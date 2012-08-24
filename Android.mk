@@ -18,7 +18,6 @@ LOCAL_AAPT_FLAGS := \
 
 LOCAL_JAVA_LIBRARIES := telephony-common
 LOCAL_STATIC_JAVA_LIBRARIES := \
-    com.android.phone.common \
     com.android.phone.shared \
     com.android.vcard \
     android-common \

@@ -75,8 +75,8 @@ import com.android.contacts.util.Constants;
 import com.android.contacts.util.PhoneNumberFormatter;
 import com.android.contacts.util.StopWatch;
 import com.android.internal.telephony.ITelephony;
-import com.android.phone.CallLogAsync;
-import com.android.phone.HapticFeedback;
+import com.android.phone.common.CallLogAsync;
+import com.android.phone.common.HapticFeedback;
 
 /**
  * Fragment that displays a twelve-key phone dialpad.
