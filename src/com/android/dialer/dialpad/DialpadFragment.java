@@ -69,11 +69,11 @@ import android.widget.TextView;
 
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
-import com.android.contacts.SpecialCharSequenceMgr;
-import com.android.dialer.DialtactsActivity;
 import com.android.contacts.util.Constants;
 import com.android.contacts.util.PhoneNumberFormatter;
 import com.android.contacts.util.StopWatch;
+import com.android.dialer.DialtactsActivity;
+import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.internal.telephony.ITelephony;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;

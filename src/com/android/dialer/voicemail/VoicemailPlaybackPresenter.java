@@ -31,7 +31,7 @@ import android.view.View;
 import android.widget.SeekBar;
 
 import com.android.contacts.R;
-import com.android.contacts.util.AsyncTaskExecutor;
+import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.ex.variablespeed.MediaPlayerProxy;
 import com.android.ex.variablespeed.SingleThreadedMediaPlayerProxy;
 import com.google.common.annotations.VisibleForTesting;

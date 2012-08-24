@@ -19,8 +19,6 @@ package com.android.dialer.util;
 import android.app.Instrumentation;
 import android.os.AsyncTask;
 
-import com.android.contacts.util.AsyncTaskExecutor;
-import com.android.contacts.util.AsyncTaskExecutors;
 import com.google.common.collect.Lists;
 
 import junit.framework.Assert;

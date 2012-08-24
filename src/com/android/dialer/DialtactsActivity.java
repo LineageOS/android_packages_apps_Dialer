@@ -59,17 +59,17 @@ import android.widget.SearchView.OnQueryTextListener;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
 import com.android.contacts.activities.TransactionSafeActivity;
-import com.android.dialer.calllog.CallLogFragment;
-import com.android.dialer.dialpad.DialpadFragment;
 import com.android.contacts.interactions.PhoneNumberInteraction;
 import com.android.contacts.list.ContactListFilterController;
 import com.android.contacts.list.ContactListFilterController.ContactListFilterListener;
 import com.android.contacts.list.ContactListItemView;
 import com.android.contacts.list.OnPhoneNumberPickerActionListener;
-import com.android.contacts.list.PhoneFavoriteFragment;
 import com.android.contacts.list.PhoneNumberPickerFragment;
 import com.android.contacts.util.AccountFilterUtil;
 import com.android.contacts.util.Constants;
+import com.android.dialer.calllog.CallLogFragment;
+import com.android.dialer.dialpad.DialpadFragment;
+import com.android.dialer.list.PhoneFavoriteFragment;
 import com.android.internal.telephony.ITelephony;
 
 /**

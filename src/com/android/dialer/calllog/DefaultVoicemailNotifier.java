@@ -32,8 +32,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.common.io.MoreCloseables;
-import com.android.dialer.CallDetailActivity;
 import com.android.contacts.R;
+import com.android.dialer.CallDetailActivity;
 import com.google.common.collect.Maps;
 
 import java.util.Map;

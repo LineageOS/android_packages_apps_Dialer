@@ -34,7 +34,7 @@ import android.test.suitebuilder.annotation.Suppress;
 import android.view.Menu;
 import android.widget.TextView;
 
-import com.android.contacts.util.AsyncTaskExecutors;
+import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.FakeAsyncTaskExecutor;
 import com.android.contacts.common.test.IntegrationTestUtils;
 import com.android.dialer.util.LocaleTestUtils;

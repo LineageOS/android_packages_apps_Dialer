@@ -33,11 +33,11 @@ import android.view.ViewTreeObserver;
 
 import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.ContactPhotoManager;
+import com.android.contacts.R;
+import com.android.contacts.util.UriUtils;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
-import com.android.contacts.R;
 import com.android.dialer.util.ExpirableCache;
-import com.android.contacts.util.UriUtils;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 

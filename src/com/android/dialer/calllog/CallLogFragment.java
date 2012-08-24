@@ -49,7 +49,7 @@ import com.android.common.io.MoreCloseables;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
 import com.android.contacts.util.Constants;
-import com.android.contacts.util.EmptyLoader;
+import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;

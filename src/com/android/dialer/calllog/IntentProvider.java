@@ -23,8 +23,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 
-import com.android.dialer.CallDetailActivity;
 import com.android.contacts.ContactsUtils;
+import com.android.dialer.CallDetailActivity;
 
 /**
  * Used to create an intent to attach to an action in the call log.
