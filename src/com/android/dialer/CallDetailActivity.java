@@ -51,12 +51,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.ContactPhotoManager;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
 import com.android.contacts.format.FormatUtils;
-import com.android.contacts.util.ClipboardUtils;
-import com.android.contacts.util.Constants;
+import com.android.contacts.common.ClipboardUtils;
 import com.android.dialer.BackScrollManager.ScrollableHeader;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
 import com.android.dialer.calllog.CallTypeHelper;
@@ -371,8 +371,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                 TelephonyManager tm = (TelephonyManager)
                         getSystemService(Context.TELEPHONY_SERVICE);
                 if (tm.getCallState() == TelephonyManager.CALL_STATE_IDLE) {
-                    startActivity(ContactsUtils.getCallIntent(
-                            Uri.fromParts(Constants.SCHEME_TEL, mNumber, null)));
+                    startActivity(CallUtil.getCallIntent(
+                            Uri.fromParts(CallUtil.SCHEME_TEL, mNumber, null)));
                     return true;
                 }
             }
@@ -513,7 +513,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     ViewEntry entry = new ViewEntry(
                             getString(R.string.menu_callNumber,
                                     FormatUtils.forceLeftToRight(displayNumber)),
-                                    ContactsUtils.getCallIntent(mNumber),
+                                    CallUtil.getCallIntent(mNumber),
                                     getString(R.string.description_call, nameOrNumber));
 
                     // Only show a label if the number is shown and it is not a SIP address.
@@ -820,7 +820,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     }
 
     public void onMenuEditNumberBeforeCall(MenuItem menuItem) {
-        startActivity(new Intent(Intent.ACTION_DIAL, ContactsUtils.getCallUri(mNumber)));
+        startActivity(new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(mNumber)));
     }
 
     public void onMenuTrashVoicemail(MenuItem menuItem) {

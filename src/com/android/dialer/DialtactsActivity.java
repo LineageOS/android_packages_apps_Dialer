@@ -56,6 +56,7 @@ import android.widget.SearchView;
 import android.widget.SearchView.OnCloseListener;
 import android.widget.SearchView.OnQueryTextListener;
 
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
 import com.android.contacts.activities.TransactionSafeActivity;
@@ -66,7 +67,6 @@ import com.android.contacts.list.ContactListItemView;
 import com.android.contacts.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.list.PhoneNumberPickerFragment;
 import com.android.contacts.util.AccountFilterUtil;
-import com.android.contacts.util.Constants;
 import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.list.PhoneFavoriteFragment;
@@ -852,7 +852,7 @@ public class DialtactsActivity extends TransactionSafeActivity
         }
         if (Intent.ACTION_VIEW.equals(action)) {
             final Uri data = intent.getData();
-            if (data != null && Constants.SCHEME_TEL.equals(data.getScheme())) {
+            if (data != null && CallUtil.SCHEME_TEL.equals(data.getScheme())) {
                 return true;
             }
         }
@@ -926,7 +926,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
         @Override
         public void onCallNumberDirectly(String phoneNumber) {
-            Intent intent = ContactsUtils.getCallIntent(phoneNumber, getCallOrigin());
+            Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin());
             startActivity(intent);
         }
     };

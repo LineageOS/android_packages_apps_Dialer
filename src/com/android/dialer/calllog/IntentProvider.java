@@ -23,7 +23,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 
-import com.android.contacts.ContactsUtils;
+import com.android.contacts.common.CallUtil;
 import com.android.dialer.CallDetailActivity;
 
 /**
@@ -38,7 +38,7 @@ public abstract class IntentProvider {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return ContactsUtils.getCallIntent(number);
+                return CallUtil.getCallIntent(number);
             }
         };
     }

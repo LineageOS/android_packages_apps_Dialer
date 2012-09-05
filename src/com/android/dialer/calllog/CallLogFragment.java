@@ -46,9 +46,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.common.io.MoreCloseables;
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
-import com.android.contacts.util.Constants;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
@@ -444,8 +444,8 @@ public class CallLogFragment extends ListFragment
             Intent intent;
             // If "number" is really a SIP address, construct a sip: URI.
             if (PhoneNumberUtils.isUriNumber(number)) {
-                intent = ContactsUtils.getCallIntent(
-                        Uri.fromParts(Constants.SCHEME_SIP, number, null));
+                intent = CallUtil.getCallIntent(
+                        Uri.fromParts(CallUtil.SCHEME_SIP, number, null));
             } else {
                 // We're calling a regular PSTN phone number.
                 // Construct a tel: URI, but do some other possible cleanup first.
@@ -457,8 +457,8 @@ public class CallLogFragment extends ListFragment
                     String countryIso = cursor.getString(CallLogQuery.COUNTRY_ISO);
                     number = mAdapter.getBetterNumberFromContacts(number, countryIso);
                 }
-                intent = ContactsUtils.getCallIntent(
-                        Uri.fromParts(Constants.SCHEME_TEL, number, null));
+                intent = CallUtil.getCallIntent(
+                        Uri.fromParts(CallUtil.SCHEME_TEL, number, null));
             }
             intent.setFlags(
                     Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);

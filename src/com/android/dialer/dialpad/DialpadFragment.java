@@ -67,9 +67,9 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
-import com.android.contacts.util.Constants;
 import com.android.contacts.util.PhoneNumberFormatter;
 import com.android.contacts.util.StopWatch;
 import com.android.dialer.DialtactsActivity;
@@ -344,7 +344,7 @@ public class DialpadFragment extends Fragment
         if (Intent.ACTION_DIAL.equals(action) || Intent.ACTION_VIEW.equals(action)) {
             Uri uri = intent.getData();
             if (uri != null) {
-                if (Constants.SCHEME_TEL.equals(uri.getScheme())) {
+                if (CallUtil.SCHEME_TEL.equals(uri.getScheme())) {
                     // Put the requested number into the input area
                     String data = uri.getSchemeSpecificPart();
                     // Remember it is filled via Intent.
@@ -1094,9 +1094,9 @@ public class DialpadFragment extends Fragment
                 // Clear the digits just in case.
                 mDigits.getText().clear();
             } else {
-                final Intent intent = ContactsUtils.getCallIntent(number,
+                final Intent intent = CallUtil.getCallIntent(number,
                         (getActivity() instanceof DialtactsActivity ?
-                                ((DialtactsActivity)getActivity()).getCallOrigin() : null));
+                                ((DialtactsActivity) getActivity()).getCallOrigin() : null));
                 startActivity(intent);
                 mClearDigitsOnStop = true;
                 getActivity().finish();
@@ -1622,7 +1622,7 @@ public class DialpadFragment extends Fragment
     }
 
     private Intent newFlashIntent() {
-        final Intent intent = ContactsUtils.getCallIntent(EMPTY_NUMBER);
+        final Intent intent = CallUtil.getCallIntent(EMPTY_NUMBER);
         intent.putExtra(EXTRA_SEND_EMPTY_FLASH, true);
         return intent;
     }
