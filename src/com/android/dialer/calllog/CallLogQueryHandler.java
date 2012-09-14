@@ -35,6 +35,7 @@ import android.provider.VoicemailContract.Status;
 import android.util.Log;
 
 import com.android.common.io.MoreCloseables;
+import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.google.common.collect.Lists;
 
@@ -45,7 +46,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.concurrent.GuardedBy;
 
 /** Handles asynchronous queries to the call log. */
-/*package*/ class CallLogQueryHandler extends AsyncQueryHandler {
+/*package*/ class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
 
     private static final String TAG = "CallLogQueryHandler";
@@ -268,7 +269,7 @@ import javax.annotation.concurrent.GuardedBy;
     }
 
     @Override
-    protected synchronized void onQueryComplete(int token, Object cookie, Cursor cursor) {
+    protected void onNotNullableQueryComplete(int token, Object cookie, Cursor cursor) {
         if (token == QUERY_NEW_CALLS_TOKEN) {
             int requestId = ((Integer) cookie).intValue();
             if (requestId != mCallsRequestId) {

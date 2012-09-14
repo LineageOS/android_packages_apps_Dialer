@@ -16,7 +16,6 @@
 
 package com.android.dialer;
 
-import android.content.AsyncQueryHandler;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.VoicemailContract.Status;
@@ -24,12 +23,13 @@ import android.provider.VoicemailContract.Voicemails;
 import android.util.Log;
 
 import com.android.common.io.MoreCloseables;
+import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 
 /**
  * Class used by {@link CallDetailActivity} to fire async content resolver queries.
  */
-public class CallDetailActivityQueryHandler extends AsyncQueryHandler {
+public class CallDetailActivityQueryHandler extends NoNullCursorAsyncQueryHandler {
     private static final String TAG = "CallDetail";
     private static final int QUERY_VOICEMAIL_CONTENT_TOKEN = 101;
     private static final int QUERY_VOICEMAIL_STATUS_TOKEN = 102;
@@ -63,7 +63,8 @@ public class CallDetailActivityQueryHandler extends AsyncQueryHandler {
     }
 
     @Override
-    protected synchronized void onQueryComplete(int token, Object cookie, Cursor cursor) {
+    protected synchronized void onNotNullableQueryComplete(int token, Object cookie,
+            Cursor cursor) {
         try {
             if (token == QUERY_VOICEMAIL_CONTENT_TOKEN) {
                 // Query voicemail status only if this voicemail record does not have audio.

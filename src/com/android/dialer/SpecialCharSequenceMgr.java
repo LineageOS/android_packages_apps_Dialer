@@ -19,7 +19,6 @@ package com.android.dialer;
 import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.app.ProgressDialog;
-import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,6 +36,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.contacts.R;
+import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.internal.telephony.ITelephony;
 import com.android.internal.telephony.TelephonyCapabilities;
 import com.android.internal.telephony.TelephonyIntents;
@@ -352,7 +352,7 @@ public class SpecialCharSequenceMgr {
      *
      * Queries originate from {@link handleAdnEntry}.
      */
-    private static class QueryHandler extends AsyncQueryHandler {
+    private static class QueryHandler extends NoNullCursorAsyncQueryHandler {
 
         private boolean mCanceled;
 
@@ -365,7 +365,7 @@ public class SpecialCharSequenceMgr {
          * we're handed the ADN cursor.
          */
         @Override
-        protected void onQueryComplete(int token, Object cookie, Cursor c) {
+        protected void onNotNullableQueryComplete(int token, Object cookie, Cursor c) {
             sPreviousAdnQueryHandler = null;
             if (mCanceled) {
                 return;
