@@ -49,10 +49,14 @@
     <string name="voicemail_fetching_timout" msgid="6552711420422790440">"Δεν ανακτήθηκαν τα μην. αυτ. τηλεφ."</string>
     <string name="call_log_new_header" msgid="8880520605610950591">"Νέο"</string>
     <string name="call_log_old_header" msgid="5378037070074806149">"Παλαιότερ."</string>
-    <string name="call_log_voicemail_header" msgid="2195054668365729801">"Κλήσεις με φωνητικό μήνυμα"</string>
-    <string name="call_log_incoming_header" msgid="2024080008507724507">"Εισερχόμενες κλήσεις"</string>
-    <string name="call_log_outgoing_header" msgid="8634793539454239253">"Εξερχόμενες κλήσεις"</string>
-    <string name="call_log_missed_header" msgid="8821528400336093775">"Αναπάντητες κλήσεις"</string>
+    <!-- no translation found for call_log_voicemail_header (1656430490229372168) -->
+    <skip />
+    <!-- no translation found for call_log_incoming_header (4514259481080897711) -->
+    <skip />
+    <!-- no translation found for call_log_outgoing_header (378663994725907738) -->
+    <skip />
+    <!-- no translation found for call_log_missed_header (5446439128157203772) -->
+    <skip />
     <string name="voicemail_status_voicemail_not_available" msgid="5416272416842129144">"Αδυναμία σύνδεσης με τον διακομιστή αυτόματου τηλεφωνητή."</string>
     <string name="voicemail_status_messages_waiting" msgid="4458458132507579370">"Αδύν. η σύνδ. με διακομ. αυτόμ. τηλεφ. Υπάρχ. νέα μηνύματα."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8634314832269048952">"Ρύθμιση του τηλεφωνητή σας."</string>

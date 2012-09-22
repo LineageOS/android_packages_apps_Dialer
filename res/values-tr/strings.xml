@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="applicationLabel" msgid="2896013994591816355">"Çevirici"</string>
+    <string name="launcherDialer" msgid="4812615012439839668">"Telefon"</string>
+    <string name="dialerIconLabel" msgid="6452903404967127043">"Telefon"</string>
+    <string name="recentCallsIconLabel" msgid="5907257356627356916">"Çağrı kaydı"</string>
+    <string name="menu_sendTextMessage" msgid="3595115037800019790">"Kısa mesaj gönder"</string>
+    <string name="recentCalls_callNumber" msgid="3515599302039524481">"Telefon et: <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="recentCalls_editNumberBeforeCall" msgid="2135159627866994026">"Telefon etmeden önce numarayı düzenle"</string>
+    <string name="recentCalls_addToContact" msgid="3461703895193177303">"Kişilere ekle"</string>
+    <string name="recentCalls_removeFromRecentList" msgid="7691127430328165825">"Çağrı kaydından kaldır"</string>
+    <string name="recentCalls_deleteAll" msgid="5940657691419101776">"Çağrı kaydını temizle"</string>
+    <string name="recentCalls_trashVoicemail" msgid="8564377061038549002">"Sesli mesajı sil"</string>
+    <string name="recentCalls_shareVoicemail" msgid="7039805601642115775">"Sesli mesajı paylaş"</string>
+    <string name="recentCalls_empty" msgid="2475657296340964771">"Çağrı kaydı boş."</string>
+    <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Çağrı kaydı silinsin mi?"</string>
+    <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Tüm çağrı kayıtlarınız silinecek."</string>
+    <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Çağrı kaydı siliniyor…"</string>
+    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Sık iletişim kurulanlar silinsin mi?"</string>
+    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Kişiler ve Telefon uygulamalarındaki sık iletişim kurulanlar listesini temizleyecek ve e-posta uygulamalarını adres tercihlerinizi en baştan öğrenmeye zorlayacaksınız."</string>
+    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Sık iletişim kurulanlar siliniyor…"</string>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one" msgid="7337617129792669763">"Sesli mesaj"</item>
+    <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> Sesli mesaj"</item>
+  </plurals>
+    <string name="notification_action_voicemail_play" msgid="6479729974823808963">"Çal"</string>
+    <string name="notification_voicemail_callers_list" msgid="7275857613463950729">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
+    <string name="notification_new_voicemail_ticker" msgid="773612832096153276">"Yeni sesli mesaj, gönderen: <xliff:g id="CALLER">%1$s</xliff:g>"</string>
+    <string name="voicemail_playback_error" msgid="3745094029143083237">"Sesli mesaj çalınamadı."</string>
+    <string name="voicemail_buffering" msgid="3471857802985075286">"Arabelleğe alınıyor…"</string>
+    <string name="voicemail_fetching_content" msgid="7304127676344948616">"Sesli mesaj getiriliyor…"</string>
+    <string name="voicemail_fetching_timout" msgid="6552711420422790440">"Sesli mesaj getirilemedi."</string>
+    <string name="call_log_new_header" msgid="8880520605610950591">"Yeni"</string>
+    <string name="call_log_old_header" msgid="5378037070074806149">"Daha eski"</string>
+    <!-- no translation found for call_log_voicemail_header (1656430490229372168) -->
+    <skip />
+    <!-- no translation found for call_log_incoming_header (4514259481080897711) -->
+    <skip />
+    <!-- no translation found for call_log_outgoing_header (378663994725907738) -->
+    <skip />
+    <!-- no translation found for call_log_missed_header (5446439128157203772) -->
+    <skip />
+    <string name="voicemail_status_voicemail_not_available" msgid="5416272416842129144">"Sesli mesaj sunucusuna bağlanılamıyor."</string>
+    <string name="voicemail_status_messages_waiting" msgid="4458458132507579370">"Sesli mesaj sunucusuna bağlanılamıyor. Yeni sesli mesajlar bekliyor."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8634314832269048952">"Sesli mesajınızı yapılandırın."</string>
+    <string name="voicemail_status_audio_not_available" msgid="3238711781241004997">"Ses kullanılamıyor."</string>
+    <string name="voicemail_status_action_configure" msgid="6294251161130772427">"Yapılandır"</string>
+    <string name="voicemail_status_action_call_server" msgid="5905306807691863100">"Sesli mesajı ara"</string>
+    <string name="voicemail_speed_slowest" msgid="4253243787222323405">"En düşük hız"</string>
+    <string name="voicemail_speed_slower" msgid="4776579878006616930">"Düşük hız"</string>
+    <string name="voicemail_speed_normal" msgid="5467566844006749402">"Normal hız"</string>
+    <string name="voicemail_speed_faster" msgid="533959523242789518">"Yüksek hız"</string>
+    <string name="voicemail_speed_fastest" msgid="7495589683231751304">"En yüksek hız"</string>
+    <string name="call_log_item_count_and_date" msgid="6348558252438448946">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
+</resources>
