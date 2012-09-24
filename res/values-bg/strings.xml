@@ -40,7 +40,7 @@
     <item quantity="one" msgid="7337617129792669763">"Гласова поща"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> гласови съобщения"</item>
   </plurals>
-    <string name="notification_action_voicemail_play" msgid="6479729974823808963">"Google Play"</string>
+    <string name="notification_action_voicemail_play" msgid="6479729974823808963">"Пускане"</string>
     <string name="notification_voicemail_callers_list" msgid="7275857613463950729">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="773612832096153276">"Нова гласова поща от <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3745094029143083237">"Гласовата поща не можа да бъде пусната."</string>

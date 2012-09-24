@@ -57,8 +57,8 @@
     <skip />
     <!-- no translation found for call_log_missed_header (5446439128157203772) -->
     <skip />
-    <string name="voicemail_status_voicemail_not_available" msgid="5416272416842129144">"Tidak boleh bersambung kepada pelayan mel suara."</string>
-    <string name="voicemail_status_messages_waiting" msgid="4458458132507579370">"Tak blh brsmbg kpd pelayan mel suara. Mel suara baharu menunggu."</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="5416272416842129144">"Tidak dapat bersambung kepada pelayan mel suara."</string>
+    <string name="voicemail_status_messages_waiting" msgid="4458458132507579370">"Gagal menyambung ke pelayan mel suara. Mel suara baharu menanti."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8634314832269048952">"Sediakan mel suara anda."</string>
     <string name="voicemail_status_audio_not_available" msgid="3238711781241004997">"Audio tidak tersedia."</string>
     <string name="voicemail_status_action_configure" msgid="6294251161130772427">"Sediakan"</string>

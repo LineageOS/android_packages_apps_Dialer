@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="2896013994591816355">"Appeler"</string>
+    <string name="applicationLabel" msgid="2896013994591816355">"Dialer"</string>
     <string name="launcherDialer" msgid="4812615012439839668">"Téléphone"</string>
     <string name="dialerIconLabel" msgid="6452903404967127043">"Téléphone"</string>
     <string name="recentCallsIconLabel" msgid="5907257356627356916">"Journal d\'appels"</string>

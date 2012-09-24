@@ -27,7 +27,7 @@
     <string name="recentCalls_addToContact" msgid="3461703895193177303">"Dodaj med stike"</string>
     <string name="recentCalls_removeFromRecentList" msgid="7691127430328165825">"Odstrani iz dnevnika klicev"</string>
     <string name="recentCalls_deleteAll" msgid="5940657691419101776">"Počisti dnevnik klicev"</string>
-    <string name="recentCalls_trashVoicemail" msgid="8564377061038549002">"Brisanje sporočil odzivnika"</string>
+    <string name="recentCalls_trashVoicemail" msgid="8564377061038549002">"Brisanje sporočil iz odzivnika"</string>
     <string name="recentCalls_shareVoicemail" msgid="7039805601642115775">"Skupna raba odzivnika"</string>
     <string name="recentCalls_empty" msgid="2475657296340964771">"Dnevnik klicev je prazen."</string>
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Želite izbrisati dnevnik klicev?"</string>
@@ -38,15 +38,15 @@
     <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Brisanje sezn. pogostih stikov ..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Odzivnik"</item>
-    <item quantity="other" msgid="7909053058399879093">"Št. sporočil odzivnika: <xliff:g id="COUNT">%1$d</xliff:g>"</item>
+    <item quantity="other" msgid="7909053058399879093">"Št. sporočil v odzivniku: <xliff:g id="COUNT">%1$d</xliff:g>"</item>
   </plurals>
     <string name="notification_action_voicemail_play" msgid="6479729974823808963">"Predvajaj"</string>
     <string name="notification_voicemail_callers_list" msgid="7275857613463950729">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="773612832096153276">"Novo sporočilo odzivnika od <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="3745094029143083237">"Sporočil odzivn. ni mogoče predvajati."</string>
+    <string name="notification_new_voicemail_ticker" msgid="773612832096153276">"Novo sporočilo v odzivniku od <xliff:g id="CALLER">%1$s</xliff:g>"</string>
+    <string name="voicemail_playback_error" msgid="3745094029143083237">"Sporočil iz odziv. ni mogoče predvajati."</string>
     <string name="voicemail_buffering" msgid="3471857802985075286">"Medpomnjenje ..."</string>
-    <string name="voicemail_fetching_content" msgid="7304127676344948616">"Prejemanje sporočil odzivnika ..."</string>
-    <string name="voicemail_fetching_timout" msgid="6552711420422790440">"Sporočil odzi. ni mogoče prejeti."</string>
+    <string name="voicemail_fetching_content" msgid="7304127676344948616">"Prejemanje sporočil iz odzivnika ..."</string>
+    <string name="voicemail_fetching_timout" msgid="6552711420422790440">"Sporočil iz odzivnika ni mogoče prejeti."</string>
     <string name="call_log_new_header" msgid="8880520605610950591">"Novi"</string>
     <string name="call_log_old_header" msgid="5378037070074806149">"Starejši"</string>
     <!-- no translation found for call_log_voicemail_header (1656430490229372168) -->

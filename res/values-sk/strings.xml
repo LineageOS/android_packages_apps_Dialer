@@ -37,7 +37,7 @@
     <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Vymažete zoznam často kontaktovaných osôb v aplikáciách Ľudia a Telefón a e-mailové aplikácie budú musieť vytvoriť predvoľby adresátov znova."</string>
     <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Mazanie často kontaktov. osôb..."</string>
   <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="7337617129792669763">"Hlasová schránka"</item>
+    <item quantity="one" msgid="7337617129792669763">"Hlasová správa"</item>
     <item quantity="other" msgid="7909053058399879093">"Počet hlasových správ: <xliff:g id="COUNT">%1$d</xliff:g>"</item>
   </plurals>
     <string name="notification_action_voicemail_play" msgid="6479729974823808963">"Prehrať"</string>

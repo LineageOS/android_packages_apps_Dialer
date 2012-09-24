@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="2896013994591816355">"拨号器"</string>
+    <string name="applicationLabel" msgid="2896013994591816355">"拨号"</string>
     <string name="launcherDialer" msgid="4812615012439839668">"拨号"</string>
     <string name="dialerIconLabel" msgid="6452903404967127043">"拨号"</string>
     <string name="recentCallsIconLabel" msgid="5907257356627356916">"通话记录"</string>
@@ -29,7 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="5940657691419101776">"清除通话记录"</string>
     <string name="recentCalls_trashVoicemail" msgid="8564377061038549002">"删除语音邮件"</string>
     <string name="recentCalls_shareVoicemail" msgid="7039805601642115775">"分享语音邮件"</string>
-    <string name="recentCalls_empty" msgid="2475657296340964771">"通话记录为空。"</string>
+    <string name="recentCalls_empty" msgid="2475657296340964771">"通话记录没有内容。"</string>
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"是否清除通话记录？"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"系统将删除您的所有通话记录。"</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"正在清除通话记录…"</string>
@@ -47,7 +47,7 @@
     <string name="voicemail_buffering" msgid="3471857802985075286">"正在缓冲…"</string>
     <string name="voicemail_fetching_content" msgid="7304127676344948616">"正在提取语音邮件…"</string>
     <string name="voicemail_fetching_timout" msgid="6552711420422790440">"无法提取语音邮件。"</string>
-    <string name="call_log_new_header" msgid="8880520605610950591">"新未接来电"</string>
+    <string name="call_log_new_header" msgid="8880520605610950591">"新的未接来电"</string>
     <string name="call_log_old_header" msgid="5378037070074806149">"更早"</string>
     <!-- no translation found for call_log_voicemail_header (1656430490229372168) -->
     <skip />
@@ -63,10 +63,10 @@
     <string name="voicemail_status_audio_not_available" msgid="3238711781241004997">"音频无法播放。"</string>
     <string name="voicemail_status_action_configure" msgid="6294251161130772427">"设置"</string>
     <string name="voicemail_status_action_call_server" msgid="5905306807691863100">"呼叫语音信箱"</string>
-    <string name="voicemail_speed_slowest" msgid="4253243787222323405">"最慢"</string>
+    <string name="voicemail_speed_slowest" msgid="4253243787222323405">"最慢速度"</string>
     <string name="voicemail_speed_slower" msgid="4776579878006616930">"慢速"</string>
     <string name="voicemail_speed_normal" msgid="5467566844006749402">"正常速度"</string>
     <string name="voicemail_speed_faster" msgid="533959523242789518">"快速"</string>
-    <string name="voicemail_speed_fastest" msgid="7495589683231751304">"最快"</string>
+    <string name="voicemail_speed_fastest" msgid="7495589683231751304">"最快速度"</string>
     <string name="call_log_item_count_and_date" msgid="6348558252438448946">"（<xliff:g id="COUNT">%1$d</xliff:g> 个）<xliff:g id="DATE">%2$s</xliff:g>"</string>
 </resources>
