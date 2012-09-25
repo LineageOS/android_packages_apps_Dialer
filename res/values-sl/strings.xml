@@ -49,14 +49,10 @@
     <string name="voicemail_fetching_timout" msgid="6552711420422790440">"Sporočil iz odzivnika ni mogoče prejeti."</string>
     <string name="call_log_new_header" msgid="8880520605610950591">"Novi"</string>
     <string name="call_log_old_header" msgid="5378037070074806149">"Starejši"</string>
-    <!-- no translation found for call_log_voicemail_header (1656430490229372168) -->
-    <skip />
-    <!-- no translation found for call_log_incoming_header (4514259481080897711) -->
-    <skip />
-    <!-- no translation found for call_log_outgoing_header (378663994725907738) -->
-    <skip />
-    <!-- no translation found for call_log_missed_header (5446439128157203772) -->
-    <skip />
+    <string name="call_log_voicemail_header" msgid="1656430490229372168">"Samo klici z odzivnikom"</string>
+    <string name="call_log_incoming_header" msgid="4514259481080897711">"Samo dohodni klici"</string>
+    <string name="call_log_outgoing_header" msgid="378663994725907738">"Samo odhodni klici"</string>
+    <string name="call_log_missed_header" msgid="5446439128157203772">"Samo neodgovorjeni klici"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5416272416842129144">"S strežnikom odzivnika se ni mogoče povezati."</string>
     <string name="voicemail_status_messages_waiting" msgid="4458458132507579370">"S strež. odzivnika se ni mogoče povezati. Nova sporočila čakajo."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8634314832269048952">"Nastavite odzivnik."</string>

@@ -25,8 +25,8 @@
     <string name="recentCalls_callNumber" msgid="3515599302039524481">"ለ<xliff:g id="NAME">%s</xliff:g> ደውል"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="2135159627866994026">"ከመደወል በፊት ቁጥር አርትዕ"</string>
     <string name="recentCalls_addToContact" msgid="3461703895193177303">"ወደ ዕውቂያዎች አክል"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="7691127430328165825">"ከጥሪ ማስታወሻ አስወግድ"</string>
-    <string name="recentCalls_deleteAll" msgid="5940657691419101776">"የጥሪ ማስታወሻ አጽዳ"</string>
+    <string name="recentCalls_removeFromRecentList" msgid="7691127430328165825">"ከጥሪ ምዝግብ ማስታወሻ አስወግድ"</string>
+    <string name="recentCalls_deleteAll" msgid="5940657691419101776">"የጥሪ ምዝግብ ማስታወሻ አጽዳ"</string>
     <string name="recentCalls_trashVoicemail" msgid="8564377061038549002">"የድምፅ መልዕክት ሰርዝ"</string>
     <string name="recentCalls_shareVoicemail" msgid="7039805601642115775">"የድምፅ መልዕክት አጋራ"</string>
     <string name="recentCalls_empty" msgid="2475657296340964771">"የጥሪ ምዝግብ ማስታወሻ ባዶ ነው።"</string>
@@ -34,7 +34,7 @@
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"ሁሉም የጥሪ መዝገቦችዎ ይሰረዛሉ።"</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"የጥሪ ምዝግብ ማስታወሻን በማጽዳት ላይ…"</string>
     <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"በተደጋጋሚ የተገኙ ይጽዱ?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"በሰዎች እና በስልክ መተግበሪያዎች ውስጥ በተደጋጋሚ ያገኟቸውን ዝርዝር ያጸዱና የኢሜይል መተግበሪያዎች ምርጫዎችዎን ከባዶ ተነስተው እንያውቁ ያስገድዷቸዋል።"</string>
+    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"በሰዎች እና በስልክ መተግበሪያዎች ውስጥ በተደጋጋሚ ያገኟቸውን ዝርዝር ያጸዱና የኢሜይል መተግበሪያዎች ምርጫዎችዎን ከባዶ ተነስተው እንዲያውቁ ያስገድዷቸዋል።"</string>
     <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"በተደጋጋሚ የተገኙትን በማጽዳት ላይ…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"የድምጽ መልዕክት"</item>
@@ -45,8 +45,8 @@
     <string name="notification_new_voicemail_ticker" msgid="773612832096153276">"አዲስ የድምፅ መልዕክት ከ<xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3745094029143083237">"ድምፅ መልዕክትን ማጫወት አልተቻለም።"</string>
     <string name="voicemail_buffering" msgid="3471857802985075286">"በማቋት ላይ…"</string>
-    <string name="voicemail_fetching_content" msgid="7304127676344948616">"ድምፅ መልዕክትን በማምጣት ላይ..."</string>
-    <string name="voicemail_fetching_timout" msgid="6552711420422790440">"ድምፅ ማምጣት አልተቻለም።"</string>
+    <string name="voicemail_fetching_content" msgid="7304127676344948616">"የድምፅ መልዕክትን በማምጣት ላይ..."</string>
+    <string name="voicemail_fetching_timout" msgid="6552711420422790440">"የድምፅ መልዕክት ማምጣት አልተቻለም።"</string>
     <string name="call_log_new_header" msgid="8880520605610950591">"አዲስ"</string>
     <string name="call_log_old_header" msgid="5378037070074806149">"የቆዩ"</string>
     <string name="call_log_voicemail_header" msgid="1656430490229372168">"የድምጽ መልዕክት ያላቸው ጥሪዎች ብቻ"</string>

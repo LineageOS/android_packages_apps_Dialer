@@ -20,33 +20,33 @@
     <string name="applicationLabel" msgid="2896013994591816355">"Ukudayela"</string>
     <string name="launcherDialer" msgid="4812615012439839668">"Ifoni"</string>
     <string name="dialerIconLabel" msgid="6452903404967127043">"Ifoni"</string>
-    <string name="recentCallsIconLabel" msgid="5907257356627356916">"Irekhodi lwamakholi"</string>
+    <string name="recentCallsIconLabel" msgid="5907257356627356916">"Irekhodi lamakholi"</string>
     <string name="menu_sendTextMessage" msgid="3595115037800019790">"Thumela umlayezo wombhalo"</string>
     <string name="recentCalls_callNumber" msgid="3515599302039524481">"Shayela u-<xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="2135159627866994026">"Hlela inombolo ngaphambi kokufona"</string>
     <string name="recentCalls_addToContact" msgid="3461703895193177303">"Faka oxhumana nabo"</string>
     <string name="recentCalls_removeFromRecentList" msgid="7691127430328165825">"Susa kwirekhodi lamakholi"</string>
-    <string name="recentCalls_deleteAll" msgid="5940657691419101776">"Sula irekhodi lwamakholi"</string>
-    <string name="recentCalls_trashVoicemail" msgid="8564377061038549002">"Susa i-voicemail"</string>
-    <string name="recentCalls_shareVoicemail" msgid="7039805601642115775">"Abelana nge-voicemail"</string>
-    <string name="recentCalls_empty" msgid="2475657296340964771">"Irekhodi lwamakholi alinalutho."</string>
-    <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Sula irekhodi lwamakholi"</string>
-    <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Yonke rekhodi eqoshiwe izosuswa."</string>
-    <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Isula irekhodi lwamakholi..."</string>
+    <string name="recentCalls_deleteAll" msgid="5940657691419101776">"Sula irekhodi lamakholi"</string>
+    <string name="recentCalls_trashVoicemail" msgid="8564377061038549002">"Susa ivoyisimeyili"</string>
+    <string name="recentCalls_shareVoicemail" msgid="7039805601642115775">"Abelana ngevoyisimeyili"</string>
+    <string name="recentCalls_empty" msgid="2475657296340964771">"Irekhodi lamakholi alinalutho."</string>
+    <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Sula irekhodi lamakholi"</string>
+    <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Wonke amarekhodi aqoshiwe azosuswa."</string>
+    <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Isula irekhodi lamakholi..."</string>
     <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Sula oxhumana nabo njalo?"</string>
     <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Uzosula uhlu okuxhunyanwa nalo njalo kwizinhlelo zokusebenza zaBantu kanye Nefoni, futhi iphoqelela izinhlelo zokusebenza ze-imeyli ukufunda okukhethayo kokuthintana kusuka ekuqaleni."</string>
     <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Isula oxhumana nabo njalo…"</string>
   <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="7337617129792669763">"I-voicemail"</item>
-    <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> ama-voicemail"</item>
+    <item quantity="one" msgid="7337617129792669763">"Ivoyisimeyili"</item>
+    <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> amavoyisimeyili"</item>
   </plurals>
     <string name="notification_action_voicemail_play" msgid="6479729974823808963">"Dlala"</string>
     <string name="notification_voicemail_callers_list" msgid="7275857613463950729">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="773612832096153276">"I-voicemail entsha kusuka ku-<xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="3745094029143083237">"Yehlulekile ukudlala i-voicemail."</string>
+    <string name="notification_new_voicemail_ticker" msgid="773612832096153276">"Ivoyisimeyili entsha esuka ku-<xliff:g id="CALLER">%1$s</xliff:g>"</string>
+    <string name="voicemail_playback_error" msgid="3745094029143083237">"Yehlulekile ukudlala ivoyisimeyili."</string>
     <string name="voicemail_buffering" msgid="3471857802985075286">"Ukugcina kumthamo…"</string>
-    <string name="voicemail_fetching_content" msgid="7304127676344948616">"Ilanda i-voicemail..."</string>
-    <string name="voicemail_fetching_timout" msgid="6552711420422790440">"Yehlulekile ukulanda i-voicemail."</string>
+    <string name="voicemail_fetching_content" msgid="7304127676344948616">"Ilanda ivoyisimeyili..."</string>
+    <string name="voicemail_fetching_timout" msgid="6552711420422790440">"Yehlulekile ukulanda ivoyisimeyili."</string>
     <string name="call_log_new_header" msgid="8880520605610950591">"Okusha"</string>
     <string name="call_log_old_header" msgid="5378037070074806149">"Kudala kakhulu"</string>
     <!-- no translation found for call_log_voicemail_header (1656430490229372168) -->
@@ -57,12 +57,12 @@
     <skip />
     <!-- no translation found for call_log_missed_header (5446439128157203772) -->
     <skip />
-    <string name="voicemail_status_voicemail_not_available" msgid="5416272416842129144">"Ayikwazi ukuxhuma kuseva ye-voicemail."</string>
-    <string name="voicemail_status_messages_waiting" msgid="4458458132507579370">"Ayikwazi ukuxhumana neseva ye-voicemail. Ama-voicemail amasha alindile"</string>
-    <string name="voicemail_status_configure_voicemail" msgid="8634314832269048952">"Setha ivoicemail yakho."</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="5416272416842129144">"Ayikwazi ukuxhuma kuseva yevoyisimeyili."</string>
+    <string name="voicemail_status_messages_waiting" msgid="4458458132507579370">"Ayikwazi ukuxhumana neseva yevoyisimeyili. Amavoyisimeyili amasha alindile"</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8634314832269048952">"Setha ivoyisimeyili yakho."</string>
     <string name="voicemail_status_audio_not_available" msgid="3238711781241004997">"Umsindo awutholakali."</string>
     <string name="voicemail_status_action_configure" msgid="6294251161130772427">"Setha"</string>
-    <string name="voicemail_status_action_call_server" msgid="5905306807691863100">"Fonela i-voicemail"</string>
+    <string name="voicemail_status_action_call_server" msgid="5905306807691863100">"Fonela ivoyisimeyili"</string>
     <string name="voicemail_speed_slowest" msgid="4253243787222323405">"Ijubane elincane kakhulu"</string>
     <string name="voicemail_speed_slower" msgid="4776579878006616930">"Ijubane elinensayo"</string>
     <string name="voicemail_speed_normal" msgid="5467566844006749402">"ijubane elijwayelekile"</string>
