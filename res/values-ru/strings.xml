@@ -26,7 +26,7 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="2135159627866994026">"Изменить номер и вызвать"</string>
     <string name="recentCalls_addToContact" msgid="3461703895193177303">"Добавить в контакты"</string>
     <string name="recentCalls_removeFromRecentList" msgid="7691127430328165825">"Удалить из списка вызовов"</string>
-    <string name="recentCalls_deleteAll" msgid="5940657691419101776">"Очистить список вызовов"</string>
+    <string name="recentCalls_deleteAll" msgid="5940657691419101776">"Очистить список"</string>
     <string name="recentCalls_trashVoicemail" msgid="8564377061038549002">"Удалить голосовое сообщение"</string>
     <string name="recentCalls_shareVoicemail" msgid="7039805601642115775">"Отправить голосовое сообщение"</string>
     <string name="recentCalls_empty" msgid="2475657296340964771">"Список вызовов пуст."</string>
