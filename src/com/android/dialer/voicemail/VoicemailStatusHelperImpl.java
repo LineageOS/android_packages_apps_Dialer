@@ -28,8 +28,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.VoicemailContract.Status;
 
-import com.android.contacts.R;
 import com.android.contacts.util.UriUtils;
+import com.android.dialer.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -34,7 +34,7 @@ import android.net.Uri;
 import android.provider.VoicemailContract.Status;
 import android.test.AndroidTestCase;
 
-import com.android.contacts.R;
+import com.android.dialer.R;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 
 import java.util.List;

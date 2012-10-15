@@ -22,9 +22,9 @@ import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
-import com.android.contacts.R;
 import com.android.contacts.test.NeededForTesting;
 import com.android.dialer.PhoneCallDetailsViews;
+import com.android.dialer.R;
 
 /**
  * Simple value object containing the various views within a call log entry.

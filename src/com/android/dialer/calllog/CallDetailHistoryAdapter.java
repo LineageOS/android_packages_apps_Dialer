@@ -25,8 +25,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.android.contacts.R;
 import com.android.dialer.PhoneCallDetails;
+import com.android.dialer.R;
 
 /**
  * Adapter for a ListView containing history items from the details of a call.

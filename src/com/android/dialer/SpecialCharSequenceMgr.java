@@ -35,7 +35,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.contacts.R;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.internal.telephony.ITelephony;
 import com.android.internal.telephony.TelephonyCapabilities;

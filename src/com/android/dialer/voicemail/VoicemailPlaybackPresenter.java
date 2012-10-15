@@ -30,7 +30,7 @@ import android.os.PowerManager;
 import android.view.View;
 import android.widget.SeekBar;
 
-import com.android.contacts.R;
+import com.android.dialer.R;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.ex.variablespeed.MediaPlayerProxy;
 import com.android.ex.variablespeed.SingleThreadedMediaPlayerProxy;

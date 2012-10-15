@@ -21,9 +21,9 @@ import android.provider.CallLog.Calls;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.android.contacts.R;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
+import com.android.dialer.R;
 
 /**
  * Helper class to fill in the views of a call log entry.
