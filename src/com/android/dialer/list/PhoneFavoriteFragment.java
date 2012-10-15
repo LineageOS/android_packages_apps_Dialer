@@ -47,7 +47,6 @@ import android.widget.TextView;
 
 import com.android.contacts.ContactPhotoManager;
 import com.android.contacts.ContactTileLoaderFactory;
-import com.android.contacts.R;
 import com.android.contacts.dialog.ClearFrequentsDialog;
 import com.android.contacts.interactions.ImportExportDialogFragment;
 import com.android.contacts.list.ContactListFilter;
@@ -58,6 +57,7 @@ import com.android.contacts.list.ContactTileView;
 import com.android.contacts.list.PhoneNumberListAdapter;
 import com.android.contacts.preference.ContactsPreferences;
 import com.android.contacts.util.AccountFilterUtil;
+import com.android.dialer.R;
 
 /**
  * Fragment for Phone UI's favorite screen.

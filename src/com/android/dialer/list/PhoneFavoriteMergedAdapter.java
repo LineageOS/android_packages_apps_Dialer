@@ -25,10 +25,10 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.SectionIndexer;
 
-import com.android.contacts.R;
 import com.android.contacts.list.ContactEntryListAdapter;
 import com.android.contacts.list.ContactListItemView;
 import com.android.contacts.list.ContactTileAdapter;
+import com.android.dialer.R;
 
 /**
  * An adapter that combines items from {@link com.android.contacts.list.ContactTileAdapter} and

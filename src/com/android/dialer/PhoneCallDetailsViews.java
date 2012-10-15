@@ -20,7 +20,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.contacts.R;
 import com.android.dialer.calllog.CallTypeIconsView;
 
 /**

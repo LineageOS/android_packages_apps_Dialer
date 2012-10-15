@@ -67,12 +67,12 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.android.contacts.common.CallUtil;
 import com.android.contacts.ContactsUtils;
-import com.android.contacts.R;
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.util.PhoneNumberFormatter;
 import com.android.contacts.util.StopWatch;
 import com.android.dialer.DialtactsActivity;
+import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.internal.telephony.ITelephony;
 import com.android.phone.common.CallLogAsync;

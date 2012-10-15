@@ -19,7 +19,7 @@ package com.android.dialer.calllog;
 import android.content.res.Resources;
 import android.provider.CallLog.Calls;
 
-import com.android.contacts.R;
+import com.android.dialer.R;
 
 /**
  * Helper class to perform operations related to call types.

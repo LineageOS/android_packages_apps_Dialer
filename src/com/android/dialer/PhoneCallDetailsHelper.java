@@ -29,7 +29,6 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.contacts.R;
 import com.android.contacts.test.NeededForTesting;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.PhoneNumberHelper;

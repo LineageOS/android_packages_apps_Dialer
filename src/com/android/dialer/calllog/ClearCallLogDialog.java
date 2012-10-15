@@ -28,7 +28,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.CallLog.Calls;
 
-import com.android.contacts.R;
+import com.android.dialer.R;
 
 /**
  * Dialog that clears the call log after confirming with the user

@@ -37,9 +37,9 @@ import android.test.suitebuilder.annotation.MediumTest;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.android.dialer.CallDetailActivity;
-import com.android.contacts.R;
 import com.android.contacts.common.test.FragmentTestActivity;
+import com.android.dialer.CallDetailActivity;
+import com.android.dialer.R;
 import com.android.internal.telephony.CallerInfo;
 
 import java.util.Date;

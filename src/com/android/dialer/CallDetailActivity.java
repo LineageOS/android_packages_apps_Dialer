@@ -54,7 +54,6 @@ import android.widget.Toast;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.ContactPhotoManager;
 import com.android.contacts.ContactsUtils;
-import com.android.contacts.R;
 import com.android.contacts.format.FormatUtils;
 import com.android.contacts.common.ClipboardUtils;
 import com.android.dialer.BackScrollManager.ScrollableHeader;

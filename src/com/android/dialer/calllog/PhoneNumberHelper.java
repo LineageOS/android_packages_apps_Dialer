@@ -20,7 +20,7 @@ import android.content.res.Resources;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
-import com.android.contacts.R;
+import com.android.dialer.R;
 import com.android.internal.telephony.CallerInfo;
 
 /**
