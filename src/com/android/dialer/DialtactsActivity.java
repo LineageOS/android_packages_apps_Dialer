@@ -57,7 +57,6 @@ import android.widget.SearchView.OnCloseListener;
 import android.widget.SearchView.OnQueryTextListener;
 
 import com.android.contacts.common.CallUtil;
-import com.android.contacts.ContactsUtils;
 import com.android.contacts.activities.TransactionSafeActivity;
 import com.android.contacts.interactions.PhoneNumberInteraction;
 import com.android.contacts.list.ContactListFilterController;
@@ -69,6 +68,7 @@ import com.android.contacts.util.AccountFilterUtil;
 import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.list.PhoneFavoriteFragment;
+import com.android.dialer.util.OrientationUtil;
 import com.android.internal.telephony.ITelephony;
 
 /**
@@ -1018,7 +1018,7 @@ public class DialtactsActivity extends TransactionSafeActivity
             // This is when the user is looking at the dialer pad.  In this case, the real
             // ActionBar is hidden and fake menu items are shown.
             // Except in landscape, in which case the real search menu item is shown.
-            searchMenuItem.setVisible(ContactsUtils.isLandscape(this));
+            searchMenuItem.setVisible(OrientationUtil.isLandscape(this));
             // If a permanent menu key is available, then we need to show the call settings item
             // so that the call settings item can be invoked by the permanent menu key.
             callSettingsMenuItem.setVisible(ViewConfiguration.get(this).hasPermanentMenuKey());

@@ -32,8 +32,8 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
 import com.android.common.widget.GroupingListAdapter;
-import com.android.contacts.ContactPhotoManager;
-import com.android.contacts.util.UriUtils;
+import com.android.contacts.common.ContactPhotoManager;
+import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;

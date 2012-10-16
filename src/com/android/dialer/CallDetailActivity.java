@@ -51,11 +51,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.CallUtil;
-import com.android.contacts.ContactPhotoManager;
-import com.android.contacts.ContactsUtils;
-import com.android.contacts.format.FormatUtils;
 import com.android.contacts.common.ClipboardUtils;
+import com.android.contacts.common.GeoUtil;
 import com.android.dialer.BackScrollManager.ScrollableHeader;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
 import com.android.dialer.calllog.CallTypeHelper;
@@ -79,6 +78,9 @@ import java.util.List;
  */
 public class CallDetailActivity extends Activity implements ProximitySensorAware {
     private static final String TAG = "CallDetail";
+
+    private static final char LEFT_TO_RIGHT_EMBEDDING = '\u202A';
+    private static final char POP_DIRECTIONAL_FORMATTING = '\u202C';
 
     /** The time to wait before enabling the blank the screen due to the proximity sensor. */
     private static final long PROXIMITY_BLANK_DELAY_MILLIS = 100;
@@ -271,10 +273,10 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         mMainActionView = (ImageView) findViewById(R.id.main_action);
         mMainActionPushLayerView = (ImageButton) findViewById(R.id.main_action_push_layer);
         mContactBackgroundView = (ImageView) findViewById(R.id.contact_background);
-        mDefaultCountryIso = ContactsUtils.getCurrentCountryIso(this);
+        mDefaultCountryIso = GeoUtil.getCurrentCountryIso(this);
         mContactPhotoManager = ContactPhotoManager.getInstance(this);
         mProximitySensorManager = new ProximitySensorManager(this, mProximitySensorListener);
-        mContactInfoHelper = new ContactInfoHelper(this, ContactsUtils.getCurrentCountryIso(this));
+        mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
         configureActionBar();
         optionallyHandleVoicemail();
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
@@ -511,7 +513,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
 
                     ViewEntry entry = new ViewEntry(
                             getString(R.string.menu_callNumber,
-                                    FormatUtils.forceLeftToRight(displayNumber)),
+                                    forceLeftToRight(displayNumber)),
                                     CallUtil.getCallIntent(mNumber),
                                     getString(R.string.description_call, nameOrNumber));
 
@@ -934,5 +936,14 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             // Restore the view background.
             mTargetView.setBackground(mOriginalViewBackground);
         }
+    }
+
+    /** Returns the given text, forced to be left-to-right. */
+    private static CharSequence forceLeftToRight(CharSequence text) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(LEFT_TO_RIGHT_EMBEDDING);
+        sb.append(text);
+        sb.append(POP_DIRECTIONAL_FORMATTING);
+        return sb.toString();
     }
 }
