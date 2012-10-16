@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Kas kustutada kõnelogi?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Kõik teie kõnesalvestised kustutatakse."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Kõnelogi kustutamine ..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Kas kustutada sagedased kontaktid?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Kustutate rakendustes Inimesed ja Telefon loendi Sagedased kontaktid, mistõttu meilirakendused peavad teie adresseerimiseelistused uuesti omandama."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Saged. kontaktide kustutamine ..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Kõnepost"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> kõnepostisõnumit"</item>

@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Moet die oproeplog uitgevee word?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Al jou oproeprekords sal uitgevee word."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Vee tans oproeplog uit..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Moet dikwels-gebruikte kontakte uitgevee word?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Jy gaan die lys van dikwels-gebruikte kontakte in die Mense- en Foon-programme uitvee, en e-posprogramme forseer om jou adresvoorkeure van nuuts af te leer."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Vee tans dikwels-gebruikte kontakte uit..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Stemboodskap"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> stemboodskappe"</item>

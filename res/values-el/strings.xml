@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Εκκαθάριση αρχείου καταγραφής κλήσεων;"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Όλα τα αρχεία κλήσεων θα διαγραφούν."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Εκκαθάριση αρχ. καταγραφής κλήσεων…"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Διαγραφή ατόμων με συχνή επικοινωνία;"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Θα διαγράψετε τη λίστα ατόμων με τα οποία είχατε συχνή επικοινωνία στις εφαρμογές \"Άτομα\" και \"Τηλέφωνο\" και θα κάνετε τις εφαρμογές ηλεκτρονικού ταχυδρομείου να μάθουν τις προτιμήσεις επικοινωνίας σας από την αρχή."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Διαγρ. ατόμων με συχνή επικοινωνία…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Αυτόματος τηλεφωνητής"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> μηνύματα αυτόματου τηλεφωνητή"</item>

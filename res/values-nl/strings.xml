@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Oproeplogboek wissen?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Al uw oproepgegevens worden verwijderd."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Oproeplogboek wissen..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Lijst regelmatige contacten wissen?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"U wist de lijst met contacten waarmee u regelmatig contact opneemt in de apps Personen en Telefoon, en e-mailapps moeten uw voorkeursadressen weer opnieuw leren."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Regelmatige contacten wissen..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Voicemail"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> voicemails"</item>

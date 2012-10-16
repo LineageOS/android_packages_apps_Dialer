@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Tømme samtaleloggen?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Alle samtalelogger vil bli slettet."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Tømmer samtaleloggen …"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Fjerne ofte kontaktede personer?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Du fjerner listen over ofte kontaktede personer i Personer- og Telefon-appen, og tvinger e-postappene til å lære adresseinnstillingene dine på nytt."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Fjerner ofte kontaktede personer ..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Talemelding"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> talemeldinger"</item>

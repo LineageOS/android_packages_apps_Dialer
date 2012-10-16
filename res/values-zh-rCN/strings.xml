@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"是否清除通话记录？"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"系统将删除您的所有通话记录。"</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"正在清除通话记录…"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"是否清除常用联系人？"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"此操作会清除“联系人”和“拨号”应用中的常用联系人列表，并强制电子邮件应用重新获取您最常使用的联系地址。"</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"正在清除常用联系人…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"语音邮件"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> 封语音邮件"</item>

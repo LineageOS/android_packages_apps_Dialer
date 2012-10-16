@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"清除通話紀錄？"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"即將刪除您所有的通話紀錄。"</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"正在清除通話紀錄…"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"清除常用聯絡人？"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"您將清除「使用者」應用程式和「電話」應用程式中的常用聯絡人清單，並強制電子郵件應用程式重新取得您的寄件偏好設定。"</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"正在清除常用聯絡人…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"語音留言"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> 則語音留言"</item>

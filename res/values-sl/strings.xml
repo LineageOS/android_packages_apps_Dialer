@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Želite izbrisati dnevnik klicev?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Seznam vseh klicev bo izbrisan."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Brisanje dnevnika klicev ..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Želite izbr. seznam pogostih stikov?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Izbrisali boste seznam pogostih stikov v aplikacijah Osebe in Telefon, zato bodo e-poštne aplikacije začele shranjevati pogoste naslovnike od začetka."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Brisanje sezn. pogostih stikov ..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Odzivnik"</item>
     <item quantity="other" msgid="7909053058399879093">"Št. sporočil v odzivniku: <xliff:g id="COUNT">%1$d</xliff:g>"</item>

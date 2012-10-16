@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"محو سجل المكالمات؟"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"سيتم حذف جميع سجلات المكالمات."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"جارٍ محو سجل المكالمات..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"محو قائمة من يتم الاتصال بهم كثيرًا؟"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"ستمحو قائمة من يتم الاتصال بهم كثيرًا في تطبيقي الأشخاص والهاتف، وستفرض على تطبيقات البريد الإلكتروني التعرف على تفضيلات توجيه الرسائل من البداية."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"جارٍ محو قائمة المُتصل بهم كثيرًا…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"البريد الصوتي"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> من رسائل البريد الصوتي"</item>

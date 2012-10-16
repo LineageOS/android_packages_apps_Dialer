@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Sula irekhodi lamakholi"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Wonke amarekhodi aqoshiwe azosuswa."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Isula irekhodi lamakholi..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Sula oxhumana nabo njalo?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Uzosula uhlu okuxhunyanwa nalo njalo kwizinhlelo zokusebenza zaBantu kanye Nefoni, futhi iphoqelela izinhlelo zokusebenza ze-imeyli ukufunda okukhethayo kokuthintana kusuka ekuqaleni."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Isula oxhumana nabo njalo…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Ivoyisimeyili"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> amavoyisimeyili"</item>

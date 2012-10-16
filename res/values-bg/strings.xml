@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Да се изчисти ли списъкът с обажд.?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Всичките ви записи на обажданията ще бъдат изтрити."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Списъкът с обаждания се изчиства…"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Да се изчистят ли често търсените?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Ще изчистите списъка с често търсените в приложенията Хора и Телефон и ще принудите приложенията за имейл да научат предпочитанията ви за адресите, започвайки отначало."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Често търсените се изчистват…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Гласова поща"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> гласови съобщения"</item>

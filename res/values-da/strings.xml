@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Vil du rydde opkaldslisten?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Alle registrerede opkald slettes."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Opkaldslisten ryddes..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Vil du rydde de ofte kontaktede?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Hvis du gør dette, rydder du listen over personer, som du ofte kontakter, i appene Personer og Telefon. Du vil samtidig tvinge e-mailapps til at lære dine adressepræferencer fra bunden."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Ofte kontaktede personer ryddes…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Telefonsvarerbesked"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> telefonsvarerbeskeder"</item>

@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Futa rekodi ya simu?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Kumbukumbu zako zote za simu zitafutwa."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Inafuta rekodi ya simu..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Futa unaowasiliana nao mara kwa mara?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Utafuta orodha ya unaowasiliana nao mara kwa mara katika programu za Watu na Simu, na ulazimishe programu za barua pepe kujifunza mapendeleo yako ya anwani kutoka mwanzo."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Inafuta unaowasiliana nao mara kwa mara..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Ujumbe wa sauti"</item>
     <item quantity="other" msgid="7909053058399879093">"Ujumbe <xliff:g id="COUNT">%1$d</xliff:g> wa sauti"</item>

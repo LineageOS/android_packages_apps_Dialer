@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Želite li izbrisati popis poziva?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Svi vaši popisi poziva izbrisat će se."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Brisanje popisa poziva..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Brisati podatke o čestim kontaktima?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Izbrisat ćete popis osoba s kojima često kontaktirate u aplikacijama Osobe i Telefoni pa će aplikacije e-pošte morati ispočetka učiti vaše postavke adresiranja."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Brisanje čestih kontakata..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Govorna pošta"</item>
     <item quantity="other" msgid="7909053058399879093">"Br. poruka govorne pošte: <xliff:g id="COUNT">%1$d</xliff:g>"</item>

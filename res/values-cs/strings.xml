@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Vymazat seznam hovorů?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Všechny záznamy hovorů budou smazány."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Mazání seznamu hovorů..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Vymazat často kontaktované osoby?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Vymažete seznam často kontaktovaných osob v aplikacích Lidé a Telefon a e-mailové aplikace budou muset nastavení adresátů vytvořit znovu."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Mazání často kontaktovaných osob..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Hlasová schránka"</item>
     <item quantity="other" msgid="7909053058399879093">"Počet hlasových zpráv: <xliff:g id="COUNT">%1$d</xliff:g>"</item>

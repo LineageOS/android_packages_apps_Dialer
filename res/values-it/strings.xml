@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Cancellare registro chiamate?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Tutte le voci nel registro chiamate verranno eliminate."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Cancellazione registro chiamate…"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Cancellare contattati di frequente?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Cancellerai l\'elenco degli utenti contattati di frequente nelle applicazioni Persone e Telefono e imposterai l\'acquisizione forzata delle tue preferenze di indirizzamento da zero nelle applicazioni email."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Cancellazione contattati di frequente…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Messaggio vocale"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> messaggi vocali"</item>

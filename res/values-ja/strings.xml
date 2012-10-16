@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"通話履歴を消去しますか？"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"すべての通話記録は削除されます。"</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"通話履歴を消去しています…"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"よく使う連絡先を消去しますか？"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"連絡帳アプリや電話アプリのよく使う連絡先リストを消去し、メールアプリがアドレス設定を初めから保存していくようにします。"</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"よく使う連絡先を消去しています…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"ボイスメール"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g>件のボイスメール"</item>

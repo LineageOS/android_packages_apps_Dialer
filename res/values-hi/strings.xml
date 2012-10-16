@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"कॉल लॉग साफ़ करें?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"आपके सभी कॉल रिकॉर्ड हटा दिए जाएंगे."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"कॉल लॉग साफ़ कर रहा है..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"अक्‍सर संपर्क किए गए लोग साफ़ करें?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"आप लोग और फ़ोन एप्‍लिकेशन में अक्‍सर संपर्क किए गए लोगों की सूची साफ़ करेंगे, और अपने ईमेल एप्लिकेशन को आपकी संबोधन प्राथमिकताओं को प्रारंभ से जानने के लिए बाध्‍य करेंगे."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"अक्‍सर संपर्क किए गए लोग साफ़ कर रहा है…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"ध्वनिमेल"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> ध्‍वनिमेल"</item>

@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"¿Borrar registro?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Se eliminarán todos los registros de llamadas."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Borrando registro de llamadas…"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"¿Borrar contactos frecuentes?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Vas a borrar la lista de contactos frecuentes de las aplicaciones Contactos y Teléfono y obligarás a las aplicaciones de correo electrónico a que memoricen tus preferencias de nuevo."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Borrando contactos frecuentes…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Mensaje de voz"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> mensajes de voz"</item>

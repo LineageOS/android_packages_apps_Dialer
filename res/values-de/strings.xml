@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Anrufliste löschen?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Ihre gesamte Anrufliste wird gelöscht."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Anrufliste wird gelöscht..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Liste \"Häufig kontaktiert\" löschen?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Sie löschen die Liste \"Häufig kontaktiert\" in den Apps \"Kontakte\" und \"Telefon\" und geben Ihre Adresseinstellungen für E-Mail-Apps neu ein."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"\"Häufig kontaktiert\" wird gelöscht…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Mailbox"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> Mailbox-Nachrichten"</item>

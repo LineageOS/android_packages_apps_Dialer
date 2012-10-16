@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Tyhjennetäänkö puheluloki?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Kaikki puhelutallenteet poistetaan."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Tyhjennetään puhelulokia..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Tyhjennetäänkö usein käytetyt?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Toiminto tyhjentää Henkilöt- ja Puhelin-sovellusten usein käytettyjen kontaktien luettelon. Lisäksi sähköpostisovellukset pakotetaan opettelemaan osoiteasetuksesi uudestaan."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Tyhjennetään usein käytetyt..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Vastaaja"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> vastaajaviestiä"</item>

@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"የጥሪ ምዝግብ ማስታወሻ ይጽዳ?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"ሁሉም የጥሪ መዝገቦችዎ ይሰረዛሉ።"</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"የጥሪ ምዝግብ ማስታወሻን በማጽዳት ላይ…"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"በተደጋጋሚ የተገኙ ይጽዱ?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"በሰዎች እና በስልክ መተግበሪያዎች ውስጥ በተደጋጋሚ ያገኟቸውን ዝርዝር ያጸዱና የኢሜይል መተግበሪያዎች ምርጫዎችዎን ከባዶ ተነስተው እንዲያውቁ ያስገድዷቸዋል።"</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"በተደጋጋሚ የተገኙትን በማጽዳት ላይ…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"የድምጽ መልዕክት"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> የድምፅ መልዕክቶች"</item>

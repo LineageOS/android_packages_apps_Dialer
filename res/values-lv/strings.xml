@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Vai notīrīt zvanu žurnālu?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Visi zvanu ieraksti tiks dzēsti."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Notiek zvanu žurnāla tīrīšana..."</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Vai dzēst bieži lietotās kontaktp.?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Tiks dzēsts bieži lietoto kontaktpersonu saraksts lietotnēs Personas un Tālrunis, un e-pasta lietotnēs adrešu preferenču saglabāšana tiks sākta no sākuma."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Bieži lietoto kontaktp. dzēšana..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Balss pasts"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> balss pasta ziņojums(-i)"</item>

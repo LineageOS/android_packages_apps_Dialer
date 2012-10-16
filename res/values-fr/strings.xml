@@ -33,9 +33,6 @@
     <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Effacer le journal d\'appels ?"</string>
     <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Votre journal d\'appels sera entièrement supprimé."</string>
     <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Suppression du journal d\'appels…"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="3730983715110813657">"Effacer les contacts fréquents ?"</string>
-    <string name="clearFrequentsConfirmation" msgid="3678152656485640402">"Cette opération efface la liste des personnes que vous contactez le plus souvent dans les applications Contacts et Téléphone, et oblige vos applications de messagerie électronique à mémoriser de nouveau les adresses que vous utilisez le plus fréquemment."</string>
-    <string name="clearFrequentsProgress_title" msgid="7975489396602226565">"Suppression des contacts fréquents…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="7337617129792669763">"Messages vocaux"</item>
     <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> messages vocaux"</item>
