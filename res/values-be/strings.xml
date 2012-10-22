@@ -17,84 +17,49 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for applicationLabel (2896013994591816355) -->
-    <skip />
-    <!-- no translation found for launcherDialer (4812615012439839668) -->
-    <skip />
-    <!-- no translation found for dialerIconLabel (6452903404967127043) -->
-    <skip />
-    <!-- no translation found for recentCallsIconLabel (5907257356627356916) -->
-    <skip />
-    <!-- no translation found for menu_sendTextMessage (3595115037800019790) -->
-    <skip />
-    <!-- no translation found for recentCalls_callNumber (3515599302039524481) -->
-    <skip />
-    <!-- no translation found for recentCalls_editNumberBeforeCall (2135159627866994026) -->
-    <skip />
-    <!-- no translation found for recentCalls_addToContact (3461703895193177303) -->
-    <skip />
-    <!-- no translation found for recentCalls_removeFromRecentList (7691127430328165825) -->
-    <skip />
-    <!-- no translation found for recentCalls_deleteAll (5940657691419101776) -->
-    <skip />
-    <!-- no translation found for recentCalls_trashVoicemail (8564377061038549002) -->
-    <skip />
-    <!-- no translation found for recentCalls_shareVoicemail (7039805601642115775) -->
-    <skip />
-    <!-- no translation found for recentCalls_empty (2475657296340964771) -->
-    <skip />
-    <!-- no translation found for clearCallLogConfirmation_title (8437942116681120680) -->
-    <skip />
-    <!-- no translation found for clearCallLogConfirmation (3049814863802377048) -->
-    <skip />
-    <!-- no translation found for clearCallLogProgress_title (4967754518175652306) -->
-    <skip />
-    <!-- no translation found for notification_voicemail_title:one (7337617129792669763) -->
-    <!-- no translation found for notification_voicemail_title:other (7909053058399879093) -->
-    <!-- no translation found for notification_action_voicemail_play (6479729974823808963) -->
-    <skip />
-    <!-- no translation found for notification_voicemail_callers_list (7275857613463950729) -->
-    <skip />
-    <!-- no translation found for notification_new_voicemail_ticker (773612832096153276) -->
-    <skip />
-    <!-- no translation found for voicemail_playback_error (3745094029143083237) -->
-    <skip />
-    <!-- no translation found for voicemail_buffering (3471857802985075286) -->
-    <skip />
-    <!-- no translation found for voicemail_fetching_content (7304127676344948616) -->
-    <skip />
-    <!-- no translation found for voicemail_fetching_timout (6552711420422790440) -->
-    <skip />
-    <!-- no translation found for call_log_new_header (8880520605610950591) -->
-    <skip />
-    <!-- no translation found for call_log_old_header (5378037070074806149) -->
-    <skip />
+    <string name="applicationLabel" msgid="2896013994591816355">"Тэлефон"</string>
+    <string name="launcherDialer" msgid="4812615012439839668">"Тэлефон"</string>
+    <string name="dialerIconLabel" msgid="6452903404967127043">"Тэлефон"</string>
+    <string name="recentCallsIconLabel" msgid="5907257356627356916">"Спіс выклікаў"</string>
+    <string name="menu_sendTextMessage" msgid="3595115037800019790">"Даслаць тэкст. павед."</string>
+    <string name="recentCalls_callNumber" msgid="3515599302039524481">"Выклікаць карыстальнiка <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="recentCalls_editNumberBeforeCall" msgid="2135159627866994026">"Рэдагаваць нумар перад выклікам"</string>
+    <string name="recentCalls_addToContact" msgid="3461703895193177303">"Дадаць у кантакты"</string>
+    <string name="recentCalls_removeFromRecentList" msgid="7691127430328165825">"Выдаліць са спісу выклікаў"</string>
+    <string name="recentCalls_deleteAll" msgid="5940657691419101776">"Ачысціць спіс выклікаў"</string>
+    <string name="recentCalls_trashVoicemail" msgid="8564377061038549002">"Выдаліць галасавое паведамленне"</string>
+    <string name="recentCalls_shareVoicemail" msgid="7039805601642115775">"Адправiць галасавое паведамленне"</string>
+    <string name="recentCalls_empty" msgid="2475657296340964771">"Спіс выклікаў пусты."</string>
+    <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Ачысціць спіс выклікаў?"</string>
+    <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Усе вашы запісы выклікаў будуць выдалены."</string>
+    <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Выдаленне гiсторыi выклiкаў..."</string>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one" msgid="7337617129792669763">"Галасавая пошта"</item>
+    <item quantity="other" msgid="7909053058399879093">"Галасавых паведамленняў: <xliff:g id="COUNT">%1$d</xliff:g>"</item>
+  </plurals>
+    <string name="notification_action_voicemail_play" msgid="6479729974823808963">"Прайграць"</string>
+    <string name="notification_voicemail_callers_list" msgid="7275857613463950729">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
+    <string name="notification_new_voicemail_ticker" msgid="773612832096153276">"Новае паведамл. ад: <xliff:g id="CALLER">%1$s</xliff:g>"</string>
+    <string name="voicemail_playback_error" msgid="3745094029143083237">"Немагчыма прайгр. пав. галасавой пошты"</string>
+    <string name="voicemail_buffering" msgid="3471857802985075286">"Запiс у буфер..."</string>
+    <string name="voicemail_fetching_content" msgid="7304127676344948616">"Атрыманне галасавой пошты..."</string>
+    <string name="voicemail_fetching_timout" msgid="6552711420422790440">"Немагчыма атрымаць галасавую пошту."</string>
+    <string name="call_log_new_header" msgid="8880520605610950591">"Новы"</string>
+    <string name="call_log_old_header" msgid="5378037070074806149">"Старэйшы"</string>
     <string name="call_log_voicemail_header" msgid="1656430490229372168">"Толькi выклiкі з галасавой поштай"</string>
     <string name="call_log_incoming_header" msgid="4514259481080897711">"Толькi ўваходныя выклiкi"</string>
     <string name="call_log_outgoing_header" msgid="378663994725907738">"Толькi выходныя выклiкi"</string>
     <string name="call_log_missed_header" msgid="5446439128157203772">"Толькі прапушчаныя выклiкi"</string>
-    <!-- no translation found for voicemail_status_voicemail_not_available (5416272416842129144) -->
-    <skip />
-    <!-- no translation found for voicemail_status_messages_waiting (4458458132507579370) -->
-    <skip />
-    <!-- no translation found for voicemail_status_configure_voicemail (8634314832269048952) -->
-    <skip />
-    <!-- no translation found for voicemail_status_audio_not_available (3238711781241004997) -->
-    <skip />
-    <!-- no translation found for voicemail_status_action_configure (6294251161130772427) -->
-    <skip />
-    <!-- no translation found for voicemail_status_action_call_server (5905306807691863100) -->
-    <skip />
-    <!-- no translation found for voicemail_speed_slowest (4253243787222323405) -->
-    <skip />
-    <!-- no translation found for voicemail_speed_slower (4776579878006616930) -->
-    <skip />
-    <!-- no translation found for voicemail_speed_normal (5467566844006749402) -->
-    <skip />
-    <!-- no translation found for voicemail_speed_faster (533959523242789518) -->
-    <skip />
-    <!-- no translation found for voicemail_speed_fastest (7495589683231751304) -->
-    <skip />
-    <!-- no translation found for call_log_item_count_and_date (6348558252438448946) -->
-    <skip />
+    <string name="voicemail_status_voicemail_not_available" msgid="5416272416842129144">"Немагчыма падлучыцца да сервера галасавой пошты."</string>
+    <string name="voicemail_status_messages_waiting" msgid="4458458132507579370">"Немагч. далучыцца да сервера гал. пошты. Нов. галас. павед. чак."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8634314832269048952">"Налада галасавой пошты."</string>
+    <string name="voicemail_status_audio_not_available" msgid="3238711781241004997">"Аўдыё недаступнае."</string>
+    <string name="voicemail_status_action_configure" msgid="6294251161130772427">"Стварыць"</string>
+    <string name="voicemail_status_action_call_server" msgid="5905306807691863100">"Выкл. гал. пошту"</string>
+    <string name="voicemail_speed_slowest" msgid="4253243787222323405">"Самая нiзкая хуткасць"</string>
+    <string name="voicemail_speed_slower" msgid="4776579878006616930">"Нiзкая хуткасць"</string>
+    <string name="voicemail_speed_normal" msgid="5467566844006749402">"Звычайная хуткасць"</string>
+    <string name="voicemail_speed_faster" msgid="533959523242789518">"Высокая хуткасць"</string>
+    <string name="voicemail_speed_fastest" msgid="7495589683231751304">"Максімальная хуткасць"</string>
+    <string name="call_log_item_count_and_date" msgid="6348558252438448946">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
 </resources>
