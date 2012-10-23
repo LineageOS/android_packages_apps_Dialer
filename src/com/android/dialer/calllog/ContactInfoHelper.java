@@ -24,7 +24,7 @@ import android.provider.ContactsContract.PhoneLookup;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
-import com.android.contacts.util.UriUtils;
+import com.android.contacts.common.util.UriUtils;
 
 /**
  * Utility class to look up the contact information for a given number.

@@ -19,7 +19,7 @@ package com.android.dialer.calllog;
 import android.net.Uri;
 import android.text.TextUtils;
 
-import com.android.contacts.util.UriUtils;
+import com.android.contacts.common.util.UriUtils;
 
 /**
  * Information for a contact as needed by the Call Log.

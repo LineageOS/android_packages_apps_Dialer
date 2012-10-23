@@ -67,13 +67,14 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.android.contacts.ContactsUtils;
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.GeoUtil;
 import com.android.contacts.util.PhoneNumberFormatter;
 import com.android.contacts.util.StopWatch;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
+import com.android.dialer.util.OrientationUtil;
 import com.android.internal.telephony.ITelephony;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
@@ -200,6 +201,16 @@ public class DialpadFragment extends Fragment
 
     private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
 
+    /**
+     * Return an Intent for launching voicemail screen.
+     */
+    private static Intent getVoicemailIntent() {
+        final Intent intent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
+                Uri.fromParts("voicemail", "", null));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
+    }
+
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         mWasEmptyBeforeTextChange = TextUtils.isEmpty(s);
@@ -241,7 +252,7 @@ public class DialpadFragment extends Fragment
     public void onCreate(Bundle state) {
         super.onCreate(state);
 
-        mCurrentCountryIso = ContactsUtils.getCurrentCountryIso(getActivity());
+        mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
 
         try {
             mHaptic.init(getActivity(),
@@ -290,7 +301,7 @@ public class DialpadFragment extends Fragment
         mDialButtonContainer = fragmentView.findViewById(R.id.dialButtonContainer);
         // If in portrait, add padding to the dial button since we need space for the
         // search and menu/overflow buttons.
-        if (mDialButtonContainer != null && !ContactsUtils.isLandscape(this.getActivity())) {
+        if (mDialButtonContainer != null && !OrientationUtil.isLandscape(this.getActivity())) {
             mDialButtonContainer.setPadding(
                     fakeMenuItemWidth, mDialButtonContainer.getPaddingTop(),
                     fakeMenuItemWidth, mDialButtonContainer.getPaddingBottom());
@@ -625,7 +636,7 @@ public class DialpadFragment extends Fragment
         super.onCreateOptionsMenu(menu, inflater);
         // Landscape dialer uses the real actionbar menu, whereas portrait uses a fake one
         // that is created using constructPopupMenu()
-        if (ContactsUtils.isLandscape(this.getActivity()) ||
+        if (OrientationUtil.isLandscape(this.getActivity()) ||
                 ViewConfiguration.get(getActivity()).hasPermanentMenuKey() &&
                 isLayoutReady() && mDialpadChooser != null) {
             inflater.inflate(R.menu.dialpad_options, menu);
@@ -635,7 +646,7 @@ public class DialpadFragment extends Fragment
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         // Hardware menu key should be available and Views should already be ready.
-        if (ContactsUtils.isLandscape(this.getActivity()) ||
+        if (OrientationUtil.isLandscape(this.getActivity()) ||
                 ViewConfiguration.get(getActivity()).hasPermanentMenuKey() &&
                 isLayoutReady() && mDialpadChooser != null) {
             setupMenuItems(menu);
@@ -1000,7 +1011,7 @@ public class DialpadFragment extends Fragment
     }
 
     public void callVoicemail() {
-        startActivity(ContactsUtils.getVoicemailIntent());
+        startActivity(getVoicemailIntent());
         mClearDigitsOnStop = true;
         getActivity().finish();
     }

@@ -46,8 +46,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.common.io.MoreCloseables;
-import com.android.contacts.ContactsUtils;
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.GeoUtil;
 import com.android.dialer.R;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
@@ -220,7 +220,7 @@ public class CallLogFragment extends ListFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String currentCountryIso = ContactsUtils.getCurrentCountryIso(getActivity());
+        String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mAdapter = new CallLogAdapter(getActivity(), this,
                 new ContactInfoHelper(getActivity(), currentCountryIso));
         setListAdapter(mAdapter);
