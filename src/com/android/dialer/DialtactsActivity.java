@@ -57,7 +57,7 @@ import android.widget.SearchView.OnCloseListener;
 import android.widget.SearchView.OnQueryTextListener;
 
 import com.android.contacts.common.CallUtil;
-import com.android.contacts.activities.TransactionSafeActivity;
+import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.interactions.PhoneNumberInteraction;
 import com.android.contacts.list.ContactListFilterController;
 import com.android.contacts.list.ContactListFilterController.ContactListFilterListener;
@@ -78,8 +78,7 @@ import com.android.internal.telephony.ITelephony;
  * embedded using intents.
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
  */
-public class DialtactsActivity extends TransactionSafeActivity
-        implements View.OnClickListener {
+public class DialtactsActivity extends TransactionSafeActivity implements View.OnClickListener {
     private static final String TAG = "DialtactsActivity";
 
     public static final boolean DEBUG = false;
