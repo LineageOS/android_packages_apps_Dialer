@@ -69,7 +69,7 @@ import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
-import com.android.contacts.util.PhoneNumberFormatter;
+import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
