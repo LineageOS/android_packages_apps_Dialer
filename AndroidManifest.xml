@@ -163,6 +163,18 @@
             android:exported="true"
         />
 
+        <!-- Used to filter contacts list by account -->
+        <activity
+            android:name="com.android.contacts.list.AccountFilterActivity"
+            android:label="@string/activity_title_contacts_filter"
+            android:theme="@style/ContactListFilterTheme"/>
+
+        <!-- Used to select display and sync groups -->
+        <activity
+            android:name="com.android.contacts.list.CustomContactListFilterActivity"
+            android:label="@string/custom_list_filter"
+            android:theme="@style/ContactListFilterTheme"/>
+
         <receiver android:name=".calllog.CallLogReceiver"
             android:enabled="@*android:bool/config_voice_capable">
             <intent-filter>
