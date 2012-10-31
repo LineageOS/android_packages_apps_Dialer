@@ -46,8 +46,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.contacts.common.ContactPhotoManager;
-import com.android.contacts.ContactTileLoaderFactory;
-import com.android.contacts.dialog.ClearFrequentsDialog;
+import com.android.contacts.common.ContactTileLoaderFactory;
+import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.interactions.ImportExportDialogFragment;
 import com.android.contacts.list.ContactListFilter;
 import com.android.contacts.list.ContactListFilterController;
