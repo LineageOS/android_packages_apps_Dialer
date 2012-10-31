@@ -178,4 +178,12 @@
         <xliff:g id="date">%2$s</xliff:g>
     </string>
 
+    <!-- Title for the sms disambiguation dialog -->
+    <string name="sms_disambig_title">Choose number</string>
+
+    <!-- Title for the call disambiguation dialog -->
+    <string name="call_disambig_title">Choose number</string>
+
+    <!-- Message next to disamgiguation dialog check box -->
+    <string name="make_primary">Remember this choice</string>
 </resources>
