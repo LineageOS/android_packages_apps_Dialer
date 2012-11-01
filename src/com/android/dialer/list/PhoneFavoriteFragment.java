@@ -48,14 +48,14 @@ import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
+import com.android.contacts.common.list.ContactListFilter;
+import com.android.contacts.common.list.ContactListItemView;
+import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.interactions.ImportExportDialogFragment;
-import com.android.contacts.list.ContactListFilter;
 import com.android.contacts.list.ContactListFilterController;
-import com.android.contacts.list.ContactListItemView;
 import com.android.contacts.list.ContactTileAdapter;
 import com.android.contacts.list.ContactTileView;
 import com.android.contacts.list.PhoneNumberListAdapter;
-import com.android.contacts.preference.ContactsPreferences;
 import com.android.contacts.util.AccountFilterUtil;
 import com.android.dialer.R;
 
