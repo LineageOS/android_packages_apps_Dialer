@@ -17,49 +17,53 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="2896013994591816355">"Biranje"</string>
-    <string name="launcherDialer" msgid="4812615012439839668">"Telefon"</string>
-    <string name="dialerIconLabel" msgid="6452903404967127043">"Telefon"</string>
-    <string name="recentCallsIconLabel" msgid="5907257356627356916">"Popis poziva"</string>
-    <string name="menu_sendTextMessage" msgid="3595115037800019790">"Pošalji tekstnu poruku"</string>
-    <string name="recentCalls_callNumber" msgid="3515599302039524481">"Nazovi: <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="2135159627866994026">"Uredi broj prije poziva"</string>
-    <string name="recentCalls_addToContact" msgid="3461703895193177303">"Dodaj kontaktima"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="7691127430328165825">"Ukloni s popisa poziva"</string>
-    <string name="recentCalls_deleteAll" msgid="5940657691419101776">"Izbriši popis poziva"</string>
-    <string name="recentCalls_trashVoicemail" msgid="8564377061038549002">"Brisanje govorne pošte"</string>
-    <string name="recentCalls_shareVoicemail" msgid="7039805601642115775">"Dijeli govornu poštu"</string>
-    <string name="recentCalls_empty" msgid="2475657296340964771">"Popis poziva je prazan."</string>
-    <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Želite li izbrisati popis poziva?"</string>
-    <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Svi vaši popisi poziva izbrisat će se."</string>
-    <string name="clearCallLogProgress_title" msgid="4967754518175652306">"Brisanje popisa poziva..."</string>
+    <!-- no translation found for applicationLabel (8490255569343340580) -->
+    <skip />
+    <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
+    <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
+    <string name="recentCallsIconLabel" msgid="1419116422359067949">"Zapisnik poziva"</string>
+    <string name="menu_sendTextMessage" msgid="6937343460284499306">"Pošalji tekstnu poruku"</string>
+    <string name="recentCalls_callNumber" msgid="1756372533999226126">"Nazovi <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Uredi broj prije pozivanja"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Dodaj u kontakte"</string>
+    <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Ukloni iz zapisnika poziva"</string>
+    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Izbriši zapisnik poziva"</string>
+    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Brisanje govorne pošte"</string>
+    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Podijeli govornu poštu"</string>
+    <string name="recentCalls_empty" msgid="247053222448663107">"Zapisnik poziva je prazan"</string>
+    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Izbrisati dnevnik poziva?"</string>
+    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Svi vaši zapisi poziva bit će izbrisani."</string>
+    <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Brisanje dnevnika poziva..."</string>
   <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="7337617129792669763">"Govorna pošta"</item>
-    <item quantity="other" msgid="7909053058399879093">"Br. poruka govorne pošte: <xliff:g id="COUNT">%1$d</xliff:g>"</item>
+    <item quantity="one" msgid="1746619685488504230">"Govorna pošta"</item>
+    <item quantity="other" msgid="5513481419205061254">"Br. govornih pošta: <xliff:g id="COUNT">%1$d</xliff:g>"</item>
   </plurals>
-    <string name="notification_action_voicemail_play" msgid="6479729974823808963">"Reprodukcija"</string>
-    <string name="notification_voicemail_callers_list" msgid="7275857613463950729">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="773612832096153276">"Nova govorna pošta kontakta <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="3745094029143083237">"Reprodukcija govorne pošte nije uspjela."</string>
-    <string name="voicemail_buffering" msgid="3471857802985075286">"Stavljanje u međuspremnik..."</string>
-    <string name="voicemail_fetching_content" msgid="7304127676344948616">"Dohvaćanje govorne pošte..."</string>
-    <string name="voicemail_fetching_timout" msgid="6552711420422790440">"Dohvaćanje govorne pošte nije uspjelo."</string>
-    <string name="call_log_new_header" msgid="8880520605610950591">"Novo"</string>
-    <string name="call_log_old_header" msgid="5378037070074806149">"Starije"</string>
-    <string name="call_log_voicemail_header" msgid="1656430490229372168">"Samo pozivi s govornom poštom"</string>
-    <string name="call_log_incoming_header" msgid="4514259481080897711">"Samo dolazni pozivi"</string>
-    <string name="call_log_outgoing_header" msgid="378663994725907738">"Samo odlazni pozivi"</string>
-    <string name="call_log_missed_header" msgid="5446439128157203772">"Samo propušteni pozivi"</string>
-    <string name="voicemail_status_voicemail_not_available" msgid="5416272416842129144">"Povezivanje s poslužiteljem govorne pošte nije moguće."</string>
-    <string name="voicemail_status_messages_waiting" msgid="4458458132507579370">"Nema veze s posluž. govorne pošte. Nova govorna pošta čeka."</string>
-    <string name="voicemail_status_configure_voicemail" msgid="8634314832269048952">"Postavite svoju govornu poštu."</string>
-    <string name="voicemail_status_audio_not_available" msgid="3238711781241004997">"Zvuk nije dostupan."</string>
-    <string name="voicemail_status_action_configure" msgid="6294251161130772427">"Postavljanje"</string>
-    <string name="voicemail_status_action_call_server" msgid="5905306807691863100">"Zovi govornu poštu"</string>
-    <string name="voicemail_speed_slowest" msgid="4253243787222323405">"Najsporije"</string>
-    <string name="voicemail_speed_slower" msgid="4776579878006616930">"Sporo"</string>
-    <string name="voicemail_speed_normal" msgid="5467566844006749402">"Normalna brzina"</string>
-    <string name="voicemail_speed_faster" msgid="533959523242789518">"Brzo"</string>
-    <string name="voicemail_speed_fastest" msgid="7495589683231751304">"Najbrže"</string>
-    <string name="call_log_item_count_and_date" msgid="6348558252438448946">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Reproduciraj"</string>
+    <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
+    <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nova govorna pošta od kontakta <xliff:g id="CALLER">%1$s</xliff:g>"</string>
+    <string name="voicemail_playback_error" msgid="1811242131549854624">"Reprodukcija govorne pošte nije uspjela"</string>
+    <string name="voicemail_buffering" msgid="738287747618697097">"Stavljanje u međuspremnik..."</string>
+    <string name="voicemail_fetching_content" msgid="877911315738258780">"Dohvaćanje govorne pošte..."</string>
+    <string name="voicemail_fetching_timout" msgid="6691792377574905201">"Dohvaćanje govorne pošte nije uspjelo."</string>
+    <string name="call_log_new_header" msgid="846546437517724715">"Novo"</string>
+    <string name="call_log_old_header" msgid="6262205894314263629">"Starije"</string>
+    <string name="call_log_voicemail_header" msgid="3945407886667089173">"Samo pozivi s govornom poštom"</string>
+    <string name="call_log_incoming_header" msgid="2787722299753674684">"Samo dolazni pozivi"</string>
+    <string name="call_log_outgoing_header" msgid="761009180766735769">"Samo odlazni pozivi"</string>
+    <string name="call_log_missed_header" msgid="8017148056610855956">"Samo propušteni pozivi"</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="3021980206152528883">"Povezivanje s poslužiteljem govorne pošte nije moguće."</string>
+    <string name="voicemail_status_messages_waiting" msgid="7113421459602803605">"Vezu s poslužiteljem govorne pošte nije moguće uspostaviti. Nova govorna pošta čeka."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="3738537770636895689">"Postavite svoju govornu poštu."</string>
+    <string name="voicemail_status_audio_not_available" msgid="3369618334553341626">"Zvuk nije dostupan."</string>
+    <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Postavljanje"</string>
+    <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Zovi govornu poštu"</string>
+    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"Najsporije"</string>
+    <string name="voicemail_speed_slower" msgid="1508601287347216244">"Sporo"</string>
+    <string name="voicemail_speed_normal" msgid="9033988544627228892">"Normalna brzina"</string>
+    <string name="voicemail_speed_faster" msgid="2019965121475935488">"Brzo"</string>
+    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"Najbrže"</string>
+    <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="sms_disambig_title" msgid="5846266399240630846">"Odaberite broj"</string>
+    <string name="call_disambig_title" msgid="4392886850104795739">"Odaberite broj"</string>
+    <string name="make_primary" msgid="5829291915305113983">"Zapamti ovaj izbor"</string>
 </resources>

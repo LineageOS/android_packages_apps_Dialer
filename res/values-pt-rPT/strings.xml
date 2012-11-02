@@ -17,49 +17,53 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="2896013994591816355">"Telefone"</string>
-    <string name="launcherDialer" msgid="4812615012439839668">"Telemóvel"</string>
-    <string name="dialerIconLabel" msgid="6452903404967127043">"Telemóvel"</string>
-    <string name="recentCallsIconLabel" msgid="5907257356627356916">"Registo de chamadas"</string>
-    <string name="menu_sendTextMessage" msgid="3595115037800019790">"Enviar SMS"</string>
-    <string name="recentCalls_callNumber" msgid="3515599302039524481">"Chamar <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="2135159627866994026">"Editar número antes de efetuar chamada"</string>
-    <string name="recentCalls_addToContact" msgid="3461703895193177303">"Adicionar aos contactos"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="7691127430328165825">"Remover do registo de chamadas"</string>
-    <string name="recentCalls_deleteAll" msgid="5940657691419101776">"Limpar registo de chamadas"</string>
-    <string name="recentCalls_trashVoicemail" msgid="8564377061038549002">"Eliminar correio de voz"</string>
-    <string name="recentCalls_shareVoicemail" msgid="7039805601642115775">"Partilhar correio de voz"</string>
-    <string name="recentCalls_empty" msgid="2475657296340964771">"O registo de chamadas está vazio."</string>
-    <string name="clearCallLogConfirmation_title" msgid="8437942116681120680">"Limpar registo de chamadas?"</string>
-    <string name="clearCallLogConfirmation" msgid="3049814863802377048">"Todos os registos de chamadas serão eliminados."</string>
-    <string name="clearCallLogProgress_title" msgid="4967754518175652306">"A limpar registo de chamadas..."</string>
+    <!-- no translation found for applicationLabel (8490255569343340580) -->
+    <skip />
+    <string name="launcherDialer" msgid="8636288196618486553">"Telefone"</string>
+    <string name="dialerIconLabel" msgid="6500826552823403796">"Telefone"</string>
+    <string name="recentCallsIconLabel" msgid="1419116422359067949">"Chamadas"</string>
+    <string name="menu_sendTextMessage" msgid="6937343460284499306">"Enviar mensagem de texto"</string>
+    <string name="recentCalls_callNumber" msgid="1756372533999226126">"Ligar a <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Editar número antes de efectuar a chamada"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Adicionar aos contactos"</string>
+    <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Remover do registo de chamadas"</string>
+    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Limpar registo de chamadas"</string>
+    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Eliminar correio de voz"</string>
+    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Partilhar correio de voz"</string>
+    <string name="recentCalls_empty" msgid="247053222448663107">"O registo de chamadas está vazio."</string>
+    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Limpar reg. de cham.?"</string>
+    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Todos os registos de chamadas serão eliminados."</string>
+    <string name="clearCallLogProgress_title" msgid="8365943000154295771">"A limpar registo de chamadas..."</string>
   <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="7337617129792669763">"Correio de voz"</item>
-    <item quantity="other" msgid="7909053058399879093">"<xliff:g id="COUNT">%1$d</xliff:g> Mensagens de correio de voz"</item>
+    <item quantity="one" msgid="1746619685488504230">"Correio de voz"</item>
+    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> Mensagens de correio de voz"</item>
   </plurals>
-    <string name="notification_action_voicemail_play" msgid="6479729974823808963">"Reproduzir"</string>
-    <string name="notification_voicemail_callers_list" msgid="7275857613463950729">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="773612832096153276">"Nova msg de correio de voz de <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="3745094029143083237">"Não foi possível reprod. correio de voz."</string>
-    <string name="voicemail_buffering" msgid="3471857802985075286">"A colocar na memória intermédia..."</string>
-    <string name="voicemail_fetching_content" msgid="7304127676344948616">"A obter correio de voz..."</string>
-    <string name="voicemail_fetching_timout" msgid="6552711420422790440">"Não foi possível obter correio de voz."</string>
-    <string name="call_log_new_header" msgid="8880520605610950591">"Novas"</string>
-    <string name="call_log_old_header" msgid="5378037070074806149">"+ antigas"</string>
-    <string name="call_log_voicemail_header" msgid="1656430490229372168">"Apenas chamadas com correio de voz"</string>
-    <string name="call_log_incoming_header" msgid="4514259481080897711">"Apenas chamadas recebidas"</string>
-    <string name="call_log_outgoing_header" msgid="378663994725907738">"Apenas chamadas efetuadas"</string>
-    <string name="call_log_missed_header" msgid="5446439128157203772">"Apenas chamadas não atendidas"</string>
-    <string name="voicemail_status_voicemail_not_available" msgid="5416272416842129144">"Não é possível ligar ao servidor de correio de voz."</string>
-    <string name="voicemail_status_messages_waiting" msgid="4458458132507579370">"Não é possível ligar ao serv. corr. voz. Novas msgs à espera."</string>
-    <string name="voicemail_status_configure_voicemail" msgid="8634314832269048952">"Configure o seu correio de voz."</string>
-    <string name="voicemail_status_audio_not_available" msgid="3238711781241004997">"O áudio não está disponível."</string>
-    <string name="voicemail_status_action_configure" msgid="6294251161130772427">"Configurar"</string>
-    <string name="voicemail_status_action_call_server" msgid="5905306807691863100">"Chamar corr. de voz"</string>
-    <string name="voicemail_speed_slowest" msgid="4253243787222323405">"Velocidade mais lenta"</string>
-    <string name="voicemail_speed_slower" msgid="4776579878006616930">"Velocidade lenta"</string>
-    <string name="voicemail_speed_normal" msgid="5467566844006749402">"Velocidade normal"</string>
-    <string name="voicemail_speed_faster" msgid="533959523242789518">"Velocidade rápida"</string>
-    <string name="voicemail_speed_fastest" msgid="7495589683231751304">"Velocidade mais rápida"</string>
-    <string name="call_log_item_count_and_date" msgid="6348558252438448946">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Reproduzir"</string>
+    <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g> , <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
+    <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nova msg de correio de voz de <xliff:g id="CALLER">%1$s</xliff:g>"</string>
+    <string name="voicemail_playback_error" msgid="1811242131549854624">"Não foi possível reprod. correio de voz."</string>
+    <string name="voicemail_buffering" msgid="738287747618697097">"A colocar na memória intermédia..."</string>
+    <string name="voicemail_fetching_content" msgid="877911315738258780">"A obter correio de voz..."</string>
+    <string name="voicemail_fetching_timout" msgid="6691792377574905201">"Não foi possível obter correio de voz."</string>
+    <string name="call_log_new_header" msgid="846546437517724715">"Novo"</string>
+    <string name="call_log_old_header" msgid="6262205894314263629">"+ antigo"</string>
+    <string name="call_log_voicemail_header" msgid="3945407886667089173">"Apenas chamadas com correio de voz"</string>
+    <string name="call_log_incoming_header" msgid="2787722299753674684">"Apenas chamadas recebidas"</string>
+    <string name="call_log_outgoing_header" msgid="761009180766735769">"Apenas chamadas efetuadas"</string>
+    <string name="call_log_missed_header" msgid="8017148056610855956">"Apenas chamadas não atendidas"</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="3021980206152528883">"Não é possível ligar ao servidor de correio de voz."</string>
+    <string name="voicemail_status_messages_waiting" msgid="7113421459602803605">"Não é possível ligar ao serv. corr. voz. Novas msgs à espera."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="3738537770636895689">"Configure o seu correio de voz."</string>
+    <string name="voicemail_status_audio_not_available" msgid="3369618334553341626">"O áudio não está disponível."</string>
+    <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Configurar"</string>
+    <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Chamar correio de voz"</string>
+    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"Velocidade mais lenta"</string>
+    <string name="voicemail_speed_slower" msgid="1508601287347216244">"Velocidade reduzida"</string>
+    <string name="voicemail_speed_normal" msgid="9033988544627228892">"Velocidade normal"</string>
+    <string name="voicemail_speed_faster" msgid="2019965121475935488">"Velocidade rápida"</string>
+    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"Velocidade mais rápida"</string>
+    <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="sms_disambig_title" msgid="5846266399240630846">"Selecionar número"</string>
+    <string name="call_disambig_title" msgid="4392886850104795739">"Selecionar número"</string>
+    <string name="make_primary" msgid="5829291915305113983">"Memorizar esta escolha"</string>
 </resources>
