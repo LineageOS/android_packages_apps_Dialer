@@ -1,5 +1,7 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+ * Not a Contribution.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,6 +46,7 @@ import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
+import android.telephony.MSimTelephonyManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -107,6 +110,7 @@ public class DialpadFragment extends Fragment
 
     private static final boolean DEBUG = DialtactsActivity.DEBUG;
 
+    private static final String SUBSCRIPTION_KEY = "subscription";
     private static final String EMPTY_NUMBER = "";
     private static final char PAUSE = ',';
     private static final char WAIT = ';';
@@ -174,6 +178,7 @@ public class DialpadFragment extends Fragment
      */
     private String mProhibitedPhoneNumberRegexp;
 
+    private int mSubscription = 0;
 
     // Last number dialed, retrieved asynchronously from the call DB
     // in onCreate. This number is displayed when the user hits the
@@ -1700,14 +1705,22 @@ public class DialpadFragment extends Fragment
      *
      * @return true if voicemail is enabled and accessibly. Note that this can be false
      * "temporarily" after the app boot.
-     * @see TelephonyManager#getVoiceMailNumber()
+     * @see MSimTelephonyManager#getVoiceMailNumber()
      */
     private boolean isVoicemailAvailable() {
         try {
-            return (TelephonyManager.getDefault().getVoiceMailNumber() != null);
+            if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+                mSubscription = MSimTelephonyManager.getDefault().getPreferredVoiceSubscription();
+                Log.d(TAG, "Voicemail preferred sub id = "+ mSubscription);
+
+                return (MSimTelephonyManager.getDefault().
+                        getVoiceMailNumber(mSubscription) != null);
+            } else {
+                return (TelephonyManager.getDefault().getVoiceMailNumber() != null);
+            }
         } catch (SecurityException se) {
             // Possibly no READ_PHONE_STATE privilege.
-            Log.w(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");
+            Log.e(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");
         }
         return false;
     }
@@ -1782,6 +1795,7 @@ public class DialpadFragment extends Fragment
     private Intent newFlashIntent() {
         final Intent intent = CallUtil.getCallIntent(EMPTY_NUMBER);
         intent.putExtra(EXTRA_SEND_EMPTY_FLASH, true);
+        intent.putExtra(SUBSCRIPTION_KEY, mSubscription);
         return intent;
     }
 
