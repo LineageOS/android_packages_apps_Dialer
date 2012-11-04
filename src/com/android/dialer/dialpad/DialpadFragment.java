@@ -41,6 +41,7 @@ import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -1640,13 +1641,37 @@ public class DialpadFragment extends AnalyticsFragment
      * @see TelephonyManager#getVoiceMailNumber()
      */
     private boolean isVoicemailAvailable() {
-        try {
-            return getTelephonyManager().getVoiceMailNumber() != null;
-        } catch (SecurityException se) {
-            // Possibly no READ_PHONE_STATE privilege.
-            Log.w(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");
+        boolean promptEnabled = SubscriptionManager.isVoicePromptEnabled();
+        if (promptEnabled) {
+            hasVMNumber();
+        } else {
+            long subId = SubscriptionManager.getDefaultVoiceSubId();
+            try {
+                return getTelephonyManager().getVoiceMailNumber(subId) != null;
+            } catch (SecurityException se) {
+                // Possibly no READ_PHONE_STATE privilege.
+                Log.w(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");
+            }
         }
         return false;
+    }
+
+    private boolean hasVMNumber() {
+        boolean hasVMNum = false;
+        int phoneCount = getTelephonyManager().getPhoneCount();
+        for (int i = 0; i < phoneCount; i++) {
+            try {
+                long[] subId = SubscriptionManager.getSubId(i);
+                hasVMNum = getTelephonyManager().getVoiceMailNumber(subId[0]) != null;
+            } catch (SecurityException se) {
+                // Possibly no READ_PHONE_STATE privilege.
+                Log.e(TAG, "hasVMNumber: SecurityException, Maybe privilege isn't sufficient.");
+            }
+            if (hasVMNum) {
+                break;
+            }
+        }
+        return hasVMNum;
     }
 
     /**

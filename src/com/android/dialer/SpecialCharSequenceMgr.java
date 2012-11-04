@@ -27,9 +27,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Looper;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.provider.Settings;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.WindowManager;
@@ -38,7 +41,7 @@ import android.widget.Toast;
 
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
-
+import com.android.internal.telephony.ITelephony;
 /**
  * Helper class to listen for some magic character sequences
  * that are handled specially by the dialer.
@@ -208,7 +211,9 @@ public class SpecialCharSequenceMgr {
                 sc.progressDialog.show();
 
                 // run the query.
-                handler.startQuery(ADN_QUERY_TOKEN, sc, Uri.parse("content://icc/adn"),
+                long subId = SubscriptionManager.getDefaultVoiceSubId();
+                Uri uri = Uri.parse("content://icc/adn/subId/" + subId);
+                handler.startQuery(ADN_QUERY_TOKEN, sc, uri,
                         new String[]{ADN_PHONE_NUMBER_COLUMN_NAME}, null, null, null);
 
                 if (sPreviousAdnQueryHandler != null) {
@@ -226,9 +231,14 @@ public class SpecialCharSequenceMgr {
 
     static boolean handlePinEntry(Context context, String input) {
         if ((input.startsWith("**04") || input.startsWith("**05")) && input.endsWith("#")) {
-            TelecomManager telecomManager =
-                    (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-            return telecomManager.handleMmi(input);
+            long subId = SubscriptionManager.getDefaultVoiceSubId();
+            try {
+                return ITelephony.Stub.asInterface(ServiceManager.getService(
+                        Context.TELEPHONY_SERVICE)).handlePinMmiForSubscriber(subId, input);
+            } catch(RemoteException ex) {
+                Log.e(TAG, "Remote Exception "+ex);
+                return false;
+            }
         }
         return false;
     }
@@ -237,7 +247,9 @@ public class SpecialCharSequenceMgr {
         TelephonyManager telephonyManager =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (telephonyManager != null && input.equals(MMI_IMEI_DISPLAY)) {
-            int phoneType = telephonyManager.getPhoneType();
+            int phoneType;
+            long subId = SubscriptionManager.getDefaultVoiceSubId();
+            phoneType = telephonyManager.getCurrentPhoneType(subId);
             if (phoneType == TelephonyManager.PHONE_TYPE_GSM) {
                 showIMEIPanel(context, useSystemWindow, telephonyManager);
                 return true;
@@ -272,7 +284,10 @@ public class SpecialCharSequenceMgr {
 
     private static void showIMEIPanel(Context context, boolean useSystemWindow,
             TelephonyManager telephonyManager) {
-        String imeiStr = telephonyManager.getDeviceId();
+        String imeiStr = null;
+        long subId = SubscriptionManager.getDefaultVoiceSubId();
+        int slotId = SubscriptionManager.getSlotId(subId);
+        imeiStr = telephonyManager.getDeviceId(slotId);
 
         AlertDialog alert = new AlertDialog.Builder(context)
                 .setTitle(R.string.imei)
@@ -284,7 +299,10 @@ public class SpecialCharSequenceMgr {
 
     private static void showMEIDPanel(Context context, boolean useSystemWindow,
             TelephonyManager telephonyManager) {
-        String meidStr = telephonyManager.getDeviceId();
+        String meidStr = null;
+        long subId = SubscriptionManager.getDefaultVoiceSubId();
+        int slotId = SubscriptionManager.getSlotId(subId);
+        meidStr = telephonyManager.getDeviceId(slotId);
 
         AlertDialog alert = new AlertDialog.Builder(context)
                 .setTitle(R.string.meid)
