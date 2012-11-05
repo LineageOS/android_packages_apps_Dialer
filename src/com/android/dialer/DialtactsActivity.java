@@ -58,15 +58,15 @@ import android.widget.SearchView.OnQueryTextListener;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.activity.TransactionSafeActivity;
-import com.android.dialer.interactions.PhoneNumberInteraction;
+import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.list.ContactListFilterController;
 import com.android.contacts.list.ContactListFilterController.ContactListFilterListener;
-import com.android.contacts.list.ContactListItemView;
 import com.android.contacts.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.list.PhoneNumberPickerFragment;
 import com.android.contacts.util.AccountFilterUtil;
 import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.dialpad.DialpadFragment;
+import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.list.PhoneFavoriteFragment;
 import com.android.dialer.util.OrientationUtil;
 import com.android.internal.telephony.ITelephony;
