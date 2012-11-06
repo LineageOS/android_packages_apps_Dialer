@@ -17,8 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for applicationLabel (8490255569343340580) -->
-    <skip />
+    <string name="applicationLabel" msgid="8490255569343340580">"ደዋይ"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"ስልክ"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ስልክ"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"ምዝግብ ማስታወሻ"</string>
