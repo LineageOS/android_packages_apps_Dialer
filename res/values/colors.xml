@@ -18,5 +18,7 @@
 
     <!-- Secondary text color in the Phone app -->
     <color name="dialtacts_secondary_text_color">#888888</color>
+    <color name="smartdial_confidence_drawable_color">#39caff</color>
+    <color name="smartdial_highlighted_text_color">#ffffff</color>
 
 </resources>

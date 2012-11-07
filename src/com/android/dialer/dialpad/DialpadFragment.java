@@ -31,6 +31,7 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -39,6 +40,7 @@ import android.provider.Contacts.Intents.Insert;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
+import android.provider.ContactsContract.Contacts;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
@@ -59,6 +61,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -68,9 +71,12 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.activity.TransactionSafeActivity;
+import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
+import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
@@ -78,6 +84,9 @@ import com.android.dialer.util.OrientationUtil;
 import com.android.internal.telephony.ITelephony;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Fragment that displays a twelve-key phone dialpad.
@@ -87,7 +96,8 @@ public class DialpadFragment extends Fragment
         View.OnLongClickListener, View.OnKeyListener,
         AdapterView.OnItemClickListener, TextWatcher,
         PopupMenu.OnMenuItemClickListener,
-        DialpadImageButton.OnPressedListener {
+        DialpadImageButton.OnPressedListener,
+        SmartDialLoaderTask.SmartDialLoaderCallback {
     private static final String TAG = DialpadFragment.class.getSimpleName();
 
     private static final boolean DEBUG = DialtactsActivity.DEBUG;
@@ -103,6 +113,8 @@ public class DialpadFragment extends Fragment
 
     /** Stream type used to play the DTMF tones off call, and mapped to the volume control keys */
     private static final int DIAL_TONE_STREAM_TYPE = AudioManager.STREAM_DTMF;
+
+    private ContactsPreferences mContactsPrefs;
 
     /**
      * View (usually FrameLayout) containing mDigits field. This can be null, in which mDigits
@@ -131,6 +143,15 @@ public class DialpadFragment extends Fragment
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
 
+    /** Will be set only if the view has the smart dialing section. */
+    private AbsListView mSmartDialList;
+
+    /**
+     * Adapter for {@link #mSmartDialList}.
+     * Will be set only if the view has the smart dialing section.
+     */
+    private SmartDialAdapter mSmartDialAdapter;
+
     /**
      * Regular expression prohibiting manual phone call. Can be empty, which means "no rule".
      */
@@ -149,6 +170,7 @@ public class DialpadFragment extends Fragment
     // Vibration (haptic feedback) for dialer key presses.
     private final HapticFeedback mHaptic = new HapticFeedback();
 
+    private boolean mNeedToCacheSmartDial = false;
     /** Identifier for the "Add Call" intent extra. */
     private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
@@ -248,14 +270,16 @@ public class DialpadFragment extends Fragment
         }
 
         updateDialAndDeleteButtonEnabledState();
+        loadSmartDialEntries();
     }
 
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
 
+        mContactsPrefs = new ContactsPreferences(getActivity());
         mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-
+        mNeedToCacheSmartDial = true;
         try {
             mHaptic.init(getActivity(),
                          getResources().getBoolean(R.bool.config_enable_dialer_key_vibration));
@@ -270,6 +294,13 @@ public class DialpadFragment extends Fragment
 
         if (state != null) {
             mDigitsFilledByIntent = state.getBoolean(PREF_DIGITS_FILLED_BY_INTENT);
+        }
+
+        // Start caching contacts to use for smart dialling only if the dialpad fragment is visible
+        if (getUserVisibleHint()) {
+            SmartDialLoaderTask.startCacheContactsTaskIfNeeded(
+                    getActivity(), mContactsPrefs.getDisplayOrder());
+            mNeedToCacheSmartDial = false;
         }
     }
 
@@ -335,6 +366,14 @@ public class DialpadFragment extends Fragment
         // Set up the "dialpad chooser" UI; see showDialpadChooser().
         mDialpadChooser = (ListView) fragmentView.findViewById(R.id.dialpadChooser);
         mDialpadChooser.setOnItemClickListener(this);
+
+        // Smart dial
+        mSmartDialList = (AbsListView) fragmentView.findViewById(R.id.dialpad_smartdial_list);
+        if (mSmartDialList != null) {
+            mSmartDialAdapter = new SmartDialAdapter(getActivity());
+            mSmartDialList.setAdapter(mSmartDialAdapter);
+            mSmartDialList.setOnItemClickListener(new OnSmartDialItemClick());
+        }
 
         return fragmentView;
     }
@@ -1109,6 +1148,11 @@ public class DialpadFragment extends Fragment
         }
     }
 
+    private String getCallOrigin() {
+        return (getActivity() instanceof DialtactsActivity) ?
+                ((DialtactsActivity) getActivity()).getCallOrigin() : null;
+    }
+
     private void handleDialButtonClickWithEmptyDigits() {
         if (phoneIsCdma() && phoneIsOffhook()) {
             // This is really CDMA specific. On GSM is it possible
@@ -1630,5 +1674,60 @@ public class DialpadFragment extends Fragment
         final Intent intent = CallUtil.getCallIntent(EMPTY_NUMBER);
         intent.putExtra(EXTRA_SEND_EMPTY_FLASH, true);
         return intent;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && mNeedToCacheSmartDial) {
+            SmartDialLoaderTask.startCacheContactsTaskIfNeeded(
+                    getActivity(), mContactsPrefs.getDisplayOrder());
+            mNeedToCacheSmartDial = false;
+        }
+    }
+
+    private String mLastDigitsForSmartDial;
+
+    private void loadSmartDialEntries() {
+        if (mSmartDialAdapter == null) {
+            // No smart dial views.  Landscape?
+            return;
+        }
+
+        // Update only when the digits have changed.
+        final String digits = SmartDialNameMatcher.normalizeNumber(mDigits.getText().toString());
+        if (TextUtils.equals(digits, mLastDigitsForSmartDial)) {
+            return;
+        }
+        mLastDigitsForSmartDial = digits;
+
+        if (digits.length() < 2) {
+            mSmartDialAdapter.clear();
+        } else {
+            final SmartDialLoaderTask task = new SmartDialLoaderTask(this, digits);
+            // don't execute this in serial, otherwise we have to wait too long for results
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {});
+        }
+    }
+
+    @Override
+    public void setSmartDialAdapterEntries(List<SmartDialEntry> data) {
+        if (data == null || data.isEmpty()) {
+            // No results found.  Keep the last results.
+            return;
+        }
+        mSmartDialAdapter.setEntries(data);
+    }
+
+    private class OnSmartDialItemClick implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final SmartDialEntry entry = (SmartDialEntry) view.getTag();
+            if (entry == null) return; // just in case.
+
+            mClearDigitsOnStop = true;
+            PhoneNumberInteraction.startInteractionForPhoneCall(
+                    (TransactionSafeActivity) getActivity(), entry.contactUri, getCallOrigin());
+        }
     }
 }
