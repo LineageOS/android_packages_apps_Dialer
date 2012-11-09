@@ -51,10 +51,8 @@
 
     <application
         android:label="@string/applicationLabel"
-        android:icon="@mipmap/ic_launcher_contacts"
-        android:taskAffinity="android.task.contacts"
-        android:hardwareAccelerated="true"
-    >
+        android:icon="@mipmap/ic_launcher_phone"
+        android:hardwareAccelerated="true">
 
         <!-- The entrance point for Phone UI.
              stateAlwaysHidden is set to suppress keyboard show up on
@@ -68,7 +66,6 @@
             android:icon="@mipmap/ic_launcher_phone"
             android:screenOrientation="nosensor"
             android:enabled="@*android:bool/config_voice_capable"
-            android:taskAffinity="android.task.contacts.phone"
             android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />
@@ -130,7 +127,6 @@
                   android:theme="@style/CallDetailActivityTheme"
                   android:screenOrientation="portrait"
                   android:icon="@mipmap/ic_launcher_phone"
-                  android:taskAffinity="android.task.contacts.phone"
             >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
