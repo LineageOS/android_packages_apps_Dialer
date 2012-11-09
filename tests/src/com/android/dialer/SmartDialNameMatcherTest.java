@@ -106,7 +106,6 @@ public class SmartDialNameMatcherTest extends TestCase {
         final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query);
         final ArrayList<SmartDialMatchPosition> matchPositions =
                 new ArrayList<SmartDialMatchPosition>();
-        displayName = SmartDialNameMatcher.stripDiacritics(displayName);
         final boolean matches = matcher.matchesCombination(
                 displayName, query, matchPositions);
         Log.d(TAG, "query=" + query + "  text=" + displayName

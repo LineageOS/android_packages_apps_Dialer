@@ -50,13 +50,11 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
 
     private class Contact {
         final String mDisplayName;
-        final String mStrippedDisplayName;
         final String mLookupKey;
         final long mId;
 
         public Contact(long id, String displayName, String lookupKey) {
             mDisplayName = displayName;
-            mStrippedDisplayName = SmartDialNameMatcher.stripDiacritics(displayName);
             mLookupKey = lookupKey;
             mId = id;
         }
@@ -223,9 +221,9 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
         int count = 0;
         for (int i = 0; i < sContactsCache.size(); i++) {
             final Contact contact = sContactsCache.get(i);
-            final String strippedDisplayName = contact.mStrippedDisplayName;
+            final String displayName = contact.mDisplayName;
 
-            if (!mNameMatcher.matches(strippedDisplayName)) {
+            if (!mNameMatcher.matches(displayName)) {
                 continue;
             }
             // Matched; create SmartDialEntry.
