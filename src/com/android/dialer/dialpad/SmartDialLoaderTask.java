@@ -168,14 +168,21 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
             stopWatch.stopAndLog("SmartDial Already Cached", 0);
             return;
         }
-
+        if (mContext == null) {
+            if (DEBUG) {
+                stopWatch.stopAndLog("Invalid context", 0);
+            }
+            return;
+        }
         final Cursor c = mContext.getContentResolver().query(ContactQuery.URI,
                 (mNameDisplayOrder == ContactsContract.Preferences.DISPLAY_ORDER_PRIMARY)
                     ? ContactQuery.PROJECTION : ContactQuery.PROJECTION_ALTERNATIVE,
                 ContactQuery.SELECTION, null,
                 ContactQuery.ORDER_BY);
         if (c == null) {
-            stopWatch.stopAndLog("Query Failuregi", 0);
+            if (DEBUG) {
+                stopWatch.stopAndLog("Query Failure", 0);
+            }
             return;
         }
         sContactsCache = Lists.newArrayListWithCapacity(c.getCount());
