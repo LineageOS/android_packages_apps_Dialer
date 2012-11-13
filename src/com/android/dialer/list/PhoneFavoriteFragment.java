@@ -50,12 +50,12 @@ import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.list.ContactListItemView;
+import com.android.contacts.common.list.ContactTileAdapter;
+import com.android.contacts.common.list.ContactTileView;
+import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.interactions.ImportExportDialogFragment;
 import com.android.contacts.list.ContactListFilterController;
-import com.android.contacts.list.ContactTileAdapter;
-import com.android.contacts.list.ContactTileView;
-import com.android.contacts.list.PhoneNumberListAdapter;
 import com.android.contacts.util.AccountFilterUtil;
 import com.android.dialer.R;
 
@@ -63,8 +63,8 @@ import com.android.dialer.R;
  * Fragment for Phone UI's favorite screen.
  *
  * This fragment contains three kinds of contacts in one screen: "starred", "frequent", and "all"
- * contacts. To show them at once, this merges results from {@link com.android.contacts.list.ContactTileAdapter} and
- * {@link com.android.contacts.list.PhoneNumberListAdapter} into one unified list using {@link PhoneFavoriteMergedAdapter}.
+ * contacts. To show them at once, this merges results from {@link com.android.contacts.common.list.ContactTileAdapter} and
+ * {@link com.android.contacts.common.list.PhoneNumberListAdapter} into one unified list using {@link PhoneFavoriteMergedAdapter}.
  * A contact filter header is also inserted between those adapters' results.
  */
 public class PhoneFavoriteFragment extends Fragment implements OnItemClickListener {

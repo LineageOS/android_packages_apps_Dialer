@@ -27,11 +27,11 @@ import android.widget.SectionIndexer;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
-import com.android.contacts.list.ContactTileAdapter;
+import com.android.contacts.common.list.ContactTileAdapter;
 import com.android.dialer.R;
 
 /**
- * An adapter that combines items from {@link com.android.contacts.list.ContactTileAdapter} and
+ * An adapter that combines items from {@link com.android.contacts.common.list.ContactTileAdapter} and
  * {@link com.android.contacts.common.list.ContactEntryListAdapter} into a single list. In between those two results,
  * an account filter header will be inserted.
  */
