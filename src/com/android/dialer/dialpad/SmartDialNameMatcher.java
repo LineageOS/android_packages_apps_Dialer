@@ -19,8 +19,6 @@ package com.android.dialer.dialpad;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 
-import com.android.contacts.test.NeededForTesting;
-
 import java.text.Normalizer;
 import java.util.ArrayList;
 
