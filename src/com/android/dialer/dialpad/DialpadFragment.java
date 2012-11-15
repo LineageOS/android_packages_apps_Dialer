@@ -170,7 +170,7 @@ public class DialpadFragment extends Fragment
     // Vibration (haptic feedback) for dialer key presses.
     private final HapticFeedback mHaptic = new HapticFeedback();
 
-    private boolean mNeedToCacheSmartDial = false;
+    private SmartDialCache mSmartDialCache;
     /** Identifier for the "Add Call" intent extra. */
     private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
@@ -279,7 +279,7 @@ public class DialpadFragment extends Fragment
 
         mContactsPrefs = new ContactsPreferences(getActivity());
         mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mNeedToCacheSmartDial = true;
+        mSmartDialCache = new SmartDialCache(getActivity(), mContactsPrefs.getDisplayOrder());
         try {
             mHaptic.init(getActivity(),
                          getResources().getBoolean(R.bool.config_enable_dialer_key_vibration));
@@ -294,13 +294,6 @@ public class DialpadFragment extends Fragment
 
         if (state != null) {
             mDigitsFilledByIntent = state.getBoolean(PREF_DIGITS_FILLED_BY_INTENT);
-        }
-
-        // Start caching contacts to use for smart dialling only if the dialpad fragment is visible
-        if (getUserVisibleHint()) {
-            SmartDialLoaderTask.startCacheContactsTaskIfNeeded(
-                    getActivity(), mContactsPrefs.getDisplayOrder());
-            mNeedToCacheSmartDial = false;
         }
     }
 
@@ -1679,10 +1672,8 @@ public class DialpadFragment extends Fragment
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && mNeedToCacheSmartDial) {
-            SmartDialLoaderTask.startCacheContactsTaskIfNeeded(
-                    getActivity(), mContactsPrefs.getDisplayOrder());
-            mNeedToCacheSmartDial = false;
+        if (isVisibleToUser) {
+            mSmartDialCache.cacheIfNeeded();
         }
     }
 
@@ -1704,7 +1695,7 @@ public class DialpadFragment extends Fragment
         if (digits.length() < 2) {
             mSmartDialAdapter.clear();
         } else {
-            final SmartDialLoaderTask task = new SmartDialLoaderTask(this, digits);
+            final SmartDialLoaderTask task = new SmartDialLoaderTask(this, digits, mSmartDialCache);
             // don't execute this in serial, otherwise we have to wait too long for results
             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {});
         }
