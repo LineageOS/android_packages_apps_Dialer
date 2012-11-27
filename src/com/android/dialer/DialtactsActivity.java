@@ -58,9 +58,9 @@ import android.widget.SearchView.OnQueryTextListener;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.activity.TransactionSafeActivity;
+import com.android.contacts.common.list.ContactListFilterController;
+import com.android.contacts.common.list.ContactListFilterController.ContactListFilterListener;
 import com.android.contacts.common.list.ContactListItemView;
-import com.android.contacts.list.ContactListFilterController;
-import com.android.contacts.list.ContactListFilterController.ContactListFilterListener;
 import com.android.contacts.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.list.PhoneNumberPickerFragment;
 import com.android.contacts.util.AccountFilterUtil;
