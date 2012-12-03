@@ -55,8 +55,8 @@ import com.android.contacts.common.list.ContactTileAdapter;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.preference.ContactsPreferences;
+import com.android.contacts.common.util.AccountFilterUtil;
 import com.android.contacts.interactions.ImportExportDialogFragment;
-import com.android.contacts.util.AccountFilterUtil;
 import com.android.dialer.R;
 
 /**
