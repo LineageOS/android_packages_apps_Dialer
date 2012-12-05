@@ -120,4 +120,7 @@
         <item name="android:overScrollMode">always</item>
     </style>
 
+    <style name="FragmentActionBarPadding">
+        <item name="android:paddingBottom">?android:attr/actionBarSize</item>
+    </style>
 </resources>
