@@ -44,6 +44,13 @@ public class SmartDialNameMatcher {
         '9', '9', '9', '9' // W,X,Y,Z -> 9
     };
 
+    // Whether or not we allow matches like 57 - (J)ohn (S)mith
+    private static final boolean ALLOW_INITIAL_MATCH = true;
+
+    // The maximum length of the initial we will match - typically set to 1 to minimize false
+    // positives
+    private static final int INITIAL_LENGTH_LIMIT = 1;
+
     /*
      * The switch statement in this function was generated using the python code:
      * from unidecode import unidecode
@@ -511,6 +518,34 @@ public class SmartDialNameMatcher {
                         matchList.add(new SmartDialMatchPosition(
                                 tokenStart, queryLength + tokenStart + seperatorCount));
                         return true;
+                    } else if (ALLOW_INITIAL_MATCH && queryStart < INITIAL_LENGTH_LIMIT) {
+                        // we matched the first character.
+                        // branch off and see if we can find another match with the remaining
+                        // characters in the query string and the remaining tokens
+                        //find the next space in the query string
+                        int j = nameStart;
+                        while (j < nameLength && displayName.charAt(j) != ' ') {
+                            j++;
+                        }
+                        // this means there is at least one character left after the space
+                        if (j < nameLength - 1) {
+                            final String remainder = displayName.substring(j + 1);
+                            final ArrayList<SmartDialMatchPosition> partialTemp =
+                                    Lists.newArrayList();
+                            if (matchesCombination(
+                                    remainder, query.substring(queryStart + 1), partialTemp)) {
+
+                                // store the list of possible match positions
+                                SmartDialMatchPosition.advanceMatchPositions(partialTemp, j + 1);
+                                partialTemp.add(0,
+                                        new SmartDialMatchPosition(nameStart, nameStart + 1));
+
+                                // we found a partial token match, store the data in a
+                                // temp buffer and return it if we end up not finding a full
+                                // token match
+                                partial = partialTemp;
+                            }
+                        }
                     }
                     nameStart++;
                     queryStart++;
@@ -531,6 +566,13 @@ public class SmartDialNameMatcher {
                     seperatorCount++;
                 }
             }
+        }
+        // if we have no complete match at this point, then we attempt to fall back to the partial
+        // token match(if any). If we don't allow initial matching (ALLOW_INITIAL_MATCH = false)
+        // then partial will always be empty.
+        if (!partial.isEmpty()) {
+            matchList.addAll(partial);
+            return true;
         }
         return false;
     }

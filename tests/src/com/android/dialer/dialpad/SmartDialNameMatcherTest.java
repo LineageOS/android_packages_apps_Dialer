@@ -66,6 +66,20 @@ public class SmartDialNameMatcherTest extends TestCase {
         checkMatches("William     J  Smith", "6576", false, 0, 0);
     }
 
+
+    public void testMatches_Initial() {
+        // wjs matches (W)illiam (J)ohn (S)mith
+        checkMatches("William John Smith", "957", true, 0, 1, 8, 9, 13, 14);
+        // wjsmit matches (W)illiam (J)ohn (Smit)h
+        checkMatches("William John Smith", "957648", true, 0, 1, 8, 9, 13, 17);
+        // wjohn matches (W)illiam (John) Smith
+        checkMatches("William John Smith", "95646", true, 0, 1, 8, 12);
+        // jsmi matches William (J)ohn (Smi)th
+        checkMatches("William John Smith", "5764", true, 8, 9, 13, 16);
+        // make sure multiple spaces don't mess things up
+        checkMatches("William        John   Smith", "5764", true, 15, 16, 22, 25);
+    }
+
     // TODO: Do we want to make these pass anymore?
     @Suppress
     public void testMatches_repeatedSeparators() {
@@ -102,7 +116,7 @@ public class SmartDialNameMatcherTest extends TestCase {
     }
 
     private void checkMatches(String displayName, String query, boolean expectedMatches,
-            int expectedMatchStart, int expectedMatchEnd) {
+            int... expectedMatchPositions) {
         final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query);
         final ArrayList<SmartDialMatchPosition> matchPositions =
                 new ArrayList<SmartDialMatchPosition>();
@@ -115,9 +129,14 @@ public class SmartDialNameMatcherTest extends TestCase {
                 + "  nfkc=" + Normalizer.normalize(displayName, Normalizer.Form.NFKC)
                 + "  matches=" + matches);
         assertEquals("matches", expectedMatches, matches);
+        final int length = expectedMatchPositions.length;
+        assertEquals(length % 2, 0);
         if (matches) {
-            assertEquals("start", expectedMatchStart, matchPositions.get(0).start);
-            assertEquals("end", expectedMatchEnd, matchPositions.get(0).end);
+            for (int i = 0; i < length/2; i++) {
+                assertEquals("start", expectedMatchPositions[i * 2], matchPositions.get(i).start);
+                assertEquals("end", expectedMatchPositions[i * 2 + 1], matchPositions.get(i).end);
+            }
         }
     }
+
 }
