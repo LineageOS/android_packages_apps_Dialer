@@ -55,7 +55,7 @@
         </FrameLayout>
 
         <view
-            class="com.android.contacts.widget.ProportionalLayout"
+            class="com.android.contacts.common.widget.ProportionalLayout"
             android:id="@+id/contact_background_sizer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
