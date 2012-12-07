@@ -16,7 +16,7 @@
 
 package com.android.dialer.dialpad;
 
-import com.android.contacts.R;
+import com.android.dialer.R;
 import com.google.common.collect.Lists;
 
 import android.content.Context;
