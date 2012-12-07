@@ -508,4 +508,7 @@
     <!-- Dialog title displayed when loading a phone number from the SIM card for speed dial -->
     <string name="simContacts_title">SIM card contacts</string>
 
+    <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
+    <string name="add_contact_not_available">Re-enable the People application to use this feature.</string>
+
 </resources>
