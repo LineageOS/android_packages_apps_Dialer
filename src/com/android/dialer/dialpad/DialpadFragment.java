@@ -40,7 +40,6 @@ import android.provider.Contacts.Intents.Insert;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
-import android.provider.ContactsContract.Contacts;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
@@ -49,7 +48,6 @@ import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.method.DialerKeyListener;
 import android.text.style.RelativeSizeSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -71,21 +69,20 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
-import com.android.contacts.common.activity.TransactionSafeActivity;
-import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.activity.TransactionSafeActivity;
+import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
-import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
+import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.util.OrientationUtil;
 import com.android.internal.telephony.ITelephony;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -18,11 +18,6 @@ package com.android.dialer.dialpad;
 
 import static com.android.dialer.dialpad.SmartDialAdapter.LOG_TAG;
 
-import com.google.common.collect.Lists;
-
-import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
@@ -32,6 +27,7 @@ import android.util.Log;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.dialpad.SmartDialCache.Contact;
+import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
