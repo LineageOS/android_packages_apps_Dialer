@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,6 +56,7 @@ import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.SearchView.OnCloseListener;
 import android.widget.SearchView.OnQueryTextListener;
+import android.widget.Toast;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.activity.TransactionSafeActivity;
@@ -938,13 +940,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final MenuItem callSettingsMenuItem = menu.findItem(R.id.menu_call_settings);
         final MenuItem searchMenuItem = menu.findItem(R.id.search_on_action_bar);
         final MenuItem filterOptionMenuItem = menu.findItem(R.id.filter_option);
-        final MenuItem addContactOptionMenuItem = menu.findItem(R.id.add_contact);
 
         callSettingsMenuItem.setIntent(DialtactsActivity.getCallSettingsIntent());
         searchMenuItem.setOnMenuItemClickListener(mSearchMenuItemClickListener);
         filterOptionMenuItem.setOnMenuItemClickListener(mFilterOptionsMenuItemClickListener);
-        addContactOptionMenuItem.setIntent(
-                new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI));
 
         return true;
     }
@@ -971,6 +970,22 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_contact:
+                try {
+                    startActivity(new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI));
+                } catch (ActivityNotFoundException e) {
+                    Toast toast = Toast.makeText(this, R.string.add_contact_not_available,
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void prepareOptionsMenuInSearchMode(Menu menu) {
