@@ -187,4 +187,6 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Chargiar da la carta SIM…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contacts sin la carta SIM"</string>
+    <!-- no translation found for add_contact_not_available (1419207765446461366) -->
+    <skip />
 </resources>
