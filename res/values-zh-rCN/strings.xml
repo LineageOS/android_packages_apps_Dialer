@@ -130,6 +130,5 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"正从 SIM 卡中载入..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM 卡联系人"</string>
-    <!-- no translation found for add_contact_not_available (1419207765446461366) -->
-    <skip />
+    <string name="add_contact_not_available" msgid="1419207765446461366">"必须重新启用联系人应用才能使用此功能。"</string>
 </resources>
