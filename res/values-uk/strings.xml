@@ -130,5 +130,5 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Завантаж. із SIM-карти…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Контакти SIM-карти"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Повторно ввімкнуть програму Люди, щоб скористатися цією функцією."</string>
+    <string name="add_contact_not_available" msgid="1419207765446461366">"Повторно ввімкніть програму Люди, щоб скористатися цією функцією."</string>
 </resources>
