@@ -130,5 +130,5 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Inapakia kutoka SIM kadi..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Anwani za SIM kadi"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Wezesha upya programu ya watu ili kutumia kipengele hiki."</string>
+    <string name="add_contact_not_available" msgid="1419207765446461366">"Washa tena Programu ya watu ili itumie kipengele hiki."</string>
 </resources>
