@@ -218,6 +218,12 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter implements SectionIn
                     mAccountFilterHeaderContainer.getPaddingTop(),
                     mItemPaddingRight,
                     mAccountFilterHeaderContainer.getPaddingBottom());
+
+            // Show a single "No Contacts" label under the "all" section account header
+            // if no contacts are displayed.
+            mAccountFilterHeaderContainer.findViewById(
+                    R.id.contact_list_all_empty).setVisibility(
+                    contactEntryListAdapterCount == 0 ? View.VISIBLE : View.GONE);
             return mAccountFilterHeaderContainer;
         } else {  // For "all" section
             if (mContactEntryListAdapter.isLoading()) {  // "All" section is being loaded.
