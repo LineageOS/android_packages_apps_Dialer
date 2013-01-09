@@ -115,12 +115,8 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         }
 
         @Override
-        public boolean collapseWith(PhoneItem phoneItem) {
-            if (!shouldCollapseWith(phoneItem)) {
-                return false;
-            }
+        public void collapseWith(PhoneItem phoneItem) {
             // Just keep the number and id we already have.
-            return true;
         }
 
         @Override
