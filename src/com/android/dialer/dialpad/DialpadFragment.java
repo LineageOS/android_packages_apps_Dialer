@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,6 +34,7 @@ import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
@@ -77,6 +79,7 @@ import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
+import com.android.dialer.dialpad.SmartDialCache.SmartDialContentObserver;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.util.OrientationUtil;
 import com.android.internal.telephony.ITelephony;
@@ -148,6 +151,7 @@ public class DialpadFragment extends Fragment
      * Will be set only if the view has the smart dialing section.
      */
     private SmartDialAdapter mSmartDialAdapter;
+    private SmartDialContentObserver mSmartDialObserver;
 
     /**
      * Regular expression prohibiting manual phone call. Can be empty, which means "no rule".
@@ -276,7 +280,8 @@ public class DialpadFragment extends Fragment
 
         mContactsPrefs = new ContactsPreferences(getActivity());
         mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mSmartDialCache = new SmartDialCache(getActivity(), mContactsPrefs.getDisplayOrder());
+        mSmartDialCache = SmartDialCache.getInstance(getActivity(),
+                mContactsPrefs.getDisplayOrder());
         try {
             mHaptic.init(getActivity(),
                          getResources().getBoolean(R.bool.config_enable_dialer_key_vibration));
@@ -292,6 +297,10 @@ public class DialpadFragment extends Fragment
         if (state != null) {
             mDigitsFilledByIntent = state.getBoolean(PREF_DIGITS_FILLED_BY_INTENT);
         }
+
+        mSmartDialObserver = new SmartDialContentObserver(new Handler(), mSmartDialCache);
+        this.getActivity().getContentResolver().registerContentObserver(
+                SmartDialCache.PhoneQuery.URI, true, mSmartDialObserver);
     }
 
     @Override
@@ -361,6 +370,7 @@ public class DialpadFragment extends Fragment
             mSmartDialAdapter = new SmartDialAdapter(getActivity());
             mSmartDialList.setAdapter(mSmartDialAdapter);
             mSmartDialList.setOnItemClickListener(new OnSmartDialItemClick());
+            mSmartDialList.setOnItemLongClickListener(new OnSmartDialLongClick());
         }
 
         return fragmentView;
@@ -608,6 +618,9 @@ public class DialpadFragment extends Fragment
         stopWatch.lap("bes");
 
         stopWatch.stopAndLog(TAG, 50);
+
+        this.getActivity().getContentResolver().registerContentObserver(
+                SmartDialCache.PhoneQuery.URI, true, mSmartDialObserver);
     }
 
     @Override
@@ -635,6 +648,8 @@ public class DialpadFragment extends Fragment
         mLastNumberDialed = EMPTY_NUMBER;  // Since we are going to query again, free stale number.
 
         SpecialCharSequenceMgr.cleanup();
+
+        getActivity().getContentResolver().unregisterContentObserver(mSmartDialObserver);
     }
 
     @Override
@@ -1668,7 +1683,7 @@ public class DialpadFragment extends Fragment
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            mSmartDialCache.cacheIfNeeded();
+            mSmartDialCache.cacheIfNeeded(false);
         }
     }
 
@@ -1691,17 +1706,30 @@ public class DialpadFragment extends Fragment
             mSmartDialAdapter.clear();
         } else {
             final SmartDialLoaderTask task = new SmartDialLoaderTask(this, digits, mSmartDialCache);
-            // don't execute this in serial, otherwise we have to wait too long for results
             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {});
         }
     }
 
     @Override
-    public void setSmartDialAdapterEntries(List<SmartDialEntry> data) {
-        if (data == null) {
+    public void setSmartDialAdapterEntries(List<SmartDialEntry> data, String query) {
+        if (data == null || query == null || !query.equals(mLastDigitsForSmartDial)) {
             return;
         }
         mSmartDialAdapter.setEntries(data);
+    }
+
+    private class OnSmartDialLongClick implements AdapterView.OnItemLongClickListener {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            final SmartDialEntry entry = (SmartDialEntry) view.getTag();
+            if (entry == null) return false; // just in case.
+            mClearDigitsOnStop = true;
+            // Show the phone number disambiguation dialog without using the primary
+            // phone number so that the user can decide which number to call
+            PhoneNumberInteraction.startInteractionForPhoneCall(
+                    (TransactionSafeActivity) getActivity(), entry.contactUri, false);
+            return true;
+        }
     }
 
     private class OnSmartDialItemClick implements AdapterView.OnItemClickListener {
@@ -1709,10 +1737,12 @@ public class DialpadFragment extends Fragment
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             final SmartDialEntry entry = (SmartDialEntry) view.getTag();
             if (entry == null) return; // just in case.
-
+            // Dial the displayed phone number immediately
+            final Intent intent = CallUtil.getCallIntent(entry.phoneNumber.toString(),
+                    (getActivity() instanceof DialtactsActivity ?
+                            ((DialtactsActivity) getActivity()).getCallOrigin() : null));
+            startActivity(intent);
             mClearDigitsOnStop = true;
-            PhoneNumberInteraction.startInteractionForPhoneCall(
-                    (TransactionSafeActivity) getActivity(), entry.contactUri, getCallOrigin());
         }
     }
 }

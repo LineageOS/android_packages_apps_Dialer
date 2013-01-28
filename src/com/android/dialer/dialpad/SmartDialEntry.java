@@ -24,13 +24,18 @@ public class SmartDialEntry {
     /** Display name for the contact. */
     public final CharSequence displayName;
     public final Uri contactUri;
+    public final CharSequence phoneNumber;
 
     public final ArrayList<SmartDialMatchPosition> matchPositions;
+    public final SmartDialMatchPosition phoneNumberMatchPosition;
 
-    public SmartDialEntry(CharSequence displayName, Uri contactUri,
-            ArrayList<SmartDialMatchPosition> matchPositions) {
+    public SmartDialEntry(CharSequence displayName, Uri contactUri, CharSequence phoneNumber,
+            ArrayList<SmartDialMatchPosition> matchPositions,
+            SmartDialMatchPosition phoneNumberMatchPosition) {
         this.displayName = displayName;
         this.contactUri = contactUri;
         this.matchPositions = matchPositions;
+        this.phoneNumber = phoneNumber;
+        this.phoneNumberMatchPosition = phoneNumberMatchPosition;
     }
 }

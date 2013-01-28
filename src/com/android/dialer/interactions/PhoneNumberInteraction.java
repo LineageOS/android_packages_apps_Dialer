@@ -268,6 +268,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     private final int mInteractionType;
 
     private final String mCallOrigin;
+    private boolean mUseDefault;
 
     private CursorLoader mLoader;
 
@@ -313,14 +314,29 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
     /**
      * Initiates the interaction. This may result in a phone call or sms message started
-     * or a disambiguation dialog to determine which phone number should be used.
+     * or a disambiguation dialog to determine which phone number should be used. If there
+     * is a primary phone number, it will be automatically used and a disambiguation dialog
+     * will no be shown.
      */
     @VisibleForTesting
     /* package */ void startInteraction(Uri uri) {
+        startInteraction(uri, true);
+    }
+
+    /**
+     * Initiates the interaction to result in either a phone call or sms message for a contact.
+     * @param uri Contact Uri
+     * @param useDefault Whether or not to use the primary(default) phone number. If true, the
+     * primary phone number will always be used by default if one is available. If false, a
+     * disambiguation dialog will be shown regardless of whether or not a primary phone number
+     * is available.
+     */
+    @VisibleForTesting
+    /* package */ void startInteraction(Uri uri, boolean useDefault) {
         if (mLoader != null) {
             mLoader.reset();
         }
-
+        mUseDefault = useDefault;
         final Uri queryUri;
         final String inputUriAsString = uri.toString();
         if (inputUriAsString.startsWith(Contacts.CONTENT_URI.toString())) {
@@ -352,15 +368,13 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
             onDismiss();
             return;
         }
-
         ArrayList<PhoneItem> phoneList = new ArrayList<PhoneItem>();
         String primaryPhone = null;
         try {
             while (cursor.moveToNext()) {
-                if (cursor.getInt(cursor.getColumnIndex(Phone.IS_SUPER_PRIMARY)) != 0) {
+                if (mUseDefault && cursor.getInt(cursor.getColumnIndex(Phone.IS_SUPER_PRIMARY)) != 0) {
                     // Found super primary, call it.
                     primaryPhone = cursor.getString(cursor.getColumnIndex(Phone.NUMBER));
-                    break;
                 }
 
                 PhoneItem item = new PhoneItem();
@@ -379,7 +393,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
             cursor.close();
         }
 
-        if (primaryPhone != null) {
+        if (mUseDefault && primaryPhone != null) {
             performAction(primaryPhone);
             onDismiss();
             return;
@@ -423,7 +437,28 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
      */
     public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri) {
         (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null))
-                .startInteraction(uri);
+                .startInteraction(uri, true);
+    }
+
+    /**
+     * Start call action using given contact Uri. If there are multiple candidates for the phone
+     * call, dialog is automatically shown and the user is asked to choose one.
+     *
+     * @param activity that is calling this interaction. This must be of type
+     * {@link TransactionSafeActivity} because we need to check on the activity state after the
+     * phone numbers have been queried for.
+     * @param uri contact Uri (built from {@link Contacts#CONTENT_URI}) or data Uri
+     * (built from {@link Data#CONTENT_URI}). Contact Uri may show the disambiguation dialog while
+     * data Uri won't.
+     * @param useDefault Whether or not to use the primary(default) phone number. If true, the
+     * primary phone number will always be used by default if one is available. If false, a
+     * disambiguation dialog will be shown regardless of whether or not a primary phone number
+     * is available.
+     */
+    public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri,
+            boolean useDefault) {
+        (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null))
+                .startInteraction(uri, useDefault);
     }
 
     /**
@@ -437,7 +472,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri,
             String callOrigin) {
         (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null, callOrigin))
-                .startInteraction(uri);
+                .startInteraction(uri, true);
     }
 
     /**
@@ -454,7 +489,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
      */
     public static void startInteractionForTextMessage(TransactionSafeActivity activity, Uri uri) {
         (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_SMS, null))
-                .startInteraction(uri);
+                .startInteraction(uri, true);
     }
 
     @VisibleForTesting
