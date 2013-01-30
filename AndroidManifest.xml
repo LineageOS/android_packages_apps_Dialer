@@ -228,5 +228,10 @@
             android:name=".calllog.CallLogNotificationsService"
             android:exported="false"
         />
+
+        <!-- Service to update a contact -->
+        <service
+            android:name=".contact.ContactUpdateService"
+            android:exported="false" />
     </application>
 </manifest>
