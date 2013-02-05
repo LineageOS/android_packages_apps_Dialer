@@ -1698,8 +1698,7 @@ public class DialpadFragment extends Fragment
 
     @Override
     public void setSmartDialAdapterEntries(List<SmartDialEntry> data) {
-        if (data == null || data.isEmpty()) {
-            // No results found.  Keep the last results.
+        if (data == null) {
             return;
         }
         mSmartDialAdapter.setEntries(data);
