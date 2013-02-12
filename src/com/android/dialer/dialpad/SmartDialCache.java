@@ -19,80 +19,129 @@ package com.android.dialer.dialpad;
 import static com.android.dialer.dialpad.SmartDialAdapter.LOG_TAG;
 
 import android.content.Context;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Handler;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Directory;
 import android.util.Log;
 
 import com.android.contacts.common.util.StopWatch;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.base.Preconditions;
+
+import java.util.Comparator;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Cache object used to cache Smart Dial contacts that handles various states of the cache:
- * 1) Cache has been populated
- * 2) Cache task is currently running
- * 3) Cache task failed
+ * Cache object used to cache Smart Dial contacts that handles various states of the cache at the
+ * point in time when getContacts() is called
+ * 1) Cache is currently empty and there is no caching thread running - getContacts() starts a
+ * caching thread and returns the cache when completed
+ * 2) The cache is currently empty, but a caching thread has been started - getContacts() waits
+ * till the existing caching thread is completed before immediately returning the cache
+ * 3) The cache has already been populated, and there is no caching thread running - getContacts()
+ * returns the existing cache immediately
+ * 4) The cache has already been populated, but there is another caching thread running (due to
+ * a forced cache refresh due to content updates - getContacts() returns the existing cache
+ * immediately
  */
 public class SmartDialCache {
 
-    public static class Contact {
+    public static class ContactNumber {
         public final String displayName;
         public final String lookupKey;
         public final long id;
+        public final int affinity;
+        public final String phoneNumber;
 
-        public Contact(long id, String displayName, String lookupKey) {
+        public ContactNumber(long id, String displayName, String phoneNumber, String lookupKey,
+                int affinity) {
             this.displayName = displayName;
             this.lookupKey = lookupKey;
             this.id = id;
+            this.affinity = affinity;
+            this.phoneNumber = phoneNumber;
         }
     }
 
-    /** Query used for loadByContactName */
-    private interface ContactQuery {
-        Uri URI = Contacts.CONTENT_URI.buildUpon()
-                // Visible contact only
-                //.appendQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY, "0")
-                .build();
-        String[] PROJECTION = new String[] {
-                Contacts._ID,
-                Contacts.DISPLAY_NAME,
-                Contacts.LOOKUP_KEY
-            };
-        String[] PROJECTION_ALTERNATIVE = new String[] {
-                Contacts._ID,
-                Contacts.DISPLAY_NAME_ALTERNATIVE,
-                Contacts.LOOKUP_KEY
-            };
+    public static interface PhoneQuery {
 
-        int COLUMN_ID = 0;
-        int COLUMN_DISPLAY_NAME = 1;
-        int COLUMN_LOOKUP_KEY = 2;
+       Uri URI = Phone.CONTENT_URI.buildUpon().
+               appendQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY,
+               String.valueOf(Directory.DEFAULT)).
+               appendQueryParameter(ContactsContract.REMOVE_DUPLICATE_ENTRIES, "true").
+               build();
 
-        String SELECTION =
-                Contacts.HAS_PHONE_NUMBER + "=1";
+       final String[] PROJECTION_PRIMARY = new String[] {
+            Phone._ID,                          // 0
+            Phone.TYPE,                         // 1
+            Phone.LABEL,                        // 2
+            Phone.NUMBER,                       // 3
+            Phone.CONTACT_ID,                   // 4
+            Phone.LOOKUP_KEY,                   // 5
+            Phone.DISPLAY_NAME_PRIMARY,         // 6
+        };
 
-        String ORDER_BY = Contacts.LAST_TIME_CONTACTED + " DESC";
+        final String[] PROJECTION_ALTERNATIVE = new String[] {
+            Phone._ID,                          // 0
+            Phone.TYPE,                         // 1
+            Phone.LABEL,                        // 2
+            Phone.NUMBER,                       // 3
+            Phone.CONTACT_ID,                   // 4
+            Phone.LOOKUP_KEY,                   // 5
+            Phone.DISPLAY_NAME_ALTERNATIVE,     // 6
+        };
+
+        public static final int PHONE_ID           = 0;
+        public static final int PHONE_TYPE         = 1;
+        public static final int PHONE_LABEL        = 2;
+        public static final int PHONE_NUMBER       = 3;
+        public static final int PHONE_CONTACT_ID   = 4;
+        public static final int PHONE_LOOKUP_KEY   = 5;
+        public static final int PHONE_DISPLAY_NAME = 6;
+
+        public static final String SORT_ORDER = Contacts.LAST_TIME_CONTACTED + " DESC";
     }
 
-    // mContactsCache and mCachingStarted need to be volatile because we check for their status
-    // in cacheIfNeeded from the UI thread, to decided whether or not to fire up a caching thread.
-    private List<Contact> mContactsCache;
-    private volatile boolean mNeedsRecache = true;
+    private SmartDialTrie mContactsCache;
+    private static AtomicInteger mCacheStatus;
     private final int mNameDisplayOrder;
     private final Context mContext;
-    private final Object mLock = new Object();
+    private final static Object mLock = new Object();
 
-    private static final boolean DEBUG = true; // STOPSHIP change to false.
+    public static final int CACHE_NEEDS_RECACHE = 1;
+    public static final int CACHE_IN_PROGRESS = 2;
+    public static final int CACHE_COMPLETED = 3;
 
-    public SmartDialCache(Context context, int nameDisplayOrder) {
+    private static final boolean DEBUG = true;
+
+    private SmartDialCache(Context context, int nameDisplayOrder) {
         mNameDisplayOrder = nameDisplayOrder;
         Preconditions.checkNotNull(context, "Context must not be null");
         mContext = context.getApplicationContext();
+        mCacheStatus = new AtomicInteger(CACHE_NEEDS_RECACHE);
+    }
+
+    private static SmartDialCache instance;
+
+    /**
+     * Returns an instance of SmartDialCache.
+     *
+     * @param context A context that provides a valid ContentResolver.
+     * @param nameDisplayOrder One of the two name display order integer constants (1 or 2) as saved
+     *        in settings under the key
+     *        {@link android.provider.ContactsContract.Preferences#DISPLAY_ORDER}.
+     * @return An instance of SmartDialCache
+     */
+    public static synchronized SmartDialCache getInstance(Context context, int nameDisplayOrder) {
+        if (instance == null) {
+            instance = new SmartDialCache(context, nameDisplayOrder);
+        }
+        return instance;
     }
 
     /**
@@ -100,76 +149,118 @@ public class SmartDialCache {
      * contacts to a local cache.
      */
     private void cacheContacts(Context context) {
+        mCacheStatus.set(CACHE_IN_PROGRESS);
         synchronized(mLock) {
-            // In extremely rare edge cases, getContacts() might be called and start caching
-            // between the time mCachingThread is added to the thread pool and it starts
-            // running. If so, at this point in time mContactsCache will no longer be null
-            // since it is populated by getContacts. We thus no longer have to perform any
-            // caching.
-            if (mContactsCache != null) {
-                if (DEBUG) {
-                    Log.d(LOG_TAG, "Contacts already cached");
-                }
-                return;
+            if (DEBUG) {
+                Log.d(LOG_TAG, "Starting caching thread");
             }
             final StopWatch stopWatch = DEBUG ? StopWatch.start("SmartDial Cache") : null;
-            final Cursor c = context.getContentResolver().query(ContactQuery.URI,
+            final Cursor c = context.getContentResolver().query(PhoneQuery.URI,
                     (mNameDisplayOrder == ContactsContract.Preferences.DISPLAY_ORDER_PRIMARY)
-                        ? ContactQuery.PROJECTION : ContactQuery.PROJECTION_ALTERNATIVE,
-                    ContactQuery.SELECTION, null,
-                    ContactQuery.ORDER_BY);
+                        ? PhoneQuery.PROJECTION_PRIMARY : PhoneQuery.PROJECTION_ALTERNATIVE,
+                    null, null, PhoneQuery.SORT_ORDER);
+            if (DEBUG) {
+                stopWatch.lap("SmartDial query complete");
+            }
             if (c == null) {
                 Log.w(LOG_TAG, "SmartDial query received null for cursor");
                 if (DEBUG) {
-                    stopWatch.stopAndLog("Query Failure", 0);
+                    stopWatch.stopAndLog("SmartDial query received null for cursor", 0);
                 }
+                mCacheStatus.getAndSet(CACHE_NEEDS_RECACHE);
                 return;
             }
+            final SmartDialTrie cache = new SmartDialTrie(
+                    SmartDialNameMatcher.LATIN_LETTERS_TO_DIGITS);
             try {
-                mContactsCache = Lists.newArrayListWithCapacity(c.getCount());
                 c.moveToPosition(-1);
+                int affinityCount = 0;
                 while (c.moveToNext()) {
-                    final String displayName = c.getString(ContactQuery.COLUMN_DISPLAY_NAME);
-                    final long id = c.getLong(ContactQuery.COLUMN_ID);
-                    final String lookupKey = c.getString(ContactQuery.COLUMN_LOOKUP_KEY);
-                    mContactsCache.add(new Contact(id, displayName, lookupKey));
+                    final String displayName = c.getString(PhoneQuery.PHONE_DISPLAY_NAME);
+                    final String phoneNumber = c.getString(PhoneQuery.PHONE_NUMBER);
+                    final long id = c.getLong(PhoneQuery.PHONE_CONTACT_ID);
+                    final String lookupKey = c.getString(PhoneQuery.PHONE_LOOKUP_KEY);
+                    cache.put(new ContactNumber(id, displayName, phoneNumber, lookupKey,
+                            affinityCount));
+                    affinityCount++;
                 }
             } finally {
                 c.close();
+                mContactsCache = cache;
                 if (DEBUG) {
-                    stopWatch.stopAndLog("SmartDial Cache", 0);
+                    stopWatch.stopAndLog("SmartDial caching completed", 0);
                 }
             }
         }
+        if (DEBUG) {
+            Log.d(LOG_TAG, "Caching thread completed");
+        }
+        mCacheStatus.getAndSet(CACHE_COMPLETED);
     }
 
     /**
-     * Returns the list of cached contacts. If the caching task has not started or been completed,
-     * the method blocks till the caching process is complete before returning the full list of
-     * cached contacts. This means that this method should not be called from the UI thread.
+     * Returns the list of cached contacts. This is blocking so it should not be called from the UI
+     * thread. There are 4 possible scenarios:
+     *
+     * 1) Cache is currently empty and there is no caching thread running - getContacts() starts a
+     * caching thread and returns the cache when completed
+     * 2) The cache is currently empty, but a caching thread has been started - getContacts() waits
+     * till the existing caching thread is completed before immediately returning the cache
+     * 3) The cache has already been populated, and there is no caching thread running -
+     * getContacts() returns the existing cache immediately
+     * 4) The cache has already been populated, but there is another caching thread running (due to
+     * a forced cache refresh due to content updates - getContacts() returns the existing cache
+     * immediately
      *
      * @return List of already cached contacts, or an empty list if the caching failed for any
      * reason.
      */
-    public List<Contact> getContacts() {
+    public SmartDialTrie getContacts() {
+        // Either scenario 3 or 4 - This means just go ahead and return the existing cache
+        // immediately even if there is a caching thread currently running. We are guaranteed to
+        // have the newest value of mContactsCache at this point because it is volatile.
+        if (mContactsCache != null) {
+            return mContactsCache;
+        }
+        // At this point we are forced to wait for cacheContacts to complete in another thread(if
+        // one currently exists) because of mLock.
         synchronized(mLock) {
+            // If mContactsCache is still null at this point, either there was never any caching
+            // process running, or it failed (Scenario 1). If so, just go ahead and try to cache
+            // the contacts again.
             if (mContactsCache == null) {
                 cacheContacts(mContext);
-                mNeedsRecache = false;
-                return (mContactsCache == null) ? new ArrayList<Contact>() : mContactsCache;
+                return (mContactsCache == null) ? new SmartDialTrie(
+                        SmartDialNameMatcher.LATIN_LETTERS_TO_DIGITS) : mContactsCache;
             } else {
+                // After waiting for the lock on mLock to be released, mContactsCache is now
+                // non-null due to the completion of the caching thread (Scenario 2). Go ahead
+                // and return the existing cache.
                 return mContactsCache;
             }
         }
     }
 
     /**
-     * Only start a new caching task if {@link #mContactsCache} is null and there is no caching
-     * task that is currently running
+     * Cache contacts only if there is a need to (forced cache refresh or no attempt to cache yet).
+     * This method is called in 2 places: whenever the DialpadFragment comes into view, and when the
+     * ContentObserver observes a change in contacts.
+     *
+     * @param forceRecache If true, force a cache refresh.
      */
-    public void cacheIfNeeded() {
-        if (mNeedsRecache) {
-            mNeedsRecache = false;
+
+    public void cacheIfNeeded(boolean forceRecache) {
+        if (DEBUG) {
+            Log.d("SmartDial", "cacheIfNeeded called with " + String.valueOf(forceRecache));
+        }
+        if (mCacheStatus.get() == CACHE_IN_PROGRESS) {
+            return;
+        }
+        if (forceRecache || mCacheStatus.get() == CACHE_NEEDS_RECACHE) {
+            // Because this method can be possibly be called multiple times in rapid succession,
+            // set the cache status even before starting a caching thread to avoid unnecessarily
+            // spawning extra threads.
+            mCacheStatus.set(CACHE_IN_PROGRESS);
             startCachingThread();
         }
     }
@@ -183,4 +274,42 @@ public class SmartDialCache {
         }).start();
     }
 
+    public static class ContactAffinityComparator implements Comparator<ContactNumber> {
+        @Override
+        public int compare(ContactNumber lhs, ContactNumber rhs) {
+            // Smaller affinity is better because they are numbered in ascending order in
+            // the order the contacts were returned from the ContactsProvider (sorted by
+            // frequency of use and time last used
+            return Integer.compare(lhs.affinity, rhs.affinity);
+        }
+
+    }
+
+    public static class SmartDialContentObserver extends ContentObserver {
+        private final SmartDialCache mCache;
+        // throttle updates in case onChange is called too often due to syncing, etc.
+        private final long mThresholdBetweenUpdates = 5000;
+        private long mLastCalled = 0;
+        private long mLastUpdated = 0;
+        public SmartDialContentObserver(Handler handler, SmartDialCache cache) {
+            super(handler);
+            mCache = cache;
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            mLastCalled = System.currentTimeMillis();
+            if (DEBUG) {
+                Log.d(LOG_TAG, "Contacts change observed");
+            }
+            if (mLastCalled - mLastUpdated > mThresholdBetweenUpdates) {
+                mLastUpdated = mLastCalled;
+                if (DEBUG) {
+                    Log.d(LOG_TAG, "More than 5 seconds since last cache, forcing recache");
+                }
+                mCache.cacheIfNeeded(true);
+            }
+            super.onChange(selfChange);
+        }
+    }
 }

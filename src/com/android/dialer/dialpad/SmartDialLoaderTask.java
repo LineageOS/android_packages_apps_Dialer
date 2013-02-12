@@ -26,11 +26,16 @@ import android.util.Log;
 
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.StopWatch;
-import com.android.dialer.dialpad.SmartDialCache.Contact;
+import com.android.dialer.dialpad.SmartDialCache.ContactNumber;
+
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * This task searches through the provided cache to return the top 3 contacts(ranked by confidence)
@@ -40,7 +45,7 @@ import java.util.List;
 public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDialEntry>> {
 
     public interface SmartDialLoaderCallback {
-        void setSmartDialAdapterEntries(List<SmartDialEntry> list);
+        void setSmartDialAdapterEntries(List<SmartDialEntry> list, String query);
     }
 
     static private final boolean DEBUG = true; // STOPSHIP change to false.
@@ -50,6 +55,8 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
     private final SmartDialCache mContactsCache;
 
     private final SmartDialLoaderCallback mCallback;
+
+    private final String mQuery;
 
     /**
      * See {@link ContactsPreferences#getDisplayOrder()}.
@@ -63,6 +70,7 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
         this.mCallback = callback;
         this.mNameMatcher = new SmartDialNameMatcher(PhoneNumberUtils.normalizeNumber(query));
         this.mContactsCache = cache;
+        this.mQuery = query;
     }
 
     @Override
@@ -73,7 +81,7 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
     @Override
     protected void onPostExecute(List<SmartDialEntry> result) {
         if (mCallback != null) {
-            mCallback.setSmartDialAdapterEntries(result);
+            mCallback.setSmartDialAdapterEntries(result, mQuery);
         }
     }
 
@@ -83,40 +91,76 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
      * contacts.
      */
     private ArrayList<SmartDialEntry> getContactMatches() {
-        final List<Contact> cachedContactList = mContactsCache.getContacts();
-        // cachedContactList will never be null at this point
 
+        final SmartDialTrie trie = mContactsCache.getContacts();
         if (DEBUG) {
-            Log.d(LOG_TAG, "Size of cache: " + cachedContactList.size());
+            Log.d(LOG_TAG, "Size of cache: " + trie.size());
         }
 
-        final StopWatch stopWatch = DEBUG ? StopWatch.start(LOG_TAG + " Start Match") : null;
-        final ArrayList<SmartDialEntry> outList = Lists.newArrayList();
-
-        int count = 0;
-        for (int i = 0; i < cachedContactList.size(); i++) {
-            final Contact contact = cachedContactList.get(i);
-            final String displayName = contact.displayName;
-
-            if (!mNameMatcher.matches(displayName)) {
+        final StopWatch stopWatch = DEBUG ? StopWatch.start("Start Match") : null;
+        final ArrayList<ContactNumber> allMatches = trie.getAllWithPrefix(mNameMatcher.getQuery());
+        if (DEBUG) {
+            stopWatch.lap("Find matches");
+        }
+        // Sort matches in order of ascending contact affinity (lower is better)
+        Collections.sort(allMatches, new SmartDialCache.ContactAffinityComparator());
+        if (DEBUG) {
+            stopWatch.lap("Sort");
+        }
+        final Set<ContactMatch> duplicates = new HashSet<ContactMatch>();
+        final ArrayList<SmartDialEntry> candidates = Lists.newArrayList();
+        for (ContactNumber contact : allMatches) {
+            final ContactMatch contactMatch = new ContactMatch(contact.lookupKey, contact.id);
+            // Don't add multiple contact numbers from the same contact into suggestions if
+            // there are multiple matches. Instead, just keep the highest priority number
+            // instead.
+            if (duplicates.contains(contactMatch)) {
                 continue;
             }
-            // Matched; create SmartDialEntry.
-            @SuppressWarnings("unchecked")
-            final SmartDialEntry entry = new SmartDialEntry(
-                     contact.displayName,
-                     Contacts.getLookupUri(contact.id, contact.lookupKey),
-                     (ArrayList<SmartDialMatchPosition>) mNameMatcher.getMatchPositions().clone()
-                     );
-            outList.add(entry);
-            count++;
-            if (count >= MAX_ENTRIES) {
+            duplicates.add(contactMatch);
+            final boolean matches = mNameMatcher.matches(contact.displayName);
+            candidates.add(new SmartDialEntry(
+                    contact.displayName,
+                    Contacts.getLookupUri(contact.id, contact.lookupKey),
+                    contact.phoneNumber,
+                    mNameMatcher.getMatchPositions(),
+                    mNameMatcher.matchesNumber(contact.phoneNumber, mNameMatcher.getQuery())
+                    ));
+            if (candidates.size() >= MAX_ENTRIES) {
                 break;
             }
         }
         if (DEBUG) {
             stopWatch.stopAndLog(LOG_TAG + " Match Complete", 0);
         }
-        return outList;
+        return candidates;
+    }
+
+    private class ContactMatch {
+        public final String lookupKey;
+        public final long id;
+
+        public ContactMatch(String lookupKey, long id) {
+            this.lookupKey = lookupKey;
+            this.id = id;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(lookupKey, id);
+        }
+
+        @Override
+        public boolean equals(Object object) {
+            if (this == object) {
+                return true;
+            }
+            if (object instanceof ContactMatch) {
+                ContactMatch that = (ContactMatch) object;
+                return Objects.equal(this.lookupKey, that.lookupKey)
+                        && Objects.equal(this.id, that.id);
+            }
+            return false;
+        }
     }
 }

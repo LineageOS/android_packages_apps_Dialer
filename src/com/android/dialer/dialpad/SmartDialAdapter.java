@@ -18,15 +18,16 @@ package com.android.dialer.dialpad;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 
 import com.android.dialer.R;
 import com.google.common.collect.Lists;
@@ -38,16 +39,12 @@ public class SmartDialAdapter extends BaseAdapter {
     private final LayoutInflater mInflater;
 
     private List<SmartDialEntry> mEntries;
-    private static Drawable mHighConfidenceHint;
 
     private final int mHighlightedTextColor;
 
     public SmartDialAdapter(Context context) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final Resources res = context.getResources();
-        mHighConfidenceHint = SmartDialTextView.getHighConfidenceHintDrawable(
-                res, res.getDimension(R.dimen.smartdial_confidence_hint_text_size),
-                res.getColor(R.color.smartdial_confidence_drawable_color));
         mHighlightedTextColor = res.getColor(R.color.smartdial_highlighted_text_color);
         clear();
     }
@@ -109,55 +106,59 @@ public class SmartDialAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final SmartDialTextView view;
+        final LinearLayout view;
         if (convertView == null) {
-            view = (SmartDialTextView) mInflater.inflate(
+            view = (LinearLayout) mInflater.inflate(
                     R.layout.dialpad_smartdial_item, parent, false);
         } else {
-            view = (SmartDialTextView) convertView;
+            view = (LinearLayout) convertView;
         }
-        // Set the display name with highlight.
+
+        final SmartDialTextView nameView = (SmartDialTextView) view.findViewById(R.id.contact_name);
+
+        final SmartDialTextView numberView = (SmartDialTextView) view.findViewById(
+                R.id.contact_number);
 
         final SmartDialEntry item = mEntries.get(position);
 
         if (item == null) {
             // Clear the text in case the view was reused.
-            view.setText("");
+            nameView.setText("");
+            numberView.setText("");
             // Empty view. We use this to force a single entry to be in the middle
             return view;
         }
-        final SpannableString displayName = new SpannableString(item.displayName);
-        for (final SmartDialMatchPosition p : item.matchPositions) {
-            final int matchStart = p.start;
-            final int matchEnd = p.end;
-            if (matchStart < matchEnd) {
-                // Create a new ForegroundColorSpan for each section of the name to highlight,
-                // otherwise multiple highlights won't work.
-                try {
-                    displayName.setSpan(
-                            new ForegroundColorSpan(mHighlightedTextColor), matchStart, matchEnd,
-                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                } catch (final IndexOutOfBoundsException e) {
-                    Log.wtf(LOG_TAG,
-                            "Invalid match positions provided - [" + matchStart + ","
-                            + matchEnd + "] for display name: " + item.displayName);
+
+        // Highlight the display name with the provided match positions
+        if (!TextUtils.isEmpty(item.displayName)) {
+            final SpannableString displayName = new SpannableString(item.displayName);
+            for (final SmartDialMatchPosition p : item.matchPositions) {
+                if (p.start < p.end) {
+                    if (p.end > displayName.length()) {
+                        p.end = displayName.length();
+                    }
+                    // Create a new ForegroundColorSpan for each section of the name to highlight,
+                    // otherwise multiple highlights won't work.
+                    displayName.setSpan(new ForegroundColorSpan(mHighlightedTextColor), p.start,
+                            p.end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
             }
+            nameView.setText(displayName);
         }
 
-        if (position == 1) {
-            view.setCompoundDrawablesWithIntrinsicBounds(
-                    null, null, null, mHighConfidenceHint);
-            // Hack to align text in this view with text in other views without the
-            // overflow drawable
-            view.setCompoundDrawablePadding(-mHighConfidenceHint.getIntrinsicHeight());
-        } else {
-            view.setCompoundDrawablesWithIntrinsicBounds(
-                    null, null, null, null);
+        // Highlight the phone number with the provided match positions
+        if (!TextUtils.isEmpty(item.phoneNumber)) {
+            final SmartDialMatchPosition p = item.phoneNumberMatchPosition;
+            final SpannableString phoneNumber = new SpannableString(item.phoneNumber);
+            if (p != null && p.start < p.end) {
+                if (p.end > phoneNumber.length()) {
+                    p.end = phoneNumber.length();
+                }
+                phoneNumber.setSpan(new ForegroundColorSpan(mHighlightedTextColor), p.start, p.end,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            numberView.setText(phoneNumber);
         }
-
-
-        view.setText(displayName);
         view.setTag(item);
 
         return view;

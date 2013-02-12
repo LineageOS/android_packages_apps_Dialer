@@ -16,10 +16,11 @@
 
 package com.android.dialer.dialpad;
 
+import android.text.TextUtils;
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 
 /**
@@ -33,7 +34,7 @@ public class SmartDialNameMatcher {
 
     private final String mQuery;
 
-    private static final char[] LETTERS_TO_DIGITS = {
+    public static final char[] LATIN_LETTERS_TO_DIGITS = {
         '2', '2', '2', // A,B,C -> 2
         '3', '3', '3', // D,E,F -> 3
         '4', '4', '4', // G,H,I -> 4
@@ -66,37 +67,37 @@ public class SmartDialNameMatcher {
      * alphabetic equivalents. The unidecode library can be found at:
      * http://pypi.python.org/pypi/Unidecode/0.04.1
      */
-    private static char remapAccentedChars(char c) {
+    public static char remapAccentedChars(char c) {
         switch (c) {
-            case 'À': return 'A';
-            case 'Á': return 'A';
-            case 'Â': return 'A';
-            case 'Ã': return 'A';
-            case 'Ä': return 'A';
-            case 'Å': return 'A';
-            case 'Ç': return 'C';
-            case 'È': return 'E';
-            case 'É': return 'E';
-            case 'Ê': return 'E';
-            case 'Ë': return 'E';
-            case 'Ì': return 'I';
-            case 'Í': return 'I';
-            case 'Î': return 'I';
-            case 'Ï': return 'I';
-            case 'Ð': return 'D';
-            case 'Ñ': return 'N';
-            case 'Ò': return 'O';
-            case 'Ó': return 'O';
-            case 'Ô': return 'O';
-            case 'Õ': return 'O';
-            case 'Ö': return 'O';
+            case 'À': return 'a';
+            case 'Á': return 'a';
+            case 'Â': return 'a';
+            case 'Ã': return 'a';
+            case 'Ä': return 'a';
+            case 'Å': return 'a';
+            case 'Ç': return 'c';
+            case 'È': return 'e';
+            case 'É': return 'e';
+            case 'Ê': return 'e';
+            case 'Ë': return 'e';
+            case 'Ì': return 'i';
+            case 'Í': return 'i';
+            case 'Î': return 'i';
+            case 'Ï': return 'i';
+            case 'Ð': return 'd';
+            case 'Ñ': return 'n';
+            case 'Ò': return 'o';
+            case 'Ó': return 'o';
+            case 'Ô': return 'o';
+            case 'Õ': return 'o';
+            case 'Ö': return 'o';
             case '×': return 'x';
-            case 'Ø': return 'O';
-            case 'Ù': return 'U';
-            case 'Ú': return 'U';
-            case 'Û': return 'U';
-            case 'Ü': return 'U';
-            case 'Ý': return 'U';
+            case 'Ø': return 'o';
+            case 'Ù': return 'u';
+            case 'Ú': return 'u';
+            case 'Û': return 'u';
+            case 'Ü': return 'u';
+            case 'Ý': return 'u';
             case 'à': return 'a';
             case 'á': return 'a';
             case 'â': return 'a';
@@ -126,260 +127,286 @@ public class SmartDialNameMatcher {
             case 'ü': return 'u';
             case 'ý': return 'y';
             case 'ÿ': return 'y';
-            case 'Ā': return 'A';
+            case 'Ā': return 'a';
             case 'ā': return 'a';
-            case 'Ă': return 'A';
+            case 'Ă': return 'a';
             case 'ă': return 'a';
-            case 'Ą': return 'A';
+            case 'Ą': return 'a';
             case 'ą': return 'a';
-            case 'Ć': return 'C';
+            case 'Ć': return 'c';
             case 'ć': return 'c';
-            case 'Ĉ': return 'C';
+            case 'Ĉ': return 'c';
             case 'ĉ': return 'c';
-            case 'Ċ': return 'C';
+            case 'Ċ': return 'c';
             case 'ċ': return 'c';
-            case 'Č': return 'C';
+            case 'Č': return 'c';
             case 'č': return 'c';
-            case 'Ď': return 'D';
+            case 'Ď': return 'd';
             case 'ď': return 'd';
-            case 'Đ': return 'D';
+            case 'Đ': return 'd';
             case 'đ': return 'd';
-            case 'Ē': return 'E';
+            case 'Ē': return 'e';
             case 'ē': return 'e';
-            case 'Ĕ': return 'E';
+            case 'Ĕ': return 'e';
             case 'ĕ': return 'e';
-            case 'Ė': return 'E';
+            case 'Ė': return 'e';
             case 'ė': return 'e';
-            case 'Ę': return 'E';
+            case 'Ę': return 'e';
             case 'ę': return 'e';
-            case 'Ě': return 'E';
+            case 'Ě': return 'e';
             case 'ě': return 'e';
-            case 'Ĝ': return 'G';
+            case 'Ĝ': return 'g';
             case 'ĝ': return 'g';
-            case 'Ğ': return 'G';
+            case 'Ğ': return 'g';
             case 'ğ': return 'g';
-            case 'Ġ': return 'G';
+            case 'Ġ': return 'g';
             case 'ġ': return 'g';
-            case 'Ģ': return 'G';
+            case 'Ģ': return 'g';
             case 'ģ': return 'g';
-            case 'Ĥ': return 'H';
+            case 'Ĥ': return 'h';
             case 'ĥ': return 'h';
-            case 'Ħ': return 'H';
+            case 'Ħ': return 'h';
             case 'ħ': return 'h';
-            case 'Ĩ': return 'I';
+            case 'Ĩ': return 'i';
             case 'ĩ': return 'i';
-            case 'Ī': return 'I';
+            case 'Ī': return 'i';
             case 'ī': return 'i';
-            case 'Ĭ': return 'I';
+            case 'Ĭ': return 'i';
             case 'ĭ': return 'i';
-            case 'Į': return 'I';
+            case 'Į': return 'i';
             case 'į': return 'i';
-            case 'İ': return 'I';
+            case 'İ': return 'i';
             case 'ı': return 'i';
-            case 'Ĵ': return 'J';
+            case 'Ĵ': return 'j';
             case 'ĵ': return 'j';
-            case 'Ķ': return 'K';
+            case 'Ķ': return 'k';
             case 'ķ': return 'k';
             case 'ĸ': return 'k';
-            case 'Ĺ': return 'L';
+            case 'Ĺ': return 'l';
             case 'ĺ': return 'l';
-            case 'Ļ': return 'L';
+            case 'Ļ': return 'l';
             case 'ļ': return 'l';
-            case 'Ľ': return 'L';
+            case 'Ľ': return 'l';
             case 'ľ': return 'l';
-            case 'Ŀ': return 'L';
+            case 'Ŀ': return 'l';
             case 'ŀ': return 'l';
-            case 'Ł': return 'L';
+            case 'Ł': return 'l';
             case 'ł': return 'l';
-            case 'Ń': return 'N';
+            case 'Ń': return 'n';
             case 'ń': return 'n';
-            case 'Ņ': return 'N';
+            case 'Ņ': return 'n';
             case 'ņ': return 'n';
-            case 'Ň': return 'N';
+            case 'Ň': return 'n';
             case 'ň': return 'n';
-            case 'Ō': return 'O';
+            case 'Ō': return 'o';
             case 'ō': return 'o';
-            case 'Ŏ': return 'O';
+            case 'Ŏ': return 'o';
             case 'ŏ': return 'o';
-            case 'Ő': return 'O';
+            case 'Ő': return 'o';
             case 'ő': return 'o';
-            case 'Ŕ': return 'R';
+            case 'Ŕ': return 'r';
             case 'ŕ': return 'r';
-            case 'Ŗ': return 'R';
+            case 'Ŗ': return 'r';
             case 'ŗ': return 'r';
-            case 'Ř': return 'R';
+            case 'Ř': return 'r';
             case 'ř': return 'r';
-            case 'Ś': return 'S';
+            case 'Ś': return 's';
             case 'ś': return 's';
-            case 'Ŝ': return 'S';
+            case 'Ŝ': return 's';
             case 'ŝ': return 's';
-            case 'Ş': return 'S';
+            case 'Ş': return 's';
             case 'ş': return 's';
-            case 'Š': return 'S';
+            case 'Š': return 's';
             case 'š': return 's';
-            case 'Ţ': return 'T';
+            case 'Ţ': return 't';
             case 'ţ': return 't';
-            case 'Ť': return 'T';
+            case 'Ť': return 't';
             case 'ť': return 't';
-            case 'Ŧ': return 'T';
+            case 'Ŧ': return 't';
             case 'ŧ': return 't';
-            case 'Ũ': return 'U';
+            case 'Ũ': return 'u';
             case 'ũ': return 'u';
-            case 'Ū': return 'U';
+            case 'Ū': return 'u';
             case 'ū': return 'u';
-            case 'Ŭ': return 'U';
+            case 'Ŭ': return 'u';
             case 'ŭ': return 'u';
-            case 'Ů': return 'U';
+            case 'Ů': return 'u';
             case 'ů': return 'u';
-            case 'Ű': return 'U';
+            case 'Ű': return 'u';
             case 'ű': return 'u';
-            case 'Ų': return 'U';
+            case 'Ų': return 'u';
             case 'ų': return 'u';
-            case 'Ŵ': return 'W';
+            case 'Ŵ': return 'w';
             case 'ŵ': return 'w';
-            case 'Ŷ': return 'Y';
+            case 'Ŷ': return 'y';
             case 'ŷ': return 'y';
-            case 'Ÿ': return 'Y';
-            case 'Ź': return 'Z';
+            case 'Ÿ': return 'y';
+            case 'Ź': return 'z';
             case 'ź': return 'z';
-            case 'Ż': return 'Z';
+            case 'Ż': return 'z';
             case 'ż': return 'z';
-            case 'Ž': return 'Z';
+            case 'Ž': return 'z';
             case 'ž': return 'z';
             case 'ſ': return 's';
             case 'ƀ': return 'b';
-            case 'Ɓ': return 'B';
-            case 'Ƃ': return 'B';
+            case 'Ɓ': return 'b';
+            case 'Ƃ': return 'b';
             case 'ƃ': return 'b';
-            case 'Ɔ': return 'O';
-            case 'Ƈ': return 'C';
+            case 'Ɔ': return 'o';
+            case 'Ƈ': return 'c';
             case 'ƈ': return 'c';
-            case 'Ɖ': return 'D';
-            case 'Ɗ': return 'D';
-            case 'Ƌ': return 'D';
+            case 'Ɖ': return 'd';
+            case 'Ɗ': return 'd';
+            case 'Ƌ': return 'd';
             case 'ƌ': return 'd';
             case 'ƍ': return 'd';
-            case 'Ɛ': return 'E';
-            case 'Ƒ': return 'F';
+            case 'Ɛ': return 'e';
+            case 'Ƒ': return 'f';
             case 'ƒ': return 'f';
-            case 'Ɠ': return 'G';
-            case 'Ɣ': return 'G';
-            case 'Ɩ': return 'I';
-            case 'Ɨ': return 'I';
-            case 'Ƙ': return 'K';
+            case 'Ɠ': return 'g';
+            case 'Ɣ': return 'g';
+            case 'Ɩ': return 'i';
+            case 'Ɨ': return 'i';
+            case 'Ƙ': return 'k';
             case 'ƙ': return 'k';
             case 'ƚ': return 'l';
             case 'ƛ': return 'l';
-            case 'Ɯ': return 'W';
-            case 'Ɲ': return 'N';
+            case 'Ɯ': return 'w';
+            case 'Ɲ': return 'n';
             case 'ƞ': return 'n';
-            case 'Ɵ': return 'O';
-            case 'Ơ': return 'O';
+            case 'Ɵ': return 'o';
+            case 'Ơ': return 'o';
             case 'ơ': return 'o';
-            case 'Ƥ': return 'P';
+            case 'Ƥ': return 'p';
             case 'ƥ': return 'p';
             case 'ƫ': return 't';
-            case 'Ƭ': return 'T';
+            case 'Ƭ': return 't';
             case 'ƭ': return 't';
-            case 'Ʈ': return 'T';
-            case 'Ư': return 'U';
+            case 'Ʈ': return 't';
+            case 'Ư': return 'u';
             case 'ư': return 'u';
-            case 'Ʊ': return 'Y';
-            case 'Ʋ': return 'V';
-            case 'Ƴ': return 'Y';
+            case 'Ʊ': return 'y';
+            case 'Ʋ': return 'v';
+            case 'Ƴ': return 'y';
             case 'ƴ': return 'y';
-            case 'Ƶ': return 'Z';
+            case 'Ƶ': return 'z';
             case 'ƶ': return 'z';
             case 'ƿ': return 'w';
-            case 'Ǎ': return 'A';
+            case 'Ǎ': return 'a';
             case 'ǎ': return 'a';
-            case 'Ǐ': return 'I';
+            case 'Ǐ': return 'i';
             case 'ǐ': return 'i';
-            case 'Ǒ': return 'O';
+            case 'Ǒ': return 'o';
             case 'ǒ': return 'o';
-            case 'Ǔ': return 'U';
+            case 'Ǔ': return 'u';
             case 'ǔ': return 'u';
-            case 'Ǖ': return 'U';
+            case 'Ǖ': return 'u';
             case 'ǖ': return 'u';
-            case 'Ǘ': return 'U';
+            case 'Ǘ': return 'u';
             case 'ǘ': return 'u';
-            case 'Ǚ': return 'U';
+            case 'Ǚ': return 'u';
             case 'ǚ': return 'u';
-            case 'Ǜ': return 'U';
+            case 'Ǜ': return 'u';
             case 'ǜ': return 'u';
-            case 'Ǟ': return 'A';
+            case 'Ǟ': return 'a';
             case 'ǟ': return 'a';
-            case 'Ǡ': return 'A';
+            case 'Ǡ': return 'a';
             case 'ǡ': return 'a';
-            case 'Ǥ': return 'G';
+            case 'Ǥ': return 'g';
             case 'ǥ': return 'g';
-            case 'Ǧ': return 'G';
+            case 'Ǧ': return 'g';
             case 'ǧ': return 'g';
-            case 'Ǩ': return 'K';
+            case 'Ǩ': return 'k';
             case 'ǩ': return 'k';
-            case 'Ǫ': return 'O';
+            case 'Ǫ': return 'o';
             case 'ǫ': return 'o';
-            case 'Ǭ': return 'O';
+            case 'Ǭ': return 'o';
             case 'ǭ': return 'o';
             case 'ǰ': return 'j';
-            case 'ǲ': return 'D';
-            case 'Ǵ': return 'G';
+            case 'ǲ': return 'd';
+            case 'Ǵ': return 'g';
             case 'ǵ': return 'g';
-            case 'Ƿ': return 'W';
-            case 'Ǹ': return 'N';
+            case 'Ƿ': return 'w';
+            case 'Ǹ': return 'n';
             case 'ǹ': return 'n';
-            case 'Ǻ': return 'A';
+            case 'Ǻ': return 'a';
             case 'ǻ': return 'a';
-            case 'Ǿ': return 'O';
+            case 'Ǿ': return 'o';
             case 'ǿ': return 'o';
-            case 'Ȁ': return 'A';
+            case 'Ȁ': return 'a';
             case 'ȁ': return 'a';
-            case 'Ȃ': return 'A';
+            case 'Ȃ': return 'a';
             case 'ȃ': return 'a';
-            case 'Ȅ': return 'E';
+            case 'Ȅ': return 'e';
             case 'ȅ': return 'e';
-            case 'Ȇ': return 'E';
+            case 'Ȇ': return 'e';
             case 'ȇ': return 'e';
-            case 'Ȉ': return 'I';
+            case 'Ȉ': return 'i';
             case 'ȉ': return 'i';
-            case 'Ȋ': return 'I';
+            case 'Ȋ': return 'i';
             case 'ȋ': return 'i';
-            case 'Ȍ': return 'O';
+            case 'Ȍ': return 'o';
             case 'ȍ': return 'o';
-            case 'Ȏ': return 'O';
+            case 'Ȏ': return 'o';
             case 'ȏ': return 'o';
-            case 'Ȑ': return 'R';
+            case 'Ȑ': return 'r';
             case 'ȑ': return 'r';
-            case 'Ȓ': return 'R';
+            case 'Ȓ': return 'r';
             case 'ȓ': return 'r';
-            case 'Ȕ': return 'U';
+            case 'Ȕ': return 'u';
             case 'ȕ': return 'u';
-            case 'Ȗ': return 'U';
+            case 'Ȗ': return 'u';
             case 'ȗ': return 'u';
-            case 'Ș': return 'S';
+            case 'Ș': return 's';
             case 'ș': return 's';
-            case 'Ț': return 'T';
+            case 'Ț': return 't';
             case 'ț': return 't';
-            case 'Ȝ': return 'Y';
+            case 'Ȝ': return 'y';
             case 'ȝ': return 'y';
-            case 'Ȟ': return 'H';
+            case 'Ȟ': return 'h';
             case 'ȟ': return 'h';
-            case 'Ȥ': return 'Z';
+            case 'Ȥ': return 'z';
             case 'ȥ': return 'z';
-            case 'Ȧ': return 'A';
+            case 'Ȧ': return 'a';
             case 'ȧ': return 'a';
-            case 'Ȩ': return 'E';
+            case 'Ȩ': return 'e';
             case 'ȩ': return 'e';
-            case 'Ȫ': return 'O';
+            case 'Ȫ': return 'o';
             case 'ȫ': return 'o';
-            case 'Ȭ': return 'O';
+            case 'Ȭ': return 'o';
             case 'ȭ': return 'o';
-            case 'Ȯ': return 'O';
+            case 'Ȯ': return 'o';
             case 'ȯ': return 'o';
-            case 'Ȱ': return 'O';
+            case 'Ȱ': return 'o';
             case 'ȱ': return 'o';
-            case 'Ȳ': return 'Y';
+            case 'Ȳ': return 'y';
             case 'ȳ': return 'y';
+            case 'A': return 'a';
+            case 'B': return 'b';
+            case 'C': return 'c';
+            case 'D': return 'd';
+            case 'E': return 'e';
+            case 'F': return 'f';
+            case 'G': return 'g';
+            case 'H': return 'h';
+            case 'I': return 'i';
+            case 'J': return 'j';
+            case 'K': return 'k';
+            case 'L': return 'l';
+            case 'M': return 'm';
+            case 'N': return 'n';
+            case 'O': return 'o';
+            case 'P': return 'p';
+            case 'Q': return 'q';
+            case 'R': return 'r';
+            case 'S': return 's';
+            case 'T': return 't';
+            case 'U': return 'u';
+            case 'V': return 'v';
+            case 'W': return 'w';
+            case 'X': return 'x';
+            case 'Y': return 'y';
+            case 'Z': return 'z';
             default: return c;
         }
     }
@@ -391,45 +418,53 @@ public class SmartDialNameMatcher {
     }
 
     /**
-     * Strips all accented characters in a name and converts them to their alphabetic equivalents.
-     *
-     * @param name Name we want to remove accented characters from.
-     * @return Name without accents in characters
-     */
-    public static String stripDiacritics(String name) {
-        // NFD stands for normalization form D - Canonical Decomposition
-        // This means that for all characters with diacritics, e.g. ä, we decompose them into
-        // two characters, the first being the alphabetic equivalent, and the second being a
-        // a character that represents the diacritic.
-
-        final String normalized = Normalizer.normalize(name, Normalizer.Form.NFD);
-        final StringBuilder stripped = new StringBuilder();
-        for (int i = 0; i < normalized.length(); i++) {
-            // This pass through the string strips out all the diacritics by checking to see
-            // if they are in this list here:
-            // http://www.fileformat.info/info/unicode/category/Mn/list.htm
-            if (Character.getType(normalized.charAt(i)) != Character.NON_SPACING_MARK) {
-                stripped.append(normalized.charAt(i));
-            }
-        }
-        return stripped.toString();
-    }
-
-    /**
-     * Strips a phone number of unnecessary characters (zeros, ones, spaces, dashes, etc.)
+     * Strips a phone number of unnecessary characters (spaces, dashes, etc.)
      *
      * @param number Phone number we want to normalize
-     * @return Phone number consisting of digits from 2-9
+     * @return Phone number consisting of digits from 0-9
      */
     public static String normalizeNumber(String number) {
         final StringBuilder s = new StringBuilder();
         for (int i = 0; i < number.length(); i++) {
             char ch = number.charAt(i);
-            if (ch >= '2' && ch <= '9') {
+            if (ch >= '0' && ch <= '9') {
                 s.append(ch);
             }
         }
         return s.toString();
+    }
+
+    /**
+     * Matches a phone number against a query, taking care of formatting characters
+     *
+     * @param phoneNumber - Raw phone number
+     * @param query - Normalized query (only contains numbers from 0-9)
+     * @return {@literal null} if the number and the query don't match, a valid
+     *         SmartDialMatchPosition with the matching positions otherwise
+     */
+    public SmartDialMatchPosition matchesNumber(String phoneNumber, String query) {
+        if (TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(query)) {
+            return null;
+        }
+        int queryAt = 0;
+        int numberAt = 0;
+        for (int i = 0; i < phoneNumber.length(); i++) {
+            if (queryAt == query.length()) {
+                break;
+            }
+            char ch = phoneNumber.charAt(i);
+            if (ch >= '0' && ch <= '9') {
+                if (ch != query.charAt(queryAt)) {
+                    return null;
+                }
+                queryAt++;
+                numberAt++;
+            } else {
+                numberAt++;
+                continue;
+            }
+        }
+        return new SmartDialMatchPosition(0, numberAt);
     }
 
     /**
@@ -452,9 +487,7 @@ public class SmartDialNameMatcher {
      * positions to.
      * @return Returns true if a combination of the tokens in displayName match the query
      * string contained in query. If the function returns true, matchList will contain an
-     * ArrayList of match positions. For now, matchList will contain a maximum of one match
-     * position. If we intend to support initial matching in the future, matchList could possibly
-     * contain more than one match position.
+     * ArrayList of match positions (multiple matches correspond to initial matches).
      */
     @VisibleForTesting
     boolean matchesCombination(String displayName, String query,
@@ -500,7 +533,7 @@ public class SmartDialNameMatcher {
             }
             if ((ch >= 'a') && (ch <= 'z')) {
                 // a starts at index 0
-                if (LETTERS_TO_DIGITS[ch - 'a'] != query.charAt(queryStart)) {
+                if (LATIN_LETTERS_TO_DIGITS[ch - 'a'] != query.charAt(queryStart)) {
                     // we did not find a match
                     queryStart = 0;
                     seperatorCount = 0;
@@ -539,7 +572,6 @@ public class SmartDialNameMatcher {
                                 SmartDialMatchPosition.advanceMatchPositions(partialTemp, j + 1);
                                 partialTemp.add(0,
                                         new SmartDialMatchPosition(nameStart, nameStart + 1));
-
                                 // we found a partial token match, store the data in a
                                 // temp buffer and return it if we end up not finding a full
                                 // token match
@@ -583,7 +615,9 @@ public class SmartDialNameMatcher {
     }
 
     public ArrayList<SmartDialMatchPosition> getMatchPositions() {
-        return mMatchPositions;
+        // Return a clone of mMatchPositions so that the caller can use it without
+        // worrying about it changing
+        return new ArrayList<SmartDialMatchPosition>(mMatchPositions);
     }
 
     public String getQuery() {

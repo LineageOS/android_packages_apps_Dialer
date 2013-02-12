@@ -56,17 +56,16 @@
             android:src="@drawable/ic_dial_action_delete" />
     </LinearLayout>
 
-    <View style="@style/DialpadHorizontalSeparator"/>
-
     <!-- Smard dial suggestion section -->
     <GridView
         android:id="@+id/dialpad_smartdial_list"
         android:layout_width="match_parent"
-        android:layout_height="42sp"
+        android:layout_height="50sp"
         android:columnWidth="0dp"
         android:numColumns="3"
         android:stretchMode="columnWidth"
         android:gravity="center"
+        android:layout_marginTop="@dimen/dialpad_vertical_margin"
         android:background="@drawable/dialpad_background"/>
 
     <!-- Keypad section -->
