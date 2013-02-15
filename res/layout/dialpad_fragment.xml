@@ -71,6 +71,24 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:contentDescription="@string/description_delete_button"
                 android:src="@drawable/ic_dial_action_delete" />
+
+           <!-- recipients replaces digits and deleteButton when
+            dial conference controls are made visible. -->
+            <EditText
+                android:id="@+id/recipients"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dip"
+                android:layout_weight="1"
+                android:autoText="true"
+                android:background="@android:color/transparent"
+                android:hint="@string/to_hint"
+                android:maxLength="2000"
+                android:maxLines="3"
+                android:minHeight="48dip"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <!-- Keypad section -->
@@ -78,13 +96,35 @@
 
         <View style="@style/DialpadHorizontalSeparator"/>
 
-        <LinearLayout
+        <!-- dialpadStub values are copied from dialpad.xml.  dialpadStub replaces dialpad when
+         dial conference controls are made visible. -->
+        <View
+            android:id="@+id/dialpadStub"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dialpad_vertical_margin"
+            android:layout_weight="@integer/dialpad_layout_weight_dialpad"
+            android:background="@drawable/dialpad_background"
+            android:paddingBottom="10dip"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialpad_vertical_margin"
+            android:background="#66000000" />
+
+        <TableLayout
             android:id="@+id/dialButtonContainer"
             android:layout_width="match_parent"
             android:layout_height="@dimen/fake_action_bar_height"
             android:layout_gravity="center_horizontal"
             android:background="@color/dialpad_call_button_color"
             android:layoutDirection="locale">
+        <TableRow
+            android:layout_height="match_parent"
+            android:layout_weight="1">
             <ImageButton
                 android:id="@+id/call_history_on_dialpad_button"
                 android:layout_height="match_parent"
@@ -111,7 +151,20 @@
                 android:background="@drawable/btn_call"
                 android:src="@drawable/ic_menu_overflow_lt"
                 android:contentDescription="@string/action_menu_overflow_description" />
-        </LinearLayout>
+            <!-- src for image for the button will be changed dynamically in the code.
+            See DialpadFragment.-->
+            <ImageButton
+                android:id="@+id/dialConferenceButton"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:state_enabled="false"
+                android:background="@drawable/btn_call"
+                android:contentDescription="@string/description_dial_button"
+                android:src="@drawable/ic_add_group_holo_dark" />
+            </TableRow>
+        </TableLayout>
 
         <!-- "Dialpad chooser" UI, shown only when the user brings up the
              Dialer while a call is already in progress.

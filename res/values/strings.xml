@@ -632,7 +632,6 @@
          [CHAR LIMIT=NONE]
     -->
     <string name="contact_tooltip">Tap image to see all numbers or press and hold to reorder</string>
-
-    <!-- Content description for dismiss button on badge. [CHAR LIMIT=NONE] -->
-    <string name="description_dismiss">Dismiss</string>
+    <string name="dial_conference">Dial conference</string>
+    <string name="to_hint">1111:to;sip:abby@example.com:bcc;sip:bill@example.com:cc;</string>
 </resources>
