@@ -96,7 +96,7 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"通話詳細"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"通話要求の詳細が読み込めませんでした。"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"プッシュホン式キーパッドを使う"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"保留中の通話に戻る"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"通話に戻る"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"別の通話を追加"</string>
     <string name="type_incoming" msgid="6502076603836088532">"通話着信"</string>
     <string name="type_outgoing" msgid="343108709599392641">"発信履歴"</string>
