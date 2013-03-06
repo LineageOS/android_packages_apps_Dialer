@@ -21,7 +21,6 @@ import android.graphics.Rect;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.accessibility.AccessibilityEvent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -55,32 +54,5 @@ public class DigitsEditText extends EditText {
             imm.hideSoftInputFromWindow(getApplicationWindowToken(), 0);
         }
         return ret;
-    }
-
-    @Override
-    public void sendAccessibilityEventUnchecked(AccessibilityEvent event) {
-        if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED) {
-            // Since we're replacing the text every time we add or remove a
-            // character, only read the difference. (issue 5337550)
-            final int added = event.getAddedCount();
-            final int removed = event.getRemovedCount();
-            final int length = event.getBeforeText().length();
-            if (added > removed) {
-                event.setRemovedCount(0);
-                event.setAddedCount(1);
-                event.setFromIndex(length);
-            } else if (removed > added) {
-                event.setRemovedCount(1);
-                event.setAddedCount(0);
-                event.setFromIndex(length - 1);
-            } else {
-                return;
-            }
-        } else if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_FOCUSED) {
-            // The parent EditText class lets tts read "edit box" when this View has a focus, which
-            // confuses users on app launch (issue 5275935).
-            return;
-        }
-        super.sendAccessibilityEventUnchecked(event);
     }
 }
