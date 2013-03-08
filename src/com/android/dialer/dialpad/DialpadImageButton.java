@@ -18,10 +18,12 @@ package com.android.dialer.dialpad;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ImageButton;
 
 /**
@@ -81,20 +83,13 @@ public class DialpadImageButton extends ImageButton {
     }
 
     @Override
-    public boolean performClick() {
-        // When accessibility is on, simulate press and release to preserve the
-        // semantic meaning of performClick(). Required for Braille support.
-        if (mAccessibilityManager.isEnabled()) {
-            // Checking the press state prevents double activation.
-            if (!isPressed()) {
-                setPressed(true);
-                setPressed(false);
-            }
-
+    public boolean performAccessibilityAction(int action, Bundle arguments) {
+        if (action == AccessibilityNodeInfo.ACTION_CLICK) {
+            simulateClickForAccessibility();
             return true;
         }
 
-        return super.performClick();
+        return super.performAccessibilityAction(action, arguments);
     }
 
     @Override
@@ -110,7 +105,7 @@ public class DialpadImageButton extends ImageButton {
                     break;
                 case MotionEvent.ACTION_HOVER_EXIT:
                     if (mHoverBounds.contains((int) event.getX(), (int) event.getY())) {
-                        performClick();
+                        simulateClickForAccessibility();
                     }
                     setClickable(true);
                     break;
@@ -118,5 +113,19 @@ public class DialpadImageButton extends ImageButton {
         }
 
         return super.onHoverEvent(event);
+    }
+
+    /**
+     * When accessibility is on, simulate press and release to preserve the
+     * semantic meaning of performClick(). Required for Braille support.
+     */
+    private void simulateClickForAccessibility() {
+        // Checking the press state prevents double activation.
+        if (isPressed()) {
+            return;
+        }
+
+        setPressed(true);
+        setPressed(false);
     }
 }
