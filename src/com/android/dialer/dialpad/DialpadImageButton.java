@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ImageButton;
@@ -126,6 +127,11 @@ public class DialpadImageButton extends ImageButton {
         }
 
         setPressed(true);
+
+        // Stay consistent with performClick() by sending the event after
+        // setting the pressed state but before performing the action.
+        sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
+
         setPressed(false);
     }
 }
