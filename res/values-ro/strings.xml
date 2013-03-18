@@ -26,11 +26,11 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Modificaţi numărul înainte de apelare"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Adăugaţi la persoane din agendă"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Eliminaţi din jurnalul de apeluri"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Ştergeţi jurnalul de apeluri"</string>
-    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ştergeţi mesajul vocal"</string>
+    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Ștergeţi jurnalul de apeluri"</string>
+    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ștergeţi mesajul vocal"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Distribuiţi mesajul vocal"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"Jurnalul de apeluri este gol."</string>
-    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Ştergeţi apelurile?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Ștergeţi apelurile?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Toate înregistrările apelurilor dvs. vor fi şterse."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Se goleşte jurnalul de apeluri..."</string>
   <plurals name="notification_voicemail_title">
