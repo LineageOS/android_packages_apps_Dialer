@@ -85,6 +85,7 @@ import com.android.dialer.util.OrientationUtil;
 import com.android.internal.telephony.ITelephony;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
+import com.google.common.annotations.VisibleForTesting;
 
 import java.util.List;
 
@@ -103,6 +104,8 @@ public class DialpadFragment extends Fragment
     private static final boolean DEBUG = DialtactsActivity.DEBUG;
 
     private static final String EMPTY_NUMBER = "";
+    private static final char PAUSE = ',';
+    private static final char WAIT = ';';
 
     /** The length of DTMF tones in milliseconds */
     private static final int TONE_LENGTH_MS = 150;
@@ -692,8 +695,6 @@ public class DialpadFragment extends Fragment
     private void setupMenuItems(Menu menu) {
         final MenuItem callSettingsMenuItem = menu.findItem(R.id.menu_call_settings_dialpad);
         final MenuItem addToContactMenuItem = menu.findItem(R.id.menu_add_contacts);
-        final MenuItem twoSecPauseMenuItem = menu.findItem(R.id.menu_2s_pause);
-        final MenuItem waitMenuItem = menu.findItem(R.id.menu_add_wait);
 
         // Check if all the menu items are inflated correctly. As a shortcut, we assume all menu
         // items are ready if the first item is non-null.
@@ -710,54 +711,17 @@ public class DialpadFragment extends Fragment
             callSettingsMenuItem.setIntent(DialtactsActivity.getCallSettingsIntent());
         }
 
-        // We show "add to contacts", "2sec pause", and "add wait" menus only when the user is
-        // seeing usual dialpads and has typed at least one digit.
+        // We show "add to contacts" menu only when the user is
+        // seeing usual dialpad and has typed at least one digit.
         // We never show a menu if the "choose dialpad" UI is up.
         if (dialpadChooserVisible() || isDigitsEmpty()) {
             addToContactMenuItem.setVisible(false);
-            twoSecPauseMenuItem.setVisible(false);
-            waitMenuItem.setVisible(false);
         } else {
             final CharSequence digits = mDigits.getText();
 
             // Put the current digits string into an intent
             addToContactMenuItem.setIntent(getAddToContactIntent(digits));
             addToContactMenuItem.setVisible(true);
-
-            // Check out whether to show Pause & Wait option menu items
-            int selectionStart;
-            int selectionEnd;
-            String strDigits = digits.toString();
-
-            selectionStart = mDigits.getSelectionStart();
-            selectionEnd = mDigits.getSelectionEnd();
-
-            if (selectionStart != -1) {
-                if (selectionStart > selectionEnd) {
-                    // swap it as we want start to be less then end
-                    int tmp = selectionStart;
-                    selectionStart = selectionEnd;
-                    selectionEnd = tmp;
-                }
-
-                if (selectionStart != 0) {
-                    // Pause can be visible if cursor is not in the begining
-                    twoSecPauseMenuItem.setVisible(true);
-
-                    // For Wait to be visible set of condition to meet
-                    waitMenuItem.setVisible(showWait(selectionStart, selectionEnd, strDigits));
-                } else {
-                    // cursor in the beginning both pause and wait to be invisible
-                    twoSecPauseMenuItem.setVisible(false);
-                    waitMenuItem.setVisible(false);
-                }
-            } else {
-                twoSecPauseMenuItem.setVisible(true);
-
-                // cursor is not selected so assume new digit is added to the end
-                int strLength = strDigits.length();
-                waitMenuItem.setVisible(showWait(strLength, strLength, strDigits));
-            }
         }
     }
 
@@ -1528,10 +1492,10 @@ public class DialpadFragment extends Fragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_2s_pause:
-                updateDialString(",");
+                updateDialString(PAUSE);
                 return true;
             case R.id.menu_add_wait:
-                updateDialString(";");
+                updateDialString(WAIT);
                 return true;
             default:
                 return false;
@@ -1547,7 +1511,12 @@ public class DialpadFragment extends Fragment
      * Updates the dial string (mDigits) after inserting a Pause character (,)
      * or Wait character (;).
      */
-    private void updateDialString(String newDigits) {
+    private void updateDialString(char newDigit) {
+        if(newDigit != WAIT && newDigit != PAUSE) {
+            Log.wtf(TAG, "Not expected for anything other than PAUSE & WAIT");
+            return;
+        }
+
         int selectionStart;
         int selectionEnd;
 
@@ -1558,20 +1527,19 @@ public class DialpadFragment extends Fragment
         selectionStart = Math.min(anchor, point);
         selectionEnd = Math.max(anchor, point);
 
+        if (selectionStart == -1) {
+            selectionStart = selectionEnd = mDigits.length();
+        }
+
         Editable digits = mDigits.getText();
-        if (selectionStart != -1) {
-            if (selectionStart == selectionEnd) {
-                // then there is no selection. So insert the pause at this
-                // position and update the mDigits.
-                digits.replace(selectionStart, selectionStart, newDigits);
-            } else {
-                digits.replace(selectionStart, selectionEnd, newDigits);
-                // Unselect: back to a regular cursor, just pass the character inserted.
-                mDigits.setSelection(selectionStart + 1);
+
+        if (canAddDigit(digits, selectionStart, selectionEnd, newDigit)) {
+            digits.replace(selectionStart, selectionEnd, Character.toString(newDigit));
+
+            if (selectionStart != selectionEnd) {
+              // Unselect: back to a regular cursor, just pass the character inserted.
+              mDigits.setSelection(selectionStart + 1);
             }
-        } else {
-            int len = mDigits.length();
-            digits.replace(len, len, newDigits);
         }
     }
 
@@ -1617,28 +1585,38 @@ public class DialpadFragment extends Fragment
     }
 
     /**
-     * This function return true if Wait menu item can be shown
-     * otherwise returns false. Assumes the passed string is non-empty
-     * and the 0th index check is not required.
+     * Returns true of the newDigit parameter can be added at the current selection
+     * point, otherwise returns false.
+     * Only prevents input of WAIT and PAUSE digits at an unsupported position.
+     * Fails early if start == -1 or start is larger than end.
      */
-    private static boolean showWait(int start, int end, String digits) {
-        if (start == end) {
-            // visible false in this case
-            if (start > digits.length()) return false;
-
-            // preceding char is ';', so visible should be false
-            if (digits.charAt(start - 1) == ';') return false;
-
-            // next char is ';', so visible should be false
-            if ((digits.length() > start) && (digits.charAt(start) == ';')) return false;
-        } else {
-            // visible false in this case
-            if (start > digits.length() || end > digits.length()) return false;
-
-            // In this case we need to just check for ';' preceding to start
-            // or next to end
-            if (digits.charAt(start - 1) == ';') return false;
+    @VisibleForTesting
+    /* package */ static boolean canAddDigit(CharSequence digits, int start, int end,
+                                             char newDigit) {
+        if(newDigit != WAIT && newDigit != PAUSE) {
+            Log.wtf(TAG, "Should not be called for anything other than PAUSE & WAIT");
+            return false;
         }
+
+        // False if no selection, or selection is reversed (end < start)
+        if (start == -1 || end < start) {
+            return false;
+        }
+
+        // unsupported selection-out-of-bounds state
+        if (start > digits.length() || end > digits.length()) return false;
+
+        // Special digit cannot be the first digit
+        if (start == 0) return false;
+
+        if (newDigit == WAIT) {
+            // preceding char is ';' (WAIT)
+            if (digits.charAt(start - 1) == WAIT) return false;
+
+            // next char is ';' (WAIT)
+            if ((digits.length() > end) && (digits.charAt(end) == WAIT)) return false;
+        }
+
         return true;
     }
 
