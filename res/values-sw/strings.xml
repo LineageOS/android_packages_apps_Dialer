@@ -50,7 +50,7 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Simu zinazoingia tu"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Simu zinazotoka tu"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Simu zisizojibiwa tu"</string>
-    <string name="voicemail_status_voicemail_not_available" msgid="3021980206152528883">"Haiwezi kuunganisha kwa seva ya ujumbe wa sauti."</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="3021980206152528883">"Imeshindwa kuunganisha kwenye seva ya ujumbe wa sauti."</string>
     <string name="voicemail_status_messages_waiting" msgid="7113421459602803605">"Imeshindwa kuwasiliana na seva ya ujumbe wa sauti. Mawasiliano mapya ya sauti yanasubiri kusikilizwa."</string>
     <string name="voicemail_status_configure_voicemail" msgid="3738537770636895689">"Sanidi ujumbe wako wa sauti."</string>
     <string name="voicemail_status_audio_not_available" msgid="3369618334553341626">"Sauti haipatikani."</string>
