@@ -117,7 +117,7 @@ public class SmartDialCache {
     public static final int CACHE_IN_PROGRESS = 2;
     public static final int CACHE_COMPLETED = 3;
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private SmartDialCache(Context context, int nameDisplayOrder) {
         mNameDisplayOrder = nameDisplayOrder;
