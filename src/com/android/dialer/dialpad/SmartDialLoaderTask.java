@@ -48,7 +48,7 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
         void setSmartDialAdapterEntries(List<SmartDialEntry> list, String query);
     }
 
-    static private final boolean DEBUG = true; // STOPSHIP change to false.
+    static private final boolean DEBUG = false;
 
     private static final int MAX_ENTRIES = 3;
 
