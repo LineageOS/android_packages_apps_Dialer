@@ -79,7 +79,6 @@ import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
-import com.android.dialer.dialpad.SmartDialCache.SmartDialContentObserver;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.util.OrientationUtil;
 import com.android.internal.telephony.ITelephony;
@@ -154,7 +153,6 @@ public class DialpadFragment extends Fragment
      * Will be set only if the view has the smart dialing section.
      */
     private SmartDialAdapter mSmartDialAdapter;
-    private SmartDialContentObserver mSmartDialObserver;
 
     /**
      * Regular expression prohibiting manual phone call. Can be empty, which means "no rule".
@@ -226,6 +224,7 @@ public class DialpadFragment extends Fragment
     private boolean mDigitsFilledByIntent;
 
     private boolean mStartedFromNewIntent = false;
+    private boolean mFirstLaunch = false;
 
     private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
 
@@ -280,7 +279,7 @@ public class DialpadFragment extends Fragment
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
-
+        mFirstLaunch = true;
         mContactsPrefs = new ContactsPreferences(getActivity());
         mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mSmartDialCache = SmartDialCache.getInstance(getActivity(),
@@ -300,10 +299,6 @@ public class DialpadFragment extends Fragment
         if (state != null) {
             mDigitsFilledByIntent = state.getBoolean(PREF_DIGITS_FILLED_BY_INTENT);
         }
-
-        mSmartDialObserver = new SmartDialContentObserver(new Handler(), mSmartDialCache);
-        this.getActivity().getContentResolver().registerContentObserver(
-                SmartDialCache.PhoneQuery.URI, true, mSmartDialObserver);
     }
 
     @Override
@@ -614,6 +609,19 @@ public class DialpadFragment extends Fragment
             showDialpadChooser(false);
         }
 
+        // Don't force recache if this is the first time onResume is being called, since caching
+        // should already happen in setUserVisibleHint.
+        if (!mFirstLaunch) {
+            // This forced recache covers the case where the dialer was previously running, and
+            // was brought back into the foreground. If the dialpad fragment hasn't actually
+            // become visible throughout the entire activity's lifecycle, it is possible that
+            // caching hasn't happened yet. In this case, we can force a recache anyway, since we
+            // are not worried about startup performance anymore.
+            mSmartDialCache.cacheIfNeeded(true);
+        }
+
+        mFirstLaunch = false;
+
         stopWatch.lap("hnt");
 
         updateDialAndDeleteButtonEnabledState();
@@ -621,9 +629,6 @@ public class DialpadFragment extends Fragment
         stopWatch.lap("bes");
 
         stopWatch.stopAndLog(TAG, 50);
-
-        this.getActivity().getContentResolver().registerContentObserver(
-                SmartDialCache.PhoneQuery.URI, true, mSmartDialObserver);
     }
 
     @Override
@@ -651,8 +656,6 @@ public class DialpadFragment extends Fragment
         mLastNumberDialed = EMPTY_NUMBER;  // Since we are going to query again, free stale number.
 
         SpecialCharSequenceMgr.cleanup();
-
-        getActivity().getContentResolver().unregisterContentObserver(mSmartDialObserver);
     }
 
     @Override
@@ -1661,6 +1664,10 @@ public class DialpadFragment extends Fragment
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
+            // This is called if the dialpad fragment is swiped into to view for the very first
+            // time in the activity's lifecycle, or the user starts the dialer for the first time
+            // and the dialpad fragment is displayed immediately, and is what causes the initial
+            // caching process to happen.
             mSmartDialCache.cacheIfNeeded(false);
         }
     }

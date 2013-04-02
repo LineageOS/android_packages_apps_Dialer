@@ -243,8 +243,8 @@ public class SmartDialCache {
 
     /**
      * Cache contacts only if there is a need to (forced cache refresh or no attempt to cache yet).
-     * This method is called in 2 places: whenever the DialpadFragment comes into view, and when the
-     * ContentObserver observes a change in contacts.
+     * This method is called in 2 places: whenever the DialpadFragment comes into view, and in
+     * onResume.
      *
      * @param forceRecache If true, force a cache refresh.
      */
@@ -283,33 +283,5 @@ public class SmartDialCache {
             return Integer.compare(lhs.affinity, rhs.affinity);
         }
 
-    }
-
-    public static class SmartDialContentObserver extends ContentObserver {
-        private final SmartDialCache mCache;
-        // throttle updates in case onChange is called too often due to syncing, etc.
-        private final long mThresholdBetweenUpdates = 5000;
-        private long mLastCalled = 0;
-        private long mLastUpdated = 0;
-        public SmartDialContentObserver(Handler handler, SmartDialCache cache) {
-            super(handler);
-            mCache = cache;
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            mLastCalled = System.currentTimeMillis();
-            if (DEBUG) {
-                Log.d(LOG_TAG, "Contacts change observed");
-            }
-            if (mLastCalled - mLastUpdated > mThresholdBetweenUpdates) {
-                mLastUpdated = mLastCalled;
-                if (DEBUG) {
-                    Log.d(LOG_TAG, "More than 5 seconds since last cache, forcing recache");
-                }
-                mCache.cacheIfNeeded(true);
-            }
-            super.onChange(selfChange);
-        }
     }
 }
