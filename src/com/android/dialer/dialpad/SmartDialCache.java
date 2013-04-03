@@ -26,6 +26,7 @@ import android.os.Handler;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
 import android.util.Log;
 
@@ -104,7 +105,33 @@ public class SmartDialCache {
         public static final int PHONE_LOOKUP_KEY   = 5;
         public static final int PHONE_DISPLAY_NAME = 6;
 
-        public static final String SORT_ORDER = Contacts.LAST_TIME_CONTACTED + " DESC";
+        // Current contacts - those contacted within the last 3 days (in milliseconds)
+        final static long LAST_TIME_USED_CURRENT_MS = 3 * 24 * 60 * 60 * 1000;
+
+        // Recent contacts - those contacted within the last 30 days (in milliseconds)
+        final static long LAST_TIME_USED_RECENT_MS = 30 * 24 * 60 * 60 * 1000;
+
+        final static String TIME_SINCE_LAST_USED_MS =
+                "(? - " + Data.LAST_TIME_USED + ")";
+
+        final static String SORT_BY_DATA_USAGE =
+                "(CASE WHEN " + TIME_SINCE_LAST_USED_MS + " < " + LAST_TIME_USED_CURRENT_MS +
+                " THEN 0 " +
+                " WHEN " + TIME_SINCE_LAST_USED_MS + " < " + LAST_TIME_USED_RECENT_MS +
+                " THEN 1 " +
+                " ELSE 2 END), " +
+                Data.TIMES_USED + " DESC";
+
+        // This sort order is similar to that used by the ContactsProvider when returning a list
+        // of frequently called contacts.
+        public static final String SORT_ORDER =
+                Contacts.STARRED + " DESC, "
+                + Data.IS_SUPER_PRIMARY + " DESC, "
+                + SORT_BY_DATA_USAGE + ", "
+                + Contacts.IN_VISIBLE_GROUP + " DESC, "
+                + Contacts.DISPLAY_NAME + ", "
+                + Data.CONTACT_ID + ", "
+                + Data.IS_PRIMARY + " DESC";
     }
 
     private SmartDialTrie mContactsCache;
@@ -155,10 +182,12 @@ public class SmartDialCache {
                 Log.d(LOG_TAG, "Starting caching thread");
             }
             final StopWatch stopWatch = DEBUG ? StopWatch.start("SmartDial Cache") : null;
+            final String millis = String.valueOf(System.currentTimeMillis());
             final Cursor c = context.getContentResolver().query(PhoneQuery.URI,
                     (mNameDisplayOrder == ContactsContract.Preferences.DISPLAY_ORDER_PRIMARY)
                         ? PhoneQuery.PROJECTION_PRIMARY : PhoneQuery.PROJECTION_ALTERNATIVE,
-                    null, null, PhoneQuery.SORT_ORDER);
+                    null, new String[] {millis, millis},
+                    PhoneQuery.SORT_ORDER);
             if (DEBUG) {
                 stopWatch.lap("SmartDial query complete");
             }
