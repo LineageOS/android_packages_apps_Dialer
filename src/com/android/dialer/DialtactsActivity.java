@@ -680,7 +680,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mSearchFragment.setOnPhoneNumberPickerActionListener(mPhoneNumberPickerActionListener);
             mSearchFragment.setQuickContactEnabled(true);
             mSearchFragment.setDarkTheme(true);
-            mSearchFragment.setPhotoPosition(ContactListItemView.PhotoPosition.LEFT);
+            mSearchFragment.setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(
+                    true /* opposite */));
             mSearchFragment.setUseCallableUri(true);
             if (mContactListFilterController != null
                     && mContactListFilterController.getFilter() != null) {

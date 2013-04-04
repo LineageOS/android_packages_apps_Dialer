@@ -32,10 +32,10 @@
     <ImageButton
         android:id="@+id/search_option"
         android:layout_width="wrap_content"
-        android:paddingLeft="4dip"
-        android:paddingRight="4dip"
+        android:paddingStart="4dip"
+        android:paddingEnd="4dip"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:contentDescription="@string/action_menu_overflow_description"
         android:importantForAccessibility="yes"
         android:src="@drawable/ic_menu_overflow"

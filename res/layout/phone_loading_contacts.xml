@@ -21,7 +21,7 @@
     android:layout_height="match_parent"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal"
-    android:gravity="left|center_vertical">
+    android:gravity="start|center_vertical">
 
     <ProgressBar
         android:indeterminate="true"
@@ -35,6 +35,6 @@
         android:layout_height="wrap_content"
         android:text="@string/contact_list_loading"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginLeft="4dip" />
+        android:layout_marginStart="4dip" />
 
 </LinearLayout>
