@@ -301,8 +301,10 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mAllContactsAdapter.setSectionHeaderDisplayEnabled(true);
         // Disable pinned header. It doesn't work with this fragment.
         mAllContactsAdapter.setPinnedPartitionHeadersEnabled(false);
-        // Put photos on left for consistency with "frequent" contacts section.
-        mAllContactsAdapter.setPhotoPosition(ContactListItemView.PhotoPosition.LEFT);
+        // Put photos on START (LEFT in LTR layout direction and RIGHT in RTL layout direction)
+        // for consistency with "frequent" contacts section.
+        mAllContactsAdapter.setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(
+                true /* opposite */ ));
 
         // Use Callable.CONTENT_URI which will include not only phone numbers but also SIP
         // addresses.
