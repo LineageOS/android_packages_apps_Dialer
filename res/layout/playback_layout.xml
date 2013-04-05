@@ -31,7 +31,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="58dip"
-            android:layout_marginRight="@dimen/call_detail_button_spacing"
+            android:layout_marginEnd="@dimen/call_detail_button_spacing"
             android:background="@drawable/dialpad_background"
             android:layout_weight="1"
         >
@@ -79,12 +79,12 @@
             android:thumb="@drawable/seek_bar_thumb"
             android:thumbOffset="8dip"
             android:progress="0"
-            android:paddingLeft="8dip"
-            android:paddingRight="8dip"
+            android:paddingStart="8dip"
+            android:paddingEnd="8dip"
             android:paddingTop="30dip"
             android:paddingBottom="20dip"
-            android:layout_marginRight="64dip"
-            android:layout_marginLeft="64dip"
+            android:layout_marginEnd="64dip"
+            android:layout_marginStart="64dip"
             android:max="0"
             android:layout_centerVertical="true"
         />
@@ -115,7 +115,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:paddingBottom="19dip"
             android:paddingTop="29dip"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
         />
         <ImageButton
@@ -126,7 +126,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:paddingBottom="19dip"
             android:paddingTop="29dip"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
         />
     </RelativeLayout>

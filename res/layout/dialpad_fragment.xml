@@ -19,8 +19,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/dialpad_horizontal_margin"
-    android:paddingRight="@dimen/dialpad_horizontal_margin">
+    android:paddingStart="@dimen/dialpad_horizontal_margin"
+    android:paddingEnd="@dimen/dialpad_horizontal_margin"
+    android:layoutDirection="ltr" >
 
     <!-- Text field and possibly soft menu button above the keypad where
          the digits are displayed. -->

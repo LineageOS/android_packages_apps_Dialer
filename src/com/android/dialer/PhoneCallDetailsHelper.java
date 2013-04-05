@@ -115,10 +115,14 @@ public class PhoneCallDetailsHelper {
                 numberText = details.geocode;
             }
             labelText = null;
+            // We have a real phone number as "nameView" so make it always LTR
+            views.nameView.setTextDirection(View.TEXT_DIRECTION_LTR);
         } else {
             nameText = details.name;
             numberText = displayNumber;
             labelText = numberFormattedLabel;
+            // We have a real phone number as "numberView" so make it always LTR
+            views.numberView.setTextDirection(View.TEXT_DIRECTION_LTR);
         }
 
         views.nameView.setText(nameText);
