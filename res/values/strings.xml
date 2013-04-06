@@ -511,4 +511,8 @@
     <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
     <string name="add_contact_not_available">Re-enable the People application to use this feature.</string>
 
+    <string name="menu_add_to_blacklist">Add to blacklist</string>
+    <string name="toast_added_to_blacklist">%s added to blacklist.</string>
+
+    <!-- CYANOGENMOD ADDITIONS END -->
 </resources>
