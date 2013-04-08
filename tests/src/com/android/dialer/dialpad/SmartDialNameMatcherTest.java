@@ -80,8 +80,19 @@ public class SmartDialNameMatcherTest extends TestCase {
         checkMatches("William        John   Smith", "5764", true, 15, 16, 22, 25);
     }
 
-    // TODO: Do we want to make these pass anymore?
-    @Suppress
+    public void testMatches_InitialWithSeparator() {
+        // wjs matches (W)illiam (J)ohn (S)mith
+        checkMatches("William John-Smith", "957", true, 0, 1, 8, 9, 13, 14);
+        // wjsmit matches (W)illiam (J)ohn-(OShe)a
+        checkMatches("William John-O'Shea", "956743", true, 0, 1, 8, 9, 13, 18);
+        // wjohn matches (W)illiam-(John) Smith
+        checkMatches("William-John Smith", "95646", true, 0, 1, 8, 12);
+        // jsmi matches William (J)ohn-(Smi)th
+        checkMatches("William John-Smith", "5764", true, 8, 9, 13, 16);
+        // make sure multiple spaces don't mess things up
+        checkMatches("William        John---Smith", "5764", true, 15, 16, 22, 25);
+    }
+
     public void testMatches_repeatedSeparators() {
         // Simple match for single token
         checkMatches("John,,,,,Doe", "5646", true, 0, 4);
@@ -89,6 +100,15 @@ public class SmartDialNameMatcherTest extends TestCase {
         checkMatches("John,,,,,Doe", "56463", true, 0, 10);
         // Match token after chain of separators
         checkMatches("John,,,,,Doe", "363", true, 9, 12);
+    }
+
+    public void testMatches_LatinMix() {
+        // Latin + Chinese characters
+        checkMatches("Lee王力Wang宏", "59264", true, 0, 1, 5, 9);
+        // Latin + Japanese characters
+        checkMatches("千Abcd佳智Efgh佳IJKL", "222333444555", true, 1, 16);
+        // Latin + Arabic characters
+        checkMatches("Peterعبد الرحمنJames", "752637", true, 0, 1, 15, 20);
     }
 
     public void testMatches_umlaut() {

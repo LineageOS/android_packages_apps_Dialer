@@ -66,6 +66,8 @@ public class SmartDialNameMatcher {
      * This gives us a way to map characters containing accents/diacritics to their
      * alphabetic equivalents. The unidecode library can be found at:
      * http://pypi.python.org/pypi/Unidecode/0.04.1
+     *
+     * Also remaps all upper case latin characters to their lower case equivalents.
      */
     public static char remapAccentedChars(char c) {
         switch (c) {
@@ -471,7 +473,12 @@ public class SmartDialNameMatcher {
      * This function iterates through each token in the display name, trying to match the query
      * to the numeric equivalent of the token.
      *
-     * A token is defined as a range in the display name delimited by whitespace. For example,
+     * A token is defined as a range in the display name delimited by characters that have no
+     * latin alphabet equivalents (e.g. spaces - ' ', periods - ',', underscores - '_' or chinese
+     * characters - '王'). Transliteration from non-latin characters to latin character will be
+     * done on a best effort basis - e.g. 'Ü' - 'u'.
+     *
+     * For example,
      * the display name "Phillips Thomas Jr" contains three tokens: "phillips", "thomas", and "jr".
      *
      * A match must begin at the start of a token.
@@ -520,25 +527,19 @@ public class SmartDialNameMatcher {
         int seperatorCount = 0;
 
         ArrayList<SmartDialMatchPosition> partial = new ArrayList<SmartDialMatchPosition>();
-
         // Keep going until we reach the end of displayName
         while (nameStart < nameLength && queryStart < queryLength) {
             char ch = displayName.charAt(nameStart);
             // Strip diacritics from accented characters if any
             ch = remapAccentedChars(ch);
-            if ((ch >= 'A') && (ch <= 'Z')) {
-                // Simply change the ascii code to the lower case version instead of using
-                // toLowerCase for efficiency
-                ch += 32;
-            }
-            if ((ch >= 'a') && (ch <= 'z')) {
+            if (isLowercaseLatin(ch)) {
                 // a starts at index 0
                 if (LATIN_LETTERS_TO_DIGITS[ch - 'a'] != query.charAt(queryStart)) {
                     // we did not find a match
                     queryStart = 0;
                     seperatorCount = 0;
                     while (nameStart < nameLength &&
-                            !Character.isWhitespace(displayName.charAt(nameStart))) {
+                            isLowercaseLatin(remapAccentedChars(displayName.charAt(nameStart)))) {
                         nameStart++;
                     }
                     nameStart++;
@@ -555,12 +556,14 @@ public class SmartDialNameMatcher {
                         // we matched the first character.
                         // branch off and see if we can find another match with the remaining
                         // characters in the query string and the remaining tokens
-                        //find the next space in the query string
-                        int j = nameStart;
-                        while (j < nameLength && displayName.charAt(j) != ' ') {
-                            j++;
+                        // find the next separator in the query string
+                        int j;
+                        for (j = nameStart; j < nameLength; j++) {
+                            if (!isLowercaseLatin(remapAccentedChars(displayName.charAt(j)))) {
+                                break;
+                            }
                         }
-                        // this means there is at least one character left after the space
+                        // this means there is at least one character left after the separator
                         if (j < nameLength - 1) {
                             final String remainder = displayName.substring(j + 1);
                             final ArrayList<SmartDialMatchPosition> partialTemp =
@@ -607,6 +610,13 @@ public class SmartDialNameMatcher {
             return true;
         }
         return false;
+    }
+
+    /*
+     * Returns true if the character is a lowercase latin character(i.e. non-separator).
+     */
+    private boolean isLowercaseLatin(char ch) {
+        return ch >= 'a' && ch <= 'z';
     }
 
     public boolean matches(String displayName) {
