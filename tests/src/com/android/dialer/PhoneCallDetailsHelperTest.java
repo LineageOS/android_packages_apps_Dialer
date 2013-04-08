@@ -110,8 +110,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
 
     public void testSetPhoneCallDetails_Normal() {
         setPhoneCallDetailsWithNumber("14125551212", "1-412-555-1212");
-        assertEquals("yesterday", mViews.callTypeAndDate.getText().toString());
-        assertEqualsHtml("<font color='#33b5e5'><b>yesterday</b></font>",
+        assertEquals("Yesterday", mViews.callTypeAndDate.getText().toString());
+        assertEqualsHtml("<font color='#33b5e5'><b>Yesterday</b></font>",
                 mViews.callTypeAndDate.getText());
     }
 
@@ -139,7 +139,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
 
         setPhoneCallDetailsWithDate(
                 new GregorianCalendar(2011, 5, 2, 13, 0, 0).getTimeInMillis());
-        assertDateEquals("yesterday");
+        assertDateEquals("Yesterday");
 
         setPhoneCallDetailsWithDate(
                 new GregorianCalendar(2011, 5, 1, 13, 0, 0).getTimeInMillis());
@@ -266,7 +266,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
             assertEquals(id, mViews.callTypeIcons.getCallType(index));
         }
         assertEquals(View.VISIBLE, mViews.callTypeIcons.getVisibility());
-        assertEquals("yesterday", mViews.callTypeAndDate.getText().toString());
+        assertEquals("Yesterday", mViews.callTypeAndDate.getText().toString());
     }
 
     /**
@@ -280,7 +280,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
             assertEquals(id, mViews.callTypeIcons.getCallType(index));
         }
         assertEquals(View.VISIBLE, mViews.callTypeIcons.getVisibility());
-        assertEquals(overflowText + " yesterday", mViews.callTypeAndDate.getText().toString());
+        assertEquals(overflowText + " Yesterday", mViews.callTypeAndDate.getText().toString());
     }
 
     /** Sets the phone call details with default values and the given number. */
