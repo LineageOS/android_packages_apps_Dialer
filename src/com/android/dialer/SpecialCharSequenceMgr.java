@@ -19,6 +19,8 @@ package com.android.dialer;
 import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -45,7 +47,7 @@ import com.android.internal.telephony.TelephonyIntents;
  * that are handled specially by the dialer.
  *
  * Note the Phone app also handles these sequences too (in a couple of
- * relativly obscure places in the UI), so there's a separate version of
+ * relatively obscure places in the UI), so there's a separate version of
  * this class under apps/Phone.
  *
  * TODO: there's lots of duplicated code between this class and the
@@ -54,7 +56,9 @@ import com.android.internal.telephony.TelephonyIntents;
  */
 public class SpecialCharSequenceMgr {
     private static final String TAG = "SpecialCharSequenceMgr";
+
     private static final String MMI_IMEI_DISPLAY = "*#06#";
+    private static final String MMI_REGULATORY_INFO_DISPLAY = "*#07#";
 
     /**
      * Remembers the previous {@link QueryHandler} and cancel the operation when needed, to
@@ -65,7 +69,7 @@ public class SpecialCharSequenceMgr {
      * on {@link #cleanup()}.
      *
      * TODO: Remove this and replace it (and {@link #cleanup()}) with better implementation.
-     * One complication is that we have SpecialCharSequencMgr in Phone package too, which has
+     * One complication is that we have SpecialCharSequenceMgr in Phone package too, which has
      * *slightly* different implementation. Note that Phone package doesn't have this problem,
      * so the class on Phone side doesn't have this functionality.
      * Fundamental fix would be to have one shared implementation and resolve this corner case more
@@ -92,6 +96,7 @@ public class SpecialCharSequenceMgr {
         String dialString = PhoneNumberUtils.stripSeparators(input);
 
         if (handleIMEIDisplay(context, dialString, useSystemWindow)
+                || handleRegulatoryInfoDisplay(context, dialString)
                 || handlePinEntry(context, dialString)
                 || handleAdnEntry(context, dialString, textField)
                 || handleSecretCode(context, dialString)) {
@@ -251,6 +256,23 @@ public class SpecialCharSequenceMgr {
         return false;
     }
 
+    private static boolean handleRegulatoryInfoDisplay(Context context, String input) {
+        if (input.equals(MMI_REGULATORY_INFO_DISPLAY)) {
+            Log.d(TAG, "handleRegulatoryInfoDisplay() sending intent to settings app");
+            ComponentName regInfoDisplayActivity = new ComponentName(
+                    "com.android.settings", "com.android.settings.RegulatoryInfoDisplayActivity");
+            Intent showRegInfoIntent = new Intent("android.settings.SHOW_REGULATORY_INFO");
+            showRegInfoIntent.setComponent(regInfoDisplayActivity);
+            try {
+                context.startActivity(showRegInfoIntent);
+            } catch (ActivityNotFoundException e) {
+                Log.e(TAG, "startActivity() failed: " + e);
+            }
+            return true;
+        }
+        return false;
+    }
+
     // TODO: Combine showIMEIPanel() and showMEIDPanel() into a single
     // generic "showDeviceIdPanel()" method, like in the apps/Phone
     // version of SpecialCharSequenceMgr.java.  (This will require moving
@@ -349,7 +371,7 @@ public class SpecialCharSequenceMgr {
     /**
      * Asynchronous query handler that services requests to look up ADNs
      *
-     * Queries originate from {@link handleAdnEntry}.
+     * Queries originate from {@link #handleAdnEntry}.
      */
     private static class QueryHandler extends NoNullCursorAsyncQueryHandler {
 
