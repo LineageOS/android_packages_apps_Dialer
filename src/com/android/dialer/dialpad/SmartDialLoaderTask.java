@@ -93,6 +93,8 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
     private ArrayList<SmartDialEntry> getContactMatches() {
 
         final SmartDialTrie trie = mContactsCache.getContacts();
+        final boolean matchNanp = mContactsCache.getUserInNanpRegion();
+
         if (DEBUG) {
             Log.d(LOG_TAG, "Size of cache: " + trie.size());
         }
@@ -119,12 +121,14 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
             }
             duplicates.add(contactMatch);
             final boolean matches = mNameMatcher.matches(contact.displayName);
+
             candidates.add(new SmartDialEntry(
                     contact.displayName,
                     Contacts.getLookupUri(contact.id, contact.lookupKey),
                     contact.phoneNumber,
                     mNameMatcher.getMatchPositions(),
-                    mNameMatcher.matchesNumber(contact.phoneNumber, mNameMatcher.getQuery())
+                    SmartDialNameMatcher.matchesNumber(contact.phoneNumber,
+                            mNameMatcher.getQuery(), matchNanp)
                     ));
             if (candidates.size() >= MAX_ENTRIES) {
                 break;

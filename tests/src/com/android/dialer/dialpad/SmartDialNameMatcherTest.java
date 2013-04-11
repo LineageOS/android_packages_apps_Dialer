@@ -91,6 +91,8 @@ public class SmartDialNameMatcherTest extends TestCase {
         checkMatches("William John-Smith", "5764", true, 8, 9, 13, 16);
         // make sure multiple spaces don't mess things up
         checkMatches("William        John---Smith", "5764", true, 15, 16, 22, 25);
+
+        checkMatches("Berkeley Hair-Studio", "788346", true, 14, 20);
     }
 
     public void testMatches_repeatedSeparators() {
@@ -114,6 +116,7 @@ public class SmartDialNameMatcherTest extends TestCase {
     public void testMatches_umlaut() {
         checkMatches("ÄÖÜäöü", "268268", true, 0, 6);
     }
+
     // TODO: Great if it was treated as "s" or "ss. Figure out if possible without prefix trie?
     @Suppress
     public void testMatches_germanSharpS() {
@@ -133,6 +136,80 @@ public class SmartDialNameMatcherTest extends TestCase {
     public void testMatches_cyrillic() {
         // http://en.wikipedia.org/wiki/Cyrillic_script
         fail("Cyrillic letters aren't supported yet.");
+    }
+
+
+    public void testMatches_NumberBasic() {
+        // Simple basic examples that start the match from the start of the number
+        checkMatchesNumber("5103337596", "510", true, 0, 3);
+        checkMatchesNumber("5103337596", "511", false, 0, 0);
+        checkMatchesNumber("5103337596", "5103337596", true, 0, 10);
+        checkMatchesNumber("123-456-789", "123456789", true, 0, 11);
+        checkMatchesNumber("123-456-789", "123456788", false, 0, 0);
+        checkMatchesNumber("09999999999", "099", true, 0, 3);
+    }
+
+    public void testMatches_NumberWithCountryCode() {
+        // These matches should ignore the country prefix
+        // USA (+1)
+        checkMatchesNumber("+15103337596", "5103337596", true, 2, 12);
+        checkMatchesNumber("+15103337596", "15103337596", true, 0, 12);
+
+        // Singapore (+65)
+        checkMatchesNumber("+6591776930", "6591", true, 0, 5);
+        checkMatchesNumber("+6591776930", "9177", true, 3, 7);
+        checkMatchesNumber("+6591776930", "5917", false, 3, 7);
+
+        // Hungary (+36)
+        checkMatchesNumber("+3612345678", "361234", true, 0, 7);
+        checkMatchesNumber("+3612345678", "1234", true, 3, 7);
+
+        // Hongkong (+852)
+        checkMatchesNumber("+852 2222 2222", "85222222222", true, 0, 14);
+        checkMatchesNumber("+852 2222 3333", "2222", true, 5, 9);
+
+        // Invalid (+854)
+        checkMatchesNumber("+854 1111 2222", "8541111", true, 0, 9);
+        checkMatchesNumber("+854 1111 2222", "1111", false, 0, 0);
+    }
+
+    public void testMatches_NumberNANP() {
+        // An 11 digit number prefixed with 1 should be matched by the 10 digit number, as well as
+        // the 7 digit number (without area code)
+        checkMatchesNumber("1-510-333-7596", "5103337596", true, true, 2, 14);
+        checkMatchesNumber("1-510-333-7596", "3337596", true, true, 6, 14);
+
+        // Invalid NANP numbers should not be matched
+        checkMatchesNumber("1-510-333-759", "510333759", false, true, 0, 0);
+        checkMatchesNumber("510-333-759", "333759", false, true, 0, 0);
+
+        // match should fail if NANP flag is switched off
+        checkMatchesNumber("1-510-333-7596", "3337596", false, false, 0, 0);
+
+        // A 10 digit number without a 1 prefix should be matched by the 7 digit number
+        checkMatchesNumber("(650) 292 2323", "2922323", true, true, 6, 14);
+        checkMatchesNumber("(650) 292 2323", "6502922323", true, true, 0, 14);
+        // match should fail if NANP flag is switched off
+        checkMatchesNumber("(650) 292 2323", "2922323", false, false, 0, 0);
+        // But this should still match (since it is the full number)
+        checkMatchesNumber("(650) 292 2323", "6502922323", true, false, 0, 14);
+    }
+
+
+    private void checkMatchesNumber(String number, String query, boolean expectedMatches,
+            int matchStart, int matchEnd) {
+        checkMatchesNumber(number, query, expectedMatches, false, matchStart, matchEnd);
+    }
+
+    private void checkMatchesNumber(String number, String query, boolean expectedMatches,
+            boolean matchNanp, int matchStart, int matchEnd) {
+        final SmartDialMatchPosition pos = SmartDialNameMatcher.matchesNumber(number, query,
+                matchNanp);
+        assertEquals(expectedMatches, pos != null);
+        if (expectedMatches) {
+            assertEquals("start", matchStart, pos.start);
+            assertEquals("end", matchEnd, pos.end);
+        }
     }
 
     private void checkMatches(String displayName, String query, boolean expectedMatches,

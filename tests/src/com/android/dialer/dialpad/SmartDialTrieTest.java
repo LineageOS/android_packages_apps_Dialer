@@ -48,11 +48,11 @@ public class SmartDialTrieTest extends TestCase{
         final ContactNumber jasonsmitt = new ContactNumber(1, "Jason Smitt", "0", "1", 2);
         trie.put(jasonsmith);
         trie.put(jasonsmitt);
-        assertEquals(true, trie.getAllWithPrefix("5276676484").contains(jasonsmith));
-        assertEquals(false, trie.getAllWithPrefix("5276676484").contains(jasonsmitt));
+        assertTrue(trie.getAllWithPrefix("5276676484").contains(jasonsmith));
+        assertFalse(trie.getAllWithPrefix("5276676484").contains(jasonsmitt));
 
-        assertEquals(false, trie.getAllWithPrefix("5276676488").contains(jasonsmith));
-        assertEquals(true, trie.getAllWithPrefix("5276676488").contains(jasonsmitt));
+        assertFalse(trie.getAllWithPrefix("5276676488").contains(jasonsmith));
+        assertTrue(trie.getAllWithPrefix("5276676488").contains(jasonsmitt));
 
     }
 
@@ -66,18 +66,18 @@ public class SmartDialTrieTest extends TestCase{
         trie.put(jasonsmitt);
 
         // 6279 corresponds to mary = "Mary Jane" but not "Jason Smitt"
-        assertEquals(true, checkContains(trie, maryjane, "6279"));
-        assertEquals(false, checkContains(trie, jasonsmitt, "6279"));
+        assertTrue(checkContains(trie, maryjane, "6279"));
+        assertFalse(checkContains(trie, jasonsmitt, "6279"));
 
         // 72 corresponds to sa = "Sarah Smith" but not "Jason Smitt" or "Mary Jane"
-        assertEquals(false, checkContains(trie, maryjane, "72"));
-        assertEquals(true, checkContains(trie, sarahsmith, "72"));
-        assertEquals(false, checkContains(trie, jasonsmitt, "72"));
+        assertFalse(checkContains(trie, maryjane, "72"));
+        assertTrue(checkContains(trie, sarahsmith, "72"));
+        assertFalse(checkContains(trie, jasonsmitt, "72"));
 
         // 76 corresponds to sm = "Sarah Smith" and "Jason Smitt" but not "Mary Jane"
-        assertEquals(false, checkContains(trie, maryjane, "76"));
-        assertEquals(true, checkContains(trie, sarahsmith, "76"));
-        assertEquals(true, checkContains(trie, jasonsmitt, "76"));
+        assertFalse(checkContains(trie, maryjane, "76"));
+        assertTrue(checkContains(trie, sarahsmith, "76"));
+        assertTrue(checkContains(trie, jasonsmitt, "76"));
     }
 
     public void testPutForNameTokens() {
@@ -86,11 +86,11 @@ public class SmartDialTrieTest extends TestCase{
         trie.put(jasonfwilliams);
 
         // 527 corresponds to jas = "Jason"
-        assertEquals(true, checkContains(trie, jasonfwilliams, "527"));
+        assertTrue(checkContains(trie, jasonfwilliams, "527"));
         // 945 corresponds to wil = "Wil"
-        assertEquals(true, checkContains(trie, jasonfwilliams, "945"));
+        assertTrue(checkContains(trie, jasonfwilliams, "945"));
         // 66 doesn't match
-        assertEquals(false, checkContains(trie, jasonfwilliams, "66"));
+        assertFalse(checkContains(trie, jasonfwilliams, "66"));
     }
 
     public void testPutForInitialMatches() {
@@ -99,21 +99,21 @@ public class SmartDialTrieTest extends TestCase{
                 new ContactNumber(0, "Martin Jr Harry", "0", "0", 1);
         trie.put(martinjuniorharry);
         // 654 corresponds to mjh = "(M)artin (J)r (H)arry"
-        assertEquals(true, checkContains(trie, martinjuniorharry, "654"));
+        assertTrue(checkContains(trie, martinjuniorharry, "654"));
         // The reverse (456) does not match (for now)
-        assertEquals(false, checkContains(trie, martinjuniorharry, "456"));
+        assertFalse(checkContains(trie, martinjuniorharry, "456"));
         // 6542 corresponds to mjha = "(M)artin (J)r (Ha)rry"
-        assertEquals(true, checkContains(trie, martinjuniorharry, "6542"));
+        assertTrue(checkContains(trie, martinjuniorharry, "6542"));
         // 542 corresponds to jha = "Martin (J)r (Ha)rry"
-        assertEquals(true, checkContains(trie, martinjuniorharry, "542"));
+        assertTrue(checkContains(trie, martinjuniorharry, "542"));
         // 547 doesn't match
-        assertEquals(false, checkContains(trie, martinjuniorharry, "547"));
+        assertFalse(checkContains(trie, martinjuniorharry, "547"));
         // 655 doesn't match
-        assertEquals(false, checkContains(trie, martinjuniorharry, "655"));
+        assertFalse(checkContains(trie, martinjuniorharry, "655"));
         // 653 doesn't match
-        assertEquals(false, checkContains(trie, martinjuniorharry, "653"));
+        assertFalse(checkContains(trie, martinjuniorharry, "653"));
         // 6543 doesn't match
-        assertEquals(false, checkContains(trie, martinjuniorharry, "6543"));
+        assertFalse(checkContains(trie, martinjuniorharry, "6543"));
     }
 
     public void testSeparators() {
@@ -124,9 +124,9 @@ public class SmartDialTrieTest extends TestCase{
         for (int i = 0; i < name.length(); i++) {
             // separators at position 8 and 12
             if (i == 8 || i == 14) {
-                assertEquals(true, bytes[i] == -1);
+                assertTrue(bytes[i] == -1);
             } else {
-                assertEquals(false, bytes[i] == -1);
+                assertFalse(bytes[i] == -1);
             }
         }
     }
@@ -137,8 +137,8 @@ public class SmartDialTrieTest extends TestCase{
         final ContactNumber bronte = new ContactNumber(2, "Brontë", "0", "1", 2);
         trie.put(reenee);
         trie.put(bronte);
-        assertEquals(true, checkContains(trie, reenee, "733633"));
-        assertEquals(true, checkContains(trie, bronte, "276683"));
+        assertTrue(checkContains(trie, reenee, "733633"));
+        assertTrue(checkContains(trie, bronte, "276683"));
     }
 
     public void testPutForNumbers() {
@@ -150,13 +150,109 @@ public class SmartDialTrieTest extends TestCase{
         final ContactNumber contactno3 = new ContactNumber(0, "James", "+13684976334", "0", 1);
         trie.put(contactno3);
         // all phone numbers belonging to the contact should correspond to it
-        assertEquals(true, checkContains(trie, contactno1, "510"));
-        assertEquals(false, checkContains(trie, contactno1, "511"));
-        assertEquals(true, checkContains(trie, contactno2, "77212862357"));
-        assertEquals(false, checkContains(trie, contactno2, "77212862356"));
-        assertEquals(true, checkContains(trie, contactno3, "1368"));
-        assertEquals(false, checkContains(trie, contactno3, "1367"));
+        assertTrue(checkContains(trie, contactno1, "510"));
+        assertFalse(checkContains(trie, contactno1, "511"));
+        assertTrue(checkContains(trie, contactno2, "77212862357"));
+        assertFalse(checkContains(trie, contactno2, "77212862356"));
+        assertTrue(checkContains(trie, contactno3, "1368"));
+        assertFalse(checkContains(trie, contactno3, "1367"));
 
+    }
+
+    public void testPutNumbersCountryCode() {
+        final SmartDialTrie trie = new SmartDialTrie();
+        final ContactNumber contactno1 = new ContactNumber(0, "James", "+13684976334", "0", 1);
+        trie.put(contactno1);
+
+        // all phone numbers belonging to the contact should correspond to it
+        assertTrue(checkContains(trie, contactno1, "1368"));
+        assertTrue(checkContains(trie, contactno1, "368497"));
+        assertFalse(checkContains(trie, contactno1, "2368497"));
+
+        final ContactNumber contactno2 = new ContactNumber(0, "Jason", "+65 9177-6930", "0", 1);
+        trie.put(contactno2);
+
+        assertTrue(checkContains(trie, contactno2, "6591776930"));
+        assertTrue(checkContains(trie, contactno2, "91776930"));
+        assertFalse(checkContains(trie, contactno2, "591776930"));
+
+        final ContactNumber contactno3 = new ContactNumber(0, "Mike", "+85212345678", "0", 1);
+        trie.put(contactno3);
+        assertTrue(checkContains(trie, contactno3, "85212345678"));
+        assertTrue(checkContains(trie, contactno3, "12345678"));
+        assertFalse(checkContains(trie, contactno2, "5212345678"));
+
+        // Invalid country code, don't try to parse it
+        final ContactNumber contactno4 = new ContactNumber(0, "Invalid", "+85112345678", "0", 1);
+        trie.put(contactno4);
+        assertTrue(checkContains(trie, contactno4, "85112345678"));
+        assertFalse(checkContains(trie, contactno4, "12345678"));
+
+        final ContactNumber contactno5 = new ContactNumber(0, "Invalid", "+852", "0", 1);
+        // Shouldn't crash
+        trie.put(contactno5);
+    }
+
+    // Tests special case handling for NANP numbers
+    public void testPutNumbersNANP() {
+
+        final SmartDialTrie trie = new SmartDialTrie(true /* formatNanp */);
+        // Unformatted number with 1 prefix
+        final ContactNumber contactno1 = new ContactNumber(0, "James", "16503337596", "0", 1);
+        trie.put(contactno1);
+
+        assertTrue(checkContains(trie, contactno1, "16503337596"));
+        assertTrue(checkContains(trie, contactno1, "6503337596"));
+        assertTrue(checkContains(trie, contactno1, "3337596"));
+
+        // Number with seperators
+        final ContactNumber contactno2 = new ContactNumber(0, "Michael", "5109921234", "0", 1);
+        trie.put(contactno2);
+        assertTrue(checkContains(trie, contactno2, "5109921234"));
+        assertTrue(checkContains(trie, contactno2, "9921234"));
+
+        // Number with area code only + separators
+        final ContactNumber contactno3 = new ContactNumber(0, "Jason", "(415)-123-4567", "0", 1);
+        trie.put(contactno3);
+        assertTrue(checkContains(trie, contactno3, "4151234567"));
+        assertTrue(checkContains(trie, contactno3, "1234567"));
+
+        // Number without +1 prefix but is a NANP number
+        final ContactNumber contactno4 = new ContactNumber(0, "Mike", "1 510-284-9170", "0", 1);
+        trie.put(contactno4);
+        assertTrue(checkContains(trie, contactno4, "15102849170"));
+        assertTrue(checkContains(trie, contactno4, "5102849170"));
+        assertTrue(checkContains(trie, contactno4, "2849170"));
+
+        // Invalid number(has 1 prefix, but is only 10 characters long)
+        final ContactNumber contactno5 = new ContactNumber(0, "Invalid", "1-415-123-123", "0", 1);
+        trie.put(contactno5);
+        // It should still be inserted as is
+        assertTrue(checkContains(trie, contactno5, "1415123123"));
+        // But the NANP special case handling should not work
+        assertFalse(checkContains(trie, contactno5, "415123123"));
+        assertFalse(checkContains(trie, contactno5, "123123"));
+
+        // Invalid number(only 9 characters long)
+        final ContactNumber contactno6 = new ContactNumber(0, "Invalid2", "415-123-123", "0", 1);
+        trie.put(contactno6);
+        // It should still be inserted as is
+        assertTrue(checkContains(trie, contactno6, "415123123"));
+        // But the NANP special case handling should not work
+        assertFalse(checkContains(trie, contactno6, "123123"));
+
+        // If user's region is determined to be not in North America, then the NANP number
+        // workarounds should not be applied
+        final SmartDialTrie trieNonNANP = new SmartDialTrie();
+
+        trieNonNANP.put(contactno3);
+        assertTrue(checkContains(trieNonNANP, contactno3, "4151234567"));
+        assertFalse(checkContains(trieNonNANP, contactno3, "1234567"));
+
+        trieNonNANP.put(contactno4);
+        assertTrue(checkContains(trieNonNANP, contactno4, "15102849170"));
+        assertFalse(checkContains(trieNonNANP, contactno4, "5102849170"));
+        assertFalse(checkContains(trieNonNANP, contactno4, "2849170"));
     }
 
     public void testNodeConstructor() {
@@ -185,8 +281,8 @@ public class SmartDialTrieTest extends TestCase{
         final ContactNumber contact = new ContactNumber(0, "James", "510-527-2357", "0", 1);
         final ContactNumber contactNotIn = new ContactNumber(2, "Jason Smitt", "0", "2", 3);
         n.add(contact);
-        assertEquals(true, n.getContents().contains(contact));
-        assertEquals(false, n.getContents().contains(contactNotIn));
+        assertTrue(n.getContents().contains(contact));
+        assertFalse(n.getContents().contains(contactNotIn));
     }
 
     private boolean checkContains(SmartDialTrie trie, ContactNumber contact, CharSequence prefix) {

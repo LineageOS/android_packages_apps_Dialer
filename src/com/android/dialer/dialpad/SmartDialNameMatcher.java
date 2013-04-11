@@ -437,20 +437,54 @@ public class SmartDialNameMatcher {
     }
 
     /**
+     * Matches a phone number against a query, taking care of formatting characters and also
+     * taking into account country code prefixes and special NANP number treatment.
+     *
+     * @param phoneNumber - Raw phone number
+     * @param query - Normalized query (only contains numbers from 0-9)
+     * @param matchNanp - Whether or not to do special matching for NANP numbers
+     * @return {@literal null} if the number and the query don't match, a valid
+     *         SmartDialMatchPosition with the matching positions otherwise
+     */
+    public static SmartDialMatchPosition matchesNumber(String phoneNumber, String query,
+            boolean matchNanp) {
+        // Try matching the number as is
+        SmartDialMatchPosition matchPos = matchesNumberWithOffset(phoneNumber, query, 0);
+        if (matchPos == null) {
+            // Try matching the number without the '+' prefix, if any
+            int offset = SmartDialTrie.getOffsetWithoutCountryCode(phoneNumber);
+            if (offset > 0) {
+                matchPos = matchesNumberWithOffset(phoneNumber, query, offset);
+            } else if (matchNanp) {
+                // Try matching NANP numbers
+                final int[] offsets = SmartDialTrie.getOffsetForNANPNumbers(phoneNumber);
+                for (int i = 0; i < offsets.length; i++) {
+                    matchPos = matchesNumberWithOffset(phoneNumber, query, offsets[i]);
+                    if (matchPos != null) break;
+                }
+            }
+        }
+        return matchPos;
+    }
+
+    /**
      * Matches a phone number against a query, taking care of formatting characters
      *
      * @param phoneNumber - Raw phone number
      * @param query - Normalized query (only contains numbers from 0-9)
+     * @param offset - The position in the number to start the match against (used to ignore
+     * leading prefixes/country codes)
      * @return {@literal null} if the number and the query don't match, a valid
      *         SmartDialMatchPosition with the matching positions otherwise
      */
-    public SmartDialMatchPosition matchesNumber(String phoneNumber, String query) {
+    private static SmartDialMatchPosition matchesNumberWithOffset(String phoneNumber, String query,
+            int offset) {
         if (TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(query)) {
             return null;
         }
         int queryAt = 0;
-        int numberAt = 0;
-        for (int i = 0; i < phoneNumber.length(); i++) {
+        int numberAt = offset;
+        for (int i = offset; i < phoneNumber.length(); i++) {
             if (queryAt == query.length()) {
                 break;
             }
@@ -460,13 +494,25 @@ public class SmartDialNameMatcher {
                     return null;
                 }
                 queryAt++;
-                numberAt++;
             } else {
-                numberAt++;
-                continue;
+                if (queryAt == 0) {
+                    // Found a separator before any part of the query was matched, so advance the
+                    // offset to avoid prematurely highlighting separators before the rest of the
+                    // query.
+                    // E.g. don't highlight the first '-' if we're matching 1-510-111-1111 with
+                    // '510'.
+                    // However, if the current offset is 0, just include the beginning separators
+                    // anyway, otherwise the highlighting ends up looking weird.
+                    // E.g. if we're matching (510)-111-1111 with '510', we should include the
+                    // first '('.
+                    if (offset != 0) {
+                        offset++;
+                    }
+                }
             }
+            numberAt++;
         }
-        return new SmartDialMatchPosition(0, numberAt);
+        return new SmartDialMatchPosition(0 + offset, numberAt);
     }
 
     /**
