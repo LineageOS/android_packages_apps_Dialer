@@ -106,6 +106,14 @@ public class SmartDialTrieTest extends TestCase{
         assertTrue(checkContains(trie, martinjuniorharry, "6542"));
         // 542 corresponds to jha = "Martin (J)r (Ha)rry"
         assertTrue(checkContains(trie, martinjuniorharry, "542"));
+        // 642 corresponds to mha = "(M)artin Jr (Ha)rry"
+        assertTrue(checkContains(trie, martinjuniorharry, "642"));
+        // 6542779 (M)artin (J)r (Harry)
+        assertTrue(checkContains(trie, martinjuniorharry, "6542779"));
+        // 65742779 (M)artin (Jr) (Harry)
+        assertTrue(checkContains(trie, martinjuniorharry, "65742779"));
+        // 542779 Martin (J)r (Harry)
+        assertTrue(checkContains(trie, martinjuniorharry, "542779"));
         // 547 doesn't match
         assertFalse(checkContains(trie, martinjuniorharry, "547"));
         // 655 doesn't match
@@ -114,6 +122,39 @@ public class SmartDialTrieTest extends TestCase{
         assertFalse(checkContains(trie, martinjuniorharry, "653"));
         // 6543 doesn't match
         assertFalse(checkContains(trie, martinjuniorharry, "6543"));
+        // 7(2^3 -1) entries for the name, and 1 for the number
+        assertEquals(8, trie.numEntries());
+    }
+
+    public void testPutForInitialMatchesCombinations() {
+        final SmartDialTrie trie = new SmartDialTrie();
+        final ContactNumber alphabet = new ContactNumber(0, "abc def ghi jkl mno pqrs tuv wxyz",
+                "1", "1", 2);
+        trie.put(alphabet);
+        // 255 (2^8 - 1) combinations for the name, and 1 for the number
+        assertEquals(256, trie.numEntries());
+
+        // Test every single combination of the leading initials of each name token by generating
+        // strings consisting of all combinations of the digits 2-9.
+        final StringBuilder sb = new StringBuilder();
+
+        // Create an array of bit positions 0b10000000, 0b01000000, 0b00100000, ...
+        final int[] pos = new int[8];
+        for (int i = 2; i <= 9; i++) {
+            pos[i - 2] = 1 << (9 - i);
+        }
+        for (int i = 1; i < 256; i++) {
+            sb.setLength(0);
+            // If the bit at nth position is set to true, then add the nth initial to the target
+            // string
+            for (int j = 2; j <= 9; j++) {
+                if ((i & pos[j - 2]) > 0) {
+                    sb.append(j);
+                }
+            }
+            assertTrue(checkContains(trie, alphabet, sb.toString()));
+        }
+
     }
 
     public void testSeparators() {
@@ -139,6 +180,19 @@ public class SmartDialTrieTest extends TestCase{
         trie.put(bronte);
         assertTrue(checkContains(trie, reenee, "733633"));
         assertTrue(checkContains(trie, bronte, "276683"));
+    }
+
+    public void testNumbersInName() {
+        final SmartDialTrie trie = new SmartDialTrie();
+        final ContactNumber contact = new ContactNumber(0, "12345678", "0", "0", 1);
+        final ContactNumber teacher = new ContactNumber(1, "1st Grade Teacher", "0", "1", 2);
+        trie.put(contact);
+        trie.put(teacher);
+        assertTrue(checkContains(trie, contact, "12345678"));
+        // (1st Grade) Teacher
+        assertTrue(checkContains(trie, teacher, "17847233"));
+        // (1)st (G)rade (Tea)cher
+        assertTrue(checkContains(trie, teacher, "14832"));
     }
 
     public void testPutForNumbers() {

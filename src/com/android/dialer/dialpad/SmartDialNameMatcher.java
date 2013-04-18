@@ -578,17 +578,42 @@ public class SmartDialNameMatcher {
             char ch = displayName.charAt(nameStart);
             // Strip diacritics from accented characters if any
             ch = remapAccentedChars(ch);
-            if (isLowercaseLatin(ch)) {
-                // a starts at index 0
-                if (LATIN_LETTERS_TO_DIGITS[ch - 'a'] != query.charAt(queryStart)) {
-                    // we did not find a match
-                    queryStart = 0;
-                    seperatorCount = 0;
-                    while (nameStart < nameLength &&
-                            isLowercaseLatin(remapAccentedChars(displayName.charAt(nameStart)))) {
+            if (isLowercaseLatinLetterOrDigit(ch)) {
+                if (ch >= 'a' && ch <= 'z') {
+                    // a starts at index 0. If ch >= '0' && ch <= '9', we don't have to do anything
+                    ch = LATIN_LETTERS_TO_DIGITS[ch - 'a'];
+                }
+                if (ch != query.charAt(queryStart)) {
+                    // Failed to match the current character in the query.
+
+                    // Case 1: Failed to match the first character in the query. Skip to the next
+                    // token since there is no chance of this token matching the query.
+
+                    // Case 2: Previous characters in the query matched, but the current character
+                    // failed to match. This happened in the middle of a token. Skip to the next
+                    // token since there is no chance of this token matching the query.
+
+                    // Case 3: Previous characters in the query matched, but the current character
+                    // failed to match. This happened right at the start of the current token. In
+                    // this case, we should restart the query and try again with the current token.
+                    // Otherwise, we would fail to match a query like "964"(yog) against a name
+                    // Yo-Yoghurt because the query match would fail on the 3rd character, and
+                    // then skip to the end of the "Yoghurt" token.
+
+                    if (queryStart == 0 || isLowercaseLatinLetterOrDigit(remapAccentedChars(
+                            displayName.charAt(nameStart - 1)))) {
+                        // skip to the next token, in the case of 1 or 2.
+                        while (nameStart < nameLength &&
+                                isLowercaseLatinLetterOrDigit(remapAccentedChars(
+                                        displayName.charAt(nameStart)))) {
+                            nameStart++;
+                        }
                         nameStart++;
                     }
-                    nameStart++;
+
+                    // Restart the query and set the correct token position
+                    queryStart = 0;
+                    seperatorCount = 0;
                     tokenStart = nameStart;
                 } else {
                     if (queryStart == queryLength - 1) {
@@ -605,7 +630,8 @@ public class SmartDialNameMatcher {
                         // find the next separator in the query string
                         int j;
                         for (j = nameStart; j < nameLength; j++) {
-                            if (!isLowercaseLatin(remapAccentedChars(displayName.charAt(j)))) {
+                            if (!isLowercaseLatinLetterOrDigit(remapAccentedChars(
+                                    displayName.charAt(j)))) {
                                 break;
                             }
                         }
@@ -659,10 +685,10 @@ public class SmartDialNameMatcher {
     }
 
     /*
-     * Returns true if the character is a lowercase latin character(i.e. non-separator).
+     * Returns true if the character is a lowercase latin character or digit(i.e. non-separator).
      */
-    private boolean isLowercaseLatin(char ch) {
-        return ch >= 'a' && ch <= 'z';
+    private boolean isLowercaseLatinLetterOrDigit(char ch) {
+        return (ch >= 'a' && ch <= 'z') || (ch >= '0' && ch <= '9');
     }
 
     public boolean matches(String displayName) {
