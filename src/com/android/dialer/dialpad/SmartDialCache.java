@@ -19,22 +19,27 @@ package com.android.dialer.dialpad;
 import static com.android.dialer.dialpad.SmartDialAdapter.LOG_TAG;
 
 import android.content.Context;
-import android.database.ContentObserver;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.util.StopWatch;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -134,11 +139,22 @@ public class SmartDialCache {
                 + Data.IS_PRIMARY + " DESC";
     }
 
+    // Static set used to determine which countries use NANP numbers
+    public static Set<String> sNanpCountries = null;
+
     private SmartDialTrie mContactsCache;
     private static AtomicInteger mCacheStatus;
     private final int mNameDisplayOrder;
     private final Context mContext;
     private final static Object mLock = new Object();
+
+    /** The country code of the user's sim card obtained by calling getSimCountryIso*/
+    private static final String PREF_USER_SIM_COUNTRY_CODE =
+            "DialtactsActivity_user_sim_country_code";
+    private static final String PREF_USER_SIM_COUNTRY_CODE_DEFAULT = null;
+
+    private static String sUserSimCountryCode = PREF_USER_SIM_COUNTRY_CODE_DEFAULT;
+    private static boolean sUserInNanpRegion = false;
 
     public static final int CACHE_NEEDS_RECACHE = 1;
     public static final int CACHE_IN_PROGRESS = 2;
@@ -151,6 +167,27 @@ public class SmartDialCache {
         Preconditions.checkNotNull(context, "Context must not be null");
         mContext = context.getApplicationContext();
         mCacheStatus = new AtomicInteger(CACHE_NEEDS_RECACHE);
+
+        final TelephonyManager manager = (TelephonyManager) context.getSystemService(
+                Context.TELEPHONY_SERVICE);
+        if (manager != null) {
+            sUserSimCountryCode = manager.getSimCountryIso();
+        }
+
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        if (sUserSimCountryCode != null) {
+            // Update shared preferences with the latest country obtained from getSimCountryIso
+            prefs.edit().putString(PREF_USER_SIM_COUNTRY_CODE, sUserSimCountryCode).apply();
+        } else {
+            // Couldn't get the country from getSimCountryIso. Maybe we are in airplane mode.
+            // Try to load the settings, if any from SharedPreferences.
+            sUserSimCountryCode = prefs.getString(PREF_USER_SIM_COUNTRY_CODE,
+                    PREF_USER_SIM_COUNTRY_CODE_DEFAULT);
+        }
+
+        sUserInNanpRegion = isCountryNanp(sUserSimCountryCode);
+
     }
 
     private static SmartDialCache instance;
@@ -200,7 +237,7 @@ public class SmartDialCache {
                 return;
             }
             final SmartDialTrie cache = new SmartDialTrie(
-                    SmartDialNameMatcher.LATIN_LETTERS_TO_DIGITS);
+                    SmartDialNameMatcher.LATIN_LETTERS_TO_DIGITS, sUserInNanpRegion);
             try {
                 c.moveToPosition(-1);
                 int affinityCount = 0;
@@ -259,8 +296,7 @@ public class SmartDialCache {
             // the contacts again.
             if (mContactsCache == null) {
                 cacheContacts(mContext);
-                return (mContactsCache == null) ? new SmartDialTrie(
-                        SmartDialNameMatcher.LATIN_LETTERS_TO_DIGITS) : mContactsCache;
+                return (mContactsCache == null) ? new SmartDialTrie() : mContactsCache;
             } else {
                 // After waiting for the lock on mLock to be released, mContactsCache is now
                 // non-null due to the completion of the caching thread (Scenario 2). Go ahead
@@ -312,5 +348,55 @@ public class SmartDialCache {
             return Integer.compare(lhs.affinity, rhs.affinity);
         }
 
+    }
+
+    public boolean getUserInNanpRegion() {
+        return sUserInNanpRegion;
+    }
+
+    /**
+     * Indicates whether the given country uses NANP numbers
+     *
+     * @param country ISO 3166 country code (case doesn't matter)
+     * @return True if country uses NANP numbers (e.g. US, Canada), false otherwise
+     */
+    @VisibleForTesting
+    static boolean isCountryNanp(String country) {
+        if (TextUtils.isEmpty(country)) {
+            return false;
+        }
+        if (sNanpCountries == null) {
+            sNanpCountries = initNanpCountries();
+        }
+        return sNanpCountries.contains(country.toUpperCase());
+    }
+
+    private static Set<String> initNanpCountries() {
+        final HashSet<String> result = new HashSet<String>();
+        result.add("US"); // United States
+        result.add("CA"); // Canada
+        result.add("AS"); // American Samoa
+        result.add("AI"); // Anguilla
+        result.add("AG"); // Antigua and Barbuda
+        result.add("BS"); // Bahamas
+        result.add("BB"); // Barbados
+        result.add("BM"); // Bermuda
+        result.add("VG"); // British Virgin Islands
+        result.add("KY"); // Cayman Islands
+        result.add("DM"); // Dominica
+        result.add("DO"); // Dominican Republic
+        result.add("GD"); // Grenada
+        result.add("GU"); // Guam
+        result.add("JM"); // Jamaica
+        result.add("PR"); // Puerto Rico
+        result.add("MS"); // Montserrat
+        result.add("MP"); // Northern Mariana Islands
+        result.add("KN"); // Saint Kitts and Nevis
+        result.add("LC"); // Saint Lucia
+        result.add("VC"); // Saint Vincent and the Grenadines
+        result.add("TT"); // Trinidad and Tobago
+        result.add("TC"); // Turks and Caicos Islands
+        result.add("VI"); // U.S. Virgin Islands
+        return result;
     }
 }
