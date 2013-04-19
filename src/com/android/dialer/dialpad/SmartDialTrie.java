@@ -119,7 +119,7 @@ public class SmartDialTrie {
         // Preconvert the display name into a byte array containing indexes to avoid having to
         // remap each character over multiple passes
         putForPrefix(contact, mRoot, toByteArray(contact.displayName), 0,
-                contact.displayName.length(), true, true);
+                contact.displayName.length(), true);
         // We don't need to do the same for phone numbers since we only make one pass over them.
         // Strip the calling code from the phone number here
         if (!TextUtils.isEmpty(contact.phoneNumber)) {
@@ -224,6 +224,8 @@ public class SmartDialTrie {
             c = SmartDialNameMatcher.remapAccentedChars(chars.charAt(i));
             if (c >= 'a' && c <= 'z') {
                 result[i] = (byte) (mCharacterMap[c - 'a'] - '0');
+            } else if (c >= '0' && c <= '9') {
+                result[i] = (byte) (c - '0');
             } else {
                 result[i] = -1;
             }
@@ -274,11 +276,9 @@ public class SmartDialTrie {
      * @param end - Last index(not inclusive) of the byte array
      * @param isFullName If true, prefix will be treated as a full name and recursive calls to add
      *        initial matches as well as name token matches into the trie will be made.
-     * @param addInitials If true, recursive calls to add initial matches into the trie will be
-     *        made.
      */
     private void putForPrefix(ContactNumber contact, Node root, byte[] prefix, int start, int end,
-            boolean isFullName, boolean addInitials) {
+            boolean isFullName) {
         Node current = root;
         Node initialNode = root;
         final int length = end;
@@ -291,22 +291,21 @@ public class SmartDialTrie {
                     atSeparator = false;
                     // encountered a new name token, so add this token into the tree starting from
                     // the root node
-                    if (addInitials || isFullName) {
-                        if (initialNode != this.mRoot) {
-                            if (isFullName) {
-                                putForPrefix(contact, this.mRoot, prefix, i, prefix.length, false,
-                                        true);
-                            }
-                            putForPrefix(contact, initialNode,
-                                    prefix, i, prefix.length, false, false);
+                    if (initialNode != this.mRoot) {
+                        if (isFullName) {
+                            putForPrefix(contact, this.mRoot, prefix, i, prefix.length, false);
+                        }
+                        if (initialNode != root) {
+                            putForPrefix(contact, initialNode, prefix, i, prefix.length,
+                                    false);
                         }
                     }
 
-                    // Finding a new name token means we find a new initial character as well.
-                    // Use initialNode to track the current node at which initial characters match.
-                    // E.g. If we are at character m of John W S(m)ith, then the current initial
-                    // node is indexed by the characters JWS.
-                    initialNode = initialNode.getChild(index, true);
+                    // Set initial node to the node indexed by the first character of the current
+                    // prefix
+                    if (initialNode == root) {
+                        initialNode = initialNode.getChild(index, true);
+                    }
                 }
                 current = current.getChild(index, true);
             } else {
@@ -315,6 +314,15 @@ public class SmartDialTrie {
         }
         current.add(contact);
     }
+
+    /* Used only for testing to verify we insert the correct number of entries into the trie */
+    @VisibleForTesting
+    int numEntries() {
+        final ArrayList<ContactNumber> result = Lists.newArrayList();
+        getAll(mRoot, result);
+        return result.size();
+    }
+
 
     @VisibleForTesting
     public int size() {

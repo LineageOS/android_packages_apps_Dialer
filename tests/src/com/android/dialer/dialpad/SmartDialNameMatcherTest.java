@@ -89,10 +89,21 @@ public class SmartDialNameMatcherTest extends TestCase {
         checkMatches("William-John Smith", "95646", true, 0, 1, 8, 12);
         // jsmi matches William (J)ohn-(Smi)th
         checkMatches("William John-Smith", "5764", true, 8, 9, 13, 16);
+        // wsmi matches (W)illiam John (Smi)th
+        checkMatches("William John-Smith", "9764", true, 0, 1, 13, 16);
         // make sure multiple spaces don't mess things up
         checkMatches("William        John---Smith", "5764", true, 15, 16, 22, 25);
-
+        // match tokens that are located directly after a non-space separator (studio)
         checkMatches("Berkeley Hair-Studio", "788346", true, 14, 20);
+        // match tokens with same initials
+        checkMatches("H.Harold", "427653", true, 2, 8);
+        // various matching combinations of tokens with similar initials
+        checkMatches("Yo-Yoghurt Land", "964487", true, 3, 9);
+        checkMatches("Yo-Yoghurt Land", "96448785263", true, 3, 15);
+        checkMatches("Yo-Yoghurt Land", "95263", true, 3, 4, 11, 15);
+        checkMatches("Yo-Yoghurt Land", "995263", true, 0, 1, 3, 4, 11, 15);
+
+        checkMatches("ab zz ef", "23", true, 0, 1, 6, 7);
     }
 
     public void testMatches_repeatedSeparators() {
@@ -116,6 +127,17 @@ public class SmartDialNameMatcherTest extends TestCase {
     public void testMatches_umlaut() {
         checkMatches("ÄÖÜäöü", "268268", true, 0, 6);
     }
+
+    public void testMatches_NumberInName() {
+        // Number used as display name
+        checkMatches("+1-123-456-6789", "1234566789", true, 3, 15);
+        // Mix of numbers and letters
+        checkMatches("3rd Grade Teacher", "373", true, 0, 3);
+        checkMatches("1800 Win A Prize", "1800", true, 0, 4);
+        checkMatches("1800 Win A Prize", "1800946277493", true, 0, 16);
+        checkMatches("1800 Win A Prize", "977493", true, 5, 6, 11, 16);
+    }
+
 
     // TODO: Great if it was treated as "s" or "ss. Figure out if possible without prefix trie?
     @Suppress
