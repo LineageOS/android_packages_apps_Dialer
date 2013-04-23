@@ -104,9 +104,6 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     /** If the activity was triggered from a notification. */
     public static final String EXTRA_FROM_NOTIFICATION = "EXTRA_FROM_NOTIFICATION";
 
-    private static final String INSERT_BLACKLIST = "com.android.phone.INSERT_BLACKLIST";
-    private static final String BLACKLIST_NUMBER = "number";
-
     private CallTypeHelper mCallTypeHelper;
     private PhoneNumberHelper mPhoneNumberHelper;
     private PhoneCallDetailsHelper mPhoneCallDetailsHelper;
@@ -849,13 +846,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     }
 
     public void onMenuAddToBlacklist(MenuItem menuItem) {
-        Intent intent = new Intent(INSERT_BLACKLIST);
-        intent.putExtra(BLACKLIST_NUMBER, mNumber);
-        sendBroadcast(intent);
-
-        // Give the user some feedback
-        String message = getResources().getString(R.string.toast_added_to_blacklist, mNumber);
-        Toast.makeText(CallDetailActivity.this, message, Toast.LENGTH_SHORT).show();
+        mContactInfoHelper.addNumberToBlacklist(mNumber);
     }
 
     private void configureActionBar() {
