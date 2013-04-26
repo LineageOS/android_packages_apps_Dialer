@@ -20,19 +20,19 @@
     <string name="applicationLabel" msgid="8490255569343340580">"撥號"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"電話"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"電話"</string>
-    <string name="recentCallsIconLabel" msgid="1419116422359067949">"通話記錄"</string>
+    <string name="recentCallsIconLabel" msgid="1419116422359067949">"通話紀錄"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"傳送簡訊"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"撥電話給<xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"撥打電話前編輯號碼"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"新增至通訊錄"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"從通話記錄中移除"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"清除通話記錄"</string>
+    <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"從通話紀錄中移除"</string>
+    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"清除通話紀錄"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"刪除語音留言"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"分享語音信箱"</string>
-    <string name="recentCalls_empty" msgid="247053222448663107">"無通話記錄。"</string>
-    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"確定要清除通話記錄？"</string>
-    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"即將刪除您所有的通話記錄。"</string>
-    <string name="clearCallLogProgress_title" msgid="8365943000154295771">"正在清除通話記錄…"</string>
+    <string name="recentCalls_empty" msgid="247053222448663107">"無通話紀錄。"</string>
+    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"確定要清除通話紀錄？"</string>
+    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"即將刪除您所有的通話紀錄。"</string>
+    <string name="clearCallLogProgress_title" msgid="8365943000154295771">"正在清除通話紀錄…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="1746619685488504230">"語音留言"</item>
     <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> 則語音留言"</item>
