@@ -111,10 +111,10 @@ public class SmartDialCache {
         public static final int PHONE_DISPLAY_NAME = 6;
 
         // Current contacts - those contacted within the last 3 days (in milliseconds)
-        final static long LAST_TIME_USED_CURRENT_MS = 3 * 24 * 60 * 60 * 1000;
+        final static long LAST_TIME_USED_CURRENT_MS = 3L * 24 * 60 * 60 * 1000;
 
         // Recent contacts - those contacted within the last 30 days (in milliseconds)
-        final static long LAST_TIME_USED_RECENT_MS = 30 * 24 * 60 * 60 * 1000;
+        final static long LAST_TIME_USED_RECENT_MS = 30L * 24 * 60 * 60 * 1000;
 
         final static String TIME_SINCE_LAST_USED_MS =
                 "(? - " + Data.LAST_TIME_USED + ")";

@@ -19,6 +19,7 @@ package com.android.dialer.dialpad;
 import static com.android.dialer.dialpad.SmartDialCache.ContactNumber;
 
 import com.android.dialer.dialpad.SmartDialTrie.Node;
+import com.android.dialer.dialpad.SmartDialTrie.ParseInfo;
 
 import android.test.suitebuilder.annotation.SmallTest;
 
@@ -129,47 +130,91 @@ public class SmartDialTrieTest extends TestCase{
     public void testPutForInitialMatchesCombinations() {
         final SmartDialTrie trie = new SmartDialTrie();
         final ContactNumber alphabet = new ContactNumber(0, "abc def ghi jkl mno pqrs tuv wxyz",
-                "1", "1", 2);
+                "12345678", "1", 2);
         trie.put(alphabet);
-        // 255 (2^8 - 1) combinations for the name, and 1 for the number
-        assertEquals(256, trie.numEntries());
-
-        // Test every single combination of the leading initials of each name token by generating
-        // strings consisting of all combinations of the digits 2-9.
-        final StringBuilder sb = new StringBuilder();
-
-        // Create an array of bit positions 0b10000000, 0b01000000, 0b00100000, ...
-        final int[] pos = new int[8];
-        for (int i = 2; i <= 9; i++) {
-            pos[i - 2] = 1 << (9 - i);
-        }
-        for (int i = 1; i < 256; i++) {
-            sb.setLength(0);
-            // If the bit at nth position is set to true, then add the nth initial to the target
-            // string
-            for (int j = 2; j <= 9; j++) {
-                if ((i & pos[j - 2]) > 0) {
-                    sb.append(j);
-                }
-            }
-            assertTrue(checkContains(trie, alphabet, sb.toString()));
-        }
-
+        assertEquals(20, trie.numEntries());
+        // 8 name entries (abcdefghi..., defghi..., ...)
+        assertTrue(checkContains(trie, alphabet, "22233344455566677778889999"));
+        assertTrue(checkContains(trie, alphabet, "33344455566677778889999"));
+        assertTrue(checkContains(trie, alphabet, "44455566677778889999"));
+        assertTrue(checkContains(trie, alphabet, "55566677778889999"));
+        assertTrue(checkContains(trie, alphabet, "66677778889999"));
+        assertTrue(checkContains(trie, alphabet, "77778889999"));
+        assertTrue(checkContains(trie, alphabet, "8889999"));
+        assertTrue(checkContains(trie, alphabet, "9999"));
+        // 1 number entry
+        assertTrue(checkContains(trie, alphabet, "12345678"));
+        // 11 initial entries (adtw, adw, adt, ad, atw, at, aw, dt, dw, dtw, tw)
+        // 4c2(6) + 4c3(4) + 4c4(1)
+        assertTrue(checkContains(trie, alphabet, "2389999"));
+        assertTrue(checkContains(trie, alphabet, "239999"));
+        assertTrue(checkContains(trie, alphabet, "23888"));
+        assertTrue(checkContains(trie, alphabet, "2333"));
+        assertTrue(checkContains(trie, alphabet, "289999"));
+        assertTrue(checkContains(trie, alphabet, "2888"));
+        assertTrue(checkContains(trie, alphabet, "29999"));
+        assertTrue(checkContains(trie, alphabet, "3888"));
+        assertTrue(checkContains(trie, alphabet, "39999"));
+        assertTrue(checkContains(trie, alphabet, "389999"));
+        assertTrue(checkContains(trie, alphabet, "89999"));
     }
 
-    public void testSeparators() {
-        SmartDialTrie trie = new SmartDialTrie();
-        String name = "Mcdonald Jamie-Cullum";
-        byte[] bytes = trie.toByteArray(name);
+    public void testCheckLongToken() {
+        final SmartDialTrie trie = new SmartDialTrie();
+        final ContactNumber alphabet = new ContactNumber(0, " aaaa bbbb cccc dddd eeee ffff gggg" +
+                " hhhh iiii jjjj kkkk llll mmmm nnnn oooo pppp qqqq rrrr ssss tttt uuuu vvvv " +
+                " wwww xxxx yyyy zzzz", "1", "1", 2);
+        // Make sure the check to prevent overly long tokens from causing an OOM kicks in
+        trie.put(alphabet);
+        assertTrue(checkContains(trie, alphabet, "2222"));
+        // 26 name entries (aaaabbbbcccc...., bbbbccccdddd...., ccccdddd...)
+        // 1 number entry
+        // 11 initial entries 4c2(6) + 4c3(4) + 4c4(1)
+        assertEquals(38, trie.numEntries());
+
+        final ContactNumber alphabet2 = new ContactNumber(0, "aaaabbbbccccddddeeeeffffgggg" +
+                "hhhhiiiijjjjkkkkllllmmmmnnnnooooppppqqqqrrrrssssttttuuuuvvvvwwwwxxxxyyyyzzzz",
+                "1", "1", 2);
+        trie.put(alphabet2);
+        // added one name, and one number entry
+        assertEquals(40, trie.numEntries());
+    }
+
+    public void testParseInfo() {
+        final SmartDialTrie trie = new SmartDialTrie();
+        final String name = "Mcdonald Jamie-Cullum";
+        final ParseInfo info = trie.parseToIndexes(name, 2, 2);
         // Make sure the dash is correctly converted to a separator character
         for (int i = 0; i < name.length(); i++) {
             // separators at position 8 and 12
             if (i == 8 || i == 14) {
-                assertTrue(bytes[i] == -1);
+                assertTrue(info.indexes[i] == -1);
             } else {
-                assertFalse(bytes[i] == -1);
+                assertFalse(info.indexes[i] == -1);
             }
         }
+        assertEquals(14, info.nthFirstTokenPos);
+        assertEquals(8, info.nthLastTokenPos);
+
+        final String name2 = "aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk";
+        final ParseInfo info2 = trie.parseToIndexes(name2, 2, 2);
+        assertEquals(7, info2.nthFirstTokenPos);
+        assertEquals(35, info2.nthLastTokenPos);
+
+        final String name3 = "this  is- a,test    name";
+        final ParseInfo info3 = trie.parseToIndexes(name3, 3, 3);
+        assertEquals(11, info3.nthFirstTokenPos);
+        assertEquals(8, info3.nthLastTokenPos);
+
+        final String name4 = "M c-Donald James";
+        final ParseInfo info4 = trie.parseToIndexes(name4, 2, 3);
+        assertEquals(3, info4.nthFirstTokenPos);
+        assertEquals(1, info4.nthLastTokenPos);
+
+        final String name5 = "   Aa'Bb    c    dddd  e'e";
+        final ParseInfo info5 = trie.parseToIndexes(name5, 4, 4);
+        assertEquals(21, info5.nthFirstTokenPos);
+        assertEquals(8, info5.nthLastTokenPos);
     }
 
     public void testAccentedCharacters() {
