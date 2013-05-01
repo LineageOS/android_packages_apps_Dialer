@@ -45,12 +45,32 @@ public class SmartDialTrie {
         int nthLastTokenPos;
     }
 
-    private static final int LAST_TOKENS_FOR_INITIALS = 2;
-    private static final int FIRST_TOKENS_FOR_INITIALS = 2;
+    /**
+     * A country code and integer offset pair that represents the parsed country code in a
+     * phone number. The country code is a string containing the numeric country-code prefix in
+     * a phone number (e.g. 1 or 852). The offset is the integer position of where the country code
+     * ends in a phone number.
+     */
+    public static class CountryCodeWithOffset {
+        public static final CountryCodeWithOffset NO_COUNTRY_CODE = new CountryCodeWithOffset(0,
+                "");
+
+        final String countryCode;
+        final int offset;
+
+        public CountryCodeWithOffset(int offset, String countryCode) {
+            this.countryCode = countryCode;
+            this.offset = offset;
+        }
+    }
+
     final Node mRoot = new Node();
     private int mSize = 0;
     private final char[] mCharacterMap;
     private final boolean mFormatNanp;
+
+    private static final int LAST_TOKENS_FOR_INITIALS = 2;
+    private static final int FIRST_TOKENS_FOR_INITIALS = 2;
 
     // Static set of all possible country codes in the world
     public static Set<String> sCountryCodes = null;
@@ -134,12 +154,14 @@ public class SmartDialTrie {
         // Strip the calling code from the phone number here
         if (!TextUtils.isEmpty(contact.phoneNumber)) {
             // Handle country codes for numbers with a + prefix
-            final int offset = getOffsetWithoutCountryCode(contact.phoneNumber);
-            if (offset > 0) {
-                putNumber(contact, contact.phoneNumber, offset);
-            } else if (mFormatNanp) {
+            final CountryCodeWithOffset code = getOffsetWithoutCountryCode(contact.phoneNumber);
+            if (code.offset != 0) {
+                putNumber(contact, contact.phoneNumber, code.offset);
+            }
+            if ((code.countryCode.equals("1") || code.offset == 0) && mFormatNanp) {
                 // Special case handling for NANP numbers (1-xxx-xxx-xxxx)
-                final String stripped = SmartDialNameMatcher.normalizeNumber(contact.phoneNumber);
+                final String stripped = SmartDialNameMatcher.normalizeNumber(
+                        contact.phoneNumber, code.offset);
                 if (!TextUtils.isEmpty(stripped)) {
                     int trunkPrefixOffset = 0;
                     if (stripped.charAt(0) == '1') {
@@ -159,24 +181,25 @@ public class SmartDialTrie {
                     }
                 }
             }
-            putNumber(contact, contact.phoneNumber);
+            putNumber(contact, contact.phoneNumber, 0);
         }
         mSize++;
     }
 
-    public static int getOffsetWithoutCountryCode(String number) {
+    public static CountryCodeWithOffset getOffsetWithoutCountryCode(String number) {
         if (!TextUtils.isEmpty(number)) {
             if (number.charAt(0) == '+') {
                 // check for international code here
                 for (int i = 1; i <= 1 + 3; i++) {
                     if (number.length() <= i) break;
-                    if (isValidCountryCode(number.substring(1, i))) {
-                        return i;
+                    final String countryCode = number.substring(1, i);
+                    if (isValidCountryCode(countryCode)) {
+                        return new CountryCodeWithOffset(i, countryCode);
                     }
                 }
             }
         }
-        return -1;
+        return CountryCodeWithOffset.NO_COUNTRY_CODE;
     }
 
     /**
@@ -271,16 +294,6 @@ public class SmartDialTrie {
         info.nthLastTokenPos = offSets.size() >= lastNTokens ? offSets.get(offSets.size() -
                 lastNTokens) : 0;
         return info;
-    }
-
-    /**
-     * Puts a phone number and its associated contact into the prefix trie.
-     *
-     * @param contact - Contact to add to the trie
-     * @param phoneNumber - Phone number of the contact
-    */
-    private void putNumber(ContactNumber contact, String phoneNumber) {
-        putNumber(contact, phoneNumber, 0);
     }
 
     /**

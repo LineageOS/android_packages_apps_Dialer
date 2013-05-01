@@ -18,6 +18,8 @@ package com.android.dialer.dialpad;
 
 import android.text.TextUtils;
 
+import com.android.dialer.dialpad.SmartDialTrie.CountryCodeWithOffset;
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 
@@ -426,8 +428,19 @@ public class SmartDialNameMatcher {
      * @return Phone number consisting of digits from 0-9
      */
     public static String normalizeNumber(String number) {
+        return normalizeNumber(number, 0);
+    }
+
+    /**
+     * Strips a phone number of unnecessary characters (spaces, dashes, etc.)
+     *
+     * @param number Phone number we want to normalize
+     * @param offset Offset to start from
+     * @return Phone number consisting of digits from 0-9
+     */
+    public static String normalizeNumber(String number, int offset) {
         final StringBuilder s = new StringBuilder();
-        for (int i = 0; i < number.length(); i++) {
+        for (int i = offset; i < number.length(); i++) {
             char ch = number.charAt(i);
             if (ch >= '0' && ch <= '9') {
                 s.append(ch);
@@ -452,10 +465,12 @@ public class SmartDialNameMatcher {
         SmartDialMatchPosition matchPos = matchesNumberWithOffset(phoneNumber, query, 0);
         if (matchPos == null) {
             // Try matching the number without the '+' prefix, if any
-            int offset = SmartDialTrie.getOffsetWithoutCountryCode(phoneNumber);
-            if (offset > 0) {
-                matchPos = matchesNumberWithOffset(phoneNumber, query, offset);
-            } else if (matchNanp) {
+            final CountryCodeWithOffset code = SmartDialTrie.getOffsetWithoutCountryCode(
+                    phoneNumber);
+            if (code != null) {
+                matchPos = matchesNumberWithOffset(phoneNumber, query, code.offset);
+            }
+            if (matchPos == null && matchNanp) {
                 // Try matching NANP numbers
                 final int[] offsets = SmartDialTrie.getOffsetForNANPNumbers(phoneNumber);
                 for (int i = 0; i < offsets.length; i++) {

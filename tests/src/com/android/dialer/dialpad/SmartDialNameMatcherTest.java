@@ -201,6 +201,17 @@ public class SmartDialNameMatcherTest extends TestCase {
         checkMatchesNumber("1-510-333-7596", "5103337596", true, true, 2, 14);
         checkMatchesNumber("1-510-333-7596", "3337596", true, true, 6, 14);
 
+        // An 11 digit number prefixed with +1 should be matched by the 10 digit number, as well as
+        // the 7 digit number (without area code)
+        checkMatchesNumber("+1-510-333-7596", "5103337596", true, true, 3, 15);
+        checkMatchesNumber("+1-510-333-7596", "3337596", true, true, 7, 15);
+        checkMatchesNumber("+1-510-333-7596", "103337596", false, true, 0, 0);
+        checkMatchesNumber("+1-510-333-7596", "337596", false, true, 0, 0);
+        checkMatchesNumber("+1510 3337596", "5103337596", true, true, 2, 13);
+        checkMatchesNumber("+1510 3337596", "3337596", true, true, 6, 13);
+        checkMatchesNumber("+1510 3337596", "103337596", false, true, 0, 0);
+        checkMatchesNumber("+1510 3337596", "37596", false, true, 0, 0);
+
         // Invalid NANP numbers should not be matched
         checkMatchesNumber("1-510-333-759", "510333759", false, true, 0, 0);
         checkMatchesNumber("510-333-759", "333759", false, true, 0, 0);

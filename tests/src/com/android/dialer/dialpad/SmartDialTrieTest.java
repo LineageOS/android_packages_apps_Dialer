@@ -294,7 +294,6 @@ public class SmartDialTrieTest extends TestCase{
 
     // Tests special case handling for NANP numbers
     public void testPutNumbersNANP() {
-
         final SmartDialTrie trie = new SmartDialTrie(true /* formatNanp */);
         // Unformatted number with 1 prefix
         final ContactNumber contactno1 = new ContactNumber(0, "James", "16503337596", "0", 1);
@@ -339,6 +338,29 @@ public class SmartDialTrieTest extends TestCase{
         assertTrue(checkContains(trie, contactno6, "415123123"));
         // But the NANP special case handling should not work
         assertFalse(checkContains(trie, contactno6, "123123"));
+
+        // Number with +1 prefix and is a NANP number
+        final ContactNumber contactno7 = new ContactNumber(0, "Mike", "+1-510-284-9170", "0", 1);
+        trie.put(contactno7);
+        assertTrue(checkContains(trie, contactno7, "15102849170"));
+        assertTrue(checkContains(trie, contactno7, "5102849170"));
+        assertTrue(checkContains(trie, contactno7, "2849170"));
+        assertFalse(checkContains(trie, contactno7, "849170"));
+        assertFalse(checkContains(trie, contactno7, "10849170"));
+
+        // Number with +1 prefix but is an invalid NANP number
+        final ContactNumber contactno8 = new ContactNumber(0, "Invalid", "+1-510-284-917", "0", 1);
+        trie.put(contactno8);
+        assertTrue(checkContains(trie, contactno8, "1510284917"));
+        assertTrue(checkContains(trie, contactno8, "510284917"));
+        assertFalse(checkContains(trie, contactno8, "2849170"));
+
+        // Number with invalid country code prefix
+        final ContactNumber contactno9 = new ContactNumber(0, "Inv", "+857-510-284-9170", "0", 1);
+        trie.put(contactno9);
+        assertTrue(checkContains(trie, contactno9, "8575102849170"));
+        assertFalse(checkContains(trie, contactno9, "5102849170"));
+        assertFalse(checkContains(trie, contactno9, "2849170"));
 
         // If user's region is determined to be not in North America, then the NANP number
         // workarounds should not be applied
