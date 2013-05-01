@@ -38,6 +38,15 @@ import java.util.Set;
  * that uses NANP numbers.</p>
  */
 public class SmartDialTrie {
+    @VisibleForTesting
+    static class ParseInfo {
+        byte[] indexes;
+        int nthFirstTokenPos;
+        int nthLastTokenPos;
+    }
+
+    private static final int LAST_TOKENS_FOR_INITIALS = 2;
+    private static final int FIRST_TOKENS_FOR_INITIALS = 2;
     final Node mRoot = new Node();
     private int mSize = 0;
     private final char[] mCharacterMap;
@@ -118,8 +127,9 @@ public class SmartDialTrie {
     public void put(ContactNumber contact) {
         // Preconvert the display name into a byte array containing indexes to avoid having to
         // remap each character over multiple passes
-        putForPrefix(contact, mRoot, toByteArray(contact.displayName), 0,
-                contact.displayName.length(), true);
+        final ParseInfo info = parseToIndexes(contact.displayName, FIRST_TOKENS_FOR_INITIALS,
+                LAST_TOKENS_FOR_INITIALS);
+        putForPrefix(contact, mRoot, info, 0, true);
         // We don't need to do the same for phone numbers since we only make one pass over them.
         // Strip the calling code from the phone number here
         if (!TextUtils.isEmpty(contact.phoneNumber)) {
@@ -215,22 +225,52 @@ public class SmartDialTrie {
         return new int[0];
     }
 
+    /**
+     * Converts the given characters into a byte array of index and returns it together with offset
+     * information in a {@link ParseInfo} data structure.
+     * @param chars Characters to convert into indexes
+     * @param firstNTokens The first n tokens we want the offset for
+     * @param lastNTokens The last n tokens we want the offset for
+     */
     @VisibleForTesting
-    /* package */ byte[] toByteArray(CharSequence chars) {
+    ParseInfo parseToIndexes(CharSequence chars, int firstNTokens, int lastNTokens) {
         final int length = chars.length();
         final byte[] result = new byte[length];
+        final ArrayList<Integer> offSets = new ArrayList<Integer>();
         char c;
+        int tokenCount = 0;
+        boolean atSeparator = true;
         for (int i = 0; i < length; i++) {
             c = SmartDialNameMatcher.remapAccentedChars(chars.charAt(i));
-            if (c >= 'a' && c <= 'z') {
-                result[i] = (byte) (mCharacterMap[c - 'a'] - '0');
-            } else if (c >= '0' && c <= '9') {
-                result[i] = (byte) (c - '0');
+            if (c >= 'a' && c <= 'z' || c >= '0' && c <= '9') {
+                if (atSeparator) {
+                    tokenCount++;
+                }
+                atSeparator = false;
+                if (c <= '9') {
+                    // 0-9
+                    result[i] = (byte) (c - '0');
+                } else {
+                    // a-z
+                    result[i] = (byte) (mCharacterMap[c - 'a'] - '0');
+                }
             } else {
+                // Found the last character of the current token
+                if (!atSeparator) {
+                    offSets.add(i);
+                }
                 result[i] = -1;
+                atSeparator = true;
             }
         }
-        return result;
+
+        final ParseInfo info = new ParseInfo();
+        info.indexes = result;
+        info.nthFirstTokenPos = offSets.size() >= firstNTokens ? offSets.get(firstNTokens - 1) :
+                length - 1;
+        info.nthLastTokenPos = offSets.size() >= lastNTokens ? offSets.get(offSets.size() -
+                lastNTokens) : 0;
+        return info;
     }
 
     /**
@@ -248,7 +288,7 @@ public class SmartDialTrie {
      *
      * @param contact - Contact to add to the trie
      * @param phoneNumber - Phone number of the contact
-     * @param offset - The nth character of the phone number to start from
+     * @param offSet - The nth character of the phone number to start from
      */
     private void putNumber(ContactNumber contact, String phoneNumber, int offSet) {
         Preconditions.checkArgument(offSet < phoneNumber.length());
@@ -268,24 +308,29 @@ public class SmartDialTrie {
      * Place an contact into the trie using at the provided node using the provided prefix. Uses as
      * the input prefix a byte array instead of a CharSequence, as we will be traversing the array
      * multiple times and it is more efficient to pre-convert the prefix into indexes before hand.
+     * Adds initial matches for the first token, and the last N tokens in the name.
      *
      * @param contact Contact to put
      * @param root Root node to use as the starting point
-     * @param prefix Sequence of bytes which represent the index at
+     * @param parseInfo ParseInfo data structure containing the converted byte array, as well as
+     *        token offsets that determine which tokens should have entries added for initial
+     *        search
      * @param start - Starting index of the byte array
-     * @param end - Last index(not inclusive) of the byte array
-     * @param isFullName If true, prefix will be treated as a full name and recursive calls to add
-     *        initial matches as well as name token matches into the trie will be made.
+     * @param isFullName If true, prefix will be treated as a full name and everytime a new name
+     *        token is encountered, the rest of the name segment is added into the trie.
      */
-    private void putForPrefix(ContactNumber contact, Node root, byte[] prefix, int start, int end,
+    private void putForPrefix(ContactNumber contact, Node root, ParseInfo info, int start,
             boolean isFullName) {
+        final boolean addInitialMatches = (start >= info.nthLastTokenPos ||
+                start <= info.nthFirstTokenPos);
+        final byte[] indexes = info.indexes;
         Node current = root;
         Node initialNode = root;
-        final int length = end;
+        final int length = indexes.length;
         boolean atSeparator = true;
         byte index;
         for (int i = start; i < length; i++) {
-            index = prefix[i];
+            index = indexes[i];
             if (index > -1) {
                 if (atSeparator) {
                     atSeparator = false;
@@ -293,14 +338,14 @@ public class SmartDialTrie {
                     // the root node
                     if (initialNode != this.mRoot) {
                         if (isFullName) {
-                            putForPrefix(contact, this.mRoot, prefix, i, prefix.length, false);
+                            putForPrefix(contact, this.mRoot, info, i, false);
                         }
-                        if (initialNode != root) {
-                            putForPrefix(contact, initialNode, prefix, i, prefix.length,
-                                    false);
+                        if (addInitialMatches &&
+                                (i >= info.nthLastTokenPos || i <= info.nthFirstTokenPos) &&
+                                initialNode != root) {
+                            putForPrefix(contact, initialNode, info, i, false);
                         }
                     }
-
                     // Set initial node to the node indexed by the first character of the current
                     // prefix
                     if (initialNode == root) {
