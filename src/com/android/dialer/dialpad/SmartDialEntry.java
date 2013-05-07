@@ -29,6 +29,9 @@ public class SmartDialEntry {
     public final ArrayList<SmartDialMatchPosition> matchPositions;
     public final SmartDialMatchPosition phoneNumberMatchPosition;
 
+    public static final SmartDialEntry NULL = new SmartDialEntry("", Uri.EMPTY, "",
+            new ArrayList<SmartDialMatchPosition>(), null);
+
     public SmartDialEntry(CharSequence displayName, Uri contactUri, CharSequence phoneNumber,
             ArrayList<SmartDialMatchPosition> matchPositions,
             SmartDialMatchPosition phoneNumberMatchPosition) {

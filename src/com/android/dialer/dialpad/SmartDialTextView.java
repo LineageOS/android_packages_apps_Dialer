@@ -17,14 +17,8 @@
 package com.android.dialer.dialpad;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Paint.Align;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -34,7 +28,6 @@ public class SmartDialTextView extends TextView {
 
     private final float mPadding;
     private final float mExtraPadding;
-    private static final String HIGH_CONFIDENCE_HINT = "\u2026";
 
     public SmartDialTextView(Context context) {
         this(context, null);
@@ -44,33 +37,6 @@ public class SmartDialTextView extends TextView {
         super(context, attrs);
         mPadding = getResources().getDimension(R.dimen.smartdial_suggestions_padding);
         mExtraPadding = getResources().getDimension(R.dimen.smartdial_suggestions_extra_padding);
-    }
-
-    /**
-     * Returns a drawable that resembles a sideways overflow icon. Used to indicate the presence
-     * of a high confidence match.
-     *
-     * @param res Resources that we will use to create our BitmapDrawable with
-     * @param textSize Size of drawable to create
-     * @param color Color of drawable to create
-     * @return The drawable drawn according to the given parameters
-     */
-    public static Drawable getHighConfidenceHintDrawable(final Resources res, final float textSize,
-            final int color) {
-        final Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setTextAlign(Align.CENTER);
-        paint.setTextSize(textSize);
-        paint.setColor(color);
-        final Rect bounds = new Rect();
-        paint.getTextBounds(HIGH_CONFIDENCE_HINT, 0, HIGH_CONFIDENCE_HINT.length(), bounds);
-        final int width = bounds.width();
-        final int height = bounds.height();
-        final Bitmap buffer = Bitmap.createBitmap(
-                width, (height * 3 / 2), Bitmap.Config.ARGB_8888);
-        final Canvas canvas = new Canvas(buffer);
-        canvas.drawText(HIGH_CONFIDENCE_HINT, width / 2, height, paint);
-        return new BitmapDrawable(res, buffer);
     }
 
     @Override
@@ -94,8 +60,17 @@ public class SmartDialTextView extends TextView {
         float width = w - 2 * mPadding - 2 * mExtraPadding;
 
         float ratio = width / paint.measureText(getText().toString());
+        TextUtils.TruncateAt ellipsizeAt = null;
         if (ratio < 1.0f) {
-            setTextScaleX(ratio);
+            if (ratio < 0.8f) {
+                // If the text is too big to fit even after scaling to 80%, just ellipsize it
+                // instead.
+                ellipsizeAt = TextUtils.TruncateAt.END;
+                setTextScaleX(0.8f);
+            } else {
+                setTextScaleX(ratio);
+            }
         }
+        setEllipsize(ellipsizeAt);
     }
 }
