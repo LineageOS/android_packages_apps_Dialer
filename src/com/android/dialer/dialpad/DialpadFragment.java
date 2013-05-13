@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -154,6 +155,13 @@ public class DialpadFragment extends Fragment
      */
     private SmartDialAdapter mSmartDialAdapter;
 
+    private SmartDialCache mSmartDialCache;
+    /**
+     * Master switch controlling whether or not smart dialing is enabled, and whether the
+     * smart dialing suggestion strip is visible.
+     */
+    private boolean mSmartDialEnabled = false;
+
     /**
      * Regular expression prohibiting manual phone call. Can be empty, which means "no rule".
      */
@@ -172,7 +180,6 @@ public class DialpadFragment extends Fragment
     // Vibration (haptic feedback) for dialer key presses.
     private final HapticFeedback mHaptic = new HapticFeedback();
 
-    private SmartDialCache mSmartDialCache;
     /** Identifier for the "Add Call" intent extra. */
     private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
@@ -282,8 +289,6 @@ public class DialpadFragment extends Fragment
         mFirstLaunch = true;
         mContactsPrefs = new ContactsPreferences(getActivity());
         mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mSmartDialCache = SmartDialCache.getInstance(getActivity(),
-                mContactsPrefs.getDisplayOrder());
         try {
             mHaptic.init(getActivity(),
                          getResources().getBoolean(R.bool.config_enable_dialer_key_vibration));
@@ -370,7 +375,6 @@ public class DialpadFragment extends Fragment
             mSmartDialList.setOnItemClickListener(new OnSmartDialItemClick());
             mSmartDialList.setOnItemLongClickListener(new OnSmartDialLongClick());
         }
-
         return fragmentView;
     }
 
@@ -543,9 +547,15 @@ public class DialpadFragment extends Fragment
 
         stopWatch.lap("qloc");
 
+        final ContentResolver contentResolver = getActivity().getContentResolver();
+
         // retrieve the DTMF tone play back setting.
-        mDTMFToneEnabled = Settings.System.getInt(getActivity().getContentResolver(),
+        mDTMFToneEnabled = Settings.System.getInt(contentResolver,
                 Settings.System.DTMF_TONE_WHEN_DIALING, 1) == 1;
+
+        // retrieve dialpad autocomplete setting
+        mSmartDialEnabled = Settings.Secure.getInt(contentResolver,
+                Settings.Secure.DIALPAD_AUTOCOMPLETE, 1) == 1;
 
         stopWatch.lap("dtwd");
 
@@ -611,15 +621,24 @@ public class DialpadFragment extends Fragment
             showDialpadChooser(false);
         }
 
-        // Don't force recache if this is the first time onResume is being called, since caching
-        // should already happen in setUserVisibleHint.
-        if (!mFirstLaunch) {
-            // This forced recache covers the case where the dialer was previously running, and
-            // was brought back into the foreground. If the dialpad fragment hasn't actually
-            // become visible throughout the entire activity's lifecycle, it is possible that
-            // caching hasn't happened yet. In this case, we can force a recache anyway, since we
-            // are not worried about startup performance anymore.
-            mSmartDialCache.cacheIfNeeded(true);
+        // Handle smart dialing related state
+        if (mSmartDialEnabled) {
+            mSmartDialList.setVisibility(View.VISIBLE);
+            mSmartDialCache = SmartDialCache.getInstance(getActivity(),
+                    mContactsPrefs.getDisplayOrder());
+            // Don't force recache if this is the first time onResume is being called, since
+            // caching should already happen in setUserVisibleHint.
+            if (!mFirstLaunch) {
+                // This forced recache covers the case where the dialer was previously running, and
+                // was brought back into the foreground. If the dialpad fragment hasn't actually
+                // become visible throughout the entire activity's lifecycle, it is possible that
+                // caching hasn't happened yet. In this case, we can force a recache anyway, since
+                // we are not worried about startup performance anymore.
+                mSmartDialCache.cacheIfNeeded(true);
+            }
+        } else {
+            mSmartDialList.setVisibility(View.GONE);
+            mSmartDialCache = null;
         }
 
         mFirstLaunch = false;
@@ -1665,7 +1684,7 @@ public class DialpadFragment extends Fragment
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
+        if (mSmartDialEnabled && isVisibleToUser) {
             // This is called if the dialpad fragment is swiped into to view for the very first
             // time in the activity's lifecycle, or the user starts the dialer for the first time
             // and the dialpad fragment is displayed immediately, and is what causes the initial
@@ -1677,7 +1696,7 @@ public class DialpadFragment extends Fragment
     private String mLastDigitsForSmartDial;
 
     private void loadSmartDialEntries() {
-        if (mSmartDialAdapter == null) {
+        if (!mSmartDialEnabled || mSmartDialAdapter == null) {
             // No smart dial views.  Landscape?
             return;
         }
