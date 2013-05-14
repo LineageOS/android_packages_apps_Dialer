@@ -555,7 +555,7 @@ public class DialpadFragment extends Fragment
 
         // retrieve dialpad autocomplete setting
         mSmartDialEnabled = Settings.Secure.getInt(contentResolver,
-                Settings.Secure.DIALPAD_AUTOCOMPLETE, 1) == 1;
+                Settings.Secure.DIALPAD_AUTOCOMPLETE, 0) == 1;
 
         stopWatch.lap("dtwd");
 
@@ -579,6 +579,10 @@ public class DialpadFragment extends Fragment
         stopWatch.lap("tg");
         // Prevent unnecessary confusion. Reset the press count anyway.
         mDialpadPressCount = 0;
+
+        // Initialize smart dialing state. This has to be done before anything is filled in before
+        // the dialpad edittext to prevent entries from being loaded from a null cache.
+        initializeSmartDialingState();
 
         Activity parent = getActivity();
         if (parent instanceof DialtactsActivity) {
@@ -619,26 +623,6 @@ public class DialpadFragment extends Fragment
             // Also, a sanity-check: the "dialpad chooser" UI should NEVER
             // be visible if the phone is idle!
             showDialpadChooser(false);
-        }
-
-        // Handle smart dialing related state
-        if (mSmartDialEnabled) {
-            mSmartDialList.setVisibility(View.VISIBLE);
-            mSmartDialCache = SmartDialCache.getInstance(getActivity(),
-                    mContactsPrefs.getDisplayOrder());
-            // Don't force recache if this is the first time onResume is being called, since
-            // caching should already happen in setUserVisibleHint.
-            if (!mFirstLaunch) {
-                // This forced recache covers the case where the dialer was previously running, and
-                // was brought back into the foreground. If the dialpad fragment hasn't actually
-                // become visible throughout the entire activity's lifecycle, it is possible that
-                // caching hasn't happened yet. In this case, we can force a recache anyway, since
-                // we are not worried about startup performance anymore.
-                mSmartDialCache.cacheIfNeeded(true);
-            }
-        } else {
-            mSmartDialList.setVisibility(View.GONE);
-            mSmartDialCache = null;
         }
 
         mFirstLaunch = false;
@@ -1701,6 +1685,11 @@ public class DialpadFragment extends Fragment
             return;
         }
 
+        if (mSmartDialCache == null) {
+            Log.e(TAG, "Trying to load smart dialing entries from a null cache");
+            return;
+        }
+
         // Update only when the digits have changed.
         final String digits = SmartDialNameMatcher.normalizeNumber(mDigits.getText().toString());
         if (TextUtils.equals(digits, mLastDigitsForSmartDial)) {
@@ -1722,6 +1711,28 @@ public class DialpadFragment extends Fragment
             return;
         }
         mSmartDialAdapter.setEntries(data);
+    }
+
+    private void initializeSmartDialingState() {
+        // Handle smart dialing related state
+        if (mSmartDialEnabled) {
+            mSmartDialList.setVisibility(View.VISIBLE);
+            mSmartDialCache = SmartDialCache.getInstance(getActivity(),
+                    mContactsPrefs.getDisplayOrder());
+            // Don't force recache if this is the first time onResume is being called, since
+            // caching should already happen in setUserVisibleHint.
+            if (!mFirstLaunch) {
+                // This forced recache covers the case where the dialer was previously running, and
+                // was brought back into the foreground. If the dialpad fragment hasn't actually
+                // become visible throughout the entire activity's lifecycle, it is possible that
+                // caching hasn't happened yet. In this case, we can force a recache anyway, since
+                // we are not worried about startup performance anymore.
+                mSmartDialCache.cacheIfNeeded(true);
+            }
+        } else {
+            mSmartDialList.setVisibility(View.GONE);
+            mSmartDialCache = null;
+        }
     }
 
     private class OnSmartDialLongClick implements AdapterView.OnItemLongClickListener {
