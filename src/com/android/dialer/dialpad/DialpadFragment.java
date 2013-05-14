@@ -67,8 +67,10 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
@@ -147,13 +149,12 @@ public class DialpadFragment extends Fragment
     private DialpadChooserAdapter mDialpadChooserAdapter;
 
     /** Will be set only if the view has the smart dialing section. */
-    private AbsListView mSmartDialList;
+    private RelativeLayout mSmartDialContainer;
 
     /**
-     * Adapter for {@link #mSmartDialList}.
      * Will be set only if the view has the smart dialing section.
      */
-    private SmartDialAdapter mSmartDialAdapter;
+    private SmartDialController mSmartDialAdapter;
 
     private SmartDialCache mSmartDialCache;
     /**
@@ -368,12 +369,12 @@ public class DialpadFragment extends Fragment
         mDialpadChooser.setOnItemClickListener(this);
 
         // Smart dial
-        mSmartDialList = (AbsListView) fragmentView.findViewById(R.id.dialpad_smartdial_list);
-        if (mSmartDialList != null) {
-            mSmartDialAdapter = new SmartDialAdapter(getActivity());
-            mSmartDialList.setAdapter(mSmartDialAdapter);
-            mSmartDialList.setOnItemClickListener(new OnSmartDialItemClick());
-            mSmartDialList.setOnItemLongClickListener(new OnSmartDialLongClick());
+        mSmartDialContainer = (RelativeLayout) fragmentView.findViewById(
+                R.id.dialpad_smartdial_container);
+
+        if (mSmartDialContainer != null) {
+            mSmartDialAdapter = new SmartDialController(getActivity(), mSmartDialContainer,
+                    new OnSmartDialShortClick(), new OnSmartDialLongClick());
         }
         return fragmentView;
     }
@@ -1697,7 +1698,7 @@ public class DialpadFragment extends Fragment
         }
         mLastDigitsForSmartDial = digits;
 
-        if (digits.length() < 2) {
+        if (digits.length() < 1) {
             mSmartDialAdapter.clear();
         } else {
             final SmartDialLoaderTask task = new SmartDialLoaderTask(this, digits, mSmartDialCache);
@@ -1716,7 +1717,7 @@ public class DialpadFragment extends Fragment
     private void initializeSmartDialingState() {
         // Handle smart dialing related state
         if (mSmartDialEnabled) {
-            mSmartDialList.setVisibility(View.VISIBLE);
+            mSmartDialContainer.setVisibility(View.VISIBLE);
             mSmartDialCache = SmartDialCache.getInstance(getActivity(),
                     mContactsPrefs.getDisplayOrder());
             // Don't force recache if this is the first time onResume is being called, since
@@ -1730,14 +1731,14 @@ public class DialpadFragment extends Fragment
                 mSmartDialCache.cacheIfNeeded(true);
             }
         } else {
-            mSmartDialList.setVisibility(View.GONE);
+            mSmartDialContainer.setVisibility(View.GONE);
             mSmartDialCache = null;
         }
     }
 
-    private class OnSmartDialLongClick implements AdapterView.OnItemLongClickListener {
+    private class OnSmartDialLongClick implements View.OnLongClickListener {
         @Override
-        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        public boolean onLongClick(View view) {
             final SmartDialEntry entry = (SmartDialEntry) view.getTag();
             if (entry == null) return false; // just in case.
             mClearDigitsOnStop = true;
@@ -1749,9 +1750,9 @@ public class DialpadFragment extends Fragment
         }
     }
 
-    private class OnSmartDialItemClick implements AdapterView.OnItemClickListener {
+    private class OnSmartDialShortClick implements View.OnClickListener {
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        public void onClick(View view) {
             final SmartDialEntry entry = (SmartDialEntry) view.getTag();
             if (entry == null) return; // just in case.
             // Dial the displayed phone number immediately

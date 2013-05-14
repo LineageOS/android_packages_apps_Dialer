@@ -16,7 +16,7 @@
 
 package com.android.dialer.dialpad;
 
-import static com.android.dialer.dialpad.SmartDialAdapter.LOG_TAG;
+import static com.android.dialer.dialpad.SmartDialController.LOG_TAG;
 
 import android.content.Context;
 import android.content.SharedPreferences;
