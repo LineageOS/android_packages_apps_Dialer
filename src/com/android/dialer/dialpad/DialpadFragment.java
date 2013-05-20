@@ -401,6 +401,12 @@ public class DialpadFragment extends Fragment
      * @return true when {@link #mDigits} is actually filled by the Intent.
      */
     private boolean fillDigitsIfNecessary(Intent intent) {
+        // Only fills digits from an intent if it is a new intent.
+        // Otherwise falls back to the previously used number.
+        if (!mFirstLaunch && !mStartedFromNewIntent) {
+            return false;
+        }
+
         final String action = intent.getAction();
         if (Intent.ACTION_DIAL.equals(action) || Intent.ACTION_VIEW.equals(action)) {
             Uri uri = intent.getData();
@@ -439,7 +445,6 @@ public class DialpadFragment extends Fragment
                 }
             }
         }
-
         return false;
     }
 
@@ -463,7 +468,17 @@ public class DialpadFragment extends Fragment
      * Checks the given Intent and changes dialpad's UI state. For example, if the Intent requires
      * the screen to enter "Add Call" mode, this method will show correct UI for the mode.
      */
-    private void configureScreenFromIntent(Intent intent) {
+    private void configureScreenFromIntent(Activity parent) {
+        // If we were not invoked with a DIAL intent,
+        if (!(parent instanceof DialtactsActivity)) {
+            setStartedFromNewIntent(false);
+            return;
+        }
+
+        // See if we were invoked with a DIAL intent. If we were, fill in the appropriate
+        // digits in the dialer field.
+        Intent intent = parent.getIntent();
+
         if (!isLayoutReady()) {
             // This happens typically when parent's Activity#onNewIntent() is called while
             // Fragment#onCreateView() isn't called yet, and thus we cannot configure Views at
@@ -499,8 +514,8 @@ public class DialpadFragment extends Fragment
 
             }
         }
-
         showDialpadChooser(needToShowDialpadChooser);
+        setStartedFromNewIntent(false);
     }
 
     public void setStartedFromNewIntent(boolean value) {
@@ -537,13 +552,6 @@ public class DialpadFragment extends Fragment
         // Long-pressing zero button will enter '+' instead.
         fragmentView.findViewById(R.id.zero).setOnLongClickListener(this);
 
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        configureScreenFromIntent(getActivity().getIntent());
-        setStartedFromNewIntent(false);
     }
 
     @Override
@@ -595,12 +603,7 @@ public class DialpadFragment extends Fragment
         // the dialpad edittext to prevent entries from being loaded from a null cache.
         initializeSmartDialingState();
 
-        Activity parent = getActivity();
-        if (parent instanceof DialtactsActivity) {
-            // See if we were invoked with a DIAL intent. If we were, fill in the appropriate
-            // digits in the dialer field.
-            fillDigitsIfNecessary(parent.getIntent());
-        }
+        configureScreenFromIntent(getActivity());
 
         stopWatch.lap("fdin");
 
