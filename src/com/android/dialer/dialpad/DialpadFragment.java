@@ -1669,11 +1669,13 @@ public class DialpadFragment extends Fragment
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (mSmartDialEnabled && isVisibleToUser) {
-            // This is called if the dialpad fragment is swiped into to view for the very first
-            // time in the activity's lifecycle, or the user starts the dialer for the first time
-            // and the dialpad fragment is displayed immediately, and is what causes the initial
-            // caching process to happen.
+        if (mSmartDialEnabled && isVisibleToUser && mSmartDialCache != null) {
+            // This is called every time the dialpad fragment comes into view. The first
+            // time the dialer is launched, mSmartDialEnabled is always false as it has not been
+            // read from settings(in onResume) yet at the point where setUserVisibleHint is called
+            // for the first time, so the caching on first launch will happen in onResume instead.
+            // This covers only the case where the dialer is launched in the call log or
+            // contacts tab, and then the user swipes to the dialpad.
             mSmartDialCache.cacheIfNeeded(false);
         }
     }
@@ -1722,12 +1724,13 @@ public class DialpadFragment extends Fragment
                     mContactsPrefs.getDisplayOrder());
             // Don't force recache if this is the first time onResume is being called, since
             // caching should already happen in setUserVisibleHint.
-            if (!mFirstLaunch) {
-                // This forced recache covers the case where the dialer was previously running, and
-                // was brought back into the foreground. If the dialpad fragment hasn't actually
-                // become visible throughout the entire activity's lifecycle, it is possible that
-                // caching hasn't happened yet. In this case, we can force a recache anyway, since
-                // we are not worried about startup performance anymore.
+            if (!mFirstLaunch || getUserVisibleHint()) {
+                // This forced recache covers the cases where the dialer was running before and
+                // was brought back into the foreground, or the dialer was launched for the first
+                // time and displays the dialpad fragment immediately. If the dialpad fragment
+                // hasn't actually become visible throughout the entire activity's lifecycle, it
+                // is possible that caching hasn't happened yet. In this case, we can force a
+                // recache anyway, since we are not worried about startup performance anymore.
                 mSmartDialCache.cacheIfNeeded(true);
             }
         } else {
