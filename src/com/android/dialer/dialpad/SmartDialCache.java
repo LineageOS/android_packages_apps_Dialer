@@ -144,6 +144,7 @@ public class SmartDialCache {
 
     private SmartDialTrie mContactsCache;
     private static AtomicInteger mCacheStatus;
+    private final SmartDialMap mMap;
     private final int mNameDisplayOrder;
     private final Context mContext;
     private final static Object mLock = new Object();
@@ -162,8 +163,9 @@ public class SmartDialCache {
 
     private static final boolean DEBUG = false;
 
-    private SmartDialCache(Context context, int nameDisplayOrder) {
+    private SmartDialCache(Context context, int nameDisplayOrder, SmartDialMap map) {
         mNameDisplayOrder = nameDisplayOrder;
+        mMap = map;
         Preconditions.checkNotNull(context, "Context must not be null");
         mContext = context.getApplicationContext();
         mCacheStatus = new AtomicInteger(CACHE_NEEDS_RECACHE);
@@ -201,9 +203,10 @@ public class SmartDialCache {
      *        {@link android.provider.ContactsContract.Preferences#DISPLAY_ORDER}.
      * @return An instance of SmartDialCache
      */
-    public static synchronized SmartDialCache getInstance(Context context, int nameDisplayOrder) {
+    public static synchronized SmartDialCache getInstance(Context context, int nameDisplayOrder,
+            SmartDialMap map) {
         if (instance == null) {
-            instance = new SmartDialCache(context, nameDisplayOrder);
+            instance = new SmartDialCache(context, nameDisplayOrder, map);
         }
         return instance;
     }
@@ -236,8 +239,7 @@ public class SmartDialCache {
                 mCacheStatus.getAndSet(CACHE_NEEDS_RECACHE);
                 return;
             }
-            final SmartDialTrie cache = new SmartDialTrie(
-                    SmartDialNameMatcher.LATIN_LETTERS_TO_DIGITS, sUserInNanpRegion);
+            final SmartDialTrie cache = new SmartDialTrie(mMap, sUserInNanpRegion);
             try {
                 c.moveToPosition(-1);
                 int affinityCount = 0;
@@ -348,6 +350,10 @@ public class SmartDialCache {
             return Integer.compare(lhs.affinity, rhs.affinity);
         }
 
+    }
+
+    public SmartDialMap getMap() {
+        return mMap;
     }
 
     public boolean getUserInNanpRegion() {

@@ -157,6 +157,12 @@ public class DialpadFragment extends Fragment
     private SmartDialController mSmartDialAdapter;
 
     private SmartDialCache mSmartDialCache;
+
+    /**
+     * Use latin character map by default
+     */
+    private SmartDialMap mSmartDialMap = new LatinSmartDialMap();
+
     /**
      * Master switch controlling whether or not smart dialing is enabled, and whether the
      * smart dialing suggestion strip is visible.
@@ -1694,7 +1700,8 @@ public class DialpadFragment extends Fragment
         }
 
         // Update only when the digits have changed.
-        final String digits = SmartDialNameMatcher.normalizeNumber(mDigits.getText().toString());
+        final String digits = SmartDialNameMatcher.normalizeNumber(mDigits.getText().toString(),
+                mSmartDialMap);
         if (TextUtils.equals(digits, mLastDigitsForSmartDial)) {
             return;
         }
@@ -1721,7 +1728,7 @@ public class DialpadFragment extends Fragment
         if (mSmartDialEnabled) {
             mSmartDialContainer.setVisibility(View.VISIBLE);
             mSmartDialCache = SmartDialCache.getInstance(getActivity(),
-                    mContactsPrefs.getDisplayOrder());
+                    mContactsPrefs.getDisplayOrder(), mSmartDialMap);
             // Don't force recache if this is the first time onResume is being called, since
             // caching should already happen in setUserVisibleHint.
             if (!mFirstLaunch || getUserVisibleHint()) {

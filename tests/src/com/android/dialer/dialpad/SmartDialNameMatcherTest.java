@@ -236,7 +236,8 @@ public class SmartDialNameMatcherTest extends TestCase {
 
     private void checkMatchesNumber(String number, String query, boolean expectedMatches,
             boolean matchNanp, int matchStart, int matchEnd) {
-        final SmartDialMatchPosition pos = SmartDialNameMatcher.matchesNumber(number, query,
+        final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query);
+        final SmartDialMatchPosition pos = matcher.matchesNumber(number, query,
                 matchNanp);
         assertEquals(expectedMatches, pos != null);
         if (expectedMatches) {

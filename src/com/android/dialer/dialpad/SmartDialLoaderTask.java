@@ -68,8 +68,9 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
     public SmartDialLoaderTask(SmartDialLoaderCallback callback, String query,
             SmartDialCache cache) {
         this.mCallback = callback;
-        this.mNameMatcher = new SmartDialNameMatcher(PhoneNumberUtils.normalizeNumber(query));
         this.mContactsCache = cache;
+        this.mNameMatcher = new SmartDialNameMatcher(PhoneNumberUtils.normalizeNumber(query),
+                cache.getMap());
         this.mQuery = query;
     }
 
@@ -127,7 +128,7 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
                     Contacts.getLookupUri(contact.id, contact.lookupKey),
                     contact.phoneNumber,
                     mNameMatcher.getMatchPositions(),
-                    SmartDialNameMatcher.matchesNumber(contact.phoneNumber,
+                    mNameMatcher.matchesNumber(contact.phoneNumber,
                             mNameMatcher.getQuery(), matchNanp)
                     ));
             if (candidates.size() >= MAX_ENTRIES) {

@@ -66,7 +66,7 @@ public class SmartDialTrie {
 
     final Node mRoot = new Node();
     private int mSize = 0;
-    private final char[] mCharacterMap;
+    private final SmartDialMap mMap;
     private final boolean mFormatNanp;
 
     private static final int LAST_TOKENS_FOR_INITIALS = 2;
@@ -77,7 +77,7 @@ public class SmartDialTrie {
 
     public SmartDialTrie() {
         // Use the latin letter to digit map by default if none provided
-        this(SmartDialNameMatcher.LATIN_LETTERS_TO_DIGITS, false);
+        this(new LatinSmartDialMap(), false);
     }
 
     /**
@@ -88,7 +88,7 @@ public class SmartDialTrie {
      */
     @VisibleForTesting
     public SmartDialTrie(boolean formatNanp) {
-        this(SmartDialNameMatcher.LATIN_LETTERS_TO_DIGITS, formatNanp);
+        this(new LatinSmartDialMap(), formatNanp);
     }
 
     /**
@@ -98,8 +98,8 @@ public class SmartDialTrie {
      * @param formatNanp True if inserted numbers are to be treated as NANP numbers
      * such that numbers are automatically broken up by country prefix and area code.
      */
-    public SmartDialTrie(char[] charMap, boolean formatNanp) {
-        mCharacterMap = charMap;
+    public SmartDialTrie(SmartDialMap map, boolean formatNanp) {
+        mMap = map;
         mFormatNanp = formatNanp;
     }
 
@@ -161,7 +161,7 @@ public class SmartDialTrie {
             if ((code.countryCode.equals("1") || code.offset == 0) && mFormatNanp) {
                 // Special case handling for NANP numbers (1-xxx-xxx-xxxx)
                 final String stripped = SmartDialNameMatcher.normalizeNumber(
-                        contact.phoneNumber, code.offset);
+                        contact.phoneNumber, code.offset, mMap);
                 if (!TextUtils.isEmpty(stripped)) {
                     int trunkPrefixOffset = 0;
                     if (stripped.charAt(0) == '1') {
@@ -211,14 +211,14 @@ public class SmartDialTrie {
      * and an array containing integer offsets for the number (starting after the '1' prefix,
      * and the area code prefix respectively.
      */
-    public static int[] getOffsetForNANPNumbers(String number) {
+    public static int[] getOffsetForNANPNumbers(String number, SmartDialMap map) {
         int validDigits = 0;
         boolean hasPrefix = false;
         int firstOffset = 0; // Tracks the location of the first digit after the '1' prefix
         int secondOffset = 0; // Tracks the location of the first digit after the area code
         for (int i = 0; i < number.length(); i++) {
             final char ch = number.charAt(i);
-            if (ch >= '0' && ch <= '9') {
+            if (map.isValidDialpadNumericChar(ch)) {
                 if (validDigits == 0) {
                     // Check the first digit to see if it is 1
                     if (ch == '1') {
@@ -264,19 +264,13 @@ public class SmartDialTrie {
         int tokenCount = 0;
         boolean atSeparator = true;
         for (int i = 0; i < length; i++) {
-            c = SmartDialNameMatcher.remapAccentedChars(chars.charAt(i));
-            if (c >= 'a' && c <= 'z' || c >= '0' && c <= '9') {
+            c = mMap.normalizeCharacter(chars.charAt(i));
+            if (mMap.isValidDialpadCharacter(c)) {
                 if (atSeparator) {
                     tokenCount++;
                 }
                 atSeparator = false;
-                if (c <= '9') {
-                    // 0-9
-                    result[i] = (byte) (c - '0');
-                } else {
-                    // a-z
-                    result[i] = (byte) (mCharacterMap[c - 'a'] - '0');
-                }
+                result[i] = mMap.getDialpadIndex(c);
             } else {
                 // Found the last character of the current token
                 if (!atSeparator) {
@@ -310,7 +304,7 @@ public class SmartDialTrie {
         char ch;
         for (int i = offSet; i < length; i++) {
             ch = phoneNumber.charAt(i);
-            if (ch >= '0' && ch <= '9') {
+            if (mMap.isValidDialpadNumericChar(ch)) {
                 current = current.getChild(ch, true);
             }
         }
