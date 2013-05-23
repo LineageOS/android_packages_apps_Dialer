@@ -21,6 +21,7 @@ import android.app.ActionBar.LayoutParams;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.Activity;
+import android.app.backup.BackupManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -107,6 +108,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private static final int TAB_INDEX_COUNT = 3;
 
     private SharedPreferences mPrefs;
+
+    public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
 
     /** Last manually selected tab index */
     private static final String PREF_LAST_MANUALLY_SELECTED_TAB =
@@ -526,7 +529,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         getActionBar().setDisplayShowHomeEnabled(false);
 
         // Load the last manually loaded tab
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mPrefs = this.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
         mLastManuallySelectedFragment = mPrefs.getInt(PREF_LAST_MANUALLY_SELECTED_TAB,
                 PREF_LAST_MANUALLY_SELECTED_TAB_DEFAULT);
         if (mLastManuallySelectedFragment >= TAB_INDEX_COUNT) {
@@ -711,6 +714,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mPrefs.edit().putInt(PREF_LAST_MANUALLY_SELECTED_TAB, mLastManuallySelectedFragment)
                 .apply();
+        requestBackup();
+    }
+
+    private void requestBackup() {
+        final BackupManager bm = new BackupManager(this);
+        bm.dataChanged();
     }
 
     private void fixIntent(Intent intent) {
