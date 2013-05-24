@@ -49,7 +49,11 @@
         android:label="@string/applicationLabel"
         android:icon="@mipmap/ic_launcher_phone"
         android:hardwareAccelerated="true"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:backupAgent='com.android.dialer.DialerBackupAgent'>
+
+        <meta-data android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAIBXgtCEKQ6W0PXVnW-ZVia2KmlV2AxsTw3GjAeQ" />
 
         <!-- The entrance point for Phone UI.
              stateAlwaysHidden is set to suppress keyboard show up on
