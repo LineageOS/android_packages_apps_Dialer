@@ -252,6 +252,10 @@ public class DialpadFragment extends Fragment
         return intent;
     }
 
+    private TelephonyManager getTelephonyManager() {
+        return (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+    }
+
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         mWasEmptyBeforeTextChange = TextUtils.isEmpty(s);
@@ -603,9 +607,7 @@ public class DialpadFragment extends Fragment
         // While we're in the foreground, listen for phone state changes,
         // purely so that we can take down the "dialpad chooser" if the
         // phone becomes idle while the chooser UI is visible.
-        TelephonyManager telephonyManager =
-                (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-        telephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+        getTelephonyManager().listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
         stopWatch.lap("tm");
 
@@ -648,9 +650,7 @@ public class DialpadFragment extends Fragment
         super.onPause();
 
         // Stop listening for phone state changes.
-        TelephonyManager telephonyManager =
-                (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-        telephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+        getTelephonyManager().listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
 
         // Make sure we don't leave this activity with a tone still playing.
         stopTone();
@@ -1458,45 +1458,22 @@ public class DialpadFragment extends Fragment
      * @return true if the phone is "in use", meaning that at least one line
      *              is active (ie. off hook or ringing or dialing).
      */
-    public static boolean phoneIsInUse() {
-        boolean phoneInUse = false;
-        try {
-            ITelephony phone = ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
-            if (phone != null) phoneInUse = !phone.isIdle();
-        } catch (RemoteException e) {
-            Log.w(TAG, "phone.isIdle() failed", e);
-        }
-        return phoneInUse;
+    public boolean phoneIsInUse() {
+        return getTelephonyManager().getCallState() != TelephonyManager.CALL_STATE_IDLE;
     }
 
     /**
      * @return true if the phone is a CDMA phone type
      */
     private boolean phoneIsCdma() {
-        boolean isCdma = false;
-        try {
-            ITelephony phone = ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
-            if (phone != null) {
-                isCdma = (phone.getActivePhoneType() == TelephonyManager.PHONE_TYPE_CDMA);
-            }
-        } catch (RemoteException e) {
-            Log.w(TAG, "phone.getActivePhoneType() failed", e);
-        }
-        return isCdma;
+        return getTelephonyManager().getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA;
     }
 
     /**
      * @return true if the phone state is OFFHOOK
      */
     private boolean phoneIsOffhook() {
-        boolean phoneOffhook = false;
-        try {
-            ITelephony phone = ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
-            if (phone != null) phoneOffhook = phone.isOffhook();
-        } catch (RemoteException e) {
-            Log.w(TAG, "phone.isOffhook() failed", e);
-        }
-        return phoneOffhook;
+        return getTelephonyManager().getCallState() == TelephonyManager.CALL_STATE_OFFHOOK;
     }
 
     /**
@@ -1591,7 +1568,7 @@ public class DialpadFragment extends Fragment
      */
     private boolean isVoicemailAvailable() {
         try {
-            return (TelephonyManager.getDefault().getVoiceMailNumber() != null);
+            return getTelephonyManager().getVoiceMailNumber() != null;
         } catch (SecurityException se) {
             // Possibly no READ_PHONE_STATE privilege.
             Log.w(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");

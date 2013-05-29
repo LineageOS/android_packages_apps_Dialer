@@ -331,7 +331,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             }
 
             // During the call, we don't remember the tab position.
-            if (!DialpadFragment.phoneIsInUse()) {
+            if (mDialpadFragment == null || !mDialpadFragment.phoneIsInUse()) {
                 // Remember this tab index. This function is also called, if the tab is set
                 // automatically in which case the setter (setCurrentTab) has to set this to its old
                 // value afterwards
@@ -803,7 +803,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final int savedTabIndex = mLastManuallySelectedFragment;
 
         final int tabIndex;
-        if (DialpadFragment.phoneIsInUse() || isDialIntent(intent)) {
+        if ((mDialpadFragment != null && mDialpadFragment.phoneIsInUse())
+                || isDialIntent(intent)) {
             tabIndex = TAB_INDEX_DIALER;
         } else if (recentCallsRequest) {
             tabIndex = TAB_INDEX_CALL_LOG;
@@ -1122,7 +1123,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final Tab tab = actionBar.getSelectedTab();
 
         // User can search during the call, but we don't want to remember the status.
-        if (tab != null && !DialpadFragment.phoneIsInUse()) {
+        if (tab != null && (mDialpadFragment == null ||
+                        !mDialpadFragment.phoneIsInUse())) {
             mLastManuallySelectedFragment = tab.getPosition();
         }
 
