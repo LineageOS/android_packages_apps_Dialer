@@ -40,7 +40,6 @@ import android.widget.FrameLayout;
 import com.android.contacts.common.test.FragmentTestActivity;
 import com.android.dialer.CallDetailActivity;
 import com.android.dialer.R;
-import com.android.internal.telephony.CallerInfo;
 
 import java.util.Date;
 import java.util.Formatter;
@@ -165,9 +164,9 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testCallAndGroupViews_GroupView() {
         mCursor.moveToFirst();
-        insert(CallerInfo.PRIVATE_NUMBER, NOW, 0, Calls.INCOMING_TYPE);
-        insert(CallerInfo.PRIVATE_NUMBER, NOW, 0, Calls.INCOMING_TYPE);
-        insert(CallerInfo.PRIVATE_NUMBER, NOW, 0, Calls.INCOMING_TYPE);
+        insertPrivate(NOW, 0);
+        insertPrivate(NOW, 0);
+        insertPrivate(NOW, 0);
         View view = mAdapter.newGroupView(getActivity(), mParentView);
         mAdapter.bindGroupView(view, getActivity(), mCursor, 3, false);
         assertNotNull(view.findViewById(R.id.secondary_action_icon));
@@ -176,7 +175,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testCallAndGroupViews_StandAloneView() {
         mCursor.moveToFirst();
-        insert(CallerInfo.PRIVATE_NUMBER, NOW, 0, Calls.INCOMING_TYPE);
+        insertPrivate(NOW, 0);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
         assertNotNull(view.findViewById(R.id.secondary_action_icon));
@@ -185,7 +184,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testCallAndGroupViews_ChildView() {
         mCursor.moveToFirst();
-        insert(CallerInfo.PRIVATE_NUMBER, NOW, 0, Calls.INCOMING_TYPE);
+        insertPrivate(NOW, 0);
         View view = mAdapter.newChildView(getActivity(), mParentView);
         mAdapter.bindChildView(view, getActivity(), mCursor);
         assertNotNull(view.findViewById(R.id.secondary_action_icon));
@@ -194,7 +193,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testBindView_NumberOnlyNoCache() {
         mCursor.moveToFirst();
-        insert(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE);
+        insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
 
@@ -205,7 +204,8 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testBindView_NumberOnlyDbCachedFormattedNumber() {
         mCursor.moveToFirst();
-        Object[] values = getValuesToInsert(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE);
+        Object[] values = getValuesToInsert(TEST_NUMBER,
+                Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
         values[CallLogQuery.CACHED_FORMATTED_NUMBER] = TEST_FORMATTED_NUMBER;
         insertValues(values);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
@@ -296,7 +296,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testBindView_WithoutQuickContactBadge() {
         mCursor.moveToFirst();
-        insert(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE);
+        insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
 
@@ -307,7 +307,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testBindView_CallButton() {
         mCursor.moveToFirst();
-        insert(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE);
+        insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
 
@@ -323,7 +323,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testBindView_PlayButton() {
         mCursor.moveToFirst();
-        insertVoicemail(TEST_NUMBER, NOW, 0);
+        insertVoicemail(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
 
@@ -363,9 +363,9 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
                 break;
             }
             mItem = (CallLogListItemViews) mList[i].getTag();
-            String number = getPhoneNumberForListEntry(i);
-            if (CallerInfo.PRIVATE_NUMBER.equals(number) ||
-                CallerInfo.UNKNOWN_NUMBER.equals(number)) {
+            int presentation = getPhoneNumberPresentationForListEntry(i);
+            if (presentation == Calls.PRESENTATION_RESTRICTED ||
+                    presentation == Calls.PRESENTATION_UNKNOWN) {
                 assertFalse(View.VISIBLE == mItem.secondaryActionView.getVisibility());
             } else {
                 assertEquals(View.VISIBLE, mItem.secondaryActionView.getVisibility());
@@ -422,11 +422,11 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         }
     }
 
-    /** Returns the number associated with the given entry in {{@link #mList}. */
-    private String getPhoneNumberForListEntry(int index) {
+    /** Returns the number presentation associated with the given entry in {{@link #mList}. */
+    private int getPhoneNumberPresentationForListEntry(int index) {
         // The entries are added backward, so count from the end of the cursor.
         mCursor.moveToPosition(mCursor.getCount() - index - 1);
-        return mCursor.getString(CallLogQuery.NUMBER);
+        return mCursor.getInt(CallLogQuery.NUMBER_PRESENTATION);
     }
 
     //
@@ -458,8 +458,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
      *
      * It includes the values for the cached contact associated with the number.
      *
-     * @param number The phone number. For unknown and private numbers,
-     *               use CallerInfo.UNKNOWN_NUMBER or CallerInfo.PRIVATE_NUMBER.
+     * @param number The phone number.
      * @param date In millisec since epoch. Use NOW to use the current time.
      * @param duration In seconds of the call. Use RAND_DURATION to pick a random one.
      * @param type Either Call.OUTGOING_TYPE or Call.INCOMING_TYPE or Call.MISSED_TYPE.
@@ -469,7 +468,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
      */
     private void insertWithCachedValues(String number, long date, int duration, int type,
             String cachedName, int cachedNumberType, String cachedNumberLabel) {
-        insert(number, date, duration, type);
+        insert(number, Calls.PRESENTATION_ALLOWED, date, duration, type);
         ContactInfo contactInfo = new ContactInfo();
         contactInfo.lookupUri = TEST_LOOKUP_URI;
         contactInfo.name = cachedName;
@@ -487,14 +486,15 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
 
     /**
      * Insert a new call entry in the test DB.
-     * @param number The phone number. For unknown and private numbers,
-     *               use CallerInfo.UNKNOWN_NUMBER or CallerInfo.PRIVATE_NUMBER.
+     * @param number The phone number.
+     * @param presentation Number representing display rules for "allowed",
+     *               "payphone", "restricted", or "unknown".
      * @param date In millisec since epoch. Use NOW to use the current time.
      * @param duration In seconds of the call. Use RAND_DURATION to pick a random one.
      * @param type Either Call.OUTGOING_TYPE or Call.INCOMING_TYPE or Call.MISSED_TYPE.
      */
-    private void insert(String number, long date, int duration, int type) {
-        insertValues(getValuesToInsert(number, date, duration, type));
+    private void insert(String number, int presentation, long date, int duration, int type) {
+        insertValues(getValuesToInsert(number, presentation, date, duration, type));
     }
 
     /** Inserts the given values in the cursor. */
@@ -506,16 +506,19 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     /**
      * Returns the values for a new call entry.
      *
-     * @param number The phone number. For unknown and private numbers,
-     *               use CallerInfo.UNKNOWN_NUMBER or CallerInfo.PRIVATE_NUMBER.
+     * @param number The phone number.
+     * @param presentation Number representing display rules for "allowed",
+     *               "payphone", "restricted", or "unknown".
      * @param date In millisec since epoch. Use NOW to use the current time.
      * @param duration In seconds of the call. Use RAND_DURATION to pick a random one.
      * @param type Either Call.OUTGOING_TYPE or Call.INCOMING_TYPE or Call.MISSED_TYPE.
      */
-    private Object[] getValuesToInsert(String number, long date, int duration, int type) {
+    private Object[] getValuesToInsert(String number, int presentation,
+            long date, int duration, int type) {
         Object[] values = CallLogQueryTestUtils.createTestExtendedValues();
         values[CallLogQuery.ID] = mIndex;
         values[CallLogQuery.NUMBER] = number;
+        values[CallLogQuery.NUMBER_PRESENTATION] = presentation;
         values[CallLogQuery.DATE] = date == NOW ? new Date().getTime() : date;
         values[CallLogQuery.DURATION] = duration < 0 ? mRnd.nextInt(10 * 60) : duration;
         if (mVoicemail != null && mVoicemail.equals(number)) {
@@ -529,13 +532,14 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
 
     /**
      * Insert a new voicemail entry in the test DB.
-     * @param number The phone number. For unknown and private numbers,
-     *               use CallerInfo.UNKNOWN_NUMBER or CallerInfo.PRIVATE_NUMBER.
+     * @param number The phone number.
+     * @param presentation Number representing display rules for "allowed",
+     *               "payphone", "restricted", or "unknown".
      * @param date In millisec since epoch. Use NOW to use the current time.
      * @param duration In seconds of the call. Use RAND_DURATION to pick a random one.
      */
-    private void insertVoicemail(String number, long date, int duration) {
-        Object[] values = getValuesToInsert(number, date, duration, Calls.VOICEMAIL_TYPE);
+    private void insertVoicemail(String number, int presentation, long date, int duration) {
+        Object[] values = getValuesToInsert(number, presentation, date, duration, Calls.VOICEMAIL_TYPE);
         // Must have the same index as the row.
         values[CallLogQuery.VOICEMAIL_URI] =
                 ContentUris.withAppendedId(VoicemailContract.Voicemails.CONTENT_URI, mIndex);
@@ -548,7 +552,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
      * @param duration In seconds of the call. Use RAND_DURATION to pick a random one.
      */
     private void insertPrivate(long date, int duration) {
-        insert(CallerInfo.PRIVATE_NUMBER, date, duration, Calls.INCOMING_TYPE);
+        insert("", Calls.PRESENTATION_RESTRICTED, date, duration, Calls.INCOMING_TYPE);
     }
 
     /**
@@ -557,7 +561,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
      * @param duration In seconds of the call. Use RAND_DURATION to pick a random one.
      */
     private void insertUnknown(long date, int duration) {
-        insert(CallerInfo.UNKNOWN_NUMBER, date, duration, Calls.INCOMING_TYPE);
+        insert("", Calls.PRESENTATION_UNKNOWN, date, duration, Calls.INCOMING_TYPE);
     }
 
     /**
@@ -568,7 +572,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     private void insertCalltoVoicemail(long date, int duration) {
         // mVoicemail may be null
         if (mVoicemail != null) {
-            insert(mVoicemail, date, duration, Calls.OUTGOING_TYPE);
+            insert(mVoicemail, Calls.PRESENTATION_ALLOWED, date, duration, Calls.OUTGOING_TYPE);
         }
     }
 
@@ -605,7 +609,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
             } else {
                 int inout = mRnd.nextBoolean() ? Calls.OUTGOING_TYPE :  Calls.INCOMING_TYPE;
                 String number = new Formatter().format("1800123%04d", i).toString();
-                insert(number, NOW, RAND_DURATION, inout);
+                insert(number, Calls.PRESENTATION_ALLOWED, NOW, RAND_DURATION, inout);
             }
         }
         return privateOrUnknownOrVm;

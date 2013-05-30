@@ -105,7 +105,8 @@ public class PhoneCallDetailsHelper {
         final CharSequence numberText;
         final CharSequence labelText;
         final CharSequence displayNumber =
-            mPhoneNumberHelper.getDisplayNumber(details.number, details.formattedNumber);
+            mPhoneNumberHelper.getDisplayNumber(details.number,
+                    details.numberPresentation, details.formattedNumber);
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
             if (TextUtils.isEmpty(details.geocode)
@@ -135,7 +136,7 @@ public class PhoneCallDetailsHelper {
     public void setCallDetailsHeader(TextView nameView, PhoneCallDetails details) {
         final CharSequence nameText;
         final CharSequence displayNumber =
-                mPhoneNumberHelper.getDisplayNumber(details.number,
+            mPhoneNumberHelper.getDisplayNumber(details.number, details.numberPresentation,
                         mResources.getString(R.string.recentCalls_addToContact));
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;

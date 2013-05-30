@@ -145,7 +145,7 @@ import javax.annotation.concurrent.GuardedBy;
         // plus the section value.
         matrixCursor.addRow(new Object[]{
                 0L, "", 0L, 0L, 0, "", "", "", null, 0, null, null, null, null, 0L, null, 0,
-                section
+                Calls.PRESENTATION_ALLOWED, section
         });
         return matrixCursor;
     }

@@ -230,6 +230,7 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         ContentResolver contentResolver = getContentResolver();
         ContentValues values = new ContentValues();
         values.put(CallLog.Calls.NUMBER, CONTACT_NUMBER);
+        values.put(CallLog.Calls.NUMBER_PRESENTATION, CallLog.Calls.PRESENTATION_ALLOWED);
         values.put(CallLog.Calls.TYPE, CallLog.Calls.INCOMING_TYPE);
         mCallLogUri = contentResolver.insert(CallLog.Calls.CONTENT_URI, values);
         setActivityIntent(new Intent(Intent.ACTION_VIEW, mCallLogUri));

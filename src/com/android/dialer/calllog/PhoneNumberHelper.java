@@ -17,11 +17,11 @@
 package com.android.dialer.calllog;
 
 import android.content.res.Resources;
+import android.provider.CallLog.Calls;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
 import com.android.dialer.R;
-import com.android.internal.telephony.CallerInfo;
 
 /**
  * Helper for formatting and managing phone numbers.
@@ -34,16 +34,15 @@ public class PhoneNumberHelper {
     }
 
     /** Returns true if it is possible to place a call to the given number. */
-    public boolean canPlaceCallsTo(CharSequence number) {
-        return !(TextUtils.isEmpty(number)
-                || number.equals(CallerInfo.UNKNOWN_NUMBER)
-                || number.equals(CallerInfo.PRIVATE_NUMBER)
-                || number.equals(CallerInfo.PAYPHONE_NUMBER));
+    public static boolean canPlaceCallsTo(CharSequence number, int presentation) {
+        return presentation == Calls.PRESENTATION_ALLOWED
+            && !TextUtils.isEmpty(number);
     }
 
     /** Returns true if it is possible to send an SMS to the given number. */
-    public boolean canSendSmsTo(CharSequence number) {
-        return canPlaceCallsTo(number) && !isVoicemailNumber(number) && !isSipNumber(number);
+    public boolean canSendSmsTo(CharSequence number, int presentation) {
+        return canPlaceCallsTo(number, presentation)
+            && !isVoicemailNumber(number) && !isSipNumber(number);
     }
 
     /**
@@ -52,18 +51,19 @@ public class PhoneNumberHelper {
      * @param number the number to display
      * @param formattedNumber the formatted number if available, may be null
      */
-    public CharSequence getDisplayNumber(CharSequence number, CharSequence formattedNumber) {
-        if (TextUtils.isEmpty(number)) {
-            return "";
-        }
-        if (number.equals(CallerInfo.UNKNOWN_NUMBER)) {
+    public CharSequence getDisplayNumber(CharSequence number,
+            int presentation, CharSequence formattedNumber) {
+        if (presentation == Calls.PRESENTATION_UNKNOWN) {
             return mResources.getString(R.string.unknown);
         }
-        if (number.equals(CallerInfo.PRIVATE_NUMBER)) {
+        if (presentation == Calls.PRESENTATION_RESTRICTED) {
             return mResources.getString(R.string.private_num);
         }
-        if (number.equals(CallerInfo.PAYPHONE_NUMBER)) {
+        if (presentation == Calls.PRESENTATION_PAYPHONE) {
             return mResources.getString(R.string.payphone);
+        }
+        if (TextUtils.isEmpty(number)) {
+            return "";
         }
         if (isVoicemailNumber(number)) {
             return mResources.getString(R.string.voicemail);

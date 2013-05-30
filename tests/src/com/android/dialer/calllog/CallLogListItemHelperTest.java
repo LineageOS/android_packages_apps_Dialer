@@ -24,7 +24,6 @@ import android.view.View;
 
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
-import com.android.internal.telephony.CallerInfo;
 
 /**
  * Unit tests for {@link CallLogListItemHelper}.
@@ -73,27 +72,29 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     }
 
     public void testSetPhoneCallDetails() {
-        setPhoneCallDetailsWithNumber("12125551234", "1-212-555-1234");
+        setPhoneCallDetailsWithNumber("12125551234", Calls.PRESENTATION_ALLOWED,
+                "1-212-555-1234");
         assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_Unknown() {
-        setPhoneCallDetailsWithNumber(CallerInfo.UNKNOWN_NUMBER, CallerInfo.UNKNOWN_NUMBER);
+        setPhoneCallDetailsWithNumber("", Calls.PRESENTATION_UNKNOWN, "");
         assertNoCallButton();
     }
 
     public void testSetPhoneCallDetails_Private() {
-        setPhoneCallDetailsWithNumber(CallerInfo.PRIVATE_NUMBER, CallerInfo.PRIVATE_NUMBER);
+        setPhoneCallDetailsWithNumber("", Calls.PRESENTATION_RESTRICTED, "");
         assertNoCallButton();
     }
 
     public void testSetPhoneCallDetails_Payphone() {
-        setPhoneCallDetailsWithNumber(CallerInfo.PAYPHONE_NUMBER, CallerInfo.PAYPHONE_NUMBER);
+        setPhoneCallDetailsWithNumber("", Calls.PRESENTATION_PAYPHONE, "");
         assertNoCallButton();
     }
 
     public void testSetPhoneCallDetails_VoicemailNumber() {
-        setPhoneCallDetailsWithNumber(TEST_VOICEMAIL_NUMBER, TEST_VOICEMAIL_NUMBER);
+        setPhoneCallDetailsWithNumber(TEST_VOICEMAIL_NUMBER,
+                Calls.PRESENTATION_ALLOWED, TEST_VOICEMAIL_NUMBER);
         assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
     }
 
@@ -108,8 +109,8 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     }
 
     public void testSetPhoneCallDetails_VoicemailFromUnknown() {
-        setPhoneCallDetailsWithNumberAndType(CallerInfo.UNKNOWN_NUMBER, CallerInfo.UNKNOWN_NUMBER,
-                Calls.VOICEMAIL_TYPE);
+        setPhoneCallDetailsWithNumberAndType("", Calls.PRESENTATION_UNKNOWN,
+                "", Calls.VOICEMAIL_TYPE);
         assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
     }
 
@@ -120,15 +121,18 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     }
 
     /** Sets the details of a phone call using the specified phone number. */
-    private void setPhoneCallDetailsWithNumber(String number, String formattedNumber) {
-        setPhoneCallDetailsWithNumberAndType(number, formattedNumber, Calls.INCOMING_TYPE);
+    private void setPhoneCallDetailsWithNumber(String number,
+            int presentation, String formattedNumber) {
+        setPhoneCallDetailsWithNumberAndType(number, presentation,
+                formattedNumber, Calls.INCOMING_TYPE);
     }
 
     /** Sets the details of a phone call using the specified phone number. */
-    private void setPhoneCallDetailsWithNumberAndType(String number, String formattedNumber,
-            int callType) {
+    private void setPhoneCallDetailsWithNumberAndType(String number,
+            int presentation, String formattedNumber, int callType) {
         mHelper.setPhoneCallDetails(mViews,
-                new PhoneCallDetails(number, formattedNumber, TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new PhoneCallDetails(number, presentation, formattedNumber,
+                        TEST_COUNTRY_ISO, TEST_GEOCODE,
                         new int[]{ callType }, TEST_DATE, TEST_DURATION),
                 false);
     }
@@ -136,16 +140,18 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     /** Sets the details of a phone call using the specified call type. */
     private void setPhoneCallDetailsWithTypes(int... types) {
         mHelper.setPhoneCallDetails(mViews,
-                new PhoneCallDetails(TEST_NUMBER, TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO,
-                        TEST_GEOCODE, types, TEST_DATE, TEST_DURATION),
+                new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                        TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
+                        types, TEST_DATE, TEST_DURATION),
                 false);
     }
 
     /** Sets the details of a phone call using the specified call type. */
     private void setUnreadPhoneCallDetailsWithTypes(int... types) {
         mHelper.setPhoneCallDetails(mViews,
-                new PhoneCallDetails(TEST_NUMBER, TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO,
-                        TEST_GEOCODE, types, TEST_DATE, TEST_DURATION),
+                new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                        TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
+                        types, TEST_DATE, TEST_DURATION),
                 true);
     }
 }
