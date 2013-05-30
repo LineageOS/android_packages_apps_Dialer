@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -35,7 +34,6 @@ import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
@@ -62,12 +60,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -82,6 +78,7 @@ import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
+import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.util.OrientationUtil;
 import com.android.internal.telephony.ITelephony;
@@ -156,8 +153,6 @@ public class DialpadFragment extends Fragment
      */
     private SmartDialController mSmartDialAdapter;
 
-    private SmartDialCache mSmartDialCache;
-
     /**
      * Use latin character map by default
      */
@@ -168,6 +163,8 @@ public class DialpadFragment extends Fragment
      * smart dialing suggestion strip is visible.
      */
     private boolean mSmartDialEnabled = false;
+
+    private DialerDatabaseHelper mDialerDatabaseHelper;
 
     /**
      * Regular expression prohibiting manual phone call. Can be empty, which means "no rule".
@@ -300,6 +297,10 @@ public class DialpadFragment extends Fragment
         mFirstLaunch = true;
         mContactsPrefs = new ContactsPreferences(getActivity());
         mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
+
+        mDialerDatabaseHelper = DialerDatabaseHelper.getInstance(getActivity());
+        SmartDialPrefix.initializeNanpSettings(getActivity());
+
         try {
             mHaptic.init(getActivity(),
                          getResources().getBoolean(R.bool.config_enable_dialer_key_vibration));
@@ -1653,30 +1654,11 @@ public class DialpadFragment extends Fragment
         return intent;
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (mSmartDialEnabled && isVisibleToUser && mSmartDialCache != null) {
-            // This is called every time the dialpad fragment comes into view. The first
-            // time the dialer is launched, mSmartDialEnabled is always false as it has not been
-            // read from settings(in onResume) yet at the point where setUserVisibleHint is called
-            // for the first time, so the caching on first launch will happen in onResume instead.
-            // This covers only the case where the dialer is launched in the call log or
-            // contacts tab, and then the user swipes to the dialpad.
-            mSmartDialCache.cacheIfNeeded(false);
-        }
-    }
-
     private String mLastDigitsForSmartDial;
 
     private void loadSmartDialEntries() {
         if (!mSmartDialEnabled || mSmartDialAdapter == null) {
             // No smart dial views.  Landscape?
-            return;
-        }
-
-        if (mSmartDialCache == null) {
-            Log.e(TAG, "Trying to load smart dialing entries from a null cache");
             return;
         }
 
@@ -1691,7 +1673,7 @@ public class DialpadFragment extends Fragment
         if (digits.length() < 1) {
             mSmartDialAdapter.clear();
         } else {
-            final SmartDialLoaderTask task = new SmartDialLoaderTask(this, digits, mSmartDialCache);
+            final SmartDialLoaderTask task = new SmartDialLoaderTask(this, digits, getActivity());
             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {});
         }
     }
@@ -1708,24 +1690,15 @@ public class DialpadFragment extends Fragment
         // Handle smart dialing related state
         if (mSmartDialEnabled) {
             mSmartDialContainer.setVisibility(View.VISIBLE);
-            mSmartDialCache = SmartDialCache.getInstance(getActivity(),
-                    mContactsPrefs.getDisplayOrder(), mSmartDialMap);
-            // Don't force recache if this is the first time onResume is being called, since
-            // caching should already happen in setUserVisibleHint.
-            if (!mFirstLaunch || getUserVisibleHint()) {
-                // This forced recache covers the cases where the dialer was running before and
-                // was brought back into the foreground, or the dialer was launched for the first
-                // time and displays the dialpad fragment immediately. If the dialpad fragment
-                // hasn't actually become visible throughout the entire activity's lifecycle, it
-                // is possible that caching hasn't happened yet. In this case, we can force a
-                // recache anyway, since we are not worried about startup performance anymore.
-                mSmartDialCache.cacheIfNeeded(true);
+
+            if (DEBUG) {
+                Log.w(TAG, "Creating smart dial database");
             }
+            mDialerDatabaseHelper.startSmartDialUpdateThread();
         } else {
             if (mSmartDialContainer != null) {
                 mSmartDialContainer.setVisibility(View.GONE);
             }
-            mSmartDialCache = null;
         }
     }
 

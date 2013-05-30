@@ -19,8 +19,10 @@ package com.android.dialer.dialpad;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.test.suitebuilder.annotation.Suppress;
 import android.util.Log;
+import android.test.AndroidTestCase;
 
 import com.android.dialer.dialpad.SmartDialNameMatcher;
+import com.android.dialer.dialpad.SmartDialPrefix;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
@@ -237,8 +239,7 @@ public class SmartDialNameMatcherTest extends TestCase {
     private void checkMatchesNumber(String number, String query, boolean expectedMatches,
             boolean matchNanp, int matchStart, int matchEnd) {
         final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query);
-        final SmartDialMatchPosition pos = matcher.matchesNumber(number, query,
-                matchNanp);
+        final SmartDialMatchPosition pos = matcher.matchesNumber(number, query, matchNanp);
         assertEquals(expectedMatches, pos != null);
         if (expectedMatches) {
             assertEquals("start", matchStart, pos.start);

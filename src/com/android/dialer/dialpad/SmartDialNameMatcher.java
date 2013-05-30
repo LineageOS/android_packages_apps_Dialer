@@ -18,7 +18,7 @@ package com.android.dialer.dialpad;
 
 import android.text.TextUtils;
 
-import com.android.dialer.dialpad.SmartDialTrie.CountryCodeWithOffset;
+import com.android.dialer.dialpad.SmartDialPrefix.PhoneNumberTokens;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
@@ -88,37 +88,48 @@ public class SmartDialNameMatcher {
     }
 
     /**
+     * Matches a phone number against a query. Let the test application overwrite the NANP setting.
+     *
+     * @param phoneNumber - Raw phone number
+     * @param query - Normalized query (only contains numbers from 0-9)
+     * @param useNanp - Overwriting nanp setting boolean, used for testing.
+     * @return {@literal null} if the number and the query don't match, a valid
+     *         SmartDialMatchPosition with the matching positions otherwise
+     */
+    @VisibleForTesting
+    public SmartDialMatchPosition matchesNumber(String phoneNumber, String query, boolean useNanp) {
+        // Try matching the number as is
+        SmartDialMatchPosition matchPos = matchesNumberWithOffset(phoneNumber, query, 0);
+        if (matchPos == null) {
+            final PhoneNumberTokens phoneNumberTokens =
+                    SmartDialPrefix.parsePhoneNumber(phoneNumber);
+
+            if (phoneNumberTokens == null) {
+                return matchPos;
+            }
+            if (phoneNumberTokens.countryCodeOffset != 0) {
+                matchPos = matchesNumberWithOffset(phoneNumber, query,
+                        phoneNumberTokens.countryCodeOffset);
+            }
+            if (matchPos == null && phoneNumberTokens.nanpCodeOffset != 0 && useNanp) {
+                matchPos = matchesNumberWithOffset(phoneNumber, query,
+                        phoneNumberTokens.nanpCodeOffset);
+            }
+        }
+        return matchPos;
+    }
+
+    /**
      * Matches a phone number against a query, taking care of formatting characters and also
      * taking into account country code prefixes and special NANP number treatment.
      *
      * @param phoneNumber - Raw phone number
      * @param query - Normalized query (only contains numbers from 0-9)
-     * @param matchNanp - Whether or not to do special matching for NANP numbers
      * @return {@literal null} if the number and the query don't match, a valid
      *         SmartDialMatchPosition with the matching positions otherwise
      */
-    public SmartDialMatchPosition matchesNumber(String phoneNumber, String query,
-            boolean matchNanp) {
-        // Try matching the number as is
-        SmartDialMatchPosition matchPos = matchesNumberWithOffset(phoneNumber, query, 0);
-        if (matchPos == null) {
-            // Try matching the number without the '+' prefix, if any
-            final CountryCodeWithOffset code = SmartDialTrie.getOffsetWithoutCountryCode(
-                    phoneNumber);
-            if (code != null) {
-                matchPos = matchesNumberWithOffset(phoneNumber, query, code.offset);
-            }
-            if (matchPos == null && matchNanp) {
-                // Try matching NANP numbers
-                final int[] offsets = SmartDialTrie.getOffsetForNANPNumbers(phoneNumber,
-                        mMap);
-                for (int i = 0; i < offsets.length; i++) {
-                    matchPos = matchesNumberWithOffset(phoneNumber, query, offsets[i]);
-                    if (matchPos != null) break;
-                }
-            }
-        }
-        return matchPos;
+    public SmartDialMatchPosition matchesNumber(String phoneNumber, String query) {
+        return matchesNumber(phoneNumber, query, true);
     }
 
     /**
