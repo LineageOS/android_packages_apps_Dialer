@@ -195,6 +195,10 @@ public class DialpadFragment extends Fragment
     /** Identifier for the "Add Call" intent extra. */
     private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
+    /** Identifier for the "Add Participant" intent extra. */
+    private static final String ADD_PARTICIPANT_KEY = "add_participant";
+    private boolean mAddParticipant = false;
+
     /**
      * Identifier for intent extra for sending an empty Flash message for
      * CDMA networks. This message is used by the network to simulate a
@@ -239,8 +243,7 @@ public class DialpadFragment extends Fragment
                 // Note that when there is on going call, add call should not show dial
                 // conference button since normal dialpad should be used.
                 // Check if ImsPhone is created, if so enable the conference button.
-                if (SystemProperties.getBoolean(
-                        TelephonyProperties.CALLS_ON_IMS_ENABLED_PROPERTY, false)) {
+                if (isCallOnImsEnabled()) {
                     // Note, phone app still need to check if UI option to "Use Ims Always"
                     // is checked upon receiving dial request.
                     mDialConferenceButton.setVisibility(View.VISIBLE);
@@ -387,8 +390,7 @@ public class DialpadFragment extends Fragment
         }
 
         mDialConferenceButton = (ImageButton) fragmentView.findViewById(R.id.dialConferenceButton);
-        if(SystemProperties.getBoolean(
-                TelephonyProperties.CALLS_ON_IMS_ENABLED_PROPERTY, false)) {
+        if(isCallOnImsEnabled()) {
             if (mDialConferenceButton != null) {
                 mDialConferenceButton.setOnClickListener(this);
                 mDialConferenceButton.setOnLongClickListener(this);
@@ -541,11 +543,24 @@ public class DialpadFragment extends Fragment
 
             }
         } else {
-            // for add call, show normal dialpad without dial conference button.
-            mDialConferenceButton.setVisibility(View.GONE);
+            mAddParticipant = intent.getBooleanExtra(ADD_PARTICIPANT_KEY, false);
+            if (isCallOnImsEnabled()) {
+                // for IMS AddParticipant feature add call, show normal
+                // dialpad with dial conference button.
+                mDialConferenceButton.setVisibility(View.VISIBLE);
+            } else {
+                // for add call, show normal dialpad without dial conference button.
+                mDialConferenceButton.setVisibility(View.GONE);
+            }
         }
 
+        Log.d(TAG,"mAddParticipant = " + mAddParticipant);
         showDialpadChooser(needToShowDialpadChooser);
+    }
+
+    private boolean isCallOnImsEnabled() {
+        return (SystemProperties.getBoolean(
+                    TelephonyProperties.CALLS_ON_IMS_ENABLED_PROPERTY, false));
     }
 
     public void setStartedFromNewIntent(boolean value) {
@@ -1193,6 +1208,7 @@ public class DialpadFragment extends Fragment
                     // must be dial conference add extra
                     intent.putExtra(EXTRA_DIAL_CONFERENCE_URI, true);
                 }
+                intent.putExtra(ADD_PARTICIPANT_KEY, mAddParticipant);
                 startActivity(intent);
                 mClearDigitsOnStop = true;
                 getActivity().finish();
