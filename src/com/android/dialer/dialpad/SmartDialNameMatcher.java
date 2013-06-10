@@ -49,6 +49,7 @@ public class SmartDialNameMatcher {
 
     private final SmartDialMap mMap;
 
+    @VisibleForTesting
     public SmartDialNameMatcher(String query) {
         this(query, LATIN_SMART_DIAL_MAP);
     }
