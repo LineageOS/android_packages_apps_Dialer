@@ -378,7 +378,8 @@ public class DialpadFragment extends Fragment
         mDialpadChooser = (ListView) fragmentView.findViewById(R.id.dialpadChooser);
         mDialpadChooser.setOnItemClickListener(this);
 
-        // Smart dial
+        // Smart dial container. This is null if in landscape mode since it is not present
+        // in the landscape dialer layout.
         mSmartDialContainer = (RelativeLayout) fragmentView.findViewById(
                 R.id.dialpad_smartdial_container);
 
@@ -574,7 +575,7 @@ public class DialpadFragment extends Fragment
 
         // retrieve dialpad autocomplete setting
         mSmartDialEnabled = Settings.Secure.getInt(contentResolver,
-                Settings.Secure.DIALPAD_AUTOCOMPLETE, 0) == 1;
+                Settings.Secure.DIALPAD_AUTOCOMPLETE, 0) == 1 && mSmartDialContainer != null;
 
         stopWatch.lap("dtwd");
 
@@ -1721,7 +1722,9 @@ public class DialpadFragment extends Fragment
                 mSmartDialCache.cacheIfNeeded(true);
             }
         } else {
-            mSmartDialContainer.setVisibility(View.GONE);
+            if (mSmartDialContainer != null) {
+                mSmartDialContainer.setVisibility(View.GONE);
+            }
             mSmartDialCache = null;
         }
     }
