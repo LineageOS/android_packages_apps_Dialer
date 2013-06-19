@@ -53,7 +53,6 @@ import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
-import com.android.internal.telephony.CallerInfo;
 import com.android.internal.telephony.ITelephony;
 import com.google.common.annotations.VisibleForTesting;
 
@@ -460,10 +459,8 @@ public class CallLogFragment extends ListFragment
         final Cursor cursor = (Cursor)mAdapter.getItem(position);
         if (cursor != null) {
             String number = cursor.getString(CallLogQuery.NUMBER);
-            if (TextUtils.isEmpty(number)
-                    || number.equals(CallerInfo.UNKNOWN_NUMBER)
-                    || number.equals(CallerInfo.PRIVATE_NUMBER)
-                    || number.equals(CallerInfo.PAYPHONE_NUMBER)) {
+            int numberPresentation = cursor.getInt(CallLogQuery.NUMBER_PRESENTATION);
+            if (!PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation)) {
                 // This number can't be called, do nothing
                 return;
             }

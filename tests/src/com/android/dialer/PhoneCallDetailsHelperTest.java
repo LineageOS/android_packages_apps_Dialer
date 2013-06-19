@@ -29,7 +29,6 @@ import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.PhoneNumberHelper;
 import com.android.dialer.calllog.TestPhoneNumberHelper;
 import com.android.dialer.util.LocaleTestUtils;
-import com.android.internal.telephony.CallerInfo;
 
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -89,27 +88,29 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     }
 
     public void testSetPhoneCallDetails_Unknown() {
-        setPhoneCallDetailsWithNumber(CallerInfo.UNKNOWN_NUMBER, CallerInfo.UNKNOWN_NUMBER);
+        setPhoneCallDetailsWithNumber("", Calls.PRESENTATION_UNKNOWN, "");
         assertNameEqualsResource(R.string.unknown);
     }
 
     public void testSetPhoneCallDetails_Private() {
-        setPhoneCallDetailsWithNumber(CallerInfo.PRIVATE_NUMBER, CallerInfo.PRIVATE_NUMBER);
+        setPhoneCallDetailsWithNumber("", Calls.PRESENTATION_RESTRICTED, "");
         assertNameEqualsResource(R.string.private_num);
     }
 
     public void testSetPhoneCallDetails_Payphone() {
-        setPhoneCallDetailsWithNumber(CallerInfo.PAYPHONE_NUMBER, CallerInfo.PAYPHONE_NUMBER);
+        setPhoneCallDetailsWithNumber("", Calls.PRESENTATION_PAYPHONE, "");
         assertNameEqualsResource(R.string.payphone);
     }
 
     public void testSetPhoneCallDetails_Voicemail() {
-        setPhoneCallDetailsWithNumber(TEST_VOICEMAIL_NUMBER, TEST_VOICEMAIL_NUMBER);
+        setPhoneCallDetailsWithNumber(TEST_VOICEMAIL_NUMBER,
+                Calls.PRESENTATION_ALLOWED, TEST_VOICEMAIL_NUMBER);
         assertNameEqualsResource(R.string.voicemail);
     }
 
     public void testSetPhoneCallDetails_Normal() {
-        setPhoneCallDetailsWithNumber("14125551212", "1-412-555-1212");
+        setPhoneCallDetailsWithNumber("14125551212",
+                Calls.PRESENTATION_ALLOWED, "1-412-555-1212");
         assertEquals("Yesterday", mViews.callTypeAndDate.getText().toString());
         assertEqualsHtml("<font color='#33b5e5'><b>Yesterday</b></font>",
                 mViews.callTypeAndDate.getText());
@@ -199,35 +200,36 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     }
 
     public void testSetPhoneCallDetails_Highlighted() {
-        setPhoneCallDetailsWithNumber(TEST_VOICEMAIL_NUMBER, "");
+        setPhoneCallDetailsWithNumber(TEST_VOICEMAIL_NUMBER,
+                Calls.PRESENTATION_ALLOWED, "");
     }
 
     public void testSetCallDetailsHeader_NumberOnly() {
-        setCallDetailsHeaderWithNumberOnly(TEST_NUMBER);
+        setCallDetailsHeaderWithNumber(TEST_NUMBER, Calls.PRESENTATION_ALLOWED);
         assertEquals(View.VISIBLE, mNameView.getVisibility());
         assertEquals("Add to contacts", mNameView.getText().toString());
     }
 
     public void testSetCallDetailsHeader_UnknownNumber() {
-        setCallDetailsHeaderWithNumberOnly(CallerInfo.UNKNOWN_NUMBER);
+        setCallDetailsHeaderWithNumber("", Calls.PRESENTATION_UNKNOWN);
         assertEquals(View.VISIBLE, mNameView.getVisibility());
         assertEquals("Unknown", mNameView.getText().toString());
     }
 
     public void testSetCallDetailsHeader_PrivateNumber() {
-        setCallDetailsHeaderWithNumberOnly(CallerInfo.PRIVATE_NUMBER);
+        setCallDetailsHeaderWithNumber("", Calls.PRESENTATION_RESTRICTED);
         assertEquals(View.VISIBLE, mNameView.getVisibility());
         assertEquals("Private number", mNameView.getText().toString());
     }
 
     public void testSetCallDetailsHeader_PayphoneNumber() {
-        setCallDetailsHeaderWithNumberOnly(CallerInfo.PAYPHONE_NUMBER);
+        setCallDetailsHeaderWithNumber("", Calls.PRESENTATION_PAYPHONE);
         assertEquals(View.VISIBLE, mNameView.getVisibility());
         assertEquals("Pay phone", mNameView.getText().toString());
     }
 
     public void testSetCallDetailsHeader_VoicemailNumber() {
-        setCallDetailsHeaderWithNumberOnly(TEST_VOICEMAIL_NUMBER);
+        setCallDetailsHeaderWithNumber(TEST_VOICEMAIL_NUMBER, Calls.PRESENTATION_ALLOWED);
         assertEquals(View.VISIBLE, mNameView.getVisibility());
         assertEquals("Voicemail", mNameView.getText().toString());
     }
@@ -284,15 +286,21 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     }
 
     /** Sets the phone call details with default values and the given number. */
-    private void setPhoneCallDetailsWithNumber(String number, String formattedNumber) {
-        setPhoneCallDetailsWithNumberAndGeocode(number, formattedNumber, TEST_GEOCODE);
+    private void setPhoneCallDetailsWithNumber(String number, int presentation,
+            String formattedNumber) {
+        mHelper.setPhoneCallDetails(mViews,
+                new PhoneCallDetails(number, presentation, formattedNumber,
+                        TEST_COUNTRY_ISO, TEST_GEOCODE,
+                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION),
+                true);
     }
 
     /** Sets the phone call details with default values and the given number. */
     private void setPhoneCallDetailsWithNumberAndGeocode(String number, String formattedNumber,
             String geocodedLocation) {
         mHelper.setPhoneCallDetails(mViews,
-                new PhoneCallDetails(number, formattedNumber, TEST_COUNTRY_ISO, geocodedLocation,
+                new PhoneCallDetails(number, Calls.PRESENTATION_ALLOWED,
+                        formattedNumber, TEST_COUNTRY_ISO, geocodedLocation,
                         new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION),
                 true);
     }
@@ -300,29 +308,33 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     /** Sets the phone call details with default values and the given date. */
     private void setPhoneCallDetailsWithDate(long date) {
         mHelper.setPhoneCallDetails(mViews,
-                new PhoneCallDetails(TEST_NUMBER, TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO,
-                        TEST_GEOCODE, new int[]{ Calls.INCOMING_TYPE }, date, TEST_DURATION),
+                new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                        TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
+                        new int[]{ Calls.INCOMING_TYPE }, date, TEST_DURATION),
                 false);
     }
 
     /** Sets the phone call details with default values and the given call types using icons. */
     private void setPhoneCallDetailsWithCallTypeIcons(int... callTypes) {
         mHelper.setPhoneCallDetails(mViews,
-                new PhoneCallDetails(TEST_NUMBER, TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO,
-                        TEST_GEOCODE, callTypes, TEST_DATE, TEST_DURATION),
+                new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                        TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
+                        callTypes, TEST_DATE, TEST_DURATION),
                 false);
     }
 
-    private void setCallDetailsHeaderWithNumberOnly(String number) {
+    private void setCallDetailsHeaderWithNumber(String number, int presentation) {
         mHelper.setCallDetailsHeader(mNameView,
-                new PhoneCallDetails(number, TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO,
-                        TEST_GEOCODE, new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION));
+                new PhoneCallDetails(number, presentation,
+                        TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
+                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION));
     }
 
     private void setCallDetailsHeader(String name) {
         mHelper.setCallDetailsHeader(mNameView,
-                new PhoneCallDetails(TEST_NUMBER, TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO,
-                        TEST_GEOCODE, new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION,
+                new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                        TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
+                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION,
                         name, 0, "", null, null));
     }
 }

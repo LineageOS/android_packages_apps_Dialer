@@ -161,6 +161,7 @@ public class FillCallLogTestActivity extends Activity {
         for (int i = 0; i < count; i++) {
             values[i] = new ContentValues();
             values[i].put(Calls.NUMBER, generateRandomNumber());
+            values[i].put(Calls.NUMBER_PRESENTATION, Calls.PRESENTATION_ALLOWED);
             values[i].put(Calls.DATE, System.currentTimeMillis()); // Will be randomized later
             values[i].put(Calls.DURATION, 1); // Will be overwritten later
         }

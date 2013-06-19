@@ -60,7 +60,8 @@ import com.android.dialer.R;
             boolean isHighlighted) {
         mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details,
                 isHighlighted);
-        boolean canCall = mPhoneNumberHelper.canPlaceCallsTo(details.number);
+        boolean canCall = PhoneNumberHelper.canPlaceCallsTo(details.number,
+            details.numberPresentation);
         boolean canPlay = details.callTypes[0] == Calls.VOICEMAIL_TYPE;
 
         if (canPlay) {
@@ -93,7 +94,7 @@ import com.android.dialer.R;
             recipient = details.name;
         } else {
             recipient = mPhoneNumberHelper.getDisplayNumber(
-                    details.number, details.formattedNumber);
+                    details.number, details.numberPresentation, details.formattedNumber);
         }
         return mResources.getString(R.string.description_call, recipient);
     }

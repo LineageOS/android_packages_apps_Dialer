@@ -521,6 +521,7 @@ import java.util.LinkedList;
         views.listHeaderTextView.setVisibility(View.GONE);
 
         final String number = c.getString(CallLogQuery.NUMBER);
+        final int numberPresentation = c.getInt(CallLogQuery.NUMBER_PRESENTATION);
         final long date = c.getLong(CallLogQuery.DATE);
         final long duration = c.getLong(CallLogQuery.DURATION);
         final int callType = c.getInt(CallLogQuery.CALL_TYPE);
@@ -551,7 +552,7 @@ import java.util.LinkedList;
         ExpirableCache.CachedValue<ContactInfo> cachedInfo =
                 mContactInfoCache.getCachedValue(numberCountryIso);
         ContactInfo info = cachedInfo == null ? null : cachedInfo.getValue();
-        if (!mPhoneNumberHelper.canPlaceCallsTo(number)
+        if (!PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation)
                 || mPhoneNumberHelper.isVoicemailNumber(number)) {
             // If this is a number that cannot be dialed, there is no point in looking up a contact
             // for it.
@@ -593,12 +594,14 @@ import java.util.LinkedList;
         final String geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
         final PhoneCallDetails details;
         if (TextUtils.isEmpty(name)) {
-            details = new PhoneCallDetails(number, formattedNumber, countryIso, geocode,
-                    callTypes, date, duration);
+            details = new PhoneCallDetails(number, numberPresentation,
+                    formattedNumber, countryIso, geocode, callTypes, date,
+                    duration);
         } else {
             // We do not pass a photo id since we do not need the high-res picture.
-            details = new PhoneCallDetails(number, formattedNumber, countryIso, geocode,
-                    callTypes, date, duration, name, ntype, label, lookupUri, null);
+            details = new PhoneCallDetails(number, numberPresentation,
+                    formattedNumber, countryIso, geocode, callTypes, date,
+                    duration, name, ntype, label, lookupUri, null);
         }
 
         final boolean isNew = c.getInt(CallLogQuery.IS_READ) == 0;
