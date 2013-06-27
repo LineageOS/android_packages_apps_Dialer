@@ -147,7 +147,7 @@ public class SmartDialPrefixTest extends AndroidTestCase {
                 lastTimeUsed, timesUsed, starred, isSuperPrimary, inVisibleGroup, isPrimary});
         nameCursor.addRow(new Object[]{displayName, contactId});
 
-        return new ContactNumber(contactId, displayName, number, lookupKey);
+        return new ContactNumber(contactId, id, displayName, number, lookupKey, 0);
     }
 
     private ArrayList<ContactNumber> getLooseMatchesFromDb(String query) {

@@ -17,7 +17,9 @@
 <resources>
 
     <!-- Secondary text color in the Phone app -->
+    <color name="dialtacts_primary_text_color">#111111</color>
     <color name="dialtacts_secondary_text_color">#888888</color>
+    <color name="dialpad_text_color">#ffffff</color>
     <color name="smartdial_name_primary_text_color">#0099cc</color>
     <color name="smartdial_name_highlighted_text_color">#39c9ff</color>
     <color name="smartdial_number_primary_text_color">#bbbbbb</color>
@@ -40,4 +42,17 @@
 
     <!-- Standard color for selected items. -->
     <color name="item_selected">#660099cc</color>
+
+    <!-- Background color of new dialer activity -->
+    <color name="background_dial_holo_light">#ffffff</color>
+
+    <!-- Background color of new dialpad -->
+    <color name="background_dialpad">#ee020709</color>
+
+    <!-- Primary color of dialpad text, including the call button -->
+    <color name="dialpad_primary_text_color">#0099cc</color>
+    <!-- Secondary color of dialpad text (mainly used for the letters corresponding to each digit
+        -->
+    <color name="dialpad_secondary_text_color">#888888</color>
+
 </resources>

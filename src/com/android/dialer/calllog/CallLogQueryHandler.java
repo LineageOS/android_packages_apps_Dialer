@@ -45,7 +45,7 @@ import java.util.List;
 import javax.annotation.concurrent.GuardedBy;
 
 /** Handles asynchronous queries to the call log. */
-/*package*/ class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
+public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
 
     private static final String TAG = "CallLogQueryHandler";
@@ -61,6 +61,8 @@ import javax.annotation.concurrent.GuardedBy;
     private static final int UPDATE_MARK_MISSED_CALL_AS_READ_TOKEN = 57;
     /** The token for the query to fetch voicemail status messages. */
     private static final int QUERY_VOICEMAIL_STATUS_TOKEN = 58;
+
+    private final int mLogLimit;
 
     /**
      * Call type similar to Calls.INCOMING_TYPE used to specify all types instead of one particular
@@ -121,9 +123,15 @@ import javax.annotation.concurrent.GuardedBy;
     }
 
     public CallLogQueryHandler(ContentResolver contentResolver, Listener listener) {
+        this(contentResolver, listener, -1);
+    }
+
+    public CallLogQueryHandler(ContentResolver contentResolver, Listener listener, int limit) {
         super(contentResolver);
         mListener = new WeakReference<Listener>(listener);
+        mLogLimit = limit;
     }
+
 
     /**
      * Fetches the list of calls from the call log for a given type.
@@ -154,8 +162,9 @@ import javax.annotation.concurrent.GuardedBy;
             selection = String.format("(%s = ?)", Calls.TYPE);
             selectionArgs.add(Integer.toString(callType));
         }
+        final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;
         Uri uri = Calls.CONTENT_URI_WITH_VOICEMAIL.buildUpon()
-                .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(NUM_LOGS_TO_DISPLAY))
+                .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
                 .build();
         startQuery(token, requestId, uri,
                 CallLogQuery._PROJECTION, selection, selectionArgs.toArray(EMPTY_STRING_ARRAY),

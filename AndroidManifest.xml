@@ -123,6 +123,69 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".NewDialtactsActivity"
+            android:label="New Dialer"
+            android:theme="@style/NewDialtactsTheme"
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:launchMode="singleTask"
+            android:clearTaskOnLaunch="true"
+            android:icon="@mipmap/ic_launcher_phone"
+            android:screenOrientation="nosensor"
+            android:enabled="@*android:bool/config_voice_capable"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.DIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="vnd.android.cursor.item/phone" />
+                <data android:mimeType="vnd.android.cursor.item/person" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.DIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="voicemail" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.DIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.DIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tel" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.CALL_BUTTON" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.phone.action.TOUCH_DIALER" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.TAB" />
+            </intent-filter>
+            -->
+
+        </activity>
+
+        <activity android:name="com.android.dialer.calllog.NewCallLogActivity"
+                  android:label="@string/recentCallsIconLabel"
+                  android:theme="@style/NewDialtactsTheme"
+                  android:screenOrientation="portrait"
+                  android:icon="@mipmap/ic_launcher_phone">
+        </activity>
+
         <activity android:name="com.android.dialer.CallDetailActivity"
                   android:label="@string/callDetailTitle"
                   android:theme="@style/CallDetailActivityTheme"

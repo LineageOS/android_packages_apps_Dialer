@@ -32,7 +32,6 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -50,6 +49,7 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.RelativeSizeSpan;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -60,13 +60,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
@@ -76,6 +78,8 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.DialtactsActivity;
+import com.android.dialer.NeededForReflection;
+import com.android.dialer.NewDialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.database.DialerDatabaseHelper;
@@ -86,8 +90,6 @@ import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
 import com.google.common.annotations.VisibleForTesting;
 
-import java.util.List;
-
 /**
  * Fragment that displays a twelve-key phone dialpad.
  */
@@ -96,9 +98,41 @@ public class NewDialpadFragment extends Fragment
         View.OnLongClickListener, View.OnKeyListener,
         AdapterView.OnItemClickListener, TextWatcher,
         PopupMenu.OnMenuItemClickListener,
-        DialpadImageButton.OnPressedListener,
-        SmartDialLoaderTask.SmartDialLoaderCallback {
+        DialpadImageButton.OnPressedListener {
     private static final String TAG = NewDialpadFragment.class.getSimpleName();
+
+    /**
+     * LinearLayout with getter and setter methods for the translationY property using floats,
+     * for animation purposes.
+     */
+    public static class DialpadSlidingLinearLayout extends LinearLayout {
+
+        public DialpadSlidingLinearLayout(Context context) {
+            super(context);
+        }
+
+        public DialpadSlidingLinearLayout(Context context, AttributeSet attrs) {
+            super(context, attrs);
+        }
+
+        public DialpadSlidingLinearLayout(Context context, AttributeSet attrs, int defStyle) {
+            super(context, attrs, defStyle);
+        }
+
+        @NeededForReflection
+        public float getYFraction() {
+            return getTranslationY() / getHeight();
+        }
+
+        @NeededForReflection
+        public void setYFraction(float yFraction) {
+            setTranslationY(yFraction * getHeight());
+        }
+    }
+
+    public interface OnDialpadQueryChangedListener {
+        void onDialpadQueryChanged(String query);
+    }
 
     private static final boolean DEBUG = DialtactsActivity.DEBUG;
 
@@ -117,6 +151,10 @@ public class NewDialpadFragment extends Fragment
     private static final int DIAL_TONE_STREAM_TYPE = AudioManager.STREAM_DTMF;
 
     private ContactsPreferences mContactsPrefs;
+
+    private OnDialpadQueryChangedListener mDialpadQueryListener;
+
+    private View mFragmentView;
 
     /**
      * View (usually FrameLayout) containing mDigits field. This can be null, in which mDigits
@@ -144,25 +182,6 @@ public class NewDialpadFragment extends Fragment
     private View mDialButton;
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
-
-    /** Will be set only if the view has the smart dialing section. */
-    private RelativeLayout mSmartDialContainer;
-
-    /**
-     * Will be set only if the view has the smart dialing section.
-     */
-    private SmartDialController mSmartDialAdapter;
-
-    /**
-     * Use latin character map by default
-     */
-    private SmartDialMap mSmartDialMap = new LatinSmartDialMap();
-
-    /**
-     * Master switch controlling whether or not smart dialing is enabled, and whether the
-     * smart dialing suggestion strip is visible.
-     */
-    private boolean mSmartDialEnabled = false;
 
     private DialerDatabaseHelper mDialerDatabaseHelper;
 
@@ -287,8 +306,10 @@ public class NewDialpadFragment extends Fragment
             mDigits.setCursorVisible(false);
         }
 
+        if (mDialpadQueryListener != null) {
+            mDialpadQueryListener.onDialpadQueryChanged(mDigits.getText().toString());
+        }
         updateDialAndDeleteButtonEnabledState();
-        loadSmartDialEntries();
     }
 
     @Override
@@ -308,8 +329,6 @@ public class NewDialpadFragment extends Fragment
              Log.e(TAG, "Vibrate control bool missing.", nfe);
         }
 
-        setHasOptionsMenu(true);
-
         mProhibitedPhoneNumberRegexp = getResources().getString(
                 R.string.config_prohibited_phone_number_regexp);
 
@@ -320,7 +339,29 @@ public class NewDialpadFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
-        View fragmentView = inflater.inflate(R.layout.dialpad_fragment, container, false);
+        View fragmentView = inflater.inflate(R.layout.new_dialpad_fragment, container, false);
+        mFragmentView = fragmentView;
+        mFragmentView.buildLayer();
+
+        // TODO krelease: Get rid of this ugly hack which is to prevent the first frame of the
+        // animation from drawing the fragment at translationY = 0
+        final ViewTreeObserver vto = mFragmentView.getViewTreeObserver();
+        final OnPreDrawListener preDrawListener = new OnPreDrawListener() {
+
+            @Override
+            public boolean onPreDraw() {
+                if (isHidden()) return true;
+                if (mFragmentView.getTranslationY() == 0) {
+                    ((DialpadSlidingLinearLayout) mFragmentView).setYFraction(0.67f);
+                }
+                final ViewTreeObserver vto = mFragmentView.getViewTreeObserver();
+                vto.removeOnPreDrawListener(this);
+                return true;
+            }
+
+        };
+
+        vto.addOnPreDrawListener(preDrawListener);
 
         // Load up the resources for the text field.
         Resources r = getResources();
@@ -379,15 +420,6 @@ public class NewDialpadFragment extends Fragment
         mDialpadChooser = (ListView) fragmentView.findViewById(R.id.dialpadChooser);
         mDialpadChooser.setOnItemClickListener(this);
 
-        // Smart dial container. This is null if in landscape mode since it is not present
-        // in the landscape dialer layout.
-        mSmartDialContainer = (RelativeLayout) fragmentView.findViewById(
-                R.id.dialpad_smartdial_container);
-
-        if (mSmartDialContainer != null) {
-            mSmartDialAdapter = new SmartDialController(getActivity(), mSmartDialContainer,
-                    new OnSmartDialShortClick(), new OnSmartDialLongClick());
-        }
         return fragmentView;
     }
 
@@ -560,6 +592,9 @@ public class NewDialpadFragment extends Fragment
     public void onResume() {
         super.onResume();
 
+        final NewDialtactsActivity activity = (NewDialtactsActivity) getActivity();
+        mDialpadQueryListener = activity;
+
         final StopWatch stopWatch = StopWatch.start("Dialpad.onResume");
 
         // Query the last dialed number. Do it first because hitting
@@ -573,10 +608,6 @@ public class NewDialpadFragment extends Fragment
         // retrieve the DTMF tone play back setting.
         mDTMFToneEnabled = Settings.System.getInt(contentResolver,
                 Settings.System.DTMF_TONE_WHEN_DIALING, 1) == 1;
-
-        // retrieve dialpad autocomplete setting
-        mSmartDialEnabled = Settings.Secure.getInt(contentResolver,
-                Settings.Secure.DIALPAD_AUTOCOMPLETE, 0) == 1 && mSmartDialContainer != null;
 
         stopWatch.lap("dtwd");
 
@@ -678,6 +709,7 @@ public class NewDialpadFragment extends Fragment
     @Override
     public void onStop() {
         super.onStop();
+
         if (mClearDigitsOnStop) {
             mClearDigitsOnStop = false;
             mDigits.getText().clear();
@@ -688,28 +720,6 @@ public class NewDialpadFragment extends Fragment
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(PREF_DIGITS_FILLED_BY_INTENT, mDigitsFilledByIntent);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        // Landscape dialer uses the real actionbar menu, whereas portrait uses a fake one
-        // that is created using constructPopupMenu()
-        if (OrientationUtil.isLandscape(this.getActivity()) ||
-                ViewConfiguration.get(getActivity()).hasPermanentMenuKey() &&
-                isLayoutReady() && mDialpadChooser != null) {
-            inflater.inflate(R.menu.dialpad_options, menu);
-        }
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        // Hardware menu key should be available and Views should already be ready.
-        if (OrientationUtil.isLandscape(this.getActivity()) ||
-                ViewConfiguration.get(getActivity()).hasPermanentMenuKey() &&
-                isLayoutReady() && mDialpadChooser != null) {
-            setupMenuItems(menu);
-        }
     }
 
     private void setupMenuItems(Menu menu) {
@@ -1481,24 +1491,6 @@ public class NewDialpadFragment extends Fragment
         return getTelephonyManager().getCallState() == TelephonyManager.CALL_STATE_OFFHOOK;
     }
 
-    /**
-     * Returns true whenever any one of the options from the menu is selected.
-     * Code changes to support dialpad options
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_2s_pause:
-                updateDialString(PAUSE);
-                return true;
-            case R.id.menu_add_wait:
-                updateDialString(WAIT);
-                return true;
-            default:
-                return false;
-        }
-    }
-
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         return onOptionsItemSelected(item);
@@ -1507,6 +1499,7 @@ public class NewDialpadFragment extends Fragment
     /**
      * Updates the dial string (mDigits) after inserting a Pause character (,)
      * or Wait character (;).
+     * TODO krelease: add new dialpad buttons to add PAUSE and WAIT characters
      */
     private void updateDialString(char newDigit) {
         if(newDigit != WAIT && newDigit != PAUSE) {
@@ -1654,79 +1647,22 @@ public class NewDialpadFragment extends Fragment
         return intent;
     }
 
-    private String mLastDigitsForSmartDial;
-
-    private void loadSmartDialEntries() {
-        if (!mSmartDialEnabled || mSmartDialAdapter == null) {
-            // No smart dial views.  Landscape?
-            return;
-        }
-
-        // Update only when the digits have changed.
-        final String digits = SmartDialNameMatcher.normalizeNumber(mDigits.getText().toString(),
-                mSmartDialMap);
-        if (TextUtils.equals(digits, mLastDigitsForSmartDial)) {
-            return;
-        }
-        mLastDigitsForSmartDial = digits;
-
-        if (digits.length() < 1) {
-            mSmartDialAdapter.clear();
-        } else {
-            final SmartDialLoaderTask task = new SmartDialLoaderTask(this, digits, getActivity());
-            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[] {});
-        }
+    private void initializeSmartDialingState() {
+        // Handle smart dialing related state
+        // TODO krelease: This should probably be moved to somewhere more appropriate, maybe
+        // into DialtactsActivity
+        mDialerDatabaseHelper.startSmartDialUpdateThread();
     }
 
     @Override
-    public void setSmartDialAdapterEntries(List<SmartDialEntry> data, String query) {
-        if (data == null || query == null || !query.equals(mLastDigitsForSmartDial)) {
-            return;
-        }
-        mSmartDialAdapter.setEntries(data);
-    }
-
-    private void initializeSmartDialingState() {
-        // Handle smart dialing related state
-        if (mSmartDialEnabled) {
-            mSmartDialContainer.setVisibility(View.VISIBLE);
-
-            if (DEBUG) {
-                Log.w(TAG, "Creating smart dial database");
-            }
-            mDialerDatabaseHelper.startSmartDialUpdateThread();
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        final NewDialtactsActivity activity = (NewDialtactsActivity) getActivity();
+        if (activity == null) return;
+        if (hidden) {
+            activity.showSearchBar();
         } else {
-            if (mSmartDialContainer != null) {
-                mSmartDialContainer.setVisibility(View.GONE);
-            }
-        }
-    }
-
-    private class OnSmartDialLongClick implements View.OnLongClickListener {
-        @Override
-        public boolean onLongClick(View view) {
-            final SmartDialEntry entry = (SmartDialEntry) view.getTag();
-            if (entry == null) return false; // just in case.
-            mClearDigitsOnStop = true;
-            // Show the phone number disambiguation dialog without using the primary
-            // phone number so that the user can decide which number to call
-            PhoneNumberInteraction.startInteractionForPhoneCall(
-                    (TransactionSafeActivity) getActivity(), entry.contactUri, false);
-            return true;
-        }
-    }
-
-    private class OnSmartDialShortClick implements View.OnClickListener {
-        @Override
-        public void onClick(View view) {
-            final SmartDialEntry entry = (SmartDialEntry) view.getTag();
-            if (entry == null) return; // just in case.
-            // Dial the displayed phone number immediately
-            final Intent intent = CallUtil.getCallIntent(entry.phoneNumber.toString(),
-                    (getActivity() instanceof DialtactsActivity ?
-                            ((DialtactsActivity) getActivity()).getCallOrigin() : null));
-            startActivity(intent);
-            mClearDigitsOnStop = true;
+            activity.hideSearchBar();
         }
     }
 }

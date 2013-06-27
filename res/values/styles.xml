@@ -65,6 +65,61 @@
         <item name="favorites_padding_bottom">?android:attr/actionBarSize</item>
     </style>
 
+    <style name="NewDialtactsTheme"
+           parent="android:Theme.Holo.Light">
+        <item name="android:textColorPrimary">@color/dialtacts_primary_text_color</item>
+        <item name="android:textColorSecondary">@color/dialtacts_secondary_text_color</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/DialtactsActionBarStyleNew</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/background_dial_holo_light</item>
+        <item name="android:listViewStyle">@style/ListViewStyle</item>
+        <item name="activated_background">@drawable/list_item_activated_background</item>
+        <item name="section_header_background">@drawable/list_title_holo</item>
+        <item name="list_section_header_height">32dip</item>
+        <item name="list_item_divider">?android:attr/listDivider</item>
+        <item name="list_item_padding_top">0dip</item>
+        <item name="list_item_padding_right">0dip</item>
+        <item name="list_item_padding_bottom">0dip</item>
+        <item name="list_item_padding_left">0dip</item>
+        <item name="list_item_gap_between_image_and_text">8dip</item>
+        <item name="list_item_gap_between_label_and_data">5dip</item>
+        <item name="list_item_presence_icon_margin">4dip</item>
+        <item name="list_item_presence_icon_size">16dip</item>
+        <item name="list_item_photo_size">@dimen/contact_browser_list_item_photo_size</item>
+        <item name="list_item_profile_photo_size">70dip</item>
+        <item name="list_item_prefix_highlight_color">@color/people_app_theme_color</item>
+        <item name="list_item_header_text_indent">8dip</item>
+        <item name="list_item_header_text_color">@color/people_app_theme_color</item>
+        <item name="list_item_header_text_size">14sp</item>
+        <item name="list_item_header_height">24dip</item>
+        <item name="list_item_header_underline_height">1dip</item>
+        <item name="list_item_header_underline_color">@color/people_app_theme_color</item>
+        <item name="list_item_data_width_weight">5</item>
+        <item name="list_item_label_width_weight">3</item>
+        <item name="contact_browser_list_padding_left">16dip</item>
+        <item name="contact_browser_list_padding_right">0dip</item>
+        <item name="contact_browser_background">@android:color/transparent</item>
+        <item name="list_item_text_indent">@dimen/contact_browser_list_item_text_indent</item>
+        <!-- CallLog -->
+        <item name="call_log_primary_text_color">#111111</item>
+        <item name="call_log_primary_background_color">#000000</item>
+        <item name="call_log_secondary_text_color">#555555</item>
+        <item name="call_log_secondary_background_color">#333333</item>
+        <item name="call_log_header_color">#33b5e5</item>
+        <!-- VoicemailStatus -->
+        <item name="call_log_voicemail_status_height">48dip</item>
+        <item name="call_log_voicemail_status_background_color">#262626</item>
+        <item name="call_log_voicemail_status_text_color">#888888</item>
+        <item name="call_log_voicemail_status_action_text_color">#33b5e5</item>
+            <!-- Favorites -->
+        <item name="favorites_padding_bottom">?android:attr/actionBarSize</item>
+    </style>
+
+    <style name="DialpadTheme" parent="DialtactsTheme">
+        <item name="android:textColorPrimary">#FFFFFF</item>
+    </style>
+
     <style name="CallDetailActivityTheme" parent="android:Theme.Holo">
         <item name="android:windowBackground">@android:color/black</item>
         <item name="android:gravity">top</item>
@@ -108,6 +163,11 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dialpad_vertical_margin</item>
         <item name="android:background">#66000000</item>
+    </style>
+
+    <style name="DialtactsActionBarStyleNew" parent="android:Widget.Holo.ActionBar">
+        <item name="android:backgroundSplit">@null</item>
+        <item name="android:displayOptions"></item>
     </style>
 
     <style name="DialtactsActionBarStyle" parent="android:Widget.Holo.ActionBar">

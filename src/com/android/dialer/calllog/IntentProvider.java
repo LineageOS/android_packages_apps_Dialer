@@ -62,11 +62,10 @@ public abstract class IntentProvider {
     }
 
     public static IntentProvider getCallDetailIntentProvider(
-            final CallLogAdapter adapter, final int position, final long id, final int groupSize) {
+            final Cursor cursor, final int position, final long id, final int groupSize) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                Cursor cursor = adapter.getCursor();
                 cursor.moveToPosition(position);
 
                 Intent intent = new Intent(context, CallDetailActivity.class);

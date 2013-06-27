@@ -17,15 +17,16 @@
 <!-- Use LinearLayout + FrameLayout, just to rely on android:divider and android:showDividers -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/FragmentActionBarPadding"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:divider="?android:attr/dividerHorizontal"
-    android:showDividers="end">
+    android:showDividers="end"
+    android:clipChildren="false">
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
         <ListView
             android:id="@+id/contact_tile_list"
             android:layout_width="match_parent"
@@ -43,5 +44,34 @@
             android:layout_marginTop="@dimen/empty_message_top_margin"
             android:textColor="?android:attr/textColorSecondary"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
+    </FrameLayout>
+    <FrameLayout
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:id="@+id/fake_action_bar">
+        <ImageButton
+            android:id="@+id/call_history_button"
+            android:layout_width="@dimen/fake_menu_button_min_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom|start"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/description_search_button"
+            android:src="@drawable/ic_dial_action_search"/>
+        <ImageButton
+            android:id="@+id/dialpad_button"
+            android:layout_width="@dimen/fake_menu_button_min_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom|center"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/description_search_button"
+            android:src="@drawable/ic_dial_action_search"/>
+        <ImageButton
+             android:id="@+id/overflow_menu"
+             android:layout_width="@dimen/fake_menu_button_min_width"
+             android:layout_height="match_parent"
+             android:layout_gravity="bottom|end"
+             android:src="@drawable/ic_menu_overflow"
+             android:contentDescription="@string/action_menu_overflow_description"
+             android:background="?android:attr/selectableItemBackground"/>
     </FrameLayout>
 </LinearLayout>

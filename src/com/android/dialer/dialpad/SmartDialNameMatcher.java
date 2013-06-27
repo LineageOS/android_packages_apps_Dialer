@@ -45,9 +45,12 @@ public class SmartDialNameMatcher {
 
     private final ArrayList<SmartDialMatchPosition> mMatchPositions = Lists.newArrayList();
 
-    private static final SmartDialMap LATIN_SMART_DIAL_MAP = new LatinSmartDialMap();
+    public static final SmartDialMap LATIN_SMART_DIAL_MAP = new LatinSmartDialMap();
 
     private final SmartDialMap mMap;
+
+    private String mNameMatchMask = "";
+    private String mPhoneNumberMatchMask = "";
 
     @VisibleForTesting
     public SmartDialNameMatcher(String query) {
@@ -57,6 +60,29 @@ public class SmartDialNameMatcher {
     public SmartDialNameMatcher(String query, SmartDialMap map) {
         mQuery = query;
         mMap = map;
+    }
+
+    /**
+     * Constructs empty highlight mask. Bit 0 at a position means there is no match, Bit 1 means
+     * there is a match and should be highlighted in the TextView.
+     * @param builder StringBuilder object
+     * @param length Length of the desired mask.
+     */
+    private void constructEmptyMask(StringBuilder builder, int length) {
+        for (int i = 0; i < length; ++i) {
+            builder.append("0");
+        }
+    }
+
+    /**
+     * Replaces the 0-bit at a position with 1-bit, indicating that there is a match.
+     * @param builder StringBuilder object.
+     * @param matchPos Match Positions to mask as 1.
+     */
+    private void replaceBitInMask(StringBuilder builder, SmartDialMatchPosition matchPos) {
+        for (int i = matchPos.start; i < matchPos.end; ++i) {
+            builder.replace(i, i + 1, "1");
+        }
     }
 
     /**
@@ -98,6 +124,10 @@ public class SmartDialNameMatcher {
      */
     @VisibleForTesting
     public SmartDialMatchPosition matchesNumber(String phoneNumber, String query, boolean useNanp) {
+        StringBuilder builder = new StringBuilder();
+        constructEmptyMask(builder, phoneNumber.length());
+        mPhoneNumberMatchMask = builder.toString();
+
         // Try matching the number as is
         SmartDialMatchPosition matchPos = matchesNumberWithOffset(phoneNumber, query, 0);
         if (matchPos == null) {
@@ -105,6 +135,10 @@ public class SmartDialNameMatcher {
                     SmartDialPrefix.parsePhoneNumber(phoneNumber);
 
             if (phoneNumberTokens == null) {
+                if (matchPos != null) {
+                    replaceBitInMask(builder, matchPos);
+                    mPhoneNumberMatchMask = builder.toString();
+                }
                 return matchPos;
             }
             if (phoneNumberTokens.countryCodeOffset != 0) {
@@ -116,7 +150,23 @@ public class SmartDialNameMatcher {
                         phoneNumberTokens.nanpCodeOffset);
             }
         }
+        if (matchPos != null) {
+            replaceBitInMask(builder, matchPos);
+            mPhoneNumberMatchMask = builder.toString();
+        }
         return matchPos;
+    }
+
+    /**
+     * Matches a phone number against the saved query, taking care of formatting characters and also
+     * taking into account country code prefixes and special NANP number treatment.
+     *
+     * @param phoneNumber - Raw phone number
+     * @return {@literal null} if the number and the query don't match, a valid
+     *         SmartDialMatchPosition with the matching positions otherwise
+     */
+    public SmartDialMatchPosition matchesNumber(String phoneNumber) {
+        return matchesNumber(phoneNumber, mQuery, true);
     }
 
     /**
@@ -210,6 +260,9 @@ public class SmartDialNameMatcher {
     @VisibleForTesting
     boolean matchesCombination(String displayName, String query,
             ArrayList<SmartDialMatchPosition> matchList) {
+        StringBuilder builder = new StringBuilder();
+        constructEmptyMask(builder, displayName.length());
+        mNameMatchMask = builder.toString();
         final int nameLength = displayName.length();
         final int queryLength = query.length();
 
@@ -286,6 +339,10 @@ public class SmartDialNameMatcher {
                         // one so if we find a full token match, we can return right away
                         matchList.add(new SmartDialMatchPosition(
                                 tokenStart, queryLength + tokenStart + seperatorCount));
+                        for (SmartDialMatchPosition match : matchList) {
+                            replaceBitInMask(builder, match);
+                        }
+                        mNameMatchMask = builder.toString();
                         return true;
                     } else if (ALLOW_INITIAL_MATCH && queryStart < INITIAL_LENGTH_LIMIT) {
                         // we matched the first character.
@@ -343,6 +400,10 @@ public class SmartDialNameMatcher {
         // then partial will always be empty.
         if (!partial.isEmpty()) {
             matchList.addAll(partial);
+            for (SmartDialMatchPosition match : matchList) {
+                replaceBitInMask(builder, match);
+            }
+            mNameMatchMask = builder.toString();
             return true;
         }
         return false;
@@ -357,6 +418,14 @@ public class SmartDialNameMatcher {
         // Return a clone of mMatchPositions so that the caller can use it without
         // worrying about it changing
         return new ArrayList<SmartDialMatchPosition>(mMatchPositions);
+    }
+
+    public String getNameMatchPositionsInString() {
+        return mNameMatchMask;
+    }
+
+    public String getNumberMatchPositionsInString() {
+        return mPhoneNumberMatchMask;
     }
 
     public String getQuery() {

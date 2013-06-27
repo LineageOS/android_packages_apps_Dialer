@@ -127,13 +127,6 @@
                     />
                 </LinearLayout>
             </LinearLayout>
-            <View
-                android:id="@+id/divider"
-                android:layout_width="1px"
-                android:layout_height="@dimen/call_log_call_action_size"
-                android:background="@drawable/ic_divider_dashed_holo_dark"
-                android:layout_gravity="center_vertical"
-            />
             <ImageButton
                 android:id="@+id/secondary_action_icon"
                 android:layout_width="@dimen/call_log_call_action_width"

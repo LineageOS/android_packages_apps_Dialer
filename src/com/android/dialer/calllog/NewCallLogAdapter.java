@@ -46,7 +46,7 @@ import java.util.LinkedList;
 /**
  * Adapter class to fill in data for the Call Log.
  */
-/*package*/ class NewCallLogAdapter extends GroupingListAdapter
+public class NewCallLogAdapter extends GroupingListAdapter
         implements ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {
@@ -166,7 +166,7 @@ import java.util.LinkedList;
     private QueryThread mCallerIdThread;
 
     /** Instance of helper class for managing views. */
-    private final CallLogListItemHelper mCallLogViewsHelper;
+    private final NewCallLogListItemHelper mCallLogViewsHelper;
 
     /** Helper to set up contact photos. */
     private final ContactPhotoManager mContactPhotoManager;
@@ -227,7 +227,7 @@ import java.util.LinkedList;
         }
     };
 
-    NewCallLogAdapter(Context context, CallFetcher callFetcher,
+    public NewCallLogAdapter(Context context, CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper) {
         super(context);
 
@@ -246,7 +246,7 @@ import java.util.LinkedList;
         PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
                 resources, callTypeHelper, mPhoneNumberHelper);
         mCallLogViewsHelper =
-                new CallLogListItemHelper(
+                new NewCallLogListItemHelper(
                         phoneCallDetailsHelper, mPhoneNumberHelper, resources);
         mCallLogGroupBuilder = new CallLogGroupBuilder(this);
     }
@@ -259,7 +259,7 @@ import java.util.LinkedList;
         mCallFetcher.fetchCalls();
     }
 
-    void setLoading(boolean loading) {
+    public void setLoading(boolean loading) {
         mLoading = loading;
     }
 
@@ -444,7 +444,7 @@ import java.util.LinkedList;
     protected View newStandAloneView(Context context, ViewGroup parent) {
         LayoutInflater inflater =
                 (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
+        View view = inflater.inflate(R.layout.new_call_log_list_item, parent, false);
         findAndCacheViews(view);
         return view;
     }
@@ -458,7 +458,7 @@ import java.util.LinkedList;
     protected View newChildView(Context context, ViewGroup parent) {
         LayoutInflater inflater =
                 (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
+        View view = inflater.inflate(R.layout.new_call_log_list_item, parent, false);
         findAndCacheViews(view);
         return view;
     }
@@ -472,7 +472,7 @@ import java.util.LinkedList;
     protected View newGroupView(Context context, ViewGroup parent) {
         LayoutInflater inflater =
                 (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
+        View view = inflater.inflate(R.layout.new_call_log_list_item, parent, false);
         findAndCacheViews(view);
         return view;
     }
@@ -515,9 +515,10 @@ import java.util.LinkedList;
 
         final ContactInfo cachedContactInfo = getContactInfoFromCallLog(c);
 
-        /*views.primaryActionView.setTag(
+        views.primaryActionView.setTag(
                 IntentProvider.getCallDetailIntentProvider(
-                        this, c.getPosition(), c.getLong(CallLogQuery.ID), count));*/
+                        getCursor(), c.getPosition(), c.getLong(CallLogQuery.ID), count));
+
         // Store away the voicemail information so we can play it directly.
         if (callType == Calls.VOICEMAIL_TYPE) {
             String voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
@@ -715,7 +716,7 @@ import java.util.LinkedList;
 
     private void setPhoto(CallLogListItemViews views, long photoId, Uri contactUri) {
         views.quickContactView.assignContactUri(contactUri);
-        mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, true);
+        mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, false /* darkTheme */);
     }
 
     /**

@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * in the query. Used by {@link SmartDialController} to highlight certain parts of the contact's
  * display name to indicate that those ranges matched the user's query.
  */
-class SmartDialMatchPosition {
+public class SmartDialMatchPosition {
     public int start;
     public int end;
 

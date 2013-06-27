@@ -511,4 +511,31 @@
     <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
     <string name="add_contact_not_available">Re-enable the People application to use this feature.</string>
 
+    <!-- Hint displayed in dialer search box when there is no query that is currently typed.
+         [CHAR LIMIT=25] -->
+    <string name="dialer_hint_find_contact">Type a name or phone</string>
+
+    <!-- Title for the call log tab containing the list of all voicemails and calls
+         [CHAR LIMIT=10] -->
+    <string name="call_log_all_title">All</string>
+
+    <!-- Title for the call log tab containing the list of all missed calls only
+         [CHAR LIMIT=10] -->
+    <string name="call_log_missed_title">Missed</string>
+
+    <!-- Title for the call log tab containing the list of all voicemails only
+         [CHAR LIMIT=10] -->
+    <string name="call_log_voicemail_title">Voicemail</string>
+
+    <!-- Text displayed when the list of missed calls is empty -->
+    <string name="recentMissed_empty">No recent missed calls.</string>
+
+    <!-- Text displayed when the list of voicemails is empty -->
+    <string name="recentVoicemails_empty">No recent voicemails.</string>
+
+    <!--  Menu option to enable all contacts to be displayed -->
+    <string name="show_all_contacts">Show all contacts</string>
+
+    <!--  Menu option to show favorite contacts only -->
+    <string name="show_favorites_only">Show favorites only</string>
 </resources>

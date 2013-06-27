@@ -13,10 +13,15 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/delete_all"
-        android:title="@string/recentCalls_deleteAll"
-        android:showAsAction="never"
-        android:orderInCategory="1"/>
-</menu>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?android:attr/actionBarSize"
+    android:id="@+id/calllog_frame">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/call_log_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?android:attr/actionBarSize" />
+</FrameLayout>

@@ -7,10 +7,9 @@
 
 # Any class or method annotated with NeededForTesting or NeededForReflection.
 -keep @com.android.contacts.common.test.NeededForTesting class *
--keep @com.android.dialer.test.NeededForReflection class *
 -keepclassmembers class * {
 @com.android.contacts.common.test.NeededForTesting *;
-@com.android.dialer.test.NeededForReflection *;
+@com.android.dialer.NeededForReflection *;
 }
 
 -verbose

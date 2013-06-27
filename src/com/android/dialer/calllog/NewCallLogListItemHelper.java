@@ -27,8 +27,12 @@ import com.android.dialer.R;
 
 /**
  * Helper class to fill in the views of a call log entry.
+ * TODO krelease: The only difference between this and the original is that we don't touch
+ * divider views, which are not present in the new dialer. Once the new dialer replaces
+ * the old one, we can replace it entirely. Otherwise we would have redundant divider=null
+ * checks all over the place.
  */
-/*package*/ class NewCallLogListItemHelper {
+/* package */class NewCallLogListItemHelper {
     /** Helper for populating the details of a phone call. */
     private final PhoneCallDetailsHelper mPhoneCallDetailsHelper;
     /** Helper for handling phone numbers. */
@@ -67,15 +71,12 @@ import com.android.dialer.R;
         if (canPlay) {
             // Playback action takes preference.
             configurePlaySecondaryAction(views, isHighlighted);
-            views.dividerView.setVisibility(View.VISIBLE);
         } else if (canCall) {
             // Call is the secondary action.
             configureCallSecondaryAction(views, details);
-            views.dividerView.setVisibility(View.VISIBLE);
         } else {
             // No action available.
             views.secondaryActionView.setVisibility(View.GONE);
-            views.dividerView.setVisibility(View.GONE);
         }
     }
 

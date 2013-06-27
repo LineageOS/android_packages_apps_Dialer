@@ -517,7 +517,7 @@ import java.util.LinkedList;
 
         views.primaryActionView.setTag(
                 IntentProvider.getCallDetailIntentProvider(
-                        this, c.getPosition(), c.getLong(CallLogQuery.ID), count));
+                        getCursor(), c.getPosition(), c.getLong(CallLogQuery.ID), count));
         // Store away the voicemail information so we can play it directly.
         if (callType == Calls.VOICEMAIL_TYPE) {
             String voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);

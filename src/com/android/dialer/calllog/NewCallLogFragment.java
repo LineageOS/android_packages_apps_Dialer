@@ -34,7 +34,6 @@ import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -59,10 +58,11 @@ import com.google.common.annotations.VisibleForTesting;
 import java.util.List;
 
 /**
- * Displays a list of call log entries.
+ * Displays a list of call log entries. To filter for a particular kind of call
+ * (all, missed or voicemails), specify it in the constructor.
  */
 public class NewCallLogFragment extends ListFragment
-        implements CallLogQueryHandler.Listener, CallLogAdapter.CallFetcher {
+        implements CallLogQueryHandler.Listener, NewCallLogAdapter.CallFetcher {
     private static final String TAG = "CallLogFragment";
 
     /**
@@ -70,7 +70,7 @@ public class NewCallLogFragment extends ListFragment
      */
     private static final int EMPTY_LOADER_ID = 0;
 
-    private CallLogAdapter mAdapter;
+    private NewCallLogAdapter mAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
     private boolean mScrollToTop;
 
@@ -81,7 +81,6 @@ public class NewCallLogFragment extends ListFragment
     private View mStatusMessageView;
     private TextView mStatusMessageText;
     private TextView mStatusMessageAction;
-    private TextView mFilterStatusView;
     private KeyguardManager mKeyguardManager;
 
     private boolean mEmptyLoaderRunning;
@@ -114,11 +113,30 @@ public class NewCallLogFragment extends ListFragment
     // Default to all calls.
     private int mCallTypeFilter = CallLogQueryHandler.CALL_TYPE_ALL;
 
+    // Log limit - if no limit is specified, then the default in {@link NewCallLogQueryHandler}
+    // will be used.
+    private int mLogLimit = -1;
+
+    public NewCallLogFragment() {
+        this(CallLogQueryHandler.CALL_TYPE_ALL, -1);
+    }
+
+    public NewCallLogFragment(int filterType) {
+        this(filterType, -1);
+    }
+
+    public NewCallLogFragment(int filterType, int logLimit) {
+        super();
+        mCallTypeFilter = filterType;
+        mLogLimit = logLimit;
+    }
+
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
 
-        mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(), this);
+        mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
+                this, mLogLimit);
         mKeyguardManager =
                 (KeyguardManager) getActivity().getSystemService(Context.KEYGUARD_SERVICE);
         getActivity().getContentResolver().registerContentObserver(
@@ -126,6 +144,7 @@ public class NewCallLogFragment extends ListFragment
         getActivity().getContentResolver().registerContentObserver(
                 ContactsContract.Contacts.CONTENT_URI, true, mContactsObserver);
         setHasOptionsMenu(true);
+        updateCallList(mCallTypeFilter);
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -205,20 +224,20 @@ public class NewCallLogFragment extends ListFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
-        View view = inflater.inflate(R.layout.call_log_fragment, container, false);
+        View view = inflater.inflate(R.layout.new_call_log_fragment, container, false);
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
         mStatusMessageView = view.findViewById(R.id.voicemail_status);
         mStatusMessageText = (TextView) view.findViewById(R.id.voicemail_status_message);
         mStatusMessageAction = (TextView) view.findViewById(R.id.voicemail_status_action);
-        mFilterStatusView = (TextView) view.findViewById(R.id.filter_status);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        updateEmptyMessage(mCallTypeFilter);
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mAdapter = new CallLogAdapter(getActivity(), this,
+        mAdapter = new NewCallLogAdapter(getActivity(), this,
                 new ContactInfoHelper(getActivity(), currentCountryIso));
         setListAdapter(mAdapter);
         getListView().setItemsCanFocus(true);
@@ -250,6 +269,7 @@ public class NewCallLogFragment extends ListFragment
 
     @Override
     public void onResume() {
+        Log.d(TAG, "Call Log Fragment resume");
         super.onResume();
         refreshData();
     }
@@ -320,132 +340,30 @@ public class NewCallLogFragment extends ListFragment
         mCallLogQueryHandler.fetchVoicemailStatus();
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.call_log_options, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        final MenuItem itemDeleteAll = menu.findItem(R.id.delete_all);
-        // Check if all the menu items are inflated correctly. As a shortcut, we assume all
-        // menu items are ready if the first item is non-null.
-        if (itemDeleteAll != null) {
-            itemDeleteAll.setEnabled(mAdapter != null && !mAdapter.isEmpty());
-
-            showAllFilterMenuOptions(menu);
-            hideCurrentFilterMenuOption(menu);
-
-            // Only hide if not available.  Let the above calls handle showing.
-            if (!mVoicemailSourcesAvailable) {
-                menu.findItem(R.id.show_voicemails_only).setVisible(false);
-            }
+    private void updateCallList(int filterType) {
+        if (filterType == CallLogQueryHandler.CALL_TYPE_ALL) {
+            unregisterPhoneCallReceiver();
+        } else {
+            // TODO krelease: Make this work
+            //registerPhoneCallReceiver();
         }
+        mCallLogQueryHandler.fetchCalls(filterType);
     }
 
-    private void hideCurrentFilterMenuOption(Menu menu) {
-        MenuItem item = null;
-        switch (mCallTypeFilter) {
-            case CallLogQueryHandler.CALL_TYPE_ALL:
-                item = menu.findItem(R.id.show_all_calls);
-                break;
-            case Calls.INCOMING_TYPE:
-                item = menu.findItem(R.id.show_incoming_only);
-                break;
-            case Calls.OUTGOING_TYPE:
-                item = menu.findItem(R.id.show_outgoing_only);
-                break;
-            case Calls.MISSED_TYPE:
-                item = menu.findItem(R.id.show_missed_only);
-                break;
-            case Calls.VOICEMAIL_TYPE:
-                menu.findItem(R.id.show_voicemails_only);
-                break;
-        }
-        if (item != null) {
-            item.setVisible(false);
-        }
-    }
-
-    private void showAllFilterMenuOptions(Menu menu) {
-        menu.findItem(R.id.show_all_calls).setVisible(true);
-        menu.findItem(R.id.show_incoming_only).setVisible(true);
-        menu.findItem(R.id.show_outgoing_only).setVisible(true);
-        menu.findItem(R.id.show_missed_only).setVisible(true);
-        menu.findItem(R.id.show_voicemails_only).setVisible(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.delete_all:
-                ClearCallLogDialog.show(getFragmentManager());
-                return true;
-
-            case R.id.show_outgoing_only:
-                // We only need the phone call receiver when there is an active call type filter.
-                // Not many people may use the filters so don't register the receiver until now .
-                registerPhoneCallReceiver();
-                mCallLogQueryHandler.fetchCalls(Calls.OUTGOING_TYPE);
-                updateFilterTypeAndHeader(Calls.OUTGOING_TYPE);
-                return true;
-
-            case R.id.show_incoming_only:
-                registerPhoneCallReceiver();
-                mCallLogQueryHandler.fetchCalls(Calls.INCOMING_TYPE);
-                updateFilterTypeAndHeader(Calls.INCOMING_TYPE);
-                return true;
-
-            case R.id.show_missed_only:
-                registerPhoneCallReceiver();
-                mCallLogQueryHandler.fetchCalls(Calls.MISSED_TYPE);
-                updateFilterTypeAndHeader(Calls.MISSED_TYPE);
-                return true;
-
-            case R.id.show_voicemails_only:
-                registerPhoneCallReceiver();
-                mCallLogQueryHandler.fetchCalls(Calls.VOICEMAIL_TYPE);
-                updateFilterTypeAndHeader(Calls.VOICEMAIL_TYPE);
-                return true;
-
-            case R.id.show_all_calls:
-                // Filter is being turned off, receiver no longer needed.
-                unregisterPhoneCallReceiver();
-                mCallLogQueryHandler.fetchCalls(CallLogQueryHandler.CALL_TYPE_ALL);
-                updateFilterTypeAndHeader(CallLogQueryHandler.CALL_TYPE_ALL);
-                return true;
-
-            default:
-                return false;
-        }
-    }
-
-    private void updateFilterTypeAndHeader(int filterType) {
-        mCallTypeFilter = filterType;
-
+    private void updateEmptyMessage(int filterType) {
+        final String message;
         switch (filterType) {
-            case CallLogQueryHandler.CALL_TYPE_ALL:
-                mFilterStatusView.setVisibility(View.GONE);
-                break;
-            case Calls.INCOMING_TYPE:
-                showFilterStatus(R.string.call_log_incoming_header);
-                break;
-            case Calls.OUTGOING_TYPE:
-                showFilterStatus(R.string.call_log_outgoing_header);
-                break;
             case Calls.MISSED_TYPE:
-                showFilterStatus(R.string.call_log_missed_header);
+                message = getString(R.string.recentMissed_empty);
                 break;
             case Calls.VOICEMAIL_TYPE:
-                showFilterStatus(R.string.call_log_voicemail_header);
+                message = getString(R.string.recentVoicemails_empty);
+                break;
+            default:
+                message = getString(R.string.recentCalls_empty);
                 break;
         }
-    }
-
-    private void showFilterStatus(int resId) {
-        mFilterStatusView.setText(resId);
-        mFilterStatusView.setVisibility(View.VISIBLE);
+        ((TextView) getListView().getEmptyView()).setText(message);
     }
 
     public void callSelectedEntry() {
@@ -489,8 +407,7 @@ public class NewCallLogFragment extends ListFragment
         }
     }
 
-    @VisibleForTesting
-    CallLogAdapter getAdapter() {
+    NewCallLogAdapter getAdapter() {
         return mAdapter;
     }
 
@@ -547,6 +464,8 @@ public class NewCallLogFragment extends ListFragment
         updateOnTransition(true);
     }
 
+    // TODO krelease: Figure out if we still need this. If so, it should be probably be moved to
+    // the call log activity instead, or done only in a single call log fragment.
     private void updateOnTransition(boolean onEntry) {
         // We don't want to update any call data when keyguard is on because the user has likely not
         // seen the new calls yet.
@@ -570,9 +489,13 @@ public class NewCallLogFragment extends ListFragment
         getActivity().startService(serviceIntent);
     }
 
+    // TODO krelease: Make the ViewPager switch to the correct tab (All) when a phone call is
+    // placed.
+    // This should probably be moved to the call log activity.
     /**
      * Register a phone call filter to reset the call type when a phone call is place.
      */
+    /*
     private void registerPhoneCallReceiver() {
         if (mPhoneStateListener != null) {
             return; // Already registered.
@@ -592,13 +515,13 @@ public class NewCallLogFragment extends ListFragment
                         if (getActivity() == null || getActivity().isFinishing()) {
                             return;
                         }
-                        updateFilterTypeAndHeader(CallLogQueryHandler.CALL_TYPE_ALL);
                     }
                  });
             }
         };
         mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
     }
+    */
 
     /**
      * Un-registers the phone call receiver.
