@@ -280,7 +280,7 @@ public class SmartDialPrefix {
                 /** If the number does not start with '+', finds out whether it is in NANP
                  * format and has '1' preceding the number.
                  */
-                if ((normalizedNumber.charAt(0) == '1') && (normalizedNumber.length() == 11) &&
+                if ((normalizedNumber.length() == 11) && (normalizedNumber.charAt(0) == '1') &&
                         (sUserInNanpRegion)) {
                     countryCode = "1";
                     countryCodeOffset = number.indexOf(normalizedNumber.charAt(1));
