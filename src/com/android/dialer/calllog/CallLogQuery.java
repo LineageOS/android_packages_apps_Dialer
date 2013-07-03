@@ -64,42 +64,4 @@ public final class CallLogQuery {
     public static final int CACHED_FORMATTED_NUMBER = 15;
     public static final int IS_READ = 16;
     public static final int NUMBER_PRESENTATION = 17;
-    /** The index of the synthetic "section" column in the extended projection. */
-    public static final int SECTION = 18;
-
-    /**
-     * The name of the synthetic "section" column.
-     * <p>
-     * This column identifies whether a row is a header or an actual item, and whether it is
-     * part of the new or old calls.
-     */
-    public static final String SECTION_NAME = "section";
-    /** The value of the "section" column for the header of the new section. */
-    public static final int SECTION_NEW_HEADER = 0;
-    /** The value of the "section" column for the items of the new section. */
-    public static final int SECTION_NEW_ITEM = 1;
-    /** The value of the "section" column for the header of the old section. */
-    public static final int SECTION_OLD_HEADER = 2;
-    /** The value of the "section" column for the items of the old section. */
-    public static final int SECTION_OLD_ITEM = 3;
-
-    /** The call log projection including the section name. */
-    public static final String[] EXTENDED_PROJECTION;
-    static {
-        EXTENDED_PROJECTION = new String[_PROJECTION.length + 1];
-        System.arraycopy(_PROJECTION, 0, EXTENDED_PROJECTION, 0, _PROJECTION.length);
-        EXTENDED_PROJECTION[_PROJECTION.length] = SECTION_NAME;
-    }
-
-    public static boolean isSectionHeader(Cursor cursor) {
-        int section = cursor.getInt(CallLogQuery.SECTION);
-        return section == CallLogQuery.SECTION_NEW_HEADER
-                || section == CallLogQuery.SECTION_OLD_HEADER;
-    }
-
-    public static boolean isNewSection(Cursor cursor) {
-        int section = cursor.getInt(CallLogQuery.SECTION);
-        return section == CallLogQuery.SECTION_NEW_ITEM
-                || section == CallLogQuery.SECTION_NEW_HEADER;
-    }
 }

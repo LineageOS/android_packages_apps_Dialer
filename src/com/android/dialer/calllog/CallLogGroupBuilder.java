@@ -70,10 +70,7 @@ public class CallLogGroupBuilder {
             final boolean sameNumber = equalNumbers(firstNumber, currentNumber);
             final boolean shouldGroup;
 
-            if (CallLogQuery.isSectionHeader(cursor)) {
-                // Cannot group headers.
-                shouldGroup = false;
-            } else if (!sameNumber) {
+            if (!sameNumber) {
                 // Should only group with calls from the same number.
                 shouldGroup = false;
             } else if (firstCallType == Calls.VOICEMAIL_TYPE) {

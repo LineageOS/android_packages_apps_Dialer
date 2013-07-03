@@ -126,7 +126,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mAdapter.disableRequestProcessingForTest();
         mAdapter.stopRequestProcessing();
         mParentView = new FrameLayout(mActivity);
-        mCursor = new MatrixCursor(CallLogQuery.EXTENDED_PROJECTION);
+        mCursor = new MatrixCursor(CallLogQuery._PROJECTION);
         buildIconMap();
     }
 
@@ -515,7 +515,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
      */
     private Object[] getValuesToInsert(String number, int presentation,
             long date, int duration, int type) {
-        Object[] values = CallLogQueryTestUtils.createTestExtendedValues();
+        Object[] values = CallLogQueryTestUtils.createTestValues();
         values[CallLogQuery.ID] = mIndex;
         values[CallLogQuery.NUMBER] = number;
         values[CallLogQuery.NUMBER_PRESENTATION] = presentation;
@@ -526,7 +526,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         }
         values[CallLogQuery.CALL_TYPE] = type;
         values[CallLogQuery.COUNTRY_ISO] = TEST_COUNTRY_ISO;
-        values[CallLogQuery.SECTION] = CallLogQuery.SECTION_OLD_ITEM;
         return values;
     }
 

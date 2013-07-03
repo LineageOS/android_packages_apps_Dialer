@@ -500,24 +500,10 @@ import java.util.LinkedList;
      */
     private void bindView(View view, Cursor c, int count) {
         final CallLogListItemViews views = (CallLogListItemViews) view.getTag();
-        final int section = c.getInt(CallLogQuery.SECTION);
 
-        // This might be a header: check the value of the section column in the cursor.
-        if (section == CallLogQuery.SECTION_NEW_HEADER
-                || section == CallLogQuery.SECTION_OLD_HEADER) {
-            views.primaryActionView.setVisibility(View.GONE);
-            views.bottomDivider.setVisibility(View.GONE);
-            views.listHeaderTextView.setVisibility(View.VISIBLE);
-            views.listHeaderTextView.setText(
-                    section == CallLogQuery.SECTION_NEW_HEADER
-                            ? R.string.call_log_new_header
-                            : R.string.call_log_old_header);
-            // Nothing else to set up for a header.
-            return;
-        }
         // Default case: an item in the call log.
         views.primaryActionView.setVisibility(View.VISIBLE);
-        views.bottomDivider.setVisibility(isLastOfSection(c) ? View.GONE : View.VISIBLE);
+        views.bottomDivider.setVisibility(View.VISIBLE);
         views.listHeaderTextView.setVisibility(View.GONE);
 
         final String number = c.getString(CallLogQuery.NUMBER);
@@ -615,16 +601,6 @@ import java.util.LinkedList;
             mViewTreeObserver = view.getViewTreeObserver();
             mViewTreeObserver.addOnPreDrawListener(this);
         }
-    }
-
-    /** Returns true if this is the last item of a section. */
-    private boolean isLastOfSection(Cursor c) {
-        if (c.isLast()) return true;
-        final int section = c.getInt(CallLogQuery.SECTION);
-        if (!c.moveToNext()) return true;
-        final int nextSection = c.getInt(CallLogQuery.SECTION);
-        c.moveToPrevious();
-        return section != nextSection;
     }
 
     /** Checks whether the contact info from the call log matches the one from the contacts db. */

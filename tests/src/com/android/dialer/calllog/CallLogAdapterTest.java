@@ -65,7 +65,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         mAdapter = new TestCallLogAdapter(getContext(), fakeCallFetcher, fakeContactInfoHelper);
         // The cursor used in the tests to store the entries to display.
-        mCursor = new MatrixCursor(CallLogQuery.EXTENDED_PROJECTION);
+        mCursor = new MatrixCursor(CallLogQuery._PROJECTION);
         mCursor.moveToFirst();
         // The views into which to store the data.
         mView = new View(getContext());
@@ -172,7 +172,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
     /** Returns a call log entry without cached values. */
     private Object[] createCallLogEntry() {
-        Object[] values = CallLogQueryTestUtils.createTestExtendedValues();
+        Object[] values = CallLogQueryTestUtils.createTestValues();
         values[CallLogQuery.NUMBER] = TEST_NUMBER;
         values[CallLogQuery.COUNTRY_ISO] = TEST_COUNTRY_ISO;
         return values;

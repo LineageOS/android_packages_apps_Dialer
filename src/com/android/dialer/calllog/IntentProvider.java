@@ -68,10 +68,7 @@ public abstract class IntentProvider {
             public Intent getIntent(Context context) {
                 Cursor cursor = adapter.getCursor();
                 cursor.moveToPosition(position);
-                if (CallLogQuery.isSectionHeader(cursor)) {
-                    // Do nothing when a header is clicked.
-                    return null;
-                }
+
                 Intent intent = new Intent(context, CallDetailActivity.class);
                 // Check if the first item is a voicemail.
                 String voicemailUri = cursor.getString(CallLogQuery.VOICEMAIL_URI);
