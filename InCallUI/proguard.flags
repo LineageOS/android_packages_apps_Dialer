@@ -1,0 +1,3 @@
+-keep class com.android.incallui.widget.multiwaveview.* {
+  *;
+}

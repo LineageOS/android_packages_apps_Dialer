@@ -15,15 +15,30 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
         package="com.android.incallui"
         coreApp="true" >
 
     <original-package android:name="com.android.incallui" />
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application
             android:label="@string/inCallLabel"
             android:supportsRtl="true">
+
+        <!-- Main in-call UI activity.  This is never launched directly
+             from outside the phone app; instead, it's either launched by
+             the OutgoingCallBroadcaster (for outgoing calls), or as the
+             fullScreenIntent of a notification (for incoming calls.) -->
+        <activity android:name=".InCallActivity"
+                  android:theme="@style/Theme.InCallScreen"
+                  android:label="@string/inCallLabel"
+                  android:excludeFromRecents="true"
+                  android:launchMode="singleInstance"
+                  android:screenOrientation="nosensor"
+                  android:configChanges="keyboardHidden"
+                  android:exported="false">
+        </activity>
 
         <service android:name="CallMonitorService">
             <intent-filter>

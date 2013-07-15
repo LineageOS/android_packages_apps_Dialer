@@ -9,6 +9,8 @@ LOCAL_PACKAGE_NAME := InCallUI
 LOCAL_CERTIFICATE := platform
 LOCAL_PRIVELEGED_MODULE := true
 
+LOCAL_PROGUARD_FLAG_FILES := proguard.flags
+
 include $(BUILD_PACKAGE)
 
 # Build the test package

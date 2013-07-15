@@ -19,7 +19,6 @@ package com.android.incallui;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -59,6 +58,10 @@ public class CallMonitorService extends Service {
             final Message msg = mMainHandler.obtainMessage(DO_SHOW_ALERT, 0, 0,
                     "Incoming call with call Id: " + callId);
             mMainHandler.sendMessage(msg);
+
+            final Intent intent = new Intent(getApplication(), InCallActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     };
 
