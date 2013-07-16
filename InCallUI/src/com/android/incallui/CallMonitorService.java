@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.services.telephony.common.ICallMonitorService;
@@ -31,30 +33,68 @@ import com.android.services.telephony.common.ICallMonitorService;
  */
 public class CallMonitorService extends Service {
 
-     @Override
-     public void onCreate() {
-         super.onCreate();
-     }
+    private static final String TAG = CallMonitorService.class.getSimpleName();
+    private static final boolean DBG = false; // TODO: Have a shared location for this.
+    private MainHandler mMainHandler;
 
-     @Override
-     public void onDestroy() {
-     }
+    private static final int DO_SHOW_ALERT = 1;
 
-     @Override
-     public IBinder onBind(Intent intent) {
-         return mBinder;
-     }
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mMainHandler = new MainHandler();
+    }
 
-     private final ICallMonitorService.Stub mBinder = new ICallMonitorService.Stub() {
-         public void onIncomingCall(int callId) {
-             showAlert("New Call came in: " + callId);
-         }
-     };
+    @Override
+    public void onDestroy() {
+    }
 
-     private void showAlert(String message) {
-         Context context = getApplicationContext();
-         int duration = Toast.LENGTH_SHORT;
+    @Override
+    public IBinder onBind(Intent intent) {
+        return mBinder;
+    }
 
-         Toast.makeText(context, message, duration).show();
-     }
+    private final ICallMonitorService.Stub mBinder = new ICallMonitorService.Stub() {
+        public void onIncomingCall(int callId) {
+            final Message msg = mMainHandler.obtainMessage(DO_SHOW_ALERT, 0, 0,
+                    "Incoming call with call Id: " + callId);
+            mMainHandler.sendMessage(msg);
+        }
+    };
+
+    /**
+     * Handles messages from the Service methods so that they get called on the
+     * main thread.  Service methods by default are handled in background threads.
+     */
+    class MainHandler extends Handler {
+        MainHandler() {
+            super(getApplicationContext().getMainLooper(), null, true);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            executeMessage(msg);
+        }
+    }
+
+    private void showAlert(String message) {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast.makeText(context, message, duration).show();
+    }
+
+    private void executeMessage(Message msg) {
+        if (DBG) {
+            Log.d(TAG, "executeMessage(" + msg.what + ")");
+        }
+        switch (msg.what) {
+            case DO_SHOW_ALERT:
+                showAlert((String) msg.obj);
+                break;
+            default:
+                break;
+
+        }
+    }
  }

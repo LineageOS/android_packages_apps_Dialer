@@ -27,7 +27,7 @@
 
         <service android:name="CallMonitorService">
             <intent-filter>
-                <action android:name="com.android.telephony.common.ICallMonitorService" />
+                <action android:name="com.android.services.telephony.common.ICallMonitorService" />
             </intent-filter>
         </service>
 
