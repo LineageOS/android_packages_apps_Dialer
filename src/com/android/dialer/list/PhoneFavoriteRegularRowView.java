@@ -16,26 +16,42 @@
 package com.android.dialer.list;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.View;
+import android.view.GestureDetector;
 
-import com.android.contacts.common.MoreContactUtils;
-import com.android.contacts.common.list.ContactEntry;
-import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.util.ViewUtil;
+import com.android.dialer.R;
+import com.android.dialer.list.PhoneFavoriteDragAndDropListeners.PhoneFavoriteDragListener;
+import com.android.dialer.list.PhoneFavoriteDragAndDropListeners.PhoneFavoriteGestureListener;
 
-/**
- * A light version of the {@link com.android.contacts.common.list.ContactTileView} that is used in Dialtacts
- * for frequently called contacts. Slightly different behavior from superclass...
- * when you tap it, you want to call the frequently-called number for the
- * contact, even if that is not the default number for that contact.
- */
-public class PhoneFavoriteRegularRowView extends ContactTileView {
-    private String mPhoneNumberString;
+import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
+
+
+public class PhoneFavoriteRegularRowView extends PhoneFavoriteTileView {
+    private static final String TAG = PhoneFavoriteRegularRowView.class.getSimpleName();
+    private static final boolean DEBUG = false;
 
     public PhoneFavoriteRegularRowView(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+
+        mFavoriteContactCard = findViewById(R.id.contact_favorite_card);
+        mRemovalDialogue = findViewById(R.id.favorite_remove_dialogue);
+        mUndoRemovalButton = findViewById(R.id.favorite_remove_undo_button);
+
+        mGestureDetector = new GestureDetector(getContext(),
+                new PhoneFavoriteGestureListener(this));
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        mParentRow = (ContactTileRow) getParent();
+        mParentRow.setOnDragListener(new PhoneFavoriteDragListener(mParentRow,
+                mParentRow.getTileAdapter()));
     }
 
     @Override
@@ -46,37 +62,5 @@ public class PhoneFavoriteRegularRowView extends ContactTileView {
     @Override
     protected int getApproximateImageSize() {
         return ViewUtil.getConstantPreLayoutWidth(getQuickContact());
-    }
-
-    @Override
-    public void loadFromContact(ContactEntry entry) {
-        super.loadFromContact(entry);
-        mPhoneNumberString = null; // ... in case we're reusing the view
-        if (entry != null) {
-            // Grab the phone-number to call directly... see {@link onClick()}
-            mPhoneNumberString = entry.phoneNumber;
-        }
-    }
-
-    @Override
-    protected OnClickListener createClickListener() {
-        return new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mListener == null) return;
-                if (TextUtils.isEmpty(mPhoneNumberString)) {
-                    // Copy "superclass" implementation
-                    mListener.onContactSelected(getLookupUri(), MoreContactUtils
-                            .getTargetRectFromView(
-                                    mContext, PhoneFavoriteRegularRowView.this));
-                } else {
-                    // When you tap a frequently-called contact, you want to
-                    // call them at the number that you usually talk to them
-                    // at (i.e. the one displayed in the UI), regardless of
-                    // whether that's their default number.
-                    mListener.onCallNumberDirectly(mPhoneNumberString);
-                }
-            }
-        };
     }
 }

@@ -15,11 +15,13 @@
  */
 package com.android.dialer.list;
 
+import android.animation.ObjectAnimator;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
@@ -33,7 +35,6 @@ import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.R;
 import com.android.contacts.common.list.ContactEntry;
-import com.android.contacts.common.list.ContactTileAdapter;
 import com.android.contacts.common.list.ContactTileView;
 
 import java.util.ArrayList;
@@ -45,14 +46,33 @@ import java.util.ArrayList;
  *
  */
 public class PhoneFavoritesTileAdapter extends BaseAdapter {
-    private static final String TAG = ContactTileAdapter.class.getSimpleName();
+    private static final String TAG = PhoneFavoritesTileAdapter.class.getSimpleName();
+    private static final boolean DEBUG = false;
 
     public static final int ROW_LIMIT_DEFAULT = 1;
+
+    /** Time period for an animation. */
+    private static final int ANIMATION_LENGTH = 300;
+
+    private final ObjectAnimator mTranslateHorizontalAnimation;
+    private final ObjectAnimator mTranslateVerticalAnimation;
+    private final ObjectAnimator mAlphaAnimation;
 
     private ContactTileView.Listener mListener;
     private Context mContext;
     private Resources mResources;
-    protected Cursor mContactCursor = null;
+
+    /** Contact data stored in cache. This is used to populate the associated view. */
+    protected ArrayList<ContactEntry> mContactEntries = null;
+    /** Back up of the temporarily removed Contact during dragging. */
+    private ContactEntry mDraggedEntry = null;
+    /** Position of the temporarily removed contact in the cache. */
+    private int mDraggedEntryIndex = -1;
+    /** New position of the temporarily removed contact in the cache. */
+    private int mDropEntryIndex = -1;
+    /** Position of the contact pending removal. */
+    private int mPotentialRemoveEntryIndex = -1;
+
     private ContactPhotoManager mPhotoManager;
     protected int mNumFrequents;
     protected int mNumStarred;
@@ -78,22 +98,36 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     private boolean mIsQuickContactEnabled = false;
     private final int mPaddingInPixels;
 
-    public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener, int numCols) {
+    /** Indicates whether a drag is in process. */
+    private boolean mInDragging = false;
+
+    public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener, 
+            int numCols) {
         this(context, listener, numCols, ROW_LIMIT_DEFAULT);
     }
 
-    public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener, int numCols,
-            int maxTiledRows) {
+    public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener,
+            int numCols, int maxTiledRows) {
         mListener = listener;
         mContext = context;
         mResources = context.getResources();
         mColumnCount = numCols;
         mNumFrequents = 0;
         mMaxTiledRows = maxTiledRows;
-
+        mContactEntries = new ArrayList<ContactEntry>();
         // Converting padding in dips to padding in pixels
         mPaddingInPixels = mContext.getResources()
                 .getDimensionPixelSize(R.dimen.contact_tile_divider_padding);
+
+        // Initiates all animations.
+        mAlphaAnimation = ObjectAnimator.ofFloat(null, "alpha", 1.f).setDuration(ANIMATION_LENGTH);
+
+        mTranslateHorizontalAnimation = ObjectAnimator.ofFloat(null, "translationX", 0.f).
+                setDuration(ANIMATION_LENGTH);
+
+        mTranslateVerticalAnimation = ObjectAnimator.ofFloat(null, "translationY", 0.f).setDuration(
+                ANIMATION_LENGTH);
+
         bindColumnIndices();
     }
 
@@ -111,6 +145,20 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
 
     public void enableQuickContact(boolean enableQuickContact) {
         mIsQuickContactEnabled = enableQuickContact;
+    }
+
+    /**
+     * Indicates whether a drag is in process.
+     *
+     * @param inDragging Boolean variable indicating whether there is a drag in process.
+     */
+    public void setInDragging(boolean inDragging) {
+        mInDragging = inDragging;
+    }
+
+    /** Gets whether the drag is in process. */
+    public boolean getInDragging() {
+        return mInDragging;
     }
 
     /**
@@ -148,13 +196,49 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
      * Else use {@link ContactTileLoaderFactory}
      */
     public void setContactCursor(Cursor cursor) {
-        mContactCursor = cursor;
-        mNumStarred = getNumStarredContacts(cursor);
+        if (cursor != null && !cursor.isClosed()) {
+            mNumStarred = getNumStarredContacts(cursor);
+            saveNumFrequentsFromCursor(cursor);
+            saveCursorToCache(cursor);
 
-        saveNumFrequentsFromCursor(cursor);
+            // cause a refresh of any views that rely on this data
+            notifyDataSetChanged();
+        }
+    }
 
-        // cause a refresh of any views that rely on this data
-        notifyDataSetChanged();
+    /**
+     * Saves the cursor data to the cache, to speed up UI changes.
+     *
+     * @param cursor Returned cursor with data to populate the view.
+     */
+    private void saveCursorToCache(Cursor cursor) {
+        mContactEntries.clear();
+        try {
+            cursor.moveToPosition(-1);
+            while (cursor.moveToNext()) {
+                final long id = cursor.getLong(mIdIndex);
+                final String photoUri = cursor.getString(mPhotoUriIndex);
+                final String lookupKey = cursor.getString(mLookupIndex);
+
+                final ContactEntry contact = new ContactEntry();
+                final String name = cursor.getString(mNameIndex);
+                contact.name = (name != null) ? name : mResources.getString(R.string.missing_name);
+                contact.status = cursor.getString(mStatusIndex);
+                contact.photoUri = (photoUri != null ? Uri.parse(photoUri) : null);
+                contact.lookupKey = ContentUris.withAppendedId(
+                        Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey), id);
+
+                // Set phone number and label
+                final int phoneNumberType = cursor.getInt(mPhoneNumberTypeIndex);
+                final String phoneNumberCustomLabel = cursor.getString(mPhoneNumberLabelIndex);
+                contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
+                        phoneNumberCustomLabel);
+                contact.phoneNumber = cursor.getString(mPhoneNumberIndex);
+                mContactEntries.add(contact);
+            }
+        } finally {
+            cursor.close();
+        }
     }
 
     /**
@@ -164,10 +248,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
      * Returns 0 if {@link DisplayType#FREQUENT_ONLY}
      */
     protected int getNumStarredContacts(Cursor cursor) {
-        if (cursor == null || cursor.isClosed()) {
-            throw new IllegalStateException("Unable to access cursor");
-        }
-
         cursor.moveToPosition(-1);
         while (cursor.moveToNext()) {
             if (cursor.getInt(mStarredIndex) == 0) {
@@ -180,32 +260,15 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         return cursor.getCount();
     }
 
-    protected ContactEntry createContactEntryFromCursor(Cursor cursor, int position) {
-        // If the loader was canceled we will be given a null cursor.
-        // In that case, show an empty list of contacts.
-        if (cursor == null || cursor.isClosed() || cursor.getCount() <= position) return null;
-
-        cursor.moveToPosition(position);
-        long id = cursor.getLong(mIdIndex);
-        String photoUri = cursor.getString(mPhotoUriIndex);
-        String lookupKey = cursor.getString(mLookupIndex);
-
-        ContactEntry contact = new ContactEntry();
-        String name = cursor.getString(mNameIndex);
-        contact.name = (name != null) ? name : mResources.getString(R.string.missing_name);
-        contact.status = cursor.getString(mStatusIndex);
-        contact.photoUri = (photoUri != null ? Uri.parse(photoUri) : null);
-        contact.lookupKey = ContentUris.withAppendedId(
-                Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey), id);
-
-        // Set phone number and label
-        int phoneNumberType = cursor.getInt(mPhoneNumberTypeIndex);
-        String phoneNumberCustomLabel = cursor.getString(mPhoneNumberLabelIndex);
-        contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
-                phoneNumberCustomLabel);
-        contact.phoneNumber = cursor.getString(mPhoneNumberIndex);
-
-        return contact;
+    /**
+     * Loads a contact from the cached list.
+     *
+     * @param position Position of the Contact.
+     * @return Contact at the requested position.
+     */
+    protected ContactEntry getContactEntryFromCache(int position) {
+        if (mContactEntries.size() <= position) return null;
+        return mContactEntries.get(position);
     }
 
     /**
@@ -217,7 +280,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (mContactCursor == null || mContactCursor.isClosed()) {
+        if (mContactEntries == null) {
             return 0;
         }
 
@@ -244,6 +307,14 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         return mColumnCount * mMaxTiledRows;
     }
 
+    protected int getRowIndex(int entryIndex) {
+        if (entryIndex < mMaxTiledRows * mColumnCount) {
+            return entryIndex / mColumnCount;
+        } else {
+            return entryIndex - mMaxTiledRows * mColumnCount + mMaxTiledRows;
+        }
+    }
+
     public int getColumnCount() {
         return mColumnCount;
     }
@@ -261,7 +332,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
             // Contacts that appear as tiles
             for (int columnCounter = 0; columnCounter < mColumnCount &&
                     contactIndex != maxContactsInTiles; columnCounter++) {
-                resultList.add(createContactEntryFromCursor(mContactCursor, contactIndex));
+                resultList.add(getContactEntryFromCache(contactIndex));
                 contactIndex++;
             }
         } else {
@@ -269,7 +340,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
             // The actual position of the contact in the cursor is simply total the number of
             // tiled contacts + the given position
             contactIndex = maxContactsInTiles + position - 1;
-            resultList.add(createContactEntryFromCursor(mContactCursor, contactIndex));
+            resultList.add(getContactEntryFromCache(contactIndex));
         }
 
         return resultList;
@@ -295,7 +366,74 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     }
 
     @Override
+    public void notifyDataSetChanged() {
+        if (DEBUG) {
+            Log.v(TAG, "nofigyDataSetChanged");
+        }
+        super.notifyDataSetChanged();
+    }
+
+    /**
+     * Configures the animation for each view.
+     *
+     * @param contactTileRowView The row to be animated.
+     * @param position The position of the row.
+     * @param itemViewType The type of the row.
+     */
+    private void configureAnimationToView(ContactTileRow contactTileRowView, int position,
+            int itemViewType) {
+        if (mInDragging) {
+            // If the one item above the row is being dragged, animates all following items to
+            // move up. If the item is a favorite tile, animate it to appear from right.
+            if (position >= getRowIndex(mDraggedEntryIndex)) {
+                if (itemViewType == ViewTypes.FREQUENT) {
+                    mTranslateVerticalAnimation.setTarget(contactTileRowView);
+                    mTranslateVerticalAnimation.setFloatValues(contactTileRowView.getHeight(), 0);
+                    mTranslateVerticalAnimation.clone().start();
+                } else {
+                    contactTileRowView.animateTilesAppearLeft(mDraggedEntryIndex -
+                            position * mColumnCount);
+                }
+            }
+        } else if (mDropEntryIndex != -1) {
+            // If one item is dropped in front the row, animate all following rows to shift down.
+            // If the item is a favorite tile, animate it to appear from left.
+            if (position >= getRowIndex(mDropEntryIndex)) {
+                if (itemViewType == ViewTypes.FREQUENT) {
+                    if (position == getRowIndex(mDropEntryIndex) || position == mMaxTiledRows) {
+                        contactTileRowView.setVisibility(View.VISIBLE);
+                        mAlphaAnimation.setTarget(contactTileRowView);
+                        mAlphaAnimation.clone().start();
+                    } else {
+                        mTranslateVerticalAnimation.setTarget(contactTileRowView);
+                        mTranslateVerticalAnimation.setFloatValues(-contactTileRowView.getHeight(),
+                                0);
+                        mTranslateVerticalAnimation.clone().start();
+                    }
+                } else {
+                    contactTileRowView.animateTilesAppearRight(mDropEntryIndex + 1 -
+                            position * mColumnCount);
+                }
+            }
+        } else if (mPotentialRemoveEntryIndex != -1) {
+            // If one item is to be removed above this row, animate the row to shift up. If it is
+            // a favorite contact tile, animate it to appear from right.
+            if (position >= getRowIndex(mPotentialRemoveEntryIndex)) {
+                if (itemViewType == ViewTypes.FREQUENT) {
+                    mTranslateVerticalAnimation.setTarget(contactTileRowView);
+                    mTranslateVerticalAnimation.setFloatValues(contactTileRowView.getHeight(), 0);
+                    mTranslateVerticalAnimation.clone().start();
+                } else {
+                    contactTileRowView.animateTilesAppearLeft(
+                            mPotentialRemoveEntryIndex - position * mColumnCount);
+                }
+            }
+        }
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Log.v(TAG, "get view for " + String.valueOf(position));
         int itemViewType = getItemViewType(position);
 
         ContactTileRow contactTileRowView  = (ContactTileRow) convertView;
@@ -304,10 +442,13 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
 
         if (contactTileRowView == null) {
             // Creating new row if needed
-            contactTileRowView = new ContactTileRow(mContext, itemViewType);
+            contactTileRowView = new ContactTileRow(mContext, itemViewType, position);
         }
 
-        contactTileRowView.configureRow(contactList, position == getCount() - 1);
+        contactTileRowView.configureRow(contactList, position, position == getCount() - 1);
+
+        configureAnimationToView(contactTileRowView, position, itemViewType);
+
         return contactTileRowView;
     }
 
@@ -347,22 +488,100 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     }
 
     /**
+     * Temporarily removes a contact from the list for UI refresh. Stores data for this contact
+     * in the back-up variable.
+     *
+     * @param index Position of the contact to be removed.
+     */
+    public void popContactEntry(int index) {
+        if (index >= 0 && index < mContactEntries.size()) {
+            mDraggedEntry = mContactEntries.get(index);
+            mDraggedEntryIndex = index;
+            mContactEntries.remove(index);
+            notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * Drops the temporarily removed contact to the desired location in the list.
+     *
+     * @param index Location where the contact will be dropped.
+     */
+    public void dropContactEntry(int index) {
+        if (mDraggedEntry != null) {
+            if (index >= 0 && index <= mContactEntries.size()) {
+                mContactEntries.add(index, mDraggedEntry);
+                mDropEntryIndex = index;
+            } else if (mDraggedEntryIndex >= 0 && mDraggedEntryIndex <= mContactEntries.size()) {
+                /** If the index is invalid, falls back to the original position of the contact. */
+                mContactEntries.add(mDraggedEntryIndex, mDraggedEntry);
+                mDropEntryIndex = mDraggedEntryIndex;
+            }
+            mDraggedEntry = null;
+            notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * Sets an item to for pending removal. If the user does not click the undo button, the item
+     * will be removed at the next interaction.
+     *
+     * @param index Index of the item to be removed.
+     */
+    public void setPotentialRemoveEntryIndex(int index) {
+        mPotentialRemoveEntryIndex = index;
+    }
+
+    /**
+     * Removes a contact entry from the cache.
+     *
+     * @return True is an item is removed. False is there is no item to be removed.
+     */
+    public boolean removeContactEntry() {
+        if (mPotentialRemoveEntryIndex >= 0 && mPotentialRemoveEntryIndex < mContactEntries.size()) {
+            mContactEntries.remove(mPotentialRemoveEntryIndex);
+            notifyDataSetChanged();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Resets the item for pending removal.
+     */
+    public void undoPotentialRemoveEntryIndex() {
+        mPotentialRemoveEntryIndex = -1;
+    }
+
+    /**
+     * Clears all temporary variables at a new interaction.
+     */
+    public void cleanTempVariables() {
+        mDraggedEntryIndex = -1;
+        mDropEntryIndex = -1;
+        mDraggedEntry = null;
+        mPotentialRemoveEntryIndex = -1;
+    }
+
+    /**
      * Acts as a row item composed of {@link ContactTileView}
      *
      * TODO: FREQUENT doesn't really need it.  Just let {@link #getView} return
      */
-    private class ContactTileRow extends FrameLayout {
+    public class ContactTileRow extends FrameLayout {
         private int mItemViewType;
         private int mLayoutResId;
         private final int mRowPaddingStart;
         private final int mRowPaddingEnd;
         private final int mRowPaddingTop;
         private final int mRowPaddingBottom;
+        private int mPosition;
 
-        public ContactTileRow(Context context, int itemViewType) {
+        public ContactTileRow(Context context, int itemViewType, int position) {
             super(context);
             mItemViewType = itemViewType;
             mLayoutResId = getLayoutResourceId(mItemViewType);
+            mPosition = position;
 
             final Resources resources = mContext.getResources();
             mRowPaddingStart = resources.getDimensionPixelSize(
@@ -386,8 +605,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         /**
          * Configures the row to add {@link ContactEntry}s information to the views
          */
-        public void configureRow(ArrayList<ContactEntry> list, boolean isLastRow) {
+        public void configureRow(ArrayList<ContactEntry> list, int position, boolean isLastRow) {
             int columnCount = mItemViewType == ViewTypes.FREQUENT ? 1 : mColumnCount;
+            mPosition = position;
 
             // Adding tiles to row and filling in contact information
             for (int columnCounter = 0; columnCounter < columnCount; columnCounter++) {
@@ -398,11 +618,11 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         }
 
         private void addTileFromEntry(ContactEntry entry, int childIndex, boolean isLastRow) {
-            final ContactTileView contactTile;
+            final PhoneFavoriteTileView contactTile;
 
             if (getChildCount() <= childIndex) {
 
-                contactTile = (ContactTileView) inflate(mContext, mLayoutResId, null);
+                contactTile = (PhoneFavoriteTileView) inflate(mContext, mLayoutResId, null);
                 // Note: the layoutparam set here is only actually used for FREQUENT.
                 // We override onMeasure() for STARRED and we don't care the layout param there.
                 final Resources resources = mContext.getResources();
@@ -411,18 +631,17 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
 
                 params.setMargins(
-                        resources.getDimensionPixelSize(R.dimen.detail_item_side_margin),
-                        0,
-                        resources.getDimensionPixelSize(R.dimen.detail_item_side_margin),
-                        0);
+                        resources.getDimensionPixelSize(R.dimen.detail_item_side_margin), 0,
+                        resources.getDimensionPixelSize(R.dimen.detail_item_side_margin), 0);
                 contactTile.setLayoutParams(params);
                 contactTile.setPhotoManager(mPhotoManager);
                 contactTile.setListener(mListener);
                 addView(contactTile);
             } else {
-                contactTile = (ContactTileView) getChildAt(childIndex);
+                contactTile = (PhoneFavoriteTileView) getChildAt(childIndex);
             }
             contactTile.loadFromContact(entry);
+            contactTile.setId(childIndex);
             switch (mItemViewType) {
                 case ViewTypes.TOP:
                     // Setting divider visibilities
@@ -436,6 +655,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
                 default:
                     break;
             }
+            contactTile.setupFavoriteContactCard();
         }
 
         @Override
@@ -517,6 +737,65 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
                         );
             }
             setMeasuredDimension(width, imageSize + getPaddingTop() + getPaddingBottom());
+        }
+
+        /**
+         * Gets the index of the item at the specified coordinates.
+         *
+         * @param itemX X-coordinate of the selected item.
+         * @param itemY Y-coordinate of the selected item.
+         * @return Index of the selected item in the cached array.
+         */
+        public int getItemIndex(float itemX, float itemY) {
+            if (mPosition < mMaxTiledRows) {
+                final Rect childRect = new Rect();
+                if (DEBUG) {
+                    Log.v(TAG, String.valueOf(itemX) + " " + String.valueOf(itemY));
+                }
+                for (int i = 0; i < getChildCount(); ++i) {
+                    /** If the row contains multiple tiles, checks each tile to see if the point
+                     * is contained in the tile. */
+                    getChildAt(i).getHitRect(childRect);
+                    if (DEBUG) {
+                        Log.v(TAG, childRect.toString());
+                    }
+                    if (childRect.contains((int)itemX, (int)itemY)) {
+                        /** If the point is contained in the rectangle, computes the index of the
+                         * item in the cached array. */
+                        return i + (mPosition) * mColumnCount;
+                    }
+                }
+            } else {
+                /** If the selected item is one of the rows, compute the index. */
+                return (mPosition - mMaxTiledRows) + mColumnCount * mMaxTiledRows;
+            }
+            return -1;
+        }
+
+        public PhoneFavoritesTileAdapter getTileAdapter() {
+            return PhoneFavoritesTileAdapter.this;
+        }
+
+        public void animateTilesAppearLeft(int index) {
+            for (int i = index; i < getChildCount(); ++i) {
+                View childView = getChildAt(i);
+                mTranslateHorizontalAnimation.setTarget(childView);
+                mTranslateHorizontalAnimation.setFloatValues(childView.getWidth(), 0);
+                mTranslateHorizontalAnimation.clone().start();
+            }
+        }
+
+        public void animateTilesAppearRight(int index) {
+            for (int i = index; i < getChildCount(); ++i) {
+                View childView = getChildAt(i);
+                mTranslateHorizontalAnimation.setTarget(childView);
+                mTranslateHorizontalAnimation.setFloatValues(-childView.getWidth(), 0);
+                mTranslateHorizontalAnimation.clone().start();
+            }
+        }
+
+        public int getPosition() {
+            return mPosition;
         }
     }
 

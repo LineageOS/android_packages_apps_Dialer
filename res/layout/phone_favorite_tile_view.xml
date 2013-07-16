@@ -16,14 +16,17 @@
 <view
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@null"
-    android:paddingBottom="1dp"
-    android:paddingRight="1dp"
-    android:paddingEnd="1dp"
-    class="com.android.dialer.list.PhoneFavoriteTileView" >
+    android:paddingBottom="1dip"
+    android:paddingRight="1dip"
+    android:paddingEnd="1dip"
+    class="com.android.dialer.list.PhoneFavoriteSquareTileView" >
 
     <RelativeLayout
+        android:id="@+id/contact_tile_favorite_card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground" >>
 
         <com.android.contacts.common.widget.LayoutSuppressingImageView
             android:id="@+id/contact_tile_image"
@@ -82,5 +85,48 @@
             android:contentDescription="@string/description_view_contact_detail" />
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/favorite_tile_remove_dialogue"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center_horizontal"
+        android:alpha="0.0"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/favorite_tile_remove_dialogue_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/favorite_hidden"
+            android:ellipsize="marquee"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_marginLeft="8dip"
+            android:layout_marginStart="8dip"
+            android:singleLine="true"
+            android:layout_gravity="center_horizontal"
+            android:textDirection="ltr"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            android:id="@+id/favorite_tile_remove_undo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="@string/favorite_hidden_undo"
+            android:layout_marginLeft="8dip"
+            android:layout_marginStart="8dip"
+            android:gravity="end"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"/>
+
+    </LinearLayout>
 
 </view>
