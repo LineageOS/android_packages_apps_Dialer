@@ -130,7 +130,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter implements SectionIn
         // "+2" for mAccountFilterHeaderContainer and mLoadingView
         return (mContactTileAdapter.getViewTypeCount()
                 + mContactEntryListAdapter.getViewTypeCount()
-                + 1);
+                + 2);
     }
 
     @Override
