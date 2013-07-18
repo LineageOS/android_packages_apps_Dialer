@@ -22,10 +22,12 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.services.telephony.common.ICallMonitorService;
+import com.android.services.telephony.common.ICallCommandService;
 
 /**
  * Service used to listen for call state changes.
@@ -34,7 +36,9 @@ public class CallMonitorService extends Service {
 
     private static final String TAG = CallMonitorService.class.getSimpleName();
     private static final boolean DBG = false; // TODO: Have a shared location for this.
+
     private MainHandler mMainHandler;
+    private ICallCommandService mCallCommandService;
 
     private static final int DO_SHOW_ALERT = 1;
 
@@ -54,6 +58,14 @@ public class CallMonitorService extends Service {
     }
 
     private final ICallMonitorService.Stub mBinder = new ICallMonitorService.Stub() {
+
+        @Override
+        public void setCallCommandService(ICallCommandService service) {
+            logD("onConnected: " + service.toString());
+            mCallCommandService = service;
+        }
+
+        @Override
         public void onIncomingCall(int callId) {
             final Message msg = mMainHandler.obtainMessage(DO_SHOW_ALERT, 0, 0,
                     "Incoming call with call Id: " + callId);
@@ -88,16 +100,31 @@ public class CallMonitorService extends Service {
     }
 
     private void executeMessage(Message msg) {
-        if (DBG) {
-            Log.d(TAG, "executeMessage(" + msg.what + ")");
-        }
+        logD("executeMessage(" + msg.what + ")");
         switch (msg.what) {
             case DO_SHOW_ALERT:
                 showAlert((String) msg.obj);
+                answerCall(0);
                 break;
             default:
                 break;
 
+        }
+    }
+
+    private void answerCall(int callId) {
+        try {
+            if (mCallCommandService != null) {
+                mCallCommandService.answerCall(callId);
+            }
+        } catch (RemoteException e) {
+            Log.e(TAG, "answerCall : " + e);
+        }
+    }
+
+    private void logD(String message) {
+        if (DBG) {
+            Log.d(TAG, message);
         }
     }
  }
