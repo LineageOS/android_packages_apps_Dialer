@@ -43,13 +43,11 @@ public class NewCallLogActivity extends Activity {
     private ViewPagerAdapter mViewPagerAdapter;
     private NewCallLogFragment mAllCallsFragment;
     private NewCallLogFragment mMissedCallsFragment;
-    private NewCallLogFragment mVoicemailsFragment;
 
     private static final int TAB_INDEX_ALL = 0;
     private static final int TAB_INDEX_MISSED = 1;
-    private static final int TAB_INDEX_VOICEMAIL = 2;
 
-    private static final int TAB_INDEX_COUNT = 3;
+    private static final int TAB_INDEX_COUNT = 2;
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager fm) {
@@ -65,9 +63,6 @@ public class NewCallLogActivity extends Activity {
                 case TAB_INDEX_MISSED:
                     mMissedCallsFragment = new NewCallLogFragment(Calls.MISSED_TYPE);
                     return mMissedCallsFragment;
-                case TAB_INDEX_VOICEMAIL:
-                    mVoicemailsFragment = new NewCallLogFragment(Calls.VOICEMAIL_TYPE);
-                    return mVoicemailsFragment;
             }
             throw new IllegalStateException("No fragment at position " + position);
         }
@@ -138,18 +133,11 @@ public class NewCallLogActivity extends Activity {
         missedTab.setTabListener(mTabListener);
         actionBar.addTab(missedTab);
 
-        final Tab voicemailTab = actionBar.newTab();
-        final String voicemailTitle = getString(R.string.call_log_voicemail_title);
-        voicemailTab.setContentDescription(voicemailTitle);
-        voicemailTab.setText(voicemailTitle);
-        voicemailTab.setTabListener(mTabListener);
-        actionBar.addTab(voicemailTab);
-
         mViewPager = (ViewPager) findViewById(R.id.call_log_pager);
         mViewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setOnPageChangeListener(mOnPageChangeListener);
-        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setOffscreenPageLimit(1);
     }
 
     @Override
