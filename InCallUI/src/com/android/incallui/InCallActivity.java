@@ -17,6 +17,7 @@
 package com.android.incallui;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,17 +55,16 @@ public class InCallActivity extends Activity {
         // Inflate everything in incall_screen.xml and add it to the screen.
         setContentView(R.layout.incall_screen);
 
-        // Initialize the UI
-        //findViewById(R.id.callCard);
-        //findViewById(R.id.inCallTouchUi);
-        //ViewStub stub = (ViewStub) findViewById(R.id.dtmf_twelve_key_dialer_stub);
-
         logD("onCreate(): exit");
     }
 
     @Override
     protected void onResume() {
         logD("onResume()...");
+        final AnswerFragment answerFragment = new AnswerFragment();
+        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.main, answerFragment);
+        fragmentTransaction.commit();
         super.onResume();
     }
 

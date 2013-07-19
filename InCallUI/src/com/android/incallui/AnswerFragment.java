@@ -17,6 +17,7 @@
 package com.android.incallui;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,14 +28,23 @@ import android.view.ViewGroup;
  */
 public class AnswerFragment extends Fragment {
 
-    AnswerPresenter mPresenter;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final AnswerUi ui = (AnswerUi) inflater.inflate(R.layout.answer_fragment, container,
                 false);
-        mPresenter = new AnswerPresenter(ui);
+        final AnswerPresenter presenter = new AnswerPresenter(ui, new AnswerPresenter.Listener() {
+            @Override
+            public void onAnswered() {
+                close();
+            }
+        });
         return ui;
+    }
+
+    private void close() {
+        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.remove(this);
+        fragmentTransaction.commit();
     }
 }
