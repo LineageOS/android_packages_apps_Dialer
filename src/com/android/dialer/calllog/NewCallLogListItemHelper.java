@@ -84,7 +84,7 @@ import com.android.dialer.R;
     private void configureCallSecondaryAction(CallLogListItemViews views,
             PhoneCallDetails details) {
         views.secondaryActionView.setVisibility(View.VISIBLE);
-        views.secondaryActionView.setImageResource(R.drawable.ic_ab_dialer_holo_dark);
+        views.secondaryActionView.setImageResource(R.drawable.ic_ab_dialer_holo_light);
         views.secondaryActionView.setContentDescription(getCallActionDescription(details));
     }
 
@@ -104,7 +104,7 @@ import com.android.dialer.R;
     private void configurePlaySecondaryAction(CallLogListItemViews views, boolean isHighlighted) {
         views.secondaryActionView.setVisibility(View.VISIBLE);
         views.secondaryActionView.setImageResource(
-                isHighlighted ? R.drawable.ic_play_active_holo_dark : R.drawable.ic_play_holo_dark);
+                isHighlighted ? R.drawable.ic_play_active_holo_dark : R.drawable.ic_play_holo_light);
         views.secondaryActionView.setContentDescription(
                 mResources.getString(R.string.description_call_log_play_button));
     }

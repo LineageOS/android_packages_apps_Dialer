@@ -22,17 +22,36 @@
     android:clipChildren="false"
     android:id="@+id/dialtacts_container"
     >
+    <!-- Overlapping dialpad fragment is inserted here -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:orientation="vertical" >
-        <SearchView
-            android:id="@+id/search_view"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:iconifiedByDefault="false"
-            android:inputType="textFilter" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="23dp"
+            android:id="@+id/search_view_container"
+            android:background="@color/searchbox_background_color"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <EditText
+                android:id="@+id/search_view"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:inputType="textFilter"/>
+            <ImageView
+                android:id="@+id/search_close_button"
+                android:layout_height="40dp"
+                android:layout_width="40dp"
+                android:padding="6dp"
+                android:src="@drawable/ic_close_dk"
+                android:background="?android:attr/selectableItemBackground"
+                android:visibility="gone" />
+        </LinearLayout>
         <FrameLayout
             android:layout_height="0dp"
             android:layout_weight="1"

@@ -175,12 +175,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.TAB" />
             </intent-filter>
-            -->
-
+             -->
         </activity>
 
         <activity android:name="com.android.dialer.calllog.NewCallLogActivity"
-                  android:label="@string/recentCallsIconLabel"
+                  android:label="@string/call_log_activity_title"
                   android:theme="@style/NewDialtactsTheme"
                   android:screenOrientation="portrait"
                   android:icon="@mipmap/ic_launcher_phone">

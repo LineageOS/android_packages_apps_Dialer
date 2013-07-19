@@ -73,6 +73,8 @@
         <item name="android:actionBarStyle">@style/DialtactsActionBarStyleNew</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/background_dial_holo_light</item>
+        <!--  Searchbox Style -->
+        <item name="android:editTextStyle">@style/DialtactsSearchboxStyle</item>
         <item name="android:listViewStyle">@style/ListViewStyle</item>
         <item name="activated_background">@drawable/list_item_activated_background</item>
         <item name="section_header_background">@drawable/list_title_holo</item>
@@ -167,6 +169,9 @@
 
     <style name="DialtactsActionBarStyleNew" parent="android:Widget.Holo.ActionBar">
         <item name="android:backgroundSplit">@null</item>
+        <item name="android:background">@color/actionbar_background_color</item>
+        <!-- Empty icon -->
+        <item name="android:icon">@android:color/transparent</item>
         <item name="android:displayOptions"></item>
     </style>
 
@@ -182,5 +187,10 @@
 
     <style name="FragmentActionBarPadding">
         <item name="android:paddingBottom">?android:attr/actionBarSize</item>
+    </style>
+
+    <style name="DialtactsSearchboxStyle" parent="@android:style/Widget.EditText">
+        <item name="android:background">@null</item>
+        <item name="android:textColorHint">@color/searchbox_text_color</item>
     </style>
 </resources>
