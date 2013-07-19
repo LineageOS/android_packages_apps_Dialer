@@ -131,4 +131,12 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"正从 SIM 卡中加载..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM 卡联系人"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"必须重新启用联系人应用才能使用此功能。"</string>
+    <string name="dialer_hint_find_contact" msgid="9190419749917566623">"请输入姓名或电话号码"</string>
+    <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
+    <string name="call_log_missed_title" msgid="4541142293870638971">"未接电话"</string>
+    <string name="call_log_voicemail_title" msgid="940422274047025948">"语音邮件"</string>
+    <string name="recentMissed_empty" msgid="5427113551557296665">"最近没有未接来电。"</string>
+    <string name="recentVoicemails_empty" msgid="5163114119598014048">"最近没有语音邮件。"</string>
+    <string name="show_all_contacts" msgid="1732256558071778056">"显示所有联系人"</string>
+    <string name="show_favorites_only" msgid="5520072531022614595">"仅显示常用联系人"</string>
 </resources>

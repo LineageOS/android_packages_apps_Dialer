@@ -131,4 +131,20 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Загрузка з SIM-карты..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Кантакты SIM-карты"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Каб выкарыстоўваць гэту функцыю, паўторна ўключыце прыкладанне \"Кантакты\"."</string>
+    <!-- no translation found for dialer_hint_find_contact (9190419749917566623) -->
+    <skip />
+    <!-- no translation found for call_log_all_title (3566738938889333307) -->
+    <skip />
+    <!-- no translation found for call_log_missed_title (4541142293870638971) -->
+    <skip />
+    <!-- no translation found for call_log_voicemail_title (940422274047025948) -->
+    <skip />
+    <!-- no translation found for recentMissed_empty (5427113551557296665) -->
+    <skip />
+    <!-- no translation found for recentVoicemails_empty (5163114119598014048) -->
+    <skip />
+    <!-- no translation found for show_all_contacts (1732256558071778056) -->
+    <skip />
+    <!-- no translation found for show_favorites_only (5520072531022614595) -->
+    <skip />
 </resources>
