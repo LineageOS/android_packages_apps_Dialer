@@ -516,16 +516,12 @@
     <string name="dialer_hint_find_contact">Type a name or phone</string>
 
     <!-- Title for the call log tab containing the list of all voicemails and calls
-         [CHAR LIMIT=10] -->
+         [CHAR LIMIT=15] -->
     <string name="call_log_all_title">All</string>
 
     <!-- Title for the call log tab containing the list of all missed calls only
-         [CHAR LIMIT=10] -->
+         [CHAR LIMIT=15] -->
     <string name="call_log_missed_title">Missed</string>
-
-    <!-- Title for the call log tab containing the list of all voicemails only
-         [CHAR LIMIT=10] -->
-    <string name="call_log_voicemail_title">Voicemail</string>
 
     <!-- Text displayed when the list of missed calls is empty -->
     <string name="recentMissed_empty">No recent missed calls.</string>
