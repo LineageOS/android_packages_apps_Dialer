@@ -24,14 +24,14 @@ import android.util.Log;
 
 import com.android.internal.util.Preconditions;
 import com.android.services.telephony.common.ICallCommandService;
-import com.android.services.telephony.common.ICallMonitorService;
+import com.android.services.telephony.common.ICallHandlerService;
 
 /**
  * Service used to listen for call state changes.
  */
-public class CallMonitorService extends Service {
+public class CallHandlerService extends Service {
 
-    private static final String TAG = CallMonitorService.class.getSimpleName();
+    private static final String TAG = CallHandlerService.class.getSimpleName();
     private static final boolean DBG = false; // TODO: Have a shared location for this.
 
     private static ICallCommandService mCallCommandService;
@@ -50,7 +50,7 @@ public class CallMonitorService extends Service {
         return mBinder;
     }
 
-    private final ICallMonitorService.Stub mBinder = new ICallMonitorService.Stub() {
+    private final ICallHandlerService.Stub mBinder = new ICallHandlerService.Stub() {
 
         @Override
         public void setCallCommandService(ICallCommandService service) {

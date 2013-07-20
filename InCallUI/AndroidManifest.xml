@@ -40,9 +40,9 @@
                   android:exported="false">
         </activity>
 
-        <service android:name="CallMonitorService">
+        <service android:name="CallHandlerService">
             <intent-filter>
-                <action android:name="com.android.services.telephony.common.ICallMonitorService" />
+                <action android:name="com.android.services.telephony.common.ICallHandlerService" />
             </intent-filter>
         </service>
 
