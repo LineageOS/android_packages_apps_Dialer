@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2013 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License
  */
 
 package com.android.incallui;
@@ -68,8 +68,11 @@ public class CallHandlerService extends Service {
 
     // TODO(klp): Not sure if static call is ok. Might need to switch to normal service binding.
     public static void answerCall(int callId) {
-        Preconditions.checkState(mCallCommandService != null);
-
+        //Preconditions.checkState(mCallCommandService != null);
+        // TODO(klp): enable fail fast later.
+        if (mCallCommandService == null) {
+            return;
+        }
         try {
             mCallCommandService.answerCall(callId);
         } catch (RemoteException e) {

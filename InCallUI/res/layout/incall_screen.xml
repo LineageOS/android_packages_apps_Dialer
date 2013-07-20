@@ -16,13 +16,20 @@
 
 <!-- In-call Phone UI; see InCallActivity.java. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-        android:id="@+id/main">
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/main">
 
-    <View android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:background="#ddd"/>
+    <LinearLayout android:id="@+id/in_call_and_button_container"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <!-- Call card fragment will be added here. -->
+        <!-- Call button fragment will be added here. -->
+
+    </LinearLayout>
+
+    <!-- Glowpad fragment will be added here to overlay. -->
 
 </FrameLayout>

@@ -61,8 +61,15 @@ public class InCallActivity extends Activity {
     @Override
     protected void onResume() {
         logD("onResume()...");
+
+        // TODO(klp): create once and reset when needed.
         final AnswerFragment answerFragment = new AnswerFragment();
+        final CallCardFragment callCardFragment = new CallCardFragment();
+        final CallButtonFragment callButtonFragment = new CallButtonFragment();
         final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.in_call_and_button_container, callCardFragment);
+        fragmentTransaction.add(R.id.in_call_and_button_container, callButtonFragment);
+
         fragmentTransaction.add(R.id.main, answerFragment);
         fragmentTransaction.commit();
         super.onResume();
