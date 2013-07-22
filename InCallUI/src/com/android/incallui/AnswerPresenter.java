@@ -33,7 +33,7 @@ public class AnswerPresenter {
 
     public void onAnswer() {
         // TODO(klp): hook in call id.
-        CallHandlerService.answerCall(1);
+        CallCommandService.getInstance().answerCall(1);
         mListener.onAnswered();
     }
 

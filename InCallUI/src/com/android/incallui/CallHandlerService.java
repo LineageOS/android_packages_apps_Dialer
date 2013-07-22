@@ -34,8 +34,6 @@ public class CallHandlerService extends Service {
     private static final String TAG = CallHandlerService.class.getSimpleName();
     private static final boolean DBG = false; // TODO: Have a shared location for this.
 
-    private static ICallCommandService mCallCommandService;
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -55,7 +53,7 @@ public class CallHandlerService extends Service {
         @Override
         public void setCallCommandService(ICallCommandService service) {
             logD("onConnected: " + service.toString());
-            mCallCommandService = service;
+            CallCommandService.init(service);
         }
 
         @Override
@@ -65,20 +63,6 @@ public class CallHandlerService extends Service {
             startActivity(intent);
         }
     };
-
-    // TODO(klp): Not sure if static call is ok. Might need to switch to normal service binding.
-    public static void answerCall(int callId) {
-        //Preconditions.checkState(mCallCommandService != null);
-        // TODO(klp): enable fail fast later.
-        if (mCallCommandService == null) {
-            return;
-        }
-        try {
-            mCallCommandService.answerCall(callId);
-        } catch (RemoteException e) {
-            Log.e(TAG, "answerCall : " + e);
-        }
-    }
 
     private void logD(String message) {
         if (DBG) {
