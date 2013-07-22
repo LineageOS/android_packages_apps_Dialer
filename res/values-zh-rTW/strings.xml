@@ -134,7 +134,6 @@
     <string name="dialer_hint_find_contact" msgid="9190419749917566623">"輸入姓名或電話"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"未接來電"</string>
-    <string name="call_log_voicemail_title" msgid="940422274047025948">"語音留言"</string>
     <string name="recentMissed_empty" msgid="5427113551557296665">"最近沒有未接來電。"</string>
     <string name="recentVoicemails_empty" msgid="5163114119598014048">"最近沒有語音留言。"</string>
     <string name="show_all_contacts" msgid="1732256558071778056">"顯示所有聯絡人"</string>
