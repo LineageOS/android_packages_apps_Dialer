@@ -55,15 +55,23 @@ public class CallCommandService {
         try {
             mCommandService.answerCall(callId);
         } catch (RemoteException e) {
-            Log.e(TAG, "answerCall : " + e);
+            Log.e(TAG, "Error answering call.", e);
         }
     }
 
-    public void mute() {
-
+    public void mute(boolean onOff) {
+        try {
+            mCommandService.mute(onOff);
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error muting phone.", e);
+        }
     }
 
-    public void turnSpeakerOn() {
-
+    public void turnSpeakerOn(boolean onOff) {
+        try {
+            mCommandService.speaker(onOff);
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error setting speaker.", e);
+        }
     }
 }
