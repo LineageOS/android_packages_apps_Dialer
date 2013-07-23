@@ -71,8 +71,9 @@
         <item name="android:textColorSecondary">@color/dialtacts_secondary_text_color</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:actionBarStyle">@style/DialtactsActionBarStyleNew</item>
+        <item name="android:actionBarTabStyle">@style/DialtactsActionBarTabStyle</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@color/background_dial_holo_light</item>
+        <item name="android:windowBackground">@color/background_dialer_light</item>
         <!--  Searchbox Style -->
         <item name="android:editTextStyle">@style/DialtactsSearchboxStyle</item>
         <item name="android:listViewStyle">@style/ListViewStyle</item>
@@ -168,8 +169,8 @@
     </style>
 
     <style name="DialtactsActionBarStyleNew" parent="android:Widget.Holo.ActionBar">
-        <item name="android:backgroundSplit">@null</item>
-        <item name="android:background">@color/actionbar_background_color</item>
+        <item name="android:background">@drawable/call_history_actionbar_background</item>
+        <item name="android:backgroundStacked">@color/actionbar_background_color</item>
         <!-- Empty icon -->
         <item name="android:icon">@android:color/transparent</item>
         <item name="android:displayOptions"></item>
@@ -179,6 +180,10 @@
         <item name="android:backgroundSplit">@null</item>
         <item name="android:backgroundStacked">@drawable/ab_stacked_opaque_dark_holo</item>
         <item name="android:displayOptions"></item>
+    </style>
+
+    <style name="DialtactsActionBarTabStyle" parent="@android:style/Widget.Holo.ActionBar.TabView">
+        <item name="android:background">@drawable/action_bar_tab</item>
     </style>
 
     <style name="ListViewStyle" parent="@android:style/Widget.Holo.Light.ListView">

@@ -175,7 +175,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.TAB" />
             </intent-filter>
-             -->
+            -->
         </activity>
 
         <activity android:name="com.android.dialer.calllog.NewCallLogActivity"

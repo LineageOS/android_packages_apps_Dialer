@@ -14,16 +14,14 @@
      limitations under the License.
 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
-
-<item>
-    <shape android:shape="rectangle" >
-        <solid android:color="@color/favorite_contacts_separator_color" />
-        <padding android:bottom="1dp" />
-    </shape>
-</item>
-<item>
-    <shape android:shape="rectangle" >
-        <solid android:color="@color/background_dialer_list_items" />
-    </shape>
-</item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#c6c6c6" />
+        </shape>
+    </item>
+    <item android:bottom="1dip">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/actionbar_background_color" />
+        </shape>
+    </item>
 </layer-list>

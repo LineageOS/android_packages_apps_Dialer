@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.SectionIndexer;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
@@ -60,6 +61,9 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter implements Sectio
 
     private final int mItemPaddingLeft;
     private final int mItemPaddingRight;
+    private final int mCallLogPadding;
+
+    private final Context mContext;
 
     private final DataSetObserver mObserver;
 
@@ -70,8 +74,10 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter implements Sectio
             NewCallLogAdapter callLogAdapter,
             View loadingView) {
         final Resources resources = context.getResources();
+        mContext = context;
         mItemPaddingLeft = resources.getDimensionPixelSize(R.dimen.detail_item_side_margin);
         mItemPaddingRight = resources.getDimensionPixelSize(R.dimen.list_visible_scrollbar_padding);
+        mCallLogPadding = resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding);
         mContactTileAdapter = contactTileAdapter;
         mContactEntryListAdapter = contactEntryListAdapter;
         mCallLogAdapter = callLogAdapter;
@@ -237,8 +243,32 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter implements Sectio
         // TODO krelease: Handle the new callLogAdapterCount and position offsets properly
         if (callLogAdapterCount > 0) {
             if (position == 0) {
-                final View view = mCallLogAdapter.getView(position, convertView, parent);
-                return view;
+                final FrameLayout wrapper;
+                if (convertView == null) {
+                    wrapper = new FrameLayout(mContext);
+                } else {
+                    wrapper = (FrameLayout) convertView;
+                }
+
+                // Special case wrapper view for the most recent call log item. This allows
+                // us to create a card-like effect for the more recent call log item in
+                // the PhoneFavoriteMergedAdapter, but keep the original look of the item in
+                // the CallLogAdapter.
+                final View view = mCallLogAdapter.getView(position, convertView == null ?
+                        null : wrapper.getChildAt(0), parent);
+                wrapper.removeAllViews();
+                view.setBackgroundResource(R.drawable.dialer_recent_card_bg);
+
+                final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT);
+
+                params.setMarginsRelative(mCallLogPadding, mCallLogPadding, mCallLogPadding,
+                        mCallLogPadding);
+                view.setLayoutParams(params);
+                wrapper.addView(view);
+
+                return wrapper;
             }
             position -= callLogAdapterCount;
         }

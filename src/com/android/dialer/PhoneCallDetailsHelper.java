@@ -115,19 +115,25 @@ public class PhoneCallDetailsHelper {
             } else {
                 numberText = details.geocode;
             }
-            labelText = null;
+            labelText = numberText;
             // We have a real phone number as "nameView" so make it always LTR
             views.nameView.setTextDirection(View.TEXT_DIRECTION_LTR);
         } else {
             nameText = details.name;
             numberText = displayNumber;
-            labelText = numberFormattedLabel;
+            labelText = TextUtils.isEmpty(numberFormattedLabel) ? numberText :
+                    numberFormattedLabel;
             // We have a real phone number as "numberView" so make it always LTR
-            views.numberView.setTextDirection(View.TEXT_DIRECTION_LTR);
+            if (views.numberView != null) {
+                views.numberView.setTextDirection(View.TEXT_DIRECTION_LTR);
+            }
         }
 
         views.nameView.setText(nameText);
-        views.numberView.setText(numberText);
+        if (views.numberView != null) {
+            views.numberView.setText(numberText);
+        }
+
         views.labelView.setText(labelText);
         views.labelView.setVisibility(TextUtils.isEmpty(labelText) ? View.GONE : View.VISIBLE);
     }
