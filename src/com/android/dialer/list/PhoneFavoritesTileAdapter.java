@@ -43,7 +43,6 @@ import java.util.ArrayList;
  *
  * This adapter has been rewritten to only support a maximum of one row for favorites.
  *
- * TODO Krelease: Move to PhoneContactTileAdapter in Dialer package.
  */
 public class PhoneFavoritesTileAdapter extends BaseAdapter {
     private static final String TAG = ContactTileAdapter.class.getSimpleName();
@@ -98,7 +97,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
 
         // Converting padding in dips to padding in pixels
         mPaddingInPixels = mContext.getResources()
-                .getDimensionPixelSize(R.dimen.contact_tile_divider_padding);
+                .getDimensionPixelSize(R.dimen.phone_contact_tile_divider_padding);
         bindColumnIndices();
     }
 
@@ -322,7 +321,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         switch (viewType) {
             case ViewTypes.FREQUENT:
                 return R.layout.phone_favorite_regular_row_view;
-            case ViewTypes.STARRED_PHONE:
+            case ViewTypes.TOP:
                 return R.layout.phone_favorite_tile_view;
             default:
                 throw new IllegalArgumentException("Unrecognized viewType " + viewType);
@@ -336,7 +335,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     @Override
     public int getItemViewType(int position) {
         if (position < getRowCount(mDividerPosition)) {
-            return ViewTypes.STARRED_PHONE;
+            return ViewTypes.TOP;
         } else {
             return ViewTypes.FREQUENT;
         }
@@ -358,11 +357,30 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     private class ContactTileRow extends FrameLayout {
         private int mItemViewType;
         private int mLayoutResId;
+        private final int mRowPaddingStart;
+        private final int mRowPaddingEnd;
+        private final int mRowPaddingTop;
+        private final int mRowPaddingBottom;
 
         public ContactTileRow(Context context, int itemViewType) {
             super(context);
             mItemViewType = itemViewType;
             mLayoutResId = getLayoutResourceId(mItemViewType);
+
+            final Resources resources = mContext.getResources();
+            mRowPaddingStart = resources.getDimensionPixelSize(
+                    R.dimen.favorites_row_start_padding);
+            mRowPaddingEnd = resources.getDimensionPixelSize(
+                    R.dimen.favorites_row_end_padding);
+            mRowPaddingTop = resources.getDimensionPixelSize(
+                    R.dimen.favorites_row_top_padding);
+            mRowPaddingBottom = resources.getDimensionPixelSize(
+                    R.dimen.favorites_row_bottom_padding);
+
+            setBackgroundResource(R.drawable.bottom_border_background);
+
+            setPaddingRelative(mRowPaddingStart, mRowPaddingTop, mRowPaddingEnd,
+                    mRowPaddingBottom);
 
             // Remove row (but not children) from accessibility node tree.
             setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
@@ -390,7 +408,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
                 contactTile = (ContactTileView) inflate(mContext, mLayoutResId, null);
                 // Note: the layoutparam set here is only actually used for FREQUENT.
                 // We override onMeasure() for STARRED and we don't care the layout param there.
-                Resources resources = mContext.getResources();
+                final Resources resources = mContext.getResources();
                 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -409,11 +427,10 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
             }
             contactTile.loadFromContact(entry);
             switch (mItemViewType) {
-                case ViewTypes.STARRED_PHONE:
+                case ViewTypes.TOP:
                     // Setting divider visibilities
                     contactTile.setPaddingRelative(0, 0,
-                            childIndex >= mColumnCount - 1 ? 0 : mPaddingInPixels,
-                            isLastRow ? 0 : mPaddingInPixels);
+                            childIndex >= mColumnCount - 1 ? 0 : mPaddingInPixels, 0);
                     break;
                 case ViewTypes.FREQUENT:
                     contactTile.setHorizontalDividerVisibility(
@@ -427,7 +444,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         @Override
         protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
             switch (mItemViewType) {
-                case ViewTypes.STARRED_PHONE:
+                case ViewTypes.TOP:
                     onLayoutForTiles();
                     return;
                 default:
@@ -440,7 +457,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
             final int count = getChildCount();
 
             // Just line up children horizontally.
-            int childLeft = 0;
+            int childLeft = getPaddingStart();
             for (int i = 0; i < count; i++) {
                 final View child = getChildAt(i);
 
@@ -454,8 +471,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
             switch (mItemViewType) {
-                case ViewTypes.STARRED_PHONE:
-                case ViewTypes.STARRED:
+                case ViewTypes.TOP:
                     onMeasureForTiles(widthMeasureSpec);
                     return;
                 default:
@@ -484,7 +500,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
             //    Let width = given width.
             //    Let height = image size + bottom paddding.
 
-            final int totalPaddingsInPixels = (mColumnCount - 1) * mPaddingInPixels;
+            final int totalPaddingsInPixels = (mColumnCount - 1) * mPaddingInPixels
+                    + mRowPaddingStart + mRowPaddingEnd;
 
             // Preferred width / height for images (excluding the padding).
             // The actual width may be 1 pixel larger than this if we have a remainder.
@@ -496,20 +513,19 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
                 final int childWidth = imageSize + child.getPaddingRight()
                         // Compensate for the remainder
                         + (i < remainder ? 1 : 0);
-                final int childHeight = imageSize + child.getPaddingBottom();
+                final int childHeight = imageSize;
                 child.measure(
                         MeasureSpec.makeMeasureSpec(childWidth, MeasureSpec.EXACTLY),
                         MeasureSpec.makeMeasureSpec(childHeight, MeasureSpec.EXACTLY)
                         );
             }
-            setMeasuredDimension(width, imageSize + getChildAt(0).getPaddingBottom());
+            setMeasuredDimension(width, imageSize + getPaddingTop() + getPaddingBottom());
         }
     }
 
     protected static class ViewTypes {
-        public static final int COUNT = 3;
-        public static final int STARRED = 0;
-        public static final int FREQUENT = 1;
-        public static final int STARRED_PHONE = 2;
+        public static final int COUNT = 2;
+        public static final int FREQUENT = 0;
+        public static final int TOP = 1;
     }
 }

@@ -534,4 +534,7 @@
 
     <!--  Menu option to show favorite contacts only -->
     <string name="show_favorites_only">Show favorites only</string>
+
+    <!--  Title of activity that displays a list of all calls -->
+    <string name="call_log_activity_title">History</string>
 </resources>

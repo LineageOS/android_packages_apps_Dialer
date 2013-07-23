@@ -250,13 +250,11 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter implements Sectio
             final int frequentHeaderPosition = mContactTileAdapter.getFrequentHeaderPosition();
             // TODO krelease: Get rid of frequent header position, we don't need it anymore
             if (position >= frequentHeaderPosition) {
-                // Views for "frequent" contacts use FrameLayout's margins instead of padding.
                 final FrameLayout frameLayout = (FrameLayout) view;
                 final View child = frameLayout.getChildAt(0);
                 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                         FrameLayout.LayoutParams.WRAP_CONTENT,
                         FrameLayout.LayoutParams.WRAP_CONTENT);
-                params.setMargins(mItemPaddingLeft, 0, mItemPaddingRight, 0);
                 child.setLayoutParams(params);
             }
             return view;

@@ -28,6 +28,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -37,7 +38,9 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents.UI;
 import android.provider.Settings;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +49,8 @@ import android.view.View.OnFocusChangeListener;
 import android.view.ViewConfiguration;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.SearchView.OnCloseListener;
@@ -145,7 +150,9 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
      * {@link PhoneNumberPickerFragment}).
      */
     private boolean mInSearchUi;
-    private SearchView mSearchView;
+    private View mSearchViewContainer;
+    private View mSearchViewCloseButton;
+    private EditText mSearchView;
 
     /**
      * The index of the Fragment (or, the tab) that has last been manually selected.
@@ -181,60 +188,41 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     /**
      * Listener used to send search queries to the phone search fragment.
      */
-    private final OnQueryTextListener mPhoneSearchQueryTextListener =
-            new OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    View view = getCurrentFocus();
-                    if (view != null) {
-                        hideInputMethod(view);
-                        view.clearFocus();
-                    }
-                    return true;
+    private final TextWatcher mPhoneSearchQueryTextListener = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        final boolean smartDialSearch = isDialpadShowing();
+                final String newText = s.toString();
+                // Show search result with non-empty text. Show a bare list otherwise.
+                if (TextUtils.isEmpty(newText) && mInSearchUi) {
+                    exitSearchUi();
+                    mSearchViewCloseButton.setVisibility(View.GONE);
+                    return;
+                } else if (!TextUtils.isEmpty(newText) && !mInSearchUi) {
+                    enterSearchUi(smartDialSearch);
                 }
 
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    final boolean smartDialSearch = isDialpadShowing();
-
-                    // Show search result with non-empty text. Show a bare list otherwise.
-                    if (TextUtils.isEmpty(newText) && mInSearchUi) {
-                        exitSearchUi();
-                        return true;
-                    } else if (!TextUtils.isEmpty(newText) && !mInSearchUi) {
-                        enterSearchUi(smartDialSearch);
-                    }
-
-                    if (isDialpadShowing()) {
-                        mSmartDialSearchFragment.setQueryString(newText, false);
-                    } else {
-                        mRegularSearchFragment.setQueryString(newText, false);
-                    }
-                    return true;
+                if (isDialpadShowing()) {
+                    mSmartDialSearchFragment.setQueryString(newText, false);
+                } else {
+                    mRegularSearchFragment.setQueryString(newText, false);
                 }
+                mSearchViewCloseButton.setVisibility(View.VISIBLE);
+                return;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
     };
 
     private boolean isDialpadShowing() {
         return mDialpadFragment.isVisible();
     }
-
-    /**
-     * Listener used to handle the "close" button on the right side of {@link SearchView}.
-     * If some text is in the search view, this will clean it up. Otherwise this will exit
-     * the search UI and let users go back to usual Phone UI.
-     *
-     * This does _not_ handle back button.
-     */
-    private final OnCloseListener mPhoneSearchCloseListener =
-            new OnCloseListener() {
-                @Override
-                public boolean onClose() {
-                    if (!TextUtils.isEmpty(mSearchView.getQuery())) {
-                        mSearchView.setQuery(null, true);
-                    }
-                    return true;
-                }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -362,6 +350,12 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
                 final Intent intent = new Intent(this, NewCallLogActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.search_close_button:
+                // Clear the search field
+                if (!TextUtils.isEmpty(mSearchView.getText())) {
+                    mSearchView.setText("");
+                }
+                break;
             default: {
                 Log.wtf(TAG, "Unexpected onClick event from " + view);
                 break;
@@ -384,20 +378,14 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     }
 
     private void prepareSearchView() {
-        mSearchView = (SearchView) findViewById(R.id.search_view);
-        mSearchView.setOnQueryTextListener(mPhoneSearchQueryTextListener);
-        mSearchView.setOnCloseListener(mPhoneSearchCloseListener);
-        // Since we're using a custom layout for showing SearchView instead of letting the
-        // search menu icon do that job, we need to manually configure the View so it looks
-        // "shown via search menu".
-        // - it should be iconified by default
-        // - it should not be iconified at this time
-        // See also comments for onActionViewExpanded()/onActionViewCollapsed()
-        mSearchView.setIconifiedByDefault(true);
-        mSearchView.setQueryHint(getString(R.string.dialer_hint_find_contact));
-        mSearchView.setIconified(false);
-        mSearchView.clearFocus();
-        mSearchView.setOnQueryTextFocusChangeListener(new OnFocusChangeListener() {
+        mSearchViewContainer = findViewById(R.id.search_view_container);
+        mSearchViewCloseButton = findViewById(R.id.search_close_button);
+        mSearchViewCloseButton.setClickable(true);
+        mSearchViewCloseButton.setOnClickListener(this);
+        mSearchView = (EditText) findViewById(R.id.search_view);
+        mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
+        mSearchView.setHint(getString(R.string.dialer_hint_find_contact));
+        mSearchView.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
@@ -416,19 +404,19 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     final AnimatorListener mHideListener = new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
-            mSearchView.setVisibility(View.GONE);
+            mSearchViewContainer.setVisibility(View.GONE);
         }
     };
 
     public void hideSearchBar() {
-        mSearchView.animate().cancel();
-        mSearchView.setAlpha(1);
-        mSearchView.setTranslationY(0);
-        mSearchView.animate().withLayer().alpha(0).translationY(-mSearchView.getHeight()).
-                setDuration(200).setListener(mHideListener);
+        mSearchViewContainer.animate().cancel();
+        mSearchViewContainer.setAlpha(1);
+        mSearchViewContainer.setTranslationY(0);
+        mSearchViewContainer.animate().withLayer().alpha(0).translationY(-mSearchView.getHeight())
+                .setDuration(200).setListener(mHideListener);
 
         mPhoneFavoriteFragment.getView().animate().withLayer()
-                .translationY(-mSearchView.getHeight()).setDuration(200).setListener(
+                .translationY(-mSearchViewContainer.getHeight()).setDuration(200).setListener(
                     new AnimatorListenerAdapter() {
                     @Override
                         public void onAnimationEnd(Animator animation) {
@@ -439,18 +427,18 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     }
 
     public void showSearchBar() {
-        mSearchView.animate().cancel();
-        mSearchView.setAlpha(0);
-        mSearchView.setTranslationY(-mSearchView.getHeight());
-        mSearchView.animate().withLayer().alpha(1).translationY(0).setDuration(200)
+        mSearchViewContainer.animate().cancel();
+        mSearchViewContainer.setAlpha(0);
+        mSearchViewContainer.setTranslationY(-mSearchViewContainer.getHeight());
+        mSearchViewContainer.animate().withLayer().alpha(1).translationY(0).setDuration(200)
                 .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationStart(Animator animation) {
-                            mSearchView.setVisibility(View.VISIBLE);
+                        mSearchViewContainer.setVisibility(View.VISIBLE);
                         }
                 });
 
-        mPhoneFavoriteFragment.getView().setTranslationY(-mSearchView.getHeight());
+        mPhoneFavoriteFragment.getView().setTranslationY(-mSearchViewContainer.getHeight());
         mPhoneFavoriteFragment.getView().animate().withLayer().translationY(0).setDuration(200)
                 .setListener(
                         new AnimatorListenerAdapter() {
@@ -728,7 +716,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
         if (mDialpadFragment.isVisible()) {
             hideDialpadFragment();
         } else if (mInSearchUi) {
-            mSearchView.setQuery(null, false);
+            mSearchView.setText(null);
         } else if (isTaskRoot()) {
             // Instead of stopping, simply push this to the back of the stack.
             // This is only done when running at the top of the stack;
@@ -744,8 +732,8 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     public void onDialpadQueryChanged(String query) {
         final String normalizedQuery = SmartDialNameMatcher.normalizeNumber(query,
                 SmartDialNameMatcher.LATIN_SMART_DIAL_MAP);
-        if (!TextUtils.equals(mSearchView.getQuery(), normalizedQuery)) {
-            mSearchView.setQuery(normalizedQuery, false);
+        if (!TextUtils.equals(mSearchView.getText(), normalizedQuery)) {
+            mSearchView.setText(normalizedQuery);
         }
     }
 

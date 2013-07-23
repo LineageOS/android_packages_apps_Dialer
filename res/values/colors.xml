@@ -44,7 +44,7 @@
     <color name="item_selected">#660099cc</color>
 
     <!-- Background color of new dialer activity -->
-    <color name="background_dial_holo_light">#ffffff</color>
+    <color name="background_dial_holo_light">#f5f5f5</color>
 
     <!-- Background color of new dialpad -->
     <color name="background_dialpad">#ee020709</color>
@@ -54,5 +54,16 @@
     <!-- Secondary color of dialpad text (mainly used for the letters corresponding to each digit
         -->
     <color name="dialpad_secondary_text_color">#888888</color>
+
+    <!-- Background color of fake action bar in the favorites fragment -->
+    <color name="actionbar_background_color">#e6e6e6</color>
+
+    <!-- Color of the 1dp divider that separates favorites -->
+    <color name="favorite_contacts_separator_color">#d0d0d0</color>
+
+    <!-- Background color of the search box -->
+    <color name="searchbox_background_color">#ffffff</color>
+    <!-- Text color of the search box -->
+    <color name="searchbox_text_color">#d3d3d3</color>
 
 </resources>
