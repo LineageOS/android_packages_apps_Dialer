@@ -34,7 +34,8 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_alignParentBottom="true">
+              android:layout_alignParentBottom="true"
+              android:visibility="invisible">
 
     <!-- Row 1, the "extra button row": A couple of relatively rare
          buttons used only in certain call states.

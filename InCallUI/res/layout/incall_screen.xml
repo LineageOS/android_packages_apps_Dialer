@@ -25,11 +25,18 @@
                   android:layout_height="match_parent"
                   android:orientation="vertical">
 
-        <!-- Call card fragment will be added here. -->
-        <!-- Call button fragment will be added here. -->
+        <fragment android:name="com.android.incallui.CallCardFragment"
+                  android:id="@+id/callCardFragment"
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight="1"/>
+        <fragment android:name="com.android.incallui.CallButtonFragment"
+                  android:id="@+id/callButtonFragment"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
-    <!-- Glowpad fragment will be added here to overlay. -->
+    <!-- Glowpad fragment loaded here on demand. -->
 
 </FrameLayout>

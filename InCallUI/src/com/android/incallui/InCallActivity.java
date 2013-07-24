@@ -37,6 +37,8 @@ public class InCallActivity extends Activity {
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final boolean VERBOSE = Log.isLoggable(TAG, Log.VERBOSE);
 
+    private CallButtonPresenter mCallButtonPresenter;
+
     @Override
     protected void onCreate(Bundle icicle) {
         logD("onCreate()...  this = " + this);
@@ -58,18 +60,26 @@ public class InCallActivity extends Activity {
         logD("onCreate(): exit");
     }
 
+
     @Override
     protected void onResume() {
         logD("onResume()...");
 
+        final CallButtonFragment callButtonFragment = (CallButtonFragment) getFragmentManager()
+                .findFragmentById(R.id.callButtonFragment);
+        mCallButtonPresenter = callButtonFragment.getPresenter();
+
         // TODO(klp): create once and reset when needed.
         final AnswerFragment answerFragment = new AnswerFragment();
-        final CallCardFragment callCardFragment = new CallCardFragment();
-        final CallButtonFragment callButtonFragment = new CallButtonFragment();
-        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.in_call_and_button_container, callCardFragment);
-        fragmentTransaction.add(R.id.in_call_and_button_container, callButtonFragment);
+        final AnswerPresenter presenter = answerFragment.getPresenter();
+        presenter.addCloseListener(new AnswerPresenter.Listener() {
+            @Override
+            public void onClose() {
+                mCallButtonPresenter.show();
+            }
+        });
 
+        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.main, answerFragment);
         fragmentTransaction.commit();
         super.onResume();
@@ -204,12 +214,6 @@ public class InCallActivity extends Activity {
     private void logD(String msg) {
         if (DEBUG) {
             Log.d(TAG, msg);
-        }
-    }
-
-    private void logV(String msg) {
-        if (VERBOSE) {
-            Log.v(TAG, msg);
         }
     }
 }

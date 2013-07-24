@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,25 +25,46 @@ import android.view.ViewGroup;
 /**
  *
  */
-public class AnswerFragment extends Fragment {
+public class AnswerFragment extends BaseFragment<AnswerPresenter> implements
+        GlowPadWrapper.AnswerListener {
+
+    @Override
+    public AnswerPresenter createPresenter() {
+        return new AnswerPresenter(new AnswerPresenter.Listener() {
+            @Override
+            public void onClose() {
+                close();
+            }
+        });
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final AnswerUi ui = (AnswerUi) inflater.inflate(R.layout.answer_fragment, container,
-                false);
-        final AnswerPresenter presenter = new AnswerPresenter(ui, new AnswerPresenter.Listener() {
-            @Override
-            public void onAnswered() {
-                close();
-            }
-        });
-        return ui;
+        final GlowPadWrapper glowPad = (GlowPadWrapper) inflater.inflate(R.layout.answer_fragment,
+                container, false);
+        glowPad.setAnswerListener(this);
+        return glowPad;
     }
 
     private void close() {
         final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.remove(this);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onAnswer() {
+        getPresenter().onAnswer();
+    }
+
+    @Override
+    public void onDecline() {
+        getPresenter().onDecline();
+    }
+
+    @Override
+    public void onText() {
+        getPresenter().onText();
     }
 }

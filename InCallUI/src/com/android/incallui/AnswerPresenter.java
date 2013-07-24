@@ -16,40 +16,46 @@
 
 package com.android.incallui;
 
+import com.google.android.collect.Lists;
+
+import java.util.ArrayList;
+
 /**
  *
  */
-public class AnswerPresenter {
+public class AnswerPresenter extends Presenter<Ui> {
 
-    private Ui mUi;
-    private Listener mListener;
+    private ArrayList<Listener> mListeners = Lists.newArrayList();
 
-    public AnswerPresenter(Ui ui, Listener listener) {
-        this.mUi = ui;
-        this.mListener = listener;
+    public AnswerPresenter(Listener listener) {
+        this.mListeners.add(listener);
+    }
 
-        mUi.setPresenter(this);
+    public void addCloseListener(Listener listener) {
+        mListeners.add(listener);
     }
 
     public void onAnswer() {
         // TODO(klp): hook in call id.
         CallCommandService.getInstance().answerCall(1);
-        mListener.onAnswered();
+        notifyListeners();
     }
 
     public void onDecline() {
-        mListener.onAnswered();
+        notifyListeners();
     }
 
     public void onText() {
-        mListener.onAnswered();
+        notifyListeners();
     }
 
-    public interface Ui {
-        void setPresenter(AnswerPresenter presenter);
+    private void notifyListeners() {
+        for (Listener listener : mListeners) {
+            listener.onClose();
+        }
     }
 
     public interface Listener {
-        void onAnswered();
+        void onClose();
     }
 }

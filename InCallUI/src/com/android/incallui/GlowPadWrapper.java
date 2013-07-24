@@ -29,10 +29,9 @@ import com.android.incallui.widget.multiwaveview.GlowPadView;
 /**
  *
  */
-public class AnswerUi extends GlowPadView implements AnswerPresenter.Ui,
-        GlowPadView.OnTriggerListener {
+public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTriggerListener {
 
-    private static final String TAG = AnswerUi.class.getSimpleName();
+    private static final String TAG = GlowPadWrapper.class.getSimpleName();
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     // Parameters for the GlowPadView "ping" animation; see triggerPing().
@@ -51,14 +50,14 @@ public class AnswerUi extends GlowPadView implements AnswerPresenter.Ui,
         }
     };
 
-    private AnswerPresenter mPresenter;
+    private AnswerListener mAnswerListener;
     private boolean mPingEnabled = true;
 
-    public AnswerUi(Context context) {
+    public GlowPadWrapper(Context context) {
         super(context);
     }
 
-    public AnswerUi(Context context, AttributeSet attrs) {
+    public GlowPadWrapper(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -130,13 +129,13 @@ public class AnswerUi extends GlowPadView implements AnswerPresenter.Ui,
         final int resId = getResourceIdForTarget(target);
         switch (resId) {
             case R.drawable.ic_lockscreen_answer:
-                mPresenter.onAnswer();
+                mAnswerListener.onAnswer();
                 break;
             case R.drawable.ic_lockscreen_decline:
-                mPresenter.onDecline();
+                mAnswerListener.onDecline();
                 break;
             case R.drawable.ic_lockscreen_text:
-                mPresenter.onText();
+                mAnswerListener.onText();
                 break;
             default:
                 // Code should never reach here.
@@ -154,9 +153,14 @@ public class AnswerUi extends GlowPadView implements AnswerPresenter.Ui,
 
     }
 
-    @Override
-    public void setPresenter(AnswerPresenter listener) {
-        mPresenter = listener;
+    public void setAnswerListener(AnswerListener listener) {
+        mAnswerListener = listener;
+    }
+
+    public interface AnswerListener {
+        void onAnswer();
+        void onDecline();
+        void onText();
     }
 
     private void logD(String msg) {

@@ -16,20 +16,79 @@
 
 package com.android.incallui;
 
-import android.app.Fragment;
+import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.ToggleButton;
 
 /**
  * Fragment for call control buttons
  */
-public class CallButtonFragment extends Fragment {
+public class CallButtonFragment extends BaseFragment<CallButtonPresenter> implements
+        CallButtonPresenter.CallButtonUi {
+
+    @Override
+    CallButtonPresenter createPresenter() {
+        return new CallButtonPresenter();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        final AudioManager audioManager = (AudioManager) getActivity().getSystemService(
+                Context.AUDIO_SERVICE);
+        getPresenter().init(audioManager);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.call_button_fragment, container, false);
+        final View parent = inflater.inflate(R.layout.call_button_fragment, container, false);
+        final ToggleButton toggleButton = (ToggleButton) parent.findViewById(R.id.muteButton);
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                getPresenter().muteClicked(isChecked);
+            }
+        });
+
+        final ToggleButton audioButton = (ToggleButton) parent.findViewById(R.id.audioButton);
+        audioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                getPresenter().speakerClicked(isChecked);
+            }
+        });
+
+        return parent;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        getPresenter().onUiReady(this);
+    }
+
+    @Override
+    public void setVisible() {
+        Log.e("TEST", "" + getView());
+        getView().setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setMute(boolean value) {
+        final ToggleButton button = (ToggleButton) getView().findViewById(R.id.muteButton);
+        button.setChecked(value);
+    }
+
+    @Override
+    public void setSpeaker(boolean value) {
+        final ToggleButton button = (ToggleButton) getView().findViewById(R.id.audioButton);
+        button.setChecked(value);
     }
 }
