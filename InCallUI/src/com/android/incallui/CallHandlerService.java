@@ -62,6 +62,9 @@ public class CallHandlerService extends Service {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
+
+        public void onDisconnect(int callId) {
+        }
     };
 
     private void logD(String message) {
