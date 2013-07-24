@@ -25,15 +25,15 @@ import com.android.services.telephony.common.ICallCommandService;
 /**
  * Main interface for phone related commands.
  */
-public class CallCommandService {
+public class CallCommandClient {
 
-    private static final String TAG = CallCommandService.class.getSimpleName();
+    private static final String TAG = CallCommandClient.class.getSimpleName();
 
-    private static CallCommandService sInstance;
+    private static CallCommandClient sInstance;
 
-    public static CallCommandService getInstance() {
+    public static CallCommandClient getInstance() {
         if (sInstance == null) {
-            throw new IllegalStateException("CallCommandService has not been initialized.");
+            throw new IllegalStateException("CallCommandClient has not been initialized.");
         }
         return sInstance;
     }
@@ -41,13 +41,13 @@ public class CallCommandService {
     // TODO(klp): Not sure if static call is ok. Might need to switch to normal service binding.
     public static void init(ICallCommandService service) {
         Preconditions.checkState(sInstance == null);
-        sInstance = new CallCommandService(service);
+        sInstance = new CallCommandClient(service);
     }
 
 
     private ICallCommandService mCommandService;
 
-    private CallCommandService(ICallCommandService service) {
+    private CallCommandClient(ICallCommandService service) {
         mCommandService = service;
     }
 

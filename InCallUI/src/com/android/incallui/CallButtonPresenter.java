@@ -41,12 +41,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void muteClicked(boolean checked) {
-        CallCommandService.getInstance().mute(checked);
+        CallCommandClient.getInstance().mute(checked);
         getUi().setMute(checked);
     }
 
     public void speakerClicked(boolean checked) {
-        CallCommandService.getInstance().turnSpeakerOn(checked);
+        CallCommandClient.getInstance().turnSpeakerOn(checked);
         getUi().setSpeaker(checked);
     }
 
