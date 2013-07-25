@@ -30,7 +30,7 @@ import android.widget.Toast;
 /**
  * Phone app "in call" screen.
  */
-public class InCallActivity extends Activity {
+public class InCallActivity extends Activity implements CallButtonPresenter.EndCallListener {
 
     private static final String TAG = InCallActivity.class.getSimpleName();
 
@@ -68,6 +68,7 @@ public class InCallActivity extends Activity {
         final CallButtonFragment callButtonFragment = (CallButtonFragment) getFragmentManager()
                 .findFragmentById(R.id.callButtonFragment);
         mCallButtonPresenter = callButtonFragment.getPresenter();
+        mCallButtonPresenter.setEndCallListener(this);
 
         // TODO(klp): create once and reset when needed.
         final AnswerFragment answerFragment = new AnswerFragment();
@@ -215,5 +216,10 @@ public class InCallActivity extends Activity {
         if (DEBUG) {
             Log.d(TAG, msg);
         }
+    }
+
+    @Override
+    public void onCallEnd() {
+        finish();
     }
 }

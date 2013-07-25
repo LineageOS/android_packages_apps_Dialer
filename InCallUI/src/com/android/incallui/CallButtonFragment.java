@@ -23,15 +23,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
 /**
  * Fragment for call control buttons
  */
-public class CallButtonFragment extends BaseFragment<CallButtonPresenter> implements
-        CallButtonPresenter.CallButtonUi {
+public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
+        implements CallButtonPresenter.CallButtonUi {
 
     @Override
     CallButtonPresenter createPresenter() {
@@ -85,9 +84,12 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter> implem
     }
 
     @Override
-    public void setVisible() {
-        Log.e("TEST", "" + getView());
-        getView().setVisibility(View.VISIBLE);
+    public void setVisible(boolean on) {
+        if (on) {
+            getView().setVisibility(View.VISIBLE);
+        } else {
+            getView().setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

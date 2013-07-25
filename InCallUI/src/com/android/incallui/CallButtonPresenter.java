@@ -24,6 +24,7 @@ import android.media.AudioManager;
 public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButtonUi> {
 
     private AudioManager mAudioManager;
+    private EndCallListener mEndCallListener;
 
     public void init(AudioManager audioManager) {
         mAudioManager = audioManager;
@@ -37,12 +38,21 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void show() {
-        getUi().setVisible();
+        getUi().setVisible(true);
     }
 
     public void endCallClicked() {
         // TODO(klp): hook up call id.
         CallCommandClient.getInstance().disconnectCall(1);
+
+        mEndCallListener.onCallEnd();
+        reset();
+    }
+
+    private void reset() {
+        getUi().setVisible(false);
+        getUi().setMute(false);
+        getUi().setSpeaker(false);
     }
 
     public void muteClicked(boolean checked) {
@@ -55,9 +65,17 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         getUi().setSpeaker(checked);
     }
 
+    public void setEndCallListener(EndCallListener endCallListener) {
+        mEndCallListener = endCallListener;
+    }
+
     public interface CallButtonUi extends Ui {
-        void setVisible();
+        void setVisible(boolean on);
         void setMute(boolean on);
         void setSpeaker(boolean on);
+    }
+
+    public interface EndCallListener {
+        void onCallEnd();
     }
 }
