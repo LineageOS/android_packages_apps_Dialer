@@ -26,73 +26,38 @@
     android:paddingStart="5dip"
     android:paddingEnd="5dip"
     android:paddingBottom="10dip"
+    android:stretchColumns="0,1,2"
     android:layoutDirection="ltr" >
 
     <TableRow
          android:layout_height="0px"
          android:layout_weight="1">
-        <com.android.dialer.dialpad.DialpadImageButton
-            android:id="@+id/one" style="@style/DialtactsDialpadButtonStyle"
-            android:src="@drawable/dial_num_1_wht"
-            android:contentDescription="@string/description_image_button_one" />
-        <com.android.dialer.dialpad.DialpadImageButton
-            android:id="@+id/two" style="@style/DialtactsDialpadButtonStyle"
-            android:src="@drawable/dial_num_2_wht"
-            android:contentDescription="@string/description_image_button_two" />
-        <com.android.dialer.dialpad.DialpadImageButton
-            android:id="@+id/three" style="@style/DialtactsDialpadButtonStyle"
-            android:src="@drawable/dial_num_3_wht"
-            android:contentDescription="@string/description_image_button_three" />
+        <include layout="@layout/dialpad_key" android:id="@+id/one"/>
+        <include layout="@layout/dialpad_key" android:id="@+id/two"/>
+        <include layout="@layout/dialpad_key" android:id="@+id/three"/>
     </TableRow>
 
     <TableRow
          android:layout_height="0px"
          android:layout_weight="1">
-        <com.android.dialer.dialpad.DialpadImageButton
-            android:id="@+id/four" style="@style/DialtactsDialpadButtonStyle"
-            android:src="@drawable/dial_num_4_wht"
-            android:contentDescription="@string/description_image_button_four" />
-        <com.android.dialer.dialpad.DialpadImageButton
-            android:id="@+id/five" style="@style/DialtactsDialpadButtonStyle"
-            android:src="@drawable/dial_num_5_wht"
-            android:contentDescription="@string/description_image_button_five" />
-        <com.android.dialer.dialpad.DialpadImageButton
-            android:id="@+id/six" style="@style/DialtactsDialpadButtonStyle"
-            android:src="@drawable/dial_num_6_wht"
-            android:contentDescription="@string/description_image_button_six" />
+        <include layout="@layout/dialpad_key" android:id="@+id/four"/>
+        <include layout="@layout/dialpad_key" android:id="@+id/five"/>
+        <include layout="@layout/dialpad_key" android:id="@+id/six"/>
     </TableRow>
 
     <TableRow
          android:layout_height="0px"
          android:layout_weight="1">
-        <com.android.dialer.dialpad.DialpadImageButton
-            android:id="@+id/seven" style="@style/DialtactsDialpadButtonStyle"
-            android:src="@drawable/dial_num_7_wht"
-            android:contentDescription="@string/description_image_button_seven" />
-        <com.android.dialer.dialpad.DialpadImageButton
-            android:id="@+id/eight" style="@style/DialtactsDialpadButtonStyle"
-            android:src="@drawable/dial_num_8_wht"
-            android:contentDescription="@string/description_image_button_eight" />
-        <com.android.dialer.dialpad.DialpadImageButton
-            android:id="@+id/nine" style="@style/DialtactsDialpadButtonStyle"
-            android:src="@drawable/dial_num_9_wht"
-            android:contentDescription="@string/description_image_button_nine" />
+        <include layout="@layout/dialpad_key" android:id="@+id/seven"/>
+        <include layout="@layout/dialpad_key" android:id="@+id/eight"/>
+        <include layout="@layout/dialpad_key" android:id="@+id/nine"/>
     </TableRow>
 
     <TableRow
          android:layout_height="0px"
          android:layout_weight="1">
-        <com.android.dialer.dialpad.DialpadImageButton
-            android:id="@+id/star" style="@style/DialtactsDialpadButtonStyle"
-            android:src="@drawable/dial_num_star_wht"
-            android:contentDescription="@string/description_image_button_star" />
-        <com.android.dialer.dialpad.DialpadImageButton
-            android:id="@+id/zero" style="@style/DialtactsDialpadButtonStyle"
-            android:src="@drawable/dial_num_0_wht"
-            android:contentDescription="@string/description_image_button_zero" />
-        <com.android.dialer.dialpad.DialpadImageButton
-            android:id="@+id/pound" style="@style/DialtactsDialpadButtonStyle"
-            android:src="@drawable/dial_num_pound_wht"
-            android:contentDescription="@string/description_image_button_pound" />
+        <include layout="@layout/dialpad_key" android:id="@+id/star"/>
+        <include layout="@layout/dialpad_key" android:id="@+id/zero"/>
+        <include layout="@layout/dialpad_key" android:id="@+id/pound"/>
     </TableRow>
 </TableLayout>
