@@ -51,7 +51,7 @@ public class CallHandlerService extends Service {
         @Override
         public void setCallCommandService(ICallCommandService service) {
             logD("onConnected: " + service.toString());
-            CallCommandService.init(service);
+            CallCommandClient.init(service);
         }
 
         @Override

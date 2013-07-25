@@ -37,7 +37,7 @@ public class AnswerPresenter extends Presenter<Ui> {
 
     public void onAnswer() {
         // TODO(klp): hook in call id.
-        CallCommandService.getInstance().answerCall(1);
+        CallCommandClient.getInstance().answerCall(1);
         notifyListeners();
     }
 
