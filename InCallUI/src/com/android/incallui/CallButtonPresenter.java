@@ -40,6 +40,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         getUi().setVisible();
     }
 
+    public void endCallClicked() {
+        // TODO(klp): hook up call id.
+        CallCommandClient.getInstance().disconnectCall(1);
+    }
+
     public void muteClicked(boolean checked) {
         CallCommandClient.getInstance().mute(checked);
         getUi().setMute(checked);

@@ -59,6 +59,14 @@ public class CallCommandClient {
         }
     }
 
+    public void disconnectCall(int callId) {
+        try {
+            mCommandService.disconnectCall(callId);
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error answering call.", e);
+        }
+    }
+
     public void mute(boolean onOff) {
         try {
             mCommandService.mute(onOff);

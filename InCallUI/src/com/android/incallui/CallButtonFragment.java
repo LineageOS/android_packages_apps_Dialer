@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
@@ -50,6 +51,15 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter> implem
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View parent = inflater.inflate(R.layout.call_button_fragment, container, false);
+
+        final View endCallButton = parent.findViewById(R.id.endButton);
+        endCallButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().endCallClicked();
+            }
+        });
+
         final ToggleButton toggleButton = (ToggleButton) parent.findViewById(R.id.muteButton);
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
