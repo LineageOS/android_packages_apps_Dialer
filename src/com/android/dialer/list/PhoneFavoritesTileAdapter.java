@@ -47,7 +47,7 @@ import java.util.ArrayList;
 public class PhoneFavoritesTileAdapter extends BaseAdapter {
     private static final String TAG = ContactTileAdapter.class.getSimpleName();
 
-    public static final int NO_ROW_LIMIT = -1;
+    public static final int ROW_LIMIT_DEFAULT = 1;
 
     private ContactTileView.Listener mListener;
     private Context mContext;
@@ -55,14 +55,10 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     protected Cursor mContactCursor = null;
     private ContactPhotoManager mPhotoManager;
     protected int mNumFrequents;
+    protected int mNumStarred;
 
-    /**
-     * Index of the first NON starred contact in the {@link Cursor}
-     * Only valid when {@link DisplayType#STREQUENT} is true
-     */
-    private int mDividerPosition;
     protected int mColumnCount;
-    private int mMaxTiledRows = NO_ROW_LIMIT;
+    private int mMaxTiledRows = ROW_LIMIT_DEFAULT;
     private int mStarredIndex;
 
     protected int mIdIndex;
@@ -83,7 +79,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     private final int mPaddingInPixels;
 
     public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener, int numCols) {
-        this(context, listener, numCols, NO_ROW_LIMIT);
+        this(context, listener, numCols, ROW_LIMIT_DEFAULT);
     }
 
     public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener, int numCols,
@@ -143,7 +139,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
      * @param cursor The cursor to get number of frequents from.
      */
     protected void saveNumFrequentsFromCursor(Cursor cursor) {
-        mNumFrequents = cursor.getCount() - mDividerPosition;
+        mNumFrequents = cursor.getCount() - mNumStarred;
     }
 
     /**
@@ -153,7 +149,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
      */
     public void setContactCursor(Cursor cursor) {
         mContactCursor = cursor;
-        mDividerPosition = getDividerPosition(cursor);
+        mNumStarred = getNumStarredContacts(cursor);
 
         saveNumFrequentsFromCursor(cursor);
 
@@ -167,7 +163,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
      * Returns -1 if {@link DisplayType#STARRED_ONLY}
      * Returns 0 if {@link DisplayType#FREQUENT_ONLY}
      */
-    protected int getDividerPosition(Cursor cursor) {
+    protected int getNumStarredContacts(Cursor cursor) {
         if (cursor == null || cursor.isClosed()) {
             throw new IllegalStateException("Unable to access cursor");
         }
@@ -225,17 +221,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
             return 0;
         }
 
-        // Takes numbers of rows the Starred Contacts Occupy
-        int starredRowCount = getRowCount(mDividerPosition) +
-                (mMaxTiledRows == NO_ROW_LIMIT ? 0 : Math.max(0, mDividerPosition -
-                        mMaxTiledRows * mColumnCount));
-
-        // Compute the frequent row count which is 1 plus the number of frequents
-        // (to account for the divider) or 0 if there are no frequents.
-        int frequentRowCount = mNumFrequents == 0 ? 0 : mNumFrequents;
-
-        // Return the number of starred plus frequent rows
-        return starredRowCount + frequentRowCount;
+        final int total = mNumFrequents + mNumStarred;
+        return total - (mMaxTiledRows * (mColumnCount - 1));
     }
 
     /**
@@ -245,8 +232,11 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     protected int getRowCount(int entryCount) {
         if (entryCount == 0) return 0;
         final int nonLimitedRows = ((entryCount - 1) / mColumnCount) + 1;
-        return mMaxTiledRows == NO_ROW_LIMIT ? nonLimitedRows : Math.min(mMaxTiledRows,
-                nonLimitedRows);
+        return Math.min(mMaxTiledRows, nonLimitedRows);
+    }
+
+    private int getMaxContactsInTiles() {
+        return mColumnCount * mMaxTiledRows;
     }
 
     public int getColumnCount() {
@@ -261,24 +251,22 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     public ArrayList<ContactEntry> getItem(int position) {
         ArrayList<ContactEntry> resultList = new ArrayList<ContactEntry>(mColumnCount);
         int contactIndex = position * mColumnCount;
-        if (position < getRowCount(mDividerPosition)) {
+        final int maxContactsInTiles = getMaxContactsInTiles();
+        if (position < getRowCount(maxContactsInTiles)) {
+            // Contacts that appear as tiles
             for (int columnCounter = 0; columnCounter < mColumnCount &&
-                    contactIndex != mDividerPosition; columnCounter++) {
+                    contactIndex != maxContactsInTiles; columnCounter++) {
                 resultList.add(createContactEntryFromCursor(mContactCursor, contactIndex));
                 contactIndex++;
             }
         } else {
-            /*
-             * Current position minus how many rows are before the divider and Minus 1 for the
-             * divider itself provides the relative index of the frequent contact being displayed.
-             * Then add the dividerPostion to give the offset into the contacts cursor to get the
-             * absolute index.
-             */
-            final int rowCount = getRowCount(mDividerPosition);
-            contactIndex = position - rowCount + Math.min(mDividerPosition,
-                    rowCount * mColumnCount);
+            // Contacts that appear as rows
+            // The actual position of the contact in the cursor is simply total the number of
+            // tiled contacts + the given position
+            contactIndex = maxContactsInTiles + position - 1;
             resultList.add(createContactEntryFromCursor(mContactCursor, contactIndex));
         }
+
         return resultList;
     }
 
@@ -298,7 +286,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-        return position != getRowCount(mDividerPosition);
+        return true;
     }
 
     @Override
@@ -334,7 +322,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (position < getRowCount(mDividerPosition)) {
+        if (position < getRowCount(getMaxContactsInTiles())) {
             return ViewTypes.TOP;
         } else {
             return ViewTypes.FREQUENT;
@@ -344,9 +332,12 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     /**
      * Returns the "frequent header" position. Only available when STREQUENT or
      * STREQUENT_PHONE_ONLY is used for its display type.
+     *
+     * TODO krelease: We shouldn't need this method once we get rid of the frequent header
+     * in the merged adapter
      */
     public int getFrequentHeaderPosition() {
-        return getRowCount(mDividerPosition);
+        return getRowCount(mNumStarred);
     }
 
     /**
