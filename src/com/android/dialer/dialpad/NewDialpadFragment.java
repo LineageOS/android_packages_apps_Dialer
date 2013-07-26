@@ -101,6 +101,10 @@ public class NewDialpadFragment extends Fragment
         DialpadImageButton.OnPressedListener {
     private static final String TAG = NewDialpadFragment.class.getSimpleName();
 
+    public interface OnDialpadFragmentStartedListener {
+        public void onDialpadFragmentStarted();
+    }
+
     /**
      * LinearLayout with getter and setter methods for the translationY property using floats,
      * for animation purposes.
@@ -380,18 +384,6 @@ public class NewDialpadFragment extends Fragment
             setupKeypad(fragmentView);
         }
 
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        int minCellSize = (int) (56 * dm.density); // 56dip == minimum size of menu buttons
-        int cellCount = dm.widthPixels / minCellSize;
-        int fakeMenuItemWidth = dm.widthPixels / cellCount;
-        mDialButtonContainer = fragmentView.findViewById(R.id.dialButtonContainer);
-        // If in portrait, add padding to the dial button since we need space for the
-        // search and menu/overflow buttons.
-        if (mDialButtonContainer != null && !OrientationUtil.isLandscape(this.getActivity())) {
-            mDialButtonContainer.setPadding(
-                    fakeMenuItemWidth, mDialButtonContainer.getPaddingTop(),
-                    fakeMenuItemWidth, mDialButtonContainer.getPaddingBottom());
-        }
         mDialButton = fragmentView.findViewById(R.id.dialButton);
         if (r.getBoolean(R.bool.config_show_onscreen_dial_button)) {
             mDialButton.setOnClickListener(this);
@@ -421,6 +413,20 @@ public class NewDialpadFragment extends Fragment
         mDialpadChooser.setOnItemClickListener(this);
 
         return fragmentView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        final Activity activity = getActivity();
+
+        try {
+            ((OnDialpadFragmentStartedListener) activity).onDialpadFragmentStarted();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnDialpadFragmentStartedListener");
+        }
     }
 
     private boolean isLayoutReady() {

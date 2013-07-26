@@ -46,7 +46,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"/>
     </FrameLayout>
     <FrameLayout
-        android:layout_height="48dp"
+        android:layout_height="@dimen/fake_action_bar_height"
         android:layout_width="match_parent"
         android:id="@+id/fake_action_bar"
         android:background="@color/actionbar_background_color">
@@ -56,7 +56,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="bottom|start"
             android:background="?android:attr/selectableItemBackground"
-            android:contentDescription="@string/description_search_button"
+            android:contentDescription="@string/action_menu_call_history_description"
             android:src="@drawable/ic_dialer_menu_history_dk"/>
         <ImageButton
             android:id="@+id/dialpad_button"
