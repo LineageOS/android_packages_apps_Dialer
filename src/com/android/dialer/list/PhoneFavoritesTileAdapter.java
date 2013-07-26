@@ -225,6 +225,10 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         return total - (mMaxTiledRows * (mColumnCount - 1));
     }
 
+    public int getMaxTiledRows() {
+        return mMaxTiledRows;
+    }
+
     /**
      * Returns the number of rows required to show the provided number of entries
      * with the current number of columns.

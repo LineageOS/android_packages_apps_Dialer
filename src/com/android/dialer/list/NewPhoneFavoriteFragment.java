@@ -172,20 +172,9 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
     }
 
     private class ScrollListener implements ListView.OnScrollListener {
-        private boolean mShouldShowFastScroller;
         @Override
         public void onScroll(AbsListView view,
                 int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-            // FastScroller should be visible only when the user is seeing "all" contacts section.
-            final boolean shouldShow = mAdapter.shouldShowFirstScroller(firstVisibleItem);
-            if (shouldShow != mShouldShowFastScroller) {
-                mListView.setVerticalScrollBarEnabled(shouldShow);
-                mListView.setFastScrollEnabled(shouldShow);
-                mListView.setFastScrollAlwaysVisible(shouldShow);
-                mShouldShowFastScroller = shouldShow;
-            }
-
-
         }
 
         @Override
@@ -343,8 +332,7 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
         mLoadingView = inflater.inflate(R.layout.phone_loading_contacts, mListView, false);
 
         mAdapter = new NewPhoneFavoriteMergedAdapter(getActivity(),
-                mContactTileAdapter, mAccountFilterHeaderContainer, mAllContactsAdapter,
-                mCallLogAdapter, mLoadingView);
+                mContactTileAdapter, mAccountFilterHeaderContainer, mCallLogAdapter, mLoadingView);
 
         mListView.setAdapter(mAdapter);
 
