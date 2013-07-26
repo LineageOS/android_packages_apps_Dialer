@@ -29,6 +29,10 @@ public class NewSearchFragment extends PhoneNumberPickerFragment {
 
     private OnListFragmentScrolledListener mActivityScrollListener;
 
+    public NewSearchFragment() {
+        setDirectorySearchEnabled(true);
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

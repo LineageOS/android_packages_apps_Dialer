@@ -176,6 +176,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 }
 
                 @Override
+                public void onCallNumberDirectly(String phoneNumber) {
+                    Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin());
+                    startActivity(intent);
+                }
+
+                @Override
                 public void onShortcutIntentCreated(Intent intent) {
                     Log.w(TAG, "Unsupported intent has come (" + intent + "). Ignoring.");
                 }

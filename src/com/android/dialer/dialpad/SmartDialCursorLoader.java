@@ -24,6 +24,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 
+import com.android.contacts.common.list.PhoneNumberListAdapter.PhoneQuery;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.database.DialerDatabaseHelper.ContactNumber;
 
@@ -43,29 +44,6 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
 
     private String mQuery;
     private SmartDialNameMatcher mNameMatcher;
-
-    /** Constructs the columns of the cursor to be used. */
-    public static class SmartDialPhoneQuery {
-        public static final String[] PROJECTION_PRIMARY = new String[] {
-            Phone._ID,                          // 0
-            Phone.TYPE,                         // 1
-            Phone.LABEL,                        // 2
-            Phone.NUMBER,                       // 3
-            Phone.CONTACT_ID,                   // 4
-            Phone.LOOKUP_KEY,                   // 5
-            Phone.PHOTO_ID,                     // 6
-            Phone.DISPLAY_NAME_PRIMARY,         // 7
-        };
-
-        public static final int SMARTDIAL_ID          = 0;
-        public static final int SMARTDIAL_TYPE         = 1;
-        public static final int SMARTDIAL_LABEL        = 2;
-        public static final int SMARTDIAL_NUMBER       = 3;
-        public static final int SMARTDIAL_CONTACT_ID   = 4;
-        public static final int SMARTDIAL_LOOKUP_KEY   = 5;
-        public static final int SMARTDIAL_PHOTO_ID     = 6;
-        public static final int SMARTDIAL_DISPLAY_NAME = 7;
-    }
 
     public SmartDialCursorLoader(Context context) {
         super(context);
@@ -107,10 +85,16 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
         }
 
         /** Constructs a cursor for the returned array of results. */
-        final MatrixCursor cursor = new MatrixCursor(SmartDialPhoneQuery.PROJECTION_PRIMARY);
+        final MatrixCursor cursor = new MatrixCursor(PhoneQuery.PROJECTION_PRIMARY);
+        Object[] row = new Object[PhoneQuery.PROJECTION_PRIMARY.length];
         for (ContactNumber contact : allMatches) {
-            cursor.addRow(new Object[] {contact.dataId, null, null, contact.phoneNumber, contact.id,
-                    contact.lookupKey, contact.photoId, contact.displayName});
+            row[PhoneQuery.PHONE_ID] = contact.dataId;
+            row[PhoneQuery.PHONE_NUMBER] = contact.phoneNumber;
+            row[PhoneQuery.CONTACT_ID] = contact.id;
+            row[PhoneQuery.LOOKUP_KEY] = contact.lookupKey;
+            row[PhoneQuery.PHOTO_ID] = contact.photoId;
+            row[PhoneQuery.DISPLAY_NAME] = contact.displayName;
+            cursor.addRow(row);
         }
         return cursor;
     }
