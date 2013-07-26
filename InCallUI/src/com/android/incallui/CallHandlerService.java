@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.ICallCommandService;
 import com.android.services.telephony.common.ICallHandlerService;
 
@@ -55,13 +56,17 @@ public class CallHandlerService extends Service {
         }
 
         @Override
-        public void onIncomingCall(int callId) {
+        public void onIncomingCall(Call call) {
             final Intent intent = new Intent(getApplication(), InCallActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
 
-        public void onDisconnect(int callId) {
+        @Override
+        public void onDisconnect(Call call) {
+        }
+
+        public void onCallUpdate(Call call) {
         }
     };
 
