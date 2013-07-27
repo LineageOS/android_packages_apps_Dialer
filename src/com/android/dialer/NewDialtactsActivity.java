@@ -38,6 +38,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents.UI;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -107,14 +108,6 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
      */
     private static final String ACTION_TOUCH_DIALER = "com.android.phone.action.TOUCH_DIALER";
 
-    private SharedPreferences mPrefs;
-
-    public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
-
-    /** Last manually selected tab index */
-    private static final String PREF_LAST_MANUALLY_SELECTED_TAB =
-            "DialtactsActivity_last_manually_selected_tab";
-
     private static final int SUBACTIVITY_ACCOUNT_FILTER = 1;
 
     private String mFilterText;
@@ -154,12 +147,6 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     private View mSearchViewContainer;
     private View mSearchViewCloseButton;
     private EditText mSearchView;
-
-    /**
-     * The index of the Fragment (or, the tab) that has last been manually selected.
-     * This value does not keep track of programmatically set Tabs (e.g. Call Log after a Call)
-     */
-    private int mLastManuallySelectedFragment;
 
     /**
      * Listener used when one of phone numbers in search UI is selected. This will initiate a
@@ -257,16 +244,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
         mBottomPaddingView = findViewById(R.id.dialtacts_bottom_padding);
         prepareSearchView();
 
-        // Load the last manually loaded tab
-        mPrefs = this.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-
-        /*
-         * TODO krelease : Remember which fragment was last displayed, and then redisplay it as
-         * necessary. mLastManuallySelectedFragment = mPrefs.getInt(PREF_LAST_MANUALLY_SELECTED_TAB,
-         * PREF_LAST_MANUALLY_SELECTED_TAB_DEFAULT); if (mLastManuallySelectedFragment >=
-         * TAB_INDEX_COUNT) { // Stored value may have exceeded the number of current tabs. Reset
-         * it. mLastManuallySelectedFragment = PREF_LAST_MANUALLY_SELECTED_TAB_DEFAULT; }
-         */
+        displayFragment(intent);
 
         if (UI.FILTER_CONTACTS_ACTION.equals(intent.getAction())
                 && savedInstanceState == null) {
@@ -346,10 +324,13 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
                 break;
             }
             case R.id.dialpad_button:
-                showDialpadFragment();
+                showDialpadFragment(true);
                 break;
             case R.id.call_history_on_dialpad_button:
             case R.id.call_history_button:
+                // TODO krelease: This should start an intent with content type
+                // CallLog.Calls.CONTENT_TYPE, once the intent filters for the call log activity
+                // is enabled
                 final Intent intent = new Intent(this, NewCallLogActivity.class);
                 startActivity(intent);
                 break;
@@ -366,16 +347,20 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
         }
     }
 
-    private void showDialpadFragment() {
+    private void showDialpadFragment(boolean animate) {
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.slide_in, 0);
+        if (animate) {
+            ft.setCustomAnimations(R.anim.slide_in, 0);
+        }
         ft.show(mDialpadFragment);
         ft.commit();
     }
 
-    private void hideDialpadFragment() {
+    private void hideDialpadFragment(boolean animate) {
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.setCustomAnimations(0, R.anim.slide_out);
+        if (animate) {
+            ft.setCustomAnimations(0, R.anim.slide_out);
+        }
         ft.hide(mDialpadFragment);
         ft.commit();
     }
@@ -400,7 +385,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
 
     private void hideDialpadFragmentIfNecessary() {
         if (mDialpadFragment.isVisible()) {
-            hideDialpadFragment();
+            hideDialpadFragment(true);
         }
     }
 
@@ -481,19 +466,6 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
         callhistoryButton.setOnClickListener(this);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mPrefs.edit().putInt(PREF_LAST_MANUALLY_SELECTED_TAB, mLastManuallySelectedFragment)
-                .apply();
-        requestBackup();
-    }
-
-    private void requestBackup() {
-        final BackupManager bm = new BackupManager(this);
-        bm.dataChanged();
-    }
-
     private void fixIntent(Intent intent) {
         // This should be cleaned up: the call key used to send an Intent
         // that just said to go to the recent calls list.  It now sends this
@@ -547,6 +519,14 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
             finish();
             return;
         }
+
+        if ((mDialpadFragment != null && phoneIsInUse())
+                || isDialIntent(intent)) {
+            mDialpadFragment.setStartedFromNewIntent(true);
+            // TODO krelease: This should use showDialpadFragment(false) to avoid animating
+            // the dialpad in. Need to fix the onPreDrawListener in NewDialpadFragment first.
+            showDialpadFragment(true);
+        }
     }
 
     @Override
@@ -555,9 +535,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
         fixIntent(newIntent);
         displayFragment(newIntent);
         final String action = newIntent.getAction();
-        if (UI.FILTER_CONTACTS_ACTION.equals(action)) {
-            setupFilterText(newIntent);
-        }
+
         if (mInSearchUi || (mRegularSearchFragment != null && mRegularSearchFragment.isVisible())) {
             exitSearchUi();
         }
@@ -724,7 +702,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     @Override
     public void onBackPressed() {
         if (mDialpadFragment.isVisible()) {
-            hideDialpadFragment();
+            hideDialpadFragment(true);
         } else if (mInSearchUi) {
             mSearchView.setText(null);
         } else if (isTaskRoot()) {
@@ -765,5 +743,9 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
         setupFakeActionBarItemsForDialpadFragment();
     }
 
-
+    private boolean phoneIsInUse() {
+        final TelephonyManager tm = (TelephonyManager) getSystemService(
+                Context.TELEPHONY_SERVICE);
+        return tm.getCallState() != TelephonyManager.CALL_STATE_IDLE;
+    }
 }

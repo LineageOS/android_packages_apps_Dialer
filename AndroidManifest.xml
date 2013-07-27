@@ -183,6 +183,14 @@
                   android:theme="@style/NewDialtactsTheme"
                   android:screenOrientation="portrait"
                   android:icon="@mipmap/ic_launcher_phone">
+                <!--
+                <intent-filter>
+                    <action android:name="android.intent.action.VIEW" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <category android:name="android.intent.category.BROWSABLE" />
+                    <data android:mimeType="vnd.android.cursor.dir/calls" />
+                </intent-filter>
+                 -->
         </activity>
 
         <activity android:name="com.android.dialer.CallDetailActivity"

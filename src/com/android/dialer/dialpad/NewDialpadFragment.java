@@ -347,8 +347,8 @@ public class NewDialpadFragment extends Fragment
         mFragmentView = fragmentView;
         mFragmentView.buildLayer();
 
-        // TODO krelease: Get rid of this ugly hack which is to prevent the first frame of the
-        // animation from drawing the fragment at translationY = 0
+        // Set the translationY to the correct value before it is drawn for the first frame
+        // to prevent flicker when the animation first starts
         final ViewTreeObserver vto = mFragmentView.getViewTreeObserver();
         final OnPreDrawListener preDrawListener = new OnPreDrawListener() {
 
@@ -510,11 +510,10 @@ public class NewDialpadFragment extends Fragment
      */
     private void configureScreenFromIntent(Activity parent) {
         // If we were not invoked with a DIAL intent,
-        if (!(parent instanceof DialtactsActivity)) {
+        if (!(parent instanceof NewDialtactsActivity)) {
             setStartedFromNewIntent(false);
             return;
         }
-
         // See if we were invoked with a DIAL intent. If we were, fill in the appropriate
         // digits in the dialer field.
         Intent intent = parent.getIntent();
