@@ -302,6 +302,10 @@
     -->
     <string name="description_digits_edittext">number to dial</string>
 
+    <!-- Content description for the fake action menu button that brings up the call history
+         activity -->
+    <string name="action_menu_call_history_description">Call History</string>
+
     <!-- Content description for the fake action menu overflow button.
          This should be same as the description for the real action menu
          overflow button available in ActionBar.

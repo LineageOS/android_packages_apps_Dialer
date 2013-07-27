@@ -82,7 +82,8 @@ import com.android.internal.telephony.ITelephony;
 public class NewDialtactsActivity extends TransactionSafeActivity implements View.OnClickListener,
         NewDialpadFragment.OnDialpadQueryChangedListener, PopupMenu.OnMenuItemClickListener,
         OnListFragmentScrolledListener,
-        NewPhoneFavoriteFragment.OnPhoneFavoriteFragmentStartedListener {
+        NewPhoneFavoriteFragment.OnPhoneFavoriteFragmentStartedListener,
+        NewDialpadFragment.OnDialpadFragmentStartedListener {
     private static final String TAG = "DialtactsActivity";
 
     public static final boolean DEBUG = false;
@@ -335,6 +336,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.overflow_menu_on_dialpad:
             case R.id.overflow_menu: {
                 final PopupMenu popupMenu = new PopupMenu(NewDialtactsActivity.this, view);
                 final Menu menu = popupMenu.getMenu();
@@ -346,6 +348,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
             case R.id.dialpad_button:
                 showDialpadFragment();
                 break;
+            case R.id.call_history_on_dialpad_button:
             case R.id.call_history_button:
                 final Intent intent = new Intent(this, NewCallLogActivity.class);
                 startActivity(intent);
@@ -450,7 +453,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     }
 
 
-    public void setupFakeActionBarItems() {
+    public void setupFakeActionBarItemsForFavoritesFragment() {
         mMenuButton = findViewById(R.id.overflow_menu);
         if (mMenuButton != null) {
             // mMenuButton.setMinimumWidth(fakeMenuItemWidth);
@@ -469,6 +472,13 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
         mDialpadButton = findViewById(R.id.dialpad_button);
         // DialpadButton.setMinimumWidth(fakeMenuItemWidth);
         mDialpadButton.setOnClickListener(this);
+    }
+
+    public void setupFakeActionBarItemsForDialpadFragment() {
+        final View overflowButton = findViewById(R.id.overflow_menu_on_dialpad);
+        overflowButton.setOnClickListener(this);
+        final View callhistoryButton = findViewById(R.id.call_history_on_dialpad_button);
+        callhistoryButton.setOnClickListener(this);
     }
 
     @Override
@@ -747,6 +757,13 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
 
     @Override
     public void onPhoneFavoriteFragmentStarted() {
-        setupFakeActionBarItems();
+        setupFakeActionBarItemsForFavoritesFragment();
     }
+
+    @Override
+    public void onDialpadFragmentStarted() {
+        setupFakeActionBarItemsForDialpadFragment();
+    }
+
+
 }
