@@ -39,6 +39,10 @@ public class ContactInfoHelper {
     private final Context mContext;
     private final String mCurrentCountryIso;
 
+    // Blacklist support
+    private static final String INSERT_BLACKLIST = "com.android.phone.INSERT_BLACKLIST";
+    private static final String BLACKLIST_NUMBER = "number";
+
     public ContactInfoHelper(Context context, String currentCountryIso) {
         mContext = context;
         mCurrentCountryIso = currentCountryIso;

@@ -339,6 +339,9 @@
     <!-- Title bar for call detail screen -->
     <string name="callDetailTitle">Call details</string>
 
+    <!-- Title bar for call stat detail screen -->
+    <string name="callStatsDetailTitle">Call stat details</string>
+
     <!-- Toast for call detail screen when couldn't read the requested details -->
     <string name="toast_call_detail_error">Couldn\'t read details for the requested call.</string>
 

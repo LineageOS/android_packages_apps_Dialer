@@ -56,4 +56,7 @@
     <dimen name="smartdial_suggestions_extra_padding">2dp</dimen>
     <dimen name="smartdial_confidence_hint_text_size">27dp</dimen>
 
+    <!-- Size of the pie chart in the call stats detail activity -->
+    <dimen name="call_stats_details_chart_size">140dip</dimen>
+
 </resources>
