@@ -20,7 +20,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="gone"
-    android:background="@android:color/black"
+    android:background="@color/call_detail_background"
 >
     <!--
       The list view is under everything.
@@ -211,7 +211,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@android:color/black"
+        android:background="@color/call_detail_background"
         android:visibility="gone"
         android:clickable="true"
     />
