@@ -16,16 +16,12 @@
 package com.android.dialer;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.ListView;
 
 import com.android.contacts.common.list.ContactListItemView;
-import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.dialer.list.OnListFragmentScrolledListener;
 
