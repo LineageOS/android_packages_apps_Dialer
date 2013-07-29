@@ -32,6 +32,11 @@ import android.widget.ToggleButton;
 public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
         implements CallButtonPresenter.CallButtonUi {
 
+    private ToggleButton mMuteButton;
+    private ToggleButton mAudioButton;
+    private ToggleButton mHoldButton;
+    private View mEndCallButton;
+
     @Override
     CallButtonPresenter createPresenter() {
         return new CallButtonPresenter();
@@ -51,27 +56,35 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
             Bundle savedInstanceState) {
         final View parent = inflater.inflate(R.layout.call_button_fragment, container, false);
 
-        final View endCallButton = parent.findViewById(R.id.endButton);
-        endCallButton.setOnClickListener(new View.OnClickListener() {
+        mEndCallButton = parent.findViewById(R.id.endButton);
+        mEndCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getPresenter().endCallClicked();
             }
         });
 
-        final ToggleButton toggleButton = (ToggleButton) parent.findViewById(R.id.muteButton);
-        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mMuteButton = (ToggleButton) parent.findViewById(R.id.muteButton);
+        mMuteButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 getPresenter().muteClicked(isChecked);
             }
         });
 
-        final ToggleButton audioButton = (ToggleButton) parent.findViewById(R.id.audioButton);
-        audioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mAudioButton = (ToggleButton) parent.findViewById(R.id.audioButton);
+        mAudioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 getPresenter().speakerClicked(isChecked);
+            }
+        });
+
+        mHoldButton = (ToggleButton) parent.findViewById(R.id.holdButton);
+        mHoldButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                getPresenter().holdClicked(isChecked);
             }
         });
 
@@ -94,13 +107,19 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
 
     @Override
     public void setMute(boolean value) {
-        final ToggleButton button = (ToggleButton) getView().findViewById(R.id.muteButton);
-        button.setChecked(value);
+        mMuteButton.setChecked(value);
+    }
+
+    /**
+     * TODO(klp): Rename this from setSpeaker() to setAudio() once it does more than speakerphone.
+     */
+    @Override
+    public void setSpeaker(boolean value) {
+        mAudioButton.setChecked(value);
     }
 
     @Override
-    public void setSpeaker(boolean value) {
-        final ToggleButton button = (ToggleButton) getView().findViewById(R.id.audioButton);
-        button.setChecked(value);
+    public void setHold(boolean value) {
+        mHoldButton.setChecked(value);
     }
 }

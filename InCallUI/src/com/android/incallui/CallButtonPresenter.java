@@ -46,6 +46,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         CallCommandClient.getInstance().disconnectCall(1);
 
         mEndCallListener.onCallEnd();
+
+        // TODO(klp): These states should come from Call objects from the CallList.
         reset();
     }
 
@@ -53,6 +55,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         getUi().setVisible(false);
         getUi().setMute(false);
         getUi().setSpeaker(false);
+        getUi().setHold(false);
     }
 
     public void muteClicked(boolean checked) {
@@ -65,6 +68,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         getUi().setSpeaker(checked);
     }
 
+    public void holdClicked(boolean checked) {
+        // TODO(klp): use appropriate hold callId.
+        CallCommandClient.getInstance().hold(1, true);
+        getUi().setHold(checked);
+    }
+
     public void setEndCallListener(EndCallListener endCallListener) {
         mEndCallListener = endCallListener;
     }
@@ -73,6 +82,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void setVisible(boolean on);
         void setMute(boolean on);
         void setSpeaker(boolean on);
+        void setHold(boolean on);
     }
 
     public interface EndCallListener {
