@@ -114,6 +114,8 @@
     <string name="description_dial_button" msgid="1274091017188142646">"cumponer"</string>
     <string name="description_delete_button" msgid="6263102114033407382">"tasta da return"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"numer da cumponer"</string>
+    <!-- no translation found for action_menu_call_history_description (9018442816219748968) -->
+    <skip />
     <!-- no translation found for action_menu_overflow_description (2303272250613084574) -->
     <!-- no translation found for action_menu_overflow_description (2295659037509008453) -->
     <skip />
