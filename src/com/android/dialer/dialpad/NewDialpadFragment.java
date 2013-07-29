@@ -158,8 +158,6 @@ public class NewDialpadFragment extends Fragment
 
     private OnDialpadQueryChangedListener mDialpadQueryListener;
 
-    private View mFragmentView;
-
     /**
      * View (usually FrameLayout) containing mDigits field. This can be null, in which mDigits
      * isn't enclosed by the container.
@@ -343,22 +341,22 @@ public class NewDialpadFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
-        View fragmentView = inflater.inflate(R.layout.new_dialpad_fragment, container, false);
-        mFragmentView = fragmentView;
-        mFragmentView.buildLayer();
+        final View fragmentView = inflater.inflate(R.layout.new_dialpad_fragment, container,
+                false);
+        fragmentView.buildLayer();
 
-        // Set the translationY to the correct value before it is drawn for the first frame
-        // to prevent flicker when the animation first starts
-        final ViewTreeObserver vto = mFragmentView.getViewTreeObserver();
+        // TODO krelease: Get rid of this ugly hack which is to prevent the first frame of the
+        // animation from drawing the fragment at translationY = 0
+        final ViewTreeObserver vto = fragmentView.getViewTreeObserver();
         final OnPreDrawListener preDrawListener = new OnPreDrawListener() {
 
             @Override
             public boolean onPreDraw() {
                 if (isHidden()) return true;
-                if (mFragmentView.getTranslationY() == 0) {
-                    ((DialpadSlidingLinearLayout) mFragmentView).setYFraction(0.67f);
+                if (fragmentView.getTranslationY() == 0) {
+                    ((DialpadSlidingLinearLayout) fragmentView).setYFraction(0.67f);
                 }
-                final ViewTreeObserver vto = mFragmentView.getViewTreeObserver();
+                final ViewTreeObserver vto = fragmentView.getViewTreeObserver();
                 vto.removeOnPreDrawListener(this);
                 return true;
             }
