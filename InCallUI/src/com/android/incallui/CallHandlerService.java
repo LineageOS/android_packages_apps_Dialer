@@ -25,6 +25,8 @@ import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.ICallCommandService;
 import com.android.services.telephony.common.ICallHandlerService;
 
+import java.util.List;
+
 /**
  * Service used to listen for call state changes.
  */
@@ -66,7 +68,8 @@ public class CallHandlerService extends Service {
         public void onDisconnect(Call call) {
         }
 
-        public void onCallUpdate(Call call) {
+        @Override
+        public void onUpdate(List<Call> call) {
         }
     };
 
