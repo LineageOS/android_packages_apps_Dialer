@@ -313,7 +313,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             playbackFragment.setArguments(fragmentArguments);
             voicemailContainer.setVisibility(View.VISIBLE);
             getFragmentManager().beginTransaction()
-                    .add(R.id.voicemail_container, playbackFragment).commitAllowingStateLoss();
+                    .add(R.id.voicemail_container, playbackFragment)
+                    .commitAllowingStateLoss();
             mAsyncQueryHandler.startVoicemailStatusQuery(getVoicemailUri());
             markVoicemailAsRead(getVoicemailUri());
         } else {
@@ -535,7 +536,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     // call.
                     if (mPhoneNumberHelper.canSendSmsTo(mNumber, numberPresentation)) {
                         entry.setSecondaryAction(
-                                R.drawable.ic_text_holo_dark,
+                                R.drawable.ic_text_holo_light,
                                 new Intent(Intent.ACTION_SENDTO,
                                            Uri.fromParts("sms", mNumber, null)),
                                 getString(R.string.description_send_text_message, nameOrNumber));

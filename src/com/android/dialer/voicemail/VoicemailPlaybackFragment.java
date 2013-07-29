@@ -261,7 +261,7 @@ public class VoicemailPlaybackFragment extends Fragment {
 
         @Override
         public void playbackStarted() {
-            mStartStopButton.setImageResource(R.drawable.ic_hold_pause_holo_dark);
+            mStartStopButton.setImageResource(R.drawable.ic_hold_pause);
         }
 
         @Override

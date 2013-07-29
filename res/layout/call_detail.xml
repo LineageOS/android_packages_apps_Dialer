@@ -20,7 +20,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="gone"
-    android:background="@android:color/black"
 >
     <!--
       The list view is under everything.
@@ -72,6 +71,7 @@
                 android:scaleType="centerCrop"
             />
         </view>
+
         <LinearLayout
             android:id="@+id/blue_separator"
             android:layout_width="match_parent"
@@ -108,7 +108,7 @@
             android:layout_marginEnd="@dimen/call_log_inner_margin"
             android:layout_marginStart="@dimen/call_detail_contact_name_margin"
             android:gravity="center_vertical"
-            android:textColor="?attr/call_log_primary_text_color"
+            android:textColor="?attr/call_log_header_color"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:singleLine="true"
         />
@@ -126,9 +126,8 @@
             android:id="@+id/voicemail_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/call_detail_button_spacing"
             android:layout_below="@id/blue_separator"
-        >
+            android:paddingBottom="@dimen/call_detail_button_spacing">
             <!-- The voicemail fragment will be put here. -->
         </LinearLayout>
         <FrameLayout
@@ -138,8 +137,9 @@
             android:layout_marginBottom="@dimen/call_detail_button_spacing"
             android:layout_below="@id/voicemail_container"
             android:gravity="center_vertical"
-            android:background="@drawable/dialpad_background"
+            android:background="@color/background_dialer_list_items"
         >
+
             <LinearLayout
                 android:id="@+id/call_and_sms_main_action"
                 android:layout_width="match_parent"
@@ -183,7 +183,7 @@
                 <View android:id="@+id/call_and_sms_divider"
                     android:layout_width="1px"
                     android:layout_height="32dip"
-                    android:background="@drawable/ic_divider_dashed_holo_dark"
+                    android:background="@color/background_dialer_light"
                     android:layout_gravity="center_vertical"
                 />
 
@@ -200,7 +200,6 @@
             </LinearLayout>
         </FrameLayout>
     </RelativeLayout>
-
     <!--
          Used to hide the UI when playing a voicemail and the proximity sensor
          is detecting something near the screen.

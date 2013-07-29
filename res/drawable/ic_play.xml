@@ -16,6 +16,6 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_enabled="false"
-        android:drawable="@drawable/ic_play_disabled_holo_dark" />
-    <item android:drawable="@drawable/ic_play_holo_dark" />
+        android:drawable="@drawable/ic_vm_play_dis" />
+    <item android:drawable="@drawable/ic_vm_play_dk" />
 </selector>
