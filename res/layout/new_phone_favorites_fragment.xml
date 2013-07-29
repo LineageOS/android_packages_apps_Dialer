@@ -22,7 +22,8 @@
     android:orientation="vertical"
     android:divider="?android:attr/dividerHorizontal"
     android:showDividers="end"
-    android:clipChildren="false">
+    android:clipChildren="false"
+    android:background="@color/background_dialer_light">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
