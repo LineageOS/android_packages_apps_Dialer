@@ -617,6 +617,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
                         columnCounter < list.size() ? list.get(columnCounter) : null;
                 addTileFromEntry(entry, columnCounter, isLastRow);
             }
+            setPressed(false);
+            getBackground().setAlpha(255);
         }
 
         private void addTileFromEntry(ContactEntry entry, int childIndex, boolean isLastRow) {
