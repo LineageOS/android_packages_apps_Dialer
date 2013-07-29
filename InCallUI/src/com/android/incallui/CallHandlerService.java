@@ -35,9 +35,13 @@ public class CallHandlerService extends Service {
     private static final String TAG = CallHandlerService.class.getSimpleName();
     private static final boolean DBG = false; // TODO: Have a shared location for this.
 
+    private CallList mCallList;
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        mCallList = new CallList();
     }
 
     @Override
@@ -59,6 +63,8 @@ public class CallHandlerService extends Service {
 
         @Override
         public void onIncomingCall(Call call) {
+            mCallList.onUpdate(call);
+
             final Intent intent = new Intent(getApplication(), InCallActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -66,10 +72,12 @@ public class CallHandlerService extends Service {
 
         @Override
         public void onDisconnect(Call call) {
+            mCallList.onUpdate(call);
         }
 
         @Override
-        public void onUpdate(List<Call> call) {
+        public void onUpdate(List<Call> calls) {
+            mCallList.onUpdate(calls);
         }
     };
 
