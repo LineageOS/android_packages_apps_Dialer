@@ -29,6 +29,9 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -118,6 +121,11 @@ public class NewCallLogActivity extends Activity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
+
+        final SpannableString s = new SpannableString(getString(R.string.call_log_activity_title));
+        s.setSpan(new TypefaceSpan(getString(R.string.call_log_activity_title_font_family)), 0,
+                s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        actionBar.setTitle(s);
 
         final Tab allTab = actionBar.newTab();
         final String allTitle = getString(R.string.call_log_all_title);
