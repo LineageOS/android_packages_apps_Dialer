@@ -221,7 +221,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
             return 0;
         }
 
-        final int total = mNumFrequents + mNumStarred;
+        int total = mNumFrequents + mNumStarred;
+
         return total - (mMaxTiledRows * (mColumnCount - 1));
     }
 
@@ -297,7 +298,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         int itemViewType = getItemViewType(position);
 
-        ContactTileRow contactTileRowView = (ContactTileRow) convertView;
+        ContactTileRow contactTileRowView  = (ContactTileRow) convertView;
+
         ArrayList<ContactEntry> contactList = getItem(position);
 
         if (contactTileRowView == null) {

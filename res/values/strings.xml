@@ -534,6 +534,10 @@
          Do not translate. -->
     <string name="call_log_activity_title_font_family">sans-serif-light</string>
 
+    <!-- String resource for the font-family to use for show all contacts' title
+         Do not translate. -->
+    <string name="show_all_contacts_title_font_family">sans-serif-light</string>
+
     <!-- Text displayed when the list of missed calls is empty -->
     <string name="recentMissed_empty">No recent missed calls.</string>
 
@@ -597,4 +601,9 @@
     <string name="dialpad_pound_number">#</string>
     <!--  Do not translate. -->
     <string name="dialpad_pound_letters"></string>
+
+    <!--  Title of fragment that displays all contacts -->
+    <string name="show_all_contacts_title">All contacts</string>
+    <!--  Title of show all contacts button -->
+    <string name="show_all_contacts_button_text">All contacts</string>
 </resources>

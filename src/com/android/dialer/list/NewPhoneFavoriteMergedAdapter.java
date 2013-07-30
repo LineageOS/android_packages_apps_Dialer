@@ -23,11 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.SectionIndexer;
 
-import com.android.contacts.common.list.ContactEntryListAdapter;
-import com.android.contacts.common.list.ContactListItemView;
 import com.android.dialer.R;
 import com.android.dialer.calllog.NewCallLogAdapter;
 
@@ -49,6 +45,7 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
     private final PhoneFavoritesTileAdapter mContactTileAdapter;
     private final NewCallLogAdapter mCallLogAdapter;
     private final View mLoadingView;
+    private final View mShowAllContactsButton;
 
     private final int mCallLogPadding;
 
@@ -60,7 +57,8 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
             PhoneFavoritesTileAdapter contactTileAdapter,
             View accountFilterHeaderContainer,
             NewCallLogAdapter callLogAdapter,
-            View loadingView) {
+            View loadingView,
+            View showAllContactsButton) {
         final Resources resources = context.getResources();
         mContext = context;
         mCallLogPadding = resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding);
@@ -70,6 +68,7 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
         mObserver = new CustomDataSetObserver();
         mContactTileAdapter.registerDataSetObserver(mObserver);
         mLoadingView = loadingView;
+        mShowAllContactsButton = showAllContactsButton;
     }
 
     @Override
@@ -81,13 +80,11 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mContactTileAdapter.getCount() + mCallLogAdapter.getCount();
+        return mContactTileAdapter.getCount() + mCallLogAdapter.getCount() + 1;
     }
 
     @Override
     public Object getItem(int position) {
-        final int contactTileAdapterCount = mContactTileAdapter.getCount();
-
         final int callLogAdapterCount = mCallLogAdapter.getCount();
 
         if (callLogAdapterCount > 0) {
@@ -108,7 +105,7 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return (mContactTileAdapter.getViewTypeCount() + mCallLogAdapter.getViewTypeCount());
+        return (mContactTileAdapter.getViewTypeCount() + mCallLogAdapter.getViewTypeCount() + 1);
     }
 
     @Override
@@ -119,17 +116,23 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
             // View type of the call log adapter is the last view type of the contact tile adapter
             // + 1
             return mContactTileAdapter.getViewTypeCount();
-        } else {
+        } else if (position < getCount() - 1) {
             return mContactTileAdapter.getItemViewType(
                     getAdjustedFavoritePosition(position, callLogAdapterCount));
+        } else {
+            // View type of the show all contact button is the last view type of the contact tile
+            // adapter + 2
+            return mContactTileAdapter.getViewTypeCount() + 1;
         }
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int contactTileAdapterCount = mContactTileAdapter.getCount();
-
         final int callLogAdapterCount = mCallLogAdapter.getCount();
+
+        if (position == getCount() - 1) {
+            return mShowAllContactsButton;
+        }
 
         if (callLogAdapterCount > 0) {
             if (position == 0) {
@@ -189,7 +192,6 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
     @Override
     public boolean isEnabled(int position) {
         final int callLogAdapterCount = mCallLogAdapter.getCount();
-        final int contactTileAdapterCount = mContactTileAdapter.getCount();
         if (position < callLogAdapterCount) {
             return mCallLogAdapter.isEnabled(position);
         } else { // For favorites section
@@ -201,5 +203,4 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
     private int getAdjustedFavoritePosition(int position, int callLogAdapterCount) {
         return position - callLogAdapterCount;
     }
-
 }

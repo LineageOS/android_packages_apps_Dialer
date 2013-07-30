@@ -39,6 +39,7 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents.UI;
 import android.provider.Settings;
 import android.speech.RecognizerIntent;
+import android.support.v4.app.NavUtils;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -72,6 +73,7 @@ import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.list.NewPhoneFavoriteFragment;
 import com.android.dialer.list.OnListFragmentScrolledListener;
+import com.android.dialer.list.ShowAllContactsFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.internal.telephony.ITelephony;
 
@@ -96,7 +98,6 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     private static final String PHONE_PACKAGE = "com.android.phone";
     private static final String CALL_SETTINGS_CLASS_NAME =
             "com.android.phone.CallFeaturesSetting";
-
     /** @see #getCallOrigin() */
     private static final String CALL_ORIGIN_DIALTACTS =
             "com.android.dialer.DialtactsActivity";
@@ -105,6 +106,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     private static final String TAG_REGULAR_SEARCH_FRAGMENT = "search";
     private static final String TAG_SMARTDIAL_SEARCH_FRAGMENT = "smartdial";
     private static final String TAG_FAVORITES_FRAGMENT = "favorites";
+    private static final String TAG_SHOW_ALL_CONTACTS_FRAGMENT = "show_all_contacts";
 
     /**
      * Just for backward compatibility. Should behave as same as {@link Intent#ACTION_DIAL}.
@@ -136,6 +138,8 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
      * Fragment for searching phone numbers using the dialpad.
      */
     private SmartDialSearchFragment mSmartDialSearchFragment;
+
+    private ShowAllContactsFragment mShowAllContactsFragment;
 
     private View mMenuButton;
     private View mCallHistoryButton;
@@ -237,20 +241,22 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
 
         if (savedInstanceState == null) {
             mPhoneFavoriteFragment = new NewPhoneFavoriteFragment();
-            mPhoneFavoriteFragment.setRetainInstance(true);
             mPhoneFavoriteFragment.setListener(mPhoneFavoriteListener);
 
             mRegularSearchFragment = new NewSearchFragment();
             mSmartDialSearchFragment = new SmartDialSearchFragment();
             mDialpadFragment = new NewDialpadFragment();
+            mShowAllContactsFragment = new ShowAllContactsFragment();
+            mShowAllContactsFragment.setOnPhoneNumberPickerActionListener(
+                    mPhoneNumberPickerActionListener);
 
             // TODO krelease: load fragments on demand instead of creating all of them at run time
             final FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.add(R.id.dialtacts_frame, mPhoneFavoriteFragment, TAG_FAVORITES_FRAGMENT);
             ft.add(R.id.dialtacts_frame, mRegularSearchFragment, TAG_REGULAR_SEARCH_FRAGMENT);
             ft.add(R.id.dialtacts_frame, mSmartDialSearchFragment, TAG_SMARTDIAL_SEARCH_FRAGMENT);
+            ft.add(R.id.dialtacts_frame, mShowAllContactsFragment, TAG_SHOW_ALL_CONTACTS_FRAGMENT);
             ft.add(R.id.dialtacts_container, mDialpadFragment, TAG_DIALPAD_FRAGMENT);
-            // Fragments will be hidden as necessary in onAttachFragment
             ft.commit();
         }
 
@@ -282,18 +288,34 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
                 TAG_SMARTDIAL_SEARCH_FRAGMENT);
         mSmartDialSearchFragment.setOnPhoneNumberPickerActionListener(
                 mPhoneNumberPickerActionListener);
+
+        mShowAllContactsFragment = (ShowAllContactsFragment) fm.findFragmentByTag(
+                TAG_SHOW_ALL_CONTACTS_FRAGMENT);
+        mShowAllContactsFragment.setOnPhoneNumberPickerActionListener(
+                mPhoneNumberPickerActionListener);
     }
 
     @Override
     public void onAttachFragment(Fragment fragment) {
         if (fragment instanceof NewDialpadFragment || fragment instanceof NewSearchFragment
-                || fragment instanceof SmartDialSearchFragment) {
+                || fragment instanceof SmartDialSearchFragment
+                || fragment instanceof ShowAllContactsFragment) {
             final FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.hide(fragment);
             transaction.commit();
         }
         // TODO krelease: Save some kind of state here to show the appropriate fragment
         // based on the state of the dialer when it was last paused
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                hideAllContactsFragment();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -314,7 +336,8 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
                 try {
                     startActivity(new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI));
                 } catch (ActivityNotFoundException e) {
-                    Toast toast = Toast.makeText(this, R.string.add_contact_not_available,
+                    Toast toast = Toast.makeText(this,
+                            R.string.add_contact_not_available,
                             Toast.LENGTH_SHORT);
                     toast.show();
                 }
@@ -402,6 +425,23 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
         ft.commit();
     }
 
+    public void showAllContactsFragment() {
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.hide(mPhoneFavoriteFragment);
+        ft.show(mShowAllContactsFragment);
+        // TODO{klp} Add animation
+        ft.commit();
+        hideSearchBar(false);
+    }
+
+    private void hideAllContactsFragment() {
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.hide(mShowAllContactsFragment);
+        ft.show(mPhoneFavoriteFragment);
+        ft.commit();
+        showSearchBar();
+    }
+
     private void prepareSearchView() {
         mSearchViewContainer = findViewById(R.id.search_view_container);
         mSearchViewCloseButton = findViewById(R.id.search_close_button);
@@ -435,26 +475,29 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     };
 
     public void hideSearchBar() {
-        // If the favorites fragment hasn't been fully created before the dialpad fragment
-        // is hidden (i.e. onResume), don't bother animating
-        if (mPhoneFavoriteFragment == null || mPhoneFavoriteFragment.getView() == null) {
-            return;
-        }
-        mSearchViewContainer.animate().cancel();
-        mSearchViewContainer.setAlpha(1);
-        mSearchViewContainer.setTranslationY(0);
-        mSearchViewContainer.animate().withLayer().alpha(0).translationY(-mSearchView.getHeight())
-                .setDuration(200).setListener(mHideListener);
+       hideSearchBar(true);
+    }
 
-        mPhoneFavoriteFragment.getView().animate().withLayer()
-                .translationY(-mSearchViewContainer.getHeight()).setDuration(200).setListener(
+    public void hideSearchBar(boolean shiftView) {
+        if (shiftView) {
+            mSearchViewContainer.animate().cancel();
+            mSearchViewContainer.setAlpha(1);
+            mSearchViewContainer.setTranslationY(0);
+            mSearchViewContainer.animate().withLayer().alpha(0).translationY(-mSearchView.getHeight())
+                    .setDuration(200).setListener(mHideListener);
+
+            mPhoneFavoriteFragment.getView().animate().withLayer()
+                    .translationY(-mSearchViewContainer.getHeight()).setDuration(200).setListener(
                     new AnimatorListenerAdapter() {
-                    @Override
+                        @Override
                         public void onAnimationEnd(Animator animation) {
                             mBottomPaddingView.setVisibility(View.VISIBLE);
                             mPhoneFavoriteFragment.getView().setTranslationY(0);
                         }
                     });
+        } else {
+            mSearchViewContainer.setTranslationY(-mSearchView.getHeight());
+        }
     }
 
     public void showSearchBar() {
@@ -468,20 +511,20 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
         mSearchViewContainer.setTranslationY(-mSearchViewContainer.getHeight());
         mSearchViewContainer.animate().withLayer().alpha(1).translationY(0).setDuration(200)
                 .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
                         mSearchViewContainer.setVisibility(View.VISIBLE);
-                        }
+                    }
                 });
 
         mPhoneFavoriteFragment.getView().setTranslationY(-mSearchViewContainer.getHeight());
         mPhoneFavoriteFragment.getView().animate().withLayer().translationY(0).setDuration(200)
                 .setListener(
                         new AnimatorListenerAdapter() {
-                                @Override
-                                public void onAnimationStart(Animator animation) {
-                                    mBottomPaddingView.setVisibility(View.GONE);
-                                }
+                            @Override
+                            public void onAnimationStart(Animator animation) {
+                                mBottomPaddingView.setVisibility(View.GONE);
+                            }
                         });
     }
 
@@ -745,6 +788,8 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
             hideDialpadFragment(true);
         } else if (mInSearchUi) {
             mSearchView.setText(null);
+        } else if (mShowAllContactsFragment.isVisible()) {
+            hideAllContactsFragment();
         } else if (isTaskRoot()) {
             // Instead of stopping, simply push this to the back of the stack.
             // This is only done when running at the top of the stack;

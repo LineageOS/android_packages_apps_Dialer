@@ -19,16 +19,11 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.ContactsContract.Directory;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,10 +39,8 @@ import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.GeoUtil;
-import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
-import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.NewDialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfoHelper;
@@ -94,19 +87,6 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
             if (DEBUG) Log.d(TAG, "ContactTileLoaderListener#onLoadFinished");
             mContactTileAdapter.setContactCursor(data);
 
-            if (mAllContactsForceReload) {
-                mAllContactsAdapter.onDataReload();
-                // Use restartLoader() to make LoaderManager to load the section again.
-                getLoaderManager().restartLoader(
-                        LOADER_ID_ALL_CONTACTS, null, mAllContactsLoaderListener);
-            } else if (!mAllContactsLoaderStarted) {
-                // Load "all" contacts if not loaded yet.
-                getLoaderManager().initLoader(
-                        LOADER_ID_ALL_CONTACTS, null, mAllContactsLoaderListener);
-            }
-            mAllContactsForceReload = false;
-            mAllContactsLoaderStarted = true;
-
             // Show the filter header with "loading" state.
             mAccountFilterHeader.setVisibility(View.VISIBLE);
         }
@@ -114,29 +94,6 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
         @Override
         public void onLoaderReset(Loader<Cursor> loader) {
             if (DEBUG) Log.d(TAG, "ContactTileLoaderListener#onLoaderReset. ");
-        }
-    }
-
-    private class AllContactsLoaderListener implements LoaderManager.LoaderCallbacks<Cursor> {
-        @Override
-        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-            if (DEBUG) Log.d(TAG, "AllContactsLoaderListener#onCreateLoader");
-            CursorLoader loader = new CursorLoader(getActivity(), null, null, null, null, null);
-            mAllContactsAdapter.configureLoader(loader, Directory.DEFAULT);
-            return loader;
-        }
-
-        @Override
-        public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-            if (DEBUG) Log.d(TAG, "AllContactsLoaderListener#onLoadFinished");
-            mAllContactsAdapter.changeCursor(0, data);
-            mHandler.removeMessages(MESSAGE_SHOW_LOADING_EFFECT);
-            mLoadingView.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void onLoaderReset(Loader<Cursor> loader) {
-            if (DEBUG) Log.d(TAG, "AllContactsLoaderListener#onLoaderReset. ");
         }
     }
 
@@ -161,16 +118,6 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
         }
     }
 
-    private class ContactsPreferenceChangeListener
-            implements ContactsPreferences.ChangeListener {
-        @Override
-        public void onChange() {
-            if (loadContactsPreferences()) {
-                requestReloadAllContacts();
-            }
-        }
-    }
-
     private class ScrollListener implements ListView.OnScrollListener {
         @Override
         public void onScroll(AbsListView view,
@@ -183,19 +130,6 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
         }
     }
 
-    private static final int MESSAGE_SHOW_LOADING_EFFECT = 1;
-    private static final int LOADING_EFFECT_DELAY = 500;  // ms
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MESSAGE_SHOW_LOADING_EFFECT:
-                    mLoadingView.setVisibility(View.VISIBLE);
-                    break;
-            }
-        }
-    };
-
     private Listener mListener;
 
     private OnListFragmentScrolledListener mActivityScrollListener;
@@ -206,21 +140,9 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
     private NewCallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
 
-    /**
-     * true when the loader for {@link PhoneNumberListAdapter} has started already.
-     */
-    private boolean mAllContactsLoaderStarted;
-    /**
-     * true when the loader for {@link PhoneNumberListAdapter} must reload "all" contacts again.
-     * It typically happens when {@link ContactsPreferences} has changed its settings
-     * (display order and sort order)
-     */
-    private boolean mAllContactsForceReload;
-
-    private ContactsPreferences mContactsPrefs;
-
     private TextView mEmptyView;
     private ListView mListView;
+    private View mShowAllContactsButton;
     /**
      * Layout containing {@link #mAccountFilterHeader}. Used to limit area being "pressed".
      */
@@ -237,10 +159,6 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
             new ContactTileAdapterListener();
     private final LoaderManager.LoaderCallbacks<Cursor> mContactTileLoaderListener =
             new ContactTileLoaderListener();
-    private final LoaderManager.LoaderCallbacks<Cursor> mAllContactsLoaderListener =
-            new AllContactsLoaderListener();
-    private final ContactsPreferenceChangeListener mContactsPreferenceChangeListener =
-            new ContactsPreferenceChangeListener();
     private final ScrollListener mScrollListener = new ScrollListener();
 
     private boolean mOptionsMenuHasFrequents;
@@ -250,8 +168,6 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
         if (DEBUG) Log.d(TAG, "onAttach()");
         super.onAttach(activity);
 
-        mContactsPrefs = new ContactsPreferences(activity);
-
         // Construct two base adapters which will become part of PhoneFavoriteMergedAdapter.
         // We don't construct the resultant adapter at this moment since it requires LayoutInflater
         // that will be available on onCreateView().
@@ -260,33 +176,6 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
                 getResources().getInteger(R.integer.contact_tile_column_count_in_favorites_new),
                 1);
         mContactTileAdapter.setPhotoLoader(ContactPhotoManager.getInstance(activity));
-
-        // Setup the "all" adapter manually. See also the setup logic in ContactEntryListFragment.
-        mAllContactsAdapter = new PhoneNumberListAdapter(activity);
-        mAllContactsAdapter.setDisplayPhotos(true);
-        mAllContactsAdapter.setQuickContactEnabled(true);
-        mAllContactsAdapter.setSearchMode(false);
-        mAllContactsAdapter.setIncludeProfile(false);
-        mAllContactsAdapter.setSelectionVisible(false);
-        mAllContactsAdapter.setDarkTheme(false);
-        mAllContactsAdapter.setPhotoLoader(ContactPhotoManager.getInstance(activity));
-        // Disable directory header.
-        mAllContactsAdapter.setHasHeader(0, false);
-        // Show A-Z section index.
-        mAllContactsAdapter.setSectionHeaderDisplayEnabled(true);
-        // Disable pinned header. It doesn't work with this fragment.
-        mAllContactsAdapter.setPinnedPartitionHeadersEnabled(false);
-        // Put photos on START (LEFT in LTR layout direction and RIGHT in RTL layout direction)
-        // for consistency with "frequent" contacts section.
-        mAllContactsAdapter.setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(
-                true /* opposite */ ));
-
-        // Use Callable.CONTENT_URI which will include not only phone numbers but also SIP
-        // addresses.
-        mAllContactsAdapter.setUseCallableUri(true);
-
-        mAllContactsAdapter.setContactNameDisplayOrder(mContactsPrefs.getDisplayOrder());
-        mAllContactsAdapter.setSortOrder(mContactsPrefs.getSortOrder());
     }
 
     @Override
@@ -330,9 +219,18 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
         mAccountFilterHeaderContainer.addView(mAccountFilterHeader);
 
         mLoadingView = inflater.inflate(R.layout.phone_loading_contacts, mListView, false);
+        mShowAllContactsButton = inflater.inflate(R.layout.show_all_contact_button, mListView,
+                false);
+        mShowAllContactsButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAllContacts();
+            }
+        });
 
-        mAdapter = new NewPhoneFavoriteMergedAdapter(getActivity(),
-                mContactTileAdapter, mAccountFilterHeaderContainer, mCallLogAdapter, mLoadingView);
+        mAdapter = new NewPhoneFavoriteMergedAdapter(getActivity(), mContactTileAdapter,
+                mAccountFilterHeaderContainer, mCallLogAdapter, mLoadingView,
+                mShowAllContactsButton);
 
         mListView.setAdapter(mAdapter);
 
@@ -346,6 +244,7 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
 
         return listLayout;
     }
+
 
     // TODO krelease: update the options menu when displaying the popup menu instead. We could
     // possibly get rid of this method entirely.
@@ -386,30 +285,11 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
             throw new ClassCastException(activity.toString()
                     + " must implement OnListFragmentScrolledListener");
         }
-        mContactsPrefs.registerChangeListener(mContactsPreferenceChangeListener);
-
-        // If ContactsPreferences has changed, we need to reload "all" contacts with the new
-        // settings. If mAllContactsFoarceReload is already true, it should be kept.
-        if (loadContactsPreferences()) {
-            mAllContactsForceReload = true;
-        }
 
         // Use initLoader() instead of restartLoader() to refraining unnecessary reload.
         // This method call implicitly assures ContactTileLoaderListener's onLoadFinished() will
         // be called, on which we'll check if "all" contacts should be reloaded again or not.
         getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, mContactTileLoaderListener);
-
-        // Delay showing "loading" view until certain amount of time so that users won't see
-        // instant flash of the view when the contacts load is fast enough.
-        // This will be kept shown until both tile and all sections are loaded.
-        mLoadingView.setVisibility(View.INVISIBLE);
-        mHandler.sendEmptyMessageDelayed(MESSAGE_SHOW_LOADING_EFFECT, LOADING_EFFECT_DELAY);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mContactsPrefs.unregisterChangeListener();
     }
 
     /**
@@ -424,58 +304,17 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
         if (position <= contactTileAdapterCount) {
             Log.e(TAG, "onItemClick() event for unexpected position. "
                     + "The position " + position + " is before \"all\" section. Ignored.");
-        } else {
-            final int localPosition = position - mContactTileAdapter.getCount() - 1;
-            if (mListener != null) {
-                mListener.onContactSelected(mAllContactsAdapter.getDataUri(localPosition));
-            }
         }
-    }
-
-    private boolean loadContactsPreferences() {
-        if (mContactsPrefs == null || mAllContactsAdapter == null) {
-            return false;
-        }
-
-        boolean changed = false;
-        final int currentDisplayOrder = mContactsPrefs.getDisplayOrder();
-        if (mAllContactsAdapter.getContactNameDisplayOrder() != currentDisplayOrder) {
-            mAllContactsAdapter.setContactNameDisplayOrder(currentDisplayOrder);
-            changed = true;
-        }
-
-        final int currentSortOrder = mContactsPrefs.getSortOrder();
-        if (mAllContactsAdapter.getSortOrder() != currentSortOrder) {
-            mAllContactsAdapter.setSortOrder(currentSortOrder);
-            changed = true;
-        }
-
-        return changed;
     }
 
     /**
-     * Requests to reload "all" contacts. If the section is already loaded, this method will
-     * force reloading it now. If the section isn't loaded yet, the actual load may be done later
-     * (on {@link #onStart()}.
+     * Gets called when user click on the show all contacts button.
      */
-    private void requestReloadAllContacts() {
-        if (DEBUG) {
-            Log.d(TAG, "requestReloadAllContacts()"
-                    + " mAllContactsAdapter: " + mAllContactsAdapter
-                    + ", mAllContactsLoaderStarted: " + mAllContactsLoaderStarted);
+    private void showAllContacts() {
+        // TODO {klp} Use interface for the fragment to communicate with the activity
+        if (getActivity() instanceof  NewDialtactsActivity) {
+            ((NewDialtactsActivity) getActivity()).showAllContactsFragment();
         }
-
-        if (mAllContactsAdapter == null || !mAllContactsLoaderStarted) {
-            // Remember this request until next load on onStart().
-            mAllContactsForceReload = true;
-            return;
-        }
-
-        if (DEBUG) Log.d(TAG, "Reload \"all\" contacts now.");
-
-        mAllContactsAdapter.onDataReload();
-        // Use restartLoader() to make LoaderManager to load the section again.
-        getLoaderManager().restartLoader(LOADER_ID_ALL_CONTACTS, null, mAllContactsLoaderListener);
     }
 
     public void setListener(Listener listener) {
