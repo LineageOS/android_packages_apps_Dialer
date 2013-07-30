@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aca2d91_5951e361",
+        "filename": "src/com/android/dialer/callstats/CallStatsActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-07-30T06:03:17Z",
+      "side": 1,
+      "message": "This should only be done if calls fetching finished at least once.",
+      "revId": "b3d905fd94c356d4a54f63d239dbcb21c86b2c2a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aca2d91_995e5b75",
+        "filename": "src/com/android/dialer/callstats/CallStatsAdapter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-07-30T06:03:17Z",
+      "side": 1,
+      "message": "Need to check whether updateData() was called before prior to set mLoading to false.",
+      "revId": "b3d905fd94c356d4a54f63d239dbcb21c86b2c2a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
