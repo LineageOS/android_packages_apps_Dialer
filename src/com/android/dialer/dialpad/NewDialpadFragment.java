@@ -69,6 +69,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
@@ -98,7 +99,7 @@ public class NewDialpadFragment extends Fragment
         View.OnLongClickListener, View.OnKeyListener,
         AdapterView.OnItemClickListener, TextWatcher,
         PopupMenu.OnMenuItemClickListener,
-        DialpadImageButton.OnPressedListener {
+        DialpadKeyButton.OnPressedListener {
     private static final String TAG = NewDialpadFragment.class.getSimpleName();
 
     public interface OnDialpadFragmentStartedListener {
@@ -577,10 +578,34 @@ public class NewDialpadFragment extends Fragment
     }
 
     private void setupKeypad(View fragmentView) {
-        int[] buttonIds = new int[] { R.id.one, R.id.two, R.id.three, R.id.four, R.id.five,
-                R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.zero, R.id.star, R.id.pound};
-        for (int id : buttonIds) {
-            ((DialpadImageButton) fragmentView.findViewById(id)).setOnPressedListener(this);
+        final int[] buttonIds = new int[] {R.id.zero, R.id.one, R.id.two, R.id.three, R.id.four,
+                R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.star, R.id.pound};
+
+        final int[] numberIds = new int[] {R.string.dialpad_0_number, R.string.dialpad_1_number,
+                R.string.dialpad_2_number, R.string.dialpad_3_number, R.string.dialpad_4_number,
+                R.string.dialpad_5_number, R.string.dialpad_6_number, R.string.dialpad_7_number,
+                R.string.dialpad_8_number, R.string.dialpad_9_number, R.string.dialpad_star_number,
+                R.string.dialpad_pound_number};
+
+        final int[] letterIds = new int[] {R.string.dialpad_0_letters, R.string.dialpad_1_letters,
+                R.string.dialpad_2_letters, R.string.dialpad_3_letters, R.string.dialpad_4_letters,
+                R.string.dialpad_5_letters, R.string.dialpad_6_letters, R.string.dialpad_7_letters,
+                R.string.dialpad_8_letters, R.string.dialpad_9_letters,
+                R.string.dialpad_star_letters, R.string.dialpad_pound_letters};
+
+        DialpadKeyButton dialpadKey;
+        TextView numberView;
+        TextView lettersView;
+        final Resources resources = getResources();
+        for (int i = 0; i < buttonIds.length; i++) {
+            dialpadKey = (DialpadKeyButton) fragmentView.findViewById(buttonIds[i]);
+            dialpadKey.setLayoutParams(new TableRow.LayoutParams(
+                    TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
+            dialpadKey.setOnPressedListener(this);
+            numberView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_number);
+            lettersView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_letters);
+            numberView.setText(resources.getString(numberIds[i]));
+            lettersView.setText(resources.getString(letterIds[i]));
         }
 
         // Long-pressing one button will initiate Voicemail.
