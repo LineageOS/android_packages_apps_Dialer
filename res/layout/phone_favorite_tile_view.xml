@@ -16,14 +16,14 @@
 <view
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@null"
-    android:paddingBottom="1dip"
-    android:paddingRight="1dip"
-    android:paddingEnd="1dip"
+    android:paddingBottom="1dp"
+    android:paddingRight="1dp"
+    android:paddingEnd="1dp"
     class="com.android.dialer.list.PhoneFavoriteTileView" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <com.android.contacts.common.widget.LayoutSuppressingImageView
             android:id="@+id/contact_tile_image"
@@ -31,23 +31,29 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
 
+        <View
+            android:id="@+id/shadow_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shadow_contact_photo"/>
+
         <TextView
             android:id="@+id/contact_tile_name"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/contact_tile_shadowbox_height"
-            android:background="@color/contact_tile_shadow_box_color"
+            android:layout_height="@dimen/contact_tile_info_button_height_and_width"
             android:gravity="center_vertical"
-            android:textColor="@android:color/white"
+            android:textColor="@color/contact_tile_name_color"
+            android:fontFamily="sans-serif-light"
             android:singleLine="true"
             android:textSize="16sp"
             android:fadingEdge="horizontal"
             android:fadingEdgeLength="3dip"
             android:ellipsize="marquee"
             android:layout_alignParentBottom="true"
-            android:paddingLeft="8dip"
-            android:paddingRight="47dip"
-            android:paddingStart="8dip"
-            android:paddingEnd="47dip"
+            android:paddingLeft="8dp"
+            android:paddingRight="@dimen/contact_tile_info_button_height_and_width"
+            android:paddingStart="8dp"
+            android:paddingEnd="@dimen/contact_tile_info_button_height_and_width"
             android:textAlignment="viewStart" />
 
         <View
@@ -62,14 +68,14 @@
             android:id="@id/contact_tile_secondary_button"
             android:src="@drawable/ic_contact_info"
             android:background="?android:attr/selectableItemBackground"
-            android:layout_height="@dimen/contact_tile_shadowbox_height"
-            android:layout_width="48dip"
-            android:paddingLeft="12dip"
-            android:paddingRight="12dip"
-            android:paddingStart="12dip"
-            android:paddingEnd="12dip"
-            android:paddingTop="12dip"
-            android:paddingBottom="12dip"
+            android:layout_height="@dimen/contact_tile_info_button_height_and_width"
+            android:layout_width="@dimen/contact_tile_info_button_height_and_width"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"

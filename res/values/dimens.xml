@@ -59,7 +59,8 @@
     <dimen name="smartdial_confidence_hint_text_size">27dp</dimen>
 
     <!--  Favorites tile and recent call log padding -->
-    <dimen name="phone_contact_tile_divider_padding">3dp</dimen>
+    <dimen name="contact_tile_divider_padding">3dp</dimen>
+    <dimen name="contact_tile_info_button_height_and_width">36dp</dimen>
     <dimen name="favorites_row_top_padding">8dp</dimen>
     <dimen name="favorites_row_bottom_padding">8dp</dimen>
     <dimen name="favorites_row_start_padding">8dp</dimen>

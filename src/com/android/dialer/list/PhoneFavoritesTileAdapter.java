@@ -93,7 +93,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
 
         // Converting padding in dips to padding in pixels
         mPaddingInPixels = mContext.getResources()
-                .getDimensionPixelSize(R.dimen.phone_contact_tile_divider_padding);
+                .getDimensionPixelSize(R.dimen.contact_tile_divider_padding);
         bindColumnIndices();
     }
 
