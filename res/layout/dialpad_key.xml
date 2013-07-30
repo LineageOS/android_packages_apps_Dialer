@@ -17,15 +17,14 @@
 <!-- A layout representing a single key in the dialpad -->
 <com.android.dialer.dialpad.DialpadKeyButton
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dialpad_key"
     style="@style/DialtactsDialpadButtonStyle"
     android:clickable="true" >
     <TextView
         android:id="@+id/dialpad_key_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#33b5e5"
-        android:textSize="40dp"
+        android:textColor="@color/dialpad_primary_text_color"
+        android:textSize="@dimen/dialpad_key_numbers_size"
         android:fontFamily="sans-serif-light"
         android:layout_centerInParent="true"
         />
@@ -33,8 +32,8 @@
         android:id="@+id/dialpad_key_letters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#aaaaaa"
-        android:textSize="11dp"
+        android:textColor="@color/dialpad_secondary_text_color"
+        android:textSize="@dimen/dialpad_key_letters_size"
         android:paddingRight="11dp"
         android:layout_alignBaseline="@id/dialpad_key_number"
         android:fontFamily="sans-serif-light"

@@ -426,6 +426,9 @@ public class NewDialpadFragment extends Fragment
             throw new ClassCastException(activity.toString()
                     + " must implement OnDialpadFragmentStartedListener");
         }
+
+        final View overflowButton = getView().findViewById(R.id.overflow_menu_on_dialpad);
+        overflowButton.setOnClickListener(this);
     }
 
     private boolean isLayoutReady() {
@@ -605,7 +608,9 @@ public class NewDialpadFragment extends Fragment
             numberView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_number);
             lettersView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_letters);
             numberView.setText(resources.getString(numberIds[i]));
-            lettersView.setText(resources.getString(letterIds[i]));
+            if (lettersView != null) {
+                lettersView.setText(resources.getString(letterIds[i]));
+            }
         }
 
         // Long-pressing one button will initiate Voicemail.
@@ -751,23 +756,7 @@ public class NewDialpadFragment extends Fragment
     }
 
     private void setupMenuItems(Menu menu) {
-        final MenuItem callSettingsMenuItem = menu.findItem(R.id.menu_call_settings_dialpad);
         final MenuItem addToContactMenuItem = menu.findItem(R.id.menu_add_contacts);
-
-        // Check if all the menu items are inflated correctly. As a shortcut, we assume all menu
-        // items are ready if the first item is non-null.
-        if (callSettingsMenuItem == null) {
-            return;
-        }
-
-        final Activity activity = getActivity();
-        if (activity != null && ViewConfiguration.get(activity).hasPermanentMenuKey()) {
-            // Call settings should be available via its parent Activity.
-            callSettingsMenuItem.setVisible(false);
-        } else {
-            callSettingsMenuItem.setVisible(true);
-            callSettingsMenuItem.setIntent(DialtactsActivity.getCallSettingsIntent());
-        }
 
         // We show "add to contacts" menu only when the user is
         // seeing usual dialpad and has typed at least one digit.
@@ -776,7 +765,6 @@ public class NewDialpadFragment extends Fragment
             addToContactMenuItem.setVisible(false);
         } else {
             final CharSequence digits = mDigits.getText();
-
             // Put the current digits string into an intent
             addToContactMenuItem.setIntent(getAddToContactIntent(digits));
             addToContactMenuItem.setVisible(true);
@@ -942,6 +930,15 @@ public class NewDialpadFragment extends Fragment
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.overflow_menu_on_dialpad: {
+                final PopupMenu popupMenu = new PopupMenu(getActivity(), view);
+                final Menu menu = popupMenu.getMenu();
+                popupMenu.inflate(R.menu.dialpad_options_new);
+                popupMenu.setOnMenuItemClickListener(this);
+                setupMenuItems(menu);
+                popupMenu.show();
+                break;
+            }
             case R.id.deleteButton: {
                 keyPressed(KeyEvent.KEYCODE_DEL);
                 return;
@@ -962,19 +959,6 @@ public class NewDialpadFragment extends Fragment
                 return;
             }
         }
-    }
-
-    public PopupMenu constructPopupMenu(View anchorView) {
-        final Context context = getActivity();
-        if (context == null) {
-            return null;
-        }
-        final PopupMenu popupMenu = new PopupMenu(context, anchorView);
-        final Menu menu = popupMenu.getMenu();
-        popupMenu.inflate(R.menu.dialpad_options);
-        popupMenu.setOnMenuItemClickListener(this);
-        setupMenuItems(menu);
-        return popupMenu;
     }
 
     @Override
@@ -1521,13 +1505,22 @@ public class NewDialpadFragment extends Fragment
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        return onOptionsItemSelected(item);
+        // R.id.menu_add_contacts already has an add to contact intent populated by setupMenuItems
+        switch (item.getItemId()) {
+            case R.id.menu_2s_pause:
+                updateDialString(PAUSE);
+                return true;
+            case R.id.menu_add_wait:
+                updateDialString(WAIT);
+                return true;
+            default:
+                return false;
+        }
     }
 
     /**
      * Updates the dial string (mDigits) after inserting a Pause character (,)
      * or Wait character (;).
-     * TODO krelease: add new dialpad buttons to add PAUSE and WAIT characters
      */
     private void updateDialString(char newDigit) {
         if(newDigit != WAIT && newDigit != PAUSE) {

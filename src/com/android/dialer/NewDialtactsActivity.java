@@ -323,7 +323,6 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.overflow_menu_on_dialpad:
             case R.id.overflow_menu: {
                 final PopupMenu popupMenu = new PopupMenu(NewDialtactsActivity.this, view);
                 final Menu menu = popupMenu.getMenu();
@@ -479,8 +478,6 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     }
 
     public void setupFakeActionBarItemsForDialpadFragment() {
-        final View overflowButton = findViewById(R.id.overflow_menu_on_dialpad);
-        overflowButton.setOnClickListener(this);
         final View callhistoryButton = findViewById(R.id.call_history_on_dialpad_button);
         callhistoryButton.setOnClickListener(this);
     }

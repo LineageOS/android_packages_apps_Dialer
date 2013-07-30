@@ -85,9 +85,9 @@
                 android:layout_height="@dimen/fake_action_bar_height"
                 android:layout_width="@dimen/fake_menu_button_min_width"
                 android:layout_gravity="bottom|start"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="@drawable/btn_call"
                 android:contentDescription="@string/action_menu_call_history_description"
-                android:src="@drawable/ic_dialer_menu_history_dk"/>
+                android:src="@drawable/ic_menu_history_lt"/>
             <ImageButton
                 android:id="@+id/dialButton"
                 android:layout_width="0dp"
@@ -103,8 +103,8 @@
                 android:layout_height="@dimen/fake_action_bar_height"
                 android:layout_width="@dimen/fake_menu_button_min_width"
                 android:layout_gravity="bottom|end"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_menu_overflow_dark"
+                android:background="@drawable/btn_call"
+                android:src="@drawable/ic_menu_overflow_lt"
                 android:contentDescription="@string/action_menu_overflow_description" />
         </LinearLayout>
 

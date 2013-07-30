@@ -53,10 +53,9 @@
     <color name="background_dialpad">#ee020709</color>
 
     <!-- Primary color of dialpad text, including the call button -->
-    <color name="dialpad_primary_text_color">#0099cc</color>
-    <!-- Secondary color of dialpad text (mainly used for the letters corresponding to each digit
-        -->
-    <color name="dialpad_secondary_text_color">#888888</color>
+    <color name="dialpad_primary_text_color">#33b5e5</color>
+    <!-- Secondary color of dialpad text (used for the letters corresponding to each digit -->
+    <color name="dialpad_secondary_text_color">#aaaaaa</color>
 
     <!-- Background color of action bars -->
     <color name="actionbar_background_color">#e6e6e6</color>
