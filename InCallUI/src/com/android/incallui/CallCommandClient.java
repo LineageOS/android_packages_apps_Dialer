@@ -75,6 +75,14 @@ public class CallCommandClient {
         }
     }
 
+    public void hold(int callId, boolean onOff) {
+        try {
+            mCommandService.hold(callId, onOff);
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error holding call.", e);
+        }
+    }
+
     public void turnSpeakerOn(boolean onOff) {
         try {
             mCommandService.speaker(onOff);
