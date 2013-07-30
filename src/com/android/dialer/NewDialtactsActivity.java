@@ -460,13 +460,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     public void setupFakeActionBarItemsForFavoritesFragment() {
         mMenuButton = findViewById(R.id.overflow_menu);
         if (mMenuButton != null) {
-            // mMenuButton.setMinimumWidth(fakeMenuItemWidth);
-            if (ViewConfiguration.get(this).hasPermanentMenuKey()) {
-                // This is required for dialpad button's layout, so must not use GONE here.
-                mMenuButton.setVisibility(View.INVISIBLE);
-            } else {
-                mMenuButton.setOnClickListener(this);
-            }
+            mMenuButton.setOnClickListener(this);
         }
 
         mCallHistoryButton = findViewById(R.id.call_history_button);
