@@ -82,6 +82,7 @@
     <string name="description_dial_button" msgid="1274091017188142646">"डायल करें"</string>
     <string name="description_delete_button" msgid="6263102114033407382">"हटाएं"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"डायल करने के लिए नंबर"</string>
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"कॉल इतिहास"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"अधिक विकल्प"</string>
     <string name="menu_copy" msgid="6108677035381940698">"प्रतिलिपि"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"केवल आउटगोइंग ही दिखाएं"</string>
