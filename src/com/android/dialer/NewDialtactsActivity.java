@@ -183,7 +183,13 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        final boolean smartDialSearch = isDialpadShowing();
+                // TODO krelease: populate the search fragments with the correct
+                // search query at the correct point in time of the fragment lifecycle.
+                // The current behavior is to simply return to the favorites screen
+                // (when docked), or returning to the Dialer after it has been
+                // swapped out of memory.
+                if (mDialpadFragment == null) return;
+                final boolean smartDialSearch = isDialpadShowing();
                 final String newText = s.toString();
                 // Show search result with non-empty text. Show a bare list otherwise.
                 if (TextUtils.isEmpty(newText) && mInSearchUi) {
@@ -194,7 +200,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
                     enterSearchUi(smartDialSearch);
                 }
 
-                if (isDialpadShowing()) {
+                if (smartDialSearch) {
                     mSmartDialSearchFragment.setQueryString(newText, false);
                 } else {
                     mRegularSearchFragment.setQueryString(newText, false);
@@ -209,7 +215,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     };
 
     private boolean isDialpadShowing() {
-        return mDialpadFragment.isVisible();
+        return mDialpadFragment != null && mDialpadFragment.isVisible();
     }
 
     @Override
@@ -223,23 +229,24 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
 
         getActionBar().hide();
 
-        mPhoneFavoriteFragment = new NewPhoneFavoriteFragment();
-        mPhoneFavoriteFragment.setListener(mPhoneFavoriteListener);
+        if (savedInstanceState == null) {
+            mPhoneFavoriteFragment = new NewPhoneFavoriteFragment();
+            mPhoneFavoriteFragment.setRetainInstance(true);
+            mPhoneFavoriteFragment.setListener(mPhoneFavoriteListener);
 
-        mRegularSearchFragment = new NewSearchFragment();
-        mSmartDialSearchFragment = new SmartDialSearchFragment();
-        mDialpadFragment = new NewDialpadFragment();
+            mRegularSearchFragment = new NewSearchFragment();
+            mSmartDialSearchFragment = new SmartDialSearchFragment();
+            mDialpadFragment = new NewDialpadFragment();
 
-        // TODO krelease: load fragments on demand instead of creating all of them at run time
-        final FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.add(R.id.dialtacts_frame, mPhoneFavoriteFragment, TAG_FAVORITES_FRAGMENT);
-        ft.add(R.id.dialtacts_frame, mRegularSearchFragment, TAG_REGULAR_SEARCH_FRAGMENT);
-        ft.add(R.id.dialtacts_frame, mSmartDialSearchFragment, TAG_SMARTDIAL_SEARCH_FRAGMENT);
-        ft.add(R.id.dialtacts_container, mDialpadFragment, TAG_DIALPAD_FRAGMENT);
-        ft.hide(mRegularSearchFragment);
-        ft.hide(mDialpadFragment);
-        ft.hide(mSmartDialSearchFragment);
-        ft.commit();
+            // TODO krelease: load fragments on demand instead of creating all of them at run time
+            final FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.add(R.id.dialtacts_frame, mPhoneFavoriteFragment, TAG_FAVORITES_FRAGMENT);
+            ft.add(R.id.dialtacts_frame, mRegularSearchFragment, TAG_REGULAR_SEARCH_FRAGMENT);
+            ft.add(R.id.dialtacts_frame, mSmartDialSearchFragment, TAG_SMARTDIAL_SEARCH_FRAGMENT);
+            ft.add(R.id.dialtacts_container, mDialpadFragment, TAG_DIALPAD_FRAGMENT);
+            // Fragments will be hidden as necessary in onAttachFragment
+            ft.commit();
+        }
 
         mBottomPaddingView = findViewById(R.id.dialtacts_bottom_padding);
         prepareSearchView();
@@ -264,21 +271,23 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
                 TAG_REGULAR_SEARCH_FRAGMENT);
         mRegularSearchFragment.setOnPhoneNumberPickerActionListener(
                 mPhoneNumberPickerActionListener);
-        if (!mRegularSearchFragment.isHidden()) {
-            final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.hide(mRegularSearchFragment);
-            transaction.commit();
-        }
 
         mSmartDialSearchFragment = (SmartDialSearchFragment) fm.findFragmentByTag(
                 TAG_SMARTDIAL_SEARCH_FRAGMENT);
         mSmartDialSearchFragment.setOnPhoneNumberPickerActionListener(
                 mPhoneNumberPickerActionListener);
-        if (!mSmartDialSearchFragment.isHidden()) {
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if (fragment instanceof NewDialpadFragment || fragment instanceof NewSearchFragment
+                || fragment instanceof SmartDialSearchFragment) {
             final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.hide(mSmartDialSearchFragment);
+            transaction.hide(fragment);
             transaction.commit();
         }
+        // TODO krelease: Save some kind of state here to show the appropriate fragment
+        // based on the state of the dialer when it was last paused
     }
 
     @Override
@@ -397,6 +406,11 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     };
 
     public void hideSearchBar() {
+        // If the favorites fragment hasn't been fully created before the dialpad fragment
+        // is hidden (i.e. onResume), don't bother animating
+        if (mPhoneFavoriteFragment == null || mPhoneFavoriteFragment.getView() == null) {
+            return;
+        }
         mSearchViewContainer.animate().cancel();
         mSearchViewContainer.setAlpha(1);
         mSearchViewContainer.setTranslationY(0);
@@ -415,6 +429,11 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     }
 
     public void showSearchBar() {
+        // If the favorites fragment hasn't been fully created before the dialpad fragment
+        // is hidden (i.e. onResume), don't bother animating
+        if (mPhoneFavoriteFragment == null || mPhoneFavoriteFragment.getView() == null) {
+            return;
+        }
         mSearchViewContainer.animate().cancel();
         mSearchViewContainer.setAlpha(0);
         mSearchViewContainer.setTranslationY(-mSearchViewContainer.getHeight());
