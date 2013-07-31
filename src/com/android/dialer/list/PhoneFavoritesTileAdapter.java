@@ -101,7 +101,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     /** Indicates whether a drag is in process. */
     private boolean mInDragging = false;
 
-    public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener, 
+    public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener,
             int numCols) {
         this(context, listener, numCols, ROW_LIMIT_DEFAULT);
     }
@@ -433,7 +433,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.v(TAG, "get view for " + String.valueOf(position));
+        if (DEBUG) {
+            Log.v(TAG, "get view for " + String.valueOf(position));
+        }
         int itemViewType = getItemViewType(position);
 
         ContactTileRow contactTileRowView  = (ContactTileRow) convertView;
