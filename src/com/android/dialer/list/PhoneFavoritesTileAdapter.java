@@ -433,7 +433,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.v(TAG, "get view for " + String.valueOf(position));
+        if (DEBUG) {
+            Log.v(TAG, "get view for " + String.valueOf(position));
+        }
         int itemViewType = getItemViewType(position);
 
         ContactTileRow contactTileRowView  = (ContactTileRow) convertView;
