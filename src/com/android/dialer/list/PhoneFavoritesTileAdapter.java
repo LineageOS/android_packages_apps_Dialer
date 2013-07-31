@@ -101,7 +101,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     /** Indicates whether a drag is in process. */
     private boolean mInDragging = false;
 
-    public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener, 
+    public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener,
             int numCols) {
         this(context, listener, numCols, ROW_LIMIT_DEFAULT);
     }
@@ -284,7 +284,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
             return 0;
         }
 
-        int total = mNumFrequents + mNumStarred;
+        int total = mContactEntries.size();
 
         return total - (mMaxTiledRows * (mColumnCount - 1));
     }
