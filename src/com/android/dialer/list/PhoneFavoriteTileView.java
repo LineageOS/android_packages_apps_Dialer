@@ -135,6 +135,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
             // favorite removal view to the foreground to ask user to confirm removal.
             int animationLength = (int) ((1 - Math.abs(mFavoriteContactCard.getTranslationX()) /
                     getWidth()) * ANIMATION_LENGTH);
+            animationLength = Math.max(0, animationLength);
             final ObjectAnimator fadeOut = ObjectAnimator.ofFloat(mFavoriteContactCard, "alpha",
                     0.f).setDuration(animationLength);
             final ObjectAnimator moveAway = ObjectAnimator.ofFloat(mFavoriteContactCard,
