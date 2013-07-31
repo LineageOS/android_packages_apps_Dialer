@@ -38,6 +38,7 @@ public class InCallActivity extends Activity implements CallButtonPresenter.EndC
     private static final boolean VERBOSE = Log.isLoggable(TAG, Log.VERBOSE);
 
     private CallButtonPresenter mCallButtonPresenter;
+    private CallCardPresenter mCallCardPresenter;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -57,6 +58,8 @@ public class InCallActivity extends Activity implements CallButtonPresenter.EndC
         // Inflate everything in incall_screen.xml and add it to the screen.
         setContentView(R.layout.incall_screen);
 
+        initializeInCall();
+
         logD("onCreate(): exit");
     }
 
@@ -64,11 +67,6 @@ public class InCallActivity extends Activity implements CallButtonPresenter.EndC
     @Override
     protected void onResume() {
         logD("onResume()...");
-
-        final CallButtonFragment callButtonFragment = (CallButtonFragment) getFragmentManager()
-                .findFragmentById(R.id.callButtonFragment);
-        mCallButtonPresenter = callButtonFragment.getPresenter();
-        mCallButtonPresenter.setEndCallListener(this);
 
         // TODO(klp): create once and reset when needed.
         final AnswerFragment answerFragment = new AnswerFragment();
@@ -207,8 +205,20 @@ public class InCallActivity extends Activity implements CallButtonPresenter.EndC
         return super.onKeyDown(keyCode, event);
     }
 
+    private void initializeInCall() {
+
+        final CallButtonFragment callButtonFragment = (CallButtonFragment) getFragmentManager()
+                .findFragmentById(R.id.callButtonFragment);
+        mCallButtonPresenter = callButtonFragment.getPresenter();
+        mCallButtonPresenter.setEndCallListener(this);
+
+        final CallCardFragment callCardFragment = (CallCardFragment) getFragmentManager()
+                .findFragmentById(R.id.callCardFragment);
+    }
+
     private void toast(String text) {
         final Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+
         toast.show();
     }
 

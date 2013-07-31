@@ -18,7 +18,9 @@ package com.android.incallui;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.util.Log;
 
 import com.android.services.telephony.common.Call;
@@ -35,13 +37,18 @@ public class CallHandlerService extends Service {
     private static final String TAG = CallHandlerService.class.getSimpleName();
     private static final boolean DBG = false; // TODO: Have a shared location for this.
 
+    private static final int ON_UPDATE_CALL = 1;
+    private static final int ON_UPDATE_MULTI_CALL = 2;
+
     private CallList mCallList;
+    private Handler mMainHandler;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mCallList = new CallList();
+        mCallList = CallList.getInstance();
+        mMainHandler = new MainHandler();
     }
 
     @Override
@@ -63,27 +70,55 @@ public class CallHandlerService extends Service {
 
         @Override
         public void onIncomingCall(Call call) {
-            mCallList.onUpdate(call);
-
             final Intent intent = new Intent(getApplication(), InCallActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+
+            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_CALL, 0, 0, call));
         }
 
         @Override
         public void onDisconnect(Call call) {
-            mCallList.onUpdate(call);
+            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_CALL, 0, 0, call));
         }
 
         @Override
         public void onUpdate(List<Call> calls) {
-            mCallList.onUpdate(calls);
+            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_MULTI_CALL, 0, 0, calls));
         }
     };
 
     private void logD(String message) {
         if (DBG) {
             Log.d(TAG, message);
+        }
+    }
+
+    /**
+     * Handles messages from the service so that they get executed on the main thread, where they
+     * can interact with UI.
+     */
+    private class MainHandler extends Handler {
+        MainHandler() {
+            super(getApplicationContext().getMainLooper(), null, true);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            executeMessage(msg);
+        }
+    }
+
+    private void executeMessage(Message msg) {
+        switch (msg.what) {
+            case ON_UPDATE_CALL:
+                mCallList.onUpdate((Call) msg.obj);
+                break;
+            case ON_UPDATE_MULTI_CALL:
+                mCallList.onUpdate((List<Call>) msg.obj);
+                break;
+            default:
+                break;
         }
     }
 }
