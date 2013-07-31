@@ -20,6 +20,11 @@
     <!-- Official label for the in-call UI -->
     <string name="inCallLabel">InCallUI</string>
 
+    <!-- Call status -->
+
+    <!-- In-call screen: status label for a call that's on hold -->
+    <string name="onHold">On hold</string>
+
     <!-- "Audio mode" popup menu: Item label to select the speakerphone [CHAR LIMIT=25] -->
     <string name="audio_mode_speaker">Speaker</string>
     <!-- "Audio mode" popup menu: Item label to select the handset earpiece [CHAR LIMIT=25] -->

@@ -30,26 +30,36 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         super.onUiReady(ui);
 
         CallList.getInstance().addListener(this);
-
-        // When UI is ready, manually trigger a change
-        onCallListChange(CallList.getInstance());
     }
 
     @Override
     public void onCallListChange(CallList callList) {
-        Call call = callList.getIncomingOrActive();
+        final CallCardUi ui = getUi();
 
+        // Populate the primary call card based on the incoming call or the active call.
+        final Call call = callList.getIncomingOrActive();
         if (call != null) {
-            getUi().setNumber(call.getNumber());
+            ui.setNumber(call.getNumber());
         } else {
             // When there is no longer an incoming/active call, we need to reset everything
             // so that no data survives for the next call.
-            getUi().setNumber("");
+            ui.setNumber("");
+        }
+
+        // secondary call card info only comes from the background call (if any exist)
+        final Call backgroundCall = callList.getBackgroundCall();
+        if (backgroundCall != null) {
+            ui.setSecondaryCallInfo(true, backgroundCall.getNumber());
+        } else {
+            ui.setSecondaryCallInfo(false, null);
         }
     }
 
     public interface CallCardUi extends Ui {
+        // TODO(klp): Consider passing in the Call object directly in these methods.
+
         public void setNumber(String number);
         public void setName(String name);
+        public void setSecondaryCallInfo(boolean show, String number);
     }
 }

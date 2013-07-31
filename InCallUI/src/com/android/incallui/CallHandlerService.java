@@ -70,6 +70,8 @@ public class CallHandlerService extends Service {
 
         @Override
         public void onIncomingCall(Call call) {
+            // TODO(klp): New presenter manager should launch this task...not this service.
+            // TODO(klp): Update the flags to match the only activity
             final Intent intent = new Intent(getApplication(), InCallActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

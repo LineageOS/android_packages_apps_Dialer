@@ -16,6 +16,9 @@
 
 package com.android.incallui;
 
+import com.google.common.base.Preconditions;
+
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,16 +29,22 @@ import android.view.ViewGroup;
  *
  */
 public class AnswerFragment extends BaseFragment<AnswerPresenter> implements
-        GlowPadWrapper.AnswerListener {
+        GlowPadWrapper.AnswerListener, AnswerPresenter.AnswerUi {
+    final private IFragmentHost mFragmentHost;
+
+    public AnswerFragment(IFragmentHost fragmentHost) {
+        mFragmentHost = fragmentHost;
+
+        // Normally called with onCreateView, however, AnswerPresenter's interaction
+        // begins before any UI is displayed.
+        // Order matters with this call because mFragmentHost mustn't be null when the presenter
+        // asks AnswerFragment to display itself (see showAnswerWidget).
+        getPresenter().onUiReady(this);
+    }
 
     @Override
     public AnswerPresenter createPresenter() {
-        return new AnswerPresenter(new AnswerPresenter.Listener() {
-            @Override
-            public void onClose() {
-                close();
-            }
-        });
+        return new AnswerPresenter();
     }
 
     @Override
@@ -45,12 +54,6 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter> implements
                 container, false);
         glowPad.setAnswerListener(this);
         return glowPad;
-    }
-
-    private void close() {
-        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.remove(this);
-        fragmentTransaction.commit();
     }
 
     @Override
@@ -66,5 +69,35 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter> implements
     @Override
     public void onText() {
         getPresenter().onText();
+    }
+
+    @Override
+    public void showAnswerWidget(boolean show) {
+        Preconditions.checkNotNull(mFragmentHost);
+
+        if (show) {
+            mFragmentHost.addFragment(this);
+        } else {
+            close();
+        }
+    }
+
+    private void close() {
+        // TODO(klp): With a proper main presenter, we will not need to check for isAdded.
+        if (isAdded()) {
+            final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.remove(this);
+            fragmentTransaction.commit();
+        }
+    }
+
+    // Stop gap until we can consolidate presenters and make InCallActivity a UI Class that relies
+    // on it's the consolidated presenter.
+    //
+    // TODO(klp): Remove individual presenters for button/answer/callcard and have a single
+    // presenter that interacts directly with this activity.  This will allow us to remove
+    // this unnecessary interface.
+    static interface IFragmentHost {
+        public void addFragment(Fragment fragment);
     }
 }

@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.TextView;
 
 /**
@@ -30,6 +31,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
 
     private TextView mPhoneNumber;
 
+    private ViewStub mSecondaryCallInfo;
+    private TextView mSecondaryCallName;
+
     @Override
     CallCardPresenter createPresenter() {
         return new CallCardPresenter();
@@ -38,16 +42,29 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.call_card_fragment, container, false);
+        return inflater.inflate(R.layout.call_card, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         mPhoneNumber = (TextView) view.findViewById(R.id.phoneNumber);
+        mSecondaryCallInfo = (ViewStub) view.findViewById(R.id.secondary_call_info);
 
         // This method call will begin the callbacks on CallCardUi. We need to ensure
         // everything needed for the callbacks is set up before this is called.
         getPresenter().onUiReady(this);
+    }
+
+    @Override
+    public void setSecondaryCallInfo(boolean show, String number) {
+        if (show) {
+            showAndInitializeSecondaryCallInfo();
+
+            // Until we have the name source, use the number as the main text for secondary calls.
+            mSecondaryCallName.setText(number);
+        } else {
+            mSecondaryCallInfo.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -57,6 +74,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
 
     @Override
     public void setName(String name) {
+    }
+
+    private void showAndInitializeSecondaryCallInfo() {
+        mSecondaryCallInfo.setVisibility(View.VISIBLE);
+
+        // mSecondaryCallName is initialized here (vs. onViewCreated) because it is inaccesible
+        // until mSecondaryCallInfo is inflated in the call above.
+        if (mSecondaryCallName == null) {
+            mSecondaryCallName = (TextView) getView().findViewById(R.id.secondaryCallName);
+        }
     }
 
 }

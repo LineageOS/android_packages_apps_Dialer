@@ -21,10 +21,10 @@ import android.media.AudioManager;
 /**
  * Logic for call buttons.
  */
-public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButtonUi> {
+public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButtonUi>
+        implements CallList.Listener {
 
     private AudioManager mAudioManager;
-    private EndCallListener mEndCallListener;
 
     public void init(AudioManager audioManager) {
         mAudioManager = audioManager;
@@ -35,19 +35,26 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         super.onUiReady(ui);
         getUi().setMute(mAudioManager.isMicrophoneMute());
         getUi().setSpeaker(mAudioManager.isSpeakerphoneOn());
+
+        CallList.getInstance().addListener(this);
     }
 
-    public void show() {
-        getUi().setVisible(true);
+    @Override
+    public void onCallListChange(CallList callList) {
+        // show the buttons if there is a live call AND there is no
+        // incoming call.
+        final boolean showButtons = callList.existsLiveCall() &&
+                callList.getIncomingCall() == null;
+        getUi().setVisible(showButtons);
     }
 
     public void endCallClicked() {
         // TODO(klp): hook up call id.
         CallCommandClient.getInstance().disconnectCall(1);
 
-        mEndCallListener.onCallEnd();
-
-        // TODO(klp): These states should come from Call objects from the CallList.
+        // TODO(klp): Remove once all state is gathered from CallList.
+        //            This will be wrong when you disconnect from a call if
+        //            the user has another call on hold.
         reset();
     }
 
@@ -74,18 +81,10 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         getUi().setHold(checked);
     }
 
-    public void setEndCallListener(EndCallListener endCallListener) {
-        mEndCallListener = endCallListener;
-    }
-
     public interface CallButtonUi extends Ui {
         void setVisible(boolean on);
         void setMute(boolean on);
         void setSpeaker(boolean on);
         void setHold(boolean on);
-    }
-
-    public interface EndCallListener {
-        void onCallEnd();
     }
 }

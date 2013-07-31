@@ -82,7 +82,11 @@ public class CallList {
 
     public void addListener(Listener listener) {
         Preconditions.checkNotNull(listener);
+
         mListeners.add(listener);
+
+        // Let the listener know about the active calls immediately.
+        listener.onCallListChange(this);
     }
 
     public void removeListener(Listener listener) {
@@ -96,15 +100,39 @@ public class CallList {
      * update the Call object when the active call changes.
      */
     public Call getIncomingOrActive() {
-        Call retval = null;
+        Call retval = getIncomingCall();
+        if (retval == null) {
+            retval = getFirstCallWithState(Call.State.ACTIVE);
+        }
+        return retval;
+    }
 
+    public Call getBackgroundCall() {
+        return getFirstCallWithState(Call.State.ONHOLD);
+    }
+
+    public Call getIncomingCall() {
+        return getFirstCallWithState(Call.State.INCOMING);
+    }
+
+    public boolean existsLiveCall() {
         for (Call call : mCallMap.values()) {
-            if (call.getState() == Call.State.INCOMING) {
+            if (!isCallDead(call)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns first call found in the call map with the specified state.
+     */
+    public Call getFirstCallWithState(int state) {
+        Call retval = null;
+        for (Call call : mCallMap.values()) {
+            if (call.getState() == state) {
                 retval = call;
-                // incoming call takes precedence, cut out early.
                 break;
-            } else if (retval == null && call.getState() == Call.State.ACTIVE) {
-                retval = call;
             }
         }
 

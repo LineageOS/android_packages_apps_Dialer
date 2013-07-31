@@ -17,6 +17,7 @@
 package com.android.incallui;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,15 +31,17 @@ import android.widget.Toast;
 /**
  * Phone app "in call" screen.
  */
-public class InCallActivity extends Activity implements CallButtonPresenter.EndCallListener {
+public class InCallActivity extends Activity implements AnswerFragment.IFragmentHost,
+        CallList.Listener {
 
     private static final String TAG = InCallActivity.class.getSimpleName();
 
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final boolean VERBOSE = Log.isLoggable(TAG, Log.VERBOSE);
 
-    private CallButtonPresenter mCallButtonPresenter;
-    private CallCardPresenter mCallCardPresenter;
+    private CallButtonFragment mCallButtonFragment;
+    private CallCardFragment mCallCardFragment;
+    private AnswerFragment mAnswerFragment;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -68,19 +71,6 @@ public class InCallActivity extends Activity implements CallButtonPresenter.EndC
     protected void onResume() {
         logD("onResume()...");
 
-        // TODO(klp): create once and reset when needed.
-        final AnswerFragment answerFragment = new AnswerFragment();
-        final AnswerPresenter presenter = answerFragment.getPresenter();
-        presenter.addCloseListener(new AnswerPresenter.Listener() {
-            @Override
-            public void onClose() {
-                mCallButtonPresenter.show();
-            }
-        });
-
-        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.main, answerFragment);
-        fragmentTransaction.commit();
         super.onResume();
     }
 
@@ -207,13 +197,23 @@ public class InCallActivity extends Activity implements CallButtonPresenter.EndC
 
     private void initializeInCall() {
 
-        final CallButtonFragment callButtonFragment = (CallButtonFragment) getFragmentManager()
-                .findFragmentById(R.id.callButtonFragment);
-        mCallButtonPresenter = callButtonFragment.getPresenter();
-        mCallButtonPresenter.setEndCallListener(this);
+        // TODO(klp): Make sure that this doesn't need to move back to onResume() since they are
+        // statically added fragments.
+        if (mCallButtonFragment == null) {
+            mCallButtonFragment = (CallButtonFragment) getFragmentManager()
+                    .findFragmentById(R.id.callButtonFragment);
+        }
 
-        final CallCardFragment callCardFragment = (CallCardFragment) getFragmentManager()
-                .findFragmentById(R.id.callCardFragment);
+        if (mCallCardFragment == null) {
+            mCallCardFragment = (CallCardFragment) getFragmentManager()
+                    .findFragmentById(R.id.callCardFragment);
+        }
+
+        if (mAnswerFragment == null) {
+            mAnswerFragment = new AnswerFragment(this);
+        }
+
+        CallList.getInstance().addListener(this);
     }
 
     private void toast(String text) {
@@ -229,7 +229,24 @@ public class InCallActivity extends Activity implements CallButtonPresenter.EndC
     }
 
     @Override
-    public void onCallEnd() {
-        finish();
+    public void addFragment(Fragment fragment) {
+        Log.d(TAG, "AddFragment");
+
+        // TODO(klp): Do a check to make sure the fragment isn't already added before trying to
+        // add it again.
+        // TODO(klp): IsResumed check only required because CallList notifications are coming in
+        // an indeterminate order.  This should no longer be required with a main Presenter class.
+        if (this.isResumed()) {
+            final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.add(R.id.main, fragment);
+            fragmentTransaction.commit();
+        }
+    }
+
+    @Override
+    public void onCallListChange(CallList callList) {
+        if (!callList.existsLiveCall()) {
+            finish();
+        }
     }
 }
