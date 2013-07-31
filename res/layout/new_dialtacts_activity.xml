@@ -49,8 +49,18 @@
                 android:layout_width="40dp"
                 android:padding="6dp"
                 android:src="@drawable/ic_close_dk"
+                android:clickable="true"
                 android:background="?android:attr/selectableItemBackground"
                 android:visibility="gone" />
+            <ImageView
+                android:id="@+id/voice_search_button"
+                android:layout_height="40dp"
+                android:layout_width="40dp"
+                android:padding="6dp"
+                android:src="@drawable/ic_voice_search"
+                android:clickable="true"
+                android:contentDescription="@string/description_start_voice_search"
+                android:background="?android:attr/selectableItemBackground" />
         </LinearLayout>
         <FrameLayout
             android:layout_height="0dp"
