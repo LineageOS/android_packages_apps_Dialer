@@ -18,7 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/voicemail_playback_ui_background"
+    android:background="@color/background_dialer_light"
 >
     <!-- Mute, playback, trash buttons. -->
     <LinearLayout
@@ -32,8 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="58dip"
             android:layout_marginEnd="@dimen/call_detail_button_spacing"
-            android:background="@drawable/dialpad_background"
             android:layout_weight="1"
+            android:background="@color/background_dialer_list_items"
         >
             <ImageButton
                 android:id="@+id/playback_start_stop"
@@ -46,8 +46,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="58dip"
-            android:background="@drawable/dialpad_background"
             android:layout_weight="1"
+            android:background="@color/background_dialer_list_items"
         >
             <ImageButton
                 android:id="@+id/playback_speakerphone"
@@ -62,9 +62,9 @@
         android:id="@+id/seek_container"
         android:layout_width="match_parent"
         android:layout_height="80dip"
-        android:background="@drawable/dialpad_background"
         android:layout_below="@id/buttons_linear_layout"
         android:layout_marginTop="@dimen/call_detail_button_spacing"
+        android:background="@color/background_dialer_list_items"
     >
         <!-- SeekBar left-right margin decreased from redlines 72dip by 8dip to account for
              half thumb width (thumb is 16dip).
@@ -129,5 +129,10 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
         />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/background_dialer_light"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 </RelativeLayout>

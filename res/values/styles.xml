@@ -122,16 +122,16 @@
         <item name="android:textColorPrimary">#FFFFFF</item>
     </style>
 
-    <style name="CallDetailActivityTheme" parent="android:Theme.Holo">
-        <item name="android:windowBackground">@android:color/black</item>
+    <style name="CallDetailActivityTheme" parent="android:Theme.Holo.Light">
+        <item name="android:windowBackground">@color/background_dialer_list_items</item>
         <item name="android:gravity">top</item>
         <item name="android:listViewStyle">@style/ListViewStyle</item>
         <!-- CallLog -->
-        <item name="call_log_primary_text_color">#FFFFFF</item>
-        <item name="call_log_primary_background_color">#000000</item>
-        <item name="call_log_secondary_text_color">#FFFFFF</item>
-        <item name="call_log_secondary_background_color">#333333</item>
-        <item name="call_log_header_color">#33b5e5</item>
+        <item name="call_log_primary_text_color">#333333</item>
+        <item name="call_log_primary_background_color">#FFFFFF</item>
+        <item name="call_log_secondary_text_color">#333333</item>
+        <item name="call_log_secondary_background_color">#FFFFFF</item>
+        <item name="call_log_header_color">#FFFFFF</item>
         <!-- VoicemailStatus -->
         <item name="call_log_voicemail_status_height">48dip</item>
         <item name="call_log_voicemail_status_background_color">#262626</item>

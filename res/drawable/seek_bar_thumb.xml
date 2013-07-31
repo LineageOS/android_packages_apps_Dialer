@@ -26,7 +26,7 @@
                         android:height="16dip"
                     />
                     <solid
-                        android:color="@color/voicemail_playback_seek_bar_yet_to_play"
+                        android:color="#44cecece"
                     />
                 </shape>
             </item>
@@ -43,7 +43,7 @@
                     android:shape="oval"
                 >
                     <solid
-                        android:color="@color/voicemail_playback_seek_bar_already_played"
+                        android:color="@color/background_dialer_list_items"
                     />
                 </shape>
             </item>
