@@ -38,6 +38,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents.UI;
 import android.provider.Settings;
+import android.speech.RecognizerIntent;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -73,6 +74,8 @@ import com.android.dialer.list.NewPhoneFavoriteFragment;
 import com.android.dialer.list.OnListFragmentScrolledListener;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.internal.telephony.ITelephony;
+
+import java.util.ArrayList;
 
 /**
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
@@ -110,6 +113,8 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
 
     private static final int SUBACTIVITY_ACCOUNT_FILTER = 1;
 
+    private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
+
     private String mFilterText;
 
     /**
@@ -146,6 +151,7 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     private boolean mInSearchUi;
     private View mSearchViewContainer;
     private View mSearchViewCloseButton;
+    private View mVoiceSearchButton;
     private EditText mSearchView;
 
     /**
@@ -349,11 +355,34 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
                     mSearchView.setText("");
                 }
                 break;
+            case R.id.voice_search_button:
+                final Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                startActivityForResult(voiceIntent, ACTIVITY_REQUEST_CODE_VOICE_SEARCH);
+                break;
             default: {
                 Log.wtf(TAG, "Unexpected onClick event from " + view);
                 break;
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ACTIVITY_REQUEST_CODE_VOICE_SEARCH) {
+            if (resultCode == RESULT_OK) {
+                final ArrayList<String> matches = data.getStringArrayListExtra(
+                        RecognizerIntent.EXTRA_RESULTS);
+                if (matches.size() > 0) {
+                    final String match = matches.get(0);
+                    mSearchView.setText(match);
+                } else {
+                    Log.e(TAG, "Voice search - nothing heard");
+                }
+            } else {
+                Log.e(TAG, "Voice search failed");
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void showDialpadFragment(boolean animate) {
@@ -377,8 +406,9 @@ public class NewDialtactsActivity extends TransactionSafeActivity implements Vie
     private void prepareSearchView() {
         mSearchViewContainer = findViewById(R.id.search_view_container);
         mSearchViewCloseButton = findViewById(R.id.search_close_button);
-        mSearchViewCloseButton.setClickable(true);
         mSearchViewCloseButton.setOnClickListener(this);
+        mVoiceSearchButton = findViewById(R.id.voice_search_button);
+        mVoiceSearchButton.setOnClickListener(this);
         mSearchView = (EditText) findViewById(R.id.search_view);
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
         mSearchView.setHint(getString(R.string.dialer_hint_find_contact));

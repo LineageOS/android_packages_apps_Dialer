@@ -452,6 +452,9 @@
     -->
     <string name="description_call_log_unheard_voicemail">Unheard voicemail</string>
 
+    <!-- String describing the icon used to start a voice search -->
+    <string name="description_start_voice_search">Start voice search</string>
+
     <!-- The string used to represent an unknown location for a phone number in the call log [CHAR LIMIT=3] -->
     <string name="call_log_empty_gecode">-</string>
 
