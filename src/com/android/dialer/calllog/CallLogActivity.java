@@ -36,11 +36,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.android.dialer.NewDialtactsActivity;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.NewCallLogFragment;
 
-public class NewCallLogActivity extends Activity {
+public class CallLogActivity extends Activity {
 
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
@@ -172,7 +172,7 @@ public class NewCallLogActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                final Intent intent = new Intent(this, NewDialtactsActivity.class);
+                final Intent intent = new Intent(this, DialtactsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 return true;

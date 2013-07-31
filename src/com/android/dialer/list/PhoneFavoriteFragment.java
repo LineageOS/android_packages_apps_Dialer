@@ -57,7 +57,7 @@ import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.AccountFilterUtil;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
-import com.android.dialer.DialtactsActivity;
+import com.android.dialer.OldDialtactsActivity;
 import com.android.dialer.R;
 
 /**
@@ -411,7 +411,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                 // now in Dialtacts for (potential) performance reasons.  Compare with how it is
                 // done in {@link PeopleActivity}.
                 ImportExportDialogFragment.show(getFragmentManager(), true,
-                        DialtactsActivity.class);
+                        OldDialtactsActivity.class);
                 return true;
             case R.id.menu_accounts:
                 final Intent intent = new Intent(Settings.ACTION_SYNC_SETTINGS);

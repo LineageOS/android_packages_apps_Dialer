@@ -78,9 +78,9 @@ import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
-import com.android.dialer.DialtactsActivity;
+import com.android.dialer.OldDialtactsActivity;
 import com.android.dialer.NeededForReflection;
-import com.android.dialer.NewDialtactsActivity;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.database.DialerDatabaseHelper;
@@ -139,7 +139,7 @@ public class NewDialpadFragment extends Fragment
         void onDialpadQueryChanged(String query);
     }
 
-    private static final boolean DEBUG = DialtactsActivity.DEBUG;
+    private static final boolean DEBUG = OldDialtactsActivity.DEBUG;
 
     private static final String EMPTY_NUMBER = "";
     private static final char PAUSE = ',';
@@ -512,7 +512,7 @@ public class NewDialpadFragment extends Fragment
      */
     private void configureScreenFromIntent(Activity parent) {
         // If we were not invoked with a DIAL intent,
-        if (!(parent instanceof NewDialtactsActivity)) {
+        if (!(parent instanceof DialtactsActivity)) {
             setStartedFromNewIntent(false);
             return;
         }
@@ -625,7 +625,7 @@ public class NewDialpadFragment extends Fragment
     public void onResume() {
         super.onResume();
 
-        final NewDialtactsActivity activity = (NewDialtactsActivity) getActivity();
+        final DialtactsActivity activity = (DialtactsActivity) getActivity();
         mDialpadQueryListener = activity;
 
         final StopWatch stopWatch = StopWatch.start("Dialpad.onResume");
@@ -1148,8 +1148,8 @@ public class NewDialpadFragment extends Fragment
                 mDigits.getText().clear();
             } else {
                 final Intent intent = CallUtil.getCallIntent(number,
-                        (getActivity() instanceof DialtactsActivity ?
-                                ((DialtactsActivity) getActivity()).getCallOrigin() : null));
+                        (getActivity() instanceof OldDialtactsActivity ?
+                                ((OldDialtactsActivity) getActivity()).getCallOrigin() : null));
                 startActivity(intent);
                 mClearDigitsOnStop = true;
                 getActivity().finish();
@@ -1158,8 +1158,8 @@ public class NewDialpadFragment extends Fragment
     }
 
     private String getCallOrigin() {
-        return (getActivity() instanceof DialtactsActivity) ?
-                ((DialtactsActivity) getActivity()).getCallOrigin() : null;
+        return (getActivity() instanceof OldDialtactsActivity) ?
+                ((OldDialtactsActivity) getActivity()).getCallOrigin() : null;
     }
 
     private void handleDialButtonClickWithEmptyDigits() {
@@ -1678,7 +1678,7 @@ public class NewDialpadFragment extends Fragment
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        final NewDialtactsActivity activity = (NewDialtactsActivity) getActivity();
+        final DialtactsActivity activity = (DialtactsActivity) getActivity();
         if (activity == null) return;
         if (hidden) {
             activity.showSearchBar();

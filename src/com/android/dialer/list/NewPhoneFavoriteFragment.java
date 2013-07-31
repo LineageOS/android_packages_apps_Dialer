@@ -42,7 +42,7 @@ import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
-import com.android.dialer.NewDialtactsActivity;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.NewCallLogAdapter;
@@ -313,8 +313,8 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
      */
     private void showAllContacts() {
         // TODO {klp} Use interface for the fragment to communicate with the activity
-        if (getActivity() instanceof  NewDialtactsActivity) {
-            ((NewDialtactsActivity) getActivity()).showAllContactsFragment();
+        if (getActivity() instanceof  DialtactsActivity) {
+            ((DialtactsActivity) getActivity()).showAllContactsFragment();
         }
     }
 

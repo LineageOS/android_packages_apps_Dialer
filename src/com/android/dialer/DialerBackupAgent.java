@@ -33,6 +33,6 @@ public class DialerBackupAgent extends BackupAgentHelper
     @Override
     public void onCreate() {
         addHelper(SHARED_KEY, new SharedPreferencesBackupHelper(this,
-               DialtactsActivity.SHARED_PREFS_NAME));
+               OldDialtactsActivity.SHARED_PREFS_NAME));
     }
 }

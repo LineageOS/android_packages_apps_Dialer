@@ -75,7 +75,7 @@ import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
-import com.android.dialer.DialtactsActivity;
+import com.android.dialer.OldDialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.database.DialerDatabaseHelper;
@@ -100,7 +100,7 @@ public class DialpadFragment extends Fragment
         SmartDialLoaderTask.SmartDialLoaderCallback {
     private static final String TAG = DialpadFragment.class.getSimpleName();
 
-    private static final boolean DEBUG = DialtactsActivity.DEBUG;
+    private static final boolean DEBUG = OldDialtactsActivity.DEBUG;
 
     private static final String EMPTY_NUMBER = "";
     private static final char PAUSE = ',';
@@ -472,7 +472,7 @@ public class DialpadFragment extends Fragment
      */
     private void configureScreenFromIntent(Activity parent) {
         // If we were not invoked with a DIAL intent,
-        if (!(parent instanceof DialtactsActivity)) {
+        if (!(parent instanceof OldDialtactsActivity)) {
             setStartedFromNewIntent(false);
             return;
         }
@@ -728,7 +728,7 @@ public class DialpadFragment extends Fragment
             callSettingsMenuItem.setVisible(false);
         } else {
             callSettingsMenuItem.setVisible(true);
-            callSettingsMenuItem.setIntent(DialtactsActivity.getCallSettingsIntent());
+            callSettingsMenuItem.setIntent(OldDialtactsActivity.getCallSettingsIntent());
         }
 
         // We show "add to contacts" menu only when the user is
@@ -1126,8 +1126,8 @@ public class DialpadFragment extends Fragment
                 mDigits.getText().clear();
             } else {
                 final Intent intent = CallUtil.getCallIntent(number,
-                        (getActivity() instanceof DialtactsActivity ?
-                                ((DialtactsActivity) getActivity()).getCallOrigin() : null));
+                        (getActivity() instanceof OldDialtactsActivity ?
+                                ((OldDialtactsActivity) getActivity()).getCallOrigin() : null));
                 startActivity(intent);
                 mClearDigitsOnStop = true;
                 getActivity().finish();
@@ -1136,8 +1136,8 @@ public class DialpadFragment extends Fragment
     }
 
     private String getCallOrigin() {
-        return (getActivity() instanceof DialtactsActivity) ?
-                ((DialtactsActivity) getActivity()).getCallOrigin() : null;
+        return (getActivity() instanceof OldDialtactsActivity) ?
+                ((OldDialtactsActivity) getActivity()).getCallOrigin() : null;
     }
 
     private void handleDialButtonClickWithEmptyDigits() {
@@ -1723,8 +1723,8 @@ public class DialpadFragment extends Fragment
             if (entry == null) return; // just in case.
             // Dial the displayed phone number immediately
             final Intent intent = CallUtil.getCallIntent(entry.phoneNumber.toString(),
-                    (getActivity() instanceof DialtactsActivity ?
-                            ((DialtactsActivity) getActivity()).getCallOrigin() : null));
+                    (getActivity() instanceof OldDialtactsActivity ?
+                            ((OldDialtactsActivity) getActivity()).getCallOrigin() : null));
             startActivity(intent);
             mClearDigitsOnStop = true;
         }
