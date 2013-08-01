@@ -50,41 +50,4 @@
     <string name="call_stats_reset_filter">Reset time range</string>
     <string name="call_stats_sort_by_duration">Sort by call duration</string>
     <string name="call_stats_sort_by_count">Sort by call count</string>
-
-    <!-- 0:           sec
-         1:      min
-         2:      min  sec
-         3: hour
-         4: hour      sec
-         5: hour min
-         6: hour min  sec -->
-
-    <string-array name="call_stats_duration">
-        <item><xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
-        <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-        <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
-         <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-    </string-array>
-
-    <plurals name="hour">
-        <item quantity="one">1 hr</item>
-        <item quantity="other">%d hrs</item>
-    </plurals>
-    <plurals name="minute">
-        <item quantity="one">1 min</item>
-        <item quantity="other">%d mins</item>
-    </plurals>
-    <plurals name="second">
-        <item quantity="one">1 sec</item>
-        <item quantity="other">%d secs</item>
-    </plurals>
-
-    <plurals name="call">
-        <item quantity="one">1 call</item>
-        <item quantity="other">%d calls</item>
-    </plurals>
-
 </resources>
