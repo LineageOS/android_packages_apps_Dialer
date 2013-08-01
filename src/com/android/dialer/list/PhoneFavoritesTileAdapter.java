@@ -521,6 +521,14 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     }
 
     /**
+     * Invoked when the dragged item is dropped to unsupported location. We will then move the
+     * contact back to where it was dragged from.
+     */
+    public void dropToUnsupportedView() {
+        dropContactEntry(-1);
+    }
+
+    /**
      * Sets an item to for pending removal. If the user does not click the undo button, the item
      * will be removed at the next interaction.
      *

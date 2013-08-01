@@ -17,7 +17,6 @@ package com.android.dialer.list;
 
 import android.content.ClipData;
 import android.graphics.Rect;
-import android.graphics.Canvas;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -136,6 +135,9 @@ public class PhoneFavoriteDragAndDropListeners {
 
         @Override
         public boolean onDrag(View v, DragEvent event) {
+            if (DEBUG) {
+                Log.v(TAG, event.toString());
+            }
             // Handles drag events.
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
@@ -198,6 +200,13 @@ public class PhoneFavoriteDragAndDropListeners {
                     }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
+                    if (mTileAdapter.getInDragging()) {
+                        // If the drag and drop ends when the drop happens outside of any rows,
+                        // we will end the drag here and put the item back to where it was dragged
+                        // from before.
+                        mTileAdapter.setInDragging(false);
+                        mTileAdapter.dropToUnsupportedView();
+                    }
                     break;
                 case DragEvent.ACTION_DRAG_LOCATION:
                     break;
