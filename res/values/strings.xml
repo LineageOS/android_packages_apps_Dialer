@@ -339,9 +339,6 @@
     <!-- Title bar for call detail screen -->
     <string name="callDetailTitle">Call details</string>
 
-    <!-- Title bar for call stat detail screen -->
-    <string name="callStatsDetailTitle">Call stat details</string>
-
     <!-- Toast for call detail screen when couldn't read the requested details -->
     <string name="toast_call_detail_error">Couldn\'t read details for the requested call.</string>
 
@@ -514,8 +511,4 @@
     <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
     <string name="add_contact_not_available">Re-enable the People application to use this feature.</string>
 
-    <string name="menu_add_to_blacklist">Add to blacklist</string>
-    <string name="toast_added_to_blacklist">%s added to blacklist.</string>
-
-    <!-- CYANOGENMOD ADDITIONS END -->
 </resources>
