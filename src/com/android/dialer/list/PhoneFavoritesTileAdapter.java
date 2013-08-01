@@ -213,31 +213,27 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
      */
     private void saveCursorToCache(Cursor cursor) {
         mContactEntries.clear();
-        try {
-            cursor.moveToPosition(-1);
-            while (cursor.moveToNext()) {
-                final long id = cursor.getLong(mIdIndex);
-                final String photoUri = cursor.getString(mPhotoUriIndex);
-                final String lookupKey = cursor.getString(mLookupIndex);
+        cursor.moveToPosition(-1);
+        while (cursor.moveToNext()) {
+            final long id = cursor.getLong(mIdIndex);
+            final String photoUri = cursor.getString(mPhotoUriIndex);
+            final String lookupKey = cursor.getString(mLookupIndex);
 
-                final ContactEntry contact = new ContactEntry();
-                final String name = cursor.getString(mNameIndex);
-                contact.name = (name != null) ? name : mResources.getString(R.string.missing_name);
-                contact.status = cursor.getString(mStatusIndex);
-                contact.photoUri = (photoUri != null ? Uri.parse(photoUri) : null);
-                contact.lookupKey = ContentUris.withAppendedId(
-                        Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey), id);
+            final ContactEntry contact = new ContactEntry();
+            final String name = cursor.getString(mNameIndex);
+            contact.name = (name != null) ? name : mResources.getString(R.string.missing_name);
+            contact.status = cursor.getString(mStatusIndex);
+            contact.photoUri = (photoUri != null ? Uri.parse(photoUri) : null);
+            contact.lookupKey = ContentUris.withAppendedId(
+                    Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey), id);
 
-                // Set phone number and label
-                final int phoneNumberType = cursor.getInt(mPhoneNumberTypeIndex);
-                final String phoneNumberCustomLabel = cursor.getString(mPhoneNumberLabelIndex);
-                contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
-                        phoneNumberCustomLabel);
-                contact.phoneNumber = cursor.getString(mPhoneNumberIndex);
-                mContactEntries.add(contact);
-            }
-        } finally {
-            cursor.close();
+            // Set phone number and label
+            final int phoneNumberType = cursor.getInt(mPhoneNumberTypeIndex);
+            final String phoneNumberCustomLabel = cursor.getString(mPhoneNumberLabelIndex);
+            contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
+                    phoneNumberCustomLabel);
+            contact.phoneNumber = cursor.getString(mPhoneNumberIndex);
+            mContactEntries.add(contact);
         }
     }
 
