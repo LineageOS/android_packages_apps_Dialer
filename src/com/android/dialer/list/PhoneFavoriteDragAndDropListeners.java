@@ -17,6 +17,7 @@ package com.android.dialer.list;
 
 import android.content.ClipData;
 import android.graphics.Rect;
+import android.graphics.Canvas;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -51,14 +52,15 @@ public class PhoneFavoriteDragAndDropListeners {
         @Override
         public void onLongPress(MotionEvent event) {
             final ClipData data = ClipData.newPlainText("", "");
-            final View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(mView);
             mView.setPressed(false);
             if (mView instanceof PhoneFavoriteRegularRowView) {
                 // If the view is regular row, start drag the row view.
-                // TODO: move the padding so we can start drag the original view.
+                final View.DragShadowBuilder shadowBuilder =
+                        new View.DragShadowBuilder(mView.getParentRow());
                 mView.getParentRow().startDrag(data, shadowBuilder, null, 0);
             } else {
                 // If the view is a tile view, start drag the tile.
+                final View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(mView);
                 mView.startDrag(data, shadowBuilder, null, 0);
             }
         }
