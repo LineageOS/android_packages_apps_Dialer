@@ -276,13 +276,16 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (mContactEntries == null) {
+        if (mContactEntries == null || mContactEntries.isEmpty()) {
             return 0;
         }
 
         int total = mContactEntries.size();
-
-        return total - (mMaxTiledRows * (mColumnCount - 1));
+        // The number of contacts that don't show up as tiles
+        final int nonTiledRows = Math.max(0, total - getMaxContactsInTiles());
+        // The number of tiled rows
+        final int tiledRows = getRowCount(total - nonTiledRows);
+        return nonTiledRows + tiledRows;
     }
 
     public int getMaxTiledRows() {
