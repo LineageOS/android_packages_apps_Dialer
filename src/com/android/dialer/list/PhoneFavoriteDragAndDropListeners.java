@@ -16,6 +16,7 @@
 package com.android.dialer.list;
 
 import android.content.ClipData;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -136,6 +137,37 @@ public class PhoneFavoriteDragAndDropListeners {
             // Handles drag events.
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
+                    if (mTileAdapter != null && mContactTileRow != null
+                            && !mTileAdapter.getInDragging()) {
+                        // Gets the current drag location with respect to the whole Dialer view.
+                        mX = event.getX();
+                        mY = event.getY();
+                        if (DEBUG) {
+                            Log.v(TAG, String.valueOf(mX) + "; " + String.valueOf(mY));
+                        }
+
+                        final int[] rowLocation = new int[2];
+                        mContactTileRow.getLocationOnScreen(rowLocation);
+
+                        final Rect locationRect = new Rect(rowLocation[0], rowLocation[1],
+                                rowLocation[0] + mContactTileRow.getWidth(),
+                                rowLocation[1] + mContactTileRow.getHeight());
+
+                        if (locationRect.contains((int) mX, (int) mY)) {
+                            // Finds out which item is being dragged.
+                            // Computes relative coordinates as we get absolute coordinates.
+                            final int dragIndex = mContactTileRow.getItemIndex(
+                                    mX - rowLocation[0], mY - rowLocation[1]);
+                            if (DEBUG) {
+                                Log.v(TAG, "Start dragging " + String.valueOf(dragIndex));
+                            }
+                            // Indicates a drag has started.
+                            mTileAdapter.setInDragging(true);
+
+                            // Temporarily pops out the Contact entry.
+                            mTileAdapter.popContactEntry(dragIndex);
+                        }
+                    }
                     break;
                 case DragEvent.ACTION_DRAG_ENTERED:
                     break;
@@ -145,6 +177,9 @@ public class PhoneFavoriteDragAndDropListeners {
                     // Gets the location of the drag with respect to the whole Dialer view.
                     mX = event.getX() + v.getLeft();
                     mY = event.getY() + v.getTop();
+                    if (DEBUG) {
+                        Log.v(TAG, String.valueOf(mX) + "; " + String.valueOf(mY));
+                    }
 
                     // Indicates a drag has finished.
                     if (mTileAdapter != null && mContactTileRow != null) {
@@ -163,29 +198,6 @@ public class PhoneFavoriteDragAndDropListeners {
                 case DragEvent.ACTION_DRAG_ENDED:
                     break;
                 case DragEvent.ACTION_DRAG_LOCATION:
-                    // Gets the current drag location with respect to the whole Dialer view.
-                    mX = event.getX() + v.getLeft();
-                    mY = event.getY() + v.getTop();
-                    if (DEBUG) {
-                        Log.v(TAG, String.valueOf(mX) + "; " + String.valueOf(mY));
-                    }
-
-                    if (mTileAdapter != null && mContactTileRow != null) {
-                        // If there is no drag in process, initializes the drag.
-                        if (!mTileAdapter.getInDragging()) {
-                            // Finds out which item is being dragged.
-                            final int dragIndex = mContactTileRow.getItemIndex(mX, mY);
-                            if (DEBUG) {
-                                Log.v(TAG, "Start dragging " + String.valueOf(dragIndex));
-                            }
-
-                            // Indicates a drag has started.
-                            mTileAdapter.setInDragging(true);
-
-                            // Temporarily pops out the Contact entry.
-                            mTileAdapter.popContactEntry(dragIndex);
-                        }
-                    }
                     break;
                 default:
                     break;
