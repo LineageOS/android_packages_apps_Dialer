@@ -50,4 +50,7 @@
     <string name="call_stats_reset_filter">Reset time range</string>
     <string name="call_stats_sort_by_duration">Sort by call duration</string>
     <string name="call_stats_sort_by_count">Sort by call count</string>
+
+    <string name="menu_add_to_blacklist">Add to blacklist</string>
+    <string name="toast_added_to_blacklist">%s added to blacklist.</string>
 </resources>
