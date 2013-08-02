@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aca2d91_7f935aa4",
+        "filename": "res/values/cm_arrays.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-08-02T05:19:23Z",
+      "side": 1,
+      "message": "This is intentionally translatable. E.g. German has commas between hour, minute and second.",
+      "revId": "47e586104e61d534493da51f8d4f25e586367186",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
