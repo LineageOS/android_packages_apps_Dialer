@@ -167,6 +167,8 @@
     <skip />
     <!-- no translation found for description_call_log_unheard_voicemail (118101684236996786) -->
     <skip />
+    <!-- no translation found for description_start_voice_search (520539488194946012) -->
+    <skip />
     <!-- no translation found for call_log_empty_gecode (5588904744812100846) -->
     <skip />
     <!-- no translation found for menu_callNumber (997146291983360266) -->
@@ -206,5 +208,13 @@
     <!-- no translation found for show_favorites_only (5520072531022614595) -->
     <skip />
     <!-- no translation found for call_log_activity_title (4612824396355272023) -->
+    <skip />
+    <!-- no translation found for show_all_contacts_title (8395378484578221791) -->
+    <skip />
+    <!-- no translation found for show_all_contacts_button_text (8057452310403090131) -->
+    <skip />
+    <!-- no translation found for favorite_hidden (4837366417440391323) -->
+    <skip />
+    <!-- no translation found for favorite_hidden_undo (2508998611039406474) -->
     <skip />
 </resources>

@@ -82,8 +82,7 @@
     <string name="description_dial_button" msgid="1274091017188142646">"composer"</string>
     <string name="description_delete_button" msgid="6263102114033407382">"retour arrière"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"numéro à composer"</string>
-    <!-- no translation found for action_menu_call_history_description (9018442816219748968) -->
-    <skip />
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Historique des appels"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Plus d\'options"</string>
     <string name="menu_copy" msgid="6108677035381940698">"Copier"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"Afficher appels sortants uniq."</string>
@@ -115,6 +114,8 @@
     <string name="description_call" msgid="3443678121983852666">"Appeler <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Envoyer un SMS à <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nouveau message vocal"</string>
+    <!-- no translation found for description_start_voice_search (520539488194946012) -->
+    <skip />
     <string name="call_log_empty_gecode" msgid="5588904744812100846">"-"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Appeler le <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Inconnu"</string>
@@ -141,4 +142,12 @@
     <string name="show_all_contacts" msgid="1732256558071778056">"Afficher tous les contacts"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Afficher les contacts ajoutés aux favoris uniquement"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historique"</string>
+    <!-- no translation found for show_all_contacts_title (8395378484578221791) -->
+    <skip />
+    <!-- no translation found for show_all_contacts_button_text (8057452310403090131) -->
+    <skip />
+    <!-- no translation found for favorite_hidden (4837366417440391323) -->
+    <skip />
+    <!-- no translation found for favorite_hidden_undo (2508998611039406474) -->
+    <skip />
 </resources>
