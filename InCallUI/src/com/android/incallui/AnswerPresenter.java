@@ -16,29 +16,16 @@
 
 package com.android.incallui;
 
+import android.util.Log;
+
 /**
  * Presenter for the Incoming call widget.
  */
-public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
-        implements CallList.Listener {
+public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi> {
 
     @Override
     public void onUiReady(AnswerUi ui) {
         super.onUiReady(ui);
-        CallList.getInstance().addListener(this);
-    }
-
-    @Override
-    public void onCallListChange(CallList callList) {
-        // TODO(klp): The answer widget and call cards are independently managing their behavior
-        // from CallList events. We need to create a class to manage the behavior of all the
-        // Presenters from a single place.
-        final boolean showWidget = (callList.getIncomingCall() != null);
-
-        final AnswerUi ui = getUi();
-        if (ui != null) {
-            ui.showAnswerWidget(showWidget);
-        }
     }
 
     public void onAnswer() {
@@ -55,6 +42,5 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     interface AnswerUi extends Ui {
-        public void showAnswerWidget(boolean show);
     }
 }

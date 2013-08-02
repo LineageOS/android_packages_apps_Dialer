@@ -42,6 +42,7 @@ public class CallHandlerService extends Service {
 
     private CallList mCallList;
     private Handler mMainHandler;
+    private InCallPresenter mInCallPresenter;
 
     @Override
     public void onCreate() {
@@ -49,6 +50,9 @@ public class CallHandlerService extends Service {
 
         mCallList = CallList.getInstance();
         mMainHandler = new MainHandler();
+        mInCallPresenter = InCallPresenter.getInstance();
+
+        mInCallPresenter.init(this);
     }
 
     @Override
@@ -69,23 +73,13 @@ public class CallHandlerService extends Service {
         }
 
         @Override
-        public void onIncomingCall(Call call) {
-            // TODO(klp): New presenter manager should launch this task...not this service.
-            // TODO(klp): Update the flags to match the only activity
-            final Intent intent = new Intent(getApplication(), InCallActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_CALL, 0, 0, call));
-        }
-
-        @Override
         public void onDisconnect(Call call) {
             mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_CALL, 0, 0, call));
         }
 
         @Override
-        public void onUpdate(List<Call> calls) {
+        public void onUpdate(List<Call> calls, boolean fullUpdate) {
+            // TODO(klp): Add use of fullUpdate to message
             mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_MULTI_CALL, 0, 0, calls));
         }
     };

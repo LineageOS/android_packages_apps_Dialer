@@ -22,8 +22,6 @@ import com.google.android.collect.Sets;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 
-import android.util.Log;
-
 import com.android.services.telephony.common.Call;
 
 import java.util.HashMap;
@@ -36,8 +34,6 @@ import java.util.Set;
  * changes to calls.
  */
 public class CallList {
-    private static String TAG = CallList.class.getSimpleName();
-
     private static CallList sInstance;
 
     private final HashMap<Integer, Call> mCallMap = Maps.newHashMap();

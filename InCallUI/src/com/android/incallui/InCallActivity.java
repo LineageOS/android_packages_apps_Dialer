@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,8 +32,7 @@ import android.widget.Toast;
 /**
  * Phone app "in call" screen.
  */
-public class InCallActivity extends Activity implements AnswerFragment.IFragmentHost,
-        CallList.Listener {
+public class InCallActivity extends Activity {
 
     private static final String TAG = InCallActivity.class.getSimpleName();
 
@@ -42,6 +42,7 @@ public class InCallActivity extends Activity implements AnswerFragment.IFragment
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
     private AnswerFragment mAnswerFragment;
+    private boolean mFragmentsAdded = false;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -70,8 +71,28 @@ public class InCallActivity extends Activity implements AnswerFragment.IFragment
     @Override
     protected void onResume() {
         logD("onResume()...");
-
         super.onResume();
+
+        if (!mFragmentsAdded) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.main, mAnswerFragment)
+                    .commit();
+
+            mFragmentsAdded = true;
+        }
+
+        InCallPresenter.getInstance().setActivity(this);
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if (fragment instanceof AnswerFragment) {
+            mAnswerFragment = (AnswerFragment) fragment;
+
+            getFragmentManager().beginTransaction()
+                    .hide(mAnswerFragment)
+                    .commit();
+        }
     }
 
     // onPause is guaranteed to be called when the InCallActivity goes
@@ -195,8 +216,21 @@ public class InCallActivity extends Activity implements AnswerFragment.IFragment
         return super.onKeyDown(keyCode, event);
     }
 
-    private void initializeInCall() {
+    /**
+     * Called to show the incoming call widget.
+     */
+    /* package */ void showIncoming(boolean show) {
+        final FragmentTransaction trans = getFragmentManager().beginTransaction();
+        if (show) {
+            trans.show(mAnswerFragment);
+        } else {
+            trans.hide(mAnswerFragment);
+        }
 
+        trans.commitAllowingStateLoss();
+    }
+
+    private void initializeInCall() {
         // TODO(klp): Make sure that this doesn't need to move back to onResume() since they are
         // statically added fragments.
         if (mCallButtonFragment == null) {
@@ -210,10 +244,8 @@ public class InCallActivity extends Activity implements AnswerFragment.IFragment
         }
 
         if (mAnswerFragment == null) {
-            mAnswerFragment = new AnswerFragment(this);
+            mAnswerFragment = new AnswerFragment();
         }
-
-        CallList.getInstance().addListener(this);
     }
 
     private void toast(String text) {
@@ -225,28 +257,6 @@ public class InCallActivity extends Activity implements AnswerFragment.IFragment
     private void logD(String msg) {
         if (DEBUG) {
             Log.d(TAG, msg);
-        }
-    }
-
-    @Override
-    public void addFragment(Fragment fragment) {
-        Log.d(TAG, "AddFragment");
-
-        // TODO(klp): Do a check to make sure the fragment isn't already added before trying to
-        // add it again.
-        // TODO(klp): IsResumed check only required because CallList notifications are coming in
-        // an indeterminate order.  This should no longer be required with a main Presenter class.
-        if (this.isResumed()) {
-            final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.main, fragment);
-            fragmentTransaction.commit();
-        }
-    }
-
-    @Override
-    public void onCallListChange(CallList callList) {
-        if (!callList.existsLiveCall()) {
-            finish();
         }
     }
 }
