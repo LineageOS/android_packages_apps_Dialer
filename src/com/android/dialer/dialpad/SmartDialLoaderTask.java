@@ -16,8 +16,6 @@
 
 package com.android.dialer.dialpad;
 
-import static com.android.dialer.dialpad.SmartDialController.LOG_TAG;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
@@ -40,6 +38,7 @@ import java.util.List;
  * callback function.
  */
 public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDialEntry>> {
+    private final String TAG = SmartDialLoaderTask.class.getSimpleName();
 
     public interface SmartDialLoaderCallback {
         void setSmartDialAdapterEntries(List<SmartDialEntry> list, String query);
@@ -101,7 +100,7 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
                     ));
         }
         if (DEBUG) {
-            stopWatch.stopAndLog(LOG_TAG + " Match Complete", 0);
+            stopWatch.stopAndLog(TAG + " Match Complete", 0);
         }
         return candidates;
     }

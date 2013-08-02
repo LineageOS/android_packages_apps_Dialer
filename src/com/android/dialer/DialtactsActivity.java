@@ -68,7 +68,7 @@ import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.dialer.calllog.CallLogActivity;
-import com.android.dialer.dialpad.NewDialpadFragment;
+import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.list.NewPhoneFavoriteFragment;
@@ -86,13 +86,15 @@ import java.util.ArrayList;
  * be renamed more appropriately before shipping.
  */
 public class DialtactsActivity extends TransactionSafeActivity implements View.OnClickListener,
-        NewDialpadFragment.OnDialpadQueryChangedListener, PopupMenu.OnMenuItemClickListener,
+        DialpadFragment.OnDialpadQueryChangedListener, PopupMenu.OnMenuItemClickListener,
         OnListFragmentScrolledListener,
         NewPhoneFavoriteFragment.OnPhoneFavoriteFragmentStartedListener,
-        NewDialpadFragment.OnDialpadFragmentStartedListener {
+        DialpadFragment.OnDialpadFragmentStartedListener {
     private static final String TAG = "DialtactsActivity";
 
     public static final boolean DEBUG = false;
+
+    public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
 
     /** Used to open Call Setting */
     private static final String PHONE_PACKAGE = "com.android.phone";
@@ -127,7 +129,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     /**
      * Fragment containing the dialpad that slides into view
      */
-    private NewDialpadFragment mDialpadFragment;
+    private DialpadFragment mDialpadFragment;
 
     /**
      * Fragment for searching phone numbers using the alphanumeric keyboard.
@@ -245,7 +247,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
             mRegularSearchFragment = new NewSearchFragment();
             mSmartDialSearchFragment = new SmartDialSearchFragment();
-            mDialpadFragment = new NewDialpadFragment();
+            mDialpadFragment = new DialpadFragment();
             mShowAllContactsFragment = new ShowAllContactsFragment();
             mShowAllContactsFragment.setOnPhoneNumberPickerActionListener(
                     mPhoneNumberPickerActionListener);
@@ -277,7 +279,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final FragmentManager fm = getFragmentManager();
         mPhoneFavoriteFragment = (NewPhoneFavoriteFragment) fm.findFragmentByTag(
                 TAG_FAVORITES_FRAGMENT);
-        mDialpadFragment = (NewDialpadFragment) fm.findFragmentByTag(TAG_DIALPAD_FRAGMENT);
+        mDialpadFragment = (DialpadFragment) fm.findFragmentByTag(TAG_DIALPAD_FRAGMENT);
 
         mRegularSearchFragment = (NewSearchFragment) fm.findFragmentByTag(
                 TAG_REGULAR_SEARCH_FRAGMENT);
@@ -297,7 +299,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onAttachFragment(Fragment fragment) {
-        if (fragment instanceof NewDialpadFragment || fragment instanceof NewSearchFragment
+        if (fragment instanceof DialpadFragment || fragment instanceof NewSearchFragment
                 || fragment instanceof SmartDialSearchFragment
                 || fragment instanceof ShowAllContactsFragment) {
             final FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -327,7 +329,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 // now in Dialtacts for (potential) performance reasons. Compare with how it is
                 // done in {@link PeopleActivity}.
                 ImportExportDialogFragment.show(getFragmentManager(), true,
-                        OldDialtactsActivity.class);
+                        DialtactsActivity.class);
                 return true;
             case R.id.menu_clear_frequents:
                 ClearFrequentsDialog.show(getFragmentManager());
@@ -343,7 +345,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 }
                 return true;
             case R.id.menu_call_settings:
-                final Intent settingsIntent = OldDialtactsActivity.getCallSettingsIntent();
+                final Intent settingsIntent = DialtactsActivity.getCallSettingsIntent();
                 startActivity(settingsIntent);
         }
         return false;
