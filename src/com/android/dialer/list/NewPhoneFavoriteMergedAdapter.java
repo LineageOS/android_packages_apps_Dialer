@@ -73,9 +73,8 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
 
     @Override
     public boolean isEmpty() {
-        // Cannot use the super's method here because we add extra rows in getCount() to account
-        // for headers
-        return mCallLogAdapter.getCount() + mContactTileAdapter.getCount() == 0;
+        // This adapter will always contain at least the all contacts button
+        return false;
     }
 
     @Override
@@ -94,7 +93,6 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
             // Set position to the position of the actual favorite contact in the favorites adapter
             position = getAdjustedFavoritePosition(position, callLogAdapterCount);
         }
-
         return mContactTileAdapter.getItem(position);
     }
 
