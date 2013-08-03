@@ -95,4 +95,23 @@ public class CallCommandClient {
             Logger.e(this, "Error setting speaker.", e);
         }
     }
+
+    public void playDtmfTone(char digit, boolean timedShortTone) {
+        try {
+            Logger.v(this, "Sending dtmf tone " + digit);
+            mCommandService.playDtmfTone(digit, timedShortTone);
+        } catch (RemoteException e) {
+            Logger.e(this, "Error setting speaker.", e);
+        }
+
+    }
+
+    public void stopDtmfTone() {
+        try {
+            Logger.v(this, "Stop dtmf tone ");
+            mCommandService.stopDtmfTone();
+        } catch (RemoteException e) {
+            Logger.e(this, "Error setting speaker.", e);
+        }
+    }
 }

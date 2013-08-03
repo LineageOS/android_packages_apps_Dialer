@@ -72,8 +72,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     public interface CallCardUi extends Ui {
         // TODO(klp): Consider passing in the Call object directly in these methods.
 
-        public void setNumber(String number);
-        public void setName(String name);
-        public void setSecondaryCallInfo(boolean show, String number);
+        void setVisible(boolean on);
+        void setNumber(String number);
+        void setName(String name);
+        void setSecondaryCallInfo(boolean show, String number);
     }
 }

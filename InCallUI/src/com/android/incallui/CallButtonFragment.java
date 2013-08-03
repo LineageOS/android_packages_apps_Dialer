@@ -34,6 +34,8 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
     private ToggleButton mMuteButton;
     private ToggleButton mAudioButton;
     private ToggleButton mHoldButton;
+    private ToggleButton mShowDialpadButton;
+
     private View mEndCallButton;
 
     @Override
@@ -87,6 +89,14 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
             }
         });
 
+        mShowDialpadButton = (ToggleButton) parent.findViewById(R.id.dialpadButton);
+        mShowDialpadButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                getPresenter().showDialpadClicked(isChecked);
+            }
+        });
+
         return parent;
     }
 
@@ -120,5 +130,13 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
     @Override
     public void setHold(boolean value) {
         mHoldButton.setChecked(value);
+    }
+
+    @Override
+    public void displayDialpad(boolean value) {
+        mShowDialpadButton.setChecked(value);
+        if (getActivity() != null && getActivity() instanceof InCallActivity) {
+            ((InCallActivity) getActivity()).displayDialpad(value);
+        }
     }
 }

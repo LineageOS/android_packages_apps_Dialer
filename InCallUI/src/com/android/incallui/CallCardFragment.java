@@ -56,6 +56,15 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     }
 
     @Override
+    public void setVisible(boolean on) {
+        if (on) {
+            getView().setVisibility(View.VISIBLE);
+        } else {
+            getView().setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
     public void setSecondaryCallInfo(boolean show, String number) {
         if (show) {
             showAndInitializeSecondaryCallInfo();

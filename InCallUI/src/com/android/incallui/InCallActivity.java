@@ -33,6 +33,7 @@ public class InCallActivity extends Activity {
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
     private AnswerFragment mAnswerFragment;
+    private DialpadFragment mDialpadFragment;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -133,7 +134,16 @@ public class InCallActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        // TODO(klp): implement
+        // TODO(klp): implement fully
+        Logger.d(this, "onBackPressed()...");
+
+        // BACK is also used to exit out of any "special modes" of the
+        // in-call UI:
+
+        if (mDialpadFragment.isVisible()) {
+            mCallButtonFragment.displayDialpad(false);  // do the "closing" animation
+            return;
+        }
 
         // Nothing special to do.  Fall back to the default behavior.
         super.onBackPressed();
@@ -185,8 +195,7 @@ public class InCallActivity extends Activity {
                 break;
         }
 
-        // TODO(klp): handle dialer key down
-
+        // TODO(klp) Adds hardware keyboard support
         return super.onKeyDown(keyCode, event);
     }
 
@@ -206,6 +215,12 @@ public class InCallActivity extends Activity {
         if (mAnswerFragment == null) {
             mAnswerFragment = (AnswerFragment) getFragmentManager()
                     .findFragmentById(R.id.answerFragment);
+        }
+
+        if (mDialpadFragment == null) {
+            mDialpadFragment = (DialpadFragment) getFragmentManager()
+                    .findFragmentById(R.id.dialpadFragment);
+            mDialpadFragment.getView().setVisibility(View.INVISIBLE);
         }
 
         setUpPresenters();
@@ -234,5 +249,15 @@ public class InCallActivity extends Activity {
         final Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
 
         toast.show();
+    }
+
+    public void displayDialpad(boolean showDialpad) {
+        if (showDialpad) {
+            mDialpadFragment.setVisible(true);
+            mCallCardFragment.setVisible(false);
+        } else {
+            mDialpadFragment.setVisible(false);
+            mCallCardFragment.setVisible(true);
+        }
     }
 }

@@ -16,10 +16,6 @@
 
 package com.android.incallui;
 
-import com.google.common.base.Preconditions;
-
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +49,7 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter> implements
 
     @Override
     public void showAnswerUi(boolean show) {
-        getView().setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+        getView().setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override

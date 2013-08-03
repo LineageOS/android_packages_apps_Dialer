@@ -98,10 +98,16 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         getUi().setHold(checked);
     }
 
+    public void showDialpadClicked(boolean checked) {
+        Logger.v(this, "Show dialpad " + String.valueOf(checked));
+        getUi().displayDialpad(checked);
+    }
+
     public interface CallButtonUi extends Ui {
         void setVisible(boolean on);
         void setMute(boolean on);
         void setSpeaker(boolean on);
         void setHold(boolean on);
+        void displayDialpad(boolean on);
     }
 }
