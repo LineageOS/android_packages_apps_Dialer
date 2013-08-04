@@ -123,16 +123,9 @@ public class PhoneCallDetailsHelper {
             numberText = displayNumber;
             labelText = TextUtils.isEmpty(numberFormattedLabel) ? numberText :
                     numberFormattedLabel;
-            // We have a real phone number as "numberView" so make it always LTR
-            if (views.numberView != null) {
-                views.numberView.setTextDirection(View.TEXT_DIRECTION_LTR);
-            }
         }
 
         views.nameView.setText(nameText);
-        if (views.numberView != null) {
-            views.numberView.setText(numberText);
-        }
 
         views.labelView.setText(labelText);
         views.labelView.setVisibility(TextUtils.isEmpty(labelText) ? View.GONE : View.VISIBLE);

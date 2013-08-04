@@ -117,7 +117,6 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     /** Asserts that the whole call area is gone. */
     private void assertNoCallButton() {
         assertEquals(View.GONE, mViews.secondaryActionView.getVisibility());
-        assertEquals(View.GONE, mViews.dividerView.getVisibility());
     }
 
     /** Sets the details of a phone call using the specified phone number. */

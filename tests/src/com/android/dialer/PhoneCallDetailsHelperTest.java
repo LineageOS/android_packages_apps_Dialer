@@ -179,24 +179,24 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     public void testSetPhoneCallDetails_Geocode() {
         setPhoneCallDetailsWithNumberAndGeocode("+14125555555", "1-412-555-5555", "Pennsylvania");
         assertNameEquals("1-412-555-5555");  // The phone number is shown as the name.
-        assertNumberEquals("Pennsylvania");  // The geocode is shown as the number.
+        assertLabelEquals("Pennsylvania"); // The geocode is shown as the label.
     }
 
     public void testSetPhoneCallDetails_NoGeocode() {
         setPhoneCallDetailsWithNumberAndGeocode("+14125555555", "1-412-555-5555", null);
         assertNameEquals("1-412-555-5555");  // The phone number is shown as the name.
-        assertNumberEquals("-");  // The empty geocode is shown as the number.
+        assertLabelEquals("-"); // The empty geocode is shown as the label.
     }
 
     public void testSetPhoneCallDetails_EmptyGeocode() {
         setPhoneCallDetailsWithNumberAndGeocode("+14125555555", "1-412-555-5555", "");
         assertNameEquals("1-412-555-5555");  // The phone number is shown as the name.
-        assertNumberEquals("-");  // The empty geocode is shown as the number.
+        assertLabelEquals("-"); // The empty geocode is shown as the label.
     }
 
     public void testSetPhoneCallDetails_NoGeocodeForVoicemail() {
         setPhoneCallDetailsWithNumberAndGeocode(TEST_VOICEMAIL_NUMBER, "", "United States");
-        assertNumberEquals("-");  // The empty geocode is shown as the number.
+        assertLabelEquals("-"); // The empty geocode is shown as the label.
     }
 
     public void testSetPhoneCallDetails_Highlighted() {
@@ -250,9 +250,9 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         assertEquals(text, mViews.nameView.getText().toString());
     }
 
-    /** Asserts that the number text field contains the given string value. */
-    private void assertNumberEquals(String text) {
-        assertEquals(text, mViews.numberView.getText().toString());
+    /** Asserts that the label text field contains the given string value. */
+    private void assertLabelEquals(String text) {
+        assertEquals(text, mViews.labelView.getText().toString());
     }
 
     /** Asserts that the date text field contains the given string value. */

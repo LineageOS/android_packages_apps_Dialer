@@ -225,7 +225,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, "John Doe");
-        assertNumberAndLabelAre(views, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_HOME));
+        assertLabel(views, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_HOME));
     }
 
     @MediumTest
@@ -238,7 +238,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, "John Doe");
-        assertNumberAndLabelAre(views, "sip:johndoe@gmail.com", null);
+        assertLabel(views, "sip:johndoe@gmail.com", null);
     }
 
     @MediumTest
@@ -251,7 +251,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, "John Doe");
-        assertNumberAndLabelAre(views, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_HOME));
+        assertLabel(views, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_HOME));
     }
 
     @MediumTest
@@ -264,7 +264,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, "John Doe");
-        assertNumberAndLabelAre(views, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_WORK));
+        assertLabel(views, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_WORK));
     }
 
     @MediumTest
@@ -278,7 +278,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, "John Doe");
-        assertNumberAndLabelAre(views, TEST_FORMATTED_NUMBER, numberLabel);
+        assertLabel(views, TEST_FORMATTED_NUMBER, numberLabel);
     }
 
     @MediumTest
@@ -620,12 +620,9 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         assertEquals(name, views.phoneCallDetailsViews.nameView.getText());
     }
 
-    /** Asserts that the number and label text view contains the given text. */
-    private void assertNumberAndLabelAre(CallLogListItemViews views, CharSequence number,
+    /** Asserts that the label text view contains the given text. */
+    private void assertLabel(CallLogListItemViews views, CharSequence number,
             CharSequence label) {
-        assertEquals(View.VISIBLE, views.phoneCallDetailsViews.numberView.getVisibility());
-        assertEquals(number, views.phoneCallDetailsViews.numberView.getText().toString());
-
         assertEquals(label == null ? View.GONE : View.VISIBLE,
                 views.phoneCallDetailsViews.labelView.getVisibility());
         if (label != null) {

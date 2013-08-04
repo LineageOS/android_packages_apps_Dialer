@@ -46,7 +46,7 @@ import java.util.LinkedList;
 /**
  * Adapter class to fill in data for the Call Log.
  */
-/*package*/ class CallLogAdapter extends GroupingListAdapter
+public class CallLogAdapter extends GroupingListAdapter
         implements ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {
@@ -227,7 +227,7 @@ import java.util.LinkedList;
         }
     };
 
-    CallLogAdapter(Context context, CallFetcher callFetcher,
+    public CallLogAdapter(Context context, CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper) {
         super(context);
 
@@ -259,7 +259,7 @@ import java.util.LinkedList;
         mCallFetcher.fetchCalls();
     }
 
-    void setLoading(boolean loading) {
+    public void setLoading(boolean loading) {
         mLoading = loading;
     }
 
@@ -518,6 +518,7 @@ import java.util.LinkedList;
         views.primaryActionView.setTag(
                 IntentProvider.getCallDetailIntentProvider(
                         getCursor(), c.getPosition(), c.getLong(CallLogQuery.ID), count));
+
         // Store away the voicemail information so we can play it directly.
         if (callType == Calls.VOICEMAIL_TYPE) {
             String voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
@@ -715,7 +716,7 @@ import java.util.LinkedList;
 
     private void setPhoto(CallLogListItemViews views, long photoId, Uri contactUri) {
         views.quickContactView.assignContactUri(contactUri);
-        mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, true);
+        mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, false /* darkTheme */);
     }
 
     /**

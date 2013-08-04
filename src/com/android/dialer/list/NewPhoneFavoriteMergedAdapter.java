@@ -25,11 +25,11 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 
 import com.android.dialer.R;
-import com.android.dialer.calllog.NewCallLogAdapter;
+import com.android.dialer.calllog.CallLogAdapter;
 
 /**
  * An adapter that combines items from {@link com.android.contacts.common.list.ContactTileAdapter}
- * and {@link com.android.dialer.calllog.NewCallLogAdapter} into a single list.
+ * and {@link com.android.dialer.calllog.CallLogAdapter} into a single list.
  */
 public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
 
@@ -43,7 +43,7 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
     private static final String TAG = NewPhoneFavoriteMergedAdapter.class.getSimpleName();
 
     private final PhoneFavoritesTileAdapter mContactTileAdapter;
-    private final NewCallLogAdapter mCallLogAdapter;
+    private final CallLogAdapter mCallLogAdapter;
     private final View mLoadingView;
     private final View mShowAllContactsButton;
 
@@ -56,7 +56,7 @@ public class NewPhoneFavoriteMergedAdapter extends BaseAdapter {
     public NewPhoneFavoriteMergedAdapter(Context context,
             PhoneFavoritesTileAdapter contactTileAdapter,
             View accountFilterHeaderContainer,
-            NewCallLogAdapter callLogAdapter,
+            CallLogAdapter callLogAdapter,
             View loadingView,
             View showAllContactsButton) {
         final Resources resources = context.getResources();

@@ -38,14 +38,14 @@ import android.view.MenuItem;
 
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
-import com.android.dialer.calllog.NewCallLogFragment;
+import com.android.dialer.calllog.CallLogFragment;
 
 public class CallLogActivity extends Activity {
 
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
-    private NewCallLogFragment mAllCallsFragment;
-    private NewCallLogFragment mMissedCallsFragment;
+    private CallLogFragment mAllCallsFragment;
+    private CallLogFragment mMissedCallsFragment;
 
     private static final int TAB_INDEX_ALL = 0;
     private static final int TAB_INDEX_MISSED = 1;
@@ -61,10 +61,10 @@ public class CallLogActivity extends Activity {
         public Fragment getItem(int position) {
             switch (position) {
                 case TAB_INDEX_ALL:
-                    mAllCallsFragment = new NewCallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
+                    mAllCallsFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
                     return mAllCallsFragment;
                 case TAB_INDEX_MISSED:
-                    mMissedCallsFragment = new NewCallLogFragment(Calls.MISSED_TYPE);
+                    mMissedCallsFragment = new CallLogFragment(Calls.MISSED_TYPE);
                     return mMissedCallsFragment;
             }
             throw new IllegalStateException("No fragment at position " + position);
@@ -114,7 +114,7 @@ public class CallLogActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.call_log_activity_new);
+        setContentView(R.layout.call_log_activity);
 
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -159,7 +159,7 @@ public class CallLogActivity extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         final MenuItem itemDeleteAll = menu.findItem(R.id.delete_all);
 
-        final NewCallLogAdapter adapter = mAllCallsFragment.getAdapter();
+        final CallLogAdapter adapter = mAllCallsFragment.getAdapter();
         // Check if all the menu items are inflated correctly. As a shortcut, we assume all
         // menu items are ready if the first item is non-null.
         if (itemDeleteAll != null) {

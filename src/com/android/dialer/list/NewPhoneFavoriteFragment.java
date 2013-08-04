@@ -45,7 +45,7 @@ import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfoHelper;
-import com.android.dialer.calllog.NewCallLogAdapter;
+import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.CallLogQueryHandler;
 
 /**
@@ -57,7 +57,7 @@ import com.android.dialer.calllog.CallLogQueryHandler;
  * A contact filter header is also inserted between those adapters' results.
  */
 public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickListener,
-        CallLogQueryHandler.Listener, NewCallLogAdapter.CallFetcher {
+        CallLogQueryHandler.Listener, CallLogAdapter.CallFetcher {
     private static final String TAG = NewPhoneFavoriteFragment.class.getSimpleName();
     private static final boolean DEBUG = false;
 
@@ -138,7 +138,7 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
     private PhoneFavoritesTileAdapter mContactTileAdapter;
     private PhoneNumberListAdapter mAllContactsAdapter;
 
-    private NewCallLogAdapter mCallLogAdapter;
+    private CallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
 
     private TextView mEmptyView;
@@ -187,7 +187,7 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
         mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
                 this, 1);
         final String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mCallLogAdapter = new NewCallLogAdapter(getActivity(), this,
+        mCallLogAdapter = new CallLogAdapter(getActivity(), this,
                 new ContactInfoHelper(getActivity(), currentCountryIso));
         setHasOptionsMenu(true);
     }
