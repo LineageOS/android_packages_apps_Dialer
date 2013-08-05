@@ -17,7 +17,6 @@
 package com.android.incallui;
 
 import android.os.RemoteException;
-import android.util.Log;
 
 import com.android.internal.util.Preconditions;
 import com.android.services.telephony.common.ICallCommandService;
@@ -26,8 +25,6 @@ import com.android.services.telephony.common.ICallCommandService;
  * Main interface for phone related commands.
  */
 public class CallCommandClient {
-
-    private static final String TAG = CallCommandClient.class.getSimpleName();
 
     private static CallCommandClient sInstance;
 
@@ -55,7 +52,7 @@ public class CallCommandClient {
         try {
             mCommandService.answerCall(callId);
         } catch (RemoteException e) {
-            Log.e(TAG, "Error answering call.", e);
+            Logger.e(this, "Error answering call.", e);
         }
     }
 
@@ -63,7 +60,7 @@ public class CallCommandClient {
         try {
             mCommandService.disconnectCall(callId);
         } catch (RemoteException e) {
-            Log.e(TAG, "Error answering call.", e);
+            Logger.e(this, "Error answering call.", e);
         }
     }
 
@@ -71,7 +68,7 @@ public class CallCommandClient {
         try {
             mCommandService.mute(onOff);
         } catch (RemoteException e) {
-            Log.e(TAG, "Error muting phone.", e);
+            Logger.e(this, "Error muting phone.", e);
         }
     }
 
@@ -79,7 +76,7 @@ public class CallCommandClient {
         try {
             mCommandService.hold(callId, onOff);
         } catch (RemoteException e) {
-            Log.e(TAG, "Error holding call.", e);
+            Logger.e(this, "Error holding call.", e);
         }
     }
 
@@ -87,7 +84,7 @@ public class CallCommandClient {
         try {
             mCommandService.speaker(onOff);
         } catch (RemoteException e) {
-            Log.e(TAG, "Error setting speaker.", e);
+            Logger.e(this, "Error setting speaker.", e);
         }
     }
 }

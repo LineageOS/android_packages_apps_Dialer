@@ -18,8 +18,6 @@ package com.android.incallui;
 
 import com.google.common.base.Preconditions;
 
-import android.util.Log;
-
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.services.telephony.common.Call;
@@ -29,8 +27,6 @@ import com.android.services.telephony.common.Call;
  */
 public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         implements InCallStateListener {
-    private static final String TAG = AnswerPresenter.class.getSimpleName();
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private Call mCall;
 
@@ -45,9 +41,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             getUi().showAnswerUi(true);
             mCall = callList.getIncomingCall();
 
-            if (DEBUG) {
-                Log.d(TAG, "Showing incoming with: " + mCall);
-            }
+            Logger.d(this, "Showing incoming with: " + mCall);
         } else {
             getUi().showAnswerUi(false);
             mCall = null;
@@ -56,12 +50,14 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     public void onAnswer() {
         Preconditions.checkNotNull(mCall);
+        Logger.d(this, "onAnswer");
 
         CallCommandClient.getInstance().answerCall(mCall.getCallId());
     }
 
     public void onDecline() {
         Preconditions.checkNotNull(mCall);
+        Logger.d(this, "onDecline");
 
         CallCommandClient.getInstance().disconnectCall(mCall.getCallId());
     }

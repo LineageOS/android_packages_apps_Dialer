@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -31,17 +30,13 @@ import android.widget.Toast;
  * Phone app "in call" screen.
  */
 public class InCallActivity extends Activity {
-    private static final String TAG = InCallActivity.class.getSimpleName();
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    private static final boolean VERBOSE = Log.isLoggable(TAG, Log.VERBOSE);
-
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
     private AnswerFragment mAnswerFragment;
 
     @Override
     protected void onCreate(Bundle icicle) {
-        logD("onCreate()...  this = " + this);
+        Logger.d(this, "onCreate()...  this = " + this);
 
         super.onCreate(icicle);
 
@@ -59,12 +54,12 @@ public class InCallActivity extends Activity {
 
         initializeInCall();
 
-        logD("onCreate(): exit");
+        Logger.d(this, "onCreate(): exit");
     }
 
     @Override
     protected void onResume() {
-        logD("onResume()...");
+        Logger.d(this, "onResume()...");
         super.onResume();
     }
 
@@ -72,19 +67,19 @@ public class InCallActivity extends Activity {
     // in the background.
     @Override
     protected void onPause() {
-        logD("onPause()...");
+        Logger.d(this, "onPause()...");
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        logD("onStop()...");
+        Logger.d(this, "onStop()...");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        logD("onDestroy()...  this = " + this);
+        Logger.d(this, "onDestroy()...  this = " + this);
         super.onDestroy();
     }
 
@@ -105,7 +100,7 @@ public class InCallActivity extends Activity {
      */
     @Override
     public void finish() {
-        logD("finish()...");
+        Logger.d(this, "finish()...");
         super.finish();
 
         // TODO(klp): Actually finish the activity for now.  Revisit performance implications of
@@ -115,7 +110,7 @@ public class InCallActivity extends Activity {
 
     @Override
     protected void onNewIntent(Intent intent) {
-        logD("onNewIntent: intent = " + intent);
+        Logger.d(this, "onNewIntent: intent = " + intent);
 
         // We're being re-launched with a new Intent.  Since it's possible for a
         // single InCallActivity instance to persist indefinitely (even if we
@@ -174,8 +169,8 @@ public class InCallActivity extends Activity {
 
             // Various testing/debugging features, enabled ONLY when VERBOSE == true.
             case KeyEvent.KEYCODE_SLASH:
-                if (VERBOSE) {
-                    Log.v(TAG, "----------- InCallActivity View dump --------------");
+                if (Logger.VERBOSE) {
+                    Logger.v(this, "----------- InCallActivity View dump --------------");
                     // Dump starting from the top-level view of the entire activity:
                     Window w = this.getWindow();
                     View decorView = w.getDecorView();
@@ -229,11 +224,5 @@ public class InCallActivity extends Activity {
         final Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
 
         toast.show();
-    }
-
-    private void logD(String msg) {
-        if (DEBUG) {
-            Log.d(TAG, msg);
-        }
     }
 }

@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.util.Log;
 
 import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.ICallCommandService;
@@ -33,9 +32,6 @@ import java.util.List;
  * Service used to listen for call state changes.
  */
 public class CallHandlerService extends Service {
-
-    private static final String TAG = CallHandlerService.class.getSimpleName();
-    private static final boolean DBG = false; // TODO: Have a shared location for this.
 
     private static final int ON_UPDATE_CALL = 1;
     private static final int ON_UPDATE_MULTI_CALL = 2;
@@ -68,7 +64,7 @@ public class CallHandlerService extends Service {
 
         @Override
         public void setCallCommandService(ICallCommandService service) {
-            logD("onConnected: " + service.toString());
+            Logger.d(this, "onConnected: " + service.toString());
             CallCommandClient.init(service);
         }
 
@@ -83,12 +79,6 @@ public class CallHandlerService extends Service {
             mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_MULTI_CALL, 0, 0, calls));
         }
     };
-
-    private void logD(String message) {
-        if (DBG) {
-            Log.d(TAG, message);
-        }
-    }
 
     /**
      * Handles messages from the service so that they get executed on the main thread, where they

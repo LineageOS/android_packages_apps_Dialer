@@ -21,7 +21,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.android.incallui.widget.multiwaveview.GlowPadView;
@@ -30,9 +29,6 @@ import com.android.incallui.widget.multiwaveview.GlowPadView;
  *
  */
 public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTriggerListener {
-
-    private static final String TAG = GlowPadWrapper.class.getSimpleName();
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     // Parameters for the GlowPadView "ping" animation; see triggerPing().
     private static final int PING_MESSAGE_WHAT = 101;
@@ -63,7 +59,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
 
     @Override
     protected void onFinishInflate() {
-        logD("onFinishInflate()");
+        Logger.d(this, "onFinishInflate()");
         super.onFinishInflate();
         setOnTriggerListener(this);
         startPing();
@@ -71,7 +67,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
 
     @Override
     protected void onWindowVisibilityChanged(int visibility) {
-        logD("Visibility changed " + visibility);
+        Logger.d(this, "Visibility changed " + visibility);
         super.onWindowVisibilityChanged(visibility);
         switch (visibility) {
             case View.VISIBLE:
@@ -86,7 +82,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
 
     @Override
     protected Parcelable onSaveInstanceState() {
-        logD("onSaveInstanceState()");
+        Logger.d(this, "onSaveInstanceState()");
         // TODO: evaluate this versus stopping during fragment onPause/onResume
         stopPing();
         return super.onSaveInstanceState();
@@ -113,19 +109,19 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
 
     @Override
     public void onGrabbed(View v, int handle) {
-        logD("onGrabbed()");
+        Logger.d(this, "onGrabbed()");
         stopPing();
     }
 
     @Override
     public void onReleased(View v, int handle) {
-        logD("onReleased()");
+        Logger.d(this, "onReleased()");
         startPing();
     }
 
     @Override
     public void onTrigger(View v, int target) {
-        logD("onTrigger()");
+        Logger.d(this, "onTrigger()");
         final int resId = getResourceIdForTarget(target);
         switch (resId) {
             case R.drawable.ic_lockscreen_answer:
@@ -139,7 +135,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
                 break;
             default:
                 // Code should never reach here.
-                Log.e(TAG, "Trigger detected on unhandled resource. Skipping.");
+                Logger.e(this, "Trigger detected on unhandled resource. Skipping.");
         }
     }
 
@@ -161,11 +157,5 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
         void onAnswer();
         void onDecline();
         void onText();
-    }
-
-    private void logD(String msg) {
-        if (DEBUG) {
-            Log.d(TAG, msg);
-        }
     }
 }

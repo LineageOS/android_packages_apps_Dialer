@@ -21,7 +21,6 @@ import com.google.common.base.Preconditions;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import java.util.Set;
 
@@ -34,8 +33,6 @@ import java.util.Set;
  * that want to listen in on the in-call state changes.
  */
 public class InCallPresenter implements CallList.Listener {
-    private static final String TAG = InCallPresenter.class.getSimpleName();
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static InCallPresenter sInCallPresenter;
 
@@ -52,7 +49,7 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     public void init(Context context) {
-        Log.i(TAG, "InCallPresenter initialized with context " + context);
+        Logger.i(this, "InCallPresenter initialized with context " + context);
         Preconditions.checkState(mContext == null);
 
         mContext = context;
@@ -97,7 +94,7 @@ public class InCallPresenter implements CallList.Listener {
 
         // notify listeners of new state
         for (InCallStateListener listener : mListeners) {
-            logD("Notify " + listener + " of state " + mInCallState.toString());
+            Logger.d(this, "Notify " + listener + " of state " + mInCallState.toString());
             listener.onStateChange(mInCallState, callList);
         }
     }
@@ -153,12 +150,6 @@ public class InCallPresenter implements CallList.Listener {
      */
     private InCallPresenter() {
         CallList.getInstance().addListener(this);
-    }
-
-    private void logD(String msg) {
-        if (DEBUG) {
-            Log.d(TAG, msg);
-        }
     }
 
     /**

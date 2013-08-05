@@ -23,8 +23,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
-import android.util.Log;
-
 import com.android.services.telephony.common.Call;
 
 import java.util.HashMap;
@@ -38,8 +36,6 @@ import java.util.Set;
  * Primary lister of changes to this class is InCallPresenter.
  */
 public class CallList {
-    private static final String TAG = CallList.class.getSimpleName();
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final Map<Integer, String> STATE_MAP = ImmutableMap.<Integer, String>builder()
             .put(Call.State.ACTIVE, "ACTIVE")
             .put(Call.State.CALL_WAITING, "CALL_WAITING")
@@ -75,7 +71,7 @@ public class CallList {
      * Called when a single call has changed.
      */
     public void onUpdate(Call call) {
-        logD("onUpdate - " + safeCallString(call));
+        Logger.d(this, "onUpdate - " + safeCallString(call));
 
         updateCallInMap(call);
         notifyListenersOfChange();
@@ -85,11 +81,11 @@ public class CallList {
      * Called when multiple calls have changed.
      */
     public void onUpdate(List<Call> callsToUpdate) {
-        logD("onUpdate(...)");
+        Logger.d(this, "onUpdate(...)");
 
         Preconditions.checkNotNull(callsToUpdate);
         for (Call call : callsToUpdate) {
-            logD("\t" + safeCallString(call));
+            Logger.d(this, "\t" + safeCallString(call));
 
             updateCallInMap(call);
         }
@@ -157,7 +153,7 @@ public class CallList {
             }
         }
 
-        logD("Found " + (retval == null ? "no " : "") + "call with state: " +
+        Logger.d(this, "Found " + (retval == null ? "no " : "") + "call with state: " +
                 STATE_MAP.get(state));
         return retval;
     }
@@ -187,12 +183,6 @@ public class CallList {
     private boolean isCallDead(Call call) {
         final int state = call.getState();
         return Call.State.IDLE == state || Call.State.INVALID == state;
-    }
-
-    private void logD(String msg) {
-        if (DEBUG) {
-            Log.d(TAG, msg);
-        }
     }
 
     /**

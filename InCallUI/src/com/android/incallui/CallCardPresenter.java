@@ -16,8 +16,6 @@
 
 package com.android.incallui;
 
-import android.util.Log;
-
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.services.telephony.common.Call;
@@ -28,8 +26,6 @@ import com.android.services.telephony.common.Call;
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         implements InCallStateListener {
-    private static final String TAG = CallCardPresenter.class.getSimpleName();
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     @Override
     public void onUiReady(CallCardUi ui) {
@@ -50,10 +46,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             secondary = callList.getBackgroundCall();
         }
 
-        if (DEBUG) {
-            Log.d(TAG, "Primary call: " + primary);
-            Log.d(TAG, "Secondary call: " + secondary);
-        }
+        Logger.d(this, "Primary call: " + primary);
+        Logger.d(this, "Secondary call: " + secondary);
 
         // Set primary call data
         if (primary != null) {
