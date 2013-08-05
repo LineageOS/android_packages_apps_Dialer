@@ -50,16 +50,16 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     public void onAnswer() {
         Preconditions.checkNotNull(mCall);
-        Logger.d(this, "onAnswer");
+        Logger.d(this, "onAnswer " + mCall.getCallId());
 
         CallCommandClient.getInstance().answerCall(mCall.getCallId());
     }
 
     public void onDecline() {
         Preconditions.checkNotNull(mCall);
-        Logger.d(this, "onDecline");
+        Logger.d(this, "onDecline " + mCall.getCallId());
 
-        CallCommandClient.getInstance().disconnectCall(mCall.getCallId());
+        CallCommandClient.getInstance().rejectCall(mCall.getCallId());
     }
 
     public void onText() {

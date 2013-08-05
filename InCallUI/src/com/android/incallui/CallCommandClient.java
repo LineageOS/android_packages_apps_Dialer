@@ -56,6 +56,14 @@ public class CallCommandClient {
         }
     }
 
+    public void rejectCall(int callId) {
+        try {
+            mCommandService.rejectCall(callId);
+        } catch (RemoteException e) {
+            Logger.e(this, "Error rejecting call.", e);
+        }
+    }
+
     public void disconnectCall(int callId) {
         try {
             mCommandService.disconnectCall(callId);
