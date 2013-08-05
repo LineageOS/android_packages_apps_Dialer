@@ -128,8 +128,25 @@ public class CallList {
         return getFirstCallWithState(Call.State.ONHOLD);
     }
 
+    public Call getSecondBackgroundCall() {
+        return getCallWithState(Call.State.ONHOLD, 1);
+    }
+
+    public Call getActiveOrBackgroundCall() {
+        Call call = getActiveCall();
+        if (call == null) {
+            call = getBackgroundCall();
+        }
+        return call;
+    }
+
     public Call getIncomingCall() {
-        return getFirstCallWithState(Call.State.INCOMING);
+        Call call = getFirstCallWithState(Call.State.INCOMING);
+        if (call == null) {
+            call = getFirstCallWithState(Call.State.CALL_WAITING);
+        }
+
+        return call;
     }
 
     public boolean existsLiveCall() {
@@ -145,11 +162,24 @@ public class CallList {
      * Returns first call found in the call map with the specified state.
      */
     public Call getFirstCallWithState(int state) {
+        return getCallWithState(state, 0);
+    }
+
+    /**
+     * Returns the [position]th call found in the call map with the specified state.
+     * TODO(klp): Improve this logic to sort by call time.
+     */
+    public Call getCallWithState(int state, int positionToFind) {
         Call retval = null;
+        int position = 0;
         for (Call call : mCallMap.values()) {
             if (call.getState() == state) {
-                retval = call;
-                break;
+                if (position >= positionToFind) {
+                    retval = call;
+                    break;
+                } else {
+                    position++;
+                }
             }
         }
 

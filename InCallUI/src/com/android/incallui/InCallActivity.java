@@ -101,6 +101,8 @@ public class InCallActivity extends Activity {
     @Override
     public void finish() {
         Logger.d(this, "finish()...");
+        tearDownPresenters();
+
         super.finish();
 
         // TODO(klp): Actually finish the activity for now.  Revisit performance implications of
@@ -218,6 +220,14 @@ public class InCallActivity extends Activity {
 
         // setting activity should be last thing in setup process
         mainPresenter.setActivity(this);
+    }
+
+    private void tearDownPresenters() {
+        InCallPresenter mainPresenter = InCallPresenter.getInstance();
+
+        mainPresenter.removeListener(mCallButtonFragment.getPresenter());
+        mainPresenter.removeListener(mCallCardFragment.getPresenter());
+        mainPresenter.removeListener(mAnswerFragment.getPresenter());
     }
 
     private void toast(String text) {

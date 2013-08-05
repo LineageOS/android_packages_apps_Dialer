@@ -46,9 +46,7 @@ public class CallHandlerService extends Service {
 
         mCallList = CallList.getInstance();
         mMainHandler = new MainHandler();
-        mInCallPresenter = InCallPresenter.getInstance();
-
-        mInCallPresenter.init(this);
+        mInCallPresenter = InCallPresenter.init(this);
     }
 
     @Override

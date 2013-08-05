@@ -43,7 +43,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             primary = callList.getIncomingCall();
         } else if (state == InCallState.INCALL) {
             primary = callList.getActiveCall();
-            secondary = callList.getBackgroundCall();
+            if (primary != null) {
+                secondary = callList.getBackgroundCall();
+            } else {
+                primary = callList.getBackgroundCall();
+                secondary = callList.getSecondBackgroundCall();
+            }
         }
 
         Logger.d(this, "Primary call: " + primary);

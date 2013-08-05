@@ -49,7 +49,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         getUi().setVisible(state == InCallState.INCALL);
 
         if (state == InCallState.INCALL) {
-            mCall = callList.getActiveCall();
+            mCall = callList.getActiveOrBackgroundCall();
         } else {
             mCall = null;
         }
@@ -75,17 +75,23 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void muteClicked(boolean checked) {
+        Logger.d(this, "turning on mute: " + checked);
+
         CallCommandClient.getInstance().mute(checked);
         getUi().setMute(checked);
     }
 
     public void speakerClicked(boolean checked) {
+        Logger.d(this, "turning on speaker: " + checked);
+
         CallCommandClient.getInstance().turnSpeakerOn(checked);
         getUi().setSpeaker(checked);
     }
 
     public void holdClicked(boolean checked) {
         Preconditions.checkNotNull(mCall);
+
+        Logger.d(this, "holding: " + mCall.getCallId());
 
         // TODO(klp): use appropriate hold callId.
         CallCommandClient.getInstance().hold(mCall.getCallId(), checked);

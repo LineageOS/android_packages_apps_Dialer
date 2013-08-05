@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 The Android Open Source Project
+ * Copyright (C) 2013 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import com.google.common.base.Preconditions;
 import android.content.Context;
 import android.content.Intent;
 
+import com.android.services.telephony.common.Call;
+
 import java.util.Set;
 
 /**
@@ -31,34 +33,34 @@ import java.util.Set;
  * are disconnected.
  * Creates and manages the in-call state and provides a listener pattern for the presenters
  * that want to listen in on the in-call state changes.
+ * TODO(klp): This class has become more of a state machine at this point.  Consider renaming.
  */
 public class InCallPresenter implements CallList.Listener {
 
     private static InCallPresenter sInCallPresenter;
 
-    private Context mContext;
-    private InCallState mInCallState = InCallState.HIDDEN;
-    private InCallActivity mInCallActivity;
+    private final StatusBarNotifier mStatusBarNotifier;
     private final Set<InCallStateListener> mListeners = Sets.newHashSet();
 
-    public static synchronized InCallPresenter getInstance() {
-        if (sInCallPresenter == null) {
-            sInCallPresenter = new InCallPresenter();
-        }
+    private InCallState mInCallState = InCallState.HIDDEN;
+    private InCallActivity mInCallActivity;
+
+    public static InCallPresenter getInstance() {
+        Preconditions.checkNotNull(sInCallPresenter);
         return sInCallPresenter;
     }
 
-    public void init(Context context) {
-        Logger.i(this, "InCallPresenter initialized with context " + context);
-        Preconditions.checkState(mContext == null);
-
-        mContext = context;
-        CallList.getInstance().addListener(this);
+    public static synchronized InCallPresenter init(Context context) {
+        Preconditions.checkState(sInCallPresenter == null);
+        sInCallPresenter = new InCallPresenter(context);
+        return sInCallPresenter;
     }
 
     public void setActivity(InCallActivity inCallActivity) {
         mInCallActivity = inCallActivity;
         mInCallState = InCallState.STARTED;
+
+        Logger.d(this, "UI Initialized");
 
         // Since the UI just came up, imitate an update from the call list
         // to set the proper UI state.
@@ -75,21 +77,14 @@ public class InCallPresenter implements CallList.Listener {
     public void onCallListChange(CallList callList) {
         // fast fail if we are still starting up
         if (mInCallState == InCallState.STARTING_UP) {
+            Logger.d(this, "Already on STARTING_UP, ignoring until ready");
             return;
         }
 
-        InCallState newState = mInCallState;
-        if (callList.getIncomingCall() != null) {
-            newState = InCallState.INCOMING;
-        } else if (callList.getActiveCall() != null) {
-            newState = InCallState.INCALL;
-        } else {
-            newState = InCallState.HIDDEN;
-        }
-
+        InCallState newState = getPotentialStateFromCallList(callList);
         newState = startOrFinishUi(newState);
 
-        // finally set the new state before announcing it to the world
+        // Set the new state before announcing it to the world
         mInCallState = newState;
 
         // notify listeners of new state
@@ -97,6 +92,22 @@ public class InCallPresenter implements CallList.Listener {
             Logger.d(this, "Notify " + listener + " of state " + mInCallState.toString());
             listener.onStateChange(mInCallState, callList);
         }
+    }
+
+    /**
+     * Given the call list, return the state in which the in-call screen should be.
+     */
+    public InCallState getPotentialStateFromCallList(CallList callList) {
+        InCallState newState = InCallState.HIDDEN;
+
+        if (callList.getIncomingCall() != null) {
+            newState = InCallState.INCOMING;
+        } else if (callList.getActiveCall() != null ||
+                callList.getBackgroundCall() != null) {
+            newState = InCallState.INCALL;
+        }
+
+        return newState;
     }
 
     public void addListener(InCallStateListener listener) {
@@ -115,26 +126,23 @@ public class InCallPresenter implements CallList.Listener {
      * It returns a potential new middle state (STARTING_UP) if appropriate.
      */
     private InCallState startOrFinishUi(InCallState newState) {
+        Logger.d(this, "startOrFInishUi: " + newState.toString());
+
         // TODO(klp): Consider a proper state machine implementation
 
         // if we need to show something, we need to start the Ui...
-        if (newState != InCallState.HIDDEN) {
+        if (!newState.isHidden()) {
 
-            // ...only if the UI is currently hidden
-            if (mInCallState == InCallState.HIDDEN) {
-                // TODO(klp): Update the flags to match the PhoneApp activity
-                final Intent intent = new Intent(mContext, InCallActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
-
+            // When we attempt to go to any state from HIDDEN, it means that we need to create the
+            // entire UI. However, the StatusBarNotifier is in charge of starting up the Ui because
+            // it has special behavior in case we have to deal with an immersive foreground app.
+            // We set the STARTING_UP state to let StatusBarNotifier know it needs to start the
+            // the Ui.
+            if (mInCallState.isHidden()) {
                 return InCallState.STARTING_UP;
             }
 
-        // (newState == InCallState.HIDDEN)
-        // Else, we need to hide the UI...if it exists
         } else if (mInCallActivity != null) {
-            mListeners.clear();
-
             // Null out reference before we start end sequence
             InCallActivity temp = mInCallActivity;
             mInCallActivity = null;
@@ -148,7 +156,12 @@ public class InCallPresenter implements CallList.Listener {
     /**
      * Private constructor. Must use getInstance() to get this singleton.
      */
-    private InCallPresenter() {
+    private InCallPresenter(Context context) {
+        Preconditions.checkNotNull(context);
+
+        mStatusBarNotifier = new StatusBarNotifier(context);
+        addListener(mStatusBarNotifier);
+
         CallList.getInstance().addListener(this);
     }
 
@@ -156,12 +169,29 @@ public class InCallPresenter implements CallList.Listener {
      * All the main states of InCallActivity.
      */
     public enum InCallState {
+        // InCall Screen is off and there are no calls
         HIDDEN,
+
+        // In call is in the process of starting up
         STARTING_UP,
+
+        // In call has started but is not displaying any information
         STARTED,
+
+        // Incoming-call screen is up
         INCOMING,
-        INCALL
-    };
+
+        // In-call experience is showing
+        INCALL;
+
+        public boolean isIncoming() {
+            return (this == INCOMING);
+        }
+
+        public boolean isHidden() {
+            return (this == HIDDEN);
+        }
+    }
 
     /**
      * Interface implemented by classes that need to know about the InCall State.
