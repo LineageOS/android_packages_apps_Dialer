@@ -30,6 +30,7 @@
                   android:layout_width="match_parent"
                   android:layout_height="0dp"
                   android:layout_weight="1"/>
+
         <fragment android:name="com.android.incallui.CallButtonFragment"
                   android:id="@+id/callButtonFragment"
                   android:layout_width="match_parent"
@@ -37,6 +38,13 @@
 
     </LinearLayout>
 
-    <!-- Glowpad fragment loaded here on demand. -->
+    <fragment android:name="com.android.incallui.AnswerFragment"
+              android:id="@+id/answerFragment"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:layout_centerHorizontal="true"
+              android:gravity="center"
+              android:layout_gravity="bottom|center_horizontal" />
 
 </FrameLayout>

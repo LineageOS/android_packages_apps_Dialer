@@ -18,8 +18,6 @@ package com.android.incallui;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,16 +31,13 @@ import android.widget.Toast;
  * Phone app "in call" screen.
  */
 public class InCallActivity extends Activity {
-
     private static final String TAG = InCallActivity.class.getSimpleName();
-
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final boolean VERBOSE = Log.isLoggable(TAG, Log.VERBOSE);
 
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
     private AnswerFragment mAnswerFragment;
-    private boolean mFragmentsAdded = false;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -67,32 +62,10 @@ public class InCallActivity extends Activity {
         logD("onCreate(): exit");
     }
 
-
     @Override
     protected void onResume() {
         logD("onResume()...");
         super.onResume();
-
-        if (!mFragmentsAdded) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.main, mAnswerFragment)
-                    .commit();
-
-            mFragmentsAdded = true;
-        }
-
-        InCallPresenter.getInstance().setActivity(this);
-    }
-
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        if (fragment instanceof AnswerFragment) {
-            mAnswerFragment = (AnswerFragment) fragment;
-
-            getFragmentManager().beginTransaction()
-                    .hide(mAnswerFragment)
-                    .commit();
-        }
     }
 
     // onPause is guaranteed to be called when the InCallActivity goes
@@ -133,7 +106,11 @@ public class InCallActivity extends Activity {
     @Override
     public void finish() {
         logD("finish()...");
-        moveTaskToBack(true);
+        super.finish();
+
+        // TODO(klp): Actually finish the activity for now.  Revisit performance implications of
+        // this before launch.
+        // moveTaskToBack(true);
     }
 
     @Override
@@ -216,20 +193,6 @@ public class InCallActivity extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
-    /**
-     * Called to show the incoming call widget.
-     */
-    /* package */ void showIncoming(boolean show) {
-        final FragmentTransaction trans = getFragmentManager().beginTransaction();
-        if (show) {
-            trans.show(mAnswerFragment);
-        } else {
-            trans.hide(mAnswerFragment);
-        }
-
-        trans.commitAllowingStateLoss();
-    }
-
     private void initializeInCall() {
         // TODO(klp): Make sure that this doesn't need to move back to onResume() since they are
         // statically added fragments.
@@ -244,8 +207,22 @@ public class InCallActivity extends Activity {
         }
 
         if (mAnswerFragment == null) {
-            mAnswerFragment = new AnswerFragment();
+            mAnswerFragment = (AnswerFragment) getFragmentManager()
+                    .findFragmentById(R.id.answerFragment);
         }
+
+        setUpPresenters();
+    }
+
+    private void setUpPresenters() {
+        InCallPresenter mainPresenter = InCallPresenter.getInstance();
+
+        mainPresenter.addListener(mCallButtonFragment.getPresenter());
+        mainPresenter.addListener(mCallCardFragment.getPresenter());
+        mainPresenter.addListener(mAnswerFragment.getPresenter());
+
+        // setting activity should be last thing in setup process
+        mainPresenter.setActivity(this);
     }
 
     private void toast(String text) {

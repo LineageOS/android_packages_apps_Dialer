@@ -21,19 +21,35 @@ import com.google.android.collect.Maps;
 import com.google.android.collect.Sets;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+
+import android.util.Log;
 
 import com.android.services.telephony.common.Call;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
- * Maintains the list of active calls received from CallHandlerService.
- * TODO(klp): This class should be used by InCallUI to read about
- * changes to calls.
+ * Maintains the list of active calls received from CallHandlerService and notifies interested
+ * classes of changes to the call list as they are received from the telephony stack.
+ * Primary lister of changes to this class is InCallPresenter.
  */
 public class CallList {
+    private static final String TAG = CallList.class.getSimpleName();
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+    private static final Map<Integer, String> STATE_MAP = ImmutableMap.<Integer, String>builder()
+            .put(Call.State.ACTIVE, "ACTIVE")
+            .put(Call.State.CALL_WAITING, "CALL_WAITING")
+            .put(Call.State.DIALING, "DIALING")
+            .put(Call.State.IDLE, "IDLE")
+            .put(Call.State.INCOMING, "INCOMING")
+            .put(Call.State.ONHOLD, "ONHOLD")
+            .put(Call.State.INVALID, "INVALID")
+            .build();
+
     private static CallList sInstance;
 
     private final HashMap<Integer, Call> mCallMap = Maps.newHashMap();
@@ -59,8 +75,9 @@ public class CallList {
      * Called when a single call has changed.
      */
     public void onUpdate(Call call) {
-        updateCallInMap(call);
+        logD("onUpdate - " + safeCallString(call));
 
+        updateCallInMap(call);
         notifyListenersOfChange();
     }
 
@@ -68,8 +85,12 @@ public class CallList {
      * Called when multiple calls have changed.
      */
     public void onUpdate(List<Call> callsToUpdate) {
+        logD("onUpdate(...)");
+
         Preconditions.checkNotNull(callsToUpdate);
         for (Call call : callsToUpdate) {
+            logD("\t" + safeCallString(call));
+
             updateCallInMap(call);
         }
 
@@ -98,9 +119,13 @@ public class CallList {
     public Call getIncomingOrActive() {
         Call retval = getIncomingCall();
         if (retval == null) {
-            retval = getFirstCallWithState(Call.State.ACTIVE);
+            retval = getActiveCall();
         }
         return retval;
+    }
+
+    public Call getActiveCall() {
+        return getFirstCallWithState(Call.State.ACTIVE);
     }
 
     public Call getBackgroundCall() {
@@ -132,6 +157,8 @@ public class CallList {
             }
         }
 
+        logD("Found " + (retval == null ? "no " : "") + "call with state: " +
+                STATE_MAP.get(state));
         return retval;
     }
 
@@ -160,6 +187,24 @@ public class CallList {
     private boolean isCallDead(Call call) {
         final int state = call.getState();
         return Call.State.IDLE == state || Call.State.INVALID == state;
+    }
+
+    private void logD(String msg) {
+        if (DEBUG) {
+            Log.d(TAG, msg);
+        }
+    }
+
+    /**
+     * Creates a log-safe string for call objects.
+     */
+    private String safeCallString(Call call) {
+        final StringBuffer buffer = new StringBuffer();
+        buffer.append("Call (")
+                .append(call.getCallId())
+                .append("), ")
+                .append(STATE_MAP.get(call.getState()));
+        return buffer.toString();
     }
 
     /**

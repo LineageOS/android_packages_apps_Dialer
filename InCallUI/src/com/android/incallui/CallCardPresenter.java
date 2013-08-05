@@ -16,40 +16,55 @@
 
 package com.android.incallui;
 
+import android.util.Log;
+
+import com.android.incallui.InCallPresenter.InCallState;
+import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.services.telephony.common.Call;
 
 /**
  * Presenter for the Call Card Fragment.
- * This class listens for changes to CallList and passes it along to the fragment.
+ * This class listens for changes to InCallState and passes it along to the fragment.
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
-        implements CallList.Listener {
+        implements InCallStateListener {
+    private static final String TAG = CallCardPresenter.class.getSimpleName();
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     @Override
     public void onUiReady(CallCardUi ui) {
         super.onUiReady(ui);
-
-        CallList.getInstance().addListener(this);
     }
 
     @Override
-    public void onCallListChange(CallList callList) {
+    public void onStateChange(InCallState state, CallList callList) {
         final CallCardUi ui = getUi();
 
-        // Populate the primary call card based on the incoming call or the active call.
-        final Call call = callList.getIncomingOrActive();
-        if (call != null) {
-            ui.setNumber(call.getNumber());
+        Call primary = null;
+        Call secondary = null;
+
+        if (state == InCallState.INCOMING) {
+            primary = callList.getIncomingCall();
+        } else if (state == InCallState.INCALL) {
+            primary = callList.getActiveCall();
+            secondary = callList.getBackgroundCall();
+        }
+
+        if (DEBUG) {
+            Log.d(TAG, "Primary call: " + primary);
+            Log.d(TAG, "Secondary call: " + secondary);
+        }
+
+        // Set primary call data
+        if (primary != null) {
+            ui.setNumber(primary.getNumber());
         } else {
-            // When there is no longer an incoming/active call, we need to reset everything
-            // so that no data survives for the next call.
             ui.setNumber("");
         }
 
-        // secondary call card info only comes from the background call (if any exist)
-        final Call backgroundCall = callList.getBackgroundCall();
-        if (backgroundCall != null) {
-            ui.setSecondaryCallInfo(true, backgroundCall.getNumber());
+        // Set secondary call data
+        if (secondary != null) {
+            ui.setSecondaryCallInfo(true, secondary.getNumber());
         } else {
             ui.setSecondaryCallInfo(false, null);
         }

@@ -16,31 +16,60 @@
 
 package com.android.incallui;
 
+import com.google.common.base.Preconditions;
+
 import android.util.Log;
+
+import com.android.incallui.InCallPresenter.InCallState;
+import com.android.incallui.InCallPresenter.InCallStateListener;
+import com.android.services.telephony.common.Call;
 
 /**
  * Presenter for the Incoming call widget.
  */
-public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi> {
+public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
+        implements InCallStateListener {
+    private static final String TAG = AnswerPresenter.class.getSimpleName();
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+
+    private Call mCall;
 
     @Override
     public void onUiReady(AnswerUi ui) {
         super.onUiReady(ui);
     }
 
+    @Override
+    public void onStateChange(InCallState state, CallList callList) {
+        if (state == InCallState.INCOMING) {
+            getUi().showAnswerUi(true);
+            mCall = callList.getIncomingCall();
+
+            if (DEBUG) {
+                Log.d(TAG, "Showing incoming with: " + mCall);
+            }
+        } else {
+            getUi().showAnswerUi(false);
+            mCall = null;
+        }
+    }
+
     public void onAnswer() {
-        // TODO(klp): hook in call id.
-        CallCommandClient.getInstance().answerCall(1);
+        Preconditions.checkNotNull(mCall);
+
+        CallCommandClient.getInstance().answerCall(mCall.getCallId());
     }
 
     public void onDecline() {
-        // TODO(klp): hook in call id.
-        CallCommandClient.getInstance().disconnectCall(1);
+        Preconditions.checkNotNull(mCall);
+
+        CallCommandClient.getInstance().disconnectCall(mCall.getCallId());
     }
 
     public void onText() {
     }
 
     interface AnswerUi extends Ui {
+        public void showAnswerUi(boolean show);
     }
 }

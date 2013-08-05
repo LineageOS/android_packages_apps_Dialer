@@ -16,15 +16,22 @@
 
 package com.android.incallui;
 
+import com.google.common.base.Preconditions;
+
 import android.media.AudioManager;
+
+import com.android.incallui.InCallPresenter.InCallState;
+import com.android.incallui.InCallPresenter.InCallStateListener;
+import com.android.services.telephony.common.Call;
 
 /**
  * Logic for call buttons.
  */
 public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButtonUi>
-        implements CallList.Listener {
+        implements InCallStateListener {
 
     private AudioManager mAudioManager;
+    private Call mCall;
 
     public void init(AudioManager audioManager) {
         mAudioManager = audioManager;
@@ -35,22 +42,24 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         super.onUiReady(ui);
         getUi().setMute(mAudioManager.isMicrophoneMute());
         getUi().setSpeaker(mAudioManager.isSpeakerphoneOn());
-
-        CallList.getInstance().addListener(this);
     }
 
     @Override
-    public void onCallListChange(CallList callList) {
-        // show the buttons if there is a live call AND there is no
-        // incoming call.
-        final boolean showButtons = callList.existsLiveCall() &&
-                callList.getIncomingCall() == null;
-        getUi().setVisible(showButtons);
+    public void onStateChange(InCallState state, CallList callList) {
+        getUi().setVisible(state == InCallState.INCALL);
+
+        if (state == InCallState.INCALL) {
+            mCall = callList.getActiveCall();
+        } else {
+            mCall = null;
+        }
     }
 
     public void endCallClicked() {
+        Preconditions.checkNotNull(mCall);
+
         // TODO(klp): hook up call id.
-        CallCommandClient.getInstance().disconnectCall(1);
+        CallCommandClient.getInstance().disconnectCall(mCall.getCallId());
 
         // TODO(klp): Remove once all state is gathered from CallList.
         //            This will be wrong when you disconnect from a call if
@@ -76,8 +85,10 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void holdClicked(boolean checked) {
+        Preconditions.checkNotNull(mCall);
+
         // TODO(klp): use appropriate hold callId.
-        CallCommandClient.getInstance().hold(1, true);
+        CallCommandClient.getInstance().hold(mCall.getCallId(), checked);
         getUi().setHold(checked);
     }
 
