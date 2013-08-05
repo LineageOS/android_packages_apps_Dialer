@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -36,6 +37,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
+import android.provider.ContactsContract.PinnedPositions;
 import android.provider.ContactsContract.RawContacts;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -247,15 +249,26 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     }
 
     private static final String[] PHONE_NUMBER_PROJECTION = new String[] {
-            Phone._ID,
-            Phone.NUMBER,
-            Phone.IS_SUPER_PRIMARY,
-            RawContacts.ACCOUNT_TYPE,
-            RawContacts.DATA_SET,
-            Phone.TYPE,
-            Phone.LABEL,
-            Phone.MIMETYPE
+            Phone._ID,                      // 0
+            Phone.NUMBER,                   // 1
+            Phone.IS_SUPER_PRIMARY,         // 2
+            RawContacts.ACCOUNT_TYPE,       // 3
+            RawContacts.DATA_SET,           // 4
+            Phone.TYPE,                     // 5
+            Phone.LABEL,                    // 6
+            Phone.MIMETYPE,                 // 7
+            Phone.CONTACT_ID                // 8
     };
+
+    private static final int _ID = 0;
+    private static final int NUMBER = 1;
+    private static final int IS_SUPER_PRIMARY = 2;
+    private static final int ACCOUNT_TYPE = 3;
+    private static final int DATA_SET = 4;
+    private static final int TYPE = 5;
+    private static final int LABEL = 6;
+    private static final int MIMETYPE = 7;
+    private static final int CONTACT_ID = 8;
 
     private static final String PHONE_NUMBER_SELECTION =
             Data.MIMETYPE + " IN ('"
@@ -269,6 +282,9 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
     private final String mCallOrigin;
     private boolean mUseDefault;
+
+    private static final int UNKNOWN_CONTACT_ID = -1;
+    private long mContactId = UNKNOWN_CONTACT_ID;
 
     private CursorLoader mLoader;
 
@@ -293,6 +309,15 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     }
 
     private void performAction(String phoneNumber) {
+        if (mInteractionType == ContactDisplayUtils.INTERACTION_CALL && mContactId !=
+                UNKNOWN_CONTACT_ID) {
+            // Since we are making an outgoing call to this contact, undemote it here.
+            // If the contact is not demoted, this will not do anything.
+            final ContentValues cv = new ContentValues(1);
+            cv.put(String.valueOf(mContactId), PinnedPositions.UNDEMOTE);
+            mContext.getContentResolver().update(PinnedPositions.UPDATE_URI, cv, null, null);
+        }
+
         PhoneNumberInteraction.performAction(mContext, phoneNumber, mInteractionType, mCallOrigin);
     }
 
@@ -372,20 +397,23 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         String primaryPhone = null;
         try {
             while (cursor.moveToNext()) {
-                if (mUseDefault && cursor.getInt(cursor.getColumnIndex(Phone.IS_SUPER_PRIMARY)) != 0) {
+                if (mContactId == UNKNOWN_CONTACT_ID) {
+                    mContactId = cursor.getLong(CONTACT_ID);
+                }
+
+                if (mUseDefault && cursor.getInt(IS_SUPER_PRIMARY) != 0) {
                     // Found super primary, call it.
-                    primaryPhone = cursor.getString(cursor.getColumnIndex(Phone.NUMBER));
+                    primaryPhone = cursor.getString(NUMBER);
                 }
 
                 PhoneItem item = new PhoneItem();
-                item.id = cursor.getLong(cursor.getColumnIndex(Data._ID));
-                item.phoneNumber = cursor.getString(cursor.getColumnIndex(Phone.NUMBER));
-                item.accountType =
-                        cursor.getString(cursor.getColumnIndex(RawContacts.ACCOUNT_TYPE));
-                item.dataSet = cursor.getString(cursor.getColumnIndex(RawContacts.DATA_SET));
-                item.type = cursor.getInt(cursor.getColumnIndex(Phone.TYPE));
-                item.label = cursor.getString(cursor.getColumnIndex(Phone.LABEL));
-                item.mimeType = cursor.getString(cursor.getColumnIndex(Phone.MIMETYPE));
+                item.id = cursor.getLong(_ID);
+                item.phoneNumber = cursor.getString(NUMBER);
+                item.accountType = cursor.getString(ACCOUNT_TYPE);
+                item.dataSet = cursor.getString(DATA_SET);
+                item.type = cursor.getInt(TYPE);
+                item.label = cursor.getString(LABEL);
+                item.mimeType = cursor.getString(MIMETYPE);
 
                 phoneList.add(item);
             }
