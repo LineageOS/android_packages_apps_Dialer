@@ -159,10 +159,9 @@ public class CallLogActivity extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         final MenuItem itemDeleteAll = menu.findItem(R.id.delete_all);
 
-        final CallLogAdapter adapter = mAllCallsFragment.getAdapter();
-        // Check if all the menu items are inflated correctly. As a shortcut, we assume all
-        // menu items are ready if the first item is non-null.
-        if (itemDeleteAll != null) {
+        // If onPrepareOptionsMenu is called before fragments loaded. Don't do anything.
+        if (mAllCallsFragment != null && itemDeleteAll != null) {
+            final CallLogAdapter adapter = mAllCallsFragment.getAdapter();
             itemDeleteAll.setEnabled(adapter != null && !adapter.isEmpty());
         }
         return true;
