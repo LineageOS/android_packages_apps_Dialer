@@ -155,6 +155,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * {@link PhoneNumberPickerFragment}).
      */
     private boolean mInSearchUi;
+    private boolean mFirstLaunch;
     private View mSearchViewContainer;
     private View mSearchViewCloseButton;
     private View mVoiceSearchButton;
@@ -234,6 +235,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mFirstLaunch = true;
+
         final Intent intent = getIntent();
         fixIntent(intent);
 
@@ -265,8 +268,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mBottomPaddingView = findViewById(R.id.dialtacts_bottom_padding);
         prepareSearchView();
 
-        displayFragment(intent);
-
         if (UI.FILTER_CONTACTS_ACTION.equals(intent.getAction())
                 && savedInstanceState == null) {
             setupFilterText(intent);
@@ -295,6 +296,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 TAG_SHOW_ALL_CONTACTS_FRAGMENT);
         mShowAllContactsFragment.setOnPhoneNumberPickerActionListener(
                 mPhoneNumberPickerActionListener);
+
+        if (mFirstLaunch) {
+            displayFragment(getIntent());
+        }
+        mFirstLaunch = false;
     }
 
     @Override
@@ -605,8 +611,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             return;
         }
 
-        if ((mDialpadFragment != null && phoneIsInUse())
-                || isDialIntent(intent)) {
+        if (mDialpadFragment != null && (phoneIsInUse() || isDialIntent(intent))) {
             mDialpadFragment.setStartedFromNewIntent(true);
             // TODO krelease: This should use showDialpadFragment(false) to avoid animating
             // the dialpad in. Need to fix the onPreDrawListener in NewDialpadFragment first.
