@@ -22,6 +22,8 @@ import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.services.telephony.common.Call;
 
+import java.util.ArrayList;
+
 /**
  * Presenter for the Incoming call widget.
  */
@@ -29,6 +31,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         implements InCallStateListener {
 
     private Call mCall;
+    private ArrayList<String> mTextResponses;
 
     @Override
     public void onUiReady(AnswerUi ui) {
@@ -40,7 +43,13 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         if (state == InCallState.INCOMING) {
             getUi().showAnswerUi(true);
             mCall = callList.getIncomingCall();
-
+            mTextResponses = callList.getTextResponses(mCall);
+            if (mTextResponses != null) {
+                getUi().showTextButton(true);
+                getUi().configureMessageDialogue(mTextResponses);
+            } else {
+                getUi().showTextButton(false);
+            }
             Logger.d(this, "Showing incoming with: " + mCall);
         } else {
             getUi().showAnswerUi(false);
@@ -59,13 +68,25 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         Preconditions.checkNotNull(mCall);
         Logger.d(this, "onDecline " + mCall.getCallId());
 
-        CallCommandClient.getInstance().rejectCall(mCall.getCallId());
+        CallCommandClient.getInstance().rejectCall(mCall.getCallId(), false, null);
     }
 
     public void onText() {
+        getUi().showMessageDialogue();
+    }
+
+    public void rejectCallWithMessage(String message) {
+        Logger.d(this, "sendTextToDefaultActivity()...");
+        CallCommandClient.getInstance().rejectCall(mCall.getCallId(), true, message);
+        getUi().dismissPopup();
     }
 
     interface AnswerUi extends Ui {
         public void showAnswerUi(boolean show);
+        public void showTextButton(boolean show);
+        public boolean isMessageDialogueShowing();
+        public void showMessageDialogue();
+        public void dismissPopup();
+        public void configureMessageDialogue(ArrayList<String> textResponses);
     }
 }

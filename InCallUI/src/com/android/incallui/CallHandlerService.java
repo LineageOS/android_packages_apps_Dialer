@@ -26,7 +26,10 @@ import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.ICallCommandService;
 import com.android.services.telephony.common.ICallHandlerService;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Service used to listen for call state changes.
@@ -35,6 +38,7 @@ public class CallHandlerService extends Service {
 
     private static final int ON_UPDATE_CALL = 1;
     private static final int ON_UPDATE_MULTI_CALL = 2;
+    private static final int ON_UPDATE_CALL_WITH_TEXT_RESPONSES = 3;
 
     private CallList mCallList;
     private Handler mMainHandler;
@@ -69,6 +73,15 @@ public class CallHandlerService extends Service {
         @Override
         public void onDisconnect(Call call) {
             mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_CALL, 0, 0, call));
+        }
+
+        @Override
+        public void onIncoming(Call call, List<String> textResponses) {
+            // TODO(klp): Add text responses to the call object.
+            Map.Entry<Call, List<String> > incomingCall = new AbstractMap.SimpleEntry<Call,
+                    List<String> >(call, textResponses);
+            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_CALL_WITH_TEXT_RESPONSES,
+                    0, 0, incomingCall));
         }
 
         @Override
@@ -108,6 +121,9 @@ public class CallHandlerService extends Service {
                 break;
             case ON_UPDATE_MULTI_CALL:
                 mCallList.onUpdate((List<Call>) msg.obj);
+                break;
+            case ON_UPDATE_CALL_WITH_TEXT_RESPONSES:
+                mCallList.onUpdate((AbstractMap.SimpleEntry<Call, List<String> >) msg.obj);
                 break;
             default:
                 break;

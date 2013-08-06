@@ -56,9 +56,9 @@ public class CallCommandClient {
         }
     }
 
-    public void rejectCall(int callId) {
+    public void rejectCall(int callId, boolean rejectWithMessage, String message) {
         try {
-            mCommandService.rejectCall(callId);
+            mCommandService.rejectCall(callId, rejectWithMessage, message);
         } catch (RemoteException e) {
             Logger.e(this, "Error rejecting call.", e);
         }

@@ -25,6 +25,8 @@ import com.google.common.collect.ImmutableMap;
 
 import com.android.services.telephony.common.Call;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +51,8 @@ public class CallList {
     private static CallList sInstance;
 
     private final HashMap<Integer, Call> mCallMap = Maps.newHashMap();
+    private final HashMap<Integer, ArrayList<String>> mCallTextReponsesMap =
+            Maps.newHashMap();
     private final Set<Listener> mListeners = Sets.newArraySet();
 
     /**
@@ -74,6 +78,19 @@ public class CallList {
         Logger.d(this, "onUpdate - " + safeCallString(call));
 
         updateCallInMap(call);
+
+        notifyListenersOfChange();
+    }
+
+    /**
+     * Called when a single call has changed.
+     */
+    public void onUpdate(AbstractMap.SimpleEntry<Call, List<String> > incomingCall) {
+        Logger.d(this, "onUpdate - " + safeCallString(incomingCall.getKey()));
+
+        updateCallInMap(incomingCall.getKey());
+        updateCallTextMap(incomingCall.getKey(), incomingCall.getValue());
+
         notifyListenersOfChange();
     }
 
@@ -88,6 +105,7 @@ public class CallList {
             Logger.d(this, "\t" + safeCallString(call));
 
             updateCallInMap(call);
+            updateCallTextMap(call, null);
         }
 
         notifyListenersOfChange();
@@ -158,6 +176,10 @@ public class CallList {
         return false;
     }
 
+    public ArrayList<String> getTextResponses(Call call) {
+        return mCallTextReponsesMap.get(call.getCallId());
+    }
+
     /**
      * Returns first call found in the call map with the specified state.
      */
@@ -207,6 +229,20 @@ public class CallList {
             mCallMap.put(id, call);
         } else if (mCallMap.containsKey(id)) {
             mCallMap.remove(id);
+        }
+    }
+
+    private void updateCallTextMap(Call call, List<String> textResponses) {
+        Preconditions.checkNotNull(call);
+
+        final Integer id = new Integer(call.getCallId());
+
+        if (!isCallDead(call)) {
+            if (textResponses != null) {
+                mCallTextReponsesMap.put(id, (ArrayList<String>) textResponses);
+            }
+        } else if (mCallMap.containsKey(id)) {
+            mCallTextReponsesMap.remove(id);
         }
     }
 
