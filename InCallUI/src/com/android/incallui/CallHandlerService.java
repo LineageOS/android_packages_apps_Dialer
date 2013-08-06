@@ -76,6 +76,14 @@ public class CallHandlerService extends Service {
             // TODO(klp): Add use of fullUpdate to message
             mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_MULTI_CALL, 0, 0, calls));
         }
+
+        @Override
+        public void onAudioModeChange(int mode) {
+        }
+
+        @Override
+        public void onAudioModeSupportChange(int modeMask) {
+        }
     };
 
     /**
