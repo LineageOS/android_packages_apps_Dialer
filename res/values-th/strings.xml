@@ -114,8 +114,7 @@
     <string name="description_call" msgid="3443678121983852666">"โทรหา <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"ส่งข้อความไปที่ <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"ข้อความเสียงที่ยังไม่ได้ฟัง"</string>
-    <!-- no translation found for description_start_voice_search (520539488194946012) -->
-    <skip />
+    <string name="description_start_voice_search" msgid="520539488194946012">"เริ่มต้นการค้นหาด้วยเสียง"</string>
     <string name="call_log_empty_gecode" msgid="5588904744812100846">"-"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"โทร <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"ไม่ทราบ"</string>
@@ -142,12 +141,8 @@
     <string name="show_all_contacts" msgid="1732256558071778056">"แสดงรายชื่อในสมุดโทรศัพท์ทั้งหมด"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"แสดงเฉพาะรายชื่อที่ชื่นชอบ"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ประวัติ"</string>
-    <!-- no translation found for show_all_contacts_title (8395378484578221791) -->
-    <skip />
-    <!-- no translation found for show_all_contacts_button_text (8057452310403090131) -->
-    <skip />
-    <!-- no translation found for favorite_hidden (4837366417440391323) -->
-    <skip />
-    <!-- no translation found for favorite_hidden_undo (2508998611039406474) -->
-    <skip />
+    <string name="show_all_contacts_title" msgid="8395378484578221791">"ที่อยู่ติดต่อทั้งหมด"</string>
+    <string name="show_all_contacts_button_text" msgid="8057452310403090131">"ที่อยู่ติดต่อทั้งหมด"</string>
+    <string name="favorite_hidden" msgid="4837366417440391323">"ซ่อนจากรายการโปรด"</string>
+    <string name="favorite_hidden_undo" msgid="2508998611039406474">"เลิกทำ"</string>
 </resources>

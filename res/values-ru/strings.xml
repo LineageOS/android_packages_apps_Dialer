@@ -114,8 +114,7 @@
     <string name="description_call" msgid="3443678121983852666">"Позвонить: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Отправить текстовое сообщение: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Непрослушанные сообщения голосовой почты"</string>
-    <!-- no translation found for description_start_voice_search (520539488194946012) -->
-    <skip />
+    <string name="description_start_voice_search" msgid="520539488194946012">"Начать голосовой поиск"</string>
     <string name="call_log_empty_gecode" msgid="5588904744812100846">"-"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Позвонить: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Неизвестно"</string>
@@ -142,12 +141,8 @@
     <string name="show_all_contacts" msgid="1732256558071778056">"Все контакты"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Только часто используемые"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"История"</string>
-    <!-- no translation found for show_all_contacts_title (8395378484578221791) -->
-    <skip />
-    <!-- no translation found for show_all_contacts_button_text (8057452310403090131) -->
-    <skip />
-    <!-- no translation found for favorite_hidden (4837366417440391323) -->
-    <skip />
-    <!-- no translation found for favorite_hidden_undo (2508998611039406474) -->
-    <skip />
+    <string name="show_all_contacts_title" msgid="8395378484578221791">"Все контакты"</string>
+    <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Все контакты"</string>
+    <string name="favorite_hidden" msgid="4837366417440391323">"Контакт скрыт"</string>
+    <string name="favorite_hidden_undo" msgid="2508998611039406474">"Отмена"</string>
 </resources>
