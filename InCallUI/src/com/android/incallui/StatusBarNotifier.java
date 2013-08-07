@@ -141,7 +141,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         Logger.d(this, "updateInCallNotification(allowFullScreenIntent = "
                      + allowFullScreenIntent + ")...");
 
-        if (InCallState.INCALL != state && InCallState.INCOMING != state) {
+        if (!state.isConnectingOrConnected()) {
             cancelInCall();
             return;
         }
@@ -153,11 +153,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
          * Set up the Intents that will get fires when the user interacts with the notificaiton.
          */
         builder.setContentIntent(inCallPendingIntent);
-        if (InCallState.INCOMING == state) {
-            if (allowFullScreenIntent) {
-                configureFullScreenIntent(builder, inCallPendingIntent);
-            }
-        } else if (InCallState.INCALL == state) {
+        if (allowFullScreenIntent) {
+            configureFullScreenIntent(builder, inCallPendingIntent);
+        }
+
+        // TODO(klp): Does this need to include OUTGOING state as well?
+        if (InCallState.INCALL == state) {
             addActiveCallIntents(builder);
         }
 

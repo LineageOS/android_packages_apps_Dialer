@@ -94,6 +94,13 @@ public class CallHandlerService extends Service {
         @Override
         public void onUpdate(List<Call> calls, boolean fullUpdate) {
             Logger.d(CallHandlerService.this, "onUpdate ");
+
+            if (Logger.VERBOSE) {
+                for (Call c : calls) {
+                    Logger.v(this, "Call: " + c);
+                }
+            }
+
             // TODO(klp): Add use of fullUpdate to message
             mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_MULTI_CALL, 0, 0, calls));
         }

@@ -72,6 +72,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
 
         if (state == InCallState.INCOMING) {
             primary = callList.getIncomingCall();
+        } else if (state == InCallState.OUTGOING) {
+            primary = callList.getOutgoingCall();
+
+            // Safe to assume that the primary call is valid since we would not be in the
+            // OUTGOING state without an outgoing call.
+            secondary = callList.getBackgroundCall();
         } else if (state == InCallState.INCALL) {
             primary = callList.getActiveCall();
             if (primary != null) {

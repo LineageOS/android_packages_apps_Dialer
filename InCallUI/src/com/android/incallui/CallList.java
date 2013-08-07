@@ -38,15 +38,6 @@ import java.util.Set;
  * Primary lister of changes to this class is InCallPresenter.
  */
 public class CallList {
-    private static final Map<Integer, String> STATE_MAP = ImmutableMap.<Integer, String>builder()
-            .put(Call.State.ACTIVE, "ACTIVE")
-            .put(Call.State.CALL_WAITING, "CALL_WAITING")
-            .put(Call.State.DIALING, "DIALING")
-            .put(Call.State.IDLE, "IDLE")
-            .put(Call.State.INCOMING, "INCOMING")
-            .put(Call.State.ONHOLD, "ONHOLD")
-            .put(Call.State.INVALID, "INVALID")
-            .build();
 
     private static CallList sInstance;
 
@@ -75,7 +66,7 @@ public class CallList {
      * Called when a single call has changed.
      */
     public void onUpdate(Call call) {
-        Logger.d(this, "onUpdate - " + safeCallString(call));
+        Logger.d(this, "onUpdate - " + call);
 
         updateCallInMap(call);
 
@@ -86,7 +77,7 @@ public class CallList {
      * Called when a single call has changed.
      */
     public void onUpdate(AbstractMap.SimpleEntry<Call, List<String> > incomingCall) {
-        Logger.d(this, "onUpdate - " + safeCallString(incomingCall.getKey()));
+        Logger.d(this, "onUpdate - " + incomingCall.getKey());
 
         updateCallInMap(incomingCall.getKey());
         updateCallTextMap(incomingCall.getKey(), incomingCall.getValue());
@@ -102,7 +93,7 @@ public class CallList {
 
         Preconditions.checkNotNull(callsToUpdate);
         for (Call call : callsToUpdate) {
-            Logger.d(this, "\t" + safeCallString(call));
+            Logger.d(this, "\t" + call);
 
             updateCallInMap(call);
             updateCallTextMap(call, null);
@@ -126,7 +117,7 @@ public class CallList {
     }
 
     /**
-     * TODO(klp): Change so that this function is not needed. Instead of assuming there is an active
+     * TODO: Change so that this function is not needed. Instead of assuming there is an active
      * call, the code should rely on the status of a specific Call and allow the presenters to
      * update the Call object when the active call changes.
      */
@@ -136,6 +127,10 @@ public class CallList {
             retval = getActiveCall();
         }
         return retval;
+    }
+
+    public Call getOutgoingCall() {
+        return getFirstCallWithState(Call.State.DIALING);
     }
 
     public Call getActiveCall() {
@@ -205,8 +200,7 @@ public class CallList {
             }
         }
 
-        Logger.d(this, "Found " + (retval == null ? "no " : "") + "call with state: " +
-                STATE_MAP.get(state));
+        Logger.d(this, "Found call: " + retval);
         return retval;
     }
 
@@ -249,18 +243,6 @@ public class CallList {
     private boolean isCallDead(Call call) {
         final int state = call.getState();
         return Call.State.IDLE == state || Call.State.INVALID == state;
-    }
-
-    /**
-     * Creates a log-safe string for call objects.
-     */
-    private String safeCallString(Call call) {
-        final StringBuffer buffer = new StringBuffer();
-        buffer.append("Call (")
-                .append(call.getCallId())
-                .append("), ")
-                .append(STATE_MAP.get(call.getState()));
-        return buffer.toString();
     }
 
     /**

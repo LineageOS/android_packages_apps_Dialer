@@ -102,6 +102,8 @@ public class InCallPresenter implements CallList.Listener {
 
         if (callList.getIncomingCall() != null) {
             newState = InCallState.INCOMING;
+        } else if (callList.getOutgoingCall() != null) {
+            newState = InCallState.OUTGOING;
         } else if (callList.getActiveCall() != null ||
                 callList.getBackgroundCall() != null) {
             newState = InCallState.INCALL;
@@ -182,7 +184,10 @@ public class InCallPresenter implements CallList.Listener {
         INCOMING,
 
         // In-call experience is showing
-        INCALL;
+        INCALL,
+
+        // User is dialing out
+        OUTGOING;
 
         public boolean isIncoming() {
             return (this == INCOMING);
@@ -190,6 +195,12 @@ public class InCallPresenter implements CallList.Listener {
 
         public boolean isHidden() {
             return (this == HIDDEN);
+        }
+
+        public boolean isConnectingOrConnected() {
+            return (this == INCOMING ||
+                    this == OUTGOING ||
+                    this == INCALL);
         }
     }
 

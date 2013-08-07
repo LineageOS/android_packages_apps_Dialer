@@ -56,9 +56,14 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     @Override
     public void onStateChange(InCallState state, CallList callList) {
-        getUi().setVisible(state == InCallState.INCALL);
+        final boolean isVisible = state.isConnectingOrConnected() &&
+                !state.isIncoming();
 
-        if (state == InCallState.INCALL) {
+        getUi().setVisible(isVisible);
+
+        if (state == InCallState.OUTGOING) {
+            mCall = callList.getOutgoingCall();
+        } else if (state == InCallState.INCALL) {
             mCall = callList.getActiveOrBackgroundCall();
         } else {
             mCall = null;
