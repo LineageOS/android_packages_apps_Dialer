@@ -190,11 +190,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 public void onHomeInActionBarSelected() {
                     exitSearchUi();
                 }
-
-                @Override
-                public void onCallNumberDirectly(String phoneNumber) {
-
-                }
     };
 
     /**
