@@ -18,6 +18,8 @@ package com.android.incallui;
 
 import android.content.ContentUris;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.ContactsContract.Contacts;
 import android.text.TextUtils;
@@ -31,10 +33,26 @@ import com.android.services.telephony.common.Call;
  * Presenter for the Call Card Fragment.
  * This class listens for changes to InCallState and passes it along to the fragment.
  */
-public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
-        implements InCallStateListener, CallerInfoAsyncQuery.OnQueryCompleteListener {
+public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> implements
+        InCallStateListener, CallerInfoAsyncQuery.OnQueryCompleteListener,
+        ContactsAsyncHelper.OnImageLoadCompleteListener {
+
+    private static final int TOKEN_UPDATE_PHOTO_FOR_CALL_STATE = 0;
 
     private Context mContext;
+
+    /**
+     * Uri being used to load contact photo for mPhoto. Will be null when nothing is being loaded,
+     * or a photo is already loaded.
+     */
+    private Uri mLoadingPersonUri;
+
+    // Track the state for the photo.
+    private ContactsAsyncHelper.ImageTracker mPhotoTracker;
+
+    public CallCardPresenter() {
+        mPhotoTracker = new ContactsAsyncHelper.ImageTracker();
+    }
 
     @Override
     public void onUiReady(CallCardUi ui) {
@@ -87,6 +105,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setNumberLabel(String label);
         void setName(String name);
         void setName(String name, boolean isNumber);
+        void setImage(int resource);
+        void setImage(Drawable drawable);
+        void setImage(Bitmap bitmap);
         void setSecondaryCallInfo(boolean show, String number);
     }
 
@@ -116,11 +137,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private void updateDisplayByCallerInfo(Call call, CallerInfo info, int presentation,
             boolean isPrimary) {
 
-        //Todo (klp): Either enable or get rid of this
-        // inform the state machine that we are displaying a photo.
-        //mPhotoTracker.setPhotoRequest(info);
-        //mPhotoTracker.setPhotoState(ContactsAsyncHelper.ImageTracker.DISPLAY_IMAGE);
-
+        // Inform the state machine that we are displaying a photo.
+        mPhotoTracker.setPhotoRequest(info);
+        mPhotoTracker.setPhotoState(ContactsAsyncHelper.ImageTracker.DISPLAY_IMAGE);
 
         // The actual strings we're going to display onscreen:
         String displayName;
@@ -235,7 +254,84 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             updateInfoUiForPrimary(displayName, displayNumber, label);
         }
 
+        // If the photoResource is filled in for the CallerInfo, (like with the
+        // Emergency Number case), then we can just set the photo image without
+        // requesting for an image load. Please refer to CallerInfoAsyncQuery.java
+        // for cases where CallerInfo.photoResource may be set. We can also avoid
+        // the image load step if the image data is cached.
+        final CallCardUi ui = getUi();
+        if (info == null) return;
+
+        // This will only be true for emergency numbers
+        if (info.photoResource != 0) {
+            ui.setImage(info.photoResource);
+        } else if (info.isCachedPhotoCurrent) {
+            if (info.cachedPhoto != null) {
+                ui.setImage(info.cachedPhoto);
+            } else {
+                ui.setImage(R.drawable.picture_unknown);
+            }
+        } else {
+            if (personUri == null) {
+                Logger.v(this, "personUri is null. Just use unknown picture.");
+                ui.setImage(R.drawable.picture_unknown);
+            } else if (personUri.equals(mLoadingPersonUri)) {
+                Logger.v(this, "The requested Uri (" + personUri + ") is being loaded already."
+                        + " Ignore the duplicate load request.");
+            } else {
+                // Remember which person's photo is being loaded right now so that we won't issue
+                // unnecessary load request multiple times, which will mess up animation around
+                // the contact photo.
+                mLoadingPersonUri = personUri;
+
+                // Load the image with a callback to update the image state.
+                // When the load is finished, onImageLoadComplete() will be called.
+                ContactsAsyncHelper.startObtainPhotoAsync(TOKEN_UPDATE_PHOTO_FOR_CALL_STATE,
+                        mContext, personUri, this, call);
+
+                // If the image load is too slow, we show a default avatar icon afterward.
+                // If it is fast enough, this message will be canceled on onImageLoadComplete().
+                // TODO (klp): Figure out if this handler is still needed.
+                // mHandler.removeMessages(MESSAGE_SHOW_UNKNOWN_PHOTO);
+                // mHandler.sendEmptyMessageDelayed(MESSAGE_SHOW_UNKNOWN_PHOTO, MESSAGE_DELAY);
+            }
+        }
         // TODO (klp): Update other fields - photo, sip label, etc.
+    }
+
+    /**
+     * Implemented for ContactsAsyncHelper.OnImageLoadCompleteListener interface.
+     * make sure that the call state is reflected after the image is loaded.
+     */
+    @Override
+    public void onImageLoadComplete(int token, Drawable photo, Bitmap photoIcon, Object cookie) {
+        // mHandler.removeMessages(MESSAGE_SHOW_UNKNOWN_PHOTO);
+        if (mLoadingPersonUri != null) {
+            // Start sending view notification after the current request being done.
+            // New image may possibly be available from the next phone calls.
+            //
+            // TODO: may be nice to update the image view again once the newer one
+            // is available on contacts database.
+            // TODO (klp): What is this, and why does it need the write_contacts permission?
+            // CallerInfoUtils.sendViewNotificationAsync(mContext, mLoadingPersonUri);
+        } else {
+            // This should not happen while we need some verbose info if it happens..
+            Logger.v(this, "Person Uri isn't available while Image is successfully loaded.");
+        }
+        mLoadingPersonUri = null;
+
+        Call call = (Call) cookie;
+
+        // TODO (klp): Handle conference calls
+
+        final CallCardUi ui = getUi();
+        if (photo != null) {
+            ui.setImage(photo);
+        } else if (photoIcon != null) {
+            ui.setImage(photoIcon);
+        } else {
+            ui.setImage(R.drawable.picture_unknown);
+        }
     }
 
     /**

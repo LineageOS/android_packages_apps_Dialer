@@ -17,12 +17,16 @@
 package com.android.incallui;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -34,6 +38,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     private TextView mPhoneNumber;
     private TextView mNumberLabel;
     private TextView mName;
+    private ImageView mPhoto;
 
 
     private ViewStub mSecondaryCallInfo;
@@ -56,6 +61,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
         mName = (TextView) view.findViewById(R.id.name);
         mNumberLabel = (TextView) view.findViewById(R.id.label);
         mSecondaryCallInfo = (ViewStub) view.findViewById(R.id.secondary_call_info);
+        mPhoto = (ImageView) view.findViewById(R.id.photo);
 
         // This method call will begin the callbacks on CallCardUi. We need to ensure
         // everything needed for the callbacks is set up before this is called.
@@ -137,4 +143,29 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
         }
     }
 
+    @Override
+    public void setImage(int resource) {
+        setImage(getActivity().getResources().getDrawable(resource));
+    }
+
+    @Override
+    public void setImage(Drawable drawable) {
+        setDrawableToImageView(mPhoto, drawable);
+    }
+
+    @Override
+    public void setImage(Bitmap bitmap) {
+        setImage(new BitmapDrawable(getActivity().getResources(), bitmap));
+    }
+
+    private void setDrawableToImageView(ImageView view, Drawable drawable) {
+        final Drawable current = view.getDrawable();
+        if (current == null) {
+            view.setImageDrawable(drawable);
+            AnimationUtils.Fade.show(view);
+        } else {
+            AnimationUtils.startCrossFade(view, current, drawable);
+            mPhoto.setVisibility(View.VISIBLE);
+        }
+    }
 }
