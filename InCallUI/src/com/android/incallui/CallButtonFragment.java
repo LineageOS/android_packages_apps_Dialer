@@ -119,6 +119,7 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
 
     @Override
     public void onDestroyView() {
+        super.onDestroyView();
         getPresenter().onUiUnready(this);
     }
 

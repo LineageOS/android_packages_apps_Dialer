@@ -41,9 +41,9 @@ import android.util.Log;
         }
     }
 
-    public static void v(String tag, String msg) {
-        if (VERBOSE) {
-            Log.v(TAG, tag + msg);
+    public static void d(Object obj, String str1, Object str2) {
+        if (DEBUG) {
+            Log.d(TAG, getPrefix(obj) + str1 + str2);
         }
     }
 
@@ -61,6 +61,12 @@ import android.util.Log;
         Log.e(TAG, tag + msg);
     }
 
+    public static void v(Object obj, String str1, Object str2) {
+        if (VERBOSE) {
+            Log.d(TAG, getPrefix(obj) + str1 + str2);
+        }
+    }
+
     public static void e(Object obj, String msg, Exception e) {
         Log.e(TAG, getPrefix(obj) + msg, e);
     }
@@ -75,6 +81,10 @@ import android.util.Log;
 
     public static void i(Object obj, String msg) {
         Log.i(TAG, getPrefix(obj) + msg);
+    }
+
+    public static void wtf(Object obj, String msg) {
+        Log.wtf(TAG, getPrefix(obj) + msg);
     }
 
     private static String getPrefix(Object obj) {

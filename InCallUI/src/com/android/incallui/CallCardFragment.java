@@ -22,12 +22,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.services.telephony.common.Call;
 
 /**
  * Fragment for call card.
@@ -39,8 +42,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     private TextView mNumberLabel;
     private TextView mName;
     private ImageView mPhoto;
-
-
+    private TextView mCallStateLabel;
     private ViewStub mSecondaryCallInfo;
     private TextView mSecondaryCallName;
 
@@ -63,6 +65,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
         mNumberLabel = (TextView) view.findViewById(R.id.label);
         mSecondaryCallInfo = (ViewStub) view.findViewById(R.id.secondary_call_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
+        mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
 
         // This method call will begin the callbacks on CallCardUi. We need to ensure
         // everything needed for the callbacks is set up before this is called.
@@ -71,6 +74,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
 
     @Override
     public void onDestroyView() {
+        super.onDestroyView();
         getPresenter().onUiUnready(this);
     }
 
@@ -137,6 +141,109 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
         } else {
             mNumberLabel.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void setCallState(int state, Call.DisconnectCause cause) {
+        String callStateLabel = null;
+
+        // States other than disconnected not yet supported
+        if (state == Call.State.DISCONNECTED) {
+            callStateLabel = getCallFailedString(cause);
+        }
+
+        Logger.d(this, "setCallState ", callStateLabel);
+
+        if (!TextUtils.isEmpty(callStateLabel)) {
+            mCallStateLabel.setVisibility(View.VISIBLE);
+            mCallStateLabel.setText(callStateLabel);
+        } else {
+            mCallStateLabel.setVisibility(View.GONE);
+            // Gravity is aligned left when receiving an incoming call in landscape.
+            // In that rare case, the gravity needs to be reset to the right.
+            // Also, setText("") is used since there is a delay in making the view GONE,
+            // so the user will otherwise see the text jump to the right side before disappearing.
+            if(mCallStateLabel.getGravity() != Gravity.END) {
+                mCallStateLabel.setText("");
+                mCallStateLabel.setGravity(Gravity.END);
+            }
+        }
+    }
+
+    /**
+     * Maps the disconnect cause to a resource string.
+     */
+    private String getCallFailedString(Call.DisconnectCause cause) {
+        int resID = R.string.card_title_call_ended;
+
+        // TODO: The card *title* should probably be "Call ended" in all
+        // cases, but if the DisconnectCause was an error condition we should
+        // probably also display the specific failure reason somewhere...
+
+        switch (cause) {
+            case BUSY:
+                resID = R.string.callFailed_userBusy;
+                break;
+
+            case CONGESTION:
+                resID = R.string.callFailed_congestion;
+                break;
+
+            case TIMED_OUT:
+                resID = R.string.callFailed_timedOut;
+                break;
+
+            case SERVER_UNREACHABLE:
+                resID = R.string.callFailed_server_unreachable;
+                break;
+
+            case NUMBER_UNREACHABLE:
+                resID = R.string.callFailed_number_unreachable;
+                break;
+
+            case INVALID_CREDENTIALS:
+                resID = R.string.callFailed_invalid_credentials;
+                break;
+
+            case SERVER_ERROR:
+                resID = R.string.callFailed_server_error;
+                break;
+
+            case OUT_OF_NETWORK:
+                resID = R.string.callFailed_out_of_network;
+                break;
+
+            case LOST_SIGNAL:
+            case CDMA_DROP:
+                resID = R.string.callFailed_noSignal;
+                break;
+
+            case LIMIT_EXCEEDED:
+                resID = R.string.callFailed_limitExceeded;
+                break;
+
+            case POWER_OFF:
+                resID = R.string.callFailed_powerOff;
+                break;
+
+            case ICC_ERROR:
+                resID = R.string.callFailed_simError;
+                break;
+
+            case OUT_OF_SERVICE:
+                resID = R.string.callFailed_outOfService;
+                break;
+
+            case INVALID_NUMBER:
+            case UNOBTAINABLE_NUMBER:
+                resID = R.string.callFailed_unobtainable_number;
+                break;
+
+            default:
+                resID = R.string.card_title_call_ended;
+                break;
+        }
+        return this.getView().getContext().getString(resID);
     }
 
     private void showAndInitializeSecondaryCallInfo() {

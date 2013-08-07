@@ -70,6 +70,7 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter> implements
 
     @Override
     public void onDestroyView() {
+        super.onDestroyView();
         getPresenter().onUiUnready(this);
     }
 

@@ -42,6 +42,7 @@ public class CallHandlerService extends Service {
     private static final int ON_UPDATE_CALL_WITH_TEXT_RESPONSES = 3;
     private static final int ON_AUDIO_MODE = 4;
     private static final int ON_SUPPORTED_AUDIO_MODE = 5;
+    private static final int ON_DISCONNECT_CALL = 6;
 
 
     private CallList mCallList;
@@ -79,7 +80,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onDisconnect(Call call) {
             Logger.d(CallHandlerService.this, "onDisconnected");
-            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_CALL, 0, 0, call));
+            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_DISCONNECT_CALL, 0, 0, call));
         }
 
         @Override
@@ -148,6 +149,9 @@ public class CallHandlerService extends Service {
                 break;
             case ON_UPDATE_CALL_WITH_TEXT_RESPONSES:
                 mCallList.onUpdate((AbstractMap.SimpleEntry<Call, List<String> >) msg.obj);
+                break;
+            case ON_DISCONNECT_CALL:
+                mCallList.onDisconnect((Call) msg.obj);
                 break;
             case ON_AUDIO_MODE:
                 mAudioModeProvider.onAudioModeChange(msg.arg1);

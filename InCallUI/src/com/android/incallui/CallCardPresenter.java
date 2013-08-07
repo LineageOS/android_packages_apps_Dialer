@@ -75,17 +75,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
         } else if (state == InCallState.OUTGOING) {
             primary = callList.getOutgoingCall();
 
-            // Safe to assume that the primary call is valid since we would not be in the
-            // OUTGOING state without an outgoing call.
-            secondary = callList.getBackgroundCall();
+            // getCallToDisplay doesn't go through outgoing or incoming calls. It will return the
+            // highest priority call to display as the secondary call.
+            secondary = getCallToDisplay(callList, null);
         } else if (state == InCallState.INCALL) {
-            primary = callList.getActiveCall();
-            if (primary != null) {
-                secondary = callList.getBackgroundCall();
-            } else {
-                primary = callList.getBackgroundCall();
-                secondary = callList.getSecondBackgroundCall();
-            }
+            primary = getCallToDisplay(callList, null);
+            secondary = getCallToDisplay(callList, primary);
         }
 
         Logger.d(this, "Primary call: " + primary);
@@ -96,12 +91,55 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
                 null, this);
         updateDisplayByCallerInfo(primary, primaryCallInfo, primary.getNumberPresentation(), true);
 
+        if (primary != null) {
+            ui.setNumber(primary.getNumber());
+            ui.setCallState(primary.getState(), primary.getDisconnectCause());
+        } else {
+            ui.setNumber("");
+            ui.setCallState(Call.State.INVALID, Call.DisconnectCause.UNKNOWN);
+        }
+
         // Set secondary call data
         if (secondary != null) {
             ui.setSecondaryCallInfo(true, secondary.getNumber());
         } else {
             ui.setSecondaryCallInfo(false, null);
         }
+    }
+
+    /**
+     * Get the highest priority call to display.
+     * Goes through the calls and chooses which to return based on priority of which type of call
+     * to display to the user. Callers can use the "ignore" feature to get the second best call
+     * by passing a previously found primary call as ignore.
+     *
+     * @param ignore A call to ignore if found.
+     */
+    private Call getCallToDisplay(CallList callList, Call ignore) {
+
+        // Disconnected calls get primary position to let user know quickly
+        // what call has disconnected. Disconnected calls are very short lived.
+        Call retval = callList.getDisconnectedCall();
+        if (retval != null && retval != ignore) {
+            return retval;
+        }
+
+        // Active calls come second.  An active call always gets precedent.
+        retval = callList.getActiveCall();
+        if (retval != null && retval != ignore) {
+            return retval;
+        }
+
+        // Then we go to background call (calls on hold)
+        retval = callList.getBackgroundCall();
+        if (retval != null && retval != ignore) {
+            return retval;
+        }
+
+        // Lastly, we go to a second background call.
+        retval = callList.getSecondBackgroundCall();
+
+        return retval;
     }
 
     public interface CallCardUi extends Ui {
@@ -115,6 +153,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
         void setImage(Drawable drawable);
         void setImage(Bitmap bitmap);
         void setSecondaryCallInfo(boolean show, String number);
+        void setCallState(int state, Call.DisconnectCause cause);
     }
 
     @Override

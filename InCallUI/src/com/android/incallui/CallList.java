@@ -23,6 +23,9 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
+import android.os.Handler;
+import android.os.Message;
+
 import com.android.services.telephony.common.Call;
 
 import java.util.AbstractMap;
@@ -38,6 +41,10 @@ import java.util.Set;
  * Primary lister of changes to this class is InCallPresenter.
  */
 public class CallList {
+
+    private static final int DISCONNECTED_CALL_TIMEOUT_MS = 3000;
+
+    private static final int EVENT_DISCONNECTED_TIMEOUT = 1;
 
     private static CallList sInstance;
 
@@ -66,7 +73,17 @@ public class CallList {
      * Called when a single call has changed.
      */
     public void onUpdate(Call call) {
-        Logger.d(this, "onUpdate - " + call);
+        Logger.d(this, "onUpdate - ", call);
+
+        updateCallInMap(call);
+        notifyListenersOfChange();
+    }
+
+    /**
+     * Called when a single call disconnects.
+     */
+    public void onDisconnect(Call call) {
+        Logger.d(this, "onDisconnect: ", call);
 
         updateCallInMap(call);
 
@@ -141,6 +158,10 @@ public class CallList {
         return getFirstCallWithState(Call.State.ONHOLD);
     }
 
+    public Call getDisconnectedCall() {
+        return getFirstCallWithState(Call.State.DISCONNECTED);
+    }
+
     public Call getSecondBackgroundCall() {
         return getCallWithState(Call.State.ONHOLD, 1);
     }
@@ -200,7 +221,7 @@ public class CallList {
             }
         }
 
-        Logger.d(this, "Found call: " + retval);
+        Logger.v(this, "Found call: ", retval);
         return retval;
     }
 
@@ -219,7 +240,21 @@ public class CallList {
 
         final Integer id = new Integer(call.getCallId());
 
-        if (!isCallDead(call)) {
+        if (call.getState() == Call.State.DISCONNECTED) {
+            // For disconnected calls, we want to keep them alive for a few seconds so that the UI
+            // has a chance to display anything it needs when a call is disconnected.
+
+            // Set up a timer to destroy the call after X seconds.
+            Message msg = mHandler.obtainMessage(EVENT_DISCONNECTED_TIMEOUT, call);
+            boolean sent = mHandler.sendMessageDelayed(msg, DISCONNECTED_CALL_TIMEOUT_MS);
+
+            Logger.d(this, "Retval from sendMessageDelayed: ", Boolean.toString(sent));
+
+            // Don't add disconnected calls that do not already exist in the map
+            if (mCallMap.containsKey(id)) {
+                mCallMap.put(id, call);
+            }
+        } else if (!isCallDead(call)) {
             mCallMap.put(id, call);
         } else if (mCallMap.containsKey(id)) {
             mCallMap.remove(id);
@@ -244,6 +279,33 @@ public class CallList {
         final int state = call.getState();
         return Call.State.IDLE == state || Call.State.INVALID == state;
     }
+
+    /**
+     * Sets up a call for deletion and notifies listeners of change.
+     */
+    private void finishDisconnectedCall(Call call) {
+        call.setState(Call.State.IDLE);
+        updateCallInMap(call);
+        notifyListenersOfChange();
+    }
+
+    /**
+     * Handles the timeout for destroying disconnected calls.
+     */
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case EVENT_DISCONNECTED_TIMEOUT:
+                    Logger.d(this, "EVENT_DISCONNECTED_TIMEOUT ", msg.obj);
+                    finishDisconnectedCall((Call) msg.obj);
+                    break;
+                default:
+                    Logger.wtf(this, "Message not expected: " + msg.what);
+                    break;
+            }
+        }
+    };
 
     /**
      * Listener interface for any class that wants to be notified of changes

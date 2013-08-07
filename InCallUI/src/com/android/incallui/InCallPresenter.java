@@ -105,7 +105,8 @@ public class InCallPresenter implements CallList.Listener {
         } else if (callList.getOutgoingCall() != null) {
             newState = InCallState.OUTGOING;
         } else if (callList.getActiveCall() != null ||
-                callList.getBackgroundCall() != null) {
+                callList.getBackgroundCall() != null ||
+                callList.getDisconnectedCall() != null) {
             newState = InCallState.INCALL;
         }
 
