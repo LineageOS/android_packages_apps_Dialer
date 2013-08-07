@@ -17,14 +17,15 @@ package com.android.dialer.list;
 
 import android.animation.ObjectAnimator;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.PinnedPositions;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +36,17 @@ import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.R;
 import com.android.contacts.common.list.ContactEntry;
+import com.android.contacts.common.list.ContactTileAdapter.DisplayType;
 import com.android.contacts.common.list.ContactTileView;
+import com.android.internal.annotations.VisibleForTesting;
+
+import com.google.common.collect.ComparisonChain;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * Also allows for a configurable number of columns as well as a maximum row of tiled contacts.
@@ -94,12 +103,25 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     private int mPhoneNumberIndex;
     private int mPhoneNumberTypeIndex;
     private int mPhoneNumberLabelIndex;
+    protected int mPinnedIndex;
+    protected int mContactIdForFrequentIndex;
 
-    private boolean mIsQuickContactEnabled = false;
     private final int mPaddingInPixels;
 
     /** Indicates whether a drag is in process. */
     private boolean mInDragging = false;
+
+    private static final int PIN_LIMIT = 20;
+
+    final Comparator<ContactEntry> mContactEntryComparator = new Comparator<ContactEntry>() {
+        @Override
+        public int compare(ContactEntry lhs, ContactEntry rhs) {
+            return ComparisonChain.start()
+                    .compare(lhs.pinned, rhs.pinned)
+                    .compare(lhs.name, rhs.name)
+                    .result();
+        }
+    };
 
     public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener,
             int numCols) {
@@ -143,10 +165,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         mColumnCount = columnCount;
     }
 
-    public void enableQuickContact(boolean enableQuickContact) {
-        mIsQuickContactEnabled = enableQuickContact;
-    }
-
     /**
      * Indicates whether a drag is in process.
      *
@@ -177,6 +195,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         mPhoneNumberIndex = ContactTileLoaderFactory.PHONE_NUMBER;
         mPhoneNumberTypeIndex = ContactTileLoaderFactory.PHONE_NUMBER_TYPE;
         mPhoneNumberLabelIndex = ContactTileLoaderFactory.PHONE_NUMBER_LABEL;
+        mPinnedIndex = ContactTileLoaderFactory.PINNED;
+        mContactIdForFrequentIndex = ContactTileLoaderFactory.CONTACT_ID_FOR_FREQUENT;
     }
 
     /**
@@ -213,14 +233,28 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
      */
     private void saveCursorToCache(Cursor cursor) {
         mContactEntries.clear();
+
         cursor.moveToPosition(-1);
         while (cursor.moveToNext()) {
             final long id = cursor.getLong(mIdIndex);
+
             final String photoUri = cursor.getString(mPhotoUriIndex);
             final String lookupKey = cursor.getString(mLookupIndex);
 
             final ContactEntry contact = new ContactEntry();
+
+            final int pinned = cursor.getInt(mPinnedIndex);
+            final int starred = cursor.getInt(mStarredIndex);
+
             final String name = cursor.getString(mNameIndex);
+
+            if (starred > 0) {
+                contact.id = id;
+            } else {
+                // The contact id for frequent contacts is stored in the .contact_id field rather
+                // than the _id field
+                contact.id = cursor.getLong(mContactIdForFrequentIndex);
+            }
             contact.name = (name != null) ? name : mResources.getString(R.string.missing_name);
             contact.status = cursor.getString(mStatusIndex);
             contact.photoUri = (photoUri != null ? Uri.parse(photoUri) : null);
@@ -233,8 +267,14 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
             contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
                     phoneNumberCustomLabel);
             contact.phoneNumber = cursor.getString(mPhoneNumberIndex);
+
+            contact.pinned = pinned;
             mContactEntries.add(contact);
         }
+
+        arrangeContactsByPinnedPosition(mContactEntries);
+
+        notifyDataSetChanged();
     }
 
     /**
@@ -367,7 +407,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     @Override
     public void notifyDataSetChanged() {
         if (DEBUG) {
-            Log.v(TAG, "nofigyDataSetChanged");
+            Log.v(TAG, "notifyDataSetChanged");
         }
         super.notifyDataSetChanged();
     }
@@ -381,20 +421,10 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
      */
     private void configureAnimationToView(ContactTileRow contactTileRowView, int position,
             int itemViewType) {
-        if (mInDragging) {
-            // If the one item above the row is being dragged, animates all following items to
-            // move up. If the item is a favorite tile, animate it to appear from right.
-            if (position >= getRowIndex(mDraggedEntryIndex)) {
-                if (itemViewType == ViewTypes.FREQUENT) {
-                    mTranslateVerticalAnimation.setTarget(contactTileRowView);
-                    mTranslateVerticalAnimation.setFloatValues(contactTileRowView.getHeight(), 0);
-                    mTranslateVerticalAnimation.clone().start();
-                } else {
-                    contactTileRowView.animateTilesAppearLeft(mDraggedEntryIndex -
-                            position * mColumnCount);
-                }
-            }
-        } else if (mDropEntryIndex != -1) {
+        // No need to animate anything if we are just entering a drag, because the blank
+        // entry takes the place of the dragged entry anyway.
+        if (mInDragging) return;
+        if (mDropEntryIndex != -1) {
             // If one item is dropped in front the row, animate all following rows to shift down.
             // If the item is a favorite tile, animate it to appear from left.
             if (position >= getRowIndex(mDropEntryIndex)) {
@@ -497,8 +527,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     public void popContactEntry(int index) {
         if (index >= 0 && index < mContactEntries.size()) {
             mDraggedEntry = mContactEntries.get(index);
+            mContactEntries.set(index, ContactEntry.BLANK_ENTRY);
             mDraggedEntryIndex = index;
-            mContactEntries.remove(index);
             notifyDataSetChanged();
         }
     }
@@ -509,17 +539,30 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
      * @param index Location where the contact will be dropped.
      */
     public void dropContactEntry(int index) {
+        boolean changed = false;
         if (mDraggedEntry != null) {
             if (index >= 0 && index <= mContactEntries.size()) {
-                mContactEntries.add(index, mDraggedEntry);
+                // Don't add the ContactEntry here (to prevent a double animation from occuring).
+                // When we receive a new cursor the list of contact entries will automatically be
+                // populated with the dragged ContactEntry at the correct spot.
                 mDropEntryIndex = index;
+                changed = true;
             } else if (mDraggedEntryIndex >= 0 && mDraggedEntryIndex <= mContactEntries.size()) {
                 /** If the index is invalid, falls back to the original position of the contact. */
-                mContactEntries.add(mDraggedEntryIndex, mDraggedEntry);
+                mContactEntries.set(mDraggedEntryIndex, mDraggedEntry);
                 mDropEntryIndex = mDraggedEntryIndex;
+                notifyDataSetChanged();
+            }
+
+            if (changed && mDropEntryIndex < PIN_LIMIT) {
+                final ContentValues cv = getReflowedPinnedPositions(mContactEntries, mDraggedEntry,
+                        mDraggedEntryIndex, mDropEntryIndex);
+                final Uri pinUri = PinnedPositions.UPDATE_URI.buildUpon().appendQueryParameter(
+                            PinnedPositions.STAR_WHEN_PINNING, "true").build();
+                // update the database here with the new pinned positions
+                mContext.getContentResolver().update(pinUri, cv, null, null);
             }
             mDraggedEntry = null;
-            notifyDataSetChanged();
         }
     }
 
@@ -542,14 +585,14 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     }
 
     /**
-     * Removes a contact entry from the cache.
+     * Removes a contact entry from the list.
      *
      * @return True is an item is removed. False is there is no item to be removed.
      */
     public boolean removeContactEntry() {
         if (mPotentialRemoveEntryIndex >= 0 && mPotentialRemoveEntryIndex < mContactEntries.size()) {
-            mContactEntries.remove(mPotentialRemoveEntryIndex);
-            notifyDataSetChanged();
+            final ContactEntry entry = mContactEntries.get(mPotentialRemoveEntryIndex);
+            unstarAndUnpinContact(entry.lookupKey);
             return true;
         }
         return false;
@@ -575,7 +618,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     /**
      * Acts as a row item composed of {@link ContactTileView}
      *
-     * TODO: FREQUENT doesn't really need it.  Just let {@link #getView} return
      */
     public class ContactTileRow extends FrameLayout {
         private int mItemViewType;
@@ -808,6 +850,124 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         public int getPosition() {
             return mPosition;
         }
+    }
+
+    /**
+     * Used when a contact is swiped away. This will both unstar and set pinned position of the
+     * contact to PinnedPosition.DEMOTED so that it doesn't show up anymore in the favorites list.
+     */
+    private void unstarAndUnpinContact(Uri contactUri) {
+        final ContentValues values = new ContentValues(2);
+        values.put(Contacts.STARRED, false);
+        values.put(Contacts.PINNED, PinnedPositions.DEMOTED);
+        mContext.getContentResolver().update(contactUri, values, null, null);
+    }
+
+    /**
+     * Given a list of contacts that each have pinned positions, rearrange the list (destructive)
+     * such that all pinned contacts are in their defined pinned positions, and unpinned contacts
+     * take the spaces between those pinned contacts. Demoted contacts should not appear in the
+     * resulting list.
+     *
+     * This method also updates the pinned positions of pinned contacts so that they are all
+     * unique positive integers within range from 0 to toArrange.size() - 1. This is because
+     * when the contact entries are read from the database, it is possible for them to have
+     * overlapping pin positions due to sync or modifications by third party apps.
+     */
+    @VisibleForTesting
+    /* package */ void arrangeContactsByPinnedPosition(ArrayList<ContactEntry> toArrange) {
+        final PriorityQueue<ContactEntry> pinnedQueue =
+                new PriorityQueue<ContactEntry>(PIN_LIMIT, mContactEntryComparator);
+
+        final List<ContactEntry> unpinnedContacts = new LinkedList<ContactEntry>();
+
+        final int length = toArrange.size();
+        for (int i = 0; i < length; i++) {
+            final ContactEntry contact = toArrange.get(i);
+            // Decide whether the contact is hidden(demoted), pinned, or unpinned
+            if (contact.pinned > PIN_LIMIT) {
+                unpinnedContacts.add(contact);
+            } else if (contact.pinned > PinnedPositions.DEMOTED) {
+                // Demoted or contacts with negative pinned positions are ignored.
+                // Pinned contacts go into a priority queue where they are ranked by pinned
+                // position. This is required because the contacts provider does not return
+                // contacts ordered by pinned position.
+                pinnedQueue.add(contact);
+            }
+        }
+
+        final int maxToPin = Math.min(PIN_LIMIT, pinnedQueue.size() + unpinnedContacts.size());
+
+        toArrange.clear();
+        for (int i = 0; i < maxToPin; i++) {
+            if (!pinnedQueue.isEmpty() && pinnedQueue.peek().pinned <= i) {
+                final ContactEntry toPin = pinnedQueue.poll();
+                toPin.pinned = i;
+                toArrange.add(toPin);
+            } else if (!unpinnedContacts.isEmpty()) {
+                toArrange.add(unpinnedContacts.remove(0));
+            }
+        }
+
+        // If there are still contacts in pinnedContacts at this point, it means that the pinned
+        // positions of these pinned contacts exceed the actual number of contacts in the list.
+        // For example, the user had 10 frequents, starred and pinned one of them at the last spot,
+        // and then cleared frequents. Contacts in this situation should become unpinned.
+        while (!pinnedQueue.isEmpty()) {
+            final ContactEntry entry = pinnedQueue.poll();
+            entry.pinned = PinnedPositions.UNPINNED;
+            toArrange.add(entry);
+        }
+
+        // Any remaining unpinned contacts that weren't in the gaps between the pinned contacts
+        // now just get appended to the end of the list.
+        toArrange.addAll(unpinnedContacts);
+    }
+
+    /**
+     * Given an existing list of contact entries and a single entry that is to be pinned at a
+     * particular position, return a ContentValues object that contains new pinned positions for
+     * all contacts that are forced to be pinned at new positions, trying as much as possible to
+     * keep pinned contacts at their original location.
+     *
+     * At this point in time the pinned position of each contact in the list has already been
+     * updated by {@link #arrangeContactsByPinnedPosition}, so we can assume that all pinned
+     * positions(within {@link #PIN_LIMIT} are unique positive integers.
+     */
+    @VisibleForTesting
+    /* package */ ContentValues getReflowedPinnedPositions(ArrayList<ContactEntry> list,
+            ContactEntry entryToPin, int oldPos, int newPinPos) {
+
+        final ContentValues cv = new ContentValues();
+
+        // Add the dragged contact at the user-requested spot.
+        cv.put(String.valueOf(entryToPin.id), newPinPos);
+
+        final int listSize = list.size();
+        if (oldPos < newPinPos && list.get(listSize - 1).pinned == (listSize - 1)) {
+            // The only time we should get here is it we are completely full - i.e. starting
+            // from the newly pinned contact to the end of the list, every single contact
+            // thereafter is pinned, and a contact is being shifted to the right by the user.
+            // Instead of trying to make room to the right, we should thus try to shift contacts
+            // to the left instead, working backwards through the list, starting from the contact
+            // which just got bumped.
+            for (int i = newPinPos; i >= 0; i--) {
+                final ContactEntry entry = list.get(i);
+                // Once we find an unpinned spot(or a blank entry), we can stop pushing contacts
+                // to the left.
+                if (entry.pinned > PIN_LIMIT) break;
+                cv.put(String.valueOf(entry.id), entry.pinned - 1);
+            }
+        } else {
+            // Shift any pinned contacts to the right as necessary, until an unpinned
+            // spot is found
+            for (int i = newPinPos; i < PIN_LIMIT && i < list.size(); i++) {
+                final ContactEntry entry = list.get(i);
+                if (entry.pinned > PIN_LIMIT) break;
+                cv.put(String.valueOf(entry.id), entry.pinned + 1);
+            }
+        }
+        return cv;
     }
 
     protected static class ViewTypes {

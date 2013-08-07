@@ -78,6 +78,14 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
         if (entry != null) {
             // Grab the phone-number to call directly... see {@link onClick()}
             mPhoneNumberString = entry.phoneNumber;
+            // If this is a blank entry, don't show anything.
+            // TODO krelease:Just hide the view for now. For this to truly look like an empty row
+            // the entire ContactTileRow needs to be hidden.
+            if (entry == ContactEntry.BLANK_ENTRY) {
+                setVisibility(View.INVISIBLE);
+            } else {
+                setVisibility(View.VISIBLE);
+            }
         }
     }
 
