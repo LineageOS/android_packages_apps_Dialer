@@ -20,28 +20,38 @@ import com.google.common.base.Preconditions;
 
 import android.media.AudioManager;
 
+import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
+import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
 
 /**
  * Logic for call buttons.
  */
 public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButtonUi>
-        implements InCallStateListener {
+        implements InCallStateListener, AudioModeListener {
 
-    private AudioManager mAudioManager;
     private Call mCall;
+    private final AudioModeProvider mAudioModeProvider;
 
-    public void init(AudioManager audioManager) {
-        mAudioManager = audioManager;
+    public CallButtonPresenter(AudioModeProvider audioModeProvider) {
+
+        // AudioModeProvider works effectively as a pass through. However, if we
+        // had this presenter listen for changes directly, it would have to live forever
+        // or risk missing important updates.
+        mAudioModeProvider = audioModeProvider;
+        mAudioModeProvider.addListener(this);
     }
 
     @Override
     public void onUiReady(CallButtonUi ui) {
         super.onUiReady(ui);
-        getUi().setMute(mAudioManager.isMicrophoneMute());
-        getUi().setSpeaker(mAudioManager.isSpeakerphoneOn());
+    }
+
+    @Override
+    public void onUiUnready(CallButtonUi ui) {
+        mAudioModeProvider.removeListener(this);
     }
 
     @Override
@@ -55,23 +65,62 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
     }
 
+    @Override
+    public void onAudioMode(int mode) {
+        getUi().setAudio(mode);
+    }
+
+    @Override
+    public void onSupportedAudioMode(int mask) {
+        getUi().setSupportedAudio(mask);
+    }
+
+    public int getAudioMode() {
+        return mAudioModeProvider.getAudioMode();
+    }
+
+    public int getSupportedAudio() {
+        return mAudioModeProvider.getSupportedModes();
+    }
+
+    public void setAudioMode(int mode) {
+
+        // TODO: Set a intermediate state in this presenter until we get
+        // an update for onAudioMode().  This will make UI response immediate
+        // if it turns out to be slow
+
+        Logger.d(this, "Sending new Audio Mode: " + AudioMode.toString(mode));
+        CallCommandClient.getInstance().setAudioMode(mode);
+    }
+
+    /**
+     * Function assumes that bluetooth is not supported.
+     */
+    public void toggleSpeakerphone() {
+        // this function should not be called if bluetooth is available
+        if (0 != (AudioMode.BLUETOOTH & mAudioModeProvider.getSupportedModes())) {
+
+            // It's clear the UI is off, so update the supported mode once again.
+            Logger.e(this, "toggling speakerphone not allowed when bluetooth supported.");
+            getUi().setSupportedAudio(mAudioModeProvider.getSupportedModes());
+            return;
+        }
+
+        int newMode = AudioMode.SPEAKER;
+
+        // if speakerphone is already on, change to wired/earpiece
+        if (mAudioModeProvider.getAudioMode() == AudioMode.SPEAKER) {
+            newMode = AudioMode.WIRED_OR_EARPIECE;
+        }
+
+        setAudioMode(newMode);
+    }
+
     public void endCallClicked() {
         Preconditions.checkNotNull(mCall);
 
         // TODO(klp): hook up call id.
         CallCommandClient.getInstance().disconnectCall(mCall.getCallId());
-
-        // TODO(klp): Remove once all state is gathered from CallList.
-        //            This will be wrong when you disconnect from a call if
-        //            the user has another call on hold.
-        reset();
-    }
-
-    private void reset() {
-        getUi().setVisible(false);
-        getUi().setMute(false);
-        getUi().setSpeaker(false);
-        getUi().setHold(false);
     }
 
     public void muteClicked(boolean checked) {
@@ -79,13 +128,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
         CallCommandClient.getInstance().mute(checked);
         getUi().setMute(checked);
-    }
-
-    public void speakerClicked(boolean checked) {
-        Logger.d(this, "turning on speaker: " + checked);
-
-        CallCommandClient.getInstance().turnSpeakerOn(checked);
-        getUi().setSpeaker(checked);
     }
 
     public void holdClicked(boolean checked) {
@@ -106,8 +148,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     public interface CallButtonUi extends Ui {
         void setVisible(boolean on);
         void setMute(boolean on);
-        void setSpeaker(boolean on);
         void setHold(boolean on);
         void displayDialpad(boolean on);
+        void setAudio(int mode);
+        void setSupportedAudio(int mask);
     }
 }

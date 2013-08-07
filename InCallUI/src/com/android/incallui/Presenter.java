@@ -32,6 +32,13 @@ public abstract class Presenter<U extends Ui> {
         mUi = ui;
     }
 
+    /**
+     * Called when the UI view is destroyed in Fragment.onDestroyView().
+     */
+    public void onUiUnready(U ui) {
+        mUi = null;
+    }
+
     public U getUi() {
         return mUi;
     }

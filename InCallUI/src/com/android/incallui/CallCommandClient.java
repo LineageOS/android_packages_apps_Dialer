@@ -88,9 +88,9 @@ public class CallCommandClient {
         }
     }
 
-    public void turnSpeakerOn(boolean onOff) {
+    public void setAudioMode(int mode) {
         try {
-            mCommandService.speaker(onOff);
+            mCommandService.setAudioMode(mode);
         } catch (RemoteException e) {
             Logger.e(this, "Error setting speaker.", e);
         }

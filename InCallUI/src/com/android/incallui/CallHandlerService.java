@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 
+import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.ICallCommandService;
 import com.android.services.telephony.common.ICallHandlerService;
@@ -39,10 +40,14 @@ public class CallHandlerService extends Service {
     private static final int ON_UPDATE_CALL = 1;
     private static final int ON_UPDATE_MULTI_CALL = 2;
     private static final int ON_UPDATE_CALL_WITH_TEXT_RESPONSES = 3;
+    private static final int ON_AUDIO_MODE = 4;
+    private static final int ON_SUPPORTED_AUDIO_MODE = 5;
+
 
     private CallList mCallList;
     private Handler mMainHandler;
     private InCallPresenter mInCallPresenter;
+    private AudioModeProvider mAudioModeProvider;
 
     @Override
     public void onCreate() {
@@ -51,6 +56,7 @@ public class CallHandlerService extends Service {
         mCallList = CallList.getInstance();
         mMainHandler = new MainHandler();
         mInCallPresenter = InCallPresenter.init(this);
+        mAudioModeProvider = AudioModeProvider.getInstance();
     }
 
     @Override
@@ -66,12 +72,13 @@ public class CallHandlerService extends Service {
 
         @Override
         public void setCallCommandService(ICallCommandService service) {
-            Logger.d(this, "onConnected: " + service.toString());
+            Logger.d(CallHandlerService.this, "onConnected: " + service.toString());
             CallCommandClient.init(service);
         }
 
         @Override
         public void onDisconnect(Call call) {
+            Logger.d(CallHandlerService.this, "onDisconnected");
             mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_CALL, 0, 0, call));
         }
 
@@ -86,16 +93,24 @@ public class CallHandlerService extends Service {
 
         @Override
         public void onUpdate(List<Call> calls, boolean fullUpdate) {
+            Logger.d(CallHandlerService.this, "onUpdate ");
             // TODO(klp): Add use of fullUpdate to message
             mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_MULTI_CALL, 0, 0, calls));
         }
 
         @Override
         public void onAudioModeChange(int mode) {
+            Logger.d(CallHandlerService.this, "onAudioModeChange : " + AudioMode.toString(mode));
+            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_AUDIO_MODE, mode, 0, null));
         }
 
         @Override
-        public void onAudioModeSupportChange(int modeMask) {
+        public void onSupportedAudioModeChange(int modeMask) {
+            Logger.d(CallHandlerService.this, "onSupportedAudioModeChange : " +
+                    AudioMode.toString(modeMask));
+
+            mMainHandler.sendMessage(
+                    mMainHandler.obtainMessage(ON_SUPPORTED_AUDIO_MODE, modeMask, 0, null));
         }
     };
 
@@ -115,6 +130,8 @@ public class CallHandlerService extends Service {
     }
 
     private void executeMessage(Message msg) {
+        Logger.d(this, "executeMessage " + msg.what);
+
         switch (msg.what) {
             case ON_UPDATE_CALL:
                 mCallList.onUpdate((Call) msg.obj);
@@ -124,6 +141,12 @@ public class CallHandlerService extends Service {
                 break;
             case ON_UPDATE_CALL_WITH_TEXT_RESPONSES:
                 mCallList.onUpdate((AbstractMap.SimpleEntry<Call, List<String> >) msg.obj);
+                break;
+            case ON_AUDIO_MODE:
+                mAudioModeProvider.onAudioModeChange(msg.arg1);
+                break;
+            case ON_SUPPORTED_AUDIO_MODE:
+                mAudioModeProvider.onSupportedAudioModeChange(msg.arg1);
                 break;
             default:
                 break;

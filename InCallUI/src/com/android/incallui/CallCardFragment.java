@@ -55,6 +55,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
         return inflater.inflate(R.layout.call_card, container, false);
     }
 
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         mPhoneNumber = (TextView) view.findViewById(R.id.phoneNumber);
@@ -66,6 +67,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
         // This method call will begin the callbacks on CallCardUi. We need to ensure
         // everything needed for the callbacks is set up before this is called.
         getPresenter().onUiReady(this);
+    }
+
+    @Override
+    public void onDestroyView() {
+        getPresenter().onUiUnready(this);
     }
 
     @Override
