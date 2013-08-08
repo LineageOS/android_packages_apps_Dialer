@@ -19,8 +19,7 @@
     android:id="@+id/pinned_header_list_layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="?android:attr/actionBarSize">
+    android:layout_height="match_parent">
 
     <!-- Shown only when an Account filter is set.
          - paddingTop should be here to show "shade" effect correctly. -->
@@ -35,7 +34,7 @@
         android:layout_weight="1" >
         <view
             class="com.android.contacts.common.list.PinnedHeaderListView"
-            style="@style/NewDialtactsTheme"
+            style="@style/DialtactsTheme"
             android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

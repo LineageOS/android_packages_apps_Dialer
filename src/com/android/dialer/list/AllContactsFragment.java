@@ -17,12 +17,8 @@
 
 package com.android.dialer.list;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.TypefaceSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +27,10 @@ import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.dialer.R;
 
-// TODO{klp}: Wrap this fragment with an activity.
 /**
  * Fragments to show all contacts with phone numbers.
  */
-public class ShowAllContactsFragment extends PhoneNumberPickerFragment{
+public class AllContactsFragment extends PhoneNumberPickerFragment{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,35 +46,6 @@ public class ShowAllContactsFragment extends PhoneNumberPickerFragment{
         setDarkTheme(false);
         setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(true /* opposite */));
         setUseCallableUri(true);
-    }
-
-    @Override
-    public void onStart() {
-        // Displays action bar for quick navigation.
-        final ActionBar actionBar = getActivity().getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(true);
-
-        final SpannableString s = new SpannableString(getString(R.string.show_all_contacts_title));
-        s.setSpan(new TypefaceSpan(getString(R.string.show_all_contacts_title)), 0,
-                s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        actionBar.setTitle(s);
-
-        super.onStart();
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        // Hides the action bar as it is hidden in the main activity
-        if (getActivity() != null) {
-            if (hidden) {
-                getActivity().getActionBar().hide();
-            } else {
-                getActivity().getActionBar().show();
-            }
-        }
     }
 
     @Override

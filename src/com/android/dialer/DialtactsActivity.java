@@ -71,9 +71,9 @@ import com.android.dialer.calllog.CallLogActivity;
 import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.interactions.PhoneNumberInteraction;
+import com.android.dialer.list.AllContactsActivity;
 import com.android.dialer.list.PhoneFavoriteFragment;
 import com.android.dialer.list.OnListFragmentScrolledListener;
-import com.android.dialer.list.ShowAllContactsFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.internal.telephony.ITelephony;
 
@@ -89,7 +89,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         DialpadFragment.OnDialpadQueryChangedListener, PopupMenu.OnMenuItemClickListener,
         OnListFragmentScrolledListener,
         PhoneFavoriteFragment.OnPhoneFavoriteFragmentStartedListener,
-        DialpadFragment.OnDialpadFragmentStartedListener {
+        DialpadFragment.OnDialpadFragmentStartedListener,
+        PhoneFavoriteFragment.OnShowAllContactsListener {
     private static final String TAG = "DialtactsActivity";
 
     public static final boolean DEBUG = false;
@@ -140,8 +141,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Fragment for searching phone numbers using the dialpad.
      */
     private SmartDialSearchFragment mSmartDialSearchFragment;
-
-    private ShowAllContactsFragment mShowAllContactsFragment;
 
     private View mMenuButton;
     private View mCallHistoryButton;
@@ -257,16 +256,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mRegularSearchFragment = new SearchFragment();
             mSmartDialSearchFragment = new SmartDialSearchFragment();
             mDialpadFragment = new DialpadFragment();
-            mShowAllContactsFragment = new ShowAllContactsFragment();
-            mShowAllContactsFragment.setOnPhoneNumberPickerActionListener(
-                    mPhoneNumberPickerActionListener);
 
             // TODO krelease: load fragments on demand instead of creating all of them at run time
             final FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.add(R.id.dialtacts_frame, mPhoneFavoriteFragment, TAG_FAVORITES_FRAGMENT);
             ft.add(R.id.dialtacts_frame, mRegularSearchFragment, TAG_REGULAR_SEARCH_FRAGMENT);
             ft.add(R.id.dialtacts_frame, mSmartDialSearchFragment, TAG_SMARTDIAL_SEARCH_FRAGMENT);
-            ft.add(R.id.dialtacts_frame, mShowAllContactsFragment, TAG_SHOW_ALL_CONTACTS_FRAGMENT);
             ft.add(R.id.dialtacts_container, mDialpadFragment, TAG_DIALPAD_FRAGMENT);
             ft.commit();
         }
@@ -298,11 +293,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mSmartDialSearchFragment.setOnPhoneNumberPickerActionListener(
                 mPhoneNumberPickerActionListener);
 
-        mShowAllContactsFragment = (ShowAllContactsFragment) fm.findFragmentByTag(
-                TAG_SHOW_ALL_CONTACTS_FRAGMENT);
-        mShowAllContactsFragment.setOnPhoneNumberPickerActionListener(
-                mPhoneNumberPickerActionListener);
-
         if (mFirstLaunch) {
             displayFragment(getIntent());
         }
@@ -312,24 +302,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onAttachFragment(Fragment fragment) {
         if (fragment instanceof DialpadFragment || fragment instanceof SearchFragment
-                || fragment instanceof SmartDialSearchFragment
-                || fragment instanceof ShowAllContactsFragment) {
+                || fragment instanceof SmartDialSearchFragment) {
             final FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.hide(fragment);
             transaction.commit();
         }
         // TODO krelease: Save some kind of state here to show the appropriate fragment
         // based on the state of the dialer when it was last paused
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                hideAllContactsFragment();
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -437,23 +416,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         ft.hide(mDialpadFragment);
         ft.commit();
-    }
-
-    public void showAllContactsFragment() {
-        final FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.hide(mPhoneFavoriteFragment);
-        ft.show(mShowAllContactsFragment);
-        // TODO{klp} Add animation
-        ft.commit();
-        hideSearchBar(false);
-    }
-
-    private void hideAllContactsFragment() {
-        final FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.hide(mShowAllContactsFragment);
-        ft.show(mPhoneFavoriteFragment);
-        ft.commit();
-        showSearchBar();
     }
 
     private void prepareSearchView() {
@@ -801,8 +763,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             hideDialpadFragment(true);
         } else if (mInSearchUi) {
             mSearchView.setText(null);
-        } else if (mShowAllContactsFragment.isVisible()) {
-            hideAllContactsFragment();
         } else if (isTaskRoot()) {
             // Instead of stopping, simply push this to the back of the stack.
             // This is only done when running at the top of the stack;
@@ -845,5 +805,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final TelephonyManager tm = (TelephonyManager) getSystemService(
                 Context.TELEPHONY_SERVICE);
         return tm.getCallState() != TelephonyManager.CALL_STATE_IDLE;
+    }
+
+    @Override
+    public void onShowAllContacts() {
+        final Intent intent = new Intent(this, AllContactsActivity.class);
+        startActivity(intent);
     }
 }
