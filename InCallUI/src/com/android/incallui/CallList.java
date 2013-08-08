@@ -42,7 +42,7 @@ import java.util.Set;
  */
 public class CallList {
 
-    private static final int DISCONNECTED_CALL_TIMEOUT_MS = 3000;
+    private static final int DISCONNECTED_CALL_TIMEOUT_MS = 2000;
 
     private static final int EVENT_DISCONNECTED_TIMEOUT = 1;
 
