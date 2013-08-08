@@ -86,12 +86,14 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
         Logger.d(this, "Primary call: " + primary);
         Logger.d(this, "Secondary call: " + secondary);
 
-        // Set primary call data
-        final CallerInfo primaryCallInfo = CallerInfoUtils.getCallerInfoForCall(mContext, primary,
-                null, this);
-        updateDisplayByCallerInfo(primary, primaryCallInfo, primary.getNumberPresentation(), true);
 
         if (primary != null) {
+            // Set primary call data
+            final CallerInfo primaryCallInfo = CallerInfoUtils.getCallerInfoForCall(mContext,
+                    primary, null, this);
+            updateDisplayByCallerInfo(primary, primaryCallInfo, primary.getNumberPresentation(),
+                    true);
+
             ui.setNumber(primary.getNumber());
             ui.setCallState(primary.getState(), primary.getDisconnectCause());
         } else {
