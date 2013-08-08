@@ -129,7 +129,7 @@ public class InCallActivity extends Activity {
         // we can count on our onResume() method being called next.
 
         // Just like in onCreate(), handle the intent.
-        //TODO(klp): handle intent
+        internalResolveIntent(intent);
     }
 
     @Override
@@ -197,6 +197,46 @@ public class InCallActivity extends Activity {
 
         // TODO(klp) Adds hardware keyboard support
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void internalResolveIntent(Intent intent) {
+        final String action = intent.getAction();
+
+        if (action.equals(intent.ACTION_MAIN)) {
+            // This action is the normal way to bring up the in-call UI.
+            //
+            // But we do check here for one extra that can come along with the
+            // ACTION_MAIN intent:
+
+            // TODO(klp): Enable this for klp
+            /*
+            if (intent.hasExtra(SHOW_DIALPAD_EXTRA)) {
+                // SHOW_DIALPAD_EXTRA can be used here to specify whether the DTMF
+                // dialpad should be initially visible.  If the extra isn't
+                // present at all, we just leave the dialpad in its previous state.
+
+                boolean showDialpad = intent.getBooleanExtra(SHOW_DIALPAD_EXTRA, false);
+                if (VDBG) log("- internalResolveIntent: SHOW_DIALPAD_EXTRA: " + showDialpad);
+
+                // If SHOW_DIALPAD_EXTRA is specified, that overrides whatever
+                // the previous state of inCallUiState.showDialpad was.
+                mApp.inCallUiState.showDialpad = showDialpad;
+
+                final boolean hasActiveCall = mCM.hasActiveFgCall();
+                final boolean hasHoldingCall = mCM.hasActiveBgCall();
+
+                // There's only one line in use, AND it's on hold, at which we're sure the user
+                // wants to use the dialpad toward the exact line, so un-hold the holding line.
+                if (showDialpad && !hasActiveCall && hasHoldingCall) {
+                    PhoneUtils.switchHoldingAndActive(mCM.getFirstActiveBgCall());
+                }
+            }
+            */
+            // ...and in onResume() we'll update the onscreen dialpad state to
+            // match the InCallUiState.
+
+            return;
+        }
     }
 
     private void initializeInCall() {

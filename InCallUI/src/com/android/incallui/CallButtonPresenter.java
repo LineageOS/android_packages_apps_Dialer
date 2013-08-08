@@ -182,6 +182,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             Logger.v(this, "Show swap ", call.can(Capabilities.SWAP_CALLS));
             Logger.v(this, "Show add call ", call.can(Capabilities.ADD_CALL));
 
+            ui.setHold(call.getState() == Call.State.ONHOLD);
+
             ui.showHold(call.can(Capabilities.HOLD));
             ui.showMerge(call.can(Capabilities.MERGE_CALLS));
             ui.showSwap(call.can(Capabilities.SWAP_CALLS));

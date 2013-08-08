@@ -41,6 +41,7 @@ public class InCallPresenter implements CallList.Listener {
 
     private final StatusBarNotifier mStatusBarNotifier;
     private final Set<InCallStateListener> mListeners = Sets.newHashSet();
+    private final Context mContext;
 
     private InCallState mInCallState = InCallState.HIDDEN;
     private InCallActivity mInCallActivity;
@@ -76,6 +77,10 @@ public class InCallPresenter implements CallList.Listener {
     @Override
     public void onCallListChange(CallList callList) {
         // fast fail if we are still starting up
+        // TODO(klp): If the Activity crashes unexpectedly during start-up, we may never
+        // get out of STARTING_UP state and thus never attempt to recreate the activity a
+        // subsequent time. Test to see if this is the case and add a timeout for
+        // STARTING_UP phase.
         if (mInCallState == InCallState.STARTING_UP) {
             Logger.d(this, "Already on STARTING_UP, ignoring until ready");
             return;
@@ -133,27 +138,98 @@ public class InCallPresenter implements CallList.Listener {
 
         // TODO(klp): Consider a proper state machine implementation
 
-        // if we need to show something, we need to start the Ui...
-        if (!newState.isHidden()) {
+        // If the state isn't changing, we have already done any starting/stopping of
+        // activities in a previous pass...so lets cut out early
+        if (newState == mInCallState) {
+            return newState;
+        }
 
-            // When we attempt to go to any state from HIDDEN, it means that we need to create the
-            // entire UI. However, the StatusBarNotifier is in charge of starting up the Ui because
-            // it has special behavior in case we have to deal with an immersive foreground app.
-            // We set the STARTING_UP state to let StatusBarNotifier know it needs to start the
-            // the Ui.
-            if (mInCallState.isHidden()) {
-                return InCallState.STARTING_UP;
+        // A new Incoming call means that the user needs to be notified of the the call (since
+        // it wasn't them who initiated it).  We do this through full screen notifications and
+        // happens indirectly through {@link StatusBarListener}.
+        //
+        // The process for incoming calls is as follows:
+        //
+        // 1) CallList          - Announces existence of new INCOMING call
+        // 2) InCallPresenter   - Gets announcement and calculates that the new InCallState
+        //                      - should be set to INCOMING.
+        // 3) InCallPresenter   - This method is called to see if we need to start or finish
+        //                        the app given the new state. Because the previous state was
+        //                        not INCOMING (and you can't have two incoming calls at once),
+        //                        we start the start-up sequence by setting
+        //                        InCallState = STARTING_UP (this is the code that you see
+        //                        below). During the STARTING_UP phase, InCallPresenter will
+        //                        ignore all new call changes that come in.
+        // 4) StatusBarNotifier - Listens to InCallState changes. When it sees STARTING_UP, it
+        //                        will issue a FullScreen Notification that will either start
+        //                        the InCallActivity or show the user a top-level notification
+        //                        dialog if the user is in an immersive app. That notification
+        //                        can also start the InCallActivity.
+        // 5) InCallActivity    - Main activity starts up and at the end of its onCreate will
+        //                        call InCallPresenter::setActivity() to let the presenter
+        //                        know that start-up is complete.
+        // 6) InCallPresenter   - Sets STARTED as the new InCallState and issues a manual update
+        //                        of the call list so that it catches any changes that it
+        //                        previously ignored during STARTING_UP. That will result
+        //                        in a recalculated InCallState and throw us back into this
+        //                        method again.
+        // 7) InCallPresenter   - 99% of the time we end up back here with the current
+        //                        state at STARTED and newState as INCOMING (again). We do not
+        //                        want to do the start-up sequence again if we see that it has
+        //                        already STARTED so we just fall through in that case and let
+        //                        normal code flow occur (newState <= INCOMING).
+        //
+        //          [ AND NOW YOU'RE IN THE CALL. voila! ]
+        //
+        // Our app is started using a fullScreen notification.  We need to do this whenever
+        // we get an incoming call.
+        final boolean startStartupSequence = (InCallState.INCOMING == newState &&
+                InCallState.STARTED != mInCallState);
+
+        // A new outgoing call indicates that the user just now dialed a number and when that
+        // happens we need to display the screen immediateley.
+        //
+        // This is different from the incoming call sequence because we do not need to shock the
+        // user with a top-level notification.  Just show the call UI normally.
+        final boolean showCallUi = (InCallState.OUTGOING == newState);
+
+        Logger.v(this, "showCallUi: ", showCallUi);
+        Logger.v(this, "startStartupSequence: ", startStartupSequence);
+
+
+        if (startStartupSequence) {
+            return InCallState.STARTING_UP;
+        } else if (showCallUi) {
+            showInCall();
+        } else if (newState == InCallState.HIDDEN) {
+
+            // The new state is the hidden state (no calls).  Tear everything down.
+
+            if (mInCallActivity != null) {
+                // Null out reference before we start end sequence
+                InCallActivity temp = mInCallActivity;
+                mInCallActivity = null;
+
+                temp.finish();
             }
-
-        } else if (mInCallActivity != null) {
-            // Null out reference before we start end sequence
-            InCallActivity temp = mInCallActivity;
-            mInCallActivity = null;
-
-            temp.finish();
         }
 
         return newState;
+    }
+
+    private void showInCall() {
+        Logger.d(this, "Showing in call manually.");
+        mContext.startActivity(getInCallIntent());
+    }
+
+    private Intent getInCallIntent() {
+        final Intent intent = new Intent(Intent.ACTION_MAIN, null);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
+        intent.setClass(mContext, InCallActivity.class);
+
+        return intent;
     }
 
     /**
@@ -161,6 +237,8 @@ public class InCallPresenter implements CallList.Listener {
      */
     private InCallPresenter(Context context) {
         Preconditions.checkNotNull(context);
+
+        mContext = context;
 
         mStatusBarNotifier = new StatusBarNotifier(context);
         addListener(mStatusBarNotifier);
