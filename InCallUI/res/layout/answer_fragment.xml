@@ -29,7 +29,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:layout_gravity="bottom|center_horizontal"
-        android:background="#00000000"
+        android:background="@android:color/black"
 
         dc:targetDrawables="@array/incoming_call_widget_3way_targets"
         dc:targetDescriptions="@array/incoming_call_widget_3way_target_descriptions"
