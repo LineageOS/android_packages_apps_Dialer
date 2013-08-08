@@ -16,8 +16,15 @@
 
 package com.android.incallui;
 
+import android.content.ContentUris;
+import android.content.Context;
+import android.net.Uri;
+import android.provider.ContactsContract.Contacts;
+import android.text.TextUtils;
+
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
+
 import com.android.services.telephony.common.Call;
 
 /**
@@ -25,11 +32,17 @@ import com.android.services.telephony.common.Call;
  * This class listens for changes to InCallState and passes it along to the fragment.
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
-        implements InCallStateListener {
+        implements InCallStateListener, CallerInfoAsyncQuery.OnQueryCompleteListener {
+
+    private Context mContext;
 
     @Override
     public void onUiReady(CallCardUi ui) {
         super.onUiReady(ui);
+    }
+
+    public void setContext(Context context) {
+        mContext = context;
     }
 
     @Override
@@ -55,11 +68,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         Logger.d(this, "Secondary call: " + secondary);
 
         // Set primary call data
-        if (primary != null) {
-            ui.setNumber(primary.getNumber());
-        } else {
-            ui.setNumber("");
-        }
+        final CallerInfo primaryCallInfo = CallerInfoUtils.getCallerInfoForCall(mContext, primary,
+                null, this);
+        updateDisplayByCallerInfo(primary, primaryCallInfo, primary.getNumberPresentation(), true);
 
         // Set secondary call data
         if (secondary != null) {
@@ -71,10 +82,179 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     public interface CallCardUi extends Ui {
         // TODO(klp): Consider passing in the Call object directly in these methods.
-
         void setVisible(boolean on);
         void setNumber(String number);
+        void setNumberLabel(String label);
         void setName(String name);
+        void setName(String name, boolean isNumber);
         void setSecondaryCallInfo(boolean show, String number);
+    }
+
+    @Override
+    public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
+        if (cookie instanceof Call) {
+            final Call call = (Call) cookie;
+            if (ci.contactExists || ci.isEmergencyNumber() || ci.isVoiceMailNumber()) {
+                updateDisplayByCallerInfo(call, ci, Call.PRESENTATION_ALLOWED, true);
+            } else {
+                // If the contact doesn't exist, we can still use information from the
+                // returned caller info (geodescription, etc).
+                updateDisplayByCallerInfo(call, ci, call.getNumberPresentation(), true);
+            }
+
+            // Todo (klp): updatePhotoForCallState(call);
+        }
+    }
+
+    /**
+     * Based on the given caller info, determine a suitable name, phone number and label
+     * to be passed to the CallCardUI.
+     *
+     * If the current call is a conference call, use
+     * updateDisplayForConference() instead.
+     */
+    private void updateDisplayByCallerInfo(Call call, CallerInfo info, int presentation,
+            boolean isPrimary) {
+
+        //Todo (klp): Either enable or get rid of this
+        // inform the state machine that we are displaying a photo.
+        //mPhotoTracker.setPhotoRequest(info);
+        //mPhotoTracker.setPhotoState(ContactsAsyncHelper.ImageTracker.DISPLAY_IMAGE);
+
+
+        // The actual strings we're going to display onscreen:
+        String displayName;
+        String displayNumber = null;
+        String label = null;
+        Uri personUri = null;
+
+        // Gather missing info unless the call is generic, in which case we wouldn't use
+        // the gathered information anyway.
+        if (info != null) {
+
+            // It appears that there is a small change in behaviour with the
+            // PhoneUtils' startGetCallerInfo whereby if we query with an
+            // empty number, we will get a valid CallerInfo object, but with
+            // fields that are all null, and the isTemporary boolean input
+            // parameter as true.
+
+            // In the past, we would see a NULL callerinfo object, but this
+            // ends up causing null pointer exceptions elsewhere down the
+            // line in other cases, so we need to make this fix instead. It
+            // appears that this was the ONLY call to PhoneUtils
+            // .getCallerInfo() that relied on a NULL CallerInfo to indicate
+            // an unknown contact.
+
+            // Currently, infi.phoneNumber may actually be a SIP address, and
+            // if so, it might sometimes include the "sip:" prefix. That
+            // prefix isn't really useful to the user, though, so strip it off
+            // if present. (For any other URI scheme, though, leave the
+            // prefix alone.)
+            // TODO: It would be cleaner for CallerInfo to explicitly support
+            // SIP addresses instead of overloading the "phoneNumber" field.
+            // Then we could remove this hack, and instead ask the CallerInfo
+            // for a "user visible" form of the SIP address.
+            String number = info.phoneNumber;
+            if ((number != null) && number.startsWith("sip:")) {
+                number = number.substring(4);
+            }
+
+            if (TextUtils.isEmpty(info.name)) {
+                // No valid "name" in the CallerInfo, so fall back to
+                // something else.
+                // (Typically, we promote the phone number up to the "name" slot
+                // onscreen, and possibly display a descriptive string in the
+                // "number" slot.)
+                if (TextUtils.isEmpty(number)) {
+                    // No name *or* number! Display a generic "unknown" string
+                    // (or potentially some other default based on the presentation.)
+                    displayName = getPresentationString(presentation);
+                    Logger.d(this, "  ==> no name *or* number! displayName = " + displayName);
+                } else if (presentation != Call.PRESENTATION_ALLOWED) {
+                    // This case should never happen since the network should never send a phone #
+                    // AND a restricted presentation. However we leave it here in case of weird
+                    // network behavior
+                    displayName = getPresentationString(presentation);
+                    Logger.d(this, "  ==> presentation not allowed! displayName = " + displayName);
+                } else if (!TextUtils.isEmpty(info.cnapName)) {
+                    // No name, but we do have a valid CNAP name, so use that.
+                    displayName = info.cnapName;
+                    info.name = info.cnapName;
+                    displayNumber = number;
+                    Logger.d(this, "  ==> cnapName available: displayName '"
+                            + displayName + "', displayNumber '" + displayNumber + "'");
+                } else {
+                    // No name; all we have is a number. This is the typical
+                    // case when an incoming call doesn't match any contact,
+                    // or if you manually dial an outgoing number using the
+                    // dialpad.
+
+                    // Promote the phone number up to the "name" slot:
+                    displayName = number;
+
+                    // ...and use the "number" slot for a geographical description
+                    // string if available (but only for incoming calls.)
+                    if ((call != null) && (call.getState() == Call.State.INCOMING)) {
+                        // TODO (CallerInfoAsyncQuery cleanup): Fix the CallerInfo
+                        // query to only do the geoDescription lookup in the first
+                        // place for incoming calls.
+                        displayNumber = info.geoDescription; // may be null
+                        Logger.d(this, "Geodescrption: " + info.geoDescription);
+                    }
+
+                    Logger.d(this, "  ==>  no name; falling back to number: displayName '"
+                            + displayName + "', displayNumber '" + displayNumber + "'");
+                }
+            } else {
+                // We do have a valid "name" in the CallerInfo. Display that
+                // in the "name" slot, and the phone number in the "number" slot.
+                if (presentation != Call.PRESENTATION_ALLOWED) {
+                    // This case should never happen since the network should never send a name
+                    // AND a restricted presentation. However we leave it here in case of weird
+                    // network behavior
+                    displayName = getPresentationString(presentation);
+                    Logger.d(this, "  ==> valid name, but presentation not allowed!"
+                            + " displayName = " + displayName);
+                } else {
+                    displayName = info.name;
+                    displayNumber = number;
+                    label = info.phoneLabel;
+                    Logger.d(this, "  ==>  name is present in CallerInfo: displayName '"
+                            + displayName + "', displayNumber '" + displayNumber + "'");
+                }
+            }
+            personUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, info.person_id);
+            Logger.d(this, "- got personUri: '" + personUri
+                    + "', based on info.person_id: " + info.person_id);
+        } else {
+            displayName = getPresentationString(presentation);
+        }
+
+        // TODO (klp): Update secondary user call info as well.
+        if (isPrimary) {
+            updateInfoUiForPrimary(displayName, displayNumber, label);
+        }
+
+        // TODO (klp): Update other fields - photo, sip label, etc.
+    }
+
+    /**
+     * Updates the info portion of the call card with passed in values for the primary user.
+     */
+    private void updateInfoUiForPrimary(String displayName, String displayNumber, String label) {
+        final CallCardUi ui = getUi();
+        ui.setName(displayName);
+        ui.setNumber(displayNumber);
+        ui.setNumberLabel(label);
+    }
+
+    public String getPresentationString(int presentation) {
+        String name = mContext.getString(R.string.unknown);
+        if (presentation == Call.PRESENTATION_RESTRICTED) {
+            name = mContext.getString(R.string.private_num);
+        } else if (presentation == Call.PRESENTATION_PAYPHONE) {
+            name = mContext.getString(R.string.payphone);
+        }
+        return name;
     }
 }

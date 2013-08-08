@@ -29,9 +29,21 @@ import android.util.Log;
     public static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     public static final boolean VERBOSE = Log.isLoggable(TAG, Log.VERBOSE);
 
+    public static void d(String tag, String msg) {
+        if (DEBUG) {
+            Log.d(TAG, tag + msg);
+        }
+    }
+
     public static void d(Object obj, String msg) {
         if (DEBUG) {
             Log.d(TAG, getPrefix(obj) + msg);
+        }
+    }
+
+    public static void v(String tag, String msg) {
+        if (VERBOSE) {
+            Log.v(TAG, tag + msg);
         }
     }
 
@@ -41,12 +53,24 @@ import android.util.Log;
         }
     }
 
+    public static void e(String tag, String msg, Exception e) {
+        Log.e(TAG, tag + msg, e);
+    }
+
+    public static void e(String tag, String msg) {
+        Log.e(TAG, tag + msg);
+    }
+
     public static void e(Object obj, String msg, Exception e) {
         Log.e(TAG, getPrefix(obj) + msg, e);
     }
 
     public static void e(Object obj, String msg) {
         Log.e(TAG, getPrefix(obj) + msg);
+    }
+
+    public static void i(String tag, String msg) {
+        Log.i(TAG, tag + msg);
     }
 
     public static void i(Object obj, String msg) {

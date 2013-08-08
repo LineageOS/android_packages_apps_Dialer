@@ -16,7 +16,9 @@
 
 package com.android.incallui;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
         implements CallCardPresenter.CallCardUi {
 
     private TextView mPhoneNumber;
+    private TextView mNumberLabel;
+    private TextView mName;
+
 
     private ViewStub mSecondaryCallInfo;
     private TextView mSecondaryCallName;
@@ -48,6 +53,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         mPhoneNumber = (TextView) view.findViewById(R.id.phoneNumber);
+        mName = (TextView) view.findViewById(R.id.name);
+        mNumberLabel = (TextView) view.findViewById(R.id.label);
         mSecondaryCallInfo = (ViewStub) view.findViewById(R.id.secondary_call_info);
 
         // This method call will begin the callbacks on CallCardUi. We need to ensure
@@ -65,6 +72,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        getPresenter().setContext(activity);
+    }
+
+    @Override
     public void setSecondaryCallInfo(boolean show, String number) {
         if (show) {
             showAndInitializeSecondaryCallInfo();
@@ -78,11 +91,40 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
 
     @Override
     public void setNumber(String number)  {
-        mPhoneNumber.setText(number);
+        if (!TextUtils.isEmpty(number)) {
+            mPhoneNumber.setText(number);
+            mPhoneNumber.setVisibility(View.VISIBLE);
+            // We have a real phone number as "mPhoneNumber" so make it always LTR
+            mPhoneNumber.setTextDirection(View.TEXT_DIRECTION_LTR);
+        } else {
+            mPhoneNumber.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setName(String name, boolean isNumber) {
+        mName.setText(name);
+        mName.setVisibility(View.VISIBLE);
+        if (isNumber) {
+            mName.setTextDirection(View.TEXT_DIRECTION_LTR);
+        } else {
+            mName.setTextDirection(View.TEXT_DIRECTION_INHERIT);
+        }
     }
 
     @Override
     public void setName(String name) {
+        setName(name, false);
+    }
+
+    @Override
+    public void setNumberLabel(String label) {
+        if (!TextUtils.isEmpty(label)) {
+            mNumberLabel.setText(label);
+            mNumberLabel.setVisibility(View.VISIBLE);
+        } else {
+            mNumberLabel.setVisibility(View.GONE);
+        }
     }
 
     private void showAndInitializeSecondaryCallInfo() {

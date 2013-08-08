@@ -25,6 +25,13 @@
     <!-- In-call screen: status label for a call that's on hold -->
     <string name="onHold">On hold</string>
 
+    <!-- Incoming call screen, name of "unknown" caller -->
+    <string name="unknown">Unknown</string>
+    <!-- Incoming call screen, string when number hidden -->
+    <string name="private_num">Private number</string>
+    <!-- Incoming call screen, string when called from a pay phone -->
+    <string name="payphone">Pay phone</string>
+
     <!-- "Audio mode" popup menu: Item label to select the speakerphone [CHAR LIMIT=25] -->
     <string name="audio_mode_speaker">Speaker</string>
     <!-- "Audio mode" popup menu: Item label to select the handset earpiece [CHAR LIMIT=25] -->
