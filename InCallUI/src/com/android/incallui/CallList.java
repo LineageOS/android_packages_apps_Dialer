@@ -56,17 +56,17 @@ public class CallList {
     /**
      * Static singleton accessor method.
      */
-    public static synchronized CallList getInstance() {
+    /*public static synchronized CallList getInstance() {
         if (sInstance == null) {
             sInstance = new CallList();
         }
         return sInstance;
-    }
+    }*/
 
     /**
      * Private constructor.  Instance should only be acquired through getInstance().
      */
-    private CallList() {
+    public CallList() {
     }
 
     /**

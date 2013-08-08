@@ -33,17 +33,7 @@ import java.util.List;
     private int mSupportedModes = AudioMode.ALL_MODES;
     private final List<AudioModeListener> mListeners = Lists.newArrayList();
 
-    public static synchronized AudioModeProvider getInstance() {
-        if (sAudioModeProvider == null) {
-            sAudioModeProvider = new AudioModeProvider();
-        }
-        return sAudioModeProvider;
-    }
-
-    /**
-     * Access only through getInstance()
-     */
-    private AudioModeProvider() {
+    public AudioModeProvider() {
     }
 
     public void onAudioModeChange(int newMode) {
@@ -65,6 +55,8 @@ import java.util.List;
     public void addListener(AudioModeListener listener) {
         if (!mListeners.contains(listener)) {
             mListeners.add(listener);
+            listener.onSupportedAudioMode(mSupportedModes);
+            listener.onAudioMode(mAudioMode);
         }
     }
 

@@ -52,7 +52,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
 
     @Override
     CallCardPresenter createPresenter() {
-        return new CallCardPresenter(AudioModeProvider.getInstance());
+        return new CallCardPresenter();
     }
 
     @Override

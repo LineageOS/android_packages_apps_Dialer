@@ -39,22 +39,49 @@ public class InCallPresenter implements CallList.Listener {
 
     private static InCallPresenter sInCallPresenter;
 
-    private final StatusBarNotifier mStatusBarNotifier;
     private final Set<InCallStateListener> mListeners = Sets.newHashSet();
-    private final Context mContext;
 
-    private InCallState mInCallState = InCallState.HIDDEN;
+    private AudioModeProvider mAudioModeProvider;
+    private StatusBarNotifier mStatusBarNotifier;
+    private Context mContext;
+    private CallList mCallList;
     private InCallActivity mInCallActivity;
 
-    public static InCallPresenter getInstance() {
-        Preconditions.checkNotNull(sInCallPresenter);
+    private InCallState mInCallState = InCallState.HIDDEN;
+
+    public static synchronized InCallPresenter getInstance() {
+        if (sInCallPresenter == null) {
+            sInCallPresenter = new InCallPresenter();
+        }
         return sInCallPresenter;
     }
 
-    public static synchronized InCallPresenter init(Context context) {
-        Preconditions.checkState(sInCallPresenter == null);
-        sInCallPresenter = new InCallPresenter(context);
-        return sInCallPresenter;
+    public void setUp(Context context, CallList callList, AudioModeProvider audioModeProvider) {
+        Preconditions.checkNotNull(context);
+        mContext = context;
+
+        mCallList = callList;
+        mCallList.addListener(this);
+
+        mStatusBarNotifier = new StatusBarNotifier(context);
+        addListener(mStatusBarNotifier);
+
+        mAudioModeProvider = audioModeProvider;
+    }
+
+    public void tearDown() {
+        mAudioModeProvider = null;
+
+        removeListener(mStatusBarNotifier);
+        mStatusBarNotifier = null;
+
+        mCallList.removeListener(this);
+        mCallList = null;
+
+        mContext = null;
+        mInCallActivity = null;
+
+        mListeners.clear();
     }
 
     public void setActivity(InCallActivity inCallActivity) {
@@ -64,7 +91,7 @@ public class InCallPresenter implements CallList.Listener {
 
         // Since the UI just came up, imitate an update from the call list
         // to set the proper UI state.
-        onCallListChange(CallList.getInstance());
+        onCallListChange(mCallList);
     }
 
     /**
@@ -91,7 +118,7 @@ public class InCallPresenter implements CallList.Listener {
     /**
      * Given the call list, return the state in which the in-call screen should be.
      */
-    public InCallState getPotentialStateFromCallList(CallList callList) {
+    public static InCallState getPotentialStateFromCallList(CallList callList) {
         InCallState newState = InCallState.HIDDEN;
 
         if (callList.getIncomingCall() != null) {
@@ -115,6 +142,10 @@ public class InCallPresenter implements CallList.Listener {
     public void removeListener(InCallStateListener listener) {
         Preconditions.checkNotNull(listener);
         mListeners.remove(listener);
+    }
+
+    public AudioModeProvider getAudioModeProvider() {
+        return mAudioModeProvider;
     }
 
     /**
@@ -206,15 +237,7 @@ public class InCallPresenter implements CallList.Listener {
     /**
      * Private constructor. Must use getInstance() to get this singleton.
      */
-    private InCallPresenter(Context context) {
-        Preconditions.checkNotNull(context);
-
-        mContext = context;
-
-        mStatusBarNotifier = new StatusBarNotifier(context);
-        addListener(mStatusBarNotifier);
-
-        CallList.getInstance().addListener(this);
+    private InCallPresenter() {
     }
 
     /**

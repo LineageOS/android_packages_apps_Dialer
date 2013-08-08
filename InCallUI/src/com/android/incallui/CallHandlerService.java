@@ -54,14 +54,20 @@ public class CallHandlerService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        mCallList = CallList.getInstance();
+        mCallList = new CallList();
         mMainHandler = new MainHandler();
-        mInCallPresenter = InCallPresenter.init(this);
-        mAudioModeProvider = AudioModeProvider.getInstance();
+        mAudioModeProvider = new AudioModeProvider();
+        mInCallPresenter = InCallPresenter.getInstance();
+        mInCallPresenter.setUp(getApplicationContext(), mCallList, mAudioModeProvider);
     }
 
     @Override
     public void onDestroy() {
+        mInCallPresenter.tearDown();
+        mInCallPresenter = null;
+        mAudioModeProvider = null;
+        mMainHandler = null;
+        mCallList = null;
     }
 
     @Override

@@ -269,6 +269,11 @@ public class InCallActivity extends Activity {
     private void setUpPresenters() {
         InCallPresenter mainPresenter = InCallPresenter.getInstance();
 
+        mCallButtonFragment.getPresenter().setAudioModeProvider(
+                mainPresenter.getAudioModeProvider());
+        mCallCardFragment.getPresenter().setAudioModeProvider(
+                mainPresenter.getAudioModeProvider());
+
         mainPresenter.addListener(mCallButtonFragment.getPresenter());
         mainPresenter.addListener(mCallCardFragment.getPresenter());
         mainPresenter.addListener(mAnswerFragment.getPresenter());

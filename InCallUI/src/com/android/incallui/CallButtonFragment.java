@@ -57,7 +57,7 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
     CallButtonPresenter createPresenter() {
         // TODO: find a cleaner way to include audio mode provider than
         // having a singleton instance.
-        return new CallButtonPresenter(AudioModeProvider.getInstance());
+        return new CallButtonPresenter();
     }
 
     @Override
