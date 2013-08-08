@@ -16,8 +16,6 @@
 
 package com.android.incallui;
 
-import com.google.common.base.Preconditions;
-
 import android.media.AudioManager;
 
 import com.android.incallui.AudioModeProvider.AudioModeListener;
@@ -122,7 +120,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void endCallClicked() {
-        Preconditions.checkNotNull(mCall);
+        if (mCall == null) {
+            return;
+        }
 
         // TODO(klp): hook up call id.
         CallCommandClient.getInstance().disconnectCall(mCall.getCallId());
@@ -136,7 +136,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void holdClicked(boolean checked) {
-        Preconditions.checkNotNull(mCall);
+        if (mCall == null) {
+            return;
+        }
 
         Logger.d(this, "holding: " + mCall.getCallId());
 

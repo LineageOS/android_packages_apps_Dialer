@@ -16,8 +16,6 @@
 
 package com.android.incallui;
 
-import com.google.common.base.Preconditions;
-
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.services.telephony.common.Call;
@@ -58,14 +56,20 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     public void onAnswer() {
-        Preconditions.checkNotNull(mCall);
+        if (mCall == null) {
+            return;
+        }
+
         Logger.d(this, "onAnswer " + mCall.getCallId());
 
         CallCommandClient.getInstance().answerCall(mCall.getCallId());
     }
 
     public void onDecline() {
-        Preconditions.checkNotNull(mCall);
+        if (mCall == null) {
+            return;
+        }
+
         Logger.d(this, "onDecline " + mCall.getCallId());
 
         CallCommandClient.getInstance().rejectCall(mCall.getCallId(), false, null);
