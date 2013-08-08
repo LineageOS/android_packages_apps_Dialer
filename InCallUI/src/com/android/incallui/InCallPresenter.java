@@ -59,7 +59,6 @@ public class InCallPresenter implements CallList.Listener {
 
     public void setActivity(InCallActivity inCallActivity) {
         mInCallActivity = inCallActivity;
-        mInCallState = InCallState.STARTED;
 
         Logger.d(this, "UI Initialized");
 
@@ -76,16 +75,6 @@ public class InCallPresenter implements CallList.Listener {
      */
     @Override
     public void onCallListChange(CallList callList) {
-        // fast fail if we are still starting up
-        // TODO(klp): If the Activity crashes unexpectedly during start-up, we may never
-        // get out of STARTING_UP state and thus never attempt to recreate the activity a
-        // subsequent time. Test to see if this is the case and add a timeout for
-        // STARTING_UP phase.
-        if (mInCallState == InCallState.STARTING_UP) {
-            Logger.d(this, "Already on STARTING_UP, ignoring until ready");
-            return;
-        }
-
         InCallState newState = getPotentialStateFromCallList(callList);
         newState = startOrFinishUi(newState);
 
@@ -131,7 +120,6 @@ public class InCallPresenter implements CallList.Listener {
     /**
      * When the state of in-call changes, this is the first method to get called. It determines if
      * the UI needs to be started or finished depending on the new state and does it.
-     * It returns a potential new middle state (STARTING_UP) if appropriate.
      */
     private InCallState startOrFinishUi(InCallState newState) {
         Logger.d(this, "startOrFInishUi: " + newState.toString());
@@ -154,37 +142,21 @@ public class InCallPresenter implements CallList.Listener {
         // 2) InCallPresenter   - Gets announcement and calculates that the new InCallState
         //                      - should be set to INCOMING.
         // 3) InCallPresenter   - This method is called to see if we need to start or finish
-        //                        the app given the new state. Because the previous state was
-        //                        not INCOMING (and you can't have two incoming calls at once),
-        //                        we start the start-up sequence by setting
-        //                        InCallState = STARTING_UP (this is the code that you see
-        //                        below). During the STARTING_UP phase, InCallPresenter will
-        //                        ignore all new call changes that come in.
-        // 4) StatusBarNotifier - Listens to InCallState changes. When it sees STARTING_UP, it
-        //                        will issue a FullScreen Notification that will either start
-        //                        the InCallActivity or show the user a top-level notification
-        //                        dialog if the user is in an immersive app. That notification
-        //                        can also start the InCallActivity.
+        //                        the app given the new state.
+        // 4) StatusBarNotifier - Listens to InCallState changes. InCallPresenter calls
+        //                        StatusBarNotifier explicitly to issue a FullScreen Notification
+        //                        that will either start the InCallActivity or show the user a
+        //                        top-level notification dialog if the user is in an immersive app.
+        //                        That notification can also start the InCallActivity.
         // 5) InCallActivity    - Main activity starts up and at the end of its onCreate will
         //                        call InCallPresenter::setActivity() to let the presenter
         //                        know that start-up is complete.
-        // 6) InCallPresenter   - Sets STARTED as the new InCallState and issues a manual update
-        //                        of the call list so that it catches any changes that it
-        //                        previously ignored during STARTING_UP. That will result
-        //                        in a recalculated InCallState and throw us back into this
-        //                        method again.
-        // 7) InCallPresenter   - 99% of the time we end up back here with the current
-        //                        state at STARTED and newState as INCOMING (again). We do not
-        //                        want to do the start-up sequence again if we see that it has
-        //                        already STARTED so we just fall through in that case and let
-        //                        normal code flow occur (newState <= INCOMING).
         //
         //          [ AND NOW YOU'RE IN THE CALL. voila! ]
         //
         // Our app is started using a fullScreen notification.  We need to do this whenever
         // we get an incoming call.
-        final boolean startStartupSequence = (InCallState.INCOMING == newState &&
-                InCallState.STARTED != mInCallState);
+        final boolean startStartupSequence = (InCallState.INCOMING == newState);
 
         // A new outgoing call indicates that the user just now dialed a number and when that
         // happens we need to display the screen immediateley.
@@ -198,13 +170,12 @@ public class InCallPresenter implements CallList.Listener {
 
 
         if (startStartupSequence) {
-            return InCallState.STARTING_UP;
+            mStatusBarNotifier.updateNotificationAndLaunchIncomingCallUi(newState);
         } else if (showCallUi) {
             showInCall();
         } else if (newState == InCallState.HIDDEN) {
 
             // The new state is the hidden state (no calls).  Tear everything down.
-
             if (mInCallActivity != null) {
                 // Null out reference before we start end sequence
                 InCallActivity temp = mInCallActivity;
@@ -252,12 +223,6 @@ public class InCallPresenter implements CallList.Listener {
     public enum InCallState {
         // InCall Screen is off and there are no calls
         HIDDEN,
-
-        // In call is in the process of starting up
-        STARTING_UP,
-
-        // In call has started but is not displaying any information
-        STARTED,
 
         // Incoming-call screen is up
         INCOMING,
