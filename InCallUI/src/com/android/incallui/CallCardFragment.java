@@ -17,6 +17,7 @@
 package com.android.incallui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -46,14 +47,19 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     private ViewStub mSecondaryCallInfo;
     private TextView mSecondaryCallName;
 
+    // Cached DisplayMetrics density.
+    private float mDensity;
+
     @Override
     CallCardPresenter createPresenter() {
-        return new CallCardPresenter();
+        return new CallCardPresenter(AudioModeProvider.getInstance());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        mDensity = getResources().getDisplayMetrics().density;
+
         return inflater.inflate(R.layout.call_card, container, false);
     }
 
@@ -144,19 +150,23 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     }
 
     @Override
-    public void setCallState(int state, Call.DisconnectCause cause) {
+    public void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn) {
         String callStateLabel = null;
 
         // States other than disconnected not yet supported
-        if (state == Call.State.DISCONNECTED) {
-            callStateLabel = getCallFailedString(cause);
-        }
+        callStateLabel = getCallStateLabelFromState(state, cause);
 
-        Logger.d(this, "setCallState ", callStateLabel);
+        Logger.v(this, "setCallState ", callStateLabel);
+        Logger.v(this, "DisconnectCause ", cause);
+        Logger.v(this, "bluetooth on ", bluetoothOn);
 
         if (!TextUtils.isEmpty(callStateLabel)) {
             mCallStateLabel.setVisibility(View.VISIBLE);
             mCallStateLabel.setText(callStateLabel);
+
+            if (Call.State.INCOMING == state) {
+                setBluetoothOn(bluetoothOn);
+            }
         } else {
             mCallStateLabel.setVisibility(View.GONE);
             // Gravity is aligned left when receiving an incoming call in landscape.
@@ -168,6 +178,65 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
                 mCallStateLabel.setGravity(Gravity.END);
             }
         }
+    }
+
+    private void setBluetoothOn(boolean onOff) {
+        // Also, display a special icon (alongside the "Incoming call"
+        // label) if there's an incoming call and audio will be routed
+        // to bluetooth when you answer it.
+        final int bluetoothIconId = R.drawable.ic_incoming_call_bluetooth;
+
+        if (onOff) {
+            mCallStateLabel.setCompoundDrawablesWithIntrinsicBounds(bluetoothIconId, 0, 0, 0);
+            mCallStateLabel.setCompoundDrawablePadding((int) (mDensity * 5));
+        } else {
+            // Clear out any icons
+            mCallStateLabel.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        }
+    }
+
+    /**
+     * Gets the call state label based on the state of the call and
+     * cause of disconnect
+     */
+    private String getCallStateLabelFromState(int state, Call.DisconnectCause cause) {
+        final Context context = getView().getContext();
+        String callStateLabel = null;  // Label to display as part of the call banner
+
+        if (Call.State.IDLE == state) {
+            // "Call state" is meaningless in this state.
+
+        } else if (Call.State.ACTIVE == state) {
+            // We normally don't show a "call state label" at all in
+            // this state (but see below for some special cases).
+
+        } else if (Call.State.ONHOLD == state) {
+            callStateLabel = context.getString(R.string.card_title_on_hold);
+
+        } else if (Call.State.DIALING == state) {
+            callStateLabel = context.getString(R.string.card_title_dialing);
+
+        } else if (Call.State.INCOMING == state || Call.State.CALL_WAITING == state) {
+            callStateLabel = context.getString(R.string.card_title_incoming_call);
+
+        // TODO(klp): Add a disconnecting state
+        //} else if (Call.State.DISCONNECTING) {
+                // While in the DISCONNECTING state we display a "Hanging up"
+                // message in order to make the UI feel more responsive.  (In
+                // GSM it's normal to see a delay of a couple of seconds while
+                // negotiating the disconnect with the network, so the "Hanging
+                // up" state at least lets the user know that we're doing
+                // something.  This state is currently not used with CDMA.)
+                //callStateLabel = context.getString(R.string.card_title_hanging_up);
+
+        } else if (Call.State.DISCONNECTED == state) {
+            callStateLabel = getCallFailedString(cause);
+
+        } else {
+            Logger.wtf(this, "updateCallStateWidgets: unexpected call state: " + state);
+        }
+
+        return callStateLabel;
     }
 
     /**
