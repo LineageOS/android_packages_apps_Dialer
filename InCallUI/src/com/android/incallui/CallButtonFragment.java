@@ -143,6 +143,11 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
     }
 
     @Override
+    public void showHold(boolean show) {
+        mHoldButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
     public void setAudio(int mode) {
     }
 

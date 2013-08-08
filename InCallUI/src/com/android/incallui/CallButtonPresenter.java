@@ -23,6 +23,7 @@ import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
+import com.android.services.telephony.common.Call.Capabilities;
 
 /**
  * Logic for call buttons.
@@ -54,10 +55,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     @Override
     public void onStateChange(InCallState state, CallList callList) {
-        final boolean isVisible = state.isConnectingOrConnected() &&
-                !state.isIncoming();
-
-        getUi().setVisible(isVisible);
 
         if (state == InCallState.OUTGOING) {
             mCall = callList.getOutgoingCall();
@@ -66,6 +63,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         } else {
             mCall = null;
         }
+
+        updateUi(state, mCall);
     }
 
     @Override
@@ -152,10 +151,27 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         getUi().displayDialpad(checked);
     }
 
+    private void updateUi(InCallState state, Call call) {
+        final CallButtonUi ui = getUi();
+        if (ui == null) {
+            return;
+        }
+
+        final boolean isVisible = state.isConnectingOrConnected() &&
+                !state.isIncoming();
+
+        getUi().setVisible(isVisible);
+
+        if (call != null) {
+            getUi().showHold(call.can(Capabilities.HOLD));
+        }
+    }
+
     public interface CallButtonUi extends Ui {
         void setVisible(boolean on);
         void setMute(boolean on);
         void setHold(boolean on);
+        void showHold(boolean show);
         void displayDialpad(boolean on);
         void setAudio(int mode);
         void setSupportedAudio(int mask);
