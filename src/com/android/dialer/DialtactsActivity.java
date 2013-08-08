@@ -71,7 +71,7 @@ import com.android.dialer.calllog.CallLogActivity;
 import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.interactions.PhoneNumberInteraction;
-import com.android.dialer.list.NewPhoneFavoriteFragment;
+import com.android.dialer.list.PhoneFavoriteFragment;
 import com.android.dialer.list.OnListFragmentScrolledListener;
 import com.android.dialer.list.ShowAllContactsFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
@@ -88,7 +88,7 @@ import java.util.ArrayList;
 public class DialtactsActivity extends TransactionSafeActivity implements View.OnClickListener,
         DialpadFragment.OnDialpadQueryChangedListener, PopupMenu.OnMenuItemClickListener,
         OnListFragmentScrolledListener,
-        NewPhoneFavoriteFragment.OnPhoneFavoriteFragmentStartedListener,
+        PhoneFavoriteFragment.OnPhoneFavoriteFragmentStartedListener,
         DialpadFragment.OnDialpadFragmentStartedListener {
     private static final String TAG = "DialtactsActivity";
 
@@ -124,7 +124,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     /**
      * The main fragment displaying the user's favorites and frequent contacts
      */
-    private NewPhoneFavoriteFragment mPhoneFavoriteFragment;
+    private PhoneFavoriteFragment mPhoneFavoriteFragment;
 
     /**
      * Fragment containing the dialpad that slides into view
@@ -134,7 +134,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     /**
      * Fragment for searching phone numbers using the alphanumeric keyboard.
      */
-    private NewSearchFragment mRegularSearchFragment;
+    private SearchFragment mRegularSearchFragment;
 
     /**
      * Fragment for searching phone numbers using the dialpad.
@@ -246,15 +246,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final Intent intent = getIntent();
         fixIntent(intent);
 
-        setContentView(R.layout.new_dialtacts_activity);
+        setContentView(R.layout.dialtacts_activity);
 
         getActionBar().hide();
 
         if (savedInstanceState == null) {
-            mPhoneFavoriteFragment = new NewPhoneFavoriteFragment();
+            mPhoneFavoriteFragment = new PhoneFavoriteFragment();
             mPhoneFavoriteFragment.setListener(mPhoneFavoriteListener);
 
-            mRegularSearchFragment = new NewSearchFragment();
+            mRegularSearchFragment = new SearchFragment();
             mSmartDialSearchFragment = new SmartDialSearchFragment();
             mDialpadFragment = new DialpadFragment();
             mShowAllContactsFragment = new ShowAllContactsFragment();
@@ -284,11 +284,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     protected void onResume() {
         super.onResume();
         final FragmentManager fm = getFragmentManager();
-        mPhoneFavoriteFragment = (NewPhoneFavoriteFragment) fm.findFragmentByTag(
+        mPhoneFavoriteFragment = (PhoneFavoriteFragment) fm.findFragmentByTag(
                 TAG_FAVORITES_FRAGMENT);
         mDialpadFragment = (DialpadFragment) fm.findFragmentByTag(TAG_DIALPAD_FRAGMENT);
 
-        mRegularSearchFragment = (NewSearchFragment) fm.findFragmentByTag(
+        mRegularSearchFragment = (SearchFragment) fm.findFragmentByTag(
                 TAG_REGULAR_SEARCH_FRAGMENT);
         mRegularSearchFragment.setOnPhoneNumberPickerActionListener(
                 mPhoneNumberPickerActionListener);
@@ -311,7 +311,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onAttachFragment(Fragment fragment) {
-        if (fragment instanceof DialpadFragment || fragment instanceof NewSearchFragment
+        if (fragment instanceof DialpadFragment || fragment instanceof SearchFragment
                 || fragment instanceof SmartDialSearchFragment
                 || fragment instanceof ShowAllContactsFragment) {
             final FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -369,7 +369,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             case R.id.overflow_menu: {
                 final PopupMenu popupMenu = new PopupMenu(DialtactsActivity.this, view);
                 final Menu menu = popupMenu.getMenu();
-                popupMenu.inflate(R.menu.dialtacts_options_new);
+                popupMenu.inflate(R.menu.dialtacts_options);
                 popupMenu.setOnMenuItemClickListener(this);
                 popupMenu.show();
                 break;
@@ -704,8 +704,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
     }
 
-    private final NewPhoneFavoriteFragment.Listener mPhoneFavoriteListener =
-            new NewPhoneFavoriteFragment.Listener() {
+    private final PhoneFavoriteFragment.Listener mPhoneFavoriteListener =
+            new PhoneFavoriteFragment.Listener() {
         @Override
         public void onContactSelected(Uri contactUri) {
             PhoneNumberInteraction.startInteractionForPhoneCall(

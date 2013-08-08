@@ -346,7 +346,7 @@ public class DialpadFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
-        final View fragmentView = inflater.inflate(R.layout.new_dialpad_fragment, container,
+        final View fragmentView = inflater.inflate(R.layout.dialpad_fragment, container,
                 false);
         fragmentView.buildLayer();
 
@@ -938,7 +938,7 @@ public class DialpadFragment extends Fragment
             case R.id.overflow_menu_on_dialpad: {
                 final PopupMenu popupMenu = new PopupMenu(getActivity(), view);
                 final Menu menu = popupMenu.getMenu();
-                popupMenu.inflate(R.menu.dialpad_options_new);
+                popupMenu.inflate(R.menu.dialpad_options);
                 popupMenu.setOnMenuItemClickListener(this);
                 setupMenuItems(menu);
                 popupMenu.show();

@@ -84,9 +84,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dialpad_button_margin"
-            android:layout_above="@id/dialButton"
+            android:layout_above="@+id/dialButton"
             android:background="#33000000" />
-        <ImageButton android:id="@+id/dialButton"
+        <ImageButton android:id="@id/dialButton"
             android:layout_width="match_parent"
             android:layout_height="@dimen/call_button_height"
             android:layout_alignParentBottom="true"
