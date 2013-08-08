@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnDismissListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
@@ -38,12 +39,15 @@ import com.android.services.telephony.common.AudioMode;
  */
 public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
         implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener,
-                OnDismissListener {
+                OnDismissListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private ToggleButton mMuteButton;
     private ToggleButton mAudioButton;
     private ToggleButton mHoldButton;
     private ToggleButton mShowDialpadButton;
+    private ImageButton mMergeButton;
+    private ImageButton mAddCallButton;
+    private ImageButton mSwapButton;
 
     private PopupMenu mAudioModePopup;
     private boolean mAudioModePopupVisible;
@@ -99,12 +103,13 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
         });
 
         mShowDialpadButton = (ToggleButton) parent.findViewById(R.id.dialpadButton);
-        mShowDialpadButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                getPresenter().showDialpadClicked(isChecked);
-            }
-        });
+        mShowDialpadButton.setOnClickListener(this);
+        mAddCallButton = (ImageButton) parent.findViewById(R.id.addButton);
+        mAddCallButton.setOnClickListener(this);
+        mMergeButton = (ImageButton) parent.findViewById(R.id.mergeButton);
+        mMergeButton.setOnClickListener(this);
+        mSwapButton = (ImageButton) parent.findViewById(R.id.swapButton);
+        mSwapButton.setOnClickListener(this);
 
         return parent;
     }
@@ -121,6 +126,33 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
     public void onDestroyView() {
         super.onDestroyView();
         getPresenter().onUiUnready(this);
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        Logger.d(this, "onClick(View " + view + ", id " + id + ")...");
+
+        switch(id) {
+            case R.id.addButton:
+                getPresenter().addCallClicked();
+                break;
+            case R.id.mergeButton:
+                getPresenter().mergeClicked();
+                break;
+            case R.id.swapButton:
+                getPresenter().swapClicked();
+                break;
+            case R.id.dialpadButton:
+                getPresenter().showDialpadClicked(mShowDialpadButton.isChecked());
+            default:
+                Logger.wtf(this, "onClick: unexpected");
+                break;
+        }
     }
 
     @Override
@@ -145,6 +177,21 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
     @Override
     public void showHold(boolean show) {
         mHoldButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showMerge(boolean show) {
+        mMergeButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showSwap(boolean show) {
+        mSwapButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showAddCall(boolean show) {
+        mAddCallButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override

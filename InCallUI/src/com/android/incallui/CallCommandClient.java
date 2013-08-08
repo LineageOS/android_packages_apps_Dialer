@@ -88,6 +88,30 @@ public class CallCommandClient {
         }
     }
 
+    public void merge() {
+        try {
+            mCommandService.merge();
+        } catch (RemoteException e) {
+            Logger.e(this, "Error merging calls.", e);
+        }
+    }
+
+    public void swap() {
+        try {
+            mCommandService.swap();
+        } catch (RemoteException e) {
+            Logger.e(this, "Error merging calls.", e);
+        }
+    }
+
+    public void addCall() {
+        try {
+            mCommandService.addCall();
+        } catch (RemoteException e) {
+            Logger.e(this, "Error merging calls.", e);
+        }
+    }
+
     public void setAudioMode(int mode) {
         try {
             mCommandService.setAudioMode(mode);

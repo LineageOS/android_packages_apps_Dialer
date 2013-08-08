@@ -146,6 +146,18 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         getUi().setHold(checked);
     }
 
+    public void mergeClicked() {
+        CallCommandClient.getInstance().merge();
+    }
+
+    public void addCallClicked() {
+        CallCommandClient.getInstance().addCall();
+    }
+
+    public void swapClicked() {
+        CallCommandClient.getInstance().swap();
+    }
+
     public void showDialpadClicked(boolean checked) {
         Logger.v(this, "Show dialpad " + String.valueOf(checked));
         getUi().displayDialpad(checked);
@@ -160,10 +172,20 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean isVisible = state.isConnectingOrConnected() &&
                 !state.isIncoming();
 
-        getUi().setVisible(isVisible);
+        ui.setVisible(isVisible);
 
-        if (call != null) {
-            getUi().showHold(call.can(Capabilities.HOLD));
+        Logger.d(this, "Updating call UI for call: ", call);
+
+        if (isVisible && call != null) {
+            Logger.v(this, "Show hold ", call.can(Capabilities.HOLD));
+            Logger.v(this, "Show merge ", call.can(Capabilities.MERGE_CALLS));
+            Logger.v(this, "Show swap ", call.can(Capabilities.SWAP_CALLS));
+            Logger.v(this, "Show add call ", call.can(Capabilities.ADD_CALL));
+
+            ui.showHold(call.can(Capabilities.HOLD));
+            ui.showMerge(call.can(Capabilities.MERGE_CALLS));
+            ui.showSwap(call.can(Capabilities.SWAP_CALLS));
+            ui.showAddCall(call.can(Capabilities.ADD_CALL));
         }
     }
 
@@ -172,6 +194,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void setMute(boolean on);
         void setHold(boolean on);
         void showHold(boolean show);
+        void showMerge(boolean show);
+        void showSwap(boolean show);
+        void showAddCall(boolean show);
         void displayDialpad(boolean on);
         void setAudio(int mode);
         void setSupportedAudio(int mask);
