@@ -58,11 +58,6 @@
     <!-- Min with of fake menu buttons, which should be same as ActionBar's one -->
     <dimen name="fake_menu_button_min_width">56dp</dimen>
 
-    <!--  Smart Dial -->
-    <dimen name="smartdial_suggestions_padding">4dp</dimen>
-    <dimen name="smartdial_suggestions_extra_padding">2dp</dimen>
-    <dimen name="smartdial_confidence_hint_text_size">27dp</dimen>
-
     <!--  Favorites tile and recent call log padding -->
     <dimen name="contact_tile_divider_padding">3dp</dimen>
     <dimen name="contact_tile_info_button_height_and_width">36dp</dimen>
