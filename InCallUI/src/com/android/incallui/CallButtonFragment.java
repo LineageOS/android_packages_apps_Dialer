@@ -149,6 +149,7 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
                 break;
             case R.id.dialpadButton:
                 getPresenter().showDialpadClicked(mShowDialpadButton.isChecked());
+                break;
             default:
                 Logger.wtf(this, "onClick: unexpected");
                 break;
