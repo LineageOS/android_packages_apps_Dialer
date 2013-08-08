@@ -119,12 +119,6 @@
     <!-- Message to display if we fail to get content within a suitable time period. [CHAR LIMIT=40] -->
     <string name="voicemail_fetching_timout">Couldn\'t fetch voicemail.</string>
 
-    <!-- The header in the call log used to identify missed calls and voicemail that have not yet been consumed [CHAR LIMIT=10] -->
-    <string name="call_log_new_header">New</string>
-
-    <!-- The header in the call log used to identify items that have been already consumed [CHAR LIMIT=10] -->
-    <string name="call_log_old_header">Older</string>
-
     <!-- The header to show that call log is only showing voicemail calls. [CHAR LIMIT=40] -->
     <string name="call_log_voicemail_header">Calls with voicemail only</string>
 
