@@ -56,16 +56,15 @@ import com.android.dialer.calllog.CallLogQueryHandler;
  * {@link com.android.contacts.common.list.PhoneNumberListAdapter} into one unified list using {@link PhoneFavoriteMergedAdapter}.
  * A contact filter header is also inserted between those adapters' results.
  */
-public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickListener,
+public class PhoneFavoriteFragment extends Fragment implements OnItemClickListener,
         CallLogQueryHandler.Listener, CallLogAdapter.CallFetcher {
-    private static final String TAG = NewPhoneFavoriteFragment.class.getSimpleName();
+    private static final String TAG = PhoneFavoriteFragment.class.getSimpleName();
     private static final boolean DEBUG = false;
 
     /**
      * Used with LoaderManager.
      */
     private static int LOADER_ID_CONTACT_TILE = 1;
-    private static int LOADER_ID_ALL_CONTACTS = 2;
 
     public interface OnPhoneFavoriteFragmentStartedListener {
         public void onPhoneFavoriteFragmentStarted();
@@ -134,7 +133,7 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
     private Listener mListener;
 
     private OnListFragmentScrolledListener mActivityScrollListener;
-    private NewPhoneFavoriteMergedAdapter mAdapter;
+    private PhoneFavoriteMergedAdapter mAdapter;
     private PhoneFavoritesTileAdapter mContactTileAdapter;
     private PhoneNumberListAdapter mAllContactsAdapter;
 
@@ -203,7 +202,7 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View listLayout = inflater.inflate(
-                R.layout.new_phone_favorites_fragment, container, false);
+                R.layout.phone_favorites_fragment, container, false);
 
         mListView = (ListView) listLayout.findViewById(R.id.contact_tile_list);
         mListView.setItemsCanFocus(true);
@@ -229,7 +228,7 @@ public class NewPhoneFavoriteFragment extends Fragment implements OnItemClickLis
             }
         });
 
-        mAdapter = new NewPhoneFavoriteMergedAdapter(getActivity(), mContactTileAdapter,
+        mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), mContactTileAdapter,
                 mAccountFilterHeaderContainer, mCallLogAdapter, mLoadingView,
                 mShowAllContactsButton);
 

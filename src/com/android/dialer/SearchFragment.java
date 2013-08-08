@@ -25,11 +25,11 @@ import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.dialer.list.OnListFragmentScrolledListener;
 
-public class NewSearchFragment extends PhoneNumberPickerFragment {
+public class SearchFragment extends PhoneNumberPickerFragment {
 
     private OnListFragmentScrolledListener mActivityScrollListener;
 
-    public NewSearchFragment() {
+    public SearchFragment() {
         setDirectorySearchEnabled(true);
     }
 

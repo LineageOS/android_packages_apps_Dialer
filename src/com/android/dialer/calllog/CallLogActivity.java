@@ -151,7 +151,7 @@ public class CallLogActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         final MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.call_log_options_new, menu);
+        inflater.inflate(R.menu.call_log_options, menu);
         return true;
     }
 
