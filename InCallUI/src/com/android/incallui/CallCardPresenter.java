@@ -24,9 +24,11 @@ import android.net.Uri;
 import android.provider.ContactsContract.Contacts;
 import android.text.TextUtils;
 
+import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 
+import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
 
 /**
@@ -35,11 +37,13 @@ import com.android.services.telephony.common.Call;
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> implements
         InCallStateListener, CallerInfoAsyncQuery.OnQueryCompleteListener,
-        ContactsAsyncHelper.OnImageLoadCompleteListener {
+        ContactsAsyncHelper.OnImageLoadCompleteListener, AudioModeListener {
 
     private static final int TOKEN_UPDATE_PHOTO_FOR_CALL_STATE = 0;
 
     private Context mContext;
+    private AudioModeProvider mAudioModeProvider;
+    private Call mPrimary;
 
     /**
      * Uri being used to load contact photo for mPhoto. Will be null when nothing is being loaded,
@@ -50,13 +54,24 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
     // Track the state for the photo.
     private ContactsAsyncHelper.ImageTracker mPhotoTracker;
 
-    public CallCardPresenter() {
+    public CallCardPresenter(AudioModeProvider audioModeProvider) {
         mPhotoTracker = new ContactsAsyncHelper.ImageTracker();
+        mAudioModeProvider = audioModeProvider;
     }
 
     @Override
     public void onUiReady(CallCardUi ui) {
         super.onUiReady(ui);
+
+        mAudioModeProvider.addListener(this);
+    }
+
+    @Override
+    public void onUiUnready(CallCardUi ui) {
+        super.onUiUnready(ui);
+
+        mAudioModeProvider.removeListener(this);
+        mPrimary = null;
     }
 
     public void setContext(Context context) {
@@ -66,6 +81,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
     @Override
     public void onStateChange(InCallState state, CallList callList) {
         final CallCardUi ui = getUi();
+        if (ui == null) {
+            return;
+        }
 
         Call primary = null;
         Call secondary = null;
@@ -95,10 +113,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
                     true);
 
             ui.setNumber(primary.getNumber());
-            ui.setCallState(primary.getState(), primary.getDisconnectCause());
+            ui.setCallState(primary.getState(), primary.getDisconnectCause(),
+                    (mAudioModeProvider.getAudioMode() == AudioMode.BLUETOOTH));
         } else {
             ui.setNumber("");
-            ui.setCallState(Call.State.INVALID, Call.DisconnectCause.UNKNOWN);
+            ui.setCallState(Call.State.INVALID, Call.DisconnectCause.UNKNOWN, false);
         }
 
         // Set secondary call data
@@ -107,6 +126,21 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
         } else {
             ui.setSecondaryCallInfo(false, null);
         }
+
+        mPrimary = primary;
+    }
+
+    @Override
+    public void onAudioMode(int mode) {
+        if (mPrimary != null && getUi() != null) {
+            final boolean bluetoothOn = (AudioMode.BLUETOOTH == mode);
+
+            getUi().setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn);
+        }
+    }
+
+    @Override
+    public void onSupportedAudioMode(int mask) {
     }
 
     /**
@@ -155,7 +189,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
         void setImage(Drawable drawable);
         void setImage(Bitmap bitmap);
         void setSecondaryCallInfo(boolean show, String number);
-        void setCallState(int state, Call.DisconnectCause cause);
+        void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn);
     }
 
     @Override
