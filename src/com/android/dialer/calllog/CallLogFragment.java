@@ -90,7 +90,6 @@ public class CallLogFragment extends ListFragment
     private final Handler mHandler = new Handler();
 
     private TelephonyManager mTelephonyManager;
-    private PhoneStateListener mPhoneStateListener;
 
     private class CustomContentObserver extends ContentObserver {
         public CustomContentObserver() {
@@ -322,7 +321,6 @@ public class CallLogFragment extends ListFragment
         mAdapter.changeCursor(null);
         getActivity().getContentResolver().unregisterContentObserver(mCallLogObserver);
         getActivity().getContentResolver().unregisterContentObserver(mContactsObserver);
-        unregisterPhoneCallReceiver();
     }
 
     @Override
@@ -340,12 +338,6 @@ public class CallLogFragment extends ListFragment
     }
 
     private void updateCallList(int filterType) {
-        if (filterType == CallLogQueryHandler.CALL_TYPE_ALL) {
-            unregisterPhoneCallReceiver();
-        } else {
-            // TODO krelease: Make this work
-            //registerPhoneCallReceiver();
-        }
         mCallLogQueryHandler.fetchCalls(filterType);
     }
 
@@ -486,49 +478,5 @@ public class CallLogFragment extends ListFragment
         Intent serviceIntent = new Intent(getActivity(), CallLogNotificationsService.class);
         serviceIntent.setAction(CallLogNotificationsService.ACTION_UPDATE_NOTIFICATIONS);
         getActivity().startService(serviceIntent);
-    }
-
-    // TODO krelease: Make the ViewPager switch to the correct tab (All) when a phone call is
-    // placed.
-    // This should probably be moved to the call log activity.
-    /**
-     * Register a phone call filter to reset the call type when a phone call is place.
-     */
-    /*
-    private void registerPhoneCallReceiver() {
-        if (mPhoneStateListener != null) {
-            return; // Already registered.
-        }
-        mTelephonyManager = (TelephonyManager) getActivity().getSystemService(
-                Context.TELEPHONY_SERVICE);
-        mPhoneStateListener = new PhoneStateListener() {
-            @Override
-            public void onCallStateChanged(int state, String incomingNumber) {
-                if (state != TelephonyManager.CALL_STATE_OFFHOOK &&
-                        state != TelephonyManager.CALL_STATE_RINGING) {
-                    return;
-                }
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (getActivity() == null || getActivity().isFinishing()) {
-                            return;
-                        }
-                    }
-                 });
-            }
-        };
-        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
-    }
-    */
-
-    /**
-     * Un-registers the phone call receiver.
-     */
-    private void unregisterPhoneCallReceiver() {
-        if (mPhoneStateListener != null) {
-            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
-            mPhoneStateListener = null;
-        }
     }
 }
