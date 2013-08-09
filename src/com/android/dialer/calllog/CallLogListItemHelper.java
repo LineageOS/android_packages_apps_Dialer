@@ -27,10 +27,6 @@ import com.android.dialer.R;
 
 /**
  * Helper class to fill in the views of a call log entry.
- * TODO krelease: The only difference between this and the original is that we don't touch
- * divider views, which are not present in the new dialer. Once the new dialer replaces
- * the old one, we can replace it entirely. Otherwise we would have redundant divider=null
- * checks all over the place.
  */
 /* package */class CallLogListItemHelper {
     /** Helper for populating the details of a phone call. */
