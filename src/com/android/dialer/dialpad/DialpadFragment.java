@@ -262,6 +262,7 @@ public class DialpadFragment extends Fragment
 
     private boolean mStartedFromNewIntent = false;
     private boolean mFirstLaunch = false;
+    private boolean mAdjustTranslationForAnimation = false;
 
     private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
 
@@ -350,15 +351,17 @@ public class DialpadFragment extends Fragment
                 false);
         fragmentView.buildLayer();
 
-        // TODO krelease: Get rid of this ugly hack which is to prevent the first frame of the
-        // animation from drawing the fragment at translationY = 0
         final ViewTreeObserver vto = fragmentView.getViewTreeObserver();
+        // Adjust the translation of the DialpadFragment in a preDrawListener instead of in
+        // DialtactsActivity, because at the point in time when the DialpadFragment is added,
+        // its views have not been laid out yet.
         final OnPreDrawListener preDrawListener = new OnPreDrawListener() {
 
             @Override
             public boolean onPreDraw() {
+
                 if (isHidden()) return true;
-                if (fragmentView.getTranslationY() == 0) {
+                if (mAdjustTranslationForAnimation && fragmentView.getTranslationY() == 0) {
                     ((DialpadSlidingLinearLayout) fragmentView).setYFraction(
                             DIALPAD_SLIDE_FRACTION);
                 }
@@ -1690,5 +1693,13 @@ public class DialpadFragment extends Fragment
         } else {
             activity.hideSearchBar();
         }
+    }
+
+    public void setAdjustTranslationForAnimation(boolean value) {
+        mAdjustTranslationForAnimation = value;
+    }
+
+    public void setYFraction(float yFraction) {
+        ((DialpadSlidingLinearLayout) getView()).setYFraction(yFraction);
     }
 }
