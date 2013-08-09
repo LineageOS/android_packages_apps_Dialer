@@ -24,6 +24,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import com.android.incallui.InCallApp.NotificationBroadcastReceiver;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.services.telephony.common.Call;
 
@@ -36,6 +37,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
 
     private final Context mContext;
     private final NotificationManager mNotificationManager;
+    private InCallState mInCallState = InCallState.HIDDEN;
 
     public StatusBarNotifier(Context context) {
         Preconditions.checkNotNull(context);
@@ -128,37 +130,36 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      *   handling a new incoming call for the first time.
      */
     private void updateInCallNotification(boolean allowFullScreenIntent, InCallState state) {
-        int resId;
         Logger.d(this, "updateInCallNotification(allowFullScreenIntent = "
                      + allowFullScreenIntent + ")...");
+
+        // First, we dont need to continue issuing new notifications if the state hasn't
+        // changed from the last time we did this.
+        if (mInCallState == state) {
+            return;
+        }
+        mInCallState = state;
 
         if (!state.isConnectingOrConnected()) {
             cancelInCall();
             return;
         }
 
-        final PendingIntent inCallPendingIntent = getLaunchPendingIntent();
+        final PendingIntent inCallPendingIntent = createLaunchPendingIntent();
         final Notification.Builder builder = getNotificationBuilder();
+        builder.setContentIntent(inCallPendingIntent);
 
         /*
-         * Set up the Intents that will get fires when the user interacts with the notificaiton.
+         * Set up the Intents that will get fired when the user interacts with the notificaiton.
          */
-        builder.setContentIntent(inCallPendingIntent);
         if (allowFullScreenIntent) {
             configureFullScreenIntent(builder, inCallPendingIntent);
         }
 
-        // TODO(klp): Does this need to include OUTGOING state as well?
-        if (InCallState.INCALL == state) {
-            addActiveCallIntents(builder);
-        }
-
-
         /*
          * Set up notification Ui.
          */
-        setUpNotificationUi(builder);
-
+        setUpNotification(builder, state);
 
         /*
          * Fire off the notification
@@ -171,7 +172,13 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     /**
      * Sets up the main Ui for the notification
      */
-    private void setUpNotificationUi(Notification.Builder builder) {
+    private void setUpNotification(Notification.Builder builder, InCallState state) {
+
+        // Add special Content for calls that are ongoing
+        if (InCallState.INCALL == state || InCallState.OUTGOING == state) {
+            addActiveCallIntents(builder);
+        }
+
         // set the content
         builder.setContentText(mContext.getString(R.string.notification_ongoing_call));
         builder.setSmallIcon(R.drawable.stat_sys_phone_call);
@@ -179,11 +186,11 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
 
     private void addActiveCallIntents(Notification.Builder builder) {
         Logger.i(this, "Will show \"hang-up\" action in the ongoing active call Notification");
+
         // TODO: use better asset.
-        // TODO(klp): uncomment this for "hang-up" capability
-        //builder.addAction(R.drawable.stat_sys_phone_call_end,
-        //        mContext.getText(R.string.notification_action_end_call),
-        //        PhoneGlobals.createHangUpOngoingCallPendingIntent(mContext));
+        builder.addAction(R.drawable.stat_sys_phone_call_end,
+                mContext.getText(R.string.notification_action_end_call),
+                createHangUpOngoingCallPendingIntent(mContext));
     }
 
     /**
@@ -239,7 +246,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         return builder;
     }
 
-    private PendingIntent getLaunchPendingIntent() {
+    private PendingIntent createLaunchPendingIntent() {
 
         final Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
@@ -255,5 +262,15 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         PendingIntent inCallPendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
 
         return inCallPendingIntent;
+    }
+
+    /**
+     * Returns PendingIntent for hanging up ongoing phone call. This will typically be used from
+     * Notification context.
+     */
+    private static PendingIntent createHangUpOngoingCallPendingIntent(Context context) {
+        final Intent intent = new Intent(InCallApp.ACTION_HANG_UP_ONGOING_CALL, null,
+                context, NotificationBroadcastReceiver.class);
+        return PendingIntent.getBroadcast(context, 0, intent, 0);
     }
 }

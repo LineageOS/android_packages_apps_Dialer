@@ -24,6 +24,7 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
+            android:name="InCallApp"
             android:label="@string/inCallLabel"
             android:supportsRtl="true">
 
@@ -46,6 +47,13 @@
                 <action android:name="com.android.services.telephony.common.ICallHandlerService" />
             </intent-filter>
         </service>
+
+        <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
+        <receiver android:name="InCallApp$NotificationBroadcastReceiver" exported="false">
+            <intent-filter>
+                <action android:name="com.android.incallui.ACTION_HANG_UP_ONGOING_CALL" />
+            </intent-filter>
+        </receiver>
 
     </application>
 </manifest>
