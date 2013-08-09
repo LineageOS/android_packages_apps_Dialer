@@ -82,7 +82,7 @@
             android:background="@color/dialpad_primary_text_color">
             <ImageButton
                 android:id="@+id/call_history_on_dialpad_button"
-                android:layout_height="@dimen/fake_action_bar_height"
+                android:layout_height="match_parent"
                 android:layout_width="@dimen/fake_menu_button_min_width"
                 android:layout_gravity="bottom|start"
                 android:background="@drawable/btn_call"
@@ -100,7 +100,7 @@
                 android:src="@drawable/ic_dial_action_call" />
             <ImageButton
                 android:id="@+id/overflow_menu_on_dialpad"
-                android:layout_height="@dimen/fake_action_bar_height"
+                android:layout_height="match_parent"
                 android:layout_width="@dimen/fake_menu_button_min_width"
                 android:layout_gravity="bottom|end"
                 android:background="@drawable/btn_call"
