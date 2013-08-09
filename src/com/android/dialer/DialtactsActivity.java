@@ -422,15 +422,19 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     private void showDialpadFragment(boolean animate) {
+        mDialpadFragment.setAdjustTranslationForAnimation(animate);
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         if (animate) {
             ft.setCustomAnimations(R.anim.slide_in, 0);
+        } else {
+            mDialpadFragment.setYFraction(0);
         }
         ft.show(mDialpadFragment);
         ft.commit();
     }
 
     private void hideDialpadFragment(boolean animate) {
+        mDialpadFragment.setAdjustTranslationForAnimation(animate);
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         if (animate) {
             ft.setCustomAnimations(0, R.anim.slide_out);
@@ -619,9 +623,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         if (mDialpadFragment != null && (phoneIsInUse() || isDialIntent(intent))) {
             mDialpadFragment.setStartedFromNewIntent(true);
-            // TODO krelease: This should use showDialpadFragment(false) to avoid animating
-            // the dialpad in. Need to fix the onPreDrawListener in NewDialpadFragment first.
-            showDialpadFragment(true);
+            showDialpadFragment(false);
         }
     }
 
