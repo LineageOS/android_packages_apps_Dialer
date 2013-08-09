@@ -135,7 +135,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private OnListFragmentScrolledListener mActivityScrollListener;
     private PhoneFavoriteMergedAdapter mAdapter;
     private PhoneFavoritesTileAdapter mContactTileAdapter;
-    private PhoneNumberListAdapter mAllContactsAdapter;
 
     private CallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
@@ -160,8 +159,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private final LoaderManager.LoaderCallbacks<Cursor> mContactTileLoaderListener =
             new ContactTileLoaderListener();
     private final ScrollListener mScrollListener = new ScrollListener();
-
-    private boolean mOptionsMenuHasFrequents;
 
     @Override
     public void onAttach(Activity activity) {
@@ -245,24 +242,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         return listLayout;
     }
 
-
-    // TODO krelease: update the options menu when displaying the popup menu instead. We could
-    // possibly get rid of this method entirely.
-    private boolean isOptionsMenuChanged() {
-        return mOptionsMenuHasFrequents != hasFrequents();
-    }
-
-    // TODO krelease: Configure the menu items properly. Since the menu items show up as a PopupMenu
-    // rather than a normal actionbar menu, the initialization should be done there.
-    /*
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        final MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
-        mOptionsMenuHasFrequents = hasFrequents();
-        clearFrequents.setVisible(mOptionsMenuHasFrequents);
-    }*/
-
-    private boolean hasFrequents() {
+    public boolean hasFrequents() {
+        if (mContactTileAdapter == null) return false;
         return mContactTileAdapter.getNumFrequents() > 0;
     }
 
