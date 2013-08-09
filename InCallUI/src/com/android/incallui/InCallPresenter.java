@@ -149,6 +149,20 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     /**
+     * Hangs up any active or outgoing calls.
+     */
+    public void hangUpOngoingCall() {
+        Call call = mCallList.getOutgoingCall();
+        if (call == null) {
+            call = mCallList.getActiveOrBackgroundCall();
+        }
+
+        if (call != null) {
+            CallCommandClient.getInstance().disconnectCall(call.getCallId());
+        }
+    }
+
+    /**
      * When the state of in-call changes, this is the first method to get called. It determines if
      * the UI needs to be started or finished depending on the new state and does it.
      */
