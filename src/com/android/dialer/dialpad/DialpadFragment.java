@@ -1663,6 +1663,10 @@ public class DialpadFragment extends Fragment
                             // TODO: Filter out emergency numbers if
                             // the carrier does not want redial for
                             // these.
+                            // If the fragment has already been detached since the last time
+                            // we called queryLastOutgoingCall in onResume there is no point
+                            // doing anything here.
+                            if (getActivity() == null) return;
                             mLastNumberDialed = number;
                             updateDialAndDeleteButtonEnabledState();
                         }
