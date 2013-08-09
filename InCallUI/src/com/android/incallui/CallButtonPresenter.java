@@ -32,25 +32,24 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         implements InCallStateListener, AudioModeListener {
 
     private Call mCall;
-    private final AudioModeProvider mAudioModeProvider;
+    private AudioModeProvider mAudioModeProvider;
 
-    public CallButtonPresenter(AudioModeProvider audioModeProvider) {
-
-        // AudioModeProvider works effectively as a pass through. However, if we
-        // had this presenter listen for changes directly, it would have to live forever
-        // or risk missing important updates.
-        mAudioModeProvider = audioModeProvider;
-        mAudioModeProvider.addListener(this);
+    public CallButtonPresenter() {
     }
 
     @Override
     public void onUiReady(CallButtonUi ui) {
         super.onUiReady(ui);
+        if (mAudioModeProvider != null) {
+            mAudioModeProvider.addListener(this);
+        }
     }
 
     @Override
     public void onUiUnready(CallButtonUi ui) {
-        mAudioModeProvider.removeListener(this);
+        if (mAudioModeProvider != null) {
+            mAudioModeProvider.removeListener(this);
+        }
     }
 
     @Override
@@ -78,11 +77,18 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public int getAudioMode() {
-        return mAudioModeProvider.getAudioMode();
+        if (mAudioModeProvider != null) {
+            return mAudioModeProvider.getAudioMode();
+        }
+        return AudioMode.EARPIECE;
     }
 
     public int getSupportedAudio() {
-        return mAudioModeProvider.getSupportedModes();
+        if (mAudioModeProvider != null) {
+            return mAudioModeProvider.getSupportedModes();
+        }
+
+        return 0;
     }
 
     public void setAudioMode(int mode) {
@@ -100,18 +106,18 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
      */
     public void toggleSpeakerphone() {
         // this function should not be called if bluetooth is available
-        if (0 != (AudioMode.BLUETOOTH & mAudioModeProvider.getSupportedModes())) {
+        if (0 != (AudioMode.BLUETOOTH & getSupportedAudio())) {
 
-            // It's clear the UI is off, so update the supported mode once again.
+            // It's clear the UI is wrong, so update the supported mode once again.
             Logger.e(this, "toggling speakerphone not allowed when bluetooth supported.");
-            getUi().setSupportedAudio(mAudioModeProvider.getSupportedModes());
+            getUi().setSupportedAudio(getSupportedAudio());
             return;
         }
 
         int newMode = AudioMode.SPEAKER;
 
         // if speakerphone is already on, change to wired/earpiece
-        if (mAudioModeProvider.getAudioMode() == AudioMode.SPEAKER) {
+        if (getAudioMode() == AudioMode.SPEAKER) {
             newMode = AudioMode.WIRED_OR_EARPIECE;
         }
 
@@ -189,6 +195,14 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             ui.showSwap(call.can(Capabilities.SWAP_CALLS));
             ui.showAddCall(call.can(Capabilities.ADD_CALL));
         }
+    }
+
+    public void setAudioModeProvider(AudioModeProvider audioModeProvider) {
+        // AudioModeProvider works effectively as a pass through. However, if we
+        // had this presenter listen for changes directly, it would have to live forever
+        // or risk missing important updates.
+        mAudioModeProvider = audioModeProvider;
+        mAudioModeProvider.addListener(this);
     }
 
     public interface CallButtonUi extends Ui {

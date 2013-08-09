@@ -54,23 +54,26 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
     // Track the state for the photo.
     private ContactsAsyncHelper.ImageTracker mPhotoTracker;
 
-    public CallCardPresenter(AudioModeProvider audioModeProvider) {
+    public CallCardPresenter() {
         mPhotoTracker = new ContactsAsyncHelper.ImageTracker();
-        mAudioModeProvider = audioModeProvider;
     }
 
     @Override
     public void onUiReady(CallCardUi ui) {
         super.onUiReady(ui);
 
-        mAudioModeProvider.addListener(this);
+        if (mAudioModeProvider != null) {
+            mAudioModeProvider.addListener(this);
+        }
     }
 
     @Override
     public void onUiUnready(CallCardUi ui) {
         super.onUiUnready(ui);
 
-        mAudioModeProvider.removeListener(this);
+        if (mAudioModeProvider != null) {
+            mAudioModeProvider.removeListener(this);
+        }
         mPrimary = null;
     }
 
@@ -112,9 +115,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
             updateDisplayByCallerInfo(primary, primaryCallInfo, primary.getNumberPresentation(),
                     true);
 
+            final boolean bluetoothOn = mAudioModeProvider != null &&
+                    mAudioModeProvider.getAudioMode() == AudioMode.BLUETOOTH;
+
             ui.setNumber(primary.getNumber());
-            ui.setCallState(primary.getState(), primary.getDisconnectCause(),
-                    (mAudioModeProvider.getAudioMode() == AudioMode.BLUETOOTH));
+            ui.setCallState(primary.getState(), primary.getDisconnectCause(), bluetoothOn);
         } else {
             ui.setNumber("");
             ui.setCallState(Call.State.INVALID, Call.DisconnectCause.UNKNOWN, false);
@@ -423,6 +428,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
         ui.setName(displayName);
         ui.setNumber(displayNumber);
         ui.setNumberLabel(label);
+    }
+
+    public void setAudioModeProvider(AudioModeProvider audioModeProvider) {
+        mAudioModeProvider = audioModeProvider;
+        mAudioModeProvider.addListener(this);
     }
 
     public String getPresentationString(int presentation) {
