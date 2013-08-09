@@ -50,16 +50,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      */
     @Override
     public void onStateChange(InCallState state, CallList callList) {
-
-        if (InCallState.STARTING_UP == state) {
-            // TODO: This method needs to move somewhere more appropriate for sharing
-            InCallState newState = InCallPresenter.getInstance()
-                    .getPotentialStateFromCallList(callList);
-
-            updateNotificationAndLaunchIncomingCallUi(newState);
-        } else {
-            updateInCallNotification(state);
-        }
+        updateInCallNotification(state);
     }
 
     /**
@@ -107,7 +98,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      *
      * @see #updateInCallNotification(boolean)
      */
-    private void updateNotificationAndLaunchIncomingCallUi(InCallState state) {
+    public void updateNotificationAndLaunchIncomingCallUi(InCallState state) {
         // Set allowFullScreenIntent=true to indicate that we *should*
         // launch the incoming call UI if necessary.
         updateInCallNotification(true, state);
