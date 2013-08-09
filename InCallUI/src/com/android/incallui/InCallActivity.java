@@ -34,6 +34,7 @@ public class InCallActivity extends Activity {
     private CallCardFragment mCallCardFragment;
     private AnswerFragment mAnswerFragment;
     private DialpadFragment mDialpadFragment;
+    private boolean mIsForegroundActivity;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -62,6 +63,9 @@ public class InCallActivity extends Activity {
     protected void onResume() {
         Logger.d(this, "onResume()...");
         super.onResume();
+
+        mIsForegroundActivity = true;
+        InCallPresenter.getInstance().onUiShowing(true);
     }
 
     // onPause is guaranteed to be called when the InCallActivity goes
@@ -70,6 +74,9 @@ public class InCallActivity extends Activity {
     protected void onPause() {
         Logger.d(this, "onPause()...");
         super.onPause();
+
+        mIsForegroundActivity = false;
+        InCallPresenter.getInstance().onUiShowing(false);
     }
 
     @Override
@@ -82,6 +89,13 @@ public class InCallActivity extends Activity {
     protected void onDestroy() {
         Logger.d(this, "onDestroy()...  this = " + this);
         super.onDestroy();
+    }
+
+    /**
+     * Returns true when theActivity is in foreground (between onResume and onPause).
+     */
+    /* package */ boolean isForegroundActivity() {
+        return mIsForegroundActivity;
     }
 
     /**

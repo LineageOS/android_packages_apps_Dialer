@@ -163,6 +163,23 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     /**
+     * Returns true if the incall app is the foreground application.
+     */
+    public boolean isShowingInCallUi() {
+        return (mInCallActivity != null &&
+                mInCallActivity.isForegroundActivity());
+    }
+
+    /**
+     * Called when the activity goes out of the foreground.
+     */
+    public void onUiShowing(boolean showing) {
+        // We need to update the notification bar when we leave the UI because that
+        // could trigger it to show again.
+        mStatusBarNotifier.updateNotification(mInCallState);
+    }
+
+    /**
      * When the state of in-call changes, this is the first method to get called. It determines if
      * the UI needs to be started or finished depending on the new state and does it.
      */
