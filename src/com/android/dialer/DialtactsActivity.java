@@ -81,9 +81,6 @@ import java.util.ArrayList;
 
 /**
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
- *
- * TODO krelease: All classes currently prefixed with New will replace the original classes or
- * be renamed more appropriately before shipping.
  */
 public class DialtactsActivity extends TransactionSafeActivity implements View.OnClickListener,
         DialpadFragment.OnDialpadQueryChangedListener, PopupMenu.OnMenuItemClickListener,
@@ -370,6 +367,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 final PopupMenu popupMenu = new PopupMenu(DialtactsActivity.this, view);
                 final Menu menu = popupMenu.getMenu();
                 popupMenu.inflate(R.menu.dialtacts_options);
+                final MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
+                clearFrequents.setEnabled(mPhoneFavoriteFragment.hasFrequents());
                 popupMenu.setOnMenuItemClickListener(this);
                 popupMenu.show();
                 break;
@@ -379,9 +378,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 break;
             case R.id.call_history_on_dialpad_button:
             case R.id.call_history_button:
-                // TODO krelease: This should start an intent with content type
-                // CallLog.Calls.CONTENT_TYPE, once the intent filters for the call log activity
-                // is enabled
+                // Use explicit CallLogActivity intent instead of ACTION_VIEW +
+                // CONTENT_TYPE, so that we always open our call log from our dialer
                 final Intent intent = new Intent(this, CallLogActivity.class);
                 startActivity(intent);
                 break;
@@ -606,9 +604,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * @param intent Intent that contains information about which tab should be selected
      */
     private void displayFragment(Intent intent) {
-        // TODO krelease: Make navigation via intent work by displaying the correct fragment
-        // as appropriate.
-
         // If we got here by hitting send and we're in call forward along to the in-call activity
         boolean recentCallsRequest = Calls.CONTENT_TYPE.equals(intent.resolveType(
             getContentResolver()));
