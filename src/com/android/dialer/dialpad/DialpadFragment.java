@@ -377,6 +377,7 @@ public class DialpadFragment extends Fragment
         // Load up the resources for the text field.
         Resources r = getResources();
 
+        mDialButtonContainer = fragmentView.findViewById(R.id.dialButtonContainer);
         mDigitsContainer = fragmentView.findViewById(R.id.digits_container);
         mDigits = (EditText) fragmentView.findViewById(R.id.digits);
         mDigits.setKeyListener(UnicodeDialerKeyListener.INSTANCE);
