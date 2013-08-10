@@ -368,7 +368,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 final Menu menu = popupMenu.getMenu();
                 popupMenu.inflate(R.menu.dialtacts_options);
                 final MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
-                clearFrequents.setEnabled(mPhoneFavoriteFragment.hasFrequents());
+                clearFrequents.setVisible(mPhoneFavoriteFragment.hasFrequents());
                 popupMenu.setOnMenuItemClickListener(this);
                 popupMenu.show();
                 break;
