@@ -22,6 +22,7 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 
 import com.android.contacts.common.list.ContactListItemView;
+import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.dialer.list.OnListFragmentScrolledListener;
 
@@ -53,6 +54,9 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     @Override
     public void onStart() {
         super.onStart();
+        if (isSearchMode()) {
+            getAdapter().setHasHeader(0, false);
+        }
         getListView().setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -70,6 +74,9 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     protected void setSearchMode(boolean flag) {
         super.setSearchMode(flag);
         // This hides the "All contacts with phone numbers" header in the search fragment
-        getAdapter().setHasHeader(0, false);
+        final ContactEntryListAdapter adapter = getAdapter();
+        if (adapter != null) {
+            adapter.setHasHeader(0, false);
+        }
     }
 }
