@@ -60,7 +60,7 @@
              dialpad screen. -->
         <activity android:name=".DialtactsActivity"
             android:label="@string/launcherDialer"
-            android:theme="@style/NewDialtactsTheme"
+            android:theme="@style/DialtactsTheme"
             android:uiOptions="splitActionBarWhenNarrow"
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
@@ -119,7 +119,7 @@
 
         <activity android:name="com.android.dialer.calllog.CallLogActivity"
             android:label="@string/call_log_activity_title"
-            android:theme="@style/NewDialtactsTheme"
+            android:theme="@style/DialtactsTheme"
             android:screenOrientation="portrait"
             android:icon="@mipmap/ic_launcher_phone">
             <intent-filter>
@@ -128,6 +128,12 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:mimeType="vnd.android.cursor.dir/calls" />
             </intent-filter>
+        </activity>
+
+        <activity android:name="com.android.dialer.list.AllContactsActivity"
+            android:label="@string/show_all_contacts_title"
+            android:theme="@style/DialtactsTheme"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity android:name="com.android.dialer.CallDetailActivity"

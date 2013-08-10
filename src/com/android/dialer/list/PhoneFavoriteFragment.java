@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Rect;
@@ -68,6 +69,10 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
     public interface OnPhoneFavoriteFragmentStartedListener {
         public void onPhoneFavoriteFragmentStarted();
+    }
+
+    public interface OnShowAllContactsListener {
+        public void onShowAllContacts();
     }
 
     public interface Listener {
@@ -133,6 +138,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private Listener mListener;
 
     private OnListFragmentScrolledListener mActivityScrollListener;
+    private OnShowAllContactsListener mShowAllContactsListener;
     private PhoneFavoriteMergedAdapter mAdapter;
     private PhoneFavoritesTileAdapter mContactTileAdapter;
 
@@ -267,6 +273,13 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                     + " must implement OnListFragmentScrolledListener");
         }
 
+        try {
+            mShowAllContactsListener = (OnShowAllContactsListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnShowAllContactsListener");
+        }
+
         // Use initLoader() instead of restartLoader() to refraining unnecessary reload.
         // This method call implicitly assures ContactTileLoaderListener's onLoadFinished() will
         // be called, on which we'll check if "all" contacts should be reloaded again or not.
@@ -292,10 +305,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      * Gets called when user click on the show all contacts button.
      */
     private void showAllContacts() {
-        // TODO {klp} Use interface for the fragment to communicate with the activity
-        if (getActivity() instanceof  DialtactsActivity) {
-            ((DialtactsActivity) getActivity()).showAllContactsFragment();
-        }
+        mShowAllContactsListener.onShowAllContacts();
     }
 
     public void setListener(Listener listener) {
