@@ -262,7 +262,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // is null. Otherwise the fragment manager takes care of recreating these fragments.
         if (savedInstanceState == null) {
             final PhoneFavoriteFragment phoneFavoriteFragment = new PhoneFavoriteFragment();
-            phoneFavoriteFragment.setListener(mPhoneFavoriteListener);
 
             final FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.add(R.id.dialtacts_frame, phoneFavoriteFragment, TAG_FAVORITES_FRAGMENT);
@@ -313,6 +312,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mRegularSearchFragment = (SearchFragment) fragment;
         } else if (fragment instanceof PhoneFavoriteFragment) {
             mPhoneFavoriteFragment = (PhoneFavoriteFragment) fragment;
+            mPhoneFavoriteFragment.setListener(mPhoneFavoriteListener);
         }
     }
 
