@@ -90,7 +90,9 @@ public class PhoneFavoriteDragAndDropListeners {
                     Math.abs(x2 - x1) > mFlingHorizontalThreshold &&
                     Math.abs(velocityX) > FLING_VELOCITY_MINIMUM) {
                 // If fling is triggered successfully, end the scroll and setup removal dialogue.
-                final int removeIndex = mView.getParentRow().getItemIndex(x1, y1);
+
+                final int removeIndex = mView.getParentRow().getItemIndex(mView.getLeft() + x1,
+                        mView.getTop() + y1);
                 mView.setScrollEnd(false);
                 mView.setupRemoveDialogue();
                 mView.getParentRow().getTileAdapter().setPotentialRemoveEntryIndex(removeIndex);
