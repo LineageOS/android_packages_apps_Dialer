@@ -68,8 +68,10 @@ import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.dialer.calllog.CallLogActivity;
+import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
+import com.android.dialer.dialpad.SmartDialPrefix;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.list.AllContactsActivity;
 import com.android.dialer.list.PhoneFavoriteFragment;
@@ -164,6 +166,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private EditText mSearchView;
 
     private String mSearchQuery;
+
+    private DialerDatabaseHelper mDialerDatabaseHelper;
 
     /**
      * Listener used when one of phone numbers in search UI is selected. This will initiate a
@@ -281,6 +285,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 && savedInstanceState == null) {
             setupFilterText(intent);
         }
+
+        mDialerDatabaseHelper = DialerDatabaseHelper.getInstance(this);
+        SmartDialPrefix.initializeNanpSettings(this);
     }
 
     @Override
@@ -290,6 +297,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             displayFragment(getIntent());
         }
         mFirstLaunch = false;
+        mDialerDatabaseHelper.startSmartDialUpdateThread();
     }
 
     @Override
