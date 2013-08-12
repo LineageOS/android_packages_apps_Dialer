@@ -176,7 +176,7 @@ public class InCallPresenter implements CallList.Listener {
     public void onUiShowing(boolean showing) {
         // We need to update the notification bar when we leave the UI because that
         // could trigger it to show again.
-        mStatusBarNotifier.updateNotification(mInCallState);
+        mStatusBarNotifier.updateNotification(mInCallState, mCallList);
     }
 
     /**
@@ -232,7 +232,7 @@ public class InCallPresenter implements CallList.Listener {
 
 
         if (startStartupSequence) {
-            mStatusBarNotifier.updateNotificationAndLaunchIncomingCallUi(newState);
+            mStatusBarNotifier.updateNotificationAndLaunchIncomingCallUi(newState, mCallList);
         } else if (showCallUi) {
             showInCall();
         } else if (newState == InCallState.HIDDEN) {

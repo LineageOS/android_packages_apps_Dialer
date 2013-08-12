@@ -39,6 +39,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     private final NotificationManager mNotificationManager;
     private boolean mIsShowingNotification = false;
     private InCallState mInCallState = InCallState.HIDDEN;
+    private int mSavedIcon = 0;
+    private int mSavedContent = 0;
 
     public StatusBarNotifier(Context context) {
         Preconditions.checkNotNull(context);
@@ -53,7 +55,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      */
     @Override
     public void onStateChange(InCallState state, CallList callList) {
-        updateNotification(state);
+        updateNotification(state, callList);
     }
 
     /**
@@ -64,10 +66,10 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      * This method will never actually launch the incoming-call UI.
      * (Use updateNotificationAndLaunchIncomingCallUi() for that.)
      */
-    public void updateNotification(InCallState state) {
+    public void updateNotification(InCallState state, CallList callList) {
         // allowFullScreenIntent=false means *don't* allow the incoming
         // call UI to be launched.
-        updateInCallNotification(false, state);
+        updateInCallNotification(false, state, callList);
     }
 
     /**
@@ -101,10 +103,10 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      *
      * @see #updateInCallNotification(boolean)
      */
-    public void updateNotificationAndLaunchIncomingCallUi(InCallState state) {
+    public void updateNotificationAndLaunchIncomingCallUi(InCallState state, CallList callList) {
         // Set allowFullScreenIntent=true to indicate that we *should*
         // launch the incoming call UI if necessary.
-        updateInCallNotification(true, state);
+        updateInCallNotification(true, state, callList);
     }
 
 
@@ -132,38 +134,62 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      *   Watch out: This should be set to true *only* when directly
      *   handling a new incoming call for the first time.
      */
-    private void updateInCallNotification(boolean allowFullScreenIntent, InCallState state) {
+    private void updateInCallNotification(boolean allowFullScreenIntent, InCallState state,
+            CallList callList) {
         Logger.d(this, "updateInCallNotification(allowFullScreenIntent = "
                      + allowFullScreenIntent + ")...");
 
-        if (shouldSuppressNotification(state)) {
+        if (shouldSuppressNotification(state, callList)) {
             cancelInCall();
             return;
         }
 
-        // We dont need to continue issuing new notifications if the state hasn't
-        // changed from the last time we did this and we're still showing the same
-        // notification
-        if (mInCallState == state && mIsShowingNotification) {
+        buildAndSendNotification(state, callList, allowFullScreenIntent);
+
+    }
+
+    /**
+     * Sets up the main Ui for the notification
+     */
+    private void buildAndSendNotification(InCallState state, CallList callList,
+            boolean allowFullScreenIntent) {
+
+        final Call call = getCallToShow(callList);
+        if (call == null) {
+            Logger.wtf(this, "No call for the notification!");
+        }
+
+        final int iconResId = getIconToDisplay(call);
+        final int contentResId = getContentString(call);
+
+        // If we checked and found that nothing is different, dont issue another notification.
+        if (!checkForChangeAndSaveData(iconResId, contentResId, state, allowFullScreenIntent)) {
             return;
         }
-        mInCallState = state;
 
-        final PendingIntent inCallPendingIntent = createLaunchPendingIntent();
-        final Notification.Builder builder = getNotificationBuilder();
-        builder.setContentIntent(inCallPendingIntent);
 
         /*
-         * Set up the Intents that will get fired when the user interacts with the notificaiton.
+         * Nothing more to check...build and send it.
          */
+        final Notification.Builder builder = getNotificationBuilder();
+
+        // Set up the main intent to send the user to the in-call screen
+        final PendingIntent inCallPendingIntent = createLaunchPendingIntent();
+        builder.setContentIntent(inCallPendingIntent);
+
+        // Set the intent as a full screen intent as well if requested
         if (allowFullScreenIntent) {
             configureFullScreenIntent(builder, inCallPendingIntent);
         }
 
-        /*
-         * Set up notification Ui.
-         */
-        setUpNotification(builder, state);
+        // set the content
+        builder.setContentText(mContext.getString(contentResId));
+        builder.setSmallIcon(iconResId);
+
+        // Add special Content for calls that are ongoing
+        if (InCallState.INCALL == state || InCallState.OUTGOING == state) {
+            addHangupAction(builder);
+        }
 
         /*
          * Fire off the notification
@@ -175,21 +201,91 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     }
 
     /**
-     * Sets up the main Ui for the notification
+     * Checks the new notification data and compares it against any notification that we
+     * are already displaying. If the data is exactly the same, we return false so that
+     * we do not issue a new notification for the exact same data.
      */
-    private void setUpNotification(Notification.Builder builder, InCallState state) {
+    private boolean checkForChangeAndSaveData(int icon, int content, InCallState state,
+            boolean showFullScreenIntent) {
+        boolean retval = (mSavedIcon != icon) || (mSavedContent != content) ||
+                (mInCallState == state);
 
-        // Add special Content for calls that are ongoing
-        if (InCallState.INCALL == state || InCallState.OUTGOING == state) {
-            addActiveCallIntents(builder);
+        // A full screen intent means that we have been asked to interrupt an activity,
+        // so we definitely want to show it.
+        if (showFullScreenIntent) {
+            Logger.d(this, "Forcing full screen intent");
+            retval = true;
         }
 
-        // set the content
-        builder.setContentText(mContext.getString(R.string.notification_ongoing_call));
-        builder.setSmallIcon(R.drawable.stat_sys_phone_call);
+        // If we aren't showing a notification right now, definitely start showing one.
+        if (!mIsShowingNotification) {
+            Logger.d(this, "Showing notification for first time.");
+            retval = true;
+        }
+
+        mSavedIcon = icon;
+        mSavedContent = content;
+        mInCallState = state;
+
+        if (retval) {
+            Logger.d(this, "Data changed.  Showing notification");
+        }
+
+        return retval;
     }
 
-    private void addActiveCallIntents(Notification.Builder builder) {
+    /**
+     * Returns the appropriate icon res Id to display based on the call for which
+     * we want to display information.
+     */
+    private int getIconToDisplay(Call call) {
+        // Even if both lines are in use, we only show a single item in
+        // the expanded Notifications UI.  It's labeled "Ongoing call"
+        // (or "On hold" if there's only one call, and it's on hold.)
+        // Also, we don't have room to display caller-id info from two
+        // different calls.  So if both lines are in use, display info
+        // from the foreground call.  And if there's a ringing call,
+        // display that regardless of the state of the other calls.
+        if (call.getState() == Call.State.ONHOLD) {
+            return R.drawable.stat_sys_phone_call_on_hold;
+        }
+        return R.drawable.stat_sys_phone_call;
+    }
+
+    /**
+     * Returns the message to use with the notificaiton.
+     */
+    private int getContentString(Call call) {
+        int resId = R.string.notification_ongoing_call;
+
+        if (call.getState() == Call.State.INCOMING) {
+            resId = R.string.notification_incoming_call;
+
+        } else if (call.getState() == Call.State.ONHOLD) {
+            resId = R.string.notification_on_hold;
+
+        } else if (call.getState() == Call.State.DIALING) {
+            resId = R.string.notification_dialing;
+        }
+
+        return resId;
+    }
+
+    /**
+     * Gets the most relevant call to display in the notification.
+     */
+    private Call getCallToShow(CallList callList) {
+        Call call = callList.getIncomingCall();
+        if (call == null) {
+            call = callList.getOutgoingCall();
+        }
+        if (call == null) {
+            call = callList.getActiveOrBackgroundCall();
+        }
+        return call;
+    }
+
+    private void addHangupAction(Notification.Builder builder) {
         Logger.i(this, "Will show \"hang-up\" action in the ongoing active call Notification");
 
         // TODO: use better asset.
@@ -254,7 +350,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     /**
      * Returns true if notification should not be shown in the current state.
      */
-    private boolean shouldSuppressNotification(InCallState state) {
+    private boolean shouldSuppressNotification(InCallState state, CallList callList) {
         // Suppress the in-call notification if the InCallScreen is the
         // foreground activity, since it's already obvious that you're on a
         // call.  (The status bar icon is needed only if you navigate *away*
@@ -262,7 +358,16 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         boolean shouldSuppress = InCallPresenter.getInstance().isShowingInCallUi();
 
         // Suppress if the call is not active.
-        shouldSuppress |= !state.isConnectingOrConnected();
+        if (!state.isConnectingOrConnected()) {
+            shouldSuppress = true;
+        }
+
+        // We can still be in the INCALL state when a call is disconnected (in order to show
+        // the "Call ended" screen.  So check that we have an active connection too.
+        final Call call = getCallToShow(callList);
+        if (call == null) {
+            shouldSuppress = true;
+        }
 
         // If there's an incoming ringing call: always show the
         // notification, since the in-call notification is what actually
