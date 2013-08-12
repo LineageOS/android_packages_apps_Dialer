@@ -37,6 +37,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
 
     private final Context mContext;
     private final NotificationManager mNotificationManager;
+    private boolean mIsShowingNotification = false;
     private InCallState mInCallState = InCallState.HIDDEN;
 
     public StatusBarNotifier(Context context) {
@@ -52,7 +53,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      */
     @Override
     public void onStateChange(InCallState state, CallList callList) {
-        updateInCallNotification(state);
+        updateNotification(state);
     }
 
     /**
@@ -63,7 +64,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      * This method will never actually launch the incoming-call UI.
      * (Use updateNotificationAndLaunchIncomingCallUi() for that.)
      */
-    private void updateInCallNotification(InCallState state) {
+    public void updateNotification(InCallState state) {
         // allowFullScreenIntent=false means *don't* allow the incoming
         // call UI to be launched.
         updateInCallNotification(false, state);
@@ -114,6 +115,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     private void cancelInCall() {
         Logger.d(this, "cancelInCall()...");
         mNotificationManager.cancel(IN_CALL_NOTIFICATION);
+
+        mIsShowingNotification = false;
     }
 
     /**
@@ -133,17 +136,18 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         Logger.d(this, "updateInCallNotification(allowFullScreenIntent = "
                      + allowFullScreenIntent + ")...");
 
-        // First, we dont need to continue issuing new notifications if the state hasn't
-        // changed from the last time we did this.
-        if (mInCallState == state) {
-            return;
-        }
-        mInCallState = state;
-
-        if (!state.isConnectingOrConnected()) {
+        if (shouldSuppressNotification(state)) {
             cancelInCall();
             return;
         }
+
+        // We dont need to continue issuing new notifications if the state hasn't
+        // changed from the last time we did this and we're still showing the same
+        // notification
+        if (mInCallState == state && mIsShowingNotification) {
+            return;
+        }
+        mInCallState = state;
 
         final PendingIntent inCallPendingIntent = createLaunchPendingIntent();
         final Notification.Builder builder = getNotificationBuilder();
@@ -167,6 +171,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         Notification notification = builder.build();
         Logger.d(this, "Notifying IN_CALL_NOTIFICATION: " + notification);
         mNotificationManager.notify(IN_CALL_NOTIFICATION, notification);
+        mIsShowingNotification = true;
     }
 
     /**
@@ -244,6 +249,44 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         builder.setPriority(Notification.PRIORITY_HIGH);
 
         return builder;
+    }
+
+    /**
+     * Returns true if notification should not be shown in the current state.
+     */
+    private boolean shouldSuppressNotification(InCallState state) {
+        // Suppress the in-call notification if the InCallScreen is the
+        // foreground activity, since it's already obvious that you're on a
+        // call.  (The status bar icon is needed only if you navigate *away*
+        // from the in-call UI.)
+        boolean shouldSuppress = InCallPresenter.getInstance().isShowingInCallUi();
+
+        // Suppress if the call is not active.
+        shouldSuppress |= !state.isConnectingOrConnected();
+
+        // If there's an incoming ringing call: always show the
+        // notification, since the in-call notification is what actually
+        // launches the incoming call UI in the first place (see
+        // notification.fullScreenIntent below.)  This makes sure that we'll
+        // correctly handle the case where a new incoming call comes in but
+        // the InCallScreen is already in the foreground.
+        if (state.isIncoming()) {
+            shouldSuppress = false;
+        }
+
+        // JANK fix:
+        // This class will issue a notification when user makes an outgoing call.
+        // However, since we suppress the notification when the user is in the in-call screen,
+        // that results is us showing it for a split second, until the in-call screen comes up.
+        // It looks ugly.
+        //
+        // The solution is to ignore the change from HIDDEN to OUTGOING since in that particular
+        // case, we know we'll get called to update again when the UI finally starts.
+        if (InCallState.OUTGOING == state && InCallState.HIDDEN == mInCallState) {
+            shouldSuppress = true;
+        }
+
+        return shouldSuppress;
     }
 
     private PendingIntent createLaunchPendingIntent() {
