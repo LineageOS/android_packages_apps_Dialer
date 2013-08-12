@@ -24,13 +24,12 @@ public class CallerInfoUtils {
     private static final int QUERY_TOKEN = -1;
 
     /**
-     * This is called to get caller info for a call. For outgoing calls, uri should not be null
-     * because we know which contact uri the user selected to make the outgoing call. This
-     * will return a CallerInfo object immediately based off information in the call, but
+     * This is called to get caller info for a call. This will return a CallerInfo
+     * object immediately based off information in the call, but
      * more information is returned to the OnQueryCompleteListener (which contains
      * information about the phone number label, user's name, etc).
      */
-    public static CallerInfo getCallerInfoForCall(Context context, Call call, Uri uri,
+    public static CallerInfo getCallerInfoForCall(Context context, Call call,
             CallerInfoAsyncQuery.OnQueryCompleteListener listener) {
         CallerInfo info = new CallerInfo();
         String number = call.getNumber();
@@ -42,29 +41,26 @@ public class CallerInfoUtils {
         info.numberPresentation = call.getNumberPresentation();
         info.namePresentation = call.getCnapNamePresentation();
 
-        if (uri != null) {
-            // Have an URI, so pass it to startQuery
-            CallerInfoAsyncQuery.startQuery(QUERY_TOKEN, context, uri, listener, call);
-        } else {
-            if (!TextUtils.isEmpty(number)) {
-                number = modifyForSpecialCnapCases(context, info, number, info.numberPresentation);
-                info.phoneNumber = number;
+        // TODO: Have phoneapp send a Uri when it knows the contact that triggered this call.
 
-                // For scenarios where we may receive a valid number from the network but a
-                // restricted/unavailable presentation, we do not want to perform a contact query,
-                // so just return the existing caller info.
-                if (info.numberPresentation != Call.PRESENTATION_ALLOWED) {
-                    return info;
-                } else {
-                    // Start the query with the number provided from the call.
-                    Logger.d(TAG, "==> Actually starting CallerInfoAsyncQuery.startQuery()...");
-                    CallerInfoAsyncQuery.startQuery(QUERY_TOKEN, context, number, listener, call);
-                }
-            } else {
-                // The number is null or empty (Blocked caller id or empty). Just return the
-                // caller info object as is, without starting a query.
+        if (!TextUtils.isEmpty(number)) {
+            number = modifyForSpecialCnapCases(context, info, number, info.numberPresentation);
+            info.phoneNumber = number;
+
+            // For scenarios where we may receive a valid number from the network but a
+            // restricted/unavailable presentation, we do not want to perform a contact query,
+            // so just return the existing caller info.
+            if (info.numberPresentation != Call.PRESENTATION_ALLOWED) {
                 return info;
+            } else {
+                // Start the query with the number provided from the call.
+                Logger.d(TAG, "==> Actually starting CallerInfoAsyncQuery.startQuery()...");
+                CallerInfoAsyncQuery.startQuery(QUERY_TOKEN, context, number, listener, call);
             }
+        } else {
+            // The number is null or empty (Blocked caller id or empty). Just return the
+            // caller info object as is, without starting a query.
+            return info;
         }
 
         return info;

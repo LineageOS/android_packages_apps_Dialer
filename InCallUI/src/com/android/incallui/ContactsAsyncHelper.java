@@ -38,9 +38,6 @@ import java.io.InputStream;
  */
 public class ContactsAsyncHelper {
 
-    private static final boolean DBG = false;
-    private static final String LOG_TAG = "ContactsAsyncHelper";
-
     /**
      * Interface for a WorkerHandler result return.
      */
@@ -71,10 +68,8 @@ public class ContactsAsyncHelper {
             switch (msg.arg1) {
                 case EVENT_LOAD_IMAGE:
                     if (args.listener != null) {
-                        if (DBG) {
-                            Log.d(LOG_TAG, "Notifying listener: " + args.listener.toString() +
-                                    " image: " + args.uri + " completed");
-                        }
+                        Logger.d(this, "Notifying listener: " + args.listener.toString() +
+                                " image: " + args.uri + " completed");
                         args.listener.onImageLoadComplete(msg.what, args.photo, args.photoIcon,
                                 args.cookie);
                     }
@@ -197,7 +192,7 @@ public class ContactsAsyncHelper {
                             inputStream = Contacts.openContactPhotoInputStream(
                                     args.context.getContentResolver(), args.uri, true);
                         } catch (Exception e) {
-                            Log.e(LOG_TAG, "Error opening photo input stream", e);
+                            Logger.e(this, "Error opening photo input stream", e);
                         }
 
                         if (inputStream != null) {
@@ -208,25 +203,21 @@ public class ContactsAsyncHelper {
                             // BitmapDrawable and thus we can have (down)scaled version of it.
                             args.photoIcon = getPhotoIconWhenAppropriate(args.context, args.photo);
 
-                            if (DBG) {
-                                Log.d(LOG_TAG, "Loading image: " + msg.arg1 +
-                                        " token: " + msg.what + " image URI: " + args.uri);
-                            }
+                            Logger.d(ContactsAsyncHelper.this, "Loading image: " + msg.arg1 +
+                                    " token: " + msg.what + " image URI: " + args.uri);
                         } else {
                             args.photo = null;
                             args.photoIcon = null;
-                            if (DBG) {
-                                Log.d(LOG_TAG, "Problem with image: " + msg.arg1 +
-                                        " token: " + msg.what + " image URI: " + args.uri +
-                                        ", using default image.");
-                            }
+                            Logger.d(ContactsAsyncHelper.this, "Problem with image: " + msg.arg1 +
+                                    " token: " + msg.what + " image URI: " + args.uri +
+                                    ", using default image.");
                         }
                     } finally {
                         if (inputStream != null) {
                             try {
                                 inputStream.close();
                             } catch (IOException e) {
-                                Log.e(LOG_TAG, "Unable to close input stream.", e);
+                                Logger.e(this, "Unable to close input stream.", e);
                             }
                         }
                     }
@@ -264,7 +255,7 @@ public class ContactsAsyncHelper {
                 // If the longer edge is much longer than the shorter edge, the latter may
                 // become 0 which will cause a crash.
                 if (newWidth <= 0 || newHeight <= 0) {
-                    Log.w(LOG_TAG, "Photo icon's width or height become 0.");
+                    Logger.w(this, "Photo icon's width or height become 0.");
                     return null;
                 }
 
@@ -307,7 +298,7 @@ public class ContactsAsyncHelper {
         // in case the source caller info is null, the URI will be null as well.
         // just update using the placeholder image in this case.
         if (personUri == null) {
-            Log.wtf(LOG_TAG, "Uri is missing");
+            Logger.wtf("startObjectPhotoAsync", "Uri is missing");
             return;
         }
 
@@ -326,7 +317,7 @@ public class ContactsAsyncHelper {
         msg.arg1 = EVENT_LOAD_IMAGE;
         msg.obj = args;
 
-        if (DBG) Log.d(LOG_TAG, "Begin loading image: " + args.uri +
+        Logger.d("startObjectPhotoAsync", "Begin loading image: " + args.uri +
                 ", displaying default image for now.");
 
         // notify the thread to begin working
