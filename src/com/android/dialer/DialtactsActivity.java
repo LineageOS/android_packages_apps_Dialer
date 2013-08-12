@@ -309,8 +309,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             transaction.commit();
         } else if (fragment instanceof SmartDialSearchFragment) {
             mSmartDialSearchFragment = (SmartDialSearchFragment) fragment;
+            mSmartDialSearchFragment.setOnPhoneNumberPickerActionListener(
+                    mPhoneNumberPickerActionListener);
         } else if (fragment instanceof SearchFragment) {
             mRegularSearchFragment = (SearchFragment) fragment;
+            mRegularSearchFragment.setOnPhoneNumberPickerActionListener(
+                    mPhoneNumberPickerActionListener);
         } else if (fragment instanceof PhoneFavoriteFragment) {
             mPhoneFavoriteFragment = (PhoneFavoriteFragment) fragment;
         }
