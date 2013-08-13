@@ -26,7 +26,9 @@ import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.PinnedPositions;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.LongSparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -99,6 +101,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
 
     /**
      * Only valid when {@link DisplayType#STREQUENT_PHONE_ONLY} is true
+     *
+     * TODO krelease: Remove entirely if not needed
      */
     private int mPhoneNumberIndex;
     private int mPhoneNumberTypeIndex;
@@ -235,38 +239,62 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         mContactEntries.clear();
 
         cursor.moveToPosition(-1);
+
+        final LongSparseArray<Object> duplicates = new LongSparseArray<Object>(cursor.getCount());
+
+        // Dummy object that we're inserting into the sparse array as a value so that we can use
+        // the sparse array as a set to check for duplicates
+
+        final Object dummy = new Object();
+
         while (cursor.moveToNext()) {
-            final long id = cursor.getLong(mIdIndex);
 
-            final String photoUri = cursor.getString(mPhotoUriIndex);
-            final String lookupKey = cursor.getString(mLookupIndex);
-
-            final ContactEntry contact = new ContactEntry();
-
-            final int pinned = cursor.getInt(mPinnedIndex);
             final int starred = cursor.getInt(mStarredIndex);
-
-            final String name = cursor.getString(mNameIndex);
+            final long id;
 
             if (starred > 0) {
-                contact.id = id;
+                id = cursor.getLong(mIdIndex);
             } else {
                 // The contact id for frequent contacts is stored in the .contact_id field rather
                 // than the _id field
-                contact.id = cursor.getLong(mContactIdForFrequentIndex);
+                id = cursor.getLong(mContactIdForFrequentIndex);
             }
-            contact.name = (name != null) ? name : mResources.getString(R.string.missing_name);
-            contact.status = cursor.getString(mStatusIndex);
+
+            if (duplicates.get(id) == null) {
+                duplicates.put(id, dummy);
+            } else {
+                continue;
+            }
+
+            final String photoUri = cursor.getString(mPhotoUriIndex);
+            final String lookupKey = cursor.getString(mLookupIndex);
+            final int pinned = cursor.getInt(mPinnedIndex);
+            final String name = cursor.getString(mNameIndex);
+
+            final ContactEntry contact = new ContactEntry();
+
+            contact.id = id;
+            contact.name = (!TextUtils.isEmpty(name)) ? name :
+                    mResources.getString(R.string.missing_name);
             contact.photoUri = (photoUri != null ? Uri.parse(photoUri) : null);
             contact.lookupKey = ContentUris.withAppendedId(
                     Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey), id);
 
-            // Set phone number and label
-            final int phoneNumberType = cursor.getInt(mPhoneNumberTypeIndex);
-            final String phoneNumberCustomLabel = cursor.getString(mPhoneNumberLabelIndex);
-            contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
-                    phoneNumberCustomLabel);
-            contact.phoneNumber = cursor.getString(mPhoneNumberIndex);
+
+            // TODO krelease: These columns are temporarily unused for now so that
+            // the contact tiles will be treated like favorites since they don't have a phone
+            // number. Depending on how the final UX goes we will either remove or enable
+            // them again.
+
+            /*
+                // Set phone number, label and status
+                final int phoneNumberType = cursor.getInt(mPhoneNumberTypeIndex);
+                final String phoneNumberCustomLabel = cursor.getString(mPhoneNumberLabelIndex);
+                contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
+                        phoneNumberCustomLabel);
+                contact.phoneNumber = cursor.getString(mPhoneNumberIndex);
+                contact.status = cursor.getString(mStatusIndex);
+            */
 
             contact.pinned = pinned;
             mContactEntries.add(contact);
