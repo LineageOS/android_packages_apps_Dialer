@@ -43,6 +43,7 @@ public class InCallPresenter implements CallList.Listener {
 
     private AudioModeProvider mAudioModeProvider;
     private StatusBarNotifier mStatusBarNotifier;
+    private ContactInfoCache mContactInfoCache;
     private Context mContext;
     private CallList mCallList;
     private InCallActivity mInCallActivity;
@@ -63,7 +64,9 @@ public class InCallPresenter implements CallList.Listener {
         mCallList = callList;
         mCallList.addListener(this);
 
-        mStatusBarNotifier = new StatusBarNotifier(context);
+        mContactInfoCache = new ContactInfoCache(context);
+
+        mStatusBarNotifier = new StatusBarNotifier(context, mContactInfoCache, mCallList);
         addListener(mStatusBarNotifier);
 
         mAudioModeProvider = audioModeProvider;
@@ -146,6 +149,10 @@ public class InCallPresenter implements CallList.Listener {
 
     public AudioModeProvider getAudioModeProvider() {
         return mAudioModeProvider;
+    }
+
+    public ContactInfoCache getContactInfoCache() {
+        return mContactInfoCache;
     }
 
     /**
@@ -244,6 +251,10 @@ public class InCallPresenter implements CallList.Listener {
                 mInCallActivity = null;
 
                 temp.finish();
+
+                // blow away stale contact info so that we get fresh data on
+                // the next set of calls
+                mContactInfoCache.clearCache();
             }
         }
 

@@ -144,10 +144,17 @@ public class ContactInfoCache implements CallerInfoAsyncQuery.OnQueryCompleteLis
             entry.info.photo = new BitmapDrawable(mContext.getResources(), photoIcon);
         } else {
             Logger.v(this, "unknown photo");
-            entry.info.photo = mContext.getResources().getDrawable(R.drawable.picture_unknown);
+            entry.info.photo = null;
         }
 
         sendNotification(entry);
+    }
+
+    /**
+     * Blows away the stored cache values.
+     */
+    public void clearCache() {
+        mInfoMap.clear();
     }
 
     /**

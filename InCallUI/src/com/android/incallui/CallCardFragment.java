@@ -95,12 +95,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        getPresenter().setContext(activity);
-    }
-
-    @Override
     public void setPrimary(String number, String name, String label, Drawable photo) {
         boolean nameIsNumber = false;
 
@@ -197,8 +191,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
 
     private void setDrawableToImageView(ImageView view, Drawable photo) {
         if (photo == null) {
-            mPhoto.setVisibility(View.INVISIBLE);
-            return;
+            photo = view.getResources().getDrawable(R.drawable.picture_unknown);
         }
 
         final Drawable current = view.getDrawable();

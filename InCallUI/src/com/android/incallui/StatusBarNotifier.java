@@ -23,7 +23,13 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 
+import com.android.incallui.ContactInfoCache.ContactCacheEntry;
+import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallApp.NotificationBroadcastReceiver;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.services.telephony.common.Call;
@@ -31,21 +37,29 @@ import com.android.services.telephony.common.Call;
 /**
  * This class adds Notifications to the status bar for the in-call experience.
  */
-public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
+public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
+        ContactInfoCacheCallback {
     // notification types
     private static final int IN_CALL_NOTIFICATION = 1;
 
     private final Context mContext;
+    private final ContactInfoCache mContactInfoCache;
+    private final CallList mCallList;
     private final NotificationManager mNotificationManager;
     private boolean mIsShowingNotification = false;
     private InCallState mInCallState = InCallState.HIDDEN;
     private int mSavedIcon = 0;
     private int mSavedContent = 0;
+    private Bitmap mSavedLargeIcon;
+    private String mSavedContentTitle;
 
-    public StatusBarNotifier(Context context) {
+    public StatusBarNotifier(Context context, ContactInfoCache contactInfoCache,
+            CallList callList) {
         Preconditions.checkNotNull(context);
 
         mContext = context;
+        mContactInfoCache = contactInfoCache;
+        mCallList = callList;
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
     }
@@ -56,6 +70,14 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     @Override
     public void onStateChange(InCallState state, CallList callList) {
         updateNotification(state, callList);
+    }
+
+    /**
+     * Called after the Contact Info query has finished.
+     */
+    @Override
+    public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
+        updateNotification(mInCallState, mCallList);
     }
 
     /**
@@ -134,8 +156,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      *   Watch out: This should be set to true *only* when directly
      *   handling a new incoming call for the first time.
      */
-    private void updateInCallNotification(boolean allowFullScreenIntent, InCallState state,
-            CallList callList) {
+    private void updateInCallNotification(final boolean allowFullScreenIntent,
+            final InCallState state, CallList callList) {
         Logger.d(this, "updateInCallNotification(allowFullScreenIntent = "
                      + allowFullScreenIntent + ")...");
 
@@ -144,29 +166,41 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
             return;
         }
 
-        buildAndSendNotification(state, callList, allowFullScreenIntent);
+        final Call call = getCallToShow(callList);
+        if (call == null) {
+            Logger.wtf(this, "No call for the notification!");
+        }
+
+        // we make a call to the contact info cache to query for supplemental data to what the
+        // call provides.  This includes the contact name and photo.
+        // This callback will always get called immediately and synchronously with whatever data
+        // it has available, and may make a subsequent call later (same thread) if it had to
+        // call into the contacts provider for more data.
+        mContactInfoCache.findInfo(call, new ContactInfoCacheCallback() {
+            @Override
+            public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
+                buildAndSendNotification(state, call, entry, allowFullScreenIntent);
+            }
+        });
 
     }
 
     /**
      * Sets up the main Ui for the notification
      */
-    private void buildAndSendNotification(InCallState state, CallList callList,
-            boolean allowFullScreenIntent) {
-
-        final Call call = getCallToShow(callList);
-        if (call == null) {
-            Logger.wtf(this, "No call for the notification!");
-        }
+    private void buildAndSendNotification(InCallState state, Call call,
+            ContactCacheEntry contactInfo, boolean allowFullScreenIntent) {
 
         final int iconResId = getIconToDisplay(call);
+        final Bitmap largeIcon = getLargeIconToDisplay(contactInfo);
         final int contentResId = getContentString(call);
+        final String contentTitle = getContentTitle(contactInfo);
 
         // If we checked and found that nothing is different, dont issue another notification.
-        if (!checkForChangeAndSaveData(iconResId, contentResId, state, allowFullScreenIntent)) {
+        if (!checkForChangeAndSaveData(iconResId, contentResId, largeIcon, contentTitle, state,
+                allowFullScreenIntent)) {
             return;
         }
-
 
         /*
          * Nothing more to check...build and send it.
@@ -185,6 +219,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         // set the content
         builder.setContentText(mContext.getString(contentResId));
         builder.setSmallIcon(iconResId);
+        builder.setContentTitle(contentTitle);
+        builder.setLargeIcon(largeIcon);
 
         // Add special Content for calls that are ongoing
         if (InCallState.INCALL == state || InCallState.OUTGOING == state) {
@@ -205,10 +241,20 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      * are already displaying. If the data is exactly the same, we return false so that
      * we do not issue a new notification for the exact same data.
      */
-    private boolean checkForChangeAndSaveData(int icon, int content, InCallState state,
-            boolean showFullScreenIntent) {
+    private boolean checkForChangeAndSaveData(int icon, int content, Bitmap largeIcon,
+            String contentTitle, InCallState state, boolean showFullScreenIntent) {
+
+        // The two are different:
+        // if new title is not null, it should be different from saved version OR
+        // if new title is null, the saved version should not be null
+        final boolean contentTitleChanged =
+                (contentTitle != null && !contentTitle.equals(mSavedContentTitle)) ||
+                (contentTitle == null && mSavedContentTitle != null);
+
+        // any change means we are definitely updating
         boolean retval = (mSavedIcon != icon) || (mSavedContent != content) ||
-                (mInCallState == state);
+                (mInCallState != state) || (mSavedLargeIcon != largeIcon) ||
+                contentTitleChanged;
 
         // A full screen intent means that we have been asked to interrupt an activity,
         // so we definitely want to show it.
@@ -226,12 +272,36 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         mSavedIcon = icon;
         mSavedContent = content;
         mInCallState = state;
+        mSavedLargeIcon = largeIcon;
+        mSavedContentTitle = contentTitle;
 
         if (retval) {
             Logger.d(this, "Data changed.  Showing notification");
         }
 
         return retval;
+    }
+
+    /**
+     * Returns the main string to use in the notification.
+     */
+    private String getContentTitle(ContactCacheEntry contactInfo) {
+        if (TextUtils.isEmpty(contactInfo.name)) {
+            return contactInfo.number;
+        }
+
+        return contactInfo.name;
+    }
+
+    /**
+     * Gets a large icon from the contact info object to display in the notification.
+     */
+    private Bitmap getLargeIconToDisplay(ContactCacheEntry contactInfo) {
+        if (contactInfo.photo != null && (contactInfo.photo instanceof BitmapDrawable)) {
+            return ((BitmapDrawable) contactInfo.photo).getBitmap();
+        }
+
+        return null;
     }
 
     /**
