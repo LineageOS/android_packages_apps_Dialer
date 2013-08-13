@@ -35,7 +35,6 @@ import com.android.services.telephony.common.Call;
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         implements InCallStateListener, AudioModeListener, ContactInfoCacheCallback {
 
-    private Context mContext;
     private AudioModeProvider mAudioModeProvider;
     private ContactInfoCache mContactInfoCache;
     private Call mPrimary;
@@ -67,9 +66,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         mSecondaryContactInfo = null;
     }
 
-    public void setContext(Context context) {
-        mContext = context;
-        mContactInfoCache = new ContactInfoCache(mContext);
+    public void setContactInfoCache(ContactInfoCache cache) {
+        mContactInfoCache = cache;
         startContactInfoSearch();
     }
 

@@ -287,6 +287,8 @@ public class InCallActivity extends Activity {
                 mainPresenter.getAudioModeProvider());
         mCallCardFragment.getPresenter().setAudioModeProvider(
                 mainPresenter.getAudioModeProvider());
+        mCallCardFragment.getPresenter().setContactInfoCache(
+                mainPresenter.getContactInfoCache());
 
         mainPresenter.addListener(mCallButtonFragment.getPresenter());
         mainPresenter.addListener(mCallCardFragment.getPresenter());
