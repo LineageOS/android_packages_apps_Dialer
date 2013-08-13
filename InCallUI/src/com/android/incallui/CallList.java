@@ -221,7 +221,6 @@ public class CallList {
             }
         }
 
-        Logger.v(this, "Found call: ", retval);
         return retval;
     }
 
