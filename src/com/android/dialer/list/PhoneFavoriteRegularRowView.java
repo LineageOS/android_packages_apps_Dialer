@@ -19,11 +19,11 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
+import android.view.View;
 
 import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
 import com.android.dialer.list.PhoneFavoriteDragAndDropListeners.PhoneFavoriteDragListener;
-import com.android.dialer.list.PhoneFavoriteDragAndDropListeners.PhoneFavoriteGestureListener;
 
 import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
 
@@ -40,7 +40,7 @@ public class PhoneFavoriteRegularRowView extends PhoneFavoriteTileView {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        mFavoriteContactCard = findViewById(R.id.contact_favorite_card);
+        final View favoriteContactCard = findViewById(R.id.contact_favorite_card);
 
         final int rowPaddingStart;
         final int rowPaddingEnd;
@@ -57,26 +57,8 @@ public class PhoneFavoriteRegularRowView extends PhoneFavoriteTileView {
         rowPaddingBottom = resources.getDimensionPixelSize(
                 R.dimen.favorites_row_bottom_padding);
 
-        mFavoriteContactCard.setPaddingRelative(rowPaddingStart, rowPaddingTop, rowPaddingEnd,
+        favoriteContactCard.setPaddingRelative(rowPaddingStart, rowPaddingTop, rowPaddingEnd,
                 rowPaddingBottom);
-
-        mRemovalDialogue = findViewById(R.id.favorite_remove_dialogue);
-        mUndoRemovalButton = findViewById(R.id.favorite_remove_undo_button);
-
-        mGestureDetector = new GestureDetector(getContext(),
-                new PhoneFavoriteGestureListener(this));
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        mParentRow = (ContactTileRow) getParent();
-        mParentRow.setOnDragListener(new PhoneFavoriteDragListener(mParentRow,
-                mParentRow.getTileAdapter()));
-    }
-
-    @Override
-    protected boolean isDarkTheme() {
-        return false;
     }
 
     @Override
