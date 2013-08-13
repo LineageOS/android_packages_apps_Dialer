@@ -46,6 +46,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     private TextView mCallStateLabel;
     private ViewStub mSecondaryCallInfo;
     private TextView mSecondaryCallName;
+    private ImageView mSecondaryPhoto;
 
     // Cached DisplayMetrics density.
     private float mDensity;
@@ -100,52 +101,66 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     }
 
     @Override
-    public void setSecondaryCallInfo(boolean show, String number) {
-        if (show) {
-            showAndInitializeSecondaryCallInfo();
+    public void setPrimary(String number, String name, String label, Drawable photo) {
+        boolean nameIsNumber = false;
 
-            // Until we have the name source, use the number as the main text for secondary calls.
-            mSecondaryCallName.setText(number);
-        } else {
-            mSecondaryCallInfo.setVisibility(View.GONE);
+        // If there is no name, then use the number as the name;
+        if (TextUtils.isEmpty(name)) {
+            name = number;
+            number = null;
+            nameIsNumber = true;
         }
-    }
 
-    @Override
-    public void setNumber(String number)  {
-        if (!TextUtils.isEmpty(number)) {
+        // Set the number
+        if (TextUtils.isEmpty(number)) {
+            mPhoneNumber.setText("");
+            mPhoneNumber.setVisibility(View.GONE);
+        } else {
             mPhoneNumber.setText(number);
             mPhoneNumber.setVisibility(View.VISIBLE);
-            // We have a real phone number as "mPhoneNumber" so make it always LTR
             mPhoneNumber.setTextDirection(View.TEXT_DIRECTION_LTR);
-        } else {
-            mPhoneNumber.setVisibility(View.GONE);
         }
-    }
 
-    @Override
-    public void setName(String name, boolean isNumber) {
-        mName.setText(name);
-        mName.setVisibility(View.VISIBLE);
-        if (isNumber) {
-            mName.setTextDirection(View.TEXT_DIRECTION_LTR);
+        // Set direction of the name field
+
+        // set the name field.
+        if (TextUtils.isEmpty(name)) {
+            mName.setText("");
         } else {
-            mName.setTextDirection(View.TEXT_DIRECTION_INHERIT);
+            mName.setText(name);
+
+            int nameDirection = View.TEXT_DIRECTION_INHERIT;
+            if (nameIsNumber) {
+                nameDirection = View.TEXT_DIRECTION_LTR;
+            }
+            mName.setTextDirection(nameDirection);
         }
-    }
 
-    @Override
-    public void setName(String name) {
-        setName(name, false);
-    }
-
-    @Override
-    public void setNumberLabel(String label) {
+        // Set the label (Mobile, Work, etc)
         if (!TextUtils.isEmpty(label)) {
             mNumberLabel.setText(label);
             mNumberLabel.setVisibility(View.VISIBLE);
         } else {
             mNumberLabel.setVisibility(View.GONE);
+        }
+
+        setDrawableToImageView(mPhoto, photo);
+    }
+
+    @Override
+    public void setSecondary(boolean show, String number, String name, String label,
+            Drawable photo) {
+
+        if (show) {
+            showAndInitializeSecondaryCallInfo();
+            if (TextUtils.isEmpty(name)) {
+                name = number;
+            }
+
+            mSecondaryCallName.setText(name);
+            setDrawableToImageView(mSecondaryPhoto, photo);
+        } else {
+            mSecondaryCallInfo.setVisibility(View.GONE);
         }
     }
 
@@ -177,6 +192,22 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
                 mCallStateLabel.setText("");
                 mCallStateLabel.setGravity(Gravity.END);
             }
+        }
+    }
+
+    private void setDrawableToImageView(ImageView view, Drawable photo) {
+        if (photo == null) {
+            mPhoto.setVisibility(View.INVISIBLE);
+            return;
+        }
+
+        final Drawable current = view.getDrawable();
+        if (current == null) {
+            view.setImageDrawable(photo);
+            AnimationUtils.Fade.show(view);
+        } else {
+            AnimationUtils.startCrossFade(view, current, photo);
+            mPhoto.setVisibility(View.VISIBLE);
         }
     }
 
@@ -323,31 +354,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
         if (mSecondaryCallName == null) {
             mSecondaryCallName = (TextView) getView().findViewById(R.id.secondaryCallName);
         }
-    }
-
-    @Override
-    public void setImage(int resource) {
-        setImage(getActivity().getResources().getDrawable(resource));
-    }
-
-    @Override
-    public void setImage(Drawable drawable) {
-        setDrawableToImageView(mPhoto, drawable);
-    }
-
-    @Override
-    public void setImage(Bitmap bitmap) {
-        setImage(new BitmapDrawable(getActivity().getResources(), bitmap));
-    }
-
-    private void setDrawableToImageView(ImageView view, Drawable drawable) {
-        final Drawable current = view.getDrawable();
-        if (current == null) {
-            view.setImageDrawable(drawable);
-            AnimationUtils.Fade.show(view);
-        } else {
-            AnimationUtils.startCrossFade(view, current, drawable);
-            mPhoto.setVisibility(View.VISIBLE);
+        if (mSecondaryPhoto == null) {
+            mSecondaryPhoto = (ImageView) getView().findViewById(R.id.secondaryCallPhoto);
         }
     }
 }
