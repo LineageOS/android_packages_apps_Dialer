@@ -222,6 +222,13 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         builder.setContentTitle(contentTitle);
         builder.setLargeIcon(largeIcon);
 
+        if (call.getState() == Call.State.ACTIVE) {
+            builder.setUsesChronometer(true);
+            builder.setWhen(call.getConnectTime());
+        } else {
+            builder.setUsesChronometer(false);
+        }
+
         // Add special Content for calls that are ongoing
         if (InCallState.INCALL == state || InCallState.OUTGOING == state) {
             addHangupAction(builder);
