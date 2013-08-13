@@ -8,7 +8,7 @@ LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
 LOCAL_PACKAGE_NAME := InCallUI
 LOCAL_CERTIFICATE := platform
-LOCAL_PRIVELEGED_MODULE := true
+LOCAL_PRIVELEGED_MODULE := false
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
