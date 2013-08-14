@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dae975fb_1d4a3684",
+        "filename": "res/values-ru/cm_plurals.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5896
+      },
+      "writtenOn": "2013-08-14T08:40:38Z",
+      "side": 1,
+      "message": "quantity\u003d\"one\" nuzhno ubrat\u0027 naverno, t.k. v russkom yazyke eto i k 1, i k 21 (31,41 i t.d.) otnositsya.\nMozhno poluchit\u0027, naprimer, vmesto \"21 min.\" \"1 min.\"",
+      "revId": "9b8f12653943372136c794a6652ac176b2020281",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
