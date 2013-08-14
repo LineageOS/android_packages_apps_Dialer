@@ -55,7 +55,6 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     public PhoneFavoriteMergedAdapter(Context context,
             PhoneFavoritesTileAdapter contactTileAdapter,
-            View accountFilterHeaderContainer,
             CallLogAdapter callLogAdapter,
             View loadingView,
             View showAllContactsButton) {

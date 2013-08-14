@@ -293,7 +293,11 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             Log.v(TAG, "Getting Instance");
         }
         if (sSingleton == null) {
-            sSingleton = new DialerDatabaseHelper(context, SMARTDIAL_DATABASE_NAME);
+            // Use application context instead of activity context because this is a singleton,
+            // and we don't want to leak the activity if the activity is not running but the
+            // dialer database helper is still doing work.
+            sSingleton = new DialerDatabaseHelper(context.getApplicationContext(),
+                    SMARTDIAL_DATABASE_NAME);
         }
         return sSingleton;
     }

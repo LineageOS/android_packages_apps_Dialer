@@ -536,17 +536,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     }
 
     /**
-     * Returns the "frequent header" position. Only available when STREQUENT or
-     * STREQUENT_PHONE_ONLY is used for its display type.
-     *
-     * TODO krelease: We shouldn't need this method once we get rid of the frequent header
-     * in the merged adapter
-     */
-    public int getFrequentHeaderPosition() {
-        return getRowCount(mNumStarred);
-    }
-
-    /**
      * Temporarily removes a contact from the list for UI refresh. Stores data for this contact
      * in the back-up variable.
      *

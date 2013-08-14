@@ -190,8 +190,6 @@ public class DialpadFragment extends Fragment
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
 
-    private DialerDatabaseHelper mDialerDatabaseHelper;
-
     /**
      * Regular expression prohibiting manual phone call. Can be empty, which means "no rule".
      */
@@ -326,9 +324,6 @@ public class DialpadFragment extends Fragment
         mFirstLaunch = true;
         mContactsPrefs = new ContactsPreferences(getActivity());
         mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-
-        mDialerDatabaseHelper = DialerDatabaseHelper.getInstance(getActivity());
-        SmartDialPrefix.initializeNanpSettings(getActivity());
 
         try {
             mHaptic.init(getActivity(),
@@ -673,10 +668,6 @@ public class DialpadFragment extends Fragment
         stopWatch.lap("tg");
         // Prevent unnecessary confusion. Reset the press count anyway.
         mDialpadPressCount = 0;
-
-        // Initialize smart dialing state. This has to be done before anything is filled in before
-        // the dialpad edittext to prevent entries from being loaded from a null cache.
-        initializeSmartDialingState();
 
         configureScreenFromIntent(getActivity());
 
@@ -1679,13 +1670,6 @@ public class DialpadFragment extends Fragment
         final Intent intent = CallUtil.getCallIntent(EMPTY_NUMBER);
         intent.putExtra(EXTRA_SEND_EMPTY_FLASH, true);
         return intent;
-    }
-
-    private void initializeSmartDialingState() {
-        // Handle smart dialing related state
-        // TODO krelease: This should probably be moved to somewhere more appropriate, maybe
-        // into DialtactsActivity
-        mDialerDatabaseHelper.startSmartDialUpdateThread();
     }
 
     @Override
