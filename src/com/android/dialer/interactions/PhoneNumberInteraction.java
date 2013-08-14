@@ -309,15 +309,6 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     }
 
     private void performAction(String phoneNumber) {
-        if (mInteractionType == ContactDisplayUtils.INTERACTION_CALL && mContactId !=
-                UNKNOWN_CONTACT_ID) {
-            // Since we are making an outgoing call to this contact, undemote it here.
-            // If the contact is not demoted, this will not do anything.
-            final ContentValues cv = new ContentValues(1);
-            cv.put(String.valueOf(mContactId), PinnedPositions.UNDEMOTE);
-            mContext.getContentResolver().update(PinnedPositions.UPDATE_URI, cv, null, null);
-        }
-
         PhoneNumberInteraction.performAction(mContext, phoneNumber, mInteractionType, mCallOrigin);
     }
 
