@@ -178,6 +178,10 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Can be set to true by tests to disable processing of requests. */
     private volatile boolean mRequestProcessingDisabled = false;
 
+    /** True if CallLogAdapter is created from the PhoneFavoriteFragment, where the primary
+     * action should be set to call a number instead of opening the detail page. */
+    private boolean mUseCallAsPrimaryAction = false;
+
     /** Listener for the primary action in the list, opens the call details. */
     private final View.OnClickListener mPrimaryActionListener = new View.OnClickListener() {
         @Override
@@ -228,12 +232,13 @@ public class CallLogAdapter extends GroupingListAdapter
     };
 
     public CallLogAdapter(Context context, CallFetcher callFetcher,
-            ContactInfoHelper contactInfoHelper) {
+            ContactInfoHelper contactInfoHelper, boolean useCallAsPrimaryAction) {
         super(context);
 
         mContext = context;
         mCallFetcher = callFetcher;
         mContactInfoHelper = contactInfoHelper;
+        mUseCallAsPrimaryAction = useCallAsPrimaryAction;
 
         mContactInfoCache = ExpirableCache.create(CONTACT_INFO_CACHE_SIZE);
         mRequests = new LinkedList<ContactInfoRequest>();
@@ -515,9 +520,15 @@ public class CallLogAdapter extends GroupingListAdapter
 
         final ContactInfo cachedContactInfo = getContactInfoFromCallLog(c);
 
-        views.primaryActionView.setTag(
-                IntentProvider.getCallDetailIntentProvider(
-                        getCursor(), c.getPosition(), c.getLong(CallLogQuery.ID), count));
+        if (!mUseCallAsPrimaryAction) {
+            // Sets the primary action to open call detail page.
+            views.primaryActionView.setTag(
+                    IntentProvider.getCallDetailIntentProvider(
+                            getCursor(), c.getPosition(), c.getLong(CallLogQuery.ID), count));
+        } else {
+            // Sets the primary action to call the number.
+            views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number));
+        }
 
         // Store away the voicemail information so we can play it directly.
         if (callType == Calls.VOICEMAIL_TYPE) {
@@ -594,7 +605,8 @@ public class CallLogAdapter extends GroupingListAdapter
         final boolean isNew = c.getInt(CallLogQuery.IS_READ) == 0;
         // New items also use the highlighted version of the text.
         final boolean isHighlighted = isNew;
-        mCallLogViewsHelper.setPhoneCallDetails(views, details, isHighlighted);
+        mCallLogViewsHelper.setPhoneCallDetails(views, details, isHighlighted,
+                mUseCallAsPrimaryAction);
         setPhoto(views, photoId, lookupUri);
 
         // Listen for the first draw
