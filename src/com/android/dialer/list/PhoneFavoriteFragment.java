@@ -91,9 +91,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
             if (DEBUG) Log.d(TAG, "ContactTileLoaderListener#onLoadFinished");
             mContactTileAdapter.setContactCursor(data);
-
-            // Show the filter header with "loading" state.
-            mAccountFilterHeader.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -148,11 +145,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private TextView mEmptyView;
     private ListView mListView;
     private View mShowAllContactsButton;
-    /**
-     * Layout containing {@link #mAccountFilterHeader}. Used to limit area being "pressed".
-     */
-    private FrameLayout mAccountFilterHeaderContainer;
-    private View mAccountFilterHeader;
 
     /**
      * Layout used when contacts load is slower than expected and thus "loading" view should be
@@ -214,13 +206,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mListView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
         mListView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
 
-        // TODO krelease: Don't show this header anymore
-        // Create the account filter header but keep it hidden until "all" contacts are loaded.
-        mAccountFilterHeaderContainer = new FrameLayout(getActivity(), null);
-        mAccountFilterHeader = inflater.inflate(R.layout.account_filter_header_for_phone_favorite,
-                mListView, false);
-        mAccountFilterHeaderContainer.addView(mAccountFilterHeader);
-
         mLoadingView = inflater.inflate(R.layout.phone_loading_contacts, mListView, false);
         mShowAllContactsButton = inflater.inflate(R.layout.show_all_contact_button, mListView,
                 false);
@@ -232,8 +217,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         });
 
         mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), mContactTileAdapter,
-                mAccountFilterHeaderContainer, mCallLogAdapter, mLoadingView,
-                mShowAllContactsButton);
+                mCallLogAdapter, mLoadingView, mShowAllContactsButton);
 
         mListView.setAdapter(mAdapter);
 
