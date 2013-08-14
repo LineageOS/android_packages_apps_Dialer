@@ -150,13 +150,15 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         final CallCardUi ui = getUi();
 
         if (ui == null || mPrimary == null || mPrimary.getState() != Call.State.ACTIVE) {
-            ui.setPrimaryCallElapsedTime(false, null);
+            if (ui != null) {
+                ui.setPrimaryCallElapsedTime(false, null);
+            }
             mCallTimer.cancel();
+        } else {
+            final long callStart = mPrimary.getConnectTime();
+            final long duration = System.currentTimeMillis() - callStart;
+            ui.setPrimaryCallElapsedTime(true, DateUtils.formatElapsedTime(duration / 1000));
         }
-
-        final long callStart = mPrimary.getConnectTime();
-        final long duration = System.currentTimeMillis() - callStart;
-        ui.setPrimaryCallElapsedTime(true, DateUtils.formatElapsedTime(duration / 1000));
     }
 
 
