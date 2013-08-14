@@ -557,7 +557,7 @@ public class DialpadFragment extends Fragment
 
         // retrieve dialpad autocomplete setting
         mSmartDialEnabled = Settings.Secure.getInt(contentResolver,
-                Settings.Secure.DIALPAD_AUTOCOMPLETE, 0) == 1 && mSmartDialContainer != null;
+                Settings.Secure.DIALPAD_AUTOCOMPLETE, 1) == 1 && mSmartDialContainer != null;
 
         stopWatch.lap("dtwd");
 
