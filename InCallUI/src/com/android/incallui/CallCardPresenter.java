@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.format.DateUtils;
 
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
@@ -35,14 +36,25 @@ import com.android.services.telephony.common.Call;
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         implements InCallStateListener, AudioModeListener, ContactInfoCacheCallback {
 
+    private static final long CALL_TIME_UPDATE_INTERVAL = 1000; // in milliseconds
+
     private AudioModeProvider mAudioModeProvider;
     private ContactInfoCache mContactInfoCache;
     private Call mPrimary;
     private Call mSecondary;
     private ContactCacheEntry mPrimaryContactInfo;
     private ContactCacheEntry mSecondaryContactInfo;
+    private CallTimer mCallTimer;
 
     public CallCardPresenter() {
+
+        // create the call timer
+        mCallTimer = new CallTimer(new Runnable() {
+            @Override
+            public void run() {
+                updateCallTime();
+            }
+        });
     }
 
     @Override
@@ -64,11 +76,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         mPrimary = null;
         mPrimaryContactInfo = null;
         mSecondaryContactInfo = null;
-    }
-
-    public void setContactInfoCache(ContactInfoCache cache) {
-        mContactInfoCache = cache;
-        startContactInfoSearch();
     }
 
     @Override
@@ -106,6 +113,16 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // It is in that callback that we set the values into the Ui.
         startContactInfoSearch();
 
+        // Start/Stop the call time update timer
+        if (mPrimary != null && mPrimary.getState() == Call.State.ACTIVE) {
+            Logger.d(this, "Starting the calltime timer");
+            mCallTimer.start(CALL_TIME_UPDATE_INTERVAL);
+        } else {
+            Logger.d(this, "Canceling the calltime timer");
+            mCallTimer.cancel();
+            ui.setPrimaryCallElapsedTime(false, null);
+        }
+
         // Set the call state
         if (mPrimary != null) {
             final boolean bluetoothOn = mAudioModeProvider != null &&
@@ -127,6 +144,25 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     @Override
     public void onSupportedAudioMode(int mask) {
+    }
+
+    public void updateCallTime() {
+        final CallCardUi ui = getUi();
+
+        if (ui == null || mPrimary == null || mPrimary.getState() != Call.State.ACTIVE) {
+            ui.setPrimaryCallElapsedTime(false, null);
+            mCallTimer.cancel();
+        }
+
+        final long callStart = mPrimary.getConnectTime();
+        final long duration = System.currentTimeMillis() - callStart;
+        ui.setPrimaryCallElapsedTime(true, DateUtils.formatElapsedTime(duration / 1000));
+    }
+
+
+    public void setContactInfoCache(ContactInfoCache cache) {
+        mContactInfoCache = cache;
+        startContactInfoSearch();
     }
 
     /**
@@ -245,5 +281,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimary(String number, String name, String label, Drawable photo);
         void setSecondary(boolean show, String number, String name, String label, Drawable photo);
         void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn);
+        void setPrimaryCallElapsedTime(boolean show, String duration);
     }
 }

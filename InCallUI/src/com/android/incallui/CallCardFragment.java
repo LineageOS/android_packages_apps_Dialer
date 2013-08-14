@@ -39,11 +39,15 @@ import com.android.services.telephony.common.Call;
 public class CallCardFragment extends BaseFragment<CallCardPresenter>
         implements CallCardPresenter.CallCardUi {
 
+    // Primary caller info
     private TextView mPhoneNumber;
     private TextView mNumberLabel;
     private TextView mName;
-    private ImageView mPhoto;
     private TextView mCallStateLabel;
+    private ImageView mPhoto;
+    private TextView mElapsedTime;
+
+    // Secondary caller info
     private ViewStub mSecondaryCallInfo;
     private TextView mSecondaryCallName;
     private ImageView mSecondaryPhoto;
@@ -73,6 +77,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
         mSecondaryCallInfo = (ViewStub) view.findViewById(R.id.secondary_call_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
+        mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
 
         // This method call will begin the callbacks on CallCardUi. We need to ensure
         // everything needed for the callbacks is set up before this is called.
@@ -186,6 +191,19 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
                 mCallStateLabel.setText("");
                 mCallStateLabel.setGravity(Gravity.END);
             }
+        }
+    }
+
+    @Override
+    public void setPrimaryCallElapsedTime(boolean show, String callTimeElapsed) {
+        if (show) {
+            if (mElapsedTime.getVisibility() != View.VISIBLE) {
+                AnimationUtils.Fade.show(mElapsedTime);
+            }
+            mElapsedTime.setText(callTimeElapsed);
+        } else {
+            // hide() animation has no effect if it is already hidden.
+            AnimationUtils.Fade.hide(mElapsedTime, View.INVISIBLE);
         }
     }
 
