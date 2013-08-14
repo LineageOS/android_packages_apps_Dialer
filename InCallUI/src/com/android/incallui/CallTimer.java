@@ -69,7 +69,7 @@ public class CallTimer extends Handler {
         }
 
         final long now = SystemClock.uptimeMillis();
-        final long nextReport = mLastReportedTime + mInterval;
+        long nextReport = mLastReportedTime + mInterval;
         while (now >= nextReport) {
             nextReport += mInterval;
         }
