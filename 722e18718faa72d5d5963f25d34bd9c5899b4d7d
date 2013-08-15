@@ -16,6 +16,24 @@
       "revId": "722e18718faa72d5d5963f25d34bd9c5899b4d7d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dae975fb_8e3caa30",
+        "filename": "res/values-ru/cm_plurals.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5574
+      },
+      "writtenOn": "2013-08-15T09:36:10Z",
+      "side": 1,
+      "message": "Ya vbrosil takoe dlya Mms. Rabotaet, mozhno ispol\u0027zovat voobshe vezde :)",
+      "parentUuid": "dae975fb_0e943a35",
+      "revId": "722e18718faa72d5d5963f25d34bd9c5899b4d7d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
