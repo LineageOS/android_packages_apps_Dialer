@@ -16,8 +16,8 @@
 
 package com.android.incallui;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 
 import com.android.incallui.AudioModeProvider.AudioModeListener;
@@ -28,6 +28,7 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 
 import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
+import com.android.services.telephony.common.Call.DisconnectCause;
 
 /**
  * Presenter for the Call Card Fragment.
@@ -95,10 +96,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
             // getCallToDisplay doesn't go through outgoing or incoming calls. It will return the
             // highest priority call to display as the secondary call.
-            secondary = getCallToDisplay(callList, null);
+            secondary = getCallToDisplay(callList, null, true);
         } else if (state == InCallState.INCALL) {
-            primary = getCallToDisplay(callList, null);
-            secondary = getCallToDisplay(callList, primary);
+            primary = getCallToDisplay(callList, null, false);
+            secondary = getCallToDisplay(callList, primary, true);
         }
 
         Logger.d(this, "Primary call: " + primary);
@@ -129,7 +130,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     mAudioModeProvider.getAudioMode() == AudioMode.BLUETOOTH;
             ui.setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn);
         } else {
-            ui.setCallState(Call.State.INVALID, Call.DisconnectCause.UNKNOWN, false);
+            ui.setCallState(Call.State.IDLE, Call.DisconnectCause.UNKNOWN, false);
         }
     }
 
@@ -194,19 +195,22 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      *
      * @param ignore A call to ignore if found.
      */
-    private Call getCallToDisplay(CallList callList, Call ignore) {
+    private Call getCallToDisplay(CallList callList, Call ignore, boolean skipDisconnected) {
 
-        // Disconnected calls get primary position to let user know quickly
-        // what call has disconnected. Disconnected calls are very short lived.
-        Call retval = callList.getDisconnectedCall();
+        // Active calls come second.  An active call always gets precedent.
+        Call retval = callList.getActiveCall();
         if (retval != null && retval != ignore) {
             return retval;
         }
 
-        // Active calls come second.  An active call always gets precedent.
-        retval = callList.getActiveCall();
-        if (retval != null && retval != ignore) {
-            return retval;
+        // Disconnected calls get primary position if there are no active calls
+        // to let user know quickly what call has disconnected. Disconnected
+        // calls are very short lived.
+        if (!skipDisconnected) {
+            retval = callList.getDisconnectedCall();
+            if (retval != null && retval != ignore) {
+                return retval;
+            }
         }
 
         // Then we go to background call (calls on hold)
@@ -226,11 +230,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     @Override
     public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
-        Logger.d(this, "onContactInfoComplete: ", entry.name);
-        Logger.d(this, "onContactInfoComplete: ", entry.number);
-        Logger.d(this, "onContactInfoComplete: ", entry.label);
-        Logger.d(this, "onContactInfoComplete: ", entry.photo);
-
         if (mPrimary != null && mPrimary.getCallId() == callId) {
             mPrimaryContactInfo = entry;
             updatePrimaryDisplayInfo();
@@ -249,13 +248,38 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         if (mPrimaryContactInfo != null) {
-            ui.setPrimary(mPrimaryContactInfo.number, mPrimaryContactInfo.name,
-                    mPrimaryContactInfo.label, mPrimaryContactInfo.photo);
+            final String name = getNameForCall(mPrimaryContactInfo);
+            final String number = getNumberForCall(mPrimaryContactInfo);
+            final boolean nameIsNumber = name != null && name.equals(mPrimaryContactInfo.number);
+            ui.setPrimary(number, name, nameIsNumber, mPrimaryContactInfo.label,
+                    mPrimaryContactInfo.photo, mPrimary.isConferenceCall());
         } else {
             // reset to nothing (like at end of call)
-            ui.setPrimary(null, null, null, null);
+            ui.setPrimary(null, null, false, null, null, false);
         }
 
+    }
+
+    /**
+     * Gets the name to display for the call.
+     */
+    private static String getNameForCall(ContactCacheEntry contactInfo) {
+        if (TextUtils.isEmpty(contactInfo.name)) {
+            return contactInfo.number;
+        }
+        return contactInfo.name;
+    }
+
+    /**
+     * Gets the number to display for a call.
+     */
+    private static String getNumberForCall(ContactCacheEntry contactInfo) {
+        // If the name is empty, we use the number for the name...so dont show a second
+        // number in the number field
+        if (TextUtils.isEmpty(contactInfo.name)) {
+            return null;
+        }
+        return contactInfo.number;
     }
 
     private void updateSecondaryDisplayInfo() {
@@ -265,11 +289,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         if (mSecondaryContactInfo != null) {
-            ui.setSecondary(true, mSecondaryContactInfo.number, mSecondaryContactInfo.name,
+            final String name = getNameForCall(mSecondaryContactInfo);
+            ui.setSecondary(true, getNameForCall(mSecondaryContactInfo),
                     mSecondaryContactInfo.label, mSecondaryContactInfo.photo);
         } else {
             // reset to nothing so that it starts off blank next time we use it.
-            ui.setSecondary(false, null, null, null, null);
+            ui.setSecondary(false, null, null, null);
         }
     }
 
@@ -280,8 +305,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
-        void setPrimary(String number, String name, String label, Drawable photo);
-        void setSecondary(boolean show, String number, String name, String label, Drawable photo);
+        void setPrimary(String number, String name, boolean nameIsNumber, String label,
+                Drawable photo, boolean isConference);
+        void setSecondary(boolean show, String name, String label, Drawable photo);
         void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn);
         void setPrimaryCallElapsedTime(boolean show, String duration);
     }

@@ -100,14 +100,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     }
 
     @Override
-    public void setPrimary(String number, String name, String label, Drawable photo) {
-        boolean nameIsNumber = false;
+    public void setPrimary(String number, String name, boolean nameIsNumber, String label,
+            Drawable photo, boolean isConference) {
 
-        // If there is no name, then use the number as the name;
-        if (TextUtils.isEmpty(name)) {
-            name = number;
-            number = null;
-            nameIsNumber = true;
+        if (isConference) {
+            name = getView().getResources().getString(R.string.card_title_conf_call);
+            photo = getView().getResources().getDrawable(R.drawable.picture_conference);
         }
 
         // Set the number
@@ -147,14 +145,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     }
 
     @Override
-    public void setSecondary(boolean show, String number, String name, String label,
-            Drawable photo) {
+    public void setSecondary(boolean show, String name, String label, Drawable photo) {
 
         if (show) {
             showAndInitializeSecondaryCallInfo();
-            if (TextUtils.isEmpty(name)) {
-                name = number;
-            }
 
             mSecondaryCallName.setText(name);
             setDrawableToImageView(mSecondaryPhoto, photo);
@@ -275,7 +269,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
             callStateLabel = getCallFailedString(cause);
 
         } else {
-            Logger.wtf(this, "updateCallStateWidgets: unexpected call state: " + state);
+            Logger.wtf(this, "updateCallStateWidgets: unexpected call: " + state);
         }
 
         return callStateLabel;
