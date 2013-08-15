@@ -85,12 +85,14 @@ public class CallHandlerService extends Service {
 
         @Override
         public void onDisconnect(Call call) {
-            Logger.d(CallHandlerService.this, "onDisconnected");
+            Logger.d(CallHandlerService.this, "onDisconnected: " + call);
             mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_DISCONNECT_CALL, 0, 0, call));
         }
 
         @Override
         public void onIncoming(Call call, List<String> textResponses) {
+            Logger.d(CallHandlerService.this, "onIncomingCall: " + call);
+
             // TODO(klp): Add text responses to the call object.
             Map.Entry<Call, List<String> > incomingCall = new AbstractMap.SimpleEntry<Call,
                     List<String> >(call, textResponses);
@@ -100,7 +102,7 @@ public class CallHandlerService extends Service {
 
         @Override
         public void onUpdate(List<Call> calls, boolean fullUpdate) {
-            Logger.d(CallHandlerService.this, "onUpdate ");
+            Logger.d(CallHandlerService.this, "onUpdate " + calls.toString());
 
             if (Logger.VERBOSE) {
                 for (Call c : calls) {

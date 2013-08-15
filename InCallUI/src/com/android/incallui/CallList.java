@@ -240,17 +240,17 @@ public class CallList {
         final Integer id = new Integer(call.getCallId());
 
         if (call.getState() == Call.State.DISCONNECTED) {
-            // For disconnected calls, we want to keep them alive for a few seconds so that the UI
-            // has a chance to display anything it needs when a call is disconnected.
 
-            // Set up a timer to destroy the call after X seconds.
-            Message msg = mHandler.obtainMessage(EVENT_DISCONNECTED_TIMEOUT, call);
-            boolean sent = mHandler.sendMessageDelayed(msg, DISCONNECTED_CALL_TIMEOUT_MS);
-
-            Logger.d(this, "Retval from sendMessageDelayed: ", Boolean.toString(sent));
-
-            // Don't add disconnected calls that do not already exist in the map
+            // update existing (but do not add!!) disconnected calls
             if (mCallMap.containsKey(id)) {
+
+                // For disconnected calls, we want to keep them alive for a few seconds so that the
+                // UI has a chance to display anything it needs when a call is disconnected.
+
+                // Set up a timer to destroy the call after X seconds.
+                final Message msg = mHandler.obtainMessage(EVENT_DISCONNECTED_TIMEOUT, call);
+                mHandler.sendMessageDelayed(msg, DISCONNECTED_CALL_TIMEOUT_MS);
+
                 mCallMap.put(id, call);
             }
         } else if (!isCallDead(call)) {

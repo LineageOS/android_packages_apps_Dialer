@@ -70,6 +70,8 @@ public class InCallPresenter implements CallList.Listener {
         addListener(mStatusBarNotifier);
 
         mAudioModeProvider = audioModeProvider;
+
+        Logger.d(this, "Finished InCallPresenter.setUp");
     }
 
     public void tearDown() {
@@ -85,6 +87,8 @@ public class InCallPresenter implements CallList.Listener {
         mInCallActivity = null;
 
         mListeners.clear();
+
+        Logger.d(this, "Finished InCallPresenter.tearDown");
     }
 
     public void setActivity(InCallActivity inCallActivity) {
