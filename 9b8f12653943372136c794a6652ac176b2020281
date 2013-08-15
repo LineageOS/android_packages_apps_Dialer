@@ -70,6 +70,24 @@
       "revId": "9b8f12653943372136c794a6652ac176b2020281",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dae975fb_13a107aa",
+        "filename": "res/values-ru/cm_plurals.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5896
+      },
+      "writtenOn": "2013-08-15T06:29:24Z",
+      "side": 1,
+      "message": "Ya schitayu chto nado ubrat\u0027: v lubom sluchae tolku ot nego net, a sudya po moim eksperimentam s CMFileManager quantity\u003d\"one\" k 1,21,31,41 i t.d. otnositsya.",
+      "parentUuid": "dae975fb_33ee4bed",
+      "revId": "9b8f12653943372136c794a6652ac176b2020281",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
