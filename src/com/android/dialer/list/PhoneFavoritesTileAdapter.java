@@ -652,14 +652,26 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
             mPosition = position;
 
             final Resources resources = mContext.getResources();
-            mRowPaddingStart = resources.getDimensionPixelSize(
-                    R.dimen.favorites_row_start_padding);
-            mRowPaddingEnd = resources.getDimensionPixelSize(
-                    R.dimen.favorites_row_end_padding);
-            mRowPaddingTop = resources.getDimensionPixelSize(
-                    R.dimen.favorites_row_top_padding);
-            mRowPaddingBottom = resources.getDimensionPixelSize(
-                    R.dimen.favorites_row_bottom_padding);
+
+            if (mItemViewType == ViewTypes.TOP) {
+                // For tiled views, we still want padding to be set on the ContactTileRow.
+                // Otherwise the padding would be set around each of the tiles, which we don't want
+                mRowPaddingTop = resources.getDimensionPixelSize(
+                        R.dimen.favorites_row_top_padding);
+                mRowPaddingBottom = resources.getDimensionPixelSize(
+                        R.dimen.favorites_row_bottom_padding);
+                mRowPaddingStart = resources.getDimensionPixelSize(
+                        R.dimen.favorites_row_start_padding);
+                mRowPaddingEnd = resources.getDimensionPixelSize(
+                        R.dimen.favorites_row_end_padding);
+
+            } else {
+                // For row views, padding is set on the view itself.
+                mRowPaddingTop = 0;
+                mRowPaddingBottom = 0;
+                mRowPaddingStart = 0;
+                mRowPaddingEnd = 0;
+            }
 
             setBackgroundResource(R.drawable.bottom_border_background);
 

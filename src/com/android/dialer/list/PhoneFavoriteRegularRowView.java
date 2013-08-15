@@ -16,6 +16,7 @@
 package com.android.dialer.list;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 
@@ -40,6 +41,25 @@ public class PhoneFavoriteRegularRowView extends PhoneFavoriteTileView {
         super.onFinishInflate();
 
         mFavoriteContactCard = findViewById(R.id.contact_favorite_card);
+
+        final int rowPaddingStart;
+        final int rowPaddingEnd;
+        final int rowPaddingTop;
+        final int rowPaddingBottom;
+
+        final Resources resources = getResources();
+        rowPaddingStart = resources.getDimensionPixelSize(
+                R.dimen.favorites_row_start_padding);
+        rowPaddingEnd = resources.getDimensionPixelSize(
+                R.dimen.favorites_row_end_padding);
+        rowPaddingTop = resources.getDimensionPixelSize(
+                R.dimen.favorites_row_top_padding);
+        rowPaddingBottom = resources.getDimensionPixelSize(
+                R.dimen.favorites_row_bottom_padding);
+
+        mFavoriteContactCard.setPaddingRelative(rowPaddingStart, rowPaddingTop, rowPaddingEnd,
+                rowPaddingBottom);
+
         mRemovalDialogue = findViewById(R.id.favorite_remove_dialogue);
         mUndoRemovalButton = findViewById(R.id.favorite_remove_undo_button);
 
