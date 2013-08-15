@@ -55,10 +55,6 @@
     <skip />
     <!-- no translation found for voicemail_fetching_timout (6691792377574905201) -->
     <skip />
-    <!-- no translation found for call_log_new_header (846546437517724715) -->
-    <skip />
-    <!-- no translation found for call_log_old_header (6262205894314263629) -->
-    <skip />
     <!-- no translation found for call_log_voicemail_header (3945407886667089173) -->
     <skip />
     <!-- no translation found for call_log_incoming_header (2787722299753674684) -->
@@ -208,6 +204,26 @@
     <!-- no translation found for show_favorites_only (5520072531022614595) -->
     <skip />
     <!-- no translation found for call_log_activity_title (4612824396355272023) -->
+    <skip />
+    <!-- no translation found for dialpad_0_number (8859392433961251108) -->
+    <skip />
+    <!-- no translation found for dialpad_1_number (6536740525419909212) -->
+    <skip />
+    <!-- no translation found for dialpad_2_number (4941546415280852148) -->
+    <skip />
+    <!-- no translation found for dialpad_3_number (6539414865185536881) -->
+    <skip />
+    <!-- no translation found for dialpad_4_number (979988372051042362) -->
+    <skip />
+    <!-- no translation found for dialpad_5_number (5492272478939926734) -->
+    <skip />
+    <!-- no translation found for dialpad_6_number (8044579516869379093) -->
+    <skip />
+    <!-- no translation found for dialpad_7_number (4175113016564167123) -->
+    <skip />
+    <!-- no translation found for dialpad_8_number (7949849563865941621) -->
+    <skip />
+    <!-- no translation found for dialpad_9_number (4377059952097526576) -->
     <skip />
     <!-- no translation found for show_all_contacts_title (8395378484578221791) -->
     <skip />
