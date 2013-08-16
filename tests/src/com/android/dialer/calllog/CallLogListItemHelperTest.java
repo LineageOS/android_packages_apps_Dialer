@@ -77,8 +77,19 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
     }
 
+    public void testSetPhoneCallDetailsInFavorites() {
+        setPhoneCallDetailsWithNumberInFavorites("12125551234", Calls.PRESENTATION_ALLOWED,
+                "1-212-555-1234");
+        assertNoCallButton();
+    }
+
     public void testSetPhoneCallDetails_Unknown() {
         setPhoneCallDetailsWithNumber("", Calls.PRESENTATION_UNKNOWN, "");
+        assertNoCallButton();
+    }
+
+    public void testSetPhoneCallDetailsInFavorites_Unknown() {
+        setPhoneCallDetailsWithNumberInFavorites("", Calls.PRESENTATION_UNKNOWN, "");
         assertNoCallButton();
     }
 
@@ -87,8 +98,18 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         assertNoCallButton();
     }
 
+    public void testSetPhoneCallDetailsInFavorites_Private() {
+        setPhoneCallDetailsWithNumberInFavorites("", Calls.PRESENTATION_RESTRICTED, "");
+        assertNoCallButton();
+    }
+
     public void testSetPhoneCallDetails_Payphone() {
         setPhoneCallDetailsWithNumber("", Calls.PRESENTATION_PAYPHONE, "");
+        assertNoCallButton();
+    }
+
+    public void testSetPhoneCallDetailsInFavorites_Payphone() {
+        setPhoneCallDetailsWithNumberInFavorites("", Calls.PRESENTATION_PAYPHONE, "");
         assertNoCallButton();
     }
 
@@ -114,6 +135,28 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
     }
 
+    public void testSetPhoneCallDetailsInFavorites_VoicemailNumber() {
+        setPhoneCallDetailsWithNumberInFavorites(TEST_VOICEMAIL_NUMBER,
+                Calls.PRESENTATION_ALLOWED, TEST_VOICEMAIL_NUMBER);
+        assertNoCallButton();
+    }
+
+    public void testSetPhoneCallDetailsInFavorites_ReadVoicemail() {
+        setPhoneCallDetailsWithTypesInFavorites(Calls.VOICEMAIL_TYPE);
+        assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
+    }
+
+    public void testSetPhoneCallDetailsInFavorites_UnreadVoicemail() {
+        setUnreadPhoneCallDetailsWithTypesInFavorites(Calls.VOICEMAIL_TYPE);
+        assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
+    }
+
+    public void testSetPhoneCallDetailsInFavorites_VoicemailFromUnknown() {
+        setPhoneCallDetailsWithNumberAndTypeInFavorites("", Calls.PRESENTATION_UNKNOWN,
+                "", Calls.VOICEMAIL_TYPE);
+        assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
+    }
+
     /** Asserts that the whole call area is gone. */
     private void assertNoCallButton() {
         assertEquals(View.GONE, mViews.secondaryActionView.getVisibility());
@@ -126,6 +169,13 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 formattedNumber, Calls.INCOMING_TYPE);
     }
 
+    /** Sets the details of a phone call in the favorite screen using the specified phone number. */
+    private void setPhoneCallDetailsWithNumberInFavorites(String number,
+            int presentation, String formattedNumber) {
+        setPhoneCallDetailsWithNumberAndTypeInFavorites(number, presentation,
+                formattedNumber, Calls.INCOMING_TYPE);
+    }
+
     /** Sets the details of a phone call using the specified phone number. */
     private void setPhoneCallDetailsWithNumberAndType(String number,
             int presentation, String formattedNumber, int callType) {
@@ -133,7 +183,17 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 new PhoneCallDetails(number, presentation, formattedNumber,
                         TEST_COUNTRY_ISO, TEST_GEOCODE,
                         new int[]{ callType }, TEST_DATE, TEST_DURATION),
-                false);
+                false, false);
+    }
+
+    /** Sets the details of a phone call in the favorite screen using the specified phone number. */
+    private void setPhoneCallDetailsWithNumberAndTypeInFavorites(String number,
+            int presentation, String formattedNumber, int callType) {
+        mHelper.setPhoneCallDetails(mViews,
+                new PhoneCallDetails(number, presentation, formattedNumber,
+                        TEST_COUNTRY_ISO, TEST_GEOCODE,
+                        new int[]{ callType }, TEST_DATE, TEST_DURATION),
+                false, true);
     }
 
     /** Sets the details of a phone call using the specified call type. */
@@ -142,15 +202,35 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                         types, TEST_DATE, TEST_DURATION),
-                false);
+                false, false);
     }
 
-    /** Sets the details of a phone call using the specified call type. */
+    /** Sets the details of a phone call in the favorite screen using the specified call type. */
+    private void setPhoneCallDetailsWithTypesInFavorites(int... types) {
+        mHelper.setPhoneCallDetails(mViews,
+                new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                        TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
+                        types, TEST_DATE, TEST_DURATION),
+                false, true);
+    }
+
+    /** Sets the details of an unread phone call using the specified call type. */
     private void setUnreadPhoneCallDetailsWithTypes(int... types) {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                         types, TEST_DATE, TEST_DURATION),
-                true);
+                true, false);
+    }
+
+    /** Sets the details of an unread phone call in the favorite screen using the specified call
+     * type.
+     */
+    private void setUnreadPhoneCallDetailsWithTypesInFavorites(int... types) {
+        mHelper.setPhoneCallDetails(mViews,
+                new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                        TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
+                        types, TEST_DATE, TEST_DURATION),
+                true, true);
     }
 }
