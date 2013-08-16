@@ -65,7 +65,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="bottom|center"
             android:background="?android:attr/selectableItemBackground"
-            android:contentDescription="@string/description_search_button"
+            android:contentDescription="@string/action_menu_dialpad_button"
             android:src="@drawable/ic_menu_dialpad_dk"/>
         <ImageButton
              android:id="@+id/overflow_menu"
