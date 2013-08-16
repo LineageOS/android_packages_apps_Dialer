@@ -18,6 +18,7 @@ package com.android.dialer.list;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.ContactsContract.QuickContact;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.View;
@@ -51,11 +52,7 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
         mSecondaryButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, getLookupUri());
-                // Secondary target will be visible only from phone's favorite screen, then
-                // we want to launch it as a separate People task.
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                getContext().startActivity(intent);
+                launchQuickContact();
             }
         });
 
@@ -78,5 +75,10 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
     protected int getApproximateImageSize() {
         // The picture is the full size of the tile (minus some padding, but we can be generous)
         return mListener.getApproximateTileWidth();
+    }
+
+    private void launchQuickContact() {
+        QuickContact.showQuickContact(getContext(), PhoneFavoriteSquareTileView.this,
+                getLookupUri(), QuickContact.MODE_LARGE, null);
     }
 }
