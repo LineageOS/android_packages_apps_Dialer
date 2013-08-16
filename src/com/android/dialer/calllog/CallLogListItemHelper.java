@@ -57,7 +57,7 @@ import com.android.dialer.R;
      * @param isHighlighted whether to use the highlight text for the call
      */
     public void setPhoneCallDetails(CallLogListItemViews views, PhoneCallDetails details,
-            boolean isHighlighted) {
+            boolean isHighlighted, boolean useCallAsPrimaryAction) {
         mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details,
                 isHighlighted);
         boolean canCall = PhoneNumberHelper.canPlaceCallsTo(details.number,
@@ -67,7 +67,7 @@ import com.android.dialer.R;
         if (canPlay) {
             // Playback action takes preference.
             configurePlaySecondaryAction(views, isHighlighted);
-        } else if (canCall) {
+        } else if (canCall && !useCallAsPrimaryAction) {
             // Call is the secondary action.
             configureCallSecondaryAction(views, details);
         } else {
