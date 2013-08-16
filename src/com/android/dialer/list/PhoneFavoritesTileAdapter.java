@@ -29,7 +29,9 @@ import android.provider.ContactsContract.PinnedPositions;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.LongSparseArray;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
@@ -40,6 +42,8 @@ import com.android.contacts.common.R;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileAdapter.DisplayType;
 import com.android.contacts.common.list.ContactTileView;
+import com.android.dialer.list.SwipeHelper.OnItemGestureListener;
+import com.android.dialer.list.SwipeHelper.SwipeHelperCallback;
 import com.android.internal.annotations.VisibleForTesting;
 
 import com.google.common.collect.ComparisonChain;
@@ -56,7 +60,8 @@ import java.util.PriorityQueue;
  * This adapter has been rewritten to only support a maximum of one row for favorites.
  *
  */
-public class PhoneFavoritesTileAdapter extends BaseAdapter {
+public class PhoneFavoritesTileAdapter extends BaseAdapter implements
+        SwipeHelper.OnItemGestureListener {
     private static final String TAG = PhoneFavoritesTileAdapter.class.getSimpleName();
     private static final boolean DEBUG = false;
 
@@ -393,24 +398,42 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
     @Override
     public ArrayList<ContactEntry> getItem(int position) {
         ArrayList<ContactEntry> resultList = new ArrayList<ContactEntry>(mColumnCount);
-        int contactIndex = position * mColumnCount;
+
+        final int entryIndex = getFirstContactEntryIndexForPosition(position);
+
+        final int viewType = getItemViewType(position);
+
+        final int columnCount;
+        if (viewType == ViewTypes.TOP) {
+            columnCount = mColumnCount;
+        } else {
+            columnCount = 1;
+        }
+
+        for (int i = 0; i < columnCount; i++) {
+            final ContactEntry entry = getContactEntryFromCache(entryIndex + i);
+            if (entry == null) break; // less than mColumnCount contacts
+            resultList.add(entry);
+        }
+
+        return resultList;
+    }
+
+    /*
+     * Given a position in the adapter, returns the index of the first contact entry that is to be
+     * in that row.
+     */
+    private int getFirstContactEntryIndexForPosition(int position) {
         final int maxContactsInTiles = getMaxContactsInTiles();
         if (position < getRowCount(maxContactsInTiles)) {
             // Contacts that appear as tiles
-            for (int columnCounter = 0; columnCounter < mColumnCount &&
-                    contactIndex != maxContactsInTiles; columnCounter++) {
-                resultList.add(getContactEntryFromCache(contactIndex));
-                contactIndex++;
-            }
+            return position * mColumnCount;
         } else {
             // Contacts that appear as rows
             // The actual position of the contact in the cursor is simply total the number of
             // tiled contacts + the given position
-            contactIndex = maxContactsInTiles + position - 1;
-            resultList.add(getContactEntryFromCache(contactIndex));
+            return maxContactsInTiles + position - 1;
         }
-
-        return resultList;
     }
 
     @Override
@@ -606,13 +629,16 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
      *
      * @return True is an item is removed. False is there is no item to be removed.
      */
-    public boolean removeContactEntry() {
+    public boolean removePendingContactEntry() {
+        boolean removed = false;
         if (mPotentialRemoveEntryIndex >= 0 && mPotentialRemoveEntryIndex < mContactEntries.size()) {
-            final ContactEntry entry = mContactEntries.get(mPotentialRemoveEntryIndex);
+            final ContactEntry entry = mContactEntries.remove(mPotentialRemoveEntryIndex);
             unstarAndUnpinContact(entry.lookupKey);
-            return true;
+            notifyDataSetChanged();
+            removed = true;
         }
-        return false;
+        cleanTempVariables();
+        return removed;
     }
 
     /**
@@ -636,7 +662,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
      * Acts as a row item composed of {@link ContactTileView}
      *
      */
-    public class ContactTileRow extends FrameLayout {
+    public class ContactTileRow extends FrameLayout implements SwipeHelperCallback {
+        public static final int CONTACT_ENTRY_INDEX_TAG = R.id.contact_entry_index_tag;
+
         private int mItemViewType;
         private int mLayoutResId;
         private final int mRowPaddingStart;
@@ -644,6 +672,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         private final int mRowPaddingTop;
         private final int mRowPaddingBottom;
         private int mPosition;
+        private SwipeHelper mSwipeHelper;
+        private OnItemGestureListener mOnItemSwipeListener;
 
         public ContactTileRow(Context context, int itemViewType, int position) {
             super(context);
@@ -680,6 +710,20 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
 
             // Remove row (but not children) from accessibility node tree.
             setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+
+            if (mItemViewType == ViewTypes.FREQUENT) {
+                // ListView handles swiping for this item
+                SwipeHelper.setSwipeable(this, true);
+            } else if (mItemViewType == ViewTypes.TOP) {
+                // The contact tile row has its own swipe helpers, that makes each individual
+                // tile swipeable.
+                final float densityScale = getResources().getDisplayMetrics().density;
+                final float pagingTouchSlop = ViewConfiguration.get(context)
+                        .getScaledPagingTouchSlop();
+                mSwipeHelper = new SwipeHelper(context, SwipeHelper.X, this, densityScale,
+                        pagingTouchSlop);
+                mOnItemSwipeListener = PhoneFavoritesTileAdapter.this;
+            }
         }
 
         /**
@@ -723,19 +767,28 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
                 contactTile = (PhoneFavoriteTileView) getChildAt(childIndex);
             }
             contactTile.loadFromContact(entry);
-            contactTile.setId(childIndex);
+
+            int entryIndex = -1;
             switch (mItemViewType) {
                 case ViewTypes.TOP:
                     // Setting divider visibilities
                     contactTile.setPaddingRelative(0, 0,
                             childIndex >= mColumnCount - 1 ? 0 : mPaddingInPixels, 0);
+                    entryIndex = getFirstContactEntryIndexForPosition(mPosition) + childIndex;
+                    SwipeHelper.setSwipeable(contactTile, true);
                     break;
                 case ViewTypes.FREQUENT:
                     contactTile.setHorizontalDividerVisibility(
                             isLastRow ? View.GONE : View.VISIBLE);
+                    entryIndex = getFirstContactEntryIndexForPosition(mPosition);
+                    SwipeHelper.setSwipeable(this, true);
                     break;
                 default:
                     break;
+            }
+            // tag the tile with the index of the contact entry it is associated with
+            if (entryIndex != -1) {
+                contactTile.setTag(CONTACT_ENTRY_INDEX_TAG, entryIndex);
             }
             contactTile.setupFavoriteContactCard();
         }
@@ -879,6 +932,97 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         public int getPosition() {
             return mPosition;
         }
+
+        @Override
+        public View getChildAtPosition(MotionEvent ev) {
+            // find the view under the pointer, accounting for GONE views
+            final int count = getChildCount();
+            final int touchX = (int) ev.getX();
+            View slidingChild;
+            for (int childIdx = 0; childIdx < count; childIdx++) {
+                slidingChild = getChildAt(childIdx);
+                if (slidingChild.getVisibility() == GONE) {
+                    continue;
+                }
+                if (touchX >= slidingChild.getLeft() && touchX <= slidingChild.getRight()) {
+                    if (SwipeHelper.isSwipeable(slidingChild)) {
+                        // If this view is swipable, then return it. If not, because the removal
+                        // dialog is currently showing, then return a null view, which will simply
+                        // be ignored by the swipe helper.
+                        return slidingChild;
+                    } else {
+                        return null;
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public View getChildContentView(View v) {
+            return v.findViewById(R.id.contact_favorite_card);
+        }
+
+        @Override
+        public void onScroll() {}
+
+        @Override
+        public boolean canChildBeDismissed(View v) {
+            return true;
+        }
+
+        @Override
+        public void onBeginDrag(View v) {
+            removePendingContactEntry();
+            final int index = indexOfChild(v);
+            // Move tile to front so that any overlap will be hidden behind its siblings
+            if (index > 0) {
+                detachViewFromParent(index);
+                attachViewToParent(v, 0, v.getLayoutParams());
+            }
+
+            // We do this so the underlying ScrollView knows that it won't get
+            // the chance to intercept events anymore
+            requestDisallowInterceptTouchEvent(true);
+        }
+
+        @Override
+        public void onChildDismissed(View v) {
+            if (v != null) {
+                if (mOnItemSwipeListener != null) {
+                    mOnItemSwipeListener.onSwipe(v);
+                }
+            }
+        }
+
+        @Override
+        public void onDragCancelled(View v) {}
+
+        @Override
+        public boolean onInterceptTouchEvent(MotionEvent ev) {
+            if (mSwipeHelper != null) {
+                return mSwipeHelper.onInterceptTouchEvent(ev) || super.onInterceptTouchEvent(ev);
+            } else {
+                return super.onInterceptTouchEvent(ev);
+            }
+        }
+
+        @Override
+        public boolean onTouchEvent(MotionEvent ev) {
+            if (mSwipeHelper != null) {
+                return mSwipeHelper.onTouchEvent(ev) || super.onTouchEvent(ev);
+            } else {
+                return super.onTouchEvent(ev);
+            }
+        }
+
+        public int getItemViewType() {
+            return mItemViewType;
+        }
+
+        public void setOnItemSwipeListener(OnItemGestureListener listener) {
+            mOnItemSwipeListener = listener;
+        }
     }
 
     /**
@@ -1003,5 +1147,24 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter {
         public static final int COUNT = 2;
         public static final int FREQUENT = 0;
         public static final int TOP = 1;
+    }
+
+    @Override
+    public void onSwipe(View view) {
+        final PhoneFavoriteTileView tileView = (PhoneFavoriteTileView) view.findViewById(
+                R.id.contact_tile);
+        // When the view is in the removal dialog, it should no longer be swipeable
+        SwipeHelper.setSwipeable(view, false);
+        tileView.displayRemovalDialog();
+
+        final Integer entryIndex = (Integer) tileView.getTag(
+                ContactTileRow.CONTACT_ENTRY_INDEX_TAG);
+
+        setPotentialRemoveEntryIndex(entryIndex);
+    }
+
+    @Override
+    public void onTouch() {
+        removePendingContactEntry();
     }
 }

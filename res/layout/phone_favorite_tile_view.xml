@@ -18,11 +18,11 @@
     android:paddingBottom="1dip"
     android:paddingRight="1dip"
     android:paddingEnd="1dip"
-    android:background="@color/background_dialer_light"
+    android:id="@+id/contact_tile"
     class="com.android.dialer.list.PhoneFavoriteSquareTileView" >
 
     <RelativeLayout
-        android:id="@+id/contact_tile_favorite_card"
+        android:id="@+id/contact_favorite_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="true">
@@ -86,18 +86,19 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/favorite_tile_remove_dialogue"
+        android:id="@+id/favorite_remove_dialogue"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:gravity="center_horizontal"
+        android:background="@color/background_dialer_light"
         android:alpha="0.0"
         android:visibility="gone">
 
         <TextView
-            android:id="@+id/favorite_tile_remove_dialogue_text"
+            android:id="@+id/favorite_remove_dialogue_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/favorite_hidden"
@@ -112,11 +113,12 @@
             android:textAlignment="center" />
 
         <LinearLayout
-            android:id="@+id/favorite_tile_remove_undo_button"
+            android:id="@+id/favorite_remove_undo_button"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
+            android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:layout_weight="1"
             android:layout_gravity="bottom">

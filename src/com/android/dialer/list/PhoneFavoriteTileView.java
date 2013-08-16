@@ -16,8 +16,11 @@
  */
 package com.android.dialer.list;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.ClipData;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -29,7 +32,9 @@ import android.view.View;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
+import com.android.dialer.list.PhoneFavoriteDragAndDropListeners.PhoneFavoriteDragListener;
 import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
+import com.android.dialer.list.PhoneFavoritesTileAdapter.ViewTypes;
 
 /**
  * A light version of the {@link com.android.contacts.common.list.ContactTileView} that is used in
@@ -47,11 +52,11 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     private static final int ANIMATION_LENGTH = 300;
 
     /** The view that holds the front layer of the favorite contact card. */
-    protected View mFavoriteContactCard;
+    private View mFavoriteContactCard;
     /** The view that holds the background layer of the removal dialogue. */
-    protected View mRemovalDialogue;
+    private View mRemovalDialogue;
     /** Undo button for undoing favorite removal. */
-    protected View mUndoRemovalButton;
+    private View mUndoRemovalButton;
     /** The view that holds the list view row. */
     protected ContactTileRow mParentRow;
 
@@ -60,8 +65,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
 
     /** Custom gesture detector.*/
     protected GestureDetector mGestureDetector;
-    /** Indicator of whether a scroll has started. */
-    private boolean mInScroll;
 
     public PhoneFavoriteTileView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -69,6 +72,42 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
 
     public ContactTileRow getParentRow() {
         return mParentRow;
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        mFavoriteContactCard = findViewById(com.android.dialer.R.id.contact_favorite_card);
+        mRemovalDialogue = findViewById(com.android.dialer.R.id.favorite_remove_dialogue);
+        mUndoRemovalButton = findViewById(com.android.dialer.R.id
+                .favorite_remove_undo_button);
+
+        mUndoRemovalButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                undoRemove();
+            }
+        });
+
+        setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setPressed(false);
+                final PhoneFavoriteTileView view = (PhoneFavoriteTileView) v;
+                final ClipData data = ClipData.newPlainText("", "");
+                if (view instanceof PhoneFavoriteRegularRowView) {
+                    // If the view is regular row, start drag the row view.
+                    final View.DragShadowBuilder shadowBuilder =
+                            new View.DragShadowBuilder(view.getParentRow());
+                    view.getParentRow().startDrag(data, shadowBuilder, null, 0);
+                } else {
+                    // If the view is a tile view, start drag the tile.
+                    final View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+                    view.startDrag(data, shadowBuilder, null, 0);
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -89,74 +128,23 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
         }
     }
 
-    /**
-     * Gets the latest scroll gesture offset.
-     */
-    public void setScrollOffset(float offset) {
-        // Sets the mInScroll variable to indicate a scroll is in progress.
-        if (!mInScroll) {
-            mInScroll = true;
-        }
+    public void displayRemovalDialog() {
+        mRemovalDialogue.setVisibility(VISIBLE);
+        mRemovalDialogue.setAlpha(0f);
+        final int animationLength = ANIMATION_LENGTH;
+        final AnimatorSet animSet = new AnimatorSet();
+        final ObjectAnimator fadeIn = ObjectAnimator.ofFloat(mRemovalDialogue, "alpha",
+                1.f).setDuration(animationLength);
 
-        // Changes the view to follow user's scroll position.
-        shiftViewWithScroll(offset);
-    }
-
-    /**
-     * Shifts the view to follow user's scroll position.
-     */
-    private void shiftViewWithScroll(float offset) {
-       if (mInScroll) {
-           // Shifts the foreground card to follow users' scroll gesture.
-           mFavoriteContactCard.setTranslationX(offset);
-
-           // Changes transparency of the foreground and background color
-           final float alpha = 1.f - Math.abs((offset)) / getWidth();
-           final float cappedAlpha = Math.min(Math.max(alpha, 0.f), 1.f);
-           mFavoriteContactCard.setAlpha(cappedAlpha);
-       }
-    }
-
-    /**
-     * Sets the scroll has finished.
-     *
-     * @param isUnfinishedFling True if it is triggered from the onFling method, but the fling was
-     * too short or too slow, or from the scroll that does not trigger fling.
-     */
-    public void setScrollEnd(boolean isUnfinishedFling) {
-        mInScroll = false;
-
-        if (isUnfinishedFling) {
-            // If the fling is too short or too slow, or it is from a scroll, bring back the
-            // favorite contact card.
-            final ObjectAnimator fadeIn = ObjectAnimator.ofFloat(mFavoriteContactCard, "alpha",
-                    1.f).setDuration(ANIMATION_LENGTH);
-            final ObjectAnimator moveBack = ObjectAnimator.ofFloat(mFavoriteContactCard,
-                    "translationX", 0.f).setDuration(ANIMATION_LENGTH);
-            final ObjectAnimator backgroundFadeOut = ObjectAnimator.ofInt(
-                    mParentRow.getBackground(), "alpha", 255).setDuration(ANIMATION_LENGTH);
-            final AnimatorSet animSet = new AnimatorSet();
-            animSet.playTogether(fadeIn, moveBack, backgroundFadeOut);
-            animSet.start();
-        } else {
-            // If the fling is fast and far enough, move away the favorite contact card, bring the
-            // favorite removal view to the foreground to ask user to confirm removal.
-            int animationLength = (int) ((1 - Math.abs(mFavoriteContactCard.getTranslationX()) /
-                    getWidth()) * ANIMATION_LENGTH);
-            animationLength = Math.max(0, animationLength);
-            final ObjectAnimator fadeOut = ObjectAnimator.ofFloat(mFavoriteContactCard, "alpha",
-                    0.f).setDuration(animationLength);
-            final ObjectAnimator moveAway = ObjectAnimator.ofFloat(mFavoriteContactCard,
-                    "translationX", getWidth()).setDuration(animationLength);
+        if (mParentRow.getItemViewType() == ViewTypes.FREQUENT) {
             final ObjectAnimator backgroundFadeIn = ObjectAnimator.ofInt(
                     mParentRow.getBackground(), "alpha", 0).setDuration(animationLength);
-            if (mFavoriteContactCard.getTranslationX() < 0) {
-                moveAway.setFloatValues(-getWidth());
-            }
-            final AnimatorSet animSet = new AnimatorSet();
-            animSet.playTogether(fadeOut, moveAway, backgroundFadeIn);
-            animSet.start();
+            animSet.playTogether(fadeIn, backgroundFadeIn);
+        } else {
+            animSet.playTogether(fadeIn);
         }
+
+        animSet.start();
     }
 
     /**
@@ -177,24 +165,20 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
         final AnimatorSet animSet = new AnimatorSet();
         animSet.playTogether(fadeIn, moveBack, backgroundFadeOut);
         animSet.start();
+        animSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if (mParentRow.getItemViewType() == ViewTypes.FREQUENT) {
+                    SwipeHelper.setSwipeable(mParentRow, true);
+                } else {
+                    SwipeHelper.setSwipeable(PhoneFavoriteTileView.this, true);
+                }
+            }
+        });
+
 
         // Signals the PhoneFavoritesTileAdapter to undo the potential delete.
         mParentRow.getTileAdapter().undoPotentialRemoveEntryIndex();
-    }
-
-    /**
-     * Sets up the removal dialogue.
-     */
-    public void setupRemoveDialogue() {
-        mRemovalDialogue.setVisibility(VISIBLE);
-        mRemovalDialogue.setAlpha(1.0f);
-
-        mUndoRemovalButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                undoRemove();
-            }
-        });
     }
 
     /**
@@ -210,11 +194,24 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     }
 
     @Override
+    protected void onAttachedToWindow() {
+        mParentRow = (ContactTileRow) getParent();
+        mParentRow.setOnDragListener(new PhoneFavoriteDragListener(mParentRow,
+                mParentRow.getTileAdapter()));
+    }
+
+    @Override
+    protected boolean isDarkTheme() {
+        return false;
+    }
+
+    @Override
     protected OnClickListener createClickListener() {
         return new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mListener == null) return;
+                // When the removal dialog is present, don't allow a click to call
+                if (mListener == null || mRemovalDialogue.isShown()) return;
                 if (TextUtils.isEmpty(mPhoneNumberString)) {
                     // Copy "superclass" implementation
                     mListener.onContactSelected(getLookupUri(), MoreContactUtils
@@ -229,35 +226,5 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
                 }
             }
         };
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (DEBUG) {
-            Log.v(TAG, event.toString());
-        }
-        switch (event.getAction()) {
-            // If the scroll has finished without triggering a fling, handles it here.
-            case MotionEvent.ACTION_UP:
-                setPressed(false);
-                if (mInScroll) {
-                    if (!mGestureDetector.onTouchEvent(event)) {
-                        setScrollEnd(true);
-                    }
-                    return true;
-                }
-                break;
-            // When user starts a new gesture, clean up the pending removals.
-            case MotionEvent.ACTION_DOWN:
-                mParentRow.getTileAdapter().removeContactEntry();
-                break;
-            // When user continues with a new gesture, cleans up all the temp variables.
-            case MotionEvent.ACTION_CANCEL:
-                mParentRow.getTileAdapter().cleanTempVariables();
-                break;
-            default:
-                break;
-        }
-        return mGestureDetector.onTouchEvent(event);
     }
 }
