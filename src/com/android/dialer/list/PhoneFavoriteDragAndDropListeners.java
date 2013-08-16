@@ -15,12 +15,9 @@
  */
 package com.android.dialer.list;
 
-import android.content.ClipData;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.DragEvent;
-import android.view.GestureDetector.SimpleOnGestureListener;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
 
@@ -33,90 +30,6 @@ public class PhoneFavoriteDragAndDropListeners {
 
     private static final String TAG = PhoneFavoriteDragAndDropListeners.class.getSimpleName();
     private static final boolean DEBUG = false;
-
-    private static final float FLING_HEIGHT_PORTION = 1.f / 4.f;
-    private static final float FLING_WIDTH_PORTION = 1.f / 6.f;
-
-    public static class PhoneFavoriteGestureListener extends SimpleOnGestureListener {
-        private static final float FLING_VELOCITY_MINIMUM = 5.0f;
-        private float mFlingHorizontalThreshold;
-        private float mFlingVerticalThreshold;
-        private final PhoneFavoriteTileView mView;
-
-        public PhoneFavoriteGestureListener(View view) {
-            super();
-            mView = (PhoneFavoriteTileView) view;
-        }
-
-        @Override
-        public void onLongPress(MotionEvent event) {
-            final ClipData data = ClipData.newPlainText("", "");
-            mView.setPressed(false);
-            if (mView instanceof PhoneFavoriteRegularRowView) {
-                // If the view is regular row, start drag the row view.
-                final View.DragShadowBuilder shadowBuilder =
-                        new View.DragShadowBuilder(mView.getParentRow());
-                mView.getParentRow().startDrag(data, shadowBuilder, null, 0);
-            } else {
-                // If the view is a tile view, start drag the tile.
-                final View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(mView);
-                mView.startDrag(data, shadowBuilder, null, 0);
-            }
-        }
-
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            final float x1 = e1.getX();
-            final float x2 = e2.getX();
-            // Temporarily disables parents from getting this event so the listview does not scroll.
-            mView.getParent().requestDisallowInterceptTouchEvent(true);
-            mView.setScrollOffset(x2 - x1);
-            return true;
-        }
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            // Sets fling trigger threshold.
-            mFlingVerticalThreshold = (float) mView.getHeight() * FLING_HEIGHT_PORTION;
-            mFlingHorizontalThreshold = (float) mView.getWidth() * FLING_WIDTH_PORTION;
-            final float x1 = e1.getX();
-            final float x2 = e2.getX();
-            final float y1 = e1.getY();
-            final float y2 = e2.getY();
-
-            mView.setPressed(false);
-
-            if (Math.abs(y1 - y2) < mFlingVerticalThreshold &&
-                    Math.abs(x2 - x1) > mFlingHorizontalThreshold &&
-                    Math.abs(velocityX) > FLING_VELOCITY_MINIMUM) {
-                // If fling is triggered successfully, end the scroll and setup removal dialogue.
-
-                final int removeIndex = mView.getParentRow().getItemIndex(mView.getLeft() + x1,
-                        mView.getTop() + y1);
-                mView.setScrollEnd(false);
-                mView.setupRemoveDialogue();
-                mView.getParentRow().getTileAdapter().setPotentialRemoveEntryIndex(removeIndex);
-
-                return true;
-            } else {
-                mView.setScrollEnd(true);
-                return false;
-            }
-        }
-
-        @Override
-        public boolean onDown(MotionEvent e) {
-            mView.setPressed(true);
-            // Signals that the view will accept further events.
-            return true;
-        }
-
-        @Override
-        public boolean onSingleTapUp(MotionEvent e) {
-            mView.performClick();
-            return true;
-        }
-    }
 
     /**
      * Implements the OnDragListener to handle drag events.

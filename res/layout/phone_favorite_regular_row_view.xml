@@ -17,7 +17,7 @@
 <!-- Layout parameters are set programmatically. -->
 <view
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/contact_tile_frequent_phone"
+    android:id="@+id/contact_tile"
     class="com.android.dialer.list.PhoneFavoriteRegularRowView">
 
     <RelativeLayout
@@ -33,7 +33,7 @@
             android:layout_height="64dip"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:nextFocusRight="@id/contact_tile_frequent_phone"
+            android:nextFocusRight="@id/contact_tile"
             android:scaleType="centerCrop"
             android:focusable="true" />
 
@@ -88,7 +88,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:clickable="true"
-            android:layout_marginRight="30dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:background="?android:attr/selectableItemBackground"
             android:gravity="center_vertical">
 
             <ImageView

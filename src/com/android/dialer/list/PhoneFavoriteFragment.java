@@ -143,7 +143,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private CallLogQueryHandler mCallLogQueryHandler;
 
     private TextView mEmptyView;
-    private ListView mListView;
+    private SwipeableListView mListView;
     private View mShowAllContactsButton;
 
     /**
@@ -191,6 +191,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         super.onResume();
         mCallLogQueryHandler.fetchCalls(CallLogQueryHandler.CALL_TYPE_ALL);
         mCallLogAdapter.setLoading(true);
+        getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
     }
 
     @Override
@@ -199,12 +200,13 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         final View listLayout = inflater.inflate(
                 R.layout.phone_favorites_fragment, container, false);
 
-        mListView = (ListView) listLayout.findViewById(R.id.contact_tile_list);
+        mListView = (SwipeableListView) listLayout.findViewById(R.id.contact_tile_list);
         mListView.setItemsCanFocus(true);
         mListView.setOnItemClickListener(this);
         mListView.setVerticalScrollBarEnabled(false);
         mListView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
         mListView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
+        mListView.setOnItemSwipeListener(mContactTileAdapter);
 
         mLoadingView = inflater.inflate(R.layout.phone_loading_contacts, mListView, false);
         mShowAllContactsButton = inflater.inflate(R.layout.show_all_contact_button, mListView,
@@ -311,5 +313,12 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     // TODO krelease: Implement this
     @Override
     public void fetchCalls() {
+    }
+
+    @Override
+    public void onPause() {
+        // If there are any pending contact entries that are to be removed, remove them
+        mContactTileAdapter.removePendingContactEntry();
+        super.onPause();
     }
 }
