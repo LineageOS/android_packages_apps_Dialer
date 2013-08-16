@@ -237,7 +237,7 @@ public class CallLogFragment extends ListFragment
         updateEmptyMessage(mCallTypeFilter);
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mAdapter = new CallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso));
+                new ContactInfoHelper(getActivity(), currentCountryIso), false);
         setListAdapter(mAdapter);
         getListView().setItemsCanFocus(true);
     }
