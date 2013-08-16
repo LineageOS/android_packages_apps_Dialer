@@ -26,7 +26,6 @@ import android.widget.ImageButton;
 
 import com.android.contacts.common.R;
 import com.android.dialer.list.PhoneFavoriteDragAndDropListeners.PhoneFavoriteDragListener;
-import com.android.dialer.list.PhoneFavoriteDragAndDropListeners.PhoneFavoriteGestureListener;
 import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
 
 /**
@@ -45,9 +44,6 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        mFavoriteContactCard = findViewById(com.android.dialer.R.id.contact_tile_favorite_card);
-        mRemovalDialogue = findViewById(com.android.dialer.R.id.favorite_tile_remove_dialogue);
-        mUndoRemovalButton = findViewById(com.android.dialer.R.id.favorite_tile_remove_undo_button);
         mSecondaryButton = (ImageButton) findViewById(R.id.contact_tile_secondary_button);
         mSecondaryButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -55,20 +51,6 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
                 launchQuickContact();
             }
         });
-
-        mGestureDetector = new GestureDetector(getContext(),
-                new PhoneFavoriteGestureListener(this));
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        mParentRow = (ContactTileRow) getParent();
-        setOnDragListener(new PhoneFavoriteDragListener(mParentRow, mParentRow.getTileAdapter()));
-    }
-
-    @Override
-    protected boolean isDarkTheme() {
-        return false;
     }
 
     @Override
