@@ -44,8 +44,6 @@
     <string name="voicemail_buffering" msgid="738287747618697097">"正在缓冲…"</string>
     <string name="voicemail_fetching_content" msgid="877911315738258780">"正在抓取语​​音邮件…"</string>
     <string name="voicemail_fetching_timout" msgid="6691792377574905201">"无法抓取语音邮件。"</string>
-    <string name="call_log_new_header" msgid="846546437517724715">"新记录"</string>
-    <string name="call_log_old_header" msgid="6262205894314263629">"旧记录"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"只显示语音信箱留言"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"只显示来电"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"只显示外拨电话"</string>
@@ -141,8 +139,18 @@
     <string name="show_all_contacts" msgid="1732256558071778056">"显示所有联系人"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"仅显示常用联系人"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"通话记录"</string>
+    <string name="dialpad_0_number" msgid="8859392433961251108">"0"</string>
+    <string name="dialpad_1_number" msgid="6536740525419909212">"1"</string>
+    <string name="dialpad_2_number" msgid="4941546415280852148">"2"</string>
+    <string name="dialpad_3_number" msgid="6539414865185536881">"3"</string>
+    <string name="dialpad_4_number" msgid="979988372051042362">"4"</string>
+    <string name="dialpad_5_number" msgid="5492272478939926734">"5"</string>
+    <string name="dialpad_6_number" msgid="8044579516869379093">"6"</string>
+    <string name="dialpad_7_number" msgid="4175113016564167123">"7"</string>
+    <string name="dialpad_8_number" msgid="7949849563865941621">"8"</string>
+    <string name="dialpad_9_number" msgid="4377059952097526576">"9"</string>
     <string name="show_all_contacts_title" msgid="8395378484578221791">"所有联系人"</string>
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"所有联系人"</string>
-    <string name="favorite_hidden" msgid="4837366417440391323">"已从“常联系的人”中隐藏"</string>
+    <string name="favorite_hidden" msgid="4837366417440391323">"已从“常用联系人”中隐藏"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"撤消"</string>
 </resources>

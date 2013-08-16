@@ -44,8 +44,6 @@
     <string name="voicemail_buffering" msgid="738287747618697097">"Bufrer …"</string>
     <string name="voicemail_fetching_content" msgid="877911315738258780">"Henter talepost …"</string>
     <string name="voicemail_fetching_timout" msgid="6691792377574905201">"Kunne ikke hente talepost."</string>
-    <string name="call_log_new_header" msgid="846546437517724715">"Nytt"</string>
-    <string name="call_log_old_header" msgid="6262205894314263629">"Eldre"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Bare anrop som gikk til talepostkasse"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Bare innkommende anrop"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Bare utgående anrop"</string>
@@ -141,6 +139,16 @@
     <string name="show_all_contacts" msgid="1732256558071778056">"Vis alle kontakter"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Vis bare favoritter"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Logg"</string>
+    <string name="dialpad_0_number" msgid="8859392433961251108">"0"</string>
+    <string name="dialpad_1_number" msgid="6536740525419909212">"1"</string>
+    <string name="dialpad_2_number" msgid="4941546415280852148">"2"</string>
+    <string name="dialpad_3_number" msgid="6539414865185536881">"3"</string>
+    <string name="dialpad_4_number" msgid="979988372051042362">"4"</string>
+    <string name="dialpad_5_number" msgid="5492272478939926734">"5"</string>
+    <string name="dialpad_6_number" msgid="8044579516869379093">"6"</string>
+    <string name="dialpad_7_number" msgid="4175113016564167123">"7"</string>
+    <string name="dialpad_8_number" msgid="7949849563865941621">"8"</string>
+    <string name="dialpad_9_number" msgid="4377059952097526576">"9"</string>
     <string name="show_all_contacts_title" msgid="8395378484578221791">"Alle kontakter"</string>
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Alle kontakter"</string>
     <string name="favorite_hidden" msgid="4837366417440391323">"Skjult fra favoritter"</string>
