@@ -16,9 +16,7 @@
 
 package com.android.incallui;
 
-import android.content.Context;
 import android.graphics.drawable.LayerDrawable;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,9 +35,10 @@ import com.android.services.telephony.common.AudioMode;
 /**
  * Fragment for call control buttons
  */
-public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
-        implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener,
-                OnDismissListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class CallButtonFragment
+        extends BaseFragment<CallButtonPresenter, CallButtonPresenter.CallButtonUi>
+        implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener, OnDismissListener,
+        View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private ToggleButton mMuteButton;
     private ToggleButton mAudioButton;
@@ -58,6 +57,11 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
         // TODO: find a cleaner way to include audio mode provider than
         // having a singleton instance.
         return new CallButtonPresenter();
+    }
+
+    @Override
+    CallButtonPresenter.CallButtonUi getUi() {
+        return this;
     }
 
     @Override
@@ -115,8 +119,8 @@ public class CallButtonFragment extends BaseFragment<CallButtonPresenter>
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        getPresenter().onUiReady(this);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         // set the buttons
         updateAudioButtons(getPresenter().getSupportedAudio());

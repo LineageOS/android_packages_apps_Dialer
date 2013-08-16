@@ -33,8 +33,8 @@ import java.util.ArrayList;
 /**
  *
  */
-public class AnswerFragment extends BaseFragment<AnswerPresenter> implements
-        GlowPadWrapper.AnswerListener, AnswerPresenter.AnswerUi {
+public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresenter.AnswerUi>
+        implements GlowPadWrapper.AnswerListener, AnswerPresenter.AnswerUi {
 
     /**
      * The popup showing the list of canned responses.
@@ -57,13 +57,17 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter> implements
     }
 
     @Override
+    AnswerPresenter.AnswerUi getUi() {
+        return this;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final GlowPadWrapper glowPad = (GlowPadWrapper) inflater.inflate(R.layout.answer_fragment,
                 container, false);
 
         glowPad.setAnswerListener(this);
-        getPresenter().onUiReady(this);
 
         return glowPad;
     }

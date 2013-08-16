@@ -17,6 +17,14 @@
 package com.android.incallui;
 
 import android.graphics.drawable.Drawable;
+import android.content.ContentUris;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.provider.ContactsContract.Contacts;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
@@ -25,20 +33,27 @@ import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
-
+import com.android.incallui.service.PhoneNumberService;
+import com.android.incallui.util.HttpFetcher;
+import com.android.incalluibind.ServiceFactory;
 import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.Call.DisconnectCause;
 
+import java.io.IOException;
+
 /**
  * Presenter for the Call Card Fragment.
+ * <p>
  * This class listens for changes to InCallState and passes it along to the fragment.
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         implements InCallStateListener, AudioModeListener, ContactInfoCacheCallback {
 
+    private static final String TAG = CallCardPresenter.class.getSimpleName();
     private static final long CALL_TIME_UPDATE_INTERVAL = 1000; // in milliseconds
 
+    private PhoneNumberService mPhoneNumberService;
     private AudioModeProvider mAudioModeProvider;
     private ContactInfoCache mContactInfoCache;
     private Call mPrimary;
@@ -56,6 +71,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 updateCallTime();
             }
         });
+    }
+
+    public void init(PhoneNumberService phoneNumberService) {
+        mPhoneNumberService = phoneNumberService;
     }
 
     @Override
@@ -81,6 +100,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     @Override
     public void onStateChange(InCallState state, CallList callList) {
+        Logger.d(TAG, "onStateChange()");
         final CallCardUi ui = getUi();
         if (ui == null) {
             return;
@@ -233,10 +253,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (mPrimary != null && mPrimary.getCallId() == callId) {
             mPrimaryContactInfo = entry;
             updatePrimaryDisplayInfo();
+            lookupPhoneNumber(mPrimary.getNumber());
         }
         if (mSecondary != null && mSecondary.getCallId() == callId) {
             mSecondaryContactInfo = entry;
             updateSecondaryDisplayInfo();
+            // TODO(klp): investigate reverse lookup for secondary call.
         }
 
     }
@@ -258,6 +280,59 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             ui.setPrimary(null, null, false, null, null, false);
         }
 
+    }
+
+    public void lookupPhoneNumber(String phoneNumber) {
+        if (mPhoneNumberService != null) {
+            mPhoneNumberService.getPhoneNumberInfo(phoneNumber,
+                    new PhoneNumberService.PhoneNumberServiceListener() {
+                        @Override
+                        public void onPhoneNumberInfoComplete(
+                                final PhoneNumberService.PhoneNumberInfo info) {
+                            if (info == null) {
+                                return;
+                            }
+                            // TODO(klp): Ui is sometimes null due to something being shutdown.
+                            if (getUi() != null) {
+                                if (info.getName() != null) {
+                                    getUi().setName(info.getName());
+                                }
+
+                                if (info.getImageUrl() != null) {
+                                    fetchImage(info.getImageUrl());
+                                }
+                            }
+                        }
+                    });
+        }
+    }
+
+    private void fetchImage(final String url) {
+        if (url != null) {
+            new AsyncTask<Void, Void, Bitmap>() {
+
+                @Override
+                protected Bitmap doInBackground(Void... params) {
+                    // Fetch the image
+                    try {
+                        final byte[] image = HttpFetcher.getRequestAsByteArray(url);
+                        return BitmapFactory.decodeByteArray(image, 0, image.length);
+                    } catch (IOException e) {
+                        Logger.e(TAG, "Unable to download/decode photo.", e);
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Bitmap bitmap) {
+                    // TODO(klp): same as above, figure out why it's null.
+                    if (getUi() != null) {
+                        getUi().setImage(bitmap);
+                    }
+                }
+
+            }.execute();
+        }
     }
 
     /**
@@ -310,5 +385,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setSecondary(boolean show, String name, String label, Drawable photo);
         void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn);
         void setPrimaryCallElapsedTime(boolean show, String duration);
+        void setName(String name);
+        void setImage(Bitmap bitmap);
     }
 }
