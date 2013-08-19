@@ -31,6 +31,10 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     private OnListFragmentScrolledListener mActivityScrollListener;
 
     public SearchFragment() {
+        configureDirectorySearch();
+    }
+
+    public void configureDirectorySearch() {
         setDirectorySearchEnabled(true);
     }
 
