@@ -83,6 +83,8 @@
     <!-- no translation found for action_menu_call_history_description (9018442816219748968) -->
     <skip />
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Дадатковыя параметры"</string>
+    <!-- no translation found for action_menu_dialpad_button (1425910318049008136) -->
+    <skip />
     <string name="menu_copy" msgid="6108677035381940698">"Капіраваць"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"Паказаць толькі выходныя"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"Паказаць толькі ўваходныя"</string>
