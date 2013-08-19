@@ -18,27 +18,25 @@ package com.android.dialer.database;
 
 import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.ContactsContract.Contacts;
-import android.provider.ContactsContract.Data;
-import android.provider.ContactsContract.Directory;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.test.suitebuilder.annotation.Suppress;
 import android.test.AndroidTestCase;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
 
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.database.DialerDatabaseHelper.ContactNumber;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 
-import junit.framework.TestCase;
-
 import java.lang.Exception;
 import java.lang.FindBugsSuppressWarnings;
 import java.lang.Override;
 import java.lang.String;
 import java.util.ArrayList;
+
+import junit.framework.TestCase;
 
 /**
  * To run this test, use the command:
@@ -119,32 +117,39 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
     private MatrixCursor constructNewContactCursor() {
         final MatrixCursor cursor = new MatrixCursor(new String[]{
-                Phone._ID,
-                Phone.TYPE,
-                Phone.LABEL,
-                Phone.NUMBER,
-                Phone.CONTACT_ID,
-                Phone.LOOKUP_KEY,
-                Phone.DISPLAY_NAME_PRIMARY,
-                Data.LAST_TIME_USED,
-                Data.TIMES_USED,
-                Contacts.STARRED,
-                Data.IS_SUPER_PRIMARY,
-                Contacts.IN_VISIBLE_GROUP,
-                Data.IS_PRIMARY});
-
+                    Phone._ID,                          // 0
+                    Phone.TYPE,                         // 1
+                    Phone.LABEL,                        // 2
+                    Phone.NUMBER,                       // 3
+                    Phone.CONTACT_ID,                   // 4
+                    Phone.LOOKUP_KEY,                   // 5
+                    Phone.DISPLAY_NAME_PRIMARY,         // 6
+                    Phone.PHOTO_ID,                     // 7
+                    Data.LAST_TIME_USED,                // 8
+                    Data.TIMES_USED,                    // 9
+                    Contacts.STARRED,                   // 10
+                    Data.IS_SUPER_PRIMARY,              // 11
+                    Contacts.IN_VISIBLE_GROUP,          // 12
+                    Data.IS_PRIMARY});                  // 13
         return cursor;
     }
 
+    private ContactNumber constructNewContactWithDummyIds(MatrixCursor contactCursor,
+            MatrixCursor nameCursor, String number, int id, String displayName) {
+        return constructNewContact(contactCursor, nameCursor, id, number, 0, "", displayName, 0, 0,
+                0, 0, 0, 0, 0);
+    }
+
     private ContactNumber constructNewContact(MatrixCursor contactCursor, MatrixCursor nameCursor,
-            int id, String number, int contactId, String lookupKey, String displayName,
+            int id, String number, int contactId, String lookupKey, String displayName, int photoId,
             int lastTimeUsed, int timesUsed, int starred, int isSuperPrimary, int inVisibleGroup,
             int isPrimary) {
         assertNotNull(contactCursor);
         assertNotNull(nameCursor);
 
         contactCursor.addRow(new Object[]{id, "", "", number, contactId, lookupKey, displayName,
-                lastTimeUsed, timesUsed, starred, isSuperPrimary, inVisibleGroup, isPrimary});
+                photoId, lastTimeUsed, timesUsed, starred, isSuperPrimary, inVisibleGroup,
+                isPrimary});
         nameCursor.addRow(new Object[]{displayName, contactId});
 
         return new ContactNumber(contactId, id, displayName, number, lookupKey, 0);
@@ -161,12 +166,12 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
         final MatrixCursor nameCursor =  constructNewNameCursor();
         final MatrixCursor contactCursor = constructNewContactCursor();
-        final ContactNumber jasonsmith = constructNewContact(contactCursor, nameCursor,
-                0, "", 0, "", "Jason Smith", 0, 0, 0, 0, 0, 0);
-        final ContactNumber jasonsmitt = constructNewContact(contactCursor, nameCursor,
-                1, "", 1, "", "Jason Smitt", 0, 0, 0, 0, 0, 0);
-        final ContactNumber alphabet = constructNewContact(contactCursor, nameCursor,
-                0, "12345678", 0, "", "abc def ghi jkl mno pqrs tuv wxyz", 0, 0, 0, 0, 0, 0);
+        final ContactNumber jasonsmith = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "", 0, "Jason Smith");
+        final ContactNumber jasonsmitt = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "", 1, "Jason Smitt");
+        final ContactNumber alphabet = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "12345678", 2, "abc def ghi jkl mno pqrs tuv wxyz");
 
         mTestHelper.insertUpdatedContactsAndNumberPrefix(db, contactCursor, Long.valueOf(0));
         mTestHelper.insertNamePrefixes(db, nameCursor);
@@ -199,12 +204,12 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
         final MatrixCursor nameCursor =  constructNewNameCursor();
         final MatrixCursor contactCursor = constructNewContactCursor();
-        final ContactNumber maryjane = constructNewContact(contactCursor, nameCursor,
-                0, "", 0, "", "Mary Jane", 0, 0, 0, 0, 0, 0);
-        final ContactNumber sarahsmith = constructNewContact(contactCursor, nameCursor,
-                0, "", 1, "", "Sarah Smith", 0, 0, 0, 0, 0, 0);
-        final ContactNumber jasonsmitt = constructNewContact(contactCursor, nameCursor,
-                0, "", 2, "", "Jason Smitt", 0, 0, 0, 0, 0, 0);
+        final ContactNumber maryjane = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "", 0, "Mary Jane");
+        final ContactNumber sarahsmith = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "", 1, "Sarah Smith");
+        final ContactNumber jasonsmitt = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "", 2, "Jason Smitt");
 
         mTestHelper.insertUpdatedContactsAndNumberPrefix(db, contactCursor, Long.valueOf(0));
         mTestHelper.insertNamePrefixes(db, nameCursor);
@@ -234,8 +239,8 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
         final MatrixCursor nameCursor =  constructNewNameCursor();
         final MatrixCursor contactCursor = constructNewContactCursor();
-        final ContactNumber jasonfwilliams = constructNewContact(contactCursor, nameCursor,
-                0, "", 0, "", "Jason F. Williams", 0, 0, 0, 0, 0, 0);
+        final ContactNumber jasonfwilliams = constructNewContactWithDummyIds(contactCursor,
+                nameCursor, "", 0, "Jason F. Williams");
 
         mTestHelper.insertUpdatedContactsAndNumberPrefix(db, contactCursor, Long.valueOf(0));
         mTestHelper.insertNamePrefixes(db, nameCursor);
@@ -255,8 +260,8 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
         final MatrixCursor nameCursor =  constructNewNameCursor();
         final MatrixCursor contactCursor = constructNewContactCursor();
-        final ContactNumber martinjuniorharry = constructNewContact(contactCursor, nameCursor,
-                0, "", 0, "", "Martin Jr Harry", 0, 0, 0, 0, 0, 0);
+        final ContactNumber martinjuniorharry = constructNewContactWithDummyIds(contactCursor,
+                nameCursor, "", 0, "Martin Jr Harry");
 
         mTestHelper.insertUpdatedContactsAndNumberPrefix(db, contactCursor, Long.valueOf(0));
         mTestHelper.insertNamePrefixes(db, nameCursor);
@@ -298,8 +303,8 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
         final MatrixCursor nameCursor =  constructNewNameCursor();
         final MatrixCursor contactCursor = constructNewContactCursor();
-        final ContactNumber alphabet = constructNewContact(contactCursor, nameCursor,
-                0, "12345678", 0, "", "abc def ghi jkl mno pqrs tuv wxyz", 0, 0, 0, 0, 0, 0);
+        final ContactNumber alphabet = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "12345678", 0, "abc def ghi jkl mno pqrs tuv wxyz");
 
         mTestHelper.insertUpdatedContactsAndNumberPrefix(db, contactCursor, Long.valueOf(0));
         mTestHelper.insertNamePrefixes(db, nameCursor);
@@ -327,14 +332,13 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
         final MatrixCursor nameCursor =  constructNewNameCursor();
         final MatrixCursor contactCursor = constructNewContactCursor();
-        final ContactNumber alphabet = constructNewContact(contactCursor, nameCursor,
-                0, "1", 0, "", " aaaa bbbb cccc dddd eeee ffff gggg" +
-                " hhhh iiii jjjj kkkk llll mmmm nnnn oooo pppp qqqq rrrr ssss tttt uuuu vvvv " +
-                " wwww xxxx yyyy zzzz", 0, 0, 0, 0, 0, 0);
+        final ContactNumber alphabet = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "1", 0,  " aaaa bbbb cccc dddd eeee ffff gggg hhhh iiii jjjj kkkk llll mmmm nnnn" +
+                " oooo pppp qqqq rrrr ssss tttt uuuu vvvv wwww xxxx yyyy zzzz");
 
-        final ContactNumber alphabet2 = constructNewContact(contactCursor, nameCursor,
-                0, "1", 1, "", "aaaabbbbccccddddeeeeffffgggghhhhiiiijjjjkkkkllllmmmmnnnnoooopppp" +
-                "qqqqrrrrssssttttuuuuvvvvwwwwxxxxyyyyzzzz", 0, 0, 0, 0, 0, 0);
+        final ContactNumber alphabet2 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "1", 1, "aaaabbbbccccddddeeeeffffgggghhhhiiiijjjjkkkkllllmmmmnnnnooooppppqqqqrrrr" +
+                "ssssttttuuuuvvvvwwwwxxxxyyyyzzzz");
 
         mTestHelper.insertUpdatedContactsAndNumberPrefix(db, contactCursor, Long.valueOf(0));
         mTestHelper.insertNamePrefixes(db, nameCursor);
@@ -346,50 +350,15 @@ public class SmartDialPrefixTest extends AndroidTestCase {
         assertEquals(40, mTestHelper.countPrefixTableRows(db));
     }
 
-    public void testParseInfo() {
-        final String name = "Mcdonald Jamie-Cullum";
-        final ArrayList<String> info = SmartDialPrefix.parseToIndexTokens(name);
-        assertEquals(3, info.size());
-        assertEquals(8, info.get(0).length());
-        assertEquals(5, info.get(1).length());
-        assertEquals(6, info.get(2).length());
-
-        final String name2 = "aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk";
-        final ArrayList<String> info2 = SmartDialPrefix.parseToIndexTokens(name2);
-        assertEquals(11, info2.size());
-        assertEquals(3, info2.get(0).length());
-        assertEquals(3, info2.get(10).length());
-
-        final String name3 = "this  is- a,test    name";
-        final ArrayList<String> info3 = SmartDialPrefix.parseToIndexTokens(name3);
-        assertEquals(5, info3.size());
-        assertEquals(2, info3.get(1).length());
-        assertEquals(1, info3.get(2).length());
-        assertEquals(4, info3.get(3).length());
-        assertEquals(4, info3.get(4).length());
-
-        final String name4 = "M c-Donald James";
-        final ArrayList<String> info4 = SmartDialPrefix.parseToIndexTokens(name4);
-        assertEquals(4, info4.size());
-        assertEquals(1, info4.get(1).length());
-        assertEquals(6, info4.get(2).length());
-
-        final String name5 = "   Aa'Bb    c    dddd  e'e";
-        final ArrayList<String> info5 = SmartDialPrefix.parseToIndexTokens(name5);
-        assertEquals(6, info5.size());
-        assertEquals(2, info5.get(0).length());
-        assertEquals(1, info5.get(5).length());
-    }
-
     public void testAccentedCharacters() {
         final SQLiteDatabase db = mTestHelper.getWritableDatabase();
 
         final MatrixCursor nameCursor =  constructNewNameCursor();
         final MatrixCursor contactCursor = constructNewContactCursor();
-        final ContactNumber reene = constructNewContact(contactCursor, nameCursor,
-                0, "0", 0, "", "Reenée", 0, 0, 0, 0, 0, 0);
-        final ContactNumber bronte = constructNewContact(contactCursor, nameCursor,
-                0, "0", 1, "", "Brontë", 0, 0, 0, 0, 0, 0);
+        final ContactNumber reene = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "0", 0, "Reenée");
+        final ContactNumber bronte = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "0", 1, "Brontë");
 
         mTestHelper.insertUpdatedContactsAndNumberPrefix(db, contactCursor, Long.valueOf(0));
         mTestHelper.insertNamePrefixes(db, nameCursor);
@@ -406,10 +375,10 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
         final MatrixCursor nameCursor =  constructNewNameCursor();
         final MatrixCursor contactCursor = constructNewContactCursor();
-        final ContactNumber contact = constructNewContact(contactCursor, nameCursor,
-                0, "0", 0, "", "12345678", 0, 0, 0, 0, 0, 0);
-        final ContactNumber teacher = constructNewContact(contactCursor, nameCursor,
-                0, "0", 1, "", "1st Grade Teacher", 0, 0, 0, 0, 0, 0);
+        final ContactNumber contact = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "0", 0, "12345678");
+        final ContactNumber teacher = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "0", 1, "1st Grade Teacher");
 
         mTestHelper.insertUpdatedContactsAndNumberPrefix(db, contactCursor, Long.valueOf(0));
         mTestHelper.insertNamePrefixes(db, nameCursor);
@@ -427,12 +396,12 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
         final MatrixCursor nameCursor =  constructNewNameCursor();
         final MatrixCursor contactCursor = constructNewContactCursor();
-        final ContactNumber contactno1 = constructNewContact(contactCursor, nameCursor,
-                0, "510-527-2357", 0, "", "James", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno2 = constructNewContact(contactCursor, nameCursor,
-                0, "77212862357", 1, "", "James", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno3 = constructNewContact(contactCursor, nameCursor,
-                0, "+13684976334", 2, "", "James", 0, 0, 0, 0, 0, 0);
+        final ContactNumber contactno1 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "510-527-2357", 0,  "James");
+        final ContactNumber contactno2 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "77212862357", 1, "James");
+        final ContactNumber contactno3 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "+13684976334", 2, "James");
 
         mTestHelper.insertUpdatedContactsAndNumberPrefix(db, contactCursor, Long.valueOf(0));
         mTestHelper.insertNamePrefixes(db, nameCursor);
@@ -453,16 +422,16 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
         final MatrixCursor nameCursor =  constructNewNameCursor();
         final MatrixCursor contactCursor = constructNewContactCursor();
-        final ContactNumber contactno1 = constructNewContact(contactCursor, nameCursor,
-                0, "+13684976334", 0, "", "James", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno2 = constructNewContact(contactCursor, nameCursor,
-                0, "+65 9177-6930", 1, "", "Jason", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno3 = constructNewContact(contactCursor, nameCursor,
-                0, "+85212345678", 2, "", "Mike", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno4 = constructNewContact(contactCursor, nameCursor,
-                0, "+85112345678", 3, "", "Invalid", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno5 = constructNewContact(contactCursor, nameCursor,
-                0, "+852", 4, "", "Invalid", 0, 0, 0, 0, 0, 0);
+        final ContactNumber contactno1 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "+13684976334", 0, "James");
+        final ContactNumber contactno2 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "+65 9177-6930", 1, "Jason");
+        final ContactNumber contactno3 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "+85212345678", 2, "Mike");
+        final ContactNumber contactno4 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "+85112345678", 3, "Invalid");
+        final ContactNumber contactno5 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "+852", 4, "Invalid");
 
         mTestHelper.insertUpdatedContactsAndNumberPrefix(db, contactCursor, Long.valueOf(0));
         mTestHelper.insertNamePrefixes(db, nameCursor);
@@ -493,24 +462,24 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
         final MatrixCursor nameCursor =  constructNewNameCursor();
         final MatrixCursor contactCursor = constructNewContactCursor();
-        final ContactNumber contactno1 = constructNewContact(contactCursor, nameCursor,
-                0, "16503337596", 0, "", "James", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno2 = constructNewContact(contactCursor, nameCursor,
-                0, "5109921234", 1, "", "Michael", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno3 = constructNewContact(contactCursor, nameCursor,
-                0, "(415)-123-4567", 2, "", "Jason", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno4 = constructNewContact(contactCursor, nameCursor,
-                0, "1 510-284-9170", 3, "", "Mike", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno5 = constructNewContact(contactCursor, nameCursor,
-                0, "1-415-123-123", 4, "", "Invalid", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno6 = constructNewContact(contactCursor, nameCursor,
-                0, "415-123-123", 5, "", "Invalid2", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno7 = constructNewContact(contactCursor, nameCursor,
-                0, "+1-510-284-9170", 6, "", "Mike", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno8 = constructNewContact(contactCursor, nameCursor,
-                0, "+1-510-284-917", 7, "", "Invalid", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno9 = constructNewContact(contactCursor, nameCursor,
-                0, "+857-510-284-9170", 8, "", "Inv", 0, 0, 0, 0, 0, 0);
+        final ContactNumber contactno1 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "16503337596", 0, "James");
+        final ContactNumber contactno2 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "5109921234", 1, "Michael");
+        final ContactNumber contactno3 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "(415)-123-4567", 2, "Jason");
+        final ContactNumber contactno4 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "1 510-284-9170", 3, "Mike");
+        final ContactNumber contactno5 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "1-415-123-123", 4, "Invalid");
+        final ContactNumber contactno6 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "415-123-123", 5, "Invalid2");
+        final ContactNumber contactno7 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "+1-510-284-9170", 6, "Mike");
+        final ContactNumber contactno8 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "+1-510-284-917", 7, "Invalid");
+        final ContactNumber contactno9 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "+857-510-284-9170", 8, "Inv");
 
         mTestHelper.insertUpdatedContactsAndNumberPrefix(db, contactCursor, Long.valueOf(0));
         mTestHelper.insertNamePrefixes(db, nameCursor);
@@ -553,18 +522,7 @@ public class SmartDialPrefixTest extends AndroidTestCase {
         assertFalse(getLooseMatchesFromDb("5102849170").contains(contactno9));
         assertFalse(getLooseMatchesFromDb("2849170").contains(contactno9));
 
-//        // If user's region is determined to be not in North America, then the NANP number
-//        // workarounds should not be applied
-//        final SmartDialTrie trieNonNANP = new SmartDialTrie();
-//
-//        trieNonNANP.put(contactno3);
-//        assertTrue(checkContains(trieNonNANP, contactno3, "4151234567"));
-//        assertFalse(checkContains(trieNonNANP, contactno3, "1234567"));
-//
-//        trieNonNANP.put(contactno4);
-//        assertTrue(checkContains(trieNonNANP, contactno4, "15102849170"));
-//        assertFalse(checkContains(trieNonNANP, contactno4, "5102849170"));
-//        assertFalse(checkContains(trieNonNANP, contactno4, "2849170"));
+        // TODO(klp) Adds test for non-NANP region number matchings.
     }
 
     // Tests special case handling for non-NANP numbers
@@ -575,10 +533,10 @@ public class SmartDialPrefixTest extends AndroidTestCase {
         final MatrixCursor nameCursor =  constructNewNameCursor();
         final MatrixCursor contactCursor = constructNewContactCursor();
 
-        final ContactNumber contactno0 = constructNewContact(contactCursor, nameCursor,
-                0, "(415)-123-4567", 0, "", "Jason", 0, 0, 0, 0, 0, 0);
-        final ContactNumber contactno1 = constructNewContact(contactCursor, nameCursor,
-                0, "1 510-284-9170", 1, "", "Mike", 0, 0, 0, 0, 0, 0);
+        final ContactNumber contactno0 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "(415)-123-4567", 0, "Jason");
+        final ContactNumber contactno1 = constructNewContactWithDummyIds(contactCursor, nameCursor,
+                "1 510-284-9170", 1, "Mike");
 
 
         mTestHelper.insertUpdatedContactsAndNumberPrefix(db, contactCursor, Long.valueOf(0));
@@ -593,5 +551,40 @@ public class SmartDialPrefixTest extends AndroidTestCase {
         assertTrue(getLooseMatchesFromDb("15102849170").contains(contactno1));
         assertFalse(getLooseMatchesFromDb("5102849170").contains(contactno1));
         assertFalse(getLooseMatchesFromDb("2849170").contains(contactno1));
+    }
+
+    public void testParseInfo() {
+        final String name = "Mcdonald Jamie-Cullum";
+        final ArrayList<String> info = SmartDialPrefix.parseToIndexTokens(name);
+        assertEquals(3, info.size());
+        assertEquals(8, info.get(0).length());
+        assertEquals(5, info.get(1).length());
+        assertEquals(6, info.get(2).length());
+
+        final String name2 = "aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk";
+        final ArrayList<String> info2 = SmartDialPrefix.parseToIndexTokens(name2);
+        assertEquals(11, info2.size());
+        assertEquals(3, info2.get(0).length());
+        assertEquals(3, info2.get(10).length());
+
+        final String name3 = "this  is- a,test    name";
+        final ArrayList<String> info3 = SmartDialPrefix.parseToIndexTokens(name3);
+        assertEquals(5, info3.size());
+        assertEquals(2, info3.get(1).length());
+        assertEquals(1, info3.get(2).length());
+        assertEquals(4, info3.get(3).length());
+        assertEquals(4, info3.get(4).length());
+
+        final String name4 = "M c-Donald James";
+        final ArrayList<String> info4 = SmartDialPrefix.parseToIndexTokens(name4);
+        assertEquals(4, info4.size());
+        assertEquals(1, info4.get(1).length());
+        assertEquals(6, info4.get(2).length());
+
+        final String name5 = "   Aa'Bb    c    dddd  e'e";
+        final ArrayList<String> info5 = SmartDialPrefix.parseToIndexTokens(name5);
+        assertEquals(6, info5.size());
+        assertEquals(2, info5.get(0).length());
+        assertEquals(1, info5.get(5).length());
     }
 }
