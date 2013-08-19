@@ -31,6 +31,11 @@ import com.android.dialer.dialpad.SmartDialCursorLoader;
 public class SmartDialSearchFragment extends SearchFragment {
     private static final String TAG = SmartDialSearchFragment.class.getSimpleName();
 
+    @Override
+    public void configureDirectorySearch() {
+        setDirectorySearchEnabled(false);
+    }
+
     /**
      * Creates a SmartDialListAdapter to display and operate on search results.
      */
