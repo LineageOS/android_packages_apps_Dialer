@@ -89,6 +89,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     /** Position of the contact pending removal. */
     private int mPotentialRemoveEntryIndex = -1;
 
+    private boolean mAwaitingRemove = false;
+
     private ContactPhotoManager mPhotoManager;
     protected int mNumFrequents;
     protected int mNumStarred;
@@ -304,6 +306,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             contact.pinned = pinned;
             mContactEntries.add(contact);
         }
+
+        mAwaitingRemove = false;
 
         arrangeContactsByPinnedPosition(mContactEntries);
 
@@ -636,6 +640,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             unstarAndUnpinContact(entry.lookupKey);
             notifyDataSetChanged();
             removed = true;
+            mAwaitingRemove = true;
         }
         cleanTempVariables();
         return removed;
@@ -1000,7 +1005,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
         @Override
         public boolean onInterceptTouchEvent(MotionEvent ev) {
-            if (mSwipeHelper != null) {
+            if (mSwipeHelper != null && isSwipeEnabled()) {
                 return mSwipeHelper.onInterceptTouchEvent(ev) || super.onInterceptTouchEvent(ev);
             } else {
                 return super.onInterceptTouchEvent(ev);
@@ -1009,7 +1014,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
         @Override
         public boolean onTouchEvent(MotionEvent ev) {
-            if (mSwipeHelper != null) {
+            if (mSwipeHelper != null && isSwipeEnabled()) {
                 return mSwipeHelper.onTouchEvent(ev) || super.onTouchEvent(ev);
             } else {
                 return super.onTouchEvent(ev);
@@ -1166,5 +1171,11 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     @Override
     public void onTouch() {
         removePendingContactEntry();
+        return;
+    }
+
+    @Override
+    public boolean isSwipeEnabled() {
+        return !mAwaitingRemove;
     }
 }
