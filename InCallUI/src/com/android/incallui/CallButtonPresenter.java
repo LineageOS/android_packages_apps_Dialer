@@ -33,6 +33,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     private Call mCall;
     private AudioModeProvider mAudioModeProvider;
+    private ProximitySensor mProximitySensor;
 
     public CallButtonPresenter() {
     }
@@ -166,6 +167,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     public void showDialpadClicked(boolean checked) {
         Logger.v(this, "Show dialpad " + String.valueOf(checked));
         getUi().displayDialpad(checked);
+        mProximitySensor.onDialpadVisible(checked);
     }
 
     private void updateUi(InCallState state, Call call) {
@@ -202,6 +204,10 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // or risk missing important updates.
         mAudioModeProvider = audioModeProvider;
         mAudioModeProvider.addListener(this);
+    }
+
+    public void setProximitySensor(ProximitySensor proximitySensor) {
+        mProximitySensor = proximitySensor;
     }
 
     public interface CallButtonUi extends Ui {
