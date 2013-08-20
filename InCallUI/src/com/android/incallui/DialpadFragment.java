@@ -31,7 +31,7 @@ import java.util.HashMap;
 /**
  * Fragment for call control buttons
  */
-public class DialpadFragment extends BaseFragment<DialpadPresenter>
+public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPresenter.DialpadUi>
         implements DialpadPresenter.DialpadUi, View.OnTouchListener, View.OnKeyListener,
         View.OnHoverListener, View.OnClickListener {
 
@@ -164,6 +164,11 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter>
     }
 
     @Override
+    DialpadPresenter.DialpadUi getUi() {
+        return this;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -181,7 +186,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter>
 
             setupKeypad(parent);
         }
-        getPresenter().onUiReady(this);
         return parent;
     }
 

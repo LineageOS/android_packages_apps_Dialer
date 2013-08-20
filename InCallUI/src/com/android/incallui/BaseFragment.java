@@ -17,21 +17,38 @@
 package com.android.incallui;
 
 import android.app.Fragment;
+import android.os.Bundle;
+import android.view.View;
+
+import com.android.internal.util.Preconditions;
 
 /**
  *
  */
-public abstract class BaseFragment<T extends Presenter> extends Fragment {
+public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends Fragment {
 
     private T mPresenter;
 
-    protected BaseFragment() {
-        this.mPresenter = createPresenter();
-    }
-
     abstract T createPresenter();
 
+    abstract U getUi();
+
+    protected BaseFragment() {
+        mPresenter = createPresenter();
+    }
+
+    /**
+     * Presenter will be available after onActivityCreated().
+     *
+     * @return The presenter associated with this fragment.
+     */
     public T getPresenter() {
         return mPresenter;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mPresenter.onUiReady(getUi());
     }
 }
