@@ -28,27 +28,27 @@ public class CallCommandClient {
 
     private static CallCommandClient sInstance;
 
-    public static CallCommandClient getInstance() {
+    public static synchronized CallCommandClient getInstance() {
         if (sInstance == null) {
-            throw new IllegalStateException("CallCommandClient has not been initialized.");
+            sInstance = new CallCommandClient();
         }
         return sInstance;
     }
 
-    // TODO(klp): Not sure if static call is ok. Might need to switch to normal service binding.
-    public static void init(ICallCommandService service) {
-        Preconditions.checkState(sInstance == null);
-        sInstance = new CallCommandClient(service);
-    }
-
-
     private ICallCommandService mCommandService;
 
-    private CallCommandClient(ICallCommandService service) {
+    private CallCommandClient() {
+    }
+
+    public void setService(ICallCommandService service) {
         mCommandService = service;
     }
 
     public void answerCall(int callId) {
+        if (mCommandService == null) {
+            Logger.e(this, "Cannot answer call; CallCommandService == null");
+            return;
+        }
         try {
             mCommandService.answerCall(callId);
         } catch (RemoteException e) {
@@ -57,6 +57,10 @@ public class CallCommandClient {
     }
 
     public void rejectCall(int callId, boolean rejectWithMessage, String message) {
+        if (mCommandService == null) {
+            Logger.e(this, "Cannot reject call; CallCommandService == null");
+            return;
+        }
         try {
             mCommandService.rejectCall(callId, rejectWithMessage, message);
         } catch (RemoteException e) {
@@ -65,6 +69,10 @@ public class CallCommandClient {
     }
 
     public void disconnectCall(int callId) {
+        if (mCommandService == null) {
+            Logger.e(this, "Cannot disconnect call; CallCommandService == null");
+            return;
+        }
         try {
             mCommandService.disconnectCall(callId);
         } catch (RemoteException e) {
@@ -73,6 +81,10 @@ public class CallCommandClient {
     }
 
     public void mute(boolean onOff) {
+        if (mCommandService == null) {
+            Logger.e(this, "Cannot mute call; CallCommandService == null");
+            return;
+        }
         try {
             mCommandService.mute(onOff);
         } catch (RemoteException e) {
@@ -81,6 +93,10 @@ public class CallCommandClient {
     }
 
     public void hold(int callId, boolean onOff) {
+        if (mCommandService == null) {
+            Logger.e(this, "Cannot hold call; CallCommandService == null");
+            return;
+        }
         try {
             mCommandService.hold(callId, onOff);
         } catch (RemoteException e) {
@@ -89,6 +105,10 @@ public class CallCommandClient {
     }
 
     public void merge() {
+        if (mCommandService == null) {
+            Logger.e(this, "Cannot merge call; CallCommandService == null");
+            return;
+        }
         try {
             mCommandService.merge();
         } catch (RemoteException e) {
@@ -97,6 +117,10 @@ public class CallCommandClient {
     }
 
     public void swap() {
+        if (mCommandService == null) {
+            Logger.e(this, "Cannot swap call; CallCommandService == null");
+            return;
+        }
         try {
             mCommandService.swap();
         } catch (RemoteException e) {
@@ -105,6 +129,10 @@ public class CallCommandClient {
     }
 
     public void addCall() {
+        if (mCommandService == null) {
+            Logger.e(this, "Cannot add call; CallCommandService == null");
+            return;
+        }
         try {
             mCommandService.addCall();
         } catch (RemoteException e) {
@@ -113,6 +141,10 @@ public class CallCommandClient {
     }
 
     public void setAudioMode(int mode) {
+        if (mCommandService == null) {
+            Logger.e(this, "Cannot set audio mode; CallCommandService == null");
+            return;
+        }
         try {
             mCommandService.setAudioMode(mode);
         } catch (RemoteException e) {
@@ -121,6 +153,10 @@ public class CallCommandClient {
     }
 
     public void playDtmfTone(char digit, boolean timedShortTone) {
+        if (mCommandService == null) {
+            Logger.e(this, "Cannot start dtmf tone; CallCommandService == null");
+            return;
+        }
         try {
             Logger.v(this, "Sending dtmf tone " + digit);
             mCommandService.playDtmfTone(digit, timedShortTone);
@@ -131,6 +167,10 @@ public class CallCommandClient {
     }
 
     public void stopDtmfTone() {
+        if (mCommandService == null) {
+            Logger.e(this, "Cannot stop dtmf tone; CallCommandService == null");
+            return;
+        }
         try {
             Logger.v(this, "Stop dtmf tone ");
             mCommandService.stopDtmfTone();

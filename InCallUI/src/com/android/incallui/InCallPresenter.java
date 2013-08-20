@@ -47,7 +47,7 @@ public class InCallPresenter implements CallList.Listener {
     private Context mContext;
     private CallList mCallList;
     private InCallActivity mInCallActivity;
-
+    private boolean mServiceConnected = false;
     private InCallState mInCallState = InCallState.HIDDEN;
 
     public static synchronized InCallPresenter getInstance() {
@@ -71,34 +71,44 @@ public class InCallPresenter implements CallList.Listener {
 
         mAudioModeProvider = audioModeProvider;
 
+        // This only gets called by the service so this is okay.
+        mServiceConnected = true;
+
         Logger.d(this, "Finished InCallPresenter.setUp");
     }
 
+    /**
+     * Called when the telephony service has disconnected from us.  This will happen when there are
+     * no more active calls. However, we may still want to continue showing the UI for
+     * certain cases like showing "Call Ended".
+     * What we really want is to wait for the activity and the service to both disconnect before we
+     * tear things down. This method sets a serviceConnected boolean and calls a secondary method
+     * that performs the aforementioned logic.
+     */
     public void tearDown() {
-        mAudioModeProvider = null;
-
-        removeListener(mStatusBarNotifier);
-        mStatusBarNotifier = null;
-
-        mCallList.removeListener(this);
-        mCallList = null;
-
-        mContext = null;
-        mInCallActivity = null;
-
-        mListeners.clear();
-
-        Logger.d(this, "Finished InCallPresenter.tearDown");
+        Logger.d(this, "tearDown");
+        mServiceConnected = false;
+        attemptCleanup();
     }
 
+    /**
+     * Called when the UI begins or ends. Starts the callstate callbacks if the UI just began.
+     * Attempts to tear down everything if the UI just ended. See #tearDown for more insight on
+     * the tear-down process.
+     */
     public void setActivity(InCallActivity inCallActivity) {
         mInCallActivity = inCallActivity;
 
-        Logger.d(this, "UI Initialized");
+        if (mInCallActivity != null) {
+            Logger.d(this, "UI Initialized");
 
-        // Since the UI just came up, imitate an update from the call list
-        // to set the proper UI state.
-        onCallListChange(mCallList);
+            // Since the UI just came up, imitate an update from the call list
+            // to set the proper UI state.
+            onCallListChange(mCallList);
+        } else {
+            Logger.d(this, "setActivity(null)");
+            attemptCleanup();
+        }
     }
 
     /**
@@ -187,7 +197,9 @@ public class InCallPresenter implements CallList.Listener {
     public void onUiShowing(boolean showing) {
         // We need to update the notification bar when we leave the UI because that
         // could trigger it to show again.
-        mStatusBarNotifier.updateNotification(mInCallState, mCallList);
+        if (mStatusBarNotifier != null) {
+            mStatusBarNotifier.updateNotification(mInCallState, mCallList);
+        }
     }
 
     /**
@@ -195,7 +207,7 @@ public class InCallPresenter implements CallList.Listener {
      * the UI needs to be started or finished depending on the new state and does it.
      */
     private InCallState startOrFinishUi(InCallState newState) {
-        Logger.d(this, "startOrFInishUi: " + newState.toString());
+        Logger.d(this, "startOrFinishUi: " + newState.toString());
 
         // TODO(klp): Consider a proper state machine implementation
 
@@ -228,8 +240,10 @@ public class InCallPresenter implements CallList.Listener {
         //          [ AND NOW YOU'RE IN THE CALL. voila! ]
         //
         // Our app is started using a fullScreen notification.  We need to do this whenever
-        // we get an incoming call.
-        final boolean startStartupSequence = (InCallState.INCOMING == newState);
+        // we get an incoming call or if this is the first time we are displaying (the previous
+        // state was HIDDEN).
+        final boolean startStartupSequence = (InCallState.INCOMING == newState ||
+                InCallState.HIDDEN == mInCallState);
 
         // A new outgoing call indicates that the user just now dialed a number and when that
         // happens we need to display the screen immediateley.
@@ -242,10 +256,10 @@ public class InCallPresenter implements CallList.Listener {
         Logger.v(this, "startStartupSequence: ", startStartupSequence);
 
 
-        if (startStartupSequence) {
-            mStatusBarNotifier.updateNotificationAndLaunchIncomingCallUi(newState, mCallList);
-        } else if (showCallUi) {
+        if (showCallUi) {
             showInCall();
+        } else if (startStartupSequence) {
+            mStatusBarNotifier.updateNotificationAndLaunchIncomingCallUi(newState, mCallList);
         } else if (newState == InCallState.HIDDEN) {
 
             // The new state is the hidden state (no calls).  Tear everything down.
@@ -263,6 +277,30 @@ public class InCallPresenter implements CallList.Listener {
         }
 
         return newState;
+    }
+
+    /**
+     * Checks to see if both the UI is gone and the service is disconnected. If so, tear it all
+     * down.
+     */
+    private void attemptCleanup() {
+        if (mInCallActivity == null && !mServiceConnected) {
+            Logger.d(this, "Start InCallPresenter.CleanUp");
+            mAudioModeProvider = null;
+
+            removeListener(mStatusBarNotifier);
+            mStatusBarNotifier = null;
+
+            mCallList.removeListener(this);
+            mCallList = null;
+
+            mContext = null;
+            mInCallActivity = null;
+
+            mListeners.clear();
+
+            Logger.d(this, "Finished InCallPresenter.CleanUp");
+        }
     }
 
     private void showInCall() {
