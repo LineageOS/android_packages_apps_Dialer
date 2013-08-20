@@ -76,7 +76,7 @@ public class SwipeableListView extends ListView implements SwipeHelperCallback {
     }
 
     public boolean isSwipeEnabled() {
-        return mEnableSwipe;
+        return mEnableSwipe && mOnItemGestureListener.isSwipeEnabled();
     }
 
     public void setOnItemSwipeListener(OnItemGestureListener listener) {
@@ -85,7 +85,7 @@ public class SwipeableListView extends ListView implements SwipeHelperCallback {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (mEnableSwipe) {
+        if (isSwipeEnabled()) {
             return mSwipeHelper.onInterceptTouchEvent(ev) || super.onInterceptTouchEvent(ev);
         } else {
             return super.onInterceptTouchEvent(ev);
@@ -97,7 +97,7 @@ public class SwipeableListView extends ListView implements SwipeHelperCallback {
         if (mOnItemGestureListener != null) {
             mOnItemGestureListener.onTouch();
         }
-        if (mEnableSwipe) {
+        if (isSwipeEnabled()) {
             return mSwipeHelper.onTouchEvent(ev) || super.onTouchEvent(ev);
         } else {
             return super.onTouchEvent(ev);

@@ -465,5 +465,7 @@ public class SwipeHelper {
         public void onSwipe(View view);
 
         public void onTouch();
+
+        public boolean isSwipeEnabled();
     }
 }
