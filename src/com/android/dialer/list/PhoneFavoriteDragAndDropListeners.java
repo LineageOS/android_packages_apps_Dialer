@@ -58,7 +58,6 @@ public class PhoneFavoriteDragAndDropListeners {
                 case DragEvent.ACTION_DRAG_STARTED:
                     if (mTileAdapter != null && mContactTileRow != null
                             && !mTileAdapter.getInDragging()) {
-                        // Gets the current drag location with respect to the whole Dialer view.
                         mX = event.getX();
                         mY = event.getY();
                         if (DEBUG) {
@@ -93,9 +92,8 @@ public class PhoneFavoriteDragAndDropListeners {
                 case DragEvent.ACTION_DRAG_EXITED:
                     break;
                 case DragEvent.ACTION_DROP:
-                    // Gets the location of the drag with respect to the whole Dialer view.
-                    mX = event.getX() + v.getLeft();
-                    mY = event.getY() + v.getTop();
+                    mX = event.getX();
+                    mY = event.getY();
                     if (DEBUG) {
                         Log.v(TAG, String.valueOf(mX) + "; " + String.valueOf(mY));
                     }
