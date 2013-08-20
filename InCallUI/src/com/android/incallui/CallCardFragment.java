@@ -31,12 +31,13 @@ import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.incalluibind.ServiceFactory;
 import com.android.services.telephony.common.Call;
 
 /**
  * Fragment for call card.
  */
-public class CallCardFragment extends BaseFragment<CallCardPresenter>
+public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPresenter.CallCardUi>
         implements CallCardPresenter.CallCardUi {
 
     // Primary caller info
@@ -56,21 +57,36 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
     private float mDensity;
 
     @Override
+    CallCardPresenter.CallCardUi getUi() {
+        return this;
+    }
+
+    @Override
     CallCardPresenter createPresenter() {
         return new CallCardPresenter();
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        getPresenter().init(ServiceFactory.newPhoneNumberService(getActivity()));
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+
         mDensity = getResources().getDisplayMetrics().density;
 
         return inflater.inflate(R.layout.call_card, container, false);
     }
 
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         mPhoneNumber = (TextView) view.findViewById(R.id.phoneNumber);
         mName = (TextView) view.findViewById(R.id.name);
         mNumberLabel = (TextView) view.findViewById(R.id.label);
@@ -78,10 +94,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
         mPhoto = (ImageView) view.findViewById(R.id.photo);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
-
-        // This method call will begin the callbacks on CallCardUi. We need to ensure
-        // everything needed for the callbacks is set up before this is called.
-        getPresenter().onUiReady(this);
     }
 
     @Override
@@ -97,6 +109,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter>
         } else {
             getView().setVisibility(View.INVISIBLE);
         }
+    }
+
+    @Override
+    public void setName(String name) {
+        mName.setText(name);
+    }
+
+    @Override
+    public void setImage(Bitmap image) {
+        setDrawableToImageView(mPhoto, new BitmapDrawable(getResources(), image));
     }
 
     @Override
