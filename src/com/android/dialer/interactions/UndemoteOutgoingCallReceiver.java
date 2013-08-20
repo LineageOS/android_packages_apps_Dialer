@@ -24,6 +24,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.PhoneLookup;
 import android.provider.ContactsContract.PinnedPositions;
+import android.text.TextUtils;
 
 /**
  * This broadcast receiver is used to listen to outgoing calls and undemote formerly demoted
@@ -37,6 +38,9 @@ public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent != null && Intent.ACTION_NEW_OUTGOING_CALL.equals(intent.getAction())) {
             final String number = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
+            if (TextUtils.isEmpty(number)) {
+                return;
+            }
             final long id = getContactIdFromPhoneNumber(context, number);
             if (id != NO_CONTACT_FOUND) {
                 undemoteContactWithId(context, id);
