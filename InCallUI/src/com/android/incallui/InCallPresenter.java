@@ -49,6 +49,7 @@ public class InCallPresenter implements CallList.Listener {
     private InCallActivity mInCallActivity;
     private boolean mServiceConnected = false;
     private InCallState mInCallState = InCallState.HIDDEN;
+    private ProximitySensor mProximitySensor;
 
     public static synchronized InCallPresenter getInstance() {
         if (sInCallPresenter == null) {
@@ -73,6 +74,9 @@ public class InCallPresenter implements CallList.Listener {
 
         // This only gets called by the service so this is okay.
         mServiceConnected = true;
+
+        mProximitySensor = new ProximitySensor(context, mAudioModeProvider);
+        addListener(mProximitySensor);
 
         Logger.d(this, "Finished InCallPresenter.setUp");
     }
@@ -169,6 +173,10 @@ public class InCallPresenter implements CallList.Listener {
         return mContactInfoCache;
     }
 
+    public ProximitySensor getProximitySensor() {
+        return mProximitySensor;
+    }
+
     /**
      * Hangs up any active or outgoing calls.
      */
@@ -199,6 +207,10 @@ public class InCallPresenter implements CallList.Listener {
         // could trigger it to show again.
         if (mStatusBarNotifier != null) {
             mStatusBarNotifier.updateNotification(mInCallState, mCallList);
+        }
+
+        if (mProximitySensor != null) {
+            mProximitySensor.onInCallShowing(showing);
         }
     }
 
@@ -286,6 +298,7 @@ public class InCallPresenter implements CallList.Listener {
     private void attemptCleanup() {
         if (mInCallActivity == null && !mServiceConnected) {
             Logger.d(this, "Start InCallPresenter.CleanUp");
+            mProximitySensor = null;
             mAudioModeProvider = null;
 
             removeListener(mStatusBarNotifier);
