@@ -88,6 +88,9 @@ public class InCallActivity extends Activity {
     @Override
     protected void onDestroy() {
         Logger.d(this, "onDestroy()...  this = " + this);
+
+        tearDownPresenters();
+
         super.onDestroy();
     }
 
@@ -116,13 +119,7 @@ public class InCallActivity extends Activity {
     @Override
     public void finish() {
         Logger.d(this, "finish()...");
-        tearDownPresenters();
-
         super.finish();
-
-        // TODO(klp): Actually finish the activity for now.  Revisit performance implications of
-        // this before launch.
-        // moveTaskToBack(true);
     }
 
     @Override
@@ -299,11 +296,14 @@ public class InCallActivity extends Activity {
     }
 
     private void tearDownPresenters() {
+        Logger.d(this, "Tearing down presenters.");
         InCallPresenter mainPresenter = InCallPresenter.getInstance();
 
         mainPresenter.removeListener(mCallButtonFragment.getPresenter());
         mainPresenter.removeListener(mCallCardFragment.getPresenter());
         mainPresenter.removeListener(mAnswerFragment.getPresenter());
+
+        mainPresenter.setActivity(null);
     }
 
     private void toast(String text) {

@@ -225,6 +225,25 @@ public class CallList {
     }
 
     /**
+     * This is called when the service disconnects, either expectedly or unexpectedly.
+     * For the expected case, it's because we have no calls left.  For the unexpected case,
+     * it is likely a crash of phone and we need to clean up our calls manually.  Without phone,
+     * there can be no active calls, so this is relatively safe thing to do.
+     */
+    public void clearOnDisconnect() {
+        for (Call call : mCallMap.values()) {
+            final int state = call.getState();
+            if (state != Call.State.IDLE &&
+                    state != Call.State.INVALID &&
+                    state != Call.State.DISCONNECTED) {
+                call.setState(Call.State.DISCONNECTED);
+                updateCallInMap(call);
+            }
+        }
+        notifyListenersOfChange();
+    }
+
+    /**
      * Sends a generic notification to all listeners that something has changed.
      * It is up to the listeners to call back to determine what changed.
      */

@@ -54,7 +54,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     @Override
     public void onStateChange(InCallState state, CallList callList) {
-
         if (state == InCallState.OUTGOING) {
             mCall = callList.getOutgoingCall();
         } else if (state == InCallState.INCALL) {

@@ -44,6 +44,8 @@ public class CallHandlerService extends Service {
     private static final int ON_SUPPORTED_AUDIO_MODE = 5;
     private static final int ON_DISCONNECT_CALL = 6;
 
+    private static final int LARGEST_MSG_ID = ON_DISCONNECT_CALL;
+
 
     private CallList mCallList;
     private Handler mMainHandler;
@@ -52,6 +54,7 @@ public class CallHandlerService extends Service {
 
     @Override
     public void onCreate() {
+        Logger.d(this, "onCreate started");
         super.onCreate();
 
         mCallList = new CallList();
@@ -59,20 +62,44 @@ public class CallHandlerService extends Service {
         mAudioModeProvider = new AudioModeProvider();
         mInCallPresenter = InCallPresenter.getInstance();
         mInCallPresenter.setUp(getApplicationContext(), mCallList, mAudioModeProvider);
+        Logger.d(this, "onCreate finished");
     }
 
     @Override
     public void onDestroy() {
+        Logger.d(this, "onDestroy started");
+
+        // Remove all pending messages before nulling out handler
+        for (int i = 1; i <= LARGEST_MSG_ID; i++) {
+            mMainHandler.removeMessages(i);
+        }
+        mMainHandler = null;
+
+        // The service gets disconnected under two circumstances:
+        // 1. When there are no more calls
+        // 2. When the phone app crashes.
+        // If (2) happens, we can't leave the UI thinking that there are still
+        // live calls.  So we will tell the callList to clear as a final request.
+        mCallList.clearOnDisconnect();
+        mCallList = null;
+
         mInCallPresenter.tearDown();
         mInCallPresenter = null;
         mAudioModeProvider = null;
-        mMainHandler = null;
-        mCallList = null;
+
+        Logger.d(this, "onDestroy finished");
     }
 
     @Override
     public IBinder onBind(Intent intent) {
+        Logger.d(this, "onBind");
         return mBinder;
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Logger.d(this, "onUnbind");
+        return true;
     }
 
     private final ICallHandlerService.Stub mBinder = new ICallHandlerService.Stub() {
@@ -80,7 +107,7 @@ public class CallHandlerService extends Service {
         @Override
         public void setCallCommandService(ICallCommandService service) {
             Logger.d(CallHandlerService.this, "onConnected: " + service.toString());
-            CallCommandClient.init(service);
+            CallCommandClient.getInstance().setService(service);
         }
 
         @Override
@@ -146,6 +173,12 @@ public class CallHandlerService extends Service {
     }
 
     private void executeMessage(Message msg) {
+        if (msg.what > LARGEST_MSG_ID) {
+            // If you got here, you may have added a new message and forgotten to
+            // update LARGEST_MSG_ID
+            Logger.wtf(this, "Cannot handle message larger than LARGEST_MSG_ID.");
+        }
+
         Logger.d(this, "executeMessage " + msg.what);
 
         switch (msg.what) {
