@@ -59,6 +59,14 @@ public class PhoneFavoriteRegularRowView extends PhoneFavoriteTileView {
 
         favoriteContactCard.setPaddingRelative(rowPaddingStart, rowPaddingTop, rowPaddingEnd,
                 rowPaddingBottom);
+
+        final View quickContactBadge = findViewById(R.id.contact_tile_quick);
+        quickContactBadge.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return PhoneFavoriteRegularRowView.this.performLongClick();
+            }
+        });
     }
 
     @Override
