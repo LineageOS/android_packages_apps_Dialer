@@ -1724,21 +1724,43 @@ public class DialpadFragment extends Fragment
      * @see MSimTelephonyManager#getVoiceMailNumber()
      */
     private boolean isVoicemailAvailable() {
-        try {
-            if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+        boolean promptEnabled = Settings.Global.getInt(getActivity().getContentResolver(),
+                Settings.Global.MULTI_SIM_VOICE_PROMPT, 0) == 1;
+        Log.d(TAG, "prompt enabled :  "+ promptEnabled);
+        if (promptEnabled) {
+            return hasVMNumber();
+        } else {
+            try {
                 mSubscription = MSimTelephonyManager.getDefault().getPreferredVoiceSubscription();
-                Log.d(TAG, "Voicemail preferred sub id = "+ mSubscription);
-
-                return (MSimTelephonyManager.getDefault().
-                        getVoiceMailNumber(mSubscription) != null);
-            } else {
-                return (TelephonyManager.getDefault().getVoiceMailNumber() != null);
+                if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+                    return (MSimTelephonyManager.getDefault().
+                            getVoiceMailNumber(mSubscription) != null);
+                } else {
+                    return (TelephonyManager.getDefault().getVoiceMailNumber() != null);
+                }
+            } catch (SecurityException se) {
+                // Possibly no READ_PHONE_STATE privilege.
+                Log.e(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");
             }
-        } catch (SecurityException se) {
-            // Possibly no READ_PHONE_STATE privilege.
-            Log.e(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");
         }
         return false;
+    }
+
+    private boolean hasVMNumber() {
+        boolean hasVMNum = false;
+        int phoneCount = MSimTelephonyManager.getDefault().getPhoneCount();
+        for (int i = 0; i < phoneCount; i++) {
+            try {
+                hasVMNum = MSimTelephonyManager.getDefault().getVoiceMailNumber(i) != null;
+            } catch (SecurityException se) {
+                // Possibly no READ_PHONE_STATE privilege.
+                Log.e(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");
+            }
+            if (hasVMNum) {
+                break;
+            }
+        }
+        return hasVMNum;
     }
 
     /**
