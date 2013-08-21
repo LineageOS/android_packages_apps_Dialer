@@ -16,11 +16,15 @@
 
 package com.android.incallui.service;
 
+import android.graphics.Bitmap;
+
 /**
  *
  */
 public interface PhoneNumberService {
     public void getPhoneNumberInfo(String phoneNumber, PhoneNumberServiceListener listener);
+
+    public Bitmap fetchImage(String url);
 
     public interface PhoneNumberServiceListener {
 
