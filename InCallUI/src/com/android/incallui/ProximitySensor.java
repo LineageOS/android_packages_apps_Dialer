@@ -60,7 +60,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
         } else {
             mProximityWakeLock = null;
         }
-        Logger.d(this, "onCreate: mProximityWakeLock: ", mProximityWakeLock);
+        Log.d(this, "onCreate: mProximityWakeLock: ", mProximityWakeLock);
 
         mAccelerometerListener = new AccelerometerListener(context, this);
         mAudioModeProvider = audioModeProvider;
@@ -165,17 +165,17 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
      * 4) If the slider is open(i.e. the hardkeyboard is *not* hidden)
      */
     private void updateProximitySensorMode() {
-        Logger.v(this, "updateProximitySensorMode");
+        Log.v(this, "updateProximitySensorMode");
 
         if (proximitySensorModeEnabled()) {
-            Logger.v(this, "keyboard open: ", mIsHardKeyboardOpen);
-            Logger.v(this, "dialpad visible: ", mDialpadVisible);
-            Logger.v(this, "isOffhook: ", mIsPhoneOffhook);
+            Log.v(this, "keyboard open: ", mIsHardKeyboardOpen);
+            Log.v(this, "dialpad visible: ", mDialpadVisible);
+            Log.v(this, "isOffhook: ", mIsPhoneOffhook);
 
             synchronized (mProximityWakeLock) {
 
                 final int audioMode = mAudioModeProvider.getAudioMode();
-                Logger.v(this, "audioMode: ", AudioMode.toString(audioMode));
+                Log.v(this, "audioMode: ", AudioMode.toString(audioMode));
 
                 // turn proximity sensor off and turn screen on immediately if
                 // we are using a headset, the keyboard is open, or the device
@@ -190,7 +190,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                 // proximity sensor goes negative.
                 final boolean horizontal =
                         (mOrientation == AccelerometerListener.ORIENTATION_HORIZONTAL);
-                Logger.v(this, "horizontal: ", horizontal);
+                Log.v(this, "horizontal: ", horizontal);
                 screenOnImmediately |= !mUiShowing && horizontal;
 
                 // We do not keep the screen off when dialpad is visible, we are horizontal, and
@@ -199,22 +199,22 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                 // proximity sensor turn off the screen by their hands.
                 screenOnImmediately |= mDialpadVisible && horizontal;
 
-                Logger.v(this, "screenonImmediately: ", screenOnImmediately);
+                Log.v(this, "screenonImmediately: ", screenOnImmediately);
 
                 if (mIsPhoneOffhook && !screenOnImmediately) {
                     // Phone is in use!  Arrange for the screen to turn off
                     // automatically when the sensor detects a close object.
                     if (!mProximityWakeLock.isHeld()) {
-                        Logger.d(this, "updateProximitySensorMode: acquiring...");
+                        Log.d(this, "updateProximitySensorMode: acquiring...");
                         mProximityWakeLock.acquire();
                     } else {
-                        Logger.v(this, "updateProximitySensorMode: lock already held.");
+                        Log.v(this, "updateProximitySensorMode: lock already held.");
                     }
                 } else {
                     // Phone is either idle, or ringing.  We don't want any
                     // special proximity sensor behavior in either case.
                     if (mProximityWakeLock.isHeld()) {
-                        Logger.d(this, "updateProximitySensorMode: releasing...");
+                        Log.d(this, "updateProximitySensorMode: releasing...");
                         // Wait until user has moved the phone away from his head if we are
                         // releasing due to the phone call ending.
                         // Qtherwise, turn screen on immediately
@@ -222,7 +222,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                             (screenOnImmediately ? 0 : PowerManager.WAIT_FOR_PROXIMITY_NEGATIVE);
                         mProximityWakeLock.release(flags);
                     } else {
-                        Logger.v(this, "updateProximitySensorMode: lock already released.");
+                        Log.v(this, "updateProximitySensorMode: lock already released.");
                     }
                 }
             }
