@@ -19,6 +19,7 @@ package com.android.incallui;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -50,6 +51,9 @@ public class InCallActivity extends Activity {
                 | WindowManager.LayoutParams.FLAG_IGNORE_CHEEK_PRESSES);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        // TODO(klp): Do we need to add this back when prox sensor is not available?
+        // lp.inputFeatures |= WindowManager.LayoutParams.INPUT_FEATURE_DISABLE_USER_ACTIVITY;
 
         // Inflate everything in incall_screen.xml and add it to the screen.
         setContentView(R.layout.incall_screen);
@@ -210,6 +214,11 @@ public class InCallActivity extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration config) {
+        InCallPresenter.getInstance().getProximitySensor().onConfigurationChanged(config);
+    }
+
     private void internalResolveIntent(Intent intent) {
         final String action = intent.getAction();
 
@@ -282,6 +291,8 @@ public class InCallActivity extends Activity {
 
         mCallButtonFragment.getPresenter().setAudioModeProvider(
                 mainPresenter.getAudioModeProvider());
+        mCallButtonFragment.getPresenter().setProximitySensor(
+                mainPresenter.getProximitySensor());
         mCallCardFragment.getPresenter().setAudioModeProvider(
                 mainPresenter.getAudioModeProvider());
         mCallCardFragment.getPresenter().setContactInfoCache(
