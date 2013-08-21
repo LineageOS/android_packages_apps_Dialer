@@ -60,7 +60,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
 
     @Override
     public void onClick(View v) {
-        Logger.d(this, "onClick");
+        Log.d(this, "onClick");
         final AccessibilityManager accessibilityManager = (AccessibilityManager)
             getActivity().getSystemService(Context.ACCESSIBILITY_SERVICE);
         // When accessibility is on, simulate press and release to preserve the
@@ -109,7 +109,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
-        Logger.d(this, "onKey:  keyCode " + keyCode + ", view " + v);
+        Log.d(this, "onKey:  keyCode " + keyCode + ", view " + v);
 
         if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
             int viewId = v.getId();
@@ -133,7 +133,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        Logger.d(this, "onTouch");
+        Log.d(this, "onTouch");
         int viewId = v.getId();
 
         // if the button is recognized

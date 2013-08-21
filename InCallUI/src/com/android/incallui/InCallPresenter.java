@@ -78,7 +78,7 @@ public class InCallPresenter implements CallList.Listener {
         mProximitySensor = new ProximitySensor(context, mAudioModeProvider);
         addListener(mProximitySensor);
 
-        Logger.d(this, "Finished InCallPresenter.setUp");
+        Log.d(this, "Finished InCallPresenter.setUp");
     }
 
     /**
@@ -90,7 +90,7 @@ public class InCallPresenter implements CallList.Listener {
      * that performs the aforementioned logic.
      */
     public void tearDown() {
-        Logger.d(this, "tearDown");
+        Log.d(this, "tearDown");
         mServiceConnected = false;
         attemptCleanup();
     }
@@ -104,13 +104,13 @@ public class InCallPresenter implements CallList.Listener {
         mInCallActivity = inCallActivity;
 
         if (mInCallActivity != null) {
-            Logger.d(this, "UI Initialized");
+            Log.d(this, "UI Initialized");
 
             // Since the UI just came up, imitate an update from the call list
             // to set the proper UI state.
             onCallListChange(mCallList);
         } else {
-            Logger.d(this, "setActivity(null)");
+            Log.d(this, "setActivity(null)");
             attemptCleanup();
         }
     }
@@ -131,7 +131,7 @@ public class InCallPresenter implements CallList.Listener {
 
         // notify listeners of new state
         for (InCallStateListener listener : mListeners) {
-            Logger.d(this, "Notify " + listener + " of state " + mInCallState.toString());
+            Log.d(this, "Notify " + listener + " of state " + mInCallState.toString());
             listener.onStateChange(mInCallState, callList);
         }
     }
@@ -219,7 +219,7 @@ public class InCallPresenter implements CallList.Listener {
      * the UI needs to be started or finished depending on the new state and does it.
      */
     private InCallState startOrFinishUi(InCallState newState) {
-        Logger.d(this, "startOrFinishUi: " + newState.toString());
+        Log.d(this, "startOrFinishUi: " + newState.toString());
 
         // TODO(klp): Consider a proper state machine implementation
 
@@ -264,8 +264,8 @@ public class InCallPresenter implements CallList.Listener {
         // user with a top-level notification.  Just show the call UI normally.
         final boolean showCallUi = (InCallState.OUTGOING == newState);
 
-        Logger.v(this, "showCallUi: ", showCallUi);
-        Logger.v(this, "startStartupSequence: ", startStartupSequence);
+        Log.v(this, "showCallUi: ", showCallUi);
+        Log.v(this, "startStartupSequence: ", startStartupSequence);
 
 
         if (showCallUi) {
@@ -297,8 +297,9 @@ public class InCallPresenter implements CallList.Listener {
      */
     private void attemptCleanup() {
         if (mInCallActivity == null && !mServiceConnected) {
-            Logger.d(this, "Start InCallPresenter.CleanUp");
+            Log.d(this, "Start InCallPresenter.CleanUp");
             mProximitySensor = null;
+
             mAudioModeProvider = null;
 
             removeListener(mStatusBarNotifier);
@@ -312,12 +313,12 @@ public class InCallPresenter implements CallList.Listener {
 
             mListeners.clear();
 
-            Logger.d(this, "Finished InCallPresenter.CleanUp");
+            Log.d(this, "Finished InCallPresenter.CleanUp");
         }
     }
 
     private void showInCall() {
-        Logger.d(this, "Showing in call manually.");
+        Log.d(this, "Showing in call manually.");
         mContext.startActivity(getInCallIntent());
     }
 

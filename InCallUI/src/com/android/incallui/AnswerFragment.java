@@ -159,9 +159,9 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
                                 View view,  // The TextView that was clicked
                                 int position,
                                 long id) {
-            Logger.d(this, "RespondViaSmsItemClickListener.onItemClick(" + position + ")...");
+            Log.d(this, "RespondViaSmsItemClickListener.onItemClick(" + position + ")...");
             final String message = (String) parent.getItemAtPosition(position);
-            Logger.v(this, "- message: '" + message + "'");
+            Log.v(this, "- message: '" + message + "'");
 
             // The "Custom" choice is a special case.
             // (For now, it's guaranteed to be the last item.)

@@ -28,7 +28,6 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.ContactsContract.Contacts;
-import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,7 +67,7 @@ public class ContactsAsyncHelper {
             switch (msg.arg1) {
                 case EVENT_LOAD_IMAGE:
                     if (args.listener != null) {
-                        Logger.d(this, "Notifying listener: " + args.listener.toString() +
+                        Log.d(this, "Notifying listener: " + args.listener.toString() +
                                 " image: " + args.uri + " completed");
                         args.listener.onImageLoadComplete(msg.what, args.photo, args.photoIcon,
                                 args.cookie);
@@ -192,7 +191,7 @@ public class ContactsAsyncHelper {
                             inputStream = Contacts.openContactPhotoInputStream(
                                     args.context.getContentResolver(), args.uri, true);
                         } catch (Exception e) {
-                            Logger.e(this, "Error opening photo input stream", e);
+                            Log.e(this, "Error opening photo input stream", e);
                         }
 
                         if (inputStream != null) {
@@ -203,12 +202,12 @@ public class ContactsAsyncHelper {
                             // BitmapDrawable and thus we can have (down)scaled version of it.
                             args.photoIcon = getPhotoIconWhenAppropriate(args.context, args.photo);
 
-                            Logger.d(ContactsAsyncHelper.this, "Loading image: " + msg.arg1 +
+                            Log.d(ContactsAsyncHelper.this, "Loading image: " + msg.arg1 +
                                     " token: " + msg.what + " image URI: " + args.uri);
                         } else {
                             args.photo = null;
                             args.photoIcon = null;
-                            Logger.d(ContactsAsyncHelper.this, "Problem with image: " + msg.arg1 +
+                            Log.d(ContactsAsyncHelper.this, "Problem with image: " + msg.arg1 +
                                     " token: " + msg.what + " image URI: " + args.uri +
                                     ", using default image.");
                         }
@@ -217,7 +216,7 @@ public class ContactsAsyncHelper {
                             try {
                                 inputStream.close();
                             } catch (IOException e) {
-                                Logger.e(this, "Unable to close input stream.", e);
+                                Log.e(this, "Unable to close input stream.", e);
                             }
                         }
                     }
@@ -255,7 +254,7 @@ public class ContactsAsyncHelper {
                 // If the longer edge is much longer than the shorter edge, the latter may
                 // become 0 which will cause a crash.
                 if (newWidth <= 0 || newHeight <= 0) {
-                    Logger.w(this, "Photo icon's width or height become 0.");
+                    Log.w(this, "Photo icon's width or height become 0.");
                     return null;
                 }
 
@@ -298,7 +297,7 @@ public class ContactsAsyncHelper {
         // in case the source caller info is null, the URI will be null as well.
         // just update using the placeholder image in this case.
         if (personUri == null) {
-            Logger.wtf("startObjectPhotoAsync", "Uri is missing");
+            Log.wtf("startObjectPhotoAsync", "Uri is missing");
             return;
         }
 
@@ -317,7 +316,7 @@ public class ContactsAsyncHelper {
         msg.arg1 = EVENT_LOAD_IMAGE;
         msg.obj = args;
 
-        Logger.d("startObjectPhotoAsync", "Begin loading image: " + args.uri +
+        Log.d("startObjectPhotoAsync", "Begin loading image: " + args.uri +
                 ", displaying default image for now.");
 
         // notify the thread to begin working

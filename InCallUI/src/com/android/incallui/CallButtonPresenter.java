@@ -16,8 +16,6 @@
 
 package com.android.incallui;
 
-import android.media.AudioManager;
-
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
@@ -97,7 +95,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // an update for onAudioMode().  This will make UI response immediate
         // if it turns out to be slow
 
-        Logger.d(this, "Sending new Audio Mode: " + AudioMode.toString(mode));
+        Log.d(this, "Sending new Audio Mode: " + AudioMode.toString(mode));
         CallCommandClient.getInstance().setAudioMode(mode);
     }
 
@@ -109,7 +107,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         if (0 != (AudioMode.BLUETOOTH & getSupportedAudio())) {
 
             // It's clear the UI is wrong, so update the supported mode once again.
-            Logger.e(this, "toggling speakerphone not allowed when bluetooth supported.");
+            Log.e(this, "toggling speakerphone not allowed when bluetooth supported.");
             getUi().setSupportedAudio(getSupportedAudio());
             return;
         }
@@ -134,7 +132,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void muteClicked(boolean checked) {
-        Logger.d(this, "turning on mute: " + checked);
+        Log.d(this, "turning on mute: " + checked);
 
         CallCommandClient.getInstance().mute(checked);
         getUi().setMute(checked);
@@ -145,7 +143,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
-        Logger.d(this, "holding: " + mCall.getCallId());
+        Log.d(this, "holding: " + mCall.getCallId());
 
         // TODO(klp): use appropriate hold callId.
         CallCommandClient.getInstance().hold(mCall.getCallId(), checked);
@@ -165,7 +163,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void showDialpadClicked(boolean checked) {
-        Logger.v(this, "Show dialpad " + String.valueOf(checked));
+        Log.v(this, "Show dialpad " + String.valueOf(checked));
         getUi().displayDialpad(checked);
         mProximitySensor.onDialpadVisible(checked);
     }
@@ -181,13 +179,13 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
         ui.setVisible(isVisible);
 
-        Logger.d(this, "Updating call UI for call: ", call);
+        Log.d(this, "Updating call UI for call: ", call);
 
         if (isVisible && call != null) {
-            Logger.v(this, "Show hold ", call.can(Capabilities.HOLD));
-            Logger.v(this, "Show merge ", call.can(Capabilities.MERGE_CALLS));
-            Logger.v(this, "Show swap ", call.can(Capabilities.SWAP_CALLS));
-            Logger.v(this, "Show add call ", call.can(Capabilities.ADD_CALL));
+            Log.v(this, "Show hold ", call.can(Capabilities.HOLD));
+            Log.v(this, "Show merge ", call.can(Capabilities.MERGE_CALLS));
+            Log.v(this, "Show swap ", call.can(Capabilities.SWAP_CALLS));
+            Log.v(this, "Show add call ", call.can(Capabilities.ADD_CALL));
 
             ui.setHold(call.getState() == Call.State.ONHOLD);
 

@@ -48,7 +48,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             } else {
                 getUi().showTextButton(false);
             }
-            Logger.d(this, "Showing incoming with: " + mCall);
+            Log.d(this, "Showing incoming with: " + mCall);
         } else {
             getUi().showAnswerUi(false);
             mCall = null;
@@ -60,7 +60,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             return;
         }
 
-        Logger.d(this, "onAnswer " + mCall.getCallId());
+        Log.d(this, "onAnswer " + mCall.getCallId());
 
         CallCommandClient.getInstance().answerCall(mCall.getCallId());
     }
@@ -70,7 +70,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             return;
         }
 
-        Logger.d(this, "onDecline " + mCall.getCallId());
+        Log.d(this, "onDecline " + mCall.getCallId());
 
         CallCommandClient.getInstance().rejectCall(mCall.getCallId(), false, null);
     }
@@ -80,7 +80,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     public void rejectCallWithMessage(String message) {
-        Logger.d(this, "sendTextToDefaultActivity()...");
+        Log.d(this, "sendTextToDefaultActivity()...");
         CallCommandClient.getInstance().rejectCall(mCall.getCallId(), true, message);
         getUi().dismissPopup();
     }

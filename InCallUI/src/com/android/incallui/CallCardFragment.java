@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -186,9 +185,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         // States other than disconnected not yet supported
         callStateLabel = getCallStateLabelFromState(state, cause);
 
-        Logger.v(this, "setCallState ", callStateLabel);
-        Logger.v(this, "DisconnectCause ", cause);
-        Logger.v(this, "bluetooth on ", bluetoothOn);
+        Log.v(this, "setCallState ", callStateLabel);
+        Log.v(this, "DisconnectCause ", cause);
+        Log.v(this, "bluetooth on ", bluetoothOn);
 
         if (!TextUtils.isEmpty(callStateLabel)) {
             mCallStateLabel.setVisibility(View.VISIBLE);
@@ -291,7 +290,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             callStateLabel = getCallFailedString(cause);
 
         } else {
-            Logger.wtf(this, "updateCallStateWidgets: unexpected call: " + state);
+            Log.wtf(this, "updateCallStateWidgets: unexpected call: " + state);
         }
 
         return callStateLabel;

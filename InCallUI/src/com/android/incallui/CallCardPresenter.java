@@ -17,14 +17,9 @@
 package com.android.incallui;
 
 import android.graphics.drawable.Drawable;
-import android.content.ContentUris;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.provider.ContactsContract.Contacts;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
@@ -35,10 +30,8 @@ import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.service.PhoneNumberService;
 import com.android.incallui.util.HttpFetcher;
-import com.android.incalluibind.ServiceFactory;
 import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
-import com.android.services.telephony.common.Call.DisconnectCause;
 
 import java.io.IOException;
 
@@ -100,7 +93,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     @Override
     public void onStateChange(InCallState state, CallList callList) {
-        Logger.d(TAG, "onStateChange()");
+        Log.d(TAG, "onStateChange()");
         final CallCardUi ui = getUi();
         if (ui == null) {
             return;
@@ -122,8 +115,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             secondary = getCallToDisplay(callList, primary, true);
         }
 
-        Logger.d(this, "Primary call: " + primary);
-        Logger.d(this, "Secondary call: " + secondary);
+        Log.d(this, "Primary call: " + primary);
+        Log.d(this, "Secondary call: " + secondary);
 
         mPrimary = primary;
         mSecondary = secondary;
@@ -136,10 +129,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         // Start/Stop the call time update timer
         if (mPrimary != null && mPrimary.getState() == Call.State.ACTIVE) {
-            Logger.d(this, "Starting the calltime timer");
+            Log.d(this, "Starting the calltime timer");
             mCallTimer.start(CALL_TIME_UPDATE_INTERVAL);
         } else {
-            Logger.d(this, "Canceling the calltime timer");
+            Log.d(this, "Canceling the calltime timer");
             mCallTimer.cancel();
             ui.setPrimaryCallElapsedTime(false, null);
         }
@@ -318,7 +311,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                         final byte[] image = HttpFetcher.getRequestAsByteArray(url);
                         return BitmapFactory.decodeByteArray(image, 0, image.length);
                     } catch (IOException e) {
-                        Logger.e(TAG, "Unable to download/decode photo.", e);
+                        Log.e(TAG, "Unable to download/decode photo.", e);
                     }
                     return null;
                 }

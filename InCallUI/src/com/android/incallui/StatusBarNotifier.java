@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
@@ -137,7 +136,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      * @see updateInCallNotification()
      */
     private void cancelInCall() {
-        Logger.d(this, "cancelInCall()...");
+        Log.d(this, "cancelInCall()...");
         mNotificationManager.cancel(IN_CALL_NOTIFICATION);
 
         mIsShowingNotification = false;
@@ -158,8 +157,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      */
     private void updateInCallNotification(final boolean allowFullScreenIntent,
             final InCallState state, CallList callList) {
-        Logger.d(this, "updateInCallNotification(allowFullScreenIntent = "
-                     + allowFullScreenIntent + ")...");
+        Log.d(this, "updateInCallNotification(allowFullScreenIntent = "
+                + allowFullScreenIntent + ")...");
 
         if (shouldSuppressNotification(state, callList)) {
             cancelInCall();
@@ -168,7 +167,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
         final Call call = getCallToShow(callList);
         if (call == null) {
-            Logger.wtf(this, "No call for the notification!");
+            Log.wtf(this, "No call for the notification!");
         }
 
         // we make a call to the contact info cache to query for supplemental data to what the
@@ -238,7 +237,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
          * Fire off the notification
          */
         Notification notification = builder.build();
-        Logger.d(this, "Notifying IN_CALL_NOTIFICATION: " + notification);
+        Log.d(this, "Notifying IN_CALL_NOTIFICATION: " + notification);
         mNotificationManager.notify(IN_CALL_NOTIFICATION, notification);
         mIsShowingNotification = true;
     }
@@ -266,13 +265,13 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // A full screen intent means that we have been asked to interrupt an activity,
         // so we definitely want to show it.
         if (showFullScreenIntent) {
-            Logger.d(this, "Forcing full screen intent");
+            Log.d(this, "Forcing full screen intent");
             retval = true;
         }
 
         // If we aren't showing a notification right now, definitely start showing one.
         if (!mIsShowingNotification) {
-            Logger.d(this, "Showing notification for first time.");
+            Log.d(this, "Showing notification for first time.");
             retval = true;
         }
 
@@ -283,7 +282,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         mSavedContentTitle = contentTitle;
 
         if (retval) {
-            Logger.d(this, "Data changed.  Showing notification");
+            Log.d(this, "Data changed.  Showing notification");
         }
 
         return retval;
@@ -363,7 +362,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     }
 
     private void addHangupAction(Notification.Builder builder) {
-        Logger.i(this, "Will show \"hang-up\" action in the ongoing active call Notification");
+        Log.i(this, "Will show \"hang-up\" action in the ongoing active call Notification");
 
         // TODO: use better asset.
         builder.addAction(R.drawable.stat_sys_phone_call_end,
@@ -380,7 +379,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // to the status bar).  Setting fullScreenIntent will cause
         // the InCallScreen to be launched immediately *unless* the
         // current foreground activity is marked as "immersive".
-        Logger.d(this, "- Setting fullScreenIntent: " + intent);
+        Log.d(this, "- Setting fullScreenIntent: " + intent);
         builder.setFullScreenIntent(intent, true);
 
         // Ugly hack alert:
@@ -406,7 +405,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
         // TODO(klp): reenable this for klp
         /*if (incomingCall.getState() == Call.State.CALL_WAITING) {
-            Logger.i(this, "updateInCallNotification: call-waiting! force relaunch...");
+            Log.i(this, "updateInCallNotification: call-waiting! force relaunch...");
             // Cancel the IN_CALL_NOTIFICATION immediately before
             // (re)posting it; this seems to force the
             // NotificationManager to launch the fullScreenIntent.

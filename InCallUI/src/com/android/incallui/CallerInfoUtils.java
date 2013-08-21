@@ -1,7 +1,6 @@
 package com.android.incallui;
 
 import android.content.Context;
-import android.net.Uri;
 import android.text.TextUtils;
 
 import com.android.services.telephony.common.Call;
@@ -54,7 +53,7 @@ public class CallerInfoUtils {
                 return info;
             } else {
                 // Start the query with the number provided from the call.
-                Logger.d(TAG, "==> Actually starting CallerInfoAsyncQuery.startQuery()...");
+                Log.d(TAG, "==> Actually starting CallerInfoAsyncQuery.startQuery()...");
                 CallerInfoAsyncQuery.startQuery(QUERY_TOKEN, context, number, listener, call);
             }
         } else {
@@ -81,7 +80,7 @@ public class CallerInfoUtils {
         // displayed/logged after this function returns based on the presentation value.
         if (ci == null || number == null) return number;
 
-        Logger.d(TAG, "modifyForSpecialCnapCases: initially, number="
+        Log.d(TAG, "modifyForSpecialCnapCases: initially, number="
                 + toLogSafePhoneNumber(number)
                 + ", presentation=" + presentation + " ci " + ci);
 
@@ -112,12 +111,12 @@ public class CallerInfoUtils {
                 } else if (cnapSpecialCase == Call.PRESENTATION_UNKNOWN) {
                     number = context.getString(R.string.unknown);
                 }
-                Logger.d(TAG, "SpecialCnap: number=" + toLogSafePhoneNumber(number)
+                Log.d(TAG, "SpecialCnap: number=" + toLogSafePhoneNumber(number)
                         + "; presentation now=" + cnapSpecialCase);
                 ci.numberPresentation = cnapSpecialCase;
             }
         }
-        Logger.d(TAG, "modifyForSpecialCnapCases: returning number string="
+        Log.d(TAG, "modifyForSpecialCnapCases: returning number string="
                 + toLogSafePhoneNumber(number));
         return number;
     }
@@ -131,16 +130,16 @@ public class CallerInfoUtils {
         if (n.equals("PRIVATE") ||
                 n.equals("P") ||
                 n.equals("RES")) {
-            Logger.d(TAG, "checkCnapSpecialCases, PRIVATE string: " + n);
+            Log.d(TAG, "checkCnapSpecialCases, PRIVATE string: " + n);
             return Call.PRESENTATION_RESTRICTED;
         } else if (n.equals("UNAVAILABLE") ||
                 n.equals("UNKNOWN") ||
                 n.equals("UNA") ||
                 n.equals("U")) {
-            Logger.d(TAG, "checkCnapSpecialCases, UNKNOWN string: " + n);
+            Log.d(TAG, "checkCnapSpecialCases, UNKNOWN string: " + n);
             return Call.PRESENTATION_UNKNOWN;
         } else {
-            Logger.d(TAG, "checkCnapSpecialCases, normal str. number: " + n);
+            Log.d(TAG, "checkCnapSpecialCases, normal str. number: " + n);
             return CNAP_SPECIAL_CASE_NO;
         }
     }
