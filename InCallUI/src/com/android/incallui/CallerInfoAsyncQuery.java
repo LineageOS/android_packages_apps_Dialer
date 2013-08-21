@@ -25,7 +25,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.os.SystemProperties;
 import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
@@ -135,14 +134,15 @@ public class CallerInfoAsyncQuery {
                     // However, if there is any code that this Handler calls (such as in
                     // super.handleMessage) that DOES place unexpected messages on the
                     // queue, then we need pass these messages on.
-                    Logger.d(this, "Unexpected command (CookieWrapper is null): " + msg.what +
+                    Log.d(this, "Unexpected command (CookieWrapper is null): " + msg.what +
                             " ignored by CallerInfoWorkerHandler, passing onto parent.");
 
                     super.handleMessage(msg);
                 } else {
 
-                    Logger.d(this, "Processing event: " + cw.event + " token (arg1): " + msg.arg1 +
-                        " command: " + msg.what + " query URI: " + sanitizeUriToString(args.uri));
+                    Log.d(this, "Processing event: " + cw.event + " token (arg1): " + msg.arg1 +
+                            " command: " + msg.what + " query URI: " +
+                            sanitizeUriToString(args.uri));
 
                     switch (cw.event) {
                         case EVENT_NEW_QUERY:
@@ -197,7 +197,7 @@ public class CallerInfoAsyncQuery {
          */
         @Override
         protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-            Logger.d(this, "##### onQueryComplete() #####   query complete for token: " + token);
+            Log.d(this, "##### onQueryComplete() #####   query complete for token: " + token);
 
             //get the cookie and notify the listener.
             CookieWrapper cw = (CookieWrapper) cookie;
@@ -206,7 +206,7 @@ public class CallerInfoAsyncQuery {
                 // from within this code.
                 // However, if there is any code that calls this method, we should
                 // check the parameters to make sure they're viable.
-                Logger.d(this, "Cookie is null, ignoring onQueryComplete() request.");
+                Log.d(this, "Cookie is null, ignoring onQueryComplete() request.");
                 return;
             }
 
@@ -235,13 +235,13 @@ public class CallerInfoAsyncQuery {
                     mCallerInfo = new CallerInfo().markAsVoiceMail();
                 } else {
                     mCallerInfo = CallerInfo.getCallerInfo(mQueryContext, mQueryUri, cursor);
-                    Logger.d(this, "==> Got mCallerInfo: " + mCallerInfo);
+                    Log.d(this, "==> Got mCallerInfo: " + mCallerInfo);
 
                     CallerInfo newCallerInfo = CallerInfo.doSecondaryLookupIfNecessary(
                             mQueryContext, cw.number, mCallerInfo);
                     if (newCallerInfo != mCallerInfo) {
                         mCallerInfo = newCallerInfo;
-                        Logger.d(this, "#####async contact look up with numeric username"
+                        Log.d(this, "#####async contact look up with numeric username"
                                 + mCallerInfo);
                     }
 
@@ -277,7 +277,7 @@ public class CallerInfoAsyncQuery {
                     }
                 }
 
-                Logger.d(this, "constructing CallerInfo object for token: " + token);
+                Log.d(this, "constructing CallerInfo object for token: " + token);
 
                 //notify that we can clean up the queue after this.
                 CookieWrapper endMarker = new CookieWrapper();
@@ -287,8 +287,8 @@ public class CallerInfoAsyncQuery {
 
             //notify the listener that the query is complete.
             if (cw.listener != null) {
-                Logger.d(this, "notifying listener: " + cw.listener.getClass().toString() +
-                             " for token: " + token + mCallerInfo);
+                Log.d(this, "notifying listener: " + cw.listener.getClass().toString() +
+                        " for token: " + token + mCallerInfo);
                 cw.listener.onQueryComplete(token, cw.cookie, mCallerInfo);
             }
         }
@@ -310,7 +310,7 @@ public class CallerInfoAsyncQuery {
         CallerInfoAsyncQuery c = new CallerInfoAsyncQuery();
         c.allocate(context, contactRef);
 
-        Logger.d(LOG_TAG, "starting query for URI: " + contactRef + " handler: " + c.toString());
+        Log.d(LOG_TAG, "starting query for URI: " + contactRef + " handler: " + c.toString());
 
         //create cookieWrapper, start query
         CookieWrapper cw = new CookieWrapper();
@@ -336,9 +336,9 @@ public class CallerInfoAsyncQuery {
      */
     public static CallerInfoAsyncQuery startQuery(int token, Context context, String number,
             OnQueryCompleteListener listener, Object cookie) {
-        Logger.d(LOG_TAG, "##### CallerInfoAsyncQuery startQuery()... #####");
-        Logger.d(LOG_TAG, "- number: " + /* number */"xxxxxxx");
-        Logger.d(LOG_TAG, "- cookie: " + cookie);
+        Log.d(LOG_TAG, "##### CallerInfoAsyncQuery startQuery()... #####");
+        Log.d(LOG_TAG, "- number: " + /* number */"xxxxxxx");
+        Log.d(LOG_TAG, "- cookie: " + cookie);
 
         // Construct the URI object and query params, and start the query.
 
@@ -348,7 +348,7 @@ public class CallerInfoAsyncQuery {
 
         if (PhoneNumberUtils.isUriNumber(number)) {
             // "number" is really a SIP address.
-            Logger.d(LOG_TAG, "  - Treating number as a SIP address: " + /* number */"xxxxxxx");
+            Log.d(LOG_TAG, "  - Treating number as a SIP address: " + /* number */"xxxxxxx");
 
             // We look up SIP addresses directly in the Data table:
             contactRef = Data.CONTENT_URI;
@@ -380,11 +380,11 @@ public class CallerInfoAsyncQuery {
         }
 
         if (DBG) {
-            Logger.d(LOG_TAG, "==> contactRef: " + sanitizeUriToString(contactRef));
-            Logger.d(LOG_TAG, "==> selection: " + selection);
+            Log.d(LOG_TAG, "==> contactRef: " + sanitizeUriToString(contactRef));
+            Log.d(LOG_TAG, "==> selection: " + selection);
             if (selectionArgs != null) {
                 for (int i = 0; i < selectionArgs.length; i++) {
-                    Logger.d(LOG_TAG, "==> selectionArgs[" + i + "]: " + selectionArgs[i]);
+                    Log.d(LOG_TAG, "==> selectionArgs[" + i + "]: " + selectionArgs[i]);
                 }
             }
         }
@@ -422,7 +422,7 @@ public class CallerInfoAsyncQuery {
      */
     public void addQueryListener(int token, OnQueryCompleteListener listener, Object cookie) {
 
-        Logger.d(this, "adding listener to query: " + sanitizeUriToString(mHandler.mQueryUri) +
+        Log.d(this, "adding listener to query: " + sanitizeUriToString(mHandler.mQueryUri) +
                 " handler: " + mHandler.toString());
 
         //create cookieWrapper, add query request to end of queue.

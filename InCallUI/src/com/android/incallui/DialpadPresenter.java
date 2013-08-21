@@ -52,17 +52,17 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
      */
     // TODO(klp) Add timedShortTone==true handling for accessibility cases.
     public final void processDtmf(char c, boolean timedShortTone) {
-        Logger.d(this, "Processing dtmf key " + c);
+        Log.d(this, "Processing dtmf key " + c);
         // if it is a valid key, then update the display and send the dtmf tone.
         if (PhoneNumberUtils.is12Key(c)) {
-            Logger.d(this, "updating display and sending dtmf tone for '" + c + "'");
+            Log.d(this, "updating display and sending dtmf tone for '" + c + "'");
 
             // Append this key to the "digits" widget.
             getUi().appendDigitsToField(c);
             // Plays the tone through CallCommandService
             CallCommandClient.getInstance().playDtmfTone(c, timedShortTone);
         } else {
-            Logger.d(this, "ignoring dtmf request for '" + c + "'");
+            Log.d(this, "ignoring dtmf request for '" + c + "'");
         }
     }
 
@@ -70,7 +70,7 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
      * Stops the local tone based on the phone type.
      */
     public void stopTone() {
-        Logger.d(this, "stopping remote tone");
+        Log.d(this, "stopping remote tone");
         CallCommandClient.getInstance().stopDtmfTone();
     }
 

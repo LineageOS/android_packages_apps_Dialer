@@ -139,7 +139,7 @@ public class CallButtonFragment
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        Logger.d(this, "onClick(View " + view + ", id " + id + ")...");
+        Log.d(this, "onClick(View " + view + ", id " + id + ")...");
 
         switch(id) {
             case R.id.addButton:
@@ -155,7 +155,7 @@ public class CallButtonFragment
                 getPresenter().showDialpadClicked(mShowDialpadButton.isChecked());
                 break;
             default:
-                Logger.wtf(this, "onClick: unexpected");
+                Log.wtf(this, "onClick: unexpected");
                 break;
         }
     }
@@ -211,9 +211,9 @@ public class CallButtonFragment
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        Logger.d(this, "- onMenuItemClick: " + item);
-        Logger.d(this, "  id: " + item.getItemId());
-        Logger.d(this, "  title: '" + item.getTitle() + "'");
+        Log.d(this, "- onMenuItemClick: " + item);
+        Log.d(this, "  id: " + item.getItemId());
+        Log.d(this, "  title: '" + item.getTitle() + "'");
 
         int mode = AudioMode.WIRED_OR_EARPIECE;
 
@@ -231,7 +231,7 @@ public class CallButtonFragment
                 mode = AudioMode.BLUETOOTH;
                 break;
             default:
-                Logger.e(this, "onMenuItemClick:  unexpected View ID " + item.getItemId()
+                Log.e(this, "onMenuItemClick:  unexpected View ID " + item.getItemId()
                         + " (MenuItem = '" + item + "')");
                 break;
         }
@@ -247,7 +247,7 @@ public class CallButtonFragment
     // of the menu items.
     @Override
     public void onDismiss(PopupMenu menu) {
-        Logger.d(this, "- onDismiss: " + menu);
+        Log.d(this, "- onDismiss: " + menu);
         mAudioModePopupVisible = false;
     }
 
@@ -256,7 +256,7 @@ public class CallButtonFragment
      * pop up menu.  Otherwise, it toggles the speakerphone.
      */
     private void onAudioButtonClicked() {
-        Logger.d(this, "onAudioButtonClicked: " +
+        Log.d(this, "onAudioButtonClicked: " +
                 AudioMode.toString(getPresenter().getSupportedAudio()));
 
         if (isSupported(AudioMode.BLUETOOTH)) {
@@ -304,7 +304,7 @@ public class CallButtonFragment
         boolean showToggleIndicator = false;
 
         if (bluetoothSupported) {
-            Logger.d(this, "updateAudioButtons - popup menu mode");
+            Log.d(this, "updateAudioButtons - popup menu mode");
 
             audioButtonEnabled = true;
             showMoreIndicator = true;
@@ -325,7 +325,7 @@ public class CallButtonFragment
                 // earpiece" icon.  (Still need an asset for that, though.)
             }
         } else if (speakerSupported) {
-            Logger.d(this, "updateAudioButtons - speaker toggle mode");
+            Log.d(this, "updateAudioButtons - speaker toggle mode");
 
             audioButtonEnabled = true;
 
@@ -339,7 +339,7 @@ public class CallButtonFragment
             showSpeakerphoneOnIcon = isAudio(AudioMode.SPEAKER);
             showSpeakerphoneOffIcon = !showSpeakerphoneOnIcon;
         } else {
-            Logger.d(this, "updateAudioButtons - disabled...");
+            Log.d(this, "updateAudioButtons - disabled...");
 
             // The audio button is a toggle in this state, but that's mostly
             // irrelevant since it's always disabled and unchecked.
@@ -353,13 +353,13 @@ public class CallButtonFragment
 
         // Finally, update it all!
 
-        Logger.v(this, "audioButtonEnabled: " + audioButtonEnabled);
-        Logger.v(this, "audioButtonChecked: " + audioButtonChecked);
-        Logger.v(this, "showMoreIndicator: " + showMoreIndicator);
-        Logger.v(this, "showBluetoothIcon: " + showBluetoothIcon);
-        Logger.v(this, "showSpeakerphoneOnIcon: " + showSpeakerphoneOnIcon);
-        Logger.v(this, "showSpeakerphoneOffIcon: " + showSpeakerphoneOffIcon);
-        Logger.v(this, "showHandsetIcon: " + showHandsetIcon);
+        Log.v(this, "audioButtonEnabled: " + audioButtonEnabled);
+        Log.v(this, "audioButtonChecked: " + audioButtonChecked);
+        Log.v(this, "showMoreIndicator: " + showMoreIndicator);
+        Log.v(this, "showBluetoothIcon: " + showBluetoothIcon);
+        Log.v(this, "showSpeakerphoneOnIcon: " + showSpeakerphoneOnIcon);
+        Log.v(this, "showSpeakerphoneOffIcon: " + showSpeakerphoneOffIcon);
+        Log.v(this, "showHandsetIcon: " + showHandsetIcon);
 
         // Constants for Drawable.setAlpha()
         final int HIDDEN = 0;
@@ -369,7 +369,7 @@ public class CallButtonFragment
         mAudioButton.setChecked(audioButtonChecked);
 
         final LayerDrawable layers = (LayerDrawable) mAudioButton.getBackground();
-        Logger.d(this, "'layers' drawable: " + layers);
+        Log.d(this, "'layers' drawable: " + layers);
 
         layers.findDrawableByLayerId(R.id.compoundBackgroundItem)
                 .setAlpha(showToggleIndicator ? VISIBLE : HIDDEN);
@@ -391,7 +391,7 @@ public class CallButtonFragment
     }
 
     private void showAudioModePopup() {
-        Logger.d(this, "showAudioPopup()...");
+        Log.d(this, "showAudioPopup()...");
 
         mAudioModePopup = new PopupMenu(getView().getContext(), mAudioButton /* anchorView */);
         mAudioModePopup.getMenuInflater().inflate(R.menu.incall_audio_mode_menu,

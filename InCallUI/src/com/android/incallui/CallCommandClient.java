@@ -18,7 +18,6 @@ package com.android.incallui;
 
 import android.os.RemoteException;
 
-import com.android.internal.util.Preconditions;
 import com.android.services.telephony.common.ICallCommandService;
 
 /**
@@ -46,136 +45,136 @@ public class CallCommandClient {
 
     public void answerCall(int callId) {
         if (mCommandService == null) {
-            Logger.e(this, "Cannot answer call; CallCommandService == null");
+            Log.e(this, "Cannot answer call; CallCommandService == null");
             return;
         }
         try {
             mCommandService.answerCall(callId);
         } catch (RemoteException e) {
-            Logger.e(this, "Error answering call.", e);
+            Log.e(this, "Error answering call.", e);
         }
     }
 
     public void rejectCall(int callId, boolean rejectWithMessage, String message) {
         if (mCommandService == null) {
-            Logger.e(this, "Cannot reject call; CallCommandService == null");
+            Log.e(this, "Cannot reject call; CallCommandService == null");
             return;
         }
         try {
             mCommandService.rejectCall(callId, rejectWithMessage, message);
         } catch (RemoteException e) {
-            Logger.e(this, "Error rejecting call.", e);
+            Log.e(this, "Error rejecting call.", e);
         }
     }
 
     public void disconnectCall(int callId) {
         if (mCommandService == null) {
-            Logger.e(this, "Cannot disconnect call; CallCommandService == null");
+            Log.e(this, "Cannot disconnect call; CallCommandService == null");
             return;
         }
         try {
             mCommandService.disconnectCall(callId);
         } catch (RemoteException e) {
-            Logger.e(this, "Error answering call.", e);
+            Log.e(this, "Error answering call.", e);
         }
     }
 
     public void mute(boolean onOff) {
         if (mCommandService == null) {
-            Logger.e(this, "Cannot mute call; CallCommandService == null");
+            Log.e(this, "Cannot mute call; CallCommandService == null");
             return;
         }
         try {
             mCommandService.mute(onOff);
         } catch (RemoteException e) {
-            Logger.e(this, "Error muting phone.", e);
+            Log.e(this, "Error muting phone.", e);
         }
     }
 
     public void hold(int callId, boolean onOff) {
         if (mCommandService == null) {
-            Logger.e(this, "Cannot hold call; CallCommandService == null");
+            Log.e(this, "Cannot hold call; CallCommandService == null");
             return;
         }
         try {
             mCommandService.hold(callId, onOff);
         } catch (RemoteException e) {
-            Logger.e(this, "Error holding call.", e);
+            Log.e(this, "Error holding call.", e);
         }
     }
 
     public void merge() {
         if (mCommandService == null) {
-            Logger.e(this, "Cannot merge call; CallCommandService == null");
+            Log.e(this, "Cannot merge call; CallCommandService == null");
             return;
         }
         try {
             mCommandService.merge();
         } catch (RemoteException e) {
-            Logger.e(this, "Error merging calls.", e);
+            Log.e(this, "Error merging calls.", e);
         }
     }
 
     public void swap() {
         if (mCommandService == null) {
-            Logger.e(this, "Cannot swap call; CallCommandService == null");
+            Log.e(this, "Cannot swap call; CallCommandService == null");
             return;
         }
         try {
             mCommandService.swap();
         } catch (RemoteException e) {
-            Logger.e(this, "Error merging calls.", e);
+            Log.e(this, "Error merging calls.", e);
         }
     }
 
     public void addCall() {
         if (mCommandService == null) {
-            Logger.e(this, "Cannot add call; CallCommandService == null");
+            Log.e(this, "Cannot add call; CallCommandService == null");
             return;
         }
         try {
             mCommandService.addCall();
         } catch (RemoteException e) {
-            Logger.e(this, "Error merging calls.", e);
+            Log.e(this, "Error merging calls.", e);
         }
     }
 
     public void setAudioMode(int mode) {
         if (mCommandService == null) {
-            Logger.e(this, "Cannot set audio mode; CallCommandService == null");
+            Log.e(this, "Cannot set audio mode; CallCommandService == null");
             return;
         }
         try {
             mCommandService.setAudioMode(mode);
         } catch (RemoteException e) {
-            Logger.e(this, "Error setting speaker.", e);
+            Log.e(this, "Error setting speaker.", e);
         }
     }
 
     public void playDtmfTone(char digit, boolean timedShortTone) {
         if (mCommandService == null) {
-            Logger.e(this, "Cannot start dtmf tone; CallCommandService == null");
+            Log.e(this, "Cannot start dtmf tone; CallCommandService == null");
             return;
         }
         try {
-            Logger.v(this, "Sending dtmf tone " + digit);
+            Log.v(this, "Sending dtmf tone " + digit);
             mCommandService.playDtmfTone(digit, timedShortTone);
         } catch (RemoteException e) {
-            Logger.e(this, "Error setting speaker.", e);
+            Log.e(this, "Error setting speaker.", e);
         }
 
     }
 
     public void stopDtmfTone() {
         if (mCommandService == null) {
-            Logger.e(this, "Cannot stop dtmf tone; CallCommandService == null");
+            Log.e(this, "Cannot stop dtmf tone; CallCommandService == null");
             return;
         }
         try {
-            Logger.v(this, "Stop dtmf tone ");
+            Log.v(this, "Stop dtmf tone ");
             mCommandService.stopDtmfTone();
         } catch (RemoteException e) {
-            Logger.e(this, "Error setting speaker.", e);
+            Log.e(this, "Error setting speaker.", e);
         }
     }
 }

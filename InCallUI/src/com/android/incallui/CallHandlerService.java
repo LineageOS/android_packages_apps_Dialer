@@ -28,7 +28,6 @@ import com.android.services.telephony.common.ICallCommandService;
 import com.android.services.telephony.common.ICallHandlerService;
 
 import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +53,7 @@ public class CallHandlerService extends Service {
 
     @Override
     public void onCreate() {
-        Logger.d(this, "onCreate started");
+        Log.d(this, "onCreate started");
         super.onCreate();
 
         mCallList = new CallList();
@@ -62,12 +61,12 @@ public class CallHandlerService extends Service {
         mAudioModeProvider = new AudioModeProvider();
         mInCallPresenter = InCallPresenter.getInstance();
         mInCallPresenter.setUp(getApplicationContext(), mCallList, mAudioModeProvider);
-        Logger.d(this, "onCreate finished");
+        Log.d(this, "onCreate finished");
     }
 
     @Override
     public void onDestroy() {
-        Logger.d(this, "onDestroy started");
+        Log.d(this, "onDestroy started");
 
         // Remove all pending messages before nulling out handler
         for (int i = 1; i <= LARGEST_MSG_ID; i++) {
@@ -87,18 +86,18 @@ public class CallHandlerService extends Service {
         mInCallPresenter = null;
         mAudioModeProvider = null;
 
-        Logger.d(this, "onDestroy finished");
+        Log.d(this, "onDestroy finished");
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        Logger.d(this, "onBind");
+        Log.d(this, "onBind");
         return mBinder;
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
-        Logger.d(this, "onUnbind");
+        Log.d(this, "onUnbind");
         return true;
     }
 
@@ -106,19 +105,19 @@ public class CallHandlerService extends Service {
 
         @Override
         public void setCallCommandService(ICallCommandService service) {
-            Logger.d(CallHandlerService.this, "onConnected: " + service.toString());
+            Log.d(CallHandlerService.this, "onConnected: " + service.toString());
             CallCommandClient.getInstance().setService(service);
         }
 
         @Override
         public void onDisconnect(Call call) {
-            Logger.d(CallHandlerService.this, "onDisconnected: " + call);
+            Log.d(CallHandlerService.this, "onDisconnected: " + call);
             mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_DISCONNECT_CALL, 0, 0, call));
         }
 
         @Override
         public void onIncoming(Call call, List<String> textResponses) {
-            Logger.d(CallHandlerService.this, "onIncomingCall: " + call);
+            Log.d(CallHandlerService.this, "onIncomingCall: " + call);
 
             // TODO(klp): Add text responses to the call object.
             Map.Entry<Call, List<String> > incomingCall = new AbstractMap.SimpleEntry<Call,
@@ -129,11 +128,11 @@ public class CallHandlerService extends Service {
 
         @Override
         public void onUpdate(List<Call> calls, boolean fullUpdate) {
-            Logger.d(CallHandlerService.this, "onUpdate " + calls.toString());
+            Log.d(CallHandlerService.this, "onUpdate " + calls.toString());
 
-            if (Logger.VERBOSE) {
+            if (Log.VERBOSE) {
                 for (Call c : calls) {
-                    Logger.v(this, "Call: " + c);
+                    Log.v(this, "Call: " + c);
                 }
             }
 
@@ -143,13 +142,13 @@ public class CallHandlerService extends Service {
 
         @Override
         public void onAudioModeChange(int mode) {
-            Logger.d(CallHandlerService.this, "onAudioModeChange : " + AudioMode.toString(mode));
+            Log.d(CallHandlerService.this, "onAudioModeChange : " + AudioMode.toString(mode));
             mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_AUDIO_MODE, mode, 0, null));
         }
 
         @Override
         public void onSupportedAudioModeChange(int modeMask) {
-            Logger.d(CallHandlerService.this, "onSupportedAudioModeChange : " +
+            Log.d(CallHandlerService.this, "onSupportedAudioModeChange : " +
                     AudioMode.toString(modeMask));
 
             mMainHandler.sendMessage(
@@ -176,10 +175,10 @@ public class CallHandlerService extends Service {
         if (msg.what > LARGEST_MSG_ID) {
             // If you got here, you may have added a new message and forgotten to
             // update LARGEST_MSG_ID
-            Logger.wtf(this, "Cannot handle message larger than LARGEST_MSG_ID.");
+            Log.wtf(this, "Cannot handle message larger than LARGEST_MSG_ID.");
         }
 
-        Logger.d(this, "executeMessage " + msg.what);
+        Log.d(this, "executeMessage " + msg.what);
 
         switch (msg.what) {
             case ON_UPDATE_CALL:

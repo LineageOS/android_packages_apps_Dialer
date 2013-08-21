@@ -16,79 +16,78 @@
 
 package com.android.incallui;
 
-import android.util.Log;
-
 /**
  * Manages logging for the entire class.
  */
-/*package*/ class Logger {
+public class Log {
 
     // Generic tag for all In Call logging
     private static final String TAG = "InCall";
 
-    public static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    public static final boolean VERBOSE = Log.isLoggable(TAG, Log.VERBOSE);
+    public static final boolean DEBUG = android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
+    public static final boolean VERBOSE = android.util.Log.isLoggable(TAG,
+            android.util.Log.VERBOSE);
 
     public static void d(String tag, String msg) {
         if (DEBUG) {
-            Log.d(TAG, tag + msg);
+            android.util.Log.d(TAG, tag + msg);
         }
     }
 
     public static void d(Object obj, String msg) {
         if (DEBUG) {
-            Log.d(TAG, getPrefix(obj) + msg);
+            android.util.Log.d(TAG, getPrefix(obj) + msg);
         }
     }
 
     public static void d(Object obj, String str1, Object str2) {
         if (DEBUG) {
-            Log.d(TAG, getPrefix(obj) + str1 + str2);
+            android.util.Log.d(TAG, getPrefix(obj) + str1 + str2);
         }
     }
 
     public static void v(Object obj, String msg) {
         if (VERBOSE) {
-            Log.v(TAG, getPrefix(obj) + msg);
+            android.util.Log.v(TAG, getPrefix(obj) + msg);
         }
     }
 
     public static void v(Object obj, String str1, Object str2) {
         if (VERBOSE) {
-            Log.d(TAG, getPrefix(obj) + str1 + str2);
+            android.util.Log.d(TAG, getPrefix(obj) + str1 + str2);
         }
     }
 
     public static void e(String tag, String msg, Exception e) {
-        Log.e(TAG, tag + msg, e);
+        android.util.Log.e(TAG, tag + msg, e);
     }
 
     public static void e(String tag, String msg) {
-        Log.e(TAG, tag + msg);
+        android.util.Log.e(TAG, tag + msg);
     }
 
     public static void e(Object obj, String msg, Exception e) {
-        Log.e(TAG, getPrefix(obj) + msg, e);
+        android.util.Log.e(TAG, getPrefix(obj) + msg, e);
     }
 
     public static void e(Object obj, String msg) {
-        Log.e(TAG, getPrefix(obj) + msg);
+        android.util.Log.e(TAG, getPrefix(obj) + msg);
     }
 
     public static void i(String tag, String msg) {
-        Log.i(TAG, tag + msg);
+        android.util.Log.i(TAG, tag + msg);
     }
 
     public static void i(Object obj, String msg) {
-        Log.i(TAG, getPrefix(obj) + msg);
+        android.util.Log.i(TAG, getPrefix(obj) + msg);
     }
 
     public static void w(Object obj, String msg) {
-        Log.w(TAG, getPrefix(obj) + msg);
+        android.util.Log.w(TAG, getPrefix(obj) + msg);
     }
 
     public static void wtf(Object obj, String msg) {
-        Log.wtf(TAG, getPrefix(obj) + msg);
+        android.util.Log.wtf(TAG, getPrefix(obj) + msg);
     }
 
     private static String getPrefix(Object obj) {

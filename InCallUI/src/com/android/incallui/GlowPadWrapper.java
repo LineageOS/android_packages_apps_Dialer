@@ -59,7 +59,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
 
     @Override
     protected void onFinishInflate() {
-        Logger.d(this, "onFinishInflate()");
+        Log.d(this, "onFinishInflate()");
         super.onFinishInflate();
         setOnTriggerListener(this);
         startPing();
@@ -67,7 +67,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
 
     @Override
     protected void onWindowVisibilityChanged(int visibility) {
-        Logger.d(this, "Visibility changed " + visibility);
+        Log.d(this, "Visibility changed " + visibility);
         super.onWindowVisibilityChanged(visibility);
         switch (visibility) {
             case View.VISIBLE:
@@ -82,7 +82,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
 
     @Override
     protected Parcelable onSaveInstanceState() {
-        Logger.d(this, "onSaveInstanceState()");
+        Log.d(this, "onSaveInstanceState()");
         // TODO: evaluate this versus stopping during fragment onPause/onResume
         stopPing();
         return super.onSaveInstanceState();
@@ -109,19 +109,19 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
 
     @Override
     public void onGrabbed(View v, int handle) {
-        Logger.d(this, "onGrabbed()");
+        Log.d(this, "onGrabbed()");
         stopPing();
     }
 
     @Override
     public void onReleased(View v, int handle) {
-        Logger.d(this, "onReleased()");
+        Log.d(this, "onReleased()");
         startPing();
     }
 
     @Override
     public void onTrigger(View v, int target) {
-        Logger.d(this, "onTrigger()");
+        Log.d(this, "onTrigger()");
         final int resId = getResourceIdForTarget(target);
         switch (resId) {
             case R.drawable.ic_lockscreen_answer:
@@ -135,7 +135,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
                 break;
             default:
                 // Code should never reach here.
-                Logger.e(this, "Trigger detected on unhandled resource. Skipping.");
+                Log.e(this, "Trigger detected on unhandled resource. Skipping.");
         }
     }
 

@@ -17,7 +17,6 @@
 package com.android.incallui;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -39,7 +38,7 @@ public class InCallActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle icicle) {
-        Logger.d(this, "onCreate()...  this = " + this);
+        Log.d(this, "onCreate()...  this = " + this);
 
         super.onCreate(icicle);
 
@@ -60,12 +59,12 @@ public class InCallActivity extends Activity {
 
         initializeInCall();
 
-        Logger.d(this, "onCreate(): exit");
+        Log.d(this, "onCreate(): exit");
     }
 
     @Override
     protected void onResume() {
-        Logger.d(this, "onResume()...");
+        Log.d(this, "onResume()...");
         super.onResume();
 
         mIsForegroundActivity = true;
@@ -76,7 +75,7 @@ public class InCallActivity extends Activity {
     // in the background.
     @Override
     protected void onPause() {
-        Logger.d(this, "onPause()...");
+        Log.d(this, "onPause()...");
         super.onPause();
 
         mIsForegroundActivity = false;
@@ -85,13 +84,13 @@ public class InCallActivity extends Activity {
 
     @Override
     protected void onStop() {
-        Logger.d(this, "onStop()...");
+        Log.d(this, "onStop()...");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        Logger.d(this, "onDestroy()...  this = " + this);
+        Log.d(this, "onDestroy()...  this = " + this);
 
         tearDownPresenters();
 
@@ -122,13 +121,13 @@ public class InCallActivity extends Activity {
      */
     @Override
     public void finish() {
-        Logger.d(this, "finish()...");
+        Log.d(this, "finish()...");
         super.finish();
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
-        Logger.d(this, "onNewIntent: intent = " + intent);
+        Log.d(this, "onNewIntent: intent = " + intent);
 
         // We're being re-launched with a new Intent.  Since it's possible for a
         // single InCallActivity instance to persist indefinitely (even if we
@@ -150,7 +149,7 @@ public class InCallActivity extends Activity {
     @Override
     public void onBackPressed() {
         // TODO(klp): implement fully
-        Logger.d(this, "onBackPressed()...");
+        Log.d(this, "onBackPressed()...");
 
         // BACK is also used to exit out of any "special modes" of the
         // in-call UI:
@@ -196,8 +195,8 @@ public class InCallActivity extends Activity {
 
             // Various testing/debugging features, enabled ONLY when VERBOSE == true.
             case KeyEvent.KEYCODE_SLASH:
-                if (Logger.VERBOSE) {
-                    Logger.v(this, "----------- InCallActivity View dump --------------");
+                if (Log.VERBOSE) {
+                    Log.v(this, "----------- InCallActivity View dump --------------");
                     // Dump starting from the top-level view of the entire activity:
                     Window w = this.getWindow();
                     View decorView = w.getDecorView();
@@ -307,7 +306,7 @@ public class InCallActivity extends Activity {
     }
 
     private void tearDownPresenters() {
-        Logger.d(this, "Tearing down presenters.");
+        Log.d(this, "Tearing down presenters.");
         InCallPresenter mainPresenter = InCallPresenter.getInstance();
 
         mainPresenter.removeListener(mCallButtonFragment.getPresenter());

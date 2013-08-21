@@ -16,12 +16,9 @@
 
 package com.android.incallui;
 
-import com.google.android.collect.Lists;
 import com.google.android.collect.Maps;
 import com.google.android.collect.Sets;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 
 import android.os.Handler;
 import android.os.Message;
@@ -32,7 +29,6 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -73,7 +69,7 @@ public class CallList {
      * Called when a single call has changed.
      */
     public void onUpdate(Call call) {
-        Logger.d(this, "onUpdate - ", call);
+        Log.d(this, "onUpdate - ", call);
 
         updateCallInMap(call);
         notifyListenersOfChange();
@@ -83,7 +79,7 @@ public class CallList {
      * Called when a single call disconnects.
      */
     public void onDisconnect(Call call) {
-        Logger.d(this, "onDisconnect: ", call);
+        Log.d(this, "onDisconnect: ", call);
 
         updateCallInMap(call);
 
@@ -94,7 +90,7 @@ public class CallList {
      * Called when a single call has changed.
      */
     public void onUpdate(AbstractMap.SimpleEntry<Call, List<String> > incomingCall) {
-        Logger.d(this, "onUpdate - " + incomingCall.getKey());
+        Log.d(this, "onUpdate - " + incomingCall.getKey());
 
         updateCallInMap(incomingCall.getKey());
         updateCallTextMap(incomingCall.getKey(), incomingCall.getValue());
@@ -106,11 +102,11 @@ public class CallList {
      * Called when multiple calls have changed.
      */
     public void onUpdate(List<Call> callsToUpdate) {
-        Logger.d(this, "onUpdate(...)");
+        Log.d(this, "onUpdate(...)");
 
         Preconditions.checkNotNull(callsToUpdate);
         for (Call call : callsToUpdate) {
-            Logger.d(this, "\t" + call);
+            Log.d(this, "\t" + call);
 
             updateCallInMap(call);
             updateCallTextMap(call, null);
@@ -315,11 +311,11 @@ public class CallList {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case EVENT_DISCONNECTED_TIMEOUT:
-                    Logger.d(this, "EVENT_DISCONNECTED_TIMEOUT ", msg.obj);
+                    Log.d(this, "EVENT_DISCONNECTED_TIMEOUT ", msg.obj);
                     finishDisconnectedCall((Call) msg.obj);
                     break;
                 default:
-                    Logger.wtf(this, "Message not expected: " + msg.what);
+                    Log.wtf(this, "Message not expected: " + msg.what);
                     break;
             }
         }

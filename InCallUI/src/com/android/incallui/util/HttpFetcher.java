@@ -17,8 +17,8 @@
 package com.android.incallui.util;
 
 import android.os.SystemClock;
-import android.util.Log;
 
+import com.android.incallui.Log;
 import com.google.common.io.Closeables;
 
 import java.io.ByteArrayOutputStream;

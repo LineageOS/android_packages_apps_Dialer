@@ -118,7 +118,7 @@ public class ContactInfoCache implements CallerInfoAsyncQuery.OnQueryCompleteLis
      */
     @Override
     public void onImageLoadComplete(int token, Drawable photo, Bitmap photoIcon, Object cookie) {
-        Logger.d(this, "Image load complete with context: ", mContext);
+        Log.d(this, "Image load complete with context: ", mContext);
         // TODO: may be nice to update the image view again once the newer one
         // is available on contacts database.
         // TODO (klp): What is this, and why does it need the write_contacts permission?
@@ -127,23 +127,23 @@ public class ContactInfoCache implements CallerInfoAsyncQuery.OnQueryCompleteLis
         final Call call = (Call) cookie;
 
         if (!mInfoMap.containsKey(call.getCallId())) {
-            Logger.e(this, "Image Load received for empty search entry.");
+            Log.e(this, "Image Load received for empty search entry.");
             return;
         }
 
         final SearchEntry entry = mInfoMap.get(call.getCallId());
 
-        Logger.d(this, "setting photo for entry: ", entry);
+        Log.d(this, "setting photo for entry: ", entry);
 
         // TODO (klp): Handle conference calls
         if (photo != null) {
-            Logger.v(this, "direct drawable: ", photo);
+            Log.v(this, "direct drawable: ", photo);
             entry.info.photo = photo;
         } else if (photoIcon != null) {
-            Logger.v(this, "photo icon: ", photoIcon);
+            Log.v(this, "photo icon: ", photoIcon);
             entry.info.photo = new BitmapDrawable(mContext.getResources(), photoIcon);
         } else {
-            Logger.v(this, "unknown photo");
+            Log.v(this, "unknown photo");
             entry.info.photo = null;
         }
 
@@ -220,19 +220,19 @@ public class ContactInfoCache implements CallerInfoAsyncQuery.OnQueryCompleteLis
                     // No name *or* number! Display a generic "unknown" string
                     // (or potentially some other default based on the presentation.)
                     displayName = getPresentationString(presentation);
-                    Logger.d(this, "  ==> no name *or* number! displayName = " + displayName);
+                    Log.d(this, "  ==> no name *or* number! displayName = " + displayName);
                 } else if (presentation != Call.PRESENTATION_ALLOWED) {
                     // This case should never happen since the network should never send a phone #
                     // AND a restricted presentation. However we leave it here in case of weird
                     // network behavior
                     displayName = getPresentationString(presentation);
-                    Logger.d(this, "  ==> presentation not allowed! displayName = " + displayName);
+                    Log.d(this, "  ==> presentation not allowed! displayName = " + displayName);
                 } else if (!TextUtils.isEmpty(info.cnapName)) {
                     // No name, but we do have a valid CNAP name, so use that.
                     displayName = info.cnapName;
                     info.name = info.cnapName;
                     displayNumber = number;
-                    Logger.d(this, "  ==> cnapName available: displayName '"
+                    Log.d(this, "  ==> cnapName available: displayName '"
                             + displayName + "', displayNumber '" + displayNumber + "'");
                 } else {
                     // No name; all we have is a number. This is the typical
@@ -250,10 +250,10 @@ public class ContactInfoCache implements CallerInfoAsyncQuery.OnQueryCompleteLis
                         // query to only do the geoDescription lookup in the first
                         // place for incoming calls.
                         displayNumber = info.geoDescription; // may be null
-                        Logger.d(this, "Geodescrption: " + info.geoDescription);
+                        Log.d(this, "Geodescrption: " + info.geoDescription);
                     }
 
-                    Logger.d(this, "  ==>  no name; falling back to number: displayName '"
+                    Log.d(this, "  ==>  no name; falling back to number: displayName '"
                             + displayName + "', displayNumber '" + displayNumber + "'");
                 }
             } else {
@@ -264,18 +264,18 @@ public class ContactInfoCache implements CallerInfoAsyncQuery.OnQueryCompleteLis
                     // AND a restricted presentation. However we leave it here in case of weird
                     // network behavior
                     displayName = getPresentationString(presentation);
-                    Logger.d(this, "  ==> valid name, but presentation not allowed!"
+                    Log.d(this, "  ==> valid name, but presentation not allowed!"
                             + " displayName = " + displayName);
                 } else {
                     displayName = info.name;
                     displayNumber = number;
                     label = info.phoneLabel;
-                    Logger.d(this, "  ==>  name is present in CallerInfo: displayName '"
+                    Log.d(this, "  ==>  name is present in CallerInfo: displayName '"
                             + displayName + "', displayNumber '" + displayNumber + "'");
                 }
             }
             personUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, info.person_id);
-            Logger.d(this, "- got personUri: '" + personUri
+            Log.d(this, "- got personUri: '" + personUri
                     + "', based on info.person_id: " + info.person_id);
         } else {
             displayName = getPresentationString(presentation);
@@ -292,10 +292,10 @@ public class ContactInfoCache implements CallerInfoAsyncQuery.OnQueryCompleteLis
             }
         } else {
             if (personUri == null) {
-                Logger.v(this, "personUri is null. Just use unknown picture.");
+                Log.v(this, "personUri is null. Just use unknown picture.");
                 photo = mContext.getResources().getDrawable(R.drawable.picture_unknown);
             } else {
-                Logger.d(this, "startObtainPhotoAsync");
+                Log.d(this, "startObtainPhotoAsync");
                 // Load the image with a callback to update the image state.
                 // When the load is finished, onImageLoadComplete() will be called.
                 ContactsAsyncHelper.startObtainPhotoAsync(TOKEN_UPDATE_PHOTO_FOR_CALL_STATE,
