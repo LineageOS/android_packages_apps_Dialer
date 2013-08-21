@@ -74,7 +74,7 @@
     <View
        android:layout_width="@dimen/dialpad_center_margin"
        android:layout_height="match_parent"
-       android:background="#66000000"/>
+       android:background="@color/dialpad_switch_bg"/>
     <RelativeLayout
         android:id="@+id/dialButtonContainer"
         android:layout_width="0dp"
@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dialpad_button_margin"
             android:layout_above="@id/dialButton"
-            android:background="#33000000" />
+            android:background="@color/dial_button_background" />
         <ImageButton android:id="@+id/dialButton"
             android:layout_width="match_parent"
             android:layout_height="@dimen/call_button_height"

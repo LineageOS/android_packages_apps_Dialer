@@ -57,18 +57,17 @@
     <color name="call_log_voicemail_status_text_color">#888888</color>
     <color name="call_log_voicemail_status_action_text_color">#33b5e5</color>
     <color name="call_detail_background">#ff000000</color>
+    <color name="call_detail_blank_background">#ff000000</color>
     <color name="call_detail_separator">#ff33b5e5</color>
     <color name="call_detail_photo_bg">#7f000000</color>
     <color name="call_log_divider">#55ffffff</color>
-    <color name="detail_tab_carousel_tab_label_Background_color">#7f000000</color>
     <color name="white_text">#ffffffff</color>
     <color name="black_text">#ff000000</color>
     <color name="contact_tile_name_text">#ffffffff</color>
     <color name="dialpad_switch_bg">#66000000</color>
+    <color name="dial_button_background">#33000000</color>
     <color name="account_container">#eeeeee</color>
     <color name="photo_backdrop">#000000</color>
     <color name="photo_container">#4cffffff</color>
-    <color name="social_widget_bg">#00000000</color>
     <color name="contact_detail_fragment">#ffffff</color>
-
 </resources>
