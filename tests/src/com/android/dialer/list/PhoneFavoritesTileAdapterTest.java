@@ -8,7 +8,7 @@ public class PhoneFavoritesTileAdapterTest extends AndroidTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        mAdapter = new PhoneFavoritesTileAdapter(getContext(), null, 3, 1);
+        mAdapter = new PhoneFavoritesTileAdapter(getContext(), null, null, 3, 1);
     }
 
     /**

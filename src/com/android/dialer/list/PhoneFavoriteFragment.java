@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -41,6 +42,7 @@ import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.dialer.DialtactsActivity;
@@ -48,6 +50,10 @@ import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.CallLogQueryHandler;
+import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Fragment for Phone UI's favorite screen.
@@ -58,9 +64,13 @@ import com.android.dialer.calllog.CallLogQueryHandler;
  * A contact filter header is also inserted between those adapters' results.
  */
 public class PhoneFavoriteFragment extends Fragment implements OnItemClickListener,
-        CallLogQueryHandler.Listener, CallLogAdapter.CallFetcher {
+        CallLogQueryHandler.Listener, CallLogAdapter.CallFetcher,
+        PhoneFavoritesTileAdapter.OnDataSetChangedForAnimationListener {
+
     private static final String TAG = PhoneFavoriteFragment.class.getSimpleName();
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
+
+    private static final int ANIMATION_DURATION = 300;
 
     /**
      * Used with LoaderManager.
@@ -146,6 +156,9 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private SwipeableListView mListView;
     private View mShowAllContactsButton;
 
+    private final HashMap<Long, Integer> mItemIdTopMap = new HashMap<Long, Integer>();
+    private final HashMap<Long, Integer> mItemIdLeftMap = new HashMap<Long, Integer>();
+
     /**
      * Layout used when contacts load is slower than expected and thus "loading" view should be
      * shown.
@@ -168,6 +181,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         // that will be available on onCreateView().
 
         mContactTileAdapter = new PhoneFavoritesTileAdapter(activity, mContactTileAdapterListener,
+                this,
                 getResources().getInteger(R.integer.contact_tile_column_count_in_favorites_new),
                 1);
         mContactTileAdapter.setPhotoLoader(ContactPhotoManager.getInstance(activity));
@@ -320,5 +334,167 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         // If there are any pending contact entries that are to be removed, remove them
         mContactTileAdapter.removePendingContactEntry();
         super.onPause();
+    }
+
+    /**
+     * Saves the current view offsets into memory
+     */
+    @SuppressWarnings("unchecked")
+    private void saveOffsets(long... idsInPlace) {
+        final int firstVisiblePosition = mListView.getFirstVisiblePosition();
+        if (DEBUG) {
+            Log.d(TAG, "Child count : " + mListView.getChildCount());
+        }
+        for (int i = 0; i < mListView.getChildCount(); i++) {
+            final View child = mListView.getChildAt(i);
+            final int position = firstVisiblePosition + i;
+            final long itemId = mAdapter.getItemId(position);
+            final int itemViewType = mAdapter.getItemViewType(position);
+            if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP) {
+                // This is a tiled row, so save horizontal offsets instead
+                saveHorizontalOffsets((ContactTileRow) child, (ArrayList<ContactEntry>)
+                        mAdapter.getItem(position), idsInPlace);
+            }
+            if (DEBUG) {
+                Log.d(TAG, "Saving itemId: " + itemId + " for listview child " + i + " Top: "
+                        + child.getTop());
+            }
+            mItemIdTopMap.put(itemId, child.getTop());
+        }
+    }
+
+    private void saveHorizontalOffsets(ContactTileRow row, ArrayList<ContactEntry> list,
+            long... idsInPlace) {
+        for (int i = 0; i < list.size(); i++) {
+            final View child = row.getChildAt(i);
+            final ContactEntry entry = list.get(i);
+            final long itemId = mContactTileAdapter.getAdjustedItemId(entry.id);
+            if (DEBUG) {
+                Log.d(TAG, "Saving itemId: " + itemId + " for tileview child " + i + " Left: "
+                        + child.getTop());
+            }
+            mItemIdLeftMap.put(itemId, child.getLeft());
+        }
+    }
+
+    /*
+     * Performs a animations for a row of tiles
+     */
+    private void performHorizontalAnimations(ContactTileRow row, ArrayList<ContactEntry> list,
+            long[] idsInPlace) {
+        if (mItemIdLeftMap.isEmpty()) {
+            return;
+        }
+        for (int i = 0; i < list.size(); i++) {
+            final View child = row.getChildAt(i);
+            final ContactEntry entry = list.get(i);
+            final long itemId = mContactTileAdapter.getAdjustedItemId(entry.id);
+
+            // Skip animation for this view if the caller specified that it should be
+            // kept in place
+            if (containsId(idsInPlace, itemId)) continue;
+
+            Integer startLeft = mItemIdLeftMap.get(itemId);
+            int left = child.getLeft();
+            if (DEBUG) {
+                Log.d(TAG, "Found itemId: " + itemId + " for tileview child " + i +
+                        " Left: " + left);
+            }
+            if (startLeft != null) {
+                if (startLeft != left) {
+                    int delta = startLeft - left;
+                    child.setTranslationX(delta);
+                    child.animate().setDuration(ANIMATION_DURATION).translationX(0);
+                }
+            }
+            // No need to worry about horizontal offsets of new views that come into view since
+            // there is no horizontal scrolling involved.
+        }
+    }
+
+    /*
+     * Performs animations for the list view. If the list item is a row of tiles, horizontal
+     * animations will be performed instead.
+     */
+    private void animateListView(final long... idsInPlace) {
+        if (mItemIdTopMap.isEmpty()) {
+            // Don't do animations if the database is being queried for the first time and
+            // the previous item offsets have not been cached, or the user hasn't done anything
+            // (dragging, swiping etc) that requires an animation.
+            return;
+        }
+        final ViewTreeObserver observer = mListView.getViewTreeObserver();
+        observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @SuppressWarnings("unchecked")
+            @Override
+            public boolean onPreDraw() {
+                observer.removeOnPreDrawListener(this);
+                final int firstVisiblePosition = mListView.getFirstVisiblePosition();
+                for (int i = 0; i < mListView.getChildCount(); i++) {
+                    final View child = mListView.getChildAt(i);
+                    int position = firstVisiblePosition + i;
+                    final int itemViewType = mAdapter.getItemViewType(position);
+                    if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP) {
+                        // This is a tiled row, so perform horizontal animations instead
+                        performHorizontalAnimations((ContactTileRow) child, (
+                                ArrayList<ContactEntry>) mAdapter.getItem(position), idsInPlace);
+                    }
+
+                    final long itemId = mAdapter.getItemId(position);
+
+                    // Skip animation for this view if the caller specified that it should be
+                    // kept in place
+                    if (containsId(idsInPlace, itemId)) continue;
+
+                    Integer startTop = mItemIdTopMap.get(itemId);
+                    final int top = child.getTop();
+                    if (DEBUG) {
+                        Log.d(TAG, "Found itemId: " + itemId + " for listview child " + i +
+                                " Top: " + top);
+                    }
+                    int delta = 0;
+                    if (startTop != null) {
+                        if (startTop != top) {
+                            delta = startTop - top;
+                        }
+                    } else if (!mItemIdLeftMap.containsKey(itemId)) {
+                        // Animate new views along with the others. The catch is that they did not
+                        // exist in the start state, so we must calculate their starting position
+                        // based on neighboring views.
+                        int childHeight = child.getHeight() + mListView.getDividerHeight();
+                        startTop = top + (i > 0 ? childHeight : -childHeight);
+                        delta = startTop - top;
+                    }
+
+                    if (delta != 0) {
+                        child.setTranslationY(delta);
+                        child.animate().setDuration(ANIMATION_DURATION).translationY(0);
+                    }
+                }
+                mItemIdTopMap.clear();
+                mItemIdLeftMap.clear();
+                return true;
+            }
+        });
+    }
+
+    private boolean containsId(long[] ids, long target) {
+        // Linear search on array is fine because this is typically only 0-1 elements long
+        for (int i = 0; i < ids.length; i++) {
+            if (ids[i] == target) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void onDataSetChangedForAnimation(long... idsInPlace) {
+        animateListView(idsInPlace);
+    }
+
+    @Override
+    public void cacheOffsetsForDatasetChange() {
+        saveOffsets();
     }
 }

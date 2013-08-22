@@ -42,6 +42,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     private static final String TAG = PhoneFavoriteMergedAdapter.class.getSimpleName();
 
+    private static final int ALL_CONTACTS_BUTTON_ITEM_ID = -1;
     private final PhoneFavoritesTileAdapter mContactTileAdapter;
     private final CallLogAdapter mCallLogAdapter;
     private final View mLoadingView;
@@ -95,9 +96,35 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         return mContactTileAdapter.getItem(position);
     }
 
+    /**
+     * In order to ensure that items have stable ids (for animation purposes), we need to
+     * guarantee that every single item has a unique ID, even across data set changes.
+     *
+     * These are the ranges of IDs reserved for each item type.
+     *
+     * -(N + 1) to -2: CallLogAdapterItems, where N is equal to the number of call log items
+     * -1: All contacts button
+     * 0 to (N -1): Rows of tiled contacts, where N is equal to the max rows of tiled contacts
+     * N to infinity: Rows of regular contacts. Their item id is calculated by N + contact_id,
+     * where contact_id is guaranteed to never be negative.
+     */
     @Override
     public long getItemId(int position) {
-        return position;
+        final int callLogAdapterCount = mCallLogAdapter.getCount();
+        if (position < callLogAdapterCount) {
+            // Call log items are not animated, so reusing their position for IDs is fine.
+            return ALL_CONTACTS_BUTTON_ITEM_ID - 1 - position;
+        } else if (position < (callLogAdapterCount + mContactTileAdapter.getCount())) {
+            return mContactTileAdapter.getItemId(position - callLogAdapterCount);
+        } else {
+            // All contacts button
+            return ALL_CONTACTS_BUTTON_ITEM_ID;
+        }
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return true;
     }
 
     @Override

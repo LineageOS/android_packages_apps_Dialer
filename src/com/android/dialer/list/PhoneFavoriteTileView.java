@@ -144,6 +144,18 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
             animSet.playTogether(fadeIn);
         }
 
+        animSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                mParentRow.setHasTransientState(true);
+            };
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mParentRow.setHasTransientState(false);
+            }
+        });
+
         animSet.start();
     }
 
@@ -164,8 +176,11 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
                 "alpha", 255).setDuration(ANIMATION_LENGTH);
         final AnimatorSet animSet = new AnimatorSet();
         animSet.playTogether(fadeIn, moveBack, backgroundFadeOut);
-        animSet.start();
         animSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                mParentRow.setHasTransientState(true);
+            }
             @Override
             public void onAnimationEnd(Animator animation) {
                 if (mParentRow.getItemViewType() == ViewTypes.FREQUENT) {
@@ -173,10 +188,10 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
                 } else {
                     SwipeHelper.setSwipeable(PhoneFavoriteTileView.this, true);
                 }
+                mParentRow.setHasTransientState(false);
             }
         });
-
-
+        animSet.start();
         // Signals the PhoneFavoritesTileAdapter to undo the potential delete.
         mParentRow.getTileAdapter().undoPotentialRemoveEntryIndex();
     }
