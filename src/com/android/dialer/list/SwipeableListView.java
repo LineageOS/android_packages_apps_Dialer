@@ -151,10 +151,14 @@ public class SwipeableListView extends ListView implements SwipeHelperCallback {
     }
 
     @Override
-    public void onDragCancelled(View v) {}
+    public void onDragCancelled(View v) {
+        v.setHasTransientState(false);
+    }
 
     @Override
     public void onBeginDrag(View v) {
+        final View tileRow = (View) v.getParent();
+        tileRow.setHasTransientState(true);
         // We do this so the underlying ScrollView knows that it won't get
         // the chance to intercept events anymore
         requestDisallowInterceptTouchEvent(true);
