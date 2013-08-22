@@ -688,6 +688,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                         R.dimen.favorites_row_start_padding);
                 mRowPaddingEnd = resources.getDimensionPixelSize(
                         R.dimen.favorites_row_end_padding);
+
+                setBackgroundResource(R.drawable.bottom_border_background);
             } else {
                 // For row views, padding is set on the view itself.
                 mRowPaddingTop = 0;
@@ -695,8 +697,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                 mRowPaddingStart = 0;
                 mRowPaddingEnd = 0;
             }
-
-            setBackgroundResource(R.drawable.bottom_border_background);
 
             setPaddingRelative(mRowPaddingStart, mRowPaddingTop, mRowPaddingEnd,
                     mRowPaddingBottom);
@@ -743,7 +743,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                 }
             }
             setPressed(false);
-            getBackground().setAlpha(255);
         }
 
         private void addTileFromEntry(ContactEntry entry, int childIndex, boolean isLastRow) {
@@ -960,11 +959,12 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         public void onBeginDrag(View v) {
             removePendingContactEntry();
             final int index = indexOfChild(v);
-            // Move tile to front so that any overlap will be hidden behind its siblings
+
+            /*
             if (index > 0) {
                 detachViewFromParent(index);
                 attachViewToParent(v, 0, v.getLayoutParams());
-            }
+            }*/
 
             // We do this so the underlying ScrollView knows that it won't get
             // the chance to intercept events anymore
