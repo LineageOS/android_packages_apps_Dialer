@@ -27,6 +27,7 @@ import android.util.Log;
 import com.android.contacts.common.list.PhoneNumberListAdapter.PhoneQuery;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.database.DialerDatabaseHelper.ContactNumber;
+import com.android.dialerbind.DatabaseHelperManager;
 
 import java.util.ArrayList;
 
@@ -76,7 +77,8 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
         }
 
         /** Loads results from the database helper. */
-        DialerDatabaseHelper dialerDatabaseHelper = DialerDatabaseHelper.getInstance(mContext);
+        final DialerDatabaseHelper dialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(
+                mContext);
         final ArrayList<ContactNumber> allMatches = dialerDatabaseHelper.getLooseMatches(mQuery,
                 mNameMatcher);
 

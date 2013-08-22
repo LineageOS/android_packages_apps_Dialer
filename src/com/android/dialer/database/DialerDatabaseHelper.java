@@ -16,11 +16,13 @@
 
 package com.android.dialer.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.net.Uri;
@@ -31,6 +33,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.util.StopWatch;
@@ -68,14 +71,15 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      *   0-98   KeyLimePie
      * </pre>
      */
-    private static final int DATABASE_VERSION = 2;
-    private static final String SMARTDIAL_DATABASE_NAME = "dialer.db";
+    public static final int DATABASE_VERSION = 3;
+    public static final String DATABASE_NAME = "dialer.db";
 
     /**
      * Saves the last update time of smart dial databases to shared preferences.
      */
-    private static final String DATABASE_LAST_CREATED_SHARED_PREF = "com.android.dialer_smartdial";
+    private static final String DATABASE_LAST_CREATED_SHARED_PREF = "com.android.dialer";
     private static final String LAST_UPDATED_MILLIS = "last_updated_millis";
+    private static final String DATABASE_VERSION_PROPERTY = "database_version";
 
     private static final int MAX_ENTRIES = 20;
 
@@ -84,6 +88,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         static final String SMARTDIAL_TABLE = "smartdial_table";
         /** Saves all possible prefixes to refer to a contacts.*/
         static final String PREFIX_TABLE = "prefix_table";
+        /** Database properties for internal use */
+        static final String PROPERTIES = "properties";
     }
 
     public interface SmartDialDbColumns {
@@ -106,6 +112,11 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     public static interface PrefixColumns extends BaseColumns {
         static final String PREFIX = "prefix";
         static final String CONTACT_ID = "contact_id";
+    }
+
+    public interface PropertiesColumns {
+        String PROPERTY_KEY = "property_key";
+        String PROPERTY_VALUE = "property_value";
     }
 
     /** Query options for querying the contact database.*/
@@ -297,7 +308,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             // and we don't want to leak the activity if the activity is not running but the
             // dialer database helper is still doing work.
             sSingleton = new DialerDatabaseHelper(context.getApplicationContext(),
-                    SMARTDIAL_DATABASE_NAME);
+                    DATABASE_NAME);
         }
         return sSingleton;
     }
@@ -311,7 +322,11 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     }
 
     protected DialerDatabaseHelper(Context context, String databaseName) {
-        super(context, databaseName, null, DATABASE_VERSION);
+        this(context, databaseName, DATABASE_VERSION);
+    }
+
+    protected DialerDatabaseHelper(Context context, String databaseName, int dbVersion) {
+        super(context, databaseName, null, dbVersion);
         mContext = Preconditions.checkNotNull(context, "Context must not be null");
     }
 
@@ -344,28 +359,115 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 PrefixColumns.PREFIX + " TEXT COLLATE NOCASE, " +
                 PrefixColumns.CONTACT_ID + " INTEGER" +
                 ");");
+
+        db.execSQL("CREATE TABLE " + Tables.PROPERTIES + " (" +
+                PropertiesColumns.PROPERTY_KEY + " TEXT PRIMARY KEY, " +
+                PropertiesColumns.PROPERTY_VALUE + " TEXT " +
+                ");");
+
+        setProperty(db, DATABASE_VERSION_PROPERTY, String.valueOf(DATABASE_VERSION));
+        resetSmartDialLastUpdatedTime();
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.w(TAG, oldVersion + " to " + newVersion + ", rebuilding table");
+    public void onUpgrade(SQLiteDatabase db, int oldNumber, int newNumber) {
+        // Disregard the old version and new versions provided by SQLiteOpenHelper, we will read
+        // our own from the database.
 
+        int oldVersion;
+
+        oldVersion = getPropertyAsInt(db, DATABASE_VERSION_PROPERTY, 0);
+
+        if (oldVersion == 0) {
+            Log.e(TAG, "Malformed database version..recreating database");
+        }
+
+        if (oldVersion < 2) {
+            db.execSQL("DROP TABLE IF EXISTS " + Tables.PREFIX_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + Tables.SMARTDIAL_TABLE);
+            onCreate(db);
+            return;
+        }
+
+        if (oldVersion < 3) {
+            db.execSQL("CREATE TABLE " + Tables.PROPERTIES + " (" +
+                    PropertiesColumns.PROPERTY_KEY + " TEXT PRIMARY KEY, " +
+                    PropertiesColumns.PROPERTY_VALUE + " TEXT " +
+                    ");");
+            oldVersion = 3;
+        }
+
+        if (oldVersion != DATABASE_VERSION) {
+            throw new IllegalStateException(
+                    "error upgrading the database to version " + DATABASE_VERSION);
+        }
+
+        setProperty(db, DATABASE_VERSION_PROPERTY, String.valueOf(DATABASE_VERSION));
+    }
+
+    /**
+     * Stores a key-value pair in the {@link Tables#PROPERTIES} table.
+     */
+    public void setProperty(String key, String value) {
+        setProperty(getWritableDatabase(), key, value);
+    }
+
+    public void setProperty(SQLiteDatabase db, String key, String value) {
+        final ContentValues values = new ContentValues();
+        values.put(PropertiesColumns.PROPERTY_KEY, key);
+        values.put(PropertiesColumns.PROPERTY_VALUE, value);
+        db.replace(Tables.PROPERTIES, null, values);
+    }
+
+    /**
+     * Returns the value from the {@link Tables#PROPERTIES} table.
+     */
+    public String getProperty(String key, String defaultValue) {
+        return getProperty(getReadableDatabase(), key, defaultValue);
+    }
+
+    public String getProperty(SQLiteDatabase db, String key, String defaultValue) {
+        try {
+            final Cursor cursor = db.query(Tables.PROPERTIES,
+                    new String[] {PropertiesColumns.PROPERTY_VALUE},
+                            PropertiesColumns.PROPERTY_KEY + "=?",
+                    new String[] {key}, null, null, null);
+            String value = null;
+            try {
+                if (cursor.moveToFirst()) {
+                    value = cursor.getString(0);
+                }
+            } finally {
+                cursor.close();
+            }
+            return value != null ? value : defaultValue;
+        } catch (SQLiteException e) {
+            return defaultValue;
+        }
+    }
+
+    public int getPropertyAsInt(SQLiteDatabase db, String key, int defaultValue) {
+        final String stored = getProperty(db, DATABASE_VERSION_PROPERTY, "");
+        try {
+            return Integer.parseInt(stored);
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    private void resetSmartDialLastUpdatedTime() {
         final SharedPreferences databaseLastUpdateSharedPref = mContext.getSharedPreferences(
                 DATABASE_LAST_CREATED_SHARED_PREF, Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = databaseLastUpdateSharedPref.edit();
         editor.putLong(LAST_UPDATED_MILLIS, 0);
         editor.commit();
-
-        db.execSQL("DROP TABLE IF EXISTS " + Tables.PREFIX_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + Tables.SMARTDIAL_TABLE);
-        onCreate(db);
     }
 
     /**
      * Starts the database upgrade process in the background.
      */
     public void startSmartDialUpdateThread() {
-       new SmartDialUpdateAsyncTask().execute();
+        new SmartDialUpdateAsyncTask().execute();
     }
 
     private class SmartDialUpdateAsyncTask extends AsyncTask {
