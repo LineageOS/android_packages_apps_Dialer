@@ -50,6 +50,7 @@ import com.google.common.collect.ComparisonChain;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -67,14 +68,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
     public static final int ROW_LIMIT_DEFAULT = 1;
 
-    /** Time period for an animation. */
-    private static final int ANIMATION_LENGTH = 300;
-
-    private final ObjectAnimator mTranslateHorizontalAnimation;
-    private final ObjectAnimator mTranslateVerticalAnimation;
-    private final ObjectAnimator mAlphaAnimation;
-
     private ContactTileView.Listener mListener;
+    private OnDataSetChangedForAnimationListener mDataSetChangedListener;
+
     private Context mContext;
     private Resources mResources;
 
@@ -88,6 +84,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     private int mDropEntryIndex = -1;
     /** Position of the contact pending removal. */
     private int mPotentialRemoveEntryIndex = -1;
+    private long mIdToKeepInPlace = -1;
 
     private boolean mAwaitingRemove = false;
 
@@ -134,13 +131,15 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         }
     };
 
-    public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener,
-            int numCols) {
-        this(context, listener, numCols, ROW_LIMIT_DEFAULT);
-    }
+    public interface OnDataSetChangedForAnimationListener {
+        public void onDataSetChangedForAnimation(long... idsInPlace);
+        public void cacheOffsetsForDatasetChange();
+    };
 
     public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener,
+            OnDataSetChangedForAnimationListener dataSetChangedListener,
             int numCols, int maxTiledRows) {
+        mDataSetChangedListener = dataSetChangedListener;
         mListener = listener;
         mContext = context;
         mResources = context.getResources();
@@ -151,15 +150,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         // Converting padding in dips to padding in pixels
         mPaddingInPixels = mContext.getResources()
                 .getDimensionPixelSize(R.dimen.contact_tile_divider_padding);
-
-        // Initiates all animations.
-        mAlphaAnimation = ObjectAnimator.ofFloat(null, "alpha", 1.f).setDuration(ANIMATION_LENGTH);
-
-        mTranslateHorizontalAnimation = ObjectAnimator.ofFloat(null, "translationX", 0.f).
-                setDuration(ANIMATION_LENGTH);
-
-        mTranslateVerticalAnimation = ObjectAnimator.ofFloat(null, "translationY", 0.f).setDuration(
-                ANIMATION_LENGTH);
 
         bindColumnIndices();
     }
@@ -229,11 +219,21 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     public void setContactCursor(Cursor cursor) {
         if (cursor != null && !cursor.isClosed()) {
             mNumStarred = getNumStarredContacts(cursor);
+            if (mAwaitingRemove) {
+                mDataSetChangedListener.cacheOffsetsForDatasetChange();
+            }
+
             saveNumFrequentsFromCursor(cursor);
             saveCursorToCache(cursor);
-
             // cause a refresh of any views that rely on this data
             notifyDataSetChanged();
+            // about to start redraw
+            if (mIdToKeepInPlace != -1) {
+                mDataSetChangedListener.onDataSetChangedForAnimation(mIdToKeepInPlace);
+            } else {
+                mDataSetChangedListener.onDataSetChangedForAnimation();
+            }
+            mIdToKeepInPlace = -1;
         }
     }
 
@@ -440,15 +440,36 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         }
     }
 
+    /**
+     * For the top row of tiled contacts, the item id is the position of the row of
+     * contacts.
+     * For frequent contacts, the item id is the maximum number of rows of tiled contacts +
+     * the actual contact id. Since contact ids are always greater than 0, this guarantees that
+     * all items within this adapter will always have unique ids.
+     */
     @Override
     public long getItemId(int position) {
-        // As we show several selectable items for each ListView row,
-        // we can not determine a stable id. But as we don't rely on ListView's selection,
-        // this should not be a problem.
-        return position;
+        if (getItemViewType(position) == ViewTypes.FREQUENT) {
+            return getAdjustedItemId(getItem(position).get(0).id);
+        } else {
+            return position;
+        }
+    }
+
+    /**
+     * Calculates the stable itemId for a particular entry based on its contactID
+     */
+    public long getAdjustedItemId(long id) {
+        return mMaxTiledRows + id;
     }
 
     @Override
+    public boolean hasStableIds() {
+        return true;
+    }
+
+    @Override
+
     public boolean areAllItemsEnabled() {
         // No dividers, so all items are enabled.
         return true;
@@ -465,54 +486,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             Log.v(TAG, "notifyDataSetChanged");
         }
         super.notifyDataSetChanged();
-    }
-
-    /**
-     * Configures the animation for each view.
-     *
-     * @param contactTileRowView The row to be animated.
-     * @param position The position of the row.
-     * @param itemViewType The type of the row.
-     */
-    private void configureAnimationToView(ContactTileRow contactTileRowView, int position,
-            int itemViewType) {
-        // No need to animate anything if we are just entering a drag, because the blank
-        // entry takes the place of the dragged entry anyway.
-        if (mInDragging) return;
-        if (mDropEntryIndex != -1) {
-            // If one item is dropped in front the row, animate all following rows to shift down.
-            // If the item is a favorite tile, animate it to appear from left.
-            if (position >= getRowIndex(mDropEntryIndex)) {
-                if (itemViewType == ViewTypes.FREQUENT) {
-                    if (position == getRowIndex(mDropEntryIndex) || position == mMaxTiledRows) {
-                        contactTileRowView.setVisibility(View.VISIBLE);
-                        mAlphaAnimation.setTarget(contactTileRowView);
-                        mAlphaAnimation.clone().start();
-                    } else {
-                        mTranslateVerticalAnimation.setTarget(contactTileRowView);
-                        mTranslateVerticalAnimation.setFloatValues(-contactTileRowView.getHeight(),
-                                0);
-                        mTranslateVerticalAnimation.clone().start();
-                    }
-                } else {
-                    contactTileRowView.animateTilesAppearRight(mDropEntryIndex + 1 -
-                            position * mColumnCount);
-                }
-            }
-        } else if (mPotentialRemoveEntryIndex != -1) {
-            // If one item is to be removed above this row, animate the row to shift up. If it is
-            // a favorite contact tile, animate it to appear from right.
-            if (position >= getRowIndex(mPotentialRemoveEntryIndex)) {
-                if (itemViewType == ViewTypes.FREQUENT) {
-                    mTranslateVerticalAnimation.setTarget(contactTileRowView);
-                    mTranslateVerticalAnimation.setFloatValues(contactTileRowView.getHeight(), 0);
-                    mTranslateVerticalAnimation.clone().start();
-                } else {
-                    contactTileRowView.animateTilesAppearLeft(
-                            mPotentialRemoveEntryIndex - position * mColumnCount);
-                }
-            }
-        }
     }
 
     @Override
@@ -532,8 +505,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         }
 
         contactTileRowView.configureRow(contactList, position, position == getCount() - 1);
-
-        configureAnimationToView(contactTileRowView, position, itemViewType);
 
         return contactTileRowView;
     }
@@ -572,6 +543,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         if (index >= 0 && index < mContactEntries.size()) {
             mDraggedEntry = mContactEntries.get(index);
             mContactEntries.set(index, ContactEntry.BLANK_ENTRY);
+            ContactEntry.BLANK_ENTRY.id = mDraggedEntry.id;
             mDraggedEntryIndex = index;
             notifyDataSetChanged();
         }
@@ -590,6 +562,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                 // When we receive a new cursor the list of contact entries will automatically be
                 // populated with the dragged ContactEntry at the correct spot.
                 mDropEntryIndex = index;
+                mIdToKeepInPlace = getAdjustedItemId(mDraggedEntry.id);
+                mDataSetChangedListener.cacheOffsetsForDatasetChange();
                 changed = true;
             } else if (mDraggedEntryIndex >= 0 && mDraggedEntryIndex <= mContactEntries.size()) {
                 /** If the index is invalid, falls back to the original position of the contact. */
@@ -636,9 +610,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     public boolean removePendingContactEntry() {
         boolean removed = false;
         if (mPotentialRemoveEntryIndex >= 0 && mPotentialRemoveEntryIndex < mContactEntries.size()) {
-            final ContactEntry entry = mContactEntries.remove(mPotentialRemoveEntryIndex);
+            final ContactEntry entry = mContactEntries.get(mPotentialRemoveEntryIndex);
             unstarAndUnpinContact(entry.lookupKey);
-            notifyDataSetChanged();
             removed = true;
             mAwaitingRemove = true;
         }
@@ -699,7 +672,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                         R.dimen.favorites_row_start_padding);
                 mRowPaddingEnd = resources.getDimensionPixelSize(
                         R.dimen.favorites_row_end_padding);
-
             } else {
                 // For row views, padding is set on the view itself.
                 mRowPaddingTop = 0;
@@ -743,6 +715,13 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                 ContactEntry entry =
                         columnCounter < list.size() ? list.get(columnCounter) : null;
                 addTileFromEntry(entry, columnCounter, isLastRow);
+            }
+            if (columnCount == 1) {
+                if (list.get(0) == ContactEntry.BLANK_ENTRY) {
+                    setVisibility(View.INVISIBLE);
+                } else {
+                    setVisibility(View.VISIBLE);
+                }
             }
             setPressed(false);
             getBackground().setAlpha(255);
@@ -914,24 +893,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
         public PhoneFavoritesTileAdapter getTileAdapter() {
             return PhoneFavoritesTileAdapter.this;
-        }
-
-        public void animateTilesAppearLeft(int index) {
-            for (int i = index; i < getChildCount(); ++i) {
-                View childView = getChildAt(i);
-                mTranslateHorizontalAnimation.setTarget(childView);
-                mTranslateHorizontalAnimation.setFloatValues(childView.getWidth(), 0);
-                mTranslateHorizontalAnimation.clone().start();
-            }
-        }
-
-        public void animateTilesAppearRight(int index) {
-            for (int i = index; i < getChildCount(); ++i) {
-                View childView = getChildAt(i);
-                mTranslateHorizontalAnimation.setTarget(childView);
-                mTranslateHorizontalAnimation.setFloatValues(-childView.getWidth(), 0);
-                mTranslateHorizontalAnimation.clone().start();
-            }
         }
 
         public int getPosition() {
