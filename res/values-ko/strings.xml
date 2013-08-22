@@ -82,8 +82,7 @@
     <string name="description_digits_edittext" msgid="8760207516497016437">"전화를 걸 번호"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"통화 기록"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"옵션 더보기"</string>
-    <!-- no translation found for action_menu_dialpad_button (1425910318049008136) -->
-    <skip />
+    <string name="action_menu_dialpad_button" msgid="1425910318049008136">"다이얼패드"</string>
     <string name="menu_copy" msgid="6108677035381940698">"복사"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"발신 전화만 표시"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"수신 전화만 표시"</string>
