@@ -18,7 +18,6 @@ package com.android.incallui;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -29,11 +28,8 @@ import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.service.PhoneNumberService;
-import com.android.incallui.util.HttpFetcher;
 import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
-
-import java.io.IOException;
 
 /**
  * Presenter for the Call Card Fragment.
@@ -307,13 +303,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 @Override
                 protected Bitmap doInBackground(Void... params) {
                     // Fetch the image
-                    try {
-                        final byte[] image = HttpFetcher.getRequestAsByteArray(url);
-                        return BitmapFactory.decodeByteArray(image, 0, image.length);
-                    } catch (IOException e) {
-                        Log.e(TAG, "Unable to download/decode photo.", e);
-                    }
-                    return null;
+                    return mPhoneNumberService.fetchImage(url);
                 }
 
                 @Override
