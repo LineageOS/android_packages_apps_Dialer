@@ -745,7 +745,7 @@ public class DialpadFragment extends Fragment
 
         if (mClearDigitsOnStop) {
             mClearDigitsOnStop = false;
-            mDigits.getText().clear();
+            clearDialpad();
         }
     }
 
@@ -1155,6 +1155,10 @@ public class DialpadFragment extends Fragment
                 getActivity().finish();
             }
         }
+    }
+
+    public void clearDialpad() {
+        mDigits.getText().clear();
     }
 
     private String getCallOrigin() {
