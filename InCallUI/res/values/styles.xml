@@ -152,7 +152,7 @@
     <style name="PrimaryCallInfoPrimaryCallBanner">
         <item name="android:layout_alignParentTop">true</item>
     </style>
-    <style name="PrimaryCallInfoSecondaryInfoContainer">
+    <style name="PrimaryCallInfoSupplementaryInfoContainer">
         <item name="android:layout_below">@id/primary_call_banner</item>
     </style>
 
