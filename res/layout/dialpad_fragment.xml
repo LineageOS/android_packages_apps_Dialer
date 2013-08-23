@@ -79,7 +79,8 @@
             android:layout_height="0px"
             android:layout_weight="@integer/dialpad_layout_weight_additional_buttons"
             android:layout_gravity="center_horizontal"
-            android:background="@color/dialpad_primary_text_color">
+            android:background="@color/dialpad_primary_text_color"
+            android:layoutDirection="locale">
             <ImageButton
                 android:id="@+id/call_history_on_dialpad_button"
                 android:layout_height="match_parent"
