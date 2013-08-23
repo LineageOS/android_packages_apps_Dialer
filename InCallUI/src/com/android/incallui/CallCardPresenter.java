@@ -16,6 +16,9 @@
 
 package com.android.incallui;
 
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -54,9 +57,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private ContactCacheEntry mPrimaryContactInfo;
     private ContactCacheEntry mSecondaryContactInfo;
     private CallTimer mCallTimer;
+    private Context mContext;
 
     public CallCardPresenter() {
-
         // create the call timer
         mCallTimer = new CallTimer(new Runnable() {
             @Override
@@ -66,7 +69,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         });
     }
 
-    public void init(PhoneNumberService phoneNumberService) {
+    public void init(Context context, PhoneNumberService phoneNumberService) {
+        mContext = context;
         mPhoneNumberService = phoneNumberService;
     }
 
@@ -266,11 +270,14 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             final String name = getNameForCall(mPrimaryContactInfo);
             final String number = getNumberForCall(mPrimaryContactInfo);
             final boolean nameIsNumber = name != null && name.equals(mPrimaryContactInfo.number);
+            final String gatewayLabel = getGatewayLabel();
+            final String gatewayNumber = getGatewayNumber();
             ui.setPrimary(number, name, nameIsNumber, mPrimaryContactInfo.label,
-                    mPrimaryContactInfo.photo, mPrimary.isConferenceCall());
+                    mPrimaryContactInfo.photo, mPrimary.isConferenceCall(), gatewayLabel,
+                    gatewayNumber);
         } else {
             // reset to nothing (like at end of call)
-            ui.setPrimary(null, null, false, null, null, false);
+            ui.setPrimary(null, null, false, null, null, false, null, null);
         }
 
     }
@@ -298,6 +305,41 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                         }
                     });
         }
+    }
+
+    /**
+     * Returns the gateway number for any existing outgoing call.
+     */
+    private String getGatewayNumber() {
+        if (hasOutgoingGatewayCall()) {
+            return mPrimary.getGatewayNumber();
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the label for the gateway app for any existing outgoing call.
+     */
+    private String getGatewayLabel() {
+        if (hasOutgoingGatewayCall() && getUi() != null) {
+            final PackageManager pm = mContext.getPackageManager();
+            try {
+                final ApplicationInfo info = pm.getApplicationInfo(mPrimary.getGatewayPackage(), 0);
+                return mContext.getString(R.string.calling_via_template,
+                        pm.getApplicationLabel(info).toString());
+            } catch (PackageManager.NameNotFoundException e) {
+            }
+        }
+        return null;
+    }
+
+    private boolean hasOutgoingGatewayCall() {
+        // We only display the gateway information while DIALING so return false for any othe
+        // call state.
+        return (mPrimary.getState() == Call.State.DIALING &&
+                !TextUtils.isEmpty(mPrimary.getGatewayNumber()) &&
+                !TextUtils.isEmpty(mPrimary.getGatewayPackage()));
     }
 
     private void fetchImage(final String url) {
@@ -374,7 +416,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
-                Drawable photo, boolean isConference);
+                Drawable photo, boolean isConference, String gatewayLabel, String gatewayNumber);
         void setSecondary(boolean show, String name, String label, Drawable photo);
         void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn);
         void setPrimaryCallElapsedTime(boolean show, String duration);
