@@ -23,7 +23,9 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.android.services.telephony.common.Call;
+import com.google.common.collect.Lists;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -40,6 +42,7 @@ public class InCallPresenter implements CallList.Listener {
     private static InCallPresenter sInCallPresenter;
 
     private final Set<InCallStateListener> mListeners = Sets.newHashSet();
+    private final ArrayList<IncomingCallListener> mIncomingCallListeners = Lists.newArrayList();
 
     private AudioModeProvider mAudioModeProvider;
     private StatusBarNotifier mStatusBarNotifier;
@@ -65,10 +68,11 @@ public class InCallPresenter implements CallList.Listener {
         mCallList = callList;
         mCallList.addListener(this);
 
-        mContactInfoCache = new ContactInfoCache(context);
+        mContactInfoCache = ContactInfoCache.getInstance(context);
 
         mStatusBarNotifier = new StatusBarNotifier(context, mContactInfoCache, mCallList);
         addListener(mStatusBarNotifier);
+        addIncomingCallListener(mStatusBarNotifier);
 
         mAudioModeProvider = audioModeProvider;
 
@@ -138,6 +142,20 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     /**
+     * Called when there is a new incoming call.
+     *
+     * @param call
+     */
+    @Override
+    public void onIncomingCall(Call call) {
+        mInCallState = startOrFinishUi(InCallState.INCOMING);
+
+        for (IncomingCallListener listener : mIncomingCallListeners) {
+            listener.onIncomingCall(call);
+        }
+    }
+
+    /**
      * Given the call list, return the state in which the in-call screen should be.
      */
     public static InCallState getPotentialStateFromCallList(CallList callList) {
@@ -154,6 +172,11 @@ public class InCallPresenter implements CallList.Listener {
         }
 
         return newState;
+    }
+
+    public void addIncomingCallListener(IncomingCallListener listener) {
+        Preconditions.checkNotNull(listener);
+        mIncomingCallListeners.add(listener);
     }
 
     public void addListener(InCallStateListener listener) {
@@ -374,5 +397,9 @@ public class InCallPresenter implements CallList.Listener {
     public interface InCallStateListener {
         // TODO(klp): Enhance state to contain the call objects instead of passing CallList
         public void onStateChange(InCallState state, CallList callList);
+    }
+
+    public interface IncomingCallListener {
+        public void onIncomingCall(Call call);
     }
 }

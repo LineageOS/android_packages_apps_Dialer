@@ -42,7 +42,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     // Primary caller info
     private TextView mPhoneNumber;
     private TextView mNumberLabel;
-    private TextView mName;
+    private TextView mPrimaryName;
     private TextView mCallStateLabel;
     private ImageView mPhoto;
     private TextView mElapsedTime;
@@ -72,7 +72,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getPresenter().init(getActivity(), ServiceFactory.newPhoneNumberService(getActivity()));
+        final CallList calls = CallList.getInstance();
+        final Call call = calls.getFirstCall();
+        getPresenter().init(getActivity(), ServiceFactory.newPhoneNumberService(getActivity()),
+                call);
     }
 
     @Override
@@ -90,7 +93,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         super.onViewCreated(view, savedInstanceState);
 
         mPhoneNumber = (TextView) view.findViewById(R.id.phoneNumber);
-        mName = (TextView) view.findViewById(R.id.name);
+        mPrimaryName = (TextView) view.findViewById(R.id.name);
         mNumberLabel = (TextView) view.findViewById(R.id.label);
         mSecondaryCallInfo = (ViewStub) view.findViewById(R.id.secondary_call_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
@@ -117,14 +120,60 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setName(String name) {
-        mName.setText(name);
+    public void setPrimaryName(String name, boolean nameIsNumber) {
+        if (TextUtils.isEmpty(name)) {
+            mPrimaryName.setText("");
+        } else {
+            mPrimaryName.setText(name);
+
+            // Set direction of the name field
+            int nameDirection = View.TEXT_DIRECTION_INHERIT;
+            if (nameIsNumber) {
+                nameDirection = View.TEXT_DIRECTION_LTR;
+            }
+            mPrimaryName.setTextDirection(nameDirection);
+        }
     }
 
     @Override
-    public void setImage(Bitmap image) {
+    public void setPrimaryImage(Bitmap image) {
         if (image != null) {
             setDrawableToImageView(mPhoto, new BitmapDrawable(getResources(), image));
+        }
+    }
+
+    @Override
+    public void setPrimaryPhoneNumber(String number) {
+        // Set the number
+        if (TextUtils.isEmpty(number)) {
+            mPhoneNumber.setText("");
+            mPhoneNumber.setVisibility(View.GONE);
+        } else {
+            mPhoneNumber.setText(number);
+            mPhoneNumber.setVisibility(View.VISIBLE);
+            mPhoneNumber.setTextDirection(View.TEXT_DIRECTION_LTR);
+        }
+    }
+
+    @Override
+    public void setPrimaryLabel(String label) {
+        if (!TextUtils.isEmpty(label)) {
+            mNumberLabel.setText(label);
+            mNumberLabel.setVisibility(View.VISIBLE);
+        } else {
+            mNumberLabel.setVisibility(View.GONE);
+        }
+
+    }
+
+    @Override
+    public void setPrimaryGateway(String gatewayLabel, String gatewayNumber) {
+        if (!TextUtils.isEmpty(gatewayLabel) && !TextUtils.isEmpty(gatewayNumber)) {
+            mProviderLabel.setText(gatewayLabel);
+            mProviderNumber.setText(gatewayNumber);
+            mProviderInfo.setVisibility(View.VISIBLE);
+        } else {
+            mProviderInfo.setVisibility(View.GONE);
         }
     }
 
@@ -138,47 +187,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             photo = getView().getResources().getDrawable(R.drawable.picture_conference);
         }
 
-        // Set the number
-        if (TextUtils.isEmpty(number)) {
-            mPhoneNumber.setText("");
-            mPhoneNumber.setVisibility(View.GONE);
-        } else {
-            mPhoneNumber.setText(number);
-            mPhoneNumber.setVisibility(View.VISIBLE);
-            mPhoneNumber.setTextDirection(View.TEXT_DIRECTION_LTR);
-        }
+        setPrimaryPhoneNumber(number);
 
         // Set any gateway information
-        if (!TextUtils.isEmpty(gatewayLabel) && !TextUtils.isEmpty(gatewayNumber)) {
-            mProviderLabel.setText(gatewayLabel);
-            mProviderNumber.setText(gatewayNumber);
-            mProviderInfo.setVisibility(View.VISIBLE);
-        } else {
-            mProviderInfo.setVisibility(View.GONE);
-        }
-
-        // Set direction of the name field
+        setPrimaryGateway(gatewayLabel, gatewayNumber);
 
         // set the name field.
-        if (TextUtils.isEmpty(name)) {
-            mName.setText("");
-        } else {
-            mName.setText(name);
-
-            int nameDirection = View.TEXT_DIRECTION_INHERIT;
-            if (nameIsNumber) {
-                nameDirection = View.TEXT_DIRECTION_LTR;
-            }
-            mName.setTextDirection(nameDirection);
-        }
+        setPrimaryName(name, nameIsNumber);
 
         // Set the label (Mobile, Work, etc)
-        if (!TextUtils.isEmpty(label)) {
-            mNumberLabel.setText(label);
-            mNumberLabel.setVisibility(View.VISIBLE);
-        } else {
-            mNumberLabel.setVisibility(View.GONE);
-        }
+        setPrimaryLabel(label);
 
         setDrawableToImageView(mPhoto, photo);
     }
