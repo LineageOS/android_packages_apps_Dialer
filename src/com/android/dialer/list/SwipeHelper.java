@@ -270,7 +270,7 @@ public class SwipeHelper {
         anim.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                mCallback.onChildDismissed(mCurrView);
+                mCallback.onChildDismissed(view);
                 animView.setLayerType(View.LAYER_TYPE_NONE, null);
             }
         });
