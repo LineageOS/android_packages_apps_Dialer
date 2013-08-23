@@ -31,9 +31,9 @@
         android:layout_gravity="bottom|center_horizontal"
         android:background="@android:color/black"
 
-        dc:targetDrawables="@array/incoming_call_widget_3way_targets"
-        dc:targetDescriptions="@array/incoming_call_widget_3way_target_descriptions"
-        dc:directionDescriptions="@array/incoming_call_widget_3way_direction_descriptions"
+        dc:targetDrawables="@array/incoming_call_widget_2way_targets"
+        dc:targetDescriptions="@array/incoming_call_widget_2way_target_descriptions"
+        dc:directionDescriptions="@array/incoming_call_widget_2way_direction_descriptions"
         dc:handleDrawable="@drawable/ic_in_call_touch_handle"
         dc:outerRingDrawable="@*android:drawable/ic_lockscreen_outerring"
         dc:outerRadius="@dimen/glowpadview_target_placement_radius"

@@ -76,7 +76,8 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     public void onText() {
-        getUi().showMessageDialogue();
+        // No-op for now.  b/10424370
+        // getUi().showMessageDialogue();
     }
 
     public void rejectCallWithMessage(String message) {
