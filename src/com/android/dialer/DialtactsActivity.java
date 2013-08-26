@@ -473,6 +473,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
     };
 
+    private void hideDialpadAndSearchUi() {
+        if (mInSearchUi) {
+            exitSearchUi();
+        }
+        hideDialpadFragment(false, true);
+    }
+
     public void hideSearchBar() {
        hideSearchBar(true);
     }
