@@ -46,6 +46,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mCallStateLabel;
     private ImageView mPhoto;
     private TextView mElapsedTime;
+    private View mProviderInfo;
+    private TextView mProviderLabel;
+    private TextView mProviderNumber;
 
     // Secondary caller info
     private ViewStub mSecondaryCallInfo;
@@ -69,7 +72,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getPresenter().init(ServiceFactory.newPhoneNumberService(getActivity()));
+        getPresenter().init(getActivity(), ServiceFactory.newPhoneNumberService(getActivity()));
     }
 
     @Override
@@ -93,6 +96,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mPhoto = (ImageView) view.findViewById(R.id.photo);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
+        mProviderInfo = view.findViewById(R.id.providerInfo);
+        mProviderLabel = (TextView) view.findViewById(R.id.providerLabel);
+        mProviderNumber = (TextView) view.findViewById(R.id.providerAddress);
     }
 
     @Override
@@ -124,7 +130,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setPrimary(String number, String name, boolean nameIsNumber, String label,
-            Drawable photo, boolean isConference) {
+            Drawable photo, boolean isConference, String gatewayLabel, String gatewayNumber) {
+        Log.d(this, "Setting primary call [" + gatewayLabel + "][" + gatewayNumber + "]");
 
         if (isConference) {
             name = getView().getResources().getString(R.string.card_title_conf_call);
@@ -139,6 +146,15 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mPhoneNumber.setText(number);
             mPhoneNumber.setVisibility(View.VISIBLE);
             mPhoneNumber.setTextDirection(View.TEXT_DIRECTION_LTR);
+        }
+
+        // Set any gateway information
+        if (!TextUtils.isEmpty(gatewayLabel) && !TextUtils.isEmpty(gatewayNumber)) {
+            mProviderLabel.setText(gatewayLabel);
+            mProviderNumber.setText(gatewayNumber);
+            mProviderInfo.setVisibility(View.VISIBLE);
+        } else {
+            mProviderInfo.setVisibility(View.GONE);
         }
 
         // Set direction of the name field
