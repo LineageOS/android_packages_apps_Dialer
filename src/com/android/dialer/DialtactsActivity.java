@@ -77,6 +77,7 @@ import com.android.dialer.list.AllContactsActivity;
 import com.android.dialer.list.PhoneFavoriteFragment;
 import com.android.dialer.list.OnListFragmentScrolledListener;
 import com.android.dialer.list.SmartDialSearchFragment;
+import com.android.dialerbind.DatabaseHelperManager;
 import com.android.internal.telephony.ITelephony;
 
 import java.util.ArrayList;
@@ -287,7 +288,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             setupFilterText(intent);
         }
 
-        mDialerDatabaseHelper = DialerDatabaseHelper.getInstance(this);
+        mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
         SmartDialPrefix.initializeNanpSettings(this);
     }
 
