@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.os.RemoteException;
 
+import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.ICallCommandService;
 
 /**
@@ -44,6 +45,7 @@ public class CallCommandClient {
     }
 
     public void answerCall(int callId) {
+        Log.i(this, "answerCall: " + callId);
         if (mCommandService == null) {
             Log.e(this, "Cannot answer call; CallCommandService == null");
             return;
@@ -56,6 +58,7 @@ public class CallCommandClient {
     }
 
     public void rejectCall(int callId, boolean rejectWithMessage, String message) {
+        Log.i(this, "rejectCall: " + callId + ", with rejectMessage? " + rejectWithMessage);
         if (mCommandService == null) {
             Log.e(this, "Cannot reject call; CallCommandService == null");
             return;
@@ -68,6 +71,7 @@ public class CallCommandClient {
     }
 
     public void disconnectCall(int callId) {
+        Log.i(this, "disconnect Call: " + callId);
         if (mCommandService == null) {
             Log.e(this, "Cannot disconnect call; CallCommandService == null");
             return;
@@ -80,6 +84,7 @@ public class CallCommandClient {
     }
 
     public void mute(boolean onOff) {
+        Log.i(this, "mute: " + onOff);
         if (mCommandService == null) {
             Log.e(this, "Cannot mute call; CallCommandService == null");
             return;
@@ -92,6 +97,7 @@ public class CallCommandClient {
     }
 
     public void hold(int callId, boolean onOff) {
+        Log.i(this, "hold call(" + onOff + "): " + callId);
         if (mCommandService == null) {
             Log.e(this, "Cannot hold call; CallCommandService == null");
             return;
@@ -104,6 +110,7 @@ public class CallCommandClient {
     }
 
     public void merge() {
+        Log.i(this, "merge calls");
         if (mCommandService == null) {
             Log.e(this, "Cannot merge call; CallCommandService == null");
             return;
@@ -116,6 +123,7 @@ public class CallCommandClient {
     }
 
     public void swap() {
+        Log.i(this, "swap active/hold calls");
         if (mCommandService == null) {
             Log.e(this, "Cannot swap call; CallCommandService == null");
             return;
@@ -128,6 +136,7 @@ public class CallCommandClient {
     }
 
     public void addCall() {
+        Log.i(this, "add a new call");
         if (mCommandService == null) {
             Log.e(this, "Cannot add call; CallCommandService == null");
             return;
@@ -140,6 +149,7 @@ public class CallCommandClient {
     }
 
     public void setAudioMode(int mode) {
+        Log.i(this, "Set Audio Mode: " + AudioMode.toString(mode));
         if (mCommandService == null) {
             Log.e(this, "Cannot set audio mode; CallCommandService == null");
             return;

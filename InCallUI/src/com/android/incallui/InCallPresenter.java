@@ -104,13 +104,13 @@ public class InCallPresenter implements CallList.Listener {
         mInCallActivity = inCallActivity;
 
         if (mInCallActivity != null) {
-            Log.d(this, "UI Initialized");
+            Log.i(this, "UI Initialized");
 
             // Since the UI just came up, imitate an update from the call list
             // to set the proper UI state.
             onCallListChange(mCallList);
         } else {
-            Log.d(this, "setActivity(null)");
+            Log.i(this, "UI Destroyed)");
             attemptCleanup();
         }
     }
@@ -127,6 +127,7 @@ public class InCallPresenter implements CallList.Listener {
         newState = startOrFinishUi(newState);
 
         // Set the new state before announcing it to the world
+        Log.i(this, "Phone switching state: " + mInCallState + " -> " + newState);
         mInCallState = newState;
 
         // notify listeners of new state
@@ -264,15 +265,14 @@ public class InCallPresenter implements CallList.Listener {
         // user with a top-level notification.  Just show the call UI normally.
         final boolean showCallUi = (InCallState.OUTGOING == newState);
 
-        Log.v(this, "showCallUi: ", showCallUi);
-        Log.v(this, "startStartupSequence: ", startStartupSequence);
-
-
         if (showCallUi) {
+            Log.i(this, "Start in call UI");
             showInCall();
         } else if (startStartupSequence) {
+            Log.i(this, "Start Full Screen in call UI");
             mStatusBarNotifier.updateNotificationAndLaunchIncomingCallUi(newState, mCallList);
         } else if (newState == InCallState.HIDDEN) {
+            Log.i(this, "Hide in call UI");
 
             // The new state is the hidden state (no calls).  Tear everything down.
             if (mInCallActivity != null) {
@@ -297,7 +297,7 @@ public class InCallPresenter implements CallList.Listener {
      */
     private void attemptCleanup() {
         if (mInCallActivity == null && !mServiceConnected) {
-            Log.d(this, "Start InCallPresenter.CleanUp");
+            Log.i(this, "Start InCall presenter cleanup.");
             mProximitySensor = null;
 
             mAudioModeProvider = null;
@@ -318,7 +318,6 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     private void showInCall() {
-        Log.d(this, "Showing in call manually.");
         mContext.startActivity(getInCallIntent());
     }
 
