@@ -181,12 +181,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     // CallLog screen (search UI will be automatically exited).
                     PhoneNumberInteraction.startInteractionForPhoneCall(
                         DialtactsActivity.this, dataUri, getCallOrigin());
+                    hideDialpadAndSearchUi();
                 }
 
                 @Override
                 public void onCallNumberDirectly(String phoneNumber) {
                     Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin());
                     startActivity(intent);
+                    hideDialpadAndSearchUi();
                 }
 
                 @Override
@@ -430,7 +432,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ft.commit();
     }
 
-    private void hideDialpadFragment(boolean animate) {
+    private void hideDialpadFragment(boolean animate, boolean clearDialpad) {
+        if (mDialpadFragment == null) return;
+        if (clearDialpad) {
+            mDialpadFragment.clearDialpad();
+        }
+        if (!mDialpadFragment.isVisible()) return;
         mDialpadFragment.setAdjustTranslationForAnimation(animate);
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         if (animate) {
@@ -457,12 +464,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 }
             }
         });
-    }
-
-    private void hideDialpadFragmentIfNecessary() {
-        if (mDialpadFragment != null && mDialpadFragment.isVisible()) {
-            hideDialpadFragment(true);
-        }
     }
 
     final AnimatorListener mHideListener = new AnimatorListenerAdapter() {
@@ -793,9 +794,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onBackPressed() {
         if (mDialpadFragment != null && mDialpadFragment.isVisible()) {
-            hideDialpadFragment(true);
+            hideDialpadFragment(true, false);
         } else if (mInSearchUi) {
             mSearchView.setText(null);
+            mDialpadFragment.clearDialpad();
         } else if (isTaskRoot()) {
             // Instead of stopping, simply push this to the back of the stack.
             // This is only done when running at the top of the stack;
@@ -830,7 +832,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onListFragmentScrollStateChange(int scrollState) {
         if (scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-            hideDialpadFragmentIfNecessary();
+            hideDialpadFragment(true, false);
             hideInputMethod(getCurrentFocus());
         }
     }
