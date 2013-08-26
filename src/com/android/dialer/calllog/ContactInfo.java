@@ -39,6 +39,8 @@ public final class ContactInfo {
 
     public static ContactInfo EMPTY = new ContactInfo();
 
+    public static String GEOCODE_AS_LABEL = "";
+
     @Override
     public int hashCode() {
         // Uses only name and contactUri to determine hashcode.

@@ -25,6 +25,8 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
 import com.android.contacts.common.util.UriUtils;
+import com.android.dialer.service.CachedNumberLookupService;
+import com.android.dialerbind.ServiceFactory;
 
 /**
  * Utility class to look up the contact information for a given number.
@@ -32,6 +34,9 @@ import com.android.contacts.common.util.UriUtils;
 public class ContactInfoHelper {
     private final Context mContext;
     private final String mCurrentCountryIso;
+
+    private static final CachedNumberLookupService mCachedNumberLookupService =
+            ServiceFactory.newCachedNumberLookupService();
 
     public ContactInfoHelper(Context context, String currentCountryIso) {
         mContext = context;
@@ -183,6 +188,8 @@ public class ContactInfoHelper {
         ContactInfo info = lookupContactFromUri(uri);
         if (info != null && info != ContactInfo.EMPTY) {
             info.formattedNumber = formatPhoneNumber(number, null, countryIso);
+        } else if (mCachedNumberLookupService != null) {
+            info = mCachedNumberLookupService.lookupCachedContactFromNumber(mContext, number);
         }
         return info;
     }

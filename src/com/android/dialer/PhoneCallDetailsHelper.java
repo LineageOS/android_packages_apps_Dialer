@@ -18,6 +18,7 @@ package com.android.dialer;
 
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telephony.PhoneNumberUtils;
 import android.text.SpannableString;
@@ -31,6 +32,7 @@ import android.widget.TextView;
 
 import com.android.contacts.common.test.NeededForTesting;
 import com.android.dialer.calllog.CallTypeHelper;
+import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.PhoneNumberHelper;
 
 /**
@@ -97,8 +99,12 @@ public class PhoneCallDetailsHelper {
         // Only show a label if the number is shown and it is not a SIP address.
         if (!TextUtils.isEmpty(details.number)
                 && !PhoneNumberUtils.isUriNumber(details.number.toString())) {
-            numberFormattedLabel = Phone.getTypeLabel(mResources, details.numberType,
-                    details.numberLabel);
+            if (details.numberLabel == ContactInfo.GEOCODE_AS_LABEL) {
+                numberFormattedLabel = details.geocode;
+            } else {
+                numberFormattedLabel = Phone.getTypeLabel(mResources, details.numberType,
+                        details.numberLabel);
+            }
         }
 
         final CharSequence nameText;
