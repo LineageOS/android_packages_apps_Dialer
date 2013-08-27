@@ -38,7 +38,9 @@ import java.util.Set;
  */
 public class CallList {
 
-    private static final int DISCONNECTED_CALL_TIMEOUT_MS = 2000;
+    private static final int DISCONNECTED_CALL_SHORT_TIMEOUT_MS = 200;
+    private static final int DISCONNECTED_CALL_MEDIUM_TIMEOUT_MS = 2000;
+    private static final int DISCONNECTED_CALL_LONG_TIMEOUT_MS = 5000;
 
     private static final int EVENT_DISCONNECTED_TIMEOUT = 1;
 
@@ -264,7 +266,7 @@ public class CallList {
 
                 // Set up a timer to destroy the call after X seconds.
                 final Message msg = mHandler.obtainMessage(EVENT_DISCONNECTED_TIMEOUT, call);
-                mHandler.sendMessageDelayed(msg, DISCONNECTED_CALL_TIMEOUT_MS);
+                mHandler.sendMessageDelayed(msg, getDelayForDisconnect(call));
 
                 mCallMap.put(id, call);
             }
@@ -273,6 +275,32 @@ public class CallList {
         } else if (mCallMap.containsKey(id)) {
             mCallMap.remove(id);
         }
+    }
+
+    private int getDelayForDisconnect(Call call) {
+        Preconditions.checkState(call.getState() == Call.State.DISCONNECTED);
+
+
+        final Call.DisconnectCause cause = call.getDisconnectCause();
+        final int delay;
+        switch (cause) {
+            case LOCAL:
+                delay = DISCONNECTED_CALL_SHORT_TIMEOUT_MS;
+                break;
+            case NORMAL:
+                delay = DISCONNECTED_CALL_MEDIUM_TIMEOUT_MS;
+                break;
+            case INCOMING_REJECTED:
+            case INCOMING_MISSED:
+                // no delay for missed/rejected incoming calls
+                delay = 0;
+                break;
+            default:
+                delay = DISCONNECTED_CALL_LONG_TIMEOUT_MS;
+                break;
+        }
+
+        return delay;
     }
 
     private void updateCallTextMap(Call call, List<String> textResponses) {
