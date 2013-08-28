@@ -19,16 +19,11 @@
 <com.android.incallui.GlowPadWrapper
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:dc="http://schemas.android.com/apk/res-auto"
-
         android:id="@+id/glow_pad_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/glowpadview_margin_bottom"
         android:focusable="true"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:layout_gravity="bottom|center_horizontal"
         android:background="@android:color/black"
 
         dc:targetDrawables="@array/incoming_call_widget_2way_targets"
