@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -49,6 +50,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mProviderInfo;
     private TextView mProviderLabel;
     private TextView mProviderNumber;
+    private ViewGroup mSupplementaryInfoContainer;
 
     // Secondary caller info
     private ViewStub mSecondaryCallInfo;
@@ -99,6 +101,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mProviderInfo = view.findViewById(R.id.providerInfo);
         mProviderLabel = (TextView) view.findViewById(R.id.providerLabel);
         mProviderNumber = (TextView) view.findViewById(R.id.providerAddress);
+        mSupplementaryInfoContainer =
+            (ViewGroup) view.findViewById(R.id.supplementary_info_container);
     }
 
     @Override
@@ -208,8 +212,22 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         Log.v(this, "bluetooth on ", bluetoothOn);
 
         if (!TextUtils.isEmpty(callStateLabel)) {
+            // There are cases where we totally skip the animation
+            final boolean skipAnimation = (state == Call.State.DIALING
+                    || state == Call.State.DISCONNECTED);
+
+            LayoutTransition transition = null;
+            if (skipAnimation) {
+                transition = mSupplementaryInfoContainer.getLayoutTransition();
+                mSupplementaryInfoContainer.setLayoutTransition(null);
+            }
+
             mCallStateLabel.setVisibility(View.VISIBLE);
             mCallStateLabel.setText(callStateLabel);
+
+            if (skipAnimation) {
+                mSupplementaryInfoContainer.setLayoutTransition(transition);
+            }
 
             if (Call.State.INCOMING == state) {
                 setBluetoothOn(bluetoothOn);
