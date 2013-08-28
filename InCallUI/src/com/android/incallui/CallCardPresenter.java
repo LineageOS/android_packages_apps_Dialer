@@ -228,7 +228,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // TODO: un-stable... must use number field to check if a contact was found
         // because the contactinfocache pre-massages the data into the ui fields.
         // Need to do massaging outside of contactinfocache.
-        if (entry == null || entry.number == null) {
+        if (entry == null || entry.label == null) {
             // TODO(klp): currently we can't distinguish between...
             //   1) a lookup occurred but failed to find a local contact.
             //   2) a lookup has not occurred.
