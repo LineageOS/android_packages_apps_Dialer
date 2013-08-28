@@ -64,8 +64,8 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         mCallLogPadding = resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding);
         mContactTileAdapter = contactTileAdapter;
         mCallLogAdapter = callLogAdapter;
-
         mObserver = new CustomDataSetObserver();
+        mCallLogAdapter.registerDataSetObserver(mObserver);
         mContactTileAdapter.registerDataSetObserver(mObserver);
         mLoadingView = loadingView;
         mShowAllContactsButton = showAllContactsButton;
