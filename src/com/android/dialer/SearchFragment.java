@@ -26,6 +26,8 @@ import com.android.dialer.list.OnListFragmentScrolledListener;
 
 public class SearchFragment extends PhoneNumberPickerFragment {
 
+    private static final int SEARCH_DIRECTORY_RESULT_LIMIT = 5;
+
     private OnListFragmentScrolledListener mActivityScrollListener;
 
     public SearchFragment() {
@@ -34,6 +36,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
 
     public void configureDirectorySearch() {
         setDirectorySearchEnabled(true);
+        setDirectoryResultLimit(SEARCH_DIRECTORY_RESULT_LIMIT);
     }
 
     @Override
