@@ -276,11 +276,20 @@ public class InCallPresenter implements CallList.Listener {
 
             // The new state is the hidden state (no calls).  Tear everything down.
             if (mInCallActivity != null) {
-                // Null out reference before we start end sequence
-                InCallActivity temp = mInCallActivity;
-                mInCallActivity = null;
-
-                temp.finish();
+                if (mInCallActivity.isFinishing()) {
+                    // Tear down process:
+                    // When there are no more calls to handle, two things happen:
+                    // 1. The binding connection with TeleService ends
+                    // 2. InCallState changes to HIDDEN and we call activity.finish() here.
+                    //
+                    // Without the service connection, we will not get updates from the service
+                    // and so will never get a new call to move out of the HIDDEN state. Since this
+                    // code is called when we move from a different state into the HIDDEN state,
+                    // it should never get hit twice. In case it does, log an error.
+                    Log.e(this, "Attempting to finish incall activity twice.");
+                } else {
+                    mInCallActivity.finish();
+                }
 
                 // blow away stale contact info so that we get fresh data on
                 // the next set of calls
