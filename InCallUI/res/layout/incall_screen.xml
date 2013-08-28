@@ -62,7 +62,9 @@
               android:layout_height="wrap_content"
               android:layout_alignParentBottom="true"
               android:layout_centerHorizontal="true"
-              android:gravity="center"
-              android:layout_gravity="bottom|center_horizontal" />
+              android:gravity="top"
+              android:layout_gravity="bottom|center_horizontal"
+              android:layout_marginBottom="@dimen/glowpadview_margin_bottom"
+              android:visibility="gone" />
 
 </FrameLayout>
