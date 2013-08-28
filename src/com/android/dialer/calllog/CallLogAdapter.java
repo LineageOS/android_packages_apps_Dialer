@@ -372,7 +372,8 @@ public class CallLogAdapter extends GroupingListAdapter
         // view.
         NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
         ContactInfo existingInfo = mContactInfoCache.getPossiblyExpired(numberCountryIso);
-        boolean updated = (existingInfo != ContactInfo.EMPTY) && !info.equals(existingInfo);
+
+        boolean updated = !info.equals(existingInfo);
 
         // Store the data in the cache so that the UI thread can use to display it. Store it
         // even if it has not changed so that it is marked as not expired.
@@ -587,6 +588,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final int ntype = info.type;
         final String label = info.label;
         final long photoId = info.photoId;
+        final Uri photoUri = info.photoUri;
         CharSequence formattedNumber = info.formattedNumber;
         final int[] callTypes = getCallTypes(c, count);
         final String geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
@@ -607,7 +609,12 @@ public class CallLogAdapter extends GroupingListAdapter
         final boolean isHighlighted = isNew;
         mCallLogViewsHelper.setPhoneCallDetails(views, details, isHighlighted,
                 mUseCallAsPrimaryAction);
-        setPhoto(views, photoId, lookupUri);
+
+        if (photoId == 0 && photoUri != null) {
+            setPhoto(views, photoUri, lookupUri);
+        } else {
+            setPhoto(views, photoId, lookupUri);
+        }
 
         // Listen for the first draw
         if (mViewTreeObserver == null) {
@@ -730,6 +737,13 @@ public class CallLogAdapter extends GroupingListAdapter
         views.quickContactView.assignContactUri(contactUri);
         mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, false /* darkTheme */);
     }
+
+    private void setPhoto(CallLogListItemViews views, Uri photoUri, Uri contactUri) {
+        views.quickContactView.assignContactUri(contactUri);
+        mContactPhotoManager.loadDirectoryPhoto(views.quickContactView, photoUri,
+                false /* darkTheme */);
+    }
+
 
     /**
      * Sets whether processing of requests for contact details should be enabled.
