@@ -47,8 +47,8 @@ public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         mPresenter.onUiReady(getUi());
     }
 }

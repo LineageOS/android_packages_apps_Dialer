@@ -292,14 +292,11 @@ public class InCallActivity extends Activity {
                 mainPresenter.getAudioModeProvider());
         mCallButtonFragment.getPresenter().setProximitySensor(
                 mainPresenter.getProximitySensor());
-        mCallCardFragment.getPresenter().setAudioModeProvider(
-                mainPresenter.getAudioModeProvider());
-        mCallCardFragment.getPresenter().setContactInfoCache(
-                mainPresenter.getContactInfoCache());
+        final CallCardPresenter presenter = mCallCardFragment.getPresenter();
+        presenter.setAudioModeProvider(mainPresenter.getAudioModeProvider());
 
         mainPresenter.addListener(mCallButtonFragment.getPresenter());
         mainPresenter.addListener(mCallCardFragment.getPresenter());
-        mainPresenter.addListener(mAnswerFragment.getPresenter());
 
         // setting activity should be last thing in setup process
         mainPresenter.setActivity(this);
@@ -311,7 +308,6 @@ public class InCallActivity extends Activity {
 
         mainPresenter.removeListener(mCallButtonFragment.getPresenter());
         mainPresenter.removeListener(mCallCardFragment.getPresenter());
-        mainPresenter.removeListener(mAnswerFragment.getPresenter());
 
         mainPresenter.setActivity(null);
     }

@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import com.android.services.telephony.common.CallIdentification;
 import com.google.common.base.Preconditions;
 
 import android.app.Notification;
@@ -37,7 +38,7 @@ import com.android.services.telephony.common.Call;
  * This class adds Notifications to the status bar for the in-call experience.
  */
 public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
-        ContactInfoCacheCallback {
+        InCallPresenter.IncomingCallListener {
     // notification types
     private static final int IN_CALL_NOTIFICATION = 1;
 
@@ -71,12 +72,25 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         updateNotification(state, callList);
     }
 
-    /**
-     * Called after the Contact Info query has finished.
-     */
     @Override
-    public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
-        updateNotification(mInCallState, mCallList);
+    public void onIncomingCall(final Call call) {
+        final ContactCacheEntry entry = ContactInfoCache.buildCacheEntryFromCall(mContext,
+                call.getIdentification(), true);
+
+        // Initial update with no contact information.
+        buildAndSendNotification(InCallState.INCOMING, call, entry, false);
+
+        // we make a call to the contact info cache to query for supplemental data to what the
+        // call provides.  This includes the contact name and photo.
+        // This callback will always get called immediately and synchronously with whatever data
+        // it has available, and may make a subsequent call later (same thread) if it had to
+        // call into the contacts provider for more data.
+        mContactInfoCache.findInfo(call.getIdentification(), true, new ContactInfoCacheCallback() {
+            @Override
+            public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
+                buildAndSendNotification(InCallState.INCOMING, call, entry, false);
+            }
+        });
     }
 
     /**
@@ -160,28 +174,24 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         Log.d(this, "updateInCallNotification(allowFullScreenIntent = "
                 + allowFullScreenIntent + ")...");
 
-        if (shouldSuppressNotification(state, callList)) {
+        final Call call = getCallToShow(callList);
+        if (shouldSuppressNotification(state, call)) {
             cancelInCall();
             return;
         }
 
-        final Call call = getCallToShow(callList);
         if (call == null) {
             Log.wtf(this, "No call for the notification!");
+            return;
         }
 
-        // we make a call to the contact info cache to query for supplemental data to what the
-        // call provides.  This includes the contact name and photo.
-        // This callback will always get called immediately and synchronously with whatever data
-        // it has available, and may make a subsequent call later (same thread) if it had to
-        // call into the contacts provider for more data.
-        mContactInfoCache.findInfo(call, new ContactInfoCacheCallback() {
-            @Override
-            public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
-                buildAndSendNotification(state, call, entry, allowFullScreenIntent);
-            }
-        });
-
+        // Contact info should have already been done on incoming calls.
+        ContactCacheEntry entry = mContactInfoCache.getInfo(call.getCallId());
+        if (entry == null) {
+            entry = ContactInfoCache.buildCacheEntryFromCall(mContext, call.getIdentification(),
+                    state == InCallState.INCOMING);
+        }
+        buildAndSendNotification(state, call, entry, allowFullScreenIntent);
     }
 
     /**
@@ -426,7 +436,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     /**
      * Returns true if notification should not be shown in the current state.
      */
-    private boolean shouldSuppressNotification(InCallState state, CallList callList) {
+    private boolean shouldSuppressNotification(InCallState state, Call call) {
         // Suppress the in-call notification if the InCallScreen is the
         // foreground activity, since it's already obvious that you're on a
         // call.  (The status bar icon is needed only if you navigate *away*
@@ -440,7 +450,6 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
         // We can still be in the INCALL state when a call is disconnected (in order to show
         // the "Call ended" screen.  So check that we have an active connection too.
-        final Call call = getCallToShow(callList);
         if (call == null) {
             shouldSuppress = true;
         }

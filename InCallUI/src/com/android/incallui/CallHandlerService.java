@@ -36,6 +36,8 @@ import java.util.Map;
  */
 public class CallHandlerService extends Service {
 
+    private final static String TAG = CallHandlerService.class.getSimpleName();
+
     private static final int ON_UPDATE_CALL = 1;
     private static final int ON_UPDATE_MULTI_CALL = 2;
     private static final int ON_UPDATE_CALL_WITH_TEXT_RESPONSES = 3;
@@ -56,8 +58,8 @@ public class CallHandlerService extends Service {
         Log.d(this, "onCreate started");
         super.onCreate();
 
-        mCallList = new CallList();
         mMainHandler = new MainHandler();
+        mCallList = CallList.getInstance();
         mAudioModeProvider = new AudioModeProvider();
         mInCallPresenter = InCallPresenter.getInstance();
         mInCallPresenter.setUp(getApplicationContext(), mCallList, mAudioModeProvider);
@@ -105,54 +107,73 @@ public class CallHandlerService extends Service {
 
         @Override
         public void setCallCommandService(ICallCommandService service) {
-            Log.d(CallHandlerService.this, "onConnected: " + service.toString());
-            CallCommandClient.getInstance().setService(service);
+            try {
+                Log.d(CallHandlerService.this, "onConnected: " + service.toString());
+                CallCommandClient.getInstance().setService(service);
+            } catch (Exception e) {
+                Log.e(TAG, "Error processing setCallCommandservice() call", e);
+            }
         }
 
         @Override
         public void onDisconnect(Call call) {
-            Log.d(CallHandlerService.this, "onDisconnected: " + call);
-            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_DISCONNECT_CALL, 0, 0, call));
+            try {
+                Log.d(CallHandlerService.this, "onDisconnected: " + call);
+                mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_DISCONNECT_CALL, call));
+            } catch (Exception e) {
+                Log.e(TAG, "Error processing onDisconnect() call.", e);
+            }
         }
 
         @Override
         public void onIncoming(Call call, List<String> textResponses) {
-            Log.d(CallHandlerService.this, "onIncomingCall: " + call);
+            try {
+                Log.d(CallHandlerService.this, "onIncomingCall: " + call);
 
-            // TODO(klp): Add text responses to the call object.
-            Map.Entry<Call, List<String> > incomingCall = new AbstractMap.SimpleEntry<Call,
-                    List<String> >(call, textResponses);
-            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_CALL_WITH_TEXT_RESPONSES,
-                    0, 0, incomingCall));
+                // TODO(klp): Add text responses to the call object.
+                Map.Entry<Call, List<String>> incomingCall
+                        = new AbstractMap.SimpleEntry<Call, List<String>>(call, textResponses);
+                Log.d("TEST", mMainHandler.toString());
+                mMainHandler.sendMessage(mMainHandler.obtainMessage(
+                        ON_UPDATE_CALL_WITH_TEXT_RESPONSES, incomingCall));
+            } catch (Exception e) {
+                Log.e(TAG, "Error processing onIncoming() call.", e);
+            }
         }
 
         @Override
-        public void onUpdate(List<Call> calls, boolean fullUpdate) {
-            Log.d(CallHandlerService.this, "onUpdate " + calls.toString());
+        public void onUpdate(List<Call> calls) {
+            try {
+                Log.d(CallHandlerService.this, "onUpdate " + calls.toString());
 
-            if (Log.VERBOSE) {
-                for (Call c : calls) {
-                    Log.v(this, "Call: " + c);
-                }
+                // TODO(klp): Add use of fullUpdate to message
+                mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_MULTI_CALL, calls));
+            } catch (Exception e) {
+                Log.e(TAG, "Error processing onUpdate() call.", e);
             }
-
-            // TODO(klp): Add use of fullUpdate to message
-            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_MULTI_CALL, 0, 0, calls));
         }
 
         @Override
         public void onAudioModeChange(int mode) {
-            Log.d(CallHandlerService.this, "onAudioModeChange : " + AudioMode.toString(mode));
-            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_AUDIO_MODE, mode, 0, null));
+            try {
+                Log.d(CallHandlerService.this, "onAudioModeChange : " + AudioMode.toString(mode));
+                mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_AUDIO_MODE, mode, 0, null));
+            } catch (Exception e) {
+                Log.e(TAG, "Error processing onAudioModeChange() call.", e);
+            }
         }
 
         @Override
         public void onSupportedAudioModeChange(int modeMask) {
-            Log.d(CallHandlerService.this, "onSupportedAudioModeChange : " +
-                    AudioMode.toString(modeMask));
+            try {
+                Log.d(CallHandlerService.this, "onSupportedAudioModeChange : " + AudioMode.toString(
+                        modeMask));
 
-            mMainHandler.sendMessage(
-                    mMainHandler.obtainMessage(ON_SUPPORTED_AUDIO_MODE, modeMask, 0, null));
+                mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_SUPPORTED_AUDIO_MODE,
+                        modeMask, 0, null));
+            } catch (Exception e) {
+                Log.e(TAG, "Error processing onSupportedAudioModeChange() call.", e);
+            }
         }
     };
 
@@ -188,7 +209,9 @@ public class CallHandlerService extends Service {
                 mCallList.onUpdate((List<Call>) msg.obj);
                 break;
             case ON_UPDATE_CALL_WITH_TEXT_RESPONSES:
-                mCallList.onUpdate((AbstractMap.SimpleEntry<Call, List<String> >) msg.obj);
+                AbstractMap.SimpleEntry<Call, List<String>> entry
+                        = (AbstractMap.SimpleEntry<Call, List<String>>) msg.obj;
+                mCallList.onIncoming(entry.getKey(), entry.getValue());
                 break;
             case ON_DISCONNECT_CALL:
                 mCallList.onDisconnect((Call) msg.obj);
