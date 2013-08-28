@@ -239,6 +239,21 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     /**
+     * Brings the app into the foreground if possible.
+     */
+    public void bringToForeground() {
+        // Before we bring the incall UI to the foreground, we check to see if:
+        // 1. there is an activity
+        // 2. the activity is not already in the foreground
+        // 3. We are in a state where we want to show the incall ui
+        if (mInCallActivity != null &&
+                !mInCallActivity.isForegroundActivity() &&
+                mInCallState != InCallState.HIDDEN) {
+            showInCall();
+        }
+    }
+
+    /**
      * When the state of in-call changes, this is the first method to get called. It determines if
      * the UI needs to be started or finished depending on the new state and does it.
      */

@@ -44,8 +44,9 @@ public class CallHandlerService extends Service {
     private static final int ON_AUDIO_MODE = 4;
     private static final int ON_SUPPORTED_AUDIO_MODE = 5;
     private static final int ON_DISCONNECT_CALL = 6;
+    private static final int ON_BRING_TO_FOREGROUND = 7;
 
-    private static final int LARGEST_MSG_ID = ON_DISCONNECT_CALL;
+    private static final int LARGEST_MSG_ID = ON_BRING_TO_FOREGROUND;
 
 
     private CallList mCallList;
@@ -175,6 +176,11 @@ public class CallHandlerService extends Service {
                 Log.e(TAG, "Error processing onSupportedAudioModeChange() call.", e);
             }
         }
+
+        @Override
+        public void bringToForeground() {
+            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_BRING_TO_FOREGROUND));
+        }
     };
 
     /**
@@ -221,6 +227,11 @@ public class CallHandlerService extends Service {
                 break;
             case ON_SUPPORTED_AUDIO_MODE:
                 mAudioModeProvider.onSupportedAudioModeChange(msg.arg1);
+                break;
+            case ON_BRING_TO_FOREGROUND:
+                if (mInCallPresenter != null) {
+                    mInCallPresenter.bringToForeground();
+                }
                 break;
             default:
                 break;
