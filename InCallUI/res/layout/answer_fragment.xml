@@ -25,6 +25,7 @@
         android:focusable="true"
         android:layout_centerHorizontal="true"
         android:background="@android:color/black"
+        android:visibility="gone"
 
         dc:targetDrawables="@array/incoming_call_widget_2way_targets"
         dc:targetDescriptions="@array/incoming_call_widget_2way_target_descriptions"

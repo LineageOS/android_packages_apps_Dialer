@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.services.telephony.common.Call;
+import com.android.services.telephony.common.CallIdentification;
 
 import java.util.Arrays;
 
@@ -28,40 +29,36 @@ public class CallerInfoUtils {
      * more information is returned to the OnQueryCompleteListener (which contains
      * information about the phone number label, user's name, etc).
      */
-    public static CallerInfo getCallerInfoForCall(Context context, Call call,
+    public static CallerInfo getCallerInfoForCall(Context context, CallIdentification call,
             CallerInfoAsyncQuery.OnQueryCompleteListener listener) {
-        CallerInfo info = new CallerInfo();
+        CallerInfo info = buildCallerInfo(context, call);
         String number = call.getNumber();
-
-        // Store CNAP information retrieved from the Connection (we want to do this
-        // here regardless of whether the number is empty or not).
-        info.cnapName = call.getCnapName();
-        info.name = info.cnapName;
-        info.numberPresentation = call.getNumberPresentation();
-        info.namePresentation = call.getCnapNamePresentation();
 
         // TODO: Have phoneapp send a Uri when it knows the contact that triggered this call.
 
+        if (info.numberPresentation == Call.PRESENTATION_ALLOWED) {
+            // Start the query with the number provided from the call.
+            Log.d(TAG, "==> Actually starting CallerInfoAsyncQuery.startQuery()...");
+            CallerInfoAsyncQuery.startQuery(QUERY_TOKEN, context, number, listener, call);
+        }
+        return info;
+    }
+
+    public static CallerInfo buildCallerInfo(Context context, CallIdentification identification) {
+        CallerInfo info = new CallerInfo();
+
+        // Store CNAP information retrieved from the Connection (we want to do this
+        // here regardless of whether the number is empty or not).
+        info.cnapName = identification.getCnapName();
+        info.name = info.cnapName;
+        info.numberPresentation = identification.getNumberPresentation();
+        info.namePresentation = identification.getCnapNamePresentation();
+
+        String number = identification.getNumber();
         if (!TextUtils.isEmpty(number)) {
             number = modifyForSpecialCnapCases(context, info, number, info.numberPresentation);
             info.phoneNumber = number;
-
-            // For scenarios where we may receive a valid number from the network but a
-            // restricted/unavailable presentation, we do not want to perform a contact query,
-            // so just return the existing caller info.
-            if (info.numberPresentation != Call.PRESENTATION_ALLOWED) {
-                return info;
-            } else {
-                // Start the query with the number provided from the call.
-                Log.d(TAG, "==> Actually starting CallerInfoAsyncQuery.startQuery()...");
-                CallerInfoAsyncQuery.startQuery(QUERY_TOKEN, context, number, listener, call);
-            }
-        } else {
-            // The number is null or empty (Blocked caller id or empty). Just return the
-            // caller info object as is, without starting a query.
-            return info;
         }
-
         return info;
     }
 

@@ -16,8 +16,6 @@
 
 package com.android.incallui;
 
-import com.android.incallui.InCallPresenter.InCallState;
-import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.services.telephony.common.Call;
 
 import java.util.ArrayList;
@@ -26,53 +24,94 @@ import java.util.ArrayList;
  * Presenter for the Incoming call widget.
  */
 public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
-        implements InCallStateListener {
+        implements CallList.CallUpdateListener, CallList.Listener {
 
-    private Call mCall;
-    private ArrayList<String> mTextResponses;
+    private static final String TAG = AnswerPresenter.class.getSimpleName();
+
+    private int mCallId = Call.INVALID_CALL_ID;
 
     @Override
     public void onUiReady(AnswerUi ui) {
         super.onUiReady(ui);
+
+        final CallList calls = CallList.getInstance();
+        final Call call = calls.getIncomingCall();
+        // TODO: change so that answer presenter never starts up if it's not incoming.
+        if (call != null) {
+            processIncomingCall(call);
+
+            // Listen for call updates for the current call.
+            calls.addCallUpdateListener(mCallId, this);
+
+            // Listen for incoming calls.
+            calls.addListener(this);
+        }
     }
 
     @Override
-    public void onStateChange(InCallState state, CallList callList) {
-        if (state == InCallState.INCOMING) {
-            getUi().showAnswerUi(true);
-            mCall = callList.getIncomingCall();
-            mTextResponses = callList.getTextResponses(mCall);
-            if (mTextResponses != null) {
-                getUi().showTextButton(true);
-                getUi().configureMessageDialogue(mTextResponses);
-            } else {
-                getUi().showTextButton(false);
+    public void onCallListChange(CallList callList) {
+        // no-op
+    }
+
+    @Override
+    public void onIncomingCall(Call call) {
+        // TODO: Ui is being destroyed when the fragment detaches.  Need clean up step to stop
+        // getting updates here.
+        if (getUi() != null) {
+            if (call.getCallId() != mCallId) {
+                // A new call is coming in.
+                processIncomingCall(call);
             }
-            Log.d(this, "Showing incoming with: " + mCall);
+        }
+    }
+
+    private void processIncomingCall(Call call) {
+        mCallId = call.getCallId();
+        Log.d(TAG, "Showing incoming for call id: " + mCallId);
+        final ArrayList<String> textMsgs = CallList.getInstance().getTextResponses(
+                call.getCallId());
+        getUi().showAnswerUi(true);
+
+        if (textMsgs != null) {
+            getUi().showTextButton(true);
+            getUi().configureMessageDialogue(textMsgs);
         } else {
+            getUi().showTextButton(false);
+        }
+    }
+
+
+    @Override
+    public void onCallStateChanged(Call call) {
+        Log.d(TAG, "onCallStateChange() " + call);
+        if (call.getState() != Call.State.INCOMING) {
+            // Stop listening for updates.
+            CallList.getInstance().removeCallUpdateListener(mCallId, this);
+            CallList.getInstance().removeListener(this);
+
             getUi().showAnswerUi(false);
-            mCall = null;
+            mCallId = Call.INVALID_CALL_ID;
         }
     }
 
     public void onAnswer() {
-        if (mCall == null) {
+        if (mCallId == Call.INVALID_CALL_ID) {
             return;
         }
 
-        Log.d(this, "onAnswer " + mCall.getCallId());
+        Log.d(this, "onAnswer " + mCallId);
 
-        CallCommandClient.getInstance().answerCall(mCall.getCallId());
+        CallCommandClient.getInstance().answerCall(mCallId);
     }
 
     public void onDecline() {
-        if (mCall == null) {
+        if (mCallId == Call.INVALID_CALL_ID) {
             return;
         }
 
-        Log.d(this, "onDecline " + mCall.getCallId());
+        Log.d(this, "onDecline " + mCallId);
 
-        CallCommandClient.getInstance().rejectCall(mCall.getCallId(), false, null);
+        CallCommandClient.getInstance().rejectCall(mCallId, false, null);
     }
 
     public void onText() {
@@ -82,7 +121,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     public void rejectCallWithMessage(String message) {
         Log.d(this, "sendTextToDefaultActivity()...");
-        CallCommandClient.getInstance().rejectCall(mCall.getCallId(), true, message);
+        CallCommandClient.getInstance().rejectCall(mCallId, true, message);
         getUi().dismissPopup();
     }
 

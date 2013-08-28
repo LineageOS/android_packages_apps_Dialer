@@ -39,6 +39,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     @Override
     public void onUiReady(CallButtonUi ui) {
         super.onUiReady(ui);
+
         if (mAudioModeProvider != null) {
             mAudioModeProvider.addListener(this);
         }
@@ -66,12 +67,16 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     @Override
     public void onAudioMode(int mode) {
-        getUi().setAudio(mode);
+        if (getUi() != null) {
+            getUi().setAudio(mode);
+        }
     }
 
     @Override
     public void onSupportedAudioMode(int mask) {
-        getUi().setSupportedAudio(mask);
+        if (getUi() != null) {
+            getUi().setSupportedAudio(mask);
+        }
     }
 
     public int getAudioMode() {

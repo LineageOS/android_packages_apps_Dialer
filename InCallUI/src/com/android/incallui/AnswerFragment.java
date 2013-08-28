@@ -16,8 +16,6 @@
 
 package com.android.incallui;
 
-import com.google.common.base.Preconditions;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -27,6 +25,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.google.common.base.Preconditions;
 
 import java.util.ArrayList;
 
@@ -39,10 +39,9 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     /**
      * The popup showing the list of canned responses.
      *
-     * This is an AlertDialog containing a ListView showing the possible
-     * choices.  This may be null if the InCallScreen hasn't ever called
-     * showRespondViaSmsPopup() yet, or if the popup was visible once but
-     * then got dismissed.
+     * This is an AlertDialog containing a ListView showing the possible choices.  This may be null
+     * if the InCallScreen hasn't ever called showRespondViaSmsPopup() yet, or if the popup was
+     * visible once but then got dismissed.
      */
     private Dialog mCannedResponsePopup = null;
 
@@ -101,9 +100,8 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
         lv.setAdapter(mTextResponsesAdapter);
         lv.setOnItemClickListener(new RespondViaSmsItemClickListener());
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                .setCancelable(true)
-                .setView(lv);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setCancelable(
+                true).setView(lv);
         mCannedResponsePopup = builder.create();
         mCannedResponsePopup.show();
     }
@@ -111,9 +109,8 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     /**
      * Dismiss currently visible popups.
      *
-     * This is safe to call even if the popup is already dismissed, and
-     * even if you never called showRespondViaSmsPopup() in the first
-     * place.
+     * This is safe to call even if the popup is already dismissed, and even if you never called
+     * showRespondViaSmsPopup() in the first place.
      */
     @Override
     public void dismissPopup() {
@@ -127,9 +124,7 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     public void configureMessageDialogue(ArrayList<String> textResponses) {
         textResponses.add(getResources().getString(R.string.respond_via_sms_custom_message));
         mTextResponsesAdapter = new ArrayAdapter<String>(getActivity(),
-                                         android.R.layout.simple_list_item_1,
-                                         android.R.id.text1,
-                                         textResponses);
+                android.R.layout.simple_list_item_1, android.R.id.text1, textResponses);
     }
 
     @Override
@@ -151,14 +146,14 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
      * OnItemClickListener for the "Respond via SMS" popup.
      */
     public class RespondViaSmsItemClickListener implements AdapterView.OnItemClickListener {
+
         /**
          * Handles the user selecting an item from the popup.
          */
         @Override
         public void onItemClick(AdapterView<?> parent,  // The ListView
-                                View view,  // The TextView that was clicked
-                                int position,
-                                long id) {
+                View view,  // The TextView that was clicked
+                int position, long id) {
             Log.d(this, "RespondViaSmsItemClickListener.onItemClick(" + position + ")...");
             final String message = (String) parent.getItemAtPosition(position);
             Log.v(this, "- message: '" + message + "'");
