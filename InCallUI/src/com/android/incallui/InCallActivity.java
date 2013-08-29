@@ -57,9 +57,14 @@ public class InCallActivity extends Activity {
         // Inflate everything in incall_screen.xml and add it to the screen.
         setContentView(R.layout.incall_screen);
 
-        initializeInCall();
-
         Log.d(this, "onCreate(): exit");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        initializeInCall();
     }
 
     @Override
@@ -282,10 +287,10 @@ public class InCallActivity extends Activity {
             mDialpadFragment.getView().setVisibility(View.INVISIBLE);
         }
 
-        setUpPresenters();
+        setUpPresenterCallbacks();
     }
 
-    private void setUpPresenters() {
+    private void setUpPresenterCallbacks() {
         InCallPresenter mainPresenter = InCallPresenter.getInstance();
 
         mCallButtonFragment.getPresenter().setAudioModeProvider(
