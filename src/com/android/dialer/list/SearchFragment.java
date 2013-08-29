@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.dialer;
+package com.android.dialer.list;
 
 import android.app.Activity;
 import android.widget.AbsListView;
@@ -26,18 +26,7 @@ import com.android.dialer.list.OnListFragmentScrolledListener;
 
 public class SearchFragment extends PhoneNumberPickerFragment {
 
-    private static final int SEARCH_DIRECTORY_RESULT_LIMIT = 5;
-
     private OnListFragmentScrolledListener mActivityScrollListener;
-
-    public SearchFragment() {
-        configureDirectorySearch();
-    }
-
-    public void configureDirectorySearch() {
-        setDirectorySearchEnabled(true);
-        setDirectoryResultLimit(SEARCH_DIRECTORY_RESULT_LIMIT);
-    }
 
     @Override
     public void onAttach(Activity activity) {
