@@ -95,6 +95,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         Preconditions.checkState(Looper.getMainLooper().getThread() == Thread.currentThread());
         Preconditions.checkNotNull(callback);
 
+        // TODO(klp): We dont need to make this call if the call Id already exists in mInfoMap.
         final int callId = identification.getCallId();
         // If the entry already exists, add callback
         List<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
