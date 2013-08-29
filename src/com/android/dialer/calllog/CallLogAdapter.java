@@ -598,10 +598,9 @@ public class CallLogAdapter extends GroupingListAdapter
                     formattedNumber, countryIso, geocode, callTypes, date,
                     duration);
         } else {
-            // We do not pass a photo id since we do not need the high-res picture.
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, name, ntype, label, lookupUri, null);
+                    duration, name, ntype, label, lookupUri, photoUri);
         }
 
         final boolean isNew = c.getInt(CallLogQuery.IS_READ) == 0;
