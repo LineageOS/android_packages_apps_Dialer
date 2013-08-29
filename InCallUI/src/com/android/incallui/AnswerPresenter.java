@@ -39,13 +39,10 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         // TODO: change so that answer presenter never starts up if it's not incoming.
         if (call != null) {
             processIncomingCall(call);
-
-            // Listen for call updates for the current call.
-            calls.addCallUpdateListener(mCallId, this);
-
-            // Listen for incoming calls.
-            calls.addListener(this);
         }
+
+        // Listen for incoming calls.
+        calls.addListener(this);
     }
 
     @Override
@@ -67,6 +64,10 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     private void processIncomingCall(Call call) {
         mCallId = call.getCallId();
+
+        // Listen for call updates for the current call.
+        CallList.getInstance().addCallUpdateListener(mCallId, this);
+
         Log.d(TAG, "Showing incoming for call id: " + mCallId);
         final ArrayList<String> textMsgs = CallList.getInstance().getTextResponses(
                 call.getCallId());
@@ -84,10 +85,9 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     @Override
     public void onCallStateChanged(Call call) {
         Log.d(TAG, "onCallStateChange() " + call);
-        if (call.getState() != Call.State.INCOMING) {
+        if (call.getState() != Call.State.INCOMING && call.getState() != Call.State.CALL_WAITING) {
             // Stop listening for updates.
             CallList.getInstance().removeCallUpdateListener(mCallId, this);
-            CallList.getInstance().removeListener(this);
 
             getUi().showAnswerUi(false);
             mCallId = Call.INVALID_CALL_ID;
