@@ -224,6 +224,17 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     /**
+     * Returns true of the activity has been created and is running.
+     * Returns true as long as activity is not destroyed or finishing.  This ensures that we return
+     * true even if the activity is paused (not in foreground).
+     */
+    public boolean isActivityStarted() {
+        return (mInCallActivity != null &&
+                !mInCallActivity.isDestroyed() &&
+                !mInCallActivity.isFinishing());
+    }
+
+    /**
      * Called when the activity goes out of the foreground.
      */
     public void onUiShowing(boolean showing) {

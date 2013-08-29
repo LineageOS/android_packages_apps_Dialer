@@ -80,6 +80,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // Initial update with no contact information.
         buildAndSendNotification(InCallState.INCOMING, call, entry, false);
 
+        // TODO(klp): InCallPresenter already calls updateNofication() when it wants to start
+        // the notification. We shouldn't do this twice.
+        // TODO(klp): This search doesn't happen for outgoing calls any more.  It works because
+        // the call card makes a requests that are cached...but eventually this startup process
+        // needs to incorporate call searches for all new calls, not just incoming.
+
         // we make a call to the contact info cache to query for supplemental data to what the
         // call provides.  This includes the contact name and photo.
         // This callback will always get called immediately and synchronously with whatever data
@@ -180,12 +186,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
             return;
         }
 
-        if (call == null) {
-            Log.wtf(this, "No call for the notification!");
-            return;
-        }
-
         // Contact info should have already been done on incoming calls.
+        // TODO(klp): This also needs to be done for outgoing calls.
         ContactCacheEntry entry = mContactInfoCache.getInfo(call.getCallId());
         if (entry == null) {
             entry = ContactInfoCache.buildCacheEntryFromCall(mContext, call.getIdentification(),
@@ -445,12 +447,14 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
         // Suppress if the call is not active.
         if (!state.isConnectingOrConnected()) {
+            Log.v(this, "suppressing: not connecting or connected");
             shouldSuppress = true;
         }
 
         // We can still be in the INCALL state when a call is disconnected (in order to show
         // the "Call ended" screen.  So check that we have an active connection too.
         if (call == null) {
+            Log.v(this, "suppressing: no call");
             shouldSuppress = true;
         }
 
@@ -461,18 +465,19 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // correctly handle the case where a new incoming call comes in but
         // the InCallScreen is already in the foreground.
         if (state.isIncoming()) {
+            Log.v(this, "unsuppressing: incoming call");
             shouldSuppress = false;
         }
 
-        // JANK fix:
-        // This class will issue a notification when user makes an outgoing call.
-        // However, since we suppress the notification when the user is in the in-call screen,
-        // that results is us showing it for a split second, until the in-call screen comes up.
-        // It looks ugly.
-        //
-        // The solution is to ignore the change from HIDDEN to OUTGOING since in that particular
-        // case, we know we'll get called to update again when the UI finally starts.
-        if (InCallState.OUTGOING == state && InCallState.HIDDEN == mInCallState) {
+        // JANK Fix
+        // Do not show the notification for outgoing calls until the UI comes up.
+        // Since we don't normally show a notification while the incall screen is
+        // in the foreground, if we show the outgoing notification before the activity
+        // comes up the user will see it flash on and off on an outgoing call.
+        // This code ensures that we do not show the notification for outgoing calls before
+        // the activity has started.
+        if (state == InCallState.OUTGOING && !InCallPresenter.getInstance().isActivityStarted()) {
+            Log.v(this, "suppressing: activity not started.");
             shouldSuppress = true;
         }
 
