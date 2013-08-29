@@ -30,17 +30,26 @@ import java.util.List;
 
     private static AudioModeProvider sAudioModeProvider;
     private int mAudioMode = AudioMode.EARPIECE;
+    private boolean mMuted = false;
     private int mSupportedModes = AudioMode.ALL_MODES;
     private final List<AudioModeListener> mListeners = Lists.newArrayList();
 
     public AudioModeProvider() {
     }
 
-    public void onAudioModeChange(int newMode) {
-        mAudioMode = newMode;
+    public void onAudioModeChange(int newMode, boolean muted) {
+        if (mAudioMode != newMode) {
+            mAudioMode = newMode;
+            for (AudioModeListener l : mListeners) {
+                l.onAudioMode(mAudioMode);
+            }
+        }
 
-        for (AudioModeListener l : mListeners) {
-            l.onAudioMode(mAudioMode);
+        if (mMuted != muted) {
+            mMuted = muted;
+            for (AudioModeListener l : mListeners) {
+                l.onMute(mMuted);
+            }
         }
     }
 
@@ -57,6 +66,7 @@ import java.util.List;
             mListeners.add(listener);
             listener.onSupportedAudioMode(mSupportedModes);
             listener.onAudioMode(mAudioMode);
+            listener.onMute(mMuted);
         }
     }
 
@@ -76,6 +86,7 @@ import java.util.List;
 
     /* package */ interface AudioModeListener {
         void onAudioMode(int newMode);
+        void onMute(boolean muted);
         void onSupportedAudioMode(int modeMask);
     }
 }

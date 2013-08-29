@@ -79,6 +79,13 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
     }
 
+    @Override
+    public void onMute(boolean muted) {
+        if (getUi() != null) {
+            getUi().setMute(muted);
+        }
+    }
+
     public int getAudioMode() {
         if (mAudioModeProvider != null) {
             return mAudioModeProvider.getAudioMode();
@@ -140,7 +147,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         Log.d(this, "turning on mute: " + checked);
 
         CallCommandClient.getInstance().mute(checked);
-        getUi().setMute(checked);
     }
 
     public void holdClicked(boolean checked) {

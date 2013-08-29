@@ -201,6 +201,8 @@ public class CallButtonFragment
 
     @Override
     public void setAudio(int mode) {
+        updateAudioButtons(getPresenter().getSupportedAudio());
+        refreshAudioModePopup();
     }
 
     @Override
