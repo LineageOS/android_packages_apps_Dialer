@@ -258,7 +258,7 @@ public class InCallPresenter implements CallList.Listener {
      * the UI needs to be started or finished depending on the new state and does it.
      */
     private InCallState startOrFinishUi(InCallState newState) {
-        Log.d(this, "startOrFinishUi: " + newState.toString());
+        Log.d(this, "startOrFinishUi: " + mInCallState + " -> " + newState);
 
         // TODO(klp): Consider a proper state machine implementation
 
@@ -291,10 +291,8 @@ public class InCallPresenter implements CallList.Listener {
         //          [ AND NOW YOU'RE IN THE CALL. voila! ]
         //
         // Our app is started using a fullScreen notification.  We need to do this whenever
-        // we get an incoming call or if this is the first time we are displaying (the previous
-        // state was HIDDEN).
-        final boolean startStartupSequence = (InCallState.INCOMING == newState ||
-                InCallState.HIDDEN == mInCallState);
+        // we get an incoming call.
+        final boolean startStartupSequence = (InCallState.INCOMING == newState);
 
         // A new outgoing call indicates that the user just now dialed a number and when that
         // happens we need to display the screen immediateley.

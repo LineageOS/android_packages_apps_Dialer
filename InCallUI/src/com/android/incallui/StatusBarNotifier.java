@@ -69,6 +69,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      */
     @Override
     public void onStateChange(InCallState state, CallList callList) {
+        Log.d(this, "onStateChange");
         updateNotification(state, callList);
     }
 
@@ -102,6 +103,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      * (Use updateNotificationAndLaunchIncomingCallUi() for that.)
      */
     public void updateNotification(InCallState state, CallList callList) {
+        Log.d(this, "updateNotification");
         // allowFullScreenIntent=false means *don't* allow the incoming
         // call UI to be launched.
         updateInCallNotification(false, state, callList);
@@ -176,6 +178,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
         final Call call = getCallToShow(callList);
         if (shouldSuppressNotification(state, call)) {
+            Log.d(this, "Suppressing notification");
             cancelInCall();
             return;
         }
@@ -222,7 +225,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
         // Set the intent as a full screen intent as well if requested
         if (allowFullScreenIntent) {
-            configureFullScreenIntent(builder, inCallPendingIntent);
+            configureFullScreenIntent(builder, inCallPendingIntent, call);
         }
 
         // set the content
@@ -383,7 +386,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     /**
      * Adds fullscreen intent to the builder.
      */
-    private void configureFullScreenIntent(Notification.Builder builder, PendingIntent intent) {
+    private void configureFullScreenIntent(Notification.Builder builder, PendingIntent intent,
+            Call call) {
         // Ok, we actually want to launch the incoming call
         // UI at this point (in addition to simply posting a notification
         // to the status bar).  Setting fullScreenIntent will cause
@@ -413,14 +417,13 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // TODO: there should be a cleaner way of avoiding this
         // problem (see discussion in bug 3184149.)
 
-        // TODO(klp): reenable this for klp
-        /*if (incomingCall.getState() == Call.State.CALL_WAITING) {
+        if (call.getState() == Call.State.CALL_WAITING) {
             Log.i(this, "updateInCallNotification: call-waiting! force relaunch...");
             // Cancel the IN_CALL_NOTIFICATION immediately before
             // (re)posting it; this seems to force the
             // NotificationManager to launch the fullScreenIntent.
             mNotificationManager.cancel(IN_CALL_NOTIFICATION);
-        }*/
+        }
     }
 
     private Notification.Builder getNotificationBuilder() {
