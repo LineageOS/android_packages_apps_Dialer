@@ -155,10 +155,11 @@ public class CallHandlerService extends Service {
         }
 
         @Override
-        public void onAudioModeChange(int mode) {
+        public void onAudioModeChange(int mode, boolean muted) {
             try {
                 Log.d(CallHandlerService.this, "onAudioModeChange : " + AudioMode.toString(mode));
-                mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_AUDIO_MODE, mode, 0, null));
+                mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_AUDIO_MODE, mode,
+                            muted ? 1 : 0, null));
             } catch (Exception e) {
                 Log.e(TAG, "Error processing onAudioModeChange() call.", e);
             }
@@ -223,7 +224,7 @@ public class CallHandlerService extends Service {
                 mCallList.onDisconnect((Call) msg.obj);
                 break;
             case ON_AUDIO_MODE:
-                mAudioModeProvider.onAudioModeChange(msg.arg1);
+                mAudioModeProvider.onAudioModeChange(msg.arg1, msg.arg2 == 1);
                 break;
             case ON_SUPPORTED_AUDIO_MODE:
                 mAudioModeProvider.onSupportedAudioModeChange(msg.arg1);

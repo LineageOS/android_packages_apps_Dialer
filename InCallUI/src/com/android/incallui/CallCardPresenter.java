@@ -199,6 +199,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     public void onSupportedAudioMode(int mask) {
     }
 
+    @Override
+    public void onMute(boolean muted) {
+    }
+
     public void updateCallTime() {
         final CallCardUi ui = getUi();
 

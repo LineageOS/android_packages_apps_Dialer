@@ -96,6 +96,10 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
     public void onSupportedAudioMode(int modeMask) {
     }
 
+    @Override
+    public void onMute(boolean muted) {
+    }
+
     /**
      * Called when the audio mode changes during a call.
      */
