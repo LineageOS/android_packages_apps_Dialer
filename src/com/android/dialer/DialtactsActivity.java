@@ -76,6 +76,8 @@ import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.list.AllContactsActivity;
 import com.android.dialer.list.PhoneFavoriteFragment;
 import com.android.dialer.list.OnListFragmentScrolledListener;
+import com.android.dialer.list.RegularSearchFragment;
+import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialerbind.DatabaseHelperManager;
 import com.android.internal.telephony.ITelephony;
@@ -138,7 +140,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     /**
      * Fragment for searching phone numbers using the alphanumeric keyboard.
      */
-    private SearchFragment mRegularSearchFragment;
+    private RegularSearchFragment mRegularSearchFragment;
 
     /**
      * Fragment for searching phone numbers using the dialpad.
@@ -322,7 +324,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mSmartDialSearchFragment.setOnPhoneNumberPickerActionListener(
                     mPhoneNumberPickerActionListener);
         } else if (fragment instanceof SearchFragment) {
-            mRegularSearchFragment = (SearchFragment) fragment;
+            mRegularSearchFragment = (RegularSearchFragment) fragment;
             mRegularSearchFragment.setOnPhoneNumberPickerActionListener(
                     mPhoneNumberPickerActionListener);
         } else if (fragment instanceof PhoneFavoriteFragment) {
@@ -770,7 +772,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             if (smartDialSearch) {
                 fragment = new SmartDialSearchFragment();
             } else {
-                fragment = new SearchFragment();
+                fragment = new RegularSearchFragment();
             }
             transaction.replace(R.id.dialtacts_frame, fragment, tag);
         } else {
