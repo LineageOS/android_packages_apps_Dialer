@@ -70,18 +70,23 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     public void init(Context context, PhoneNumberService phoneNumberService, Call call) {
         mContext = Preconditions.checkNotNull(context);
         mPhoneNumberService = Preconditions.checkNotNull(phoneNumberService);
-        Preconditions.checkNotNull(call);
         mContext = context;
         mPhoneNumberService = phoneNumberService;
-        final CallIdentification identification = call.getIdentification();
 
-        // TODO(klp): Logic to determine which ui field get what data resides in contactInfoCache.
-        // It needs to be moved so it can be re-used.
-        mPrimaryContactInfo = ContactInfoCache.buildCacheEntryFromCall(mContext, identification,
-                call.getState() == Call.State.INCOMING);
+        // Call may be null if disconnect happened already.
+        if (call != null) {
+            final CallIdentification identification = call.getIdentification();
 
-        // start processing lookups right away.
-        startContactInfoSearch(identification, true, false, call.getState() == Call.State.INCOMING);
+            // TODO(klp): Logic to determine which ui field get what data resides in
+            // contactInfoCache.
+            // It needs to be moved so it can be re-used.
+            mPrimaryContactInfo = ContactInfoCache.buildCacheEntryFromCall(mContext, identification,
+                    call.getState() == Call.State.INCOMING);
+
+            // start processing lookups right away.
+            startContactInfoSearch(identification, true, false,
+                    call.getState() == Call.State.INCOMING);
+        }
     }
 
     @Override
