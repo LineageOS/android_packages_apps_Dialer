@@ -72,12 +72,6 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        getPresenter().onUiUnready(this);
-    }
-
-    @Override
     public void showAnswerUi(boolean show) {
         getView().setVisibility(show ? View.VISIBLE : View.GONE);
     }
