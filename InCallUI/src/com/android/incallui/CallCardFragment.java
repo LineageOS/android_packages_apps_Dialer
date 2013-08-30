@@ -26,6 +26,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
@@ -56,6 +57,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private ViewStub mSecondaryCallInfo;
     private TextView mSecondaryCallName;
     private ImageView mSecondaryPhoto;
+    private View mSecondaryPhotoOverlay;
 
     // Cached DisplayMetrics density.
     private float mDensity;
@@ -436,6 +438,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
         if (mSecondaryPhoto == null) {
             mSecondaryPhoto = (ImageView) getView().findViewById(R.id.secondaryCallPhoto);
+        }
+
+        if (mSecondaryPhotoOverlay == null) {
+            mSecondaryPhotoOverlay = getView().findViewById(R.id.dim_effect_for_secondary_photo);
+            mSecondaryPhotoOverlay.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getPresenter().secondaryPhotoClicked();
+                }
+            });
         }
     }
 }
