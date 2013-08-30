@@ -47,6 +47,8 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
 
     private ArrayAdapter<String> mTextResponsesAdapter = null;
 
+    private GlowPadWrapper mGlowpad;
+
     public AnswerFragment() {
     }
 
@@ -63,12 +65,12 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final GlowPadWrapper glowPad = (GlowPadWrapper) inflater.inflate(R.layout.answer_fragment,
+        mGlowpad = (GlowPadWrapper) inflater.inflate(R.layout.answer_fragment,
                 container, false);
 
-        glowPad.setAnswerListener(this);
+        mGlowpad.setAnswerListener(this);
 
-        return glowPad;
+        return mGlowpad;
     }
 
     @Override
@@ -78,7 +80,29 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
 
     @Override
     public void showTextButton(boolean show) {
-        // TODO(klp) Hide the text button when the call does not support reject by text.
+        final int targetResourceId = show
+                ? R.array.incoming_call_widget_3way_targets
+                : R.array.incoming_call_widget_2way_targets;
+
+        if (targetResourceId != mGlowpad.getTargetResourceId()) {
+            if (show) {
+                // Answer, Decline, and Respond via SMS.
+                mGlowpad.setTargetResources(targetResourceId);
+                mGlowpad.setTargetDescriptionsResourceId(
+                        R.array.incoming_call_widget_3way_target_descriptions);
+                mGlowpad.setDirectionDescriptionsResourceId(
+                        R.array.incoming_call_widget_3way_direction_descriptions);
+            } else {
+                // Answer or Decline.
+                mGlowpad.setTargetResources(targetResourceId);
+                mGlowpad.setTargetDescriptionsResourceId(
+                        R.array.incoming_call_widget_2way_target_descriptions);
+                mGlowpad.setDirectionDescriptionsResourceId(
+                        R.array.incoming_call_widget_2way_direction_descriptions);
+            }
+
+            mGlowpad.reset(false);
+        }
     }
 
     @Override
