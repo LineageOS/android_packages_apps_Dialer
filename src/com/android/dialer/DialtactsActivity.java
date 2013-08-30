@@ -347,7 +347,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             case R.id.menu_clear_frequents:
                 ClearFrequentsDialog.show(getFragmentManager());
                 return true;
-            case R.id.add_contact:
+            case R.id.menu_add_contact:
                 try {
                     startActivity(new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI));
                 } catch (ActivityNotFoundException e) {
@@ -360,6 +360,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             case R.id.menu_call_settings:
                 final Intent settingsIntent = DialtactsActivity.getCallSettingsIntent();
                 startActivity(settingsIntent);
+                return true;
+            case R.id.menu_all_contacts:
+                onShowAllContacts();
+                return true;
         }
         return false;
     }
