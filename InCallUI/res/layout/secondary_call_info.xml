@@ -36,20 +36,27 @@
         android:layout_height="match_parent"
         android:background="@drawable/clickable_dim_effect"/>
 
-    <!-- Name (or the phone number, if we don't have a name to display). -->
-    <TextView android:id="@+id/secondaryCallName"
-        style="@style/SecondaryCallInfoSecondaryCallName"
+    <!-- Parent FrameLayout is used to size the background correctly, while the child TextView
+        just wraps its content and is aligned with layout_gravity start so that it is aligned
+        to the correct side in RTL mode regardless of whether the text is Arabic or not -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/call_banner_height"
-        android:gravity="top|start"
         android:paddingStart="@dimen/call_banner_side_padding"
         android:paddingEnd="@dimen/call_banner_side_padding"
         android:paddingTop="@dimen/call_banner_top_bottom_padding"
         android:paddingBottom="@dimen/call_banner_top_bottom_padding"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/incall_call_banner_text_color"
-        android:singleLine="true"
-        android:background="@color/incall_call_banner_background" />
+        android:background="@color/incall_call_banner_background">
+        <!-- Name (or the phone number, if we don't have a name to display). -->
+        <TextView android:id="@+id/secondaryCallName"
+            style="@style/SecondaryCallInfoSecondaryCallName"
+            android:layout_gravity="top|start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/incall_call_banner_text_color"
+            android:singleLine="true"/>
+    </FrameLayout>
 
     <!-- Call status of the background call, usually the string "On hold". -->
     <TextView android:id="@+id/secondaryCallStatus"
@@ -57,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/call_banner_height"
         android:gravity="top|end"
+        android:layout_gravity="end"
         android:paddingStart="@dimen/call_banner_side_padding"
         android:paddingEnd="@dimen/call_banner_side_padding"
         android:paddingTop="@dimen/call_banner_top_bottom_padding"
