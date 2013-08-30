@@ -19,14 +19,27 @@ package com.android.incallui.service;
 import android.graphics.Bitmap;
 
 /**
- *
+ * Provides phone number lookup services.
  */
 public interface PhoneNumberService {
-    public void getPhoneNumberInfo(String phoneNumber, PhoneNumberServiceListener listener);
 
-    public Bitmap fetchImage(String url);
+    /**
+     * Get a phone number number asynchronously.
+     *
+     * @param phoneNumber The phone number to lookup.
+     * @param listener The listener to notify when the phone number lookup is complete.
+     */
+    public void getPhoneNumberInfo(String phoneNumber, NumberLookupListener listener);
 
-    public interface PhoneNumberServiceListener {
+    /**
+     * Get an image asynchronously.
+     *
+     * @param url The url to fetch the image from.
+     * @param listener The listener to notify when the image lookup is complete.
+     */
+    public void fetchImage(String url, ImageLookupListener listener);
+
+    public interface NumberLookupListener {
 
         /**
          * Callback when a phone number has been looked up.
@@ -36,8 +49,18 @@ public interface PhoneNumberService {
         public void onPhoneNumberInfoComplete(PhoneNumberInfo info);
     }
 
+    public interface ImageLookupListener {
+
+        /**
+         * Callback when a image has been fetched.
+         *
+         * @param bitmap The fetched image.
+         */
+        public void onImageFetchComplete(Bitmap bitmap);
+    }
+
     public interface PhoneNumberInfo {
-        public String getName();
+        public String getDisplayName();
         public String getPhoneNumber();
         public String getImageUrl();
     }

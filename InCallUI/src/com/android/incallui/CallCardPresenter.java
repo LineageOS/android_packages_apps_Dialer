@@ -21,7 +21,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
@@ -368,7 +367,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     public void lookupPhoneNumber(String phoneNumber) {
         if (mPhoneNumberService != null) {
             mPhoneNumberService.getPhoneNumberInfo(phoneNumber,
-                    new PhoneNumberService.PhoneNumberServiceListener() {
+                    new PhoneNumberService.NumberLookupListener() {
                         @Override
                         public void onPhoneNumberInfoComplete(
                                 final PhoneNumberService.PhoneNumberInfo info) {
@@ -377,8 +376,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                             }
                             // TODO(klp): Ui is sometimes null due to something being shutdown.
                             if (getUi() != null) {
-                                if (info.getName() != null) {
-                                    getUi().setPrimaryName(info.getName(), false);
+                                if (info.getDisplayName() != null) {
+                                    getUi().setPrimaryName(info.getDisplayName(), false);
                                 }
 
                                 if (info.getImageUrl() != null) {
@@ -433,23 +432,14 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     private void fetchImage(final String url) {
         if (url != null) {
-            new AsyncTask<Void, Void, Bitmap>() {
-
+            mPhoneNumberService.fetchImage(url, new PhoneNumberService.ImageLookupListener() {
                 @Override
-                protected Bitmap doInBackground(Void... params) {
-                    // Fetch the image
-                    return mPhoneNumberService.fetchImage(url);
-                }
-
-                @Override
-                protected void onPostExecute(Bitmap bitmap) {
-                    // TODO(klp): same as above, figure out why it's null.
+                public void onImageFetchComplete(Bitmap bitmap) {
                     if (getUi() != null) {
                         getUi().setPrimaryImage(bitmap);
                     }
                 }
-
-            }.execute();
+            });
         }
     }
 
