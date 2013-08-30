@@ -111,12 +111,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        getPresenter().onUiUnready(this);
-    }
-
-    @Override
     public void setVisible(boolean on) {
         if (on) {
             getView().setVisibility(View.VISIBLE);

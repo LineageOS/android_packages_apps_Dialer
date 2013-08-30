@@ -127,12 +127,6 @@ public class CallButtonFragment
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        getPresenter().onUiUnready(this);
-    }
-
-    @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
     }
 
