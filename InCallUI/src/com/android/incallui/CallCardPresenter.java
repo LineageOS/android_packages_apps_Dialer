@@ -74,6 +74,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         // Call may be null if disconnect happened already.
         if (call != null) {
+            mPrimary = call;
+
             final CallIdentification identification = call.getIdentification();
 
             // TODO(klp): Logic to determine which ui field get what data resides in
@@ -241,7 +243,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             //   1) a lookup occurred but failed to find a local contact.
             //   2) a lookup has not occurred.
             // We need to track it so we can avoid an un-necessary lookup here.
-            Log.d(TAG, "Local contact cache does not contain the contact.  Searching provider.");
+            Log.d(TAG, "Contact lookup. In memory cache miss. Searching provider.");
             cache.findInfo(identification, isIncoming, new ContactInfoCacheCallback() {
                 @Override
                 public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
@@ -250,16 +252,16 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     // Need to do massaging outside of contactinfocache.
                     if (entry.label == null) {
                         // Name not found.  Try lookup.
-                        Log.d(TAG, "Local contact not found, performing reverse lookup.");
+                        Log.d(TAG, "Contact lookup. Contact provider miss. Searching people api.");
                         lookupPhoneNumber(identification.getNumber());
                     } else {
-                        Log.d(TAG, "Found contact in provider: " + entry);
+                        Log.d(TAG, "Contact lookup. Found in contact provider: " + entry);
                         updateContactEntry(entry, isPrimary, isConference);
                     }
                 }
             });
         } else {
-            Log.d(TAG, "Found contact in cache: " + entry);
+            Log.d(TAG, "Contact lookup. Found in memory cache: " + entry);
             updateContactEntry(entry, isPrimary, isConference);
         }
     }
