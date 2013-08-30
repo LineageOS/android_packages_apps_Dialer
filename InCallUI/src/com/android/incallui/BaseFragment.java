@@ -18,12 +18,9 @@ package com.android.incallui;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.view.View;
-
-import com.android.internal.util.Preconditions;
 
 /**
- *
+ * Parent for all fragments that use Presenters and Ui design.
  */
 public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends Fragment {
 
@@ -50,5 +47,11 @@ public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mPresenter.onUiReady(getUi());
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mPresenter.onUiUnready(getUi());
     }
 }
