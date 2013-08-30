@@ -31,7 +31,10 @@
         android:scaleType="centerCrop"
         android:contentDescription="@string/onHold" />
 
-    <!-- TODO(klp): Add clickable dim effect -->
+    <View android:id="@+id/dim_effect_for_secondary_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/clickable_dim_effect"/>
 
     <!-- Name (or the phone number, if we don't have a name to display). -->
     <TextView android:id="@+id/secondaryCallName"

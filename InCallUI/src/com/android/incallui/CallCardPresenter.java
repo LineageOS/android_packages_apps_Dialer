@@ -480,6 +480,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         mAudioModeProvider.addListener(this);
     }
 
+    public void secondaryPhotoClicked() {
+        CallCommandClient.getInstance().swap();
+    }
+
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
