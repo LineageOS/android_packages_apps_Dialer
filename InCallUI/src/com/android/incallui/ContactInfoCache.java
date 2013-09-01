@@ -36,14 +36,12 @@ import com.google.common.base.Preconditions;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Class responsible for querying Contact Information for Call objects.
- * Can perform asynchronous requests to the Contact Provider for information as well
- * as respond synchronously for any data that it currently has cached from previous
- * queries.
- * This class always gets called from the UI thread so it does not need thread protection.
+ * Class responsible for querying Contact Information for Call objects. Can perform asynchronous
+ * requests to the Contact Provider for information as well as respond synchronously for any data
+ * that it currently has cached from previous queries. This class always gets called from the UI
+ * thread so it does not need thread protection.
  */
 public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadCompleteListener {
 
@@ -52,7 +50,9 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
     private final Context mContext;
     private final HashMap<Integer, ContactCacheEntry> mInfoMap = Maps.newHashMap();
-    private final HashMap<Integer, List<ContactInfoCacheCallback>> mCallBacks = Maps.newHashMap();
+    private final HashMap<Integer, List<ContactInfoCacheCallback>> mCallBacksGuarded = Maps
+            .newHashMap();
+    private final Object mCallBackLock = new Object();
 
     private static ContactInfoCache sCache = null;
 
@@ -95,46 +95,48 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         Preconditions.checkState(Looper.getMainLooper().getThread() == Thread.currentThread());
         Preconditions.checkNotNull(callback);
 
-        // TODO(klp): We dont need to make this call if the call Id already exists in mInfoMap.
         final int callId = identification.getCallId();
         // If the entry already exists, add callback
-        List<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
-        if (callBacks == null) {
-
-            // New lookup
-            callBacks = Lists.newArrayList();
-            callBacks.add(callback);
-            mCallBacks.put(callId, callBacks);
-
-            /**
-             * Performs a query for caller information.
-             * Save any immediate data we get from the query. An asynchronous query may also be made
-             * for any data that we do not already have. Some queries, such as those for voicemail and
-             * emergency call information, will not perform an additional asynchronous query.
-             */
-            CallerInfoUtils.getCallerInfoForCall(mContext, identification,
-                    new CallerInfoAsyncQuery.OnQueryCompleteListener() {
-                        @Override
-                        public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
-                            int presentationMode = identification.getNumberPresentation();
-                            if (ci.contactExists || ci.isEmergencyNumber() || ci
-                                    .isVoiceMailNumber()) {
-                                presentationMode = Call.PRESENTATION_ALLOWED;
-                            }
-
-                            // This starts the photo load.
-                            final ContactCacheEntry cacheEntry = buildEntry(mContext,
-                                    identification.getCallId(), ci, presentationMode, isIncoming,
-                                    ContactInfoCache.this);
-
-                            // Add the contact info to the cache.
-                            mInfoMap.put(callId, cacheEntry);
-                            sendNotification(identification.getCallId(), cacheEntry);
-                        }
-                    });
-        } else {
-            callBacks.add(callback);
+        List<ContactInfoCacheCallback> callBacks;
+        synchronized (mCallBackLock) {
+            callBacks = mCallBacksGuarded.get(callId);
+            if (callBacks != null) {
+                callBacks.add(callback);
+                return;
+            } else {
+                // New lookup
+                callBacks = Lists.newArrayList();
+                callBacks.add(callback);
+                mCallBacksGuarded.put(callId, callBacks);
+            }
         }
+
+        /**
+         * Performs a query for caller information.
+         * Save any immediate data we get from the query. An asynchronous query may also be made
+         * for any data that we do not already have. Some queries, such as those for voicemail and
+         * emergency call information, will not perform an additional asynchronous query.
+         */
+        CallerInfoUtils.getCallerInfoForCall(mContext, identification,
+                new CallerInfoAsyncQuery.OnQueryCompleteListener() {
+                    @Override
+                    public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
+                        int presentationMode = identification.getNumberPresentation();
+                        if (ci.contactExists || ci.isEmergencyNumber() || ci.isVoiceMailNumber()) {
+                            presentationMode = Call.PRESENTATION_ALLOWED;
+                        }
+
+                        // This starts the photo load.
+                        final ContactCacheEntry cacheEntry = buildEntry(mContext,
+                                identification.getCallId(), ci, presentationMode, isIncoming,
+                                ContactInfoCache.this);
+
+                        // Add the contact info to the cache.
+                        mInfoMap.put(callId, cacheEntry);
+                        sendNotification(identification.getCallId(), cacheEntry);
+                    }
+                });
+
     }
 
     /**
@@ -179,8 +181,10 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
      * Blows away the stored cache values.
      */
     public void clearCache() {
-        mInfoMap.clear();
-        mCallBacks.clear();
+        synchronized (mCallBackLock) {
+            mInfoMap.clear();
+            mCallBacksGuarded.clear();
+        }
     }
 
     private static ContactCacheEntry buildEntry(Context context, int callId,
@@ -338,7 +342,12 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
      * Sends the updated information to call the callbacks for the entry.
      */
     private void sendNotification(int callId, ContactCacheEntry entry) {
-        List<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
+        final List<ContactInfoCacheCallback> callBacks;
+        synchronized (mCallBackLock) {
+            callBacks = mCallBacksGuarded.get(callId);
+            // Do not clear mInfoMap here because we still need the data.
+            mCallBacksGuarded.clear();
+        }
         if (callBacks != null) {
             for (ContactInfoCacheCallback callBack : callBacks) {
                 callBack.onContactInfoComplete(callId, entry);
