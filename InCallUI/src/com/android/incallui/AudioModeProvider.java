@@ -84,6 +84,10 @@ import java.util.List;
         return mAudioMode;
     }
 
+    public boolean getMute() {
+        return mMuted;
+    }
+
     /* package */ interface AudioModeListener {
         void onAudioMode(int newMode);
         void onMute(boolean muted);
