@@ -17,16 +17,15 @@
 package com.android.dialer.list;
 
 import android.content.Context;
-import android.content.Intent;
 import android.provider.ContactsContract.QuickContact;
+import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.android.contacts.common.R;
-import com.android.dialer.list.PhoneFavoriteDragAndDropListeners.PhoneFavoriteDragListener;
-import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
+
+import java.util.regex.Pattern;
 
 /**
  * Displays the contact's picture overlayed with their name
@@ -35,6 +34,10 @@ import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
 public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
     private static final String TAG = PhoneFavoriteSquareTileView.class.getSimpleName();
     private ImageButton mSecondaryButton;
+
+    // TODO: Use a more expansive name token separator if needed. For now it should be fine to
+    // not split by dashes, underscore etc.
+    private static final Pattern NAME_TOKEN_SEPARATOR_PATTERN = Pattern.compile("\\s+");
 
     public PhoneFavoriteSquareTileView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -62,5 +65,13 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
     private void launchQuickContact() {
         QuickContact.showQuickContact(getContext(), PhoneFavoriteSquareTileView.this,
                 getLookupUri(), QuickContact.MODE_LARGE, null);
+    }
+
+    @Override
+    protected String getNameForView(String name) {
+        if (TextUtils.isEmpty(name)) return name;
+        final String[] tokens = NAME_TOKEN_SEPARATOR_PATTERN.split(name, 2);
+        if (tokens.length < 1) return name;
+        return tokens[0];
     }
 }
