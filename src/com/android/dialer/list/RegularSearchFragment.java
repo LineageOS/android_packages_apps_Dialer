@@ -15,9 +15,16 @@
  */
 package com.android.dialer.list;
 
+import com.android.contacts.common.list.ContactEntryListAdapter;
+import com.android.dialerbind.ServiceFactory;
+import com.android.dialer.service.CachedNumberLookupService;
+
 public class RegularSearchFragment extends SearchFragment {
 
     private static final int SEARCH_DIRECTORY_RESULT_LIMIT = 5;
+
+    private static final CachedNumberLookupService mCachedNumberLookupService =
+        ServiceFactory.newCachedNumberLookupService();
 
     public RegularSearchFragment() {
         configureDirectorySearch();
@@ -26,5 +33,23 @@ public class RegularSearchFragment extends SearchFragment {
     public void configureDirectorySearch() {
         setDirectorySearchEnabled(true);
         setDirectoryResultLimit(SEARCH_DIRECTORY_RESULT_LIMIT);
+    }
+
+    @Override
+    protected ContactEntryListAdapter createListAdapter() {
+        RegularSearchListAdapter adapter = new RegularSearchListAdapter(getActivity());
+        adapter.setDisplayPhotos(true);
+        adapter.setUseCallableUri(usesCallableUri());
+        return adapter;
+    }
+
+    @Override
+    protected void cacheContactInfo(int position) {
+        if (mCachedNumberLookupService != null) {
+            final RegularSearchListAdapter adapter =
+                (RegularSearchListAdapter) getAdapter();
+            mCachedNumberLookupService.addContact(getContext(),
+                    adapter.getContactInfo(position));
+        }
     }
 }
