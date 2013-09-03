@@ -32,6 +32,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private Call mCall;
     private AudioModeProvider mAudioModeProvider;
     private ProximitySensor mProximitySensor;
+    private boolean mAutomaticallyMuted = false;
+    private boolean mPreviousMuteState = false;
 
     public CallButtonPresenter() {
     }
@@ -166,6 +168,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void addCallClicked() {
+        // Automatically mute the current call
+        mAutomaticallyMuted = true;
+        mPreviousMuteState = mAudioModeProvider.getMute();
+        getUi().setMute(true);
+
         CallCommandClient.getInstance().addCall();
     }
 
@@ -204,6 +211,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             ui.showMerge(call.can(Capabilities.MERGE_CALLS));
             ui.showSwap(call.can(Capabilities.SWAP_CALLS));
             ui.showAddCall(call.can(Capabilities.ADD_CALL));
+
+            // Restore the previous mute state
+            if (mAutomaticallyMuted && mAudioModeProvider.getMute() != mPreviousMuteState) {
+                ui.setMute(mPreviousMuteState);
+                mAutomaticallyMuted = false;
+            }
         }
     }
 
