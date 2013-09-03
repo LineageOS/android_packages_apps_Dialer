@@ -24,7 +24,7 @@ import com.android.contacts.common.util.UriUtils;
 /**
  * Information for a contact as needed by the Call Log.
  */
-public final class ContactInfo {
+public class ContactInfo {
     public Uri lookupUri;
     public String name;
     public int type;
