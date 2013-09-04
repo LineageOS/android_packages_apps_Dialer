@@ -202,12 +202,19 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setSecondary(boolean show, String name, String label, Drawable photo) {
+    public void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
+            Drawable photo) {
 
         if (show) {
             showAndInitializeSecondaryCallInfo();
-
             mSecondaryCallName.setText(name);
+
+            int nameDirection = View.TEXT_DIRECTION_INHERIT;
+            if (nameIsNumber) {
+                nameDirection = View.TEXT_DIRECTION_LTR;
+            }
+            mSecondaryCallName.setTextDirection(nameDirection);
+
             setDrawableToImageView(mSecondaryPhoto, photo);
         } else {
             mSecondaryCallInfo.setVisibility(View.GONE);

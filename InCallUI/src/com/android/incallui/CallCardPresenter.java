@@ -21,6 +21,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
@@ -368,11 +369,15 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         if (mSecondaryContactInfo != null) {
             Log.d(TAG, "updateSecondaryDisplayInfo() " + mSecondaryContactInfo);
-            ui.setSecondary(true, getNameForCall(mSecondaryContactInfo),
-                    mSecondaryContactInfo.label, mSecondaryContactInfo.photo);
+            final String nameForCall = getNameForCall(mSecondaryContactInfo);
+
+            final boolean nameIsNumber = nameForCall != null && nameForCall.equals(
+                    mSecondaryContactInfo.number);
+            ui.setSecondary(true, nameForCall, nameIsNumber, mSecondaryContactInfo.label,
+                    mSecondaryContactInfo.photo);
         } else {
             // reset to nothing so that it starts off blank next time we use it.
-            ui.setSecondary(false, null, null, null);
+            ui.setSecondary(false, null, false, null, null);
         }
     }
 
@@ -490,10 +495,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setVisible(boolean on);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isConference, String gatewayLabel, String gatewayNumber);
-        void setSecondary(boolean show, String name, String label, Drawable photo);
+        void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
+                Drawable photo);
         void setSecondaryImage(Bitmap bitmap);
         void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn);
-
         void setPrimaryCallElapsedTime(boolean show, String duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Bitmap bitmap);
