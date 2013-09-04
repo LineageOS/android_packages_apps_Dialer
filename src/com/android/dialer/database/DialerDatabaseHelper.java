@@ -337,6 +337,10 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        setupTables(db);
+    }
+
+    private void setupTables(SQLiteDatabase db) {
         dropTables(db);
         db.execSQL("CREATE TABLE " + Tables.SMARTDIAL_TABLE + " (" +
                 SmartDialDbColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -390,7 +394,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         }
 
         if (oldVersion < 4) {
-            onCreate(db);
+            setupTables(db);
             return;
         }
 
