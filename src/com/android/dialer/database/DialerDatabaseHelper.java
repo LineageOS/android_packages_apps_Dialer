@@ -71,7 +71,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      *   0-98   KeyLimePie
      * </pre>
      */
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "dialer.db";
 
     /**
@@ -337,6 +337,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        dropTables(db);
         db.execSQL("CREATE TABLE " + Tables.SMARTDIAL_TABLE + " (" +
                 SmartDialDbColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 SmartDialDbColumns.DATA_ID + " INTEGER, " +
@@ -369,6 +370,12 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         resetSmartDialLastUpdatedTime();
     }
 
+    public void dropTables(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + Tables.PREFIX_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Tables.SMARTDIAL_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Tables.PROPERTIES);
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldNumber, int newNumber) {
         // Disregard the old version and new versions provided by SQLiteOpenHelper, we will read
@@ -382,19 +389,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             Log.e(TAG, "Malformed database version..recreating database");
         }
 
-        if (oldVersion < 2) {
-            db.execSQL("DROP TABLE IF EXISTS " + Tables.PREFIX_TABLE);
-            db.execSQL("DROP TABLE IF EXISTS " + Tables.SMARTDIAL_TABLE);
+        if (oldVersion < 4) {
             onCreate(db);
             return;
-        }
-
-        if (oldVersion < 3) {
-            db.execSQL("CREATE TABLE " + Tables.PROPERTIES + " (" +
-                    PropertiesColumns.PROPERTY_KEY + " TEXT PRIMARY KEY, " +
-                    PropertiesColumns.PROPERTY_VALUE + " TEXT " +
-                    ");");
-            oldVersion = 3;
         }
 
         if (oldVersion != DATABASE_VERSION) {
@@ -447,7 +444,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public int getPropertyAsInt(SQLiteDatabase db, String key, int defaultValue) {
-        final String stored = getProperty(db, DATABASE_VERSION_PROPERTY, "");
+        final String stored = getProperty(db, key, "");
         try {
             return Integer.parseInt(stored);
         } catch (NumberFormatException e) {
