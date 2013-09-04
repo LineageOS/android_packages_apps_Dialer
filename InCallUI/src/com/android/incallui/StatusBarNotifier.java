@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
@@ -93,9 +94,18 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // it has available, and may make a subsequent call later (same thread) if it had to
         // call into the contacts provider for more data.
         mContactInfoCache.findInfo(call.getIdentification(), true, new ContactInfoCacheCallback() {
+            private ContactCacheEntry mEntry;
+
             @Override
             public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
+                mEntry = entry;
                 buildAndSendNotification(InCallState.INCOMING, call, entry, false);
+            }
+
+            @Override
+            public void onImageLoadComplete(int callId, Bitmap photo) {
+                mEntry.photo = new BitmapDrawable(mContext.getResources(), photo);
+                buildAndSendNotification(InCallState.INCOMING, call, mEntry, false);
             }
         });
     }

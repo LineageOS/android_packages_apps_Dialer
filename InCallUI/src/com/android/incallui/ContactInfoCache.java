@@ -174,7 +174,22 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             entry.photo = null;
         }
 
-        sendNotification(callId, entry);
+        final List<ContactInfoCacheCallback> callBacks;
+        synchronized (mCallBackLock) {
+            callBacks = mCallBacksGuarded.get(callId);
+            // Do not clear mInfoMap here because we still need the data.
+            mCallBacksGuarded.clear();
+        }
+        if (callBacks != null) {
+            for (ContactInfoCacheCallback callBack : callBacks) {
+                if (entry.photo == null) {
+                    callBack.onImageLoadComplete(callId, null);
+                } else {
+                    callBack.onImageLoadComplete(callId, ((BitmapDrawable) entry.photo)
+                            .getBitmap());
+                }
+            }
+        }
     }
 
     /**
@@ -342,12 +357,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
      * Sends the updated information to call the callbacks for the entry.
      */
     private void sendNotification(int callId, ContactCacheEntry entry) {
-        final List<ContactInfoCacheCallback> callBacks;
-        synchronized (mCallBackLock) {
-            callBacks = mCallBacksGuarded.get(callId);
-            // Do not clear mInfoMap here because we still need the data.
-            mCallBacksGuarded.clear();
-        }
+        final List<ContactInfoCacheCallback> callBacks = mCallBacksGuarded.get(callId);;
         if (callBacks != null) {
             for (ContactInfoCacheCallback callBack : callBacks) {
                 callBack.onContactInfoComplete(callId, entry);
@@ -373,6 +383,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
      */
     public interface ContactInfoCacheCallback {
         public void onContactInfoComplete(int callId, ContactCacheEntry entry);
+        public void onImageLoadComplete(int callId, Bitmap photo);
     }
 
     public static class ContactCacheEntry {
