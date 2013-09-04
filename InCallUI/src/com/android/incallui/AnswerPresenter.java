@@ -46,6 +46,18 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     @Override
+    public void onUiUnready(AnswerUi ui) {
+        super.onUiUnready(ui);
+        CallList.getInstance().removeListener(this);
+
+        // This is necessary because the activity can be destroyed while an incoming call exists.
+        // This happens when back button is pressed while incoming call is still being shown.
+        if (mCallId != Call.INVALID_CALL_ID) {
+            CallList.getInstance().removeCallUpdateListener(mCallId, this);
+        }
+    }
+
+    @Override
     public void onCallListChange(CallList callList) {
         // no-op
     }
