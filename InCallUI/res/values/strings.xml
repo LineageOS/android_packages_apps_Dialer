@@ -17,8 +17,12 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- Official label for the in-call UI -->
-    <string name="inCallLabel">InCallUI</string>
+    <!-- Official label of the phone app, as seen in "Manage Applications"
+         and other settings UIs. -->
+    <string name="phoneAppLabel" product="default">Phone</string>
+
+    <!-- Official label for the in-call UI. DO NOT TRANSLATE. -->
+    <string name="inCallLabel" translate="false">InCallUI</string>
 
     <!-- Call status -->
 
