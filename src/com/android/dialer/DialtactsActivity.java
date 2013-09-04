@@ -501,9 +501,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     private void hideDialpadAndSearchUi() {
-        if (getInSearchUi()) {
-            exitSearchUi();
-        }
+        mSearchView.setText(null);
         hideDialpadFragment(false, true);
     }
 
