@@ -121,6 +121,15 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
     private static final int PIN_LIMIT = 20;
 
+    /**
+     * The soft limit on how many contact tiles to show.
+     * NOTE This soft limit would not restrict the number of starred contacts to show, rather
+     * 1. If the count of starred contacts is less than this limit, show 20 tiles total.
+     * 2. If the count of starred contacts is more than or equal to this limit,
+     * show all starred tiles and no frequents.
+     */
+    private static final int TILES_SOFT_LIMIT = 20;
+
     final Comparator<ContactEntry> mContactEntryComparator = new Comparator<ContactEntry>() {
         @Override
         public int compare(ContactEntry lhs, ContactEntry rhs) {
@@ -254,6 +263,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
         final Object dummy = new Object();
 
+        // Track the length of {@link #mContactEntries} and compare to {@link #TILES_SOFT_LIMIT}.
+        int counter = 0;
+
         while (cursor.moveToNext()) {
 
             final int starred = cursor.getInt(mStarredIndex);
@@ -261,6 +273,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
             if (starred > 0) {
                 id = cursor.getLong(mIdIndex);
+            } else if (counter >= TILES_SOFT_LIMIT) {
+                break;
             } else {
                 // The contact id for frequent contacts is stored in the .contact_id field rather
                 // than the _id field
@@ -305,6 +319,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
             contact.pinned = pinned;
             mContactEntries.add(contact);
+
+            counter++;
         }
 
         mAwaitingRemove = false;
