@@ -77,10 +77,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      */
     private static int LOADER_ID_CONTACT_TILE = 1;
 
-    public interface OnPhoneFavoriteFragmentStartedListener {
-        public void onPhoneFavoriteFragmentStarted();
-    }
-
     public interface OnShowAllContactsListener {
         public void onShowAllContacts();
     }
@@ -258,13 +254,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         super.onStart();
 
         final Activity activity = getActivity();
-
-        try {
-            ((OnPhoneFavoriteFragmentStartedListener) activity).onPhoneFavoriteFragmentStarted();
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnPhoneFavoriteFragmentStartedListener");
-        }
 
         try {
             mActivityScrollListener = (OnListFragmentScrolledListener) activity;
