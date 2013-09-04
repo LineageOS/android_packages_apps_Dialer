@@ -48,10 +48,8 @@ public class SmartDialSearchFragment extends SearchFragment {
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         // Smart dialing does not support Directory Load, falls back to normal search instead.
         if (id == getDirectoryLoaderId()) {
-            Log.v(TAG, "Directory load");
             return super.onCreateLoader(id, args);
         } else {
-            Log.v(TAG, "Creating loader");
             final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
             SmartDialCursorLoader loader = new SmartDialCursorLoader(super.getContext());
             adapter.configureLoader(loader);
