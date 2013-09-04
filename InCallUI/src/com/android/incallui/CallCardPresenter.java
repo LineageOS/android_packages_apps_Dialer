@@ -69,8 +69,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     public void init(Context context, PhoneNumberService phoneNumberService, Call call) {
         mContext = Preconditions.checkNotNull(context);
-        mPhoneNumberService = Preconditions.checkNotNull(phoneNumberService);
-        mContext = context;
         mPhoneNumberService = phoneNumberService;
 
         // Call may be null if disconnect happened already.
@@ -448,7 +446,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private void fetchImage(final String url) {
-        if (url != null) {
+        if (url != null && mPhoneNumberService != null) {
             mPhoneNumberService.fetchImage(url, new PhoneNumberService.ImageLookupListener() {
                 @Override
                 public void onImageFetchComplete(Bitmap bitmap) {
