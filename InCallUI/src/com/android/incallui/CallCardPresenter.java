@@ -259,6 +259,16 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                         updateContactEntry(entry, isPrimary, isConference);
                     }
                 }
+
+                @Override
+                public void onImageLoadComplete(int callId, Bitmap photo) {
+                    if (callId == mPrimary.getCallId()) {
+                        getUi().setPrimaryImage(photo);
+                    } else if (callId == mSecondary.getCallId()) {
+                        getUi().setSecondaryImage(photo);
+                    }
+
+                }
             });
         } else {
             Log.d(TAG, "Contact lookup. Found in memory cache: " + entry);
@@ -481,6 +491,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isConference, String gatewayLabel, String gatewayNumber);
         void setSecondary(boolean show, String name, String label, Drawable photo);
+        void setSecondaryImage(Bitmap bitmap);
         void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn);
 
         void setPrimaryCallElapsedTime(boolean show, String duration);

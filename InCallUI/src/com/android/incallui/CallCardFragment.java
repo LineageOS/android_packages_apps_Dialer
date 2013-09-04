@@ -215,6 +215,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
+    public void setSecondaryImage(Bitmap bitmap) {
+        if (bitmap != null) {
+            setDrawableToImageView(mSecondaryPhoto, new BitmapDrawable(getResources(), bitmap));
+        }
+    }
+
+    @Override
     public void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn) {
         String callStateLabel = null;
 
