@@ -80,7 +80,7 @@ import com.android.dialer.R;
     private void configureCallSecondaryAction(CallLogListItemViews views,
             PhoneCallDetails details) {
         views.secondaryActionView.setVisibility(View.VISIBLE);
-        views.secondaryActionView.setImageResource(R.drawable.ic_ab_dialer_holo_light);
+        views.secondaryActionView.setImageResource(R.drawable.ic_phone_dk);
         views.secondaryActionView.setContentDescription(getCallActionDescription(details));
     }
 
