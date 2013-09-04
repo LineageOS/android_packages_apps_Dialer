@@ -118,7 +118,7 @@
     <string name="menu_callNumber" msgid="997146291983360266">"დარეკვა <xliff:g id="NUMBER">%s</xliff:g>-ზე"</string>
     <string name="unknown" msgid="740067747858270469">"უცნობი"</string>
     <string name="voicemail" msgid="3851469869202611441">"ხმოვანი ფოსტა"</string>
-    <string name="private_num" msgid="6374339738119166953">"კერძო ნომერი"</string>
+    <string name="private_num" msgid="6374339738119166953">"დაფარული ნომერი"</string>
     <string name="payphone" msgid="4864313342828942922">"საზოგადოებრივი ტელეფონი"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"კლავიატურის გამოყენება დასარეკად"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"დარეკეთ ზარის დასამატებლად"</string>
