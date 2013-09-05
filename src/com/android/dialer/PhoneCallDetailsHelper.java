@@ -72,6 +72,7 @@ public class PhoneCallDetailsHelper {
         for (int index = 0; index < count && index < MAX_CALL_TYPE_ICONS; ++index) {
             views.callTypeIcons.add(details.callTypes[index]);
         }
+        views.callTypeIcons.requestLayout();
         views.callTypeIcons.setVisibility(View.VISIBLE);
 
         // Show the total call count only if there are more than the maximum number of icons.
