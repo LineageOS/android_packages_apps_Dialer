@@ -32,7 +32,8 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/button_cluster_side_padding"
         android:paddingEnd="@dimen/button_cluster_side_padding"
-        android:background="?android:attr/selectableItemBackground">
+        android:background="?android:attr/selectableItemBackground"
+        android:visibility="gone">
         <!-- The entire LinearLayout here is clickable, so we don't
              care about clicks on the ImageButton itself. -->
         <ImageButton android:id="@+id/manageConferenceButtonImage"
@@ -55,7 +56,8 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/button_cluster_side_padding"
         android:paddingEnd="@dimen/button_cluster_side_padding"
-        android:background="?android:attr/selectableItemBackground">
+        android:background="?android:attr/selectableItemBackground"
+        android:visibility="gone">
         <!-- The entire LinearLayout here is clickable, so we don't
              care about clicks on the ImageButton itself. -->
         <ImageButton android:id="@+id/cdmaMergeButtonImage"

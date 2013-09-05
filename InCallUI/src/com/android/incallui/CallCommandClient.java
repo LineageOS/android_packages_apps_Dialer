@@ -79,7 +79,20 @@ public class CallCommandClient {
         try {
             mCommandService.disconnectCall(callId);
         } catch (RemoteException e) {
-            Log.e(this, "Error answering call.", e);
+            Log.e(this, "Error disconnecting call.", e);
+        }
+    }
+
+    public void separateCall(int callId) {
+        Log.i(this, "separate Call: " + callId);
+        if (mCommandService == null) {
+            Log.e(this, "Cannot separate call; CallCommandService == null");
+            return;
+        }
+        try {
+            mCommandService.separateCall(callId);
+        } catch (RemoteException e) {
+            Log.e(this, "Error separating call.", e);
         }
     }
 

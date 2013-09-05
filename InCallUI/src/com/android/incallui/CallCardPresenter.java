@@ -156,13 +156,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (secondary == null) {
             // Secondary call may have ended.  Update the ui.
             mSecondaryContactInfo = null;
-            updateSecondaryDisplayInfo();
+            updateSecondaryDisplayInfo(false);
         } else {
             if (mSecondary == null || mSecondary.getCallId() != secondary.getCallId()) {
                 // secondary call has changed
                 mSecondaryContactInfo = ContactInfoCache.buildCacheEntryFromCall(mContext,
                         secondary.getIdentification(), secondary.getState() == Call.State.INCOMING);
-                updateSecondaryDisplayInfo();
+                updateSecondaryDisplayInfo(secondary.isConferenceCall());
                 startContactInfoSearch(secondary.getIdentification(), false,
                         secondary.isConferenceCall(), secondary.getState() == Call.State.INCOMING);
             }
@@ -289,7 +289,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             updatePrimaryDisplayInfo(entry, isConference);
         } else {
             mSecondaryContactInfo = entry;
-            updateSecondaryDisplayInfo();
+            updateSecondaryDisplayInfo(isConference);
         }
     }
 
@@ -358,7 +358,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     }
 
-    private void updateSecondaryDisplayInfo() {
+    private void updateSecondaryDisplayInfo(boolean isConference) {
 
         final CallCardUi ui = getUi();
         if (ui == null) {
@@ -372,10 +372,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             final boolean nameIsNumber = nameForCall != null && nameForCall.equals(
                     mSecondaryContactInfo.number);
             ui.setSecondary(true, nameForCall, nameIsNumber, mSecondaryContactInfo.label,
-                    mSecondaryContactInfo.photo);
+                    mSecondaryContactInfo.photo, isConference);
         } else {
             // reset to nothing so that it starts off blank next time we use it.
-            ui.setSecondary(false, null, false, null, null);
+            ui.setSecondary(false, null, false, null, null, false);
         }
     }
 
@@ -494,7 +494,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isConference, String gatewayLabel, String gatewayNumber);
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-                Drawable photo);
+                Drawable photo, boolean isConference);
         void setSecondaryImage(Bitmap bitmap);
         void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn);
         void setPrimaryCallElapsedTime(boolean show, String duration);

@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -51,6 +52,9 @@ public class CallButtonFragment
     private PopupMenu mAudioModePopup;
     private boolean mAudioModePopupVisible;
     private View mEndCallButton;
+    private View mExtraRowButton;
+    private View mManageConferenceButton;
+    private View mCDMAMergeButton;
 
     @Override
     CallButtonPresenter createPresenter() {
@@ -73,6 +77,17 @@ public class CallButtonFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View parent = inflater.inflate(R.layout.call_button_fragment, container, false);
+
+        mExtraRowButton = parent.findViewById(R.id.extraButtonRow);
+
+        mManageConferenceButton = parent.findViewById(R.id.manageConferenceButton);
+        mManageConferenceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().manageConferenceButtonClicked();
+            }
+        });
+        mCDMAMergeButton = parent.findViewById(R.id.cdmaMergeButton);
 
         mEndCallButton = parent.findViewById(R.id.endButton);
         mEndCallButton.setOnClickListener(new View.OnClickListener() {
@@ -448,5 +463,40 @@ public class CallButtonFragment
         if (getActivity() != null && getActivity() instanceof InCallActivity) {
             ((InCallActivity) getActivity()).displayDialpad(value);
         }
+    }
+
+    @Override
+    public boolean isDialpadVisible() {
+        if (getActivity() != null && getActivity() instanceof InCallActivity) {
+            return ((InCallActivity) getActivity()).isDialpadVisible();
+        }
+        return false;
+    }
+
+    @Override
+    public void displayManageConferencePanel(boolean value) {
+        if (getActivity() != null && getActivity() instanceof InCallActivity) {
+            ((InCallActivity) getActivity()).displayManageConferencePanel(value);
+        }
+    }
+
+
+    @Override
+    public void showManageConferenceCallButton() {
+        mExtraRowButton.setVisibility(View.VISIBLE);
+        mManageConferenceButton.setVisibility(View.VISIBLE);
+        mCDMAMergeButton.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showCDMAMergeButton() {
+        mExtraRowButton.setVisibility(View.VISIBLE);
+        mManageConferenceButton.setVisibility(View.GONE);
+        mCDMAMergeButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideExtraRow() {
+       mExtraRowButton.setVisibility(View.GONE);
     }
 }

@@ -185,6 +185,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         if (isConference) {
             name = getView().getResources().getString(R.string.card_title_conf_call);
             photo = getView().getResources().getDrawable(R.drawable.picture_conference);
+            nameIsNumber = false;
         }
 
         setPrimaryPhoneNumber(number);
@@ -203,9 +204,15 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-            Drawable photo) {
+            Drawable photo, boolean isConference) {
 
         if (show) {
+            if (isConference) {
+                name = getView().getResources().getString(R.string.card_title_conf_call);
+                photo = getView().getResources().getDrawable(R.drawable.picture_conference);
+                nameIsNumber = false;
+            }
+
             showAndInitializeSecondaryCallInfo();
             mSecondaryCallName.setText(name);
 
