@@ -615,6 +615,9 @@ public class CallLogAdapter extends GroupingListAdapter
             setPhoto(views, photoId, lookupUri);
         }
 
+        views.quickContactView.setContentDescription(views.phoneCallDetailsViews.nameView.
+                getText());
+
         // Listen for the first draw
         if (mViewTreeObserver == null) {
             mViewTreeObserver = view.getViewTreeObserver();
