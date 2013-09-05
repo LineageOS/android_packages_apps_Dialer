@@ -56,20 +56,21 @@ public class CallHandlerService extends Service {
 
     @Override
     public void onCreate() {
-        Log.d(this, "onCreate started");
+        Log.i(this, "creating");
         super.onCreate();
 
         mMainHandler = new MainHandler();
         mCallList = CallList.getInstance();
-        mAudioModeProvider = new AudioModeProvider();
+        mAudioModeProvider = AudioModeProvider.getInstance();
         mInCallPresenter = InCallPresenter.getInstance();
+
         mInCallPresenter.setUp(getApplicationContext(), mCallList, mAudioModeProvider);
         Log.d(this, "onCreate finished");
     }
 
     @Override
     public void onDestroy() {
-        Log.d(this, "onDestroy started");
+        Log.i(this, "destroying");
 
         // Remove all pending messages before nulling out handler
         for (int i = 1; i <= LARGEST_MSG_ID; i++) {
@@ -94,14 +95,17 @@ public class CallHandlerService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d(this, "onBind");
+        Log.i(this, "onBind");
         return mBinder;
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
-        Log.d(this, "onUnbind");
-        return true;
+        Log.i(this, "onUnbind");
+
+        // Returning true here means we get called on rebind, which is a feature we do not need.
+        // Return false so that all reconections happen with a call to onBind().
+        return false;
     }
 
     private final ICallHandlerService.Stub mBinder = new ICallHandlerService.Stub() {
@@ -119,7 +123,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onDisconnect(Call call) {
             try {
-                Log.d(CallHandlerService.this, "onDisconnected: " + call);
+                Log.i(CallHandlerService.this, "onDisconnected: " + call);
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_DISCONNECT_CALL, call));
             } catch (Exception e) {
                 Log.e(TAG, "Error processing onDisconnect() call.", e);
@@ -129,7 +133,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onIncoming(Call call, List<String> textResponses) {
             try {
-                Log.d(CallHandlerService.this, "onIncomingCall: " + call);
+                Log.i(CallHandlerService.this, "onIncomingCall: " + call);
 
                 // TODO(klp): Add text responses to the call object.
                 Map.Entry<Call, List<String>> incomingCall
@@ -145,7 +149,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onUpdate(List<Call> calls) {
             try {
-                Log.d(CallHandlerService.this, "onUpdate " + calls.toString());
+                Log.i(CallHandlerService.this, "onUpdate " + calls.toString());
 
                 // TODO(klp): Add use of fullUpdate to message
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_MULTI_CALL, calls));
@@ -157,7 +161,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onAudioModeChange(int mode, boolean muted) {
             try {
-                Log.d(CallHandlerService.this, "onAudioModeChange : " + AudioMode.toString(mode));
+                Log.i(CallHandlerService.this, "onAudioModeChange : " + AudioMode.toString(mode));
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_AUDIO_MODE, mode,
                             muted ? 1 : 0, null));
             } catch (Exception e) {
@@ -168,7 +172,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onSupportedAudioModeChange(int modeMask) {
             try {
-                Log.d(CallHandlerService.this, "onSupportedAudioModeChange : " + AudioMode.toString(
+                Log.i(CallHandlerService.this, "onSupportedAudioModeChange : " + AudioMode.toString(
                         modeMask));
 
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_SUPPORTED_AUDIO_MODE,

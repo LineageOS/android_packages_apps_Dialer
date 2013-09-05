@@ -58,14 +58,17 @@ public class InCallActivity extends Activity {
         // Inflate everything in incall_screen.xml and add it to the screen.
         setContentView(R.layout.incall_screen);
 
+        initializeInCall();
         Log.d(this, "onCreate(): exit");
     }
 
     @Override
     protected void onStart() {
+        Log.d(this, "onStart()...");
         super.onStart();
 
-        initializeInCall();
+        // setting activity should be last thing in setup process
+        InCallPresenter.getInstance().setActivity(this);
     }
 
     @Override
@@ -98,7 +101,7 @@ public class InCallActivity extends Activity {
     protected void onDestroy() {
         Log.d(this, "onDestroy()...  this = " + this);
 
-        tearDownPresenters();
+        InCallPresenter.getInstance().setActivity(null);
 
         super.onDestroy();
     }
@@ -293,36 +296,6 @@ public class InCallActivity extends Activity {
                     .findFragmentById(R.id.conferenceManagerFragment);
             mConferenceManagerFragment.getView().setVisibility(View.INVISIBLE);
         }
-        setUpPresenterCallbacks();
-    }
-
-    private void setUpPresenterCallbacks() {
-        InCallPresenter mainPresenter = InCallPresenter.getInstance();
-
-        mCallButtonFragment.getPresenter().setAudioModeProvider(
-                mainPresenter.getAudioModeProvider());
-        mCallButtonFragment.getPresenter().setProximitySensor(
-                mainPresenter.getProximitySensor());
-        final CallCardPresenter presenter = mCallCardFragment.getPresenter();
-        presenter.setAudioModeProvider(mainPresenter.getAudioModeProvider());
-
-        mainPresenter.addListener(mCallButtonFragment.getPresenter());
-        mainPresenter.addListener(mCallCardFragment.getPresenter());
-        mainPresenter.addListener(mConferenceManagerFragment.getPresenter());
-
-        // setting activity should be last thing in setup process
-        mainPresenter.setActivity(this);
-    }
-
-    private void tearDownPresenters() {
-        Log.d(this, "Tearing down presenters.");
-        InCallPresenter mainPresenter = InCallPresenter.getInstance();
-
-        mainPresenter.removeListener(mCallButtonFragment.getPresenter());
-        mainPresenter.removeListener(mCallCardFragment.getPresenter());
-        mainPresenter.removeListener(mConferenceManagerFragment.getPresenter());
-
-        mainPresenter.setActivity(null);
     }
 
     private void toast(String text) {
