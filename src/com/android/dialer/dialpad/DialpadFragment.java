@@ -36,10 +36,11 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
-import android.provider.Contacts.Intents.Insert;
+import android.provider.ContactsContract.Contacts;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
+import android.provider.ContactsContract.Intents;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
@@ -766,16 +767,9 @@ public class DialpadFragment extends Fragment
         } else {
             final CharSequence digits = mDigits.getText();
             // Put the current digits string into an intent
-            addToContactMenuItem.setIntent(getAddToContactIntent(digits));
+            addToContactMenuItem.setIntent(DialtactsActivity.getAddNumberToContactIntent(digits));
             addToContactMenuItem.setVisible(true);
         }
-    }
-
-    private static Intent getAddToContactIntent(CharSequence digits) {
-        final Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
-        intent.putExtra(Insert.PHONE, digits);
-        intent.setType(People.CONTENT_ITEM_TYPE);
-        return intent;
     }
 
     private void keyPressed(int keyCode) {
