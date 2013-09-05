@@ -262,7 +262,7 @@
              fullScreenIntent of a notification (for incoming calls.) -->
         <activity android:name="com.android.incallui.InCallActivity"
                   android:theme="@style/Theme.InCallScreen"
-                  android:label="@string/inCallLabel"
+                  android:label="@string/phoneAppLabel"
                   android:excludeFromRecents="true"
                   android:launchMode="singleInstance"
                   android:screenOrientation="nosensor"
