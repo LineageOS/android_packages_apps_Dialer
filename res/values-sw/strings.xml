@@ -93,6 +93,7 @@
     <string name="add_wait" msgid="3360818652790319634">"Ongeza kusubiri"</string>
     <string name="call_settings" msgid="7666474782093693667">"Mipangilio"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Anwani mpya"</string>
+    <string name="menu_allContacts" msgid="6948308384034051670">"Anwani zote"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Maelezo ya simu"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"Haikuweza kusoma maelezo ya simu iliyoombwa."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Tumia kibao cha kuchapa cha sauti na kugusa"</string>

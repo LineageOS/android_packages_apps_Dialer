@@ -134,6 +134,8 @@
     <!-- no translation found for call_settings (7666474782093693667) -->
     <skip />
     <string name="menu_newContact" msgid="1209922412763274638">"Nov contact"</string>
+    <!-- no translation found for menu_allContacts (6948308384034051670) -->
+    <skip />
     <string name="callDetailTitle" msgid="5340227785196217938">"Detagls dal clom"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"Impussibel da leger ils detagls dal clom dumandà."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Utilisar la tastatura dal telefon"</string>

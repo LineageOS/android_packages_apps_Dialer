@@ -93,6 +93,7 @@
     <string name="add_wait" msgid="3360818652790319634">"රැඳී සිටීම එක් කරන්න"</string>
     <string name="call_settings" msgid="7666474782093693667">"සැකසුම්"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"නව සම්බන්ධතාවයක්"</string>
+    <string name="menu_allContacts" msgid="6948308384034051670">"සියලුම සම්බන්ධතා"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"ඇමතුම් විස්තර"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"අයැදුම් කළ ඇමතුම සඳහා විස්තර කියවිය නොහැකි විය."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"ස්පර්ශ නාද යතුරුපෑඩය භාවිතා කරන්න"</string>
