@@ -37,23 +37,26 @@
             android:id="@+id/one"
             style="@style/DialtactsDialpadButtonStyle"
             android:clickable="true" >
-            <TextView
-                android:id="@+id/dialpad_key_number"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dialpad_primary_text_color"
-                android:textSize="@dimen/dialpad_key_numbers_size"
-                android:fontFamily="sans-serif-light"
-                android:layout_centerInParent="true" />
-            <ImageView
-                android:id="@+id/dialpad_key_voicemail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_dial_action_vm"
-                android:paddingRight="11dp"
-                android:layout_alignBaseline="@id/dialpad_key_number"
-                android:baselineAlignBottom="true"
-                android:layout_alignParentRight="true" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center" >
+                <TextView
+                    android:id="@+id/dialpad_key_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dialpad_primary_text_color"
+                    android:textSize="@dimen/dialpad_key_numbers_size"
+                    android:fontFamily="sans-serif-light"/>
+                <ImageView
+                    android:id="@+id/dialpad_key_voicemail"
+                    android:layout_width="@dimen/dialpad_key_letters_width"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_dial_action_vm"
+                    android:paddingLeft="11dp"
+                    android:scaleType="fitStart"
+                    android:baselineAlignBottom="true" />
+            </LinearLayout>
         </com.android.dialer.dialpad.DialpadKeyButton>
         <include layout="@layout/dialpad_key" android:id="@+id/two"/>
         <include layout="@layout/dialpad_key" android:id="@+id/three"/>
@@ -90,7 +93,8 @@
                 android:textColor="@color/dialpad_secondary_text_color"
                 android:textSize="@dimen/dialpad_key_special_characters_size"
                 android:fontFamily="sans-serif-light"
-                android:layout_centerInParent="true" />
+                android:paddingRight="@dimen/dialpad_key_letters_width"
+                android:layout_gravity="center" />
         </com.android.dialer.dialpad.DialpadKeyButton>
         <include layout="@layout/dialpad_key" android:id="@+id/zero"/>
         <com.android.dialer.dialpad.DialpadKeyButton
@@ -105,7 +109,8 @@
                 android:textColor="@color/dialpad_secondary_text_color"
                 android:textSize="@dimen/dialpad_key_special_characters_size"
                 android:fontFamily="sans-serif-light"
-                android:layout_centerInParent="true" />
+                android:paddingRight="@dimen/dialpad_key_letters_width"
+                android:layout_gravity="center" />
         </com.android.dialer.dialpad.DialpadKeyButton>
     </TableRow>
 </TableLayout>

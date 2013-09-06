@@ -52,7 +52,10 @@
     <!-- Text dimensions for dialpad keys -->
     <dimen name="dialpad_key_numbers_size">40dp</dimen>
     <dimen name="dialpad_key_letters_size">11dp</dimen>
+    <dimen name="dialpad_key_plus_size">15dp</dimen>
     <dimen name="dialpad_key_special_characters_size">25dp</dimen>
+    <dimen name="dialpad_key_letters_width">41dp</dimen>
+
 
     <dimen name="fake_action_bar_height">48dp</dimen>
     <!-- Min with of fake menu buttons, which should be same as ActionBar's one -->
