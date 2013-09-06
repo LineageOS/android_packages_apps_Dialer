@@ -93,6 +93,7 @@
     <string name="add_wait" msgid="3360818652790319634">"पर्खाइ थप्नुहोस्"</string>
     <string name="call_settings" msgid="7666474782093693667">"सेटिङहरू"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"नयाँ सम्पर्क"</string>
+    <string name="menu_allContacts" msgid="6948308384034051670">"सबै सम्पर्कहरू"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"कल विवरण"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"अनुरोध गरिएको कलको जानकारी पढ्न सकेन।"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"स्पर्श टोन किप्याडको प्रयोग गर्नुहोस्"</string>
