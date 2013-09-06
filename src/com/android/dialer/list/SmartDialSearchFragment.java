@@ -38,6 +38,11 @@ public class SmartDialSearchFragment extends SearchFragment {
         SmartDialNumberListAdapter adapter = new SmartDialNumberListAdapter(getActivity());
         adapter.setUseCallableUri(super.usesCallableUri());
         adapter.setQuickContactEnabled(true);
+        // Disable the direct call shortcut for the smart dial fragment, since the call button
+        // will already be showing anyway.
+        adapter.setShortcutEnabled(SmartDialNumberListAdapter.SHORTCUT_DIRECT_CALL, false);
+        adapter.setShortcutEnabled(SmartDialNumberListAdapter.SHORTCUT_ADD_NEW_NAMED_CONTACT,
+                false);
         return adapter;
     }
 

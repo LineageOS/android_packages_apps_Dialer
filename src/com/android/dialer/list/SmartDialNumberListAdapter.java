@@ -37,7 +37,7 @@ import java.util.ArrayList;
 /**
  * List adapter to display the SmartDial search results.
  */
-public class SmartDialNumberListAdapter extends PhoneNumberListAdapter{
+public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
 
     private static final String TAG = SmartDialNumberListAdapter.class.getSimpleName();
     private static final boolean DEBUG = false;
