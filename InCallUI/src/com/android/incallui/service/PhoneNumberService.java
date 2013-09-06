@@ -61,7 +61,10 @@ public interface PhoneNumberService {
 
     public interface PhoneNumberInfo {
         public String getDisplayName();
-        public String getPhoneNumber();
+        public String getNumber();
+        public int getPhoneType();
+        public String getPhoneLabel();
+        public String getNormalizedNumber();
         public String getImageUrl();
     }
 }
