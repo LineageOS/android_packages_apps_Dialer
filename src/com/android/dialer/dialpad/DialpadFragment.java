@@ -52,6 +52,7 @@ import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -600,10 +601,12 @@ public class DialpadFragment extends Fragment
                 R.string.dialpad_8_letters, R.string.dialpad_9_letters,
                 R.string.dialpad_star_letters, R.string.dialpad_pound_letters};
 
+        final Resources resources = getResources();
+
         DialpadKeyButton dialpadKey;
         TextView numberView;
         TextView lettersView;
-        final Resources resources = getResources();
+
         for (int i = 0; i < buttonIds.length; i++) {
             dialpadKey = (DialpadKeyButton) fragmentView.findViewById(buttonIds[i]);
             dialpadKey.setLayoutParams(new TableRow.LayoutParams(
@@ -614,6 +617,10 @@ public class DialpadFragment extends Fragment
             numberView.setText(resources.getString(numberIds[i]));
             if (lettersView != null) {
                 lettersView.setText(resources.getString(letterIds[i]));
+                if (buttonIds[i] == R.id.zero) {
+                    lettersView.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(
+                            R.dimen.dialpad_key_plus_size));
+                }
             }
         }
 
