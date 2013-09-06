@@ -57,6 +57,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
@@ -133,6 +134,30 @@ public class DialpadFragment extends Fragment
         @NeededForReflection
         public void setYFraction(float yFraction) {
             setTranslationY(yFraction * getHeight());
+        }
+    }
+
+    /**
+     * LinearLayout that always returns true for onHoverEvent callbacks, to fix
+     * problems with accessibility due to the dialpad overlaying other fragments.
+     */
+    public static class HoverIgnoringLinearLayout extends LinearLayout {
+
+        public HoverIgnoringLinearLayout(Context context) {
+            super(context);
+        }
+
+        public HoverIgnoringLinearLayout(Context context, AttributeSet attrs) {
+            super(context, attrs);
+        }
+
+        public HoverIgnoringLinearLayout(Context context, AttributeSet attrs, int defStyle) {
+            super(context, attrs, defStyle);
+        }
+
+        @Override
+        public boolean onHoverEvent(MotionEvent event) {
+            return true;
         }
     }
 
@@ -611,7 +636,9 @@ public class DialpadFragment extends Fragment
             dialpadKey.setOnPressedListener(this);
             numberView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_number);
             lettersView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_letters);
-            numberView.setText(resources.getString(numberIds[i]));
+            final String numberString = resources.getString(numberIds[i]);
+            numberView.setText(numberString);
+            dialpadKey.setContentDescription(numberString);
             if (lettersView != null) {
                 lettersView.setText(resources.getString(letterIds[i]));
             }
