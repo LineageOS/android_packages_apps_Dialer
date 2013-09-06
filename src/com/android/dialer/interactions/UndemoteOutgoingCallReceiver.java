@@ -35,7 +35,7 @@ public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
     private static final long NO_CONTACT_FOUND = -1;
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
         if (intent != null && Intent.ACTION_NEW_OUTGOING_CALL.equals(intent.getAction())) {
             final String number = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
             if (TextUtils.isEmpty(number)) {
@@ -43,7 +43,13 @@ public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
             }
             final long id = getContactIdFromPhoneNumber(context, number);
             if (id != NO_CONTACT_FOUND) {
-                undemoteContactWithId(context, id);
+                final Thread thread = new Thread() {
+                    @Override
+                    public void run() {
+                        undemoteContactWithId(context, id);
+                    }
+                };
+                thread.start();
             }
         }
     }
