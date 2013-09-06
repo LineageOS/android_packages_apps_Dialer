@@ -18,14 +18,21 @@ package com.android.dialer.list;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapter;
+import com.android.dialer.calllog.CallLogNotificationsHelper;
+import com.android.dialer.calllog.CallLogQueryHandler;
+import com.android.dialer.list.SwipeHelper.OnItemGestureListener;
+import com.android.dialer.list.SwipeHelper.SwipeHelperCallback;
 
 /**
  * An adapter that combines items from {@link com.android.contacts.common.list.ContactTileAdapter}
@@ -54,6 +61,41 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     private final DataSetObserver mObserver;
 
+    private final CallLogQueryHandler mCallLogQueryHandler;
+
+    private final OnItemGestureListener mCallLogOnItemSwipeListener =
+            new OnItemGestureListener() {
+        @Override
+        public void onSwipe(View view) {
+            mCallLogQueryHandler.markNewCallsAsOld();
+            mCallLogQueryHandler.markNewVoicemailsAsOld();
+            CallLogNotificationsHelper.removeMissedCallNotifications();
+            CallLogNotificationsHelper.updateVoicemailNotifications(mContext);
+            mCallLogQueryHandler.fetchNewCalls(CallLogQueryHandler.CALL_TYPE_ALL);
+        }
+
+        @Override
+        public void onTouch() {}
+
+        @Override
+        public boolean isSwipeEnabled() {
+            return true;
+        }
+    };
+
+    private final CallLogQueryHandler.Listener mCallLogQueryHandlerListener =
+            new CallLogQueryHandler.Listener() {
+        @Override
+        public void onVoicemailStatusFetched(Cursor statusCursor) {}
+
+        @Override
+        public void onCallsFetched(Cursor combinedCursor) {
+            mCallLogAdapter.invalidateCache();
+            mCallLogAdapter.changeCursor(combinedCursor);
+            mCallLogAdapter.notifyDataSetChanged();
+        }
+    };
+
     public PhoneFavoriteMergedAdapter(Context context,
             PhoneFavoritesTileAdapter contactTileAdapter,
             CallLogAdapter callLogAdapter,
@@ -69,6 +111,8 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         mContactTileAdapter.registerDataSetObserver(mObserver);
         mLoadingView = loadingView;
         mShowAllContactsButton = showAllContactsButton;
+        mCallLogQueryHandler = new CallLogQueryHandler(mContext.getContentResolver(),
+                mCallLogQueryHandlerListener);
     }
 
     @Override
@@ -160,11 +204,12 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
         if (callLogAdapterCount > 0) {
             if (position == 0) {
-                final FrameLayout wrapper;
+                final SwipeableCallLogRow wrapper;
                 if (convertView == null) {
-                    wrapper = new FrameLayout(mContext);
+                    wrapper = new SwipeableCallLogRow(mContext);
+                    wrapper.setOnItemSwipeListener(mCallLogOnItemSwipeListener);
                 } else {
-                    wrapper = (FrameLayout) convertView;
+                    wrapper = (SwipeableCallLogRow) convertView;
                 }
 
                 // Special case wrapper view for the most recent call log item. This allows
@@ -174,17 +219,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
                 final View view = mCallLogAdapter.getView(position, convertView == null ?
                         null : wrapper.getChildAt(0), parent);
                 wrapper.removeAllViews();
-                view.setBackgroundResource(R.drawable.dialer_recent_card_bg);
-
-                final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                        FrameLayout.LayoutParams.WRAP_CONTENT,
-                        FrameLayout.LayoutParams.WRAP_CONTENT);
-
-                params.setMarginsRelative(mCallLogPadding, mCallLogPadding, mCallLogPadding,
-                        mCallLogPadding);
-                view.setLayoutParams(params);
                 wrapper.addView(view);
-
                 return wrapper;
             }
             // Set position to the position of the actual favorite contact in the
@@ -226,5 +261,92 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     private int getAdjustedFavoritePosition(int position, int callLogAdapterCount) {
         return position - callLogAdapterCount;
+    }
+
+    /**
+     * The swipeable call log row.
+     * See also {@link PhoneFavoritesTileAdapter.ContactTileRow}.
+     */
+    private class SwipeableCallLogRow extends FrameLayout implements SwipeHelperCallback {
+        private SwipeHelper mSwipeHelper;
+        private OnItemGestureListener mOnItemSwipeListener;
+
+        public SwipeableCallLogRow(Context context) {
+            super(context);
+            final float densityScale = getResources().getDisplayMetrics().density;
+            final float pagingTouchSlop = ViewConfiguration.get(context)
+                    .getScaledPagingTouchSlop();
+            mSwipeHelper = new SwipeHelper(context, SwipeHelper.X, this,
+                    densityScale, pagingTouchSlop);
+        }
+
+        @Override
+        public void addView(View view) {
+            view.setBackgroundResource(R.drawable.dialer_recent_card_bg);
+
+            final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                    FrameLayout.LayoutParams.WRAP_CONTENT);
+            params.setMarginsRelative(mCallLogPadding, mCallLogPadding, mCallLogPadding,
+                    mCallLogPadding);
+            view.setLayoutParams(params);
+
+            super.addView(view);
+        }
+
+        @Override
+        public View getChildAtPosition(MotionEvent ev) {
+            return getChildCount() > 0 ? getChildAt(0) : null;
+        }
+
+        @Override
+        public View getChildContentView(View v) {
+            return v.findViewById(R.id.call_log_list_item);
+        }
+
+        @Override
+        public void onScroll() {}
+
+        @Override
+        public boolean canChildBeDismissed(View v) {
+            return true;
+        }
+
+        @Override
+        public void onBeginDrag(View v) {
+        }
+
+        @Override
+        public void onChildDismissed(View v) {
+            if (v != null && mOnItemSwipeListener != null) {
+                mOnItemSwipeListener.onSwipe(v);
+            }
+            removeAllViews();
+        }
+
+        @Override
+        public void onDragCancelled(View v) {}
+
+        @Override
+        public boolean onInterceptTouchEvent(MotionEvent ev) {
+            if (mSwipeHelper != null) {
+                return mSwipeHelper.onInterceptTouchEvent(ev) || super.onInterceptTouchEvent(ev);
+            } else {
+                return super.onInterceptTouchEvent(ev);
+            }
+        }
+
+        @Override
+        public boolean onTouchEvent(MotionEvent ev) {
+            if (mSwipeHelper != null) {
+                return mSwipeHelper.onTouchEvent(ev) || super.onTouchEvent(ev);
+            } else {
+                return super.onTouchEvent(ev);
+            }
+        }
+
+        public void setOnItemSwipeListener(OnItemGestureListener listener) {
+            mOnItemSwipeListener = listener;
+        }
     }
 }
