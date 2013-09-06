@@ -200,4 +200,31 @@ public class CallCommandClient {
             Log.e(this, "Error setting speaker.", e);
         }
     }
+
+    public void postDialWaitContinue(int callId) {
+        if (mCommandService == null) {
+            Log.e(this, "Cannot postDialWaitContinue(); CallCommandService == null");
+            return;
+        }
+        try {
+            Log.v(this, "postDialWaitContinue()");
+            mCommandService.postDialWaitContinue(callId);
+        } catch (RemoteException e) {
+            Log.e(this, "Error on postDialWaitContinue().", e);
+        }
+    }
+
+    public void postDialCancel(int callId) {
+        if (mCommandService == null) {
+            Log.e(this, "Cannot postDialCancel(); CallCommandService == null");
+            return;
+        }
+        try {
+            Log.v(this, "postDialCancel()");
+            mCommandService.postDialCancel(callId);
+        } catch (RemoteException e) {
+            Log.e(this, "Error on postDialCancel().", e);
+        }
+    }
+
 }
