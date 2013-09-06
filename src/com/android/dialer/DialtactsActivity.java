@@ -37,6 +37,7 @@ import android.os.ServiceManager;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Intents;
 import android.provider.ContactsContract.Intents.UI;
 import android.provider.Settings;
 import android.speech.RecognizerIntent;
@@ -881,5 +882,18 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onShowAllContacts() {
         final Intent intent = new Intent(this, AllContactsActivity.class);
         startActivity(intent);
+    }
+
+    public static Intent getAddNumberToContactIntent(CharSequence text) {
+        final Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
+        intent.putExtra(Intents.Insert.PHONE, text);
+        intent.setType(Contacts.CONTENT_ITEM_TYPE);
+        return intent;
+    }
+
+    public static Intent getInsertContactWithNameIntent(CharSequence text) {
+        final Intent intent = new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI);
+        intent.putExtra(Intents.Insert.NAME, text);
+        return intent;
     }
 }

@@ -612,4 +612,12 @@
     <string name="favorite_hidden">Hidden from favorites</string>
     <!--  Text displayed for the undo button to undo removing a favorite contact -->
     <string name="favorite_hidden_undo">Undo</string>
+
+    <!-- Shortcut item used to call a number directly from search -->
+    <string name="search_shortcut_call_number">Call
+        <xliff:g id="number">%s</xliff:g>
+    </string>
+
+    <!-- Shortcut item used to add a number directly from search -->
+    <string name="search_shortcut_add_to_contacts">Add to contacts</string>
 </resources>
