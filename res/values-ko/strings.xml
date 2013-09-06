@@ -93,6 +93,7 @@
     <string name="add_wait" msgid="3360818652790319634">"대기 시간 추가"</string>
     <string name="call_settings" msgid="7666474782093693667">"설정"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"새 연락처"</string>
+    <string name="menu_allContacts" msgid="6948308384034051670">"전체 주소록"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"통화 세부정보"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"요청한 통화의 세부정보를 읽지 못했습니다."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"터치톤 키패드 사용"</string>

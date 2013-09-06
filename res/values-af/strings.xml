@@ -93,6 +93,7 @@
     <string name="add_wait" msgid="3360818652790319634">"Voeg wagtyd by"</string>
     <string name="call_settings" msgid="7666474782093693667">"Instellings"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nuwe kontak"</string>
+    <string name="menu_allContacts" msgid="6948308384034051670">"Alle kontakte"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Oproepdetails"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"Kon nie details vir die versoekte oproep lees nie."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Gebruik raak-nommerbord"</string>
