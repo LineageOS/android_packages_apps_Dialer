@@ -1467,4 +1467,7 @@
          related settings.
          [CHAR LIMIT=30] -->
     <string name="preference_category_ringtone">Ringtone &amp; Vibrate</string>
+
+    <!-- Label for "Manage conference call" panel [CHAR LIMIT=40] -->
+    <string name="manageConferenceLabel">Manage conference call</string>
 </resources>

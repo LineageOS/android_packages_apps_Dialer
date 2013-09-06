@@ -145,6 +145,10 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         CallCommandClient.getInstance().disconnectCall(mCall.getCallId());
     }
 
+    public void manageConferenceButtonClicked() {
+        getUi().displayManageConferencePanel(true);
+    }
+
     public void muteClicked(boolean checked) {
         Log.d(this, "turning on mute: " + checked);
 
@@ -217,6 +221,34 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 ui.setMute(mPreviousMuteState);
                 mAutomaticallyMuted = false;
             }
+
+            // Finally, update the "extra button row": It's displayed above the
+            // "End" button, but only if necessary.  Also, it's never displayed
+            // while the dialpad is visible (since it would overlap.)
+            //
+            // The row contains two buttons:
+            //
+            // - "Manage conference" (used only on GSM devices)
+            // - "Merge" button (used only on CDMA devices)
+            // TODO(klp) Add cdma merge button
+            final boolean showCdmaMerge = false;
+//                    (phoneType == PhoneConstants.PHONE_TYPE_CDMA) && inCallControlState.canMerge;
+            final boolean showExtraButtonRow =
+                    (showCdmaMerge || call.isConferenceCall()) && !getUi().isDialpadVisible();
+            if (showExtraButtonRow) {
+                // Need to set up mCdmaMergeButton and mManageConferenceButton if this is the first
+                // time they're visible.
+                // TODO(klp) add cdma merge button
+//                if (mCdmaMergeButton == null) {
+//                    setupExtraButtons();
+//                }
+//                mCdmaMergeButton.setVisibility(showCdmaMerge ? View.VISIBLE : View.GONE);
+                if (call.isConferenceCall()) {
+                    getUi().showManageConferenceCallButton();
+                }
+            } else {
+                getUi().hideExtraRow();
+            }
         }
     }
 
@@ -241,7 +273,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void showSwap(boolean show);
         void showAddCall(boolean show);
         void displayDialpad(boolean on);
+        boolean isDialpadVisible();
         void setAudio(int mode);
         void setSupportedAudio(int mask);
+        void showManageConferenceCallButton();
+        void showCDMAMergeButton();
+        void hideExtraRow();
+        void displayManageConferencePanel(boolean on);
     }
 }
