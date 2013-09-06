@@ -21,6 +21,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -252,7 +253,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     if (entry.label == null) {
                         // Name not found.  Try lookup.
                         Log.d(TAG, "Contact lookup. Contact provider miss. Searching people api.");
-                        lookupPhoneNumber(identification.getNumber());
+                        lookupPhoneNumber(identification.getNumber(),
+                                isPrimary, isConference);
                     } else {
                         Log.d(TAG, "Contact lookup. Found in contact provider: " + entry);
                         updateContactEntry(entry, isPrimary, isConference);
@@ -379,25 +381,35 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
     }
 
-    public void lookupPhoneNumber(String phoneNumber) {
+    public void lookupPhoneNumber(final String phoneNumber,
+            final boolean isPrimary, final boolean isConference) {
         if (mPhoneNumberService != null) {
             mPhoneNumberService.getPhoneNumberInfo(phoneNumber,
                     new PhoneNumberService.NumberLookupListener() {
                         @Override
                         public void onPhoneNumberInfoComplete(
                                 final PhoneNumberService.PhoneNumberInfo info) {
-                            if (info == null) {
+                            if (info == null || getUi() == null) {
                                 return;
                             }
-                            // TODO(klp): Ui is sometimes null due to something being shutdown.
-                            if (getUi() != null) {
-                                if (info.getDisplayName() != null) {
-                                    getUi().setPrimaryName(info.getDisplayName(), false);
-                                }
+                            ContactCacheEntry entry = new ContactCacheEntry();
+                            entry.name = info.getDisplayName();
+                            entry.number = info.getNumber();
+                            final int type = info.getPhoneType();
+                            final String label = info.getPhoneLabel();
+                            if (type == Phone.TYPE_CUSTOM) {
+                                entry.label = label;
+                            } else {
+                                final CharSequence typeStr = Phone.getTypeLabel(
+                                        mContext.getResources(), type, label);
+                                entry.label = typeStr == null ? null :
+                                    typeStr.toString();
+                            }
 
-                                if (info.getImageUrl() != null) {
-                                    fetchImage(info.getImageUrl());
-                                }
+                            updateContactEntry(entry, isPrimary, isConference);
+
+                            if (info.getImageUrl() != null) {
+                                fetchImage(info.getImageUrl());
                             }
                         }
                     });
