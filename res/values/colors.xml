@@ -44,7 +44,7 @@
     <color name="background_dialer_list_items">#f5f5f5</color>
 
     <!-- Background color of new dialpad -->
-    <color name="background_dialpad">#ee020709</color>
+    <color name="background_dialpad">#f2020709</color>
 
     <!-- Primary color of dialpad text, including the call button -->
     <color name="dialpad_primary_text_color">#33b5e5</color>
