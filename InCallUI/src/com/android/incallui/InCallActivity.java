@@ -34,6 +34,7 @@ public class InCallActivity extends Activity {
     private CallCardFragment mCallCardFragment;
     private AnswerFragment mAnswerFragment;
     private DialpadFragment mDialpadFragment;
+    private ConferenceManagerFragment mConferenceManagerFragment;
     private boolean mIsForegroundActivity;
 
     @Override
@@ -287,6 +288,11 @@ public class InCallActivity extends Activity {
             mDialpadFragment.getView().setVisibility(View.INVISIBLE);
         }
 
+        if (mConferenceManagerFragment == null) {
+            mConferenceManagerFragment = (ConferenceManagerFragment) getFragmentManager()
+                    .findFragmentById(R.id.conferenceManagerFragment);
+            mConferenceManagerFragment.getView().setVisibility(View.INVISIBLE);
+        }
         setUpPresenterCallbacks();
     }
 
@@ -302,6 +308,7 @@ public class InCallActivity extends Activity {
 
         mainPresenter.addListener(mCallButtonFragment.getPresenter());
         mainPresenter.addListener(mCallCardFragment.getPresenter());
+        mainPresenter.addListener(mConferenceManagerFragment.getPresenter());
 
         // setting activity should be last thing in setup process
         mainPresenter.setActivity(this);
@@ -313,6 +320,7 @@ public class InCallActivity extends Activity {
 
         mainPresenter.removeListener(mCallButtonFragment.getPresenter());
         mainPresenter.removeListener(mCallCardFragment.getPresenter());
+        mainPresenter.removeListener(mConferenceManagerFragment.getPresenter());
 
         mainPresenter.setActivity(null);
     }
@@ -330,6 +338,16 @@ public class InCallActivity extends Activity {
         } else {
             mDialpadFragment.setVisible(false);
             mCallCardFragment.setVisible(true);
+        }
+    }
+
+    public boolean isDialpadVisible() {
+        return mDialpadFragment.isVisible();
+    }
+
+    public void displayManageConferencePanel(boolean showPanel) {
+        if (showPanel) {
+            mConferenceManagerFragment.setVisible(true);
         }
     }
 }
