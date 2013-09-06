@@ -59,11 +59,10 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
         if (DEBUG) {
             Log.v(TAG, "Configure new query to be " + query);
         }
-        mQuery = query;
+        mQuery = SmartDialNameMatcher.normalizeNumber(query, SmartDialPrefix.getMap());
 
         /** Constructs a name matcher object for matching names. */
-        mNameMatcher = new SmartDialNameMatcher(PhoneNumberUtils.normalizeNumber(query),
-            SmartDialPrefix.getMap());
+        mNameMatcher = new SmartDialNameMatcher(mQuery, SmartDialPrefix.getMap());
     }
 
     /**
