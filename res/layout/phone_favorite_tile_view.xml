@@ -104,7 +104,6 @@
             android:text="@string/favorite_hidden"
             android:ellipsize="marquee"
             android:fontFamily="sans-serif"
-            android:textStyle="italic"
             android:textSize="14sp"
             android:textColor="@color/undo_dialogue_text_color"
             android:lines="2"
