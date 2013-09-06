@@ -127,12 +127,16 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     public void onText() {
-        getUi().showMessageDialogue();
+        if (getUi() != null) {
+            getUi().showMessageDialogue();
+        }
     }
 
     public void rejectCallWithMessage(String message) {
         Log.d(this, "sendTextToDefaultActivity()...");
-        getUi().dismissPopup();
+        if (getUi() != null) {
+            getUi().dismissPopup();
+        }
         CallCommandClient.getInstance().rejectCall(mCallId, true, message);
     }
 
