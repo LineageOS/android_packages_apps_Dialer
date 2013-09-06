@@ -93,6 +93,7 @@
     <string name="add_wait" msgid="3360818652790319634">"Aggiungi attesa"</string>
     <string name="call_settings" msgid="7666474782093693667">"Impostazioni"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nuovo contatto"</string>
+    <string name="menu_allContacts" msgid="6948308384034051670">"Tutti i contatti"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Dettagli chiamata"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"Impossibile leggere i dettagli per la chiamata richiesta."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Usa tastierino per selezione a toni"</string>

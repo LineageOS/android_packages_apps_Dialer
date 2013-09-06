@@ -93,6 +93,7 @@
     <string name="add_wait" msgid="3360818652790319634">"新增插播功能"</string>
     <string name="call_settings" msgid="7666474782093693667">"設定"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"新增聯絡人"</string>
+    <string name="menu_allContacts" msgid="6948308384034051670">"所有聯絡人"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"通話詳細資料"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"無法讀取所需通話的詳細資訊。"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"使用觸控音頻按鍵"</string>

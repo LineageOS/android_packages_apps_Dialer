@@ -93,6 +93,7 @@
     <string name="add_wait" msgid="3360818652790319634">"Magdagdag ng paghihintay"</string>
     <string name="call_settings" msgid="7666474782093693667">"Mga Setting"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Bagong contact"</string>
+    <string name="menu_allContacts" msgid="6948308384034051670">"Lahat ng contact"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Mga detalye ng tawag"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"Hindi mabasa ang mga detalye para sa hiniling na tawag."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Gumamit ng touch tone na keypad"</string>

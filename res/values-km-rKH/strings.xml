@@ -93,6 +93,7 @@
     <string name="add_wait" msgid="3360818652790319634">"បញ្ចូល​ការ​រង់ចាំ"</string>
     <string name="call_settings" msgid="7666474782093693667">"ការ​កំណត់"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"ទំនាក់ទំនង​ថ្មី"</string>
+    <string name="menu_allContacts" msgid="6948308384034051670">"ទំនាក់ទំនង​ទាំងអស់"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"ព័ត៌មាន​លម្អិត​នៃ​ការ​ហៅ"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"មិន​អាច​អាន​ព័ត៌មាន​លម្អិត​សម្រាប់​ការ​ហៅ​បាន​ស្នើ។"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"ប្រើ​សំឡេង​ប៉ះ​បន្ទះ​លេខ"</string>
