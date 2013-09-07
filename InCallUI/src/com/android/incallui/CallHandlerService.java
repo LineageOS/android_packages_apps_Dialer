@@ -45,8 +45,9 @@ public class CallHandlerService extends Service {
     private static final int ON_SUPPORTED_AUDIO_MODE = 5;
     private static final int ON_DISCONNECT_CALL = 6;
     private static final int ON_BRING_TO_FOREGROUND = 7;
+    private static final int ON_POST_CHAR_WAIT = 8;
 
-    private static final int LARGEST_MSG_ID = ON_BRING_TO_FOREGROUND;
+    private static final int LARGEST_MSG_ID = ON_POST_CHAR_WAIT;
 
 
     private CallList mCallList;
@@ -182,6 +183,12 @@ public class CallHandlerService extends Service {
         public void bringToForeground() {
             mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_BRING_TO_FOREGROUND));
         }
+
+        @Override
+        public void onPostDialWait(int callId, String chars) {
+            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_POST_CHAR_WAIT, callId, 0,
+                    chars));
+        }
     };
 
     /**
@@ -222,6 +229,9 @@ public class CallHandlerService extends Service {
                 break;
             case ON_DISCONNECT_CALL:
                 mCallList.onDisconnect((Call) msg.obj);
+                break;
+            case ON_POST_CHAR_WAIT:
+                mInCallPresenter.onPostDialCharWait(msg.arg1, (String) msg.obj);
                 break;
             case ON_AUDIO_MODE:
                 mAudioModeProvider.onAudioModeChange(msg.arg1, msg.arg2 == 1);

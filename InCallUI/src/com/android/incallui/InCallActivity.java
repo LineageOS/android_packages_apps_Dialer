@@ -350,4 +350,9 @@ public class InCallActivity extends Activity {
             mConferenceManagerFragment.setVisible(true);
         }
     }
+
+    public void showPostCharWaitDialog(int callId, String chars) {
+        final PostCharDialogFragment fragment = new PostCharDialogFragment(callId,  chars);
+        fragment.show(getFragmentManager(), "postCharWait");
+    }
 }
