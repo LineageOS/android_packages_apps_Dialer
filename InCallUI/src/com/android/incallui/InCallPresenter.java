@@ -264,6 +264,10 @@ public class InCallPresenter implements CallList.Listener {
         }
     }
 
+    public void onPostDialCharWait(int callId, String chars) {
+        mInCallActivity.showPostCharWaitDialog(callId, chars);
+    }
+
     /**
      * When the state of in-call changes, this is the first method to get called. It determines if
      * the UI needs to be started or finished depending on the new state and does it.
