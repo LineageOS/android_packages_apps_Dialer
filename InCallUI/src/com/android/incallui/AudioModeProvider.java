@@ -28,13 +28,14 @@ import java.util.List;
  */
 /* package */ class AudioModeProvider {
 
-    private static AudioModeProvider sAudioModeProvider;
+    private static AudioModeProvider sAudioModeProvider = new AudioModeProvider();
     private int mAudioMode = AudioMode.EARPIECE;
     private boolean mMuted = false;
     private int mSupportedModes = AudioMode.ALL_MODES;
     private final List<AudioModeListener> mListeners = Lists.newArrayList();
 
-    public AudioModeProvider() {
+    public static AudioModeProvider getInstance() {
+        return sAudioModeProvider;
     }
 
     public void onAudioModeChange(int newMode, boolean muted) {

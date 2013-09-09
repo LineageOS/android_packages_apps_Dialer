@@ -51,7 +51,7 @@ public class InCallPresenter implements CallList.Listener {
     private CallList mCallList;
     private InCallActivity mInCallActivity;
     private boolean mServiceConnected = false;
-    private InCallState mInCallState = InCallState.HIDDEN;
+    private InCallState mInCallState = InCallState.NO_CALLS;
     private ProximitySensor mProximitySensor;
 
     public static synchronized InCallPresenter getInstance() {
@@ -62,11 +62,17 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     public void setUp(Context context, CallList callList, AudioModeProvider audioModeProvider) {
+        if (mServiceConnected) {
+            Log.i(this, "New service connection replacing existing one.");
+            // retain the current resources, no need to create new ones.
+            Preconditions.checkState(context == mContext);
+            Preconditions.checkState(callList == mCallList);
+            Preconditions.checkState(audioModeProvider == mAudioModeProvider);
+            return;
+        }
+
         Preconditions.checkNotNull(context);
         mContext = context;
-
-        mCallList = callList;
-        mCallList.addListener(this);
 
         mContactInfoCache = ContactInfoCache.getInstance(context);
 
@@ -76,11 +82,17 @@ public class InCallPresenter implements CallList.Listener {
 
         mAudioModeProvider = audioModeProvider;
 
+        mProximitySensor = new ProximitySensor(context, mAudioModeProvider);
+        addListener(mProximitySensor);
+
+        mCallList = callList;
+
         // This only gets called by the service so this is okay.
         mServiceConnected = true;
 
-        mProximitySensor = new ProximitySensor(context, mAudioModeProvider);
-        addListener(mProximitySensor);
+        // The final thing we do in this set up is add ourselves as a listener to CallList.  This
+        // will kick off an update and the whole process can start.
+        mCallList.addListener(this);
 
         Log.d(this, "Finished InCallPresenter.setUp");
     }
@@ -105,17 +117,41 @@ public class InCallPresenter implements CallList.Listener {
      * the tear-down process.
      */
     public void setActivity(InCallActivity inCallActivity) {
-        mInCallActivity = inCallActivity;
+        boolean updateListeners = false;
 
-        if (mInCallActivity != null) {
-            Log.i(this, "UI Initialized");
+        if (inCallActivity != null) {
+            if (mInCallActivity == null) {
+                updateListeners = true;
+                Log.i(this, "UI Initialized");
+            } else if (mInCallActivity != inCallActivity) {
+                Log.wtf(this, "Setting a second activity before destroying the first.");
+            } else {
+                // since setActivity is called onStart(), it can be called multiple times.
+                // This is fine and ignorable, but we do not want to update the world every time
+                // this happens (like going to/from background) so we do not set updateListeners.
+            }
 
-            // Since the UI just came up, imitate an update from the call list
-            // to set the proper UI state.
-            onCallListChange(mCallList);
+            mInCallActivity = inCallActivity;
         } else {
             Log.i(this, "UI Destroyed)");
+            updateListeners = true;
+            mInCallActivity = null;
             attemptCleanup();
+        }
+
+
+        // Messages can come from the telephony layer while the activity is coming up
+        // and while the activity is going down.  So in both cases we need to recalculate what
+        // state we should be in after they complete.
+        // Examples: (1) A new incoming call could come in and then get disconnected before
+        //               the activity is created.
+        //           (2) All calls could disconnect and then get a new incoming call before the
+        //               activity is destroyed.
+        //
+        // ... but only if we are still connected (or got a new connection) to the service.
+        // Otherwise the service will come back up when it needs us.
+        if (updateListeners && mServiceConnected) {
+            onCallListChange(mCallList);
         }
     }
 
@@ -148,7 +184,10 @@ public class InCallPresenter implements CallList.Listener {
      */
     @Override
     public void onIncomingCall(Call call) {
-        mInCallState = startOrFinishUi(InCallState.INCOMING);
+        InCallState newState = startOrFinishUi(InCallState.INCOMING);
+
+        Log.i(this, "Phone switching state: " + mInCallState + " -> " + newState);
+        mInCallState = newState;
 
         for (IncomingCallListener listener : mIncomingCallListeners) {
             listener.onIncomingCall(call);
@@ -159,7 +198,7 @@ public class InCallPresenter implements CallList.Listener {
      * Given the call list, return the state in which the in-call screen should be.
      */
     public static InCallState getPotentialStateFromCallList(CallList callList) {
-        InCallState newState = InCallState.HIDDEN;
+        InCallState newState = InCallState.NO_CALLS;
 
         if (callList.getIncomingCall() != null) {
             newState = InCallState.INCOMING;
@@ -219,8 +258,7 @@ public class InCallPresenter implements CallList.Listener {
      * Returns true if the incall app is the foreground application.
      */
     public boolean isShowingInCallUi() {
-        return (mInCallActivity != null &&
-                mInCallActivity.isForegroundActivity());
+        return (isActivityStarted() && mInCallActivity.isForegroundActivity());
     }
 
     /**
@@ -257,9 +295,9 @@ public class InCallPresenter implements CallList.Listener {
         // 1. there is an activity
         // 2. the activity is not already in the foreground
         // 3. We are in a state where we want to show the incall ui
-        if (mInCallActivity != null &&
-                !mInCallActivity.isForegroundActivity() &&
-                mInCallState != InCallState.HIDDEN) {
+        if (isActivityStarted() &&
+                !isShowingInCallUi() &&
+                mInCallState != InCallState.NO_CALLS) {
             showInCall();
         }
     }
@@ -316,35 +354,34 @@ public class InCallPresenter implements CallList.Listener {
         // user with a top-level notification.  Just show the call UI normally.
         final boolean showCallUi = (InCallState.OUTGOING == newState);
 
+        // TODO: Can we be suddenly in a call without it having been in the outgoing or incoming
+        // state?  I havent seen that but if it can happen, the code below should be enabled.
+        // showCallUi |= (InCallState.INCALL && !isActivityStarted());
+
+        // The only time that we have an instance of mInCallActivity and it isn't started is
+        // when it is being destroyed.  In that case, lets avoid bringing up another instance of
+        // the activity.  When it is finally destroyed, we double check if we should bring it back
+        // up so we aren't going to lose anything by avoiding a second startup here.
+        boolean activityIsFinishing = mInCallActivity != null && !isActivityStarted();
+        if (activityIsFinishing) {
+            Log.i(this, "Undo the state change: " + newState + " -> " + mInCallState);
+            return mInCallState;
+        }
+
         if (showCallUi) {
             Log.i(this, "Start in call UI");
             showInCall();
         } else if (startStartupSequence) {
             Log.i(this, "Start Full Screen in call UI");
             mStatusBarNotifier.updateNotificationAndLaunchIncomingCallUi(newState, mCallList);
-        } else if (newState == InCallState.HIDDEN) {
+        } else if (newState == InCallState.NO_CALLS) {
             Log.i(this, "Hide in call UI");
 
-            // The new state is the hidden state (no calls).  Tear everything down.
+            // The new state is the no calls state.  Tear everything down.
             if (mInCallActivity != null) {
-                if (mInCallActivity.isFinishing()) {
-                    // Tear down process:
-                    // When there are no more calls to handle, two things happen:
-                    // 1. The binding connection with TeleService ends
-                    // 2. InCallState changes to HIDDEN and we call activity.finish() here.
-                    //
-                    // Without the service connection, we will not get updates from the service
-                    // and so will never get a new call to move out of the HIDDEN state. Since this
-                    // code is called when we move from a different state into the HIDDEN state,
-                    // it should never get hit twice. In case it does, log an error.
-                    Log.e(this, "Attempting to finish incall activity twice.");
-                } else {
+                if (isActivityStarted()) {
                     mInCallActivity.finish();
                 }
-
-                // blow away stale contact info so that we get fresh data on
-                // the next set of calls
-                mContactInfoCache.clearCache();
             }
         }
 
@@ -356,8 +393,16 @@ public class InCallPresenter implements CallList.Listener {
      * down.
      */
     private void attemptCleanup() {
-        if (mInCallActivity == null && !mServiceConnected) {
-            Log.i(this, "Start InCall presenter cleanup.");
+        boolean shouldCleanup = (mInCallActivity == null && !mServiceConnected);
+        Log.i(this, "attemptCleanup? " + shouldCleanup);
+
+        if (shouldCleanup) {
+
+            // blow away stale contact info so that we get fresh data on
+            // the next set of calls
+            mContactInfoCache.clearCache();
+            mContactInfoCache = null;
+
             mProximitySensor = null;
 
             mAudioModeProvider = null;
@@ -402,7 +447,7 @@ public class InCallPresenter implements CallList.Listener {
      */
     public enum InCallState {
         // InCall Screen is off and there are no calls
-        HIDDEN,
+        NO_CALLS,
 
         // Incoming-call screen is up
         INCOMING,
@@ -415,10 +460,6 @@ public class InCallPresenter implements CallList.Listener {
 
         public boolean isIncoming() {
             return (this == INCOMING);
-        }
-
-        public boolean isHidden() {
-            return (this == HIDDEN);
         }
 
         public boolean isConnectingOrConnected() {
