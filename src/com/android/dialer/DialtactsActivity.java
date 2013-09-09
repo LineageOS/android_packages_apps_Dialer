@@ -233,6 +233,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 if (TextUtils.isEmpty(newText) && getInSearchUi()) {
                     exitSearchUi();
                     mSearchViewCloseButton.setVisibility(View.GONE);
+                    mVoiceSearchButton.setVisibility(View.VISIBLE);
                     return;
                 } else if (!TextUtils.isEmpty(newText)) {
                     final boolean sameSearchMode = (dialpadSearch && mInDialpadSearch) ||
@@ -249,6 +250,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                         mRegularSearchFragment.setQueryString(newText, false);
                     }
                     mSearchViewCloseButton.setVisibility(View.VISIBLE);
+                    mVoiceSearchButton.setVisibility(View.GONE);
                     return;
                 }
             }
