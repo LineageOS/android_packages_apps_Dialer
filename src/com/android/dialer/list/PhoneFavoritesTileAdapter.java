@@ -715,6 +715,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                         .getScaledPagingTouchSlop();
                 mSwipeHelper = new SwipeHelper(context, SwipeHelper.X, this, densityScale,
                         pagingTouchSlop);
+                // Increase swipe thresholds for square tiles since they are relatively small.
+                mSwipeHelper.setChildSwipedFarEnoughFactor(0.9f);
+                mSwipeHelper.setChildSwipedFastEnoughFactor(0.1f);
                 mOnItemSwipeListener = PhoneFavoritesTileAdapter.this;
             }
         }

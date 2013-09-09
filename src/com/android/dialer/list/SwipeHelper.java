@@ -89,6 +89,9 @@ public class SwipeHelper {
     private float mStartAlpha;
     private boolean mProtected = false;
 
+    private float mChildSwipedFarEnoughFactor = 0.4f;
+    private float mChildSwipedFastEnoughFactor = 0.05f;
+
     public SwipeHelper(Context context, int swipeDirection, SwipeHelperCallback callback, float densityScale,
             float pagingTouchSlop) {
         mCallback = callback;
@@ -116,6 +119,14 @@ public class SwipeHelper {
 
     public void setPagingTouchSlop(float pagingTouchSlop) {
         mPagingTouchSlop = pagingTouchSlop;
+    }
+
+    public void setChildSwipedFarEnoughFactor(float factor) {
+        mChildSwipedFarEnoughFactor = factor;
+    }
+
+    public void setChildSwipedFastEnoughFactor(float factor) {
+        mChildSwipedFastEnoughFactor = factor;
     }
 
     private float getVelocity(VelocityTracker vt) {
@@ -407,15 +418,15 @@ public class SwipeHelper {
                     // swipe/dismiss
                     float translation = Math.abs(mCurrAnimView.getTranslationX());
                     float currAnimViewSize = getSize(mCurrAnimView);
-                    // Long swipe = translation of .4 * width
+                    // Long swipe = translation of {@link #mChildSwipedFarEnoughFactor} * width
                     boolean childSwipedFarEnough = DISMISS_IF_SWIPED_FAR_ENOUGH
-                            && translation > 0.4 * currAnimViewSize;
-                    // Fast swipe = > escapeVelocity and translation of .1 *
-                    // width
+                            && translation > mChildSwipedFarEnoughFactor * currAnimViewSize;
+                    // Fast swipe = > escapeVelocity and translation of
+                    // {@link #mChildSwipedFastEnoughFactor} * width
                     boolean childSwipedFastEnough = (Math.abs(velocity) > escapeVelocity)
                             && (Math.abs(velocity) > Math.abs(perpendicularVelocity))
                             && (velocity > 0) == (mCurrAnimView.getTranslationX() > 0)
-                            && translation > 0.05 * currAnimViewSize;
+                            && translation > mChildSwipedFastEnoughFactor * currAnimViewSize;
                     if (LOG_SWIPE_DISMISS_VELOCITY) {
                         Log.v(TAG, "Swipe/Dismiss: " + velocity + "/" + escapeVelocity + "/"
                                 + perpendicularVelocity + ", x: " + translation + "/"
