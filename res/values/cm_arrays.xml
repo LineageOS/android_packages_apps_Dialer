@@ -40,4 +40,20 @@
         <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
         <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
     </string-array>
+    <!-- T9 -->
+    <string-array name="t9_map" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>@string/t9_map_row_2</item>
+        <item>@string/t9_map_row_3</item>
+        <item>@string/t9_map_row_4</item>
+        <item>@string/t9_map_row_5</item>
+        <item>@string/t9_map_row_6</item>
+        <item>@string/t9_map_row_7</item>
+        <item>@string/t9_map_row_8</item>
+        <item>@string/t9_map_row_9</item>
+        <item>*</item>
+        <item>#</item>
+        <item>+</item>
+    </string-array>
 </resources>
