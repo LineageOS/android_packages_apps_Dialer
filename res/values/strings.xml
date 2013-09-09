@@ -520,8 +520,8 @@
     <string name="add_contact_not_available">Re-enable the People application to use this feature.</string>
 
     <!-- Hint displayed in dialer search box when there is no query that is currently typed.
-         [CHAR LIMIT=25] -->
-    <string name="dialer_hint_find_contact">Type a name or phone</string>
+         [CHAR LIMIT=30] -->
+    <string name="dialer_hint_find_contact">Type a name or phone number</string>
 
     <!-- Title for the call log tab containing the list of all voicemails and calls
          [CHAR LIMIT=15] -->
