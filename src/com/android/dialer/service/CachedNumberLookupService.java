@@ -13,6 +13,7 @@ public interface CachedNumberLookupService {
         public static final int SOURCE_TYPE_PLACES = 3;
         public static final int SOURCE_TYPE_PROFILE = 4;
 
+        public String sourceName;
         public int    sourceType;
         public int    sourceId;
         public String lookupKey;
