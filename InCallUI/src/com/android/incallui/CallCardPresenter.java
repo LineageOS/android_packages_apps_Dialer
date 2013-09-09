@@ -49,7 +49,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private static final long CALL_TIME_UPDATE_INTERVAL = 1000; // in milliseconds
 
     private PhoneNumberService mPhoneNumberService;
-    private AudioModeProvider mAudioModeProvider;
     private Call mPrimary;
     private Call mSecondary;
     private ContactCacheEntry mPrimaryContactInfo;
@@ -94,23 +93,26 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     public void onUiReady(CallCardUi ui) {
         super.onUiReady(ui);
 
+        AudioModeProvider.getInstance().addListener(this);
+
         // Contact search may have completed before ui is ready.
         if (mPrimaryContactInfo != null) {
             updatePrimaryDisplayInfo(mPrimaryContactInfo, false);
         }
 
-        if (mAudioModeProvider != null) {
-            mAudioModeProvider.addListener(this);
-        }
+        // Register for call state changes last
+        InCallPresenter.getInstance().addListener(this);
     }
 
     @Override
     public void onUiUnready(CallCardUi ui) {
         super.onUiUnready(ui);
 
-        if (mAudioModeProvider != null) {
-            mAudioModeProvider.removeListener(this);
-        }
+        // stop getting call state changes
+        InCallPresenter.getInstance().removeListener(this);
+
+        AudioModeProvider.getInstance().removeListener(this);
+
         mPrimary = null;
         mPrimaryContactInfo = null;
         mSecondaryContactInfo = null;
@@ -184,8 +186,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         // Set the call state
         if (mPrimary != null) {
-            final boolean bluetoothOn = mAudioModeProvider != null &&
-                    mAudioModeProvider.getAudioMode() == AudioMode.BLUETOOTH;
+            final boolean bluetoothOn =
+                    (AudioModeProvider.getInstance().getAudioMode() == AudioMode.BLUETOOTH);
             ui.setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn);
         } else {
             ui.setCallState(Call.State.IDLE, Call.DisconnectCause.UNKNOWN, false);
@@ -492,11 +494,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return null;
         }
         return contactInfo.number;
-    }
-
-    public void setAudioModeProvider(AudioModeProvider audioModeProvider) {
-        mAudioModeProvider = audioModeProvider;
-        mAudioModeProvider.addListener(this);
     }
 
     public void secondaryPhotoClicked() {

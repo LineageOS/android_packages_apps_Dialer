@@ -52,6 +52,6 @@ public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mPresenter.onUiUnready(getUi());
+        mPresenter.onUiDestroy(getUi());
     }
 }

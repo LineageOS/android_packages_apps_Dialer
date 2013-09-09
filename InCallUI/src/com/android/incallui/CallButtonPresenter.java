@@ -30,7 +30,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         implements InCallStateListener, AudioModeListener {
 
     private Call mCall;
-    private AudioModeProvider mAudioModeProvider;
     private ProximitySensor mProximitySensor;
     private boolean mAutomaticallyMuted = false;
     private boolean mPreviousMuteState = false;
@@ -42,16 +41,22 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     public void onUiReady(CallButtonUi ui) {
         super.onUiReady(ui);
 
-        if (mAudioModeProvider != null) {
-            mAudioModeProvider.addListener(this);
-        }
+        mProximitySensor = InCallPresenter.getInstance().getProximitySensor();
+        AudioModeProvider.getInstance().addListener(this);
+
+        // register for call state changes last
+        InCallPresenter.getInstance().addListener(this);
     }
 
     @Override
     public void onUiUnready(CallButtonUi ui) {
-        if (mAudioModeProvider != null) {
-            mAudioModeProvider.removeListener(this);
-        }
+        InCallPresenter.getInstance().removeListener(this);
+        AudioModeProvider.getInstance().removeListener(this);
+
+        mProximitySensor = null;
+
+        // set Ui to null, so should go last
+        super.onUiUnready(ui);
     }
 
     @Override
@@ -89,18 +94,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public int getAudioMode() {
-        if (mAudioModeProvider != null) {
-            return mAudioModeProvider.getAudioMode();
-        }
-        return AudioMode.EARPIECE;
+        return AudioModeProvider.getInstance().getAudioMode();
     }
 
     public int getSupportedAudio() {
-        if (mAudioModeProvider != null) {
-            return mAudioModeProvider.getSupportedModes();
-        }
-
-        return 0;
+        return AudioModeProvider.getInstance().getSupportedModes();
     }
 
     public void setAudioMode(int mode) {
@@ -174,7 +172,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     public void addCallClicked() {
         // Automatically mute the current call
         mAutomaticallyMuted = true;
-        mPreviousMuteState = mAudioModeProvider.getMute();
+        mPreviousMuteState = AudioModeProvider.getInstance().getMute();
         getUi().setMute(true);
 
         CallCommandClient.getInstance().addCall();
@@ -217,7 +215,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             ui.showAddCall(call.can(Capabilities.ADD_CALL));
 
             // Restore the previous mute state
-            if (mAutomaticallyMuted && mAudioModeProvider.getMute() != mPreviousMuteState) {
+            if (mAutomaticallyMuted &&
+                    AudioModeProvider.getInstance().getMute() != mPreviousMuteState) {
                 ui.setMute(mPreviousMuteState);
                 mAutomaticallyMuted = false;
             }
@@ -250,18 +249,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 getUi().hideExtraRow();
             }
         }
-    }
-
-    public void setAudioModeProvider(AudioModeProvider audioModeProvider) {
-        // AudioModeProvider works effectively as a pass through. However, if we
-        // had this presenter listen for changes directly, it would have to live forever
-        // or risk missing important updates.
-        mAudioModeProvider = audioModeProvider;
-        mAudioModeProvider.addListener(this);
-    }
-
-    public void setProximitySensor(ProximitySensor proximitySensor) {
-        mProximitySensor = proximitySensor;
     }
 
     public interface CallButtonUi extends Ui {

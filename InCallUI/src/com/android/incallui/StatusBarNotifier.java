@@ -48,7 +48,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     private final CallList mCallList;
     private final NotificationManager mNotificationManager;
     private boolean mIsShowingNotification = false;
-    private InCallState mInCallState = InCallState.HIDDEN;
+    private InCallState mInCallState = InCallState.NO_CALLS;
     private int mSavedIcon = 0;
     private int mSavedContent = 0;
     private Bitmap mSavedLargeIcon;
