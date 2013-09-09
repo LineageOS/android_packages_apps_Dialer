@@ -34,6 +34,9 @@ import android.util.Log;
 
 import com.android.contacts.common.util.StopWatch;
 
+import com.android.dialer.dialpad.util.*;
+import com.android.dialer.R;
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 
@@ -56,6 +59,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * immediately
  */
 public class SmartDialCache {
+    private static NameToNumber mNormalizer;
+    public static String T9_DELIMITER = " -- ";
 
     public static class ContactNumber {
         public final String displayName;
@@ -204,8 +209,24 @@ public class SmartDialCache {
     public static synchronized SmartDialCache getInstance(Context context, int nameDisplayOrder) {
         if (instance == null) {
             instance = new SmartDialCache(context, nameDisplayOrder);
+            initNormalizer(context);
         }
         return instance;
+    }
+
+    private static void initNormalizer(Context context) {
+        StringBuilder t9Chars = new StringBuilder();
+        StringBuilder t9Digits = new StringBuilder();
+
+        for (String item : context.getResources().getStringArray(R.array.t9_map)) {
+            t9Chars.append(item);
+            for (int i = 0; i < item.length(); i++) {
+                t9Digits.append(item.charAt(0));
+            }
+        }
+
+        mNormalizer = NameToNumberFactory.create(context,
+                t9Chars.toString(), t9Digits.toString());
     }
 
     /**
@@ -246,6 +267,13 @@ public class SmartDialCache {
                     final String phoneNumber = c.getString(PhoneQuery.PHONE_NUMBER);
                     final long id = c.getLong(PhoneQuery.PHONE_CONTACT_ID);
                     final String lookupKey = c.getString(PhoneQuery.PHONE_LOOKUP_KEY);
+                    String T9Names[] = mNormalizer.convert(displayName).split(" ");
+                    for (String T9Name : T9Names) {
+                        cache.put(new ContactNumber(id, T9Name + SmartDialCache.T9_DELIMITER
+                                + displayName, phoneNumber, lookupKey,
+                                affinityCount));
+                        affinityCount++;
+                    }
                     cache.put(new ContactNumber(id, displayName, phoneNumber, lookupKey,
                             affinityCount));
                     affinityCount++;

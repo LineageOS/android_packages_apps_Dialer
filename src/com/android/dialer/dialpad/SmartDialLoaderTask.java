@@ -121,9 +121,19 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
             }
             duplicates.add(contactMatch);
             final boolean matches = mNameMatcher.matches(contact.displayName);
+            // We will add the T9 number before the display name,
+            // and use the character ' -- ' that is defined in 
+            // SmartDialCache.T9_DELIMITER as delimiter.
+            String displayName = contact.displayName;
+            if (displayName != null) {
+                String names[] = displayName.split(SmartDialCache.T9_DELIMITER);
+                if (names != null && names.length > 1) {
+                    displayName = names[1];
+                }
+            }
 
             candidates.add(new SmartDialEntry(
-                    contact.displayName,
+                    displayName,
                     Contacts.getLookupUri(contact.id, contact.lookupKey),
                     contact.phoneNumber,
                     mNameMatcher.getMatchPositions(),
