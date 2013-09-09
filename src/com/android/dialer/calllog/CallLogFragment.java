@@ -26,8 +26,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
@@ -429,22 +427,6 @@ public class CallLogFragment extends ListFragment
         }
     }
 
-    /** Removes the missed call notifications. */
-    private void removeMissedCallNotifications() {
-        try {
-            ITelephony telephony =
-                    ITelephony.Stub.asInterface(ServiceManager.getService("phone"));
-            if (telephony != null) {
-                telephony.cancelMissedCallsNotification();
-            } else {
-                Log.w(TAG, "Telephony service is null, can't call " +
-                        "cancelMissedCallsNotification");
-            }
-        } catch (RemoteException e) {
-            Log.e(TAG, "Failed to clear missed calls notification due to remote exception");
-        }
-    }
-
     /** Updates call data and notification state while leaving the call log tab. */
     private void updateOnExit() {
         updateOnTransition(false);
@@ -469,14 +451,8 @@ public class CallLogFragment extends ListFragment
             if (!onEntry) {
                 mCallLogQueryHandler.markMissedCallsAsRead();
             }
-            removeMissedCallNotifications();
-            updateVoicemailNotifications();
+            CallLogNotificationsHelper.removeMissedCallNotifications();
+            CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
         }
-    }
-
-    private void updateVoicemailNotifications() {
-        Intent serviceIntent = new Intent(getActivity(), CallLogNotificationsService.class);
-        serviceIntent.setAction(CallLogNotificationsService.ACTION_UPDATE_NOTIFICATIONS);
-        getActivity().startService(serviceIntent);
     }
 }
