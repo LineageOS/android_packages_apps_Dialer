@@ -55,6 +55,8 @@ import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.util.Constants;
+import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.BackScrollManager.ScrollableHeader;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
 import com.android.dialer.calllog.CallTypeHelper;
@@ -450,7 +452,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     nameOrNumber = firstDetails.number;
                 }
 
-                if (contactUri != null) {
+                if (contactUri != null && !UriUtils.isEncodedContactUri(contactUri)) {
                     mainActionIntent = new Intent(Intent.ACTION_VIEW, contactUri);
                     // This will launch People's detail contact screen, so we probably want to
                     // treat it as a separate People task.
