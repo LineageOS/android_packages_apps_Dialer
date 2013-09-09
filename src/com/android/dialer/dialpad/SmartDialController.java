@@ -361,6 +361,9 @@ public class SmartDialController {
                     if (p.end > displayName.length()) {
                         p.end = displayName.length();
                     }
+                    if (p.start > displayName.length()) {
+                        p.start = 0;
+                    }
                     // Create a new ForegroundColorSpan for each section of the name to highlight,
                     // otherwise multiple highlights won't work.
                     displayName.setSpan(new ForegroundColorSpan(mNameHighlightedTextColor), p.start,

@@ -53,4 +53,13 @@
 
     <string name="menu_add_to_blacklist">Add to blacklist</string>
     <string name="toast_added_to_blacklist">%s added to blacklist.</string>
+    <!-- T9 -->
+    <string name="t9_map_row_2">2abcàáâäåɑæçǽćčá</string>
+    <string name="t9_map_row_3">3defďéèêëě</string>
+    <string name="t9_map_row_4">4ghiíìïîǵ</string>
+    <string name="t9_map_row_5">5jklḱḱĺ</string>
+    <string name="t9_map_row_6">6mnoòóöôøñŋǿḿńňő</string>
+    <string name="t9_map_row_7">7pqrsßɾṕŕśřš</string>
+    <string name="t9_map_row_8">8tuvťúùüûűů</string>
+    <string name="t9_map_row_9">9wxyzýẃźž</string>
 </resources>
