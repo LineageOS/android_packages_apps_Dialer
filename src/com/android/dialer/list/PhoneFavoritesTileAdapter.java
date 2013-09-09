@@ -74,6 +74,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     private Context mContext;
     private Resources mResources;
 
+    private View mEmptyView;
+
     /** Contact data stored in cache. This is used to populate the associated view. */
     protected ArrayList<ContactEntry> mContactEntries = null;
     /** Back up of the temporarily removed Contact during dragging. */
@@ -367,10 +369,15 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         return mNumFrequents;
     }
 
+    private boolean isEmptyView(int position) {
+        return position == 0 && (mContactEntries == null || mContactEntries.isEmpty());
+    }
+
     @Override
     public int getCount() {
         if (mContactEntries == null || mContactEntries.isEmpty()) {
-            return 0;
+            // empty view
+            return 1;
         }
 
         int total = mContactEntries.size();
@@ -493,7 +500,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
     @Override
     public boolean isEnabled(int position) {
-        return true;
+        return !isEmptyView(position);
     }
 
     @Override
@@ -509,7 +516,12 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         if (DEBUG) {
             Log.v(TAG, "get view for " + String.valueOf(position));
         }
+
         int itemViewType = getItemViewType(position);
+
+        if (itemViewType == ViewTypes.EMPTY) {
+            return mEmptyView;
+        }
 
         ContactTileRow contactTileRowView  = (ContactTileRow) convertView;
 
@@ -542,6 +554,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
     @Override
     public int getItemViewType(int position) {
+        if (isEmptyView(position)) return ViewTypes.EMPTY;
         if (position < getRowCount(getMaxContactsInTiles())) {
             return ViewTypes.TOP;
         } else {
@@ -1129,9 +1142,10 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     }
 
     protected static class ViewTypes {
-        public static final int COUNT = 2;
+        public static final int COUNT = 3;
         public static final int FREQUENT = 0;
         public static final int TOP = 1;
+        public static final int EMPTY = 2;
     }
 
     @Override
@@ -1157,5 +1171,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     @Override
     public boolean isSwipeEnabled() {
         return !mAwaitingRemove;
+    }
+
+    public void setEmptyView(View emptyView) {
+        mEmptyView = emptyView;
     }
 }
