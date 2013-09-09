@@ -567,7 +567,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                             private View mControls = findViewById(R.id.controls);
                             private View mPhoto = findViewById(R.id.contact_background_sizer);
                             private View mHeader = findViewById(R.id.photo_text_bar);
-                            private View mSeparator = findViewById(R.id.blue_separator);
+                        private View mSeparator = findViewById(R.id.separator);
 
                             @Override
                             public void setOffset(int offset) {

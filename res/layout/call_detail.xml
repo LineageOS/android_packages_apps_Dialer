@@ -73,10 +73,10 @@
         </view>
 
         <LinearLayout
-            android:id="@+id/blue_separator"
+            android:id="@+id/separator"
             android:layout_width="match_parent"
             android:layout_height="1dip"
-            android:background="@android:color/holo_blue_light"
+            android:background="@color/background_dialer_light"
             android:layout_below="@+id/contact_background_sizer"
         />
         <View
@@ -126,7 +126,7 @@
             android:id="@+id/voicemail_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/blue_separator"
+            android:layout_below="@id/separator"
             android:paddingBottom="@dimen/call_detail_button_spacing">
             <!-- The voicemail fragment will be put here. -->
         </LinearLayout>
