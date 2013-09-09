@@ -118,7 +118,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     @Override
     public void onStateChange(InCallState state, CallList callList) {
-        Log.d(TAG, "onStateChange() " + state);
+        Log.d(this, "onStateChange() " + state);
         final CallCardUi ui = getUi();
         if (ui == null) {
             return;
@@ -253,8 +253,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     if (entry.label == null) {
                         // Name not found.  Try lookup.
                         Log.d(TAG, "Contact lookup. Contact provider miss. Searching people api.");
-                        lookupPhoneNumber(identification.getNumber(),
-                                isPrimary, isConference);
+                        lookupPhoneNumber(identification.getNumber(), isPrimary, isConference);
                     } else {
                         Log.d(TAG, "Contact lookup. Found in contact provider: " + entry);
                         updateContactEntry(entry, isPrimary, isConference);
@@ -263,12 +262,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
                 @Override
                 public void onImageLoadComplete(int callId, Bitmap photo) {
-                    if (callId == mPrimary.getCallId()) {
+                    if (mPrimary != null && callId == mPrimary.getCallId()) {
                         getUi().setPrimaryImage(photo);
-                    } else if (callId == mSecondary.getCallId()) {
+                    } else if (mSecondary != null && callId == mSecondary.getCallId()) {
                         getUi().setSecondaryImage(photo);
                     }
-
                 }
             });
         } else {
@@ -409,7 +407,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                             updateContactEntry(entry, isPrimary, isConference);
 
                             if (info.getImageUrl() != null) {
-                                fetchImage(info.getImageUrl());
+                                fetchImage(info.getImageUrl(), isPrimary);
                             }
                         }
                     });
@@ -457,13 +455,17 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 !TextUtils.isEmpty(mPrimary.getGatewayPackage()));
     }
 
-    private void fetchImage(final String url) {
+    private void fetchImage(final String url, final boolean isPrimary) {
         if (url != null && mPhoneNumberService != null) {
             mPhoneNumberService.fetchImage(url, new PhoneNumberService.ImageLookupListener() {
                 @Override
                 public void onImageFetchComplete(Bitmap bitmap) {
                     if (getUi() != null) {
-                        getUi().setPrimaryImage(bitmap);
+                        if (isPrimary) {
+                            getUi().setPrimaryImage(bitmap);
+                        } else {
+                            getUi().setSecondaryImage(bitmap);
+                        }
                     }
                 }
             });
