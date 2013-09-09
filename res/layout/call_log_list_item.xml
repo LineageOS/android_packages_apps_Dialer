@@ -17,6 +17,7 @@
 <view
     xmlns:android="http://schemas.android.com/apk/res/android"
     class="com.android.dialer.calllog.CallLogListItemView"
+    android:id="@+id/call_log_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"

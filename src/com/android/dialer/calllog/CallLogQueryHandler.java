@@ -132,16 +132,28 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         mLogLimit = limit;
     }
 
-
     /**
      * Fetches the list of calls from the call log for a given type.
+     * This call ignores the new or old state.
      * <p>
      * It will asynchronously update the content of the list view when the fetch completes.
      */
     public void fetchCalls(int callType) {
         cancelFetch();
         int requestId = newCallsRequest();
-        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType);
+        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType , false /* newOnly */);
+    }
+
+    /**
+     * Fetches the list of calls from the call log for a given type.
+     * This call fetches only the new (i.e. NEW = 1) ones.
+     * <p>
+     * It will asynchronously update the content of the list view when the fetch completes.
+     */
+    public void fetchNewCalls(int callType) {
+        cancelFetch();
+        int requestId = newCallsRequest();
+        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType , true /* newOnly */);
     }
 
     public void fetchVoicemailStatus() {
@@ -149,20 +161,29 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
                 VoicemailStatusHelperImpl.PROJECTION, null, null, null);
     }
 
-    /** Fetches the list of calls in the call log, either the new one or the old ones. */
-    private void fetchCalls(int token, int requestId, int callType) {
+    /** Fetches the list of calls in the call log. */
+    private void fetchCalls(int token, int requestId, int callType, boolean newOnly) {
         // We need to check for NULL explicitly otherwise entries with where READ is NULL
         // may not match either the query or its negation.
         // We consider the calls that are not yet consumed (i.e. IS_READ = 0) as "new".
-        String selection = null;
+        StringBuilder where = new StringBuilder();
         List<String> selectionArgs = Lists.newArrayList();
 
+        if (newOnly) {
+            where.append(Calls.NEW);
+            where.append(" = 1");
+        }
+
         if (callType > CALL_TYPE_ALL) {
+            if (where.length() > 0) {
+                where.append(" AND ");
+            }
             // Add a clause to fetch only items of type voicemail.
-            selection = String.format("(%s = ?)", Calls.TYPE);
+            where.append(String.format("(%s = ?)", Calls.TYPE));
             selectionArgs.add(Integer.toString(callType));
         }
         final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;
+        final String selection = where.length() > 0 ? where.toString() : null;
         Uri uri = Calls.CONTENT_URI_WITH_VOICEMAIL.buildUpon()
                 .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
                 .build();
