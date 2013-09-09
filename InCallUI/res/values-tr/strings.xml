@@ -619,4 +619,5 @@
     <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Tuşlara basınca ses çıksın"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"Tuş takımı otomatik tamamlama"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Zil Sesi ve Titreşim"</string>
+    <string name="manageConferenceLabel" msgid="4691922394301969053">"Konferans görüşmesini yönet"</string>
 </resources>
