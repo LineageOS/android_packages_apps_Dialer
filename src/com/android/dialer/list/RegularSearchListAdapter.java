@@ -50,13 +50,11 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
             final DirectoryPartition partition =
                 (DirectoryPartition) getPartition(partitionIndex);
             final long directoryId = partition.getDirectoryId();
-            if (isExtendedDirectory(directoryId)) {
-               info.sourceType = CachedContactInfo.SOURCE_TYPE_EXTENDED;
-                // TODO source_id for extended directory?
-            } else {
-                info.sourceType = CachedContactInfo.SOURCE_TYPE_DIRECTORY;
-                info.sourceId = (int) directoryId;
-            }
+            info.sourceName = partition.getLabel();
+            info.sourceType = isExtendedDirectory(directoryId) ?
+                CachedContactInfo.SOURCE_TYPE_EXTENDED :
+                CachedContactInfo.SOURCE_TYPE_DIRECTORY;
+            info.sourceId = (int) directoryId;
         }
         return info;
     }
