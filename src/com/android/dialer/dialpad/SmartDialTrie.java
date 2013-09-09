@@ -147,7 +147,8 @@ public class SmartDialTrie {
     public void put(ContactNumber contact) {
         // Preconvert the display name into a byte array containing indexes to avoid having to
         // remap each character over multiple passes
-        final ParseInfo info = parseToIndexes(contact.displayName, FIRST_TOKENS_FOR_INITIALS,
+        String matchName = contact.latinizedName != null ? contact.latinizedName : contact.displayName;
+        final ParseInfo info = parseToIndexes(matchName, FIRST_TOKENS_FOR_INITIALS,
                 LAST_TOKENS_FOR_INITIALS);
         putForPrefix(contact, mRoot, info, 0, true);
         // We don't need to do the same for phone numbers since we only make one pass over them.
