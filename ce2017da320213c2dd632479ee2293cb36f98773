@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba076199_883a6ccc",
+        "filename": "src/com/android/dialer/dialpad/SmartDialCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-09-09T18:26:46Z",
+      "side": 1,
+      "message": "This is a hack:\n- Using magic tokens in (user-definable) display names is bad and may break depending on what the user put there\n- In case of non-chinese|korean, you\u0027ll add the matches twice (once the output of the normalization, once below).\n\nI\u0027d suggest an approach like this:\n- Give ContactNumber a new field like \u0027latinizedName\u0027 which is only filled for the chinese and korean case. Fill it with the latinized version (e.g. Pinyin in the chinese case)\n- Everytime the display name is used for digit parsing (e.g. in SmartDialTrie.put, SmartDialLoaderTask.getContactMatches), use latinizedName if available (String matchName \u003d latinName !\u003d null ? latinName : displayName). Matching against the non-latinized version won\u0027t work anyway, as SmartDialNameMatcher only supports latin characters\n- Keep displayName as it currently is",
+      "revId": "ce2017da320213c2dd632479ee2293cb36f98773",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba076199_483474dd",
+        "filename": "src/com/android/dialer/dialpad/util/NameToNumber.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-09-09T18:26:46Z",
+      "side": 1,
+      "message": "This should become an interface:\n\npublic interface NameLatinizer {\n    String[] getNameLatinizations(String name);\n}",
+      "revId": "ce2017da320213c2dd632479ee2293cb36f98773",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
