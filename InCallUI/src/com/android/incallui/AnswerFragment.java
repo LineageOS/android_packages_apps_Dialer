@@ -140,9 +140,12 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
 
     @Override
     public void configureMessageDialogue(ArrayList<String> textResponses) {
-        textResponses.add(getResources().getString(R.string.respond_via_sms_custom_message));
+        final ArrayList<String> textResponsesForDisplay = new ArrayList<String>(textResponses);
+
+        textResponsesForDisplay.add(getResources().getString(
+                R.string.respond_via_sms_custom_message));
         mTextResponsesAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, textResponses);
+                android.R.layout.simple_list_item_1, android.R.id.text1, textResponsesForDisplay);
     }
 
     @Override
