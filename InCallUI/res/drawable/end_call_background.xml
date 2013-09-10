@@ -17,29 +17,12 @@
 <!-- Background drawable used to render the "end call" button. -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_enabled="false">
-        <bitmap
-            android:src="@drawable/endcall_disable"
-            android:tileMode="repeat" />
-    </item>
+    <item android:state_enabled="false"
+          android:drawable="@drawable/end_call_disabled_state" />
 
-    <item android:state_pressed="true">
-        <bitmap
-            android:src="@drawable/endcall_active"
-            android:tileMode="repeat" />
-    </item>
+    <item android:state_pressed="true"
+          android:drawable="@drawable/end_call_pressed_state" />
 
-    <item>
-        <layer-list>
-            <item>
-                <bitmap
-                    android:src="@drawable/endcall_background_texture"
-                    android:tileMode="repeat" />
-            </item>
-
-            <!-- The standard "compound button" background. -->
-            <item android:drawable="@drawable/btn_compound_background" />
-        </layer-list>
-    </item>
+    <item android:drawable="@drawable/end_call_active_state" />
 
 </selector>
