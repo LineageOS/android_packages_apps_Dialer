@@ -98,7 +98,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     @Override
     public void onCallStateChanged(Call call) {
-        Log.d(TAG, "onCallStateChange() " + call);
+        Log.d(this, "onCallStateChange() " + call);
         if (call.getState() != Call.State.INCOMING && call.getState() != Call.State.CALL_WAITING) {
             // Stop listening for updates.
             CallList.getInstance().removeCallUpdateListener(mCallId, this);
