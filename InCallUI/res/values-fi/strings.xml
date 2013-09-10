@@ -623,4 +623,5 @@
     <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Valintanäppäimien näppäinäänet"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"Näppäimistön automaattinen täydennys"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Soittoääni ja värinä"</string>
+    <string name="manageConferenceLabel" msgid="4691922394301969053">"Hallinnoi puhelinneuvottelua"</string>
 </resources>
