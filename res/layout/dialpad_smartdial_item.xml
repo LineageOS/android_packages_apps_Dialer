@@ -17,6 +17,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="0dp"
+    android:maxWidth="200dp"
     android:layout_weight="1"
     android:layout_height="match_parent"
     android:layout_marginTop="2dp"

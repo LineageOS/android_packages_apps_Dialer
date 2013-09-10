@@ -72,13 +72,26 @@
             android:layout_height="match_parent"
             android:background="@drawable/dialpad_background">
         </View>
-        <LinearLayout
-            android:id="@+id/dialpad_smartdial_list"
+        <RelativeLayout
+            android:id="@+id/dialpad_smartdial_scroll_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:gravity="center">
-        </LinearLayout>
+
+            <HorizontalScrollView
+            android:id="@+id/dialpad_smartdial_list_scroll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
+                <LinearLayout
+                    android:id="@+id/dialpad_smartdial_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                </LinearLayout>
+             </HorizontalScrollView>
+        </RelativeLayout>
     </RelativeLayout>
 
     <!-- Keypad section -->

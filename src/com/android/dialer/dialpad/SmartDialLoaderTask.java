@@ -50,7 +50,7 @@ public class SmartDialLoaderTask extends AsyncTask<String, Integer, List<SmartDi
 
     static private final boolean DEBUG = false;
 
-    private static final int MAX_ENTRIES = 3;
+    private static final int MAX_ENTRIES = 6;
 
     private final SmartDialCache mContactsCache;
 
