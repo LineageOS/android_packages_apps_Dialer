@@ -29,6 +29,9 @@
     <!-- Match call_button_height to Phone's dimens/in_call_end_button_height -->
     <dimen name="call_button_height">74dp</dimen>
 
+    <!--  Search View -->
+    <dimen name="search_text_size">16sp</dimen>
+
     <!-- Call Log -->
     <dimen name="call_log_call_action_size">32dip</dimen>
     <dimen name="call_log_call_action_width">48dip</dimen>
