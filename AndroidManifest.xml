@@ -120,7 +120,7 @@
 
         <activity android:name="com.android.dialer.calllog.CallLogActivity"
             android:label="@string/call_log_activity_title"
-            android:theme="@style/CallLogActivityTheme"
+            android:theme="@style/DialtactsThemeWithActionBarOverlay"
             android:screenOrientation="portrait"
             android:icon="@mipmap/ic_launcher_phone">
             <intent-filter>
@@ -133,7 +133,7 @@
 
         <activity android:name="com.android.dialer.list.AllContactsActivity"
             android:label="@string/show_all_contacts_title"
-            android:theme="@style/DialtactsTheme"
+            android:theme="@style/DialtactsThemeWithActionBarOverlay"
             android:screenOrientation="portrait">
         </activity>
 
