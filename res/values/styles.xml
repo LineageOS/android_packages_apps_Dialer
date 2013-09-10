@@ -19,7 +19,7 @@
            parent="android:Theme.Holo.Light">
         <item name="android:textColorPrimary">@color/dialtacts_primary_text_color</item>
         <item name="android:textColorSecondary">@color/dialtacts_secondary_text_color</item>
-        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowActionBarOverlay">false</item>
         <item name="android:actionBarStyle">@style/DialtactsActionBarStyle</item>
         <item name="android:actionBarTabStyle">@style/DialtactsActionBarTabStyle</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -70,6 +70,10 @@
 
     <style name="DialpadTheme" parent="DialtactsTheme">
         <item name="android:textColorPrimary">#FFFFFF</item>
+    </style>
+
+    <style name="CallLogActivityTheme" parent="DialtactsTheme">
+        <item name="android:windowActionBarOverlay">true</item>
     </style>
 
     <style name="CallDetailActivityTheme" parent="android:Theme.Holo.Light">

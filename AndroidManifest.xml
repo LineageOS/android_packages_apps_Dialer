@@ -63,7 +63,6 @@
         <activity android:name=".DialtactsActivity"
             android:label="@string/launcherDialer"
             android:theme="@style/DialtactsTheme"
-            android:uiOptions="splitActionBarWhenNarrow"
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
             android:icon="@mipmap/ic_launcher_phone"
@@ -121,7 +120,7 @@
 
         <activity android:name="com.android.dialer.calllog.CallLogActivity"
             android:label="@string/call_log_activity_title"
-            android:theme="@style/DialtactsTheme"
+            android:theme="@style/CallLogActivityTheme"
             android:screenOrientation="portrait"
             android:icon="@mipmap/ic_launcher_phone">
             <intent-filter>
