@@ -199,7 +199,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     @Override
     public void onResume() {
         super.onResume();
-        mCallLogQueryHandler.fetchCalls(CallLogQueryHandler.CALL_TYPE_ALL);
+        mCallLogQueryHandler.fetchNewCalls(CallLogQueryHandler.CALL_TYPE_ALL);
         mCallLogAdapter.setLoading(true);
         getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
     }
