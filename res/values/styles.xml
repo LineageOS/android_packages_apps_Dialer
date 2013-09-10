@@ -20,7 +20,7 @@
         <item name="android:textColorPrimary">@color/dialtacts_primary_text_color</item>
         <item name="android:textColorSecondary">@color/dialtacts_secondary_text_color</item>
         <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:actionBarStyle">@style/DialtactsActionBarStyleNew</item>
+        <item name="android:actionBarStyle">@style/DialtactsActionBarStyle</item>
         <item name="android:actionBarTabStyle">@style/DialtactsActionBarTabStyle</item>
         <item name="android:windowContentOverlay">@null</item>
         <!--  Searchbox Style -->
@@ -117,17 +117,11 @@
         <item name="android:background">#66000000</item>
     </style>
 
-    <style name="DialtactsActionBarStyleNew" parent="android:Widget.Holo.ActionBar">
+    <style name="DialtactsActionBarStyle" parent="android:Widget.Holo.ActionBar">
         <item name="android:background">@drawable/call_history_actionbar_background</item>
         <item name="android:backgroundStacked">@color/actionbar_background_color</item>
         <!-- Empty icon -->
         <item name="android:icon">@android:color/transparent</item>
-        <item name="android:displayOptions"></item>
-    </style>
-
-    <style name="DialtactsActionBarStyle" parent="android:Widget.Holo.ActionBar">
-        <item name="android:backgroundSplit">@null</item>
-        <item name="android:backgroundStacked">@drawable/ab_stacked_opaque_dark_holo</item>
         <item name="android:displayOptions"></item>
     </style>
 
