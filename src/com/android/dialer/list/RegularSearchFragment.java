@@ -16,7 +16,7 @@
 package com.android.dialer.list;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
-import com.android.dialerbind.ServiceFactory;
+import com.android.dialerbind.ObjectFactory;
 import com.android.dialer.service.CachedNumberLookupService;
 
 public class RegularSearchFragment extends SearchFragment {
@@ -24,7 +24,7 @@ public class RegularSearchFragment extends SearchFragment {
     private static final int SEARCH_DIRECTORY_RESULT_LIMIT = 5;
 
     private static final CachedNumberLookupService mCachedNumberLookupService =
-        ServiceFactory.newCachedNumberLookupService();
+        ObjectFactory.newCachedNumberLookupService();
 
     public RegularSearchFragment() {
         configureDirectorySearch();

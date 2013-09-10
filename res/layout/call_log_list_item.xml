@@ -17,9 +17,9 @@
 <view
     xmlns:android="http://schemas.android.com/apk/res/android"
     class="com.android.dialer.calllog.CallLogListItemView"
-    android:id="@+id/call_log_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/call_log_list_item"
     android:orientation="vertical"
     android:background="@drawable/bottom_border_background"
 >
@@ -140,12 +140,4 @@
         android:paddingTop="@dimen/call_log_inner_margin"
         android:paddingBottom="@dimen/call_log_inner_margin" />
 
-    <View
-        android:id="@+id/call_log_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginStart="@dimen/call_log_outer_margin"
-        android:layout_marginEnd="@dimen/call_log_outer_margin"
-        android:background="#55ffffff"
-    />
 </view>

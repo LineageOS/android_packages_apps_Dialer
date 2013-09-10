@@ -90,7 +90,7 @@ public class CallLogAdapter extends GroupingListAdapter
     /** The size of the cache of contact info. */
     private static final int CONTACT_INFO_CACHE_SIZE = 100;
 
-    private final Context mContext;
+    protected final Context mContext;
     private final ContactInfoHelper mContactInfoHelper;
     private final CallFetcher mCallFetcher;
     private ViewTreeObserver mViewTreeObserver = null;
@@ -448,8 +448,17 @@ public class CallLogAdapter extends GroupingListAdapter
 
     @Override
     protected View newStandAloneView(Context context, ViewGroup parent) {
-        LayoutInflater inflater =
-                (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return newChildView(context, parent);
+    }
+
+    @Override
+    protected View newGroupView(Context context, ViewGroup parent) {
+        return newChildView(context, parent);
+    }
+
+    @Override
+    protected View newChildView(Context context, ViewGroup parent) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
         findAndCacheViews(view);
         return view;
@@ -461,26 +470,8 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     @Override
-    protected View newChildView(Context context, ViewGroup parent) {
-        LayoutInflater inflater =
-                (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
-        findAndCacheViews(view);
-        return view;
-    }
-
-    @Override
     protected void bindChildView(View view, Context context, Cursor cursor) {
         bindView(view, cursor, 1);
-    }
-
-    @Override
-    protected View newGroupView(Context context, ViewGroup parent) {
-        LayoutInflater inflater =
-                (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
-        findAndCacheViews(view);
-        return view;
     }
 
     @Override
@@ -509,7 +500,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
         // Default case: an item in the call log.
         views.primaryActionView.setVisibility(View.VISIBLE);
-        views.bottomDivider.setVisibility(View.VISIBLE);
         views.listHeaderTextView.setVisibility(View.GONE);
 
         final String number = c.getString(CallLogQuery.NUMBER);
@@ -593,6 +583,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final int[] callTypes = getCallTypes(c, count);
         final String geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
         final PhoneCallDetails details;
+
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
@@ -623,6 +614,12 @@ public class CallLogAdapter extends GroupingListAdapter
             mViewTreeObserver = view.getViewTreeObserver();
             mViewTreeObserver.addOnPreDrawListener(this);
         }
+
+        postBindView(views, info);
+    }
+
+    protected void postBindView(CallLogListItemViews views, ContactInfo info) {
+        // no-op
     }
 
     /** Checks whether the contact info from the call log matches the one from the contacts db. */

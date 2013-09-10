@@ -30,13 +30,9 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
-import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -50,8 +46,8 @@ import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
+import com.android.dialerbind.ObjectFactory;
 import com.android.internal.telephony.ITelephony;
-import com.google.common.annotations.VisibleForTesting;
 
 import java.util.List;
 
@@ -234,8 +230,8 @@ public class CallLogFragment extends ListFragment
         super.onViewCreated(view, savedInstanceState);
         updateEmptyMessage(mCallTypeFilter);
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mAdapter = new CallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso), false);
+        mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this, new ContactInfoHelper(
+                getActivity(), currentCountryIso), false, true);
         setListAdapter(mAdapter);
         getListView().setItemsCanFocus(true);
     }

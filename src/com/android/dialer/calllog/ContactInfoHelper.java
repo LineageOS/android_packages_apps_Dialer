@@ -22,18 +22,15 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
-import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.service.CachedNumberLookupService;
-import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
-import com.android.dialerbind.ServiceFactory;
+import com.android.dialerbind.ObjectFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +43,7 @@ public class ContactInfoHelper {
     private final String mCurrentCountryIso;
 
     private static final CachedNumberLookupService mCachedNumberLookupService =
-            ServiceFactory.newCachedNumberLookupService();
+            ObjectFactory.newCachedNumberLookupService();
 
     public ContactInfoHelper(Context context, String currentCountryIso) {
         mContext = context;
