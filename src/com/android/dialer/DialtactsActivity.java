@@ -408,6 +408,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             case R.id.search_close_button:
                 // Clear the search field
                 if (!TextUtils.isEmpty(mSearchView.getText())) {
+                    mDialpadFragment.clearDialpad();
                     mSearchView.setText("");
                 }
                 break;
