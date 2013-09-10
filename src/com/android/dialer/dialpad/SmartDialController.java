@@ -101,7 +101,7 @@ public class SmartDialController {
     private final List<LinearLayout> mViewOverlays = Lists.newArrayList();
     private final List<LinearLayout> mViews = Lists.newArrayList();
 
-    private static final int NUM_SUGGESTIONS = 3;
+    private static final int NUM_SUGGESTIONS = 6;
 
     private static final long ANIM_DURATION = 200;
 
@@ -226,12 +226,12 @@ public class SmartDialController {
             show(active);
             if (!containsSameContact(oldItem, item)) {
                 // Determine what kind of animation to use for the new view
-                if (i == 1) { // Middle suggestion
+                if (i == 2) { // Middle suggestion
                     if (containsSameContact(item, mOldEntries.get(0))) {
                         // Suggestion went from the left to the middle, slide it left to right
                         animateSlideFromLeft(active);
                         dontAnimateOverlay[0] = true;
-                    } else if (containsSameContact(item, mOldEntries.get(2))) {
+                    } else if (containsSameContact(item, mOldEntries.get(5))) {
                         // Suggestion sent from the right to the middle, slide it right to left
                         animateSlideFromRight(active);
                         dontAnimateOverlay[2] = true;
@@ -239,11 +239,11 @@ public class SmartDialController {
                         animateFadeInAndSlideUp(active);
                     }
                 } else { // Left/Right suggestion
-                    if (i == 2 && containsSameContact(item, mOldEntries.get(1))) {
+                    if (((i == 3)||(i == 4)) && containsSameContact(item, mOldEntries.get(2))) {
                         // Suggestion went from middle to the right, slide it left to right
                         animateSlideFromLeft(active);
                         dontAnimateOverlay[1] = true;
-                    } else if (i == 0 && containsSameContact(item, mOldEntries.get(1))) {
+                    } else if (((i == 0)||(i == 1)) && containsSameContact(item, mOldEntries.get(2))) {
                         // Suggestion went from middle to the left, slide it right to left
                         animateSlideFromRight(active);
                         dontAnimateOverlay[1] = true;
