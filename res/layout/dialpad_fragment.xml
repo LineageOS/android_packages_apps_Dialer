@@ -57,6 +57,7 @@
                 android:textAppearance="@style/DialtactsDigitsTextAppearance"
                 android:textColor="@color/dialpad_text_color"
                 android:textCursorDrawable="@null"
+                android:fontFamily="sans-serif-light"
                 android:nextFocusRight="@+id/overflow_menu"
                 android:background="@android:color/transparent" />
 
