@@ -155,4 +155,6 @@
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Bonke oxhumana nabo"</string>
     <string name="favorite_hidden" msgid="4837366417440391323">"Kufihliwe kusukela kuzintandokazi"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Hlehlisa"</string>
+    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Shayela ku-<xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Engeza koxhumana nabo"</string>
 </resources>

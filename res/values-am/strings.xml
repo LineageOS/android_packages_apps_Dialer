@@ -89,7 +89,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"ያመለጡትን ብቻ አሳይ"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"የድምፅ መልዕክቶች ብቻ አሳይ"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"ሁሉንም ጥሪዎች አሳይ"</string>
-    <string name="add_2sec_pause" msgid="9214012315201040129">"2 ሰከንድ ፋታ አክል"</string>
+    <string name="add_2sec_pause" msgid="9214012315201040129">"2 ሴኮንድ ፋታ አክል"</string>
     <string name="add_wait" msgid="3360818652790319634">"ጠብቅአክል"</string>
     <string name="call_settings" msgid="7666474782093693667">"ቅንብሮች"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"አዲስ ዕውቅያ"</string>
@@ -155,4 +155,6 @@
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"ሁሉም እውቂያዎች"</string>
     <string name="favorite_hidden" msgid="4837366417440391323">"ከተወዳጆች ተደብቋል"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"ቀልብስ"</string>
+    <string name="search_shortcut_call_number" msgid="7277194656832895870">"ለ<xliff:g id="NUMBER">%s</xliff:g> ደውል"</string>
+    <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"ወደ ዕውቂያዎች አክል"</string>
 </resources>

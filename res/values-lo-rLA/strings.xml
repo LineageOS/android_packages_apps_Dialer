@@ -155,4 +155,6 @@
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"ລາຍຊື່ຜູ່ຕິດຕໍ່ທັງໝົດ"</string>
     <string name="favorite_hidden" msgid="4837366417440391323">"ຖືກເຊື່ອງຈາກລາຍການທີ່ມັກແລ້ວ"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"ຍົກເລີກ"</string>
+    <string name="search_shortcut_call_number" msgid="7277194656832895870">"ໂທ​ຫາ <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"ເພີ່ມໃສ່ລາຍຊື່ຕິດຕໍ່"</string>
 </resources>
