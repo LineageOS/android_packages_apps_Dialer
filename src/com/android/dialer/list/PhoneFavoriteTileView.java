@@ -131,20 +131,10 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     public void displayRemovalDialog() {
         mRemovalDialogue.setVisibility(VISIBLE);
         mRemovalDialogue.setAlpha(0f);
-        final int animationLength = ANIMATION_LENGTH;
-        final AnimatorSet animSet = new AnimatorSet();
         final ObjectAnimator fadeIn = ObjectAnimator.ofFloat(mRemovalDialogue, "alpha",
-                1.f).setDuration(animationLength);
+                1.f).setDuration(ANIMATION_LENGTH);
 
-        if (mParentRow.getItemViewType() == ViewTypes.FREQUENT) {
-            final ObjectAnimator backgroundFadeIn = ObjectAnimator.ofInt(
-                    mParentRow.getBackground(), "alpha", 0).setDuration(animationLength);
-            animSet.playTogether(fadeIn, backgroundFadeIn);
-        } else {
-            animSet.playTogether(fadeIn);
-        }
-
-        animSet.addListener(new AnimatorListenerAdapter() {
+        fadeIn.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
                 mParentRow.setHasTransientState(true);
@@ -155,8 +145,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
                 mParentRow.setHasTransientState(false);
             }
         });
-
-        animSet.start();
+        fadeIn.start();
     }
 
     /**
@@ -172,10 +161,11 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
                 setDuration(ANIMATION_LENGTH);
         final ObjectAnimator moveBack = ObjectAnimator.ofFloat(mFavoriteContactCard, "translationX",
                 0.f).setDuration(ANIMATION_LENGTH);
-        final ObjectAnimator backgroundFadeOut = ObjectAnimator.ofInt(mParentRow.getBackground(),
-                "alpha", 255).setDuration(ANIMATION_LENGTH);
+
         final AnimatorSet animSet = new AnimatorSet();
-        animSet.playTogether(fadeIn, moveBack, backgroundFadeOut);
+
+        animSet.playTogether(fadeIn, moveBack);
+
         animSet.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
