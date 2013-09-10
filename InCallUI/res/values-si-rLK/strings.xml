@@ -619,4 +619,5 @@
     <string name="dtmf_tone_enable_title" msgid="827601042915852989">"ඇමතුම් පෑඩයේ ස්පර්ශ නාද"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"ඩයල් පෑඩය ස්වයංපූර්ණය"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"රිගින් ටෝන් සහ කම්පනය කරන්න"</string>
+    <string name="manageConferenceLabel" msgid="4691922394301969053">"සම්මන්ත්‍රණ ඇමතුම කළමනාකරණය කරන්න"</string>
 </resources>
