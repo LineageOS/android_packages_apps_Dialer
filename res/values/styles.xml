@@ -72,7 +72,7 @@
         <item name="android:textColorPrimary">#FFFFFF</item>
     </style>
 
-    <style name="CallLogActivityTheme" parent="DialtactsTheme">
+    <style name="DialtactsThemeWithActionBarOverlay" parent="DialtactsTheme">
         <item name="android:windowActionBarOverlay">true</item>
     </style>
 
