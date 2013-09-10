@@ -85,6 +85,7 @@ public class CallList {
 
         updateCallInMap(call);
 
+        notifyCallUpdateListeners(call);
         notifyListenersOfChange();
     }
 
