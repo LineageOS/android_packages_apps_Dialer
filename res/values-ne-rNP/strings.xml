@@ -155,4 +155,8 @@
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"सबै सम्पर्कहरू"</string>
     <string name="favorite_hidden" msgid="4837366417440391323">"मन पर्नेहरूबाट लुकाइएका"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"अनडु गर्नुहोस्"</string>
+    <!-- no translation found for search_shortcut_call_number (7277194656832895870) -->
+    <skip />
+    <!-- no translation found for search_shortcut_add_to_contacts (1853716708655789069) -->
+    <skip />
 </resources>
