@@ -195,13 +195,13 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
 
         final boolean isVisible = state.isConnectingOrConnected() &&
-                !state.isIncoming();
+                !state.isIncoming() && call != null;
 
         ui.setVisible(isVisible);
 
         Log.d(this, "Updating call UI for call: ", call);
 
-        if (isVisible && call != null) {
+        if (isVisible) {
             Log.v(this, "Show hold ", call.can(Capabilities.HOLD));
             Log.v(this, "Show merge ", call.can(Capabilities.MERGE_CALLS));
             Log.v(this, "Show swap ", call.can(Capabilities.SWAP_CALLS));
