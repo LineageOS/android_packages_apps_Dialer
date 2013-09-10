@@ -39,4 +39,5 @@
         dc:vibrationDuration="20"
         dc:glowRadius="@dimen/glowpadview_glow_radius"
         dc:pointDrawable="@*android:drawable/ic_lockscreen_glowdot"
+        dc:allowScaling="true"
         />
