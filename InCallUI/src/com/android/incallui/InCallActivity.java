@@ -273,6 +273,7 @@ public class InCallActivity extends Activity {
         if (mCallButtonFragment == null) {
             mCallButtonFragment = (CallButtonFragment) getFragmentManager()
                     .findFragmentById(R.id.callButtonFragment);
+            mCallButtonFragment.getView().setVisibility(View.INVISIBLE);
         }
 
         if (mCallCardFragment == null) {
