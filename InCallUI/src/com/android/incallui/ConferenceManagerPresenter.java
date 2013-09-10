@@ -60,7 +60,7 @@ public class ConferenceManagerPresenter
 
     private void update(CallList callList) {
         mCallerIds = null;
-        mCallerIds = callList.getActiveCall().getChildCallIds().toArray(new Integer[0]);
+        mCallerIds = callList.getActiveOrBackgroundCall().getChildCallIds().toArray(new Integer[0]);
         mNumCallersInConference = mCallerIds.length;
         Log.v(this, "Number of calls is " + String.valueOf(mNumCallersInConference));
 
