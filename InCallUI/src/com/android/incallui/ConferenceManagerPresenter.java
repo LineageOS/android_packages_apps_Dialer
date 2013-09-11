@@ -39,8 +39,24 @@ public class ConferenceManagerPresenter
     private Context mContext;
 
     @Override
+    public void onUiReady(ConferenceManagerUi ui) {
+        super.onUiReady(ui);
+
+        // register for call state changes last
+        InCallPresenter.getInstance().addListener(this);
+    }
+
+    @Override
+    public void onUiUnready(ConferenceManagerUi ui) {
+        super.onUiUnready(ui);
+
+        InCallPresenter.getInstance().removeListener(this);
+    }
+
+    @Override
     public void onStateChange(InCallState state, CallList callList) {
         if (getUi().isFragmentVisible()) {
+            Log.v(this, "onStateChange" + state);
             if (state == InCallState.INCALL && callList.getActiveOrBackgroundCall() != null &&
                     callList.getActiveOrBackgroundCall().isConferenceCall()) {
                 Log.v(this, "Number of existing calls is " +
