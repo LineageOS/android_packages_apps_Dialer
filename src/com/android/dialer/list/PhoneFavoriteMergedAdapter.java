@@ -52,7 +52,6 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     private static final int ALL_CONTACTS_BUTTON_ITEM_ID = -1;
     private final PhoneFavoritesTileAdapter mContactTileAdapter;
     private final CallLogAdapter mCallLogAdapter;
-    private final View mLoadingView;
     private final View mShowAllContactsButton;
 
     private final int mCallLogPadding;
@@ -99,7 +98,6 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     public PhoneFavoriteMergedAdapter(Context context,
             PhoneFavoritesTileAdapter contactTileAdapter,
             CallLogAdapter callLogAdapter,
-            View loadingView,
             View showAllContactsButton) {
         final Resources resources = context.getResources();
         mContext = context;
@@ -109,7 +107,6 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         mObserver = new CustomDataSetObserver();
         mCallLogAdapter.registerDataSetObserver(mObserver);
         mContactTileAdapter.registerDataSetObserver(mObserver);
-        mLoadingView = loadingView;
         mShowAllContactsButton = showAllContactsButton;
         mCallLogQueryHandler = new CallLogQueryHandler(mContext.getContentResolver(),
                 mCallLogQueryHandlerListener);
@@ -242,9 +239,6 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     @Override
     public boolean areAllItemsEnabled() {
-        // If "all" section is being loaded we'll show mLoadingView, which is not enabled.
-        // Otherwise check the all the other components in the ListView and return appropriate
-        // result.
         return mCallLogAdapter.areAllItemsEnabled() && mContactTileAdapter.areAllItemsEnabled();
     }
 

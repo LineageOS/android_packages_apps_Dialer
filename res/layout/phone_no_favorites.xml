@@ -14,27 +14,21 @@
      limitations under the License.
 -->
 
-<!-- "Loading" text with a spinner, which is used in PhoneFavorite screen -->
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:orientation="horizontal"
-    android:gravity="start|center_vertical">
-
-    <ProgressBar
-        android:indeterminate="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progress_spinner"/>
+    android:minHeight="?android:attr/listPreferredItemHeight">
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/contact_list_loading"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginStart="4dip" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/listTotalAllContactsZeroStarred"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="?android:attr/textColorSecondary"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
 
-</LinearLayout>
+</FrameLayout>

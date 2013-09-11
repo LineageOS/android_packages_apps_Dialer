@@ -12,7 +12,7 @@ public class PhoneFavoritesTileAdapterTest extends AndroidTestCase {
     }
 
     /**
-     * TODO Krelease: Add tests
+     * TODO: Add tests
      *
      * Test cases (various combinations of):
      * No pinned contacts
@@ -26,7 +26,7 @@ public class PhoneFavoritesTileAdapterTest extends AndroidTestCase {
     }
 
     /**
-     * TODO Krelease: Add tests
+     * TODO: Add tests
      *
      * This method assumes that contacts have already been reordered by
      * arrangeContactsByPinnedPosition, so we can test it with a less expansive set of test data.

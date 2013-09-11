@@ -144,18 +144,17 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private CallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
 
-    private TextView mEmptyView;
     private PhoneFavoriteListView mListView;
+
     private View mShowAllContactsButton;
 
     private final HashMap<Long, Integer> mItemIdTopMap = new HashMap<Long, Integer>();
     private final HashMap<Long, Integer> mItemIdLeftMap = new HashMap<Long, Integer>();
 
     /**
-     * Layout used when contacts load is slower than expected and thus "loading" view should be
-     * shown.
+     * Layout used when there are no favorites.
      */
-    private View mLoadingView;
+    private View mEmptyView;
 
     private final ContactTileView.Listener mContactTileAdapterListener =
             new ContactTileAdapterListener();
@@ -171,7 +170,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         // Construct two base adapters which will become part of PhoneFavoriteMergedAdapter.
         // We don't construct the resultant adapter at this moment since it requires LayoutInflater
         // that will be available on onCreateView().
-
         mContactTileAdapter = new PhoneFavoritesTileAdapter(activity, mContactTileAdapterListener,
                 this,
                 getResources().getInteger(R.integer.contact_tile_column_count_in_favorites_new),
@@ -214,7 +212,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mListView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
         mListView.setOnItemSwipeListener(mContactTileAdapter);
 
-        mLoadingView = inflater.inflate(R.layout.phone_loading_contacts, mListView, false);
+        mEmptyView = inflater.inflate(R.layout.phone_no_favorites, mListView, false);
+
         mShowAllContactsButton = inflater.inflate(R.layout.show_all_contact_button, mListView,
                 false);
         mShowAllContactsButton.setOnClickListener(new OnClickListener() {
@@ -224,18 +223,15 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             }
         });
 
+        mContactTileAdapter.setEmptyView(mEmptyView);
         mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), mContactTileAdapter,
-                mCallLogAdapter, mLoadingView, mShowAllContactsButton);
+                mCallLogAdapter, mShowAllContactsButton);
 
         mListView.setAdapter(mAdapter);
 
         mListView.setOnScrollListener(mScrollListener);
         mListView.setFastScrollEnabled(false);
         mListView.setFastScrollAlwaysVisible(false);
-
-        mEmptyView = (TextView) listLayout.findViewById(R.id.contact_tile_list_empty);
-        mEmptyView.setText(getString(R.string.listTotalAllContactsZero));
-        mListView.setEmptyView(mEmptyView);
 
         return listLayout;
     }
