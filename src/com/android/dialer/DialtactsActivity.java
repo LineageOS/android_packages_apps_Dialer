@@ -161,6 +161,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean mInRegularSearch;
 
     /**
+     * True if the dialpad is only temporarily showing due to being in call
+     */
+    private boolean mInCallDialpadUp;
+
+    /**
      * True when this activity has been launched for the first time.
      */
     private boolean mFirstLaunch;
@@ -312,7 +317,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         super.onResume();
         if (mFirstLaunch) {
             displayFragment(getIntent());
+        } else if (!phoneIsInUse() && mInCallDialpadUp) {
+            hideDialpadFragment(false, true);
+            mInCallDialpadUp = false;
         }
+
         mFirstLaunch = false;
         mDialerDatabaseHelper.startSmartDialUpdateThread();
     }
@@ -396,6 +405,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 break;
             }
             case R.id.dialpad_button:
+                // Reset the boolean flag that tracks whether the dialpad was up because
+                // we were in call. Regardless of whether it was true before, we want to
+                // show the dialpad because the user has explicitly clicked the dialpad
+                // button.
+                mInCallDialpadUp = false;
                 showDialpadFragment(true);
                 break;
             case R.id.call_history_on_dialpad_button:
@@ -632,6 +646,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         if (mDialpadFragment != null && (phoneIsInUse() || isDialIntent(intent))) {
             mDialpadFragment.setStartedFromNewIntent(true);
+            if (!mDialpadFragment.isVisible()) {
+                mInCallDialpadUp = true;
+            }
             showDialpadFragment(false);
         }
     }
