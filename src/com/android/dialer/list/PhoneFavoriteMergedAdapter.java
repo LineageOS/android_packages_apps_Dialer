@@ -285,7 +285,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             view.setBackgroundResource(R.drawable.dialer_recent_card_bg);
 
             final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.WRAP_CONTENT);
             params.setMarginsRelative(mCallLogPadding, mCallLogPadding, mCallLogPadding,
                     mCallLogPadding);
