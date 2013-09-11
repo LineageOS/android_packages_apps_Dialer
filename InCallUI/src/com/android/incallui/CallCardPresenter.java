@@ -21,7 +21,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -31,7 +30,6 @@ import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
-import com.android.incallui.service.PhoneNumberService;
 import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.CallIdentification;
@@ -48,7 +46,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private static final String TAG = CallCardPresenter.class.getSimpleName();
     private static final long CALL_TIME_UPDATE_INTERVAL = 1000; // in milliseconds
 
-    private PhoneNumberService mPhoneNumberService;
     private Call mPrimary;
     private Call mSecondary;
     private ContactCacheEntry mPrimaryContactInfo;
@@ -67,9 +64,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
 
-    public void init(Context context, PhoneNumberService phoneNumberService, Call call) {
+    public void init(Context context, Call call) {
         mContext = Preconditions.checkNotNull(context);
-        mPhoneNumberService = phoneNumberService;
 
         // Call may be null if disconnect happened already.
         if (call != null) {
@@ -236,34 +232,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         final ContactInfoCache cache = ContactInfoCache.getInstance(mContext);
 
-        // See if local contact lookup was already made by the status bar (for incoming calls)
-        final ContactCacheEntry entry = cache.getInfo(identification.getCallId());
-
-        // TODO: un-stable... must use number field to check if a contact was found
-        // because the contactinfocache pre-massages the data into the ui fields.
-        // Need to do massaging outside of contactinfocache.
-        if (entry == null || entry.label == null) {
-            // TODO(klp): currently we can't distinguish between...
-            //   1) a lookup occurred but failed to find a local contact.
-            //   2) a lookup has not occurred.
-            // We need to track it so we can avoid an un-necessary lookup here.
-            Log.d(TAG, "Contact lookup. In memory cache miss. Searching provider.");
-            cache.findInfo(identification, isIncoming, new ContactInfoCacheCallback() {
+        cache.findInfo(identification, isIncoming, new ContactInfoCacheCallback() {
                 @Override
                 public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
-                    // TODO: un-stable... must use label field to check if a contact was found
-                    // because the contactinfocache pre-massages the data into the ui fields.
-                    // Need to do massaging outside of contactinfocache.
-                    if (entry.label == null) {
-                        if (identification.getNumberPresentation() == Call.PRESENTATION_ALLOWED) {
-                            // Name not found.  Try lookup.
-                            Log.d(TAG, "Contact lookup. Contact provider miss. Searching people "
-                                    + "api.");
-                            lookupPhoneNumber(identification.getNumber(), isPrimary, isConference);
-                        }
-                    } else {
-                        Log.d(TAG, "Contact lookup. Found in contact provider: " + entry);
-                        updateContactEntry(entry, isPrimary, isConference);
+                    updateContactEntry(entry, isPrimary, isConference);
+                    if (entry.name != null) {
+                        Log.d(TAG, "Contact found: " + entry);
                     }
                 }
 
@@ -276,10 +250,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     }
                 }
             });
-        } else {
-            Log.d(TAG, "Contact lookup. Found in memory cache: " + entry);
-            updateContactEntry(entry, isPrimary, isConference);
-        }
     }
 
     private boolean isConference(Call call) {
@@ -383,41 +353,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
     }
 
-    public void lookupPhoneNumber(final String phoneNumber,
-            final boolean isPrimary, final boolean isConference) {
-        if (mPhoneNumberService != null) {
-            mPhoneNumberService.getPhoneNumberInfo(phoneNumber,
-                    new PhoneNumberService.NumberLookupListener() {
-                        @Override
-                        public void onPhoneNumberInfoComplete(
-                                final PhoneNumberService.PhoneNumberInfo info) {
-                            if (info == null || getUi() == null) {
-                                return;
-                            }
-                            ContactCacheEntry entry = new ContactCacheEntry();
-                            entry.name = info.getDisplayName();
-                            entry.number = info.getNumber();
-                            final int type = info.getPhoneType();
-                            final String label = info.getPhoneLabel();
-                            if (type == Phone.TYPE_CUSTOM) {
-                                entry.label = label;
-                            } else {
-                                final CharSequence typeStr = Phone.getTypeLabel(
-                                        mContext.getResources(), type, label);
-                                entry.label = typeStr == null ? null :
-                                    typeStr.toString();
-                            }
-
-                            updateContactEntry(entry, isPrimary, isConference);
-
-                            if (info.getImageUrl() != null) {
-                                fetchImage(info.getImageUrl(), isPrimary);
-                            }
-                        }
-                    });
-        }
-    }
-
     /**
      * Returns the gateway number for any existing outgoing call.
      */
@@ -459,23 +394,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 !TextUtils.isEmpty(mPrimary.getGatewayPackage()));
     }
 
-    private void fetchImage(final String url, final boolean isPrimary) {
-        if (url != null && mPhoneNumberService != null) {
-            mPhoneNumberService.fetchImage(url, new PhoneNumberService.ImageLookupListener() {
-                @Override
-                public void onImageFetchComplete(Bitmap bitmap) {
-                    if (getUi() != null) {
-                        if (isPrimary) {
-                            getUi().setPrimaryImage(bitmap);
-                        } else {
-                            getUi().setSecondaryImage(bitmap);
-                        }
-                    }
-                }
-            });
-        }
-    }
-
     /**
      * Gets the name to display for the call.
      */
@@ -493,7 +411,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // If the name is empty, we use the number for the name...so dont show a second
         // number in the number field
         if (TextUtils.isEmpty(contactInfo.name)) {
-            return null;
+            return contactInfo.location;
         }
         return contactInfo.number;
     }
