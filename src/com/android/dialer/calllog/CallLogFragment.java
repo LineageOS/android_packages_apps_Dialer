@@ -444,10 +444,8 @@ public class CallLogFragment extends ListFragment
         // seen the new calls yet.
         // This might be called before onCreate() and thus we need to check null explicitly.
         if (mKeyguardManager != null && !mKeyguardManager.inKeyguardRestrictedInputMode()) {
-            // On either of the transitions we reset the new flag and update the notifications.
+            // On either of the transitions we update the missed call and voicemail notifications.
             // While exiting we additionally consume all missed calls (by marking them as read).
-            // This will ensure that they no more appear in the "new" section when we return back.
-            mCallLogQueryHandler.markNewCallsAsOld();
             if (!onEntry) {
                 mCallLogQueryHandler.markMissedCallsAsRead();
             }
