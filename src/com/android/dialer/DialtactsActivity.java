@@ -20,7 +20,6 @@ import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
-import android.app.backup.BackupManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentManager.BackStackEntry;
@@ -28,20 +27,15 @@ import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.CallLog.Calls;
-import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.provider.ContactsContract.Intents.UI;
-import android.provider.Settings;
 import android.speech.RecognizerIntent;
-import android.support.v4.app.NavUtils;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -51,24 +45,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
-import android.view.ViewConfiguration;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.SearchView;
-import android.widget.SearchView.OnCloseListener;
-import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
-import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
-import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.dialer.calllog.CallLogActivity;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpad.DialpadFragment;
@@ -76,8 +63,8 @@ import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.list.AllContactsActivity;
-import com.android.dialer.list.PhoneFavoriteFragment;
 import com.android.dialer.list.OnListFragmentScrolledListener;
+import com.android.dialer.list.PhoneFavoriteFragment;
 import com.android.dialer.list.RegularSearchFragment;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
@@ -381,14 +368,22 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 }
                 return true;
             case R.id.menu_call_settings:
-                final Intent settingsIntent = DialtactsActivity.getCallSettingsIntent();
-                startActivity(settingsIntent);
+                handleMenuSettings();
                 return true;
             case R.id.menu_all_contacts:
                 onShowAllContacts();
                 return true;
         }
         return false;
+    }
+
+    protected void handleMenuSettings() {
+        openTelephonySetting(this);
+    }
+
+    public static void openTelephonySetting(Activity activity) {
+        final Intent settingsIntent = getCallSettingsIntent();
+        activity.startActivity(settingsIntent);
     }
 
     @Override
