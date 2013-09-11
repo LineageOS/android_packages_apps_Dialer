@@ -209,11 +209,14 @@ public class AnimationUtils {
             final ImageView imageView, final Drawable from, final Drawable to) {
         // We skip the cross-fade when those two Drawables are equal, or they are BitmapDrawables
         // pointing to the same Bitmap.
-        final boolean areSameImage = from.equals(to) ||
-                ((from instanceof BitmapDrawable)
-                        && (to instanceof BitmapDrawable)
-                        && ((BitmapDrawable) from).getBitmap()
-                                .equals(((BitmapDrawable) to).getBitmap()));
+        final boolean drawableIsEqual = (from != null && to != null && from.equals(to));
+        final boolean hasFromImage = ((from instanceof BitmapDrawable) &&
+                ((BitmapDrawable) from).getBitmap() != null);
+        final boolean hasToImage = ((to instanceof BitmapDrawable) &&
+                ((BitmapDrawable) to).getBitmap() != null);
+        final boolean areSameImage = drawableIsEqual || (hasFromImage && hasToImage &&
+                ((BitmapDrawable) from).getBitmap().equals(((BitmapDrawable) to).getBitmap()));
+
         if (!areSameImage) {
             if (FADE_DBG) {
                 log("Start cross-fade animation for " + imageView
@@ -262,6 +265,9 @@ public class AnimationUtils {
             TransitionDrawable transitionDrawable = new TransitionDrawable(layers);
             imageView.setImageDrawable(transitionDrawable);
             transitionDrawable.startTransition(ANIMATION_DURATION); */
+            imageView.setTag(to);
+        } else if (!hasFromImage && hasToImage) {
+            imageView.setImageDrawable(to);
             imageView.setTag(to);
         } else {
             if (FADE_DBG) {
