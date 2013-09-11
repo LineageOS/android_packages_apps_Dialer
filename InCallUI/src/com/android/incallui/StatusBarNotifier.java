@@ -105,8 +105,10 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
             @Override
             public void onImageLoadComplete(int callId, Bitmap photo) {
-                mEntry.photo = new BitmapDrawable(mContext.getResources(), photo);
-                buildAndSendNotification(InCallState.INCOMING, call, mEntry, false);
+                if (mEntry != null) {
+                    mEntry.photo = new BitmapDrawable(mContext.getResources(), photo);
+                    buildAndSendNotification(InCallState.INCOMING, call, mEntry, false);
+                }
             }
         });
     }

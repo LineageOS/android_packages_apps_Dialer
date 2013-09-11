@@ -32,7 +32,6 @@ import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.incalluibind.ServiceFactory;
 import com.android.services.telephony.common.Call;
 
 /**
@@ -78,8 +77,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         final CallList calls = CallList.getInstance();
         final Call call = calls.getFirstCall();
-        getPresenter().init(getActivity(), ServiceFactory.newPhoneNumberService(getActivity()),
-                call);
+        getPresenter().init(getActivity(), call);
     }
 
     @Override
