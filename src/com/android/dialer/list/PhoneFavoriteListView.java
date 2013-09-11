@@ -19,10 +19,13 @@ package com.android.dialer.list;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnDragListener;
 import android.view.ViewConfiguration;
 import android.widget.ListView;
 
@@ -32,40 +35,75 @@ import com.android.dialer.list.SwipeHelper.OnItemGestureListener;
 import com.android.dialer.list.SwipeHelper.SwipeHelperCallback;
 
 /**
- * Copy of packages/apps/UnifiedEmail - com.android.mail.ui.Swipeable with changes.
+ * The ListView composed of {@link ContactTileRow}.
+ * This ListView handles both
+ * - Swiping, which is borrowed from packages/apps/UnifiedEmail (com.android.mail.ui.Swipeable)
+ * - Drag and drop
  */
-public class SwipeableListView extends ListView implements SwipeHelperCallback {
+public class PhoneFavoriteListView extends ListView implements
+        SwipeHelperCallback, OnDragListener {
+
+    public static final String LOG_TAG = PhoneFavoriteListView.class.getSimpleName();
+
     private SwipeHelper mSwipeHelper;
     private boolean mEnableSwipe = true;
 
-    public static final String LOG_TAG = SwipeableListView.class.getSimpleName();
-
     private OnItemGestureListener mOnItemGestureListener;
 
-    public SwipeableListView(Context context) {
+    private float mDensityScale;
+    private float mTouchSlop;
+
+    private int mTopScrollBound;
+    private int mBottomScrollBound;
+    private int mLastDragY;
+
+    private Handler mScrollHandler;
+    private final long SCROLL_HANDLER_DELAY_MILLIS = 5;
+    private final int DRAG_SCROLL_PX_UNIT = 10;
+
+    /**
+     * {@link #mTopScrollBound} and {@link mBottomScrollBound} will be
+     * offseted to the top / bottom by {@link #getHeight} * {@link #BOUND_GAP_RATIO} pixels.
+     */
+    private final float BOUND_GAP_RATIO = 0.2f;
+
+    private final Runnable mDragScroller = new Runnable() {
+        @Override
+        public void run() {
+            if (mLastDragY <= mTopScrollBound) {
+                smoothScrollBy(-DRAG_SCROLL_PX_UNIT, (int) SCROLL_HANDLER_DELAY_MILLIS);
+            } else if (mLastDragY >= mBottomScrollBound) {
+                smoothScrollBy(DRAG_SCROLL_PX_UNIT, (int) SCROLL_HANDLER_DELAY_MILLIS);
+            }
+            mScrollHandler.postDelayed(this, SCROLL_HANDLER_DELAY_MILLIS);
+        }
+    };
+
+    public PhoneFavoriteListView(Context context) {
         this(context, null);
     }
 
-    public SwipeableListView(Context context, AttributeSet attrs) {
+    public PhoneFavoriteListView(Context context, AttributeSet attrs) {
         this(context, attrs, -1);
     }
 
-    public SwipeableListView(Context context, AttributeSet attrs, int defStyle) {
+    public PhoneFavoriteListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        float densityScale = getResources().getDisplayMetrics().density;
-        float pagingTouchSlop = ViewConfiguration.get(context).getScaledPagingTouchSlop();
-        mSwipeHelper = new SwipeHelper(context, SwipeHelper.X, this, densityScale,
-                pagingTouchSlop);
+        mDensityScale = getResources().getDisplayMetrics().density;
+        mTouchSlop = ViewConfiguration.get(context).getScaledPagingTouchSlop();
+        mSwipeHelper = new SwipeHelper(context, SwipeHelper.X, this,
+                mDensityScale, mTouchSlop);
         setItemsCanFocus(true);
+        setOnDragListener(this);
     }
 
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        float densityScale = getResources().getDisplayMetrics().density;
-        mSwipeHelper.setDensityScale(densityScale);
-        float pagingTouchSlop = ViewConfiguration.get(getContext()).getScaledPagingTouchSlop();
-        mSwipeHelper.setPagingTouchSlop(pagingTouchSlop);
+        mDensityScale= getResources().getDisplayMetrics().density;
+        mTouchSlop = ViewConfiguration.get(getContext()).getScaledPagingTouchSlop();
+        mSwipeHelper.setDensityScale(mDensityScale);
+        mSwipeHelper.setPagingTouchSlop(mTouchSlop);
     }
 
     /**
@@ -161,5 +199,39 @@ public class SwipeableListView extends ListView implements SwipeHelperCallback {
         // We do this so the underlying ScrollView knows that it won't get
         // the chance to intercept events anymore
         requestDisallowInterceptTouchEvent(true);
+    }
+
+    @Override
+    public boolean dispatchDragEvent(DragEvent event) {
+        switch (event.getAction()) {
+            case DragEvent.ACTION_DRAG_LOCATION:
+                if (mScrollHandler == null) {
+                    mScrollHandler = getHandler();
+                }
+                mLastDragY = (int) event.getY();
+                mScrollHandler.postDelayed(mDragScroller, SCROLL_HANDLER_DELAY_MILLIS);
+                break;
+            case DragEvent.ACTION_DRAG_ENTERED:
+                final int boundGap = (int) (getHeight() * BOUND_GAP_RATIO);
+                mTopScrollBound = (getTop() + boundGap);
+                mBottomScrollBound = (getBottom() - boundGap);
+                break;
+            case DragEvent.ACTION_DRAG_EXITED:
+            case DragEvent.ACTION_DRAG_ENDED:
+                mScrollHandler.removeCallbacks(mDragScroller);
+                break;
+            case DragEvent.ACTION_DRAG_STARTED:
+                // Not a receiver
+            case DragEvent.ACTION_DROP:
+                // Not a receiver
+            default:
+                break;
+        }
+        return super.dispatchDragEvent(event);
+    }
+
+    @Override
+    public boolean onDrag(View v, DragEvent event) {
+        return true;
     }
 }

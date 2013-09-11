@@ -145,7 +145,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private CallLogQueryHandler mCallLogQueryHandler;
 
     private TextView mEmptyView;
-    private SwipeableListView mListView;
+    private PhoneFavoriteListView mListView;
     private View mShowAllContactsButton;
 
     private final HashMap<Long, Integer> mItemIdTopMap = new HashMap<Long, Integer>();
@@ -206,7 +206,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         final View listLayout = inflater.inflate(
                 R.layout.phone_favorites_fragment, container, false);
 
-        mListView = (SwipeableListView) listLayout.findViewById(R.id.contact_tile_list);
+        mListView = (PhoneFavoriteListView) listLayout.findViewById(R.id.contact_tile_list);
         mListView.setItemsCanFocus(true);
         mListView.setOnItemClickListener(this);
         mListView.setVerticalScrollBarEnabled(false);
