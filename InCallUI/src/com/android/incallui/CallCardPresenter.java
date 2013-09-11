@@ -253,9 +253,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     // because the contactinfocache pre-massages the data into the ui fields.
                     // Need to do massaging outside of contactinfocache.
                     if (entry.label == null) {
-                        // Name not found.  Try lookup.
-                        Log.d(TAG, "Contact lookup. Contact provider miss. Searching people api.");
-                        lookupPhoneNumber(identification.getNumber(), isPrimary, isConference);
+                        if (identification.getNumberPresentation() == Call.PRESENTATION_ALLOWED) {
+                            // Name not found.  Try lookup.
+                            Log.d(TAG, "Contact lookup. Contact provider miss. Searching people "
+                                    + "api.");
+                            lookupPhoneNumber(identification.getNumber(), isPrimary, isConference);
+                        }
                     } else {
                         Log.d(TAG, "Contact lookup. Found in contact provider: " + entry);
                         updateContactEntry(entry, isPrimary, isConference);
