@@ -56,7 +56,6 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         if (mCallId != Call.INVALID_CALL_ID) {
             CallList.getInstance().removeCallUpdateListener(mCallId, this);
         }
-
     }
 
     @Override

@@ -50,13 +50,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     @Override
     public void onUiUnready(CallButtonUi ui) {
+        super.onUiUnready(ui);
+
         InCallPresenter.getInstance().removeListener(this);
         AudioModeProvider.getInstance().removeListener(this);
 
         mProximitySensor = null;
-
-        // set Ui to null, so should go last
-        super.onUiUnready(ui);
     }
 
     @Override
