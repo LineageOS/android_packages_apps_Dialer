@@ -19,7 +19,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Rect;
@@ -27,7 +26,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.View.OnClickListener;
@@ -35,7 +33,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -44,13 +41,12 @@ import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
-import com.android.contacts.common.list.PhoneNumberListAdapter;
-import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
+import com.android.dialerbind.ObjectFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -191,8 +187,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
                 this, 1);
         final String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mCallLogAdapter = new CallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso), true);
+        mCallLogAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
+                new ContactInfoHelper(getActivity(), currentCountryIso), true, false);
         setHasOptionsMenu(true);
     }
 

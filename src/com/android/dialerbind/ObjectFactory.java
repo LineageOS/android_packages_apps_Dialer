@@ -16,15 +16,27 @@
 
 package com.android.dialerbind;
 
+import static com.android.dialer.calllog.CallLogAdapter.CallFetcher;
+
+import android.content.Context;
+
+import com.android.dialer.calllog.CallLogAdapter;
+import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.service.CachedNumberLookupService;
 
 /**
- * Default static binder for services.
+ * Default static binding for various objects.
  */
-public class ServiceFactory {
+public class ObjectFactory {
 
     public static CachedNumberLookupService newCachedNumberLookupService() {
         // no-op
         return null;
+    }
+
+    public static CallLogAdapter newCallLogAdapter(Context context, CallFetcher callFetcher,
+            ContactInfoHelper contactInfoHelper, boolean useCallAsPrimaryAction,
+            boolean isCallLog) {
+        return new CallLogAdapter(context, callFetcher, contactInfoHelper, useCallAsPrimaryAction);
     }
 }
