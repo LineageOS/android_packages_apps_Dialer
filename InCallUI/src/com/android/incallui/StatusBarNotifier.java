@@ -25,6 +25,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -215,10 +216,11 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     private void buildAndSendNotification(InCallState state, Call call,
             ContactCacheEntry contactInfo, boolean allowFullScreenIntent) {
 
+        final boolean isConference = call.isConferenceCall();
         final int iconResId = getIconToDisplay(call);
-        final Bitmap largeIcon = getLargeIconToDisplay(contactInfo);
+        final Bitmap largeIcon = getLargeIconToDisplay(contactInfo, isConference);
         final int contentResId = getContentString(call);
-        final String contentTitle = getContentTitle(contactInfo);
+        final String contentTitle = getContentTitle(contactInfo, isConference);
 
         // If we checked and found that nothing is different, dont issue another notification.
         if (!checkForChangeAndSaveData(iconResId, contentResId, largeIcon, contentTitle, state,
@@ -316,7 +318,10 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     /**
      * Returns the main string to use in the notification.
      */
-    private String getContentTitle(ContactCacheEntry contactInfo) {
+    private String getContentTitle(ContactCacheEntry contactInfo, boolean isConference) {
+        if (isConference) {
+            return mContext.getResources().getString(R.string.card_title_conf_call);
+        }
         if (TextUtils.isEmpty(contactInfo.name)) {
             return contactInfo.number;
         }
@@ -327,7 +332,11 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     /**
      * Gets a large icon from the contact info object to display in the notification.
      */
-    private Bitmap getLargeIconToDisplay(ContactCacheEntry contactInfo) {
+    private Bitmap getLargeIconToDisplay(ContactCacheEntry contactInfo, boolean isConference) {
+        if (isConference) {
+            return BitmapFactory.decodeResource(mContext.getResources(),
+                    R.drawable.picture_conference);
+        }
         if (contactInfo.photo != null && (contactInfo.photo instanceof BitmapDrawable)) {
             return ((BitmapDrawable) contactInfo.photo).getBitmap();
         }
