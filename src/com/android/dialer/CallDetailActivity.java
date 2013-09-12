@@ -436,7 +436,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                 // Cache the details about the phone number.
                 final boolean canPlaceCallsTo =
                     PhoneNumberHelper.canPlaceCallsTo(mNumber, numberPresentation);
-                final boolean isVoicemailNumber = mPhoneNumberHelper.isVoicemailNumber(mNumber);
+                final boolean isVoicemailNumber = PhoneNumberHelper.isVoicemailNumber(mNumber);
                 final boolean isSipNumber = mPhoneNumberHelper.isSipNumber(mNumber);
 
                 // Let user view contact details if they exist, otherwise add option to create new
@@ -631,7 +631,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             // If this is not a regular number, there is no point in looking it up in the contacts.
             ContactInfo info =
                     PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation)
-                    && !mPhoneNumberHelper.isVoicemailNumber(number)
+                    && !PhoneNumberHelper.isVoicemailNumber(number)
                             ? mContactInfoHelper.lookupNumber(number, countryIso)
                             : null;
             if (info == null) {

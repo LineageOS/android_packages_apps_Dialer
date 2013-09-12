@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import com.android.contacts.common.util.UriUtils;
+import com.google.common.base.Objects;
 
 /**
  * Information for a contact as needed by the Call Log.
@@ -69,5 +70,13 @@ public class ContactInfo {
         if (photoId != other.photoId) return false;
         if (!UriUtils.areEqual(photoUri, other.photoUri)) return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).add("lookupUri", lookupUri).add("name", name).add(
+                "type", type).add("label", label).add("number", number).add("formattedNumber",
+                formattedNumber).add("normalizedNumber", normalizedNumber).add("photoId", photoId)
+                .add("photoUri", photoUri).toString();
     }
 }

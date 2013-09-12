@@ -542,7 +542,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 mContactInfoCache.getCachedValue(numberCountryIso);
         ContactInfo info = cachedInfo == null ? null : cachedInfo.getValue();
         if (!PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation)
-                || mPhoneNumberHelper.isVoicemailNumber(number)) {
+                || PhoneNumberHelper.isVoicemailNumber(number)) {
             // If this is a number that cannot be dialed, there is no point in looking up a contact
             // for it.
             info = ContactInfo.EMPTY;
@@ -615,10 +615,11 @@ public class CallLogAdapter extends GroupingListAdapter
             mViewTreeObserver.addOnPreDrawListener(this);
         }
 
-        postBindView(views, info);
+        postBindView(views, info, details);
     }
 
-    protected void postBindView(CallLogListItemViews views, ContactInfo info) {
+    protected void postBindView(CallLogListItemViews views, ContactInfo info,
+            PhoneCallDetails details) {
         // no-op
     }
 
