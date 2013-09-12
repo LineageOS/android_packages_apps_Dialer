@@ -193,7 +193,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     @Override
     public void onResume() {
         super.onResume();
-        mCallLogQueryHandler.fetchNewCalls(CallLogQueryHandler.CALL_TYPE_ALL);
+        fetchCalls();
         mCallLogAdapter.setLoading(true);
         getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
     }
@@ -293,9 +293,9 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mListener = listener;
     }
 
-    // TODO krelease: Implement this
     @Override
     public void onVoicemailStatusFetched(Cursor statusCursor) {
+        // no-op
     }
 
     @Override
@@ -305,9 +305,9 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mAdapter.notifyDataSetChanged();
     }
 
-    // TODO krelease: Implement this
     @Override
     public void fetchCalls() {
+        mCallLogQueryHandler.fetchNewCalls(CallLogQueryHandler.CALL_TYPE_ALL);
     }
 
     @Override
