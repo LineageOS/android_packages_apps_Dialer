@@ -121,6 +121,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onDisconnect(Call call) {
             try {
+                Log.i(CallHandlerService.this, "onDisconnected: " + call);
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_DISCONNECT_CALL, call));
             } catch (Exception e) {
                 Log.e(TAG, "Error processing onDisconnect() call.", e);
@@ -130,6 +131,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onIncoming(Call call, List<String> textResponses) {
             try {
+                Log.i(CallHandlerService.this, "onIncomingCall: " + call);
                 Map.Entry<Call, List<String>> incomingCall
                         = new AbstractMap.SimpleEntry<Call, List<String>>(call, textResponses);
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(
@@ -142,6 +144,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onUpdate(List<Call> calls) {
             try {
+                Log.i(CallHandlerService.this, "onUpdate: " + calls);
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_MULTI_CALL, calls));
             } catch (Exception e) {
                 Log.e(TAG, "Error processing onUpdate() call.", e);
@@ -151,6 +154,8 @@ public class CallHandlerService extends Service {
         @Override
         public void onAudioModeChange(int mode, boolean muted) {
             try {
+                Log.i(CallHandlerService.this, "onAudioModeChange : " +
+                        AudioMode.toString(mode));
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_AUDIO_MODE, mode,
                             muted ? 1 : 0, null));
             } catch (Exception e) {
@@ -161,6 +166,8 @@ public class CallHandlerService extends Service {
         @Override
         public void onSupportedAudioModeChange(int modeMask) {
             try {
+                Log.i(CallHandlerService.this, "onSupportedAudioModeChange : " +
+                        AudioMode.toString(modeMask));
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_SUPPORTED_AUDIO_MODE,
                         modeMask, 0, null));
             } catch (Exception e) {
@@ -232,38 +239,39 @@ public class CallHandlerService extends Service {
 
         switch (msg.what) {
             case ON_UPDATE_CALL:
-                Log.i(CallHandlerService.this, "onUpdate: " + msg.obj);
+                Log.i(CallHandlerService.this, "ON_UPDATE_CALL: " + msg.obj);
                 mCallList.onUpdate((Call) msg.obj);
                 break;
             case ON_UPDATE_MULTI_CALL:
-                Log.i(CallHandlerService.this, "onUpdateMulti: " + msg.obj);
+                Log.i(CallHandlerService.this, "ON_UPDATE_MULTI_CALL: " + msg.obj);
                 mCallList.onUpdate((List<Call>) msg.obj);
                 break;
             case ON_UPDATE_CALL_WITH_TEXT_RESPONSES:
                 AbstractMap.SimpleEntry<Call, List<String>> entry
                         = (AbstractMap.SimpleEntry<Call, List<String>>) msg.obj;
-                Log.i(CallHandlerService.this, "onIncomingCall: " + entry.getKey());
+                Log.i(CallHandlerService.this, "ON_INCOMING_CALL: " + entry.getKey());
                 mCallList.onIncoming(entry.getKey(), entry.getValue());
                 break;
             case ON_DISCONNECT_CALL:
-                Log.i(CallHandlerService.this, "onDisconnected: " + msg.obj);
+                Log.i(CallHandlerService.this, "ON_DISCONNECT_CALL: " + msg.obj);
                 mCallList.onDisconnect((Call) msg.obj);
                 break;
             case ON_POST_CHAR_WAIT:
                 mInCallPresenter.onPostDialCharWait(msg.arg1, (String) msg.obj);
                 break;
             case ON_AUDIO_MODE:
-                Log.i(CallHandlerService.this, "onAudioModeChange : " +
+                Log.i(CallHandlerService.this, "ON_AUDIO_MODE: " +
                         AudioMode.toString(msg.arg1) + ", muted (" + (msg.arg2 == 1) + ")");
                 mAudioModeProvider.onAudioModeChange(msg.arg1, msg.arg2 == 1);
                 break;
             case ON_SUPPORTED_AUDIO_MODE:
-                Log.i(CallHandlerService.this, "onSupportedAudioModeChange : " + AudioMode.toString(
+                Log.i(CallHandlerService.this, "ON_SUPPORTED_AUDIO_MODE: " + AudioMode.toString(
                         msg.arg1));
 
                 mAudioModeProvider.onSupportedAudioModeChange(msg.arg1);
                 break;
             case ON_BRING_TO_FOREGROUND:
+                Log.i(CallHandlerService.this, "ON_BRING_TO_FOREGROUND");
                 if (mInCallPresenter != null) {
                     mInCallPresenter.bringToForeground();
                 }
