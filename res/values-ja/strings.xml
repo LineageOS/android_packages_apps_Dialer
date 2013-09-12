@@ -29,8 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"通話履歴を全件消去"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ボイスメールを削除"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"ボイスメールを共有"</string>
-    <string name="recentCalls_empty" msgid="247053222448663107">"通話履歴なし"</string>
-    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"通話履歴を消しますか？"</string>
+    <string name="recentCalls_empty" msgid="247053222448663107">"通話履歴はありません。"</string>
+    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"通話履歴を消去しますか？"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"すべての通話記録は削除されます。"</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"通話履歴を消去しています..."</string>
   <plurals name="notification_voicemail_title">
@@ -133,7 +133,8 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIMカードから読み取り中..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIMカードの連絡先"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"この機能を使用するには連絡帳アプリを再度有効にしてください。"</string>
-    <string name="dialer_hint_find_contact" msgid="9190419749917566623">"名前か電話番号を入力"</string>
+    <!-- no translation found for dialer_hint_find_contact (8798845521253672403) -->
+    <skip />
     <string name="call_log_all_title" msgid="3566738938889333307">"すべて"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"不在着信"</string>
     <string name="recentMissed_empty" msgid="5427113551557296665">"最近の不在着信はありません。"</string>
@@ -153,7 +154,8 @@
     <string name="dialpad_9_number" msgid="4377059952097526576">"9"</string>
     <string name="show_all_contacts_title" msgid="8395378484578221791">"すべての連絡先"</string>
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"すべての連絡先"</string>
-    <string name="favorite_hidden" msgid="4837366417440391323">"お気に入りに表示しない"</string>
+    <!-- no translation found for favorite_hidden (5011234945140912047) -->
+    <skip />
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"元に戻す"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g>に発信"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"連絡先に追加"</string>
