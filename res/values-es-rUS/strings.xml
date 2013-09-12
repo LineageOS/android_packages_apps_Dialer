@@ -133,7 +133,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Cargando desde tarjeta SIM..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contactos de tarjeta SIM"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Vuelve a activar la aplicación Contactos para usar esta función."</string>
-    <string name="dialer_hint_find_contact" msgid="9190419749917566623">"Escribe nombre o tel."</string>
+    <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Ingresa un nombre o teléfono."</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Todo"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Perdidas"</string>
     <string name="recentMissed_empty" msgid="5427113551557296665">"No hay llamadas perdidas recientes."</string>
@@ -153,10 +153,8 @@
     <string name="dialpad_9_number" msgid="4377059952097526576">"9"</string>
     <string name="show_all_contacts_title" msgid="8395378484578221791">"Todos los contactos"</string>
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Todos los contactos"</string>
-    <string name="favorite_hidden" msgid="4837366417440391323">"No se muestra en favoritos."</string>
+    <string name="favorite_hidden" msgid="5011234945140912047">"Eliminado de favoritos"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Deshacer"</string>
-    <!-- no translation found for search_shortcut_call_number (7277194656832895870) -->
-    <skip />
-    <!-- no translation found for search_shortcut_add_to_contacts (1853716708655789069) -->
-    <skip />
+    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Llamar al <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Agregar a contactos"</string>
 </resources>
