@@ -311,7 +311,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         // Also, display a special icon (alongside the "Incoming call"
         // label) if there's an incoming call and audio will be routed
         // to bluetooth when you answer it.
-        final int bluetoothIconId = R.drawable.ic_incoming_call_bluetooth;
+        final int bluetoothIconId = R.drawable.ic_in_call_bt_dk;
 
         if (onOff) {
             mCallStateLabel.setCompoundDrawablesWithIntrinsicBounds(bluetoothIconId, 0, 0, 0);
