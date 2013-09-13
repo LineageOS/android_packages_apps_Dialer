@@ -117,7 +117,7 @@ public class PhoneCallDetailsHelper {
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
             if (TextUtils.isEmpty(details.geocode)
-                    || mPhoneNumberHelper.isVoicemailNumber(details.number)) {
+                    || PhoneNumberHelper.isVoicemailNumber(details.number)) {
                 numberText = mResources.getString(R.string.call_log_empty_gecode);
             } else {
                 numberText = details.geocode;
