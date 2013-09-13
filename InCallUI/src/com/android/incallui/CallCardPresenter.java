@@ -188,9 +188,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (mPrimary != null) {
             final boolean bluetoothOn =
                     (AudioModeProvider.getInstance().getAudioMode() == AudioMode.BLUETOOTH);
-            ui.setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn);
+            ui.setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
+                    getGatewayLabel(), getGatewayNumber());
         } else {
-            ui.setCallState(Call.State.IDLE, Call.DisconnectCause.UNKNOWN, false);
+            ui.setCallState(Call.State.IDLE, Call.DisconnectCause.UNKNOWN, false, null, null);
         }
     }
 
@@ -199,7 +200,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (mPrimary != null && getUi() != null) {
             final boolean bluetoothOn = (AudioMode.BLUETOOTH == mode);
 
-            getUi().setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn);
+            getUi().setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
+                    getGatewayLabel(), getGatewayNumber());
         }
     }
 
@@ -350,15 +352,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             final String name = getNameForCall(entry);
             final String number = getNumberForCall(entry);
             final boolean nameIsNumber = name != null && name.equals(entry.number);
-            final String gatewayLabel = getGatewayLabel();
-            final String gatewayNumber = getGatewayNumber();
 
             ui.setPrimary(number, name, nameIsNumber, entry.label,
-                    entry.photo, isConference, gatewayLabel,
-                    gatewayNumber);
+                    entry.photo, isConference);
         } else {
             // reset to nothing (like at end of call)
-            ui.setPrimary(null, null, false, null, null, false, null, null);
+            ui.setPrimary(null, null, false, null, null, false);
         }
 
     }
@@ -506,16 +505,16 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
-                Drawable photo, boolean isConference, String gatewayLabel, String gatewayNumber);
+                Drawable photo, boolean isConference);
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isConference);
         void setSecondaryImage(Bitmap bitmap);
-        void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn);
+        void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn,
+                String gatewayLabel, String gatewayNumber);
         void setPrimaryCallElapsedTime(boolean show, String duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Bitmap bitmap);
         void setPrimaryPhoneNumber(String phoneNumber);
         void setPrimaryLabel(String label);
-        void setPrimaryGateway(String label, String number);
     }
 }
