@@ -84,7 +84,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     call.getState() == Call.State.INCOMING);
 
             // start processing lookups right away.
-            startContactInfoSearch(identification, true, false,
+            startContactInfoSearch(identification, true, call.isConferenceCall(),
                     call.getState() == Call.State.INCOMING);
         }
     }
@@ -97,7 +97,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         // Contact search may have completed before ui is ready.
         if (mPrimaryContactInfo != null) {
-            updatePrimaryDisplayInfo(mPrimaryContactInfo, false);
+            updatePrimaryDisplayInfo(mPrimaryContactInfo, isConference(mPrimary));
         }
 
         // Register for call state changes last
