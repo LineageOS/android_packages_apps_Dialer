@@ -586,7 +586,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     public void dropContactEntry(int index) {
         boolean changed = false;
         if (mDraggedEntry != null) {
-            if (index >= 0 && index <= mContactEntries.size()) {
+            if (index >= 0 && index < mContactEntries.size()) {
                 // Don't add the ContactEntry here (to prevent a double animation from occuring).
                 // When we receive a new cursor the list of contact entries will automatically be
                 // populated with the dragged ContactEntry at the correct spot.
@@ -1110,7 +1110,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             ContactEntry entryToPin, int oldPos, int newPinPos) {
 
         final ContentValues cv = new ContentValues();
-
         // Add the dragged contact at the user-requested spot.
         cv.put(String.valueOf(entryToPin.id), newPinPos);
 
