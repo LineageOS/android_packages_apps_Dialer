@@ -167,20 +167,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setPrimaryGateway(String gatewayLabel, String gatewayNumber) {
-        if (!TextUtils.isEmpty(gatewayLabel) && !TextUtils.isEmpty(gatewayNumber)) {
-            mProviderLabel.setText(gatewayLabel);
-            mProviderNumber.setText(gatewayNumber);
-            mProviderInfo.setVisibility(View.VISIBLE);
-        } else {
-            mProviderInfo.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
     public void setPrimary(String number, String name, boolean nameIsNumber, String label,
-            Drawable photo, boolean isConference, String gatewayLabel, String gatewayNumber) {
-        Log.d(this, "Setting primary call [" + gatewayLabel + "][" + gatewayNumber + "]");
+            Drawable photo, boolean isConference) {
+        Log.d(this, "Setting primary call");
 
         if (isConference) {
             name = getView().getResources().getString(R.string.card_title_conf_call);
@@ -189,9 +178,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
 
         setPrimaryPhoneNumber(number);
-
-        // Set any gateway information
-        setPrimaryGateway(gatewayLabel, gatewayNumber);
 
         // set the name field.
         setPrimaryName(name, nameIsNumber);
@@ -236,7 +222,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn) {
+    public void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn,
+            String gatewayLabel, String gatewayNumber) {
         String callStateLabel = null;
 
         // States other than disconnected not yet supported
@@ -245,24 +232,22 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         Log.v(this, "setCallState ", callStateLabel);
         Log.v(this, "DisconnectCause ", cause);
         Log.v(this, "bluetooth on ", bluetoothOn);
+        Log.v(this, "gateway " + gatewayLabel + gatewayNumber);
 
+        // There are cases where we totally skip the animation, in which case remove the transition
+        // animation here and restore it afterwards.
+        final boolean skipAnimation = (state == Call.State.DIALING
+                || state == Call.State.DISCONNECTED);
+        LayoutTransition transition = null;
+        if (skipAnimation) {
+            transition = mSupplementaryInfoContainer.getLayoutTransition();
+            mSupplementaryInfoContainer.setLayoutTransition(null);
+        }
+
+        // Update the call state label.
         if (!TextUtils.isEmpty(callStateLabel)) {
-            // There are cases where we totally skip the animation
-            final boolean skipAnimation = (state == Call.State.DIALING
-                    || state == Call.State.DISCONNECTED);
-
-            LayoutTransition transition = null;
-            if (skipAnimation) {
-                transition = mSupplementaryInfoContainer.getLayoutTransition();
-                mSupplementaryInfoContainer.setLayoutTransition(null);
-            }
-
             mCallStateLabel.setVisibility(View.VISIBLE);
             mCallStateLabel.setText(callStateLabel);
-
-            if (skipAnimation) {
-                mSupplementaryInfoContainer.setLayoutTransition(transition);
-            }
 
             if (Call.State.INCOMING == state) {
                 setBluetoothOn(bluetoothOn);
@@ -277,6 +262,20 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mCallStateLabel.setText("");
                 mCallStateLabel.setGravity(Gravity.END);
             }
+        }
+
+        // Provider info: (e.g. "Calling via <gatewayLabel>")
+        if (!TextUtils.isEmpty(gatewayLabel) && !TextUtils.isEmpty(gatewayNumber)) {
+            mProviderLabel.setText(gatewayLabel);
+            mProviderNumber.setText(gatewayNumber);
+            mProviderInfo.setVisibility(View.VISIBLE);
+        } else {
+            mProviderInfo.setVisibility(View.GONE);
+        }
+
+        // Restore the animation.
+        if (skipAnimation) {
+            mSupplementaryInfoContainer.setLayoutTransition(transition);
         }
     }
 
