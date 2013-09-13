@@ -186,6 +186,11 @@ public class CallButtonFragment
     }
 
     @Override
+    public void enableMute(boolean enabled) {
+        mMuteButton.setEnabled(enabled);
+    }
+
+    @Override
     public void setHold(boolean value) {
         mHoldButton.setChecked(value);
     }
@@ -193,6 +198,11 @@ public class CallButtonFragment
     @Override
     public void showHold(boolean show) {
         mHoldButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void enableHold(boolean enabled) {
+        mHoldButton.setEnabled(enabled);
     }
 
     @Override
@@ -208,6 +218,11 @@ public class CallButtonFragment
     @Override
     public void showAddCall(boolean show) {
         mAddCallButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void enableAddCall(boolean enabled) {
+        mAddCallButton.setEnabled(enabled);
     }
 
     @Override
