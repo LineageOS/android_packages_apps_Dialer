@@ -99,7 +99,7 @@
          android:id="@+id/conferenceCallerDisconnect"
          android:layout_width="80dp"
          android:layout_height="match_parent"
-         android:src="@drawable/ic_end_call_holo_dark"
+         android:src="@drawable/ic_in_call_phone_hangup"
          android:background="@drawable/end_call_background"
          android:scaleType="center"
          android:contentDescription="@string/onscreenEndCallText" />
