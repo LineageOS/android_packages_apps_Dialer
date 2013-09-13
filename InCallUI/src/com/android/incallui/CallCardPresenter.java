@@ -269,6 +269,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
                 @Override
                 public void onImageLoadComplete(int callId, Bitmap photo) {
+                    if (getUi() == null) {
+                        return;
+                    }
                     if (mPrimary != null && callId == mPrimary.getCallId()) {
                         getUi().setPrimaryImage(photo);
                     } else if (mSecondary != null && callId == mSecondary.getCallId()) {
