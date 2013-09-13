@@ -16,6 +16,9 @@
 
 package com.android.incallui;
 
+import com.android.services.telephony.common.Call;
+import com.android.services.telephony.common.Call.State;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -30,12 +33,18 @@ import android.widget.Toast;
  * Phone app "in call" screen.
  */
 public class InCallActivity extends Activity {
+
+    public static final String SHOW_DIALPAD_EXTRA = "InCallActivity.show_dialpad";
+
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
     private AnswerFragment mAnswerFragment;
     private DialpadFragment mDialpadFragment;
     private ConferenceManagerFragment mConferenceManagerFragment;
     private boolean mIsForegroundActivity;
+
+    /** Use to pass 'showDialpad' from {@link #onNewIntent} to {@link #onResume} */
+    private boolean mShowDialpadRequested;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -78,6 +87,11 @@ public class InCallActivity extends Activity {
 
         mIsForegroundActivity = true;
         InCallPresenter.getInstance().onUiShowing(true);
+
+        if (mShowDialpadRequested) {
+            mCallButtonFragment.displayDialpad(true);
+            mShowDialpadRequested = false;
+        }
     }
 
     // onPause is guaranteed to be called when the InCallActivity goes
@@ -236,34 +250,31 @@ public class InCallActivity extends Activity {
             // But we do check here for one extra that can come along with the
             // ACTION_MAIN intent:
 
-            // TODO(klp): Enable this for klp
-            /*
             if (intent.hasExtra(SHOW_DIALPAD_EXTRA)) {
                 // SHOW_DIALPAD_EXTRA can be used here to specify whether the DTMF
                 // dialpad should be initially visible.  If the extra isn't
                 // present at all, we just leave the dialpad in its previous state.
 
-                boolean showDialpad = intent.getBooleanExtra(SHOW_DIALPAD_EXTRA, false);
-                if (VDBG) log("- internalResolveIntent: SHOW_DIALPAD_EXTRA: " + showDialpad);
+                final boolean showDialpad = intent.getBooleanExtra(SHOW_DIALPAD_EXTRA, false);
+                Log.d(this, "- internalResolveIntent: SHOW_DIALPAD_EXTRA: " + showDialpad);
 
-                // If SHOW_DIALPAD_EXTRA is specified, that overrides whatever
-                // the previous state of inCallUiState.showDialpad was.
-                mApp.inCallUiState.showDialpad = showDialpad;
-
-                final boolean hasActiveCall = mCM.hasActiveFgCall();
-                final boolean hasHoldingCall = mCM.hasActiveBgCall();
-
-                // There's only one line in use, AND it's on hold, at which we're sure the user
-                // wants to use the dialpad toward the exact line, so un-hold the holding line.
-                if (showDialpad && !hasActiveCall && hasHoldingCall) {
-                    PhoneUtils.switchHoldingAndActive(mCM.getFirstActiveBgCall());
-                }
+                relaunchedFromDialer(showDialpad);
             }
-            */
-            // ...and in onResume() we'll update the onscreen dialpad state to
-            // match the InCallUiState.
 
             return;
+        }
+    }
+
+    private void relaunchedFromDialer(boolean showDialpad) {
+        mShowDialpadRequested = showDialpad;
+
+        if (mShowDialpadRequested) {
+            // If there's only one line in use, AND it's on hold, then we're sure the user
+            // wants to use the dialpad toward the exact line, so un-hold the holding line.
+            final Call call = CallList.getInstance().getActiveOrBackgroundCall();
+            if (call != null && call.getState() == State.ONHOLD) {
+                CallCommandClient.getInstance().hold(call.getCallId(), false);
+            }
         }
     }
 
