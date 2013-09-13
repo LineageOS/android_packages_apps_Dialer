@@ -63,7 +63,6 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialpad_background"
             android:paddingStart="@dimen/button_cluster_side_padding"
             android:paddingEnd="@dimen/button_cluster_side_padding"
             >
