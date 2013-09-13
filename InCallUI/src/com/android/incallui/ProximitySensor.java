@@ -210,7 +210,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                         .add("hor", horizontal ? 1 : 0).toString());
 
                 if (mIsPhoneOffhook && !screenOnImmediately) {
-                    final String logStr = "turning off proximity sensor: ";
+                    final String logStr = "turning on proximity sensor: ";
                     // Phone is in use!  Arrange for the screen to turn off
                     // automatically when the sensor detects a close object.
                     if (!mProximityWakeLock.isHeld()) {
