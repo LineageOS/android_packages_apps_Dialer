@@ -249,7 +249,7 @@ public class CallLogAdapter extends GroupingListAdapter
         mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
         mPhoneNumberHelper = new PhoneNumberHelper(resources);
         PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
-                resources, callTypeHelper, mPhoneNumberHelper);
+                resources, callTypeHelper, new PhoneNumberUtilsWrapper());
         mCallLogViewsHelper =
                 new CallLogListItemHelper(
                         phoneCallDetailsHelper, mPhoneNumberHelper, resources);
@@ -541,8 +541,8 @@ public class CallLogAdapter extends GroupingListAdapter
         ExpirableCache.CachedValue<ContactInfo> cachedInfo =
                 mContactInfoCache.getCachedValue(numberCountryIso);
         ContactInfo info = cachedInfo == null ? null : cachedInfo.getValue();
-        if (!PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation)
-                || PhoneNumberHelper.isVoicemailNumber(number)) {
+        if (!PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
+                || new PhoneNumberUtilsWrapper().isVoicemailNumber(number)) {
             // If this is a number that cannot be dialed, there is no point in looking up a contact
             // for it.
             info = ContactInfo.EMPTY;
