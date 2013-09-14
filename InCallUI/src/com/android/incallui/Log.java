@@ -27,10 +27,11 @@ public class Log {
     public static final boolean DEBUG = android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
     public static final boolean VERBOSE = android.util.Log.isLoggable(TAG,
             android.util.Log.VERBOSE);
+    public static final String TAG_DELIMETER = " - ";
 
     public static void d(String tag, String msg) {
         if (DEBUG) {
-            android.util.Log.d(TAG, tag + " - " + msg);
+            android.util.Log.d(TAG, delimit(tag) + msg);
         }
     }
 
@@ -59,11 +60,11 @@ public class Log {
     }
 
     public static void e(String tag, String msg, Exception e) {
-        android.util.Log.e(TAG, tag + msg, e);
+        android.util.Log.e(TAG, delimit(tag) + msg, e);
     }
 
     public static void e(String tag, String msg) {
-        android.util.Log.e(TAG, tag + msg);
+        android.util.Log.e(TAG, delimit(tag) + msg);
     }
 
     public static void e(Object obj, String msg, Exception e) {
@@ -75,7 +76,7 @@ public class Log {
     }
 
     public static void i(String tag, String msg) {
-        android.util.Log.i(TAG, tag + msg);
+        android.util.Log.i(TAG, delimit(tag) + msg);
     }
 
     public static void i(Object obj, String msg) {
@@ -91,6 +92,10 @@ public class Log {
     }
 
     private static String getPrefix(Object obj) {
-        return (obj == null ? "" : (obj.getClass().getSimpleName() + " - "));
+        return (obj == null ? "" : (obj.getClass().getSimpleName() + TAG_DELIMETER));
+    }
+
+    private static String delimit(String tag) {
+        return tag + TAG_DELIMETER;
     }
 }
