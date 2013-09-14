@@ -25,7 +25,6 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnDragListener;
 import android.view.ViewConfiguration;
 import android.widget.ListView;
 
@@ -40,8 +39,7 @@ import com.android.dialer.list.SwipeHelper.SwipeHelperCallback;
  * - Swiping, which is borrowed from packages/apps/UnifiedEmail (com.android.mail.ui.Swipeable)
  * - Drag and drop
  */
-public class PhoneFavoriteListView extends ListView implements
-        SwipeHelperCallback, OnDragListener {
+public class PhoneFavoriteListView extends ListView implements SwipeHelperCallback {
 
     public static final String LOG_TAG = PhoneFavoriteListView.class.getSimpleName();
 
@@ -60,6 +58,9 @@ public class PhoneFavoriteListView extends ListView implements
     private Handler mScrollHandler;
     private final long SCROLL_HANDLER_DELAY_MILLIS = 5;
     private final int DRAG_SCROLL_PX_UNIT = 10;
+
+    private boolean mIsDragScrollerRunning = false;
+    private int mTouchDownForDragStartY;
 
     /**
      * {@link #mTopScrollBound} and {@link mBottomScrollBound} will be
@@ -94,7 +95,6 @@ public class PhoneFavoriteListView extends ListView implements
         mSwipeHelper = new SwipeHelper(context, SwipeHelper.X, this,
                 mDensityScale, mTouchSlop);
         setItemsCanFocus(true);
-        setOnDragListener(this);
     }
 
     @Override
@@ -123,6 +123,9 @@ public class PhoneFavoriteListView extends ListView implements
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            mTouchDownForDragStartY = (int) ev.getY();
+        }
         if (isSwipeEnabled()) {
             return mSwipeHelper.onInterceptTouchEvent(ev) || super.onInterceptTouchEvent(ev);
         } else {
@@ -189,8 +192,7 @@ public class PhoneFavoriteListView extends ListView implements
     }
 
     @Override
-    public void onDragCancelled(View v) {
-    }
+    public void onDragCancelled(View v) {}
 
     @Override
     public void onBeginDrag(View v) {
@@ -205,11 +207,16 @@ public class PhoneFavoriteListView extends ListView implements
     public boolean dispatchDragEvent(DragEvent event) {
         switch (event.getAction()) {
             case DragEvent.ACTION_DRAG_LOCATION:
-                if (mScrollHandler == null) {
-                    mScrollHandler = getHandler();
-                }
                 mLastDragY = (int) event.getY();
-                mScrollHandler.postDelayed(mDragScroller, SCROLL_HANDLER_DELAY_MILLIS);
+                handleDrag((int) event.getX(), mLastDragY);
+                // Kick off {@link #mScrollHandler} if it's not started yet.
+                if (!mIsDragScrollerRunning &&
+                        // And if the distance traveled while dragging exceeds the touch slop
+                        (Math.abs(mLastDragY - mTouchDownForDragStartY) >= 4 * mTouchSlop)) {
+                    mIsDragScrollerRunning = true;
+                    ensureScrollHandler();
+                    mScrollHandler.postDelayed(mDragScroller, SCROLL_HANDLER_DELAY_MILLIS);
+                }
                 break;
             case DragEvent.ACTION_DRAG_ENTERED:
                 final int boundGap = (int) (getHeight() * BOUND_GAP_RATIO);
@@ -218,11 +225,12 @@ public class PhoneFavoriteListView extends ListView implements
                 break;
             case DragEvent.ACTION_DRAG_EXITED:
             case DragEvent.ACTION_DRAG_ENDED:
+            case DragEvent.ACTION_DROP:
+                ensureScrollHandler();
                 mScrollHandler.removeCallbacks(mDragScroller);
+                mIsDragScrollerRunning = false;
                 break;
             case DragEvent.ACTION_DRAG_STARTED:
-                // Not a receiver
-            case DragEvent.ACTION_DROP:
                 // Not a receiver
             default:
                 break;
@@ -230,8 +238,35 @@ public class PhoneFavoriteListView extends ListView implements
         return super.dispatchDragEvent(event);
     }
 
-    @Override
-    public boolean onDrag(View v, DragEvent event) {
-        return true;
+    private void ensureScrollHandler() {
+        if (mScrollHandler == null) {
+            mScrollHandler = getHandler();
+        }
+    }
+
+    private void handleDrag(int x, int y) {
+        // find the view under the pointer, accounting for GONE views
+        final int count = getChildCount();
+        View slidingChild;
+        for (int childIdx = 0; childIdx < count; childIdx++) {
+            slidingChild = getChildAt(childIdx);
+            if (slidingChild.getVisibility() == GONE) {
+                continue;
+            }
+            if (y >= slidingChild.getTop() &&
+                    y <= slidingChild.getBottom() &&
+                    slidingChild instanceof ContactTileRow) {
+                final ContactTileRow tile = (ContactTileRow) slidingChild;
+                reportDragEnteredItemIndex(tile.getItemIndex(x, y));
+            }
+        }
+    }
+
+    private void reportDragEnteredItemIndex(int itemIndex) {
+        final PhoneFavoriteMergedAdapter adapter =
+                (PhoneFavoriteMergedAdapter) getAdapter();
+        if (adapter != null) {
+            adapter.reportDragEnteredItemIndex(itemIndex);
+        }
     }
 }

@@ -99,7 +99,11 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
                     // If the view is regular row, start drag the row view.
                     final View.DragShadowBuilder shadowBuilder =
                             new View.DragShadowBuilder(view.getParentRow());
-                    view.getParentRow().startDrag(data, shadowBuilder, null, 0);
+                    final ContactTileRow parent = (ContactTileRow) view.getParentRow();
+                    // Drag is not available for the item exceeds the PIN_LIMIT.
+                    if (parent.getRegularRowItemIndex() < PhoneFavoritesTileAdapter.PIN_LIMIT) {
+                        view.getParentRow().startDrag(data, shadowBuilder, null, 0);
+                    }
                 } else {
                     // If the view is a tile view, start drag the tile.
                     final View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
