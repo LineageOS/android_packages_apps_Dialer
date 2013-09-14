@@ -236,6 +236,10 @@ public class CallList {
         return result;
     }
 
+    public Call getCall(int callId) {
+        return mCallMap.get(callId);
+    }
+
     public boolean existsLiveCall() {
         for (Call call : mCallMap.values()) {
             if (!isCallDead(call)) {

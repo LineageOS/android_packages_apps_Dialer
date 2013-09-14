@@ -134,9 +134,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setPrimaryImage(Bitmap image) {
+    public void setPrimaryImage(Drawable image) {
         if (image != null) {
-            setDrawableToImageView(mPhoto, new BitmapDrawable(getResources(), image));
+            setDrawableToImageView(mPhoto, image);
         }
     }
 
@@ -213,9 +213,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setSecondaryImage(Bitmap bitmap) {
-        if (bitmap != null) {
-            setDrawableToImageView(mSecondaryPhoto, new BitmapDrawable(getResources(), bitmap));
+    public void setSecondaryImage(Drawable image) {
+        if (image != null) {
+            setDrawableToImageView(mSecondaryPhoto, image);
         }
     }
 

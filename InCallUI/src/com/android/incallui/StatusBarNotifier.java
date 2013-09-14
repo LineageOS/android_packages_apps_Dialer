@@ -36,11 +36,12 @@ import com.android.incallui.InCallApp.NotificationBroadcastReceiver;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.services.telephony.common.Call;
 
+import java.util.HashMap;
+
 /**
  * This class adds Notifications to the status bar for the in-call experience.
  */
-public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
-        InCallPresenter.IncomingCallListener {
+public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     // notification types
     private static final int IN_CALL_NOTIFICATION = 1;
 
@@ -49,7 +50,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     private final CallList mCallList;
     private final NotificationManager mNotificationManager;
     private boolean mIsShowingNotification = false;
-    private InCallState mInCallState = InCallState.NO_CALLS;
+    private int mCallState = Call.State.INVALID;
     private int mSavedIcon = 0;
     private int mSavedContent = 0;
     private Bitmap mSavedLargeIcon;
@@ -72,45 +73,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     @Override
     public void onStateChange(InCallState state, CallList callList) {
         Log.d(this, "onStateChange");
+
         updateNotification(state, callList);
-    }
-
-    @Override
-    public void onIncomingCall(final Call call) {
-        final ContactCacheEntry entry = ContactInfoCache.buildCacheEntryFromCall(mContext,
-                call.getIdentification(), true);
-
-        // Initial update with no contact information.
-        buildAndSendNotification(InCallState.INCOMING, call, entry, false);
-
-        // TODO(klp): InCallPresenter already calls updateNofication() when it wants to start
-        // the notification. We shouldn't do this twice.
-        // TODO(klp): This search doesn't happen for outgoing calls any more.  It works because
-        // the call card makes a requests that are cached...but eventually this startup process
-        // needs to incorporate call searches for all new calls, not just incoming.
-
-        // we make a call to the contact info cache to query for supplemental data to what the
-        // call provides.  This includes the contact name and photo.
-        // This callback will always get called immediately and synchronously with whatever data
-        // it has available, and may make a subsequent call later (same thread) if it had to
-        // call into the contacts provider for more data.
-        mContactInfoCache.findInfo(call.getIdentification(), true, new ContactInfoCacheCallback() {
-            private ContactCacheEntry mEntry;
-
-            @Override
-            public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
-                mEntry = entry;
-                buildAndSendNotification(InCallState.INCOMING, call, entry, false);
-            }
-
-            @Override
-            public void onImageLoadComplete(int callId, Bitmap photo) {
-                if (mEntry != null) {
-                    mEntry.photo = new BitmapDrawable(mContext.getResources(), photo);
-                    buildAndSendNotification(InCallState.INCOMING, call, mEntry, false);
-                }
-            }
-        });
     }
 
     /**
@@ -165,7 +129,6 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         updateInCallNotification(true, state, callList);
     }
 
-
     /**
      * Take down the in-call notification.
      * @see updateInCallNotification()
@@ -202,22 +165,51 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
             return;
         }
 
-        // Contact info should have already been done on incoming calls.
-        // TODO(klp): This also needs to be done for outgoing calls.
-        ContactCacheEntry entry = mContactInfoCache.getInfo(call.getCallId());
-        if (entry == null) {
-            entry = ContactInfoCache.buildCacheEntryFromCall(mContext, call.getIdentification(),
-                    state == InCallState.INCOMING);
-        }
-        buildAndSendNotification(state, call, entry, allowFullScreenIntent);
+        // we make a call to the contact info cache to query for supplemental data to what the
+        // call provides.  This includes the contact name and photo.
+        // This callback will always get called immediately and synchronously with whatever data
+        // it has available, and may make a subsequent call later (same thread) if it had to
+        // call into the contacts provider for more data.
+        mContactInfoCache.findInfo(call.getIdentification(), call.getState() == Call.State.INCOMING,
+                new ContactInfoCacheCallback() {
+                    private boolean mAllowFullScreenIntent = allowFullScreenIntent;
+
+                    @Override
+                    public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
+                        Call call = CallList.getInstance().getCall(callId);
+                        if (call != null) {
+                            buildAndSendNotification(call, entry, mAllowFullScreenIntent);
+                        }
+
+                        // Full screen intents are what bring up the in call screen. We only want
+                        // to do this the first time we are called back.
+                        mAllowFullScreenIntent = false;
+                    }
+
+                    @Override
+                    public void onImageLoadComplete(int callId, ContactCacheEntry entry) {
+                        Call call = CallList.getInstance().getCall(callId);
+                        if (call != null) {
+                            buildAndSendNotification(call, entry, mAllowFullScreenIntent);
+                        }
+                    } });
     }
 
     /**
      * Sets up the main Ui for the notification
      */
-    private void buildAndSendNotification(InCallState state, Call call,
-            ContactCacheEntry contactInfo, boolean allowFullScreenIntent) {
+    private void buildAndSendNotification(Call originalCall, ContactCacheEntry contactInfo,
+            boolean allowFullScreenIntent) {
 
+        // This can get called to update an existing notification after contact information has come
+        // back. However, it can happen much later. Before we continue, we need to make sure that
+        // the call being passed in is still the one we want to show in the notification.
+        final Call call = getCallToShow(CallList.getInstance());
+        if (call.getCallId() != originalCall.getCallId()) {
+            return;
+        }
+
+        final int state = call.getState();
         final boolean isConference = call.isConferenceCall();
         final int iconResId = getIconToDisplay(call);
         final Bitmap largeIcon = getLargeIconToDisplay(contactInfo, isConference);
@@ -250,15 +242,17 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         builder.setContentTitle(contentTitle);
         builder.setLargeIcon(largeIcon);
 
-        if (call.getState() == Call.State.ACTIVE) {
+        if (state == Call.State.ACTIVE) {
             builder.setUsesChronometer(true);
             builder.setWhen(call.getConnectTime());
         } else {
             builder.setUsesChronometer(false);
         }
 
-        // Add special Content for calls that are ongoing
-        if (InCallState.INCALL == state || InCallState.OUTGOING == state) {
+        // Add hang up option for any active calls (active | onhold), outgoing calls (dialing).
+        if (state == Call.State.ACTIVE ||
+                state == Call.State.DIALING ||
+                state == Call.State.ONHOLD) {
             addHangupAction(builder);
         }
 
@@ -277,7 +271,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      * we do not issue a new notification for the exact same data.
      */
     private boolean checkForChangeAndSaveData(int icon, int content, Bitmap largeIcon,
-            String contentTitle, InCallState state, boolean showFullScreenIntent) {
+            String contentTitle, int state, boolean showFullScreenIntent) {
 
         // The two are different:
         // if new title is not null, it should be different from saved version OR
@@ -288,7 +282,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
         // any change means we are definitely updating
         boolean retval = (mSavedIcon != icon) || (mSavedContent != content) ||
-                (mInCallState != state) || (mSavedLargeIcon != largeIcon) ||
+                (mCallState != state) || (mSavedLargeIcon != largeIcon) ||
                 contentTitleChanged;
 
         // A full screen intent means that we have been asked to interrupt an activity,
@@ -306,7 +300,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
         mSavedIcon = icon;
         mSavedContent = content;
-        mInCallState = state;
+        mCallState = state;
         mSavedLargeIcon = largeIcon;
         mSavedContentTitle = contentTitle;
 
@@ -501,7 +495,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // comes up the user will see it flash on and off on an outgoing call.
         // This code ensures that we do not show the notification for outgoing calls before
         // the activity has started.
-        if (state == InCallState.OUTGOING && !InCallPresenter.getInstance().isActivityStarted()) {
+        if (state == InCallState.OUTGOING &&
+                !InCallPresenter.getInstance().isActivityPreviouslyStarted()) {
             Log.v(this, "suppressing: activity not started.");
             shouldSuppress = true;
         }
@@ -511,11 +506,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
     private PendingIntent createLaunchPendingIntent() {
 
-        final Intent intent = new Intent(Intent.ACTION_MAIN, null);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
-        intent.setClass(mContext, InCallActivity.class);
+        final Intent intent = InCallPresenter.getInstance().getInCallIntent();
 
         // PendingIntent that can be used to launch the InCallActivity.  The
         // system fires off this intent if the user pulls down the windowshade
