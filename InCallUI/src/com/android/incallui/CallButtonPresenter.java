@@ -202,17 +202,30 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         Log.d(this, "Updating call UI for call: ", call);
 
         if (isVisible) {
-            Log.v(this, "Show hold ", call.can(Capabilities.HOLD));
+            Log.v(this, "Show hold ", call.can(Capabilities.SUPPORT_HOLD));
+            Log.v(this, "Enable hold", call.can(Capabilities.HOLD));
             Log.v(this, "Show merge ", call.can(Capabilities.MERGE_CALLS));
             Log.v(this, "Show swap ", call.can(Capabilities.SWAP_CALLS));
             Log.v(this, "Show add call ", call.can(Capabilities.ADD_CALL));
+            Log.v(this, "Show mute ", call.can(Capabilities.MUTE));
 
+            final boolean canMerge = call.can(Capabilities.MERGE_CALLS);
+            final boolean canAdd = call.can(Capabilities.ADD_CALL);
+
+            if (canMerge) {
+                ui.showMerge(true);
+                ui.showAddCall(false);
+            } else {
+                ui.showMerge(false);
+                ui.showAddCall(true);
+                ui.enableAddCall(canAdd);
+            }
+
+            ui.showHold(call.can(Capabilities.SUPPORT_HOLD));
             ui.setHold(call.getState() == Call.State.ONHOLD);
+            ui.enableHold(call.can(Capabilities.HOLD));
 
-            ui.showHold(call.can(Capabilities.HOLD));
-            ui.showMerge(call.can(Capabilities.MERGE_CALLS));
             ui.showSwap(call.can(Capabilities.SWAP_CALLS));
-            ui.showAddCall(call.can(Capabilities.ADD_CALL));
 
             // Restore the previous mute state
             if (mAutomaticallyMuted &&
@@ -220,6 +233,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 ui.setMute(mPreviousMuteState);
                 mAutomaticallyMuted = false;
             }
+            ui.enableMute(call.can(Capabilities.MUTE));
 
             // Finally, update the "extra button row": It's displayed above the
             // "End" button, but only if necessary.  Also, it's never displayed
@@ -254,11 +268,14 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     public interface CallButtonUi extends Ui {
         void setVisible(boolean on);
         void setMute(boolean on);
+        void enableMute(boolean enabled);
         void setHold(boolean on);
         void showHold(boolean show);
+        void enableHold(boolean enabled);
         void showMerge(boolean show);
         void showSwap(boolean show);
         void showAddCall(boolean show);
+        void enableAddCall(boolean enabled);
         void displayDialpad(boolean on);
         boolean isDialpadVisible();
         void setAudio(int mode);
