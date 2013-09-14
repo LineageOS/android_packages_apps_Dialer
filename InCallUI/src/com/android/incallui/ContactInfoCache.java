@@ -240,7 +240,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             // If there's an associated image, fetch that
             if (info.getImageUrl() != null) {
                 Log.d(TAG, "Contact lookup. Remote contact found, loading image.");
-                mPhoneNumberService.fetchImage(info.getImageUrl(), this);
+                mPhoneNumberService.fetchImage(info.getNormalizedNumber(),
+                        info.getImageUrl(), this);
             } else {
                 // Otherwise, we're done, so clear callbacks
                 Log.d(TAG, "Contact lookup. Remote contact found, no image.");

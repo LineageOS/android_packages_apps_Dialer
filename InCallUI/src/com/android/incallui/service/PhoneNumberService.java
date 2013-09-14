@@ -34,10 +34,11 @@ public interface PhoneNumberService {
     /**
      * Get an image asynchronously.
      *
+     * @param number The phone number for the image.
      * @param url The url to fetch the image from.
      * @param listener The listener to notify when the image lookup is complete.
      */
-    public void fetchImage(String url, ImageLookupListener listener);
+    public void fetchImage(String number, String url, ImageLookupListener listener);
 
     public interface NumberLookupListener {
 
