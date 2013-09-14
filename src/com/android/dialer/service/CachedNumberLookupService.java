@@ -32,4 +32,8 @@ public interface CachedNumberLookupService {
     public ContactInfo lookupCachedContactFromNumber(Context context, String number);
 
     public void addContact(Context context, CachedContactInfo info);
+
+    public boolean isCacheUri(String uri);
+
+    public boolean addPhoto(Context context, String number, byte[] photo);
 }
