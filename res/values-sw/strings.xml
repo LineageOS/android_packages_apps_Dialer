@@ -27,20 +27,20 @@
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Ongeza kwa anwani"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Toa kwa orodha ya simu zilizopigwa"</string>
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Futa rekodi ya simu"</string>
-    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Futa barua ya sauti"</string>
-    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Shiriki barua ya sauti"</string>
+    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Futa ujumbe wa sauti"</string>
+    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Shiriki ujumbe wa sauti"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"Orodha ya kupiga simu haina chochote."</string>
-    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Futa rekodi ya simu?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Ungependa kufuta rekodi ya simu?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Kumbukumbu zako zote za simu zitafutwa."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Inafuta rekodi ya simu ..."</string>
   <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Barua ya sauti"</item>
+    <item quantity="one" msgid="1746619685488504230">"Ujumbe wa sauti"</item>
     <item quantity="other" msgid="5513481419205061254">"Barua za sauti <xliff:g id="COUNT">%1$d</xliff:g>"</item>
   </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Cheza"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Barua mpya ya sauti kutoka <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="1811242131549854624">"Haikuweza kucheza barua ya sauti."</string>
+    <string name="voicemail_playback_error" msgid="1811242131549854624">"Imeshindwa kucheza ujumbe wa sauti."</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"Inaakibisha..."</string>
     <string name="voicemail_fetching_content" msgid="877911315738258780">"Inaleta barua ya sauti…"</string>
     <string name="voicemail_fetching_timout" msgid="6691792377574905201">"Haikuweza kuleta barua ya sauti."</string>
@@ -75,7 +75,7 @@
     <string name="description_image_button_star" msgid="3365919907520767866">"nyota"</string>
     <string name="description_image_button_zero" msgid="4133108949401820710">"sufuri"</string>
     <string name="description_image_button_pound" msgid="3039765597595889230">"Pauni"</string>
-    <string name="description_voicemail_button" msgid="3402506823655455591">"Barua ya sauti"</string>
+    <string name="description_voicemail_button" msgid="3402506823655455591">"Ujumbe wa sauti"</string>
     <string name="description_search_button" msgid="3660807558587384889">"tafuta"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"piga simu"</string>
     <string name="description_delete_button" msgid="6263102114033407382">"futa"</string>
@@ -104,7 +104,7 @@
     <string name="type_missed" msgid="2720502601640509542">"Simu isiyojibiwa"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Barua za sauti"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Simu zinazoingia"</string>
-    <string name="description_call_log_play_button" msgid="651182125650429846">"Cheza barua ya sauti"</string>
+    <string name="description_call_log_play_button" msgid="651182125650429846">"Sikiliza ujumbe wa sauti"</string>
     <string name="description_call_log_incoming_call" msgid="4485427487637250143">"Simu inayoingia"</string>
     <string name="description_call_log_outgoing_call" msgid="604831756853471658">"Simu inayotoka"</string>
     <string name="description_call_log_missed_call" msgid="2242805209983708825">"Simu isiyojibiwa"</string>
@@ -118,7 +118,7 @@
     <string name="call_log_empty_gecode" msgid="5588904744812100846">"-"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Piga simu <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Haijulikani"</string>
-    <string name="voicemail" msgid="3851469869202611441">"Barua ya sauti"</string>
+    <string name="voicemail" msgid="3851469869202611441">"Ujumbe wa sauti"</string>
     <string name="private_num" msgid="6374339738119166953">" Nambari isiyojulikana"</string>
     <string name="payphone" msgid="4864313342828942922">"Simu ya kulipia"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Tumia kibodi kubonyeza"</string>
@@ -135,7 +135,7 @@
     <string name="add_contact_not_available" msgid="1419207765446461366">"Washa tena Programu ya watu ili itumie kipengele hiki."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Andika jina au nambari ya simu"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Zote"</string>
-    <string name="call_log_missed_title" msgid="4541142293870638971">"Hazikupokewa"</string>
+    <string name="call_log_missed_title" msgid="4541142293870638971">"Ambazo hazikupokewa"</string>
     <string name="recentMissed_empty" msgid="5427113551557296665">"Hakuna simu za hivi karibuni ambazo hazikupokewa."</string>
     <string name="recentVoicemails_empty" msgid="5163114119598014048">"Hakuna ujumbe wa sauti wa hivi karibuni."</string>
     <string name="show_all_contacts" msgid="1732256558071778056">"Onyesha anwani zote"</string>
