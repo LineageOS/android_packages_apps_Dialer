@@ -148,7 +148,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     public void muteClicked(boolean checked) {
         Log.d(this, "turning on mute: " + checked);
-
         CallCommandClient.getInstance().mute(checked);
     }
 
@@ -172,7 +171,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // Automatically mute the current call
         mAutomaticallyMuted = true;
         mPreviousMuteState = AudioModeProvider.getInstance().getMute();
+        // Simulate a click on the mute button
         getUi().setMute(true);
+        muteClicked(true);
 
         CallCommandClient.getInstance().addCall();
     }
