@@ -75,11 +75,30 @@ public class PhoneNumberHelper {
         }
     }
 
+    public static boolean isUnknownNumberThatCanBeLookedUp(CharSequence number, int presentation) {
+        if (presentation == Calls.PRESENTATION_UNKNOWN) {
+            return false;
+        }
+        if (presentation == Calls.PRESENTATION_RESTRICTED) {
+            return false;
+        }
+        if (presentation == Calls.PRESENTATION_PAYPHONE) {
+            return false;
+        }
+        if (TextUtils.isEmpty(number)) {
+            return false;
+        }
+        if (isVoicemailNumber(number)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Returns true if the given number is the number of the configured voicemail.
      * To be able to mock-out this, it is not a static method.
      */
-    public boolean isVoicemailNumber(CharSequence number) {
+    public static boolean isVoicemailNumber(CharSequence number) {
         return PhoneNumberUtils.isVoiceMailNumber(number.toString());
     }
 
