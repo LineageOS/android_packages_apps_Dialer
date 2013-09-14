@@ -32,7 +32,7 @@ public class CallerInfoUtils {
     public static CallerInfo getCallerInfoForCall(Context context, CallIdentification call,
             CallerInfoAsyncQuery.OnQueryCompleteListener listener) {
         CallerInfo info = buildCallerInfo(context, call);
-        String number = call.getNumber();
+        String number = info.phoneNumber;
 
         // TODO: Have phoneapp send a Uri when it knows the contact that triggered this call.
 
@@ -56,6 +56,12 @@ public class CallerInfoUtils {
 
         String number = identification.getNumber();
         if (!TextUtils.isEmpty(number)) {
+            final String[] numbers = number.split("&");
+            number = numbers[0];
+            if (numbers.length > 1) {
+                info.forwardingNumber = numbers[1];
+            }
+
             number = modifyForSpecialCnapCases(context, info, number, info.numberPresentation);
             info.phoneNumber = number;
         }
@@ -158,7 +164,7 @@ public class CallerInfoUtils {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < number.length(); i++) {
             char c = number.charAt(i);
-            if (c == '-' || c == '@' || c == '.') {
+            if (c == '-' || c == '@' || c == '.' || c == '&') {
                 builder.append(c);
             } else {
                 builder.append('x');
