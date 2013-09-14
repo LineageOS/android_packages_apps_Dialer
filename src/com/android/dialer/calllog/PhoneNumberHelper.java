@@ -33,18 +33,6 @@ public class PhoneNumberHelper {
         mResources = resources;
     }
 
-    /** Returns true if it is possible to place a call to the given number. */
-    public static boolean canPlaceCallsTo(CharSequence number, int presentation) {
-        return presentation == Calls.PRESENTATION_ALLOWED
-            && !TextUtils.isEmpty(number);
-    }
-
-    /** Returns true if it is possible to send an SMS to the given number. */
-    public boolean canSendSmsTo(CharSequence number, int presentation) {
-        return canPlaceCallsTo(number, presentation)
-            && !isVoicemailNumber(number) && !isSipNumber(number);
-    }
-
     /**
      * Returns the string to display for the given phone number.
      *
@@ -65,7 +53,7 @@ public class PhoneNumberHelper {
         if (TextUtils.isEmpty(number)) {
             return "";
         }
-        if (isVoicemailNumber(number)) {
+        if (new PhoneNumberUtilsWrapper().isVoicemailNumber(number)) {
             return mResources.getString(R.string.voicemail);
         }
         if (TextUtils.isEmpty(formattedNumber)) {
@@ -73,40 +61,5 @@ public class PhoneNumberHelper {
         } else {
             return formattedNumber;
         }
-    }
-
-    public static boolean isUnknownNumberThatCanBeLookedUp(CharSequence number, int presentation) {
-        if (presentation == Calls.PRESENTATION_UNKNOWN) {
-            return false;
-        }
-        if (presentation == Calls.PRESENTATION_RESTRICTED) {
-            return false;
-        }
-        if (presentation == Calls.PRESENTATION_PAYPHONE) {
-            return false;
-        }
-        if (TextUtils.isEmpty(number)) {
-            return false;
-        }
-        if (isVoicemailNumber(number)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Returns true if the given number is the number of the configured voicemail.
-     * To be able to mock-out this, it is not a static method.
-     */
-    public static boolean isVoicemailNumber(CharSequence number) {
-        return PhoneNumberUtils.isVoiceMailNumber(number.toString());
-    }
-
-    /**
-     * Returns true if the given number is a SIP address.
-     * To be able to mock-out this, it is not a static method.
-     */
-    public boolean isSipNumber(CharSequence number) {
-        return PhoneNumberUtils.isUriNumber(number.toString());
     }
 }
