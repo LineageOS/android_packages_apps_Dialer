@@ -241,8 +241,7 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
      */
     private static final class DefaultNewCallsQuery implements NewCallsQuery {
         private static final String[] PROJECTION = {
-            Calls._ID, Calls.NUMBER, Calls.NUMBER_PRESENTATION,
-            Calls.VOICEMAIL_URI
+            Calls._ID, Calls.NUMBER, Calls.VOICEMAIL_URI, Calls.NUMBER_PRESENTATION
         };
         private static final int ID_COLUMN_INDEX = 0;
         private static final int NUMBER_COLUMN_INDEX = 1;
