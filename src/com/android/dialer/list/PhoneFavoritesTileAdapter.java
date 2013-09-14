@@ -84,6 +84,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     private int mDraggedEntryIndex = -1;
     /** New position of the temporarily removed contact in the cache. */
     private int mDropEntryIndex = -1;
+    /** New position of the temporarily entered contact in the cache. */
+    private int mDragEnteredEntryIndex = -1;
     /** Position of the contact pending removal. */
     private int mPotentialRemoveEntryIndex = -1;
     private long mIdToKeepInPlace = -1;
@@ -121,7 +123,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     /** Indicates whether a drag is in process. */
     private boolean mInDragging = false;
 
-    private static final int PIN_LIMIT = 20;
+    public static final int PIN_LIMIT = 20;
 
     /**
      * The soft limit on how many contact tiles to show.
@@ -569,34 +571,58 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
      * @param index Position of the contact to be removed.
      */
     public void popContactEntry(int index) {
-        if (index >= 0 && index < mContactEntries.size()) {
+        if (isIndexInBound(index)) {
             mDraggedEntry = mContactEntries.get(index);
-            mContactEntries.set(index, ContactEntry.BLANK_ENTRY);
-            ContactEntry.BLANK_ENTRY.id = mDraggedEntry.id;
             mDraggedEntryIndex = index;
+            mDragEnteredEntryIndex = index;
+            markDropArea(mDragEnteredEntryIndex);
+        }
+    }
+
+    /**
+     * @param itemIndex Position of the contact in {@link #mContactEntries}.
+     * @return True if the given index is valid for {@link #mContactEntries}.
+     */
+    private boolean isIndexInBound(int itemIndex) {
+        return itemIndex >= 0 && itemIndex < mContactEntries.size();
+    }
+
+    /**
+     * Mark the tile as drop area by given the item index in {@link #mContactEntries}.
+     *
+     * @param itemIndex Position of the contact in {@link #mContactEntries}.
+     */
+    private void markDropArea(int itemIndex) {
+        if (isIndexInBound(mDragEnteredEntryIndex) && isIndexInBound(itemIndex)) {
+            // Remove the old placeholder item and place the new placeholder item.
+            mContactEntries.remove(mDragEnteredEntryIndex);
+            mDragEnteredEntryIndex = itemIndex;
+            mContactEntries.add(mDragEnteredEntryIndex, ContactEntry.BLANK_ENTRY);
+            ContactEntry.BLANK_ENTRY.id = mDraggedEntry.id;
             notifyDataSetChanged();
         }
     }
 
     /**
      * Drops the temporarily removed contact to the desired location in the list.
-     *
-     * @param index Location where the contact will be dropped.
      */
-    public void dropContactEntry(int index) {
+    public void handleDrop() {
         boolean changed = false;
         if (mDraggedEntry != null) {
-            if (index >= 0 && index < mContactEntries.size()) {
+            if (isIndexInBound(mDragEnteredEntryIndex)) {
                 // Don't add the ContactEntry here (to prevent a double animation from occuring).
                 // When we receive a new cursor the list of contact entries will automatically be
                 // populated with the dragged ContactEntry at the correct spot.
-                mDropEntryIndex = index;
+                mDropEntryIndex = mDragEnteredEntryIndex;
+                mContactEntries.set(mDropEntryIndex, mDraggedEntry);
                 mIdToKeepInPlace = getAdjustedItemId(mDraggedEntry.id);
                 mDataSetChangedListener.cacheOffsetsForDatasetChange();
                 changed = true;
-            } else if (mDraggedEntryIndex >= 0 && mDraggedEntryIndex <= mContactEntries.size()) {
-                /** If the index is invalid, falls back to the original position of the contact. */
-                mContactEntries.set(mDraggedEntryIndex, mDraggedEntry);
+            } else if (isIndexInBound(mDraggedEntryIndex)) {
+                // If {@link #mDragEnteredEntryIndex} is invalid,
+                // falls back to the original position of the contact.
+                mContactEntries.remove(mDragEnteredEntryIndex);
+                mContactEntries.add(mDraggedEntryIndex, mDraggedEntry);
                 mDropEntryIndex = mDraggedEntryIndex;
                 notifyDataSetChanged();
             }
@@ -605,7 +631,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                 final ContentValues cv = getReflowedPinnedPositions(mContactEntries, mDraggedEntry,
                         mDraggedEntryIndex, mDropEntryIndex);
                 final Uri pinUri = PinnedPositions.UPDATE_URI.buildUpon().appendQueryParameter(
-                            PinnedPositions.STAR_WHEN_PINNING, "true").build();
+                        PinnedPositions.STAR_WHEN_PINNING, "true").build();
                 // update the database here with the new pinned positions
                 mContext.getContentResolver().update(pinUri, cv, null, null);
             }
@@ -618,7 +644,11 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
      * contact back to where it was dragged from.
      */
     public void dropToUnsupportedView() {
-        dropContactEntry(-1);
+        if (isIndexInBound(mDragEnteredEntryIndex)) {
+            mContactEntries.remove(mDragEnteredEntryIndex);
+            mContactEntries.add(mDraggedEntryIndex, mDraggedEntry);
+            notifyDataSetChanged();
+        }
     }
 
     /**
@@ -638,7 +668,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
      */
     public boolean removePendingContactEntry() {
         boolean removed = false;
-        if (mPotentialRemoveEntryIndex >= 0 && mPotentialRemoveEntryIndex < mContactEntries.size()) {
+        if (isIndexInBound(mPotentialRemoveEntryIndex)) {
             final ContactEntry entry = mContactEntries.get(mPotentialRemoveEntryIndex);
             unstarAndUnpinContact(entry.lookupKey);
             removed = true;
@@ -661,6 +691,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     public void cleanTempVariables() {
         mDraggedEntryIndex = -1;
         mDropEntryIndex = -1;
+        mDragEnteredEntryIndex = -1;
         mDraggedEntry = null;
         mPotentialRemoveEntryIndex = -1;
     }
@@ -917,9 +948,18 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                 }
             } else {
                 /** If the selected item is one of the rows, compute the index. */
-                return (mPosition - mMaxTiledRows) + mColumnCount * mMaxTiledRows;
+                return getRegularRowItemIndex();
             }
             return -1;
+        }
+
+        /**
+         * Gets the index of the regular row item.
+         *
+         * @return Index of the selected item in the cached array.
+         */
+        public int getRegularRowItemIndex() {
+            return (mPosition - mMaxTiledRows) + mColumnCount * mMaxTiledRows;
         }
 
         public PhoneFavoritesTileAdapter getTileAdapter() {
@@ -1110,32 +1150,12 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             ContactEntry entryToPin, int oldPos, int newPinPos) {
 
         final ContentValues cv = new ContentValues();
-        // Add the dragged contact at the user-requested spot.
-        cv.put(String.valueOf(entryToPin.id), newPinPos);
-
-        final int listSize = list.size();
-        if (oldPos < newPinPos && list.get(listSize - 1).pinned == (listSize - 1)) {
-            // The only time we should get here is it we are completely full - i.e. starting
-            // from the newly pinned contact to the end of the list, every single contact
-            // thereafter is pinned, and a contact is being shifted to the right by the user.
-            // Instead of trying to make room to the right, we should thus try to shift contacts
-            // to the left instead, working backwards through the list, starting from the contact
-            // which just got bumped.
-            for (int i = newPinPos; i >= 0; i--) {
-                final ContactEntry entry = list.get(i);
-                // Once we find an unpinned spot(or a blank entry), we can stop pushing contacts
-                // to the left.
-                if (entry.pinned > PIN_LIMIT) break;
-                cv.put(String.valueOf(entry.id), entry.pinned - 1);
-            }
-        } else {
-            // Shift any pinned contacts to the right as necessary, until an unpinned
-            // spot is found
-            for (int i = newPinPos; i < PIN_LIMIT && i < list.size(); i++) {
-                final ContactEntry entry = list.get(i);
-                if (entry.pinned > PIN_LIMIT) break;
-                cv.put(String.valueOf(entry.id), entry.pinned + 1);
-            }
+        final int lowerBound = Math.min(oldPos, newPinPos);
+        final int upperBound = Math.max(oldPos, newPinPos);
+        for (int i = lowerBound; i <= upperBound; i++) {
+            final ContactEntry entry = list.get(i);
+            if (entry.pinned == i) continue;
+            cv.put(String.valueOf(entry.id), i);
         }
         return cv;
     }
@@ -1174,5 +1194,14 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
     public void setEmptyView(View emptyView) {
         mEmptyView = emptyView;
+    }
+
+    public void reportDragEnteredItemIndex(int itemIndex) {
+        if (mInDragging &&
+                mDragEnteredEntryIndex != itemIndex &&
+                isIndexInBound(itemIndex) &&
+                itemIndex < PIN_LIMIT) {
+            markDropArea(itemIndex);
+        }
     }
 }
