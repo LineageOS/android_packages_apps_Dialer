@@ -114,7 +114,7 @@
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g> को कॉल करें"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g> को पाठ संदेश भेजें"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"नहीं सुना गया ध्वनिमेल"</string>
-    <string name="description_start_voice_search" msgid="520539488194946012">"ध्‍वनि खोज प्रारंभ करें"</string>
+    <string name="description_start_voice_search" msgid="520539488194946012">"बोलकर खोजें शुरु करें"</string>
     <string name="call_log_empty_gecode" msgid="5588904744812100846">"-"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> पर कॉल करें"</string>
     <string name="unknown" msgid="740067747858270469">"अज्ञात"</string>
@@ -133,8 +133,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"सिम कार्ड से लोड हो रहा है…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"सिम कार्ड के संपर्क"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"इस सुविधा का उपयोग करने के लिए लोग एप्स को पुन: सक्षम करें."</string>
-    <!-- no translation found for dialer_hint_find_contact (8798845521253672403) -->
-    <skip />
+    <string name="dialer_hint_find_contact" msgid="8798845521253672403">"नाम या फ़ोन नंबर लिखें"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"सभी"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"छूटे हुए"</string>
     <string name="recentMissed_empty" msgid="5427113551557296665">"हाल ही का कोई भी छूटा हुआ कॉल नहीं."</string>
@@ -154,8 +153,7 @@
     <string name="dialpad_9_number" msgid="4377059952097526576">"9"</string>
     <string name="show_all_contacts_title" msgid="8395378484578221791">"सभी संपर्क"</string>
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"सभी संपर्क"</string>
-    <!-- no translation found for favorite_hidden (5011234945140912047) -->
-    <skip />
+    <string name="favorite_hidden" msgid="5011234945140912047">"पसंदीदा से निकाल दिया गया"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"पूर्ववत करें"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> पर कॉल करें"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"संपर्कों में जोड़ें"</string>

@@ -133,7 +133,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Indlæser fra SIM-kort ..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Kontakter på SIM-kort"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Genaktiver applikationen Personer for at bruge denne funktion."</string>
-    <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Skriv et navn eller et telefonnummer"</string>
+    <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Skriv navn eller telefonnummer"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Alle"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Ubesvarede"</string>
     <string name="recentMissed_empty" msgid="5427113551557296665">"Ingen ubesvarede opkald."</string>
