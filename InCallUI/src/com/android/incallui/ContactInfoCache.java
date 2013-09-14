@@ -34,11 +34,13 @@ import com.android.services.telephony.common.CallIdentification;
 import com.android.services.telephony.common.MoreStrings;
 import com.google.android.collect.Lists;
 import com.google.android.collect.Maps;
+import com.google.android.collect.Sets;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Class responsible for querying Contact Information for Call objects. Can perform asynchronous
@@ -54,8 +56,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
     private final Context mContext;
     private final PhoneNumberService mPhoneNumberService;
     private final HashMap<Integer, ContactCacheEntry> mInfoMap = Maps.newHashMap();
-    private final HashMap<Integer, List<ContactInfoCacheCallback>> mCallBacks =
-        Maps.newHashMap();
+    private final HashMap<Integer, Set<ContactInfoCacheCallback>> mCallBacks = Maps.newHashMap();
 
     private static ContactInfoCache sCache = null;
 
@@ -115,7 +116,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
         final int callId = identification.getCallId();
         final ContactCacheEntry cacheEntry = mInfoMap.get(callId);
-        List<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
+        Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
 
         // If we have a previously obtained intermediate result return that now
         if (cacheEntry != null) {
@@ -135,7 +136,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         }
         Log.d(TAG, "Contact lookup. In memory cache miss; searching provider.");
         // New lookup
-        callBacks = Lists.newArrayList();
+        callBacks = Sets.newHashSet();
         callBacks.add(callback);
         mCallBacks.put(callId, callBacks);
 
@@ -402,7 +403,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     displayName = info.cnapName;
                     info.name = info.cnapName;
                     displayNumber = number;
-                    Log.d(TAG, "  ==> cnapName available: displayName '" + displayName + "', displayNumber '" + displayNumber + "'");
+                    Log.d(TAG, "  ==> cnapName available: displayName '" + displayName +
+                            "', displayNumber '" + displayNumber + "'");
                 } else {
                     // No name; all we have is a number. This is the typical
                     // case when an incoming call doesn't match any contact,
@@ -432,8 +434,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     // AND a restricted presentation. However we leave it here in case of weird
                     // network behavior
                     displayName = getPresentationString(context, presentation);
-                    Log.d(TAG,
-                            "  ==> valid name, but presentation not allowed!" + " displayName = " + displayName);
+                    Log.d(TAG, "  ==> valid name, but presentation not allowed!" +
+                            " displayName = " + displayName);
                 } else {
                     displayName = info.name;
                     displayNumber = number;
@@ -453,7 +455,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
      * Sends the updated information to call the callbacks for the entry.
      */
     private void sendInfoNotifications(int callId, ContactCacheEntry entry) {
-        final List<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);;
+        final Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
         if (callBacks != null) {
             for (ContactInfoCacheCallback callBack : callBacks) {
                 callBack.onContactInfoComplete(callId, entry);
@@ -462,21 +464,16 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
     }
 
     private void sendImageNotifications(int callId, ContactCacheEntry entry) {
-        final List<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);;
-        if (callBacks != null) {
+        final Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
+        if (callBacks != null && entry.photo != null) {
             for (ContactInfoCacheCallback callBack : callBacks) {
-                if (entry.photo == null) {
-                    callBack.onImageLoadComplete(callId, null);
-                } else {
-                    callBack.onImageLoadComplete(callId, ((BitmapDrawable) entry.photo)
-                            .getBitmap());
-                }
+                callBack.onImageLoadComplete(callId, entry);
             }
         }
     }
 
     private void clearCallbacks(int callId) {
-        mCallBacks.remove(callId);;
+        mCallBacks.remove(callId);
     }
 
     /**
@@ -497,7 +494,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
      */
     public interface ContactInfoCacheCallback {
         public void onContactInfoComplete(int callId, ContactCacheEntry entry);
-        public void onImageLoadComplete(int callId, Bitmap photo);
+        public void onImageLoadComplete(int callId, ContactCacheEntry entry);
     }
 
     public static class ContactCacheEntry {

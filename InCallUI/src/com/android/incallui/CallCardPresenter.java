@@ -242,14 +242,16 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 }
 
                 @Override
-                public void onImageLoadComplete(int callId, Bitmap photo) {
+                public void onImageLoadComplete(int callId, ContactCacheEntry entry) {
                     if (getUi() == null) {
                         return;
                     }
-                    if (mPrimary != null && callId == mPrimary.getCallId()) {
-                        getUi().setPrimaryImage(photo);
-                    } else if (mSecondary != null && callId == mSecondary.getCallId()) {
-                        getUi().setSecondaryImage(photo);
+                    if (entry.photo != null) {
+                        if (mPrimary != null && callId == mPrimary.getCallId()) {
+                            getUi().setPrimaryImage(entry.photo);
+                        } else if (mSecondary != null && callId == mSecondary.getCallId()) {
+                            getUi().setSecondaryImage(entry.photo);
+                        }
                     }
                 }
             });
@@ -429,12 +431,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 Drawable photo, boolean isConference);
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isConference);
-        void setSecondaryImage(Bitmap bitmap);
+        void setSecondaryImage(Drawable image);
         void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn,
                 String gatewayLabel, String gatewayNumber);
         void setPrimaryCallElapsedTime(boolean show, String duration);
         void setPrimaryName(String name, boolean nameIsNumber);
-        void setPrimaryImage(Bitmap bitmap);
+        void setPrimaryImage(Drawable image);
         void setPrimaryPhoneNumber(String phoneNumber);
         void setPrimaryLabel(String label);
     }
