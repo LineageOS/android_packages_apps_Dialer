@@ -461,6 +461,14 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      * Returns true if notification should not be shown in the current state.
      */
     private boolean shouldSuppressNotification(InCallState state, Call call) {
+
+        // We can still be in the INCALL state when a call is disconnected (in order to show
+        // the "Call ended" screen.  So check that we have an active connection too.
+        if (call == null) {
+            Log.v(this, "suppressing: no call");
+            return true;
+        }
+
         // Suppress the in-call notification if the InCallScreen is the
         // foreground activity, since it's already obvious that you're on a
         // call.  (The status bar icon is needed only if you navigate *away*
@@ -470,13 +478,6 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // Suppress if the call is not active.
         if (!state.isConnectingOrConnected()) {
             Log.v(this, "suppressing: not connecting or connected");
-            shouldSuppress = true;
-        }
-
-        // We can still be in the INCALL state when a call is disconnected (in order to show
-        // the "Call ended" screen.  So check that we have an active connection too.
-        if (call == null) {
-            Log.v(this, "suppressing: no call");
             shouldSuppress = true;
         }
 
