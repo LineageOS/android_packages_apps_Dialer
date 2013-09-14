@@ -50,9 +50,17 @@ public class InCallPresenter implements CallList.Listener {
     private Context mContext;
     private CallList mCallList;
     private InCallActivity mInCallActivity;
-    private boolean mServiceConnected = false;
     private InCallState mInCallState = InCallState.NO_CALLS;
     private ProximitySensor mProximitySensor;
+    private boolean mServiceConnected = false;
+
+    /**
+     * Is true when the activity has been previously started. Some code needs to know not just if
+     * the activity is currently up, but if it had been previously shown in foreground for this
+     * in-call session (e.g., StatusBarNotifier). This gets reset when the session ends in the
+     * tear-down method.
+     */
+    private boolean mActivityPreviouslyStarted = false;
 
     public static synchronized InCallPresenter getInstance() {
         if (sInCallPresenter == null) {
@@ -78,7 +86,6 @@ public class InCallPresenter implements CallList.Listener {
 
         mStatusBarNotifier = new StatusBarNotifier(context, mContactInfoCache, mCallList);
         addListener(mStatusBarNotifier);
-        addIncomingCallListener(mStatusBarNotifier);
 
         mAudioModeProvider = audioModeProvider;
 
@@ -218,6 +225,11 @@ public class InCallPresenter implements CallList.Listener {
         mIncomingCallListeners.add(listener);
     }
 
+    public void removeIncomingCallListener(IncomingCallListener listener) {
+        Preconditions.checkNotNull(listener);
+        mIncomingCallListeners.remove(listener);
+    }
+
     public void addListener(InCallStateListener listener) {
         Preconditions.checkNotNull(listener);
         mListeners.add(listener);
@@ -272,8 +284,12 @@ public class InCallPresenter implements CallList.Listener {
                 !mInCallActivity.isFinishing());
     }
 
+    public boolean isActivityPreviouslyStarted() {
+        return mActivityPreviouslyStarted;
+    }
+
     /**
-     * Called when the activity goes out of the foreground.
+     * Called when the activity goes in/out of the foreground.
      */
     public void onUiShowing(boolean showing) {
         // We need to update the notification bar when we leave the UI because that
@@ -284,6 +300,10 @@ public class InCallPresenter implements CallList.Listener {
 
         if (mProximitySensor != null) {
             mProximitySensor.onInCallShowing(showing);
+        }
+
+        if (showing) {
+            mActivityPreviouslyStarted = true;
         }
     }
 
@@ -397,6 +417,7 @@ public class InCallPresenter implements CallList.Listener {
         Log.i(this, "attemptCleanup? " + shouldCleanup);
 
         if (shouldCleanup) {
+            mActivityPreviouslyStarted = false;
 
             // blow away stale contact info so that we get fresh data on
             // the next set of calls
@@ -417,6 +438,7 @@ public class InCallPresenter implements CallList.Listener {
             mInCallActivity = null;
 
             mListeners.clear();
+            mIncomingCallListeners.clear();
 
             Log.d(this, "Finished InCallPresenter.CleanUp");
         }
@@ -426,7 +448,7 @@ public class InCallPresenter implements CallList.Listener {
         mContext.startActivity(getInCallIntent());
     }
 
-    private Intent getInCallIntent() {
+    public Intent getInCallIntent() {
         final Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
