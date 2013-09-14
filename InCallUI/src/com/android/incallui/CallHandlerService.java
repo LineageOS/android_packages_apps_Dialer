@@ -46,7 +46,7 @@ public class CallHandlerService extends Service {
     private static final int ON_DISCONNECT_CALL = 6;
     private static final int ON_BRING_TO_FOREGROUND = 7;
     private static final int ON_POST_CHAR_WAIT = 8;
-    private static final int ON_CREATE = 9;
+    private static final int ON_START = 9;
     private static final int ON_DESTROY = 10;
 
     private static final int LARGEST_MSG_ID = ON_DESTROY;
@@ -57,10 +57,11 @@ public class CallHandlerService extends Service {
     private Object mHandlerInitLock = new Object();
     private InCallPresenter mInCallPresenter;
     private AudioModeProvider mAudioModeProvider;
+    private boolean mServiceStarted = false;
 
     @Override
     public void onCreate() {
-        Log.i(this, "onCreate");
+        Log.i(TAG, "onCreate");
         super.onCreate();
 
         synchronized(mHandlerInitLock) {
@@ -69,50 +70,47 @@ public class CallHandlerService extends Service {
             }
         }
 
-        // Creation (and destruction) are sent to the message handler.  The reason for this is that
-        // at any time the service could potentially unbind for both legitimate reasons as well as
-        // app crashes and it's better to queue up create/destroy because:
-        // (1) Previous actions like onUpdate/onDisconnect could be queued up and we dont want to
-        //     destroy the system from a different thread in the middle of executing those actions.
-        // (2) If we queue up destruction we must also queue up creation or else we risk having a
-        //     second "create" happen before the first "destroy".
-        //     (e.g., create1, queue destroy1, create2, do destroy1)
-        mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_CREATE));
-
-        // TODO: consider optimization of checking to see if any ON_DESTROY messages exist
-        // in the queue and in those cases simply remove the pending message.
     }
 
     @Override
     public void onDestroy() {
-        Log.i(this, "onDestroy");
+        Log.i(TAG, "onDestroy");
 
+        // onDestroy will get called when:
+        // 1) there are no more calls
+        // 2) the client (TeleService) crashes.
+        //
+        // Because onDestroy is not sequenced with calls to CallHandlerService binder,
+        // we cannot know which is happening.
+        // Thats okay since in both cases we want to end all calls and let the UI know it can tear
+        // itself down when it's ready. Start the destruction sequence.
         mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_DESTROY));
     }
 
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.i(this, "onBind");
+        Log.i(TAG, "onBind");
         return mBinder;
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
-        Log.i(this, "onUnbind");
+        Log.i(TAG, "onUnbind");
 
         // Returning true here means we get called on rebind, which is a feature we do not need.
-        // Return false so that all reconections happen with a call to onBind().
+        // Return false so that all reconnections happen with a call to onBind().
         return false;
     }
 
     private final ICallHandlerService.Stub mBinder = new ICallHandlerService.Stub() {
 
         @Override
-        public void setCallCommandService(ICallCommandService service) {
+        public void startCallService(ICallCommandService service) {
             try {
-                Log.d(CallHandlerService.this, "onConnected: " + service.toString());
-                CallCommandClient.getInstance().setService(service);
+                Log.d(TAG, "startCallService: " + service.toString());
+
+                mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_START, service));
             } catch (Exception e) {
                 Log.e(TAG, "Error processing setCallCommandservice() call", e);
             }
@@ -121,7 +119,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onDisconnect(Call call) {
             try {
-                Log.i(CallHandlerService.this, "onDisconnected: " + call);
+                Log.i(TAG, "onDisconnected: " + call);
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_DISCONNECT_CALL, call));
             } catch (Exception e) {
                 Log.e(TAG, "Error processing onDisconnect() call.", e);
@@ -131,7 +129,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onIncoming(Call call, List<String> textResponses) {
             try {
-                Log.i(CallHandlerService.this, "onIncomingCall: " + call);
+                Log.i(TAG, "onIncomingCall: " + call);
                 Map.Entry<Call, List<String>> incomingCall
                         = new AbstractMap.SimpleEntry<Call, List<String>>(call, textResponses);
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(
@@ -144,7 +142,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onUpdate(List<Call> calls) {
             try {
-                Log.i(CallHandlerService.this, "onUpdate: " + calls);
+                Log.i(TAG, "onUpdate: " + calls);
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_UPDATE_MULTI_CALL, calls));
             } catch (Exception e) {
                 Log.e(TAG, "Error processing onUpdate() call.", e);
@@ -154,7 +152,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onAudioModeChange(int mode, boolean muted) {
             try {
-                Log.i(CallHandlerService.this, "onAudioModeChange : " +
+                Log.i(TAG, "onAudioModeChange : " +
                         AudioMode.toString(mode));
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_AUDIO_MODE, mode,
                             muted ? 1 : 0, null));
@@ -166,7 +164,7 @@ public class CallHandlerService extends Service {
         @Override
         public void onSupportedAudioModeChange(int modeMask) {
             try {
-                Log.i(CallHandlerService.this, "onSupportedAudioModeChange : " +
+                Log.i(TAG, "onSupportedAudioModeChange : " +
                         AudioMode.toString(modeMask));
                 mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_SUPPORTED_AUDIO_MODE,
                         modeMask, 0, null));
@@ -187,24 +185,39 @@ public class CallHandlerService extends Service {
         }
     };
 
-    private void doCreate() {
-        Log.i(this, "doCreate");
+    private void doStart(ICallCommandService service) {
+        Log.i(TAG, "doStart");
+
+        // always setup the new callcommandservice
+        CallCommandClient.getInstance().setService(service);
+
+        // If we have a new service when one is already started, we can continue
+        // using the service that we already have.
+        if (mServiceStarted) {
+            Log.i(TAG, "Starting a service before another one is completed");
+            doStop();
+        }
 
         mCallList = CallList.getInstance();
         mAudioModeProvider = AudioModeProvider.getInstance();
         mInCallPresenter = InCallPresenter.getInstance();
 
         mInCallPresenter.setUp(getApplicationContext(), mCallList, mAudioModeProvider);
+
+        mServiceStarted = true;
     }
 
-    public void doDestroy() {
-        Log.i(this, "doDestroy");
+    public void doStop() {
+        Log.i(TAG, "doStop");
 
-        // The service gets disconnected under two circumstances:
-        // 1. When there are no more calls
-        // 2. When the phone app crashes.
-        // If (2) happens, we can't leave the UI thinking that there are still
-        // live calls.  So we will tell the callList to clear as a final request.
+        if (!mServiceStarted) {
+            return;
+        }
+
+        mServiceStarted = false;
+
+        // We are disconnected, clear the call list so that UI can start
+        // tearing itself down.
         mCallList.clearOnDisconnect();
         mCallList = null;
 
@@ -232,55 +245,61 @@ public class CallHandlerService extends Service {
         if (msg.what > LARGEST_MSG_ID) {
             // If you got here, you may have added a new message and forgotten to
             // update LARGEST_MSG_ID
-            Log.wtf(this, "Cannot handle message larger than LARGEST_MSG_ID.");
+            Log.wtf(TAG, "Cannot handle message larger than LARGEST_MSG_ID.");
         }
 
-        Log.d(this, "executeMessage " + msg.what);
+        // If we are not initialized, ignore all messages except start up
+        if (!mServiceStarted && msg.what != ON_START) {
+            Log.i(TAG, "System not initialized.  Ignoring message: " + msg.what);
+            return;
+        }
+
+        Log.d(TAG, "executeMessage " + msg.what);
 
         switch (msg.what) {
             case ON_UPDATE_CALL:
-                Log.i(CallHandlerService.this, "ON_UPDATE_CALL: " + msg.obj);
+                Log.i(TAG, "ON_UPDATE_CALL: " + msg.obj);
                 mCallList.onUpdate((Call) msg.obj);
                 break;
             case ON_UPDATE_MULTI_CALL:
-                Log.i(CallHandlerService.this, "ON_UPDATE_MULTI_CALL: " + msg.obj);
+                Log.i(TAG, "ON_UPDATE_MULTI_CALL: " + msg.obj);
                 mCallList.onUpdate((List<Call>) msg.obj);
                 break;
             case ON_UPDATE_CALL_WITH_TEXT_RESPONSES:
                 AbstractMap.SimpleEntry<Call, List<String>> entry
                         = (AbstractMap.SimpleEntry<Call, List<String>>) msg.obj;
-                Log.i(CallHandlerService.this, "ON_INCOMING_CALL: " + entry.getKey());
+                Log.i(TAG, "ON_INCOMING_CALL: " + entry.getKey());
                 mCallList.onIncoming(entry.getKey(), entry.getValue());
                 break;
             case ON_DISCONNECT_CALL:
-                Log.i(CallHandlerService.this, "ON_DISCONNECT_CALL: " + msg.obj);
+                Log.i(TAG, "ON_DISCONNECT_CALL: " + msg.obj);
                 mCallList.onDisconnect((Call) msg.obj);
                 break;
             case ON_POST_CHAR_WAIT:
                 mInCallPresenter.onPostDialCharWait(msg.arg1, (String) msg.obj);
                 break;
             case ON_AUDIO_MODE:
-                Log.i(CallHandlerService.this, "ON_AUDIO_MODE: " +
+                Log.i(TAG, "ON_AUDIO_MODE: " +
                         AudioMode.toString(msg.arg1) + ", muted (" + (msg.arg2 == 1) + ")");
                 mAudioModeProvider.onAudioModeChange(msg.arg1, msg.arg2 == 1);
                 break;
             case ON_SUPPORTED_AUDIO_MODE:
-                Log.i(CallHandlerService.this, "ON_SUPPORTED_AUDIO_MODE: " + AudioMode.toString(
+                Log.i(TAG, "ON_SUPPORTED_AUDIO_MODE: " + AudioMode.toString(
                         msg.arg1));
 
                 mAudioModeProvider.onSupportedAudioModeChange(msg.arg1);
                 break;
             case ON_BRING_TO_FOREGROUND:
-                Log.i(CallHandlerService.this, "ON_BRING_TO_FOREGROUND");
+                Log.i(TAG, "ON_BRING_TO_FOREGROUND");
                 if (mInCallPresenter != null) {
                     mInCallPresenter.bringToForeground();
                 }
                 break;
-            case ON_CREATE:
-                doCreate();
+            case ON_START:
+                doStart((ICallCommandService) msg.obj);
                 break;
             case ON_DESTROY:
-                doDestroy();
+                doStop();
                 break;
             default:
                 break;
