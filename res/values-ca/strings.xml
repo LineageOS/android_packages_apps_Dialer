@@ -30,7 +30,7 @@
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Suprimeix missatge de veu"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Comparteix la bústia de veu"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"El registre de trucades és buit."</string>
-    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Esborrament registre"</string>
+    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Esborrar el registre?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Se suprimiran tots els registres de trucades."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Esborrant registre de trucades..."</string>
   <plurals name="notification_voicemail_title">
