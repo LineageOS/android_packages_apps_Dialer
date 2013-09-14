@@ -20,7 +20,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.content.ClipData;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -32,7 +31,6 @@ import android.view.View;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
-import com.android.dialer.list.PhoneFavoriteDragAndDropListeners.PhoneFavoriteDragListener;
 import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
 import com.android.dialer.list.PhoneFavoritesTileAdapter.ViewTypes;
 
@@ -94,20 +92,16 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
             public boolean onLongClick(View v) {
                 setPressed(false);
                 final PhoneFavoriteTileView view = (PhoneFavoriteTileView) v;
-                final ClipData data = ClipData.newPlainText("", "");
                 if (view instanceof PhoneFavoriteRegularRowView) {
-                    // If the view is regular row, start drag the row view.
-                    final View.DragShadowBuilder shadowBuilder =
-                            new View.DragShadowBuilder(view.getParentRow());
                     final ContactTileRow parent = (ContactTileRow) view.getParentRow();
+                    // If the view is regular row, start drag the row view.
                     // Drag is not available for the item exceeds the PIN_LIMIT.
                     if (parent.getRegularRowItemIndex() < PhoneFavoritesTileAdapter.PIN_LIMIT) {
-                        view.getParentRow().startDrag(data, shadowBuilder, null, 0);
+                        parent.startDrag(null, new View.DragShadowBuilder(parent), null, 0);
                     }
                 } else {
                     // If the view is a tile view, start drag the tile.
-                    final View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-                    view.startDrag(data, shadowBuilder, null, 0);
+                    view.startDrag(null, new View.DragShadowBuilder(view), null, 0);
                 }
                 return true;
             }
@@ -205,8 +199,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     @Override
     protected void onAttachedToWindow() {
         mParentRow = (ContactTileRow) getParent();
-        mParentRow.setOnDragListener(new PhoneFavoriteDragListener(mParentRow,
-                mParentRow.getTileAdapter()));
     }
 
     @Override
