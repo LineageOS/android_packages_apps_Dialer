@@ -30,8 +30,4 @@ public final class TestPhoneNumberHelper extends PhoneNumberHelper {
         mVoicemailNumber = voicemailNumber;
     }
 
-    @Override
-    public boolean isVoicemailNumber(CharSequence number) {
-        return mVoicemailNumber.equals(number);
-    }
 }
