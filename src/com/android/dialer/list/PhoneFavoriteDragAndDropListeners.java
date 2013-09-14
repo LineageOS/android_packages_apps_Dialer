@@ -48,6 +48,40 @@ public class PhoneFavoriteDragAndDropListeners {
             mTileAdapter = tileAdapter;
         }
 
+        /**
+         * @return The item index in {@link #mTileAdapter} for the given {@link DragEvent}.
+         *     Returns -1 if {@link #mTileAdapter} is not in dragging or index can not be found.
+         */
+        private int getDragItemIndex(DragEvent event) {
+            int itemIndex = -1;
+            if (mTileAdapter != null && mContactTileRow != null
+                    && !mTileAdapter.getInDragging()) {
+                mX = event.getX();
+                mY = event.getY();
+                if (DEBUG) {
+                    Log.v(TAG, String.valueOf(mX) + "; " + String.valueOf(mY));
+                }
+
+                final int[] rowLocation = new int[2];
+                mContactTileRow.getLocationOnScreen(rowLocation);
+
+                final Rect locationRect = new Rect(rowLocation[0], rowLocation[1],
+                        rowLocation[0] + mContactTileRow.getWidth(),
+                        rowLocation[1] + mContactTileRow.getHeight());
+
+                if (locationRect.contains((int) mX, (int) mY)) {
+                    // Finds out which item is being dragged.
+                    // Computes relative coordinates as we get absolute coordinates.
+                    itemIndex = mContactTileRow.getItemIndex(
+                            mX - rowLocation[0], mY - rowLocation[1]);
+                    if (DEBUG) {
+                        Log.v(TAG, "Start dragging " + String.valueOf(itemIndex));
+                    }
+                }
+            }
+            return itemIndex;
+        }
+
         @Override
         public boolean onDrag(View v, DragEvent event) {
             if (DEBUG) {
@@ -56,35 +90,13 @@ public class PhoneFavoriteDragAndDropListeners {
             // Handles drag events.
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
-                    if (mTileAdapter != null && mContactTileRow != null
-                            && !mTileAdapter.getInDragging()) {
-                        mX = event.getX();
-                        mY = event.getY();
-                        if (DEBUG) {
-                            Log.v(TAG, String.valueOf(mX) + "; " + String.valueOf(mY));
-                        }
+                    final int itemIndex = getDragItemIndex(event);
+                    if (itemIndex != -1) {
+                        // Indicates a drag has started.
+                        mTileAdapter.setInDragging(true);
 
-                        final int[] rowLocation = new int[2];
-                        mContactTileRow.getLocationOnScreen(rowLocation);
-
-                        final Rect locationRect = new Rect(rowLocation[0], rowLocation[1],
-                                rowLocation[0] + mContactTileRow.getWidth(),
-                                rowLocation[1] + mContactTileRow.getHeight());
-
-                        if (locationRect.contains((int) mX, (int) mY)) {
-                            // Finds out which item is being dragged.
-                            // Computes relative coordinates as we get absolute coordinates.
-                            final int dragIndex = mContactTileRow.getItemIndex(
-                                    mX - rowLocation[0], mY - rowLocation[1]);
-                            if (DEBUG) {
-                                Log.v(TAG, "Start dragging " + String.valueOf(dragIndex));
-                            }
-                            // Indicates a drag has started.
-                            mTileAdapter.setInDragging(true);
-
-                            // Temporarily pops out the Contact entry.
-                            mTileAdapter.popContactEntry(dragIndex);
-                        }
+                        // Temporarily pops out the Contact entry.
+                        mTileAdapter.popContactEntry(itemIndex);
                     }
                     break;
                 case DragEvent.ACTION_DRAG_ENTERED:
@@ -92,33 +104,21 @@ public class PhoneFavoriteDragAndDropListeners {
                 case DragEvent.ACTION_DRAG_EXITED:
                     break;
                 case DragEvent.ACTION_DROP:
-                    mX = event.getX();
-                    mY = event.getY();
-                    if (DEBUG) {
-                        Log.v(TAG, String.valueOf(mX) + "; " + String.valueOf(mY));
-                    }
-
                     // Indicates a drag has finished.
                     if (mTileAdapter != null && mContactTileRow != null) {
                         mTileAdapter.setInDragging(false);
-
-                        // Finds out at which position of the list the Contact is being dropped.
-                        final int dropIndex = mContactTileRow.getItemIndex(mX, mY);
-                        if (DEBUG) {
-                            Log.v(TAG, "Stop dragging " + String.valueOf(dropIndex));
-                        }
-
-                        // Adds the dragged contact to the drop position.
-                        mTileAdapter.dropContactEntry(dropIndex);
+                        // The drop to position has been reported to the adapter
+                        // via {@link DragEvent#ACTION_DRAG_LOCATION} events in ListView.
+                        mTileAdapter.handleDrop();
                     }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if (mTileAdapter.getInDragging()) {
+                    if (mTileAdapter != null && mTileAdapter.getInDragging()) {
                         // If the drag and drop ends when the drop happens outside of any rows,
                         // we will end the drag here and put the item back to where it was dragged
                         // from before.
                         mTileAdapter.setInDragging(false);
-                        mTileAdapter.dropToUnsupportedView();
+                        mTileAdapter.handleDrop();
                     }
                     break;
                 case DragEvent.ACTION_DRAG_LOCATION:

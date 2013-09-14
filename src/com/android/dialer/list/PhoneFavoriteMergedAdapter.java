@@ -346,4 +346,10 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             mOnItemSwipeListener = listener;
         }
     }
+
+    public void reportDragEnteredItemIndex(int itemIndex) {
+        if (mContactTileAdapter != null) {
+            mContactTileAdapter.reportDragEnteredItemIndex(itemIndex);
+        }
+    }
 }
