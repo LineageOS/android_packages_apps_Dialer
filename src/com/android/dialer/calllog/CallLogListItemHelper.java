@@ -60,8 +60,8 @@ import com.android.dialer.R;
             boolean isHighlighted, boolean useCallAsPrimaryAction) {
         mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details,
                 isHighlighted);
-        boolean canCall = PhoneNumberHelper.canPlaceCallsTo(details.number,
-            details.numberPresentation);
+        boolean canCall = PhoneNumberUtilsWrapper.canPlaceCallsTo(details.number,
+                details.numberPresentation);
         boolean canPlay = details.callTypes[0] == Calls.VOICEMAIL_TYPE;
 
         if (canPlay) {
