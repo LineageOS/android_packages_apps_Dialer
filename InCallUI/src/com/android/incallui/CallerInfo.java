@@ -76,6 +76,7 @@ public class CallerInfo {
     public String name;
     public String phoneNumber;
     public String normalizedNumber;
+    public String forwardingNumber;
     public String geoDescription;
 
     public String cnapName;
@@ -587,6 +588,7 @@ public class CallerInfo {
                     .append("\nname: " + name)
                     .append("\nphoneNumber: " + phoneNumber)
                     .append("\nnormalizedNumber: " + normalizedNumber)
+                    .append("\forwardingNumber: " + forwardingNumber)
                     .append("\ngeoDescription: " + geoDescription)
                     .append("\ncnapName: " + cnapName)
                     .append("\nnumberPresentation: " + numberPresentation)
