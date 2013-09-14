@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.CompoundButton;
@@ -98,10 +99,11 @@ public class CallButtonFragment
         });
 
         mMuteButton = (ToggleButton) parent.findViewById(R.id.muteButton);
-        mMuteButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mMuteButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                getPresenter().muteClicked(isChecked);
+            public void onClick(View v) {
+                final CompoundButton button = (CompoundButton) v;
+                getPresenter().muteClicked(button.isChecked());
             }
         });
 
