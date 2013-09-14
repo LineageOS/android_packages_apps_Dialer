@@ -34,6 +34,7 @@ import com.android.contacts.common.test.NeededForTesting;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.PhoneNumberHelper;
+import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 
 /**
  * Helper class to fill in the views in {@link PhoneCallDetailsViews}.
@@ -48,6 +49,7 @@ public class PhoneCallDetailsHelper {
     // Helper classes.
     private final CallTypeHelper mCallTypeHelper;
     private final PhoneNumberHelper mPhoneNumberHelper;
+    private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
 
     /**
      * Creates a new instance of the helper.
@@ -57,10 +59,11 @@ public class PhoneCallDetailsHelper {
      * @param resources used to look up strings
      */
     public PhoneCallDetailsHelper(Resources resources, CallTypeHelper callTypeHelper,
-            PhoneNumberHelper phoneNumberHelper) {
+            PhoneNumberUtilsWrapper phoneUtils) {
         mResources = resources;
         mCallTypeHelper = callTypeHelper;
-        mPhoneNumberHelper = phoneNumberHelper;
+        mPhoneNumberHelper = new PhoneNumberHelper(resources);
+        mPhoneNumberUtilsWrapper = phoneUtils;
     }
 
     /** Fills the call details views with content. */
@@ -117,7 +120,7 @@ public class PhoneCallDetailsHelper {
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
             if (TextUtils.isEmpty(details.geocode)
-                    || PhoneNumberHelper.isVoicemailNumber(details.number)) {
+                    || mPhoneNumberUtilsWrapper.isVoicemailNumber(details.number)) {
                 numberText = mResources.getString(R.string.call_log_empty_gecode);
             } else {
                 numberText = details.geocode;

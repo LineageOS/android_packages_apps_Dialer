@@ -31,7 +31,6 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,8 +131,8 @@ public class CallLogFragment extends ListFragment
                 this, mLogLimit);
         mKeyguardManager =
                 (KeyguardManager) getActivity().getSystemService(Context.KEYGUARD_SERVICE);
-        getActivity().getContentResolver().registerContentObserver(
-                CallLog.CONTENT_URI, true, mCallLogObserver);
+        getActivity().getContentResolver().registerContentObserver(CallLog.CONTENT_URI, true,
+                mCallLogObserver);
         getActivity().getContentResolver().registerContentObserver(
                 ContactsContract.Contacts.CONTENT_URI, true, mContactsObserver);
         setHasOptionsMenu(true);
@@ -363,7 +362,7 @@ public class CallLogFragment extends ListFragment
         if (cursor != null) {
             String number = cursor.getString(CallLogQuery.NUMBER);
             int numberPresentation = cursor.getInt(CallLogQuery.NUMBER_PRESENTATION);
-            if (!PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation)) {
+            if (!PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
                 // This number can't be called, do nothing
                 return;
             }

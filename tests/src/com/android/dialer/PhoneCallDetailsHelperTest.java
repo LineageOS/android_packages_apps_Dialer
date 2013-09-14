@@ -26,8 +26,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.dialer.calllog.CallTypeHelper;
-import com.android.dialer.calllog.PhoneNumberHelper;
-import com.android.dialer.calllog.TestPhoneNumberHelper;
+import com.android.dialer.calllog.TestPhoneNumberUtilsWrapper;
 import com.android.dialer.util.LocaleTestUtils;
 
 import java.util.GregorianCalendar;
@@ -58,7 +57,6 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     /** The views to fill. */
     private PhoneCallDetailsViews mViews;
     private TextView mNameView;
-    private PhoneNumberHelper mPhoneNumberHelper;
     private LocaleTestUtils mLocaleTestUtils;
 
     @Override
@@ -67,8 +65,9 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         Context context = getContext();
         Resources resources = context.getResources();
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
-        mPhoneNumberHelper = new TestPhoneNumberHelper(resources, TEST_VOICEMAIL_NUMBER);
-        mHelper = new PhoneCallDetailsHelper(resources, callTypeHelper, mPhoneNumberHelper);
+        final TestPhoneNumberUtilsWrapper phoneUtils = new TestPhoneNumberUtilsWrapper(
+                TEST_VOICEMAIL_NUMBER);
+        mHelper = new PhoneCallDetailsHelper(resources, callTypeHelper, phoneUtils);
         mHelper.setCurrentTimeForTest(
                 new GregorianCalendar(2011, 5, 4, 13, 0, 0).getTimeInMillis());
         mViews = PhoneCallDetailsViews.createForTest(context);
@@ -83,7 +82,6 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mNameView = null;
         mViews = null;
         mHelper = null;
-        mPhoneNumberHelper = null;
         super.tearDown();
     }
 
