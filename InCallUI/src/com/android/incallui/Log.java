@@ -24,7 +24,8 @@ public class Log {
     // Generic tag for all In Call logging
     private static final String TAG = "InCall";
 
-    public static final boolean DEBUG = android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
+    public static final boolean DEBUG = android.util.Log.isLoggable(TAG, android.util.Log.DEBUG)
+            || (System.getProperty("ro.build.type", "").equals("userdebug"));
     public static final boolean VERBOSE = android.util.Log.isLoggable(TAG,
             android.util.Log.VERBOSE);
 
