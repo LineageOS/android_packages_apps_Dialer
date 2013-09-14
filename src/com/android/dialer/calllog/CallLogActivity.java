@@ -122,11 +122,6 @@ public class CallLogActivity extends Activity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
 
-        final SpannableString s = new SpannableString(getString(R.string.call_log_activity_title));
-        s.setSpan(new TypefaceSpan(getString(R.string.call_log_activity_title_font_family)), 0,
-                s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        actionBar.setTitle(s);
-
         final Tab allTab = actionBar.newTab();
         final String allTitle = getString(R.string.call_log_all_title);
         allTab.setContentDescription(allTitle);

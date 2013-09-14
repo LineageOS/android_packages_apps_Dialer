@@ -81,11 +81,6 @@ public class AllContactsActivity extends TransactionSafeActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
 
-        final SpannableString s = new SpannableString(getString(R.string.show_all_contacts_title));
-        s.setSpan(new TypefaceSpan(getString(R.string.show_all_contacts_title_font_family)), 0,
-                s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        actionBar.setTitle(s);
-
         setContentView(R.layout.all_contacts_activity);
     }
 
