@@ -634,6 +634,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                         PinnedPositions.STAR_WHEN_PINNING, "true").build();
                 // update the database here with the new pinned positions
                 mContext.getContentResolver().update(pinUri, cv, null, null);
+                notifyDataSetChanged();
             }
             mDraggedEntry = null;
         }
@@ -970,27 +971,32 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             return mPosition;
         }
 
-        @Override
-        public View getChildAtPosition(MotionEvent ev) {
+        /**
+         * Find the view under the pointer.
+         */
+        public View getViewAtPosition(int x, int y) {
             // find the view under the pointer, accounting for GONE views
             final int count = getChildCount();
-            final int touchX = (int) ev.getX();
-            View slidingChild;
+            View view;
             for (int childIdx = 0; childIdx < count; childIdx++) {
-                slidingChild = getChildAt(childIdx);
-                if (slidingChild.getVisibility() == GONE) {
-                    continue;
+                view = getChildAt(childIdx);
+                if (x >= view.getLeft() && x <= view.getRight()) {
+                    return view;
                 }
-                if (touchX >= slidingChild.getLeft() && touchX <= slidingChild.getRight()) {
-                    if (SwipeHelper.isSwipeable(slidingChild)) {
-                        // If this view is swipable, then return it. If not, because the removal
-                        // dialog is currently showing, then return a null view, which will simply
-                        // be ignored by the swipe helper.
-                        return slidingChild;
-                    } else {
-                        return null;
-                    }
-                }
+            }
+            return null;
+        }
+
+        @Override
+        public View getChildAtPosition(MotionEvent ev) {
+            final View view = getViewAtPosition((int) ev.getX(), (int) ev.getY());
+            if (view != null &&
+                    SwipeHelper.isSwipeable(view) &&
+                    view.getVisibility() != GONE) {
+                // If this view is swipable, then return it. If not, because the removal
+                // dialog is currently showing, then return a null view, which will simply
+                // be ignored by the swipe helper.
+                return view;
             }
             return null;
         }

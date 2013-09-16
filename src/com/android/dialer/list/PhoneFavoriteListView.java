@@ -19,6 +19,9 @@ package com.android.dialer.list;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -63,6 +66,20 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
     private boolean mIsDragScrollerRunning = false;
     private int mTouchDownForDragStartX;
     private int mTouchDownForDragStartY;
+    private Bitmap mDragShadowBitmap;
+
+    // X and Y offsets inside the item from where the user grabbed to the
+    // child's left coordinate. This is used to aid in the drawing of the drag shadow.
+    private int mTouchOffsetToChildLeft;
+    private int mTouchOffsetToChildTop;
+
+    private int mDragShadowLeft;
+    private int mDragShadowTop;
+    private int mDragShadowWidth;
+    private int mDragShadowHeight;
+
+    private final int DRAG_SHADOW_ALPHA = 180;
+    private final Paint mPaint = new Paint();
 
     /**
      * {@link #mTopScrollBound} and {@link mBottomScrollBound} will be
@@ -97,6 +114,7 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
         mSwipeHelper = new SwipeHelper(context, SwipeHelper.X, this,
                 mDensityScale, mTouchSlop);
         setItemsCanFocus(true);
+        mPaint.setAlpha(DRAG_SHADOW_ALPHA);
     }
 
     @Override
@@ -206,7 +224,9 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
         final int eY = (int) event.getY();
         switch (action) {
             case DragEvent.ACTION_DRAG_STARTED:
-                handleDragStarted(mTouchDownForDragStartX, mTouchDownForDragStartY);
+                if (!handleDragStarted(mTouchDownForDragStartX, mTouchDownForDragStartY)) {
+                    return false;
+                };
                 break;
             case DragEvent.ACTION_DRAG_LOCATION:
                 mLastDragY = eY;
@@ -232,7 +252,7 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
                 mScrollHandler.removeCallbacks(mDragScroller);
                 mIsDragScrollerRunning = false;
                 if (action != DragEvent.ACTION_DRAG_EXITED) {
-                    handleDragFinished();
+                    handleDragFinished(eX, eY);
                 }
                 break;
             default:
@@ -240,6 +260,15 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
         }
         // This ListView will consumer the drag events on behalf of its children.
         return true;
+    }
+
+    @Override
+    public void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
+        // Draw the drag shadow at its last known location if the drag shadow exists.
+        if (mDragShadowBitmap != null) {
+            canvas.drawBitmap(mDragShadowBitmap, mDragShadowLeft, mDragShadowTop, mPaint);
+        }
     }
 
     /**
@@ -263,32 +292,107 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
         }
     }
 
-    private void handleDragStarted(int x, int y) {
+    /**
+     * @return True if the drag is started.
+     */
+    private boolean handleDragStarted(int x, int y) {
         final View child = getViewAtPosition(x, y);
-        if (child instanceof ContactTileRow) {
-            final ContactTileRow tile = (ContactTileRow) child;
-            final int itemIndex = tile.getItemIndex(x, y);
-            if (itemIndex != -1 && mOnDragDropListener != null) {
-                mOnDragDropListener.onDragStarted(itemIndex);
-            }
+        if (!(child instanceof ContactTileRow)) {
+            // Bail early.
+            return false;
         }
+
+        final ContactTileRow tile = (ContactTileRow) child;
+        final int itemIndex = tile.getItemIndex(x, y);
+        if (itemIndex != -1 && mOnDragDropListener != null) {
+            final PhoneFavoriteTileView tileView =
+                    (PhoneFavoriteTileView) tile.getViewAtPosition(x, y);
+            mDragShadowBitmap = createDraggedChildBitmap(tileView);
+            if (mDragShadowBitmap == null) {
+                return false;
+            }
+
+            if (tileView instanceof PhoneFavoriteRegularRowView) {
+                mDragShadowLeft = tile.getLeft();
+                mDragShadowTop = tile.getTop();
+            } else {
+                // Square tile is relative to the contact tile,
+                // and contact tile is relative to this list view.
+                mDragShadowLeft = tileView.getLeft() + tileView.getParentRow().getLeft();
+                mDragShadowTop = tileView.getTop() + tileView.getParentRow().getTop();
+            }
+            mDragShadowWidth = tileView.getWidth();
+            mDragShadowHeight = tileView.getHeight();
+
+            // x and y passed in are the coordinates of where the user has touched down, calculate
+            // the offset to the top left coordinate of the dragged child.  This will be used for
+            // drawing the drag shadow.
+            mTouchOffsetToChildLeft = x - mDragShadowLeft;
+            mTouchOffsetToChildTop = y - mDragShadowTop;
+
+            // invalidate to trigger a redraw of the drag shadow.
+            invalidate();
+
+            mOnDragDropListener.onDragStarted(itemIndex);
+        }
+
+        return true;
     }
 
     private void handleDragHovered(int x, int y) {
         final View child = getViewAtPosition(x, y);
-        if (child instanceof ContactTileRow) {
-            final ContactTileRow tile = (ContactTileRow) child;
-            final int itemIndex = tile.getItemIndex(x, y);
-            if (itemIndex != -1 && mOnDragDropListener != null) {
-                mOnDragDropListener.onDragHovered(itemIndex);
-            }
+        if (!(child instanceof ContactTileRow)) {
+            // Bail early.
+            return;
+        }
+
+        // Update the drag shadow location.
+        mDragShadowLeft = x - mTouchOffsetToChildLeft;
+        mDragShadowTop = y - mTouchOffsetToChildTop;
+
+        // invalidate to trigger a redraw of the drag shadow.
+        invalidate();
+
+        final ContactTileRow tile = (ContactTileRow) child;
+        final int itemIndex = tile.getItemIndex(x, y);
+        if (itemIndex != -1 && mOnDragDropListener != null) {
+            mOnDragDropListener.onDragHovered(itemIndex);
         }
     }
 
-    private void handleDragFinished() {
+    private void handleDragFinished(int x, int y) {
+        // Update the drag shadow location.
+        mDragShadowLeft = x - mTouchOffsetToChildLeft;
+        mDragShadowTop = y - mTouchOffsetToChildTop;
+
+        if (mDragShadowBitmap != null) {
+            mDragShadowBitmap.recycle();
+            mDragShadowBitmap = null;
+        }
+
         if (mOnDragDropListener != null) {
             mOnDragDropListener.onDragFinished();
         }
+    }
+
+    private Bitmap createDraggedChildBitmap(View view) {
+        view.setDrawingCacheEnabled(true);
+        final Bitmap cache = view.getDrawingCache();
+
+        Bitmap bitmap = null;
+        if (cache != null) {
+            try {
+                bitmap = cache.copy(Bitmap.Config.ARGB_8888, false);
+            } catch (final OutOfMemoryError e) {
+                Log.w(LOG_TAG, "Failed to copy bitmap from Drawing cache", e);
+                bitmap = null;
+            }
+        }
+
+        view.destroyDrawingCache();
+        view.setDrawingCacheEnabled(false);
+
+        return bitmap;
     }
 
     public interface OnDragDropListener {
