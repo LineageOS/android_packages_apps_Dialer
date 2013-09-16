@@ -92,16 +92,17 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
             public boolean onLongClick(View v) {
                 setPressed(false);
                 final PhoneFavoriteTileView view = (PhoneFavoriteTileView) v;
+                // NOTE The drag shadow is handled in the ListView.
                 if (view instanceof PhoneFavoriteRegularRowView) {
                     final ContactTileRow parent = (ContactTileRow) view.getParentRow();
                     // If the view is regular row, start drag the row view.
                     // Drag is not available for the item exceeds the PIN_LIMIT.
                     if (parent.getRegularRowItemIndex() < PhoneFavoritesTileAdapter.PIN_LIMIT) {
-                        parent.startDrag(null, new View.DragShadowBuilder(parent), null, 0);
+                        parent.startDrag(null, new View.DragShadowBuilder(), null, 0);
                     }
                 } else {
                     // If the view is a tile view, start drag the tile.
-                    view.startDrag(null, new View.DragShadowBuilder(view), null, 0);
+                    view.startDrag(null, new View.DragShadowBuilder(), null, 0);
                 }
                 return true;
             }
