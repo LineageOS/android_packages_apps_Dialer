@@ -127,6 +127,16 @@ public class InCallPresenter implements CallList.Listener {
         boolean updateListeners = false;
 
         if (inCallActivity != null) {
+            // When the UI comes up, we need to first check the state of the Service.
+            // If the service is not attached, that means that a call probably connected and
+            // then immediately disconnected before the UI was able to come up.  A disconnected
+            // service means we dont have calls, so start tearing down the UI instead.
+            if (mServiceConnected == false) {
+                inCallActivity.finish();
+                attemptCleanup();
+                return;
+            }
+
             if (mInCallActivity == null) {
                 updateListeners = true;
                 Log.i(this, "UI Initialized");
@@ -421,17 +431,23 @@ public class InCallPresenter implements CallList.Listener {
 
             // blow away stale contact info so that we get fresh data on
             // the next set of calls
-            mContactInfoCache.clearCache();
+            if (mContactInfoCache != null) {
+                mContactInfoCache.clearCache();
+            }
             mContactInfoCache = null;
 
             mProximitySensor = null;
 
             mAudioModeProvider = null;
 
-            removeListener(mStatusBarNotifier);
+            if (mStatusBarNotifier != null) {
+                removeListener(mStatusBarNotifier);
+            }
             mStatusBarNotifier = null;
 
-            mCallList.removeListener(this);
+            if (mCallList != null) {
+                mCallList.removeListener(this);
+            }
             mCallList = null;
 
             mContext = null;
