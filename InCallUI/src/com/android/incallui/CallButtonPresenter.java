@@ -23,6 +23,8 @@ import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.Call.Capabilities;
 
+import android.telephony.PhoneNumberUtils;
+
 /**
  * Logic for call buttons.
  */
@@ -33,6 +35,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private ProximitySensor mProximitySensor;
     private boolean mAutomaticallyMuted = false;
     private boolean mPreviousMuteState = false;
+
+    private InCallState mPreviousState = null;
 
     public CallButtonPresenter() {
     }
@@ -64,11 +68,22 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             mCall = callList.getOutgoingCall();
         } else if (state == InCallState.INCALL) {
             mCall = callList.getActiveOrBackgroundCall();
+
+            // When connected to voice mail, automatically shows the dialpad.
+            // (On previous releases we showed it when in-call shows up, before waiting for
+            // OUTGOING.  We may want to do that once we start showing "Voice mail" label on
+            // the dialpad too.)
+            if (mPreviousState == InCallState.OUTGOING
+                    && PhoneNumberUtils.isVoiceMailNumber(mCall.getNumber())) {
+                getUi().displayDialpad(true);
+            }
         } else {
             mCall = null;
         }
 
         updateUi(state, mCall);
+
+        mPreviousState = state;
     }
 
     @Override

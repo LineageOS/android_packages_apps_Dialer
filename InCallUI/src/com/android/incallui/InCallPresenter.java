@@ -320,7 +320,7 @@ public class InCallPresenter implements CallList.Listener {
     /**
      * Brings the app into the foreground if possible.
      */
-    public void bringToForeground() {
+    public void bringToForeground(boolean showDialpad) {
         // Before we bring the incall UI to the foreground, we check to see if:
         // 1. there is an activity
         // 2. the activity is not already in the foreground
@@ -328,7 +328,7 @@ public class InCallPresenter implements CallList.Listener {
         if (isActivityStarted() &&
                 !isShowingInCallUi() &&
                 mInCallState != InCallState.NO_CALLS) {
-            showInCall();
+            showInCall(showDialpad);
         }
     }
 
@@ -400,7 +400,7 @@ public class InCallPresenter implements CallList.Listener {
 
         if (showCallUi) {
             Log.i(this, "Start in call UI");
-            showInCall();
+            showInCall(false);
         } else if (startStartupSequence) {
             Log.i(this, "Start Full Screen in call UI");
             mStatusBarNotifier.updateNotificationAndLaunchIncomingCallUi(newState, mCallList);
@@ -460,16 +460,19 @@ public class InCallPresenter implements CallList.Listener {
         }
     }
 
-    private void showInCall() {
-        mContext.startActivity(getInCallIntent());
+    private void showInCall(boolean showDialpad) {
+        mContext.startActivity(getInCallIntent(showDialpad));
     }
 
-    public Intent getInCallIntent() {
+    public Intent getInCallIntent(boolean showDialpad) {
         final Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
                 | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
         intent.setClass(mContext, InCallActivity.class);
+        if (showDialpad) {
+            intent.putExtra(InCallActivity.SHOW_DIALPAD_EXTRA, true);
+        }
 
         return intent;
     }
