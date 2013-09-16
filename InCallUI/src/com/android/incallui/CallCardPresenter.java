@@ -30,6 +30,7 @@ import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
+import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.CallIdentification;
@@ -41,7 +42,7 @@ import com.google.common.base.Preconditions;
  * This class listens for changes to InCallState and passes it along to the fragment.
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
-        implements InCallStateListener, AudioModeListener {
+        implements InCallStateListener, AudioModeListener, IncomingCallListener {
 
     private static final String TAG = CallCardPresenter.class.getSimpleName();
     private static final long CALL_TIME_UPDATE_INTERVAL = 1000; // in milliseconds
@@ -98,6 +99,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         // Register for call state changes last
         InCallPresenter.getInstance().addListener(this);
+        InCallPresenter.getInstance().addIncomingCallListener(this);
     }
 
     @Override
@@ -106,12 +108,19 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         // stop getting call state changes
         InCallPresenter.getInstance().removeListener(this);
+        InCallPresenter.getInstance().removeIncomingCallListener(this);
 
         AudioModeProvider.getInstance().removeListener(this);
 
         mPrimary = null;
         mPrimaryContactInfo = null;
         mSecondaryContactInfo = null;
+    }
+
+    @Override
+    public void onIncomingCall(InCallState state, Call call) {
+        // same logic should happen as with onStateChange()
+        onStateChange(state, CallList.getInstance());
     }
 
     @Override
