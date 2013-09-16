@@ -197,7 +197,7 @@ public class InCallPresenter implements CallList.Listener {
         mInCallState = newState;
 
         for (IncomingCallListener listener : mIncomingCallListeners) {
-            listener.onIncomingCall(call);
+            listener.onIncomingCall(mInCallState, call);
         }
     }
 
@@ -500,6 +500,6 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     public interface IncomingCallListener {
-        public void onIncomingCall(Call call);
+        public void onIncomingCall(InCallState state, Call call);
     }
 }
