@@ -45,6 +45,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mNumberLabel;
     private TextView mPrimaryName;
     private TextView mCallStateLabel;
+    private TextView mCallTypeLabel;
     private ImageView mPhoto;
     private TextView mElapsedTime;
     private View mProviderInfo;
@@ -100,6 +101,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mSecondaryCallInfo = (ViewStub) view.findViewById(R.id.secondary_call_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
+        mCallTypeLabel = (TextView) view.findViewById(R.id.callTypeLabel);
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
         mProviderInfo = view.findViewById(R.id.providerInfo);
         mProviderLabel = (TextView) view.findViewById(R.id.providerLabel);
@@ -166,7 +168,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setPrimary(String number, String name, boolean nameIsNumber, String label,
-            Drawable photo, boolean isConference) {
+            Drawable photo, boolean isConference, boolean isSipCall) {
         Log.d(this, "Setting primary call");
 
         if (isConference) {
@@ -182,6 +184,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         // Set the label (Mobile, Work, etc)
         setPrimaryLabel(label);
+
+        showInternetCallLabel(isSipCall);
 
         setDrawableToImageView(mPhoto, photo);
     }
@@ -274,6 +278,17 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         // Restore the animation.
         if (skipAnimation) {
             mSupplementaryInfoContainer.setLayoutTransition(transition);
+        }
+    }
+
+    private void showInternetCallLabel(boolean show) {
+        if (show) {
+            final String label = getView().getContext().getString(
+                    R.string.incall_call_type_label_sip);
+            mCallTypeLabel.setVisibility(View.VISIBLE);
+            mCallTypeLabel.setText(label);
+        } else {
+            mCallTypeLabel.setVisibility(View.GONE);
         }
     }
 
