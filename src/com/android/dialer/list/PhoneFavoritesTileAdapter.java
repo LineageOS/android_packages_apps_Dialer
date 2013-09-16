@@ -62,7 +62,7 @@ import java.util.PriorityQueue;
  *
  */
 public class PhoneFavoritesTileAdapter extends BaseAdapter implements
-        SwipeHelper.OnItemGestureListener {
+        SwipeHelper.OnItemGestureListener, PhoneFavoriteListView.OnDragDropListener {
     private static final String TAG = PhoneFavoritesTileAdapter.class.getSimpleName();
     private static final boolean DEBUG = false;
 
@@ -1192,16 +1192,29 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         return !mAwaitingRemove;
     }
 
-    public void setEmptyView(View emptyView) {
-        mEmptyView = emptyView;
+    @Override
+    public void onDragStarted(int itemIndex) {
+        setInDragging(true);
+        popContactEntry(itemIndex);
     }
 
-    public void reportDragEnteredItemIndex(int itemIndex) {
+    @Override
+    public void onDragHovered(int itemIndex) {
         if (mInDragging &&
                 mDragEnteredEntryIndex != itemIndex &&
                 isIndexInBound(itemIndex) &&
                 itemIndex < PIN_LIMIT) {
             markDropArea(itemIndex);
         }
+    }
+
+    @Override
+    public void onDragFinished() {
+        setInDragging(false);
+        handleDrop();
+    }
+
+    public void setEmptyView(View emptyView) {
+        mEmptyView = emptyView;
     }
 }
