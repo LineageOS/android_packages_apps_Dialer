@@ -174,8 +174,9 @@ public class CallHandlerService extends Service {
         }
 
         @Override
-        public void bringToForeground() {
-            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_BRING_TO_FOREGROUND));
+        public void bringToForeground(boolean showDialpad) {
+            mMainHandler.sendMessage(mMainHandler.obtainMessage(ON_BRING_TO_FOREGROUND,
+                    showDialpad ? 1 : 0, 0));
         }
 
         @Override
@@ -290,9 +291,9 @@ public class CallHandlerService extends Service {
                 mAudioModeProvider.onSupportedAudioModeChange(msg.arg1);
                 break;
             case ON_BRING_TO_FOREGROUND:
-                Log.i(TAG, "ON_BRING_TO_FOREGROUND");
+                Log.i(TAG, "ON_BRING_TO_FOREGROUND" + msg.arg1);
                 if (mInCallPresenter != null) {
-                    mInCallPresenter.bringToForeground();
+                    mInCallPresenter.bringToForeground(msg.arg1 != 0);
                 }
                 break;
             case ON_START:
