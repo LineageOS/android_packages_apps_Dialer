@@ -45,5 +45,11 @@
             android:layout_marginTop="@dimen/empty_message_top_margin"
             android:textColor="?android:attr/textColorSecondary"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        <ImageView
+            android:id="@+id/contact_tile_drag_shadow_overlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
     </FrameLayout>
 </LinearLayout>
