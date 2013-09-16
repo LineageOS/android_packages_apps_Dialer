@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Looper;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
 import com.android.incallui.service.PhoneNumberService;
@@ -354,6 +355,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         String displayNumber = null;
         String displayLocation = null;
         String label = null;
+        boolean isSipCall = false;
 
             // It appears that there is a small change in behaviour with the
             // PhoneUtils' startGetCallerInfo whereby if we query with an
@@ -378,8 +380,12 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             // Then we could remove this hack, and instead ask the CallerInfo
             // for a "user visible" form of the SIP address.
             String number = info.phoneNumber;
-            if (number != null && number.startsWith("sip:")) {
-                number = number.substring(4);
+
+            if (!TextUtils.isEmpty(number)) {
+                isSipCall = PhoneNumberUtils.isUriNumber(number);
+                if (number.startsWith("sip:")) {
+                    number = number.substring(4);
+                }
             }
 
             if (TextUtils.isEmpty(info.name)) {
@@ -450,6 +456,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         cce.number = displayNumber;
         cce.location = displayLocation;
         cce.label = label;
+        cce.isSipCall = isSipCall;
     }
 
     /**
@@ -504,6 +511,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         public String location;
         public String label;
         public Drawable photo;
+        public boolean isSipCall;
         public Uri personUri; // Used for local photo load
 
         @Override
@@ -514,6 +522,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     .add("location", MoreStrings.toSafeString(location))
                     .add("label", label)
                     .add("photo", photo)
+                    .add("isSipCall", isSipCall)
                     .toString();
         }
     }

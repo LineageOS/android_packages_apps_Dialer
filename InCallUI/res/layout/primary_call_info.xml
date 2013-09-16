@@ -88,7 +88,7 @@
                  for certain kinds of calls (like "Internet call" for a SIP call.) -->
             <TextView android:id="@+id/callTypeLabel"
                       android:textAppearance="?android:attr/textAppearanceSmall"
-                      android:textColor="@color/incall_call_banner_text_color"
+                      android:textColor="@color/incall_callTypeSip"
                       android:maxLines="1"
                       android:layout_column="0"
                       android:layout_row="2"
