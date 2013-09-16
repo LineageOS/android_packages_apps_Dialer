@@ -74,7 +74,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             // OUTGOING.  We may want to do that once we start showing "Voice mail" label on
             // the dialpad too.)
             if (mPreviousState == InCallState.OUTGOING
-                    && PhoneNumberUtils.isVoiceMailNumber(mCall.getNumber())) {
+                    && mCall != null && PhoneNumberUtils.isVoiceMailNumber(mCall.getNumber())) {
                 getUi().displayDialpad(true);
             }
         } else {
