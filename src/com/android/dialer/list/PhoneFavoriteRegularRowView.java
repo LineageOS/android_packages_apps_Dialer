@@ -23,7 +23,6 @@ import android.view.View;
 
 import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
-import com.android.dialer.list.PhoneFavoriteDragAndDropListeners.PhoneFavoriteDragListener;
 
 import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
 

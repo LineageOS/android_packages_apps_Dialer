@@ -211,6 +211,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mListView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
         mListView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
         mListView.setOnItemSwipeListener(mContactTileAdapter);
+        mListView.setOnDragDropListener(mContactTileAdapter);
 
         mEmptyView = inflater.inflate(R.layout.phone_no_favorites, mListView, false);
 
