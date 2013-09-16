@@ -168,12 +168,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setPrimary(String number, String name, boolean nameIsNumber, String label,
-            Drawable photo, boolean isConference, boolean isSipCall) {
+            Drawable photo, boolean isConference, boolean isGeneric, boolean isSipCall) {
         Log.d(this, "Setting primary call");
 
         if (isConference) {
-            name = getView().getResources().getString(R.string.card_title_conf_call);
-            photo = getView().getResources().getDrawable(R.drawable.picture_conference);
+            name = getConferenceString(isGeneric);
+            photo = getConferencePhoto(isGeneric);
             nameIsNumber = false;
         }
 
@@ -192,12 +192,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-            Drawable photo, boolean isConference) {
+            Drawable photo, boolean isConference, boolean isGeneric) {
 
         if (show) {
             if (isConference) {
-                name = getView().getResources().getString(R.string.card_title_conf_call);
-                photo = getView().getResources().getDrawable(R.drawable.picture_conference);
+                name = getConferenceString(isGeneric);
+                photo = getConferencePhoto(isGeneric);
                 nameIsNumber = false;
             }
 
@@ -316,8 +316,20 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             AnimationUtils.Fade.show(view);
         } else {
             AnimationUtils.startCrossFade(view, current, photo);
-            mPhoto.setVisibility(View.VISIBLE);
+            view.setVisibility(View.VISIBLE);
         }
+    }
+
+    private String getConferenceString(boolean isGeneric) {
+        Log.v(this, "isGenericString: " + isGeneric);
+        final int resId = isGeneric ? R.string.card_title_in_call : R.string.card_title_conf_call;
+        return getView().getResources().getString(resId);
+    }
+
+    private Drawable getConferencePhoto(boolean isGeneric) {
+        Log.v(this, "isGenericPhoto: " + isGeneric);
+        final int resId = isGeneric ? R.drawable.picture_dialing : R.drawable.picture_conference;
+        return getView().getResources().getDrawable(resId);
     }
 
     private void setBluetoothOn(boolean onOff) {

@@ -55,7 +55,7 @@ public class CallButtonFragment
     private View mEndCallButton;
     private View mExtraRowButton;
     private View mManageConferenceButton;
-    private View mCDMAMergeButton;
+    private View mGenericMergeButton;
 
     @Override
     CallButtonPresenter createPresenter() {
@@ -88,7 +88,13 @@ public class CallButtonFragment
                 getPresenter().manageConferenceButtonClicked();
             }
         });
-        mCDMAMergeButton = parent.findViewById(R.id.cdmaMergeButton);
+        mGenericMergeButton = parent.findViewById(R.id.cdmaMergeButton);
+        mGenericMergeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().mergeClicked();
+            }
+        });
 
         mEndCallButton = parent.findViewById(R.id.endButton);
         mEndCallButton.setOnClickListener(new View.OnClickListener() {
@@ -502,14 +508,14 @@ public class CallButtonFragment
     public void showManageConferenceCallButton() {
         mExtraRowButton.setVisibility(View.VISIBLE);
         mManageConferenceButton.setVisibility(View.VISIBLE);
-        mCDMAMergeButton.setVisibility(View.GONE);
+        mGenericMergeButton.setVisibility(View.GONE);
     }
 
     @Override
-    public void showCDMAMergeButton() {
+    public void showGenericMergeButton() {
         mExtraRowButton.setVisibility(View.VISIBLE);
         mManageConferenceButton.setVisibility(View.GONE);
-        mCDMAMergeButton.setVisibility(View.VISIBLE);
+        mGenericMergeButton.setVisibility(View.VISIBLE);
     }
 
     @Override
