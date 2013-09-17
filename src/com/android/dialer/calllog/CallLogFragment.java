@@ -432,8 +432,7 @@ public class CallLogFragment extends ListFragment
         updateOnTransition(true);
     }
 
-    // TODO krelease: Figure out if we still need this. If so, it should be probably be moved to
-    // the call log activity instead, or done only in a single call log fragment.
+    // TODO: Move to CallLogActivity
     private void updateOnTransition(boolean onEntry) {
         // We don't want to update any call data when keyguard is on because the user has likely not
         // seen the new calls yet.
@@ -441,6 +440,7 @@ public class CallLogFragment extends ListFragment
         if (mKeyguardManager != null && !mKeyguardManager.inKeyguardRestrictedInputMode()) {
             // On either of the transitions we update the missed call and voicemail notifications.
             // While exiting we additionally consume all missed calls (by marking them as read).
+            mCallLogQueryHandler.markNewCallsAsOld();
             if (!onEntry) {
                 mCallLogQueryHandler.markMissedCallsAsRead();
             }
