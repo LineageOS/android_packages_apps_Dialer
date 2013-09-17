@@ -24,7 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewStub;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -147,6 +146,14 @@ public class CallButtonFragment
 
         // set the buttons
         updateAudioButtons(getPresenter().getSupportedAudio());
+    }
+
+    @Override
+    public void onResume() {
+        if (getPresenter() != null) {
+            getPresenter().refreshMuteState();
+        }
+        super.onResume();
     }
 
     @Override
