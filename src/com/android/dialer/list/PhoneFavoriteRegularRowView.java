@@ -56,7 +56,7 @@ public class PhoneFavoriteRegularRowView extends PhoneFavoriteTileView {
         rowPaddingBottom = resources.getDimensionPixelSize(
                 R.dimen.favorites_row_bottom_padding);
 
-        favoriteContactCard.setBackgroundResource(R.drawable.bottom_border_background);
+        favoriteContactCard.setBackgroundResource(R.drawable.contact_list_item_background);
 
         favoriteContactCard.setPaddingRelative(rowPaddingStart, rowPaddingTop, rowPaddingEnd,
                 rowPaddingBottom);
