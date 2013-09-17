@@ -33,6 +33,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -66,7 +67,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private static final String TAG = PhoneFavoriteFragment.class.getSimpleName();
     private static final boolean DEBUG = true;
 
-    private static final int ANIMATION_DURATION = 300;
+    private int mAnimationDuration;
 
     /**
      * Used with LoaderManager.
@@ -182,6 +183,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         if (DEBUG) Log.d(TAG, "onCreate()");
         super.onCreate(savedState);
 
+        mAnimationDuration = getResources().getInteger(R.integer.fade_duration);
         mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
                 this, 1);
         final String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
@@ -212,6 +214,10 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mListView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
         mListView.setOnItemSwipeListener(mContactTileAdapter);
         mListView.setOnDragDropListener(mContactTileAdapter);
+
+        final ImageView dragShadowOverlay =
+                (ImageView) listLayout.findViewById(R.id.contact_tile_drag_shadow_overlay);
+        mListView.setDragShadowOverlay(dragShadowOverlay);
 
         mEmptyView = inflater.inflate(R.layout.phone_no_favorites, mListView, false);
 
@@ -372,25 +378,13 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             final ContactEntry entry = list.get(i);
             final long itemId = mContactTileAdapter.getAdjustedItemId(entry.id);
 
-            // Skip animation for this view if the caller specified that it should be
-            // kept in place
-            if (containsId(idsInPlace, itemId)) continue;
-
-            Integer startLeft = mItemIdLeftMap.get(itemId);
-            int left = child.getLeft();
-            if (DEBUG) {
-                Log.d(TAG, "Found itemId: " + itemId + " for tileview child " + i +
-                        " Left: " + left);
+            if (containsId(idsInPlace, itemId)) {
+                child.setAlpha(0.0f);
+                child.animate().alpha(1.0f)
+                        .setDuration(mAnimationDuration)
+                        .start();
+                break;
             }
-            if (startLeft != null) {
-                if (startLeft != left) {
-                    int delta = startLeft - left;
-                    child.setTranslationX(delta);
-                    child.animate().setDuration(ANIMATION_DURATION).translationX(0);
-                }
-            }
-            // No need to worry about horizontal offsets of new views that come into view since
-            // there is no horizontal scrolling involved.
         }
     }
 
@@ -424,33 +418,12 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
                     final long itemId = mAdapter.getItemId(position);
 
-                    // Skip animation for this view if the caller specified that it should be
-                    // kept in place
-                    if (containsId(idsInPlace, itemId)) continue;
-
-                    Integer startTop = mItemIdTopMap.get(itemId);
-                    final int top = child.getTop();
-                    if (DEBUG) {
-                        Log.d(TAG, "Found itemId: " + itemId + " for listview child " + i +
-                                " Top: " + top);
-                    }
-                    int delta = 0;
-                    if (startTop != null) {
-                        if (startTop != top) {
-                            delta = startTop - top;
-                        }
-                    } else if (!mItemIdLeftMap.containsKey(itemId)) {
-                        // Animate new views along with the others. The catch is that they did not
-                        // exist in the start state, so we must calculate their starting position
-                        // based on neighboring views.
-                        int childHeight = child.getHeight() + mListView.getDividerHeight();
-                        startTop = top + (i > 0 ? childHeight : -childHeight);
-                        delta = startTop - top;
-                    }
-
-                    if (delta != 0) {
-                        child.setTranslationY(delta);
-                        child.animate().setDuration(ANIMATION_DURATION).translationY(0);
+                    if (containsId(idsInPlace, itemId)) {
+                        child.setAlpha(0.0f);
+                        child.animate().alpha(1.0f)
+                                .setDuration(mAnimationDuration)
+                                .start();
+                        break;
                     }
                 }
                 mItemIdTopMap.clear();
