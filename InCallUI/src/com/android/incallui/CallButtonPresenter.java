@@ -226,8 +226,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
             final boolean canMerge = call.can(Capabilities.MERGE_CALLS);
             final boolean canAdd = call.can(Capabilities.ADD_CALL);
+            final boolean isGenericConference = call.can(Capabilities.GENERIC_CONFERENCE);
 
-            if (canMerge) {
+            final boolean showGenericMerge = isGenericConference && canMerge;
+            final boolean showMerge = !isGenericConference && canMerge;
+
+            if (showMerge) {
                 ui.showMerge(true);
                 ui.showAddCall(false);
             } else {
@@ -258,20 +262,18 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             //
             // - "Manage conference" (used only on GSM devices)
             // - "Merge" button (used only on CDMA devices)
-            // TODO(klp) Add cdma merge button
-            final boolean showCdmaMerge = false;
-//                    (phoneType == PhoneConstants.PHONE_TYPE_CDMA) && inCallControlState.canMerge;
-            final boolean showExtraButtonRow =
-                    (showCdmaMerge || call.isConferenceCall()) && !getUi().isDialpadVisible();
+
+            final boolean showManageConference = (call.isConferenceCall() && !isGenericConference);
+            final boolean showExtraButtonRow = (showGenericMerge || showManageConference) &&
+                    !getUi().isDialpadVisible();
+
+            Log.i(this, "isGeneric: " + isGenericConference);
+            Log.i(this, "showManageConference : " + showManageConference);
+            Log.i(this, "showGenericMerge: " + showGenericMerge);
             if (showExtraButtonRow) {
-                // Need to set up mCdmaMergeButton and mManageConferenceButton if this is the first
-                // time they're visible.
-                // TODO(klp) add cdma merge button
-//                if (mCdmaMergeButton == null) {
-//                    setupExtraButtons();
-//                }
-//                mCdmaMergeButton.setVisibility(showCdmaMerge ? View.VISIBLE : View.GONE);
-                if (call.isConferenceCall()) {
+                if (showGenericMerge) {
+                    getUi().showGenericMergeButton();
+                } else if (showManageConference) {
                     getUi().showManageConferenceCallButton();
                 }
             } else {
@@ -296,7 +298,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void setAudio(int mode);
         void setSupportedAudio(int mask);
         void showManageConferenceCallButton();
-        void showCDMAMergeButton();
+        void showGenericMergeButton();
         void hideExtraRow();
         void displayManageConferencePanel(boolean on);
     }
