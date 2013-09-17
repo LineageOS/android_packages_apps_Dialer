@@ -187,7 +187,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         mAutomaticallyMuted = true;
         mPreviousMuteState = AudioModeProvider.getInstance().getMute();
         // Simulate a click on the mute button
-        getUi().setMute(true);
         muteClicked(true);
 
         CallCommandClient.getInstance().addCall();
@@ -246,12 +245,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
             ui.showSwap(call.can(Capabilities.SWAP_CALLS));
 
-            // Restore the previous mute state
-            if (mAutomaticallyMuted &&
-                    AudioModeProvider.getInstance().getMute() != mPreviousMuteState) {
-                ui.setMute(mPreviousMuteState);
-                mAutomaticallyMuted = false;
-            }
             ui.enableMute(call.can(Capabilities.MUTE));
 
             // Finally, update the "extra button row": It's displayed above the
@@ -280,6 +273,18 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 getUi().hideExtraRow();
             }
         }
+    }
+
+    public void refreshMuteState() {
+        // Restore the previous mute state
+        if (mAutomaticallyMuted &&
+                AudioModeProvider.getInstance().getMute() != mPreviousMuteState) {
+            if (getUi() == null) {
+                return;
+            }
+            muteClicked(mPreviousMuteState);
+        }
+        mAutomaticallyMuted = false;
     }
 
     public interface CallButtonUi extends Ui {
