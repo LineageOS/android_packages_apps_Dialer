@@ -18,9 +18,12 @@ package com.android.dialer.list;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,7 +45,9 @@ import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
+import com.android.dialer.calllog.CallLogQuery;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.CallLogQueryHandler;
@@ -73,6 +78,9 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      * Used with LoaderManager.
      */
     private static int LOADER_ID_CONTACT_TILE = 1;
+
+    private static final String KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE =
+            "key_last_dismissed_call_shortcut_date";
 
     public interface OnShowAllContactsListener {
         public void onShowAllContacts();
@@ -157,6 +165,17 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      */
     private View mEmptyView;
 
+    /**
+     * Call shortcuts older than this date (persisted in shared preferences) will not show up in
+     * at the top of the screen
+     */
+    private long mLastCallShortcutDate = 0;
+
+    /**
+     * The date of the current call shortcut that is showing on screen.
+     */
+    private long mCurrentCallShortcutDate = 0;
+
     private final ContactTileView.Listener mContactTileAdapterListener =
             new ContactTileAdapterListener();
     private final LoaderManager.LoaderCallbacks<Cursor> mContactTileLoaderListener =
@@ -195,6 +214,11 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     @Override
     public void onResume() {
         super.onResume();
+        final SharedPreferences prefs = getActivity().getSharedPreferences(
+                DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+
+        mLastCallShortcutDate = prefs.getLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, 0);
+
         fetchCalls();
         mCallLogAdapter.setLoading(true);
         getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
@@ -231,7 +255,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         });
 
         mContactTileAdapter.setEmptyView(mEmptyView);
-        mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), mContactTileAdapter,
+        mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), this, mContactTileAdapter,
                 mCallLogAdapter, mShowAllContactsButton);
 
         mListView.setAdapter(mAdapter);
@@ -308,13 +332,20 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     @Override
     public void onCallsFetched(Cursor cursor) {
         mCallLogAdapter.setLoading(false);
+
+        // Save the date of the most recent call log item
+        if (cursor != null && cursor.moveToFirst()) {
+            mCurrentCallShortcutDate = cursor.getLong(CallLogQuery.DATE);
+        }
+
         mCallLogAdapter.changeCursor(cursor);
+
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void fetchCalls() {
-        mCallLogQueryHandler.fetchNewCalls(CallLogQueryHandler.CALL_TYPE_ALL);
+        mCallLogQueryHandler.fetchCalls(CallLogQueryHandler.CALL_TYPE_ALL, mLastCallShortcutDate);
     }
 
     @Override
@@ -451,5 +482,14 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     @Override
     public void cacheOffsetsForDatasetChange() {
         saveOffsets();
+    }
+
+    public void dismissShortcut() {
+        mLastCallShortcutDate = mCurrentCallShortcutDate;
+        final SharedPreferences prefs = getActivity().getSharedPreferences(
+                DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+        prefs.edit().putLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, mLastCallShortcutDate)
+                .apply();
+        fetchCalls();
     }
 }

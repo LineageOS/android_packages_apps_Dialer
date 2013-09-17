@@ -138,22 +138,14 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
      * <p>
      * It will asynchronously update the content of the list view when the fetch completes.
      */
-    public void fetchCalls(int callType) {
+    public void fetchCalls(int callType, long newerThan) {
         cancelFetch();
         int requestId = newCallsRequest();
-        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType , false /* newOnly */);
+        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType, false /* newOnly */, newerThan);
     }
 
-    /**
-     * Fetches the list of calls from the call log for a given type.
-     * This call fetches only the new (i.e. NEW = 1) ones.
-     * <p>
-     * It will asynchronously update the content of the list view when the fetch completes.
-     */
-    public void fetchNewCalls(int callType) {
-        cancelFetch();
-        int requestId = newCallsRequest();
-        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType , true /* newOnly */);
+    public void fetchCalls(int callType) {
+        fetchCalls(callType, 0);
     }
 
     public void fetchVoicemailStatus() {
@@ -162,7 +154,8 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     }
 
     /** Fetches the list of calls in the call log. */
-    private void fetchCalls(int token, int requestId, int callType, boolean newOnly) {
+    private void fetchCalls(int token, int requestId, int callType, boolean newOnly,
+            long newerThan) {
         // We need to check for NULL explicitly otherwise entries with where READ is NULL
         // may not match either the query or its negation.
         // We consider the calls that are not yet consumed (i.e. IS_READ = 0) as "new".
@@ -180,8 +173,18 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             }
             // Add a clause to fetch only items of type voicemail.
             where.append(String.format("(%s = ?)", Calls.TYPE));
+            // Add a clause to fetch only items newer than the requested date
             selectionArgs.add(Integer.toString(callType));
         }
+
+        if (newerThan > 0) {
+            if (where.length() > 0) {
+                where.append(" AND ");
+            }
+            where.append(String.format("(%s > ?)", Calls.DATE));
+            selectionArgs.add(Long.toString(newerThan));
+        }
+
         final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;
         final String selection = where.length() > 0 ? where.toString() : null;
         Uri uri = Calls.CONTENT_URI_WITH_VOICEMAIL.buildUpon()
