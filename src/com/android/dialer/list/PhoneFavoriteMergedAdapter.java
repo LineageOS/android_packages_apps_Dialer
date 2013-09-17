@@ -53,6 +53,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     private final PhoneFavoritesTileAdapter mContactTileAdapter;
     private final CallLogAdapter mCallLogAdapter;
     private final View mShowAllContactsButton;
+    private final PhoneFavoriteFragment mFragment;
 
     private final int mCallLogPadding;
 
@@ -70,7 +71,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             mCallLogQueryHandler.markNewVoicemailsAsOld();
             CallLogNotificationsHelper.removeMissedCallNotifications();
             CallLogNotificationsHelper.updateVoicemailNotifications(mContext);
-            mCallLogQueryHandler.fetchNewCalls(CallLogQueryHandler.CALL_TYPE_ALL);
+            mFragment.dismissShortcut();
         }
 
         @Override
@@ -96,11 +97,13 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     };
 
     public PhoneFavoriteMergedAdapter(Context context,
+            PhoneFavoriteFragment fragment,
             PhoneFavoritesTileAdapter contactTileAdapter,
             CallLogAdapter callLogAdapter,
             View showAllContactsButton) {
         final Resources resources = context.getResources();
         mContext = context;
+        mFragment = fragment;
         mCallLogPadding = resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding);
         mContactTileAdapter = contactTileAdapter;
         mCallLogAdapter = callLogAdapter;
