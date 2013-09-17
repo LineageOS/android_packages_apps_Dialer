@@ -31,6 +31,7 @@ import android.view.View;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
+import com.android.dialer.R;
 import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
 import com.android.dialer.list.PhoneFavoritesTileAdapter.ViewTypes;
 
@@ -47,7 +48,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     private static final boolean DEBUG = false;
 
     /** Length of all animations in miniseconds. */
-    private static final int ANIMATION_LENGTH = 300;
+    private int mAnimationDuration;
 
     /** The view that holds the front layer of the favorite contact card. */
     private View mFavoriteContactCard;
@@ -66,6 +67,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
 
     public PhoneFavoriteTileView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mAnimationDuration = context.getResources().getInteger(R.integer.fade_duration);
     }
 
     public ContactTileRow getParentRow() {
@@ -131,7 +133,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
         mRemovalDialogue.setVisibility(VISIBLE);
         mRemovalDialogue.setAlpha(0f);
         final ObjectAnimator fadeIn = ObjectAnimator.ofFloat(mRemovalDialogue, "alpha",
-                1.f).setDuration(ANIMATION_LENGTH);
+                1.f).setDuration(mAnimationDuration);
 
         fadeIn.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -157,9 +159,9 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
 
         // Animates back the favorite contact card.
         final ObjectAnimator fadeIn = ObjectAnimator.ofFloat(mFavoriteContactCard, "alpha", 1.f).
-                setDuration(ANIMATION_LENGTH);
+                setDuration(mAnimationDuration);
         final ObjectAnimator moveBack = ObjectAnimator.ofFloat(mFavoriteContactCard, "translationX",
-                0.f).setDuration(ANIMATION_LENGTH);
+                0.f).setDuration(mAnimationDuration);
 
         final AnimatorSet animSet = new AnimatorSet();
 
