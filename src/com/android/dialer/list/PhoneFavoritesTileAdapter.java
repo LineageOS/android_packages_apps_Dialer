@@ -609,7 +609,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     public void handleDrop() {
         boolean changed = false;
         if (mDraggedEntry != null) {
-            if (isIndexInBound(mDragEnteredEntryIndex)) {
+            if (isIndexInBound(mDragEnteredEntryIndex) &&
+                    mDragEnteredEntryIndex != mDraggedEntryIndex) {
                 // Don't add the ContactEntry here (to prevent a double animation from occuring).
                 // When we receive a new cursor the list of contact entries will automatically be
                 // populated with the dragged ContactEntry at the correct spot.
@@ -634,7 +635,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                         PinnedPositions.STAR_WHEN_PINNING, "true").build();
                 // update the database here with the new pinned positions
                 mContext.getContentResolver().update(pinUri, cv, null, null);
-                notifyDataSetChanged();
             }
             mDraggedEntry = null;
         }
