@@ -271,7 +271,8 @@
         </activity>
 
         <service android:name="com.android.incallui.CallHandlerService"
-                 android:process="com.android.incallui">
+                 android:process="com.android.incallui"
+                 android:permission="android.permission.BIND_CALL_SERVICE">
             <intent-filter>
                 <action android:name="com.android.services.telephony.common.ICallHandlerService" />
             </intent-filter>
