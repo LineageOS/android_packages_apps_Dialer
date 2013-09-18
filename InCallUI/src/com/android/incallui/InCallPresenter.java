@@ -35,7 +35,7 @@ import java.util.Set;
  * are disconnected.
  * Creates and manages the in-call state and provides a listener pattern for the presenters
  * that want to listen in on the in-call state changes.
- * TODO(klp): This class has become more of a state machine at this point.  Consider renaming.
+ * TODO: This class has become more of a state machine at this point.  Consider renaming.
  */
 public class InCallPresenter implements CallList.Listener {
 
@@ -343,7 +343,7 @@ public class InCallPresenter implements CallList.Listener {
     private InCallState startOrFinishUi(InCallState newState) {
         Log.d(this, "startOrFinishUi: " + mInCallState + " -> " + newState);
 
-        // TODO(klp): Consider a proper state machine implementation
+        // TODO: Consider a proper state machine implementation
 
         // If the state isn't changing, we have already done any starting/stopping of
         // activities in a previous pass...so lets cut out early
@@ -514,7 +514,7 @@ public class InCallPresenter implements CallList.Listener {
      * Interface implemented by classes that need to know about the InCall State.
      */
     public interface InCallStateListener {
-        // TODO(klp): Enhance state to contain the call objects instead of passing CallList
+        // TODO: Enhance state to contain the call objects instead of passing CallList
         public void onStateChange(InCallState state, CallList callList);
     }
 
