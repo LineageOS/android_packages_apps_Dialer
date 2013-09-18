@@ -21,7 +21,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
@@ -930,18 +929,21 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
          */
         public int getItemIndex(float itemX, float itemY) {
             if (mPosition < mMaxTiledRows) {
-                final Rect childRect = new Rect();
                 if (DEBUG) {
                     Log.v(TAG, String.valueOf(itemX) + " " + String.valueOf(itemY));
                 }
                 for (int i = 0; i < getChildCount(); ++i) {
                     /** If the row contains multiple tiles, checks each tile to see if the point
                      * is contained in the tile. */
-                    getChildAt(i).getHitRect(childRect);
-                    if (DEBUG) {
-                        Log.v(TAG, childRect.toString());
-                    }
-                    if (childRect.contains((int)itemX, (int)itemY)) {
+                    final View child = getChildAt(i);
+                    /** The coordinates passed in are based on the ListView,
+                     * translate for each child first */
+                    final int xInListView = child.getLeft() + getLeft();
+                    final int yInListView = child.getTop() + getTop();
+                    final int distanceX = (int) itemX - xInListView;
+                    final int distanceY = (int) itemY - yInListView;
+                    if ((distanceX > 0 && distanceX < child.getWidth()) &&
+                            (distanceY > 0 && distanceY < child.getHeight())) {
                         /** If the point is contained in the rectangle, computes the index of the
                          * item in the cached array. */
                         return i + (mPosition) * mColumnCount;
