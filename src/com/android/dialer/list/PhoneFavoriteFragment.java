@@ -454,7 +454,31 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                         child.animate().alpha(1.0f)
                                 .setDuration(mAnimationDuration)
                                 .start();
-                        break;
+                    } else {
+                        Integer startTop = mItemIdTopMap.get(itemId);
+                        final int top = child.getTop();
+                        if (DEBUG) {
+                            Log.d(TAG, "Found itemId: " + itemId + " for listview child " + i +
+                                    " Top: " + top);
+                        }
+                        int delta = 0;
+                        if (startTop != null) {
+                            if (startTop != top) {
+                                delta = startTop - top;
+                            }
+                        } else if (!mItemIdLeftMap.containsKey(itemId)) {
+                            // Animate new views along with the others. The catch is that they did
+                            // not exist in the start state, so we must calculate their starting
+                            // position based on neighboring views.
+                            int childHeight = child.getHeight() + mListView.getDividerHeight();
+                            startTop = top + (i > 0 ? childHeight : -childHeight);
+                            delta = startTop - top;
+                        }
+
+                        if (delta != 0) {
+                            child.setTranslationY(delta);
+                            child.animate().setDuration(mAnimationDuration).translationY(0);
+                        }
                     }
                 }
                 mItemIdTopMap.clear();
