@@ -639,12 +639,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             return;
         }
 
-        if (mDialpadFragment != null && (phoneIsInUse() || isDialIntent(intent))) {
-            mDialpadFragment.setStartedFromNewIntent(true);
-            if (!mDialpadFragment.isVisible()) {
-                mInCallDialpadUp = true;
+        if (mDialpadFragment != null) {
+            final boolean phoneIsInUse = phoneIsInUse();
+            if (phoneIsInUse || isDialIntent(intent)) {
+                mDialpadFragment.setStartedFromNewIntent(true);
+                if (phoneIsInUse && !mDialpadFragment.isVisible()) {
+                    mInCallDialpadUp = true;
+                }
+                showDialpadFragment(false);
             }
-            showDialpadFragment(false);
         }
     }
 
