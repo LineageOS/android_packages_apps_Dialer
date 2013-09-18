@@ -239,11 +239,39 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 ui.enableAddCall(canAdd);
             }
 
-            ui.showHold(call.can(Capabilities.SUPPORT_HOLD));
-            ui.setHold(call.getState() == Call.State.ONHOLD);
-            ui.enableHold(call.can(Capabilities.HOLD));
+            final boolean canHold = call.can(Capabilities.HOLD);
+            final boolean canSwap = call.can(Capabilities.SWAP_CALLS);
+            final boolean supportHold = call.can(Capabilities.SUPPORT_HOLD);
 
-            ui.showSwap(call.can(Capabilities.SWAP_CALLS));
+            if (canHold) {
+                ui.showHold(true);
+                ui.setHold(call.getState() == Call.State.ONHOLD);
+                ui.enableHold(true);
+                ui.showSwap(false);
+            } else if (canSwap) {
+                ui.showHold(false);
+                ui.showSwap(true);
+            } else {
+                // Neither "Hold" nor "Swap" is available.  This can happen for two
+                // reasons:
+                //   (1) this is a transient state on a device that *can*
+                //       normally hold or swap, or
+                //   (2) this device just doesn't have the concept of hold/swap.
+                //
+                // In case (1), show the "Hold" button in a disabled state.  In case
+                // (2), remove the button entirely.  (This means that the button row
+                // will only have 4 buttons on some devices.)
+
+                if (supportHold) {
+                    ui.showHold(true);
+                    ui.enableHold(false);
+                    ui.setHold(call.getState() == Call.State.ONHOLD);
+                    ui.showSwap(false);
+                } else {
+                    ui.showHold(false);
+                    ui.showSwap(false);
+                }
+            }
 
             ui.enableMute(call.can(Capabilities.MUTE));
 
