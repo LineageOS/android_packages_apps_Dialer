@@ -60,7 +60,7 @@ public class InCallPresenter implements CallList.Listener {
      * in-call session (e.g., StatusBarNotifier). This gets reset when the session ends in the
      * tear-down method.
      */
-    private boolean mActivityPreviouslyStarted = false;
+    private boolean mIsActivityPreviouslyStarted = false;
 
     public static synchronized InCallPresenter getInstance() {
         if (sInCallPresenter == null) {
@@ -295,7 +295,7 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     public boolean isActivityPreviouslyStarted() {
-        return mActivityPreviouslyStarted;
+        return mIsActivityPreviouslyStarted;
     }
 
     /**
@@ -313,7 +313,7 @@ public class InCallPresenter implements CallList.Listener {
         }
 
         if (showing) {
-            mActivityPreviouslyStarted = true;
+            mIsActivityPreviouslyStarted = true;
         }
     }
 
@@ -322,11 +322,10 @@ public class InCallPresenter implements CallList.Listener {
      */
     public void bringToForeground(boolean showDialpad) {
         // Before we bring the incall UI to the foreground, we check to see if:
-        // 1. there is an activity
-        // 2. the activity is not already in the foreground
+        // 1. We've already started the activity once for this session
+        // 2. If it exists, the activity is not already in the foreground
         // 3. We are in a state where we want to show the incall ui
-        if (isActivityStarted() &&
-                !isShowingInCallUi() &&
+        if (mIsActivityPreviouslyStarted && !isShowingInCallUi() &&
                 mInCallState != InCallState.NO_CALLS) {
             showInCall(showDialpad);
         }
@@ -427,7 +426,7 @@ public class InCallPresenter implements CallList.Listener {
         Log.i(this, "attemptCleanup? " + shouldCleanup);
 
         if (shouldCleanup) {
-            mActivityPreviouslyStarted = false;
+            mIsActivityPreviouslyStarted = false;
 
             // blow away stale contact info so that we get fresh data on
             // the next set of calls
