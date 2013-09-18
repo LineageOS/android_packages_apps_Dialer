@@ -15,6 +15,9 @@
  */
 package com.android.dialer.list;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
@@ -140,6 +143,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         @Override
         public void onScrollStateChanged(AbsListView view, int scrollState) {
             mActivityScrollListener.onListFragmentScrollStateChange(scrollState);
+            mLastScrollState = scrollState;
         }
     }
 
@@ -181,6 +185,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private final LoaderManager.LoaderCallbacks<Cursor> mContactTileLoaderListener =
             new ContactTileLoaderListener();
     private final ScrollListener mScrollListener = new ScrollListener();
+
+    private int mLastScrollState = ListView.OnScrollListener.SCROLL_STATE_IDLE;
 
     @Override
     public void onAttach(Activity activity) {
@@ -404,18 +410,41 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         if (mItemIdLeftMap.isEmpty()) {
             return;
         }
+        final AnimatorSet animSet = new AnimatorSet();
+        final ArrayList<Animator> animators = new ArrayList<Animator>();
         for (int i = 0; i < list.size(); i++) {
             final View child = row.getChildAt(i);
             final ContactEntry entry = list.get(i);
             final long itemId = mContactTileAdapter.getAdjustedItemId(entry.id);
 
             if (containsId(idsInPlace, itemId)) {
-                child.setAlpha(0.0f);
-                child.animate().alpha(1.0f)
-                        .setDuration(mAnimationDuration)
-                        .start();
+                animators.add(ObjectAnimator.ofFloat(
+                        child, "alpha", 0.0f, 1.0f));
                 break;
+            } else {
+                Integer startLeft = mItemIdLeftMap.get(itemId);
+                int left = child.getLeft();
+                if (startLeft != null) {
+                    if (startLeft != left) {
+                        int delta = startLeft - left;
+                        if (DEBUG) {
+                            Log.d(TAG, "Found itemId: " + itemId + " for tileview child " + i +
+                                    " Left: " + left +
+                                    " Delta: " + delta);
+                        }
+                        animators.add(ObjectAnimator.ofFloat(
+                                child, "translationX", delta, 0.0f));
+                    }
+                } else {
+                    // In case the last square row is pushed up from the non-square section.
+                    animators.add(ObjectAnimator.ofFloat(
+                            child, "translationX", left, 0.0f));
+                }
             }
+        }
+        if (animators.size() > 0) {
+            animSet.setDuration(mAnimationDuration).playTogether(animators);
+            animSet.start();
         }
     }
 
@@ -424,7 +453,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      * animations will be performed instead.
      */
     private void animateListView(final long... idsInPlace) {
-        if (mItemIdTopMap.isEmpty()) {
+        if (mItemIdTopMap.isEmpty() ||
+                mLastScrollState == ListView.OnScrollListener.SCROLL_STATE_FLING) {
             // Don't do animations if the database is being queried for the first time and
             // the previous item offsets have not been cached, or the user hasn't done anything
             // (dragging, swiping etc) that requires an animation.
@@ -437,6 +467,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             public boolean onPreDraw() {
                 observer.removeOnPreDrawListener(this);
                 final int firstVisiblePosition = mListView.getFirstVisiblePosition();
+                final AnimatorSet animSet = new AnimatorSet();
+                final ArrayList<Animator> animators = new ArrayList<Animator>();
                 for (int i = 0; i < mListView.getChildCount(); i++) {
                     final View child = mListView.getChildAt(i);
                     int position = firstVisiblePosition + i;
@@ -450,17 +482,12 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                     final long itemId = mAdapter.getItemId(position);
 
                     if (containsId(idsInPlace, itemId)) {
-                        child.setAlpha(0.0f);
-                        child.animate().alpha(1.0f)
-                                .setDuration(mAnimationDuration)
-                                .start();
+                        animators.add(ObjectAnimator.ofFloat(
+                                child, "alpha", 0.0f, 1.0f));
+                        break;
                     } else {
                         Integer startTop = mItemIdTopMap.get(itemId);
                         final int top = child.getTop();
-                        if (DEBUG) {
-                            Log.d(TAG, "Found itemId: " + itemId + " for listview child " + i +
-                                    " Top: " + top);
-                        }
                         int delta = 0;
                         if (startTop != null) {
                             if (startTop != top) {
@@ -473,14 +500,30 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                             int childHeight = child.getHeight() + mListView.getDividerHeight();
                             startTop = top + (i > 0 ? childHeight : -childHeight);
                             delta = startTop - top;
+                        } else {
+                            // In the case the first non-square row is pushed down
+                            // from the square section.
+                            animators.add(ObjectAnimator.ofFloat(
+                                    child, "translationX", -child.getWidth(), 0.0f));
+                        }
+                        if (DEBUG) {
+                            Log.d(TAG, "Found itemId: " + itemId + " for listview child " + i +
+                                    " Top: " + top +
+                                    " Delta: " + delta);
                         }
 
                         if (delta != 0) {
-                            child.setTranslationY(delta);
-                            child.animate().setDuration(mAnimationDuration).translationY(0);
+                            animators.add(ObjectAnimator.ofFloat(
+                                    child, "translationY", delta, 0.0f));
                         }
                     }
                 }
+
+                if (animators.size() > 0) {
+                    animSet.setDuration(mAnimationDuration).playTogether(animators);
+                    animSet.start();
+                }
+
                 mItemIdTopMap.clear();
                 mItemIdLeftMap.clear();
                 return true;
