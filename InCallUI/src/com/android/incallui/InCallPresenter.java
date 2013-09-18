@@ -183,6 +183,12 @@ public class InCallPresenter implements CallList.Listener {
         InCallState newState = getPotentialStateFromCallList(callList);
         newState = startOrFinishUi(newState);
 
+        // Renable notification shade and soft navigation buttons, if we are no longer in the
+        // incoming call screen
+        if (!newState.isIncoming()) {
+            CallCommandClient.getInstance().setSystemBarNavigationEnabled(true);
+        }
+
         // Set the new state before announcing it to the world
         Log.i(this, "Phone switching state: " + mInCallState + " -> " + newState);
         mInCallState = newState;
@@ -205,6 +211,11 @@ public class InCallPresenter implements CallList.Listener {
 
         Log.i(this, "Phone switching state: " + mInCallState + " -> " + newState);
         mInCallState = newState;
+
+        // Disable notification shade and soft navigation buttons
+        if (newState.isIncoming()) {
+            CallCommandClient.getInstance().setSystemBarNavigationEnabled(false);
+        }
 
         for (IncomingCallListener listener : mIncomingCallListeners) {
             listener.onIncomingCall(mInCallState, call);
