@@ -279,8 +279,6 @@ public class InCallActivity extends Activity {
     }
 
     private void initializeInCall() {
-        // TODO(klp): Make sure that this doesn't need to move back to onResume() since they are
-        // statically added fragments.
         if (mCallButtonFragment == null) {
             mCallButtonFragment = (CallButtonFragment) getFragmentManager()
                     .findFragmentById(R.id.callButtonFragment);

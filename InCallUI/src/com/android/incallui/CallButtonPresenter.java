@@ -153,7 +153,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
-        // TODO(klp): hook up call id.
         CallCommandClient.getInstance().disconnectCall(mCall.getCallId());
     }
 
@@ -173,7 +172,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
         Log.d(this, "holding: " + mCall.getCallId());
 
-        // TODO(klp): use appropriate hold callId.
         CallCommandClient.getInstance().hold(mCall.getCallId(), checked);
         getUi().setHold(checked);
     }

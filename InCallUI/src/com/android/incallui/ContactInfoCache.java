@@ -266,8 +266,6 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         Log.d(this, "Image load complete with context: ", mContext);
         // TODO: may be nice to update the image view again once the newer one
         // is available on contacts database.
-        // TODO (klp): What is this, and why does it need the write_contacts permission?
-        // CallerInfoUtils.sendViewNotificationAsync(mContext, mLoadingPersonUri);
 
         final int callId = (Integer) cookie;
         final ContactCacheEntry entry = mInfoMap.get(callId);
@@ -279,7 +277,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         }
         Log.d(this, "setting photo for entry: ", entry);
 
-        // TODO (klp): Handle conference calls
+        // Conference call icons are being handled in CallCardPresenter.
         if (photo != null) {
             Log.v(this, "direct drawable: ", photo);
             entry.photo = photo;

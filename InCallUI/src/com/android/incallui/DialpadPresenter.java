@@ -50,7 +50,6 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
      * DTMF tone (or short tone if requested), and appending the digit to the
      * EditText field that displays the DTMF digits sent so far.
      */
-    // TODO(klp) Add timedShortTone==true handling for accessibility cases.
     public final void processDtmf(char c, boolean timedShortTone) {
         Log.d(this, "Processing dtmf key " + c);
         // if it is a valid key, then update the display and send the dtmf tone.
