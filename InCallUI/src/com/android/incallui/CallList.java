@@ -262,7 +262,7 @@ public class CallList {
 
     /**
      * Returns the [position]th call found in the call map with the specified state.
-     * TODO(klp): Improve this logic to sort by call time.
+     * TODO: Improve this logic to sort by call time.
      */
     public Call getCallWithState(int state, int positionToFind) {
         Call retval = null;
