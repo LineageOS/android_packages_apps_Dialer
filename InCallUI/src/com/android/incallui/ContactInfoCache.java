@@ -330,12 +330,6 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                 photo = context.getResources().getDrawable(R.drawable.picture_unknown);
             } else {
                 cce.personUri = personUri;
-
-                // If the image load is too slow, we show a default avatar icon afterward.
-                // If it is fast enough, this message will be canceled on onImageLoadComplete().
-                // TODO (klp): Figure out if this handler is still needed.
-                // mHandler.removeMessages(MESSAGE_SHOW_UNKNOWN_PHOTO);
-                // mHandler.sendEmptyMessageDelayed(MESSAGE_SHOW_UNKNOWN_PHOTO, MESSAGE_DELAY);
             }
         }
 
