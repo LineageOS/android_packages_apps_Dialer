@@ -180,6 +180,9 @@ public class InCallActivity extends Activity {
         if (mDialpadFragment.isVisible()) {
             mCallButtonFragment.displayDialpad(false);  // do the "closing" animation
             return;
+        } else if (mConferenceManagerFragment.isVisible()) {
+            mConferenceManagerFragment.setVisible(false);
+            return;
         }
 
         // Nothing special to do.  Fall back to the default behavior.
