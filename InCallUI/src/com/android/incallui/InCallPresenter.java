@@ -519,6 +519,10 @@ public class InCallPresenter implements CallList.Listener {
             }
             mContactInfoCache = null;
 
+            if (mProximitySensor != null) {
+                removeListener(mProximitySensor);
+                mProximitySensor.tearDown();
+            }
             mProximitySensor = null;
 
             mAudioModeProvider = null;
