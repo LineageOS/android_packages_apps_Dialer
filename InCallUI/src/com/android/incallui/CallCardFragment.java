@@ -231,15 +231,15 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         // States other than disconnected not yet supported
         callStateLabel = getCallStateLabelFromState(state, cause);
 
-        Log.v(this, "setCallState ", callStateLabel);
-        Log.v(this, "DisconnectCause ", cause);
-        Log.v(this, "bluetooth on ", bluetoothOn);
+        Log.v(this, "setCallState " + callStateLabel);
+        Log.v(this, "DisconnectCause " + cause);
+        Log.v(this, "bluetooth on " + bluetoothOn);
         Log.v(this, "gateway " + gatewayLabel + gatewayNumber);
 
         // There are cases where we totally skip the animation, in which case remove the transition
         // animation here and restore it afterwards.
         final boolean skipAnimation = (state == Call.State.DIALING
-                || state == Call.State.DISCONNECTED);
+                || state == Call.State.DISCONNECTED || state == Call.State.DISCONNECTING);
         LayoutTransition transition = null;
         if (skipAnimation) {
             transition = mSupplementaryInfoContainer.getLayoutTransition();
@@ -371,15 +371,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         } else if (Call.State.INCOMING == state || Call.State.CALL_WAITING == state) {
             callStateLabel = context.getString(R.string.card_title_incoming_call);
 
-        // TODO(klp): Add a disconnecting state
-        //} else if (Call.State.DISCONNECTING) {
-                // While in the DISCONNECTING state we display a "Hanging up"
-                // message in order to make the UI feel more responsive.  (In
-                // GSM it's normal to see a delay of a couple of seconds while
-                // negotiating the disconnect with the network, so the "Hanging
-                // up" state at least lets the user know that we're doing
-                // something.  This state is currently not used with CDMA.)
-                //callStateLabel = context.getString(R.string.card_title_hanging_up);
+        } else if (Call.State.DISCONNECTING == state) {
+            // While in the DISCONNECTING state we display a "Hanging up"
+            // message in order to make the UI feel more responsive.  (In
+            // GSM it's normal to see a delay of a couple of seconds while
+            // negotiating the disconnect with the network, so the "Hanging
+            // up" state at least lets the user know that we're doing
+            // something.  This state is currently not used with CDMA.)
+            callStateLabel = context.getString(R.string.card_title_hanging_up);
 
         } else if (Call.State.DISCONNECTED == state) {
             callStateLabel = getCallFailedString(cause);

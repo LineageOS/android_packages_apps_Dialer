@@ -202,6 +202,10 @@ public class CallList {
         return getFirstCallWithState(Call.State.DISCONNECTED);
     }
 
+    public Call getDisconnectingCall() {
+        return getFirstCallWithState(Call.State.DISCONNECTING);
+    }
+
     public Call getSecondBackgroundCall() {
         return getCallWithState(Call.State.ONHOLD, 1);
     }
@@ -222,7 +226,6 @@ public class CallList {
 
         return call;
     }
-
 
     public Call getFirstCall() {
         // TODO: should we switch to a simple list and pull the first one?
@@ -316,7 +319,6 @@ public class CallList {
         final Integer id = new Integer(call.getCallId());
 
         if (call.getState() == Call.State.DISCONNECTED) {
-
             // update existing (but do not add!!) disconnected calls
             if (mCallMap.containsKey(id)) {
 
