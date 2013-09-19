@@ -105,23 +105,14 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
 
     private final AnimatorListenerAdapter mDragShadowOverAnimatorListener =
             new AnimatorListenerAdapter() {
-        private void recycleDragShadow() {
+        @Override
+        public void onAnimationEnd(Animator animation) {
             if (mDragShadowBitmap != null) {
                 mDragShadowBitmap.recycle();
                 mDragShadowBitmap = null;
             }
             mDragShadowOverlay.setVisibility(GONE);
             mDragShadowOverlay.setImageBitmap(null);
-        }
-
-        @Override
-        public void onAnimationCancel(Animator animation) {
-            recycleDragShadow();
-        }
-
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            recycleDragShadow();
         }
     };
 
