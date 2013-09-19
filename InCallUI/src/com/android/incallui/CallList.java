@@ -187,7 +187,11 @@ public class CallList {
     }
 
     public Call getOutgoingCall() {
-        return getFirstCallWithState(Call.State.DIALING);
+        Call call = getFirstCallWithState(Call.State.DIALING);
+        if (call == null) {
+            call = getFirstCallWithState(Call.State.REDIALING);
+        }
+        return call;
     }
 
     public Call getActiveCall() {
@@ -231,7 +235,7 @@ public class CallList {
         // TODO: should we switch to a simple list and pull the first one?
         Call result = getIncomingCall();
         if (result == null) {
-            result = getFirstCallWithState(Call.State.DIALING);
+            result = getOutgoingCall();
         }
         if (result == null) {
             result = getFirstCallWithState(Call.State.ACTIVE);

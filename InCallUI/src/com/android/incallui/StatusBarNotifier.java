@@ -205,7 +205,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         // back. However, it can happen much later. Before we continue, we need to make sure that
         // the call being passed in is still the one we want to show in the notification.
         final Call call = getCallToShow(CallList.getInstance());
-        if (call.getCallId() != originalCall.getCallId()) {
+        if (call == null || call.getCallId() != originalCall.getCallId()) {
             return;
         }
 
@@ -251,8 +251,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
 
         // Add hang up option for any active calls (active | onhold), outgoing calls (dialing).
         if (state == Call.State.ACTIVE ||
-                state == Call.State.DIALING ||
-                state == Call.State.ONHOLD) {
+                state == Call.State.ONHOLD ||
+                Call.State.isDialing(state)) {
             addHangupAction(builder);
         }
 
@@ -370,7 +370,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         } else if (call.getState() == Call.State.ONHOLD) {
             resId = R.string.notification_on_hold;
 
-        } else if (call.getState() == Call.State.DIALING) {
+        } else if (Call.State.isDialing(call.getState())) {
             resId = R.string.notification_dialing;
         }
 

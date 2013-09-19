@@ -421,7 +421,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (mPrimary == null) {
             return false;
         }
-        return (mPrimary.getState() == Call.State.DIALING &&
+        return (Call.State.isDialing(mPrimary.getState()) &&
                 !TextUtils.isEmpty(mPrimary.getGatewayNumber()) &&
                 !TextUtils.isEmpty(mPrimary.getGatewayPackage()));
     }

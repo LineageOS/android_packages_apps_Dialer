@@ -244,7 +244,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         // There are cases where we totally skip the animation, in which case remove the transition
         // animation here and restore it afterwards.
-        final boolean skipAnimation = (state == Call.State.DIALING
+        final boolean skipAnimation = (Call.State.isDialing(state)
                 || state == Call.State.DISCONNECTED || state == Call.State.DISCONNECTING);
         LayoutTransition transition = null;
         if (skipAnimation) {
@@ -370,10 +370,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         } else if (Call.State.ONHOLD == state) {
             callStateLabel = context.getString(R.string.card_title_on_hold);
-
         } else if (Call.State.DIALING == state) {
             callStateLabel = context.getString(R.string.card_title_dialing);
-
+        } else if (Call.State.REDIALING == state) {
+            callStateLabel = context.getString(R.string.card_title_redialing);
         } else if (Call.State.INCOMING == state || Call.State.CALL_WAITING == state) {
             callStateLabel = context.getString(R.string.card_title_incoming_call);
 
