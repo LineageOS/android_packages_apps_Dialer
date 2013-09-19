@@ -227,4 +227,17 @@ public class CallCommandClient {
         }
     }
 
+    public void setSystemBarNavigationEnabled(boolean enable) {
+        if (mCommandService == null) {
+            Log.e(this, "Cannot setSystemBarNavigationEnabled(); CallCommandService == null");
+            return;
+        }
+        try {
+            Log.v(this, "setSystemBarNavigationEnabled() enabled = " + enable);
+            mCommandService.setSystemBarNavigationEnabled(enable);
+        } catch (RemoteException e) {
+            Log.d(this, "Error on setSystemBarNavigationEnabled().");
+        }
+    }
+
 }
