@@ -171,7 +171,6 @@ public class InCallActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        // TODO(klp): implement fully
         Log.d(this, "onBackPressed()...");
 
         // BACK is also used to exit out of any "special modes" of the
