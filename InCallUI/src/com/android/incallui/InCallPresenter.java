@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.android.services.telephony.common.Call;
+import com.android.services.telephony.common.Call.Capabilities;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -334,6 +335,77 @@ public class InCallPresenter implements CallList.Listener {
 
     public void onPostDialCharWait(int callId, String chars) {
         mInCallActivity.showPostCharWaitDialog(callId, chars);
+    }
+
+    /**
+     * Handles the green CALL key while in-call.
+     * @return true if we consumed the event.
+     */
+    public boolean handleCallKey() {
+        Log.v(this, "handleCallKey");
+
+        // The green CALL button means either "Answer", "Unhold", or
+        // "Swap calls", or can be a no-op, depending on the current state
+        // of the Phone.
+
+        final CallList calls = CallList.getInstance();
+        final Call incomingCall = calls.getIncomingCall();
+        Log.v(this, "incomingCall: " + incomingCall);
+
+        // (1) Attempt to answer a call
+        if (incomingCall != null) {
+            CallCommandClient.getInstance().answerCall(incomingCall.getCallId());
+            return true;
+        }
+
+        final Call activeCall = calls.getActiveCall();
+
+        if (activeCall != null) {
+            // TODO: This logic is repeated from CallButtonPresenter.java. We should
+            // consolidate this logic.
+            final boolean isGeneric = activeCall.can(Capabilities.GENERIC_CONFERENCE);
+            final boolean canMerge = activeCall.can(Capabilities.MERGE_CALLS);
+            final boolean canSwap = activeCall.can(Capabilities.SWAP_CALLS);
+
+            Log.v(this, "activeCall: " + activeCall + ", isGeneric: " + isGeneric + ", canMerge: " +
+                    canMerge + ", canSwap: " + canSwap);
+
+            // (2) Attempt actions on Generic conference calls
+            if (activeCall.isConferenceCall() && isGeneric) {
+                if (canMerge) {
+                    CallCommandClient.getInstance().merge();
+                    return true;
+                } else if (canSwap) {
+                    CallCommandClient.getInstance().swap();
+                    return true;
+                }
+            }
+
+            // (3) Swap calls
+            if (canSwap) {
+                CallCommandClient.getInstance().swap();
+                return true;
+            }
+        }
+
+        final Call heldCall = calls.getBackgroundCall();
+
+        if (heldCall != null) {
+            // We have a hold call so presumeable it will always support HOLD...but
+            // there is no harm in double checking.
+            final boolean canHold = heldCall.can(Capabilities.HOLD);
+
+            Log.v(this, "heldCall: " + heldCall + ", canHold: " + canHold);
+
+            // (4) unhold call
+            if (heldCall.getState() == Call.State.ONHOLD && canHold) {
+                CallCommandClient.getInstance().hold(heldCall.getCallId(), false);
+                return true;
+            }
+        }
+
+        // Always consume hard keys
+        return true;
     }
 
     /**

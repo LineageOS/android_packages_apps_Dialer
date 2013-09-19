@@ -190,7 +190,10 @@ public class InCallActivity extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_CALL:
-                // TODO(klp): handle call key
+                boolean handled = InCallPresenter.getInstance().handleCallKey();
+                if (!handled) {
+                    Log.w(this, "InCallActivity should always handle KEYCODE_CALL in onKeyDown");
+                }
                 // Always consume CALL to be sure the PhoneWindow won't do anything with it
                 return true;
 
@@ -209,11 +212,12 @@ public class InCallActivity extends Activity {
             case KeyEvent.KEYCODE_VOLUME_UP:
             case KeyEvent.KEYCODE_VOLUME_DOWN:
             case KeyEvent.KEYCODE_VOLUME_MUTE:
-                // Not sure if needed. If so, silence ringer.
+                // Ringer silencing handled by PhoneWindowManager.
                 break;
 
             case KeyEvent.KEYCODE_MUTE:
-                toast("mute");
+                // toggle mute
+                CallCommandClient.getInstance().mute(!AudioModeProvider.getInstance().getMute());
                 return true;
 
             // Various testing/debugging features, enabled ONLY when VERBOSE == true.
@@ -228,11 +232,10 @@ public class InCallActivity extends Activity {
                 }
                 break;
             case KeyEvent.KEYCODE_EQUALS:
-                // TODO(klp): Dump phone state?
+                // TODO: Dump phone state?
                 break;
         }
 
-        // TODO(klp) Adds hardware keyboard support
         return super.onKeyDown(keyCode, event);
     }
 
