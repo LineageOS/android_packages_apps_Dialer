@@ -158,7 +158,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
      * auto-lock" feature while in-call (see updateProximitySensorMode()).
      */
     private boolean proximitySensorModeEnabled() {
-        // TODO(klp): Do we disable notification's expanded view when app is in foreground and
+        // TODO: Do we disable notification's expanded view when app is in foreground and
         // proximity sensor is on? Is it even possible to do this any more?
         return (mProximityWakeLock != null);
     }

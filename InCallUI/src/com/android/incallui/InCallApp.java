@@ -44,7 +44,6 @@ public class InCallApp extends Application {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        // TODO(klp): See what configuration changes we need for klp
         super.onConfigurationChanged(newConfig);
     }
 
