@@ -318,6 +318,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // to let user know quickly what call has disconnected. Disconnected
         // calls are very short lived.
         if (!skipDisconnected) {
+            retval = callList.getDisconnectingCall();
+            if (retval != null && retval != ignore) {
+                return retval;
+            }
             retval = callList.getDisconnectedCall();
             if (retval != null && retval != ignore) {
                 return retval;
