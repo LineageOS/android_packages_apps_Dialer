@@ -19,6 +19,7 @@ package com.android.incallui;
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
+import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.Call.Capabilities;
@@ -29,7 +30,7 @@ import android.telephony.PhoneNumberUtils;
  * Logic for call buttons.
  */
 public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButtonUi>
-        implements InCallStateListener, AudioModeListener {
+        implements InCallStateListener, AudioModeListener, IncomingCallListener {
 
     private Call mCall;
     private ProximitySensor mProximitySensor;
@@ -50,6 +51,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
         // register for call state changes last
         InCallPresenter.getInstance().addListener(this);
+        InCallPresenter.getInstance().addIncomingCallListener(this);
     }
 
     @Override
@@ -58,6 +60,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
         InCallPresenter.getInstance().removeListener(this);
         AudioModeProvider.getInstance().removeListener(this);
+        InCallPresenter.getInstance().removeIncomingCallListener(this);
 
         mProximitySensor = null;
     }
@@ -77,13 +80,20 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                     && mCall != null && PhoneNumberUtils.isVoiceMailNumber(mCall.getNumber())) {
                 getUi().displayDialpad(true);
             }
+        } else if (state == InCallState.INCOMING) {
+            getUi().displayDialpad(false);
+            mCall = null;
         } else {
             mCall = null;
         }
-
         updateUi(state, mCall);
 
         mPreviousState = state;
+    }
+
+    @Override
+    public void onIncomingCall(InCallState state, Call call) {
+        onStateChange(state, CallList.getInstance());
     }
 
     @Override
