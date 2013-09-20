@@ -620,4 +620,11 @@
 
     <!-- Shortcut item used to add a number directly from search -->
     <string name="search_shortcut_add_to_contacts">Add to contacts</string>
+
+    <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
+    <string name="num_missed_calls"><xliff:g id="number">%s</xliff:g> new missed calls</string>
+
+    <!-- Shows when there are no favorites. -->
+    <string name="">Favorites &amp; contacts you call often will show here. So, start calling.</string>
+
 </resources>
