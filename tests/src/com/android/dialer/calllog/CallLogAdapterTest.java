@@ -216,7 +216,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         }
 
         @Override
-        void enqueueRequest(String number, String countryIso, ContactInfo callLogInfo,
+        protected void enqueueRequest(String number, String countryIso, ContactInfo callLogInfo,
                 boolean immediate) {
             requests.add(new Request(number, countryIso, callLogInfo, immediate));
         }
