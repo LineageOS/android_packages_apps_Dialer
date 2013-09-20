@@ -37,6 +37,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private boolean mAutomaticallyMuted = false;
     private boolean mPreviousMuteState = false;
 
+    private boolean mShowGenericMerge = false;
+    private boolean mShowManageConference = false;
+
     private InCallState mPreviousState = null;
 
     public CallButtonPresenter() {
@@ -208,6 +211,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         Log.v(this, "Show dialpad " + String.valueOf(checked));
         getUi().displayDialpad(checked);
         mProximitySensor.onDialpadVisible(checked);
+
+        updateExtraButtonRow();
     }
 
     private void updateUi(InCallState state, Call call) {
@@ -235,7 +240,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             final boolean canAdd = call.can(Capabilities.ADD_CALL);
             final boolean isGenericConference = call.can(Capabilities.GENERIC_CONFERENCE);
 
-            final boolean showGenericMerge = isGenericConference && canMerge;
+
             final boolean showMerge = !isGenericConference && canMerge;
 
             if (showMerge) {
@@ -292,22 +297,28 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             // - "Manage conference" (used only on GSM devices)
             // - "Merge" button (used only on CDMA devices)
 
-            final boolean showManageConference = (call.isConferenceCall() && !isGenericConference);
-            final boolean showExtraButtonRow = (showGenericMerge || showManageConference) &&
-                    !getUi().isDialpadVisible();
+            mShowGenericMerge = isGenericConference && canMerge;
+            mShowManageConference = (call.isConferenceCall() && !isGenericConference);
 
-            Log.i(this, "isGeneric: " + isGenericConference);
-            Log.i(this, "showManageConference : " + showManageConference);
-            Log.i(this, "showGenericMerge: " + showGenericMerge);
-            if (showExtraButtonRow) {
-                if (showGenericMerge) {
-                    getUi().showGenericMergeButton();
-                } else if (showManageConference) {
-                    getUi().showManageConferenceCallButton();
-                }
-            } else {
-                getUi().hideExtraRow();
+            updateExtraButtonRow();
+        }
+    }
+
+    private void updateExtraButtonRow() {
+        final boolean showExtraButtonRow = (mShowGenericMerge || mShowManageConference) &&
+                !getUi().isDialpadVisible();
+
+        Log.d(this, "isGeneric: " + mShowGenericMerge);
+        Log.d(this, "mShowManageConference : " + mShowManageConference);
+        Log.d(this, "mShowGenericMerge: " + mShowGenericMerge);
+        if (showExtraButtonRow) {
+            if (mShowGenericMerge) {
+                getUi().showGenericMergeButton();
+            } else if (mShowManageConference) {
+                getUi().showManageConferenceCallButton();
             }
+        } else {
+            getUi().hideExtraRow();
         }
     }
 
