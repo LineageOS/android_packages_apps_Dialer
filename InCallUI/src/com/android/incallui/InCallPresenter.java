@@ -488,7 +488,7 @@ public class InCallPresenter implements CallList.Listener {
             Log.i(this, "Start Full Screen in call UI");
             mStatusBarNotifier.updateNotificationAndLaunchIncomingCallUi(newState, mCallList);
         } else if (newState == InCallState.NO_CALLS) {
-            Log.i(this, "Hide in call UI");
+            Log.e(this, "Hide in call UI", new Exception());
 
             // The new state is the no calls state.  Tear everything down.
             if (mInCallActivity != null) {
