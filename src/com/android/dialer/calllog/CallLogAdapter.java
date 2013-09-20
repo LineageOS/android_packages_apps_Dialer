@@ -516,7 +516,7 @@ public class CallLogAdapter extends GroupingListAdapter
             views.primaryActionView.setTag(
                     IntentProvider.getCallDetailIntentProvider(
                             getCursor(), c.getPosition(), c.getLong(CallLogQuery.ID), count));
-        } else {
+        } else if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
             // Sets the primary action to call the number.
             views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number));
         }
