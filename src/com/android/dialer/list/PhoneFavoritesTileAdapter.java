@@ -407,7 +407,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         return mColumnCount * mMaxTiledRows;
     }
 
-    protected int getRowIndex(int entryIndex) {
+    public int getRowIndex(int entryIndex) {
         if (entryIndex < mMaxTiledRows * mColumnCount) {
             return entryIndex / mColumnCount;
         } else {
@@ -593,11 +593,14 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
      */
     private void markDropArea(int itemIndex) {
         if (isIndexInBound(mDragEnteredEntryIndex) && isIndexInBound(itemIndex)) {
+            mDataSetChangedListener.cacheOffsetsForDatasetChange();
             // Remove the old placeholder item and place the new placeholder item.
+            final int oldIndex = mDragEnteredEntryIndex;
             mContactEntries.remove(mDragEnteredEntryIndex);
             mDragEnteredEntryIndex = itemIndex;
             mContactEntries.add(mDragEnteredEntryIndex, ContactEntry.BLANK_ENTRY);
             ContactEntry.BLANK_ENTRY.id = mDraggedEntry.id;
+            mDataSetChangedListener.onDataSetChangedForAnimation();
             notifyDataSetChanged();
         }
     }
