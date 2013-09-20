@@ -3,7 +3,6 @@ package com.android.dialer.list;
 import android.content.Context;
 import android.content.res.Resources;
 import android.telephony.PhoneNumberUtils;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,9 +28,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     public final static int SHORTCUT_INVALID = -1;
     public final static int SHORTCUT_DIRECT_CALL = 0;
     public final static int SHORTCUT_ADD_NUMBER_TO_CONTACTS = 1;
-    public final static int SHORTCUT_ADD_NEW_NAMED_CONTACT = 2;
 
-    public final static int SHORTCUT_COUNT = 3;
+    public final static int SHORTCUT_COUNT = 2;
 
     private final boolean[] mShortcutEnabled = new boolean[SHORTCUT_COUNT];
 
@@ -147,10 +145,6 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                 text = resources.getString(R.string.search_shortcut_add_to_contacts);
                 drawableId = R.drawable.ic_add_person_dk;
                 break;
-            case SHORTCUT_ADD_NEW_NAMED_CONTACT:
-                text = resources.getString(R.string.search_shortcut_add_to_contacts);
-                drawableId = R.drawable.ic_add_person_dk;
-                break;
             default:
                 throw new IllegalArgumentException("Invalid shortcut type");
         }
@@ -169,20 +163,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
 
     @Override
     public void setQueryString(String queryString) {
-        boolean containsNonDialableCharacters = false;
-        for (int i = 0; i < queryString.length(); i++) {
-            if (!PhoneNumberUtils.isDialable(queryString.charAt(i))) {
-                containsNonDialableCharacters = true;
-                break;
-            }
-        }
-
-        if (containsNonDialableCharacters) {
-            mFormattedQueryString = null;
-        } else {
-            mFormattedQueryString = PhoneNumberUtils.formatNumber(queryString, mCountryIso);
-        }
-
+        mFormattedQueryString = PhoneNumberUtils.formatNumber(
+                PhoneNumberUtils.convertAndStrip(queryString), mCountryIso);
         super.setQueryString(queryString);
     }
 }
