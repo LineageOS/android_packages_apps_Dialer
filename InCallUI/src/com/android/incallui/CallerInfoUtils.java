@@ -153,7 +153,7 @@ public class CallerInfoUtils {
             return "";
         }
 
-        // Todo (klp): Figure out an equivalent for VDBG
+        // Todo: Figure out an equivalent for VDBG
         if (false) {
             // When VDBG is true we emit PII.
             return number;
