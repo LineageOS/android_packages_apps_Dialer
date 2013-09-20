@@ -143,7 +143,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         @Override
         public void onScrollStateChanged(AbsListView view, int scrollState) {
             mActivityScrollListener.onListFragmentScrollStateChange(scrollState);
-            mLastScrollState = scrollState;
         }
     }
 
@@ -185,8 +184,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private final LoaderManager.LoaderCallbacks<Cursor> mContactTileLoaderListener =
             new ContactTileLoaderListener();
     private final ScrollListener mScrollListener = new ScrollListener();
-
-    private int mLastScrollState = ListView.OnScrollListener.SCROLL_STATE_IDLE;
 
     @Override
     public void onAttach(Activity activity) {
@@ -453,8 +450,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      * animations will be performed instead.
      */
     private void animateListView(final long... idsInPlace) {
-        if (mItemIdTopMap.isEmpty() ||
-                mLastScrollState == ListView.OnScrollListener.SCROLL_STATE_FLING) {
+        if (mItemIdTopMap.isEmpty()) {
             // Don't do animations if the database is being queried for the first time and
             // the previous item offsets have not been cached, or the user hasn't done anything
             // (dragging, swiping etc) that requires an animation.
@@ -501,10 +497,10 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                             startTop = top + (i > 0 ? childHeight : -childHeight);
                             delta = startTop - top;
                         } else {
-                            // In the case the first non-square row is pushed down
+                            // In case the first non-square row is pushed down
                             // from the square section.
                             animators.add(ObjectAnimator.ofFloat(
-                                    child, "translationX", -child.getWidth(), 0.0f));
+                                    child, "alpha", 0.0f, 1.0f));
                         }
                         if (DEBUG) {
                             Log.d(TAG, "Found itemId: " + itemId + " for listview child " + i +
