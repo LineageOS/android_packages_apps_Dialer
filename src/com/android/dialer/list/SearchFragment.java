@@ -106,10 +106,6 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             final String number = adapter.getFormattedQueryString();
             final Intent intent = DialtactsActivity.getAddNumberToContactIntent(number);
             startActivityWithErrorToast(intent);
-        } else if (shortcutType == DialerPhoneNumberListAdapter.SHORTCUT_ADD_NEW_NAMED_CONTACT) {
-            final String name = adapter.getQueryString();
-            final Intent intent = DialtactsActivity.getInsertContactWithNameIntent(name);
-            startActivityWithErrorToast(intent);
         }
     }
 
