@@ -336,8 +336,7 @@ public class CallLogAdapter extends GroupingListAdapter
      * up the contact information (if it has not been already started). Otherwise, it will be
      * started with a delay. See {@link #START_PROCESSING_REQUESTS_DELAY_MILLIS}.
      */
-    @VisibleForTesting
-    void enqueueRequest(String number, String countryIso, ContactInfo callLogInfo,
+    protected void enqueueRequest(String number, String countryIso, ContactInfo callLogInfo,
             boolean immediate) {
         ContactInfoRequest request = new ContactInfoRequest(number, countryIso, callLogInfo);
         synchronized (mRequests) {
