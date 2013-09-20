@@ -68,6 +68,16 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
         mAudioModeProvider.addListener(this);
     }
 
+    public void tearDown() {
+        mAudioModeProvider.removeListener(this);
+
+        mAccelerometerListener.enable(false);
+
+        if (mProximityWakeLock.isHeld()) {
+            mProximityWakeLock.release();
+        }
+    }
+
     /**
      * Called to identify when the device is laid down flat.
      */
