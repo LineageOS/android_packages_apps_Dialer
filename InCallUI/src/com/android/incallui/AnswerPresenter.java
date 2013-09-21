@@ -64,6 +64,11 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     @Override
+    public void onDisconnect(Call call) {
+        // no-op
+    }
+
+    @Override
     public void onIncomingCall(Call call) {
         // TODO: Ui is being destroyed when the fragment detaches.  Need clean up step to stop
         // getting updates here.

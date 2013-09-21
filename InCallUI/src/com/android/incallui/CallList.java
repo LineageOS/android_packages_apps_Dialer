@@ -83,10 +83,15 @@ public class CallList {
     public void onDisconnect(Call call) {
         Log.d(this, "onDisconnect: ", call);
 
-        updateCallInMap(call);
+        boolean updated = updateCallInMap(call);
 
-        notifyCallUpdateListeners(call);
-        notifyListenersOfChange();
+        if (updated) {
+            // notify those listening for changes on this specific change
+            notifyCallUpdateListeners(call);
+
+            // notify those listening for all disconnects
+            notifyListenersOfDisconnect(call);
+        }
     }
 
     /**
@@ -232,13 +237,18 @@ public class CallList {
     }
 
     public Call getFirstCall() {
-        // TODO: should we switch to a simple list and pull the first one?
         Call result = getIncomingCall();
         if (result == null) {
             result = getOutgoingCall();
         }
         if (result == null) {
             result = getFirstCallWithState(Call.State.ACTIVE);
+        }
+        if (result == null) {
+            result = getDisconnectingCall();
+        }
+        if (result == null) {
+            result = getDisconnectedCall();
         }
         return result;
     }
@@ -317,8 +327,20 @@ public class CallList {
         }
     }
 
-    private void updateCallInMap(Call call) {
+    private void notifyListenersOfDisconnect(Call call) {
+        for (Listener listener : mListeners) {
+            listener.onDisconnect(call);
+        }
+    }
+
+    /**
+     * Updates the call entry in the local map.
+     * @return false if no call previously existed and no call was added, otherwise true.
+     */
+    private boolean updateCallInMap(Call call) {
         Preconditions.checkNotNull(call);
+
+        boolean updated = false;
 
         final Integer id = new Integer(call.getCallId());
 
@@ -334,12 +356,17 @@ public class CallList {
                 mHandler.sendMessageDelayed(msg, getDelayForDisconnect(call));
 
                 mCallMap.put(id, call);
+                updated = true;
             }
         } else if (!isCallDead(call)) {
             mCallMap.put(id, call);
+            updated = true;
         } else if (mCallMap.containsKey(id)) {
             mCallMap.remove(id);
+            updated = true;
         }
+
+        return updated;
     }
 
     private int getDelayForDisconnect(Call call) {
@@ -419,8 +446,28 @@ public class CallList {
      * to the call list.
      */
     public interface Listener {
-        public void onCallListChange(CallList callList);
+        /**
+         * Called when a new incoming call comes in.
+         * This is the only method that gets called for incoming calls. Listeners
+         * that want to perform an action on incoming call should respond in this method
+         * because {@link #onCallListChange} does not automatically get called for
+         * incoming calls.
+         */
         public void onIncomingCall(Call call);
+
+        /**
+         * Called anytime there are changes to the call list.  The change can be switching call
+         * states, updating information, etc. This method will NOT be called for new incoming
+         * calls and for calls that switch to disconnected state. Listeners must add actions
+         * to those method implementations if they want to deal with those actions.
+         */
+        public void onCallListChange(CallList callList);
+
+        /**
+         * Called when a call switches to the disconnected state.  This is the only method
+         * that will get called upon disconnection.
+         */
+        public void onDisconnect(Call call);
     }
 
     public interface CallUpdateListener {

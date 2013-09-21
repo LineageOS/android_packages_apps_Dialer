@@ -20,6 +20,10 @@ import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.Call.State;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -37,12 +41,15 @@ public class InCallActivity extends Activity {
 
     public static final String SHOW_DIALPAD_EXTRA = "InCallActivity.show_dialpad";
 
+    private static final int INVALID_RES_ID = -1;
+
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
     private AnswerFragment mAnswerFragment;
     private DialpadFragment mDialpadFragment;
     private ConferenceManagerFragment mConferenceManagerFragment;
     private boolean mIsForegroundActivity;
+    private AlertDialog mDialog;
 
     /** Use to pass 'showDialpad' from {@link #onNewIntent} to {@link #onResume} */
     private boolean mShowDialpadRequested;
@@ -145,8 +152,12 @@ public class InCallActivity extends Activity {
      */
     @Override
     public void finish() {
-        Log.d(this, "finish()...");
-        super.finish();
+        Log.i(this, "finish().  Dialog showing: " + (mDialog != null));
+
+        // skip finish if we are still showing a dialog.
+        if (mDialog == null) {
+            super.finish();
+        }
     }
 
     @Override
@@ -351,5 +362,73 @@ public class InCallActivity extends Activity {
             mCallCardFragment.dispatchPopulateAccessibilityEvent(event);
         }
         return super.dispatchPopulateAccessibilityEvent(event);
+    }
+
+    public void maybeShowErrorDialogOnDisconnect(Call.DisconnectCause cause) {
+        Log.d(this, "maybeShowErrorDialogOnDisconnect");
+
+        if (!isFinishing()) {
+            final int resId = getResIdForDisconnectCause(cause);
+            if (resId != INVALID_RES_ID) {
+                showErrorDialog(resId);
+            }
+        }
+    }
+
+    public void dismissPendingDialogs() {
+        if (mDialog != null) {
+            mDialog.dismiss();
+            mDialog = null;
+        }
+    }
+
+    /**
+     * Utility function to bring up a generic "error" dialog.
+     */
+    private void showErrorDialog(int resId) {
+        final CharSequence msg = getResources().getText(resId);
+        Log.i(this, "Show Dialog: " + msg);
+
+        dismissPendingDialogs();
+
+        mDialog = new AlertDialog.Builder(this)
+            .setMessage(msg)
+            .setPositiveButton(R.string.ok, new OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    onDialogDismissed();
+                }})
+            .setOnCancelListener(new OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    onDialogDismissed();
+                }})
+            .create();
+
+        mDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        mDialog.show();
+    }
+
+    private int getResIdForDisconnectCause(Call.DisconnectCause cause) {
+        int resId = INVALID_RES_ID;
+
+        if (cause == Call.DisconnectCause.CALL_BARRED) {
+            resId = R.string.callFailed_cb_enabled;
+        } else if (cause == Call.DisconnectCause.FDN_BLOCKED) {
+            resId = R.string.callFailed_fdn_only;
+        } else if (cause == Call.DisconnectCause.CS_RESTRICTED) {
+            resId = R.string.callFailed_dsac_restricted;
+        } else if (cause == Call.DisconnectCause.CS_RESTRICTED_EMERGENCY) {
+            resId = R.string.callFailed_dsac_restricted_emergency;
+        } else if (cause == Call.DisconnectCause.CS_RESTRICTED_NORMAL) {
+            resId = R.string.callFailed_dsac_restricted_normal;
+        }
+
+        return resId;
+    }
+
+    private void onDialogDismissed() {
+        mDialog = null;
+        InCallPresenter.getInstance().onDismissDialog();
     }
 }
