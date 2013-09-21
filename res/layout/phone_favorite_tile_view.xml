@@ -66,6 +66,20 @@
             android:nextFocusRight="@+id/contact_tile_secondary_button"
             android:background="?android:attr/selectableItemBackground" />
 
+        <ImageView
+            android:id="@+id/contact_favorite_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/contact_tile_image"
+            android:layout_alignEnd="@id/contact_tile_image"
+            android:layout_alignBottom="@id/contact_tile_image"
+            android:layout_marginRight="7dip"
+            android:layout_marginEnd="7dip"
+            android:layout_marginBottom="7dip"
+            android:src="@drawable/ic_star_marked_as_fav"
+            android:visibility="gone" />
+
+
         <ImageButton
             android:id="@id/contact_tile_secondary_button"
             android:src="@drawable/ic_contact_info"

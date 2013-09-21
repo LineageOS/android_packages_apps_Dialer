@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.android.contacts.common.R;
+import com.android.contacts.common.list.ContactEntry;
 
 import java.util.regex.Pattern;
 
@@ -48,12 +49,6 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
         super.onFinishInflate();
 
         mSecondaryButton = (ImageButton) findViewById(R.id.contact_tile_secondary_button);
-        mSecondaryButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchQuickContact();
-            }
-        });
     }
 
     @Override
@@ -73,5 +68,30 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
         final String[] tokens = NAME_TOKEN_SEPARATOR_PATTERN.split(name, 2);
         if (tokens.length < 1) return name;
         return tokens[0];
+    }
+
+    @Override
+    public void loadFromContact(ContactEntry entry) {
+        super.loadFromContact(entry);
+        if (entry != null) {
+            final boolean contactIsFavorite = entry.isFavorite;
+            mSecondaryButton.setVisibility(contactIsFavorite ? GONE : VISIBLE);
+
+            if (contactIsFavorite) {
+                mStarView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        launchQuickContact();
+                    }
+                });
+            } else {
+                mSecondaryButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        launchQuickContact();
+                    }
+                });
+            }
+        }
     }
 }

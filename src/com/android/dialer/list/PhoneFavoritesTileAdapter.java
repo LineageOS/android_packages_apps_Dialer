@@ -287,6 +287,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             final String lookupKey = cursor.getString(mLookupIndex);
             final int pinned = cursor.getInt(mPinnedIndex);
             final String name = cursor.getString(mNameIndex);
+            final boolean isStarred = cursor.getInt(mStarredIndex) > 0;
 
             final ContactEntry contact = new ContactEntry();
 
@@ -296,7 +297,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             contact.photoUri = (photoUri != null ? Uri.parse(photoUri) : null);
             contact.lookupKey = ContentUris.withAppendedId(
                     Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey), id);
-
+            contact.isFavorite = isStarred;
 
             // Set phone number, label and status
             final int phoneNumberType = cursor.getInt(mPhoneNumberTypeIndex);
@@ -618,8 +619,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             if (changed && mDropEntryIndex < PIN_LIMIT) {
                 final ContentValues cv = getReflowedPinnedPositions(mContactEntries, mDraggedEntry,
                         mDraggedEntryIndex, mDropEntryIndex);
-                final Uri pinUri = PinnedPositions.UPDATE_URI.buildUpon().appendQueryParameter(
-                        PinnedPositions.STAR_WHEN_PINNING, "true").build();
+                final Uri pinUri = PinnedPositions.UPDATE_URI.buildUpon().build();
                 // update the database here with the new pinned positions
                 mContext.getContentResolver().update(pinUri, cv, null, null);
             }
