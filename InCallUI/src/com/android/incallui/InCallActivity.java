@@ -82,7 +82,7 @@ public class InCallActivity extends Activity {
 
     @Override
     protected void onResume() {
-        Log.d(this, "onResume()...");
+        Log.i(this, "onResume()...");
         super.onResume();
 
         mIsForegroundActivity = true;
@@ -102,6 +102,9 @@ public class InCallActivity extends Activity {
         super.onPause();
 
         mIsForegroundActivity = false;
+
+        mDialpadFragment.onDialerKeyUp(null);
+
         InCallPresenter.getInstance().onUiShowing(false);
     }
 
@@ -189,6 +192,18 @@ public class InCallActivity extends Activity {
     }
 
     @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        // push input to the dialer.
+        if ((mDialpadFragment.isVisible()) && (mDialpadFragment.onDialerKeyUp(event))){
+            return true;
+        } else if (keyCode == KeyEvent.KEYCODE_CALL) {
+            // Always consume CALL to be sure the PhoneWindow won't do anything with it
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_CALL:
@@ -238,7 +253,31 @@ public class InCallActivity extends Activity {
                 break;
         }
 
+        if (event.getRepeatCount() == 0 && handleDialerKeyDown(keyCode, event)) {
+            return true;
+        }
+
         return super.onKeyDown(keyCode, event);
+    }
+
+    private boolean handleDialerKeyDown(int keyCode, KeyEvent event) {
+        Log.v(this, "handleDialerKeyDown: keyCode " + keyCode + ", event " + event + "...");
+
+        // As soon as the user starts typing valid dialable keys on the
+        // keyboard (presumably to type DTMF tones) we start passing the
+        // key events to the DTMFDialer's onDialerKeyDown.
+        if (mDialpadFragment.isVisible()) {
+            return mDialpadFragment.onDialerKeyDown(event);
+
+            // TODO: If the dialpad isn't currently visible, maybe
+            // consider automatically bringing it up right now?
+            // (Just to make sure the user sees the digits widget...)
+            // But this probably isn't too critical since it's awkward to
+            // use the hard keyboard while in-call in the first place,
+            // especially now that the in-call UI is portrait-only...
+        }
+
+        return false;
     }
 
     @Override
