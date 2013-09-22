@@ -43,6 +43,7 @@ import android.provider.Contacts.Intents.Insert;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
@@ -1745,10 +1746,12 @@ public class DialpadFragment extends Fragment
             final SmartDialEntry entry = (SmartDialEntry) view.getTag();
             if (entry == null) return false; // just in case.
             mClearDigitsOnStop = true;
-            // Show the phone number disambiguation dialog without using the primary
-            // phone number so that the user can decide which number to call
-            PhoneNumberInteraction.startInteractionForPhoneCall(
-                    (TransactionSafeActivity) getActivity(), entry.contactUri, false);
+            // Show quick contact dialog so the user can decide which number
+            // to call or perform other operations
+            Intent intent = ContactsContract.QuickContact.composeQuickContactsIntent(
+                    getActivity(), view, entry.contactUri,
+                    ContactsContract.QuickContact.MODE_LARGE, null);
+            startActivity(intent);
             return true;
         }
     }
