@@ -18,14 +18,10 @@ package com.android.dialer.list;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
 import android.view.View;
 
 import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
-
-import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
-
 
 public class PhoneFavoriteRegularRowView extends PhoneFavoriteTileView {
     private static final String TAG = PhoneFavoriteRegularRowView.class.getSimpleName();
