@@ -157,7 +157,7 @@ public class CallLogActivity extends Activity {
         // If onPrepareOptionsMenu is called before fragments loaded. Don't do anything.
         if (mAllCallsFragment != null && itemDeleteAll != null) {
             final CallLogAdapter adapter = mAllCallsFragment.getAdapter();
-            itemDeleteAll.setEnabled(adapter != null && !adapter.isEmpty());
+            itemDeleteAll.setVisible(adapter != null && !adapter.isEmpty());
         }
         return true;
     }
