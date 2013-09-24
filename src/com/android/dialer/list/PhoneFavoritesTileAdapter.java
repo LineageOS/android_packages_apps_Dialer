@@ -106,16 +106,11 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     protected int mPresenceIndex;
     protected int mStatusIndex;
 
-    /**
-     * Only valid when {@link DisplayType#STREQUENT_PHONE_ONLY} is true
-     *
-     * TODO krelease: Remove entirely if not needed
-     */
     private int mPhoneNumberIndex;
     private int mPhoneNumberTypeIndex;
     private int mPhoneNumberLabelIndex;
     protected int mPinnedIndex;
-    protected int mContactIdForFrequentIndex;
+    protected int mContactIdIndex;
 
     private final int mPaddingInPixels;
 
@@ -209,7 +204,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         mPhoneNumberTypeIndex = ContactTileLoaderFactory.PHONE_NUMBER_TYPE;
         mPhoneNumberLabelIndex = ContactTileLoaderFactory.PHONE_NUMBER_LABEL;
         mPinnedIndex = ContactTileLoaderFactory.PINNED;
-        mContactIdForFrequentIndex = ContactTileLoaderFactory.CONTACT_ID_FOR_FREQUENT;
+        mContactIdIndex = ContactTileLoaderFactory.CONTACT_ID_FOR_DATA;
     }
 
     /**
@@ -274,14 +269,12 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             final int starred = cursor.getInt(mStarredIndex);
             final long id;
 
-            if (starred > 0) {
-                id = cursor.getLong(mIdIndex);
-            } else if (counter >= TILES_SOFT_LIMIT) {
+            // We display a maximum of TILES_SOFT_LIMIT contacts, or the total number of starred
+            // whichever is greater.
+            if (starred < 1 && counter >= TILES_SOFT_LIMIT) {
                 break;
             } else {
-                // The contact id for frequent contacts is stored in the .contact_id field rather
-                // than the _id field
-                id = cursor.getLong(mContactIdForFrequentIndex);
+                id = cursor.getLong(mContactIdIndex);
             }
 
             if (duplicates.get(id) == null) {
@@ -305,20 +298,12 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                     Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey), id);
 
 
-            // TODO krelease: These columns are temporarily unused for now so that
-            // the contact tiles will be treated like favorites since they don't have a phone
-            // number. Depending on how the final UX goes we will either remove or enable
-            // them again.
-
-            /*
-                // Set phone number, label and status
-                final int phoneNumberType = cursor.getInt(mPhoneNumberTypeIndex);
-                final String phoneNumberCustomLabel = cursor.getString(mPhoneNumberLabelIndex);
-                contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
-                        phoneNumberCustomLabel);
-                contact.phoneNumber = cursor.getString(mPhoneNumberIndex);
-                contact.status = cursor.getString(mStatusIndex);
-            */
+            // Set phone number, label and status
+            final int phoneNumberType = cursor.getInt(mPhoneNumberTypeIndex);
+            final String phoneNumberCustomLabel = cursor.getString(mPhoneNumberLabelIndex);
+            contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
+                    phoneNumberCustomLabel);
+            contact.phoneNumber = cursor.getString(mPhoneNumberIndex);
 
             contact.pinned = pinned;
             mContactEntries.add(contact);
