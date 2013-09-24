@@ -37,37 +37,34 @@
             android:scaleType="centerCrop"
             android:focusable="true" />
 
-        <TextView
-            android:id="@id/contact_tile_name"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dip"
             android:layout_marginStart="8dip"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginTop="8dip"
             android:layout_toRightOf="@id/contact_tile_quick"
             android:layout_toEndOf="@id/contact_tile_quick"
-            android:singleLine="true"
-            android:fadingEdge="horizontal"
-            android:fadingEdgeLength="3dip"
-            android:ellipsize="marquee"
-            android:textAlignment="viewStart" />
-
-        <TextView
-            android:id="@+id/contact_tile_phone_type"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_below="@id/contact_tile_name"
-            android:layout_toRightOf="@id/contact_tile_quick"
-            android:layout_toEndOf="@id/contact_tile_quick"
-            android:textSize="12sp"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:textColor="@color/dialtacts_secondary_text_color"
-            android:layout_marginLeft="8dip"
-            android:layout_marginStart="8dip"
-            android:layout_gravity="bottom" />
-
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+            <TextView
+                android:id="@id/contact_tile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:singleLine="true"
+                android:fadingEdge="horizontal"
+                android:fadingEdgeLength="3dip"
+                android:ellipsize="marquee"
+                android:textAlignment="viewStart" />
+            <TextView
+                android:id="@+id/contact_tile_phone_type"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="12sp"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textColor="@color/dialtacts_secondary_text_color" />
+        </LinearLayout>
         <ImageView
             android:id="@+id/contact_favorite_star"
             android:layout_width="wrap_content"
@@ -78,7 +75,6 @@
             android:layout_marginRight="7dip"
             android:layout_marginEnd="7dip"
             android:layout_marginBottom="7dip"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_star_marked_as_fav"
             android:visibility="gone" />
 
