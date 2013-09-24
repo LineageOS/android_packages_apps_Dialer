@@ -109,6 +109,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     private int mPhoneNumberIndex;
     private int mPhoneNumberTypeIndex;
     private int mPhoneNumberLabelIndex;
+    private int mIsDefaultNumberIndex;
     protected int mPinnedIndex;
     protected int mContactIdIndex;
 
@@ -203,6 +204,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         mPhoneNumberIndex = ContactTileLoaderFactory.PHONE_NUMBER;
         mPhoneNumberTypeIndex = ContactTileLoaderFactory.PHONE_NUMBER_TYPE;
         mPhoneNumberLabelIndex = ContactTileLoaderFactory.PHONE_NUMBER_LABEL;
+        mIsDefaultNumberIndex = ContactTileLoaderFactory.IS_DEFAULT_NUMBER;
         mPinnedIndex = ContactTileLoaderFactory.PINNED;
         mContactIdIndex = ContactTileLoaderFactory.CONTACT_ID_FOR_DATA;
     }
@@ -256,11 +258,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
         final LongSparseArray<Object> duplicates = new LongSparseArray<Object>(cursor.getCount());
 
-        // Dummy object that we're inserting into the sparse array as a value so that we can use
-        // the sparse array as a set to check for duplicates
-
-        final Object dummy = new Object();
-
         // Track the length of {@link #mContactEntries} and compare to {@link #TILES_SOFT_LIMIT}.
         int counter = 0;
 
@@ -277,9 +274,14 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                 id = cursor.getLong(mContactIdIndex);
             }
 
-            if (duplicates.get(id) == null) {
-                duplicates.put(id, dummy);
-            } else {
+            final ContactEntry existing = (ContactEntry) duplicates.get(id);
+            if (existing != null) {
+                // Check if the existing number is a default number. If not, clear the phone number
+                // and label fields so that the disambiguation dialog will show up.
+                if (!existing.isDefaultNumber) {
+                    existing.phoneLabel = null;
+                    existing.phoneNumber = null;
+                }
                 continue;
             }
 
@@ -288,6 +290,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             final int pinned = cursor.getInt(mPinnedIndex);
             final String name = cursor.getString(mNameIndex);
             final boolean isStarred = cursor.getInt(mStarredIndex) > 0;
+            final boolean isDefaultNumber = cursor.getInt(mIsDefaultNumberIndex) > 0;
 
             final ContactEntry contact = new ContactEntry();
 
@@ -298,8 +301,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             contact.lookupKey = ContentUris.withAppendedId(
                     Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey), id);
             contact.isFavorite = isStarred;
+            contact.isDefaultNumber = isDefaultNumber;
 
-            // Set phone number, label and status
+            // Set phone number and label
             final int phoneNumberType = cursor.getInt(mPhoneNumberTypeIndex);
             final String phoneNumberCustomLabel = cursor.getString(mPhoneNumberLabelIndex);
             contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
@@ -308,6 +312,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
             contact.pinned = pinned;
             mContactEntries.add(contact);
+
+            duplicates.put(id, contact);
 
             counter++;
         }
