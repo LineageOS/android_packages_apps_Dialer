@@ -632,7 +632,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             // If this is not a regular number, there is no point in looking it up in the contacts.
             ContactInfo info =
                     PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
-                    && new PhoneNumberUtilsWrapper().isVoicemailNumber(number)
+                    && !new PhoneNumberUtilsWrapper().isVoicemailNumber(number)
                             ? mContactInfoHelper.lookupNumber(number, countryIso)
                             : null;
             if (info == null) {
