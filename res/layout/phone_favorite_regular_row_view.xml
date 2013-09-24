@@ -68,6 +68,20 @@
             android:layout_marginStart="8dip"
             android:layout_gravity="bottom" />
 
+        <ImageView
+            android:id="@+id/contact_favorite_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/contact_tile_quick"
+            android:layout_alignEnd="@id/contact_tile_quick"
+            android:layout_alignBottom="@id/contact_tile_quick"
+            android:layout_marginRight="7dip"
+            android:layout_marginEnd="7dip"
+            android:layout_marginBottom="7dip"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_star_marked_as_fav"
+            android:visibility="gone" />
+
     </RelativeLayout>
 
     <LinearLayout
