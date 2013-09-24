@@ -27,6 +27,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.Toast;
 
 /**
@@ -342,5 +343,13 @@ public class InCallActivity extends Activity {
     public void showPostCharWaitDialog(int callId, String chars) {
         final PostCharDialogFragment fragment = new PostCharDialogFragment(callId,  chars);
         fragment.show(getFragmentManager(), "postCharWait");
+    }
+
+    @Override
+    public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
+        if (mCallCardFragment != null) {
+            mCallCardFragment.dispatchPopulateAccessibilityEvent(event);
+        }
+        return super.dispatchPopulateAccessibilityEvent(event);
     }
 }
