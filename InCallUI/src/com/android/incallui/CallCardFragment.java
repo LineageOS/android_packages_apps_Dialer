@@ -29,10 +29,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.services.telephony.common.Call;
+
+import java.util.List;
 
 /**
  * Fragment for call card.
@@ -492,6 +495,32 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                     getPresenter().secondaryPhotoClicked();
                 }
             });
+        }
+    }
+
+    public void dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
+        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            dispatchPopulateAccessibilityEvent(event, mPrimaryName);
+            dispatchPopulateAccessibilityEvent(event, mPhoneNumber);
+            return;
+        }
+        dispatchPopulateAccessibilityEvent(event, mCallStateLabel);
+        dispatchPopulateAccessibilityEvent(event, mPrimaryName);
+        dispatchPopulateAccessibilityEvent(event, mPhoneNumber);
+        dispatchPopulateAccessibilityEvent(event, mCallTypeLabel);
+        dispatchPopulateAccessibilityEvent(event, mSecondaryCallName);
+
+        return;
+    }
+
+    private void dispatchPopulateAccessibilityEvent(AccessibilityEvent event, View view) {
+        if (view == null) return;
+        final List<CharSequence> eventText = event.getText();
+        int size = eventText.size();
+        view.dispatchPopulateAccessibilityEvent(event);
+        // if no text added write null to keep relative position
+        if (size == eventText.size()) {
+            eventText.add(null);
         }
     }
 }
