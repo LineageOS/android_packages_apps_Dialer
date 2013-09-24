@@ -627,4 +627,9 @@
     <!-- Shows when there are no favorites. -->
     <string name="no_favorites">Favorites &amp; contacts you\ncall often will show here.\nSo, start calling.</string>
 
+    <!-- Shows up as a tooltip to provide a hint to the user that the profile pic in a contact
+         card can be tapped to bring up a list of all numbers, or long pressed to start reordering
+         [CHAR LIMIT=NONE]
+    -->
+    <string name="contact_tooltip">Tap image to see all numbers or press and hold to reorder</string>
 </resources>
