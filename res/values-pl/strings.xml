@@ -157,4 +157,8 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Cofnij"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Zadzwoń: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Dodaj do kontaktów"</string>
+    <!-- no translation found for num_missed_calls (8081736535604293886) -->
+    <skip />
+    <!-- no translation found for no_favorites (2576737323200849714) -->
+    <skip />
 </resources>
