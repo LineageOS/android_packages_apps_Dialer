@@ -53,6 +53,21 @@
             android:ellipsize="marquee"
             android:textAlignment="viewStart" />
 
+        <TextView
+            android:id="@+id/contact_tile_phone_type"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/contact_tile_name"
+            android:layout_toRightOf="@id/contact_tile_quick"
+            android:layout_toEndOf="@id/contact_tile_quick"
+            android:textSize="12sp"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:textColor="@color/dialtacts_secondary_text_color"
+            android:layout_marginLeft="8dip"
+            android:layout_marginStart="8dip"
+            android:layout_gravity="bottom" />
+
     </RelativeLayout>
 
     <LinearLayout
