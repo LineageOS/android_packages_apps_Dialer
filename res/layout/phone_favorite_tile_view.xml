@@ -39,25 +39,43 @@
             android:layout_height="match_parent"
             android:background="@drawable/shadow_contact_photo"/>
 
-        <TextView
-            android:id="@+id/contact_tile_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/contact_tile_info_button_height_and_width"
-            android:gravity="center_vertical"
-            android:textColor="@color/contact_tile_name_color"
-            android:fontFamily="sans-serif-light"
-            android:singleLine="true"
-            android:textSize="16sp"
-            android:fadingEdge="horizontal"
-            android:fadingEdgeLength="3dip"
-            android:ellipsize="marquee"
-            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
             android:paddingLeft="8dp"
             android:paddingRight="@dimen/contact_tile_info_button_height_and_width"
             android:paddingStart="8dp"
             android:paddingEnd="@dimen/contact_tile_info_button_height_and_width"
-            android:textAlignment="viewStart" />
-
+            android:paddingBottom="4dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/contact_tile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="@color/contact_tile_name_color"
+                android:fontFamily="sans-serif-light"
+                android:singleLine="true"
+                android:textSize="16sp"
+                android:fadingEdge="horizontal"
+                android:fadingEdgeLength="3dip"
+                android:ellipsize="marquee"
+                android:textAlignment="viewStart" />
+            <TextView
+                android:id="@+id/contact_tile_phone_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="@color/contact_tile_name_color"
+                android:fontFamily="sans-serif-light"
+                android:singleLine="true"
+                android:textSize="12sp"
+                android:fadingEdge="horizontal"
+                android:fadingEdgeLength="3dip"
+                android:ellipsize="marquee"
+                android:textAlignment="viewStart" />
+        </LinearLayout>
         <View
             android:id="@+id/contact_tile_push_state"
             android:layout_width="match_parent"
