@@ -30,6 +30,7 @@ import android.database.MatrixCursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CallLog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,6 +82,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      * Used with LoaderManager.
      */
     private static int LOADER_ID_CONTACT_TILE = 1;
+    private static int MISSED_CALL_LOADER = 2;
 
     private static final String KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE =
             "key_last_dismissed_call_shortcut_date";
@@ -92,6 +94,27 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     public interface Listener {
         public void onContactSelected(Uri contactUri);
         public void onCallNumberDirectly(String phoneNumber);
+    }
+
+    private class MissedCallLogLoaderListener implements LoaderManager.LoaderCallbacks<Cursor> {
+
+        @Override
+        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+            final Uri uri = CallLog.Calls.CONTENT_URI;
+            final String[] projection = new String[] {CallLog.Calls.TYPE};
+            final String selection = CallLog.Calls.TYPE + " = " + CallLog.Calls.MISSED_TYPE +
+                    " AND " + CallLog.Calls.IS_READ + " = 0";
+            return new CursorLoader(getActivity(), uri, projection, selection, null, null);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor data) {
+            mCallLogAdapter.setMissedCalls(data);
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Cursor> cursorLoader) {
+        }
     }
 
     private class ContactTileLoaderListener implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -299,6 +322,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         // This method call implicitly assures ContactTileLoaderListener's onLoadFinished() will
         // be called, on which we'll check if "all" contacts should be reloaded again or not.
         getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, mContactTileLoaderListener);
+        getLoaderManager().initLoader(MISSED_CALL_LOADER, null, new MissedCallLogLoaderListener());
     }
 
     /**
