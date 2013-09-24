@@ -625,6 +625,6 @@
     <string name="num_missed_calls"><xliff:g id="number">%s</xliff:g> new missed calls</string>
 
     <!-- Shows when there are no favorites. -->
-    <string name="no_favorites">Favorites &amp; contacts you call often will show here. So, start calling.</string>
+    <string name="no_favorites">Favorites &amp; contacts you\ncall often will show here.\nSo, start calling.</string>
 
 </resources>
