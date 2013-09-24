@@ -308,6 +308,12 @@ public class InCallPresenter implements CallList.Listener {
      * Hangs up any active or outgoing calls.
      */
     public void hangUpOngoingCall() {
+        // By the time we receive this intent, we could be shut down and call list
+        // could be null.  Bail in those cases.
+        if (mCallList == null) {
+            return;
+        }
+
         Call call = mCallList.getOutgoingCall();
         if (call == null) {
             call = mCallList.getActiveOrBackgroundCall();
