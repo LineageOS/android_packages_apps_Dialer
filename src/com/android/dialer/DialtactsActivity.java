@@ -141,6 +141,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private View mMenuButton;
     private View mCallHistoryButton;
     private View mDialpadButton;
+    private PopupMenu mOverflowMenu;
 
     // Padding view used to shift the fragments up when the dialpad is shown.
     private View mBottomPaddingView;
@@ -181,6 +182,20 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             }
         }
     };
+
+    private class OverflowPopupMenu extends PopupMenu {
+        public OverflowPopupMenu(Context context, View anchor) {
+            super(context, anchor);
+        }
+
+        @Override
+        public void show() {
+            final Menu menu = getMenu();
+            final MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
+            clearFrequents.setVisible(mPhoneFavoriteFragment.hasFrequents());
+            super.show();
+        }
+    }
 
     /**
      * Listener used when one of phone numbers in search UI is selected. This will initiate a
@@ -409,13 +424,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.overflow_menu: {
-                final PopupMenu popupMenu = new PopupMenu(DialtactsActivity.this, view);
-                final Menu menu = popupMenu.getMenu();
-                popupMenu.inflate(R.menu.dialtacts_options);
-                final MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
-                clearFrequents.setVisible(mPhoneFavoriteFragment.hasFrequents());
-                popupMenu.setOnMenuItemClickListener(this);
-                popupMenu.show();
+                mOverflowMenu.show();
                 break;
             }
             case R.id.dialpad_button:
@@ -591,6 +600,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mMenuButton = findViewById(R.id.overflow_menu);
         if (mMenuButton != null) {
             mMenuButton.setOnClickListener(this);
+
+            mOverflowMenu = new OverflowPopupMenu(DialtactsActivity.this, mMenuButton);
+            final Menu menu = mOverflowMenu.getMenu();
+            mOverflowMenu.inflate(R.menu.dialtacts_options);
+            mOverflowMenu.setOnMenuItemClickListener(this);
+            mMenuButton.setOnTouchListener(mOverflowMenu.getDragToOpenListener());
         }
 
         mCallHistoryButton = findViewById(R.id.call_history_button);
