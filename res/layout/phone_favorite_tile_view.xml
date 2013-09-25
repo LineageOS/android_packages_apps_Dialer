@@ -71,6 +71,7 @@
                 android:fontFamily="sans-serif-light"
                 android:singleLine="true"
                 android:textSize="12sp"
+                android:paddingBottom="2dp"
                 android:fadingEdge="horizontal"
                 android:fadingEdgeLength="3dip"
                 android:ellipsize="marquee"
