@@ -37,6 +37,7 @@ public class ObjectFactory {
     public static CallLogAdapter newCallLogAdapter(Context context, CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper, boolean useCallAsPrimaryAction,
             boolean isCallLog) {
-        return new CallLogAdapter(context, callFetcher, contactInfoHelper, useCallAsPrimaryAction);
+        return new CallLogAdapter(context, callFetcher, contactInfoHelper, useCallAsPrimaryAction,
+                isCallLog);
     }
 }
