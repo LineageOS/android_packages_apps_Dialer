@@ -23,6 +23,8 @@ import android.text.TextUtils;
 
 import com.android.contacts.common.list.DirectoryPartition;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
+import com.android.dialer.calllog.ContactInfo;
+import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 
 /**
@@ -34,8 +36,10 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
         super(context);
     }
 
-    public CachedContactInfo getContactInfo(int position) {
-        CachedContactInfo info = new CachedContactInfo();
+    public CachedContactInfo getContactInfo(
+            CachedNumberLookupService lookupService, int position) {
+        ContactInfo info = new ContactInfo();
+        CachedContactInfo cacheInfo = lookupService.buildCachedContactInfo(info);
         final Cursor item = (Cursor) getItem(position);
         if (item != null) {
             info.name = item.getString(PhoneQuery.DISPLAY_NAME);
@@ -44,19 +48,21 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
             info.number = item.getString(PhoneQuery.PHONE_NUMBER);
             final String photoUriStr = item.getString(PhoneQuery.PHOTO_URI);
             info.photoUri = photoUriStr == null ? null : Uri.parse(photoUriStr);
-            info.lookupKey = item.getString(PhoneQuery.LOOKUP_KEY);
+
+            cacheInfo.setLookupKey(item.getString(PhoneQuery.LOOKUP_KEY));
 
             final int partitionIndex = getPartitionForPosition(position);
             final DirectoryPartition partition =
                 (DirectoryPartition) getPartition(partitionIndex);
             final long directoryId = partition.getDirectoryId();
-            info.sourceName = partition.getLabel();
-            info.sourceType = isExtendedDirectory(directoryId) ?
-                CachedContactInfo.SOURCE_TYPE_EXTENDED :
-                CachedContactInfo.SOURCE_TYPE_DIRECTORY;
-            info.sourceId = (int) directoryId;
+            final String sourceName = partition.getLabel();
+            if (isExtendedDirectory(directoryId)) {
+                cacheInfo.setExtendedSource(sourceName, directoryId);
+            } else {
+                cacheInfo.setDirectorySource(sourceName, directoryId);
+            }
         }
-        return info;
+        return cacheInfo;
     }
 
     @Override

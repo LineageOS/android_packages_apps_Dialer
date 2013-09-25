@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.service.CachedNumberLookupService;
+import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialerbind.ObjectFactory;
 
 import org.json.JSONException;
@@ -228,7 +229,9 @@ public class ContactInfoHelper {
         if (info != null && info != ContactInfo.EMPTY) {
             info.formattedNumber = formatPhoneNumber(number, null, countryIso);
         } else if (mCachedNumberLookupService != null) {
-            info = mCachedNumberLookupService.lookupCachedContactFromNumber(mContext, number);
+            CachedContactInfo cacheInfo = mCachedNumberLookupService
+                .lookupCachedContactFromNumber(mContext, number);
+            info = cacheInfo != null ? cacheInfo.getContactInfo() : null;
         }
         return info;
     }
