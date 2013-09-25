@@ -452,7 +452,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             // Contacts that appear as rows
             // The actual position of the contact in the cursor is simply total the number of
             // tiled contacts + the given position
-            return maxContactsInTiles + position - 1;
+            return maxContactsInTiles + position - mMaxTiledRows;
         }
     }
 
@@ -855,7 +855,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
                 // Note MeasuredWidth includes the padding.
                 final int childWidth = child.getMeasuredWidth();
-                child.layout(childLeft, 0, childLeft + childWidth, child.getMeasuredHeight());
+                child.layout(childLeft, getPaddingTop(), childLeft + childWidth,
+                        getPaddingTop() + child.getMeasuredHeight());
                 childLeft += childWidth;
             }
         }
