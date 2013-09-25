@@ -482,7 +482,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ft.commit();
     }
 
-    private void hideDialpadFragment(boolean animate, boolean clearDialpad) {
+    public void hideDialpadFragment(boolean animate, boolean clearDialpad) {
         if (mDialpadFragment == null) return;
         if (clearDialpad) {
             mDialpadFragment.clearDialpad();

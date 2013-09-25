@@ -1082,8 +1082,11 @@ public class DialpadFragment extends Fragment
 
     public void callVoicemail() {
         startActivity(getVoicemailIntent());
-        mClearDigitsOnStop = true;
-        getActivity().finish();
+        hideAndClearDialpad();
+    }
+
+    private void hideAndClearDialpad() {
+        ((DialtactsActivity) getActivity()).hideDialpadFragment(false, true);
     }
 
     public static class ErrorDialogFragment extends DialogFragment {
@@ -1179,8 +1182,7 @@ public class DialpadFragment extends Fragment
                         (getActivity() instanceof DialtactsActivity ?
                                 ((DialtactsActivity) getActivity()).getCallOrigin() : null));
                 startActivity(intent);
-                mClearDigitsOnStop = true;
-                getActivity().finish();
+                hideAndClearDialpad();
             }
         }
     }
