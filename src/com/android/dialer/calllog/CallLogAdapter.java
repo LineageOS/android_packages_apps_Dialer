@@ -18,6 +18,7 @@ package com.android.dialer.calllog;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
@@ -29,7 +30,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.ContactPhotoManager;
@@ -48,6 +52,7 @@ import java.util.LinkedList;
  */
 public class CallLogAdapter extends GroupingListAdapter
         implements ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
+
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {
         public void fetchCalls();
@@ -182,6 +187,15 @@ public class CallLogAdapter extends GroupingListAdapter
      * action should be set to call a number instead of opening the detail page. */
     private boolean mUseCallAsPrimaryAction = false;
 
+    private boolean mIsCallLog = true;
+    private int mNumMissedCalls = 0;
+    private int mNumMissedCallsShown = 0;
+    private Uri mCurrentPhotoUri;
+
+    private View mBadgeContainer;
+    private ImageView mBadgeImageView;
+    private TextView mBadgeText;
+
     /** Listener for the primary action in the list, opens the call details. */
     private final View.OnClickListener mPrimaryActionListener = new View.OnClickListener() {
         @Override
@@ -232,13 +246,15 @@ public class CallLogAdapter extends GroupingListAdapter
     };
 
     public CallLogAdapter(Context context, CallFetcher callFetcher,
-            ContactInfoHelper contactInfoHelper, boolean useCallAsPrimaryAction) {
+            ContactInfoHelper contactInfoHelper, boolean useCallAsPrimaryAction,
+            boolean isCallLog) {
         super(context);
 
         mContext = context;
         mCallFetcher = callFetcher;
         mContactInfoHelper = contactInfoHelper;
         mUseCallAsPrimaryAction = useCallAsPrimaryAction;
+        mIsCallLog = isCallLog;
 
         mContactInfoCache = ExpirableCache.create(CONTACT_INFO_CACHE_SIZE);
         mRequests = new LinkedList<ContactInfoRequest>();
@@ -614,12 +630,107 @@ public class CallLogAdapter extends GroupingListAdapter
             mViewTreeObserver.addOnPreDrawListener(this);
         }
 
-        postBindView(views, info, details);
+        bindBadge(view, info, details, callType);
     }
 
-    protected void postBindView(CallLogListItemViews views, ContactInfo info,
+    protected void bindBadge(View view, ContactInfo info, PhoneCallDetails details, int callType) {
+
+        // Do not show badge in call log.
+        if (!mIsCallLog) {
+            final int numMissed = getNumMissedCalls(callType);
+            final ViewStub stub = (ViewStub) view.findViewById(R.id.link_stub);
+            if (shouldShowBadge(numMissed, info, details)) {
+
+                // stub will be null if it was already inflated.
+                if (stub != null) {
+                    final View inflated = stub.inflate();
+                    inflated.setVisibility(View.VISIBLE);
+                    mBadgeContainer = inflated.findViewById(R.id.badge_link_container);
+                    mBadgeImageView = (ImageView) inflated.findViewById(R.id.badge_image);
+                    mBadgeText = (TextView) inflated.findViewById(R.id.badge_text);
+                }
+
+                mBadgeContainer.setOnClickListener(getBadgeClickListener());
+                mBadgeImageView.setImageResource(getBadgeImageResId());
+                mBadgeText.setText(getBadgeText(numMissed));
+
+                mNumMissedCallsShown = numMissed;
+            } else {
+                // Hide badge if it was previously shown.
+                if (stub == null) {
+                    final View container = view.findViewById(R.id.badge_container);
+                    if (container != null) {
+                        container.setVisibility(View.GONE);
+                    }
+                }
+            }
+        }
+    }
+
+    public void setMissedCalls(Cursor data) {
+        final int missed;
+        if (data == null) {
+            missed = 0;
+        } else {
+            missed = data.getCount();
+        }
+        // Only need to update if the number of calls changed.
+        if (missed != mNumMissedCalls) {
+            mNumMissedCalls = missed;
+            notifyDataSetChanged();
+        }
+    }
+
+    protected View.OnClickListener getBadgeClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(mContext, CallLogActivity.class);
+                mContext.startActivity(intent);
+            }
+        };
+    }
+
+    /**
+     * Get the resource id for the image to be shown for the badge.
+     */
+    protected int getBadgeImageResId() {
+        return R.drawable.ic_call_log_blue;
+    }
+
+    /**
+     * Get the text to be shown for the badge.
+     *
+     * @param numMissed The number of missed calls.
+     */
+    protected String getBadgeText(int numMissed) {
+        return mContext.getResources().getString(R.string.num_missed_calls, numMissed);
+    }
+
+    /**
+     * Whether to show the badge.
+     *
+     * @param numMissedCalls The number of missed calls.
+     * @param info The contact info.
+     * @param details The call detail.
+     * @return {@literal true} if badge should be shown.  {@literal false} otherwise.
+     */
+    protected boolean shouldShowBadge(int numMissedCalls, ContactInfo info,
             PhoneCallDetails details) {
-        // no-op
+        // Do not process if the data has not changed (optimization since bind view is called
+        // multiple times due to contact lookup).
+        if (numMissedCalls == mNumMissedCallsShown) {
+            return false;
+        }
+        return numMissedCalls > 0;
+    }
+
+    private int getNumMissedCalls(int callType) {
+        if (callType == Calls.MISSED_TYPE) {
+            // Exclude the current missed call shown in the shortcut.
+            return mNumMissedCalls - 1;
+        }
+        return mNumMissedCalls;
     }
 
     /** Checks whether the contact info from the call log matches the one from the contacts db. */
@@ -733,11 +844,19 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     private void setPhoto(CallLogListItemViews views, long photoId, Uri contactUri) {
+        mCurrentPhotoUri = null;
         views.quickContactView.assignContactUri(contactUri);
         mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, false /* darkTheme */);
     }
 
     private void setPhoto(CallLogListItemViews views, Uri photoUri, Uri contactUri) {
+        if (photoUri.equals(mCurrentPhotoUri)) {
+            // photo manager will perform a fade in transition.  To avoid flicker, do not set the
+            // same photo multiple times.
+            return;
+        }
+
+        mCurrentPhotoUri = photoUri;
         views.quickContactView.assignContactUri(contactUri);
         mContactPhotoManager.loadDirectoryPhoto(views.quickContactView, photoUri,
                 false /* darkTheme */);

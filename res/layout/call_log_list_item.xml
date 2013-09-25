@@ -140,4 +140,10 @@
         android:paddingTop="@dimen/call_log_inner_margin"
         android:paddingBottom="@dimen/call_log_inner_margin" />
 
+    <!-- Displays the extra link section -->
+    <ViewStub android:id="@+id/link_stub"
+              android:layout="@layout/call_log_list_item_extra"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"/>
+
 </view>
