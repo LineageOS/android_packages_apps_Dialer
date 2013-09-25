@@ -17,7 +17,9 @@ package com.android.dialer.list;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
@@ -26,7 +28,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,7 +43,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
@@ -128,6 +128,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
             if (DEBUG) Log.d(TAG, "ContactTileLoaderListener#onLoadFinished");
             mContactTileAdapter.setContactCursor(data);
+            setEmptyViewVisibility(mContactTileAdapter.getCount() == 0);
         }
 
         @Override
@@ -179,9 +180,12 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private CallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
 
+    private View mParentView;
+
     private PhoneFavoriteListView mListView;
 
     private View mShowAllContactsButton;
+    private View mShowAllContactsInEmptyViewButton;
 
     private final HashMap<Long, Integer> mItemIdTopMap = new HashMap<Long, Integer>();
     private final HashMap<Long, Integer> mItemIdLeftMap = new HashMap<Long, Integer>();
@@ -253,10 +257,9 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final View listLayout = inflater.inflate(
-                R.layout.phone_favorites_fragment, container, false);
+        mParentView = inflater.inflate(R.layout.phone_favorites_fragment, container, false);
 
-        mListView = (PhoneFavoriteListView) listLayout.findViewById(R.id.contact_tile_list);
+        mListView = (PhoneFavoriteListView) mParentView.findViewById(R.id.contact_tile_list);
         mListView.setItemsCanFocus(true);
         mListView.setOnItemClickListener(this);
         mListView.setVerticalScrollBarEnabled(false);
@@ -266,10 +269,19 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mListView.setOnDragDropListener(mContactTileAdapter);
 
         final ImageView dragShadowOverlay =
-                (ImageView) listLayout.findViewById(R.id.contact_tile_drag_shadow_overlay);
+                (ImageView) mParentView.findViewById(R.id.contact_tile_drag_shadow_overlay);
         mListView.setDragShadowOverlay(dragShadowOverlay);
 
-        mEmptyView = inflater.inflate(R.layout.phone_no_favorites, mListView, false);
+        mEmptyView = mParentView.findViewById(R.id.phone_no_favorites_view);
+
+        mShowAllContactsInEmptyViewButton = mParentView.findViewById(
+                R.id.show_all_contact_button_in_nofav);
+        mShowAllContactsInEmptyViewButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAllContacts();
+            }
+        });
 
         mShowAllContactsButton = inflater.inflate(R.layout.show_all_contact_button, mListView,
                 false);
@@ -280,7 +292,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             }
         });
 
-        mContactTileAdapter.setEmptyView(mEmptyView);
         mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), this, mContactTileAdapter,
                 mCallLogAdapter, mShowAllContactsButton);
 
@@ -290,12 +301,57 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mListView.setFastScrollEnabled(false);
         mListView.setFastScrollAlwaysVisible(false);
 
-        return listLayout;
+        return mParentView;
     }
 
     public boolean hasFrequents() {
         if (mContactTileAdapter == null) return false;
         return mContactTileAdapter.getNumFrequents() > 0;
+    }
+
+    /* package */ void setEmptyViewVisibility(final boolean visible) {
+        final int previousVisibility = mEmptyView.getVisibility();
+        final int newVisibility = visible ? View.VISIBLE : View.GONE;
+
+        if (previousVisibility != newVisibility) {
+            Integer colorFrom = visible ?
+                    getResources().getColor(R.color.background_dialer_light) :
+                    getResources().getColor(R.color.nofavorite_background_color);
+            Integer colorTo = visible ?
+                    getResources().getColor(R.color.nofavorite_background_color) :
+                    getResources().getColor(R.color.background_dialer_light);
+            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(),
+                    colorFrom, colorTo);
+            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animator) {
+                    mParentView.setBackgroundColor((Integer)animator.getAnimatedValue());
+                }
+            });
+            colorAnimation.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
+                    if (!visible) {
+                        mEmptyView.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    if (visible) {
+                        mEmptyView.setVisibility(View.VISIBLE);
+                    }
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animator) {}
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {}
+            });
+
+            colorAnimation.start();
+        }
     }
 
     @Override
