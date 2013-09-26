@@ -157,8 +157,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"ቀልብስ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"ለ<xliff:g id="NUMBER">%s</xliff:g> ደውል"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"ወደ ዕውቂያዎች አክል"</string>
-    <!-- no translation found for num_missed_calls (8081736535604293886) -->
-    <skip />
-    <!-- no translation found for no_favorites (2576737323200849714) -->
-    <skip />
+    <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> አዲስ ያመለጡ ጥሪዎች"</string>
+    <string name="no_favorites" msgid="5212485868783382971">"ተወዳጆች እና አብዛኛው ጊዜ\nየሚደውሉላቸው እውቂያዎች እዚህ ይታያሉ።\nስለዚህ መደወል ይጀምሩ።"</string>
+    <string name="contact_tooltip" msgid="7817483485692282287">"ሁሉንም ቁጥሮች ለማየት ምስሉን መታ ያድርጉ ወይም ቅደም ተከተላቸውን ለማስተካከል ተጭነው ይያዙ"</string>
 </resources>
