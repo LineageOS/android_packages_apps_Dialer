@@ -370,6 +370,14 @@ public class InCallActivity extends Activity {
         toast.show();
     }
 
+    /**
+     * Simulates a user click to hide the dialpad. This will update the UI to show the call card,
+     * update the checked state of the dialpad button, and update the proximity sensor state.
+     */
+    public void hideDialpadForDisconnect() {
+        mCallButtonFragment.displayDialpad(false);
+    }
+
     public void displayDialpad(boolean showDialpad) {
         if (showDialpad) {
             mDialpadFragment.setVisible(true);
