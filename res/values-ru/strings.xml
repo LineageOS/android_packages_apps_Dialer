@@ -159,6 +159,5 @@
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Добавить в контакты"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Пропущенных вызовов: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Здесь будут отображаться избранные элементы\nи контакты, которым вы звоните чаще всего.\nОбщайтесь с удовольствием."</string>
-    <!-- no translation found for contact_tooltip (7817483485692282287) -->
-    <skip />
+    <string name="contact_tooltip" msgid="7817483485692282287">"Нажмите на фото, чтобы посмотреть все номера. Чтобы изменить порядок номеров, нажмите и удерживайте фото."</string>
 </resources>

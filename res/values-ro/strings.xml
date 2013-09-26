@@ -159,6 +159,5 @@
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Adăugați în Agendă"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> (de) apeluri nepreluate noi"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Preferințele și persoanele din Agendă pe care \nle apelați frecvent vor fi afișate aici.\nDeci începeți să le apelați."</string>
-    <!-- no translation found for contact_tooltip (7817483485692282287) -->
-    <skip />
+    <string name="contact_tooltip" msgid="7817483485692282287">"Atingeți imaginea pentru a vedea toate numerele sau apăsați și țineți apăsat pentru a reordona"</string>
 </resources>

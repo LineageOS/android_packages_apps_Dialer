@@ -159,6 +159,5 @@
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Lisää yhteystietoihin"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> uutta vastaamatonta puhelua"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Suosikit ja yhteyshenkilöt, joille\nsoitat usein, näkyvät tässä.\nAla siis soitella."</string>
-    <!-- no translation found for contact_tooltip (7817483485692282287) -->
-    <skip />
+    <string name="contact_tooltip" msgid="7817483485692282287">"Napauta kuvaa nähdäksesi kaikki numerot tai järjestä uudelleen painamalla pitkään"</string>
 </resources>

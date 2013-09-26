@@ -159,6 +159,5 @@
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"ወደ ዕውቂያዎች አክል"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> አዲስ ያመለጡ ጥሪዎች"</string>
     <string name="no_favorites" msgid="5212485868783382971">"ተወዳጆች እና አብዛኛው ጊዜ\nየሚደውሉላቸው እውቂያዎች እዚህ ይታያሉ።\nስለዚህ መደወል ይጀምሩ።"</string>
-    <!-- no translation found for contact_tooltip (7817483485692282287) -->
-    <skip />
+    <string name="contact_tooltip" msgid="7817483485692282287">"ሁሉንም ቁጥሮች ለማየት ምስሉን መታ ያድርጉ ወይም ቅደም ተከተላቸውን ለማስተካከል ተጭነው ይያዙ"</string>
 </resources>
