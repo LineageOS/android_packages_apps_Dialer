@@ -21,6 +21,7 @@ import android.content.Context;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
+import com.android.services.telephony.common.Call;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSortedSet;
@@ -57,11 +58,13 @@ public class ConferenceManagerPresenter
     public void onStateChange(InCallState state, CallList callList) {
         if (getUi().isFragmentVisible()) {
             Log.v(this, "onStateChange" + state);
-            if (state == InCallState.INCALL && callList.getActiveOrBackgroundCall() != null &&
-                    callList.getActiveOrBackgroundCall().isConferenceCall()) {
-                Log.v(this, "Number of existing calls is " +
-                        String.valueOf(callList.getActiveCall().getChildCallIds().size()));
-                update(callList);
+            if (state == InCallState.INCALL) {
+                final Call call = callList.getActiveOrBackgroundCall();
+                if (call != null && call.isConferenceCall()) {
+                    Log.v(this, "Number of existing calls is " +
+                            String.valueOf(call.getChildCallIds().size()));
+                    update(callList);
+                }
             } else {
                 getUi().setVisible(false);
             }
