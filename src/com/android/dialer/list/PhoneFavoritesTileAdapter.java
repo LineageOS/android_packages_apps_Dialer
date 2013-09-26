@@ -803,7 +803,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                     contactTile.setPaddingRelative(0, 0,
                             childIndex >= mColumnCount - 1 ? 0 : mPaddingInPixels, 0);
                     entryIndex = getFirstContactEntryIndexForPosition(mPosition) + childIndex;
-                    SwipeHelper.setSwipeable(contactTile, true);
+                    SwipeHelper.setSwipeable(contactTile, false);
                     break;
                 case ViewTypes.FREQUENT:
                     contactTile.setHorizontalDividerVisibility(
