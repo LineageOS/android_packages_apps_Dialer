@@ -63,6 +63,11 @@
                 android:contentDescription="@string/description_start_voice_search"
                 android:background="?android:attr/selectableItemBackground" />
         </LinearLayout>
+        <View
+            android:id="@+id/searchbox_divider"
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="@color/background_dialer_light" />
         <FrameLayout
             android:layout_height="0dp"
             android:layout_weight="1"

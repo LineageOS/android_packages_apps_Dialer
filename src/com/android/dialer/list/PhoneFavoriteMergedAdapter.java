@@ -116,14 +116,12 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     }
 
     @Override
-    public boolean isEmpty() {
-        // This adapter will always contain at least the all contacts button
-        return false;
-    }
-
-    @Override
     public int getCount() {
-        return mContactTileAdapter.getCount() + mCallLogAdapter.getCount() + 1;
+        if (mContactTileAdapter.getCount() > 0) {
+            return mContactTileAdapter.getCount() + mCallLogAdapter.getCount() + 1;
+        } else {
+            return mCallLogAdapter.getCount();
+        }
     }
 
     @Override
@@ -198,7 +196,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         final int callLogAdapterCount = mCallLogAdapter.getCount();
 
-        if (position == getCount() - 1) {
+        if ((position == getCount() - 1) && (mContactTileAdapter.getCount() > 0)) {
             return mShowAllContactsButton;
         }
 
