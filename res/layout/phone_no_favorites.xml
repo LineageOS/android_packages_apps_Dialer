@@ -14,21 +14,53 @@
      limitations under the License.
 -->
 
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:minHeight="?android:attr/listPreferredItemHeight">
+
+    <ImageView
+        android:id="@+id/nofavorite_image"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingTop="36dp"
+        android:paddingBottom="16dp"
+        android:src="@drawable/no_favorites_banner" />
+
+    <FrameLayout
+        android:id="@+id/show_all_contact_button_in_nofav_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/background_dialer_list_items">
+
+        <include
+            android:id="@+id/show_all_contact_button_in_nofav"
+            layout="@layout/show_all_contact_button" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:text="@string/listTotalAllContactsZeroStarred"
+        android:layout_below="@id/nofavorite_image"
+        android:layout_above="@id/show_all_contact_button_in_nofav_frame"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/no_favorites"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textColor="@color/nofavorite_text_color"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"/>
 
-</FrameLayout>
+</RelativeLayout>
