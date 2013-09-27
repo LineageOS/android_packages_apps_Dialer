@@ -29,8 +29,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.CallLog.Calls;
@@ -168,21 +166,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private DialerDatabaseHelper mDialerDatabaseHelper;
 
-    private static final int EVENT_DELAYED_HIDE_SEARCH = 1;
-
-    // Wait this much time (in ms) before hiding the search fragment after clicking on
-    // a search result to dial, to avoid jank
-    private static final int CLEAR_SEARCH_DELAY = 500;
-
-    final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == EVENT_DELAYED_HIDE_SEARCH) {
-                hideDialpadAndSearchUi();
-            }
-        }
-    };
-
     private class OverflowPopupMenu extends PopupMenu {
         public OverflowPopupMenu(Context context, View anchor) {
             super(context, anchor);
@@ -209,16 +192,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     // CallLog screen (search UI will be automatically exited).
                     PhoneNumberInteraction.startInteractionForPhoneCall(
                         DialtactsActivity.this, dataUri, getCallOrigin());
-                    mHandler.sendEmptyMessageDelayed(EVENT_DELAYED_HIDE_SEARCH,
-                            CLEAR_SEARCH_DELAY);
+                    hideDialpadAndSearchUi();
                 }
 
                 @Override
                 public void onCallNumberDirectly(String phoneNumber) {
                     Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin());
                     startActivity(intent);
-                    mHandler.sendEmptyMessageDelayed(EVENT_DELAYED_HIDE_SEARCH,
-                            CLEAR_SEARCH_DELAY);
+                    hideDialpadAndSearchUi();
                 }
 
                 @Override
