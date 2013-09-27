@@ -325,6 +325,11 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
         }
 
         final ContactTileRow tile = (ContactTileRow) child;
+
+        if (tile.getTileAdapter().hasPotentialRemoveEntryIndex()) {
+            return false;
+        }
+
         final int itemIndex = tile.getItemIndex(x, y);
         if (itemIndex != -1 && mOnDragDropListener != null) {
             final PhoneFavoriteTileView tileView =
