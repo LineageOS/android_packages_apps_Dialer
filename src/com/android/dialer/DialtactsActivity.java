@@ -858,6 +858,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Hides the search fragment
      */
     private void exitSearchUi() {
+        // See related bug in enterSearchUI();
+        if (getFragmentManager().isDestroyed()) {
+            return;
+        }
         // Go all the way back to the favorites fragment, regardless of how many times we
         // transitioned between search fragments
         final BackStackEntry entry = getFragmentManager().getBackStackEntryAt(0);
