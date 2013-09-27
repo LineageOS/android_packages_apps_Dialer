@@ -534,6 +534,8 @@ public class CallLogAdapter extends GroupingListAdapter
         } else if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
             // Sets the primary action to call the number.
             views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number));
+        } else {
+            views.primaryActionView.setTag(null);
         }
 
         // Store away the voicemail information so we can play it directly.
