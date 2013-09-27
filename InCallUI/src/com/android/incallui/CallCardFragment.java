@@ -495,6 +495,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                     getPresenter().secondaryPhotoClicked();
                 }
             });
+            mSecondaryPhotoOverlay.setOnTouchListener(new SmallerHitTargetTouchListener());
         }
     }
 
