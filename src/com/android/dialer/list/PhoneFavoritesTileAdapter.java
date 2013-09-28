@@ -667,6 +667,10 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         mPotentialRemoveEntryIndex = -1;
     }
 
+    public boolean hasPotentialRemoveEntryIndex() {
+        return isIndexInBound(mPotentialRemoveEntryIndex);
+    }
+
     /**
      * Clears all temporary variables at a new interaction.
      */
