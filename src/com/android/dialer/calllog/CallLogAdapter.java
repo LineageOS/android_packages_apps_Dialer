@@ -190,7 +190,6 @@ public class CallLogAdapter extends GroupingListAdapter
     private boolean mIsCallLog = true;
     private int mNumMissedCalls = 0;
     private int mNumMissedCallsShown = 0;
-    private Uri mCurrentPhotoUri;
 
     private View mBadgeContainer;
     private ImageView mBadgeImageView;
@@ -846,19 +845,11 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     private void setPhoto(CallLogListItemViews views, long photoId, Uri contactUri) {
-        mCurrentPhotoUri = null;
         views.quickContactView.assignContactUri(contactUri);
         mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, false /* darkTheme */);
     }
 
     private void setPhoto(CallLogListItemViews views, Uri photoUri, Uri contactUri) {
-        if (photoUri.equals(mCurrentPhotoUri)) {
-            // photo manager will perform a fade in transition.  To avoid flicker, do not set the
-            // same photo multiple times.
-            return;
-        }
-
-        mCurrentPhotoUri = photoUri;
         views.quickContactView.assignContactUri(contactUri);
         mContactPhotoManager.loadDirectoryPhoto(views.quickContactView, photoUri,
                 false /* darkTheme */);
