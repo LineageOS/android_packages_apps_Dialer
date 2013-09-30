@@ -314,43 +314,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         final int newVisibility = visible ? View.VISIBLE : View.GONE;
 
         if (previousVisibility != newVisibility) {
-            Integer colorFrom = visible ?
-                    getResources().getColor(R.color.background_dialer_light) :
-                    getResources().getColor(R.color.nofavorite_background_color);
-            Integer colorTo = visible ?
-                    getResources().getColor(R.color.nofavorite_background_color) :
-                    getResources().getColor(R.color.background_dialer_light);
-            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(),
-                    colorFrom, colorTo);
-            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animator) {
-                    mParentView.setBackgroundColor((Integer)animator.getAnimatedValue());
-                }
-            });
-            colorAnimation.addListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animator) {
-                    if (!visible) {
-                        mEmptyView.setVisibility(View.GONE);
-                    }
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animator) {
-                    if (visible) {
-                        mEmptyView.setVisibility(View.VISIBLE);
-                    }
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animator) {}
-
-                @Override
-                public void onAnimationRepeat(Animator animator) {}
-            });
-
-            colorAnimation.start();
+            mEmptyView.setVisibility(newVisibility);
         }
     }
 
