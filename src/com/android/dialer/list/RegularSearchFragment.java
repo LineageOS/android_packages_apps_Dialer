@@ -15,7 +15,11 @@
  */
 package com.android.dialer.list;
 
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
 import com.android.contacts.common.list.ContactEntryListAdapter;
+import com.android.contacts.common.list.PinnedHeaderListView;
 import com.android.dialerbind.ObjectFactory;
 import com.android.dialer.service.CachedNumberLookupService;
 
@@ -36,6 +40,11 @@ public class RegularSearchFragment extends SearchFragment {
     }
 
     @Override
+    protected void onCreateView(LayoutInflater inflater, ViewGroup container) {
+        super.onCreateView(inflater, container);
+        ((PinnedHeaderListView) getListView()).setScrollToSectionOnHeaderTouch(true);
+    }
+
     protected ContactEntryListAdapter createListAdapter() {
         RegularSearchListAdapter adapter = new RegularSearchListAdapter(getActivity());
         adapter.setDisplayPhotos(true);
