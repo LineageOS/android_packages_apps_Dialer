@@ -20,15 +20,21 @@ import android.provider.CallLog;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
+import com.google.android.collect.Sets;
+
+import java.util.Set;
+
 /**
  *
  */
 public class PhoneNumberUtilsWrapper {
 
+    private static final Set<String> LEGACY_UNKNOWN_NUMBERS = Sets.newHashSet("-1", "-2", "-3");
+
     /** Returns true if it is possible to place a call to the given number. */
     public static boolean canPlaceCallsTo(CharSequence number, int presentation) {
         return presentation == CallLog.Calls.PRESENTATION_ALLOWED
-            && !TextUtils.isEmpty(number);
+            && !TextUtils.isEmpty(number) && !isLegacyUnknownNumbers(number);
     }
 
     /**
@@ -71,6 +77,13 @@ public class PhoneNumberUtilsWrapper {
         if (new PhoneNumberUtilsWrapper().isVoicemailNumber(number)) {
             return false;
         }
+        if (isLegacyUnknownNumbers(number.toString())) {
+            return false;
+        }
         return true;
+    }
+
+    public static boolean isLegacyUnknownNumbers(CharSequence number) {
+        return LEGACY_UNKNOWN_NUMBERS.contains(number.toString());
     }
 }

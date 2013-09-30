@@ -56,6 +56,9 @@ public class PhoneNumberHelper {
         if (new PhoneNumberUtilsWrapper().isVoicemailNumber(number)) {
             return mResources.getString(R.string.voicemail);
         }
+        if (PhoneNumberUtilsWrapper.isLegacyUnknownNumbers(number)) {
+            return mResources.getString(R.string.unknown);
+        }
         if (TextUtils.isEmpty(formattedNumber)) {
             return number;
         } else {
