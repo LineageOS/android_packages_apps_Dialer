@@ -87,15 +87,20 @@
 
         <ImageView
             android:id="@+id/contact_favorite_star"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@id/contact_tile_image"
-            android:layout_alignEnd="@id/contact_tile_image"
-            android:layout_alignBottom="@id/contact_tile_image"
-            android:layout_marginRight="7dip"
-            android:layout_marginEnd="7dip"
-            android:layout_marginBottom="7dip"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_height="@dimen/contact_tile_info_button_height_and_width"
+            android:layout_width="@dimen/contact_tile_info_button_height_and_width"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/ic_star_marked_as_fav"
+            android:scaleType="center"
             android:visibility="gone" />
 
 
