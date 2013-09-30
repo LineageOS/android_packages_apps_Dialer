@@ -640,7 +640,13 @@ public class CallLogAdapter extends GroupingListAdapter
         if (!mIsCallLog) {
             final int numMissed = getNumMissedCalls(callType);
             final ViewStub stub = (ViewStub) view.findViewById(R.id.link_stub);
+
             if (shouldShowBadge(numMissed, info, details)) {
+                // Do not process if the data has not changed (optimization since bind view is
+                // called multiple times due to contact lookup).
+                if (numMissed == mNumMissedCallsShown) {
+                    return;
+                }
 
                 // stub will be null if it was already inflated.
                 if (stub != null) {
@@ -718,11 +724,6 @@ public class CallLogAdapter extends GroupingListAdapter
      */
     protected boolean shouldShowBadge(int numMissedCalls, ContactInfo info,
             PhoneCallDetails details) {
-        // Do not process if the data has not changed (optimization since bind view is called
-        // multiple times due to contact lookup).
-        if (numMissedCalls == mNumMissedCallsShown) {
-            return false;
-        }
         return numMissedCalls > 0;
     }
 
