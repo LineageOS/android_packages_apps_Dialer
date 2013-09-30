@@ -246,6 +246,7 @@ public class InCallPresenter implements CallList.Listener {
      */
     @Override
     public void onDisconnect(Call call) {
+        mInCallActivity.hideDialpadForDisconnect();
         maybeShowErrorDialogOnDisconnect(call);
 
         // We need to do the run the same code as onCallListChange.
