@@ -772,7 +772,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                     setVisibility(View.VISIBLE);
                 }
             }
-            setPressed(false);
         }
 
         private void addTileFromEntry(ContactEntry entry, int childIndex, boolean isLastRow) {

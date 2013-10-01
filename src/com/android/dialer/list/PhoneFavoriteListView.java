@@ -306,14 +306,6 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
         }
     }
 
-    private FrameLayout.LayoutParams getDragShadowLayoutParams() {
-        final FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-                mDragShadowWidth, mDragShadowHeight);
-        lp.leftMargin = mDragShadowLeft;
-        lp.topMargin = mDragShadowTop;
-        return lp;
-    }
-
     /**
      * @return True if the drag is started.
      */
@@ -361,7 +353,8 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
             mDragShadowOverlay.setVisibility(VISIBLE);
             mDragShadowOverlay.setAlpha(DRAG_SHADOW_ALPHA);
 
-            mDragShadowOverlay.setLayoutParams(getDragShadowLayoutParams());
+            mDragShadowOverlay.setX(mDragShadowLeft);
+            mDragShadowOverlay.setY(mDragShadowTop);
 
             // x and y passed in are the coordinates of where the user has touched down, calculate
             // the offset to the top left coordinate of the dragged child.  This will be used for
