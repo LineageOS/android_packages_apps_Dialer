@@ -48,7 +48,7 @@ import java.util.ArrayList;
 /**
  * This is a copy of com.android.internal.widget.multiwaveview.GlowPadView with minor changes
  * to remove dependencies on private api's.
- * 
+ *
  * Incoporated the scaling functionality.
  *
  * A re-usable widget containing a center, outer ring and wave animation.
@@ -1114,9 +1114,9 @@ public class GlowPadView extends View {
         final float placementWidth = getRingWidth();
         final float placementHeight = getRingHeight();
         float newWaveCenterX = mHorizontalInset
-                + Math.max(width, mMaxTargetWidth + placementWidth) / 2;
+                + (mMaxTargetWidth + placementWidth) / 2;
         float newWaveCenterY = mVerticalInset
-                + Math.max(height, + mMaxTargetHeight + placementHeight) / 2;
+                + (mMaxTargetHeight + placementHeight) / 2;
 
         if (mInitialLayout) {
             stopAndHideWaveAnimation();

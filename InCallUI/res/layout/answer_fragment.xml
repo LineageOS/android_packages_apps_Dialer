@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:focusable="true"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:background="@android:color/black"
         android:visibility="gone"
 
