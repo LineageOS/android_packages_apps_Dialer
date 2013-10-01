@@ -391,7 +391,8 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
 
         // Draw the drag shadow at its last known location if the drag shadow exists.
         if (mDragShadowOverlay != null) {
-            mDragShadowOverlay.setLayoutParams(getDragShadowLayoutParams());
+            mDragShadowOverlay.setX(mDragShadowLeft);
+            mDragShadowOverlay.setY(mDragShadowTop);
         }
 
         final ContactTileRow tile = (ContactTileRow) child;

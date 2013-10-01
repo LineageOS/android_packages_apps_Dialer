@@ -74,7 +74,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         PhoneFavoritesTileAdapter.OnDataSetChangedForAnimationListener {
 
     private static final String TAG = PhoneFavoriteFragment.class.getSimpleName();
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private int mAnimationDuration;
 
