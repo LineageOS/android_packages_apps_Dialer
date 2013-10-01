@@ -399,6 +399,9 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     public void onPause() {
         // If there are any pending contact entries that are to be removed, remove them
         mContactTileAdapter.removePendingContactEntry();
+        // Wipe the cache to refresh the call shortcut item. This is not that expensive because
+        // it only contains one item.
+        mCallLogAdapter.invalidateCache();
         super.onPause();
     }
 
