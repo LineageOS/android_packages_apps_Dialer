@@ -43,18 +43,19 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/call_banner_height"
         android:paddingStart="@dimen/call_banner_side_padding"
-        android:paddingEnd="@dimen/call_banner_side_padding"
+        android:paddingEnd="@dimen/secondary_call_banner_right_padding"
         android:paddingTop="@dimen/call_banner_top_bottom_padding"
         android:paddingBottom="@dimen/call_banner_top_bottom_padding"
         android:background="@color/incall_call_banner_background">
         <!-- Name (or the phone number, if we don't have a name to display). -->
         <TextView android:id="@+id/secondaryCallName"
             style="@style/SecondaryCallInfoSecondaryCallName"
-            android:layout_gravity="top|start"
+            android:layout_gravity="bottom|start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/incall_call_banner_text_color"
+            android:ellipsize="marquee"
             android:singleLine="true"/>
     </FrameLayout>
 
@@ -63,7 +64,7 @@
         style="@style/SecondaryCallInfoSecondaryCallStatus"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/call_banner_height"
-        android:gravity="top|end"
+        android:gravity="bottom|end"
         android:layout_gravity="end"
         android:paddingStart="@dimen/call_banner_side_padding"
         android:paddingEnd="@dimen/call_banner_side_padding"
