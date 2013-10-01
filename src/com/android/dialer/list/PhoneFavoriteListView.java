@@ -80,8 +80,6 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
 
     private int mDragShadowLeft;
     private int mDragShadowTop;
-    private int mDragShadowWidth;
-    private int mDragShadowHeight;
 
     private final float DRAG_SHADOW_ALPHA = 0.7f;
 
@@ -268,9 +266,8 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
                 ensureScrollHandler();
                 mScrollHandler.removeCallbacks(mDragScroller);
                 mIsDragScrollerRunning = false;
-                // Either it's been a successful drop or it's ended with out drop.
-                if (action == DragEvent.ACTION_DROP ||
-                        (action == DragEvent.ACTION_DRAG_ENDED && !event.getResult())) {
+                // Either a successful drop or it's ended with out drop.
+                if (action == DragEvent.ACTION_DROP || action == DragEvent.ACTION_DRAG_ENDED) {
                     handleDragFinished(eX, eY);
                 }
                 break;
@@ -346,9 +343,6 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
                 mDragShadowTop = tileView.getTop() + tileView.getParentRow().getTop();
             }
 
-            mDragShadowWidth = tileView.getWidth();
-            mDragShadowHeight = tileView.getHeight();
-
             mDragShadowOverlay.setImageBitmap(mDragShadowBitmap);
             mDragShadowOverlay.setVisibility(VISIBLE);
             mDragShadowOverlay.setAlpha(DRAG_SHADOW_ALPHA);
@@ -372,20 +366,19 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
     }
 
     private void handleDragHovered(int x, int y) {
-        final View child = getViewAtPosition(x, y);
-        if (!(child instanceof ContactTileRow)) {
-            // Bail early.
-            return;
-        }
-
         // Update the drag shadow location.
         mDragShadowLeft = x - mTouchOffsetToChildLeft;
         mDragShadowTop = y - mTouchOffsetToChildTop;
-
         // Draw the drag shadow at its last known location if the drag shadow exists.
         if (mDragShadowOverlay != null) {
             mDragShadowOverlay.setX(mDragShadowLeft);
             mDragShadowOverlay.setY(mDragShadowTop);
+        }
+
+        final View child = getViewAtPosition(x, y);
+        if (!(child instanceof ContactTileRow)) {
+            // Bail early.
+            return;
         }
 
         final ContactTileRow tile = (ContactTileRow) child;
