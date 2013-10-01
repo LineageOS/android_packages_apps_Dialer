@@ -71,7 +71,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             mCallLogQueryHandler.markNewVoicemailsAsOld();
             CallLogNotificationsHelper.removeMissedCallNotifications();
             CallLogNotificationsHelper.updateVoicemailNotifications(mContext);
-            mFragment.dismissShortcut();
+            mFragment.dismissShortcut(((View) view.getParent()).getHeight());
         }
 
         @Override
@@ -217,6 +217,10 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
                 final View view = mCallLogAdapter.getView(position, convertView == null ?
                         null : wrapper.getChildAt(0), parent);
                 wrapper.removeAllViews();
+                final View callLogItem = view.findViewById(R.id.call_log_list_item);
+                // Reset the internal call log item view if it is being recycled
+                callLogItem.setTranslationX(0);
+                callLogItem.setAlpha(1);
                 wrapper.addView(view);
                 return wrapper;
             }
@@ -319,7 +323,6 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             if (v != null && mOnItemSwipeListener != null) {
                 mOnItemSwipeListener.onSwipe(v);
             }
-            removeAllViews();
         }
 
         @Override

@@ -73,6 +73,15 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         CallLogQueryHandler.Listener, CallLogAdapter.CallFetcher,
         PhoneFavoritesTileAdapter.OnDataSetChangedForAnimationListener {
 
+    /**
+     * By default, the animation code assumes that all items in a list view are of the same height
+     * when animating new list items into view (e.g. from the bottom of the screen into view).
+     * This can cause incorrect translation offsets when a item that is larger or smaller than
+     * other list item is removed from the list. This key is used to provide the actual height
+     * of the removed object so that the actual translation appears correct to the user.
+     */
+    private static final long KEY_REMOVED_ITEM_HEIGHT = Long.MAX_VALUE;
+
     private static final String TAG = PhoneFavoriteFragment.class.getSimpleName();
     private static final boolean DEBUG = false;
 
@@ -378,6 +387,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
     @Override
     public void onCallsFetched(Cursor cursor) {
+        animateListView();
         mCallLogAdapter.setLoading(false);
 
         // Save the date of the most recent call log item
@@ -386,7 +396,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         }
 
         mCallLogAdapter.changeCursor(cursor);
-
         mAdapter.notifyDataSetChanged();
     }
 
@@ -409,7 +418,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      * Saves the current view offsets into memory
      */
     @SuppressWarnings("unchecked")
-    private void saveOffsets(long... idsInPlace) {
+    private void saveOffsets(int removedItemHeight) {
         final int firstVisiblePosition = mListView.getFirstVisiblePosition();
         if (DEBUG) {
             Log.d(TAG, "Child count : " + mListView.getChildCount());
@@ -422,7 +431,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP) {
                 // This is a tiled row, so save horizontal offsets instead
                 saveHorizontalOffsets((ContactTileRow) child, (ArrayList<ContactEntry>)
-                        mAdapter.getItem(position), idsInPlace);
+                        mAdapter.getItem(position));
             }
             if (DEBUG) {
                 Log.d(TAG, "Saving itemId: " + itemId + " for listview child " + i + " Top: "
@@ -430,10 +439,11 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             }
             mItemIdTopMap.put(itemId, child.getTop());
         }
+
+        mItemIdTopMap.put(KEY_REMOVED_ITEM_HEIGHT, removedItemHeight);
     }
 
-    private void saveHorizontalOffsets(ContactTileRow row, ArrayList<ContactEntry> list,
-            long... idsInPlace) {
+    private void saveHorizontalOffsets(ContactTileRow row, ArrayList<ContactEntry> list) {
         for (int i = 0; i < list.size(); i++) {
             final View child = row.getChildAt(i);
             final ContactEntry entry = list.get(i);
@@ -503,6 +513,9 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             // (dragging, swiping etc) that requires an animation.
             return;
         }
+
+        final int removedItemHeight = mItemIdTopMap.get(KEY_REMOVED_ITEM_HEIGHT);
+
         final ViewTreeObserver observer = mListView.getViewTreeObserver();
         observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @SuppressWarnings("unchecked")
@@ -540,8 +553,14 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                             // Animate new views along with the others. The catch is that they did
                             // not exist in the start state, so we must calculate their starting
                             // position based on neighboring views.
-                            int childHeight = child.getHeight() + mListView.getDividerHeight();
-                            startTop = top + (i > 0 ? childHeight : -childHeight);
+
+                            final int itemHeight;
+                            if (removedItemHeight == 0) {
+                                itemHeight = child.getHeight() + mListView.getDividerHeight();
+                            } else {
+                                itemHeight = removedItemHeight;
+                            }
+                            startTop = top + (i > 0 ? itemHeight : -itemHeight);
                             delta = startTop - top;
                         } else {
                             // In case the first non-square row is pushed down
@@ -591,10 +610,11 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
     @Override
     public void cacheOffsetsForDatasetChange() {
-        saveOffsets();
+        saveOffsets(0);
     }
 
-    public void dismissShortcut() {
+    public void dismissShortcut(int height) {
+        saveOffsets(height);
         mLastCallShortcutDate = mCurrentCallShortcutDate;
         final SharedPreferences prefs = getActivity().getSharedPreferences(
                 DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
