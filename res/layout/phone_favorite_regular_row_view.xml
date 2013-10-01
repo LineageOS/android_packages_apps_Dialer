@@ -24,8 +24,7 @@
         android:id="@+id/contact_favorite_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusable="true"
-        android:background="?android:attr/selectableItemBackground" >
+        android:focusable="true">
 
         <com.android.contacts.common.widget.LayoutSuppressingQuickContactBadge
             android:id="@+id/contact_tile_quick"
