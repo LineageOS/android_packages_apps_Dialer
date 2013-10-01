@@ -103,6 +103,10 @@ public class CallButtonFragment
             }
         });
 
+        // make the hit target smaller for the end button so that is creates a deadzone
+        // along the inside perimeter of the button.
+        mEndCallButton.setOnTouchListener(new SmallerHitTargetTouchListener());
+
         mMuteButton = (ToggleButton) parent.findViewById(R.id.muteButton);
         mMuteButton.setOnClickListener(new OnClickListener() {
             @Override
