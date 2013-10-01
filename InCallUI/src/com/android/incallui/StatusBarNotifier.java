@@ -329,15 +329,24 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      * Gets a large icon from the contact info object to display in the notification.
      */
     private Bitmap getLargeIconToDisplay(ContactCacheEntry contactInfo, boolean isConference) {
+        Bitmap largeIcon = null;
         if (isConference) {
-            return BitmapFactory.decodeResource(mContext.getResources(),
+            largeIcon = BitmapFactory.decodeResource(mContext.getResources(),
                     R.drawable.picture_conference);
         }
         if (contactInfo.photo != null && (contactInfo.photo instanceof BitmapDrawable)) {
-            return ((BitmapDrawable) contactInfo.photo).getBitmap();
+            largeIcon = ((BitmapDrawable) contactInfo.photo).getBitmap();
         }
 
-        return null;
+        if (largeIcon != null) {
+            final int height = (int) mContext.getResources().getDimension(
+                    android.R.dimen.notification_large_icon_height);
+            final int width = (int) mContext.getResources().getDimension(
+                    android.R.dimen.notification_large_icon_width);
+            largeIcon = Bitmap.createScaledBitmap(largeIcon, width, height, false);
+        }
+
+        return largeIcon;
     }
 
     /**
