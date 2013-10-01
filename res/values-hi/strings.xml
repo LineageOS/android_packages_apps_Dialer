@@ -115,7 +115,7 @@
     <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g> को पाठ संदेश भेजें"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"नहीं सुना गया ध्वनिमेल"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"बोलकर खोजें शुरु करें"</string>
-    <string name="call_log_empty_gecode" msgid="5588904744812100846">"-"</string>
+    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> पर कॉल करें"</string>
     <string name="unknown" msgid="740067747858270469">"अज्ञात"</string>
     <string name="voicemail" msgid="3851469869202611441">"ध्वनिमेल"</string>
@@ -157,7 +157,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"पूर्ववत करें"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> पर कॉल करें"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"संपर्कों में जोड़ें"</string>
-    <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> नए छूटे हुए कॉल"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"आपके द्वारा अक्सर कॉल किए जाने वाले पसंदीदा और संपर्क\nयहां दिखाए जाएंगे.\nतो, कॉल करना प्रारंभ करें."</string>
+    <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>  छूटे हुए नए कॉल"</string>
+    <string name="no_favorites" msgid="5212485868783382971">"पसंदीदा &amp; आपके द्वारा अक्सर कॉल किए जाने वाले पसंदीदा और संपर्क\nयहां दिखाए जाएंगे.\nतो, कॉल करना प्रारंभ करें."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"सभी नंबर देखने के लिए चित्र को टैप करें या पुनः क्रमित करने के लिए दबाए रखें"</string>
 </resources>
