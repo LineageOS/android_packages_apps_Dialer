@@ -807,6 +807,9 @@ public class DialpadFragment extends Fragment
     }
 
     private void keyPressed(int keyCode) {
+        if (getView().getTranslationY() != 0) {
+            return;
+        }
         switch (keyCode) {
             case KeyEvent.KEYCODE_1:
                 playTone(ToneGenerator.TONE_DTMF_1, TONE_LENGTH_INFINITE);
