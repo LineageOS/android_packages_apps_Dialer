@@ -20,6 +20,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.ClipData;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -68,6 +69,10 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     /** Custom gesture detector.*/
     protected GestureDetector mGestureDetector;
 
+    // Dummy clip data object that is attached to drag shadows so that text views
+    // don't crash with an NPE if the drag shadow is released in their bounds
+    private static final ClipData EMPTY_CLIP_DATA = ClipData.newPlainText("", "");
+
     public PhoneFavoriteTileView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mAnimationDuration = context.getResources().getInteger(R.integer.fade_duration);
@@ -99,15 +104,15 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
                 final PhoneFavoriteTileView view = (PhoneFavoriteTileView) v;
                 // NOTE The drag shadow is handled in the ListView.
                 if (view instanceof PhoneFavoriteRegularRowView) {
-                    final ContactTileRow parent = (ContactTileRow) view.getParentRow();
+                    final ContactTileRow parent = view.getParentRow();
                     // If the view is regular row, start drag the row view.
                     // Drag is not available for the item exceeds the PIN_LIMIT.
                     if (parent.getRegularRowItemIndex() < PhoneFavoritesTileAdapter.PIN_LIMIT) {
-                        parent.startDrag(null, new View.DragShadowBuilder(), null, 0);
+                        parent.startDrag(EMPTY_CLIP_DATA, new View.DragShadowBuilder(), null, 0);
                     }
                 } else {
                     // If the view is a tile view, start drag the tile.
-                    view.startDrag(null, new View.DragShadowBuilder(), null, 0);
+                    view.startDrag(EMPTY_CLIP_DATA, new View.DragShadowBuilder(), null, 0);
                 }
                 return true;
             }
