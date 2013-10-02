@@ -147,6 +147,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
+    private boolean mClearSearchOnPause;
 
     /**
      * True if the dialpad is only temporarily showing due to being in call
@@ -192,14 +193,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     // CallLog screen (search UI will be automatically exited).
                     PhoneNumberInteraction.startInteractionForPhoneCall(
                         DialtactsActivity.this, dataUri, getCallOrigin());
-                    hideDialpadAndSearchUi();
+                    mClearSearchOnPause = true;
                 }
 
                 @Override
                 public void onCallNumberDirectly(String phoneNumber) {
                     Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin());
                     startActivity(intent);
-                    hideDialpadAndSearchUi();
+                    mClearSearchOnPause = true;
                 }
 
                 @Override
@@ -326,6 +327,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mFirstLaunch = false;
         mDialerDatabaseHelper.startSmartDialUpdateThread();
+    }
+
+    @Override
+    protected void onPause() {
+        if (mClearSearchOnPause) {
+            hideDialpadAndSearchUi();
+            mClearSearchOnPause = false;
+        }
+        super.onPause();
     }
 
     @Override
