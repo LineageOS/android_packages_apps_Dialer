@@ -96,7 +96,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
         setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                setPressed(false);
                 final PhoneFavoriteTileView view = (PhoneFavoriteTileView) v;
                 // NOTE The drag shadow is handled in the ListView.
                 if (view instanceof PhoneFavoriteRegularRowView) {
