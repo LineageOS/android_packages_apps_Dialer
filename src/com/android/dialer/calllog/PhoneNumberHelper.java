@@ -33,14 +33,7 @@ public class PhoneNumberHelper {
         mResources = resources;
     }
 
-    /**
-     * Returns the string to display for the given phone number.
-     *
-     * @param number the number to display
-     * @param formattedNumber the formatted number if available, may be null
-     */
-    public CharSequence getDisplayNumber(CharSequence number,
-            int presentation, CharSequence formattedNumber) {
+    /* package */ CharSequence getDisplayName(CharSequence number, int presentation) {
         if (presentation == Calls.PRESENTATION_UNKNOWN) {
             return mResources.getString(R.string.unknown);
         }
@@ -50,15 +43,34 @@ public class PhoneNumberHelper {
         if (presentation == Calls.PRESENTATION_PAYPHONE) {
             return mResources.getString(R.string.payphone);
         }
-        if (TextUtils.isEmpty(number)) {
-            return "";
-        }
         if (new PhoneNumberUtilsWrapper().isVoicemailNumber(number)) {
             return mResources.getString(R.string.voicemail);
         }
         if (PhoneNumberUtilsWrapper.isLegacyUnknownNumbers(number)) {
             return mResources.getString(R.string.unknown);
         }
+        return "";
+    }
+
+    /**
+     * Returns the string to display for the given phone number.
+     *
+     * @param number the number to display
+     * @param formattedNumber the formatted number if available, may be null
+     */
+    public CharSequence getDisplayNumber(CharSequence number,
+            int presentation, CharSequence formattedNumber) {
+
+        final CharSequence displayName = getDisplayName(number, presentation);
+
+        if (!TextUtils.isEmpty(displayName)) {
+            return displayName;
+        }
+
+        if (TextUtils.isEmpty(number)) {
+            return "";
+        }
+
         if (TextUtils.isEmpty(formattedNumber)) {
             return number;
         } else {
