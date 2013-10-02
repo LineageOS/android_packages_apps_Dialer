@@ -64,6 +64,8 @@ public class ConferenceManagerPresenter
                     Log.v(this, "Number of existing calls is " +
                             String.valueOf(call.getChildCallIds().size()));
                     update(callList);
+                } else {
+                    getUi().setVisible(false);
                 }
             } else {
                 getUi().setVisible(false);
