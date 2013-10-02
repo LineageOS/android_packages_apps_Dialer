@@ -43,6 +43,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
@@ -195,6 +197,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
     private View mShowAllContactsButton;
     private View mShowAllContactsInEmptyViewButton;
+    private View mContactTileFrame;
 
     private final HashMap<Long, Integer> mItemIdTopMap = new HashMap<Long, Integer>();
     private final HashMap<Long, Integer> mItemIdLeftMap = new HashMap<Long, Integer>();
@@ -301,6 +304,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             }
         });
 
+        mContactTileFrame = mParentView.findViewById(R.id.contact_tile_frame);
+
         mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), this, mContactTileAdapter,
                 mCallLogAdapter, mShowAllContactsButton);
 
@@ -323,6 +328,10 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         final int newVisibility = visible ? View.VISIBLE : View.GONE;
 
         if (previousVisibility != newVisibility) {
+            final RelativeLayout.LayoutParams params = (LayoutParams) mContactTileFrame
+                    .getLayoutParams();
+            params.height = visible ? LayoutParams.WRAP_CONTENT : LayoutParams.MATCH_PARENT;
+            mContactTileFrame.setLayoutParams(params);
             mEmptyView.setVisibility(newVisibility);
         }
     }
