@@ -221,14 +221,14 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
-        final boolean isVisible = state.isConnectingOrConnected() &&
+        final boolean isEnabled = state.isConnectingOrConnected() &&
                 !state.isIncoming() && call != null;
 
-        ui.setVisible(isVisible);
+        ui.setEnabled(isEnabled);
 
         Log.d(this, "Updating call UI for call: ", call);
 
-        if (isVisible) {
+        if (isEnabled) {
             Log.v(this, "Show hold ", call.can(Capabilities.SUPPORT_HOLD));
             Log.v(this, "Enable hold", call.can(Capabilities.HOLD));
             Log.v(this, "Show merge ", call.can(Capabilities.MERGE_CALLS));
@@ -335,7 +335,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public interface CallButtonUi extends Ui {
-        void setVisible(boolean on);
+        void setEnabled(boolean on);
         void setMute(boolean on);
         void enableMute(boolean enabled);
         void setHold(boolean on);

@@ -189,12 +189,23 @@ public class CallButtonFragment
     }
 
     @Override
-    public void setVisible(boolean on) {
-        if (on) {
-            getView().setVisibility(View.VISIBLE);
-        } else {
-            getView().setVisibility(View.INVISIBLE);
+    public void setEnabled(boolean isEnabled) {
+        View view = getView();
+        if (view.getVisibility() != View.VISIBLE) {
+            view.setVisibility(View.VISIBLE);
         }
+
+        // The main end-call button spanning across the screen.
+        mEndCallButton.setEnabled(isEnabled);
+
+        // The smaller buttons laid out horizontally just below the end-call button.
+        mMuteButton.setEnabled(isEnabled);
+        mAudioButton.setEnabled(isEnabled);
+        mHoldButton.setEnabled(isEnabled);
+        mShowDialpadButton.setEnabled(isEnabled);
+        mMergeButton.setEnabled(isEnabled);
+        mAddCallButton.setEnabled(isEnabled);
+        mSwapButton.setEnabled(isEnabled);
     }
 
     @Override
