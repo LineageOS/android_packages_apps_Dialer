@@ -118,12 +118,12 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
             // Check if we already know the name associated with this number.
             String name = names.get(newCall.number);
             if (name == null) {
-                // Look it up in the database.
-                name = mNameLookupQuery.query(newCall.number);
+                name = mPhoneNumberHelper.getDisplayName(newCall.number,
+                        newCall.numberPresentation).toString();
                 // If we cannot lookup the contact, use the number instead.
-                if (name == null) {
-                    name = mPhoneNumberHelper.getDisplayNumber(newCall.number,
-                            newCall.numberPresentation, "").toString();
+                if (TextUtils.isEmpty(name)) {
+                    // Look it up in the database.
+                    name = mNameLookupQuery.query(newCall.number);
                     if (TextUtils.isEmpty(name)) {
                         name = newCall.number;
                     }
