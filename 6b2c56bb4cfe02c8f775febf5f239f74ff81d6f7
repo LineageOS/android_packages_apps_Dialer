@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da37b569_a0f68fd5",
+        "filename": "res/layout/dialpad_fragment.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-10-02T06:40:06Z",
+      "side": 1,
+      "message": "The trailing whitespace and indention should be fixed.",
+      "revId": "6b2c56bb4cfe02c8f775febf5f239f74ff81d6f7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da37b569_80e7cb11",
+        "filename": "src/com/android/dialer/dialpad/SmartDialController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-10-02T06:40:06Z",
+      "side": 1,
+      "message": "if ((i \u003d\u003d 3 || i \u003d\u003d 4) \u0026\u0026 ...",
+      "revId": "6b2c56bb4cfe02c8f775febf5f239f74ff81d6f7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da37b569_60ee47ee",
+        "filename": "src/com/android/dialer/dialpad/SmartDialController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2013-10-02T06:40:06Z",
+      "side": 1,
+      "message": "As above + wrap to 100 chars.",
+      "revId": "6b2c56bb4cfe02c8f775febf5f239f74ff81d6f7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
