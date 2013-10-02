@@ -42,5 +42,5 @@
     <drawable name="end_call_pressed_state">#ff4e4e</drawable>
 
     <!-- Used when the End Call button is disabled -->
-    <drawable name="end_call_disabled_state">#00000000</drawable>
+    <drawable name="end_call_disabled_state">#303030</drawable>
 </resources>
