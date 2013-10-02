@@ -261,6 +261,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     if (entry.name != null) {
                         Log.d(TAG, "Contact found: " + entry);
                     }
+                    if (entry.personUri != null) {
+                        CallerInfoUtils.sendViewNotification(mContext, entry.personUri);
+                    }
                 }
 
                 @Override
