@@ -67,5 +67,6 @@ public interface PhoneNumberService {
         public String getPhoneLabel();
         public String getNormalizedNumber();
         public String getImageUrl();
+        public boolean isBusiness();
     }
 }
