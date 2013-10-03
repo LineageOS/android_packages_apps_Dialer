@@ -86,7 +86,7 @@
     <string name="sum_cw_enabled" msgid="8083061901633671397">"Durante una llamada, notificarme sobre las llamadas entrantes"</string>
     <string name="sum_cw_disabled" msgid="3648693907300104575">"Durante una llamada, notificarme sobre las llamadas entrantes"</string>
     <string name="call_forwarding_settings" msgid="3378927671091537173">"Configuración de reenvío de llamadas"</string>
-    <string name="labelCF" msgid="2574386948026924737">"Reenvío de llamada"</string>
+    <string name="labelCF" msgid="2574386948026924737">"Desvío de llamadas"</string>
     <string name="labelCFU" msgid="8147177368148660600">"Reenviar siempre"</string>
     <string name="messageCFU" msgid="3560082430662923687">"Usar siempre este número"</string>
     <string name="sum_cfu_enabled_indicator" msgid="4014187342724130197">"Reenviar todas las llamadas"</string>
@@ -369,7 +369,7 @@
     <string name="pin_changed" msgid="4365538014588501049">"El PIN de la tarjeta SIM se modificó correctamente."</string>
     <string name="puk_requested" msgid="3898394204193202803">"Contraseña incorrecta. La tarjeta SIM está bloqueada. Se solicitó PUK2."</string>
     <string name="enter_pin2_text" msgid="8339444124477720345">"PIN2"</string>
-    <string name="oldPin2Label" msgid="8559146795026261502">"Reenviar cuando está ocupado"</string>
+    <string name="oldPin2Label" msgid="8559146795026261502">"PIN2 viejo"</string>
     <string name="newPin2Label" msgid="4573956902204349054">"PIN2 nuevo"</string>
     <string name="confirmPin2Label" msgid="8100319484454787708">"Confirmar PIN2 nuevo"</string>
     <string name="badPuk2" msgid="4851734468010000418">"El PUK2 que ingresaste es incorrecto. Vuelve a intentarlo."</string>
