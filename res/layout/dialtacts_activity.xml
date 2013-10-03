@@ -31,43 +31,49 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="23dp"
             android:id="@+id/search_view_container"
-            android:background="@color/searchbox_background_color"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <EditText
-                android:id="@+id/search_view"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="1"
-                android:textSize="@dimen/search_text_size"
-                android:inputType="textFilter"/>
-            <ImageView
-                android:id="@+id/search_close_button"
-                android:layout_height="40dp"
-                android:layout_width="40dp"
-                android:padding="6dp"
-                android:src="@drawable/ic_close_dk"
-                android:clickable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:visibility="gone" />
-            <ImageView
-                android:id="@+id/voice_search_button"
-                android:layout_height="40dp"
-                android:layout_width="40dp"
-                android:padding="6dp"
-                android:src="@drawable/ic_voice_search"
-                android:clickable="true"
-                android:contentDescription="@string/description_start_voice_search"
-                android:background="?android:attr/selectableItemBackground" />
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="23dp"
+                android:background="@color/searchbox_background_color"
+                android:gravity="center_vertical">
+                <EditText
+                    android:id="@+id/search_view"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/search_text_size"
+                    android:inputType="textFilter"/>
+                <ImageView
+                    android:id="@+id/search_close_button"
+                    android:layout_height="40dp"
+                    android:layout_width="40dp"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_close_dk"
+                    android:clickable="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:visibility="gone" />
+                <ImageView
+                    android:id="@+id/voice_search_button"
+                    android:layout_height="40dp"
+                    android:layout_width="40dp"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_voice_search"
+                    android:clickable="true"
+                    android:contentDescription="@string/description_start_voice_search"
+                    android:background="?android:attr/selectableItemBackground" />
+            </LinearLayout>
+            <View
+                android:id="@+id/searchbox_divider"
+                android:layout_height="1dp"
+                android:layout_width="match_parent"
+                android:background="@color/background_dialer_light" />
         </LinearLayout>
-        <View
-            android:id="@+id/searchbox_divider"
-            android:layout_height="1dp"
-            android:layout_width="match_parent"
-            android:background="@color/background_dialer_light" />
         <FrameLayout
             android:layout_height="0dp"
             android:layout_weight="1"
