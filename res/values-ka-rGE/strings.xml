@@ -115,8 +115,7 @@
     <string name="description_send_text_message" msgid="7803126439934046891">"ტესქტური შეტყობინების გაგზავნა <xliff:g id="NAME">%1$s</xliff:g>-ისთვის"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"მოსასმენი ხმოვანი ფოსტა"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"ხმოვანი ძიების დაწყება"</string>
-    <!-- no translation found for call_log_empty_gecode (2019639420045039861) -->
-    <skip />
+    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"დარეკვა <xliff:g id="NUMBER">%s</xliff:g>-ზე"</string>
     <string name="unknown" msgid="740067747858270469">"უცნობი"</string>
     <string name="voicemail" msgid="3851469869202611441">"ხმოვანი ფოსტა"</string>
