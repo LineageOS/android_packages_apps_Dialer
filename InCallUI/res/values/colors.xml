@@ -43,4 +43,10 @@
 
     <!-- Used when the End Call button is disabled -->
     <drawable name="end_call_disabled_state">#303030</drawable>
+
+    <!-- Dialpad background -->
+    <color name="dialpad_background">#000000</color>
+
+    <!-- Button background -->
+    <color name="button_background">#000000</color>
 </resources>
