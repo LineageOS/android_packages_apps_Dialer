@@ -505,7 +505,11 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
         int itemViewType = getItemViewType(position);
 
-        ContactTileRow contactTileRowView  = (ContactTileRow) convertView;
+        ContactTileRow contactTileRowView = null;
+
+        if (convertView instanceof  ContactTileRow) {
+            contactTileRowView  = (ContactTileRow) convertView;
+        }
 
         ArrayList<ContactEntry> contactList = getItem(position);
 

@@ -73,4 +73,8 @@
     <dimen name="favorites_row_end_padding">8dp</dimen>
     <dimen name="favorites_row_undo_text_side_padding">32dp</dimen>
     <dimen name="recent_call_log_item_padding">8dp</dimen>
+
+    <!-- Padding for the tooltip -->
+    <dimen name="dismiss_button_padding_start">20dip</dimen>
+    <dimen name="dismiss_button_padding_end">28dip</dimen>
 </resources>
