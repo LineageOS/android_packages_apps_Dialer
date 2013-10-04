@@ -93,6 +93,8 @@ import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
 import com.google.common.annotations.VisibleForTesting;
 
+import java.util.HashSet;
+
 /**
  * Fragment that displays a twelve-key phone dialpad.
  */
@@ -205,12 +207,9 @@ public class DialpadFragment extends Fragment
     private final Object mToneGeneratorLock = new Object();
     private View mDialpad;
     /**
-     * Remembers the number of dialpad buttons which are pressed at this moment.
-     * If it becomes 0, meaning no buttons are pressed, we'll call
-     * {@link ToneGenerator#stopTone()}; the method shouldn't be called unless the last key is
-     * released.
+     * Set of dialpad keys that are currently being pressed
      */
-    private int mDialpadPressCount;
+    private final HashSet<View> mPressedDialpadKeys = new HashSet<View>(12);
 
     private View mDialButtonContainer;
     private View mDialButton;
@@ -701,8 +700,8 @@ public class DialpadFragment extends Fragment
             }
         }
         stopWatch.lap("tg");
-        // Prevent unnecessary confusion. Reset the press count anyway.
-        mDialpadPressCount = 0;
+
+        mPressedDialpadKeys.clear();
 
         configureScreenFromIntent(getActivity());
 
@@ -758,8 +757,7 @@ public class DialpadFragment extends Fragment
 
         // Make sure we don't leave this activity with a tone still playing.
         stopTone();
-        // Just in case reset the counter too.
-        mDialpadPressCount = 0;
+        mPressedDialpadKeys.clear();
 
         synchronized (mToneGeneratorLock) {
             if (mToneGenerator != null) {
@@ -939,20 +937,11 @@ public class DialpadFragment extends Fragment
                     break;
                 }
             }
-            mDialpadPressCount++;
+            mPressedDialpadKeys.add(view);
         } else {
             view.jumpDrawablesToCurrentState();
-            mDialpadPressCount--;
-            if (mDialpadPressCount < 0) {
-                // e.g.
-                // - when the user action is detected as horizontal swipe, at which only
-                //   "up" event is thrown.
-                // - when the user long-press '0' button, at which dialpad will decrease this count
-                //   while it still gets press-up event here.
-                if (DEBUG) Log.d(TAG, "mKeyPressCount become negative.");
-                stopTone();
-                mDialpadPressCount = 0;
-            } else if (mDialpadPressCount == 0) {
+            mPressedDialpadKeys.remove(view);
+            if (mPressedDialpadKeys.isEmpty()) {
                 stopTone();
             }
         }
@@ -1040,12 +1029,9 @@ public class DialpadFragment extends Fragment
                 removePreviousDigitIfPossible();
                 keyPressed(KeyEvent.KEYCODE_PLUS);
 
-                // Stop tone immediately and decrease the press count, so that possible subsequent
-                // dial button presses won't honor the 0 click any more.
-                // Note: this *will* make mDialpadPressCount negative when the 0 key is released,
-                // which should be handled appropriately.
+                // Stop tone immediately
                 stopTone();
-                if (mDialpadPressCount > 0) mDialpadPressCount--;
+                mPressedDialpadKeys.remove(view);
 
                 return true;
             }
