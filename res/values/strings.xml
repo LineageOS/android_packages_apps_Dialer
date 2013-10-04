@@ -632,4 +632,7 @@
          [CHAR LIMIT=NONE]
     -->
     <string name="contact_tooltip">Tap image to see all numbers or press and hold to reorder</string>
+
+    <!-- Content description for dismiss button on badge. [CHAR LIMIT=NONE] -->
+    <string name="description_dismiss">Dismiss</string>
 </resources>
