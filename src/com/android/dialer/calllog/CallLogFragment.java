@@ -519,9 +519,12 @@ public class CallLogFragment extends ListFragment
             mAdapter.invalidateCache();
             startCallsQuery();
             startVoicemailStatusQuery();
-            updateOnEntry();
             mRefreshDataRequired = false;
+        } else {
+            // make adapter refresh, so call dates are updated
+            mAdapter.notifyDataSetChanged();
         }
+        updateOnEntry();
     }
 
     /** Removes the missed call notifications. */
