@@ -48,7 +48,7 @@
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Kipaza sauti cha kichwani"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Viskizi vya maskio pasiwaya"</string>
     <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
-    <string name="wait_prompt_str" msgid="7601815427707856238">"Tuma toni zinazofuata? \n"</string>
+    <string name="wait_prompt_str" msgid="7601815427707856238">"Ungependa kutuma toni zifuatazo? \n"</string>
     <string name="pause_prompt_str" msgid="1789964702154314806">"Inatuma toni\n"</string>
     <string name="send_button" msgid="4106860097497818751">"Tuma"</string>
     <string name="pause_prompt_yes" msgid="3564467212025151797">"Ndiyo"</string>
