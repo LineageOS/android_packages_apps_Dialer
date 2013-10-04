@@ -66,6 +66,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/button_cluster_side_padding"
             android:paddingEnd="@dimen/button_cluster_side_padding"
+            android:background="@color/button_background"
             >
 
         <!-- This row has either 4 or 5 buttons, depending on
