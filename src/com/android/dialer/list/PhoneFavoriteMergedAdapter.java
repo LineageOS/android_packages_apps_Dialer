@@ -49,11 +49,14 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     private static final String TAG = PhoneFavoriteMergedAdapter.class.getSimpleName();
 
+    private static final int TILE_INTERACTION_TEASER_VIEW_POSITION = 2;
+    private static final int TILE_INTERACTION_TEASER_VIEW_ID = -2;
     private static final int ALL_CONTACTS_BUTTON_ITEM_ID = -1;
     private final PhoneFavoritesTileAdapter mContactTileAdapter;
     private final CallLogAdapter mCallLogAdapter;
     private final View mShowAllContactsButton;
     private final PhoneFavoriteFragment mFragment;
+    private final TileInteractionTeaserView mTileInteractionTeaserView;
 
     private final int mCallLogPadding;
 
@@ -100,7 +103,8 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             PhoneFavoriteFragment fragment,
             PhoneFavoritesTileAdapter contactTileAdapter,
             CallLogAdapter callLogAdapter,
-            View showAllContactsButton) {
+            View showAllContactsButton,
+            TileInteractionTeaserView tileInteractionTeaserView) {
         final Resources resources = context.getResources();
         mContext = context;
         mFragment = fragment;
@@ -111,6 +115,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         mCallLogAdapter.registerDataSetObserver(mObserver);
         mContactTileAdapter.registerDataSetObserver(mObserver);
         mShowAllContactsButton = showAllContactsButton;
+        mTileInteractionTeaserView = tileInteractionTeaserView;
         mCallLogQueryHandler = new CallLogQueryHandler(mContext.getContentResolver(),
                 mCallLogQueryHandlerListener);
     }
@@ -118,7 +123,8 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         if (mContactTileAdapter.getCount() > 0) {
-            return mContactTileAdapter.getCount() + mCallLogAdapter.getCount() + 1;
+            return mContactTileAdapter.getCount() + mCallLogAdapter.getCount() + 1 +
+                    getTeaserViewCount();
         } else {
             return mCallLogAdapter.getCount();
         }
@@ -132,9 +138,10 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             if (position < callLogAdapterCount) {
                 return mCallLogAdapter.getItem(position);
             }
-            // Set position to the position of the actual favorite contact in the favorites adapter
-            position = getAdjustedFavoritePosition(position, callLogAdapterCount);
         }
+        // Set position to the position of the actual favorite contact in the favorites adapter
+        position = getAdjustedFavoritePosition(position, callLogAdapterCount);
+
         return mContactTileAdapter.getItem(position);
     }
 
@@ -144,7 +151,8 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
      *
      * These are the ranges of IDs reserved for each item type.
      *
-     * -(N + 1) to -2: CallLogAdapterItems, where N is equal to the number of call log items
+     * -(N + 1) to -3: CallLogAdapterItems, where N is equal to the number of call log items
+     * -2: Teaser
      * -1: All contacts button
      * 0 to (N -1): Rows of tiled contacts, where N is equal to the max rows of tiled contacts
      * N to infinity: Rows of regular contacts. Their item id is calculated by N + contact_id,
@@ -155,9 +163,14 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         final int callLogAdapterCount = mCallLogAdapter.getCount();
         if (position < callLogAdapterCount) {
             // Call log items are not animated, so reusing their position for IDs is fine.
-            return ALL_CONTACTS_BUTTON_ITEM_ID - 1 - position;
-        } else if (position < (callLogAdapterCount + mContactTileAdapter.getCount())) {
-            return mContactTileAdapter.getItemId(position - callLogAdapterCount);
+            return ALL_CONTACTS_BUTTON_ITEM_ID - 2 - position;
+        } else if (position == TILE_INTERACTION_TEASER_VIEW_POSITION + callLogAdapterCount &&
+                mTileInteractionTeaserView.getShouldDisplayInList()){
+            return TILE_INTERACTION_TEASER_VIEW_ID;
+        } else if (position < (callLogAdapterCount + mContactTileAdapter.getCount() +
+                getTeaserViewCount())) {
+            return mContactTileAdapter.getItemId(
+                    getAdjustedFavoritePosition(position, callLogAdapterCount));
         } else {
             // All contacts button
             return ALL_CONTACTS_BUTTON_ITEM_ID;
@@ -171,7 +184,10 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return (mContactTileAdapter.getViewTypeCount() + mCallLogAdapter.getViewTypeCount() + 1);
+        return (mContactTileAdapter.getViewTypeCount() +            /* Favorite and frequent */
+                mCallLogAdapter.getViewTypeCount() +                /* Recent call log */
+                getTeaserViewCount() +                              /* Teaser */
+                1);                                                 /* Show all contacts button. */
     }
 
     @Override
@@ -182,6 +198,10 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             // View type of the call log adapter is the last view type of the contact tile adapter
             // + 1
             return mContactTileAdapter.getViewTypeCount();
+        } else if (position == TILE_INTERACTION_TEASER_VIEW_POSITION + callLogAdapterCount &&
+                mTileInteractionTeaserView.getShouldDisplayInList()) {
+            // View type of the teaser row is the last view type of the contact tile adapter + 3
+            return mContactTileAdapter.getViewTypeCount() + 2;
         } else if (position < getCount() - 1) {
             return mContactTileAdapter.getItemViewType(
                     getAdjustedFavoritePosition(position, callLogAdapterCount));
@@ -198,6 +218,12 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
         if ((position == getCount() - 1) && (mContactTileAdapter.getCount() > 0)) {
             return mShowAllContactsButton;
+        }
+
+        if (mTileInteractionTeaserView.getShouldDisplayInList())  {
+            if (position == TILE_INTERACTION_TEASER_VIEW_POSITION + callLogAdapterCount) {
+                return mTileInteractionTeaserView;
+            }
         }
 
         if (callLogAdapterCount > 0) {
@@ -224,10 +250,11 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
                 wrapper.addView(view);
                 return wrapper;
             }
-            // Set position to the position of the actual favorite contact in the
-            // favorites adapter
-            position = getAdjustedFavoritePosition(position, callLogAdapterCount);
         }
+
+        // Set position to the position of the actual favorite contact in the
+        // favorites adapter
+        position = getAdjustedFavoritePosition(position, callLogAdapterCount);
 
         // Favorites section
         final View view = mContactTileAdapter.getView(position, convertView, parent);
@@ -259,7 +286,17 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     }
 
     private int getAdjustedFavoritePosition(int position, int callLogAdapterCount) {
-        return position - callLogAdapterCount;
+        if (position - callLogAdapterCount > TILE_INTERACTION_TEASER_VIEW_POSITION &&
+                mTileInteractionTeaserView.getShouldDisplayInList()) {
+            return position - callLogAdapterCount - 1;
+        } else {
+            return position - callLogAdapterCount;
+        }
+    }
+
+    private int getTeaserViewCount() {
+        return (mContactTileAdapter.getCount() > TILE_INTERACTION_TEASER_VIEW_POSITION &&
+                mTileInteractionTeaserView.getShouldDisplayInList() ? 1 : 0);
     }
 
     /**
