@@ -581,7 +581,7 @@
     <string name="no_internet_available_title" msgid="3327109242858406165">"Ինտերնետ կապ չկա"</string>
     <string name="no_wifi_available_title" msgid="747881033089378758">"Wi-Fi կապ չկա"</string>
     <string name="no_internet_available" msgid="7877142631803238549">"Ինտերնետային զանգի կատարման համար նախ ստուգեք ձեր ինտերնետ կապը:"</string>
-    <string name="no_wifi_available" msgid="1225073547318465713">"Ինտերնետային զանգերի համար դուք պետք է միացված լինեք Wi-Fi ցանցին (օգտագործեք Անլար &amp; Ցանցային կարգավորումները):"</string>
+    <string name="no_wifi_available" msgid="1225073547318465713">"Ինտերնետային զանգերի համար դուք պետք է միացված լինեք Wi-Fi ցանցին (օգտագործեք Անլար կապ և Ցանցեր կարգավորումները):"</string>
     <string name="no_voip" msgid="8901474054537199865">"Ինտերնետային զանգերը չեն սպասարկվում"</string>
     <string name="sip_system_decide" msgid="368030746310423471">"Ավտոմատ"</string>
     <string name="sip_always_send_keepalive" msgid="8192080724632877132">"Միշտ ուղարկել"</string>
