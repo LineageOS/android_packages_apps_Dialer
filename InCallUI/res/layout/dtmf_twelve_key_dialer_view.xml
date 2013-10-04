@@ -60,7 +60,7 @@
         android:paddingStart="5dip"
         android:paddingEnd="5dip"
         android:paddingBottom="10dip"
-        android:background="@drawable/dialpad_background"
+        android:background="@color/dialpad_background"
         android:layoutDirection="ltr">
 
         <TableRow
