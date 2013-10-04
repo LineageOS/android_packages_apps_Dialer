@@ -199,6 +199,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private View mShowAllContactsInEmptyViewButton;
     private View mContactTileFrame;
 
+    private TileInteractionTeaserView mTileInteractionTeaserView;
+
     private final HashMap<Long, Integer> mItemIdTopMap = new HashMap<Long, Integer>();
     private final HashMap<Long, Integer> mItemIdLeftMap = new HashMap<Long, Integer>();
 
@@ -306,8 +308,13 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
         mContactTileFrame = mParentView.findViewById(R.id.contact_tile_frame);
 
+        mTileInteractionTeaserView = (TileInteractionTeaserView) inflater.inflate(
+                R.layout.tile_interactions_teaser_view, mListView, false);
+
         mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), this, mContactTileAdapter,
-                mCallLogAdapter, mShowAllContactsButton);
+                mCallLogAdapter, mShowAllContactsButton, mTileInteractionTeaserView);
+
+        mTileInteractionTeaserView.setAdapter(mAdapter);
 
         mListView.setAdapter(mAdapter);
 
