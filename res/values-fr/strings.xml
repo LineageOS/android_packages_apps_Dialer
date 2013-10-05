@@ -29,7 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Effacer tous les appels"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Supprimer le message vocal"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Partager le message vocal"</string>
-    <string name="recentCalls_empty" msgid="247053222448663107">"Aucun appel."</string>
+    <string name="recentCalls_empty" msgid="247053222448663107">"Aucun appel"</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Effacer les appels ?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Votre journal d\'appels va être supprimé."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Effacement des appels…"</string>
@@ -90,7 +90,7 @@
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Messages vocaux uniquement"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Afficher tous les appels"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Ajouter une pause de 2 s"</string>
-    <string name="add_wait" msgid="3360818652790319634">"Ajouter Attendre"</string>
+    <string name="add_wait" msgid="3360818652790319634">"Ajouter Attente"</string>
     <string name="call_settings" msgid="7666474782093693667">"Paramètres"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nouveau contact"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Tous les contacts"</string>
@@ -115,7 +115,7 @@
     <string name="description_send_text_message" msgid="7803126439934046891">"Envoyer un SMS à <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nouveau message vocal"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Démarrer la recherche vocale"</string>
-    <string name="call_log_empty_gecode" msgid="5588904744812100846">"-"</string>
+    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Appeler le <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Inconnu"</string>
     <string name="voicemail" msgid="3851469869202611441">"Messagerie vocale"</string>

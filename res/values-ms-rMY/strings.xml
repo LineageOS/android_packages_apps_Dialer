@@ -115,7 +115,7 @@
     <string name="description_send_text_message" msgid="7803126439934046891">"Hantar mesej teks kepada <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Mel suara belum didengar"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Mulakan carian suara"</string>
-    <string name="call_log_empty_gecode" msgid="5588904744812100846">"-"</string>
+    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Panggil <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Tidak diketahui"</string>
     <string name="voicemail" msgid="3851469869202611441">"Mel suara"</string>
@@ -159,5 +159,5 @@
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Tambahkan pada kenalan"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> panggilan terlepas baharu"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Kegemaran &amp; kenalan yang\nkerap anda hubungi akan ditunjukkan di sini.\nJadi, mulalah membuat panggilan."</string>
-    <string name="contact_tooltip" msgid="7817483485692282287">"Ketik imej untuk melihat semua nombor atau tekan dan tahan untuk menyusun semula"</string>
+    <string name="contact_tooltip" msgid="7817483485692282287">"Ketik imej untuk melihat semua nombor atau tekan dan tahan imej untuk menyusun semula"</string>
 </resources>

@@ -75,7 +75,7 @@
     <string name="description_image_button_star" msgid="3365919907520767866">"stjernemarker"</string>
     <string name="description_image_button_zero" msgid="4133108949401820710">"nul"</string>
     <string name="description_image_button_pound" msgid="3039765597595889230">"pund"</string>
-    <string name="description_voicemail_button" msgid="3402506823655455591">"voicemail"</string>
+    <string name="description_voicemail_button" msgid="3402506823655455591">"telefonsvarer"</string>
     <string name="description_search_button" msgid="3660807558587384889">"søg"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"ring op"</string>
     <string name="description_delete_button" msgid="6263102114033407382">"backspace"</string>
@@ -92,7 +92,7 @@
     <string name="add_2sec_pause" msgid="9214012315201040129">"Tilføj pause på 2 sek."</string>
     <string name="add_wait" msgid="3360818652790319634">"Tilføj Vent"</string>
     <string name="call_settings" msgid="7666474782093693667">"Indstillinger"</string>
-    <string name="menu_newContact" msgid="1209922412763274638">"Ny kontakt"</string>
+    <string name="menu_newContact" msgid="1209922412763274638">"Ny kontaktperson"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Alle kontaktpersoner"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Opkaldsdetaljer"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"Detaljerne for det anmodede opkald kunne ikke læses."</string>
@@ -115,10 +115,10 @@
     <string name="description_send_text_message" msgid="7803126439934046891">"Send sms til <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Uaflyttet besked på telefonsvareren"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Start stemmesøgning"</string>
-    <string name="call_log_empty_gecode" msgid="5588904744812100846">"-"</string>
+    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Ring til <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Ukendte"</string>
-    <string name="voicemail" msgid="3851469869202611441">"Voicemail"</string>
+    <string name="voicemail" msgid="3851469869202611441">"Telefonsvarer"</string>
     <string name="private_num" msgid="6374339738119166953">"Privat nummer"</string>
     <string name="payphone" msgid="4864313342828942922">"Betalingstelefon"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Brug tastatur til at ringe op"</string>
