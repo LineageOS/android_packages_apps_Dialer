@@ -1704,6 +1704,7 @@ public class DialpadFragment extends Fragment
             activity.showSearchBar();
         } else {
             activity.hideSearchBar();
+            mDigits.requestFocus();
         }
     }
 
