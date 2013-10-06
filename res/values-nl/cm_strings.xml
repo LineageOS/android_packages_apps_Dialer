@@ -16,7 +16,7 @@
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="callStatsDetailTitle">Gespreksstatistiekdetails</string>
-    <string name="call_stats">>Gespreksstatistieken</string>
+    <string name="call_stats">Gespreksstatistieken</string>
     <string name="call_stats_refresh">Vernieuwen</string>
     <string name="activity_title_call_stats">Gespreksstatistieken</string>
     <string name="call_stats_nav_all">Alles</string>
