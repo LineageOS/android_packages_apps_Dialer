@@ -22,6 +22,7 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
@@ -29,11 +30,16 @@ import android.os.Bundle;
 import android.provider.CallLog.Calls;
 
 import com.android.dialer.R;
+import com.android.dialer.service.CachedNumberLookupService;
+import com.android.dialerbind.ObjectFactory;
 
 /**
  * Dialog that clears the call log after confirming with the user
  */
 public class ClearCallLogDialog extends DialogFragment {
+    private static final CachedNumberLookupService mCachedNumberLookupService =
+            ObjectFactory.newCachedNumberLookupService();
+
     /** Preferred way to show this dialog */
     public static void show(FragmentManager fragmentManager) {
         ClearCallLogDialog dialog = new ClearCallLogDialog();
@@ -43,6 +49,7 @@ public class ClearCallLogDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final ContentResolver resolver = getActivity().getContentResolver();
+        final Context context = getActivity().getApplicationContext();
         final OnClickListener okListener = new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -53,6 +60,9 @@ public class ClearCallLogDialog extends DialogFragment {
                     @Override
                     protected Void doInBackground(Void... params) {
                         resolver.delete(Calls.CONTENT_URI, null, null);
+                        if (mCachedNumberLookupService != null) {
+                            mCachedNumberLookupService.clearAllCacheEntries(context);
+                        }
                         return null;
                     }
                     @Override
