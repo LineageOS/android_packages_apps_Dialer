@@ -53,6 +53,7 @@
                    android:paddingTop="8dip"
                    android:src="@drawable/ic_close_dk"
                    android:background="?android:attr/selectableItemBackground"
-                   android:visibility="gone"/>
+                   android:visibility="gone"
+                   android:contentDescription="@string/description_dismiss"/>
     </LinearLayout>
 </FrameLayout>
