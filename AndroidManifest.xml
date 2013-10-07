@@ -45,6 +45,10 @@
     <!-- allow broadcasting secret code intents that reboot the phone -->
     <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- This tells the activity manager to not delay any of our activity
+     start requests, even if they happen immediately after the user
+     presses home. -->
+    <uses-permission android:name="android.permission.STOP_APP_SWITCHES" />
 
     <application
         android:name="DialerApplication"
