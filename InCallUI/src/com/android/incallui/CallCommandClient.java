@@ -18,8 +18,10 @@ package com.android.incallui;
 
 import android.os.RemoteException;
 
+
 import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.ICallCommandService;
+import com.android.services.telephony.common.Call;
 
 /**
  * Main interface for phone related commands.
@@ -57,14 +59,15 @@ public class CallCommandClient {
         }
     }
 
-    public void rejectCall(int callId, boolean rejectWithMessage, String message) {
-        Log.i(this, "rejectCall: " + callId + ", with rejectMessage? " + rejectWithMessage);
+    public void rejectCall(Call call, boolean rejectWithMessage, String message) {
+        Log.i(this, "rejectCall: " + call.getCallId() +
+                ", with rejectMessage? " + rejectWithMessage);
         if (mCommandService == null) {
             Log.e(this, "Cannot reject call; CallCommandService == null");
             return;
         }
         try {
-            mCommandService.rejectCall(callId, rejectWithMessage, message);
+            mCommandService.rejectCall(call, rejectWithMessage, message);
         } catch (RemoteException e) {
             Log.e(this, "Error rejecting call.", e);
         }
