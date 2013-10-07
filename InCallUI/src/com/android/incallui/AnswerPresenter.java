@@ -93,7 +93,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
         if (call.can(Call.Capabilities.RESPOND_VIA_TEXT) && textMsgs != null) {
             getUi().showTextButton(true);
-            getUi().configureMessageDialogue(textMsgs);
+            getUi().configureMessageDialog(textMsgs);
         } else {
             getUi().showTextButton(false);
         }
@@ -134,24 +134,19 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     public void onText() {
         if (getUi() != null) {
-            getUi().showMessageDialogue();
+            getUi().showMessageDialog();
         }
     }
 
     public void rejectCallWithMessage(String message) {
         Log.d(this, "sendTextToDefaultActivity()...");
-        if (getUi() != null) {
-            getUi().dismissPopup();
-        }
         CallCommandClient.getInstance().rejectCall(mCallId, true, message);
     }
 
     interface AnswerUi extends Ui {
         public void showAnswerUi(boolean show);
         public void showTextButton(boolean show);
-        public boolean isMessageDialogueShowing();
-        public void showMessageDialogue();
-        public void dismissPopup();
-        public void configureMessageDialogue(ArrayList<String> textResponses);
+        public void showMessageDialog();
+        public void configureMessageDialog(ArrayList<String> textResponses);
     }
 }

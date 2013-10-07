@@ -18,12 +18,18 @@ package com.android.incallui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.common.base.Preconditions;
@@ -106,12 +112,7 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     }
 
     @Override
-    public boolean isMessageDialogueShowing() {
-        return mCannedResponsePopup != null && mCannedResponsePopup.isShowing();
-    }
-
-    @Override
-    public void showMessageDialogue() {
+    public void showMessageDialog() {
         final ListView lv = new ListView(getActivity());
 
         Preconditions.checkNotNull(mTextResponsesAdapter);
@@ -130,16 +131,65 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
      * This is safe to call even if the popup is already dismissed, and even if you never called
      * showRespondViaSmsPopup() in the first place.
      */
-    @Override
-    public void dismissPopup() {
+    private void dismissPopup() {
         if (mCannedResponsePopup != null) {
             mCannedResponsePopup.dismiss();  // safe even if already dismissed
             mCannedResponsePopup = null;
         }
     }
 
+    /**
+     * Shows the custom message entry dialog.
+     */
+    public void showCustomMessageDialog() {
+        // Create an alert dialog containing an EditText
+        final EditText et = new EditText(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setCancelable(
+                true).setView(et)
+                .setPositiveButton(R.string.custom_message_send,
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getPresenter().rejectCallWithMessage(et.getText().toString().trim());
+                    }
+                })
+                .setNegativeButton(R.string.custom_message_cancel,
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setTitle(R.string.respond_via_sms_custom_message);
+        final AlertDialog customResponseDialog = builder.create();
+
+        // Enable/disable the send button based on whether there is a message in the EditText
+        et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                final Button sendButton = customResponseDialog.getButton(
+                        DialogInterface.BUTTON_POSITIVE);
+                sendButton.setEnabled(s != null && s.toString().trim().length() != 0);
+            }
+        });
+
+        // Keyboard up, show the dialog
+        customResponseDialog.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        customResponseDialog.show();
+
+        // Send button starts out disabled
+        final Button sendButton = customResponseDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        sendButton.setEnabled(false);
+    }
+
     @Override
-    public void configureMessageDialogue(ArrayList<String> textResponses) {
+    public void configureMessageDialog(ArrayList<String> textResponses) {
         final ArrayList<String> textResponsesForDisplay = new ArrayList<String>(textResponses);
 
         textResponsesForDisplay.add(getResources().getString(
@@ -178,12 +228,13 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
             Log.d(this, "RespondViaSmsItemClickListener.onItemClick(" + position + ")...");
             final String message = (String) parent.getItemAtPosition(position);
             Log.v(this, "- message: '" + message + "'");
+            dismissPopup();
 
             // The "Custom" choice is a special case.
             // (For now, it's guaranteed to be the last item.)
             if (position == (parent.getCount() - 1)) {
-                // Take the user to the standard SMS compose UI.
-                getPresenter().rejectCallWithMessage(null);
+                // Show the custom message dialog
+                showCustomMessageDialog();
             } else {
                 getPresenter().rejectCallWithMessage(message);
             }
