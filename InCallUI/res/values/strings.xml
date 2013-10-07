@@ -1280,6 +1280,10 @@
     <string name="respond_via_sms_canned_response_4">Can\'t talk now. Call me later?</string>
     <!-- "Respond via SMS" option that lets you compose a custom response. [CHAR LIMIT=30] -->
     <string name="respond_via_sms_custom_message">Write your own...</string>
+    <!-- "Custom Message" Cancel alert dialog button -->
+    <string name="custom_message_cancel">Cancel</string>
+    <!-- "Custom Message" Send alert dialog button -->
+    <string name="custom_message_send">Send</string>
 
     <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
     <string name="respond_via_sms_setting_title">Quick responses</string>
