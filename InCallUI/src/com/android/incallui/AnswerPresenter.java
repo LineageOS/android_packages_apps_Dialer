@@ -29,6 +29,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     private static final String TAG = AnswerPresenter.class.getSimpleName();
 
     private int mCallId = Call.INVALID_CALL_ID;
+    private Call mCall = null;
 
     @Override
     public void onUiReady(AnswerUi ui) {
@@ -82,6 +83,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     private void processIncomingCall(Call call) {
         mCallId = call.getCallId();
+        mCall = call;
 
         // Listen for call updates for the current call.
         CallList.getInstance().addCallUpdateListener(mCallId, this);
@@ -108,6 +110,9 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             CallList.getInstance().removeCallUpdateListener(mCallId, this);
 
             getUi().showAnswerUi(false);
+
+            // mCallId will hold the state of the call. We don't clear the mCall variable here as
+            // it may be useful for sending text messages after phone disconnects.
             mCallId = Call.INVALID_CALL_ID;
         }
     }
@@ -123,13 +128,9 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     public void onDecline() {
-        if (mCallId == Call.INVALID_CALL_ID) {
-            return;
-        }
-
         Log.d(this, "onDecline " + mCallId);
 
-        CallCommandClient.getInstance().rejectCall(mCallId, false, null);
+        CallCommandClient.getInstance().rejectCall(mCall, false, null);
     }
 
     public void onText() {
@@ -140,7 +141,14 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     public void rejectCallWithMessage(String message) {
         Log.d(this, "sendTextToDefaultActivity()...");
-        CallCommandClient.getInstance().rejectCall(mCallId, true, message);
+
+        CallCommandClient.getInstance().rejectCall(mCall, true, message);
+
+        onDismissDialog();
+    }
+
+    public void onDismissDialog() {
+        InCallPresenter.getInstance().onDismissDialog();
     }
 
     interface AnswerUi extends Ui {

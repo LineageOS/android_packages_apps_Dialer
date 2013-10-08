@@ -138,6 +138,9 @@ public class InCallActivity extends Activity {
         return mIsForegroundActivity;
     }
 
+    private boolean hasPendingErrorDialog() {
+        return mDialog != null;
+    }
     /**
      * Dismisses the in-call screen.
      *
@@ -158,7 +161,7 @@ public class InCallActivity extends Activity {
         Log.i(this, "finish().  Dialog showing: " + (mDialog != null));
 
         // skip finish if we are still showing a dialog.
-        if (mDialog == null) {
+        if (!hasPendingErrorDialog() && !mAnswerFragment.hasPendingDialogs()) {
             super.finish();
         }
     }
@@ -427,6 +430,7 @@ public class InCallActivity extends Activity {
             mDialog.dismiss();
             mDialog = null;
         }
+        mAnswerFragment.dismissPendingDialogues();
     }
 
     /**
