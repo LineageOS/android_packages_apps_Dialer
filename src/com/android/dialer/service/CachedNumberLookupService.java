@@ -34,4 +34,12 @@ public interface CachedNumberLookupService {
     public boolean isCacheUri(String uri);
 
     public boolean addPhoto(Context context, String number, byte[] photo);
+
+    /**
+     * Remove all cached phone number entries from the cache, regardless of how old they
+     * are.
+     *
+     * @param context Valid context
+     */
+    public void clearAllCacheEntries(Context context);
 }
