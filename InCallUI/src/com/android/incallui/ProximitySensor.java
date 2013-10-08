@@ -216,8 +216,9 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                         .add("keybrd", mIsHardKeyboardOpen ? 1 : 0)
                         .add("dpad", mDialpadVisible ? 1 : 0)
                         .add("offhook", mIsPhoneOffhook ? 1 : 0)
-                        .add("aud", audioMode)
-                        .add("hor", horizontal ? 1 : 0).toString());
+                        .add("hor", horizontal ? 1 : 0)
+                        .add("ui", mUiShowing ? 1 : 0)
+                        .add("aud", AudioMode.toString(audioMode)).toString());
 
                 if (mIsPhoneOffhook && !screenOnImmediately) {
                     final String logStr = "turning on proximity sensor: ";

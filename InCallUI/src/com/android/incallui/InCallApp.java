@@ -57,7 +57,7 @@ public class InCallApp extends Application {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            Log.v(this, "Broadcast from Notification: ", action);
+            Log.i(this, "Broadcast from Notification: " + action);
 
             if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
                 // TODO: Commands of this nature should exist in the CallList or a
