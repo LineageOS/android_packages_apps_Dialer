@@ -160,4 +160,6 @@
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nuove chiamate senza risposta"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Preferiti e contatti che\nchiami spesso verranno mostrati qui.\nInizia a chiamarli."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Tocca l\'immagine per visualizzare tutti i numeri o tieni premuto per cambiare l\'ordine"</string>
+    <!-- no translation found for description_dismiss (2146276780562549643) -->
+    <skip />
 </resources>
