@@ -195,26 +195,27 @@ public class CallLogAdapter extends GroupingListAdapter
     private ImageView mBadgeImageView;
     private TextView mBadgeText;
 
-    /** Listener for the primary action in the list, opens the call details. */
-    private final View.OnClickListener mPrimaryActionListener = new View.OnClickListener() {
+    /** Listener for the primary or secondary actions in the list.
+     *  Primary opens the call details.
+     *  Secondary calls or plays.
+     **/
+    private final View.OnClickListener mActionListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            IntentProvider intentProvider = (IntentProvider) view.getTag();
-            if (intentProvider != null) {
-                mContext.startActivity(intentProvider.getIntent(mContext));
-            }
+            startActivityForAction(view);
         }
     };
-    /** Listener for the secondary action in the list, either call or play. */
-    private final View.OnClickListener mSecondaryActionListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            IntentProvider intentProvider = (IntentProvider) view.getTag();
-            if (intentProvider != null) {
-                mContext.startActivity(intentProvider.getIntent(mContext));
+
+    private void startActivityForAction(View view) {
+        final IntentProvider intentProvider = (IntentProvider) view.getTag();
+        if (intentProvider != null) {
+            final Intent intent = intentProvider.getIntent(mContext);
+            // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
+            if (intent != null) {
+                mContext.startActivity(intent);
             }
         }
-    };
+    }
 
     @Override
     public boolean onPreDraw() {
@@ -497,8 +498,8 @@ public class CallLogAdapter extends GroupingListAdapter
     private void findAndCacheViews(View view) {
         // Get the views to bind to.
         CallLogListItemViews views = CallLogListItemViews.fromView(view);
-        views.primaryActionView.setOnClickListener(mPrimaryActionListener);
-        views.secondaryActionView.setOnClickListener(mSecondaryActionListener);
+        views.primaryActionView.setOnClickListener(mActionListener);
+        views.secondaryActionView.setOnClickListener(mActionListener);
         view.setTag(views);
     }
 
