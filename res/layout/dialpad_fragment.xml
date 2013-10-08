@@ -41,7 +41,7 @@
             android:id="@+id/digits_container"
             android:layout_width="match_parent"
             android:layout_height="0px"
-            android:layout_weight="@integer/dialpad_layout_weight_digits_new"
+            android:layout_weight="@integer/dialpad_layout_weight_digits"
             android:layout_marginTop="@dimen/dialpad_vertical_margin"
             android:gravity="center" >
 
@@ -81,8 +81,7 @@
         <LinearLayout
             android:id="@+id/dialButtonContainer"
             android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="@integer/dialpad_layout_weight_additional_buttons"
+            android:layout_height="@dimen/fake_action_bar_height"
             android:layout_gravity="center_horizontal"
             android:background="@color/dialpad_primary_text_color"
             android:layoutDirection="locale">
