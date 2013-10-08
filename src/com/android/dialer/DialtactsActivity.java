@@ -144,6 +144,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     // Padding view used to shift the fragments up when the dialpad is shown.
     private View mBottomPaddingView;
     private View mFragmentsFrame;
+    private View mActionBar;
 
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
@@ -302,6 +303,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mBottomPaddingView = findViewById(R.id.dialtacts_bottom_padding);
         mFragmentsFrame = findViewById(R.id.dialtacts_frame);
+        mActionBar = findViewById(R.id.fake_action_bar);
         prepareSearchView();
 
         if (UI.FILTER_CONTACTS_ACTION.equals(intent.getAction())
@@ -547,11 +549,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             mBottomPaddingView.setVisibility(View.VISIBLE);
-                                mFragmentsFrame.setTranslationY(0);
+                            mFragmentsFrame.setTranslationY(0);
+                            mActionBar.setVisibility(View.INVISIBLE);
                         }
                     });
         } else {
             mSearchViewContainer.setTranslationY(-mSearchView.getHeight());
+            mActionBar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -564,6 +568,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     @Override
                     public void onAnimationStart(Animator animation) {
                         mSearchViewContainer.setVisibility(View.VISIBLE);
+                        mActionBar.setVisibility(View.VISIBLE);
                     }
                 });
 
