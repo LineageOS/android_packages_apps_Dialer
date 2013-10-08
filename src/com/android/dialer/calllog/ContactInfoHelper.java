@@ -130,9 +130,9 @@ public class ContactInfoHelper {
 
             return Contacts.CONTENT_LOOKUP_URI.buildUpon()
                     .appendPath(Constants.LOOKUP_URI_ENCODED)
-                    .appendQueryParameter(Constants.LOOKUP_URI_JSON, jsonString)
                     .appendQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY,
                             String.valueOf(Long.MAX_VALUE))
+                    .encodedFragment(jsonString)
                     .build();
         } catch (JSONException e) {
             return null;
