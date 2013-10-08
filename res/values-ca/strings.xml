@@ -160,4 +160,6 @@
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> trucades perdudes noves"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Aquí es mostraran els preferits i els contactes\nals quals truques sovint.\nJa pots començar a trucar."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Toca la imatge per veure tots els números o bé mantén-la premuda per reorganitzar"</string>
+    <!-- no translation found for description_dismiss (2146276780562549643) -->
+    <skip />
 </resources>
