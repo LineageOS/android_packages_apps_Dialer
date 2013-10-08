@@ -51,6 +51,11 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
      */
     private Dialog mCannedResponsePopup = null;
 
+    /**
+     * The popup showing a text field for users to type in their custom message.
+     */
+    private AlertDialog mCustomMessagePopup = null;
+
     private ArrayAdapter<String> mTextResponsesAdapter = null;
 
     private GlowPadWrapper mGlowpad;
@@ -125,17 +130,55 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
         mCannedResponsePopup.show();
     }
 
+    private boolean isCannedResponsePopupShowing() {
+        if (mCannedResponsePopup != null) {
+            return mCannedResponsePopup.isShowing();
+        }
+        return false;
+    }
+
+    private boolean isCustomMessagePopupShowing() {
+        if (mCustomMessagePopup != null) {
+            return mCustomMessagePopup.isShowing();
+        }
+        return false;
+    }
+
     /**
-     * Dismiss currently visible popups.
+     * Dismiss the canned response list popup.
      *
      * This is safe to call even if the popup is already dismissed, and even if you never called
      * showRespondViaSmsPopup() in the first place.
      */
-    private void dismissPopup() {
+    private void dismissCannedResponsePopup() {
         if (mCannedResponsePopup != null) {
             mCannedResponsePopup.dismiss();  // safe even if already dismissed
             mCannedResponsePopup = null;
         }
+    }
+
+    /**
+     * Dismiss the custom compose message popup.
+     */
+    private void dismissCustomMessagePopup() {
+       if (mCustomMessagePopup != null) {
+           mCustomMessagePopup.dismiss();
+           mCustomMessagePopup = null;
+       }
+    }
+
+    public void dismissPendingDialogues() {
+        if (isCannedResponsePopupShowing()) {
+            dismissCannedResponsePopup();
+        }
+
+        if (isCustomMessagePopupShowing()) {
+            dismissCustomMessagePopup();
+        }
+    }
+
+    public boolean hasPendingDialogs() {
+        return !(mCannedResponsePopup == null && mCustomMessagePopup == null);
     }
 
     /**
@@ -150,41 +193,49 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
                         new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        getPresenter().rejectCallWithMessage(et.getText().toString().trim());
+                        // The order is arranged in a way that the popup will be destroyed when the
+                        // InCallActivity is about to finish.
+                        final String textMessage = et.getText().toString().trim();
+                        dismissCustomMessagePopup();
+                        getPresenter().rejectCallWithMessage(textMessage);
                     }
                 })
                 .setNegativeButton(R.string.custom_message_cancel,
                         new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dismissCustomMessagePopup();
+                        getPresenter().onDismissDialog();
                     }
                 })
                 .setTitle(R.string.respond_via_sms_custom_message);
-        final AlertDialog customResponseDialog = builder.create();
+        mCustomMessagePopup = builder.create();
 
         // Enable/disable the send button based on whether there is a message in the EditText
         et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
             @Override
             public void afterTextChanged(Editable s) {
-                final Button sendButton = customResponseDialog.getButton(
+                final Button sendButton = mCustomMessagePopup.getButton(
                         DialogInterface.BUTTON_POSITIVE);
                 sendButton.setEnabled(s != null && s.toString().trim().length() != 0);
             }
         });
 
         // Keyboard up, show the dialog
-        customResponseDialog.getWindow().setSoftInputMode(
+        mCustomMessagePopup.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        customResponseDialog.show();
+        mCustomMessagePopup.show();
 
         // Send button starts out disabled
-        final Button sendButton = customResponseDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        final Button sendButton = mCustomMessagePopup.getButton(DialogInterface.BUTTON_POSITIVE);
         sendButton.setEnabled(false);
     }
 
@@ -228,7 +279,7 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
             Log.d(this, "RespondViaSmsItemClickListener.onItemClick(" + position + ")...");
             final String message = (String) parent.getItemAtPosition(position);
             Log.v(this, "- message: '" + message + "'");
-            dismissPopup();
+            dismissCannedResponsePopup();
 
             // The "Custom" choice is a special case.
             // (For now, it's guaranteed to be the last item.)
