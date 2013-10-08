@@ -47,10 +47,8 @@
     <!-- Layout weight values for dialpad screen. These layouts will be used in one
          LinearLayout (dialpad_fragment.xml), configuring dialpad screen's vertical
          ratio. -->
-    <integer name="dialpad_layout_weight_digits">20</integer>
-    <integer name="dialpad_layout_weight_digits_new">15</integer>
+    <integer name="dialpad_layout_weight_digits">15</integer>
     <integer name="dialpad_layout_weight_dialpad">65</integer>
-    <integer name="dialpad_layout_weight_additional_buttons">15</integer>
 
     <!-- Text dimensions for dialpad keys -->
     <dimen name="dialpad_key_numbers_size">40dp</dimen>
@@ -60,7 +58,7 @@
     <dimen name="dialpad_key_letters_width">41dp</dimen>
 
 
-    <dimen name="fake_action_bar_height">48dp</dimen>
+    <dimen name="fake_action_bar_height">60dp</dimen>
     <!-- Min with of fake menu buttons, which should be same as ActionBar's one -->
     <dimen name="fake_menu_button_min_width">56dp</dimen>
 
