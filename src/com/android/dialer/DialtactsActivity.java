@@ -1,5 +1,7 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+ * Not a Contribution.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,6 +41,7 @@ import android.provider.ContactsContract.Intents.UI;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.telephony.MSimTelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -90,6 +93,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private static final String PHONE_PACKAGE = "com.android.phone";
     private static final String CALL_SETTINGS_CLASS_NAME =
             "com.android.phone.CallFeaturesSetting";
+    private static final String MSIM_CALL_SETTINGS_CLASS_NAME =
+            "com.android.phone.MSimCallFeaturesSetting";
 
     /** @see #getCallOrigin() */
     private static final String CALL_ORIGIN_DIALTACTS =
@@ -1271,7 +1276,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     /** Returns an Intent to launch Call Settings screen */
     public static Intent getCallSettingsIntent() {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setClassName(PHONE_PACKAGE, CALL_SETTINGS_CLASS_NAME);
+        if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+            intent.setClassName(PHONE_PACKAGE, MSIM_CALL_SETTINGS_CLASS_NAME);
+        } else {
+            intent.setClassName(PHONE_PACKAGE, CALL_SETTINGS_CLASS_NAME);
+        }
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         return intent;
     }
