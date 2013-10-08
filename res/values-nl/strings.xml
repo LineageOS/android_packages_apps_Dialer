@@ -160,4 +160,6 @@
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nieuwe gemiste oproepen"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Favorieten en contacten die u\nvaak belt, worden hier weergegeven.\nDus begin met bellen."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Tik op de afbeelding om alle nummers te bekijken of raak deze lang aan om de volgorde van nummers te wijzigen"</string>
+    <!-- no translation found for description_dismiss (2146276780562549643) -->
+    <skip />
 </resources>
