@@ -154,6 +154,15 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
     }
 
     /**
+     * TODO: There is no way to determine if a screen is off due to proximity or if it is
+     * legitimately off, but if ever we can do that in the future, it would be useful here.
+     * Until then, this function will simply return true of the screen is off.
+     */
+    public boolean isScreenReallyOff() {
+        return !mPowerManager.isScreenOn();
+    }
+
+    /**
      * @return true if this device supports the "proximity sensor
      * auto-lock" feature while in-call (see updateProximitySensorMode()).
      */

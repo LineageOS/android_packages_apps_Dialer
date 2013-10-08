@@ -568,13 +568,34 @@ public class InCallPresenter implements CallList.Listener {
             if (isActivityStarted()) {
                 mInCallActivity.dismissPendingDialogs();
             }
-            mStatusBarNotifier.updateNotificationAndLaunchIncomingCallUi(newState, mCallList);
+            startUi(newState);
         } else if (newState == InCallState.NO_CALLS) {
             // The new state is the no calls state.  Tear everything down.
             attemptFinishActivity();
         }
 
         return newState;
+    }
+
+    private void startUi(InCallState inCallState) {
+        final Call incomingCall = mCallList.getIncomingCall();
+        final boolean isCallWaiting = (incomingCall != null &&
+                incomingCall.getState() == Call.State.CALL_WAITING);
+
+        // If the screen is off, we need to make sure it gets turned on for incoming calls.
+        // This normally works just fine thanks to FLAG_TURN_SCREEN_ON but that only works
+        // when the activity is first created. Therefore, to ensure the screen is turned on
+        // for the call waiting case, we finish() the current activity and start a new one.
+        // There should be no jank from this since the screen is already off and will remain so
+        // until our new activity is up.
+        if (mProximitySensor.isScreenReallyOff() && isCallWaiting) {
+            if (isActivityStarted()) {
+                mInCallActivity.finish();
+            }
+            mInCallActivity = null;
+        }
+
+        mStatusBarNotifier.updateNotificationAndLaunchIncomingCallUi(inCallState, mCallList);
     }
 
     /**
