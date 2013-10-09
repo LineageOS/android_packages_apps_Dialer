@@ -389,6 +389,8 @@ public class InCallActivity extends Activity {
             mDialpadFragment.setVisible(false);
             mCallCardFragment.setVisible(true);
         }
+
+        InCallPresenter.getInstance().getProximitySensor().onDialpadVisible(showDialpad);
     }
 
     public boolean isDialpadVisible() {
