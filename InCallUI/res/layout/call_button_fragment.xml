@@ -136,6 +136,7 @@
                      style="@style/InCallButton"
                      android:src="@drawable/ic_incall_switch_holo_dark"
                      android:contentDescription="@string/onscreenSwapCallsText"
+                     android:visibility="gone"
                 />
 
         <!-- Separator between 4th and 5th button (if 5th exists) -->
@@ -150,6 +151,7 @@
                      style="@style/InCallButton"
                      android:src="@drawable/ic_add_contact_holo_dark"
                      android:contentDescription="@string/onscreenAddCallText"
+                     android:visibility="gone"
                 />
         <!-- "Merge calls" -->
         <!-- This button is used only on GSM devices, where we know
@@ -159,6 +161,7 @@
                      style="@style/InCallButton"
                      android:src="@drawable/ic_merge_holo_dark"
                      android:contentDescription="@string/onscreenMergeCallsText"
+                     android:visibility="gone"
                 />
 
         <!-- Separator between 4th (or 5th) button and right padding -->
