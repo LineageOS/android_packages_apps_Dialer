@@ -33,7 +33,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         implements InCallStateListener, AudioModeListener, IncomingCallListener {
 
     private Call mCall;
-    private ProximitySensor mProximitySensor;
     private boolean mAutomaticallyMuted = false;
     private boolean mPreviousMuteState = false;
 
@@ -49,7 +48,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     public void onUiReady(CallButtonUi ui) {
         super.onUiReady(ui);
 
-        mProximitySensor = InCallPresenter.getInstance().getProximitySensor();
         AudioModeProvider.getInstance().addListener(this);
 
         // register for call state changes last
@@ -64,8 +62,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         InCallPresenter.getInstance().removeListener(this);
         AudioModeProvider.getInstance().removeListener(this);
         InCallPresenter.getInstance().removeIncomingCallListener(this);
-
-        mProximitySensor = null;
     }
 
     @Override
@@ -210,8 +206,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     public void showDialpadClicked(boolean checked) {
         Log.v(this, "Show dialpad " + String.valueOf(checked));
         getUi().displayDialpad(checked);
-        mProximitySensor.onDialpadVisible(checked);
-
         updateExtraButtonRow();
     }
 
