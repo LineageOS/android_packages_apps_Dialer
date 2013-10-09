@@ -16,7 +16,6 @@
 
 package com.android.dialer;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -281,7 +280,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         mContactPhotoManager = ContactPhotoManager.getInstance(this);
         mProximitySensorManager = new ProximitySensorManager(this, mProximitySensorListener);
         mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
-        configureActionBar();
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         optionallyHandleVoicemail();
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
             closeSystemDialogs();
@@ -796,20 +795,6 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         return super.onPrepareOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home: {
-                onHomeSelected();
-                return true;
-            }
-
-            // All the options menu items are handled by onMenu... methods.
-            default:
-                throw new IllegalArgumentException();
-        }
-    }
-
     public void onMenuRemoveFromCallLog(MenuItem menuItem) {
         final StringBuilder callIds = new StringBuilder();
         for (Uri callUri : getCallLogEntryUris()) {
@@ -852,13 +837,6 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                         finish();
                     }
                 });
-    }
-
-    private void configureActionBar() {
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_HOME);
-        }
     }
 
     /** Invoked when the user presses the home button in the action bar. */
