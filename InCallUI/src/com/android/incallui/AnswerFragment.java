@@ -79,14 +79,33 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
         mGlowpad = (GlowPadWrapper) inflater.inflate(R.layout.answer_fragment,
                 container, false);
 
+        Log.d(this, "Creating view for answer fragment ", this);
+        Log.d(this, "Created from activity", getActivity());
         mGlowpad.setAnswerListener(this);
 
         return mGlowpad;
     }
 
     @Override
+    public void onDestroyView() {
+        Log.d(this, "onDestroyView");
+        if (mGlowpad != null) {
+            mGlowpad.stopPing();
+            mGlowpad = null;
+        }
+        super.onDestroyView();
+    }
+
+    @Override
     public void showAnswerUi(boolean show) {
         getView().setVisibility(show ? View.VISIBLE : View.GONE);
+
+        Log.d(this, "Show answer UI: " + show);
+        if (show) {
+            mGlowpad.startPing();
+        } else {
+            mGlowpad.stopPing();
+        }
     }
 
     @Override
@@ -126,6 +145,14 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setCancelable(
                 true).setView(lv);
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                if (mGlowpad != null) {
+                    mGlowpad.startPing();
+                }
+            }
+        });
         mCannedResponsePopup = builder.create();
         mCannedResponsePopup.show();
     }
