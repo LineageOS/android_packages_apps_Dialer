@@ -172,8 +172,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             if (!callerInfo.contactExists && cacheEntry.name == null &&
                     mPhoneNumberService != null) {
                 Log.d(TAG, "Contact lookup. Local contacts miss, checking remote");
-                mPhoneNumberService.getPhoneNumberInfo(cacheEntry.number,
-                        new PhoneNumberServiceListener(callId));
+                final PhoneNumberServiceListener listener = new PhoneNumberServiceListener(callId);
+                mPhoneNumberService.getPhoneNumberInfo(cacheEntry.number, listener, listener);
             } else if (cacheEntry.personUri != null) {
                 Log.d(TAG, "Contact lookup. Local contact found, starting image load");
                 // Load the image with a callback to update the image state.
@@ -244,14 +244,9 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             mInfoMap.put(mCallId, entry);
             sendInfoNotifications(mCallId, entry);
 
-            // If there's an associated image, fetch that
-            if (info.getImageUrl() != null) {
-                Log.d(TAG, "Contact lookup. Remote contact found, loading image.");
-                mPhoneNumberService.fetchImage(info.getNormalizedNumber(),
-                        info.getImageUrl(), this);
-            } else {
-                // Otherwise, we're done, so clear callbacks
-                Log.d(TAG, "Contact lookup. Remote contact found, no image.");
+            // If there is no image then we should not expect another callback.
+            if (info.getImageUrl() == null) {
+                // We're done, so clear callbacks
                 clearCallbacks(mCallId);
             }
         }

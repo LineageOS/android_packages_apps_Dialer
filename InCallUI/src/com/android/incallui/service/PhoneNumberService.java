@@ -28,17 +28,10 @@ public interface PhoneNumberService {
      *
      * @param phoneNumber The phone number to lookup.
      * @param listener The listener to notify when the phone number lookup is complete.
+     * @param imageListener The listener to notify when the image lookup is complete.
      */
-    public void getPhoneNumberInfo(String phoneNumber, NumberLookupListener listener);
-
-    /**
-     * Get an image asynchronously.
-     *
-     * @param number The phone number for the image.
-     * @param url The url to fetch the image from.
-     * @param listener The listener to notify when the image lookup is complete.
-     */
-    public void fetchImage(String number, String url, ImageLookupListener listener);
+    public void getPhoneNumberInfo(String phoneNumber, NumberLookupListener listener,
+            ImageLookupListener imageListener);
 
     public interface NumberLookupListener {
 
