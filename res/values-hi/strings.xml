@@ -160,6 +160,5 @@
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>  छूटे हुए नए कॉल"</string>
     <string name="no_favorites" msgid="5212485868783382971">"पसंदीदा &amp; आपके द्वारा अक्सर कॉल किए जाने वाले पसंदीदा और संपर्क\nयहां दिखाए जाएंगे.\nतो, कॉल करना प्रारंभ करें."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"सभी नंबर देखने के लिए चित्र को टैप करें या पुनः क्रमित करने के लिए दबाए रखें"</string>
-    <!-- no translation found for description_dismiss (2146276780562549643) -->
-    <skip />
+    <string name="description_dismiss" msgid="2146276780562549643">"ख़ारिज करें"</string>
 </resources>

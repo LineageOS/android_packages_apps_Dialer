@@ -160,6 +160,5 @@
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> 個新的未接來電"</string>
     <string name="no_favorites" msgid="5212485868783382971">"您的最愛聯絡人和經常通話的聯絡人\n會在這裡顯示，\n致電他們吧！"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"輕按相片可查看所有號碼，按住則可重新排序"</string>
-    <!-- no translation found for description_dismiss (2146276780562549643) -->
-    <skip />
+    <string name="description_dismiss" msgid="2146276780562549643">"關閉"</string>
 </resources>
