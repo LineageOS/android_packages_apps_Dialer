@@ -487,12 +487,12 @@
     <item quantity="other" msgid="3122217344579273583">"ለ <xliff:g id="COUNT">%s</xliff:g> ደቂቃ ምንም የውሂብ ተያያዥነት የለም"</item>
   </plurals>
   <plurals name="alert_dialog_exit_ecm">
-    <item quantity="one" msgid="8060210887681426682">"ለ<xliff:g id="COUNT">%s</xliff:g> ደቂቃ ስልኩ በየአደጋ ጥሪ ሁናቴ ውስጥ ይሆናል፡፡ በዚህ ሁናቴ ውስጥ ምንም መተግበሪያዎች የውሂብ ግንኙነት በመጠቀም መጠቀም አይቻልም፡፡ አሁን መውጣት ትፈልጋለህ?"</item>
-    <item quantity="other" msgid="8617116564023933114">"ለ<xliff:g id="COUNT">%s</xliff:g>ደቂቃዎች ስልኩ በየአደጋ ጥሪ ሁናቴ ውስጥ ይሆናል፡፡ በዚህ ሁናቴ ውስጥ ምንም መተግበሪያዎች የውሂብ ግንኙነት በመጠቀም መጠቀም አይቻልም፡፡ አሁን መውጣት ትፈልጋለህ?"</item>
+    <item quantity="one" msgid="8060210887681426682">"ለ<xliff:g id="COUNT">%s</xliff:g> ደቂቃ ስልኩ በየአደጋ ጥሪ ሁናቴ ውስጥ ይሆናል። በዚህ ሁናቴ ውስጥ ምንም መተግበሪያዎች የውሂብ ግንኙነት በመጠቀም መጠቀም አይቻልም። አሁን መውጣት ይፈልጋሉ?"</item>
+    <item quantity="other" msgid="8617116564023933114">"ለ<xliff:g id="COUNT">%s</xliff:g>ደቂቃዎች ስልኩ በየአደጋ ጥሪ ሁናቴ ውስጥ ይሆናል። በዚህ ሁናቴ ውስጥ ምንም መተግበሪያዎች የውሂብ ግንኙነት በመጠቀም መጠቀም አይቻልም። አሁን መውጣት ይፈልጋሉ?"</item>
   </plurals>
   <plurals name="alert_dialog_not_avaialble_in_ecm">
-    <item quantity="one" msgid="2585506997024726599">"የአደጋ ጥሪ ሁናቴ በሚሆንበት ጊዜ የተመረጠው እርምጃ አይገኝም፡፡ ስልኩ ለ<xliff:g id="COUNT">%s</xliff:g> ደቂቃ በዚህ ሁናቴ ውስጥ ይሆናል፡፡ አሁን መውጣት ትፈልጋለህ?"</item>
-    <item quantity="other" msgid="6115622137771382224">"የአደጋ ጥሪ ሁናቴ በሚሆንበት ጊዜ የተመረጠው እርምጃ አይገኝም፡፡ ስልኩ ለ<xliff:g id="COUNT">%s</xliff:g> ደቂቃዎች በዚህ ሁናቴ ውስጥ ይሆናል፡፡ አሁን መውጣት ትፈልጋለህ?"</item>
+    <item quantity="one" msgid="2585506997024726599">"የአደጋ ጥሪ ሁናቴ በሚሆንበት ጊዜ የተመረጠው እርምጃ አይገኝም። ስልኩ ለ<xliff:g id="COUNT">%s</xliff:g> ደቂቃ በዚህ ሁናቴ ውስጥ ይሆናል። አሁን መውጣት ይፈልጋሉ?"</item>
+    <item quantity="other" msgid="6115622137771382224">"የአደጋ ጥሪ ሁናቴ በሚሆንበት ጊዜ የተመረጠው እርምጃ አይገኝም። ስልኩ ለ<xliff:g id="COUNT">%s</xliff:g> ደቂቃዎች በዚህ ሁናቴ ውስጥ ይሆናል። አሁን መውጣት ይፈልጋሉ?"</item>
   </plurals>
     <string name="alert_dialog_in_ecm_call" msgid="1886723687211887104">"የተመረጠው እርምጃ በአደጋ ጥሪ ጊዜ ለክንውን ሊገኝ አይችልም።"</string>
     <string name="progress_dialog_exiting_ecm" msgid="4835734101617817074">"የአደጋ ጊዜ ተዘዋዋሪ ጥሪ ሁኔታ ወጥቷል"</string>
@@ -525,7 +525,7 @@
     <string name="pstn_phone" msgid="8782554491484326429">"የተንቀሳቃሽ ስልክ ጥሪ"</string>
     <string name="internet_phone" msgid="1147922660195095810">"የበይነመረብ  ጥሪ"</string>
     <string name="no_sip_account_found_title" msgid="6266249392379373628">"ምንም የበይነ መረብ ጥሪ መለያ"</string>
-    <string name="no_sip_account_found" msgid="724325811961769997">"በዚህ ስልክ ላይ ምንም የበየነ መረብ መደወያ መለያዎች የሉም፡፡ አሁን አንድ ማከል ትፈልጋለህ?"</string>
+    <string name="no_sip_account_found" msgid="724325811961769997">"በዚህ ስልክ ላይ ምንም የበየነ መረብ መደወያ መለያዎች የሉም። አሁን አንድ ማከል ይፈልጋሉ?"</string>
     <string name="sip_menu_add" msgid="8757508498518881500">"አክል"</string>
     <string name="add_sip_account" msgid="5904858426290097611">"መለያ አክል"</string>
     <string name="remove_sip_account" msgid="7645900420385682570">"መለያ አስወግድ"</string>
