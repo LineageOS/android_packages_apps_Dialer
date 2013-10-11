@@ -119,7 +119,7 @@
     <string name="menu_callNumber" msgid="997146291983360266">"拨打 <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"未知"</string>
     <string name="voicemail" msgid="3851469869202611441">"语音信箱"</string>
-    <string name="private_num" msgid="6374339738119166953">"私人号码"</string>
+    <string name="private_num" msgid="6374339738119166953">"私密号码"</string>
     <string name="payphone" msgid="4864313342828942922">"公用电话"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"使用键盘拨号"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"拨号以添加通话"</string>
@@ -160,6 +160,5 @@
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>个新的未接电话"</string>
     <string name="no_favorites" msgid="5212485868783382971">"您收藏的联系人和经常通话\n的联系人都会显示在这里。\n现在就开始与联系人通话吧。"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"点按图片可查看所有号码，按住图片可重新排序"</string>
-    <!-- no translation found for description_dismiss (2146276780562549643) -->
-    <skip />
+    <string name="description_dismiss" msgid="2146276780562549643">"关闭"</string>
 </resources>
