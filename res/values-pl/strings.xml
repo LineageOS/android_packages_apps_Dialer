@@ -160,6 +160,5 @@
     <string name="num_missed_calls" msgid="8081736535604293886">"Nowe nieodebrane połączenia: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Tutaj będą widoczne Twoje\nulubione i najczęstsze kontakty.\nPora zacząć dzwonić."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Kliknij zdjęcie, by zobaczyć wszystkie numery, lub kliknij je i przytrzymaj, by zmienić kolejność"</string>
-    <!-- no translation found for description_dismiss (2146276780562549643) -->
-    <skip />
+    <string name="description_dismiss" msgid="2146276780562549643">"Zamknij"</string>
 </resources>
