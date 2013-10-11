@@ -73,6 +73,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     public void onIncomingCall(Call call) {
         // TODO: Ui is being destroyed when the fragment detaches.  Need clean up step to stop
         // getting updates here.
+        Log.d(this, "onIncomingCall: " + this);
         if (getUi() != null) {
             if (call.getCallId() != mCallId) {
                 // A new call is coming in.
@@ -88,7 +89,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         // Listen for call updates for the current call.
         CallList.getInstance().addCallUpdateListener(mCallId, this);
 
-        Log.d(TAG, "Showing incoming for call id: " + mCallId);
+        Log.d(TAG, "Showing incoming for call id: " + mCallId + " " + this);
         final ArrayList<String> textMsgs = CallList.getInstance().getTextResponses(
                 call.getCallId());
         getUi().showAnswerUi(true);
@@ -104,7 +105,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     @Override
     public void onCallStateChanged(Call call) {
-        Log.d(this, "onCallStateChange() " + call);
+        Log.d(this, "onCallStateChange() " + call + " " + this);
         if (call.getState() != Call.State.INCOMING && call.getState() != Call.State.CALL_WAITING) {
             // Stop listening for updates.
             CallList.getInstance().removeCallUpdateListener(mCallId, this);
