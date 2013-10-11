@@ -19,7 +19,6 @@ package com.android.incallui;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -48,13 +47,16 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
 
     private AnswerListener mAnswerListener;
     private boolean mPingEnabled = true;
+    private boolean mTargetTriggered = false;
 
     public GlowPadWrapper(Context context) {
         super(context);
+        Log.d(this, "class created " + this + " ");
     }
 
     public GlowPadWrapper(Context context, AttributeSet attrs) {
         super(context, attrs);
+        Log.d(this, "class created " + this);
     }
 
     @Override
@@ -62,43 +64,23 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
         Log.d(this, "onFinishInflate()");
         super.onFinishInflate();
         setOnTriggerListener(this);
-        startPing();
-    }
-
-    @Override
-    protected void onWindowVisibilityChanged(int visibility) {
-        Log.d(this, "Visibility changed " + visibility);
-        super.onWindowVisibilityChanged(visibility);
-        switch (visibility) {
-            case View.VISIBLE:
-                startPing();
-                break;
-            case View.INVISIBLE:
-            case View.GONE:
-                stopPing();
-                break;
-        }
-    }
-
-    @Override
-    protected Parcelable onSaveInstanceState() {
-        Log.d(this, "onSaveInstanceState()");
-        // TODO: evaluate this versus stopping during fragment onPause/onResume
-        stopPing();
-        return super.onSaveInstanceState();
     }
 
     public void startPing() {
+        Log.d(this, "startPing");
         mPingEnabled = true;
         triggerPing();
     }
 
     public void stopPing() {
+        Log.d(this, "stopPing");
         mPingEnabled = false;
+        mPingHandler.removeMessages(PING_MESSAGE_WHAT);
     }
 
     private void triggerPing() {
-        if (mPingEnabled) {
+        Log.d(this, "triggerPing(): " + mPingEnabled + " " + this);
+        if (mPingEnabled && !mPingHandler.hasMessages(PING_MESSAGE_WHAT)) {
             ping();
 
             if (ENABLE_PING_AUTO_REPEAT) {
@@ -116,7 +98,11 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
     @Override
     public void onReleased(View v, int handle) {
         Log.d(this, "onReleased()");
-        startPing();
+        if (mTargetTriggered) {
+            mTargetTriggered = false;
+        } else {
+            startPing();
+        }
     }
 
     @Override
@@ -126,12 +112,15 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
         switch (resId) {
             case R.drawable.ic_lockscreen_answer:
                 mAnswerListener.onAnswer();
+                mTargetTriggered = true;
                 break;
             case R.drawable.ic_lockscreen_decline:
                 mAnswerListener.onDecline();
+                mTargetTriggered = true;
                 break;
             case R.drawable.ic_lockscreen_text:
                 mAnswerListener.onText();
+                mTargetTriggered = true;
                 break;
             default:
                 // Code should never reach here.
