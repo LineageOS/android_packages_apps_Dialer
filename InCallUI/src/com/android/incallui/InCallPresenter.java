@@ -135,6 +135,7 @@ public class InCallPresenter implements CallList.Listener {
      */
     public void setActivity(InCallActivity inCallActivity) {
         boolean updateListeners = false;
+        boolean doAttemptCleanup = false;
 
         if (inCallActivity != null) {
             if (mInCallActivity == null) {
@@ -171,9 +172,12 @@ public class InCallPresenter implements CallList.Listener {
             Log.i(this, "UI Destroyed)");
             updateListeners = true;
             mInCallActivity = null;
-            attemptCleanup();
-        }
 
+            // We attempt cleanup for the destroy case but only after we recalculate the state
+            // to see if we need to come back up or stay shut down. This is why we do the cleanup
+            // after the call to onCallListChange() instead of directly here.
+            doAttemptCleanup = true;
+        }
 
         // Messages can come from the telephony layer while the activity is coming up
         // and while the activity is going down.  So in both cases we need to recalculate what
@@ -183,10 +187,19 @@ public class InCallPresenter implements CallList.Listener {
         //           (2) All calls could disconnect and then get a new incoming call before the
         //               activity is destroyed.
         //
-        // ... but only if we are still connected (or got a new connection) to the service.
-        // Otherwise the service will come back up when it needs us.
-        if (updateListeners && mServiceConnected) {
+        // b/1122139 - We previously had a check for mServiceConnected here as well, but there are
+        // cases where we need to recalculate the current state even if the service in not
+        // connected.  In particular the case where startOrFinish() is called while the app is
+        // already finish()ing. In that case, we skip updating the state with the knowledge that
+        // we will check again once the activity has finished. That means we have to recalculate the
+        // state here even if the service is disconnected since we may not have finished a state
+        // transition while finish()ing.
+        if (updateListeners) {
             onCallListChange(mCallList);
+        }
+
+        if (doAttemptCleanup) {
+            attemptCleanup();
         }
     }
 
