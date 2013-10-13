@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a50d1a3_a50ea4e3",
+        "filename": "res/values-ug/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-10-13T04:13:46Z",
+      "side": 1,
+      "message": "Whitespace error",
+      "revId": "a1fa64578a0fd16f6968f06a29e2b19bfd31bbec",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
