@@ -66,6 +66,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     @Override
     public void onStateChange(InCallState state, CallList callList) {
+
         if (state == InCallState.OUTGOING) {
             mCall = callList.getOutgoingCall();
         } else if (state == InCallState.INCALL) {
@@ -171,6 +172,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     public void muteClicked(boolean checked) {
         Log.d(this, "turning on mute: " + checked);
+
         CallCommandClient.getInstance().mute(checked);
     }
 
@@ -182,7 +184,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         Log.d(this, "holding: " + mCall.getCallId());
 
         CallCommandClient.getInstance().hold(mCall.getCallId(), checked);
-        getUi().setHold(checked);
     }
 
     public void mergeClicked() {
