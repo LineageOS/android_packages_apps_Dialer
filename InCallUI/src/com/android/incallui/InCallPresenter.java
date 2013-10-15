@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import com.android.incallui.service.PhoneNumberService;
 import com.google.android.collect.Sets;
 import com.google.common.base.Preconditions;
 
@@ -211,6 +212,9 @@ public class InCallPresenter implements CallList.Listener {
      */
     @Override
     public void onCallListChange(CallList callList) {
+        if (callList == null) {
+            return;
+        }
         InCallState newState = getPotentialStateFromCallList(callList);
         newState = startOrFinishUi(newState);
 
@@ -270,8 +274,12 @@ public class InCallPresenter implements CallList.Listener {
      * Given the call list, return the state in which the in-call screen should be.
      */
     public static InCallState getPotentialStateFromCallList(CallList callList) {
+
         InCallState newState = InCallState.NO_CALLS;
 
+        if (callList == null) {
+            return newState;
+        }
         if (callList.getIncomingCall() != null) {
             newState = InCallState.INCOMING;
         } else if (callList.getOutgoingCall() != null) {
@@ -321,10 +329,15 @@ public class InCallPresenter implements CallList.Listener {
     /**
      * Hangs up any active or outgoing calls.
      */
-    public void hangUpOngoingCall() {
+    public void hangUpOngoingCall(Context context) {
         // By the time we receive this intent, we could be shut down and call list
         // could be null.  Bail in those cases.
         if (mCallList == null) {
+            if (mStatusBarNotifier == null) {
+                // The In Call UI has crashed but the notification still stayed up. We should not
+                // come to this stage.
+                StatusBarNotifier.clearInCallNotification(context);
+            }
             return;
         }
 
