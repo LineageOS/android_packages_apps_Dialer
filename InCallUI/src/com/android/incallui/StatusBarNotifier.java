@@ -140,6 +140,15 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         mIsShowingNotification = false;
     }
 
+    /* package */ static void clearInCallNotification(Context backupContext) {
+        Log.i(StatusBarNotifier.class.getSimpleName(),
+                "Something terrible happened. Clear all InCall notifications");
+
+        NotificationManager notificationManager =
+                (NotificationManager) backupContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(IN_CALL_NOTIFICATION);
+    }
+
     /**
      * Helper method for updateInCallNotification() and
      * updateNotificationAndLaunchIncomingCallUi(): Update the phone app's
@@ -390,6 +399,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      * Gets the most relevant call to display in the notification.
      */
     private Call getCallToShow(CallList callList) {
+        if (callList == null) {
+            return null;
+        }
         Call call = callList.getIncomingCall();
         if (call == null) {
             call = callList.getOutgoingCall();
