@@ -62,7 +62,7 @@
                     android:id="@+id/voice_search_button"
                     android:layout_height="40dp"
                     android:layout_width="40dp"
-                    android:padding="6dp"
+                    android:padding="3dp"
                     android:src="@drawable/ic_voice_search"
                     android:clickable="true"
                     android:contentDescription="@string/description_start_voice_search"
