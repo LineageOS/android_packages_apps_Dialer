@@ -31,8 +31,7 @@
         <ImageView
             android:id="@+id/arrow"
             android:layout_width="48dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="12dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="12dp"
             android:duplicateParentState="true"
@@ -60,7 +59,7 @@
             android:background="@color/undo_dialogue_text_color"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"/>
+            android:layout_marginStart="16dp"/>
 
         <ImageButton
             android:id="@+id/dismiss_button"
