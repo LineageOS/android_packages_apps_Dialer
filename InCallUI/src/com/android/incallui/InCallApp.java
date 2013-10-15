@@ -63,7 +63,7 @@ public class InCallApp extends Application {
                 // TODO: Commands of this nature should exist in the CallList or a
                 //       CallController class that has access to CallCommandClient and
                 //       CallList.
-                InCallPresenter.getInstance().hangUpOngoingCall();
+                InCallPresenter.getInstance().hangUpOngoingCall(context);
             }
         }
     }
