@@ -101,8 +101,8 @@
              action button that brings up a popup menu; see
              btn_compound_audio.xml and InCallTouchUi.updateAudioButton()
              for the full details. -->
-        <ToggleButton android:id="@+id/audioButton"
-                      style="@style/InCallCompoundButton"
+        <ImageButton android:id="@+id/audioButton"
+                      style="@style/InCallButton"
                       android:background="@drawable/btn_compound_audio"
                       android:contentDescription="@string/onscreenAudioText"
                 />
@@ -112,9 +112,9 @@
 
         <!-- "Mute" -->
         <!-- This is a "compound button": it has checked and unchecked states. -->
-        <ToggleButton android:id="@+id/muteButton"
-                      style="@style/InCallCompoundButton"
-                      android:background="@drawable/btn_compound_mute"
+        <ImageButton android:id="@+id/muteButton"
+                      style="@style/InCallButton"
+                      android:background="@drawable/btn_fake_compound_mute"
                       android:contentDescription="@string/onscreenMuteText"
                 />
 
@@ -126,9 +126,9 @@
              must always be set to GONE. -->
         <!-- "Hold" -->
         <!-- This is a "compound button": it has checked and unchecked states. -->
-        <ToggleButton android:id="@+id/holdButton"
-                      style="@style/InCallCompoundButton"
-                      android:background="@drawable/btn_compound_hold"
+        <ImageButton android:id="@+id/holdButton"
+                      style="@style/InCallButton"
+                      android:background="@drawable/btn_fake_compound_hold"
                       android:contentDescription="@string/onscreenHoldText"
                 />
         <!-- "Swap" (or "Manage calls" in some CDMA states) -->

@@ -41,9 +41,9 @@ public class CallButtonFragment
         implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener, OnDismissListener,
         View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
-    private ToggleButton mMuteButton;
-    private ToggleButton mAudioButton;
-    private ToggleButton mHoldButton;
+    private ImageButton mMuteButton;
+    private ImageButton mAudioButton;
+    private ImageButton mHoldButton;
     private ToggleButton mShowDialpadButton;
     private ImageButton mMergeButton;
     private ImageButton mAddCallButton;
@@ -107,16 +107,16 @@ public class CallButtonFragment
         // along the inside perimeter of the button.
         mEndCallButton.setOnTouchListener(new SmallerHitTargetTouchListener());
 
-        mMuteButton = (ToggleButton) parent.findViewById(R.id.muteButton);
+        mMuteButton = (ImageButton) parent.findViewById(R.id.muteButton);
         mMuteButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                final CompoundButton button = (CompoundButton) v;
-                getPresenter().muteClicked(button.isChecked());
+                final ImageButton button = (ImageButton) v;
+                getPresenter().muteClicked(!button.isSelected());
             }
         });
 
-        mAudioButton = (ToggleButton) parent.findViewById(R.id.audioButton);
+        mAudioButton = (ImageButton) parent.findViewById(R.id.audioButton);
         mAudioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,11 +124,12 @@ public class CallButtonFragment
             }
         });
 
-        mHoldButton = (ToggleButton) parent.findViewById(R.id.holdButton);
-        mHoldButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mHoldButton = (ImageButton) parent.findViewById(R.id.holdButton);
+        mHoldButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                getPresenter().holdClicked(isChecked);
+            public void onClick(View v) {
+                final ImageButton button = (ImageButton) v;
+                getPresenter().holdClicked(!button.isSelected());
             }
         });
 
@@ -210,7 +211,7 @@ public class CallButtonFragment
 
     @Override
     public void setMute(boolean value) {
-        mMuteButton.setChecked(value);
+        mMuteButton.setSelected(value);
     }
 
     @Override
@@ -220,7 +221,7 @@ public class CallButtonFragment
 
     @Override
     public void setHold(boolean value) {
-        mHoldButton.setChecked(value);
+        mHoldButton.setSelected(value);
     }
 
     @Override
@@ -422,7 +423,7 @@ public class CallButtonFragment
         final int VISIBLE = 255;
 
         mAudioButton.setEnabled(audioButtonEnabled);
-        mAudioButton.setChecked(audioButtonChecked);
+        mAudioButton.setSelected(audioButtonChecked);
 
         final LayerDrawable layers = (LayerDrawable) mAudioButton.getBackground();
         Log.d(this, "'layers' drawable: " + layers);
