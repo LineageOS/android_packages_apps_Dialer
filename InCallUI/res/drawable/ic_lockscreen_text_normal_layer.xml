@@ -28,5 +28,5 @@
         android:right="@dimen/incoming_call_widget_asset_margin"
         android:bottom="@dimen/incoming_call_widget_asset_margin"
         android:left="@dimen/incoming_call_widget_asset_margin"
-        android:drawable="@drawable/ic_lockscreen_text_normal" />
+        android:drawable="@drawable/ic_text_holo_dark" />
 </layer-list>
