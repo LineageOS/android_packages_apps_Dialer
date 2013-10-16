@@ -93,7 +93,7 @@
     <string name="sum_cfu_enabled" msgid="2450052502198827927">"Reenviar todas las llamadas a <xliff:g id="PHONENUMBER">{0}</xliff:g>"</string>
     <string name="sum_cfu_enabled_no_number" msgid="6591985777096823616">"El número no está disponible"</string>
     <string name="sum_cfu_disabled" msgid="3698472522160364904">"Desactivado"</string>
-    <string name="labelCFB" msgid="218938523102207587">"Reenviar si está ocup."</string>
+    <string name="labelCFB" msgid="218938523102207587">"Reenviar cuando está ocupado"</string>
     <string name="messageCFB" msgid="3711089705936187129">"Número cuando está ocupado"</string>
     <string name="sum_cfb_enabled" msgid="5984198104833116690">"Reenviar a <xliff:g id="PHONENUMBER">{0}</xliff:g>"</string>
     <string name="sum_cfb_disabled" msgid="227440009979537651">"Desactivado"</string>
@@ -309,7 +309,7 @@
   </string-array>
     <string name="cdma_activate_device" msgid="3793805892364814518">"Activar dispositivo"</string>
     <string name="cdma_lte_data_service" msgid="4255018217292548962">"Configurar servicio de datos"</string>
-    <string name="fdn" msgid="7878832555095183202">"Números de marc. fijos"</string>
+    <string name="fdn" msgid="7878832555095183202">"Números de marcación fijos"</string>
     <string name="manage_fdn_list" msgid="8777755791892122369">"Lista de NMF"</string>
     <string name="fdn_activation" msgid="2156479741307463576">"Activación de NMF"</string>
     <string name="fdn_enabled" msgid="5238109009915521240">"Los números de marcación fija están activados"</string>
