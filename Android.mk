@@ -6,7 +6,7 @@ LOCAL_MODULE_TAGS := optional
 contacts_common_dir := ../ContactsCommon
 
 src_dirs := src $(contacts_common_dir)/src
-res_dirs := res $(contacts_common_dir)/res
+res_dirs := res-override res $(contacts_common_dir)/res
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs))
 LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(res_dirs))
