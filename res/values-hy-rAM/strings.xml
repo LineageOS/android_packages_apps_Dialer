@@ -158,7 +158,7 @@
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Զանգել <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Ավելացնել կոնտակտներում"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> նոր բաց թողնված զանգ"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Հաճախ կանչվող ընտրյալներ &amp; կոնտակտները\nկցուցադրվեն այստեղ:\nԿարող եք զանգել:"</string>
+    <string name="no_favorites" msgid="5212485868783382971">"Հաճախ կանչվող ընտրյալները և կոնտակտները\nկցուցադրվեն այստեղ:\nԿարող եք զանգել:"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Հպեք նկարին՝ բոլոր համարները տեսնելու, կամ հպեք ու պահեք՝ վերադասավորելու համար:"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Անտեսել"</string>
 </resources>
