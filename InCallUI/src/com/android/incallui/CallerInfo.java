@@ -380,9 +380,8 @@ public class CallerInfo {
     // 'Emergency Number' and let the UI make the decision about what
     // should be displayed.
     /* package */ CallerInfo markAsEmergency(Context context) {
-        phoneNumber = context.getString(
-            com.android.internal.R.string.emergency_call_dialog_number_for_display);
-        photoResource = com.android.internal.R.drawable.picture_emergency;
+        phoneNumber = context.getString(R.string.emergency_call_dialog_number_for_display);
+        photoResource = R.drawable.picture_emergency;
         mIsEmergency = true;
         return this;
     }
