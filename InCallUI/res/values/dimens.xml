@@ -98,8 +98,6 @@
          So, (94 - 38)/2 ==> 28dp -->
     <dimen name="incoming_call_widget_asset_margin">28dp</dimen>
 
-
-
     <!-- Size of alarm alert outer ring. -->
     <dimen name="glowpadview_outerring_diameter">270dip</dimen>
 

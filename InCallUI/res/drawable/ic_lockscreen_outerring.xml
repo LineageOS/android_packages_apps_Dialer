@@ -14,20 +14,11 @@
      limitations under the License.
 -->
 
-<!-- Touch handle for the GlowPadView widget on the incoming call screen -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:state_enabled="true"
-        android:state_active="false"
-        android:state_focused="false"
-        android:drawable="@drawable/ic_in_call_touch_handle_normal" />
-
-    <!-- "Pressed" state uses the same simple "ring" image as on the lockscreen -->
-    <item
-        android:state_enabled="true"
-        android:state_active="true"
-        android:state_focused="false"
-        android:drawable="@drawable/ic_lockscreen_handle_pressed" />
-
-</selector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"
+    >
+    <size android:height="@dimen/glowpadview_outerring_diameter"
+          android:width="@dimen/glowpadview_outerring_diameter" />
+    <solid android:color="#00000000" />
+    <stroke android:color="#1affffff" android:width="2dp" />
+</shape>
