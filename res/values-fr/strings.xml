@@ -90,7 +90,7 @@
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Messages vocaux uniquement"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Afficher tous les appels"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Ajouter une pause de 2 s"</string>
-    <string name="add_wait" msgid="3360818652790319634">"Ajouter Attente"</string>
+    <string name="add_wait" msgid="3360818652790319634">"Ajouter une attente"</string>
     <string name="call_settings" msgid="7666474782093693667">"Paramètres"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nouveau contact"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Tous les contacts"</string>
