@@ -54,7 +54,7 @@
         android:id="@+id/manageConferenceHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@*android:drawable/ab_transparent_dark_holo">
+        android:background="@drawable/ab_transparent_dark_holo">
 
         <LinearLayout
             android:id="@+id/manage_done"
@@ -73,7 +73,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                style="@*android:style/TextAppearance.Holo.Widget.ActionBar.Title"
+                style="@android:style/TextAppearance.Holo.Widget.ActionBar.Title"
                 android:gravity="center_vertical"
                 android:text="@string/manageConferenceLabel"/>
         </LinearLayout>
