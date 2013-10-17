@@ -70,9 +70,9 @@
         <item>@null</item>"
     </array>
     <array name="incoming_call_widget_3way_direction_descriptions">
-        <item>@*android:string/description_direction_right</item>
-        <item>@*android:string/description_direction_up</item>
-        <item>@*android:string/description_direction_left</item>
+        <item>@string/description_direction_right</item>
+        <item>@string/description_direction_up</item>
+        <item>@string/description_direction_left</item>
         <item>@null</item>
     </array>
 
@@ -93,9 +93,9 @@
         <item>@null</item>"
     </array>
     <array name="incoming_call_widget_2way_direction_descriptions">
-        <item>@*android:string/description_direction_right</item>
+        <item>@string/description_direction_right</item>
         <item>@null</item>
-        <item>@*android:string/description_direction_left</item>
+        <item>@string/description_direction_left</item>
         <item>@null</item>
     </array>
 
