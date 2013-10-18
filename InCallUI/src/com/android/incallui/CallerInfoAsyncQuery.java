@@ -27,8 +27,12 @@ import android.os.Message;
 import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+
+import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.contacts.common.util.TelephonyManagerUtils;
+
+import java.util.Locale;
 
 /**
  * Helper class to make it easier to run asynchronous caller-id lookup queries.
@@ -231,7 +235,7 @@ public class CallerInfoAsyncQuery {
                     // comments at the top of CallerInfo class).
                     mCallerInfo = new CallerInfo().markAsEmergency(mQueryContext);
                 } else if (cw.event == EVENT_VOICEMAIL_NUMBER) {
-                    mCallerInfo = new CallerInfo().markAsVoiceMail();
+                    mCallerInfo = new CallerInfo().markAsVoiceMail(mQueryContext);
                 } else {
                     mCallerInfo = CallerInfo.getCallerInfo(mQueryContext, mQueryUri, cursor);
                     Log.d(this, "==> Got mCallerInfo: " + mCallerInfo);
@@ -268,9 +272,10 @@ public class CallerInfoAsyncQuery {
 
                     // Use the number entered by the user for display.
                     if (!TextUtils.isEmpty(cw.number)) {
-                        mCallerInfo.phoneNumber = PhoneNumberUtils.formatNumber(cw.number,
+                        mCallerInfo.phoneNumber = PhoneNumberHelper.formatNumber(cw.number,
                                 mCallerInfo.normalizedNumber,
-                                CallerInfo.getCurrentCountryIso(mQueryContext));
+                                TelephonyManagerUtils.getCurrentCountryIso(mQueryContext,
+                                        Locale.getDefault()));
                     }
                 }
 
@@ -343,7 +348,7 @@ public class CallerInfoAsyncQuery {
         String selection;
         String[] selectionArgs;
 
-        if (PhoneNumberUtils.isUriNumber(number)) {
+        if (PhoneNumberHelper.isUriNumber(number)) {
             // "number" is really a SIP address.
             Log.d(LOG_TAG, "  - Treating number as a SIP address: " + /* number */"xxxxxxx");
 
@@ -396,9 +401,9 @@ public class CallerInfoAsyncQuery {
         cw.number = number;
 
         // check to see if these are recognized numbers, and use shortcuts if we can.
-        if (PhoneNumberUtils.isLocalEmergencyNumber(number, context)) {
+        if (PhoneNumberHelper.isLocalEmergencyNumber(number, context)) {
             cw.event = EVENT_EMERGENCY_NUMBER;
-        } else if (PhoneNumberUtils.isVoiceMailNumber(number)) {
+        } else if (TelephonyManagerUtils.isVoiceMailNumber(number, context)) {
             cw.event = EVENT_VOICEMAIL_NUMBER;
         } else {
             cw.event = EVENT_NEW_QUERY;

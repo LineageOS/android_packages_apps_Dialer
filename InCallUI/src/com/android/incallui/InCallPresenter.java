@@ -17,7 +17,7 @@
 package com.android.incallui;
 
 import com.android.incallui.service.PhoneNumberService;
-import com.google.android.collect.Sets;
+import com.google.common.collect.Sets;
 import com.google.common.base.Preconditions;
 
 import android.content.Context;

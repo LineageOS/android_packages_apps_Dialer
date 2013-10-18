@@ -16,9 +16,9 @@
 
 package com.android.incallui;
 
-import com.google.android.collect.Lists;
-import com.google.android.collect.Maps;
-import com.google.android.collect.Sets;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.common.base.Preconditions;
 
 import android.os.Handler;
@@ -49,7 +49,7 @@ public class CallList {
     private final HashMap<Integer, Call> mCallMap = Maps.newHashMap();
     private final HashMap<Integer, ArrayList<String>> mCallTextReponsesMap =
             Maps.newHashMap();
-    private final Set<Listener> mListeners = Sets.newArraySet();
+    private final Set<Listener> mListeners = Sets.newHashSet();
     private final HashMap<Integer, List<CallUpdateListener>> mCallUpdateListenerMap = Maps
             .newHashMap();
 

@@ -25,17 +25,17 @@ import android.net.Uri;
 import android.os.Looper;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.incallui.service.PhoneNumberService;
 import com.android.incalluibind.ServiceFactory;
 import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.CallIdentification;
 import com.android.services.telephony.common.MoreStrings;
-import com.google.android.collect.Lists;
-import com.google.android.collect.Maps;
-import com.google.android.collect.Sets;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
@@ -375,7 +375,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             String number = info.phoneNumber;
 
             if (!TextUtils.isEmpty(number)) {
-                isSipCall = PhoneNumberUtils.isUriNumber(number);
+                isSipCall = PhoneNumberHelper.isUriNumber(number);
                 if (number.startsWith("sip:")) {
                     number = number.substring(4);
                 }

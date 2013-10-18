@@ -16,6 +16,8 @@
 
 package com.android.incallui;
 
+import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.contacts.common.util.TelephonyManagerUtils;
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
@@ -24,7 +26,7 @@ import com.android.services.telephony.common.AudioMode;
 import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.Call.Capabilities;
 
-import android.telephony.PhoneNumberUtils;
+import android.app.Fragment;
 
 /**
  * Logic for call buttons.
@@ -66,6 +68,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     @Override
     public void onStateChange(InCallState state, CallList callList) {
+        CallButtonUi ui = getUi();
 
         if (state == InCallState.OUTGOING) {
             mCall = callList.getOutgoingCall();
@@ -76,12 +79,18 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             // (On previous releases we showed it when in-call shows up, before waiting for
             // OUTGOING.  We may want to do that once we start showing "Voice mail" label on
             // the dialpad too.)
-            if (mPreviousState == InCallState.OUTGOING
-                    && mCall != null && PhoneNumberUtils.isVoiceMailNumber(mCall.getNumber())) {
-                getUi().displayDialpad(true);
+            if (ui != null) {
+                final Fragment callButtonFragment = (Fragment) ui;
+                if (mPreviousState == InCallState.OUTGOING && mCall != null
+                        && TelephonyManagerUtils.isVoiceMailNumber(mCall.getNumber(),
+                                callButtonFragment.getActivity())) {
+                    ui.displayDialpad(true);
+                }
             }
         } else if (state == InCallState.INCOMING) {
-            getUi().displayDialpad(false);
+            if (ui != null) {
+                ui.displayDialpad(false);
+            }
             mCall = null;
         } else {
             mCall = null;

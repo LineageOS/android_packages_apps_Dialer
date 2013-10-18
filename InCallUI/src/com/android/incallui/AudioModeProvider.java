@@ -16,12 +16,11 @@
 
 package com.android.incallui;
 
-import com.google.android.collect.Lists;
+import com.google.common.collect.Lists;
 
 import com.android.services.telephony.common.AudioMode;
 
 import java.util.List;
-
 
 /**
  * Proxy class for getting and setting the audio mode.

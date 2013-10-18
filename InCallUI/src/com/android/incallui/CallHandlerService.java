@@ -233,7 +233,10 @@ public class CallHandlerService extends Service {
      */
     private class MainHandler extends Handler {
         MainHandler() {
-            super(getApplicationContext().getMainLooper(), null, true);
+            // TODO: Evaluate whether we need to send messages asynchronously. The Handler
+            // implementation in the public API handles message sending synchronously, which may
+            // cause deadlocks.
+            super(getApplicationContext().getMainLooper());
         }
 
         @Override
