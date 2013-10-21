@@ -115,7 +115,7 @@
     <string name="reverting_settings" msgid="4752151682666912828">"सेटिंग वापस ला रहा है..."</string>
     <string name="response_error" msgid="6674110501330139405">"नेटवर्क से अनपेक्षित प्रतिसाद."</string>
     <string name="exception_error" msgid="7027667130619518211">"नेटवर्क या सिम कार्ड त्रुटि."</string>
-    <string name="fdn_check_failure" msgid="18200614306525434">"आपके फ़ोन एप्‍स की फ़िक्‍स्‍ड डायलिंग नंबर सेटिंग चालू है. इसके परिणामस्‍वरूप, कॉल से संबंधित कुछ सुविधाएं कार्य नहीं कर रही हैं."</string>
+    <string name="fdn_check_failure" msgid="18200614306525434">"आपके फ़ोन ऐप्स की फ़िक्‍स्‍ड डायलिंग नंबर सेटिंग चालू है. इसके परिणामस्‍वरूप, कॉल से संबंधित कुछ सुविधाएं कार्य नहीं कर रही हैं."</string>
     <string name="radio_off_error" msgid="2304459933248513376">"इन सेटिंग को देखने के पहले रेडियो चालू करें."</string>
     <string name="close_dialog" msgid="2365884406356986917">"ठीक है"</string>
     <string name="enable" msgid="1059008390636773574">"सक्षम करें"</string>
@@ -612,6 +612,9 @@
     <string name="description_target_answer" msgid="7205604197797472471">"उत्तर"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS भेजें"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"अस्वीकार करें"</string>
+    <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> के लिए ऊपर स्‍लाइड करें."</string>
+    <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> के लिए बाएं स्‍लाइड करें."</string>
+    <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> के लिए दाएं स्‍लाइड करें."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"कंपन करें"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"कंपन करें"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"ध्वनि"</string>
@@ -622,4 +625,5 @@
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"डायलपैड स्वत: पूर्ण"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"रिंगटोन और कंपन"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"कॉन्फ़्रेंस कॉल प्रबंधित करें"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"आपातकालीन नंबर"</string>
 </resources>

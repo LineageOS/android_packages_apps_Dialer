@@ -58,7 +58,7 @@
     <string name="no_vm_number_msg" msgid="1300729501030053828">"لم يتم تخزين رقم بريد صوتي على بطاقة SIM."</string>
     <string name="add_vm_number_str" msgid="4676479471644687453">"إضافة رقم"</string>
     <string name="puk_unlocked" msgid="2284912838477558454">"تم إلغاء حظر بطاقة SIM. جارٍ إلغاء تأمين الهاتف..."</string>
-    <string name="label_ndp" msgid="780479633159517250">"رقم التعريف الشخصي لإلغاء تأمين شبكة SIM"</string>
+    <string name="label_ndp" msgid="780479633159517250">"رمز PIN لإلغاء تأمين شبكة SIM"</string>
     <string name="sim_ndp_unlock_text" msgid="683628237760543009">"إلغاء تأمين"</string>
     <string name="sim_ndp_dismiss_text" msgid="1604823375752456947">"استبعاد"</string>
     <string name="requesting_unlock" msgid="6412629401033249351">"جارٍ طلب إلغاء تأمين الشبكة..."</string>
@@ -85,8 +85,8 @@
     <string name="labelCW" msgid="6120513814915920200">"انتظار المكالمة"</string>
     <string name="sum_cw_enabled" msgid="8083061901633671397">"تنبيهي بالمكالمات الواردة أثناء المكالمة"</string>
     <string name="sum_cw_disabled" msgid="3648693907300104575">"تنبيهي بالمكالمات الواردة أثناء المكالمة"</string>
-    <string name="call_forwarding_settings" msgid="3378927671091537173">"إعدادات إعادة توجيه الاتصال"</string>
-    <string name="labelCF" msgid="2574386948026924737">"إعادة توجيه الاتصال"</string>
+    <string name="call_forwarding_settings" msgid="3378927671091537173">"إعدادات اعادة توجيه المكالمة"</string>
+    <string name="labelCF" msgid="2574386948026924737">"اعادة توجيه المكالمة"</string>
     <string name="labelCFU" msgid="8147177368148660600">"إعادة التوجيه دومًا"</string>
     <string name="messageCFU" msgid="3560082430662923687">"استخدام هذا الرقم دائمًا"</string>
     <string name="sum_cfu_enabled_indicator" msgid="4014187342724130197">"إعادة التوجيه كل المكالمات"</string>
@@ -97,17 +97,17 @@
     <string name="messageCFB" msgid="3711089705936187129">"الرقم عندما يكون مشغولاً"</string>
     <string name="sum_cfb_enabled" msgid="5984198104833116690">"إعادة التوجيه إلى <xliff:g id="PHONENUMBER">{0}</xliff:g>"</string>
     <string name="sum_cfb_disabled" msgid="227440009979537651">"معطّل"</string>
-    <string name="disable_cfb_forbidden" msgid="3506984333877998061">"لا يتيح مشغل شبكة الجوال تعطيل إعادة توجيه الاتصال عندما يكون هاتفك مشغولاً."</string>
+    <string name="disable_cfb_forbidden" msgid="3506984333877998061">"لا يتيح مشغل شبكة الجوال تعطيل اعادة توجيه المكالمة عندما يكون هاتفك مشغولاً."</string>
     <string name="labelCFNRy" msgid="3646316323834351390">"إعادة التوجيه عند عدم الرد"</string>
     <string name="messageCFNRy" msgid="672317899884380374">"الرقم عندما لا يتم الرد"</string>
     <string name="sum_cfnry_enabled" msgid="6955775691317662910">"إعادة التوجيه إلى <xliff:g id="PHONENUMBER">{0}</xliff:g>"</string>
     <string name="sum_cfnry_disabled" msgid="8422350929957344729">"معطّل"</string>
-    <string name="disable_cfnry_forbidden" msgid="4308233959150658058">"لا يتيح مشغل شبكة الجوال تعطيل إعادة توجيه الاتصال عند عدم رد هاتفك."</string>
+    <string name="disable_cfnry_forbidden" msgid="4308233959150658058">"لا يتيح مشغل شبكة الجوال تعطيل اعادة توجيه المكالمة عند عدم رد هاتفك."</string>
     <string name="labelCFNRc" msgid="47183615370850000">"إعادة التوجيه عندما لا يمكن الوصول"</string>
     <string name="messageCFNRc" msgid="6380695421020295119">"الرقم عندما لا يمكن الوصول"</string>
     <string name="sum_cfnrc_enabled" msgid="7010898346095497421">"إعادة التوجيه إلى <xliff:g id="PHONENUMBER">{0}</xliff:g>"</string>
     <string name="sum_cfnrc_disabled" msgid="7222141261321276464">"معطّل"</string>
-    <string name="disable_cfnrc_forbidden" msgid="5646361343094064333">"لا يتيح مشغل شبكة الجوال تعطيل إعادة توجيه الاتصال عند عدم التمكن من الوصول إلى هاتفك."</string>
+    <string name="disable_cfnrc_forbidden" msgid="5646361343094064333">"لا يتيح مشغل شبكة الجوال تعطيل اعادة توجيه المكالمة عند عدم التمكن من الوصول إلى هاتفك."</string>
     <string name="updating_title" msgid="6146755386174019046">"إعدادات الاتصال"</string>
     <string name="error_updating_title" msgid="7970259216988931777">"خطأ في إعدادات الاتصال"</string>
     <string name="reading_settings" msgid="1920291699287055284">"جارٍ قراءة الإعدادات..."</string>
@@ -316,11 +316,11 @@
     <string name="fdn_disabled" msgid="4700049736675368279">"تم تعطيل أرقام الاتصال الثابتة"</string>
     <string name="enable_fdn" msgid="3740191529180493851">"تمكين FDN"</string>
     <string name="disable_fdn" msgid="7944020890722540616">"تعطيل FDN"</string>
-    <string name="change_pin2" msgid="2153563695382176676">"تغيير رقم التعريف الشخصي PIN2"</string>
+    <string name="change_pin2" msgid="2153563695382176676">"تغيير رمز PIN PIN2"</string>
     <string name="enable_fdn_ok" msgid="7215588870329688132">"تعطيل FDN"</string>
     <string name="disable_fdn_ok" msgid="5727046928930740173">"تمكين FDN"</string>
     <string name="sum_fdn" msgid="1959399454900272878">"إدارة أرقام الاتصال الثابتة"</string>
-    <string name="sum_fdn_change_pin" msgid="6666549734792827932">"تغيير رقم التعريف الشخصي للدخول إلى FDN"</string>
+    <string name="sum_fdn_change_pin" msgid="6666549734792827932">"تغيير رمز PIN للدخول إلى FDN"</string>
     <string name="sum_fdn_manage_list" msgid="8431088265332628316">"إدارة قائمة أرقام الهاتف"</string>
     <string name="voice_privacy" msgid="3776841382844614716">"خصوصية الصوت"</string>
     <string name="voice_privacy_summary" msgid="3159383389833516214">"تمكين وضع الخصوصية المحسن"</string>
@@ -351,35 +351,35 @@
     <string name="simContacts_empty" msgid="5270660846489561932">"ليس هناك جهات اتصال على بطاقة SIM."</string>
     <string name="simContacts_title" msgid="1861472842524839921">"حدد جهات اتصال لاستيرادها"</string>
     <string name="simContacts_airplaneMode" msgid="1846161429087789936">"لاستيراد جهات اتصال من بطاقة SIM، الرجاء إيقاف وضع الطائرة أولاً."</string>
-    <string name="enable_pin" msgid="5422767284133234860">"تمكين/تعطيل رقم التعريف الشخصي لبطاقة SIM"</string>
-    <string name="change_pin" msgid="9174186126330785343">"تغيير رقم التعريف الشخصي لبطاقة SIM"</string>
-    <string name="enter_pin_text" msgid="8532615714751931951">"رقم التعريف الشخصي لبطاقة SIM:"</string>
-    <string name="oldPinLabel" msgid="5287773661246368314">"رقم التعريف الشخصي القديم"</string>
-    <string name="newPinLabel" msgid="207488227285336897">"رقم التعريف الشخصي الجديد"</string>
-    <string name="confirmPinLabel" msgid="257597715098070206">"تأكيد رقم التعريف الشخصي الجديد"</string>
-    <string name="badPin" msgid="8955102849303984935">"رقم التعريف الشخصي القديم الذي كتبته غير صحيح. حاول مرة أخرى."</string>
+    <string name="enable_pin" msgid="5422767284133234860">"تمكين/تعطيل رمز PIN لبطاقة SIM"</string>
+    <string name="change_pin" msgid="9174186126330785343">"تغيير رمز PIN لبطاقة SIM"</string>
+    <string name="enter_pin_text" msgid="8532615714751931951">"رمز PIN لبطاقة SIM:"</string>
+    <string name="oldPinLabel" msgid="5287773661246368314">"رمز PIN القديم"</string>
+    <string name="newPinLabel" msgid="207488227285336897">"رمز PIN الجديد"</string>
+    <string name="confirmPinLabel" msgid="257597715098070206">"تأكيد رمز PIN الجديد"</string>
+    <string name="badPin" msgid="8955102849303984935">"رمز PIN القديم الذي كتبته غير صحيح. حاول مرة أخرى."</string>
     <string name="mismatchPin" msgid="5923253370683071889">"أرقام التعريف الشخصي PIN2 التي كتبتها غير متطابقة. حاول مرة أخرى."</string>
-    <string name="invalidPin" msgid="5981171102258684792">"اكتب رقم التعريف الشخصي المكون من 4 إلى 8 أرقام."</string>
-    <string name="disable_sim_pin" msgid="3992926931620188855">"تعطيل رقم التعريف الشخصي لبطاقة SIM"</string>
-    <string name="enable_sim_pin" msgid="5803702443844458831">"تمكين رقم التعريف الشخصي لبطاقة SIM"</string>
+    <string name="invalidPin" msgid="5981171102258684792">"اكتب رمز PIN المكون من 4 إلى 8 أرقام."</string>
+    <string name="disable_sim_pin" msgid="3992926931620188855">"تعطيل رمز PIN لبطاقة SIM"</string>
+    <string name="enable_sim_pin" msgid="5803702443844458831">"تمكين رمز PIN لبطاقة SIM"</string>
     <string name="enable_in_progress" msgid="3695303775100109650">"يُرجى الانتظار…"</string>
-    <string name="enable_pin_ok" msgid="9166061915030865848">"تم تمكين رقم التعريف الشخصي لبطاقة SIM."</string>
-    <string name="disable_pin_ok" msgid="5596999379593924850">"تم تعطيل رقم التعريف الشخصي لبطاقة SIM."</string>
-    <string name="pin_failed" msgid="2298841192582192277">"رقم التعريف الشخصي الذي كتبته ليس صحيحًا."</string>
-    <string name="pin_changed" msgid="4365538014588501049">"تم تغيير رقم التعريف الشخصي لبطاقة SIM بنجاح."</string>
+    <string name="enable_pin_ok" msgid="9166061915030865848">"تم تمكين رمز PIN لبطاقة SIM."</string>
+    <string name="disable_pin_ok" msgid="5596999379593924850">"تم تعطيل رمز PIN لبطاقة SIM."</string>
+    <string name="pin_failed" msgid="2298841192582192277">"رمز PIN الذي كتبته ليس صحيحًا."</string>
+    <string name="pin_changed" msgid="4365538014588501049">"تم تغيير رمز PIN لبطاقة SIM بنجاح."</string>
     <string name="puk_requested" msgid="3898394204193202803">"كلمة المرور غير صحيحة، تم تأمين بطاقة SIM! رقم PUK2 مطلوب."</string>
     <string name="enter_pin2_text" msgid="8339444124477720345">"PIN2"</string>
-    <string name="oldPin2Label" msgid="8559146795026261502">"رقم التعريف الشخصي PIN2 القديم"</string>
+    <string name="oldPin2Label" msgid="8559146795026261502">"رمز PIN PIN2 القديم"</string>
     <string name="newPin2Label" msgid="4573956902204349054">"رقم تعريف شخصي PIN2 جديد"</string>
-    <string name="confirmPin2Label" msgid="8100319484454787708">"تأكيد رقم التعريف الشخصي PIN2 الجديد"</string>
+    <string name="confirmPin2Label" msgid="8100319484454787708">"تأكيد رمز PIN PIN2 الجديد"</string>
     <string name="badPuk2" msgid="4851734468010000418">"رقم PUK2 الذي كتبته غير صحيح. حاول مرة أخرى."</string>
-    <string name="badPin2" msgid="1041576234483629991">"رقم التعريف الشخصي PIN2 القديم الذي كتبته غير صحيح. الرجاء المحاولة مرة أخرى."</string>
+    <string name="badPin2" msgid="1041576234483629991">"رمز PIN PIN2 القديم الذي كتبته غير صحيح. الرجاء المحاولة مرة أخرى."</string>
     <string name="mismatchPin2" msgid="523029155918113440">"أرقام التعريف الشخصي PIN2 التي كتبتها غير متطابقة. حاول مرة أخرى."</string>
-    <string name="invalidPin2" msgid="8237110107480395938">"اكتب رقم التعريف الشخصي PIN2 المكون من 4 إلى 8 أرقام."</string>
+    <string name="invalidPin2" msgid="8237110107480395938">"اكتب رمز PIN PIN2 المكون من 4 إلى 8 أرقام."</string>
     <string name="invalidPuk2" msgid="1290977391033057871">"اكتب PUK2 يتكون من 8 أحرف."</string>
-    <string name="pin2_changed" msgid="1639666438836544393">"تم تغيير رقم التعريف الشخصي PIN2 بنجاح."</string>
+    <string name="pin2_changed" msgid="1639666438836544393">"تم تغيير رمز PIN PIN2 بنجاح."</string>
     <string name="label_puk2_code" msgid="302845876240219560">"اكتب رمز PUK2"</string>
-    <string name="fdn_enable_puk2_requested" msgid="4262894949634885773">"كلمة المرور غير صحيحة.غيّر رقم التعريف الشخصي PIN2 وأعد المحاولة."</string>
+    <string name="fdn_enable_puk2_requested" msgid="4262894949634885773">"كلمة المرور غير صحيحة.غيّر رمز PIN PIN2 وأعد المحاولة."</string>
     <string name="puk2_requested" msgid="8909278021238716877">"كلمة المرور غير صحيحة، تم تأمين بطاقة SIM. رقم PUK2 مطلوب."</string>
     <string name="doneButton" msgid="2859593360997984240">"تم"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"مكالمة جماعية <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
@@ -502,13 +502,13 @@
     <string name="voicemail_provider" msgid="5135942703327136909">"الخدمة"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"الإعداد"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;لم يتم التعيين&gt;"</string>
-    <string name="other_settings" msgid="3672912580359716394">"إعدادات الاتصال الأخرى"</string>
+    <string name="other_settings" msgid="3672912580359716394">"اعدادات المكالمات الاخرى"</string>
     <string name="calling_via_template" msgid="4839419581866928142">"الاتصال عبر <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"صورة جهة الاتصال"</string>
     <string name="goPrivate" msgid="865837794424530980">"انتقال إلى مكالمة خاصة"</string>
     <string name="selectContact" msgid="781975788478987237">"تحديد جهة اتصال"</string>
-    <string name="sip_settings" msgid="6699045718560859691">"إعدادات الاتصال عبر الإنترنت"</string>
-    <string name="sip_accounts" msgid="2097054001288457163">"حسابات الاتصال عبر الإنترنت (SIP)"</string>
+    <string name="sip_settings" msgid="6699045718560859691">"اعدادات المكالمة عبر الانترنت"</string>
+    <string name="sip_accounts" msgid="2097054001288457163">"حسابات المكالمة عبر الانترنت ( SIP)"</string>
     <string name="sip_accounts_title" msgid="1212889069281054570">"الحسابات"</string>
     <string name="sip_receive_calls" msgid="5635685570889971559">"تلقي المكالمات الواردة"</string>
     <string name="sip_receive_calls_summary" msgid="8403613238633679184">"يقلل من عمر البطارية"</string>
@@ -516,7 +516,7 @@
     <string name="sip_call_options_wifi_only_title" msgid="145572394529090811">"استخدام الاتصال عبر الإنترنت (Wi-Fi فقط)"</string>
     <string name="sip_call_options_entry_1" msgid="6556668894178520760">"لكل المكالمات عند توفر شبكة البيانات"</string>
     <string name="sip_call_options_entry_2" msgid="6789764029719494361">"فقط للمكالمات عبر الإنترنت"</string>
-    <string name="sip_call_options_entry_3" msgid="7474809001402649185">"المطالبة لكل اتصال"</string>
+    <string name="sip_call_options_entry_3" msgid="7474809001402649185">"السؤال لكل مكالمة"</string>
     <string name="sip_call_options_wifi_only_entry_1" msgid="7423523864471650069">"لكل المكالمات"</string>
     <string name="pick_outgoing_call_phone_type" msgid="5622916534828338675">"إجراء اتصال"</string>
     <string name="pick_outgoing_sip_phone" msgid="7012322118236208875">"استخدام حساب الاتصال عبر الإنترنت:"</string>
@@ -612,6 +612,9 @@
     <string name="description_target_answer" msgid="7205604197797472471">"رد"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"إرسال رسائل قصيرة SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"رفض"</string>
+    <string name="description_direction_up" msgid="4441409581444516690">"تمرير لأعلى لـ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_left" msgid="7129873384376533287">"تمرير لليسار لـ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_right" msgid="2122584234531957308">"تمرير لليمين لـ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"الاهتزاز"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"الاهتزاز"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"الصوت"</string>
@@ -622,4 +625,5 @@
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"الإكمال التلقائي للوحة الاتصال"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"نغمة الرنين والاهتزاز"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"إدارة مكالمة جماعية"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"رقم الطوارئ"</string>
 </resources>
