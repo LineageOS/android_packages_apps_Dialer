@@ -618,6 +618,9 @@
     <string name="description_target_answer" msgid="7205604197797472471">"接聽"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"發送短訊"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"拒絕"</string>
+    <string name="description_direction_up" msgid="4441409581444516690">"向上滑動即可<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>。"</string>
+    <string name="description_direction_left" msgid="7129873384376533287">"向左滑動即可<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>。"</string>
+    <string name="description_direction_right" msgid="2122584234531957308">"向右滑動即可<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>。"</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"震動"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"震動"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"音效"</string>
@@ -628,4 +631,5 @@
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"撥號鍵盤自動完成"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"鈴聲與震動"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"管理會議通話"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"緊急電話號碼"</string>
 </resources>

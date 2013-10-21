@@ -612,6 +612,9 @@
     <string name="description_target_answer" msgid="7205604197797472471">"Відповісти"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Надіслати SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Відхилити"</string>
+    <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> – проведіть пальцем угору."</string>
+    <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> – проведіть пальцем ліворуч."</string>
+    <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> – проведіть пальцем праворуч."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Вібросигнал"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Вібросигнал"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Звук"</string>
@@ -622,4 +625,5 @@
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"Автозавершення для цифрової клавіатури"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Сигнал дзвінка та вібросигнал"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Керувати конференц-викликом"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Екстрений номер"</string>
 </resources>
