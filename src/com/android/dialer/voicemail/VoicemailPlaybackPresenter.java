@@ -16,8 +16,6 @@
 
 package com.android.dialer.voicemail;
 
-import static android.util.MathUtils.constrain;
-
 import android.content.Context;
 import android.database.ContentObserver;
 import android.media.AudioManager;
@@ -626,5 +624,9 @@ public class VoicemailPlaybackPresenter {
         if (mWakeLock.isHeld()) {
             mWakeLock.release();
         }
+    }
+
+    private static int constrain(int amount, int low, int high) {
+        return amount < low ? low : (amount > high ? high : amount);
     }
 }
