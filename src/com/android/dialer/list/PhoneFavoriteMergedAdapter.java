@@ -323,8 +323,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.WRAP_CONTENT);
-            params.setMarginsRelative(mCallLogPadding, mCallLogPadding, mCallLogPadding,
-                    mCallLogPadding);
+            params.setMargins(mCallLogPadding, mCallLogPadding, mCallLogPadding, mCallLogPadding);
             view.setLayoutParams(params);
 
             super.addView(view);
