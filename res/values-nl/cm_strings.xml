@@ -46,4 +46,5 @@
     <string name="call_stats_sort_by_count">Sorteren op gespreksaantal</string>
     <string name="menu_add_to_blacklist">Toevoegen aan zwarte lijst</string>
     <string name="toast_added_to_blacklist">%s toegevoegd aan zwarte lijst.</string>
+    <string name="dial_conference">Groepsgesprek</string>
 </resources>
