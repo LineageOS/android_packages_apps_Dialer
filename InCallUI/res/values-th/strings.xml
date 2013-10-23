@@ -612,7 +612,7 @@
     <string name="description_target_answer" msgid="7205604197797472471">"คำตอบ"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"ส่ง SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"ปฏิเสธ"</string>
-    <string name="description_direction_up" msgid="4441409581444516690">"เลื่อนไปข้างบนเพื่อ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>"</string>
+    <string name="description_direction_up" msgid="4441409581444516690">"เลื่อนขึ้นเพื่อ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>"</string>
     <string name="description_direction_left" msgid="7129873384376533287">"เลื่อนไปทางซ้ายเพื่อ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>"</string>
     <string name="description_direction_right" msgid="2122584234531957308">"เลื่อนไปทางขวาเพื่อ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>"</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"สั่น"</string>
