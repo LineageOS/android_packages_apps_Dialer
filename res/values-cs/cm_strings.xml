@@ -15,6 +15,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="dial_conference">Telefonická konference</string>
+
     <string name="callStatsDetailTitle">Detaily volání</string>
     <string name="call_stats">Statistiky hovoru</string>
     <string name="call_stats_refresh">Obnovit</string>
