@@ -229,8 +229,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
                 if (TextUtils.isEmpty(mPhoneNumberString)) {
                     // Copy "superclass" implementation
                     mListener.onContactSelected(getLookupUri(), MoreContactUtils
-                            .getTargetRectFromView(
-                                    mContext, PhoneFavoriteTileView.this));
+                            .getTargetRectFromView(PhoneFavoriteTileView.this));
                 } else {
                     // When you tap a frequently-called contact, you want to
                     // call them at the number that you usually talk to them
