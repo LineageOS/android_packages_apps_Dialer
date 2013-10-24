@@ -46,4 +46,5 @@
     <string name="call_stats_sort_by_count">Rendezés hívások száma szerint</string>
     <string name="menu_add_to_blacklist">Hozzáadás a tiltólistához</string>
     <string name="toast_added_to_blacklist">%s hozzáadva a tiltólistához.</string>
+    <string name="dial_conference">Konferenciahívás</string>
 </resources>
