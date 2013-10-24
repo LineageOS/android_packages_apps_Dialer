@@ -131,4 +131,5 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"S\'està carregant des de la targeta SIM..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contactes de la targeta SIM"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Torna a activar l\'aplicació Persones per utilitzar aquesta funció."</string>
+    <string name="dial_conference">Truca en conferència</string>
 </resources>
