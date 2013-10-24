@@ -27,6 +27,9 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v13 \
     android-support-v4 \
     android-ex-variablespeed \
+    google-common \
+    libphonenumber \
+    libgeocoding
 
 LOCAL_REQUIRED_MODULES := libvariablespeed
 
@@ -35,6 +38,10 @@ LOCAL_CERTIFICATE := shared
 LOCAL_PRIVILEGED_MODULE := true
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags $(incallui_dir)/proguard.flags
+
+# Uncomment the following line to build against the current SDK
+# This is required for building an unbundled app.
+# LOCAL_SDK_VERSION := current
 
 include $(BUILD_PACKAGE)
 
