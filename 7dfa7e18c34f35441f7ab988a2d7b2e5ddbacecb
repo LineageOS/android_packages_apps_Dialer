@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a4dcd0f_64c42092",
+        "filename": "res/values-nl/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-10-25T22:52:51Z",
+      "side": 1,
+      "message": "Of moet dit \u0027Groepsgesprek\u0027 worden?",
+      "revId": "7dfa7e18c34f35441f7ab988a2d7b2e5ddbacecb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
