@@ -259,7 +259,7 @@ public class InCallActivity extends Activity {
                     // Dump starting from the top-level view of the entire activity:
                     Window w = this.getWindow();
                     View decorView = w.getDecorView();
-                    decorView.debug();
+                    Log.d(this, "View dump:" + decorView);
                     return true;
                 }
                 break;

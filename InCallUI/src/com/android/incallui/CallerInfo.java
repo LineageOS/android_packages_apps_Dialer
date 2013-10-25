@@ -16,28 +16,26 @@
 
 package com.android.incallui;
 
+import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.contacts.common.util.TelephonyManagerUtils;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.location.Country;
-import android.location.CountryDetector;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
 import android.provider.ContactsContract.RawContacts;
 import android.telephony.PhoneNumberUtils;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import com.android.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
-import com.android.i18n.phonenumbers.NumberParseException;
-import com.android.i18n.phonenumbers.PhoneNumberUtil;
-import com.android.i18n.phonenumbers.Phonenumber.PhoneNumber;
+import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 
 import java.util.Locale;
-
 
 /**
  * Looks up caller information for the given phone number.
@@ -195,7 +193,7 @@ public class CallerInfo {
                     if (typeColumnIndex != -1) {
                         info.numberType = cursor.getInt(typeColumnIndex);
                         info.numberLabel = cursor.getString(columnIndex);
-                        info.phoneLabel = Phone.getDisplayLabel(context,
+                        info.phoneLabel = Phone.getTypeLabel(context.getResources(),
                                 info.numberType, info.numberLabel)
                                 .toString();
                     }
@@ -274,10 +272,10 @@ public class CallerInfo {
         // Change the callerInfo number ONLY if it is an emergency number
         // or if it is the voicemail number.  If it is either, take a
         // shortcut and skip the query.
-        if (PhoneNumberUtils.isLocalEmergencyNumber(number, context)) {
+        if (PhoneNumberHelper.isLocalEmergencyNumber(number, context)) {
             return new CallerInfo().markAsEmergency(context);
-        } else if (PhoneNumberUtils.isVoiceMailNumber(number)) {
-            return new CallerInfo().markAsVoiceMail();
+        } else if (TelephonyManagerUtils.isVoiceMailNumber(number, context)) {
+            return new CallerInfo().markAsVoiceMail(context);
         }
 
         Uri contactUri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
@@ -307,8 +305,8 @@ public class CallerInfo {
     static CallerInfo doSecondaryLookupIfNecessary(Context context,
             String number, CallerInfo previousResult) {
         if (!previousResult.contactExists
-                && PhoneNumberUtils.isUriNumber(number)) {
-            String username = PhoneNumberUtils.getUsernameFromUriNumber(number);
+                && PhoneNumberHelper.isUriNumber(number)) {
+            String username = PhoneNumberHelper.getUsernameFromUriNumber(number);
             if (PhoneNumberUtils.isGlobalPhoneNumber(username)) {
                 previousResult = getCallerInfo(context,
                         Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI,
@@ -396,13 +394,14 @@ public class CallerInfo {
      */
     // TODO: As in the emergency number handling, we end up writing a
     // string in the phone number field.
-    /* package */ CallerInfo markAsVoiceMail() {
+    /* package */ CallerInfo markAsVoiceMail(Context context) {
         mIsVoiceMail = true;
 
         try {
-            String voiceMailLabel = TelephonyManager.getDefault().getVoiceMailAlphaTag();
-
-            phoneNumber = voiceMailLabel;
+            // For voicemail calls, we display the voice mail tag
+            // instead of the real phone number in the "number"
+            // field.
+            phoneNumber = TelephonyManagerUtils.getVoiceMailAlphaTag(context);
         } catch (SecurityException se) {
             // Should never happen: if this process does not have
             // permission to retrieve VM tag, it should not have
@@ -534,7 +533,7 @@ public class CallerInfo {
         PhoneNumberOfflineGeocoder geocoder = PhoneNumberOfflineGeocoder.getInstance();
 
         Locale locale = context.getResources().getConfiguration().locale;
-        String countryIso = getCurrentCountryIso(context, locale);
+        String countryIso = TelephonyManagerUtils.getCurrentCountryIso(context, locale);
         PhoneNumber pn = null;
         try {
             Log.v(TAG, "parsing '" + number
@@ -550,37 +549,9 @@ public class CallerInfo {
             String description = geocoder.getDescriptionForNumber(pn, locale);
             Log.v(TAG, "- got description: '" + description + "'");
             return description;
-        } else {
-            return null;
         }
-    }
 
-    /**
-     * @return The ISO 3166-1 two letters country code of the country the user
-     *         is in.
-     */
-    private static String getCurrentCountryIso(Context context, Locale locale) {
-        String countryIso = null;
-        CountryDetector detector = (CountryDetector) context.getSystemService(
-                Context.COUNTRY_DETECTOR);
-        if (detector != null) {
-            Country country = detector.detectCountry();
-            if (country != null) {
-                countryIso = country.getCountryIso();
-            } else {
-                Log.e(TAG, "CountryDetector.detectCountry() returned null.");
-            }
-        }
-        if (countryIso == null) {
-            countryIso = locale.getCountry();
-            Log.w(TAG, "No CountryDetector; falling back to countryIso based on locale: "
-                    + countryIso);
-        }
-        return countryIso;
-    }
-
-    protected static String getCurrentCountryIso(Context context) {
-        return getCurrentCountryIso(context, Locale.getDefault());
+        return null;
     }
 
     /**
