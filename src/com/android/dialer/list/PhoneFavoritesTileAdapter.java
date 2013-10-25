@@ -43,13 +43,12 @@ import com.android.contacts.common.list.ContactTileAdapter.DisplayType;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.dialer.list.SwipeHelper.OnItemGestureListener;
 import com.android.dialer.list.SwipeHelper.SwipeHelperCallback;
-import com.android.internal.annotations.VisibleForTesting;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ComparisonChain;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
