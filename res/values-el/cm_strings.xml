@@ -46,4 +46,5 @@
     <string name="call_stats_sort_by_count">Ταξινόμηση κατά αριθμό κλήσεων</string>
     <string name="menu_add_to_blacklist">Προσθήση στη μαύρη λίστα</string>
     <string name="toast_added_to_blacklist">%s προστέθηκε στη μαύρη λίστα.</string>
+    <string name="dial_conference">Κλήση συνδιάσκεψης</string>
 </resources>
