@@ -34,6 +34,24 @@
       "revId": "7dfa7e18c34f35441f7ab988a2d7b2e5ddbacecb",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a4dcd0f_6f25d9c0",
+        "filename": "res/values-nl/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 7630
+      },
+      "writtenOn": "2013-10-26T09:16:38Z",
+      "side": 1,
+      "message": "+1 Mee eens, vergaderen is werk, groepsgesprek kan ook privé zijn :-)",
+      "parentUuid": "1a4dcd0f_6f3f1926",
+      "revId": "7dfa7e18c34f35441f7ab988a2d7b2e5ddbacecb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
