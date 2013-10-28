@@ -46,4 +46,5 @@
     <string name="call_stats_sort_by_count">以通话次数排序</string>
     <string name="menu_add_to_blacklist">添加到黑名单</string>
     <string name="toast_added_to_blacklist">%s 已添加到黑名单.</string>
+    <string name="dial_conference">电话会议</string>
 </resources>
