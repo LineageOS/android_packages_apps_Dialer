@@ -151,6 +151,8 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
                 if (mGlowpad != null) {
                     mGlowpad.startPing();
                 }
+                dismissCannedResponsePopup();
+                getPresenter().onDismissDialog();
             }
         });
         mCannedResponsePopup = builder.create();
