@@ -46,4 +46,5 @@
     <string name="call_stats_sort_by_count">Per numero chiamate</string>
     <string name="menu_add_to_blacklist">Aggiungi a blacklist</string>
     <string name="toast_added_to_blacklist">%s aggiunto a blacklist.</string>
+    <string name="dial_conference">Componi conferenza</string>
 </resources>
