@@ -17,7 +17,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="callStatsDetailTitle">Détails des statistiques d\'appels</string>
     <string name="call_stats">Statistiques</string>
-    <string name="call_stats_refresh">Rafraichir</string>
+    <string name="call_stats_refresh">Rafraîchir</string>
     <string name="activity_title_call_stats">Statistiques</string>
     <string name="call_stats_nav_all">Tous</string>
     <string name="call_stats_nav_incoming">Entrants</string>
@@ -46,4 +46,5 @@
     <string name="call_stats_sort_by_count">Trier par nombre d\'appels</string>
     <string name="menu_add_to_blacklist">Ajouter à la liste noire</string>
     <string name="toast_added_to_blacklist">%s ajouté à la liste noire</string>
+    <string name="dial_conference">Conférence</string>
 </resources>
