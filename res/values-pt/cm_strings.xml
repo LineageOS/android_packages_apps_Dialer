@@ -46,4 +46,5 @@
     <string name="call_stats_sort_by_count">Ordenar por quantidade de chamadas</string>
     <string name="menu_add_to_blacklist">Adicionar à lista de bloqueio</string>
     <string name="toast_added_to_blacklist">%s adicionado à lista de bloqueio.</string>
+    <string name="dial_conference">Realizar conferência</string>
 </resources>
