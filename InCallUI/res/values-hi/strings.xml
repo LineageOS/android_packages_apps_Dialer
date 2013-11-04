@@ -487,8 +487,8 @@
     <item quantity="other" msgid="3122217344579273583">"<xliff:g id="COUNT">%s</xliff:g> मिनट के लिए कोई डेटा कनेक्शन नहीं"</item>
   </plurals>
   <plurals name="alert_dialog_exit_ecm">
-    <item quantity="one" msgid="8060210887681426682">"फ़ोन <xliff:g id="COUNT">%s</xliff:g> मिनट के लिए आपातकालीन कॉलबैक मोड में रहेगा. हालांकि, इस मोड में होने पर डेटा कनेक्शन का उपयोग करने वाले किसी एप्स का उपयोग नहीं किया जा सकता. क्या आप अभी बाहर निकलना चाहते हैं?"</item>
-    <item quantity="other" msgid="8617116564023933114">"फ़ोन <xliff:g id="COUNT">%s</xliff:g> मिनट के लिए आपातकालीन कॉलबैक मोड में रहेगा. हालांकि, इस मोड में होने पर डेटा कनेक्शन का उपयोग करने वाले किसी एप्स का उपयोग नहीं किया जा सकता. क्या आप अभी बाहर निकलना चाहते हैं?"</item>
+    <item quantity="one" msgid="8060210887681426682">"फ़ोन <xliff:g id="COUNT">%s</xliff:g> मिनट के लिए आपातकालीन कॉलबैक मोड में रहेगा. हालांकि, इस मोड में होने पर डेटा कनेक्शन का उपयोग करने वाले किसी ऐप्स  का उपयोग नहीं किया जा सकता. क्या आप अभी बाहर निकलना चाहते हैं?"</item>
+    <item quantity="other" msgid="8617116564023933114">"फ़ोन <xliff:g id="COUNT">%s</xliff:g> मिनट के लिए आपातकालीन कॉलबैक मोड में रहेगा. हालांकि, इस मोड में होने पर डेटा कनेक्शन का उपयोग करने वाले किसी ऐप्स  का उपयोग नहीं किया जा सकता. क्या आप अभी बाहर निकलना चाहते हैं?"</item>
   </plurals>
   <plurals name="alert_dialog_not_avaialble_in_ecm">
     <item quantity="one" msgid="2585506997024726599">"आपातकालीन कॉलबैक मोड के समय चयनित क्रिया उपलब्ध नहीं है. फ़ोन <xliff:g id="COUNT">%s</xliff:g> मिनट तक इस मोड में रहेगा. क्या आप अभी बाहर निकलना चाहते हैं?"</item>
@@ -549,7 +549,7 @@
     <string name="registration_status_failed_try_later" msgid="5214474354451220581">"खाता पंजीकरण विफल: (<xliff:g id="REGISTRATION_ERROR_MESSAGE">%s</xliff:g>); बाद में पुन: प्रयास किया जाएगा"</string>
     <string name="registration_status_invalid_credentials" msgid="4908446367559341757">"खाता पंजीकरण विफल: गलत उपयोगकर्ता नाम या पासवर्ड."</string>
     <string name="registration_status_server_unreachable" msgid="5733421582468991276">"खाता पंजीकरण विफल: सर्वर नाम जांचें."</string>
-    <string name="third_party_account_summary" msgid="2532526738862533028">"वर्तमान में इस खाते का उपयोग <xliff:g id="ACCOUNT_OWNER">%s</xliff:g> एप्स द्वारा किया जा रहा है."</string>
+    <string name="third_party_account_summary" msgid="2532526738862533028">"वर्तमान में इस खाते का उपयोग <xliff:g id="ACCOUNT_OWNER">%s</xliff:g> ऐप्स  द्वारा किया जा रहा है."</string>
     <string name="sip_edit_title" msgid="489288416435014385">"SIP खाता विवरण"</string>
     <string name="sip_edit_new_title" msgid="3659149255856520385">"SIP खाता विवरण"</string>
     <string name="domain_address_title" msgid="9071787581316160480">"सर्वर"</string>
@@ -591,7 +591,7 @@
     <string name="respond_via_sms_setting_title_2" msgid="6104662227299493906">"त्वरित प्रतिसाद संपादित करें"</string>
     <string name="respond_via_sms_setting_summary" msgid="9150281183930613065"></string>
     <string name="respond_via_sms_edittext_dialog_title" msgid="20379890418289778">"त्वरित प्रतिसाद"</string>
-    <string name="respond_via_sms_menu_reset_default_activity" msgid="1461742052902053466">"डिफ़ॉल्ट एप्स रीसेट करें"</string>
+    <string name="respond_via_sms_menu_reset_default_activity" msgid="1461742052902053466">"डिफ़ॉल्ट ऐप्स  रीसेट करें"</string>
     <string name="respond_via_sms_confirmation_format" msgid="7229149977515784269">"<xliff:g id="PHONE_NUMBER">%s</xliff:g> को संदेश भेजा गया."</string>
     <string name="description_image_button_one" msgid="5502718871331943463">"एक"</string>
     <string name="description_image_button_two" msgid="4903738528222924522">"दो"</string>
