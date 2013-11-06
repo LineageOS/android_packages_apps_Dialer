@@ -75,4 +75,7 @@
     <!-- Padding for the tooltip -->
     <dimen name="dismiss_button_padding_start">20dip</dimen>
     <dimen name="dismiss_button_padding_end">28dip</dimen>
+
+    <!-- Size of the pie chart in the call stats detail activity -->
+    <dimen name="call_stats_details_chart_size">140dip</dimen>
 </resources>

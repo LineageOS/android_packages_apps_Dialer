@@ -39,18 +39,23 @@ import android.view.MenuItem;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogFragment;
+import com.android.dialer.callstats.CallStatsFragment;
+import com.android.dialer.widget.DoubleDatePickerDialog;
 
-public class CallLogActivity extends Activity {
+public class CallLogActivity extends Activity implements
+        DoubleDatePickerDialog.OnDateSetListener {
 
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
     private CallLogFragment mAllCallsFragment;
     private CallLogFragment mMissedCallsFragment;
+    private CallStatsFragment mStatsFragment;
 
     private static final int TAB_INDEX_ALL = 0;
     private static final int TAB_INDEX_MISSED = 1;
+    private static final int TAB_INDEX_STATS = 2;
 
-    private static final int TAB_INDEX_COUNT = 2;
+    private static final int TAB_INDEX_COUNT = 3;
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager fm) {
@@ -66,6 +71,9 @@ public class CallLogActivity extends Activity {
                 case TAB_INDEX_MISSED:
                     mMissedCallsFragment = new CallLogFragment(Calls.MISSED_TYPE);
                     return mMissedCallsFragment;
+                case TAB_INDEX_STATS:
+                    mStatsFragment = new CallStatsFragment();
+                    return mStatsFragment;
             }
             throw new IllegalStateException("No fragment at position " + position);
         }
@@ -136,11 +144,18 @@ public class CallLogActivity extends Activity {
         missedTab.setTabListener(mTabListener);
         actionBar.addTab(missedTab);
 
+        final Tab statsTab = actionBar.newTab();
+        final String statsTitle = getString(R.string.call_log_stats_title);
+        statsTab.setContentDescription(statsTitle);
+        statsTab.setText(statsTitle);
+        statsTab.setTabListener(mTabListener);
+        actionBar.addTab(statsTab);
+
         mViewPager = (ViewPager) findViewById(R.id.call_log_pager);
         mViewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setOnPageChangeListener(mOnPageChangeListener);
-        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.setOffscreenPageLimit(2);
     }
 
     @Override
@@ -175,5 +190,10 @@ public class CallLogActivity extends Activity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDateSet(long from, long to) {
+        mStatsFragment.onDateSet(from, to);
     }
 }
