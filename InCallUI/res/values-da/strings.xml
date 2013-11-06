@@ -590,7 +590,7 @@
     <string name="respond_via_sms_canned_response_2" msgid="4074450431532859214">"Jeg ringer tilbage lige om lidt."</string>
     <string name="respond_via_sms_canned_response_3" msgid="3496079065723960450">"Jeg ringer til dig senere."</string>
     <string name="respond_via_sms_canned_response_4" msgid="1698989243040062190">"Kan ikke tale nu. Ringer du senere?"</string>
-    <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Skriv dit eget..."</string>
+    <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Skriv dit eget svar..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"Annuller"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Send"</string>
     <string name="respond_via_sms_setting_title" msgid="3754000371039709383">"Hurtige svar"</string>
