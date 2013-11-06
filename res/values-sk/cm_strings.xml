@@ -46,4 +46,5 @@
     <string name="call_stats_sort_by_count">Triediť podľa počtu hovorov</string>
     <string name="menu_add_to_blacklist">Pridať na čiernu listinu</string>
     <string name="toast_added_to_blacklist">%s pridaný na čiernu listinu.</string>
+    <string name="dial_conference">Telefonická konferencia</string>
 </resources>
