@@ -683,6 +683,10 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
         startActivity(new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(mNumber)));
     }
 
+    public void onMenuAddToBlacklist(MenuItem menuItem) {
+        mContactInfoHelper.addNumberToBlacklist(mNumber);
+    }
+
     public void onMenuTrashVoicemail(MenuItem menuItem) {
         mAsyncTaskExecutor.submit(Tasks.DELETE_VOICEMAIL_AND_FINISH,
                 new AsyncTask<Void, Void, Void>() {
