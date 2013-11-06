@@ -23,7 +23,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 /**
  * The details of a phone call to be shown in the UI.
  */
-public class PhoneCallDetails {
+public class PhoneCallDetails implements CallDetailHeader.Data {
     /** The number of the other party involved in the call. */
     public final CharSequence number;
     /** The number presenting rules set by the network, e.g., {@link Calls#PRESENTATION_ALLOWED} */
@@ -87,5 +87,34 @@ public class PhoneCallDetails {
         this.numberLabel = numberLabel;
         this.contactUri = contactUri;
         this.photoUri = photoUri;
+    }
+
+    @Override
+    public CharSequence getName() {
+        return name;
+    }
+    @Override
+    public CharSequence getNumber() {
+        return number;
+    }
+    @Override
+    public int getNumberPresentation() {
+        return numberPresentation;
+    }
+    @Override
+    public int getNumberType() {
+        return numberType;
+    }
+    @Override
+    public CharSequence getNumberLabel() {
+        return numberLabel;
+    }
+    @Override
+    public CharSequence getFormattedNumber() {
+        return formattedNumber;
+    }
+    @Override
+    public Uri getContactUri() {
+        return contactUri;
     }
 }
