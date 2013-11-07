@@ -128,7 +128,7 @@
   </string-array>
     <string name="vm_changed" msgid="380744030726254139">"Pasikeitė balso pašto numeris."</string>
     <string name="vm_change_failed" msgid="3352934863246208918">"Balso pašto numerio pakeisti nepavyko.\nJei ši problema kartosis, kreipkitės į operatorių."</string>
-    <string name="fw_change_failed" msgid="5298103228470214665">"Persiuntimo numerio pakeisti nepavyko.\nJei ši problema kartosis, kreipkitės į operatorių."</string>
+    <string name="fw_change_failed" msgid="5298103228470214665">"Peradresavimo numerio pakeisti nepavyko.\nJei ši problema kartosis, kreipkitės į operatorių."</string>
     <string name="fw_get_in_vm_failed" msgid="8862896836093833973">"Nepavyko pateikti ir išsaugoti dabartinio peradresavimo numerio nustatymų.\nVis tiek perjungti naują teikėją?"</string>
     <string name="no_change" msgid="3186040086622435212">"Neatlikta jokių pakeitimų."</string>
     <string name="sum_voicemail_choose_provider" msgid="59911196126278922">"Pasirinkti balso pašto paslaugą"</string>
