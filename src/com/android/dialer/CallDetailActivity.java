@@ -489,6 +489,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     nameOrNumber = firstDetails.number;
                 }
 
+                boolean skipBind = false;
+
                 if (contactUri != null && !UriUtils.isEncodedContactUri(contactUri)) {
                     mainActionIntent = new Intent(Intent.ACTION_VIEW, contactUri);
                     // This will launch People's detail contact screen, so we probably want to
@@ -505,6 +507,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     mainActionIntent = null;
                     mainActionIcon = R.drawable.ic_add_contact_holo_dark;
                     mainActionDescription = getString(R.string.description_add_contact);
+                    skipBind = true;
                 } else if (isVoicemailNumber) {
                     mainActionIntent = null;
                     mainActionIcon = 0;
@@ -536,7 +539,10 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     mainActionDescription = null;
                 }
 
-                bindContactPhotoAction(mainActionIntent, mainActionIcon, mainActionDescription);
+                if (!skipBind) {
+                    bindContactPhotoAction(mainActionIntent, mainActionIcon,
+                            mainActionDescription);
+                }
 
                 // This action allows to call the number that places the call.
                 if (canPlaceCallsTo) {
