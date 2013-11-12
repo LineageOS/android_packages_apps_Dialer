@@ -852,7 +852,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         // Go all the way back to the favorites fragment, regardless of how many times we
         // transitioned between search fragments
-        final BackStackEntry entry = getFragmentManager().getBackStackEntryAt(0);
         getFragmentManager().popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         setNotInSearchUi();
     }
