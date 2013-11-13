@@ -31,7 +31,7 @@ public interface PhoneNumberService {
      * @param imageListener The listener to notify when the image lookup is complete.
      */
     public void getPhoneNumberInfo(String phoneNumber, NumberLookupListener listener,
-            ImageLookupListener imageListener);
+            ImageLookupListener imageListener, boolean isIncoming);
 
     public interface NumberLookupListener {
 
