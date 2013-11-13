@@ -17,7 +17,7 @@
 <resources>
 
     <!-- Secondary text color in the Phone app -->
-    <color name="dialtacts_primary_text_color">#111111</color>
+    <color name="dialtacts_primary_text_color">#000000</color>
     <color name="dialtacts_secondary_text_color">#888888</color>
     <color name="dialpad_text_color">#ffffff</color>
 
