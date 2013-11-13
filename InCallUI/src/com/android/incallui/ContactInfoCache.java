@@ -173,7 +173,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     mPhoneNumberService != null) {
                 Log.d(TAG, "Contact lookup. Local contacts miss, checking remote");
                 final PhoneNumberServiceListener listener = new PhoneNumberServiceListener(callId);
-                mPhoneNumberService.getPhoneNumberInfo(cacheEntry.number, listener, listener);
+                mPhoneNumberService.getPhoneNumberInfo(cacheEntry.number, listener, listener,
+                        isIncoming);
             } else if (cacheEntry.personUri != null) {
                 Log.d(TAG, "Contact lookup. Local contact found, starting image load");
                 // Load the image with a callback to update the image state.
