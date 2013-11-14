@@ -233,6 +233,12 @@ public class InCallPresenter implements CallList.Listener {
             Log.d(this, "Notify " + listener + " of state " + mInCallState.toString());
             listener.onStateChange(mInCallState, callList);
         }
+
+        if (isActivityStarted()) {
+            final boolean hasCall = callList.getActiveOrBackgroundCall() != null ||
+                    callList.getOutgoingCall() != null;
+            mInCallActivity.dismissKeyguard(hasCall);
+        }
     }
 
     /**
@@ -268,6 +274,10 @@ public class InCallPresenter implements CallList.Listener {
 
         // We need to do the run the same code as onCallListChange.
         onCallListChange(CallList.getInstance());
+
+        if (isActivityStarted()) {
+            mInCallActivity.dismissKeyguard(false);
+        }
     }
 
     /**
