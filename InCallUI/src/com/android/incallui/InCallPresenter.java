@@ -94,7 +94,7 @@ public class InCallPresenter implements CallList.Listener {
 
         mContactInfoCache = ContactInfoCache.getInstance(context);
 
-        mStatusBarNotifier = new StatusBarNotifier(context, mContactInfoCache, mCallList);
+        mStatusBarNotifier = new StatusBarNotifier(context, mContactInfoCache);
         addListener(mStatusBarNotifier);
 
         mAudioModeProvider = audioModeProvider;
