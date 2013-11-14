@@ -96,8 +96,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     private Bitmap mSavedLargeIcon;
     private String mSavedContentTitle;
 
-    public StatusBarNotifier(Context context, ContactInfoCache contactInfoCache,
-            CallList callList) {
+    public StatusBarNotifier(Context context, ContactInfoCache contactInfoCache) {
         Preconditions.checkNotNull(context);
 
         mContext = context;
@@ -254,12 +253,15 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     }
 
     private void showNotification(final Call call, final boolean allowFullScreenIntent) {
+        final boolean isIncoming = (call.getState() == Call.State.INCOMING ||
+                call.getState() == Call.State.CALL_WAITING);
+
         // we make a call to the contact info cache to query for supplemental data to what the
         // call provides.  This includes the contact name and photo.
         // This callback will always get called immediately and synchronously with whatever data
         // it has available, and may make a subsequent call later (same thread) if it had to
         // call into the contacts provider for more data.
-        mContactInfoCache.findInfo(call.getIdentification(), call.getState() == Call.State.INCOMING,
+        mContactInfoCache.findInfo(call.getIdentification(), isIncoming,
                 new ContactInfoCacheCallback() {
                     private boolean mAllowFullScreenIntent = allowFullScreenIntent;
 
@@ -457,12 +459,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     }
 
     /**
-     * Returns the message to use with the notificaiton.
+     * Returns the message to use with the notification.
      */
     private int getContentString(Call call) {
         int resId = R.string.notification_ongoing_call;
 
-        if (call.getState() == Call.State.INCOMING) {
+        if (call.getState() == Call.State.INCOMING || call.getState() == Call.State.CALL_WAITING) {
             resId = R.string.notification_incoming_call;
 
         } else if (call.getState() == Call.State.ONHOLD) {
@@ -535,7 +537,14 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         // TODO: there should be a cleaner way of avoiding this
         // problem (see discussion in bug 3184149.)
 
-        if (call.getState() == Call.State.CALL_WAITING) {
+        // If a call is onhold during an incoming call, the call actually comes in as
+        // INCOMING.  For that case *and* traditional call-waiting, we want to
+        // cancel the notification.
+        boolean isCallWaiting = (call.getState() == Call.State.CALL_WAITING ||
+                (call.getState() == Call.State.INCOMING &&
+                        CallList.getInstance().getBackgroundCall() != null));
+
+        if (isCallWaiting) {
             Log.i(this, "updateInCallNotification: call-waiting! force relaunch...");
             // Cancel the IN_CALL_NOTIFICATION immediately before
             // (re)posting it; this seems to force the
