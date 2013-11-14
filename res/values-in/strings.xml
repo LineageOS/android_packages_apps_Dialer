@@ -89,7 +89,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Tampilkan panggilan terlewat"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Tampilkan pesan suara saja"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Tampilkan semua panggilan"</string>
-    <string name="add_2sec_pause" msgid="9214012315201040129">"Tambahkan jeda 2-det"</string>
+    <string name="add_2sec_pause" msgid="9214012315201040129">"Tambahkan jeda 2 dtk"</string>
     <string name="add_wait" msgid="3360818652790319634">"Tambahkan tunggu"</string>
     <string name="call_settings" msgid="7666474782093693667">"Setelan"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Kontak baru"</string>
