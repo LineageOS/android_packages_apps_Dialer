@@ -81,36 +81,41 @@
             android:id="@+id/dialtacts_frame"
             android:clipChildren="false">
         </FrameLayout>
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:background="#33999999"
+        />
         <FrameLayout
-        android:layout_height="@dimen/fake_action_bar_height"
-        android:layout_width="match_parent"
-        android:id="@+id/fake_action_bar"
-        android:background="@color/actionbar_background_color">
-        <ImageButton
-            android:id="@+id/call_history_button"
-            android:layout_width="@dimen/fake_menu_button_min_width"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom|start"
-            android:background="?android:attr/selectableItemBackground"
-            android:contentDescription="@string/action_menu_call_history_description"
-            android:src="@drawable/ic_menu_history_dk"/>
-        <ImageButton
-            android:id="@+id/dialpad_button"
-            android:layout_width="@dimen/fake_menu_button_min_width"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom|center"
-            android:background="?android:attr/selectableItemBackground"
-            android:contentDescription="@string/action_menu_dialpad_button"
-            android:src="@drawable/ic_menu_dialpad_dk"/>
-        <ImageButton
-             android:id="@+id/overflow_menu"
-             android:layout_width="@dimen/fake_menu_button_min_width"
-             android:layout_height="match_parent"
-             android:layout_gravity="bottom|end"
-             android:src="@drawable/ic_menu_overflow_dk"
-             android:contentDescription="@string/action_menu_overflow_description"
-             android:background="?android:attr/selectableItemBackground"/>
-    </FrameLayout>
+            android:layout_height="@dimen/fake_action_bar_height"
+            android:layout_width="match_parent"
+            android:id="@+id/fake_action_bar"
+            android:background="@color/actionbar_background_color">
+            <ImageButton
+                android:id="@+id/call_history_button"
+                android:layout_width="@dimen/fake_menu_button_min_width"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|start"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="@string/action_menu_call_history_description"
+                android:src="@drawable/ic_menu_history_dk"/>
+            <ImageButton
+                android:id="@+id/dialpad_button"
+                android:layout_width="@dimen/fake_menu_button_min_width"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|center"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="@string/action_menu_dialpad_button"
+                android:src="@drawable/ic_menu_dialpad_dk"/>
+            <ImageButton
+                 android:id="@+id/overflow_menu"
+                 android:layout_width="@dimen/fake_menu_button_min_width"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="bottom|end"
+                 android:src="@drawable/ic_menu_overflow_dk"
+                 android:contentDescription="@string/action_menu_overflow_description"
+                 android:background="?android:attr/selectableItemBackground"/>
+        </FrameLayout>
         <View
             android:id="@+id/dialtacts_bottom_padding"
             android:layout_width="match_parent"

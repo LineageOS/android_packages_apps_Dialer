@@ -30,7 +30,7 @@
     <dimen name="call_button_height">74dp</dimen>
 
     <!--  Search View -->
-    <dimen name="search_text_size">16sp</dimen>
+    <dimen name="search_text_size">14sp</dimen>
 
     <!-- Call Log -->
     <dimen name="call_log_call_action_size">32dip</dimen>
