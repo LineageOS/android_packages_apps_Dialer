@@ -71,6 +71,14 @@ public class InCallPresenter implements CallList.Listener {
         return sInCallPresenter;
     }
 
+    public InCallState getInCallState() {
+        return mInCallState;
+    }
+
+    public CallList getCallList() {
+        return mCallList;
+    }
+
     public void setUp(Context context, CallList callList, AudioModeProvider audioModeProvider) {
         if (mServiceConnected) {
             Log.i(this, "New service connection replacing existing one.");
@@ -598,6 +606,7 @@ public class InCallPresenter implements CallList.Listener {
         } else if (newState == InCallState.NO_CALLS) {
             // The new state is the no calls state.  Tear everything down.
             attemptFinishActivity();
+            attemptCleanup();
         }
 
         return newState;
