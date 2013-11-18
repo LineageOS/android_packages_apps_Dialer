@@ -28,7 +28,7 @@ import java.util.Set;
  *
  */
 public class PhoneNumberUtilsWrapper {
-
+    private static final PhoneNumberUtilsWrapper INSTANCE = new PhoneNumberUtilsWrapper();
     private static final Set<String> LEGACY_UNKNOWN_NUMBERS = Sets.newHashSet("-1", "-2", "-3");
 
     /** Returns true if it is possible to place a call to the given number. */
@@ -74,7 +74,7 @@ public class PhoneNumberUtilsWrapper {
         if (TextUtils.isEmpty(number)) {
             return false;
         }
-        if (new PhoneNumberUtilsWrapper().isVoicemailNumber(number)) {
+        if (INSTANCE.isVoicemailNumber(number)) {
             return false;
         }
         if (isLegacyUnknownNumbers(number)) {
