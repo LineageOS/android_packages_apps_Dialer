@@ -37,6 +37,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.util.StopWatch;
+import com.android.dialer.R;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 
@@ -631,7 +632,13 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 insert.bindString(2, updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER));
                 insert.bindLong(3, updatedContactCursor.getLong(PhoneQuery.PHONE_CONTACT_ID));
                 insert.bindString(4, updatedContactCursor.getString(PhoneQuery.PHONE_LOOKUP_KEY));
-                insert.bindString(5, updatedContactCursor.getString(PhoneQuery.PHONE_DISPLAY_NAME));
+                final String displayName = updatedContactCursor.getString(
+                        PhoneQuery.PHONE_DISPLAY_NAME);
+                if (displayName == null) {
+                    insert.bindString(5, mContext.getResources().getString(R.string.missing_name));
+                } else {
+                    insert.bindString(5, displayName);
+                }
                 insert.bindLong(6, updatedContactCursor.getLong(PhoneQuery.PHONE_PHOTO_ID));
                 insert.bindLong(7, updatedContactCursor.getLong(PhoneQuery.PHONE_LAST_TIME_USED));
                 insert.bindLong(8, updatedContactCursor.getInt(PhoneQuery.PHONE_TIMES_USED));
