@@ -32,7 +32,7 @@ import com.android.dialer.R;
     /** Helper for populating the details of a phone call. */
     private final PhoneCallDetailsHelper mPhoneCallDetailsHelper;
     /** Helper for handling phone numbers. */
-    private final PhoneNumberHelper mPhoneNumberHelper;
+    private final PhoneNumberDisplayHelper mPhoneNumberHelper;
     /** Resources to look up strings. */
     private final Resources mResources;
 
@@ -43,7 +43,7 @@ import com.android.dialer.R;
      * @param phoneNumberHelper used to process phone number
      */
     public CallLogListItemHelper(PhoneCallDetailsHelper phoneCallDetailsHelper,
-            PhoneNumberHelper phoneNumberHelper, Resources resources) {
+            PhoneNumberDisplayHelper phoneNumberHelper, Resources resources) {
         mPhoneCallDetailsHelper = phoneCallDetailsHelper;
         mPhoneNumberHelper = phoneNumberHelper;
         mResources = resources;

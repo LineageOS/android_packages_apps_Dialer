@@ -33,7 +33,7 @@ import android.widget.TextView;
 import com.android.contacts.common.test.NeededForTesting;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
-import com.android.dialer.calllog.PhoneNumberHelper;
+import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 
 /**
@@ -48,7 +48,7 @@ public class PhoneCallDetailsHelper {
     private Long mCurrentTimeMillisForTest;
     // Helper classes.
     private final CallTypeHelper mCallTypeHelper;
-    private final PhoneNumberHelper mPhoneNumberHelper;
+    private final PhoneNumberDisplayHelper mPhoneNumberHelper;
     private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
 
     /**
@@ -62,7 +62,7 @@ public class PhoneCallDetailsHelper {
             PhoneNumberUtilsWrapper phoneUtils) {
         mResources = resources;
         mCallTypeHelper = callTypeHelper;
-        mPhoneNumberHelper = new PhoneNumberHelper(resources);
+        mPhoneNumberHelper = new PhoneNumberDisplayHelper(resources);
         mPhoneNumberUtilsWrapper = phoneUtils;
     }
 
