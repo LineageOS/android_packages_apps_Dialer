@@ -28,6 +28,7 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
 import com.android.contacts.common.util.Constants;
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
@@ -66,13 +67,13 @@ public class ContactInfoHelper {
         final ContactInfo info;
 
         // Determine the contact info.
-        if (PhoneNumberUtils.isUriNumber(number)) {
+        if (PhoneNumberHelper.isUriNumber(number)) {
             // This "number" is really a SIP address.
             ContactInfo sipInfo = queryContactInfoForSipAddress(number);
             if (sipInfo == null || sipInfo == ContactInfo.EMPTY) {
                 // Check whether the "username" part of the SIP address is
                 // actually the phone number of a contact.
-                String username = PhoneNumberUtils.getUsernameFromUriNumber(number);
+                String username = PhoneNumberHelper.getUsernameFromUriNumber(number);
                 if (PhoneNumberUtils.isGlobalPhoneNumber(username)) {
                     sipInfo = queryContactInfoForPhoneNumber(username, countryIso);
                 }
@@ -253,7 +254,7 @@ public class ContactInfoHelper {
             return "";
         }
         // If "number" is really a SIP address, don't try to do any formatting at all.
-        if (PhoneNumberUtils.isUriNumber(number)) {
+        if (PhoneNumberHelper.isUriNumber(number)) {
             return number;
         }
         if (TextUtils.isEmpty(countryIso)) {

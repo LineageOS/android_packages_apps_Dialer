@@ -20,6 +20,8 @@ import android.provider.CallLog;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
+import com.android.contacts.common.util.PhoneNumberHelper;
+
 import com.google.common.collect.Sets;
 
 import java.util.Set;
@@ -58,7 +60,7 @@ public class PhoneNumberUtilsWrapper {
      * static method.
      */
     public boolean isSipNumber(CharSequence number) {
-        return number != null && PhoneNumberUtils.isUriNumber(number.toString());
+        return number != null && PhoneNumberHelper.isUriNumber(number.toString());
     }
 
     public static boolean isUnknownNumberThatCanBeLookedUp(CharSequence number, int presentation) {
