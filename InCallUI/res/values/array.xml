@@ -17,39 +17,6 @@
 
 <!-- Array resources for the Phone app. -->
 <resources>
-    <string-array translatable="false" name="transport_types">
-        <item>UDP</item>
-        <item>TCP</item>
-    </string-array>
-
-    <string-array translatable="true" name="sip_call_options_entries">
-        <item>@string/sip_call_options_entry_1</item>
-        <item>@string/sip_call_options_entry_2</item>
-        <item>@string/sip_call_options_entry_3</item>
-    </string-array>
-
-    <string-array translatable="true" name="sip_call_options_wifi_only_entries">
-        <item>@string/sip_call_options_wifi_only_entry_1</item>
-        <item>@string/sip_call_options_entry_2</item>
-        <item>@string/sip_call_options_entry_3</item>
-    </string-array>
-
-    <string-array translatable="false" name="sip_call_options_values">
-        <item>@string/sip_always</item>
-        <item>@string/sip_address_only</item>
-        <item>@string/sip_ask_me_each_time</item>
-    </string-array>
-
-    <string-array translatable="false" name="phone_type_values">
-        <item>@string/pstn_phone</item>
-        <item>@string/internet_phone</item>
-    </string-array>
-
-    <string-array translatable="true" name="sip_send_keepalive_options">
-        <item>@string/sip_system_decide</item>
-        <item>@string/sip_always_send_keepalive</item>
-    </string-array>
-
     <!-- "Target" resources for the GlowPadView widget used for incoming calls;
          see InCallTouchUi.showIncomingCallWidget() and incall_touch_ui.xml.  -->
 
