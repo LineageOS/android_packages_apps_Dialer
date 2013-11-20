@@ -21,6 +21,8 @@ import android.provider.CallLog.Calls;
 import android.telephony.PhoneNumberUtils;
 
 import com.android.common.widget.GroupingListAdapter;
+import com.android.contacts.common.util.PhoneNumberHelper;
+
 import com.google.common.annotations.VisibleForTesting;
 
 /**
@@ -117,7 +119,7 @@ public class CallLogGroupBuilder {
 
     @VisibleForTesting
     boolean equalNumbers(String number1, String number2) {
-        if (PhoneNumberUtils.isUriNumber(number1) || PhoneNumberUtils.isUriNumber(number2)) {
+        if (PhoneNumberHelper.isUriNumber(number1) || PhoneNumberHelper.isUriNumber(number2)) {
             return compareSipAddresses(number1, number2);
         } else {
             return PhoneNumberUtils.compare(number1, number2);

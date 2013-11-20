@@ -37,7 +37,6 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.Intents.Insert;
 import android.provider.VoicemailContract.Voicemails;
-import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -59,6 +58,7 @@ import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.BackScrollManager.ScrollableHeader;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
@@ -561,7 +561,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     // Only show a label if the number is shown and it is not a SIP address.
                     if (!TextUtils.isEmpty(firstDetails.name)
                             && !TextUtils.isEmpty(firstDetails.number)
-                            && !PhoneNumberUtils.isUriNumber(firstDetails.number.toString())) {
+                            && !PhoneNumberHelper.isUriNumber(firstDetails.number.toString())) {
                         entry.label = Phone.getTypeLabel(mResources, firstDetails.numberType,
                                 firstDetails.numberLabel);
                     }
