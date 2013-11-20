@@ -164,7 +164,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     @Override
     public void setQueryString(String queryString) {
         mFormattedQueryString = PhoneNumberUtils.formatNumber(
-                PhoneNumberUtils.convertAndStrip(queryString), mCountryIso);
+                PhoneNumberUtils.normalizeNumber(queryString), mCountryIso);
         super.setQueryString(queryString);
     }
 }
