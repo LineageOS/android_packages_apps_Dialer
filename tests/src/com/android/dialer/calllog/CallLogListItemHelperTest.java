@@ -50,6 +50,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     /** The views used in the tests. */
     private CallLogListItemViews mViews;
     private PhoneNumberDisplayHelper mPhoneNumberHelper;
+    private PhoneNumberDisplayHelper mPhoneNumberDisplayHelper;
 
     @Override
     protected void setUp() throws Exception {
@@ -61,7 +62,9 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 TEST_VOICEMAIL_NUMBER);
         PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
                 resources, callTypeHelper, phoneUtils);
-        mHelper = new CallLogListItemHelper(phoneCallDetailsHelper, mPhoneNumberHelper, resources);
+        mPhoneNumberDisplayHelper = new PhoneNumberDisplayHelper(resources);
+        mHelper = new CallLogListItemHelper(phoneCallDetailsHelper, mPhoneNumberDisplayHelper,
+                resources);
         mViews = CallLogListItemViews.createForTest(context);
     }
 

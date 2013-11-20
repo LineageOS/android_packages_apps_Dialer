@@ -63,8 +63,8 @@ public class PhoneCallDetailsHelper {
             PhoneNumberUtilsWrapper phoneUtils) {
         mResources = resources;
         mCallTypeHelper = callTypeHelper;
-        mPhoneNumberHelper = new PhoneNumberDisplayHelper(resources);
         mPhoneNumberUtilsWrapper = phoneUtils;
+        mPhoneNumberHelper = new PhoneNumberDisplayHelper(mPhoneNumberUtilsWrapper, resources);
     }
 
     /** Fills the call details views with content. */
@@ -122,7 +122,7 @@ public class PhoneCallDetailsHelper {
             nameText = displayNumber;
             if (TextUtils.isEmpty(details.geocode)
                     || mPhoneNumberUtilsWrapper.isVoicemailNumber(details.number)) {
-                numberText = mResources.getString(R.string.call_log_empty_gecode);
+                numberText = mResources.getString(R.string.call_log_empty_geocode);
             } else {
                 numberText = details.geocode;
             }
@@ -137,7 +137,6 @@ public class PhoneCallDetailsHelper {
         }
 
         views.nameView.setText(nameText);
-
         views.labelView.setText(labelText);
         views.labelView.setVisibility(TextUtils.isEmpty(labelText) ? View.GONE : View.VISIBLE);
     }
