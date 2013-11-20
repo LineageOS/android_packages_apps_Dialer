@@ -49,7 +49,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
 
     /** The views used in the tests. */
     private CallLogListItemViews mViews;
-    private PhoneNumberHelper mPhoneNumberHelper;
+    private PhoneNumberDisplayHelper mPhoneNumberHelper;
 
     @Override
     protected void setUp() throws Exception {
