@@ -183,6 +183,26 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         }
     }
 
+    private final WifiWizardAdapter.WifiWizardModel mWifiWizardModel =
+            new WifiWizardAdapter.WifiWizardModel() {
+                @Override
+                public void setWifiCallState(int state) {
+                    // TODO(ihab): Implement based on real data
+                }
+
+                @Override
+                public int getWifiCallState() {
+                    // TODO(ihab): Implement based on real data
+                    return WIFI_CALL_STATE_ALWAYS;
+                }
+
+                @Override
+                public boolean shouldDisplayWifiSelection() {
+                    // TODO(ihab): Implement based on real data
+                    return true;
+                }
+            };
+
     private Listener mListener;
 
     private OnListFragmentScrolledListener mActivityScrollListener;
@@ -305,7 +325,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                 R.layout.tile_interactions_teaser_view, mListView, false);
 
         mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), this, mContactTileAdapter,
-                mCallLogAdapter, mShowAllContactsButton, mTileInteractionTeaserView);
+                mCallLogAdapter, mShowAllContactsButton, mTileInteractionTeaserView,
+                mWifiWizardModel);
 
         mTileInteractionTeaserView.setAdapter(mAdapter);
 

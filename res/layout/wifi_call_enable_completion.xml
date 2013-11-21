@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/call_log_list_item"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+            android:layout_width="192dp"
+            android:layout_height="128dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_phone_plus_wifi"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="64dp"
+            android:paddingRight="64dp"
+            android:textSize="12dp"
+            android:textColor="@color/dialtacts_secondary_text_color"
+            android:text="@string/wifi_setup_completed"/>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="16dp"
+                android:textSize="12dp"
+                android:textAllCaps="true"
+                android:textColor="@color/dialtacts_primary_text_color"
+                android:text="@string/wifi_setup_ok"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="16dp"
+                android:textSize="12dp"
+                android:textAllCaps="true"
+                android:textColor="@color/dialtacts_primary_text_color"
+                android:text="@string/wifi_setup_settings_shortcut"/>
+
+    </LinearLayout>
+
+</LinearLayout>
