@@ -25,6 +25,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.android.services.telephony.common.Call;
+import com.android.services.telephony.common.Call.DisconnectCause;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -310,7 +311,9 @@ public class CallList {
             if (state != Call.State.IDLE &&
                     state != Call.State.INVALID &&
                     state != Call.State.DISCONNECTED) {
+
                 call.setState(Call.State.DISCONNECTED);
+                call.setDisconnectCause(DisconnectCause.UNKNOWN);
                 updateCallInMap(call);
             }
         }
@@ -380,6 +383,7 @@ public class CallList {
                 delay = DISCONNECTED_CALL_SHORT_TIMEOUT_MS;
                 break;
             case NORMAL:
+            case UNKNOWN:
                 delay = DISCONNECTED_CALL_MEDIUM_TIMEOUT_MS;
                 break;
             case INCOMING_REJECTED:
