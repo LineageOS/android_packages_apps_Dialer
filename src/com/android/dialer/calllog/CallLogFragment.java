@@ -40,6 +40,7 @@ import android.widget.TextView;
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.R;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
@@ -368,7 +369,7 @@ public class CallLogFragment extends ListFragment
             }
             Intent intent;
             // If "number" is really a SIP address, construct a sip: URI.
-            if (PhoneNumberUtils.isUriNumber(number)) {
+            if (PhoneNumberHelper.isUriNumber(number)) {
                 intent = CallUtil.getCallIntent(
                         Uri.fromParts(CallUtil.SCHEME_SIP, number, null));
             } else {

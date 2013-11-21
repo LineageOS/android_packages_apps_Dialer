@@ -31,6 +31,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.contacts.common.test.NeededForTesting;
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
@@ -102,7 +103,7 @@ public class PhoneCallDetailsHelper {
         CharSequence numberFormattedLabel = null;
         // Only show a label if the number is shown and it is not a SIP address.
         if (!TextUtils.isEmpty(details.number)
-                && !PhoneNumberUtils.isUriNumber(details.number.toString())) {
+                && !PhoneNumberHelper.isUriNumber(details.number.toString())) {
             if (details.numberLabel == ContactInfo.GEOCODE_AS_LABEL) {
                 numberFormattedLabel = details.geocode;
             } else {
