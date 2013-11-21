@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -50,6 +51,7 @@ import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactEntry;
+import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
@@ -290,21 +292,12 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
         mShowAllContactsInEmptyViewButton = mParentView.findViewById(
                 R.id.show_all_contact_button_in_nofav);
-        mShowAllContactsInEmptyViewButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAllContacts();
-            }
-        });
+        prepareAllContactsButton(mShowAllContactsInEmptyViewButton);
 
         mShowAllContactsButton = inflater.inflate(R.layout.show_all_contact_button, mListView,
                 false);
-        mShowAllContactsButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAllContacts();
-            }
-        });
+
+        prepareAllContactsButton(mShowAllContactsButton);
 
         mContactTileFrame = mParentView.findViewById(R.id.contact_tile_frame);
 
@@ -637,5 +630,34 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         prefs.edit().putLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, mLastCallShortcutDate)
                 .apply();
         fetchCalls();
+    }
+
+    /**
+     * Returns a view that is laid out and styled to look like a regular contact, with the correct
+     * click behavior (to launch the all contacts activity when it is clicked).
+     */
+    private View prepareAllContactsButton(View v) {
+        final ContactListItemView view = (ContactListItemView) v;
+        view.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAllContacts();
+            }
+        });
+
+        view.setPhotoPosition(ContactListItemView.PhotoPosition.LEFT);
+        final Resources resources = getResources();
+        view.setBackgroundResource(R.drawable.contact_list_item_background);
+
+        view.setPaddingRelative(
+                resources.getDimensionPixelSize(R.dimen.favorites_row_start_padding),
+                resources.getDimensionPixelSize(R.dimen.favorites_row_end_padding),
+                resources.getDimensionPixelSize(R.dimen.favorites_row_top_padding),
+                resources.getDimensionPixelSize(R.dimen.favorites_row_bottom_padding));
+
+        view.setDisplayName(resources.getString(R.string.show_all_contacts_button_text));
+        view.setDrawableResource(R.drawable.list_item_avatar_bg,
+                R.drawable.ic_menu_all_contacts_dk);
+        return view;
     }
 }
