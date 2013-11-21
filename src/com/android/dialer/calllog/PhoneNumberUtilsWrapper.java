@@ -50,7 +50,7 @@ public class PhoneNumberUtilsWrapper {
      * mock-out this, it is not a static method.
      */
     public boolean isVoicemailNumber(CharSequence number) {
-        return PhoneNumberUtils.isVoiceMailNumber(number.toString());
+        return number!= null && PhoneNumberUtils.isVoiceMailNumber(number.toString());
     }
 
     /**
@@ -58,7 +58,7 @@ public class PhoneNumberUtilsWrapper {
      * static method.
      */
     public boolean isSipNumber(CharSequence number) {
-        return PhoneNumberUtils.isUriNumber(number.toString());
+        return number != null && PhoneNumberUtils.isUriNumber(number.toString());
     }
 
     public static boolean isUnknownNumberThatCanBeLookedUp(CharSequence number, int presentation) {
@@ -77,13 +77,13 @@ public class PhoneNumberUtilsWrapper {
         if (new PhoneNumberUtilsWrapper().isVoicemailNumber(number)) {
             return false;
         }
-        if (isLegacyUnknownNumbers(number.toString())) {
+        if (isLegacyUnknownNumbers(number)) {
             return false;
         }
         return true;
     }
 
     public static boolean isLegacyUnknownNumbers(CharSequence number) {
-        return LEGACY_UNKNOWN_NUMBERS.contains(number.toString());
+        return number != null && LEGACY_UNKNOWN_NUMBERS.contains(number.toString());
     }
 }
