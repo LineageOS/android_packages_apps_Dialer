@@ -51,9 +51,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mCallTypeLabel;
     private ImageView mPhoto;
     private TextView mElapsedTime;
-    private View mProviderInfo;
-    private TextView mProviderLabel;
-    private TextView mProviderNumber;
     private ViewGroup mSupplementaryInfoContainer;
 
     // Secondary caller info
@@ -112,9 +109,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mCallTypeLabel = (TextView) view.findViewById(R.id.callTypeLabel);
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
-        mProviderInfo = view.findViewById(R.id.providerInfo);
-        mProviderLabel = (TextView) view.findViewById(R.id.providerLabel);
-        mProviderNumber = (TextView) view.findViewById(R.id.providerAddress);
         mSupplementaryInfoContainer =
             (ViewGroup) view.findViewById(R.id.supplementary_info_container);
     }
@@ -237,8 +231,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             String gatewayLabel, String gatewayNumber) {
         String callStateLabel = null;
 
-        // States other than disconnected not yet supported
-        callStateLabel = getCallStateLabelFromState(state, cause);
+        if (Call.State.isDialing(state) && !TextUtils.isEmpty(gatewayLabel)) {
+            // Provider info: (e.g. "Calling via <gatewayLabel>")
+            callStateLabel = gatewayLabel;
+        } else {
+            callStateLabel = getCallStateLabelFromState(state, cause);
+        }
 
         Log.v(this, "setCallState " + callStateLabel);
         Log.v(this, "DisconnectCause " + cause);
@@ -273,15 +271,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mCallStateLabel.setText("");
                 mCallStateLabel.setGravity(Gravity.END);
             }
-        }
-
-        // Provider info: (e.g. "Calling via <gatewayLabel>")
-        if (!TextUtils.isEmpty(gatewayLabel) && !TextUtils.isEmpty(gatewayNumber)) {
-            mProviderLabel.setText(gatewayLabel);
-            mProviderNumber.setText(gatewayNumber);
-            mProviderInfo.setVisibility(View.VISIBLE);
-        } else {
-            mProviderInfo.setVisibility(View.GONE);
         }
 
         // Restore the animation.
