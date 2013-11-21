@@ -176,7 +176,7 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Helper to set up contact photos. */
     private final ContactPhotoManager mContactPhotoManager;
     /** Helper to parse and process phone numbers. */
-    private PhoneNumberHelper mPhoneNumberHelper;
+    private PhoneNumberDisplayHelper mPhoneNumberHelper;
     /** Helper to group call log entries. */
     private final CallLogGroupBuilder mCallLogGroupBuilder;
 
@@ -263,7 +263,7 @@ public class CallLogAdapter extends GroupingListAdapter
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
 
         mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
-        mPhoneNumberHelper = new PhoneNumberHelper(resources);
+        mPhoneNumberHelper = new PhoneNumberDisplayHelper(resources);
         PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
                 resources, callTypeHelper, new PhoneNumberUtilsWrapper());
         mCallLogViewsHelper =
