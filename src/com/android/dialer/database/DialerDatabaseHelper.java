@@ -69,7 +69,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     /**
      * SmartDial DB version ranges:
      * <pre>
-     *   0-98   KeyLimePie
+     *   0-98   KitKat
      * </pre>
      */
     public static final int DATABASE_VERSION = 4;
@@ -959,7 +959,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                             photoId));
                     counter++;
                     if (DEBUG) {
-                        stopWatch.lap("Added one result");
+                        stopWatch.lap("Added one result: Name: " + displayName);
                     }
                 }
             }
