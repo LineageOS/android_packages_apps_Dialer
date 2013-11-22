@@ -234,7 +234,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn,
-            String gatewayLabel, String gatewayNumber) {
+            String gatewayLabel, String gatewayNumber, String wifiConnection) {
         String callStateLabel = null;
 
         // States other than disconnected not yet supported
@@ -256,15 +256,30 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
 
         // Update the call state label.
-        if (!TextUtils.isEmpty(callStateLabel)) {
+        if (!TextUtils.isEmpty(wifiConnection)) {
+            mCallStateLabel.setText(getResources().getString(R.string.in_call_wifi_connected,
+                    wifiConnection));
+            mCallStateLabel.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+            mCallStateLabel.setBackgroundResource(R.color.wifi_connected_background);
+            mCallStateLabel.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    R.drawable.ic_bluetooth_holo_dark, 0, 0, 0);
+            mCallStateLabel.setCompoundDrawablePadding(5);
+            mCallStateLabel.setAllCaps(false);
+            mCallStateLabel.setVisibility(View.VISIBLE);
+
+        } else if (!TextUtils.isEmpty(callStateLabel)) {
+            mCallStateLabel.setGravity(Gravity.END);
+            mCallStateLabel.setAllCaps(true);
             mCallStateLabel.setVisibility(View.VISIBLE);
             mCallStateLabel.setText(callStateLabel);
-
+            mCallStateLabel.setCompoundDrawables(null, null, null, null);
             if (Call.State.INCOMING == state) {
                 setBluetoothOn(bluetoothOn);
             }
         } else {
             mCallStateLabel.setVisibility(View.GONE);
+            mCallStateLabel.setCompoundDrawables(null, null, null, null);
+
             // Gravity is aligned left when receiving an incoming call in landscape.
             // In that rare case, the gravity needs to be reset to the right.
             // Also, setText("") is used since there is a delay in making the view GONE,

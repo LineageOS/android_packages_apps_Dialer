@@ -517,4 +517,6 @@
 
     <!-- This can be used in any application wanting to disable the text "Emergency number" -->
     <string name="emergency_call_dialog_number_for_display">Emergency number</string>
+
+    <string name="in_call_wifi_connected">Connected via <xliff:g id="wifi_ssid">%s</xliff:g></string>
 </resources>
