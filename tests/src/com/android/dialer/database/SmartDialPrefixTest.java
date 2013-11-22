@@ -31,12 +31,9 @@ import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 
 import java.lang.Exception;
-import java.lang.FindBugsSuppressWarnings;
 import java.lang.Override;
 import java.lang.String;
 import java.util.ArrayList;
-
-import junit.framework.TestCase;
 
 /**
  * To run this test, use the command:
@@ -80,6 +77,7 @@ public class SmartDialPrefixTest extends AndroidTestCase {
         assertTrue(SmartDialPrefix.isCountryNanp("vi"));
     }
 
+    @Override
     protected void setUp() {
         mTestHelper = DialerDatabaseHelper.getNewInstanceForTest(getContext());
     }
@@ -136,8 +134,8 @@ public class SmartDialPrefixTest extends AndroidTestCase {
 
     private ContactNumber constructNewContactWithDummyIds(MatrixCursor contactCursor,
             MatrixCursor nameCursor, String number, int id, String displayName) {
-        return constructNewContact(contactCursor, nameCursor, id, number, 0, "", displayName, 0, 0,
-                0, 0, 0, 0, 0);
+        return constructNewContact(contactCursor, nameCursor, id, number, id, String.valueOf(id),
+                displayName, 0, 0, 0, 0, 0, 0, 0);
     }
 
     private ContactNumber constructNewContact(MatrixCursor contactCursor, MatrixCursor nameCursor,
