@@ -20,6 +20,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.MatrixCursor;
@@ -119,7 +120,9 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         // Wait for the fragment to be loaded.
         getInstrumentation().waitForIdleSync();
 
-        mVoicemail = TelephonyManager.getDefault().getVoiceMailNumber();
+        final TelephonyManager telephonyManager =
+                (TelephonyManager) mActivity.getSystemService(Context.TELEPHONY_SERVICE);
+        mVoicemail = telephonyManager.getVoiceMailNumber();
         mAdapter = mFragment.getAdapter();
         // Do not process requests for details during tests. This would start a background thread,
         // which makes the tests flaky.

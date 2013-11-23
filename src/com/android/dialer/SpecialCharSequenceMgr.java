@@ -158,7 +158,7 @@ public class SpecialCharSequenceMgr {
         TelephonyManager telephonyManager =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (telephonyManager == null
-                || !TelephonyCapabilities.supportsAdn(telephonyManager.getCurrentPhoneType())) {
+                || telephonyManager.getPhoneType() != TelephonyManager.PHONE_TYPE_GSM) {
             return false;
         }
 
@@ -243,7 +243,7 @@ public class SpecialCharSequenceMgr {
         TelephonyManager telephonyManager =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (telephonyManager != null && input.equals(MMI_IMEI_DISPLAY)) {
-            int phoneType = telephonyManager.getCurrentPhoneType();
+            int phoneType = telephonyManager.getPhoneType();
             if (phoneType == TelephonyManager.PHONE_TYPE_GSM) {
                 showIMEIPanel(context, useSystemWindow, telephonyManager);
                 return true;
