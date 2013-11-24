@@ -276,6 +276,17 @@
                   android:process="com.android.incallui">
         </activity>
 
+        <activity android:name="com.android.incallui.MSimInCallActivity"
+                  android:theme="@style/Theme.InCallScreen"
+                  android:label="@string/phoneAppLabel"
+                  android:excludeFromRecents="true"
+                  android:launchMode="singleInstance"
+                  android:screenOrientation="nosensor"
+                  android:configChanges="keyboardHidden"
+                  android:exported="false"
+                  android:process="com.android.incallui">
+        </activity>
+
         <service android:name="com.android.incallui.CallHandlerService"
                  android:process="com.android.incallui"
                  android:permission="android.permission.BIND_CALL_SERVICE">
