@@ -32,6 +32,7 @@ import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.CallLog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -183,25 +184,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         }
     }
 
-    private final WifiWizardAdapter.WifiWizardModel mWifiWizardModel =
-            new WifiWizardAdapter.WifiWizardModel() {
-                @Override
-                public void setWifiCallState(int state) {
-                    // TODO(ihab): Implement based on real data
-                }
-
-                @Override
-                public int getWifiCallState() {
-                    // TODO(ihab): Implement based on real data
-                    return WIFI_CALL_STATE_ALWAYS;
-                }
-
-                @Override
-                public boolean shouldDisplayWifiSelection() {
-                    // TODO(ihab): Implement based on real data
-                    return true;
-                }
-            };
 
     private Listener mListener;
 
@@ -212,6 +194,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
     private CallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
+    private WifiWizardAdapter.WifiWizardModel mWifiSettings;
 
     private View mParentView;
 
@@ -274,6 +257,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         final String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mCallLogAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
                 new ContactInfoHelper(getActivity(), currentCountryIso), true, false);
+        mWifiSettings = new WifiSettings(getActivity());
         setHasOptionsMenu(true);
     }
 
@@ -326,7 +310,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
         mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), this, mContactTileAdapter,
                 mCallLogAdapter, mShowAllContactsButton, mTileInteractionTeaserView,
-                mWifiWizardModel);
+                mWifiSettings);
 
         mTileInteractionTeaserView.setAdapter(mAdapter);
 

@@ -28,13 +28,13 @@ import android.widget.Button;
 public class WifiWizardAdapter extends BaseAdapter {
 
     public interface WifiWizardModel {
-        public static final int WIFI_CALL_STATE_ALWAYS = 0;
-        public static final int WIFI_CALL_STATE_NEVER = 1;
-        public static final int WIFI_CALL_STATE_ASK = 2;
+        public static final int WIFI_ALWAYS_USE = 0;
+        public static final int WIFI_NEVER_USE = 1;
+        public static final int WIFI_ASK_EVERY_TIME = 2;
 
-        void setWifiCallState(int state);
+        void setWhenToMakeWifiCalls(int preference);
 
-        int getWifiCallState();
+        int getWhenToMakeWifiCalls();
 
         boolean shouldDisplayWifiSelection();
     }
