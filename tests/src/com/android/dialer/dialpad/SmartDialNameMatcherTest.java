@@ -198,6 +198,7 @@ public class SmartDialNameMatcherTest extends TestCase {
     }
 
     public void testMatches_NumberNANP() {
+        SmartDialPrefix.setUserInNanpRegion(true);
         // An 11 digit number prefixed with 1 should be matched by the 10 digit number, as well as
         // the 7 digit number (without area code)
         checkMatchesNumber("1-510-333-7596", "5103337596", true, true, 2, 14);

@@ -135,10 +135,6 @@ public class SmartDialNameMatcher {
                     SmartDialPrefix.parsePhoneNumber(phoneNumber);
 
             if (phoneNumberTokens == null) {
-                if (matchPos != null) {
-                    replaceBitInMask(builder, matchPos);
-                    mPhoneNumberMatchMask = builder.toString();
-                }
                 return matchPos;
             }
             if (phoneNumberTokens.countryCodeOffset != 0) {
