@@ -456,8 +456,9 @@
     <!-- String describing the icon used to start a voice search -->
     <string name="description_start_voice_search">Start voice search</string>
 
-    <!-- The string used to represent an unknown location for a phone number in the call log [CHAR LIMIT=3] -->
-    <string name="call_log_empty_gecode">\u0020</string>
+    <!-- The string used to represent an unknown location for a phone number in the call log
+        Do not translate. -->
+    <string name="call_log_empty_geocode"></string>
 
     <!-- Menu item used to call a contact, containing the number of the contact to call -->
     <string name="menu_callNumber">Call <xliff:g id="number">%s</xliff:g></string>
