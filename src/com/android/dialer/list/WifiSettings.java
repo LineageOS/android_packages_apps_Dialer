@@ -39,7 +39,7 @@ public class WifiSettings implements WifiWizardAdapter.WifiWizardModel {
     @Override
     public boolean shouldDisplayWifiSelection() {
 
-        PreferenceManager.getDefaultSharedPreferences(PhoneFavoriteFragment.this.getActivity());
+        // PreferenceManager.getDefaultSharedPreferences(PhoneFavoriteFragment.this.getActivity());
         // .edit().putBoolean("", true).commit();
         // .getBoolean("boobaz", false);
         // .getSharedPreferences("boo.baz", 1);
