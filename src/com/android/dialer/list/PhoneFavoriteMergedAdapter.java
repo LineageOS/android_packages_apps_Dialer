@@ -249,18 +249,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             if (position < mWifiWizardAdapter.getCount()) {
                 SwipeableCallLogRow wrapper = new SwipeableCallLogRow(mContext);
                 wrapper.addView(mWifiWizardAdapter.getView(position, convertView, parent));
-                wrapper.setOnItemSwipeListener(new OnItemGestureListener() {
-                    @Override
-                    public void onSwipe(View view) {}
-
-                    @Override
-                    public void onTouch() {}
-
-                    @Override
-                    public boolean isSwipeEnabled() {
-                        return false;
-                    }
-                });
+                wrapper.setOnItemSwipeListener(mWifiWizardAdapter.getOnItemSwipeListener());
                 return wrapper;
             } else {
                 position -= mWifiWizardAdapter.getCount();

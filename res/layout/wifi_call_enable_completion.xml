@@ -33,6 +33,7 @@
             android:layout_height="wrap_content">
 
         <TextView
+                android:id="@+id/wifi_setup_ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="16dp"
@@ -42,6 +43,7 @@
                 android:text="@string/wifi_setup_ok"/>
 
         <TextView
+                android:id="@+id/wifi_setup_settings_shortcut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="16dp"

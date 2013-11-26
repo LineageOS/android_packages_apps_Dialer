@@ -17,35 +17,49 @@ package com.android.dialer.list;
 
 import android.content.Context;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 
 public class WifiSettings implements WifiWizardAdapter.WifiWizardModel {
     private final Context mContext;
 
+    private static final String SHOULD_DISPLAY_WIFI_SELECTION = "should_display_wifi_selection";
+    private int mWhenToMakeWifiCalls;
+
     public WifiSettings(Context context) {
         this.mContext = context;
+        this.mWhenToMakeWifiCalls = getTelephonyService().getWhenToMakeWifiCalls();
     }
 
     @Override
     public void setWhenToMakeWifiCalls(int preference) {
-        // TODO(ihab): Implement based on real data
+        mWhenToMakeWifiCalls = preference;
     }
 
     @Override
     public int getWhenToMakeWifiCalls() {
-        // TODO(ihab): Implement based on real data
-        return WIFI_ALWAYS_USE;
+        return mWhenToMakeWifiCalls;
     }
 
     @Override
-    public boolean shouldDisplayWifiSelection() {
+    public boolean getShouldDisplayWifiSelection() {
+        return PreferenceManager.getDefaultSharedPreferences(mContext)
+                .getBoolean(SHOULD_DISPLAY_WIFI_SELECTION, true);
+    }
 
-        // PreferenceManager.getDefaultSharedPreferences(PhoneFavoriteFragment.this.getActivity());
-        // .edit().putBoolean("", true).commit();
-        // .getBoolean("boobaz", false);
-        // .getSharedPreferences("boo.baz", 1);
+    @Override
+    public void setShouldDisplayWifiSelection(boolean selection) {
+        PreferenceManager.getDefaultSharedPreferences(mContext)
+                .edit().putBoolean(SHOULD_DISPLAY_WIFI_SELECTION, selection)
+                .commit();
+    }
 
-        // TODO(ihab): Implement based on real data
-        return true;
+    @Override
+    public void commitWhenToMakeWifiCalls() {
+        getTelephonyService().setWhenToMakeWifiCalls(mWhenToMakeWifiCalls);
 
+    }
+
+    private TelephonyManager getTelephonyService() {
+        return (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
     }
 }

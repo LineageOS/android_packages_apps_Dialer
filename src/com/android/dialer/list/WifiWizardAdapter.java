@@ -18,25 +18,35 @@ package com.android.dialer.list;
 
 import com.android.dialer.R;
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
 
 public class WifiWizardAdapter extends BaseAdapter {
 
-    public interface WifiWizardModel {
-        public static final int WIFI_ALWAYS_USE = 0;
-        public static final int WIFI_NEVER_USE = 1;
-        public static final int WIFI_ASK_EVERY_TIME = 2;
+    /** Used to open Call Setting */
+    private static final String PHONE_PACKAGE = "com.android.phone";
+    private static final String CALL_SETTINGS_CLASS_NAME =
+            "com.android.phone.CallFeaturesSetting";
 
+    public interface WifiWizardModel {
+        /** @see android.telephony.TelephonyManager.WifiCallingChoices */
+        int getWhenToMakeWifiCalls();
+        /** @see android.telephony.TelephonyManager.WifiCallingChoices */
         void setWhenToMakeWifiCalls(int preference);
 
-        int getWhenToMakeWifiCalls();
+        /** Whether a Wi-Fi selection shortcut should be displayed */
+        boolean getShouldDisplayWifiSelection();
+        /** @see #getShouldDisplayWifiSelection() */
+        void setShouldDisplayWifiSelection(boolean preference);
 
-        boolean shouldDisplayWifiSelection();
+        /** Commit any changes made to persistent settings storage */
+        void commitWhenToMakeWifiCalls();
     }
 
     private abstract class WifiWizardStep {
@@ -48,11 +58,11 @@ public class WifiWizardAdapter extends BaseAdapter {
         public final View getView() {
             if (mView == null) {
                 mView = inflate(mResourceId);
+                configureView(mView);
             }
             if (mView.getParent() != null && (mView.getParent() instanceof ViewGroup)) {
                 ((ViewGroup) mView.getParent()).removeView(mView);
             }
-            configureView(mView);
             return mView;
         }
         protected abstract void configureView(View view);
@@ -74,29 +84,112 @@ public class WifiWizardAdapter extends BaseAdapter {
 
     private WifiWizardStep mSettingsStep =
             new WifiWizardStep(R.layout.wifi_call_enable_settings) {
+                private RadioButton rb(View view, int id) {
+                    return (RadioButton) view.findViewById(id);
+                }
+
+                private void update(View view) {
+                    rb(view, R.id.wifi_never_use_wifi).setChecked(false);
+                    rb(view, R.id.wifi_ask_use_wifi).setChecked(false);
+                    rb(view, R.id.wifi_always_use_wifi).setChecked(false);
+                    switch (mModel.getWhenToMakeWifiCalls()) {
+                        case TelephonyManager.WifiCallingChoices.NEVER_USE:
+                            rb(view, R.id.wifi_never_use_wifi).setChecked(true);
+                            break;
+                        case TelephonyManager.WifiCallingChoices.ASK_EVERY_TIME:
+                            rb(view, R.id.wifi_ask_use_wifi).setChecked(true);
+                            break;
+                        case TelephonyManager.WifiCallingChoices.ALWAYS_USE:
+                            rb(view, R.id.wifi_always_use_wifi).setChecked(true);
+                            break;
+                    }
+                }
+
+                private void listen(final View view, int id, final int prefValue) {
+                    rb(view, id).setOnCheckedChangeListener(
+                            new CompoundButton.OnCheckedChangeListener() {
+                                @Override
+                                public void onCheckedChanged(
+                                        CompoundButton buttonView,
+                                        boolean isChecked) {
+                                    if (isChecked) {
+                                        mModel.setWhenToMakeWifiCalls(prefValue);
+                                        update(view);
+                                    }
+                                }
+                            });
+                }
+
+                private void listen(View view) {
+                    listen(view, R.id.wifi_never_use_wifi,
+                            TelephonyManager.WifiCallingChoices.NEVER_USE);
+                    listen(view, R.id.wifi_ask_use_wifi,
+                            TelephonyManager.WifiCallingChoices.ASK_EVERY_TIME);
+                    listen(view, R.id.wifi_always_use_wifi,
+                            TelephonyManager.WifiCallingChoices.ALWAYS_USE);
+                }
+
                 @Override
                 protected void configureView(View view) {
-                    view.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mStep = mCompletionStep;
-                            notifyDataSetChanged();
-                        }
-                    });
+                    update(view);
+                    listen(view);
+                    view.findViewById(R.id.wifi_next_setup_screen).setOnClickListener(
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    mStep = mCompletionStep;
+                                    notifyDataSetChanged();
+                                }
+                            });
                 }
             };
 
     private WifiWizardStep mCompletionStep =
             new WifiWizardStep(R.layout.wifi_call_enable_completion) {
+                private void finish() {
+                    mModel.setShouldDisplayWifiSelection(false);
+                    mModel.commitWhenToMakeWifiCalls();
+                    // Keep 'mStep' non-null even if unused, to avoid user visible NPE
+                    // in case there may be some other bug in the logic
+                    mStep = mTeaserStep;
+                    notifyDataSetChanged();
+                }
+
                 @Override
                 protected void configureView(View view) {
-                    view.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mStep = mTeaserStep;
-                            notifyDataSetChanged();
-                        }
-                    });
+                    view.findViewById(R.id.wifi_setup_ok).setOnClickListener(
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    finish();
+                                }
+                            });
+                    view.findViewById(R.id.wifi_setup_settings_shortcut).setOnClickListener(
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    mContext.startActivity(getCallSettingsIntent());
+                                    finish();
+                                }
+                            });
+                }
+            };
+
+    private final SwipeHelper.OnItemGestureListener mOnItemSwipeListener =
+            new SwipeHelper.OnItemGestureListener() {
+                @Override
+                public void onSwipe(View view) {
+                    mModel.setShouldDisplayWifiSelection(false);
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onTouch() {}
+
+                @Override
+                public boolean isSwipeEnabled() {
+                    // TODO: This never gets called by the swipe framework; why?
+                    return mStep == mTeaserStep;
                 }
             };
 
@@ -109,9 +202,13 @@ public class WifiWizardAdapter extends BaseAdapter {
         this.mModel = model;
     }
 
+    public SwipeHelper.OnItemGestureListener getOnItemSwipeListener() {
+        return mOnItemSwipeListener;
+    }
+
     @Override
     public int getCount() {
-        return 1;
+        return mModel.getShouldDisplayWifiSelection() ? 1 : 0;
     }
 
     @Override
@@ -132,5 +229,13 @@ public class WifiWizardAdapter extends BaseAdapter {
     private View inflate(int resource) {
         return ((LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                 .inflate(resource, null);
+    }
+
+    /** Returns an Intent to launch Call Settings screen */
+    public static Intent getCallSettingsIntent() {
+        final Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setClassName(PHONE_PACKAGE, CALL_SETTINGS_CLASS_NAME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        return intent;
     }
 }

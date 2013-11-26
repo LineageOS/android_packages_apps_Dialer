@@ -100,7 +100,6 @@
         <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:id="@+id/wifi_never_use_wifi"/>
 
     </LinearLayout>
@@ -128,6 +127,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:paddingStart="8dp"
+                android:id="@+id/wifi_next_setup_screen"
                 android:src="@drawable/ic_wifi_call"/>
 
     </LinearLayout>
