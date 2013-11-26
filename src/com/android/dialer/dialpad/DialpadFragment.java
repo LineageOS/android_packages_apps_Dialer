@@ -187,8 +187,6 @@ public class DialpadFragment extends Fragment
     /** Stream type used to play the DTMF tones off call, and mapped to the volume control keys */
     private static final int DIAL_TONE_STREAM_TYPE = AudioManager.STREAM_DTMF;
 
-    private ContactsPreferences mContactsPrefs;
-
     private OnDialpadQueryChangedListener mDialpadQueryListener;
 
     /**
@@ -349,7 +347,6 @@ public class DialpadFragment extends Fragment
     public void onCreate(Bundle state) {
         super.onCreate(state);
         mFirstLaunch = true;
-        mContactsPrefs = new ContactsPreferences(getActivity());
         mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
 
         try {
