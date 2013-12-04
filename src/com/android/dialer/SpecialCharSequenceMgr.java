@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.internal.telephony.ITelephony;
+import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.msim.ITelephonyMSim;
 import com.android.internal.telephony.TelephonyCapabilities;
 import com.android.internal.telephony.TelephonyIntents;
@@ -270,6 +271,9 @@ public class SpecialCharSequenceMgr {
 
     static boolean handleIMEIDisplay(Context context, String input, boolean useSystemWindow) {
         if (input.equals(MMI_IMEI_DISPLAY)) {
+            if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+                return handleMSimIMEIDisplay(context);
+            }
             int phoneType;
             if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
                 int subscription = MSimTelephonyManager.getDefault().
@@ -292,6 +296,33 @@ public class SpecialCharSequenceMgr {
         }
 
         return false;
+    }
+
+    static boolean handleMSimIMEIDisplay(Context context) {
+        StringBuffer deviceIds = new StringBuffer();
+        int titleId = R.string.device_id;
+        for (int i = 0; i < MSimTelephonyManager.getDefault().getPhoneCount(); i++) {
+            if (i != 0) {
+                deviceIds.append("\n");
+            }
+            int phoneType = MSimTelephonyManager.getDefault().getCurrentPhoneType(i);
+            if (phoneType != TelephonyManager.PHONE_TYPE_GSM
+                    && phoneType != TelephonyManager.PHONE_TYPE_CDMA) {
+                return false;
+            }
+            deviceIds.append(context
+                    .getString(PhoneConstants.PHONE_TYPE_CDMA == phoneType ? R.string.meid
+                            : R.string.imei)
+                    + " ");
+            deviceIds.append(MSimTelephonyManager.getDefault().getDeviceId(i));
+        }
+        AlertDialog alert = new AlertDialog.Builder(context)
+                .setTitle(titleId)
+                .setMessage(deviceIds.toString())
+                .setPositiveButton(android.R.string.ok, null)
+                .setCancelable(false)
+                .show();
+        return true;
     }
 
     private static boolean handleRegulatoryInfoDisplay(Context context, String input) {
