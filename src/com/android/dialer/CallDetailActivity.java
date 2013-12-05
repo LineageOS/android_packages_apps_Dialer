@@ -18,6 +18,7 @@ package com.android.dialer;
 
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -643,7 +644,13 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             mMainActionPushLayerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(actionIntent);
+                    try {
+                        startActivity(actionIntent);
+                    } catch (ActivityNotFoundException e) {
+                        final Toast toast = Toast.makeText(CallDetailActivity.this,
+                                R.string.add_contact_not_available, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                 }
             });
             mMainActionPushLayerView.setContentDescription(actionDescription);
