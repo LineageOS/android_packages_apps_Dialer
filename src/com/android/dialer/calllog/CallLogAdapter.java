@@ -388,7 +388,16 @@ public class CallLogAdapter extends GroupingListAdapter
         NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
         ContactInfo existingInfo = mContactInfoCache.getPossiblyExpired(numberCountryIso);
 
-        boolean updated = !info.equals(existingInfo);
+        final boolean isRemoteSource = info.sourceType != 0;
+
+        // Don't force redraw if existing info in the cache is equal to {@link ContactInfo#EMPTY}
+        // to avoid updating the data set for every new row that is scrolled into view.
+        // see (https://googleplex-android-review.git.corp.google.com/#/c/166680/)
+
+        // Exception: Photo uris for contacts from remote sources are not cached in the call log
+        // cache, so we have to force a redraw for these contacts regardless.
+        boolean updated = (existingInfo != ContactInfo.EMPTY || isRemoteSource) &&
+                !info.equals(existingInfo);
 
         // Store the data in the cache so that the UI thread can use to display it. Store it
         // even if it has not changed so that it is marked as not expired.

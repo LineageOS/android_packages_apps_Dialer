@@ -78,8 +78,7 @@ public class CallLogGroupBuilder {
                 shouldGroup = false;
             } else {
                 // Incoming, outgoing, and missed calls group together.
-                shouldGroup = (callType == Calls.INCOMING_TYPE || callType == Calls.OUTGOING_TYPE ||
-                        callType == Calls.MISSED_TYPE);
+                shouldGroup = callType != Calls.VOICEMAIL_TYPE;
             }
 
             if (shouldGroup) {

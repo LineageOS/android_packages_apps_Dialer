@@ -125,13 +125,13 @@
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"طلب لإضافة مكالمة"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"عدد الدقائق:<xliff:g id="MINUTES">%s</xliff:g>، عددالثواني: <xliff:g id="SECONDS">%s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"لم يتم إرسال المكالمة"</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"لإعداد البريد الصوتي، انتقل إلى القائمة &gt; الإعدادات."</string>
+    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"‏لإعداد البريد الصوتي، انتقل إلى القائمة &gt; الإعدادات."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"للاتصال بالبريد الصوتي، يجب أولاً إيقاف وضع الطائرة."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"جارٍ التحميل..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"جارٍ التحميل من بطاقة SIM…"</string>
-    <string name="simContacts_title" msgid="27341688347689769">"بطاقة SIM وجهات الاتصال"</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"‏جارٍ التحميل من بطاقة SIM…"</string>
+    <string name="simContacts_title" msgid="27341688347689769">"‏بطاقة SIM وجهات الاتصال"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"أعد تمكين تطبيق الأشخاص لاستخدام هذه الميزة."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"أدخل اسمًا أو رقم هاتف"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"الكل"</string>
