@@ -195,35 +195,6 @@ public class CallDetailHeader {
         }
     }
 
-    private final LoaderCallbacks<Contact> mLoaderCallbacks = new LoaderCallbacks<Contact>() {
-        @Override
-        public void onLoaderReset(Loader<Contact> loader) {
-        }
-
-        @Override
-        public void onLoadFinished(Loader<Contact> loader, Contact data) {
-            final Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
-            intent.setType(Contacts.CONTENT_ITEM_TYPE);
-            if (data.getDisplayNameSource() >= DisplayNameSources.ORGANIZATION) {
-                intent.putExtra(Insert.NAME, data.getDisplayName());
-            }
-            intent.putExtra(Insert.DATA, data.getContentValues());
-            bindContactPhotoAction(intent, R.drawable.ic_add_contact_holo_dark,
-                    getString(R.string.description_add_contact));
-        }
-
-        @Override
-        public Loader<Contact> onCreateLoader(int id, Bundle args) {
-            final Uri contactUri = args.getParcelable(BUNDLE_CONTACT_URI_EXTRA);
-            if (contactUri == null) {
-                Log.wtf(TAG, "No contact lookup uri provided.");
-            }
-            return new ContactLoader(CallDetailActivity.this, contactUri,
-                    false /* loadGroupMetaData */, false /* loadInvitableAccountTypes */,
-                    false /* postViewNotification */, true /* computeFormattedPhoneNumber */);
-        }
-    };
-
     public void updateViews(String number, int numberPresentation, Data data) {
         // Cache the details about the phone number.
         final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper();
@@ -261,14 +232,6 @@ public class CallDetailHeader {
             mainActionIcon = R.drawable.ic_contacts_holo_dark;
             mainActionDescription =
                 mResources.getString(R.string.description_view_contact, nameOrNumber);
-        } else if (UriUtils.isEncodedContactUri(contactUri)) {
-            final Bundle bundle = new Bundle(1);
-            bundle.putParcelable(BUNDLE_CONTACT_URI_EXTRA, contactUri);
-            getLoaderManager().initLoader(LOADER_ID, bundle, mLoaderCallbacks);
-            mainActionIntent = null;
-            mainActionIcon = R.drawable.ic_add_contact_holo_dark;
-            mainActionDescription = getString(R.string.description_add_contact);
-            skipBind = true;
         } else if (isVoicemailNumber) {
             mainActionIntent = null;
             mainActionIcon = 0;
