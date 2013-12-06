@@ -17,7 +17,7 @@
 <resources>
 
     <!-- Secondary text color in the Phone app -->
-    <color name="dialtacts_primary_text_color">#111111</color>
+    <color name="dialtacts_primary_text_color">#000000</color>
     <color name="dialtacts_secondary_text_color">#888888</color>
     <color name="dialpad_text_color">#ffffff</color>
 
@@ -41,7 +41,7 @@
     <color name="background_dialer_light">#cecece</color>
 
     <!-- Background color of dialer list items (contacts, call log entries) -->
-    <color name="background_dialer_list_items">#f5f5f5</color>
+    <color name="background_dialer_list_items">#eeeeee</color>
 
     <!-- Background color of new dialpad -->
     <color name="background_dialpad">#f2020709</color>
@@ -52,7 +52,7 @@
     <color name="dialpad_secondary_text_color">#aaaaaa</color>
 
     <!-- Background color of action bars -->
-    <color name="actionbar_background_color">#e6e6e6</color>
+    <color name="actionbar_background_color">#ffffff</color>
 
     <!-- Color of the 1dp divider that separates favorites -->
     <color name="favorite_contacts_separator_color">#d0d0d0</color>
