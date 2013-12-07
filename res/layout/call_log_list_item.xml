@@ -39,8 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:paddingStart="@dimen/call_log_outer_margin"
-            android:paddingEnd="@dimen/call_log_outer_margin"
+            android:padding="@dimen/call_log_outer_margin"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:background="?android:attr/selectableItemBackground"
@@ -60,8 +59,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingTop="@dimen/call_log_inner_margin"
-                android:paddingBottom="@dimen/call_log_inner_margin"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
                 android:layout_marginStart="@dimen/call_log_inner_margin"
@@ -72,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/call_log_icon_margin"
                     android:textColor="?attr/call_log_primary_text_color"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:singleLine="true"
                 />
                 <LinearLayout
@@ -86,8 +83,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/call_log_icon_margin"
                         android:textColor="?attr/call_log_secondary_text_color"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:singleLine="true"
                         android:ellipsize="marquee"
                         />
@@ -113,7 +109,7 @@
                         android:layout_marginEnd="@dimen/call_log_icon_margin"
                         android:layout_gravity="center_vertical"
                         android:textColor="?attr/call_log_secondary_text_color"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:singleLine="true"
                     />
                 </LinearLayout>

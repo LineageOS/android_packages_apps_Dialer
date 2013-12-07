@@ -24,7 +24,7 @@
     <integer name="max_dismiss_velocity">2000</integer>
     <integer name="snap_animation_duration">350</integer>
     <integer name="swipe_scroll_slop">2</integer>
-    <dimen name="min_swipe">5dip</dimen>
+    <dimen name="min_swipe">0dip</dimen>
     <dimen name="min_vert">10dip</dimen>
     <dimen name="min_lock">20dip</dimen>
 </resources>

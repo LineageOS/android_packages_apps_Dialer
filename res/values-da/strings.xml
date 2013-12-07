@@ -160,5 +160,5 @@
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nye ubesvarede opkald"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Dine foretrukne og de kontaktpersoner, du\noftest ringer til, vises her.\nSå gå du bare i gang med at ringe."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Tryk på billedet for at se alle telefonnumre, eller tryk på billedet, og hold det nede, for at omarrangere"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"Annullerer"</string>
+    <string name="description_dismiss" msgid="2146276780562549643">"Annuller"</string>
 </resources>

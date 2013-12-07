@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<LinearLayout
+<com.android.contacts.common.list.ContactListItemView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/show_all_contact_button"
     android:orientation="horizontal"
@@ -23,23 +23,4 @@
     android:layout_height="match_parent"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:gravity="center"
-    android:background="?android:attr/selectableItemBackground"
-    android:focusable="true">
-
-    <ImageView
-        android:layout_height="match_parent"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_menu_all_contacts_dk"
-        android:layout_marginEnd="10dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textSize="14sp"
-        android:ellipsize="marquee"
-        android:singleLine="true"
-        android:text="@string/show_all_contacts_button_text"
-        android:textAlignment="center"
-        android:gravity="center"/>
-</LinearLayout>
+    android:focusable="true" />

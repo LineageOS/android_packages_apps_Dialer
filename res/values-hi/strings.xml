@@ -132,7 +132,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"सिम कार्ड से लोड हो रहा है…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"सिम कार्ड के संपर्क"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"इस सुविधा का उपयोग करने के लिए लोग एप्स को पुन: सक्षम करें."</string>
+    <string name="add_contact_not_available" msgid="1419207765446461366">"इस सुविधा का उपयोग करने के लिए लोग ऐप्स  को पुन: सक्षम करें."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"नाम या फ़ोन नंबर लिखें"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"सभी"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"छूटे हुए"</string>

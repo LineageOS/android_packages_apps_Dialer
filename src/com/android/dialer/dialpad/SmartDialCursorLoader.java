@@ -162,6 +162,8 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
     }
 
     private void releaseResources(Cursor cursor) {
-        cursor.close();
+        if (cursor != null) {
+            cursor.close();
+        }
     }
 }
