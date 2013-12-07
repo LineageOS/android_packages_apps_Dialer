@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa80f949_7ed116fb",
+        "filename": "res/values-it/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 3916
+      },
+      "writtenOn": "2013-12-07T12:17:15Z",
+      "side": 1,
+      "message": "Remove space.\nAlso, please rearrange strings order to match the original file (call_log_stats_title)",
+      "revId": "b50e200b30b6be1d913ba65396bbfe6af86bef2c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
