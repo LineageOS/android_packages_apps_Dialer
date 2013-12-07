@@ -137,6 +137,8 @@ public class WifiWizardAdapter extends BaseAdapter {
                             new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    mModel.setShouldDisplayWifiSelection(false);
+                                    mModel.commitWhenToMakeWifiCalls();
                                     mStep = mCompletionStep;
                                     notifyDataSetChanged();
                                 }
@@ -147,8 +149,6 @@ public class WifiWizardAdapter extends BaseAdapter {
     private WifiWizardStep mCompletionStep =
             new WifiWizardStep(R.layout.wifi_call_enable_completion) {
                 private void finish() {
-                    mModel.setShouldDisplayWifiSelection(false);
-                    mModel.commitWhenToMakeWifiCalls();
                     // Keep 'mStep' non-null even if unused, to avoid user visible NPE
                     // in case there may be some other bug in the logic
                     mStep = mTeaserStep;
