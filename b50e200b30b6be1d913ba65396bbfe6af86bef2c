@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "fa80f949_fe1186b0",
+        "filename": "res/values-it/cm_arrays.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3916
+      },
+      "writtenOn": "2013-12-07T12:25:14Z",
+      "side": 1,
+      "message": "Remove space.",
+      "revId": "b50e200b30b6be1d913ba65396bbfe6af86bef2c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa80f949_7e3fd625",
+        "filename": "res/values-it/cm_plurals.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3916
+      },
+      "writtenOn": "2013-12-07T12:25:14Z",
+      "side": 1,
+      "message": "Remove space.",
+      "revId": "b50e200b30b6be1d913ba65396bbfe6af86bef2c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa80f949_7ed116fb",
         "filename": "res/values-it/cm_strings.xml",
         "patchSetId": 1
