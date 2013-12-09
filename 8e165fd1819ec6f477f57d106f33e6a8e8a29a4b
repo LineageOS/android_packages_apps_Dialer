@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da85f559_f13548f7",
+        "filename": "res/values-zh-rCN/cm_plurals.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3589
+      },
+      "writtenOn": "2013-12-09T08:51:54Z",
+      "side": 1,
+      "message": "???",
+      "revId": "8e165fd1819ec6f477f57d106f33e6a8e8a29a4b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da85f559_913abce6",
+        "filename": "res/values-zh-rCN/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3589
+      },
+      "writtenOn": "2013-12-09T08:51:54Z",
+      "side": 1,
+      "message": "???????",
+      "revId": "8e165fd1819ec6f477f57d106f33e6a8e8a29a4b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
