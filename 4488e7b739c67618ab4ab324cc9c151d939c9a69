@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da85f559_54ca0251",
+        "filename": "res/values-zh-rCN/cm_strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3589
+      },
+      "writtenOn": "2013-12-09T18:21:52Z",
+      "side": 1,
+      "message": "???????????????????:-P",
+      "revId": "4488e7b739c67618ab4ab324cc9c151d939c9a69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
