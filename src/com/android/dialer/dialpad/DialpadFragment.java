@@ -816,12 +816,16 @@ public class DialpadFragment extends Fragment
 
     private void setupMenuItems(Menu menu) {
         final MenuItem addToContactMenuItem = menu.findItem(R.id.menu_add_contacts);
+        final MenuItem twoSecPauseMenuItem = menu.findItem(R.id.menu_2s_pause);
+        final MenuItem waitMenuItem = menu.findItem(R.id.menu_add_wait);
 
         // We show "add to contacts" menu only when the user is
         // seeing usual dialpad and has typed at least one digit.
         // We never show a menu if the "choose dialpad" UI is up.
         if (dialpadChooserVisible() || isDigitsEmpty()) {
             addToContactMenuItem.setVisible(false);
+            twoSecPauseMenuItem.setVisible(false);
+            waitMenuItem.setVisible(false);
         } else {
             final CharSequence digits = mDigits.getText();
             // Put the current digits string into an intent
