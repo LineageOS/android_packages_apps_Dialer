@@ -93,10 +93,23 @@ public class CallLogFragment extends ListFragment
             mRefreshDataRequired = true;
         }
     }
+    private class DataContentObserver extends ContentObserver {
+        public DataContentObserver() {
+            super(mHandler);
+        }
+        @Override
+        public void onChange(boolean selfChange) {
+            if (mAdapter != null) {
+                mAdapter.invalidateCache();
+            }
+        }
+    }
+
 
     // See issue 6363009
     private final ContentObserver mCallLogObserver = new CustomContentObserver();
     private final ContentObserver mContactsObserver = new CustomContentObserver();
+    private final ContentObserver mDataObserver = new DataContentObserver();
     private boolean mRefreshDataRequired = true;
 
     // Exactly same variable is in Fragment as a package private.
@@ -135,6 +148,8 @@ public class CallLogFragment extends ListFragment
                 mCallLogObserver);
         getActivity().getContentResolver().registerContentObserver(
                 ContactsContract.Contacts.CONTENT_URI, true, mContactsObserver);
+        getActivity().getContentResolver().registerContentObserver(
+                ContactsContract.Data.CONTENT_URI, true, mDataObserver);
         setHasOptionsMenu(true);
         updateCallList(mCallTypeFilter);
     }
@@ -319,6 +334,7 @@ public class CallLogFragment extends ListFragment
         mAdapter.changeCursor(null);
         getActivity().getContentResolver().unregisterContentObserver(mCallLogObserver);
         getActivity().getContentResolver().unregisterContentObserver(mContactsObserver);
+        getActivity().getContentResolver().unregisterContentObserver(mDataObserver);
     }
 
     @Override
