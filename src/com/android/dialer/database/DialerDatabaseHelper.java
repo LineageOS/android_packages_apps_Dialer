@@ -628,10 +628,26 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
             updatedContactCursor.moveToPosition(-1);
             while (updatedContactCursor.moveToNext()) {
-                insert.bindLong(1, updatedContactCursor.getLong(PhoneQuery.PHONE_ID));
-                insert.bindString(2, updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER));
-                insert.bindLong(3, updatedContactCursor.getLong(PhoneQuery.PHONE_CONTACT_ID));
-                insert.bindString(4, updatedContactCursor.getString(PhoneQuery.PHONE_LOOKUP_KEY));
+                insert.clearBindings();
+
+                // Handle string columns which can possibly be null first. In the case of certain
+                // null columns (due to malformed rows possibly inserted by third-party apps
+                // or sync adapters), skip the phone number row.
+                final String number = updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER);
+                if (TextUtils.isEmpty(number)) {
+                    continue;
+                } else {
+                    insert.bindString(2, number);
+                }
+
+                final String lookupKey = updatedContactCursor.getString(
+                        PhoneQuery.PHONE_LOOKUP_KEY);
+                if (TextUtils.isEmpty(lookupKey)) {
+                    continue;
+                } else {
+                    insert.bindString(4, lookupKey);
+                }
+
                 final String displayName = updatedContactCursor.getString(
                         PhoneQuery.PHONE_DISPLAY_NAME);
                 if (displayName == null) {
@@ -639,6 +655,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 } else {
                     insert.bindString(5, displayName);
                 }
+
+                insert.bindLong(1, updatedContactCursor.getLong(PhoneQuery.PHONE_ID));
+                insert.bindLong(3, updatedContactCursor.getLong(PhoneQuery.PHONE_CONTACT_ID));
                 insert.bindLong(6, updatedContactCursor.getLong(PhoneQuery.PHONE_PHOTO_ID));
                 insert.bindLong(7, updatedContactCursor.getLong(PhoneQuery.PHONE_LAST_TIME_USED));
                 insert.bindLong(8, updatedContactCursor.getInt(PhoneQuery.PHONE_TIMES_USED));
@@ -648,8 +667,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 insert.bindLong(12, updatedContactCursor.getInt(PhoneQuery.PHONE_IS_PRIMARY));
                 insert.bindLong(13, currentMillis);
                 insert.executeInsert();
-                insert.clearBindings();
-
                 final String contactPhoneNumber =
                         updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER);
                 final ArrayList<String> numberPrefixes =
