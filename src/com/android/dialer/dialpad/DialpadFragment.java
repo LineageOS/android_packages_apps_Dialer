@@ -71,6 +71,7 @@ import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -92,6 +93,7 @@ import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.util.OrientationUtil;
 import com.android.internal.telephony.ITelephony;
+import com.android.internal.telephony.TelephonyProperties;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
 import com.google.common.annotations.VisibleForTesting;
@@ -204,6 +206,9 @@ public class DialpadFragment extends Fragment
     private View mDigitsContainer;
     private EditText mDigits;
 
+    private EditText mRecipients;
+    private View mDialpadStub;
+
     /** Remembers if we need to clear digits field when the screen is completely gone. */
     private boolean mClearDigitsOnStop;
 
@@ -220,6 +225,7 @@ public class DialpadFragment extends Fragment
 
     private View mDialButtonContainer;
     private View mDialButton;
+    private ImageButton mDialConferenceButton;
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
 
@@ -245,6 +251,10 @@ public class DialpadFragment extends Fragment
     /** Identifier for the "Add Call" intent extra. */
     private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
+    /** Identifier for the "Add Participant" intent extra. */
+    private static final String ADD_PARTICIPANT_KEY = "add_participant";
+    private boolean mAddParticipant = false;
+
     /**
      * Identifier for intent extra for sending an empty Flash message for
      * CDMA networks. This message is used by the network to simulate a
@@ -257,6 +267,9 @@ public class DialpadFragment extends Fragment
      */
     private static final String EXTRA_SEND_EMPTY_FLASH
             = "com.android.phone.extra.SEND_EMPTY_FLASH";
+
+    public static final String EXTRA_DIAL_CONFERENCE_URI =
+            "org.codeaurora.extra.DIAL_CONFERENCE_URI";
 
     private String mCurrentCountryIso;
 
@@ -275,10 +288,22 @@ public class DialpadFragment extends Fragment
                 // Note there's a race condition in the UI here: the
                 // dialpad chooser could conceivably disappear (on its
                 // own) at the exact moment the user was trying to select
-                // one of the choices, which would be confusing.  (But at
+                // one of the choices, which would be confusing. (But at
                 // least that's better than leaving the dialpad chooser
                 // onscreen, but useless...)
                 showDialpadChooser(false);
+            }
+
+            if (state == TelephonyManager.CALL_STATE_IDLE) {
+                // No existing calls, conference can be originated.
+                // Note that when there is on going call, add call should not show dial
+                // conference button since normal dialpad should be used.
+                // Check if ImsPhone is created, if so enable the conference button.
+                if (isCallOnImsEnabled()) {
+                    // Note, phone app still need to check if UI option to "Use Ims Always"
+                    // is checked upon receiving dial request.
+                    mDialConferenceButton.setVisibility(View.VISIBLE);
+                }
             }
         }
     };
@@ -415,6 +440,18 @@ public class DialpadFragment extends Fragment
         mDigits.setOnLongClickListener(this);
         mDigits.addTextChangedListener(this);
         PhoneNumberFormatter.setPhoneNumberFormattingTextWatcher(getActivity(), mDigits);
+
+        mRecipients = (EditText) fragmentView.findViewById(R.id.recipients);
+        if (mRecipients != null) {
+            mRecipients.setVisibility(View.GONE);
+            mRecipients.addTextChangedListener(this);
+        }
+
+        mDialpadStub = fragmentView.findViewById(R.id.dialpadStub);
+        if (mDialpadStub != null) {
+            mDialpadStub.setVisibility(View.GONE);
+        }
+
         // Check for the presence of the keypad
         View oneButton = fragmentView.findViewById(R.id.one);
         if (oneButton != null) {
@@ -428,6 +465,18 @@ public class DialpadFragment extends Fragment
         } else {
             mDialButton.setVisibility(View.GONE); // It's VISIBLE by default
             mDialButton = null;
+        }
+
+        mDialConferenceButton = (ImageButton) fragmentView.findViewById(R.id.dialConferenceButton);
+        if (isCallOnImsEnabled()) {
+            if (mDialConferenceButton != null) {
+                mDialConferenceButton.setOnClickListener(this);
+                mDialConferenceButton.setOnLongClickListener(this);
+            }
+        } else {
+            if (mDialConferenceButton != null) {
+                mDialConferenceButton.setVisibility(View.GONE);
+            }
         }
 
         mDelete = fragmentView.findViewById(R.id.deleteButton);
@@ -604,9 +653,26 @@ public class DialpadFragment extends Fragment
                 }
 
             }
+        } else {
+            mAddParticipant = intent.getBooleanExtra(ADD_PARTICIPANT_KEY, false);
+            if (isCallOnImsEnabled()) {
+                // for IMS AddParticipant feature add call, show normal
+                // dialpad with dial conference button.
+                mDialConferenceButton.setVisibility(View.VISIBLE);
+            } else {
+                // for add call, show normal dialpad without dial conference
+                // button.
+                mDialConferenceButton.setVisibility(View.GONE);
+            }
         }
+        Log.d(TAG, "mAddParticipant = " + mAddParticipant);
         showDialpadChooser(needToShowDialpadChooser);
         setStartedFromNewIntent(false);
+    }
+
+    private boolean isCallOnImsEnabled() {
+        return (SystemProperties.getBoolean(
+                TelephonyProperties.CALLS_ON_IMS_ENABLED_PROPERTY, false));
     }
 
     public void setStartedFromNewIntent(boolean value) {
@@ -994,6 +1060,10 @@ public class DialpadFragment extends Fragment
                 }
                 return;
             }
+            case R.id.dialConferenceButton: {
+                dialConferenceButtonPressed();
+                return;
+            }
             default: {
                 Log.wtf(TAG, "Unexpected onClick() event from: " + view);
                 return;
@@ -1165,11 +1235,20 @@ public class DialpadFragment extends Fragment
      * case described above).
      */
     public void dialButtonPressed() {
-        if (isDigitsEmpty()) { // No number entered.
-            handleDialButtonClickWithEmptyDigits();
-        } else {
-            final String number = mDigits.getText().toString();
+        boolean isDigitsShown = mDigits.isShown();
+        final String number = (isDigitsShown) ? mDigits.getText().toString() :
+                mRecipients.getText().toString().trim();
 
+        if (isDigitsShown && isDigitsEmpty()) { // No number entered.
+            handleDialButtonClickWithEmptyDigits();
+        } else if (!isDigitsShown && number.isEmpty()) {
+            // mRecipients must be empty
+            // TODO add support for conference URI in last number dialed
+            // use ErrorDialogFragment instead? also see android.app.AlertDialog
+            android.widget.Toast.makeText(getActivity(),
+                    "Error: Cannot dial.  Please provide conference recipients.",
+                    android.widget.Toast.LENGTH_SHORT).show();
+        } else {
             // "persist.radio.otaspdial" is a temporary hack needed for one carrier's automated
             // test equipment.
             // TODO: clean it up.
@@ -1185,11 +1264,20 @@ public class DialpadFragment extends Fragment
                 }
 
                 // Clear the digits just in case.
-                mDigits.getText().clear();
+                if (isDigitsShown) {
+                    mDigits.getText().clear();
+                } else {
+                    mRecipients.getText().clear();
+                }
             } else {
                 final Intent intent = CallUtil.getCallIntent(number,
                         (getActivity() instanceof DialtactsActivity ?
                                 ((DialtactsActivity) getActivity()).getCallOrigin() : null));
+                if (!isDigitsShown) {
+                    // must be dial conference add extra
+                    intent.putExtra(EXTRA_DIAL_CONFERENCE_URI, true);
+                }
+                intent.putExtra(ADD_PARTICIPANT_KEY, mAddParticipant);
                 startActivity(intent);
                 hideAndClearDialpad();
             }
@@ -1203,6 +1291,13 @@ public class DialpadFragment extends Fragment
     private String getCallOrigin() {
         return (getActivity() instanceof DialtactsActivity) ?
                 ((DialtactsActivity) getActivity()).getCallOrigin() : null;
+    }
+
+    public void dialConferenceButtonPressed() {
+        // show dial conference screen if it is not shown
+        // If it is already shown, show normal dial screen
+        boolean show = (mRecipients != null) ? !mRecipients.isShown() : false;
+        showDialConference(show);
     }
 
     private void handleDialButtonClickWithEmptyDigits() {
@@ -1321,7 +1416,8 @@ public class DialpadFragment extends Fragment
      *                of the regular Dialer UI
      */
     private void showDialpadChooser(boolean enabled) {
-        // Check if onCreateView() is already called by checking one of View objects.
+        // Check if onCreateView() is already called by checking one of View
+        // objects.
         if (!isLayoutReady()) {
             return;
         }
@@ -1331,30 +1427,72 @@ public class DialpadFragment extends Fragment
             if (mDigitsContainer != null) {
                 mDigitsContainer.setVisibility(View.GONE);
             } else {
-                // mDigits is not enclosed by the container. Make the digits field itself gone.
+                // mDigits is not enclosed by the container. Make the digits
+                // field itself gone.
                 mDigits.setVisibility(View.GONE);
+                if (mDelete != null) mDelete.setVisibility(View.GONE);
+                if (mRecipients != null) mRecipients.setVisibility(View.GONE);
             }
+            if (mDialpadStub != null) mDialpadStub.setVisibility(View.GONE);
             if (mDialpad != null) mDialpad.setVisibility(View.GONE);
             if (mDialButtonContainer != null) mDialButtonContainer.setVisibility(View.GONE);
 
             mDialpadChooser.setVisibility(View.VISIBLE);
 
             // Instantiate the DialpadChooserAdapter and hook it up to the
-            // ListView.  We do this only once.
+            // ListView. We do this only once.
             if (mDialpadChooserAdapter == null) {
                 mDialpadChooserAdapter = new DialpadChooserAdapter(getActivity());
             }
             mDialpadChooser.setAdapter(mDialpadChooserAdapter);
         } else {
             // Log.i(TAG, "Displaying normal Dialer UI.");
-            if (mDigitsContainer != null) {
-                mDigitsContainer.setVisibility(View.VISIBLE);
-            } else {
-                mDigits.setVisibility(View.VISIBLE);
+            showDialConference(false);
+            if (mDialButtonContainer != null) {
+                mDialButtonContainer.setVisibility(View.VISIBLE);
             }
-            if (mDialpad != null) mDialpad.setVisibility(View.VISIBLE);
-            if (mDialButtonContainer != null) mDialButtonContainer.setVisibility(View.VISIBLE);
             mDialpadChooser.setVisibility(View.GONE);
+        }
+    }
+
+    private void showDialConference(boolean enabled) {
+        // Check if onCreateView() is already called by checking one of View
+        // objects.
+        if (!isLayoutReady()) {
+            return;
+        }
+        Log.d(TAG, "showDialConference " + enabled);
+
+        /*
+         * if enabled is true then pick child views that should be
+         * visible/invisible when dialpad is choosen from conference dial button
+         * if enabled is false then pick child views that should be
+         * visible/invisible when dialpad is choosen from other buttons
+         */
+
+        // viewable when choosen through conference button
+        int conferenceButtonVisibility = (enabled ? View.VISIBLE : View.GONE);
+        // not viewable when choosen through conference button
+        int nonConferenceButtonVisibility = (enabled ? View.GONE : View.VISIBLE);
+
+        // change the image visibility of the button
+        if (mRecipients != null) mRecipients.setVisibility(conferenceButtonVisibility);
+        if (mDialpadStub != null) mDialpadStub.setVisibility(conferenceButtonVisibility);
+        if (mDigitsContainer != null) mDigitsContainer.setVisibility(nonConferenceButtonVisibility);
+        if (mDigits != null) mDigits.setVisibility(nonConferenceButtonVisibility);
+        if (mDelete != null) mDelete.setVisibility(nonConferenceButtonVisibility);
+        if (mDialpad != null) mDialpad.setVisibility(nonConferenceButtonVisibility);
+        if (mDialConferenceButton != null) {
+            /*
+             * If dial conference view is shown, button should show dialpad
+             * image. Pressing the button again will return to normal dialpad
+             * view.
+             * If normal dialpad view is shown, button should show dial
+             * conference image. Pressing the button again will show dial
+             * conference view
+             */
+            mDialConferenceButton.setImageResource(enabled ? R.drawable.ic_dialpad_holo_dark
+                    : R.drawable.ic_add_group_holo_dark);
         }
     }
 
@@ -1614,8 +1752,14 @@ public class DialpadFragment extends Fragment
                 // Enable the Dial button if some digits have
                 // been entered, or if there is a last dialed number
                 // that could be redialed.
-                mDialButton.setEnabled(digitsNotEmpty ||
-                        !TextUtils.isEmpty(mLastNumberDialed));
+                if(mRecipients.getVisibility() != View.VISIBLE) {
+                    mDialButton.setEnabled(digitsNotEmpty ||
+                            !TextUtils.isEmpty(mLastNumberDialed));
+                } else {
+                    mDialButton.setEnabled(digitsNotEmpty ||
+                            !TextUtils.isEmpty(mLastNumberDialed) ||
+                            mRecipients.getText().length() > 0);
+                }
             }
         }
         mDelete.setEnabled(digitsNotEmpty);
