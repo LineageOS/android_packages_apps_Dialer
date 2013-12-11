@@ -200,11 +200,11 @@
     <string name="throttle_time_frame_subtext" msgid="7732763021560399960">"Minęło <xliff:g id="USED_0">%1$d</xliff:g>٪ cyklu\nNastępny okres za: <xliff:g id="USED_1">%2$d</xliff:g> dni (<xliff:g id="USED_2">%3$s</xliff:g>)"</string>
     <string name="throttle_rate_subtext" msgid="2149102656120726855">"Zmniejsz transfer do <xliff:g id="USED">%1$d</xliff:g> Kb/s jeśli przekroczę limit użycia danych"</string>
     <string name="throttle_help_subtext" msgid="5217706521499010816">"Więcej informacji na temat zasad dotyczących użycia danych w sieci komórkowej tego operatora"</string>
-    <string name="cell_broadcast_sms" msgid="5584192824053625842">"Wiadomość SMS transmisji komórkowej"</string>
-    <string name="enable_disable_cell_bc_sms" msgid="4851147873691392255">"Wiadomość SMS transmisji komórkowej"</string>
-    <string name="cell_bc_sms_enable" msgid="6441688565738921084">"Wiadomość SMS transmisji komórkowej włączona"</string>
-    <string name="cell_bc_sms_disable" msgid="3398365088309408749">"Wiadomość SMS transmisji komórkowej wyłączona"</string>
-    <string name="cb_sms_settings" msgid="651715019785107312">"Ustawienia wiadomości SMS transmisji komórkowej"</string>
+    <string name="cell_broadcast_sms" msgid="5584192824053625842">"Komunikaty SMS z sieci komórkowej"</string>
+    <string name="enable_disable_cell_bc_sms" msgid="4851147873691392255">"Komunikaty SMS z sieci komórkowej"</string>
+    <string name="cell_bc_sms_enable" msgid="6441688565738921084">"Komunikaty SMS z sieci komórkowej są włączone"</string>
+    <string name="cell_bc_sms_disable" msgid="3398365088309408749">"Komunikaty SMS z sieci komórkowej są wyłączone"</string>
+    <string name="cb_sms_settings" msgid="651715019785107312">"Ustawienia komunikatów SMS z sieci komórkowej"</string>
     <string name="enable_disable_emergency_broadcast" msgid="2157014609041245335">"Transmisja alarmowa"</string>
     <string name="emergency_broadcast_enable" msgid="2645980025414010211">"Transmisja alarmowa włączona"</string>
     <string name="emergency_broadcast_disable" msgid="3665199821267569426">"Transmisja alarmowa wyłączona"</string>

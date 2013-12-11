@@ -555,7 +555,7 @@
     <string name="domain_address_title" msgid="9071787581316160480">"Serveur"</string>
     <string name="username_title" msgid="2479375923477682328">"Nom d\'utilisateur"</string>
     <string name="password_title" msgid="3323555249068171531">"Mot de passe"</string>
-    <string name="display_name_title" msgid="2459768196312249937">"Nom affiché"</string>
+    <string name="display_name_title" msgid="2459768196312249937">"Nom à afficher"</string>
     <string name="proxy_address_title" msgid="4828301345351614273">"Adresse de proxy sortant"</string>
     <string name="port_title" msgid="5952939408078626657">"N° de port"</string>
     <string name="transport_title" msgid="8253139511847746640">"Type de transport"</string>

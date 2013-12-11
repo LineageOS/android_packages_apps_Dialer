@@ -24,7 +24,7 @@
     <string name="payphone" msgid="1931775086311769314">"Telefonzelle"</string>
     <string name="callFailed_userBusy" msgid="8851106999809294904">"Leitung besetzt"</string>
     <string name="callFailed_congestion" msgid="8737761615702718375">"Netzwerk ausgelastet"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Keine Antwort, Timeout"</string>
+    <string name="callFailed_timedOut" msgid="7590961703135543346">"Keine Antwort, Zeitüberschreitung"</string>
     <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Server nicht erreichbar"</string>
     <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Nummer nicht erreichbar"</string>
     <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Ungültiger Nutzername oder ungültiges Passwort"</string>

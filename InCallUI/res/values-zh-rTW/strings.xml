@@ -180,11 +180,11 @@
     <item msgid="1524224863879435516">"僅限 GSM"</item>
     <item msgid="3817924849415716259">"GSM/WCDMA 優先"</item>
   </string-array>
-    <string name="data_enabled" msgid="5972538663568715366">"已啟用資料"</string>
+    <string name="data_enabled" msgid="5972538663568715366">"啟用行動數據服務"</string>
     <string name="data_enable_summary" msgid="5022018967714633874">"啟用行動數據服務網路"</string>
     <string name="roaming" msgid="8871412572928323707">"漫遊服務"</string>
-    <string name="roaming_enable" msgid="7331106985174381987">"漫遊時連線到資料傳輸服務"</string>
-    <string name="roaming_disable" msgid="1843417228755568110">"漫遊時連線到資料傳輸服務"</string>
+    <string name="roaming_enable" msgid="7331106985174381987">"漫遊時連線到數據傳輸服務"</string>
+    <string name="roaming_disable" msgid="1843417228755568110">"漫遊時連線到數據傳輸服務"</string>
     <string name="roaming_reenable_message" msgid="8913735676127858115">"您已離開國內網路涵蓋範圍，且已關閉數據傳輸漫遊服務，因此數據連線已中斷。"</string>
     <string name="roaming_warning" msgid="7820963598559553967">"要允許漫遊服務嗎？您可能會需要支付龐大漫遊費用！"</string>
     <string name="gsm_umts_options" msgid="6538311689850981686">"GSM/UMTS 選項"</string>
