@@ -72,7 +72,7 @@
     <color name="nofavorite_text_color">#777777</color>
 
     <!-- Background color of wifi highlight items -->
-    <color name="background_wifi_highlight">#00ff00</color>
+    <color name="background_wifi_highlight">#99cc00</color>
 
     <!-- Foreground color of wifi highlight items -->
     <color name="foreground_wifi_highlight">#ffffff</color>
