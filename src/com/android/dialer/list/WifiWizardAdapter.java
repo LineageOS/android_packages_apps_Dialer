@@ -208,7 +208,11 @@ public class WifiWizardAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mModel.getShouldDisplayWifiSelection() ? 1 : 0;
+        if (mModel.getShouldDisplayWifiSelection() && mModel.getWhenToMakeWifiCalls() ==
+                TelephonyManager.WifiCallingChoices.NEVER_USE) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override
