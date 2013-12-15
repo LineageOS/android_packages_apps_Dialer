@@ -260,7 +260,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mCallStateLabel.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
             mCallStateLabel.setBackgroundResource(R.color.wifi_connected_background);
             mCallStateLabel.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    R.drawable.ic_bluetooth_holo_dark, 0, 0, 0);
+                    R.drawable.ic_in_call_wifi, 0, 0, 0);
             mCallStateLabel.setCompoundDrawablePadding(5);
             mCallStateLabel.setAllCaps(false);
             mCallStateLabel.setVisibility(View.VISIBLE);

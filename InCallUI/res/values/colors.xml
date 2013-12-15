@@ -50,5 +50,5 @@
     <!-- Button background -->
     <color name="button_background">#000000</color>
 
-    <color name="wifi_connected_background">#00ff00</color>
+    <color name="wifi_connected_background">#8099cc00</color>
 </resources>
