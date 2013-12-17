@@ -132,6 +132,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Henter fra SIM-kort…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Kontakter på SIM-kort"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Aktiver Personer-appen på nytt for å bruke denne funksjonen."</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"Talesøk er ikke tilgjengelig."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Skriv inn et navn eller telefonnummer"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Alle"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Ikke besvart"</string>

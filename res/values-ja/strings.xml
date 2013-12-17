@@ -132,6 +132,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIMカードから読み取り中..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIMカードの連絡先"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"この機能を使用するには連絡帳アプリを再度有効にしてください。"</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"音声検索は利用できません。"</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"名前または電話番号を入力"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"すべて"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"不在着信"</string>

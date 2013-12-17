@@ -132,6 +132,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Зарежда се от SIM карта..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Контакти от SIM карта"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Активирайте отново приложението Хора, за да използвате тази функция."</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"Гласовото търсене не е налице."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Въведете име или тел. номер"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Всички"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Пропуснати"</string>

@@ -132,6 +132,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Đang tải từ thẻ SIM…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Danh bạ trên thẻ SIM"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Bật lại ứng dụng Liên hệ để sử dụng tính năng này."</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"Tìm kiếm bằng giọng nói là không khả dụng."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Nhập tên hoặc số điện thoại"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Tất cả"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Bị nhỡ"</string>

@@ -132,6 +132,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Inapakia kutoka SIM kadi..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Anwani za SIM kadi"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Washa tena Programu ya watu ili itumie kipengele hiki."</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"Utafutaji kwa kutamka haupatikani."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Andika jina au nambari ya simu"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Zote"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Ambazo hazikupokewa"</string>

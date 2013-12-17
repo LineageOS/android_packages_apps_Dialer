@@ -132,6 +132,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"從  SIM 卡讀取中…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM 卡聯絡人"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"您必須重新啟用「使用者」應用程式，才能使用這項功能。"</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"無法使用語音搜尋。"</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"輸入姓名或電話號碼"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"未接來電"</string>

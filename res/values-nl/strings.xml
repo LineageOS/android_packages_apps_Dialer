@@ -132,6 +132,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Laden vanaf SIM-kaart..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contacten op SIM-kaart"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Schakel de app \'Personen\' opnieuw in om deze functie te gebruiken."</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"Gesproken zoekopdrachten zijn niet beschikbaar"</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Typ een naam of telefoonnummer"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Alle"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Gemist"</string>

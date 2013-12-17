@@ -132,6 +132,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Se încarcă de pe cardul SIM..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Persoanele din agendă de pe cardul SIM"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Pentru a utiliza această funcție, reactivați aplicația Persoane."</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"Funcția Căutare vocală nu este disponibilă."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Introd. nume sau nr. telefon"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Toate"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Nepreluate"</string>
