@@ -195,6 +195,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         } else {
             ui.setCallState(Call.State.IDLE, Call.DisconnectCause.UNKNOWN, false, null, null, null);
         }
+
+        ui.setShowConnectionHandoff(mPrimary != null && mPrimary.can(
+                Capabilities.CONNECTION_HANDOFF));
     }
 
     @Override
@@ -469,6 +472,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         CallCommandClient.getInstance().swap();
     }
 
+    public void connectionHandoffClicked() {
+        if (mPrimary != null) {
+            CallCommandClient.getInstance().connectionHandoff(mPrimary.getCallId());
+        }
+    }
+
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
@@ -483,5 +492,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimaryImage(Drawable image);
         void setPrimaryPhoneNumber(String phoneNumber);
         void setPrimaryLabel(String label);
+        void setShowConnectionHandoff(boolean showConnectionHandoff);
     }
 }

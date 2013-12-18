@@ -119,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:background="@color/incall_secondary_info_background"
             android:animateLayoutChanges="true">
 
@@ -127,8 +127,9 @@
                  indication like "Dialing" or "Incoming call" or "Call ended".
                  It's unused for the normal case of an active ongoing call. -->
             <TextView android:id="@+id/callStateLabel"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:paddingTop="@dimen/provider_info_top_bottom_padding"
                 android:paddingBottom="@dimen/provider_info_top_bottom_padding"
                 android:paddingStart="@dimen/call_banner_side_padding"
@@ -140,6 +141,13 @@
                 android:background="@android:color/transparent"
                 android:singleLine="true"
                 android:ellipsize="end"/>
+
+            <Button android:id="@+id/connectionHandoffButton"
+                    android:text="@string/connection_handoff_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
         </LinearLayout>
 
     </LinearLayout>

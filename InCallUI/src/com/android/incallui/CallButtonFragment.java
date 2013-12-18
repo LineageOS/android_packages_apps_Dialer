@@ -48,6 +48,8 @@ public class CallButtonFragment
     private ImageButton mMergeButton;
     private ImageButton mAddCallButton;
     private ImageButton mSwapButton;
+    private ImageButton mVideoHandoffButton;
+    private View mVideoHandoffSpacer;
 
     private PopupMenu mAudioModePopup;
     private boolean mAudioModePopupVisible;
@@ -141,6 +143,9 @@ public class CallButtonFragment
         mMergeButton.setOnClickListener(this);
         mSwapButton = (ImageButton) parent.findViewById(R.id.swapButton);
         mSwapButton.setOnClickListener(this);
+        mVideoHandoffButton = (ImageButton) parent.findViewById(R.id.videoHandoffButton);
+        mVideoHandoffButton.setOnClickListener(this);
+        mVideoHandoffSpacer = parent.findViewById(R.id.videoHandoffSpacer);
 
         return parent;
     }
@@ -182,6 +187,9 @@ public class CallButtonFragment
                 break;
             case R.id.dialpadButton:
                 getPresenter().showDialpadClicked(mShowDialpadButton.isChecked());
+                break;
+            case R.id.videoHandoffButton:
+                getPresenter().videoHandoffClicked();
                 break;
             default:
                 Log.wtf(this, "onClick: unexpected");
@@ -526,6 +534,11 @@ public class CallButtonFragment
         }
     }
 
+    @Override
+    public void showVideoHandoff(boolean show) {
+        mVideoHandoffButton.setVisibility(show ? View.VISIBLE : View.GONE);
+        mVideoHandoffSpacer.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
 
     @Override
     public void showManageConferenceCallButton() {

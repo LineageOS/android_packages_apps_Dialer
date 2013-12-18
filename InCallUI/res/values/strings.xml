@@ -519,4 +519,10 @@
     <string name="emergency_call_dialog_number_for_display">Emergency number</string>
 
     <string name="in_call_wifi_connected">Connected via <xliff:g id="wifi_ssid">%s</xliff:g></string>
+
+    <!-- Text for the onscreen video handoff button -->
+    <string name="video_handoff_text">Video</string>
+
+    <!-- Text for the onscreen connection handoff button -->
+    <string name="connection_handoff_text">Handoff</string>
 </resources>
