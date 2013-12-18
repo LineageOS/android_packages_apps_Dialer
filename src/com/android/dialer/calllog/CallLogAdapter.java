@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteFullException;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
@@ -504,14 +505,18 @@ public class CallLogAdapter extends GroupingListAdapter
 
         if (!needsUpdate) return;
 
-        if (countryIso == null) {
-            mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
-                    Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " IS NULL",
-                    new String[]{ number });
-        } else {
-            mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
-                    Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " = ?",
-                    new String[]{ number, countryIso });
+        try {
+            if (countryIso == null) {
+                mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
+                        Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " IS NULL",
+                        new String[]{ number });
+            } else {
+                mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
+                        Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " = ?",
+                        new String[]{ number, countryIso });
+            }
+        } catch (SQLiteFullException e) {
+            e.printStackTrace();
         }
     }
 
