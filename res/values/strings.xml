@@ -265,6 +265,12 @@
     -->
     <string name="description_image_button_pound">pound</string>
 
+    <!-- String describing the image on ImageButton plus
+
+         Used by AccessibilityService to announce the purpose of the button.
+    -->
+    <string name="description_image_button_plus">plus</string>
+
     <!-- String describing the Voicemail ImageButton
 
          Used by AccessibilityService to announce the purpose of the button.
