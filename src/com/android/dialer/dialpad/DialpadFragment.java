@@ -662,10 +662,16 @@ public class DialpadFragment extends Fragment
         }
 
         // Long-pressing one button will initiate Voicemail.
-        fragmentView.findViewById(R.id.one).setOnLongClickListener(this);
+        final DialpadKeyButton one = (DialpadKeyButton) fragmentView.findViewById(R.id.one);
+        one.setOnLongClickListener(this);
+        one.setLongHoverContentDescription(
+                resources.getText(R.string.description_voicemail_button));
 
         // Long-pressing zero button will enter '+' instead.
-        fragmentView.findViewById(R.id.zero).setOnLongClickListener(this);
+        final DialpadKeyButton zero = (DialpadKeyButton) fragmentView.findViewById(R.id.zero);
+        zero.setOnLongClickListener(this);
+        zero.setLongHoverContentDescription(
+                resources.getText(R.string.description_image_button_plus));
 
     }
 
