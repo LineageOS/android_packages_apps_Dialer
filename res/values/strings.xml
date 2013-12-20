@@ -632,6 +632,7 @@
          [CHAR LIMIT=NONE]
     -->
     <string name="contact_tooltip">Tap image to see all numbers or press and hold to reorder</string>
+    <string name="calllog_search_hint">"Search call log"</string>
     <string name="dial_conference">Dial conference</string>
     <string name="to_hint">1111:to;sip:abby@example.com:bcc;sip:bill@example.com:cc;</string>
 </resources>
