@@ -511,6 +511,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 DeleteContactQuery.PROJECTION,
                 DeleteContactQuery.SELECT_UPDATED_CLAUSE,
                 new String[] {last_update_time}, null);
+        if (deletedContactCursor == null) {
+            return;
+        }
 
         db.beginTransaction();
         try {
