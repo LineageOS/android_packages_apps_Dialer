@@ -126,6 +126,17 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="CallLogSearchActivity"
+             android:label="@string/recentCallsIconLabel" >
+             <intent-filter>
+                 <action android:name="android.intent.action.SEARCH" />
+             </intent-filter>
+
+             <meta-data
+                 android:name="android.app.searchable"
+                 android:resource="@xml/calllog_searchable" />
+        </activity>
+
         <activity android:name="com.android.dialer.calllog.CallLogActivity"
             android:label="@string/call_log_activity_title"
             android:theme="@style/DialtactsThemeWithActionBarOverlay"
@@ -175,6 +186,17 @@
                 <category android:name="android.intent.category.TEST"/>
             </intent-filter>
         </activity>
+
+        <provider android:name=".calllog.CallLogSearchProvider"
+            android:authorities="com.android.dialer.calllog.calllogsearchprovider"
+            android:exported="true" >
+            <path-permission
+                android:pathPrefix="/search_suggest_query"
+                android:readPermission="android.permission.GLOBAL_SEARCH" />
+            <path-permission
+                android:pathPrefix="/search_suggest_shortcut"
+                android:readPermission="android.permission.GLOBAL_SEARCH" />
+        </provider>
 
         <!-- Backwards compatibility: "Phone" from Gingerbread and earlier -->
         <activity-alias android:name="DialtactsActivity"

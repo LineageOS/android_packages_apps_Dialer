@@ -161,4 +161,5 @@
     <string name="no_favorites" msgid="5212485868783382971">"您收藏的联系人和经常通话\n的联系人都会显示在这里。\n现在就开始与联系人通话吧。"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"点按图片可查看所有号码，按住图片可重新排序"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"关闭"</string>
+    <string name="calllog_search_hint">"搜索通话记录"</string>
 </resources>
