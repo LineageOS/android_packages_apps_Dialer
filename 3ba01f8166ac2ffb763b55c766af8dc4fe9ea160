@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3a7e1126_9b0e57e4",
+        "filename": "res/values-nl/cm_arrays.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-12-22T06:50:52Z",
+      "side": 1,
+      "message": "example\u003d\"2 secs\" geeft aan dat een voorbeelduitvoer in het Engels \u00272 secs\u0027 zou zijn. Dit is dus niet de uiteindelijke tekst.\n\nExample-attributen hoeven niet te worden vertaald.",
+      "parentUuid": "3a7e1126_7b6feb92",
+      "revId": "3ba01f8166ac2ffb763b55c766af8dc4fe9ea160",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a7e1126_1b6ca79b",
         "filename": "res/values-nl/cm_arrays.xml",
         "patchSetId": 1
@@ -30,6 +48,23 @@
       "writtenOn": "2013-12-22T06:45:19Z",
       "side": 1,
       "message": "2 minuten",
+      "revId": "3ba01f8166ac2ffb763b55c766af8dc4fe9ea160",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a7e1126_5bf9cfc7",
+        "filename": "res/values-nl/cm_plurals.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-12-22T06:50:52Z",
+      "side": 1,
+      "message": "Hier staan de vertalingen van de array-items.",
       "revId": "3ba01f8166ac2ffb763b55c766af8dc4fe9ea160",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
