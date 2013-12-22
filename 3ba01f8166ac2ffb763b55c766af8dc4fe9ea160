@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a7e1126_7b6feb92",
+        "filename": "res/values-nl/cm_arrays.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 7630
+      },
+      "writtenOn": "2013-12-22T06:45:19Z",
+      "side": 1,
+      "message": "Dit hele bestand is niet vertaald, hier 2 seconden toch?",
+      "revId": "3ba01f8166ac2ffb763b55c766af8dc4fe9ea160",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a7e1126_1b6ca79b",
+        "filename": "res/values-nl/cm_arrays.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7630
+      },
+      "writtenOn": "2013-12-22T06:45:19Z",
+      "side": 1,
+      "message": "2 minuten",
+      "revId": "3ba01f8166ac2ffb763b55c766af8dc4fe9ea160",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
