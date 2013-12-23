@@ -60,7 +60,7 @@
                 android:textCursorDrawable="@null"
                 android:fontFamily="sans-serif-light"
                 android:nextFocusRight="@+id/overflow_menu"
-                android:background="@android:color/transparent" />
+                android:background="@color/background_digits_dialpad" />
 
             <ImageButton
                 android:id="@+id/deleteButton"
@@ -69,7 +69,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:state_enabled="false"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="@color/background_digits_dialpad"
                 android:contentDescription="@string/description_delete_button"
                 android:src="@drawable/ic_dial_action_delete" />
         </LinearLayout>

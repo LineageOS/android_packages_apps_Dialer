@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/dialpad_primary_text_color"
                     android:textSize="@dimen/dialpad_key_numbers_size"
-                    android:fontFamily="sans-serif-light"/>
+                    android:fontFamily="sans-serif"/>
                 <ImageView
                     android:id="@+id/dialpad_key_voicemail"
                     android:layout_width="@dimen/dialpad_key_letters_width"
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/dialpad_secondary_text_color"
                 android:textSize="@dimen/dialpad_key_special_characters_size"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="sans-serif"
                 android:paddingRight="@dimen/dialpad_key_letters_width"
                 android:layout_gravity="center" />
         </com.android.dialer.dialpad.DialpadKeyButton>
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/dialpad_secondary_text_color"
                 android:textSize="@dimen/dialpad_key_special_characters_size"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="sans-serif"
                 android:paddingRight="@dimen/dialpad_key_letters_width"
                 android:layout_gravity="center" />
         </com.android.dialer.dialpad.DialpadKeyButton>
