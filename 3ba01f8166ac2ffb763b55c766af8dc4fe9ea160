@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9a68dd71_07b9b62e",
+        "filename": "res/values-nl/cm_arrays.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 7630
+      },
+      "writtenOn": "2013-12-23T12:43:24Z",
+      "side": 1,
+      "message": "+1 dat wist ik niet, vind het moeilijk om het verschil te zien..",
+      "parentUuid": "3a7e1126_9b0e57e4",
+      "revId": "3ba01f8166ac2ffb763b55c766af8dc4fe9ea160",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a7e1126_1b6ca79b",
         "filename": "res/values-nl/cm_arrays.xml",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2013-12-22T06:45:19Z",
       "side": 1,
       "message": "2 minuten",
+      "revId": "3ba01f8166ac2ffb763b55c766af8dc4fe9ea160",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a68dd71_27b63a3e",
+        "filename": "res/values-nl/cm_arrays.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7630
+      },
+      "writtenOn": "2013-12-23T12:43:24Z",
+      "side": 1,
+      "message": "-1",
+      "parentUuid": "3a7e1126_1b6ca79b",
       "revId": "3ba01f8166ac2ffb763b55c766af8dc4fe9ea160",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "9a68dd71_67ac32ee",
+        "filename": "res/values-nl/cm_plurals.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 7630
+      },
+      "writtenOn": "2013-12-23T12:43:24Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "3a7e1126_5bf9cfc7",
+      "revId": "3ba01f8166ac2ffb763b55c766af8dc4fe9ea160",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba63e191_887b777b",
         "filename": "res/values-nl/cm_strings.xml",
         "patchSetId": 1
@@ -82,6 +136,24 @@
       "writtenOn": "2013-12-23T12:19:49Z",
       "side": 1,
       "message": "Ik mis\n\n\u003cstring name\u003d\"call_log_stats_title\"\u003eStatistics\u003c/string\u003e\n\nStatistieken",
+      "revId": "3ba01f8166ac2ffb763b55c766af8dc4fe9ea160",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a68dd71_47afaee3",
+        "filename": "res/values-nl/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 7630
+      },
+      "writtenOn": "2013-12-23T12:43:24Z",
+      "side": 1,
+      "message": "+1 Knap gezien :-)",
+      "parentUuid": "ba63e191_887b777b",
       "revId": "3ba01f8166ac2ffb763b55c766af8dc4fe9ea160",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
