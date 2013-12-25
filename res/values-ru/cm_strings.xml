@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_log_stats_title">Статистика</string>
+    <string name="callStatsDetailTitle">Статистика звонков</string>
+
+    <string name="call_stats">Статистика звонков</string>
+    <string name="call_stats_refresh">Обновить</string>
+    <string name="activity_title_call_stats">Статистика звонков</string>
+
+    <string name="call_stats_nav_all">Все</string>
+    <string name="call_stats_nav_incoming">Входящие</string>
+    <string name="call_stats_nav_outgoing">Исходящие</string>
+    <string name="call_stats_nav_missed">Пропущенные</string>
+    <string name="call_stats_incoming">Входящих: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">Исходящих: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Пропущенных</string>
+    <string name="call_stats_missed_percent">Пропущенных: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Всего: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Всего: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Начальная дата</string>
+    <string name="call_stats_filter_to">Конечная дата</string>
+    <string name="call_stats_filter_picker_title">Диапазон выбора</string>
+
+    <string name="date_quick_selection">Выбор периода</string>
+    <string name="date_qs_currentmonth">Текущий месяц</string>
+    <string name="date_qs_currentquarter">Текущий квартал</string>
+    <string name="date_qs_currentyear">Текущий год</string>
+    <string name="date_qs_lastweek">Прошлая неделя</string>
+    <string name="date_qs_lastmonth">Прошлая месяц</string>
+    <string name="date_qs_lastquarter">Прошлый квартал</string>
+    <string name="date_qs_lastyear">Прошлый год</string>
+
+    <string name="call_stats_date_filter">Фильтр</string>
+    <string name="call_stats_reset_filter">Сбросить фильтр</string>
+    <string name="call_stats_sort_by_duration">Сорт. по длительности</string>
+    <string name="call_stats_sort_by_count">Сорт. по количеству</string>
+
+    <string name="menu_add_to_blacklist">Добавить в чёрный список</string>
+    <string name="toast_added_to_blacklist">Абонент «%s» добавлен в чёрный список.</string>
+</resources>

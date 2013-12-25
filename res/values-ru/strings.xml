@@ -123,7 +123,7 @@
     <string name="payphone" msgid="4864313342828942922">"Телефон-автомат"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Наберите номер с клавиатуры"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Наберите номер"</string>
-    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g>:<xliff:g id="SECONDS">%s</xliff:g>"</string>
+    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> мин. <xliff:g id="SECONDS">%s</xliff:g> сек."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Вызов невозможен"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Чтобы настроить голосовую почту, выберите \"Меню &gt; Настройки\"."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Сначала отключите режим полета."</string>
