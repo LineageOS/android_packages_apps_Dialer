@@ -455,7 +455,7 @@
     <string name="hac_mode_summary" msgid="6833851160514929341">"開啟助聽器相容功能"</string>
   <string-array name="tty_mode_entries">
     <item msgid="512950011423868021">"關閉 TTY"</item>
-    <item msgid="3971695875449640648">"TTY 全能"</item>
+    <item msgid="3971695875449640648">"TTY 完整功能"</item>
     <item msgid="1937509904407445684">"TTY HCO"</item>
     <item msgid="5644925873488772224">"TTY VCO"</item>
   </string-array>
