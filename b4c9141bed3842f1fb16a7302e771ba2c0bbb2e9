@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a68dd71_41c1d62d",
+        "filename": "res/values-nl/cm_plurals.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 7221
+      },
+      "writtenOn": "2013-12-27T02:22:22Z",
+      "side": 1,
+      "message": "moet dit dan ook niet \u0027%d uur\u0027 worden?\n(zie /values/cm-plurals.xml)",
+      "revId": "b4c9141bed3842f1fb16a7302e771ba2c0bbb2e9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a68dd71_e1dc8a1a",
+        "filename": "res/values-nl/cm_plurals.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 7221
+      },
+      "writtenOn": "2013-12-27T02:22:22Z",
+      "side": 1,
+      "message": "%d min",
+      "revId": "b4c9141bed3842f1fb16a7302e771ba2c0bbb2e9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
