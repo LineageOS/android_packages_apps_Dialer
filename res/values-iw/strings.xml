@@ -75,6 +75,7 @@
     <string name="description_image_button_star" msgid="3365919907520767866">"סמן בכוכב"</string>
     <string name="description_image_button_zero" msgid="4133108949401820710">"אפס"</string>
     <string name="description_image_button_pound" msgid="3039765597595889230">"סולמית"</string>
+    <string name="description_image_button_plus" msgid="2462671072094927613">"פלוס"</string>
     <string name="description_voicemail_button" msgid="3402506823655455591">"דואר קולי"</string>
     <string name="description_search_button" msgid="3660807558587384889">"חפש"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"חייג"</string>
