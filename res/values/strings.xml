@@ -531,6 +531,14 @@
          [CHAR LIMIT=15] -->
     <string name="call_log_missed_title">Missed</string>
 
+    <!-- Title for the call log tab containing the list of incoming calls
+         [CHAR LIMIT=15] -->
+    <string name="call_log_incoming_title">Incoming</string>
+
+    <!-- Title for the call log tab containing the list of outgoing calls
+         [CHAR LIMIT=15] -->
+    <string name="call_log_outgoing_title">Outgoing</string>
+
     <!-- String resource for the font-family to use for the call log activity's title
          Do not translate. -->
     <string name="call_log_activity_title_font_family">sans-serif-light</string>
@@ -541,6 +549,12 @@
 
     <!-- Text displayed when the list of missed calls is empty -->
     <string name="recentMissed_empty">No recent missed calls.</string>
+
+    <!-- Text displayed when the list of incoming calls is empty -->
+    <string name="recentIncoming_empty">No recent incoming calls.</string>
+
+    <!-- Text displayed when the list of outgoing calls is empty -->
+    <string name="recentOutgoing_empty">No recent outgoing calls.</string>
 
     <!-- Text displayed when the list of voicemails is empty -->
     <string name="recentVoicemails_empty">No recent voicemails.</string>
