@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a68dd71_499c9869",
+        "filename": "res/values-nl/cm_plurals.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2013-12-29T06:51:34Z",
+      "side": 1,
+      "message": "ik snap deze wijziging niet, in het engels staat staat gewoon een 1 bij \"one\"\n\nhttps://github.com/CyanogenMod/android_packages_apps_Dialer/blob/cm-11.0/res/values/cm_plurals.xml",
+      "revId": "d4126a4e94cdd8afb22fc728b318c1fdef78d90b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
