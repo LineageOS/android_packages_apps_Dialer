@@ -52,6 +52,24 @@
       "revId": "d4126a4e94cdd8afb22fc728b318c1fdef78d90b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a68dd71_84a3579e",
+        "filename": "res/values-nl/cm_plurals.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 7630
+      },
+      "writtenOn": "2013-12-29T14:56:23Z",
+      "side": 1,
+      "message": "+1 dank voor de uitleg, ik heb in Transifex zo hier en daar ook 1 neergezet, zal proberen om te onthouden om daar %d van te maken.",
+      "parentUuid": "9a68dd71_49aa5872",
+      "revId": "d4126a4e94cdd8afb22fc728b318c1fdef78d90b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
