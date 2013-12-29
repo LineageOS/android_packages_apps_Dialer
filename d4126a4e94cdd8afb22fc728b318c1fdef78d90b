@@ -34,6 +34,24 @@
       "revId": "d4126a4e94cdd8afb22fc728b318c1fdef78d90b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a68dd71_49aa5872",
+        "filename": "res/values-nl/cm_plurals.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2013-12-29T07:37:18Z",
+      "side": 1,
+      "message": "Komt door Transifex. Sommige talen, bijvoorbeeld de Slavische talen (Russisch, Tsjechisch etc.), hebben wat uitgebreide meervoudsvormen. Ze hebben dan de quantity \u0027few\u0027. Transifex ondersteunt dit, maar omdat het Engels geen \u0027few\u0027 heeft, leidt het de vertaling van het Russische \u0027few\u0027 af van de enkelvoudsvorm \u0027one\u0027. Alleen is het dan wel zo dat er hardcoded \u00271\u0027 staat, en \u0027few\u0027 is daar juist niet voor bedoeld. Daar moet je die variabele \u0027%d\u0027 in kunnen voeren. Daarom is die %d er nu overal ingezet.\n\nBeter kan ik het niet uitleggen. Als het nog onduidelijk is, ga dan naar de Tsjechische vertaling van CMUpdater. Dan zie je bovenaan de plurals met \u0027few\u0027 (een aantal wordt dat vertaald op Transifex). Daarvan zie je de Engelse vertaling en dan is het wat duidelijker denk ik.\n\nIn de praktijk merk je er niets van, %d is hier gewoon \u00271\u0027. Omdat het NL geen uitgebreidere meervoudsvormen kent, mag je hier zelfs die 1 laten staan. Alleen om het consistent te houden heb ik er ook maar %d van gemaakt.",
+      "parentUuid": "9a68dd71_c9864813",
+      "revId": "d4126a4e94cdd8afb22fc728b318c1fdef78d90b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
