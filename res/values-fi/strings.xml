@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Asetukset</string>
+    <string name="dialer_hint_find_contact_google">Hae yhteystietoja ja paikkoja</string>
+    <string name="call_settings_label">Puheluasetukset</string>
+    <string name="view_location_settings">Näytä sijaintiasetukset</string>
+    <string name="enable_reverse_lookup">Käytä Googlen soittajan tunn.</string>
+    <string name="reverse_lookup_enabled">Googlen soittajan tunnus on käytössä</string>
+    <string name="google_caller_id_setting_title">Soittajan tunnus Googlelta</string>
+    <string name="google_caller_id_setting__on">Näytä yhteystietojen ulkopuolisten henkilöiden ja yritysten nimet.</string>
+    <string name="google_caller_id_setting__off">Ei käyt.</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Googlen
+        Soittajan tunnus&lt;/a> -toiminto näyttää niiden ihmisten ja yritysten nimet, jotka eivät ole yhteystiedoissasi.
+        &lt;br>&lt;br>
+        Päivitä oman puhelinnumerosi löydettävyys
+        &lt;a href=%2$s>Google-tilin asetuksissa&lt;/a>.
+        &lt;br>&lt;br>
+        Näissä toiminnoissa käytettävien tietojen toimittajia ovat Google ja sen käyttöoikeuksien myöntäjät.
+        &lt;br>&lt;a href=%3$s>Lisätietoja.&lt;/a>"</string>
+    <string name="local_search_directory_label">Lähellä olevat paikat</string>
+    <string name="local_search_setting_title">Lähellä olevat paikat</string>
+    <string name="local_search_setting_on">Näytetään lähellä olevien paikkojen hakutulokset.</string>
+    <string name="local_search_setting_off">Ei käyt.</string>
+    <string name="local_search_settings_text">"Kun teet hakuja puhelimen sovelluksella, tämä ominaisuus etsii laitteen sijaintitiedon perusteella lähellä olevia paikkoja, jotka vastaavat hakutermiäsi. Tuloksia näytetään myös yhteystietojen ulkopuolelta.&lt;br>&lt;br> Näiden ominaisuuksien käyttämät tiedot toimittaa Google ja sen käyttöoikeuksien myöntäjät. &lt;br>&lt;a href=%1$s>Lisätietoja.&lt;/a>
+        &lt;br>&lt;br>
+              Sinun täytyy antaa Googlen sovelluksille lupa käyttää puhelimen sijaintia, jotta ominaisuus toimii.
+        &lt;br>&lt;a href=%2$s>Lisätietoja.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Dialer"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Puhelin"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Puhelin"</string>

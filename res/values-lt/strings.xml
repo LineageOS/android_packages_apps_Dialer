@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Nustatymai</string>
+    <string name="dialer_hint_find_contact_google">Iešk. kont. ir vietų netoliese</string>
+    <string name="call_settings_label">Skambučių nustatymai</string>
+    <string name="view_location_settings">Peržiūrėti vietovės nustatymus</string>
+    <string name="enable_reverse_lookup">Įgal. „Google“ skambintojo ID</string>
+    <string name="reverse_lookup_enabled">„Google“ skambintojo ID įgalintas</string>
+    <string name="google_caller_id_setting_title">„Google“ skambintojo ID</string>
+    <string name="google_caller_id_setting__on">Rodyti žm. ir įm., kurių nėra kontaktuose, vardus ir pavad.</string>
+    <string name="google_caller_id_setting__off">Išjungta</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Skambintojo
+        ID sistemoje „Google“&lt;/a> rodo žmonių ir įmonių, kurių nėra jūsų kontaktuose, vardus ir pavadinimus.
+        &lt;br>&lt;br>
+       Atnaujinkite savo telefono numerio aptinkamumo nustatymą
+        &lt;a href=%2$s>„Google“ paskyros nustatymuose&lt;/a>.
+        &lt;br>&lt;br>
+        Šiose funkcijose naudojami duomenys teikiami „Google“ ir jos patentų išdavėjų.
+        &lt;br>&lt;a href=%3$s>Sužinokite daugiau.&lt;/a>"</string>
+    <string name="local_search_directory_label">Netoliese esančios vietos</string>
+    <string name="local_search_setting_title">Netoliese esančios vietos</string>
+    <string name="local_search_setting_on">Rodomi netoliese esančių vietų paieškos rezultatai.</string>
+    <string name="local_search_setting_off">Išjungta</string>
+    <string name="local_search_settings_text">"Kai ieškosite naudodami telefono programą, ši funkcija naudos jūsų vietovės duomenis, kad rastų užklausą atitinkančias netoliese esančias vietas, net jei jų nėra kontaktuose. &lt;br>&lt;br> Duomenis šioms funkcijoms teikia „Google“ ir jos licencijų išdavėjai. &lt;br>&lt;a href=%1$s>Sužinokite daugiau.&lt;/a>
+        &lt;br>&lt;br>
+        Kad tai veiktų, „Google“ programos turi būti įgalintos naudoti telefono vietovės duomenis.
+        &lt;br>&lt;a href=%2$s>Sužinokite daugiau.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Skambučiai"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefonas"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefonas"</string>

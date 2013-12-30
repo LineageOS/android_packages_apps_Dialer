@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Einstellungen</string>
+    <string name="dialer_hint_find_contact_google">In Kontakten &amp; Orten in der Nähe suchen</string>
+    <string name="call_settings_label">Anrufeinstellungen</string>
+    <string name="view_location_settings">Standorteinstellungen anzeigen</string>
+    <string name="enable_reverse_lookup">Google Anrufer-ID aktivieren</string>
+    <string name="reverse_lookup_enabled">Anrufer-ID von Google ist aktiviert.</string>
+    <string name="google_caller_id_setting_title">Anrufer-ID von Google</string>
+    <string name="google_caller_id_setting__on">Personen und Firmen anzeigen, die in meinen Kontakten fehlen</string>
+    <string name="google_caller_id_setting__off">Aus</string>
+    <string name="google_caller_id_settings_text">"Die &lt;a href=%1$s>Anrufer-ID
+ von Google&lt;/a> zeigt die Namen von Personen und Unternehmen an, die nicht in Ihren Kontakten sind.
+ &lt;br>&lt;br>
+ Die Sichtbarkeit Ihrer Telefonnummer können Sie in den
+ &lt;a href=%2$s>Google-Kontoeinstellungen&lt;/a> ändern.
+ &lt;br>&lt;br>
+ Die in diesen Funktionen verwendeten Daten werden von Google und seinen Lizenzgebern bereitgestellt.
+ &lt;br>&lt;a href=%3$s>Weitere Informationen&lt;/a>"</string>
+    <string name="local_search_directory_label">Orte in der Nähe</string>
+    <string name="local_search_setting_title">Orte in der Nähe</string>
+    <string name="local_search_setting_on">Suchergebnisse für Orte in der Nähe anzeigen</string>
+    <string name="local_search_setting_off">Aus</string>
+    <string name="local_search_settings_text">"Wenn Sie über die App auf Ihrem Telefon suchen, wird für diese Funktion Ihr Standort verwendet, um Suchergebnisse für Orte in der Nähe zu finden. Dies gilt auch für Nummern, die nicht in Ihren Kontakten vorhanden sind. &lt;br>&lt;br> Die von diesen Funktionen verwendeten Daten werden von Google und seinen Lizenzgebern bereitgestellt. &lt;br>&lt;a href=%1$s>Weitere Informationen&lt;/a>
+        &lt;br>&lt;br>
+        Aktivieren Sie Google Apps, damit der Standort Ihres Telefons verwendet werden kann.
+        &lt;br>&lt;a href=%2$s>Weitere Informationen&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Dialer"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>

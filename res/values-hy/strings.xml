@@ -17,6 +17,9 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_hint_find_contact_google">Գրեք անունը կամ հեռախոսը</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Համարհավաքիչ"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Հեռախոս"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Հեռախոս"</string>

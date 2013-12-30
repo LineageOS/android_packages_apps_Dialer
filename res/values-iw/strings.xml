@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">הגדרות</string>
+    <string name="dialer_hint_find_contact_google">חפש אנשי קשר ומקומות קרובים</string>
+    <string name="call_settings_label">הגדרות שיחה</string>
+    <string name="view_location_settings">הצג את הגדרות המיקום</string>
+    <string name="enable_reverse_lookup">‏הפעל זיהוי מתקשר של Google</string>
+    <string name="reverse_lookup_enabled">"‏שירות 'זיהוי מתקשר' של Google מופעל"</string>
+    <string name="google_caller_id_setting_title">‏זיהוי מתקשר של Google</string>
+    <string name="google_caller_id_setting__on">הצג שמות עבור אנשים ועסקים שאינם באנשי הקשר שלי.</string>
+    <string name="google_caller_id_setting__off">כבוי</string>
+    <string name="google_caller_id_settings_text">"‏&lt;a href=%1$s>זיהוי
+        מתקשר של Google&lt;/a> מציג שמות עבור אנשים ועסקים שאינם באנשי הקשר שלך.
+        &lt;br>&lt;br>
+        עדכן את יכולת הגילוי של מספר הטלפון שלך
+        &lt;a href=%2$s>בהגדרות חשבון Google&lt;/a>.
+        &lt;br>&lt;br>
+        נתונים שבהם נעשה שימוש בתכונות האלה מסופקים על ידי Google ומעניקי הרישיון שלה.
+        &lt;br>&lt;a href=%3$s>למידע נוסף.&lt;/a>"</string>
+    <string name="local_search_directory_label">מקומות קרובים</string>
+    <string name="local_search_setting_title">מקומות קרובים</string>
+    <string name="local_search_setting_on">הצג תוצאות חיפוש עבור מקומות קרובים.</string>
+    <string name="local_search_setting_off">כבוי</string>
+    <string name="local_search_settings_text">"‏כשאתה מבצע חיפושים מאפליקציית הטלפון, התכונה הזו תשתמש במיקום שלך על מנת למצוא מקומות קרובים התואמים למונח החיפוש, גם אם הם לא מופיעים באנשי הקשר שלך. &lt;br>&lt;br> נתונים שבהם נעשה שימוש בתכונות האלה מסופקים על ידי Google ומעניקי הרישיון שלה. &lt;br>&lt;a href=%1$s>למידע נוסף.&lt;/a>
+        &lt;br>&lt;br>
+        עליך לאפשר לאפליקציות של Google להשתמש במיקום של הטלפון על מנת שהתכונה הזו תפעל.
+        &lt;br>&lt;a href=%2$s>למידע נוסף.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"חייגן"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"טלפון"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"טלפון"</string>

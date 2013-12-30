@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Nastavení</string>
+    <string name="dialer_hint_find_contact_google">Hledat kontakty a místa v okolí</string>
+    <string name="call_settings_label">Nastavení hovorů</string>
+    <string name="view_location_settings">Zobrazit nastavení polohy</string>
+    <string name="enable_reverse_lookup">Zap. identif. pomocí Googlu</string>
+    <string name="reverse_lookup_enabled">Identifikace volajícího pomocí Googlu aktivována</string>
+    <string name="google_caller_id_setting_title">Identifikace volajícího pomocí Googlu</string>
+    <string name="google_caller_id_setting__on">Zobrazovat jména lidí a firem, které nejsou v kontaktech.</string>
+    <string name="google_caller_id_setting__off">Vypnuto</string>
+    <string name="google_caller_id_settings_text">"Funkce &lt;a href=%1$s>Identifikace volajícího
+        od Googlu&lt;/a> zobrazuje jména lidí a názvy firem, které nejsou ve vašich kontaktech.
+        &lt;br>&lt;br>
+        Aktualizujte objevitelnost svého telefonního čísla v 
+        &lt;a href=%2$s>nastaveních účtu Google&lt;/a>.
+        &lt;br>&lt;br>
+        Údaje používané v těchto funkcích jsou poskytovány společností Google a jejími poskytovateli licencí.
+        &lt;br>&lt;a href=%3$s>Další informace&lt;/a>"</string>
+    <string name="local_search_directory_label">Místa v okolí</string>
+    <string name="local_search_setting_title">Místa v okolí</string>
+    <string name="local_search_setting_on">Zobrazovat výsledky vyhledávání pro místa v okolí</string>
+    <string name="local_search_setting_off">Vypnuto</string>
+    <string name="local_search_settings_text">"Když vyhledáváte z aplikace v telefonu, tato funkce použije vaši polohu k nalezení míst v okolí, která vyhovují vašemu dotazu, a to i v případě, že nejsou ve vašich kontaktech. &lt;br>&lt;br> Údaje používané v těchto funkcích jsou poskytovány společností Google a jejími poskytovateli licencí. &lt;br>&lt;a href=%1$s>Další informace.&lt;/a>
+        &lt;br>&lt;br>
+        Aby tato funkce fungovala, je třeba povolit aplikacím Google používání polohy telefonu.
+        &lt;br>&lt;a href=%2$s>Další informace.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Vytáčení"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>

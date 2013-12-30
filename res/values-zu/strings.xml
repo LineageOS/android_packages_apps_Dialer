@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Izilungiselelo</string>
+    <string name="dialer_hint_find_contact_google">Sesha oxhumana nabo nezindawo eziseduze</string>
+    <string name="call_settings_label">Izilungiselelo zekholi</string>
+    <string name="view_location_settings">Buka izilungiselelo zendawo</string>
+    <string name="enable_reverse_lookup">Nika amandla i-ID yomshayi nge-Google</string>
+    <string name="reverse_lookup_enabled">Ubunikazi bekholi nge-Google bunikwe amandla</string>
+    <string name="google_caller_id_setting_title">Ubunikazi bekholi nge-Google</string>
+    <string name="google_caller_id_setting__on">Bonisa amagama wabantu namabhizinisi angekho kwengixhumana nabo.</string>
+    <string name="google_caller_id_setting__off">Valiwe</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>I-ID
+        yomshayi nge-Google&lt;/a> ibonisa amagama wabantu namabhizinisi angekho koxhumana nabo.
+        &lt;br>&lt;br>
+        Buyekeza ukutholakala kwenombolo yakho yefoni ku-
+        &lt;a href=%2$s>kuzilungiselelo ze-akhawunti yakho ye-Google&lt;/a>.
+        &lt;br>&lt;br>
+        Idatha esetshenziswa kulezi zici inikezwa yi-Google nabalayisense bazo.
+        &lt;br>&lt;a href=%3$s>Funda kabanzi.&lt;/a>"</string>
+    <string name="local_search_directory_label">Izindawo eziseduze</string>
+    <string name="local_search_setting_title">Izindawo eziseduze</string>
+    <string name="local_search_setting_on">Bonisa imiphumela yokusesha yezindawo eziseduze.</string>
+    <string name="local_search_setting_off">Valiwe</string>
+    <string name="local_search_settings_text">"Uma usesha kusuka kuhlelo lokusebenza lefoni, lesi sici sizosebenzisa indawo yakho ukuthola izindawo eziseduze ezifana nombuzo wakho, ngisho noma zingekho koxhumana nabo. &lt;br>&lt;br> Idatha yalezi zici ihlinzekwa yi-Google nezikhungo zayo ezinikezela ngelayisense. &lt;br>&lt;a href=%1$s>Funda kabanzi.&lt;/a>
+        &lt;br>&lt;br>
+        Kumele unike amandla izinhlelo zokusebenza ze-Google ukuze usebenzise indawo yefoni yakho kulo msebenzi.
+        &lt;br>&lt;a href=%2$s>Funda kabanzi.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Ukudayela"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Ifoni"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Ifoni"</string>

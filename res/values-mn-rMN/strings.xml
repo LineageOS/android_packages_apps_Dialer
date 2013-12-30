@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Тохиргоо</string>
+    <string name="dialer_hint_find_contact_google">Харилцагчид &amp; ойролцоо газруудыг хайх</string>
+    <string name="call_settings_label">Дуудлагын тохиргоо</string>
+    <string name="view_location_settings">Байршлын тохиргоог харах</string>
+    <string name="enable_reverse_lookup">Google дуудлага хийгчийн ID-г идэвхжүүлэх</string>
+    <string name="reverse_lookup_enabled">Залгагчийн ID-г Google-с харуулахыг идэвхжүүлсэн</string>
+    <string name="google_caller_id_setting_title">Залгагчийн ID-г Google-с</string>
+    <string name="google_caller_id_setting__on">Миний харилцагчид дотор байхгүй хүмүүс, байгууллагуудын нэрсийг харуулах.</string>
+    <string name="google_caller_id_setting__off">Идэвхгүй</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Залгагчийн
+        ID by Google&lt;/a> нь таны харилцагчид дотор байхгүй хүмүүс болон байгууллагуудын нэрсийг харуулна.
+        &lt;br>&lt;br>
+        Өөрийн утасны дугаарыг харуулах эсэхийг өөрийн
+        &lt;a href=%2$s>Google акаунт дотроос шинэчлээрэй&lt;/a>.
+        &lt;br>&lt;br>
+        Энэ функцад ашиглагдаж байгаа датаг Google болон түүний лиценз эзэмшигчид нийлүүлсэн.
+        &lt;br>&lt;a href=%3$s>Дэлгэрэнгүй үзэх.&lt;/a>"</string>
+    <string name="local_search_directory_label">Ойролцоо газрууд</string>
+    <string name="local_search_setting_title">Ойролцоо газрууд</string>
+    <string name="local_search_setting_on">Ойролцоох газруудын хайлтын илэрцийг харуулах.</string>
+    <string name="local_search_setting_off">Идэвхгүй</string>
+    <string name="local_search_settings_text">"Таныг өөрийн утасны апп-аас хайлт хийх үед энэ функц таны төхөөрөмжийн байршлыг ашиглан таны хайлтад таарах ойролцоох газруудыг олохыг хичээх болно. &lt;br>&lt;br> Эдгээр функцуудад зориулсан датаг Google болон үүний лиценз эзэмшигчид нийлүүлнэ. &lt;br>&lt;a href=%1$s>Дэлгэрэнгүй үзэх.&lt;/a>
+        &lt;br>&lt;br>
+        Та үүнийг ажиллуулахын тулд Google апп-уудад өөрийн утасны байршлыг ашиглахыг зөвшөөрөх шаардлагатай.
+        &lt;br>&lt;a href=%2$s>Дэлгэрэнгүй үзэх.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Залгагч"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Утас"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Утас"</string>

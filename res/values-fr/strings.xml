@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Paramètres</string>
+    <string name="dialer_hint_find_contact_google">Rech. contacts/adresses à prox.</string>
+    <string name="call_settings_label">"Paramètres d'appel"</string>
+    <string name="view_location_settings">Afficher param. localisation</string>
+    <string name="enable_reverse_lookup">Activer numéro appelant Google</string>
+    <string name="reverse_lookup_enabled">"L'affichage du n° de l'appelant Google est activé."</string>
+    <string name="google_caller_id_setting_title">Identification appelant via Google</string>
+    <string name="google_caller_id_setting__on">Afficher les noms des personnes et entreprises ne figurant pas dans mes contacts</string>
+    <string name="google_caller_id_setting__off">Désactivé</string>
+    <string name="google_caller_id_settings_text">"La &lt;a href=%1$s>fonctionnalité Google
+        d'identification de l'appelant&lt;/a> permet d'afficher sur votre appareil les noms des personnes et des entreprises ne figurant pas dans vos contacts.
+        &lt;br>&lt;br>
+        Indiquez si vous souhaitez que votre numéro de téléphone soit détectable dans les
+        &lt;a href=%2$s>paramètres de votre compte Google&lt;/a>.
+        &lt;br>&lt;br>
+        Les données utilisées par ces fonctionnalités sont fournies par Google et ses concédants.
+        &lt;br>&lt;a href=%3$s>En savoir plus&lt;/a>"</string>
+    <string name="local_search_directory_label">Adresses à proximité</string>
+    <string name="local_search_setting_title">Adresses à proximité</string>
+    <string name="local_search_setting_on">Afficher les adresses à proximité correspondant à mes recherches</string>
+    <string name="local_search_setting_off">Désactivé</string>
+    <string name="local_search_settings_text">"Lorsque vous effectuez des recherches à partir de l'application Téléphone, cette fonctionnalité utilise la position de votre appareil pour trouver des adresses à proximité qui correspondent à votre requête de recherche, même si elles ne figurent pas dans vos contacts. &lt;br>&lt;br> Les données de ces fonctionnalités sont fournies par Google et ses concédants. &lt;br>&lt;a href=%1$s>En savoir plus&lt;/a>
+        &lt;br>&lt;br>
+        Vous devez autoriser les applications Google à utiliser la position de votre téléphone pour que cela fonctionne.
+        &lt;br>&lt;a href=%2$s>En savoir plus&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Appeler"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Téléphone"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Tél."</string>

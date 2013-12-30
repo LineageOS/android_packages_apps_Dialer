@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">ការ​កំណត់</string>
+    <string name="dialer_hint_find_contact_google">ស្វែងរក​ទំនាក់ទំនង &amp; កន្លែង​នៅ​ក្បែរ</string>
+    <string name="call_settings_label">កំណត់​ការ​ហៅ</string>
+    <string name="view_location_settings">មើល​ការ​កំណត់​ទីតាំង</string>
+    <string name="enable_reverse_lookup">បើក​លេខ​សម្គាល់​អ្នក​ហៅ​ដោយ Google</string>
+    <string name="reverse_lookup_enabled">លេខ​សម្គាល់​អ្នក​ហៅ​តាម Google ត្រូវ​បាន​បើក</string>
+    <string name="google_caller_id_setting_title">លេខ​សម្គាល់​អ្នក​ហៅ​តាម Google</string>
+    <string name="google_caller_id_setting__on">បង្ហាញ​ឈ្មោះ​​​មនុស្ស​ និង​ធុរកិច្ច​ដែល​មិន​​នៅ​ក្នុង​ទំនាក់​ទំនង​របស់​ខ្ញុំ​។</string>
+    <string name="google_caller_id_setting__off">បិទ</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>លេខ​សម្គាល់​អ្នក​ហៅ
+        តាម Google&lt;/a> បង្ហាញ​ឈ្មោះ​សម្រាប់​មនុស្ស និង​ធុរកិច្ច​មិន​នៅ​ក្នុង​ទំនាក់ទំនង​របស់​អ្នក។
+        &lt;br>&lt;br>
+        ធ្វើ​បច្ចុប្បន្នភាព​​​ការ​រក​ឃើញ​លេខ​ទូរស័ព្ទ​របស់​អ្នក​ក្នុង
+        &lt;a href=%2$s>ការ​កំណត់​គណនី Google ​&lt;/a>របស់​អ្នក។
+        &lt;br>&lt;br>
+        ទិន្នន័យ​កំពុង​ត្រូវ​បាន​ប្រើប្រាស់​ក្នុង​លក្ខណៈ​ទាំង​នេះ​ដែល​ត្រូវ​បាន​ផ្ដល់​ដោយ Google និង​អ្នកមាន​អាជ្ញាប័ណ្ណ។
+        &lt;br>&lt;a href=%3$s>ស្វែងយល់​បន្ថែម។&lt;/a>"</string>
+    <string name="local_search_directory_label">កន្លែង​​ក្បែរ​ៗ</string>
+    <string name="local_search_setting_title">កន្លែង​​ក្បែរ​ៗ</string>
+    <string name="local_search_setting_on">បង្ហាញ​លទ្ធផល​ស្វែងរក​សម្រាប់​កន្លែង​នៅ​ក្បែរ​​។</string>
+    <string name="local_search_setting_off">បិទ</string>
+    <string name="local_search_settings_text">"នៅ​ពេល​អ្នក​​ស្វែងរក​ពី​កម្មវិធី​ទូរស័ព្ទ លក្ខណៈ​នេះ​នឹង​ប្រើ​ទីតាំង​របស់​អ្នក​ ដើម្បី​រក​កន្លែង​នៅ​ក្បែរ ដែល​ត្រូវ​គ្នា​នឹង​សំណួរ​របស់​អ្នក សូម្បីតែ​​ពួកវា​មិន​នៅ​ក្នុង​ទំនាក់ទំនង​របស់​អ្នក​ក៏​ដោយ។ &lt;br>&lt;br> ទិន្នន័យ​កំពុង​ត្រូវ​បាន​ប្រើ​ក្នុង​លក្ខណៈ​ទាំង​នេះ​ដែល​ត្រូវ​បាន​ផ្ដល់​ដោយ Google និង​អ្នក​មាន​អាជ្ញាប័ណ្ណ។ &lt;br>&lt;a href=%1$s>ស្វែងយល់​បន្ថែម។&lt;/a>
+        &lt;br>&lt;br>
+        អ្នក​ត្រូវ​តែ​បើក​កម្មវិធី Google ដើម្បី​ប្រើ​ទីតាំង​ទូរស័ព្ទ​របស់​អ្នក​សម្រាប់​ឲ្យ​វា​ដំណើរការ។
+        &lt;br>&lt;a href=%2$s>ស្វែងយល់​បន្ថែម។&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"អ្នក​ហៅ"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"ទូរស័ព្ទ"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ទូរស័ព្ទ"</string>

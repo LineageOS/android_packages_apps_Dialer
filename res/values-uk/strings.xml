@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Налаштування</string>
+    <string name="dialer_hint_find_contact_google">Пошук контактів, місць поблизу</string>
+    <string name="call_settings_label">Налаштування виклику</string>
+    <string name="view_location_settings">Налаштування місцезнаходження</string>
+    <string name="enable_reverse_lookup">Увімкнути АВН від Google</string>
+    <string name="reverse_lookup_enabled">Ідентифікатор абонента від Google увімкнено</string>
+    <string name="google_caller_id_setting_title">Ідентифікатор абонента від Google</string>
+    <string name="google_caller_id_setting__on">Показувати людей і компанії, яких немає в моїх контактах.</string>
+    <string name="google_caller_id_setting__off">Вимкнено</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Ідентифікатор
+        абонента від Google&lt;/a> показує імена людей і назви компаній, яких немає у ваших контактах.
+        &lt;br>&lt;br>
+        Оновіть виявлення вашого номера телефону в
+        &lt;a href=%2$s>налаштуваннях облікового запису Google&lt;/a>.
+        &lt;br>&lt;br>
+        Дані, які використовуються в цих функціях, надаються компанією Google і її ліцензіарами.
+        &lt;br>&lt;a href=%3$s>Докладніше.&lt;/a>"</string>
+    <string name="local_search_directory_label">Місця поблизу</string>
+    <string name="local_search_setting_title">Місця поблизу</string>
+    <string name="local_search_setting_on">Показувати результати пошуку для місць поблизу.</string>
+    <string name="local_search_setting_off">Вимкнено</string>
+    <string name="local_search_settings_text">"Коли ви виконуєте пошук за допомогою програми в телефоні, ця функція використовує ваше місцезнаходження, щоб шукати місця поблизу, які відповідають вашому запиту, навіть якщо їх немає у ваших контактах. &lt;br>&lt;br> Дані для цих функцій надає компанія Google і її ліцензіари. &lt;br>&lt;a href=%1$s>Докладніше.&lt;/a>
+        &lt;br>&lt;br>
+        Для цього потрібно дозволити програмам Google використовувати місцезнаходження телефону.
+        &lt;br>&lt;a href=%2$s>Докладніше.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Телефон"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Телеф."</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Тел."</string>

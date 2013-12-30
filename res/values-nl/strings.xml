@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Instellingen</string>
+    <string name="dialer_hint_find_contact_google">Contacten en plaatsen in de buurt</string>
+    <string name="call_settings_label">Oproepinstellingen</string>
+    <string name="view_location_settings">Locatie-instellingen weergeven</string>
+    <string name="enable_reverse_lookup">Google-beller-ID inschakelen</string>
+    <string name="reverse_lookup_enabled">Beller-ID van Google is ingeschakeld</string>
+    <string name="google_caller_id_setting_title">Beller-ID van Google</string>
+    <string name="google_caller_id_setting__on">Namen weergeven voor niet-contacten (mensen en bedrijven).</string>
+    <string name="google_caller_id_setting__off">Uit</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Beller-
+        ID van Google&lt;/a> geeft namen weer van mensen en bedrijven die niet in uw contacten staan.
+        &lt;br>&lt;br>
+        Verbeter de vindbaarheid van uw telefoonnummer in uw
+        &lt;a href=%2$s>Google-accountinstellingen&lt;/a>.
+        &lt;br>&lt;br>
+        De gegevens die in deze functies worden gebruikt, worden geleverd door Google en zijn licentiegevers.
+        &lt;br>&lt;a href=%3$s>Meer informatie.&lt;/a>"</string>
+    <string name="local_search_directory_label">Plaatsen in de buurt</string>
+    <string name="local_search_setting_title">Plaatsen in de buurt</string>
+    <string name="local_search_setting_on">Zoekresultaten voor plaatsen in de buurt weergeven.</string>
+    <string name="local_search_setting_off">Uit</string>
+    <string name="local_search_settings_text">"Wanneer u zoekopdrachten uitvoert via de telefoon-app, gebruikt deze functie uw locatie om plaatsen in de buurt te vinden die overeenkomen met uw zoekopdracht, zelfs als deze niet in uw contactenlijst staan. &lt;br>&lt;br> Gegevens voor deze functies worden geleverd door Google en zijn vergunninggevers. &lt;br>&lt;a href=%1$s>Meer informatie.&lt;/a>
+        &lt;br>&lt;br>
+        Voor deze functies moet u Google-apps toestemming geven de locatie van uw telefoon te gebruiken.
+        &lt;br>&lt;a href=%2$s>Meer informatie.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Dialer"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefoon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefoon"</string>

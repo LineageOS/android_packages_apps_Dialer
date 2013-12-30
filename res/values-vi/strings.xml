@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Cài đặt</string>
+    <string name="dialer_hint_find_contact_google">Tìm liên hệ và địa điểm lân cận</string>
+    <string name="call_settings_label">Cài đặt cuộc gọi</string>
+    <string name="view_location_settings">Xem cài đặt vị trí</string>
+    <string name="enable_reverse_lookup">Bật ID người gọi của Google</string>
+    <string name="reverse_lookup_enabled">Đã bật ID người gọi do Google cung cấp</string>
+    <string name="google_caller_id_setting_title">ID người gọi của Google</string>
+    <string name="google_caller_id_setting__on">Hiển thị tên của người và doanh nghiệp không nằm trong danh sách liên hệ của tôi.</string>
+    <string name="google_caller_id_setting__off">Tắt</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>ID người gọi
+ của Google&lt;/a> hiển thị tên của người và doanh nghiệp không nằm trong danh sách liên hệ của bạn.
+        &lt;br>&lt;br>
+ Cập nhật khả năng phát hiện số điện thoại của bạn trong
+        &lt;a href=%2$s>cài đặt tài khoản Google&lt;/a>.
+        &lt;br>&lt;br>
+        Dữ liệu đang được sử dụng trong những tính năng này được Google và người cấp phép của Google cung cấp.
+        &lt;br>&lt;a href=%3$s>Tìm hiểu thêm.&lt;/a>"</string>
+    <string name="local_search_directory_label">Địa điểm lân cận</string>
+    <string name="local_search_setting_title">Địa điểm lân cận</string>
+    <string name="local_search_setting_on">Hiển thị kết quả tìm kiếm cho địa điểm lân cận.</string>
+    <string name="local_search_setting_off">Tắt</string>
+    <string name="local_search_settings_text">"Khi bạn tìm kiếm từ ứng dụng trên điện thoại, tính năng này sẽ sử dụng thông tin vị trí của bạn để tìm các địa điểm lân cận phù hợp với truy vấn của bạn, ngay cả khi chúng chưa có trong danh bạ của bạn. &lt;br>&lt;br> Dữ liệu đang được sử dụng trong các tính năng này do Google và các bên cấp phép của Google cung cấp. &lt;br>&lt;a href=%1$s>Tìm hiểu thêm.&lt;/a>
+        &lt;br>&lt;br>
+        Bạn phải bật ứng dụng Google để sử dụng vị trí điện thoại của bạn để tính năng này hoạt động.
+        &lt;br>&lt;a href=%2$s>Tìm hiểu thêm.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Trình quay số"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Điện thoại"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Điện thoại"</string>

@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Seaded</string>
+    <string name="dialer_hint_find_contact_google">Kontaktide ja kohtade otsing</string>
+    <string name="call_settings_label">Kõneseaded</string>
+    <string name="view_location_settings">Kuva asukohaseaded</string>
+    <string name="enable_reverse_lookup">"Google'i helistaja ID lubamine"</string>
+    <string name="reverse_lookup_enabled">"Google'i helistaja ID on lubatud"</string>
+    <string name="google_caller_id_setting_title">"Helistaja ID Google'ilt"</string>
+    <string name="google_caller_id_setting__on">Kuva inimeste ja ettevõtete nimed, kes pole kontaktides.</string>
+    <string name="google_caller_id_setting__off">Väljas</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Google'i helistaja
+        ID&lt;/a> kuvab teie kontaktidesse mittekuuluvate inimeste ja ettevõtete nimesid.
+        &lt;br>&lt;br>
+        Värskendage oma telefoninumbri leitavust
+        &lt;a href=%2$s>Google'i konto seadetes&lt;/a>.
+        &lt;br>&lt;br>
+        Funktsioonides kasutatavaid andmeid edastavad Google ja Google'i litsentsiandjad.
+        &lt;br>&lt;a href=%3$s>Lisateave.&lt;/a>"</string>
+    <string name="local_search_directory_label">Lähedalasuvad kohad</string>
+    <string name="local_search_setting_title">Lähedalasuvad kohad</string>
+    <string name="local_search_setting_on">Lähedalasuvate kohtade otsingutulemuste kuvamine.</string>
+    <string name="local_search_setting_off">Väljas</string>
+    <string name="local_search_settings_text">"Kui teete telefonirakenduses otsinguid, kasutab see funktsioon seadme asukohta teie otsinguterminile vastavate lähedalasuvate kohtade otsimiseks, isegi kui need pole teie kontaktide hulgas. &lt;br>&lt;br> Funktsioonides kasutatavaid andmeid pakuvad Google ja Google'i litsentsiandjad.  &lt;br>&lt;a href=%1$s>Lisateave.&lt;/a>
+        &lt;br>&lt;br>
+        Selle funktsiooni kasutamiseks peate lubama Google'i rakendustel kasutada oma telefoni asukohta.
+        &lt;br>&lt;a href=%2$s>Lisateave.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Dialer"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>

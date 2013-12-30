@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Настройки</string>
+    <string name="dialer_hint_find_contact_google">Търс. на контакти и места в района</string>
+    <string name="call_settings_label">Настройки за обаждане</string>
+    <string name="view_location_settings">Настройки за местоположението</string>
+    <string name="enable_reverse_lookup">Идент. на обаждането: Актив.</string>
+    <string name="reverse_lookup_enabled">Идентификацията на обаждането чрез Google е актив.</string>
+    <string name="google_caller_id_setting_title">Идентификация на обаждането чрез Google</string>
+    <string name="google_caller_id_setting__on">Показване на имена на хора и фирми извън контактите ми.</string>
+    <string name="google_caller_id_setting__off">Изключено</string>
+    <string name="google_caller_id_settings_text">"Идентификацията на &lt;a href=%1$s>обаждането
+ от Google&lt;/a> показва имената на хората и фирмите, които не са в контактите ви.
+ &lt;br>&lt;br>
+ Актуализирайте откриваемостта на телефонния си номер от
+ &lt;a href=%2$s>настройките на профила си в Google&lt;/a>.
+ &lt;br>&lt;br>
+ Използваните в тези функции данни се предоставят от Google и лицензодателите й.
+ &lt;br>&lt;a href=%3$s>Научете повече.&lt;/a>"</string>
+    <string name="local_search_directory_label">Места в района</string>
+    <string name="local_search_setting_title">Места в района</string>
+    <string name="local_search_setting_on">Показване на резултатите от търсенето за местата в района.</string>
+    <string name="local_search_setting_off">Изключено</string>
+    <string name="local_search_settings_text">"Когато търсите от приложението на телефона, тази функция ще използва местоположението ви за намиране на места в района, които съответстват на заявката ви, дори ако не са в контактите ви. &lt;br>&lt;br> Използваните в тези функции данни се предоставят от Google и лицензодателите й. &lt;br>&lt;a href=%1$s>Научете повече.&lt;/a>
+&lt;br>&lt;br>
+За да работи функцията, трябва да активирате приложенията ни да ползват местоположението на телефона ви.
+&lt;br>&lt;a href=%2$s>Научете повече.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Набиране"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Телефон"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Телефон"</string>

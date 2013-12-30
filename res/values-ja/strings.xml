@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">設定</string>
+    <string name="dialer_hint_find_contact_google">連絡先と周辺のスポットを検索</string>
+    <string name="call_settings_label">通話設定</string>
+    <string name="view_location_settings">位置情報設定を表示</string>
+    <string name="enable_reverse_lookup">Google発信者番号を有効にする</string>
+    <string name="reverse_lookup_enabled">Googleによる発信者番号が有効です</string>
+    <string name="google_caller_id_setting_title">Google発信者番号</string>
+    <string name="google_caller_id_setting__on">Myコンタクトにないユーザーやビジネスの名前を表示します。</string>
+    <string name="google_caller_id_setting__off">OFF</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Google
+        発信者番号&lt;/a>により連絡先にないユーザー名や会社名が表示されます。
+        &lt;br>&lt;br>
+        &lt;a href=%2$s>Googleアカウント設定&lt;/a>で電話番号の
+        検出の許可を更新してください。
+        &lt;br>&lt;br>
+        この機能で使用されているデータはGoogleとそのおよびそのライセンサーが提供します。
+        &lt;br>&lt;a href=%3$s>詳細&lt;/a>"</string>
+    <string name="local_search_directory_label">周辺のスポット</string>
+    <string name="local_search_setting_title">周辺のスポット</string>
+    <string name="local_search_setting_on">周辺のスポットの検索結果を表示できます。</string>
+    <string name="local_search_setting_off">OFF</string>
+    <string name="local_search_settings_text">"携帯端末アプリから検索すると、この機能は現在地を使用して検索キーワードと一致する周辺のスポットを見つけます（連絡先にないスポットも含む）。&lt;br>&lt;br> この機能のデータはGoogleおよびそのライセンサーが提供します。&lt;br>&lt;a href=%1$s>詳細&lt;/a>
+        &lt;br>&lt;br>
+        この機能を使用するには、Googleアプリで携帯端末の現在地の使用を有効にする必要があります。
+        &lt;br>&lt;a href=%2$s>詳細&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"電話"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"電話"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"電話"</string>

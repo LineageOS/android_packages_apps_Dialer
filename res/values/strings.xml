@@ -17,6 +17,23 @@
 
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Settings</string>
+    <string name="dialer_hint_find_contact_google">Search contacts &amp; nearby places</string>
+    <string name="call_settings_label">Call settings</string>
+    <string name="view_location_settings">View location settings</string>
+    <string name="enable_reverse_lookup">Enable caller ID by Google</string>
+    <string name="reverse_lookup_enabled">Caller ID by Google is enabled</string>
+    <string name="google_caller_id_setting_title">Caller ID by Google</string>
+    <string name="google_caller_id_setting__on">Show names for people and businesses not in my contacts.</string>
+    <string name="google_caller_id_setting__off">Off</string>
+    <string name="google_caller_id_settings_text">&lt;a href=%1$s>Caller ID by Google&lt;/a> shows names for people and businesses not in your contacts. &lt;br>&lt;br> Update the discoverability of your phone number in your &lt;a href=%2$s>Google account settings&lt;/a>. &lt;br>&lt;br> Data being used in these features is provided by Google and its licensors. &lt;br>&lt;a href=%3$s>Learn more.&lt;/a></string>
+    <string name="local_search_directory_label">Nearby places</string>
+    <string name="local_search_setting_title">Nearby places</string>
+    <string name="local_search_setting_on">Display search results for nearby places.</string>
+    <string name="local_search_setting_off">Off</string>
+    <string name="local_search_settings_text">When you search from the phone app, this feature will use your location to find nearby places that match your query, even if they are not in your contacts. &lt;br>&lt;br> Data being used in these features is provided by Google and its licensors. &lt;br>&lt;a href=%1$s>Learn more.&lt;/a> &lt;br>&lt;br> You must enable Google apps to use your phone’s location for this to work. &lt;br>&lt;a href=%2$s>Learn more.&lt;/a></string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <!-- Directory partition name -->
     <string name="applicationLabel">Dialer</string>
 

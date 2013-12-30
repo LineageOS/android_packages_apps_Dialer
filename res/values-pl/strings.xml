@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Ustawienia</string>
+    <string name="dialer_hint_find_contact_google">Wyszukaj kontakty i miejsca w pobliżu</string>
+    <string name="call_settings_label">Ustawienia połączeń</string>
+    <string name="view_location_settings">Wyświetl ustawienia lokalizacji</string>
+    <string name="enable_reverse_lookup">Włącz nazwę rozmówcy od Google</string>
+    <string name="reverse_lookup_enabled">Nazwa rozmówcy od Google jest włączona</string>
+    <string name="google_caller_id_setting_title">Nazwa rozmówcy od Google</string>
+    <string name="google_caller_id_setting__on">Pokazuj nazwiska osób i nazwy firm spoza listy kontaktów.</string>
+    <string name="google_caller_id_setting__off">Wyłączona</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Nazwa
+        rozmówcy od Google&lt;/a> wyświetla nazwiska osób i nazwy firm spoza listy kontaktów.
+        &lt;br>&lt;br>
+        Zwiększ możliwość wykrycia Twojego numeru telefonu 
+        &lt;a href=%2$s>w ustawieniach konta Google&lt;/a>.
+        &lt;br>&lt;br>
+        Dane wykorzystywane w tych funkcjach dostarcza firma Google i jej licencjodawcy.
+        &lt;br>&lt;a href=%3$s>Więcej informacji.&lt;/a>"</string>
+    <string name="local_search_directory_label">Miejsca w pobliżu</string>
+    <string name="local_search_setting_title">Miejsca w pobliżu</string>
+    <string name="local_search_setting_on">Wyświetl wyniki wyszukiwania miejsc w pobliżu.</string>
+    <string name="local_search_setting_off">Wyłączone</string>
+    <string name="local_search_settings_text">"Podczas wyszukiwania w aplikacji na telefonie funkcja użyje Twojej lokalizacji, by znaleźć pobliskie miejsca pasujące do zapytania, nawet jeśli nie masz ich w kontaktach. &lt;br>&lt;br> Dane wykorzystywane przez te funkcje są dostarczane przez firmę Google i jej licencjodawców. &lt;br>&lt;a href=%1$s>Więcej informacji.&lt;/a>
+        &lt;br>&lt;br>
+        Aby funkcja działała, musisz zezwolić aplikacjom Google na dostęp do lokalizacji telefonu.
+        &lt;br>&lt;a href=%2$s>Więcej informacji.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Telefon"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>

@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">الإعدادات</string>
+    <string name="dialer_hint_find_contact_google">البحث في جهات الاتصال والأماكن المجاورة</string>
+    <string name="call_settings_label">إعدادات الاتصال</string>
+    <string name="view_location_settings">عرض إعدادات الموقع</string>
+    <string name="enable_reverse_lookup">‏تمكين معرّف المتصل من Google</string>
+    <string name="reverse_lookup_enabled">‏تم تمكين معرف المتصل من Google</string>
+    <string name="google_caller_id_setting_title">‏معرف المتصل من Google</string>
+    <string name="google_caller_id_setting__on">عرض أسماء الأشخاص والأنشطة التجارية غير المضمنة في جهات الاتصال الخاصة بي.</string>
+    <string name="google_caller_id_setting__off">إيقاف</string>
+    <string name="google_caller_id_settings_text">"‏&lt;a href=%1$s>معرّف
+        المتصل من Google&lt;/a> يعرض أسماء الأشخاص والأنشطة التجارية التي ليست ضمن جهات الاتصال التابعة لك.
+        &lt;br>&lt;br>
+        يمكنك تحديث إمكانية اكتشاف رقم هاتفك في
+        &lt;a href=%2$s>إعدادات حساب Google&lt;/a>.
+        &lt;br>&lt;br>
+        البيانات التي يتم استخدامها في هذه الميزات توفرها Google ومرخصوها.
+        &lt;br>&lt;a href=%3$s>مزيد من المعلومات.&lt;/a>"</string>
+    <string name="local_search_directory_label">الأماكن المجاورة</string>
+    <string name="local_search_setting_title">الأماكن المجاورة</string>
+    <string name="local_search_setting_on">عرض نتائج البحث عن الأماكن القريبة.</string>
+    <string name="local_search_setting_off">إيقاف</string>
+    <string name="local_search_settings_text">"‏عند البحث من تطبيق الهاتف، ستستغل هذه الميزة موقع جهازك للعثور على الأماكن المجاورة التي تتطابق مع طلب البحث حتى إذا لم تكن ضمن جهات اتصالك. &lt;br>&lt;br> وتتوفر البيانات لهذه الميزات من قِبل شركة Google والجهات المرخصة التابعة لها. &lt;br>&lt;a href=%1$s>مزيد من المعلومات.&lt;/a>
+        &lt;br>&lt;br>
+               يتعين عليك تمكين استخدام موقع جهازك في تطبيقات Google حتى تعمل هذه الميزة.
+        &lt;br>&lt;a href=%2$s>مزيد من المعلومات.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Dialer"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"الهاتف"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"الهاتف"</string>

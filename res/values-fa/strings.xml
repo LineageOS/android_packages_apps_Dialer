@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">تنظیمات</string>
+    <string name="dialer_hint_find_contact_google">جستجوی مخاطبین و مکان‌های نزدیک</string>
+    <string name="call_settings_label">تنظیمات تماس</string>
+    <string name="view_location_settings">نمایش تنظیمات موقعیت مکانی</string>
+    <string name="enable_reverse_lookup">‏فعال کردن ID تماس‌گیرنده Google</string>
+    <string name="reverse_lookup_enabled">‏شناسه تماس‌گیرنده Google فعال شده است</string>
+    <string name="google_caller_id_setting_title">‏شناسه تماس گیرنده Google</string>
+    <string name="google_caller_id_setting__on">نمایش نام افراد و کسب و کارهایی که در مخاطبین من نیستند.</string>
+    <string name="google_caller_id_setting__off">خاموش</string>
+    <string name="google_caller_id_settings_text">"‏&lt;a href=%1$s>شناسه
+       تماس گیرنده توسط Google‏&lt;/a> نام افراد و کسب و کارهایی که در مخاطبین شما نیستند را نشان می‌دهد.
+        &lt;br>&lt;br>
+        قابل شناسایی بودن شماره تلفنتان را در 
+        &lt;a href=%2$s>تنظیمات حساب Google‏&lt;/a> خود به‌روزرسانی کنید.
+        &lt;br>&lt;br>
+        داده‌های استفاده شده در این قابلیت‌ها توسط Google و اعطاکنندگان مجوز آن ارائه می‌شود.
+        &lt;br>&lt;a href=%3$s>بیشتر بدانید.&lt;/a>"</string>
+    <string name="local_search_directory_label">مکان‌های نزدیک</string>
+    <string name="local_search_setting_title">مکان‌های نزدیک</string>
+    <string name="local_search_setting_on">نتایج جستجو برای مکان‌های نزدیک نشان داده می‌شود.</string>
+    <string name="local_search_setting_off">خاموش</string>
+    <string name="local_search_settings_text">"‏هنگامی که از برنامه تلفن جستجو می‌کنید، این قابلیت از موقعیت مکانی‌تان برای یافتن مکان‌های نزدیک منطبق بر عبارت جستجوی شما استفاده می‌کند، حتی اگر در مخاطبین شما نباشند. &lt;br>&lt;br> داده‌های مورد استفاده در این قابلیت‌ها توسط Google و مجوزدهنده‌های آن ارائه می‌شوند. &lt;br>&lt;a href=%1$s>بیشتر بدانید.&lt;/a>
+‏‏       &lt;br>&lt;br>
+‏               برای اینکه این قابلیت کار کند، باید برنامه‌های Google را فعال کنید تا از موقعیت مکانی تلفنتان استفاده کنند.
+       ‏&lt;br>&lt;a href=%2$sبیشتر بدانید.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"شماره‌گیر"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"تلفن"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"تلفن"</string>

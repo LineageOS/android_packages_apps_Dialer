@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">设置</string>
+    <string name="dialer_hint_find_contact_google">搜索联系人和附近地点</string>
+    <string name="call_settings_label">通话设置</string>
+    <string name="view_location_settings">查看位置信息设置</string>
+    <string name="enable_reverse_lookup">启用 Google 来电显示</string>
+    <string name="reverse_lookup_enabled">已启用 Google 来电显示</string>
+    <string name="google_caller_id_setting_title">Google 来电显示</string>
+    <string name="google_caller_id_setting__on">显示不在我通讯录中的个人和企业的名称。</string>
+    <string name="google_caller_id_setting__off">关闭</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Google 来电显示
+&lt;/a>可显示不在您通讯录中的个人和企业的名称。
+        &lt;br>&lt;br>
+        您可以在 
+&lt;a href=%2$s>Google 帐户设置&lt;/a>中更新自己电话号码的公开范围。
+        &lt;br>&lt;br>
+        这些功能中使用的数据由 Google 及数据许可方提供。
+        &lt;br>&lt;a href=%3$s>了解详情&lt;/a>。"</string>
+    <string name="local_search_directory_label">附近地点</string>
+    <string name="local_search_setting_title">附近地点</string>
+    <string name="local_search_setting_on">显示附近地点搜索结果。</string>
+    <string name="local_search_setting_off">关闭</string>
+    <string name="local_search_settings_text">"当您在拨号应用中搜索时，此功能将使用您的位置信息查找与您的搜索字词匹配的附近地点（即使这些地点不在您的通讯录中）。&lt;br>&lt;br>此类功能中使用的相关数据由 Google 及数据许可方提供。&lt;br>&lt;a href=%1$s>了解详情&lt;/a>。
+        &lt;br>&lt;br>
+        为了使此功能正常运行，您需要授权 Google 应用使用您手机的位置信息。
+        &lt;br>&lt;a href=%2$s>了解详情&lt;/a>。"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"拨号"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"拨号"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"拨号"</string>

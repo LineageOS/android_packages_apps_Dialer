@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Setelan</string>
+    <string name="dialer_hint_find_contact_google">Cari kontak &amp; tempat terdekat</string>
+    <string name="call_settings_label">Setelan telepon</string>
+    <string name="view_location_settings">Lihat setelan lokasi</string>
+    <string name="enable_reverse_lookup">ID no. penelepon Google aktif</string>
+    <string name="reverse_lookup_enabled">ID nomor penelepon oleh Google diaktifkan</string>
+    <string name="google_caller_id_setting_title">ID Nomor penelepon menurut Google</string>
+    <string name="google_caller_id_setting__on">Tampilkan nama orang &amp; bisnis yang tidak ada di kontak saya.</string>
+    <string name="google_caller_id_setting__off">Nonaktif</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>ID
+        Pemanggil oleh Google&lt;/a> menampilkan nama orang dan bisnis yang tidak ada dalam kontak Anda.
+        &lt;br>&lt;br>
+        Perbarui kemampuan nomor telepon Anda untuk ditemukan di
+        &lt;a href=%2$s>setelan akun Google&lt;/a>.
+        &lt;br>&lt;br>
+        Data yang digunakan dalam fitur ini disediakan oleh Google dan para pemberi lisensinya.
+        &lt;br>&lt;a href=%3$s>Pelajari lebih lanjut.&lt;/a>"</string>
+    <string name="local_search_directory_label">Tempat terdekat</string>
+    <string name="local_search_setting_title">Tempat terdekat</string>
+    <string name="local_search_setting_on">Menampilkan hasil penelusuran untuk tempat terdekat.</string>
+    <string name="local_search_setting_off">Nonaktif</string>
+    <string name="local_search_settings_text">"Saat mencari dari aplikasi ponsel, fitur ini akan menggunakan lokasi Anda untuk menemukan tempat terdekat yang cocok, meskipun tempat tersebut tidak ada di kontak. &lt;br>&lt;br> Data yang digunakan dalam fitur ini disediakan oleh Google dan pemegang lisensinya. &lt;br>&lt;a href=%1$s>Pelajari lebih lanjut.&lt;/a>
+        &lt;br>&lt;br>
+        Anda harus mengizinkan aplikasi Google untuk menggunakan lokasi ponsel Anda agar fitur ini aktif.
+        &lt;br>&lt;a href=%2$s>Pelajari lebih lanjut.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Aplikasi Telepon"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telepon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telepon"</string>

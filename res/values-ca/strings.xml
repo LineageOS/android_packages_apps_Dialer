@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Configuració</string>
+    <string name="dialer_hint_find_contact_google">Cerca contactes i llocs propers</string>
+    <string name="call_settings_label">Configuració de trucades</string>
+    <string name="view_location_settings">"Mostra configuració d'ubicació"</string>
+    <string name="enable_reverse_lookup">Activa ID de trucada de Google</string>
+    <string name="reverse_lookup_enabled">"L'identificador de trucada de Google està activat"</string>
+    <string name="google_caller_id_setting_title">Identificador de trucada de Google</string>
+    <string name="google_caller_id_setting__on">Mostra noms de persones i empreses que no siguin contactes.</string>
+    <string name="google_caller_id_setting__off">Desactivat</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>L'identificador de trucada
+        de Google&lt;/a> mostra el nom de les persones i de les empreses que no són als teus contactes.
+        &lt;br>&lt;br>
+        Actualitza la visibilitat del teu número de telèfon des de la
+        &lt;a href=%2$s>configuració del compte de Google&lt;/a>.
+        &lt;br>&lt;br>
+        Google i els seus proveïdors de llicències proporcionen les dades que s'utilitzen en aquestes funcions.
+        &lt;br>&lt;a href=%3$s>Més informació&lt;/a>"</string>
+    <string name="local_search_directory_label">Llocs a prop</string>
+    <string name="local_search_setting_title">Llocs a prop</string>
+    <string name="local_search_setting_on">Mostra resultats de cerca de llocs propers.</string>
+    <string name="local_search_setting_off">Desactivat</string>
+    <string name="local_search_settings_text">"Quan facis cerques a l'aplicació del telèfon, aquesta funció utilitzarà la ubicació per trobar llocs propers que coincideixin amb la teva consulta, encara que no formin part dels teus contactes. &lt;br>&lt;br> Google i els seus proveïdors de llicències són els encarregats de proporcionar les dades que es fan servir per a aquestes funcions. &lt;br>&lt;a href=%1$s>Més informació&lt;/a>
+        &lt;br>&lt;br>
+        Has de permetre que les aplicacions de Google facin servir la ubicació del telèfon perquè aquest servei funcioni correctament.
+        &lt;br>&lt;a href=%2$s>Més informació&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Telèfon"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telèfon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telèfon"</string>

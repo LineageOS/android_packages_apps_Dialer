@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Подешавања</string>
+    <string name="dialer_hint_find_contact_google">Претражите контакте и оближња места</string>
+    <string name="call_settings_label">Подешавања позива</string>
+    <string name="view_location_settings">Прикажи подешавања локације</string>
+    <string name="enable_reverse_lookup">Омогући Google ИД позиваоца</string>
+    <string name="reverse_lookup_enabled">Google ИД позиваоца је омогућен</string>
+    <string name="google_caller_id_setting_title">Google-ов ИД позиваоца</string>
+    <string name="google_caller_id_setting__on">Приказују се имена људи и предузећа који нису у контактима.</string>
+    <string name="google_caller_id_setting__off">Искључено</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Google-ов ИД позиваоца
+        &lt;/a> приказује имена људи и називе предузећа који се не налазе у контактима.
+        &lt;br>&lt;br>
+        Ажурирајте видљивост броја телефона у
+        &lt;a href=%2$s>подешавањима Google налога&lt;/a>.
+        &lt;br>&lt;br>
+        Податке који се користе у овим функцијама пружају Google и његови издаваоци лиценци.
+        &lt;br>&lt;a href=%3$s>Сазнајте више.&lt;/a>"</string>
+    <string name="local_search_directory_label">Оближња места</string>
+    <string name="local_search_setting_title">Оближња места</string>
+    <string name="local_search_setting_on">Приказују се резултати претраге за оближња места.</string>
+    <string name="local_search_setting_off">Искључено</string>
+    <string name="local_search_settings_text">"Када претражујете из апликације за телефон, ова функција ће користити вашу локацију да би пронашла оближња места која се подударају са упитом, чак и ако нису у контактима. &lt;br>&lt;br> Податке за ове функције пружају Google и његови издаваоци лиценци. &lt;br>&lt;a href=%1$s>Сазнајте више.&lt;/a>
+        &lt;br>&lt;br>
+        Морате да омогућите Google апликацијама да користе локацију телефона да би ово функционисало.
+        &lt;br>&lt;a href=%2$s>Сазнајте више.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Телефон"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Телефон"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Телефон"</string>

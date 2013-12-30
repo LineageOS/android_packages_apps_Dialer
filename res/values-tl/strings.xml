@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Mga Setting</string>
+    <string name="dialer_hint_find_contact_google">Maghanap ng contact at lugar</string>
+    <string name="call_settings_label">Mga setting ng pagtawag</string>
+    <string name="view_location_settings">Tingnan, setting ng lokasyon</string>
+    <string name="enable_reverse_lookup">Enable ang caller ID ng Google</string>
+    <string name="reverse_lookup_enabled">Ang Caller ID ng Google ay naka-enable</string>
+    <string name="google_caller_id_setting_title">Caller ID mula sa Google</string>
+    <string name="google_caller_id_setting__on">Magpakita ng pangalan ng tao, negosyong wala sa contact ko.</string>
+    <string name="google_caller_id_setting__off">Naka-off</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Ang Caller
+        ID mula sa Google&lt;/a> ay nagpapakita ng mga pangalan para sa mga tao at negosyong wala sa iyong mga contact.
+        &lt;br>&lt;br>
+        I-update ang pagiging katuklas-tuklas ng numero ng iyong telepono sa
+        &lt;a href=%2$s>mga setting ng iyong Google account&lt;/a>.
+        &lt;br>&lt;br>
+        Ang data na ginagamit sa mga feature na ito ay ibinibigay ng Google at ng mga tagapaglisensya nito.
+        &lt;br>&lt;a href=%3$s>Matuto nang higit pa.&lt;/a>"</string>
+    <string name="local_search_directory_label">Mga kalapit na lugar</string>
+    <string name="local_search_setting_title">Mga kalapit na lugar</string>
+    <string name="local_search_setting_on">Ipakita ang mga resulta ng paghahanap para sa mga kalapit na lugar.</string>
+    <string name="local_search_setting_off">Naka-off</string>
+    <string name="local_search_settings_text">"Kapag naghanap ka mula sa phone app, gagamitin ng tampok na ito ang iyong lokasyon upang maghanap ng mga kalapit na lugar na tumutugma sa iyong query, kahit na wala sa iyong mga contact ang mga ito. &lt;br>&lt;br> Ibinibigay ng Google at ng mga tagapaglisensya nito ang data para sa mga tampok na ito. &lt;br>&lt;a href=%1$s>Matuto nang higit pa.&lt;/a>
+        &lt;br>&lt;br>
+        Dapat mong i-enable ang Google apps upang magamit ang lokasyon ng iyong telepono para gumana ito.
+        &lt;br>&lt;a href=%2$s>Matuto nang higit pa.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Dialer"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telepono"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telepono"</string>
