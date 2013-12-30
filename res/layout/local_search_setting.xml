@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 Xiao-Long Chen <chenxiaolong@cxl.epac.to>
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!--
+     This is a reverse-engineered implementation of com.google.android.Dialer.
+     There is no guarantee that this implementation will work correctly or even
+     work at all. Use at your own risk.
+-->
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@id/text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="26.0dip"
+        android:paddingTop="26.0dip"
+        android:paddingRight="26.0dip"
+        android:textSize="16.0dip"
+        android:textColor="@color/google_settings_text_color"
+        android:linksClickable="true"
+        android:singleLine="false"
+        android:fontFamily="sans-serif" />
+
+    <View
+        android:background="@color/google_settings_background"
+        android:layout_width="fill_parent"
+        android:layout_height="2.0dip"
+        android:layout_marginLeft="26.0dip"
+        android:layout_marginTop="24.0dip"
+        android:layout_marginRight="26.0dip" />
+
+    <TextView
+        android:id="@+id/view_location_settings"
+        android:layout_width="fill_parent"
+        android:layout_height="64.0dip"
+        android:layout_marginLeft="26.0dip"
+        android:layout_marginRight="26.0dip"
+        android:paddingLeft="10.0dip"
+        android:gravity="center_vertical"
+        android:textSize="18.0dip"
+        android:textColor="@color/google_settings_text_color"
+        android:text="@string/view_location_settings"
+        android:fontFamily="sans-serif" />
+
+</LinearLayout>

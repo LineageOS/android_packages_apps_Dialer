@@ -16,6 +16,9 @@
   -->
 <resources>
 
+    <!-- Google Dialer -->
+    <dimen name="action_bar_switch_padding_right">16.0dip</dimen>
+
     <!-- Height of edit text in dialpad fragment -->
     <dimen name="dialpad_horizontal_margin">0dip</dimen>
     <dimen name="dialpad_vertical_margin">2dip</dimen>

@@ -527,7 +527,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mSearchView = (EditText) findViewById(R.id.search_view);
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
 
-        final String hintText = getString(R.string.dialer_hint_find_contact);
+        final String hintText = getString(R.string.dialer_hint_find_contact_google);
 
         // The following code is used to insert an icon into a CharSequence (copied from
         // SearchView)

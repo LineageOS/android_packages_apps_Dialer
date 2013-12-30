@@ -12,4 +12,9 @@
 @com.android.dialer.NeededForReflection *;
 }
 
+# Keep DialerExtendedPhoneDirectoriesManager for assets/contacts_extensions.properties
+-keep class com.google.android.dialer.extensions.DialerExtendedPhoneDirectoriesManager extends * {
+  *;
+}
+
 -verbose

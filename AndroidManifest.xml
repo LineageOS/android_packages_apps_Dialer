@@ -54,6 +54,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="com.qti.permission.DIAG" />
 
+    <!-- Google Dialer -->
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-feature android:name="com.google.android.feature.GOOGLE_EXPERIENCE" android:required="true" />
+
     <application
         android:name="DialerApplication"
         android:label="@string/applicationLabel"
@@ -68,14 +72,14 @@
         <!-- The entrance point for Phone UI.
              stateAlwaysHidden is set to suppress keyboard show up on
              dialpad screen. -->
-        <activity android:name=".DialtactsActivity"
+        <activity android:name="com.google.android.dialer.extensions.GoogleDialtactsActivity"
             android:label="@string/launcherDialer"
             android:theme="@style/DialtactsTheme"
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
             android:icon="@mipmap/ic_launcher_phone"
             android:screenOrientation="portrait"
-            android:enabled="@*android:bool/config_voice_capable"
+            android:enabled="@*android:bool/config_enableNetworkLocationOverlay"
             android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />
@@ -181,6 +185,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.google.android.dialer.settings.GoogleDialerSettingsActivity"
+            android:label="@string/dialer_settings_label"
+            android:parentActivityName="com.google.android.GoogleDialtactsActivity"
+            android:theme="@*android:style/Theme.Holo.Light" />
+
         <activity android:name="com.android.contacts.common.test.FragmentTestActivity">
             <intent-filter>
                 <category android:name="android.intent.category.TEST"/>
@@ -200,19 +209,19 @@
 
         <!-- Backwards compatibility: "Phone" from Gingerbread and earlier -->
         <activity-alias android:name="DialtactsActivity"
-            android:targetActivity=".DialtactsActivity"
+            android:targetActivity="com.google.android.dialer.extensions.GoogleDialtactsActivity"
             android:exported="true"
         />
 
         <!-- Backwards compatibility: "Call log" from Gingerbread and earlier -->
         <activity-alias android:name="RecentCallsListActivity"
-            android:targetActivity=".DialtactsActivity"
+            android:targetActivity="com.google.android.dialer.extensions.GoogleDialtactsActivity"
             android:exported="true"
         />
 
         <!-- Backwards compatibility: "Call log" from ICS -->
         <activity-alias android:name=".activities.CallLogActivity"
-            android:targetActivity=".DialtactsActivity"
+            android:targetActivity="com.google.android.dialer.extensions.GoogleDialtactsActivity"
             android:exported="true"
         />
 
@@ -267,7 +276,7 @@
         <!-- end vCard related -->
 
         <receiver android:name=".calllog.CallLogReceiver"
-            android:enabled="@*android:bool/config_voice_capable">
+            android:enabled="@*android:bool/config_enableNetworkLocationOverlay">
             <intent-filter>
                 <action android:name="android.intent.action.NEW_VOICEMAIL" />
                 <data
@@ -339,6 +348,16 @@
                 <action android:name="com.android.incallui.ACTION_HANG_UP_ONGOING_CALL" />
             </intent-filter>
         </receiver>
+
+        <provider android:name="com.google.android.dialer.provider.DialerProvider"
+                  android:authorities="com.google.android.dialer.provider"
+                  android:exported="false"
+                  android:multiprocess="false" />
+
+        <provider android:name="com.google.android.dialer.phonenumbercache.PhoneNumberCacheProvider"
+                  android:authorities="com.google.android.dialer.cacheprovider"
+                  android:exported="false"
+                  android:multiprocess="false" />
 
     </application>
 </manifest>
