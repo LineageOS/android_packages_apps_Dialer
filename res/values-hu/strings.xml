@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Beállítások</string>
+    <string name="dialer_hint_find_contact_google">Ismerősök és helyek keresése</string>
+    <string name="call_settings_label">Hívásbeállítások</string>
+    <string name="view_location_settings">Helybeállítások megtekintése</string>
+    <string name="enable_reverse_lookup">Google-azonosítás engedélyezése</string>
+    <string name="reverse_lookup_enabled">A Google általi hívóazonosító engedélyezve</string>
+    <string name="google_caller_id_setting_title">Google általi hívásazonosítás</string>
+    <string name="google_caller_id_setting__on">A névjegyekben nem szereplő emberek/cégek nevének mutatása</string>
+    <string name="google_caller_id_setting__off">Ki</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>A Google
+        általi hívásazonosítás&lt;/a> megjeleníti a névjegyekben nem szereplő személyek és cégek nevét.
+        &lt;br>&lt;br>
+        Frissítse telefonszáma felfedezhetőségét 
+        &lt;a href=%2$s>Google-fiókjának beállításaiban&lt;/a>.
+        &lt;br>&lt;br>
+        Az ezen funkciókban használt adatokat a Google és licencadói szolgáltatják.
+        &lt;br>&lt;a href=%3$s>További információ&lt;/a>"</string>
+    <string name="local_search_directory_label">Közeli helyek</string>
+    <string name="local_search_setting_title">Közeli helyek</string>
+    <string name="local_search_setting_on">A közeli helyek találatainak megjelenítése.</string>
+    <string name="local_search_setting_off">Ki</string>
+    <string name="local_search_settings_text">"Amikor a telefonos alkalmazásban végez keresést, ez a funkció a helyadatokat használja, hogy a keresésnek megfelelő közeli helyeket találjon, még akkor is, ha azok nem szerepelnek a névjegyek között. &lt;br>&lt;br> Az ezen funkcióknál használt adatokat a Google és licencadói szolgáltatják. &lt;br>&lt;a href=%1$s>További információ&lt;/a>
+        &lt;br>&lt;br>
+        Ehhez engedélyeznie kell a Google-alkalmazások számára a telefon helyadatainak használatát.
+        &lt;br>&lt;a href=%2$s>További információ&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Tárcsázó"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>

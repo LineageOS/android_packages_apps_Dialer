@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">설정</string>
+    <string name="dialer_hint_find_contact_google">주소록 및 주변 장소 검색</string>
+    <string name="call_settings_label">통화 설정</string>
+    <string name="view_location_settings">위치 설정 보기</string>
+    <string name="enable_reverse_lookup">Google 발신번호 사용</string>
+    <string name="reverse_lookup_enabled">Google 발신번호 표시가 사용 설정되었습니다.</string>
+    <string name="google_caller_id_setting_title">Google 발신번호 표시</string>
+    <string name="google_caller_id_setting__on">내 주소록에 없는 사용자 및 업체 이름을 표시합니다.</string>
+    <string name="google_caller_id_setting__off">사용 중지</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Google
+        발신번호 표시&lt;/a>는 내 주소록에 없는 사람 및 업체 이름을 표시합니다.
+        &lt;br>&lt;br>
+        &lt;a href=%2$s>Google 계정 설정&lt;/a>에서
+       내 전화번호의 검색 허용 여부를 변경하세요.
+        &lt;br>&lt;br>
+        이 기능에 사용되는 데이터는 Google 및 라이선스 제공자가 제공합니다.
+        &lt;br>&lt;a href=%3$s>자세히 알아보기&lt;/a>"</string>
+    <string name="local_search_directory_label">근처 장소</string>
+    <string name="local_search_setting_title">근처 장소</string>
+    <string name="local_search_setting_on">주변 장소에 대한 검색결과를 표시합니다.</string>
+    <string name="local_search_setting_off">사용 중지</string>
+    <string name="local_search_settings_text">"이 기능은 휴대전화 앱에서 검색할 때 기기의 위치를 사용하여 해당 장소가 주소록에 없더라도 검색어와 일치하는 주변 장소를 찾습니다. &lt;br>&lt;br> 이 기능에 사용되는 데이터는 Google 및 Google의 라이선스 제공자가 제공합니다. &lt;br>&lt;a href=%1$s>자세히 알아보기&lt;/a>
+        &lt;br>&lt;br>
+        이 기능을 사용하려면 Google 앱에서 휴대전화의 위치 정보를 사용하도록 설정해야 합니다.
+        &lt;br>&lt;a href=%2$s>자세히 알아보기&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"다이얼러"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"휴대전화"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"휴대전화"</string>

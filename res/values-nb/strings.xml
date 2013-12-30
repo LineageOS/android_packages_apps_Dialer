@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Innstillinger</string>
+    <string name="dialer_hint_find_contact_google">Søk i kontakter/lokale steder</string>
+    <string name="call_settings_label">Samtaleinnstillinger</string>
+    <string name="view_location_settings">Se posisjonsinnstillingene</string>
+    <string name="enable_reverse_lookup">Aktivér anrops-ID fra Google</string>
+    <string name="reverse_lookup_enabled">Oppringer-ID fra Google er aktivert</string>
+    <string name="google_caller_id_setting_title">Anrops-ID fra Google</string>
+    <string name="google_caller_id_setting__on">Vis navn på personer og bedrifter som ikke er lagt til i kontaktene mine.</string>
+    <string name="google_caller_id_setting__off">Av</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Anrops-ID
+        fra Google&lt;/a> viser deg navnene til personer og bedrifter som ikke er lagt til i kontaktlisten din.
+        &lt;br>&lt;br>
+        Oppdater synligheten for telefonnummeret ditt i
+        &lt;a href=%2$s>innstillingene for Google-kontoen&lt;/a>.
+        &lt;br>&lt;br>
+        Data som brukes i disse tjenestene leveres av Google og deres lisensgivere.
+        &lt;br>&lt;a href=%3$s>Finn ut mer.&lt;/a>"</string>
+    <string name="local_search_directory_label">Steder i nærheten</string>
+    <string name="local_search_setting_title">Steder i nærheten</string>
+    <string name="local_search_setting_on">Vis søkeresultater for nærliggende steder.</string>
+    <string name="local_search_setting_off">Av</string>
+    <string name="local_search_settings_text">"Når du søker fra telefonappen din, henter denne funksjonen posisjonen din og bruker den til å finne de nærmeste stedene som passer med søkeordet ditt, selv om de ikke er i kontaktlisten din. &lt;br>&lt;br> Dataene for disse funksjonene leveres av Google og deres lisensgivere. &lt;br>&lt;a href=%1$s>Finn ut mer.&lt;/a>
+        &lt;br>&lt;br>
+        Du må tillate Google-apper å bruke telefonens posisjon for at dette skal fungere.
+        &lt;br>&lt;a href=%2$s>Finn ut mer.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Oppringer"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>

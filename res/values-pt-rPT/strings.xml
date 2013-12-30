@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Definições</string>
+    <string name="dialer_hint_find_contact_google">Pesq. contactos e locais próx.</string>
+    <string name="call_settings_label">Definições de chamadas</string>
+    <string name="view_location_settings">Ver definições da localização</string>
+    <string name="enable_reverse_lookup">Ativar identif. de cham. pelo Google</string>
+    <string name="reverse_lookup_enabled">O ID da chamada da Google está ativado</string>
+    <string name="google_caller_id_setting_title">Identificação de chamadas pelo Google</string>
+    <string name="google_caller_id_setting__on">Mostr. nomes de pessoas e empr. que não estão nos contactos.</string>
+    <string name="google_caller_id_setting__off">Desativado</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>A identificação
+        de chamadas pelo Google&lt;/a> mostra os nomes de pessoas e empresas que não se encontram nos seus contactos.
+        &lt;br>&lt;br>
+        Atualize a deteção do seu número de telefone nas suas
+        &lt;a href=%2$s>definições da Conta Google&lt;/a>.
+        &lt;br>&lt;br>
+        Os dados a serem utilizados nestas funcionalidades são fornecidos pela Google e pelos seus licenciadores.
+        &lt;br>&lt;a href=%3$s>Saiba mais.&lt;/a>"</string>
+    <string name="local_search_directory_label">Locais próximos</string>
+    <string name="local_search_setting_title">Locais próximos</string>
+    <string name="local_search_setting_on">Mostrar resultados da pesquisa para locais próximos.</string>
+    <string name="local_search_setting_off">Desativado</string>
+    <string name="local_search_settings_text">"Quando pesquisa na aplicação Telefone, esta funcionalidade utilizará a sua localização para encontrar locais nas redondezas que correspondam à sua consulta, mesmo que não estejam nos seus contactos. &lt;br>&lt;br> Os dados utilizados nestas funcionalidades são fornecidos pela Google e respetivos licenciadores. &lt;br>&lt;a href=%1$s>Saiba mais.&lt;/a>
+        &lt;br>&lt;br>
+        Para que a funcionalidade funcione, tem de permitir que as aplicações da Google utilizem a localização do seu telemóvel.
+        &lt;br>&lt;a href=%2$s>Saiba mais.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Telefone"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefone"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefone"</string>

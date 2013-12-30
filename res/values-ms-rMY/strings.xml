@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Tetapan</string>
+    <string name="dialer_hint_find_contact_google">Cari kenalan &amp; tempat</string>
+    <string name="call_settings_label">Tetapan panggilan</string>
+    <string name="view_location_settings">Lihat tetapan lokasi</string>
+    <string name="enable_reverse_lookup">Dayakan ID pemanggil</string>
+    <string name="reverse_lookup_enabled">ID Pemanggil oleh Google didayakan</string>
+    <string name="google_caller_id_setting_title">ID pemanggil oleh Google</string>
+    <string name="google_caller_id_setting__on">Tunjukkan nama orang atau perniagaan yg tiada dalam kenalan.</string>
+    <string name="google_caller_id_setting__off">Mati</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>ID
+        Pemanggil oleh Google&lt;/a> menunjukkan nama orang dan perniagaan yang tiada dalam senarai kenalan anda.
+        &lt;br>&lt;br>
+        Kemas kini kebolehtemuan nombor telefon anda dalam
+        &lt;a href=%2$s>Tetapan akaun Google anda&lt;/a>.
+        &lt;br>&lt;br>
+        Data yang digunakan dalam ciri ini disediakan oleh Google dan pemberi lesen.
+        &lt;br>&lt;a href=%3$s>Ketahui lebih lanjut.&lt;/a>"</string>
+    <string name="local_search_directory_label">Tempat berdekatan</string>
+    <string name="local_search_setting_title">Tempat berdekatan</string>
+    <string name="local_search_setting_on">Paparkan hasil carian untuk tempat berdekatan.</string>
+    <string name="local_search_setting_off">Mati</string>
+    <string name="local_search_settings_text">"Apabila anda melakukan carian dari apl telefon, ciri ini akan menggunakan lokasi anda untuk mencari tempat berdekatan yang sepadan dengan pertanyaan anda, meskipun tiada dalam kenalan anda. &lt;br>&lt;br> Data yang digunakan dalam ciri ini disediakan oleh Google dan pemberi lesen. &lt;br>&lt;a href=%1$s>Ketahui lebih lanjut.&lt;/a>
+        &lt;br>&lt;br>
+        Anda mesti mendayakan apl Google untuk menggunakan lokasi telefon anda agar ciri ini berfungsi.
+        &lt;br>&lt;a href=%2$s>Ketahui lebih lanjut.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Pendail"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>

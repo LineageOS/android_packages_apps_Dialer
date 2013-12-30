@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Indstillinger</string>
+    <string name="dialer_hint_find_contact_google">Søg kontakter og steder tæt på</string>
+    <string name="call_settings_label">Indstillinger for opkald</string>
+    <string name="view_location_settings">Se Placeringsindstillinger</string>
+    <string name="enable_reverse_lookup">Aktivér opkaldsid fra Google</string>
+    <string name="reverse_lookup_enabled">Opkalds-id fra Google er aktiveret</string>
+    <string name="google_caller_id_setting_title">Opkaldsid fra Google</string>
+    <string name="google_caller_id_setting__on">Vis person- og virksomhedsnavne, hvis ikke kontaktpersoner</string>
+    <string name="google_caller_id_setting__off">Fra</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Opkalds-id
+        fra Google&lt;/a> viser navne på personer og virksomheder, som ikke er blandt dine kontaktpersoner.
+        &lt;br>&lt;br>
+        Du kan opdatere, hvor nemt dit telefonnummer skal kunne findes, i 
+        &lt;a href=%2$s>indstillingerne for din Google-konto&lt;/a>.
+        &lt;br>&lt;br>
+        De data, der bruges i disse funktioner, leveres af Google og deres licensgivere.
+        &lt;br>&lt;a href=%3$s>Få flere oplysninger.&lt;/a>"</string>
+    <string name="local_search_directory_label">Steder i nærheden</string>
+    <string name="local_search_setting_title">Steder i nærheden</string>
+    <string name="local_search_setting_on">Vis søgeresultater for steder i nærheden.</string>
+    <string name="local_search_setting_off">Fra</string>
+    <string name="local_search_settings_text">"Når du foretager søgninger fra telefonappen, bruger denne funktion din placering til at finde steder i nærheden, som stemmer overens med din forespørgsel – også hvis disse steder ikke er blandt dine kontaktpersoner. &lt;br>&lt;br> Data, der bruges til disse funktioner, leveres af Google og dennes licensgivere. &lt;br>&lt;a href=%1$s>Få flere oplysninger.&lt;/a>
+        &lt;br>&lt;br>
+        Du skal aktivere anvendelse af din placering i Google-apps, før dette virker.
+        &lt;br>&lt;a href=%2$s>Få flere oplysninger.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Opkald"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>

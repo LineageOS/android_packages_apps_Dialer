@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">ການຕັ້ງຄ່າ</string>
+    <string name="dialer_hint_find_contact_google">ຊອກຫາລາຍຊື່ຜູ່ຕິດຕໍ່ ແລະສະຖານທີ່ໃກ້ຄຽງ</string>
+    <string name="call_settings_label">ການຕັ້ງຄ່າການໂທ</string>
+    <string name="view_location_settings">ເບິ່ງການຕັ້ງຄ່າສະຖານທີ່</string>
+    <string name="enable_reverse_lookup">ເປີດໃຊ້ງານ caller ID ໂດຍ Google</string>
+    <string name="reverse_lookup_enabled">Caller ID ໂດຍ Google ຖືກເປີດນຳໃຊ້ແລ້ວ</string>
+    <string name="google_caller_id_setting_title">Caller ID ໂດຍ Google</string>
+    <string name="google_caller_id_setting__on">ສະແດງຊື່ຂອງຄົນ ແລະທຸລະກິດທີ່ບໍ່ມີໃນລາຍຊື່ຜູ່ຕິດຕໍ່ຂອງຂ້ອຍ.</string>
+    <string name="google_caller_id_setting__off">ປິດ</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Caller
+        ID ໂດຍ Google&lt;/a> ສະແດງຊື່ຂອງຄົນ ແລະທຸລະກິດທີ່ບໍ່ມີຢູ່ໃນລາຍຊື່ຜູ່ຕິດຕໍ່ຂອງທ່ານ.
+        &lt;br>&lt;br>
+        ອັບເດດການເບິ່ງເຫັນຂອງໝາຍເລກໂທລະສັບຂອງທ່ານໄດ້ໃນ
+        &lt;a href=%2$s>ການຕັ້ງຄ່າບັນຊີ Google&lt;/a>.
+        &lt;br>&lt;br>
+        ຂໍ້ມູນທີ່ໃຊ້ໃນຄຸນສົມບັດເຫຼົ່ານີ້ ແມ່ນມອບໃຫ້ໂດຍ Google ແລະຜູ່ຖືລິຂະສິດຂອງມັນ.
+        &lt;br>&lt;a href=%3$s>ສຶກສາເພີ່ມເຕີມ.&lt;/a>"</string>
+    <string name="local_search_directory_label">ສະຖານທີ່ໃກ້ຄຽງ</string>
+    <string name="local_search_setting_title">ສະຖານທີ່ໃກ້ຄຽງ</string>
+    <string name="local_search_setting_on">ສະແດງຜົນການຊອກຫາສະຖານທີ່ໃກ້ຄຽງ.</string>
+    <string name="local_search_setting_off">ປິດ</string>
+    <string name="local_search_settings_text">"ເມື່ອທ່ານເຮັດການຊອກຫາຈາກແອັບຯໃນໂທລະສັບ, ຄຸນນະສົມບັດນີ້ຈະໃຊ້ທີ່ຕັ້ງຂອງທ່ານ ໃນການຊອກຫາສະຖານທີ່ໃກ້ຄຽງ ທີ່ກົງກັບຄຳໃນການຊອກຫາຂອງທ່ານ, ເຖິງແມ່ນວ່າພວກມັນຈະບໍ່ຢູ່ໃນລາຍຊື່ຜູ້ຕິດຕໍ່ຂອງທ່ານກໍ່ຕາມ. &lt;br>&lt;br> ຂໍ້ມູນທີ່ຖືກໃຊ້ໂດຍຄຸນນະສົມບັດນີ້ແມ່ນຖືກສະໜອງໃຫ້ໂດຍ Google ແລະ ຜູ້ອະນຸມັດສິດຂອງພວກມັນ. &lt;br>&lt;a href=%1$s>ສຶກສາເພີ່ມເຕີມ.&lt;/a>
+        &lt;br>&lt;br>
+        ທ່ານຕ້ອງເປີດໃຫ້ Google apps ສາມາດນຳໃຊ້ບໍລິການສະຖານທີ່ ຈຶ່ງຈະສາມາດນຳໃຊ້ຄຸນນະສົມບັດນີ້ໄດ້.
+        &lt;br>&lt;a href=%2$s>ສຶກສາເພີ່ມເຕີມ.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"ແປ້ນໂທລະສັບ"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"ໂທລະສັບ"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ໂທລະສັບ"</string>

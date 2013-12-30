@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Настройки</string>
+    <string name="dialer_hint_find_contact_google">Поиск контактов и мест рядом</string>
+    <string name="call_settings_label">Настройки вызовов</string>
+    <string name="view_location_settings">Настройки геоданных</string>
+    <string name="enable_reverse_lookup">Включить АОН Google</string>
+    <string name="reverse_lookup_enabled">АОН (Google) включен</string>
+    <string name="google_caller_id_setting_title">АОН (Google)</string>
+    <string name="google_caller_id_setting__on">Показывать имена и названия, не входящие в список контактов</string>
+    <string name="google_caller_id_setting__off">ВЫКЛ</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>АОН
+        от Google&lt;/a> определяет имена звонящих пользователей и названия организаций, даже если их нет в вашем списке контактов.
+        &lt;br>&lt;br>
+        Параметры видимости номера телефона можно изменить в
+        &lt;a href=%2$s>настройках аккаунта Google&lt;/a>.
+        &lt;br>&lt;br>
+        Данные, которые используются в работе этих функций, предоставлены компанией Google и ее лицензиарами.
+        &lt;br>&lt;a href=%3$s>Подробнее…&lt;/a>"</string>
+    <string name="local_search_directory_label">Места рядом</string>
+    <string name="local_search_setting_title">Места рядом</string>
+    <string name="local_search_setting_on">Показывать результаты поиска мест рядом</string>
+    <string name="local_search_setting_off">ВЫКЛ</string>
+    <string name="local_search_settings_text">"Когда вы выполняете поиск с помощью приложения на телефоне, эта функция позволяет на основании данных о вашем местоположении находить подходящие объекты неподалеку, даже если их нет в ваших контактах.&lt;br>&lt;br>Данные для этой функции предоставлены компанией Google и ее лицензиарами.&lt;br>&lt;a href=%1$s>Подробнее…&lt;/a>
+        &lt;br>&lt;br>
+        Для работы функции необходимо разрешить приложениям Google использовать геоданные.
+        &lt;br>&lt;a href=%2$s>Подробнее…&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Телефон"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Телефон"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Кнопки"</string>

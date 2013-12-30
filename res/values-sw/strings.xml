@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Mipangilio</string>
+    <string name="dialer_hint_find_contact_google">Tafuta anwani na maeneo ya karibu</string>
+    <string name="call_settings_label">Mipangilio ya simu</string>
+    <string name="view_location_settings">Tazama mipangilio ya eneo</string>
+    <string name="enable_reverse_lookup">Washa kitambulisho cha anayepiga cha Google</string>
+    <string name="reverse_lookup_enabled">Kitambulisho cha Anayepiga kutoka Google kimewashwa</string>
+    <string name="google_caller_id_setting_title">Kitambulisho cha mpigaji cha Google</string>
+    <string name="google_caller_id_setting__on">Onyesha majina ya watu na biashara ambao hawako katika anwani zangu.</string>
+    <string name="google_caller_id_setting__off">Imezimwa</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Kitambulisho cha
+        Anayepiga kilichoundwa na Google&lt;/a> kinaonyesha majina ya watu na biashara ambazo haziko katika anwani zako.
+        &lt;br>&lt;br>
+        Sasisha uwezo wa kutambulika kwa nambari yako ya simu katika
+        &lt;a href=%2$s>mipangilio ya akaunti yako ya Google&lt;/a>.
+        &lt;br>&lt;br>
+        Data inayotumiwa katika vipengee hivi inatolewa na Google na watoa leseni wake.
+        &lt;br>&lt;a href=%3$s>Pata maelezo zaidi.&lt;/a>"</string>
+    <string name="local_search_directory_label">Maeneo ya karibu</string>
+    <string name="local_search_setting_title">Maeneo ya karibu</string>
+    <string name="local_search_setting_on">Onyesha matokeo ya utafutaji wa maeneo ya karibu.</string>
+    <string name="local_search_setting_off">Imezimwa</string>
+    <string name="local_search_settings_text">"Unapotafuta kwenye programu ya simu, kipengele hiki kitatambua eneo la kifaa chako na kulitumia kupata maeneo yaliyo karibu ambayo yanalingana na hoja yako ya utafutaji, hata kama hayako katika anwani zako. &lt;br>&lt;br> Data inayotumika katika vipengele hivi inatolewa na Google na watoa leseni wake. &lt;br>&lt;a href=%1$s>Pata maelezo zaidi.&lt;/a>
+        &lt;br>&lt;br>
+        Lazima uwashe programu za Google zitumie eneo la simu yako ili hii huduma hii ifanye kazi.
+        &lt;br>&lt;a href=%2$s>Pata maelezo zaidi.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Kibonyezi"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Simu"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Simu"</string>

@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">設定</string>
+    <string name="dialer_hint_find_contact_google">搜尋聯絡人和附近地點</string>
+    <string name="call_settings_label">通話設定</string>
+    <string name="view_location_settings">查看位置設定</string>
+    <string name="enable_reverse_lookup">啟用 Google 來電顯示</string>
+    <string name="reverse_lookup_enabled">Google 來電顯示已啟用</string>
+    <string name="google_caller_id_setting_title">Google 來電顯示</string>
+    <string name="google_caller_id_setting__on">顯示不在我的聯絡人名單中的使用者和商家名稱。</string>
+    <string name="google_caller_id_setting__off">關閉</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Google
+        來電顯示&lt;/a>會顯示不在您通訊錄中的使用者和商家名稱。
+        &lt;br>&lt;br>
+        您可以在
+        &lt;a href=%2$s>Google 帳戶設定&lt;/a>中更新電話號碼的可受偵測的程度。
+        &lt;br>&lt;br>
+        相關功能所使用的資料由 Google 和資料授權者提供。
+        &lt;br>&lt;a href=%3$s>瞭解詳情&lt;/a>"</string>
+    <string name="local_search_directory_label">附近地點</string>
+    <string name="local_search_setting_title">附近地點</string>
+    <string name="local_search_setting_on">顯示附近地點搜尋結果。</string>
+    <string name="local_search_setting_off">關閉</string>
+    <string name="local_search_settings_text">"透過手機應用程式進行搜尋時，會使用您的位置資訊來尋找附近有無相符的項目 (即使這些項目不在您的聯絡人名單中)。&lt;br>&lt;br>相關功能所使用的資料由 Google 和資料授權者提供。&lt;br>&lt;a href=%1$s>瞭解詳情&lt;/a>
+        &lt;br>&lt;br>
+        您必須允許 Google 應用程式使用手機的位置資訊，這項功能才能正常運作。
+        &lt;br>&lt;a href=%2$s>瞭解詳情&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"撥號"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"電話"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"電話"</string>

@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Ayarlar</string>
+    <string name="dialer_hint_find_contact_google">Kişilerde ve yakındaki yerlerde ara</string>
+    <string name="call_settings_label">Çağrı ayarları</string>
+    <string name="view_location_settings">Konum ayarlarını görüntüle</string>
+    <string name="enable_reverse_lookup">"Google'ın arayan kimliğini etkinleştir"</string>
+    <string name="reverse_lookup_enabled">"Google'ın sunduğu arayan kimliği özelliği etkinleştirildi"</string>
+    <string name="google_caller_id_setting_title">"Google'ın Sunduğu Arayan Kimliği Hizmeti"</string>
+    <string name="google_caller_id_setting__on">Kişilerimde olmayan kişilerin ve işletmelerin adlarını göster.</string>
+    <string name="google_caller_id_setting__off">Kapalı</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Google'ın Sunduğu
+        arayan kimliği hizmeti&lt;/a> kişilerinizde kayıtlı olmayan kişilerin ve işletmelerin adlarını gösterir.
+        &lt;br>&lt;br>
+        Telefon numaranızın bulunabilirliğini
+        &lt;a href=%2$s>Google hesabı ayarlarınızda&lt;/a> güncelleyin.
+        &lt;br>&lt;br>
+        Bu özelliklerde kullanılan veriler Google ve lisans verenleri tarafından sağlanır.
+        &lt;br>&lt;a href=%3$s>Daha fazla bilgi edinin.&lt;/a>"</string>
+    <string name="local_search_directory_label">Yakındaki yerler</string>
+    <string name="local_search_setting_title">Yakındaki yerler</string>
+    <string name="local_search_setting_on">Yakınlardaki yerler için arama sonuçlarını görüntüle.</string>
+    <string name="local_search_setting_off">Kapalı</string>
+    <string name="local_search_settings_text">"Telefon uygulamasından arama yaptığınızda, bu özellik, arama sorgunuzla eşleşen yakındaki yerleri (kişileriniz arasında olmasa bile) bulmak için konum bilgilerinizi kullanır. &lt;br>&lt;br> Bu özelliklere ilişkin veriler Google ve lisans verenleri tarafından sağlanır. &lt;br>&lt;a href=%1$s>Daha fazla bilgi edinin.&lt;/a>
+        &lt;br>&lt;br>
+        Bu özelliğin kullanılabilmesi için Google uygulamalarının telefonunuzun konum bilgilerini kullanmasını etkinleştirmelisiniz.
+        &lt;br>&lt;a href=%2$s>Daha fazla bilgi edinin.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Çevirici"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>

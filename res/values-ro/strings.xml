@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Setări</string>
+    <string name="dialer_hint_find_contact_google">Căut. pers. și loc. în aprop.</string>
+    <string name="call_settings_label">Setări pentru apeluri</string>
+    <string name="view_location_settings">Afișați setările locației</string>
+    <string name="enable_reverse_lookup">Activați ID apelant (Google)</string>
+    <string name="reverse_lookup_enabled">Funcția ID apelant de la Google este activată</string>
+    <string name="google_caller_id_setting_title">Serviciul ID apelant de la Google</string>
+    <string name="google_caller_id_setting__on">Afișați numele apelanților care nu sunt în agendă.</string>
+    <string name="google_caller_id_setting__off">Dezactivat</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>ID apelant
+        de la Google&lt;/a> afișează numele persoanelor și companiilor care nu se află în agendă.
+        &lt;br>&lt;br>
+        Actualizați vizibilitatea numărului dvs. de telefon în
+        &lt;a href=%2$s>setările contului Google&lt;/a>.
+        &lt;br>&lt;br>
+        Datele pentru aceste funcții sunt oferite de Google și de furnizorii săi de licențe.
+        &lt;br>&lt;a href=%3$s>Aflați mai multe.&lt;/a>"</string>
+    <string name="local_search_directory_label">Locații din apropiere</string>
+    <string name="local_search_setting_title">Locații din apropiere</string>
+    <string name="local_search_setting_on">Afișați rezultatele căutării pentru locațiile din apropiere.</string>
+    <string name="local_search_setting_off">Dezactivat</string>
+    <string name="local_search_settings_text">"Când căutați din aplicația telefonului, această funcție va detecta locația dvs. și o va utiliza pentru a găsi locațiile din apropiere care corespund termenului dvs. de căutare, chiar dacă acestea nu sunt în agendă. &lt;br>&lt;br> Datele pentru aceste funcții sunt oferite de Google și furnizorii săi de licență. &lt;br>&lt;a href=%1$s&amp;gtAflați mai multe.&lt;/a>
+        &lt;br>&lt;br>
+        Pentru această funcție, trebuie să activați utilizarea locației telefonului dvs. de către aplicațiile Google.
+        &lt;br>&lt;a href=%2$s>Aflați mai multe.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Telefon"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>

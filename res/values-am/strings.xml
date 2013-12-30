@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">ቅንብሮች</string>
+    <string name="dialer_hint_find_contact_google">እውቂያዎችን እና በአቅራቢያ ያሉ ቦታዎችን ይፈልጉ</string>
+    <string name="call_settings_label">የጥሪ ቅንብሮች</string>
+    <string name="view_location_settings">የአካባቢ ቅንብሮችን ይመልከቱ</string>
+    <string name="enable_reverse_lookup">የደዋይ መታወቂያ በGoogle ያንቁ</string>
+    <string name="reverse_lookup_enabled">የደዋይ መታወቂያ በGoogle ነቅቷል</string>
+    <string name="google_caller_id_setting_title">የደዋይ መታወቂያ በGoogle</string>
+    <string name="google_caller_id_setting__on">በዕውቂያዎቼ ውስጥ የሌሉ ሰዎችን እና ንግዶችን ስም አሳይ።</string>
+    <string name="google_caller_id_setting__off">ጠፍቷል</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>የደዋይ
+ መታወቂያ በGoogle&lt;/a> በእውቂያዎችዎ ውስጥ የሌሉ ሰዎችን እና ንግዶችን ስሞች ያሳያል።
+ &lt;br>&lt;br>
+ በእርስዎ 
+ &lt;a href=%2$s>የGoogle መለያ ቅንብሮች&lt;/a> ውስጥ የስልክ ቁጥርዎን ተገኚነት ያዘምኑ።
+ &lt;br>&lt;br>
+ በእነዚህ ባህሪያት ውስጥ ጥቅም ላይ የሚውለው ውሂብ የሚቀርበው በGoogle እና በፈቃድ ሰጪዎቹ ነው።
+ &lt;br>&lt;a href=%3$s>ተጨማሪ ይወቁ።&lt;/a>"</string>
+    <string name="local_search_directory_label">በአቅራቢያ ያሉ ቦታዎች</string>
+    <string name="local_search_setting_title">በአቅራቢያ ያሉ ቦታዎች</string>
+    <string name="local_search_setting_on">በአቅራቢያ ላሉ ቦታዎች የፍለጋ ውጤቶችን አሳይ።</string>
+    <string name="local_search_setting_off">ጠፍቷል</string>
+    <string name="local_search_settings_text">"ከስልክ መተግበሪያው ላይ ሲፈልጉ ይህ ባህሪ ከእርስዎ መጠይቅ ጋር የሚዛመዱ በአቅራቢያ ያሉ ቦታዎችን ለማግኘት የእርስዎን አካባቢ ይጠቀማል፣ በእርስዎ ዕውቂያዎች ውስጥ ባይኖሩም እንኳን። &lt;br>&lt;br> በእነዚህ ባህሪያት ውስጥ ስራ ላይ የሚውለው ውሂብ የሚቀርበው በGoogle እና በፈቃድ ሰጪዎቹ ነው። &lt;br>&lt;a href=%1$s>ተጨማሪ ይወቁ።&lt;/a>
+ &lt;br>&lt;br>
+        ይሄ እንዲሰራ የGoogle መተግበሪያዎች የስልክዎን አካባቢ እንዲጠቀም ማንቃት አለብዎት።
+ &lt;br>&lt;a href=%2$s>ተጨማሪ ይወቁ።&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"ደዋይ"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"ስልክ"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ስልክ"</string>

@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Inställningar</string>
+    <string name="dialer_hint_find_contact_google">Sök efter kontakter och platser i närheten</string>
+    <string name="call_settings_label">Samtalsinställningar</string>
+    <string name="view_location_settings">Visa platsinställningar</string>
+    <string name="enable_reverse_lookup">Aktivera nummerpresentatör från Google</string>
+    <string name="reverse_lookup_enabled">Nummerpresentatör från Google har aktiverats</string>
+    <string name="google_caller_id_setting_title">Nummerpresentatör från Google</string>
+    <string name="google_caller_id_setting__on">Visa namn på personer/företag som inte är i kontaktlistan.</string>
+    <string name="google_caller_id_setting__off">Av</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Nummerpresentatören
+        från Google&lt;/a> visar namnen på personer och företag som inte finns i dina kontakter.
+        &lt;br>&lt;br>
+        Uppdatera synligheten för ditt telefonnummer i
+        &lt;a href=%2$s>inställningarna för ditt Google-konto&lt;/a>.
+        &lt;br>&lt;br>
+        Uppgifterna som används i dessa funktioner tillhandahålls av Google och Googles licensgivare.
+        &lt;br>&lt;a href=%3$s>Läs mer.&lt;/a>"</string>
+    <string name="local_search_directory_label">Platser i närheten</string>
+    <string name="local_search_setting_title">Platser i närheten</string>
+    <string name="local_search_setting_on">Visa sökresultat för platser i närheten.</string>
+    <string name="local_search_setting_off">Av</string>
+    <string name="local_search_settings_text">"När du söker i mobilappen används enhetens plats av funktionen för att hitta ställen i närheten som matchar din fråga, även om de inte finns bland dina kontakter. &lt;br>&lt;br> Data för dessa funktioner tillhandahålls av Google och Googles licensgivare. &lt;br>&lt;a href=%1$s>Läs mer.&lt;/a>
+        &lt;br>&lt;br>
+        För att detta ska fungera måste du tillåta att appar från Google använder mobilens plats.
+        &lt;br>&lt;a href=%2$s>Läs mer.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Samtal"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>

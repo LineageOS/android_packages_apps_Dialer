@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">การตั้งค่า</string>
+    <string name="dialer_hint_find_contact_google">ค้นหาสมุดติตด่อและที่ใกล้เคียง</string>
+    <string name="call_settings_label">การตั้งค่าการโทร</string>
+    <string name="view_location_settings">ดูการตั้งค่าสถานที่</string>
+    <string name="enable_reverse_lookup">เปิดใช้หมายเลขผู้โทรจาก Google</string>
+    <string name="reverse_lookup_enabled">เปิดใช้หมายเลขผู้โทรโดย Google แล้ว</string>
+    <string name="google_caller_id_setting_title">หมายเลขผู้โทรโดย Google</string>
+    <string name="google_caller_id_setting__on">แสดงชื่อคนและธุรกิจที่ไม่ได้อยู่ในที่อยู่ติดต่อของฉัน</string>
+    <string name="google_caller_id_setting__off">ปิด</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>หมายเลข
+        ผู้โทรโดย Google&lt;/a>จะแสดงชื่อของบุคคลและธุรกิจที่ไม่ได้อยู่ในสมุดติดต่อของคุณ
+        &lt;br>&lt;br>
+        อัปเดตการค้นพบได้ของหมายเลขโทรศัพท์ของคุณใน
+        &lt;a href=%2$s>การตั้งค่าบัญชี Google&lt;/a>
+        &lt;br>&lt;br>
+        ข้อมูลที่ใช้ในคุณลักษณะนี้ได้มาจาก Google และผู้ออกใบอนุญาตของ Google
+        &lt;br>&lt;a href=%3$s>เรียนรู้เพิ่มเติม&lt;/a>"</string>
+    <string name="local_search_directory_label">สถานที่ใกล้เคียง</string>
+    <string name="local_search_setting_title">สถานที่ใกล้เคียง</string>
+    <string name="local_search_setting_on">แสดงผลการค้นหาสำหรับสถานที่ใกล้เคียง</string>
+    <string name="local_search_setting_off">ปิด</string>
+    <string name="local_search_settings_text">"เมื่อคุณค้นหาจากแอป \"โทรศัพท์\" คุณลักษณะนี้จะใช้ตำแหน่งของคุณเพื่อค้นหาสถานที่ใกล้เคียงที่ตรงกับข้อความค้นหา แม้ว่าจะไม่ได้อยู่ในสมุดติดต่อของคุณ &lt;br>&lt;br> Google และผู้อนุญาตของบริษัทเป็นผู้ให้ข้อมูลที่ใช้ในคุณลักษณะเหล่านี้ &lt;br>&lt;a href=%1$s>เรียนรู้เพิ่มเติม&lt;/a>
+        &lt;br>&lt;br>
+        คุณต้องเปิดใช้งาน Google Apps เพื่อใช้ตำแหน่งของโทรศัพท์ คุณลักษณะนี้จึงจะทำงานได้
+        &lt;br>&lt;a href=%2$s>เรียนรู้เพิ่มเติม&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"โปรแกรมโทรออก"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"โทรศัพท์"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"โทรศัพท์"</string>

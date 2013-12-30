@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Կարգավորումներ</string>
+    <string name="dialer_hint_find_contact_google">Որոնել կոնտակտներ, մոտակա վայրեր</string>
+    <string name="call_settings_label">Զանգի կարգավորումները</string>
+    <string name="view_location_settings">Դիտել տեղադրության կարգավորումները</string>
+    <string name="enable_reverse_lookup">Միացնել զանգողի ID-ն Google-ով</string>
+    <string name="reverse_lookup_enabled">Զանգողի ID-ն Google-ի կողմից ակտիվացված է</string>
+    <string name="google_caller_id_setting_title">Զանգողի ID՝ Google-ից</string>
+    <string name="google_caller_id_setting__on">Ցույց տալ մարդկանց և ընկերությունների անունները, որոնք իմ կոնտակտներում չեն:</string>
+    <string name="google_caller_id_setting__off">Անջատված է</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Զանգողի
+        ID-ն Google-ի կողմից&lt;/a> ցույց է տալիս ձեր կոնտակտներից դուրս մարդկանց և ընկերություններին:
+        &lt;br>&lt;br>
+        Թարմացրեք ձեր հեռախոսահամարի հայտնաբերելիությունը ձեր
+        &lt;a href=%2$s>Google հաշվի կարգավորումներում&lt;/a>:
+        &lt;br>&lt;br>
+        Այս գործառույթներում օգտագործվող տվյալները տրամադրված են Google-ի և նրա հավաստագրվածների կողմից:
+        &lt;br>&lt;a href=%3$s>Իմացեք ավելին:&lt;/a>"</string>
+    <string name="local_search_directory_label">Մոտակա վայրեր</string>
+    <string name="local_search_setting_title">Մոտակա վայրեր</string>
+    <string name="local_search_setting_on">Ցուցադրել մոտակա վայրերի որոնման արդյունքները:</string>
+    <string name="local_search_setting_off">Անջատված է</string>
+    <string name="local_search_settings_text">"Հեռախոսի ծրագրով որոնելիս այս գործառույթը կօգտագործի ձեր տեղադրությունը՝ ձեր որոնմանը համապատասխան մոտական վայրերը գտնելու համար, նույնիսկ եթե դրանք ձեր կոնտակտներում չկան: &lt;br>&lt;br> Այս գործառույթների տվյալները տրամադրվում են Google-ի և նրա արտոնագրվածների կողմից: &lt;br>&lt;a href=%1$s>Իմացեք ավելին:&lt;/a>
+        &lt;br>&lt;br>
+        Հեռախոսի տեղադրության գործառույթն օգտագործելու համար պետք է միացնեք Google Apps-ը:
+        &lt;br>&lt;a href=%2$s>Իմացեք ավելին:&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Համարհավաքիչ"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Հեռախոս"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Հեռախոս"</string>

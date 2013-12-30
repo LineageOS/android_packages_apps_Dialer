@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Iestatījumi</string>
+    <string name="dialer_hint_find_contact_google">Meklēt kont. un vietas blakus</string>
+    <string name="call_settings_label">Zvanu iestatījumi</string>
+    <string name="view_location_settings">Skatīt atraš. vietas iestat.</string>
+    <string name="enable_reverse_lookup">Iespējot Google zvanītāja ID</string>
+    <string name="reverse_lookup_enabled">Google zvanītāja ID ir iespējots.</string>
+    <string name="google_caller_id_setting_title">Google nodrošinātais zvanītāja ID</string>
+    <string name="google_caller_id_setting__on">Rādīt pers. vārdus/uzņ. nos., kuru nav kontaktp. sarakstā.</string>
+    <string name="google_caller_id_setting__off">Izslēgts</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Google
+        zvanītāja ID&lt;/a> parāda to personu vārdus un uzņēmumu nosaukumus, kas nav jūsu kontaktpersonu sarakstā.
+        &lt;br>&lt;br>
+        Atjauniniet sava tālruņa numura noteikšanas iestatījumu sava
+        &lt;a href=%2$s>Google konta iestatījumos&lt;/a>.
+        &lt;br>&lt;br>
+        Šajās funkcijās izmantotos datus nodrošina uzņēmums Google un tā licences devēji.
+        &lt;br>&lt;a href=%3$s>Uzziniet vairāk&lt;/a>."</string>
+    <string name="local_search_directory_label">Tuvumā esošās vietas</string>
+    <string name="local_search_setting_title">Tuvumā esošās vietas</string>
+    <string name="local_search_setting_on">Tiek rādīti meklēšanas rezultāti par vietām blakus.</string>
+    <string name="local_search_setting_off">Izslēgti</string>
+    <string name="local_search_settings_text">"Meklējot tālruņa lietotnē, šai funkcijai tiks izmantota informācija par jūsu atrašanās vietu, lai atrastu vaicājumam atbilstošas vietas blakus, pat ja to nav jūsu kontaktpersonu sarakstā. &lt;br>&lt;br> Datus šīm funkcijām nodrošina uzņēmums Google un tā licenču devēji. &lt;br>&lt;a href=%1$s>Uzziniet vairāk.&lt;/a>.
+        &lt;br>&lt;br>
+        Lai šī funkcija darbotos, jums ir jāiespējo Google lietotņu piekļuve informācijai par jūsu atrašanās vietu.
+        &lt;br>&lt;a href=%2$s>Uzziniet vairāk.&lt;/a>."</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Tālrunis"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Tālrunis"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Zvanīt"</string>

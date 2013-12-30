@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Ρυθμίσεις</string>
+    <string name="dialer_hint_find_contact_google">Αναζήτηση επαφών - κοντ.μερών</string>
+    <string name="call_settings_label">Ρυθμίσεις κλήσεων</string>
+    <string name="view_location_settings">Προβολή ρυθμίσεων τοποθεσίας</string>
+    <string name="enable_reverse_lookup">Ενεργ.αναγν.κλήσης από Google</string>
+    <string name="reverse_lookup_enabled">Ενεργοποιήθηκε η αναγνώριση κλήσης από την Google</string>
+    <string name="google_caller_id_setting_title">Αναγνωριστικό καλούντος από την Google</string>
+    <string name="google_caller_id_setting__on">Εμφάνιση ονομάτων ατόμων και επιχειρήσεων εκτός επαφών μου.</string>
+    <string name="google_caller_id_setting__off">Ανενεργό</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>Το αναγνωριστικό
+        καλούντος από την Google&lt;/a> εμφανίζει ονόματα για άτομα και επιχειρήσεις που δεν βρίσκονται στις επαφές σας.
+        &lt;br>&lt;br>
+        Ενημερώστε την ανιχνευσιμότητα του αριθμού τηλεφώνου σας στις
+        &lt;a href=%2$s>ρυθμίσεις λογαριασμού Google&lt;/a>.
+        &lt;br>&lt;br>
+        Τα δεδομένα που χρησιμοποιούνται σε αυτές τις λειτουργίες παρέχονται από την Google και τους παρόχους αδείας της.
+        &lt;br>&lt;a href=%3$s>Μάθετε περισσότερα.&lt;/a>"</string>
+    <string name="local_search_directory_label">Κοντινά μέρη</string>
+    <string name="local_search_setting_title">Κοντινά μέρη</string>
+    <string name="local_search_setting_on">Εμφανίζονται τα αποτελέσματα αναζήτησης για κοντινά μέρη.</string>
+    <string name="local_search_setting_off">Ανενεργό</string>
+    <string name="local_search_settings_text">"Όταν πραγματοποιείτε αναζητήσεις από μια εφαρμογή τηλεφώνου, αυτή η λειτουργία θα χρησιμοποιήσει την τοποθεσία της συσκευής σας για να εντοπίσει τα πλησιέστερα μέρη που αντιστοιχούν στον όρο αναζήτησής σας, ακόμα και αν δεν ανήκουν στις επαφές σας. &lt;br>&lt;br> Τα δεδομένα για αυτές τις λειτουργίες παρέχονται από την Google και τους δικαιοπαρόχους της. &lt;br>&lt;a href=%1$s>Μάθετε περισσότερα.&lt;/a>
+        &lt;br>&lt;br>
+        Θα πρέπει να ενεργοποιήσετε τη δυνατότητα χρήσης της τοποθεσίας του τηλεφώνου σας για τις εφαρμογές Google προκειμένου να λειτουργεί αυτό το χαρακτηριστικό.
+        &lt;br>&lt;a href=%2$s>Μάθετε περισσότερα.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Πρόγραμμα κλήσης"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Τηλέφωνο"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Τηλέφωνο"</string>

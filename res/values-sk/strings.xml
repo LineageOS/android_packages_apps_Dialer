@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">Nastavenia</string>
+    <string name="dialer_hint_find_contact_google">Hľadať kontakty a blízke miesta</string>
+    <string name="call_settings_label">Nastavenia hovorov</string>
+    <string name="view_location_settings">Zobrazenie nastavení polohy</string>
+    <string name="enable_reverse_lookup">Povoliť ID volajúceho Google</string>
+    <string name="reverse_lookup_enabled">Identifikácia volajúceho Google je povolená</string>
+    <string name="google_caller_id_setting_title">Identifikácia volajúceho pomocou Googlu</string>
+    <string name="google_caller_id_setting__on">Zobraziť mená osôb a firiem, ktoré nie sú v kontaktoch.</string>
+    <string name="google_caller_id_setting__off">Vypnuté</string>
+    <string name="google_caller_id_settings_text">"Funkcia &lt;a href=%1$s>Identifikácia
+        volajúceho od spoločnosti Google&lt;/a> zobrazuje mená ľudí a firiem, ktoré nie sú vo vašich kontaktoch.
+        &lt;br>&lt;br>
+        Aktualizujte viditeľnosť svojho telefónneho čísla v
+        &lt;a href=%2$s>nastaveniach účtu Google &lt;/a>.
+        &lt;br>&lt;br>
+        Údaje používané v týchto funkciách sú poskytované spoločnosťou Google a jej poskytovateľmi licencií.
+        &lt;br>&lt;a href=%3$s>Prečítajte si viac informácií.&lt;/a>"</string>
+    <string name="local_search_directory_label">Miesta v blízkosti</string>
+    <string name="local_search_setting_title">Miesta v blízkosti</string>
+    <string name="local_search_setting_on">Zobrazenie výsledkov vyhľadávania pre miesta v blízkosti</string>
+    <string name="local_search_setting_off">Vypnuté</string>
+    <string name="local_search_settings_text">"Ak pri vyhľadávaní používate mobilnú aplikáciu, funkcia použije vašu polohu na vyhľadanie miest v blízkosti zodpovedajúcich dopytu, a to aj v prípade, ak sa nenachádzajú vo vašich kontaktoch.&lt;br>&lt;br> Údaje použité v týchto funkciách poskytuje spoločnosť Google a jej poskytovatelia licencií. &lt;br>&lt;a href=%1$s>Viac informácií.&lt;/a>
+        &lt;br>&lt;br>
+        Na to, aby táto funkcia fungovala, musíte v aplikáciách Google povoliť používanie polohy vášho telefónu.
+        &lt;br>&lt;a href=%2$s>Viac informácií.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"Vytáčanie"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"Telefón"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefón"</string>

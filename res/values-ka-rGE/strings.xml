@@ -17,6 +17,33 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Google Dialer (auto merged, do not edit) (BEGIN: do not remove) -->
+    <string name="dialer_settings_label">პარამეტრები</string>
+    <string name="dialer_hint_find_contact_google">კონტაქტების &amp; ახლომდ.ადგ. ძიება</string>
+    <string name="call_settings_label">ზარის პარამეტრები</string>
+    <string name="view_location_settings">მდებარეობის პარამეტრების ნახვა</string>
+    <string name="enable_reverse_lookup">Google-ის მიერ მრეკავის ამოცნობის ჩართვა</string>
+    <string name="reverse_lookup_enabled">Google-ის მიერ მრეკავის ამომცნობი ჩართულია</string>
+    <string name="google_caller_id_setting_title">Google-ის მიერ მრეკავის ამოცნობა</string>
+    <string name="google_caller_id_setting__on">იმ ხალხისა და კომპანიების სახელების ჩვენება, რომლებიც ჩემს კონტაქტებში არ არის.</string>
+    <string name="google_caller_id_setting__off">გამორთული</string>
+    <string name="google_caller_id_settings_text">"&lt;a href=%1$s>მრეკავის
+        ID Google&lt;/a>-ისგან  აჩვენებს იმ ადამიანებისა და ბიზნესების სახელებს, რომლებიც კონტაქტებში არ გყავთ. 
+        &lt;br>&lt;br>
+        განაახლეთ თქვენი ნომრის აღმოჩენადობა თქვენი
+        &lt;a href=%2$s>Google-ის ანგარიშის პარამეტრებში&lt;/a>.
+        &lt;br>&lt;br>
+        ამ ფუნქციებში გამოყენებული მონაცემები უზრუნველყოფილია Google-ის და მისი ლიცენზორების მიერ.
+        &lt;br>&lt;a href=%3$s>შეიტყვეთ მეტი.&lt;/a>"</string>
+    <string name="local_search_directory_label">ახლომდებარე ადგილები</string>
+    <string name="local_search_setting_title">ახლომდებარე ადგილები</string>
+    <string name="local_search_setting_on">ახლომდებარე ადგილების ძიების შედეგების ჩვენება.</string>
+    <string name="local_search_setting_off">გამორთული</string>
+    <string name="local_search_settings_text">"ტელეფონის აპიდან ძიების განხორციელებისას, ეს ფუნქცია გამოიყენებს თქვენს მდებარეობას თქვენი ძიების შესაბამისი ახლომდებარე ადგილების მისასადაგებლად, მაშინაც კი, თუ ისინი თქვენს კონტაქტებში არ იმყოფება. &lt;br>&lt;br> ამ ფუნქციების მონაცემები მოწოდებულია Google-ის და მისი ლიცენზიარების მიერ. &lt;br>&lt;a href=%1$s>შეიტყვეთ მეტი.&lt;/a>
+        &lt;br>&lt;br>
+        ამ ფუნქციისათვის აუცილებელია ნება მისცეთ Google-ის აპებს გამოიყენოს თქვენი ტელეფონის მდებარეობა.
+        &lt;br>&lt;a href=%2$s>შეიტყვეთ მეტი.&lt;/a>"</string>
+    <!-- Google Dialer (auto merged, do not edit) (END: do not remove) -->
     <string name="applicationLabel" msgid="8490255569343340580">"დარეკვა"</string>
     <string name="launcherDialer" msgid="8636288196618486553">"ტელეფონი"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ტელეფონი"</string>
