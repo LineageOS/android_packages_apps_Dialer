@@ -76,4 +76,10 @@
     <color name="call_stats_outgoing">#99cc00</color>
     <color name="call_stats_missed">#eb1313</color>
     <color name="call_stats_bar_background">#88888888</color>
+
+    <!-- Text color for google dialer settings -->
+    <color name="google_settings_text_color">#ff555555</color>
+    <!-- Background google dialer settings -->
+    <color name="google_settings_background">#ffdedede</color>
+
 </resources>

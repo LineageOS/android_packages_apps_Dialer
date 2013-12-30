@@ -19,10 +19,11 @@ package com.android.dialerbind;
 import android.content.Context;
 
 import com.android.dialer.database.DialerDatabaseHelper;
+import com.google.android.dialer.GoogleDialerDatabaseHelper;
 
 
 public class DatabaseHelperManager {
     public static DialerDatabaseHelper getDatabaseHelper(Context context) {
-        return DialerDatabaseHelper.getInstance(context);
+        return GoogleDialerDatabaseHelper.getInstance(context);
     }
 }

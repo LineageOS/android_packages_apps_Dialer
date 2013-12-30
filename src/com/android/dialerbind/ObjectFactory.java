@@ -23,6 +23,8 @@ import android.content.Context;
 import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.service.CachedNumberLookupService;
+import com.google.android.dialer.calllog.GoogleCallLogAdapter;
+import com.google.android.dialer.phonenumbercache.CachedNumberLookupServiceImpl;
 
 /**
  * Default static binding for various objects.
@@ -30,14 +32,18 @@ import com.android.dialer.service.CachedNumberLookupService;
 public class ObjectFactory {
 
     public static CachedNumberLookupService newCachedNumberLookupService() {
-        // no-op
-        return null;
+        return new CachedNumberLookupServiceImpl();
     }
 
     public static CallLogAdapter newCallLogAdapter(Context context, CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper, boolean useCallAsPrimaryAction,
             boolean isCallLog) {
-        return new CallLogAdapter(context, callFetcher, contactInfoHelper, useCallAsPrimaryAction,
-                isCallLog);
+        if (isCallLog) {
+            return new CallLogAdapter(context, callFetcher,
+                    contactInfoHelper, useCallAsPrimaryAction, isCallLog);
+        } else {
+            return new GoogleCallLogAdapter(context, callFetcher,
+                    contactInfoHelper, useCallAsPrimaryAction, isCallLog);
+        }
     }
 }
