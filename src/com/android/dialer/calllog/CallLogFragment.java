@@ -63,26 +63,26 @@ public class CallLogFragment extends ListFragment
      */
     private static final int EMPTY_LOADER_ID = 0;
 
-    private CallLogAdapter mAdapter;
-    private CallLogQueryHandler mCallLogQueryHandler;
+    protected CallLogAdapter mAdapter;
+    protected CallLogQueryHandler mCallLogQueryHandler;
     private boolean mScrollToTop;
 
     /** Whether there is at least one voicemail source installed. */
-    private boolean mVoicemailSourcesAvailable = false;
+    protected boolean mVoicemailSourcesAvailable = false;
 
-    private VoicemailStatusHelper mVoicemailStatusHelper;
-    private View mStatusMessageView;
-    private TextView mStatusMessageText;
-    private TextView mStatusMessageAction;
+    protected VoicemailStatusHelper mVoicemailStatusHelper;
+    protected View mStatusMessageView;
+    protected TextView mStatusMessageText;
+    protected TextView mStatusMessageAction;
     private KeyguardManager mKeyguardManager;
 
     private boolean mEmptyLoaderRunning;
     private boolean mCallLogFetched;
     private boolean mVoicemailStatusFetched;
 
-    private final Handler mHandler = new Handler();
+    protected final Handler mHandler = new Handler();
 
-    private TelephonyManager mTelephonyManager;
+    protected TelephonyManager mTelephonyManager;
 
     private class CustomContentObserver extends ContentObserver {
         public CustomContentObserver() {
@@ -116,7 +116,7 @@ public class CallLogFragment extends ListFragment
     private boolean mMenuVisible = true;
 
     // Default to all calls.
-    private int mCallTypeFilter = CallLogQueryHandler.CALL_TYPE_ALL;
+    protected int mCallTypeFilter = CallLogQueryHandler.CALL_TYPE_ALL;
 
     // Log limit - if no limit is specified, then the default in {@link CallLogQueryHandler}
     // will be used.
@@ -218,7 +218,7 @@ public class CallLogFragment extends ListFragment
     }
 
     /** Sets whether there are any voicemail sources available in the platform. */
-    private void setVoicemailSourcesAvailable(boolean voicemailSourcesAvailable) {
+    protected void setVoicemailSourcesAvailable(boolean voicemailSourcesAvailable) {
         if (mVoicemailSourcesAvailable == voicemailSourcesAvailable) return;
         mVoicemailSourcesAvailable = voicemailSourcesAvailable;
 

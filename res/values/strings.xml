@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2012 The Android Open Source Project
+  ~ Copyright (C) 2013 The Linux Foundation. All Rights Reserved.
   ~
+  ~ Not a Contribution.
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
   ~ You may obtain a copy of the License at
@@ -312,6 +314,7 @@
 
     <!-- Menu item to copy something [CHAR_LIMIT=10] -->
     <string name="menu_copy">Copy</string>
+    <string name="call_log_all_calls_header">All calls</string>
 
     <!-- Menu item used to show only outgoing in the call log. [CHAR LIMIT=30] -->
     <string name="menu_show_outgoing_only">Show outgoing only</string>
@@ -767,4 +770,6 @@
     <string name="dialog_speed_dial_airplane_mode_message" >"To call Speed dial, first turn off Airplane mode."</string>
     <string name="assignSpeedDialFailToast">The number has already been assigned to a speed dial key, please select another number.</string>
     <string name="device_id">Device Identifier</string>
+    <string name="slot_name">SIM</string>
+    <string name="call_log_show_all_slots">All SIMs</string>
 </resources>

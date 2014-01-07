@@ -44,6 +44,7 @@ public final class CallLogQuery {
             Calls.CACHED_FORMATTED_NUMBER,   // 15
             Calls.IS_READ,                   // 16
             Calls.NUMBER_PRESENTATION,       // 17
+            Calls.SUBSCRIPTION               // 18
     };
 
     public static final int ID = 0;
@@ -64,4 +65,5 @@ public final class CallLogQuery {
     public static final int CACHED_FORMATTED_NUMBER = 15;
     public static final int IS_READ = 16;
     public static final int NUMBER_PRESENTATION = 17;
+	public static final int SUBSCRIPTION = 18;
 }

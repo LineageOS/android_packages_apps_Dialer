@@ -16,10 +16,12 @@
 
 package com.android.dialer;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.telephony.MSimTelephonyManager;
 import android.telephony.PhoneNumberUtils;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -43,6 +45,7 @@ public class PhoneCallDetailsHelper {
     /** The maximum number of icons will be shown to represent the call types in a group. */
     private static final int MAX_CALL_TYPE_ICONS = 3;
 
+    private final Context mContext;
     private final Resources mResources;
     /** The injected current time in milliseconds since the epoch. Used only by tests. */
     private Long mCurrentTimeMillisForTest;
@@ -58,17 +61,27 @@ public class PhoneCallDetailsHelper {
      *
      * @param resources used to look up strings
      */
-    public PhoneCallDetailsHelper(Resources resources, CallTypeHelper callTypeHelper,
+    public PhoneCallDetailsHelper(Context context, CallTypeHelper callTypeHelper,
             PhoneNumberUtilsWrapper phoneUtils) {
-        mResources = resources;
+        mContext = context;
+        mResources = mContext.getResources();
         mCallTypeHelper = callTypeHelper;
         mPhoneNumberUtilsWrapper = phoneUtils;
-        mPhoneNumberHelper = new PhoneNumberDisplayHelper(mPhoneNumberUtilsWrapper, resources);
+        mPhoneNumberHelper = new PhoneNumberDisplayHelper(mPhoneNumberUtilsWrapper, mResources);
     }
 
     /** Fills the call details views with content. */
     public void setPhoneCallDetails(PhoneCallDetailsViews views, PhoneCallDetails details,
             boolean isHighlighted) {
+        // Display the icon for the last call sub.
+        if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+            views.subIconView.setVisibility(View.VISIBLE);
+            views.subIconView.setImageDrawable(
+                    DialtactsActivity.getMultiSimIcon(mContext, details.subscription));
+        } else {
+            views.subIconView.setVisibility(View.GONE);
+        }
+
         // Display up to a given number of icons.
         views.callTypeIcons.clear();
         int count = details.callTypes.length;

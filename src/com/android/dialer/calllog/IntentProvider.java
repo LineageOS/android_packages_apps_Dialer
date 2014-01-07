@@ -1,5 +1,8 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2013, The Linux Foundation. All rights reserved.
+ *
+ * Not a Contribution.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +29,7 @@ import android.util.Log;
 
 import com.android.contacts.common.CallUtil;
 import com.android.dialer.CallDetailActivity;
+import com.android.internal.telephony.MSimConstants;
 
 /**
  * Used to create an intent to attach to an action in the call log.
@@ -38,17 +42,20 @@ public abstract class IntentProvider {
 
     public abstract Intent getIntent(Context context);
 
-    public static IntentProvider getReturnCallIntentProvider(final String number) {
+    public static IntentProvider getReturnCallIntentProvider(final String number,
+            final int subscription) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return CallUtil.getCallIntent(number);
+                Intent intent = CallUtil.getCallIntent(number);
+                intent.putExtra(MSimConstants.SUBSCRIPTION_KEY, subscription);
+                return intent;
             }
         };
     }
 
     public static IntentProvider getPlayVoicemailIntentProvider(final long rowId,
-            final String voicemailUri) {
+            final String voicemailUri, final int subscription) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
@@ -60,13 +67,15 @@ public abstract class IntentProvider {
                             Uri.parse(voicemailUri));
                 }
                 intent.putExtra(CallDetailActivity.EXTRA_VOICEMAIL_START_PLAYBACK, true);
+                intent.putExtra(MSimConstants.SUBSCRIPTION_KEY, subscription);
                 return intent;
             }
         };
     }
 
     public static IntentProvider getCallDetailIntentProvider(
-            final Cursor cursor, final int position, final long id, final int groupSize) {
+            final Cursor cursor, final int position, final long id, final int groupSize,
+            final int subscription) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
@@ -103,6 +112,7 @@ public abstract class IntentProvider {
                     intent.setData(ContentUris.withAppendedId(
                             Calls.CONTENT_URI_WITH_VOICEMAIL, id));
                 }
+                intent.putExtra(MSimConstants.SUBSCRIPTION_KEY, subscription);
                 return intent;
             }
         };

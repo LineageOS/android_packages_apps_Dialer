@@ -32,6 +32,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -41,6 +43,7 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.provider.ContactsContract.Intents.UI;
+import android.provider.Settings;
 import android.speech.RecognizerIntent;
 import android.telephony.MSimTelephonyManager;
 import android.telephony.TelephonyManager;
@@ -107,6 +110,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
     private static final String PREF_LAST_T9_LOCALE = "smart_dial_prefix_last_t9_locale";
+
+    public static final String PREFERRED_SIM_ICON_INDEX = "preferred_sim_icon_index";
+    public static final String[] MULTI_SIM_NAME = {
+        "perferred_name_sub1", "preferred_name_sub2"
+    };
+
 
     /** Used to open Call Setting */
     private static final String PHONE_PACKAGE = "com.android.phone";
@@ -1066,6 +1075,51 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void setDialButtonContainerVisible(boolean visible) {
         mFakeActionBar.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    /**
+     * @return the SIM name for the special subscription.
+     */
+    public static String getMultiSimName(Context context, int subscription) {
+        if (context == null) {
+            // If the context is null, return null.
+            return null;
+        }
+
+        String name = Settings.System.getString(context.getContentResolver(),
+                MULTI_SIM_NAME[subscription]);
+        if (TextUtils.isEmpty(name)) {
+            return context.getString(R.string.slot_name) + " " + (subscription + 1);
+        }
+        return name;
+    }
+
+    /**
+     * @return the SIM icon for the special subscription.
+     */
+    public static Drawable getMultiSimIcon(Context context, int subscription) {
+        if (context == null) {
+            // If the context is null, return 0 as no resource found.
+            return null;
+        }
+
+        TypedArray icons = context.getResources().obtainTypedArray(
+                R.array.sim_icons);
+        String simIconIndex = Settings.System.getString(context.getContentResolver(),
+                PREFERRED_SIM_ICON_INDEX);
+        if (TextUtils.isEmpty(simIconIndex)) {
+            return icons.getDrawable(subscription);
+        }
+        return getPreferredIcon(icons, simIconIndex, subscription);
+    }
+
+    public static Drawable getPreferredIcon(TypedArray icons, String iconIndex, int subscription) {
+        String[] indexs = iconIndex.split(",");
+
+        if (subscription >= indexs.length) {
+            return null;
+        }
+        return icons.getDrawable(Integer.parseInt(indexs[subscription]));
     }
 
     private boolean phoneIsInUse() {
