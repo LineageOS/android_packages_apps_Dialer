@@ -151,7 +151,8 @@ public class CallStatsDetailActivity extends Activity {
 
         // Set the details header, based on the first phone call.
         mCallStatsDetailHelper.setCallStatsDetailHeader(mHeaderTextView, mData);
-        mCallDetailHeader.updateViews(mNumber, mData.numberPresentation, mData);
+        // TODO: can we pass subscription from here?
+        mCallDetailHeader.updateViews(mNumber, mData.numberPresentation, mData, -1);
 
         final CharSequence displayNumber =
             mPhoneNumberDisplayHelper.getDisplayNumber(

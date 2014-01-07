@@ -228,6 +228,16 @@
         <item name="android:overScrollMode">always</item>
     </style>
 
+    <style name="CallLogSpinnerStyle">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
     <style name="FragmentActionBarPadding">
         <item name="android:paddingBottom">?android:attr/actionBarSize</item>
     </style>

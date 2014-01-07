@@ -43,6 +43,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         new GregorianCalendar(2011, 5, 3, 13, 0, 0).getTimeInMillis();
     /** A test duration value for phone calls. */
     private static final long TEST_DURATION = 62300;
+    /** A test subscription value for phone calls. */
+    private static final int TEST_SUBSCRIPTION = 0;
     /** The number of the caller/callee in the log entry. */
     private static final String TEST_NUMBER = "14125555555";
     /** The formatted version of {@link #TEST_NUMBER}. */
@@ -69,7 +71,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
         final TestPhoneNumberUtilsWrapper phoneUtils = new TestPhoneNumberUtilsWrapper(
                 TEST_VOICEMAIL_NUMBER);
-        mHelper = new PhoneCallDetailsHelper(resources, callTypeHelper, phoneUtils);
+        mHelper = new PhoneCallDetailsHelper(context, callTypeHelper, phoneUtils);
         mHelper.setCurrentTimeForTest(
                 new GregorianCalendar(2011, 5, 4, 13, 0, 0).getTimeInMillis());
         mViews = PhoneCallDetailsViews.createForTest(context);
@@ -291,7 +293,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(number, presentation, formattedNumber,
                         TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION),
+                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION,
+                        TEST_SUBSCRIPTION),
                 true);
     }
 
@@ -301,7 +304,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(number, Calls.PRESENTATION_ALLOWED,
                         formattedNumber, TEST_COUNTRY_ISO, geocodedLocation,
-                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION),
+                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION,
+                        TEST_SUBSCRIPTION),
                 true);
     }
 
@@ -310,7 +314,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.INCOMING_TYPE }, date, TEST_DURATION),
+                        new int[]{ Calls.INCOMING_TYPE }, date, TEST_DURATION,
+                        TEST_SUBSCRIPTION),
                 false);
     }
 
@@ -319,7 +324,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        callTypes, TEST_DATE, TEST_DURATION),
+                        callTypes, TEST_DATE, TEST_DURATION, TEST_SUBSCRIPTION),
                 false);
     }
 
@@ -327,7 +332,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setCallDetailsHeader(mNameView,
                 new PhoneCallDetails(number, presentation,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION));
+                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION,
+                        TEST_SUBSCRIPTION));
     }
 
     private void setCallDetailsHeader(String name) {
@@ -335,6 +341,6 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                         new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION,
-                        name, 0, "", null, null, 0));
+                        name, 0, "", null, null, 0, TEST_SUBSCRIPTION));
     }
 }

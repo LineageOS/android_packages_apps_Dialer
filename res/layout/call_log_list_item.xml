@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2007 The Android Open Source Project
+     Copyright (C) 2013, The Linux Foundation. All rights reserved.
+
+     Not a Contribution.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -88,6 +91,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     >
+                    <ImageView
+                        android:id="@+id/sub_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/call_log_icon_margin"
+                        android:layout_marginBottom="@dimen/call_detail_button_spacing"
+                        android:layout_gravity="bottom"
+                        android:visibility="gone"
+                    />
                     <TextView
                         android:id="@+id/label"
                         android:layout_width="wrap_content"
@@ -153,6 +165,15 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:nextFocusLeft="@id/primary_action_view"
                 />
+            <ImageButton
+                android:id="@+id/call_action_sub_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dip"
+                android:layout_marginRight="8dip"
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+            />
         </LinearLayout>
     </LinearLayout>
     <TextView

@@ -40,6 +40,8 @@ public final class CallLogListItemViews {
     public final View secondaryActionView;
     /** The secondary action button on the entry. */
     public final ImageView secondaryActionButtonView;
+    /** The sub icon to mark the call action. */
+    public final ImageView subIconView;
     /** The details of the phone call. */
     public final PhoneCallDetailsViews phoneCallDetailsViews;
     /** The text of the header of a section. */
@@ -47,12 +49,13 @@ public final class CallLogListItemViews {
 
     private CallLogListItemViews(QuickContactBadge quickContactView, View primaryActionView,
             View secondaryActionView, ImageView secondaryActionButtonView,
-            PhoneCallDetailsViews phoneCallDetailsViews,
+            ImageView subIconView, PhoneCallDetailsViews phoneCallDetailsViews,
             TextView listHeaderTextView) {
         this.quickContactView = quickContactView;
         this.primaryActionView = primaryActionView;
         this.secondaryActionView = secondaryActionView;
         this.secondaryActionButtonView = secondaryActionButtonView;
+        this.subIconView = subIconView;
         this.phoneCallDetailsViews = phoneCallDetailsViews;
         this.listHeaderTextView = listHeaderTextView;
     }
@@ -63,6 +66,7 @@ public final class CallLogListItemViews {
                 view.findViewById(R.id.primary_action_view),
                 view.findViewById(R.id.secondary_action_view),
                 (ImageView) view.findViewById(R.id.secondary_action_icon),
+                (ImageView) view.findViewById(R.id.call_action_sub_icon),
                 PhoneCallDetailsViews.fromView(view),
                 (TextView) view.findViewById(R.id.call_log_header));
     }
@@ -73,6 +77,7 @@ public final class CallLogListItemViews {
                 new QuickContactBadge(context),
                 new View(context),
                 new View(context),
+                new ImageView(context),
                 new ImageView(context),
                 PhoneCallDetailsViews.createForTest(context),
                 new TextView(context));

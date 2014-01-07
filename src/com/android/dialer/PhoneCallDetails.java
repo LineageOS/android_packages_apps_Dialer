@@ -64,12 +64,15 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
      */
     public final int sourceType;
 
+    /** The subscription of the call. */
+    public final int subscription;
+
     /** Create the details for a call with a number not associated with a contact. */
     public PhoneCallDetails(CharSequence number, int numberPresentation,
             CharSequence formattedNumber, String countryIso, String geocode,
-            int[] callTypes, long date, long duration) {
+            int[] callTypes, long date, long duration, int subscription) {
         this(number, numberPresentation, formattedNumber, countryIso, geocode,
-                callTypes, date, duration, "", 0, "", null, null, 0);
+                callTypes, date, duration, "", 0, "", null, null, 0, subscription);
     }
 
     /** Create the details for a call with a number associated with a contact. */
@@ -77,7 +80,7 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration, CharSequence name,
             int numberType, CharSequence numberLabel, Uri contactUri,
-            Uri photoUri, int sourceType) {
+            Uri photoUri, int sourceType, int subscription) {
         this.number = number;
         this.numberPresentation = numberPresentation;
         this.formattedNumber = formattedNumber;
@@ -92,6 +95,7 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
         this.contactUri = contactUri;
         this.photoUri = photoUri;
         this.sourceType = sourceType;
+        this.subscription = subscription;
     }
 
     @Override

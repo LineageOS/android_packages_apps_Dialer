@@ -70,6 +70,11 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
      */
     public static final int CALL_TYPE_ALL = -1;
 
+    /**
+     * To specify all slots.
+     */
+    public static final int CALL_SUB_ALL = -1;
+
     private final WeakReference<Listener> mListener;
 
     /** The cursor containing the old calls, or null if they have not yet been fetched. */
@@ -138,14 +143,18 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
      * <p>
      * It will asynchronously update the content of the list view when the fetch completes.
      */
-    public void fetchCalls(int callType, long newerThan) {
+    public void fetchCalls(int callType, long newerThan, int sub) {
         cancelFetch();
         int requestId = newCallsRequest();
-        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType, false /* newOnly */, newerThan);
+        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType, false /* newOnly */, newerThan, sub);
+    }
+
+    public void fetchCalls(int callType, long newerThan) {
+        fetchCalls(callType, newerThan, CallLogQueryHandler.CALL_SUB_ALL);
     }
 
     public void fetchCalls(int callType) {
-        fetchCalls(callType, 0);
+        fetchCalls(callType, 0, CallLogQueryHandler.CALL_SUB_ALL);
     }
 
     public void fetchVoicemailStatus() {
@@ -155,7 +164,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     /** Fetches the list of calls in the call log. */
     private void fetchCalls(int token, int requestId, int callType, boolean newOnly,
-            long newerThan) {
+            long newerThan, int sub) {
         // We need to check for NULL explicitly otherwise entries with where READ is NULL
         // may not match either the query or its negation.
         // We consider the calls that are not yet consumed (i.e. IS_READ = 0) as "new".
@@ -175,6 +184,14 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             where.append(String.format("(%s = ?)", Calls.TYPE));
             // Add a clause to fetch only items newer than the requested date
             selectionArgs.add(Integer.toString(callType));
+        }
+
+        if (sub > CALL_SUB_ALL) {
+            if (where.length() > 0) {
+                where.append(" AND ");
+            }
+            where.append(String.format("(%s = ?)", Calls.SUBSCRIPTION));
+            selectionArgs.add(Integer.toString(sub));
         }
 
         if (newerThan > 0) {
