@@ -90,7 +90,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"仅显示未接来电"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"只显示语音邮件"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"显示所有通话"</string>
-    <string name="add_2sec_pause" msgid="9214012315201040129">"暂停时间延长2秒"</string>
+    <string name="add_2sec_pause" msgid="9214012315201040129">"延长暂停时间2秒"</string>
     <string name="add_wait" msgid="3360818652790319634">"延长等待时间"</string>
     <string name="call_settings" msgid="7666474782093693667">"设置"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"新建联系人"</string>
