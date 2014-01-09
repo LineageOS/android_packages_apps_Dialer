@@ -15,17 +15,19 @@
   ~ limitations under the License
   -->
 <resources>
-    <style name="DialtactsTheme"
-           parent="android:Theme.Holo.Light">
+    <style name="DialtactsTheme1" parent="android:Theme.Holo.Light">
         <item name="android:textColorPrimary">@color/dialtacts_primary_text_color</item>
         <item name="android:textColorSecondary">@color/dialtacts_secondary_text_color</item>
         <item name="android:windowActionBarOverlay">false</item>
         <item name="android:actionBarStyle">@style/DialtactsActionBarStyle</item>
         <item name="android:actionBarTabStyle">@style/DialtactsActionBarTabStyle</item>
+        <item name="android:listViewStyle">@style/ListViewStyle</item>
         <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="DialtactsTheme" parent="@style/DialtactsTheme1">
         <!--  Searchbox Style -->
         <item name="android:editTextStyle">@style/DialtactsSearchboxStyle</item>
-        <item name="android:listViewStyle">@style/ListViewStyle</item>
         <item name="activated_background">@drawable/list_item_activated_background</item>
         <item name="section_header_background">@drawable/list_title_holo</item>
         <item name="list_section_header_height">32dip</item>
@@ -54,43 +56,46 @@
         <item name="contact_browser_background">@android:color/transparent</item>
         <item name="list_item_text_indent">@dimen/contact_browser_list_item_text_indent</item>
         <!-- CallLog -->
-        <item name="call_log_primary_text_color">#000000</item>
-        <item name="call_log_primary_background_color">#000000</item>
-        <item name="call_log_secondary_text_color">@color/dialtacts_secondary_text_color</item>
-        <item name="call_log_secondary_background_color">#333333</item>
-        <item name="call_log_header_color">#33b5e5</item>
+        <item name="call_log_primary_text_color">@color/call_log_primary_text_color</item>
+        <item name="call_log_primary_background_color">@color/call_log_primary_background_color</item>
+        <item name="call_log_secondary_text_color">@color/call_log_secondary_text_color</item>
+        <item name="call_log_secondary_background_color">@color/call_log_secondary_background_color</item>
+        <item name="call_log_header_color">@color/call_log_header_color</item>
         <!-- VoicemailStatus -->
         <item name="call_log_voicemail_status_height">48dip</item>
-        <item name="call_log_voicemail_status_background_color">#262626</item>
-        <item name="call_log_voicemail_status_text_color">#888888</item>
-        <item name="call_log_voicemail_status_action_text_color">#33b5e5</item>
+        <item name="call_log_voicemail_status_background_color">@color/call_log_voicemail_status_background_color</item>
+        <item name="call_log_voicemail_status_text_color">@color/call_log_voicemail_status_text_color</item>
+        <item name="call_log_voicemail_status_action_text_color">@color/call_log_voicemail_status_action_text_color</item>
             <!-- Favorites -->
         <item name="favorites_padding_bottom">?android:attr/actionBarSize</item>
     </style>
 
     <style name="DialpadTheme" parent="DialtactsTheme">
-        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorPrimary">@color/dialpad_text_color</item>
     </style>
 
     <style name="DialtactsThemeWithActionBarOverlay" parent="DialtactsTheme">
         <item name="android:windowActionBarOverlay">true</item>
     </style>
 
-    <style name="CallDetailActivityTheme" parent="android:Theme.Holo.Light">
+    <style name="CallDetailActivityTheme1" parent="android:Theme.Holo.Light">
         <item name="android:windowBackground">@color/background_dialer_list_items</item>
         <item name="android:gravity">top</item>
         <item name="android:listViewStyle">@style/ListViewStyle</item>
+    </style>
+
+    <style name="CallDetailActivityTheme" parent="@style/CallDetailActivityTheme1">
         <!-- CallLog -->
-        <item name="call_log_primary_text_color">#333333</item>
-        <item name="call_log_primary_background_color">#FFFFFF</item>
-        <item name="call_log_secondary_text_color">#333333</item>
-        <item name="call_log_secondary_background_color">#FFFFFF</item>
-        <item name="call_log_header_color">#FFFFFF</item>
+        <item name="call_log_primary_text_color">@color/call_log_primary_text_color</item>
+        <item name="call_log_primary_background_color">@color/call_log_primary_background_color</item>
+        <item name="call_log_secondary_text_color">@color/call_log_secondary_text_color</item>
+        <item name="call_log_secondary_background_color">@color/call_log_secondary_background_color</item>
+        <item name="call_log_header_color">@color/call_log_header_color</item>
         <!-- VoicemailStatus -->
         <item name="call_log_voicemail_status_height">48dip</item>
-        <item name="call_log_voicemail_status_background_color">#262626</item>
-        <item name="call_log_voicemail_status_text_color">#888888</item>
-        <item name="call_log_voicemail_status_action_text_color">#33b5e5</item>
+        <item name="call_log_voicemail_status_background_color">@color/call_log_voicemail_status_background_color</item>
+        <item name="call_log_voicemail_status_text_color">@color/call_log_voicemail_status_text_color</item>
+        <item name="call_log_voicemail_status_action_text_color">@color/call_log_voicemail_status_action_text_color</item>
     </style>
 
     <style name="Theme">

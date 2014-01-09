@@ -83,7 +83,7 @@
             android:id="@+id/photo_text_bar"
             android:layout_width="match_parent"
             android:layout_height="42dip"
-            android:background="#7F000000"
+            android:background="@color/call_detail_photo_bg"
             android:layout_alignParentStart="true"
             android:layout_alignBottom="@id/contact_background_sizer"
         />
