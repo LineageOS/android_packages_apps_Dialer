@@ -84,7 +84,7 @@
         <View
             android:layout_height="2dp"
             android:layout_width="match_parent"
-            android:background="#33999999"
+            android:background="@color/dialtacts_frame_color"
         />
         <FrameLayout
             android:layout_height="@dimen/fake_action_bar_height"

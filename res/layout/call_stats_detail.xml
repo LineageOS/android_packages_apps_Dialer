@@ -111,7 +111,7 @@
                 android:layout_height="42dip"
                 android:layout_alignBottom="@id/contact_background_sizer"
                 android:layout_alignParentStart="true"
-                android:background="#7F000000" />
+                android:background="@color/call_detail_photo_bg" />
 
             <ImageView
                 android:id="@+id/main_action"
