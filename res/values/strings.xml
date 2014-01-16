@@ -539,6 +539,9 @@
     -->
     <string name="description_call_log_unheard_voicemail">Unheard voicemail</string>
 
+    <!--  String describing the icon used to clear the search field -->
+    <string name="description_clear_search">Clear search</string>
+
     <!-- String describing the icon used to start a voice search -->
     <string name="description_start_voice_search">Start voice search</string>
 
@@ -726,6 +729,8 @@
     <!-- Content description for dismiss button on badge. [CHAR LIMIT=NONE] -->
     <string name="description_dismiss">Dismiss</string>
 
+    <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
+    <string name="remove_contact">Remove</string>
     <!-- Header text displayed on the main dialer screen above the list of favorite phone numbers.
          [CHAR LIMIT=21] -->
     <string name="favorites_menu_speed_dial">Speed Dial</string>
