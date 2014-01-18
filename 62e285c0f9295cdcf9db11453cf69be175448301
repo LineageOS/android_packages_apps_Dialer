@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a5ae5dd_3295fbe3",
+        "filename": "src/com/android/dialer/CallDetailHeader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 6259
+      },
+      "writtenOn": "2014-01-18T11:24:13Z",
+      "side": 1,
+      "message": "you need to check this case first and then second if condition else if (contactUri !\u003d null)\n\nthen it works as expected\n\nsee here\n\nhttps://github.com/SlimRoms/packages_apps_Dialer/commit/d8e0e5d9c4a063910dc534294f65e395cb44764f",
+      "revId": "62e285c0f9295cdcf9db11453cf69be175448301",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
