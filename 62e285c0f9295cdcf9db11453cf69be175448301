@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5a5ae5dd_f29e8306",
+        "filename": "src/com/android/dialer/CallDetailHeader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6259
+      },
+      "writtenOn": "2014-01-18T11:26:24Z",
+      "side": 1,
+      "message": "import android.provider.ContactsContract.Intents.Insert;\n\nor see my link below....google does not use this deprecated classes anymore",
+      "revId": "62e285c0f9295cdcf9db11453cf69be175448301",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a5ae5dd_3295fbe3",
         "filename": "src/com/android/dialer/CallDetailHeader.java",
         "patchSetId": 1
