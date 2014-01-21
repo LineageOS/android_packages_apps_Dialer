@@ -75,6 +75,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     private static final int NOTIFICATION_IN_CALL = 1;
     // Notification for incoming calls. This is interruptive and will show up as a HUN.
     private static final int NOTIFICATION_INCOMING_CALL = 2;
+    //If voice privacy is on this property will be added to the call associated with the connection.
+    private static final int CAPABILITY_VOICE_PRIVACY = 0x01000000;
 
     private static final long[] VIBRATE_PATTERN = new long[] {0, 1000, 1000};
 
@@ -489,13 +491,25 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // different calls.  So if both lines are in use, display info
         // from the foreground call.  And if there's a ringing call,
         // display that regardless of the state of the other calls.
+        int resId;
+        boolean supportsVoicePrivacy = call.can(CAPABILITY_VOICE_PRIVACY);
         if (call.getState() == Call.State.ONHOLD) {
-            return R.drawable.ic_phone_paused_white_24dp;
+            if (supportsVoicePrivacy) {
+                resId = R.drawable.stat_sys_vp_phone_call_on_hold;
+            } else {
+                resId =  R.drawable.ic_phone_paused_white_24dp;
+            }
         } else if (call.getSessionModificationState()
                 == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
-            return R.drawable.ic_videocam;
+            resId =  R.drawable.ic_videocam;
+        } else {
+            if (supportsVoicePrivacy) {
+                resId =  R.drawable.stat_sys_vp_phone_call;
+            } else {
+                resId =  R.drawable.ic_call_white_24dp;
+            }
         }
-        return R.drawable.ic_call_white_24dp;
+        return resId;
     }
 
     /**
