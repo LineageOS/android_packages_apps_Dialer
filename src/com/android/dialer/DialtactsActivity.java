@@ -94,6 +94,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+//add for CSVT
+import android.content.ServiceConnection;
+import org.codeaurora.ims.csvt.ICsvtService;
+import android.content.ComponentName;
+import android.os.IBinder;
+import android.os.SystemProperties;
+
+
 /**
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
  */
@@ -185,6 +193,54 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
+
+    //add for CSVT
+
+    public static ICsvtService mCsvtService;
+
+    public static boolean isCsvtActive() {
+        boolean result = false;
+        if (mCsvtService != null) {
+            try{
+                result = mCsvtService.isActive();
+                if (DEBUG) Log.d(TAG, "mCsvtService.isActive = " + result);
+            } catch (RemoteException e) {
+                Log.e(TAG, Log.getStackTraceString(new Throwable()));
+            }
+        }
+        return result;
+    }
+
+    private boolean isVTSupported() {
+        return SystemProperties.getBoolean("persist.radio.csvt.enabled", false);
+        //return this.getResources().getBoolean(R.bool.csvt_enabled);
+    }
+
+
+    private void createCsvtService() {
+        if (isVTSupported()) {
+            try {
+                Intent intent = new Intent("org.codeaurora.ims.csvt.ICsvtService");
+                boolean bound = bindService(intent,
+                        mCsvtServiceConnection, Context.BIND_AUTO_CREATE);
+                if (DEBUG) Log.d(TAG, "ICsvtService bound request : " + bound);
+            } catch (NoClassDefFoundError e) {
+                Log.e(TAG, "Ignoring ICsvtService class not found exception " + e);
+            }
+        }
+    }
+
+    private static ServiceConnection mCsvtServiceConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mCsvtService = ICsvtService.Stub.asInterface(service);
+            if (DEBUG) Log.d(TAG,"Csvt Service Connected: " + mCsvtService);
+        }
+
+        public void onServiceDisconnected(ComponentName arg0) {
+            if (DEBUG) Log.d(TAG,"Csvt Service onServiceDisconnected");
+        }
+    };
+    //add for CSVT
 
     /**
      * True if the dialpad is only temporarily showing due to being in call

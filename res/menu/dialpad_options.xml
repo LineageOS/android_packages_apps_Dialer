@@ -29,4 +29,16 @@
         android:title="@string/add_wait"
         android:showAsAction="withText"
         android:orderInCategory="1" />
+<!-- add for CSVT -->
+    <item
+        android:id="@+id/menu_video_call"
+        android:title="@string/video_call"
+        android:showAsAction="withText"
+        android:orderInCategory="1" />
+    <item
+        android:id="@+id/menu_video_call_settings"
+        android:title="@string/video_call_settings"
+        android:showAsAction="withText"
+        android:orderInCategory="1" />
+<!-- add for CSVT -->
 </menu>
