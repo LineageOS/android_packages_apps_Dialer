@@ -38,6 +38,11 @@ public class CallTypeHelper {
     /** Color used to identify new voicemail calls. */
     private final int mNewVoicemailColor;
 
+    //add for csvt call log type
+    public static final int INCOMING_CSVT_TYPE = 5;
+    public static final int OUTGOING_CSVT_TYPE = 6;
+    public static final int MISSED_CSVT_TYPE = 7;
+
     public CallTypeHelper(Resources resources) {
         // Cache these values so that we do not need to look them up each time.
         mIncomingName = resources.getString(R.string.type_incoming);
@@ -63,6 +68,16 @@ public class CallTypeHelper {
             case Calls.VOICEMAIL_TYPE:
                 return mVoicemailName;
 
+            //add for csvt call log type
+            case INCOMING_CSVT_TYPE:
+                return mIncomingName;
+
+            case OUTGOING_CSVT_TYPE:
+                return mOutgoingName;
+
+            case MISSED_CSVT_TYPE:
+                return mMissedName;
+
             default:
                 return mMissedName;
         }
@@ -72,14 +87,17 @@ public class CallTypeHelper {
     public Integer getHighlightedColor(int callType) {
         switch (callType) {
             case Calls.INCOMING_TYPE:
+            case INCOMING_CSVT_TYPE:
                 // New incoming calls are not highlighted.
                 return null;
 
             case Calls.OUTGOING_TYPE:
+            case OUTGOING_CSVT_TYPE:
                 // New outgoing calls are not highlighted.
                 return null;
 
             case Calls.MISSED_TYPE:
+            case MISSED_CSVT_TYPE:
                 return mNewMissedColor;
 
             case Calls.VOICEMAIL_TYPE:
