@@ -15,6 +15,11 @@
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/menu_calllog_detail_video_call"
+        android:title="@string/videocall"
+        android:onClick="onMenuVTCall"
+    />
+    <item
         android:id="@+id/menu_trash"
         android:icon="@drawable/ic_menu_delete_dk"
         android:showAsAction="ifRoom"

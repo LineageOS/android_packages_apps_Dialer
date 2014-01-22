@@ -197,6 +197,46 @@
                     android:focusable="true"
                     android:background="?android:attr/selectableItemBackground"
                 />
+
+                <View android:id="@+id/videocall_and_sms_divider"
+                    android:layout_width="1px"
+                    android:layout_height="32dip"
+                    android:background="@drawable/ic_divider_dashed_holo_dark"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="gone"
+                />
+
+                <ImageView android:id="@+id/videocall"
+                    android:layout_width="@color/call_log_voicemail_highlight_color"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/call_log_inner_margin"
+                    android:paddingRight="@dimen/call_log_outer_margin"
+                    android:gravity="center"
+                    android:scaleType="centerInside"
+                    android:visibility="gone"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
+                />
+
+                <View android:id="@+id/videocall_and_sms_divider"
+                    android:layout_width="1px"
+                    android:layout_height="32dip"
+                    android:background="@drawable/ic_divider_dashed_holo_dark"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="gone"
+                />
+
+                <ImageView android:id="@+id/videocall"
+                    android:layout_width="@color/call_log_voicemail_highlight_color"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/call_log_inner_margin"
+                    android:paddingRight="@dimen/call_log_outer_margin"
+                    android:gravity="center"
+                    android:scaleType="centerInside"
+                    android:visibility="gone"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
+                />
             </LinearLayout>
         </FrameLayout>
     </RelativeLayout>

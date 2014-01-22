@@ -184,6 +184,13 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             where.append(String.format("(%s = ?)", Calls.TYPE));
             // Add a clause to fetch only items newer than the requested date
             selectionArgs.add(Integer.toString(callType));
+            if (callType == Calls.INCOMING_TYPE) {
+                selectionArgs.add(Integer.toString(CallTypeHelper.INCOMING_CSVT_TYPE));
+            } else if (callType == Calls.OUTGOING_TYPE) {
+                selectionArgs.add(Integer.toString(CallTypeHelper.OUTGOING_CSVT_TYPE));
+            } else if (callType == Calls.MISSED_TYPE) {
+                selectionArgs.add(Integer.toString(CallTypeHelper.MISSED_CSVT_TYPE));
+            }
         }
 
         if (sub > CALL_SUB_ALL) {
