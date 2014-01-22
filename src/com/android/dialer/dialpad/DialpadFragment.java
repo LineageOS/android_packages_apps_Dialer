@@ -818,6 +818,12 @@ public class DialpadFragment extends Fragment
         final MenuItem addToContactMenuItem = menu.findItem(R.id.menu_add_contacts);
         final MenuItem twoSecPauseMenuItem = menu.findItem(R.id.menu_2s_pause);
         final MenuItem waitMenuItem = menu.findItem(R.id.menu_add_wait);
+        final MenuItem videocallMenuItem = menu.findItem(R.id.menu_video_call);
+        final MenuItem videocallsettingsMenuItem = menu.findItem(R.id.menu_video_call_settings);
+
+        // We show "video call setting" menu only when the csvt is supported
+        //which means the prop "persist.radio.csvt.enabled" = true
+        videocallsettingsMenuItem.setVisible(isVTSupported());
 
         // We show "add to contacts" menu only when the user is
         // seeing usual dialpad and has typed at least one digit.
@@ -826,11 +832,18 @@ public class DialpadFragment extends Fragment
             addToContactMenuItem.setVisible(false);
             twoSecPauseMenuItem.setVisible(false);
             waitMenuItem.setVisible(false);
+            videocallMenuItem.setVisible(false);
         } else {
             final CharSequence digits = mDigits.getText();
             // Put the current digits string into an intent
             addToContactMenuItem.setIntent(DialtactsActivity.getAddNumberToContactIntent(digits));
             addToContactMenuItem.setVisible(true);
+
+            //add for csvt
+            videocallsettingsMenuItem.setVisible(isVTSupported());
+            if(isVTSupported()){
+                videocallMenuItem.setIntent(getVTCallIntent(digits.toString()));
+            }
         }
     }
 
@@ -1591,6 +1604,9 @@ public class DialpadFragment extends Fragment
             case R.id.menu_add_wait:
                 updateDialString(WAIT);
                 return true;
+            case R.id.menu_video_call_settings:
+                startActivity(getVTCallSettingsIntent());
+                return true;
             default:
                 return false;
         }
@@ -1782,6 +1798,49 @@ public class DialpadFragment extends Fragment
         intent.putExtra(SUBSCRIPTION_KEY, mSubscription);
         return intent;
     }
+
+    // add for CSVT start
+    private static Intent getVTCallIntent(String number) {
+        Intent intent = new Intent("com.borqs.videocall.action.LaunchVideoCallScreen");
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+
+        intent.putExtra("IsCallOrAnswer", true); // true as a
+        // call,
+        // while
+        // false as
+        // answer
+
+        intent.putExtra("LaunchMode", 1); // nLaunchMode: 1 as
+        // telephony, while
+        // 0 as socket
+        intent.putExtra("call_number_key", number);
+        return intent;
+    }
+
+    private static Intent getVTCallSettingsIntent() {
+        Intent intent = new Intent("com.borqs.videocall.action.LaunchVideoCallSettingsScreen");
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        return intent;
+    }
+
+    private String getValidDialNumber() {
+        if (mDigits != null)
+            return mDigits.getText().toString();
+        else
+            return null;
+    }
+
+    public static boolean isVTActive() {
+        return DialtactsActivity.isCsvtActive();
+    }
+    private boolean isVTSupported() {
+        return SystemProperties.getBoolean("persist.radio.csvt.enabled", false);
+        //return this.getResources().getBoolean(R.bool.csvt_enabled);
+    }
+
+    // add for csvt end
 
     @Override
     public void onHiddenChanged(boolean hidden) {
