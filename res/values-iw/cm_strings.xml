@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2012-2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_log_stats_title">סטטיסטיקה</string>
+  <string name="callStatsDetailTitle">פרטים של סטטיסטיקת שיחות</string>
+  <string name="call_stats">סטטיסטיקת שיחות</string>
+  <string name="call_stats_refresh">רענן</string>
+  <string name="activity_title_call_stats">סטטיסטיקת שיחות</string>
+  <string name="call_stats_nav_all">הכל</string>
+  <string name="call_stats_nav_incoming">נכנסות</string>
+  <string name="call_stats_nav_outgoing">יוצאות</string>
+  <string name="call_stats_nav_missed">פוספסו</string>
+  <string name="call_stats_incoming">נכנסות: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_outgoing">יוצאות: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_missed">פוספסו</string>
+  <string name="call_stats_missed_percent">פוספסו: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">סך הכל: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">סך הכל: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">תאריך התחלה</string>
+  <string name="call_stats_filter_to">תאריך סיום</string>
+  <string name="call_stats_filter_picker_title">מסנן טווח</string>
+  <string name="date_quick_selection">בחירה מהירה</string>
+  <string name="date_qs_currentmonth">חודש נוכחי</string>
+  <string name="date_qs_currentquarter">רבעון נוכחי</string>
+  <string name="date_qs_currentyear">שנה נוכחית</string>
+  <string name="date_qs_lastweek">שבוע שעבר</string>
+  <string name="date_qs_lastmonth">חודש אחרון</string>
+  <string name="date_qs_lastquarter">רבעון אחרון</string>
+  <string name="date_qs_lastyear">שנה שעברה</string>
+  <string name="call_stats_date_filter">התאמת טווח הזמן</string>
+  <string name="call_stats_reset_filter">אפס טווח זמן</string>
+  <string name="call_stats_sort_by_duration">מיין לפי משך שיחה</string>
+  <string name="call_stats_sort_by_count">מיין לפי מספר שיחות</string>
+  <string name="menu_add_to_blacklist">הוסף לרשימה שחורה</string>
+  <string name="toast_added_to_blacklist">%s נוסף לרשימה שחורה.</string>
+</resources>
