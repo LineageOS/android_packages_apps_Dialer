@@ -51,7 +51,7 @@
         </service>
 
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
-        <receiver android:name="InCallApp$NotificationBroadcastReceiver" exported="false">
+        <receiver android:name="InCallApp$NotificationBroadcastReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="com.android.incallui.ACTION_HANG_UP_ONGOING_CALL" />
             </intent-filter>
