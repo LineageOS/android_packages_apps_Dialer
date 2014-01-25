@@ -52,4 +52,14 @@
 
     <string name="menu_add_to_blacklist">Добавить в чёрный список</string>
     <string name="toast_added_to_blacklist">Абонент «%s» добавлен в чёрный список.</string>
+
+    <string name="dialpad_2_2_letters">АБВГ</string>
+    <string name="dialpad_3_2_letters">ДЕЖЗ</string>
+    <string name="dialpad_4_2_letters">ИЙКЛ</string>
+    <string name="dialpad_5_2_letters">МНОП</string>
+    <string name="dialpad_6_2_letters">РСТУ</string>
+    <string name="dialpad_7_2_letters">ФХЦЧ</string>
+    <string name="dialpad_8_2_letters">ШЩЪЫ</string>
+    <string name="dialpad_9_2_letters">ЬЭЮЯ</string>
+
 </resources>
