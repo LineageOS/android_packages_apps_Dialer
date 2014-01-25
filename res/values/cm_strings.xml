@@ -52,4 +52,22 @@
 
     <string name="menu_add_to_blacklist">Add to blacklist</string>
     <string name="toast_added_to_blacklist">%s added to blacklist.</string>
+
+    <!--  Localized dialer buttons.
+          In English, we don't need a secondary row, so all values are empty.
+          Change these values depending on your language requirements.
+    -->
+    <string name="dialpad_0_2_letters" translatable="false"></string>
+    <string name="dialpad_1_2_letters" translatable="false"></string>
+    <string name="dialpad_2_2_letters"></string>
+    <string name="dialpad_3_2_letters"></string>
+    <string name="dialpad_4_2_letters"></string>
+    <string name="dialpad_5_2_letters"></string>
+    <string name="dialpad_6_2_letters"></string>
+    <string name="dialpad_7_2_letters"></string>
+    <string name="dialpad_8_2_letters"></string>
+    <string name="dialpad_9_2_letters"></string>
+    <string name="dialpad_star_2_letters" translatable="false"></string>
+    <string name="dialpad_pound_2_letters" translatable="false"></string>
+
 </resources>
