@@ -512,6 +512,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         updateFloatingActionButtonControllerAlignment(false /* animate */);
         setConferenceDialButtonImage(false);
         setConferenceDialButtonVisibility(true);
+
+        SmartDialPrefix.initializeNanpSettings(this);
     }
 
     @Override
@@ -1088,7 +1090,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mSmartDialSearchFragment.setAddToContactNumber(query);
         }
         final String normalizedQuery = SmartDialNameMatcher.normalizeNumber(query,
-                SmartDialNameMatcher.LATIN_SMART_DIAL_MAP);
+                SmartDialPrefix.getMap());
 
         if (!TextUtils.equals(mSearchView.getText(), normalizedQuery)) {
             if (DEBUG) {
