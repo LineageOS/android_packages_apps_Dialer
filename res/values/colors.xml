@@ -52,7 +52,7 @@
     <!-- Primary color of dialpad text, including the call button -->
     <color name="dialpad_primary_text_color">#404040</color>
     <!-- Secondary color of dialpad text (used for the letters corresponding to each digit -->
-    <color name="dialpad_secondary_text_color">#9e9e9e</color>
+    <color name="dialpad_secondary_text_color">#888888</color>
 
     <!-- Background color of action bars -->
     <color name="actionbar_background_color">#ffffff</color>
