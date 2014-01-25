@@ -45,7 +45,7 @@ public class SmartDialNameMatcher {
 
     private final ArrayList<SmartDialMatchPosition> mMatchPositions = Lists.newArrayList();
 
-    public static final SmartDialMap LATIN_SMART_DIAL_MAP = new LatinSmartDialMap();
+    public static final SmartDialMap SMART_DIAL_MAP = new RussianSmartDialMap();
 
     private final SmartDialMap mMap;
 
@@ -54,7 +54,7 @@ public class SmartDialNameMatcher {
 
     @VisibleForTesting
     public SmartDialNameMatcher(String query) {
-        this(query, LATIN_SMART_DIAL_MAP);
+        this(query, SMART_DIAL_MAP);
     }
 
     public SmartDialNameMatcher(String query, SmartDialMap map) {
