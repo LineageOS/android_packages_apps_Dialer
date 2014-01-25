@@ -70,4 +70,10 @@ public class SmartDialSearchFragment extends SearchFragment {
         final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
         return adapter.getDataUri(position);
     }
+
+
+    public void setDialpadQueryString(String queryString) {
+        final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
+        adapter.setDialpadQueryString(queryString);
+    }
 }

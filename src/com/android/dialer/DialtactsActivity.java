@@ -229,7 +229,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                final String newText = s.toString();
+                final boolean dialpadSearch = isDialpadShowing();
+
+                final String newText = dialpadSearch ?
+                   SmartDialNameMatcher.normalizeNumber(s.toString(), SmartDialPrefix.getMap()):
+                   s.toString();
                 if (newText.equals(mSearchQuery)) {
                     // If the query hasn't changed (perhaps due to activity being destroyed
                     // and restored, or user launching the same DIAL intent twice), then there is
@@ -240,7 +244,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 if (DEBUG) {
                     Log.d(TAG, "onTextChange for mSearchView called with new query: " + s);
                 }
-                final boolean dialpadSearch = isDialpadShowing();
 
                 // Show search result with non-empty text. Show a bare list otherwise.
                 if (TextUtils.isEmpty(newText) && getInSearchUi()) {
@@ -259,6 +262,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
                     if (dialpadSearch && mSmartDialSearchFragment != null) {
                             mSmartDialSearchFragment.setQueryString(newText, false);
+                            mSmartDialSearchFragment.setDialpadQueryString(s.toString());
                     } else if (mRegularSearchFragment != null) {
                         mRegularSearchFragment.setQueryString(newText, false);
                     }
@@ -900,8 +904,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onDialpadQueryChanged(String query) {
-        final String normalizedQuery = SmartDialNameMatcher.normalizeNumber(query,
-                SmartDialNameMatcher.LATIN_SMART_DIAL_MAP);
+        final String normalizedQuery = query;
         if (!TextUtils.equals(mSearchView.getText(), normalizedQuery)) {
             if (DEBUG) {
                 Log.d(TAG, "onDialpadQueryChanged - new query: " + query);

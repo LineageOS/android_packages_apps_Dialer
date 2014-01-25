@@ -161,6 +161,11 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
         return mFormattedQueryString;
     }
 
+    public void setDialpadQueryString(String queryString) {
+        mFormattedQueryString = PhoneNumberUtils.formatNumber(
+                PhoneNumberUtils.convertAndStrip(queryString), mCountryIso);
+    }
+
     @Override
     public void setQueryString(String queryString) {
         mFormattedQueryString = PhoneNumberUtils.formatNumber(

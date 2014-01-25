@@ -65,7 +65,7 @@ public class SmartDialPrefix {
     private static Set<String> sCountryCodes = null;
 
     /** Dialpad mapping. */
-    private static final SmartDialMap mMap = new LatinSmartDialMap();
+    private static SmartDialMap mMap = null;
 
     private static boolean sNanpInitialized = false;
 
@@ -89,6 +89,15 @@ public class SmartDialPrefix {
         }
         /** Queries the NANP country list to find out whether user is in a NANP region.*/
         sUserInNanpRegion = isCountryNanp(sUserSimCountryCode);
+
+        /** Sets a layout for SmartDial depending on current UI language.*/
+        String locale = context.getResources().getConfiguration().locale.getCountry();
+        if (locale.equals("RU")) {
+            mMap = new RussianSmartDialMap();
+        } else {
+            mMap = new LatinSmartDialMap();
+        }
+
         sNanpInitialized = true;
     }
 
@@ -280,9 +289,9 @@ public class SmartDialPrefix {
                 /** If the number does not start with '+', finds out whether it is in NANP
                  * format and has '1' preceding the number.
                  */
-                if ((normalizedNumber.length() == 11) && (normalizedNumber.charAt(0) == '1') &&
-                        (sUserInNanpRegion)) {
-                    countryCode = "1";
+                if ((normalizedNumber.length() == 11) && (normalizedNumber.charAt(0) == '1'
+                     || normalizedNumber.charAt(0) == '7') && (sUserInNanpRegion)) {
+                    countryCode = normalizedNumber.substring(0, 1);
                     countryCodeOffset = number.indexOf(normalizedNumber.charAt(1));
                     if (countryCodeOffset == -1) {
                         countryCodeOffset = 0;
@@ -298,7 +307,8 @@ public class SmartDialPrefix {
                      * NANP area code, and finds out offset of the local number.
                      */
                     areaCode = normalizedNumber.substring(0, 3);
-                } else if (countryCode.equals("1") && normalizedNumber.length() == 11) {
+                } else if ((countryCode.equals("1") || countryCode.equals("7")) &&
+                            normalizedNumber.length() == 11) {
                     /** If the number has country code '1', finds out area code and offset of the
                      * local number.
                      */
@@ -594,6 +604,7 @@ public class SmartDialPrefix {
         result.add("TT"); // Trinidad and Tobago
         result.add("TC"); // Turks and Caicos Islands
         result.add("VI"); // U.S. Virgin Islands
+        result.add("RU"); // Russia
         return result;
     }
 
