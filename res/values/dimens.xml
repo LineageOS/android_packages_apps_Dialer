@@ -55,7 +55,7 @@
     <dimen name="dialpad_key_letters_size">11dp</dimen>
     <dimen name="dialpad_key_plus_size">15dp</dimen>
     <dimen name="dialpad_key_special_characters_size">25dp</dimen>
-    <dimen name="dialpad_key_letters_width">41dp</dimen>
+    <dimen name="dialpad_key_letters_width">54dp</dimen>
 
 
     <dimen name="fake_action_bar_height">60dp</dimen>
