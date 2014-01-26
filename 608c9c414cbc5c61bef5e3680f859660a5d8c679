@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a54edaf_8934dd4a",
+        "filename": "src/com/android/dialer/dialpad/SmartDialNameMatcher.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5574
+      },
+      "writtenOn": "2014-01-26T23:10:05Z",
+      "side": 1,
+      "message": "To make dialmaps switch, the most simple approach is to change them here. My only concern is, will that be correct? I mean, we\u0027re calling this constructor from another one (line 57), which sets a fixed dialmap, and replace it here with something else. I\u0027d like to keep changes to a minimum here, but on the other hand, I don\u0027t want to put a \"code-monkey-style\" solution too.\n\nCould anyone please help me with that?",
+      "revId": "608c9c414cbc5c61bef5e3680f859660a5d8c679",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
