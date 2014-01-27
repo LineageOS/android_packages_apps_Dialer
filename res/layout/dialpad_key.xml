@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/dialpad_secondary_text_color"
             android:textSize="@dimen/dialpad_key_letters_size"
-            android:fontFamily="sans-serif-light"
+            android:fontFamily="sans-serif"
             />
         <TextView
             android:id="@+id/dialpad_key_letters"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/dialpad_secondary_text_color"
             android:textSize="@dimen/dialpad_key_letters_size"
-            android:fontFamily="sans-serif-light"
+            android:fontFamily="sans-serif"
             />
       </LinearLayout>
     </LinearLayout>
