@@ -19,11 +19,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/DialtactsDialpadButtonStyle"
     android:clickable="true"
-    android:focusable="true" >
+    android:focusable="true"
+    android:paddingLeft="11dp" >
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center" >
       <TextView
           android:id="@+id/dialpad_key_number"
           android:layout_width="wrap_content"
@@ -32,14 +33,29 @@
           android:textSize="@dimen/dialpad_key_numbers_size"
           android:fontFamily="sans-serif-light"
           />
-      <TextView
-          android:id="@+id/dialpad_key_letters"
-          android:layout_width="@dimen/dialpad_key_letters_width"
+      <LinearLayout
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:textColor="@color/dialpad_secondary_text_color"
-          android:textSize="@dimen/dialpad_key_letters_size"
+          android:orientation="vertical"
           android:paddingLeft="11dp"
-          android:fontFamily="sans-serif-light"
-          />
+          android:paddingTop="8dp"
+          android:layout_gravity="center">
+        <TextView
+            android:id="@+id/dialpad_key2_letters"
+            android:layout_width="@dimen/dialpad_key_letters_width"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dialpad_secondary_text_color"
+            android:textSize="@dimen/dialpad_key_letters_size"
+            android:fontFamily="sans-serif-light"
+            />
+        <TextView
+            android:id="@+id/dialpad_key_letters"
+            android:layout_width="@dimen/dialpad_key_letters_width"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dialpad_secondary_text_color"
+            android:textSize="@dimen/dialpad_key_letters_size"
+            android:fontFamily="sans-serif-light"
+            />
+      </LinearLayout>
     </LinearLayout>
 </com.android.dialer.dialpad.DialpadKeyButton>
