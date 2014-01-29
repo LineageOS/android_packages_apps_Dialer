@@ -34,6 +34,24 @@
       "revId": "04e9b12f7778250fbdc60b8bcf4ef67c123ff04e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fade3982_c29a62c5",
+        "filename": "src/com/android/dialer/dialpad/GreekSmartDialMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 8188
+      },
+      "writtenOn": "2014-01-29T23:26:12Z",
+      "side": 1,
+      "message": "7 has 4 letters in lower case.\nSee my comments...",
+      "parentUuid": "fade3982_82621ad7",
+      "revId": "04e9b12f7778250fbdc60b8bcf4ef67c123ff04e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
