@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fade3982_423ad2ce",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 8188
+      },
+      "writtenOn": "2014-01-29T21:32:35Z",
+      "side": 1,
+      "message": "Hey dude, your country is \u0027GR\u0027 and not  \u0027EL\u0027  (same thing at the bottom) ;)",
+      "revId": "76adbd4dcdeda15547184267aed4887606ad4b29",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
