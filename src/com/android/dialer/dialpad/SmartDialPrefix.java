@@ -94,6 +94,8 @@ public class SmartDialPrefix {
         String locale = context.getResources().getConfiguration().locale.getCountry();
         if (locale.equals("RU")) {
             mMap = new RussianSmartDialMap();
+        if (locale.equals("EL")) {
+            mMap = new GreekSmartDialMap();
         } else {
             mMap = new LatinSmartDialMap();
         }
@@ -293,6 +295,15 @@ public class SmartDialPrefix {
                      || normalizedNumber.charAt(0) == '7') && (sUserInNanpRegion)) {
                     countryCode = normalizedNumber.substring(0, 1);
                     countryCodeOffset = number.indexOf(normalizedNumber.charAt(1));
+                    if (countryCodeOffset == -1) {
+                        countryCodeOffset = 0;
+                    }
+                /** Countries with two-digit country codes. */
+                } else if ((normalizedNumber.length() == 12)
+                     && (normalizedNumber.charAt(0) == '3' && normalizedNumber.charAt(1) == '0')
+                     && (sUserInNanpRegion)) {
+                    countryCode = normalizedNumber.substring(0, 2);
+                    countryCodeOffset = number.indexOf(normalizedNumber.charAt(2));
                     if (countryCodeOffset == -1) {
                         countryCodeOffset = 0;
                     }
@@ -605,6 +616,7 @@ public class SmartDialPrefix {
         result.add("TC"); // Turks and Caicos Islands
         result.add("VI"); // U.S. Virgin Islands
         result.add("RU"); // Russia
+        result.add("EL"); // Greece
         return result;
     }
 
