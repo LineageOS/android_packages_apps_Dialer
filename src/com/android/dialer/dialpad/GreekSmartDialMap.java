@@ -16,7 +16,7 @@
 
 package com.android.dialer.dialpad;
 
-public class RussianSmartDialMap implements SmartDialMap {
+public class GreekSmartDialMap implements SmartDialMap {
 
     private static final char[] LATIN_LETTERS_TO_DIGITS = {
         '2', '2', '2', // A,B,C -> 2
@@ -29,20 +29,20 @@ public class RussianSmartDialMap implements SmartDialMap {
         '9', '9', '9', '9' // W,X,Y,Z -> 9
     };
 
-    private static final char[] RUSSIAN_LETTERS_TO_DIGITS = {
-        '2', '2', '2', '2', // абвг -> 2
-        '3', '3', '3', '3', // дежз -> 3
-        '4', '4', '4', '4', // ийкл -> 4
-        '5', '5', '5', '5', // мноп -> 5
-        '6', '6', '6', '6', // рсту -> 6
-        '7', '7', '7', '7', // фхцч -> 7
-        '8', '8', '8', '8', // шщъы -> 8
-        '9', '9', '9', '9'  // ьэюя -> 9
+    private static final char[] GREEK_LETTERS_TO_DIGITS = {
+        '2', '2', '2', // Α,Β,Γ -> 2
+        '3', '3', '3', // Δ,Ε,Ζ -> 3
+        '4', '4', '4', // Η,Θ,Ι -> 4
+        '5', '5', '5', // Κ,Λ,Μ -> 5
+        '6', '6', '6', // Ν,Ξ,Ο -> 6
+        '7', '7', '7', '7', // Π,Ρ,Σ,ς -> 7
+        '8', '8', '8', // Τ,Υ,Φ -> 8
+        '9', '9', '9'  // Χ,Ψ,Ω -> 9
     };
 
     @Override
     public boolean isValidDialpadAlphabeticChar(char ch) {
-        return (ch >= 'a' && ch <= 'z') || (ch >= 'а' && ch <= 'я');
+        return (ch >= 'a' && ch <= 'z') || (ch >= 'α' && ch <= 'ω');
     }
 
     @Override
@@ -413,40 +413,44 @@ public class RussianSmartDialMap implements SmartDialMap {
             case 'X': return 'x';
             case 'Y': return 'y';
             case 'Z': return 'z';
-            case 'А': return 'а';
-            case 'Б': return 'б';
-            case 'В': return 'в';
-            case 'Г': return 'г';
-            case 'Д': return 'д';
-            case 'Е': return 'е';
-            case 'ё': return 'е';
-            case 'Ё': return 'е';
-            case 'Ж': return 'ж';
-            case 'З': return 'з';
-            case 'И': return 'и';
-            case 'Й': return 'й';
-            case 'К': return 'к';
-            case 'Л': return 'л';
-            case 'М': return 'м';
-            case 'Н': return 'н';
-            case 'О': return 'о';
-            case 'П': return 'п';
-            case 'Р': return 'р';
-            case 'С': return 'с';
-            case 'Т': return 'т';
-            case 'У': return 'у';
-            case 'Ф': return 'ф';
-            case 'Х': return 'х';
-            case 'Ц': return 'ц';
-            case 'Ч': return 'ч';
-            case 'Ш': return 'ш';
-            case 'Щ': return 'щ';
-            case 'Ъ': return 'ъ';
-            case 'Ы': return 'ы';
-            case 'Ь': return 'ь';
-            case 'Э': return 'э';
-            case 'Ю': return 'ю';
-            case 'Я': return 'я';
+            case 'Α': return 'α';
+            case 'Ά': return 'α';
+            case 'ά': return 'α';
+            case 'Β': return 'β';
+            case 'Γ': return 'γ';
+            case 'Δ': return 'δ';
+            case 'Ε': return 'ε';
+            case 'Έ': return 'ε';
+            case 'έ': return 'ε';
+            case 'Ζ': return 'ζ';
+            case 'Η': return 'η';
+            case 'Ή': return 'η';
+            case 'ή': return 'η';
+            case 'Θ': return 'θ';
+            case 'Ι': return 'ι';
+            case 'Ί': return 'ι';
+            case 'ί': return 'ι';
+            case 'Κ': return 'κ';
+            case 'Λ': return 'λ';
+            case 'Μ': return 'μ';
+            case 'Ν': return 'ν';
+            case 'Ξ': return 'ξ';
+            case 'Ο': return 'ο';
+            case 'Ό': return 'ο';
+            case 'ό': return 'ο';
+            case 'Π': return 'π';
+            case 'Ρ': return 'ρ';
+            case 'Σ': return 'σ';
+            case 'Τ': return 'τ';
+            case 'Υ': return 'υ';
+            case 'Ύ': return 'υ';
+            case 'ύ': return 'υ';
+            case 'Φ': return 'φ';
+            case 'Χ': return 'χ';
+            case 'Ψ': return 'ψ';
+            case 'Ω': return 'ω';
+            case 'Ώ': return 'ω';
+            case 'ώ': return 'ω';
             default:
                 return ch;
         }
@@ -458,8 +462,8 @@ public class RussianSmartDialMap implements SmartDialMap {
             return (byte) (ch - '0');
         } else if (ch >= 'a' && ch <= 'z') {
             return (byte) (LATIN_LETTERS_TO_DIGITS[ch - 'a'] - '0');
-        } else if (ch >= 'а' && ch <= 'я') {
-            return (byte) (RUSSIAN_LETTERS_TO_DIGITS[ch - 'а'] - '0');
+        } else if (ch >= 'α' && ch <= 'ω') {
+            return (byte) (GREEK_LETTERS_TO_DIGITS[ch - 'α'] - '0');
         } else {
             return -1;
         }
@@ -470,8 +474,8 @@ public class RussianSmartDialMap implements SmartDialMap {
         if (ch >= 'a' && ch <= 'z') {
             return LATIN_LETTERS_TO_DIGITS[ch - 'a'];
         }
-        if (ch >= 'а' && ch <= 'я') {
-            return RUSSIAN_LETTERS_TO_DIGITS[ch - 'а'];
+        if (ch >= 'α' && ch <= 'ω') {
+            return GREEK_LETTERS_TO_DIGITS[ch - 'α'];
         }
         return ch;
     }
