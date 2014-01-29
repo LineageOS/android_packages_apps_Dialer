@@ -52,6 +52,24 @@
       "revId": "04e9b12f7778250fbdc60b8bcf4ef67c123ff04e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fade3982_02a56a03",
+        "filename": "src/com/android/dialer/dialpad/GreekSmartDialMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2014-01-29T23:33:23Z",
+      "side": 1,
+      "message": "Yes, I forgot about that... it works now, thanks for the patience!",
+      "parentUuid": "fade3982_c29a62c5",
+      "revId": "04e9b12f7778250fbdc60b8bcf4ef67c123ff04e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
