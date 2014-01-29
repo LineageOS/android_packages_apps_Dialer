@@ -50,6 +50,12 @@
             </intent-filter>
         </service>
 
+        <service android:name="InCallService">
+            <intent-filter>
+                <action android:name="android.telecomm.IInCallService" />
+            </intent-filter>
+        </service>
+
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
         <receiver android:name="InCallApp$NotificationBroadcastReceiver" android:exported="false">
             <intent-filter>
