@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fade3982_e27206ad",
+        "filename": "src/com/android/dialer/dialpad/GreekSmartDialMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 8188
+      },
+      "writtenOn": "2014-01-29T23:11:18Z",
+      "side": 1,
+      "message": "\u00277\u0027, \u00277\u0027, \u00277\u0027, \u00277\u0027,",
+      "revId": "04e9b12f7778250fbdc60b8bcf4ef67c123ff04e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
