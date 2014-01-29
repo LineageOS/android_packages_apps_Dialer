@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a54edaf_ccb41ed3",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2014-01-29T20:33:52Z",
+      "side": 1,
+      "message": "Typo, I\u0027ll push a patch ASAP",
+      "revId": "c825cec99924d01f0b9c3b273477bf08bf4f1694",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
