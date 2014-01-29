@@ -16,6 +16,24 @@
       "revId": "04e9b12f7778250fbdc60b8bcf4ef67c123ff04e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fade3982_82621ad7",
+        "filename": "src/com/android/dialer/dialpad/GreekSmartDialMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2014-01-29T23:23:14Z",
+      "side": 1,
+      "message": "That fixed the crash but I wonder why? 7 has 3 letters only in the greek t9 keypad.",
+      "parentUuid": "fade3982_e27206ad",
+      "revId": "04e9b12f7778250fbdc60b8bcf4ef67c123ff04e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
