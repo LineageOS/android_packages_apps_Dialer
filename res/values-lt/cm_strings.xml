@@ -42,7 +42,7 @@
     <string name="date_qs_lastquarter">Praėjęs ketvirtis</string>
     <string name="date_qs_lastyear">Praėję metai</string>
     <string name="call_stats_date_filter">Nustatyti laikotarpį</string>
-    <string name="call_stats_reset_filter">Atstatyti laikotarpį</string>
+    <string name="call_stats_reset_filter">Atkurti laikotarpį</string>
     <string name="call_stats_sort_by_duration">Rikiuoti pagal trukmę</string>
     <string name="call_stats_sort_by_count">Rikiuoti pagal skaičių</string>
     <string name="menu_add_to_blacklist">Įtraukti į juodąjį sąrašą</string>
