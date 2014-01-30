@@ -41,11 +41,14 @@ public class InCallService extends Service {
      * {@link CallList} which in turn will trigger UI activity.
      */
     private class InCallServiceBinder extends IInCallService.Stub {
-        /** {@inheritDoc} */
+        /**
+         * TODO(santoscordon): Rename this to setTelecommAdapter.
+         * {@inheritDoc}
+         */
         @Override public void setInCallAdapter(final IInCallAdapter inCallAdapter) {
             mHandler.post(new Runnable() {
                 @Override public void run() {
-                    InCallPresenter.getInstance().setInCallAdapter(inCallAdapter);
+                    InCallPresenter.getInstance().setTelecommAdapter(inCallAdapter);
                 }
             });
         }
@@ -99,5 +102,19 @@ public class InCallService extends Service {
     /** {@inheritDoc} */
     @Override public IBinder onBind(Intent intent) {
         return mBinder;
+    }
+
+    /** {@inheritDoc} */
+    @Override public void onCreate() {
+        InCallPresenter inCallPresenter = InCallPresenter.getInstance();
+        inCallPresenter.setUp(
+                getApplicationContext(), CallList.getInstance(), AudioModeProvider.getInstance());
+    }
+
+    /** {@inheritDoc} */
+    @Override public void onDestroy() {
+        // Tear down the InCall system
+        CallList.getInstance().clearOnDisconnect();
+        InCallPresenter.getInstance().tearDown();
     }
 }

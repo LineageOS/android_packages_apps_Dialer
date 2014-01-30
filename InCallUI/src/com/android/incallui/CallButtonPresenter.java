@@ -32,6 +32,8 @@ import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.Call.Capabilities;
 
 import android.app.Fragment;
+import android.os.RemoteException;
+import android.telecomm.IInCallAdapter;
 
 /**
  * Logic for call buttons.
@@ -195,6 +197,20 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
 
         CallCommandClient.getInstance().disconnectCall(mCall.getCallId());
+
+        // Notify Telecomm that the user hit end-call.
+        IInCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
+        if (telecommAdapter != null) {
+            String callId = CallInfoTranslator.getTelecommCallId(mCall);
+            if (callId != null) {
+                try {
+                    Log.i(this, "Disconnecting the call: " + callId);
+                    telecommAdapter.disconnectCall(callId);
+                } catch (RemoteException e) {
+                    Log.e(this, "Failed to send disconnect command.", e);
+                }
+            }
+        }
     }
 
     public void manageConferenceButtonClicked() {
