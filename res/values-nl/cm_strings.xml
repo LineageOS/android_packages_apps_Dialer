@@ -47,4 +47,12 @@
     <string name="call_stats_sort_by_count">Sorteren op gespreksaantal</string>
     <string name="menu_add_to_blacklist">Toevoegen aan zwarte lijst</string>
     <string name="toast_added_to_blacklist">%s toegevoegd aan zwarte lijst.</string>
+    <string name="dialpad_2_2_letters"></string>
+    <string name="dialpad_3_2_letters"></string>
+    <string name="dialpad_4_2_letters"></string>
+    <string name="dialpad_5_2_letters"></string>
+    <string name="dialpad_6_2_letters"></string>
+    <string name="dialpad_7_2_letters"></string>
+    <string name="dialpad_8_2_letters"></string>
+    <string name="dialpad_9_2_letters"></string>
 </resources>
