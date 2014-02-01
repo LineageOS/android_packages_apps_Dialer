@@ -94,6 +94,8 @@ public class SmartDialPrefix {
         String locale = context.getResources().getConfiguration().locale.getCountry();
         if (locale.equals("RU")) {
             mMap = new RussianSmartDialMap();
+        } else if (locale.equals("IW")) {
+            mMap = new HebrewSmartDialMap();
         } else {
             mMap = new LatinSmartDialMap();
         }
