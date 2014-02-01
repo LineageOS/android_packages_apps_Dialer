@@ -96,6 +96,8 @@ public class SmartDialPrefix {
             mMap = new RussianSmartDialMap();
         } else if (locale.equals("GR")) {
             mMap = new GreekSmartDialMap();
+        } else if (locale.equals("IL")) {
+            mMap = new HebrewSmartDialMap();
         } else {
             mMap = new LatinSmartDialMap();
         }
@@ -596,6 +598,7 @@ public class SmartDialPrefix {
         result.add("DO"); // Dominican Republic
         result.add("GD"); // Grenada
         result.add("GU"); // Guam
+        result.add("IL"); // Israel
         result.add("JM"); // Jamaica
         result.add("PR"); // Puerto Rico
         result.add("MS"); // Montserrat
