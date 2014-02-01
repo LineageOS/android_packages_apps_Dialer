@@ -96,6 +96,8 @@ public class SmartDialPrefix {
             mMap = new RussianSmartDialMap();
         } else if (locale.equals("GR")) {
             mMap = new GreekSmartDialMap();
+        } else if (locale.equals("IL")) {
+            mMap = new HebrewSmartDialMap();
         } else {
             mMap = new LatinSmartDialMap();
         }
