@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fade3982_d6cfc4b1",
+        "filename": "src/com/android/dialer/dialpad/HebrewSmartDialMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 8188
+      },
+      "writtenOn": "2014-02-02T00:24:21Z",
+      "side": 1,
+      "message": "Wrong copy paste",
+      "revId": "7d23c5298fb938b6f02cb4b22aeadcaeaa8bcf02",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fade3982_b6d4c047",
+        "filename": "src/com/android/dialer/dialpad/HebrewSmartDialMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 8188
+      },
+      "writtenOn": "2014-02-02T00:24:21Z",
+      "side": 1,
+      "message": "?\u0027 - \u0027?\u0027 \u003d 26\u0027 while you have 22 in char table!",
+      "revId": "7d23c5298fb938b6f02cb4b22aeadcaeaa8bcf02",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fade3982_16cacca1",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 8188
+      },
+      "writtenOn": "2014-02-02T00:24:21Z",
+      "side": 1,
+      "message": "Wrong Country",
+      "revId": "7d23c5298fb938b6f02cb4b22aeadcaeaa8bcf02",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
