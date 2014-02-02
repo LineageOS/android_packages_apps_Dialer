@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_log_stats_title">Statistik</string>
+    <string name="callStatsDetailTitle">Detaljer om opkaldsstatistik</string>
+    <string name="call_stats">Opkaldsstatistik</string>
+    <string name="call_stats_refresh">Opdatér</string>
+    <string name="activity_title_call_stats">Opkaldsstatistik</string>
+    <string name="call_stats_nav_all">Alle</string>
+    <string name="call_stats_nav_incoming">Indgående</string>
+    <string name="call_stats_nav_outgoing">Udgående</string>
+    <string name="call_stats_nav_missed">Ubesvarede</string>
+    <string name="call_stats_incoming">Indgående: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">Udgående: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Ubesvarede</string>
+    <string name="call_stats_missed_percent">Ubesvarede: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">I alt: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">I alt: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Startdato</string>
+    <string name="call_stats_filter_to">Slutdato</string>
+    <string name="call_stats_filter_picker_title">Filterinterval</string>
+    <string name="date_quick_selection">Hurtigt valg</string>
+    <string name="date_qs_currentmonth">Aktuel måned</string>
+    <string name="date_qs_currentquarter">Aktuelt kvartal</string>
+    <string name="date_qs_currentyear">Aktuelt år</string>
+    <string name="date_qs_lastweek">Sidste uge</string>
+    <string name="date_qs_lastmonth">Sidste måned</string>
+    <string name="date_qs_lastquarter">Sidste kvartal</string>
+    <string name="date_qs_lastyear">Sidste år</string>
+    <string name="call_stats_date_filter">Justér tidsinterval</string>
+    <string name="call_stats_reset_filter">Nulstil tidsinterval</string>
+    <string name="call_stats_sort_by_duration">Sortér på opkaldsvarighed</string>
+    <string name="call_stats_sort_by_count">Sortér på antal opkald</string>
+    <string name="menu_add_to_blacklist">Føj til sortliste</string>
+    <string name="toast_added_to_blacklist">%s føjet til sortliste.</string>
+    <string name="dialpad_2_2_letters"></string>
+    <string name="dialpad_3_2_letters"></string>
+    <string name="dialpad_4_2_letters"></string>
+    <string name="dialpad_5_2_letters"></string>
+    <string name="dialpad_6_2_letters"></string>
+    <string name="dialpad_7_2_letters"></string>
+    <string name="dialpad_8_2_letters"></string>
+    <string name="dialpad_9_2_letters"></string>
+</resources>
