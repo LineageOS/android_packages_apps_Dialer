@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -48,6 +49,8 @@ public class CallButtonFragment
     private ImageButton mMergeButton;
     private ImageButton mAddCallButton;
     private ImageButton mSwapButton;
+    private ImageButton mAuxiliaryActionButton;
+    private View mAuxiliaryActionSpacer;
 
     private PopupMenu mAudioModePopup;
     private boolean mAudioModePopupVisible;
@@ -141,6 +144,9 @@ public class CallButtonFragment
         mMergeButton.setOnClickListener(this);
         mSwapButton = (ImageButton) parent.findViewById(R.id.swapButton);
         mSwapButton.setOnClickListener(this);
+        mAuxiliaryActionButton = (ImageButton) parent.findViewById(R.id.auxiliaryActionButton);
+        mAuxiliaryActionButton.setOnClickListener(this);
+        mAuxiliaryActionSpacer = parent.findViewById(R.id.auxiliaryActionSpacer);
 
         return parent;
     }
@@ -182,6 +188,9 @@ public class CallButtonFragment
                 break;
             case R.id.dialpadButton:
                 getPresenter().showDialpadClicked(mShowDialpadButton.isChecked());
+                break;
+            case R.id.auxiliaryActionButton:
+                getPresenter().auxiliaryActionButtonClicked();
                 break;
             default:
                 Log.wtf(this, "onClick: unexpected");
@@ -526,6 +535,15 @@ public class CallButtonFragment
         }
     }
 
+    @Override
+    public void updateAuxiliaryActionButton(boolean show, String description, Drawable drawable) {
+        mAuxiliaryActionButton.setVisibility(show ? View.VISIBLE : View.GONE);
+        mAuxiliaryActionSpacer.setVisibility(show ? View.VISIBLE : View.GONE);
+        if (show) {
+            mAuxiliaryActionButton.setContentDescription(description);
+            mAuxiliaryActionButton.setImageDrawable(drawable);
+        }
+    }
 
     @Override
     public void showManageConferenceCallButton() {

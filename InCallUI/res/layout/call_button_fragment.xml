@@ -164,7 +164,18 @@
                      android:visibility="gone"
                 />
 
-        <!-- Separator between 4th (or 5th) button and right padding -->
+        <!-- Separator between 5th and 6th button -->
+        <View android:id="@+id/auxiliaryActionSpacer"
+              style="@style/VerticalSeparator"
+              android:visibility="gone"
+                />
+
+        <ImageButton android:id="@+id/auxiliaryActionButton"
+                     style="@style/InCallButton"
+                     android:visibility="gone"
+                />
+
+        <!-- Separator between last button and right padding -->
         <View style="@style/VerticalSeparator"/>
 
     </LinearLayout>
