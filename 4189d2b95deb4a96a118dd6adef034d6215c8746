@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fade3982_2c833cce",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-02-05T01:53:15Z",
+      "side": 1,
+      "message": "As Russia isn\u0027t NANP either, I\u0027d like to see this reverted as well.",
+      "revId": "4189d2b95deb4a96a118dd6adef034d6215c8746",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fade3982_cc7d70e9",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-02-05T01:53:15Z",
+      "side": 1,
+      "message": "I can\u0027t imagine Greece uses NANP (http://en.wikipedia.org/wiki/North_American_Numbering_Plan) numbers...\n\n(same for Russia, BTW)",
+      "revId": "4189d2b95deb4a96a118dd6adef034d6215c8746",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fade3982_0c88f8e6",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-02-05T01:53:15Z",
+      "side": 1,
+      "message": "Both RU and GR don\u0027t belong here.",
+      "revId": "4189d2b95deb4a96a118dd6adef034d6215c8746",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
