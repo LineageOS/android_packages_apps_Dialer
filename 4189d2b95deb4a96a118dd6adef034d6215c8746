@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fade3982_df499490",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 8188
+      },
+      "writtenOn": "2014-02-06T00:14:57Z",
+      "side": 1,
+      "message": "Russia has exactly the same Number format except of first digit is \u00277\u0027 instead of \u00271\u0027",
+      "parentUuid": "fade3982_2c833cce",
+      "revId": "4189d2b95deb4a96a118dd6adef034d6215c8746",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fade3982_cc7d70e9",
         "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
         "patchSetId": 5
