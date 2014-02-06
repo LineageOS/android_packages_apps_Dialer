@@ -256,7 +256,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                 this, 1);
         final String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mCallLogAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso), true, false);
+                new ContactInfoHelper(getActivity(), currentCountryIso), false, false);
         mWifiSettings = new WifiSettings(getActivity());
         setHasOptionsMenu(true);
     }

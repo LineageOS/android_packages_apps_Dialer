@@ -183,9 +183,11 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Can be set to true by tests to disable processing of requests. */
     private volatile boolean mRequestProcessingDisabled = false;
 
-    /** True if CallLogAdapter is created from the PhoneFavoriteFragment, where the primary
-     * action should be set to call a number instead of opening the detail page. */
-    private boolean mUseCallAsPrimaryAction = false;
+    /**
+     * Whether to show the secondary action button used to play voicemail or show call details.
+     * True if created from a CallLogFragment.
+     * False if created from the PhoneFavoriteFragment. */
+    private boolean mShowSecondaryActionButton = true;
 
     private boolean mIsCallLog = true;
     private int mNumMissedCalls = 0;
@@ -246,14 +248,14 @@ public class CallLogAdapter extends GroupingListAdapter
     };
 
     public CallLogAdapter(Context context, CallFetcher callFetcher,
-            ContactInfoHelper contactInfoHelper, boolean useCallAsPrimaryAction,
+            ContactInfoHelper contactInfoHelper, boolean showSecondaryActionButton,
             boolean isCallLog) {
         super(context);
 
         mContext = context;
         mCallFetcher = callFetcher;
         mContactInfoHelper = contactInfoHelper;
-        mUseCallAsPrimaryAction = useCallAsPrimaryAction;
+        mShowSecondaryActionButton = showSecondaryActionButton;
         mIsCallLog = isCallLog;
 
         mContactInfoCache = ExpirableCache.create(CONTACT_INFO_CACHE_SIZE);
@@ -508,7 +510,7 @@ public class CallLogAdapter extends GroupingListAdapter
         // Get the views to bind to.
         CallLogListItemViews views = CallLogListItemViews.fromView(view);
         views.primaryActionView.setOnClickListener(mActionListener);
-        views.secondaryActionView.setOnClickListener(mActionListener);
+        views.secondaryActionButtonView.setOnClickListener(mActionListener);
         view.setTag(views);
     }
 
@@ -535,31 +537,30 @@ public class CallLogAdapter extends GroupingListAdapter
 
         final ContactInfo cachedContactInfo = getContactInfoFromCallLog(c);
 
-        if (!mUseCallAsPrimaryAction) {
-            // Sets the primary action to open call detail page.
-            views.primaryActionView.setTag(
-                    IntentProvider.getCallDetailIntentProvider(
-                            getCursor(), c.getPosition(), c.getLong(CallLogQuery.ID), count));
-        } else if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
+        // Primary action is always to call, if possible.
+        if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
             // Sets the primary action to call the number.
             views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number));
         } else {
             views.primaryActionView.setTag(null);
         }
 
-        // Store away the voicemail information so we can play it directly.
-        if (callType == Calls.VOICEMAIL_TYPE) {
-            String voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
-            final long rowId = c.getLong(CallLogQuery.ID);
-            views.secondaryActionView.setTag(
-                    IntentProvider.getPlayVoicemailIntentProvider(rowId, voicemailUri));
-        } else if (!TextUtils.isEmpty(number)) {
-            // Store away the number so we can call it directly if you click on the call icon.
-            views.secondaryActionView.setTag(
-                    IntentProvider.getReturnCallIntentProvider(number));
+        if ( mShowSecondaryActionButton ) {
+            // Store away the voicemail information so we can play it directly.
+            if (callType == Calls.VOICEMAIL_TYPE) {
+                String voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
+                final long rowId = c.getLong(CallLogQuery.ID);
+                views.secondaryActionButtonView.setTag(
+                        IntentProvider.getPlayVoicemailIntentProvider(rowId, voicemailUri));
+            } else {
+                // Store the call details information.
+                views.secondaryActionButtonView.setTag(
+                        IntentProvider.getCallDetailIntentProvider(
+                                getCursor(), c.getPosition(), c.getLong(CallLogQuery.ID), count));
+            }
         } else {
             // No action enabled.
-            views.secondaryActionView.setTag(null);
+            views.secondaryActionButtonView.setTag(null);
         }
 
         // Lookup contacts with this number
@@ -624,16 +625,13 @@ public class CallLogAdapter extends GroupingListAdapter
         // New items also use the highlighted version of the text.
         final boolean isHighlighted = isNew;
         mCallLogViewsHelper.setPhoneCallDetails(views, details, isHighlighted,
-                mUseCallAsPrimaryAction);
+                mShowSecondaryActionButton);
 
         if (photoId == 0 && photoUri != null) {
             setPhoto(views, photoUri, lookupUri);
         } else {
             setPhoto(views, photoId, lookupUri);
         }
-
-        views.quickContactView.setContentDescription(views.phoneCallDetailsViews.nameView.
-                getText());
 
         // Listen for the first draw
         if (mViewTreeObserver == null) {
