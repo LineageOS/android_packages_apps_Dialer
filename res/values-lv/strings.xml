@@ -113,6 +113,16 @@
     <string name="description_add_contact" msgid="3103414772502485851">"Pievienot kontaktpersonu"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Skatīt kontaktpersonu <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Zvanīt šim: <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_contact_details" msgid="51229793651342809">"Kontaktpersonas informācija: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_call_details" msgid="8936017517290240089">"Informācija par zvanu"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"Jauns balss pasta ziņojums."</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> zvani."</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"Zvanīt, ja ir neatbildēts zvans: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"Zvanīt, ja zvans ir atbildēts: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"Neatbildēts zvans no: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"Atbildēts zvans no: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"Zvanīt: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Pēdējoreiz zvanīts: <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_last" msgid="491385778814705302">"Zvanīt: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Zvanīts: <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Sūtīt īsziņu šim: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nenoklausīti balss pasta ziņojumi"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Sākt meklēšanu ar balsi"</string>

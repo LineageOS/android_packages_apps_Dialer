@@ -113,6 +113,16 @@
     <string name="description_add_contact" msgid="3103414772502485851">"Thêm địa chỉ liên hệ"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Xem thông tin liên hệ của <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Gọi <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_contact_details" msgid="51229793651342809">"Chi tiết liên lạc cho <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_call_details" msgid="8936017517290240089">"Chi tiết cuộc gọi"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"Thư thoại mới."</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> cuộc gọi."</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"Quay lại cuộc gọi nhỡ từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"Quay lại cuộc gọi đã trả lời từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"Cuộc gọi nhỡ từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"Cuộc gọi đã trả lời từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"Gọi <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Gọi lần cuối <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_last" msgid="491385778814705302">"Gọi <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Đã gọi <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Gửi tin nhắn văn bản tới <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Thư thoại chưa nghe"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Bắt đầu tìm kiếm bằng giọng nói"</string>
