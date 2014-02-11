@@ -65,10 +65,11 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/secondary_text_color" />
 
-    <com.android.dialer.widget.PieChartView
+    <com.android.internal.widget.PieChartView
         android:id="@+id/pie_chart"
         android:layout_width="@dimen/call_stats_details_chart_size"
         android:layout_height="@dimen/call_stats_details_chart_size"
+        android:padding="@dimen/call_stats_details_chart_padding"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_below="@id/total_duration"

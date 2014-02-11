@@ -78,4 +78,5 @@
 
     <!-- Size of the pie chart in the call stats detail activity -->
     <dimen name="call_stats_details_chart_size">140dip</dimen>
+    <dimen name="call_stats_details_chart_padding">5dip</dimen>
 </resources>
