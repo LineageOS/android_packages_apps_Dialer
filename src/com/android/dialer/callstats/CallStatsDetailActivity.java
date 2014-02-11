@@ -39,7 +39,7 @@ import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneNumberHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
-import com.android.dialer.widget.PieChartView;
+import com.android.internal.widget.PieChartView;
 
 /**
  * Activity to display detailed information about a callstat item
