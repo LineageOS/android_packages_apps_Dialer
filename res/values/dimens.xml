@@ -63,10 +63,11 @@
     <dimen name="fake_menu_button_min_width">56dp</dimen>
 
     <!--  Favorites tile and recent call log padding -->
-    <dimen name="contact_tile_divider_padding">3dp</dimen>
+    <dimen name="contact_tile_divider_width">12dp</dimen>
     <dimen name="contact_tile_info_button_height_and_width">36dp</dimen>
-    <dimen name="favorites_row_top_padding">8dp</dimen>
-    <dimen name="favorites_row_bottom_padding">8dp</dimen>
+    <item name="contact_tile_height_to_width_ratio" type="dimen">67%</item>
+    <dimen name="favorites_row_top_padding">6dp</dimen>
+    <dimen name="favorites_row_bottom_padding">6dp</dimen>
     <dimen name="favorites_row_start_padding">8dp</dimen>
     <dimen name="favorites_row_end_padding">8dp</dimen>
     <dimen name="favorites_row_undo_text_side_padding">32dp</dimen>
