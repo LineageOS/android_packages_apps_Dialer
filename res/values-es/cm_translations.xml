@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="hour">
+    <item quantity="one">1 hora</item>
+    <item quantity="other">%d horas</item>
+  </plurals>
+  <plurals name="minute">
+    <item quantity="one">1 minuto</item>
+    <item quantity="other">%d minutos</item>
+  </plurals>
+  <plurals name="second">
+    <item quantity="one">1 segundo</item>
+    <item quantity="other">%d segundos</item>
+  </plurals>
+  <plurals name="call">
+    <item quantity="one">1 llamada</item>
+    <item quantity="other">%d llamadas</item>
+  </plurals>
+  <string name="call_log_stats_title">Estadísticas</string>
+  <string name="callStatsDetailTitle">Detalles de llamada</string>
+  <string name="call_stats">Estadísticas de llamadas</string>
+  <string name="call_stats_refresh">Actualizar</string>
+  <string name="activity_title_call_stats">Estadísticas de llamadas</string>
+  <string name="call_stats_nav_all">Todas</string>
+  <string name="call_stats_nav_incoming">Entrantes</string>
+  <string name="call_stats_nav_outgoing">Salientes</string>
+  <string name="call_stats_nav_missed">Perdidas</string>
+  <string name="call_stats_incoming">Entrantes: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_outgoing">Salientes: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_missed">Perdidas</string>
+  <string name="call_stats_missed_percent">Perdidas: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">Fecha inicio</string>
+  <string name="call_stats_filter_to">Fecha fin</string>
+  <string name="call_stats_filter_picker_title">Rango de fechas</string>
+  <string name="date_quick_selection">Selección rápida</string>
+  <string name="date_qs_currentmonth">Mes actual</string>
+  <string name="date_qs_currentquarter">Trimestre actual</string>
+  <string name="date_qs_currentyear">Año actual</string>
+  <string name="date_qs_lastweek">Última semana</string>
+  <string name="date_qs_lastmonth">Último mes</string>
+  <string name="date_qs_lastquarter">Último trimestre</string>
+  <string name="date_qs_lastyear">Último año</string>
+  <string name="call_stats_date_filter">Ajustar rango de fechas</string>
+  <string name="call_stats_reset_filter">Restablecer rango de fechas</string>
+  <string name="call_stats_sort_by_duration">Ordenar por duración</string>
+  <string name="call_stats_sort_by_count">Ordenar por núm. llamadas</string>
+  <string name="menu_add_to_blacklist">Añadir a la lista negra</string>
+  <string name="toast_added_to_blacklist">%s añadido a la lista negra.</string>
+  <string name="dialpad_2_2_letters"></string>
+  <string name="dialpad_3_2_letters"></string>
+  <string name="dialpad_4_2_letters"></string>
+  <string name="dialpad_5_2_letters"></string>
+  <string name="dialpad_6_2_letters"></string>
+  <string name="dialpad_7_2_letters"></string>
+  <string name="dialpad_8_2_letters"></string>
+  <string name="dialpad_9_2_letters"></string>
+</resources>
