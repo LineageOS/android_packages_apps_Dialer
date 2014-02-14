@@ -181,7 +181,12 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
                 where.append(" AND ");
             }
             // Add a clause to fetch only items of type voicemail.
-            where.append(String.format("(%s = ?)", Calls.TYPE));
+            if ((callType == Calls.INCOMING_TYPE) || (callType == Calls.OUTGOING_TYPE)
+                    || (callType == Calls.MISSED_TYPE)) {
+                where.append(String.format("(%s = ? OR %s = ?)", Calls.TYPE, Calls.TYPE));
+            } else {
+                where.append(String.format("(%s = ?)", Calls.TYPE));
+            }
             // Add a clause to fetch only items newer than the requested date
             selectionArgs.add(Integer.toString(callType));
             if (callType == Calls.INCOMING_TYPE) {
