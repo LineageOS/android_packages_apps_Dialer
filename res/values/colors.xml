@@ -83,6 +83,7 @@
     <color name="call_stats_outgoing">#99cc00</color>
     <color name="call_stats_missed">#eb1313</color>
     <color name="call_stats_bar_background">#88888888</color>
+    <color name="call_stats_pie_chart_outline_color">#eeeeee</color>
 
     <!-- New Colors for Theme Chooser to be compatible -->
     <color name="call_detail_photo_bg">#7f000000</color>
