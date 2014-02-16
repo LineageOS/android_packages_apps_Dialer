@@ -111,6 +111,7 @@ public class CallStatsDetailActivity extends Activity {
         mMissedSummary = (TextView) findViewById(R.id.missed_summary);
         mMissedCount = (TextView) findViewById(R.id.missed_count);
         mPieChart = (PieChartView) findViewById(R.id.pie_chart);
+        mPieChart.setOutlineColor(mResources.getColor(R.color.call_stats_pie_chart_outline_color));
 
         configureActionBar();
         Intent launchIntent = getIntent();
