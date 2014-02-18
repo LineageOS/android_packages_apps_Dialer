@@ -115,14 +115,14 @@
     <string name="description_call" msgid="3443678121983852666">"呼叫<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的详细联系信息"</string>
     <string name="description_call_details" msgid="8936017517290240089">"通话详情"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"新语音邮件。"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"有新的语音邮件。"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>次通话。"</string>
-    <string name="description_return_missed_call" msgid="5832103397942825774">"回拨<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>用户<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的未接电话"</string>
-    <string name="description_return_answered_call" msgid="6038958518509163218">"回拨<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>用户<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的已接电话"</string>
-    <string name="description_unknown_missed_call" msgid="8736195520010578126">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>用户<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的未接电话"</string>
-    <string name="description_unknown_answered_call" msgid="1470971301999791460">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>用户<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的已接电话"</string>
-    <string name="description_call_last_multiple" msgid="271456796151369411">"与<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>用户<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>通话。上次通话时间是<xliff:g id="TIMEOFCALL">%3$s</xliff:g>。"</string>
-    <string name="description_call_last" msgid="491385778814705302">"与<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>用户<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>通话。通话时间是<xliff:g id="TIMEOFCALL">%3$s</xliff:g>。"</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"回拨<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的未接电话"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"回拨<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的已接电话"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的未接电话"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的已接电话"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）通话。上次通话时间是<xliff:g id="TIMEOFCALL">%3$s</xliff:g>。"</string>
+    <string name="description_call_last" msgid="491385778814705302">"与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）通话。上次通话时间是<xliff:g id="TIMEOFCALL">%3$s</xliff:g>。"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"向<xliff:g id="NAME">%1$s</xliff:g>发送短信"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"未收听的语音邮件"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"开始语音搜索"</string>

@@ -117,7 +117,7 @@
     <string name="description_call_details" msgid="8936017517290240089">"የጥሪ ዝርዝሮች"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"አዲስ የድምጽ መልዕክት።"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> ጥሪዎች።"</string>
-    <string name="description_return_missed_call" msgid="5832103397942825774">"ከ<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ያመለጠዎት ጥሪ ይመልሱ"</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"ከ<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ላመለጥዎት ጥሪ ይመልሱ"</string>
     <string name="description_return_answered_call" msgid="6038958518509163218">"መልስ የተሰጠው የ<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ጥሪ ይመልሱ"</string>
     <string name="description_unknown_missed_call" msgid="8736195520010578126">"ያመለጠ የ<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ጥሪ"</string>
     <string name="description_unknown_answered_call" msgid="1470971301999791460">"የ<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ጥሪ መልሰዋል"</string>

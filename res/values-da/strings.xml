@@ -117,12 +117,12 @@
     <string name="description_call_details" msgid="8936017517290240089">"Opkaldsdetaljer"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"Ny talebesked."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> opkald."</string>
-    <string name="description_return_missed_call" msgid="5832103397942825774">"Returner ubesvaret opkald fra <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
-    <string name="description_return_answered_call" msgid="6038958518509163218">"Returner besvaret opkald fra <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"Returneret ubesvaret opkald fra <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"Returneret besvaret opkald fra <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
     <string name="description_unknown_missed_call" msgid="8736195520010578126">"Ubesvaret opkald fra <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
     <string name="description_unknown_answered_call" msgid="1470971301999791460">"Besvaret opkald fra <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
-    <string name="description_call_last_multiple" msgid="271456796151369411">"Ring til <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Sidste opkald blev foretaget kl. <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_call_last" msgid="491385778814705302">"Ring til <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Opkaldet blev foretaget kl. <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"Opkald til <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Sidste opkald blev foretaget kl. <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_last" msgid="491385778814705302">"Opkald til <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Opkaldet blev foretaget kl. <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Send sms til <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Uaflyttet besked på telefonsvareren"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Start stemmesøgning"</string>

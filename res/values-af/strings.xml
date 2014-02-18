@@ -117,8 +117,8 @@
     <string name="description_call_details" msgid="8936017517290240089">"Oproepbesonderhede"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"Nuwe stemboodskap."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> oproepe."</string>
-    <string name="description_return_missed_call" msgid="5832103397942825774">"Bel <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> van wie jy \'n oproep gemis het terug"</string>
-    <string name="description_return_answered_call" msgid="6038958518509163218">"Bel <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> wat jou oproep geantwoord het terug"</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"Bel <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> (gemisde oproep) terug"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"Bel <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> (geantwoorde oproep) terug"</string>
     <string name="description_unknown_missed_call" msgid="8736195520010578126">"Het oproep van <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> af gemis"</string>
     <string name="description_unknown_answered_call" msgid="1470971301999791460">"Het oproep van <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> af geantwoord"</string>
     <string name="description_call_last_multiple" msgid="271456796151369411">"Bel <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Laas om <xliff:g id="TIMEOFCALL">%3$s</xliff:g> gebel."</string>

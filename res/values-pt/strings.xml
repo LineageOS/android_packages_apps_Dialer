@@ -122,7 +122,7 @@
     <string name="description_unknown_missed_call" msgid="8736195520010578126">"Chamada perdida de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
     <string name="description_unknown_answered_call" msgid="1470971301999791460">"Chamada atendida de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
     <string name="description_call_last_multiple" msgid="271456796151369411">"Ligar para <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Última chamada <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_call_last" msgid="491385778814705302">"Ligar para <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Ligou <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_last" msgid="491385778814705302">"Ligar para <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Última chamada: <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Enviar mensagem de texto para <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nova mensagem de voz"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Iniciar pesquisa por voz"</string>

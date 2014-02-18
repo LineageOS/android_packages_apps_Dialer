@@ -121,8 +121,8 @@
     <string name="description_return_answered_call" msgid="6038958518509163218">"Rückruf für angenommenen Anruf von <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
     <string name="description_unknown_missed_call" msgid="8736195520010578126">"Verpasster Anruf von <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
     <string name="description_unknown_answered_call" msgid="1470971301999791460">"Angenommener Anruf von <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
-    <string name="description_call_last_multiple" msgid="271456796151369411">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> anrufen. Letzter Anruf: <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_call_last" msgid="491385778814705302">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> anrufen. Anruf: <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> anrufen. Letzter Anruf: <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_call_last" msgid="491385778814705302">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> anrufen. Anruf war: <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"SMS an <xliff:g id="NAME">%1$s</xliff:g> senden"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nicht abgehörte Mailbox-Nachricht"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Sprachsuche starten"</string>
