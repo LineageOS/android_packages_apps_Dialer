@@ -21,6 +21,7 @@ import android.app.KeyguardManager;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
@@ -29,17 +30,26 @@ import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Intents.Insert;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.dialer.R;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
@@ -47,6 +57,8 @@ import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.android.dialerbind.ObjectFactory;
 import com.android.internal.telephony.ITelephony;
+import com.android.internal.telephony.MSimConstants;
+import com.android.internal.telephony.PhoneConstants;
 
 import java.util.List;
 
@@ -74,6 +86,12 @@ public class CallLogFragment extends ListFragment
     protected View mStatusMessageView;
     protected TextView mStatusMessageText;
     protected TextView mStatusMessageAction;
+
+    private static final String SMS = "sms";
+    private Context mContext;
+    private PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
+    private Resources mResources;
+    private String mNumber = null;
     private KeyguardManager mKeyguardManager;
 
     private boolean mEmptyLoaderRunning;
@@ -253,6 +271,138 @@ public class CallLogFragment extends ListFragment
         }
         setListAdapter(mAdapter);
         getListView().setItemsCanFocus(true);
+        registerForContextMenu(getListView());
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+            ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.call_log_context_menu_options, menu);
+        final MenuItem ipCallBySlot1MenuItem = menu.findItem(R.id.menu_ip_call_by_slot1);
+        final MenuItem ipCallBySlot2MenuItem = menu.findItem(R.id.menu_ip_call_by_slot2);
+        final MenuItem editBeforeCallMenuItem = menu.findItem(R.id.menu_edit_before_call);
+        final MenuItem sendTextMessageMenuItem = menu.findItem(R.id.menu_send_text_message);
+        final MenuItem addToContactMenuItem = menu.findItem(R.id.menu_add_to_contacts);
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+        mNumber = getValidCallLogNumber(info.position);
+
+        menu.setHeaderTitle(mNumber);
+
+        if (MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB1)) {
+            String sub1Name = MoreContactUtils.getSimSpnName(MSimConstants.SUB1);
+            ipCallBySlot1MenuItem.setTitle(getActivity().getString(
+                    com.android.contacts.common.R.string.ip_call_by_slot, sub1Name));
+            ipCallBySlot1MenuItem.setVisible(true);
+        } else {
+            ipCallBySlot1MenuItem.setVisible(false);
+        }
+        if (MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB2)) {
+            String sub2Name = MoreContactUtils.getSimSpnName(MSimConstants.SUB2);
+            ipCallBySlot2MenuItem.setTitle(getActivity().getString(
+                    com.android.contacts.common.R.string.ip_call_by_slot, sub2Name));
+            ipCallBySlot2MenuItem.setVisible(true);
+        } else {
+            ipCallBySlot2MenuItem.setVisible(false);
+        }
+
+        mResources = getResources();
+        mPhoneNumberUtilsWrapper = new PhoneNumberUtilsWrapper();
+        final boolean canPlaceCallsTo = mPhoneNumberUtilsWrapper.canPlaceCallsTo(mNumber,
+                CallLog.Calls.PRESENTATION_ALLOWED);
+        final boolean isVoicemailNumber = mPhoneNumberUtilsWrapper.isVoicemailNumber(mNumber);
+        final boolean isSipNumber = mPhoneNumberUtilsWrapper.isSipNumber(mNumber);
+        if (canPlaceCallsTo && !isSipNumber && !isVoicemailNumber) {
+            editBeforeCallMenuItem.setVisible(true);
+        } else {
+            editBeforeCallMenuItem.setVisible(false);
+        }
+
+        if (mPhoneNumberUtilsWrapper.canSendSmsTo(mNumber, CallLog.Calls.PRESENTATION_ALLOWED)) {
+            sendTextMessageMenuItem.setVisible(true);
+        } else {
+            sendTextMessageMenuItem.setVisible(false);
+        }
+        String mName = getValidCallLogName(info.position);
+        if (mName == null) {
+            addToContactMenuItem.setVisible(true);
+        } else {
+            addToContactMenuItem.setVisible(false);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo;
+        try {
+            menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        } catch (Exception e) {
+            return false;
+        }
+        mNumber = getValidCallLogNumber(menuInfo.position);
+
+        switch (item.getItemId()) {
+            case R.id.menu_ip_call_by_slot1:
+                ipCallBySlot(MSimConstants.SUB1, menuInfo.position, mNumber);
+                return true;
+            case R.id.menu_ip_call_by_slot2:
+                ipCallBySlot(MSimConstants.SUB2, menuInfo.position, mNumber);
+                return true;
+            case R.id.menu_edit_before_call:
+                Intent editIntent = new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(mNumber));
+                startActivity(editIntent);
+                return true;
+            case R.id.menu_send_text_message:
+                Intent smsIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        SMS, mNumber, null));
+                startActivity(smsIntent);
+                return true;
+            case R.id.menu_add_to_contacts:
+                final CharSequence digits = (CharSequence) mNumber;
+                startActivity(getAddToContactIntent(digits));
+                return true;
+            default:
+                throw new IllegalArgumentException("Unknown menu option " + item.getItemId());
+        }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mContext = activity;
+    }
+
+    private void ipCallBySlot(int subscription, int position, String number) {
+        if (MoreContactUtils.isIPNumberExist(getActivity(), subscription)) {
+            Intent callIntent = new Intent(CallUtil.getCallIntent(number));
+            callIntent.putExtra(PhoneConstants.IP_CALL, true);
+            callIntent.putExtra(MSimConstants.SUBSCRIPTION_KEY, subscription);
+            startActivity(callIntent);
+        } else {
+            MoreContactUtils.showNoIPNumberDialog(mContext, subscription);
+        }
+    }
+
+    private static Intent getAddToContactIntent(CharSequence digits) {
+        final Intent addIntent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
+        addIntent.setType(Contacts.CONTENT_ITEM_TYPE);
+        addIntent.putExtra(Insert.PHONE, digits);
+        return addIntent;
+    }
+
+    private String getValidCallLogNumber(int position) {
+        Cursor cursor = null;
+        cursor = (Cursor) mAdapter.getItem(position);
+        return cursor != null ? cursor.getString(CallLogQuery.NUMBER) : "";
+    }
+
+    private String getValidCallLogName(int position) {
+        Cursor cursor = null;
+        cursor = (Cursor) mAdapter.getItem(position);
+        return cursor != null ? cursor.getString(CallLogQuery.CACHED_NAME) : "";
     }
 
     /**

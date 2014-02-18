@@ -105,6 +105,15 @@ public class CallLogAdapter extends GroupingListAdapter
             startActivityForAction(view);
         }
     };
+    
+    private final View.OnLongClickListener mPrimaryActionLongClickListener
+            = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            // Override this method to show context menu
+            return false;
+        }
+    };
 
     private void startActivityForAction(View view) {
         final IntentProvider intentProvider = (IntentProvider) view.getTag();
@@ -212,6 +221,7 @@ public class CallLogAdapter extends GroupingListAdapter
         // Get the views to bind to.
         CallLogListItemViews views = CallLogListItemViews.fromView(view);
         views.primaryActionView.setOnClickListener(mActionListener);
+        views.primaryActionView.setOnLongClickListener(mPrimaryActionLongClickListener);
         views.secondaryActionButtonView.setOnClickListener(mActionListener);
         view.setTag(views);
     }

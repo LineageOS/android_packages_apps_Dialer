@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
  * Not a Contribution.
  * Copyright (C) 2011 The Android Open Source Project
  *
@@ -76,6 +76,7 @@ import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.NeededForReflection;
@@ -89,6 +90,9 @@ import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.util.OrientationUtil;
 import com.android.internal.telephony.ITelephony;
+import com.android.internal.telephony.MSimConstants;
+import com.android.internal.telephony.PhoneConstants;
+import com.android.internal.telephony.TelephonyProperties;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
 import com.google.common.annotations.VisibleForTesting;
@@ -106,6 +110,7 @@ public class DialpadFragment extends Fragment
         PopupMenu.OnMenuItemClickListener,
         DialpadKeyButton.OnPressedListener {
     private static final String TAG = DialpadFragment.class.getSimpleName();
+    private Context mContext;
 
     /**
      * This interface allows the DialpadFragment to tell its hosting Activity when and when not
@@ -820,6 +825,8 @@ public class DialpadFragment extends Fragment
         final MenuItem waitMenuItem = menu.findItem(R.id.menu_add_wait);
         final MenuItem videocallMenuItem = menu.findItem(R.id.menu_video_call);
         final MenuItem videocallsettingsMenuItem = menu.findItem(R.id.menu_video_call_settings);
+        final MenuItem ipCallBySlot1MenuItem = menu.findItem(R.id.menu_ip_call_by_slot1);
+        final MenuItem ipCallBySlot2MenuItem = menu.findItem(R.id.menu_ip_call_by_slot2);
 
         // We show "video call setting" menu only when the csvt is supported
         //which means the prop "persist.radio.csvt.enabled" = true
@@ -833,7 +840,25 @@ public class DialpadFragment extends Fragment
             twoSecPauseMenuItem.setVisible(false);
             waitMenuItem.setVisible(false);
             videocallMenuItem.setVisible(false);
+            ipCallBySlot1MenuItem.setVisible(false);
+            ipCallBySlot2MenuItem.setVisible(false);
         } else {
+            if (MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB1)) {
+                String sub1Name = MoreContactUtils.getSimSpnName(MSimConstants.SUB1);
+                ipCallBySlot1MenuItem.setTitle(getActivity().getString(
+                        com.android.contacts.common.R.string.ip_call_by_slot, sub1Name));
+                ipCallBySlot1MenuItem.setVisible(true);
+            } else {
+                ipCallBySlot1MenuItem.setVisible(false);
+            }
+            if (MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB2)) {
+                String sub2Name = MoreContactUtils.getSimSpnName(MSimConstants.SUB2);
+                ipCallBySlot2MenuItem.setTitle(getActivity().getString(
+                        com.android.contacts.common.R.string.ip_call_by_slot, sub2Name));
+                ipCallBySlot2MenuItem.setVisible(true);
+            } else {
+                ipCallBySlot2MenuItem.setVisible(false);
+            }
             final CharSequence digits = mDigits.getText();
             // Put the current digits string into an intent
             addToContactMenuItem.setIntent(DialtactsActivity.getAddNumberToContactIntent(digits));
@@ -1607,6 +1632,12 @@ public class DialpadFragment extends Fragment
             case R.id.menu_video_call_settings:
                 startActivity(getVTCallSettingsIntent());
                 return true;
+            case R.id.menu_ip_call_by_slot1:
+                ipCallBySlot(MSimConstants.SUB1);
+                return true;
+            case R.id.menu_ip_call_by_slot2:
+                ipCallBySlot(MSimConstants.SUB2);
+                return true;
             default:
                 return false;
         }
@@ -1645,6 +1676,23 @@ public class DialpadFragment extends Fragment
               // Unselect: back to a regular cursor, just pass the character inserted.
               mDigits.setSelection(selectionStart + 1);
             }
+        }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mContext = activity;
+    }
+
+    private void ipCallBySlot(int subscription) {
+        if (MoreContactUtils.isIPNumberExist(getActivity(), subscription)) {
+            Intent callIntent = new Intent(CallUtil.getCallIntent(getValidDialNumber()));
+            callIntent.putExtra(PhoneConstants.IP_CALL, true);
+            callIntent.putExtra(MSimConstants.SUBSCRIPTION_KEY, subscription);
+            startActivity(callIntent);
+        } else {
+            MoreContactUtils.showNoIPNumberDialog(mContext, subscription);
         }
     }
 
