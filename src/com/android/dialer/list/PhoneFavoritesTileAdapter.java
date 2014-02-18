@@ -15,7 +15,9 @@
  */
 package com.android.dialer.list;
 
-import android.animation.ObjectAnimator;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.ComparisonChain;
+
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -44,9 +46,6 @@ import com.android.contacts.common.list.ContactTileView;
 import com.android.dialer.list.SwipeHelper.OnItemGestureListener;
 import com.android.dialer.list.SwipeHelper.SwipeHelperCallback;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.ComparisonChain;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -64,7 +63,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     private static final String TAG = PhoneFavoritesTileAdapter.class.getSimpleName();
     private static final boolean DEBUG = false;
 
-    public static final int ROW_LIMIT_DEFAULT = 1;
+    public static final int NO_ROW_LIMIT = -1;
+
+    public static final int ROW_LIMIT_DEFAULT = NO_ROW_LIMIT;
 
     private ContactTileView.Listener mListener;
     private OnDataSetChangedForAnimationListener mDataSetChangedListener;
@@ -155,7 +156,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         mContactEntries = new ArrayList<ContactEntry>();
         // Converting padding in dips to padding in pixels
         mPaddingInPixels = mContext.getResources()
-                .getDimensionPixelSize(R.dimen.contact_tile_divider_padding);
+                .getDimensionPixelSize(R.dimen.contact_tile_divider_width);
 
         bindColumnIndices();
     }
@@ -386,18 +387,24 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     protected int getRowCount(int entryCount) {
         if (entryCount == 0) return 0;
         final int nonLimitedRows = ((entryCount - 1) / mColumnCount) + 1;
+        if (mMaxTiledRows == NO_ROW_LIMIT) {
+            return nonLimitedRows;
+        }
         return Math.min(mMaxTiledRows, nonLimitedRows);
     }
 
     private int getMaxContactsInTiles() {
+        if (mMaxTiledRows == NO_ROW_LIMIT) {
+            return Integer.MAX_VALUE;
+        }
         return mColumnCount * mMaxTiledRows;
     }
 
     public int getRowIndex(int entryIndex) {
-        if (entryIndex < mMaxTiledRows * mColumnCount) {
+        if (entryIndex < getMaxContactsInTiles()) {
             return entryIndex / mColumnCount;
         } else {
-            return entryIndex - mMaxTiledRows * mColumnCount + mMaxTiledRows;
+            return entryIndex - mMaxTiledRows * (mColumnCount + 1);
         }
     }
 
@@ -467,9 +474,13 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     }
 
     /**
-     * Calculates the stable itemId for a particular entry based on its contactID
+     * Calculates the stable itemId for a particular entry based on the entry's contact ID. This
+     * stable itemId is used for animation purposes.
      */
     public long getAdjustedItemId(long id) {
+        if (mMaxTiledRows == NO_ROW_LIMIT) {
+            return id;
+        }
         return mMaxTiledRows + id;
     }
 
@@ -479,7 +490,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     }
 
     @Override
-
     public boolean areAllItemsEnabled() {
         // No dividers, so all items are enabled.
         return true;
@@ -541,7 +551,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
     @Override
     public int getItemViewType(int position) {
-        if (position < getRowCount(getMaxContactsInTiles())) {
+        if (position < getMaxContactsInTiles()) {
             return ViewTypes.TOP;
         } else {
             return ViewTypes.FREQUENT;
@@ -700,6 +710,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         private final int mRowPaddingEnd;
         private final int mRowPaddingTop;
         private final int mRowPaddingBottom;
+        private final float mHeightToWidthRatio;
         private int mPosition;
         private SwipeHelper mSwipeHelper;
         private OnItemGestureListener mOnItemSwipeListener;
@@ -712,6 +723,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
             final Resources resources = mContext.getResources();
 
+            mHeightToWidthRatio = getResources().getFraction(
+                    R.dimen.contact_tile_height_to_width_ratio, 1, 1);
+
             if (mItemViewType == ViewTypes.TOP) {
                 // For tiled views, we still want padding to be set on the ContactTileRow.
                 // Otherwise the padding would be set around each of the tiles, which we don't want
@@ -723,8 +737,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                         R.dimen.favorites_row_start_padding);
                 mRowPaddingEnd = resources.getDimensionPixelSize(
                         R.dimen.favorites_row_end_padding);
-
-                setBackgroundResource(R.drawable.bottom_border_background);
             } else {
                 // For row views, padding is set on the view itself.
                 mRowPaddingTop = 0;
@@ -894,21 +906,22 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
             // Preferred width / height for images (excluding the padding).
             // The actual width may be 1 pixel larger than this if we have a remainder.
-            final int imageSize = (width - totalPaddingsInPixels) / mColumnCount;
-            final int remainder = width - (imageSize * mColumnCount) - totalPaddingsInPixels;
+            final int imageWidth = (width - totalPaddingsInPixels) / mColumnCount;
+            final int remainder = width - (imageWidth * mColumnCount) - totalPaddingsInPixels;
+
+            final int height = (int) (mHeightToWidthRatio * imageWidth);
 
             for (int i = 0; i < childCount; i++) {
                 final View child = getChildAt(i);
-                final int childWidth = imageSize + child.getPaddingRight()
+                final int childWidth = imageWidth + child.getPaddingRight()
                         // Compensate for the remainder
                         + (i < remainder ? 1 : 0);
-                final int childHeight = imageSize;
                 child.measure(
                         MeasureSpec.makeMeasureSpec(childWidth, MeasureSpec.EXACTLY),
-                        MeasureSpec.makeMeasureSpec(childHeight, MeasureSpec.EXACTLY)
+                        MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY)
                         );
             }
-            setMeasuredDimension(width, imageSize + getPaddingTop() + getPaddingBottom());
+            setMeasuredDimension(width, height + getPaddingTop() + getPaddingBottom());
         }
 
         /**
@@ -919,7 +932,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
          * @return Index of the selected item in the cached array.
          */
         public int getItemIndex(float itemX, float itemY) {
-            if (mPosition < mMaxTiledRows) {
+            if (mMaxTiledRows == NO_ROW_LIMIT || mPosition < mMaxTiledRows) {
                 if (DEBUG) {
                     Log.v(TAG, String.valueOf(itemX) + " " + String.valueOf(itemY));
                 }
