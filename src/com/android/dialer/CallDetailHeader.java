@@ -149,7 +149,7 @@ public class CallDetailHeader {
             if (contactUri == null) {
                 Log.wtf(TAG, "No contact lookup uri provided.");
             }
-            return new ContactLoader((CallDetailActivity) mActivity, contactUri,
+            return new ContactLoader(mActivity, contactUri,
                     false /* loadGroupMetaData */, false /* loadInvitableAccountTypes */,
                     false /* postViewNotification */, true /* computeFormattedPhoneNumber */);
         }
