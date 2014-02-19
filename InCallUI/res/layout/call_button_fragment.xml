@@ -164,19 +164,7 @@
                      android:visibility="gone"
                 />
 
-        <!-- Separator between 5th and 6th button -->
-        <View android:id="@+id/videoHandoffSpacer"
-              style="@style/VerticalSeparator"
-                     android:visibility="gone" />
-
-        <ImageButton android:id="@+id/videoHandoffButton"
-                     style="@style/InCallButton"
-                     android:src="@drawable/ic_in_call_video_handoff"
-                     android:contentDescription="@string/video_handoff_text"
-                     android:visibility="gone"
-                />
-
-        <!-- Separator between last button and right padding -->
+        <!-- Separator between 4th (or 5th) button and right padding -->
         <View style="@style/VerticalSeparator"/>
 
     </LinearLayout>
