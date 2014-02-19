@@ -70,4 +70,17 @@
 
     <!-- Text color for no favorites message -->
     <color name="nofavorite_text_color">#777777</color>
+
+    <!-- Text color for the "speed dial" label in the favorites menu. -->
+    <color name="speed_dial_text_color">#555555</color>
+
+    <!-- Background color for the "All Contacts" button in the favorites menu. -->
+    <color name="all_contacts_button_color">#999999</color>
+
+    <!-- Background color for the favorites menu when pressed. -->
+    <color name="favorites_menu_pressed_color">#d6d6d6</color>
+
+    <!-- Text color for the "All Contacts" button above the favorite callers -->
+    <color name="all_contacts_button_text_color">#ffffff</color>
+
 </resources>

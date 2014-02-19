@@ -82,4 +82,17 @@
     <!-- Padding for the tooltip -->
     <dimen name="dismiss_button_padding_start">20dip</dimen>
     <dimen name="dismiss_button_padding_end">28dip</dimen>
+
+    <!-- Margin around the favorites menu. -->
+    <dimen name="favorites_menu_margin">6dp</dimen>
+    <!-- Padding within the favorites menu. -->
+    <dimen name="favorites_menu_padding">4dp</dimen>
+    <!-- Text size for the "speed dial" text in the favorites menu. -->
+    <dimen name="favorites_menu_speed_dial_text_size">18sp</dimen>
+    <!-- Height of the speed dial TextView in the favorites menu. -->
+    <dimen name="favorites_menu_speed_dial_height">24dp</dimen>
+    <!-- Text size for the "All Contacts" text in the favorites menu. -->
+    <dimen name="favorites_menu_all_contacts_text_size">12sp</dimen>
+    <!-- Height of the all contacts Button in the favorites menu. -->
+    <dimen name="favorites_menu_all_contacts_height">24dp</dimen>
 </resources>

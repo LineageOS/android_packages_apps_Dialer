@@ -17,9 +17,7 @@ package com.android.dialer.list;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
-import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
@@ -27,7 +25,6 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -42,6 +39,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -197,8 +195,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
     private PhoneFavoriteListView mListView;
 
-    private View mShowAllContactsButton;
-    private View mShowAllContactsInEmptyViewButton;
+    private View mPhoneFavoritesMenu;
     private View mContactTileFrame;
 
     private TileInteractionTeaserView mTileInteractionTeaserView;
@@ -290,14 +287,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
         mEmptyView = mParentView.findViewById(R.id.phone_no_favorites_view);
 
-        mShowAllContactsInEmptyViewButton = mParentView.findViewById(
-                R.id.show_all_contact_button_in_nofav);
-        prepareAllContactsButton(mShowAllContactsInEmptyViewButton);
-
-        mShowAllContactsButton = inflater.inflate(R.layout.show_all_contact_button, mListView,
-                false);
-
-        prepareAllContactsButton(mShowAllContactsButton);
+        mPhoneFavoritesMenu = inflater.inflate(R.layout.phone_favorites_menu, mListView, false);
+        prepareFavoritesMenu(mPhoneFavoritesMenu);
 
         mContactTileFrame = mParentView.findViewById(R.id.contact_tile_frame);
 
@@ -305,7 +296,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                 R.layout.tile_interactions_teaser_view, mListView, false);
 
         mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), this, mContactTileAdapter,
-                mCallLogAdapter, mShowAllContactsButton, mTileInteractionTeaserView);
+                mCallLogAdapter, mPhoneFavoritesMenu, mTileInteractionTeaserView);
 
         mTileInteractionTeaserView.setAdapter(mAdapter);
 
@@ -637,31 +628,17 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     }
 
     /**
-     * Returns a view that is laid out and styled to look like a regular contact, with the correct
-     * click behavior (to launch the all contacts activity when it is clicked).
+     * Prepares the favorites menu which contains the static label "Speed Dial" and the
+     * "All Contacts" button.  Taps anywhere in the view take the user to "All Contacts".
+     * This emulates how the headers in Play Store work.
      */
-    private View prepareAllContactsButton(View v) {
-        final ContactListItemView view = (ContactListItemView) v;
-        view.setOnClickListener(new OnClickListener() {
+    private void prepareFavoritesMenu(View favoritesMenu) {
+        // Set the onClick listener for the view to bring up the all contacts view.
+        favoritesMenu.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAllContacts();
             }
         });
-
-        view.setPhotoPosition(ContactListItemView.PhotoPosition.LEFT);
-        final Resources resources = getResources();
-        view.setBackgroundResource(R.drawable.contact_list_item_background);
-
-        view.setPaddingRelative(
-                resources.getDimensionPixelSize(R.dimen.favorites_row_start_padding),
-                resources.getDimensionPixelSize(R.dimen.favorites_row_end_padding),
-                resources.getDimensionPixelSize(R.dimen.favorites_row_top_padding),
-                resources.getDimensionPixelSize(R.dimen.favorites_row_bottom_padding));
-
-        view.setDisplayName(resources.getString(R.string.show_all_contacts_button_text));
-        view.setDrawableResource(R.drawable.list_item_avatar_bg,
-                R.drawable.ic_menu_all_contacts_dk);
-        return view;
     }
 }
