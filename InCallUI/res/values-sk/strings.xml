@@ -60,7 +60,7 @@
     <string name="puk_unlocked" msgid="2284912838477558454">"Karta SIM bola odblokovaná. Prebieha odomykanie telefónu..."</string>
     <string name="label_ndp" msgid="780479633159517250">"Kód PIN odomknutia siete pre kartu SIM"</string>
     <string name="sim_ndp_unlock_text" msgid="683628237760543009">"Odomknúť"</string>
-    <string name="sim_ndp_dismiss_text" msgid="1604823375752456947">"Zrušiť"</string>
+    <string name="sim_ndp_dismiss_text" msgid="1604823375752456947">"Zatvoriť"</string>
     <string name="requesting_unlock" msgid="6412629401033249351">"Žiadosť o odomknutie siete..."</string>
     <string name="unlock_failed" msgid="6490531697031504225">"Žiadosť o odomknutie siete nebola úspešná."</string>
     <string name="unlock_success" msgid="6770085622238180152">"Sieť bola odomknutá."</string>
@@ -498,7 +498,7 @@
     <string name="progress_dialog_exiting_ecm" msgid="4835734101617817074">"Ukončenie režimu tiesňového spätného volania"</string>
     <string name="alert_dialog_yes" msgid="6674268047820703974">"Áno"</string>
     <string name="alert_dialog_no" msgid="1476091437797628703">"Nie"</string>
-    <string name="alert_dialog_dismiss" msgid="2491494287075907171">"Zrušiť"</string>
+    <string name="alert_dialog_dismiss" msgid="2491494287075907171">"Zatvoriť"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Služba"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Nastavenie"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Nenastavené&gt;"</string>

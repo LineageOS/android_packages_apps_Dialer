@@ -155,8 +155,8 @@
     <string name="preferred_network_mode_gsm_only_summary" msgid="3352445413437453511">"Foretrukken netværkstilstand: kun GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="2836897236221063413">"Foretrukken netværkstilstand: kun WCDMA"</string>
     <string name="preferred_network_mode_gsm_wcdma_summary" msgid="3161255745326408587">"Foretrukken netværkstilstand: GSM/WCDMA"</string>
-    <string name="preferred_network_mode_cdma_summary" msgid="3175690187294334241">"Foretrukket netværkstilstand: CDMA"</string>
-    <string name="preferred_network_mode_cdma_evdo_summary" msgid="8332063064712726618">"Foretrukket netværkstilstand: CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="3175690187294334241">"Foretrukkennetværkstilstand: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="8332063064712726618">"Foretrukkennetværkstilstand: CDMA / EvDo"</string>
     <string name="preferred_network_mode_cdma_only_summary" msgid="1309770926198634150">"Foretrukken netværkstilstand: kun CDMA"</string>
     <string name="preferred_network_mode_evdo_only_summary" msgid="8472220691721269155">"Foretrukken netværkstilstand: kun EvDo"</string>
     <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="4726682079415227330">"Foretrukken netværkstilstand: CDMA/EvDo/GSM/WCDMA"</string>

@@ -66,7 +66,7 @@
     <string name="unlock_success" msgid="6770085622238180152">"Desbloqueig de la xarxa correcte."</string>
     <string name="labelGSMMore" msgid="5930842194056092106">"Configuració de trucades GSM"</string>
     <string name="labelCDMAMore" msgid="1630676740428229339">"Configuració de trucades CDMA"</string>
-    <string name="apn_settings" msgid="9043423184895642077">"Noms de punts d\'accés"</string>
+    <string name="apn_settings" msgid="9043423184895642077">"APN"</string>
     <string name="settings_label" msgid="3876743539816984008">"Configuració de xarxa"</string>
     <string name="voicemail" msgid="8693759337917898954">"Correu de veu"</string>
     <string name="voicemail_abbreviated" msgid="2215592488517217448">"CV:"</string>
@@ -181,7 +181,7 @@
     <item msgid="3817924849415716259">"GSM/WCDMA preferit"</item>
   </string-array>
     <string name="data_enabled" msgid="5972538663568715366">"Dades activades"</string>
-    <string name="data_enable_summary" msgid="5022018967714633874">"Permet l\'accés a dades a través de la xarxa mòbil"</string>
+    <string name="data_enable_summary" msgid="5022018967714633874">"Permet l\'accés a dades a les través de la xarxa mòbil"</string>
     <string name="roaming" msgid="8871412572928323707">"Itinerància de dades"</string>
     <string name="roaming_enable" msgid="7331106985174381987">"Estableix connexió amb serveis de dades en itinerància"</string>
     <string name="roaming_disable" msgid="1843417228755568110">"Estableix connexió amb serveis de dades en itinerància"</string>

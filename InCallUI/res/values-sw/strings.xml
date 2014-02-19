@@ -40,7 +40,7 @@
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Simu zote zimezuiwa na kidhibiti ufikiaji."</string>
     <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Simu za dharura zimezuiwa na kidhibiti ufikiaji."</string>
     <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Simu za kawaida zimezuiwa na kidhibiti ufikiaji."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Nambari batili"</string>
+    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Nambari isiyo sahihi"</string>
     <string name="confCall" msgid="1904840547188336828">"Simu ya kongamano"</string>
     <string name="call_lost" msgid="317670617901479594">"Simu imepotea."</string>
     <string name="ok" msgid="3811371167865772377">"Sawa"</string>

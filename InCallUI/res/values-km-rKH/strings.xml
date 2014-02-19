@@ -180,7 +180,7 @@
     <item msgid="1524224863879435516">"តែ GSM ប៉ុណ្ណោះ"</item>
     <item msgid="3817924849415716259">"GSM/WCDMA ដែល​ចូលចិត្ត"</item>
   </string-array>
-    <string name="data_enabled" msgid="5972538663568715366">"បាន​បិទ​ទិន្នន័យ"</string>
+    <string name="data_enabled" msgid="5972538663568715366">"បាន​បើក​ទិន្នន័យ"</string>
     <string name="data_enable_summary" msgid="5022018967714633874">"បើក​ចូល​ដំណើរការ​ទិន្នន័យ​លើ​​បណ្ដាញ​ឧបករណ៍​ចល័ត"</string>
     <string name="roaming" msgid="8871412572928323707">"រ៉ូមីង​​ទិន្នន័យ"</string>
     <string name="roaming_enable" msgid="7331106985174381987">"តភ្ជាប់​ទៅ​កាន់​សេវា​កម្ម​ទិន្នន័យ​នៅ​ពេល​ដែល​រ៉ូ​មីង"</string>
