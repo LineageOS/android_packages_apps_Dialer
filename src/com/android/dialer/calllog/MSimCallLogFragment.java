@@ -90,7 +90,7 @@ public class MSimCallLogFragment extends CallLogFragment {
             int sub = position - 1;
             mCallSubFilter = sub;
             setSelectedSub(sub);
-            mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mCallSubFilter);
+            mCallLogQueryHandler.fetchCalls(mCallTypeFilter, 0, mCallSubFilter);
         }
 
         @Override
@@ -122,7 +122,7 @@ public class MSimCallLogFragment extends CallLogFragment {
                     mCallTypeFilter = Calls.VOICEMAIL_TYPE;
                     break;
             }
-            mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mCallSubFilter);
+            mCallLogQueryHandler.fetchCalls(mCallTypeFilter, 0, mCallSubFilter);
         }
 
         @Override
@@ -164,13 +164,13 @@ public class MSimCallLogFragment extends CallLogFragment {
 
     @Override
     public void fetchCalls() {
-        mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mCallSubFilter);
+        mCallLogQueryHandler.fetchCalls(mCallTypeFilter, 0, mCallSubFilter);
     }
 
     @Override
     public void startCallsQuery() {
         mAdapter.setLoading(true);
-        mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mCallSubFilter);
+        mCallLogQueryHandler.fetchCalls(mCallTypeFilter, 0, mCallSubFilter);
     }
 
     /**
