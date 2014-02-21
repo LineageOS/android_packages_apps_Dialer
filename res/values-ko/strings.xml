@@ -125,6 +125,8 @@
     <string name="description_call_last" msgid="491385778814705302">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>에 전화를 겁니다. 전화를 건 시간은 <xliff:g id="TIMEOFCALL">%3$s</xliff:g>입니다."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g>님에게 문자 메시지 보내기"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"듣지 않은 음성사서함"</string>
+    <!-- no translation found for description_clear_search (688023606766232904) -->
+    <skip />
     <string name="description_start_voice_search" msgid="520539488194946012">"음성 검색 시작"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g>에 전화"</string>
     <string name="unknown" msgid="740067747858270469">"알 수 없음"</string>
@@ -172,4 +174,10 @@
     <string name="no_favorites" msgid="5212485868783382971">"자주 전화하는 연락처가\n여기에 표시됩니다.\n전화해 보세요."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"이미지를 탭하여 모든 번호를 확인하거나 길게 눌러 재정렬합니다."</string>
     <string name="description_dismiss" msgid="2146276780562549643">"닫기"</string>
+    <!-- no translation found for remove_contact (1080555335283662961) -->
+    <skip />
+    <!-- no translation found for favorites_menu_speed_dial (3832518092014707628) -->
+    <skip />
+    <!-- no translation found for favorites_menu_all_contacts (992506284449891186) -->
+    <skip />
 </resources>

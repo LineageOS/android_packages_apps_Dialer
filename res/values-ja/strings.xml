@@ -125,6 +125,8 @@
     <string name="description_call_last" msgid="491385778814705302">"<xliff:g id="TYPEORLOCATION">%2$s</xliff:g><xliff:g id="NAMEORNUMBER">%1$s</xliff:g>に発信。前回の通話は<xliff:g id="TIMEOFCALL">%3$s</xliff:g>。"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g>にテキストメッセージを送信"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"未再生のボイスメール"</string>
+    <!-- no translation found for description_clear_search (688023606766232904) -->
+    <skip />
     <string name="description_start_voice_search" msgid="520539488194946012">"音声検索を開始"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g>に発信"</string>
     <string name="unknown" msgid="740067747858270469">"通知不可能"</string>
@@ -172,4 +174,10 @@
     <string name="no_favorites" msgid="5212485868783382971">"ここにはお気に入りや\n頻繁に通話する\n連絡先が表示されます。"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"画像をタップするとすべての番号を表示でき、押し続けると並び替えることができます"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"閉じる"</string>
+    <!-- no translation found for remove_contact (1080555335283662961) -->
+    <skip />
+    <!-- no translation found for favorites_menu_speed_dial (3832518092014707628) -->
+    <skip />
+    <!-- no translation found for favorites_menu_all_contacts (992506284449891186) -->
+    <skip />
 </resources>

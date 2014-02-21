@@ -125,6 +125,8 @@
     <string name="description_call_last" msgid="491385778814705302">"Hovor s <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Čas: <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Odeslat textovou zprávu kontaktu <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nevyslechnutá hlasová zpráva"</string>
+    <!-- no translation found for description_clear_search (688023606766232904) -->
+    <skip />
     <string name="description_start_voice_search" msgid="520539488194946012">"Spustit hlasové vyhledávání"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Zavolat na číslo <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Neznámé"</string>
@@ -172,4 +174,10 @@
     <string name="no_favorites" msgid="5212485868783382971">"Zde se bude zobrazovat oblíbený obsah\na kontakty, kterým často voláte.\nStačí jen začít volat."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Klepnutím na fotku zobrazíte všechna čísla a přidržením je můžete seřadit"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Zavřít"</string>
+    <!-- no translation found for remove_contact (1080555335283662961) -->
+    <skip />
+    <!-- no translation found for favorites_menu_speed_dial (3832518092014707628) -->
+    <skip />
+    <!-- no translation found for favorites_menu_all_contacts (992506284449891186) -->
+    <skip />
 </resources>
