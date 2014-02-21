@@ -108,6 +108,10 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         public void onCallNumberDirectly(String phoneNumber);
     }
 
+    public interface HostInterface {
+        public void setDragDropController(DragDropController controller);
+    }
+
     private class MissedCallLogLoaderListener implements LoaderManager.LoaderCallbacks<Cursor> {
 
         @Override
@@ -283,7 +287,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mListView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
         mListView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
         mListView.setOnItemSwipeListener(mContactTileAdapter);
-        mListView.setOnDragDropListener(mContactTileAdapter);
+        mListView.getDragDropController().addOnDragDropListener(mContactTileAdapter);
 
         final ImageView dragShadowOverlay =
                 (ImageView) mParentView.findViewById(R.id.contact_tile_drag_shadow_overlay);
@@ -350,6 +354,15 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnShowAllContactsListener");
+        }
+
+        try {
+            OnDragDropListener listener = (OnDragDropListener) activity;
+            mListView.getDragDropController().addOnDragDropListener(listener);
+            ((HostInterface) activity).setDragDropController(mListView.getDragDropController());
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnDragDropListener and HostInterface");
         }
 
         // Use initLoader() instead of restartLoader() to refraining unnecessary reload.

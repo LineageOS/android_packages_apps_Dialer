@@ -12,7 +12,7 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
-  -->
+-->
 
 <resources>
 
@@ -27,8 +27,10 @@
     <!-- Color of the text describing an unconsumed voicemail. -->
     <color name="call_log_voicemail_highlight_color">#33b5e5</color>
 
-    <!-- Colour of voicemail progress bar to the right of position indicator.
-         Same as the background color of the dialer -->
+    <!--
+         Colour of voicemail progress bar to the right of position indicator.
+         Same as the background color of the dialer
+    -->
     <color name="voicemail_playback_seek_bar_yet_to_play">#cecece</color>
 
     <!-- Colour of voicemail progress bar to the left of position indicator. -->
@@ -38,7 +40,7 @@
     <color name="item_selected">#660099cc</color>
 
     <!-- Background color of new dialer activity -->
-    <color name="background_dialer_light">#cecece</color>
+    <color name="background_dialer_light">#eeeeee</color>
 
     <!-- Background color of dialer list items (contacts, call log entries) -->
     <color name="background_dialer_list_items">#eeeeee</color>
@@ -82,6 +84,12 @@
 
     <!-- Generic separator color for wifi list items -->
     <color name="wifi_list_separator">#909090</color>
+
+    <!-- Text color for the "Remove" text in its regular state -->
+    <color name="remove_text_color">#555555</color>
+
+    <!-- Text color for the "Remove" text when a contact is dragged on top of the remove view -->
+    <color name="remove_highlighted_text_color">#FF3F3B</color>
 
     <!-- Text color for the "speed dial" label in the favorites menu. -->
     <color name="speed_dial_text_color">#555555</color>
