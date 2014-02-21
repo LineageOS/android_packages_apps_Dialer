@@ -748,4 +748,21 @@
 
     <string name="wifi_setup_settings_shortcut">Call settings</string>
 
+    <!-- Header text displayed on the main dialer screen above the list of favorite phone numbers.
+         [CHAR LIMIT=21] -->
+    <string name="favorites_menu_speed_dial">Speed Dial</string>
+
+    <!-- Button text for the "all contacts" button displayed on the main dialer screen above the
+         list of favorite phone numbers.  Navigates the user to the "All Contacts" list.
+         This text represents the same action as the text in string "menu_allContacts".
+         [CHAR LIMIT=21] -->
+    <string name="favorites_menu_all_contacts">ALL CONTACTS</string>
+
+    <!-- The font-family to use for the "speed dial" label on the favorites menu.
+         Do not translate. -->
+    <string name="favorites_menu_speed_dial_font_family">sans-serif-light</string>
+
+    <!-- The font-family to use for the "all contacts" label on the favorites menu.
+         Do not translate. -->
+    <string name="favorites_menu_all_contacts_font_family">sans-serif</string>
 </resources>
