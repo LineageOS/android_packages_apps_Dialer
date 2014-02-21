@@ -70,6 +70,9 @@ public class InCallService extends Service {
                     Call call = CallInfoTranslator.getCall(callId);
                     if (null != call) {
                         call.setState(Call.State.ACTIVE);
+                        if (call.getConnectTime() == 0) {
+                            call.setConnectTime(System.currentTimeMillis());
+                        }
                         CallList.getInstance().onUpdate(call);
                     }
                 }
