@@ -47,4 +47,12 @@
     <string name="call_stats_sort_by_count">Sorteer volgens oproepe</string>
     <string name="menu_add_to_blacklist">Voeg tot verban lys</string>
     <string name="toast_added_to_blacklist">%s bygevoeg tot verban lys.</string>
+    <string name="dialpad_2_2_letters"></string>
+    <string name="dialpad_3_2_letters"></string>
+    <string name="dialpad_4_2_letters"></string>
+    <string name="dialpad_5_2_letters"></string>
+    <string name="dialpad_6_2_letters"></string>
+    <string name="dialpad_7_2_letters"></string>
+    <string name="dialpad_8_2_letters"></string>
+    <string name="dialpad_9_2_letters"></string>
 </resources>
