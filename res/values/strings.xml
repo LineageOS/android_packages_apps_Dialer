@@ -748,4 +748,12 @@
     <!-- The font-family to use for the "all contacts" label on the favorites menu.
          Do not translate. -->
     <string name="favorites_menu_all_contacts_font_family">sans-serif</string>
+
+    <!-- The font-family to use for the text inside the searchbox.
+         Do not translate. -->
+    <string name="search_font_family">sans-serif</string>
+
+    <!-- The font-family to use for tab text.
+         Do not translate. -->
+    <string name="tab_font_family">sans-serif</string>
 </resources>
