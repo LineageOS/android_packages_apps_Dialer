@@ -21,7 +21,16 @@
         <item name="android:textColorSecondary">@color/dialtacts_secondary_text_color</item>
         <item name="android:windowActionBarOverlay">false</item>
         <item name="android:actionBarStyle">@style/DialtactsActionBarStyle</item>
+        <!-- Style for the tabs (for the tabs) -->
         <item name="android:actionBarTabStyle">@style/DialtactsActionBarTabStyle</item>
+        <!-- Style for the tab bar (for the divider between tabs) -->
+        <item name="android:actionBarTabBarStyle">@style/DialtactsActionBarTabBarStyle</item>
+        <!-- Style for the tab bar text (for text on tabs) -->
+        <item name="android:actionBarTabTextStyle">@style/DialtactsActionBarTabTextStyle</item>
+        <!-- Style for the overflow button in the actionbar. -->
+        <item name="android:actionOverflowButtonStyle">@style/DialtactsActionBarOverflow</item>
+        <!-- The "Up" icon in the action bar. -->
+        <item name="android:homeAsUpIndicator">@drawable/ic_back_arrow</item>
         <item name="android:windowContentOverlay">@null</item>
         <!--  Searchbox Style -->
         <item name="android:editTextStyle">@style/DialtactsSearchboxStyle</item>
@@ -66,6 +75,12 @@
         <item name="call_log_voicemail_status_action_text_color">#33b5e5</item>
             <!-- Favorites -->
         <item name="favorites_padding_bottom">?android:attr/actionBarSize</item>
+    </style>
+
+    <!-- Action bar overflow menu icon. -->
+    <style name="DialtactsActionBarOverflow"
+           parent="@android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_menu_overflow_lt</item>
     </style>
 
     <style name="DialpadTheme" parent="DialtactsTheme">
@@ -123,14 +138,40 @@
 
     <style name="DialtactsActionBarStyle" parent="android:Widget.Holo.ActionBar">
         <item name="android:background">@drawable/call_history_actionbar_background</item>
-        <item name="android:backgroundStacked">@color/actionbar_background_color</item>
+        <item name="android:backgroundStacked">#ffffff</item>
+        <item name="android:titleTextStyle">@style/DialtactsActionBarTitleText</item>
         <!-- Empty icon -->
         <item name="android:icon">@android:color/transparent</item>
-        <item name="android:displayOptions"></item>
     </style>
 
+    <!-- Text in the action bar at the top of the screen -->
+    <style name="DialtactsActionBarTitleText"
+           parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/actionbar_text_color</item>
+    </style>
+
+    <!-- Styling for the tab bar; handles styling of the divider line. -->
+    <style name="DialtactsActionBarTabBarStyle"
+           parent="@android:style/Widget.Holo.ActionBar.TabBar">
+        <item name="android:divider">@drawable/divider</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:dividerPadding">@dimen/tab_divider_padding</item>
+        <item name="android:background">@drawable/action_bar_tab</item>
+    </style>
+
+    <!-- Styling for tabs. -->
     <style name="DialtactsActionBarTabStyle" parent="@android:style/Widget.Holo.ActionBar.TabView">
         <item name="android:background">@drawable/action_bar_tab</item>
+        <item name="android:showDividers">none</item>
+    </style>
+
+    <!-- Text style for tabs. -->
+    <style name="DialtactsActionBarTabTextStyle"
+           parent="android:style/Widget.Holo.Light.ActionBar.TabText">
+        <item name="android:textColor">@color/tab_text_color</item>
+        <item name="android:textSize">@dimen/tab_text_size</item>
+        <item name="android:fontFamily">@string/tab_font_family</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ListViewStyle" parent="@android:style/Widget.Holo.Light.ListView">
