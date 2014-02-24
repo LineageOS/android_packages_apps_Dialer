@@ -101,7 +101,7 @@
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Uko mahali pasipokuwa na huduma, inajaribu tena…."</string>
     <string name="dial_emergency_error" msgid="7969515493359619960">"Simu haijatumwa. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> sio nambari ya dharura!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Simu haijatumwa. Piga nambari ya dharura!"</string>
-    <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Tumia kichapishi kubonyeza"</string>
+    <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Tumia kibodi kubonyeza"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"Shikilia"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Mwisho"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Kibao cha kupiga"</string>
