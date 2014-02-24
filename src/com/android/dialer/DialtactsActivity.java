@@ -444,6 +444,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     protected void onResume() {
         super.onResume();
+        //when already in vt call screen, click dialer should go to video call screen also.
+        Intent mIntent = new Intent("restore_video_call");
+        sendBroadcast(mIntent);
         if (mFirstLaunch) {
             displayFragment(getIntent());
         } else if (!phoneIsInUse() && mInCallDialpadUp) {
