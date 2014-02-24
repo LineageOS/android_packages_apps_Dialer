@@ -29,9 +29,6 @@
     <!-- Match call_button_height to Phone's dimens/in_call_end_button_height -->
     <dimen name="call_button_height">74dp</dimen>
 
-    <!-- Search View -->
-    <dimen name="search_text_size">14sp</dimen>
-
     <!--
           Drag to remove view (in dp because it is used in conjunction with a statically
           sized icon
@@ -92,10 +89,12 @@
     <dimen name="dismiss_button_padding_start">20dip</dimen>
     <dimen name="dismiss_button_padding_end">28dip</dimen>
 
-    <!-- Margin around the favorites menu. -->
-    <dimen name="favorites_menu_margin">6dp</dimen>
-    <!-- Padding within the favorites menu. -->
-    <dimen name="favorites_menu_padding">4dp</dimen>
+    <!-- Padding above the favorites menu. -->
+    <dimen name="favorites_menu_padding_top">6dp</dimen>
+    <!-- Padding below the favorites menu.. -->
+    <dimen name="favorites_menu_padding_bottom">3dp</dimen>
+    <!-- Horizontal padding in the favorites menu. -->
+    <dimen name="favorites_menu_padding_horizontal">8dp</dimen>
     <!-- Text size for the "speed dial" text in the favorites menu. -->
     <dimen name="favorites_menu_speed_dial_text_size">18sp</dimen>
     <!-- Height of the speed dial TextView in the favorites menu. -->
@@ -104,4 +103,34 @@
     <dimen name="favorites_menu_all_contacts_text_size">12sp</dimen>
     <!-- Height of the all contacts Button in the favorites menu. -->
     <dimen name="favorites_menu_all_contacts_height">24dp</dimen>
+
+    <!-- Margin to the left and right of the search box. -->
+    <dimen name="search_margin_horizontal">7dp</dimen>
+    <!-- Margin above the search box. -->
+    <dimen name="search_top_margin">10dp</dimen>
+    <!-- Margin below the search box. -->
+    <dimen name="search_bottom_margin">4dp</dimen>
+    <!-- Height of the search box. -->
+    <dimen name="search_box_height">41dp</dimen>
+    <!-- Search box text size -->
+    <dimen name="search_text_size">13.24sp</dimen>
+    <!-- Search box interior padding - left -->
+    <dimen name="search_box_left_padding">16dp</dimen>
+    <!-- Search box interior padding - right -->
+    <dimen name="search_box_right_padding">8dp</dimen>
+    <!-- Padding around the icon in the search box. -->
+    <dimen name="search_box_icon_padding">3dp</dimen>
+    <!-- Left margin of the text field in the search box. -->
+    <dimen name="search_box_text_left_margin">8dp</dimen>
+    <!-- Size of the icon (voice search, close search) in the search box. -->
+    <dimen name="search_box_icon_size">37dp</dimen>
+
+    <!-- Height of the underline of a tab. -->
+    <dimen name="tab_underline_height">2dp</dimen>
+    <!-- Height of the selection indicator of a tab. -->
+    <dimen name="tab_selection_height">7.7dp</dimen>
+    <!-- Padding above and below the divider line of a tab. -->
+    <dimen name="tab_divider_padding">12dp</dimen>
+    <!-- Size of text in tabs. -->
+    <dimen name="tab_text_size">12sp</dimen>
 </resources>

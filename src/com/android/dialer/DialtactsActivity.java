@@ -526,19 +526,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mSearchView = (EditText) findViewById(R.id.search_view);
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
-
-        final String hintText = getString(R.string.dialer_hint_find_contact);
-
-        // The following code is used to insert an icon into a CharSequence (copied from
-        // SearchView)
-        final SpannableStringBuilder ssb = new SpannableStringBuilder("   "); // for the icon
-        ssb.append(hintText);
-        final Drawable searchIcon = getResources().getDrawable(R.drawable.ic_ab_search);
-        final int textSize = (int) (mSearchView.getTextSize() * 1.20);
-        searchIcon.setBounds(0, 0, textSize, textSize);
-        ssb.setSpan(new ImageSpan(searchIcon), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        mSearchView.setHint(ssb);
+        mSearchView.setHint(getString(R.string.dialer_hint_find_contact));
 
         prepareVoiceSearchButton();
     }
