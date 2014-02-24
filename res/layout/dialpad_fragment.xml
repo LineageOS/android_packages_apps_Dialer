@@ -88,7 +88,7 @@
                 android:maxLength="2000"
                 android:maxLines="3"
                 android:minHeight="48dip"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/dialpad_text_color"
                 android:textSize="16sp" />
         </LinearLayout>
 
