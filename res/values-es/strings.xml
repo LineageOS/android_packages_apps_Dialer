@@ -125,8 +125,7 @@
     <string name="description_call_last" msgid="491385778814705302">"Llamar a <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Hora de la llamada: <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Enviar mensaje de texto a <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Mensaje de voz sin oír"</string>
-    <!-- no translation found for description_clear_search (688023606766232904) -->
-    <skip />
+    <string name="description_clear_search" msgid="688023606766232904">"Borrar la búsqueda"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Iniciar búsqueda por voz"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Llamar a <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Desconocidos"</string>
@@ -174,10 +173,7 @@
     <string name="no_favorites" msgid="5212485868783382971">"Los favoritos y contactos a los que\nllamas con frecuencia se mostrarán aquí.\nYa puedes llamar."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Toca la imagen para ver todos los números o mantenla pulsada para cambiar el orden"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ignorar"</string>
-    <!-- no translation found for remove_contact (1080555335283662961) -->
-    <skip />
-    <!-- no translation found for favorites_menu_speed_dial (3832518092014707628) -->
-    <skip />
-    <!-- no translation found for favorites_menu_all_contacts (992506284449891186) -->
-    <skip />
+    <string name="remove_contact" msgid="1080555335283662961">"Eliminar"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Marcación rápida"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TODOS LOS CONTACTOS"</string>
 </resources>

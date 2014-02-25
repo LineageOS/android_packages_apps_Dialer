@@ -125,8 +125,7 @@
     <string name="description_call_last" msgid="491385778814705302">"与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）通话。上次通话时间是<xliff:g id="TIMEOFCALL">%3$s</xliff:g>。"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"向<xliff:g id="NAME">%1$s</xliff:g>发送短信"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"未收听的语音邮件"</string>
-    <!-- no translation found for description_clear_search (688023606766232904) -->
-    <skip />
+    <string name="description_clear_search" msgid="688023606766232904">"清除搜索内容"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"开始语音搜索"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"拨打 <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"未知"</string>
@@ -174,10 +173,7 @@
     <string name="no_favorites" msgid="5212485868783382971">"您收藏的联系人和经常通话\n的联系人都会显示在这里。\n现在就开始与联系人通话吧。"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"点按图片可查看所有号码，按住图片可重新排序"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"关闭"</string>
-    <!-- no translation found for remove_contact (1080555335283662961) -->
-    <skip />
-    <!-- no translation found for favorites_menu_speed_dial (3832518092014707628) -->
-    <skip />
-    <!-- no translation found for favorites_menu_all_contacts (992506284449891186) -->
-    <skip />
+    <string name="remove_contact" msgid="1080555335283662961">"删除"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"快速拨号"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"所有联系人"</string>
 </resources>
