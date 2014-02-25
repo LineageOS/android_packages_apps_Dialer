@@ -125,8 +125,7 @@
     <string name="description_call_last" msgid="491385778814705302">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> पर कॉल करें. <xliff:g id="TIMEOFCALL">%3$s</xliff:g> पर कॉल किया गया."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g> को पाठ संदेश भेजें"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"नहीं सुना गया ध्वनिमेल"</string>
-    <!-- no translation found for description_clear_search (688023606766232904) -->
-    <skip />
+    <string name="description_clear_search" msgid="688023606766232904">"खोज साफ़ करें"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"बोलकर खोजें शुरु करें"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> पर कॉल करें"</string>
     <string name="unknown" msgid="740067747858270469">"अज्ञात"</string>
@@ -174,10 +173,7 @@
     <string name="no_favorites" msgid="5212485868783382971">"पसंदीदा &amp; आपके द्वारा अक्सर कॉल किए जाने वाले पसंदीदा और संपर्क\nयहां दिखाए जाएंगे.\nतो, कॉल करना प्रारंभ करें."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"सभी नंबर देखने के लिए चित्र को टैप करें या पुनः क्रमित करने के लिए दबाए रखें"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"ख़ारिज करें"</string>
-    <!-- no translation found for remove_contact (1080555335283662961) -->
-    <skip />
-    <!-- no translation found for favorites_menu_speed_dial (3832518092014707628) -->
-    <skip />
-    <!-- no translation found for favorites_menu_all_contacts (992506284449891186) -->
-    <skip />
+    <string name="remove_contact" msgid="1080555335283662961">"निकालें"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"स्पीड डायल"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"सभी संपर्क"</string>
 </resources>

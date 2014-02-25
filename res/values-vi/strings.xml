@@ -125,8 +125,7 @@
     <string name="description_call_last" msgid="491385778814705302">"Gọi <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Đã gọi <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Gửi tin nhắn văn bản tới <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Thư thoại chưa nghe"</string>
-    <!-- no translation found for description_clear_search (688023606766232904) -->
-    <skip />
+    <string name="description_clear_search" msgid="688023606766232904">"Xóa tìm kiếm"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Bắt đầu tìm kiếm bằng giọng nói"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Gọi <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Không xác định"</string>
@@ -174,10 +173,7 @@
     <string name="no_favorites" msgid="5212485868783382971">"Người liên hệ yêu thích và người liên hệ bạn\nthường gọi sẽ hiển thị tại đây.\nVì vậy, hãy bắt đầu gọi."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Chạm vào hình ảnh để xem tất cả các số hoặc nhấn và giữ để sắp xếp lại"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Loại bỏ"</string>
-    <!-- no translation found for remove_contact (1080555335283662961) -->
-    <skip />
-    <!-- no translation found for favorites_menu_speed_dial (3832518092014707628) -->
-    <skip />
-    <!-- no translation found for favorites_menu_all_contacts (992506284449891186) -->
-    <skip />
+    <string name="remove_contact" msgid="1080555335283662961">"Xóa"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Quay số nhanh"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TẤT CẢ NGƯỜI LIÊN HỆ"</string>
 </resources>
