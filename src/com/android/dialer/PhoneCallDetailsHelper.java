@@ -71,8 +71,13 @@ public class PhoneCallDetailsHelper {
     }
 
     /** Fills the call details views with content. */
+    public void setPhoneCallDetails(PhoneCallDetailsViews views,
+            PhoneCallDetails details, boolean isHighlighted) {
+        setPhoneCallDetails(views, details, isHighlighted, null);
+    }
+
     public void setPhoneCallDetails(PhoneCallDetailsViews views, PhoneCallDetails details,
-            boolean isHighlighted) {
+            boolean isHighlighted, String filter) {
         // Display the icon for the last call sub.
         if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
             views.subIconView.setVisibility(View.VISIBLE);
@@ -111,12 +116,24 @@ public class PhoneCallDetailsHelper {
         // Get type of call (ie mobile, home, etc) if known, or the caller's
         CharSequence numberFormattedLabel = getCallTypeOrLocation(details);
 
-        final CharSequence nameText;
+        CharSequence nameText;
         final CharSequence numberText;
         final CharSequence labelText;
-        final CharSequence displayNumber =
+        CharSequence displayNumber =
             mPhoneNumberHelper.getDisplayNumber(details.number,
                     details.numberPresentation, details.formattedNumber);
+
+        String phoneNum = (String) details.number;
+        if (!TextUtils.isEmpty(filter) && phoneNum.contains(filter)) {
+            int start, end;
+            start = phoneNum.indexOf(filter);
+            end = start + filter.length();
+            SpannableString result = new SpannableString(phoneNum);
+            result.setSpan(new StyleSpan(Typeface.BOLD), start, end,
+                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+            displayNumber = result;
+        }
+
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
             if (TextUtils.isEmpty(details.geocode)
@@ -130,6 +147,15 @@ public class PhoneCallDetailsHelper {
             views.nameView.setTextDirection(View.TEXT_DIRECTION_LTR);
         } else {
             nameText = details.name;
+            if (!TextUtils.isEmpty(filter) && nameText.toString().contains(filter)) {
+                int start,end;
+                start = nameText.toString().indexOf(filter);
+                end = start + filter.length();
+                SpannableString style = new SpannableString(nameText);
+                style.setSpan(new StyleSpan(Typeface.BOLD), start, end,
+                        Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                nameText = style;
+            }
             numberText = displayNumber;
             labelText = TextUtils.isEmpty(numberFormattedLabel) ? numberText :
                     numberFormattedLabel;
