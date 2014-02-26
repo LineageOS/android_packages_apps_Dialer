@@ -95,6 +95,8 @@ public class CallLogAdapter extends GroupingListAdapter
 
     private String mStatsLabel = null;
 
+    private String mFilterString;
+
     /** Listener for the primary or secondary actions in the list.
      *  Primary opens the call details.
      *  Secondary calls or plays.
@@ -319,7 +321,7 @@ public class CallLogAdapter extends GroupingListAdapter
         // New items also use the highlighted version of the text.
         final boolean isHighlighted = isNew;
         mCallLogViewsHelper.setPhoneCallDetails(views, details, isHighlighted,
-                mShowSecondaryActionButton);
+                mShowSecondaryActionButton, mFilterString);
 
         int contactType = ContactPhotoManager.TYPE_DEFAULT;
 
@@ -628,5 +630,9 @@ public class CallLogAdapter extends GroupingListAdapter
 
     public String getStatsLabel() {
         return mStatsLabel;
+    }
+
+    public void setQueryString(String filter) {
+        mFilterString = filter;
     }
 }

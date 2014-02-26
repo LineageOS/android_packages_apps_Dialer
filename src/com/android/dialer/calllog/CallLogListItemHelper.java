@@ -50,6 +50,12 @@ import com.android.dialer.R;
         mResources = resources;
     }
 
+    public void setPhoneCallDetails(CallLogListItemViews views, PhoneCallDetails details,
+            boolean isHighlighted, boolean showSecondaryActionButton) {
+        setPhoneCallDetails(views, details, isHighlighted,
+            showSecondaryActionButton, null);
+    }
+
     /**
      * Sets the name, label, and number for a contact.
      *
@@ -59,9 +65,9 @@ import com.android.dialer.R;
      * @param showSecondaryActionButton whether to show the secondary action button or not
      */
     public void setPhoneCallDetails(CallLogListItemViews views, PhoneCallDetails details,
-            boolean isHighlighted, boolean showSecondaryActionButton) {
+            boolean isHighlighted, boolean showSecondaryActionButton, String filter) {
         mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details,
-                isHighlighted);
+                isHighlighted, filter);
         boolean canPlay = details.callTypes[0] == Calls.VOICEMAIL_TYPE;
 
         // Set the accessibility text for the contact badge
