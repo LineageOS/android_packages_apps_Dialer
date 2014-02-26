@@ -74,7 +74,9 @@ public class VoicemailPlaybackFragment extends Fragment {
     };
 
     private VoicemailPlaybackPresenter mPresenter;
-    private ScheduledExecutorService mScheduledExecutorService;
+    private static int mMediaPlayerRefCount = 0;
+    private static MediaPlayerProxy mMediaPlayerInstance;
+    private static ScheduledExecutorService mScheduledExecutorService;
     private View mPlaybackLayout;
 
     @Override
@@ -87,7 +89,6 @@ public class VoicemailPlaybackFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mScheduledExecutorService = createScheduledExecutorService();
         Bundle arguments = getArguments();
         Preconditions.checkNotNull(arguments, "fragment must be started with arguments");
         Uri voicemailUri = arguments.getParcelable(EXTRA_VOICEMAIL_URI);
@@ -99,8 +100,8 @@ public class VoicemailPlaybackFragment extends Fragment {
                 powerManager.newWakeLock(
                         PowerManager.SCREEN_DIM_WAKE_LOCK, getClass().getSimpleName());
         mPresenter = new VoicemailPlaybackPresenter(createPlaybackViewImpl(),
-                createMediaPlayer(mScheduledExecutorService), voicemailUri,
-                mScheduledExecutorService, startPlayback,
+                getMediaPlayerInstance(), voicemailUri,
+                getScheduledExecutorServiceInstance(), startPlayback,
                 AsyncTaskExecutors.createAsyncTaskExecutor(), wakeLock);
         mPresenter.onCreate(savedInstanceState);
     }
@@ -113,8 +114,8 @@ public class VoicemailPlaybackFragment extends Fragment {
 
     @Override
     public void onDestroy() {
+        shutdownMediaPlayer();
         mPresenter.onDestroy();
-        mScheduledExecutorService.shutdown();
         super.onDestroy();
     }
 
@@ -129,12 +130,36 @@ public class VoicemailPlaybackFragment extends Fragment {
                 mPlaybackLayout);
     }
 
-    private MediaPlayerProxy createMediaPlayer(ExecutorService executorService) {
-        return VariableSpeed.createVariableSpeed(executorService);
+    private static synchronized MediaPlayerProxy getMediaPlayerInstance() {
+        ++mMediaPlayerRefCount;
+        if (mMediaPlayerInstance == null) {
+            mMediaPlayerInstance = VariableSpeed.createVariableSpeed(
+                    getScheduledExecutorServiceInstance());
+        }
+        return mMediaPlayerInstance;
     }
 
-    private ScheduledExecutorService createScheduledExecutorService() {
-        return Executors.newScheduledThreadPool(NUMBER_OF_THREADS_IN_POOL);
+    private static synchronized ScheduledExecutorService getScheduledExecutorServiceInstance() {
+        if (mScheduledExecutorService == null) {
+            mScheduledExecutorService = Executors.newScheduledThreadPool(
+                    NUMBER_OF_THREADS_IN_POOL);
+        }
+        return mScheduledExecutorService;
+    }
+
+    private static synchronized void shutdownMediaPlayer() {
+        --mMediaPlayerRefCount;
+        if (mMediaPlayerRefCount > 0) {
+            return;
+        }
+        if (mScheduledExecutorService != null) {
+            mScheduledExecutorService.shutdown();
+            mScheduledExecutorService = null;
+        }
+        if (mMediaPlayerInstance != null) {
+            mMediaPlayerInstance.release();
+            mMediaPlayerInstance = null;
+        }
     }
 
     /**
