@@ -731,6 +731,7 @@
 
     <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
     <string name="remove_contact">Remove</string>
+
     <!-- Header text displayed on the main dialer screen above the list of favorite phone numbers.
          [CHAR LIMIT=21] -->
     <string name="favorites_menu_speed_dial">Speed Dial</string>
