@@ -27,6 +27,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.telephony.DisconnectCause;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -432,7 +433,10 @@ public class InCallActivity extends Activity {
         return super.dispatchPopulateAccessibilityEvent(event);
     }
 
-    public void maybeShowErrorDialogOnDisconnect(Call.DisconnectCause cause) {
+    /**
+     * @param cause disconnect cause as defined in {@link DisconnectCause}
+     */
+    public void maybeShowErrorDialogOnDisconnect(int cause) {
         Log.d(this, "maybeShowErrorDialogOnDisconnect");
 
         if (!isFinishing()) {
@@ -478,18 +482,18 @@ public class InCallActivity extends Activity {
         mDialog.show();
     }
 
-    private int getResIdForDisconnectCause(Call.DisconnectCause cause) {
+    private int getResIdForDisconnectCause(int cause) {
         int resId = INVALID_RES_ID;
 
-        if (cause == Call.DisconnectCause.CALL_BARRED) {
+        if (cause == DisconnectCause.CALL_BARRED) {
             resId = R.string.callFailed_cb_enabled;
-        } else if (cause == Call.DisconnectCause.FDN_BLOCKED) {
+        } else if (cause == DisconnectCause.FDN_BLOCKED) {
             resId = R.string.callFailed_fdn_only;
-        } else if (cause == Call.DisconnectCause.CS_RESTRICTED) {
+        } else if (cause == DisconnectCause.CS_RESTRICTED) {
             resId = R.string.callFailed_dsac_restricted;
-        } else if (cause == Call.DisconnectCause.CS_RESTRICTED_EMERGENCY) {
+        } else if (cause == DisconnectCause.CS_RESTRICTED_EMERGENCY) {
             resId = R.string.callFailed_dsac_restricted_emergency;
-        } else if (cause == Call.DisconnectCause.CS_RESTRICTED_NORMAL) {
+        } else if (cause == DisconnectCause.CS_RESTRICTED_NORMAL) {
             resId = R.string.callFailed_dsac_restricted_normal;
         }
 
