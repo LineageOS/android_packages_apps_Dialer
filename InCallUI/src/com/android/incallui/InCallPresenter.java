@@ -260,11 +260,6 @@ public class InCallPresenter implements CallList.Listener {
         Log.i(this, "Phone switching state: " + mInCallState + " -> " + newState);
         mInCallState = newState;
 
-        // Disable notification shade and soft navigation buttons
-        if (newState.isIncoming()) {
-            CallCommandClient.getInstance().setSystemBarNavigationEnabled(false);
-        }
-
         for (IncomingCallListener listener : mIncomingCallListeners) {
             listener.onIncomingCall(mInCallState, call);
         }
@@ -407,6 +402,9 @@ public class InCallPresenter implements CallList.Listener {
         if (showing) {
             mIsActivityPreviouslyStarted = true;
         }
+
+        final boolean shouldLockBars = showing && mInCallState.isIncoming();
+        CallCommandClient.getInstance().setSystemBarNavigationEnabled(!shouldLockBars);
     }
 
     /**
