@@ -34,6 +34,10 @@ public class InCallApp extends Application {
      */
     public static final String ACTION_HANG_UP_ONGOING_CALL =
             "com.android.incallui.ACTION_HANG_UP_ONGOING_CALL";
+    public static final String ACTION_ANSWER_INCOMING_CALL =
+            "com.android.incallui.ACTION_ANSWER_INCOMING_CALL";
+    public static final String ACTION_DECLINE_INCOMING_CALL =
+            "com.android.incallui.ACTION_DECLINE_INCOMING_CALL";
 
     public InCallApp() {
     }
@@ -59,11 +63,15 @@ public class InCallApp extends Application {
             final String action = intent.getAction();
             Log.i(this, "Broadcast from Notification: " + action);
 
+            // TODO: Commands of this nature should exist in the CallList or a
+            //       CallController class that has access to CallCommandClient and
+            //       CallList.
             if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
-                // TODO: Commands of this nature should exist in the CallList or a
-                //       CallController class that has access to CallCommandClient and
-                //       CallList.
                 InCallPresenter.getInstance().hangUpOngoingCall(context);
+            } else if (action.equals(ACTION_ANSWER_INCOMING_CALL)) {
+                InCallPresenter.getInstance().answerIncomingCall(context);
+            } else if (action.equals(ACTION_DECLINE_INCOMING_CALL)) {
+                InCallPresenter.getInstance().declineIncomingCall(context);
             }
         }
     }

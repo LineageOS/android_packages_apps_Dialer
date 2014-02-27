@@ -368,6 +368,41 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     /**
+     * Answers any incoming call.
+     */
+    public void answerIncomingCall(Context context) {
+        // By the time we receive this intent, we could be shut down and call list
+        // could be null.  Bail in those cases.
+        if (mCallList == null) {
+            StatusBarNotifier.clearInCallNotification(context);
+            return;
+        }
+
+        Call call = mCallList.getIncomingCall();
+        if (call != null) {
+            CallCommandClient.getInstance().answerCall(call.getCallId());
+            showInCall(false);
+        }
+    }
+
+    /**
+     * Declines any incoming call.
+     */
+    public void declineIncomingCall(Context context) {
+        // By the time we receive this intent, we could be shut down and call list
+        // could be null.  Bail in those cases.
+        if (mCallList == null) {
+            StatusBarNotifier.clearInCallNotification(context);
+            return;
+        }
+
+        Call call = mCallList.getIncomingCall();
+        if (call != null) {
+            CallCommandClient.getInstance().rejectCall(call, false, null);
+        }
+    }
+
+    /**
      * Returns true if the incall app is the foreground application.
      */
     public boolean isShowingInCallUi() {

@@ -302,6 +302,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
                 Call.State.isDialing(state)) {
             addHangupAction(builder);
         }
+        // Add answer/decline options for incomng calls (incoming | call_waiting)
+        if (state == Call.State.INCOMING ||
+                state == Call.State.CALL_WAITING) {
+            addAnswerAction(builder);
+            addDeclineAction(builder);
+        }
 
         /*
          * Fire off the notification
@@ -452,6 +458,24 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
                 createHangUpOngoingCallPendingIntent(mContext));
     }
 
+    private void addAnswerAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"answer\" action in the incoming call Notification");
+
+        // TODO: use better asset and string
+        builder.addAction(R.drawable.stat_sys_phone_call,
+                mContext.getText(R.string.description_target_answer),
+                createAnswerCallPendingIntent(mContext));
+    }
+
+    private void addDeclineAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"decline\" action in the incoming call Notification");
+
+        // TODO: use better asset and string
+        builder.addAction(R.drawable.stat_sys_phone_call_end,
+                mContext.getText(R.string.description_target_decline),
+                createDeclineCallPendingIntent(mContext));
+    }
+
     /**
      * Adds fullscreen intent to the builder.
      */
@@ -530,8 +554,33 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      * Notification context.
      */
     private static PendingIntent createHangUpOngoingCallPendingIntent(Context context) {
-        final Intent intent = new Intent(InCallApp.ACTION_HANG_UP_ONGOING_CALL, null,
+        return createNotificationPendingIntent(context, InCallApp.ACTION_HANG_UP_ONGOING_CALL);
+    }
+
+    /**
+     * Returns PendingIntent for answering a phone call. This will typically be used from
+     * Notification context.
+     */
+    private static PendingIntent createAnswerCallPendingIntent(Context context) {
+        return createNotificationPendingIntent(context, InCallApp.ACTION_ANSWER_INCOMING_CALL);
+    }
+
+    /**
+     * Returns PendingIntent for declining a phone call. This will typically be used from
+     * Notification context.
+     */
+    private static PendingIntent createDeclineCallPendingIntent(Context context) {
+        return createNotificationPendingIntent(context, InCallApp.ACTION_DECLINE_INCOMING_CALL);
+    }
+
+    /**
+     * Returns PendingIntent for answering a phone call. This will typically be used from
+     * Notification context.
+     */
+    private static PendingIntent createNotificationPendingIntent(Context context, String action) {
+        final Intent intent = new Intent(action, null,
                 context, NotificationBroadcastReceiver.class);
         return PendingIntent.getBroadcast(context, 0, intent, 0);
     }
+
 }
