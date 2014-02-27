@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import com.android.incallui.service.PhoneNumberService;
 import com.google.common.collect.Sets;
 import com.google.common.base.Preconditions;
 
@@ -659,7 +658,7 @@ public class InCallPresenter implements CallList.Listener {
             mInCallActivity = null;
         }
 
-        mStatusBarNotifier.updateNotificationAndLaunchIncomingCallUi(inCallState, mCallList);
+        mStatusBarNotifier.updateNotification(inCallState, mCallList);
     }
 
     /**
