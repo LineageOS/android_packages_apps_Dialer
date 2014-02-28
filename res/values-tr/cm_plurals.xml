@@ -17,23 +17,15 @@
 -->
 <resources>
   <plurals name="hour">
-    <item quantity="one">%d ч.</item>
-    <item quantity="few">%d ч.</item>
-    <item quantity="other">%d ч.</item>
+    <item quantity="other">%d sa</item>
   </plurals>
   <plurals name="minute">
-    <item quantity="one">%d мин.</item>
-    <item quantity="few">%d мин.</item>
-    <item quantity="other">%d мин.</item>
+    <item quantity="other">%d dak</item>
   </plurals>
   <plurals name="second">
-    <item quantity="one">%d сек.</item>
-    <item quantity="few">%d сек.</item>
-    <item quantity="other">%d сек.</item>
+    <item quantity="other">%d sn</item>
   </plurals>
   <plurals name="call">
-    <item quantity="one">%d звонок</item>
-    <item quantity="few">%d звонка</item>
-    <item quantity="other">%d звонков</item>
+    <item quantity="other">%d çağrı</item>
   </plurals>
 </resources>
