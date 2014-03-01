@@ -30,7 +30,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.MoreContactUtils;
+import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.dialer.R;
@@ -48,6 +50,12 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
 
     private static final String TAG = PhoneFavoriteTileView.class.getSimpleName();
     private static final boolean DEBUG = false;
+
+    // These parameters instruct the photo manager to display the default image/letter at 80% of
+    // its normal size, and vertically offset upwards 20% towards the top of the letter tile, to
+    // make room for the contact name and number label at the bottom of the image.
+    private static final float DEFAULT_IMAGE_LETTER_OFFSET = -0.2f;
+    private static final float DEFAULT_IMAGE_LETTER_SCALE = 0.8f;
 
     /** Length of all animations in miniseconds. */
     private int mAnimationDuration;
@@ -235,5 +243,11 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
                 }
             }
         };
+    }
+
+    @Override
+    protected DefaultImageRequest getDefaultImageRequest(String displayName, String lookupKey) {
+        return new DefaultImageRequest(displayName, lookupKey, ContactPhotoManager.TYPE_DEFAULT,
+                DEFAULT_IMAGE_LETTER_SCALE, DEFAULT_IMAGE_LETTER_OFFSET);
     }
 }

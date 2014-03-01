@@ -27,6 +27,7 @@ import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,11 +38,13 @@ import android.widget.TextView;
 
 import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.ContactPhotoManager;
+import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
 import com.android.dialer.util.ExpirableCache;
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 
@@ -537,6 +540,9 @@ public class CallLogAdapter extends GroupingListAdapter
 
         final ContactInfo cachedContactInfo = getContactInfoFromCallLog(c);
 
+        final boolean isVoicemailNumber =
+                PhoneNumberUtilsWrapper.INSTANCE.isVoicemailNumber(number);
+
         // Primary action is always to call, if possible.
         if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
             // Sets the primary action to call the number.
@@ -569,7 +575,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 mContactInfoCache.getCachedValue(numberCountryIso);
         ContactInfo info = cachedInfo == null ? null : cachedInfo.getValue();
         if (!PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
-                || new PhoneNumberUtilsWrapper().isVoicemailNumber(number)) {
+                || isVoicemailNumber) {
             // If this is a number that cannot be dialed, there is no point in looking up a contact
             // for it.
             info = ContactInfo.EMPTY;
@@ -609,6 +615,7 @@ public class CallLogAdapter extends GroupingListAdapter
         CharSequence formattedNumber = info.formattedNumber;
         final int[] callTypes = getCallTypes(c, count);
         final String geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
+        final int sourceType = info.sourceType;
         final PhoneCallDetails details;
 
         if (TextUtils.isEmpty(name)) {
@@ -618,7 +625,7 @@ public class CallLogAdapter extends GroupingListAdapter
         } else {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, name, ntype, label, lookupUri, photoUri);
+                    duration, name, ntype, label, lookupUri, photoUri, sourceType);
         }
 
         final boolean isNew = c.getInt(CallLogQuery.IS_READ) == 0;
@@ -627,10 +634,32 @@ public class CallLogAdapter extends GroupingListAdapter
         mCallLogViewsHelper.setPhoneCallDetails(views, details, isHighlighted,
                 mShowSecondaryActionButton);
 
-        if (photoId == 0 && photoUri != null) {
-            setPhoto(views, photoUri, lookupUri);
+        int contactType = ContactPhotoManager.TYPE_DEFAULT;
+
+        if (isVoicemailNumber) {
+            contactType = ContactPhotoManager.TYPE_VOICEMAIL;
+        } else if (mContactInfoHelper.isBusiness(info.sourceType)) {
+            contactType = ContactPhotoManager.TYPE_BUSINESS;
+        }
+
+        String lookupKey = info.lookupKey;
+        if (lookupUri != null) {
+            //lookupKey = ContactInfoHelper.getLookupKeyFromUri(lookupUri);
+
+        }
+
+        String nameForDefaultImage = null;
+        if (TextUtils.isEmpty(name)) {
+            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(details.number,
+                    details.numberPresentation, details.formattedNumber).toString();
         } else {
-            setPhoto(views, photoId, lookupUri);
+            nameForDefaultImage = name;
+        }
+
+        if (photoId == 0 && photoUri != null) {
+            setPhoto(views, photoUri, lookupUri, nameForDefaultImage, lookupKey, contactType);
+        } else {
+            setPhoto(views, photoId, lookupUri, nameForDefaultImage, lookupKey, contactType);
         }
 
         // Listen for the first draw
@@ -853,15 +882,22 @@ public class CallLogAdapter extends GroupingListAdapter
         return callTypes;
     }
 
-    private void setPhoto(CallLogListItemViews views, long photoId, Uri contactUri) {
+    private void setPhoto(CallLogListItemViews views, long photoId, Uri contactUri,
+            String displayName, String identifier, int contactType) {
         views.quickContactView.assignContactUri(contactUri);
-        mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, false /* darkTheme */);
+        DefaultImageRequest request = new DefaultImageRequest(displayName, identifier,
+                contactType);
+        mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, false /* darkTheme */,
+                request);
     }
 
-    private void setPhoto(CallLogListItemViews views, Uri photoUri, Uri contactUri) {
+    private void setPhoto(CallLogListItemViews views, Uri photoUri, Uri contactUri,
+            String displayName, String identifier, int contactType) {
         views.quickContactView.assignContactUri(contactUri);
+        DefaultImageRequest request = new DefaultImageRequest(displayName, identifier,
+                contactType);
         mContactPhotoManager.loadDirectoryPhoto(views.quickContactView, photoUri,
-                false /* darkTheme */);
+                false /* darkTheme */, request);
     }
 
 
