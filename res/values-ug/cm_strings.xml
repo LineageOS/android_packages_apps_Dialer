@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_log_stats_title">ستاتىستىكا</string>
+    <string name="callStatsDetailTitle">چاقىرىش تەپسىلاتى</string>
+    <string name="call_stats">چاقىرىش سىتاتىستىكىسى</string>
+    <string name="call_stats_refresh">يېڭىلا</string>
+    <string name="activity_title_call_stats">چاقىرىش سىتاتىستىكىسى</string>
+    <string name="call_stats_nav_all">ھەممىسى</string>
+    <string name="call_stats_nav_incoming">چاقىرىلىش</string>
+    <string name="call_stats_nav_outgoing">چاقىرىش</string>
+    <string name="call_stats_nav_missed">سۆزلەشمىگەنلىرى</string>
+    <string name="call_stats_incoming">چاقىرىلىش: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">چاقىرىش: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">سۆزلەشمىگەنلىرى</string>
+    <string name="call_stats_missed_percent">سۆزلەشمىگەن: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">جەمئى: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">جەمئى: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">باشلاش چېسلاسى</string>
+    <string name="call_stats_filter_to">ئاخىرلىشىش چېسلاسى</string>
+    <string name="call_stats_filter_picker_title">سۈزگۈچ دائىرىسى</string>
+    <string name="date_quick_selection">تېز تاللاش</string>
+    <string name="date_qs_currentmonth">نۆۋەتتىكى ئاي</string>
+    <string name="date_qs_currentquarter">نۆۋەتتىكى پەسىل</string>
+    <string name="date_qs_currentyear">نۆۋەتتىكى يىل</string>
+    <string name="date_qs_lastweek">ئالدىنقى ھەپتە</string>
+    <string name="date_qs_lastmonth">ئالدىنقى ئاي</string>
+    <string name="date_qs_lastquarter">ئالدىنقى پەسىل</string>
+    <string name="date_qs_lastyear">ئالدىنقى يىل</string>
+    <string name="call_stats_date_filter">ۋاقىت دائىرىسى تەڭشەش</string>
+    <string name="call_stats_reset_filter">ۋاقىت دائىرىسىنى ئەسلىگە قايتۇر</string>
+    <string name="call_stats_sort_by_duration">داۋاملىشىش ۋاقتى بويىچە</string>
+    <string name="call_stats_sort_by_count">سۆزلىشىش قېتىمى بويىچە</string>
+    <string name="menu_add_to_blacklist">قارا تىزىمغا قوش</string>
+    <string name="toast_added_to_blacklist">%s قارا تىزىمغا قوشۇلدى.</string>
+</resources>
