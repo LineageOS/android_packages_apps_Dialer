@@ -249,6 +249,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final int callType = c.getInt(CallLogQuery.CALL_TYPE);
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final int subscription = c.getInt(CallLogQuery.SUBSCRIPTION);
+        final int durationType = c.getInt(CallLogQuery.DURATION_TYPE);
 
         final ContactInfo cachedContactInfo = getContactInfoFromCallLog(c);
 
@@ -310,11 +311,12 @@ public class CallLogAdapter extends GroupingListAdapter
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, subscription);
+                    duration, subscription, durationType);
         } else {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, name, ntype, label, lookupUri, photoUri, sourceType, subscription);
+                    duration, name, ntype, label, lookupUri, photoUri, sourceType, 
+                    subscription, durationType);
         }
 
         final boolean isNew = c.getInt(CallLogQuery.IS_READ) == 0;
