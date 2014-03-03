@@ -908,12 +908,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else if (getInSearchUi()) {
             mSearchView.setText(null);
             mDialpadFragment.clearDialpad();
-        } else if (isTaskRoot()) {
-            // Instead of stopping, simply push this to the back of the stack.
-            // This is only done when running at the top of the stack;
-            // otherwise, we have been launched by someone else so need to
-            // allow the user to go back to the caller.
-            moveTaskToBack(false);
         } else {
             super.onBackPressed();
         }
