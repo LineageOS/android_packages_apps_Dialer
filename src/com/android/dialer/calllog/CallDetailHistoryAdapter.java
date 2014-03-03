@@ -181,7 +181,7 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
             durationView.setVisibility(View.GONE);
         } else {
             durationView.setVisibility(View.VISIBLE);
-            durationView.setText(formatDuration(details.duration));
+            durationView.setText(formatDuration(details.duration, details.durationType));
         }
 
         // do this synchronously to prevent recordings from "popping in"
@@ -203,7 +203,7 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
         return result;
     }
 
-    private String formatDuration(long elapsedSeconds) {
+    private String formatDuration(long elapsedSeconds, int durationType) {
         long minutes = 0;
         long seconds = 0;
 
@@ -213,6 +213,24 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
         }
         seconds = elapsedSeconds;
 
-        return mContext.getString(R.string.callDetailsDurationFormat, minutes, seconds);
+        String timeStr = mContext.getString(R.string.callDetailsDurationFormat,
+                minutes, seconds);
+
+        boolean duration = mContext.getResources().getBoolean(R.bool.call_durationtype_enabled);
+
+        if (duration) {
+            switch (durationType) {
+                case Calls.DURATION_TYPE_ACTIVE:
+                    return mContext.getString(R.string.call_duration_active)
+                            + timeStr;
+                case Calls.DURATION_TYPE_CALLOUT:
+                    return mContext.getString(R.string.call_duration_call_out)
+                            + timeStr;
+                default:
+                    return timeStr;
+            }
+        } else {
+            return timeStr;
+        }
     }
 }
