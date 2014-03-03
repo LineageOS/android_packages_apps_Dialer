@@ -88,6 +88,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     private long mIdToKeepInPlace = -1;
 
     private boolean mAwaitingRemove = false;
+    private boolean mDelayCursorUpdates = false;
 
     private ContactPhotoManager mPhotoManager;
     protected int mNumFrequents;
@@ -178,6 +179,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
      * @param inDragging Boolean variable indicating whether there is a drag in process.
      */
     public void setInDragging(boolean inDragging) {
+        mDelayCursorUpdates = inDragging;
         mInDragging = inDragging;
     }
 
@@ -224,7 +226,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
      * Else use {@link ContactTileLoaderFactory}
      */
     public void setContactCursor(Cursor cursor) {
-        if (cursor != null && !cursor.isClosed()) {
+        if (!mDelayCursorUpdates && cursor != null && !cursor.isClosed()) {
             mNumStarred = getNumStarredContacts(cursor);
             if (mAwaitingRemove) {
                 mDataSetChangedListener.cacheOffsetsForDatasetChange();
