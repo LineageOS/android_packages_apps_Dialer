@@ -27,6 +27,8 @@ import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,6 +50,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView.OnScrollListener;
@@ -76,6 +79,7 @@ import com.android.dialerbind.DatabaseHelperManager;
 import com.android.internal.telephony.ITelephony;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
@@ -330,7 +334,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             hideDialpadFragment(false, true);
             mInCallDialpadUp = false;
         }
-
+        prepareVoiceSearchButton();
         mFirstLaunch = false;
         mDialerDatabaseHelper.startSmartDialUpdateThread();
     }
@@ -447,8 +451,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 }
                 break;
             case R.id.voice_search_button:
-                final Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                startActivityForResult(voiceIntent, ACTIVITY_REQUEST_CODE_VOICE_SEARCH);
+                try {
+                    startActivityForResult(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH),
+                            ACTIVITY_REQUEST_CODE_VOICE_SEARCH);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(DialtactsActivity.this, R.string.voice_search_not_available,
+                            Toast.LENGTH_SHORT).show();
+                }
                 break;
             default: {
                 Log.wtf(TAG, "Unexpected onClick event from " + view);
@@ -507,8 +516,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mSearchViewContainer = findViewById(R.id.search_view_container);
         mSearchViewCloseButton = findViewById(R.id.search_close_button);
         mSearchViewCloseButton.setOnClickListener(this);
-        mVoiceSearchButton = findViewById(R.id.voice_search_button);
-        mVoiceSearchButton.setOnClickListener(this);
+
         mSearchView = (EditText) findViewById(R.id.search_view);
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
 
@@ -524,6 +532,19 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ssb.setSpan(new ImageSpan(searchIcon), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         mSearchView.setHint(ssb);
+
+        prepareVoiceSearchButton();
+    }
+
+    private void prepareVoiceSearchButton() {
+        mVoiceSearchButton = findViewById(R.id.voice_search_button);
+        final Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        if (canIntentBeHandled(voiceIntent)) {
+            mVoiceSearchButton.setVisibility(View.VISIBLE);
+            mVoiceSearchButton.setOnClickListener(this);
+        } else {
+            mVoiceSearchButton.setVisibility(View.GONE);
+        }
     }
 
     final AnimatorListener mHideListener = new AnimatorListenerAdapter() {
@@ -954,5 +975,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final Intent intent = new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI);
         intent.putExtra(Intents.Insert.NAME, text);
         return intent;
+    }
+
+    private boolean canIntentBeHandled(Intent intent) {
+        final PackageManager packageManager = getPackageManager();
+        final List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
+                PackageManager.MATCH_DEFAULT_ONLY);
+        return resolveInfo != null && resolveInfo.size() > 0;
     }
 }
