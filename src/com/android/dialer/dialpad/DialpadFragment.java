@@ -1478,7 +1478,7 @@ public class DialpadFragment extends Fragment
         // change the image visibility of the button
         if (mRecipients != null) mRecipients.setVisibility(conferenceButtonVisibility);
         if (mDialpadStub != null) mDialpadStub.setVisibility(conferenceButtonVisibility);
-        if (mDigitsContainer != null) mDigitsContainer.setVisibility(nonConferenceButtonVisibility);
+        if (mDigitsContainer != null) mDigitsContainer.setVisibility(View.VISIBLE);
         if (mDigits != null) mDigits.setVisibility(nonConferenceButtonVisibility);
         if (mDelete != null) mDelete.setVisibility(nonConferenceButtonVisibility);
         if (mDialpad != null) mDialpad.setVisibility(nonConferenceButtonVisibility);
