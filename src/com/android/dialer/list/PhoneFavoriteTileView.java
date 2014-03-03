@@ -24,11 +24,8 @@ import android.content.ClipData;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.MoreContactUtils;
@@ -68,6 +65,8 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     private View mUndoRemovalButton;
     /** The view that holds the list view row. */
     protected ContactTileRow mParentRow;
+    /** View that contains the transparent shadow that is overlaid on top of the contact image. */
+    private View mShadowOverlay;
 
     /** Users' most frequent phone number. */
     private String mPhoneNumberString;
@@ -91,10 +90,10 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mFavoriteContactCard = findViewById(com.android.dialer.R.id.contact_favorite_card);
-        mRemovalDialogue = findViewById(com.android.dialer.R.id.favorite_remove_dialogue);
-        mUndoRemovalButton = findViewById(com.android.dialer.R.id
-                .favorite_remove_undo_button);
+        mShadowOverlay = findViewById(R.id.shadow_overlay);
+        mFavoriteContactCard = findViewById(R.id.contact_favorite_card);
+        mRemovalDialogue = findViewById(R.id.favorite_remove_dialogue);
+        mUndoRemovalButton = findViewById(R.id.favorite_remove_undo_button);
 
         mUndoRemovalButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -250,5 +249,13 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     protected DefaultImageRequest getDefaultImageRequest(String displayName, String lookupKey) {
         return new DefaultImageRequest(displayName, lookupKey, ContactPhotoManager.TYPE_DEFAULT,
                 DEFAULT_IMAGE_LETTER_SCALE, DEFAULT_IMAGE_LETTER_OFFSET);
+    }
+
+    @Override
+    protected void configureViewForImage(boolean isDefaultImage) {
+        // Hide the shadow overlay if the image is a default image (i.e. colored letter tile)
+        if (mShadowOverlay != null) {
+            mShadowOverlay.setVisibility(isDefaultImage ? View.GONE : View.VISIBLE);
+        }
     }
 }
