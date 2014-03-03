@@ -519,6 +519,9 @@
     <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
     <string name="add_contact_not_available">Re-enable the People application to use this feature.</string>
 
+    <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
+    <string name="voice_search_not_available">Voice search is not available.</string>
+
     <!-- Hint displayed in dialer search box when there is no query that is currently typed.
          [CHAR LIMIT=30] -->
     <string name="dialer_hint_find_contact">Type a name or phone number</string>
