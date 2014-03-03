@@ -41,16 +41,16 @@ public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
             if (TextUtils.isEmpty(number)) {
                 return;
             }
-            final long id = getContactIdFromPhoneNumber(context, number);
-            if (id != NO_CONTACT_FOUND) {
-                final Thread thread = new Thread() {
-                    @Override
-                    public void run() {
+            final Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    final long id = getContactIdFromPhoneNumber(context, number);
+                    if (id != NO_CONTACT_FOUND) {
                         undemoteContactWithId(context, id);
                     }
-                };
-                thread.start();
-            }
+                }
+            };
+            thread.start();
         }
     }
 
