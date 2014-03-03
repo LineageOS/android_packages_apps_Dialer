@@ -453,8 +453,11 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     }
 
     private void saveHorizontalOffsets(ContactTileRow row, ArrayList<ContactEntry> list) {
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size() && i < row.getChildCount(); i++) {
             final View child = row.getChildAt(i);
+            if (child == null) {
+                continue;
+            }
             final ContactEntry entry = list.get(i);
             final long itemId = mContactTileAdapter.getAdjustedItemId(entry.id);
             if (DEBUG) {
