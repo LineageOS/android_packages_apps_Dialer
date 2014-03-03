@@ -541,7 +541,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                     final View child = mListView.getChildAt(i);
                     int position = firstVisiblePosition + i;
                     final int itemViewType = mAdapter.getItemViewType(position);
-                    if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP) {
+                    if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP &&
+                            child instanceof ContactTileRow) {
                         // This is a tiled row, so perform horizontal animations instead
                         performHorizontalAnimations((ContactTileRow) child, (
                                 ArrayList<ContactEntry>) mAdapter.getItem(position), idsInPlace);
