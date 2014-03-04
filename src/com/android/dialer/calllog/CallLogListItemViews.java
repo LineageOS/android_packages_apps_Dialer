@@ -34,19 +34,25 @@ public final class CallLogListItemViews {
     public final QuickContactBadge quickContactView;
     /** The primary action view of the entry. */
     public final View primaryActionView;
+    /** The secondary action view, which includes both the vertical divider line and
+     *  the action button itself.  Used so that the button and divider line can be
+     *  made visible/hidden as a whole. */
+    public final View secondaryActionView;
     /** The secondary action button on the entry. */
-    public final ImageView secondaryActionView;
+    public final ImageView secondaryActionButtonView;
     /** The details of the phone call. */
     public final PhoneCallDetailsViews phoneCallDetailsViews;
     /** The text of the header of a section. */
     public final TextView listHeaderTextView;
 
     private CallLogListItemViews(QuickContactBadge quickContactView, View primaryActionView,
-            ImageView secondaryActionView, PhoneCallDetailsViews phoneCallDetailsViews,
+            View secondaryActionView, ImageView secondaryActionButtonView,
+            PhoneCallDetailsViews phoneCallDetailsViews,
             TextView listHeaderTextView) {
         this.quickContactView = quickContactView;
         this.primaryActionView = primaryActionView;
         this.secondaryActionView = secondaryActionView;
+        this.secondaryActionButtonView = secondaryActionButtonView;
         this.phoneCallDetailsViews = phoneCallDetailsViews;
         this.listHeaderTextView = listHeaderTextView;
     }
@@ -55,6 +61,7 @@ public final class CallLogListItemViews {
         return new CallLogListItemViews(
                 (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
                 view.findViewById(R.id.primary_action_view),
+                view.findViewById(R.id.secondary_action_view),
                 (ImageView) view.findViewById(R.id.secondary_action_icon),
                 PhoneCallDetailsViews.fromView(view),
                 (TextView) view.findViewById(R.id.call_log_header));
@@ -64,6 +71,7 @@ public final class CallLogListItemViews {
     public static CallLogListItemViews createForTest(Context context) {
         return new CallLogListItemViews(
                 new QuickContactBadge(context),
+                new View(context),
                 new View(context),
                 new ImageView(context),
                 PhoneCallDetailsViews.createForTest(context),
