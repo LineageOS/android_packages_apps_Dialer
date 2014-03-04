@@ -62,24 +62,12 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
     public void loadFromContact(ContactEntry entry) {
         super.loadFromContact(entry);
         if (entry != null) {
-            final boolean contactIsFavorite = entry.isFavorite;
-            mSecondaryButton.setVisibility(contactIsFavorite ? GONE : VISIBLE);
-
-            if (contactIsFavorite) {
-                mStarView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        launchQuickContact();
-                    }
-                });
-            } else {
-                mSecondaryButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        launchQuickContact();
-                    }
-                });
-            }
+            mSecondaryButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    launchQuickContact();
+                }
+            });
         }
     }
 }
