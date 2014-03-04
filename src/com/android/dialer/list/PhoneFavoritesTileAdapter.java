@@ -59,7 +59,7 @@ import java.util.PriorityQueue;
  *
  */
 public class PhoneFavoritesTileAdapter extends BaseAdapter implements
-        SwipeHelper.OnItemGestureListener, PhoneFavoriteListView.OnDragDropListener {
+        SwipeHelper.OnItemGestureListener, OnDragDropListener {
     private static final String TAG = PhoneFavoritesTileAdapter.class.getSimpleName();
     private static final boolean DEBUG = false;
 
@@ -1204,24 +1204,38 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     }
 
     @Override
-    public void onDragStarted(int itemIndex) {
+    public void onDragStarted(int itemIndex, int x, int y, PhoneFavoriteTileView view) {
         setInDragging(true);
         popContactEntry(itemIndex);
     }
 
     @Override
-    public void onDragHovered(int itemIndex) {
+    public void onDragHovered(int itemIndex, int x, int y) {
         if (mInDragging &&
                 mDragEnteredEntryIndex != itemIndex &&
                 isIndexInBound(itemIndex) &&
-                itemIndex < PIN_LIMIT) {
+                itemIndex < PIN_LIMIT &&
+                itemIndex >= 0) {
             markDropArea(itemIndex);
         }
     }
 
     @Override
-    public void onDragFinished() {
+    public void onDragFinished(int x, int y) {
         setInDragging(false);
-        handleDrop();
+        // A contact has been dragged to the RemoveView in order to be unstarred,  so simply wait
+        // for the new contact cursor which will cause the UI to be refreshed without the unstarred
+        // contact.
+        if (!mAwaitingRemove) {
+            handleDrop();
+        }
+    }
+
+    @Override
+    public void onDroppedOnRemove() {
+        if (mDraggedEntry != null) {
+            unstarAndUnpinContact(mDraggedEntry.lookupKey);
+            mAwaitingRemove = true;
+        }
     }
 }
