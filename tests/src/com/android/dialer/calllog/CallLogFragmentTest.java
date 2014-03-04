@@ -117,7 +117,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         FragmentManager fragmentManager = mActivity.getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(FragmentTestActivity.LAYOUT_ID, mFragment);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
         // Wait for the fragment to be loaded.
         getInstrumentation().waitForIdleSync();
 
@@ -320,7 +320,12 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
-        IntentProvider intentProvider = (IntentProvider) views.secondaryActionView.getTag();
+
+        // The primaryActionView tag is set in the
+        // {@link com.android.dialer.calllog.CallLogAdapter#bindView} method.  If it is possible
+        // to place a call to the phone number, a call intent will have been created for the
+        // primaryActionView.
+        IntentProvider intentProvider = (IntentProvider) views.primaryActionView.getTag();
         Intent intent = intentProvider.getIntent(mActivity);
         // Starts a call.
         assertEquals(Intent.ACTION_CALL_PRIVILEGED, intent.getAction());
@@ -336,7 +341,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
-        IntentProvider intentProvider = (IntentProvider) views.secondaryActionView.getTag();
+        IntentProvider intentProvider = (IntentProvider) views.secondaryActionButtonView.getTag();
         Intent intent = intentProvider.getIntent(mActivity);
         // Starts the call detail activity.
         assertEquals(new ComponentName(mActivity, CallDetailActivity.class),
@@ -362,8 +367,9 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     // HELPERS to check conditions on the DB/views
     //
     /**
-     * Go over all the views in the list and check that the Call
-     * icon's visibility matches the nature of the number.
+     * Go over the views in the list and check to ensure that
+     * callable numbers have an associated call intent, where numbers
+     * which are not callable have a null intent.
      */
     private void checkCallStatus() {
         for (int i = 0; i < mList.length; i++) {
@@ -374,9 +380,17 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
             int presentation = getPhoneNumberPresentationForListEntry(i);
             if (presentation == Calls.PRESENTATION_RESTRICTED ||
                     presentation == Calls.PRESENTATION_UNKNOWN) {
-                assertFalse(View.VISIBLE == mItem.secondaryActionView.getVisibility());
+                //If number is not callable, the primary action view should have a null tag.
+                assertNull(mItem.primaryActionView.getTag());
             } else {
-                assertEquals(View.VISIBLE, mItem.secondaryActionView.getVisibility());
+                //If the number is callable, the primary action view should have a non-null tag.
+                assertNotNull(mItem.primaryActionView.getTag());
+
+                IntentProvider intentProvider = (IntentProvider)mItem.primaryActionView.getTag();
+                Intent callIntent = intentProvider.getIntent(mActivity);
+
+                //The intent should be to make the call
+                assertEquals(Intent.ACTION_CALL_PRIVILEGED, callIntent.getAction());
             }
         }
     }
