@@ -43,6 +43,13 @@
     <dimen name="call_log_list_contact_photo_size">64dip</dimen>
     <dimen name="call_detail_contact_name_margin">24dip</dimen>
     <dimen name="call_detail_button_spacing">2dip</dimen>
+    <!-- Defines the vertical margin for the vertical separator between
+         the main area of a call log entry and the secondary action button. -->
+    <dimen name="call_log_list_item_vertical_divider_margin">8dp</dimen>
+
+    <!-- Defines the width of the vertical separator between
+         the main area of a call log entry and the secondary action button. -->
+    <dimen name="call_log_list_item_vertical_divider_width">1dp</dimen>
 
     <!-- Layout weight values for dialpad screen. These layouts will be used in one
          LinearLayout (dialpad_fragment.xml), configuring dialpad screen's vertical

@@ -34,10 +34,20 @@ public class ObjectFactory {
         return null;
     }
 
+    /**
+     * Create a new instance of the call log adapter.
+     * @param context The context to use.
+     * @param callFetcher Instance of call fetcher to use.
+     * @param contactInfoHelper Instance of contact info helper class to use.
+     * @param hideSecondaryAction If true, secondary action will be hidden (ie call details
+     *                            or play voicemail).
+     * @param isCallLog Is this call log adapter being used on the call log?
+     * @return Instance of CallLogAdapter.
+     */
     public static CallLogAdapter newCallLogAdapter(Context context, CallFetcher callFetcher,
-            ContactInfoHelper contactInfoHelper, boolean useCallAsPrimaryAction,
+            ContactInfoHelper contactInfoHelper, boolean hideSecondaryAction,
             boolean isCallLog) {
-        return new CallLogAdapter(context, callFetcher, contactInfoHelper, useCallAsPrimaryAction,
+        return new CallLogAdapter(context, callFetcher, contactInfoHelper, hideSecondaryAction,
                 isCallLog);
     }
 }
