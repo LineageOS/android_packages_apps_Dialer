@@ -1560,9 +1560,9 @@ public class DialpadFragment extends Fragment
      * or Wait character (;).
      */
     private void updateDialString(char newDigit) {
-        if(newDigit != WAIT && newDigit != PAUSE) {
-            Log.wtf(TAG, "Not expected for anything other than PAUSE & WAIT");
-            return;
+        if (newDigit != WAIT && newDigit != PAUSE) {
+            throw new IllegalArgumentException(
+                    "Not expected for anything other than PAUSE & WAIT");
         }
 
         int selectionStart;
@@ -1642,8 +1642,8 @@ public class DialpadFragment extends Fragment
     /* package */ static boolean canAddDigit(CharSequence digits, int start, int end,
                                              char newDigit) {
         if(newDigit != WAIT && newDigit != PAUSE) {
-            Log.wtf(TAG, "Should not be called for anything other than PAUSE & WAIT");
-            return false;
+            throw new IllegalArgumentException(
+                    "Should not be called for anything other than PAUSE & WAIT");
         }
 
         // False if no selection, or selection is reversed (end < start)
