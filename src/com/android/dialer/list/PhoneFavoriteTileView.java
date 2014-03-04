@@ -60,8 +60,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     private View mUndoRemovalButton;
     /** The view that holds the list view row. */
     protected ContactTileRow mParentRow;
-    /** The view that indicates whether the contact is a favorate. */
-    protected ImageView mStarView;
 
     /** Users' most frequent phone number. */
     private String mPhoneNumberString;
@@ -89,7 +87,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
         mRemovalDialogue = findViewById(com.android.dialer.R.id.favorite_remove_dialogue);
         mUndoRemovalButton = findViewById(com.android.dialer.R.id
                 .favorite_remove_undo_button);
-        mStarView = (ImageView) findViewById(com.android.dialer.R.id.contact_favorite_star);
 
         mUndoRemovalButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -127,7 +124,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
             // Grab the phone-number to call directly... see {@link onClick()}
             mPhoneNumberString = entry.phoneNumber;
 
-            mStarView.setVisibility(entry.isFavorite ? VISIBLE : GONE);
             // If this is a blank entry, don't show anything.
             // TODO krelease:Just hide the view for now. For this to truly look like an empty row
             // the entire ContactTileRow needs to be hidden.
