@@ -22,7 +22,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentManager.BackStackEntry;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -50,8 +49,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
@@ -70,9 +67,13 @@ import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.list.AllContactsActivity;
+import com.android.dialer.list.DragDropController;
+import com.android.dialer.list.OnDragDropListener;
 import com.android.dialer.list.OnListFragmentScrolledListener;
 import com.android.dialer.list.PhoneFavoriteFragment;
+import com.android.dialer.list.PhoneFavoriteTileView;
 import com.android.dialer.list.RegularSearchFragment;
+import com.android.dialer.list.RemoveView;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialerbind.DatabaseHelperManager;
@@ -88,7 +89,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         DialpadFragment.OnDialpadQueryChangedListener, PopupMenu.OnMenuItemClickListener,
         OnListFragmentScrolledListener,
         DialpadFragment.OnDialpadFragmentStartedListener,
-        PhoneFavoriteFragment.OnShowAllContactsListener {
+        PhoneFavoriteFragment.OnShowAllContactsListener,
+        PhoneFavoriteFragment.HostInterface,
+        OnDragDropListener {
     private static final String TAG = "DialtactsActivity";
 
     public static final boolean DEBUG = false;
@@ -121,6 +124,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private static final int SUBACTIVITY_ACCOUNT_FILTER = 1;
 
     private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
+
+    private static final int FADE_ANIMATION_DURATION = 200;
 
     private String mFilterText;
 
@@ -168,6 +173,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private boolean mFirstLaunch;
     private View mSearchViewContainer;
+    private RemoveView mRemoveViewContainer;
     private View mSearchViewCloseButton;
     private View mVoiceSearchButton;
     private EditText mSearchView;
@@ -312,6 +318,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mBottomPaddingView = findViewById(R.id.dialtacts_bottom_padding);
         mFragmentsFrame = findViewById(R.id.dialtacts_frame);
         mActionBar = findViewById(R.id.fake_action_bar);
+        mRemoveViewContainer = (RemoveView) findViewById(R.id.remove_view_container);
         prepareSearchView();
 
         if (UI.FILTER_CONTACTS_ACTION.equals(intent.getAction())
@@ -976,5 +983,49 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
                 PackageManager.MATCH_DEFAULT_ONLY);
         return resolveInfo != null && resolveInfo.size() > 0;
+    }
+
+    @Override
+    public void onDragStarted(int itemIndex, int x, int y, PhoneFavoriteTileView view) {
+        crossfadeViews(mRemoveViewContainer, mSearchViewContainer, FADE_ANIMATION_DURATION);
+    }
+
+    @Override
+    public void onDragHovered(int itemIndex, int x, int y) {}
+
+    @Override
+    public void onDragFinished(int x, int y) {
+        crossfadeViews(mSearchViewContainer, mRemoveViewContainer, FADE_ANIMATION_DURATION);
+    }
+
+    @Override
+    public void onDroppedOnRemove() {}
+
+    /**
+     * Allows the PhoneFavoriteFragment to attach the drag controller to mRemoveViewContainer
+     * once it has been attached to the activity.
+     */
+    @Override
+    public void setDragDropController(DragDropController dragController) {
+        mRemoveViewContainer.setDragDropController(dragController);
+    }
+
+    /**
+     * Crossfades two views so that the first one appears while the other one is fading
+     * out of view.
+     */
+    private void crossfadeViews(final View fadeIn, final View fadeOut, int duration) {
+        fadeOut.animate().alpha(0).setDuration(duration)
+        .setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                fadeOut.setVisibility(View.GONE);
+            }
+        });
+
+        fadeIn.setVisibility(View.VISIBLE);
+        fadeIn.setAlpha(0);
+        fadeIn.animate().alpha(1).setDuration(FADE_ANIMATION_DURATION)
+                .setListener(null);
     }
 }
