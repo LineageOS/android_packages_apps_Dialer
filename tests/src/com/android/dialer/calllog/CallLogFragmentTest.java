@@ -70,6 +70,8 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     /** The formatted version of {@link #TEST_NUMBER}. */
     private static final String TEST_FORMATTED_NUMBER = "1 212-555-1000";
 
+    private static final String TEST_DEFAULT_CUSTOM_LABEL = "myLabel";
+
     /** The activity in which we are hosting the fragment. */
     private FragmentTestActivity mActivity;
     private CallLogFragment mFragment;
@@ -218,8 +220,10 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testBindView_WithCachedName() {
         mCursor.moveToFirst();
+        // provide a default custom label instead of an empty string, which corresponds to
+        // {@value com.android.dialer.calllog.ContactInfo#GEOCODE_AS_LABEL}
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
-                "John Doe", Phone.TYPE_HOME, "");
+                "John Doe", Phone.TYPE_HOME, TEST_DEFAULT_CUSTOM_LABEL);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
 
@@ -232,20 +236,22 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     public void testBindView_UriNumber() {
         mCursor.moveToFirst();
         insertWithCachedValues("sip:johndoe@gmail.com", NOW, 0, Calls.INCOMING_TYPE,
-                "John Doe", Phone.TYPE_HOME, "");
+                "John Doe", Phone.TYPE_HOME, TEST_DEFAULT_CUSTOM_LABEL);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, "John Doe");
-        assertLabel(views, "sip:johndoe@gmail.com", null);
+        assertLabel(views, "sip:johndoe@gmail.com", "sip:johndoe@gmail.com");
     }
 
     @MediumTest
     public void testBindView_HomeLabel() {
         mCursor.moveToFirst();
+        // provide a default custom label instead of an empty string, which corresponds to
+        // {@value com.android.dialer.calllog.ContactInfo#GEOCODE_AS_LABEL}
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
-                "John Doe", Phone.TYPE_HOME, "");
+                "John Doe", Phone.TYPE_HOME, TEST_DEFAULT_CUSTOM_LABEL);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
 
@@ -257,8 +263,10 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testBindView_WorkLabel() {
         mCursor.moveToFirst();
+        // provide a default custom label instead of an empty string, which corresponds to
+        // {@link com.android.dialer.calllog.ContactInfo#GEOCODE_AS_LABEL}
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
-                "John Doe", Phone.TYPE_WORK, "");
+                "John Doe", Phone.TYPE_WORK, TEST_DEFAULT_CUSTOM_LABEL);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
 
@@ -607,7 +615,9 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
                 privateOrUnknownOrVm[2] = true;
             } else {
                 int inout = mRnd.nextBoolean() ? Calls.OUTGOING_TYPE :  Calls.INCOMING_TYPE;
-                String number = new Formatter().format("1800123%04d", i).toString();
+                final Formatter formatter = new Formatter();
+                String number = formatter.format("1800123%04d", i).toString();
+                formatter.close();
                 insert(number, Calls.PRESENTATION_ALLOWED, NOW, RAND_DURATION, inout);
             }
         }
