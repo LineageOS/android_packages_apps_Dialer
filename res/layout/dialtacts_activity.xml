@@ -28,20 +28,20 @@
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:orientation="vertical" >
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/search_view_container"
-            android:orientation="vertical"
             >
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/search_view_container"
                 android:orientation="horizontal"
                 android:paddingLeft="16dp"
                 android:paddingRight="23dp"
                 android:background="@color/searchbox_background_color"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                >
                 <EditText
                     android:id="@+id/search_view"
                     android:layout_width="0dp"
@@ -57,6 +57,7 @@
                     android:src="@drawable/ic_close_dk"
                     android:clickable="true"
                     android:background="?android:attr/selectableItemBackground"
+                    android:contentDescription="@string/description_clear_search"
                     android:visibility="gone" />
                 <ImageView
                     android:id="@+id/voice_search_button"
@@ -68,12 +69,35 @@
                     android:contentDescription="@string/description_start_voice_search"
                     android:background="?android:attr/selectableItemBackground" />
             </LinearLayout>
-            <View
-                android:id="@+id/searchbox_divider"
-                android:layout_height="1dp"
+            <com.android.dialer.list.RemoveView
                 android:layout_width="match_parent"
-                android:background="@color/background_dialer_light" />
-        </LinearLayout>
+                android:layout_height="56dp"
+                android:id="@+id/remove_view_container"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:visibility="gone">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/remove_view_icon"
+                    android:src="@drawable/ic_remove"
+                    android:contentDescription="@string/remove_contact"
+                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/remove_view_text"
+                    android:textSize="@dimen/remove_text_size"
+                    android:textColor="@color/remove_text_color"
+                    android:text="@string/remove_contact"
+                />
+            </com.android.dialer.list.RemoveView>
+        </FrameLayout>
+        <View
+            android:id="@+id/searchbox_divider"
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="@color/background_dialer_light" />
         <FrameLayout
             android:layout_height="0dp"
             android:layout_weight="1"
