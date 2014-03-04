@@ -75,7 +75,7 @@
             android:layout_marginRight="7dip"
             android:layout_marginEnd="7dip"
             android:layout_marginBottom="7dip"
-            android:src="@drawable/ic_star_marked_as_fav"
+            android:src="@drawable/star_thumbnail"
             android:visibility="gone" />
 
     </RelativeLayout>
