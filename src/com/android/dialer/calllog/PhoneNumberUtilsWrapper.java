@@ -20,7 +20,7 @@ import android.provider.CallLog;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
-import com.google.android.collect.Sets;
+import com.google.common.collect.Sets;
 
 import java.util.Set;
 
