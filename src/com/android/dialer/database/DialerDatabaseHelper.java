@@ -163,6 +163,17 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         /** Selects only rows that have been updated after a certain time stamp.*/
         static final String SELECT_UPDATED_CLAUSE =
                 Phone.CONTACT_LAST_UPDATED_TIMESTAMP + " > ?";
+
+        /** Ignores contacts that have an unreasonably long lookup key. These are likely to be
+         * the result of multiple (> 50) merged raw contacts, and are likely to cause
+         * OutOfMemoryExceptions within SQLite, or cause memory allocation problems later on
+         * when iterating through the cursor set (see b/13133579)
+         */
+        static final String SELECT_IGNORE_LOOKUP_KEY_TOO_LONG_CLAUSE =
+                "length(" + Phone.LOOKUP_KEY + ") < 1000";
+
+        static final String SELECTION = SELECT_UPDATED_CLAUSE + " AND " +
+                SELECT_IGNORE_LOOKUP_KEY_TOO_LONG_CLAUSE;
     }
 
     /** Query options for querying the deleted contact database.*/
@@ -658,7 +669,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 } else {
                     insert.bindString(5, displayName);
                 }
-
                 insert.bindLong(1, updatedContactCursor.getLong(PhoneQuery.PHONE_ID));
                 insert.bindLong(3, updatedContactCursor.getLong(PhoneQuery.PHONE_CONTACT_ID));
                 insert.bindLong(6, updatedContactCursor.getLong(PhoneQuery.PHONE_PHOTO_ID));
@@ -758,7 +768,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
              * update time.
              */
             final Cursor updatedContactCursor = mContext.getContentResolver().query(PhoneQuery.URI,
-                    PhoneQuery.PROJECTION, PhoneQuery.SELECT_UPDATED_CLAUSE,
+                    PhoneQuery.PROJECTION, PhoneQuery.SELECTION,
                     new String[]{lastUpdateMillis}, null);
 
             /** Sets the time after querying the database as the current update time. */
