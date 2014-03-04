@@ -16,8 +16,6 @@
 
 package com.android.dialer.calllog;
 
-import android.content.res.Resources;
-
 /**
  * Modified version of {@link com.android.dialer.calllog.PhoneNumberDisplayHelper} to be used in tests
  * that allows injecting the voicemail number.

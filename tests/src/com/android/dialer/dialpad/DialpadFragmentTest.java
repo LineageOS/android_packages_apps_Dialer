@@ -34,7 +34,11 @@ public class DialpadFragmentTest extends TestCase {
 
     public void testCanAddDigit_InvalidCharacter() {
         // only handles wait/pause
-        assertFalse(DialpadFragment.canAddDigit("123", 1, 1, '5'));
+        try {
+            DialpadFragment.canAddDigit("123", 1, 1, '5');
+            fail("Calling canAddDigit with invalid character should throw an exception");
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     public void testCanAddDigit_BadOrNoSelection() {
