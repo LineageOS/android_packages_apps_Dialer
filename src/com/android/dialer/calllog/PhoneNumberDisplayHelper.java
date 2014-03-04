@@ -24,12 +24,12 @@ import android.text.TextUtils;
 import com.android.dialer.R;
 
 /**
- * Helper for formatting and managing phone numbers.
+ * Helper for formatting and managing the display of phone numbers.
  */
-public class PhoneNumberHelper {
+public class PhoneNumberDisplayHelper {
     private final Resources mResources;
 
-    public PhoneNumberHelper(Resources resources) {
+    public PhoneNumberDisplayHelper(Resources resources) {
         mResources = resources;
     }
 
