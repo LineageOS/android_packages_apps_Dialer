@@ -54,7 +54,10 @@
     <color name="dialpad_secondary_text_color">#aaaaaa</color>
 
     <!-- Background color of action bars -->
-    <color name="actionbar_background_color">#ffffff</color>
+    <color name="actionbar_background_color">#3B77E7</color>
+
+    <!-- Underline color of action bars -->
+    <color name="actionbar_underline">#3265C1</color>
 
     <!-- Color of the 1dp divider that separates favorites -->
     <color name="favorite_contacts_separator_color">#d0d0d0</color>
@@ -88,7 +91,39 @@
     <!-- Background color for the favorites menu when pressed. -->
     <color name="favorites_menu_pressed_color">#d6d6d6</color>
 
+    <!-- Background color for the favorites menu. -->
+    <color name="favorites_menu_background_color">#ebebeb</color>
+
     <!-- Text color for the "All Contacts" button above the favorite callers -->
     <color name="all_contacts_button_text_color">#ffffff</color>
 
+    <!-- Background gradient start color for tabs in an unpressed state. -->
+    <color name="tab_background_gradient_start_color">#d3d3d3</color>
+
+    <!-- Background gradient end color for tabs in an unpressed state. -->
+    <color name="tab_background_gradient_end_color">#ebebeb</color>
+
+    <!-- Background gradient start color for tabs in a pressed state. -->
+    <color name="tab_background_gradient_start_pressed_color">#c4c4c4</color>
+
+    <!-- Background gradient end color for tabs in a pressed state. -->
+    <color name="tab_background_gradient_end_pressed_color">#dedede</color>
+
+    <!-- Color of the underline for a tab which is selected. -->
+    <color name="tab_underline_selected_color">#3265c1</color>
+
+    <!-- Color of the underline for a tab which is not selected. -->
+    <color name="tab_underline_color">#c8c8c8</color>
+
+    <!-- Color of the selection indicator for a tab which is selected. -->
+    <color name="tab_selected_color">#3b77e7</color>
+
+    <!-- Color of tab text. -->
+    <color name="tab_text_color">#505050</color>
+
+    <!-- Color of the bottom border below the contacts grid on the main dialer screen. -->
+    <color name="contacts_grid_bottom_border_color">#16000000</color>
+
+    <!-- Color of action bar text. -->
+    <color name="actionbar_text_color">#FFFFFF</color>
 </resources>
