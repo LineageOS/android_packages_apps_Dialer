@@ -17,29 +17,19 @@
 <!-- A layout representing a single key in the dialpad -->
 <com.android.dialer.dialpad.DialpadKeyButton
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/DialtactsDialpadButtonStyle"
-    android:clickable="true"
-    android:focusable="true" >
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-      <TextView
-          android:id="@+id/dialpad_key_number"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textColor="@color/dialpad_primary_text_color"
-          android:textSize="@dimen/dialpad_key_numbers_size"
-          android:fontFamily="sans-serif-light"
-          />
-      <TextView
-          android:id="@+id/dialpad_key_letters"
-          android:layout_width="@dimen/dialpad_key_letters_width"
-          android:layout_height="wrap_content"
-          android:textColor="@color/dialpad_secondary_text_color"
-          android:textSize="@dimen/dialpad_key_letters_size"
-          android:paddingLeft="11dp"
-          android:fontFamily="sans-serif-light"
-          />
+    style="@style/DialpadKeyButtonStyle">
+
+    <LinearLayout style="@style/DialpadKeyInternalLayoutStyle">
+
+        <!-- Note in the referenced styles that we assign hard widths to these components
+             because we want them to line up vertically when we arrange them in an MxN grid -->
+
+        <TextView
+            android:id="@+id/dialpad_key_number"
+            style="@style/DialpadKeyNumberStyle" />
+
+        <TextView
+            android:id="@+id/dialpad_key_letters"
+            style="@style/DialpadKeyLettersStyle" />
     </LinearLayout>
 </com.android.dialer.dialpad.DialpadKeyButton>
