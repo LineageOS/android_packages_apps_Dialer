@@ -45,9 +45,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -150,7 +153,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private View mDialButton;
     private PopupMenu mOverflowMenu;
 
-    // Padding view used to shift the fragments up when the dialpad is shown.
+    // Padding view used to shift the fragment frame up when the dialpad is shown so that
+    // the contents of the fragment frame continue to exist in a layout of the same height
+    private View mFragmentsSpacer;
     private View mFragmentsFrame;
 
     private boolean mInDialpadSearch;
@@ -311,9 +316,26 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         mFragmentsFrame = findViewById(R.id.dialtacts_frame);
+        mFragmentsSpacer = findViewById(R.id.contact_tile_frame_spacer);
 
         mRemoveViewContainer = (RemoveView) findViewById(R.id.remove_view_container);
-        mSearchAndRemoveViewContainer = (View) findViewById(R.id.search_and_remove_view_container);
+        mSearchAndRemoveViewContainer = findViewById(R.id.search_and_remove_view_container);
+
+        // When the first global layout pass is completed (and mSearchAndRemoveViewContainer has
+        // been assigned a valid height), assign that height to mFragmentsSpacer as well.
+        mSearchAndRemoveViewContainer.getViewTreeObserver().addOnGlobalLayoutListener(
+                new OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        mSearchAndRemoveViewContainer.getViewTreeObserver()
+                                .removeOnGlobalLayoutListener(this);
+                        mFragmentsSpacer.setLayoutParams(
+                                new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+                                        mSearchAndRemoveViewContainer.getHeight()));
+                    }
+                });
+
+
         prepareSearchView();
 
         if (UI.FILTER_CONTACTS_ACTION.equals(intent.getAction())
@@ -588,6 +610,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     public void hideSearchBar() {
         final int height = mSearchAndRemoveViewContainer.getHeight();
+
         mSearchAndRemoveViewContainer.animate().cancel();
         mSearchAndRemoveViewContainer.setAlpha(1);
         mSearchAndRemoveViewContainer.setTranslationY(0);
@@ -601,6 +624,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mFragmentsFrame.setTranslationY(0);
+                        // Display the fragments spacer (which has the same height as the
+                        // search box) now that the search box is hidden, so that
+                        // mFragmentsFrame always retains the same height
+                        mFragmentsSpacer.setVisibility(View.VISIBLE);
                     }
                 });
     }
@@ -624,6 +651,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                         new AnimatorListenerAdapter() {
                             @Override
                             public void onAnimationStart(Animator animation) {
+                                // Hide the fragment spacer now that the search box will
+                                // be displayed again
+                                mFragmentsSpacer.setVisibility(View.GONE);
                             }
                         });
     }
