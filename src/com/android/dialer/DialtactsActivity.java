@@ -168,6 +168,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean mFirstLaunch;
     private View mSearchViewContainer;
     private RemoveView mRemoveViewContainer;
+    // This view points to the Framelayout that houses both the search view and remove view
+    // containers.
+    private View mSearchAndRemoveViewContainer;
     private View mSearchViewCloseButton;
     private View mVoiceSearchButton;
     private EditText mSearchView;
@@ -310,6 +313,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mFragmentsFrame = findViewById(R.id.dialtacts_frame);
 
         mRemoveViewContainer = (RemoveView) findViewById(R.id.remove_view_container);
+        mSearchAndRemoveViewContainer = (View) findViewById(R.id.search_and_remove_view_container);
         prepareSearchView();
 
         if (UI.FILTER_CONTACTS_ACTION.equals(intent.getAction())
@@ -564,7 +568,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     final AnimatorListener mHideListener = new AnimatorListenerAdapter() {
         @Override
         public void onAnimationEnd(Animator animation) {
-            mSearchViewContainer.setVisibility(View.GONE);
+            mSearchAndRemoveViewContainer.setVisibility(View.GONE);
         }
     };
 
@@ -583,43 +587,38 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     public void hideSearchBar() {
-       hideSearchBar(true);
-    }
+        final int height = mSearchAndRemoveViewContainer.getHeight();
+        mSearchAndRemoveViewContainer.animate().cancel();
+        mSearchAndRemoveViewContainer.setAlpha(1);
+        mSearchAndRemoveViewContainer.setTranslationY(0);
+        mSearchAndRemoveViewContainer.animate().withLayer().alpha(0)
+                .translationY(-height).setDuration(200)
+                .setListener(mHideListener);
 
-    public void hideSearchBar(boolean shiftView) {
-        if (shiftView) {
-            mSearchViewContainer.animate().cancel();
-            mSearchViewContainer.setAlpha(1);
-            mSearchViewContainer.setTranslationY(0);
-            mSearchViewContainer.animate().withLayer().alpha(0).translationY(-mSearchView.getHeight())
-                    .setDuration(200).setListener(mHideListener);
-
-            mFragmentsFrame.animate().withLayer()
-                    .translationY(-mSearchViewContainer.getHeight()).setDuration(200).setListener(
-                    new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mFragmentsFrame.setTranslationY(0);
-                        }
-                    });
-        } else {
-            mSearchViewContainer.setTranslationY(-mSearchView.getHeight());
-        }
+        mFragmentsFrame.animate().withLayer()
+                .translationY(-height).setDuration(200).setListener(
+                new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mFragmentsFrame.setTranslationY(0);
+                    }
+                });
     }
 
     public void showSearchBar() {
-        mSearchViewContainer.animate().cancel();
-        mSearchViewContainer.setAlpha(0);
-        mSearchViewContainer.setTranslationY(-mSearchViewContainer.getHeight());
-        mSearchViewContainer.animate().withLayer().alpha(1).translationY(0).setDuration(200)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                        mSearchViewContainer.setVisibility(View.VISIBLE);
-                    }
-                });
+        final int height = mSearchAndRemoveViewContainer.getHeight();
+        mSearchAndRemoveViewContainer.animate().cancel();
+        mSearchAndRemoveViewContainer.setAlpha(0);
+        mSearchAndRemoveViewContainer.setTranslationY(-height);
+        mSearchAndRemoveViewContainer.animate().withLayer().alpha(1).translationY(0)
+                .setDuration(200).setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            mSearchAndRemoveViewContainer.setVisibility(View.VISIBLE);
+                        }
+                    });
 
-        mFragmentsFrame.setTranslationY(-mSearchViewContainer.getHeight());
+        mFragmentsFrame.setTranslationY(-height);
         mFragmentsFrame.animate().withLayer().translationY(0).setDuration(200)
                 .setListener(
                         new AnimatorListenerAdapter() {
