@@ -58,5 +58,4 @@
         android:layout_alignParentBottom="true"
         layout="@layout/phone_no_favorites"
         android:visibility="gone"/>
-
 </RelativeLayout>
