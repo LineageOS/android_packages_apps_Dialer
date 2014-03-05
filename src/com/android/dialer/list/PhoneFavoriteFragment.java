@@ -447,7 +447,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP) {
                 // This is a tiled row, so save horizontal offsets instead
                 saveHorizontalOffsets((ContactTileRow) child, (ArrayList<ContactEntry>)
-                        mAdapter.getItem(position), position);
+                        mAdapter.getItem(position),
+                        mAdapter.getAdjustedPositionInContactTileAdapter(position));
             }
             if (DEBUG) {
                 Log.d(TAG, "Saving itemId: " + itemId + " for listview child " + i + " Top: "
@@ -506,7 +507,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                 int left = child.getLeft();
 
                 Integer startRow = mItemIdTopMap.get(itemId);
-
                 if (startRow != null) {
                     if (startRow > currentRow) {
                         // Item has shifted upwards to the previous row.
@@ -535,10 +535,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                         animators.add(ObjectAnimator.ofFloat(
                                 child, "translationX", delta, 0.0f));
                     }
-                } else {
-                    // In case the last square row is pushed up from the non-square section.
-                    animators.add(ObjectAnimator.ofFloat(
-                            child, "translationX", left, 0.0f));
                 }
             }
         }
@@ -580,7 +576,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                         // This is a tiled row, so perform horizontal animations instead
                         performHorizontalAnimations((ContactTileRow) child, (
                                 ArrayList<ContactEntry>) mAdapter.getItem(position), idsInPlace,
-                                position);
+                                mAdapter.getAdjustedPositionInContactTileAdapter(position));
                     }
 
                     final long itemId = mAdapter.getItemId(position);
@@ -610,11 +606,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                             }
                             startTop = top + (i > 0 ? itemHeight : -itemHeight);
                             delta = startTop - top;
-                        } else {
-                            // In case the first non-square row is pushed down
-                            // from the square section.
-                            animators.add(ObjectAnimator.ofFloat(
-                                    child, "alpha", 0.0f, 1.0f));
                         }
                         if (DEBUG) {
                             Log.d(TAG, "Found itemId: " + itemId + " for listview child " + i +
