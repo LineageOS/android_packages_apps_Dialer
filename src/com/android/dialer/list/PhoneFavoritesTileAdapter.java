@@ -298,7 +298,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             contact.name = (!TextUtils.isEmpty(name)) ? name :
                     mResources.getString(R.string.missing_name);
             contact.photoUri = (photoUri != null ? Uri.parse(photoUri) : null);
-            contact.lookupKey = ContentUris.withAppendedId(
+            contact.lookupKey = lookupKey;
+            contact.lookupUri = ContentUris.withAppendedId(
                     Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey), id);
             contact.isFavorite = isStarred;
             contact.isDefaultNumber = isDefaultNumber;
@@ -667,7 +668,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         boolean removed = false;
         if (isIndexInBound(mPotentialRemoveEntryIndex)) {
             final ContactEntry entry = mContactEntries.get(mPotentialRemoveEntryIndex);
-            unstarAndUnpinContact(entry.lookupKey);
+            unstarAndUnpinContact(entry.lookupUri);
             removed = true;
             mAwaitingRemove = true;
         }
@@ -1234,7 +1235,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     @Override
     public void onDroppedOnRemove() {
         if (mDraggedEntry != null) {
-            unstarAndUnpinContact(mDraggedEntry.lookupKey);
+            unstarAndUnpinContact(mDraggedEntry.lookupUri);
             mAwaitingRemove = true;
         }
     }
