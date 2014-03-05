@@ -27,7 +27,7 @@
 
     <TextView android:id="@+id/text"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/dialpad_text_color"
+        android:textColor="@color/dialpad_primary_text_color"
         android:layout_gravity="center_vertical"
         android:layout_width="0dip"
         android:layout_weight="1"
