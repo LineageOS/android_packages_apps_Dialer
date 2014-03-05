@@ -39,6 +39,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/search_and_remove_view_container"
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
