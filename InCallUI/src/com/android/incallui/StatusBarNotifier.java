@@ -305,8 +305,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         // Add answer/decline options for incomng calls (incoming | call_waiting)
         if (state == Call.State.INCOMING ||
                 state == Call.State.CALL_WAITING) {
-            addAnswerAction(builder);
             addDeclineAction(builder);
+            addAnswerAction(builder);
         }
 
         /*
