@@ -27,6 +27,7 @@ import com.google.common.base.Objects;
  */
 public class ContactInfo {
     public Uri lookupUri;
+    public String lookupKey;
     public String name;
     public int type;
     public String label;
