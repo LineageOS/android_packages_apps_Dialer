@@ -21,8 +21,7 @@
     android:layout_height="match_parent"
     android:divider="?android:attr/dividerHorizontal"
     android:showDividers="end"
-    android:clipChildren="false"
-    android:background="@color/background_dialer_list_items">
+    android:clipChildren="false">
 
     <FrameLayout
         android:id="@+id/contact_tile_frame"

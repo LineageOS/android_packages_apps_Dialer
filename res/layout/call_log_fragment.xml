@@ -20,7 +20,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:divider="?android:attr/dividerHorizontal"
-    android:showDividers="end">
+    android:showDividers="end"
+    android:background="@color/background_dialer_list_items">
 
     <FrameLayout
         android:id="@+id/voicemail_status"
@@ -65,7 +66,8 @@
             android:layout_height="match_parent"
             android:fadingEdge="none"
             android:scrollbarStyle="outsideOverlay"
-            android:divider="@null"
+            android:divider="@color/favorite_contacts_separator_color"
+            android:dividerHeight="1dp"
         />
         <TextView android:id="@android:id/empty"
             android:layout_width="match_parent"
