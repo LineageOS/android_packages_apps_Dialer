@@ -163,13 +163,33 @@
     <skip />
     <!-- no translation found for description_call (3443678121983852666) -->
     <skip />
+    <!-- no translation found for description_contact_details (51229793651342809) -->
+    <skip />
+    <!-- no translation found for description_call_details (8936017517290240089) -->
+    <skip />
+    <!-- no translation found for description_new_voicemail (2133792360865517746) -->
+    <skip />
+    <!-- no translation found for description_num_calls (1601505153694540074) -->
+    <skip />
+    <!-- no translation found for description_return_missed_call (5832103397942825774) -->
+    <skip />
+    <!-- no translation found for description_return_answered_call (6038958518509163218) -->
+    <skip />
+    <!-- no translation found for description_unknown_missed_call (8736195520010578126) -->
+    <skip />
+    <!-- no translation found for description_unknown_answered_call (1470971301999791460) -->
+    <skip />
+    <!-- no translation found for description_call_last_multiple (271456796151369411) -->
+    <skip />
+    <!-- no translation found for description_call_last (491385778814705302) -->
+    <skip />
     <!-- no translation found for description_send_text_message (7803126439934046891) -->
     <skip />
     <!-- no translation found for description_call_log_unheard_voicemail (118101684236996786) -->
     <skip />
-    <!-- no translation found for description_start_voice_search (520539488194946012) -->
+    <!-- no translation found for description_clear_search (688023606766232904) -->
     <skip />
-    <!-- no translation found for call_log_empty_gecode (2019639420045039861) -->
+    <!-- no translation found for description_start_voice_search (520539488194946012) -->
     <skip />
     <!-- no translation found for menu_callNumber (997146291983360266) -->
     <skip />
@@ -192,6 +212,8 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Chargiar da la carta SIM…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contacts sin la carta SIM"</string>
     <!-- no translation found for add_contact_not_available (1419207765446461366) -->
+    <skip />
+    <!-- no translation found for voice_search_not_available (7580616740587850828) -->
     <skip />
     <!-- no translation found for dialer_hint_find_contact (8798845521253672403) -->
     <skip />
@@ -248,5 +270,11 @@
     <!-- no translation found for contact_tooltip (7817483485692282287) -->
     <skip />
     <!-- no translation found for description_dismiss (2146276780562549643) -->
+    <skip />
+    <!-- no translation found for remove_contact (1080555335283662961) -->
+    <skip />
+    <!-- no translation found for favorites_menu_speed_dial (3832518092014707628) -->
+    <skip />
+    <!-- no translation found for favorites_menu_all_contacts (992506284449891186) -->
     <skip />
 </resources>
