@@ -144,7 +144,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             }
         }
         // Set position to the position of the actual favorite contact in the favorites adapter
-        position = getAdjustedFavoritePosition(position, callLogAdapterCount);
+        position = getAdjustedPositionInContactTileAdapter(position);
 
         return mContactTileAdapter.getItem(position);
     }
@@ -176,7 +176,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         } else if (position < (callLogAdapterCount + mContactTileAdapter.getCount() +
                 getTeaserViewCount() + 1)) {
             return mContactTileAdapter.getItemId(
-                    getAdjustedFavoritePosition(position, callLogAdapterCount));
+                    getAdjustedPositionInContactTileAdapter(position));
         } else {
             // Default fallback.  We don't normally get here.
             return FAVORITES_MENU_ITEM_ID;
@@ -216,7 +216,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             return mContactTileAdapter.getViewTypeCount() + 3;
         } else if (position < getCount()) {
             return mContactTileAdapter.getItemViewType(
-                    getAdjustedFavoritePosition(position, callLogAdapterCount));
+                    getAdjustedPositionInContactTileAdapter(position));
         } else {
             // Catch-all - we shouldn't get here but if we do use the same as the favorites menu.
             return mContactTileAdapter.getViewTypeCount() + 3;
@@ -269,7 +269,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
         // Set position to the position of the actual favorite contact in the favorites adapter.
         // Adjusts based on the presence of other views, such as the favorites menu.
-        position = getAdjustedFavoritePosition(position, callLogAdapterCount);
+        position = getAdjustedPositionInContactTileAdapter(position);
 
         // Favorites section
         final View view = mContactTileAdapter.getView(position, convertView, parent);
@@ -296,18 +296,19 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             return mCallLogAdapter.isEnabled(position);
         } else { // For favorites section
             return mContactTileAdapter.isEnabled(
-                    getAdjustedFavoritePosition(position, callLogAdapterCount));
+                    getAdjustedPositionInContactTileAdapter(position));
         }
     }
 
     /**
-     * Determines the index into the mContactTileAdapter for the current position.
+     * Given the current position in the merged adapter, return the index in the
+     * mContactTileAdapter this position corresponds to.
      *
-     * @param position current position in the overall adapter.
-     * @param callLogAdapterCount number of entries in "last calls" list (ie 0 or 1).
+     * @param position current position in the overall (merged) adapter.
      * @return position in the mContactTileAdapter.
      */
-    private int getAdjustedFavoritePosition(int position, int callLogAdapterCount) {
+    public int getAdjustedPositionInContactTileAdapter(int position) {
+        final int callLogAdapterCount = mCallLogAdapter.getCount();
         if (position - callLogAdapterCount > TILE_INTERACTION_TEASER_VIEW_POSITION &&
                 mTileInteractionTeaserView.getShouldDisplayInList()) {
             return position - callLogAdapterCount - 2;
