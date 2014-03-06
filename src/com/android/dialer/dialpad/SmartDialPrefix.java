@@ -98,6 +98,8 @@ public class SmartDialPrefix {
             mMap = new GreekSmartDialMap();
         } else if (locale.equals("IL")) {
             mMap = new HebrewSmartDialMap();
+        } else if (locale.equals("JP")) {
+            mMap = new JapaneseSmartDialMap();
         } else {
             mMap = new LatinSmartDialMap();
         }
