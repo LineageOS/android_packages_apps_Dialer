@@ -25,8 +25,7 @@
                 android:paddingRight="@dimen/favorites_menu_padding_horizontal"
                 android:paddingTop="@dimen/favorites_menu_padding_top"
                 android:paddingBottom="@dimen/favorites_menu_padding_bottom"
-                android:background="@drawable/background_favorites_menu"
-                android:addStatesFromChildren="true"
+                android:background="@color/favorites_menu_background_color"
         >
     <TextView
             android:layout_width="wrap_content"
@@ -39,7 +38,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
         />
-    <TextView
+    <Button
             android:id="@+id/all_contacts_button"
             android:fontFamily="@string/favorites_menu_all_contacts_font_family"
             android:layout_width="wrap_content"
@@ -48,11 +47,10 @@
             android:paddingRight="@dimen/favorites_menu_padding_horizontal"
             android:text="@string/favorites_menu_all_contacts"
             android:textSize="@dimen/favorites_menu_all_contacts_text_size"
-            android:background="@color/all_contacts_button_color"
+            android:background="@drawable/background_all_contacts"
             android:textColor="@color/all_contacts_button_text_color"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:focusable="true"
         />
 </RelativeLayout>
