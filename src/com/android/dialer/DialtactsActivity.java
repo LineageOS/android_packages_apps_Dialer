@@ -121,7 +121,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     public static final String PREFERRED_SIM_ICON_INDEX = "preferred_sim_icon_index";
     public static final String[] MULTI_SIM_NAME = {
-        "perferred_name_sub1", "preferred_name_sub2"
+        "perferred_name_sub1", "perferred_name_sub2"
     };
 
 
