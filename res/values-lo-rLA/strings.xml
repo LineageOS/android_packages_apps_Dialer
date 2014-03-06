@@ -112,10 +112,20 @@
     <string name="description_add_contact" msgid="3103414772502485851">"ເພີ່ມລາຍຊື່ຜູ່ຕິດຕໍ່"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"ເບິ່ງລາຍຊື່ຜູ່ຕິດຕໍ່ <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"ໂທຫາ <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_contact_details" msgid="51229793651342809">"ລາຍລະອຽດ​ລາຍຊື່​ຜູ່ຕິດຕໍ່​ສຳລັບ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_call_details" msgid="8936017517290240089">"ລາຍລະອຽດ​ການໂທ"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"ຂໍ້ຄວາມ​ສຽງ​ໃໝ່."</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> ການໂທ."</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"ຕອບສາຍທີ່ບໍ່ໄດ້ຮັບຈາກ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"ຕອບໂທກັບຈາກ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"ສາຍທີ່ບໍ່ໄດ້ຮັບຈາກ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"ສາຍຕອບກັບຈາກ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"ໂທຫາ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. ໂທຄັ້ງສຸດທ້າຍ <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_last" msgid="491385778814705302">"ໂທຫາ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. ໂທແລ້ວ <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"ສົ່ງຂໍ້ຄວາມຫາ <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"ຂໍ້ຄວາມສຽງທີ່ຍັງບໍ່ໄດ້ຟັງ"</string>
+    <string name="description_clear_search" msgid="688023606766232904">"ລຶບ​ການ​ຊອກ​ຫາ"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"ເລີ່ມການຊອກຫາດ້ວຍສຽງ"</string>
-    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"ໂທ​ຫາ <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"ບໍ່ຮູ້ຈັກ"</string>
     <string name="voicemail" msgid="3851469869202611441">"ຂໍ້ຄວາມສຽງ"</string>
@@ -133,6 +143,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"ກຳລັງໂຫລດຈາກ SIM card..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"ລາຍຊື່ຜູ່ຕິດຕໍ່ SIM card"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"ເປີດການນຳໃຊ້ແອັບພລິເຄຊັນ People ຄືນ ເພື່ອໃຊ້ຄຸນສົມບັດນີ້."</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"ບໍ່ສາມາດນຳໃຊ້ການຊອກຫາດ້ວຍສຽງໄດ້."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"ພິມຊື່ ຫຼເບີໂທລະສັບ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ທັງໝົດ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ສາຍທີ່ບໍ່ໄດ້ຮັບ"</string>
@@ -161,4 +172,7 @@
     <string name="no_favorites" msgid="5212485868783382971">"ລາຍງານທີ່ມັກ &amp; ລາຍຊື່ຜູ່ຕິດຕໍ່ທີ່ທ່ານ\nໂທຫາເລື້ອຍໆ ຈະປາກົດຢູ່ບ່ອນນີ້.\nສະນັ້ນ, ທ່ານສາມາດເລີ່ມໂທໄດ້."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"ແຕະຮູບ​ພາບ​ເພື່ອເບິ່ງຈໍານວນຮູບພາບທັງໝົດ ຫຼືແຕະຄ້າງໄວ້ເພື່ອຈັດຮຽງໃໝ່"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"ເຂົ້າໃຈແລ້ວ"</string>
+    <string name="remove_contact" msgid="1080555335283662961">"​ລຶບ​ອອກ"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"​ໂທ​ດ່ວນ"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່​ທັງ​ໝົດ"</string>
 </resources>

@@ -112,10 +112,20 @@
     <string name="description_add_contact" msgid="3103414772502485851">"เพิ่มรายชื่อติดต่อ"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"ดูรายชื่อติดต่อ <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"โทรหา <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_contact_details" msgid="51229793651342809">"รายละเอียดที่อยู่ติดต่อสำหรับ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_call_details" msgid="8936017517290240089">"รายละเอียดการโทร"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"ข้อความเสียงใหม่"</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> สาย"</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"โทรกลับสายที่ไม่ได้รับจาก <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"โทรกลับสายที่ได้รับจาก <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"สายที่ไม่ได้รับจาก <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"สายที่ได้รับจาก <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"โทร <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> โทรล่าสุด <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_last" msgid="491385778814705302">"โทร <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> เวลาโทร <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"ส่งข้อความไปที่ <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"ข้อความเสียงที่ยังไม่ได้ฟัง"</string>
+    <string name="description_clear_search" msgid="688023606766232904">"ล้างการค้นหา"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"เริ่มต้นการค้นหาด้วยเสียง"</string>
-    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"โทร <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"ไม่ทราบ"</string>
     <string name="voicemail" msgid="3851469869202611441">"ข้อความเสียง"</string>
@@ -133,6 +143,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"กำลังโหลดจากซิมการ์ด…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"รายชื่อบนซิมการ์ด"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"เปิดใช้งานแอปพลิเคชัน People อีกครั้งเพื่อใช้คุณลักษณะนี้"</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"ค้นหาด้วยเสียงไม่สามารถใช้งานได้"</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"พิมพ์ชื่อหรือหมายเลขโทรศัพท์"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ทั้งหมด"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ไม่ได้รับ"</string>
@@ -161,4 +172,7 @@
     <string name="no_favorites" msgid="5212485868783382971">"รายการโปรดและรายชื่อติดต่อที่คุณ\nโทรหาบ่อยจะแสดงที่นี่\n เริ่มโทรได้"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"แตะรูปภาพเพื่อดูหมายเลขทั้งหมด หรือกดค้างเพื่อจัดลำดับใหม่"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"ปิด"</string>
+    <string name="remove_contact" msgid="1080555335283662961">"นำออก"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"เรียกใช้ฉับไว"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"รายชื่อติดต่อทั้งหมด"</string>
 </resources>

@@ -112,10 +112,20 @@
     <string name="description_add_contact" msgid="3103414772502485851">"新增聯絡人"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"查看聯絡人<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"致電<xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_contact_details" msgid="51229793651342809">"「<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>」的聯絡人詳細資料"</string>
+    <string name="description_call_details" msgid="8936017517290240089">"通話詳細資料"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"新留言。"</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> 次通話次數。"</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"回覆未接來電：「<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>」(<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>)。通話時間：<xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"回覆已接來電：「<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>」(<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>)。通話時間：<xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"未接來電：「<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>」(<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>)。通話時間：<xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"已接來電：「<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>」(<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>)。通話時間：<xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"與「<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>」通話 (<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>)。最後通話時間：<xliff:g id="TIMEOFCALL">%3$s</xliff:g>。"</string>
+    <string name="description_call_last" msgid="491385778814705302">"與「<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>」通話 (<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>)。通話時間：<xliff:g id="TIMEOFCALL">%3$s</xliff:g>。"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"發短訊給<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"未聽取的語音留言"</string>
+    <string name="description_clear_search" msgid="688023606766232904">"清除搜尋"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"開始語音搜尋"</string>
-    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"撥打 <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"未知"</string>
     <string name="voicemail" msgid="3851469869202611441">"留言"</string>
@@ -133,6 +143,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"正在從 SIM 卡載入..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM 卡聯絡人"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"請重新啟用「通訊錄」應用程式，才能使用這項功能。"</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"無法使用語音搜尋功能。"</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"輸入姓名或電話號碼"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"未接來電"</string>
@@ -161,4 +172,7 @@
     <string name="no_favorites" msgid="5212485868783382971">"您的最愛聯絡人和經常通話的聯絡人\n會在這裡顯示，\n致電他們吧！"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"輕按相片可查看所有號碼，按住則可重新排序"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"關閉"</string>
+    <string name="remove_contact" msgid="1080555335283662961">"移除"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"快速撥號"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"所有聯絡人"</string>
 </resources>
