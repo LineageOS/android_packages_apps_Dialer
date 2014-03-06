@@ -642,11 +642,8 @@ public class CallLogAdapter extends GroupingListAdapter
             contactType = ContactPhotoManager.TYPE_BUSINESS;
         }
 
-        String lookupKey = info.lookupKey;
-        if (lookupUri != null) {
-            //lookupKey = ContactInfoHelper.getLookupKeyFromUri(lookupUri);
-
-        }
+        String lookupKey = lookupUri == null ? null
+                : ContactInfoHelper.getLookupKeyFromUri(lookupUri);
 
         String nameForDefaultImage = null;
         if (TextUtils.isEmpty(name)) {
