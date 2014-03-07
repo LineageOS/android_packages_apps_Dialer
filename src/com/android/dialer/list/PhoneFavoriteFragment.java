@@ -673,12 +673,12 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
     /**
      * Prepares the favorites menu which contains the static label "Speed Dial" and the
-     * "All Contacts" button.  Taps anywhere in the view take the user to "All Contacts".
-     * This emulates how the headers in Play Store work.
+     * "All Contacts" button.  Sets the onClickListener for the "All Contacts" button.
      */
     private void prepareFavoritesMenu(View favoritesMenu) {
-        // Set the onClick listener for the view to bring up the all contacts view.
-        favoritesMenu.setOnClickListener(new OnClickListener() {
+        Button allContactsButton = (Button) favoritesMenu.findViewById(R.id.all_contacts_button);
+        // Set the onClick listener for the button to bring up the all contacts view.
+        allContactsButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAllContacts();
