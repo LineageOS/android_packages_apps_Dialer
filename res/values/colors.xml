@@ -92,11 +92,11 @@
     <!-- Background color for the "All Contacts" button in the favorites menu. -->
     <color name="all_contacts_button_color">#999999</color>
 
-    <!-- Background color for the favorites menu when pressed. -->
-    <color name="favorites_menu_pressed_color">#d6d6d6</color>
+    <!-- Background color for the "All Contacts" button in the favorites menu when pressed. -->
+    <color name="all_contacts_button_pressed_color">#808080</color>
 
     <!-- Background color for the favorites menu. -->
-    <color name="favorites_menu_background_color">#ebebeb</color>
+    <color name="favorites_menu_background_color">#eeeeee</color>
 
     <!-- Text color for the "All Contacts" button above the favorite callers -->
     <color name="all_contacts_button_text_color">#ffffff</color>
