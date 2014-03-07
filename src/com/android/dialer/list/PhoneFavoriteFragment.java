@@ -282,7 +282,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mListView.setVerticalScrollBarEnabled(false);
         mListView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
         mListView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
-        mListView.setOnItemSwipeListener(mContactTileAdapter);
         mListView.getDragDropController().addOnDragDropListener(mContactTileAdapter);
 
         final ImageView dragShadowOverlay =
@@ -419,8 +418,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
     @Override
     public void onPause() {
-        // If there are any pending contact entries that are to be removed, remove them
-        mContactTileAdapter.removePendingContactEntry();
         // Wipe the cache to refresh the call shortcut item. This is not that expensive because
         // it only contains one item.
         mCallLogAdapter.invalidateCache();

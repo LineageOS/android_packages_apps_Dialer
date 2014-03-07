@@ -54,15 +54,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     private static final float DEFAULT_IMAGE_LETTER_OFFSET = -0.14f;
     private static final float DEFAULT_IMAGE_LETTER_SCALE = 0.70f;
 
-    /** Length of all animations in milliseconds. */
-    private int mAnimationDuration;
-
-    /** The view that holds the front layer of the favorite contact card. */
-    private View mFavoriteContactCard;
-    /** The view that holds the background layer of the removal dialogue. */
-    private View mRemovalDialogue;
-    /** Undo button for undoing favorite removal. */
-    private View mUndoRemovalButton;
     /** The view that holds the list view row. */
     protected ContactTileRow mParentRow;
     /** View that contains the transparent shadow that is overlaid on top of the contact image. */
@@ -71,16 +62,12 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     /** Users' most frequent phone number. */
     private String mPhoneNumberString;
 
-    /** Custom gesture detector.*/
-    protected GestureDetector mGestureDetector;
-
     // Dummy clip data object that is attached to drag shadows so that text views
     // don't crash with an NPE if the drag shadow is released in their bounds
     private static final ClipData EMPTY_CLIP_DATA = ClipData.newPlainText("", "");
 
     public PhoneFavoriteTileView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mAnimationDuration = context.getResources().getInteger(R.integer.fade_duration);
     }
 
     public ContactTileRow getParentRow() {
@@ -91,16 +78,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     protected void onFinishInflate() {
         super.onFinishInflate();
         mShadowOverlay = findViewById(R.id.shadow_overlay);
-        mFavoriteContactCard = findViewById(R.id.contact_favorite_card);
-        mRemovalDialogue = findViewById(R.id.favorite_remove_dialogue);
-        mUndoRemovalButton = findViewById(R.id.favorite_remove_undo_button);
-
-        mUndoRemovalButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                undoRemove();
-            }
-        });
 
         setOnLongClickListener(new OnLongClickListener() {
             @Override
@@ -142,76 +119,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
         }
     }
 
-    public void displayRemovalDialog() {
-        mRemovalDialogue.setVisibility(VISIBLE);
-        mRemovalDialogue.setAlpha(0f);
-        final ObjectAnimator fadeIn = ObjectAnimator.ofFloat(mRemovalDialogue, "alpha",
-                1.f).setDuration(mAnimationDuration);
-
-        fadeIn.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                mParentRow.setHasTransientState(true);
-            };
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mParentRow.setHasTransientState(false);
-            }
-        });
-        fadeIn.start();
-    }
-
-    /**
-     * Signals the user wants to undo removing the favorite contact.
-     */
-    public void undoRemove() {
-        // Makes the removal dialogue invisible.
-        mRemovalDialogue.setAlpha(0.0f);
-        mRemovalDialogue.setVisibility(GONE);
-
-        // Animates back the favorite contact card.
-        final ObjectAnimator fadeIn = ObjectAnimator.ofFloat(mFavoriteContactCard, "alpha", 1.f).
-                setDuration(mAnimationDuration);
-        final ObjectAnimator moveBack = ObjectAnimator.ofFloat(mFavoriteContactCard, "translationX",
-                0.f).setDuration(mAnimationDuration);
-
-        final AnimatorSet animSet = new AnimatorSet();
-
-        animSet.playTogether(fadeIn, moveBack);
-
-        animSet.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                mParentRow.setHasTransientState(true);
-            }
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                if (mParentRow.getItemViewType() == ViewTypes.FREQUENT) {
-                    SwipeHelper.setSwipeable(mParentRow, true);
-                } else {
-                    SwipeHelper.setSwipeable(PhoneFavoriteTileView.this, true);
-                }
-                mParentRow.setHasTransientState(false);
-            }
-        });
-        animSet.start();
-        // Signals the PhoneFavoritesTileAdapter to undo the potential delete.
-        mParentRow.getTileAdapter().undoPotentialRemoveEntryIndex();
-    }
-
-    /**
-     * Sets up the favorite contact card.
-     */
-    public void setupFavoriteContactCard() {
-        if (mRemovalDialogue != null) {
-            mRemovalDialogue.setVisibility(GONE);
-            mRemovalDialogue.setAlpha(0.f);
-        }
-        mFavoriteContactCard.setAlpha(1.0f);
-        mFavoriteContactCard.setTranslationX(0.f);
-    }
-
     @Override
     protected void onAttachedToWindow() {
         mParentRow = (ContactTileRow) getParent();
@@ -227,8 +134,9 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
         return new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // When the removal dialog is present, don't allow a click to call
-                if (mListener == null || mRemovalDialogue.isShown()) return;
+                if (mListener == null) {
+                    return;
+                }
                 if (TextUtils.isEmpty(mPhoneNumberString)) {
                     // Copy "superclass" implementation
                     mListener.onContactSelected(getLookupUri(), MoreContactUtils

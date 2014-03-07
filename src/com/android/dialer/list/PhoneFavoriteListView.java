@@ -34,26 +34,15 @@ import android.widget.ListView;
 
 import com.android.dialer.R;
 import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
-import com.android.dialer.list.SwipeHelper.OnItemGestureListener;
-import com.android.dialer.list.SwipeHelper.SwipeHelperCallback;
 
 /**
- * The ListView composed of {@link ContactTileRow}.
- * This ListView handles both
- * - Swiping, which is borrowed from packages/apps/UnifiedEmail (com.android.mail.ui.Swipeable)
- * - Drag and drop
+ * The ListView used to present a combined list of shortcut cards and contact speed-dial
+ * tiles.
  */
-public class PhoneFavoriteListView extends ListView implements SwipeHelperCallback,
-        OnDragDropListener {
+public class PhoneFavoriteListView extends ListView implements OnDragDropListener {
 
     public static final String LOG_TAG = PhoneFavoriteListView.class.getSimpleName();
 
-    private SwipeHelper mSwipeHelper;
-    private boolean mEnableSwipe = true;
-
-    private OnItemGestureListener mOnItemGestureListener;
-
-    private float mDensityScale;
     private float mTouchSlop;
 
     private int mTopScrollBound;
@@ -126,10 +115,7 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
     public PhoneFavoriteListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mAnimationDuration = context.getResources().getInteger(R.integer.fade_duration);
-        mDensityScale = getResources().getDisplayMetrics().density;
         mTouchSlop = ViewConfiguration.get(context).getScaledPagingTouchSlop();
-        mSwipeHelper = new SwipeHelper(context, SwipeHelper.X, this,
-                mDensityScale, mTouchSlop);
         setItemsCanFocus(true);
         mDragDropController.addOnDragDropListener(this);
     }
@@ -137,25 +123,7 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mDensityScale= getResources().getDisplayMetrics().density;
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledPagingTouchSlop();
-        mSwipeHelper.setDensityScale(mDensityScale);
-        mSwipeHelper.setPagingTouchSlop(mTouchSlop);
-    }
-
-    /**
-     * Enable swipe gestures.
-     */
-    public void enableSwipe(boolean enable) {
-        mEnableSwipe = enable;
-    }
-
-    public boolean isSwipeEnabled() {
-        return mEnableSwipe && mOnItemGestureListener.isSwipeEnabled();
-    }
-
-    public void setOnItemSwipeListener(OnItemGestureListener listener) {
-        mOnItemGestureListener = listener;
     }
 
     /**
@@ -168,75 +136,9 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
             mTouchDownForDragStartX = (int) ev.getX();
             mTouchDownForDragStartY = (int) ev.getY();
         }
-        if (isSwipeEnabled()) {
-            return mSwipeHelper.onInterceptTouchEvent(ev) || super.onInterceptTouchEvent(ev);
-        } else {
-            return super.onInterceptTouchEvent(ev);
-        }
+
+        return super.onInterceptTouchEvent(ev);
     }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        if (mOnItemGestureListener != null) {
-            mOnItemGestureListener.onTouch();
-        }
-        if (isSwipeEnabled()) {
-            return mSwipeHelper.onTouchEvent(ev) || super.onTouchEvent(ev);
-        } else {
-            return super.onTouchEvent(ev);
-        }
-    }
-
-    @Override
-    public View getChildAtPosition(MotionEvent ev) {
-        final View view = getViewAtPosition((int) ev.getX(), (int) ev.getY());
-        if (view != null &&
-                SwipeHelper.isSwipeable(view) &&
-                view.getVisibility() != GONE) {
-            // If this view is swipable in this listview, then return it. Otherwise
-            // return a null view, which will simply be ignored by the swipe helper.
-            return view;
-        }
-        return null;
-    }
-
-    @Override
-    public View getChildContentView(View view) {
-        return view.findViewById(R.id.contact_favorite_card);
-    }
-
-    @Override
-    public void onScroll() {}
-
-    @Override
-    public boolean canChildBeDismissed(View v) {
-        return SwipeHelper.isSwipeable(v);
-    }
-
-    @Override
-    public void onChildDismissed(final View v) {
-        if (v != null) {
-            if (mOnItemGestureListener != null) {
-                mOnItemGestureListener.onSwipe(v);
-            }
-        }
-    }
-
-    @Override
-    public void onDragCancelled(View v) {}
-
-    @Override
-    public void onBeginDrag(View v) {
-        final View tileRow = (View) v.getParent();
-
-        // We do this so the underlying ScrollView knows that it won't get
-        // the chance to intercept events anymore
-        requestDisallowInterceptTouchEvent(true);
-    }
-
-    /**
-     * End of swipe-to-remove code
-     */
 
     @Override
     public boolean dispatchDragEvent(DragEvent event) {
@@ -258,12 +160,6 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
                 }
 
                 final ContactTileRow tile = (ContactTileRow) child;
-
-                // Disable drag and drop if there is a contact that has been swiped and is currently
-                // in the pending remove state
-                if (tile.getTileAdapter().hasPotentialRemoveEntryIndex()) {
-                    return false;
-                }
 
                 if (!mDragDropController.handleDragStarted(viewX, viewY, tile)) {
                     return false;

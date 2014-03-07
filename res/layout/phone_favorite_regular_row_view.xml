@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:textColor="@color/dialtacts_primary_text_color"/>
+                android:textColor="@color/dialtacts_primary_text_color"
                 android:singleLine="true"
                 android:fadingEdge="horizontal"
                 android:fadingEdgeLength="3dip"
@@ -67,68 +67,4 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/favorite_remove_dialogue"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:gravity="center_vertical"
-        android:alpha="0.0"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/favorite_remove_dialogue_text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:paddingStart="@dimen/favorites_row_undo_text_side_padding"
-            android:paddingEnd="@dimen/favorites_row_undo_text_side_padding"
-            android:text="@string/favorite_hidden"
-            android:ellipsize="marquee"
-            android:fontFamily="sans-serif"
-            android:textSize="14sp"
-            android:textColor="@color/undo_dialogue_text_color"
-            android:singleLine="true"
-            android:gravity="center_vertical"
-            android:textDirection="ltr" />
-
-        <View
-            android:id="@+id/undo_separator"
-            android:layout_width="1dip"
-            android:layout_height="match_parent"
-            android:background="@color/undo_dialogue_text_color"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp" />
-
-        <LinearLayout
-            android:id="@+id/favorite_remove_undo_button"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_fav_undo_dk"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
-                android:textSize="13sp"
-                android:ellipsize="marquee"
-                android:singleLine="true"
-                android:text="@string/favorite_hidden_undo"
-                android:textColor="@color/undo_dialogue_text_color"
-                android:textAlignment="center"/>
-        </LinearLayout>
-    </LinearLayout>
 </view>
