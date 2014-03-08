@@ -95,6 +95,9 @@
         <item name="android:windowBackground">@color/background_dialer_list_items</item>
         <item name="android:gravity">top</item>
         <item name="android:listViewStyle">@style/ListViewStyle</item>
+        <item name="android:actionBarStyle">@style/DialtactsActionBarStyle</item>
+        <item name="android:actionOverflowButtonStyle">@style/DialtactsActionBarOverflow</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_back_arrow</item>
         <!-- CallLog -->
         <item name="call_log_primary_text_color">#333333</item>
         <item name="call_log_primary_background_color">#FFFFFF</item>

@@ -57,10 +57,12 @@
     <!-- Background color of dialer list items (contacts, call log entries) -->
     <color name="background_dialer_list_items">#eeeeee</color>
 
-    <!-- Background color of action bars -->
+    <!-- Background color of action bars.  Ensure this stays in sync with packages/Telephony
+         actionbar_background_color. -->
     <color name="actionbar_background_color">#3B77E7</color>
 
-    <!-- Underline color of action bars -->
+    <!-- Underline color of action bars.  Ensure this stays in sync with packages/Telephony
+         actionbar_underline. -->
     <color name="actionbar_underline">#3265C1</color>
 
     <!-- Color of the 1dp divider that separates favorites -->
@@ -140,6 +142,7 @@
     <!-- Color of the bottom border below the contacts grid on the main dialer screen. -->
     <color name="contacts_grid_bottom_border_color">#16000000</color>
 
-    <!-- Color of action bar text. -->
+    <!-- Color of action bar text. Ensure this stays in sync with packages/Telephony
+         phone_settings_actionbar_text_color-->
     <color name="actionbar_text_color">#FFFFFF</color>
 </resources>
