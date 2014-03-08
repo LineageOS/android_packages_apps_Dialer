@@ -76,22 +76,6 @@ public class CallLogGroupBuilder {
             } else if (firstCallType == Calls.VOICEMAIL_TYPE) {
                 // never group voicemail.
                 shouldGroup = false;
-            } else if (firstCallType == CallTypeHelper.MISSED_CSVT_TYPE) {
-                // Voicemail and missed calls should only be grouped with subsequent missed calls.
-                shouldGroup = callType == CallTypeHelper.MISSED_CSVT_TYPE;
-            } else if (firstCallType == CallTypeHelper.INCOMING_CSVT_TYPE
-                        || firstCallType == CallTypeHelper.OUTGOING_CSVT_TYPE) {
-                // Incoming and outgoing calls group together.
-                shouldGroup = callType == CallTypeHelper.INCOMING_CSVT_TYPE
-                        || callType == CallTypeHelper.OUTGOING_CSVT_TYPE;
-            } else if (firstCallType == CallTypeHelper.MISSED_IMS_TYPE) {
-                // Voicemail and missed calls should only be grouped with subsequent missed calls.
-                shouldGroup = callType == CallTypeHelper.MISSED_IMS_TYPE;
-            } else if (firstCallType == CallTypeHelper.INCOMING_IMS_TYPE
-                        || firstCallType == CallTypeHelper.OUTGOING_IMS_TYPE) {
-                // Incoming and outgoing calls group together.
-                shouldGroup = callType == CallTypeHelper.INCOMING_IMS_TYPE
-                        || callType == CallTypeHelper.OUTGOING_IMS_TYPE;
             } else {
                 // Incoming, outgoing, and missed calls group together.
                 shouldGroup = callType != Calls.VOICEMAIL_TYPE;
