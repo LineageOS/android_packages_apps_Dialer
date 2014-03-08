@@ -23,9 +23,6 @@
     <color name="incall_secondary_info_background">#8033b5e5</color> <!-- semitransparent blueish grey -->
     <color name="incall_call_banner_text_color">#FFFFFF</color> <!-- white -->
 
-    <!-- DTMF Dialer -->
-    <color name="dtmf_dialer_display_text">#FFFFFF</color> <!-- white -->
-
     <!-- Color of the theme of the People app -->
     <color name="people_app_theme_color">#33B5E5</color>
 
@@ -44,9 +41,24 @@
     <!-- Used when the End Call button is disabled -->
     <drawable name="end_call_disabled_state">#303030</drawable>
 
-    <!-- Dialpad background -->
-    <color name="dialpad_background">#000000</color>
+    <!-- Color of dialpad digits -->
+    <color name="dialpad_digits_text_color">#000000</color>
+
+    <!-- Background color of dialpad -->
+    <color name="background_dialpad">#ffffff</color>
+
+    <!-- Pressed color of dialpad buttons -->
+    <color name="background_dialpad_pressed">#ececec</color>
 
     <!-- Button background -->
     <color name="button_background">#000000</color>
+
+    <!-- Background color of action bars -->
+    <color name="actionbar_background_color">#3B77E7</color>
+
+    <!-- Secondary color of dialpad text (used for the letters corresponding to each digit -->
+    <color name="dialpad_secondary_text_color">#8b8b8b</color>
+
+    <!-- Translucent shadow color -->
+    <color name="translucent_shadow">#33999999</color>
 </resources>
