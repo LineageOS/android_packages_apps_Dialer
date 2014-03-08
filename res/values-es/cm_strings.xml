@@ -47,4 +47,6 @@
     <string name="call_stats_sort_by_count">Ordenar por núm. llamadas</string>
     <string name="menu_add_to_blacklist">Añadir a la lista negra</string>
     <string name="toast_added_to_blacklist">%s añadido a la lista negra.</string>
+    <string name="nearby_places">Lugares cercanos</string>
+    <string name="people">Personas</string>
 </resources>
