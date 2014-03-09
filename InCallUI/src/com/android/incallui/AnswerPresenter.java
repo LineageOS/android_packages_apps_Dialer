@@ -16,8 +16,7 @@
 
 package com.android.incallui;
 
-import android.os.RemoteException;
-import android.telecomm.IInCallAdapter;
+import android.telecomm.InCallAdapter;
 
 import com.android.services.telephony.common.Call;
 
@@ -132,20 +131,14 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
         // TODO(santoscordon): Need a TelecommAdapter wrapper object so that we dont have to check
         // for null like this everywhere.
-        IInCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
+        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
         if (telecommAdapter != null) {
             // TODO(santoscordon): Remove translator by using only String-based IDs in all of the
             // in-call app.
             String callId = CallInfoTranslator.getTelecommCallId(mCall);
             if (callId != null) {
-                // TODO(santoscordon): TelecommAdapter wrapper would also eliminate much of this
-                // try-catch code.
-                try {
-                    Log.i(this, "Answering the call: " + callId);
-                    telecommAdapter.answerCall(callId);
-                } catch (RemoteException e) {
-                    Log.e(this, "Failed to send answer command.", e);
-                }
+                Log.i(this, "Answering the call: " + callId);
+                telecommAdapter.answerCall(callId);
             }
         }
     }
@@ -159,16 +152,12 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
         CallCommandClient.getInstance().rejectCall(mCall, false, null);
 
-        IInCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
+        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
         if (telecommAdapter != null) {
             String callId = CallInfoTranslator.getTelecommCallId(mCall);
             if (callId != null) {
-                try {
-                    Log.i(this, "Rejecting the call: " + callId);
-                    telecommAdapter.rejectCall(callId);
-                } catch (RemoteException e) {
-                    Log.e(this, "Failed to send reject command.", e);
-                }
+                Log.i(this, "Rejecting the call: " + callId);
+                telecommAdapter.rejectCall(callId);
             }
         }
     }
