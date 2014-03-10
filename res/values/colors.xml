@@ -70,8 +70,10 @@
 
     <!-- Background color of the search box -->
     <color name="searchbox_background_color">#ffffff</color>
-    <!-- Text color of the search box -->
-    <color name="searchbox_text_color">#d3d3d3</color>
+    <!-- Text color of the search box text as entered by user  -->
+    <color name="searchbox_text_color">#000000</color>
+    <!-- Text color of the search box hint text  -->
+    <color name="searchbox_hint_text_color">#d3d3d3</color>
 
     <!-- Color of the contact name in favorite tiles -->
     <color name="contact_tile_name_color">#ffffff</color>
