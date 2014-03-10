@@ -411,7 +411,7 @@ public class InCallActivity extends Activity {
             ft.setCustomAnimations(0, R.anim.slide_out);
             ft.hide(mDialpadFragment);
         }
-        ft.commit();
+        ft.commitAllowingStateLoss();
 
         InCallPresenter.getInstance().getProximitySensor().onDialpadVisible(showDialpad);
     }
