@@ -16,6 +16,24 @@
       "revId": "d7d4abc47c75c80e63ab20996217b263dcc4f7dc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bae84128_c12fee9f",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2014-03-10T09:00:02Z",
+      "side": 1,
+      "message": "Possibly, but I think domains are english-only, so that wouldn\u0027t make so much sense",
+      "parentUuid": "bae84128_615b8255",
+      "revId": "d7d4abc47c75c80e63ab20996217b263dcc4f7dc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
