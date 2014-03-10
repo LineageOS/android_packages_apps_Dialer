@@ -333,9 +333,8 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
 
     @Override
     public void onClick(View v) {
-        Log.d(this, "onClick");
         final AccessibilityManager accessibilityManager = (AccessibilityManager)
-            getActivity().getSystemService(Context.ACCESSIBILITY_SERVICE);
+            v.getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
         // When accessibility is on, simulate press and release to preserve the
         // semantic meaning of performClick(). Required for Braille support.
         if (accessibilityManager.isEnabled()) {
@@ -352,7 +351,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         // When touch exploration is turned on, lifting a finger while inside
         // the button's hover target bounds should perform a click action.
         final AccessibilityManager accessibilityManager = (AccessibilityManager)
-            getActivity().getSystemService(Context.ACCESSIBILITY_SERVICE);
+            v.getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
 
         if (accessibilityManager.isEnabled()
                 && accessibilityManager.isTouchExplorationEnabled()) {
