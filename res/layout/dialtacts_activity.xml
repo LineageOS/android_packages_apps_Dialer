@@ -64,6 +64,7 @@
                         android:textSize="@dimen/search_text_size"
                         android:fontFamily="@string/search_font_family"
                         android:textColor="@color/searchbox_text_color"
+                        android:textColorHint="@color/searchbox_hint_text_color"
                         android:inputType="textFilter"/>
                     <ImageView
                         android:id="@+id/search_close_button"
