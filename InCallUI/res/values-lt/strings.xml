@@ -167,4 +167,24 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Skambėjimo tonas ir vibracija"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Valdyti konferencinį skambutį"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Pagalbos numeris"</string>
+    <!-- no translation found for dialpad_0_number (4644117034319354934) -->
+    <skip />
+    <!-- no translation found for dialpad_1_number (9005660581700930162) -->
+    <skip />
+    <!-- no translation found for dialpad_2_number (4037709919757417820) -->
+    <skip />
+    <!-- no translation found for dialpad_3_number (7146166309009131439) -->
+    <skip />
+    <!-- no translation found for dialpad_4_number (9075039274846639476) -->
+    <skip />
+    <!-- no translation found for dialpad_5_number (5780019709590672721) -->
+    <skip />
+    <!-- no translation found for dialpad_6_number (8261355170951265389) -->
+    <skip />
+    <!-- no translation found for dialpad_7_number (277455349526398354) -->
+    <skip />
+    <!-- no translation found for dialpad_8_number (4764964930466503513) -->
+    <skip />
+    <!-- no translation found for dialpad_9_number (4023642800448238950) -->
+    <skip />
 </resources>
