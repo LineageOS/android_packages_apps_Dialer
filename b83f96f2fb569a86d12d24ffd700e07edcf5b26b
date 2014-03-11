@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bae84128_47576e02",
+        "filename": "res/values-nl/cm_caf.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7221
+      },
+      "writtenOn": "2014-03-11T09:37:25Z",
+      "side": 1,
+      "message": "moet deze vertaald worden?",
+      "revId": "b83f96f2fb569a86d12d24ffd700e07edcf5b26b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
