@@ -35,7 +35,6 @@ import android.os.ServiceManager;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
-import android.provider.ContactsContract.Intents.UI;
 import android.speech.RecognizerIntent;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
@@ -337,11 +336,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
 
         prepareSearchView();
-
-        if (UI.FILTER_CONTACTS_ACTION.equals(intent.getAction())
-                && savedInstanceState == null) {
-            setupFilterText(intent);
-        }
 
         hideDialpadFragment(false, false);
         setupFakeActionBarItems();
@@ -782,37 +776,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     public String getCallOrigin() {
         return !isDialIntent(getIntent()) ? CALL_ORIGIN_DIALTACTS : null;
-    }
-
-    /**
-     * Retrieves the filter text stored in {@link #setupFilterText(Intent)}.
-     * This text originally came from a FILTER_CONTACTS_ACTION intent received
-     * by this activity. The stored text will then be cleared after after this
-     * method returns.
-     *
-     * @return The stored filter text
-     */
-    public String getAndClearFilterText() {
-        String filterText = mFilterText;
-        mFilterText = null;
-        return filterText;
-    }
-
-    /**
-     * Stores the filter text associated with a FILTER_CONTACTS_ACTION intent.
-     * This is so child activities can check if they are supposed to display a filter.
-     *
-     * @param intent The intent received in {@link #onNewIntent(Intent)}
-     */
-    private void setupFilterText(Intent intent) {
-        // If the intent was relaunched from history, don't apply the filter text.
-        if ((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0) {
-            return;
-        }
-        String filter = intent.getStringExtra(UI.FILTER_TEXT_EXTRA_KEY);
-        if (filter != null && filter.length() > 0) {
-            mFilterText = filter;
-        }
     }
 
     private final PhoneFavoriteFragment.Listener mPhoneFavoriteListener =
