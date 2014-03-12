@@ -16,6 +16,24 @@
       "revId": "b83f96f2fb569a86d12d24ffd700e07edcf5b26b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bae84128_f962a6d7",
+        "filename": "res/values-nl/cm_caf.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2014-03-12T05:16:59Z",
+      "side": 1,
+      "message": "Ik gok dat dit een voorbeeldtekstje is, dus misschien maar translatable\u003d\"false\"",
+      "parentUuid": "bae84128_47576e02",
+      "revId": "b83f96f2fb569a86d12d24ffd700e07edcf5b26b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
