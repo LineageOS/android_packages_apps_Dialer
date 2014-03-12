@@ -51,7 +51,7 @@
             <LinearLayout
                 style="@style/DialpadKeyInternalLayoutStyle">
                 <TextView
-                    android:id="@id/dialpad_key_number"
+                    android:id="@+id/dialpad_key_number"
                     style="@style/DialpadKeyStarPoundStyle" />
                 <View
                     android:layout_height="match_parent"
