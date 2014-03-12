@@ -34,6 +34,24 @@
       "revId": "b83f96f2fb569a86d12d24ffd700e07edcf5b26b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bae84128_d97402ff",
+        "filename": "res/values-nl/cm_caf.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7630
+      },
+      "writtenOn": "2014-03-12T13:09:52Z",
+      "side": 1,
+      "message": "-1 Ik denk dat je gelijk hebt, dat het een voorbeeld is, maar waarom zou een voorbeeld niet in het Nederlands vertaald hoeven te worden? Dus wat mij betreft translatable\u003d\"true\" met b.v.\u0027example\u0027 vervangen door \u0027voorbeeld\u0027. En Abby door ..... Maxima :-)",
+      "parentUuid": "bae84128_f962a6d7",
+      "revId": "b83f96f2fb569a86d12d24ffd700e07edcf5b26b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
