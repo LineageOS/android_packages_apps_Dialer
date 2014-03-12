@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "bae84128_f91aa616",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2014-03-12T08:41:25Z",
+      "side": 1,
+      "message": "As I said, as little as possible edits. I don\u0027t think this is necessary.",
+      "revId": "d7d4abc47c75c80e63ab20996217b263dcc4f7dc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bae84128_615b8255",
         "filename": "res/values/strings.xml",
         "patchSetId": 2
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "Why? It\u0027s just an example/hint shown to the user, so it could easily be in any other language.",
       "parentUuid": "bae84128_c12fee9f",
+      "revId": "d7d4abc47c75c80e63ab20996217b263dcc4f7dc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bae84128_991d5a12",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 2597
+      },
+      "writtenOn": "2014-03-12T08:41:25Z",
+      "side": 1,
+      "message": "Although example could be translated, this string is rather complicated. It might confuse translators with lesser technical knowledge, which we will attract when Crowdin opens, what the exact meaning of this string is. Therefore I\u0027d rather have this untranslatable.",
+      "parentUuid": "bae84128_6109c231",
       "revId": "d7d4abc47c75c80e63ab20996217b263dcc4f7dc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
