@@ -27,7 +27,7 @@
 
     <!-- Call Log -->
     <dimen name="call_log_call_action_size">32dip</dimen>
-    <dimen name="call_log_call_action_width">48dip</dimen>
+    <dimen name="call_log_call_action_width">54dp</dimen>
     <dimen name="call_log_icon_margin">4dip</dimen>
     <dimen name="call_log_inner_margin">8dip</dimen>
     <dimen name="call_log_outer_margin">8dip</dimen>
@@ -38,7 +38,7 @@
     <dimen name="call_detail_button_spacing">2dip</dimen>
     <!-- Defines the vertical margin for the vertical separator between
          the main area of a call log entry and the secondary action button. -->
-    <dimen name="call_log_list_item_vertical_divider_margin">8dp</dimen>
+    <dimen name="call_log_list_item_vertical_divider_margin">17dp</dimen>
 
     <!-- Defines the width of the vertical separator between
          the main area of a call log entry and the secondary action button. -->
