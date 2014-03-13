@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bae84128_3cd07c53",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2014-03-13T05:00:26Z",
+      "side": 1,
+      "message": "It is necessary, when moved to cm_caf, \" is modified as \u0026quot; . We already did this in BluetoothExt since 10.2",
+      "parentUuid": "bae84128_f91aa616",
+      "revId": "d7d4abc47c75c80e63ab20996217b263dcc4f7dc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bae84128_615b8255",
         "filename": "res/values/strings.xml",
         "patchSetId": 2
