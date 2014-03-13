@@ -87,6 +87,24 @@
       "revId": "d7d4abc47c75c80e63ab20996217b263dcc4f7dc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bae84128_9c3708e3",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2014-03-13T01:55:50Z",
+      "side": 1,
+      "message": "I would like to see a screenshot of this....",
+      "parentUuid": "bae84128_991d5a12",
+      "revId": "d7d4abc47c75c80e63ab20996217b263dcc4f7dc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
