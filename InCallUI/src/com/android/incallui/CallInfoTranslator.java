@@ -72,6 +72,10 @@ final class CallInfoTranslator {
         call.setState(translateCallState(callInfo.getState()));
         call.setNumber(callInfo.getHandle());
 
+        // TODO: Each CallService needs to provide information what kind of call capabilities they
+        // support. For now, always assume that all calls support hold by default.
+        call.addCapabilities(Call.Capabilities.HOLD);
+
         return call;
     }
 

@@ -224,9 +224,22 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
-        Log.d(this, "holding: " + mCall.getCallId());
-
-        CallCommandClient.getInstance().hold(mCall.getCallId(), checked);
+        // Notify Telecomm that the user hit the hold button.
+        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
+        if (telecommAdapter != null) {
+            String callId = CallInfoTranslator.getTelecommCallId(mCall);
+            if (callId != null) {
+                if (checked) {
+                    Log.i(this, "Putting the call on hold: " + callId);
+                    telecommAdapter.holdCall(callId);
+                } else {
+                    Log.i(this, "Removing the call from hold: " + callId);
+                    telecommAdapter.unholdCall(callId);
+                }
+            } else {
+                Log.wtf(this, "Telecomm callId not found for call: " + mCall.getCallId());
+            }
+        }
     }
 
     public void mergeClicked() {
