@@ -420,7 +420,7 @@ public class DialpadFragment extends Fragment
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (isDigitsEmpty()) {
-                    hideAndClearDialpad();
+                    hideAndClearDialpad(true);
                     return true;
                 }
                 return false;
@@ -1054,11 +1054,11 @@ public class DialpadFragment extends Fragment
 
     public void callVoicemail() {
         startActivity(getVoicemailIntent());
-        hideAndClearDialpad();
+        hideAndClearDialpad(false);
     }
 
-    private void hideAndClearDialpad() {
-        ((DialtactsActivity) getActivity()).hideDialpadFragment(false, true);
+    private void hideAndClearDialpad(boolean animate) {
+        ((DialtactsActivity) getActivity()).hideDialpadFragment(animate, true);
     }
 
     public static class ErrorDialogFragment extends DialogFragment {
@@ -1154,7 +1154,7 @@ public class DialpadFragment extends Fragment
                         (getActivity() instanceof DialtactsActivity ?
                                 ((DialtactsActivity) getActivity()).getCallOrigin() : null));
                 startActivity(intent);
-                hideAndClearDialpad();
+                hideAndClearDialpad(false);
             }
         }
     }
