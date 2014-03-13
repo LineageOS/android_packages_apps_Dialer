@@ -282,6 +282,7 @@ public class ContactInfoHelper {
      *        {@link #mCachedNumberLookupService}.
      */
     public boolean isBusiness(int sourceType) {
-        return mCachedNumberLookupService.isBusiness(sourceType);
+        return mCachedNumberLookupService != null
+                && mCachedNumberLookupService.isBusiness(sourceType);
     }
 }
