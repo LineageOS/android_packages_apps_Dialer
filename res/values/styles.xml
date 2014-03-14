@@ -77,6 +77,18 @@
         <item name="favorites_padding_bottom">?android:attr/actionBarSize</item>
     </style>
 
+    <!-- An extension of the main DialtactsTheme used when the the launcher activity is shown.
+         Ensures that there is no actionbar showing during the load of the dialer app. -->
+    <style name="DialtactsThemeHiddenActionBar" parent="DialtactsTheme">
+        <item name="android:actionBarStyle">@style/DialtactsHiddenActionBarStyle</item>
+    </style>
+
+    <!-- A "hidden" action bar style.  Used when loading the launcher activity so that the
+         default actionbar is effectively hidden. -->
+    <style name="DialtactsHiddenActionBarStyle" parent="DialtactsActionBarStyle">
+        <item name="android:height">0dp</item>
+    </style>
+
     <!-- Action bar overflow menu icon. -->
     <style name="DialtactsActionBarOverflow"
            parent="@android:style/Widget.Holo.ActionButton.Overflow">
