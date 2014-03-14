@@ -340,5 +340,10 @@
             </intent-filter>
         </receiver>
 
+        <provider android:name="com.android.dialer.lookup.LookupProvider"
+                  android:authorities="com.android.dialer.provider"
+                  android:exported="false"
+                  android:multiprocess="false" />
+
     </application>
 </manifest>
