@@ -25,7 +25,11 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="#00000000" />
-
+    <!-- Dialpad shadow -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/shadow_fade_up" />
     <view class="com.android.dialer.dialpad.DialpadFragment$HoverIgnoringLinearLayout"
         android:id="@+id/top"
         android:animateLayoutChanges="true"

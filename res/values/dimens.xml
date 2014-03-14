@@ -73,6 +73,8 @@
     <dimen name="contact_tile_divider_padding">3dp</dimen>
     <dimen name="contact_tile_info_button_height_and_width">36dp</dimen>
     <item name="contact_tile_height_to_width_ratio" type="dimen">67%</item>
+    <dimen name="contact_tile_text_side_padding">10dp</dimen>
+    <dimen name="contact_tile_text_bottom_padding">9dp</dimen>
     <dimen name="favorites_row_top_padding">6dp</dimen>
     <dimen name="favorites_row_bottom_padding">6dp</dimen>
     <dimen name="favorites_row_start_padding">8dp</dimen>
