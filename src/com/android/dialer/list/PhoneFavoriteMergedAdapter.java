@@ -396,7 +396,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
         @Override
         public void addView(View view) {
-            view.setBackgroundResource(R.drawable.dialer_recent_card_bg);
+            view.setBackgroundResource(R.drawable.ic_tile_for_recents_and_contact_tile);
 
             final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
