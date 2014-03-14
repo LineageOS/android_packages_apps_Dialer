@@ -36,6 +36,20 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
         super(context);
     }
 
+    public ContactInfo getLookupContactInfo(int position) {
+        ContactInfo info = new ContactInfo();
+        final Cursor item = (Cursor) getItem(position);
+        if (item != null) {
+            info.name = item.getString(PhoneQuery.DISPLAY_NAME);
+            info.type = item.getInt(PhoneQuery.PHONE_TYPE);
+            info.label = item.getString(PhoneQuery.PHONE_LABEL);
+            info.number = item.getString(PhoneQuery.PHONE_NUMBER);
+            final String photoUriStr = item.getString(PhoneQuery.PHOTO_URI);
+            info.photoUri = photoUriStr == null ? null : Uri.parse(photoUriStr);
+        }
+        return info;
+    }
+
     public CachedContactInfo getContactInfo(
             CachedNumberLookupService lookupService, int position) {
         ContactInfo info = new ContactInfo();
