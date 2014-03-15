@@ -48,11 +48,11 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     private static final String TAG = PhoneFavoriteTileView.class.getSimpleName();
     private static final boolean DEBUG = false;
 
-    // These parameters instruct the photo manager to display the default image/letter at 70% of
-    // its normal size, and vertically offset upwards 20% towards the top of the letter tile, to
+    // These parameters instruct the photo manager to display the default image/letter at 65% of
+    // its normal size, and vertically offset upwards 17% towards the top of the letter tile, to
     // make room for the contact name and number label at the bottom of the image.
-    private static final float DEFAULT_IMAGE_LETTER_OFFSET = -0.2f;
-    private static final float DEFAULT_IMAGE_LETTER_SCALE = 0.70f;
+    private static final float DEFAULT_IMAGE_LETTER_OFFSET = -0.17f;
+    private static final float DEFAULT_IMAGE_LETTER_SCALE = 0.65f;
 
     /** Length of all animations in miniseconds. */
     private int mAnimationDuration;
