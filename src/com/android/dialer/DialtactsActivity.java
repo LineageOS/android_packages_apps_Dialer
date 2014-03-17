@@ -122,7 +122,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
 
-    private static final int FADE_ANIMATION_DURATION = 200;
+    private static final int ANIMATION_DURATION = 200;
 
     private String mFilterText;
 
@@ -393,10 +393,16 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mSmartDialSearchFragment = (SmartDialSearchFragment) fragment;
             mSmartDialSearchFragment.setOnPhoneNumberPickerActionListener(
                     mPhoneNumberPickerActionListener);
+            if (mFragmentsFrame != null) {
+                mFragmentsFrame.setAlpha(1.0f);
+            }
         } else if (fragment instanceof SearchFragment) {
             mRegularSearchFragment = (RegularSearchFragment) fragment;
             mRegularSearchFragment.setOnPhoneNumberPickerActionListener(
                     mPhoneNumberPickerActionListener);
+            if (mFragmentsFrame != null) {
+                mFragmentsFrame.setAlpha(1.0f);
+            }
         } else if (fragment instanceof PhoneFavoriteFragment) {
             mPhoneFavoriteFragment = (PhoneFavoriteFragment) fragment;
             mPhoneFavoriteFragment.setListener(mPhoneFavoriteListener);
@@ -615,11 +621,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mSearchAndRemoveViewContainer.setAlpha(1);
         mSearchAndRemoveViewContainer.setTranslationY(0);
         mSearchAndRemoveViewContainer.animate().withLayer().alpha(0)
-                .translationY(-height).setDuration(200)
+                .translationY(-height).setDuration(ANIMATION_DURATION)
                 .setListener(mHideListener);
 
         mFragmentsFrame.animate().withLayer()
-                .translationY(-height).setDuration(200).setListener(
+                .translationY(-height).setDuration(ANIMATION_DURATION).setListener(
                 new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -630,6 +636,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                         mFragmentsSpacer.setVisibility(View.VISIBLE);
                     }
                 });
+
+        if (!mInDialpadSearch && !mInRegularSearch) {
+            // If the favorites fragment is showing, fade to blank.
+            mFragmentsFrame.animate().alpha(0.0f);
+        }
     }
 
     public void showSearchBar() {
@@ -638,7 +649,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mSearchAndRemoveViewContainer.setAlpha(0);
         mSearchAndRemoveViewContainer.setTranslationY(-height);
         mSearchAndRemoveViewContainer.animate().withLayer().alpha(1).translationY(0)
-                .setDuration(200).setListener(new AnimatorListenerAdapter() {
+                .setDuration(ANIMATION_DURATION).setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationStart(Animator animation) {
                             mSearchAndRemoveViewContainer.setVisibility(View.VISIBLE);
@@ -646,7 +657,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     });
 
         mFragmentsFrame.setTranslationY(-height);
-        mFragmentsFrame.animate().withLayer().translationY(0).setDuration(200)
+        mFragmentsFrame.animate().withLayer().translationY(0).setDuration(ANIMATION_DURATION)
+                .alpha(1.0f)
                 .setListener(
                         new AnimatorListenerAdapter() {
                             @Override
@@ -884,7 +896,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
         SearchFragment fragment;
         if (mInDialpadSearch) {
@@ -930,6 +941,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // transitioned between search fragments
         getFragmentManager().popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         setNotInSearchUi();
+
+        if (isDialpadShowing()) {
+            mFragmentsFrame.setAlpha(0);
+        }
     }
 
     /** Returns an Intent to launch Call Settings screen */
@@ -1018,7 +1033,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onDragStarted(int itemIndex, int x, int y, PhoneFavoriteTileView view) {
-        crossfadeViews(mRemoveViewContainer, mSearchViewContainer, FADE_ANIMATION_DURATION);
+        crossfadeViews(mRemoveViewContainer, mSearchViewContainer, ANIMATION_DURATION);
     }
 
     @Override
@@ -1026,7 +1041,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onDragFinished(int x, int y) {
-        crossfadeViews(mSearchViewContainer, mRemoveViewContainer, FADE_ANIMATION_DURATION);
+        crossfadeViews(mSearchViewContainer, mRemoveViewContainer, ANIMATION_DURATION);
     }
 
     @Override
@@ -1056,7 +1071,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         fadeIn.setVisibility(View.VISIBLE);
         fadeIn.setAlpha(0);
-        fadeIn.animate().alpha(1).setDuration(FADE_ANIMATION_DURATION)
+        fadeIn.animate().alpha(1).setDuration(ANIMATION_DURATION)
                 .setListener(null);
     }
 
