@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bae84128_de4980d2",
+        "filename": "src/com/android/dialer/database/DialerDatabaseHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-03-18T03:57:49Z",
+      "side": 1,
+      "message": "This check is always true, or am I missing something?",
+      "revId": "eb65b42cc4d439b3d6a90e86d1888490564d67e6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bae84128_fe1604a6",
+        "filename": "src/com/android/dialer/lookup/LookupSettings.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-03-18T03:57:49Z",
+      "side": 1,
+      "message": "This stuff looks a bit redundant ;)\n\nprivate static String getLookupProvider(Context context, String key, String defaultValue) {\n    ContentResolver cr \u003d context.getContentResolver();\n    String provider \u003d Settings.System.getString(cr, key);\n    if (provider \u003d\u003d null) {\n        Settings.System.putString(cr, key, defaultValue);\n    }\n}\n\nand then\n\npublic static String getReverseLookupProvider(Context context) {\n    String provider \u003d getLookupProvider(context, Settings.System.REVERSE_LOOKUP_PROVIDER, RLP_DEFAULT);\n    if (\"Google\".equals(provider)) {\n        Settings.System.putString(context.getContentResolver(), Settings.System.REVERSE_LOOKUP_PROVIDER, RLP_DEFAULT);\n        provider \u003d RLP_DEFAULT;\n    }\n    return provider;\n}\n\n\ngetString/putString and the upgrade methods are unneeded afterwards.",
+      "revId": "eb65b42cc4d439b3d6a90e86d1888490564d67e6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
