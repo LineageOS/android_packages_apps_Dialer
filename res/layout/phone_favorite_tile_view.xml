@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="true"
-        android:background="@drawable/ic_tile_for_recents_and_contact_tile">
+        android:background="@drawable/ic_contacts_tiles">
 
         <com.android.contacts.common.widget.LayoutSuppressingImageView
             android:id="@+id/contact_tile_image"
@@ -72,7 +72,6 @@
                 android:fontFamily="sans-serif"
                 android:singleLine="true"
                 android:textSize="11sp"
-                android:paddingBottom="2dp"
                 android:fadingEdge="horizontal"
                 android:fadingEdgeLength="3dip"
                 android:ellipsize="marquee"
