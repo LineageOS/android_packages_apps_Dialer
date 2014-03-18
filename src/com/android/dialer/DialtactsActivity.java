@@ -152,6 +152,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private View mDialpadButton;
     private View mDialButton;
     private PopupMenu mOverflowMenu;
+    private PopupMenu mDialpadOverflowMenu;
 
     // Padding view used to shift the fragment frame up when the dialpad is shown so that
     // the contents of the fragment frame continue to exist in a layout of the same height
@@ -353,6 +354,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     protected void onResume() {
         super.onResume();
+        setupFakeActionBarItems();
         if (mFirstLaunch) {
             displayFragment(getIntent());
         } else if (!phoneIsInUse() && mInCallDialpadUp) {
@@ -457,7 +459,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         switch (view.getId()) {
             case R.id.overflow_menu: {
                 if (isDialpadShowing()) {
-                    mDialpadFragment.optionsMenuInvoked(view);
+                    mDialpadOverflowMenu.show();
                 } else {
                     mOverflowMenu.show();
                 }
@@ -551,6 +553,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ft.commit();
         mDialButton.setVisibility(shouldShowOnscreenDialButton() ? View.VISIBLE : View.GONE);
         mDialpadButton.setVisibility(View.GONE);
+        mMenuButton.setOnTouchListener(mDialpadOverflowMenu.getDragToOpenListener());
     }
 
     public void hideDialpadFragment(boolean animate, boolean clearDialpad) {
@@ -568,6 +571,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ft.commit();
         mDialButton.setVisibility(View.GONE);
         mDialpadButton.setVisibility(View.VISIBLE);
+        mMenuButton.setOnTouchListener(mOverflowMenu.getDragToOpenListener());
     }
 
     private void prepareSearchView() {
@@ -670,16 +674,17 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                         });
     }
 
-
-    public void setupFakeActionBarItems() {
+    private void setupFakeActionBarItems() {
         mMenuButton = findViewById(R.id.overflow_menu);
         if (mMenuButton != null) {
             mMenuButton.setOnClickListener(this);
-
-            mOverflowMenu = new OverflowPopupMenu(DialtactsActivity.this, mMenuButton);
-            final Menu menu = mOverflowMenu.getMenu();
-            mOverflowMenu.inflate(R.menu.dialtacts_options);
-            mOverflowMenu.setOnMenuItemClickListener(this);
+            if (mOverflowMenu == null) {
+                mOverflowMenu = buildOptionsMenu(mMenuButton);
+            }
+            if (mDialpadOverflowMenu == null) {
+                mDialpadOverflowMenu = mDialpadFragment.buildOptionsMenu(mMenuButton);
+            }
+            // Initial state is with dialpad fragment not shown
             mMenuButton.setOnTouchListener(mOverflowMenu.getDragToOpenListener());
         }
 
@@ -696,6 +701,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mDialpadButton = findViewById(R.id.dialpad_button);
         // DialpadButton.setMinimumWidth(fakeMenuItemWidth);
         mDialpadButton.setOnClickListener(this);
+    }
+
+    private PopupMenu buildOptionsMenu(View invoker) {
+        PopupMenu menu = new OverflowPopupMenu(this, invoker);
+        menu.inflate(R.menu.dialtacts_options);
+        menu.setOnMenuItemClickListener(this);
+        return menu;
     }
 
     private void fixIntent(Intent intent) {
