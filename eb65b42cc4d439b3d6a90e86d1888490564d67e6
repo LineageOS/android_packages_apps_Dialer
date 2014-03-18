@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bae84128_1e7928fd",
+        "filename": "src/com/android/dialer/database/DialerDatabaseHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 7003
+      },
+      "writtenOn": "2014-03-18T05:27:15Z",
+      "side": 1,
+      "message": "I can remove this stuff if you\u0027d like. This is here only to prevent crashes for people who have used my previous implementation (based on decompiled code).\n\nEDIT: I\u0027ll just remove the statement. The SQL command is idempotent anyway.",
+      "parentUuid": "bae84128_de4980d2",
+      "revId": "eb65b42cc4d439b3d6a90e86d1888490564d67e6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bae84128_fe1604a6",
         "filename": "src/com/android/dialer/lookup/LookupSettings.java",
         "patchSetId": 3
