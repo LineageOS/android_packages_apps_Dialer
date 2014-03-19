@@ -28,6 +28,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.telecomm.InCallAdapter;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -258,6 +259,7 @@ public class InCallActivity extends Activity {
 
             case KeyEvent.KEYCODE_MUTE:
                 // toggle mute
+                setMute(!AudioModeProvider.getInstance().getMute());
                 CallCommandClient.getInstance().mute(!AudioModeProvider.getInstance().getMute());
                 return true;
 
@@ -282,6 +284,16 @@ public class InCallActivity extends Activity {
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void setMute(boolean shouldMute) {
+        CallCommandClient.getInstance().mute(shouldMute);
+
+        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
+        if (telecommAdapter != null) {
+            Log.i(this, "Setting mute");
+            telecommAdapter.mute(shouldMute);
+        }
     }
 
     private boolean handleDialerKeyDown(int keyCode, KeyEvent event) {
