@@ -33,8 +33,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -271,8 +273,8 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     }
 
     @Override
-    public void configureMessageDialog(ArrayList<String> textResponses) {
-        final ArrayList<String> textResponsesForDisplay = new ArrayList<String>(textResponses);
+    public void configureMessageDialog(List<String> textResponses) {
+        final List<String> textResponsesForDisplay = Lists.newArrayList(textResponses);
 
         textResponsesForDisplay.add(getResources().getString(
                 R.string.respond_via_sms_custom_message));
