@@ -936,18 +936,17 @@ public class DialpadFragment extends Fragment
     }
 
     /**
-     * Called by the containing Activity to tell this Fragment that the gesture to display the
-     * "options" menu has been invoked.
+     * Called by the containing Activity to tell this Fragment to build an overflow options
+     * menu for display by the container when appropriate.
      *
      * @param invoker the View that invoked the options menu, to act as an anchor location.
      */
-    public void optionsMenuInvoked(View invoker) {
+    public PopupMenu buildOptionsMenu(View invoker) {
         final PopupMenu popupMenu = new PopupMenu(getActivity(), invoker);
-        final Menu menu = popupMenu.getMenu();
         popupMenu.inflate(R.menu.dialpad_options);
         popupMenu.setOnMenuItemClickListener(this);
-        setupMenuItems(menu);
-        popupMenu.show();
+        setupMenuItems(popupMenu.getMenu());
+        return popupMenu;
     }
 
     /**
