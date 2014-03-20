@@ -80,6 +80,46 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
     }
 
     /** {@inheritDoc} */
+    @Override protected void setDialing(String callId) {
+        Call call = CallInfoTranslator.getCall(callId);
+        if (null != call) {
+            call.setState(Call.State.DIALING);
+            CallList.getInstance().onUpdate(call);
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override protected void setRinging(String callId) {
+        Call call = CallInfoTranslator.getCall(callId);
+        if (null != call) {
+            call.setState(Call.State.RINGING);
+            CallList.getInstance().onUpdate(call);
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override protected void setPostDial(String callId, String remaining) {
+        Call call = CallInfoTranslator.getCall(callId);
+        if (null != call) {
+            // TODO(ihab): Add post-dial state to user interface
+            // TODO(ihab: Do the equivalent in the new framework:
+            // call.setState(Call.State.POST_DIAL);
+            CallList.getInstance().onUpdate(call);
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override protected void setPostDialWait(String callId, String remaining) {
+        Call call = CallInfoTranslator.getCall(callId);
+        if (null != call) {
+            // TODO(ihab): Add post-dial state to user interface
+            // TODO(ihab): Do the equivalent in the new framework:
+            // call.setState(Call.State.POST_DIAL_WAIT);
+            CallList.getInstance().onUpdate(call);
+        }
+    }
+
+    /** {@inheritDoc} */
     @Override protected void setDisconnected(String callId, int disconnectCause) {
         Call call = CallInfoTranslator.getCall(callId);
         if (null != call) {
