@@ -62,7 +62,7 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
 
     private Handler mScrollHandler;
     private final long SCROLL_HANDLER_DELAY_MILLIS = 5;
-    private final int DRAG_SCROLL_PX_UNIT = 10;
+    private final int DRAG_SCROLL_PX_UNIT = 25;
 
     private boolean mIsDragScrollerRunning = false;
     private int mTouchDownForDragStartX;
