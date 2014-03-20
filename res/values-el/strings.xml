@@ -28,7 +28,7 @@
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Κατάργηση από το αρχείο καταγραφής κλήσεων"</string>
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Εκκαθάριση αρχείου καταγραφής κλήσεων"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Διαγραφή αυτόματου τηλεφωνητή"</string>
-    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Κοινή χρήση αυτόμ. τηλεφωνητή"</string>
+    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Κοινοποίηση αυτόμ. τηλεφωνητή"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"Το αρχείο καταγραφής κλήσεων είναι κενό."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Εκκαθάριση αρχείου;"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Όλα τα αρχεία κλήσεων θα διαγραφούν."</string>
