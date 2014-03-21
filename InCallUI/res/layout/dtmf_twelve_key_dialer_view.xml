@@ -22,22 +22,12 @@
     android:orientation="vertical"
     android:layout_marginTop="1dip" >
 
-    <View
-        android:id="@+id/dialpad_spacer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
     <view class="com.android.incallui.DialpadFragment$HoverIgnoringLinearLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/background_dialpad">
 
-        <View
-            android:layout_height="@dimen/translucent_shadow_height"
-            android:layout_width="match_parent"
-            android:background="@color/translucent_shadow" />
 
         <!-- Display of the digits you've typed so far.
              This widget appears completely non-interactive to the user: you
@@ -48,7 +38,8 @@
         <EditText
             android:id="@+id/dtmfDialerField"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dialpad_digits_height"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:layout_marginStart="32dp"
@@ -66,6 +57,6 @@
             android:focusableInTouchMode="false"
             android:clickable="false"/>
 
-        <include layout="@layout/dialpad"/>
+        <include layout="@layout/dialpad_incall"/>
     </view>
 </view>

@@ -18,7 +18,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dialpad"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="0dp"
+    android:layout_weight="4"
     android:layout_gravity="center_horizontal"
     android:paddingLeft="@dimen/dialpad_horizontal_padding"
     android:paddingRight="@dimen/dialpad_horizontal_padding"
@@ -26,47 +27,49 @@
     android:stretchColumns="*"
     android:layoutDirection="ltr" >
 
-    <TableRow>
-        <include layout="@layout/dialpad_key" android:id="@+id/one"/>
-        <include layout="@layout/dialpad_key" android:id="@+id/two"/>
-        <include layout="@layout/dialpad_key" android:id="@+id/three"/>
+    <TableRow style="@style/InCallDialpadTableRowStyle">
+        <include layout="@layout/dialpad_key_incall" android:id="@+id/one"/>
+        <include layout="@layout/dialpad_key_incall" android:id="@+id/two"/>
+        <include layout="@layout/dialpad_key_incall" android:id="@+id/three"/>
     </TableRow>
 
-    <TableRow>
-        <include layout="@layout/dialpad_key" android:id="@+id/four"/>
-        <include layout="@layout/dialpad_key" android:id="@+id/five"/>
-        <include layout="@layout/dialpad_key" android:id="@+id/six"/>
+    <TableRow style="@style/InCallDialpadTableRowStyle">
+        <include layout="@layout/dialpad_key_incall" android:id="@+id/four"/>
+        <include layout="@layout/dialpad_key_incall" android:id="@+id/five"/>
+        <include layout="@layout/dialpad_key_incall" android:id="@+id/six"/>
     </TableRow>
 
-    <TableRow>
-        <include layout="@layout/dialpad_key" android:id="@+id/seven"/>
-        <include layout="@layout/dialpad_key" android:id="@+id/eight"/>
-        <include layout="@layout/dialpad_key" android:id="@+id/nine"/>
+    <TableRow style="@style/InCallDialpadTableRowStyle">
+        <include layout="@layout/dialpad_key_incall" android:id="@+id/seven"/>
+        <include layout="@layout/dialpad_key_incall" android:id="@+id/eight"/>
+        <include layout="@layout/dialpad_key_incall" android:id="@+id/nine"/>
     </TableRow>
 
-    <TableRow>
+    <TableRow style="@style/InCallDialpadTableRowStyle">
         <com.android.dialer.dialpad.DialpadKeyButton
             android:id="@+id/star"
-            style="@style/DialpadKeyButtonStyle">
+            style="@style/InCallDialpadKeyButtonStyle">
             <LinearLayout
-                style="@style/DialpadKeyInternalLayoutStyle">
+                style="@style/InCallDialpadKeyInternalLayoutStyle">
                 <TextView
                     android:id="@id/dialpad_key_number"
-                    style="@style/DialpadKeyStarPoundStyle" />
+                    style="@style/InCallDialpadKeyStarPoundStyle"
+                    android:textSize="@dimen/dialpad_key_star_size" />
                 <View
                     android:layout_height="match_parent"
                     android:layout_width="@dimen/dialpad_key_letters_width" />
             </LinearLayout>
         </com.android.dialer.dialpad.DialpadKeyButton>
-        <include layout="@layout/dialpad_key" android:id="@+id/zero"/>
+        <include layout="@layout/dialpad_key_incall" android:id="@+id/zero"/>
         <com.android.dialer.dialpad.DialpadKeyButton
             android:id="@+id/pound"
-            style="@style/DialpadKeyButtonStyle">
+            style="@style/InCallDialpadKeyButtonStyle">
             <LinearLayout
-                style="@style/DialpadKeyInternalLayoutStyle">
+                style="@style/InCallDialpadKeyInternalLayoutStyle">
                 <TextView
                     android:id="@id/dialpad_key_number"
-                    style="@style/DialpadKeyStarPoundStyle" />
+                    style="@style/InCallDialpadKeyStarPoundStyle"
+                    android:textSize="@dimen/dialpad_key_pound_size" />
                 <View
                     android:layout_height="match_parent"
                     android:layout_width="@dimen/dialpad_key_letters_width" />
