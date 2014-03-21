@@ -98,24 +98,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         }
     }
 
-    private class DismissListener implements View.OnClickListener, View.OnLongClickListener {
-
-        @Override
-        public void onClick(View view) {
-            dismiss();
-        }
-
-        @Override
-        public boolean onLongClick(View view) {
-            dismiss();
-            return true;
-        }
-
-        private void dismiss() {
-            ((InCallActivity) getActivity()).getCallButtonFragment().displayDialpad(false);
-        }
-    }
-
     private EditText mDtmfDialerField;
 
     /** Hash Map to map a view id to a character*/
@@ -460,11 +442,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
 
             setupKeypad(parent);
         }
-
-        final DismissListener dl = new DismissListener();
-        final View spacer = parent.findViewById(R.id.dialpad_spacer);
-        spacer.setOnClickListener(dl);
-        spacer.setOnLongClickListener(dl);
 
         final ViewTreeObserver vto = parent.getViewTreeObserver();
         // Adjust the translation of the DialpadFragment in a preDrawListener instead of in
