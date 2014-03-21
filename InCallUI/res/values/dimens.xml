@@ -45,7 +45,7 @@
     <dimen name="in_call_button_height">76dp</dimen>
 
     <!-- Height of the in-call "End" button. Match with Contact's dimens/call_button_height -->
-    <dimen name="in_call_end_button_height">74dp</dimen>
+    <dimen name="in_call_end_button_height">60dp</dimen>
 
     <!-- Width of buttons in the extra button row. -->
     <dimen name="extra_row_button_width">56dp</dimen>
@@ -120,7 +120,8 @@
     <!-- Text dimensions for dialpad keys -->
     <dimen name="dialpad_key_numbers_size">40sp</dimen>
     <dimen name="dialpad_key_letters_size">13sp</dimen>
-    <dimen name="dialpad_key_star_pound_size">26sp</dimen>
+    <dimen name="dialpad_key_star_size">26sp</dimen>
+    <dimen name="dialpad_key_pound_size">26sp</dimen>
     <dimen name="dialpad_key_numbers_width">30dp</dimen>
     <dimen name="dialpad_key_letters_width">50dp</dimen>
     <dimen name="dialpad_key_height">56dp</dimen>
