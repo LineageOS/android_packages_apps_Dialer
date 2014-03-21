@@ -444,7 +444,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             final int position = firstVisiblePosition + i;
             final long itemId = mAdapter.getItemId(position);
             final int itemViewType = mAdapter.getItemViewType(position);
-            if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP) {
+            if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP &&
+                    child instanceof ContactTileRow) {
                 // This is a tiled row, so save horizontal offsets instead
                 saveHorizontalOffsets((ContactTileRow) child, (ArrayList<ContactEntry>)
                         mAdapter.getItem(position),
