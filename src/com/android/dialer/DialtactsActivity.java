@@ -298,6 +298,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         fixIntent(intent);
 
         setContentView(R.layout.dialtacts_activity);
+        getWindow().setBackgroundDrawable(null);
 
         getActionBar().hide();
 
