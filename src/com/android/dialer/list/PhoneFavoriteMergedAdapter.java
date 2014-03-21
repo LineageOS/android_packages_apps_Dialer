@@ -74,7 +74,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             mCallLogQueryHandler.markNewVoicemailsAsOld();
             CallLogNotificationsHelper.removeMissedCallNotifications();
             CallLogNotificationsHelper.updateVoicemailNotifications(mContext);
-            mFragment.dismissShortcut(((View) view.getParent()).getHeight());
+            mFragment.dismissShortcut(view);
         }
 
         @Override

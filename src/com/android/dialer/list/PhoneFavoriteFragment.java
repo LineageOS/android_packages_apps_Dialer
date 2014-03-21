@@ -650,10 +650,11 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         saveOffsets(0);
     }
 
-    public void dismissShortcut(int height) {
+    public void dismissShortcut(View view) {
+        final int height = ((View) view.getParent()).getHeight();
         saveOffsets(height);
         mLastCallShortcutDate = mCurrentCallShortcutDate;
-        final SharedPreferences prefs = getActivity().getSharedPreferences(
+        final SharedPreferences prefs = view.getContext().getSharedPreferences(
                 DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
         prefs.edit().putLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, mLastCallShortcutDate)
                 .apply();
