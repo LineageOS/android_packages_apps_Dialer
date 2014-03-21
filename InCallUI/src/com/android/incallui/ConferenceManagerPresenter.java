@@ -35,7 +35,6 @@ public class ConferenceManagerPresenter
 
     private static final int MAX_CALLERS_IN_CONFERENCE = 5;
 
-    private int mNumCallersInConference;
     private Integer[] mCallerIds;
     private Context mContext;
 
@@ -80,10 +79,15 @@ public class ConferenceManagerPresenter
     }
 
     private void update(CallList callList) {
-        mCallerIds = null;
-        mCallerIds = callList.getActiveOrBackgroundCall().getChildCallIds().toArray(new Integer[0]);
-        mNumCallersInConference = mCallerIds.length;
-        Log.v(this, "Number of calls is " + String.valueOf(mNumCallersInConference));
+        // callList is non null, but getActiveOrBackgroundCall() may return null
+        final Call currentCall = callList.getActiveOrBackgroundCall();
+        if (currentCall != null) {
+            // getChildCallIds() always returns a valid Set
+            mCallerIds = currentCall.getChildCallIds().toArray(new Integer[0]);
+        } else {
+            mCallerIds = new Integer[0];
+        }
+        Log.d(this, "Number of calls is " + String.valueOf(mCallerIds.length));
 
         // Users can split out a call from the conference call if there either the active call
         // or the holding call is empty. If both are filled at the moment, users can not split out
@@ -93,7 +97,7 @@ public class ConferenceManagerPresenter
         boolean canSeparate = !(hasActiveCall && hasHoldingCall);
 
         for (int i = 0; i < MAX_CALLERS_IN_CONFERENCE; i++) {
-            if (i < mNumCallersInConference) {
+            if (i < mCallerIds.length) {
                 // Fill in the row in the UI for this caller.
 
                 final ContactCacheEntry contactCache = ContactInfoCache.getInstance(mContext).
@@ -149,11 +153,15 @@ public class ConferenceManagerPresenter
     }
 
     public void separateConferenceConnection(int rowId) {
-        CallCommandClient.getInstance().separateCall(mCallerIds[rowId]);
+        if (rowId < mCallerIds.length) {
+            CallCommandClient.getInstance().separateCall(mCallerIds[rowId]);
+        }
     }
 
     public void endConferenceConnection(int rowId) {
-        CallCommandClient.getInstance().disconnectCall(mCallerIds[rowId]);
+        if (rowId < mCallerIds.length) {
+            CallCommandClient.getInstance().disconnectCall(mCallerIds[rowId]);
+        }
     }
 
     public interface ConferenceManagerUi extends Ui {
