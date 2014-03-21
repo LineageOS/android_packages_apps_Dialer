@@ -52,10 +52,10 @@
     <color name="item_selected">#660099cc</color>
 
     <!-- Background color of new dialer activity -->
-    <color name="background_dialer_light">#eeeeee</color>
+    <color name="background_dialer_light">#ebebeb</color>
 
     <!-- Background color of dialer list items (contacts, call log entries) -->
-    <color name="background_dialer_list_items">#eeeeee</color>
+    <color name="background_dialer_list_items">#ebebeb</color>
 
     <!-- Background color of action bars.  Ensure this stays in sync with packages/Telephony
          actionbar_background_color. -->

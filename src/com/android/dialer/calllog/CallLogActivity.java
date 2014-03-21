@@ -115,6 +115,7 @@ public class CallLogActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.call_log_activity);
+        getWindow().setBackgroundDrawable(null);
 
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
