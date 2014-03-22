@@ -21,6 +21,9 @@ import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.ReverseLookup;
 
 import android.content.Context;
+import android.net.Uri;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 
@@ -43,6 +46,10 @@ public class OpenCnamReverseLookup extends ReverseLookup {
     private static final String LOOKUP_URL =
             "https://api.opencnam.com/v2/phone/";
 
+    /** Query parameters for paid accounts */
+    private static final String ACCOUNT_SID = "account_sid";
+    private static final String AUTH_TOKEN = "auth_token";
+
     public OpenCnamReverseLookup(Context context) {
     }
 
@@ -58,7 +65,7 @@ public class OpenCnamReverseLookup extends ReverseLookup {
             String normalizedNumber, String formattedNumber) {
         String displayName;
         try {
-            displayName = httpGetRequest(normalizedNumber);
+            displayName = httpGetRequest(context, normalizedNumber);
             if (DEBUG) Log.d(TAG, "Reverse lookup returned name: " + displayName);
         } catch (IOException e) {
             return null;
@@ -93,9 +100,28 @@ public class OpenCnamReverseLookup extends ReverseLookup {
         return Pair.create(builder.build(), null);
     }
 
-    private String httpGetRequest(String number) throws IOException {
+    private String httpGetRequest(Context context, String number) throws IOException {
+        Uri.Builder builder = Uri.parse(LOOKUP_URL + number).buildUpon();
+
+        // Paid account
+        String accountSid = Settings.System.getString(
+                context.getContentResolver(),
+                Settings.System.DIALER_OPENCNAM_ACCOUNT_SID);
+        String authToken = Settings.System.getString(
+                context.getContentResolver(),
+                Settings.System.DIALER_OPENCNAM_AUTH_TOKEN);
+
+        if (!TextUtils.isEmpty(accountSid) && !TextUtils.isEmpty(authToken)) {
+            Log.d(TAG, "Using paid account");
+
+            builder.appendQueryParameter(ACCOUNT_SID, accountSid);
+            builder.appendQueryParameter(AUTH_TOKEN, authToken);
+        }
+
+        String url = builder.build().toString();
+
         HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(LOOKUP_URL + number);
+        HttpGet request = new HttpGet(url);
 
         HttpResponse response = client.execute(request);
 
