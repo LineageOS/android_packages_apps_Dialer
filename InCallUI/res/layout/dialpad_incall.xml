@@ -52,7 +52,7 @@
             <LinearLayout
                 style="@style/InCallDialpadKeyInternalLayoutStyle">
                 <TextView
-                    android:id="@id/dialpad_key_number"
+                    android:id="@+id/dialpad_key_number"
                     style="@style/InCallDialpadKeyStarPoundStyle"
                     android:textSize="@dimen/dialpad_key_star_size" />
                 <View
@@ -67,7 +67,7 @@
             <LinearLayout
                 style="@style/InCallDialpadKeyInternalLayoutStyle">
                 <TextView
-                    android:id="@id/dialpad_key_number"
+                    android:id="@+id/dialpad_key_number"
                     style="@style/InCallDialpadKeyStarPoundStyle"
                     android:textSize="@dimen/dialpad_key_pound_size" />
                 <View
