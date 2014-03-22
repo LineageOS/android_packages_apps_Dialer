@@ -21,6 +21,8 @@ import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.ReverseLookup;
 
 import android.content.Context;
+import android.net.Uri;
+import android.os.SystemProperties;
 import android.util.Log;
 import android.util.Pair;
 
@@ -42,6 +44,14 @@ public class OpenCnamReverseLookup extends ReverseLookup {
 
     private static final String LOOKUP_URL =
             "https://api.opencnam.com/v2/phone/";
+
+    /** Query parameters for paid accounts */
+    private static final String ACCOUNT_SID = "account_sid";
+    private static final String AUTH_TOKEN = "auth_token";
+
+    /** System properties for paid accounts */
+    private static final String PROP_ACCOUNT_SID = "ro.dialer.opencnam.account_sid";
+    private static final String PROP_AUTH_TOKEN = "ro.dialer.opencnam.auth_token";
 
     public OpenCnamReverseLookup(Context context) {
     }
@@ -94,8 +104,23 @@ public class OpenCnamReverseLookup extends ReverseLookup {
     }
 
     private String httpGetRequest(String number) throws IOException {
+        Uri.Builder builder = Uri.parse(LOOKUP_URL + number).buildUpon();
+
+        // Paid account
+        String account_sid = SystemProperties.get(PROP_ACCOUNT_SID);
+        String auth_token = SystemProperties.get(PROP_AUTH_TOKEN);
+
+        if (!"".equals(account_sid) && !"".equals(auth_token)) {
+            Log.d(TAG, "Using paid account");
+
+            builder.appendQueryParameter(ACCOUNT_SID, account_sid);
+            builder.appendQueryParameter(AUTH_TOKEN, auth_token);
+        }
+
+        String url = builder.build().toString();
+
         HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(LOOKUP_URL + number);
+        HttpGet request = new HttpGet(url);
 
         HttpResponse response = client.execute(request);
 
