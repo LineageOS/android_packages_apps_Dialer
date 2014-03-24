@@ -405,10 +405,10 @@ public class InCallActivity extends Activity {
     public void displayDialpad(boolean showDialpad) {
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         if (showDialpad) {
-            ft.setCustomAnimations(R.anim.slide_in, 0);
+            ft.setCustomAnimations(R.anim.incall_dialpad_slide_in, 0);
             ft.show(mDialpadFragment);
         } else {
-            ft.setCustomAnimations(0, R.anim.slide_out);
+            ft.setCustomAnimations(0, R.anim.incall_dialpad_slide_out);
             ft.hide(mDialpadFragment);
         }
         ft.commitAllowingStateLoss();
