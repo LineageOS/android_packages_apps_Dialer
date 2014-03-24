@@ -91,7 +91,7 @@
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Vis kun telefonsvarerbeskeder"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Vis alle opkald"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Tilføj pause på 2 sek."</string>
-    <string name="add_wait" msgid="3360818652790319634">"Tilføj Vent"</string>
+    <string name="add_wait" msgid="3360818652790319634">"Tilføj ventetid"</string>
     <string name="call_settings" msgid="7666474782093693667">"Indstillinger"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Ny kontaktperson"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Alle kontaktpersoner"</string>
@@ -170,7 +170,7 @@
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Ring til <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Føj til kontaktpersoner"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nye ubesvarede opkald"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Dine foretrukne og de kontaktpersoner, du\noftest ringer til, vises her.\nSå gå du bare i gang med at ringe."</string>
+    <string name="no_favorites" msgid="5212485868783382971">"Dine foretrukne og de kontaktpersoner,\ndu oftest ringer til, vises her.\nSå gå du bare i gang med at ringe."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Tryk på billedet for at se alle telefonnumre, eller tryk på billedet, og hold det nede, for at omarrangere"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Annuller"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Fjern"</string>

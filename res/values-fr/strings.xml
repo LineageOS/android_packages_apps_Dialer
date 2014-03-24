@@ -170,7 +170,7 @@
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Appeler le <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Ajouter aux contacts"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Nouveaux appels manqués : <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Les favoris et les contacts que\nvous appelez souvent s\'affichent ici.\nCommencez donc par passer des appels !"</string>
+    <string name="no_favorites" msgid="5212485868783382971">"Retrouvez ici vos favoris et\nles contacts que vous appelez souvent.\n"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Appuyer sur l\'image pour afficher tous les numéros ou appuyer de manière prolongée pour les réorganiser"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ignorer"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Supprimer"</string>

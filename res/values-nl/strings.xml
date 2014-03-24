@@ -148,7 +148,7 @@
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Typ een naam of telefoonnummer"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Alle"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Gemist"</string>
-    <string name="recentMissed_empty" msgid="5427113551557296665">"Geen recente gemiste oproepen."</string>
+    <string name="recentMissed_empty" msgid="5427113551557296665">"Geen recente gemiste oproepen"</string>
     <string name="recentVoicemails_empty" msgid="5163114119598014048">"Geen recente voicemails."</string>
     <string name="show_all_contacts" msgid="1732256558071778056">"Alle contacten weergeven"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Alleen favorieten weergeven"</string>
@@ -170,7 +170,7 @@
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Bel <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Toevoegen aan contacten"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nieuwe gemiste oproepen"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Favorieten en contacten die u\nvaak belt, worden hier weergegeven.\nDus begin met bellen."</string>
+    <string name="no_favorites" msgid="5212485868783382971">"Favorieten en contacten die u\nvaak belt, worden hier weergegeven.\n"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Tik op de afbeelding om alle nummers te bekijken of raak deze lang aan om de volgorde van nummers te wijzigen"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Sluiten"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Verwijderen"</string>
