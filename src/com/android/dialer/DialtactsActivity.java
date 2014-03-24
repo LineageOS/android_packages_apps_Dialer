@@ -323,7 +323,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         hideDialpadFragment(false, false);
-        setupFakeActionBarItems();
 
         mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
         SmartDialPrefix.initializeNanpSettings(this);
