@@ -55,10 +55,6 @@
     <skip />
     <!-- no translation found for voicemail_fetching_timout (6691792377574905201) -->
     <skip />
-    <!-- no translation found for call_log_new_header (846546437517724715) -->
-    <skip />
-    <!-- no translation found for call_log_old_header (6262205894314263629) -->
-    <skip />
     <!-- no translation found for call_log_voicemail_header (3945407886667089173) -->
     <skip />
     <!-- no translation found for call_log_incoming_header (2787722299753674684) -->
@@ -119,6 +115,8 @@
     <!-- no translation found for action_menu_overflow_description (2303272250613084574) -->
     <!-- no translation found for action_menu_overflow_description (2295659037509008453) -->
     <skip />
+    <!-- no translation found for action_menu_dialpad_button (1425910318049008136) -->
+    <skip />
     <!-- no translation found for menu_copy (6108677035381940698) -->
     <skip />
     <!-- no translation found for menu_show_outgoing_only (1965570298133301970) -->
@@ -136,6 +134,8 @@
     <!-- no translation found for call_settings (7666474782093693667) -->
     <skip />
     <string name="menu_newContact" msgid="1209922412763274638">"Nov contact"</string>
+    <!-- no translation found for menu_allContacts (6948308384034051670) -->
+    <skip />
     <string name="callDetailTitle" msgid="5340227785196217938">"Detagls dal clom"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"Impussibel da leger ils detagls dal clom dumandà."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Utilisar la tastatura dal telefon"</string>
@@ -163,13 +163,33 @@
     <skip />
     <!-- no translation found for description_call (3443678121983852666) -->
     <skip />
+    <!-- no translation found for description_contact_details (51229793651342809) -->
+    <skip />
+    <!-- no translation found for description_call_details (8936017517290240089) -->
+    <skip />
+    <!-- no translation found for description_new_voicemail (2133792360865517746) -->
+    <skip />
+    <!-- no translation found for description_num_calls (1601505153694540074) -->
+    <skip />
+    <!-- no translation found for description_return_missed_call (5832103397942825774) -->
+    <skip />
+    <!-- no translation found for description_return_answered_call (6038958518509163218) -->
+    <skip />
+    <!-- no translation found for description_unknown_missed_call (8736195520010578126) -->
+    <skip />
+    <!-- no translation found for description_unknown_answered_call (1470971301999791460) -->
+    <skip />
+    <!-- no translation found for description_call_last_multiple (271456796151369411) -->
+    <skip />
+    <!-- no translation found for description_call_last (491385778814705302) -->
+    <skip />
     <!-- no translation found for description_send_text_message (7803126439934046891) -->
     <skip />
     <!-- no translation found for description_call_log_unheard_voicemail (118101684236996786) -->
     <skip />
-    <!-- no translation found for description_start_voice_search (520539488194946012) -->
+    <!-- no translation found for description_clear_search (688023606766232904) -->
     <skip />
-    <!-- no translation found for call_log_empty_gecode (5588904744812100846) -->
+    <!-- no translation found for description_start_voice_search (520539488194946012) -->
     <skip />
     <!-- no translation found for menu_callNumber (997146291983360266) -->
     <skip />
@@ -193,7 +213,9 @@
     <string name="simContacts_title" msgid="27341688347689769">"Contacts sin la carta SIM"</string>
     <!-- no translation found for add_contact_not_available (1419207765446461366) -->
     <skip />
-    <!-- no translation found for dialer_hint_find_contact (9190419749917566623) -->
+    <!-- no translation found for voice_search_not_available (7580616740587850828) -->
+    <skip />
+    <!-- no translation found for dialer_hint_find_contact (8798845521253672403) -->
     <skip />
     <!-- no translation found for call_log_all_title (3566738938889333307) -->
     <skip />
@@ -209,12 +231,50 @@
     <skip />
     <!-- no translation found for call_log_activity_title (4612824396355272023) -->
     <skip />
+    <!-- no translation found for dialpad_0_number (8859392433961251108) -->
+    <skip />
+    <!-- no translation found for dialpad_1_number (6536740525419909212) -->
+    <skip />
+    <!-- no translation found for dialpad_2_number (4941546415280852148) -->
+    <skip />
+    <!-- no translation found for dialpad_3_number (6539414865185536881) -->
+    <skip />
+    <!-- no translation found for dialpad_4_number (979988372051042362) -->
+    <skip />
+    <!-- no translation found for dialpad_5_number (5492272478939926734) -->
+    <skip />
+    <!-- no translation found for dialpad_6_number (8044579516869379093) -->
+    <skip />
+    <!-- no translation found for dialpad_7_number (4175113016564167123) -->
+    <skip />
+    <!-- no translation found for dialpad_8_number (7949849563865941621) -->
+    <skip />
+    <!-- no translation found for dialpad_9_number (4377059952097526576) -->
+    <skip />
     <!-- no translation found for show_all_contacts_title (8395378484578221791) -->
     <skip />
     <!-- no translation found for show_all_contacts_button_text (8057452310403090131) -->
     <skip />
-    <!-- no translation found for favorite_hidden (4837366417440391323) -->
+    <!-- no translation found for favorite_hidden (5011234945140912047) -->
     <skip />
     <!-- no translation found for favorite_hidden_undo (2508998611039406474) -->
+    <skip />
+    <!-- no translation found for search_shortcut_call_number (7277194656832895870) -->
+    <skip />
+    <!-- no translation found for search_shortcut_add_to_contacts (1853716708655789069) -->
+    <skip />
+    <!-- no translation found for num_missed_calls (8081736535604293886) -->
+    <skip />
+    <!-- no translation found for no_favorites (5212485868783382971) -->
+    <skip />
+    <!-- no translation found for contact_tooltip (7817483485692282287) -->
+    <skip />
+    <!-- no translation found for description_dismiss (2146276780562549643) -->
+    <skip />
+    <!-- no translation found for remove_contact (1080555335283662961) -->
+    <skip />
+    <!-- no translation found for favorites_menu_speed_dial (3832518092014707628) -->
+    <skip />
+    <!-- no translation found for favorites_menu_all_contacts (992506284449891186) -->
     <skip />
 </resources>

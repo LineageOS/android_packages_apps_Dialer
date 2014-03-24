@@ -31,7 +31,7 @@
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"የድምፅ መልዕክት አጋራ"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"ምዝግብ ማስታወሻባዶ ነው..."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"የጥሪ ማስታወሻ አጥራ"</string>
-    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"ሁሉም የጥሪ ማህደሮችህ ይሰረዛሉ፡፡"</string>
+    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"ሁሉም የጥሪ ማህደሮችዎ ይሰረዛሉ።"</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"የጥሪ ምዝግብ ማስታወሻ በማጥራት ላይ…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="1746619685488504230">"የድምፅ መልዕክት"</item>
@@ -44,8 +44,6 @@
     <string name="voicemail_buffering" msgid="738287747618697097">"በማቋት ላይ…"</string>
     <string name="voicemail_fetching_content" msgid="877911315738258780">"ድምፅ ደብዳቤ ፈልጎ በማግኘት ላይ…"</string>
     <string name="voicemail_fetching_timout" msgid="6691792377574905201">"ድምፅ ደብዳቤን ፈልጎ ማግኘት አልተቻለም፡፡"</string>
-    <string name="call_log_new_header" msgid="846546437517724715">"አዲስ"</string>
-    <string name="call_log_old_header" msgid="6262205894314263629">"የድሮ"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"የድምጽ መልዕክት ያላቸው ጥሪዎች ብቻ"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"ገቢ ጥሪዎች ብቻ"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"ወጪ ጥሪዎች ብቻ"</string>
@@ -84,16 +82,18 @@
     <string name="description_digits_edittext" msgid="8760207516497016437">"ቁጥር ለመደወል"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"የስልክ ጥሪ ታሪክ"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"ተጨማሪ አማራጮች"</string>
+    <string name="action_menu_dialpad_button" msgid="1425910318049008136">"የመደወያ ሰሌዳ"</string>
     <string name="menu_copy" msgid="6108677035381940698">"ቅዳ"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"ወጪዎቹን ብቻ አሳይ"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"ገቢዎቹን ብቻ አሳይ"</string>
     <string name="menu_show_missed_only" msgid="154473166059743996">"ያመለጡትን ብቻ አሳይ"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"የድምፅ መልዕክቶች ብቻ አሳይ"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"ሁሉንም ጥሪዎች አሳይ"</string>
-    <string name="add_2sec_pause" msgid="9214012315201040129">"2 ሰከንድ ፋታ አክል"</string>
-    <string name="add_wait" msgid="3360818652790319634">"ጠብቅአክል"</string>
+    <string name="add_2sec_pause" msgid="9214012315201040129">"2 ሴኮንድ ፋታ አክል"</string>
+    <string name="add_wait" msgid="3360818652790319634">"መጠበቅ አክል"</string>
     <string name="call_settings" msgid="7666474782093693667">"ቅንብሮች"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"አዲስ ዕውቅያ"</string>
+    <string name="menu_allContacts" msgid="6948308384034051670">"ሁሉም ዕውቂያዎች"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"የጥሪ ዝርዝሮች"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"ለተጠየቀው ጥሪዝርዝሮችንማንበብ አልተቻለም።"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"የድምፅ ቁልፍ ሰሌዳን ንካ"</string>
@@ -112,11 +112,20 @@
     <string name="description_add_contact" msgid="3103414772502485851">"እውቅያዎች አክል"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"ዕውቂያ <xliff:g id="NAME">%1$s</xliff:g> ዕይ"</string>
     <string name="description_call" msgid="3443678121983852666">"ጥሪ <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_contact_details" msgid="51229793651342809">"የ<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> እውቂያ ዝርዝሮች"</string>
+    <string name="description_call_details" msgid="8936017517290240089">"የጥሪ ዝርዝሮች"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"አዲስ የድምጽ መልዕክት።"</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> ጥሪዎች።"</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"ከ<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ላመለጥዎት ጥሪ ይመልሱ"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"መልስ የተሰጠው የ<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ጥሪ ይመልሱ"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"ያመለጠ የ<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ጥሪ"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"የ<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ጥሪ መልሰዋል"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"ለ<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> ይደውሉ። መጨረሻ ጊዜ የተደወለላቸው በ<xliff:g id="TIMEOFCALL">%3$s</xliff:g>።"</string>
+    <string name="description_call_last" msgid="491385778814705302">"ለ<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> ይደውሉ። የተደወለላቸው በ<xliff:g id="TIMEOFCALL">%3$s</xliff:g>።"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"የፅሁፍ መልዕክት ወደ <xliff:g id="NAME">%1$s</xliff:g> ላክ"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"ያልተሰማ የድምፅመልዕክት"</string>
-    <!-- no translation found for description_start_voice_search (520539488194946012) -->
-    <skip />
-    <string name="call_log_empty_gecode" msgid="5588904744812100846">"-"</string>
+    <string name="description_clear_search" msgid="688023606766232904">"ፍለጋን አጽዳ"</string>
+    <string name="description_start_voice_search" msgid="520539488194946012">"በድምፅ ፍለጋ ይጀምሩ"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"ደውል<xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"ያልታወቀ"</string>
     <string name="voicemail" msgid="3851469869202611441">"የድምፅ መልዕክት"</string>
@@ -134,7 +143,8 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"ከSIM ካርድ ላይ በመጫን ላይ..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"የSIM ካርድ ዕውቂያዎች"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"ይህንን ባህሪ ለመጠቀም የሰዎች መተግበሪያውን ዳግም ያንቁት።"</string>
-    <string name="dialer_hint_find_contact" msgid="9190419749917566623">"ስም ወይም ስልክ ይተይቡ"</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"የድምጽ ፍለጋ አይገኝም።"</string>
+    <string name="dialer_hint_find_contact" msgid="8798845521253672403">"ስም ወይም ስልክ ቁጥር ይተይቡ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ሁሉም"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ያመለጡ"</string>
     <string name="recentMissed_empty" msgid="5427113551557296665">"ምንም በቅርብ ጊዜ ያመለጡ ጥሪዎች የሉም።"</string>
@@ -142,12 +152,27 @@
     <string name="show_all_contacts" msgid="1732256558071778056">"ሁሉንም ዕውቂያዎች አሳይ"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ተወዳጆችን ብቻ አሳይ"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ታሪክ"</string>
-    <!-- no translation found for show_all_contacts_title (8395378484578221791) -->
-    <skip />
-    <!-- no translation found for show_all_contacts_button_text (8057452310403090131) -->
-    <skip />
-    <!-- no translation found for favorite_hidden (4837366417440391323) -->
-    <skip />
-    <!-- no translation found for favorite_hidden_undo (2508998611039406474) -->
-    <skip />
+    <string name="dialpad_0_number" msgid="8859392433961251108">"0"</string>
+    <string name="dialpad_1_number" msgid="6536740525419909212">"1"</string>
+    <string name="dialpad_2_number" msgid="4941546415280852148">"2"</string>
+    <string name="dialpad_3_number" msgid="6539414865185536881">"3"</string>
+    <string name="dialpad_4_number" msgid="979988372051042362">"4"</string>
+    <string name="dialpad_5_number" msgid="5492272478939926734">"5"</string>
+    <string name="dialpad_6_number" msgid="8044579516869379093">"6"</string>
+    <string name="dialpad_7_number" msgid="4175113016564167123">"7"</string>
+    <string name="dialpad_8_number" msgid="7949849563865941621">"8"</string>
+    <string name="dialpad_9_number" msgid="4377059952097526576">"9"</string>
+    <string name="show_all_contacts_title" msgid="8395378484578221791">"ሁሉም እውቂያዎች"</string>
+    <string name="show_all_contacts_button_text" msgid="8057452310403090131">"ሁሉም እውቂያዎች"</string>
+    <string name="favorite_hidden" msgid="5011234945140912047">"ከተወዳጆች ውስጥ ተወግዷል።"</string>
+    <string name="favorite_hidden_undo" msgid="2508998611039406474">"ቀልብስ"</string>
+    <string name="search_shortcut_call_number" msgid="7277194656832895870">"ለ<xliff:g id="NUMBER">%s</xliff:g> ደውል"</string>
+    <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"ወደ ዕውቂያዎች አክል"</string>
+    <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> አዲስ ያልተመለሱ ጥሪዎች"</string>
+    <string name="no_favorites" msgid="5212485868783382971">"ተወዳጆች እና አብዛኛውን ጊዜ\nየሚደውሉላቸው እውቂያዎች እዚህ ይታያሉ።\nስለዚህ መደወል ይጀምሩ።"</string>
+    <string name="contact_tooltip" msgid="7817483485692282287">"ሁሉንም ቁጥሮች ለማየት ምስሉን መታ ያድርጉ ወይም ቅደም ተከተላቸውን ለማስተካከል ተጭነው ይያዙ"</string>
+    <string name="description_dismiss" msgid="2146276780562549643">"አሰናብት"</string>
+    <string name="remove_contact" msgid="1080555335283662961">"አስወግድ"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"አቋራጭ መደወያ"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ሁሉም እውቂያዎች"</string>
 </resources>
