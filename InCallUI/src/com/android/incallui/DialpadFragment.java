@@ -43,7 +43,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         implements DialpadPresenter.DialpadUi, View.OnTouchListener, View.OnKeyListener,
         View.OnHoverListener, View.OnClickListener {
 
-    private static final float DIALPAD_SLIDE_FRACTION = 0.67f;
+    private static final float DIALPAD_SLIDE_FRACTION = 1.0f;
 
     /**
      * LinearLayout with getter and setter methods for the translationY property using floats,
