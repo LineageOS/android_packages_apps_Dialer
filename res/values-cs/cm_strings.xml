@@ -52,4 +52,7 @@
 
     <string name="menu_add_to_blacklist">Přidat na černou listinu</string>
     <string name="toast_added_to_blacklist">%s bylo přidáno na černou listinu.</string>
+
+    <string name="nearby_places">Blízká místa</string>
+    <string name="people">Lidé</string>
 </resources>
