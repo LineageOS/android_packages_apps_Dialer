@@ -15,6 +15,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_log_stats_title">Statistiche</string>
     <string name="callStatsDetailTitle">Dettagli chiamate</string>
     <string name="call_stats">Statistiche</string>
     <string name="call_stats_refresh">Aggiorna</string>
@@ -46,5 +47,6 @@
     <string name="call_stats_sort_by_count">Ordina per numero</string>
     <string name="menu_add_to_blacklist">Aggiungi a blacklist</string>
     <string name="toast_added_to_blacklist">%s aggiunto a blacklist.</string>
-    <string name="call_log_stats_title">Statistiche</string>
+    <string name="nearby_places">Posti nelle vicinanze</string>
+    <string name="people">Persone</string>
 </resources>
