@@ -21,6 +21,7 @@ import com.android.services.telephony.common.Call.State;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnCancelListener;
@@ -308,6 +309,10 @@ public class InCallActivity extends Activity {
         InCallPresenter.getInstance().getProximitySensor().onConfigurationChanged(config);
     }
 
+    public CallButtonFragment getCallButtonFragment() {
+        return mCallButtonFragment;
+    }
+
     private void internalResolveIntent(Intent intent) {
         final String action = intent.getAction();
 
@@ -365,7 +370,7 @@ public class InCallActivity extends Activity {
         if (mDialpadFragment == null) {
             mDialpadFragment = (DialpadFragment) getFragmentManager()
                     .findFragmentById(R.id.dialpadFragment);
-            mDialpadFragment.getView().setVisibility(View.INVISIBLE);
+            getFragmentManager().beginTransaction().hide(mDialpadFragment).commit();
         }
 
         if (mConferenceManagerFragment == null) {
@@ -398,13 +403,15 @@ public class InCallActivity extends Activity {
     }
 
     public void displayDialpad(boolean showDialpad) {
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
         if (showDialpad) {
-            mDialpadFragment.setVisible(true);
-            mCallCardFragment.setVisible(false);
+            ft.setCustomAnimations(R.anim.incall_dialpad_slide_in, 0);
+            ft.show(mDialpadFragment);
         } else {
-            mDialpadFragment.setVisible(false);
-            mCallCardFragment.setVisible(true);
+            ft.setCustomAnimations(0, R.anim.incall_dialpad_slide_out);
+            ft.hide(mDialpadFragment);
         }
+        ft.commitAllowingStateLoss();
 
         InCallPresenter.getInstance().getProximitySensor().onDialpadVisible(showDialpad);
     }
