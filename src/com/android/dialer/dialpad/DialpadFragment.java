@@ -1563,6 +1563,9 @@ public class DialpadFragment extends Fragment
      * Update the enabledness of the "Dial" and "Backspace" buttons if applicable.
      */
     private void updateDialAndDeleteButtonEnabledState() {
+        if (getActivity() == null) {
+            return;
+        }
         final boolean digitsNotEmpty = !isDigitsEmpty();
         mDelete.setEnabled(digitsNotEmpty);
         // On CDMA phones, if we're already on a call, we *always* enable the Dial button (since
