@@ -970,7 +970,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void setDialButtonEnabled(boolean enabled) {
-        mDialButton.setEnabled(enabled);
+        if (mDialButton != null) {
+            mDialButton.setEnabled(enabled);
+        }
     }
 
     @Override
