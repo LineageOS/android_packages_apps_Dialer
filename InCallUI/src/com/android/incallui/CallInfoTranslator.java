@@ -79,7 +79,7 @@ final class CallInfoTranslator {
 
         // TODO: Each CallService needs to provide information what kind of call capabilities they
         // support. For now, always assume that all calls support hold by default.
-        call.addCapabilities(Call.Capabilities.HOLD);
+        call.addCapabilities(Call.Capabilities.HOLD | Call.Capabilities.MUTE);
 
         return call;
     }
