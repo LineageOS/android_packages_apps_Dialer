@@ -47,6 +47,6 @@
     <string name="call_stats_sort_by_count">Ταξινόμηση κατά αριθμό κλήσεων</string>
     <string name="menu_add_to_blacklist">Προσθήση στη μαύρη λίστα</string>
     <string name="toast_added_to_blacklist">%s προστέθηκε στη μαύρη λίστα.</string>
-    <string name="nearby_places">Κοντινά μέρη</string>
-    <string name="people">Άνθρωποι</string>
+    <string name="nearby_places">Κοντινές τοποθεσίες</string>
+    <string name="people">Άτομα</string>
 </resources>
