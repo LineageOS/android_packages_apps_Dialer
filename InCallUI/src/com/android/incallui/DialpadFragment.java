@@ -20,13 +20,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.method.DialerKeyListener;
+import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import java.util.HashMap;
 
@@ -36,6 +39,61 @@ import java.util.HashMap;
 public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPresenter.DialpadUi>
         implements DialpadPresenter.DialpadUi, View.OnTouchListener, View.OnKeyListener,
         View.OnHoverListener, View.OnClickListener {
+
+    private static final float DIALPAD_SLIDE_FRACTION = 0.67f;
+
+    /**
+     * LinearLayout with getter and setter methods for the translationY property using floats,
+     * for animation purposes.
+     */
+    public static class DialpadSlidingLinearLayout extends LinearLayout {
+
+        public DialpadSlidingLinearLayout(Context context) {
+            super(context);
+        }
+
+        public DialpadSlidingLinearLayout(Context context, AttributeSet attrs) {
+            super(context, attrs);
+        }
+
+        public DialpadSlidingLinearLayout(Context context, AttributeSet attrs, int defStyle) {
+            super(context, attrs, defStyle);
+        }
+
+        public float getYFraction() {
+            final int height = getHeight();
+            if (height == 0) return 0;
+            return getTranslationY() / height;
+        }
+
+        public void setYFraction(float yFraction) {
+            setTranslationY(yFraction * getHeight());
+        }
+    }
+
+    /**
+     * LinearLayout that always returns true for onHoverEvent callbacks, to fix
+     * problems with accessibility due to the dialpad overlaying other fragments.
+     */
+    public static class HoverIgnoringLinearLayout extends LinearLayout {
+
+        public HoverIgnoringLinearLayout(Context context) {
+            super(context);
+        }
+
+        public HoverIgnoringLinearLayout(Context context, AttributeSet attrs) {
+            super(context, attrs);
+        }
+
+        public HoverIgnoringLinearLayout(Context context, AttributeSet attrs, int defStyle) {
+            super(context, attrs, defStyle);
+        }
+
+        @Override
+        public boolean onHoverEvent(MotionEvent event) {
+            return true;
+        }
+    }
 
     private EditText mDtmfDialerField;
 
@@ -381,6 +439,29 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
 
             setupKeypad(parent);
         }
+
+        final ViewTreeObserver vto = parent.getViewTreeObserver();
+        // Adjust the translation of the DialpadFragment in a preDrawListener instead of in
+        // DialtactsActivity, because at the point in time when the DialpadFragment is added,
+        // its views have not been laid out yet.
+        final ViewTreeObserver.OnPreDrawListener
+                preDrawListener = new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                if (isHidden()) return true;
+                if (parent.getTranslationY() == 0) {
+                    ((DialpadSlidingLinearLayout) parent)
+                            .setYFraction(DIALPAD_SLIDE_FRACTION);
+                }
+                final ViewTreeObserver vto = parent.getViewTreeObserver();
+                vto.removeOnPreDrawListener(this);
+                return true;
+            }
+
+        };
+
+        vto.addOnPreDrawListener(preDrawListener);
+
         return parent;
     }
 
