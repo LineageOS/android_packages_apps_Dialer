@@ -31,7 +31,7 @@
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"የድምፅ መልዕክት አጋራ"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"ምዝግብ ማስታወሻባዶ ነው..."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"የጥሪ ማስታወሻ አጥራ"</string>
-    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"ሁሉም የጥሪ ማህደሮችህ ይሰረዛሉ፡፡"</string>
+    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"ሁሉም የጥሪ ማህደሮችዎ ይሰረዛሉ።"</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"የጥሪ ምዝግብ ማስታወሻ በማጥራት ላይ…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="1746619685488504230">"የድምፅ መልዕክት"</item>
@@ -91,7 +91,7 @@
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"የድምፅ መልዕክቶች ብቻ አሳይ"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"ሁሉንም ጥሪዎች አሳይ"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"2 ሴኮንድ ፋታ አክል"</string>
-    <string name="add_wait" msgid="3360818652790319634">"ጠብቅአክል"</string>
+    <string name="add_wait" msgid="3360818652790319634">"መጠበቅ አክል"</string>
     <string name="call_settings" msgid="7666474782093693667">"ቅንብሮች"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"አዲስ ዕውቅያ"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"ሁሉም ዕውቂያዎች"</string>
