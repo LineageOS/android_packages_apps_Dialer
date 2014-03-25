@@ -35,7 +35,7 @@
     <string name="callFailed_powerOff" msgid="2766035859391549713">"Slå radio fra"</string>
     <string name="callFailed_simError" msgid="4476360200030635828">"Der er intet SIM-kort, eller der er SIM-kortfejl"</string>
     <string name="callFailed_outOfService" msgid="4825791466557236225">"Området er uden for netværksdækning"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Udgående opkald er begrænset af faste opkaldsnumre."</string>
+    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Udgående opkald er begrænset til angivne opkaldsnumre."</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Du kan ikke foretage udgående opkald, mens opkaldsspærring er slået til."</string>
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Alle opkald er begrænset af adgangskontrol."</string>
     <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Nødopkald er begrænset af adgangskontrol."</string>
@@ -55,7 +55,7 @@
     <string name="pause_prompt_no" msgid="6686238803236884877">"Nej"</string>
     <string name="wild_prompt_str" msgid="5543521676355533577">"Erstat jokertegnet med"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"Telefonmøde <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
-    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Voicemailnummer"</string>
+    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Telefonsvarernummer"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"Ringer op"</string>
     <string name="card_title_redialing" msgid="4831412164303596395">"Prøver igen"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Telefonmøde"</string>
@@ -76,7 +76,7 @@
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Ny telefonsvarerbesked"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Nye telefonsvarerbeskeder (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Ring til <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Voicemailnummeret er ukendt"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Telefonsvarernummeret er ukendt"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Ingen dækning"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Det valgte netværk (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) er ikke tilgængeligt"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Læg på"</string>

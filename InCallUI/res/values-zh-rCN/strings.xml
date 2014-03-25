@@ -85,8 +85,8 @@
     <string name="incall_error_power_off" msgid="6550191216405193368">"要进行呼叫，请先关闭飞行模式。"</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"尚未注册网络。"</string>
     <string name="incall_error_out_of_service" msgid="8587993036435080418">"无法连接到移动网络"</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"拨号未送出，因为输入的号码无效。"</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"拨号未送出。"</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"拨号失败，因为输入的号码无效。"</string>
+    <string name="incall_error_call_failed" msgid="4313552620858880999">"拨号失败。"</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"正在启动 MMI 序列..."</string>
     <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"不支持此服务。"</string>
     <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"无法切换通话。"</string>
