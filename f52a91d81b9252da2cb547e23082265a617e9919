@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bae84128_f10c6e44",
+        "filename": "res/values-da/cm_strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2014-03-25T11:50:19Z",
+      "side": 1,
+      "message": "Untranslatable http://review.cyanogenmod.org/#/c/60835/3/res/values/strings.xml",
+      "revId": "f52a91d81b9252da2cb547e23082265a617e9919",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
