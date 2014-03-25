@@ -17,6 +17,7 @@
 package com.android.incallui;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.method.DialerKeyListener;
@@ -30,6 +31,8 @@ import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import java.util.HashMap;
 
@@ -40,7 +43,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         implements DialpadPresenter.DialpadUi, View.OnTouchListener, View.OnKeyListener,
         View.OnHoverListener, View.OnClickListener {
 
-    private static final float DIALPAD_SLIDE_FRACTION = 0.67f;
+    private static final float DIALPAD_SLIDE_FRACTION = 1.0f;
 
     /**
      * LinearLayout with getter and setter methods for the translationY property using floats,
@@ -520,21 +523,43 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         }
     }
 
-    /**
-     * setup the keys on the dialer activity, using the keymaps.
-     */
-    private void setupKeypad(View parent) {
-        // for each view id listed in the displaymap
+    private void setupKeypad(View fragmentView) {
+        final int[] buttonIds = new int[] {R.id.zero, R.id.one, R.id.two, R.id.three, R.id.four,
+                R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.star, R.id.pound};
+
+        final int[] numberIds = new int[] {R.string.dialpad_0_number, R.string.dialpad_1_number,
+                R.string.dialpad_2_number, R.string.dialpad_3_number, R.string.dialpad_4_number,
+                R.string.dialpad_5_number, R.string.dialpad_6_number, R.string.dialpad_7_number,
+                R.string.dialpad_8_number, R.string.dialpad_9_number, R.string.dialpad_star_number,
+                R.string.dialpad_pound_number};
+
+        final int[] letterIds = new int[] {R.string.dialpad_0_letters, R.string.dialpad_1_letters,
+                R.string.dialpad_2_letters, R.string.dialpad_3_letters, R.string.dialpad_4_letters,
+                R.string.dialpad_5_letters, R.string.dialpad_6_letters, R.string.dialpad_7_letters,
+                R.string.dialpad_8_letters, R.string.dialpad_9_letters,
+                R.string.dialpad_star_letters, R.string.dialpad_pound_letters};
+
+        final Resources resources = getResources();
+
         View button;
-        for (int viewId : mDisplayMap.keySet()) {
-            // locate the view
-            button = parent.findViewById(viewId);
-            // Setup the listeners for the buttons
+        TextView numberView;
+        TextView lettersView;
+
+        for (int i = 0; i < buttonIds.length; i++) {
+            button = fragmentView.findViewById(buttonIds[i]);
             button.setOnTouchListener(this);
             button.setClickable(true);
             button.setOnKeyListener(this);
             button.setOnHoverListener(this);
             button.setOnClickListener(this);
+            numberView = (TextView) button.findViewById(R.id.dialpad_key_number);
+            lettersView = (TextView) button.findViewById(R.id.dialpad_key_letters);
+            final String numberString = resources.getString(numberIds[i]);
+            numberView.setText(numberString);
+            button.setContentDescription(numberString);
+            if (lettersView != null) {
+                lettersView.setText(resources.getString(letterIds[i]));
+            }
         }
     }
 }
