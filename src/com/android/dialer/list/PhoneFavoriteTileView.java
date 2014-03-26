@@ -16,15 +16,10 @@
  */
 package com.android.dialer.list;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.ClipData;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
 import android.view.View;
 
 import com.android.contacts.common.ContactPhotoManager;
@@ -34,7 +29,6 @@ import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.dialer.R;
 import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
-import com.android.dialer.list.PhoneFavoritesTileAdapter.ViewTypes;
 
 /**
  * A light version of the {@link com.android.contacts.common.list.ContactTileView} that is used in
@@ -84,17 +78,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
             public boolean onLongClick(View v) {
                 final PhoneFavoriteTileView view = (PhoneFavoriteTileView) v;
                 // NOTE The drag shadow is handled in the ListView.
-                if (view instanceof PhoneFavoriteRegularRowView) {
-                    final ContactTileRow parent = view.getParentRow();
-                    // If the view is regular row, start drag the row view.
-                    // Drag is not available for the item exceeds the PIN_LIMIT.
-                    if (parent.getRegularRowItemIndex() < PhoneFavoritesTileAdapter.PIN_LIMIT) {
-                        parent.startDrag(EMPTY_CLIP_DATA, new View.DragShadowBuilder(), null, 0);
-                    }
-                } else {
-                    // If the view is a tile view, start drag the tile.
-                    view.startDrag(EMPTY_CLIP_DATA, new View.DragShadowBuilder(), null, 0);
-                }
+                view.startDrag(EMPTY_CLIP_DATA, new View.DragShadowBuilder(), null, 0);
                 return true;
             }
         });
