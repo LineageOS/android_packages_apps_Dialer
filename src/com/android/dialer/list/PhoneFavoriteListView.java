@@ -242,15 +242,10 @@ public class PhoneFavoriteListView extends ListView implements OnDragDropListene
             return;
         }
 
-        if (tileView instanceof PhoneFavoriteRegularRowView) {
-            mDragShadowLeft = tileView.getParentRow().getLeft();
-            mDragShadowTop = tileView.getParentRow().getTop();
-        } else {
-            // Square tile is relative to the contact tile,
-            // and contact tile is relative to this list view.
-            mDragShadowLeft = tileView.getLeft() + tileView.getParentRow().getLeft();
-            mDragShadowTop = tileView.getTop() + tileView.getParentRow().getTop();
-        }
+        // Square tile is relative to the contact tile,
+        // and contact tile is relative to this list view.
+        mDragShadowLeft = tileView.getLeft() + tileView.getParentRow().getLeft();
+        mDragShadowTop = tileView.getTop() + tileView.getParentRow().getTop();
 
         mDragShadowOverlay.setImageBitmap(mDragShadowBitmap);
         mDragShadowOverlay.setVisibility(VISIBLE);

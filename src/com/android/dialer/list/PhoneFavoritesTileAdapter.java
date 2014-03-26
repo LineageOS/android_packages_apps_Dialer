@@ -50,9 +50,6 @@ import java.util.PriorityQueue;
 
 /**
  * Also allows for a configurable number of columns as well as a maximum row of tiled contacts.
- *
- * This adapter has been rewritten to only support a maximum of one row for favorites.
- *
  */
 public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         OnDragDropListener {
@@ -461,11 +458,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
      */
     @Override
     public long getItemId(int position) {
-        if (getItemViewType(position) == ViewTypes.FREQUENT) {
-            return getAdjustedItemId(getItem(position).get(0).id);
-        } else {
-            return position;
-        }
+        return position;
     }
 
     /**
@@ -531,9 +524,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
     private int getLayoutResourceId(int viewType) {
         switch (viewType) {
-            case ViewTypes.FREQUENT:
-                return R.layout.phone_favorite_regular_row_view;
-            case ViewTypes.TOP:
+          case ViewTypes.TOP:
                 return R.layout.phone_favorite_tile_view;
             default:
                 throw new IllegalArgumentException("Unrecognized viewType " + viewType);
@@ -546,11 +537,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
     @Override
     public int getItemViewType(int position) {
-        if (position < getMaxContactsInTiles()) {
-            return ViewTypes.TOP;
-        } else {
-            return ViewTypes.FREQUENT;
-        }
+        return ViewTypes.TOP;
     }
 
     /**
@@ -710,7 +697,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
          * Configures the row to add {@link ContactEntry}s information to the views
          */
         public void configureRow(ArrayList<ContactEntry> list, int position, boolean isLastRow) {
-            int columnCount = mItemViewType == ViewTypes.FREQUENT ? 1 : mColumnCount;
+            final int columnCount = mColumnCount;
             mPosition = position;
 
             // Adding tiles to row and filling in contact information
@@ -718,13 +705,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                 ContactEntry entry =
                         columnCounter < list.size() ? list.get(columnCounter) : null;
                 addTileFromEntry(entry, columnCounter, isLastRow);
-            }
-            if (columnCount == 1) {
-                if (list.get(0) == ContactEntry.BLANK_ENTRY) {
-                    setVisibility(View.INVISIBLE);
-                } else {
-                    setVisibility(View.VISIBLE);
-                }
             }
         }
 
@@ -760,11 +740,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                     contactTile.setPaddingRelative(0, 0,
                             childIndex >= mColumnCount - 1 ? 0 : mPaddingInPixels, 0);
                     entryIndex = getFirstContactEntryIndexForPosition(mPosition) + childIndex;
-                    break;
-                case ViewTypes.FREQUENT:
-                    contactTile.setHorizontalDividerVisibility(
-                            isLastRow ? View.GONE : View.VISIBLE);
-                    entryIndex = getFirstContactEntryIndexForPosition(mPosition);
                     break;
                 default:
                     break;
@@ -1026,9 +1001,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     }
 
     protected static class ViewTypes {
-        public static final int FREQUENT = 0;
-        public static final int TOP = 1;
-        public static final int COUNT = 2;
+        public static final int TOP = 0;
+        public static final int COUNT = 1;
     }
 
     @Override
