@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bae84128_8609672f",
+        "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 7003
+      },
+      "writtenOn": "2014-03-26T01:58:01Z",
+      "side": 1,
+      "message": "Thanks! I\u0027ll go fix the variable names. As to why I used system properties, I wanted to make it easy for people with the paid accounts to enter their credentials (via /data/local.prop or /system/build.prop). I don\u0027t plan on adding on adding a GUI preference this because it\u0027s not something used by many people.",
+      "parentUuid": "bae84128_6317f551",
+      "revId": "10967e94649292082455674cf27f6c43a1029215",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bae84128_c30c0145",
         "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-26T01:43:05Z",
       "side": 1,
       "message": "I think SystemProperties.get() returns null if not found, therefore using TextUtils.isEmpty() seems safer here.",
+      "revId": "10967e94649292082455674cf27f6c43a1029215",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bae84128_2604db13",
+        "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 7003
+      },
+      "writtenOn": "2014-03-26T01:58:01Z",
+      "side": 1,
+      "message": "Actually, it only ever returns null if the key is null: https://github.com/CyanogenMod/android_frameworks_base/blob/cm-11.0/core/jni/android_os_SystemProperties.cpp#L51\n\nI don\u0027t mind using TextUtils.isEmpty() though if you\u0027d like :)",
+      "parentUuid": "bae84128_c30c0145",
       "revId": "10967e94649292082455674cf27f6c43a1029215",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
