@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bae84128_06aef784",
+        "filename": "res/values-it/cm_caf.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3184
+      },
+      "writtenOn": "2014-03-26T07:31:29Z",
+      "side": 1,
+      "message": "Cerca anziché cercare?",
+      "revId": "1decf8cf4a38a56187be95c844ea75601c50f426",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
