@@ -167,4 +167,14 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"鈴聲與震動"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"管理會議通話"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"緊急電話號碼"</string>
+    <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
+    <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
+    <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
+    <string name="dialpad_3_number" msgid="7146166309009131439">"3"</string>
+    <string name="dialpad_4_number" msgid="9075039274846639476">"4"</string>
+    <string name="dialpad_5_number" msgid="5780019709590672721">"5"</string>
+    <string name="dialpad_6_number" msgid="8261355170951265389">"6"</string>
+    <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
+    <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
+    <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
 </resources>
