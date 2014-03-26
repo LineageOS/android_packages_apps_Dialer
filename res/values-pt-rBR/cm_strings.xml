@@ -47,4 +47,6 @@
     <string name="menu_add_to_blacklist">Adicionar à lista de bloqueio</string>
     <string name="toast_added_to_blacklist">%s adicionado à lista de bloqueio.</string>
     <string name="call_log_stats_title">Estatísticas</string>
+    <string name="nearby_places">Lugares próximos</string>
+    <string name="people">Pessoas</string>
 </resources>
