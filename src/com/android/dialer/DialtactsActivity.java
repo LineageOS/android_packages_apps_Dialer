@@ -336,7 +336,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     }
                 });
 
-
+        setupFakeActionBarItems();
         prepareSearchView();
 
         mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
@@ -346,7 +346,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     protected void onResume() {
         super.onResume();
-        setupFakeActionBarItems();
         if (mFirstLaunch) {
             displayFragment(getIntent());
         } else if (!phoneIsInUse() && mInCallDialpadUp) {
@@ -545,6 +544,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ft.commit();
         mDialButton.setVisibility(shouldShowOnscreenDialButton() ? View.VISIBLE : View.GONE);
         mDialpadButton.setVisibility(View.GONE);
+
+        if (mDialpadOverflowMenu == null) {
+            mDialpadOverflowMenu = mDialpadFragment.buildOptionsMenu(mMenuButton);
+        }
+
         mMenuButton.setOnTouchListener(mDialpadOverflowMenu.getDragToOpenListener());
     }
 
@@ -673,17 +677,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             if (mOverflowMenu == null) {
                 mOverflowMenu = buildOptionsMenu(mMenuButton);
             }
-            if (mDialpadOverflowMenu == null) {
-                mDialpadOverflowMenu = mDialpadFragment.buildOptionsMenu(mMenuButton);
-            }
-            // Initial state is with dialpad fragment not shown
             mMenuButton.setOnTouchListener(mOverflowMenu.getDragToOpenListener());
         }
 
         mFakeActionBar = findViewById(R.id.fake_action_bar);
 
         mCallHistoryButton = findViewById(R.id.call_history_button);
-        // mCallHistoryButton.setMinimumWidth(fakeMenuItemWidth);
         mCallHistoryButton.setOnClickListener(this);
 
         mDialButton = findViewById(R.id.dial_button);
@@ -691,7 +690,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mDialButton.setOnLongClickListener(this);
 
         mDialpadButton = findViewById(R.id.dialpad_button);
-        // DialpadButton.setMinimumWidth(fakeMenuItemWidth);
         mDialpadButton.setOnClickListener(this);
     }
 
