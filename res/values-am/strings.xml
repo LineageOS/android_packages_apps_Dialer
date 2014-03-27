@@ -26,11 +26,11 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ከመደወል በፊት ቁጥር አርትዕ"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"ወደ ዕውቂያዎች አክል"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"ከጥሪ ማስታወሻ አስወግድ"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"የጥሪ ማስታወሻ አጥራ"</string>
+    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"የጥሪ ማስታወሻ አጽዳ"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"የድምፅ መልዕክት ሰርዝ"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"የድምፅ መልዕክት አጋራ"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"ምዝግብ ማስታወሻባዶ ነው..."</string>
-    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"የጥሪ ማስታወሻ አጥራ"</string>
+    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"የጥሪ ማስታወሻ አጽዳ"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"ሁሉም የጥሪ ማህደሮችዎ ይሰረዛሉ።"</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"የጥሪ ምዝግብ ማስታወሻ በማጥራት ላይ…"</string>
   <plurals name="notification_voicemail_title">
