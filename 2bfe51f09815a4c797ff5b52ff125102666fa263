@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bae84128_578f0723",
+        "filename": "res/values-da/cm_caf.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2014-03-27T11:01:02Z",
+      "side": 1,
+      "message": "Remove the quotes (http://review.cyanogenmod.org/#/c/60835/3/res/values/strings.xml)",
+      "revId": "2bfe51f09815a4c797ff5b52ff125102666fa263",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
