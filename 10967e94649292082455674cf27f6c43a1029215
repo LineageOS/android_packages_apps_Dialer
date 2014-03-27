@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "bae84128_f790dbee",
+        "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 9330
+      },
+      "writtenOn": "2014-03-27T13:51:30Z",
+      "side": 1,
+      "message": "Do you have any suggestions for an alternative? Is there a CM settings sqlite he could use for his two rows?",
+      "parentUuid": "bae84128_7cb6728b",
+      "revId": "10967e94649292082455674cf27f6c43a1029215",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bae84128_c30c0145",
         "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
         "patchSetId": 2
