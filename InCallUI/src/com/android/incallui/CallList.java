@@ -23,6 +23,7 @@ import com.google.common.base.Preconditions;
 
 import android.os.Handler;
 import android.os.Message;
+import android.telephony.DisconnectCause;
 
 import com.android.services.telephony.common.Call;
 
@@ -373,17 +374,17 @@ public class CallList {
         Preconditions.checkState(call.getState() == Call.State.DISCONNECTED);
 
 
-        final Call.DisconnectCause cause = call.getDisconnectCause();
+        final int cause = call.getDisconnectCause();
         final int delay;
         switch (cause) {
-            case LOCAL:
+            case DisconnectCause.LOCAL:
                 delay = DISCONNECTED_CALL_SHORT_TIMEOUT_MS;
                 break;
-            case NORMAL:
+            case DisconnectCause.NORMAL:
                 delay = DISCONNECTED_CALL_MEDIUM_TIMEOUT_MS;
                 break;
-            case INCOMING_REJECTED:
-            case INCOMING_MISSED:
+            case DisconnectCause.INCOMING_REJECTED:
+            case DisconnectCause.INCOMING_MISSED:
                 // no delay for missed/rejected incoming calls
                 delay = 0;
                 break;

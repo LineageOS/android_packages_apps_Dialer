@@ -22,6 +22,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.telephony.DisconnectCause;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -233,7 +234,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn,
+    public void setCallState(int state, int cause, boolean bluetoothOn,
             String gatewayLabel, String gatewayNumber) {
         String callStateLabel = null;
 
@@ -241,7 +242,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         callStateLabel = getCallStateLabelFromState(state, cause);
 
         Log.v(this, "setCallState " + callStateLabel);
-        Log.v(this, "DisconnectCause " + cause);
+        Log.v(this, "DisconnectCause " + DisconnectCause.toString(cause));
         Log.v(this, "bluetooth on " + bluetoothOn);
         Log.v(this, "gateway " + gatewayLabel + gatewayNumber);
 
@@ -360,7 +361,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      * Gets the call state label based on the state of the call and
      * cause of disconnect
      */
-    private String getCallStateLabelFromState(int state, Call.DisconnectCause cause) {
+    private String getCallStateLabelFromState(int state, int cause) {
         final Context context = getView().getContext();
         String callStateLabel = null;  // Label to display as part of the call banner
 
@@ -401,8 +402,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     /**
      * Maps the disconnect cause to a resource string.
+     *
+     * @param cause disconnect cause as defined in {@link DisconnectCause}
      */
-    private String getCallFailedString(Call.DisconnectCause cause) {
+    private String getCallFailedString(int cause) {
         int resID = R.string.card_title_call_ended;
 
         // TODO: The card *title* should probably be "Call ended" in all
@@ -410,61 +413,61 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         // probably also display the specific failure reason somewhere...
 
         switch (cause) {
-            case BUSY:
+            case DisconnectCause.BUSY:
                 resID = R.string.callFailed_userBusy;
                 break;
 
-            case CONGESTION:
+            case DisconnectCause.CONGESTION:
                 resID = R.string.callFailed_congestion;
                 break;
 
-            case TIMED_OUT:
+            case DisconnectCause.TIMED_OUT:
                 resID = R.string.callFailed_timedOut;
                 break;
 
-            case SERVER_UNREACHABLE:
+            case DisconnectCause.SERVER_UNREACHABLE:
                 resID = R.string.callFailed_server_unreachable;
                 break;
 
-            case NUMBER_UNREACHABLE:
+            case DisconnectCause.NUMBER_UNREACHABLE:
                 resID = R.string.callFailed_number_unreachable;
                 break;
 
-            case INVALID_CREDENTIALS:
+            case DisconnectCause.INVALID_CREDENTIALS:
                 resID = R.string.callFailed_invalid_credentials;
                 break;
 
-            case SERVER_ERROR:
+            case DisconnectCause.SERVER_ERROR:
                 resID = R.string.callFailed_server_error;
                 break;
 
-            case OUT_OF_NETWORK:
+            case DisconnectCause.OUT_OF_NETWORK:
                 resID = R.string.callFailed_out_of_network;
                 break;
 
-            case LOST_SIGNAL:
-            case CDMA_DROP:
+            case DisconnectCause.LOST_SIGNAL:
+            case DisconnectCause.CDMA_DROP:
                 resID = R.string.callFailed_noSignal;
                 break;
 
-            case LIMIT_EXCEEDED:
+            case DisconnectCause.LIMIT_EXCEEDED:
                 resID = R.string.callFailed_limitExceeded;
                 break;
 
-            case POWER_OFF:
+            case DisconnectCause.POWER_OFF:
                 resID = R.string.callFailed_powerOff;
                 break;
 
-            case ICC_ERROR:
+            case DisconnectCause.ICC_ERROR:
                 resID = R.string.callFailed_simError;
                 break;
 
-            case OUT_OF_SERVICE:
+            case DisconnectCause.OUT_OF_SERVICE:
                 resID = R.string.callFailed_outOfService;
                 break;
 
-            case INVALID_NUMBER:
-            case UNOBTAINABLE_NUMBER:
+            case DisconnectCause.INVALID_NUMBER:
+            case DisconnectCause.UNOBTAINABLE_NUMBER:
                 resID = R.string.callFailed_unobtainable_number;
                 break;
 
