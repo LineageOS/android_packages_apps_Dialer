@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "bae84128_0d21f2fb",
+        "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-03-28T21:19:31Z",
+      "side": 1,
+      "message": "Yes, there is: The system settings DB can be read and written by the \u0027content\u0027 tool, so this stuff should be stored there.",
+      "parentUuid": "bae84128_f790dbee",
+      "revId": "10967e94649292082455674cf27f6c43a1029215",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bae84128_c30c0145",
         "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
         "patchSetId": 2
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Actually, it only ever returns null if the key is null: https://github.com/CyanogenMod/android_frameworks_base/blob/cm-11.0/core/jni/android_os_SystemProperties.cpp#L51\n\nI don\u0027t mind using TextUtils.isEmpty() though if you\u0027d like :)",
       "parentUuid": "bae84128_c30c0145",
+      "revId": "10967e94649292082455674cf27f6c43a1029215",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bae84128_ad23a604",
+        "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-03-28T21:19:31Z",
+      "side": 1,
+      "message": "Ok then - in that case I think using accountSid.isEmpty() would be the best idea.",
+      "parentUuid": "bae84128_2604db13",
       "revId": "10967e94649292082455674cf27f6c43a1029215",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
