@@ -391,9 +391,6 @@ public class DialpadFragment extends Fragment
 
         vto.addOnPreDrawListener(preDrawListener);
 
-        // Load up the resources for the text field.
-        Resources r = getResources();
-
         mDigitsContainer = fragmentView.findViewById(R.id.digits_container);
         mDigits = (EditText) fragmentView.findViewById(R.id.digits);
         mDigits.setKeyListener(UnicodeDialerKeyListener.INSTANCE);
@@ -440,11 +437,6 @@ public class DialpadFragment extends Fragment
         mDialpadChooser.setOnItemClickListener(this);
 
         return fragmentView;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     private boolean isLayoutReady() {
@@ -1048,7 +1040,6 @@ public class DialpadFragment extends Fragment
      * the previous digit or cancel previously entered character.
      */
     private void removePreviousDigitIfPossible() {
-        final Editable editable = mDigits.getText();
         final int currentPosition = mDigits.getSelectionStart();
         if (currentPosition > 0) {
             mDigits.setSelection(currentPosition);
@@ -1164,11 +1155,6 @@ public class DialpadFragment extends Fragment
 
     public void clearDialpad() {
         mDigits.getText().clear();
-    }
-
-    private String getCallOrigin() {
-        return (getActivity() instanceof DialtactsActivity) ?
-                ((DialtactsActivity) getActivity()).getCallOrigin() : null;
     }
 
     private void handleDialButtonClickWithEmptyDigits() {
