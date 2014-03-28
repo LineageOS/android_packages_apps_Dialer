@@ -294,9 +294,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         super.onCreate(savedInstanceState);
         mFirstLaunch = true;
 
-        final Intent intent = getIntent();
-        fixIntent(intent);
-
         setContentView(R.layout.dialtacts_activity);
         getWindow().setBackgroundDrawable(null);
 
@@ -700,38 +697,25 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         return menu;
     }
 
-    private void fixIntent(Intent intent) {
-        // This should be cleaned up: the call key used to send an Intent
-        // that just said to go to the recent calls list.  It now sends this
-        // abstract action, but this class hasn't been rewritten to deal with it.
-        if (Intent.ACTION_CALL_BUTTON.equals(intent.getAction())) {
-            intent.setDataAndType(Calls.CONTENT_URI, Calls.CONTENT_TYPE);
-            intent.putExtra("call_key", true);
-            setIntent(intent);
-        }
-    }
-
     /**
      * Returns true if the intent is due to hitting the green send key (hardware call button:
      * KEYCODE_CALL) while in a call.
      *
      * @param intent the intent that launched this activity
-     * @param recentCallsRequest true if the intent is requesting to view recent calls
      * @return true if the intent is due to hitting the green send key while in a call
      */
-    private boolean isSendKeyWhileInCall(Intent intent, boolean recentCallsRequest) {
-        // If there is a call in progress go to the call screen
-        if (recentCallsRequest) {
-            final boolean callKey = intent.getBooleanExtra("call_key", false);
+    private boolean isSendKeyWhileInCall(Intent intent) {
+        // If there is a call in progress and the user launched the dialer by hitting the call
+        // button, go straight to the in-call screen.
+        final boolean callKey = Intent.ACTION_CALL_BUTTON.equals(intent.getAction());
 
-            try {
-                ITelephony phone = ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
-                if (callKey && phone != null && phone.showCallScreen()) {
-                    return true;
-                }
-            } catch (RemoteException e) {
-                Log.e(TAG, "Failed to handle send while in call", e);
+        try {
+            ITelephony phone = ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
+            if (callKey && phone != null && phone.showCallScreen()) {
+                return true;
             }
+        } catch (RemoteException e) {
+            Log.e(TAG, "Failed to handle send while in call", e);
         }
 
         return false;
@@ -744,9 +728,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private void displayFragment(Intent intent) {
         // If we got here by hitting send and we're in call forward along to the in-call activity
-        boolean recentCallsRequest = Calls.CONTENT_TYPE.equals(intent.resolveType(
-            getContentResolver()));
-        if (isSendKeyWhileInCall(intent, recentCallsRequest)) {
+        if (isSendKeyWhileInCall(intent)) {
             finish();
             return;
         }
@@ -766,7 +748,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onNewIntent(Intent newIntent) {
         setIntent(newIntent);
-        fixIntent(newIntent);
         displayFragment(newIntent);
         final String action = newIntent.getAction();
 
@@ -812,28 +793,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             startActivity(intent);
         }
     };
-
-    /* TODO krelease: This is only relevant for phones that have a hard button search key (i.e.
-     * Nexus S). Supporting it is a little more tricky because of the dialpad fragment might
-     * be showing when the search key is pressed so there is more state management involved.
-
-    @Override
-    public void startSearch(String initialQuery, boolean selectInitialQuery,
-            Bundle appSearchData, boolean globalSearch) {
-        if (mRegularSearchFragment != null && mRegularSearchFragment.isAdded() && !globalSearch) {
-            if (mInSearchUi) {
-                if (mSearchView.hasFocus()) {
-                    showInputMethod(mSearchView.findFocus());
-                } else {
-                    mSearchView.requestFocus();
-                }
-            } else {
-                enterSearchUi();
-            }
-        } else {
-            super.startSearch(initialQuery, selectInitialQuery, appSearchData, globalSearch);
-        }
-    }*/
 
     private void showInputMethod(View view) {
         final InputMethodManager imm = (InputMethodManager) getSystemService(
