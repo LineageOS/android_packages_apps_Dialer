@@ -21,6 +21,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
+import android.telephony.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -191,7 +192,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             ui.setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
                     getGatewayLabel(), getGatewayNumber());
         } else {
-            ui.setCallState(Call.State.IDLE, Call.DisconnectCause.UNKNOWN, false, null, null);
+            ui.setCallState(Call.State.IDLE, DisconnectCause.NOT_VALID, false, null, null);
         }
     }
 
@@ -462,7 +463,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isConference, boolean isGeneric);
         void setSecondaryImage(Drawable image);
-        void setCallState(int state, Call.DisconnectCause cause, boolean bluetoothOn,
+        void setCallState(int state, int cause, boolean bluetoothOn,
                 String gatewayLabel, String gatewayNumber);
         void setPrimaryCallElapsedTime(boolean show, String duration);
         void setPrimaryName(String name, boolean nameIsNumber);
