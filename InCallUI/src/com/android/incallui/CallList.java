@@ -23,9 +23,9 @@ import com.google.common.base.Preconditions;
 
 import android.os.Handler;
 import android.os.Message;
+import android.telephony.DisconnectCause;
 
 import com.android.services.telephony.common.Call;
-import com.android.services.telephony.common.Call.DisconnectCause;
 
 import java.util.HashMap;
 import java.util.List;
@@ -306,7 +306,7 @@ public class CallList {
                     state != Call.State.DISCONNECTED) {
 
                 call.setState(Call.State.DISCONNECTED);
-                call.setDisconnectCause(DisconnectCause.UNKNOWN);
+                call.setDisconnectCause(DisconnectCause.NOT_VALID);
                 updateCallInMap(call);
             }
         }
@@ -381,18 +381,17 @@ public class CallList {
         Preconditions.checkState(call.getState() == Call.State.DISCONNECTED);
 
 
-        final Call.DisconnectCause cause = call.getDisconnectCause();
+        final int cause = call.getDisconnectCause();
         final int delay;
         switch (cause) {
-            case LOCAL:
+            case DisconnectCause.LOCAL:
                 delay = DISCONNECTED_CALL_SHORT_TIMEOUT_MS;
                 break;
-            case NORMAL:
-            case UNKNOWN:
+            case DisconnectCause.NORMAL:
                 delay = DISCONNECTED_CALL_MEDIUM_TIMEOUT_MS;
                 break;
-            case INCOMING_REJECTED:
-            case INCOMING_MISSED:
+            case DisconnectCause.INCOMING_REJECTED:
+            case DisconnectCause.INCOMING_MISSED:
                 // no delay for missed/rejected incoming calls
                 delay = 0;
                 break;
