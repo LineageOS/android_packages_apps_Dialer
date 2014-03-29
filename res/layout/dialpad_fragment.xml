@@ -30,47 +30,14 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@drawable/shadow_fade_up" />
-    <view class="com.android.dialer.dialpad.DialpadFragment$HoverIgnoringLinearLayout"
-        android:id="@+id/top"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_gravity="bottom"
-        android:orientation="vertical"
-        android:layoutDirection="ltr"
-        android:background="@color/background_dialpad"
-        android:clickable="true">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/dialpad_separator_line_color" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
-
-        <include layout="@layout/dialpad_digits" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="4dp" />
-
-        <include layout="@layout/dialpad" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/dialpad_separator_line_color" />
-
-        <!-- "Dialpad chooser" UI, shown only when the user brings up the
+    <include layout="@layout/dialpad_view" />
+    <!-- "Dialpad chooser" UI, shown only when the user brings up the
              Dialer while a call is already in progress.
              When this UI is visible, the other Dialer elements
              (the textfield/button and the dialpad) are hidden. -->
-        <ListView android:id="@+id/dialpadChooser"
+    <ListView android:id="@+id/dialpadChooser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:background="@color/background_dialer_light"
             android:visibility="gone" />
-
-    </view>
 </view>
