@@ -270,7 +270,7 @@ public class ContactInfoHelper {
             final List<String> segments = lookupUri.getPathSegments();
             // This returns the third path segment of the uri, where the lookup key is located.
             // See {@link android.provider.ContactsContract.Contacts#CONTENT_LOOKUP_URI}.
-            return (segments.size() < 3) ? null : segments.get(2);
+            return (segments.size() < 3) ? null : Uri.encode(segments.get(2));
         } else {
             return null;
         }
