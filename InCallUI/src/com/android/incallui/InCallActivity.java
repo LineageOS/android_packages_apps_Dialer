@@ -57,6 +57,11 @@ public class InCallActivity extends Activity {
     /** Use to pass 'showDialpad' from {@link #onNewIntent} to {@link #onResume} */
     private boolean mShowDialpadRequested;
 
+    /** Use to pass parameters for showing the PostCharDialog to {@link #onResume} */
+    private boolean mShowPostCharWaitDialogOnResume;
+    private int mShowPostCharWaitDialogCallId;
+    private String mShowPostCharWaitDialogChars;
+
     @Override
     protected void onCreate(Bundle icicle) {
         Log.d(this, "onCreate()...  this = " + this);
@@ -103,6 +108,10 @@ public class InCallActivity extends Activity {
         if (mShowDialpadRequested) {
             mCallButtonFragment.displayDialpad(true);
             mShowDialpadRequested = false;
+        }
+
+        if (mShowPostCharWaitDialogOnResume) {
+            showPostCharWaitDialog(mShowPostCharWaitDialogCallId, mShowPostCharWaitDialogChars);
         }
     }
 
@@ -440,8 +449,18 @@ public class InCallActivity extends Activity {
     }
 
     public void showPostCharWaitDialog(int callId, String chars) {
-        final PostCharDialogFragment fragment = new PostCharDialogFragment(callId,  chars);
-        fragment.show(getFragmentManager(), "postCharWait");
+        if (isForegroundActivity()) {
+            final PostCharDialogFragment fragment = new PostCharDialogFragment(callId,  chars);
+            fragment.show(getFragmentManager(), "postCharWait");
+
+            mShowPostCharWaitDialogOnResume = false;
+            mShowPostCharWaitDialogCallId = 0;
+            mShowPostCharWaitDialogChars = null;
+        } else {
+            mShowPostCharWaitDialogOnResume = true;
+            mShowPostCharWaitDialogCallId = callId;
+            mShowPostCharWaitDialogChars = chars;
+        }
     }
 
     @Override
@@ -484,18 +503,18 @@ public class InCallActivity extends Activity {
         dismissPendingDialogs();
 
         mDialog = new AlertDialog.Builder(this)
-            .setMessage(msg)
-            .setPositiveButton(R.string.ok, new OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    onDialogDismissed();
-                }})
-            .setOnCancelListener(new OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    onDialogDismissed();
-                }})
-            .create();
+                .setMessage(msg)
+                .setPositiveButton(R.string.ok, new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        onDialogDismissed();
+                    }})
+                .setOnCancelListener(new OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        onDialogDismissed();
+                    }})
+                .create();
 
         mDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         mDialog.show();
