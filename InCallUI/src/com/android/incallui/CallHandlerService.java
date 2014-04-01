@@ -263,21 +263,21 @@ public class CallHandlerService extends Service {
         switch (msg.what) {
             case ON_UPDATE_CALL:
                 Log.i(TAG, "ON_UPDATE_CALL: " + msg.obj);
-                mCallList.onUpdate((Call) msg.obj);
+                //mCallList.onUpdate((Call) msg.obj);
                 break;
             case ON_UPDATE_MULTI_CALL:
                 Log.i(TAG, "ON_UPDATE_MULTI_CALL: " + msg.obj);
-                mCallList.onUpdate((List<Call>) msg.obj);
+                //mCallList.onUpdate((List<Call>) msg.obj);
                 break;
             case ON_UPDATE_CALL_WITH_TEXT_RESPONSES:
                 AbstractMap.SimpleEntry<Call, List<String>> entry
                         = (AbstractMap.SimpleEntry<Call, List<String>>) msg.obj;
                 Log.i(TAG, "ON_INCOMING_CALL: " + entry.getKey());
-                mCallList.onIncoming(entry.getKey(), entry.getValue());
+                //mCallList.onIncoming(entry.getKey(), entry.getValue());
                 break;
             case ON_DISCONNECT_CALL:
                 Log.i(TAG, "ON_DISCONNECT_CALL: " + msg.obj);
-                mCallList.onDisconnect((Call) msg.obj);
+                //mCallList.onDisconnect((Call) msg.obj);
                 break;
             case ON_POST_CHAR_WAIT:
                 mInCallPresenter.onPostDialCharWait(msg.arg1, (String) msg.obj);

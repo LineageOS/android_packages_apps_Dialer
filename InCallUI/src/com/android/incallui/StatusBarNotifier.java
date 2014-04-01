@@ -34,7 +34,6 @@ import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallApp.NotificationBroadcastReceiver;
 import com.android.incallui.InCallPresenter.InCallState;
-import com.android.services.telephony.common.Call;
 
 /**
  * This class adds Notifications to the status bar for the in-call experience.
@@ -224,24 +223,22 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         // This callback will always get called immediately and synchronously with whatever data
         // it has available, and may make a subsequent call later (same thread) if it had to
         // call into the contacts provider for more data.
-        mContactInfoCache.findInfo(call.getIdentification(), isIncoming,
-                new ContactInfoCacheCallback() {
-
-                    @Override
-                    public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
-                        Call call = CallList.getInstance().getCall(callId);
-                        if (call != null) {
-                            buildAndSendNotification(call, entry);
-                        }
+        mContactInfoCache.findInfo(call, isIncoming, new ContactInfoCacheCallback() {
+                @Override
+                public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
+                    Call call = CallList.getInstance().getCall(callId);
+                    if (call != null) {
+                        buildAndSendNotification(call, entry);
                     }
+                }
 
-                    @Override
-                    public void onImageLoadComplete(int callId, ContactCacheEntry entry) {
-                        Call call = CallList.getInstance().getCall(callId);
-                        if (call != null) {
-                            buildAndSendNotification(call, entry);
-                        }
-                    } });
+                @Override
+                public void onImageLoadComplete(int callId, ContactCacheEntry entry) {
+                    Call call = CallList.getInstance().getCall(callId);
+                    if (call != null) {
+                        buildAndSendNotification(call, entry);
+                    }
+                } });
     }
 
     /**

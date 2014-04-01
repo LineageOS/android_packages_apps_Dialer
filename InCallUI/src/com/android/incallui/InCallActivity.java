@@ -16,9 +16,6 @@
 
 package com.android.incallui;
 
-import com.android.services.telephony.common.Call;
-import com.android.services.telephony.common.Call.State;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
@@ -28,7 +25,6 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.telecomm.InCallAdapter;
 import android.telephony.DisconnectCause;
 import android.view.KeyEvent;
 import android.view.View;
@@ -36,6 +32,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Toast;
+
+import com.android.incallui.Call.State;
 
 /**
  * Phone app "in call" screen.
@@ -269,8 +267,7 @@ public class InCallActivity extends Activity {
 
             case KeyEvent.KEYCODE_MUTE:
                 // toggle mute
-                setMute(!AudioModeProvider.getInstance().getMute());
-                CallCommandClient.getInstance().mute(!AudioModeProvider.getInstance().getMute());
+                TelecommAdapter.getInstance().mute(!AudioModeProvider.getInstance().getMute());
                 return true;
 
             // Various testing/debugging features, enabled ONLY when VERBOSE == true.
@@ -294,16 +291,6 @@ public class InCallActivity extends Activity {
         }
 
         return super.onKeyDown(keyCode, event);
-    }
-
-    private void setMute(boolean shouldMute) {
-        CallCommandClient.getInstance().mute(shouldMute);
-
-        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
-        if (telecommAdapter != null) {
-            Log.i(this, "Setting mute");
-            telecommAdapter.mute(shouldMute);
-        }
     }
 
     private boolean handleDialerKeyDown(int keyCode, KeyEvent event) {
@@ -367,7 +354,7 @@ public class InCallActivity extends Activity {
             // wants to use the dialpad toward the exact line, so un-hold the holding line.
             final Call call = CallList.getInstance().getActiveOrBackgroundCall();
             if (call != null && call.getState() == State.ONHOLD) {
-                CallCommandClient.getInstance().hold(call.getCallId(), false);
+                TelecommAdapter.getInstance().unholdCall(call.getCallId());
             }
         }
     }

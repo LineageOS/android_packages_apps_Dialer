@@ -25,8 +25,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.telephony.DisconnectCause;
 
-import com.android.services.telephony.common.Call;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -249,6 +247,15 @@ public class CallList {
 
     public Call getCall(int callId) {
         return mCallMap.get(callId);
+    }
+
+    public Call getCall(String callId) {
+        for (Call call : mCallMap.values()) {
+            if (call.getTelecommCallId().equals(callId)) {
+                return call;
+            }
+        }
+        return null;
     }
 
     public boolean existsLiveCall() {

@@ -22,17 +22,15 @@ import android.graphics.drawable.Drawable;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.TelephonyManagerUtils;
 import com.android.incallui.AudioModeProvider.AudioModeListener;
+import com.android.incallui.Call.Capabilities;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.service.AuxiliaryActionService;
 import com.android.incalluibind.ServiceFactory;
 import com.android.services.telephony.common.AudioMode;
-import com.android.services.telephony.common.Call;
-import com.android.services.telephony.common.Call.Capabilities;
 
 import android.app.Fragment;
-import android.telecomm.InCallAdapter;
 
 /**
  * Logic for call buttons.
@@ -164,13 +162,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // if it turns out to be slow
 
         Log.d(this, "Sending new Audio Mode: " + AudioMode.toString(mode));
-        CallCommandClient.getInstance().setAudioMode(mode);
-
-        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
-        if (telecommAdapter != null) {
-            Log.v(this, "Setting audio route");
-            telecommAdapter.setAudioRoute(mode);
-        }
+        TelecommAdapter.getInstance().setAudioRoute(mode);
     }
 
     /**
@@ -200,18 +192,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         if (mCall == null) {
             return;
         }
-
-        CallCommandClient.getInstance().disconnectCall(mCall.getCallId());
-
-        // Notify Telecomm that the user hit end-call.
-        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
-        if (telecommAdapter != null) {
-            String callId = CallInfoTranslator.getTelecommCallId(mCall);
-            if (callId != null) {
-                Log.i(this, "Disconnecting the call: " + callId);
-                telecommAdapter.disconnectCall(callId);
-            }
-        }
+        TelecommAdapter.getInstance().disconnectCall(mCall.getCallId());
     }
 
     public void manageConferenceButtonClicked() {
@@ -220,41 +201,24 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     public void muteClicked(boolean checked) {
         Log.d(this, "turning on mute: " + checked);
-
-        CallCommandClient.getInstance().mute(checked);
-
-        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
-        if (telecommAdapter != null) {
-            Log.i(this, "Setting mute");
-            telecommAdapter.mute(checked);
-        }
+        TelecommAdapter.getInstance().mute(checked);
     }
 
     public void holdClicked(boolean checked) {
         if (mCall == null) {
             return;
         }
-
-        // Notify Telecomm that the user hit the hold button.
-        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
-        if (telecommAdapter != null) {
-            String callId = CallInfoTranslator.getTelecommCallId(mCall);
-            if (callId != null) {
-                if (checked) {
-                    Log.i(this, "Putting the call on hold: " + callId);
-                    telecommAdapter.holdCall(callId);
-                } else {
-                    Log.i(this, "Removing the call from hold: " + callId);
-                    telecommAdapter.unholdCall(callId);
-                }
-            } else {
-                Log.wtf(this, "Telecomm callId not found for call: " + mCall.getCallId());
-            }
+        if (checked) {
+            Log.i(this, "Putting the call on hold: " + mCall);
+            TelecommAdapter.getInstance().holdCall(mCall.getCallId());
+        } else {
+            Log.i(this, "Removing the call from hold: " + mCall);
+            TelecommAdapter.getInstance().unholdCall(mCall.getCallId());
         }
     }
 
     public void mergeClicked() {
-        CallCommandClient.getInstance().merge();
+        TelecommAdapter.getInstance().merge();
     }
 
     public void addCallClicked() {
@@ -264,11 +228,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // Simulate a click on the mute button
         muteClicked(true);
 
-        CallCommandClient.getInstance().addCall();
+        TelecommAdapter.getInstance().addCall();
     }
 
     public void swapClicked() {
-        CallCommandClient.getInstance().swap();
+        TelecommAdapter.getInstance().swap();
     }
 
     public void showDialpadClicked(boolean checked) {

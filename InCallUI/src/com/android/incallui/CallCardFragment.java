@@ -34,8 +34,6 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.services.telephony.common.Call;
-
 import java.util.List;
 
 /**

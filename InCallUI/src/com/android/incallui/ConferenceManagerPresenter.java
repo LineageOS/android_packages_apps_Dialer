@@ -21,7 +21,6 @@ import android.content.Context;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
-import com.android.services.telephony.common.Call;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSortedSet;
@@ -154,13 +153,13 @@ public class ConferenceManagerPresenter
 
     public void separateConferenceConnection(int rowId) {
         if (rowId < mCallerIds.length) {
-            CallCommandClient.getInstance().separateCall(mCallerIds[rowId]);
+            TelecommAdapter.getInstance().separateCall(mCallerIds[rowId]);
         }
     }
 
     public void endConferenceConnection(int rowId) {
         if (rowId < mCallerIds.length) {
-            CallCommandClient.getInstance().disconnectCall(mCallerIds[rowId]);
+            TelecommAdapter.getInstance().disconnectCall(mCallerIds[rowId]);
         }
     }
 
