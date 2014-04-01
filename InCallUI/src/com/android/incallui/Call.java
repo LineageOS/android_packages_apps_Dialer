@@ -16,6 +16,8 @@
 
 package com.android.incallui;
 
+import android.telecomm.CallNumberPresentation;
+import android.telecomm.GatewayInfo;
 import android.telephony.DisconnectCause;
 
 import com.android.internal.telephony.PhoneConstants;
@@ -121,16 +123,6 @@ public final class Call {
                 | RESPOND_VIA_TEXT | MUTE | GENERIC_CONFERENCE | VIDEO_HANDOFF | CONNECTION_HANDOFF;
     }
 
-    // Number presentation type for caller id display
-    // normal
-    public static int PRESENTATION_ALLOWED = PhoneConstants.PRESENTATION_ALLOWED;
-    // block by user
-    public static int PRESENTATION_RESTRICTED = PhoneConstants.PRESENTATION_RESTRICTED;
-    // no specified or unknown by network
-    public static int PRESENTATION_UNKNOWN = PhoneConstants.PRESENTATION_UNKNOWN;
-    // show pay phone info
-    public static int PRESENTATION_PAYPHONE = PhoneConstants.PRESENTATION_PAYPHONE;
-
     // Unique identifier for the call
     private String mCallId;
 
@@ -155,11 +147,7 @@ public final class Call {
 
     private String mNumber;
 
-    // Gateway number used to dial this call
-    private String mGatewayNumber;
-
-    // Gateway service package name
-    private String mGatewayPackage;
+    private GatewayInfo mGatewayInfo;
 
     public Call(String callId, String number) {
         mCallId = callId;
@@ -186,12 +174,12 @@ public final class Call {
         return mIsWifiCall;
     }
 
-    public int getNumberPresentation() {
-        return PRESENTATION_ALLOWED;
+    public CallNumberPresentation getNumberPresentation() {
+        return CallNumberPresentation.ALLOWED;
     }
 
-    public int getCnapNamePresentation() {
-        return PRESENTATION_ALLOWED;
+    public CallNumberPresentation getCnapNamePresentation() {
+        return CallNumberPresentation.ALLOWED;
     }
 
     public String getCnapName() {
@@ -240,20 +228,12 @@ public final class Call {
         return false;
     }
 
-    public String getGatewayNumber() {
-        return mGatewayNumber;
+    public GatewayInfo getGatewayInfo() {
+        return mGatewayInfo;
     }
 
-    public void setGatewayNumber(String number) {
-        mGatewayNumber = number;
-    }
-
-    public String getGatewayPackage() {
-        return mGatewayPackage;
-    }
-
-    public void setGatewayPackage(String packageName) {
-        mGatewayPackage = packageName;
+    public void setGatewayInfo(GatewayInfo gatewayInfo) {
+        mGatewayInfo = gatewayInfo;
     }
 
     @Override

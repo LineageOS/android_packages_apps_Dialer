@@ -82,12 +82,7 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
                 break;
         }
 
-        GatewayInfo gatewayInfo = callInfo.getGatewayInfo();
-        if (gatewayInfo != null) {
-            call.setGatewayNumber(gatewayInfo.getGatewayHandle().getSchemeSpecificPart());
-            call.setGatewayPackage(gatewayInfo.getGatewayProviderPackageName());
-        }
-
+        call.setGatewayInfo(callInfo.getGatewayInfo());
         call.addCapabilities(Call.Capabilities.HOLD | Call.Capabilities.MUTE);
 
         if (call.getState() == Call.State.INCOMING) {
