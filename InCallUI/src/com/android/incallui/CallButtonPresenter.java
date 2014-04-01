@@ -18,11 +18,11 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.telecomm.CallCapabilities;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.TelephonyManagerUtils;
 import com.android.incallui.AudioModeProvider.AudioModeListener;
-import com.android.incallui.Call.Capabilities;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
@@ -259,16 +259,16 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         Log.d(this, "Updating call UI for call: ", call);
 
         if (isEnabled) {
-            Log.v(this, "Show hold ", call.can(Capabilities.SUPPORT_HOLD));
-            Log.v(this, "Enable hold", call.can(Capabilities.HOLD));
-            Log.v(this, "Show merge ", call.can(Capabilities.MERGE_CALLS));
-            Log.v(this, "Show swap ", call.can(Capabilities.SWAP_CALLS));
-            Log.v(this, "Show add call ", call.can(Capabilities.ADD_CALL));
-            Log.v(this, "Show mute ", call.can(Capabilities.MUTE));
+            Log.v(this, "Show hold ", call.can(CallCapabilities.SUPPORT_HOLD));
+            Log.v(this, "Enable hold", call.can(CallCapabilities.HOLD));
+            Log.v(this, "Show merge ", call.can(CallCapabilities.MERGE_CALLS));
+            Log.v(this, "Show swap ", call.can(CallCapabilities.SWAP_CALLS));
+            Log.v(this, "Show add call ", call.can(CallCapabilities.ADD_CALL));
+            Log.v(this, "Show mute ", call.can(CallCapabilities.MUTE));
 
-            final boolean canMerge = call.can(Capabilities.MERGE_CALLS);
-            final boolean canAdd = call.can(Capabilities.ADD_CALL);
-            final boolean isGenericConference = call.can(Capabilities.GENERIC_CONFERENCE);
+            final boolean canMerge = call.can(CallCapabilities.MERGE_CALLS);
+            final boolean canAdd = call.can(CallCapabilities.ADD_CALL);
+            final boolean isGenericConference = call.can(CallCapabilities.GENERIC_CONFERENCE);
 
 
             final boolean showMerge = !isGenericConference && canMerge;
@@ -282,9 +282,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 ui.enableAddCall(canAdd);
             }
 
-            final boolean canHold = call.can(Capabilities.HOLD);
-            final boolean canSwap = call.can(Capabilities.SWAP_CALLS);
-            final boolean supportHold = call.can(Capabilities.SUPPORT_HOLD);
+            final boolean canHold = call.can(CallCapabilities.HOLD);
+            final boolean canSwap = call.can(CallCapabilities.SWAP_CALLS);
+            final boolean supportHold = call.can(CallCapabilities.SUPPORT_HOLD);
 
             if (canHold) {
                 ui.showHold(true);
@@ -316,7 +316,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 }
             }
 
-            ui.enableMute(call.can(Capabilities.MUTE));
+            ui.enableMute(call.can(CallCapabilities.MUTE));
 
             // Finally, update the "extra button row": It's displayed above the
             // "End" button, but only if necessary.  Also, it's never displayed

@@ -23,13 +23,13 @@ import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.telecomm.CallCapabilities;
 import android.telephony.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
 import com.android.incallui.AudioModeProvider.AudioModeListener;
-import com.android.incallui.Call.Capabilities;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
@@ -296,7 +296,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private static boolean isGenericConference(Call call) {
-        return call != null && call.can(Capabilities.GENERIC_CONFERENCE);
+        return call != null && call.can(CallCapabilities.GENERIC_CONFERENCE);
     }
 
     private void updateContactEntry(ContactCacheEntry entry, boolean isPrimary,

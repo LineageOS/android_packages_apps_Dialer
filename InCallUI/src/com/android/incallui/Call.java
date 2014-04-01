@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.telecomm.CallCapabilities;
 import android.telecomm.CallNumberPresentation;
 import android.telecomm.GatewayInfo;
 import android.telephony.DisconnectCause;
@@ -101,28 +102,6 @@ public final class Call {
         }
     }
 
-    /**
-     * Defines a set of capabilities that a call can have as a bit mask.
-     * TODO: Should some of these be capabilities of the Phone instead of the call?
-     * TODO: This is starting to be a mix of capabilities and call properties.  Capabilities
-     *       and properties should be separated.
-     */
-    public static class Capabilities {
-        public static final int HOLD               = 0x00000001; /* has ability to hold the call */
-        public static final int SUPPORT_HOLD       = 0x00000002; /* can show the hold button */
-        public static final int MERGE_CALLS        = 0x00000004; /* has ability to merge calls */
-        public static final int SWAP_CALLS         = 0x00000008; /* swap with a background call */
-        public static final int ADD_CALL           = 0x00000010; /* add another call to this one */
-        public static final int RESPOND_VIA_TEXT   = 0x00000020; /* has respond via text option */
-        public static final int MUTE               = 0x00000040; /* can mute the call */
-        public static final int GENERIC_CONFERENCE = 0x00000080; /* generic conference mode */
-        public static final int VIDEO_HANDOFF      = 0x00000100; /* handoff to video */
-        public static final int CONNECTION_HANDOFF = 0x00000200; /* handoff between wifi and cell */
-
-        public static final int ALL = HOLD | SUPPORT_HOLD | MERGE_CALLS | SWAP_CALLS | ADD_CALL
-                | RESPOND_VIA_TEXT | MUTE | GENERIC_CONFERENCE | VIDEO_HANDOFF | CONNECTION_HANDOFF;
-    }
-
     // Unique identifier for the call
     private String mCallId;
 
@@ -201,7 +180,7 @@ public final class Call {
     }
 
     public void setCapabilities(int capabilities) {
-        mCapabilities = (Capabilities.ALL & capabilities);
+        mCapabilities = (CallCapabilities.ALL & capabilities);
     }
 
     public boolean can(int capabilities) {

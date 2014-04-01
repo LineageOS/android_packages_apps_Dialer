@@ -16,13 +16,12 @@
 
 package com.android.incallui;
 
-import com.google.common.collect.Sets;
-import com.google.common.base.Preconditions;
-
 import android.content.Context;
 import android.content.Intent;
+import android.telecomm.CallCapabilities;
 
-import com.android.incallui.Call.Capabilities;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Sets;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -492,9 +491,9 @@ public class InCallPresenter implements CallList.Listener {
         if (activeCall != null) {
             // TODO: This logic is repeated from CallButtonPresenter.java. We should
             // consolidate this logic.
-            final boolean isGeneric = activeCall.can(Capabilities.GENERIC_CONFERENCE);
-            final boolean canMerge = activeCall.can(Capabilities.MERGE_CALLS);
-            final boolean canSwap = activeCall.can(Capabilities.SWAP_CALLS);
+            final boolean isGeneric = activeCall.can(CallCapabilities.GENERIC_CONFERENCE);
+            final boolean canMerge = activeCall.can(CallCapabilities.MERGE_CALLS);
+            final boolean canSwap = activeCall.can(CallCapabilities.SWAP_CALLS);
 
             Log.v(this, "activeCall: " + activeCall + ", isGeneric: " + isGeneric + ", canMerge: " +
                     canMerge + ", canSwap: " + canSwap);
@@ -524,7 +523,7 @@ public class InCallPresenter implements CallList.Listener {
         if (heldCall != null) {
             // We have a hold call so presumeable it will always support HOLD...but
             // there is no harm in double checking.
-            final boolean canHold = heldCall.can(Capabilities.HOLD);
+            final boolean canHold = heldCall.can(CallCapabilities.HOLD);
 
             Log.v(this, "heldCall: " + heldCall + ", canHold: " + canHold);
 
