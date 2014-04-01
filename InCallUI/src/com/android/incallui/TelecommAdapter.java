@@ -41,42 +41,42 @@ final class TelecommAdapter {
         mAdapter = adapter;
     }
 
-    void answerCall(int callId) {
+    void answerCall(String callId) {
         if (mAdapter != null) {
-            mAdapter.answerCall(getTelecommCallId(callId));
+            mAdapter.answerCall(callId);
         } else {
             Log.e(this, "error answerCall, mAdapter is null");
         }
     }
 
-    void rejectCall(int callId, boolean rejectWithMessage, String message) {
+    void rejectCall(String callId, boolean rejectWithMessage, String message) {
         if (mAdapter != null) {
             // TODO(sail): Add support for reject with message.
-            mAdapter.rejectCall(getTelecommCallId(callId));
+            mAdapter.rejectCall(callId);
         } else {
             Log.e(this, "error rejectCall, mAdapter is null");
         }
     }
 
-    void disconnectCall(int callId) {
+    void disconnectCall(String callId) {
         if (mAdapter != null) {
-            mAdapter.disconnectCall(getTelecommCallId(callId));
+            mAdapter.disconnectCall(callId);
         } else {
             Log.e(this, "error disconnectCall, mAdapter is null");
         }
     }
 
-    void holdCall(int callId) {
+    void holdCall(String callId) {
         if (mAdapter != null) {
-            mAdapter.holdCall(getTelecommCallId(callId));
+            mAdapter.holdCall(callId);
         } else {
             Log.e(this, "error holdCall, mAdapter is null");
         }
     }
 
-    void unholdCall(int callId) {
+    void unholdCall(String callId) {
         if (mAdapter != null) {
-            mAdapter.unholdCall(getTelecommCallId(callId));
+            mAdapter.unholdCall(callId);
         } else {
             Log.e(this, "error unholdCall, mAdapter is null");
         }
@@ -98,7 +98,7 @@ final class TelecommAdapter {
         }
     }
 
-    void separateCall(int callId) {
+    void separateCall(String callId) {
         Log.wtf(this, "separateCall not implemented");
     }
 
@@ -114,35 +114,31 @@ final class TelecommAdapter {
         Log.wtf(this, "addCall not implemented");
     }
 
-    void playDtmfTone(int callId, char digit) {
+    void playDtmfTone(String callId, char digit) {
         if (mAdapter != null) {
-            mAdapter.playDtmfTone(getTelecommCallId(callId), digit);
+            mAdapter.playDtmfTone(callId, digit);
         } else {
             Log.e(this, "error playDtmfTone, mAdapter is null");
         }
     }
 
-    void stopDtmfTone(int callId) {
+    void stopDtmfTone(String callId) {
         if (mAdapter != null) {
-            mAdapter.stopDtmfTone(getTelecommCallId(callId));
+            mAdapter.stopDtmfTone(callId);
         } else {
             Log.e(this, "error stopDtmfTone, mAdapter is null");
         }
     }
 
-    void postDialWaitContinue(int callId) {
+    void postDialWaitContinue(String callId) {
         Log.wtf(this, "postDialWaitContinue not implemented");
     }
 
-    void postDialCancel(int callId) {
+    void postDialCancel(String callId) {
         Log.wtf(this, "postDialCancel not implemented");
     }
 
     void setSystemBarNavigationEnabled(boolean enable) {
         // TODO(sail): Implement this.
-    }
-
-    private String getTelecommCallId(int callId) {
-        return CallList.getInstance().getCall(callId).getTelecommCallId();
     }
 }

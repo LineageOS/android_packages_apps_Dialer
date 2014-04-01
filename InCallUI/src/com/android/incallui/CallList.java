@@ -44,10 +44,10 @@ public class CallList {
 
     private static CallList sInstance = new CallList();
 
-    private final HashMap<Integer, Call> mCallMap = Maps.newHashMap();
-    private final HashMap<Integer, List<String>> mCallTextReponsesMap = Maps.newHashMap();
+    private final HashMap<String, Call> mCallMap = Maps.newHashMap();
+    private final HashMap<String, List<String>> mCallTextReponsesMap = Maps.newHashMap();
     private final Set<Listener> mListeners = Sets.newHashSet();
-    private final HashMap<Integer, List<CallUpdateListener>> mCallUpdateListenerMap = Maps
+    private final HashMap<String, List<CallUpdateListener>> mCallUpdateListenerMap = Maps
             .newHashMap();
 
 
@@ -134,7 +134,7 @@ public class CallList {
      * @param callId The call id to get updates for.
      * @param listener The listener to add.
      */
-    public void addCallUpdateListener(int callId, CallUpdateListener listener) {
+    public void addCallUpdateListener(String callId, CallUpdateListener listener) {
         List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(callId);
         if (listeners == null) {
             listeners = Lists.newArrayList();
@@ -149,7 +149,7 @@ public class CallList {
      * @param callId The call id to remove the listener for.
      * @param listener The listener to remove.
      */
-    public void removeCallUpdateListener(int callId, CallUpdateListener listener) {
+    public void removeCallUpdateListener(String callId, CallUpdateListener listener) {
         List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(callId);
         if (listeners != null) {
             listeners.remove(listener);
@@ -245,17 +245,8 @@ public class CallList {
         return result;
     }
 
-    public Call getCall(int callId) {
-        return mCallMap.get(callId);
-    }
-
     public Call getCall(String callId) {
-        for (Call call : mCallMap.values()) {
-            if (call.getTelecommCallId().equals(callId)) {
-                return call;
-            }
-        }
-        return null;
+        return mCallMap.get(callId);
     }
 
     public boolean existsLiveCall() {
@@ -267,7 +258,7 @@ public class CallList {
         return false;
     }
 
-    public List<String> getTextResponses(int callId) {
+    public List<String> getTextResponses(String callId) {
         return mCallTextReponsesMap.get(callId);
     }
 
@@ -357,11 +348,9 @@ public class CallList {
 
         boolean updated = false;
 
-        final Integer id = new Integer(call.getCallId());
-
         if (call.getState() == Call.State.DISCONNECTED) {
             // update existing (but do not add!!) disconnected calls
-            if (mCallMap.containsKey(id)) {
+            if (mCallMap.containsKey(call.getCallId())) {
 
                 // For disconnected calls, we want to keep them alive for a few seconds so that the
                 // UI has a chance to display anything it needs when a call is disconnected.
@@ -370,14 +359,14 @@ public class CallList {
                 final Message msg = mHandler.obtainMessage(EVENT_DISCONNECTED_TIMEOUT, call);
                 mHandler.sendMessageDelayed(msg, getDelayForDisconnect(call));
 
-                mCallMap.put(id, call);
+                mCallMap.put(call.getCallId(), call);
                 updated = true;
             }
         } else if (!isCallDead(call)) {
-            mCallMap.put(id, call);
+            mCallMap.put(call.getCallId(), call);
             updated = true;
-        } else if (mCallMap.containsKey(id)) {
-            mCallMap.remove(id);
+        } else if (mCallMap.containsKey(call.getCallId())) {
+            mCallMap.remove(call.getCallId());
             updated = true;
         }
 
@@ -413,14 +402,12 @@ public class CallList {
     private void updateCallTextMap(Call call, List<String> textResponses) {
         Preconditions.checkNotNull(call);
 
-        final Integer id = new Integer(call.getCallId());
-
         if (!isCallDead(call)) {
             if (textResponses != null) {
-                mCallTextReponsesMap.put(id, textResponses);
+                mCallTextReponsesMap.put(call.getCallId(), textResponses);
             }
-        } else if (mCallMap.containsKey(id)) {
-            mCallTextReponsesMap.remove(id);
+        } else if (mCallMap.containsKey(call.getCallId())) {
+            mCallTextReponsesMap.remove(call.getCallId());
         }
     }
 

@@ -34,7 +34,7 @@ public class ConferenceManagerPresenter
 
     private static final int MAX_CALLERS_IN_CONFERENCE = 5;
 
-    private Integer[] mCallerIds;
+    private String[] mCallerIds;
     private Context mContext;
 
     @Override
@@ -82,9 +82,9 @@ public class ConferenceManagerPresenter
         final Call currentCall = callList.getActiveOrBackgroundCall();
         if (currentCall != null) {
             // getChildCallIds() always returns a valid Set
-            mCallerIds = currentCall.getChildCallIds().toArray(new Integer[0]);
+            mCallerIds = currentCall.getChildCallIds().toArray(new String[0]);
         } else {
-            mCallerIds = new Integer[0];
+            mCallerIds = new String[0];
         }
         Log.d(this, "Number of calls is " + String.valueOf(mCallerIds.length));
 

@@ -30,10 +30,10 @@ import android.view.WindowManager;
  */
 public class PostCharDialogFragment extends DialogFragment {
 
-    private int mCallId;
+    private String mCallId;
     private String mPostDialStr;
 
-    public PostCharDialogFragment(int callId, String postDialStr) {
+    public PostCharDialogFragment(String callId, String postDialStr) {
         mCallId = callId;
         mPostDialStr = postDialStr;
     }
