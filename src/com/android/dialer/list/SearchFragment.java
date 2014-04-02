@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.ListView;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
@@ -63,7 +64,16 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         if (isSearchMode()) {
             getAdapter().setHasHeader(0, false);
         }
-        getListView().setOnScrollListener(new OnScrollListener() {
+
+        final ListView listView = getListView();
+        listView.setPaddingRelative(
+                listView.getPaddingStart(),
+                getActivity().getActionBar().getHeight(),
+                listView.getPaddingEnd(),
+                listView.getPaddingBottom());
+        listView.setClipToPadding(false);
+
+        listView.setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 mActivityScrollListener.onListFragmentScrollStateChange(scrollState);
@@ -74,6 +84,10 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                     int totalItemCount) {
             }
         });
+
+        if (!getActivity().getActionBar().isShowing()) {
+            listView.setTranslationY(-getActivity().getActionBar().getHeight());
+        }
     }
 
     @Override

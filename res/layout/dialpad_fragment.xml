@@ -49,17 +49,13 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <include layout="@layout/dialpad_digits"/>
+        <include layout="@layout/dialpad_digits" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
         <include layout="@layout/dialpad" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
 
         <Space
             android:layout_width="match_parent"

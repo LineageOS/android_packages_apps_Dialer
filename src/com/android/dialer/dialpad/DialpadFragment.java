@@ -1671,9 +1671,9 @@ public class DialpadFragment extends Fragment
         final DialtactsActivity activity = (DialtactsActivity) getActivity();
         if (activity == null) return;
         if (hidden) {
-            activity.showSearchBar();
+            activity.onDialpadHidden();
         } else {
-            activity.hideSearchBar();
+            activity.onDialpadShown();
             mDigits.requestFocus();
         }
     }
