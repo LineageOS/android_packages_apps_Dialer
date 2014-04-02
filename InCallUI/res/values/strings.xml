@@ -569,4 +569,7 @@
     <string name="dialpad_star_letters"></string>
     <!--  Do not translate. -->
     <string name="dialpad_pound_letters"></string>
+
+    <!-- Text for the onscreen connection handoff button -->
+    <string name="connection_handoff_text">Handoff</string>
 </resources>

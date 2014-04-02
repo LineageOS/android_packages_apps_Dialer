@@ -142,6 +142,14 @@ final class TelecommAdapter {
         Log.wtf(this, "postDialCancel not implemented");
     }
 
+    void handoffCall(String callId) {
+        if (mAdapter != null) {
+            mAdapter.handoffCall(callId);
+        } else {
+            Log.e(this, "error handoffCall, mAdapter is null");
+        }
+    }
+
     void setSystemBarNavigationEnabled(boolean enable) {
         // TODO(sail): Implement this.
     }

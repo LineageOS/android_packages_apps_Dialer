@@ -140,6 +140,12 @@
                 android:background="@android:color/transparent"
                 android:singleLine="true"
                 android:ellipsize="end"/>
+
+            <Button android:id="@+id/connectionHandoffButton"
+                    android:text="@string/connection_handoff_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
         </LinearLayout>
 
     </LinearLayout>

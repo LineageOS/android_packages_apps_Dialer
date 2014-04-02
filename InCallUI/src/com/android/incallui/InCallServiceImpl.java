@@ -133,6 +133,20 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
     }
 
     /** {@inheritDoc} */
+    @Override protected void setHandoffEnabled(String callId, boolean isHandoffEnabled) {
+        Call call = CallList.getInstance().getCall(callId);
+        Log.v(this, "setHandoffEnabled: " + call + " isEnabled: " + isHandoffEnabled);
+        if (null != call) {
+            if (isHandoffEnabled) {
+                call.addCapabilities(CallCapabilities.CONNECTION_HANDOFF);
+            } else {
+                call.removeCapabilities(CallCapabilities.CONNECTION_HANDOFF);
+            }
+            CallList.getInstance().onUpdate(call);
+        }
+    }
+
+    /** {@inheritDoc} */
     @Override protected void setDisconnected(String callId, int disconnectCause) {
         Log.v(this, "setDisconnected");
         Call call = CallList.getInstance().getCall(callId);

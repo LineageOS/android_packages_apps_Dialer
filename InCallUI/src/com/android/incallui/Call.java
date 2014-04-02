@@ -191,6 +191,10 @@ public final class Call {
         setCapabilities(capabilities | mCapabilities);
     }
 
+    public void removeCapabilities(int capabilities) {
+        setCapabilities(~capabilities & mCapabilities);
+    }
+
     public void setConnectTime(long connectTime) {
         mConnectTime = connectTime;
     }
