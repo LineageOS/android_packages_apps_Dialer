@@ -130,6 +130,7 @@ public class CallTypeHelper {
 
     public static boolean isMissedCallType(int callType) {
         return (callType != Calls.INCOMING_TYPE && callType != Calls.OUTGOING_TYPE &&
-                callType != Calls.VOICEMAIL_TYPE);
+                callType != Calls.VOICEMAIL_TYPE && callType != INCOMING_CSVT_TYPE &&
+                callType != OUTGOING_CSVT_TYPE);
     }
 }
