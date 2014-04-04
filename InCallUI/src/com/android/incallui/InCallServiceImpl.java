@@ -138,7 +138,8 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
         Log.v(this, "setHandoffEnabled: " + call + " isEnabled: " + isHandoffEnabled);
         if (null != call) {
             if (isHandoffEnabled) {
-                call.addCapabilities(CallCapabilities.CONNECTION_HANDOFF);
+                // TODO(sail): Enable handoff once http://b/13800303 and http://b/13800552 are
+                // fixed.
             } else {
                 call.removeCapabilities(CallCapabilities.CONNECTION_HANDOFF);
             }
