@@ -25,9 +25,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.dialer.CallDetailActivity;
 import com.android.internal.telephony.MSimConstants;
 
@@ -47,9 +49,22 @@ public abstract class IntentProvider {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                Intent intent = CallUtil.getCallIntent(number);
-                intent.putExtra(MSimConstants.SUBSCRIPTION_KEY, subscription);
-                return intent;
+                if (MoreContactUtils.getEnabledSimCount() > 1) {
+                    Intent intent;
+                    if (PhoneNumberUtils.isUriNumber(number)) {
+                        intent = new Intent(Intent.ACTION_DIAL,
+                                Uri.fromParts(CallUtil.SCHEME_SIP, number, null));
+                    } else {
+                        intent = new Intent(Intent.ACTION_DIAL,
+                                Uri.fromParts(CallUtil.SCHEME_TEL, number, null));
+                    }
+                    return intent;
+                } else {
+                    Intent intent = CallUtil.getCallIntent(number);
+                    intent.putExtra(MSimConstants.SUBSCRIPTION_KEY,
+                            subscription);
+                    return intent;
+                }
             }
         };
     }
