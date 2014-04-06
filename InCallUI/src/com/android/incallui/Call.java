@@ -16,29 +16,23 @@
 
 package com.android.incallui;
 
+import android.net.Uri;
 import android.telecomm.CallCapabilities;
 import android.telecomm.CallNumberPresentation;
+import android.telecomm.CallServiceDescriptor;
 import android.telecomm.GatewayInfo;
 import android.telephony.DisconnectCause;
 
-import com.android.internal.telephony.PhoneConstants;
-import com.google.android.collect.Sets;
-import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.primitives.Ints;
 
 import java.util.Locale;
-import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 /**
  * Class object used across CallHandlerService APIs.
  * Describes a single call and its state.
  */
 public final class Call {
-
     /* Defines different states of this call */
     public static class State {
         public static final int INVALID = 0;
@@ -102,35 +96,18 @@ public final class Call {
         }
     }
 
-    // Unique identifier for the call
     private String mCallId;
-
-    // The current state of the call
     private int mState = State.INVALID;
-
-    // TODO: Probably need to change to wifi call state.  Re-use mState?
-    // State.WIFI_CONNECTING
-    // State.WIFI_CONNECTED
-    // Using this simple boolean for now so we can see the UI mock.
-    private boolean mIsWifiCall = false;
-
-    // Reason for disconnect. Valid when the call state is DISCONNECTED.
-    // Valid values are defined in {@link DisconnectCause}.
     private int mDisconnectCause = DisconnectCause.NOT_VALID;
-
-    // Bit mask of capabilities unique to this call.
     private int mCapabilities;
-
-    // Time that this call transitioned into ACTIVE state from INCOMING, WAITING, or OUTGOING.
-    private long mConnectTime = 0;
-
-    private String mNumber;
-
+    private long mConnectTimeMillis = 0;
+    private Uri mHandle;
     private GatewayInfo mGatewayInfo;
+    private CallServiceDescriptor mCurrentCallServiceDescriptor;
+    private CallServiceDescriptor mHandoffCallServiceDescriptor;
 
-    public Call(String callId, String number) {
+    public Call(String callId) {
         mCallId = callId;
-        mNumber = number;
     }
 
     public String getCallId() {
@@ -138,7 +115,18 @@ public final class Call {
     }
 
     public String getNumber() {
-        return mNumber;
+        if (mGatewayInfo != null) {
+            return mGatewayInfo.getOriginalHandle().getSchemeSpecificPart();
+        }
+        return getHandle().getSchemeSpecificPart();
+    }
+
+    public Uri getHandle() {
+        return mHandle;
+    }
+
+    public void setHandle(Uri handle) {
+        mHandle = handle;
     }
 
     public int getState() {
@@ -147,10 +135,6 @@ public final class Call {
 
     public void setState(int state) {
         mState = state;
-    }
-
-    public boolean isWifiCall() {
-        return mIsWifiCall;
     }
 
     public CallNumberPresentation getNumberPresentation() {
@@ -179,28 +163,24 @@ public final class Call {
         mDisconnectCause = cause;
     }
 
+    /** Sets a bit mask of capabilities unique to this call. */
     public void setCapabilities(int capabilities) {
         mCapabilities = (CallCapabilities.ALL & capabilities);
     }
 
+    /** Checks if the call supports the given set of capabilities supplied as a bit mask. */
     public boolean can(int capabilities) {
         return (capabilities == (capabilities & mCapabilities));
     }
 
-    public void addCapabilities(int capabilities) {
-        setCapabilities(capabilities | mCapabilities);
+    /** Sets the time when the call first became active. */
+    public void setConnectTimeMillis(long connectTimeMillis) {
+        mConnectTimeMillis = connectTimeMillis;
     }
 
-    public void removeCapabilities(int capabilities) {
-        setCapabilities(~capabilities & mCapabilities);
-    }
-
-    public void setConnectTime(long connectTime) {
-        mConnectTime = connectTime;
-    }
-
-    public long getConnectTime() {
-        return mConnectTime;
+    /** Gets the time when the call first became active. */
+    public long getConnectTimeMillis() {
+        return mConnectTimeMillis;
     }
 
     public ImmutableSortedSet<Integer> getChildCallIds() {
@@ -217,6 +197,27 @@ public final class Call {
 
     public void setGatewayInfo(GatewayInfo gatewayInfo) {
         mGatewayInfo = gatewayInfo;
+    }
+
+    /** The descriptor for the call service currently routing this call. */
+    public CallServiceDescriptor getCurrentCallServiceDescriptor() {
+        return mCurrentCallServiceDescriptor;
+    }
+
+    public void setCurrentCallServiceDescriptor(CallServiceDescriptor descriptor) {
+        mCurrentCallServiceDescriptor = descriptor;
+    }
+
+    /**
+     * The descriptor for the call service that this call is being switched to, null if handoff is
+     * not in progress.
+     */
+    public CallServiceDescriptor getHandoffCallServiceDescriptor() {
+        return mHandoffCallServiceDescriptor;
+    }
+
+    public void setHandoffCallServiceDescriptor(CallServiceDescriptor descriptor) {
+        mHandoffCallServiceDescriptor = descriptor;
     }
 
     @Override

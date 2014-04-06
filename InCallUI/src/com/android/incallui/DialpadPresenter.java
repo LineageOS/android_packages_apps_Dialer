@@ -39,7 +39,6 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
         InCallPresenter.getInstance().removeListener(this);
     }
 
-
     @Override
     public void onStateChange(InCallPresenter.InCallState state, CallList callList) {
         mCall = callList.getActiveCall();
