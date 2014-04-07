@@ -123,8 +123,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private static final int ANIMATION_DURATION = 200;
 
-    private String mFilterText;
-
     /**
      * The main fragment displaying the user's favorites and frequent contacts
      */
@@ -749,7 +747,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onNewIntent(Intent newIntent) {
         setIntent(newIntent);
         displayFragment(newIntent);
-        final String action = newIntent.getAction();
 
         invalidateOptionsMenu();
     }
@@ -793,14 +790,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             startActivity(intent);
         }
     };
-
-    private void showInputMethod(View view) {
-        final InputMethodManager imm = (InputMethodManager) getSystemService(
-                Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.showSoftInput(view, 0);
-        }
-    }
 
     private void hideInputMethod(View view) {
         final InputMethodManager imm = (InputMethodManager) getSystemService(
