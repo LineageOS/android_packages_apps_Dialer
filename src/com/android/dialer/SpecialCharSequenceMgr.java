@@ -319,11 +319,7 @@ public class SpecialCharSequenceMgr {
     private static void showIMEIPanel(Context context, boolean useSystemWindow) {
         String imeiStr;
         if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
-            int subscription = MSimTelephonyManager.getDefault().
-                    getPreferredVoiceSubscription();
-
-            imeiStr = ((MSimTelephonyManager)context.
-                    getSystemService(Context.MSIM_TELEPHONY_SERVICE)).getDeviceId(subscription);
+            imeiStr = getMSimDeviceIds(context);
         } else {
             imeiStr = ((TelephonyManager)context.
                     getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
@@ -340,11 +336,7 @@ public class SpecialCharSequenceMgr {
     private static void showMEIDPanel(Context context, boolean useSystemWindow) {
         String meidStr;
         if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
-            int subscription = MSimTelephonyManager.getDefault().
-                    getPreferredVoiceSubscription();
-
-            meidStr = ((MSimTelephonyManager)context.
-                    getSystemService(Context.MSIM_TELEPHONY_SERVICE)).getDeviceId(subscription);
+            meidStr = getMSimDeviceIds(context);
         } else {
             meidStr = ((TelephonyManager)context.
                     getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
@@ -356,6 +348,22 @@ public class SpecialCharSequenceMgr {
                 .setPositiveButton(android.R.string.ok, null)
                 .setCancelable(false)
                 .show();
+    }
+
+    private static String getMSimDeviceIds(Context context) {
+        // Show all IMEI/MEIDs for Multi-SIM
+        int numPhones = MSimTelephonyManager.getDefault().getPhoneCount();
+
+        MSimTelephonyManager telephony = (MSimTelephonyManager)context.
+                getSystemService(Context.MSIM_TELEPHONY_SERVICE);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < numPhones; i++) {
+            if (i != 0) {
+                sb.append("\n");
+            }
+            sb.append(telephony.getDeviceId(i));
+        }
+        return sb.toString();
     }
 
     /*******
