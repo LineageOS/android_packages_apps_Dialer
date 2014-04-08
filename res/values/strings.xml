@@ -612,6 +612,14 @@
     <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
     <string name="voice_search_not_available">Voice search is not available.</string>
 
+    <!-- Message displayed when the Phone application has been disabled and a phone call cannot
+         be made. [CHAR LIMIT=NONE] -->
+    <string name="call_not_available">Cannot make a phone call because the Phone application has been disabled.</string>
+
+    <!-- Message displayed when there is no application available to handle a particular action.
+         [CHAR LIMIT=NONE] -->
+    <string name="activity_not_available">No installed activity available to handle selected action.</string>
+
     <!-- Hint displayed in dialer search box when there is no query that is currently typed.
          [CHAR LIMIT=30] -->
     <string name="dialer_hint_find_contact">Type a name or phone number</string>
