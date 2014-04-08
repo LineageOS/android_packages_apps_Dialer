@@ -72,6 +72,7 @@ import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.voicemail.VoicemailPlaybackFragment;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
@@ -237,7 +238,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             if (finishPhoneNumerSelectedActionModeIfShown()) {
                 return;
             }
-            startActivity(((ViewEntry) view.getTag()).primaryIntent);
+            DialerUtils.startActivityWithErrorToast(CallDetailActivity.this,
+                    ((ViewEntry) view.getTag()).primaryIntent);
         }
     };
 
@@ -247,7 +249,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             if (finishPhoneNumerSelectedActionModeIfShown()) {
                 return;
             }
-            startActivity(((ViewEntry) view.getTag()).secondaryIntent);
+            DialerUtils.startActivityWithErrorToast(CallDetailActivity.this,
+                    ((ViewEntry) view.getTag()).secondaryIntent);
         }
     };
 
@@ -416,8 +419,10 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                 TelephonyManager tm = (TelephonyManager)
                         getSystemService(Context.TELEPHONY_SERVICE);
                 if (tm.getCallState() == TelephonyManager.CALL_STATE_IDLE) {
-                    startActivity(CallUtil.getCallIntent(
-                            Uri.fromParts(CallUtil.SCHEME_TEL, mNumber, null)));
+                    DialerUtils.startActivityWithErrorToast(this,
+                            CallUtil.getCallIntent(Uri.fromParts(CallUtil.SCHEME_TEL, mNumber,
+                                    null)),
+                            R.string.call_not_available);
                     return true;
                 }
             }
@@ -659,13 +664,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             mMainActionPushLayerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try {
-                        startActivity(actionIntent);
-                    } catch (ActivityNotFoundException e) {
-                        final Toast toast = Toast.makeText(CallDetailActivity.this,
-                                R.string.add_contact_not_available, Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
+                    DialerUtils.startActivityWithErrorToast(CallDetailActivity.this, actionIntent,
+                            R.string.add_contact_not_available);
                 }
             });
             mMainActionPushLayerView.setContentDescription(actionDescription);
@@ -840,7 +840,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             mStatusMessageAction.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, message.actionUri));
+                    DialerUtils.startActivityWithErrorToast(CallDetailActivity.this,
+                            new Intent(Intent.ACTION_VIEW, message.actionUri));
                 }
             });
         } else {
