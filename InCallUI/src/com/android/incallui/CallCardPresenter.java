@@ -21,8 +21,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.telecomm.CallCapabilities;
 import android.telecomm.CallServiceDescriptor;
 import android.telephony.DisconnectCause;
@@ -56,6 +54,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private ContactCacheEntry mSecondaryContactInfo;
     private CallTimer mCallTimer;
     private Context mContext;
+    private boolean mIsWiFiCachedValue;
 
     public CallCardPresenter() {
         // create the call timer
@@ -183,41 +182,36 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             ui.setPrimaryCallElapsedTime(false, null);
         }
 
-        // Set the call state
-        if (mPrimary != null) {
-            final boolean bluetoothOn =
-                    (AudioModeProvider.getInstance().getAudioMode() == AudioMode.BLUETOOTH);
-            ui.setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
-                    getGatewayLabel(), getGatewayNumber(), getWifiConnection());
-        } else {
-            ui.setCallState(Call.State.IDLE, DisconnectCause.NOT_VALID, false, null, null, null);
-        }
+        setUiCallState();
+    }
 
-        ui.setShowConnectionHandoff(mPrimary != null &&
-                mPrimary.can(CallCapabilities.CONNECTION_HANDOFF));
+    private void setUiCallState() {
+        if (mPrimary != null) {
+            boolean bluetoothOn =
+                    (AudioModeProvider.getInstance().getAudioMode() == AudioMode.BLUETOOTH);
+            boolean isHandoffCapable = mPrimary.can(CallCapabilities.CONNECTION_HANDOFF);
+            boolean isHandoffPending = mPrimary.getHandoffCallServiceDescriptor() != null;
+
+            CallServiceDescriptor descriptor = mPrimary.getCurrentCallServiceDescriptor();
+            boolean isWiFi = descriptor != null &&
+                descriptor.getNetworkType() == CallServiceDescriptor.FLAG_WIFI;
+            // Cache the value so the UI doesn't change when the call ends.
+            mIsWiFiCachedValue = isWiFi;
+
+            getUi().setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
+                    getGatewayLabel(), getGatewayNumber(), isWiFi, isHandoffCapable,
+                    isHandoffPending);
+        } else {
+            getUi().setCallState(Call.State.IDLE, DisconnectCause.NOT_VALID, false, null, null,
+                    mIsWiFiCachedValue, false, false);
+        }
     }
 
     @Override
     public void onAudioMode(int mode) {
         if (mPrimary != null && getUi() != null) {
-            final boolean bluetoothOn = (AudioMode.BLUETOOTH == mode);
-
-            getUi().setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
-                    getGatewayLabel(), getGatewayNumber(), getWifiConnection());
+            setUiCallState();
         }
-    }
-
-    private String getWifiConnection() {
-        CallServiceDescriptor descriptor = mPrimary.getCurrentCallServiceDescriptor();
-        if (descriptor != null && descriptor.getNetworkType() == CallServiceDescriptor.FLAG_WIFI) {
-            final WifiManager wifiManager = (WifiManager) mContext.getSystemService(
-                    Context.WIFI_SERVICE);
-            final WifiInfo info = wifiManager.getConnectionInfo();
-            if (info != null) {
-                return info.getSSID();
-            }
-        }
-        return null;
     }
 
     @Override
@@ -489,12 +483,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 Drawable photo, boolean isConference, boolean isGeneric);
         void setSecondaryImage(Drawable image);
         void setCallState(int state, int cause, boolean bluetoothOn,
-                String gatewayLabel, String gatewayNumber, String wifiConnection);
+                String gatewayLabel, String gatewayNumber, boolean isWiFi,
+                boolean isHandoffCapable, boolean isHandoffPending);
         void setPrimaryCallElapsedTime(boolean show, String duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Drawable image);
         void setPrimaryPhoneNumber(String phoneNumber);
         void setPrimaryLabel(String label);
-        void setShowConnectionHandoff(boolean showConnectionHandoff);
     }
 }

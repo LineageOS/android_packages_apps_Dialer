@@ -47,6 +47,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mPhoneNumber;
     private TextView mNumberLabel;
     private TextView mPrimaryName;
+    private TextView mCallServiceLabel;
     private TextView mCallStateLabel;
     private TextView mCallTypeLabel;
     private ImageView mPhoto;
@@ -107,6 +108,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mNumberLabel = (TextView) view.findViewById(R.id.label);
         mSecondaryCallInfo = (ViewStub) view.findViewById(R.id.secondary_call_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
+        mCallServiceLabel = (TextView) view.findViewById(R.id.callServiceLabel);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mCallTypeLabel = (TextView) view.findViewById(R.id.callTypeLabel);
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
@@ -128,12 +130,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         } else {
             getView().setVisibility(View.INVISIBLE);
         }
-    }
-
-    @Override
-    public void setShowConnectionHandoff(boolean showConnectionHandoff) {
-        Log.v(this, "setShowConnectionHandoff: " + showConnectionHandoff);
-        mConnectionHandoffButton.setVisibility(showConnectionHandoff ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -241,18 +237,29 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setCallState(int state, int cause, boolean bluetoothOn,
-            String gatewayLabel, String gatewayNumber, String wifiConnection) {
-        String callStateLabel = null;
+    public void setCallState(int state, int cause, boolean bluetoothOn, String gatewayLabel,
+            String gatewayNumber, boolean isWiFi, boolean isHandoffCapable,
+            boolean isHandoffPending) {
+        String callStateText = null;
 
         if (Call.State.isDialing(state) && !TextUtils.isEmpty(gatewayLabel)) {
             // Provider info: (e.g. "Calling via <gatewayLabel>")
-            callStateLabel = gatewayLabel;
+            callStateText = gatewayLabel;
         } else {
-            callStateLabel = getCallStateLabelFromState(state, cause);
+            callStateText = getCallStateLabelFromState(state, cause);
         }
 
-        Log.v(this, "setCallState " + callStateLabel);
+        // Only show call service related text if call state is not being displayed.
+        String callServiceText = null;
+        if (TextUtils.isEmpty(callStateText)) {
+            if (isHandoffPending) {
+                callServiceText = getResources().getString(R.string.handoff_status_pending);
+            } else if (isWiFi) {
+                callServiceText = getResources().getString(R.string.in_call_wifi_connected);
+            }
+        }
+
+        Log.v(this, "setCallState " + callStateText);
         Log.v(this, "DisconnectCause " + DisconnectCause.toString(cause));
         Log.v(this, "bluetooth on " + bluetoothOn);
         Log.v(this, "gateway " + gatewayLabel + gatewayNumber);
@@ -267,31 +274,57 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mSupplementaryInfoContainer.setLayoutTransition(null);
         }
 
-        // Update the call state label.
-        if (!TextUtils.isEmpty(wifiConnection)) {
-            mCallStateLabel.setText(getResources().getString(R.string.in_call_wifi_connected,
-                    wifiConnection));
-            mCallStateLabel.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-            mCallStateLabel.setBackgroundResource(R.color.wifi_connected_background);
-            mCallStateLabel.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    R.drawable.ic_in_call_wifi, 0, 0, 0);
-            mCallStateLabel.setCompoundDrawablePadding(5);
-            mCallStateLabel.setAllCaps(false);
-            mCallStateLabel.setVisibility(View.VISIBLE);
+        updateCallServiceLabel(isWiFi, callServiceText);
+        updateCallStateLabel(state, bluetoothOn, callStateText);
 
-        } else if (!TextUtils.isEmpty(callStateLabel)) {
-            mCallStateLabel.setGravity(Gravity.END);
-            mCallStateLabel.setAllCaps(true);
+        // Only show the handoff button if call state is not being displayed.
+        boolean showHandoffButton = isHandoffCapable && TextUtils.isEmpty(callStateText);
+        mConnectionHandoffButton.setVisibility(showHandoffButton ? View.VISIBLE : View.GONE);
+        mConnectionHandoffButton.setEnabled(!isHandoffPending);
+
+        // Background color.
+        if (isWiFi) {
+            mSupplementaryInfoContainer.setBackgroundResource(R.color.wifi_connected_background);
+        } else {
+            mSupplementaryInfoContainer.setBackgroundResource(
+                    R.color.incall_secondary_info_background);
+        }
+
+        // Restore the animation.
+        if (skipAnimation) {
+            mSupplementaryInfoContainer.setLayoutTransition(transition);
+        }
+    }
+
+    private void updateCallServiceLabel(boolean isWiFi, String text) {
+        if (!TextUtils.isEmpty(text)) {
+            mCallServiceLabel.setText(text);
+            if (isWiFi) {
+                mCallServiceLabel.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                        R.drawable.ic_in_call_wifi, 0, 0, 0);
+                mCallServiceLabel.setCompoundDrawablePadding(5);
+                mCallServiceLabel.setCompoundDrawablePadding((int) (mDensity * 5));
+            } else {
+                mCallServiceLabel.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+            }
+            mCallServiceLabel.setVisibility(View.VISIBLE);
+        } else {
+            mCallServiceLabel.setText("");
+            mCallServiceLabel.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+            mCallServiceLabel.setVisibility(View.GONE);
+        }
+    }
+
+    private void updateCallStateLabel(int state, boolean bluetoothOn, String text) {
+        if (!TextUtils.isEmpty(text)) {
             mCallStateLabel.setVisibility(View.VISIBLE);
-            mCallStateLabel.setText(callStateLabel);
-            mCallStateLabel.setCompoundDrawables(null, null, null, null);
+            mCallStateLabel.setText(text);
+
             if (Call.State.INCOMING == state) {
                 setBluetoothOn(bluetoothOn);
             }
         } else {
             mCallStateLabel.setVisibility(View.GONE);
-            mCallStateLabel.setCompoundDrawables(null, null, null, null);
-
             // Gravity is aligned left when receiving an incoming call in landscape.
             // In that rare case, the gravity needs to be reset to the right.
             // Also, setText("") is used since there is a delay in making the view GONE,
@@ -300,11 +333,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mCallStateLabel.setText("");
                 mCallStateLabel.setGravity(Gravity.END);
             }
-        }
-
-        // Restore the animation.
-        if (skipAnimation) {
-            mSupplementaryInfoContainer.setLayoutTransition(transition);
         }
     }
 

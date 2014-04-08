@@ -119,29 +119,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:background="@color/incall_secondary_info_background"
             android:animateLayoutChanges="true">
 
-            <!-- The "call state label": In some states, this shows a special
-                 indication like "Dialing" or "Incoming call" or "Call ended".
-                 It's unused for the normal case of an active ongoing call. -->
-            <TextView android:id="@+id/callStateLabel"
-                android:layout_width="match_parent"
+            <TextView android:id="@+id/callServiceLabel"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/provider_info_top_bottom_padding"
                 android:paddingBottom="@dimen/provider_info_top_bottom_padding"
                 android:paddingStart="@dimen/call_banner_side_padding"
                 android:paddingEnd="@dimen/call_banner_side_padding"
-                android:gravity="end"
+                android:gravity="start|center_vertical"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/incall_call_banner_text_color"
+                android:background="@android:color/transparent"
+                android:singleLine="true"
+                android:ellipsize="end" />
+
+            <View android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <!-- The "call state label": In some states, this shows a special
+                 indication like "Dialing" or "Incoming call" or "Call ended".
+                 It's unused for the normal case of an active ongoing call. -->
+            <TextView android:id="@+id/callStateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/provider_info_top_bottom_padding"
+                android:paddingBottom="@dimen/provider_info_top_bottom_padding"
+                android:paddingStart="@dimen/call_banner_side_padding"
+                android:paddingEnd="@dimen/call_banner_side_padding"
+                android:gravity="end|center_vertical"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/incall_call_banner_text_color"
                 android:textAllCaps="true"
                 android:background="@android:color/transparent"
                 android:singleLine="true"
-                android:ellipsize="end"/>
+                android:ellipsize="end" />
 
             <Button android:id="@+id/connectionHandoffButton"
+                    android:gravity="end|center_vertical"
                     android:text="@string/connection_handoff_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

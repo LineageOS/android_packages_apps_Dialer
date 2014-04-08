@@ -312,7 +312,7 @@
     <!-- Canned response for the "Respond via SMS" feature for incoming calls. [CHAR LIMIT=35] -->
     <string name="respond_via_sms_canned_response_4">Can\'t talk now. Call me later?</string>
     <!-- "Respond via SMS" option that lets you compose a custom response. [CHAR LIMIT=30] -->
-    <string name="respond_via_sms_custom_message">Write your own...</string>
+    <string name="respond_via_sms_custom_message">Write your own&#8230;</string>
     <!-- "Custom Message" Cancel alert dialog button -->
     <string name="custom_message_cancel">Cancel</string>
     <!-- "Custom Message" Send alert dialog button -->
@@ -518,7 +518,8 @@
     <!-- This can be used in any application wanting to disable the text "Emergency number" -->
     <string name="emergency_call_dialog_number_for_display">Emergency number</string>
 
-    <string name="in_call_wifi_connected">Connected via <xliff:g id="wifi_ssid">%s</xliff:g></string>
+    <string name="in_call_wifi_connected">Connected via Wi-Fi</string>
+    <string name="handoff_status_pending">Handoff pending&#8230;</string>
 
     <!-- The digit to be displayed on the 0 key of the dialpad [CHAR LIMIT=1]-->
     <string name="dialpad_0_number">0</string>
