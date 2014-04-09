@@ -145,6 +145,8 @@
     <string name="simContacts_title" msgid="27341688347689769">"SIMカードの連絡先"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"この機能を使用するには連絡帳アプリを再度有効にしてください。"</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"音声検索は利用できません。"</string>
+    <string name="call_not_available" msgid="8941576511946492225">"電話アプリが無効になっているため発信できません。"</string>
+    <string name="activity_not_available" msgid="8265265380537872585">"選択した操作を処理できるアクティビティがインストールされていません。"</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"名前または電話番号を入力"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"すべて"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"不在着信"</string>

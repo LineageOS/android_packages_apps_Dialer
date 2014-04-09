@@ -145,6 +145,8 @@
     <string name="simContacts_title" msgid="27341688347689769">"Kontakti SIM kartice"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Ponovo omogućite aplikaciju Osobe da biste upotrebljavali tu značajku."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Glasovno pretraživanje nije dostupno."</string>
+    <string name="call_not_available" msgid="8941576511946492225">"Telefoniranje nije moguće jer je aplikacija Telefon onemogućena."</string>
+    <string name="activity_not_available" msgid="8265265380537872585">"Nema instaliranih aplikacija za rukovanje odabranom radnjom."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Upišite ime ili tel. broj"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Sve"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Propušteni"</string>

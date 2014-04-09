@@ -145,6 +145,8 @@
     <string name="simContacts_title" msgid="27341688347689769">"Contacts de carte SIM"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Réactivez l\'application Contacts pour utiliser cette fonctionnalité."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"La recherche vocale n\'est pas disponible."</string>
+    <string name="call_not_available" msgid="8941576511946492225">"Impossible d\'effectuer un appel téléphonique, car l\'application Téléphone a été désactivée."</string>
+    <string name="activity_not_available" msgid="8265265380537872585">"Aucune application installée n\'est disponible pour effectuer l\'action sélectionnée."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Saisissez nom/numéro de tél."</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Tous"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Manqués"</string>

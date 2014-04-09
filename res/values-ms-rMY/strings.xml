@@ -145,6 +145,10 @@
     <string name="simContacts_title" msgid="27341688347689769">"Kenalan kad SIM"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Dayakan semula aplikasi Orang untuk menggunakan ciri ini."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Carian suara tidak tersedia."</string>
+    <!-- no translation found for call_not_available (8941576511946492225) -->
+    <skip />
+    <!-- no translation found for activity_not_available (8265265380537872585) -->
+    <skip />
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Taip nama atau nombor telefon"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Semua"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Tidak dijawab"</string>

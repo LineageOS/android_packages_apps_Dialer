@@ -145,6 +145,8 @@
     <string name="simContacts_title" msgid="27341688347689769">"ລາຍຊື່ຜູ່ຕິດຕໍ່ SIM card"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"ເປີດການນຳໃຊ້ແອັບພລິເຄຊັນ People ຄືນ ເພື່ອໃຊ້ຄຸນສົມບັດນີ້."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"ບໍ່ສາມາດນຳໃຊ້ການຊອກຫາດ້ວຍສຽງໄດ້."</string>
+    <string name="call_not_available" msgid="8941576511946492225">"ບໍ່​ສາ​ມາດ​ໂທ​ໄດ​້​ເນື່ອງ​ຈາກ​ແອັບ​ພ​ລິ​ເຄ​ຊັນ​ໂທ​ລະ​ສັບ​ຖືກ​ປິດ​ການ​ນຳ​ໃຊ້​ໄວ້."</string>
+    <string name="activity_not_available" msgid="8265265380537872585">"​ບໍ່​ມີ​ຄຳ​ສັ່ງ​ທີ່​ຕິດ​ຕັ້ງ​ໄວ້​ທີ່​ໃຊ້​ຈັດ​ການ​ການ​ເຮັດ​ວຽກ​ທີ່​ເລືອກ​ໄດ້."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"ພິມຊື່ ຫຼເບີໂທລະສັບ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ທັງໝົດ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ສາຍທີ່ບໍ່ໄດ້ຮັບ"</string>

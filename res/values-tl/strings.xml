@@ -145,6 +145,8 @@
     <string name="simContacts_title" msgid="27341688347689769">"Mga contact sa SIM card"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Paganahing muli ang application ng Mga Tao upang magamit ang tampok na ito."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Hindi available ang paghahanap gamit ang boses."</string>
+    <string name="call_not_available" msgid="8941576511946492225">"Hindi makagawa ng tawag sa telepono dahil naka-disable ang application na Telepono."</string>
+    <string name="activity_not_available" msgid="8265265380537872585">"Walang available na naka-install na aktibidad upang pangasiwaan ang napiling pagkilos."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"I-type pangalan o phone number"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Lahat"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Di nasagot"</string>
