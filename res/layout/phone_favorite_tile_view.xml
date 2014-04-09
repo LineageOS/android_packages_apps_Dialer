@@ -15,9 +15,6 @@
 -->
 <view
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:paddingBottom="1dip"
-    android:paddingRight="1dip"
-    android:paddingEnd="1dip"
     android:id="@+id/contact_tile"
     class="com.android.dialer.list.PhoneFavoriteSquareTileView" >
 
