@@ -18,8 +18,6 @@ package com.android.incallui;
 
 import android.animation.LayoutTransition;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.telephony.DisconnectCause;
@@ -48,6 +46,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mNumberLabel;
     private TextView mPrimaryName;
     private TextView mCallServiceLabel;
+    private ImageView mCallServiceIcon;
     private TextView mCallStateLabel;
     private TextView mCallTypeLabel;
     private ImageView mPhoto;
@@ -109,6 +108,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mSecondaryCallInfo = (ViewStub) view.findViewById(R.id.secondary_call_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
         mCallServiceLabel = (TextView) view.findViewById(R.id.callServiceLabel);
+        mCallServiceIcon = (ImageView) view.findViewById(R.id.callServiceIcon);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mCallTypeLabel = (TextView) view.findViewById(R.id.callTypeLabel);
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
@@ -300,17 +300,15 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         if (!TextUtils.isEmpty(text)) {
             mCallServiceLabel.setText(text);
             if (isWiFi) {
-                mCallServiceLabel.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                        R.drawable.ic_in_call_wifi, 0, 0, 0);
-                mCallServiceLabel.setCompoundDrawablePadding(5);
-                mCallServiceLabel.setCompoundDrawablePadding((int) (mDensity * 5));
+                mCallServiceIcon.setImageResource(R.drawable.ic_in_call_wifi);
+                mCallServiceIcon.setVisibility(View.VISIBLE);
             } else {
-                mCallServiceLabel.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                mCallServiceIcon.setVisibility(View.GONE);
             }
             mCallServiceLabel.setVisibility(View.VISIBLE);
         } else {
             mCallServiceLabel.setText("");
-            mCallServiceLabel.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+            mCallServiceIcon.setVisibility(View.GONE);
             mCallServiceLabel.setVisibility(View.GONE);
         }
     }
