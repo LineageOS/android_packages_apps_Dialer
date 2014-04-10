@@ -120,6 +120,7 @@ public class InCallServiceImpl extends InCallService {
     private static int translateState(CallState state) {
         switch (state) {
             case DIALING:
+            case NEW:
                 return Call.State.DIALING;
             case RINGING:
                 return Call.State.INCOMING;
