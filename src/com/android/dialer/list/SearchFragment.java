@@ -16,11 +16,10 @@
 package com.android.dialer.list;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.Toast;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
@@ -28,12 +27,18 @@ import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
-import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.list.OnListFragmentScrolledListener;
+import com.android.dialer.util.DialerUtils;
 
 public class SearchFragment extends PhoneNumberPickerFragment {
 
     private OnListFragmentScrolledListener mActivityScrollListener;
+
+    /*
+     * Stores the untouched user-entered string that is used to populate the add to contacts
+     * intent.
+     */
+    private String mAddToContactNumber;
 
     @Override
     public void onAttach(Activity activity) {
@@ -81,6 +86,10 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         }
     }
 
+    public void setAddToContactNumber(String addToContactNumber) {
+        mAddToContactNumber = addToContactNumber;
+    }
+
     @Override
     protected ContactEntryListAdapter createListAdapter() {
         DialerPhoneNumberListAdapter adapter = new DialerPhoneNumberListAdapter(getActivity());
@@ -103,19 +112,11 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                 listener.onCallNumberDirectly(getQueryString());
             }
         } else if (shortcutType == DialerPhoneNumberListAdapter.SHORTCUT_ADD_NUMBER_TO_CONTACTS) {
-            final String number = adapter.getFormattedQueryString();
+            final String number = TextUtils.isEmpty(mAddToContactNumber) ?
+                    adapter.getFormattedQueryString() : mAddToContactNumber;
             final Intent intent = DialtactsActivity.getAddNumberToContactIntent(number);
-            startActivityWithErrorToast(intent);
-        }
-    }
-
-    private void startActivityWithErrorToast(Intent intent) {
-        try {
-            startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            Toast toast = Toast.makeText(getActivity(), R.string.add_contact_not_available,
-                    Toast.LENGTH_SHORT);
-            toast.show();
+            DialerUtils.startActivityWithErrorToast(getActivity(), intent,
+                    R.string.add_contact_not_available);
         }
     }
 }
