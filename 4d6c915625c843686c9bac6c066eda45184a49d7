@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af24918_881a386d",
+        "filename": "res/values-am/cm_arrays.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2881
+      },
+      "writtenOn": "2014-04-11T10:31:54Z",
+      "side": 1,
+      "message": "empty arrays?",
+      "revId": "4d6c915625c843686c9bac6c066eda45184a49d7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
