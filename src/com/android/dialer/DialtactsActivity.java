@@ -902,6 +902,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 // fragment manager correctly figure out whatever fragment was last displayed.
                 return;
             }
+            mDialpadOverflowMenu = mDialpadFragment.buildOptionsMenu(mMenuButton);
             mSearchView.setText(normalizedQuery);
         }
     }
