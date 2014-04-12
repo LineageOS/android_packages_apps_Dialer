@@ -51,6 +51,7 @@ import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.ContactTileView;
+import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapter;
@@ -102,11 +103,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         public void onShowAllContacts();
     }
 
-    public interface Listener {
-        public void onContactSelected(Uri contactUri);
-        public void onCallNumberDirectly(String phoneNumber);
-    }
-
     public interface HostInterface {
         public void setDragDropController(DragDropController controller);
     }
@@ -155,15 +151,15 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private class ContactTileAdapterListener implements ContactTileView.Listener {
         @Override
         public void onContactSelected(Uri contactUri, Rect targetRect) {
-            if (mListener != null) {
-                mListener.onContactSelected(contactUri);
+            if (mPhoneNumberPickerActionListener != null) {
+                mPhoneNumberPickerActionListener.onPickPhoneNumberAction(contactUri);
             }
         }
 
         @Override
         public void onCallNumberDirectly(String phoneNumber) {
-            if (mListener != null) {
-                mListener.onCallNumberDirectly(phoneNumber);
+            if (mPhoneNumberPickerActionListener != null) {
+                mPhoneNumberPickerActionListener.onCallNumberDirectly(phoneNumber);
             }
         }
 
@@ -189,7 +185,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         }
     }
 
-    private Listener mListener;
+    private OnPhoneNumberPickerActionListener mPhoneNumberPickerActionListener;
 
     private OnListFragmentScrolledListener mActivityScrollListener;
     private OnShowAllContactsListener mShowAllContactsListener;
@@ -362,6 +358,13 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                     + " must implement OnDragDropListener and HostInterface");
         }
 
+        try {
+            mPhoneNumberPickerActionListener = (OnPhoneNumberPickerActionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement PhoneFavoritesFragment.listener");
+        }
+
         // Use initLoader() instead of restartLoader() to refraining unnecessary reload.
         // This method call implicitly assures ContactTileLoaderListener's onLoadFinished() will
         // be called, on which we'll check if "all" contacts should be reloaded again or not.
@@ -389,10 +392,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      */
     private void showAllContacts() {
         mShowAllContactsListener.onShowAllContacts();
-    }
-
-    public void setListener(Listener listener) {
-        mListener = listener;
     }
 
     @Override

@@ -71,6 +71,7 @@ import com.android.dialer.dialpad.SmartDialPrefix;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.list.AllContactsActivity;
 import com.android.dialer.list.DragDropController;
+import com.android.dialer.list.ListsFragment;
 import com.android.dialer.list.OnDragDropListener;
 import com.android.dialer.list.OnListFragmentScrolledListener;
 import com.android.dialer.list.PhoneFavoriteFragment;
@@ -94,7 +95,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         DialpadFragment.HostInterface,
         PhoneFavoriteFragment.OnShowAllContactsListener,
         PhoneFavoriteFragment.HostInterface,
-        OnDragDropListener, View.OnLongClickListener {
+        OnDragDropListener, View.OnLongClickListener,
+        OnPhoneNumberPickerActionListener {
     private static final String TAG = "DialtactsActivity";
 
     public static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -129,11 +131,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private static final int ANIMATION_DURATION = 250;
 
     /**
-     * The main fragment displaying the user's favorites and frequent contacts
-     */
-    private PhoneFavoriteFragment mPhoneFavoriteFragment;
-
-    /**
      * Fragment containing the dialpad that slides into view
      */
     private DialpadFragment mDialpadFragment;
@@ -147,6 +144,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Fragment for searching phone numbers using the dialpad.
      */
     private SmartDialSearchFragment mSmartDialSearchFragment;
+
+    /**
+     * Fragment containing the speed dial list, recents list, and all contacts list.
+     */
+    private ListsFragment mListsFragment;
 
     private View mFakeActionBar;
     private View mMenuButton;
@@ -187,6 +189,21 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private String mSearchQuery;
 
     private DialerDatabaseHelper mDialerDatabaseHelper;
+
+    private class OverflowPopupMenu extends PopupMenu {
+        public OverflowPopupMenu(Context context, View anchor) {
+            super(context, anchor);
+        }
+
+        @Override
+        public void show() {
+            final Menu menu = getMenu();
+            final MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
+            // TODO: Check mPhoneFavoriteFragment.hasFrequents()
+            clearFrequents.setVisible(true);
+            super.show();
+        }
+    }
 
     /**
      * Listener used when one of phone numbers in search UI is selected. This will initiate a
@@ -287,7 +304,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // is null. Otherwise the fragment manager takes care of recreating these fragments.
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.dialtacts_frame, new PhoneFavoriteFragment(), TAG_FAVORITES_FRAGMENT)
+                    .add(R.id.dialtacts_frame, new ListsFragment(), TAG_FAVORITES_FRAGMENT)
                     .add(R.id.dialtacts_container, new DialpadFragment(), TAG_DIALPAD_FRAGMENT)
                     .commit();
         } else {
@@ -369,12 +386,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             if (mFragmentsFrame != null) {
                 mFragmentsFrame.setAlpha(1.0f);
             }
-        } else if (fragment instanceof PhoneFavoriteFragment) {
-            mPhoneFavoriteFragment = (PhoneFavoriteFragment) fragment;
-            mPhoneFavoriteFragment.setListener(mPhoneFavoriteListener);
-            if (mFragmentsFrame != null) {
-                mFragmentsFrame.setAlpha(1.0f);
-            }
+        } else if (fragment instanceof ListsFragment) {
+            mListsFragment = (ListsFragment) fragment;
         }
     }
 
@@ -582,7 +595,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     .setInterpolator(hideActionBarInterpolator).setDuration(ANIMATION_DURATION);
         }
 
-        if (mPhoneFavoriteFragment != null && mPhoneFavoriteFragment.isVisible()) {
+        if (mListsFragment != null && mListsFragment.isVisible()) {
             // If the favorites fragment is showing, fade to blank.
             mFragmentsFrame.animate().alpha(0.0f);
         }
@@ -608,10 +621,18 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     .setInterpolator(showActionBarInterpolator).setDuration(ANIMATION_DURATION);
         }
 
-        if (mPhoneFavoriteFragment != null && mPhoneFavoriteFragment.isVisible()) {
+        if (mListsFragment != null && mListsFragment.isVisible()) {
             mFragmentsFrame.animate().alpha(1.0f);
         }
         getActionBar().show();
+    }
+
+    private void hideInputMethod(View view) {
+        final InputMethodManager imm = (InputMethodManager) getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        if (imm != null && view != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     @Override
@@ -711,29 +732,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         return !isDialIntent(getIntent()) ? CALL_ORIGIN_DIALTACTS : null;
     }
 
-    private final PhoneFavoriteFragment.Listener mPhoneFavoriteListener =
-            new PhoneFavoriteFragment.Listener() {
-        @Override
-        public void onContactSelected(Uri contactUri) {
-            PhoneNumberInteraction.startInteractionForPhoneCall(
-                        DialtactsActivity.this, contactUri, getCallOrigin());
-        }
-
-        @Override
-        public void onCallNumberDirectly(String phoneNumber) {
-            Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin());
-            startActivity(intent);
-        }
-    };
-
-    private void hideInputMethod(View view) {
-        final InputMethodManager imm = (InputMethodManager) getSystemService(
-                Context.INPUT_METHOD_SERVICE);
-        if (imm != null && view != null) {
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
     /**
      * Shows the search fragment
      */
@@ -752,12 +750,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
         SearchFragment fragment;
-        if (mInDialpadSearch) {
+        if (mInDialpadSearch && mSmartDialSearchFragment != null) {
             transaction.remove(mSmartDialSearchFragment);
-        } else if (mInRegularSearch) {
+        } else if (mInRegularSearch && mRegularSearchFragment != null) {
             transaction.remove(mRegularSearchFragment);
-        } else {
-            transaction.remove(mPhoneFavoriteFragment);
         }
 
         final String tag;
@@ -860,18 +856,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onListFragmentScroll(int firstVisibleItem, int visibleItemCount,
             int totalItemCount) {
-
-        // Hide the action bar when scrolling down in the speed dial list, and show it again when
-        // scrolling back up.
-        if (firstVisibleItem > mPreviousFirstVisibleItem) {
-            getActionBar().hide();
-        } else if (firstVisibleItem < mPreviousFirstVisibleItem) {
-            getActionBar().show();
-        }
-        mPreviousFirstVisibleItem = firstVisibleItem;
+        // TODO: No-op for now. This should eventually show/hide the actionBar based on
+        // interactions with the ListsFragments.
     }
-
-    private int mPreviousFirstVisibleItem = 0;
 
     @Override
     public void setDialButtonEnabled(boolean enabled) {
@@ -942,5 +929,25 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void setDragDropController(DragDropController dragController) {
         mRemoveViewContainer.setDragDropController(dragController);
+    }
+
+    @Override
+    public void onPickPhoneNumberAction(Uri dataUri) {
+        mPhoneNumberPickerActionListener.onPickPhoneNumberAction(dataUri);
+    }
+
+    @Override
+    public void onCallNumberDirectly(String phoneNumber) {
+        mPhoneNumberPickerActionListener.onCallNumberDirectly(phoneNumber);
+    }
+
+    @Override
+    public void onShortcutIntentCreated(Intent intent) {
+        mPhoneNumberPickerActionListener.onShortcutIntentCreated(intent);
+    }
+
+    @Override
+    public void onHomeInActionBarSelected() {
+        mPhoneNumberPickerActionListener.onHomeInActionBarSelected();
     }
 }

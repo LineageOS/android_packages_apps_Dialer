@@ -624,14 +624,6 @@
          [CHAR LIMIT=30] -->
     <string name="dialer_hint_find_contact">Type a name or phone number</string>
 
-    <!-- Title for the call log tab containing the list of all voicemails and calls
-         [CHAR LIMIT=15] -->
-    <string name="call_log_all_title">All</string>
-
-    <!-- Title for the call log tab containing the list of all missed calls only
-         [CHAR LIMIT=15] -->
-    <string name="call_log_missed_title">Missed</string>
-
     <!-- String resource for the font-family to use for the call log activity's title
          Do not translate. -->
     <string name="call_log_activity_title_font_family">sans-serif-light</string>
@@ -704,6 +696,20 @@
     <string name="dialpad_star_letters"></string>
     <!--  Do not translate. -->
     <string name="dialpad_pound_letters"></string>
+
+    <!-- Title for the call log tab containing the list of all voicemails and calls
+         [CHAR LIMIT=15] -->
+    <string name="call_log_all_title">All</string>
+
+    <!-- Title for the call log tab containing the list of all missed calls only
+         [CHAR LIMIT=15] -->
+    <string name="call_log_missed_title">Missed</string>
+
+    <string name="tab_speed_dial">Speed Dial</string>
+
+    <string name="tab_recents">Recents</string>
+
+    <string name="tab_all_contacts">Contacts</string>
 
     <!--  Title of fragment that displays all contacts -->
     <string name="show_all_contacts_title">All contacts</string>
