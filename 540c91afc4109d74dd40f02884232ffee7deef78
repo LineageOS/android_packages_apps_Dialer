@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af24918_db252caf",
+        "filename": "res/values-ru/cm_extra.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2014-04-12T03:20:08Z",
+      "side": 1,
+      "message": "oops kill it with fire!!",
+      "revId": "540c91afc4109d74dd40f02884232ffee7deef78",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
