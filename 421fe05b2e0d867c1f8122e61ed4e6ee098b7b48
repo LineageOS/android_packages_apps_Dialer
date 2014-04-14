@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af24918_19731cb3",
+        "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-04-14T20:28:59Z",
+      "side": 1,
+      "message": "accountSid",
+      "revId": "421fe05b2e0d867c1f8122e61ed4e6ee098b7b48",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af24918_796860bb",
+        "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-04-14T20:28:59Z",
+      "side": 1,
+      "message": "authToken",
+      "revId": "421fe05b2e0d867c1f8122e61ed4e6ee098b7b48",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
