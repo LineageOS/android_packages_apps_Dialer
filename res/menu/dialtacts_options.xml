@@ -15,6 +15,16 @@
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/menu_search"
+        android:title="@string/description_search_button"
+        android:showAsAction="always"
+        android:actionViewClass="android.widget.SearchView"/>
+    <item
+        android:id="@+id/menu_history"
+        android:icon="@drawable/ic_menu_history_lt"
+        android:title="@string/action_menu_call_history_description"
+        android:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/menu_import_export"
         android:title="@string/menu_import_export" />
     <item

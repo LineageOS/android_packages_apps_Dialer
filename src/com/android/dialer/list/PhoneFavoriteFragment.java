@@ -178,6 +178,10 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         @Override
         public void onScroll(AbsListView view,
                 int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            if (mActivityScrollListener != null) {
+                mActivityScrollListener.onListFragmentScroll(firstVisibleItem, visibleItemCount,
+                    totalItemCount);
+            }
         }
 
         @Override
@@ -258,6 +262,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         final String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mCallLogAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
                 new ContactInfoHelper(getActivity(), currentCountryIso), false, false);
+
         mWifiSettings = new WifiSettings(getActivity());
         setHasOptionsMenu(true);
     }

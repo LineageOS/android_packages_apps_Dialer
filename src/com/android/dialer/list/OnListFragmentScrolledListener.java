@@ -21,4 +21,6 @@ package com.android.dialer.list;
  */
 public interface OnListFragmentScrolledListener {
     public void onListFragmentScrollStateChange(int scrollState);
+    public void onListFragmentScroll(int firstVisibleItem, int visibleItemCount,
+            int totalItemCount);
 }
