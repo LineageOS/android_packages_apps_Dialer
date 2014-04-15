@@ -838,8 +838,6 @@ public class DialpadFragment extends Fragment
 
     private void setupMenuItems(Menu menu) {
         final MenuItem addToContactMenuItem = menu.findItem(R.id.menu_add_contacts);
-        final MenuItem twoSecPauseMenuItem = menu.findItem(R.id.menu_2s_pause);
-        final MenuItem waitMenuItem = menu.findItem(R.id.menu_add_wait);
         final MenuItem videocallMenuItem = menu.findItem(R.id.menu_video_call);
         final MenuItem videocallsettingsMenuItem = menu.findItem(R.id.menu_video_call_settings);
         final MenuItem ipCallBySlot1MenuItem = menu.findItem(R.id.menu_ip_call_by_slot1);
@@ -854,8 +852,6 @@ public class DialpadFragment extends Fragment
         // We never show a menu if the "choose dialpad" UI is up.
         if (dialpadChooserVisible() || isDigitsEmpty()) {
             addToContactMenuItem.setVisible(false);
-            twoSecPauseMenuItem.setVisible(false);
-            waitMenuItem.setVisible(false);
             videocallMenuItem.setVisible(false);
             ipCallBySlot1MenuItem.setVisible(false);
             ipCallBySlot2MenuItem.setVisible(false);
