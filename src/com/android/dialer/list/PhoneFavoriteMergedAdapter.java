@@ -119,6 +119,9 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         mCallLogAdapter.registerDataSetObserver(mObserver);
         mContactTileAdapter.registerDataSetObserver(mObserver);
         mPhoneFavoritesMenu = phoneFavoritesMenu;
+        // Temporary hack to hide the favorites menu because it is not being used.
+        // It should be removed from this adapter entirely eventually.
+        mPhoneFavoritesMenu.setVisibility(View.GONE);
         mTileInteractionTeaserView = tileInteractionTeaserView;
         mCallLogQueryHandler = new CallLogQueryHandler(mContext.getContentResolver(),
                 mCallLogQueryHandlerListener);

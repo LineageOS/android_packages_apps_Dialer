@@ -16,11 +16,13 @@
   -->
 
 <!-- The phone favorites menu appears on the main dialer screen above the favorite callers area,
-     and provides access to the All Contacts list. -->
+     and provides access to the All Contacts list. This is 1dp tall as a temporary hack to hide
+     it because it is no longer being used. It should be removed from its parent adapter entirely
+     eventually. -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/phone_favorites_menu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="1dp"
                 android:paddingLeft="@dimen/favorites_menu_padding_horizontal"
                 android:paddingRight="@dimen/favorites_menu_padding_horizontal"
                 android:paddingTop="@dimen/favorites_menu_padding_top"
