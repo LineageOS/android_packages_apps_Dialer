@@ -14,12 +14,22 @@
      limitations under the License.
 -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/calllog_frame">
+    android:id="@+id/calllog_frame"
+    android:orientation="vertical">
+    <com.android.dialer.list.ViewPagerTabs
+        android:id="@+id/viewpager_header"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:textAllCaps="true"
+        android:orientation="horizontal"
+        android:layout_gravity="top"
+        style="@style/DialtactsActionBarTabTextStyle" />
     <android.support.v4.view.ViewPager
         android:id="@+id/call_log_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</FrameLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+</LinearLayout>

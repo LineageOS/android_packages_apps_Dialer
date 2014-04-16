@@ -19,21 +19,18 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CallLog.Calls;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
+import com.android.dialer.list.ViewPagerTabs;
 
 public class CallLogActivity extends Activity {
 
@@ -42,6 +39,8 @@ public class CallLogActivity extends Activity {
     private CallLogFragment mAllCallsFragment;
     private CallLogFragment mMissedCallsFragment;
     private CallLogFragment mVoicemailFragment;
+
+    private String[] mTabTitles;
 
     private static final int TAB_INDEX_ALL = 0;
     private static final int TAB_INDEX_MISSED = 1;
@@ -71,44 +70,15 @@ public class CallLogActivity extends Activity {
         }
 
         @Override
+        public CharSequence getPageTitle(int position) {
+            return mTabTitles[position];
+        }
+
+        @Override
         public int getCount() {
             return TAB_INDEX_COUNT;
         }
     }
-
-    private final TabListener mTabListener = new TabListener() {
-        @Override
-        public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        }
-
-        @Override
-        public void onTabSelected(Tab tab, FragmentTransaction ft) {
-            if (mViewPager != null && mViewPager.getCurrentItem() != tab.getPosition()) {
-                mViewPager.setCurrentItem(tab.getPosition(), true);
-            }
-        }
-
-        @Override
-        public void onTabReselected(Tab tab, FragmentTransaction ft) {
-        }
-    };
-
-    private final OnPageChangeListener mOnPageChangeListener = new OnPageChangeListener() {
-
-        @Override
-        public void onPageScrolled(
-                int position, float positionOffset, int positionOffsetPixels) {}
-
-        @Override
-        public void onPageSelected(int position) {
-            final ActionBar actionBar = getActionBar();
-            actionBar.selectTab(actionBar.getTabAt(position));
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int arg0) {
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,20 +88,23 @@ public class CallLogActivity extends Activity {
         getWindow().setBackgroundDrawable(null);
 
         final ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
 
-        addTab(actionBar, getString(R.string.call_log_all_title));
-        addTab(actionBar, getString(R.string.call_log_missed_title));
-        addTab(actionBar, getString(R.string.call_log_voicemail_title));
+        mTabTitles = new String[TAB_INDEX_COUNT];
+        mTabTitles[0] = getString(R.string.call_log_all_title);
+        mTabTitles[1] = getString(R.string.call_log_missed_title);
+        mTabTitles[2] = getString(R.string.call_log_voicemail_title);
 
         mViewPager = (ViewPager) findViewById(R.id.call_log_pager);
+
         mViewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
-        mViewPager.setOnPageChangeListener(mOnPageChangeListener);
         mViewPager.setOffscreenPageLimit(2);
+
+        ViewPagerTabs tabs = (ViewPagerTabs) findViewById(R.id.viewpager_header);
+        tabs.setViewPager(mViewPager);
     }
 
     @Override
@@ -166,13 +139,5 @@ public class CallLogActivity extends Activity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void addTab(ActionBar actionBar, String title) {
-        final Tab tab = actionBar.newTab();
-        tab.setContentDescription(title);
-        tab.setText(title);
-        tab.setTabListener(mTabListener);
-        actionBar.addTab(tab);
     }
 }
