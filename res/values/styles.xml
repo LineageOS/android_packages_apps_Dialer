@@ -152,7 +152,7 @@
     </style>
 
     <style name="DialtactsActionBarStyle" parent="android:Widget.Quantum.ActionBar">
-        <item name="android:background">@drawable/call_history_actionbar_background</item>
+        <item name="android:background">@color/actionbar_background_color</item>
         <item name="android:backgroundStacked">#ffffff</item>
         <item name="android:titleTextStyle">@style/DialtactsActionBarTitleText</item>
         <!-- Empty icon -->

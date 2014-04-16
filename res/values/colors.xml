@@ -59,11 +59,7 @@
 
     <!-- Background color of action bars.  Ensure this stays in sync with packages/Telephony
          actionbar_background_color. -->
-    <color name="actionbar_background_color">#3B77E7</color>
-
-    <!-- Underline color of action bars.  Ensure this stays in sync with packages/Telephony
-         actionbar_underline. -->
-    <color name="actionbar_underline">#3265C1</color>
+    <color name="actionbar_background_color">#00AFCC</color>
 
     <!-- Color of the 1dp divider that separates favorites -->
     <color name="favorite_contacts_separator_color">#d0d0d0</color>
