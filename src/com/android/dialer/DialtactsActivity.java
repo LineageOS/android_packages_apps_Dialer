@@ -173,6 +173,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private boolean mFirstLaunch;
 
+    /**
+     * Search query to be applied to the SearchView in the ActionBar once
+     * onCreateOptionsMenu has been called.
+     */
+    private String mPendingSearchViewQuery;
+
     // This view points to the Framelayout that houses both the search view and remove view
     // containers.
     private View mSearchAndRemoveViewContainer;
@@ -648,6 +654,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         mSearchView.setOnQueryTextListener(mPhoneSearchQueryTextListener);
         mSearchView.setIconifiedByDefault(false);
+
+        if (mPendingSearchViewQuery != null) {
+            mSearchView.setQuery(mPendingSearchViewQuery, false);
+            mPendingSearchViewQuery = null;
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -826,6 +837,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         final String normalizedQuery = SmartDialNameMatcher.normalizeNumber(query,
                 SmartDialNameMatcher.LATIN_SMART_DIAL_MAP);
+        if (mSearchView == null) {
+            if (!TextUtils.isEmpty(normalizedQuery)) {
+                mPendingSearchViewQuery = normalizedQuery;
+            }
+            return;
+        }
         if (!TextUtils.equals(mSearchView.getQuery(), normalizedQuery)) {
             if (DEBUG) {
                 Log.d(TAG, "onDialpadQueryChanged - new query: " + query);
