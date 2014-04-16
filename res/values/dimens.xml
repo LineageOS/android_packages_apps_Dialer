@@ -122,12 +122,8 @@
     <!-- Size of the icon (voice search, close search) in the search box. -->
     <dimen name="search_box_icon_size">37dp</dimen>
 
-    <!-- Height of the underline of a tab. -->
-    <dimen name="tab_underline_height">2dp</dimen>
     <!-- Height of the selection indicator of a tab. -->
-    <dimen name="tab_selection_height">7.7dp</dimen>
-    <!-- Padding above and below the divider line of a tab. -->
-    <dimen name="tab_divider_padding">12dp</dimen>
+    <dimen name="tab_selected_underline_height">3dp</dimen>
     <!-- Size of text in tabs. -->
-    <dimen name="tab_text_size">12sp</dimen>
+    <dimen name="tab_text_size">13sp</dimen>
 </resources>

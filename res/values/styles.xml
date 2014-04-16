@@ -168,14 +168,11 @@
     <!-- Styling for the tab bar; handles styling of the divider line. -->
     <style name="DialtactsActionBarTabBarStyle"
            parent="@android:style/Widget.Quantum.ActionBar.TabBar">
-        <item name="android:divider">@drawable/divider</item>
-        <item name="android:showDividers">middle</item>
-        <item name="android:dividerPadding">@dimen/tab_divider_padding</item>
-        <item name="android:background">@drawable/action_bar_tab</item>
+        <item name="android:showDividers">none</item>
     </style>
 
     <!-- Styling for tabs. -->
-    <style name="DialtactsActionBarTabStyle" parent="@android:style/Widget.Holo.ActionBar.TabView">
+    <style name="DialtactsActionBarTabStyle" parent="@android:style/Widget.Quantum.ActionBar.TabView">
         <item name="android:background">@drawable/action_bar_tab</item>
         <item name="android:showDividers">none</item>
     </style>
