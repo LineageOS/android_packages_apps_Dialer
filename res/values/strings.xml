@@ -705,6 +705,10 @@
          [CHAR LIMIT=15] -->
     <string name="call_log_missed_title">Missed</string>
 
+    <!-- Title for the call log tab containing the list of all voicemail calls only
+         [CHAR LIMIT=15] -->
+    <string name="call_log_voicemail_title">Voicemail</string>
+
     <string name="tab_speed_dial">Speed Dial</string>
 
     <string name="tab_recents">Recents</string>

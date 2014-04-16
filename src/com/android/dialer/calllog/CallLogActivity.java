@@ -26,19 +26,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CallLog.Calls;
 import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.TypefaceSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
-import com.android.dialer.calllog.CallLogFragment;
 
 public class CallLogActivity extends Activity {
 
@@ -46,11 +41,13 @@ public class CallLogActivity extends Activity {
     private ViewPagerAdapter mViewPagerAdapter;
     private CallLogFragment mAllCallsFragment;
     private CallLogFragment mMissedCallsFragment;
+    private CallLogFragment mVoicemailFragment;
 
     private static final int TAB_INDEX_ALL = 0;
     private static final int TAB_INDEX_MISSED = 1;
+    private static final int TAB_INDEX_VOICEMAIL = 2;
 
-    private static final int TAB_INDEX_COUNT = 2;
+    private static final int TAB_INDEX_COUNT = 3;
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager fm) {
@@ -66,6 +63,9 @@ public class CallLogActivity extends Activity {
                 case TAB_INDEX_MISSED:
                     mMissedCallsFragment = new CallLogFragment(Calls.MISSED_TYPE);
                     return mMissedCallsFragment;
+                case TAB_INDEX_VOICEMAIL:
+                    mVoicemailFragment = new CallLogFragment(Calls.VOICEMAIL_TYPE);
+                    return mVoicemailFragment;
             }
             throw new IllegalStateException("No fragment at position " + position);
         }
@@ -123,25 +123,15 @@ public class CallLogActivity extends Activity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
 
-        final Tab allTab = actionBar.newTab();
-        final String allTitle = getString(R.string.call_log_all_title);
-        allTab.setContentDescription(allTitle);
-        allTab.setText(allTitle);
-        allTab.setTabListener(mTabListener);
-        actionBar.addTab(allTab);
-
-        final Tab missedTab = actionBar.newTab();
-        final String missedTitle = getString(R.string.call_log_missed_title);
-        missedTab.setContentDescription(missedTitle);
-        missedTab.setText(missedTitle);
-        missedTab.setTabListener(mTabListener);
-        actionBar.addTab(missedTab);
+        addTab(actionBar, getString(R.string.call_log_all_title));
+        addTab(actionBar, getString(R.string.call_log_missed_title));
+        addTab(actionBar, getString(R.string.call_log_voicemail_title));
 
         mViewPager = (ViewPager) findViewById(R.id.call_log_pager);
         mViewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setOnPageChangeListener(mOnPageChangeListener);
-        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.setOffscreenPageLimit(2);
     }
 
     @Override
@@ -176,5 +166,13 @@ public class CallLogActivity extends Activity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void addTab(ActionBar actionBar, String title) {
+        final Tab tab = actionBar.newTab();
+        tab.setContentDescription(title);
+        tab.setText(title);
+        tab.setTabListener(mTabListener);
+        actionBar.addTab(tab);
     }
 }
