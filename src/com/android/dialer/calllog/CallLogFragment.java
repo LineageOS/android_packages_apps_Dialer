@@ -30,7 +30,6 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.VoicemailContract.Status;
-import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +47,6 @@ import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.android.dialerbind.ObjectFactory;
-import com.android.internal.telephony.ITelephony;
 
 import java.util.List;
 
@@ -83,8 +81,6 @@ public class CallLogFragment extends ListFragment
     private boolean mVoicemailStatusFetched;
 
     private final Handler mHandler = new Handler();
-
-    private TelephonyManager mTelephonyManager;
 
     private class CustomContentObserver extends ContentObserver {
         public CustomContentObserver() {
@@ -345,6 +341,9 @@ public class CallLogFragment extends ListFragment
         switch (filterType) {
             case Calls.MISSED_TYPE:
                 message = getString(R.string.recentMissed_empty);
+                break;
+            case Calls.VOICEMAIL_TYPE:
+                message = getString(R.string.recentVoicemails_empty);
                 break;
             case CallLogQueryHandler.CALL_TYPE_ALL:
                 message = getString(R.string.recentCalls_empty);
