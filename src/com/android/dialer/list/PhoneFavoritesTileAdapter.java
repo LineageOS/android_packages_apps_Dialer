@@ -826,7 +826,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                         MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY)
                         );
             }
-            setMeasuredDimension(width, height + getPaddingTop() + getPaddingBottom());
+            setMeasuredDimension(width, height);
         }
 
         /**
