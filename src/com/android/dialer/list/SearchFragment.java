@@ -40,6 +40,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
      * intent.
      */
     private String mAddToContactNumber;
+    private int mActionBarHeight;
 
     @Override
     public void onAttach(Activity activity) {
@@ -65,10 +66,11 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             getAdapter().setHasHeader(0, false);
         }
 
+        mActionBarHeight = ((DialtactsActivity) getActivity()).getActionBarHeight();
         final ListView listView = getListView();
         listView.setPaddingRelative(
                 listView.getPaddingStart(),
-                getActivity().getActionBar().getHeight(),
+                mActionBarHeight,
                 listView.getPaddingEnd(),
                 listView.getPaddingBottom());
         listView.setClipToPadding(false);
@@ -86,7 +88,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         });
 
         if (!getActivity().getActionBar().isShowing()) {
-            listView.setTranslationY(-getActivity().getActionBar().getHeight());
+            listView.setTranslationY(-mActionBarHeight);
         }
     }
 
