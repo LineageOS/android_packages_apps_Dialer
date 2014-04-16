@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -30,6 +31,7 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
      * of the parent HorizontalScrollView.
      */
     LinearLayout mChild;
+    final int mTextStyle;
     final ColorStateList mTextColor;
     final int mTextSize;
     final boolean mTextAllCaps;
@@ -39,7 +41,7 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
     private static final int TAB_SIDE_PADDING_IN_DPS = 10;
 
     private static final int[] ATTRS = new int[] {
-        android.R.attr.textAppearance,
+        android.R.attr.textStyle,
         android.R.attr.textSize,
         android.R.attr.textColor,
         android.R.attr.textAllCaps
@@ -92,6 +94,7 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
         mSidePadding = (int) (getResources().getDisplayMetrics().density * TAB_SIDE_PADDING_IN_DPS);
 
         final TypedArray a = context.obtainStyledAttributes(attrs, ATTRS);
+        mTextStyle = a.getInt(0, 0);
         mTextSize = a.getDimensionPixelSize(1, 0);
         mTextColor = a.getColorStateList(2);
         mTextAllCaps = a.getBoolean(3, false);
@@ -129,8 +132,11 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
         textView.setOnLongClickListener(new OnTabLongClickListener(position));
 
         // Assign various text appearance related attributes to child views.
+        if (mTextStyle > 0) {
+            textView.setTypeface(textView.getTypeface(), mTextStyle);
+        }
         if (mTextSize > 0) {
-            textView.setTextSize(mTextSize);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
         }
         if (mTextColor != null) {
             textView.setTextColor(mTextColor);
