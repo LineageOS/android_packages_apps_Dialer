@@ -145,13 +145,9 @@
     <string name="simContacts_title" msgid="27341688347689769">"Kenalan kad SIM"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Dayakan semula aplikasi Orang untuk menggunakan ciri ini."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Carian suara tidak tersedia."</string>
-    <!-- no translation found for call_not_available (8941576511946492225) -->
-    <skip />
-    <!-- no translation found for activity_not_available (8265265380537872585) -->
-    <skip />
+    <string name="call_not_available" msgid="8941576511946492225">"Tidak boleh membuat panggilan telefon kerana aplikasi Telefon telah dilumpuhkan."</string>
+    <string name="activity_not_available" msgid="8265265380537872585">"Tiada aktiviti yang dipasang tersedia untuk mengendalikan tindakan yang dipilih."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Taip nama atau nombor telefon"</string>
-    <string name="call_log_all_title" msgid="3566738938889333307">"Semua"</string>
-    <string name="call_log_missed_title" msgid="4541142293870638971">"Tidak dijawab"</string>
     <string name="recentMissed_empty" msgid="5427113551557296665">"Tiada panggilan tidak dijawab terbaru."</string>
     <string name="recentVoicemails_empty" msgid="5163114119598014048">"Tiada mel suara terbaru."</string>
     <string name="show_all_contacts" msgid="1732256558071778056">"Tunjukkan semua kenalan"</string>
@@ -167,6 +163,14 @@
     <string name="dialpad_7_number" msgid="4175113016564167123">"7"</string>
     <string name="dialpad_8_number" msgid="7949849563865941621">"8"</string>
     <string name="dialpad_9_number" msgid="4377059952097526576">"9"</string>
+    <string name="call_log_all_title" msgid="3566738938889333307">"Semua"</string>
+    <string name="call_log_missed_title" msgid="4541142293870638971">"Tidak dijawab"</string>
+    <!-- no translation found for tab_speed_dial (7807567599021643864) -->
+    <skip />
+    <!-- no translation found for tab_recents (929949073851377206) -->
+    <skip />
+    <!-- no translation found for tab_all_contacts (1410922767166533690) -->
+    <skip />
     <string name="show_all_contacts_title" msgid="8395378484578221791">"Semua kenalan"</string>
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Semua kenalan"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Dialih keluar daripada kegemaran"</string>
