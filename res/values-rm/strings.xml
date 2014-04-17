@@ -223,10 +223,6 @@
     <skip />
     <!-- no translation found for dialer_hint_find_contact (8798845521253672403) -->
     <skip />
-    <!-- no translation found for call_log_all_title (3566738938889333307) -->
-    <skip />
-    <!-- no translation found for call_log_missed_title (4541142293870638971) -->
-    <skip />
     <!-- no translation found for recentMissed_empty (5427113551557296665) -->
     <skip />
     <!-- no translation found for recentVoicemails_empty (5163114119598014048) -->
@@ -256,6 +252,16 @@
     <!-- no translation found for dialpad_8_number (7949849563865941621) -->
     <skip />
     <!-- no translation found for dialpad_9_number (4377059952097526576) -->
+    <skip />
+    <!-- no translation found for call_log_all_title (3566738938889333307) -->
+    <skip />
+    <!-- no translation found for call_log_missed_title (4541142293870638971) -->
+    <skip />
+    <!-- no translation found for tab_speed_dial (7807567599021643864) -->
+    <skip />
+    <!-- no translation found for tab_recents (929949073851377206) -->
+    <skip />
+    <!-- no translation found for tab_all_contacts (1410922767166533690) -->
     <skip />
     <!-- no translation found for show_all_contacts_title (8395378484578221791) -->
     <skip />

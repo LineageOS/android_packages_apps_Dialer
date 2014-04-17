@@ -148,8 +148,6 @@
     <string name="call_not_available" msgid="8941576511946492225">"Не вдається здійснити дзвінок, оскільки додаток Телефон вимкнено."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Неможливо обробити вибрану дію."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Введіть ім’я чи номер телефону"</string>
-    <string name="call_log_all_title" msgid="3566738938889333307">"Усі"</string>
-    <string name="call_log_missed_title" msgid="4541142293870638971">"Пропущені"</string>
     <string name="recentMissed_empty" msgid="5427113551557296665">"Немає нещодавніх пропущених викликів."</string>
     <string name="recentVoicemails_empty" msgid="5163114119598014048">"Немає нещодавніх повідомлень голосової пошти."</string>
     <string name="show_all_contacts" msgid="1732256558071778056">"Показати всі контакти"</string>
@@ -165,6 +163,14 @@
     <string name="dialpad_7_number" msgid="4175113016564167123">"7"</string>
     <string name="dialpad_8_number" msgid="7949849563865941621">"8"</string>
     <string name="dialpad_9_number" msgid="4377059952097526576">"9"</string>
+    <string name="call_log_all_title" msgid="3566738938889333307">"Усі"</string>
+    <string name="call_log_missed_title" msgid="4541142293870638971">"Пропущені"</string>
+    <!-- no translation found for tab_speed_dial (7807567599021643864) -->
+    <skip />
+    <!-- no translation found for tab_recents (929949073851377206) -->
+    <skip />
+    <!-- no translation found for tab_all_contacts (1410922767166533690) -->
+    <skip />
     <string name="show_all_contacts_title" msgid="8395378484578221791">"Усі контакти"</string>
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Усі контакти"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Вилучено з вибраного"</string>
