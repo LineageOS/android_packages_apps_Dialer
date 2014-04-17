@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.TypedArray;
 import android.graphics.Outline;
 import android.net.Uri;
 import android.os.Bundle;
@@ -159,6 +160,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private View mFragmentsFrame;
 
+    private int mActionBarHeight;
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
@@ -305,6 +307,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         getActionBar().setDisplayShowHomeEnabled(false);
         getActionBar().setDisplayShowTitleEnabled(false);
+
+        final TypedArray styledAttributes = getTheme().obtainStyledAttributes(
+                new int[] { android.R.attr.actionBarSize });
+        mActionBarHeight = (int) styledAttributes.getDimension(0, 0);
+        styledAttributes.recycle();
 
         // Add the favorites fragment, and the dialpad fragment, but only if savedInstanceState
         // is null. Otherwise the fragment manager takes care of recreating these fragments.
@@ -597,11 +604,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             fragment = mRegularSearchFragment;
         }
         if (fragment != null && fragment.isVisible()) {
-            fragment.getListView().animate().translationY(-getActionBar().getHeight())
+            fragment.getListView().animate().translationY(-mActionBarHeight)
                     .setInterpolator(hideActionBarInterpolator).setDuration(ANIMATION_DURATION);
         }
 
-        if (mListsFragment != null && mListsFragment.isVisible()) {
+        if (mListsFragment != null && mListsFragment.isResumed() && mListsFragment.isVisible()) {
             // If the favorites fragment is showing, fade to blank.
             mFragmentsFrame.animate().alpha(0.0f);
         }
@@ -966,5 +973,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onHomeInActionBarSelected() {
         mPhoneNumberPickerActionListener.onHomeInActionBarSelected();
+    }
+
+    public int getActionBarHeight() {
+        return mActionBarHeight;
     }
 }
