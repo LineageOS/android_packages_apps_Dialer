@@ -113,6 +113,8 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
     }
 
     private void addTabs(PagerAdapter adapter) {
+        mChild.removeAllViews();
+
         final int count = adapter.getCount();
         for (int i = 0; i < count; i++) {
             addTab(adapter.getPageTitle(i), i);

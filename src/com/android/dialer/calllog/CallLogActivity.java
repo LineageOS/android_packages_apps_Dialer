@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.CallLog.Calls;
 import android.support.v13.app.FragmentPagerAdapter;
@@ -31,14 +32,17 @@ import android.view.MenuItem;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.list.ViewPagerTabs;
+import com.android.dialer.voicemail.VoicemailStatusHelper;
+import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 
-public class CallLogActivity extends Activity {
-
+public class CallLogActivity extends Activity implements CallLogQueryHandler.Listener {
     private ViewPager mViewPager;
+    private ViewPagerTabs mViewPagerTabs;
     private ViewPagerAdapter mViewPagerAdapter;
     private CallLogFragment mAllCallsFragment;
     private CallLogFragment mMissedCallsFragment;
     private CallLogFragment mVoicemailFragment;
+    private VoicemailStatusHelper mVoicemailStatusHelper;
 
     private String[] mTabTitles;
 
@@ -46,7 +50,10 @@ public class CallLogActivity extends Activity {
     private static final int TAB_INDEX_MISSED = 1;
     private static final int TAB_INDEX_VOICEMAIL = 2;
 
-    private static final int TAB_INDEX_COUNT = 3;
+    private static final int TAB_INDEX_COUNT_DEFAULT = 2;
+    private static final int TAB_INDEX_COUNT_WITH_VOICEMAIL = 3;
+
+    private boolean mHasActiveVoicemailProvider;
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager fm) {
@@ -76,7 +83,8 @@ public class CallLogActivity extends Activity {
 
         @Override
         public int getCount() {
-            return TAB_INDEX_COUNT;
+            return mHasActiveVoicemailProvider ? TAB_INDEX_COUNT_WITH_VOICEMAIL :
+                    TAB_INDEX_COUNT_DEFAULT;
         }
     }
 
@@ -92,7 +100,7 @@ public class CallLogActivity extends Activity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
 
-        mTabTitles = new String[TAB_INDEX_COUNT];
+        mTabTitles = new String[TAB_INDEX_COUNT_WITH_VOICEMAIL];
         mTabTitles[0] = getString(R.string.call_log_all_title);
         mTabTitles[1] = getString(R.string.call_log_missed_title);
         mTabTitles[2] = getString(R.string.call_log_voicemail_title);
@@ -103,8 +111,18 @@ public class CallLogActivity extends Activity {
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setOffscreenPageLimit(2);
 
-        ViewPagerTabs tabs = (ViewPagerTabs) findViewById(R.id.viewpager_header);
-        tabs.setViewPager(mViewPager);
+        mViewPagerTabs = (ViewPagerTabs) findViewById(R.id.viewpager_header);
+        mViewPagerTabs.setViewPager(mViewPager);
+
+        mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CallLogQueryHandler callLogQueryHandler =
+                new CallLogQueryHandler(this.getContentResolver(), this);
+        callLogQueryHandler.fetchVoicemailStatus();
     }
 
     @Override
@@ -139,5 +157,25 @@ public class CallLogActivity extends Activity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onVoicemailStatusFetched(Cursor statusCursor) {
+        if (this.isFinishing()) {
+            return;
+        }
+
+        // Update mHasActiveVoicemailProvider, which controls the number of tabs displayed.
+        int activeSources = mVoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor);
+        if (activeSources > 0 != mHasActiveVoicemailProvider) {
+            mHasActiveVoicemailProvider = activeSources > 0;
+            mViewPagerAdapter.notifyDataSetChanged();
+            mViewPagerTabs.setViewPager(mViewPager);
+        }
+    }
+
+    @Override
+    public void onCallsFetched(Cursor statusCursor) {
+        // Do nothing. Implemented to satisfy CallLogQueryHandler.Listener.
     }
 }
