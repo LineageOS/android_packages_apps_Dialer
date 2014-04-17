@@ -102,6 +102,7 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
         mChild = new LinearLayout(context);
         addView(mChild,
                 new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+        a.recycle();
     }
 
     public void setViewPager(ViewPager viewPager) {
