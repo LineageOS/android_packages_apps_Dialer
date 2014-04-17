@@ -28,8 +28,6 @@ public class ListsFragment extends Fragment {
     private PhoneFavoriteFragment mSpeedDialFragment;
     private AllContactsFragment mAllContactsFragment;
 
-    private OnPhoneNumberPickerActionListener mNumberPickerListener;
-
     private static final int TAB_INDEX_SPEED_DIAL = 0;
     private static final int TAB_INDEX_ALL_CONTACTS = 1;
 
@@ -50,8 +48,6 @@ public class ListsFragment extends Fragment {
                     return mSpeedDialFragment;
                 case TAB_INDEX_ALL_CONTACTS:
                     mAllContactsFragment = new AllContactsFragment();
-                    mAllContactsFragment.setOnPhoneNumberPickerActionListener(
-                            mNumberPickerListener);
                     return mAllContactsFragment;
             }
             throw new IllegalStateException("No fragment at position " + position);
@@ -84,17 +80,5 @@ public class ListsFragment extends Fragment {
         ViewPagerTabs tabs = (ViewPagerTabs) parentView.findViewById(R.id.lists_pager_header);
         tabs.setViewPager(mViewPager);
         return parentView;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        try {
-            mNumberPickerListener = (OnPhoneNumberPickerActionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnPhoneNumberPickerActionListener");
-        }
     }
 }
