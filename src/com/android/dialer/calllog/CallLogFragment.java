@@ -126,6 +126,10 @@ public class CallLogFragment extends ListFragment
     public void onCreate(Bundle state) {
         super.onCreate(state);
 
+        String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
+        mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this, new ContactInfoHelper(
+                getActivity(), currentCountryIso), true, true);
+        setListAdapter(mAdapter);
         mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
                 this, mLogLimit);
         mKeyguardManager =
@@ -229,10 +233,6 @@ public class CallLogFragment extends ListFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         updateEmptyMessage(mCallTypeFilter);
-        String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this, new ContactInfoHelper(
-                getActivity(), currentCountryIso), true, true);
-        setListAdapter(mAdapter);
         getListView().setItemsCanFocus(true);
     }
 
