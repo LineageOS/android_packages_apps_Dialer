@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.contacts.common.list.ContactListItemView;
+import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.dialer.R;
 
@@ -31,11 +32,6 @@ import com.android.dialer.R;
  * Fragments to show all contacts with phone numbers.
  */
 public class AllContactsFragment extends PhoneNumberPickerFragment{
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -46,6 +42,15 @@ public class AllContactsFragment extends PhoneNumberPickerFragment{
         setDarkTheme(false);
         setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(true /* opposite */));
         setUseCallableUri(true);
+
+        try {
+            OnPhoneNumberPickerActionListener mNumberPickerListener =
+                    (OnPhoneNumberPickerActionListener) activity;
+            setOnPhoneNumberPickerActionListener(mNumberPickerListener);
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnPhoneNumberPickerActionListener");
+        }
     }
 
     @Override
