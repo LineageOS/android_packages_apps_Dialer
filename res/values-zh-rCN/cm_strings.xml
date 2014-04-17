@@ -49,4 +49,5 @@
   <string name="menu_add_to_blacklist">添加到黑名单</string>
   <string name="toast_added_to_blacklist">%s 已添加到黑名单。</string>
   <string name="nearby_places">附近地点</string>
+  <string name="people">人</string>
 </resources>

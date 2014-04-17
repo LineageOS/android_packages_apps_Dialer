@@ -48,4 +48,6 @@
   <string name="call_stats_sort_by_count">מיין לפי מספר שיחות</string>
   <string name="menu_add_to_blacklist">הוסף לרשימה שחורה</string>
   <string name="toast_added_to_blacklist">%s נוסף לרשימה שחורה.</string>
+  <string name="nearby_places">מקומות סמוכים</string>
+  <string name="people">אנשים</string>
 </resources>

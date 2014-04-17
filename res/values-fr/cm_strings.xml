@@ -20,7 +20,6 @@
   <string name="callStatsDetailTitle">Détails des statistiques d\'appels</string>
   <string name="call_stats">Statistiques d\'appels</string>
   <string name="call_stats_refresh">Actualiser</string>
-  <string name="activity_title_call_stats">Statistiques d\'appels</string>
   <string name="call_stats_nav_all">Tous</string>
   <string name="call_stats_nav_incoming">Entrants</string>
   <string name="call_stats_nav_outgoing">Sortants</string>
