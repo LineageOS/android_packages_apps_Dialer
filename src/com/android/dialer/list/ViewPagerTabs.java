@@ -40,9 +40,10 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
 
     private static final int TAB_SIDE_PADDING_IN_DPS = 10;
 
+    // TODO: This should use <declare-styleable> in the future
     private static final int[] ATTRS = new int[] {
-        android.R.attr.textStyle,
         android.R.attr.textSize,
+        android.R.attr.textStyle,
         android.R.attr.textColor,
         android.R.attr.textAllCaps
     };
@@ -94,8 +95,8 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
         mSidePadding = (int) (getResources().getDisplayMetrics().density * TAB_SIDE_PADDING_IN_DPS);
 
         final TypedArray a = context.obtainStyledAttributes(attrs, ATTRS);
-        mTextStyle = a.getInt(0, 0);
-        mTextSize = a.getDimensionPixelSize(1, 0);
+        mTextSize = a.getDimensionPixelSize(0, 0);
+        mTextStyle = a.getInt(1, 0);
         mTextColor = a.getColorStateList(2);
         mTextAllCaps = a.getBoolean(3, false);
 
