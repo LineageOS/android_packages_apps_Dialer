@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="true"
-        android:background="@drawable/ic_contacts_tiles">
+        android:background="@drawable/ic_contacts_tiles" >
 
         <com.android.contacts.common.widget.LayoutSuppressingImageView
             android:id="@+id/contact_tile_image"
@@ -35,7 +35,7 @@
             android:id="@+id/shadow_overlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/shadow_contact_photo"/>
+            android:background="@drawable/shadow_contact_photo" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,32 +47,43 @@
             android:paddingBottom="@dimen/contact_tile_text_bottom_padding"
             android:layout_alignParentBottom="true"
             android:orientation="vertical" >
-            <TextView
-                android:id="@+id/contact_tile_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:textColor="@color/contact_tile_name_color"
-                android:fontFamily="sans-serif"
-                android:singleLine="true"
-                android:textSize="15sp"
-                android:fadingEdge="horizontal"
-                android:fadingEdgeLength="3dip"
-                android:ellipsize="marquee"
-                android:textAlignment="viewStart" />
-            <TextView
-                android:id="@+id/contact_tile_phone_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:textColor="@color/contact_tile_name_color"
-                android:fontFamily="sans-serif"
-                android:singleLine="true"
-                android:textSize="11sp"
-                android:fadingEdge="horizontal"
-                android:fadingEdgeLength="3dip"
-                android:ellipsize="marquee"
-                android:textAlignment="viewStart" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/contact_tile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/contact_tile_name_color"
+                        android:fontFamily="sans-serif"
+                        android:singleLine="true"
+                        android:textSize="15sp"
+                        android:fadingEdge="horizontal"
+                        android:fadingEdgeLength="3dip"
+                        android:ellipsize="marquee"
+                        android:textAlignment="viewStart" />
+                    <ImageView
+                        android:id="@+id/contact_star_icon"
+                        android:layout_width="@dimen/favorites_star_icon_size"
+                        android:layout_height="@dimen/favorites_star_icon_size"
+                        android:src="@drawable/star_thumbnail"
+                        android:visibility="gone" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/contact_tile_phone_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/contact_tile_name_color"
+                    android:fontFamily="sans-serif"
+                    android:singleLine="true"
+                    android:textSize="11sp"
+                    android:fadingEdge="horizontal"
+                    android:fadingEdgeLength="3dip"
+                    android:ellipsize="marquee"
+                    android:textAlignment="viewStart" />
         </LinearLayout>
         <View
             android:id="@+id/contact_tile_push_state"
