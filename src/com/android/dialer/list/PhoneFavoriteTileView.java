@@ -21,6 +21,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.MoreContactUtils;
@@ -87,17 +88,20 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     @Override
     public void loadFromContact(ContactEntry entry) {
         super.loadFromContact(entry);
-        mPhoneNumberString = null; // ... in case we're reusing the view
+        // Set phone number to null in case we're reusing the view.
+        mPhoneNumberString = null;
         if (entry != null) {
-            // Grab the phone-number to call directly... see {@link onClick()}
+            // Grab the phone-number to call directly. See {@link onClick()}.
             mPhoneNumberString = entry.phoneNumber;
 
             // If this is a blank entry, don't show anything.
-            // TODO krelease:Just hide the view for now. For this to truly look like an empty row
+            // TODO krelease: Just hide the view for now. For this to truly look like an empty row
             // the entire ContactTileRow needs to be hidden.
             if (entry == ContactEntry.BLANK_ENTRY) {
                 setVisibility(View.INVISIBLE);
             } else {
+                final ImageView starIcon = (ImageView) findViewById(R.id.contact_star_icon);
+                starIcon.setVisibility(entry.isFavorite ? View.VISIBLE : View.GONE);
                 setVisibility(View.VISIBLE);
             }
         }
