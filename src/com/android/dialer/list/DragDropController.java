@@ -1,9 +1,5 @@
 package com.android.dialer.list;
 
-import android.view.View;
-
-import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,30 +13,22 @@ public class DragDropController {
     /**
      * @return True if the drag is started, false if the drag is cancelled for some reason.
      */
-    boolean handleDragStarted(int x, int y, ContactTileRow tileRow) {
-        final PhoneFavoriteTileView tileView =
-                (PhoneFavoriteTileView) tileRow.getViewAtPosition(x, y);
-
-        final int itemIndex = tileRow.getItemIndex(x, y);
-        if (itemIndex != -1 && !mOnDragDropListeners.isEmpty()) {
+    boolean handleDragStarted(int x, int y, PhoneFavoriteSquareTileView tileView) {
+        if (tileView == null) {
+            return false;
+        }
+        if (tileView != null && !mOnDragDropListeners.isEmpty()) {
             for (int i = 0; i < mOnDragDropListeners.size(); i++) {
-                mOnDragDropListeners.get(i).onDragStarted(itemIndex, x, y, tileView);
+                mOnDragDropListeners.get(i).onDragStarted(x, y, tileView);
             }
         }
 
         return true;
     }
 
-    public void handleDragHovered(int x, int y, View view) {
-        int itemIndex;
-        if (!(view instanceof ContactTileRow)) {
-            itemIndex = -1;
-        } else {
-            final ContactTileRow tile = (ContactTileRow) view;
-            itemIndex = tile.getItemIndex(x, y);
-        }
+    public void handleDragHovered(int x, int y, PhoneFavoriteSquareTileView view) {
         for (int i = 0; i < mOnDragDropListeners.size(); i++) {
-            mOnDragDropListeners.get(i).onDragHovered(itemIndex, x, y);
+            mOnDragDropListeners.get(i).onDragHovered(x, y, view);
         }
     }
 

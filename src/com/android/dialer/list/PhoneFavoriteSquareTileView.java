@@ -18,7 +18,6 @@ package com.android.dialer.list;
 
 import android.content.Context;
 import android.provider.ContactsContract.QuickContact;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
@@ -26,18 +25,23 @@ import android.widget.ImageButton;
 import com.android.contacts.common.R;
 import com.android.contacts.common.list.ContactEntry;
 
-import java.util.regex.Pattern;
-
 /**
- * Displays the contact's picture overlayed with their name
- * in a perfect square. It also has an additional touch target for a secondary action.
+ * Displays the contact's picture overlaid with their name and number type in a tile.
  */
 public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
     private static final String TAG = PhoneFavoriteSquareTileView.class.getSimpleName();
+
+    private final float mHeightToWidthRatio;
+
     private ImageButton mSecondaryButton;
+
+    private ContactEntry mContactEntry;
 
     public PhoneFavoriteSquareTileView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        mHeightToWidthRatio = getResources().getFraction(
+                R.dimen.contact_tile_height_to_width_ratio, 1, 1);
     }
 
     @Override
@@ -50,7 +54,7 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
     @Override
     protected int getApproximateImageSize() {
         // The picture is the full size of the tile (minus some padding, but we can be generous)
-        return mListener.getApproximateTileWidth();
+        return getWidth();
     }
 
     private void launchQuickContact() {
@@ -69,5 +73,24 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
                 }
             });
         }
+        mContactEntry = entry;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        final int width = MeasureSpec.getSize(widthMeasureSpec);
+        final int height = (int) (mHeightToWidthRatio * width);
+        final int count = getChildCount();
+        for (int i = 0; i < count; i++) {
+            getChildAt(i).measure(
+                    MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
+                    MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY)
+                    );
+        }
+        setMeasuredDimension(width, height);
+    }
+
+    public ContactEntry getContactEntry() {
+        return mContactEntry;
     }
 }

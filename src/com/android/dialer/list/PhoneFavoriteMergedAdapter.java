@@ -276,14 +276,6 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
         // Favorites section
         final View view = mContactTileAdapter.getView(position, convertView, parent);
-        if (position >= mContactTileAdapter.getMaxTiledRows()) {
-            final FrameLayout frameLayout = (FrameLayout) view;
-            final View child = frameLayout.getChildAt(0);
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                    FrameLayout.LayoutParams.WRAP_CONTENT);
-            child.setLayoutParams(params);
-        }
         return view;
     }
 
@@ -331,7 +323,6 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     /**
      * The swipeable call log row.
-     * See also {@link PhoneFavoritesTileAdapter.ContactTileRow}.
      */
     private class SwipeableCallLogRow extends FrameLayout implements SwipeHelperCallback {
         private SwipeHelper mSwipeHelper;

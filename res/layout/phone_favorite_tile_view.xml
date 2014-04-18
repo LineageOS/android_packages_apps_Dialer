@@ -16,7 +16,8 @@
 <view
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/contact_tile"
-    class="com.android.dialer.list.PhoneFavoriteSquareTileView" >
+    class="com.android.dialer.list.PhoneFavoriteSquareTileView"
+    android:paddingEnd="@dimen/contact_tile_divider_width">
 
     <RelativeLayout
         android:id="@+id/contact_favorite_card"

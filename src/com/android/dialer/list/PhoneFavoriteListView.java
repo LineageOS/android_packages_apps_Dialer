@@ -29,17 +29,15 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import com.android.dialer.R;
-import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
 
 /**
- * The ListView used to present a combined list of shortcut cards and contact speed-dial
- * tiles.
+ * Viewgroup that presents the user's speed dial contacts in a grid.
  */
-public class PhoneFavoriteListView extends ListView implements OnDragDropListener {
+public class PhoneFavoriteListView extends GridView implements OnDragDropListener {
 
     public static final String LOG_TAG = PhoneFavoriteListView.class.getSimpleName();
 
@@ -116,7 +114,6 @@ public class PhoneFavoriteListView extends ListView implements OnDragDropListene
         super(context, attrs, defStyle);
         mAnimationDuration = context.getResources().getInteger(R.integer.fade_duration);
         mTouchSlop = ViewConfiguration.get(context).getScaledPagingTouchSlop();
-        setItemsCanFocus(true);
         mDragDropController.addOnDragDropListener(this);
     }
 
@@ -146,7 +143,7 @@ public class PhoneFavoriteListView extends ListView implements OnDragDropListene
         final int eX = (int) event.getX();
         final int eY = (int) event.getY();
         switch (action) {
-            case DragEvent.ACTION_DRAG_STARTED:
+            case DragEvent.ACTION_DRAG_STARTED: {
                 final int[] coordinates = new int[2];
                 getLocationOnScreen(coordinates);
                 // Calculate the X and Y coordinates of the drag event relative to the view
@@ -154,21 +151,26 @@ public class PhoneFavoriteListView extends ListView implements OnDragDropListene
                 final int viewY = eY - coordinates[1];
                 final View child = getViewAtPosition(viewX, viewY);
 
-                if (!(child instanceof ContactTileRow)) {
+                if (!(child instanceof PhoneFavoriteSquareTileView)) {
                     // Bail early.
                     return false;
                 }
 
-                final ContactTileRow tile = (ContactTileRow) child;
-
+                final PhoneFavoriteSquareTileView tile = (PhoneFavoriteSquareTileView) child;
                 if (!mDragDropController.handleDragStarted(viewX, viewY, tile)) {
                     return false;
                 }
                 break;
+            }
             case DragEvent.ACTION_DRAG_LOCATION:
                 mLastDragY = eY;
-                final View view = getViewAtPosition(eX, eY);
-                mDragDropController.handleDragHovered(eX, eY, view);
+                final View child = getViewAtPosition(eX, eY);
+
+                PhoneFavoriteSquareTileView tile = null;
+                if (child instanceof PhoneFavoriteSquareTileView) {
+                    tile = (PhoneFavoriteSquareTileView) child;
+                }
+                mDragDropController.handleDragHovered(eX, eY, tile);
                 // Kick off {@link #mScrollHandler} if it's not started yet.
                 if (!mIsDragScrollerRunning &&
                         // And if the distance traveled while dragging exceeds the touch slop
@@ -213,7 +215,8 @@ public class PhoneFavoriteListView extends ListView implements OnDragDropListene
         View child;
         for (int childIdx = 0; childIdx < count; childIdx++) {
             child = getChildAt(childIdx);
-            if (y >= child.getTop() && y <= child.getBottom()) {
+            if (y >= child.getTop() && y <= child.getBottom() && x >= child.getLeft()
+                    && x <= child.getRight()) {
                 return child;
             }
         }
@@ -231,7 +234,7 @@ public class PhoneFavoriteListView extends ListView implements OnDragDropListene
     }
 
     @Override
-    public void onDragStarted(int itemIndex, int x, int y, PhoneFavoriteTileView tileView) {
+    public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView tileView) {
         if (mDragShadowOverlay == null) {
             return;
         }
@@ -244,8 +247,8 @@ public class PhoneFavoriteListView extends ListView implements OnDragDropListene
 
         // Square tile is relative to the contact tile,
         // and contact tile is relative to this list view.
-        mDragShadowLeft = tileView.getLeft() + tileView.getParentRow().getLeft();
-        mDragShadowTop = tileView.getTop() + tileView.getParentRow().getTop();
+        mDragShadowLeft = tileView.getLeft();
+        mDragShadowTop = tileView.getTop();
 
         mDragShadowOverlay.setImageBitmap(mDragShadowBitmap);
         mDragShadowOverlay.setVisibility(VISIBLE);
@@ -262,7 +265,7 @@ public class PhoneFavoriteListView extends ListView implements OnDragDropListene
     }
 
     @Override
-    public void onDragHovered(int itemIndex, int x, int y) {
+    public void onDragHovered(int x, int y, PhoneFavoriteSquareTileView tileView) {
         // Update the drag shadow location.
         mDragShadowLeft = x - mTouchOffsetToChildLeft;
         mDragShadowTop = y - mTouchOffsetToChildTop;
