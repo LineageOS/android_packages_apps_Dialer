@@ -142,12 +142,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.android.dialer.list.AllContactsActivity"
-            android:label="@string/show_all_contacts_title"
-            android:theme="@style/DialtactsTheme"
-            android:screenOrientation="portrait">
-        </activity>
-
         <activity android:name="com.android.dialer.CallDetailActivity"
                   android:label="@string/callDetailTitle"
                   android:theme="@style/CallDetailActivityTheme"
