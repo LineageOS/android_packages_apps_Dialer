@@ -83,13 +83,4 @@ public class AllContactsActivity extends TransactionSafeActivity {
 
         setContentView(R.layout.all_contacts_activity);
     }
-
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        if (fragment instanceof AllContactsFragment) {
-            mAllContactsFragment = (AllContactsFragment) fragment;
-            mAllContactsFragment.setOnPhoneNumberPickerActionListener(
-                    mPhoneNumberPickerActionListener);
-        }
-    }
 }

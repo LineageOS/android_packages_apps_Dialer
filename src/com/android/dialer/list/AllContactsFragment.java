@@ -1,5 +1,4 @@
 /*
-
  * Copyright (C) 2013 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,44 +16,56 @@
 
 package com.android.dialer.list;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.QuickContactBadge;
 
+import com.android.contacts.common.list.ContactEntryListAdapter;
+import com.android.contacts.common.list.ContactEntryListFragment;
+import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.list.ContactListItemView;
-import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
-import com.android.contacts.common.list.PhoneNumberPickerFragment;
+import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.dialer.R;
 
 /**
  * Fragments to show all contacts with phone numbers.
  */
-public class AllContactsFragment extends PhoneNumberPickerFragment{
+public class AllContactsFragment extends ContactEntryListFragment<ContactEntryListAdapter> {
+
+    public AllContactsFragment() {
+        setQuickContactEnabled(true);
+        setPhotoLoaderEnabled(true);
+        setSectionHeaderDisplayEnabled(true);
+        setDarkTheme(false);
+    }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        // Customizes the listview according to the dialer specifics.
-        setQuickContactEnabled(true);
-        setDarkTheme(false);
-        setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(true /* opposite */));
-        setUseCallableUri(true);
-
-        try {
-            OnPhoneNumberPickerActionListener mNumberPickerListener =
-                    (OnPhoneNumberPickerActionListener) activity;
-            setOnPhoneNumberPickerActionListener(mNumberPickerListener);
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnPhoneNumberPickerActionListener");
-        }
+    protected ContactEntryListAdapter createListAdapter() {
+        DefaultContactListAdapter adapter = new DefaultContactListAdapter(getActivity());
+        adapter.setDisplayPhotos(true);
+        adapter.setFilter(ContactListFilter.createFilterWithType(
+                ContactListFilter.FILTER_TYPE_WITH_PHONE_NUMBERS_ONLY));
+        adapter.setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(true /* opposite */));
+        adapter.setSectionHeaderDisplayEnabled(isSectionHeaderDisplayEnabled());
+        return adapter;
     }
 
     @Override
     protected View inflateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.show_all_contacts_fragment, null);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ContactListItemView contactListItemView = (ContactListItemView) view;
+        QuickContactBadge quickContact = contactListItemView.getQuickContact();
+        quickContact.onClick(quickContact);
+    }
+
+    @Override
+    protected void onItemClick(int position, long id) {
+        // Do nothing. Implemented to satisfy ContactEntryListFragment.
     }
 }
