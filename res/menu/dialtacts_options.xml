@@ -34,9 +34,6 @@
         android:id="@+id/menu_add_contact"
         android:title="@string/menu_newContact"/>
     <item
-        android:id="@+id/menu_all_contacts"
-        android:title="@string/menu_allContacts"/>
-    <item
         android:id="@+id/menu_call_settings"
         android:title="@string/call_settings"
         android:orderInCategory="2" />

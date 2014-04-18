@@ -70,7 +70,6 @@ import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 import com.android.dialer.interactions.PhoneNumberInteraction;
-import com.android.dialer.list.AllContactsActivity;
 import com.android.dialer.list.DragDropController;
 import com.android.dialer.list.ListsFragment;
 import com.android.dialer.list.OnDragDropListener;
@@ -94,7 +93,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         DialpadFragment.OnDialpadQueryChangedListener,
         OnListFragmentScrolledListener,
         DialpadFragment.HostInterface,
-        PhoneFavoriteFragment.OnShowAllContactsListener,
         PhoneFavoriteFragment.HostInterface,
         OnDragDropListener, View.OnLongClickListener,
         OnPhoneNumberPickerActionListener {
@@ -494,9 +492,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 return true;
             case R.id.menu_call_settings:
                 handleMenuSettings();
-                return true;
-            case R.id.menu_all_contacts:
-                onShowAllContacts();
                 return true;
         }
         return false;
@@ -900,12 +895,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final TelephonyManager tm = (TelephonyManager) getSystemService(
                 Context.TELEPHONY_SERVICE);
         return tm.getCallState() != TelephonyManager.CALL_STATE_IDLE;
-    }
-
-    @Override
-    public void onShowAllContacts() {
-        final Intent intent = new Intent(this, AllContactsActivity.class);
-        startActivity(intent);
     }
 
     public static Intent getAddNumberToContactIntent(CharSequence text) {

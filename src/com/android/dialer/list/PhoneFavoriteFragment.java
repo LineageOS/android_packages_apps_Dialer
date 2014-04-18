@@ -100,10 +100,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private static final String KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE =
             "key_last_dismissed_call_shortcut_date";
 
-    public interface OnShowAllContactsListener {
-        public void onShowAllContacts();
-    }
-
     public interface HostInterface {
         public void setDragDropController(DragDropController controller);
     }
@@ -189,7 +185,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private OnPhoneNumberPickerActionListener mPhoneNumberPickerActionListener;
 
     private OnListFragmentScrolledListener mActivityScrollListener;
-    private OnShowAllContactsListener mShowAllContactsListener;
     private PhoneFavoriteMergedAdapter mAdapter;
     private PhoneFavoritesTileAdapter mContactTileAdapter;
 
@@ -295,7 +290,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mEmptyView = mParentView.findViewById(R.id.phone_no_favorites_view);
 
         mPhoneFavoritesMenu = inflater.inflate(R.layout.phone_favorites_menu, mListView, false);
-        prepareFavoritesMenu(mPhoneFavoritesMenu);
 
         mContactTileFrame = mParentView.findViewById(R.id.contact_tile_frame);
 
@@ -349,13 +343,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         }
 
         try {
-            mShowAllContactsListener = (OnShowAllContactsListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnShowAllContactsListener");
-        }
-
-        try {
             OnDragDropListener listener = (OnDragDropListener) activity;
             mListView.getDragDropController().addOnDragDropListener(listener);
             ((HostInterface) activity).setDragDropController(mListView.getDragDropController());
@@ -391,13 +378,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             Log.e(TAG, "onItemClick() event for unexpected position. "
                     + "The position " + position + " is before \"all\" section. Ignored.");
         }
-    }
-
-    /**
-     * Gets called when user click on the show all contacts button.
-     */
-    private void showAllContacts() {
-        mShowAllContactsListener.onShowAllContacts();
     }
 
     @Override
@@ -667,20 +647,5 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         prefs.edit().putLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, mLastCallShortcutDate)
                 .apply();
         fetchCalls();
-    }
-
-    /**
-     * Prepares the favorites menu which contains the static label "Speed Dial" and the
-     * "All Contacts" button.  Sets the onClickListener for the "All Contacts" button.
-     */
-    private void prepareFavoritesMenu(View favoritesMenu) {
-        Button allContactsButton = (Button) favoritesMenu.findViewById(R.id.all_contacts_button);
-        // Set the onClick listener for the button to bring up the all contacts view.
-        allContactsButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAllContacts();
-            }
-        });
     }
 }
