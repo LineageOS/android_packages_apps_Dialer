@@ -108,6 +108,10 @@ public class CallLogFragment extends ListFragment
     // will be used.
     private int mLogLimit = -1;
 
+    // Date limit (in millis since epoch) - when non-zero, only calls which occurred on or after
+    // the date filter are included.  If zero, no date-based filtering occurs.
+    private long mDateLimit = 0;
+
     public CallLogFragment() {
         this(CallLogQueryHandler.CALL_TYPE_ALL, -1);
     }
@@ -120,6 +124,28 @@ public class CallLogFragment extends ListFragment
         super();
         mCallTypeFilter = filterType;
         mLogLimit = logLimit;
+    }
+
+    /**
+     * Creates a call log fragment, filtering to include only calls of the desired type, occurring
+     * after the specified date.
+     * @param filterType type of calls to include.
+     * @param dateLimit limits results to calls occurring on or after the specified date.
+     */
+    public CallLogFragment(int filterType, long dateLimit) {
+        this(filterType, -1, dateLimit);
+    }
+
+    /**
+     * Creates a call log fragment, filtering to include only calls of the desired type, occurring
+     * after the specified date.  Also provides a means to limit the number of results returned.
+     * @param filterType type of calls to include.
+     * @param logLimit limits the number of results to return.
+     * @param dateLimit limits results to calls occurring on or after the specified date.
+     */
+    public CallLogFragment(int filterType, int logLimit, long dateLimit) {
+        this(filterType, logLimit);
+        mDateLimit = dateLimit;
     }
 
     @Override
@@ -141,7 +167,7 @@ public class CallLogFragment extends ListFragment
         getActivity().getContentResolver().registerContentObserver(
                 Status.CONTENT_URI, true, mVoicemailStatusObserver);
         setHasOptionsMenu(true);
-        updateCallList(mCallTypeFilter);
+        updateCallList(mCallTypeFilter, mDateLimit);
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -320,20 +346,20 @@ public class CallLogFragment extends ListFragment
 
     @Override
     public void fetchCalls() {
-        mCallLogQueryHandler.fetchCalls(mCallTypeFilter);
+        mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mDateLimit);
     }
 
     public void startCallsQuery() {
         mAdapter.setLoading(true);
-        mCallLogQueryHandler.fetchCalls(mCallTypeFilter);
+        mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mDateLimit);
     }
 
     private void startVoicemailStatusQuery() {
         mCallLogQueryHandler.fetchVoicemailStatus();
     }
 
-    private void updateCallList(int filterType) {
-        mCallLogQueryHandler.fetchCalls(filterType);
+    private void updateCallList(int filterType, long dateLimit) {
+        mCallLogQueryHandler.fetchCalls(filterType, dateLimit);
     }
 
     private void updateEmptyMessage(int filterType) {
