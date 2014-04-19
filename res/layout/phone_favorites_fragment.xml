@@ -35,6 +35,7 @@
             android:id="@+id/contact_tile_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingTop="@dimen/favorites_row_top_padding"
             android:numColumns="@integer/contact_tile_column_count_in_favorites"
             android:clipToPadding="false"
             android:fadingEdge="none"
