@@ -76,7 +76,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     private int mDropEntryIndex = -1;
     /** New position of the temporarily entered contact in the cache. */
     private int mDragEnteredEntryIndex = -1;
-    private long mIdToKeepInPlace = -1;
 
     private boolean mAwaitingRemove = false;
     private boolean mDelayCursorUpdates = false;
@@ -84,10 +83,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     private ContactPhotoManager mPhotoManager;
     protected int mNumFrequents;
     protected int mNumStarred;
-
-    protected int mColumnCount;
-    private int mMaxTiledRows = ROW_LIMIT_DEFAULT;
-    private int mStarredIndex;
 
     protected int mIdIndex;
     protected int mLookupIndex;
@@ -100,10 +95,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     private int mPhoneNumberTypeIndex;
     private int mPhoneNumberLabelIndex;
     private int mIsDefaultNumberIndex;
+    private int mStarredIndex;
     protected int mPinnedIndex;
     protected int mContactIdIndex;
-
-    private final int mPaddingInPixels;
 
     /** Indicates whether a drag is in process. */
     private boolean mInDragging = false;
@@ -135,33 +129,20 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     };
 
     public PhoneFavoritesTileAdapter(Context context, ContactTileView.Listener listener,
-            OnDataSetChangedForAnimationListener dataSetChangedListener,
-            int numCols, int maxTiledRows) {
+            OnDataSetChangedForAnimationListener dataSetChangedListener) {
         mDataSetChangedListener = dataSetChangedListener;
         mListener = listener;
         mContext = context;
         mResources = context.getResources();
-        mColumnCount = numCols;
         mNumFrequents = 0;
-        mMaxTiledRows = maxTiledRows;
         mContactEntries = new ArrayList<ContactEntry>();
-        // Converting padding in dips to padding in pixels
-        mPaddingInPixels = mContext.getResources()
-                .getDimensionPixelSize(R.dimen.contact_tile_divider_width);
+
 
         bindColumnIndices();
     }
 
     public void setPhotoLoader(ContactPhotoManager photoLoader) {
         mPhotoManager = photoLoader;
-    }
-
-    public void setMaxRowCount(int maxRows) {
-        mMaxTiledRows = maxRows;
-    }
-
-    public void setColumnCount(int columnCount) {
-        mColumnCount = columnCount;
     }
 
     /**
@@ -228,12 +209,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             // cause a refresh of any views that rely on this data
             notifyDataSetChanged();
             // about to start redraw
-            if (mIdToKeepInPlace != -1) {
-                mDataSetChangedListener.onDataSetChangedForAnimation(mIdToKeepInPlace);
-            } else {
-                mDataSetChangedListener.onDataSetChangedForAnimation();
-            }
-            mIdToKeepInPlace = -1;
+            mDataSetChangedListener.onDataSetChangedForAnimation();
         }
     }
 
@@ -337,17 +313,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     }
 
     /**
-     * Loads a contact from the cached list.
-     *
-     * @param position Position of the Contact.
-     * @return Contact at the requested position.
-     */
-    protected ContactEntry getContactEntryFromCache(int position) {
-        if (mContactEntries.size() <= position) return null;
-        return mContactEntries.get(position);
-    }
-
-    /**
      * Returns the number of frequents that will be displayed in the list.
      */
     public int getNumFrequents() {
@@ -356,52 +321,11 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
     @Override
     public int getCount() {
-        if (mContactEntries == null || mContactEntries.isEmpty()) {
+        if (mContactEntries == null) {
             return 0;
         }
 
-        int total = mContactEntries.size();
-        // The number of contacts that don't show up as tiles
-        final int nonTiledRows = Math.max(0, total - getMaxContactsInTiles());
-        // The number of tiled rows
-        final int tiledRows = getRowCount(total - nonTiledRows);
-        return nonTiledRows + tiledRows;
-    }
-
-    public int getMaxTiledRows() {
-        return mMaxTiledRows;
-    }
-
-    /**
-     * Returns the number of rows required to show the provided number of entries
-     * with the current number of columns.
-     */
-    protected int getRowCount(int entryCount) {
-        if (entryCount == 0) return 0;
-        final int nonLimitedRows = ((entryCount - 1) / mColumnCount) + 1;
-        if (mMaxTiledRows == NO_ROW_LIMIT) {
-            return nonLimitedRows;
-        }
-        return Math.min(mMaxTiledRows, nonLimitedRows);
-    }
-
-    private int getMaxContactsInTiles() {
-        if (mMaxTiledRows == NO_ROW_LIMIT) {
-            return Integer.MAX_VALUE;
-        }
-        return mColumnCount * mMaxTiledRows;
-    }
-
-    public int getRowIndex(int entryIndex) {
-        if (entryIndex < getMaxContactsInTiles()) {
-            return entryIndex / mColumnCount;
-        } else {
-            return entryIndex - mMaxTiledRows * (mColumnCount + 1);
-        }
-    }
-
-    public int getColumnCount() {
-        return mColumnCount;
+        return mContactEntries.size();
     }
 
     /**
@@ -409,44 +333,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
      * on the row for the given position.
      */
     @Override
-    public ArrayList<ContactEntry> getItem(int position) {
-        ArrayList<ContactEntry> resultList = new ArrayList<ContactEntry>(mColumnCount);
-
-        final int entryIndex = getFirstContactEntryIndexForPosition(position);
-
-        final int viewType = getItemViewType(position);
-
-        final int columnCount;
-        if (viewType == ViewTypes.TOP) {
-            columnCount = mColumnCount;
-        } else {
-            columnCount = 1;
-        }
-
-        for (int i = 0; i < columnCount; i++) {
-            final ContactEntry entry = getContactEntryFromCache(entryIndex + i);
-            if (entry == null) break; // less than mColumnCount contacts
-            resultList.add(entry);
-        }
-
-        return resultList;
-    }
-
-    /*
-     * Given a position in the adapter, returns the index of the first contact entry that is to be
-     * in that row.
-     */
-    private int getFirstContactEntryIndexForPosition(int position) {
-        final int maxContactsInTiles = getMaxContactsInTiles();
-        if (position < getRowCount(maxContactsInTiles)) {
-            // Contacts that appear as tiles
-            return position * mColumnCount;
-        } else {
-            // Contacts that appear as rows
-            // The actual position of the contact in the cursor is simply total the number of
-            // tiled contacts + the given position
-            return maxContactsInTiles + position - mMaxTiledRows;
-        }
+    public ContactEntry getItem(int position) {
+        return mContactEntries.get(position);
     }
 
     /**
@@ -458,18 +346,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
      */
     @Override
     public long getItemId(int position) {
-        return position;
-    }
-
-    /**
-     * Calculates the stable itemId for a particular entry based on the entry's contact ID. This
-     * stable itemId is used for animation purposes.
-     */
-    public long getAdjustedItemId(long id) {
-        if (mMaxTiledRows == NO_ROW_LIMIT) {
-            return id;
-        }
-        return mMaxTiledRows + id;
+        return getItem(position).id;
     }
 
     @Override
@@ -479,7 +356,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
     @Override
     public boolean areAllItemsEnabled() {
-        // No dividers, so all items are enabled.
         return true;
     }
 
@@ -504,32 +380,21 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
         int itemViewType = getItemViewType(position);
 
-        ContactTileRow contactTileRowView = null;
+        PhoneFavoriteTileView tileView = null;
 
-        if (convertView instanceof  ContactTileRow) {
-            contactTileRowView  = (ContactTileRow) convertView;
+        if (convertView instanceof PhoneFavoriteTileView) {
+            tileView  = (PhoneFavoriteTileView) convertView;
         }
 
-        ArrayList<ContactEntry> contactList = getItem(position);
-
-        if (contactTileRowView == null) {
-            // Creating new row if needed
-            contactTileRowView = new ContactTileRow(mContext, itemViewType, position);
+        if (tileView == null) {
+            tileView = (PhoneFavoriteTileView) View.inflate(mContext,
+                    R.layout.phone_favorite_tile_view, null);
         }
-
-        contactTileRowView.configureRow(contactList, position, position == getCount() - 1);
-
-        return contactTileRowView;
+        tileView.setPhotoManager(mPhotoManager);
+        tileView.loadFromContact(getItem(position));
+        return tileView;
     }
 
-    private int getLayoutResourceId(int viewType) {
-        switch (viewType) {
-          case ViewTypes.TOP:
-                return R.layout.phone_favorite_tile_view;
-            default:
-                throw new IllegalArgumentException("Unrecognized viewType " + viewType);
-        }
-    }
     @Override
     public int getViewTypeCount() {
         return ViewTypes.COUNT;
@@ -537,7 +402,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
     @Override
     public int getItemViewType(int position) {
-        return ViewTypes.TOP;
+        return ViewTypes.TILE;
     }
 
     /**
@@ -595,7 +460,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                 // populated with the dragged ContactEntry at the correct spot.
                 mDropEntryIndex = mDragEnteredEntryIndex;
                 mContactEntries.set(mDropEntryIndex, mDraggedEntry);
-                mIdToKeepInPlace = getAdjustedItemId(mDraggedEntry.id);
                 mDataSetChangedListener.cacheOffsetsForDatasetChange();
                 changed = true;
             } else if (isIndexInBound(mDraggedEntryIndex)) {
@@ -641,271 +505,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     }
 
     /**
-     * Acts as a row item composed of {@link ContactTileView}
-     *
-     */
-    public class ContactTileRow extends FrameLayout {
-        public static final int CONTACT_ENTRY_INDEX_TAG = R.id.contact_entry_index_tag;
-
-        private int mItemViewType;
-        private int mLayoutResId;
-        private final int mRowPaddingStart;
-        private final int mRowPaddingEnd;
-        private final int mRowPaddingTop;
-        private final int mRowPaddingBottom;
-        private final float mHeightToWidthRatio;
-        private int mPosition;
-
-        public ContactTileRow(Context context, int itemViewType, int position) {
-            super(context);
-            mItemViewType = itemViewType;
-            mLayoutResId = getLayoutResourceId(mItemViewType);
-            mPosition = position;
-
-            final Resources resources = mContext.getResources();
-
-            mHeightToWidthRatio = getResources().getFraction(
-                    R.dimen.contact_tile_height_to_width_ratio, 1, 1);
-
-            if (mItemViewType == ViewTypes.TOP) {
-                // For tiled views, we still want padding to be set on the ContactTileRow.
-                // Otherwise the padding would be set around each of the tiles, which we don't want
-                mRowPaddingTop = resources.getDimensionPixelSize(
-                        R.dimen.favorites_row_top_padding);
-                mRowPaddingBottom = resources.getDimensionPixelSize(
-                        R.dimen.favorites_row_bottom_padding);
-                mRowPaddingStart = resources.getDimensionPixelSize(
-                        R.dimen.favorites_row_start_padding);
-                mRowPaddingEnd = resources.getDimensionPixelSize(
-                        R.dimen.favorites_row_end_padding);
-            } else {
-                // For row views, padding is set on the view itself.
-                mRowPaddingTop = 0;
-                mRowPaddingBottom = 0;
-                mRowPaddingStart = 0;
-                mRowPaddingEnd = 0;
-            }
-
-            setPaddingRelative(mRowPaddingStart, mRowPaddingTop, mRowPaddingEnd,
-                    mRowPaddingBottom);
-
-            // Remove row (but not children) from accessibility node tree.
-            setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
-        }
-
-        /**
-         * Configures the row to add {@link ContactEntry}s information to the views
-         */
-        public void configureRow(ArrayList<ContactEntry> list, int position, boolean isLastRow) {
-            final int columnCount = mColumnCount;
-            mPosition = position;
-
-            // Adding tiles to row and filling in contact information
-            for (int columnCounter = 0; columnCounter < columnCount; columnCounter++) {
-                ContactEntry entry =
-                        columnCounter < list.size() ? list.get(columnCounter) : null;
-                addTileFromEntry(entry, columnCounter, isLastRow);
-            }
-        }
-
-        private void addTileFromEntry(ContactEntry entry, int childIndex, boolean isLastRow) {
-            final PhoneFavoriteTileView contactTile;
-
-            if (getChildCount() <= childIndex) {
-
-                contactTile = (PhoneFavoriteTileView) inflate(mContext, mLayoutResId, null);
-                // Note: the layoutparam set here is only actually used for FREQUENT.
-                // We override onMeasure() for STARRED and we don't care the layout param there.
-                final Resources resources = mContext.getResources();
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                params.setMargins(
-                        resources.getDimensionPixelSize(R.dimen.detail_item_side_margin), 0,
-                        resources.getDimensionPixelSize(R.dimen.detail_item_side_margin), 0);
-                contactTile.setLayoutParams(params);
-                contactTile.setPhotoManager(mPhotoManager);
-                contactTile.setListener(mListener);
-                addView(contactTile);
-            } else {
-                contactTile = (PhoneFavoriteTileView) getChildAt(childIndex);
-            }
-            contactTile.loadFromContact(entry);
-
-            int entryIndex = -1;
-            switch (mItemViewType) {
-                case ViewTypes.TOP:
-                    // Setting divider visibilities
-                    contactTile.setPaddingRelative(0, 0,
-                            childIndex >= mColumnCount - 1 ? 0 : mPaddingInPixels, 0);
-                    entryIndex = getFirstContactEntryIndexForPosition(mPosition) + childIndex;
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        @Override
-        protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-            switch (mItemViewType) {
-                case ViewTypes.TOP:
-                    onLayoutForTiles();
-                    return;
-                default:
-                    super.onLayout(changed, left, top, right, bottom);
-                    return;
-            }
-        }
-
-        private void onLayoutForTiles() {
-            final int count = getChildCount();
-
-            // Just line up children horizontally.
-            int childLeft = getPaddingStart();
-            for (int i = 0; i < count; i++) {
-                final View child = getChildAt(i);
-
-                // Note MeasuredWidth includes the padding.
-                final int childWidth = child.getMeasuredWidth();
-                child.layout(childLeft, getPaddingTop(), childLeft + childWidth,
-                        getPaddingTop() + child.getMeasuredHeight());
-                childLeft += childWidth;
-            }
-        }
-
-        @Override
-        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-            switch (mItemViewType) {
-                case ViewTypes.TOP:
-                    onMeasureForTiles(widthMeasureSpec);
-                    return;
-                default:
-                    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-                    return;
-            }
-        }
-
-        private void onMeasureForTiles(int widthMeasureSpec) {
-            final int width = MeasureSpec.getSize(widthMeasureSpec);
-
-            final int childCount = getChildCount();
-            if (childCount == 0) {
-                // Just in case...
-                setMeasuredDimension(width, 0);
-                return;
-            }
-
-            // 1. Calculate image size.
-            //      = ([total width] - [total padding]) / [child count]
-            //
-            // 2. Set it to width/height of each children.
-            //    If we have a remainder, some tiles will have 1 pixel larger width than its height.
-            //
-            // 3. Set the dimensions of itself.
-            //    Let width = given width.
-            //    Let height = image size + bottom paddding.
-
-            final int totalPaddingsInPixels = (mColumnCount - 1) * mPaddingInPixels
-                    + mRowPaddingStart + mRowPaddingEnd;
-
-            // Preferred width / height for images (excluding the padding).
-            // The actual width may be 1 pixel larger than this if we have a remainder.
-            final int imageWidth = (width - totalPaddingsInPixels) / mColumnCount;
-            final int remainder = width - (imageWidth * mColumnCount) - totalPaddingsInPixels;
-
-            final int height = (int) (mHeightToWidthRatio * imageWidth);
-
-            for (int i = 0; i < childCount; i++) {
-                final View child = getChildAt(i);
-                final int childWidth = imageWidth + child.getPaddingRight()
-                        // Compensate for the remainder
-                        + (i < remainder ? 1 : 0);
-                child.measure(
-                        MeasureSpec.makeMeasureSpec(childWidth, MeasureSpec.EXACTLY),
-                        MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY)
-                        );
-            }
-            setMeasuredDimension(width, height);
-        }
-
-        /**
-         * Gets the index of the item at the specified coordinates.
-         *
-         * @param itemX X-coordinate of the selected item.
-         * @param itemY Y-coordinate of the selected item.
-         * @return Index of the selected item in the cached array.
-         */
-        public int getItemIndex(float itemX, float itemY) {
-            if (mMaxTiledRows == NO_ROW_LIMIT || mPosition < mMaxTiledRows) {
-                if (DEBUG) {
-                    Log.v(TAG, String.valueOf(itemX) + " " + String.valueOf(itemY));
-                }
-                for (int i = 0; i < getChildCount(); ++i) {
-                    /** If the row contains multiple tiles, checks each tile to see if the point
-                     * is contained in the tile. */
-                    final View child = getChildAt(i);
-                    /** The coordinates passed in are based on the ListView,
-                     * translate for each child first */
-                    final int xInListView = child.getLeft() + getLeft();
-                    final int yInListView = child.getTop() + getTop();
-                    final int distanceX = (int) itemX - xInListView;
-                    final int distanceY = (int) itemY - yInListView;
-                    if ((distanceX > 0 && distanceX < child.getWidth()) &&
-                            (distanceY > 0 && distanceY < child.getHeight())) {
-                        /** If the point is contained in the rectangle, computes the index of the
-                         * item in the cached array. */
-                        return i + (mPosition) * mColumnCount;
-                    }
-                }
-            } else {
-                /** If the selected item is one of the rows, compute the index. */
-                return getRegularRowItemIndex();
-            }
-            return -1;
-        }
-
-        /**
-         * Gets the index of the regular row item.
-         *
-         * @return Index of the selected item in the cached array.
-         */
-        public int getRegularRowItemIndex() {
-            return (mPosition - mMaxTiledRows) + mColumnCount * mMaxTiledRows;
-        }
-
-        public PhoneFavoritesTileAdapter getTileAdapter() {
-            return PhoneFavoritesTileAdapter.this;
-        }
-
-        public int getPosition() {
-            return mPosition;
-        }
-
-        /**
-         * Find the view under the pointer.
-         */
-        public View getViewAtPosition(int x, int y) {
-            // find the view under the pointer, accounting for GONE views
-            final int count = getChildCount();
-            View view;
-            for (int childIdx = 0; childIdx < count; childIdx++) {
-                view = getChildAt(childIdx);
-                if (x >= view.getLeft() && x <= view.getRight()) {
-                    return view;
-                }
-            }
-            return null;
-        }
-
-        public int getItemViewType() {
-            return mItemViewType;
-        }
-    }
-
-    /**
-     * Used when a contact is swiped away. This will both unstar and set pinned position of the
-     * contact to PinnedPosition.DEMOTED so that it doesn't show up anymore in the favorites list.
+     * Used when a contact is removed from speeddial. This will both unstar and set pinned position
+     * of the contact to PinnedPosition.DEMOTED so that it doesn't show up anymore in the favorites
+     * list.
      */
     private void unstarAndUnpinContact(Uri contactUri) {
         final ContentValues values = new ContentValues(2);
@@ -1001,18 +603,25 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     }
 
     protected static class ViewTypes {
-        public static final int TOP = 0;
+        public static final int TILE = 0;
         public static final int COUNT = 1;
     }
 
     @Override
-    public void onDragStarted(int itemIndex, int x, int y, PhoneFavoriteTileView view) {
+    public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView view) {
         setInDragging(true);
+        final int itemIndex = mContactEntries.indexOf(view.getContactEntry());
         popContactEntry(itemIndex);
     }
 
     @Override
-    public void onDragHovered(int itemIndex, int x, int y) {
+    public void onDragHovered(int x, int y, PhoneFavoriteSquareTileView view) {
+        if (view == null) {
+            // The user is hovering over a view that is not a contact tile, no need to do
+            // anything here.
+            return;
+        }
+        final int itemIndex = mContactEntries.indexOf(view.getContactEntry());
         if (mInDragging &&
                 mDragEnteredEntryIndex != itemIndex &&
                 isIndexInBound(itemIndex) &&

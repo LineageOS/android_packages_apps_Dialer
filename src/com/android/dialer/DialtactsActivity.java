@@ -76,6 +76,7 @@ import com.android.dialer.list.OnDragDropListener;
 import com.android.dialer.list.OnListFragmentScrolledListener;
 import com.android.dialer.list.PhoneFavoriteFragment;
 import com.android.dialer.list.PhoneFavoriteTileView;
+import com.android.dialer.list.PhoneFavoriteSquareTileView;
 import com.android.dialer.list.RegularSearchFragment;
 import com.android.dialer.list.RemoveView;
 import com.android.dialer.list.SearchFragment;
@@ -915,13 +916,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Called when the user has long-pressed a contact tile to start a drag operation.
      */
     @Override
-    public void onDragStarted(int itemIndex, int x, int y, PhoneFavoriteTileView view) {
+    public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView view) {
         getActionBar().hide();
         mSearchAndRemoveViewContainer.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void onDragHovered(int itemIndex, int x, int y) {}
+    public void onDragHovered(int x, int y, PhoneFavoriteSquareTileView view) {}
 
     /**
      * Called when the user has released a contact tile after long-pressing it.
