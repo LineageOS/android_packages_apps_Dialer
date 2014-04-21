@@ -39,6 +39,7 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
         setPhotoLoaderEnabled(true);
         setSectionHeaderDisplayEnabled(true);
         setDarkTheme(false);
+        setVisibleScrollbarEnabled(true);
     }
 
     @Override
