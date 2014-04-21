@@ -94,6 +94,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         DialpadFragment.OnDialpadQueryChangedListener,
         OnListFragmentScrolledListener,
         DialpadFragment.HostInterface,
+        ListsFragment.HostInterface,
         PhoneFavoriteFragment.HostInterface,
         OnDragDropListener, View.OnLongClickListener,
         OnPhoneNumberPickerActionListener {
@@ -427,10 +428,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 showDialpadFragment(true);
                 break;
             case R.id.call_history_button:
-                // Use explicit CallLogActivity intent instead of ACTION_VIEW +
-                // CONTENT_TYPE, so that we always open our call log from our dialer
-                final Intent intent = new Intent(this, CallLogActivity.class);
-                startActivity(intent);
+                showCallHistory();
                 break;
             case R.id.dial_button:
                 // Dial button was pressed; tell the Dialpad fragment
@@ -463,10 +461,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_history:
-                // Use explicit CallLogActivity intent instead of ACTION_VIEW +
-                // CONTENT_TYPE, so that we always open our call log from our dialer
-                final Intent intent = new Intent(this, CallLogActivity.class);
-                startActivity(intent);
+                showCallHistory();
                 break;
             case R.id.menu_add_contact:
                 try {
@@ -910,6 +905,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
                 PackageManager.MATCH_DEFAULT_ONLY);
         return resolveInfo != null && resolveInfo.size() > 0;
+    }
+
+    @Override
+    public void showCallHistory() {
+        // Use explicit CallLogActivity intent instead of ACTION_VIEW +
+        // CONTENT_TYPE, so that we always open our call log from our dialer
+        final Intent intent = new Intent(this, CallLogActivity.class);
+        startActivity(intent);
     }
 
     /**
