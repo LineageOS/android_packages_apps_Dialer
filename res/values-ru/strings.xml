@@ -150,7 +150,6 @@
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Введите имя или номер телефона"</string>
     <string name="recentMissed_empty" msgid="5427113551557296665">"Нет пропущенных звонков."</string>
     <string name="recentVoicemails_empty" msgid="5163114119598014048">"Нет новых голосовых сообщений"</string>
-    <string name="show_all_contacts" msgid="1732256558071778056">"Все контакты"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Только часто используемые"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"История"</string>
     <string name="dialpad_0_number" msgid="8859392433961251108">"0"</string>
@@ -165,12 +164,10 @@
     <string name="dialpad_9_number" msgid="4377059952097526576">"9"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Все"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Пропущенные"</string>
-    <!-- no translation found for tab_speed_dial (7807567599021643864) -->
-    <skip />
-    <!-- no translation found for tab_recents (929949073851377206) -->
-    <skip />
-    <!-- no translation found for tab_all_contacts (1410922767166533690) -->
-    <skip />
+    <string name="call_log_voicemail_title" msgid="940422274047025948">"Г. почта"</string>
+    <string name="tab_speed_dial" msgid="7807567599021643864">"Быстрый набор"</string>
+    <string name="tab_recents" msgid="929949073851377206">"Недавние"</string>
+    <string name="tab_all_contacts" msgid="1410922767166533690">"Контакты"</string>
     <string name="show_all_contacts_title" msgid="8395378484578221791">"Все контакты"</string>
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Все контакты"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Контакт удален из избранных"</string>

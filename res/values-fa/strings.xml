@@ -150,7 +150,6 @@
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"نام یا  شماره تلفن را تایپ کنید"</string>
     <string name="recentMissed_empty" msgid="5427113551557296665">"اخیراً هیچ تماس بی‌پاسخی نداشته‌اید."</string>
     <string name="recentVoicemails_empty" msgid="5163114119598014048">"اخیراً هیچ پست صوتی نداشته‌اید."</string>
-    <string name="show_all_contacts" msgid="1732256558071778056">"نمایش همه مخاطبین"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"فقط نمایش موارد دلخواه"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"سابقه"</string>
     <string name="dialpad_0_number" msgid="8859392433961251108">"۰"</string>
@@ -165,12 +164,10 @@
     <string name="dialpad_9_number" msgid="4377059952097526576">"۹"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"همه موارد"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"بی‌پاسخ"</string>
-    <!-- no translation found for tab_speed_dial (7807567599021643864) -->
-    <skip />
-    <!-- no translation found for tab_recents (929949073851377206) -->
-    <skip />
-    <!-- no translation found for tab_all_contacts (1410922767166533690) -->
-    <skip />
+    <string name="call_log_voicemail_title" msgid="940422274047025948">"پست صوتی"</string>
+    <string name="tab_speed_dial" msgid="7807567599021643864">"شماره‌گیری سریع"</string>
+    <string name="tab_recents" msgid="929949073851377206">"موارد اخیر"</string>
+    <string name="tab_all_contacts" msgid="1410922767166533690">"مخاطبین"</string>
     <string name="show_all_contacts_title" msgid="8395378484578221791">"همه مخاطبین"</string>
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"همه مخاطبین"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"از موارد دلخواه حذف شد"</string>
