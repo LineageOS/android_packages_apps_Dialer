@@ -55,7 +55,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     private final PhoneFavoritesTileAdapter mContactTileAdapter;
     private final CallLogAdapter mCallLogAdapter;
     private final View mPhoneFavoritesMenu;
-    private final PhoneFavoriteFragment mFragment;
+    private final ListsFragment mFragment;
     private final TileInteractionTeaserView mTileInteractionTeaserView;
 
     private final int mCallLogPadding;
@@ -100,7 +100,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     };
 
     public PhoneFavoriteMergedAdapter(Context context,
-            PhoneFavoriteFragment fragment,
+            ListsFragment fragment,
             PhoneFavoritesTileAdapter contactTileAdapter,
             CallLogAdapter callLogAdapter,
             View phoneFavoritesMenu,
@@ -113,11 +113,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         mCallLogAdapter = callLogAdapter;
         mObserver = new CustomDataSetObserver();
         mCallLogAdapter.registerDataSetObserver(mObserver);
-        mContactTileAdapter.registerDataSetObserver(mObserver);
         mPhoneFavoritesMenu = phoneFavoritesMenu;
-        // Temporary hack to hide the favorites menu because it is not being used.
-        // It should be removed from this adapter entirely eventually.
-        mPhoneFavoritesMenu.setVisibility(View.GONE);
         mTileInteractionTeaserView = tileInteractionTeaserView;
         mCallLogQueryHandler = new CallLogQueryHandler(mContext.getContentResolver(),
                 mCallLogQueryHandlerListener);
@@ -133,8 +129,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
      */
     @Override
     public int getCount() {
-        return mContactTileAdapter.getCount() + mCallLogAdapter.getCount() + getTeaserViewCount()
-                + 1;
+        return mCallLogAdapter.getCount();
     }
 
     @Override
@@ -196,10 +191,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
      */
     @Override
     public int getViewTypeCount() {
-        return (mContactTileAdapter.getViewTypeCount() +            /* Favorite and frequent */
-                mCallLogAdapter.getViewTypeCount() +                /* Recent call log */
-                getTeaserViewCount() +                              /* Teaser */
-                1);                                                 /* Favorites menu. */
+        return mCallLogAdapter.getViewTypeCount();
     }
 
     @Override
@@ -207,9 +199,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         final int callLogAdapterCount = mCallLogAdapter.getCount();
 
         if (position < callLogAdapterCount) {
-            // View type of the call log adapter is the last view type of the contact tile adapter
-            // + 1
-            return mContactTileAdapter.getViewTypeCount();
+            return 0;
         } else if (position == TILE_INTERACTION_TEASER_VIEW_POSITION + callLogAdapterCount &&
                 mTileInteractionTeaserView.getShouldDisplayInList()) {
             // View type of the teaser row is the last view type of the contact tile adapter +2
@@ -236,11 +226,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         final int callLogAdapterCount = mCallLogAdapter.getCount();
 
-        // Get the view for the "teaser view" which describes how to re-arrange favorites.
-        if (mTileInteractionTeaserView.getShouldDisplayInList()
-                && position == TILE_INTERACTION_TEASER_VIEW_POSITION + callLogAdapterCount) {
-            return mTileInteractionTeaserView;
-        } else if (callLogAdapterCount > 0 && position < callLogAdapterCount) {
+        if (callLogAdapterCount > 0 && position < callLogAdapterCount) {
             // Handle case where we are requesting the view for the "most recent caller".
 
             final SwipeableCallLogRow wrapper;
@@ -281,7 +267,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     @Override
     public boolean areAllItemsEnabled() {
-        return mCallLogAdapter.areAllItemsEnabled() && mContactTileAdapter.areAllItemsEnabled();
+        return mCallLogAdapter.areAllItemsEnabled();
     }
 
     @Override

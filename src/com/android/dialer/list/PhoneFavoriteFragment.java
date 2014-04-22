@@ -21,25 +21,20 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CallLog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -47,17 +42,9 @@ import android.widget.RelativeLayout.LayoutParams;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
-import com.android.contacts.common.GeoUtil;
-import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
-import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
-import com.android.dialer.calllog.CallLogAdapter;
-import com.android.dialer.calllog.CallLogQuery;
-import com.android.dialer.calllog.CallLogQueryHandler;
-import com.android.dialer.calllog.ContactInfoHelper;
-import com.android.dialerbind.ObjectFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,7 +58,6 @@ import java.util.HashMap;
  * A contact filter header is also inserted between those adapters' results.
  */
 public class PhoneFavoriteFragment extends Fragment implements OnItemClickListener,
-        CallLogQueryHandler.Listener, CallLogAdapter.CallFetcher,
         PhoneFavoritesTileAdapter.OnDataSetChangedForAnimationListener {
 
     /**
@@ -92,34 +78,9 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      * Used with LoaderManager.
      */
     private static int LOADER_ID_CONTACT_TILE = 1;
-    private static int MISSED_CALL_LOADER = 2;
-
-    private static final String KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE =
-            "key_last_dismissed_call_shortcut_date";
 
     public interface HostInterface {
         public void setDragDropController(DragDropController controller);
-    }
-
-    private class MissedCallLogLoaderListener implements LoaderManager.LoaderCallbacks<Cursor> {
-
-        @Override
-        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-            final Uri uri = CallLog.Calls.CONTENT_URI;
-            final String[] projection = new String[] {CallLog.Calls.TYPE};
-            final String selection = CallLog.Calls.TYPE + " = " + CallLog.Calls.MISSED_TYPE +
-                    " AND " + CallLog.Calls.IS_READ + " = 0";
-            return new CursorLoader(getActivity(), uri, projection, selection, null, null);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor data) {
-            mCallLogAdapter.setMissedCalls(data);
-        }
-
-        @Override
-        public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        }
     }
 
     private class ContactTileLoaderListener implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -182,11 +143,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private OnPhoneNumberPickerActionListener mPhoneNumberPickerActionListener;
 
     private OnListFragmentScrolledListener mActivityScrollListener;
-    private PhoneFavoriteMergedAdapter mAdapter;
     private PhoneFavoritesTileAdapter mContactTileAdapter;
-
-    private CallLogAdapter mCallLogAdapter;
-    private CallLogQueryHandler mCallLogQueryHandler;
 
     private View mParentView;
 
@@ -204,17 +161,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      * Layout used when there are no favorites.
      */
     private View mEmptyView;
-
-    /**
-     * Call shortcuts older than this date (persisted in shared preferences) will not show up in
-     * at the top of the screen
-     */
-    private long mLastCallShortcutDate = 0;
-
-    /**
-     * The date of the current call shortcut that is showing on screen.
-     */
-    private long mCurrentCallShortcutDate = 0;
 
     private final ContactTileView.Listener mContactTileAdapterListener =
             new ContactTileAdapterListener();
@@ -241,23 +187,12 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         super.onCreate(savedState);
 
         mAnimationDuration = getResources().getInteger(R.integer.fade_duration);
-        mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
-                this, 1);
-        final String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mCallLogAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso), false, false);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        final SharedPreferences prefs = getActivity().getSharedPreferences(
-                DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
 
-        mLastCallShortcutDate = prefs.getLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, 0);
-
-        fetchCalls();
-        mCallLogAdapter.setLoading(true);
         getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
     }
 
@@ -285,12 +220,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
         mTileInteractionTeaserView = (TileInteractionTeaserView) inflater.inflate(
                 R.layout.tile_interactions_teaser_view, mListView, false);
-
-        mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), this, mContactTileAdapter,
-                mCallLogAdapter, mPhoneFavoritesMenu, mTileInteractionTeaserView);
-
-
-        mTileInteractionTeaserView.setAdapter(mAdapter);
 
         mListView.setAdapter(mContactTileAdapter);
 
@@ -352,7 +281,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         // This method call implicitly assures ContactTileLoaderListener's onLoadFinished() will
         // be called, on which we'll check if "all" contacts should be reloaded again or not.
         getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, mContactTileLoaderListener);
-        getLoaderManager().initLoader(MISSED_CALL_LOADER, null, new MissedCallLogLoaderListener());
     }
 
     /**
@@ -368,37 +296,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             Log.e(TAG, "onItemClick() event for unexpected position. "
                     + "The position " + position + " is before \"all\" section. Ignored.");
         }
-    }
-
-    @Override
-    public void onVoicemailStatusFetched(Cursor statusCursor) {
-        // no-op
-    }
-
-    @Override
-    public void onCallsFetched(Cursor cursor) {
-        mCallLogAdapter.setLoading(false);
-
-        // Save the date of the most recent call log item
-        if (cursor != null && cursor.moveToFirst()) {
-            mCurrentCallShortcutDate = cursor.getLong(CallLogQuery.DATE);
-        }
-
-        mCallLogAdapter.changeCursor(cursor);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void fetchCalls() {
-        mCallLogQueryHandler.fetchCalls(CallLogQueryHandler.CALL_TYPE_ALL, mLastCallShortcutDate);
-    }
-
-    @Override
-    public void onPause() {
-        // Wipe the cache to refresh the call shortcut item. This is not that expensive because
-        // it only contains one item.
-        mCallLogAdapter.invalidateCache();
-        super.onPause();
     }
 
     /**
@@ -519,16 +416,5 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     @Override
     public void cacheOffsetsForDatasetChange() {
         saveOffsets(0);
-    }
-
-    public void dismissShortcut(View view) {
-        final int height = ((View) view.getParent()).getHeight();
-        saveOffsets(height);
-        mLastCallShortcutDate = mCurrentCallShortcutDate;
-        final SharedPreferences prefs = view.getContext().getSharedPreferences(
-                DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-        prefs.edit().putLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, mLastCallShortcutDate)
-                .apply();
-        fetchCalls();
     }
 }
