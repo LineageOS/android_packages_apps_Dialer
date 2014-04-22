@@ -227,8 +227,6 @@
     <skip />
     <!-- no translation found for recentVoicemails_empty (5163114119598014048) -->
     <skip />
-    <!-- no translation found for show_all_contacts (1732256558071778056) -->
-    <skip />
     <!-- no translation found for show_favorites_only (5520072531022614595) -->
     <skip />
     <!-- no translation found for call_log_activity_title (4612824396355272023) -->
@@ -256,6 +254,8 @@
     <!-- no translation found for call_log_all_title (3566738938889333307) -->
     <skip />
     <!-- no translation found for call_log_missed_title (4541142293870638971) -->
+    <skip />
+    <!-- no translation found for call_log_voicemail_title (940422274047025948) -->
     <skip />
     <!-- no translation found for tab_speed_dial (7807567599021643864) -->
     <skip />
