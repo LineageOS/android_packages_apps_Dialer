@@ -725,6 +725,9 @@
     <!-- Shortcut item used to add a number directly from search -->
     <string name="search_shortcut_add_to_contacts">Add to contacts</string>
 
+    <!-- Title for the recent calls footer that brings users to the full call history when clicked -->
+    <string name="recents_footer_text">View full call history</string>
+
     <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
     <string name="num_missed_calls"><xliff:g id="number">%s</xliff:g> new missed calls</string>
 

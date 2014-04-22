@@ -30,7 +30,6 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.VoicemailContract.Status;
-import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +74,7 @@ public class CallLogFragment extends ListFragment
     private TextView mStatusMessageText;
     private TextView mStatusMessageAction;
     private KeyguardManager mKeyguardManager;
+    private View mFooterView;
 
     private boolean mEmptyLoaderRunning;
     private boolean mCallLogFetched;
@@ -252,6 +252,7 @@ public class CallLogFragment extends ListFragment
         mStatusMessageView = view.findViewById(R.id.voicemail_status);
         mStatusMessageText = (TextView) view.findViewById(R.id.voicemail_status_message);
         mStatusMessageAction = (TextView) view.findViewById(R.id.voicemail_status_action);
+
         return view;
     }
 
@@ -260,6 +261,7 @@ public class CallLogFragment extends ListFragment
         super.onViewCreated(view, savedInstanceState);
         updateEmptyMessage(mCallTypeFilter);
         getListView().setItemsCanFocus(true);
+        assignFooterViewToListView();
     }
 
     /**
@@ -478,5 +480,28 @@ public class CallLogFragment extends ListFragment
             CallLogNotificationsHelper.removeMissedCallNotifications();
             CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
         }
+    }
+
+    /**
+     * Assigns a view to be used as a footer view in the call log.
+     *
+     * @param view View to be used as the footer view.
+     */
+    public void setFooterView(View view) {
+        mFooterView = view;
+        // Content view not created yet, defer addition of the footerview to onCreate
+        if (getView() == null) {
+            return;
+        }
+        assignFooterViewToListView();
+    }
+
+    private void assignFooterViewToListView() {
+        if (mFooterView == null) {
+            return;
+        }
+        final ListView listView = getListView();
+        listView.removeFooterView(mFooterView);
+        listView.addFooterView(mFooterView);
     }
 }

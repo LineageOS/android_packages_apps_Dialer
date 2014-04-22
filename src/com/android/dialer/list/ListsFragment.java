@@ -22,6 +22,8 @@ import android.widget.ListView;
 
 import com.android.contacts.common.GeoUtil;
 import com.android.dialer.DialtactsActivity;
+import android.view.View.OnClickListener;
+
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.CallLogFragment;
@@ -47,14 +49,19 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
     private static final int TAB_INDEX_COUNT = 3;
 
-    // TODO: Replace with a date limit (e.g. 2 weeks)
-    private static final int MAX_ENTRIES = 20;
+    private static final int MAX_RECENTS_ENTRIES = 20;
+    // Oldest recents entry to display is 2 weeks old.
+    private static final long OLDEST_RECENTS_DATE = 1000L * 60 * 60 * 24 * 14;
 
     private static final String KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE =
             "key_last_dismissed_call_shortcut_date";
 
     // Used with LoaderManager
     private static int MISSED_CALL_LOADER = 1;
+
+    public interface HostInterface {
+        public void showCallHistory();
+    }
 
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
@@ -113,7 +120,25 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
                     return mSpeedDialFragment;
                 case TAB_INDEX_RECENTS:
                     mRecentsFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL,
-                            MAX_ENTRIES);
+                            MAX_RECENTS_ENTRIES, System.currentTimeMillis() - OLDEST_RECENTS_DATE);
+
+                    /*
+                     * Provide mViewPager as a parent viewgroup for the inflation of the footer,
+                     * to ensure that the footer view is inflated with the correct LayoutParams.
+                     * If root is null in
+                     * inflate(XmlPullParser parser, ViewGroup root, boolean attachToRoot),
+                     * the layout parameters specified in R.layout.recents_list_footer are not
+                     * correctly applied. The footer view is ultimately not attached to mViewPager.
+                     */
+                    final View viewFullHistoryFooter = getActivity().getLayoutInflater().inflate(
+                            R.layout.recents_list_footer, mViewPager, false);
+                    viewFullHistoryFooter.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ((HostInterface) getActivity()).showCallHistory();
+                        }
+                    });
+                    mRecentsFragment.setFooterView(viewFullHistoryFooter);
                     return mRecentsFragment;
                 case TAB_INDEX_ALL_CONTACTS:
                     mAllContactsFragment = new AllContactsFragment();
