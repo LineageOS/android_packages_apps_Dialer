@@ -391,6 +391,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                     R.layout.phone_favorite_tile_view, null);
         }
         tileView.setPhotoManager(mPhotoManager);
+        tileView.setListener(mListener);
         tileView.loadFromContact(getItem(position));
         return tileView;
     }
