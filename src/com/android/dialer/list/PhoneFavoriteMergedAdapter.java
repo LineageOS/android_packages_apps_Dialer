@@ -35,8 +35,8 @@ import com.android.dialer.list.SwipeHelper.OnItemGestureListener;
 import com.android.dialer.list.SwipeHelper.SwipeHelperCallback;
 
 /**
- * An adapter that combines items from {@link com.android.contacts.common.list.ContactTileAdapter}
- * and {@link com.android.dialer.calllog.CallLogAdapter} into a single list.
+ * An adapter that displays call shortcuts from {@link com.android.dialer.calllog.CallLogAdapter}
+ * in the form of cards.
  */
 public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
@@ -49,14 +49,8 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     private static final String TAG = PhoneFavoriteMergedAdapter.class.getSimpleName();
 
-    private static final int TILE_INTERACTION_TEASER_VIEW_POSITION = 3;
-    private static final int TILE_INTERACTION_TEASER_VIEW_ID = -2;
-    private static final int FAVORITES_MENU_ITEM_ID = -3;
-    private final PhoneFavoritesTileAdapter mContactTileAdapter;
     private final CallLogAdapter mCallLogAdapter;
-    private final View mPhoneFavoritesMenu;
     private final ListsFragment mFragment;
-    private final TileInteractionTeaserView mTileInteractionTeaserView;
 
     private final int mCallLogPadding;
 
@@ -101,20 +95,14 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     public PhoneFavoriteMergedAdapter(Context context,
             ListsFragment fragment,
-            PhoneFavoritesTileAdapter contactTileAdapter,
-            CallLogAdapter callLogAdapter,
-            View phoneFavoritesMenu,
-            TileInteractionTeaserView tileInteractionTeaserView) {
+            CallLogAdapter callLogAdapter) {
         final Resources resources = context.getResources();
         mContext = context;
         mFragment = fragment;
         mCallLogPadding = resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding);
-        mContactTileAdapter = contactTileAdapter;
         mCallLogAdapter = callLogAdapter;
         mObserver = new CustomDataSetObserver();
         mCallLogAdapter.registerDataSetObserver(mObserver);
-        mPhoneFavoritesMenu = phoneFavoritesMenu;
-        mTileInteractionTeaserView = tileInteractionTeaserView;
         mCallLogQueryHandler = new CallLogQueryHandler(mContext.getContentResolver(),
                 mCallLogQueryHandlerListener);
     }
@@ -134,51 +122,12 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        final int callLogAdapterCount = mCallLogAdapter.getCount();
-
-        if (callLogAdapterCount > 0) {
-            if (position < callLogAdapterCount) {
-                return mCallLogAdapter.getItem(position);
-            }
-        }
-        // Set position to the position of the actual favorite contact in the favorites adapter
-        position = getAdjustedPositionInContactTileAdapter(position);
-
-        return mContactTileAdapter.getItem(position);
+        return mCallLogAdapter.getItem(position);
     }
 
-    /**
-     * In order to ensure that items have stable ids (for animation purposes), we need to
-     * guarantee that every single item has a unique ID, even across data set changes.
-     *
-     * These are the ranges of IDs reserved for each item type.
-     *
-     * -4 and lower: CallLogAdapterItems representing most recent call.
-     * -3: Favorites menu
-     * -2: Teaser
-     * 0 to (N -1): Rows of tiled contacts, where N is equal to the max rows of tiled contacts
-     * N to infinity: Rows of regular contacts. Their item id is calculated by N + contact_id,
-     * where contact_id is guaranteed to never be negative.
-     */
     @Override
     public long getItemId(int position) {
-        final int callLogAdapterCount = mCallLogAdapter.getCount();
-        if (position < callLogAdapterCount) {
-            // Call log items are not animated, so reusing their position for IDs is fine.
-            return FAVORITES_MENU_ITEM_ID - 1 - position;
-        } else if (position == TILE_INTERACTION_TEASER_VIEW_POSITION + callLogAdapterCount &&
-                mTileInteractionTeaserView.getShouldDisplayInList()) {
-            return TILE_INTERACTION_TEASER_VIEW_ID;
-        } else if (position == callLogAdapterCount) {
-            return FAVORITES_MENU_ITEM_ID;
-        } else if (position < (callLogAdapterCount + mContactTileAdapter.getCount() +
-                getTeaserViewCount() + 1)) {
-            return mContactTileAdapter.getItemId(
-                    getAdjustedPositionInContactTileAdapter(position));
-        } else {
-            // Default fallback.  We don't normally get here.
-            return FAVORITES_MENU_ITEM_ID;
-        }
+        return position;
     }
 
     @Override
@@ -196,73 +145,32 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        final int callLogAdapterCount = mCallLogAdapter.getCount();
-
-        if (position < callLogAdapterCount) {
-            return 0;
-        } else if (position == TILE_INTERACTION_TEASER_VIEW_POSITION + callLogAdapterCount &&
-                mTileInteractionTeaserView.getShouldDisplayInList()) {
-            // View type of the teaser row is the last view type of the contact tile adapter +2
-            return mContactTileAdapter.getViewTypeCount() + 2;
-        } else if (position == callLogAdapterCount) {
-            // View type of the favorites menu is last view type of contact tile adapter +3
-            return mContactTileAdapter.getViewTypeCount() + 3;
-        } else if (position < getCount()) {
-            return mContactTileAdapter.getItemViewType(
-                    getAdjustedPositionInContactTileAdapter(position));
-        } else {
-            // Catch-all - we shouldn't get here but if we do use the same as the favorites menu.
-            return mContactTileAdapter.getViewTypeCount() + 3;
-        }
+        return mCallLogAdapter.getItemViewType(position);
     }
 
-    /**
-     * Determines the view for a specified position.
-     *
-     * @param position Position for which to retrieve view.
-     * @return view corresponding to position.
-     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int callLogAdapterCount = mCallLogAdapter.getCount();
-
-        if (callLogAdapterCount > 0 && position < callLogAdapterCount) {
-            // Handle case where we are requesting the view for the "most recent caller".
-
-            final SwipeableCallLogRow wrapper;
-            if (convertView == null) {
-                wrapper = new SwipeableCallLogRow(mContext);
-                wrapper.setOnItemSwipeListener(mCallLogOnItemSwipeListener);
-            } else {
-                wrapper = (SwipeableCallLogRow) convertView;
-            }
-
-            // Special case wrapper view for the most recent call log item. This allows
-            // us to create a card-like effect for the more recent call log item in
-            // the PhoneFavoriteMergedAdapter, but keep the original look of the item in
-            // the CallLogAdapter.
-            final View view = mCallLogAdapter.getView(position, convertView == null ?
-                    null : wrapper.getChildAt(0), parent);
-            wrapper.removeAllViews();
-            final View callLogItem = view.findViewById(R.id.call_log_list_item);
-            // Reset the internal call log item view if it is being recycled
-            callLogItem.setTranslationX(0);
-            callLogItem.setAlpha(1);
-            wrapper.addView(view);
-            return wrapper;
-        } else if (position == callLogAdapterCount) {
-            // If position is just after the entries in the mCallLogAdapter (most recent call),
-            // return the favorites menu.
-            return mPhoneFavoritesMenu;
+        final SwipeableCallLogRow wrapper;
+        if (convertView == null) {
+            wrapper = new SwipeableCallLogRow(mContext);
+            wrapper.setOnItemSwipeListener(mCallLogOnItemSwipeListener);
+        } else {
+            wrapper = (SwipeableCallLogRow) convertView;
         }
 
-        // Set position to the position of the actual favorite contact in the favorites adapter.
-        // Adjusts based on the presence of other views, such as the favorites menu.
-        position = getAdjustedPositionInContactTileAdapter(position);
-
-        // Favorites section
-        final View view = mContactTileAdapter.getView(position, convertView, parent);
-        return view;
+        // Special case wrapper view for the most recent call log item. This allows
+        // us to create a card-like effect for the more recent call log item in
+        // the PhoneFavoriteMergedAdapter, but keep the original look of the item in
+        // the CallLogAdapter.
+        final View view = mCallLogAdapter.getView(position, convertView == null ?
+                null : wrapper.getChildAt(0), parent);
+        wrapper.removeAllViews();
+        final View callLogItem = view.findViewById(R.id.call_log_list_item);
+        // Reset the internal call log item view if it is being recycled
+        callLogItem.setTranslationX(0);
+        callLogItem.setAlpha(1);
+        wrapper.addView(view);
+        return wrapper;
     }
 
     @Override
@@ -272,39 +180,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-        final int callLogAdapterCount = mCallLogAdapter.getCount();
-        if (position < callLogAdapterCount) {
-            return mCallLogAdapter.isEnabled(position);
-        } else { // For favorites section
-            return mContactTileAdapter.isEnabled(
-                    getAdjustedPositionInContactTileAdapter(position));
-        }
-    }
-
-    /**
-     * Given the current position in the merged adapter, return the index in the
-     * mContactTileAdapter this position corresponds to.
-     *
-     * @param position current position in the overall (merged) adapter.
-     * @return position in the mContactTileAdapter.
-     */
-    public int getAdjustedPositionInContactTileAdapter(int position) {
-        final int callLogAdapterCount = mCallLogAdapter.getCount();
-        if (position - callLogAdapterCount > TILE_INTERACTION_TEASER_VIEW_POSITION &&
-                mTileInteractionTeaserView.getShouldDisplayInList()) {
-            return position - callLogAdapterCount - 2;
-        } else {
-            return position - callLogAdapterCount - 1;
-        }
-    }
-
-    /**
-     * Determines the number of teaser views visible.
-     * @return 1 or 0 depending on if the teaser view is showing.
-     */
-    private int getTeaserViewCount() {
-        return (mContactTileAdapter.getCount() > TILE_INTERACTION_TEASER_VIEW_POSITION &&
-                mTileInteractionTeaserView.getShouldDisplayInList() ? 1 : 0);
+        return mCallLogAdapter.isEnabled(position);
     }
 
     /**
