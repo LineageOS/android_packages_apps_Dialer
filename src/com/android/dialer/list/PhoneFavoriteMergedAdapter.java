@@ -56,7 +56,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     private final CallLogAdapter mCallLogAdapter;
     private final WifiWizardAdapter mWifiWizardAdapter;
     private final View mPhoneFavoritesMenu;
-    private final PhoneFavoriteFragment mFragment;
+    private final ListsFragment mFragment;
     private final TileInteractionTeaserView mTileInteractionTeaserView;
 
     private final int mCallLogPadding;
@@ -101,7 +101,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     };
 
     public PhoneFavoriteMergedAdapter(Context context,
-            PhoneFavoriteFragment fragment,
+            ListsFragment fragment,
             PhoneFavoritesTileAdapter contactTileAdapter,
             CallLogAdapter callLogAdapter,
             View phoneFavoritesMenu,
@@ -115,13 +115,8 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         mCallLogAdapter = callLogAdapter;
         mWifiWizardAdapter = new WifiWizardAdapter(context, wifiWizardModel);
         mObserver = new CustomDataSetObserver();
-        mWifiWizardAdapter.registerDataSetObserver(mObserver);
         mCallLogAdapter.registerDataSetObserver(mObserver);
-        mContactTileAdapter.registerDataSetObserver(mObserver);
         mPhoneFavoritesMenu = phoneFavoritesMenu;
-        // Temporary hack to hide the favorites menu because it is not being used.
-        // It should be removed from this adapter entirely eventually.
-        mPhoneFavoritesMenu.setVisibility(View.GONE);
         mTileInteractionTeaserView = tileInteractionTeaserView;
         mCallLogQueryHandler = new CallLogQueryHandler(mContext.getContentResolver(),
                 mCallLogQueryHandlerListener);
@@ -137,20 +132,11 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
      */
     @Override
     public int getCount() {
-        return mWifiWizardAdapter.getCount() + mContactTileAdapter.getCount() + 
-                    mCallLogAdapter.getCount() + getTeaserViewCount() + 1;
+        return mCallLogAdapter.getCount();
     }
 
     @Override
     public Object getItem(int position) {
-        if (mWifiWizardAdapter.getCount() > 0) {
-            if (position < mWifiWizardAdapter.getCount()) {
-                return mWifiWizardAdapter.getItem(position);
-            } else {
-                position -= mWifiWizardAdapter.getCount();
-            }
-        }
-
         final int callLogAdapterCount = mCallLogAdapter.getCount();
 
         if (callLogAdapterCount > 0) {
@@ -182,14 +168,6 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     public long getItemId(int position) {
         final int callLogAdapterCount = mCallLogAdapter.getCount();
 
-        if (mWifiWizardAdapter.getCount() > 0) {
-            if (position < mWifiWizardAdapter.getCount()) {
-                return - callLogAdapterCount - 4;
-            } else {
-                position -= mWifiWizardAdapter.getCount();
-            }
-        }
-
         if (position < callLogAdapterCount) {
             // Call log items are not animated, so reusing their position for IDs is fine.
             return FAVORITES_MENU_ITEM_ID - 1 - position;
@@ -218,29 +196,15 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
      */
     @Override
     public int getViewTypeCount() {
-        return (mWifiWizardAdapter.getViewTypeCount() +             /* Enable Wifi calling */
-                mContactTileAdapter.getViewTypeCount() +            /* Favorite and frequent */
-                mCallLogAdapter.getViewTypeCount() +                /* Recent call log */
-                getTeaserViewCount() +                              /* Teaser */
-                1);                                                 /* Favorites menu. */
+        return mCallLogAdapter.getViewTypeCount();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (mWifiWizardAdapter.getCount() > 0) {
-            if (position < mWifiWizardAdapter.getCount()) {
-                return mWifiWizardAdapter.getItemViewType(position);
-            } else {
-                position -= mWifiWizardAdapter.getCount();
-            }
-        }
-
         final int callLogAdapterCount = mCallLogAdapter.getCount();
 
         if (position < callLogAdapterCount) {
-            // View type of the call log adapter is the last view type of the contact tile adapter
-            // + 1
-            return mContactTileAdapter.getViewTypeCount();
+            return 0;
         } else if (position == TILE_INTERACTION_TEASER_VIEW_POSITION + callLogAdapterCount &&
                 mTileInteractionTeaserView.getShouldDisplayInList()) {
             // View type of the teaser row is the last view type of the contact tile adapter +2
@@ -266,24 +230,9 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (mWifiWizardAdapter.getCount() > 0) {
-            if (position < mWifiWizardAdapter.getCount()) {
-                SwipeableCallLogRow wrapper = new SwipeableCallLogRow(mContext);
-                wrapper.addView(mWifiWizardAdapter.getView(position, convertView, parent));
-                wrapper.setOnItemSwipeListener(mWifiWizardAdapter.getOnItemSwipeListener());
-                return wrapper;
-            } else {
-                position -= mWifiWizardAdapter.getCount();
-            }
-        }
-
         final int callLogAdapterCount = mCallLogAdapter.getCount();
 
-        // Get the view for the "teaser view" which describes how to re-arrange favorites.
-        if (mTileInteractionTeaserView.getShouldDisplayInList()
-                && position == TILE_INTERACTION_TEASER_VIEW_POSITION + callLogAdapterCount) {
-            return mTileInteractionTeaserView;
-        } else if (callLogAdapterCount > 0 && position < callLogAdapterCount) {
+        if (callLogAdapterCount > 0 && position < callLogAdapterCount) {
             // Handle case where we are requesting the view for the "most recent caller".
 
             final SwipeableCallLogRow wrapper;
@@ -324,19 +273,11 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
 
     @Override
     public boolean areAllItemsEnabled() {
-        return mCallLogAdapter.areAllItemsEnabled() && mContactTileAdapter.areAllItemsEnabled();
+        return mCallLogAdapter.areAllItemsEnabled();
     }
 
     @Override
     public boolean isEnabled(int position) {
-        if (mWifiWizardAdapter.getCount() > 0) {
-            if (position < mWifiWizardAdapter.getCount()) {
-                return mWifiWizardAdapter.isEnabled(position);
-            } else {
-                position -= mWifiWizardAdapter.getCount();
-            }
-        }
-
         final int callLogAdapterCount = mCallLogAdapter.getCount();
         if (position < callLogAdapterCount) {
             return mCallLogAdapter.isEnabled(position);
