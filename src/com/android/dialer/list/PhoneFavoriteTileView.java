@@ -29,7 +29,6 @@ import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.dialer.R;
-import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
 
 /**
  * A light version of the {@link com.android.contacts.common.list.ContactTileView} that is used in
@@ -49,8 +48,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     private static final float DEFAULT_IMAGE_LETTER_OFFSET = -0.14f;
     private static final float DEFAULT_IMAGE_LETTER_SCALE = 0.70f;
 
-    /** The view that holds the list view row. */
-    protected ContactTileRow mParentRow;
     /** View that contains the transparent shadow that is overlaid on top of the contact image. */
     private View mShadowOverlay;
 
@@ -63,10 +60,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
 
     public PhoneFavoriteTileView(Context context, AttributeSet attrs) {
         super(context, attrs);
-    }
-
-    public ContactTileRow getParentRow() {
-        return mParentRow;
     }
 
     @Override
@@ -105,11 +98,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
                 setVisibility(View.VISIBLE);
             }
         }
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        mParentRow = (ContactTileRow) getParent();
     }
 
     @Override

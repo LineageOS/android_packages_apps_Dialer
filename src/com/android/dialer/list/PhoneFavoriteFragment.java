@@ -50,7 +50,6 @@ import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactEntry;
-import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.DialtactsActivity;
@@ -59,7 +58,6 @@ import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.CallLogQuery;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfoHelper;
-import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
 import com.android.dialerbind.ObjectFactory;
 
 import java.util.ArrayList;
@@ -162,7 +160,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
         @Override
         public int getApproximateTileWidth() {
-            return getView().getWidth() / mContactTileAdapter.getColumnCount();
+            return getView().getWidth();
         }
     }
 
@@ -235,9 +233,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         // We don't construct the resultant adapter at this moment since it requires LayoutInflater
         // that will be available on onCreateView().
         mContactTileAdapter = new PhoneFavoritesTileAdapter(activity, mContactTileAdapterListener,
-                this,
-                getResources().getInteger(R.integer.contact_tile_column_count_in_favorites),
-                PhoneFavoritesTileAdapter.NO_ROW_LIMIT);
+                this);
         mContactTileAdapter.setPhotoLoader(ContactPhotoManager.getInstance(activity));
     }
 
@@ -276,7 +272,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mParentView = inflater.inflate(R.layout.phone_favorites_fragment, container, false);
 
         mListView = (PhoneFavoriteListView) mParentView.findViewById(R.id.contact_tile_list);
-        mListView.setItemsCanFocus(true);
         mListView.setOnItemClickListener(this);
         mListView.setVerticalScrollBarEnabled(false);
         mListView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
@@ -300,9 +295,10 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                 mCallLogAdapter, mPhoneFavoritesMenu, mTileInteractionTeaserView,
                 mWifiSettings);
 
+
         mTileInteractionTeaserView.setAdapter(mAdapter);
 
-        mListView.setAdapter(mAdapter);
+        mListView.setAdapter(mContactTileAdapter);
 
         mListView.setOnScrollListener(mScrollListener);
         mListView.setFastScrollEnabled(false);
@@ -387,7 +383,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
     @Override
     public void onCallsFetched(Cursor cursor) {
-        animateListView();
         mCallLogAdapter.setLoading(false);
 
         // Save the date of the most recent call log item
@@ -418,7 +413,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      * that slide views from their previous positions to their new ones, to give the appearance
      * that the views are sliding into their new positions.
      */
-    @SuppressWarnings("unchecked")
     private void saveOffsets(int removedItemHeight) {
         final int firstVisiblePosition = mListView.getFirstVisiblePosition();
         if (DEBUG) {
@@ -427,122 +421,28 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         for (int i = 0; i < mListView.getChildCount(); i++) {
             final View child = mListView.getChildAt(i);
             final int position = firstVisiblePosition + i;
-            final long itemId = mAdapter.getItemId(position);
-            final int itemViewType = mAdapter.getItemViewType(position);
-            if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP &&
-                    child instanceof ContactTileRow) {
-                // This is a tiled row, so save horizontal offsets instead
-                saveHorizontalOffsets((ContactTileRow) child, (ArrayList<ContactEntry>)
-                        mAdapter.getItem(position),
-                        mAdapter.getAdjustedPositionInContactTileAdapter(position));
-            }
+            final long itemId = mContactTileAdapter.getItemId(position);
             if (DEBUG) {
                 Log.d(TAG, "Saving itemId: " + itemId + " for listview child " + i + " Top: "
                         + child.getTop());
             }
             mItemIdTopMap.put(itemId, child.getTop());
+            mItemIdLeftMap.put(itemId, child.getLeft());
         }
 
         mItemIdTopMap.put(KEY_REMOVED_ITEM_HEIGHT, removedItemHeight);
     }
 
-    /**
-     * Saves the horizontal offsets for contacts that are displayed as tiles in a row. Saving
-     * these offsets allow us to animate tiles sliding left and right within the same row.
-     * See {@link #saveOffsets(int removedItemHeight)}
-     */
-    private void saveHorizontalOffsets(ContactTileRow row, ArrayList<ContactEntry> list,
-            int currentRowIndex) {
-        for (int i = 0; i < list.size() && i < row.getChildCount(); i++) {
-            final View child = row.getChildAt(i);
-            if (child == null) {
-                continue;
-            }
-            final ContactEntry entry = list.get(i);
-            final long itemId = mContactTileAdapter.getAdjustedItemId(entry.id);
-            if (DEBUG) {
-                Log.d(TAG, "Saving itemId: " + itemId + " for tileview child " + i + " Left: "
-                        + child.getTop());
-            }
-            mItemIdTopMap.put(itemId, currentRowIndex);
-            mItemIdLeftMap.put(itemId, child.getLeft());
-        }
-    }
-
     /*
-     * Performs a animations for a row of tiles
+     * Performs animations for the gridView
      */
-    private void performHorizontalAnimations(ContactTileRow row, ArrayList<ContactEntry> list,
-            long[] idsInPlace, int currentRow) {
-        if (mItemIdLeftMap.isEmpty()) {
-            return;
-        }
-        final AnimatorSet animSet = new AnimatorSet();
-        final ArrayList<Animator> animators = new ArrayList<Animator>();
-        for (int i = 0; i < list.size(); i++) {
-            final View child = row.getChildAt(i);
-            final ContactEntry entry = list.get(i);
-            final long itemId = mContactTileAdapter.getAdjustedItemId(entry.id);
-
-            if (containsId(idsInPlace, itemId)) {
-                animators.add(ObjectAnimator.ofFloat(
-                        child, "alpha", 0.0f, 1.0f));
-                break;
-            } else {
-                Integer startLeft = mItemIdLeftMap.get(itemId);
-                int left = child.getLeft();
-
-                Integer startRow = mItemIdTopMap.get(itemId);
-                if (startRow != null) {
-                    if (startRow > currentRow) {
-                        // Item has shifted upwards to the previous row.
-                        // It should now animate in from right to left.
-                        startLeft = left + child.getWidth();
-                    } else if (startRow < currentRow) {
-                        // Item has shifted downwards to the next row.
-                        // It should now animate in from left to right.
-                        startLeft = left - child.getWidth();
-                    }
-
-                    // If the item hasn't shifted rows (startRow == currentRow), it either remains
-                    // in the same position or has shifted left or right within its current row.
-                    // Either way, startLeft has already been correctly saved and retrieved from
-                    // mItemIdTopMap.
-                }
-
-                if (startLeft != null) {
-                    if (startLeft != left) {
-                        int delta = startLeft - left;
-                        if (DEBUG) {
-                            Log.d(TAG, "Found itemId: " + itemId + " for tileview child " + i +
-                                    " Left: " + left +
-                                    " Delta: " + delta);
-                        }
-                        animators.add(ObjectAnimator.ofFloat(
-                                child, "translationX", delta, 0.0f));
-                    }
-                }
-            }
-        }
-        if (animators.size() > 0) {
-            animSet.setDuration(mAnimationDuration).playTogether(animators);
-            animSet.start();
-        }
-    }
-
-    /*
-     * Performs animations for the list view. If the list item is a row of tiles, horizontal
-     * animations will be performed instead.
-     */
-    private void animateListView(final long... idsInPlace) {
+    private void animateGridView(final long... idsInPlace) {
         if (mItemIdTopMap.isEmpty()) {
             // Don't do animations if the database is being queried for the first time and
             // the previous item offsets have not been cached, or the user hasn't done anything
             // (dragging, swiping etc) that requires an animation.
             return;
         }
-
-        final int removedItemHeight = mItemIdTopMap.get(KEY_REMOVED_ITEM_HEIGHT);
 
         final ViewTreeObserver observer = mListView.getViewTreeObserver();
         observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -556,16 +456,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                 for (int i = 0; i < mListView.getChildCount(); i++) {
                     final View child = mListView.getChildAt(i);
                     int position = firstVisiblePosition + i;
-                    final int itemViewType = mAdapter.getItemViewType(position);
-                    if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP &&
-                            child instanceof ContactTileRow) {
-                        // This is a tiled row, so perform horizontal animations instead
-                        performHorizontalAnimations((ContactTileRow) child, (
-                                ArrayList<ContactEntry>) mAdapter.getItem(position), idsInPlace,
-                                mAdapter.getAdjustedPositionInContactTileAdapter(position));
-                    }
 
-                    final long itemId = mAdapter.getItemId(position);
+                    final long itemId = mContactTileAdapter.getItemId(position);
 
                     if (containsId(idsInPlace, itemId)) {
                         animators.add(ObjectAnimator.ofFloat(
@@ -573,35 +465,32 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                         break;
                     } else {
                         Integer startTop = mItemIdTopMap.get(itemId);
+                        Integer startLeft = mItemIdLeftMap.get(itemId);
                         final int top = child.getTop();
-                        int delta = 0;
+                        final int left = child.getLeft();
+                        int deltaX = 0;
+                        int deltaY = 0;
+
+                        if (startLeft != null) {
+                            if (startLeft != left) {
+                                deltaX = startLeft - left;
+                                animators.add(ObjectAnimator.ofFloat(
+                                        child, "translationX", deltaX, 0.0f));
+                            }
+                        }
+
                         if (startTop != null) {
                             if (startTop != top) {
-                                delta = startTop - top;
+                                deltaY = startTop - top;
+                                animators.add(ObjectAnimator.ofFloat(
+                                        child, "translationY", deltaY, 0.0f));
                             }
-                        } else if (!mItemIdLeftMap.containsKey(itemId)) {
-                            // Animate new views along with the others. The catch is that they did
-                            // not exist in the start state, so we must calculate their starting
-                            // position based on neighboring views.
-
-                            final int itemHeight;
-                            if (removedItemHeight == 0) {
-                                itemHeight = child.getHeight() + mListView.getDividerHeight();
-                            } else {
-                                itemHeight = removedItemHeight;
-                            }
-                            startTop = top + (i > 0 ? itemHeight : -itemHeight);
-                            delta = startTop - top;
                         }
+
                         if (DEBUG) {
                             Log.d(TAG, "Found itemId: " + itemId + " for listview child " + i +
                                     " Top: " + top +
-                                    " Delta: " + delta);
-                        }
-
-                        if (delta != 0) {
-                            animators.add(ObjectAnimator.ofFloat(
-                                    child, "translationY", delta, 0.0f));
+                                    " Delta: " + deltaY);
                         }
                     }
                 }
@@ -630,7 +519,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
     @Override
     public void onDataSetChangedForAnimation(long... idsInPlace) {
-        animateListView(idsInPlace);
+        animateGridView(idsInPlace);
     }
 
     @Override

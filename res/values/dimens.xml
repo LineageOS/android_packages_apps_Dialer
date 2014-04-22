@@ -64,7 +64,7 @@
     <dimen name="call_button_height">74dp</dimen>
 
     <dimen name="fake_action_bar_height">60dp</dimen>
-    <!-- Min with of fake menu buttons, which should be same as ActionBar's one -->
+    <!-- Min width of fake menu buttons, which should be same as ActionBar's one -->
     <dimen name="fake_menu_button_min_width">56dp</dimen>
 
     <!--  Favorites tile and recent call log padding -->
@@ -76,7 +76,8 @@
     <dimen name="favorites_row_top_padding">1dp</dimen>
     <dimen name="favorites_row_bottom_padding">0dp</dimen>
     <dimen name="favorites_row_start_padding">1dp</dimen>
-    <dimen name="favorites_row_end_padding">1dp</dimen>
+    <!-- Padding from the last contact tile will provide the end padding. -->
+    <dimen name="favorites_row_end_padding">0dp</dimen>
     <dimen name="favorites_row_undo_text_side_padding">32dp</dimen>
     <dimen name="recent_call_log_item_padding">8dp</dimen>
     <!-- Size of the star icon on the favorites tile. -->

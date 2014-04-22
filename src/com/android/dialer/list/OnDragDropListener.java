@@ -8,22 +8,22 @@ package com.android.dialer.list;
 public interface OnDragDropListener {
     /**
      * Called when a drag is started.
-     * @param itemIndex Index of the contact on which the drag was triggered
      * @param x X-coordinate of the drag event
      * @param y Y-coordinate of the drag event
      * @param view The contact tile which the drag was started on
      */
-    public void onDragStarted(int itemIndex, int x, int y, PhoneFavoriteTileView view);
+    public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView view);
 
     /**
      * Called when a drag is in progress and the user moves the dragged contact to a
      * location.
-     * @param itemIndex Index of the contact in the ListView which is currently being displaced
-     * by the dragged contact
+     *
      * @param x X-coordinate of the drag event
      * @param y Y-coordinate of the drag event
+     * @param view Contact tile in the ListView which is currently being displaced
+     * by the dragged contact
      */
-    public void onDragHovered(int itemIndex, int x, int y);
+    public void onDragHovered(int x, int y, PhoneFavoriteSquareTileView view);
 
     /**
      * Called when a drag is completed (whether by dropping it somewhere or simply by dragging
