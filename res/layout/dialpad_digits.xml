@@ -38,7 +38,6 @@
         android:textSize="@dimen/dialpad_digits_text_size"
         android:freezesText="true"
         android:focusableInTouchMode="true"
-        android:editable="true"
         android:cursorVisible="false"
         android:textColor="@color/dialpad_digits_text_color"
         android:textCursorDrawable="@null"

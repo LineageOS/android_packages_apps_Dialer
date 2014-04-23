@@ -144,6 +144,10 @@
         <item name="android:focusable">true</item>
     </style>
 
+    <style name="DialpadBottomKeyButtonStyle" parent="DialpadKeyButtonStyle">
+        <item name="android:layout_height">@dimen/dialpad_bottom_key_height</item>
+    </style>
+
     <style name="DialpadKeyInternalLayoutStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

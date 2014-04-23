@@ -45,6 +45,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -151,12 +152,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private ListsFragment mListsFragment;
 
-    private View mFakeActionBar;
+    private View mFloatingActionButton;
     private View mMenuButton;
-    private View mCallHistoryButton;
     private View mDialpadButton;
     private View mDialButton;
-    private PopupMenu mDialpadOverflowMenu;
 
     private View mFragmentsFrame;
 
@@ -329,16 +328,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mFragmentsFrame = findViewById(R.id.dialtacts_frame);
 
-        mFakeActionBar = findViewById(R.id.fake_action_bar);
+        mFloatingActionButton = findViewById(R.id.floating_action_button);
+        setupFloatingActionButton(mFloatingActionButton);
 
-        mCallHistoryButton = findViewById(R.id.call_history_button);
-        mCallHistoryButton.setOnClickListener(this);
         mDialButton = findViewById(R.id.dial_button);
         mDialButton.setOnClickListener(this);
         mDialpadButton = findViewById(R.id.dialpad_button);
         mDialpadButton.setOnClickListener(this);
-        mMenuButton = findViewById(R.id.overflow_menu_button);
-        mMenuButton.setOnClickListener(this);
 
         mRemoveViewContainer = (RemoveView) findViewById(R.id.remove_view_container);
         mSearchAndRemoveViewContainer = findViewById(R.id.search_and_remove_view_container);
@@ -416,9 +412,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.overflow_menu_button:
-                mDialpadOverflowMenu.show();
-                break;
             case R.id.dialpad_button:
                 // Reset the boolean flag that tracks whether the dialpad was up because
                 // we were in call. Regardless of whether it was true before, we want to
@@ -426,9 +419,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 // button.
                 mInCallDialpadUp = false;
                 showDialpadFragment(true);
-                break;
-            case R.id.call_history_button:
-                showCallHistory();
                 break;
             case R.id.dial_button:
                 // Dial button was pressed; tell the Dialpad fragment
@@ -582,11 +572,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onDialpadShown() {
         mDialButton.setVisibility(View.VISIBLE);
         mDialpadButton.setVisibility(View.GONE);
-        mMenuButton.setVisibility(View.VISIBLE);
-        if (mDialpadOverflowMenu == null) {
-            mDialpadOverflowMenu = mDialpadFragment.buildOptionsMenu(mMenuButton);
-            mMenuButton.setOnTouchListener(mDialpadOverflowMenu.getDragToOpenListener());
-        }
 
         SearchFragment fragment = null;
         if (mInDialpadSearch) {
@@ -612,7 +597,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onDialpadHidden() {
         mDialButton.setVisibility(View.GONE);
         mDialpadButton.setVisibility(View.VISIBLE);
-        mMenuButton.setVisibility(View.GONE);
 
         SearchFragment fragment = null;
         if (mInDialpadSearch) {
@@ -853,9 +837,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 // fragment manager correctly figure out whatever fragment was last displayed.
                 return;
             }
-            if (mDialpadFragment != null) {
-                mDialpadOverflowMenu = mDialpadFragment.buildOptionsMenu(mMenuButton);
-            }
             mSearchView.setQuery(normalizedQuery, false);
         }
     }
@@ -884,7 +865,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void setDialButtonContainerVisible(boolean visible) {
-        mFakeActionBar.setVisibility(visible ? View.VISIBLE : View.GONE);
+        mFloatingActionButton.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     private boolean phoneIsInUse() {
@@ -905,6 +886,34 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
                 PackageManager.MATCH_DEFAULT_ONLY);
         return resolveInfo != null && resolveInfo.size() > 0;
+    }
+
+    private void setupFloatingActionButton(View view) {
+        // Once layout is complete and the floating action button has been assigned a width
+        // and height, assign the outline.
+        view.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v,
+                    int left,
+                    int top,
+                    int right,
+                    int bottom,
+                    int oldLeft,
+                    int oldTop,
+                    int oldRight,
+                    int oldBottom) {
+                final Outline outline = new Outline();
+                final int minDimension = Math.min(right - left, bottom - top);
+                if (minDimension <= 0) {
+                    return;
+                }
+                outline.setRoundRect(0, 0, right - left, bottom - top, minDimension / 2);
+                v.setOutline(outline);
+                v.setClipToOutline(true);
+            }
+        });
+        view.setTranslationZ(getResources().getDimensionPixelSize(
+                R.dimen.floating_action_button_translation_z));
     }
 
     @Override

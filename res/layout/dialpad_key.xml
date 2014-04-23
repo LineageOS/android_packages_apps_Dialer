@@ -17,7 +17,7 @@
 <!-- A layout representing a single key in the dialpad -->
 <com.android.dialer.dialpad.DialpadKeyButton
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/DialpadKeyButtonStyle">
+    style="@style/DialpadKeyButtonStyle" >
 
     <LinearLayout style="@style/DialpadKeyInternalLayoutStyle">
 

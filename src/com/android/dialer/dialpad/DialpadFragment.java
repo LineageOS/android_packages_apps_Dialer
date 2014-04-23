@@ -76,9 +76,11 @@ import com.android.dialer.NeededForReflection;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
+import com.android.dialer.util.DialerUtils;
 import com.android.internal.telephony.ITelephony;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
+
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
@@ -199,6 +201,8 @@ public class DialpadFragment extends Fragment
     /** Remembers if we need to clear digits field when the screen is completely gone. */
     private boolean mClearDigitsOnStop;
 
+    private View mAddContactButton;
+    private View mOverflowMenuButton;
     private View mDelete;
     private ToneGenerator mToneGenerator;
     private final Object mToneGeneratorLock = new Object();
@@ -333,6 +337,9 @@ public class DialpadFragment extends Fragment
         if (isDigitsEmpty()) {
             mDigitsFilledByIntent = false;
             mDigits.setCursorVisible(false);
+            mAddContactButton.setVisibility(View.INVISIBLE);
+        } else {
+            mAddContactButton.setVisibility(View.VISIBLE);
         }
 
         if (mDialpadQueryListener != null) {
@@ -612,8 +619,6 @@ public class DialpadFragment extends Fragment
 
         for (int i = 0; i < buttonIds.length; i++) {
             dialpadKey = (DialpadKeyButton) fragmentView.findViewById(buttonIds[i]);
-            dialpadKey.setLayoutParams(new TableRow.LayoutParams(
-                    TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
             dialpadKey.setOnPressedListener(this);
             numberView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_number);
             lettersView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_letters);
@@ -637,6 +642,13 @@ public class DialpadFragment extends Fragment
         zero.setLongHoverContentDescription(
                 resources.getText(R.string.description_image_button_plus));
 
+        mAddContactButton = fragmentView.findViewById(R.id.dialpad_add_contact);
+        mAddContactButton.setOnClickListener(this);
+
+        mOverflowMenuButton = fragmentView.findViewById(R.id.dialpad_overflow);
+        mOverflowMenuButton.setOnClickListener(this);
+        final PopupMenu overflowMenu = buildOptionsMenu(mOverflowMenuButton);
+        mOverflowMenuButton.setOnTouchListener(overflowMenu.getDragToOpenListener());
     }
 
     @Override
@@ -766,22 +778,6 @@ public class DialpadFragment extends Fragment
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(PREF_DIGITS_FILLED_BY_INTENT, mDigitsFilledByIntent);
-    }
-
-    private void setupMenuItems(Menu menu) {
-        final MenuItem addToContactMenuItem = menu.findItem(R.id.menu_add_contacts);
-
-        // We show "add to contacts" menu only when the user is
-        // seeing usual dialpad and has typed at least one digit.
-        // We never show a menu if the "choose dialpad" UI is up.
-        if (dialpadChooserVisible() || isDigitsEmpty()) {
-            addToContactMenuItem.setVisible(false);
-        } else {
-            final CharSequence digits = mDigits.getText();
-            // Put the current digits string into an intent
-            addToContactMenuItem.setIntent(DialtactsActivity.getAddNumberToContactIntent(digits));
-            addToContactMenuItem.setVisible(true);
-        }
     }
 
     private void keyPressed(int keyCode) {
@@ -937,7 +933,6 @@ public class DialpadFragment extends Fragment
         final PopupMenu popupMenu = new PopupMenu(getActivity(), invoker);
         popupMenu.inflate(R.menu.dialpad_options);
         popupMenu.setOnMenuItemClickListener(this);
-        setupMenuItems(popupMenu.getMenu());
         return popupMenu;
     }
 
@@ -962,6 +957,16 @@ public class DialpadFragment extends Fragment
                     mDigits.setCursorVisible(true);
                 }
                 return;
+            }
+            case R.id.dialpad_add_contact: {
+                final CharSequence digits = mDigits.getText();
+                DialerUtils.startActivityWithErrorToast(getActivity(),
+                        DialtactsActivity.getAddNumberToContactIntent(digits));
+                return;
+            }
+            case R.id.dialpad_overflow: {
+                buildOptionsMenu(view).show();
+                break;
             }
             default: {
                 Log.wtf(TAG, "Unexpected onClick() event from: " + view);

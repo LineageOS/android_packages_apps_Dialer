@@ -13,7 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dialtacts_mainlayout"
     android:layout_width="match_parent"
@@ -27,8 +27,7 @@
     <RelativeLayout
         android:id="@+id/dialtacts_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:clipChildren="false">
         <!-- The main contacts grid -->
         <FrameLayout
@@ -117,45 +116,28 @@
             </com.android.dialer.list.RemoveView>
         </FrameLayout>
     </RelativeLayout>
-    <!-- TODO: To be removed entirely and replaced with a floating action button -->
     <FrameLayout
-        android:layout_height="@dimen/fake_action_bar_height"
-        android:layout_width="match_parent"
-        android:id="@+id/fake_action_bar"
-        android:background="@color/actionbar_background_color">
-        <ImageButton
-            android:id="@+id/call_history_button"
-            android:layout_width="@dimen/fake_menu_button_min_width"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom|start"
-            android:background="?android:attr/selectableItemBackground"
-            android:contentDescription="@string/action_menu_call_history_description"
-            android:src="@drawable/ic_menu_history_lt"/>
+        android:layout_height="@dimen/floating_action_button_height"
+        android:layout_width="@dimen/floating_action_button_width"
+        android:layout_marginBottom="@dimen/floating_action_button_margin_bottom"
+        android:id="@+id/floating_action_button"
+        android:background="@color/actionbar_background_color"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true" >
         <ImageButton
             android:id="@+id/dialpad_button"
-            android:layout_width="@dimen/fake_menu_button_min_width"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="bottom|center"
             android:background="?android:attr/selectableItemBackground"
             android:contentDescription="@string/action_menu_dialpad_button"
             android:src="@drawable/ic_menu_dialpad_lt"/>
         <ImageButton
             android:id="@+id/dial_button"
-            android:layout_width="@dimen/fake_action_bar_height"
-            android:layout_height="@dimen/fake_action_bar_height"
-            android:layout_gravity="bottom|center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/btn_call"
             android:contentDescription="@string/description_dial_button"
             android:src="@drawable/ic_dial_action_call"
             android:visibility="gone" />
-        <ImageButton
-            android:id="@+id/overflow_menu_button"
-            android:layout_width="@dimen/fake_menu_button_min_width"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom|end"
-            android:visibility="gone"
-            android:src="@drawable/ic_menu_overflow_lt"
-            android:contentDescription="@string/action_menu_overflow_description"
-            android:background="?android:attr/selectableItemBackground"/>
     </FrameLayout>
-</LinearLayout>
+</RelativeLayout>
