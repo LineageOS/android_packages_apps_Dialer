@@ -46,7 +46,7 @@
         android:paddingEnd="@dimen/secondary_call_banner_right_padding"
         android:paddingTop="@dimen/call_banner_top_bottom_padding"
         android:paddingBottom="@dimen/call_banner_top_bottom_padding"
-        android:background="@color/incall_call_banner_background">
+        android:background="@color/incall_call_banner_background_color">
         <!-- Name (or the phone number, if we don't have a name to display). -->
         <TextView android:id="@+id/secondaryCallName"
             style="@style/SecondaryCallInfoSecondaryCallName"

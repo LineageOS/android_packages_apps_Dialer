@@ -287,7 +287,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mSupplementaryInfoContainer.setBackgroundResource(R.color.wifi_connected_background);
         } else {
             mSupplementaryInfoContainer.setBackgroundResource(
-                    R.color.incall_secondary_info_background);
+                    R.color.incall_call_banner_background_color);
         }
 
         // Restore the animation.

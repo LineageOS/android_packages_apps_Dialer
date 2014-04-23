@@ -18,7 +18,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/button_background">
+    android:background="@color/button_background_color">
     <!-- The buttons here have a text label floating off to the side
          (which is necessary because these buttons are used only in
          a few rare states, and the meaning of the icon might not be
