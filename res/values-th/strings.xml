@@ -28,7 +28,7 @@
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"ลบจากบันทึกการโทร"</string>
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"ล้างบันทึกการโทร"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ลบข้อความเสียง"</string>
-    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"แบ่งปันข้อความเสียง"</string>
+    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"แชร์ข้อความเสียง"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"บันทึกการโทรว่างเปล่า"</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"ล้างบันทึกการโทร"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"บันทึกการโทรทั้งหมดของคุณจะถูกลบออก"</string>
