@@ -51,7 +51,7 @@
             android:paddingEnd="@dimen/call_banner_side_padding"
             android:paddingTop="@dimen/call_banner_top_bottom_padding"
             android:paddingBottom="@dimen/call_banner_top_bottom_padding"
-            android:background="@color/incall_call_banner_background">
+            android:background="@color/incall_call_banner_background_color">
 
             <!-- Name (or the phone number, if we don't have a name to display). -->
             <TextView android:id="@+id/name"
@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
             android:orientation="vertical"
-            android:background="@color/incall_secondary_info_background"
+            android:background="@color/incall_call_banner_background_color"
             android:animateLayoutChanges="true">
 
             <!-- The "call state label": In some states, this shows a special
