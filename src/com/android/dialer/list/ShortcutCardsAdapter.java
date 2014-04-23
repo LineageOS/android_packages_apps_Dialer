@@ -38,7 +38,7 @@ import com.android.dialer.list.SwipeHelper.SwipeHelperCallback;
  * An adapter that displays call shortcuts from {@link com.android.dialer.calllog.CallLogAdapter}
  * in the form of cards.
  */
-public class PhoneFavoriteMergedAdapter extends BaseAdapter {
+public class ShortcutCardsAdapter extends BaseAdapter {
 
     private class CustomDataSetObserver extends DataSetObserver {
         @Override
@@ -47,7 +47,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         }
     }
 
-    private static final String TAG = PhoneFavoriteMergedAdapter.class.getSimpleName();
+    private static final String TAG = ShortcutCardsAdapter.class.getSimpleName();
 
     private final CallLogAdapter mCallLogAdapter;
 
@@ -94,7 +94,7 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         }
     };
 
-    public PhoneFavoriteMergedAdapter(Context context,
+    public ShortcutCardsAdapter(Context context,
             ListsFragment fragment,
             CallLogAdapter callLogAdapter) {
         final Resources resources = context.getResources();
