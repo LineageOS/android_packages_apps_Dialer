@@ -18,8 +18,6 @@ package com.android.incallui;
 
 import android.animation.LayoutTransition;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.telephony.DisconnectCause;
@@ -59,6 +57,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mSecondaryCallName;
     private ImageView mSecondaryPhoto;
     private View mSecondaryPhotoOverlay;
+
+    private View mEndCallButton;
 
     // Cached DisplayMetrics density.
     private float mDensity;
@@ -112,6 +112,17 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
         mSupplementaryInfoContainer =
             (ViewGroup) view.findViewById(R.id.supplementary_info_container);
+
+        mEndCallButton = view.findViewById(R.id.endButton);
+        mEndCallButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().endCallClicked();
+            }
+        });
+        // Make the hit target smaller for the end button so that is creates a deadzone along the
+        // inside perimeter of the button.
+        mEndCallButton.setOnTouchListener(new SmallerHitTargetTouchListener());
     }
 
     @Override

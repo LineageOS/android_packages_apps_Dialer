@@ -17,20 +17,8 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="0dp"
-             android:layout_weight="1">
-
-    <!-- Contact photo for primary call info -->
-    <ImageView android:id="@+id/photo"
-               android:layout_alignParentStart="true"
-               android:layout_alignParentTop="true"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:gravity="top|center_horizontal"
-               android:scaleType="centerCrop"
-               android:contentDescription="@string/contactPhoto"
-               android:src="@drawable/picture_unknown"/>
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -143,6 +131,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 </FrameLayout>

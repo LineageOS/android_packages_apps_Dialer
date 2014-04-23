@@ -50,15 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    <!-- Row 2: The "End call" button. -->
-    <ImageButton android:id="@+id/endButton"
-            style="@style/InCallEndButton"
-            android:layout_width="match_parent"
-            android:src="@drawable/ic_in_call_phone_hangup"
-            android:background="@drawable/end_call_background"
-            android:contentDescription="@string/onscreenEndCallText" />
-
-    <!-- Row 3: The main batch of in-call buttons:
+    <!-- Row 2: The main batch of in-call buttons:
          Dialpad / Audio mode / Mute / Hold / Add call
          Visible in all states except while an incoming call is
          ringing. -->

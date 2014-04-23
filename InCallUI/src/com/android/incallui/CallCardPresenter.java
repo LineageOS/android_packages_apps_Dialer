@@ -456,6 +456,14 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         CallCommandClient.getInstance().swap();
     }
 
+    public void endCallClicked() {
+        if (mPrimary == null) {
+            return;
+        }
+
+        CallCommandClient.getInstance().disconnectCall(mPrimary.getCallId());
+    }
+
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
