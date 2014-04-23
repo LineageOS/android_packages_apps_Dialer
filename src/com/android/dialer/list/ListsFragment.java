@@ -168,8 +168,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mCallLogAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
                 new ContactInfoHelper(getActivity(), currentCountryIso), false, false);
 
-        mMergedAdapter = new PhoneFavoriteMergedAdapter(getActivity(), this, null,
-                mCallLogAdapter, null, null, null);
+        mMergedAdapter = new PhoneFavoriteMergedAdapter(getActivity(), this, mCallLogAdapter);
     }
 
     @Override
