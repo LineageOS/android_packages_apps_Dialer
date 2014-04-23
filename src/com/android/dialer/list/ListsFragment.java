@@ -65,13 +65,13 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
-    private PhoneFavoriteFragment mSpeedDialFragment;
+    private SpeedDialFragment mSpeedDialFragment;
     private CallLogFragment mRecentsFragment;
     private AllContactsFragment mAllContactsFragment;
 
     private String[] mTabTitles;
 
-    private PhoneFavoriteMergedAdapter mMergedAdapter;
+    private ShortcutCardsAdapter mMergedAdapter;
     private CallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
 
@@ -116,7 +116,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         public Fragment getItem(int position) {
             switch (position) {
                 case TAB_INDEX_SPEED_DIAL:
-                    mSpeedDialFragment = new PhoneFavoriteFragment();
+                    mSpeedDialFragment = new SpeedDialFragment();
                     return mSpeedDialFragment;
                 case TAB_INDEX_RECENTS:
                     mRecentsFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL,
@@ -168,7 +168,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mCallLogAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
                 new ContactInfoHelper(getActivity(), currentCountryIso), false, false);
 
-        mMergedAdapter = new PhoneFavoriteMergedAdapter(getActivity(), this, mCallLogAdapter);
+        mMergedAdapter = new ShortcutCardsAdapter(getActivity(), this, mCallLogAdapter);
     }
 
     @Override

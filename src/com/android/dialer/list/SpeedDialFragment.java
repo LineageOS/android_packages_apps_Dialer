@@ -50,14 +50,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Fragment for Phone UI's favorite screen.
- *
- * This fragment contains three kinds of contacts in one screen: "starred", "frequent", and "all"
- * contacts. To show them at once, this merges results from {@link com.android.contacts.common.list.ContactTileAdapter} and
- * {@link com.android.contacts.common.list.PhoneNumberListAdapter} into one unified list using {@link PhoneFavoriteMergedAdapter}.
- * A contact filter header is also inserted between those adapters' results.
+ * This fragment displays the user's favorite/frequent contacts in a grid.
  */
-public class PhoneFavoriteFragment extends Fragment implements OnItemClickListener,
+public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         PhoneFavoritesTileAdapter.OnDataSetChangedForAnimationListener {
 
     /**
@@ -69,7 +64,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      */
     private static final long KEY_REMOVED_ITEM_HEIGHT = Long.MAX_VALUE;
 
-    private static final String TAG = PhoneFavoriteFragment.class.getSimpleName();
+    private static final String TAG = SpeedDialFragment.class.getSimpleName();
     private static final boolean DEBUG = false;
 
     private int mAnimationDuration;

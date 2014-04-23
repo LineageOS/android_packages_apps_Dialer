@@ -74,7 +74,7 @@ import com.android.dialer.list.DragDropController;
 import com.android.dialer.list.ListsFragment;
 import com.android.dialer.list.OnDragDropListener;
 import com.android.dialer.list.OnListFragmentScrolledListener;
-import com.android.dialer.list.PhoneFavoriteFragment;
+import com.android.dialer.list.SpeedDialFragment;
 import com.android.dialer.list.PhoneFavoriteTileView;
 import com.android.dialer.list.PhoneFavoriteSquareTileView;
 import com.android.dialer.list.RegularSearchFragment;
@@ -95,7 +95,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         OnListFragmentScrolledListener,
         DialpadFragment.HostInterface,
         ListsFragment.HostInterface,
-        PhoneFavoriteFragment.HostInterface,
+        SpeedDialFragment.HostInterface,
         OnDragDropListener, View.OnLongClickListener,
         OnPhoneNumberPickerActionListener {
     private static final String TAG = "DialtactsActivity";
@@ -207,7 +207,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         public void show() {
             final Menu menu = getMenu();
             final MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
-            // TODO: Check mPhoneFavoriteFragment.hasFrequents()
+            // TODO: Check mSpeedDialFragment.hasFrequents()
             clearFrequents.setVisible(true);
             super.show();
         }
@@ -483,7 +483,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 return true;
             case R.id.menu_clear_frequents:
                 // TODO: This should be enabled/disabled based on
-                // PhoneFavoritesFragments.hasFrequents
+                // SpeedDialFragment.hasFrequents
                 ClearFrequentsDialog.show(getFragmentManager());
                 return true;
             case R.id.menu_call_settings:
@@ -940,7 +940,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onDroppedOnRemove() {}
 
     /**
-     * Allows the PhoneFavoriteFragment to attach the drag controller to mRemoveViewContainer
+     * Allows the SpeedDialFragment to attach the drag controller to mRemoveViewContainer
      * once it has been attached to the activity.
      */
     @Override

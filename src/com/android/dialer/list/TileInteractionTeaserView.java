@@ -31,7 +31,7 @@ public class TileInteractionTeaserView extends FrameLayout {
     private int mTextTop;
     private int mAnimatedHeight = -1;
 
-    private PhoneFavoriteMergedAdapter mAdapter;
+    private ShortcutCardsAdapter mAdapter;
 
     public TileInteractionTeaserView(final Context context) {
         this(context, null);
@@ -91,7 +91,7 @@ public class TileInteractionTeaserView extends FrameLayout {
         return prefs.getBoolean(KEY_TILE_INTERACTION_TEASER_SHOWN, true);
     }
 
-    public void setAdapter(PhoneFavoriteMergedAdapter adapter) {
+    public void setAdapter(ShortcutCardsAdapter adapter) {
         mAdapter = adapter;
     }
 
