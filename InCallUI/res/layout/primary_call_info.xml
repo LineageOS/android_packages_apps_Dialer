@@ -37,44 +37,61 @@
             android:minHeight="@dimen/call_banner_height"
             android:paddingStart="@dimen/call_banner_side_padding"
             android:paddingEnd="@dimen/call_banner_side_padding"
-            android:paddingTop="@dimen/call_banner_top_bottom_padding"
+            android:paddingTop="@dimen/call_banner_primary_call_top_padding"
             android:paddingBottom="@dimen/call_banner_top_bottom_padding"
-            android:background="@color/incall_call_banner_background_color">
+            android:background="@color/incall_call_banner_background_color" >
 
             <!-- Name (or the phone number, if we don't have a name to display). -->
-            <TextView android:id="@+id/name"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
+            <LinearLayout android:id="@+id/stateAndName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/call_banner_name_number_right_padding"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/incall_call_banner_text_color"
-                android:singleLine="true"
-                android:textAlignment="viewStart"/>
+                android:orientation="vertical" >
+
+                <TextView android:id="@+id/callStateLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:singleLine="true"
+                    android:gravity="left"
+                    android:ellipsize="end" />
+
+                <TextView android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:paddingEnd="@dimen/call_banner_name_number_right_padding"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="@dimen/call_name_text_size"
+                    android:singleLine="true" />
+
+            </LinearLayout>
 
             <!-- Label (like "Mobile" or "Work", if present) and phone number, side by side -->
             <LinearLayout android:id="@+id/labelAndNumber"
-                android:layout_below="@id/name"
+                android:layout_below="@id/stateAndName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingEnd="@dimen/call_banner_name_number_right_padding"
-                android:orientation="horizontal">
+                android:orientation="horizontal" >
+
                 <TextView android:id="@+id/phoneNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/incall_call_banner_text_color"
+                    android:textColor="@color/incall_call_banner_secondary_text_color"
+                    android:textSize="@dimen/call_label_text_size"
                     android:singleLine="true"
                     android:textDirection="ltr" />
+
                 <TextView android:id="@+id/label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/incall_call_banner_text_color"
-                    android:textAllCaps="true"
+                    android:textColor="@color/incall_call_banner_secondary_text_color"
+                    android:textSize="@dimen/call_label_text_size"
                     android:singleLine="true"
                     android:layout_marginStart="6dp" />
+
             </LinearLayout>
 
             <!-- Elapsed time indication for a call in progress. -->
@@ -100,35 +117,6 @@
                 android:ellipsize="end" />
 
         </RelativeLayout>  <!-- End of call_banner -->
-
-
-        <LinearLayout android:id="@+id/supplementary_info_container"
-            style="@style/PrimaryCallInfoSupplementaryInfoContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:orientation="vertical"
-            android:background="@color/incall_call_banner_background_color"
-            android:animateLayoutChanges="true">
-
-            <!-- The "call state label": In some states, this shows a special
-                 indication like "Dialing" or "Incoming call" or "Call ended".
-                 It's unused for the normal case of an active ongoing call. -->
-            <TextView android:id="@+id/callStateLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/provider_info_top_bottom_padding"
-                android:paddingBottom="@dimen/provider_info_top_bottom_padding"
-                android:paddingStart="@dimen/call_banner_side_padding"
-                android:paddingEnd="@dimen/call_banner_side_padding"
-                android:gravity="end"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/incall_call_banner_text_color"
-                android:textAllCaps="true"
-                android:background="@android:color/transparent"
-                android:singleLine="true"
-                android:ellipsize="end"/>
-        </LinearLayout>
 
     </LinearLayout>
 

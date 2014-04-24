@@ -31,10 +31,16 @@
     <!-- Padding at the right edges of the secondary call banner. -->
     <dimen name="secondary_call_banner_right_padding">100dp</dimen>
     <!-- Padding at the top and bottom edges of the "call banner". -->
+    <dimen name="call_banner_primary_call_top_padding">32dp</dimen>
     <dimen name="call_banner_top_bottom_padding">16dp</dimen>
 
     <!-- Padding at the top and bottom edges of the "provider information" -->
     <dimen name="provider_info_top_bottom_padding">8dp</dimen>
+
+    <!-- Text size for the name in the call info. -->
+    <dimen name="call_name_text_size">36sp</dimen>
+    <!-- Text size for the call info label and number. -->
+    <dimen name="call_label_text_size">18sp</dimen>
 
     <!-- Right padding for name and number fields in the call banner.
          This padding is used to ensure that ultra-long names or

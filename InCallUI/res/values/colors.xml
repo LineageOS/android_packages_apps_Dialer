@@ -26,6 +26,8 @@
     <color name="incall_call_banner_background_color">@color/incall_background_color</color>
     <!-- white -->
     <color name="incall_call_banner_text_color">#FFFFFF</color>
+    <!-- White, with 80% opacity. -->
+    <color name="incall_call_banner_secondary_text_color">#99ffffff</color>
 
     <!-- Color of the theme of the People app -->
     <color name="people_app_theme_color">#33B5E5</color>
