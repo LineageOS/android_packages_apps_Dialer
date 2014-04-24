@@ -50,7 +50,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mCallTypeLabel;
     private ImageView mPhoto;
     private TextView mElapsedTime;
-    private ViewGroup mSupplementaryInfoContainer;
 
     // Secondary caller info
     private ViewStub mSecondaryCallInfo;
@@ -110,8 +109,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mCallTypeLabel = (TextView) view.findViewById(R.id.callTypeLabel);
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
-        mSupplementaryInfoContainer =
-            (ViewGroup) view.findViewById(R.id.supplementary_info_container);
 
         mEndCallButton = view.findViewById(R.id.endButton);
         mEndCallButton.setOnClickListener(new View.OnClickListener() {
@@ -255,16 +252,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         Log.v(this, "bluetooth on " + bluetoothOn);
         Log.v(this, "gateway " + gatewayLabel + gatewayNumber);
 
-        // There are cases where we totally skip the animation, in which case remove the transition
-        // animation here and restore it afterwards.
-        final boolean skipAnimation = (Call.State.isDialing(state)
-                || state == Call.State.DISCONNECTED || state == Call.State.DISCONNECTING);
-        LayoutTransition transition = null;
-        if (skipAnimation) {
-            transition = mSupplementaryInfoContainer.getLayoutTransition();
-            mSupplementaryInfoContainer.setLayoutTransition(null);
-        }
-
         // Update the call state label.
         if (!TextUtils.isEmpty(callStateLabel)) {
             mCallStateLabel.setVisibility(View.VISIBLE);
@@ -275,19 +262,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             }
         } else {
             mCallStateLabel.setVisibility(View.GONE);
-            // Gravity is aligned left when receiving an incoming call in landscape.
-            // In that rare case, the gravity needs to be reset to the right.
-            // Also, setText("") is used since there is a delay in making the view GONE,
-            // so the user will otherwise see the text jump to the right side before disappearing.
-            if(mCallStateLabel.getGravity() != Gravity.END) {
-                mCallStateLabel.setText("");
-                mCallStateLabel.setGravity(Gravity.END);
-            }
-        }
-
-        // Restore the animation.
-        if (skipAnimation) {
-            mSupplementaryInfoContainer.setLayoutTransition(transition);
         }
     }
 
