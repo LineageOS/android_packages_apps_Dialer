@@ -51,11 +51,13 @@
     <dimen name="dialpad_key_numbers_width">30dp</dimen>
     <dimen name="dialpad_key_letters_width">50dp</dimen>
     <dimen name="dialpad_key_height">56dp</dimen>
+    <!-- The bottom row of the dialpad is slightly taller to account for the dial button -->
+    <dimen name="dialpad_bottom_key_height">70dp</dimen>
     <dimen name="dialpad_key_plus_size">18sp</dimen>
     <dimen name="dialpad_number_to_letters_padding">11dp</dimen>
     <dimen name="dialpad_horizontal_padding">5dp</dimen>
-    <dimen name="dialpad_digits_text_size">36sp</dimen>
-    <dimen name="dialpad_digits_height">47dp</dimen>
+    <dimen name="dialpad_digits_text_size">33sp</dimen>
+    <dimen name="dialpad_digits_height">55dp</dimen>
     <dimen name="dialpad_digits_padding">16dp</dimen>
     <dimen name="dialpad_digits_margin_bottom">0px</dimen>
     <dimen name="dialpad_center_margin">3dp</dimen>
@@ -63,9 +65,14 @@
     <!-- Match call_button_height to Phone's dimens/in_call_end_button_height -->
     <dimen name="call_button_height">74dp</dimen>
 
-    <dimen name="fake_action_bar_height">60dp</dimen>
-    <!-- Min width of fake menu buttons, which should be same as ActionBar's one -->
-    <dimen name="fake_menu_button_min_width">56dp</dimen>
+    <!-- Height of the floating action button -->
+    <dimen name="floating_action_button_height">60dp</dimen>
+    <!-- Width of the floating action button -->
+    <dimen name="floating_action_button_width">60dp</dimen>
+    <!-- Bottom margin of the floating action button -->
+    <dimen name="floating_action_button_margin_bottom">10dp</dimen>
+    <!-- Z translation of the floating action button -->
+    <dimen name="floating_action_button_translation_z">5dp</dimen>
 
     <!--  Favorites tile and recent call log padding -->
     <dimen name="contact_tile_divider_width">1dp</dimen>
