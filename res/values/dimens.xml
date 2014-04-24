@@ -65,6 +65,8 @@
     <!-- Match call_button_height to Phone's dimens/in_call_end_button_height -->
     <dimen name="call_button_height">74dp</dimen>
 
+    <!-- Right margin of the floating action button -->
+    <dimen name="floating_action_button_margin_right">10dp</dimen>
     <!-- Bottom margin of the floating action button -->
     <dimen name="floating_action_button_margin_bottom">10dp</dimen>
 
