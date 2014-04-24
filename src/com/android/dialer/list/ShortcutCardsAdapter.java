@@ -208,6 +208,8 @@ public class ShortcutCardsAdapter extends BaseAdapter {
                     FrameLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(mCallLogPadding, mCallLogPadding, mCallLogPadding, mCallLogPadding);
             view.setLayoutParams(params);
+            view.setTranslationZ(getResources().getDimensionPixelSize(
+                    R.dimen.recent_call_log_item_translation_z));
 
             super.addView(view);
         }
