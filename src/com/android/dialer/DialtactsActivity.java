@@ -65,6 +65,7 @@ import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
+import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.calllog.CallLogActivity;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpad.DialpadFragment;
@@ -329,7 +330,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mFragmentsFrame = findViewById(R.id.dialtacts_frame);
 
         mFloatingActionButton = findViewById(R.id.floating_action_button);
-        setupFloatingActionButton(mFloatingActionButton);
+        ViewUtil.setupFloatingActionButton(mFloatingActionButton, getResources());
 
         mDialButton = findViewById(R.id.dial_button);
         mDialButton.setOnClickListener(this);
@@ -886,34 +887,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
                 PackageManager.MATCH_DEFAULT_ONLY);
         return resolveInfo != null && resolveInfo.size() > 0;
-    }
-
-    private void setupFloatingActionButton(View view) {
-        // Once layout is complete and the floating action button has been assigned a width
-        // and height, assign the outline.
-        view.addOnLayoutChangeListener(new OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v,
-                    int left,
-                    int top,
-                    int right,
-                    int bottom,
-                    int oldLeft,
-                    int oldTop,
-                    int oldRight,
-                    int oldBottom) {
-                final Outline outline = new Outline();
-                final int minDimension = Math.min(right - left, bottom - top);
-                if (minDimension <= 0) {
-                    return;
-                }
-                outline.setRoundRect(0, 0, right - left, bottom - top, minDimension / 2);
-                v.setOutline(outline);
-                v.setClipToOutline(true);
-            }
-        });
-        view.setTranslationZ(getResources().getDimensionPixelSize(
-                R.dimen.floating_action_button_translation_z));
     }
 
     @Override
