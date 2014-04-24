@@ -16,13 +16,7 @@
 
 <!-- Background drawable used to render the "end call" button. -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:state_enabled="false"
-          android:drawable="@drawable/end_call_disabled_state" />
-
-    <item android:state_pressed="true"
-          android:drawable="@drawable/end_call_pressed_state" />
-
-    <item android:drawable="@drawable/end_call_active_state" />
-
+    <item android:state_enabled="false" android:drawable="@color/end_call_disabled_color" />
+    <item android:state_pressed="true" android:drawable="@color/end_call_pressed_color" />
+    <item android:drawable="@color/end_call_active_color" />
 </selector>

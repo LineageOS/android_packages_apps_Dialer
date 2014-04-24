@@ -39,13 +39,13 @@
     <color name="manage_conference_secondary_text_color">#888888</color>
 
     <!-- Used when the End Call button is active -->
-    <drawable name="end_call_active_state">#f22121</drawable>
+    <color name="end_call_active_color">#f22121</color>
 
     <!-- Used when the End Call button is pressed -->
-    <drawable name="end_call_pressed_state">#ff4e4e</drawable>
+    <color name="end_call_pressed_color">#ff4e4e</color>
 
     <!-- Used when the End Call button is disabled -->
-    <drawable name="end_call_disabled_state">#303030</drawable>
+    <color name="end_call_disabled_color">#303030</color>
 
     <!-- Color of dialpad digits -->
     <color name="dialpad_digits_text_color">#000000</color>

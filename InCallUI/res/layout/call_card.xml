@@ -59,15 +59,23 @@
                 android:id="@+id/callButtonFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
 
-        <ImageButton android:id="@+id/endButton"
-            style="@style/InCallEndButton"
-            android:layout_width="match_parent"
-            android:src="@drawable/ic_in_call_phone_hangup"
-            android:background="@drawable/end_call_background"
-            android:contentDescription="@string/onscreenEndCallText"
-            android:layout_gravity="bottom" />
+        <FrameLayout
+            android:layout_width="@dimen/floating_action_button_width"
+            android:layout_height="@dimen/floating_action_button_height"
+            android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
+            android:layout_gravity="bottom|center">
+
+            <ImageButton android:id="@+id/endButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/end_call_background"
+                android:src="@drawable/ic_in_call_phone_hangup"
+                android:contentDescription="@string/onscreenEndCallText" />
+
+        </FrameLayout>
     </FrameLayout>
 
     <!-- Secondary "Call info" block, for the background ("on hold") call. -->

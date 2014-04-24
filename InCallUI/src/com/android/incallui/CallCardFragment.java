@@ -16,13 +16,11 @@
 
 package com.android.incallui;
 
-import android.animation.LayoutTransition;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.telephony.DisconnectCause;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +30,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.contacts.common.util.ViewUtil;
 import com.android.services.telephony.common.Call;
 
 import java.util.List;
@@ -117,9 +116,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 getPresenter().endCallClicked();
             }
         });
-        // Make the hit target smaller for the end button so that is creates a deadzone along the
-        // inside perimeter of the button.
-        mEndCallButton.setOnTouchListener(new SmallerHitTargetTouchListener());
+        ViewUtil.setupFloatingActionButton(mEndCallButton, getResources());
     }
 
     @Override
