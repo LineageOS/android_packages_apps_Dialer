@@ -517,6 +517,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         return;
     }
 
+    public void setEndCallButtonEnabled(boolean enabled) {
+        mEndCallButton.setEnabled(enabled);
+    }
+
     private void dispatchPopulateAccessibilityEvent(AccessibilityEvent event, View view) {
         if (view == null) return;
         final List<CharSequence> eventText = event.getText();

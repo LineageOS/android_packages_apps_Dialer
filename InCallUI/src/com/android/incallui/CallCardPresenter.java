@@ -194,6 +194,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         } else {
             ui.setCallState(Call.State.IDLE, DisconnectCause.NOT_VALID, false, null, null);
         }
+
+        final boolean enableEndCallButton = state.isConnectingOrConnected() &&
+                !state.isIncoming() && mPrimary != null;
+        ui.setEndCallButtonEnabled(enableEndCallButton);
     }
 
     @Override
@@ -478,5 +482,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimaryImage(Drawable image);
         void setPrimaryPhoneNumber(String phoneNumber);
         void setPrimaryLabel(String label);
+        void setEndCallButtonEnabled(boolean enabled);
     }
 }

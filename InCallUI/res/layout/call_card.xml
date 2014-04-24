@@ -17,10 +17,10 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/call_card"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    android:id="@+id/call_card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <!-- The main content of the CallCard is either one or two "call info"
          blocks, depending on whether one or two lines are in use.
@@ -32,49 +32,49 @@
 
     <!-- Primary "call card" block, for the foreground call. -->
     <FrameLayout android:id="@+id/primary_call_info"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <!-- Contact photo for primary call info -->
         <ImageView android:id="@+id/photo"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="top|center_horizontal"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/contactPhoto"
-                android:src="@drawable/picture_unknown"/>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top|center_horizontal"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/contactPhoto"
+            android:src="@drawable/picture_unknown"/>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <include android:id="@+id/primary_call_info"
-                    layout="@layout/primary_call_info" />
+                layout="@layout/primary_call_info" />
 
             <fragment android:name="com.android.incallui.CallButtonFragment"
-                    android:id="@+id/callButtonFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                android:id="@+id/callButtonFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <ImageButton android:id="@+id/endButton"
-                style="@style/InCallEndButton"
-                android:layout_width="match_parent"
-                android:src="@drawable/ic_in_call_phone_hangup"
-                android:background="@drawable/end_call_background"
-                android:contentDescription="@string/onscreenEndCallText"
-                android:layout_gravity="bottom" />
+            style="@style/InCallEndButton"
+            android:layout_width="match_parent"
+            android:src="@drawable/ic_in_call_phone_hangup"
+            android:background="@drawable/end_call_background"
+            android:contentDescription="@string/onscreenEndCallText"
+            android:layout_gravity="bottom" />
     </FrameLayout>
 
     <!-- Secondary "Call info" block, for the background ("on hold") call. -->
     <ViewStub android:id="@+id/secondary_call_info"
-            android:layout="@layout/secondary_call_info"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        android:layout="@layout/secondary_call_info"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>
