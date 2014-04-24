@@ -16,6 +16,9 @@
 
 package com.android.dialer.list;
 
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract.QuickContact;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +38,7 @@ import com.android.dialer.R;
 public class AllContactsFragment extends ContactEntryListFragment<ContactEntryListAdapter> {
 
     public AllContactsFragment() {
-        setQuickContactEnabled(true);
+        setQuickContactEnabled(false);
         setPhotoLoaderEnabled(true);
         setSectionHeaderDisplayEnabled(true);
         setDarkTheme(false);
@@ -44,7 +47,13 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
 
     @Override
     protected ContactEntryListAdapter createListAdapter() {
-        DefaultContactListAdapter adapter = new DefaultContactListAdapter(getActivity());
+        final DefaultContactListAdapter adapter = new DefaultContactListAdapter(getActivity()) {
+            @Override
+            protected void bindView(View itemView, int partition, Cursor cursor, int position) {
+                super.bindView(itemView, partition, cursor, position);
+                itemView.setTag(this.getContactUri(partition, cursor));
+            }
+        };
         adapter.setDisplayPhotos(true);
         adapter.setFilter(ContactListFilter.createFilterWithType(
                 ContactListFilter.FILTER_TYPE_WITH_PHONE_NUMBERS_ONLY));
@@ -60,9 +69,10 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ContactListItemView contactListItemView = (ContactListItemView) view;
-        QuickContactBadge quickContact = contactListItemView.getQuickContact();
-        quickContact.onClick(quickContact);
+        final Uri uri = (Uri) view.getTag();
+        if (uri != null) {
+            QuickContact.showQuickContact(getActivity(), view, uri, QuickContact.MODE_LARGE, null);
+        }
     }
 
     @Override
