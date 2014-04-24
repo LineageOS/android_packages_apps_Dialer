@@ -54,7 +54,6 @@ public class CallButtonFragment
 
     private PopupMenu mAudioModePopup;
     private boolean mAudioModePopupVisible;
-    private View mEndCallButton;
     private View mExtraRowButton;
     private View mManageConferenceButton;
     private View mGenericMergeButton;
@@ -97,18 +96,6 @@ public class CallButtonFragment
                 getPresenter().mergeClicked();
             }
         });
-
-        mEndCallButton = parent.findViewById(R.id.endButton);
-        mEndCallButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getPresenter().endCallClicked();
-            }
-        });
-
-        // make the hit target smaller for the end button so that is creates a deadzone
-        // along the inside perimeter of the button.
-        mEndCallButton.setOnTouchListener(new SmallerHitTargetTouchListener());
 
         mMuteButton = (ImageButton) parent.findViewById(R.id.muteButton);
         mMuteButton.setOnClickListener(new OnClickListener() {
@@ -204,9 +191,6 @@ public class CallButtonFragment
         if (view.getVisibility() != View.VISIBLE) {
             view.setVisibility(View.VISIBLE);
         }
-
-        // The main end-call button spanning across the screen.
-        mEndCallButton.setEnabled(isEnabled);
 
         // The smaller buttons laid out horizontally just below the end-call button.
         mMuteButton.setEnabled(isEnabled);
