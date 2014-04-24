@@ -174,6 +174,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Відмінити"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Набрати <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Додати до контактів"</string>
+    <string name="recents_footer_text" msgid="7315554578957453359">"Переглянути всю історію дзвінків"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Нових пропущених дзвінків: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Тут будуть відображатися вибрані контакти,\n яким ви часто телефонуєте.\nСпілкуйтеся із задоволенням."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Торкніться зображення, щоб побачити всі номери, або натисніть і утримуйте, щоб змінити порядок"</string>

@@ -174,6 +174,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Anular"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Telefonar para <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Adicionar aos contactos"</string>
+    <string name="recents_footer_text" msgid="7315554578957453359">"Ver histórico de chamadas completo"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> chamadas não atendidas novas"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Os favoritos e os contactos para os quais\nliga frequentemente serão mostrados aqui,\n por isso, comece a ligar."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Toque na imagem para ver todos os números ou prima sem soltar para reordenar"</string>

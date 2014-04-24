@@ -174,6 +174,8 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Отмена"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Позвонить: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Добавить в контакты"</string>
+    <!-- no translation found for recents_footer_text (7315554578957453359) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"Пропущенных вызовов: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Здесь будут отображаться избранные элементы\nи контакты, которым вы звоните чаще всего.\nОбщайтесь с удовольствием."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Нажмите на фото, чтобы посмотреть информацию о контакте. Чтобы переставить контакт в списке, нажмите на него и передвиньте на нужное место."</string>
