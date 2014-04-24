@@ -89,6 +89,11 @@
         <item name="android:windowActionBarOverlay">false</item>
     </style>
 
+    <!-- Hide the actionbar title during the activity preview -->
+    <style name="DialtactsActivityTheme" parent="DialtactsTheme">
+        <item name="android:actionBarStyle">@style/DialtactsActionBarWithoutTitleStyle</item>
+    </style>
+
     <style name="CallDetailActivityTheme" parent="android:Theme.Quantum.Light">
         <item name="android:windowBackground">@color/background_dialer_light</item>
         <item name="android:gravity">top</item>
@@ -160,6 +165,10 @@
         <item name="android:titleTextStyle">@style/DialtactsActionBarTitleText</item>
         <!-- Empty icon -->
         <item name="android:icon">@android:color/transparent</item>
+    </style>
+
+    <style name="DialtactsActionBarWithoutTitleStyle" parent="DialtactsActionBarStyle">
+        <item name="android:displayOptions"></item>
     </style>
 
     <!-- Text in the action bar at the top of the screen -->
