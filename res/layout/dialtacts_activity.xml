@@ -22,6 +22,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:clipChildren="false"
+    android:animateLayoutChanges="true"
     android:background="@color/background_dialer_light"
     >
     <RelativeLayout
@@ -119,6 +120,7 @@
     <FrameLayout
         android:layout_height="@dimen/floating_action_button_height"
         android:layout_width="@dimen/floating_action_button_width"
+        android:layout_marginRight="@dimen/floating_action_button_margin_right"
         android:layout_marginBottom="@dimen/floating_action_button_margin_bottom"
         android:id="@+id/floating_action_button"
         android:background="@color/actionbar_background_color"

@@ -17,6 +17,7 @@
 package com.android.dialer;
 
 import android.animation.Animator;
+import android.animation.LayoutTransition;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
@@ -38,9 +39,11 @@ import android.os.ServiceManager;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
+import android.support.v4.view.ViewPager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -54,8 +57,10 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
@@ -99,7 +104,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ListsFragment.HostInterface,
         SpeedDialFragment.HostInterface,
         OnDragDropListener, View.OnLongClickListener,
-        OnPhoneNumberPickerActionListener {
+        OnPhoneNumberPickerActionListener,
+        ViewPager.OnPageChangeListener {
     private static final String TAG = "DialtactsActivity";
 
     public static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -164,6 +170,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
+
+    /**
+     * The position of the currently selected tab in the attached {@link ListsFragment}.
+     */
+    private int mCurrentTabPosition = 0;
 
     /**
      * True if the dialpad is only temporarily showing due to being in call
@@ -327,6 +338,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mFirstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH);
         }
 
+        RelativeLayout parent = (RelativeLayout) findViewById(R.id.dialtacts_mainlayout);
+        parent.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+
         mFragmentsFrame = findViewById(R.id.dialtacts_frame);
 
         mFloatingActionButton = findViewById(R.id.floating_action_button);
@@ -398,6 +412,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             }
         } else if (fragment instanceof ListsFragment) {
             mListsFragment = (ListsFragment) fragment;
+            mListsFragment.addOnPageChangeListener(this);
         }
     }
 
@@ -590,6 +605,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mFragmentsFrame.animate().alpha(0.0f);
         }
         getActionBar().hide();
+        alignFloatingActionButtonMiddle();
     }
 
     /**
@@ -614,6 +630,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mFragmentsFrame.animate().alpha(1.0f);
         }
         getActionBar().show();
+        alignFloatingActionButtonByTab(mCurrentTabPosition);
     }
 
     private void hideInputMethod(View view) {
@@ -952,5 +969,44 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     public int getActionBarHeight() {
         return mActionBarHeight;
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        mCurrentTabPosition = position;
+        alignFloatingActionButtonByTab(mCurrentTabPosition);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+    }
+
+    private void alignFloatingActionButtonByTab(int position) {
+        if (position == ListsFragment.TAB_INDEX_SPEED_DIAL) {
+            alignFloatingActionButtonMiddle();
+        } else {
+            alignFloatingActionButtonRight();
+        }
+    }
+
+    private void alignFloatingActionButtonRight() {
+        final RelativeLayout.LayoutParams params =
+                (RelativeLayout.LayoutParams) mFloatingActionButton.getLayoutParams();
+        params.removeRule(RelativeLayout.CENTER_HORIZONTAL);
+        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        mFloatingActionButton.setLayoutParams(params);
+    }
+
+    private void alignFloatingActionButtonMiddle() {
+        final RelativeLayout.LayoutParams params =
+                (RelativeLayout.LayoutParams) mFloatingActionButton.getLayoutParams();
+        params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        mFloatingActionButton.setLayoutParams(params);
     }
 }

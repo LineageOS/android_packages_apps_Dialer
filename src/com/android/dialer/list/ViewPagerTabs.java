@@ -108,7 +108,6 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
 
     public void setViewPager(ViewPager viewPager) {
         mPager = viewPager;
-        mPager.setOnPageChangeListener(this);
         addTabs(mPager.getAdapter());
     }
 

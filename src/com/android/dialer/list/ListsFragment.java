@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.provider.CallLog;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import android.widget.ListView;
 
 import com.android.contacts.common.GeoUtil;
 import com.android.dialer.DialtactsActivity;
+
 import android.view.View.OnClickListener;
 
 import com.android.dialer.R;
@@ -32,6 +34,8 @@ import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialerbind.ObjectFactory;
 
+import java.util.ArrayList;
+
 /**
  * Fragment that is used as the main screen of the Dialer.
  *
@@ -41,11 +45,11 @@ import com.android.dialerbind.ObjectFactory;
  * screen.
  */
 public class ListsFragment extends Fragment implements CallLogQueryHandler.Listener,
-        CallLogAdapter.CallFetcher {
+        CallLogAdapter.CallFetcher, ViewPager.OnPageChangeListener {
 
-    private static final int TAB_INDEX_SPEED_DIAL = 0;
-    private static final int TAB_INDEX_RECENTS = 1;
-    private static final int TAB_INDEX_ALL_CONTACTS = 2;
+    public static final int TAB_INDEX_SPEED_DIAL = 0;
+    public static final int TAB_INDEX_RECENTS = 1;
+    public static final int TAB_INDEX_ALL_CONTACTS = 2;
 
     private static final int TAB_INDEX_COUNT = 3;
 
@@ -64,10 +68,13 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
     }
 
     private ViewPager mViewPager;
+    private ViewPagerTabs mViewPagerTabs;
     private ViewPagerAdapter mViewPagerAdapter;
     private SpeedDialFragment mSpeedDialFragment;
     private CallLogFragment mRecentsFragment;
     private AllContactsFragment mAllContactsFragment;
+    private ArrayList<OnPageChangeListener> mOnPageChangeListeners =
+            new ArrayList<OnPageChangeListener>();
 
     private String[] mTabTitles;
 
@@ -204,14 +211,16 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mViewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setOnPageChangeListener(this);
 
         mTabTitles = new String[TAB_INDEX_COUNT];
         mTabTitles[TAB_INDEX_SPEED_DIAL] = getResources().getString(R.string.tab_speed_dial);
         mTabTitles[TAB_INDEX_RECENTS] = getResources().getString(R.string.tab_recents);
         mTabTitles[TAB_INDEX_ALL_CONTACTS] = getResources().getString(R.string.tab_all_contacts);
 
-        ViewPagerTabs tabs = (ViewPagerTabs) parentView.findViewById(R.id.lists_pager_header);
-        tabs.setViewPager(mViewPager);
+        mViewPagerTabs = (ViewPagerTabs) parentView.findViewById(R.id.lists_pager_header);
+        mViewPagerTabs.setViewPager(mViewPager);
+        addOnPageChangeListener(mViewPagerTabs);
 
         final ListView shortcutCardsListView =
                 (ListView) parentView.findViewById(R.id.shortcut_card_list);
@@ -254,5 +263,36 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         prefs.edit().putLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, mLastCallShortcutDate)
                 .apply();
         fetchCalls();
+    }
+
+    public void addOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
+        if (!mOnPageChangeListeners.contains(onPageChangeListener)) {
+            mOnPageChangeListeners.add(onPageChangeListener);
+        }
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        final int count = mOnPageChangeListeners.size();
+        for (int i = 0; i < count; i++) {
+            mOnPageChangeListeners.get(i).onPageScrolled(position, positionOffset,
+                    positionOffsetPixels);
+        }
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        final int count = mOnPageChangeListeners.size();
+        for (int i = 0; i < count; i++) {
+            mOnPageChangeListeners.get(i).onPageSelected(position);
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        final int count = mOnPageChangeListeners.size();
+        for (int i = 0; i < count; i++) {
+            mOnPageChangeListeners.get(i).onPageScrollStateChanged(state);
+        }
     }
 }
