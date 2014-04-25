@@ -65,14 +65,8 @@
     <!-- Match call_button_height to Phone's dimens/in_call_end_button_height -->
     <dimen name="call_button_height">74dp</dimen>
 
-    <!-- Height of the floating action button -->
-    <dimen name="floating_action_button_height">60dp</dimen>
-    <!-- Width of the floating action button -->
-    <dimen name="floating_action_button_width">60dp</dimen>
     <!-- Bottom margin of the floating action button -->
     <dimen name="floating_action_button_margin_bottom">10dp</dimen>
-    <!-- Z translation of the floating action button -->
-    <dimen name="floating_action_button_translation_z">5dp</dimen>
 
     <!-- Dimensions for speed dial tiles -->
     <dimen name="contact_tile_divider_width">1dp</dimen>
