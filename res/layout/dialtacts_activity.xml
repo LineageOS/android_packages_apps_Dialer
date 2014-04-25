@@ -123,7 +123,7 @@
         android:layout_marginRight="@dimen/floating_action_button_margin_right"
         android:layout_marginBottom="@dimen/floating_action_button_margin_bottom"
         android:id="@+id/floating_action_button"
-        android:background="@color/actionbar_background_color"
+        android:background="@drawable/floating_action_button"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true" >
         <ImageButton
