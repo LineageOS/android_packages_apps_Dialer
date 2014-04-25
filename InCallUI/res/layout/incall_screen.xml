@@ -20,35 +20,13 @@
     android:layout_height="match_parent"
     android:id="@+id/main" >
 
-    <LinearLayout android:id="@+id/in_call_and_button_container"
+    <fragment android:name="com.android.incallui.CallCardFragment"
+        android:id="@+id/callCardFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
-        <LinearLayout android:id="@+id/in_call_card_container"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <fragment android:name="com.android.incallui.CallCardFragment"
-                android:id="@+id/callCardFragment"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_weight="1"/>
-
-            <fragment android:name="com.android.incallui.DialpadFragment"
-                android:id="@+id/dialpadFragment"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-    </LinearLayout>
 
     <fragment android:name="com.android.incallui.AnswerFragment"
         android:id="@+id/answerFragment"
