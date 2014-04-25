@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -150,12 +151,12 @@ public class ShortcutCardsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final SwipeableCallLogRow wrapper;
+        final SwipeableShortcutCard wrapper;
         if (convertView == null) {
-            wrapper = new SwipeableCallLogRow(mContext);
+            wrapper = new SwipeableShortcutCard(mContext);
             wrapper.setOnItemSwipeListener(mCallLogOnItemSwipeListener);
         } else {
-            wrapper = (SwipeableCallLogRow) convertView;
+            wrapper = (SwipeableShortcutCard) convertView;
         }
 
         // Special case wrapper view for the most recent call log item. This allows
@@ -186,11 +187,11 @@ public class ShortcutCardsAdapter extends BaseAdapter {
     /**
      * The swipeable call log row.
      */
-    private class SwipeableCallLogRow extends FrameLayout implements SwipeHelperCallback {
+    class SwipeableShortcutCard extends FrameLayout implements SwipeHelperCallback {
         private SwipeHelper mSwipeHelper;
         private OnItemGestureListener mOnItemSwipeListener;
 
-        public SwipeableCallLogRow(Context context) {
+        public SwipeableShortcutCard(Context context) {
             super(context);
             final float densityScale = getResources().getDisplayMetrics().density;
             final float pagingTouchSlop = ViewConfiguration.get(context)
@@ -269,6 +270,50 @@ public class ShortcutCardsAdapter extends BaseAdapter {
 
         public void setOnItemSwipeListener(OnItemGestureListener listener) {
             mOnItemSwipeListener = listener;
+        }
+
+        private float mPreviousTranslationZ = 0;
+        private Rect mClipRect = new Rect();
+
+        /**
+         * Clips the card by a specified amount.
+         *
+         * @param ratioHidden A float indicating how much of each edge of the card should be
+         *         clipped. If 0, the entire card is displayed. If 0.5f, each edge is hidden
+         *         entirely, thus obscuring the entire card.
+         */
+        public void clipCard(float ratioHidden) {
+            final View viewToClip = getChildAt(0);
+            if (viewToClip == null) {
+                return;
+            }
+            int width = viewToClip.getWidth();
+            int height = viewToClip.getHeight();
+
+            if (ratioHidden <= 0.01f) {
+                viewToClip.setTranslationZ(mPreviousTranslationZ);
+            } else if (viewToClip.getTranslationZ() != 0){
+                mPreviousTranslationZ = viewToClip.getTranslationZ();
+                viewToClip.setTranslationZ(0);
+            }
+
+            if (ratioHidden > 0.5f) {
+                mClipRect.set(0, 0 , 0, 0);
+            } else {
+                int newLeft = (int) (ratioHidden * width);
+                int newRight = (width - newLeft);
+                int newTop = (int) (ratioHidden * height);
+                int newBottom = (height - newTop);
+                mClipRect.set(newLeft, newTop, newRight, newBottom);
+            }
+            viewToClip.setClipBounds(mClipRect);
+
+            // If the view has any children, fade them out of view.
+            final ViewGroup viewGroup = (ViewGroup) viewToClip;
+            final int count = viewGroup.getChildCount();
+            for (int i = 0; i < count; i++) {
+                viewGroup.getChildAt(i).setAlpha(Math.max(0, 1 - 4 * ratioHidden));
+            }
         }
     }
 }
