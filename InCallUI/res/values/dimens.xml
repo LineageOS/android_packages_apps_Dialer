@@ -44,14 +44,14 @@
     <!-- Height of the main row of in-call buttons. -->
     <dimen name="in_call_button_height">76dp</dimen>
 
-    <!-- Height of the in-call "End" button. Match with Contact's dimens/call_button_height -->
-    <dimen name="in_call_end_button_height">60dp</dimen>
-
     <!-- Width of buttons in the extra button row. -->
     <dimen name="extra_row_button_width">56dp</dimen>
 
     <!-- Height of buttons in the extra button row. -->
     <dimen name="extra_row_button_height">@dimen/in_call_button_height</dimen>
+
+    <!-- Bottom margin for the end call button. -->
+    <dimen name="end_call_button_margin_bottom">30dp</dimen>
 
     <!-- Padding at the left and right edges of the incall_touch_ui button
          cluster.  This padding is necessary because we can't allow the
