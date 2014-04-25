@@ -186,6 +186,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private void setUiCallState() {
+        int state = Call.State.IDLE;
+
         if (mPrimary != null) {
             boolean bluetoothOn =
                     (AudioModeProvider.getInstance().getAudioMode() == AudioMode.BLUETOOTH);
@@ -198,17 +200,19 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             // Cache the value so the UI doesn't change when the call ends.
             mIsWiFiCachedValue = isWiFi;
 
-            getUi().setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
+            state = mPrimary.getState();
+
+            getUi().setCallState(state, mPrimary.getDisconnectCause(), bluetoothOn,
                     getGatewayLabel(), getGatewayNumber(), isWiFi, isHandoffCapable,
                     isHandoffPending);
         } else {
-            getUi().setCallState(Call.State.IDLE, DisconnectCause.NOT_VALID, false, null, null,
+            getUi().setCallState(state, DisconnectCause.NOT_VALID, false, null, null,
                     mIsWiFiCachedValue, false, false);
         }
 
-        final boolean enableEndCallButton = state.isConnectingOrConnected() &&
-                !state.isIncoming() && mPrimary != null;
-        ui.setEndCallButtonEnabled(enableEndCallButton);
+        final boolean enableEndCallButton = Call.State.isConnected(state) &&
+                state != Call.State.INCOMING && mPrimary != null;
+        getUi().setEndCallButtonEnabled(enableEndCallButton);
     }
 
     @Override
