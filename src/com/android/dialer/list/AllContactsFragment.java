@@ -57,7 +57,6 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
         adapter.setDisplayPhotos(true);
         adapter.setFilter(ContactListFilter.createFilterWithType(
                 ContactListFilter.FILTER_TYPE_WITH_PHONE_NUMBERS_ONLY));
-        adapter.setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(true /* opposite */));
         adapter.setSectionHeaderDisplayEnabled(isSectionHeaderDisplayEnabled());
         return adapter;
     }
