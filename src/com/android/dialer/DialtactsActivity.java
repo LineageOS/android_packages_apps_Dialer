@@ -596,7 +596,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             fragment = mRegularSearchFragment;
         }
         if (fragment != null && fragment.isVisible()) {
-            fragment.getListView().animate().translationY(-mActionBarHeight)
+            fragment.getView().animate().translationY(-mActionBarHeight)
                     .setInterpolator(hideActionBarInterpolator).setDuration(ANIMATION_DURATION);
         }
 
@@ -622,7 +622,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             fragment = mRegularSearchFragment;
         }
         if (fragment != null && fragment.isVisible()) {
-            fragment.getListView().animate().translationY(0)
+            fragment.getView().animate().translationY(0)
                     .setInterpolator(showActionBarInterpolator).setDuration(ANIMATION_DURATION);
         }
 
