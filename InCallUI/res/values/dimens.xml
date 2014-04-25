@@ -20,7 +20,7 @@
 
     <!-- Height of the "call banner" overlay on top of the upper part of
          the call info area. -->
-    <dimen name="call_banner_height">80dp</dimen>
+    <dimen name="call_banner_height">75dp</dimen>
 
     <!-- Margin between the bottom of the "call card" photo
          and the top of the in-call button cluster. -->
@@ -31,8 +31,8 @@
     <!-- Padding at the right edges of the secondary call banner. -->
     <dimen name="secondary_call_banner_right_padding">100dp</dimen>
     <!-- Padding at the top and bottom edges of the "call banner". -->
-    <dimen name="call_banner_primary_call_top_padding">32dp</dimen>
-    <dimen name="call_banner_top_bottom_padding">16dp</dimen>
+    <dimen name="call_banner_primary_call_top_padding">24dp</dimen>
+    <dimen name="call_banner_top_bottom_padding">8dp</dimen>
 
     <!-- Padding at the top and bottom edges of the "provider information" -->
     <dimen name="provider_info_top_bottom_padding">8dp</dimen>
@@ -55,9 +55,6 @@
 
     <!-- Height of buttons in the extra button row. -->
     <dimen name="extra_row_button_height">@dimen/in_call_button_height</dimen>
-
-    <!-- Bottom margin for the end call button. -->
-    <dimen name="end_call_button_margin_bottom">30dp</dimen>
 
     <!-- Padding at the left and right edges of the incall_touch_ui button
          cluster.  This padding is necessary because we can't allow the
@@ -133,6 +130,7 @@
     <dimen name="dialpad_key_height">56dp</dimen>
     <dimen name="dialpad_key_plus_size">18sp</dimen>
     <dimen name="dialpad_number_to_letters_padding">11dp</dimen>
+    <dimen name="dialpad_bottom_padding">90dp</dimen>
     <dimen name="dialpad_horizontal_padding">5dp</dimen>
 
     <!-- Height of translucent shadow effect -->
