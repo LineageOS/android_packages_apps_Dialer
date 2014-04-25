@@ -87,7 +87,7 @@
             <ImageButton android:id="@+id/endButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/end_call_background"
+                android:background="@drawable/floating_end_button_compound_background"
                 android:src="@drawable/ic_in_call_phone_hangup"
                 android:contentDescription="@string/onscreenEndCallText" />
 
