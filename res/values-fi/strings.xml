@@ -111,6 +111,7 @@
     <string name="description_call_log_missed_call" msgid="2242805209983708825">"Vastaamaton puhelu"</string>
     <string name="description_call_log_voicemail" msgid="4600798771975158948">"Vastaaja"</string>
     <string name="description_add_contact" msgid="3103414772502485851">"Lisää yhteystieto"</string>
+    <string name="description_dialpad_overflow" msgid="5085126640236518486">"Lisää vaihtoehtoja"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Näytä yhteystieto <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Soita: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Yhteystiedot: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
@@ -174,8 +175,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Kumoa"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Soita <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Lisää yhteystietoihin"</string>
-    <!-- no translation found for recents_footer_text (7315554578957453359) -->
-    <skip />
+    <string name="recents_footer_text" msgid="7315554578957453359">"Näytä koko soittohistoria"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> uutta vastaamatonta puhelua"</string>
     <string name="no_favorites" msgid="5212485868783382971">"Suosikit ja yhteyshenkilöt, joille\nsoitat usein, näkyvät tässä.\nAla siis soitella."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Napauta kuvaa nähdäksesi kaikki numerot tai järjestä uudelleen painamalla pitkään"</string>
