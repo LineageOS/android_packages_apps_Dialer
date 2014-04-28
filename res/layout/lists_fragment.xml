@@ -14,11 +14,11 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.android.dialer.widget.OverlappingPaneLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="?android:attr/actionBarSize"
-    android:orientation="vertical"
     android:animateLayoutChanges="true"
     android:id="@+id/lists_frame">
     <ListView
@@ -29,18 +29,23 @@
         android:clipToPadding="false"
         android:fadingEdge="none"
         android:divider="@null" />
-    <com.android.dialer.list.ViewPagerTabs
-        android:id="@+id/lists_pager_header"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:textAllCaps="true"
-        android:orientation="horizontal"
-        android:layout_gravity="top"
-        style="@style/DialtactsActionBarTabTextStyle" />
-    <android.support.v4.view.ViewPager
-        android:id="@+id/lists_pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-    </android.support.v4.view.ViewPager>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.android.dialer.list.ViewPagerTabs
+            android:id="@+id/lists_pager_header"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:textAllCaps="true"
+            android:orientation="horizontal"
+            android:layout_gravity="top"
+            style="@style/DialtactsActionBarTabTextStyle" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/lists_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+</com.android.dialer.widget.OverlappingPaneLayout>
