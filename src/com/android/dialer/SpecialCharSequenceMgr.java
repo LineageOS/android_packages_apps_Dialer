@@ -30,6 +30,7 @@ import android.net.Uri;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -258,10 +259,7 @@ public class SpecialCharSequenceMgr {
     private static boolean handleRegulatoryInfoDisplay(Context context, String input) {
         if (input.equals(MMI_REGULATORY_INFO_DISPLAY)) {
             Log.d(TAG, "handleRegulatoryInfoDisplay() sending intent to settings app");
-            ComponentName regInfoDisplayActivity = new ComponentName(
-                    "com.android.settings", "com.android.settings.RegulatoryInfoDisplayActivity");
-            Intent showRegInfoIntent = new Intent("android.settings.SHOW_REGULATORY_INFO");
-            showRegInfoIntent.setComponent(regInfoDisplayActivity);
+            Intent showRegInfoIntent = new Intent(Settings.ACTION_SHOW_REGULATORY_INFO);
             try {
                 context.startActivity(showRegInfoIntent);
             } catch (ActivityNotFoundException e) {
