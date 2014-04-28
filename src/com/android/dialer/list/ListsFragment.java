@@ -18,7 +18,6 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.android.contacts.common.GeoUtil;
@@ -32,6 +31,8 @@ import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.calllog.CallLogQuery;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfoHelper;
+import com.android.dialer.widget.OverlappingPaneLayout;
+import com.android.dialer.widget.OverlappingPaneLayout.PanelSlideListener;
 import com.android.dialerbind.ObjectFactory;
 
 import java.util.ArrayList;
@@ -226,7 +227,14 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
                 (ListView) parentView.findViewById(R.id.shortcut_card_list);
         shortcutCardsListView.setAdapter(mMergedAdapter);
 
-        LayoutTransition transition = ((LinearLayout) parentView).getLayoutTransition();
+        final OverlappingPaneLayout paneLayout = (OverlappingPaneLayout) parentView;
+        paneLayout.setSliderFadeColor(android.R.color.transparent);
+        // TODO: Remove the notion of a capturable view. The entire view be slideable, once
+        // the framework better supports nested scrolling.
+        paneLayout.setCapturableView(mViewPagerTabs);
+        paneLayout.openPane();
+
+        LayoutTransition transition = paneLayout.getLayoutTransition();
         // Turns on animations for all types of layout changes so that they occur for
         // height changes.
         transition.enableTransitionType(LayoutTransition.CHANGING);
