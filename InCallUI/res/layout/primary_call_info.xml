@@ -55,14 +55,32 @@
                     android:gravity="left"
                     android:ellipsize="end" />
 
-                <TextView android:id="@+id/name"
+
+                <LinearLayout android:id="@+id/stateAndName"
                     android:layout_width="match_parent"
-                    android:paddingEnd="@dimen/call_banner_name_number_right_padding"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="@dimen/call_name_text_size"
-                    android:singleLine="true" />
+                    android:orientation="horizontal" >
+
+                    <TextView android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/call_banner_name_number_right_padding"
+                        android:fontFamily="sans-serif-light"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textSize="@dimen/call_name_text_size"
+                        android:singleLine="true" />
+
+                    <!-- Elapsed time indication for a call in progress. -->
+                    <TextView android:id="@+id/elapsedTime"
+                        android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/incall_call_banner_text_color"
+                        android:singleLine="true"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -93,18 +111,6 @@
                     android:layout_marginStart="6dp" />
 
             </LinearLayout>
-
-            <!-- Elapsed time indication for a call in progress. -->
-            <TextView android:id="@+id/elapsedTime"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/incall_call_banner_text_color"
-                android:singleLine="true"
-                android:visibility="invisible" />
-
             <!-- Call type indication: a special label and/or branding
                  for certain kinds of calls (like "Internet call" for a SIP call.) -->
             <TextView android:id="@+id/callTypeLabel"
