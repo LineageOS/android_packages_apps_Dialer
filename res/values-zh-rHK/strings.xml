@@ -111,6 +111,7 @@
     <string name="description_call_log_missed_call" msgid="2242805209983708825">"未接來電"</string>
     <string name="description_call_log_voicemail" msgid="4600798771975158948">"語音信箱"</string>
     <string name="description_add_contact" msgid="3103414772502485851">"新增聯絡人"</string>
+    <string name="description_dialpad_overflow" msgid="5085126640236518486">"更多選項"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"查看聯絡人<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"致電<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"「<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>」的聯絡人詳細資料"</string>
