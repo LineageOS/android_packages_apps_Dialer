@@ -236,7 +236,6 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
                         mNotificationTimer.getState() == NotificationTimer.State.FIRED);
 
         if (showNotificationNow) {
-            Log.e(this, "showNotificationNow == true case", new Exception());
             showNotification(call, allowFullScreenIntent);
         } else {
             cancelInCall();

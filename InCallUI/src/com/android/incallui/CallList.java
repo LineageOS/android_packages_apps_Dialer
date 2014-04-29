@@ -311,7 +311,9 @@ public class CallList {
             if (state != Call.State.IDLE &&
                     state != Call.State.INVALID &&
                     state != Call.State.DISCONNECTED) {
+
                 call.setState(Call.State.DISCONNECTED);
+                call.setDisconnectCause(DisconnectCause.NOT_VALID);
                 updateCallInMap(call);
             }
         }

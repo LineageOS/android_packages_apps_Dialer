@@ -33,6 +33,9 @@
               android:id="@+id/bottomButtons"
               android:orientation="vertical"
               android:layout_width="match_parent"
+              android:background="#0000ff"
+              android:layout_margin="0dp"
+              android:padding="0dp"
               android:layout_height="wrap_content"
               android:layout_alignParentBottom="true"
               android:visibility="invisible">
@@ -51,7 +54,6 @@
     <ImageButton android:id="@+id/endButton"
                  style="@style/InCallEndButton"
                  android:layout_width="match_parent"
-                 android:layout_marginTop="2dp"
                  android:src="@drawable/ic_in_call_phone_hangup"
                  android:background="@drawable/end_call_background"
                  android:contentDescription="@string/onscreenEndCallText"/>
