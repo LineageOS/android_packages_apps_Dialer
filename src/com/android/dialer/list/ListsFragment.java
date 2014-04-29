@@ -228,7 +228,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         shortcutCardsListView.setAdapter(mMergedAdapter);
 
         final OverlappingPaneLayout paneLayout = (OverlappingPaneLayout) parentView;
-        paneLayout.setSliderFadeColor(android.R.color.transparent);
         // TODO: Remove the notion of a capturable view. The entire view be slideable, once
         // the framework better supports nested scrolling.
         paneLayout.setCapturableView(mViewPagerTabs);
