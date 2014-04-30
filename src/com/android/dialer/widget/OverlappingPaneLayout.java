@@ -66,19 +66,9 @@ public class OverlappingPaneLayout extends ViewGroup {
     private static final int DEFAULT_FADE_COLOR = 0xcccccccc;
 
     /**
-     * The fade color used for the sliding panel. 0 = no fading.
-     */
-    private int mSliderFadeColor = DEFAULT_FADE_COLOR;
-
-    /**
      * Minimum velocity that will be detected as a fling
      */
     private static final int MIN_FLING_VELOCITY = 400; // dips per second
-
-    /**
-     * The fade color used for the panel covered by the slider. 0 = no fading.
-     */
-    private int mCoveredFadeColor;
 
     /**
      * The size of the overhang in pixels.
@@ -136,9 +126,6 @@ public class OverlappingPaneLayout extends ViewGroup {
 
     private final Rect mTmpRect = new Rect();
 
-    private final ArrayList<DisableLayerRunnable> mPostedRunnables =
-            new ArrayList<DisableLayerRunnable>();
-
     /**
      * Listener for monitoring events about sliding panes.
      */
@@ -192,39 +179,6 @@ public class OverlappingPaneLayout extends ViewGroup {
      */
     public void setCapturableView(View capturableView) {
         mCapturableView = capturableView;
-    }
-
-    /**
-     * Set the color used to fade the sliding pane out when it is slid most of the way offscreen.
-     *
-     * @param color An ARGB-packed color value
-     */
-    public void setSliderFadeColor(int color) {
-        mSliderFadeColor = color;
-    }
-
-    /**
-     * @return The ARGB-packed color value used to fade the sliding pane
-     */
-    public int getSliderFadeColor() {
-        return mSliderFadeColor;
-    }
-
-    /**
-     * Set the color used to fade the pane covered by the sliding pane out when the pane
-     * will become fully covered in the closed state.
-     *
-     * @param color An ARGB-packed color value
-     */
-    public void setCoveredFadeColor(int color) {
-        mCoveredFadeColor = color;
-    }
-
-    /**
-     * @return The ARGB-packed color value used to fade the fixed pane
-     */
-    public int getCoveredFadeColor() {
-        return mCoveredFadeColor;
     }
 
     public void setPanelSlideListener(PanelSlideListener listener) {
@@ -323,12 +277,6 @@ public class OverlappingPaneLayout extends ViewGroup {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         mFirstLayout = true;
-
-        for (int i = 0, count = mPostedRunnables.size(); i < count; i++) {
-            final DisableLayerRunnable dlr = mPostedRunnables.get(i);
-            dlr.run();
-        }
-        mPostedRunnables.clear();
     }
 
     @Override
@@ -399,7 +347,6 @@ public class OverlappingPaneLayout extends ViewGroup {
             final LayoutParams lp = (LayoutParams) child.getLayoutParams();
 
             if (child.getVisibility() == GONE) {
-                lp.dimWhenOffset = false;
                 continue;
             }
 
@@ -578,8 +525,6 @@ public class OverlappingPaneLayout extends ViewGroup {
                         height - paddingBottom - mOverhangSize) - yStart - margin;
                 mSlideRange = range;
                 final int lpMargin = lp.topMargin;
-                lp.dimWhenOffset = yStart + lpMargin + range + childHeight / 2 >
-                        height - paddingBottom;
                 final int pos = (int) (range * mSlideOffset);
                 yStart += pos + lpMargin;
                 mSlideOffset = (float) pos / mSlideRange;
@@ -598,16 +543,6 @@ public class OverlappingPaneLayout extends ViewGroup {
         }
 
         if (mFirstLayout) {
-            if (mCanSlide) {
-                if (((LayoutParams) mSlideableView.getLayoutParams()).dimWhenOffset) {
-                    dimChildView(mSlideableView, mSlideOffset, mSliderFadeColor);
-                }
-            } else {
-                // Reset the dim level of all children; it's irrelevant when nothing moves.
-                for (int i = 0; i < childCount; i++) {
-                    dimChildView(getChildAt(i), 0, mSliderFadeColor);
-                }
-            }
             updateObscuredViewsVisibility(mSlideableView);
         }
 
@@ -655,8 +590,6 @@ public class OverlappingPaneLayout extends ViewGroup {
             return false;
         }
 
-        boolean interceptTap = false;
-
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
                 mIsUnableToDrag = false;
@@ -665,10 +598,6 @@ public class OverlappingPaneLayout extends ViewGroup {
                 mInitialMotionX = x;
                 mInitialMotionY = y;
 
-                if (mDragHelper.isViewUnder(mSlideableView, (int) x, (int) y) &&
-                        isDimmed(mSlideableView)) {
-                    interceptTap = true;
-                }
                 break;
             }
 
@@ -688,7 +617,7 @@ public class OverlappingPaneLayout extends ViewGroup {
 
         final boolean interceptForDrag = mDragHelper.shouldInterceptTouchEvent(ev);
 
-        return interceptForDrag || interceptTap;
+        return interceptForDrag;
     }
 
     @Override
@@ -708,23 +637,6 @@ public class OverlappingPaneLayout extends ViewGroup {
                 final float y = ev.getY();
                 mInitialMotionX = x;
                 mInitialMotionY = y;
-                break;
-            }
-
-            case MotionEvent.ACTION_UP: {
-                if (isDimmed(mSlideableView)) {
-                    final float x = ev.getX();
-                    final float y = ev.getY();
-                    final float dx = x - mInitialMotionX;
-                    final float dy = y - mInitialMotionY;
-                    final int slop = mDragHelper.getTouchSlop();
-                    if (dx * dx + dy * dy < slop * slop &&
-                            mDragHelper.isViewUnder(mSlideableView, (int) x, (int) y)) {
-                        // Taps close a dimmed open pane.
-                        closePane(mSlideableView, 0);
-                        break;
-                    }
-                }
                 break;
             }
         }
@@ -801,35 +713,7 @@ public class OverlappingPaneLayout extends ViewGroup {
 
         mSlideOffset = (float) (newTop - topBound) / mSlideRange;
 
-        if (lp.dimWhenOffset) {
-            dimChildView(mSlideableView, mSlideOffset, mSliderFadeColor);
-        }
         dispatchOnPanelSlide(mSlideableView);
-    }
-
-    private void dimChildView(View v, float mag, int fadeColor) {
-        final LayoutParams lp = (LayoutParams) v.getLayoutParams();
-
-        if (mag > 0 && fadeColor != 0) {
-            final int baseAlpha = (fadeColor & 0xff000000) >>> 24;
-            int imag = (int) (baseAlpha * mag);
-            int color = imag << 24 | (fadeColor & 0xffffff);
-            if (lp.dimPaint == null) {
-                lp.dimPaint = new Paint();
-            }
-            lp.dimPaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_OVER));
-            if (ViewCompat.getLayerType(v) != ViewCompat.LAYER_TYPE_HARDWARE) {
-                ViewCompat.setLayerType(v, ViewCompat.LAYER_TYPE_HARDWARE, lp.dimPaint);
-            }
-            invalidateChildRegion(v);
-        } else if (ViewCompat.getLayerType(v) != ViewCompat.LAYER_TYPE_NONE) {
-            if (lp.dimPaint != null) {
-                lp.dimPaint.setColorFilter(null);
-            }
-            final DisableLayerRunnable dlr = new DisableLayerRunnable(v);
-            mPostedRunnables.add(dlr);
-            ViewCompat.postOnAnimation(this, dlr);
-        }
     }
 
     @Override
@@ -849,33 +733,15 @@ public class OverlappingPaneLayout extends ViewGroup {
         if (Build.VERSION.SDK_INT >= 11) { // HC
             result = super.drawChild(canvas, child, drawingTime);
         } else {
-            if (lp.dimWhenOffset && mSlideOffset > 0) {
-                if (!child.isDrawingCacheEnabled()) {
-                    child.setDrawingCacheEnabled(true);
-                }
-                final Bitmap cache = child.getDrawingCache();
-                if (cache != null) {
-                    canvas.drawBitmap(cache, child.getLeft(), child.getTop(), lp.dimPaint);
-                    result = false;
-                } else {
-                    Log.e(TAG, "drawChild: child view " + child + " returned null drawing cache");
-                    result = super.drawChild(canvas, child, drawingTime);
-                }
-            } else {
-                if (child.isDrawingCacheEnabled()) {
-                    child.setDrawingCacheEnabled(false);
-                }
-                result = super.drawChild(canvas, child, drawingTime);
+            if (child.isDrawingCacheEnabled()) {
+                child.setDrawingCacheEnabled(false);
             }
+            result = super.drawChild(canvas, child, drawingTime);
         }
 
         canvas.restoreToCount(save);
 
         return result;
-    }
-
-    private void invalidateChildRegion(View v) {
-        ViewCompat.setLayerPaint(v, ((LayoutParams) v.getLayoutParams()).dimPaint);
     }
 
     /**
@@ -931,14 +797,6 @@ public class OverlappingPaneLayout extends ViewGroup {
                 && screenX < viewLocation[0] + capturableView.getWidth()
                 && screenY >= viewLocation[1]
                 && screenY < viewLocation[1] + capturableView.getHeight();
-    }
-
-    boolean isDimmed(View child) {
-        if (child == null) {
-            return false;
-        }
-        final LayoutParams lp = (LayoutParams) child.getLayoutParams();
-        return mCanSlide && lp.dimWhenOffset && mSlideOffset > 0;
     }
 
     @Override
@@ -1082,14 +940,6 @@ public class OverlappingPaneLayout extends ViewGroup {
          */
         boolean slideable;
 
-        /**
-         * True if this view should be drawn dimmed
-         * when it's been offset from its default position.
-         */
-        boolean dimWhenOffset;
-
-        Paint dimPaint;
-
         public LayoutParams() {
             super(FILL_PARENT, FILL_PARENT);
         }
@@ -1174,7 +1024,7 @@ public class OverlappingPaneLayout extends ViewGroup {
             final int childCount = getChildCount();
             for (int i = 0; i < childCount; i++) {
                 final View child = getChildAt(i);
-                if (!filter(child) && (child.getVisibility() == View.VISIBLE)) {
+                if (child.getVisibility() == View.VISIBLE) {
                     // Force importance to "yes" since we can't read the value.
                     ViewCompat.setImportantForAccessibility(
                             child, ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_YES);
@@ -1188,19 +1038,6 @@ public class OverlappingPaneLayout extends ViewGroup {
             super.onInitializeAccessibilityEvent(host, event);
 
             event.setClassName(OverlappingPaneLayout.class.getName());
-        }
-
-        @Override
-        public boolean onRequestSendAccessibilityEvent(ViewGroup host, View child,
-                AccessibilityEvent event) {
-            if (!filter(child)) {
-                return super.onRequestSendAccessibilityEvent(host, child, event);
-            }
-            return false;
-        }
-
-        public boolean filter(View child) {
-            return isDimmed(child);
         }
 
         /**
@@ -1234,23 +1071,6 @@ public class OverlappingPaneLayout extends ViewGroup {
             dest.addAction(src.getActions());
 
             dest.setMovementGranularities(src.getMovementGranularities());
-        }
-    }
-
-    private class DisableLayerRunnable implements Runnable {
-        final View mChildView;
-
-        DisableLayerRunnable(View childView) {
-            mChildView = childView;
-        }
-
-        @Override
-        public void run() {
-            if (mChildView.getParent() == OverlappingPaneLayout.this) {
-                ViewCompat.setLayerType(mChildView, ViewCompat.LAYER_TYPE_NONE, null);
-                invalidateChildRegion(mChildView);
-            }
-            mPostedRunnables.remove(this);
         }
     }
 }
