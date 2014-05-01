@@ -328,23 +328,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     private void updateCallStateLabel(int state, boolean bluetoothOn, String text) {
-        if (!TextUtils.isEmpty(text)) {
-            mCallStateLabel.setVisibility(View.VISIBLE);
-            mCallStateLabel.setText(text);
+        // Update the call state label.
+        mCallStateLabel.setText(callStateLabel);
 
-            if (Call.State.INCOMING == state) {
-                setBluetoothOn(bluetoothOn);
-            }
-        } else {
-            mCallStateLabel.setVisibility(View.GONE);
-            // Gravity is aligned left when receiving an incoming call in landscape.
-            // In that rare case, the gravity needs to be reset to the right.
-            // Also, setText("") is used since there is a delay in making the view GONE,
-            // so the user will otherwise see the text jump to the right side before disappearing.
-            if(mCallStateLabel.getGravity() != Gravity.END) {
-                mCallStateLabel.setText("");
-                mCallStateLabel.setGravity(Gravity.END);
-            }
+        if (Call.State.INCOMING == state) {
+            setBluetoothOn(bluetoothOn);
         }
     }
 
