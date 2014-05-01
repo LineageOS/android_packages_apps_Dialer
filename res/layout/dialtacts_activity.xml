@@ -46,30 +46,37 @@
             android:id="@+id/search_and_remove_view_container"
             android:visibility="gone"
             >
-            <com.android.dialer.list.RemoveView
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:id="@+id/remove_view_container"
-                android:orientation="horizontal"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/remove_view_icon"
-                    android:src="@drawable/ic_remove"
-                    android:contentDescription="@string/remove_contact"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/remove_view_text"
-                    android:textSize="@dimen/remove_text_size"
-                    android:textColor="@color/remove_text_color"
-                    android:text="@string/remove_contact"
-                    />
-            </com.android.dialer.list.RemoveView>
         </FrameLayout>
     </RelativeLayout>
+    <com.android.dialer.list.RemoveView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:id="@+id/remove_view"
+        android:layout_alignParentTop="true"
+        >
+        <LinearLayout
+            android:id="@+id/remove_view_container"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/remove_view_icon"
+                android:src="@drawable/ic_remove"
+                android:contentDescription="@string/remove_contact"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/remove_view_text"
+                android:textSize="@dimen/remove_text_size"
+                android:textColor="@color/remove_text_color"
+                android:text="@string/remove_contact"
+                />
+        </LinearLayout>
+    </com.android.dialer.list.RemoveView >
     <FrameLayout
         android:layout_height="@dimen/floating_action_button_height"
         android:layout_width="@dimen/floating_action_button_width"
