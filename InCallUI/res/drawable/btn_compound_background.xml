@@ -20,15 +20,14 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_pressed="true"
-          android:drawable="@drawable/list_pressed_holo_dark" />
-    <item android:state_checked="true" android:state_focused="true"
-          android:drawable="@drawable/list_selector_focused_and_checked" />
+          android:drawable="@color/tab_pressed_color" />
+    <item android:state_selected="true" android:state_focused="true"
+          android:drawable="@drawable/tab_selected_focused" />
     <item android:state_focused="true"
-          android:drawable="@drawable/list_focused_holo" />
-    <item android:state_checked="true"
-          android:drawable="@drawable/ic_active_state_dialer_holo_dark" />
+          android:drawable="@drawable/tab_unselected_focused" />
+    <item android:state_selected="true"
+            android:drawable="@drawable/tab_selected" />
 
-    <item
-        android:drawable="@android:color/transparent" />
+    <item android:drawable="@android:color/transparent" />
 
 </selector>

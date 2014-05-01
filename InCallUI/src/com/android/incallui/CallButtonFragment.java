@@ -45,7 +45,7 @@ public class CallButtonFragment
     private ImageButton mMuteButton;
     private ImageButton mAudioButton;
     private ImageButton mHoldButton;
-    private ToggleButton mShowDialpadButton;
+    private ImageButton mShowDialpadButton;
     private ImageButton mMergeButton;
     private ImageButton mAddCallButton;
     private ImageButton mSwapButton;
@@ -123,7 +123,7 @@ public class CallButtonFragment
             }
         });
 
-        mShowDialpadButton = (ToggleButton) parent.findViewById(R.id.dialpadButton);
+        mShowDialpadButton = (ImageButton) parent.findViewById(R.id.dialpadButton);
         mShowDialpadButton.setOnClickListener(this);
         mAddCallButton = (ImageButton) parent.findViewById(R.id.addButton);
         mAddCallButton.setOnClickListener(this);
@@ -174,7 +174,7 @@ public class CallButtonFragment
                 getPresenter().swapClicked();
                 break;
             case R.id.dialpadButton:
-                getPresenter().showDialpadClicked(mShowDialpadButton.isChecked());
+                getPresenter().showDialpadClicked(!mShowDialpadButton.isSelected());
                 break;
             case R.id.auxiliaryActionButton:
                 getPresenter().auxiliaryActionButtonClicked();
@@ -498,7 +498,7 @@ public class CallButtonFragment
 
     @Override
     public void displayDialpad(boolean value) {
-        mShowDialpadButton.setChecked(value);
+        mShowDialpadButton.setSelected(value);
         if (getActivity() != null && getActivity() instanceof InCallActivity) {
             ((InCallActivity) getActivity()).displayDialpad(value);
         }
