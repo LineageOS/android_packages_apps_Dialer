@@ -131,8 +131,6 @@
     <!-- Size of the icon (voice search, close search) in the search box. -->
     <dimen name="search_box_icon_size">37dp</dimen>
 
-    <!-- Height of the selection indicator of a tab. -->
-    <dimen name="tab_selected_underline_height">3dp</dimen>
     <!-- Size of text in tabs. -->
     <dimen name="tab_text_size">13sp</dimen>
 </resources>
