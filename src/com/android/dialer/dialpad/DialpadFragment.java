@@ -405,6 +405,7 @@ public class DialpadFragment extends Fragment
         mDigits.setOnKeyListener(this);
         mDigits.setOnLongClickListener(this);
         mDigits.addTextChangedListener(this);
+        mDigits.setElegantTextHeight(false);
         PhoneNumberFormatter.setPhoneNumberFormattingTextWatcher(getActivity(), mDigits);
         // Check for the presence of the keypad
         View oneButton = fragmentView.findViewById(R.id.one);
@@ -624,6 +625,7 @@ public class DialpadFragment extends Fragment
             lettersView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_letters);
             final String numberString = resources.getString(numberIds[i]);
             numberView.setText(numberString);
+            numberView.setElegantTextHeight(false);
             dialpadKey.setContentDescription(numberString);
             if (lettersView != null) {
                 lettersView.setText(resources.getString(letterIds[i]));

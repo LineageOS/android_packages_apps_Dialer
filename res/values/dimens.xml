@@ -50,7 +50,7 @@
     <dimen name="dialpad_key_star_pound_size">26sp</dimen>
     <dimen name="dialpad_key_numbers_width">30dp</dimen>
     <dimen name="dialpad_key_letters_width">50dp</dimen>
-    <dimen name="dialpad_key_height">56dp</dimen>
+    <dimen name="dialpad_key_height">56sp</dimen>
     <!-- The bottom row of the dialpad is slightly taller to account for the dial button -->
     <dimen name="dialpad_bottom_key_height">70dp</dimen>
     <dimen name="dialpad_key_plus_size">18sp</dimen>
