@@ -24,7 +24,8 @@
          the icon up to the full size of the button. -->
     <item>
         <bitmap android:src="@drawable/ic_dialpad_holo_dark"
-                android:gravity="center" />
+                android:gravity="center"
+                android:tint="@color/selectable_icon_tint" />
     </item>
 
 </layer-list>

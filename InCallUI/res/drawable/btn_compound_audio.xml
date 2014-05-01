@@ -46,7 +46,8 @@
          size of the button. -->
     <item android:id="@+id/moreIndicatorItem">
         <bitmap android:src="@drawable/ic_more_indicator_holo_dark"
-                android:gravity="center" />
+                android:gravity="center"
+                android:tint="@color/selectable_icon_tint" />
     </item>
 
     <!-- Finally, the button icon.
@@ -70,26 +71,30 @@
     <!-- Bluetooth is active -->
     <item android:id="@+id/bluetoothItem">
         <bitmap android:src="@drawable/ic_sound_bluetooth_holo_dark"
-                android:gravity="center" />
+                android:gravity="center"
+                android:tint="@color/selectable_icon_tint"  />
     </item>
 
 
     <!-- Handset earpiece is active -->
     <item android:id="@+id/handsetItem">
         <bitmap android:src="@drawable/ic_sound_handset_holo_dark"
-                android:gravity="center" />
+                android:gravity="center"
+                android:tint="@color/selectable_icon_tint" />
     </item>
 
     <!-- Speakerphone icon showing 'speaker on' state -->
     <item android:id="@+id/speakerphoneOnItem">
         <bitmap android:src="@drawable/ic_sound_speakerphone_holo_dark"
-                android:gravity="center" />
+                android:gravity="center"
+                android:tint="@color/selectable_icon_tint" />
     </item>
 
     <!-- Speakerphone icon showing 'speaker off' state -->
     <item android:id="@+id/speakerphoneOffItem">
         <bitmap android:src="@drawable/ic_sound_off_speakerphone_holo_dark"
-                android:gravity="center" />
+                android:gravity="center"
+                android:tint="@color/selectable_icon_tint" />
     </item>
 
     <!-- Generic "audio mode" icon.  Looks almost identical to
