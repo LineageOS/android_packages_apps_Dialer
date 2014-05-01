@@ -113,11 +113,9 @@
     <!-- Margin to the left and right of the search box. -->
     <dimen name="search_margin_horizontal">7dp</dimen>
     <!-- Margin above the search box. -->
-    <dimen name="search_top_margin">10dp</dimen>
+    <dimen name="search_top_margin">4dp</dimen>
     <!-- Margin below the search box. -->
     <dimen name="search_bottom_margin">4dp</dimen>
-    <!-- Height of the search box. -->
-    <dimen name="search_box_height">41dp</dimen>
     <!-- Search box text size -->
     <dimen name="search_text_size">13.24sp</dimen>
     <!-- Search box interior padding - left -->

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/search_view_container"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/search_top_margin"
+    android:layout_marginBottom="@dimen/search_bottom_margin"
+    android:layout_marginLeft="@dimen/search_margin_horizontal"
+    android:layout_marginRight="@dimen/search_margin_horizontal"
+    android:paddingLeft="@dimen/search_box_left_padding"
+    android:paddingRight="@dimen/search_box_right_padding"
+    android:background="@drawable/search_bg"
+    android:gravity="center_vertical"
+    >
+    <EditText
+        android:id="@+id/search_view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/search_box_icon_size"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/search_box_text_left_margin"
+        android:textSize="@dimen/search_text_size"
+        android:fontFamily="@string/search_font_family"
+        android:textColor="@color/searchbox_text_color"
+        android:textColorHint="@color/searchbox_hint_text_color"
+        android:hint="@string/dialer_hint_find_contact"
+        android:inputType="textFilter"/>
+    <ImageView
+        android:id="@+id/search_close_button"
+        android:layout_height="@dimen/search_box_icon_size"
+        android:layout_width="@dimen/search_box_icon_size"
+        android:padding="6dp"
+        android:src="@drawable/ic_close_dk"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/description_clear_search"
+        android:visibility="gone" />
+    <ImageView
+        android:id="@+id/voice_search_button"
+        android:layout_height="@dimen/search_box_icon_size"
+        android:layout_width="@dimen/search_box_icon_size"
+        android:padding="@dimen/search_box_icon_padding"
+        android:src="@drawable/ic_voice_search"
+        android:clickable="true"
+        android:contentDescription="@string/description_start_voice_search"
+        android:background="?android:attr/selectableItemBackground" />
+</LinearLayout>
