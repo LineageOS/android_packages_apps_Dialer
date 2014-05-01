@@ -329,7 +329,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private void updateCallStateLabel(int state, boolean bluetoothOn, String text) {
         // Update the call state label.
-        mCallStateLabel.setText(callStateLabel);
+        mCallStateLabel.setText(text);
 
         if (Call.State.INCOMING == state) {
             setBluetoothOn(bluetoothOn);

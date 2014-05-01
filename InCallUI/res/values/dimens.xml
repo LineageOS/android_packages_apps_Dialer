@@ -37,6 +37,11 @@
     <!-- Padding at the top and bottom edges of the "provider information" -->
     <dimen name="provider_info_top_bottom_padding">8dp</dimen>
 
+    <!-- Text size for the name in the call info. -->
+    <dimen name="call_name_text_size">36sp</dimen>
+    <!-- Text size for the call info label and number. -->
+    <dimen name="call_label_text_size">18sp</dimen>
+
     <!-- Right padding for name and number fields in the call banner.
          This padding is used to ensure that ultra-long names or
          numbers won't overlap the elapsed time indication. -->
