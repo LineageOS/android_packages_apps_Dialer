@@ -32,6 +32,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -216,6 +218,10 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         mTileInteractionTeaserView = (TileInteractionTeaserView) inflater.inflate(
                 R.layout.tile_interactions_teaser_view, mListView, false);
 
+        final LayoutAnimationController controller = new LayoutAnimationController(
+                AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
+        controller.setDelay(0);
+        mListView.setLayoutAnimation(controller);
         mListView.setAdapter(mContactTileAdapter);
 
         mListView.setOnScrollListener(mScrollListener);
