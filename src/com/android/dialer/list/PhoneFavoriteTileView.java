@@ -131,7 +131,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     @Override
     protected DefaultImageRequest getDefaultImageRequest(String displayName, String lookupKey) {
         return new DefaultImageRequest(displayName, lookupKey, ContactPhotoManager.TYPE_DEFAULT,
-                DEFAULT_IMAGE_LETTER_SCALE, DEFAULT_IMAGE_LETTER_OFFSET);
+                DEFAULT_IMAGE_LETTER_SCALE, DEFAULT_IMAGE_LETTER_OFFSET, false);
     }
 
     @Override

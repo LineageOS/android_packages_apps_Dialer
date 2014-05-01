@@ -745,9 +745,9 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     private void loadContactPhotos(Uri photoUri, String displayName, String lookupKey,
             int contactType) {
         final DefaultImageRequest request = new DefaultImageRequest(displayName, lookupKey,
-                contactType);
+                contactType, false);
         mContactPhotoManager.loadPhoto(mContactBackgroundView, photoUri,
-                mContactBackgroundView.getWidth(), true, request);
+                mContactBackgroundView.getWidth(), true, false /* isCircular */, request);
     }
 
     static final class ViewEntry {

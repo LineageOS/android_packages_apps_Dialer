@@ -882,19 +882,21 @@ public class CallLogAdapter extends GroupingListAdapter
     private void setPhoto(CallLogListItemViews views, long photoId, Uri contactUri,
             String displayName, String identifier, int contactType) {
         views.quickContactView.assignContactUri(contactUri);
+        views.quickContactView.setOverlay(null);
         DefaultImageRequest request = new DefaultImageRequest(displayName, identifier,
-                contactType);
+                contactType, true /* isCircular */);
         mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, false /* darkTheme */,
-                request);
+                true /* isCircular */, request);
     }
 
     private void setPhoto(CallLogListItemViews views, Uri photoUri, Uri contactUri,
             String displayName, String identifier, int contactType) {
         views.quickContactView.assignContactUri(contactUri);
+        views.quickContactView.setOverlay(null);
         DefaultImageRequest request = new DefaultImageRequest(displayName, identifier,
-                contactType);
+                contactType, true /* isCircular */);
         mContactPhotoManager.loadDirectoryPhoto(views.quickContactView, photoUri,
-                false /* darkTheme */, request);
+                false /* darkTheme */, true /* isCircular */, request);
     }
 
 
