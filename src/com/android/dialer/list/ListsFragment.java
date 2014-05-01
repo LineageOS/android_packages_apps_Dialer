@@ -9,12 +9,14 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,7 @@ import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.calllog.CallLogQuery;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfoHelper;
+import com.android.dialer.list.ShortcutCardsAdapter.SwipeableShortcutCard;
 import com.android.dialer.widget.OverlappingPaneLayout;
 import com.android.dialer.widget.OverlappingPaneLayout.PanelSlideListener;
 import com.android.dialerbind.ObjectFactory;
@@ -227,16 +230,8 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
                 (ListView) parentView.findViewById(R.id.shortcut_card_list);
         shortcutCardsListView.setAdapter(mMergedAdapter);
 
-        final OverlappingPaneLayout paneLayout = (OverlappingPaneLayout) parentView;
-        // TODO: Remove the notion of a capturable view. The entire view be slideable, once
-        // the framework better supports nested scrolling.
-        paneLayout.setCapturableView(mViewPagerTabs);
-        paneLayout.openPane();
+        setupPaneLayout((OverlappingPaneLayout) parentView, shortcutCardsListView);
 
-        LayoutTransition transition = paneLayout.getLayoutTransition();
-        // Turns on animations for all types of layout changes so that they occur for
-        // height changes.
-        transition.enableTransitionType(LayoutTransition.CHANGING);
         return parentView;
     }
 
@@ -301,5 +296,40 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         for (int i = 0; i < count; i++) {
             mOnPageChangeListeners.get(i).onPageScrollStateChanged(state);
         }
+    }
+
+    private void setupPaneLayout(OverlappingPaneLayout paneLayout,
+            final ListView shortcutCardsListView) {
+        // TODO: Remove the notion of a capturable view. The entire view be slideable, once
+        // the framework better supports nested scrolling.
+        paneLayout.setCapturableView(mViewPagerTabs);
+        paneLayout.openPane();
+        paneLayout.setPanelSlideListener(new PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+                // For every 2 percent that the panel is slid upwards, clip 3 percent from each edge
+                // of the shortcut card, to achieve the animated effect of the shortcut card
+                // rapidly shrinking and disappearing from view when the panel is slid upwards.
+                float ratioCardHidden = (1 - slideOffset) * 1.5f;
+                if (shortcutCardsListView.getCount() > 0) {
+                    SwipeableShortcutCard v =
+                            (SwipeableShortcutCard) shortcutCardsListView.getChildAt(0);
+                    v.clipCard(ratioCardHidden);
+                }
+            }
+
+            @Override
+            public void onPanelOpened(View panel) {
+            }
+
+            @Override
+            public void onPanelClosed(View panel) {
+            }
+        });
+
+        LayoutTransition transition = paneLayout.getLayoutTransition();
+        // Turns on animations for all types of layout changes so that they occur for
+        // height changes.
+        transition.enableTransitionType(LayoutTransition.CHANGING);
     }
 }
