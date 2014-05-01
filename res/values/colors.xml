@@ -113,15 +113,6 @@
     <!-- Text color for the "All Contacts" button above the favorite callers -->
     <color name="all_contacts_button_text_color">#ffffff</color>
 
-    <!-- Background color for tabs in an unpressed state. -->
-    <color name="tab_default_color">#00afcc</color>
-
-    <!-- Background color for tabs in a pressed state. -->
-    <color name="tab_pressed_color">#008698</color>
-
-    <!-- Color of the selection indicator for a tab which is selected. -->
-    <color name="tab_selected_color">#008698</color>
-
     <!-- Color of the bottom border below the contacts grid on the main dialer screen. -->
     <color name="contacts_grid_bottom_border_color">#16000000</color>
 
