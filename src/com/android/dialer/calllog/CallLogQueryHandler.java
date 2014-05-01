@@ -112,6 +112,8 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
                 Log.w(TAG, "Exception on background worker thread", e);
             } catch (SQLiteDatabaseCorruptException e) {
                 Log.w(TAG, "Exception on background worker thread", e);
+            } catch (IllegalArgumentException e) {
+                Log.w(TAG, "ContactsProvider not present on device", e);
             }
         }
     }
