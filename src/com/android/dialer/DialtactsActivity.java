@@ -995,7 +995,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onPageSelected(int position) {
         mCurrentTabPosition = position;
-        alignFloatingActionButtonByTab(mCurrentTabPosition);
+        // If the dialpad is showing, the floating action button should always be middle aligned.
+        if (!isDialpadShowing()) {
+            alignFloatingActionButtonByTab(mCurrentTabPosition);
+        }
     }
 
     @Override
