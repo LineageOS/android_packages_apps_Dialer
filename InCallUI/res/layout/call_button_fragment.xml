@@ -79,7 +79,7 @@
 
         <!-- "Dialpad" -->
         <!-- This is a "compound button": it has checked and unchecked states. -->
-        <ToggleButton android:id="@+id/dialpadButton"
+        <ImageButton android:id="@+id/dialpadButton"
                 style="@style/InCallCompoundButton"
                 android:background="@drawable/btn_compound_dialpad"
                 android:contentDescription="@string/onscreenShowDialpadText" />
@@ -105,7 +105,7 @@
         <!-- This is a "compound button": it has checked and unchecked states. -->
         <ImageButton android:id="@+id/muteButton"
                 style="@style/InCallButton"
-                android:background="@drawable/btn_fake_compound_mute"
+                android:background="@drawable/btn_compound_mute"
                 android:contentDescription="@string/onscreenMuteText" />
 
         <!-- Separator between 3rd and 4th button -->
@@ -118,7 +118,7 @@
         <!-- This is a "compound button": it has checked and unchecked states. -->
         <ImageButton android:id="@+id/holdButton"
                 style="@style/InCallButton"
-                android:background="@drawable/btn_fake_compound_hold"
+                android:background="@drawable/btn_compound_hold"
                 android:contentDescription="@string/onscreenHoldText" />
 
         <!-- "Swap" (or "Manage calls" in some CDMA states) -->

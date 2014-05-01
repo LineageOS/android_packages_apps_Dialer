@@ -37,7 +37,7 @@
          (In states where the audio button *not* a toggle, we explicitly
          hide this layer.) -->
     <item android:id="@+id/compoundBackgroundItem"
-          android:drawable="@drawable/btn_fake_compound_background" />
+          android:drawable="@drawable/btn_compound_background" />
 
     <!-- The little triangle that indicates that this isn't a plain
          button, but will instead pop up a menu.  This layer is *not*
