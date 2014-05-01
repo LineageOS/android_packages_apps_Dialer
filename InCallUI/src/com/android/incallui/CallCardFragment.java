@@ -250,15 +250,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         Log.v(this, "gateway " + gatewayLabel + gatewayNumber);
 
         // Update the call state label.
-        if (!TextUtils.isEmpty(callStateLabel)) {
-            mCallStateLabel.setVisibility(View.VISIBLE);
-            mCallStateLabel.setText(callStateLabel);
+        mCallStateLabel.setText(callStateLabel);
 
-            if (Call.State.INCOMING == state) {
-                setBluetoothOn(bluetoothOn);
-            }
-        } else {
-            mCallStateLabel.setVisibility(View.GONE);
+        if (Call.State.INCOMING == state) {
+            setBluetoothOn(bluetoothOn);
         }
     }
 
