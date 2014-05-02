@@ -161,7 +161,7 @@
         <item name="android:clickable">true</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dialpad_key_height</item>
-        <item name="android:background">@drawable/dialpad_key_colors</item>
+        <item name="android:background">@drawable/incall_dialpad_key_colors</item>
         <item name="android:focusable">true</item>
     </style>
 

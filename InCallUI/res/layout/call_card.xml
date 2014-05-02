@@ -20,7 +20,7 @@
     android:id="@+id/call_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <!-- The main content of the CallCard is either one or two "call info"
          blocks, depending on whether one or two lines are in use.
@@ -44,7 +44,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:translationZ="@dimen/primary_call_translation_z" >
 
                 <include android:id="@+id/primary_call_info"
                     layout="@layout/primary_call_info" />
@@ -79,19 +80,20 @@
         </LinearLayout>
 
         <FrameLayout
-            android:layout_width="@dimen/floating_action_button_width"
-            android:layout_height="@dimen/floating_action_button_height"
-            android:layout_marginBottom="@dimen/floating_action_button_margin_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|center">
 
             <ImageButton android:id="@+id/endButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/floating_action_button_width"
+                android:layout_height="@dimen/floating_action_button_height"
+                android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
                 android:background="@drawable/floating_end_button_compound_background"
                 android:src="@drawable/ic_in_call_phone_hangup"
                 android:contentDescription="@string/onscreenEndCallText" />
 
         </FrameLayout>
+
     </FrameLayout>
 
     <!-- Secondary "Call info" block, for the background ("on hold") call. -->
