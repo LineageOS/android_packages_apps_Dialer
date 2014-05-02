@@ -15,8 +15,6 @@
 -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:state_pressed="true"
-        android:drawable="@color/background_dialpad_pressed" />
-    <item android:drawable="@color/background_dialpad" />
+    <item android:state_pressed="true"
+        android:drawable="@color/incall_dialpad_background_pressed" />
 </selector>

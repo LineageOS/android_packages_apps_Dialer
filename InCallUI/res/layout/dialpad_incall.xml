@@ -24,7 +24,6 @@
     android:paddingBottom="@dimen/dialpad_bottom_padding"
     android:paddingLeft="@dimen/dialpad_horizontal_padding"
     android:paddingRight="@dimen/dialpad_horizontal_padding"
-    android:background="@color/background_dialpad"
     android:stretchColumns="*"
     android:layoutDirection="ltr" >
 
