@@ -49,7 +49,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
 
         setQuickContactEnabled(true);
         setDarkTheme(false);
-        setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(true /* opposite */));
+        setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(false /* opposite */));
         setUseCallableUri(true);
 
         try {
