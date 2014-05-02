@@ -124,7 +124,7 @@
         <!-- "Swap" (or "Manage calls" in some CDMA states) -->
         <ImageButton android:id="@+id/swapButton"
                 style="@style/InCallButton"
-                android:src="@drawable/ic_incall_switch_holo_dark"
+                android:background="@drawable/btn_swap"
                 android:contentDescription="@string/onscreenSwapCallsText"
                 android:visibility="gone" />
 
@@ -138,7 +138,7 @@
         <!-- "Add Call" -->
         <ImageButton android:id="@+id/addButton"
                 style="@style/InCallButton"
-                android:src="@drawable/ic_add_contact_holo_dark"
+                android:background="@drawable/btn_add"
                 android:contentDescription="@string/onscreenAddCallText"
                 android:visibility="gone" />
 
@@ -148,7 +148,7 @@
              The "Merge" button for CDMA devices is "cdmaMergeButton" above. -->
         <ImageButton android:id="@+id/mergeButton"
                 style="@style/InCallButton"
-                android:src="@drawable/ic_merge_holo_dark"
+                android:background="@drawable/btn_merge"
                 android:contentDescription="@string/onscreenMergeCallsText"
                 android:visibility="gone" />
 
