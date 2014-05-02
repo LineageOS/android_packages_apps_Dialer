@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.net.Uri;
 import com.google.common.base.Preconditions;
 
 import android.app.Notification;
@@ -309,6 +310,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
             addAnswerAction(builder);
         }
 
+        addPersonReference(builder, contactInfo, call);
+
         /*
          * Fire off the notification
          */
@@ -369,6 +372,15 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         }
 
         return contactInfo.name;
+    }
+
+    private void addPersonReference(Notification.Builder builder, ContactCacheEntry contactInfo,
+            Call call) {
+        if (contactInfo.lookupUri != null) {
+            builder.addPerson(contactInfo.lookupUri.toString());
+        } else if (!TextUtils.isEmpty(call.getNumber())) {
+            builder.addPerson(Uri.fromParts("tel", call.getNumber(), null).toString());
+        }
     }
 
     /**

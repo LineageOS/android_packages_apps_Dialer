@@ -90,6 +90,7 @@ public class CallerInfo {
 
     public int photoResource;
     public long person_id;
+    public String lookupKey;
     public boolean needUpdate;
     public Uri contactRefUri;
 
@@ -204,6 +205,14 @@ public class CallerInfo {
                 if (columnIndex != -1) {
                     info.person_id = cursor.getLong(columnIndex);
                     Log.v(TAG, "==> got info.person_id: " + info.person_id);
+
+                    // cache the lookup key for later use with person_id to create lookup URIs
+                    columnIndex = cursor.getColumnIndex(PhoneLookup.LOOKUP_KEY);
+                    if ((columnIndex != -1) && (cursor.getString(columnIndex) != null)) {
+                        info.lookupKey = cursor.getString(columnIndex);
+                    } else {
+                        info.lookupKey = null;
+                    }
                 } else {
                     // No valid columnIndex, so we can't look up person_id.
                     Log.v(TAG, "Couldn't find person_id column for " + contactRef);
