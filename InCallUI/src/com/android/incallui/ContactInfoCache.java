@@ -330,6 +330,13 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             } else {
                 cce.personUri = personUri;
             }
+
+            if (info.lookupKey == null) {
+                Log.v(TAG, "lookup key is null. Don't create a lookup uri.");
+                cce.lookupUri = null;
+            } else {
+                cce.lookupUri = Contacts.getLookupUri(info.person_id, info.lookupKey);
+            }
         }
 
         cce.photo = photo;
@@ -505,6 +512,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         public Drawable photo;
         public boolean isSipCall;
         public Uri personUri; // Used for local photo load
+        public Uri lookupUri; // Sent to NotificationMananger
 
         @Override
         public String toString() {
