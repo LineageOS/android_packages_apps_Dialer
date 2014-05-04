@@ -39,7 +39,8 @@
             android:numColumns="@integer/contact_tile_column_count_in_favorites"
             android:clipToPadding="false"
             android:fadingEdge="none"
-            android:divider="@null" />
+            android:divider="@null"
+            android:nestedScrollingEnabled="true" />
     </FrameLayout>
 
     <include

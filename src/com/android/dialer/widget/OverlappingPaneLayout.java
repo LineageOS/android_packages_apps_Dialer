@@ -102,6 +102,11 @@ public class OverlappingPaneLayout extends ViewGroup {
      */
     private boolean mIsUnableToDrag;
 
+    /**
+     * Tracks whether or not a child view is in the process of a nested scroll.
+     */
+    private boolean mIsInNestedScroll;
+
     private float mInitialMotionX;
     private float mInitialMotionY;
 
@@ -574,12 +579,16 @@ public class OverlappingPaneLayout extends ViewGroup {
         }
 
         if (!mCanSlide || (mIsUnableToDrag && action != MotionEvent.ACTION_DOWN)) {
-            mDragHelper.cancel();
+            if (!mIsInNestedScroll) {
+                mDragHelper.cancel();
+            }
             return super.onInterceptTouchEvent(ev);
         }
 
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
-            mDragHelper.cancel();
+            if (!mIsInNestedScroll) {
+                mDragHelper.cancel();
+            }
             return false;
         }
 
@@ -601,7 +610,9 @@ public class OverlappingPaneLayout extends ViewGroup {
                 final float ady = Math.abs(y - mInitialMotionY);
                 final int slop = mDragHelper.getTouchSlop();
                 if (ady > slop && adx > ady || !isCapturableViewUnder((int) x, (int) y)) {
-                    mDragHelper.cancel();
+                    if (!mIsInNestedScroll) {
+                        mDragHelper.cancel();
+                    }
                     mIsUnableToDrag = true;
                     return false;
                 }
@@ -837,6 +848,27 @@ public class OverlappingPaneLayout extends ViewGroup {
         mPreservedOpenState = ss.isOpen;
     }
 
+    @Override
+    public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
+        final boolean startNestedScroll = (nestedScrollAxes & SCROLL_AXIS_VERTICAL) != 0;
+        if (startNestedScroll) {
+            mIsInNestedScroll = true;
+            mDragHelper.startNestedScroll(mSlideableView);
+        }
+        return startNestedScroll;
+    }
+
+    @Override
+    public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
+        mDragHelper.processNestedScroll(mSlideableView, 0, dy, consumed);
+    }
+
+    @Override
+    public void onStopNestedScroll(View child) {
+        mDragHelper.stopNestedScroll(mSlideableView);
+        mIsInNestedScroll = false;
+    }
+
     private class DragHelperCallback extends ViewDragHelper.Callback {
 
         @Override
@@ -883,7 +915,6 @@ public class OverlappingPaneLayout extends ViewGroup {
                 top += mSlideRange;
             }
 
-            int left;
             mDragHelper.settleCapturedViewAt(releasedChild.getLeft(), top);
             invalidate();
         }
