@@ -56,4 +56,8 @@
     <!-- Forward lookup -->
     <string name="nearby_places">Nearby places</string>
     <string name="people">People</string>
+
+    <!-- Content description for the fake action menu button that brings up the msim selector
+         activity -->
+    <string name="action_menu_msim_selector_description">Select priority SIM</string>
 </resources>

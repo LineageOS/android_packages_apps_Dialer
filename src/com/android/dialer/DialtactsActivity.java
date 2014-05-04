@@ -149,6 +149,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private SmartDialSearchFragment mSmartDialSearchFragment;
 
+    private View mMsimButton;
+    private PopupMenu mMsimSelector;
     private View mMenuButton;
     private View mCallHistoryButton;
     private View mDialpadButton;
@@ -432,6 +434,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.msim_selector_button: {
+                mMsimSelector.show();
+                break;
+            }
             case R.id.overflow_menu: {
                 mOverflowMenu.show();
                 break;
@@ -626,6 +632,21 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mOverflowMenu.inflate(R.menu.dialtacts_options);
             mOverflowMenu.setOnMenuItemClickListener(this);
             mMenuButton.setOnTouchListener(mOverflowMenu.getDragToOpenListener());
+        }
+
+        mMsimButton = findViewById(R.id.msim_selector_button);
+        if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+            if (mMsimButton != null) {
+                mMsimButton.setOnClickListener(this);
+
+                mMsimSelector = new OverflowPopupMenu(DialtactsActivity.this, mMsimButton);
+                final Menu msimselector = mMsimSelector.getMenu();
+                mMsimSelector.inflate(R.menu.dialtacts_msim_selector);
+                mMsimSelector.setOnMenuItemClickListener(this);
+                mMsimButton.setOnTouchListener(mMsimSelector.getDragToOpenListener());
+            }
+        } else {
+            mMsimButton.setVisibility(View.GONE);
         }
 
         mCallHistoryButton = findViewById(R.id.call_history_button);
