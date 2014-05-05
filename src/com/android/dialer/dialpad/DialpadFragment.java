@@ -309,7 +309,7 @@ public class DialpadFragment extends Fragment
             mDigitsFilledByIntent = false;
             mDigits.setCursorVisible(false);
             mAddContactButton.setVisibility(View.INVISIBLE);
-        } else {
+        } else if (mDialpadView.canDigitsBeEdited()){
             mAddContactButton.setVisibility(View.VISIBLE);
         }
 

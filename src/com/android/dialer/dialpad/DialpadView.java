@@ -38,6 +38,8 @@ public class DialpadView extends LinearLayout {
     private EditText mDigits;
     private ImageButton mDelete;
 
+    private boolean mCanDigitsBeEdited;
+
     public DialpadView(Context context) {
         this(context, null);
     }
@@ -115,7 +117,7 @@ public class DialpadView extends LinearLayout {
      * @param canBeEdited If true, the backspace button will be shown and the digits EditText
      *         will be configured to allow text manipulation.
      */
-    public void setDigitsCanBeEdited(boolean canBeEdited) {
+    public void setCanDigitsBeEdited(boolean canBeEdited) {
         View deleteButton = findViewById(R.id.deleteButton);
         deleteButton.setVisibility(canBeEdited ? View.VISIBLE : View.GONE);
 
@@ -124,6 +126,17 @@ public class DialpadView extends LinearLayout {
         digits.setLongClickable(canBeEdited);
         digits.setFocusableInTouchMode(canBeEdited);
         digits.setCursorVisible(false);
+
+        View overflowMenuButton = findViewById(R.id.dialpad_overflow);
+        overflowMenuButton.setVisibility(canBeEdited ? View.VISIBLE : View.GONE);
+
+        View addContactButton = findViewById(R.id.dialpad_add_contact);
+        addContactButton.setVisibility(canBeEdited ? View.VISIBLE : View.GONE);
+        mCanDigitsBeEdited = canBeEdited;
+    }
+
+    public boolean canDigitsBeEdited() {
+        return mCanDigitsBeEdited;
     }
 
     /**
