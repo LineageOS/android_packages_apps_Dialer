@@ -290,12 +290,6 @@
     -->
     <string name="description_dial_button">dial</string>
 
-    <!-- String describing the Delete/Backspace ImageButton
-
-         Used by AccessibilityService to announce the purpose of the button.
-    -->
-    <string name="description_delete_button">backspace</string>
-
     <!-- String describing the digits text box containing the number to dial.
 
          Used by AccessibilityService to announce the purpose of the view.
@@ -419,16 +413,6 @@
               This is especially valuable for views without textual representation like ImageView.
     -->
     <string name="description_call_log_voicemail">Voicemail</string>
-
-    <!-- String describing the button to add a contact for the current number.
-
-        Note: AccessibilityServices use this attribute to announce what the view represents.
-              This is especially valuable for views without textual representation like ImageView.
-    -->
-    <string name="description_add_contact">Add contact</string>
-
-    <!-- String describing the overflow menu button in the dialpad -->
-    <string name="description_dialpad_overflow">More options</string>
 
     <!-- String describing the button to view the contact for the current number.
 
