@@ -61,6 +61,9 @@
          actionbar_background_color. -->
     <color name="actionbar_background_color">#00afcc</color>
 
+    <!-- Dark variant of the action bar color. -->
+    <color name="actionbar_background_color_dark">#008aa1</color>
+
     <!-- Color of the 1dp divider that separates favorites -->
     <color name="favorite_contacts_separator_color">#d0d0d0</color>
 
