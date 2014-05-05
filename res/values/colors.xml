@@ -44,6 +44,9 @@
     <!-- Background color of dialer list items (contacts, call log entries) -->
     <color name="background_dialer_list_items">#ffffff</color>
 
+    <!-- Dark variant of the action bar color. -->
+    <color name="actionbar_background_color_dark">#008aa1</color>
+
     <!-- Color of the 1dp divider that separates favorites -->
     <color name="favorite_contacts_separator_color">#d0d0d0</color>
 
