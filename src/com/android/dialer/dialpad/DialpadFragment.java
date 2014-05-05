@@ -142,30 +142,6 @@ public class DialpadFragment extends Fragment
         }
     }
 
-    /**
-     * LinearLayout that always returns true for onHoverEvent callbacks, to fix
-     * problems with accessibility due to the dialpad overlaying other fragments.
-     */
-    public static class HoverIgnoringLinearLayout extends LinearLayout {
-
-        public HoverIgnoringLinearLayout(Context context) {
-            super(context);
-        }
-
-        public HoverIgnoringLinearLayout(Context context, AttributeSet attrs) {
-            super(context, attrs);
-        }
-
-        public HoverIgnoringLinearLayout(Context context, AttributeSet attrs, int defStyle) {
-            super(context, attrs, defStyle);
-        }
-
-        @Override
-        public boolean onHoverEvent(MotionEvent event) {
-            return true;
-        }
-    }
-
     public interface OnDialpadQueryChangedListener {
         void onDialpadQueryChanged(String query);
     }
@@ -191,11 +167,7 @@ public class DialpadFragment extends Fragment
 
     private OnDialpadQueryChangedListener mDialpadQueryListener;
 
-    /**
-     * View (usually FrameLayout) containing mDigits field. This can be null, in which mDigits
-     * isn't enclosed by the container.
-     */
-    private View mDigitsContainer;
+    private DialpadView mDialpadView;
     private EditText mDigits;
 
     /** Remembers if we need to clear digits field when the screen is completely gone. */
@@ -206,7 +178,6 @@ public class DialpadFragment extends Fragment
     private View mDelete;
     private ToneGenerator mToneGenerator;
     private final Object mToneGeneratorLock = new Object();
-    private View mDialpad;
     private View mSpacer;
 
     /**
@@ -398,8 +369,10 @@ public class DialpadFragment extends Fragment
 
         vto.addOnPreDrawListener(preDrawListener);
 
-        mDigitsContainer = fragmentView.findViewById(R.id.digits_container);
-        mDigits = (EditText) fragmentView.findViewById(R.id.digits);
+        Resources r = getResources();
+
+        mDialpadView = (DialpadView) fragmentView.findViewById(R.id.dialpad_view);
+        mDigits = mDialpadView.getDigits();
         mDigits.setKeyListener(UnicodeDialerKeyListener.INSTANCE);
         mDigits.setOnClickListener(this);
         mDigits.setOnKeyListener(this);
@@ -410,10 +383,11 @@ public class DialpadFragment extends Fragment
         // Check for the presence of the keypad
         View oneButton = fragmentView.findViewById(R.id.one);
         if (oneButton != null) {
-            setupKeypad(fragmentView);
+            configureKeypadListeners(fragmentView);
         }
 
-        mDelete = fragmentView.findViewById(R.id.deleteButton);
+        mDelete = mDialpadView.getDeleteButton();
+
         if (mDelete != null) {
             mDelete.setOnClickListener(this);
             mDelete.setOnLongClickListener(this);
@@ -431,14 +405,7 @@ public class DialpadFragment extends Fragment
             }
         });
 
-        mDialpad = fragmentView.findViewById(R.id.dialpad);  // This is null in landscape mode.
-
-        // In landscape we put the keyboard in phone mode.
-        if (null == mDialpad) {
-            mDigits.setInputType(android.text.InputType.TYPE_CLASS_PHONE);
-        } else {
-            mDigits.setCursorVisible(false);
-        }
+        mDigits.setCursorVisible(false);
 
         // Set up the "dialpad chooser" UI; see showDialpadChooser().
         mDialpadChooser = (ListView) fragmentView.findViewById(R.id.dialpadChooser);
@@ -596,53 +563,23 @@ public class DialpadFragment extends Fragment
         }
     }
 
-    private void setupKeypad(View fragmentView) {
+    private void configureKeypadListeners(View fragmentView) {
         final int[] buttonIds = new int[] {R.id.zero, R.id.one, R.id.two, R.id.three, R.id.four,
                 R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.star, R.id.pound};
-
-        final int[] numberIds = new int[] {R.string.dialpad_0_number, R.string.dialpad_1_number,
-                R.string.dialpad_2_number, R.string.dialpad_3_number, R.string.dialpad_4_number,
-                R.string.dialpad_5_number, R.string.dialpad_6_number, R.string.dialpad_7_number,
-                R.string.dialpad_8_number, R.string.dialpad_9_number, R.string.dialpad_star_number,
-                R.string.dialpad_pound_number};
-
-        final int[] letterIds = new int[] {R.string.dialpad_0_letters, R.string.dialpad_1_letters,
-                R.string.dialpad_2_letters, R.string.dialpad_3_letters, R.string.dialpad_4_letters,
-                R.string.dialpad_5_letters, R.string.dialpad_6_letters, R.string.dialpad_7_letters,
-                R.string.dialpad_8_letters, R.string.dialpad_9_letters,
-                R.string.dialpad_star_letters, R.string.dialpad_pound_letters};
-
-        final Resources resources = getResources();
-
         DialpadKeyButton dialpadKey;
-        TextView numberView;
-        TextView lettersView;
 
         for (int i = 0; i < buttonIds.length; i++) {
             dialpadKey = (DialpadKeyButton) fragmentView.findViewById(buttonIds[i]);
             dialpadKey.setOnPressedListener(this);
-            numberView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_number);
-            lettersView = (TextView) dialpadKey.findViewById(R.id.dialpad_key_letters);
-            final String numberString = resources.getString(numberIds[i]);
-            numberView.setText(numberString);
-            numberView.setElegantTextHeight(false);
-            dialpadKey.setContentDescription(numberString);
-            if (lettersView != null) {
-                lettersView.setText(resources.getString(letterIds[i]));
-            }
         }
 
         // Long-pressing one button will initiate Voicemail.
         final DialpadKeyButton one = (DialpadKeyButton) fragmentView.findViewById(R.id.one);
         one.setOnLongClickListener(this);
-        one.setLongHoverContentDescription(
-                resources.getText(R.string.description_voicemail_button));
 
         // Long-pressing zero button will enter '+' instead.
         final DialpadKeyButton zero = (DialpadKeyButton) fragmentView.findViewById(R.id.zero);
         zero.setOnLongClickListener(this);
-        zero.setLongHoverContentDescription(
-                resources.getText(R.string.description_image_button_plus));
 
         mAddContactButton = fragmentView.findViewById(R.id.dialpad_add_contact);
         mAddContactButton.setOnClickListener(this);
@@ -984,10 +921,6 @@ public class DialpadFragment extends Fragment
         switch (id) {
             case R.id.deleteButton: {
                 digits.clear();
-                // TODO: The framework forgets to clear the pressed
-                // status of disabled button. Until this is fixed,
-                // clear manually the pressed status. b/2133127
-                mDelete.setPressed(false);
                 return true;
             }
             case R.id.one: {
@@ -1149,7 +1082,7 @@ public class DialpadFragment extends Fragment
                 }
 
                 // Clear the digits just in case.
-                mDigits.getText().clear();
+                clearDialpad();
             } else {
                 final Intent intent = CallUtil.getCallIntent(number,
                         (getActivity() instanceof DialtactsActivity ?
@@ -1287,13 +1220,9 @@ public class DialpadFragment extends Fragment
 
         if (enabled) {
             // Log.i(TAG, "Showing dialpad chooser!");
-            if (mDigitsContainer != null) {
-                mDigitsContainer.setVisibility(View.GONE);
-            } else {
-                // mDigits is not enclosed by the container. Make the digits field itself gone.
-                mDigits.setVisibility(View.GONE);
+            if (mDialpadView != null) {
+                mDialpadView.setVisibility(View.GONE);
             }
-            if (mDialpad != null) mDialpad.setVisibility(View.GONE);
             ((HostInterface) getActivity()).setDialButtonContainerVisible(false);
 
             mDialpadChooser.setVisibility(View.VISIBLE);
@@ -1306,12 +1235,11 @@ public class DialpadFragment extends Fragment
             mDialpadChooser.setAdapter(mDialpadChooserAdapter);
         } else {
             // Log.i(TAG, "Displaying normal Dialer UI.");
-            if (mDigitsContainer != null) {
-                mDigitsContainer.setVisibility(View.VISIBLE);
+            if (mDialpadView != null) {
+                mDialpadView.setVisibility(View.VISIBLE);
             } else {
                 mDigits.setVisibility(View.VISIBLE);
             }
-            if (mDialpad != null) mDialpad.setVisibility(View.VISIBLE);
             ((HostInterface) getActivity()).setDialButtonContainerVisible(true);
             mDialpadChooser.setVisibility(View.GONE);
         }
