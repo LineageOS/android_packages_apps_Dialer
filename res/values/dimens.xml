@@ -33,7 +33,7 @@
     <dimen name="call_log_outer_margin">8dip</dimen>
     <dimen name="call_log_indent_margin">24dip</dimen>
     <dimen name="call_log_list_item_height">56dip</dimen>
-    <dimen name="call_log_list_contact_photo_size">64dip</dimen>
+    <dimen name="call_log_list_contact_photo_size">40dip</dimen>
     <dimen name="call_detail_contact_name_margin">24dip</dimen>
     <dimen name="call_detail_button_spacing">2dip</dimen>
     <!-- Defines the vertical margin for the vertical separator between
@@ -128,7 +128,19 @@
     <dimen name="search_box_text_left_margin">8dp</dimen>
     <!-- Size of the icon (voice search, close search) in the search box. -->
     <dimen name="search_box_icon_size">37dp</dimen>
-
     <!-- Size of text in tabs. -->
     <dimen name="tab_text_size">13sp</dimen>
+    <!-- Padding to the left and right of call log action buttons. -->
+    <dimen name="call_log_action_horizontal_padding">8dp</dimen>
+    <!-- Left-padding for the call log action buttons - ensures the buttons align with the text
+         to the right of the contact badge.  Adjust when any of the following change:
+         call_log_action_horizontal_padding
+         call_log_list_contact_photo_size  -->
+    <dimen name="call_log_actions_left_padding">48dp</dimen>
+    <!-- Text size for primary call log text -->
+    <dimen name="call_log_primary_text_size">16sp</dimen>
+    <!-- Text size for secondary call log text -->
+    <dimen name="call_log_secondary_text_size">14sp</dimen>
+    <!-- Height of the call log actions section for each call log entry -->
+    <dimen name="call_log_action_height">48dp</dimen>
 </resources>

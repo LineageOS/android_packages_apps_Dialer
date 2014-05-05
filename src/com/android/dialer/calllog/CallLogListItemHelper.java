@@ -25,6 +25,7 @@ import android.view.View;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
+import com.android.internal.util.CharSequences;
 
 /**
  * Helper class to fill in the views of a call log entry.
@@ -56,13 +57,11 @@ import com.android.dialer.R;
      * @param views the views to populate
      * @param details the details of a phone call needed to fill in the data
      * @param isHighlighted whether to use the highlight text for the call
-     * @param showSecondaryActionButton whether to show the secondary action button or not
      */
     public void setPhoneCallDetails(CallLogListItemViews views, PhoneCallDetails details,
-            boolean isHighlighted, boolean showSecondaryActionButton) {
+            boolean isHighlighted) {
         mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details,
                 isHighlighted);
-        boolean canPlay = details.callTypes[0] == Calls.VOICEMAIL_TYPE;
 
         // Set the accessibility text for the contact badge
         views.quickContactView.setContentDescription(getContactBadgeDescription(details));
@@ -70,35 +69,25 @@ import com.android.dialer.R;
         // Set the primary action accessibility description
         views.primaryActionView.setContentDescription(getCallDescription(details));
 
-        // If secondary action is visible, either show voicemail playback icon, or
-        // show the "clock" icon corresponding to the call details screen.
-        if (showSecondaryActionButton) {
-            if (canPlay) {
-                // Playback action takes preference.
-                configurePlaySecondaryAction(views, isHighlighted);
-            } else {
-                // Call details is the secondary action.
-                configureCallDetailsSecondaryAction(views, details);
-            }
-        } else {
-            // No secondary action is to be shown (ie this is likely a PhoneFavoriteFragment)
-            views.secondaryActionView.setVisibility(View.GONE);
-        }
+        // Cache name or number of caller.  Used when setting the content descriptions of buttons
+        // when the actions ViewStub is inflated.
+        views.nameOrNumber = this.getNameOrNumber(details);
     }
 
     /**
-     * Sets the secondary action to invoke call details.
+     * Sets the accessibility descriptions for the action buttons in the action button ViewStub.
      *
-     * @param views   the views to populate
-     * @param details the details of a phone call needed to fill in the call details data
+     * @param views The views associated with the current call log entry.
      */
-    private void configureCallDetailsSecondaryAction(CallLogListItemViews views,
-            PhoneCallDetails details) {
-        views.secondaryActionView.setVisibility(View.VISIBLE);
-        // Use the small dark grey clock icon.
-        views.secondaryActionButtonView.setImageResource(R.drawable.ic_menu_history_dk);
-        views.secondaryActionButtonView.setContentDescription(
-                mResources.getString(R.string.description_call_details));
+    public void setActionContentDescriptions(CallLogListItemViews views) {
+        views.callBackButtonView.setContentDescription(
+                mResources.getString(R.string.description_call_back_action, views.nameOrNumber));
+
+        views.voicemailButtonView.setContentDescription(
+                mResources.getString(R.string.description_voicemail_action, views.nameOrNumber));
+
+        views.deleteButtonView.setContentDescription(
+                mResources.getString(R.string.description_delete_action, views.nameOrNumber));
     }
 
     /**
@@ -123,16 +112,11 @@ import com.android.dialer.R;
      *
      * The {Caller Information} references the most recent call associated with the caller.
      * For incoming calls:
-     * If missed call:  Return missed call from {Name/Number} {Call Type} {Call Time}.
-     * If answered call: Return answered call from {Name/Number} {Call Type} {Call Time}.
-     *
-     * For unknown callers, drop the "Return" part, since the call can't be returned:
-     * If answered unknown: Answered call from {Name/Number} {Call Time}.
-     * If missed unknown: Missed call from {Name/Number} {Call Time}.
+     * If missed call:  Missed call from {Name/Number} {Call Type} {Call Time}.
+     * If answered call: Answered call from {Name/Number} {Call Type} {Call Time}.
      *
      * For outgoing calls:
-     * If outgoing:  Call {Name/Number] {Call Type}.  {Last} called {Call Time}.
-     * Where {Last} is dropped if the number of calls for the caller is 1.
+     * If outgoing:  Call to {Name/Number] {Call Type} {Call Time}.
      *
      * Where:
      * {Name/Number} is the name or number of the caller (as shown in call log).
@@ -140,8 +124,8 @@ import com.android.dialer.R;
      * {Call Time} is the time since the last call for the contact occurred.
      *
      * Examples:
-     * 3 calls.  New Voicemail.  Return missed call from Joe Smith mobile 2 hours ago.
-     * 2 calls.  Call John Doe mobile.  Last called 1 hour ago.
+     * 3 calls.  New Voicemail.  Missed call from Joe Smith mobile 2 hours ago.
+     * 2 calls.  Answered call from John Doe mobile.  Last called 1 hour ago.
      * @param details Details of call.
      * @return Return call action description.
      */
@@ -191,43 +175,17 @@ import com.android.dialer.R;
      */
     public int getCallDescriptionStringID(PhoneCallDetails details) {
         int lastCallType = getLastCallType(details.callTypes);
-        boolean isNumberCallable = PhoneNumberUtilsWrapper.canPlaceCallsTo(details.number,
-                details.numberPresentation);
+        int stringID;
 
-        // Default string to use is "call XYZ..." just in case we manage to fall through.
-        int stringID = R.string.description_call_last_multiple;
-
-        if (!isNumberCallable) {
-            // Number isn't callable; this is an incoming call from an unknown caller.
-            // An uncallable outgoing call wouldn't be in the call log.
-
-            // Voicemail and missed calls are both considered missed.
-            if (lastCallType == Calls.VOICEMAIL_TYPE ||
-                    lastCallType == Calls.MISSED_TYPE) {
-                stringID = R.string.description_unknown_missed_call;
-            } else if (lastCallType == Calls.INCOMING_TYPE) {
-                stringID = R.string.description_unknown_answered_call;
-            }
+        if (lastCallType == Calls.VOICEMAIL_TYPE || lastCallType == Calls.MISSED_TYPE) {
+            //Message: Missed call from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>.
+            stringID = R.string.description_incoming_missed_call;
+        } else if (lastCallType == Calls.INCOMING_TYPE) {
+            //Message: Answered call from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>.
+            stringID = R.string.description_incoming_answered_call;
         } else {
-            // Known caller, so callable.
-
-            // Missed call (ie voicemail or missed)
-            if (lastCallType == Calls.VOICEMAIL_TYPE ||
-                    lastCallType == Calls.MISSED_TYPE) {
-                stringID = R.string.description_return_missed_call;
-            } else if (lastCallType == Calls.INCOMING_TYPE) {
-                // Incoming answered.
-                stringID = R.string.description_return_answered_call;
-            } else {
-                // Outgoing call.
-
-                // If we have a history of multiple calls
-                if (details.callTypes.length > 1) {
-                    stringID = R.string.description_call_last_multiple;
-                } else {
-                    stringID = R.string.description_call_last;
-                }
-            }
+            //Message: Call to <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>.
+            stringID = R.string.description_outgoing_call;
         }
         return stringID;
     }
@@ -259,14 +217,5 @@ import com.android.dialer.R;
                     details.number, details.numberPresentation, details.formattedNumber);
         }
         return recipient;
-    }
-
-    /** Sets the secondary action to correspond to the play button. */
-    private void configurePlaySecondaryAction(CallLogListItemViews views, boolean isHighlighted) {
-        views.secondaryActionView.setVisibility(View.VISIBLE);
-        views.secondaryActionButtonView.setImageResource(
-                isHighlighted ? R.drawable.ic_play_active_holo_dark : R.drawable.ic_play_holo_light);
-        views.secondaryActionButtonView.setContentDescription(
-                mResources.getString(R.string.description_call_log_play_button));
     }
 }

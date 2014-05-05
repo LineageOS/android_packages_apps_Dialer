@@ -22,6 +22,7 @@ import android.provider.CallLog.Calls;
 import android.test.AndroidTestCase;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -111,9 +112,9 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     public void testSetPhoneCallDetails_Normal() {
         setPhoneCallDetailsWithNumber("14125551212",
                 Calls.PRESENTATION_ALLOWED, "1-412-555-1212");
-        assertEquals("Yesterday", mViews.callTypeAndDate.getText().toString());
-        assertEqualsHtml("<font color='#33b5e5'><b>Yesterday</b></font>",
-                mViews.callTypeAndDate.getText());
+        assertTrue(mViews.callLocationAndDate.getText().toString().contains("Yesterday"));
+        assertTrue(mViews.callLocationAndDate.getText().toString().contains(
+                "<font color='#33b5e5'><b>Yesterday</b></font>"));
     }
 
     /** Asserts that a char sequence is actually a Spanned corresponding to the expected HTML. */
@@ -252,12 +253,12 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
 
     /** Asserts that the label text field contains the given string value. */
     private void assertLabelEquals(String text) {
-        assertEquals(text, mViews.labelView.getText().toString());
+        assertTrue(mViews.callLocationAndDate.getText().toString().contains(text));
     }
 
     /** Asserts that the date text field contains the given string value. */
     private void assertDateEquals(String text) {
-        assertEquals(text, mViews.callTypeAndDate.getText().toString());
+        assertTrue(mViews.callLocationAndDate.getText().toString().contains(text));
     }
 
     /** Asserts that the call type contains the images with the given drawables. */
@@ -268,7 +269,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
             assertEquals(id, mViews.callTypeIcons.getCallType(index));
         }
         assertEquals(View.VISIBLE, mViews.callTypeIcons.getVisibility());
-        assertEquals("Yesterday", mViews.callTypeAndDate.getText().toString());
+        assertTrue(mViews.callLocationAndDate.getText().toString().contains("Yesterday"));
     }
 
     /**
@@ -282,7 +283,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
             assertEquals(id, mViews.callTypeIcons.getCallType(index));
         }
         assertEquals(View.VISIBLE, mViews.callTypeIcons.getVisibility());
-        assertEquals(overflowText + " Yesterday", mViews.callTypeAndDate.getText().toString());
+        assertTrue(mViews.callLocationAndDate.getText().toString().contains(overflowText));
+        assertTrue(mViews.callLocationAndDate.getText().toString().contains("Yesterday"));
     }
 
     /** Sets the phone call details with default values and the given number. */

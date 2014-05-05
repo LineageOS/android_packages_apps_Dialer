@@ -18,9 +18,7 @@ package com.android.dialer;
 
 import android.content.res.Resources;
 import android.graphics.Typeface;
-import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.telephony.PhoneNumberUtils;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -36,6 +34,10 @@ import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
+import com.google.android.collect.Lists;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Helper class to fill in the views in {@link PhoneCallDetailsViews}.
@@ -51,6 +53,11 @@ public class PhoneCallDetailsHelper {
     private final CallTypeHelper mCallTypeHelper;
     private final PhoneNumberDisplayHelper mPhoneNumberHelper;
     private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
+
+    /**
+     * List of items to be concatenated together for accessibility descriptions
+     */
+    private ArrayList<CharSequence> mDescriptionItems = Lists.newArrayList();
 
     /**
      * Creates a new instance of the helper.
@@ -90,42 +97,54 @@ public class PhoneCallDetailsHelper {
         Integer highlightColor =
                 isHighlighted ? mCallTypeHelper.getHighlightedColor(details.callTypes[0]) : null;
 
-        // The date of this call, relative to the current time.
-        CharSequence dateText = getCallDate(details);
+        CharSequence callLocationAndDate = getCallLocationAndDate(details);
 
-        // Set the call count and date.
-        setCallCountAndDate(views, callCount, dateText, highlightColor);
-
-        // Get type of call (ie mobile, home, etc) if known, or the caller's
-        CharSequence numberFormattedLabel = getCallTypeOrLocation(details);
+        // Set the call count, location and date.
+        setCallCountAndDate(views, callCount, callLocationAndDate, highlightColor);
 
         final CharSequence nameText;
-        final CharSequence numberText;
-        final CharSequence labelText;
         final CharSequence displayNumber =
             mPhoneNumberHelper.getDisplayNumber(details.number,
                     details.numberPresentation, details.formattedNumber);
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
-            if (TextUtils.isEmpty(details.geocode)
-                    || mPhoneNumberUtilsWrapper.isVoicemailNumber(details.number)) {
-                numberText = mResources.getString(R.string.call_log_empty_geocode);
-            } else {
-                numberText = details.geocode;
-            }
-            labelText = numberText;
             // We have a real phone number as "nameView" so make it always LTR
             views.nameView.setTextDirection(View.TEXT_DIRECTION_LTR);
         } else {
             nameText = details.name;
-            numberText = displayNumber;
-            labelText = TextUtils.isEmpty(numberFormattedLabel) ? numberText :
-                    numberFormattedLabel;
         }
 
         views.nameView.setText(nameText);
-        views.labelView.setText(labelText);
-        views.labelView.setVisibility(TextUtils.isEmpty(labelText) ? View.GONE : View.VISIBLE);
+
+        // TODO: At the current time the voicemail transcription is not supported.  This view
+        // is kept for future expansion when we may wish to show a transcription of voicemail.
+        views.voicemailTranscriptionView.setText("");
+        views.voicemailTranscriptionView.setVisibility(View.GONE);
+    }
+
+    /**
+     * Builds a string containing the call location and date.
+     *
+     * @param details The call details.
+     * @return The call location and date string.
+     */
+    private CharSequence getCallLocationAndDate(PhoneCallDetails details) {
+        mDescriptionItems.clear();
+
+        // Get type of call (ie mobile, home, etc) if known, or the caller's location.
+        CharSequence callTypeOrLocation = getCallTypeOrLocation(details);
+
+        // Only add the call type or location if its not empty.  It will be empty for unknown
+        // callers.
+        if (!TextUtils.isEmpty(callTypeOrLocation)) {
+            mDescriptionItems.add(callTypeOrLocation);
+        }
+        // The date of this call, relative to the current time.
+        mDescriptionItems.add(getCallDate(details));
+
+        // Create a comma separated list from the call type or location, and call date.
+        // TextUtils.join ensures a locale appropriate list separator is used.
+        return TextUtils.join((List<CharSequence>)mDescriptionItems);
     }
 
     /**
@@ -139,13 +158,20 @@ public class PhoneCallDetailsHelper {
         CharSequence numberFormattedLabel = null;
         // Only show a label if the number is shown and it is not a SIP address.
         if (!TextUtils.isEmpty(details.number)
-                && !PhoneNumberHelper.isUriNumber(details.number.toString())) {
+                && !PhoneNumberHelper.isUriNumber(details.number.toString())
+                && !mPhoneNumberUtilsWrapper.isVoicemailNumber(details.number)) {
+
             if (details.numberLabel == ContactInfo.GEOCODE_AS_LABEL) {
                 numberFormattedLabel = details.geocode;
             } else {
                 numberFormattedLabel = Phone.getTypeLabel(mResources, details.numberType,
                         details.numberLabel);
             }
+        }
+
+        if (!TextUtils.isEmpty(details.name) && TextUtils.isEmpty(numberFormattedLabel)) {
+            numberFormattedLabel = mPhoneNumberHelper.getDisplayNumber(details.number,
+                    details.numberPresentation, details.formattedNumber);
         }
         return numberFormattedLabel;
     }
@@ -216,7 +242,7 @@ public class PhoneCallDetailsHelper {
             formattedText = text;
         }
 
-        views.callTypeAndDate.setText(formattedText);
+        views.callLocationAndDate.setText(formattedText);
     }
 
     /** Creates a SpannableString for the given text which is bold and in the given color. */

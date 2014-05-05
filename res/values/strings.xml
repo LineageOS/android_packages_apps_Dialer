@@ -472,59 +472,6 @@
     -->
     <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> calls.</string>
 
-
-    <!-- Call history description for a missed call from a caller.
-
-        Note: AccessibilityServices use this attribute to announce what the view represents.
-              This is especially valuable for views without textual representation like ImageView.
-    -->
-    <string name="description_return_missed_call">Return missed call from <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
-
-
-    <!-- Call history description for an answered call for a caller.
-
-        Note: AccessibilityServices use this attribute to announce what the view represents.
-              This is especially valuable for views without textual representation like ImageView.
-    -->
-    <string name="description_return_answered_call">Return answered call from <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
-
-    <!-- Call history description for a missed call from an unknown caller.
-         Drops the "return" part of description_return_missed_call since it is not
-         possible to actually call an unknown number.
-
-        Note: AccessibilityServices use this attribute to announce what the view represents.
-              This is especially valuable for views without textual representation like ImageView.
-    -->
-    <string name="description_unknown_missed_call">Missed call from <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
-
-
-    <!-- Call history description for an answered call from an unknown caller.
-        Drops the "return" part of description_return_answered_call since it is not
-         possible to actually call an unknown number.
-        Note: AccessibilityServices use this attribute to announce what the view represents.
-              This is especially valuable for views without textual representation like ImageView.
-    -->
-    <string name="description_unknown_answered_call">Answered call from <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
-
-    <!-- String describing an outgoing call entry in the call log.  Used to indicate that
-         a call will be made to the specified caller.  Used when there are multiple calls to/from
-         the caller.
-
-        Note: AccessibilityServices use this attribute to announce what the view represents.
-              This is especially valuable for views without textual representation like ImageView.
-    -->
-    <string name="description_call_last_multiple">Call <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g>.  Last called <xliff:g id="timeOfCall">%3$s</xliff:g>.</string>
-
-    <!-- String describing an outgoing call entry in the call log.  Used to indicate that
-         a call will be made to the specified caller.  Used when there is only a single call
-         related to/from the caller.
-
-        Note: AccessibilityServices use this attribute to announce what the view represents.
-              This is especially valuable for views without textual representation like ImageView.
-    -->
-    <string name="description_call_last">Call <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g>.  Called <xliff:g id="timeOfCall">%3$s</xliff:g>.</string>
-
-
     <!-- String describing the button to SMS a number or contact.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -547,10 +494,6 @@
 
     <!-- String describing the icon used to start a voice search -->
     <string name="description_start_voice_search">Start voice search</string>
-
-    <!-- The string used to represent an unknown location for a phone number in the call log
-        Do not translate. -->
-    <string name="call_log_empty_geocode"></string>
 
     <!-- Menu item used to call a contact, containing the number of the contact to call -->
     <string name="menu_callNumber">Call <xliff:g id="number">%s</xliff:g></string>
@@ -774,4 +717,57 @@
     <!-- The font-family to use for tab text.
          Do not translate. -->
     <string name="tab_font_family">sans-serif</string>
+
+    <!-- Button text for the "call back" button displayed underneath an entry in the call log.
+         Tapping causes a call to be placed to the caller represented by the call log entry.
+         [CHAR LIMIT=30] -->
+    <string name="call_log_action_call_back">CALL BACK</string>
+
+    <!-- Button text for the "DELETE" button displayed underneath an entry in the call log.
+         Tapping causes the call log entry in question to be removed from the call log.
+         [CHAR LIMIT=30] -->
+    <string name="call_log_action_delete">DELETE</string>
+
+    <!-- Button text for the "LISTEN" button displayed underneath an entry in the call log.
+         Tapping navigates the user to the call details screen where the user can listen to the
+         voicemail represented by the call log entry.
+         [CHAR LIMIT=30] -->
+    <string name="call_log_action_voicemail">LISTEN</string>
+
+    <!-- String describing an incoming missed call entry in the call log.
+         Note: AccessibilityServices uses this attribute to announce what the view represents.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_incoming_missed_call">Missed call from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
+
+    <!-- String describing an incoming answered call entry in the call log.
+         Note: AccessibilityServices uses this attribute to announce what the view represents.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_incoming_answered_call">Answered call from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
+
+    <!-- String describing an outgoing call entry in the call log.
+         Note: AccessibilityServices uses this attribute to announce what the view represents.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_outgoing_call">Call to <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
+
+    <!-- String describing the "call back" action for an entry in the call log.  The call back
+         action triggers a return call to the named user.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_call_back_action">Call back <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
+
+    <!-- String describing the "listen" action for an entry in the call log.  The listen
+         action is shown for call log entries representing a voicemail message and this button
+         triggers playing back the voicemail.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_voicemail_action">Listen to voicemail from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
+
+    <!-- String describing the "delete" action for an entry in the call log.  The delete
+         action triggers the removal of the current call log entry from the call log.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_delete_action">Delete call log entry for <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
+
+    <!-- Toast message which appears when a call log entry is deleted. -->
+    <string name="toast_entry_removed">Call log entry deleted.</string>
 </resources>
