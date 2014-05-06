@@ -56,7 +56,6 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.contacts.common.CallUtil;
@@ -548,7 +547,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     private void showDialpadFragment(boolean animate) {
-        mDialpadFragment.setAdjustTranslationForAnimation(animate);
+        mDialpadFragment.setAnimate(animate);
+
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         if (animate) {
             ft.setCustomAnimations(R.anim.slide_in, 0);
@@ -565,7 +565,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mDialpadFragment.clearDialpad();
         }
         if (!mDialpadFragment.isVisible()) return;
-        mDialpadFragment.setAdjustTranslationForAnimation(animate);
+        mDialpadFragment.setAnimate(animate);
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         if (animate) {
             ft.setCustomAnimations(0, R.anim.slide_out);
