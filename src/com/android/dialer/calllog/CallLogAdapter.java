@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.CallLog.Calls;
@@ -35,26 +36,38 @@ import android.view.ViewStub;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.util.UriUtils;
+import com.android.dialer.CallDetailActivity;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
+import com.android.dialer.util.AsyncTaskExecutor;
+import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.ExpirableCache;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * Adapter class to fill in data for the Call Log.
  */
 public class CallLogAdapter extends GroupingListAdapter
         implements ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
+
+
+    /** The enumeration of {@link android.os.AsyncTask} objects used in this class. */
+    public enum Tasks {
+        REMOVE_CALL_LOG_ENTRIES,
+    }
 
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {
@@ -103,6 +116,9 @@ public class CallLogAdapter extends GroupingListAdapter
     private final CallFetcher mCallFetcher;
     private ViewTreeObserver mViewTreeObserver = null;
 
+    /** Aynchronous task executor, lazy instantiated as needed. */
+    private AsyncTaskExecutor mAsyncTaskExecutor;
+
     /**
      * A cache of the contact details for the phone numbers in the call log.
      * <p>
@@ -112,6 +128,9 @@ public class CallLogAdapter extends GroupingListAdapter
      * The key is number with the country in which the call was placed or received.
      */
     private ExpirableCache<NumberWithCountryIso, ContactInfo> mContactInfoCache;
+
+    /** Hashmap, keyed by call Id, used to track which call log entries have been expanded or not */
+    private HashMap<Long,Boolean> mIsExpanded = new HashMap<Long,Boolean>();
 
     /**
      * A request for contact details for the given number.
@@ -186,12 +205,6 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Can be set to true by tests to disable processing of requests. */
     private volatile boolean mRequestProcessingDisabled = false;
 
-    /**
-     * Whether to show the secondary action button used to play voicemail or show call details.
-     * True if created from a CallLogFragment.
-     * False if created from the PhoneFavoriteFragment. */
-    private boolean mShowSecondaryActionButton = true;
-
     private boolean mIsCallLog = true;
     private int mNumMissedCalls = 0;
     private int mNumMissedCallsShown = 0;
@@ -208,6 +221,35 @@ public class CallLogAdapter extends GroupingListAdapter
         @Override
         public void onClick(View view) {
             startActivityForAction(view);
+        }
+    };
+
+    /**
+     * Click listener for the delete from call log button.  Removes the current call log
+     * entry and its associated calls from the call log.
+     */
+    private final View.OnClickListener mDeleteListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // Retrieve the views from the call log view.
+            final CallLogListItemViews views =
+                    (CallLogListItemViews)
+                            ((View)v.getParent().getParent().getParent().getParent()).getTag();
+
+            deleteCalls(views.callIds);
+            notifyDataSetChanged();
+        }
+    };
+
+    /**
+     * The onClickListener used to expand or collapse the action buttons section for a call log
+     * entry.
+     */
+    private final View.OnClickListener mExpandCollapseListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            expandOrCollapseActions((View) v.getParent().getParent());
+            notifyDataSetChanged();
         }
     };
 
@@ -251,14 +293,13 @@ public class CallLogAdapter extends GroupingListAdapter
     };
 
     public CallLogAdapter(Context context, CallFetcher callFetcher,
-            ContactInfoHelper contactInfoHelper, boolean showSecondaryActionButton,
+            ContactInfoHelper contactInfoHelper,
             boolean isCallLog) {
         super(context);
 
         mContext = context;
         mCallFetcher = callFetcher;
         mContactInfoHelper = contactInfoHelper;
-        mShowSecondaryActionButton = showSecondaryActionButton;
         mIsCallLog = isCallLog;
 
         mContactInfoCache = ExpirableCache.create(CONTACT_INFO_CACHE_SIZE);
@@ -512,8 +553,6 @@ public class CallLogAdapter extends GroupingListAdapter
     private void findAndCacheViews(View view) {
         // Get the views to bind to.
         CallLogListItemViews views = CallLogListItemViews.fromView(view);
-        views.primaryActionView.setOnClickListener(mActionListener);
-        views.secondaryActionButtonView.setOnClickListener(mActionListener);
         view.setTag(views);
     }
 
@@ -537,36 +576,55 @@ public class CallLogAdapter extends GroupingListAdapter
         final long duration = c.getLong(CallLogQuery.DURATION);
         final int callType = c.getInt(CallLogQuery.CALL_TYPE);
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
+        final long rowId = c.getLong(CallLogQuery.ID);
+        views.rowId = rowId;
+
+        // Store some values used when the actions ViewStub is inflated on expansion of the actions
+        // section.
+        views.number = number;
+        views.numberPresentation = numberPresentation;
+        views.callType = callType;
+        views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
+        // Stash away the Ids of the calls so that we can support deleting a row in the call log.
+        views.callIds = getCallIds(c, rowId, count);
 
         final ContactInfo cachedContactInfo = getContactInfoFromCallLog(c);
 
         final boolean isVoicemailNumber =
                 PhoneNumberUtilsWrapper.INSTANCE.isVoicemailNumber(number);
 
-        // Primary action is always to call, if possible.
-        if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
-            // Sets the primary action to call the number.
-            views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number));
-        } else {
-            views.primaryActionView.setTag(null);
-        }
+        // Where binding and not in the call log, use default behaviour of invoking a call when
+        // tapping the primary view.
+        if (!mIsCallLog) {
+            views.primaryActionView.setOnClickListener(this.mActionListener);
 
-        if ( mShowSecondaryActionButton ) {
-            // Store away the voicemail information so we can play it directly.
-            if (callType == Calls.VOICEMAIL_TYPE) {
-                String voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
-                final long rowId = c.getLong(CallLogQuery.ID);
-                views.secondaryActionButtonView.setTag(
-                        IntentProvider.getPlayVoicemailIntentProvider(rowId, voicemailUri));
+            // Set return call intent, otherwise null.
+            if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
+                // Sets the primary action to call the number.
+                views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number));
             } else {
-                // Store the call details information.
-                views.secondaryActionButtonView.setTag(
-                        IntentProvider.getCallDetailIntentProvider(
-                                getCursor(), c.getPosition(), c.getLong(CallLogQuery.ID), count));
+                // Number is not callable, so hide button.
+                views.primaryActionView.setTag(null);
             }
         } else {
-            // No action enabled.
-            views.secondaryActionButtonView.setTag(null);
+            // In the call log, expand/collapse an actions section for the call log entry when
+            // the primary view is tapped.
+
+            // TODO: This needs to be changed to do the proper QP open/close animation.
+            views.primaryActionView.setOnClickListener(this.mExpandCollapseListener);
+
+            // Note: Binding of the action buttons is done as required in configureActionViews
+            // when the user expands the actions ViewStub.
+        }
+
+        // Restore expansion state of the row on rebind.  Inflate the actions ViewStub if required,
+        // and set its visibility state accordingly.
+        if (isExpanded(rowId)) {
+            // Inflate the view stub if necessary, and wire up the event handlers.
+            inflateActionViewStub(view);
+            views.actionsView.setVisibility(View.VISIBLE);
+        } else if (views.actionsView != null) {
+            views.actionsView.setVisibility(View.GONE);
         }
 
         // Lookup contacts with this number
@@ -631,8 +689,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final boolean isNew = c.getInt(CallLogQuery.IS_READ) == 0;
         // New items also use the highlighted version of the text.
         final boolean isHighlighted = isNew;
-        mCallLogViewsHelper.setPhoneCallDetails(views, details, isHighlighted,
-                mShowSecondaryActionButton);
+        mCallLogViewsHelper.setPhoneCallDetails(views, details, isHighlighted);
 
         int contactType = ContactPhotoManager.TYPE_DEFAULT;
 
@@ -666,6 +723,130 @@ public class CallLogAdapter extends GroupingListAdapter
         }
 
         bindBadge(view, info, details, callType);
+    }
+
+    /**
+     * Determines if a call log row with the given Id is expanded to show the action buttons or
+     * not. If the row Id is not yet tracked, add a new entry assuming the row is collapsed.
+     * @param rowId
+     * @return
+     */
+    private boolean isExpanded(long rowId) {
+        if (!mIsExpanded.containsKey(rowId)) {
+            mIsExpanded.put(rowId, false);
+        }
+
+        return mIsExpanded.get(rowId);
+    }
+
+    /**
+     * Toggles the expansion state tracked for the call log row identified by rowId and returns
+     * the new expansion state.
+     *
+     * @param rowId The row Id associated with the call log row to expand/collapse.
+     * @return True where the row is now expanded, false otherwise.
+     */
+    private boolean toggleExpansion(long rowId) {
+        boolean isExpanded = isExpanded(rowId);
+
+        mIsExpanded.put(rowId, !isExpanded);
+        return !isExpanded;
+    }
+
+    /**
+     * Expands or collapses the view containing the CALLBACK, VOICEMAIL and DELETE action buttons.
+     *
+     * @param callLogItem The call log entry parent view.
+     */
+    private void expandOrCollapseActions(View callLogItem) {
+        final CallLogListItemViews views = (CallLogListItemViews)callLogItem.getTag();
+
+        // Hide or show the actions view.
+        boolean expanded = toggleExpansion(views.rowId);
+
+        // Inflate the view stub if necessary, and wire up the event handlers.
+        inflateActionViewStub(callLogItem);
+
+        if (expanded) {
+            views.actionsView.setVisibility(View.VISIBLE);
+
+            // Attempt to give accessibility focus to one of the action buttons.
+            // This ensures that a user realizes the expansion occurred.
+            // NOTE(tgunn): requestAccessibilityFocus returns true if the requested
+            // focus was successful.  The first successful focus will satisfy the OR
+            // block and block further attempts to set focus.
+            boolean focused = views.callBackButtonView.requestAccessibilityFocus() ||
+                    views.voicemailButtonView.requestAccessibilityFocus() ||
+                    views.deleteButtonView.requestAccessibilityFocus();
+        } else {
+            views.actionsView.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Configures the action buttons in the expandable actions ViewStub.  The ViewStub is not
+     * inflated during initial binding, so click handlers, tags and accessibility text must be set
+     * here, if necessary.
+     *
+     * @param callLogItem The call log list item view.
+     */
+    private void inflateActionViewStub(View callLogItem) {
+        final CallLogListItemViews views = (CallLogListItemViews)callLogItem.getTag();
+
+        ViewStub stub = (ViewStub)callLogItem.findViewById(R.id.call_log_entry_actions_stub);
+        if (stub != null) {
+            views.actionsView = stub.inflate();
+        }
+
+        if (views.callBackButtonView == null) {
+            views.callBackButtonView = (TextView)views.actionsView.findViewById(R.id.call_back_action);
+        }
+
+        if (views.voicemailButtonView == null) {
+            views.voicemailButtonView = (TextView)views.actionsView.findViewById(R.id.voicemail_action);
+        }
+
+        if ( views.deleteButtonView == null) {
+            views.deleteButtonView = (TextView)views.actionsView.findViewById(R.id.delete_action);
+        }
+
+        bindActionButtons(views);
+    }
+
+    /***
+     * Binds click handlers and intents to the voicemail, delete and callback action buttons.
+     *
+     * @param views  The call log item views.
+     */
+    private void bindActionButtons(CallLogListItemViews views) {
+        // Set return call intent, otherwise null.
+        if (PhoneNumberUtilsWrapper.canPlaceCallsTo(views.number, views.numberPresentation)) {
+            // Sets the primary action to call the number.
+            views.callBackButtonView.setTag(
+                    IntentProvider.getReturnCallIntentProvider(views.number));
+            views.callBackButtonView.setVisibility(View.VISIBLE);
+            views.callBackButtonView.setOnClickListener(mActionListener);
+        } else {
+            // Number is not callable, so hide button.
+            views.callBackButtonView.setTag(null);
+            views.callBackButtonView.setVisibility(View.GONE);
+        }
+
+        // For voicemail calls, show the "VOICEMAIL" action button; hide otherwise.
+        if (views.callType == Calls.VOICEMAIL_TYPE) {
+            views.voicemailButtonView.setOnClickListener(mActionListener);
+            views.voicemailButtonView.setTag(
+                    IntentProvider.getPlayVoicemailIntentProvider(
+                            views.rowId, views.voicemailUri));
+            views.voicemailButtonView.setVisibility(View.VISIBLE);
+        } else {
+            views.voicemailButtonView.setTag(null);
+            views.voicemailButtonView.setVisibility(View.GONE);
+        }
+
+        views.deleteButtonView.setOnClickListener(this.mDeleteListener);
+
+        mCallLogViewsHelper.setActionContentDescriptions(views);
     }
 
     protected void bindBadge(View view, ContactInfo info, PhoneCallDetails details, int callType) {
@@ -959,5 +1140,77 @@ public class CallLogAdapter extends GroupingListAdapter
             number = matchingNumber;
         }
         return number;
+    }
+
+    /**
+     * Retrieves the call Ids represented by the current call log row.
+     *
+     * @param cursor Call log cursor to retrieve call Ids from.
+     * @param id Id of the first call of the grouping.
+     * @param groupSize Number of calls associated with the current call log row.
+     * @return Array of call Ids.
+     */
+    private long[] getCallIds(final Cursor cursor, final long id, final int groupSize) {
+        // We want to restore the position in the cursor at the end.
+        int startingPosition = cursor.getPosition();
+        long[] ids = new long[groupSize];
+        // Copy the ids of the rows in the group.
+        for (int index = 0; index < groupSize; ++index) {
+            ids[index] = cursor.getLong(CallLogQuery.ID);
+            cursor.moveToNext();
+        }
+        cursor.moveToPosition(startingPosition);
+        return ids;
+    }
+
+    /**
+     * Retrieves an instance of the asynchronous task executor, creating one if required.
+     * @return The {@link com.android.dialer.util.AsyncTaskExecutor}
+     */
+    private AsyncTaskExecutor getTaskExecutor() {
+        if (mAsyncTaskExecutor == null) {
+            mAsyncTaskExecutor = AsyncTaskExecutors.createAsyncTaskExecutor();
+        }
+        return mAsyncTaskExecutor;
+    }
+
+    /**
+     * Deletes the calls specified in the callIds array, asynchronously.
+     *
+     * @param callIds Ids of calls to be deleted.
+     */
+    private void deleteCalls(long[] callIds) {
+        if (callIds == null) {
+            return;
+        }
+
+        // Build comma separated list of ids to delete.
+        final StringBuilder callIdString = new StringBuilder();
+        for (long callId : callIds) {
+            if (callIdString.length() != 0) {
+                callIdString.append(",");
+            }
+            callIdString.append(callId);
+        }
+
+        // Perform removal of call log entries asynchronously.
+        getTaskExecutor().submit(Tasks.REMOVE_CALL_LOG_ENTRIES,
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    public Void doInBackground(Void... params) {
+                        // Issue delete.
+                        mContext.getContentResolver().delete(Calls.CONTENT_URI_WITH_VOICEMAIL,
+                                Calls._ID + " IN (" + callIdString + ")", null);
+                        return null;
+                    }
+
+                    @Override
+                    public void onPostExecute(Void result) {
+                        // Somewhere went wrong: we're going to bail out and show error to users.
+                        Toast.makeText(mContext, R.string.toast_entry_removed,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 }
