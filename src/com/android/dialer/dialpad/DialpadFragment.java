@@ -374,6 +374,7 @@ public class DialpadFragment extends Fragment
         Resources r = getResources();
 
         mDialpadView = (DialpadView) fragmentView.findViewById(R.id.dialpad_view);
+        mDialpadView.setCanDigitsBeEdited(true);
         mDigits = mDialpadView.getDigits();
         mDigits.setKeyListener(UnicodeDialerKeyListener.INSTANCE);
         mDigits.setOnClickListener(this);
