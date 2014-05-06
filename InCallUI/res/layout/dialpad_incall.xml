@@ -46,7 +46,7 @@
     </TableRow>
 
     <TableRow style="@style/InCallDialpadTableRowStyle">
-        <com.android.dialer.dialpad.DialpadKeyButton
+        <com.android.contacts.common.dialpad.DialpadKeyButton
             android:id="@+id/star"
             style="@style/InCallDialpadKeyButtonStyle">
             <LinearLayout
@@ -59,9 +59,9 @@
                     android:layout_height="match_parent"
                     android:layout_width="@dimen/dialpad_key_letters_width" />
             </LinearLayout>
-        </com.android.dialer.dialpad.DialpadKeyButton>
+        </com.android.contacts.common.dialpad.DialpadKeyButton>
         <include layout="@layout/dialpad_key_incall" android:id="@+id/zero"/>
-        <com.android.dialer.dialpad.DialpadKeyButton
+        <com.android.contacts.common.dialpad.DialpadKeyButton
             android:id="@+id/pound"
             style="@style/InCallDialpadKeyButtonStyle">
             <LinearLayout
@@ -74,6 +74,6 @@
                     android:layout_height="match_parent"
                     android:layout_width="@dimen/dialpad_key_letters_width" />
             </LinearLayout>
-        </com.android.dialer.dialpad.DialpadKeyButton>
+        </com.android.contacts.common.dialpad.DialpadKeyButton>
     </TableRow>
 </TableLayout>
