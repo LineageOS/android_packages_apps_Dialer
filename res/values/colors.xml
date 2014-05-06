@@ -42,7 +42,7 @@
     <color name="background_dialer_light">#ffffff</color>
 
     <!-- Background color of dialer list items (contacts, call log entries) -->
-    <color name="background_dialer_list_items">#ffffff</color>
+    <color name="background_dialer_list_items">#fbfbfb</color>
 
     <!-- Dark variant of the action bar color. -->
     <color name="actionbar_background_color_dark">#008aa1</color>
@@ -93,4 +93,14 @@
     <!-- Color of action bar text. Ensure this stays in sync with packages/Telephony
          phone_settings_actionbar_text_color-->
     <color name="actionbar_text_color">#FFFFFF</color>
+
+    <!-- Color of actions in expanded call log entries.  This text color represents actions such
+         as call back, play voicemail, etc. -->
+    <color name="call_log_action_text">#1dc7db</color>
+
+    <!-- Color of the "delete" action in expanded call log entries. -->
+    <color name="call_log_action_delete_text">#ff4f4f</color>
+
+    <!-- Color of action text for expanded call log entries which is disabled. -->
+    <color name="call_log_disabled_text">#b3b3b3</color>
 </resources>

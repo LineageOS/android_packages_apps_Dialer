@@ -35,6 +35,7 @@ import android.telephony.TelephonyManager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.test.suitebuilder.annotation.MediumTest;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -174,7 +175,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         insertPrivate(NOW, 0);
         View view = mAdapter.newGroupView(getActivity(), mParentView);
         mAdapter.bindGroupView(view, getActivity(), mCursor, 3, false);
-        assertNotNull(view.findViewById(R.id.secondary_action_icon));
     }
 
     @MediumTest
@@ -183,7 +183,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         insertPrivate(NOW, 0);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
-        assertNotNull(view.findViewById(R.id.secondary_action_icon));
     }
 
     @MediumTest
@@ -192,7 +191,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         insertPrivate(NOW, 0);
         View view = mAdapter.newChildView(getActivity(), mParentView);
         mAdapter.bindChildView(view, getActivity(), mCursor);
-        assertNotNull(view.findViewById(R.id.secondary_action_icon));
     }
 
     @MediumTest
@@ -328,7 +326,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         // {@link com.android.dialer.calllog.CallLogAdapter#bindView} method.  If it is possible
         // to place a call to the phone number, a call intent will have been created for the
         // primaryActionView.
-        IntentProvider intentProvider = (IntentProvider) views.primaryActionView.getTag();
+        IntentProvider intentProvider = (IntentProvider) views.callBackButtonView.getTag();
         Intent intent = intentProvider.getIntent(mActivity);
         // Starts a call.
         assertEquals(Intent.ACTION_CALL_PRIVILEGED, intent.getAction());
@@ -344,7 +342,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mAdapter.bindStandAloneView(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
-        IntentProvider intentProvider = (IntentProvider) views.secondaryActionButtonView.getTag();
+        IntentProvider intentProvider = (IntentProvider) views.voicemailButtonView.getTag();
         Intent intent = intentProvider.getIntent(mActivity);
         // Starts the call detail activity.
         assertEquals(new ComponentName(mActivity, CallDetailActivity.class),
@@ -384,12 +382,12 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
             if (presentation == Calls.PRESENTATION_RESTRICTED ||
                     presentation == Calls.PRESENTATION_UNKNOWN) {
                 //If number is not callable, the primary action view should have a null tag.
-                assertNull(mItem.primaryActionView.getTag());
+                assertNull(mItem.callBackButtonView.getTag());
             } else {
                 //If the number is callable, the primary action view should have a non-null tag.
-                assertNotNull(mItem.primaryActionView.getTag());
+                assertNotNull(mItem.callBackButtonView.getTag());
 
-                IntentProvider intentProvider = (IntentProvider)mItem.primaryActionView.getTag();
+                IntentProvider intentProvider = (IntentProvider)mItem.callBackButtonView.getTag();
                 Intent callIntent = intentProvider.getIntent(mActivity);
 
                 //The intent should be to make the call
@@ -650,10 +648,9 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     /** Asserts that the label text view contains the given text. */
     private void assertLabel(CallLogListItemViews views, CharSequence number,
             CharSequence label) {
-        assertEquals(label == null ? View.GONE : View.VISIBLE,
-                views.phoneCallDetailsViews.labelView.getVisibility());
         if (label != null) {
-            assertEquals(label, views.phoneCallDetailsViews.labelView.getText().toString());
+            assertTrue(views.phoneCallDetailsViews.callLocationAndDate.getText().toString()
+                    .contains(label));
         }
     }
 }

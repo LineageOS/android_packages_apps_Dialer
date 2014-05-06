@@ -66,8 +66,7 @@
             android:layout_height="match_parent"
             android:fadingEdge="none"
             android:scrollbarStyle="outsideOverlay"
-            android:divider="@color/favorite_contacts_separator_color"
-            android:dividerHeight="1dp"
+            android:divider="@null"
         />
         <TextView android:id="@android:id/empty"
             android:layout_width="match_parent"
