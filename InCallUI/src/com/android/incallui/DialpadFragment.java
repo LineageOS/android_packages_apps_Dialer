@@ -17,7 +17,6 @@
 package com.android.incallui;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.method.DialerKeyListener;
@@ -31,8 +30,10 @@ import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.android.contacts.common.dialpad.DialpadKeyButton;
+import com.android.contacts.common.dialpad.DialpadView;
 
 import java.util.HashMap;
 
@@ -123,6 +124,8 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
 
     // KeyListener used with the "dialpad digits" EditText widget.
     private DTMFKeyListener mDialerKeyListener;
+
+    private DialpadView mDialpadView;
 
     /**
      * Our own key listener, specialized for dealing with DTMF codes.
@@ -432,15 +435,18 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
             Bundle savedInstanceState) {
         final View parent = inflater.inflate(
                 com.android.incallui.R.layout.dtmf_twelve_key_dialer_view, container, false);
-        mDtmfDialerField = (EditText) parent.findViewById(R.id.dtmfDialerField);
+        mDialpadView = (DialpadView) parent.findViewById(R.id.dialpad_view);
+        mDialpadView.setCanDigitsBeEdited(false);
+        mDialpadView.setBackgroundResource(R.color.incall_dialpad_background);
+        mDtmfDialerField = (EditText) parent.findViewById(R.id.digits);
         if (mDtmfDialerField != null) {
             mDialerKeyListener = new DTMFKeyListener();
             mDtmfDialerField.setKeyListener(mDialerKeyListener);
             // remove the long-press context menus that support
             // the edit (copy / paste / select) functions.
             mDtmfDialerField.setLongClickable(false);
-
-            setupKeypad(parent);
+            mDtmfDialerField.setElegantTextHeight(false);
+            configureKeypadListeners(mDialpadView);
         }
 
         final ViewTreeObserver vto = parent.getViewTreeObserver();
@@ -523,43 +529,17 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         }
     }
 
-    private void setupKeypad(View fragmentView) {
+    private void configureKeypadListeners(View fragmentView) {
         final int[] buttonIds = new int[] {R.id.zero, R.id.one, R.id.two, R.id.three, R.id.four,
                 R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.star, R.id.pound};
-
-        final int[] numberIds = new int[] {R.string.dialpad_0_number, R.string.dialpad_1_number,
-                R.string.dialpad_2_number, R.string.dialpad_3_number, R.string.dialpad_4_number,
-                R.string.dialpad_5_number, R.string.dialpad_6_number, R.string.dialpad_7_number,
-                R.string.dialpad_8_number, R.string.dialpad_9_number, R.string.dialpad_star_number,
-                R.string.dialpad_pound_number};
-
-        final int[] letterIds = new int[] {R.string.dialpad_0_letters, R.string.dialpad_1_letters,
-                R.string.dialpad_2_letters, R.string.dialpad_3_letters, R.string.dialpad_4_letters,
-                R.string.dialpad_5_letters, R.string.dialpad_6_letters, R.string.dialpad_7_letters,
-                R.string.dialpad_8_letters, R.string.dialpad_9_letters,
-                R.string.dialpad_star_letters, R.string.dialpad_pound_letters};
-
-        final Resources resources = getResources();
-
-        View button;
-        TextView numberView;
-        TextView lettersView;
-
+        DialpadKeyButton dialpadKey;
         for (int i = 0; i < buttonIds.length; i++) {
-            button = fragmentView.findViewById(buttonIds[i]);
-            button.setOnTouchListener(this);
-            button.setClickable(true);
-            button.setOnKeyListener(this);
-            button.setOnHoverListener(this);
-            button.setOnClickListener(this);
-            numberView = (TextView) button.findViewById(R.id.dialpad_key_number);
-            lettersView = (TextView) button.findViewById(R.id.dialpad_key_letters);
-            final String numberString = resources.getString(numberIds[i]);
-            numberView.setText(numberString);
-            button.setContentDescription(numberString);
-            if (lettersView != null) {
-                lettersView.setText(resources.getString(letterIds[i]));
-            }
+            dialpadKey = (DialpadKeyButton) fragmentView.findViewById(buttonIds[i]);
+            dialpadKey.setBackgroundResource(R.drawable.incall_dialpad_key_colors);
+            dialpadKey.setOnTouchListener(this);
+            dialpadKey.setOnKeyListener(this);
+            dialpadKey.setOnHoverListener(this);
+            dialpadKey.setOnClickListener(this);
         }
     }
 }
