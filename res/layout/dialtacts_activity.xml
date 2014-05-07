@@ -103,4 +103,15 @@
             android:src="@drawable/ic_dial_action_call"
             android:visibility="gone" />
     </FrameLayout>
+    <!-- Host container for the contact tile drag shadow -->
+    <FrameLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <ImageView
+            android:id="@+id/contact_tile_drag_shadow_overlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:importantForAccessibility="no" />
+    </FrameLayout>
 </RelativeLayout>

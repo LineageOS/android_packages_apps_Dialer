@@ -59,6 +59,7 @@ public class PhoneFavoriteListView extends GridView implements OnDragDropListene
 
     private Bitmap mDragShadowBitmap;
     private ImageView mDragShadowOverlay;
+    private View mDragShadowParent;
     private int mAnimationDuration;
 
     final int[] mLocationOnScreen = new int[2];
@@ -190,6 +191,7 @@ public class PhoneFavoriteListView extends GridView implements OnDragDropListene
 
     public void setDragShadowOverlay(ImageView overlay) {
         mDragShadowOverlay = overlay;
+        mDragShadowParent = (View) mDragShadowOverlay.getParent();
     }
 
     /**
@@ -230,10 +232,21 @@ public class PhoneFavoriteListView extends GridView implements OnDragDropListene
             return;
         }
 
-        // Square tile is relative to the contact tile,
-        // and contact tile is relative to this list view.
-        mDragShadowLeft = tileView.getLeft();
-        mDragShadowTop = tileView.getTop();
+        tileView.getLocationOnScreen(mLocationOnScreen);
+        mDragShadowLeft = mLocationOnScreen[0];
+        mDragShadowTop = mLocationOnScreen[1];
+
+        // x and y are the coordinates of the on-screen touch event. Using these
+        // and the on-screen location of the tileView, calculate the difference between
+        // the position of the user's finger and the position of the tileView. These will
+        // be used to offset the location of the drag shadow so that it appears that the
+        // tileView is positioned directly under the user's finger.
+        mTouchOffsetToChildLeft = x - mDragShadowLeft;
+        mTouchOffsetToChildTop = y - mDragShadowTop;
+
+        mDragShadowParent.getLocationOnScreen(mLocationOnScreen);
+        mDragShadowLeft -= mLocationOnScreen[0];
+        mDragShadowTop -= mLocationOnScreen[1];
 
         mDragShadowOverlay.setImageBitmap(mDragShadowBitmap);
         mDragShadowOverlay.setVisibility(VISIBLE);
@@ -241,19 +254,14 @@ public class PhoneFavoriteListView extends GridView implements OnDragDropListene
 
         mDragShadowOverlay.setX(mDragShadowLeft);
         mDragShadowOverlay.setY(mDragShadowTop);
-
-        // x and y passed in are the coordinates of where the user has touched down,
-        // calculate the offset to the top left coordinate of the dragged child.  This
-        // will be used for drawing the drag shadow.
-        mTouchOffsetToChildLeft = x - mDragShadowLeft;
-        mTouchOffsetToChildTop = y - mDragShadowTop;
     }
 
     @Override
     public void onDragHovered(int x, int y, PhoneFavoriteSquareTileView tileView) {
         // Update the drag shadow location.
-        mDragShadowLeft = x - mTouchOffsetToChildLeft;
-        mDragShadowTop = y - mTouchOffsetToChildTop;
+        mDragShadowParent.getLocationOnScreen(mLocationOnScreen);
+        mDragShadowLeft = x - mTouchOffsetToChildLeft - mLocationOnScreen[0];
+        mDragShadowTop = y - mTouchOffsetToChildTop - mLocationOnScreen[1];
         // Draw the drag shadow at its last known location if the drag shadow exists.
         if (mDragShadowOverlay != null) {
             mDragShadowOverlay.setX(mDragShadowLeft);
@@ -263,10 +271,6 @@ public class PhoneFavoriteListView extends GridView implements OnDragDropListene
 
     @Override
     public void onDragFinished(int x, int y) {
-        // Update the drag shadow location.
-        mDragShadowLeft = x - mTouchOffsetToChildLeft;
-        mDragShadowTop = y - mTouchOffsetToChildTop;
-
         if (mDragShadowOverlay != null) {
             mDragShadowOverlay.clearAnimation();
             mDragShadowOverlay.animate().alpha(0.0f)
