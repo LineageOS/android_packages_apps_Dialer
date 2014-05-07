@@ -33,11 +33,13 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.android.dialer.R;
+import com.android.dialer.list.DragDropController.DragItemContainer;
 
 /**
  * Viewgroup that presents the user's speed dial contacts in a grid.
  */
-public class PhoneFavoriteListView extends GridView implements OnDragDropListener {
+public class PhoneFavoriteListView extends GridView implements OnDragDropListener,
+        DragItemContainer {
 
     public static final String LOG_TAG = PhoneFavoriteListView.class.getSimpleName();
 
@@ -59,6 +61,8 @@ public class PhoneFavoriteListView extends GridView implements OnDragDropListene
     private ImageView mDragShadowOverlay;
     private int mAnimationDuration;
 
+    final int[] mLocationOnScreen = new int[2];
+
     // X and Y offsets inside the item from where the user grabbed to the
     // child's left coordinate. This is used to aid in the drawing of the drag shadow.
     private int mTouchOffsetToChildLeft;
@@ -67,7 +71,7 @@ public class PhoneFavoriteListView extends GridView implements OnDragDropListene
     private int mDragShadowLeft;
     private int mDragShadowTop;
 
-    private DragDropController mDragDropController = new DragDropController();
+    private DragDropController mDragDropController = new DragDropController(this);
 
     private final float DRAG_SHADOW_ALPHA = 0.7f;
 
@@ -138,39 +142,20 @@ public class PhoneFavoriteListView extends GridView implements OnDragDropListene
     }
 
     @Override
-    public boolean dispatchDragEvent(DragEvent event) {
+    public boolean onDragEvent(DragEvent event) {
         final int action = event.getAction();
         final int eX = (int) event.getX();
         final int eY = (int) event.getY();
         switch (action) {
             case DragEvent.ACTION_DRAG_STARTED: {
-                final int[] coordinates = new int[2];
-                getLocationOnScreen(coordinates);
-                // Calculate the X and Y coordinates of the drag event relative to the view
-                final int viewX = eX - coordinates[0];
-                final int viewY = eY - coordinates[1];
-                final View child = getViewAtPosition(viewX, viewY);
-
-                if (!(child instanceof PhoneFavoriteSquareTileView)) {
-                    // Bail early.
-                    return false;
-                }
-
-                final PhoneFavoriteSquareTileView tile = (PhoneFavoriteSquareTileView) child;
-                if (!mDragDropController.handleDragStarted(viewX, viewY, tile)) {
+                if (!mDragDropController.handleDragStarted(eX, eY)) {
                     return false;
                 }
                 break;
             }
             case DragEvent.ACTION_DRAG_LOCATION:
                 mLastDragY = eY;
-                final View child = getViewAtPosition(eX, eY);
-
-                PhoneFavoriteSquareTileView tile = null;
-                if (child instanceof PhoneFavoriteSquareTileView) {
-                    tile = (PhoneFavoriteSquareTileView) child;
-                }
-                mDragDropController.handleDragHovered(eX, eY, tile);
+                mDragDropController.handleDragHovered(this, eX, eY);
                 // Kick off {@link #mScrollHandler} if it's not started yet.
                 if (!mIsDragScrollerRunning &&
                         // And if the distance traveled while dragging exceeds the touch slop
@@ -312,5 +297,20 @@ public class PhoneFavoriteListView extends GridView implements OnDragDropListene
         view.setDrawingCacheEnabled(false);
 
         return bitmap;
+    }
+
+    @Override
+    public PhoneFavoriteSquareTileView getViewForLocation(int x, int y) {
+        getLocationOnScreen(mLocationOnScreen);
+        // Calculate the X and Y coordinates of the drag event relative to the view
+        final int viewX = x - mLocationOnScreen[0];
+        final int viewY = y - mLocationOnScreen[1];
+        final View child = getViewAtPosition(viewX, viewY);
+
+        if (!(child instanceof PhoneFavoriteSquareTileView)) {
+            return null;
+        }
+
+        return (PhoneFavoriteSquareTileView) child;
     }
 }

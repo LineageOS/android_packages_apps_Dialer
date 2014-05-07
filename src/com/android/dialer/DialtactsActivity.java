@@ -44,10 +44,12 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnDragListener;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -184,9 +186,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private String mPendingSearchViewQuery;
 
-    // This view points to the Framelayout that houses both the search view and remove view
-    // containers.
-    private View mSearchAndRemoveViewContainer;
     private EditText mSearchView;
     private View mSearchViewCloseButton;
     private View mVoiceSearchButton;
@@ -195,13 +194,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * If the user releases a contact when hovering on top of this, the contact is unfavorited and
      * removed from the speed dial list.
      */
-    private RemoveView mRemoveViewContainer;
+    private View mRemoveViewContainer;
 
     final Interpolator hideActionBarInterpolator = new AccelerateInterpolator(1.5f);
     final Interpolator showActionBarInterpolator = new DecelerateInterpolator(1.5f);
     private String mSearchQuery;
 
     private DialerDatabaseHelper mDialerDatabaseHelper;
+    private DragDropController mDragDropController;
 
     private class OverflowPopupMenu extends PopupMenu {
         public OverflowPopupMenu(Context context, View anchor) {
@@ -215,6 +215,21 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             // TODO: Check mSpeedDialFragment.hasFrequents()
             clearFrequents.setVisible(true);
             super.show();
+        }
+    }
+
+    /**
+     * Listener that listens to drag events and sends their x and y coordinates to a
+     * {@link DragDropController}.
+     */
+    private class LayoutOnDragListener implements OnDragListener {
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
+            if (event.getAction() == DragEvent.ACTION_DRAG_LOCATION) {
+                mDragDropController.handleDragHovered(v, (int) event.getX(),
+                        (int) event.getY());
+            }
+            return true;
         }
     }
 
@@ -362,11 +377,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mDialpadButton = findViewById(R.id.dialpad_button);
         mDialpadButton.setOnClickListener(this);
 
-        mRemoveViewContainer = (RemoveView) findViewById(R.id.remove_view_container);
-        mSearchAndRemoveViewContainer = findViewById(R.id.search_and_remove_view_container);
+        mRemoveViewContainer = findViewById(R.id.remove_view_container);
 
         mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
         SmartDialPrefix.initializeNanpSettings(this);
+
+        findViewById(R.id.dialtacts_mainlayout).setOnDragListener(new LayoutOnDragListener());
     }
 
     @Override
@@ -573,13 +589,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ft.hide(mDialpadFragment);
         ft.commit();
     }
-
-    final AnimatorListener mHideListener = new AnimatorListenerAdapter() {
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            mSearchAndRemoveViewContainer.setVisibility(View.GONE);
-        }
-    };
 
     private boolean getInSearchUi() {
         return mInDialpadSearch || mInRegularSearch;
@@ -936,11 +945,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView view) {
         getActionBar().hide();
-        mSearchAndRemoveViewContainer.setVisibility(View.VISIBLE);
+        mRemoveViewContainer.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void onDragHovered(int x, int y, PhoneFavoriteSquareTileView view) {}
+    public void onDragHovered(int x, int y, PhoneFavoriteSquareTileView view) {
+    }
 
     /**
      * Called when the user has released a contact tile after long-pressing it.
@@ -948,7 +958,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onDragFinished(int x, int y) {
         getActionBar().show();
-        mSearchAndRemoveViewContainer.setVisibility(View.GONE);
+        mRemoveViewContainer.setVisibility(View.GONE);
     }
 
     @Override
@@ -960,7 +970,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     @Override
     public void setDragDropController(DragDropController dragController) {
-        mRemoveViewContainer.setDragDropController(dragController);
+        mDragDropController = dragController;
+        ((RemoveView) findViewById(R.id.remove_view))
+                .setDragDropController(dragController);
     }
 
     @Override
