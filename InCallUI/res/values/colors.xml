@@ -55,6 +55,8 @@
 
     <!-- Button background color. -->
     <color name="button_background_color">@color/incall_background_color</color>
+    <color name="button_selected_color">#00acc1</color>
+
 
     <!-- Background color of action bars -->
     <color name="actionbar_background_color">#3B77E7</color>

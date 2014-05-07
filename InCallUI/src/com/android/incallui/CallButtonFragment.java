@@ -50,7 +50,6 @@ public class CallButtonFragment
     private ImageButton mAddCallButton;
     private ImageButton mSwapButton;
     private ImageButton mAuxiliaryActionButton;
-    private View mAuxiliaryActionSpacer;
 
     private PopupMenu mAudioModePopup;
     private boolean mAudioModePopupVisible;
@@ -133,7 +132,6 @@ public class CallButtonFragment
         mSwapButton.setOnClickListener(this);
         mAuxiliaryActionButton = (ImageButton) parent.findViewById(R.id.auxiliaryActionButton);
         mAuxiliaryActionButton.setOnClickListener(this);
-        mAuxiliaryActionSpacer = parent.findViewById(R.id.auxiliaryActionSpacer);
 
         return parent;
     }
@@ -522,7 +520,6 @@ public class CallButtonFragment
     @Override
     public void updateAuxiliaryActionButton(boolean show, String description, Drawable drawable) {
         mAuxiliaryActionButton.setVisibility(show ? View.VISIBLE : View.GONE);
-        mAuxiliaryActionSpacer.setVisibility(show ? View.VISIBLE : View.GONE);
         if (show) {
             mAuxiliaryActionButton.setContentDescription(description);
             mAuxiliaryActionButton.setImageDrawable(drawable);

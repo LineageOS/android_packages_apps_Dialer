@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
   ~ Copyright (C) 2014 The Android Open Source Project
   ~
@@ -15,10 +16,10 @@
   ~ limitations under the License
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="#ffeeff41" android:state_selected="true" />
-    <item android:color="#ffeeff41" android:state_pressed="true" />
-    <!-- 70% white. -->
-    <item android:color="#b3ffffff" />
-</selector>
-
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/button_selected_color" />
+        </shape>
+    </item>
+</layer-list>

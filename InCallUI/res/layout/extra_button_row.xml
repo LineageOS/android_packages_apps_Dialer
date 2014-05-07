@@ -30,8 +30,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/button_cluster_side_padding"
-        android:paddingEnd="@dimen/button_cluster_side_padding"
+        android:paddingStart="@dimen/button_cluster_horizontal_padding"
+        android:paddingEnd="@dimen/button_cluster_horizontal_padding"
         android:background="?android:attr/selectableItemBackground"
         android:visibility="gone">
         <!-- The entire LinearLayout here is clickable, so we don't
@@ -54,8 +54,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/button_cluster_side_padding"
-        android:paddingEnd="@dimen/button_cluster_side_padding"
+        android:paddingStart="@dimen/button_cluster_horizontal_padding"
+        android:paddingEnd="@dimen/button_cluster_horizontal_padding"
         android:background="?android:attr/selectableItemBackground"
         android:visibility="gone">
         <!-- The entire LinearLayout here is clickable, so we don't

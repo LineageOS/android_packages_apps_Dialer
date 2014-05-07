@@ -48,7 +48,7 @@
     <dimen name="call_banner_name_number_right_padding">50sp</dimen>
 
     <!-- Height of the main row of in-call buttons. -->
-    <dimen name="in_call_button_height">76dp</dimen>
+    <dimen name="in_call_button_height">48dp</dimen>
 
     <!-- Width of buttons in the extra button row. -->
     <dimen name="extra_row_button_width">56dp</dimen>
@@ -65,7 +65,9 @@
          risk of false touches (from your finger wrapping around while
          holding the phone, *before* moving it up to your face and having
          the prox sensor kick in.) -->
-    <dimen name="button_cluster_side_padding">20dp</dimen>
+    <dimen name="button_cluster_horizontal_padding">20dp</dimen>
+    <dimen name="button_cluster_vertical_padding">4dp</dimen>
+    <dimen name="call_button_margin">4dp</dimen>
 
     <!-- Dimensions for OTA Call Card -->
     <dimen name="otaactivate_layout_marginTop">10dp</dimen>
