@@ -1,5 +1,8 @@
 package com.android.dialer.list;
 
+import android.util.Log;
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,27 +11,48 @@ import java.util.List;
  * off events to any OnDragDropListeners that have registered for callbacks.
  */
 public class DragDropController {
-    private List<OnDragDropListener> mOnDragDropListeners = new ArrayList<OnDragDropListener>();
+
+    private final List<OnDragDropListener> mOnDragDropListeners =
+            new ArrayList<OnDragDropListener>();
+    private final DragItemContainer mDragItemContainer;
+    private final int[] mLocationOnScreen = new int[2];
+
+    /**
+     * Callback interface used to retrieve views based on the current touch coordinates of the
+     * drag event. The {@link DragItemContainer} houses the draggable views that this
+     * {@link DragDropController} controls.
+     */
+    public interface DragItemContainer {
+        public PhoneFavoriteSquareTileView getViewForLocation(int x, int y);
+    }
+
+    public DragDropController(DragItemContainer dragItemContainer) {
+        mDragItemContainer = dragItemContainer;
+    }
 
     /**
      * @return True if the drag is started, false if the drag is cancelled for some reason.
      */
-    boolean handleDragStarted(int x, int y, PhoneFavoriteSquareTileView tileView) {
+    boolean handleDragStarted(int x, int y) {
+        final PhoneFavoriteSquareTileView tileView = mDragItemContainer.getViewForLocation(x, y);
         if (tileView == null) {
             return false;
         }
-        if (tileView != null && !mOnDragDropListeners.isEmpty()) {
-            for (int i = 0; i < mOnDragDropListeners.size(); i++) {
-                mOnDragDropListeners.get(i).onDragStarted(x, y, tileView);
-            }
+        for (int i = 0; i < mOnDragDropListeners.size(); i++) {
+            mOnDragDropListeners.get(i).onDragStarted(x, y, tileView);
         }
 
         return true;
     }
 
-    public void handleDragHovered(int x, int y, PhoneFavoriteSquareTileView view) {
+    public void handleDragHovered(View v, int x, int y) {
+        v.getLocationOnScreen(mLocationOnScreen);
+        final int screenX = x + mLocationOnScreen[0];
+        final int screenY = y + mLocationOnScreen[1];
+        final PhoneFavoriteSquareTileView view = mDragItemContainer.getViewForLocation(
+                screenX, screenY);
         for (int i = 0; i < mOnDragDropListeners.size(); i++) {
-            mOnDragDropListeners.get(i).onDragHovered(x, y, view);
+            mOnDragDropListeners.get(i).onDragHovered(screenX, screenY, view);
         }
     }
 
