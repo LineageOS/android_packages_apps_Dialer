@@ -54,6 +54,7 @@
     <style name="InCallButton">
         <item name="android:layout_width">0px</item>
         <item name="android:layout_height">@dimen/in_call_button_height</item>
+        <item name="android:layout_margin">@dimen/call_button_margin</item>
         <item name="android:layout_weight">1</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
@@ -66,12 +67,6 @@
     <style name="InCallCompoundButton" parent="InCallButton">
         <item name="android:textOn">@null</item>
         <item name="android:textOff">@null</item>
-    </style>
-
-    <style name="VerticalSeparator">
-        <item name="android:layout_width">2dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@color/button_background_color</item>
     </style>
 
     <!-- Buttons in extra button row. -->
@@ -124,59 +119,8 @@
         <item name="android:windowAnimationStyle">@style/InCallAnimationStyle</item>
     </style>
 
-    <style name="InCallDialpadTableRowStyle">
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_width">match_parent</item>
-    </style>
-
-    <style name="InCallDialpadKeyNumberStyle">
-        <item name="android:textColor">@color/actionbar_background_color</item>
-        <item name="android:textSize">@dimen/dialpad_key_numbers_size</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:layout_width">@dimen/dialpad_key_numbers_width</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="InCallDialpadKeyStarPoundStyle">
-        <item name="android:textColor">@color/dialpad_secondary_text_color</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:layout_width">@dimen/dialpad_key_numbers_width</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="InCallDialpadKeyLettersStyle">
-        <item name="android:textColor">@color/dialpad_secondary_text_color</item>
-        <item name="android:textSize">@dimen/dialpad_key_letters_size</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:layout_width">@dimen/dialpad_key_letters_width</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">@dimen/dialpad_number_to_letters_padding</item>
-    </style>
-
-    <style name="InCallDialpadKeyButtonStyle">
-        <item name="android:soundEffectsEnabled">false</item>
-        <item name="android:clickable">true</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/dialpad_key_height</item>
-        <item name="android:background">@drawable/incall_dialpad_key_colors</item>
-        <item name="android:focusable">true</item>
-    </style>
-
-    <style name="InCallDialpadKeyInternalLayoutStyle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
-    </style>
-
     <style name="PrimaryCallInfoPrimaryCallBanner">
         <item name="android:layout_alignParentTop">true</item>
-    </style>
-    <style name="PrimaryCallInfoSupplementaryInfoContainer">
-        <item name="android:layout_below">@id/primary_call_banner</item>
     </style>
 
     <style name="SecondaryCallInfoSecondaryCallName">

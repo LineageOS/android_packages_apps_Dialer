@@ -20,43 +20,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="1dip"
-    android:background="@color/incall_dialpad_background" >
+    android:layout_marginTop="1dip" >
 
     <view class="com.android.incallui.DialpadFragment$HoverIgnoringLinearLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-
-        <!-- Display of the digits you've typed so far.
-             This widget appears completely non-interactive to the user: you
-             can't edit or "hit backspace" since these are DTMF tones you've
-             already sent over the network.  But it's still an EditText rather
-             than a TextView because it needs to receive key events from a
-             hard keyboard, if present (see mDialerKeyListener). -->
-        <!-- Edit text background is fully transparent to get rid of its underline. -->
-        <EditText
-            android:id="@+id/dtmfDialerField"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:background="@null"
-            android:paddingEnd="12dp"
-            android:paddingStart="12dp"
-            android:singleLine="true"
-            android:scrollHorizontally="true"
-            android:gravity="center"
-            android:freezesText="true"
-            android:fontFamily="sans-serif-light"
-            android:textSize="@dimen/dialpad_digits_text_size"
-            android:textColor="@color/dialpad_digits_text_color"
-            android:focusableInTouchMode="false"
-            android:clickable="false"/>
-
-        <include layout="@layout/dialpad_incall"/>
+        <include layout="@layout/dialpad_view"/>
     </view>
 </view>

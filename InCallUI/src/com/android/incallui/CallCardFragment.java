@@ -16,20 +16,17 @@
 
 package com.android.incallui;
 
-import android.animation.LayoutTransition;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.telephony.DisconnectCause;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,14 +44,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mPhoneNumber;
     private TextView mNumberLabel;
     private TextView mPrimaryName;
-    private TextView mCallServiceLabel;
-    private ImageView mCallServiceIcon;
     private TextView mCallStateLabel;
     private TextView mCallTypeLabel;
     private ImageView mPhoto;
     private TextView mElapsedTime;
-    private ViewGroup mSupplementaryInfoContainer;
-    private Button mConnectionHandoffButton;
 
     // Secondary caller info
     private ViewStub mSecondaryCallInfo;
@@ -111,21 +104,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mNumberLabel = (TextView) view.findViewById(R.id.label);
         mSecondaryCallInfo = (ViewStub) view.findViewById(R.id.secondary_call_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
-        mCallServiceLabel = (TextView) view.findViewById(R.id.callServiceLabel);
-        mCallServiceIcon = (ImageView) view.findViewById(R.id.callServiceIcon);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mCallTypeLabel = (TextView) view.findViewById(R.id.callTypeLabel);
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
-        mSupplementaryInfoContainer =
-            (ViewGroup) view.findViewById(R.id.supplementary_info_container);
-
-        mConnectionHandoffButton = (Button) view.findViewById(R.id.connectionHandoffButton);
-        mConnectionHandoffButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getPresenter().connectionHandoffClicked();
-            }
-        });
 
         mEndCallButton = view.findViewById(R.id.endButton);
         mEndCallButton.setOnClickListener(new View.OnClickListener() {
@@ -254,82 +235,22 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void setCallState(int state, int cause, boolean bluetoothOn, String gatewayLabel,
             String gatewayNumber, boolean isWiFi, boolean isHandoffCapable,
             boolean isHandoffPending) {
-        String callStateText = null;
+        String callStateLabel = null;
 
         if (Call.State.isDialing(state) && !TextUtils.isEmpty(gatewayLabel)) {
             // Provider info: (e.g. "Calling via <gatewayLabel>")
-            callStateText = gatewayLabel;
+            callStateLabel = gatewayLabel;
         } else {
-            callStateText = getCallStateLabelFromState(state, cause);
+            callStateLabel = getCallStateLabelFromState(state, cause);
         }
 
-        // Only show call service related text if call state is not being displayed.
-        String callServiceText = null;
-        if (TextUtils.isEmpty(callStateText)) {
-            if (isHandoffPending) {
-                callServiceText = getResources().getString(R.string.handoff_status_pending);
-            } else if (isWiFi) {
-                callServiceText = getResources().getString(R.string.in_call_wifi_connected);
-            }
-        }
-
-        Log.v(this, "setCallState " + callStateText);
+        Log.v(this, "setCallState " + callStateLabel);
         Log.v(this, "DisconnectCause " + DisconnectCause.toString(cause));
         Log.v(this, "bluetooth on " + bluetoothOn);
         Log.v(this, "gateway " + gatewayLabel + gatewayNumber);
 
-        // There are cases where we totally skip the animation, in which case remove the transition
-        // animation here and restore it afterwards.
-        final boolean skipAnimation = (Call.State.isDialing(state)
-                || state == Call.State.DISCONNECTED || state == Call.State.DISCONNECTING);
-        LayoutTransition transition = null;
-        if (skipAnimation) {
-            transition = mSupplementaryInfoContainer.getLayoutTransition();
-            mSupplementaryInfoContainer.setLayoutTransition(null);
-        }
-
-        updateCallServiceLabel(isWiFi, callServiceText);
-        updateCallStateLabel(state, bluetoothOn, callStateText);
-
-        // Only show the handoff button if call state is not being displayed.
-        boolean showHandoffButton = isHandoffCapable && TextUtils.isEmpty(callStateText);
-        mConnectionHandoffButton.setVisibility(showHandoffButton ? View.VISIBLE : View.GONE);
-        mConnectionHandoffButton.setEnabled(!isHandoffPending);
-
-        // Background color.
-        if (isWiFi) {
-            mSupplementaryInfoContainer.setBackgroundResource(R.color.wifi_connected_background);
-        } else {
-            mSupplementaryInfoContainer.setBackgroundResource(
-                    R.color.incall_call_banner_background_color);
-        }
-
-        // Restore the animation.
-        if (skipAnimation) {
-            mSupplementaryInfoContainer.setLayoutTransition(transition);
-        }
-    }
-
-    private void updateCallServiceLabel(boolean isWiFi, String text) {
-        if (!TextUtils.isEmpty(text)) {
-            mCallServiceLabel.setText(text);
-            if (isWiFi) {
-                mCallServiceIcon.setImageResource(R.drawable.ic_in_call_wifi);
-                mCallServiceIcon.setVisibility(View.VISIBLE);
-            } else {
-                mCallServiceIcon.setVisibility(View.GONE);
-            }
-            mCallServiceLabel.setVisibility(View.VISIBLE);
-        } else {
-            mCallServiceLabel.setText("");
-            mCallServiceIcon.setVisibility(View.GONE);
-            mCallServiceLabel.setVisibility(View.GONE);
-        }
-    }
-
-    private void updateCallStateLabel(int state, boolean bluetoothOn, String text) {
         // Update the call state label.
-        mCallStateLabel.setText(text);
+        mCallStateLabel.setText(callStateLabel);
 
         if (Call.State.INCOMING == state) {
             setBluetoothOn(bluetoothOn);
