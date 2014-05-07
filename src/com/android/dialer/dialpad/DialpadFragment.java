@@ -260,7 +260,7 @@ public class DialpadFragment extends Fragment
 
     private boolean mStartedFromNewIntent = false;
     private boolean mFirstLaunch = false;
-    private boolean mAdjustTranslationForAnimation = false;
+    private boolean mAnimate = false;
 
     private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
 
@@ -358,7 +358,7 @@ public class DialpadFragment extends Fragment
             public boolean onPreDraw() {
 
                 if (isHidden()) return true;
-                if (mAdjustTranslationForAnimation && fragmentView.getTranslationY() == 0) {
+                if (mAnimate && fragmentView.getTranslationY() == 0) {
                     ((DialpadSlidingLinearLayout) fragmentView).setYFraction(
                             DIALPAD_SLIDE_FRACTION);
                 }
@@ -567,8 +567,9 @@ public class DialpadFragment extends Fragment
     }
 
     private void configureKeypadListeners(View fragmentView) {
-        final int[] buttonIds = new int[] {R.id.zero, R.id.one, R.id.two, R.id.three, R.id.four,
-                R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.star, R.id.pound};
+        final int[] buttonIds = new int[] {R.id.one, R.id.two, R.id.three, R.id.four, R.id.five,
+                R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.star, R.id.zero, R.id.pound};
+
         DialpadKeyButton dialpadKey;
 
         for (int i = 0; i < buttonIds.length; i++) {
@@ -1611,13 +1612,17 @@ public class DialpadFragment extends Fragment
         if (hidden) {
             activity.onDialpadHidden();
         } else {
+            if (mAnimate) {
+                DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
+                dialpadView.animateShow();
+            }
             activity.onDialpadShown();
             mDigits.requestFocus();
         }
     }
 
-    public void setAdjustTranslationForAnimation(boolean value) {
-        mAdjustTranslationForAnimation = value;
+    public void setAnimate(boolean value) {
+        mAnimate = value;
     }
 
     public void setYFraction(float yFraction) {

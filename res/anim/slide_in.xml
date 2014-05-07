@@ -20,4 +20,4 @@
     android:valueTo="0"
     android:valueType="floatType"
     android:propertyName="yFraction"
-    android:duration="200" />
+    android:duration="666" />
