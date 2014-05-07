@@ -1608,12 +1608,15 @@ public class DialpadFragment extends Fragment
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         final DialtactsActivity activity = (DialtactsActivity) getActivity();
+        final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
         if (activity == null) return;
         if (hidden) {
+            if (mAnimate) {
+                dialpadView.animateHide();
+            }
             activity.onDialpadHidden();
         } else {
             if (mAnimate) {
-                DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
                 dialpadView.animateShow();
             }
             activity.onDialpadShown();
