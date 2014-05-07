@@ -125,4 +125,6 @@
     <dimen name="call_log_secondary_text_size">14sp</dimen>
     <!-- Height of the call log actions section for each call log entry -->
     <dimen name="call_log_action_height">48dp</dimen>
+    <!-- Elevation of expanded call log items. -->
+    <dimen name="call_log_expanded_elevation">4dp</dimen>
 </resources>

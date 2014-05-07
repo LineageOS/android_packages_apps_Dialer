@@ -769,6 +769,10 @@ public class CallLogAdapter extends GroupingListAdapter
 
         if (expanded) {
             views.actionsView.setVisibility(View.VISIBLE);
+            callLogItem.setBackgroundColor(
+                    callLogItem.getResources().getColor(R.color.background_dialer_light));
+            callLogItem.setElevation(
+                    callLogItem.getResources().getDimension(R.dimen.call_log_expanded_elevation));
 
             // Attempt to give accessibility focus to one of the action buttons.
             // This ensures that a user realizes the expansion occurred.
@@ -780,6 +784,9 @@ public class CallLogAdapter extends GroupingListAdapter
                     views.deleteButtonView.requestAccessibilityFocus();
         } else {
             views.actionsView.setVisibility(View.GONE);
+            callLogItem.setBackgroundColor(
+                    callLogItem.getResources().getColor(R.color.background_dialer_list_items));
+            callLogItem.setElevation(0);
         }
     }
 
