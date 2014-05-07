@@ -50,7 +50,8 @@
     <!-- Color of dialpad digits -->
     <color name="dialpad_digits_text_color">#000000</color>
 
-    <color name="incall_dialpad_background">#ccffffff</color>
+    <!-- 90% opacity, white. -->
+    <color name="incall_dialpad_background">#e6ffffff</color>
     <color name="incall_dialpad_background_pressed">#ccaaaaaa</color>
 
     <!-- Button background color. -->
@@ -60,9 +61,6 @@
 
     <!-- Background color of action bars -->
     <color name="actionbar_background_color">#3B77E7</color>
-
-    <!-- Secondary color of dialpad text (used for the letters corresponding to each digit -->
-    <color name="dialpad_secondary_text_color">#8b8b8b</color>
 
     <color name="translucent_shadow">#33999999</color>
 </resources>

@@ -20,7 +20,7 @@
 
     <!-- Height of the "call banner" overlay on top of the upper part of
          the call info area. -->
-    <dimen name="call_banner_height">75dp</dimen>
+    <dimen name="call_banner_height">128dp</dimen>
 
     <!-- Margin between the bottom of the "call card" photo
          and the top of the in-call button cluster. -->
@@ -103,9 +103,8 @@
 
     <dimen name="glowpadview_margin_bottom">-48dip</dimen>
     <dimen name="glowpadview_margin_right">0dip</dimen>
-
     <!-- Height of translucent shadow effect -->
     <dimen name="translucent_shadow_height">2dp</dimen>
 
-    <dimen name="end_call_button_margin_bottom">15dp</dimen>
+    <dimen name="end_call_button_margin_bottom">8dp</dimen>
 </resources>
