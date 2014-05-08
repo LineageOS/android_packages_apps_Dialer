@@ -21,6 +21,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.telephony.DisconnectCause;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -250,7 +251,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         Log.v(this, "gateway " + gatewayLabel + gatewayNumber);
 
         // Update the call state label.
-        mCallStateLabel.setText(callStateLabel);
+        if (!TextUtils.isEmpty(callStateLabel)) {
+            mCallStateLabel.setText(callStateLabel);
+            mCallStateLabel.setVisibility(View.VISIBLE);
+        } else {
+            mCallStateLabel.setVisibility(View.GONE);
+        }
 
         if (Call.State.INCOMING == state) {
             setBluetoothOn(bluetoothOn);
