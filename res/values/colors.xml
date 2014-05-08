@@ -92,7 +92,8 @@
 
     <!-- Color of action bar text. Ensure this stays in sync with packages/Telephony
          phone_settings_actionbar_text_color-->
-    <color name="actionbar_text_color">#FFFFFF</color>
+    <color name="actionbar_text_color">#ffffff</color>
+    <color name="actionbar_unselected_text_color">#a6ffffff</color>
 
     <!-- Color of actions in expanded call log entries.  This text color represents actions such
          as call back, play voicemail, etc. -->
