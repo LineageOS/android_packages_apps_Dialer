@@ -1606,9 +1606,6 @@ public class DialpadFragment extends Fragment
         final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
         if (activity == null) return;
         if (hidden) {
-            if (mAnimate) {
-                dialpadView.animateHide();
-            }
             activity.onDialpadHidden();
         } else {
             if (mAnimate) {
