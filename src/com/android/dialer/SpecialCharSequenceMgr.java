@@ -319,6 +319,9 @@ public class SpecialCharSequenceMgr {
     private static void showIMEIPanel(Context context, boolean useSystemWindow) {
         String imeiStr;
         if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+            int subscription = MSimTelephonyManager.getDefault().
+                    getPreferredVoiceSubscription();
+
             imeiStr = getMSimDeviceIds(context);
         } else {
             imeiStr = ((TelephonyManager)context.
@@ -336,6 +339,9 @@ public class SpecialCharSequenceMgr {
     private static void showMEIDPanel(Context context, boolean useSystemWindow) {
         String meidStr;
         if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+            int subscription = MSimTelephonyManager.getDefault().
+                    getPreferredVoiceSubscription();
+
             meidStr = getMSimDeviceIds(context);
         } else {
             meidStr = ((TelephonyManager)context.
