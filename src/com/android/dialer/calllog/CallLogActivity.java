@@ -113,6 +113,7 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
 
         mViewPagerTabs = (ViewPagerTabs) findViewById(R.id.viewpager_header);
         mViewPagerTabs.setViewPager(mViewPager);
+        mViewPager.setOnPageChangeListener(mViewPagerTabs);
 
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
     }
