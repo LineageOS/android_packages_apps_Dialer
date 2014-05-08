@@ -490,6 +490,17 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
+        if (hidden) {
+            dialpadView.animateHide();
+        } else {
+            dialpadView.animateShow();
+        }
+    }
+
+    @Override
     public void appendDigitsToField(char digit) {
         if (mDtmfDialerField != null) {
             // TODO: maybe *don't* manually append this digit if
