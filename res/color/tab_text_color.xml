@@ -16,6 +16,6 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="#fff" android:state_selected="true"/>
-    <item android:color="#a3e7f0" />
+    <item android:color="@color/actionbar_text_color" android:state_selected="true"/>
+    <item android:color="@color/actionbar_unselected_text_color" />
 </selector>
