@@ -175,7 +175,6 @@ public class DialpadFragment extends Fragment
     /** Remembers if we need to clear digits field when the screen is completely gone. */
     private boolean mClearDigitsOnStop;
 
-    private View mAddContactButton;
     private View mOverflowMenuButton;
     private View mDelete;
     private ToneGenerator mToneGenerator;
@@ -310,9 +309,10 @@ public class DialpadFragment extends Fragment
         if (isDigitsEmpty()) {
             mDigitsFilledByIntent = false;
             mDigits.setCursorVisible(false);
-            mAddContactButton.setVisibility(View.INVISIBLE);
+            // Set to INVISIBLE instead of GONE so that text (eg. "Type number to add") is centered.
+            mOverflowMenuButton.setVisibility(View.INVISIBLE);
         } else if (mDialpadView.canDigitsBeEdited()){
-            mAddContactButton.setVisibility(View.VISIBLE);
+            mOverflowMenuButton.setVisibility(View.VISIBLE);
         }
 
         if (mDialpadQueryListener != null) {
@@ -413,6 +413,11 @@ public class DialpadFragment extends Fragment
         // Set up the "dialpad chooser" UI; see showDialpadChooser().
         mDialpadChooser = (ListView) fragmentView.findViewById(R.id.dialpadChooser);
         mDialpadChooser.setOnItemClickListener(this);
+
+        mOverflowMenuButton = mDialpadView.getOverflowMenuButton();
+        mOverflowMenuButton.setOnClickListener(this);
+        final PopupMenu overflowMenu = buildOptionsMenu(mOverflowMenuButton);
+        mOverflowMenuButton.setOnTouchListener(overflowMenu.getDragToOpenListener());
 
         return fragmentView;
     }
@@ -584,14 +589,6 @@ public class DialpadFragment extends Fragment
         // Long-pressing zero button will enter '+' instead.
         final DialpadKeyButton zero = (DialpadKeyButton) fragmentView.findViewById(R.id.zero);
         zero.setOnLongClickListener(this);
-
-        mAddContactButton = fragmentView.findViewById(R.id.dialpad_add_contact);
-        mAddContactButton.setOnClickListener(this);
-
-        mOverflowMenuButton = fragmentView.findViewById(R.id.dialpad_overflow);
-        mOverflowMenuButton.setOnClickListener(this);
-        final PopupMenu overflowMenu = buildOptionsMenu(mOverflowMenuButton);
-        mOverflowMenuButton.setOnTouchListener(overflowMenu.getDragToOpenListener());
     }
 
     @Override
@@ -899,12 +896,6 @@ public class DialpadFragment extends Fragment
                 if (!isDigitsEmpty()) {
                     mDigits.setCursorVisible(true);
                 }
-                return;
-            }
-            case R.id.dialpad_add_contact: {
-                final CharSequence digits = mDigits.getText();
-                DialerUtils.startActivityWithErrorToast(getActivity(),
-                        DialtactsActivity.getAddNumberToContactIntent(digits));
                 return;
             }
             case R.id.dialpad_overflow: {
@@ -1439,8 +1430,12 @@ public class DialpadFragment extends Fragment
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        // R.id.menu_add_contacts already has an add to contact intent populated by setupMenuItems
         switch (item.getItemId()) {
+            case R.id.menu_add_contact:
+                final CharSequence digits = mDigits.getText();
+                DialerUtils.startActivityWithErrorToast(getActivity(),
+                        DialtactsActivity.getAddNumberToContactIntent(digits));
+                return true;
             case R.id.menu_2s_pause:
                 updateDialString(PAUSE);
                 return true;
