@@ -75,11 +75,8 @@
     <string name="description_image_button_star" msgid="3365919907520767866">"sao"</string>
     <string name="description_image_button_zero" msgid="4133108949401820710">"không"</string>
     <string name="description_image_button_pound" msgid="3039765597595889230">"dấu thăng"</string>
-    <string name="description_image_button_plus" msgid="2462671072094927613">"cộng"</string>
-    <string name="description_voicemail_button" msgid="3402506823655455591">"thư thoại"</string>
     <string name="description_search_button" msgid="3660807558587384889">"tìm kiếm"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"quay số"</string>
-    <string name="description_delete_button" msgid="6263102114033407382">"backspace"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"số để quay"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Nhật ký cuộc gọi"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Tùy chọn khác"</string>
@@ -110,20 +107,12 @@
     <string name="description_call_log_outgoing_call" msgid="604831756853471658">"Cuộc gọi đi"</string>
     <string name="description_call_log_missed_call" msgid="2242805209983708825">"Cuộc gọi nhỡ"</string>
     <string name="description_call_log_voicemail" msgid="4600798771975158948">"Thư thoại"</string>
-    <string name="description_add_contact" msgid="3103414772502485851">"Thêm địa chỉ liên hệ"</string>
-    <string name="description_dialpad_overflow" msgid="5085126640236518486">"Thêm tùy chọn"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Xem thông tin liên hệ của <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Gọi <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Chi tiết liên lạc cho <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_call_details" msgid="8936017517290240089">"Chi tiết cuộc gọi"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"Thư thoại mới."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> cuộc gọi."</string>
-    <string name="description_return_missed_call" msgid="5832103397942825774">"Quay lại cuộc gọi nhỡ từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
-    <string name="description_return_answered_call" msgid="6038958518509163218">"Quay lại cuộc gọi đã trả lời từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
-    <string name="description_unknown_missed_call" msgid="8736195520010578126">"Cuộc gọi nhỡ từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
-    <string name="description_unknown_answered_call" msgid="1470971301999791460">"Cuộc gọi đã trả lời từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
-    <string name="description_call_last_multiple" msgid="271456796151369411">"Gọi <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Gọi lần cuối <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_call_last" msgid="491385778814705302">"Gọi <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Đã gọi <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Gửi tin nhắn văn bản tới <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Thư thoại chưa nghe"</string>
     <string name="description_clear_search" msgid="688023606766232904">"Xóa tìm kiếm"</string>
@@ -153,16 +142,6 @@
     <string name="recentVoicemails_empty" msgid="5163114119598014048">"Không có thư thoại gần đây nào."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Chỉ hiển thị liên hệ ưa thích"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Lịch sử"</string>
-    <string name="dialpad_0_number" msgid="8859392433961251108">"0"</string>
-    <string name="dialpad_1_number" msgid="6536740525419909212">"1"</string>
-    <string name="dialpad_2_number" msgid="4941546415280852148">"2"</string>
-    <string name="dialpad_3_number" msgid="6539414865185536881">"3"</string>
-    <string name="dialpad_4_number" msgid="979988372051042362">"4"</string>
-    <string name="dialpad_5_number" msgid="5492272478939926734">"5"</string>
-    <string name="dialpad_6_number" msgid="8044579516869379093">"6"</string>
-    <string name="dialpad_7_number" msgid="4175113016564167123">"7"</string>
-    <string name="dialpad_8_number" msgid="7949849563865941621">"8"</string>
-    <string name="dialpad_9_number" msgid="4377059952097526576">"9"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Tất cả"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Bị nhỡ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Thư thoại"</string>
@@ -183,4 +162,14 @@
     <string name="remove_contact" msgid="1080555335283662961">"Xóa"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Quay số nhanh"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TẤT CẢ NGƯỜI LIÊN HỆ"</string>
+    <string name="call_log_action_call_back" msgid="4944463006859852473">"GỌI LẠI"</string>
+    <string name="call_log_action_delete" msgid="7371990297839987600">"XÓA"</string>
+    <string name="call_log_action_voicemail" msgid="4978620572562925654">"NGHE"</string>
+    <string name="description_incoming_missed_call" msgid="2610535352863246949">"Cuộc gọi nhỡ từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_incoming_answered_call" msgid="7206670204016969740">"Cuộc gọi đã trả lời từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_outgoing_call" msgid="3964211633673659733">"Cuộc gọi đến <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_back_action" msgid="3012837380108884260">"Gọi lại <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_voicemail_action" msgid="8054891873788903063">"Nghe thư thoại từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_delete_action" msgid="7188614068459616450">"Xóa mục nhập nhật ký cuộc gọi cho <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="toast_entry_removed" msgid="3389119736202317999">"Đã xóa mục nhập nhật ký cuộc gọi."</string>
 </resources>
