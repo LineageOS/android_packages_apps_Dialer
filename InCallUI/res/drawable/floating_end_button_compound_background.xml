@@ -20,5 +20,5 @@
         android:drawable="@drawable/floating_end_button_disabled_background" />
     <item android:state_pressed="true"
         android:drawable="@drawable/floating_end_button_pressed_background" />
-    <item android:drawable="@drawable/floating_end_button_active_background" />
+    <item android:drawable="@drawable/fab_red_background" />
 </selector>

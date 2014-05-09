@@ -100,7 +100,7 @@
                 android:layout_height="@dimen/floating_action_button_height"
                 android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
                 android:background="@drawable/floating_end_button_compound_background"
-                android:src="@drawable/ic_in_call_phone_hangup"
+                android:src="@drawable/fab_ic_end_call"
                 android:contentDescription="@string/onscreenEndCallText" />
 
         </FrameLayout>
