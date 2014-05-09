@@ -21,7 +21,7 @@
     <item android:drawable="@drawable/btn_background" />
 
     <item>
-        <bitmap android:src="@drawable/ic_add_contact_holo_dark"
+        <bitmap android:src="@drawable/ic_toolbar_add_call"
             android:gravity="center"
             android:tint="@color/selectable_icon_tint" />
     </item>

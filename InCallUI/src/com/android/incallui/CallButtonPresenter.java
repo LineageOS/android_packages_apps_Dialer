@@ -137,7 +137,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     @Override
     public void onMute(boolean muted) {
-        if (getUi() != null) {
+        if (getUi() != null && !mAutomaticallyMuted) {
             getUi().setMute(muted);
         }
     }
