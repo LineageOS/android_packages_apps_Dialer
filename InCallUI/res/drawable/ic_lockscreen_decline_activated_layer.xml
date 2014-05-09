@@ -23,9 +23,6 @@
         </shape>
     </item>
     <item
-        android:top="@dimen/incoming_call_widget_asset_margin"
-        android:right="@dimen/incoming_call_widget_asset_margin"
-        android:bottom="@dimen/incoming_call_widget_asset_margin"
-        android:left="@dimen/incoming_call_widget_asset_margin"
-        android:drawable="@drawable/ic_lockscreen_decline_activated" />
+        android:gravity="center"
+        android:drawable="@drawable/fab_ic_end_call" />
 </layer-list>

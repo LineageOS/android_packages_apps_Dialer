@@ -78,21 +78,15 @@
     <dimen name="notification_icon_size">64dp</dimen>
 
     <!-- Circle size for incoming call widget's each item. -->
-    <dimen name="incoming_call_widget_circle_size">94dp</dimen>
-    <!-- Margin used for incoming call widget's icon for each item.
-         This should be same as "(incoming_call_widget_circle_size - icon_size)/2".
-         Right now answer/decline/reject icons have 38dp width/height.
-         So, (94 - 38)/2 ==> 28dp -->
-    <dimen name="incoming_call_widget_asset_margin">28dp</dimen>
+    <dimen name="incoming_call_widget_circle_size">56dp</dimen>
 
     <!-- Size of alarm alert outer ring. -->
-    <dimen name="glowpadview_outerring_diameter">270dip</dimen>
-
+    <dimen name="glowpadview_outerring_diameter">250dp</dimen>
     <!-- Default target placement radius for GlowPadView. Should be 1/2 of outerring diameter. -->
-    <dimen name="glowpadview_target_placement_radius">135dip</dimen>
+    <dimen name="glowpadview_target_placement_radius">125dp</dimen>
 
     <!-- Default glow radius for GlowPadView -->
-    <dimen name="glowpadview_glow_radius">75dip</dimen>
+    <dimen name="glowpadview_glow_radius">70dip</dimen>
 
     <!-- Default distance beyond which GlowPadView snaps to the matching target -->
     <dimen name="glowpadview_snap_margin">40dip</dimen>
