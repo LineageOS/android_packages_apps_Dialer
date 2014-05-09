@@ -19,6 +19,7 @@
 
     <!-- In-call UI background color. -->
     <color name="incall_background_color">#0fc6dc</color>
+    <color name="incall_accent_color">#eeff41</color>
     <!-- 80% opacity, black. -->
     <color name="glowpad_background_color">#cc000000</color>
 
@@ -77,4 +78,5 @@
     <color name="actionbar_background_color">#3B77E7</color>
 
     <color name="translucent_shadow">#33999999</color>
+
 </resources>

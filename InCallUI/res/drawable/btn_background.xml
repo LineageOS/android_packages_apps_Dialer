@@ -19,7 +19,7 @@
      These buttons have two states (checked and unchecked), and
      show a blue bar along the bottom edge when checked. -->
 <touch-feedback xmlns:android="http://schemas.android.com/apk/res/android"
-    android:tint="@color/tab_pressed_color"
+    android:tint="@color/incall_accent_color"
     android:pinned="true">
     <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
