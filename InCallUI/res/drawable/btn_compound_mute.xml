@@ -20,10 +20,15 @@
     <!-- The standard "compound button" background. -->
     <item android:drawable="@drawable/btn_compound_background" />
 
-    <!-- ...and the actual icon on top.  Use an explicit <bitmap> to avoid scaling
-         the icon up to the full size of the button. -->
-    <item>
-        <bitmap android:src="@drawable/ic_mute_holo_dark"
+    <!-- Use an explicit <bitmap> to avoid scaling the icon up to the full size of the button. -->
+    <item android:id="@+id/muteOffItem">
+        <bitmap android:src="@drawable/ic_toolbar_mic_on"
+            android:gravity="center"
+            android:tint="@color/selectable_icon_tint" />
+    </item>
+
+    <item android:id="@+id/muteOnItem">
+        <bitmap android:src="@drawable/ic_toolbar_mic_off"
                 android:gravity="center"
                 android:tint="@color/selectable_icon_tint" />
     </item>

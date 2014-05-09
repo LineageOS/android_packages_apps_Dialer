@@ -85,20 +85,19 @@
 
     <!-- Speakerphone icon showing 'speaker on' state -->
     <item android:id="@+id/speakerphoneOnItem">
-        <bitmap android:src="@drawable/ic_sound_speakerphone_holo_dark"
+        <bitmap android:src="@drawable/ic_toolbar_speaker_on"
                 android:gravity="center"
                 android:tint="@color/selectable_icon_tint" />
     </item>
 
     <!-- Speakerphone icon showing 'speaker off' state -->
     <item android:id="@+id/speakerphoneOffItem">
-        <bitmap android:src="@drawable/ic_sound_off_speakerphone_holo_dark"
+        <bitmap android:src="@drawable/ic_toolbar_speaker_off"
                 android:gravity="center"
                 android:tint="@color/selectable_icon_tint" />
     </item>
 
-    <!-- Generic "audio mode" icon.  Looks almost identical to
-         ic_sound_speakerphone_holo_dark.png -->
+    <!-- Generic "audio mode" icon. -->
     <!-- TODO: is this actually needed? -->
     <!--
         <item android:id="@+id/soundItem">

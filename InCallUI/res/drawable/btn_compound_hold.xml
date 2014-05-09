@@ -23,7 +23,7 @@
     <!-- ...and the actual icon on top.  Use an explicit <bitmap> to avoid scaling
          the icon up to the full size of the button. -->
     <item>
-        <bitmap android:src="@drawable/ic_hold_pause_holo_dark"
+        <bitmap android:src="@drawable/ic_toolbar_hold"
                 android:gravity="center"
                 android:tint="@color/selectable_icon_tint" />
     </item>

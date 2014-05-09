@@ -57,6 +57,10 @@ public class CallButtonFragment
     private View mManageConferenceButton;
     private View mGenericMergeButton;
 
+    // Constants for Drawable.setAlpha()
+    private static final int HIDDEN = 0;
+    private static final int VISIBLE = 255;
+
     @Override
     CallButtonPresenter createPresenter() {
         // TODO: find a cleaner way to include audio mode provider than
@@ -202,6 +206,13 @@ public class CallButtonFragment
 
     @Override
     public void setMute(boolean value) {
+        final LayerDrawable layers = (LayerDrawable) mMuteButton.getBackground();
+
+        layers.findDrawableByLayerId(R.id.muteOffItem)
+                .setAlpha(value ? HIDDEN : VISIBLE);
+        layers.findDrawableByLayerId(R.id.muteOnItem)
+                .setAlpha(value ? VISIBLE : HIDDEN);
+
         mMuteButton.setSelected(value);
     }
 
@@ -409,10 +420,6 @@ public class CallButtonFragment
         Log.v(this, "showSpeakerphoneOffIcon: " + showSpeakerphoneOffIcon);
         Log.v(this, "showHandsetIcon: " + showHandsetIcon);
 
-        // Constants for Drawable.setAlpha()
-        final int HIDDEN = 0;
-        final int VISIBLE = 255;
-
         mAudioButton.setEnabled(audioButtonEnabled);
         mAudioButton.setSelected(audioButtonChecked);
 
@@ -436,6 +443,7 @@ public class CallButtonFragment
 
         layers.findDrawableByLayerId(R.id.speakerphoneOffItem)
                 .setAlpha(showSpeakerphoneOffIcon ? VISIBLE : HIDDEN);
+
     }
 
     private void showAudioModePopup() {

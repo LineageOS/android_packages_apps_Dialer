@@ -21,12 +21,14 @@
 <touch-feedback xmlns:android="http://schemas.android.com/apk/res/android"
     android:tint="@color/tab_pressed_color"
     android:pinned="true">
-    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <item android:state_focused="true"
-              android:drawable="@drawable/btn_unselected_focused" />
+            <item android:state_focused="true"
+                  android:drawable="@drawable/btn_unselected_focused" />
 
-        <item android:drawable="@drawable/btn_unselected" />
+            <item android:drawable="@drawable/btn_unselected" />
 
-    </selector>
+        </selector>
+    </item>
 </touch-feedback>
