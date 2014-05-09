@@ -490,7 +490,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     public void setEndCallButtonEnabled(boolean enabled) {
-        mEndCallButton.setEnabled(enabled);
+        mEndCallButton.setVisibility(enabled ? View.VISIBLE : View.GONE);
     }
 
     private void dispatchPopulateAccessibilityEvent(AccessibilityEvent event, View view) {

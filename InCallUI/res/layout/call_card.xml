@@ -75,6 +75,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
+                <fragment android:name="com.android.incallui.AnswerFragment"
+                    android:id="@+id/answerFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="top"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="@dimen/glowpadview_margin_bottom"
+                    android:visibility="gone" />
+
             </FrameLayout>
 
         </LinearLayout>
