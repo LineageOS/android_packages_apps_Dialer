@@ -28,6 +28,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -57,6 +58,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mSecondaryPhotoOverlay;
 
     private View mEndCallButton;
+    private ImageButton mHandoffButton;
 
     // Cached DisplayMetrics density.
     private float mDensity;
@@ -117,6 +119,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             }
         });
         ViewUtil.setupFloatingActionButton(mEndCallButton, getResources());
+
+        mHandoffButton = (ImageButton) view.findViewById(R.id.handoffButton);
+        mHandoffButton.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                getPresenter().connectionHandoffClicked();
+            }
+        });
+        ViewUtil.setupFloatingActionButton(mHandoffButton, getResources());
     }
 
     @Override
@@ -249,6 +259,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         Log.v(this, "DisconnectCause " + DisconnectCause.toString(cause));
         Log.v(this, "bluetooth on " + bluetoothOn);
         Log.v(this, "gateway " + gatewayLabel + gatewayNumber);
+        Log.v(this, "isWiFi " + isWiFi);
+        Log.v(this, "isHandoffCapable " + isHandoffCapable);
+        Log.v(this, "isHandoffPending " + isHandoffPending);
 
         // Update the call state label.
         if (!TextUtils.isEmpty(callStateLabel)) {
@@ -260,6 +273,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         if (Call.State.INCOMING == state) {
             setBluetoothOn(bluetoothOn);
+        }
+
+        mHandoffButton.setEnabled(isHandoffCapable && !isHandoffPending);
+        if (Call.State.ACTIVE == state) {
+            mHandoffButton.setImageResource(isWiFi ?
+                    R.drawable.ic_in_call_wifi : R.drawable.ic_in_call_pstn);
         }
     }
 
