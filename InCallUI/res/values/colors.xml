@@ -47,6 +47,18 @@
     <!-- Used when the End Call button is disabled -->
     <color name="end_call_disabled_color">#303030</color>
 
+    <!-- Used when the Handoff Call button is active -->
+    <color name="handoff_call_active_color">#F2882C</color>
+
+    <!-- Used when the Handoff Call button is pressed -->
+    <color name="handoff_call_pressed_color">#F2A35E</color>
+
+    <!-- Used when the Handoff Call button is disabled -->
+    <color name="handoff_call_disabled_color">#303030</color>
+
+    <color name="call_state_wifi">#19E392</color>
+    <color name="call_state_cellular">#33A9F2</color>
+
     <!-- Color of dialpad digits -->
     <color name="dialpad_digits_text_color">#000000</color>
 
