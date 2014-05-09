@@ -492,10 +492,8 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
-        if (hidden) {
-            dialpadView.animateHide();
-        } else {
+        if (!hidden) {
+            final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
             dialpadView.animateShow();
         }
     }
