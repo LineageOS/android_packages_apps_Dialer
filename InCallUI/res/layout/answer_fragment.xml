@@ -25,7 +25,7 @@
         android:focusable="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:background="@android:color/black"
+        android:background="@color/glowpad_background_color"
         android:visibility="gone"
 
         dc:targetDrawables="@array/incoming_call_widget_3way_targets"

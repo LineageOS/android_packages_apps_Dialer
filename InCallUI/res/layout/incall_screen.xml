@@ -27,18 +27,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-
-    <fragment android:name="com.android.incallui.AnswerFragment"
-        android:id="@+id/answerFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="top"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="@dimen/glowpadview_margin_bottom"
-        android:visibility="gone" />
-
     <fragment android:name="com.android.incallui.ConferenceManagerFragment"
         android:id="@+id/conferenceManagerFragment"
         android:layout_width="match_parent"

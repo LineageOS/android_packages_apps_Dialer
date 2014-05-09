@@ -19,6 +19,8 @@
 
     <!-- In-call UI background color. -->
     <color name="incall_background_color">#0fc6dc</color>
+    <!-- 80% opacity, black. -->
+    <color name="glowpad_background_color">#cc000000</color>
 
     <!-- green -->
     <color name="incall_callTypeSip">#99CE3F</color>
