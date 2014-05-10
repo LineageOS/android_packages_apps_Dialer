@@ -23,7 +23,10 @@
                 android:height="@dimen/incoming_call_widget_circle_size" />
         </shape>
     </item>
-    <item
-        android:gravity="center"
-        android:drawable="@drawable/fab_ic_end_call" />
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/fab_ic_end_call"
+            android:tint="@color/glowpad_end_call_widget_normal_tint" />
+    </item>
 </layer-list>

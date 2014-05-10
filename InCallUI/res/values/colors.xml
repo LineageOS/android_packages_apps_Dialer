@@ -53,10 +53,12 @@
     <color name="incall_dialpad_background">#e6ffffff</color>
     <color name="incall_dialpad_background_pressed">#ccaaaaaa</color>
 
-    <!-- Button background color. -->
     <color name="button_background_color">@color/incall_background_color</color>
     <color name="button_selected_color">#00acc1</color>
-
+    <!-- 70% opacity, white. -->
+    <color name="button_default_color">#b3ffffff</color>
+    <!-- 25% opacity, white. -->
+    <color name="button_disabled_color">#40ffffff</color>
 
     <!-- Background color of action bars -->
     <color name="actionbar_background_color">#3B77E7</color>
@@ -68,5 +70,11 @@
     <!-- 15% opacity, white. -->
     <color name="glowpad_outer_ring_color">#26ffffff</color>
     <color name="glowpad_text_widget_ring_color">#ffffff</color>
+    <color name="glowpad_widget_active_color">#ffffff</color>
+    <color name="glowpad_text_widget_normal_tint">#cccccc</color>
+    <color name="glowpad_call_widget_normal_tint">#00e5ff</color>
+    <color name="glowpad_end_call_widget_normal_tint">#ff1744</color>
+    <color name="glowpad_incoming_widget_tint">#a3a3a3</color>
+    <color name="glowpad_incoming_widget_background_tint">#ffffff</color>
 
 </resources>

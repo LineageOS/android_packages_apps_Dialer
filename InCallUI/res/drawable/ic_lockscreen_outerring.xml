@@ -18,6 +18,5 @@
     android:shape="oval">
     <size android:height="@dimen/glowpadview_outerring_diameter"
           android:width="@dimen/glowpadview_outerring_diameter" />
-    <solid android:color="#00000000" />
     <stroke android:color="@color/glowpad_outer_ring_color" android:width="1dp" />
 </shape>

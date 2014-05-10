@@ -17,17 +17,24 @@
 <!-- Touch handle for the GlowPadView widget on the incoming call screen -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Call icon on tinted floating action bar background. -->
     <item
         android:state_enabled="true"
         android:state_active="false"
-        android:state_focused="false"
-        android:drawable="@drawable/ic_in_call_touch_handle_normal" />
-
-    <!-- "Pressed" state uses the same simple "ring" image as on the lockscreen -->
-    <item
-        android:state_enabled="true"
-        android:state_active="true"
-        android:state_focused="false"
-        android:drawable="@drawable/ic_lockscreen_handle_pressed" />
+        android:state_focused="false">
+        <layer-list>
+            <item>
+                <bitmap
+                    android:src="@drawable/fab_teal_background"
+                    android:tint="@color/glowpad_incoming_widget_background_tint" />
+            </item>
+            <item>
+                <bitmap
+                    android:gravity="center"
+                    android:src="@drawable/fab_ic_call"
+                    android:tint="@color/glowpad_incoming_widget_tint" />
+            </item>
+        </layer-list>
+    </item>
 
 </selector>

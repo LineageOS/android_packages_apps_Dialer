@@ -22,7 +22,7 @@
     android:tint="@color/incall_accent_color"
     android:pinned="true">
     <item>
-        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+        <selector>
 
             <item android:state_focused="true"
                   android:drawable="@drawable/btn_unselected_focused" />

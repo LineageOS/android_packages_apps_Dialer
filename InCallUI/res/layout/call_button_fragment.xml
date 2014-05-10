@@ -38,6 +38,7 @@
     android:padding="0dp"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
+    android:animateLayoutChanges="true"
     android:visibility="invisible" >
 
     <!-- Row 1, the "extra button row": A couple of relatively rare

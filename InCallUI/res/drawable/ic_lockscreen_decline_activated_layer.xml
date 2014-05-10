@@ -14,15 +14,11 @@
      limitations under the License.
 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/fab_red_background" />
     <item>
-        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
-            <solid android:color="#ff4040"/>
-            <size
-                android:width="@dimen/incoming_call_widget_circle_size"
-                android:height="@dimen/incoming_call_widget_circle_size" />
-        </shape>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/fab_ic_end_call"
+            android:tint="@color/glowpad_widget_active_color" />
     </item>
-    <item
-        android:gravity="center"
-        android:drawable="@drawable/fab_ic_end_call" />
 </layer-list>

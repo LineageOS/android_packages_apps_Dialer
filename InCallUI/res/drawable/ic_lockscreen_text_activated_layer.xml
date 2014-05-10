@@ -16,14 +16,16 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
-            <solid android:color="@null" />
             <stroke android:color="@color/glowpad_text_widget_ring_color" android:width="1dp"/>
             <size
                 android:width="@dimen/incoming_call_widget_circle_size"
                 android:height="@dimen/incoming_call_widget_circle_size" />
         </shape>
     </item>
-    <item
-        android:gravity="center"
-        android:drawable="@drawable/fab_ic_message" />
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/fab_ic_message"
+            android:tint="@color/glowpad_widget_active_color" />
+    </item>
 </layer-list>
