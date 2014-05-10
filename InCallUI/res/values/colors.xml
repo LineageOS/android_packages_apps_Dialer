@@ -20,11 +20,7 @@
     <!-- In-call UI background color. -->
     <color name="incall_background_color">#0fc6dc</color>
     <color name="incall_accent_color">#eeff41</color>
-    <!-- 80% opacity, black. -->
-    <color name="glowpad_background_color">#cc000000</color>
 
-    <!-- green -->
-    <color name="incall_callTypeSip">#99CE3F</color>
     <!-- Background color of main banner. -->
     <color name="incall_call_banner_background_color">@color/incall_background_color</color>
     <!-- white -->
@@ -78,5 +74,11 @@
     <color name="actionbar_background_color">#3B77E7</color>
 
     <color name="translucent_shadow">#33999999</color>
+
+    <!-- 70% opacity, black. -->
+    <color name="glowpad_background_color">#b3000000</color>
+    <!-- 15% opacity, white. -->
+    <color name="glowpad_outer_ring_color">#26ffffff</color>
+    <color name="glowpad_text_widget_ring_color">#ffffff</color>
 
 </resources>
