@@ -75,8 +75,7 @@ public class PhoneCallDetailsHelper {
     }
 
     /** Fills the call details views with content. */
-    public void setPhoneCallDetails(PhoneCallDetailsViews views, PhoneCallDetails details,
-            boolean isHighlighted) {
+    public void setPhoneCallDetails(PhoneCallDetailsViews views, PhoneCallDetails details) {
         // Display up to a given number of icons.
         views.callTypeIcons.clear();
         int count = details.callTypes.length;
@@ -93,14 +92,11 @@ public class PhoneCallDetailsHelper {
         } else {
             callCount = null;
         }
-        // The color to highlight the count and date in, if any. This is based on the first call.
-        Integer highlightColor =
-                isHighlighted ? mCallTypeHelper.getHighlightedColor(details.callTypes[0]) : null;
 
         CharSequence callLocationAndDate = getCallLocationAndDate(details);
 
         // Set the call count, location and date.
-        setCallCountAndDate(views, callCount, callLocationAndDate, highlightColor);
+        setCallCountAndDate(views, callCount, callLocationAndDate);
 
         final CharSequence nameText;
         final CharSequence displayNumber =
@@ -224,7 +220,7 @@ public class PhoneCallDetailsHelper {
 
     /** Sets the call count and date. */
     private void setCallCountAndDate(PhoneCallDetailsViews views, Integer callCount,
-            CharSequence dateText, Integer highlightColor) {
+            CharSequence dateText) {
         // Combine the count (if present) and the date.
         final CharSequence text;
         if (callCount != null) {
@@ -234,23 +230,6 @@ public class PhoneCallDetailsHelper {
             text = dateText;
         }
 
-        // Apply the highlight color if present.
-        final CharSequence formattedText;
-        if (highlightColor != null) {
-            formattedText = addBoldAndColor(text, highlightColor);
-        } else {
-            formattedText = text;
-        }
-
-        views.callLocationAndDate.setText(formattedText);
-    }
-
-    /** Creates a SpannableString for the given text which is bold and in the given color. */
-    private CharSequence addBoldAndColor(CharSequence text, int color) {
-        int flags = Spanned.SPAN_INCLUSIVE_INCLUSIVE;
-        SpannableString result = new SpannableString(text);
-        result.setSpan(new StyleSpan(Typeface.BOLD), 0, text.length(), flags);
-        result.setSpan(new ForegroundColorSpan(color), 0, text.length(), flags);
-        return result;
+        views.callLocationAndDate.setText(text);
     }
 }

@@ -333,8 +333,8 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(number, presentation, formattedNumber,
                         TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ callType }, TEST_DATE, TEST_DURATION),
-                false);
+                        new int[]{ callType }, TEST_DATE, TEST_DURATION)
+        );
     }
 
     /** Sets the details of a phone call using the specified call type. */
@@ -342,8 +342,8 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        types, TEST_DATE, TEST_DURATION),
-                false);
+                        types, TEST_DATE, TEST_DURATION)
+        );
     }
 
     /** Sets the details of an unread phone call using the specified call type. */
@@ -351,7 +351,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        types, TEST_DATE, TEST_DURATION),
-                true);
+                        types, TEST_DATE, TEST_DURATION)
+        );
     }
 }

@@ -17,15 +17,12 @@
 package com.android.dialer.calllog;
 
 import android.content.res.Resources;
-import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.text.TextUtils;
-import android.view.View;
 
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
-import com.android.internal.util.CharSequences;
 
 /**
  * Helper class to fill in the views of a call log entry.
@@ -56,12 +53,9 @@ import com.android.internal.util.CharSequences;
      *
      * @param views the views to populate
      * @param details the details of a phone call needed to fill in the data
-     * @param isHighlighted whether to use the highlight text for the call
      */
-    public void setPhoneCallDetails(CallLogListItemViews views, PhoneCallDetails details,
-            boolean isHighlighted) {
-        mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details,
-                isHighlighted);
+    public void setPhoneCallDetails(CallLogListItemViews views, PhoneCallDetails details) {
+        mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details);
 
         // Set the accessibility text for the contact badge
         views.quickContactView.setContentDescription(getContactBadgeDescription(details));

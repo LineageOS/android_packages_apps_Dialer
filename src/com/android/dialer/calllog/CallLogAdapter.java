@@ -28,7 +28,6 @@ import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +41,6 @@ import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.util.UriUtils;
-import com.android.dialer.CallDetailActivity;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
@@ -55,7 +53,6 @@ import com.google.common.base.Objects;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 
 /**
  * Adapter class to fill in data for the Call Log.
@@ -686,10 +683,7 @@ public class CallLogAdapter extends GroupingListAdapter
                     duration, name, ntype, label, lookupUri, photoUri, sourceType);
         }
 
-        final boolean isNew = c.getInt(CallLogQuery.IS_READ) == 0;
-        // New items also use the highlighted version of the text.
-        final boolean isHighlighted = isNew;
-        mCallLogViewsHelper.setPhoneCallDetails(views, details, isHighlighted);
+        mCallLogViewsHelper.setPhoneCallDetails(views, details);
 
         int contactType = ContactPhotoManager.TYPE_DEFAULT;
 
@@ -1080,6 +1074,19 @@ public class CallLogAdapter extends GroupingListAdapter
                 false /* darkTheme */, true /* isCircular */, request);
     }
 
+    /**
+     * Bind a call log entry view for testing purposes.  Also inflates the action view stub so
+     * unit tests can access the buttons contained within.
+     *
+     * @param view The current call log row.
+     * @param context The current context.
+     * @param cursor The cursor to bind from.
+     */
+    @VisibleForTesting
+    void bindViewForTest(View view, Context context, Cursor cursor) {
+        bindStandAloneView(view, context, cursor);
+        inflateActionViewStub(view);
+    }
 
     /**
      * Sets whether processing of requests for contact details should be enabled.
