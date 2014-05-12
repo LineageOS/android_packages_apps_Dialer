@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"عرض الفائت فقط"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"إظهار رسائل البريد الصوتي فقط"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"عرض جميع المكالمات"</string>
+    <string name="add_contact" msgid="8875804371377471164">"إضافة جهة اتصال"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"إضافة ثانيتين إيقاف مؤقت"</string>
     <string name="add_wait" msgid="3360818652790319634">"إضافة انتظار"</string>
     <string name="call_settings" msgid="7666474782093693667">"الإعدادات"</string>

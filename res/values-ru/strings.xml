@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Пропущенные"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Показать голосовые сообщения"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Все вызовы"</string>
+    <string name="add_contact" msgid="8875804371377471164">"Добавить в контакты"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Добавить двухсекундную паузу"</string>
     <string name="add_wait" msgid="3360818652790319634">"Добавить паузу"</string>
     <string name="call_settings" msgid="7666474782093693667">"Настройки"</string>
@@ -162,24 +163,14 @@
     <string name="remove_contact" msgid="1080555335283662961">"Удалить"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Быстрый набор"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ВСЕ КОНТАКТЫ"</string>
-    <!-- no translation found for call_log_action_call_back (4944463006859852473) -->
-    <skip />
-    <!-- no translation found for call_log_action_delete (7371990297839987600) -->
-    <skip />
-    <!-- no translation found for call_log_action_voicemail (4978620572562925654) -->
-    <skip />
-    <!-- no translation found for description_incoming_missed_call (2610535352863246949) -->
-    <skip />
-    <!-- no translation found for description_incoming_answered_call (7206670204016969740) -->
-    <skip />
-    <!-- no translation found for description_outgoing_call (3964211633673659733) -->
-    <skip />
-    <!-- no translation found for description_call_back_action (3012837380108884260) -->
-    <skip />
-    <!-- no translation found for description_voicemail_action (8054891873788903063) -->
-    <skip />
-    <!-- no translation found for description_delete_action (7188614068459616450) -->
-    <skip />
-    <!-- no translation found for toast_entry_removed (3389119736202317999) -->
-    <skip />
+    <string name="call_log_action_call_back" msgid="4944463006859852473">"ВЫЗОВ"</string>
+    <string name="call_log_action_delete" msgid="7371990297839987600">"УДАЛИТЬ"</string>
+    <string name="call_log_action_voicemail" msgid="4978620572562925654">"ПРОСЛУШАТЬ"</string>
+    <string name="description_incoming_missed_call" msgid="2610535352863246949">"Пропущен вызов от контакта <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>. <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_incoming_answered_call" msgid="7206670204016969740">"Принят вызов от контакта <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>. <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_outgoing_call" msgid="3964211633673659733">"Звонок контакту <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>. <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_back_action" msgid="3012837380108884260">"Перезвонить контакту <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
+    <string name="description_voicemail_action" msgid="8054891873788903063">"Прослушать сообщение от контакта <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
+    <string name="description_delete_action" msgid="7188614068459616450">"Удалить запись для контакта <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> из списка вызовов."</string>
+    <string name="toast_entry_removed" msgid="3389119736202317999">"Запись удалена"</string>
 </resources>

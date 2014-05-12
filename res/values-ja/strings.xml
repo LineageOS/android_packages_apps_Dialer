@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"不在着信のみを表示"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"ボイスメールのみ表示"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"すべての通話を表示"</string>
+    <string name="add_contact" msgid="8875804371377471164">"連絡先を追加"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"2秒間の停止を追加"</string>
     <string name="add_wait" msgid="3360818652790319634">"待機を追加"</string>
     <string name="call_settings" msgid="7666474782093693667">"設定"</string>

@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"ສະແດງສະເພາະສາຍບໍ່ໄດ້ຮັບ"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"ສະແດງສະເພາະຂໍ້ຄວາມສຽງ"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"ສະແດງການໂທທັງໝົດ"</string>
+    <string name="add_contact" msgid="8875804371377471164">"ເພີ່ມ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"ເພີ່ມການຂັ້ນເວລາ 2 ວິນາທີ"</string>
     <string name="add_wait" msgid="3360818652790319634">"ເພີ່ມການລໍຖ້າ"</string>
     <string name="call_settings" msgid="7666474782093693667">"ການຕັ້ງຄ່າ"</string>

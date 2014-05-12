@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"부재중 전화만 표시"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"음성사서함만 표시"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"모든 통화 표시"</string>
+    <string name="add_contact" msgid="8875804371377471164">"연락처 추가"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"2초 간 일시 정지 추가"</string>
     <string name="add_wait" msgid="3360818652790319634">"대기 시간 추가"</string>
     <string name="call_settings" msgid="7666474782093693667">"설정"</string>
@@ -162,24 +163,14 @@
     <string name="remove_contact" msgid="1080555335283662961">"삭제"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"단축 다이얼"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"모든 연락처"</string>
-    <!-- no translation found for call_log_action_call_back (4944463006859852473) -->
-    <skip />
-    <!-- no translation found for call_log_action_delete (7371990297839987600) -->
-    <skip />
-    <!-- no translation found for call_log_action_voicemail (4978620572562925654) -->
-    <skip />
-    <!-- no translation found for description_incoming_missed_call (2610535352863246949) -->
-    <skip />
-    <!-- no translation found for description_incoming_answered_call (7206670204016969740) -->
-    <skip />
-    <!-- no translation found for description_outgoing_call (3964211633673659733) -->
-    <skip />
-    <!-- no translation found for description_call_back_action (3012837380108884260) -->
-    <skip />
-    <!-- no translation found for description_voicemail_action (8054891873788903063) -->
-    <skip />
-    <!-- no translation found for description_delete_action (7188614068459616450) -->
-    <skip />
-    <!-- no translation found for toast_entry_removed (3389119736202317999) -->
-    <skip />
+    <string name="call_log_action_call_back" msgid="4944463006859852473">"전화 걸기"</string>
+    <string name="call_log_action_delete" msgid="7371990297839987600">"삭제"</string>
+    <string name="call_log_action_voicemail" msgid="4978620572562925654">"듣기"</string>
+    <string name="description_incoming_missed_call" msgid="2610535352863246949">"부재중 전화: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_incoming_answered_call" msgid="7206670204016969740">"수신 전화: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_outgoing_call" msgid="3964211633673659733">"발신 전화: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>에 전화 걸기"</string>
+    <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> 음성사서함 듣기"</string>
+    <string name="description_delete_action" msgid="7188614068459616450">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>의 통화 기록 항목 삭제"</string>
+    <string name="toast_entry_removed" msgid="3389119736202317999">"통화 기록 항목이 삭제되었습니다."</string>
 </resources>
