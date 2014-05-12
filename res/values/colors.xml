@@ -103,4 +103,10 @@
 
     <!-- Color of action text for expanded call log entries which is disabled. -->
     <color name="call_log_disabled_text">#b3b3b3</color>
+
+    <!-- Color for missed call icons. -->
+    <color name="missed_call">#ff2e58</color>
+
+    <!-- Color for answered or outgoing call icons. -->
+    <color name="answered_call">#2aad6f</color>
 </resources>
