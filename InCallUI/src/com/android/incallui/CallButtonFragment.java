@@ -61,6 +61,8 @@ public class CallButtonFragment
     private static final int HIDDEN = 0;
     private static final int VISIBLE = 255;
 
+    private boolean mIsEnabled;
+
     @Override
     CallButtonPresenter createPresenter() {
         // TODO: find a cleaner way to include audio mode provider than
@@ -189,6 +191,7 @@ public class CallButtonFragment
 
     @Override
     public void setEnabled(boolean isEnabled) {
+        mIsEnabled = isEnabled;
         View view = getView();
         if (view.getVisibility() != View.VISIBLE) {
             view.setVisibility(View.VISIBLE);
@@ -420,7 +423,8 @@ public class CallButtonFragment
         Log.v(this, "showSpeakerphoneOffIcon: " + showSpeakerphoneOffIcon);
         Log.v(this, "showHandsetIcon: " + showHandsetIcon);
 
-        mAudioButton.setEnabled(audioButtonEnabled);
+        // Only enable the audio button if the fragment is enabled.
+        mAudioButton.setEnabled(audioButtonEnabled && mIsEnabled);
         mAudioButton.setSelected(audioButtonChecked);
 
         final LayerDrawable layers = (LayerDrawable) mAudioButton.getBackground();
