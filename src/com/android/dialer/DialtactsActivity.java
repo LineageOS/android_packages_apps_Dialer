@@ -16,10 +16,7 @@
 
 package com.android.dialer;
 
-import android.animation.Animator;
 import android.animation.LayoutTransition;
-import android.animation.Animator.AnimatorListener;
-import android.animation.AnimatorListenerAdapter;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -133,6 +130,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private static final int ANIMATION_DURATION = 250;
 
+    private RelativeLayout parentLayout;
+
     /**
      * Fragment containing the dialpad that slides into view
      */
@@ -154,7 +153,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private ListsFragment mListsFragment;
 
     private View mFloatingActionButton;
-    private View mMenuButton;
     private View mDialpadButton;
     private View mDialButton;
 
@@ -202,6 +200,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private DialerDatabaseHelper mDialerDatabaseHelper;
     private DragDropController mDragDropController;
+
+    private int mDialerBackgroundColor;
+    private int mContactListBackgroundColor;
 
     private class OverflowPopupMenu extends PopupMenu {
         public OverflowPopupMenu(Context context, View anchor) {
@@ -364,8 +365,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mFirstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH);
         }
 
-        RelativeLayout parent = (RelativeLayout) findViewById(R.id.dialtacts_mainlayout);
-        parent.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+        parentLayout = (RelativeLayout) findViewById(R.id.dialtacts_mainlayout);
+        parentLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+        parentLayout.setOnDragListener(new LayoutOnDragListener());
+
+        mDialerBackgroundColor = getResources().getColor(R.color.background_dialer_light);
+        mContactListBackgroundColor =
+                getResources().getColor(R.color.contact_list_background_color);
 
         mFragmentsFrame = findViewById(R.id.dialtacts_frame);
 
@@ -381,8 +387,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
         SmartDialPrefix.initializeNanpSettings(this);
-
-        findViewById(R.id.dialtacts_mainlayout).setOnDragListener(new LayoutOnDragListener());
     }
 
     @Override
@@ -625,6 +629,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         if (mListsFragment != null && mListsFragment.isResumed() && mListsFragment.isVisible()) {
             // If the favorites fragment is showing, fade to blank.
             mFragmentsFrame.animate().alpha(0.0f);
+            parentLayout.setBackgroundColor(mContactListBackgroundColor);
         }
         getActionBar().hide();
         alignFloatingActionButtonMiddle();
@@ -650,6 +655,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         if (mListsFragment != null && mListsFragment.isVisible()) {
             mFragmentsFrame.animate().alpha(1.0f);
+            parentLayout.setBackgroundColor(mDialerBackgroundColor);
+
         }
         getActionBar().show();
         alignFloatingActionButtonByTab(mCurrentTabPosition);
