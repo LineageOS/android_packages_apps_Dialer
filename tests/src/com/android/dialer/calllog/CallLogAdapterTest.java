@@ -212,7 +212,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         public TestCallLogAdapter(Context context, CallFetcher callFetcher,
                 ContactInfoHelper contactInfoHelper) {
-            super(context, callFetcher, contactInfoHelper, false);
+            super(context, callFetcher, contactInfoHelper, null, false);
         }
 
         @Override

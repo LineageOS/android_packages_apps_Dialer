@@ -66,6 +66,15 @@ public class CallLogAdapter extends GroupingListAdapter
         REMOVE_CALL_LOG_ENTRIES,
     }
 
+    /** Interface used to inform a parent UI element that a list item has been expanded. */
+    public interface CallItemExpandedListener {
+        /**
+         * @param view The {@link CallLogListItemView} that represents the item that was clicked
+         *         on.
+         */
+        public void onItemExpanded(CallLogListItemView view);
+    }
+
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {
         public void fetchCalls();
@@ -199,6 +208,8 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Helper to group call log entries. */
     private final CallLogGroupBuilder mCallLogGroupBuilder;
 
+    private CallItemExpandedListener mCallItemExpandedListener;
+
     /** Can be set to true by tests to disable processing of requests. */
     private volatile boolean mRequestProcessingDisabled = false;
 
@@ -245,7 +256,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private final View.OnClickListener mExpandCollapseListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            final View callLogItem = (View) v.getParent().getParent();
+            final CallLogListItemView callLogItem = (CallLogListItemView) v.getParent().getParent();
             final CallLogListItemViews views = (CallLogListItemViews) callLogItem.getTag();
 
             // Hide or show the actions view.
@@ -253,6 +264,11 @@ public class CallLogAdapter extends GroupingListAdapter
 
             // Trigger loading of the viewstub and visual expand or collapse.
             expandOrCollapseActions(callLogItem, expanded);
+
+            if (mCallItemExpandedListener != null) {
+                mCallItemExpandedListener.onItemExpanded(callLogItem);
+            }
+
             notifyDataSetChanged();
         }
     };
@@ -297,7 +313,7 @@ public class CallLogAdapter extends GroupingListAdapter
     };
 
     public CallLogAdapter(Context context, CallFetcher callFetcher,
-            ContactInfoHelper contactInfoHelper,
+            ContactInfoHelper contactInfoHelper, CallItemExpandedListener callItemExpandedListener,
             boolean isCallLog) {
         super(context);
 
@@ -305,6 +321,7 @@ public class CallLogAdapter extends GroupingListAdapter
         mCallFetcher = callFetcher;
         mContactInfoHelper = contactInfoHelper;
         mIsCallLog = isCallLog;
+        mCallItemExpandedListener = callItemExpandedListener;
 
         mContactInfoCache = ExpirableCache.create(CONTACT_INFO_CACHE_SIZE);
         mRequests = new LinkedList<ContactInfoRequest>();

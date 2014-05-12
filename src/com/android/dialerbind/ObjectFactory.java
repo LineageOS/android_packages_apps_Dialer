@@ -21,6 +21,7 @@ import static com.android.dialer.calllog.CallLogAdapter.CallFetcher;
 import android.content.Context;
 
 import com.android.dialer.calllog.CallLogAdapter;
+import com.android.dialer.calllog.CallLogAdapter.CallItemExpandedListener;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.service.CachedNumberLookupService;
 
@@ -43,7 +44,9 @@ public class ObjectFactory {
      * @return Instance of CallLogAdapter.
      */
     public static CallLogAdapter newCallLogAdapter(Context context, CallFetcher callFetcher,
-            ContactInfoHelper contactInfoHelper, boolean isCallLog) {
-        return new CallLogAdapter(context, callFetcher, contactInfoHelper, isCallLog);
+            ContactInfoHelper contactInfoHelper, CallItemExpandedListener callItemExpandedListener,
+            boolean isCallLog) {
+        return new CallLogAdapter(context, callFetcher, contactInfoHelper, callItemExpandedListener,
+                isCallLog);
     }
 }

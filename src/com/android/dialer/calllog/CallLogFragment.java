@@ -16,6 +16,9 @@
 
 package com.android.dialer.calllog;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
+import android.animation.Animator.AnimatorListener;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.ListFragment;
@@ -30,9 +33,14 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.VoicemailContract.Status;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -54,7 +62,9 @@ import java.util.List;
  * (all, missed or voicemails), specify it in the constructor.
  */
 public class CallLogFragment extends ListFragment
-        implements CallLogQueryHandler.Listener, CallLogAdapter.CallFetcher {
+        implements CallLogQueryHandler.Listener,
+        CallLogAdapter.CallFetcher,
+        CallLogAdapter.CallItemExpandedListener {
     private static final String TAG = "CallLogFragment";
 
     /**
@@ -79,6 +89,8 @@ public class CallLogFragment extends ListFragment
     private boolean mEmptyLoaderRunning;
     private boolean mCallLogFetched;
     private boolean mVoicemailStatusFetched;
+
+    private float mExpandedItemElevation;
 
     private final Handler mHandler = new Handler();
 
@@ -154,7 +166,7 @@ public class CallLogFragment extends ListFragment
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this, new ContactInfoHelper(
-                getActivity(), currentCountryIso), true);
+                getActivity(), currentCountryIso), this, true);
         setListAdapter(mAdapter);
         mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
                 this, mLogLimit);
@@ -168,6 +180,8 @@ public class CallLogFragment extends ListFragment
                 Status.CONTENT_URI, true, mVoicemailStatusObserver);
         setHasOptionsMenu(true);
         updateCallList(mCallTypeFilter, mDateLimit);
+
+        mExpandedItemElevation = getResources().getDimension(R.dimen.call_log_expanded_elevation);
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -502,5 +516,72 @@ public class CallLogFragment extends ListFragment
         final ListView listView = getListView();
         listView.removeFooterView(mFooterView);
         listView.addFooterView(mFooterView);
+    }
+
+    @Override
+    public void onItemExpanded(final CallLogListItemView view) {
+        final int startingHeight = view.getHeight();
+        final CallLogListItemViews viewHolder = (CallLogListItemViews) view.getTag();
+        final ViewTreeObserver observer = getListView().getViewTreeObserver();
+        observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                // We don't want to continue getting called for every draw.
+                if (observer.isAlive()) {
+                    observer.removeOnPreDrawListener(this);
+                }
+                // Calculate some values to help with the animation.
+                final int endingHeight = view.getHeight();
+                final int distance = Math.abs(endingHeight - startingHeight);
+                final int baseHeight = Math.min(endingHeight, startingHeight);
+                final boolean isExpand = endingHeight > startingHeight;
+
+                // Set the views back to the start state of the animation
+                view.getLayoutParams().height = startingHeight;
+                if (!isExpand) {
+                    viewHolder.actionsView.setVisibility(View.VISIBLE);
+                }
+                view.requestLayout();
+
+                // Set up the animator to animate the expansion.
+                ValueAnimator animator = isExpand ? ValueAnimator.ofFloat(0f, 1f)
+                        : ValueAnimator.ofFloat(1f, 0f);
+
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animator) {
+                        Float value = (Float) animator.getAnimatedValue();
+
+                        // For each value from 0 to 1, animate the various parts of the layout.
+                        view.getLayoutParams().height =
+                                (int) (value * distance + baseHeight);
+                        view.setElevation(mExpandedItemElevation * value);
+                        view.requestLayout();
+                    }
+                });
+                // Set everything to their final values when the animation's done.
+                animator.addListener(new AnimatorListener() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        view.getLayoutParams().height = LayoutParams.WRAP_CONTENT;
+                        if (!isExpand) {
+                            viewHolder.actionsView.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {}
+                    @Override
+                    public void onAnimationRepeat(Animator animation) { }
+                    @Override
+                    public void onAnimationStart(Animator animation) { }
+                });
+                animator.start();
+
+                // Return false so this draw does not occur to prevent the final frame from
+                // being drawn for the single frame before the animations start.
+                return false;
+            }
+        });
     }
 }
