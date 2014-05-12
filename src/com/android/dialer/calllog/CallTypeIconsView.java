@@ -17,7 +17,11 @@
 package com.android.dialer.calllog;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.provider.CallLog.Calls;
 import android.util.AttributeSet;
@@ -112,19 +116,80 @@ public class CallTypeIconsView extends View {
     }
 
     private static class Resources {
+
+        /**
+         * Drawable representing an incoming answered call.
+         */
         public final Drawable incoming;
+
+        /**
+         * Drawable respresenting an outgoing call.
+         */
         public final Drawable outgoing;
+
+        /**
+         * Drawable representing an incoming missed call.
+         */
         public final Drawable missed;
+
+        /**
+         * Drawable representing a voicemail.
+         */
         public final Drawable voicemail;
+
+        /**
+         * The margin to use for icons.
+         */
         public final int iconMargin;
 
+        /**
+         * Configures the call icon drawables.
+         * A single white call arrow which points down and left is used as a basis for all of the
+         * call arrow icons, applying rotation and colors as needed.
+         *
+         * @param context The current context.
+         */
         public Resources(Context context) {
             final android.content.res.Resources r = context.getResources();
-            incoming = r.getDrawable(R.drawable.ic_call_incoming_holo_dark);
-            outgoing = r.getDrawable(R.drawable.ic_call_outgoing_holo_dark);
-            missed = r.getDrawable(R.drawable.ic_call_missed_holo_dark);
+
+            incoming = r.getDrawable(R.drawable.ic_call_arrow);
+            incoming.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
+
+            // Create a rotated instance of the call arrow for outgoing calls.
+            outgoing = getRotatedDrawable(r, R.drawable.ic_call_arrow, 180f);
+            outgoing.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
+
+            // Need to make a copy of the arrow drawable, otherwise the same instance colored
+            // above will be recolored here.
+            missed = r.getDrawable(R.drawable.ic_call_arrow).mutate();
+            missed.setColorFilter(r.getColor(R.color.missed_call), PorterDuff.Mode.MULTIPLY);
+
             voicemail = r.getDrawable(R.drawable.ic_call_voicemail_holo_dark);
             iconMargin = r.getDimensionPixelSize(R.dimen.call_log_icon_margin);
+        }
+
+        /**
+         * Retrieves a copy of the specified drawable resource, rotated by a specified angle.
+         *
+         * @param resources The current resources.
+         * @param resourceId The resource ID of the drawable to rotate.
+         * @param angle The angle of rotation.
+         * @return Rotated drawable.
+         */
+        private Drawable getRotatedDrawable(
+                android.content.res.Resources resources, int resourceId, float angle) {
+
+            // Get the original drawable and make a copy which will be rotated.
+            Bitmap original = BitmapFactory.decodeResource(resources, resourceId);
+            Bitmap rotated = Bitmap.createBitmap(
+                    original.getWidth(), original.getHeight(), Bitmap.Config.ARGB_8888);
+
+            // Perform the rotation.
+            Canvas tempCanvas = new Canvas(rotated);
+            tempCanvas.rotate(angle, original.getWidth()/2, original.getHeight()/2);
+            tempCanvas.drawBitmap(original, 0, 0, null);
+
+            return new BitmapDrawable(resources,rotated);
         }
     }
 }
