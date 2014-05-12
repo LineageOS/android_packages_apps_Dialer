@@ -109,10 +109,15 @@ public final class CallLogListItemViews {
 
     @NeededForTesting
     public static CallLogListItemViews createForTest(Context context) {
-        return new CallLogListItemViews(
+        CallLogListItemViews views = new CallLogListItemViews(
                 new QuickContactBadge(context),
                 new View(context),
                 PhoneCallDetailsViews.createForTest(context),
                 new TextView(context));
+        views.callBackButtonView = new TextView(context);
+        views.deleteButtonView = new TextView(context);
+        views.voicemailButtonView = new TextView(context);
+        views.actionsView = new View(context);
+        return views;
     }
 }

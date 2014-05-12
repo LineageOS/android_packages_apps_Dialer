@@ -22,7 +22,6 @@ import android.provider.CallLog.Calls;
 import android.test.AndroidTestCase;
 import android.text.Html;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -293,8 +292,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(number, presentation, formattedNumber,
                         TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION),
-                true);
+                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION)
+        );
     }
 
     /** Sets the phone call details with default values and the given number. */
@@ -303,8 +302,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(number, Calls.PRESENTATION_ALLOWED,
                         formattedNumber, TEST_COUNTRY_ISO, geocodedLocation,
-                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION),
-                true);
+                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION)
+        );
     }
 
     /** Sets the phone call details with default values and the given date. */
@@ -312,8 +311,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.INCOMING_TYPE }, date, TEST_DURATION),
-                false);
+                        new int[]{ Calls.INCOMING_TYPE }, date, TEST_DURATION)
+        );
     }
 
     /** Sets the phone call details with default values and the given call types using icons. */
@@ -321,8 +320,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        callTypes, TEST_DATE, TEST_DURATION),
-                false);
+                        callTypes, TEST_DATE, TEST_DURATION)
+        );
     }
 
     private void setCallDetailsHeaderWithNumber(String number, int presentation) {
