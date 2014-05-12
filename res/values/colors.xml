@@ -21,6 +21,7 @@
     <color name="dialtacts_secondary_text_color">#888888</color>
     <color name="dialer_accent_color">#eeff41</color>
 
+    <color name="contact_list_background_color">#f2f2f2</color>
 
     <!-- Color of the text describing an unconsumed missed call. -->
     <color name="call_log_missed_call_highlight_color">#FF0000</color>

@@ -28,7 +28,7 @@
     <!-- Dialpad shadow -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="10dp"
         android:background="@drawable/shadow_fade_up" />
     <include layout="@layout/dialpad_view" />
     <!-- "Dialpad chooser" UI, shown only when the user brings up the

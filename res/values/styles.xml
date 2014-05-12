@@ -57,7 +57,7 @@
         <item name="list_item_label_width_weight">3</item>
         <item name="contact_browser_list_padding_left">8dip</item>
         <item name="contact_browser_list_padding_right">0dip</item>
-        <item name="contact_browser_background">@android:color/transparent</item>
+        <item name="contact_browser_background">@color/contact_list_background_color</item>
         <item name="list_item_text_indent">@dimen/contact_browser_list_item_text_indent</item>
         <!-- CallLog -->
         <item name="call_log_primary_text_color">#000000</item>
