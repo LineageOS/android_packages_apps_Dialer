@@ -182,7 +182,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mCursor.moveToFirst();
         insertPrivate(NOW, 0);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
-        mAdapter.bindStandAloneView(view, getActivity(), mCursor);
+        mAdapter.bindViewForTest(view, getActivity(), mCursor);
     }
 
     @MediumTest
@@ -198,7 +198,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mCursor.moveToFirst();
         insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
-        mAdapter.bindStandAloneView(view, getActivity(), mCursor);
+        mAdapter.bindViewForTest(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, TEST_NUMBER);
@@ -212,7 +212,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         values[CallLogQuery.CACHED_FORMATTED_NUMBER] = TEST_FORMATTED_NUMBER;
         insertValues(values);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
-        mAdapter.bindStandAloneView(view, getActivity(), mCursor);
+        mAdapter.bindViewForTest(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, TEST_FORMATTED_NUMBER);
@@ -226,7 +226,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_HOME, TEST_DEFAULT_CUSTOM_LABEL);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
-        mAdapter.bindStandAloneView(view, getActivity(), mCursor);
+        mAdapter.bindViewForTest(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, "John Doe");
@@ -239,7 +239,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         insertWithCachedValues("sip:johndoe@gmail.com", NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_HOME, TEST_DEFAULT_CUSTOM_LABEL);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
-        mAdapter.bindStandAloneView(view, getActivity(), mCursor);
+        mAdapter.bindViewForTest(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, "John Doe");
@@ -254,7 +254,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_HOME, TEST_DEFAULT_CUSTOM_LABEL);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
-        mAdapter.bindStandAloneView(view, getActivity(), mCursor);
+        mAdapter.bindViewForTest(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, "John Doe");
@@ -269,7 +269,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_WORK, TEST_DEFAULT_CUSTOM_LABEL);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
-        mAdapter.bindStandAloneView(view, getActivity(), mCursor);
+        mAdapter.bindViewForTest(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, "John Doe");
@@ -283,7 +283,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_CUSTOM, numberLabel);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
-        mAdapter.bindStandAloneView(view, getActivity(), mCursor);
+        mAdapter.bindViewForTest(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertNameIs(views, "John Doe");
@@ -296,7 +296,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_HOME, "");
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
-        mAdapter.bindStandAloneView(view, getActivity(), mCursor);
+        mAdapter.bindViewForTest(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertTrue(views.quickContactView.isEnabled());
@@ -307,7 +307,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mCursor.moveToFirst();
         insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
-        mAdapter.bindStandAloneView(view, getActivity(), mCursor);
+        mAdapter.bindViewForTest(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         assertFalse(views.quickContactView.isEnabled());
@@ -318,7 +318,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mCursor.moveToFirst();
         insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
-        mAdapter.bindStandAloneView(view, getActivity(), mCursor);
+        mAdapter.bindViewForTest(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
 
@@ -339,7 +339,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mCursor.moveToFirst();
         insertVoicemail(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0);
         View view = mAdapter.newStandAloneView(getActivity(), mParentView);
-        mAdapter.bindStandAloneView(view, getActivity(), mCursor);
+        mAdapter.bindViewForTest(view, getActivity(), mCursor);
 
         CallLogListItemViews views = (CallLogListItemViews) view.getTag();
         IntentProvider intentProvider = (IntentProvider) views.voicemailButtonView.getTag();
@@ -439,7 +439,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
             if (null == mList[i]) {
                 mList[i] = mAdapter.newStandAloneView(mActivity, mParentView);
             }
-            mAdapter.bindStandAloneView(mList[i], mActivity, mCursor);
+            mAdapter.bindViewForTest(mList[i], mActivity, mCursor);
             mCursor.moveToPrevious();
             i++;
         }
