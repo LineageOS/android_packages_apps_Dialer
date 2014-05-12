@@ -252,7 +252,6 @@ public class CallLogFragment extends ListFragment
         mStatusMessageView = view.findViewById(R.id.voicemail_status);
         mStatusMessageText = (TextView) view.findViewById(R.id.voicemail_status_message);
         mStatusMessageAction = (TextView) view.findViewById(R.id.voicemail_status_action);
-
         return view;
     }
 

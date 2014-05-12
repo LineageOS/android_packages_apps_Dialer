@@ -67,7 +67,7 @@
             android:fadingEdge="none"
             android:scrollbarStyle="outsideOverlay"
             android:divider="@null"
-        />
+            android:nestedScrollingEnabled="true" />
         <TextView android:id="@android:id/empty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -1447,4 +1447,45 @@ public class ViewDragHelper {
 
         return result;
     }
+
+    /**
+     * Prepares the {@link ViewDragHelper} for the beginning of a nested scroll.
+     *
+     * @param target The child view that is dispatching the nested scroll.
+     */
+    public void startNestedScroll(View target) {
+        setDragState(STATE_DRAGGING);
+        mCapturedView = target;
+    }
+
+    /**
+     * Informs the {@link ViewDragHelper} that a nested scroll has ended.
+     *
+     * @param target The child view that is dispatching the nested scroll.
+     */
+    public void stopNestedScroll(View target) {
+        dispatchViewReleased(0, 0);
+    }
+
+    /**
+     * Update the {@link ViewDragHelper} with a new nested scrolling event.
+     *
+     * @param target The child view that is dispatching the nested scroll.
+     * @param dx The x distance scrolled on the child, in pixels.
+     * @param dy The y distance scroll on the child, in pixels.
+     * @param consumed An int array for the {@link ViewDragHelper} to report back the scroll
+     *         deltas that it consumed.
+     */
+    public void processNestedScroll(View target, int dx, int dy, int[] consumed) {
+        final int targetX = mCapturedView.getLeft() + dx;
+        final int targetY = mCapturedView.getTop() + dy;
+        dragTo(targetX, targetY, dx, dy);
+        if (consumed != null) {
+            final int unconsumedX = targetX - mCapturedView.getLeft();
+            final int unconsumedY = targetY - mCapturedView.getTop();
+            consumed[0] = dx - unconsumedX;
+            consumed[1] = dy - unconsumedY;
+        }
+    }
+
 }
