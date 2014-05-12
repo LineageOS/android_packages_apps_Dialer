@@ -245,7 +245,14 @@ public class CallLogAdapter extends GroupingListAdapter
     private final View.OnClickListener mExpandCollapseListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            expandOrCollapseActions((View) v.getParent().getParent());
+            final View callLogItem = (View) v.getParent().getParent();
+            final CallLogListItemViews views = (CallLogListItemViews) callLogItem.getTag();
+
+            // Hide or show the actions view.
+            boolean expanded = toggleExpansion(views.rowId);
+
+            // Trigger loading of the viewstub and visual expand or collapse.
+            expandOrCollapseActions(callLogItem, expanded);
             notifyDataSetChanged();
         }
     };
@@ -616,13 +623,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
         // Restore expansion state of the row on rebind.  Inflate the actions ViewStub if required,
         // and set its visibility state accordingly.
-        if (isExpanded(rowId)) {
-            // Inflate the view stub if necessary, and wire up the event handlers.
-            inflateActionViewStub(view);
-            views.actionsView.setVisibility(View.VISIBLE);
-        } else if (views.actionsView != null) {
-            views.actionsView.setVisibility(View.GONE);
-        }
+        expandOrCollapseActions(view, isExpanded(rowId));
 
         // Lookup contacts with this number
         NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
@@ -751,17 +752,15 @@ public class CallLogAdapter extends GroupingListAdapter
      * Expands or collapses the view containing the CALLBACK, VOICEMAIL and DELETE action buttons.
      *
      * @param callLogItem The call log entry parent view.
+     * @param isExpanded The new expansion state of the view.
      */
-    private void expandOrCollapseActions(View callLogItem) {
+    private void expandOrCollapseActions(View callLogItem, boolean isExpanded) {
         final CallLogListItemViews views = (CallLogListItemViews)callLogItem.getTag();
 
-        // Hide or show the actions view.
-        boolean expanded = toggleExpansion(views.rowId);
+        if (isExpanded) {
+            // Inflate the view stub if necessary, and wire up the event handlers.
+            inflateActionViewStub(callLogItem);
 
-        // Inflate the view stub if necessary, and wire up the event handlers.
-        inflateActionViewStub(callLogItem);
-
-        if (expanded) {
             views.actionsView.setVisibility(View.VISIBLE);
             callLogItem.setBackgroundColor(
                     callLogItem.getResources().getColor(R.color.background_dialer_light));
@@ -777,7 +776,12 @@ public class CallLogAdapter extends GroupingListAdapter
                     views.voicemailButtonView.requestAccessibilityFocus() ||
                     views.deleteButtonView.requestAccessibilityFocus();
         } else {
-            views.actionsView.setVisibility(View.GONE);
+            // When recycling a view, it is possible the actionsView ViewStub was previously
+            // inflated so we should hide it in this case.
+            if (views.actionsView != null ) {
+                views.actionsView.setVisibility(View.GONE);
+            }
+
             callLogItem.setBackgroundColor(
                     callLogItem.getResources().getColor(R.color.background_dialer_list_items));
             callLogItem.setElevation(0);
