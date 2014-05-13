@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center_vertical">
                     <TextView
                         android:id="@+id/contact_tile_name"
                         android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                         android:layout_width="@dimen/favorites_star_icon_size"
                         android:layout_height="@dimen/favorites_star_icon_size"
                         android:layout_marginStart="3dp"
-                        android:src="@drawable/star_thumbnail"
+                        android:src="@drawable/ic_star"
                         android:visibility="gone" />
                 </LinearLayout>
                 <TextView
