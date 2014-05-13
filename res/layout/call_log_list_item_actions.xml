@@ -30,6 +30,7 @@
         >
         <TextView
             android:id="@+id/call_back_action"
+            android:background="@drawable/action_button_background"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:layout_width="wrap_content"
@@ -44,6 +45,7 @@
             android:focusable="true"/>
         <TextView
             android:id="@+id/voicemail_action"
+            android:background="@drawable/action_button_background"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:layout_width="wrap_content"
@@ -58,6 +60,7 @@
             android:focusable="true"/>
         <TextView
             android:id="@+id/delete_action"
+            android:background="@drawable/action_button_background"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:layout_width="wrap_content"
