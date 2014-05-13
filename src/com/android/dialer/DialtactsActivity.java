@@ -190,6 +190,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private View mFragmentsSpacer;
     private View mFragmentsFrame;
 
+    private String mRegularNumber;
+
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
@@ -363,6 +365,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     if (dialpadSearch && mSmartDialSearchFragment != null) {
                             mSmartDialSearchFragment.setQueryString(newText, false);
                             mSmartDialSearchFragment.setDialpadQueryString(s.toString());
+                            mSmartDialSearchFragment.setRegularQueryString(mRegularNumber);
                     } else if (mRegularSearchFragment != null) {
                         mRegularSearchFragment.setQueryString(newText, false);
                     }
@@ -1100,6 +1103,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onDialpadQueryChanged(String query) {
         final String normalizedQuery = query;
+        mRegularNumber = query;
         if (!TextUtils.equals(mSearchView.getText(), normalizedQuery)) {
             if (DEBUG) {
                 Log.d(TAG, "onDialpadQueryChanged - new query: " + query);
