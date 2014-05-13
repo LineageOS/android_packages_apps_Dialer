@@ -40,6 +40,7 @@ import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.Menu;
@@ -236,39 +237,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     /**
-     * Listener used when one of phone numbers in search UI is selected. This will initiate a
-     * phone call using the phone number.
-     */
-    private final OnPhoneNumberPickerActionListener mPhoneNumberPickerActionListener =
-            new OnPhoneNumberPickerActionListener() {
-                @Override
-                public void onPickPhoneNumberAction(Uri dataUri) {
-                    // Specify call-origin so that users will see the previous tab instead of
-                    // CallLog screen (search UI will be automatically exited).
-                    PhoneNumberInteraction.startInteractionForPhoneCall(
-                        DialtactsActivity.this, dataUri, getCallOrigin());
-                    mClearSearchOnPause = true;
-                }
-
-                @Override
-                public void onCallNumberDirectly(String phoneNumber) {
-                    Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin());
-                    startActivity(intent);
-                    mClearSearchOnPause = true;
-                }
-
-                @Override
-                public void onShortcutIntentCreated(Intent intent) {
-                    Log.w(TAG, "Unsupported intent has come (" + intent + "). Ignoring.");
-                }
-
-                @Override
-                public void onHomeInActionBarSelected() {
-                    exitSearchUi();
-                }
-    };
-
-    /**
      * Listener used to send search queries to the phone search fragment.
      */
     private final TextWatcher mPhoneSearchQueryTextListener = new TextWatcher() {
@@ -429,15 +397,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             transaction.commit();
         } else if (fragment instanceof SmartDialSearchFragment) {
             mSmartDialSearchFragment = (SmartDialSearchFragment) fragment;
-            mSmartDialSearchFragment.setOnPhoneNumberPickerActionListener(
-                    mPhoneNumberPickerActionListener);
+            mSmartDialSearchFragment.setOnPhoneNumberPickerActionListener(this);
             if (mFragmentsFrame != null) {
                 mFragmentsFrame.setAlpha(1.0f);
             }
         } else if (fragment instanceof SearchFragment) {
             mRegularSearchFragment = (RegularSearchFragment) fragment;
-            mRegularSearchFragment.setOnPhoneNumberPickerActionListener(
-                    mPhoneNumberPickerActionListener);
+            mRegularSearchFragment.setOnPhoneNumberPickerActionListener(this);
             if (mFragmentsFrame != null) {
                 mFragmentsFrame.setAlpha(1.0f);
             }
@@ -977,22 +943,28 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onPickPhoneNumberAction(Uri dataUri) {
-        mPhoneNumberPickerActionListener.onPickPhoneNumberAction(dataUri);
+        // Specify call-origin so that users will see the previous tab instead of
+        // CallLog screen (search UI will be automatically exited).
+        PhoneNumberInteraction.startInteractionForPhoneCall(
+            DialtactsActivity.this, dataUri, getCallOrigin());
+        mClearSearchOnPause = true;
     }
 
     @Override
     public void onCallNumberDirectly(String phoneNumber) {
-        mPhoneNumberPickerActionListener.onCallNumberDirectly(phoneNumber);
+        Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin());
+        startActivity(intent);
+        mClearSearchOnPause = true;
     }
 
     @Override
     public void onShortcutIntentCreated(Intent intent) {
-        mPhoneNumberPickerActionListener.onShortcutIntentCreated(intent);
+        Log.w(TAG, "Unsupported intent has come (" + intent + "). Ignoring.");
     }
 
     @Override
     public void onHomeInActionBarSelected() {
-        mPhoneNumberPickerActionListener.onHomeInActionBarSelected();
+        exitSearchUi();
     }
 
     public int getActionBarHeight() {
