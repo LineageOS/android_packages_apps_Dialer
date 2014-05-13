@@ -35,12 +35,4 @@ public class CallLogListItemView extends LinearLayout {
     public CallLogListItemView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
-
-    @Override
-    public void requestLayout() {
-        // We will assume that once measured this will not need to resize
-        // itself, so there is no need to pass the layout request to the parent
-        // view (ListView).
-        forceLayout();
-    }
 }
