@@ -69,6 +69,18 @@
     <!-- Text color for no favorites message -->
     <color name="nofavorite_text_color">#777777</color>
 
+    <!-- Background color of wifi highlight items -->
+    <color name="background_wifi_highlight">#99cc00</color>
+
+    <!-- Foreground color of wifi highlight items -->
+    <color name="foreground_wifi_highlight">#ffffff</color>
+
+    <!-- Dark (e.g. border) regions of wifi highlight items -->
+    <color name="wifi_dark_wifi_highlight">#009900</color>
+
+    <!-- Generic separator color for wifi list items -->
+    <color name="wifi_list_separator">#909090</color>
+
     <!-- Text color for the "Remove" text in its regular state -->
     <color name="remove_text_color">#555555</color>
 

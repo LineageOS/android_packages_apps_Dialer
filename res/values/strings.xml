@@ -620,6 +620,28 @@
     <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
     <string name="remove_contact">Remove</string>
 
+    <string name="wifi_no_signal_no_problem">No Signal? No Problem.</string>
+
+    <string name="wifi_enable_google_wifi_calling">Enable Google Wi-Fi Calling</string>
+
+    <string name="wifi_when_connected_to_a_signal">When connected to a strong Wi-Fi signal:</string>
+
+    <string name="wifi_always_use_wifi">Always use Wi-Fi to make calls</string>
+
+    <string name="wifi_ask_use_wifi">Always ask</string>
+
+    <string name="wifi_never_use_wifi">Never use Wi-Fi to make calls</string>
+
+    <string name="wifi_next_setup_screen">Next</string>
+
+    <string name="wifi_previous_setup_screen">Back</string>
+
+    <string name="wifi_setup_completed">Boom. Wi-Fi calling is all set up. You can change your preferences or turn it off anytime in settings.</string>
+
+    <string name="wifi_setup_ok">Ok, got it</string>
+
+    <string name="wifi_setup_settings_shortcut">Call settings</string>
+
     <!-- Header text displayed on the main dialer screen above the list of favorite phone numbers.
          [CHAR LIMIT=21] -->
     <string name="favorites_menu_speed_dial">Speed Dial</string>
