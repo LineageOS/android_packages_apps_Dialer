@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Zobraziť len zmeškané"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Zobraziť len hlasové správy"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Zobraziť všetky hovory"</string>
+    <string name="add_contact" msgid="8875804371377471164">"Pridať kontakt"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Pridať dvojsekundovú pauzu"</string>
     <string name="add_wait" msgid="3360818652790319634">"Pridať čakanie"</string>
     <string name="call_settings" msgid="7666474782093693667">"Nastavenia"</string>

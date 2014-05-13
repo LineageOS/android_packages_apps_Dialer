@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Onyesha zilizokosa kupokewa pekee"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Onyesha barua za sauti pekee"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Onyesha simu zote"</string>
+    <string name="add_contact" msgid="8875804371377471164">"Ongeza anwani"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Ongeza usitishaji wa sekunde 2"</string>
     <string name="add_wait" msgid="3360818652790319634">"Ongeza kusubiri"</string>
     <string name="call_settings" msgid="7666474782093693667">"Mipangilio"</string>
@@ -170,6 +171,6 @@
     <string name="description_outgoing_call" msgid="3964211633673659733">"Simu kwa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Piga simu kwa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Sikiliza ujumbe wa sauti kutoka kwa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"Futa kumbukumbu ya simu ya <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_delete_action" msgid="7188614068459616450">"Futa rekodi ya simu ya <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Kumbukumbu ya simu imefutwa."</string>
 </resources>

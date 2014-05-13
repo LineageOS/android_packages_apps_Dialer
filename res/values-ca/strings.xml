@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Mostra només trucades perdudes"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Mostra només missatges de veu"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Mostra totes les trucades"</string>
+    <string name="add_contact" msgid="8875804371377471164">"Afegeix un contacte"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Afegeix una pausa de 2 segons"</string>
     <string name="add_wait" msgid="3360818652790319634">"Afegeix espera"</string>
     <string name="call_settings" msgid="7666474782093693667">"Configuració"</string>

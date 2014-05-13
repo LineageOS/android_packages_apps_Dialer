@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Visa endast missade samtal"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Visa bara röstmeddelanden"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Visa alla samtal"</string>
+    <string name="add_contact" msgid="8875804371377471164">"Lägg till kontakt"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Lägg till en paus på 2 sek."</string>
     <string name="add_wait" msgid="3360818652790319634">"Lägg till väntetid"</string>
     <string name="call_settings" msgid="7666474782093693667">"Inställningar"</string>

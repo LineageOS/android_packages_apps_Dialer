@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Показване само на пропуснатите"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Показване само на гл. поща"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Показване на всички обаждания"</string>
+    <string name="add_contact" msgid="8875804371377471164">"Добавяне на контакт"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Добавяне на 2-сек пауза"</string>
     <string name="add_wait" msgid="3360818652790319634">"Добавяне на изчакване"</string>
     <string name="call_settings" msgid="7666474782093693667">"Настройки"</string>

@@ -87,6 +87,8 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"仅显示未接来电"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"只显示语音邮件"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"显示所有通话"</string>
+    <!-- no translation found for add_contact (8875804371377471164) -->
+    <skip />
     <string name="add_2sec_pause" msgid="9214012315201040129">"延长暂停时间2秒"</string>
     <string name="add_wait" msgid="3360818652790319634">"延长等待时间"</string>
     <string name="call_settings" msgid="7666474782093693667">"设置"</string>
@@ -162,24 +164,14 @@
     <string name="remove_contact" msgid="1080555335283662961">"移除"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"快速拨号"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"所有联系人"</string>
-    <!-- no translation found for call_log_action_call_back (4944463006859852473) -->
-    <skip />
-    <!-- no translation found for call_log_action_delete (7371990297839987600) -->
-    <skip />
-    <!-- no translation found for call_log_action_voicemail (4978620572562925654) -->
-    <skip />
-    <!-- no translation found for description_incoming_missed_call (2610535352863246949) -->
-    <skip />
-    <!-- no translation found for description_incoming_answered_call (7206670204016969740) -->
-    <skip />
-    <!-- no translation found for description_outgoing_call (3964211633673659733) -->
-    <skip />
-    <!-- no translation found for description_call_back_action (3012837380108884260) -->
-    <skip />
-    <!-- no translation found for description_voicemail_action (8054891873788903063) -->
-    <skip />
-    <!-- no translation found for description_delete_action (7188614068459616450) -->
-    <skip />
-    <!-- no translation found for toast_entry_removed (3389119736202317999) -->
-    <skip />
+    <string name="call_log_action_call_back" msgid="4944463006859852473">"回电"</string>
+    <string name="call_log_action_delete" msgid="7371990297839987600">"删除"</string>
+    <string name="call_log_action_voicemail" msgid="4978620572562925654">"听取"</string>
+    <string name="description_incoming_missed_call" msgid="2610535352863246949">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的未接电话。"</string>
+    <string name="description_incoming_answered_call" msgid="7206670204016969740">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的已接电话。"</string>
+    <string name="description_outgoing_call" msgid="3964211633673659733">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的通话。"</string>
+    <string name="description_call_back_action" msgid="3012837380108884260">"给<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>回电"</string>
+    <string name="description_voicemail_action" msgid="8054891873788903063">"听取来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的语音邮件"</string>
+    <string name="description_delete_action" msgid="7188614068459616450">"删除与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的通话记录条目"</string>
+    <string name="toast_entry_removed" msgid="3389119736202317999">"通话记录条目已删除。"</string>
 </resources>

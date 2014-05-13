@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"הצג רק שיחות שלא נענו"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"הצג הודעות דואר קולי בלבד"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"הצג את כל השיחות"</string>
+    <string name="add_contact" msgid="8875804371377471164">"הוסף איש קשר"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"הוסף השהיה של 2 שניות"</string>
     <string name="add_wait" msgid="3360818652790319634">"הוסף המתנה"</string>
     <string name="call_settings" msgid="7666474782093693667">"הגדרות"</string>
@@ -165,11 +166,11 @@
     <string name="call_log_action_call_back" msgid="4944463006859852473">"התקשר חזרה"</string>
     <string name="call_log_action_delete" msgid="7371990297839987600">"מחק"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"האזן"</string>
-    <string name="description_incoming_missed_call" msgid="2610535352863246949">"שיחה שלא נענתה מ-<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_incoming_answered_call" msgid="7206670204016969740">"שיחה שנענתה מ-<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_incoming_missed_call" msgid="2610535352863246949">"שיחה שלא נענתה מאת <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_incoming_answered_call" msgid="7206670204016969740">"שיחה שנענתה מאת <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"התקשר אל <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"התקשר חזרה אל <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_voicemail_action" msgid="8054891873788903063">"האזן לדואר קולי מ-<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_voicemail_action" msgid="8054891873788903063">"האזן לדואר קולי מאת <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_delete_action" msgid="7188614068459616450">"מחק רשומה ביומן השיחות עבור <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"רשומת יומן שיחות נמחקה."</string>
 </resources>

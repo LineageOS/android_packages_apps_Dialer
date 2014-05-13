@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Pokaż tylko nieodebrane"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Pokaż tylko pocztę głosową"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Pokaż wszystkie połączenia"</string>
+    <string name="add_contact" msgid="8875804371377471164">"Dodaj kontakt"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Dodaj 2-sekundową pauzę"</string>
     <string name="add_wait" msgid="3360818652790319634">"Dodaj oczekiwanie"</string>
     <string name="call_settings" msgid="7666474782093693667">"Ustawienia"</string>

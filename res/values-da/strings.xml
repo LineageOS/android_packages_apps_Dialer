@@ -87,6 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Vis kun ubesvarede"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Vis kun telefonsvarerbeskeder"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Vis alle opkald"</string>
+    <string name="add_contact" msgid="8875804371377471164">"Tilføj kontaktperson"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Tilføj pause på 2 sek."</string>
     <string name="add_wait" msgid="3360818652790319634">"Tilføj ventetid"</string>
     <string name="call_settings" msgid="7666474782093693667">"Indstillinger"</string>
@@ -167,9 +168,9 @@
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"LYT"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Ubesvaret opkald fra <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"Opkald besvaret fra <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_outgoing_call" msgid="3964211633673659733">"Ring til <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_outgoing_call" msgid="3964211633673659733">"Opkald til <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Ring tilbage til <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_voicemail_action" msgid="8054891873788903063">"Lyt til talebesked fra <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_voicemail_action" msgid="8054891873788903063">"Lyt til indtalt besked fra <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_delete_action" msgid="7188614068459616450">"Slet <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> fra opkaldslisten"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Navn eller nummer blev slettet fra opkaldslisten."</string>
 </resources>
