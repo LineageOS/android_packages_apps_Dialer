@@ -71,7 +71,7 @@
     <dimen name="recent_call_log_item_padding">8dp</dimen>
 
     <!-- Size of the star icon on the favorites tile. -->
-    <dimen name="favorites_star_icon_size">10dp</dimen>
+    <dimen name="favorites_star_icon_size">12dp</dimen>
 
     <!-- Padding for the tooltip -->
     <dimen name="dismiss_button_padding_start">20dip</dimen>
