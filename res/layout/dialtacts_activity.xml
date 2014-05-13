@@ -79,28 +79,22 @@
         </LinearLayout>
     </com.android.dialer.list.RemoveView >
     <FrameLayout
-        android:layout_height="@dimen/floating_action_button_height"
+        android:id="@+id/floating_action_button_container"
         android:layout_width="@dimen/floating_action_button_width"
+        android:layout_height="@dimen/floating_action_button_height"
         android:layout_marginRight="@dimen/floating_action_button_margin_right"
         android:layout_marginBottom="@dimen/floating_action_button_margin_bottom"
-        android:id="@+id/floating_action_button"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true">
+
         <ImageButton
-            android:id="@+id/dialpad_button"
-            android:background="@drawable/floating_action_button"
+            android:id="@+id/floating_action_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/floating_action_button"
             android:contentDescription="@string/action_menu_dialpad_button"
             android:src="@drawable/fab_ic_dial"/>
-        <ImageButton
-            android:id="@+id/dial_button"
-            android:background="@drawable/floating_action_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/description_dial_button"
-            android:src="@drawable/fab_ic_call"
-            android:visibility="gone" />
+
     </FrameLayout>
     <!-- Host container for the contact tile drag shadow -->
     <FrameLayout

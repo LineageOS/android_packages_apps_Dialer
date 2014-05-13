@@ -109,8 +109,7 @@ public class DialpadFragment extends Fragment
      * TODO: Refactor the app so this interchange is a bit cleaner.
      */
     public interface HostInterface {
-        void setDialButtonEnabled(boolean enabled);
-        void setDialButtonContainerVisible(boolean visible);
+        void setFloatingActionButtonVisible(boolean visible);
     }
 
     /**
@@ -318,7 +317,7 @@ public class DialpadFragment extends Fragment
         if (mDialpadQueryListener != null) {
             mDialpadQueryListener.onDialpadQueryChanged(mDigits.getText().toString());
         }
-        updateDialAndDeleteButtonEnabledState();
+        updateDeleteButtonEnabledState();
     }
 
     @Override
@@ -673,7 +672,7 @@ public class DialpadFragment extends Fragment
 
         stopWatch.lap("hnt");
 
-        updateDialAndDeleteButtonEnabledState();
+        updateDeleteButtonEnabledState();
 
         stopWatch.lap("bes");
 
@@ -1218,7 +1217,7 @@ public class DialpadFragment extends Fragment
             if (mDialpadView != null) {
                 mDialpadView.setVisibility(View.GONE);
             }
-            ((HostInterface) getActivity()).setDialButtonContainerVisible(false);
+            ((HostInterface) getActivity()).setFloatingActionButtonVisible(false);
 
             mDialpadChooser.setVisibility(View.VISIBLE);
 
@@ -1235,7 +1234,7 @@ public class DialpadFragment extends Fragment
             } else {
                 mDigits.setVisibility(View.VISIBLE);
             }
-            ((HostInterface) getActivity()).setDialButtonContainerVisible(true);
+            ((HostInterface) getActivity()).setFloatingActionButtonVisible(true);
             mDialpadChooser.setVisibility(View.GONE);
         }
     }
@@ -1486,23 +1485,12 @@ public class DialpadFragment extends Fragment
     /**
      * Update the enabledness of the "Dial" and "Backspace" buttons if applicable.
      */
-    private void updateDialAndDeleteButtonEnabledState() {
+    private void updateDeleteButtonEnabledState() {
         if (getActivity() == null) {
             return;
         }
         final boolean digitsNotEmpty = !isDigitsEmpty();
         mDelete.setEnabled(digitsNotEmpty);
-        // On CDMA phones, if we're already on a call, we *always* enable the Dial button (since
-        // you can press it without entering any digits to send an empty flash.)
-        if (phoneIsCdma() && phoneIsOffhook()) {
-            ((HostInterface) getActivity()).setDialButtonEnabled(true);
-        } else {
-            // Common case: GSM, or CDMA but not on a call. Enable the Dial button if something
-            // has been entered into the digits field, or if there is a last dialed number that
-            // could be redialed.
-            ((HostInterface) getActivity()).setDialButtonEnabled(
-                    digitsNotEmpty || !TextUtils.isEmpty(mLastNumberDialed));
-        }
     }
 
     /**
@@ -1587,7 +1575,7 @@ public class DialpadFragment extends Fragment
                             // doing anything here.
                             if (getActivity() == null) return;
                             mLastNumberDialed = number;
-                            updateDialAndDeleteButtonEnabledState();
+                            updateDeleteButtonEnabledState();
                         }
                     });
         mCallLog.getLastOutgoingCall(lastCallArgs);

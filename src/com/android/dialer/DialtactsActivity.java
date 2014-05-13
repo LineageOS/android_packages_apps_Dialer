@@ -53,6 +53,7 @@ import android.view.animation.Interpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -152,9 +153,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private ListsFragment mListsFragment;
 
-    private View mFloatingActionButton;
-    private View mDialpadButton;
-    private View mDialButton;
+    private View mFloatingActionButtonContainer;
+    private ImageButton mFloatingActionButton;
 
     private View mFragmentsFrame;
 
@@ -162,6 +162,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
+    private boolean isDialpadShown;
 
     /**
      * The position of the currently selected tab in the attached {@link ListsFragment}.
@@ -375,13 +376,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mFragmentsFrame = findViewById(R.id.dialtacts_frame);
 
-        mFloatingActionButton = findViewById(R.id.floating_action_button);
-        ViewUtil.setupFloatingActionButton(mFloatingActionButton, getResources());
+        mFloatingActionButtonContainer = findViewById(R.id.floating_action_button_container);
+        ViewUtil.setupFloatingActionButton(mFloatingActionButtonContainer, getResources());
 
-        mDialButton = findViewById(R.id.dial_button);
-        mDialButton.setOnClickListener(this);
-        mDialpadButton = findViewById(R.id.dialpad_button);
-        mDialpadButton.setOnClickListener(this);
+        mFloatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
+        mFloatingActionButton.setOnClickListener(this);
 
         mRemoveViewContainer = findViewById(R.id.remove_view_container);
 
@@ -460,17 +459,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.dialpad_button:
-                // Reset the boolean flag that tracks whether the dialpad was up because
-                // we were in call. Regardless of whether it was true before, we want to
-                // show the dialpad because the user has explicitly clicked the dialpad
-                // button.
-                mInCallDialpadUp = false;
-                showDialpadFragment(true);
-                break;
-            case R.id.dial_button:
-                // Dial button was pressed; tell the Dialpad fragment
-                mDialpadFragment.dialButtonPressed();
+            case R.id.floating_action_button:
+                if (!isDialpadShown) {
+                    mInCallDialpadUp = false;
+                    showDialpadFragment(true);
+                } else {
+                    // Dial button was pressed; tell the Dialpad fragment
+                    mDialpadFragment.dialButtonPressed();
+                }
                 break;
             case R.id.search_close_button:
                 // Clear the search field
@@ -534,15 +530,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public boolean onLongClick(View view) {
         switch (view.getId()) {
-            case R.id.dial_button: {
-                // Dial button was pressed; tell the Dialpad fragment
-                mDialpadFragment.dialButtonPressed();
-                return true;  // Consume the event
-            }
-            default: {
+            case R.id.floating_action_button:
+                if (isDialpadShown) {
+                    // Dial button was pressed; tell the Dialpad fragment
+                    mDialpadFragment.dialButtonPressed();
+                    return true;  // Consume the event
+                }
+            default:
                 Log.wtf(TAG, "Unexpected onClick event from " + view);
                 break;
-            }
         }
         return false;
     }
@@ -612,8 +608,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Callback from child DialpadFragment when the dialpad is shown.
      */
     public void onDialpadShown() {
-        mDialButton.setVisibility(View.VISIBLE);
-        mDialpadButton.setVisibility(View.GONE);
+        isDialpadShown = true;
+        mFloatingActionButton.setImageResource(R.drawable.fab_ic_call);
+        mFloatingActionButton.setContentDescription(
+                getResources().getString(R.string.description_dial_button));
 
         SearchFragment fragment = null;
         if (mInDialpadSearch) {
@@ -639,8 +637,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Callback from child DialpadFragment when the dialpad is hidden.
      */
     public void onDialpadHidden() {
-        mDialButton.setVisibility(View.GONE);
-        mDialpadButton.setVisibility(View.VISIBLE);
+        isDialpadShown = false;
+        mFloatingActionButton.setImageResource(R.drawable.fab_ic_dial);
+        mFloatingActionButton.setContentDescription(
+                getResources().getString(R.string.action_menu_dialpad_button));
 
         SearchFragment fragment = null;
         if (mInDialpadSearch) {
@@ -907,15 +907,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     @Override
-    public void setDialButtonEnabled(boolean enabled) {
-        if (mDialButton != null) {
-            mDialButton.setEnabled(enabled);
-        }
-    }
-
-    @Override
-    public void setDialButtonContainerVisible(boolean visible) {
-        mFloatingActionButton.setVisibility(visible ? View.VISIBLE : View.GONE);
+    public void setFloatingActionButtonVisible(boolean visible) {
+        mFloatingActionButtonContainer.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     private boolean phoneIsInUse() {
@@ -1034,17 +1027,17 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private void alignFloatingActionButtonRight() {
         final RelativeLayout.LayoutParams params =
-                (RelativeLayout.LayoutParams) mFloatingActionButton.getLayoutParams();
+                (RelativeLayout.LayoutParams) mFloatingActionButtonContainer.getLayoutParams();
         params.removeRule(RelativeLayout.CENTER_HORIZONTAL);
         params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        mFloatingActionButton.setLayoutParams(params);
+        mFloatingActionButtonContainer.setLayoutParams(params);
     }
 
     private void alignFloatingActionButtonMiddle() {
         final RelativeLayout.LayoutParams params =
-                (RelativeLayout.LayoutParams) mFloatingActionButton.getLayoutParams();
+                (RelativeLayout.LayoutParams) mFloatingActionButtonContainer.getLayoutParams();
         params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        mFloatingActionButton.setLayoutParams(params);
+        mFloatingActionButtonContainer.setLayoutParams(params);
     }
 }
