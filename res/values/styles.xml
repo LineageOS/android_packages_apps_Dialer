@@ -55,8 +55,8 @@
         <item name="list_item_header_height">30dip</item>
         <item name="list_item_data_width_weight">5</item>
         <item name="list_item_label_width_weight">3</item>
-        <item name="contact_browser_list_padding_left">8dip</item>
-        <item name="contact_browser_list_padding_right">0dip</item>
+        <item name="contact_browser_list_padding_left">16dp</item>
+        <item name="contact_browser_list_padding_right">0dp</item>
         <item name="contact_browser_background">@color/contact_list_background_color</item>
         <item name="list_item_text_indent">@dimen/contact_browser_list_item_text_indent</item>
         <!-- CallLog -->
