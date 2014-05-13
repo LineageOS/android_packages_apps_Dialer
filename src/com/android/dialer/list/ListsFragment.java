@@ -1,6 +1,7 @@
 package com.android.dialer.list;
 
 import android.animation.LayoutTransition;
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.LoaderManager;
@@ -71,9 +72,11 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         public void showCallHistory();
     }
 
+    private ActionBar mActionBar;
     private ViewPager mViewPager;
     private ViewPagerTabs mViewPagerTabs;
     private ViewPagerAdapter mViewPagerAdapter;
+    private ListView mShortcutCardsListView;
     private SpeedDialFragment mSpeedDialFragment;
     private CallLogFragment mRecentsFragment;
     private AllContactsFragment mAllContactsFragment;
@@ -117,6 +120,40 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         public void onLoaderReset(Loader<Cursor> cursorLoader) {
         }
     }
+
+    private PanelSlideListener mPanelSlideListener = new PanelSlideListener() {
+        @Override
+        public void onPanelSlide(View panel, float slideOffset) {
+            // For every 2 percent that the panel is slid upwards, clip 3 percent from each edge
+            // of the shortcut card, to achieve the animated effect of the shortcut card
+            // rapidly shrinking and disappearing from view when the panel is slid upwards.
+            // slideOffset is 1 when the shortcut card is fully exposed, and 0 when completely
+            // hidden.
+            float ratioCardHidden = (1 - slideOffset) * 1.5f;
+            if (mShortcutCardsListView.getCount() > 0) {
+                SwipeableShortcutCard v =
+                        (SwipeableShortcutCard) mShortcutCardsListView.getChildAt(0);
+                v.clipCard(ratioCardHidden);
+            }
+
+            if (mActionBar != null) {
+                // Amount of available space that is not being hidden by the bottom pane
+                final int topPaneHeight = (int) (slideOffset * mShortcutCardsListView.getHeight());
+
+                final int availableActionBarHeight =
+                        Math.min(mActionBar.getHeight(), topPaneHeight);
+                mActionBar.setHideOffset(mActionBar.getHeight() - availableActionBarHeight);
+            }
+        }
+
+        @Override
+        public void onPanelOpened(View panel) {
+        }
+
+        @Override
+        public void onPanelClosed(View panel) {
+        }
+    };
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager fm) {
@@ -194,7 +231,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         final SharedPreferences prefs = getActivity().getSharedPreferences(
                 DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
         mLastCallShortcutDate = prefs.getLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, 0);
-
+        mActionBar = getActivity().getActionBar();
         fetchCalls();
         mCallLogAdapter.setLoading(true);
     }
@@ -204,6 +241,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         // Wipe the cache to refresh the call shortcut item. This is not that expensive because
         // it only contains one item.
         mCallLogAdapter.invalidateCache();
+        mActionBar = null;
         super.onPause();
     }
 
@@ -226,11 +264,10 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mViewPagerTabs.setViewPager(mViewPager);
         addOnPageChangeListener(mViewPagerTabs);
 
-        final ListView shortcutCardsListView =
-                (ListView) parentView.findViewById(R.id.shortcut_card_list);
-        shortcutCardsListView.setAdapter(mMergedAdapter);
+        mShortcutCardsListView = (ListView) parentView.findViewById(R.id.shortcut_card_list);
+        mShortcutCardsListView.setAdapter(mMergedAdapter);
 
-        setupPaneLayout((OverlappingPaneLayout) parentView, shortcutCardsListView);
+        setupPaneLayout((OverlappingPaneLayout) parentView);
 
         return parentView;
     }
@@ -298,34 +335,12 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         }
     }
 
-    private void setupPaneLayout(OverlappingPaneLayout paneLayout,
-            final ListView shortcutCardsListView) {
+    private void setupPaneLayout(OverlappingPaneLayout paneLayout) {
         // TODO: Remove the notion of a capturable view. The entire view be slideable, once
         // the framework better supports nested scrolling.
         paneLayout.setCapturableView(mViewPagerTabs);
         paneLayout.openPane();
-        paneLayout.setPanelSlideListener(new PanelSlideListener() {
-            @Override
-            public void onPanelSlide(View panel, float slideOffset) {
-                // For every 2 percent that the panel is slid upwards, clip 3 percent from each edge
-                // of the shortcut card, to achieve the animated effect of the shortcut card
-                // rapidly shrinking and disappearing from view when the panel is slid upwards.
-                float ratioCardHidden = (1 - slideOffset) * 1.5f;
-                if (shortcutCardsListView.getCount() > 0) {
-                    SwipeableShortcutCard v =
-                            (SwipeableShortcutCard) shortcutCardsListView.getChildAt(0);
-                    v.clipCard(ratioCardHidden);
-                }
-            }
-
-            @Override
-            public void onPanelOpened(View panel) {
-            }
-
-            @Override
-            public void onPanelClosed(View panel) {
-            }
-        });
+        paneLayout.setPanelSlideListener(mPanelSlideListener);
 
         LayoutTransition transition = paneLayout.getLayoutTransition();
         // Turns on animations for all types of layout changes so that they occur for
