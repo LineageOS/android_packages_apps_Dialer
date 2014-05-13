@@ -38,6 +38,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
 
     private OnListFragmentScrolledListener mActivityScrollListener;
 
+    private String mRegularQueryString;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -114,7 +116,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                 listener.onCallNumberDirectly(getQueryString());
             }
         } else if (shortcutType == DialerPhoneNumberListAdapter.SHORTCUT_ADD_NUMBER_TO_CONTACTS) {
-            final String number = adapter.getFormattedQueryString();
+            final String number = mRegularQueryString != null ? mRegularQueryString
+                    : adapter.getFormattedQueryString();
             final Intent intent = DialtactsActivity.getAddNumberToContactIntent(number);
             startActivityWithErrorToast(intent);
         }
@@ -128,5 +131,9 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                     Toast.LENGTH_SHORT);
             toast.show();
         }
+    }
+
+    public void setRegularQueryString(String query) {
+        mRegularQueryString = query;
     }
 }
