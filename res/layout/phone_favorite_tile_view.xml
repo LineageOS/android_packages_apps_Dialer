@@ -51,12 +51,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center">
                     <TextView
                         android:id="@+id/contact_tile_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
                         android:textColor="@color/contact_tile_name_color"
                         android:fontFamily="sans-serif"
                         android:singleLine="true"
@@ -69,6 +69,7 @@
                         android:id="@+id/contact_star_icon"
                         android:layout_width="@dimen/favorites_star_icon_size"
                         android:layout_height="@dimen/favorites_star_icon_size"
+                        android:layout_marginStart="3dp"
                         android:src="@drawable/star_thumbnail"
                         android:visibility="gone" />
                 </LinearLayout>
