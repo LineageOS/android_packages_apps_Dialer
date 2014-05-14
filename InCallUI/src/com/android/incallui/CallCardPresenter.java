@@ -24,6 +24,7 @@ import android.graphics.Bitmap;
 import android.telephony.DisconnectCause;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.telecomm.InCallAdapter;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -463,7 +464,18 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     public void secondaryPhotoClicked() {
-        CallCommandClient.getInstance().swap();
+        if (mSecondary == null) {
+            Log.wtf(this, "Secondary photo clicked but no secondary call.");
+            return;
+        }
+
+        String callId = CallInfoTranslator.getTelecommCallId(mSecondary);
+        if (callId != null) {
+            Log.i(this, "Swapping call to foreground: " + callId);
+            InCallPresenter.getInstance().getTelecommAdapter().unholdCall(callId);
+        } else {
+            Log.wtf(this, "Telecomm callId not found for call: " + callId);
+        }
     }
 
     public void endCallClicked() {
