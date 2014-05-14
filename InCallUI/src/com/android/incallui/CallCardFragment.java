@@ -28,6 +28,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -127,6 +128,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         } else {
             getView().setVisibility(View.INVISIBLE);
         }
+    }
+
+    @Override
+    public void setShowConnectionHandoff(boolean showConnectionHandoff) {
+        Log.v(this, "setShowConnectionHandoff: " + showConnectionHandoff);
+        mConnectionHandoffButton.setVisibility(showConnectionHandoff ? View.VISIBLE : View.GONE);
     }
 
     @Override
