@@ -243,4 +243,29 @@ public class CallCommandClient {
         }
     }
 
+    public void videoHandoff(int callId) {
+        Log.i(this, "video handoff");
+        if (mCommandService == null) {
+            Log.e(this, "Cannot perform video handoff; CallCommandService == null");
+            return;
+        }
+        try {
+            mCommandService.videoHandoff(callId);
+        } catch (RemoteException e) {
+            Log.e(this, "Error performing video handoff.", e);
+        }
+    }
+
+    public void connectionHandoff(int callId) {
+        Log.i(this, "connection handoff");
+        if (mCommandService == null) {
+            Log.e(this, "Cannot perform connection handoff; CallCommandService == null");
+            return;
+        }
+        try {
+            mCommandService.connectionHandoff(callId);
+        } catch (RemoteException e) {
+            Log.e(this, "Error performing connection handoff.", e);
+        }
+    }
 }

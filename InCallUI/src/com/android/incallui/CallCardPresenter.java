@@ -194,12 +194,14 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             ui.setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
                     getGatewayLabel(), getGatewayNumber(), getWifiConnection());
         } else {
-            ui.setCallState(Call.State.IDLE, DisconnectCause.NOT_VALID, false, null, null);
+            ui.setCallState(Call.State.IDLE, DisconnectCause.NOT_VALID, false, null, null, null);
         }
 
         final boolean enableEndCallButton = state.isConnectingOrConnected() &&
                 !state.isIncoming() && mPrimary != null;
         ui.setEndCallButtonEnabled(enableEndCallButton);
+        ui.setShowConnectionHandoff(mPrimary != null && mPrimary.can(
+                Capabilities.CONNECTION_HANDOFF));
     }
 
     @Override
@@ -213,14 +215,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private String getWifiConnection() {
-        if (mPrimary.isWifiCall()) {
-            final WifiManager wifiManager = (WifiManager) mContext.getSystemService(
-                    Context.WIFI_SERVICE);
-            final WifiInfo info = wifiManager.getConnectionInfo();
-            if (info != null) {
-                return info.getSSID();
-            }
-        }
         return null;
     }
 
@@ -482,6 +476,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         CallCommandClient.getInstance().disconnectCall(mPrimary.getCallId());
     }
 
+    public void connectionHandoffClicked() {
+        if (mPrimary != null) {
+            CallCommandClient.getInstance().connectionHandoff(mPrimary.getCallId());
+        }
+    }
+
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
@@ -497,5 +497,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimaryPhoneNumber(String phoneNumber);
         void setPrimaryLabel(String label);
         void setEndCallButtonEnabled(boolean enabled);
+        void setShowConnectionHandoff(boolean showConnectionHandoff);
     }
 }

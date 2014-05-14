@@ -183,6 +183,9 @@ public class CallButtonFragment
             case R.id.auxiliaryActionButton:
                 getPresenter().auxiliaryActionButtonClicked();
                 break;
+            case R.id.videoHandoffButton:
+                getPresenter().videoHandoffClicked();
+                break;
             default:
                 Log.wtf(this, "onClick: unexpected");
                 break;
