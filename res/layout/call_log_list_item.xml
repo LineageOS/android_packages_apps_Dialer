@@ -22,20 +22,23 @@
     android:id="@+id/call_log_list_item"
     android:orientation="vertical"
 >
-    <!--
-        This layout may represent either a call log item or one of the
-        headers in the call log.
-
-        The former will make the @id/call_log_item visible and the
-        @id/call_log_header gone.
-
-        The latter will make the @id/call_log_header visible and the
-        @id/call_log_item gone
-    -->
-
+    <!-- Day group heading. Used to show a "today", "yesterday", "last week" or "other" heading
+         above a group of call log entries. -->
+    <TextView
+        android:id="@+id/call_log_day_group_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/call_log_outer_margin"
+        android:layout_marginEnd="@dimen/call_log_outer_margin"
+        android:textColor="?attr/call_log_secondary_text_color"
+        android:textSize="@dimen/call_log_secondary_text_size"
+        android:paddingTop="@dimen/call_log_day_group_padding"
+        android:paddingBottom="0dp"
+        />
     <!-- Linear layout to separate the primary area containing the contact badge and caller
          information and the secondary action (call details / play voicemail). -->
     <LinearLayout
+        android:id="@+id/call_log_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:baselineAligned="false"
@@ -127,14 +130,6 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"/>
     </LinearLayout>
-    <TextView
-        android:id="@+id/call_log_header"
-        style="@style/ContactListSeparatorTextViewStyle"
-        android:layout_marginStart="@dimen/call_log_outer_margin"
-        android:layout_marginEnd="@dimen/call_log_outer_margin"
-        android:paddingTop="@dimen/call_log_inner_margin"
-        android:paddingBottom="@dimen/call_log_inner_margin" />
-
     <!-- Displays the extra link section -->
     <ViewStub android:id="@+id/link_stub"
               android:layout="@layout/call_log_list_item_extra"

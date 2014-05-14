@@ -61,13 +61,17 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <!-- clipChildren=true is required to ensure shadows on elevated call log entries are not
+             clipped.-->
         <ListView android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fadingEdge="none"
             android:scrollbarStyle="outsideOverlay"
             android:divider="@null"
-            android:nestedScrollingEnabled="true" />
+            android:nestedScrollingEnabled="true"
+            android:clipChildren="false"
+        />
         <TextView android:id="@android:id/empty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

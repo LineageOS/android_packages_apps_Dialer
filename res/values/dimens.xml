@@ -130,4 +130,6 @@
     <dimen name="call_log_action_height">48dp</dimen>
     <!-- Elevation of expanded call log items. -->
     <dimen name="call_log_expanded_elevation">4dp</dimen>
+    <!-- Padding above call log day group headers. -->
+    <dimen name="call_log_day_group_padding">16dp</dimen>
 </resources>
