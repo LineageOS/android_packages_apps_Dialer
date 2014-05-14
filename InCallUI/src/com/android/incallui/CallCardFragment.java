@@ -133,7 +133,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public void setShowConnectionHandoff(boolean showConnectionHandoff) {
         Log.v(this, "setShowConnectionHandoff: " + showConnectionHandoff);
-        mConnectionHandoffButton.setVisibility(showConnectionHandoff ? View.VISIBLE : View.GONE);
     }
 
     @Override
