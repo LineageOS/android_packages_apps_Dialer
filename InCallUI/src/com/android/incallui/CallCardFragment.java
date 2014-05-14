@@ -33,7 +33,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.contacts.common.util.ViewUtil;
-import com.android.services.telephony.common.Call;
 
 import java.util.List;
 
@@ -130,7 +129,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
     }
 
-    @Override
     public void setShowConnectionHandoff(boolean showConnectionHandoff) {
         Log.v(this, "setShowConnectionHandoff: " + showConnectionHandoff);
     }

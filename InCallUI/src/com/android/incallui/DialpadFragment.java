@@ -533,7 +533,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
             dialpadKey.setOnTouchListener(this);
             dialpadKey.setOnKeyListener(this);
             dialpadKey.setOnHoverListener(this);
-            dialpadKey.setOnClickListener(this);
         }
     }
 }
