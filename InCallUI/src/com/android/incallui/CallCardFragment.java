@@ -28,7 +28,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,7 +50,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mCallTypeLabel;
     private ImageView mPhoto;
     private TextView mElapsedTime;
-    private Button mConnectionHandoffButton;
 
     // Secondary caller info
     private ViewStub mSecondaryCallInfo;
@@ -120,14 +118,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             }
         });
         ViewUtil.setupFloatingActionButton(mEndCallButton, getResources());
-
-        mConnectionHandoffButton = (Button) view.findViewById(R.id.connectionHandoffButton);
-        mConnectionHandoffButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getPresenter().connectionHandoffClicked();
-            }
-        });
     }
 
     @Override
@@ -184,11 +174,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mNumberLabel.setVisibility(View.GONE);
         }
 
-    }
-
-    @Override
-    public void setShowConnectionHandoff(boolean showConnectionHandoff) {
-        mConnectionHandoffButton.setVisibility(showConnectionHandoff ? View.VISIBLE : View.GONE);
     }
 
     @Override

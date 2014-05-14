@@ -200,8 +200,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         final boolean enableEndCallButton = state.isConnectingOrConnected() &&
                 !state.isIncoming() && mPrimary != null;
         ui.setEndCallButtonEnabled(enableEndCallButton);
-        ui.setShowConnectionHandoff(mPrimary != null && mPrimary.can(
-                Capabilities.CONNECTION_HANDOFF));
     }
 
     @Override
@@ -476,12 +474,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         CallCommandClient.getInstance().disconnectCall(mPrimary.getCallId());
     }
 
-    public void connectionHandoffClicked() {
-        if (mPrimary != null) {
-            CallCommandClient.getInstance().connectionHandoff(mPrimary.getCallId());
-        }
-    }
-
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
@@ -497,6 +489,5 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimaryPhoneNumber(String phoneNumber);
         void setPrimaryLabel(String label);
         void setEndCallButtonEnabled(boolean enabled);
-        void setShowConnectionHandoff(boolean showConnectionHandoff);
     }
 }

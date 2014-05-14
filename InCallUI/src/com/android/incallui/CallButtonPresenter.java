@@ -257,11 +257,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             Log.v(this, "Show swap ", call.can(Capabilities.SWAP_CALLS));
             Log.v(this, "Show add call ", call.can(Capabilities.ADD_CALL));
             Log.v(this, "Show mute ", call.can(Capabilities.MUTE));
-            Log.v(this, "Show video handoff ", call.can(Capabilities.VIDEO_HANDOFF));
 
             final boolean canMerge = call.can(Capabilities.MERGE_CALLS);
             final boolean canAdd = call.can(Capabilities.ADD_CALL);
             final boolean isGenericConference = call.can(Capabilities.GENERIC_CONFERENCE);
+
 
             final boolean showMerge = !isGenericConference && canMerge;
 
@@ -309,7 +309,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             }
 
             ui.enableMute(call.can(Capabilities.MUTE));
-            ui.showVideoHandoff(call.can(Capabilities.VIDEO_HANDOFF));
 
             // Finally, update the "extra button row": It's displayed above the
             // "End" button, but only if necessary.  Also, it's never displayed
