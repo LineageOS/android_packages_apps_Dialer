@@ -21,6 +21,7 @@ import android.telecomm.CallCapabilities;
 import android.telecomm.CallInfo;
 import android.telecomm.GatewayInfo;
 import android.telecomm.InCallAdapter;
+import android.telecomm.InCallService;
 import android.telephony.DisconnectCause;
 
 import com.google.common.collect.ImmutableList;
@@ -31,7 +32,7 @@ import com.google.common.collect.ImmutableList;
  * dialing (outgoing), and active calls. When the last call is disconnected, Telecomm will unbind to
  * the service triggering InCallActivity (via CallList) to finish soon after.
  */
-public class InCallServiceImpl extends android.telecomm.InCallService {
+public class InCallServiceImpl extends InCallService {
 
     private static final ImmutableList<String> EMPTY_RESPONSE_TEXTS = ImmutableList.of();
 
@@ -47,6 +48,7 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
     @Override public void onDestroy() {
         Log.v(this, "onDestroy");
         // Tear down the InCall system
+        TelecommAdapter.getInstance().setAdapter(null);
         CallList.getInstance().clearOnDisconnect();
         InCallPresenter.getInstance().tearDown();
     }
@@ -55,8 +57,8 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
      * TODO(santoscordon): Rename this to setTelecommAdapter.
      * {@inheritDoc}
      */
-    @Override protected void setInCallAdapter(InCallAdapter inCallAdapter) {
-        Log.v(this, "setInCallAdapter");
+    @Override protected void onAdapterAttached(InCallAdapter inCallAdapter) {
+        Log.v(this, "onAdapterAttached");
         TelecommAdapter.getInstance().setAdapter(inCallAdapter);
     }
 
