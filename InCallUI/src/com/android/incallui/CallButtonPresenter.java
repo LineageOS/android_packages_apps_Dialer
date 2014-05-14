@@ -32,7 +32,6 @@ import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.Call.Capabilities;
 
 import android.app.Fragment;
-import android.os.RemoteException;
 import android.telecomm.InCallAdapter;
 
 /**
@@ -166,6 +165,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
         Log.d(this, "Sending new Audio Mode: " + AudioMode.toString(mode));
         CallCommandClient.getInstance().setAudioMode(mode);
+
+        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
+        if (telecommAdapter != null) {
+            Log.v(this, "Setting audio route");
+            telecommAdapter.setAudioRoute(mode);
+        }
     }
 
     /**
@@ -217,6 +222,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         Log.d(this, "turning on mute: " + checked);
 
         CallCommandClient.getInstance().mute(checked);
+
+        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
+        if (telecommAdapter != null) {
+            Log.i(this, "Setting mute");
+            telecommAdapter.mute(checked);
+        }
     }
 
     public void holdClicked(boolean checked) {

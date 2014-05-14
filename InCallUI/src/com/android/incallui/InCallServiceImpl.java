@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
+import android.telecomm.CallAudioState;
 import android.telecomm.CallInfo;
 import android.telecomm.InCallAdapter;
 
@@ -102,5 +103,11 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
             call.setState(Call.State.ONHOLD);
             CallList.getInstance().onUpdate(call);
         }
+    }
+
+    /** {@inheritDoc} */
+    @Override protected void onAudioStateChanged(CallAudioState audioState) {
+        AudioModeProvider.getInstance().onAudioModeChange(audioState.route, audioState.isMuted);
+        AudioModeProvider.getInstance().onSupportedAudioModeChange(audioState.supportedRouteMask);
     }
 }
