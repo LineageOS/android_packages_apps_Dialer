@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.telecomm.CallInfo;
 import android.telecomm.CallState;
+import android.telecomm.GatewayInfo;
 
 import com.android.services.telephony.common.Call;
 import com.google.common.base.Preconditions;
@@ -68,7 +69,13 @@ final class CallInfoTranslator {
         }
 
         call.setState(translateCallState(callInfo.getState()));
-        call.setNumber(callInfo.getHandle().getSchemeSpecificPart());
+        call.setNumber(callInfo.getOriginalHandle().getSchemeSpecificPart());
+
+        GatewayInfo gatewayInfo = callInfo.getGatewayInfo();
+        if (gatewayInfo != null) {
+            call.setGatewayNumber(gatewayInfo.getGatewayHandle().getSchemeSpecificPart());
+            call.setGatewayPackage(gatewayInfo.getGatewayProviderPackageName());
+        }
 
         // TODO: Each CallService needs to provide information what kind of call capabilities they
         // support. For now, always assume that all calls support hold by default.
