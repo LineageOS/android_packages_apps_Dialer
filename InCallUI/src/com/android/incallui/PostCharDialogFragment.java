@@ -52,7 +52,7 @@ public class PostCharDialogFragment extends DialogFragment {
         builder.setPositiveButton(R.string.pause_prompt_yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int whichButton) {
-                TelecommAdapter.getInstance().postDialWaitContinue(mCallId);
+                TelecommAdapter.getInstance().postDialContinue(mCallId);
             }
         });
         builder.setNegativeButton(R.string.pause_prompt_no, new DialogInterface.OnClickListener() {

@@ -125,13 +125,11 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
     /** {@inheritDoc} */
     @Override protected void setPostDial(String callId, String remaining) {
         // TODO(ihab): Add post-dial state to user interface
-        // TODO(ihab: Do the equivalent in the new framework:
     }
 
     /** {@inheritDoc} */
     @Override protected void setPostDialWait(String callId, String remaining) {
         // TODO(ihab): Add post-dial state to user interface
-        // TODO(ihab): Do the equivalent in the new framework:
     }
 
     /** {@inheritDoc} */

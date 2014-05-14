@@ -130,8 +130,12 @@ final class TelecommAdapter {
         }
     }
 
-    void postDialWaitContinue(String callId) {
-        Log.wtf(this, "postDialWaitContinue not implemented");
+    void postDialContinue(String callId) {
+        if (mAdapter != null) {
+            mAdapter.postDialContinue(callId);
+        } else {
+            Log.e(this, "error postDialContinue, mAdapter is null");
+        }
     }
 
     void postDialCancel(String callId) {
