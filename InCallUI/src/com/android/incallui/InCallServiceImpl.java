@@ -16,14 +16,10 @@
 
 package com.android.incallui;
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Looper;
 import android.telecomm.CallAudioState;
 import android.telecomm.CallInfo;
 import android.telecomm.InCallAdapter;
+import android.telephony.DisconnectCause;
 
 import com.android.services.telephony.common.Call;
 import com.google.common.collect.ImmutableList;
@@ -84,9 +80,10 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
     }
 
     /** {@inheritDoc} */
-    @Override protected void setDisconnected(String callId) {
+    @Override protected void setDisconnected(String callId, int disconnectCause) {
         Call call = CallInfoTranslator.getCall(callId);
         if (null != call) {
+            call.setDisconnectCause(DisconnectCause.NORMAL);
             call.setState(Call.State.DISCONNECTED);
             CallList.getInstance().onDisconnect(call);
 
