@@ -19,8 +19,6 @@ package com.android.incallui;
 import android.telecomm.InCallAdapter;
 import android.telephony.PhoneNumberUtils;
 
-import com.android.services.telephony.common.Call;
-
 /**
  * Logic for call buttons.
  */
@@ -50,17 +48,12 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
         Log.d(this, "Processing dtmf key " + c);
         // if it is a valid key, then update the display and send the dtmf tone.
         if (PhoneNumberUtils.is12Key(c) && mCall != null) {
-            // Plays the tone through Telecomm
-            InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
-            if (telecommAdapter != null) {
-                String callId = CallInfoTranslator.getTelecommCallId(mCall);
-                if (callId != null) {
-                    Log.d(this, "updating display and sending dtmf tone for '" + c + "'");
-                    // Append this key to the "digits" widget.
-                    getUi().appendDigitsToField(c);
-                    telecommAdapter.playDtmfTone(callId, c);
-                }
-            }
+            Log.d(this, "updating display and sending dtmf tone for '" + c + "'");
+
+            // Append this key to the "digits" widget.
+            getUi().appendDigitsToField(c);
+            // Plays the tone through Telecomm.
+            TelecommAdapter.getInstance().playDtmfTone(mCall.getCallId(), c);
         } else {
             Log.d(this, "ignoring dtmf request for '" + c + "'");
         }
@@ -72,14 +65,7 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
     public void stopTone() {
         if (mCall != null) {
             Log.d(this, "stopping remote tone");
-            InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
-            if (telecommAdapter != null) {
-                String callId = CallInfoTranslator.getTelecommCallId(mCall);
-                if (callId != null) {
-                    Log.d(this, "stopping remote tone: " + callId);
-                    telecommAdapter.stopDtmfTone(callId);
-                }
-            }
+            TelecommAdapter.getInstance().stopDtmfTone(mCall.getCallId());
         }
     }
 

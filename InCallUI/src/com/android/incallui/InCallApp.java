@@ -63,9 +63,7 @@ public class InCallApp extends Application {
             final String action = intent.getAction();
             Log.i(this, "Broadcast from Notification: " + action);
 
-            // TODO: Commands of this nature should exist in the CallList or a
-            //       CallController class that has access to CallCommandClient and
-            //       CallList.
+            // TODO: Commands of this nature should exist in the CallList.
             if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
                 InCallPresenter.getInstance().hangUpOngoingCall(context);
             } else if (action.equals(ACTION_ANSWER_INCOMING_CALL)) {

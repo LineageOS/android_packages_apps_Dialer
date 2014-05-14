@@ -16,10 +16,6 @@
 
 package com.android.incallui;
 
-import android.telecomm.InCallAdapter;
-
-import com.android.services.telephony.common.Call;
-
 import java.util.List;
 
 /**
@@ -125,21 +121,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         }
 
         Log.d(this, "onAnswer " + mCallId);
-
-        CallCommandClient.getInstance().answerCall(mCallId);
-
-        // TODO(santoscordon): Need a TelecommAdapter wrapper object so that we dont have to check
-        // for null like this everywhere.
-        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
-        if (telecommAdapter != null) {
-            // TODO(santoscordon): Remove translator by using only String-based IDs in all of the
-            // in-call app.
-            String callId = CallInfoTranslator.getTelecommCallId(mCall);
-            if (callId != null) {
-                Log.i(this, "Answering the call: " + callId);
-                telecommAdapter.answerCall(callId);
-            }
-        }
+        TelecommAdapter.getInstance().answerCall(mCall.getCallId());
     }
 
     /**
@@ -148,17 +130,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
      */
     public void onDecline() {
         Log.d(this, "onDecline " + mCallId);
-
-        CallCommandClient.getInstance().rejectCall(mCall, false, null);
-
-        InCallAdapter telecommAdapter = InCallPresenter.getInstance().getTelecommAdapter();
-        if (telecommAdapter != null) {
-            String callId = CallInfoTranslator.getTelecommCallId(mCall);
-            if (callId != null) {
-                Log.i(this, "Rejecting the call: " + callId);
-                telecommAdapter.rejectCall(callId);
-            }
-        }
+        TelecommAdapter.getInstance().rejectCall(mCall.getCallId(), false, null);
     }
 
     public void onText() {
@@ -169,8 +141,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     public void rejectCallWithMessage(String message) {
         Log.d(this, "sendTextToDefaultActivity()...");
-
-        CallCommandClient.getInstance().rejectCall(mCall, true, message);
+        TelecommAdapter.getInstance().rejectCall(mCall.getCallId(), true, message);
 
         onDismissDialog();
     }

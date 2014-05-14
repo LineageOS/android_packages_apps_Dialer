@@ -18,10 +18,10 @@ package com.android.incallui;
 
 import android.telecomm.CallAudioState;
 import android.telecomm.CallInfo;
+import android.telecomm.GatewayInfo;
 import android.telecomm.InCallAdapter;
 import android.telephony.DisconnectCause;
 
-import com.android.services.telephony.common.Call;
 import com.google.common.collect.ImmutableList;
 
 /**
@@ -36,6 +36,7 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
 
     /** {@inheritDoc} */
     @Override public void onCreate() {
+        Log.v(this, "onCreate");
         InCallPresenter inCallPresenter = InCallPresenter.getInstance();
         inCallPresenter.setUp(
                 getApplicationContext(), CallList.getInstance(), AudioModeProvider.getInstance());
@@ -43,6 +44,7 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
 
     /** {@inheritDoc} */
     @Override public void onDestroy() {
+        Log.v(this, "onDestroy");
         // Tear down the InCall system
         CallList.getInstance().clearOnDisconnect();
         InCallPresenter.getInstance().tearDown();
@@ -53,12 +55,40 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
      * {@inheritDoc}
      */
     @Override protected void setInCallAdapter(InCallAdapter inCallAdapter) {
-        InCallPresenter.getInstance().setTelecommAdapter(inCallAdapter);
+        Log.v(this, "setInCallAdapter");
+        TelecommAdapter.getInstance().setAdapter(inCallAdapter);
     }
 
     /** {@inheritDoc} */
     @Override protected void addCall(CallInfo callInfo) {
-        Call call = CallInfoTranslator.getCall(callInfo);
+        Log.v(this, "addCall, state: " + callInfo.getState());
+        Call call = new Call(callInfo.getId(),
+                callInfo.getOriginalHandle().getSchemeSpecificPart());
+        switch(callInfo.getState()) {
+            case RINGING:
+                call.setState(Call.State.INCOMING);
+                break;
+            case DIALING:
+                call.setState(Call.State.DIALING);
+                break;
+            case ACTIVE:
+                call.setState(Call.State.ACTIVE);
+                break;
+            case DISCONNECTED:
+                call.setState(Call.State.DISCONNECTED);
+                break;
+            default:
+                call.setState(Call.State.INVALID);
+                break;
+        }
+
+        GatewayInfo gatewayInfo = callInfo.getGatewayInfo();
+        if (gatewayInfo != null) {
+            call.setGatewayNumber(gatewayInfo.getGatewayHandle().getSchemeSpecificPart());
+            call.setGatewayPackage(gatewayInfo.getGatewayProviderPackageName());
+        }
+
+        call.addCapabilities(Call.Capabilities.HOLD | Call.Capabilities.MUTE);
 
         if (call.getState() == Call.State.INCOMING) {
             CallList.getInstance().onIncoming(call, EMPTY_RESPONSE_TEXTS);
@@ -69,7 +99,8 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
 
     /** {@inheritDoc} */
     @Override protected void setActive(String callId) {
-        Call call = CallInfoTranslator.getCall(callId);
+        Call call = CallList.getInstance().getCall(callId);
+        Log.v(this, "setActive: " + call);
         if (null != call) {
             call.setState(Call.State.ACTIVE);
             if (call.getConnectTime() == 0) {
@@ -81,7 +112,8 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
 
     /** {@inheritDoc} */
     @Override protected void setDialing(String callId) {
-        Call call = CallInfoTranslator.getCall(callId);
+        Call call = CallList.getInstance().getCall(callId);
+        Log.v(this, "setDialing: " + call);
         if (null != call) {
             call.setState(Call.State.DIALING);
             CallList.getInstance().onUpdate(call);
@@ -90,52 +122,36 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
 
     /** {@inheritDoc} */
     @Override protected void setRinging(String callId) {
-        Call call = CallInfoTranslator.getCall(callId);
-        if (null != call) {
-            call.setState(Call.State.RINGING);
-            CallList.getInstance().onUpdate(call);
-        }
+        // TODO(ihab): Implement this.
+        Log.v(this, "setRinging");
     }
 
     /** {@inheritDoc} */
     @Override protected void setPostDial(String callId, String remaining) {
-        Call call = CallInfoTranslator.getCall(callId);
-        if (null != call) {
-            // TODO(ihab): Add post-dial state to user interface
-            // TODO(ihab: Do the equivalent in the new framework:
-            // call.setState(Call.State.POST_DIAL);
-            CallList.getInstance().onUpdate(call);
-        }
+        // TODO(ihab): Add post-dial state to user interface
+        // TODO(ihab: Do the equivalent in the new framework:
     }
 
     /** {@inheritDoc} */
     @Override protected void setPostDialWait(String callId, String remaining) {
-        Call call = CallInfoTranslator.getCall(callId);
-        if (null != call) {
-            // TODO(ihab): Add post-dial state to user interface
-            // TODO(ihab): Do the equivalent in the new framework:
-            // call.setState(Call.State.POST_DIAL_WAIT);
-            CallList.getInstance().onUpdate(call);
-        }
+        // TODO(ihab): Add post-dial state to user interface
+        // TODO(ihab): Do the equivalent in the new framework:
     }
 
     /** {@inheritDoc} */
     @Override protected void setDisconnected(String callId, int disconnectCause) {
-        Call call = CallInfoTranslator.getCall(callId);
+        Log.v(this, "setDisconnected");
+        Call call = CallList.getInstance().getCall(callId);
         if (null != call) {
             call.setDisconnectCause(DisconnectCause.NORMAL);
             call.setState(Call.State.DISCONNECTED);
             CallList.getInstance().onDisconnect(call);
-
-            // Remove it from the mapping since we no longer need to interact
-            // with the Call.
-            CallInfoTranslator.removeCall(callId);
         }
     }
 
     /** {@inheritDoc} */
     @Override protected void setOnHold(String callId) {
-        Call call = CallInfoTranslator.getCall(callId);
+        Call call = CallList.getInstance().getCall(callId);
         if (null != call) {
             call.setState(Call.State.ONHOLD);
             CallList.getInstance().onUpdate(call);

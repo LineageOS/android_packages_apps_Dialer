@@ -30,8 +30,6 @@ import android.text.TextUtils;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.incallui.service.PhoneNumberService;
 import com.android.incalluibind.ServiceFactory;
-import com.android.services.telephony.common.Call;
-import com.android.services.telephony.common.CallIdentification;
 import com.android.services.telephony.common.MoreStrings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -77,14 +75,14 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         return mInfoMap.get(callId);
     }
 
-    public static ContactCacheEntry buildCacheEntryFromCall(Context context,
-            CallIdentification identification, boolean isIncoming) {
+    public static ContactCacheEntry buildCacheEntryFromCall(Context context, Call call,
+            boolean isIncoming) {
         final ContactCacheEntry entry = new ContactCacheEntry();
 
         // TODO: get rid of caller info.
-        final CallerInfo info = CallerInfoUtils.buildCallerInfo(context, identification);
-        ContactInfoCache.populateCacheEntry(context, info, entry,
-                identification.getNumberPresentation(), isIncoming);
+        final CallerInfo info = CallerInfoUtils.buildCallerInfo(context, call);
+        ContactInfoCache.populateCacheEntry(context, info, entry, call.getNumberPresentation(),
+                isIncoming);
         return entry;
     }
 
@@ -97,8 +95,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
         @Override
         public void onQueryComplete(int token, Object cookie, CallerInfo callerInfo) {
-            final CallIdentification identification = (CallIdentification) cookie;
-            findInfoQueryComplete(identification, callerInfo, mIsIncoming, true);
+            findInfoQueryComplete((Call) cookie, callerInfo, mIsIncoming, true);
         }
     }
 
@@ -107,15 +104,14 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
      * Returns the data through callback.  If callback is null, no response is made, however the
      * query is still performed and cached.
      *
-     * @param identification The call identification
      * @param callback The function to call back when the call is found. Can be null.
      */
-    public void findInfo(final CallIdentification identification, final boolean isIncoming,
+    public void findInfo(final Call call, final boolean isIncoming,
             ContactInfoCacheCallback callback) {
         Preconditions.checkState(Looper.getMainLooper().getThread() == Thread.currentThread());
         Preconditions.checkNotNull(callback);
 
-        final int callId = identification.getCallId();
+        final int callId = call.getCallId();
         final ContactCacheEntry cacheEntry = mInfoMap.get(callId);
         Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
 
@@ -148,15 +144,15 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
          * emergency call information, will not perform an additional asynchronous query.
          */
         final CallerInfo callerInfo = CallerInfoUtils.getCallerInfoForCall(
-                mContext, identification, new FindInfoCallback(isIncoming));
+                mContext, call, new FindInfoCallback(isIncoming));
 
-        findInfoQueryComplete(identification, callerInfo, isIncoming, false);
+        findInfoQueryComplete(call, callerInfo, isIncoming, false);
     }
 
-    private void findInfoQueryComplete(CallIdentification identification,
-            CallerInfo callerInfo, boolean isIncoming, boolean didLocalLookup) {
-        final int callId = identification.getCallId();
-        int presentationMode = identification.getNumberPresentation();
+    private void findInfoQueryComplete(Call call, CallerInfo callerInfo, boolean isIncoming,
+            boolean didLocalLookup) {
+        final int callId = call.getCallId();
+        int presentationMode = call.getNumberPresentation();
         if (callerInfo.contactExists || callerInfo.isEmergencyNumber() || callerInfo.isVoiceMailNumber()) {
             presentationMode = Call.PRESENTATION_ALLOWED;
         }
@@ -347,7 +343,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
     }
 
     /**
-     * Populate a cache entry from a caller identification (which got converted into a caller info).
+     * Populate a cache entry from a call (which got converted into a caller info).
      */
     public static void populateCacheEntry(Context context, CallerInfo info, ContactCacheEntry cce,
             int presentation, boolean isIncoming) {

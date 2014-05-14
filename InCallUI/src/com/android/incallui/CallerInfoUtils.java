@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 
-import com.android.services.telephony.common.Call;
-import com.android.services.telephony.common.CallIdentification;
-
 import java.util.Arrays;
 
 /**
@@ -37,7 +34,7 @@ public class CallerInfoUtils {
      * more information is returned to the OnQueryCompleteListener (which contains
      * information about the phone number label, user's name, etc).
      */
-    public static CallerInfo getCallerInfoForCall(Context context, CallIdentification call,
+    public static CallerInfo getCallerInfoForCall(Context context, Call call,
             CallerInfoAsyncQuery.OnQueryCompleteListener listener) {
         CallerInfo info = buildCallerInfo(context, call);
         String number = info.phoneNumber;
@@ -52,17 +49,17 @@ public class CallerInfoUtils {
         return info;
     }
 
-    public static CallerInfo buildCallerInfo(Context context, CallIdentification identification) {
+    public static CallerInfo buildCallerInfo(Context context, Call call) {
         CallerInfo info = new CallerInfo();
 
         // Store CNAP information retrieved from the Connection (we want to do this
         // here regardless of whether the number is empty or not).
-        info.cnapName = identification.getCnapName();
+        info.cnapName = call.getCnapName();
         info.name = info.cnapName;
-        info.numberPresentation = identification.getNumberPresentation();
-        info.namePresentation = identification.getCnapNamePresentation();
+        info.numberPresentation = call.getNumberPresentation();
+        info.namePresentation = call.getCnapNamePresentation();
 
-        String number = identification.getNumber();
+        String number = call.getNumber();
         if (!TextUtils.isEmpty(number)) {
             final String[] numbers = number.split("&");
             number = numbers[0];
