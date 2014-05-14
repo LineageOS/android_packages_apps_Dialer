@@ -21,6 +21,7 @@ import com.google.common.base.Preconditions;
 
 import android.content.Context;
 import android.content.Intent;
+import android.telecomm.IInCallAdapter;
 
 import com.android.services.telephony.common.Call;
 import com.android.services.telephony.common.Call.Capabilities;
@@ -54,6 +55,9 @@ public class InCallPresenter implements CallList.Listener {
     private InCallState mInCallState = InCallState.NO_CALLS;
     private ProximitySensor mProximitySensor;
     private boolean mServiceConnected = false;
+
+    /** Used to send call-related commands and updates back to Telecomm. */
+    private IInCallAdapter mInCallAdapter;
 
     /**
      * Is true when the activity has been previously started. Some code needs to know not just if
@@ -551,6 +555,15 @@ public class InCallPresenter implements CallList.Listener {
             attemptFinishActivity();
             attemptCleanup();
         }
+    }
+
+    /**
+     * Persists the current instance of IInCallAdapter.
+     *
+     * @param inCallAdapter The adapter to Telecomm system used to send call-related commands.
+     */
+    void setInCallAdapter(IInCallAdapter inCallAdapter) {
+        mInCallAdapter = inCallAdapter;
     }
 
     /**
