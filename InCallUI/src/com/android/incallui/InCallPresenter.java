@@ -57,7 +57,7 @@ public class InCallPresenter implements CallList.Listener {
     private boolean mServiceConnected = false;
 
     /** Used to send call-related commands and updates back to Telecomm. */
-    private IInCallAdapter mInCallAdapter;
+    private IInCallAdapter mTelecommAdapter;
 
     /**
      * Is true when the activity has been previously started. Some code needs to know not just if
@@ -560,10 +560,14 @@ public class InCallPresenter implements CallList.Listener {
     /**
      * Persists the current instance of IInCallAdapter.
      *
-     * @param inCallAdapter The adapter to Telecomm system used to send call-related commands.
+     * @param telecommAdapter The adapter to the Telecomm system used to send call-related commands.
      */
-    void setInCallAdapter(IInCallAdapter inCallAdapter) {
-        mInCallAdapter = inCallAdapter;
+    void setTelecommAdapter(IInCallAdapter telecommAdapter) {
+        mTelecommAdapter = telecommAdapter;
+    }
+
+    IInCallAdapter getTelecommAdapter() {
+        return mTelecommAdapter;
     }
 
     /**

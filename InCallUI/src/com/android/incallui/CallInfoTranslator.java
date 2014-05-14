@@ -21,7 +21,8 @@ import android.telecomm.CallInfo;
 import com.android.services.telephony.common.Call;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.common.collect.Maps;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 import java.util.Map;
 
@@ -29,17 +30,17 @@ import java.util.Map;
  * Translates {@link CallInfo} objects into {@link Call} objects so that call-infos received from
  * Telecomm can be used easily with {@link CallList}. Manages Telecomm call ID to {@link Call}
  * mappings. This class uses IDs for both {@link Call} objects and {@link CallInfo} objects which
- * are both normally referred to as "call id". To distinguish the two, the code and comments refer
+ * are both normally referred to as "call ID". To distinguish the two, the code and comments refer
  * to them as "call ID" and "Telecomm call ID" respectively.
  * TODO(santoscordon): This class is a temporary solution until all calls are coming in through
  * Telecomm at which point we can rewrite the standard Call object format.
  */
 final class CallInfoTranslator {
     /**
-     * Maps String-based Telecomm call IDs to call objects. Entries are added with calls to
+     * Maps String-based Telecomm call IDs to call objects and back. Entries are added with calls to
      * {@link #getCall} and removed with explicit calls to {@link #removeCall}.
      */
-    private static final Map<String, Call> sCallsById = Maps.newHashMap();
+    private static final BiMap<String, Call> sCallsByTelecommId = HashBiMap.create();
 
     /**
      * Stores the next available ID usable by Call objects. IDs start at 100000 and increase by one
@@ -58,9 +59,11 @@ final class CallInfoTranslator {
      * @param callInfo The call-info object from which to create a Call.
      */
     static Call getCall(CallInfo callInfo) {
-        Call call = getCall(callInfo.getId());
+        String telecommCallId = callInfo.getId();
+        Call call = getCall(telecommCallId);
         if (call == null) {
             call = new Call(sNextAvailableCallId++);
+            sCallsByTelecommId.put(telecommCallId, call);
         }
 
         // TODO(santoscordon): Remove assumption that all calls are dialing by default once
@@ -72,20 +75,25 @@ final class CallInfoTranslator {
     }
 
     /**
-     * Returns the call which maps from the specified Telecomm call ID. If no call was previously
-     * associated with the specified ID then return null.
+     * Returns the call which maps from the specified Telecomm call ID.
      *
      * @param telecommCallId The Telecomm call ID to map.
-     * @return The call associated with the specified Telecomm call ID.
+     * @return The call associated with the specified Telecomm call ID, or null if no association
+     *         exists.
      */
     static Call getCall(String telecommCallId) {
         Preconditions.checkState(!Strings.isNullOrEmpty(telecommCallId));
+        return sCallsByTelecommId.get(telecommCallId);
+    }
 
-        if (sCallsById.containsKey(telecommCallId)) {
-            return sCallsById.get(telecommCallId);
-        }
-
-        return null;
+    /**
+     * Returns the Telecomm call ID for the given call object.
+     *
+     * @param call The call object associated with the Telecomm call ID.
+     * @return The telecomm call ID or null if it cannot be found.
+     */
+    static String getTelecommCallId(Call call) {
+        return sCallsByTelecommId.inverse().get(call);
     }
 
     /**
@@ -94,6 +102,6 @@ final class CallInfoTranslator {
      * @param telecommCallId The Telecomm call ID to remove.
      */
     static void removeCall(String telecommCallId) {
-        sCallsById.remove(telecommCallId);
+        sCallsByTelecommId.remove(telecommCallId);
     }
 }
