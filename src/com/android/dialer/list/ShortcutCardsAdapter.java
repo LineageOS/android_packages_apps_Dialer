@@ -51,6 +51,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
     private static final String TAG = ShortcutCardsAdapter.class.getSimpleName();
 
     private final CallLogAdapter mCallLogAdapter;
+
     private final ListsFragment mFragment;
 
     private final int mCallLogPadding;
