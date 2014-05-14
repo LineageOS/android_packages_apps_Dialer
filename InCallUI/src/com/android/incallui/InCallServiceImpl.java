@@ -18,9 +18,10 @@ package com.android.incallui;
 
 import android.telecomm.CallAudioState;
 import android.telecomm.CallCapabilities;
-import android.telecomm.CallInfo;
+import android.telecomm.CallState;
 import android.telecomm.GatewayInfo;
 import android.telecomm.InCallAdapter;
+import android.telecomm.InCallCall;
 import android.telecomm.InCallService;
 import android.telephony.DisconnectCause;
 
@@ -33,7 +34,6 @@ import com.google.common.collect.ImmutableList;
  * the service triggering InCallActivity (via CallList) to finish soon after.
  */
 public class InCallServiceImpl extends InCallService {
-
     private static final ImmutableList<String> EMPTY_RESPONSE_TEXTS = ImmutableList.of();
 
     /** {@inheritDoc} */
@@ -53,41 +53,17 @@ public class InCallServiceImpl extends InCallService {
         InCallPresenter.getInstance().tearDown();
     }
 
-    /**
-     * TODO(santoscordon): Rename this to setTelecommAdapter.
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override protected void onAdapterAttached(InCallAdapter inCallAdapter) {
         Log.v(this, "onAdapterAttached");
         TelecommAdapter.getInstance().setAdapter(inCallAdapter);
     }
 
     /** {@inheritDoc} */
-    @Override protected void addCall(CallInfo callInfo) {
-        Log.v(this, "addCall, state: " + callInfo.getState());
-        Call call = new Call(callInfo.getId(),
-                callInfo.getOriginalHandle().getSchemeSpecificPart());
-        switch(callInfo.getState()) {
-            case RINGING:
-                call.setState(Call.State.INCOMING);
-                break;
-            case DIALING:
-                call.setState(Call.State.DIALING);
-                break;
-            case ACTIVE:
-                call.setState(Call.State.ACTIVE);
-                break;
-            case DISCONNECTED:
-                call.setState(Call.State.DISCONNECTED);
-                break;
-            default:
-                call.setState(Call.State.INVALID);
-                break;
-        }
-
-        call.setGatewayInfo(callInfo.getGatewayInfo());
-        call.addCapabilities(CallCapabilities.HOLD | CallCapabilities.MUTE);
-
+    @Override protected void addCall(InCallCall telecommCall) {
+        Log.v(this, "addCall, state: " + telecommCall.getState());
+        Call call = new Call(telecommCall.getId());
+        updateCall(call, telecommCall);
         if (call.getState() == Call.State.INCOMING) {
             CallList.getInstance().onIncoming(call, EMPTY_RESPONSE_TEXTS);
         } else {
@@ -96,32 +72,22 @@ public class InCallServiceImpl extends InCallService {
     }
 
     /** {@inheritDoc} */
-    @Override protected void setActive(String callId) {
-        Call call = CallList.getInstance().getCall(callId);
-        Log.v(this, "setActive: " + call);
-        if (null != call) {
-            call.setState(Call.State.ACTIVE);
-            if (call.getConnectTime() == 0) {
-                call.setConnectTime(System.currentTimeMillis());
-            }
+    @Override protected void updateCall(InCallCall telecommCall) {
+        Call call = CallList.getInstance().getCall(telecommCall.getId());
+        if (call == null) {
+            Log.v(this, "updateCall for unknown call: " + telecommCall.getId());
+            return;
+        }
+
+        Log.v(this, "updateCall: " + call);
+        int oldState = call.getState();
+        updateCall(call, telecommCall);
+
+        if (oldState != call.getState() && call.getState() == Call.State.DISCONNECTED) {
+            CallList.getInstance().onDisconnect(call);
+        } else {
             CallList.getInstance().onUpdate(call);
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override protected void setDialing(String callId) {
-        Call call = CallList.getInstance().getCall(callId);
-        Log.v(this, "setDialing: " + call);
-        if (null != call) {
-            call.setState(Call.State.DIALING);
-            CallList.getInstance().onUpdate(call);
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override protected void setRinging(String callId) {
-        // TODO(ihab): Implement this.
-        Log.v(this, "setRinging");
     }
 
     /** {@inheritDoc} */
@@ -135,43 +101,38 @@ public class InCallServiceImpl extends InCallService {
     }
 
     /** {@inheritDoc} */
-    @Override protected void setHandoffEnabled(String callId, boolean isHandoffEnabled) {
-        Call call = CallList.getInstance().getCall(callId);
-        Log.v(this, "setHandoffEnabled: " + call + " isEnabled: " + isHandoffEnabled);
-        if (null != call) {
-            if (isHandoffEnabled) {
-                // TODO(sail): Enable handoff once http://b/13800303 and http://b/13800552 are
-                // fixed.
-            } else {
-                call.removeCapabilities(CallCapabilities.CONNECTION_HANDOFF);
-            }
-            CallList.getInstance().onUpdate(call);
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override protected void setDisconnected(String callId, int disconnectCause) {
-        Log.v(this, "setDisconnected");
-        Call call = CallList.getInstance().getCall(callId);
-        if (null != call) {
-            call.setDisconnectCause(DisconnectCause.NORMAL);
-            call.setState(Call.State.DISCONNECTED);
-            CallList.getInstance().onDisconnect(call);
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override protected void setOnHold(String callId) {
-        Call call = CallList.getInstance().getCall(callId);
-        if (null != call) {
-            call.setState(Call.State.ONHOLD);
-            CallList.getInstance().onUpdate(call);
-        }
-    }
-
-    /** {@inheritDoc} */
     @Override protected void onAudioStateChanged(CallAudioState audioState) {
         AudioModeProvider.getInstance().onAudioModeChange(audioState.route, audioState.isMuted);
         AudioModeProvider.getInstance().onSupportedAudioModeChange(audioState.supportedRouteMask);
+    }
+
+    private void updateCall(Call call, InCallCall telecommCall) {
+        call.setHandle(telecommCall.getHandle());
+        call.setDisconnectCause(telecommCall.getDisconnectCause());
+        call.setCapabilities(telecommCall.getCapabilities());
+        call.setConnectTimeMillis(telecommCall.getConnectTimeMillis());
+        call.setGatewayInfo(telecommCall.getGatewayInfo());
+        call.setCurrentCallServiceDescriptor(telecommCall.getCurrentCallServiceDescriptor());
+        call.setHandoffCallServiceDescriptor(telecommCall.getHandoffCallServiceDescriptor());
+        call.setState(translateState(telecommCall.getState()));
+    }
+
+    private static int translateState(CallState state) {
+        switch (state) {
+            case DIALING:
+                return Call.State.DIALING;
+            case RINGING:
+                return Call.State.INCOMING;
+            case POST_DIAL:
+            case POST_DIAL_WAIT:
+            case ACTIVE:
+                return Call.State.ACTIVE;
+            case ON_HOLD:
+                return Call.State.ONHOLD;
+            case DISCONNECTED:
+                return Call.State.DISCONNECTED;
+            default:
+                return Call.State.INVALID;
+        }
     }
 }

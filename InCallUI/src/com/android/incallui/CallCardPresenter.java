@@ -24,6 +24,7 @@ import android.graphics.Bitmap;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telecomm.CallCapabilities;
+import android.telecomm.CallServiceDescriptor;
 import android.telephony.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -208,6 +209,15 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private String getWifiConnection() {
+        CallServiceDescriptor descriptor = mPrimary.getCurrentCallServiceDescriptor();
+        if (descriptor != null && descriptor.getNetworkType() == CallServiceDescriptor.FLAG_WIFI) {
+            final WifiManager wifiManager = (WifiManager) mContext.getSystemService(
+                    Context.WIFI_SERVICE);
+            final WifiInfo info = wifiManager.getConnectionInfo();
+            if (info != null) {
+                return info.getSSID();
+            }
+        }
         return null;
     }
 
@@ -228,7 +238,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             }
             mCallTimer.cancel();
         } else {
-            final long callStart = mPrimary.getConnectTime();
+            final long callStart = mPrimary.getConnectTimeMillis();
             final long duration = System.currentTimeMillis() - callStart;
             ui.setPrimaryCallElapsedTime(true, DateUtils.formatElapsedTime(duration / 1000));
         }

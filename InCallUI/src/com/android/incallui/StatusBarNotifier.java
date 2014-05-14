@@ -289,7 +289,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
 
         if (state == Call.State.ACTIVE) {
             builder.setUsesChronometer(true);
-            builder.setWhen(call.getConnectTime());
+            builder.setWhen(call.getConnectTimeMillis());
         } else {
             builder.setUsesChronometer(false);
         }
