@@ -42,7 +42,7 @@ import java.util.HashMap;
  */
 public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPresenter.DialpadUi>
         implements DialpadPresenter.DialpadUi, View.OnTouchListener, View.OnKeyListener,
-        View.OnHoverListener, View.OnClickListener {
+        View.OnHoverListener {
 
     private static final float DIALPAD_SLIDE_FRACTION = 1.0f;
 
@@ -314,21 +314,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         public final char[] DTMF_CHARACTERS = new char[] {
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '#', '*'
         };
-    }
-
-    @Override
-    public void onClick(View v) {
-        final AccessibilityManager accessibilityManager = (AccessibilityManager)
-            v.getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
-        // When accessibility is on, simulate press and release to preserve the
-        // semantic meaning of performClick(). Required for Braille support.
-        if (accessibilityManager.isEnabled()) {
-            final int id = v.getId();
-            // Checking the press state prevents double activation.
-            if (!v.isPressed() && mDisplayMap.containsKey(id)) {
-                getPresenter().processDtmf(mDisplayMap.get(id), true /* timedShortTone */);
-            }
-        }
     }
 
     @Override
