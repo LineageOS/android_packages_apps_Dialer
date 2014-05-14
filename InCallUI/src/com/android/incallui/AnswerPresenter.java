@@ -26,7 +26,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     private static final String TAG = AnswerPresenter.class.getSimpleName();
 
-    private int mCallId = Call.INVALID_CALL_ID;
+    private String mCallId;
     private Call mCall = null;
 
     @Override
@@ -52,7 +52,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
         // This is necessary because the activity can be destroyed while an incoming call exists.
         // This happens when back button is pressed while incoming call is still being shown.
-        if (mCallId != Call.INVALID_CALL_ID) {
+        if (mCallId != null) {
             CallList.getInstance().removeCallUpdateListener(mCallId, this);
         }
     }
@@ -73,7 +73,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         // getting updates here.
         Log.d(this, "onIncomingCall: " + this);
         if (getUi() != null) {
-            if (call.getCallId() != mCallId) {
+            if (!call.getCallId().equals(mCallId)) {
                 // A new call is coming in.
                 processIncomingCall(call);
             }
@@ -111,12 +111,12 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
             // mCallId will hold the state of the call. We don't clear the mCall variable here as
             // it may be useful for sending text messages after phone disconnects.
-            mCallId = Call.INVALID_CALL_ID;
+            mCallId = null;
         }
     }
 
     public void onAnswer() {
-        if (mCallId == Call.INVALID_CALL_ID) {
+        if (mCallId == null) {
             return;
         }
 

@@ -36,9 +36,6 @@ import java.util.TreeSet;
  */
 public final class Call {
 
-    public static final int INVALID_CALL_ID = -1;
-    public static final int MAX_CONFERENCED_CALLS = 5;
-
     /* Defines different states of this call */
     public static class State {
         public static final int INVALID = 0;
@@ -135,9 +132,7 @@ public final class Call {
     public static int PRESENTATION_PAYPHONE = PhoneConstants.PRESENTATION_PAYPHONE;
 
     // Unique identifier for the call
-    private int mCallId;
-
-    private String mTelecommCallId;
+    private String mCallId;
 
     // The current state of the call
     private int mState = State.INVALID;
@@ -166,20 +161,13 @@ public final class Call {
     // Gateway service package name
     private String mGatewayPackage;
 
-    private static int sNextAvailableCallId = 100000;
-
-    public Call(String telecommCallId, String number) {
-        mTelecommCallId = telecommCallId;
-        mCallId = sNextAvailableCallId++;
+    public Call(String callId, String number) {
+        mCallId = callId;
         mNumber = number;
     }
 
-    public int getCallId() {
+    public String getCallId() {
         return mCallId;
-    }
-
-    public String getTelecommCallId() {
-        return mTelecommCallId;
     }
 
     public String getNumber() {
@@ -270,6 +258,6 @@ public final class Call {
 
     @Override
     public String toString() {
-        return String.format(Locale.US, "[%d, %s]", mCallId, State.toString(mState));
+        return String.format(Locale.US, "[%s, %s]", mCallId, State.toString(mState));
     }
 }

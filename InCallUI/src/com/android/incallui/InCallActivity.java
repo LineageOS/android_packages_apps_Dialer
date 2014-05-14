@@ -57,7 +57,7 @@ public class InCallActivity extends Activity {
 
     /** Use to pass parameters for showing the PostCharDialog to {@link #onResume} */
     private boolean mShowPostCharWaitDialogOnResume;
-    private int mShowPostCharWaitDialogCallId;
+    private String mShowPostCharWaitDialogCallId;
     private String mShowPostCharWaitDialogChars;
 
     @Override
@@ -435,13 +435,13 @@ public class InCallActivity extends Activity {
         }
     }
 
-    public void showPostCharWaitDialog(int callId, String chars) {
+    public void showPostCharWaitDialog(String callId, String chars) {
         if (isForegroundActivity()) {
             final PostCharDialogFragment fragment = new PostCharDialogFragment(callId,  chars);
             fragment.show(getFragmentManager(), "postCharWait");
 
             mShowPostCharWaitDialogOnResume = false;
-            mShowPostCharWaitDialogCallId = 0;
+            mShowPostCharWaitDialogCallId = null;
             mShowPostCharWaitDialogChars = null;
         } else {
             mShowPostCharWaitDialogOnResume = true;

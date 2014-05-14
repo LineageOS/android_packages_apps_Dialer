@@ -242,7 +242,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         // otherwise compare call Ids
-        return call1.getCallId() == call2.getCallId();
+        return call1.getCallId().equals(call2.getCallId());
     }
 
     private void maybeStartSearch(Call call, boolean isPrimary) {
@@ -261,7 +261,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         cache.findInfo(call, isIncoming, new ContactInfoCacheCallback() {
                 @Override
-                public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
+                public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
                     updateContactEntry(entry, isPrimary, false);
                     if (entry.name != null) {
                         Log.d(TAG, "Contact found: " + entry);
@@ -272,14 +272,14 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 }
 
                 @Override
-                public void onImageLoadComplete(int callId, ContactCacheEntry entry) {
+                public void onImageLoadComplete(String callId, ContactCacheEntry entry) {
                     if (getUi() == null) {
                         return;
                     }
                     if (entry.photo != null) {
-                        if (mPrimary != null && callId == mPrimary.getCallId()) {
+                        if (mPrimary != null && callId.equals(mPrimary.getCallId())) {
                             getUi().setPrimaryImage(entry.photo);
-                        } else if (mSecondary != null && callId == mSecondary.getCallId()) {
+                        } else if (mSecondary != null && callId.equals(mSecondary.getCallId())) {
                             getUi().setSecondaryImage(entry.photo);
                         }
                     }

@@ -280,7 +280,7 @@ public class CallHandlerService extends Service {
                 //mCallList.onDisconnect((Call) msg.obj);
                 break;
             case ON_POST_CHAR_WAIT:
-                mInCallPresenter.onPostDialCharWait(msg.arg1, (String) msg.obj);
+                //mInCallPresenter.onPostDialCharWait(msg.arg1, (String) msg.obj);
                 break;
             case ON_AUDIO_MODE:
                 Log.i(TAG, "ON_AUDIO_MODE: " +

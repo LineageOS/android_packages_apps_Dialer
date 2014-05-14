@@ -226,7 +226,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         // call into the contacts provider for more data.
         mContactInfoCache.findInfo(call, isIncoming, new ContactInfoCacheCallback() {
                 @Override
-                public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
+                public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
                     Call call = CallList.getInstance().getCall(callId);
                     if (call != null) {
                         buildAndSendNotification(call, entry);
@@ -234,7 +234,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
                 }
 
                 @Override
-                public void onImageLoadComplete(int callId, ContactCacheEntry entry) {
+                public void onImageLoadComplete(String callId, ContactCacheEntry entry) {
                     Call call = CallList.getInstance().getCall(callId);
                     if (call != null) {
                         buildAndSendNotification(call, entry);
@@ -251,7 +251,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         // back. However, it can happen much later. Before we continue, we need to make sure that
         // the call being passed in is still the one we want to show in the notification.
         final Call call = getCallToShow(CallList.getInstance());
-        if (call == null || call.getCallId() != originalCall.getCallId()) {
+        if (call == null || !call.getCallId().equals(originalCall.getCallId())) {
             return;
         }
 
