@@ -25,6 +25,7 @@ import android.telecomm.CallInfo;
 import android.telecomm.InCallAdapter;
 
 import com.android.services.telephony.common.Call;
+import com.google.common.collect.ImmutableList;
 
 /**
  * Used to receive updates about calls from the Telecomm component.  This service is bound to
@@ -33,6 +34,9 @@ import com.android.services.telephony.common.Call;
  * the service triggering InCallActivity (via CallList) to finish soon after.
  */
 public class InCallServiceImpl extends android.telecomm.InCallService {
+
+    private static final ImmutableList<String> EMPTY_RESPONSE_TEXTS = ImmutableList.of();
+
     /** {@inheritDoc} */
     @Override public void onCreate() {
         InCallPresenter inCallPresenter = InCallPresenter.getInstance();
@@ -58,7 +62,12 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
     /** {@inheritDoc} */
     @Override protected void addCall(CallInfo callInfo) {
         Call call = CallInfoTranslator.getCall(callInfo);
-        CallList.getInstance().onUpdate(call);
+
+        if (call.getState() == Call.State.INCOMING) {
+            CallList.getInstance().onIncoming(call, EMPTY_RESPONSE_TEXTS);
+        } else {
+            CallList.getInstance().onUpdate(call);
+        }
     }
 
     /** {@inheritDoc} */

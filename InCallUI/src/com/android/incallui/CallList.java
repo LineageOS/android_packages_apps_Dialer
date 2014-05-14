@@ -27,7 +27,6 @@ import android.telephony.DisconnectCause;
 
 import com.android.services.telephony.common.Call;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -48,8 +47,7 @@ public class CallList {
     private static CallList sInstance = new CallList();
 
     private final HashMap<Integer, Call> mCallMap = Maps.newHashMap();
-    private final HashMap<Integer, ArrayList<String>> mCallTextReponsesMap =
-            Maps.newHashMap();
+    private final HashMap<Integer, List<String>> mCallTextReponsesMap = Maps.newHashMap();
     private final Set<Listener> mListeners = Sets.newHashSet();
     private final HashMap<Integer, List<CallUpdateListener>> mCallUpdateListenerMap = Maps
             .newHashMap();
@@ -262,7 +260,7 @@ public class CallList {
         return false;
     }
 
-    public ArrayList<String> getTextResponses(int callId) {
+    public List<String> getTextResponses(int callId) {
         return mCallTextReponsesMap.get(callId);
     }
 
@@ -412,7 +410,7 @@ public class CallList {
 
         if (!isCallDead(call)) {
             if (textResponses != null) {
-                mCallTextReponsesMap.put(id, (ArrayList<String>) textResponses);
+                mCallTextReponsesMap.put(id, textResponses);
             }
         } else if (mCallMap.containsKey(id)) {
             mCallTextReponsesMap.remove(id);

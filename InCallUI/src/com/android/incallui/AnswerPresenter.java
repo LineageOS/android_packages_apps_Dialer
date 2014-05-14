@@ -20,7 +20,7 @@ import android.telecomm.InCallAdapter;
 
 import com.android.services.telephony.common.Call;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Presenter for the Incoming call widget.
@@ -92,8 +92,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         CallList.getInstance().addCallUpdateListener(mCallId, this);
 
         Log.d(TAG, "Showing incoming for call id: " + mCallId + " " + this);
-        final ArrayList<String> textMsgs = CallList.getInstance().getTextResponses(
-                call.getCallId());
+        final List<String> textMsgs = CallList.getInstance().getTextResponses(call.getCallId());
         getUi().showAnswerUi(true);
 
         if (call.can(Call.Capabilities.RESPOND_VIA_TEXT) && textMsgs != null) {
@@ -184,6 +183,6 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         public void showAnswerUi(boolean show);
         public void showTextButton(boolean show);
         public void showMessageDialog();
-        public void configureMessageDialog(ArrayList<String> textResponses);
+        public void configureMessageDialog(List<String> textResponses);
     }
 }
