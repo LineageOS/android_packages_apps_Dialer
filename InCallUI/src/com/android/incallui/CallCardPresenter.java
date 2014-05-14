@@ -398,9 +398,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     private String getGatewayNumber() {
         if (hasOutgoingGatewayCall()) {
-            return mPrimary.getGatewayNumber();
+            return mPrimary.getGatewayInfo().getGatewayHandle().getSchemeSpecificPart();
         }
-
         return null;
     }
 
@@ -411,7 +410,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (hasOutgoingGatewayCall() && getUi() != null) {
             final PackageManager pm = mContext.getPackageManager();
             try {
-                final ApplicationInfo info = pm.getApplicationInfo(mPrimary.getGatewayPackage(), 0);
+                ApplicationInfo info = pm.getApplicationInfo(
+                        mPrimary.getGatewayInfo().getGatewayProviderPackageName(), 0);
                 return mContext.getString(R.string.calling_via_template,
                         pm.getApplicationLabel(info).toString());
             } catch (PackageManager.NameNotFoundException e) {
@@ -429,9 +429,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (mPrimary == null) {
             return false;
         }
-        return (Call.State.isDialing(mPrimary.getState()) &&
-                !TextUtils.isEmpty(mPrimary.getGatewayNumber()) &&
-                !TextUtils.isEmpty(mPrimary.getGatewayPackage()));
+        return Call.State.isDialing(mPrimary.getState()) && mPrimary.getGatewayInfo() != null &&
+                !mPrimary.getGatewayInfo().isEmpty();
     }
 
     /**

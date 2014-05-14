@@ -27,6 +27,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
 import android.provider.ContactsContract.RawContacts;
+import android.telecomm.CallNumberPresentation;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
@@ -79,8 +80,8 @@ public class CallerInfo {
     public String geoDescription;
 
     public String cnapName;
-    public int numberPresentation;
-    public int namePresentation;
+    public CallNumberPresentation numberPresentation;
+    public CallNumberPresentation namePresentation;
     public boolean contactExists;
 
     public String phoneLabel;
