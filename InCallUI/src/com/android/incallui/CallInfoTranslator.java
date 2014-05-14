@@ -67,10 +67,8 @@ final class CallInfoTranslator {
             sCallsByTelecommId.put(telecommCallId, call);
         }
 
-        // TODO(santoscordon): Remove assumption that all calls are dialing by default once
-        // CallInfo supports Call States
         call.setState(translateCallState(callInfo.getState()));
-        call.setNumber(callInfo.getHandle());
+        call.setNumber(callInfo.getHandle().getSchemeSpecificPart());
 
         // TODO: Each CallService needs to provide information what kind of call capabilities they
         // support. For now, always assume that all calls support hold by default.
