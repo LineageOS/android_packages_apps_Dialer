@@ -17,6 +17,7 @@
 package com.android.incallui;
 
 import android.telecomm.CallAudioState;
+import android.telecomm.CallCapabilities;
 import android.telecomm.CallInfo;
 import android.telecomm.GatewayInfo;
 import android.telecomm.InCallAdapter;
@@ -83,7 +84,7 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
         }
 
         call.setGatewayInfo(callInfo.getGatewayInfo());
-        call.addCapabilities(Call.Capabilities.HOLD | Call.Capabilities.MUTE);
+        call.addCapabilities(CallCapabilities.HOLD | CallCapabilities.MUTE);
 
         if (call.getState() == Call.State.INCOMING) {
             CallList.getInstance().onIncoming(call, EMPTY_RESPONSE_TEXTS);

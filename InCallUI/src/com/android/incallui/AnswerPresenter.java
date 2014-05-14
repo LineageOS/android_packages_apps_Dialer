@@ -16,6 +16,8 @@
 
 package com.android.incallui;
 
+import android.telecomm.CallCapabilities;
+
 import java.util.List;
 
 /**
@@ -91,7 +93,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         final List<String> textMsgs = CallList.getInstance().getTextResponses(call.getCallId());
         getUi().showAnswerUi(true);
 
-        if (call.can(Call.Capabilities.RESPOND_VIA_TEXT) && textMsgs != null) {
+        if (call.can(CallCapabilities.RESPOND_VIA_TEXT) && textMsgs != null) {
             getUi().showTextButton(true);
             getUi().configureMessageDialog(textMsgs);
         } else {
