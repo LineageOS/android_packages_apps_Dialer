@@ -22,6 +22,8 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
 import android.telephony.DisconnectCause;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -190,7 +192,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             final boolean bluetoothOn =
                     (AudioModeProvider.getInstance().getAudioMode() == AudioMode.BLUETOOTH);
             ui.setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
-                    getGatewayLabel(), getGatewayNumber());
+                    getGatewayLabel(), getGatewayNumber(), getWifiConnection());
         } else {
             ui.setCallState(Call.State.IDLE, DisconnectCause.NOT_VALID, false, null, null);
         }
@@ -206,8 +208,20 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             final boolean bluetoothOn = (AudioMode.BLUETOOTH == mode);
 
             getUi().setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
-                    getGatewayLabel(), getGatewayNumber());
+                    getGatewayLabel(), getGatewayNumber(), getWifiConnection());
         }
+    }
+
+    private String getWifiConnection() {
+        if (mPrimary.isWifiCall()) {
+            final WifiManager wifiManager = (WifiManager) mContext.getSystemService(
+                    Context.WIFI_SERVICE);
+            final WifiInfo info = wifiManager.getConnectionInfo();
+            if (info != null) {
+                return info.getSSID();
+            }
+        }
+        return null;
     }
 
     @Override
@@ -476,7 +490,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 Drawable photo, boolean isConference, boolean isGeneric);
         void setSecondaryImage(Drawable image);
         void setCallState(int state, int cause, boolean bluetoothOn,
-                String gatewayLabel, String gatewayNumber);
+                String gatewayLabel, String gatewayNumber, String wifiConnection);
         void setPrimaryCallElapsedTime(boolean show, String duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Drawable image);

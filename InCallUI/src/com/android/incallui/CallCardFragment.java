@@ -235,7 +235,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setCallState(int state, int cause, boolean bluetoothOn,
-            String gatewayLabel, String gatewayNumber) {
+            String gatewayLabel, String gatewayNumber, String wifiConnection) {
         String callStateLabel = null;
 
         if (Call.State.isDialing(state) && !TextUtils.isEmpty(gatewayLabel)) {
