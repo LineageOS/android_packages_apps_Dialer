@@ -85,4 +85,13 @@ public class InCallServiceImpl extends android.telecomm.InCallService {
             CallInfoTranslator.removeCall(callId);
         }
     }
+
+    /** {@inheritDoc} */
+    @Override protected void setOnHold(String callId) {
+        Call call = CallInfoTranslator.getCall(callId);
+        if (null != call) {
+            call.setState(Call.State.ONHOLD);
+            CallList.getInstance().onUpdate(call);
+        }
+    }
 }
