@@ -493,6 +493,8 @@
     <!-- This can be used in any application wanting to disable the text "Emergency number" -->
     <string name="emergency_call_dialog_number_for_display">Emergency number</string>
 
+    <string name="in_call_wifi_connected">Connected via <xliff:g id="wifi_ssid">%s</xliff:g></string>
+
     <!-- The digit to be displayed on the 0 key of the dialpad [CHAR LIMIT=1]-->
     <string name="dialpad_0_number">0</string>
     <!-- The digit to be displayed on the 1 key of the dialpad [CHAR LIMIT=1]-->

@@ -53,6 +53,8 @@
     <!-- 25% opacity, white. -->
     <color name="button_disabled_color">#40ffffff</color>
 
+    <color name="wifi_connected_background">#8099cc00</color>
+
     <!-- Background color of action bars -->
     <color name="actionbar_background_color">#3B77E7</color>
 
