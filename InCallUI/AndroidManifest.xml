@@ -50,9 +50,9 @@
             </intent-filter>
         </service>
 
-        <service android:name="InCallService">
+        <service android:name="InCallServiceImpl">
             <intent-filter>
-                <action android:name="android.telecomm.IInCallService" />
+                <action android:name="android.telecomm.InCallService" />
             </intent-filter>
         </service>
 
