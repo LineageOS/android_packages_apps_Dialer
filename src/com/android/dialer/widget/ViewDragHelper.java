@@ -1464,6 +1464,7 @@ public class ViewDragHelper {
      * @param target The child view that is dispatching the nested scroll.
      */
     public void stopNestedScroll(View target) {
+        mCapturedView = target;
         dispatchViewReleased(0, 0);
     }
 
