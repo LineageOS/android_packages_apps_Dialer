@@ -17,6 +17,7 @@
 package com.android.incallui;
 
 import android.telecomm.CallInfo;
+import android.telecomm.CallState;
 
 import com.android.services.telephony.common.Call;
 import com.google.common.base.Preconditions;
@@ -68,7 +69,7 @@ final class CallInfoTranslator {
 
         // TODO(santoscordon): Remove assumption that all calls are dialing by default once
         // CallInfo supports Call States
-        call.setState(Call.State.DIALING);
+        call.setState(translateCallState(callInfo.getState()));
         call.setNumber(callInfo.getHandle());
 
         return call;
@@ -103,5 +104,23 @@ final class CallInfoTranslator {
      */
     static void removeCall(String telecommCallId) {
         sCallsByTelecommId.remove(telecommCallId);
+    }
+
+    /**
+     * Converts {@link CallState} to its {@link Call#State} equivalent.
+     *
+     * @param callState The call state from Telecomm.
+     */
+    private static int translateCallState(CallState callState) {
+        switch(callState) {
+            case RINGING:
+                return Call.State.INCOMING;
+            case DIALING:
+                return Call.State.DIALING;
+            case ACTIVE:
+                return Call.State.ACTIVE;
+            default:
+                return Call.State.INVALID;
+        }
     }
 }

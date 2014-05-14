@@ -69,16 +69,6 @@ public class CallList {
     }
 
     /**
-     * Called when a single call has changed.
-     */
-    public void onUpdate(Call call) {
-        Log.d(this, "onUpdate - ", call);
-
-        updateCallInMap(call);
-        notifyListenersOfChange();
-    }
-
-    /**
      * Called when a single call disconnects.
      */
     public void onDisconnect(Call call) {
@@ -110,6 +100,16 @@ public class CallList {
     }
 
     /**
+     * Called when a single call has changed.
+     */
+    public void onUpdate(Call call) {
+        Log.d(this, "onUpdate - ", call);
+
+        onUpdateCall(call);
+        notifyGenericListeners();
+    }
+
+    /**
      * Called when multiple calls have changed.
      */
     public void onUpdate(List<Call> callsToUpdate) {
@@ -117,15 +117,10 @@ public class CallList {
 
         Preconditions.checkNotNull(callsToUpdate);
         for (Call call : callsToUpdate) {
-            Log.d(this, "\t" + call);
-
-            updateCallInMap(call);
-            updateCallTextMap(call, null);
-
-            notifyCallUpdateListeners(call);
+            onUpdateCall(call);
         }
 
-        notifyListenersOfChange();
+        notifyGenericListeners();
     }
 
     public void notifyCallUpdateListeners(Call call) {
@@ -317,14 +312,26 @@ public class CallList {
                 updateCallInMap(call);
             }
         }
-        notifyListenersOfChange();
+        notifyGenericListeners();
+    }
+
+    /**
+     * Processes an update for a single call.
+     *
+     * @param call The call to update.
+     */
+    private void onUpdateCall(Call call) {
+        Log.d(this, "\t" + call);
+        updateCallInMap(call);
+        updateCallTextMap(call, null);
+        notifyCallUpdateListeners(call);
     }
 
     /**
      * Sends a generic notification to all listeners that something has changed.
      * It is up to the listeners to call back to determine what changed.
      */
-    private void notifyListenersOfChange() {
+    private void notifyGenericListeners() {
         for (Listener listener : mListeners) {
             listener.onCallListChange(this);
         }
@@ -423,7 +430,7 @@ public class CallList {
     private void finishDisconnectedCall(Call call) {
         call.setState(Call.State.IDLE);
         updateCallInMap(call);
-        notifyListenersOfChange();
+        notifyGenericListeners();
     }
 
     /**
