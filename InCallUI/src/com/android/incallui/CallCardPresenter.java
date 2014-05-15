@@ -480,7 +480,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return;
         }
 
-        CallCommandClient.getInstance().disconnectCall(mPrimary.getCallId().hashCode());
+        Log.i(this, "Disconnecting call: " + mPrimary);
+        TelecommAdapter.getInstance().disconnectCall(mPrimary.getCallId());
     }
 
     public interface CallCardUi extends Ui {
