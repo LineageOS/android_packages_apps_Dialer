@@ -41,6 +41,7 @@ import com.android.incallui.Call.State;
 public class InCallActivity extends Activity {
 
     public static final String SHOW_DIALPAD_EXTRA = "InCallActivity.show_dialpad";
+    public static final String NEW_OUTGOING_CALL = "InCallActivity.new_outgoing_call";
 
     private static final int INVALID_RES_ID = -1;
 
@@ -83,6 +84,8 @@ public class InCallActivity extends Activity {
         setContentView(R.layout.incall_screen);
 
         initializeInCall();
+
+        internalResolveIntent(getIntent());
         Log.d(this, "onCreate(): exit");
     }
 
@@ -340,6 +343,10 @@ public class InCallActivity extends Activity {
                 Log.d(this, "- internalResolveIntent: SHOW_DIALPAD_EXTRA: " + showDialpad);
 
                 relaunchedFromDialer(showDialpad);
+            }
+
+            if (intent.getBooleanExtra(NEW_OUTGOING_CALL, false)) {
+                mCallCardFragment.animateForNewOutgoingCall();
             }
 
             return;

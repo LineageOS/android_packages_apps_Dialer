@@ -375,7 +375,7 @@ public class InCallPresenter implements CallList.Listener {
         Call call = mCallList.getIncomingCall();
         if (call != null) {
             TelecommAdapter.getInstance().answerCall(call.getCallId());
-            showInCall(false);
+            showInCall(false, false/* newOutgoingCall */);
         }
     }
 
@@ -450,7 +450,7 @@ public class InCallPresenter implements CallList.Listener {
         // 3. We are in a state where we want to show the incall ui
         if (mIsActivityPreviouslyStarted && !isShowingInCallUi() &&
                 mInCallState != InCallState.NO_CALLS) {
-            showInCall(showDialpad);
+            showInCall(showDialpad, false /* newOutgoingCall */);
         }
     }
 
@@ -635,7 +635,7 @@ public class InCallPresenter implements CallList.Listener {
 
         if (showCallUi) {
             Log.i(this, "Start in call UI");
-            showInCall(false);
+            showInCall(false /* showDialpad */, true /* newOutgoingCall */);
         } else if (startStartupSequence) {
             Log.i(this, "Start Full Screen in call UI");
 
@@ -722,11 +722,11 @@ public class InCallPresenter implements CallList.Listener {
         }
     }
 
-    private void showInCall(boolean showDialpad) {
-        mContext.startActivity(getInCallIntent(showDialpad));
+    private void showInCall(boolean showDialpad, boolean newOutgoingCall) {
+        mContext.startActivity(getInCallIntent(showDialpad, newOutgoingCall));
     }
 
-    public Intent getInCallIntent(boolean showDialpad) {
+    public Intent getInCallIntent(boolean showDialpad, boolean newOutgoingCall) {
         final Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
@@ -736,6 +736,7 @@ public class InCallPresenter implements CallList.Listener {
             intent.putExtra(InCallActivity.SHOW_DIALPAD_EXTRA, true);
         }
 
+        intent.putExtra(InCallActivity.NEW_OUTGOING_CALL, newOutgoingCall);
         return intent;
     }
 

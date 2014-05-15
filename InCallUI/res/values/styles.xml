@@ -112,13 +112,16 @@
         <item name="android:taskToFrontExitAnimation">@anim/activity_open_exit</item>
     </style>
 
-    <!-- Theme for the InCallActivity activity.  This gives us a totally black
-         window background instead of the default dark grey.  (We don't just use
+    <!-- Theme for the InCallActivity activity. Should have a transparent background for the
+         circular reveal animation for a new outgoing call to work correctly. We don't just use
          Theme.Black.NoTitleBar directly, since we want any popups or dialogs
          from the InCallActivity to have the correct holo style. -->
     <style name="Theme.InCallScreen" parent="@android:style/Theme.Holo.NoActionBar">
-        <item name="android:windowBackground">@android:color/black</item>
         <item name="android:windowAnimationStyle">@style/InCallAnimationStyle</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="PrimaryCallInfoPrimaryCallBanner">
