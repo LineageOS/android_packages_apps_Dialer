@@ -99,7 +99,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         DialpadFragment.HostInterface,
         ListsFragment.HostInterface,
         SpeedDialFragment.HostInterface,
-        OnDragDropListener, View.OnLongClickListener,
+        OnDragDropListener,
         OnPhoneNumberPickerActionListener,
         ViewPager.OnPageChangeListener {
     private static final String TAG = "DialtactsActivity";
@@ -243,55 +243,51 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Listener used to send search queries to the phone search fragment.
      */
     private final TextWatcher mPhoneSearchQueryTextListener = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                final String newText = s.toString();
-                if (newText.equals(mSearchQuery)) {
-                    // If the query hasn't changed (perhaps due to activity being destroyed
-                    // and restored, or user launching the same DIAL intent twice), then there is
-                    // no need to do anything here.
-                    return;
-                }
-                mSearchQuery = newText;
-                if (DEBUG) {
-                    Log.d(TAG, "onTextChange for mSearchView called with new query: " + newText);
-                }
-                final boolean dialpadSearch = mIsDialpadShown;
-
-                // Show search result with non-empty text. Show a bare list otherwise.
-                if (TextUtils.isEmpty(newText) && getInSearchUi()) {
-                    exitSearchUi();
-                    mSearchViewCloseButton.setVisibility(View.GONE);
-                    mVoiceSearchButton.setVisibility(View.VISIBLE);
-                    return;
-                } else if (!TextUtils.isEmpty(newText)) {
-                    final boolean sameSearchMode = (dialpadSearch && mInDialpadSearch) ||
-                            (!dialpadSearch && mInRegularSearch);
-                    if (!sameSearchMode) {
-                        // call enterSearchUi only if we are switching search modes, or entering
-                        // search ui for the first time
-                        enterSearchUi(dialpadSearch, newText);
-                    }
-
-                    if (dialpadSearch && mSmartDialSearchFragment != null) {
-                            mSmartDialSearchFragment.setQueryString(newText, false);
-                    } else if (mRegularSearchFragment != null) {
-                        mRegularSearchFragment.setQueryString(newText, false);
-                    }
-                    mSearchViewCloseButton.setVisibility(View.VISIBLE);
-                    mVoiceSearchButton.setVisibility(View.GONE);
-                    return;
-                }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            final String newText = s.toString();
+            if (newText.equals(mSearchQuery)) {
+                // If the query hasn't changed (perhaps due to activity being destroyed
+                // and restored, or user launching the same DIAL intent twice), then there is
+                // no need to do anything here.
                 return;
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+            mSearchQuery = newText;
+            if (DEBUG) {
+                Log.d(TAG, "onTextChange for mSearchView called with new query: " + newText);
             }
+
+            // Show search result with non-empty text. Show a bare list otherwise.
+            final boolean sameSearchMode = (mIsDialpadShown && mInDialpadSearch) ||
+                    (!mIsDialpadShown && mInRegularSearch);
+            if (!sameSearchMode) {
+                // call enterSearchUi only if we are switching search modes, or entering
+                // search ui for the first time
+                enterSearchUi(mIsDialpadShown, newText);
+            }
+
+            if (mIsDialpadShown && mSmartDialSearchFragment != null) {
+                mSmartDialSearchFragment.setQueryString(newText, false /* delaySelection */);
+            } else if (mRegularSearchFragment != null) {
+                mRegularSearchFragment.setQueryString(newText, false /* delaySelection */);
+            }
+
+            if (TextUtils.isEmpty(newText)) {
+                mSearchViewCloseButton.setVisibility(View.GONE);
+                mVoiceSearchButton.setVisibility(View.VISIBLE);
+            } else {
+                mSearchViewCloseButton.setVisibility(View.VISIBLE);
+                mVoiceSearchButton.setVisibility(View.GONE);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
     };
 
     @Override
@@ -397,12 +393,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else if (fragment instanceof SmartDialSearchFragment) {
             mSmartDialSearchFragment = (SmartDialSearchFragment) fragment;
             mSmartDialSearchFragment.setOnPhoneNumberPickerActionListener(this);
+            mSmartDialSearchFragment.setShowEmptyListForNullQuery(true);
             if (mFragmentsFrame != null) {
                 mFragmentsFrame.setAlpha(1.0f);
             }
         } else if (fragment instanceof SearchFragment) {
             mRegularSearchFragment = (RegularSearchFragment) fragment;
             mRegularSearchFragment.setOnPhoneNumberPickerActionListener(this);
+            mRegularSearchFragment.setShowEmptyListForNullQuery(true);
             if (mFragmentsFrame != null) {
                 mFragmentsFrame.setAlpha(1.0f);
             }
@@ -488,22 +486,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             case R.id.menu_call_settings:
                 handleMenuSettings();
                 return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onLongClick(View view) {
-        switch (view.getId()) {
-            case R.id.floating_action_button:
-                if (mIsDialpadShown) {
-                    // Dial button was pressed; tell the Dialpad fragment
-                    mDialpadFragment.dialButtonPressed();
-                    return true;  // Consume the event
-                }
-            default:
-                Log.wtf(TAG, "Unexpected onClick event from " + view);
-                break;
         }
         return false;
     }
@@ -775,8 +757,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-        SearchFragment fragment;
         if (mInDialpadSearch && mSmartDialSearchFragment != null) {
             transaction.remove(mSmartDialSearchFragment);
         } else if (mInRegularSearch && mRegularSearchFragment != null) {
@@ -792,7 +772,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mInDialpadSearch = smartDialSearch;
         mInRegularSearch = !smartDialSearch;
 
-        fragment = (SearchFragment) getFragmentManager().findFragmentByTag(tag);
+        SearchFragment fragment = (SearchFragment) getFragmentManager().findFragmentByTag(tag);
         if (fragment == null) {
             if (smartDialSearch) {
                 fragment = new SmartDialSearchFragment();
@@ -804,7 +784,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         fragment.setHasOptionsMenu(false);
         transaction.replace(R.id.dialtacts_frame, fragment, tag);
         transaction.addToBackStack(null);
-        fragment.setQueryString(query, false);
+        fragment.setQueryString(query, false /* delaySelection */);
         transaction.commit();
     }
 
@@ -841,6 +821,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else if (getInSearchUi()) {
             mSearchView.setText(null);
             mDialpadFragment.clearDialpad();
+            exitSearchUi();
         } else {
             super.onBackPressed();
         }
@@ -883,7 +864,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onListFragmentScroll(int firstVisibleItem, int visibleItemCount,
-            int totalItemCount) {
+                                     int totalItemCount) {
         // TODO: No-op for now. This should eventually show/hide the actionBar based on
         // interactions with the ListsFragments.
     }
@@ -962,7 +943,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // Specify call-origin so that users will see the previous tab instead of
         // CallLog screen (search UI will be automatically exited).
         PhoneNumberInteraction.startInteractionForPhoneCall(
-            DialtactsActivity.this, dataUri, getCallOrigin());
+                DialtactsActivity.this, dataUri, getCallOrigin());
         mClearSearchOnPause = true;
     }
 
