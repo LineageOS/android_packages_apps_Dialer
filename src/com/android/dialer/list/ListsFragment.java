@@ -89,6 +89,8 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
     private CallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
 
+    private boolean mIsPanelOpen = true;
+
     /**
      * Call shortcuts older than this date (persisted in shared preferences) will not show up in
      * at the top of the screen
@@ -143,15 +145,21 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
                 final int availableActionBarHeight =
                         Math.min(mActionBar.getHeight(), topPaneHeight);
                 mActionBar.setHideOffset(mActionBar.getHeight() - availableActionBarHeight);
+
+                if (!mActionBar.isShowing()) {
+                    mActionBar.show();
+                }
             }
         }
 
         @Override
         public void onPanelOpened(View panel) {
+            mIsPanelOpen = true;
         }
 
         @Override
         public void onPanelClosed(View panel) {
+            mIsPanelOpen = false;
         }
     };
 
@@ -332,6 +340,15 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         final int count = mOnPageChangeListeners.size();
         for (int i = 0; i < count; i++) {
             mOnPageChangeListeners.get(i).onPageScrollStateChanged(state);
+        }
+    }
+
+    public void maybeShowActionBar() {
+        // TODO: Try to show the action bar regardless of whether the panel is open, and then update
+        // the offset to show/hide the action bar, instead of updating the whether the action bar is
+        // shown in onPanelSlide.
+        if (mIsPanelOpen) {
+            mActionBar.show();
         }
     }
 
