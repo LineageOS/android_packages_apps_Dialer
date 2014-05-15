@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Palieskite vaizdą, kad pamatytumėte visus skaičius, arba paspauskite ir palaikykite, kad pakeistumėte tvarką"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Atsisakyti"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Pašalinti"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Nėra signalo? Jokių problemų."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Įgalinti „Google Wi-Fi“ skambinimą"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Kai yra stiprus „Wi-Fi“ signalas:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Skambinant visada naudoti „Wi-Fi“"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Visada klausti"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Skambinant niekada nenaudoti „Wi-Fi“"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Kitas"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Atgal"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"Viskas. „Wi-Fi“ skambinimo funkcija visiškai nustatyta. Nustatymuose bet kada galite keisti savo nuostatas ar išjungti šią funkciją."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"Gerai, supratau"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Skambučių nustatymai"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Spartusis rinkimas"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"VISI KONTAKTAI"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ATSKAMBINTI"</string>

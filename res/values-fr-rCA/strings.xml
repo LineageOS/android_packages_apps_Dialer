@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Touchez l\'image pour afficher tous les numéros, ou maintenez votre doigt sur l\'une d\'elles pour les réorganiser"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Fermer"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Supprimer"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Pas de signal? Pas de problème."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Activer la fonctionnalité d\'appels par Wi-Fi de Google"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Lorsque l\'appareil est connecté à un réseau Wi-Fi dont le signal est puissant :"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Toujours utiliser le Wi-Fi pour faire des appels"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Toujours demander"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Ne jamais utiliser le Wi-Fi pour faire des appels"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Suivante"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Précédent"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"Et voilà, la fonctionnalité d\'appel par Wi-Fi est configurée. Vous pouvez modifier vos préférences ou la désactiver à tout moment dans les paramètres."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"OK, j\'ai compris"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Paramètres d\'appel"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Composition rapide"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TOUS LES CONTACTS"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"RAPPELER"</string>

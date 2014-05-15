@@ -87,8 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Numai apelurile nepreluate"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Afişaţi numai mesajele vocale"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Afişaţi toate apelurile"</string>
-    <!-- no translation found for add_contact (8875804371377471164) -->
-    <skip />
+    <string name="add_contact" msgid="8875804371377471164">"Adăugați o persoană de contact"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Pauză 2 secunde"</string>
     <string name="add_wait" msgid="3360818652790319634">"Adăugaţi interval de aşteptare"</string>
     <string name="call_settings" msgid="7666474782093693667">"Setări"</string>
@@ -162,6 +161,28 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Atingeți imaginea pentru a vedea toate numerele sau apăsați și țineți apăsat pentru a reordona"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Închideți"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Eliminați"</string>
+    <!-- no translation found for wifi_no_signal_no_problem (5905489120009368358) -->
+    <skip />
+    <!-- no translation found for wifi_enable_google_wifi_calling (889688113802116339) -->
+    <skip />
+    <!-- no translation found for wifi_when_connected_to_a_signal (1380410417434941662) -->
+    <skip />
+    <!-- no translation found for wifi_always_use_wifi (5090531595867169067) -->
+    <skip />
+    <!-- no translation found for wifi_ask_use_wifi (2530040568117536243) -->
+    <skip />
+    <!-- no translation found for wifi_never_use_wifi (8523176164034184009) -->
+    <skip />
+    <!-- no translation found for wifi_next_setup_screen (6468744966620746912) -->
+    <skip />
+    <!-- no translation found for wifi_previous_setup_screen (8525707359376859298) -->
+    <skip />
+    <!-- no translation found for wifi_setup_completed (2823266959975201512) -->
+    <skip />
+    <!-- no translation found for wifi_setup_ok (7801061518697115555) -->
+    <skip />
+    <!-- no translation found for wifi_setup_settings_shortcut (278329876445606742) -->
+    <skip />
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Apelare rapidă"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TOATĂ AGENDA"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"SUNAȚI"</string>

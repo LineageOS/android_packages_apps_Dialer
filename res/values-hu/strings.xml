@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Koppintson a képre az összes szám megtekintéséhez, vagy tartsa lenyomva az átrendezéshez"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Elvetés"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Eltávolítás"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Nincs hálózat? Semmi gond."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Google Wi-Fin keresztüli hívás engedélyezése"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Ha stabil Wi-Fi-hálózathoz csatlakozik:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Mindig Wi-Fit használjon híváshoz"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Mindig kérdezzen rá"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Soha ne használja a Wi-Fit híváshoz"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Következő"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Vissza"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"Kész! A Wi-Fi-alapú hívást sikerült beállítani. A beállításokban bármikor módosíthatja a részleteket, vagy kikapcsolhatja a funkciót."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"Rendben, értem"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Hívásbeállítások"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Gyorshívó"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ÖSSZES NÉVJEGY"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"VISSZAHÍVÁS"</string>
