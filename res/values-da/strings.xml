@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Tryk på billedet for at se alle telefonnumre, eller tryk på billedet, og hold det nede, for at omarrangere"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Annuller"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Fjern"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Har du intet signal? Det er ikke noget problem."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Aktivér Google Wi-Fi Calling"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Når der er oprettet forbindelse til et stærkt Wi-Fi-netværk:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Brug altid Wi-Fi til at foretage opkald"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Spørg altid"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Brug aldrig Wi-Fi til at foretage opkald"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Næste"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Tilbage"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"Sådan! Så er Wi-Fi Calling konfiguret. Du kan til enhver tid ændre dine præferencer eller slå tjenesten fra i indstillingerne."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"OK, forstået"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Indstillinger for opkald"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Hurtigopkald"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ALLE KONTAKTPERSONER"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"RING TILBAGE"</string>

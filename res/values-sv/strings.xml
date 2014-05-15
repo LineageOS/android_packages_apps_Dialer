@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Tryck på bilden om du vill visa alla nummer eller tryck länge om du vill flytta den"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Avvisa"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Ta bort"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Ingen signal? Inga problem."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Aktivera Wi-Fi-samtal via Google"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Vid anslutning till en stark Wi-Fi-signal:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Använd alltid Wi-Fi för att ringa"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Fråga alltid"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Använd aldrig Wi-Fi för att ringa"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Nästa"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Föregående"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"Så där. Nu har samtal via Wi-Fi konfigurerats. Du kan ändra inställningarna eller inaktivera dem när som helst under Inställningar."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"OK, jag förstår"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Samtalsinställningar"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Snabbval"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ALLA KONTAKTER"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"RING UPP"</string>

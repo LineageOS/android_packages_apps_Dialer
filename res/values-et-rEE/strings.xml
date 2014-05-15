@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Puudutage kujutist, et näha kõiki numbreid, või vajutage ja hoidke all ümberkorraldamiseks"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Loobu"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Eemalda"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Kas signaali pole? See ei ole probleem."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Luba Google\'i WiFi-helistamine"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Kui WiFi-signaal on tugev:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Kasuta helistamiseks alati WiFi-t"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Küsi alati"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Ära kasuta WiFi-t kunagi helistamiseks"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Järgmine"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Tagasi"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"Korras! WiFi-helistamine on seadistatud. Saate eelistusi muuta või selle igal ajal seadetes välja lülitada."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"Ok, selge"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Kõneseaded"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Kiirvalimine"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"KÕIK KONTAKTID"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"HELISTA TAGASI"</string>

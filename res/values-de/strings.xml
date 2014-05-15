@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Auf Bild tippen, um alle Nummern zu sehen, oder berühren und halten, um Anordnung zu ändern"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ablehnen"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Entfernen"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Kein Signal? Kein Problem"</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"WLAN-Anrufe mit Google aktivieren"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Bei Verbindung mit einem starken WLAN-Signal:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Für Anrufe immer WLAN verwenden"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Immer nachfragen"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Für Anrufe niemals WLAN verwenden"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Weiter"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Zurück"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"WLAN-Anrufe sind nun eingerichtet. Sie können Ihre Einstellungen ändern oder die Funktion jederzeit in Ihren Einstellungen deaktivieren."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"OK"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Anrufeinstellungen"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Kurzwahl"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"Alle Kontakte"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"Zurückrufen"</string>

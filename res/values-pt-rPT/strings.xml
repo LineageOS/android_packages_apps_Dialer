@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Toque na imagem para ver todos os números ou prima sem soltar para reordenar"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ignorar"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Remover"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Sem sinal? Não há problema."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Ativar o Google Wi-Fi Calling"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Quando ligado ao Wi-Fi com uma boa intensidade do sinal:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Utilizar sempre o Wi-Fi para efetuar chamadas"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Perguntar sempre"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Nunca utilizar o Wi-Fi para efetuar chamadas"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Seguinte"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Anterior"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"Pronto! As chamadas por Wi-Fi já estão configuradas. Pode alterar as suas preferências ou desativar esta opção nas definições em qualquer altura."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"OK, compreendi"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Definições de chamadas"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Marcação rápida"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TODOS OS CONTACTOS"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"TELEFONAR DE VOLTA"</string>

@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"ሁሉንም ቁጥሮች ለማየት ምስሉን መታ ያድርጉ ወይም ቅደም ተከተላቸውን ለማስተካከል ተጭነው ይያዙ"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"አሰናብት"</string>
     <string name="remove_contact" msgid="1080555335283662961">"አስወግድ"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"ምልክት የለም? ችግር የለውም።"</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Google Wi-Fi መደወልን አንቃ"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"ከጠንካራ የWi-Fi ምልክት ጋር ሲገናኝ፦"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"ጥሪዎችን ለማድረግ ሁልጊዜ Wi-Fi ተጠቀም"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"ሁልጊዜ ጠይቅ"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"ጥሪዎችን ለማድረግ Wi-Fiን በጭራሽ አትጠቀም"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"ቀጣይ"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"ተመለስ"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"ቡው። Wi-Fi መደወል ተዋቅሯል። በማንኛውም ጊዜ በቅንብሮች ውስጥ ምርጫዎችዎን መቀየር ወይም እሱን ማጥፋት ይችላሉ።"</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"እሺ፣ ገባኝ"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"የጥሪ ቅንብሮች"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"አቋራጭ መደወያ"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ሁሉም እውቂያዎች"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"መልሰህ ደውል"</string>

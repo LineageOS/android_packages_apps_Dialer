@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"הקש על תמונה כדי לראות את כל המספרים, או לחץ והחזק כדי לשנות את הסדר"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"סגור"</string>
     <string name="remove_contact" msgid="1080555335283662961">"הסר"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"אין אות? אין בעיה."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"‏הפעל התקשרות Google בחיבור Wi-Fi"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"‏בעת חיבור לאות Wi-Fi חזק:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"‏השתמש תמיד בחיבור Wi-Fi לביצוע שיחות"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"שאל תמיד"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"‏לעולם אל תשתמש בחיבור Wi-Fi לביצוע שיחות"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"הבא"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"הקודם"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"‏זהו. ההתקשרות בחיבור Wi-Fi הוגדרה. בכל עת תוכל לשנות את ההעדפות שלך או להשבית את החיבור בהגדרות."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"בסדר, הבנתי"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"הגדרות שיחה"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"חיוג מהיר"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"כל אנשי הקשר"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"התקשר חזרה"</string>

@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Pieskarieties attēlam, lai skatītu visus tālruņa numurus, vai pieskarieties un turiet, lai mainītu secību."</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Noraidīt"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Noņemt"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Vai nav signāla? Tā nav problēma."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Iespējot Google Wi-Fi zvanus"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Ja ir izveidots savienojums ar spēcīga signāla Wi-Fi tīklu:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Vienmēr izmantot Wi-Fi savienojumu zvanu veikšanai"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Vienmēr jautāt"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Nekad neizmantot Wi-Fi savienojumu zvanu veikšanai"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Tālāk"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Atpakaļ"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"Wi-Fi zvani ir iestatīti. Jebkurā laikā varat mainīt to preferences vai izslēgt tos iestatījumos."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"Labi, sapratu!"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Zvanu iestatījumi"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Ātrā izvēlne"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"VISAS KONTAKTPERSONAS"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ATZVANĪT"</string>

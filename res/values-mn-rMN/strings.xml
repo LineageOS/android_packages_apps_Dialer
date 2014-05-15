@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Бүх тоог харахын тулд зургийг товших буюу дахин захиалахын тулд дараад барина уу"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Хаах"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Хасах"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Дохио байхгүй юу? Ямар ч асуудалгүй."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Google-ийн Wi-Fi дуудлагыг идэвхжүүлэх"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Хүчтэй Wi-Fi дохиотой холбогдсон үед:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Дуудлага хийхэд үргэлж Wi-Fi ашиглах"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Үргэлж асуух"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Дуудлага хийхэд хэзээ ч Wi-Fi ашиглахгүй"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Дараах"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Буцах"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"За. Wi-Fi дуудлагыг тохируулчихлаа. Та дуртай үедээ тохиргоон дотроос сонголтоо өөрчлөх буюу унтраах боломжтой."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"Тийм, ойлголоо"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Дуудлагын тохиргоо"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Шуурхай залгах"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"БҮХ ХАРИЛЦАГЧИД"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"БУЦААЖ ЗАЛГАХ"</string>

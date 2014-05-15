@@ -161,6 +161,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"ប៉ះ​រូបភាព ដើម្បី​មើល​លេខ​ទាំងអស់ ឬ​ចុច និង​សង្កត់​ដើម្បី​តម្រៀប​ឡើងវិញ"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"បដិសេធ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"លុបចេញ"</string>
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"គ្មាន​សញ្ញា? គ្មាន​បញ្ហា។"</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"បើក​ការ​ហៅ​តាម Google វ៉ាយហ្វាយ"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"នៅ​ពេល​បាន​ភ្ជាប់​ទៅ​សញ្ញា​វ៉ាយហ្វាយ​ខ្លាំង៖"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"ប្រើ​វ៉ាយហ្វាយ​ជា​និច្ច​ដើម្បី​ហៅ​"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"សួរ​ជានិច្ច"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"កុំ​ប្រើ​វ៉ាយហ្វាយ​​ដើើម្បី​​ហៅ"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"បន្ទាប់"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"ថយក្រោយ"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"ការ​ហៅ​តាម​វ៉ាយហ្វាយ​ត្រូវ​បាន​រៀបចំ​ទាំង​អស់។ ​អ្នក​អាច​ប្ដូរ​ចំណូល​ចិត្ត ឬ​បិទ​វា​នៅ​ពេល​ណា​មួយ​ក្នុង​ការ​កំណត់។"</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"យល់​ព្រម យល់​ហើយ"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"កំណត់​ការ​ហៅ"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"ការ​ហៅ​រហ័ស"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ទំនាក់ទំនង​ទាំងអស់"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ហៅ​ទៅវិញ"</string>
