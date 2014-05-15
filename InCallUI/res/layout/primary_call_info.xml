@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <!-- "Call Banner" for primary call, the foregound or ringing call.
+        <!-- "Call Banner" for primary call, the foregound or ringing call.Di
          The "call banner" is a block of info about a single call,
          including the contact name, phone number, call time counter,
          and other status info.  This info is shown as a "banner"

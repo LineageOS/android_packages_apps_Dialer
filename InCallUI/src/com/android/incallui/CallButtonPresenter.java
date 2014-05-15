@@ -188,13 +188,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         setAudioMode(newMode);
     }
 
-    public void endCallClicked() {
-        if (mCall == null) {
-            return;
-        }
-        TelecommAdapter.getInstance().disconnectCall(mCall.getCallId());
-    }
-
     public void manageConferenceButtonClicked() {
         getUi().displayManageConferencePanel(true);
     }

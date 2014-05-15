@@ -121,6 +121,10 @@
     <string name="contactPhoto" msgid="4713193418046639466">"संपर्क का फ़ोटो"</string>
     <string name="goPrivate" msgid="865837794424530980">"निजी हो जाएं"</string>
     <string name="selectContact" msgid="781975788478987237">"संपर्क को चुनें"</string>
+    <string name="respond_via_sms_canned_response_1" msgid="2461606462788380215">"अभी बात नहीं हो सकती. क्‍या चल रहा है?"</string>
+    <string name="respond_via_sms_canned_response_2" msgid="4074450431532859214">"मैं आपको वापस कॉल करूंगा/करूंगी."</string>
+    <string name="respond_via_sms_canned_response_3" msgid="3496079065723960450">"मैं आपको बाद में कॉल करूंगा/करूंगी."</string>
+    <string name="respond_via_sms_canned_response_4" msgid="1698989243040062190">"अभी बात नहीं हो सकती. बाद में कॉल करें?"</string>
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"अपना स्वयं का लिखें..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"रद्द करें"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"भेजें"</string>

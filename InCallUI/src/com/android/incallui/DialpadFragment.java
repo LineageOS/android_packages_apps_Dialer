@@ -42,7 +42,7 @@ import java.util.HashMap;
  */
 public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPresenter.DialpadUi>
         implements DialpadPresenter.DialpadUi, View.OnTouchListener, View.OnKeyListener,
-        View.OnHoverListener {
+        View.OnHoverListener, View.OnClickListener {
 
     private static final float DIALPAD_SLIDE_FRACTION = 1.0f;
 
@@ -317,6 +317,21 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
     }
 
     @Override
+    public void onClick(View v) {
+        final AccessibilityManager accessibilityManager = (AccessibilityManager)
+            v.getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+        // When accessibility is on, simulate press and release to preserve the
+        // semantic meaning of performClick(). Required for Braille support.
+        if (accessibilityManager.isEnabled()) {
+            final int id = v.getId();
+            // Checking the press state prevents double activation.
+            if (!v.isPressed() && mDisplayMap.containsKey(id)) {
+                getPresenter().processDtmf(mDisplayMap.get(id));
+            }
+        }
+    }
+
+    @Override
     public boolean onHover(View v, MotionEvent event) {
         // When touch exploration is turned on, lifting a finger while inside
         // the button's hover target bounds should perform a click action.
@@ -533,6 +548,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
             dialpadKey.setOnTouchListener(this);
             dialpadKey.setOnKeyListener(this);
             dialpadKey.setOnHoverListener(this);
+            dialpadKey.setOnClickListener(this);
         }
     }
 }

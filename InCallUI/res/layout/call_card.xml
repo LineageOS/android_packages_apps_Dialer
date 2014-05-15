@@ -109,6 +109,22 @@
                     android:contentDescription="@string/onscreenEndCallText" />
 
             </FrameLayout>
+
+            <!-- Insert a CallService indicator (which controls handoff, too) -->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right">
+
+                <ImageButton android:id="@+id/handoffButton"
+                    android:enabled="false"
+		            android:layout_width="@dimen/floating_action_button_width"
+		            android:layout_height="@dimen/floating_action_button_height"
+                    android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
+                    android:background="@drawable/floating_handoff_button_compound_background"
+                    android:src="@drawable/ic_in_call_pstn" />
+            </FrameLayout>
+
         </FrameLayout>
 
         <!-- Secondary "Call info" block, for the background ("on hold") call. -->

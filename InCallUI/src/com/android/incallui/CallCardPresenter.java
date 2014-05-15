@@ -57,6 +57,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private CallTimer mCallTimer;
     private Context mContext;
 
+    private boolean mIsWiFiCachedValue;
+
     public CallCardPresenter() {
         // create the call timer
         mCallTimer = new CallTimer(new Runnable() {
@@ -184,18 +186,28 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         // Set the call state
+        int callState = Call.State.IDLE;
         if (mPrimary != null) {
             final boolean bluetoothOn =
                     (AudioModeProvider.getInstance().getAudioMode() == AudioMode.BLUETOOTH);
-            ui.setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
-                    getGatewayLabel(), getGatewayNumber(), getWifiConnection());
+            boolean isHandoffCapable = isHandoffCapable();
+            boolean isHandoffPending = isHandoffPending();
+
+            boolean isWiFi = isWifiCall();
+            // Cache the value so the UI doesn't change when the call ends.
+            mIsWiFiCachedValue = isWiFi;
+
+            getUi().setCallState(callState, mPrimary.getDisconnectCause(), bluetoothOn,
+                    getGatewayLabel(), getGatewayNumber(), isWiFi, isHandoffCapable,
+                    isHandoffPending);
         } else {
-            ui.setCallState(Call.State.IDLE, DisconnectCause.NOT_VALID, false, null, null, null);
+            getUi().setCallState(callState, DisconnectCause.NOT_VALID, false, null, null,
+                    mIsWiFiCachedValue, false, false);
         }
 
-        final boolean enableEndCallButton = state.isConnectingOrConnected() &&
-                !state.isIncoming() && mPrimary != null;
-        ui.setEndCallButtonEnabled(enableEndCallButton);
+        final boolean enableEndCallButton = Call.State.isConnected(callState) &&
+                callState != Call.State.INCOMING && mPrimary != null;
+        getUi().setEndCallButtonEnabled(enableEndCallButton);
     }
 
     @Override
@@ -204,21 +216,23 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             final boolean bluetoothOn = (AudioMode.BLUETOOTH == mode);
 
             getUi().setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
-                    getGatewayLabel(), getGatewayNumber(), getWifiConnection());
+                    getGatewayLabel(), getGatewayNumber(), isWifiCall(),
+                    isHandoffCapable(), isHandoffPending());
         }
     }
 
-    private String getWifiConnection() {
+    private boolean isWifiCall() {
         CallServiceDescriptor descriptor = mPrimary.getCurrentCallServiceDescriptor();
-        if (descriptor != null && descriptor.getNetworkType() == CallServiceDescriptor.FLAG_WIFI) {
-            final WifiManager wifiManager = (WifiManager) mContext.getSystemService(
-                    Context.WIFI_SERVICE);
-            final WifiInfo info = wifiManager.getConnectionInfo();
-            if (info != null) {
-                return info.getSSID();
-            }
-        }
-        return null;
+        return descriptor != null &&
+                descriptor.getNetworkType() == CallServiceDescriptor.FLAG_WIFI;
+    }
+
+    private boolean isHandoffCapable() {
+        return mPrimary.can(CallCapabilities.CONNECTION_HANDOFF);
+    }
+
+    private boolean isHandoffPending() {
+        return mPrimary.getHandoffCallServiceDescriptor() != null;
     }
 
     @Override
@@ -242,6 +256,14 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             final long duration = System.currentTimeMillis() - callStart;
             ui.setPrimaryCallElapsedTime(true, DateUtils.formatElapsedTime(duration / 1000));
         }
+    }
+
+    public void connectionHandoffClicked() {
+        if (mPrimary == null) {
+            return;
+        }
+
+        TelecommAdapter.getInstance().handoffCall(mPrimary.getCallId());
     }
 
     private boolean areCallsSame(Call call1, Call call2) {
@@ -492,7 +514,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 Drawable photo, boolean isConference, boolean isGeneric);
         void setSecondaryImage(Drawable image);
         void setCallState(int state, int cause, boolean bluetoothOn,
-                String gatewayLabel, String gatewayNumber, String wifiConnection);
+                String gatewayLabel, String gatewayNumber, boolean isWifi, boolean isHandoffCapable,
+                boolean isHandoffPending);
         void setPrimaryCallElapsedTime(boolean show, String duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Drawable image);
