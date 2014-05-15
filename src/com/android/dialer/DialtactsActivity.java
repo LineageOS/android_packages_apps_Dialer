@@ -49,6 +49,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnDragListener;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.inputmethod.InputMethodManager;
@@ -163,7 +166,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
-    private boolean isDialpadShown;
+    private boolean mIsDialpadShown;
 
     /**
      * The position of the currently selected tab in the attached {@link ListsFragment}.
@@ -257,7 +260,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 if (DEBUG) {
                     Log.d(TAG, "onTextChange for mSearchView called with new query: " + newText);
                 }
-                final boolean dialpadSearch = isDialpadShowing();
+                final boolean dialpadSearch = mIsDialpadShown;
 
                 // Show search result with non-empty text. Show a bare list otherwise.
                 if (TextUtils.isEmpty(newText) && getInSearchUi()) {
@@ -290,10 +293,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             public void afterTextChanged(Editable s) {
             }
     };
-
-    private boolean isDialpadShowing() {
-        return mDialpadFragment != null && mDialpadFragment.isVisible();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -426,7 +425,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.floating_action_button:
-                if (!isDialpadShown) {
+                if (!mIsDialpadShown) {
                     mInCallDialpadUp = false;
                     showDialpadFragment(true);
                 } else {
@@ -497,7 +496,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public boolean onLongClick(View view) {
         switch (view.getId()) {
             case R.id.floating_action_button:
-                if (isDialpadShown) {
+                if (mIsDialpadShown) {
                     // Dial button was pressed; tell the Dialpad fragment
                     mDialpadFragment.dialButtonPressed();
                     return true;  // Consume the event
@@ -528,32 +527,107 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * Initiates a fragment transaction to show the dialpad fragment. Animations and other visual
+     * updates are handled by a callback which is invoked after the dialpad fragment is shown.
+     * @see #onDialpadShown
+     */
     private void showDialpadFragment(boolean animate) {
+        if (mIsDialpadShown) {
+            return;
+        }
+        mIsDialpadShown = true;
         mDialpadFragment.setAnimate(animate);
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
-        if (animate) {
-            ft.setCustomAnimations(R.anim.slide_in, 0);
-        } else {
-            mDialpadFragment.setYFraction(0);
-        }
         ft.show(mDialpadFragment);
         ft.commit();
     }
 
+    /**
+     * Callback from child DialpadFragment when the dialpad is shown.
+     */
+    public void onDialpadShown() {
+        updateFloatingActionButton();
+        if (mDialpadFragment.getAnimate()) {
+            Animation slideIn = AnimationUtils.loadAnimation(this, R.anim.slide_in);
+            mDialpadFragment.getView().startAnimation(slideIn);
+        } else {
+            mDialpadFragment.setYFraction(0);
+        }
+
+        if (mListsFragment != null && mListsFragment.isResumed() && mListsFragment.isVisible()) {
+            // If the favorites fragment is showing, fade to blank.
+            mFragmentsFrame.animate().alpha(0.0f);
+            parentLayout.setBackgroundColor(mContactListBackgroundColor);
+        }
+
+        updateSearchFragmentPosition();
+        getActionBar().hide();
+    }
+
+    /**
+     * Initiates animations and other visual updates to hide the dialpad. The fragment is hidden in
+     * a callback after the hide animation ends.
+     * @see #commitDialpadFragmentHide
+     */
     public void hideDialpadFragment(boolean animate, boolean clearDialpad) {
-        if (mDialpadFragment == null) return;
+        if (mDialpadFragment == null) {
+            return;
+        }
         if (clearDialpad) {
             mDialpadFragment.clearDialpad();
         }
-        if (!mDialpadFragment.isVisible()) return;
-        mDialpadFragment.setAnimate(animate);
-        final FragmentTransaction ft = getFragmentManager().beginTransaction();
-        if (animate) {
-            ft.setCustomAnimations(0, R.anim.slide_out);
+        if (!mIsDialpadShown) {
+            return;
         }
+        mIsDialpadShown = false;
+        mDialpadFragment.setAnimate(animate);
+
+        updateFloatingActionButton();
+        if (animate) {
+            Animation slideOut = AnimationUtils.loadAnimation(this, R.anim.slide_out);
+            slideOut.setAnimationListener(new ActivityAnimationListener() {
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    commitDialpadFragmentHide();
+                }
+            });
+            mDialpadFragment.getView().startAnimation(slideOut);
+        } else {
+            commitDialpadFragmentHide();
+        }
+
+        if (mListsFragment != null && mListsFragment.isVisible()) {
+            mFragmentsFrame.animate().alpha(1.0f);
+            parentLayout.setBackgroundColor(mDialerBackgroundColor);
+        }
+
+        updateSearchFragmentPosition();
+        getActionBar().show();
+    }
+
+    /**
+     * Finishes hiding the dialpad fragment after any animations are completed.
+     */
+    private void commitDialpadFragmentHide() {
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.hide(mDialpadFragment);
         ft.commit();
+    }
+
+    private void updateSearchFragmentPosition() {
+        int translationValue = mIsDialpadShown ?  -mActionBarHeight : 0;
+        SearchFragment fragment = null;
+        if (mInDialpadSearch) {
+            fragment = mSmartDialSearchFragment;
+        } else if (mInRegularSearch) {
+            fragment = mRegularSearchFragment;
+        }
+        if (fragment != null && fragment.isVisible()) {
+            fragment.getView().animate().translationY(translationValue)
+                    .setInterpolator(hideActionBarInterpolator).setDuration(ANIMATION_DURATION);
+        }
     }
 
     private boolean getInSearchUi() {
@@ -568,64 +642,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private void hideDialpadAndSearchUi() {
         mSearchView.setText(null);
         hideDialpadFragment(false, true);
-    }
-
-    /**
-     * Callback from child DialpadFragment when the dialpad is shown.
-     */
-    public void onDialpadShown() {
-        isDialpadShown = true;
-        mFloatingActionButton.setImageResource(R.drawable.fab_ic_call);
-        mFloatingActionButton.setContentDescription(
-                getResources().getString(R.string.description_dial_button));
-
-        SearchFragment fragment = null;
-        if (mInDialpadSearch) {
-            fragment = mSmartDialSearchFragment;
-        } else if (mInRegularSearch) {
-            fragment = mRegularSearchFragment;
-        }
-        if (fragment != null && fragment.isVisible()) {
-            fragment.getView().animate().translationY(-mActionBarHeight)
-                    .setInterpolator(hideActionBarInterpolator).setDuration(ANIMATION_DURATION);
-        }
-
-        if (mListsFragment != null && mListsFragment.isResumed() && mListsFragment.isVisible()) {
-            // If the favorites fragment is showing, fade to blank.
-            mFragmentsFrame.animate().alpha(0.0f);
-            parentLayout.setBackgroundColor(mContactListBackgroundColor);
-        }
-        getActionBar().hide();
-        alignFloatingActionButtonMiddle();
-    }
-
-    /**
-     * Callback from child DialpadFragment when the dialpad is hidden.
-     */
-    public void onDialpadHidden() {
-        isDialpadShown = false;
-        mFloatingActionButton.setImageResource(R.drawable.fab_ic_dial);
-        mFloatingActionButton.setContentDescription(
-                getResources().getString(R.string.action_menu_dialpad_button));
-
-        SearchFragment fragment = null;
-        if (mInDialpadSearch) {
-            fragment = mSmartDialSearchFragment;
-        } else if (mInRegularSearch) {
-            fragment = mRegularSearchFragment;
-        }
-        if (fragment != null && fragment.isVisible()) {
-            fragment.getView().animate().translationY(0)
-                    .setInterpolator(showActionBarInterpolator).setDuration(ANIMATION_DURATION);
-        }
-
-        if (mListsFragment != null && mListsFragment.isVisible()) {
-            mFragmentsFrame.animate().alpha(1.0f);
-            parentLayout.setBackgroundColor(mDialerBackgroundColor);
-
-        }
-        getActionBar().show();
-        alignFloatingActionButtonByTab(mCurrentTabPosition);
     }
 
     private void hideInputMethod(View view) {
@@ -805,7 +821,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         getFragmentManager().popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         setNotInSearchUi();
 
-        if (isDialpadShowing()) {
+        if (mIsDialpadShown) {
             mFragmentsFrame.setAlpha(0);
         }
     }
@@ -820,7 +836,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onBackPressed() {
-        if (mDialpadFragment != null && mDialpadFragment.isVisible()) {
+        if (mIsDialpadShown) {
             hideDialpadFragment(true, false);
         } else if (getInSearchUi()) {
             mSearchView.setText(null);
@@ -980,13 +996,27 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onPageSelected(int position) {
         mCurrentTabPosition = position;
         // If the dialpad is showing, the floating action button should always be middle aligned.
-        if (!isDialpadShowing()) {
+        if (!mIsDialpadShown) {
             alignFloatingActionButtonByTab(mCurrentTabPosition);
         }
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
+    }
+
+    private void updateFloatingActionButton() {
+        if (mIsDialpadShown) {
+            mFloatingActionButton.setImageResource(R.drawable.fab_ic_call);
+            mFloatingActionButton.setContentDescription(
+                    getResources().getString(R.string.description_dial_button));
+            alignFloatingActionButtonByTab(mCurrentTabPosition);
+        } else {
+            mFloatingActionButton.setImageResource(R.drawable.fab_ic_dial);
+            mFloatingActionButton.setContentDescription(
+                    getResources().getString(R.string.action_menu_dialpad_button));
+            alignFloatingActionButtonMiddle();
+        }
     }
 
     private void alignFloatingActionButtonByTab(int position) {
@@ -1011,5 +1041,22 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         params.addRule(RelativeLayout.CENTER_HORIZONTAL);
         mFloatingActionButtonContainer.setLayoutParams(params);
+    }
+
+    /**
+     * Convenience class which implements AnimationListener interface as null-op methods.
+     */
+    private class ActivityAnimationListener implements AnimationListener {
+        @Override
+        public void onAnimationStart(Animation animation) {
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+        }
     }
 }
