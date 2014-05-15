@@ -347,29 +347,6 @@ public class DialpadFragment extends Fragment
                 false);
         fragmentView.buildLayer();
 
-        final ViewTreeObserver vto = fragmentView.getViewTreeObserver();
-        // Adjust the translation of the DialpadFragment in a preDrawListener instead of in
-        // DialtactsActivity, because at the point in time when the DialpadFragment is added,
-        // its views have not been laid out yet.
-        final OnPreDrawListener preDrawListener = new OnPreDrawListener() {
-
-            @Override
-            public boolean onPreDraw() {
-
-                if (isHidden()) return true;
-                if (mAnimate && fragmentView.getTranslationY() == 0) {
-                    ((DialpadSlidingLinearLayout) fragmentView).setYFraction(
-                            DIALPAD_SLIDE_FRACTION);
-                }
-                final ViewTreeObserver vto = fragmentView.getViewTreeObserver();
-                vto.removeOnPreDrawListener(this);
-                return true;
-            }
-
-        };
-
-        vto.addOnPreDrawListener(preDrawListener);
-
         Resources r = getResources();
 
         mDialpadView = (DialpadView) fragmentView.findViewById(R.id.dialpad_view);
@@ -1593,9 +1570,7 @@ public class DialpadFragment extends Fragment
         final DialtactsActivity activity = (DialtactsActivity) getActivity();
         final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
         if (activity == null) return;
-        if (hidden) {
-            activity.onDialpadHidden();
-        } else {
+        if (!hidden) {
             if (mAnimate) {
                 dialpadView.animateShow();
             }
@@ -1606,6 +1581,10 @@ public class DialpadFragment extends Fragment
 
     public void setAnimate(boolean value) {
         mAnimate = value;
+    }
+
+    public boolean getAnimate() {
+        return mAnimate;
     }
 
     public void setYFraction(float yFraction) {
