@@ -297,5 +297,15 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         public void addGroup(int cursorPosition, int size, boolean expanded) {
             groups.add(new GroupSpec(cursorPosition, size, expanded));
         }
+
+        @Override
+        public void setDayGroup(long rowId, int dayGroup) {
+            //No-op
+        }
+
+        @Override
+        public void clearDayGroups() {
+            //No-op
+        }
     }
 }
