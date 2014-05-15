@@ -1010,12 +1010,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mFloatingActionButton.setImageResource(R.drawable.fab_ic_call);
             mFloatingActionButton.setContentDescription(
                     getResources().getString(R.string.description_dial_button));
-            alignFloatingActionButtonByTab(mCurrentTabPosition);
+            alignFloatingActionButtonMiddle();
         } else {
             mFloatingActionButton.setImageResource(R.drawable.fab_ic_dial);
             mFloatingActionButton.setContentDescription(
                     getResources().getString(R.string.action_menu_dialpad_button));
-            alignFloatingActionButtonMiddle();
+            alignFloatingActionButtonByTab(mCurrentTabPosition);
         }
     }
 
