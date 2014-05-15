@@ -99,7 +99,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         DialpadFragment.HostInterface,
         ListsFragment.HostInterface,
         SpeedDialFragment.HostInterface,
-        OnDragDropListener, View.OnLongClickListener,
+        OnDragDropListener,
         OnPhoneNumberPickerActionListener,
         ViewPager.OnPageChangeListener {
     private static final String TAG = "DialtactsActivity";
@@ -493,22 +493,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     @Override
-    public boolean onLongClick(View view) {
-        switch (view.getId()) {
-            case R.id.floating_action_button:
-                if (mIsDialpadShown) {
-                    // Dial button was pressed; tell the Dialpad fragment
-                    mDialpadFragment.dialButtonPressed();
-                    return true;  // Consume the event
-                }
-            default:
-                Log.wtf(TAG, "Unexpected onClick event from " + view);
-                break;
-        }
-        return false;
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ACTIVITY_REQUEST_CODE_VOICE_SEARCH) {
             if (resultCode == RESULT_OK) {
@@ -775,8 +759,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-        SearchFragment fragment;
         if (mInDialpadSearch && mSmartDialSearchFragment != null) {
             transaction.remove(mSmartDialSearchFragment);
         } else if (mInRegularSearch && mRegularSearchFragment != null) {
@@ -792,7 +774,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mInDialpadSearch = smartDialSearch;
         mInRegularSearch = !smartDialSearch;
 
-        fragment = (SearchFragment) getFragmentManager().findFragmentByTag(tag);
+        SearchFragment fragment = (SearchFragment) getFragmentManager().findFragmentByTag(tag);
         if (fragment == null) {
             if (smartDialSearch) {
                 fragment = new SmartDialSearchFragment();
