@@ -40,6 +40,7 @@ import android.widget.Toast;
 import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
+import com.android.contacts.common.util.DateUtils;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
@@ -59,7 +60,6 @@ import java.util.LinkedList;
  */
 public class CallLogAdapter extends GroupingListAdapter
         implements ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
-
 
     /** The enumeration of {@link android.os.AsyncTask} objects used in this class. */
     public enum Tasks {
@@ -117,6 +117,12 @@ public class CallLogAdapter extends GroupingListAdapter
     /** The size of the cache of contact info. */
     private static final int CONTACT_INFO_CACHE_SIZE = 100;
 
+    /** Localized string representing the word "Today". */
+    private static final CharSequence TODAY_LABEL = DateUtils.getTodayString();
+
+    /** Localized string representing the word "Yesterday". */
+    private static final CharSequence YESTERDAY_LABEL = DateUtils.getYesterdayString();
+
     protected final Context mContext;
     private final ContactInfoHelper mContactInfoHelper;
     private final CallFetcher mCallFetcher;
@@ -137,6 +143,20 @@ public class CallLogAdapter extends GroupingListAdapter
 
     /** Hashmap, keyed by call Id, used to track which call log entries have been expanded or not */
     private HashMap<Long,Boolean> mIsExpanded = new HashMap<Long,Boolean>();
+
+    /**
+     *  Hashmap, keyed by call Id, used to track the day group for a call.  As call log entries are
+     *  put into the primary call groups in {@link com.android.dialer.calllog.CallLogGroupBuilder},
+     *  they are also assigned a secondary "day group".  This hashmap tracks the day group assigned
+     *  to all calls in the call log.  This information is used to trigger the display of a day
+     *  group header above the call log entry at the start of a day group.
+     *  Note: Multiple calls are grouped into a single primary "call group" in the call log, and
+     *  the cursor used to bind rows includes all of these calls.  When determining if a day group
+     *  change has occurred it is necessary to look at the last entry in the call log to determine
+     *  its day group.  This hashmap provides a means of determining the previous day group without
+     *  having to reverse the cursor to the start of the previous day call log entry.
+     */
+    private HashMap<Long,Integer> mDayGroups = new HashMap<Long, Integer>();
 
     /**
      * A request for contact details for the given number.
@@ -589,7 +609,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
         // Default case: an item in the call log.
         views.primaryActionView.setVisibility(View.VISIBLE);
-        views.listHeaderTextView.setVisibility(View.GONE);
 
         final String number = c.getString(CallLogQuery.NUMBER);
         final int numberPresentation = c.getInt(CallLogQuery.NUMBER_PRESENTATION);
@@ -599,6 +618,21 @@ public class CallLogAdapter extends GroupingListAdapter
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final long rowId = c.getLong(CallLogQuery.ID);
         views.rowId = rowId;
+
+        // For entries in the call log, check if the day group has changed and display a header
+        // if necessary.
+        if (mIsCallLog) {
+            int currentGroup = getDayGroupForCall(rowId);
+            int previousGroup = getPreviousDayGroup(c);
+            if (currentGroup != previousGroup) {
+                views.dayGroupHeader.setVisibility(View.VISIBLE);
+                views.dayGroupHeader.setText(getGroupDescription(currentGroup));
+            } else {
+                views.dayGroupHeader.setVisibility(View.GONE);
+            }
+        } else {
+            views.dayGroupHeader.setVisibility(View.GONE);
+        }
 
         // Store some values used when the actions ViewStub is inflated on expansion of the actions
         // section.
@@ -738,6 +772,38 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     /**
+     * Retrieves the day group of the previous call in the call log.  Used to determine if the day
+     * group has changed and to trigger display of the day group text.
+     *
+     * @param cursor The call log cursor.
+     * @return The previous day group, or DAY_GROUP_NONE if this is the first call.
+     */
+    private int getPreviousDayGroup(Cursor cursor) {
+        // We want to restore the position in the cursor at the end.
+        int startingPosition = cursor.getPosition();
+        int dayGroup = CallLogGroupBuilder.DAY_GROUP_NONE;
+        if (cursor.moveToPrevious()) {
+            long previousRowId = cursor.getLong(CallLogQuery.ID);
+            dayGroup = getDayGroupForCall(previousRowId);
+        }
+        cursor.moveToPosition(startingPosition);
+        return dayGroup;
+    }
+
+    /**
+     * Given a call Id, look up the day group that the call belongs to.  The day group data is
+     * populated in {@link com.android.dialer.calllog.CallLogGroupBuilder}.
+     *
+     * @param callId The call to retrieve the day group for.
+     * @return The day group for the call.
+     */
+    private int getDayGroupForCall(long callId) {
+        if (mDayGroups.containsKey(callId)) {
+            return mDayGroups.get(callId);
+        }
+        return CallLogGroupBuilder.DAY_GROUP_NONE;
+    }
+    /**
      * Determines if a call log row with the given Id is expanded to show the action buttons or
      * not. If the row Id is not yet tracked, add a new entry assuming the row is collapsed.
      * @param rowId
@@ -779,9 +845,9 @@ public class CallLogAdapter extends GroupingListAdapter
             inflateActionViewStub(callLogItem);
 
             views.actionsView.setVisibility(View.VISIBLE);
-            callLogItem.setBackgroundColor(
+            views.callLogEntryView.setBackgroundColor(
                     callLogItem.getResources().getColor(R.color.background_dialer_light));
-            callLogItem.setElevation(
+            views.callLogEntryView.setElevation(
                     callLogItem.getResources().getDimension(R.dimen.call_log_expanded_elevation));
 
             // Attempt to give accessibility focus to one of the action buttons.
@@ -799,9 +865,9 @@ public class CallLogAdapter extends GroupingListAdapter
                 views.actionsView.setVisibility(View.GONE);
             }
 
-            callLogItem.setBackgroundColor(
+            views.callLogEntryView.setBackgroundColor(
                     callLogItem.getResources().getColor(R.color.background_dialer_list_items));
-            callLogItem.setElevation(0);
+            views.callLogEntryView.setElevation(0);
         }
     }
 
@@ -1138,6 +1204,27 @@ public class CallLogAdapter extends GroupingListAdapter
         super.addGroup(cursorPosition, size, expanded);
     }
 
+    /**
+     * Stores the day group associated with a call in the call log.
+     *
+     * @param rowId The row Id of the current call.
+     * @param dayGroup The day group the call belongs in.
+     */
+    @Override
+    public void setDayGroup(long rowId, int dayGroup) {
+        if (!mDayGroups.containsKey(rowId)) {
+            mDayGroups.put(rowId, dayGroup);
+        }
+    }
+
+    /**
+     * Clears the day group associations on re-bind of the call log.
+     */
+    @Override
+    public void clearDayGroups() {
+        mDayGroups.clear();
+    }
+
     /*
      * Get the number from the Contacts, if available, since sometimes
      * the number provided by caller id may not be formatted properly
@@ -1196,6 +1283,24 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         cursor.moveToPosition(startingPosition);
         return ids;
+    }
+
+    /**
+     * Determines the description for a day group.
+     *
+     * @param group The day group to retrieve the description for.
+     * @return The day group description.
+     */
+    private CharSequence getGroupDescription(int group) {
+       if (group == CallLogGroupBuilder.DAY_GROUP_TODAY) {
+           return TODAY_LABEL;
+       } else if (group == CallLogGroupBuilder.DAY_GROUP_YESTERDAY) {
+           return YESTERDAY_LABEL;
+       } else if (group == CallLogGroupBuilder.DAY_GROUP_LAST_WEEK) {
+           return mContext.getResources().getString(R.string.call_log_header_last_week);
+       } else {
+           return mContext.getResources().getString(R.string.call_log_header_other);
+       }
     }
 
     /**

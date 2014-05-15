@@ -36,8 +36,10 @@ public final class CallLogListItemViews {
     public final View primaryActionView;
     /** The details of the phone call. */
     public final PhoneCallDetailsViews phoneCallDetailsViews;
-    /** The text of the header of a section. */
-    public final TextView listHeaderTextView;
+    /** The text of the header for a day grouping. */
+    public final TextView dayGroupHeader;
+    /** The view containing the details for the call log row, including the action buttons. */
+    public final View callLogEntryView;
     /** The view containing call log item actions.  Null until the ViewStub is inflated. */
     public View actionsView;
     /** The "call back" action button - assigned only when the action section is expanded. */
@@ -91,12 +93,13 @@ public final class CallLogListItemViews {
     public CharSequence nameOrNumber;
 
     private CallLogListItemViews(QuickContactBadge quickContactView, View primaryActionView,
-            PhoneCallDetailsViews phoneCallDetailsViews,
-            TextView listHeaderTextView) {
+            PhoneCallDetailsViews phoneCallDetailsViews, View callLogEntryView,
+            TextView dayGroupHeader) {
         this.quickContactView = quickContactView;
         this.primaryActionView = primaryActionView;
         this.phoneCallDetailsViews = phoneCallDetailsViews;
-        this.listHeaderTextView = listHeaderTextView;
+        this.callLogEntryView = callLogEntryView;
+        this.dayGroupHeader = dayGroupHeader;
     }
 
     public static CallLogListItemViews fromView(View view) {
@@ -104,7 +107,8 @@ public final class CallLogListItemViews {
                 (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
                 view.findViewById(R.id.primary_action_view),
                 PhoneCallDetailsViews.fromView(view),
-                (TextView) view.findViewById(R.id.call_log_header));
+                view.findViewById(R.id.call_log_row),
+                (TextView) view.findViewById(R.id.call_log_day_group_label));
     }
 
     @NeededForTesting
@@ -113,6 +117,7 @@ public final class CallLogListItemViews {
                 new QuickContactBadge(context),
                 new View(context),
                 PhoneCallDetailsViews.createForTest(context),
+                new View(context),
                 new TextView(context));
         views.callBackButtonView = new TextView(context);
         views.deleteButtonView = new TextView(context);

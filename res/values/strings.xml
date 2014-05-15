@@ -718,6 +718,15 @@
          [CHAR LIMIT=NONE] -->
     <string name="description_delete_action">Delete call log entry for <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
 
-    <!-- Toast message which appears when a call log entry is deleted. -->
+    <!-- Toast message which appears when a call log entry is deleted.
+         [CHAR LIMIT=NONE] -->
     <string name="toast_entry_removed">Call log entry deleted.</string>
+
+    <!-- String used as a header in the call log above calls which occurred last week.
+         [CHAR LIMIT=65] -->
+    <string name="call_log_header_last_week">Last week</string>
+
+    <!-- String used as a header in the call log above calls which ocurred more than a week ago.
+         [CHAR LIMIT=65] -->
+    <string name="call_log_header_other">Other</string>
 </resources>
