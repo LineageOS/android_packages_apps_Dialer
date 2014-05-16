@@ -188,6 +188,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // Set the call state
         int callState = Call.State.IDLE;
         if (mPrimary != null) {
+            callState = mPrimary.getState();
             final boolean bluetoothOn =
                     (AudioModeProvider.getInstance().getAudioMode() == AudioMode.BLUETOOTH);
             boolean isHandoffCapable = isHandoffCapable();
