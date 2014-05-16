@@ -44,7 +44,6 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -103,6 +102,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         SpeedDialFragment.HostInterface,
         OnDragDropListener,
         OnPhoneNumberPickerActionListener,
+        PopupMenu.OnMenuItemClickListener,
         ViewPager.OnPageChangeListener {
     private static final String TAG = "DialtactsActivity";
 
@@ -193,6 +193,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private EditText mSearchView;
     private View mSearchViewCloseButton;
     private View mVoiceSearchButton;
+
     /**
      * View that contains the "Remove" dialog that shows up when the user long presses a contact.
      * If the user releases a contact when hovering on top of this, the contact is unfavorited and
@@ -207,8 +208,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private DialerDatabaseHelper mDialerDatabaseHelper;
     private DragDropController mDragDropController;
 
-    private class OverflowPopupMenu extends PopupMenu {
-        public OverflowPopupMenu(Context context, View anchor) {
+    private class OptionsPopupMenu extends PopupMenu {
+        public OptionsPopupMenu(Context context, View anchor) {
             super(context, anchor);
         }
 
@@ -216,8 +217,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         public void show() {
             final Menu menu = getMenu();
             final MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
-            // TODO: Check mSpeedDialFragment.hasFrequents()
-            clearFrequents.setVisible(true);
+            clearFrequents.setVisible(mListsFragment != null &&
+                    mListsFragment.getSpeedDialFragment() != null &&
+                    mListsFragment.getSpeedDialFragment().hasFrequents());
             super.show();
         }
     }
@@ -335,9 +337,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
         mSearchView.setOnTouchListener(mSearchViewOnTouchListener);
 
-
         mSearchViewCloseButton = actionBarView.findViewById(R.id.search_close_button);
         mSearchViewCloseButton.setOnClickListener(this);
+
+        ImageButton optionsMenuButton =
+                (ImageButton) actionBarView.findViewById(R.id.dialtacts_options_menu_button);
+        optionsMenuButton.setOnClickListener(this);
+        final OptionsPopupMenu optionsMenu = buildOptionsMenu(optionsMenuButton);
+        optionsMenuButton.setOnTouchListener(optionsMenu.getDragToOpenListener());
 
         final TypedArray styledAttributes = getTheme().obtainStyledAttributes(
                 new int[] { android.R.attr.actionBarSize });
@@ -462,6 +469,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                             Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case R.id.dialtacts_options_menu_button:
+                buildOptionsMenu(view).show();
+                break;
             default: {
                 Log.wtf(TAG, "Unexpected onClick event from " + view);
                 break;
@@ -470,7 +480,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_history:
                 showCallHistory();
@@ -494,8 +504,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                         DialtactsActivity.class);
                 return true;
             case R.id.menu_clear_frequents:
-                // TODO: This should be enabled/disabled based on
-                // SpeedDialFragment.hasFrequents
                 ClearFrequentsDialog.show(getFragmentManager());
                 return true;
             case R.id.menu_call_settings:
@@ -653,19 +661,20 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
     }
 
+    private OptionsPopupMenu buildOptionsMenu(View invoker) {
+        final OptionsPopupMenu popupMenu = new OptionsPopupMenu(this, invoker);
+        popupMenu.inflate(R.menu.dialtacts_options);
+        popupMenu.setOnMenuItemClickListener(this);
+        return popupMenu;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (DEBUG) {
-            Log.d(TAG, "onCreateOptionsMenu");
-        }
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.dialtacts_options, menu);
-
         if (mPendingSearchViewQuery != null) {
             mSearchView.setText(mPendingSearchViewQuery);
             mPendingSearchViewQuery = null;
         }
-        return super.onCreateOptionsMenu(menu);
+        return false;
     }
 
     /**
