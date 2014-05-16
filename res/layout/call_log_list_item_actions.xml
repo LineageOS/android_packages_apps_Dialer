@@ -42,7 +42,8 @@
             android:textSize="@dimen/call_log_secondary_text_size"
             android:nextFocusLeft="@+id/primary_action_view"
             android:nextFocusRight="@+id/voicemail_action"
-            android:focusable="true"/>
+            android:focusable="true"
+            android:singleLine="true"/>
         <TextView
             android:id="@+id/voicemail_action"
             android:background="@drawable/action_button_background"
@@ -57,7 +58,8 @@
             android:textSize="@dimen/call_log_secondary_text_size"
             android:nextFocusLeft="@+id/call_back_action"
             android:nextFocusRight="@+id/delete_action"
-            android:focusable="true"/>
+            android:focusable="true"
+            android:singleLine="true"/>
         <TextView
             android:id="@+id/delete_action"
             android:background="@drawable/action_button_background"
@@ -71,7 +73,24 @@
             android:textColor="@color/call_log_action_delete_text"
             android:textSize="@dimen/call_log_secondary_text_size"
             android:nextFocusLeft="@+id/voicemail_action"
+            android:nextFocusRight="@+id/details_action"
+            android:focusable="true"
+            android:singleLine="true"/>
+        <TextView
+            android:id="@+id/details_action"
+            android:background="@drawable/action_button_background"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/call_log_action_horizontal_padding"
+            android:paddingRight="@dimen/call_log_action_horizontal_padding"
+            android:text="@string/call_log_action_details"
+            android:textColor="?attr/call_log_secondary_text_color"
+            android:textSize="@dimen/call_log_secondary_text_size"
+            android:nextFocusLeft="@+id/delete_action"
             android:nextFocusRight="@+id/primary_action_view"
-            android:focusable="true"/>
+            android:focusable="true"
+            android:singleLine="true"/>
     </LinearLayout>
 </FrameLayout>

@@ -65,39 +65,29 @@ public abstract class IntentProvider {
         };
     }
 
+    /**
+     * Retrieves the call details intent provider for an entry in the call log.
+     *
+     * @param id The call ID of the first call in the call group.
+     * @param extraIds The call ID of the other calls grouped together with the call.
+     * @param voicemailUri If call log entry is for a voicemail, the voicemail URI.
+     * @return The call details intent provider.
+     */
     public static IntentProvider getCallDetailIntentProvider(
-            final Cursor cursor, final int position, final long id, final int groupSize) {
+            final long id, final long[] extraIds, final String voicemailUri) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                if (cursor.isClosed()) {
-                    // There are reported instances where the cursor is already closed.
-                    // b/10937133
-                    // When causes a crash when it's accessed here.
-                    Log.e(TAG, "getCallDetailIntentProvider() cursor is already closed.");
-                    return null;
-                }
-
-                cursor.moveToPosition(position);
-
                 Intent intent = new Intent(context, CallDetailActivity.class);
                 // Check if the first item is a voicemail.
-                String voicemailUri = cursor.getString(CallLogQuery.VOICEMAIL_URI);
                 if (voicemailUri != null) {
                     intent.putExtra(CallDetailActivity.EXTRA_VOICEMAIL_URI,
                             Uri.parse(voicemailUri));
                 }
                 intent.putExtra(CallDetailActivity.EXTRA_VOICEMAIL_START_PLAYBACK, false);
 
-                if (groupSize > 1) {
-                    // We want to restore the position in the cursor at the end.
-                    long[] ids = new long[groupSize];
-                    // Copy the ids of the rows in the group.
-                    for (int index = 0; index < groupSize; ++index) {
-                        ids[index] = cursor.getLong(CallLogQuery.ID);
-                        cursor.moveToNext();
-                    }
-                    intent.putExtra(CallDetailActivity.EXTRA_CALL_LOG_IDS, ids);
+                if (extraIds != null && extraIds.length > 0) {
+                    intent.putExtra(CallDetailActivity.EXTRA_CALL_LOG_IDS, extraIds);
                 } else {
                     // If there is a single item, use the direct URI for it.
                     intent.setData(ContentUris.withAppendedId(

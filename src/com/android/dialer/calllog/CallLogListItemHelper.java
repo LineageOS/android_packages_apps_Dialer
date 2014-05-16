@@ -82,6 +82,9 @@ import com.android.dialer.R;
 
         views.deleteButtonView.setContentDescription(
                 mResources.getString(R.string.description_delete_action, views.nameOrNumber));
+
+        views.detailsButtonView.setContentDescription(
+                mResources.getString(R.string.description_details_action, views.nameOrNumber));
     }
 
     /**

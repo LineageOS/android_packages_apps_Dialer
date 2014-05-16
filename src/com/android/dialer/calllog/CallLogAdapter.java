@@ -641,7 +641,7 @@ public class CallLogAdapter extends GroupingListAdapter
         views.callType = callType;
         views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
         // Stash away the Ids of the calls so that we can support deleting a row in the call log.
-        views.callIds = getCallIds(c, rowId, count);
+        views.callIds = getCallIds(c, count);
 
         final ContactInfo cachedContactInfo = getContactInfoFromCallLog(c);
 
@@ -857,7 +857,8 @@ public class CallLogAdapter extends GroupingListAdapter
             // block and block further attempts to set focus.
             boolean focused = views.callBackButtonView.requestAccessibilityFocus() ||
                     views.voicemailButtonView.requestAccessibilityFocus() ||
-                    views.deleteButtonView.requestAccessibilityFocus();
+                    views.deleteButtonView.requestAccessibilityFocus() ||
+                    views.detailsButtonView.requestAccessibilityFocus();
         } else {
             // When recycling a view, it is possible the actionsView ViewStub was previously
             // inflated so we should hide it in this case.
@@ -894,8 +895,12 @@ public class CallLogAdapter extends GroupingListAdapter
             views.voicemailButtonView = (TextView)views.actionsView.findViewById(R.id.voicemail_action);
         }
 
-        if ( views.deleteButtonView == null) {
+        if (views.deleteButtonView == null) {
             views.deleteButtonView = (TextView)views.actionsView.findViewById(R.id.delete_action);
+        }
+
+        if (views.detailsButtonView == null) {
+            views.detailsButtonView = (TextView)views.actionsView.findViewById(R.id.details_action);
         }
 
         bindActionButtons(views);
@@ -927,9 +932,18 @@ public class CallLogAdapter extends GroupingListAdapter
                     IntentProvider.getPlayVoicemailIntentProvider(
                             views.rowId, views.voicemailUri));
             views.voicemailButtonView.setVisibility(View.VISIBLE);
+
+            views.detailsButtonView.setVisibility(View.GONE);
         } else {
             views.voicemailButtonView.setTag(null);
             views.voicemailButtonView.setVisibility(View.GONE);
+
+            views.detailsButtonView.setOnClickListener(mActionListener);
+            views.detailsButtonView.setTag(
+                    IntentProvider.getCallDetailIntentProvider(
+                            views.rowId, views.callIds, null)
+            );
+
         }
 
         views.deleteButtonView.setOnClickListener(this.mDeleteListener);
@@ -1268,11 +1282,10 @@ public class CallLogAdapter extends GroupingListAdapter
      * Retrieves the call Ids represented by the current call log row.
      *
      * @param cursor Call log cursor to retrieve call Ids from.
-     * @param id Id of the first call of the grouping.
      * @param groupSize Number of calls associated with the current call log row.
      * @return Array of call Ids.
      */
-    private long[] getCallIds(final Cursor cursor, final long id, final int groupSize) {
+    private long[] getCallIds(final Cursor cursor, final int groupSize) {
         // We want to restore the position in the cursor at the end.
         int startingPosition = cursor.getPosition();
         long[] ids = new long[groupSize];

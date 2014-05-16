@@ -21,6 +21,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/call_log_list_item"
     android:orientation="vertical"
+    android:clipChildren="false"
 >
     <!-- Day group heading. Used to show a "today", "yesterday", "last week" or "other" heading
          above a group of call log entries. -->
