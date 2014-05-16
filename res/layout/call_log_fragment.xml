@@ -68,6 +68,7 @@
             android:layout_height="match_parent"
             android:fadingEdge="none"
             android:scrollbarStyle="outsideOverlay"
+            android:background="@color/background_dialer_list_items"
             android:divider="@null"
             android:nestedScrollingEnabled="true"
             android:clipChildren="false"

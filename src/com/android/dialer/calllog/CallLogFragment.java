@@ -17,6 +17,8 @@
 package com.android.dialer.calllog;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.animation.Animator.AnimatorListener;
 import android.app.Activity;
@@ -541,9 +543,33 @@ public class CallLogFragment extends ListFragment
                 if (!isExpand) {
                     viewHolder.actionsView.setVisibility(View.VISIBLE);
                 }
+
+                // Set up the fade effect for the action buttons.
+                if (isExpand) {
+                    int fadeDuration = getResources().getInteger(
+                            R.integer.call_log_actions_fade_in_duration);
+                    int startDelay = getResources().getInteger(
+                            R.integer.call_log_actions_fade_start);
+                    // Start the fade in after the expansion has partly completed, otherwise it
+                    // will be mostly over before the expansion completes.
+                    viewHolder.actionsView.setAlpha(0f);
+                    viewHolder.actionsView.animate()
+                            .alpha(1f)
+                            .setStartDelay(startDelay)
+                            .setDuration(fadeDuration)
+                            .start();
+                } else {
+                    int fadeDuration = getResources().getInteger(
+                            R.integer.call_log_actions_fade_out_duration);
+                    viewHolder.actionsView.setAlpha(1f);
+                    viewHolder.actionsView.animate()
+                            .alpha(0f)
+                            .setDuration(fadeDuration)
+                            .start();
+                }
                 view.requestLayout();
 
-                // Set up the animator to animate the expansion.
+                // Set up the animator to animate the expansion and shadow depth.
                 ValueAnimator animator = isExpand ? ValueAnimator.ofFloat(0f, 1f)
                         : ValueAnimator.ofFloat(1f, 0f);
 
@@ -555,7 +581,8 @@ public class CallLogFragment extends ListFragment
                         // For each value from 0 to 1, animate the various parts of the layout.
                         view.getLayoutParams().height =
                                 (int) (value * distance + baseHeight);
-                        view.setElevation(mExpandedItemElevation * value);
+                        viewHolder.callLogEntryView
+                                .setElevation(mExpandedItemElevation * value);
                         view.requestLayout();
                     }
                 });
@@ -564,6 +591,7 @@ public class CallLogFragment extends ListFragment
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         view.getLayoutParams().height = LayoutParams.WRAP_CONTENT;
+
                         if (!isExpand) {
                             viewHolder.actionsView.setVisibility(View.GONE);
                         }
@@ -576,6 +604,11 @@ public class CallLogFragment extends ListFragment
                     @Override
                     public void onAnimationStart(Animator animation) { }
                 });
+
+                final int expandCollapseDuration = getResources().getInteger(
+                        R.integer.call_log_expand_collapse_duration);
+
+                animator.setDuration(expandCollapseDuration);
                 animator.start();
 
                 // Return false so this draw does not occur to prevent the final frame from
