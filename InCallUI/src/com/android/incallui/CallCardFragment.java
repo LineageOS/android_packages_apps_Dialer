@@ -37,6 +37,8 @@ import android.view.ViewStub;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.animation.Interpolator;
+import android.view.animation.PathInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,7 +54,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         implements CallCardPresenter.CallCardUi {
 
     private static final int REVEAL_ANIMATION_DURATION = 800;
-    private static final int SHRINK_ANIMATION_DURATION = 400;
+    private static final int SHRINK_ANIMATION_DURATION = 1000;
 
     // Primary caller info
     private TextView mPhoneNumber;
@@ -60,6 +62,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mPrimaryName;
     private TextView mCallStateLabel;
     private TextView mCallTypeLabel;
+    private View mCallNumberAndLabel;
     private ImageView mPhoto;
     private TextView mElapsedTime;
 
@@ -78,8 +81,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mEndCallButton;
     private ImageButton mHandoffButton;
 
+    private final Interpolator mAnimationInterpolator = new PathInterpolator(0.4f, 0, 0.2f, 1);
+
     // Cached DisplayMetrics density.
     private float mDensity;
+
+    private float mTranslationOffset;
 
     @Override
     CallCardPresenter.CallCardUi getUi() {
@@ -112,6 +119,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         super.onCreateView(inflater, container, savedInstanceState);
 
         mDensity = getResources().getDisplayMetrics().density;
+        mTranslationOffset =
+                getResources().getDimensionPixelSize(R.dimen.call_card_anim_translate_y_offset);
 
         return inflater.inflate(R.layout.call_card, container, false);
     }
@@ -126,6 +135,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mSecondaryCallInfo = (ViewStub) view.findViewById(R.id.secondary_call_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
+        mCallNumberAndLabel = view.findViewById(R.id.labelAndNumber);
         mCallTypeLabel = (TextView) view.findViewById(R.id.callTypeLabel);
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
         mPrimaryCallCardContainer = view.findViewById(R.id.primary_call_info_container);
@@ -568,8 +578,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 // Prepare the state of views before the circular reveal animation
                 mPrimaryCallCardContainer.setBottom(parent.getHeight());
                 mEndCallButton.setTranslationY(200);
-                mPrimaryCallInfo.setAlpha(0);
                 mCallButtonsContainer.setAlpha(0);
+                mCallStateLabel.setAlpha(0);
+                mPrimaryName.setAlpha(0);
+                mCallTypeLabel.setAlpha(0);
+                mCallNumberAndLabel.setAlpha(0);
 
                 final Animator revealAnimator = getRevealAnimator();
                 final Animator shrinkAnimator =
@@ -593,6 +606,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         });
     }
 
+    /**
+     * Animator that performs the upwards shrinking animation of the blue call card scrim.
+     * At the start of the animation, each child view is moved downwards by a pre-specified amount
+     * and then translated upwards together with the scrim.
+     */
     private Animator getShrinkAnimator(int startHeight, int endHeight) {
         final Animator shrinkAnimator =
                 ObjectAnimator.ofInt(mPrimaryCallCardContainer, "bottom",
@@ -601,14 +619,17 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         shrinkAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
+                assignTranslateAnimation(mCallStateLabel, 1);
+                assignTranslateAnimation(mPrimaryName, 2);
+                assignTranslateAnimation(mCallTypeLabel, 3);
+                assignTranslateAnimation(mCallNumberAndLabel, 4);
+                assignTranslateAnimation(mCallButtonsContainer, 5);
+
                 mEndCallButton.animate().translationY(0)
-                        .setDuration(SHRINK_ANIMATION_DURATION);
-                mPrimaryCallInfo.animate().alpha(1).withLayer()
-                        .setDuration(SHRINK_ANIMATION_DURATION);
-                mCallButtonsContainer.animate().alpha(1).withLayer()
                         .setDuration(SHRINK_ANIMATION_DURATION);
             }
         });
+        shrinkAnimator.setInterpolator(mAnimationInterpolator);
         return shrinkAnimator;
     }
 
@@ -623,6 +644,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 0, Math.max(size.x, size.y));
         valueAnimator.setDuration(REVEAL_ANIMATION_DURATION);
         return valueAnimator;
+    }
+
+    private void assignTranslateAnimation(View view, int offset) {
+        view.setTranslationY(mTranslationOffset * offset);
+        view.animate().translationY(0).alpha(1).withLayer()
+                .setDuration(SHRINK_ANIMATION_DURATION).setInterpolator(mAnimationInterpolator);
     }
 
     private final class LayoutIgnoringListener implements View.OnLayoutChangeListener {

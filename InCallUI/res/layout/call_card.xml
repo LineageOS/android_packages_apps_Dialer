@@ -48,7 +48,8 @@
                 android:orientation="vertical"
                 android:translationZ="@dimen/primary_call_translation_z"
                 android:background="@color/incall_call_banner_background_color"
-                >
+                android:clipChildren="false"
+                android:clipToPadding="false" >
 
                 <include layout="@layout/primary_call_info" />
 
