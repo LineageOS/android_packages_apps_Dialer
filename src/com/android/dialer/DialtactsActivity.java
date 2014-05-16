@@ -167,7 +167,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
     private boolean mIsDialpadShown;
-    private boolean mIsExitingSearch;
 
     /**
      * The position of the currently selected tab in the attached {@link ListsFragment}.
@@ -261,13 +260,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 Log.d(TAG, "onTextChange for mSearchView called with new query: " + newText);
             }
 
-            // Show search result with non-empty text. Show a bare list otherwise.
-            final boolean sameSearchMode = (mIsDialpadShown && mInDialpadSearch) ||
-                    (!mIsDialpadShown && mInRegularSearch);
-            if (!sameSearchMode) {
-                // call enterSearchUi only if we are switching search modes, or entering
-                // search ui for the first time
-                enterSearchUi(mIsDialpadShown, mSearchQuery);
+            // Show search fragment only when the query string is changed to non-empty text.
+            if (!TextUtils.isEmpty(newText)) {
+                // Call enterSearchUi only if we are switching search modes, or showing a search
+                // fragment for the first time.
+                final boolean sameSearchMode = (mIsDialpadShown && mInDialpadSearch) ||
+                        (!mIsDialpadShown && mInRegularSearch);
+                if (!sameSearchMode) {
+                    enterSearchUi(mIsDialpadShown, mSearchQuery);
+                }
             }
 
             if (mIsDialpadShown && mSmartDialSearchFragment != null) {
@@ -762,7 +763,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Shows the search fragment
      */
     private void enterSearchUi(boolean smartDialSearch, String query) {
-        if (getFragmentManager().isDestroyed() || mIsExitingSearch) {
+        if (getFragmentManager().isDestroyed()) {
             // Weird race condition where fragment is doing work after the activity is destroyed
             // due to talkback being on (b/10209937). Just return since we can't do any
             // constructive here.
@@ -820,8 +821,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             return;
         }
 
-        mIsExitingSearch = true;
-
         mSearchView.setText(null);
         mDialpadFragment.clearDialpad();
         setNotInSearchUi();
@@ -838,8 +837,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         transaction.commit();
 
         mListsFragment.getView().animate().alpha(1).withLayer();
-
-        mIsExitingSearch = false;
     }
 
     /** Returns an Intent to launch Call Settings screen */
