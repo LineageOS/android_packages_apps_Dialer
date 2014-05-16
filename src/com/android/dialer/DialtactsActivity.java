@@ -588,6 +588,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mIsDialpadShown = false;
         mDialpadFragment.setAnimate(animate);
 
+        updateSearchFragmentPosition();
         updateFloatingActionButton();
         if (animate) {
             Animation slideOut = AnimationUtils.loadAnimation(this, R.anim.slide_out);
@@ -602,7 +603,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             commitDialpadFragmentHide();
         }
 
-        updateSearchFragmentPosition();
         mListsFragment.maybeShowActionBar();
     }
 
@@ -618,9 +618,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private void updateSearchFragmentPosition() {
         int translationValue = mIsDialpadShown ?  -mActionBarHeight : 0;
         SearchFragment fragment = null;
-        if (mInDialpadSearch) {
+        if (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()) {
             fragment = mSmartDialSearchFragment;
-        } else if (mInRegularSearch) {
+        } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
             fragment = mRegularSearchFragment;
         }
         if (fragment != null && fragment.isVisible()) {
