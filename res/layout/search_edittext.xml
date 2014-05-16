@@ -45,4 +45,12 @@
         android:clickable="true"
         android:contentDescription="@string/description_start_voice_search"
         android:background="?android:attr/selectableItemBackground" />
+    <ImageButton
+        android:id="@+id/dialtacts_options_menu_button"
+        android:layout_width="@dimen/search_box_icon_size"
+        android:layout_height="@dimen/search_box_icon_size"
+        android:padding="@dimen/search_box_icon_padding"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/ic_overflow_menu"
+        android:tint="@color/searchbox_options_menu_color" />
 </view>

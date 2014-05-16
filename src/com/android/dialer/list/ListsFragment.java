@@ -364,4 +364,8 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         // height changes.
         transition.enableTransitionType(LayoutTransition.CHANGING);
     }
+
+    public SpeedDialFragment getSpeedDialFragment() {
+        return mSpeedDialFragment;
+    }
 }
