@@ -105,11 +105,6 @@
     <!-- Color of the bottom border below the contacts grid on the main dialer screen. -->
     <color name="contacts_grid_bottom_border_color">#16000000</color>
 
-    <!-- Color of action bar text. Ensure this stays in sync with packages/Telephony
-         phone_settings_actionbar_text_color-->
-    <color name="actionbar_text_color">#ffffff</color>
-    <color name="actionbar_unselected_text_color">#a6ffffff</color>
-
     <!-- Color of actions in expanded call log entries.  This text color represents actions such
          as call back, play voicemail, etc. -->
     <color name="call_log_action_text">#1dc7db</color>

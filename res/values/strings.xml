@@ -664,10 +664,6 @@
          Do not translate. -->
     <string name="search_font_family">sans-serif</string>
 
-    <!-- The font-family to use for tab text.
-         Do not translate. -->
-    <string name="tab_font_family">sans-serif</string>
-
     <!-- Button text for the "call back" button displayed underneath an entry in the call log.
          Tapping causes a call to be placed to the caller represented by the call log entry.
          [CHAR LIMIT=30] -->

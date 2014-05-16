@@ -113,7 +113,6 @@
 
     <!-- Size of text in tabs. -->
     <dimen name="tab_height">43dp</dimen>
-    <dimen name="tab_text_size">14sp</dimen>
 
     <!-- Padding to the left and right of call log action buttons. -->
     <dimen name="call_log_action_horizontal_padding">8dp</dimen>
