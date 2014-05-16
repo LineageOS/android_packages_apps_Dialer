@@ -347,7 +347,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         // TODO: Try to show the action bar regardless of whether the panel is open, and then update
         // the offset to show/hide the action bar, instead of updating the whether the action bar is
         // shown in onPanelSlide.
-        if (mIsPanelOpen) {
+        if (mIsPanelOpen && mActionBar != null) {
             mActionBar.show();
         }
     }
