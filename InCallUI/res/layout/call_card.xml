@@ -16,144 +16,119 @@
   ~ limitations under the License
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/call_card"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- The main content of the CallCard is either one or two "call info"
+         blocks, depending on whether one or two lines are in use.
+
+         The call_info blocks are stacked vertically inside a CallCard (LinearLayout),
+         each with layout_weight="1".  If only one line is in use (i.e. the
+         common case) then the 2nd call info will be GONE and thus the 1st one
+         will expand to fill the full height of the CallCard. -->
+
+    <!-- Primary "call card" block, for the foreground call. -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_height="0dp"
+        android:layout_weight="5" >
 
-        <!-- The main content of the CallCard is either one or two "call info"
-             blocks, depending on whether one or two lines are in use.
-
-             The call_info blocks are stacked vertically inside a CallCard (LinearLayout),
-             each with layout_weight="1".  If only one line is in use (i.e. the
-             common case) then the 2nd call info will be GONE and thus the 1st one
-             will expand to fill the full height of the CallCard. -->
-
-        <!-- Primary "call card" block, for the foreground call. -->
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5" >
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
             <LinearLayout
+                android:id="@+id/primary_call_info_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:translationZ="@dimen/primary_call_translation_z"
+                android:background="@color/incall_call_banner_background_color"
+                >
 
-                <LinearLayout
-                    android:id="@+id/primary_call_info_container"
+                <include layout="@layout/primary_call_info" />
+
+                <fragment android:name="com.android.incallui.CallButtonFragment"
+                    android:id="@+id/callButtonFragment"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:translationZ="@dimen/primary_call_translation_z"
-                    android:background="@color/incall_call_banner_background_color"
-                    >
-
-                    <include layout="@layout/primary_call_info" />
-
-                    <fragment android:name="com.android.incallui.CallButtonFragment"
-                        android:id="@+id/callButtonFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <!-- Contact photo for primary call info -->
-                    <ImageView android:id="@+id/photo"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="top|center_horizontal"
-                        android:scaleType="centerCrop"
-                        android:contentDescription="@string/contactPhoto"
-                        android:src="@drawable/picture_unknown"/>
-
-                    <fragment android:name="com.android.incallui.DialpadFragment"
-                        android:id="@+id/dialpadFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <fragment android:name="com.android.incallui.AnswerFragment"
-                        android:id="@+id/answerFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:gravity="top"
-                        android:layout_gravity="bottom|center_horizontal"
-                        android:layout_marginBottom="@dimen/glowpadview_margin_bottom"
-                        android:visibility="gone" />
-
-                </FrameLayout>
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
             <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
-                <ImageButton android:id="@+id/endButton"
-                    android:layout_width="@dimen/floating_action_button_width"
-                    android:layout_height="@dimen/floating_action_button_height"
-                    android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
-                    android:background="@drawable/end_call_background"
-                    android:src="@drawable/fab_ic_end_call"
-                    android:contentDescription="@string/onscreenEndCallText" />
+                <!-- Contact photo for primary call info -->
+                <ImageView android:id="@+id/photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top|center_horizontal"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/contactPhoto"
+                    android:src="@drawable/picture_unknown"/>
+
+                <fragment android:name="com.android.incallui.DialpadFragment"
+                    android:id="@+id/dialpadFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <fragment android:name="com.android.incallui.AnswerFragment"
+                    android:id="@+id/answerFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="top"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="@dimen/glowpadview_margin_bottom"
+                    android:visibility="gone" />
 
             </FrameLayout>
 
-            <!-- Insert a CallService indicator (which controls handoff, too) -->
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right">
+        </LinearLayout>
 
-                <ImageButton android:id="@+id/handoffButton"
-                    android:enabled="false"
-		            android:layout_width="@dimen/floating_action_button_width"
-		            android:layout_height="@dimen/floating_action_button_height"
-                    android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
-                    android:background="@drawable/floating_handoff_button_compound_background"
-                    android:src="@drawable/ic_in_call_pstn" />
-            </FrameLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center">
+
+            <ImageButton android:id="@+id/endButton"
+                android:layout_width="@dimen/floating_action_button_width"
+                android:layout_height="@dimen/floating_action_button_height"
+                android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
+                android:background="@drawable/end_call_background"
+                android:src="@drawable/fab_ic_end_call"
+                android:contentDescription="@string/onscreenEndCallText" />
 
         </FrameLayout>
 
-        <!-- Secondary "Call info" block, for the background ("on hold") call. -->
-        <ViewStub android:id="@+id/secondary_call_info"
-            android:layout="@layout/secondary_call_info"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        <!-- Insert a CallService indicator (which controls handoff, too) -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right">
 
-    </LinearLayout>
+            <ImageButton android:id="@+id/handoffButton"
+                android:enabled="false"
+            android:layout_width="@dimen/floating_action_button_width"
+            android:layout_height="@dimen/floating_action_button_height"
+                android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
+                android:background="@drawable/floating_handoff_button_compound_background"
+                android:src="@drawable/ic_in_call_pstn" />
+        </FrameLayout>
 
-    <!-- Animated scrim that fills the whole screen and then shrinks to show call details -->
-    <LinearLayout
-        android:id="@+id/animated_scrim"
+    </FrameLayout>
+
+    <!-- Secondary "Call info" block, for the background ("on hold") call. -->
+    <ViewStub android:id="@+id/secondary_call_info"
+        android:layout="@layout/secondary_call_info"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-        <Space
-            android:id="@+id/animated_scrim_spacer"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/incall_call_banner_background_color" />
-    </LinearLayout>
-
-</FrameLayout>
+</LinearLayout>

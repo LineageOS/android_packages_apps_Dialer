@@ -16,9 +16,10 @@
 
 package com.android.incallui;
 
-import android.animation.Animator.AnimatorListener;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
@@ -32,18 +33,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.ViewStub;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.accessibility.AccessibilityEvent;
-import android.view.animation.Animation;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.android.contacts.common.animation.AnimationListenerAdapter;
-import com.android.contacts.common.util.ViewUtil;
-import com.android.incallui.animation.ResizeAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -59,7 +52,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         implements CallCardPresenter.CallCardUi {
 
     private static final int REVEAL_ANIMATION_DURATION = 800;
-    private static final int SLIDE_ANIMATION_DURATION = 400;
+    private static final int SHRINK_ANIMATION_DURATION = 400;
 
     // Primary caller info
     private TextView mPhoneNumber;
@@ -82,15 +75,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private ImageView mSecondaryPhoto;
     private View mSecondaryPhotoOverlay;
 
-    private View mAnimatedScrim;
-
     private View mEndCallButton;
     private ImageButton mHandoffButton;
 
     // Cached DisplayMetrics density.
     private float mDensity;
-
-    private final AnimatorListener mAnimatedScrimListener = new AnimatedScrimListener();
 
     @Override
     CallCardPresenter.CallCardUi getUi() {
@@ -141,7 +130,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
         mPrimaryCallCardContainer = view.findViewById(R.id.primary_call_info_container);
         mPrimaryCallInfo = view.findViewById(R.id.primary_call_banner);
-        mAnimatedScrim = view.findViewById(R.id.animated_scrim);
         mCallButtonsContainer = view.findViewById(R.id.callButtonFragment);
 
         mEndCallButton = view.findViewById(R.id.endButton);
@@ -544,6 +532,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         return;
     }
 
+    @Override
     public void setEndCallButtonEnabled(boolean enabled) {
         mEndCallButton.setVisibility(enabled ? View.VISIBLE : View.GONE);
     }
@@ -560,11 +549,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     public void animateForNewOutgoingCall() {
-        final View animatedSpacer = getView().findViewById(R.id.animated_scrim_spacer);
-
-        mAnimatedScrim.setVisibility(View.VISIBLE);
-        mAnimatedScrim.getLayoutParams().height = LayoutParams.MATCH_PARENT;
-        mAnimatedScrim.requestLayout();
+        final ViewGroup parent = (ViewGroup) mPrimaryCallCardContainer.getParent();
 
         final ViewTreeObserver observer = getView().getViewTreeObserver();
         observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
@@ -576,20 +561,58 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 }
                 observer.removeOnGlobalLayoutListener(this);
 
-                // Prepare the state of views before the circular reveal animation
-                final int targetHeight = mPrimaryCallCardContainer.getHeight();
-                animatedSpacer.getLayoutParams().height = targetHeight;
-                animatedSpacer.requestLayout();
+                final int originalHeight = mPrimaryCallCardContainer.getHeight();
+                final LayoutIgnoringListener listener = new LayoutIgnoringListener();
+                mPrimaryCallCardContainer.addOnLayoutChangeListener(listener);
 
+                // Prepare the state of views before the circular reveal animation
+                mPrimaryCallCardContainer.setBottom(parent.getHeight());
+                mEndCallButton.setTranslationY(200);
                 mPrimaryCallInfo.setAlpha(0);
                 mCallButtonsContainer.setAlpha(0);
 
-                performAnimatedReveal(mAnimatedScrimListener);
+                final Animator revealAnimator = getRevealAnimator();
+                final Animator shrinkAnimator =
+                        getShrinkAnimator(parent.getHeight(), originalHeight);
+
+                final AnimatorSet set = new AnimatorSet();
+                set.playSequentially(revealAnimator, shrinkAnimator);
+                set.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                        mPrimaryCallCardContainer.removeOnLayoutChangeListener(listener);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mPrimaryCallCardContainer.removeOnLayoutChangeListener(listener);
+                    }
+                });
+                set.start();
             }
         });
     }
 
-    private void performAnimatedReveal(AnimatorListener listener) {
+    private Animator getShrinkAnimator(int startHeight, int endHeight) {
+        final Animator shrinkAnimator =
+                ObjectAnimator.ofInt(mPrimaryCallCardContainer, "bottom",
+                        startHeight, endHeight);
+        shrinkAnimator.setDuration(SHRINK_ANIMATION_DURATION);
+        shrinkAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                mEndCallButton.animate().translationY(0)
+                        .setDuration(SHRINK_ANIMATION_DURATION);
+                mPrimaryCallInfo.animate().alpha(1).withLayer()
+                        .setDuration(SHRINK_ANIMATION_DURATION);
+                mCallButtonsContainer.animate().alpha(1).withLayer()
+                        .setDuration(SHRINK_ANIMATION_DURATION);
+            }
+        });
+        return shrinkAnimator;
+    }
+
+    private Animator getRevealAnimator() {
         final Activity activity = getActivity();
         final View view  = activity.getWindow().getDecorView();
         final Display display = activity.getWindowManager().getDefaultDisplay();
@@ -599,37 +622,24 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         final ValueAnimator valueAnimator = view.createRevealAnimator(size.x / 2, size.y / 2,
                 0, Math.max(size.x, size.y));
         valueAnimator.setDuration(REVEAL_ANIMATION_DURATION);
-        valueAnimator.addListener(listener);
-        valueAnimator.start();
+        return valueAnimator;
     }
 
-    private final class AnimatedScrimListener extends AnimatorListenerAdapter {
+    private final class LayoutIgnoringListener implements View.OnLayoutChangeListener {
         @Override
-        public void onAnimationEnd(Animator animation) {
-            final int width = mAnimatedScrim.getWidth();
-            ResizeAnimation resizeAnimation =
-                    new ResizeAnimation(mAnimatedScrim, width, width, mAnimatedScrim.getHeight(),
-                            0);
-            resizeAnimation.setDuration(SLIDE_ANIMATION_DURATION);
-            resizeAnimation.setAnimationListener(new AnimationListenerAdapter() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-                    // Prepare the state of views before the scrim's sliding up animation
-                    mEndCallButton.setTranslationY(200);
-                    mEndCallButton.animate().translationY(0)
-                            .setDuration(SLIDE_ANIMATION_DURATION);
-                    mPrimaryCallInfo.animate().alpha(1).withLayer()
-                            .setDuration(SLIDE_ANIMATION_DURATION);
-                    mCallButtonsContainer.animate().alpha(1).withLayer()
-                            .setDuration(SLIDE_ANIMATION_DURATION);
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    mAnimatedScrim.setVisibility(View.GONE);
-                }
-            });
-            mAnimatedScrim.startAnimation(resizeAnimation);
+        public void onLayoutChange(View v,
+                int left,
+                int top,
+                int right,
+                int bottom,
+                int oldLeft,
+                int oldTop,
+                int oldRight,
+                int oldBottom) {
+            v.setLeft(oldLeft);
+            v.setRight(oldRight);
+            v.setTop(oldTop);
+            v.setBottom(oldBottom);
         }
-    };
+    }
 }
