@@ -190,6 +190,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private String mPendingSearchViewQuery;
 
     private EditText mSearchView;
+    private View mSearchIcon;
     private View mSearchViewCloseButton;
     private View mVoiceSearchButton;
 
@@ -333,6 +334,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         SearchEditTextLayout actionBarView = (SearchEditTextLayout) actionBar.getCustomView();
         actionBarView.setPreImeKeyListener(mSearchEditTextLayoutListener);
+
+        mSearchIcon = actionBarView.findViewById(R.id.search_magnifying_glass);
 
         mSearchView = (EditText) actionBarView.findViewById(R.id.search_view);
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
@@ -604,6 +607,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         mListsFragment.maybeShowActionBar();
+        if (isInSearchUi()) {
+            mSearchIcon.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -810,6 +816,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         transaction.commit();
 
         mListsFragment.getView().animate().alpha(0).withLayer();
+
+        if (!mIsDialpadShown) {
+            mSearchIcon.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -837,6 +847,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         transaction.commit();
 
         mListsFragment.getView().animate().alpha(1).withLayer();
+        mSearchIcon.setVisibility(View.VISIBLE);
     }
 
     /** Returns an Intent to launch Call Settings screen */
