@@ -48,6 +48,8 @@ public final class CallLogListItemViews {
     public TextView deleteButtonView;
     /** The "voicemail" action button - assigned only when the action section is expanded. */
     public TextView voicemailButtonView;
+    /** The "details" action button - assigned only when the action section is expanded. */
+    public TextView detailsButtonView;
 
     /**
      * The row Id for the first call associated with the call log entry.  Used as a key for the
@@ -122,6 +124,7 @@ public final class CallLogListItemViews {
         views.callBackButtonView = new TextView(context);
         views.deleteButtonView = new TextView(context);
         views.voicemailButtonView = new TextView(context);
+        views.detailsButtonView = new TextView(context);
         views.actionsView = new View(context);
         return views;
     }

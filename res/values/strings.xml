@@ -429,13 +429,6 @@
     -->
     <string name="description_contact_details">Contact details for <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
 
-    <!-- String describing the button to access call details in the call log.
-
-        Note: AccessibilityServices use this attribute to announce what the view represents.
-              This is especially valuable for views without textual representation like ImageView.
-    -->
-    <string name="description_call_details">Call details</string>
-
     <!-- String indicating a call log entry has an associated voicemail.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -684,6 +677,12 @@
          [CHAR LIMIT=30] -->
     <string name="call_log_action_voicemail">LISTEN</string>
 
+    <!-- Button text for the "DETAILS" button displayed underneath an entry in the call log.
+         Tapping navigates the user to the call details screen where the user can view details for
+         the call log entry.
+         [CHAR LIMIT=30] -->
+    <string name="call_log_action_details">DETAILS</string>
+
     <!-- String describing an incoming missed call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
@@ -717,6 +716,12 @@
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
     <string name="description_delete_action">Delete call log entry for <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
+
+    <!-- String describing the "details" action for an entry in the call log.  The details action
+         displays the call details screen for an entry in the call log.  This shows the calls to
+         and from the specified number associated with the call log entry.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_details_action">Call details for <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
 
     <!-- Toast message which appears when a call log entry is deleted.
          [CHAR LIMIT=NONE] -->
