@@ -101,15 +101,16 @@
     <!-- Search box text size -->
     <dimen name="search_text_size">13.24sp</dimen>
     <!-- Search box interior padding - left -->
-    <dimen name="search_box_left_padding">16dp</dimen>
+    <dimen name="search_box_left_padding">8dp</dimen>
     <!-- Search box interior padding - right -->
     <dimen name="search_box_right_padding">8dp</dimen>
     <!-- Padding around the icon in the search box. -->
-    <dimen name="search_box_icon_padding">3dp</dimen>
+    <dimen name="search_box_icon_margin">4dp</dimen>
+    <dimen name="search_box_search_icon_padding">4dp</dimen>
     <!-- Left margin of the text field in the search box. -->
     <dimen name="search_box_text_left_margin">8dp</dimen>
     <!-- Size of the icon (voice search, close search) in the search box. -->
-    <dimen name="search_box_icon_size">37dp</dimen>
+    <dimen name="search_box_icon_size">28dp</dimen>
 
     <!-- Size of text in tabs. -->
     <dimen name="tab_height">43dp</dimen>
