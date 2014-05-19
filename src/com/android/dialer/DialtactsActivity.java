@@ -193,6 +193,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private View mSearchIcon;
     private View mSearchViewCloseButton;
     private View mVoiceSearchButton;
+    private SearchEditTextLayout mSearchEditTextLayout;
 
     /**
      * View that contains the "Remove" dialog that shows up when the user long presses a contact.
@@ -332,21 +333,21 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         actionBar.setCustomView(R.layout.search_edittext);
         actionBar.setDisplayShowCustomEnabled(true);
 
-        SearchEditTextLayout actionBarView = (SearchEditTextLayout) actionBar.getCustomView();
-        actionBarView.setPreImeKeyListener(mSearchEditTextLayoutListener);
+        mSearchEditTextLayout = (SearchEditTextLayout) actionBar.getCustomView();
+        mSearchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
 
-        mSearchIcon = actionBarView.findViewById(R.id.search_magnifying_glass);
-        mVoiceSearchButton = actionBarView.findViewById(R.id.voice_search_button);
+        mSearchIcon = mSearchEditTextLayout.findViewById(R.id.search_magnifying_glass);
+        mVoiceSearchButton = mSearchEditTextLayout.findViewById(R.id.voice_search_button);
 
-        mSearchView = (EditText) actionBarView.findViewById(R.id.search_view);
+        mSearchView = (EditText) mSearchEditTextLayout.findViewById(R.id.search_view);
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
         mSearchView.setOnTouchListener(mSearchViewOnTouchListener);
 
-        mSearchViewCloseButton = actionBarView.findViewById(R.id.search_close_button);
+        mSearchViewCloseButton = mSearchEditTextLayout.findViewById(R.id.search_close_button);
         mSearchViewCloseButton.setOnClickListener(this);
 
-        ImageButton optionsMenuButton =
-                (ImageButton) actionBarView.findViewById(R.id.dialtacts_options_menu_button);
+        ImageButton optionsMenuButton = (ImageButton) mSearchEditTextLayout.findViewById(
+                R.id.dialtacts_options_menu_button);
         optionsMenuButton.setOnClickListener(this);
         final OptionsPopupMenu optionsMenu = buildOptionsMenu(optionsMenuButton);
         optionsMenuButton.setOnTouchListener(optionsMenu.getDragToOpenListener());
@@ -816,6 +817,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         transaction.commit();
 
         mListsFragment.getView().animate().alpha(0).withLayer();
+        mSearchEditTextLayout.animateExpandOrCollapse(true);
 
         if (!mIsDialpadShown) {
             mSearchIcon.setVisibility(View.GONE);
@@ -847,6 +849,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         transaction.commit();
 
         mListsFragment.getView().animate().alpha(1).withLayer();
+        mSearchEditTextLayout.animateExpandOrCollapse(false);
         mSearchIcon.setVisibility(View.VISIBLE);
     }
 
