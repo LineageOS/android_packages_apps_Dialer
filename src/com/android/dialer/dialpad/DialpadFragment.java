@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -260,6 +261,8 @@ public class DialpadFragment extends Fragment
     private boolean mFirstLaunch = false;
     private boolean mAnimate = false;
 
+    private ComponentName mSmsPackageComponentName;
+
     private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
 
     /**
@@ -392,8 +395,6 @@ public class DialpadFragment extends Fragment
 
         mOverflowMenuButton = mDialpadView.getOverflowMenuButton();
         mOverflowMenuButton.setOnClickListener(this);
-        final PopupMenu overflowMenu = buildOptionsMenu(mOverflowMenuButton);
-        mOverflowMenuButton.setOnTouchListener(overflowMenu.getDragToOpenListener());
 
         return fragmentView;
     }
@@ -654,6 +655,11 @@ public class DialpadFragment extends Fragment
         stopWatch.lap("bes");
 
         stopWatch.stopAndLog(TAG, 50);
+
+        mSmsPackageComponentName = DialerUtils.getSmsComponent(activity);
+
+        final PopupMenu overflowMenu = buildOptionsMenu(mOverflowMenuButton);
+        mOverflowMenuButton.setOnTouchListener(overflowMenu.getDragToOpenListener());
     }
 
     @Override
@@ -845,9 +851,12 @@ public class DialpadFragment extends Fragment
      *
      * @param invoker the View that invoked the options menu, to act as an anchor location.
      */
-    public PopupMenu buildOptionsMenu(View invoker) {
+    private PopupMenu buildOptionsMenu(View invoker) {
         final PopupMenu popupMenu = new PopupMenu(getActivity(), invoker);
         popupMenu.inflate(R.menu.dialpad_options);
+        final Menu menu = popupMenu.getMenu();
+        final MenuItem sendMessage = menu.findItem(R.id.menu_send_message);
+        sendMessage.setVisible(mSmsPackageComponentName != null);
         popupMenu.setOnMenuItemClickListener(this);
         return popupMenu;
     }
@@ -1407,17 +1416,25 @@ public class DialpadFragment extends Fragment
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_add_contact:
+            case R.id.menu_add_contact: {
                 final CharSequence digits = mDigits.getText();
                 DialerUtils.startActivityWithErrorToast(getActivity(),
                         DialtactsActivity.getAddNumberToContactIntent(digits));
                 return true;
+            }
             case R.id.menu_2s_pause:
                 updateDialString(PAUSE);
                 return true;
             case R.id.menu_add_wait:
                 updateDialString(WAIT);
                 return true;
+            case R.id.menu_send_message: {
+                final CharSequence digits = mDigits.getText();
+                final Intent smsIntent = new Intent(Intent.ACTION_SENDTO,
+                        Uri.fromParts(CallUtil.SCHEME_SMSTO, digits.toString(), null));
+                smsIntent.setComponent(mSmsPackageComponentName);
+                DialerUtils.startActivityWithErrorToast(getActivity(), smsIntent);
+            }
             default:
                 return false;
         }

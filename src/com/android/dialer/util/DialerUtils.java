@@ -16,11 +16,19 @@
 package com.android.dialer.util;
 
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.provider.Telephony;
 import android.widget.Toast;
 
+import com.android.contacts.common.CallUtil;
 import com.android.dialer.R;
+
+import java.util.List;
 
 /**
  * General purpose utility methods for the Dialer.
@@ -53,5 +61,25 @@ public class DialerUtils {
         } catch (ActivityNotFoundException e) {
             Toast.makeText(context, msgId, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * Returns the component name to use in order to send an SMS using the default SMS application,
+     * or null if none exists.
+     */
+    public static ComponentName getSmsComponent(Context context) {
+        String smsPackage = Telephony.Sms.getDefaultSmsPackage(context);
+        if (smsPackage != null) {
+            final PackageManager packageManager = context.getPackageManager();
+            final Intent intent = new Intent(Intent.ACTION_SENDTO,
+                    Uri.fromParts(CallUtil.SCHEME_SMSTO, "", null));
+            final List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, 0);
+            for (ResolveInfo resolveInfo : resolveInfos) {
+                if (smsPackage.equals(resolveInfo.activityInfo.packageName)) {
+                    return new ComponentName(smsPackage, resolveInfo.activityInfo.name);
+                }
+            }
+        }
+        return null;
     }
 }
