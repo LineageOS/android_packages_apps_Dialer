@@ -203,7 +203,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
 
         @Override
         public void addView(View view) {
-            view.setBackgroundResource(R.drawable.ic_tile_for_recents_and_contact_tile);
+            view.setBackgroundResource(R.drawable.rounded_corner_bg);
 
             final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,

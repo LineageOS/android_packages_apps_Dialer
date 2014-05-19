@@ -111,6 +111,8 @@
     <dimen name="search_box_text_left_margin">8dp</dimen>
     <!-- Size of the icon (voice search, close search) in the search box. -->
     <dimen name="search_box_icon_size">28dp</dimen>
+    <!-- Elevation of the search box -->
+    <dimen name="search_box_elevation">10dp</dimen>
 
     <!-- Size of text in tabs. -->
     <dimen name="tab_height">43dp</dimen>
