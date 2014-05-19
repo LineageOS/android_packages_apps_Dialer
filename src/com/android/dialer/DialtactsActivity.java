@@ -336,6 +336,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         actionBarView.setPreImeKeyListener(mSearchEditTextLayoutListener);
 
         mSearchIcon = actionBarView.findViewById(R.id.search_magnifying_glass);
+        mVoiceSearchButton = actionBarView.findViewById(R.id.voice_search_button);
 
         mSearchView = (EditText) actionBarView.findViewById(R.id.search_view);
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
@@ -658,7 +659,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     private void prepareVoiceSearchButton() {
-        mVoiceSearchButton = getActionBar().getCustomView().findViewById(R.id.voice_search_button);
         final Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         if (canIntentBeHandled(voiceIntent)) {
             mVoiceSearchButton.setVisibility(View.VISIBLE);
