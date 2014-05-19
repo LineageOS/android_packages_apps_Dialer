@@ -75,13 +75,6 @@
        point exactly one of the pair is VISIBLE and the other is
        GONE. -->
 
-        <!-- "Dialpad" -->
-        <!-- This is a "compound button": it has checked and unchecked states. -->
-        <ImageButton android:id="@+id/dialpadButton"
-            style="@style/InCallCompoundButton"
-            android:background="@drawable/btn_compound_dialpad"
-            android:contentDescription="@string/onscreenShowDialpadText" />
-
         <!-- "Audio mode" -->
         <!-- This is a multi-mode button that can behave either like a
              simple "compound button" with two states *or* like an
@@ -99,6 +92,13 @@
             style="@style/InCallButton"
             android:background="@drawable/btn_compound_mute"
             android:contentDescription="@string/onscreenMuteText" />
+
+        <!-- "Dialpad" -->
+        <!-- This is a "compound button": it has checked and unchecked states. -->
+        <ImageButton android:id="@+id/dialpadButton"
+            style="@style/InCallCompoundButton"
+            android:background="@drawable/btn_compound_dialpad"
+            android:contentDescription="@string/onscreenShowDialpadText" />
 
         <!-- This slot is either "Hold" or "Swap", depending on
              the state of the call.   One or the other of these
