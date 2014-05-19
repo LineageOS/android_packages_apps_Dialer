@@ -121,4 +121,7 @@
 
     <!-- Color for answered or outgoing call icons. -->
     <color name="answered_call">#2aad6f</color>
+
+    <!-- Color for icons in the actionbar -->
+    <color name="actionbar_icon_color">#ffffff</color>
 </resources>
