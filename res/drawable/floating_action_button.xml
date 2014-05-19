@@ -15,8 +15,8 @@
      limitations under the License.
 -->
 
-<touch-feedback xmlns:android="http://schemas.android.com/apk/res/android"
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:tint="@color/dialer_accent_color"
     android:pinned="true">
     <item android:drawable="@drawable/fab_teal_background" />
-</touch-feedback>
+</ripple>

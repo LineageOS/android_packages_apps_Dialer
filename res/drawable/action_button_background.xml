@@ -14,7 +14,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<touch-feedback xmlns:android="http://schemas.android.com/apk/res/android"
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
                 android:tint="?android:attr/colorButtonPressed"
                 android:pinned="true">
     <!-- Transparent background constrains the touch feedback ripple to the button, but also allows
@@ -24,4 +24,4 @@
             <solid android:color="@android:color/transparent" />
         </shape>
     </item>
-</touch-feedback>
+</ripple>
