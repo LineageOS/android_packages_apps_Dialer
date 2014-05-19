@@ -88,21 +88,6 @@
     <!-- Text color for the "Remove" text when a contact is dragged on top of the remove view -->
     <color name="remove_highlighted_text_color">#FF3F3B</color>
 
-    <!-- Text color for the "speed dial" label in the favorites menu. -->
-    <color name="speed_dial_text_color">#555555</color>
-
-    <!-- Background color for the "All Contacts" button in the favorites menu. -->
-    <color name="all_contacts_button_color">#999999</color>
-
-    <!-- Background color for the "All Contacts" button in the favorites menu when pressed. -->
-    <color name="all_contacts_button_pressed_color">#808080</color>
-
-    <!-- Background color for the favorites menu. -->
-    <color name="favorites_menu_background_color">#eeeeee</color>
-
-    <!-- Text color for the "All Contacts" button above the favorite callers -->
-    <color name="all_contacts_button_text_color">#ffffff</color>
-
     <!-- Color of the bottom border below the contacts grid on the main dialer screen. -->
     <color name="contacts_grid_bottom_border_color">#16000000</color>
 

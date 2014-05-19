@@ -146,7 +146,6 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
 
     private PhoneFavoriteListView mListView;
 
-    private View mPhoneFavoritesMenu;
     private View mContactTileFrame;
 
     private TileInteractionTeaserView mTileInteractionTeaserView;
@@ -210,8 +209,6 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         mListView.setDragShadowOverlay(dragShadowOverlay);
 
         mEmptyView = mParentView.findViewById(R.id.phone_no_favorites_view);
-
-        mPhoneFavoritesMenu = inflater.inflate(R.layout.phone_favorites_menu, mListView, false);
 
         mContactTileFrame = mParentView.findViewById(R.id.contact_tile_frame);
 
