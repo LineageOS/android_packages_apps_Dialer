@@ -16,11 +16,10 @@
   ~ limitations under the License
   -->
 
-<!-- "Call Banner" for primary call, the foregound or ringing call.Di
- The "call banner" is a block of info about a single call,
- including the contact name, phone number, call time counter,
- and other status info.  This info is shown as a "banner"
- overlaid across the top of contact photo. -->
+<!-- "Call Banner" for primary call, the foregound or ringing call. The "call banner" is a block
+    of info about a single call, including the contact name, phone number, call time counter, and
+    other status info.  This info is shown as a "banner" overlaid across the top of contact photo.
+    -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/primary_call_banner"
     style="@style/PrimaryCallInfoPrimaryCallBanner"
@@ -108,16 +107,16 @@
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <!-- Call type indication: a special label and/or branding
+        <!-- Call type indication: a special label and/or branding
          for certain kinds of calls (like "Internet call" for a SIP call.) -->
-    <TextView android:id="@+id/callTypeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/incall_call_banner_text_color"
-        android:maxLines="1"
-        android:ellipsize="end" />
+        <TextView android:id="@+id/callTypeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/incall_call_banner_text_color"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+    </LinearLayout>
 
 </RelativeLayout>  <!-- End of call_banner -->

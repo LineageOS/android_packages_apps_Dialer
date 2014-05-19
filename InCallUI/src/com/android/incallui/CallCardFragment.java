@@ -621,8 +621,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             public void onAnimationStart(Animator animation) {
                 assignTranslateAnimation(mCallStateLabel, 1);
                 assignTranslateAnimation(mPrimaryName, 2);
-                assignTranslateAnimation(mCallTypeLabel, 3);
-                assignTranslateAnimation(mCallNumberAndLabel, 4);
+                assignTranslateAnimation(mCallNumberAndLabel, 3);
+                assignTranslateAnimation(mCallTypeLabel, 4);
                 assignTranslateAnimation(mCallButtonsContainer, 5);
 
                 mEndCallButton.animate().translationY(0)
