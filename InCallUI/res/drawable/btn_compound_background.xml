@@ -16,7 +16,7 @@
 
 <!-- Background resource for "compound buttons" in the in-call UI.
      These buttons have two states (selected and unselected). -->
-<touch-feedback xmlns:android="http://schemas.android.com/apk/res/android"
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:tint="@color/incall_accent_color"
     android:pinned="true">
     <item>
@@ -33,4 +33,4 @@
             <item android:drawable="@drawable/btn_unselected" />
         </selector>
     </item>
-</touch-feedback>
+</ripple>
