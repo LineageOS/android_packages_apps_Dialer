@@ -121,10 +121,6 @@
     <string name="contactPhoto" msgid="4713193418046639466">"संपर्क का फ़ोटो"</string>
     <string name="goPrivate" msgid="865837794424530980">"निजी हो जाएं"</string>
     <string name="selectContact" msgid="781975788478987237">"संपर्क को चुनें"</string>
-    <string name="respond_via_sms_canned_response_1" msgid="2461606462788380215">"अभी बात नहीं हो सकती. क्‍या चल रहा है?"</string>
-    <string name="respond_via_sms_canned_response_2" msgid="4074450431532859214">"मैं आपको वापस कॉल करूंगा/करूंगी."</string>
-    <string name="respond_via_sms_canned_response_3" msgid="3496079065723960450">"मैं आपको बाद में कॉल करूंगा/करूंगी."</string>
-    <string name="respond_via_sms_canned_response_4" msgid="1698989243040062190">"अभी बात नहीं हो सकती. बाद में कॉल करें?"</string>
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"अपना स्वयं का लिखें..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"रद्द करें"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"भेजें"</string>
@@ -161,6 +157,8 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"रिंगटोन और कंपन"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"कॉन्फ़्रेंस कॉल प्रबंधित करें"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"आपातकालीन नंबर"</string>
+    <!-- no translation found for in_call_wifi_connected (8179928320848155569) -->
+    <skip />
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
@@ -171,4 +169,6 @@
     <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
     <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
     <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
+    <!-- no translation found for connection_handoff_text (394933522990446004) -->
+    <skip />
 </resources>
