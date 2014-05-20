@@ -14,65 +14,39 @@
      limitations under the License.
 -->
 
-<!-- XML resource file for secondary call info, which will be used by CallCard.
-     See also call_card.xml.
+<!-- XML resource file for secondary call info, which will be used by CallCard. -->
 
-     This should look similar to primary call info (primary_call_info.xml), but
-     to optimize the view usage, the structure is different. -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/secondary_call_info"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/call_banner_side_padding"
+    android:paddingEnd="@dimen/secondary_call_banner_right_padding"
+    android:paddingTop="@dimen/call_banner_top_bottom_padding"
+    android:paddingBottom="@dimen/call_banner_top_bottom_padding"
+    android:background="@color/incall_banner_secondary_background_color"
+    android:elevation="@dimen/secondary_call_elevation" >
 
-    <!-- Contact photo for call_info #2 -->
-    <ImageView android:id="@+id/secondaryCallPhoto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="top|center_horizontal"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/onHold" />
-
-    <View android:id="@+id/dim_effect_for_secondary_photo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/clickable_dim_effect"/>
-
-    <!-- Parent FrameLayout is used to size the background correctly, while the child TextView
-        just wraps its content and is aligned with layout_gravity start so that it is aligned
-        to the correct side in RTL mode regardless of whether the text is Arabic or not -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/call_banner_height"
-        android:paddingStart="@dimen/call_banner_side_padding"
-        android:paddingEnd="@dimen/secondary_call_banner_right_padding"
-        android:paddingTop="@dimen/call_banner_top_bottom_padding"
-        android:paddingBottom="@dimen/call_banner_top_bottom_padding"
-        android:background="@color/incall_call_banner_background_color">
-        <!-- Name (or the phone number, if we don't have a name to display). -->
-        <TextView android:id="@+id/secondaryCallName"
-            style="@style/SecondaryCallInfoSecondaryCallName"
-            android:layout_gravity="bottom|start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/incall_call_banner_text_color"
-            android:ellipsize="marquee"
-            android:singleLine="true"/>
-    </FrameLayout>
+    <!-- Name (or the phone number, if we don't have a name to display). -->
+    <TextView android:id="@+id/secondaryCallName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/incall_banner_secondary_text_color"
+        android:ellipsize="marquee"
+        android:singleLine="true"/>
 
     <!-- Call status of the background call, usually the string "On hold". -->
     <TextView android:id="@+id/secondaryCallStatus"
-        style="@style/SecondaryCallInfoSecondaryCallStatus"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/call_banner_height"
-        android:gravity="bottom|end"
-        android:layout_gravity="end"
-        android:paddingStart="@dimen/call_banner_side_padding"
+        android:layout_height="wrap_content"
         android:paddingEnd="@dimen/call_banner_side_padding"
-        android:paddingTop="@dimen/call_banner_top_bottom_padding"
-        android:paddingBottom="@dimen/call_banner_top_bottom_padding"
         android:text="@string/onHold"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/incall_call_banner_text_color"
-        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/incall_banner_secondary_text_color"
+        android:textAlignment="textEnd"
         android:singleLine="true" />
-</FrameLayout>
+
+</LinearLayout>

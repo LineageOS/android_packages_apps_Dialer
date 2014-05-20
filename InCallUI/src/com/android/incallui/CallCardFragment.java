@@ -73,10 +73,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mCallButtonsContainer;
 
     // Secondary caller info
-    private ViewStub mSecondaryCallInfo;
+    private View mSecondaryCallInfo;
     private TextView mSecondaryCallName;
-    private ImageView mSecondaryPhoto;
-    private View mSecondaryPhotoOverlay;
 
     private View mEndCallButton;
     private ImageButton mHandoffButton;
@@ -132,7 +130,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mPhoneNumber = (TextView) view.findViewById(R.id.phoneNumber);
         mPrimaryName = (TextView) view.findViewById(R.id.name);
         mNumberLabel = (TextView) view.findViewById(R.id.label);
-        mSecondaryCallInfo = (ViewStub) view.findViewById(R.id.secondary_call_info);
+        mSecondaryCallInfo = (View) view.findViewById(R.id.secondary_call_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mCallNumberAndLabel = view.findViewById(R.id.labelAndNumber);
@@ -246,12 +244,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-            Drawable photo, boolean isConference, boolean isGeneric) {
+            boolean isConference, boolean isGeneric) {
 
         if (show) {
             if (isConference) {
                 name = getConferenceString(isGeneric);
-                photo = getConferencePhoto(isGeneric);
                 nameIsNumber = false;
             }
 
@@ -263,17 +260,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 nameDirection = View.TEXT_DIRECTION_LTR;
             }
             mSecondaryCallName.setTextDirection(nameDirection);
-
-            setDrawableToImageView(mSecondaryPhoto, photo);
         } else {
             mSecondaryCallInfo.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void setSecondaryImage(Drawable image) {
-        if (image != null) {
-            setDrawableToImageView(mSecondaryPhoto, image);
         }
     }
 
@@ -511,20 +499,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         if (mSecondaryCallName == null) {
             mSecondaryCallName = (TextView) getView().findViewById(R.id.secondaryCallName);
         }
-        if (mSecondaryPhoto == null) {
-            mSecondaryPhoto = (ImageView) getView().findViewById(R.id.secondaryCallPhoto);
-        }
-
-        if (mSecondaryPhotoOverlay == null) {
-            mSecondaryPhotoOverlay = getView().findViewById(R.id.dim_effect_for_secondary_photo);
-            mSecondaryPhotoOverlay.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getPresenter().secondaryPhotoClicked();
-                }
-            });
-            mSecondaryPhotoOverlay.setOnTouchListener(new SmallerHitTargetTouchListener());
-        }
+        mSecondaryCallInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().secondaryInfoClicked();
+            }
+        });
     }
 
     public void dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {

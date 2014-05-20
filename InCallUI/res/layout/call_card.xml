@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:translationZ="@dimen/primary_call_translation_z"
+                android:elevation="@dimen/primary_call_elevation"
                 android:background="@color/incall_call_banner_background_color"
                 android:clipChildren="false"
                 android:clipToPadding="false" >
@@ -72,6 +72,9 @@
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/contactPhoto"
                     android:src="@drawable/picture_unknown"/>
+
+                <!-- Secondary "Call info" block, for the background ("on hold") call. -->
+                <include layout="@layout/secondary_call_info" />
 
                 <fragment android:name="com.android.incallui.DialpadFragment"
                     android:id="@+id/dialpadFragment"
@@ -124,12 +127,5 @@
         </FrameLayout>
 
     </FrameLayout>
-
-    <!-- Secondary "Call info" block, for the background ("on hold") call. -->
-    <ViewStub android:id="@+id/secondary_call_info"
-        android:layout="@layout/secondary_call_info"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 
 </LinearLayout>

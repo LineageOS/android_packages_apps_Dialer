@@ -312,8 +312,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     if (entry.photo != null) {
                         if (mPrimary != null && callId.equals(mPrimary.getCallId())) {
                             getUi().setPrimaryImage(entry.photo);
-                        } else if (mSecondary != null && callId.equals(mSecondary.getCallId())) {
-                            getUi().setSecondaryImage(entry.photo);
                         }
                     }
                 }
@@ -418,11 +416,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
             final boolean nameIsNumber = nameForCall != null && nameForCall.equals(
                     mSecondaryContactInfo.number);
-            ui.setSecondary(true, nameForCall, nameIsNumber, mSecondaryContactInfo.label,
-                    mSecondaryContactInfo.photo, isConference, isGenericConf);
+            ui.setSecondary(true /* show */, nameForCall, nameIsNumber, mSecondaryContactInfo.label,
+                    isConference, isGenericConf);
         } else {
             // reset to nothing so that it starts off blank next time we use it.
-            ui.setSecondary(false, null, false, null, null, isConference, isGenericConf);
+            ui.setSecondary(false, null, false, null, isConference, isGenericConf);
         }
     }
 
@@ -488,9 +486,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         return contactInfo.number;
     }
 
-    public void secondaryPhotoClicked() {
+    public void secondaryInfoClicked() {
         if (mSecondary == null) {
-            Log.wtf(this, "Secondary photo clicked but no secondary call.");
+            Log.wtf(this, "Secondary info clicked but no secondary call.");
             return;
         }
 
@@ -512,8 +510,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isConference, boolean isGeneric, boolean isSipCall);
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-                Drawable photo, boolean isConference, boolean isGeneric);
-        void setSecondaryImage(Drawable image);
+                boolean isConference, boolean isGeneric);
         void setCallState(int state, int cause, boolean bluetoothOn,
                 String gatewayLabel, String gatewayNumber, boolean isWifi, boolean isHandoffCapable,
                 boolean isHandoffPending);

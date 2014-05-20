@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/incall_call_banner_secondary_text_color"
+                    android:textColor="@color/incall_call_banner_subtext_color"
                     android:textSize="@dimen/call_label_text_size"
                     android:singleLine="true"
                     android:textDirection="ltr" />
@@ -88,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/incall_call_banner_secondary_text_color"
+                    android:textColor="@color/incall_call_banner_subtext_color"
                     android:textSize="@dimen/call_label_text_size"
                     android:singleLine="true"
                     android:layout_marginStart="6dp" />
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/incall_call_banner_secondary_text_color"
+                android:textColor="@color/incall_call_banner_subtext_color"
                 android:singleLine="true"
                 android:visibility="gone" />
 

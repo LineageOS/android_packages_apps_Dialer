@@ -127,11 +127,4 @@
     <style name="PrimaryCallInfoPrimaryCallBanner">
         <item name="android:layout_alignParentTop">true</item>
     </style>
-
-    <style name="SecondaryCallInfoSecondaryCallName">
-        <item name="android:layout_gravity">top|left</item>
-    </style>
-    <style name="SecondaryCallInfoSecondaryCallStatus">
-        <item name="android:layout_gravity">top|right</item>
-    </style>
 </resources>
