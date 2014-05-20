@@ -29,7 +29,7 @@
   <string name="call_stats_outgoing">発信: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">不在</string>
   <string name="call_stats_missed_percent">不在: <xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">合計: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total">合計: <xliff:g id="call_count">%s</xliff:g>、<xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">合計: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">開始日</string>
   <string name="call_stats_filter_to">終了日</string>

@@ -15,7 +15,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="calllog_search_hint">Arama kaydını araştır</string>
   <string name="dial_conference">Konferans araması yap</string>
 </resources>

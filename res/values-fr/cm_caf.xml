@@ -15,7 +15,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="calllog_search_hint">Recherche du journal d\'appels</string>
   <string name="dial_conference">Conférence audio</string>
 </resources>
