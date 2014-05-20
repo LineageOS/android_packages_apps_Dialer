@@ -85,6 +85,7 @@ import com.android.dialer.list.RemoveView;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.widget.SearchEditTextLayout;
+import com.android.dialer.widget.SearchEditTextLayout.OnBackButtonClickedListener;
 import com.android.dialerbind.DatabaseHelperManager;
 import com.android.internal.telephony.ITelephony;
 
@@ -190,8 +191,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private String mPendingSearchViewQuery;
 
     private EditText mSearchView;
-    private View mSearchIcon;
-    private View mSearchViewCloseButton;
     private View mVoiceSearchButton;
     private SearchEditTextLayout mSearchEditTextLayout;
 
@@ -278,14 +277,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             } else if (mRegularSearchFragment != null) {
                 mRegularSearchFragment.setQueryString(mSearchQuery, false /* delaySelection */);
             }
-
-            if (TextUtils.isEmpty(newText)) {
-                mSearchViewCloseButton.setVisibility(View.GONE);
-                mVoiceSearchButton.setVisibility(View.VISIBLE);
-            } else {
-                mSearchViewCloseButton.setVisibility(View.VISIBLE);
-                mVoiceSearchButton.setVisibility(View.GONE);
-            }
         }
 
         @Override
@@ -295,15 +286,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
 
     /**
-     * Open the search UI when the user touches the search text view.
+     * Open the search UI when the user clicks on the search box.
      */
-    private final View.OnTouchListener mSearchViewOnTouchListener = new View.OnTouchListener() {
+    private final View.OnClickListener mSearchViewOnClickListener = new View.OnClickListener() {
         @Override
-        public boolean onTouch(View v, MotionEvent event) {
+        public void onClick(View v) {
             if (!isInSearchUi()) {
                 enterSearchUi(false /* smartDialSearch */, mSearchView.getText().toString());
             }
-            return false;
         }
     };
 
@@ -336,15 +326,17 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mSearchEditTextLayout = (SearchEditTextLayout) actionBar.getCustomView();
         mSearchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
 
-        mSearchIcon = mSearchEditTextLayout.findViewById(R.id.search_magnifying_glass);
-        mVoiceSearchButton = mSearchEditTextLayout.findViewById(R.id.voice_search_button);
-
         mSearchView = (EditText) mSearchEditTextLayout.findViewById(R.id.search_view);
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
-        mSearchView.setOnTouchListener(mSearchViewOnTouchListener);
-
-        mSearchViewCloseButton = mSearchEditTextLayout.findViewById(R.id.search_close_button);
-        mSearchViewCloseButton.setOnClickListener(this);
+        mVoiceSearchButton = mSearchEditTextLayout.findViewById(R.id.voice_search_button);
+        mSearchEditTextLayout.findViewById(R.id.search_box_start_search).setOnClickListener(
+                mSearchViewOnClickListener);
+        mSearchEditTextLayout.setOnBackButtonClickedListener(new OnBackButtonClickedListener() {
+            @Override
+            public void onBackButtonClicked() {
+                onBackPressed();
+            }
+        });
 
         ImageButton optionsMenuButton = (ImageButton) mSearchEditTextLayout.findViewById(
                 R.id.dialtacts_options_menu_button);
@@ -609,11 +601,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         mListsFragment.maybeShowActionBar();
+
         if (isInSearchUi()) {
             if (TextUtils.isEmpty(mSearchQuery)) {
                 exitSearchUi();
-            } else {
-                mSearchIcon.setVisibility(View.GONE);
             }
         }
     }
@@ -822,10 +813,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mListsFragment.getView().animate().alpha(0).withLayer();
         mSearchEditTextLayout.animateExpandOrCollapse(true);
-
-        if (!mIsDialpadShown) {
-            mSearchIcon.setVisibility(View.GONE);
-        }
     }
 
     /**
@@ -843,7 +830,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.setCustomAnimations(0, android.R.animator.fade_out);
-
         if (mSmartDialSearchFragment != null) {
             transaction.remove(mSmartDialSearchFragment);
         }
@@ -854,7 +840,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mListsFragment.getView().animate().alpha(1).withLayer();
         mSearchEditTextLayout.animateExpandOrCollapse(false);
-        mSearchIcon.setVisibility(View.VISIBLE);
     }
 
     /** Returns an Intent to launch Call Settings screen */
@@ -874,6 +859,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             hideDialpadFragment(true, false);
         } else if (isInSearchUi()) {
             exitSearchUi();
+            hideInputMethod(parentLayout);
         } else {
             super.onBackPressed();
         }

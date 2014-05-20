@@ -20,12 +20,19 @@ import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
-import android.widget.LinearLayout;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 
+import com.android.contacts.common.animation.AnimationUtils;
 import com.android.dialer.R;
 
-public class SearchEditTextLayout extends LinearLayout {
+public class SearchEditTextLayout extends FrameLayout {
+    private static final int ANIMATION_DURATION = 200;
+
     private OnKeyListener mPreImeKeyListener;
     private int mTopMargin;
     private int mBottomMargin;
@@ -33,6 +40,19 @@ public class SearchEditTextLayout extends LinearLayout {
     private int mRightMargin;
 
     private int mBackgroundColor;
+
+    private View mCollapsed;
+    private View mExpanded;
+    private EditText mSearchView;
+
+    private OnBackButtonClickedListener mOnBackButtonClickedListener;
+
+    /**
+     * Listener for the back button next to the search view being pressed
+     */
+    public interface OnBackButtonClickedListener {
+        public void onBackButtonClicked();
+    }
 
     public SearchEditTextLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -43,6 +63,10 @@ public class SearchEditTextLayout extends LinearLayout {
         mPreImeKeyListener = listener;
     }
 
+    public void setOnBackButtonClickedListener(OnBackButtonClickedListener listener) {
+        mOnBackButtonClickedListener = listener;
+    }
+
     @Override
     protected void onFinishInflate() {
         MarginLayoutParams params = (MarginLayoutParams) getLayoutParams();
@@ -50,6 +74,36 @@ public class SearchEditTextLayout extends LinearLayout {
         mBottomMargin = params.bottomMargin;
         mLeftMargin = params.leftMargin;
         mRightMargin = params.rightMargin;
+
+        mCollapsed = findViewById(R.id.search_box_collapsed);
+        mExpanded = findViewById(R.id.search_box_expanded);
+        mSearchView = (EditText) mExpanded.findViewById(R.id.search_view);
+
+        mSearchView.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    showInputMethod(v);
+                }
+            }
+        });
+
+        findViewById(R.id.search_close_button).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearchView.setText(null);
+            }
+        });
+
+        findViewById(R.id.search_back_button).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnBackButtonClickedListener != null) {
+                    mOnBackButtonClickedListener.onBackButtonClicked();
+                }
+            }
+        });
+
         super.onFinishInflate();
     }
 
@@ -66,9 +120,12 @@ public class SearchEditTextLayout extends LinearLayout {
     public void animateExpandOrCollapse(boolean expand) {
         final ValueAnimator animator;
         if (expand) {
+            AnimationUtils.crossFadeViews(mExpanded, mCollapsed, ANIMATION_DURATION);
             animator = ValueAnimator.ofFloat(1f, 0f);
             setBackgroundColor(mBackgroundColor);
+            mSearchView.requestFocus();
         } else {
+            AnimationUtils.crossFadeViews(mCollapsed, mExpanded, ANIMATION_DURATION);
             animator = ValueAnimator.ofFloat(0f, 1f);
             setBackgroundResource(R.drawable.rounded_corner);
         }
@@ -84,6 +141,15 @@ public class SearchEditTextLayout extends LinearLayout {
                 requestLayout();
             }
         });
+        animator.setDuration(ANIMATION_DURATION);
         animator.start();
+    }
+
+    private void showInputMethod(View view) {
+        final InputMethodManager imm = (InputMethodManager) getContext().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(view, 0);
+        }
     }
 }
