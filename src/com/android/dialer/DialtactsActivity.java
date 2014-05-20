@@ -609,7 +609,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mListsFragment.maybeShowActionBar();
         if (isInSearchUi()) {
-            mSearchIcon.setVisibility(View.GONE);
+            if (TextUtils.isEmpty(mSearchQuery)) {
+                exitSearchUi();
+            } else {
+                mSearchIcon.setVisibility(View.GONE);
+            }
         }
     }
 
