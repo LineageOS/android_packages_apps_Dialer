@@ -163,8 +163,6 @@
     <skip />
     <!-- no translation found for description_contact_details (51229793651342809) -->
     <skip />
-    <!-- no translation found for description_call_details (8936017517290240089) -->
-    <skip />
     <!-- no translation found for description_new_voicemail (2133792360865517746) -->
     <skip />
     <!-- no translation found for description_num_calls (1601505153694540074) -->
@@ -283,6 +281,8 @@
     <skip />
     <!-- no translation found for call_log_action_voicemail (4978620572562925654) -->
     <skip />
+    <!-- no translation found for call_log_action_details (6252596497021563115) -->
+    <skip />
     <!-- no translation found for description_incoming_missed_call (2610535352863246949) -->
     <skip />
     <!-- no translation found for description_incoming_answered_call (7206670204016969740) -->
@@ -295,6 +295,12 @@
     <skip />
     <!-- no translation found for description_delete_action (7188614068459616450) -->
     <skip />
+    <!-- no translation found for description_details_action (2433827152749491785) -->
+    <skip />
     <!-- no translation found for toast_entry_removed (3389119736202317999) -->
+    <skip />
+    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
+    <skip />
+    <!-- no translation found for call_log_header_other (8209775016508312763) -->
     <skip />
 </resources>

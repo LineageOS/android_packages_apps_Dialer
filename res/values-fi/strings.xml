@@ -111,7 +111,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Näytä yhteystieto <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Soita: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Yhteystiedot: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_call_details" msgid="8936017517290240089">"Puhelun tiedot"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"Uusi ääniviesti."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> puhelua."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Lähetä tekstiviesti: <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -161,38 +160,33 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Napauta kuvaa nähdäksesi kaikki numerot tai järjestä uudelleen painamalla pitkään"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ohita"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Poista"</string>
-    <!-- no translation found for wifi_no_signal_no_problem (5905489120009368358) -->
-    <skip />
-    <!-- no translation found for wifi_enable_google_wifi_calling (889688113802116339) -->
-    <skip />
-    <!-- no translation found for wifi_when_connected_to_a_signal (1380410417434941662) -->
-    <skip />
-    <!-- no translation found for wifi_always_use_wifi (5090531595867169067) -->
-    <skip />
-    <!-- no translation found for wifi_ask_use_wifi (2530040568117536243) -->
-    <skip />
-    <!-- no translation found for wifi_never_use_wifi (8523176164034184009) -->
-    <skip />
-    <!-- no translation found for wifi_next_setup_screen (6468744966620746912) -->
-    <skip />
-    <!-- no translation found for wifi_previous_setup_screen (8525707359376859298) -->
-    <skip />
-    <!-- no translation found for wifi_setup_completed (2823266959975201512) -->
-    <skip />
-    <!-- no translation found for wifi_setup_ok (7801061518697115555) -->
-    <skip />
-    <!-- no translation found for wifi_setup_settings_shortcut (278329876445606742) -->
-    <skip />
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Ei signaalia? Ei syytä huoleen."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Käytä Googlen Wi-Fi-puheluita"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Kun Wi-Fi-signaali on vahva:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Käytä puheluille aina Wi-Fi-yhteyttä"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Kysy aina"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Älä koskaan käytä puheluille Wi-Fi-yhteyttä"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Seuraava"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Edellinen"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"Valmista tuli! Wi-Fi-puhelut on määritetty. Voit halutessasi muokata asetuksia tai poistaa Wi-Fi-puhelut käytöstä."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"OK!"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Puheluasetukset"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Pikavalinta"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"KAIKKI YHTEYSTIEDOT"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"SOITA TAKAISIN"</string>
     <string name="call_log_action_delete" msgid="7371990297839987600">"POISTA"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"KUUNTELE"</string>
+    <string name="call_log_action_details" msgid="6252596497021563115">"TIEDOT"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Vastaamaton puhelu: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"Vastattu puhelu: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"Puhelu: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Soita takaisin: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Kuuntele vastaajaviesti: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_delete_action" msgid="7188614068459616450">"Poista puhelulokimerkintä: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_details_action" msgid="2433827152749491785">"Yhteystiedon <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> puhelutiedot"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Puhelulokimerkintä poistettiin."</string>
+    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
+    <skip />
+    <!-- no translation found for call_log_header_other (8209775016508312763) -->
+    <skip />
 </resources>

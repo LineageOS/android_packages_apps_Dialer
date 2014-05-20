@@ -111,7 +111,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Прикажи контакт <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Позови корисника <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Детаљи о контакту за <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_call_details" msgid="8936017517290240089">"Детаљи позива"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"Нова говорна порука."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> позива."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Слање текстуалне поруке контакту <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -161,38 +160,33 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Додирните слику да бисте видели све бројеве или притисните и задржите да бисте променили распоред"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Одбаци"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Уклони"</string>
-    <!-- no translation found for wifi_no_signal_no_problem (5905489120009368358) -->
-    <skip />
-    <!-- no translation found for wifi_enable_google_wifi_calling (889688113802116339) -->
-    <skip />
-    <!-- no translation found for wifi_when_connected_to_a_signal (1380410417434941662) -->
-    <skip />
-    <!-- no translation found for wifi_always_use_wifi (5090531595867169067) -->
-    <skip />
-    <!-- no translation found for wifi_ask_use_wifi (2530040568117536243) -->
-    <skip />
-    <!-- no translation found for wifi_never_use_wifi (8523176164034184009) -->
-    <skip />
-    <!-- no translation found for wifi_next_setup_screen (6468744966620746912) -->
-    <skip />
-    <!-- no translation found for wifi_previous_setup_screen (8525707359376859298) -->
-    <skip />
-    <!-- no translation found for wifi_setup_completed (2823266959975201512) -->
-    <skip />
-    <!-- no translation found for wifi_setup_ok (7801061518697115555) -->
-    <skip />
-    <!-- no translation found for wifi_setup_settings_shortcut (278329876445606742) -->
-    <skip />
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Нема сигнала? Нема проблема."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Омогући Google позивање преко Wi-Fi-ја"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Када је повезано са јаким Wi-Fi сигналом:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Увек користи Wi-Fi за позивање"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Увек питај"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Никада не користи Wi-Fi за позивање"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Даље"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Назад"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"Готово! Позивање преко Wi-Fi-ја је подешено. Можете да промените поставке или да га искључите било када у подешавањима."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"Важи"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Подешавања позива"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Брзо позивање"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"СВИ КОНТАКТИ"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"УПУТИ ПОВРАТНИ ПОЗИВ"</string>
     <string name="call_log_action_delete" msgid="7371990297839987600">"ИЗБРИШИ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ПУСТИ"</string>
+    <string name="call_log_action_details" msgid="6252596497021563115">"ДЕТАЉИ"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Пропуштени позив од <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"Примљени позив од <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"Позив за <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Упути повратни позив за <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Пусти говорну пошту од <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_delete_action" msgid="7188614068459616450">"Избриши унос у евиденцији позива за <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_details_action" msgid="2433827152749491785">"Детаљи позива за <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Унос у евиденцији позива је избрисан."</string>
+    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
+    <skip />
+    <!-- no translation found for call_log_header_other (8209775016508312763) -->
+    <skip />
 </resources>
