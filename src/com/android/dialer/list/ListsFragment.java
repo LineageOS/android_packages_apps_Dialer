@@ -177,24 +177,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
                 case TAB_INDEX_RECENTS:
                     mRecentsFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL,
                             MAX_RECENTS_ENTRIES, System.currentTimeMillis() - OLDEST_RECENTS_DATE);
-
-                    /*
-                     * Provide mViewPager as a parent viewgroup for the inflation of the footer,
-                     * to ensure that the footer view is inflated with the correct LayoutParams.
-                     * If root is null in
-                     * inflate(XmlPullParser parser, ViewGroup root, boolean attachToRoot),
-                     * the layout parameters specified in R.layout.recents_list_footer are not
-                     * correctly applied. The footer view is ultimately not attached to mViewPager.
-                     */
-                    final View viewFullHistoryFooter = getActivity().getLayoutInflater().inflate(
-                            R.layout.recents_list_footer, mViewPager, false);
-                    viewFullHistoryFooter.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            ((HostInterface) getActivity()).showCallHistory();
-                        }
-                    });
-                    mRecentsFragment.setFooterView(viewFullHistoryFooter);
+                    mRecentsFragment.setHasFooterView(true);
                     return mRecentsFragment;
                 case TAB_INDEX_ALL_CONTACTS:
                     mAllContactsFragment = new AllContactsFragment();
