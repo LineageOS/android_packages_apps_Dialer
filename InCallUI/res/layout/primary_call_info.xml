@@ -29,7 +29,6 @@
     android:paddingStart="@dimen/call_banner_side_padding"
     android:paddingEnd="@dimen/call_banner_side_padding"
     android:paddingTop="@dimen/call_banner_primary_call_top_padding"
-    android:paddingBottom="@dimen/call_banner_top_bottom_padding"
     android:clipChildren="false"
     android:clipToPadding="false" >
 
@@ -102,6 +101,7 @@
                 android:layout_centerVertical="true"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/incall_call_banner_subtext_color"
+                android:textSize="@dimen/call_label_text_size"
                 android:singleLine="true"
                 android:visibility="gone" />
 

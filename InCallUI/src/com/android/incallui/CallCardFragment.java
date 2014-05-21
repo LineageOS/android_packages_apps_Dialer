@@ -229,10 +229,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             nameIsNumber = false;
         }
 
-        setPrimaryPhoneNumber(number);
-
         // set the name field.
         setPrimaryName(name, nameIsNumber);
+
+        if (TextUtils.isEmpty(number) && TextUtils.isEmpty(label)) {
+            mCallNumberAndLabel.setVisibility(View.GONE);
+        } else {
+            mCallNumberAndLabel.setVisibility(View.VISIBLE);
+        }
+
+        setPrimaryPhoneNumber(number);
 
         // Set the label (Mobile, Work, etc)
         setPrimaryLabel(label);
