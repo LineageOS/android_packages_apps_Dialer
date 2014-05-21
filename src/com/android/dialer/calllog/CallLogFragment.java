@@ -17,8 +17,6 @@
 package com.android.dialer.calllog;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.animation.Animator.AnimatorListener;
 import android.app.Activity;
@@ -35,14 +33,12 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.VoicemailContract.Status;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -51,6 +47,7 @@ import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.R;
+import com.android.dialer.list.ListsFragment.HostInterface;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
@@ -73,6 +70,11 @@ public class CallLogFragment extends ListFragment
      * ID of the empty loader to defer other fragments.
      */
     private static final int EMPTY_LOADER_ID = 0;
+
+    private static final String KEY_FILTER_TYPE = "filter_type";
+    private static final String KEY_LOG_LIMIT = "log_limit";
+    private static final String KEY_DATE_LIMIT = "date_limit";
+    private static final String KEY_SHOW_FOOTER = "show_footer";
 
     private CallLogAdapter mAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
@@ -126,6 +128,9 @@ public class CallLogFragment extends ListFragment
     // the date filter are included.  If zero, no date-based filtering occurs.
     private long mDateLimit = 0;
 
+    // Whether or not to show the Show call history footer view
+    private boolean mHasFooterView = false;
+
     public CallLogFragment() {
         this(CallLogQueryHandler.CALL_TYPE_ALL, -1);
     }
@@ -165,6 +170,13 @@ public class CallLogFragment extends ListFragment
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
+
+        if (state != null) {
+            mCallTypeFilter = state.getInt(KEY_FILTER_TYPE, mCallTypeFilter);
+            mLogLimit = state.getInt(KEY_LOG_LIMIT, mLogLimit);
+            mDateLimit = state.getLong(KEY_DATE_LIMIT, mDateLimit);
+            mHasFooterView = state.getBoolean(KEY_SHOW_FOOTER, mHasFooterView);
+        }
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this, new ContactInfoHelper(
@@ -276,7 +288,7 @@ public class CallLogFragment extends ListFragment
         super.onViewCreated(view, savedInstanceState);
         updateEmptyMessage(mCallTypeFilter);
         getListView().setItemsCanFocus(true);
-        assignFooterViewToListView();
+        maybeAddFooterView();
     }
 
     /**
@@ -359,6 +371,15 @@ public class CallLogFragment extends ListFragment
         getActivity().getContentResolver().unregisterContentObserver(mCallLogObserver);
         getActivity().getContentResolver().unregisterContentObserver(mContactsObserver);
         getActivity().getContentResolver().unregisterContentObserver(mVoicemailStatusObserver);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_FILTER_TYPE, mCallTypeFilter);
+        outState.putInt(KEY_LOG_LIMIT, mLogLimit);
+        outState.putLong(KEY_DATE_LIMIT, mDateLimit);
+        outState.putBoolean(KEY_SHOW_FOOTER, mHasFooterView);
     }
 
     @Override
@@ -498,23 +519,36 @@ public class CallLogFragment extends ListFragment
     }
 
     /**
-     * Assigns a view to be used as a footer view in the call log.
+     * Enables/disables the showing of the view full call history footer
      *
-     * @param view View to be used as the footer view.
+     * @param hasFooterView Whether or not to show the footer
      */
-    public void setFooterView(View view) {
-        mFooterView = view;
-        // Content view not created yet, defer addition of the footerview to onCreate
-        if (getView() == null) {
-            return;
-        }
-        assignFooterViewToListView();
+    public void setHasFooterView(boolean hasFooterView) {
+        mHasFooterView = hasFooterView;
+        maybeAddFooterView();
     }
 
-    private void assignFooterViewToListView() {
-        if (mFooterView == null) {
+    /**
+     * Determine whether or not the footer view should be added to the listview. If getView()
+     * is null, which means onCreateView hasn't been called yet, defer the addition of the footer
+     * until onViewCreated has been called.
+     */
+    private void maybeAddFooterView() {
+        if (!mHasFooterView || getView() == null) {
             return;
         }
+
+        if (mFooterView == null) {
+            mFooterView = getActivity().getLayoutInflater().inflate(
+                    R.layout.recents_list_footer, (ViewGroup) getView(), false);
+            mFooterView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((HostInterface) getActivity()).showCallHistory();
+                }
+            });
+        }
+
         final ListView listView = getListView();
         listView.removeFooterView(mFooterView);
         listView.addFooterView(mFooterView);
