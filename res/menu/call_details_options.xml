@@ -16,13 +16,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_trash"
-        android:icon="@drawable/ic_voicemail_delete"
+        android:icon="@drawable/ic_calllog_delete"
         android:showAsAction="ifRoom"
         android:title="@string/recentCalls_trashVoicemail"
         android:onClick="onMenuTrashVoicemail"
     />
     <item
         android:id="@+id/menu_remove_from_call_log"
+        android:icon="@drawable/ic_calllog_delete"
+        android:showAsAction="ifRoom"
         android:title="@string/recentCalls_removeFromRecentList"
         android:onClick="onMenuRemoveFromCallLog"
     />
