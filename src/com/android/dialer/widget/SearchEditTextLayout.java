@@ -122,7 +122,7 @@ public class SearchEditTextLayout extends FrameLayout {
         if (expand) {
             AnimationUtils.crossFadeViews(mExpanded, mCollapsed, ANIMATION_DURATION);
             animator = ValueAnimator.ofFloat(1f, 0f);
-            setBackgroundColor(mBackgroundColor);
+            setBackgroundResource(R.drawable.search_shadow);
             mSearchView.requestFocus();
         } else {
             AnimationUtils.crossFadeViews(mCollapsed, mExpanded, ANIMATION_DURATION);
