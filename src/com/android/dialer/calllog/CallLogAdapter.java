@@ -272,23 +272,6 @@ public class CallLogAdapter extends GroupingListAdapter
     };
 
     /**
-     * Click listener for the delete from call log button.  Removes the current call log
-     * entry and its associated calls from the call log.
-     */
-    private final View.OnClickListener mDeleteListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            // Retrieve the views from the call log view.
-            final CallLogListItemViews views =
-                    (CallLogListItemViews)
-                            ((View)v.getParent().getParent().getParent().getParent()).getTag();
-
-            deleteCalls(views.callIds);
-            notifyDataSetChanged();
-        }
-    };
-
-    /**
      * The onClickListener used to expand or collapse the action buttons section for a call log
      * entry.
      */
@@ -866,7 +849,7 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     /**
-     * Expands or collapses the view containing the CALLBACK, VOICEMAIL and DELETE action buttons.
+     * Expands or collapses the view containing the CALLBACK, VOICEMAIL and DETAILS action buttons.
      *
      * @param callLogItem The call log entry parent view.
      * @param isExpanded The new expansion state of the view.
@@ -892,7 +875,6 @@ public class CallLogAdapter extends GroupingListAdapter
             // block and block further attempts to set focus.
             boolean focused = views.callBackButtonView.requestAccessibilityFocus() ||
                     views.voicemailButtonView.requestAccessibilityFocus() ||
-                    views.deleteButtonView.requestAccessibilityFocus() ||
                     views.detailsButtonView.requestAccessibilityFocus();
         } else {
             // When recycling a view, it is possible the actionsView ViewStub was previously
@@ -940,10 +922,6 @@ public class CallLogAdapter extends GroupingListAdapter
                     R.id.voicemail_action);
         }
 
-        if (views.deleteButtonView == null) {
-            views.deleteButtonView = (TextView)views.actionsView.findViewById(R.id.delete_action);
-        }
-
         if (views.detailsButtonView == null) {
             views.detailsButtonView = (TextView)views.actionsView.findViewById(R.id.details_action);
         }
@@ -952,7 +930,7 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     /***
-     * Binds click handlers and intents to the voicemail, delete and callback action buttons.
+     * Binds click handlers and intents to the voicemail, details and callback action buttons.
      *
      * @param views  The call log item views.
      */
@@ -990,8 +968,6 @@ public class CallLogAdapter extends GroupingListAdapter
             );
 
         }
-
-        views.deleteButtonView.setOnClickListener(this.mDeleteListener);
 
         mCallLogViewsHelper.setActionContentDescriptions(views);
     }
@@ -1359,56 +1335,5 @@ public class CallLogAdapter extends GroupingListAdapter
        } else {
            return mContext.getResources().getString(R.string.call_log_header_other);
        }
-    }
-
-    /**
-     * Retrieves an instance of the asynchronous task executor, creating one if required.
-     * @return The {@link com.android.dialer.util.AsyncTaskExecutor}
-     */
-    private AsyncTaskExecutor getTaskExecutor() {
-        if (mAsyncTaskExecutor == null) {
-            mAsyncTaskExecutor = AsyncTaskExecutors.createAsyncTaskExecutor();
-        }
-        return mAsyncTaskExecutor;
-    }
-
-    /**
-     * Deletes the calls specified in the callIds array, asynchronously.
-     *
-     * @param callIds Ids of calls to be deleted.
-     */
-    private void deleteCalls(long[] callIds) {
-        if (callIds == null) {
-            return;
-        }
-
-        // Build comma separated list of ids to delete.
-        final StringBuilder callIdString = new StringBuilder();
-        for (long callId : callIds) {
-            if (callIdString.length() != 0) {
-                callIdString.append(",");
-            }
-            callIdString.append(callId);
-        }
-
-        // Perform removal of call log entries asynchronously.
-        getTaskExecutor().submit(Tasks.REMOVE_CALL_LOG_ENTRIES,
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    public Void doInBackground(Void... params) {
-                        // Issue delete.
-                        mContext.getContentResolver().delete(Calls.CONTENT_URI_WITH_VOICEMAIL,
-                                Calls._ID + " IN (" + callIdString + ")", null);
-                        return null;
-                    }
-
-                    @Override
-                    public void onPostExecute(Void result) {
-                        // Somewhere went wrong: we're going to bail out and show error to users.
-                        Toast.makeText(mContext, R.string.toast_entry_removed,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
     }
 }

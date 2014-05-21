@@ -95,12 +95,6 @@
          as call back, play voicemail, etc. -->
     <color name="call_log_action_text">#1dc7db</color>
 
-    <!-- Color of the "delete" action in expanded call log entries. -->
-    <color name="call_log_action_delete_text">#ff4f4f</color>
-
-    <!-- Color of action text for expanded call log entries which is disabled. -->
-    <color name="call_log_disabled_text">#b3b3b3</color>
-
     <!-- Color for missed call icons. -->
     <color name="missed_call">#ff2e58</color>
 

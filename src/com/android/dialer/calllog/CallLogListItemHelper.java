@@ -80,9 +80,6 @@ import com.android.dialer.R;
         views.voicemailButtonView.setContentDescription(
                 mResources.getString(R.string.description_voicemail_action, views.nameOrNumber));
 
-        views.deleteButtonView.setContentDescription(
-                mResources.getString(R.string.description_delete_action, views.nameOrNumber));
-
         views.detailsButtonView.setContentDescription(
                 mResources.getString(R.string.description_details_action, views.nameOrNumber));
     }

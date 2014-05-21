@@ -662,11 +662,6 @@
          [CHAR LIMIT=30] -->
     <string name="call_log_action_call_back">CALL BACK</string>
 
-    <!-- Button text for the "DELETE" button displayed underneath an entry in the call log.
-         Tapping causes the call log entry in question to be removed from the call log.
-         [CHAR LIMIT=30] -->
-    <string name="call_log_action_delete">DELETE</string>
-
     <!-- Button text for the "LISTEN" button displayed underneath an entry in the call log.
          Tapping navigates the user to the call details screen where the user can listen to the
          voicemail represented by the call log entry.
@@ -706,12 +701,6 @@
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
     <string name="description_voicemail_action">Listen to voicemail from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
-
-    <!-- String describing the "delete" action for an entry in the call log.  The delete
-         action triggers the removal of the current call log entry from the call log.
-         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
-         [CHAR LIMIT=NONE] -->
-    <string name="description_delete_action">Delete call log entry for <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
 
     <!-- String describing the "details" action for an entry in the call log.  The details action
          displays the call details screen for an entry in the call log.  This shows the calls to

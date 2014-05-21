@@ -44,8 +44,6 @@ public final class CallLogListItemViews {
     public View actionsView;
     /** The "call back" action button - assigned only when the action section is expanded. */
     public TextView callBackButtonView;
-    /** The "delete" action button - assigned only when the action section is expanded. */
-    public TextView deleteButtonView;
     /** The "voicemail" action button - assigned only when the action section is expanded. */
     public TextView voicemailButtonView;
     /** The "details" action button - assigned only when the action section is expanded. */
@@ -122,7 +120,6 @@ public final class CallLogListItemViews {
                 new View(context),
                 new TextView(context));
         views.callBackButtonView = new TextView(context);
-        views.deleteButtonView = new TextView(context);
         views.voicemailButtonView = new TextView(context);
         views.detailsButtonView = new TextView(context);
         views.actionsView = new View(context);
