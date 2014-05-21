@@ -48,6 +48,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
+import android.view.View.OnTouchListener;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -305,7 +306,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         public boolean onKey(View v, int keyCode, KeyEvent event) {
             if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN &&
                     TextUtils.isEmpty(mSearchView.getText().toString())) {
-                onBackPressed();
+                maybeExitSearchUi();
             }
             return false;
         }
@@ -367,6 +368,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         parentLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         parentLayout.setOnDragListener(new LayoutOnDragListener());
 
+        setupActivityOverlay();
+
         mFloatingActionButtonContainer = findViewById(R.id.floating_action_button_container);
         ViewUtil.setupFloatingActionButton(mFloatingActionButtonContainer, getResources());
 
@@ -377,6 +380,19 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
         SmartDialPrefix.initializeNanpSettings(this);
+    }
+
+    private void setupActivityOverlay() {
+        final View activityOverlay = findViewById(R.id.activity_overlay);
+        activityOverlay.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (!mIsDialpadShown) {
+                    maybeExitSearchUi();
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -863,6 +879,18 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else {
             super.onBackPressed();
         }
+    }
+
+    /**
+     * @return True if the search UI was exited, false otherwise
+     */
+    private boolean maybeExitSearchUi() {
+        if (isInSearchUi() && TextUtils.isEmpty(mSearchQuery)) {
+            exitSearchUi();
+            hideInputMethod(parentLayout);
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -98,6 +98,7 @@
     </FrameLayout>
     <!-- Host container for the contact tile drag shadow -->
     <FrameLayout
+        android:id="@+id/activity_overlay"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
         <ImageView
