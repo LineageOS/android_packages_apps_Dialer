@@ -111,7 +111,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"查看联系人<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"呼叫<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的详细联系信息"</string>
-    <string name="description_call_details" msgid="8936017517290240089">"通话详情"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"有新的语音邮件。"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>次通话。"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"向<xliff:g id="NAME">%1$s</xliff:g>发送短信"</string>
@@ -161,38 +160,35 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"点按图片可查看所有号码，按住图片可重新排序"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"关闭"</string>
     <string name="remove_contact" msgid="1080555335283662961">"移除"</string>
-    <!-- no translation found for wifi_no_signal_no_problem (5905489120009368358) -->
-    <skip />
-    <!-- no translation found for wifi_enable_google_wifi_calling (889688113802116339) -->
-    <skip />
-    <!-- no translation found for wifi_when_connected_to_a_signal (1380410417434941662) -->
-    <skip />
-    <!-- no translation found for wifi_always_use_wifi (5090531595867169067) -->
-    <skip />
-    <!-- no translation found for wifi_ask_use_wifi (2530040568117536243) -->
-    <skip />
-    <!-- no translation found for wifi_never_use_wifi (8523176164034184009) -->
-    <skip />
-    <!-- no translation found for wifi_next_setup_screen (6468744966620746912) -->
-    <skip />
-    <!-- no translation found for wifi_previous_setup_screen (8525707359376859298) -->
-    <skip />
-    <!-- no translation found for wifi_setup_completed (2823266959975201512) -->
-    <skip />
-    <!-- no translation found for wifi_setup_ok (7801061518697115555) -->
-    <skip />
-    <!-- no translation found for wifi_setup_settings_shortcut (278329876445606742) -->
-    <skip />
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"没有信号？没关系。"</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"启用Google WLAN通话功能"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"连接到稳定的WLAN网络时："</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"一律使用WLAN进行通话"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"一律询问"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"一律不使用WLAN进行通话"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"下一页"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"返回"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"太好了！WLAN通话功能已全部设置完毕。您可以随时在“设置”中更改偏好设置或关闭这项功能。"</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"知道了"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"通话设置"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"快速拨号"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"所有联系人"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"回电"</string>
     <string name="call_log_action_delete" msgid="7371990297839987600">"删除"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"听取"</string>
+    <!-- no translation found for call_log_action_details (6252596497021563115) -->
+    <skip />
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的未接电话。"</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的已接电话。"</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的通话。"</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"给<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>回电"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"听取来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的语音邮件"</string>
     <string name="description_delete_action" msgid="7188614068459616450">"删除与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的通话记录条目"</string>
+    <!-- no translation found for description_details_action (2433827152749491785) -->
+    <skip />
     <string name="toast_entry_removed" msgid="3389119736202317999">"通话记录条目已删除。"</string>
+    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
+    <skip />
+    <!-- no translation found for call_log_header_other (8209775016508312763) -->
+    <skip />
 </resources>

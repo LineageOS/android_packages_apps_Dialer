@@ -111,7 +111,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Просмотреть данные: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Позвонить: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Сведения о контакте <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_call_details" msgid="8936017517290240089">"Сведения о вызове"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"Новое голосовое сообщение."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"Вызовов: <xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Отправить текстовое сообщение: <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -161,38 +160,33 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Нажмите на фото, чтобы посмотреть информацию о контакте. Чтобы переставить контакт в списке, нажмите на него и передвиньте на нужное место."</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Закрыть"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Удалить"</string>
-    <!-- no translation found for wifi_no_signal_no_problem (5905489120009368358) -->
-    <skip />
-    <!-- no translation found for wifi_enable_google_wifi_calling (889688113802116339) -->
-    <skip />
-    <!-- no translation found for wifi_when_connected_to_a_signal (1380410417434941662) -->
-    <skip />
-    <!-- no translation found for wifi_always_use_wifi (5090531595867169067) -->
-    <skip />
-    <!-- no translation found for wifi_ask_use_wifi (2530040568117536243) -->
-    <skip />
-    <!-- no translation found for wifi_never_use_wifi (8523176164034184009) -->
-    <skip />
-    <!-- no translation found for wifi_next_setup_screen (6468744966620746912) -->
-    <skip />
-    <!-- no translation found for wifi_previous_setup_screen (8525707359376859298) -->
-    <skip />
-    <!-- no translation found for wifi_setup_completed (2823266959975201512) -->
-    <skip />
-    <!-- no translation found for wifi_setup_ok (7801061518697115555) -->
-    <skip />
-    <!-- no translation found for wifi_setup_settings_shortcut (278329876445606742) -->
-    <skip />
+    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Нет сигнала? Не беда."</string>
+    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Разрешить звонки через Wi-Fi"</string>
+    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Если сигнал Wi-Fi хороший:"</string>
+    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Всегда использовать сети Wi-Fi для звонков"</string>
+    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Всегда спрашивать"</string>
+    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Не использовать сети Wi-Fi для звонков"</string>
+    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Далее"</string>
+    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Назад"</string>
+    <string name="wifi_setup_completed" msgid="2823266959975201512">"Теперь вы можете использовать сети Wi-Fi для звонков. Отключить функцию или изменить параметры можно в настройках."</string>
+    <string name="wifi_setup_ok" msgid="7801061518697115555">"ОК"</string>
+    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Настройки вызовов"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Быстрый набор"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ВСЕ КОНТАКТЫ"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ВЫЗОВ"</string>
     <string name="call_log_action_delete" msgid="7371990297839987600">"УДАЛИТЬ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ПРОСЛУШАТЬ"</string>
+    <string name="call_log_action_details" msgid="6252596497021563115">"ПОДРОБНЕЕ"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Пропущен вызов от контакта <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>. <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"Принят вызов от контакта <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>. <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"Звонок контакту <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>. <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Перезвонить контакту <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Прослушать сообщение от контакта <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
     <string name="description_delete_action" msgid="7188614068459616450">"Удалить запись для контакта <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> из списка вызовов."</string>
+    <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> – сведения о вызове"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Запись удалена"</string>
+    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
+    <skip />
+    <!-- no translation found for call_log_header_other (8209775016508312763) -->
+    <skip />
 </resources>
