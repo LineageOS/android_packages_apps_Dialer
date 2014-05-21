@@ -699,6 +699,10 @@ public class DialpadFragment extends Fragment
         // Long-pressing zero button will enter '+' instead.
         fragmentView.findViewById(R.id.zero).setOnLongClickListener(this);
 
+        // Long-pressing star button will enter ','(pause) instead.
+        fragmentView.findViewById(R.id.star).setOnLongClickListener(this);
+        // Long-pressing pound button will enter ';'(wait) instead.
+        fragmentView.findViewById(R.id.pound).setOnLongClickListener(this);
     }
 
     public void refreshKeypad() {
@@ -1154,6 +1158,28 @@ public class DialpadFragment extends Fragment
                 // To show that, make the cursor visible, and return false, letting the EditText
                 // show the option by itself.
                 mDigits.setCursorVisible(true);
+                return false;
+            }
+            case R.id.star: {
+                if (mDigits.length() > 1) {
+                    // Remove tentative input ('*') done by onTouch().
+                    removePreviousDigitIfPossible();
+                    keyPressed(KeyEvent.KEYCODE_COMMA);
+                    stopTone();
+                    mPressedDialpadKeys.remove(view);
+                    return true;
+                }
+                return false;
+            }
+            case R.id.pound: {
+                if (mDigits.length() > 1) {
+                    // Remove tentative input ('#') done by onTouch().
+                    removePreviousDigitIfPossible();
+                    keyPressed(KeyEvent.KEYCODE_SEMICOLON);
+                    stopTone();
+                    mPressedDialpadKeys.remove(view);
+                    return true;
+                }
                 return false;
             }
         }
