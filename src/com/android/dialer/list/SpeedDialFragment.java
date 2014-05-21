@@ -195,7 +195,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mParentView = inflater.inflate(R.layout.phone_favorites_fragment, container, false);
+        mParentView = inflater.inflate(R.layout.speeddial_fragment, container, false);
 
         mListView = (PhoneFavoriteListView) mParentView.findViewById(R.id.contact_tile_list);
         mListView.setOnItemClickListener(this);

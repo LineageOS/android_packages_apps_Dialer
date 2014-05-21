@@ -40,6 +40,7 @@
             android:clipToPadding="false"
             android:fadingEdge="none"
             android:divider="@null"
+            android:paddingBottom="@dimen/floating_action_button_height"
             android:nestedScrollingEnabled="true" />
     </FrameLayout>
 
