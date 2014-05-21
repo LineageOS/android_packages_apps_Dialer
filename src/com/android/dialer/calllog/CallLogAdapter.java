@@ -73,6 +73,14 @@ public class CallLogAdapter extends GroupingListAdapter
          *         on.
          */
         public void onItemExpanded(CallLogListItemView view);
+
+        /**
+         * Determines whether a call log entry with a given ID is currently visible in the ListView.
+         *
+         * @param callId The call ID to check.
+         * @return True if the call log entry with the given ID is visible.
+         */
+        public boolean isItemVisible(long callId);
     }
 
     /** Interface used to initiate a refresh of the content. */
@@ -123,6 +131,9 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Localized string representing the word "Yesterday". */
     private static final CharSequence YESTERDAY_LABEL = DateUtils.getYesterdayString();
 
+    /** Constant used to indicate no row is expanded. */
+    private static final long NONE_EXPANDED = -1;
+
     protected final Context mContext;
     private final ContactInfoHelper mContactInfoHelper;
     private final CallFetcher mCallFetcher;
@@ -141,8 +152,16 @@ public class CallLogAdapter extends GroupingListAdapter
      */
     private ExpirableCache<NumberWithCountryIso, ContactInfo> mContactInfoCache;
 
-    /** Hashmap, keyed by call Id, used to track which call log entries have been expanded or not */
-    private HashMap<Long,Boolean> mIsExpanded = new HashMap<Long,Boolean>();
+    /**
+     * Tracks the call log row which was previously expanded.  Used so that the closure of a
+     * previously expanded call log entry can be animated on rebind.
+     */
+    private long mPreviouslyExpanded = NONE_EXPANDED;
+
+    /**
+     * Tracks the currently expanded call log row.
+     */
+    private long mCurrentlyExpanded = NONE_EXPANDED;
 
     /**
      *  Hashmap, keyed by call Id, used to track the day group for a call.  As call log entries are
@@ -285,6 +304,7 @@ public class CallLogAdapter extends GroupingListAdapter
             // Trigger loading of the viewstub and visual expand or collapse.
             expandOrCollapseActions(callLogItem, expanded);
 
+            // Animate the expansion or collapse.
             if (mCallItemExpandedListener != null) {
                 mCallItemExpandedListener.onItemExpanded(callLogItem);
             }
@@ -605,6 +625,7 @@ public class CallLogAdapter extends GroupingListAdapter
      * @param count the number of entries in the current item, greater than 1 if it is a group
      */
     private void bindView(View view, Cursor c, int count) {
+        final CallLogListItemView callLogItemView = (CallLogListItemView) view;
         final CallLogListItemViews views = (CallLogListItemViews) view.getTag();
 
         // Default case: an item in the call log.
@@ -664,8 +685,6 @@ public class CallLogAdapter extends GroupingListAdapter
         } else {
             // In the call log, expand/collapse an actions section for the call log entry when
             // the primary view is tapped.
-
-            // TODO: This needs to be changed to do the proper QP open/close animation.
             views.primaryActionView.setOnClickListener(this.mExpandCollapseListener);
 
             // Note: Binding of the action buttons is done as required in configureActionViews
@@ -674,7 +693,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
         // Restore expansion state of the row on rebind.  Inflate the actions ViewStub if required,
         // and set its visibility state accordingly.
-        expandOrCollapseActions(view, isExpanded(rowId));
+        expandOrCollapseActions(callLogItemView, isExpanded(rowId));
 
         // Lookup contacts with this number
         NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
@@ -804,31 +823,46 @@ public class CallLogAdapter extends GroupingListAdapter
         return CallLogGroupBuilder.DAY_GROUP_NONE;
     }
     /**
-     * Determines if a call log row with the given Id is expanded to show the action buttons or
-     * not. If the row Id is not yet tracked, add a new entry assuming the row is collapsed.
-     * @param rowId
-     * @return
+     * Determines if a call log row with the given Id is expanded.
+     * @param rowId The row Id of the call.
+     * @return True if the row should be expanded.
      */
     private boolean isExpanded(long rowId) {
-        if (!mIsExpanded.containsKey(rowId)) {
-            mIsExpanded.put(rowId, false);
-        }
-
-        return mIsExpanded.get(rowId);
+        return mCurrentlyExpanded == rowId;
     }
 
     /**
      * Toggles the expansion state tracked for the call log row identified by rowId and returns
-     * the new expansion state.
+     * the new expansion state.  Assumes that only a single call log row will be expanded at any
+     * one point and tracks the current and previous expanded item.
      *
      * @param rowId The row Id associated with the call log row to expand/collapse.
      * @return True where the row is now expanded, false otherwise.
      */
     private boolean toggleExpansion(long rowId) {
-        boolean isExpanded = isExpanded(rowId);
+        if (rowId == mCurrentlyExpanded) {
+            // Collapsing currently expanded row.
+            mPreviouslyExpanded = NONE_EXPANDED;
+            mCurrentlyExpanded = NONE_EXPANDED;
 
-        mIsExpanded.put(rowId, !isExpanded);
-        return !isExpanded;
+            return false;
+        } else {
+            // Expanding a row (collapsing current expanded one).
+
+            // Where an item which was previously expanded is still on screen, track it as being
+            // previously expanded so that we will animate the collapse on re-bind.
+            if (mCurrentlyExpanded != NONE_EXPANDED &&
+                    mCallItemExpandedListener != null &&
+                    mCallItemExpandedListener.isItemVisible(mCurrentlyExpanded)) {
+
+                mPreviouslyExpanded = mCurrentlyExpanded;
+            } else {
+                // Item is no longer on screen, so we will not animate its collapse on rebind.
+                mPreviouslyExpanded = NONE_EXPANDED;
+            }
+            mCurrentlyExpanded = rowId;
+            return true;
+        }
     }
 
     /**
@@ -837,7 +871,7 @@ public class CallLogAdapter extends GroupingListAdapter
      * @param callLogItem The call log entry parent view.
      * @param isExpanded The new expansion state of the view.
      */
-    private void expandOrCollapseActions(View callLogItem, boolean isExpanded) {
+    private void expandOrCollapseActions(CallLogListItemView callLogItem, boolean isExpanded) {
         final CallLogListItemViews views = (CallLogListItemViews)callLogItem.getTag();
 
         if (isExpanded) {
@@ -845,6 +879,7 @@ public class CallLogAdapter extends GroupingListAdapter
             inflateActionViewStub(callLogItem);
 
             views.actionsView.setVisibility(View.VISIBLE);
+            views.actionsView.setAlpha(1.0f);
             views.callLogEntryView.setBackgroundColor(
                     callLogItem.getResources().getColor(R.color.background_dialer_light));
             views.callLogEntryView.setElevation(
@@ -862,13 +897,21 @@ public class CallLogAdapter extends GroupingListAdapter
         } else {
             // When recycling a view, it is possible the actionsView ViewStub was previously
             // inflated so we should hide it in this case.
-            if (views.actionsView != null ) {
+            if (views.actionsView != null) {
                 views.actionsView.setVisibility(View.GONE);
             }
 
             views.callLogEntryView.setBackgroundColor(
                     callLogItem.getResources().getColor(R.color.background_dialer_list_items));
             views.callLogEntryView.setElevation(0);
+
+            // Where the current row was previously expanded, trigger a collapse animation.
+            if (views.rowId == mPreviouslyExpanded) {
+                if (mCallItemExpandedListener != null && views.actionsView != null) {
+                    mCallItemExpandedListener.onItemExpanded(callLogItem);
+                }
+                mPreviouslyExpanded = NONE_EXPANDED;
+            }
         }
     }
 
@@ -888,11 +931,13 @@ public class CallLogAdapter extends GroupingListAdapter
         }
 
         if (views.callBackButtonView == null) {
-            views.callBackButtonView = (TextView)views.actionsView.findViewById(R.id.call_back_action);
+            views.callBackButtonView = (TextView)views.actionsView.findViewById(
+                    R.id.call_back_action);
         }
 
         if (views.voicemailButtonView == null) {
-            views.voicemailButtonView = (TextView)views.actionsView.findViewById(R.id.voicemail_action);
+            views.voicemailButtonView = (TextView)views.actionsView.findViewById(
+                    R.id.voicemail_action);
         }
 
         if (views.deleteButtonView == null) {
