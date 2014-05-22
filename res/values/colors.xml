@@ -83,6 +83,9 @@
          as call back, play voicemail, etc. -->
     <color name="call_log_action_text">#1dc7db</color>
 
+    <!-- Color of view full call history item text. -->
+    <color name="view_full_call_history_color">#1dc7db</color>
+
     <!-- Color for missed call icons. -->
     <color name="missed_call">#ff2e58</color>
 

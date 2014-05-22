@@ -25,7 +25,9 @@
     android:paddingTop="20dp"
     android:paddingBottom="20dp"
     android:gravity="center"
-    android:textColor="@color/dialtacts_primary_text_color"
+    android:fontFamily="@string/view_full_call_history_font_family"
+    android:textStyle="bold"
+    android:textColor="@color/view_full_call_history_color"
     android:textSize="14sp"
     android:text="@string/recents_footer_text"
     android:background="?android:attr/selectableItemBackground" />
