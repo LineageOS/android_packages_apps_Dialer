@@ -209,13 +209,6 @@ public class CallButtonFragment
 
     @Override
     public void setMute(boolean value) {
-        final LayerDrawable layers = (LayerDrawable) mMuteButton.getBackground();
-
-        layers.findDrawableByLayerId(R.id.muteOffItem)
-                .setAlpha(value ? HIDDEN : VISIBLE);
-        layers.findDrawableByLayerId(R.id.muteOnItem)
-                .setAlpha(value ? VISIBLE : HIDDEN);
-
         mMuteButton.setSelected(value);
     }
 
@@ -359,8 +352,7 @@ public class CallButtonFragment
         boolean showMoreIndicator = false;
 
         boolean showBluetoothIcon = false;
-        boolean showSpeakerphoneOnIcon = false;
-        boolean showSpeakerphoneOffIcon = false;
+        boolean showSpeakerphoneIcon = false;
         boolean showHandsetIcon = false;
 
         boolean showToggleIndicator = false;
@@ -378,7 +370,7 @@ public class CallButtonFragment
             if (isAudio(AudioMode.BLUETOOTH)) {
                 showBluetoothIcon = true;
             } else if (isAudio(AudioMode.SPEAKER)) {
-                showSpeakerphoneOnIcon = true;
+                showSpeakerphoneIcon = true;
             } else {
                 showHandsetIcon = true;
                 // TODO: if a wired headset is plugged in, that takes precedence
@@ -397,9 +389,7 @@ public class CallButtonFragment
 
             // update desired layers:
             showToggleIndicator = true;
-
-            showSpeakerphoneOnIcon = isAudio(AudioMode.SPEAKER);
-            showSpeakerphoneOffIcon = !showSpeakerphoneOnIcon;
+            showSpeakerphoneIcon = true;
         } else {
             Log.d(this, "updateAudioButtons - disabled...");
 
@@ -410,7 +400,7 @@ public class CallButtonFragment
 
             // update desired layers:
             showToggleIndicator = true;
-            showSpeakerphoneOffIcon = true;
+            showSpeakerphoneIcon = true;
         }
 
         // Finally, update it all!
@@ -419,8 +409,7 @@ public class CallButtonFragment
         Log.v(this, "audioButtonChecked: " + audioButtonChecked);
         Log.v(this, "showMoreIndicator: " + showMoreIndicator);
         Log.v(this, "showBluetoothIcon: " + showBluetoothIcon);
-        Log.v(this, "showSpeakerphoneOnIcon: " + showSpeakerphoneOnIcon);
-        Log.v(this, "showSpeakerphoneOffIcon: " + showSpeakerphoneOffIcon);
+        Log.v(this, "showSpeakerphoneIcon: " + showSpeakerphoneIcon);
         Log.v(this, "showHandsetIcon: " + showHandsetIcon);
 
         // Only enable the audio button if the fragment is enabled.
@@ -442,11 +431,8 @@ public class CallButtonFragment
         layers.findDrawableByLayerId(R.id.handsetItem)
                 .setAlpha(showHandsetIcon ? VISIBLE : HIDDEN);
 
-        layers.findDrawableByLayerId(R.id.speakerphoneOnItem)
-                .setAlpha(showSpeakerphoneOnIcon ? VISIBLE : HIDDEN);
-
-        layers.findDrawableByLayerId(R.id.speakerphoneOffItem)
-                .setAlpha(showSpeakerphoneOffIcon ? VISIBLE : HIDDEN);
+        layers.findDrawableByLayerId(R.id.speakerphoneItem)
+                .setAlpha(showSpeakerphoneIcon ? VISIBLE : HIDDEN);
 
     }
 

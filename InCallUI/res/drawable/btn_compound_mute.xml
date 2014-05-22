@@ -21,16 +21,10 @@
     <item android:drawable="@drawable/btn_compound_background" />
 
     <!-- Use an explicit <bitmap> to avoid scaling the icon up to the full size of the button. -->
-    <item android:id="@+id/muteOffItem">
-        <bitmap android:src="@drawable/ic_toolbar_mic_on"
+    <item>
+        <bitmap android:src="@drawable/ic_toolbar_mic_off"
             android:gravity="center"
             android:tint="@color/selectable_icon_tint" />
-    </item>
-
-    <item android:id="@+id/muteOnItem">
-        <bitmap android:src="@drawable/ic_toolbar_mic_off"
-                android:gravity="center"
-                android:tint="@color/selectable_icon_tint" />
     </item>
 
 </layer-list>

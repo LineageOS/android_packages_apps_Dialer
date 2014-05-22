@@ -84,15 +84,8 @@
     </item>
 
     <!-- Speakerphone icon showing 'speaker on' state -->
-    <item android:id="@+id/speakerphoneOnItem">
+    <item android:id="@+id/speakerphoneItem">
         <bitmap android:src="@drawable/ic_toolbar_speaker_on"
-                android:gravity="center"
-                android:tint="@color/selectable_icon_tint" />
-    </item>
-
-    <!-- Speakerphone icon showing 'speaker off' state -->
-    <item android:id="@+id/speakerphoneOffItem">
-        <bitmap android:src="@drawable/ic_toolbar_speaker_off"
                 android:gravity="center"
                 android:tint="@color/selectable_icon_tint" />
     </item>
