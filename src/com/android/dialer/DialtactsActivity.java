@@ -323,6 +323,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final ActionBar actionBar = getActionBar();
         actionBar.setCustomView(R.layout.search_edittext);
         actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setBackgroundDrawable(null);
 
         mSearchEditTextLayout = (SearchEditTextLayout) actionBar.getCustomView();
         mSearchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
