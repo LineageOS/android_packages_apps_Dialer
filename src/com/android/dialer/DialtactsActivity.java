@@ -20,7 +20,6 @@ import android.animation.LayoutTransition;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -85,6 +84,7 @@ import com.android.dialer.list.RegularSearchFragment;
 import com.android.dialer.list.RemoveView;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
+import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
 import com.android.dialer.widget.SearchEditTextLayout.OnBackButtonClickedListener;
 import com.android.dialerbind.DatabaseHelperManager;
@@ -102,10 +102,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         DialpadFragment.HostInterface,
         ListsFragment.HostInterface,
         SpeedDialFragment.HostInterface,
+        SearchFragment.HostInterface,
         OnDragDropListener,
         OnPhoneNumberPickerActionListener,
         PopupMenu.OnMenuItemClickListener,
-        ViewPager.OnPageChangeListener {
+        ViewPager.OnPageChangeListener,
+        ActionBarController.ActivityUi {
     private static final String TAG = "DialtactsActivity";
 
     public static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -208,6 +210,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private DialerDatabaseHelper mDialerDatabaseHelper;
     private DragDropController mDragDropController;
+    private ActionBarController mActionBarController;
 
     private class OptionsPopupMenu extends PopupMenu {
         public OptionsPopupMenu(Context context, View anchor) {
@@ -293,6 +296,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         @Override
         public void onClick(View v) {
             if (!isInSearchUi()) {
+                mActionBarController.onSearchBoxTapped();
                 enterSearchUi(false /* smartDialSearch */, mSearchView.getText().toString());
             }
         }
@@ -324,6 +328,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         actionBar.setCustomView(R.layout.search_edittext);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setBackgroundDrawable(null);
+
+        mActionBarController = new ActionBarController(this,
+                (SearchEditTextLayout) actionBar.getCustomView());
 
         mSearchEditTextLayout = (SearchEditTextLayout) actionBar.getCustomView();
         mSearchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
@@ -363,6 +370,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mInRegularSearch = savedInstanceState.getBoolean(KEY_IN_REGULAR_SEARCH_UI);
             mInDialpadSearch = savedInstanceState.getBoolean(KEY_IN_DIALPAD_SEARCH_UI);
             mFirstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH);
+            mActionBarController.restoreInstanceState(savedInstanceState);
         }
 
         parentLayout = (RelativeLayout) findViewById(R.id.dialtacts_mainlayout);
@@ -426,6 +434,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         outState.putBoolean(KEY_IN_REGULAR_SEARCH_UI, mInRegularSearch);
         outState.putBoolean(KEY_IN_DIALPAD_SEARCH_UI, mInDialpadSearch);
         outState.putBoolean(KEY_FIRST_LAUNCH, mFirstLaunch);
+        mActionBarController.saveInstanceState(outState);
     }
 
     @Override
@@ -563,6 +572,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ft.show(mDialpadFragment);
         ft.commit();
 
+        mActionBarController.onDialpadUp();
+
         if (!isInSearchUi()) {
             enterSearchUi(true /* isSmartDial */, mSearchQuery);
         }
@@ -581,7 +592,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         updateSearchFragmentPosition();
-        getActionBar().hide();
     }
 
     /**
@@ -617,7 +627,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             commitDialpadFragmentHide();
         }
 
-        mListsFragment.maybeShowActionBar();
+        mActionBarController.onDialpadDown();
 
         if (isInSearchUi()) {
             if (TextUtils.isEmpty(mSearchQuery)) {
@@ -649,8 +659,19 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
     }
 
-    private boolean isInSearchUi() {
+    @Override
+    public boolean isInSearchUi() {
         return mInDialpadSearch || mInRegularSearch;
+    }
+
+    @Override
+    public boolean hasSearchQuery() {
+        return !TextUtils.isEmpty(mSearchQuery);
+    }
+
+    @Override
+    public boolean shouldShowActionBar() {
+        return mListsFragment.shouldShowActionBar();
     }
 
     private void setNotInSearchUi() {
@@ -829,7 +850,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         transaction.commit();
 
         mListsFragment.getView().animate().alpha(0).withLayer();
-        mSearchEditTextLayout.animateExpandOrCollapse(true);
     }
 
     /**
@@ -856,7 +876,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         transaction.commit();
 
         mListsFragment.getView().animate().alpha(1).withLayer();
-        mSearchEditTextLayout.animateExpandOrCollapse(false);
+        mActionBarController.onSearchUiExited();
     }
 
     /** Returns an Intent to launch Call Settings screen */
@@ -974,7 +994,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     @Override
     public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView view) {
-        getActionBar().hide();
+        mActionBarController.slideActionBarUp(true);
         mRemoveViewContainer.setVisibility(View.VISIBLE);
     }
 
@@ -987,7 +1007,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     @Override
     public void onDragFinished(int x, int y) {
-        getActionBar().show();
+        mActionBarController.slideActionBarDown(true);
         mRemoveViewContainer.setVisibility(View.GONE);
     }
 
@@ -1029,10 +1049,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onHomeInActionBarSelected() {
         exitSearchUi();
-    }
-
-    public int getActionBarHeight() {
-        return mActionBarHeight;
     }
 
     @Override
@@ -1106,5 +1122,25 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         @Override
         public void onAnimationRepeat(Animation animation) {
         }
+    }
+
+    @Override
+    public boolean isActionBarShowing() {
+        return mActionBarController.isActionBarShowing();
+    }
+
+    @Override
+    public int getActionBarHideOffset() {
+        return getActionBar().getHideOffset();
+    }
+
+    @Override
+    public int getActionBarHeight() {
+        return mActionBarHeight;
+    }
+
+    @Override
+    public void setActionBarHideOffset(int hideOffset) {
+        getActionBar().setHideOffset(hideOffset);
     }
 }
