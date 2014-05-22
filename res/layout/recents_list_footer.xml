@@ -30,4 +30,4 @@
     android:textColor="@color/view_full_call_history_color"
     android:textSize="14sp"
     android:text="@string/recents_footer_text"
-    android:background="?android:attr/selectableItemBackground" />
+    android:background="@drawable/recent_lists_footer_background" />

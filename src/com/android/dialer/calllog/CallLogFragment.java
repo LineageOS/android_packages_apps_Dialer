@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.graphics.Outline;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -94,7 +95,11 @@ public class CallLogFragment extends ListFragment
     private boolean mCallLogFetched;
     private boolean mVoicemailStatusFetched;
 
-    private float mExpandedItemElevation;
+    private float mExpandedItemTranslationZ;
+    private int mFadeInDuration;
+    private int mFadeInStartDelay;
+    private int mFadeOutDuration;
+    private int mExpandCollapseDuration;
 
     private final Handler mHandler = new Handler();
 
@@ -195,7 +200,13 @@ public class CallLogFragment extends ListFragment
         setHasOptionsMenu(true);
         updateCallList(mCallTypeFilter, mDateLimit);
 
-        mExpandedItemElevation = getResources().getDimension(R.dimen.call_log_expanded_elevation);
+        mExpandedItemTranslationZ =
+                getResources().getDimension(R.dimen.call_log_expanded_translation_z);
+        mFadeInDuration = getResources().getInteger(R.integer.call_log_actions_fade_in_duration);
+        mFadeInStartDelay = getResources().getInteger(R.integer.call_log_actions_fade_start);
+        mFadeOutDuration = getResources().getInteger(R.integer.call_log_actions_fade_out_duration);
+        mExpandCollapseDuration = getResources().getInteger(
+                R.integer.call_log_expand_collapse_duration);
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -578,27 +589,36 @@ public class CallLogFragment extends ListFragment
                     viewHolder.actionsView.setVisibility(View.VISIBLE);
                 }
 
+                // If the day group header is shown, subtract the header from the outline of the
+                // view. The outline is used for generating the shadow of the view, but we only want
+                // a shadow on the call log list item and not the header. This is a slight hack, but
+                // the hierarchy of the call log list items makes it hard to achieve the desired
+                // shadow behavior otherwise.
+                if (viewHolder.dayGroupHeader.isShown()) {
+                    Outline outline = new Outline();
+                    outline.setRect(
+                            0 /* left */,
+                            viewHolder.dayGroupHeader.getHeight() /* top */,
+                            view.getWidth() /* right */,
+                            view.getHeight() /* bottom */);
+                    view.setOutline(outline);
+                }
+
                 // Set up the fade effect for the action buttons.
                 if (isExpand) {
-                    int fadeDuration = getResources().getInteger(
-                            R.integer.call_log_actions_fade_in_duration);
-                    int startDelay = getResources().getInteger(
-                            R.integer.call_log_actions_fade_start);
                     // Start the fade in after the expansion has partly completed, otherwise it
                     // will be mostly over before the expansion completes.
                     viewHolder.actionsView.setAlpha(0f);
                     viewHolder.actionsView.animate()
                             .alpha(1f)
-                            .setStartDelay(startDelay)
-                            .setDuration(fadeDuration)
+                            .setStartDelay(mFadeInStartDelay)
+                            .setDuration(mFadeInDuration)
                             .start();
                 } else {
-                    int fadeDuration = getResources().getInteger(
-                            R.integer.call_log_actions_fade_out_duration);
                     viewHolder.actionsView.setAlpha(1f);
                     viewHolder.actionsView.animate()
                             .alpha(0f)
-                            .setDuration(fadeDuration)
+                            .setDuration(mFadeOutDuration)
                             .start();
                 }
                 view.requestLayout();
@@ -613,10 +633,8 @@ public class CallLogFragment extends ListFragment
                         Float value = (Float) animator.getAnimatedValue();
 
                         // For each value from 0 to 1, animate the various parts of the layout.
-                        view.getLayoutParams().height =
-                                (int) (value * distance + baseHeight);
-                        viewHolder.callLogEntryView
-                                .setElevation(mExpandedItemElevation * value);
+                        view.getLayoutParams().height = (int) (value * distance + baseHeight);
+                        view.setTranslationZ(mExpandedItemTranslationZ * value);
                         view.requestLayout();
                     }
                 });
@@ -632,17 +650,14 @@ public class CallLogFragment extends ListFragment
                     }
 
                     @Override
-                    public void onAnimationCancel(Animator animation) {}
+                    public void onAnimationCancel(Animator animation) { }
                     @Override
                     public void onAnimationRepeat(Animator animation) { }
                     @Override
                     public void onAnimationStart(Animator animation) { }
                 });
 
-                final int expandCollapseDuration = getResources().getInteger(
-                        R.integer.call_log_expand_collapse_duration);
-
-                animator.setDuration(expandCollapseDuration);
+                animator.setDuration(mExpandCollapseDuration);
                 animator.start();
 
                 // Return false so this draw does not occur to prevent the final frame from

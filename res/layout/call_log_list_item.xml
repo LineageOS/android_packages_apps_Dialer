@@ -14,16 +14,14 @@
      limitations under the License.
 -->
 
-<view
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<view xmlns:android="http://schemas.android.com/apk/res/android"
     class="com.android.dialer.calllog.CallLogListItemView"
+    android:id="@+id/call_log_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/call_log_outer_margin"
-    android:id="@+id/call_log_list_item"
     android:orientation="vertical"
-    android:clipChildren="false"
->
+    android:background="@color/background_dialer_list_items" >
+
     <!-- Day group heading. Used to show a "today", "yesterday", "last week" or "other" heading
          above a group of call log entries. -->
     <TextView
@@ -37,17 +35,16 @@
         android:paddingTop="@dimen/call_log_day_group_padding"
         android:paddingBottom="0dp"
         />
+
     <!-- Linear layout to separate the primary area containing the contact badge and caller
          information and the secondary action (call details / play voicemail). -->
     <LinearLayout
         android:id="@+id/call_log_row"
-        android:background="@color/background_dialer_list_items"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:baselineAligned="false"
         android:orientation="vertical"
-        android:gravity="center_vertical"
-        >
+        android:gravity="center_vertical" >
 
         <!-- Primary area containing the contact badge and caller information -->
         <LinearLayout
@@ -55,15 +52,15 @@
             android:background="@drawable/call_log_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/call_log_outer_margin"
-            android:paddingRight="@dimen/call_log_outer_margin"
+            android:paddingStart="@dimen/call_log_outer_margin"
+            android:paddingEnd="@dimen/call_log_outer_margin"
             android:paddingTop="@dimen/call_log_outer_margin"
+            android:paddingBottom="@dimen/call_log_outer_margin"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:focusable="true"
             android:nextFocusRight="@+id/call_back_action"
-            android:nextFocusLeft="@+id/quick_contact_photo"
-            >
+            android:nextFocusLeft="@+id/quick_contact_photo" >
             <QuickContactBadge
                 android:id="@+id/quick_contact_photo"
                 android:layout_width="@dimen/call_log_list_contact_photo_size"

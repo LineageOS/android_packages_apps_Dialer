@@ -71,7 +71,6 @@
             android:background="@color/background_dialer_list_items"
             android:divider="@null"
             android:nestedScrollingEnabled="true"
-            android:clipChildren="false"
         />
         <TextView android:id="@android:id/empty"
             android:layout_width="match_parent"
