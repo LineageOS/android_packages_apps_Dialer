@@ -28,7 +28,7 @@
         android:id="@+id/call_log_day_group_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/call_log_outer_margin"
+        android:layout_marginStart="@dimen/call_log_start_margin"
         android:layout_marginEnd="@dimen/call_log_outer_margin"
         android:textColor="?attr/call_log_secondary_text_color"
         android:textSize="@dimen/call_log_secondary_text_size"
@@ -52,7 +52,7 @@
             android:background="@drawable/call_log_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/call_log_outer_margin"
+            android:paddingStart="@dimen/call_log_start_margin"
             android:paddingEnd="@dimen/call_log_outer_margin"
             android:paddingTop="@dimen/call_log_outer_margin"
             android:paddingBottom="@dimen/call_log_outer_margin"
@@ -75,7 +75,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
-                android:layout_marginStart="@dimen/call_log_inner_margin"
+                android:layout_marginStart="@dimen/call_log_start_margin"
                 >
                 <TextView
                     android:id="@+id/name"
