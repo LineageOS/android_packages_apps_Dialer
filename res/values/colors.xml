@@ -47,6 +47,9 @@
     <!-- Background color of dialer list items (contacts, call log entries) -->
     <color name="background_dialer_list_items">#fbfbfb</color>
 
+    <color name="search_shortcut_background_color">#b6b6b6</color>
+    <color name="search_shortcut_icon_color">#f8f8f8</color>
+
     <!-- Dark variant of the action bar color. -->
     <color name="actionbar_background_color_dark">#008aa1</color>
 
