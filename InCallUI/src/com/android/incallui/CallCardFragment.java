@@ -53,8 +53,8 @@ import java.util.List;
 public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPresenter.CallCardUi>
         implements CallCardPresenter.CallCardUi {
 
-    private static final int REVEAL_ANIMATION_DURATION = 800;
-    private static final int SHRINK_ANIMATION_DURATION = 1000;
+    private static final int REVEAL_ANIMATION_DURATION = 500;
+    private static final int SHRINK_ANIMATION_DURATION = 700;
 
     // Primary caller info
     private TextView mPhoneNumber;
