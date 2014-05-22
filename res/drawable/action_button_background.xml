@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-                android:tint="?android:attr/colorButtonPressed"
+                android:tint="?android:attr/colorControlHighlight"
                 android:pinned="true">
     <!-- Transparent background constrains the touch feedback ripple to the button, but also allows
          touch feedback ripples in the parent to show under the button. -->
