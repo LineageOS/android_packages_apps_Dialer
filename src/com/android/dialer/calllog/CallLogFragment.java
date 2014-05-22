@@ -46,6 +46,7 @@ import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
 import com.android.dialer.list.ListsFragment.HostInterface;
 import com.android.dialer.util.EmptyLoader;
@@ -552,6 +553,8 @@ public class CallLogFragment extends ListFragment
         final ListView listView = getListView();
         listView.removeFooterView(mFooterView);
         listView.addFooterView(mFooterView);
+
+        ViewUtil.addBottomPaddingToListViewForFab(listView, getResources());
     }
 
     @Override
