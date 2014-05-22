@@ -865,8 +865,8 @@ public class CallLogAdapter extends GroupingListAdapter
             views.actionsView.setAlpha(1.0f);
             views.callLogEntryView.setBackgroundColor(
                     callLogItem.getResources().getColor(R.color.background_dialer_light));
-            views.callLogEntryView.setElevation(
-                    callLogItem.getResources().getDimension(R.dimen.call_log_expanded_elevation));
+            views.callLogEntryView.setTranslationZ(callLogItem.getResources().getDimension(
+                    R.dimen.call_log_expanded_translation_z));
 
             // Attempt to give accessibility focus to one of the action buttons.
             // This ensures that a user realizes the expansion occurred.

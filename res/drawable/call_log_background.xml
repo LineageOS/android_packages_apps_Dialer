@@ -15,5 +15,5 @@
      limitations under the License.
 -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-                android:tint="?android:attr/colorControlHighlight"
-                android:pinned="false" />
+    android:tint="?android:attr/colorControlHighlight"
+    android:pinned="false" />
