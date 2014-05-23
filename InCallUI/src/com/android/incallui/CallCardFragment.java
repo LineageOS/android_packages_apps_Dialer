@@ -305,7 +305,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
 
         mHandoffButton.setEnabled(isHandoffCapable && !isHandoffPending);
-        mHandoffButton.setVisibility(mHandoffButton.isEnabled() ? View.VISIBLE : View.GONE);
+        mHandoffButton.setVisibility(isWiFi || mHandoffButton.isEnabled() ?
+                View.VISIBLE : View.GONE);
         mHandoffButton.setImageResource(isWiFi ?
                 R.drawable.ic_in_call_wifi : R.drawable.ic_in_call_pstn);
     }
