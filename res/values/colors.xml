@@ -67,6 +67,8 @@
     <!-- Color of the contact name in favorite tiles -->
     <color name="contact_tile_name_color">#ffffff</color>
 
+    <color name="contact_list_name_text_color">#4d4d4d</color>
+
     <!-- Undo dialogue color -->
     <color name="undo_dialogue_text_color">#4d4d4d</color>
 
