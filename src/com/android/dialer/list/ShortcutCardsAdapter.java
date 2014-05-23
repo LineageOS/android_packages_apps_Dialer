@@ -55,6 +55,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
     private final ListsFragment mFragment;
 
     private final int mCallLogPadding;
+    private final int mCardMaxHorizontalClip;
 
     private final Context mContext;
 
@@ -101,6 +102,8 @@ public class ShortcutCardsAdapter extends BaseAdapter {
         final Resources resources = context.getResources();
         mContext = context;
         mFragment = fragment;
+        mCardMaxHorizontalClip = resources.getDimensionPixelSize(
+                R.dimen.recent_call_log_item_horizontal_clip_limit);
         mCallLogPadding = resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding);
         mCallLogAdapter = callLogAdapter;
         mObserver = new CustomDataSetObserver();
@@ -301,8 +304,8 @@ public class ShortcutCardsAdapter extends BaseAdapter {
             if (ratioHidden > 0.5f) {
                 mClipRect.set(0, 0 , 0, 0);
             } else {
-                int newLeft = (int) (ratioHidden * width);
-                int newRight = (width - newLeft);
+                int newLeft = (int) (ratioHidden * mCardMaxHorizontalClip);
+                int newRight = width - newLeft;
                 int newTop = (int) (ratioHidden * height);
                 int newBottom = (height - newTop);
                 mClipRect.set(newLeft, newTop, newRight, newBottom);
@@ -313,7 +316,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
             final ViewGroup viewGroup = (ViewGroup) viewToClip;
             final int count = viewGroup.getChildCount();
             for (int i = 0; i < count; i++) {
-                viewGroup.getChildAt(i).setAlpha(Math.max(0, 1 - 4 * ratioHidden));
+                viewGroup.getChildAt(i).setAlpha(Math.max(0, 1 - 3 * ratioHidden));
             }
         }
     }
