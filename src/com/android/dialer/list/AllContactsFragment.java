@@ -23,13 +23,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.QuickContactBadge;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactEntryListFragment;
 import com.android.contacts.common.list.ContactListFilter;
-import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.DefaultContactListAdapter;
+import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
 
 /**
@@ -43,6 +44,12 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
         setSectionHeaderDisplayEnabled(true);
         setDarkTheme(false);
         setVisibleScrollbarEnabled(true);
+    }
+
+    @Override
+    public void onViewCreated(View view, android.os.Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ViewUtil.addBottomPaddingToListViewForFab(getListView(), getResources());
     }
 
     @Override

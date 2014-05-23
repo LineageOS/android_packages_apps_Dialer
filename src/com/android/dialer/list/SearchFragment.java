@@ -17,6 +17,7 @@ package com.android.dialer.list;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AbsListView;
@@ -27,6 +28,7 @@ import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
+import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.list.OnListFragmentScrolledListener;
@@ -93,6 +95,12 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         if (!getActivity().getActionBar().isShowing()) {
             parentView.setTranslationY(-mActionBarHeight);
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ViewUtil.addBottomPaddingToListViewForFab(getListView(), getResources());
     }
 
     @Override
