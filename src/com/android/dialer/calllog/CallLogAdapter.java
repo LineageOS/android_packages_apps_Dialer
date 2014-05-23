@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.CallLog.Calls;
@@ -35,7 +34,6 @@ import android.view.ViewStub;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.ContactPhotoManager;
@@ -45,8 +43,6 @@ import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
-import com.android.dialer.util.AsyncTaskExecutor;
-import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.ExpirableCache;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -126,10 +122,10 @@ public class CallLogAdapter extends GroupingListAdapter
     private static final int CONTACT_INFO_CACHE_SIZE = 100;
 
     /** Localized string representing the word "Today". */
-    private static final CharSequence TODAY_LABEL = DateUtils.getTodayString();
+    private final CharSequence mTodayLabel = DateUtils.getTodayString();
 
     /** Localized string representing the word "Yesterday". */
-    private static final CharSequence YESTERDAY_LABEL = DateUtils.getYesterdayString();
+    private final CharSequence mYesterdayLabel = DateUtils.getYesterdayString();
 
     /** Constant used to indicate no row is expanded. */
     private static final long NONE_EXPANDED = -1;
@@ -138,9 +134,6 @@ public class CallLogAdapter extends GroupingListAdapter
     private final ContactInfoHelper mContactInfoHelper;
     private final CallFetcher mCallFetcher;
     private ViewTreeObserver mViewTreeObserver = null;
-
-    /** Aynchronous task executor, lazy instantiated as needed. */
-    private AsyncTaskExecutor mAsyncTaskExecutor;
 
     /**
      * A cache of the contact details for the phone numbers in the call log.
@@ -1327,9 +1320,9 @@ public class CallLogAdapter extends GroupingListAdapter
      */
     private CharSequence getGroupDescription(int group) {
        if (group == CallLogGroupBuilder.DAY_GROUP_TODAY) {
-           return TODAY_LABEL;
+           return mTodayLabel;
        } else if (group == CallLogGroupBuilder.DAY_GROUP_YESTERDAY) {
-           return YESTERDAY_LABEL;
+           return mYesterdayLabel;
        } else if (group == CallLogGroupBuilder.DAY_GROUP_LAST_WEEK) {
            return mContext.getResources().getString(R.string.call_log_header_last_week);
        } else {
