@@ -75,12 +75,13 @@ public class CallLogAdapter extends GroupingListAdapter
         public void onItemExpanded(CallLogListItemView view);
 
         /**
-         * Determines whether a call log entry with a given ID is currently visible in the ListView.
+         * Retrieves the call log view for the specified call Id.  If the view is not currently
+         * visible, returns null.
          *
-         * @param callId The call ID to check.
-         * @return True if the call log entry with the given ID is visible.
+         * @param callId The call Id.
+         * @return The call log view.
          */
-        public boolean isItemVisible(long callId);
+        public CallLogListItemView getViewForCallId(long callId);
     }
 
     /** Interface used to initiate a refresh of the content. */
@@ -290,9 +291,19 @@ public class CallLogAdapter extends GroupingListAdapter
             // Animate the expansion or collapse.
             if (mCallItemExpandedListener != null) {
                 mCallItemExpandedListener.onItemExpanded(callLogItem);
-            }
 
-            notifyDataSetChanged();
+                // Animate the collapse of the previous item if it is still visible on screen.
+                if (mPreviouslyExpanded != NONE_EXPANDED) {
+                    CallLogListItemView previousItem = mCallItemExpandedListener.getViewForCallId(
+                            mPreviouslyExpanded);
+
+                    if (previousItem != null) {
+                        expandOrCollapseActions(previousItem, false);
+                        mCallItemExpandedListener.onItemExpanded(previousItem);
+                    }
+                    mPreviouslyExpanded = NONE_EXPANDED;
+                }
+            }
         }
     };
 
@@ -832,17 +843,7 @@ public class CallLogAdapter extends GroupingListAdapter
         } else {
             // Expanding a row (collapsing current expanded one).
 
-            // Where an item which was previously expanded is still on screen, track it as being
-            // previously expanded so that we will animate the collapse on re-bind.
-            if (mCurrentlyExpanded != NONE_EXPANDED &&
-                    mCallItemExpandedListener != null &&
-                    mCallItemExpandedListener.isItemVisible(mCurrentlyExpanded)) {
-
-                mPreviouslyExpanded = mCurrentlyExpanded;
-            } else {
-                // Item is no longer on screen, so we will not animate its collapse on rebind.
-                mPreviouslyExpanded = NONE_EXPANDED;
-            }
+            mPreviouslyExpanded = mCurrentlyExpanded;
             mCurrentlyExpanded = rowId;
             return true;
         }
@@ -865,7 +866,7 @@ public class CallLogAdapter extends GroupingListAdapter
             views.actionsView.setAlpha(1.0f);
             views.callLogEntryView.setBackgroundColor(
                     callLogItem.getResources().getColor(R.color.background_dialer_light));
-            views.callLogEntryView.setTranslationZ(callLogItem.getResources().getDimension(
+            callLogItem.setTranslationZ(callLogItem.getResources().getDimension(
                     R.dimen.call_log_expanded_translation_z));
 
             // Attempt to give accessibility focus to one of the action buttons.
@@ -885,15 +886,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
             views.callLogEntryView.setBackgroundColor(
                     callLogItem.getResources().getColor(R.color.background_dialer_list_items));
-            views.callLogEntryView.setElevation(0);
-
-            // Where the current row was previously expanded, trigger a collapse animation.
-            if (views.rowId == mPreviouslyExpanded) {
-                if (mCallItemExpandedListener != null && views.actionsView != null) {
-                    mCallItemExpandedListener.onItemExpanded(callLogItem);
-                }
-                mPreviouslyExpanded = NONE_EXPANDED;
-            }
+            callLogItem.setTranslationZ(0);
         }
     }
 
