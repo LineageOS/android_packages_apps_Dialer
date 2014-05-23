@@ -31,18 +31,12 @@
     <dimen name="call_log_icon_margin">4dip</dimen>
     <dimen name="call_log_inner_margin">8dip</dimen>
     <dimen name="call_log_outer_margin">8dp</dimen>
+    <dimen name="call_log_start_margin">16dp</dimen>
     <dimen name="call_log_indent_margin">24dip</dimen>
     <dimen name="call_log_list_item_height">56dip</dimen>
     <dimen name="call_log_list_contact_photo_size">40dip</dimen>
     <dimen name="call_detail_contact_name_margin">24dip</dimen>
     <dimen name="call_detail_button_spacing">2dip</dimen>
-    <!-- Defines the vertical margin for the vertical separator between
-         the main area of a call log entry and the secondary action button. -->
-    <dimen name="call_log_list_item_vertical_divider_margin">17dp</dimen>
-
-    <!-- Defines the width of the vertical separator between
-         the main area of a call log entry and the secondary action button. -->
-    <dimen name="call_log_list_item_vertical_divider_width">1dp</dimen>
 
     <!-- Match call_button_height to Phone's dimens/in_call_end_button_height -->
     <dimen name="call_button_height">74dp</dimen>
@@ -123,7 +117,7 @@
          to the right of the contact badge.  Adjust when any of the following change:
          call_log_action_horizontal_padding
          call_log_list_contact_photo_size  -->
-    <dimen name="call_log_actions_left_padding">48dp</dimen>
+    <dimen name="call_log_actions_left_padding">64dp</dimen>
     <!-- Text size for primary call log text -->
     <dimen name="call_log_primary_text_size">16sp</dimen>
     <!-- Text size for secondary call log text -->
