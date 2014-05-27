@@ -671,13 +671,14 @@ public class CallLogFragment extends ListFragment
     }
 
     /**
-     * Determines whether a call log entry with a given ID is currently visible in the list view.
+     * Retrieves the call log view for the specified call Id.  If the view is not currently
+     * visible, returns null.
      *
-     * @param callId The call ID to check.
-     * @return True if the call log entry with the given ID is visible.
+     * @param callId The call Id.
+     * @return The call log view.
      */
     @Override
-    public boolean isItemVisible(long callId) {
+    public CallLogListItemView getViewForCallId(long callId) {
         ListView listView = getListView();
 
         int firstPosition = listView.getFirstVisiblePosition();
@@ -689,10 +690,11 @@ public class CallLogFragment extends ListFragment
             if (view != null) {
                 final CallLogListItemViews viewHolder = (CallLogListItemViews) view.getTag();
                 if (viewHolder != null && viewHolder.rowId == callId) {
-                    return true;
+                    return (CallLogListItemView)view;
                 }
             }
         }
-        return false;
+
+        return null;
     }
 }
