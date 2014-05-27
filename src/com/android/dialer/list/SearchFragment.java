@@ -45,6 +45,12 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     private String mAddToContactNumber;
     private int mActionBarHeight;
 
+    public interface HostInterface {
+        public boolean isActionBarShowing();
+        public int getActionBarHideOffset();
+        public int getActionBarHeight();
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -69,7 +75,9 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             getAdapter().setHasHeader(0, false);
         }
 
-        mActionBarHeight = ((DialtactsActivity) getActivity()).getActionBarHeight();
+        HostInterface activity = (HostInterface) getActivity();
+
+        mActionBarHeight = activity.getActionBarHeight();
 
         final View parentView = getView();
         parentView.setPaddingRelative(
@@ -92,7 +100,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             }
         });
 
-        if (!getActivity().getActionBar().isShowing()) {
+
+        if (!activity.isActionBarShowing()) {
             parentView.setTranslationY(-mActionBarHeight);
         }
     }
