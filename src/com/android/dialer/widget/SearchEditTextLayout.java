@@ -16,6 +16,8 @@
 
 package com.android.dialer.widget;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
@@ -27,7 +29,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
-import com.android.contacts.common.animation.AnimationUtils;
+import com.android.contacts.common.animation.AnimUtils;
 import com.android.dialer.R;
 
 public class SearchEditTextLayout extends FrameLayout {
@@ -39,11 +41,15 @@ public class SearchEditTextLayout extends FrameLayout {
     private int mLeftMargin;
     private int mRightMargin;
 
-    private int mBackgroundColor;
+    /* Subclass-visible for testing */
+    protected boolean mIsExpanded = false;
+    protected boolean mIsFadedOut = false;
 
     private View mCollapsed;
     private View mExpanded;
     private EditText mSearchView;
+
+    private ValueAnimator mAnimator;
 
     private OnBackButtonClickedListener mOnBackButtonClickedListener;
 
@@ -56,7 +62,6 @@ public class SearchEditTextLayout extends FrameLayout {
 
     public SearchEditTextLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mBackgroundColor = getResources().getColor(R.color.searchbox_background_color);
     }
 
     public void setPreImeKeyListener(OnKeyListener listener) {
@@ -117,32 +122,85 @@ public class SearchEditTextLayout extends FrameLayout {
         return super.dispatchKeyEventPreIme(event);
     }
 
-    public void animateExpandOrCollapse(boolean expand) {
-        final ValueAnimator animator;
-        if (expand) {
-            AnimationUtils.crossFadeViews(mExpanded, mCollapsed, ANIMATION_DURATION);
-            animator = ValueAnimator.ofFloat(1f, 0f);
-            setBackgroundResource(R.drawable.search_shadow);
-            mSearchView.requestFocus();
+    public void fadeOut() {
+        AnimUtils.fadeOut(this, ANIMATION_DURATION);
+        mIsFadedOut = true;
+    }
+
+    public void fadeIn() {
+        AnimUtils.fadeIn(this, ANIMATION_DURATION);
+        mIsFadedOut = false;
+    }
+
+    public void setVisible(boolean visible) {
+        if (visible) {
+            setAlpha(1);
+            setVisibility(View.VISIBLE);
+            mIsFadedOut = false;
         } else {
-            AnimationUtils.crossFadeViews(mCollapsed, mExpanded, ANIMATION_DURATION);
-            animator = ValueAnimator.ofFloat(0f, 1f);
-            setBackgroundResource(R.drawable.rounded_corner);
+            setAlpha(0);
+            setVisibility(View.GONE);
+            mIsFadedOut = true;
         }
-        animator.addUpdateListener(new AnimatorUpdateListener() {
+    }
+    public void expand(boolean animate, boolean requestFocus) {
+        if (animate) {
+            AnimUtils.crossFadeViews(mExpanded, mCollapsed, ANIMATION_DURATION);
+            mAnimator = ValueAnimator.ofFloat(1f, 0f);
+            prepareAnimator(true);
+        } else {
+            mExpanded.setVisibility(View.VISIBLE);
+            mExpanded.setAlpha(1);
+            setMargins(0f);
+            mCollapsed.setVisibility(View.GONE);
+        }
+
+        setBackgroundResource(R.drawable.search_shadow);
+        if (requestFocus) {
+            mSearchView.requestFocus();
+        }
+        mIsExpanded = true;
+    }
+
+    public void collapse(boolean animate) {
+        if (animate) {
+            AnimUtils.crossFadeViews(mCollapsed, mExpanded, ANIMATION_DURATION);
+            mAnimator = ValueAnimator.ofFloat(0f, 1f);
+            prepareAnimator(false);
+        } else {
+            mCollapsed.setVisibility(View.VISIBLE);
+            mCollapsed.setAlpha(1);
+            setMargins(1f);
+            mExpanded.setVisibility(View.GONE);
+        }
+
+        mIsExpanded = false;
+        setBackgroundResource(R.drawable.rounded_corner);
+    }
+
+    private void prepareAnimator(final boolean expand) {
+        if (mAnimator != null) {
+            mAnimator.cancel();
+        }
+
+        mAnimator.addUpdateListener(new AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 final Float fraction = (Float) animation.getAnimatedValue();
-                MarginLayoutParams params = (MarginLayoutParams) getLayoutParams();
-                params.topMargin = (int) (mTopMargin * fraction);
-                params.bottomMargin = (int) (mBottomMargin * fraction);
-                params.leftMargin = (int) (mLeftMargin * fraction);
-                params.rightMargin = (int) (mRightMargin * fraction);
-                requestLayout();
+                setMargins(fraction);
             }
         });
-        animator.setDuration(ANIMATION_DURATION);
-        animator.start();
+
+        mAnimator.setDuration(ANIMATION_DURATION);
+        mAnimator.start();
+    }
+
+    public boolean isExpanded() {
+        return mIsExpanded;
+    }
+
+    public boolean isFadedOut() {
+        return mIsFadedOut;
     }
 
     private void showInputMethod(View view) {
@@ -151,5 +209,19 @@ public class SearchEditTextLayout extends FrameLayout {
         if (imm != null) {
             imm.showSoftInput(view, 0);
         }
+    }
+
+    /**
+     * Assigns margins to the search box as a fraction of its maximum margin size
+     *
+     * @param fraction How large the margins should be as a fraction of their full size
+     */
+    private void setMargins(float fraction) {
+        MarginLayoutParams params = (MarginLayoutParams) getLayoutParams();
+        params.topMargin = (int) (mTopMargin * fraction);
+        params.bottomMargin = (int) (mBottomMargin * fraction);
+        params.leftMargin = (int) (mLeftMargin * fraction);
+        params.rightMargin = (int) (mRightMargin * fraction);
+        requestLayout();
     }
 }
