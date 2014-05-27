@@ -31,9 +31,7 @@ import android.text.TextUtils;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewStub;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.accessibility.AccessibilityEvent;
@@ -43,6 +41,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.contacts.common.animation.AnimUtils;
 import com.android.contacts.common.util.ViewUtil;
 
 import java.util.List;
@@ -325,12 +324,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void setPrimaryCallElapsedTime(boolean show, String callTimeElapsed) {
         if (show) {
             if (mElapsedTime.getVisibility() != View.VISIBLE) {
-                AnimationUtils.Fade.show(mElapsedTime);
+                AnimUtils.fadeIn(mElapsedTime, AnimUtils.DEFAULT_DURATION);
             }
             mElapsedTime.setText(callTimeElapsed);
         } else {
             // hide() animation has no effect if it is already hidden.
-            AnimationUtils.Fade.hide(mElapsedTime, View.INVISIBLE);
+            AnimUtils.fadeOut(mElapsedTime, AnimUtils.DEFAULT_DURATION);
         }
     }
 
@@ -342,7 +341,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         final Drawable current = view.getDrawable();
         if (current == null) {
             view.setImageDrawable(photo);
-            AnimationUtils.Fade.show(view);
+            AnimUtils.fadeIn(mElapsedTime, AnimUtils.DEFAULT_DURATION);
         } else {
             AnimationUtils.startCrossFade(view, current, photo);
             view.setVisibility(View.VISIBLE);
