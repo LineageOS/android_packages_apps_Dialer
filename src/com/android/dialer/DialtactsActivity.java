@@ -346,10 +346,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final OptionsPopupMenu optionsMenu = buildOptionsMenu(optionsMenuButton);
         optionsMenuButton.setOnTouchListener(optionsMenu.getDragToOpenListener());
 
-        final TypedArray styledAttributes = getTheme().obtainStyledAttributes(
-                new int[] { android.R.attr.actionBarSize });
-        mActionBarHeight = (int) styledAttributes.getDimension(0, 0);
-        styledAttributes.recycle();
+        mActionBarHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_height);
 
         // Add the favorites fragment, and the dialpad fragment, but only if savedInstanceState
         // is null. Otherwise the fragment manager takes care of recreating these fragments.

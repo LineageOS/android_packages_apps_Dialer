@@ -88,12 +88,16 @@
     <!-- Height of the all contacts Button in the favorites menu. -->
     <dimen name="favorites_menu_all_contacts_height">24dp</dimen>
 
+    <!-- Height of the actionBar - this is 8dps bigger than the platform standard to give more
+    room to the search box-->
+    <dimen name="action_bar_height">64dp</dimen>
+
     <!-- Margin to the left and right of the search box. -->
     <dimen name="search_margin_horizontal">7dp</dimen>
     <!-- Margin above the search box. -->
-    <dimen name="search_top_margin">4dp</dimen>
+    <dimen name="search_top_margin">8dp</dimen>
     <!-- Margin below the search box. -->
-    <dimen name="search_bottom_margin">4dp</dimen>
+    <dimen name="search_bottom_margin">8dp</dimen>
     <!-- Search box text size -->
     <dimen name="search_text_size">13.24sp</dimen>
     <!-- Search box interior padding - left -->
@@ -108,7 +112,7 @@
     <!-- Size of the icon (voice search, close search) in the search box. -->
     <dimen name="search_box_icon_size">28dp</dimen>
     <!-- Elevation of the search box -->
-    <dimen name="search_box_elevation">10dp</dimen>
+    <dimen name="search_box_elevation">5dp</dimen>
 
     <!-- Size of text in tabs. -->
     <dimen name="tab_height">43dp</dimen>
