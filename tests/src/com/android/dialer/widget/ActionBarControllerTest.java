@@ -114,14 +114,14 @@ public class ActionBarControllerTest extends InstrumentationTestCase {
     public void testOnSearchUiExited() {
         // ActionBar shown previously before entering searchUI
         mSearchBox.expand(true, false);
-        mSearchBox.makeInvisible();
+        mSearchBox.setVisible(false);
         mActivityUi.shouldShowActionBar = true;
         mActionBarController.onSearchUiExited();
         assertActionBarState(false, false, false);
 
         // ActionBar slid up previously before entering searchUI
         mSearchBox.collapse(false);
-        mSearchBox.makeInvisible();
+        mSearchBox.setVisible(false);
         mActivityUi.shouldShowActionBar = false;
         mActionBarController.onSearchUiExited();
         assertActionBarState(false, false, true);
