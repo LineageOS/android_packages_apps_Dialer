@@ -21,6 +21,7 @@ import android.provider.ContactsContract.QuickContact;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.android.contacts.common.R;
 import com.android.contacts.common.list.ContactEntry;
@@ -47,7 +48,10 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-
+        final TextView nameView = (TextView) findViewById(R.id.contact_tile_name);
+        nameView.setElegantTextHeight(false);
+        final TextView phoneTypeView = (TextView) findViewById(R.id.contact_tile_phone_type);
+        phoneTypeView.setElegantTextHeight(false);
         mSecondaryButton = (ImageButton) findViewById(R.id.contact_tile_secondary_button);
     }
 
