@@ -160,21 +160,9 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Touchez l\'image pour afficher tous les numéros, ou maintenez votre doigt sur l\'une d\'elles pour les réorganiser"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Fermer"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Supprimer"</string>
-    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Pas de signal? Pas de problème."</string>
-    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Activer la fonctionnalité d\'appels par Wi-Fi de Google"</string>
-    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Lorsque l\'appareil est connecté à un réseau Wi-Fi dont le signal est puissant :"</string>
-    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Toujours utiliser le Wi-Fi pour faire des appels"</string>
-    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Toujours demander"</string>
-    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Ne jamais utiliser le Wi-Fi pour faire des appels"</string>
-    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Suivante"</string>
-    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Précédent"</string>
-    <string name="wifi_setup_completed" msgid="2823266959975201512">"Et voilà, la fonctionnalité d\'appel par Wi-Fi est configurée. Vous pouvez modifier vos préférences ou la désactiver à tout moment dans les paramètres."</string>
-    <string name="wifi_setup_ok" msgid="7801061518697115555">"OK, j\'ai compris"</string>
-    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Paramètres d\'appel"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Composition rapide"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TOUS LES CONTACTS"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"RAPPELER"</string>
-    <string name="call_log_action_delete" msgid="7371990297839987600">"SUPPRIMER"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ÉCOUTER"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"DÉTAILS"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Appel manqué de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> à <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
@@ -182,11 +170,8 @@
     <string name="description_outgoing_call" msgid="3964211633673659733">"Appel à <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> à <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Rappeler <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Écouter le message vocal de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"Supprimer l\'entrée de journal d\'appel pour <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Détails de l\'appel pour <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Entrée du journal d\'appels supprimée."</string>
-    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
-    <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
-    <skip />
+    <string name="call_log_header_last_week" msgid="5197040511028258038">"La semaine dernière"</string>
+    <string name="call_log_header_other" msgid="8209775016508312763">"Autre"</string>
 </resources>

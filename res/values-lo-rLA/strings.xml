@@ -160,21 +160,9 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"ແຕະຮູບ​ພາບ​ເພື່ອເບິ່ງຈໍານວນຮູບພາບທັງໝົດ ຫຼືແຕະຄ້າງໄວ້ເພື່ອຈັດຮຽງໃໝ່"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"ເຂົ້າໃຈແລ້ວ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"​ລຶບ​ອອກ"</string>
-    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"ບໍ່​ມີ​ສັນ​ຍາ? ບໍ່​ມີ​ບັນ​ຫາ."</string>
-    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"ເປີດ​ນຳ​ໃຊ້ Google Wi-Fi Calling"</string>
-    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"ເມື່ອ​ເຊື່ອມ​ຕໍ່​ກັບ​ເຄືອ​ຂ່າຍ Wi-Fi ທີ່​ສັນ​ຍານ​ແຮງ:"</string>
-    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"ໃຊ້ Wi-Fi ​ທຸກ​ຄັ້ງ​ເພື່ອ​ໂທ"</string>
-    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"ຖາມ​ທຸກ​ຄັ້ງ"</string>
-    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"ບໍ່​ໃຊ້ Wi-Fi ເພື່ອ​ໂທ​ອອກ"</string>
-    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"ຕໍ່ໄປ"</string>
-    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"ກັບຄືນ"</string>
-    <string name="wifi_setup_completed" msgid="2823266959975201512">"ບູມ. ການ​ໂທ​ດ້ວຍ Wi-Fi ​ຖືກ​ຕັ້ງ​ຄ່າ​ຮຽບ​ຮ້ອຍ​ແລ້ວ. ທ່ານ​ສາ​ມາດ​ປັ​ບ​ປ່ຽນຄ່າ​ ຫຼື​ປິດ​ມັນ​ໄດ້​ທຸກ​ເວ​ລາ​ໃນ​ເມ​ນູ​ການ​ຕັ້ງ​ຄ່າ."</string>
-    <string name="wifi_setup_ok" msgid="7801061518697115555">"ໂອ​ເຄ, ເຂົ້າ​ໃຈ​ແລ້ວ"</string>
-    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"​ການ​ຕັ້ງ​ຄ່າ​ການ​ໂທ"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"​ໂທ​ດ່ວນ"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່​ທັງ​ໝົດ"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ໂທ​ກັບ"</string>
-    <string name="call_log_action_delete" msgid="7371990297839987600">"ລຶບ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ຟັງ"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"ລາຍ​ລະ​ອຽດ"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"ສາຍ​ທີ່ບໍ່​ໄດ້​ຮັບ​ຈາກ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
@@ -182,7 +170,6 @@
     <string name="description_outgoing_call" msgid="3964211633673659733">"ໂທ​ຫາ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"ໂທ​ກັບ​ຫາ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"​ຟັງ​ຂໍ້​ຄວາມ​ສຽງ​ຈາກ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"ລຶບ​ບັນ​ທຶກ​ການ​ໂທ​​ຫາ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"ລາຍລະອຽດ​ການ​ໂທ​ສຳລັບ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"​ລຶບ​ບັນ​ທຶກ​ການ​ໂທ​ແລ້ວ."</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"ອາທິດແລ້ວ"</string>

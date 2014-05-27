@@ -160,21 +160,9 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Dotaknite se slike, da prikažete vse številke, ali jo pritisnite in pridržite, da spremenite vrstni red"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Opusti"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Odstrani"</string>
-    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Ni signala? Ne skrbite."</string>
-    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Omogoči klicanje prek storitve Google Wi-Fi"</string>
-    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Ko je vzpostavljena povezava z močnim signalom Wi-Fi:"</string>
-    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Vedno uporabi povezavo Wi-Fi za klicanje"</string>
-    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Vedno vprašaj"</string>
-    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Nikoli ne uporabi povezave Wi-Fi za klicanje"</string>
-    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Naprej"</string>
-    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Nazaj"</string>
-    <string name="wifi_setup_completed" msgid="2823266959975201512">"Tako. Klicanje prek povezave Wi-Fi je nastavljeno. V nastavitvah lahko kadar koli spremenite nastavitve klicanja ali ga izklopite."</string>
-    <string name="wifi_setup_ok" msgid="7801061518697115555">"V redu, razumem"</string>
-    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Klicne nastavitve"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Hitro izbiranje"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"VSI STIKI"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"POVRATNI KLIC"</string>
-    <string name="call_log_action_delete" msgid="7371990297839987600">"IZBRIŠI"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"POSLUŠAJ"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"PODROBNOSTI"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Neodgovorjeni klic ob <xliff:g id="TIMEOFCALL">%3$s</xliff:g> od: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> – <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>."</string>
@@ -182,11 +170,8 @@
     <string name="description_outgoing_call" msgid="3964211633673659733">"Klic: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> – <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> ob <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Povratni klic: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Poslušajte sporočilo v odzivniku od: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"Izbriši vnos v dnevnik klicev za: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Podrobnosti klica za: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Vnos v dnevnik klicev je izbrisan."</string>
-    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
-    <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
-    <skip />
+    <string name="call_log_header_last_week" msgid="5197040511028258038">"Pretekli teden"</string>
+    <string name="call_log_header_other" msgid="8209775016508312763">"Drugo"</string>
 </resources>
