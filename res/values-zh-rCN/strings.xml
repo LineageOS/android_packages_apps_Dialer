@@ -140,7 +140,7 @@
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"输入姓名或手机号"</string>
     <string name="recentMissed_empty" msgid="5427113551557296665">"最近没有未接来电。"</string>
     <string name="recentVoicemails_empty" msgid="5163114119598014048">"最近没有语音邮件。"</string>
-    <string name="show_favorites_only" msgid="5520072531022614595">"仅显示常用联系人"</string>
+    <string name="show_favorites_only" msgid="5520072531022614595">"仅显示收藏的联系人"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"通话记录"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"未接电话"</string>
@@ -150,7 +150,7 @@
     <string name="tab_all_contacts" msgid="1410922767166533690">"联系人"</string>
     <string name="show_all_contacts_title" msgid="8395378484578221791">"所有联系人"</string>
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"所有联系人"</string>
-    <string name="favorite_hidden" msgid="5011234945140912047">"已从“常用联系人”中删除"</string>
+    <string name="favorite_hidden" msgid="5011234945140912047">"已从收藏中移除"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"撤消"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"拨打<xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"添加到通讯录"</string>
@@ -160,32 +160,17 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"点按图片可查看所有号码，按住图片可重新排序"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"关闭"</string>
     <string name="remove_contact" msgid="1080555335283662961">"移除"</string>
-    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"没有信号？没关系。"</string>
-    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"启用Google WLAN通话功能"</string>
-    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"连接到稳定的WLAN网络时："</string>
-    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"一律使用WLAN进行通话"</string>
-    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"一律询问"</string>
-    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"一律不使用WLAN进行通话"</string>
-    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"下一页"</string>
-    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"返回"</string>
-    <string name="wifi_setup_completed" msgid="2823266959975201512">"太好了！WLAN通话功能已全部设置完毕。您可以随时在“设置”中更改偏好设置或关闭这项功能。"</string>
-    <string name="wifi_setup_ok" msgid="7801061518697115555">"知道了"</string>
-    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"通话设置"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"快速拨号"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"所有联系人"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"回电"</string>
-    <string name="call_log_action_delete" msgid="7371990297839987600">"删除"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"听取"</string>
-    <!-- no translation found for call_log_action_details (6252596497021563115) -->
-    <skip />
+    <string name="call_log_action_details" msgid="6252596497021563115">"详情"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的未接电话。"</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的已接电话。"</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的通话。"</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"给<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>回电"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"听取来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的语音邮件"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"删除与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的通话记录条目"</string>
-    <!-- no translation found for description_details_action (2433827152749491785) -->
-    <skip />
+    <string name="description_details_action" msgid="2433827152749491785">"与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的通话详情"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"通话记录条目已删除。"</string>
     <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
     <skip />

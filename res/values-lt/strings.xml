@@ -160,21 +160,9 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Palieskite vaizdą, kad pamatytumėte visus skaičius, arba paspauskite ir palaikykite, kad pakeistumėte tvarką"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Atsisakyti"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Pašalinti"</string>
-    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Nėra signalo? Jokių problemų."</string>
-    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Įgalinti „Google Wi-Fi“ skambinimą"</string>
-    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Kai yra stiprus „Wi-Fi“ signalas:"</string>
-    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Skambinant visada naudoti „Wi-Fi“"</string>
-    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Visada klausti"</string>
-    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Skambinant niekada nenaudoti „Wi-Fi“"</string>
-    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Kitas"</string>
-    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Atgal"</string>
-    <string name="wifi_setup_completed" msgid="2823266959975201512">"Viskas. „Wi-Fi“ skambinimo funkcija visiškai nustatyta. Nustatymuose bet kada galite keisti savo nuostatas ar išjungti šią funkciją."</string>
-    <string name="wifi_setup_ok" msgid="7801061518697115555">"Gerai, supratau"</string>
-    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Skambučių nustatymai"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Spartusis rinkimas"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"VISI KONTAKTAI"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ATSKAMBINTI"</string>
-    <string name="call_log_action_delete" msgid="7371990297839987600">"IŠTRINTI"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"KLAUSYTI"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"IŠSAMI INFORMACIJA"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Praleistas skambutis: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
@@ -182,11 +170,8 @@
     <string name="description_outgoing_call" msgid="3964211633673659733">"Atliktas skambutis: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Atskambinti <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Klausyti balso pašto nuo <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"Ištrinti <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> skambučių žurnalo įrašą"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Išsami skambučio informacija (<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>)"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Skambučių žurnalo įrašas ištrintas."</string>
-    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
-    <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
-    <skip />
+    <string name="call_log_header_last_week" msgid="5197040511028258038">"Paskutinė savaitė"</string>
+    <string name="call_log_header_other" msgid="8209775016508312763">"Kita"</string>
 </resources>

@@ -160,21 +160,9 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"برای مشاهده همه شماره‌ها روی تصویر ضربه بزنید یا برای مرتب‌سازی مجدد فشار دهید و نگه‌دارید"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"رد کردن"</string>
     <string name="remove_contact" msgid="1080555335283662961">"حذف"</string>
-    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"سیگنال وجود ندارد؟ مشکلی نیست."</string>
-    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"‏فعال کردن تماس Google Wi-Fi"</string>
-    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"‏هنگام اتصال به سیگنال Wi-Fi قوی:"</string>
-    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"‏برای تماس گرفتن همیشه از Wi-Fi استفاده شود"</string>
-    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"همیشه پرسیده شود"</string>
-    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"‏برای تماس گرفتن هرگز از Wi-Fi استفاده نشود"</string>
-    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"بعدی"</string>
-    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"برگشت"</string>
-    <string name="wifi_setup_completed" msgid="2823266959975201512">"‏بوم. تماس Wi-Fi تنظیم شد. می‌توانید تنظیمات برگزیده‌تان را تغییر دهید یا هر وقت خواستید در تنظیمات، آن را خاموش کنید."</string>
-    <string name="wifi_setup_ok" msgid="7801061518697115555">"بسیار خوب، متوجه شدم"</string>
-    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"تنظیمات تماس"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"شماره‌گیری سریع"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"همه مخاطبین"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"تماس"</string>
-    <string name="call_log_action_delete" msgid="7371990297839987600">"حذف"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"گوش دادن"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"جزئیات"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"تماس‌ بی‌پاسخ از <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>،‏ <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>،‏ <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
@@ -182,11 +170,8 @@
     <string name="description_outgoing_call" msgid="3964211633673659733">"تماس‌ به <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>،‏ <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>،‏ <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"تماس با <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"گوش دادن به پست صوتی از <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"حذف ورودی گزارش تماس مربوط به <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"جزئیات تماس برای <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"ورودی گزارش تماس حذف شد."</string>
-    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
-    <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
-    <skip />
+    <string name="call_log_header_last_week" msgid="5197040511028258038">"هفته گذشته"</string>
+    <string name="call_log_header_other" msgid="8209775016508312763">"موارد دیگر"</string>
 </resources>
