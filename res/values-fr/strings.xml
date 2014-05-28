@@ -172,8 +172,6 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Écouter le message vocal laissé par le numéro ou le contact \"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>\""</string>
     <string name="description_details_action" msgid="2433827152749491785">"Détails de l\'appel pour <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"L\'entrée du journal d\'appels a bien été supprimée."</string>
-    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
-    <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
-    <skip />
+    <string name="call_log_header_last_week" msgid="5197040511028258038">"La semaine dernière"</string>
+    <string name="call_log_header_other" msgid="8209775016508312763">"Autre"</string>
 </resources>
