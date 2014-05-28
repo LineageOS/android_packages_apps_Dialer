@@ -172,8 +172,6 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"听取来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的语音邮件"</string>
     <string name="description_details_action" msgid="2433827152749491785">"与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的通话详情"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"通话记录条目已删除。"</string>
-    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
-    <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
-    <skip />
+    <string name="call_log_header_last_week" msgid="5197040511028258038">"上周"</string>
+    <string name="call_log_header_other" msgid="8209775016508312763">"其他"</string>
 </resources>
