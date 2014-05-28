@@ -157,7 +157,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Рингтон и вибросигнал"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Управление конференц-связью"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Экстренная служба"</string>
-    <string name="in_call_wifi_connected" msgid="8179928320848155569">"Соединение через <xliff:g id="WIFI_SSID">%s</xliff:g>"</string>
+    <string name="in_call_wifi_connected" msgid="8179928320848155569">"Подключение через <xliff:g id="WIFI_SSID">%s</xliff:g>"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
