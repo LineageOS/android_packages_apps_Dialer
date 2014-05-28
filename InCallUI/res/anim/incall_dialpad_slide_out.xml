@@ -19,4 +19,4 @@
     android:valueTo="1.0"
     android:valueType="floatType"
     android:propertyName="yFraction"
-    android:duration="426" />
+    android:duration="257" />
