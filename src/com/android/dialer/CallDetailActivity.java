@@ -398,14 +398,15 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
      * If both are available, the data on the intent takes precedence.
      */
     private Uri[] getCallLogEntryUris() {
-        Uri uri = getIntent().getData();
+        final Uri uri = getIntent().getData();
         if (uri != null) {
             // If there is a data on the intent, it takes precedence over the extra.
             return new Uri[]{ uri };
         }
-        long[] ids = getIntent().getLongArrayExtra(EXTRA_CALL_LOG_IDS);
-        Uri[] uris = new Uri[ids.length];
-        for (int index = 0; index < ids.length; ++index) {
+        final long[] ids = getIntent().getLongArrayExtra(EXTRA_CALL_LOG_IDS);
+        final int numIds = ids == null ? 0 : ids.length;
+        final Uri[] uris = new Uri[numIds];
+        for (int index = 0; index < numIds; ++index) {
             uris[index] = ContentUris.withAppendedId(Calls.CONTENT_URI_WITH_VOICEMAIL, ids[index]);
         }
         return uris;
