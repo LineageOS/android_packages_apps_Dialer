@@ -52,8 +52,8 @@ import java.util.List;
 public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPresenter.CallCardUi>
         implements CallCardPresenter.CallCardUi {
 
-    private static final int REVEAL_ANIMATION_DURATION = 500;
-    private static final int SHRINK_ANIMATION_DURATION = 700;
+    private static final int REVEAL_ANIMATION_DURATION = 333;
+    private static final int SHRINK_ANIMATION_DURATION = 333;
 
     // Primary caller info
     private TextView mPhoneNumber;
@@ -77,8 +77,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private View mEndCallButton;
     private ImageButton mHandoffButton;
-
-    private final Interpolator mAnimationInterpolator = new PathInterpolator(0.4f, 0, 0.2f, 1);
 
     // Cached DisplayMetrics density.
     private float mDensity;
@@ -614,7 +612,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                         .setDuration(SHRINK_ANIMATION_DURATION);
             }
         });
-        shrinkAnimator.setInterpolator(mAnimationInterpolator);
+        shrinkAnimator.setInterpolator(AnimUtils.EASE_IN);
         return shrinkAnimator;
     }
 
@@ -634,7 +632,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private void assignTranslateAnimation(View view, int offset) {
         view.setTranslationY(mTranslationOffset * offset);
         view.animate().translationY(0).alpha(1).withLayer()
-                .setDuration(SHRINK_ANIMATION_DURATION).setInterpolator(mAnimationInterpolator);
+                .setDuration(SHRINK_ANIMATION_DURATION).setInterpolator(AnimUtils.EASE_IN);
     }
 
     private final class LayoutIgnoringListener implements View.OnLayoutChangeListener {
