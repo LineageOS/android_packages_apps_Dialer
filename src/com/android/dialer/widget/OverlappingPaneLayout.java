@@ -908,6 +908,9 @@ public class OverlappingPaneLayout extends ViewGroup {
 
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
+            if (releasedChild == null) {
+                return;
+            }
             final LayoutParams lp = (LayoutParams) releasedChild.getLayoutParams();
 
             int top = getPaddingTop() + lp.topMargin;
