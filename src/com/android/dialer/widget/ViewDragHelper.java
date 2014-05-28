@@ -1454,6 +1454,9 @@ public class ViewDragHelper {
      * @param target The child view that is dispatching the nested scroll.
      */
     public void startNestedScroll(View target) {
+        if (mVelocityTracker == null) {
+            mVelocityTracker = VelocityTracker.obtain();
+        }
         setDragState(STATE_DRAGGING);
         mCapturedView = target;
     }
