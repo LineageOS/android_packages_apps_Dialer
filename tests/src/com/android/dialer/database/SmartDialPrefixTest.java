@@ -21,6 +21,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.test.suitebuilder.annotation.Suppress;
 import android.test.AndroidTestCase;
+import android.text.TextUtils;
+import android.util.Log;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
@@ -37,7 +39,7 @@ import java.util.ArrayList;
 
 /**
  * To run this test, use the command:
- * adb shell am instrument -w -e class com.android.dialer.dialpad.SmartDialPrefixTest /
+ * adb shell am instrument -w -e class com.android.dialer.database.SmartDialPrefixTest /
  * com.android.dialer.tests/android.test.InstrumentationTestRunner
  */
 @SmallTest
@@ -144,6 +146,12 @@ public class SmartDialPrefixTest extends AndroidTestCase {
             int isPrimary) {
         assertNotNull(contactCursor);
         assertNotNull(nameCursor);
+
+        if (TextUtils.isEmpty(number)) {
+            // Add a dummy number, otherwise DialerDatabaseHelper simply ignores the entire
+            // row if the number is empty
+            number = "0";
+        }
 
         contactCursor.addRow(new Object[]{id, "", "", number, contactId, lookupKey, displayName,
                 photoId, lastTimeUsed, timesUsed, starred, isSuperPrimary, inVisibleGroup,
@@ -292,7 +300,8 @@ public class SmartDialPrefixTest extends AndroidTestCase {
         // 6543 doesn't match
         assertFalse(getLooseMatchesFromDb("6543").contains(martinjuniorharry));
 
-        assertEquals(7, mTestHelper.countPrefixTableRows(db));
+        // 7 actual rows, + 1 for the dummy number we added
+        assertEquals(8, mTestHelper.countPrefixTableRows(db));
     }
 
     public void testPutForInitialMatchesForLongTokenNames() {

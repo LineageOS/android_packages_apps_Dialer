@@ -27,7 +27,7 @@ import android.provider.CallLog.Calls;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.android.contacts.common.test.NeededForTesting;
+import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.R;
 import com.google.common.collect.Lists;
 
