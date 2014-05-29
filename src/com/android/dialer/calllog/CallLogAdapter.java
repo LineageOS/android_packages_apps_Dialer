@@ -578,7 +578,15 @@ public class CallLogAdapter extends GroupingListAdapter
     protected View newChildView(Context context, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
-        findAndCacheViews(view);
+
+        // Get the views to bind to and cache them.
+        CallLogListItemViews views = CallLogListItemViews.fromView(view);
+        view.setTag(views);
+
+        // Set text height to false on the TextViews so they don't have extra padding.
+        views.phoneCallDetailsViews.nameView.setElegantTextHeight(false);
+        views.phoneCallDetailsViews.callLocationAndDate.setElegantTextHeight(false);
+
         return view;
     }
 
@@ -599,9 +607,6 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     private void findAndCacheViews(View view) {
-        // Get the views to bind to.
-        CallLogListItemViews views = CallLogListItemViews.fromView(view);
-        view.setTag(views);
     }
 
     /**
