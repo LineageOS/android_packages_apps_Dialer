@@ -99,4 +99,7 @@
 
     <!-- Color for icons in the actionbar -->
     <color name="actionbar_icon_color">#ffffff</color>
+
+    <!-- 10% opacity, theme color. -->
+    <color name="dialer_dialpad_touch_tint">#1a1dc7db</color>
 </resources>
