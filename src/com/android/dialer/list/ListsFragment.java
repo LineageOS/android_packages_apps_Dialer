@@ -52,6 +52,9 @@ import java.util.ArrayList;
 public class ListsFragment extends Fragment implements CallLogQueryHandler.Listener,
         CallLogAdapter.CallFetcher, ViewPager.OnPageChangeListener {
 
+    private static final boolean DEBUG = DialtactsActivity.DEBUG;
+    private static final String TAG = "ListsFragment";
+
     public static final int TAB_INDEX_SPEED_DIAL = 0;
     public static final int TAB_INDEX_RECENTS = 1;
     public static final int TAB_INDEX_ALL_CONTACTS = 2;
@@ -154,11 +157,17 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
         @Override
         public void onPanelOpened(View panel) {
+            if (DEBUG) {
+                Log.d(TAG, "onPanelOpened");
+            }
             mIsPanelOpen = true;
         }
 
         @Override
         public void onPanelClosed(View panel) {
+            if (DEBUG) {
+                Log.d(TAG, "onPanelClosed");
+            }
             mIsPanelOpen = false;
         }
     };
@@ -232,7 +241,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         // Wipe the cache to refresh the call shortcut item. This is not that expensive because
         // it only contains one item.
         mCallLogAdapter.invalidateCache();
-        mActionBar = null;
         super.onPause();
     }
 
