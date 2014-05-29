@@ -112,8 +112,6 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         setPhoneCallDetailsWithNumber("14125551212",
                 Calls.PRESENTATION_ALLOWED, "1-412-555-1212");
         assertTrue(mViews.callLocationAndDate.getText().toString().contains("Yesterday"));
-        assertTrue(mViews.callLocationAndDate.getText().toString().contains(
-                "<font color='#33b5e5'><b>Yesterday</b></font>"));
     }
 
     /** Asserts that a char sequence is actually a Spanned corresponding to the expected HTML. */
