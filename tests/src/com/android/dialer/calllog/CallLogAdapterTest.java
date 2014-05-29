@@ -68,7 +68,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mCursor = new MatrixCursor(CallLogQuery._PROJECTION);
         mCursor.moveToFirst();
         // The views into which to store the data.
-        mView = new CallLogListItemView(getContext());
+        mView = new View(getContext());
         mView.setTag(CallLogListItemViews.createForTest(getContext()));
     }
 

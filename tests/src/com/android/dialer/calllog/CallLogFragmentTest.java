@@ -91,6 +91,11 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
 
     private Random mRnd;
 
+    // References to the icons bitmaps used to build the list are stored in a
+    // map mIcons. The keys to retrieve the icons are:
+    // Calls.INCOMING_TYPE, Calls.OUTGOING_TYPE and Calls.MISSED_TYPE.
+    private HashMap<Integer, Bitmap> mCallTypeIcons;
+
     // An item in the call list. All the methods performing checks use it.
     private CallLogListItemViews mItem;
     // The list of views representing the data in the DB. View are in
@@ -128,6 +133,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mAdapter.stopRequestProcessing();
         mParentView = new FrameLayout(mActivity);
         mCursor = new MatrixCursor(CallLogQuery._PROJECTION);
+        buildIconMap();
     }
 
     /**
@@ -404,6 +410,17 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         BitmapDrawable d = (BitmapDrawable) r.getDrawable(resid);
         assertNotNull(d);
         return d.getBitmap();
+    }
+
+    /**
+     * Fetch all the icons we need in tests from the contacts app and store them in a map.
+     */
+    private void buildIconMap() {
+        mCallTypeIcons = new HashMap<Integer, Bitmap>(3);
+
+        mCallTypeIcons.put(Calls.INCOMING_TYPE, getBitmap("ic_call_incoming_holo_dark"));
+        mCallTypeIcons.put(Calls.MISSED_TYPE, getBitmap("ic_call_missed_holo_dark"));
+        mCallTypeIcons.put(Calls.OUTGOING_TYPE, getBitmap("ic_call_outgoing_holo_dark"));
     }
 
     //
