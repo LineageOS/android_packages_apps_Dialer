@@ -71,6 +71,7 @@
             <!-- Favorites -->
         <item name="favorites_padding_bottom">?android:attr/actionBarSize</item>
         <item name="android:colorPrimaryDark">@color/actionbar_background_color_dark</item>
+        <item name="dialpad_key_button_touch_tint">@color/dialer_dialpad_touch_tint</item>
     </style>
 
     <!-- Action bar overflow menu icon. -->
