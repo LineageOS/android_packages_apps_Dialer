@@ -64,6 +64,7 @@ import android.widget.Toast;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.activity.TransactionSafeActivity;
+import com.android.contacts.common.animation.AnimationListenerAdapter;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
@@ -613,7 +614,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         updateFloatingActionButton();
         if (animate) {
             Animation slideOut = AnimationUtils.loadAnimation(this, R.anim.slide_out);
-            slideOut.setAnimationListener(new ActivityAnimationListener() {
+            slideOut.setAnimationListener(new AnimationListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     commitDialpadFragmentHide();
@@ -1102,23 +1103,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         params.addRule(RelativeLayout.CENTER_HORIZONTAL);
         mFloatingActionButtonContainer.setLayoutParams(params);
-    }
-
-    /**
-     * Convenience class which implements AnimationListener interface as null-op methods.
-     */
-    private class ActivityAnimationListener implements AnimationListener {
-        @Override
-        public void onAnimationStart(Animation animation) {
-        }
-
-        @Override
-        public void onAnimationEnd(Animation animation) {
-        }
-
-        @Override
-        public void onAnimationRepeat(Animation animation) {
-        }
     }
 
     @Override
