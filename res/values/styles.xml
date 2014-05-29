@@ -102,7 +102,7 @@
         <!-- CallLog -->
         <item name="call_log_primary_text_color">#404040</item>
         <item name="call_log_primary_background_color">#FFFFFF</item>
-        <item name="call_log_secondary_text_color">#9a9a9a</item>
+        <item name="call_log_secondary_text_color">#8f8f8f</item>
         <item name="call_log_secondary_background_color">#FFFFFF</item>
         <item name="call_log_header_color">#FFFFFF</item>
         <!-- VoicemailStatus -->

@@ -27,6 +27,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapter;
@@ -54,7 +55,10 @@ public class ShortcutCardsAdapter extends BaseAdapter {
 
     private final ListsFragment mFragment;
 
-    private final int mCallLogPadding;
+    private final int mCallLogMargin;
+    private final int mCallLogMarginBottom;
+    private final int mCallLogPaddingStart;
+    private final int mCallLogPaddingBottom;
     private final int mCardMaxHorizontalClip;
 
     private final Context mContext;
@@ -104,7 +108,14 @@ public class ShortcutCardsAdapter extends BaseAdapter {
         mFragment = fragment;
         mCardMaxHorizontalClip = resources.getDimensionPixelSize(
                 R.dimen.recent_call_log_item_horizontal_clip_limit);
-        mCallLogPadding = resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding);
+        mCallLogMargin = resources.getDimensionPixelSize(R.dimen.recent_call_log_item_margin);
+        mCallLogMarginBottom =
+                resources.getDimensionPixelSize(R.dimen.recent_call_log_item_margin_bottom);
+        mCallLogPaddingStart =
+                resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding_start);
+        mCallLogPaddingBottom =
+                resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding_bottom);
+
         mCallLogAdapter = callLogAdapter;
         mObserver = new CustomDataSetObserver();
         mCallLogAdapter.registerDataSetObserver(mObserver);
@@ -211,8 +222,15 @@ public class ShortcutCardsAdapter extends BaseAdapter {
             final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(mCallLogPadding, mCallLogPadding, mCallLogPadding, mCallLogPadding);
+            params.setMargins(mCallLogMargin, mCallLogMargin, mCallLogMargin, mCallLogMarginBottom);
             view.setLayoutParams(params);
+
+            LinearLayout actionView =
+                    (LinearLayout)view.findViewById(R.id.primary_action_view);
+            actionView.setPaddingRelative(
+                    mCallLogPaddingStart, actionView.getPaddingTop(),
+                    actionView.getPaddingEnd(), mCallLogPaddingBottom);
+
             view.setTranslationZ(getResources().getDimensionPixelSize(
                     R.dimen.recent_call_log_item_translation_z));
 

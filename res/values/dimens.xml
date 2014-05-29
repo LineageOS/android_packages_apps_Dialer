@@ -63,9 +63,13 @@
 
     <!-- Dimensions for most recent call shortcut cards -->
     <dimen name="recent_call_log_item_translation_z">4dp</dimen>
-    <dimen name="recent_call_log_item_padding">8dp</dimen>
+    <dimen name="recent_call_log_item_margin">8dp</dimen>
+    <dimen name="recent_call_log_item_margin_bottom">6dp</dimen>
+
     <!-- The maximum amount to clip on the left and right of the recent call shortcut card -->
     <dimen name="recent_call_log_item_horizontal_clip_limit">20dp</dimen>
+    <dimen name="recent_call_log_item_padding_start">8dp</dimen>
+    <dimen name="recent_call_log_item_padding_bottom">7dp</dimen>
 
     <!-- Size of the star icon on the favorites tile. -->
     <dimen name="favorites_star_icon_size">12dp</dimen>
