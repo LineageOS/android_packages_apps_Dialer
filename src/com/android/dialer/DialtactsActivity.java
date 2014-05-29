@@ -126,6 +126,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private static final String KEY_IN_DIALPAD_SEARCH_UI = "in_dialpad_search_ui";
     private static final String KEY_SEARCH_QUERY = "search_query";
     private static final String KEY_FIRST_LAUNCH = "first_launch";
+    private static final String KEY_IS_DIALPAD_SHOWN = "is_dialpad_shown";
 
     private static final String TAG_DIALPAD_FRAGMENT = "dialpad";
     private static final String TAG_REGULAR_SEARCH_FRAGMENT = "search";
@@ -171,6 +172,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
     private boolean mIsDialpadShown;
+    private boolean mShowDialpadOnResume;
 
     /**
      * The position of the currently selected tab in the attached {@link ListsFragment}.
@@ -367,6 +369,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mInRegularSearch = savedInstanceState.getBoolean(KEY_IN_REGULAR_SEARCH_UI);
             mInDialpadSearch = savedInstanceState.getBoolean(KEY_IN_DIALPAD_SEARCH_UI);
             mFirstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH);
+            mShowDialpadOnResume = savedInstanceState.getBoolean(KEY_IS_DIALPAD_SHOWN);
             mActionBarController.restoreInstanceState(savedInstanceState);
         }
 
@@ -409,6 +412,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else if (!phoneIsInUse() && mInCallDialpadUp) {
             hideDialpadFragment(false, true);
             mInCallDialpadUp = false;
+        } else if (mShowDialpadOnResume) {
+            showDialpadFragment(false);
+            mShowDialpadOnResume = false;
         }
         mFirstLaunch = false;
         prepareVoiceSearchButton();
@@ -431,6 +437,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         outState.putBoolean(KEY_IN_REGULAR_SEARCH_UI, mInRegularSearch);
         outState.putBoolean(KEY_IN_DIALPAD_SEARCH_UI, mInDialpadSearch);
         outState.putBoolean(KEY_FIRST_LAUNCH, mFirstLaunch);
+        outState.putBoolean(KEY_IS_DIALPAD_SHOWN, mIsDialpadShown);
         mActionBarController.saveInstanceState(outState);
     }
 
@@ -438,9 +445,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onAttachFragment(Fragment fragment) {
         if (fragment instanceof DialpadFragment) {
             mDialpadFragment = (DialpadFragment) fragment;
-            final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.hide(mDialpadFragment);
-            transaction.commit();
+            if (!mShowDialpadOnResume) {
+                final FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.hide(mDialpadFragment);
+                transaction.commit();
+            }
         } else if (fragment instanceof SmartDialSearchFragment) {
             mSmartDialSearchFragment = (SmartDialSearchFragment) fragment;
             mSmartDialSearchFragment.setOnPhoneNumberPickerActionListener(this);
