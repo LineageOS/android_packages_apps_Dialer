@@ -45,6 +45,7 @@
     <dimen name="floating_action_button_margin_right">16dp</dimen>
     <!-- Bottom margin of the floating action button -->
     <dimen name="floating_action_button_margin_bottom">16dp</dimen>
+    <dimen name="floating_action_button_dialpad_margin_bottom">12dp</dimen>
 
     <!-- Dimensions for speed dial tiles -->
     <dimen name="contact_tile_divider_width">1dp</dimen>

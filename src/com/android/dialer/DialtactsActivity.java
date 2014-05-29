@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
@@ -168,7 +169,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private View mFloatingActionButtonContainer;
     private ImageButton mFloatingActionButton;
 
-    private int mActionBarHeight;
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
@@ -214,6 +214,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private DialerDatabaseHelper mDialerDatabaseHelper;
     private DragDropController mDragDropController;
     private ActionBarController mActionBarController;
+
+    private int mActionBarHeight;
+    private int mFloatingActionButtonMarginBottom;
+    private int mFloatingActionButtonDialpadMarginBottom;
 
     private class OptionsPopupMenu extends PopupMenu {
         public OptionsPopupMenu(Context context, View anchor) {
@@ -324,6 +328,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         super.onCreate(savedInstanceState);
         mFirstLaunch = true;
 
+        final Resources resources = getResources();
+        mActionBarHeight = resources.getDimensionPixelSize(R.dimen.action_bar_height);
+        mFloatingActionButtonMarginBottom =
+                resources.getDimensionPixelOffset(R.dimen.floating_action_button_margin_bottom);
+        mFloatingActionButtonDialpadMarginBottom = resources.getDimensionPixelOffset(
+                R.dimen.floating_action_button_dialpad_margin_bottom);
+
         setContentView(R.layout.dialtacts_activity);
         getWindow().setBackgroundDrawable(null);
 
@@ -355,8 +366,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         optionsMenuButton.setOnClickListener(this);
         final OptionsPopupMenu optionsMenu = buildOptionsMenu(optionsMenuButton);
         optionsMenuButton.setOnTouchListener(optionsMenu.getDragToOpenListener());
-
-        mActionBarHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_height);
 
         // Add the favorites fragment, and the dialpad fragment, but only if savedInstanceState
         // is null. Otherwise the fragment manager takes care of recreating these fragments.
@@ -1103,6 +1112,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 (RelativeLayout.LayoutParams) mFloatingActionButtonContainer.getLayoutParams();
         params.removeRule(RelativeLayout.CENTER_HORIZONTAL);
         params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        updateFloatingActionButtonMargin(params);
         mFloatingActionButtonContainer.setLayoutParams(params);
     }
 
@@ -1111,7 +1121,18 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 (RelativeLayout.LayoutParams) mFloatingActionButtonContainer.getLayoutParams();
         params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        updateFloatingActionButtonMargin(params);
         mFloatingActionButtonContainer.setLayoutParams(params);
+    }
+
+    private void updateFloatingActionButtonMargin(RelativeLayout.LayoutParams params) {
+        params.setMarginsRelative(
+                params.getMarginStart(),
+                params.topMargin,
+                params.getMarginEnd(),
+                mIsDialpadShown ?
+                        mFloatingActionButtonDialpadMarginBottom :
+                        mFloatingActionButtonMarginBottom);
     }
 
     @Override
