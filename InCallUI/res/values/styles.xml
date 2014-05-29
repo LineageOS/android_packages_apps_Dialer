@@ -122,6 +122,7 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="dialpad_key_button_touch_tint">@color/incall_dialpad_touch_tint</item>
     </style>
 
     <style name="PrimaryCallInfoPrimaryCallBanner">

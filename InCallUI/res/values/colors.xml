@@ -81,4 +81,6 @@
     <color name="glowpad_incoming_widget_tint">#a3a3a3</color>
     <color name="glowpad_incoming_widget_background_tint">#ffffff</color>
 
+    <!-- 15% opacity, accent color. -->
+    <color name="incall_dialpad_touch_tint">#26eeff41</color>
 </resources>
