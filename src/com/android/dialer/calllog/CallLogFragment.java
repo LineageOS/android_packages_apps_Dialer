@@ -649,6 +649,11 @@ public class CallLogFragment extends ListFragment
 
                         if (!isExpand) {
                             viewHolder.actionsView.setVisibility(View.GONE);
+                        } else {
+                            // This seems like it should be unnecessary, but without this, after
+                            // navigating out of the activity and then back, the action view alpha
+                            // is defaulting to the value (0) at the start of the expand animation.
+                            viewHolder.actionsView.setAlpha(1);
                         }
                     }
 
