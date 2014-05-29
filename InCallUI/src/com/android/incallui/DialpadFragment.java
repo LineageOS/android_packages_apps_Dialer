@@ -544,7 +544,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         DialpadKeyButton dialpadKey;
         for (int i = 0; i < buttonIds.length; i++) {
             dialpadKey = (DialpadKeyButton) fragmentView.findViewById(buttonIds[i]);
-            dialpadKey.setBackgroundResource(R.drawable.incall_dialpad_key_colors);
             dialpadKey.setOnTouchListener(this);
             dialpadKey.setOnKeyListener(this);
             dialpadKey.setOnHoverListener(this);
