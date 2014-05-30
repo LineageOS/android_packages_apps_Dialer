@@ -263,10 +263,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 // no need to do anything here.
                 return;
             }
-            mSearchQuery = newText;
             if (DEBUG) {
                 Log.d(TAG, "onTextChange for mSearchView called with new query: " + newText);
+                Log.d(TAG, "Previous Query: " + mSearchQuery);
             }
+            mSearchQuery = newText;
 
             // Show search fragment only when the query string is changed to non-empty text.
             if (!TextUtils.isEmpty(newText)) {
@@ -687,8 +688,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     private void hideDialpadAndSearchUi() {
-        mSearchView.setText(null);
-        hideDialpadFragment(false, true);
+        if (mIsDialpadShown) {
+            hideDialpadFragment(false, true);
+        } else {
+            exitSearchUi();
+        }
     }
 
     private void hideInputMethod(View view) {
@@ -873,7 +877,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         setNotInSearchUi();
 
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(0, android.R.animator.fade_out);
         if (mSmartDialSearchFragment != null) {
             transaction.remove(mSmartDialSearchFragment);
         }

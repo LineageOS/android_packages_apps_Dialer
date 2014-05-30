@@ -123,7 +123,11 @@ public class SearchEditTextLayout extends FrameLayout {
     }
 
     public void fadeOut() {
-        AnimUtils.fadeOut(this, ANIMATION_DURATION);
+        fadeOut(null);
+    }
+
+    public void fadeOut(AnimUtils.AnimationCallback callback) {
+        AnimUtils.fadeOut(this, ANIMATION_DURATION, callback);
         mIsFadedOut = true;
     }
 

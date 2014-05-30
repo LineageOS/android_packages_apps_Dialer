@@ -7,6 +7,8 @@ import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.android.contacts.common.animation.AnimUtils;
+import com.android.contacts.common.animation.AnimUtils.AnimationCallback;
 import com.android.dialer.DialtactsActivity;
 
 /**
@@ -25,6 +27,18 @@ public class ActionBarController {
     private SearchEditTextLayout mSearchBox;
 
     private boolean mIsActionBarSlidUp;
+
+    private final AnimationCallback mFadeOutCallback = new AnimationCallback() {
+        @Override
+        public void onAnimationEnd() {
+            slideActionBarUp(false);
+        }
+
+        @Override
+        public void onAnimationCancel() {
+            slideActionBarUp(false);
+        }
+    };
 
     public interface ActivityUi {
         public boolean isInSearchUi();
@@ -127,7 +141,7 @@ public class ActionBarController {
             slideActionBarUp(true);
         } else {
             // From the lists fragment
-            mSearchBox.fadeOut();
+            mSearchBox.fadeOut(mFadeOutCallback);
         }
     }
 
