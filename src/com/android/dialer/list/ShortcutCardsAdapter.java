@@ -55,9 +55,11 @@ public class ShortcutCardsAdapter extends BaseAdapter {
 
     private final ListsFragment mFragment;
 
-    private final int mCallLogMargin;
+    private final int mCallLogMarginHorizontal;
+    private final int mCallLogMarginTop;
     private final int mCallLogMarginBottom;
     private final int mCallLogPaddingStart;
+    private final int mCallLogPaddingTop;
     private final int mCallLogPaddingBottom;
     private final int mCardMaxHorizontalClip;
 
@@ -106,13 +108,18 @@ public class ShortcutCardsAdapter extends BaseAdapter {
         final Resources resources = context.getResources();
         mContext = context;
         mFragment = fragment;
-        mCardMaxHorizontalClip = resources.getDimensionPixelSize(
-                R.dimen.recent_call_log_item_horizontal_clip_limit);
-        mCallLogMargin = resources.getDimensionPixelSize(R.dimen.recent_call_log_item_margin);
+        mCardMaxHorizontalClip =
+                resources.getDimensionPixelSize(R.dimen.recent_call_log_item_horizontal_clip_limit);
+        mCallLogMarginHorizontal =
+                resources.getDimensionPixelSize(R.dimen.recent_call_log_item_margin_horizontal);
+        mCallLogMarginTop =
+                resources.getDimensionPixelSize(R.dimen.recent_call_log_item_margin_top);
         mCallLogMarginBottom =
                 resources.getDimensionPixelSize(R.dimen.recent_call_log_item_margin_bottom);
         mCallLogPaddingStart =
                 resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding_start);
+        mCallLogPaddingTop =
+                resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding_top);
         mCallLogPaddingBottom =
                 resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding_bottom);
 
@@ -222,14 +229,20 @@ public class ShortcutCardsAdapter extends BaseAdapter {
             final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(mCallLogMargin, mCallLogMargin, mCallLogMargin, mCallLogMarginBottom);
+            params.setMargins(
+                    mCallLogMarginHorizontal,
+                    mCallLogMarginTop,
+                    mCallLogMarginHorizontal,
+                    mCallLogMarginBottom);
             view.setLayoutParams(params);
 
             LinearLayout actionView =
                     (LinearLayout)view.findViewById(R.id.primary_action_view);
             actionView.setPaddingRelative(
-                    mCallLogPaddingStart, actionView.getPaddingTop(),
-                    actionView.getPaddingEnd(), mCallLogPaddingBottom);
+                    mCallLogPaddingStart,
+                    mCallLogPaddingTop,
+                    actionView.getPaddingEnd(),
+                    mCallLogPaddingBottom);
 
             view.setTranslationZ(getResources().getDimensionPixelSize(
                     R.dimen.recent_call_log_item_translation_z));
