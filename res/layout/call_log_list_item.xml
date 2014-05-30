@@ -33,7 +33,7 @@
         android:textColor="?attr/call_log_secondary_text_color"
         android:textSize="@dimen/call_log_secondary_text_size"
         android:paddingTop="@dimen/call_log_day_group_padding"
-        android:paddingBottom="0dp"
+        android:paddingBottom="1dp"
         />
 
     <!-- Linear layout to separate the primary area containing the contact badge and caller
