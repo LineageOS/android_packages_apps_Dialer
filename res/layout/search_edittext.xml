@@ -36,7 +36,8 @@
                 android:layout_margin="@dimen/search_box_icon_margin"
                 android:padding="@dimen/search_box_search_icon_padding"
                 android:src="@drawable/ic_ab_search"
-                android:importantForAccessibility="no" />
+                android:importantForAccessibility="no"
+                android:tint="@color/searchbox_icon_tint" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -59,7 +60,9 @@
             android:src="@drawable/ic_voice_search"
             android:clickable="true"
             android:contentDescription="@string/description_start_voice_search"
-            android:background="?android:attr/selectableItemBackground" />
+            android:background="?android:attr/selectableItemBackground"
+            android:tint="@color/searchbox_icon_tint" />
+
 
         <ImageButton
             android:id="@+id/dialtacts_options_menu_button"
@@ -69,7 +72,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_overflow_menu"
             android:contentDescription="@string/action_menu_overflow_description"
-            android:tint="@color/searchbox_options_menu_color" />
+            android:tint="@color/searchbox_icon_tint" />
 
     </LinearLayout>
 

@@ -61,8 +61,8 @@
     <!-- Text color of the search box text as entered by user  -->
     <color name="searchbox_text_color">#000000</color>
     <!-- Text color of the search box hint text  -->
-    <color name="searchbox_hint_text_color">#d3d3d3</color>
-    <color name="searchbox_options_menu_color">#d5d5d5</color>
+    <color name="searchbox_hint_text_color">#a4a4a4</color>
+    <color name="searchbox_icon_tint">#a4a4a4</color>
 
     <!-- Color of the contact name in favorite tiles -->
     <color name="contact_tile_name_color">#ffffff</color>
