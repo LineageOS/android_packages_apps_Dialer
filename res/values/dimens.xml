@@ -63,7 +63,7 @@
     <dimen name="favorites_row_undo_text_side_padding">32dp</dimen>
 
     <!-- Dimensions for most recent call shortcut cards -->
-    <dimen name="recent_call_log_item_translation_z">4dp</dimen>
+    <dimen name="recent_call_log_item_translation_z">3dp</dimen>
     <dimen name="recent_call_log_item_margin_horizontal">8dp</dimen>
     <dimen name="recent_call_log_item_margin_top">4dp</dimen>
     <dimen name="recent_call_log_item_margin_bottom">6dp</dimen>
@@ -120,7 +120,7 @@
     <!-- Size of the icon (voice search, close search) in the search box. -->
     <dimen name="search_box_icon_size">28dp</dimen>
     <!-- Elevation of the search box -->
-    <dimen name="search_box_elevation">4dp</dimen>
+    <dimen name="search_box_elevation">3dp</dimen>
 
     <!-- Size of text in tabs. -->
     <dimen name="tab_height">43dp</dimen>
