@@ -26,11 +26,12 @@ import com.android.dialer.R;
 public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnPageChangeListener {
 
     ViewPager mPager;
+    private ViewPagerTabStrip mTabStrip;
+
     /**
      * Linearlayout that will contain the TextViews serving as tabs. This is the only child
      * of the parent HorizontalScrollView.
      */
-    LinearLayout mChild;
     final int mTextStyle;
     final ColorStateList mTextColor;
     final int mTextSize;
@@ -100,8 +101,8 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
         mTextColor = a.getColorStateList(2);
         mTextAllCaps = a.getBoolean(3, false);
 
-        mChild = new LinearLayout(context);
-        addView(mChild,
+        mTabStrip = new ViewPagerTabStrip(context);
+        addView(mTabStrip,
                 new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
         a.recycle();
     }
@@ -112,7 +113,7 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
     }
 
     private void addTabs(PagerAdapter adapter) {
-        mChild.removeAllViews();
+        mTabStrip.removeAllViews();
 
         final int count = adapter.getCount();
         for (int i = 0; i < count; i++) {
@@ -123,7 +124,7 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
     private void addTab(CharSequence tabTitle, final int position) {
         final TextView textView = new TextView(getContext());
         textView.setText(tabTitle);
-        textView.setBackgroundResource(R.drawable.action_bar_tab);
+        textView.setBackgroundResource(R.drawable.view_pager_tab_background);
         textView.setGravity(Gravity.CENTER);
         textView.setOnClickListener(new OnClickListener() {
             @Override
@@ -146,7 +147,7 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
         }
         textView.setAllCaps(mTextAllCaps);
         textView.setPadding(mSidePadding, 0, mSidePadding, 0);
-        mChild.addView(textView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+        mTabStrip.addView(textView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
                 LayoutParams.MATCH_PARENT, 1));
         // Default to the first child being selected
         if (position == 0) {
@@ -157,15 +158,23 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        int tabStripChildCount = mTabStrip.getChildCount();
+        if ((tabStripChildCount == 0) || (position < 0) || (position >= tabStripChildCount)) {
+            return;
+        }
+
+        mTabStrip.onPageScrolled(position, positionOffset, positionOffsetPixels);
+        smoothScrollTo(position, 0);
     }
 
     @Override
     public void onPageSelected(int position) {
         if (mPrevSelected >= 0) {
-            mChild.getChildAt(mPrevSelected).setSelected(false);
+            mTabStrip.getChildAt(mPrevSelected).setSelected(false);
         }
-        final View selectedChild = mChild.getChildAt(position);
+        final View selectedChild = mTabStrip.getChildAt(position);
         selectedChild.setSelected(true);
+
         // Update scroll position
         final int scrollPos = selectedChild.getLeft() - (getWidth() - selectedChild.getWidth()) / 2;
         smoothScrollTo(scrollPos, 0);
@@ -176,3 +185,4 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
     public void onPageScrollStateChanged(int state) {
     }
 }
+
