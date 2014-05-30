@@ -94,12 +94,8 @@
         <item name="android:actionBarStyle">@style/DialtactsActionBarWithoutTitleStyle</item>
     </style>
 
-    <style name="CallDetailActivityTheme" parent="android:Theme.Quantum.Light">
+    <style name="CallDetailActivityTheme" parent="DialtactsThemeWithoutActionBarOverlay">
         <item name="android:windowBackground">@color/background_dialer_light</item>
-        <item name="android:gravity">top</item>
-        <item name="android:listViewStyle">@style/ListViewStyle</item>
-        <item name="android:actionBarStyle">@style/DialtactsActionBarStyle</item>
-        <item name="android:actionOverflowButtonStyle">@style/DialtactsActionBarOverflow</item>
         <!-- CallLog -->
         <item name="call_log_primary_text_color">#404040</item>
         <item name="call_log_primary_background_color">#FFFFFF</item>
@@ -115,7 +111,6 @@
 
     <style name="DialtactsActionBarStyle" parent="android:Widget.Quantum.ActionBar">
         <item name="android:background">@color/actionbar_background_color</item>
-        <item name="android:backgroundStacked">#ffffff</item>
         <item name="android:titleTextStyle">@style/DialtactsActionBarTitleText</item>
         <item name="android:height">@dimen/action_bar_height</item>
         <!-- Empty icon -->
@@ -130,18 +125,6 @@
     <style name="DialtactsActionBarTitleText"
            parent="@android:style/TextAppearance.Quantum.Widget.ActionBar.Title">
         <item name="android:textColor">@color/actionbar_text_color</item>
-    </style>
-
-    <!-- Styling for the tab bar; handles styling of the divider line. -->
-    <style name="DialtactsActionBarTabBarStyle"
-           parent="@android:style/Widget.Quantum.ActionBar.TabBar">
-        <item name="android:showDividers">none</item>
-    </style>
-
-    <!-- Styling for tabs. -->
-    <style name="DialtactsActionBarTabStyle" parent="@android:style/Widget.Quantum.ActionBar.TabView">
-        <item name="android:background">@drawable/action_bar_tab</item>
-        <item name="android:showDividers">none</item>
     </style>
 
     <!-- Text style for tabs. -->
