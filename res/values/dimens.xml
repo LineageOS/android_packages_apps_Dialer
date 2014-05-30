@@ -130,16 +130,14 @@
          call_log_action_horizontal_padding
          call_log_list_contact_photo_size  -->
     <dimen name="call_log_actions_left_padding">64dp</dimen>
-    <!-- Text size for primary call log text -->
     <dimen name="call_log_primary_text_size">16sp</dimen>
-    <!-- Text size for secondary call log text -->
     <dimen name="call_log_secondary_text_size">14sp</dimen>
+    <dimen name="call_log_list_item_actions_text_size">12sp</dimen>
     <!-- Height of the call log actions section for each call log entry -->
-    <dimen name="call_log_action_height">48dp</dimen>
+    <dimen name="call_log_action_height">44dp</dimen>
     <!-- Z Translation of expanded call log items. -->
     <dimen name="call_log_expanded_translation_z">4dp</dimen>
-    <!-- Padding above call log day group headers. -->
-    <dimen name="call_log_day_group_padding">16dp</dimen>
+    <dimen name="call_log_day_group_padding">15dp</dimen>
 
     <!-- Size of icon for contacts number shortcuts -->
     <dimen name="search_shortcut_radius">40dp</dimen>
