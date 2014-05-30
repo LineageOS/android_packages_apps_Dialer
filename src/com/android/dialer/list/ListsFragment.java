@@ -338,6 +338,10 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         return mIsPanelOpen && mActionBar != null;
     }
 
+    public boolean isPaneOpen() {
+        return mIsPanelOpen;
+    }
+
     private void setupPaneLayout(OverlappingPaneLayout paneLayout) {
         // TODO: Remove the notion of a capturable view. The entire view be slideable, once
         // the framework better supports nested scrolling.

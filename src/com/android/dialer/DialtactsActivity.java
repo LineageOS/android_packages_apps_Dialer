@@ -1007,7 +1007,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     @Override
     public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView view) {
-        mActionBarController.slideActionBarUp(true);
+        if (mListsFragment.isPaneOpen()) {
+            mActionBarController.slideActionBarUp(true);
+        }
         mRemoveViewContainer.setVisibility(View.VISIBLE);
     }
 
@@ -1020,7 +1022,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     @Override
     public void onDragFinished(int x, int y) {
-        mActionBarController.slideActionBarDown(true);
+        if (mListsFragment.isPaneOpen()) {
+            mActionBarController.slideActionBarDown(true);
+        }
         mRemoveViewContainer.setVisibility(View.GONE);
     }
 
