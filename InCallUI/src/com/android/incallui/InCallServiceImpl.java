@@ -91,19 +91,29 @@ public class InCallServiceImpl extends InCallService {
     }
 
     /** {@inheritDoc} */
-    @Override protected void setPostDial(String callId, String remaining) {
+    @Override
+    protected void setPostDial(String callId, String remaining) {
         // TODO(ihab): Add post-dial state to user interface
     }
 
     /** {@inheritDoc} */
-    @Override protected void setPostDialWait(String callId, String remaining) {
+    @Override
+    protected void setPostDialWait(String callId, String remaining) {
         // TODO(ihab): Add post-dial state to user interface
     }
 
     /** {@inheritDoc} */
-    @Override protected void onAudioStateChanged(CallAudioState audioState) {
+    @Override
+    protected void onAudioStateChanged(CallAudioState audioState) {
         AudioModeProvider.getInstance().onAudioModeChange(audioState.route, audioState.isMuted);
         AudioModeProvider.getInstance().onSupportedAudioModeChange(audioState.supportedRouteMask);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected void bringToForeground(boolean showDialpad) {
+        Log.i(this, "Bringing UI to foreground.");
+        InCallPresenter.getInstance().bringToForeground(showDialpad);
     }
 
     private void updateCall(Call call, InCallCall telecommCall) {
