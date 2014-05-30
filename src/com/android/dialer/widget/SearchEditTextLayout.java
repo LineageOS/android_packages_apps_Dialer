@@ -16,13 +16,10 @@
 
 package com.android.dialer.widget;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -40,6 +37,8 @@ public class SearchEditTextLayout extends FrameLayout {
     private int mBottomMargin;
     private int mLeftMargin;
     private int mRightMargin;
+
+    private float mCollapsedElevation;
 
     /* Subclass-visible for testing */
     protected boolean mIsExpanded = false;
@@ -79,6 +78,8 @@ public class SearchEditTextLayout extends FrameLayout {
         mBottomMargin = params.bottomMargin;
         mLeftMargin = params.leftMargin;
         mRightMargin = params.rightMargin;
+
+        mCollapsedElevation = getElevation();
 
         mCollapsed = findViewById(R.id.search_box_collapsed);
         mExpanded = findViewById(R.id.search_box_expanded);
@@ -160,6 +161,7 @@ public class SearchEditTextLayout extends FrameLayout {
         }
 
         setBackgroundResource(R.drawable.search_shadow);
+        setElevation(0);
         if (requestFocus) {
             mSearchView.requestFocus();
         }
@@ -179,6 +181,7 @@ public class SearchEditTextLayout extends FrameLayout {
         }
 
         mIsExpanded = false;
+        setElevation(mCollapsedElevation);
         setBackgroundResource(R.drawable.rounded_corner);
     }
 
