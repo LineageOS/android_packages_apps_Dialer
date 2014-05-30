@@ -80,7 +80,6 @@ import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.util.DialerUtils;
-import com.android.internal.telephony.ITelephony;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
 
@@ -216,9 +215,9 @@ public class DialpadFragment extends Fragment
      * press/depress of the "hookswitch" of a landline phone. Aka "empty flash".
      *
      * TODO: Using an intent extra to tell the phone to send this flash is a
-     * temporary measure. To be replaced with an ITelephony call in the future.
+     * temporary measure. To be replaced with an Telephony/TelecommManager call in the future.
      * TODO: Keep in sync with the string defined in OutgoingCallBroadcaster.java
-     * in Phone app until this is replaced with the ITelephony API.
+     * in Phone app until this is replaced with the Telephony/Telecomm API.
      */
     private static final String EXTRA_SEND_EMPTY_FLASH
             = "com.android.phone.extra.SEND_EMPTY_FLASH";
@@ -1373,12 +1372,7 @@ public class DialpadFragment extends Fragment
      * or "return to call" from the dialpad chooser.
      */
     private void returnToInCallScreen(boolean showDialpad) {
-        try {
-            ITelephony phone = ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
-            if (phone != null) phone.showCallScreenWithDialpad(showDialpad);
-        } catch (RemoteException e) {
-            Log.w(TAG, "phone.showCallScreenWithDialpad() failed", e);
-        }
+        getTelephonyManager().showCallScreenWithDialpad(showDialpad);
 
         // Finally, finish() ourselves so that we don't stay on the
         // activity stack.

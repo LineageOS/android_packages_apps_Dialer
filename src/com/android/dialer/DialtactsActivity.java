@@ -90,7 +90,6 @@ import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
 import com.android.dialer.widget.SearchEditTextLayout.OnBackButtonClickedListener;
 import com.android.dialerbind.DatabaseHelperManager;
-import com.android.internal.telephony.ITelephony;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -750,13 +749,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // button, go straight to the in-call screen.
         final boolean callKey = Intent.ACTION_CALL_BUTTON.equals(intent.getAction());
 
-        try {
-            ITelephony phone = ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
-            if (callKey && phone != null && phone.showCallScreen()) {
-                return true;
-            }
-        } catch (RemoteException e) {
-            Log.e(TAG, "Failed to handle send while in call", e);
+        if (callKey) {
+            getTelephonyManager().showCallScreen();
+            return true;
         }
 
         return false;
@@ -981,9 +976,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     private boolean phoneIsInUse() {
-        final TelephonyManager tm = (TelephonyManager) getSystemService(
-                Context.TELEPHONY_SERVICE);
-        return tm.getCallState() != TelephonyManager.CALL_STATE_IDLE;
+        // TODO(santoscordon): Replace with a TelecommService method call.
+        return getTelephonyManager().getCallState() != TelephonyManager.CALL_STATE_IDLE;
     }
 
     public static Intent getAddNumberToContactIntent(CharSequence text) {
@@ -1136,6 +1130,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 mIsDialpadShown ?
                         mFloatingActionButtonDialpadMarginBottom :
                         mFloatingActionButtonMarginBottom);
+    }
+
+    private TelephonyManager getTelephonyManager() {
+        return (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
     }
 
     @Override
