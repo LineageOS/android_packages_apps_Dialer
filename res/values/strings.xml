@@ -460,9 +460,6 @@
     -->
     <string name="description_call_log_unheard_voicemail">Unheard voicemail</string>
 
-    <!--  String describing the icon used to clear the search field -->
-    <string name="description_clear_search">Clear search</string>
-
     <!-- String describing the icon used to start a voice search -->
     <string name="description_start_voice_search">Start voice search</string>
 
@@ -634,10 +631,6 @@
     <!-- The font-family to use for the "all contacts" label on the favorites menu.
          Do not translate. -->
     <string name="favorites_menu_all_contacts_font_family">sans-serif</string>
-
-    <!-- The font-family to use for the text inside the searchbox.
-         Do not translate. -->
-    <string name="search_font_family">sans-serif</string>
 
     <!-- Button text for the "call back" button displayed underneath an entry in the call log.
          Tapping causes a call to be placed to the caller represented by the call log entry.

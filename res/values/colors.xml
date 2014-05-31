@@ -50,18 +50,9 @@
     <color name="search_shortcut_background_color">#b6b6b6</color>
     <color name="search_shortcut_icon_color">#f8f8f8</color>
 
-    <!-- Dark variant of the action bar color. -->
-    <color name="actionbar_background_color_dark">#008aa1</color>
-
     <!-- Color of the 1dp divider that separates favorites -->
     <color name="favorite_contacts_separator_color">#d0d0d0</color>
 
-    <!-- Background color of the search box -->
-    <color name="searchbox_background_color">#ffffff</color>
-    <!-- Text color of the search box text as entered by user  -->
-    <color name="searchbox_text_color">#000000</color>
-    <!-- Text color of the search box hint text  -->
-    <color name="searchbox_hint_text_color">#a4a4a4</color>
     <color name="searchbox_icon_tint">#a4a4a4</color>
 
     <!-- Color of the contact name in favorite tiles -->
@@ -96,9 +87,6 @@
 
     <!-- Color for answered or outgoing call icons. -->
     <color name="answered_call">#2aad6f</color>
-
-    <!-- Color for icons in the actionbar -->
-    <color name="actionbar_icon_color">#ffffff</color>
 
     <color name="dialer_dialpad_touch_tint">#1a1dc7db</color>
 
