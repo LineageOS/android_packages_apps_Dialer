@@ -29,7 +29,7 @@ import android.util.Pair;
 
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 
-import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.HttpStatus;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
