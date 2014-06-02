@@ -213,6 +213,9 @@ public class ShortcutCardsAdapter extends BaseAdapter {
         private SwipeHelper mSwipeHelper;
         private OnItemGestureListener mOnItemSwipeListener;
 
+        private float mPreviousTranslationZ = 0;
+        private Rect mClipRect = new Rect();
+
         public SwipeableShortcutCard(Context context) {
             super(context);
             final float densityScale = getResources().getDisplayMetrics().density;
@@ -244,8 +247,9 @@ public class ShortcutCardsAdapter extends BaseAdapter {
                     actionView.getPaddingEnd(),
                     mCallLogPaddingBottom);
 
-            view.setTranslationZ(getResources().getDimensionPixelSize(
-                    R.dimen.recent_call_log_item_translation_z));
+            mPreviousTranslationZ = getResources().getDimensionPixelSize(
+                    R.dimen.recent_call_log_item_translation_z);
+            view.setTranslationZ(mPreviousTranslationZ);
 
             super.addView(view);
         }
@@ -307,9 +311,6 @@ public class ShortcutCardsAdapter extends BaseAdapter {
             mOnItemSwipeListener = listener;
         }
 
-        private float mPreviousTranslationZ = 0;
-        private Rect mClipRect = new Rect();
-
         /**
          * Clips the card by a specified amount.
          *
@@ -325,7 +326,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
             int width = viewToClip.getWidth();
             int height = viewToClip.getHeight();
 
-            if (ratioHidden <= 0.01f) {
+            if (ratioHidden <= 0.001f) {
                 viewToClip.setTranslationZ(mPreviousTranslationZ);
             } else if (viewToClip.getTranslationZ() != 0){
                 mPreviousTranslationZ = viewToClip.getTranslationZ();
