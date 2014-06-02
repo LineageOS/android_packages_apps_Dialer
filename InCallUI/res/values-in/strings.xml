@@ -70,7 +70,7 @@
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Panggilan tak terjawab"</string>
     <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> panggilan tak terjawab"</string>
     <string name="notification_missedCallTicker" msgid="504686252427747209">"Panggilan tak terjawab dari <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
-    <string name="notification_ongoing_call" msgid="7068688957273482989">"Panggilan yang berlangsung"</string>
+    <string name="notification_ongoing_call" msgid="7068688957273482989">"Panggilan yang sedang berlangsung"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"Ditangguhkan"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Panggilan masuk"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Kotak pesan baru"</string>
