@@ -17,20 +17,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="horizontal"
+    >
     <!-- spacer view -->
     <View
         android:id="@+id/spacer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="#00000000" />
     <!-- Dialpad shadow -->
     <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/shadow_length"
-        android:background="@drawable/shadow_fade_up" />
-    <include layout="@layout/dialpad_view" />
+        android:layout_width="@dimen/shadow_length"
+        android:layout_height="match_parent"
+        android:background="@drawable/shadow_fade_left" />
+    <include layout="@layout/dialpad_view"
+         android:layout_height="match_parent"
+         android:layout_width="0dp"
+         android:layout_weight="1" />
     <!-- "Dialpad chooser" UI, shown only when the user brings up the
              Dialer while a call is already in progress.
              When this UI is visible, the other Dialer elements

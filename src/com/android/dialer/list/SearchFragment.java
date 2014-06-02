@@ -80,14 +80,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         mActionBarHeight = activity.getActionBarHeight();
 
         final View parentView = getView();
-        parentView.setPaddingRelative(
-                parentView.getPaddingStart(),
-                mActionBarHeight,
-                parentView.getPaddingEnd(),
-                parentView.getPaddingBottom());
 
         final ListView listView = getListView();
-
         listView.setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -99,10 +93,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                     int totalItemCount) {
             }
         });
-
-
-        if (!activity.isActionBarShowing()) {
-            parentView.setTranslationY(-mActionBarHeight);
+        if (activity.isActionBarShowing()) {
+            listView.setTranslationY(mActionBarHeight);
         }
     }
 

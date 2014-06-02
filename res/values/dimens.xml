@@ -127,4 +127,7 @@
 
     <!-- Size of icon for contacts number shortcuts -->
     <dimen name="search_shortcut_radius">40dp</dimen>
+
+    <!-- Length of dialpad's shadows in dialer. -->
+    <dimen name="shadow_length">10dp</dimen>
 </resources>

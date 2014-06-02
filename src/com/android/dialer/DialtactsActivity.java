@@ -330,8 +330,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         final Resources resources = getResources();
         mActionBarHeight = resources.getDimensionPixelSize(R.dimen.action_bar_height);
-        mFloatingActionButtonMarginBottom =
-                resources.getDimensionPixelOffset(R.dimen.floating_action_button_margin_bottom);
+        mFloatingActionButtonMarginBottom = resources.getDimensionPixelOffset(
+                R.dimen.floating_action_button_margin_bottom);
         mFloatingActionButtonDialpadMarginBottom = resources.getDimensionPixelOffset(
                 R.dimen.floating_action_button_dialpad_margin_bottom);
 
@@ -662,7 +662,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     private void updateSearchFragmentPosition() {
-        int translationValue = mIsDialpadShown ?  -mActionBarHeight : 0;
+        int startTranslationValue = mIsDialpadShown ? mActionBarHeight : 0;
+        int endTranslationValue = mIsDialpadShown ? 0 : mActionBarHeight;
         SearchFragment fragment = null;
         if (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()) {
             fragment = mSmartDialSearchFragment;
@@ -670,8 +671,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             fragment = mRegularSearchFragment;
         }
         if (fragment != null && fragment.isVisible()) {
-            fragment.getView().animate().translationY(translationValue)
-                    .setInterpolator(hideActionBarInterpolator).setDuration(ANIMATION_DURATION);
+            fragment.getListView().setTranslationY(startTranslationValue);
+            fragment.getListView().animate().translationY(endTranslationValue)
+                    .setInterpolator(hideActionBarInterpolator)
+                    .setDuration(ANIMATION_DURATION)
+                    .start();
         }
     }
 
