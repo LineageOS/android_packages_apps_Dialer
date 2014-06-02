@@ -101,7 +101,7 @@
     <dimen name="action_bar_height">64dp</dimen>
 
     <!-- Margin to the left and right of the search box. -->
-    <dimen name="search_margin_horizontal">7dp</dimen>
+    <dimen name="search_margin_horizontal">8dp</dimen>
     <!-- Margin above the search box. -->
     <dimen name="search_top_margin">8dp</dimen>
     <!-- Margin below the search box. -->
