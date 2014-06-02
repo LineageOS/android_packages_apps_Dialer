@@ -79,6 +79,12 @@ public class OpenCnamReverseLookup extends ReverseLookup {
             return null;
         }
 
+        // OpenCNAM only supports US numbers, so check that the E164 number has
+        // a US country ISO code.
+        if (!normalizedNumber.startsWith("+1") && !normalizedNumber.startsWith("1")) {
+            return null;
+        }
+
         String number = formattedNumber != null
                 ? formattedNumber : normalizedNumber;
 
