@@ -19,6 +19,7 @@ package com.android.dialer.widget;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.android.contacts.common.animation.AnimUtils;
 import com.android.dialer.R;
 
 public class SearchEditTextLayout extends FrameLayout {
+    private static final float EXPAND_MARGIN_FRACTION_START = 0.8f;
     private static final int ANIMATION_DURATION = 200;
 
     private OnKeyListener mPreImeKeyListener;
@@ -47,6 +49,11 @@ public class SearchEditTextLayout extends FrameLayout {
     private View mCollapsed;
     private View mExpanded;
     private EditText mSearchView;
+    private View mCollapsedSearchBox;
+    private View mVoiceSearchButtonView;
+    private View mOverflowButtonView;
+    private View mBackButtonView;
+    private View mClearButtonView;
 
     private ValueAnimator mAnimator;
 
@@ -84,6 +91,12 @@ public class SearchEditTextLayout extends FrameLayout {
         mCollapsed = findViewById(R.id.search_box_collapsed);
         mExpanded = findViewById(R.id.search_box_expanded);
         mSearchView = (EditText) mExpanded.findViewById(R.id.search_view);
+
+        mCollapsedSearchBox = findViewById(R.id.search_box_start_search);
+        mVoiceSearchButtonView = findViewById(R.id.voice_search_button);
+        mOverflowButtonView = findViewById(R.id.dialtacts_options_menu_button);
+        mBackButtonView = findViewById(R.id.search_back_button);
+        mClearButtonView = findViewById(R.id.search_close_button);
 
         mSearchView.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
@@ -149,9 +162,16 @@ public class SearchEditTextLayout extends FrameLayout {
         }
     }
     public void expand(boolean animate, boolean requestFocus) {
+        mCollapsedSearchBox.setVisibility(View.GONE);
+        mVoiceSearchButtonView.setVisibility(View.GONE);
+        mOverflowButtonView.setVisibility(View.GONE);
+        mBackButtonView.setVisibility(View.VISIBLE);
+        mClearButtonView.setVisibility(View.VISIBLE);
+
         if (animate) {
             AnimUtils.crossFadeViews(mExpanded, mCollapsed, ANIMATION_DURATION);
-            mAnimator = ValueAnimator.ofFloat(1f, 0f);
+            mAnimator = ValueAnimator.ofFloat(EXPAND_MARGIN_FRACTION_START, 0f);
+            setMargins(EXPAND_MARGIN_FRACTION_START);
             prepareAnimator(true);
         } else {
             mExpanded.setVisibility(View.VISIBLE);
@@ -169,6 +189,12 @@ public class SearchEditTextLayout extends FrameLayout {
     }
 
     public void collapse(boolean animate) {
+        mCollapsedSearchBox.setVisibility(View.VISIBLE);
+        mVoiceSearchButtonView.setVisibility(View.VISIBLE);
+        mOverflowButtonView.setVisibility(View.VISIBLE);
+        mBackButtonView.setVisibility(View.GONE);
+        mClearButtonView.setVisibility(View.GONE);
+
         if (animate) {
             AnimUtils.crossFadeViews(mCollapsed, mExpanded, ANIMATION_DURATION);
             mAnimator = ValueAnimator.ofFloat(0f, 1f);

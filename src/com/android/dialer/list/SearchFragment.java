@@ -17,13 +17,16 @@ package com.android.dialer.list;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Interpolator;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 
+import com.android.contacts.common.animation.AnimUtils;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
@@ -31,7 +34,6 @@ import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
-import com.android.dialer.list.OnListFragmentScrolledListener;
 import com.android.dialer.util.DialerUtils;
 
 public class SearchFragment extends PhoneNumberPickerFragment {
@@ -44,9 +46,16 @@ public class SearchFragment extends PhoneNumberPickerFragment {
      */
     private String mAddToContactNumber;
     private int mActionBarHeight;
+    private int mShadowHeight;
+    private int mPaddingTop;
+    private int mShowDialpadDuration;
+    private int mHideDialpadDuration;
+
+    private HostInterface mActivity;
 
     public interface HostInterface {
         public boolean isActionBarShowing();
+        public boolean isDialpadShown();
         public int getActionBarHideOffset();
         public int getActionBarHeight();
     }
@@ -75,9 +84,14 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             getAdapter().setHasHeader(0, false);
         }
 
-        HostInterface activity = (HostInterface) getActivity();
+        mActivity = (HostInterface) getActivity();
 
-        mActionBarHeight = activity.getActionBarHeight();
+        final Resources res = getResources();
+        mActionBarHeight = mActivity.getActionBarHeight();
+        mShadowHeight  = res.getDrawable(R.drawable.search_shadow).getIntrinsicHeight();
+        mPaddingTop = res.getDimensionPixelSize(R.dimen.search_list_padding_top);
+        mShowDialpadDuration = res.getInteger(R.integer.dialpad_slide_in_duration);
+        mHideDialpadDuration = res.getInteger(R.integer.dialpad_slide_out_duration);
 
         final View parentView = getView();
         parentView.setPaddingRelative(
@@ -88,6 +102,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
 
         final ListView listView = getListView();
 
+        listView.setClipToPadding(false);
         listView.setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -100,10 +115,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             }
         });
 
-
-        if (!activity.isActionBarShowing()) {
-            parentView.setTranslationY(-mActionBarHeight);
-        }
+        updatePosition(false /* animate */);
     }
 
     @Override
@@ -154,5 +166,37 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             DialerUtils.startActivityWithErrorToast(getActivity(), intent,
                     R.string.add_contact_not_available);
         }
+    }
+
+    /**
+     * Updates the position and padding of the search fragment, depending on whether the dialpad is
+     * shown. This can be optionally animated.
+     * @param animate
+     */
+    public void updatePosition(boolean animate) {
+        // Use negative shadow height instead of 0 to account for the 9-patch's shadow.
+        int translationValue = mActivity.isDialpadShown() ? -mActionBarHeight : -mShadowHeight;
+
+        if (animate) {
+            Interpolator interpolator =
+                    mActivity.isDialpadShown() ? AnimUtils.EASE_IN : AnimUtils.EASE_OUT ;
+            int duration =
+                    mActivity.isDialpadShown() ? mShowDialpadDuration : mHideDialpadDuration;
+            getView().animate()
+                    .translationY(translationValue)
+                    .setInterpolator(interpolator)
+                    .setDuration(duration);
+        } else {
+            getView().setTranslationY(translationValue);
+        }
+
+        // There is padding which should only be applied when the dialpad is not shown.
+        int paddingTop = mActivity.isDialpadShown() ? 0 : mPaddingTop;
+        final ListView listView = getListView();
+        listView.setPaddingRelative(
+                listView.getPaddingStart(),
+                paddingTop,
+                listView.getPaddingEnd(),
+                listView.getPaddingBottom());
     }
 }
