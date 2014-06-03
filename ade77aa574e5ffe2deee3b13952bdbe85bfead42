@@ -51,6 +51,24 @@
       "revId": "ade77aa574e5ffe2deee3b13952bdbe85bfead42",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da0c15f0_d5b0388e",
+        "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-03T07:52:20Z",
+      "side": 1,
+      "message": "Did you click the link? ;)\nI was just suggesting to use the existing constant for it.",
+      "parentUuid": "da0c15f0_95b6c088",
+      "revId": "ade77aa574e5ffe2deee3b13952bdbe85bfead42",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
