@@ -112,10 +112,20 @@
     <string name="description_add_contact" msgid="3103414772502485851">"Magdagdag ng contact"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Tingnan ang contact na si <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Tawagan si <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_contact_details" msgid="51229793651342809">"Mga detalye sa pakikipag-ugnayan para kay/sa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_call_details" msgid="8936017517290240089">"Mga detalye ng tawag"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"Bagong voicemail."</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> (na) tawag."</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"Tawagan pabalik si/ang <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> para sa hindi nasagot na tawag"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"Tawagan pabalik si/ang <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> para sa sinagot na tawag"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"Hindi nasagot na tawag mula kay/sa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"Sinagot na tawag mula kay/sa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"Tawagan si/ang <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Huling tinawagan noong <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_last" msgid="491385778814705302">"Tawagan si/ang <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Tinawagan noong <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Ipadala ang text message kay <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Hindi pa naririnig na voicemail"</string>
+    <string name="description_clear_search" msgid="688023606766232904">"I-clear ang paghahanap"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Simulan ang paghahanap gamit ang boses"</string>
-    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Tumawag sa <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Di-kilala"</string>
     <string name="voicemail" msgid="3851469869202611441">"Voicemail"</string>
@@ -133,6 +143,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Naglo-load mula sa SIM card…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Mga contact sa SIM card"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Paganahing muli ang application ng Mga Tao upang magamit ang tampok na ito."</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"Hindi available ang paghahanap gamit ang boses."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"I-type pangalan o phone number"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Lahat"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Di nasagot"</string>
@@ -158,7 +169,10 @@
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Tumawag sa <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Idagdag sa mga contact"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> (na) bagong hindi nasagot na tawag"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Lalabas dito ang mga paborito at contact na\nmadalas mong tinatawagan.\nKaya, simulan ang pagtawag."</string>
+    <string name="no_favorites" msgid="5212485868783382971">"Ipapakita dito ang mga paborito at contact na\nmadalas mong tinatawagan.\nKaya, simulan ang pagtawag."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"I-tap ang larawan upang makita ang lahat ng numero at pindutin nang matagal upang ayusing muli"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"I-dismiss"</string>
+    <string name="remove_contact" msgid="1080555335283662961">"Alisin"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Speed Dial"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"LAHAT NG CONTACT"</string>
 </resources>

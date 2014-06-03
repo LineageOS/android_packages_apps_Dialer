@@ -51,6 +51,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     private static final String TEST_COUNTRY_ISO = "US";
     /** The geocoded location used in the tests. */
     private static final String TEST_GEOCODE = "United States";
+    /** Empty geocode label */
+    private static final String EMPTY_GEOCODE = "";
 
     /** The object under test. */
     private PhoneCallDetailsHelper mHelper;
@@ -183,18 +185,18 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     public void testSetPhoneCallDetails_NoGeocode() {
         setPhoneCallDetailsWithNumberAndGeocode("+14125555555", "1-412-555-5555", null);
         assertNameEquals("1-412-555-5555");  // The phone number is shown as the name.
-        assertLabelEquals("-"); // The empty geocode is shown as the label.
+        assertLabelEquals(EMPTY_GEOCODE); // The empty geocode is shown as the label.
     }
 
     public void testSetPhoneCallDetails_EmptyGeocode() {
         setPhoneCallDetailsWithNumberAndGeocode("+14125555555", "1-412-555-5555", "");
         assertNameEquals("1-412-555-5555");  // The phone number is shown as the name.
-        assertLabelEquals("-"); // The empty geocode is shown as the label.
+        assertLabelEquals(EMPTY_GEOCODE); // The empty geocode is shown as the label.
     }
 
     public void testSetPhoneCallDetails_NoGeocodeForVoicemail() {
         setPhoneCallDetailsWithNumberAndGeocode(TEST_VOICEMAIL_NUMBER, "", "United States");
-        assertLabelEquals("-"); // The empty geocode is shown as the label.
+        assertLabelEquals(EMPTY_GEOCODE); // The empty geocode is shown as the label.
     }
 
     public void testSetPhoneCallDetails_Highlighted() {
@@ -333,6 +335,6 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                         new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION,
-                        name, 0, "", null, null));
+                        name, 0, "", null, null, 0));
     }
 }

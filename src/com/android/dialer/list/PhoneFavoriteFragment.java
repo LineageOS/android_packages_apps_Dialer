@@ -17,9 +17,7 @@ package com.android.dialer.list;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
-import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
@@ -27,7 +25,6 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -36,12 +33,13 @@ import android.provider.CallLog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -55,10 +53,10 @@ import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
-import com.android.dialer.calllog.CallLogQuery;
-import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.CallLogAdapter;
+import com.android.dialer.calllog.CallLogQuery;
 import com.android.dialer.calllog.CallLogQueryHandler;
+import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.list.PhoneFavoritesTileAdapter.ContactTileRow;
 import com.android.dialerbind.ObjectFactory;
 
@@ -107,6 +105,10 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     public interface Listener {
         public void onContactSelected(Uri contactUri);
         public void onCallNumberDirectly(String phoneNumber);
+    }
+
+    public interface HostInterface {
+        public void setDragDropController(DragDropController controller);
     }
 
     private class MissedCallLogLoaderListener implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -197,8 +199,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
     private PhoneFavoriteListView mListView;
 
-    private View mShowAllContactsButton;
-    private View mShowAllContactsInEmptyViewButton;
+    private View mPhoneFavoritesMenu;
     private View mContactTileFrame;
 
     private TileInteractionTeaserView mTileInteractionTeaserView;
@@ -238,8 +239,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         // that will be available on onCreateView().
         mContactTileAdapter = new PhoneFavoritesTileAdapter(activity, mContactTileAdapterListener,
                 this,
-                getResources().getInteger(R.integer.contact_tile_column_count_in_favorites_new),
-                1);
+                getResources().getInteger(R.integer.contact_tile_column_count_in_favorites),
+                PhoneFavoritesTileAdapter.NO_ROW_LIMIT);
         mContactTileAdapter.setPhotoLoader(ContactPhotoManager.getInstance(activity));
     }
 
@@ -253,7 +254,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                 this, 1);
         final String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mCallLogAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso), true, false);
+                new ContactInfoHelper(getActivity(), currentCountryIso), false, false);
         setHasOptionsMenu(true);
     }
 
@@ -282,7 +283,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mListView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
         mListView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
         mListView.setOnItemSwipeListener(mContactTileAdapter);
-        mListView.setOnDragDropListener(mContactTileAdapter);
+        mListView.getDragDropController().addOnDragDropListener(mContactTileAdapter);
 
         final ImageView dragShadowOverlay =
                 (ImageView) mParentView.findViewById(R.id.contact_tile_drag_shadow_overlay);
@@ -290,14 +291,8 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
 
         mEmptyView = mParentView.findViewById(R.id.phone_no_favorites_view);
 
-        mShowAllContactsInEmptyViewButton = mParentView.findViewById(
-                R.id.show_all_contact_button_in_nofav);
-        prepareAllContactsButton(mShowAllContactsInEmptyViewButton);
-
-        mShowAllContactsButton = inflater.inflate(R.layout.show_all_contact_button, mListView,
-                false);
-
-        prepareAllContactsButton(mShowAllContactsButton);
+        mPhoneFavoritesMenu = inflater.inflate(R.layout.phone_favorites_menu, mListView, false);
+        prepareFavoritesMenu(mPhoneFavoritesMenu);
 
         mContactTileFrame = mParentView.findViewById(R.id.contact_tile_frame);
 
@@ -305,7 +300,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                 R.layout.tile_interactions_teaser_view, mListView, false);
 
         mAdapter = new PhoneFavoriteMergedAdapter(getActivity(), this, mContactTileAdapter,
-                mCallLogAdapter, mShowAllContactsButton, mTileInteractionTeaserView);
+                mCallLogAdapter, mPhoneFavoritesMenu, mTileInteractionTeaserView);
 
         mTileInteractionTeaserView.setAdapter(mAdapter);
 
@@ -354,6 +349,15 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnShowAllContactsListener");
+        }
+
+        try {
+            OnDragDropListener listener = (OnDragDropListener) activity;
+            mListView.getDragDropController().addOnDragDropListener(listener);
+            ((HostInterface) activity).setDragDropController(mListView.getDragDropController());
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnDragDropListener and HostInterface");
         }
 
         // Use initLoader() instead of restartLoader() to refraining unnecessary reload.
@@ -424,7 +428,10 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     }
 
     /**
-     * Saves the current view offsets into memory
+     * Cache the current view offsets into memory. Once a relayout of views in the ListView
+     * has happened due to a dataset change, the cached offsets are used to create animations
+     * that slide views from their previous positions to their new ones, to give the appearance
+     * that the views are sliding into their new positions.
      */
     @SuppressWarnings("unchecked")
     private void saveOffsets(int removedItemHeight) {
@@ -437,10 +444,12 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             final int position = firstVisiblePosition + i;
             final long itemId = mAdapter.getItemId(position);
             final int itemViewType = mAdapter.getItemViewType(position);
-            if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP) {
+            if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP &&
+                    child instanceof ContactTileRow) {
                 // This is a tiled row, so save horizontal offsets instead
                 saveHorizontalOffsets((ContactTileRow) child, (ArrayList<ContactEntry>)
-                        mAdapter.getItem(position));
+                        mAdapter.getItem(position),
+                        mAdapter.getAdjustedPositionInContactTileAdapter(position));
             }
             if (DEBUG) {
                 Log.d(TAG, "Saving itemId: " + itemId + " for listview child " + i + " Top: "
@@ -452,15 +461,25 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mItemIdTopMap.put(KEY_REMOVED_ITEM_HEIGHT, removedItemHeight);
     }
 
-    private void saveHorizontalOffsets(ContactTileRow row, ArrayList<ContactEntry> list) {
-        for (int i = 0; i < list.size(); i++) {
+    /**
+     * Saves the horizontal offsets for contacts that are displayed as tiles in a row. Saving
+     * these offsets allow us to animate tiles sliding left and right within the same row.
+     * See {@link #saveOffsets(int removedItemHeight)}
+     */
+    private void saveHorizontalOffsets(ContactTileRow row, ArrayList<ContactEntry> list,
+            int currentRowIndex) {
+        for (int i = 0; i < list.size() && i < row.getChildCount(); i++) {
             final View child = row.getChildAt(i);
+            if (child == null) {
+                continue;
+            }
             final ContactEntry entry = list.get(i);
             final long itemId = mContactTileAdapter.getAdjustedItemId(entry.id);
             if (DEBUG) {
                 Log.d(TAG, "Saving itemId: " + itemId + " for tileview child " + i + " Left: "
                         + child.getTop());
             }
+            mItemIdTopMap.put(itemId, currentRowIndex);
             mItemIdLeftMap.put(itemId, child.getLeft());
         }
     }
@@ -469,7 +488,7 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
      * Performs a animations for a row of tiles
      */
     private void performHorizontalAnimations(ContactTileRow row, ArrayList<ContactEntry> list,
-            long[] idsInPlace) {
+            long[] idsInPlace, int currentRow) {
         if (mItemIdLeftMap.isEmpty()) {
             return;
         }
@@ -487,6 +506,25 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
             } else {
                 Integer startLeft = mItemIdLeftMap.get(itemId);
                 int left = child.getLeft();
+
+                Integer startRow = mItemIdTopMap.get(itemId);
+                if (startRow != null) {
+                    if (startRow > currentRow) {
+                        // Item has shifted upwards to the previous row.
+                        // It should now animate in from right to left.
+                        startLeft = left + child.getWidth();
+                    } else if (startRow < currentRow) {
+                        // Item has shifted downwards to the next row.
+                        // It should now animate in from left to right.
+                        startLeft = left - child.getWidth();
+                    }
+
+                    // If the item hasn't shifted rows (startRow == currentRow), it either remains
+                    // in the same position or has shifted left or right within its current row.
+                    // Either way, startLeft has already been correctly saved and retrieved from
+                    // mItemIdTopMap.
+                }
+
                 if (startLeft != null) {
                     if (startLeft != left) {
                         int delta = startLeft - left;
@@ -498,10 +536,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                         animators.add(ObjectAnimator.ofFloat(
                                 child, "translationX", delta, 0.0f));
                     }
-                } else {
-                    // In case the last square row is pushed up from the non-square section.
-                    animators.add(ObjectAnimator.ofFloat(
-                            child, "translationX", left, 0.0f));
                 }
             }
         }
@@ -538,10 +572,12 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                     final View child = mListView.getChildAt(i);
                     int position = firstVisiblePosition + i;
                     final int itemViewType = mAdapter.getItemViewType(position);
-                    if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP) {
+                    if (itemViewType == PhoneFavoritesTileAdapter.ViewTypes.TOP &&
+                            child instanceof ContactTileRow) {
                         // This is a tiled row, so perform horizontal animations instead
                         performHorizontalAnimations((ContactTileRow) child, (
-                                ArrayList<ContactEntry>) mAdapter.getItem(position), idsInPlace);
+                                ArrayList<ContactEntry>) mAdapter.getItem(position), idsInPlace,
+                                mAdapter.getAdjustedPositionInContactTileAdapter(position));
                     }
 
                     final long itemId = mAdapter.getItemId(position);
@@ -571,11 +607,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
                             }
                             startTop = top + (i > 0 ? itemHeight : -itemHeight);
                             delta = startTop - top;
-                        } else {
-                            // In case the first non-square row is pushed down
-                            // from the square section.
-                            animators.add(ObjectAnimator.ofFloat(
-                                    child, "alpha", 0.0f, 1.0f));
                         }
                         if (DEBUG) {
                             Log.d(TAG, "Found itemId: " + itemId + " for listview child " + i +
@@ -633,31 +664,17 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     }
 
     /**
-     * Returns a view that is laid out and styled to look like a regular contact, with the correct
-     * click behavior (to launch the all contacts activity when it is clicked).
+     * Prepares the favorites menu which contains the static label "Speed Dial" and the
+     * "All Contacts" button.  Sets the onClickListener for the "All Contacts" button.
      */
-    private View prepareAllContactsButton(View v) {
-        final ContactListItemView view = (ContactListItemView) v;
-        view.setOnClickListener(new OnClickListener() {
+    private void prepareFavoritesMenu(View favoritesMenu) {
+        Button allContactsButton = (Button) favoritesMenu.findViewById(R.id.all_contacts_button);
+        // Set the onClick listener for the button to bring up the all contacts view.
+        allContactsButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAllContacts();
             }
         });
-
-        view.setPhotoPosition(ContactListItemView.PhotoPosition.LEFT);
-        final Resources resources = getResources();
-        view.setBackgroundResource(R.drawable.contact_list_item_background);
-
-        view.setPaddingRelative(
-                resources.getDimensionPixelSize(R.dimen.favorites_row_start_padding),
-                resources.getDimensionPixelSize(R.dimen.favorites_row_end_padding),
-                resources.getDimensionPixelSize(R.dimen.favorites_row_top_padding),
-                resources.getDimensionPixelSize(R.dimen.favorites_row_bottom_padding));
-
-        view.setDisplayName(resources.getString(R.string.show_all_contacts_button_text));
-        view.setDrawableResource(R.drawable.list_item_avatar_bg,
-                R.drawable.ic_menu_all_contacts_dk);
-        return view;
     }
 }

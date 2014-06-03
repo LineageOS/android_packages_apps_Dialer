@@ -14,23 +14,26 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
-
+    <!-- Tab underline -->
     <item>
-        <shape android:shape="rectangle" >
-            <solid android:color="#7d7d7d" />
+        <shape android:shape="rectangle">
+            <solid android:color="@color/tab_underline_selected_color"/>
         </shape>
     </item>
-    <item android:bottom="6dp">
+    <!-- Tab selection indicator -->
+    <item android:bottom="@dimen/tab_underline_height">
         <shape android:shape="rectangle" >
-            <solid android:color="@color/actionbar_background_color" />
+            <solid android:color="@color/tab_selected_color" />
         </shape>
     </item>
-    <item>
+    <!-- Tab background (in pressed state) -->
+    <item android:bottom="@dimen/tab_selection_height">
         <shape android:shape="rectangle" >
-            <solid android:color="#4dffffff" />
+            <gradient
+                android:startColor="@color/tab_background_gradient_start_pressed_color"
+                android:endColor="@color/tab_background_gradient_end_pressed_color"
+                android:angle="270" />
         </shape>
     </item>
-
 </layer-list>

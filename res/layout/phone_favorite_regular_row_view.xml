@@ -65,18 +65,6 @@
                 android:singleLine="true"
                 android:textColor="@color/dialtacts_secondary_text_color" />
         </LinearLayout>
-        <ImageView
-            android:id="@+id/contact_favorite_star"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@id/contact_tile_quick"
-            android:layout_alignEnd="@id/contact_tile_quick"
-            android:layout_alignBottom="@id/contact_tile_quick"
-            android:layout_marginRight="7dip"
-            android:layout_marginEnd="7dip"
-            android:layout_marginBottom="7dip"
-            android:src="@drawable/ic_star_marked_as_fav"
-            android:visibility="gone" />
 
     </RelativeLayout>
 

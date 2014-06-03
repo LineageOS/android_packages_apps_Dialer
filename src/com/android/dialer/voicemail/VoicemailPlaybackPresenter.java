@@ -16,8 +16,6 @@
 
 package com.android.dialer.voicemail;
 
-import static android.util.MathUtils.constrain;
-
 import android.content.Context;
 import android.database.ContentObserver;
 import android.media.AudioManager;
@@ -37,6 +35,7 @@ import com.android.ex.variablespeed.SingleThreadedMediaPlayerProxy;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -313,6 +312,7 @@ public class VoicemailPlaybackPresenter {
                             mPlayer.setDataSource(mView.getDataSourceContext(), mVoicemailUri);
                             mPlayer.setAudioStreamType(PLAYBACK_STREAM);
                             mPlayer.prepare();
+                            mDuration.set(mPlayer.getDuration());
                             return null;
                         } catch (Exception e) {
                             return e;
@@ -346,7 +346,7 @@ public class VoicemailPlaybackPresenter {
         mView.setSpeakerPhoneOn(mView.isSpeakerPhoneOn());
         mView.setRateDecreaseButtonListener(createRateDecreaseListener());
         mView.setRateIncreaseButtonListener(createRateIncreaseListener());
-        mView.setClipPosition(0, mPlayer.getDuration());
+        mView.setClipPosition(0, mDuration.get());
         mView.playbackStopped();
         // Always disable on stop.
         mView.disableProximitySensor();
@@ -365,6 +365,10 @@ public class VoicemailPlaybackPresenter {
     }
 
     public void onDestroy() {
+        if (mPrepareTask != null) {
+            mPrepareTask.cancel(false);
+            mPrepareTask = null;
+        }
         mPlayer.release();
         if (mFetchResultHandler != null) {
             mFetchResultHandler.destroy();
@@ -432,49 +436,67 @@ public class VoicemailPlaybackPresenter {
         }
     }
 
+    private class AsyncPrepareTask extends AsyncTask<Void, Void, Exception> {
+        private int mClipPositionInMillis;
+
+        AsyncPrepareTask(int clipPositionInMillis) {
+            mClipPositionInMillis = clipPositionInMillis;
+        }
+
+        @Override
+        public Exception doInBackground(Void... params) {
+            try {
+                if (!mPlayer.isReadyToPlay()) {
+                    mPlayer.reset();
+                    mPlayer.setDataSource(mView.getDataSourceContext(), mVoicemailUri);
+                    mPlayer.setAudioStreamType(PLAYBACK_STREAM);
+                    mPlayer.prepare();
+                }
+                return null;
+            } catch (Exception e) {
+                return e;
+            }
+        }
+
+        @Override
+        public void onPostExecute(Exception exception) {
+            mPrepareTask = null;
+            if (exception == null) {
+                final int duration = mPlayer.getDuration();
+                mDuration.set(duration);
+                int startPosition =
+                    constrain(mClipPositionInMillis, 0, duration);
+                mPlayer.seekTo(startPosition);
+                mView.setClipPosition(startPosition, duration);
+                try {
+                    // Can throw RejectedExecutionException
+                    mPlayer.start();
+                    mView.playbackStarted();
+                    if (!mWakeLock.isHeld()) {
+                        mWakeLock.acquire();
+                    }
+                    // Only enable if we are not currently using the speaker phone.
+                    if (!mView.isSpeakerPhoneOn()) {
+                        mView.enableProximitySensor();
+                    }
+                    // Can throw RejectedExecutionException
+                    mPositionUpdater.startUpdating(startPosition, duration);
+                } catch (RejectedExecutionException e) {
+                    handleError(e);
+                }
+            } else {
+                handleError(exception);
+            }
+        }
+    }
+
     private void resetPrepareStartPlaying(final int clipPositionInMillis) {
         if (mPrepareTask != null) {
             mPrepareTask.cancel(false);
+            mPrepareTask = null;
         }
         mPrepareTask = mAsyncTaskExecutor.submit(Tasks.RESET_PREPARE_START_MEDIA_PLAYER,
-                new AsyncTask<Void, Void, Exception>() {
-                    @Override
-                    public Exception doInBackground(Void... params) {
-                        try {
-                            mPlayer.reset();
-                            mPlayer.setDataSource(mView.getDataSourceContext(), mVoicemailUri);
-                            mPlayer.setAudioStreamType(PLAYBACK_STREAM);
-                            mPlayer.prepare();
-                            return null;
-                        } catch (Exception e) {
-                            return e;
-                        }
-                    }
-
-                    @Override
-                    public void onPostExecute(Exception exception) {
-                        mPrepareTask = null;
-                        if (exception == null) {
-                            mDuration.set(mPlayer.getDuration());
-                            int startPosition =
-                                    constrain(clipPositionInMillis, 0, mDuration.get());
-                            mView.setClipPosition(startPosition, mDuration.get());
-                            mPlayer.seekTo(startPosition);
-                            mPlayer.start();
-                            mView.playbackStarted();
-                            if (!mWakeLock.isHeld()) {
-                                mWakeLock.acquire();
-                            }
-                            // Only enable if we are not currently using the speaker phone.
-                            if (!mView.isSpeakerPhoneOn()) {
-                                mView.enableProximitySensor();
-                            }
-                            mPositionUpdater.startUpdating(startPosition, mDuration.get());
-                        } else {
-                            handleError(exception);
-                        }
-                    }
-                });
+                new AsyncPrepareTask(clipPositionInMillis));
     }
 
     private void handleError(Exception e) {
@@ -600,6 +622,7 @@ public class VoicemailPlaybackPresenter {
             synchronized (mLock) {
                 if (mScheduledFuture != null) {
                     mScheduledFuture.cancel(false);
+                    mScheduledFuture = null;
                 }
                 mScheduledFuture = mExecutorService.scheduleAtFixedRate(this, 0, mPeriodMillis,
                         TimeUnit.MILLISECONDS);
@@ -622,9 +645,14 @@ public class VoicemailPlaybackPresenter {
         }
         if (mPrepareTask != null) {
             mPrepareTask.cancel(false);
+            mPrepareTask = null;
         }
         if (mWakeLock.isHeld()) {
             mWakeLock.release();
         }
+    }
+
+    private static int constrain(int amount, int low, int high) {
+        return amount < low ? low : (amount > high ? high : amount);
     }
 }

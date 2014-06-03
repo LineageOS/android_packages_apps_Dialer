@@ -258,7 +258,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     }
 
     @Override
-    protected void onNotNullableQueryComplete(int token, Object cookie, Cursor cursor) {
+    protected synchronized void onNotNullableQueryComplete(int token, Object cookie, Cursor cursor) {
         if (token == QUERY_CALLLOG_TOKEN) {
             int requestId = ((Integer) cookie).intValue();
             if (requestId != mCallsRequestId) {

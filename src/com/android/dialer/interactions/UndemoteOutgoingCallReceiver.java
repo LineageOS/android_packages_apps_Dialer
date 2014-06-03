@@ -41,16 +41,16 @@ public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
             if (TextUtils.isEmpty(number)) {
                 return;
             }
-            final long id = getContactIdFromPhoneNumber(context, number);
-            if (id != NO_CONTACT_FOUND) {
-                final Thread thread = new Thread() {
-                    @Override
-                    public void run() {
+            final Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    final long id = getContactIdFromPhoneNumber(context, number);
+                    if (id != NO_CONTACT_FOUND) {
                         undemoteContactWithId(context, id);
                     }
-                };
-                thread.start();
-            }
+                }
+            };
+            thread.start();
         }
     }
 
@@ -68,6 +68,9 @@ public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
                 Uri.encode(number));
         final Cursor cursor = context.getContentResolver().query(contactUri, new String[] {
                 PhoneLookup._ID}, null, null, null);
+        if (cursor == null) {
+            return NO_CONTACT_FOUND;
+        }
         try {
             if (cursor.moveToFirst()) {
                 final long id = cursor.getLong(0);

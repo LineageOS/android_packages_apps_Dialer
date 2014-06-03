@@ -112,10 +112,20 @@
     <string name="description_add_contact" msgid="3103414772502485851">"संपर्क जोड़ें"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> संपर्क देखें"</string>
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g> को कॉल करें"</string>
+    <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> का संपर्क विवरण"</string>
+    <string name="description_call_details" msgid="8936017517290240089">"कॉल विवरण"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"नया ध्वनि मेल."</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> कॉल."</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> से वापसी वाला छूटा हुआ कॉल"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> से वापसी वाला जवाबी कॉल"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> से छूटा हुआ कॉल"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g> से जवाबी कॉल"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> पर कॉल करें. <xliff:g id="TIMEOFCALL">%3$s</xliff:g> पर अंतिम बार कॉल किया गया."</string>
+    <string name="description_call_last" msgid="491385778814705302">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> पर कॉल करें. <xliff:g id="TIMEOFCALL">%3$s</xliff:g> पर कॉल किया गया."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g> को पाठ संदेश भेजें"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"नहीं सुना गया ध्वनिमेल"</string>
+    <string name="description_clear_search" msgid="688023606766232904">"खोज साफ़ करें"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"बोलकर खोजें शुरु करें"</string>
-    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> पर कॉल करें"</string>
     <string name="unknown" msgid="740067747858270469">"अज्ञात"</string>
     <string name="voicemail" msgid="3851469869202611441">"ध्वनिमेल"</string>
@@ -133,6 +143,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"सिम कार्ड से लोड हो रहा है…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"सिम कार्ड के संपर्क"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"इस सुविधा का उपयोग करने के लिए लोग ऐप्स  को पुन: सक्षम करें."</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"बोलकर खोजना उपलब्ध नहीं है."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"नाम या फ़ोन नंबर लिखें"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"सभी"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"छूटे हुए"</string>
@@ -161,4 +172,7 @@
     <string name="no_favorites" msgid="5212485868783382971">"पसंदीदा &amp; आपके द्वारा अक्सर कॉल किए जाने वाले पसंदीदा और संपर्क\nयहां दिखाए जाएंगे.\nतो, कॉल करना प्रारंभ करें."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"सभी नंबर देखने के लिए चित्र को टैप करें या पुनः क्रमित करने के लिए दबाए रखें"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"ख़ारिज करें"</string>
+    <string name="remove_contact" msgid="1080555335283662961">"निकालें"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"स्पीड डायल"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"सभी संपर्क"</string>
 </resources>

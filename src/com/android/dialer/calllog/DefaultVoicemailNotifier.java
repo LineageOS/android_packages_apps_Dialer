@@ -57,7 +57,7 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
     private final NotificationManager mNotificationManager;
     private final NewCallsQuery mNewCallsQuery;
     private final NameLookupQuery mNameLookupQuery;
-    private final PhoneNumberHelper mPhoneNumberHelper;
+    private final PhoneNumberDisplayHelper mPhoneNumberHelper;
 
     /** Returns the singleton instance of the {@link DefaultVoicemailNotifier}. */
     public static synchronized DefaultVoicemailNotifier getInstance(Context context) {
@@ -75,7 +75,7 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
 
     private DefaultVoicemailNotifier(Context context,
             NotificationManager notificationManager, NewCallsQuery newCallsQuery,
-            NameLookupQuery nameLookupQuery, PhoneNumberHelper phoneNumberHelper) {
+            NameLookupQuery nameLookupQuery, PhoneNumberDisplayHelper phoneNumberHelper) {
         mContext = context;
         mNotificationManager = notificationManager;
         mNewCallsQuery = newCallsQuery;
@@ -340,7 +340,7 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
      * This will cause some Disk I/O, at least the first time it is created, so it should not be
      * called from the main thread.
      */
-    public static PhoneNumberHelper createPhoneNumberHelper(Context context) {
-        return new PhoneNumberHelper(context.getResources());
+    public static PhoneNumberDisplayHelper createPhoneNumberHelper(Context context) {
+        return new PhoneNumberDisplayHelper(context.getResources());
     }
 }

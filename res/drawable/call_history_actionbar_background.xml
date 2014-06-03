@@ -16,10 +16,10 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#c6c6c6" />
+            <solid android:color="@color/actionbar_underline" />
         </shape>
     </item>
-    <item android:bottom="1dip">
+    <item android:bottom="2dp">
         <shape android:shape="rectangle">
             <solid android:color="@color/actionbar_background_color" />
         </shape>

@@ -20,7 +20,7 @@ import android.provider.CallLog;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
-import com.google.android.collect.Sets;
+import com.google.common.collect.Sets;
 
 import java.util.Set;
 
@@ -28,7 +28,7 @@ import java.util.Set;
  *
  */
 public class PhoneNumberUtilsWrapper {
-
+    public static final PhoneNumberUtilsWrapper INSTANCE = new PhoneNumberUtilsWrapper();
     private static final Set<String> LEGACY_UNKNOWN_NUMBERS = Sets.newHashSet("-1", "-2", "-3");
 
     /** Returns true if it is possible to place a call to the given number. */
@@ -50,7 +50,7 @@ public class PhoneNumberUtilsWrapper {
      * mock-out this, it is not a static method.
      */
     public boolean isVoicemailNumber(CharSequence number) {
-        return PhoneNumberUtils.isVoiceMailNumber(number.toString());
+        return number!= null && PhoneNumberUtils.isVoiceMailNumber(number.toString());
     }
 
     /**
@@ -58,7 +58,7 @@ public class PhoneNumberUtilsWrapper {
      * static method.
      */
     public boolean isSipNumber(CharSequence number) {
-        return PhoneNumberUtils.isUriNumber(number.toString());
+        return number != null && PhoneNumberUtils.isUriNumber(number.toString());
     }
 
     public static boolean isUnknownNumberThatCanBeLookedUp(CharSequence number, int presentation) {
@@ -74,16 +74,16 @@ public class PhoneNumberUtilsWrapper {
         if (TextUtils.isEmpty(number)) {
             return false;
         }
-        if (new PhoneNumberUtilsWrapper().isVoicemailNumber(number)) {
+        if (INSTANCE.isVoicemailNumber(number)) {
             return false;
         }
-        if (isLegacyUnknownNumbers(number.toString())) {
+        if (isLegacyUnknownNumbers(number)) {
             return false;
         }
         return true;
     }
 
     public static boolean isLegacyUnknownNumbers(CharSequence number) {
-        return LEGACY_UNKNOWN_NUMBERS.contains(number.toString());
+        return number != null && LEGACY_UNKNOWN_NUMBERS.contains(number.toString());
     }
 }

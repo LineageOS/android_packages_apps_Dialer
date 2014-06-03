@@ -112,10 +112,20 @@
     <string name="description_add_contact" msgid="3103414772502485851">"Añadir contacto"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Ver contacto <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Llamar a <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_contact_details" msgid="51229793651342809">"Información de contacto de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_call_details" msgid="8936017517290240089">"Detalles de la llamada"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"Nuevo mensaje de voz."</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> llamadas."</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"Se devuelve una llamada perdida de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"Se devuelve una llamada respondida de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"Llamada perdida de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"Llamada respondida de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"Llamar a <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Última llamada: <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_last" msgid="491385778814705302">"Llamar a <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Hora de la llamada: <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Enviar mensaje de texto a <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Mensaje de voz sin oír"</string>
+    <string name="description_clear_search" msgid="688023606766232904">"Borrar la búsqueda"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Iniciar búsqueda por voz"</string>
-    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Llamar a <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Desconocidos"</string>
     <string name="voicemail" msgid="3851469869202611441">"Buzón de voz"</string>
@@ -133,6 +143,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Cargando desde tarjeta SIM…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contactos de tarjeta SIM"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Vuelve a habilitar la aplicación Contactos para usar esta función."</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"La búsqueda por voz no está disponible."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Escribe un nombre o teléfono"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Todo"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Perdidas"</string>
@@ -158,7 +169,10 @@
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Llamar a <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Añadir a contactos"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> llamadas perdidas nuevas"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Los favoritos y contactos a los que\nllamas con frecuencia se mostrarán aquí.\nYa puedes llamar."</string>
+    <string name="no_favorites" msgid="5212485868783382971">"Los favoritos y contactos a los que\nllamas con frecuencia se mostrarán aquí.\n"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Toca la imagen para ver todos los números o mantenla pulsada para cambiar el orden"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ignorar"</string>
+    <string name="remove_contact" msgid="1080555335283662961">"Eliminar"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Marcación rápida"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TODOS LOS CONTACTOS"</string>
 </resources>

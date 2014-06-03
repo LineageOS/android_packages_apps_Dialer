@@ -70,6 +70,10 @@ public class CallLogNotificationsService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        if (intent == null) {
+            Log.d(TAG, "onHandleIntent: could not handle null intent");
+            return;
+        }
         if (ACTION_MARK_NEW_VOICEMAILS_AS_OLD.equals(intent.getAction())) {
             mCallLogQueryHandler.markNewVoicemailsAsOld();
         } else if (ACTION_UPDATE_NOTIFICATIONS.equals(intent.getAction())) {

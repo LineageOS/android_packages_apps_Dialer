@@ -30,7 +30,7 @@
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Eliminar correio de voz"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Partilhar correio de voz"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"O registo de chamadas está vazio."</string>
-    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Limpar reg. de cham.?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Limpar registo de chamadas?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Todos os registos de chamadas serão eliminados."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"A limpar registo de chamadas..."</string>
   <plurals name="notification_voicemail_title">
@@ -112,10 +112,20 @@
     <string name="description_add_contact" msgid="3103414772502485851">"Adicionar contacto"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Ver o contacto <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Ligar a <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_contact_details" msgid="51229793651342809">"Detalhes de contacto para <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_call_details" msgid="8936017517290240089">"Detalhes da chamada"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"Novo correio de voz."</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> chamadas."</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"Responder à chamada não atendida de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"Responder à chamada atendida de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"Chamada não atendida de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"Chamada atendida de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> <xliff:g id="TIMEOFCALL">%3$s</xliff:g>"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"Telefonar para <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Última chamada efetuada às <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <string name="description_call_last" msgid="491385778814705302">"Telefonar para <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>. Chamada efetuada às <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Enviar mensagem de texto para <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Mensagem de correio de voz ainda não ouvida"</string>
+    <string name="description_clear_search" msgid="688023606766232904">"Limpar pesquisa"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Iniciar pesquisa por voz"</string>
-    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Telefonar para <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Desconhecido"</string>
     <string name="voicemail" msgid="3851469869202611441">"Correio de voz"</string>
@@ -133,6 +143,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"A carregar a partir do cartão SIM..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contactos no cartão SIM"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"Reative a aplicação Pessoas para utilizar esta funcionalidade."</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"A pesquisa por voz não está disponível."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Introduzir nome ou n.º telef."</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Todos"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Não atendidas"</string>
@@ -161,4 +172,7 @@
     <string name="no_favorites" msgid="5212485868783382971">"Os favoritos e os contactos para os quais\nliga frequentemente serão mostrados aqui,\n por isso, comece a ligar."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Toque na imagem para ver todos os números ou prima sem soltar para reordenar"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ignorar"</string>
+    <string name="remove_contact" msgid="1080555335283662961">"Remover"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Marcação rápida"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TODOS OS CONTACTOS"</string>
 </resources>

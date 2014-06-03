@@ -24,6 +24,7 @@ import android.view.View;
 
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
+import com.android.dialer.R;
 
 /**
  * Unit tests for {@link CallLogListItemHelper}.
@@ -49,19 +50,24 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
 
     /** The views used in the tests. */
     private CallLogListItemViews mViews;
-    private PhoneNumberHelper mPhoneNumberHelper;
+    private PhoneNumberDisplayHelper mPhoneNumberHelper;
+    private PhoneNumberDisplayHelper mPhoneNumberDisplayHelper;
+
+    private Resources mResources;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         Context context = getContext();
-        Resources resources = context.getResources();
-        CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
+        mResources = context.getResources();
+        CallTypeHelper callTypeHelper = new CallTypeHelper(mResources);
         final TestPhoneNumberUtilsWrapper phoneUtils = new TestPhoneNumberUtilsWrapper(
                 TEST_VOICEMAIL_NUMBER);
         PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
-                resources, callTypeHelper, phoneUtils);
-        mHelper = new CallLogListItemHelper(phoneCallDetailsHelper, mPhoneNumberHelper, resources);
+                mResources, callTypeHelper, phoneUtils);
+        mPhoneNumberDisplayHelper = new PhoneNumberDisplayHelper(mResources);
+        mHelper = new CallLogListItemHelper(phoneCallDetailsHelper, mPhoneNumberDisplayHelper,
+                mResources);
         mViews = CallLogListItemViews.createForTest(context);
     }
 
@@ -75,92 +81,286 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     public void testSetPhoneCallDetails() {
         setPhoneCallDetailsWithNumber("12125551234", Calls.PRESENTATION_ALLOWED,
                 "1-212-555-1234");
-        assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
+        assertEquals(View.VISIBLE, mViews.secondaryActionButtonView.getVisibility());
     }
 
     public void testSetPhoneCallDetailsInFavorites() {
         setPhoneCallDetailsWithNumberInFavorites("12125551234", Calls.PRESENTATION_ALLOWED,
                 "1-212-555-1234");
-        assertNoCallButton();
+        assertNoCallIntent();
     }
 
     public void testSetPhoneCallDetails_Unknown() {
         setPhoneCallDetailsWithNumber("", Calls.PRESENTATION_UNKNOWN, "");
-        assertNoCallButton();
+        assertNoCallIntent();
     }
 
     public void testSetPhoneCallDetailsInFavorites_Unknown() {
         setPhoneCallDetailsWithNumberInFavorites("", Calls.PRESENTATION_UNKNOWN, "");
-        assertNoCallButton();
+        assertNoCallIntent();
     }
 
     public void testSetPhoneCallDetails_Private() {
         setPhoneCallDetailsWithNumber("", Calls.PRESENTATION_RESTRICTED, "");
-        assertNoCallButton();
+        assertNoCallIntent();
     }
 
     public void testSetPhoneCallDetailsInFavorites_Private() {
         setPhoneCallDetailsWithNumberInFavorites("", Calls.PRESENTATION_RESTRICTED, "");
-        assertNoCallButton();
+        assertNoCallIntent();
     }
 
     public void testSetPhoneCallDetails_Payphone() {
         setPhoneCallDetailsWithNumber("", Calls.PRESENTATION_PAYPHONE, "");
-        assertNoCallButton();
+        assertNoCallIntent();
     }
 
     public void testSetPhoneCallDetailsInFavorites_Payphone() {
         setPhoneCallDetailsWithNumberInFavorites("", Calls.PRESENTATION_PAYPHONE, "");
-        assertNoCallButton();
+        assertNoCallIntent();
     }
 
     public void testSetPhoneCallDetails_VoicemailNumber() {
         setPhoneCallDetailsWithNumber(TEST_VOICEMAIL_NUMBER,
                 Calls.PRESENTATION_ALLOWED, TEST_VOICEMAIL_NUMBER);
-        assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
+        assertEquals(View.VISIBLE, mViews.secondaryActionButtonView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_ReadVoicemail() {
         setPhoneCallDetailsWithTypes(Calls.VOICEMAIL_TYPE);
-        assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
+        assertEquals(View.VISIBLE, mViews.secondaryActionButtonView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_UnreadVoicemail() {
         setUnreadPhoneCallDetailsWithTypes(Calls.VOICEMAIL_TYPE);
-        assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
+        assertEquals(View.VISIBLE, mViews.secondaryActionButtonView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_VoicemailFromUnknown() {
         setPhoneCallDetailsWithNumberAndType("", Calls.PRESENTATION_UNKNOWN,
                 "", Calls.VOICEMAIL_TYPE);
-        assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
+        assertEquals(View.VISIBLE, mViews.secondaryActionButtonView.getVisibility());
     }
 
     public void testSetPhoneCallDetailsInFavorites_VoicemailNumber() {
         setPhoneCallDetailsWithNumberInFavorites(TEST_VOICEMAIL_NUMBER,
                 Calls.PRESENTATION_ALLOWED, TEST_VOICEMAIL_NUMBER);
-        assertNoCallButton();
+        assertNoCallIntent();
     }
 
     public void testSetPhoneCallDetailsInFavorites_ReadVoicemail() {
         setPhoneCallDetailsWithTypesInFavorites(Calls.VOICEMAIL_TYPE);
-        assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
+        assertEquals(View.VISIBLE, mViews.secondaryActionButtonView.getVisibility());
     }
 
     public void testSetPhoneCallDetailsInFavorites_UnreadVoicemail() {
         setUnreadPhoneCallDetailsWithTypesInFavorites(Calls.VOICEMAIL_TYPE);
-        assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
+        assertEquals(View.VISIBLE, mViews.secondaryActionButtonView.getVisibility());
     }
 
     public void testSetPhoneCallDetailsInFavorites_VoicemailFromUnknown() {
         setPhoneCallDetailsWithNumberAndTypeInFavorites("", Calls.PRESENTATION_UNKNOWN,
                 "", Calls.VOICEMAIL_TYPE);
-        assertEquals(View.VISIBLE, mViews.secondaryActionView.getVisibility());
+        assertEquals(View.VISIBLE, mViews.secondaryActionButtonView.getVisibility());
     }
 
-    /** Asserts that the whole call area is gone. */
-    private void assertNoCallButton() {
-        assertEquals(View.GONE, mViews.secondaryActionView.getVisibility());
+    /**
+     * Test getCallDescriptionID method used to get the accessibility description for calls.
+     * Test case where an answered unknown call is received.
+     */
+    public void testGetCallDescriptionID_UnknownAnswered() {
+        PhoneCallDetails details = new PhoneCallDetails("", Calls.PRESENTATION_UNKNOWN, "",
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION);
+        assertEquals(R.string.description_unknown_answered_call,
+                mHelper.getCallDescriptionStringID(details));
+    }
+
+    /**
+     * Test getCallDescriptionID method used to get the accessibility description for calls.
+     * Test case where an missed unknown call is received.
+     */
+    public void testGetCallDescriptionID_UnknownMissed() {
+        PhoneCallDetails details = new PhoneCallDetails("", Calls.PRESENTATION_UNKNOWN, "",
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.MISSED_TYPE}, TEST_DATE, TEST_DURATION);
+        assertEquals(R.string.description_unknown_missed_call,
+                mHelper.getCallDescriptionStringID(details));
+    }
+
+    /**
+     * Test getCallDescriptionID method used to get the accessibility description for calls.
+     * Test case where an missed unknown call is received and a voicemail was left.
+     */
+    public void testGetCallDescriptionID_UnknownVoicemail() {
+        PhoneCallDetails details = new PhoneCallDetails("", Calls.PRESENTATION_UNKNOWN, "",
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.VOICEMAIL_TYPE}, TEST_DATE, TEST_DURATION);
+        assertEquals(R.string.description_unknown_missed_call,
+                mHelper.getCallDescriptionStringID(details));
+    }
+
+    /**
+     * Test getCallDescriptionID method used to get the accessibility description for calls.
+     * Test case where an answered call from a known caller is received.
+     */
+    public void testGetCallDescriptionID_KnownAnswered() {
+        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION);
+        assertEquals(R.string.description_return_answered_call,
+                mHelper.getCallDescriptionStringID(details));
+    }
+
+    /**
+     * Test getCallDescriptionID method used to get the accessibility description for calls.
+     * Test case where a missed call from a known caller is received.
+     */
+    public void testGetCallDescriptionID_KnownMissed() {
+        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.MISSED_TYPE}, TEST_DATE, TEST_DURATION);
+        assertEquals(R.string.description_return_missed_call,
+                mHelper.getCallDescriptionStringID(details));
+    }
+
+    /**
+     * Test getCallDescriptionID method used to get the accessibility description for calls.
+     * Test case where a missed call from a known caller is received and a voicemail was left.
+     */
+    public void testGetCallDescriptionID_KnownVoicemail() {
+        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.VOICEMAIL_TYPE}, TEST_DATE, TEST_DURATION);
+        assertEquals(R.string.description_return_missed_call,
+                mHelper.getCallDescriptionStringID(details));
+    }
+
+    /**
+     * Test getCallDescriptionID method used to get the accessibility description for calls.
+     * Test case where an outgoing call is made to a known number and there is a history of
+     * only a single call for this caller.
+     */
+    public void testGetCallDescriptionID_OutgoingSingle() {
+        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
+        assertEquals(R.string.description_call_last,
+                mHelper.getCallDescriptionStringID(details));
+    }
+
+    /**
+     * Test getCallDescriptionID method used to get the accessibility description for calls.
+     * Test case where an outgoing call is made to a known number and there is a history of
+     * many calls for this caller.
+     */
+    public void testGetCallDescriptionID_OutgoingMultiple() {
+        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.OUTGOING_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
+        assertEquals(R.string.description_call_last_multiple,
+                mHelper.getCallDescriptionStringID(details));
+    }
+
+    /**
+     * Test getCallDescription method used to get the accessibility description for calls.
+     * For outgoing calls, we should NOT have "New Voicemail" in the description.
+     */
+    public void testGetCallDescription_NoVoicemailOutgoing() {
+        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.OUTGOING_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
+        CharSequence description = mHelper.getCallDescription(details);
+        assertFalse(description.toString()
+                .contains(this.mResources.getString(R.string.description_new_voicemail)));
+    }
+
+    /**
+     * Test getCallDescription method used to get the accessibility description for calls.
+     * For regular incoming calls, we should NOT have "New Voicemail" in the description.
+     */
+    public void testGetCallDescription_NoVoicemailIncoming() {
+        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.INCOMING_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
+        CharSequence description = mHelper.getCallDescription(details);
+        assertFalse(description.toString()
+                .contains(this.mResources.getString(R.string.description_new_voicemail)));
+    }
+
+    /**
+     * Test getCallDescription method used to get the accessibility description for calls.
+     * For regular missed calls, we should NOT have "New Voicemail" in the description.
+     */
+    public void testGetCallDescription_NoVoicemailMissed() {
+        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.MISSED_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
+        CharSequence description = mHelper.getCallDescription(details);
+        assertFalse(description.toString()
+                .contains(this.mResources.getString(R.string.description_new_voicemail)));
+    }
+
+    /**
+     * Test getCallDescription method used to get the accessibility description for calls.
+     * For voicemail calls, we should have "New Voicemail" in the description.
+     */
+    public void testGetCallDescription_Voicemail() {
+        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.VOICEMAIL_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
+        CharSequence description = mHelper.getCallDescription(details);
+        assertTrue(description.toString()
+                .contains(this.mResources.getString(R.string.description_new_voicemail)));
+    }
+
+    /**
+     * Test getCallDescription method used to get the accessibility description for calls.
+     * Test that the "X calls" message is not present if there is only a single call.
+     */
+    public void testGetCallDescription_NumCallsSingle() {
+        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.VOICEMAIL_TYPE}, TEST_DATE, TEST_DURATION);
+        CharSequence description = mHelper.getCallDescription(details);
+
+        // Rather than hard coding the "X calls" string message, we'll generate it with an empty
+        // number of calls, and trim the resulting string.  This gets us just the word "calls",
+        // and ensures any trivial changes to that string resource won't unnecessarily break
+        // the unit test.
+        assertFalse(description.toString()
+                .contains(this.mResources.getString(R.string.description_num_calls, "").trim()));
+    }
+
+    /**
+     * Test getCallDescription method used to get the accessibility description for calls.
+     * Test that the "X calls" message is present if there are many calls.
+     */
+    public void testGetCallDescription_NumCallsMultiple() {
+        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.VOICEMAIL_TYPE, Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION);
+        CharSequence description = mHelper.getCallDescription(details);
+        assertTrue(description.toString()
+                .contains(this.mResources.getString(R.string.description_num_calls, 2)));
+    }
+
+    /** Asserts that the primary action view does not have a call intent. */
+    private void assertNoCallIntent() {
+        Object intentProvider = (IntentProvider)mViews.primaryActionView.getTag();
+        // The intent provider should be null as there is no ability to make a call.
+        assertNull(intentProvider);
     }
 
     /** Sets the details of a phone call using the specified phone number. */

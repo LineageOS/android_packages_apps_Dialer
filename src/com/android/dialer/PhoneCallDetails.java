@@ -59,13 +59,17 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
      * This is meant to store the high-res photo only.
      */
     public final Uri photoUri;
+    /**
+     * The source type of the contact associated with this call.
+     */
+    public final int sourceType;
 
     /** Create the details for a call with a number not associated with a contact. */
     public PhoneCallDetails(CharSequence number, int numberPresentation,
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration) {
         this(number, numberPresentation, formattedNumber, countryIso, geocode,
-                callTypes, date, duration, "", 0, "", null, null);
+                callTypes, date, duration, "", 0, "", null, null, 0);
     }
 
     /** Create the details for a call with a number associated with a contact. */
@@ -73,7 +77,7 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration, CharSequence name,
             int numberType, CharSequence numberLabel, Uri contactUri,
-            Uri photoUri) {
+            Uri photoUri, int sourceType) {
         this.number = number;
         this.numberPresentation = numberPresentation;
         this.formattedNumber = formattedNumber;
@@ -87,6 +91,7 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
         this.numberLabel = numberLabel;
         this.contactUri = contactUri;
         this.photoUri = photoUri;
+        this.sourceType = sourceType;
     }
 
     @Override

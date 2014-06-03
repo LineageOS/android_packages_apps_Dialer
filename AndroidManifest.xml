@@ -16,7 +16,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     android:sharedUserId="com.android.dialer"
-    package="com.android.dialer">
+    package="com.android.dialer"
+    coreApp="true" >
 
     <uses-permission android:name="android.permission.CALL_PRIVILEGED" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -72,7 +73,7 @@
              dialpad screen. -->
         <activity android:name=".DialtactsActivity"
             android:label="@string/launcherDialer"
-            android:theme="@style/DialtactsTheme"
+            android:theme="@style/DialtactsThemeHiddenActionBar"
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
             android:icon="@mipmap/ic_launcher_phone"
