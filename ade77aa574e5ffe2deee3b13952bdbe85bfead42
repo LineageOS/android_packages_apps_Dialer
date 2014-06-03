@@ -69,6 +69,24 @@
       "revId": "ade77aa574e5ffe2deee3b13952bdbe85bfead42",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da0c15f0_15abd01e",
+        "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2014-06-03T07:55:27Z",
+      "side": 1,
+      "message": "Oh derp. Yeah. Don\u0027t mind me. Someone fed be red bull.",
+      "parentUuid": "da0c15f0_d5b0388e",
+      "revId": "ade77aa574e5ffe2deee3b13952bdbe85bfead42",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
