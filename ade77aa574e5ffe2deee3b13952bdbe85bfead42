@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da0c15f0_55bc286c",
+        "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-03T07:47:38Z",
+      "side": 1,
+      "message": "If normalizedNumber is null a NPE will be thrown in httpGetRequest, so the check for it being !\u003d null is unneeded.",
+      "revId": "ade77aa574e5ffe2deee3b13952bdbe85bfead42",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da0c15f0_f590dcee",
+        "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-03T07:47:38Z",
+      "side": 1,
+      "message": "http://developer.android.com/reference/org/apache/http/HttpStatus.html#SC_OK",
+      "revId": "ade77aa574e5ffe2deee3b13952bdbe85bfead42",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
