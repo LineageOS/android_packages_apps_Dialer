@@ -48,6 +48,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.View.OnDragListener;
 import android.view.View.OnTouchListener;
 import android.view.animation.AccelerateInterpolator;
@@ -88,6 +89,7 @@ import com.android.dialer.list.RemoveView;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.widget.ActionBarController;
+import com.android.dialer.widget.FloatingActionButtonController;
 import com.android.dialer.widget.SearchEditTextLayout;
 import com.android.dialer.widget.SearchEditTextLayout.OnBackButtonClickedListener;
 import com.android.dialerbind.DatabaseHelperManager;
@@ -180,23 +182,20 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     };
 
     /**
-     * Set to true if the device is in landscape orientation.
-     */
-    private boolean mIsLandscape;
-
-    /**
      * Fragment containing the speed dial list, recents list, and all contacts list.
      */
     private ListsFragment mListsFragment;
-
-    private View mFloatingActionButtonContainer;
-    private ImageButton mFloatingActionButton;
 
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
     private boolean mIsDialpadShown;
     private boolean mShowDialpadOnResume;
+
+    /**
+     * Whether or not the device is in landscape orientation.
+     */
+    private boolean mIsLandscape;
 
     /**
      * The position of the currently selected tab in the attached {@link ListsFragment}.
@@ -235,10 +234,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private DialerDatabaseHelper mDialerDatabaseHelper;
     private DragDropController mDragDropController;
     private ActionBarController mActionBarController;
+    private FloatingActionButtonController mFloatingActionButtonController;
 
     private int mActionBarHeight;
-    private int mFloatingActionButtonMarginBottom;
-    private int mFloatingActionButtonDialpadMarginBottom;
 
     private class OptionsPopupMenu extends PopupMenu {
         public OptionsPopupMenu(Context context, View anchor) {
@@ -352,10 +350,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         final Resources resources = getResources();
         mActionBarHeight = resources.getDimensionPixelSize(R.dimen.action_bar_height);
-        mFloatingActionButtonMarginBottom = resources.getDimensionPixelOffset(
-                R.dimen.floating_action_button_margin_bottom);
-        mFloatingActionButtonDialpadMarginBottom = resources.getDimensionPixelOffset(
-                R.dimen.floating_action_button_dialpad_margin_bottom);
 
         setContentView(R.layout.dialtacts_activity);
         getWindow().setBackgroundDrawable(null);
@@ -383,6 +377,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             }
         });
 
+        boolean mIsLandscape = getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
+        View floatingActionButtonContainer = findViewById(R.id.floating_action_button_container);
+        ImageButton floatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
+        floatingActionButton.setOnClickListener(this);
+        mFloatingActionButtonController = new FloatingActionButtonController(this, mIsLandscape,
+                floatingActionButtonContainer);
+
         ImageButton optionsMenuButton = (ImageButton) mSearchEditTextLayout.findViewById(
                 R.id.dialtacts_options_menu_button);
         optionsMenuButton.setOnClickListener(this);
@@ -403,9 +405,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mFirstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH);
             mShowDialpadOnResume = savedInstanceState.getBoolean(KEY_IS_DIALPAD_SHOWN);
             mActionBarController.restoreInstanceState(savedInstanceState);
+            mFloatingActionButtonController.restoreInstanceState(savedInstanceState);
         }
-        mIsLandscape = getResources().getConfiguration().orientation ==
-                Configuration.ORIENTATION_LANDSCAPE;
 
         mSlideIn = AnimationUtils.loadAnimation(this,
                 mIsLandscape ? R.anim.slide_in_right : R.anim.slide_in);
@@ -417,14 +418,17 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         parentLayout = (RelativeLayout) findViewById(R.id.dialtacts_mainlayout);
         parentLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         parentLayout.setOnDragListener(new LayoutOnDragListener());
+        parentLayout.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        int screenWidth = parentLayout.getWidth();
+                        mFloatingActionButtonController.setScreenWidth(screenWidth);
+                        parentLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
 
         setupActivityOverlay();
-
-        mFloatingActionButtonContainer = findViewById(R.id.floating_action_button_container);
-        ViewUtil.setupFloatingActionButton(mFloatingActionButtonContainer, getResources());
-
-        mFloatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
-        mFloatingActionButton.setOnClickListener(this);
 
         mRemoveViewContainer = findViewById(R.id.remove_view_container);
 
@@ -480,6 +484,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         outState.putBoolean(KEY_FIRST_LAUNCH, mFirstLaunch);
         outState.putBoolean(KEY_IS_DIALPAD_SHOWN, mIsDialpadShown);
         mActionBarController.saveInstanceState(outState);
+        mFloatingActionButtonController.saveInstanceState(outState);
     }
 
     @Override
@@ -630,7 +635,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Callback from child DialpadFragment when the dialpad is shown.
      */
     public void onDialpadShown() {
-        updateFloatingActionButton();
+        mFloatingActionButtonController.updateByDialpadVisibility(true);
         if (mDialpadFragment.getAnimate()) {
             mDialpadFragment.getView().startAnimation(mSlideIn);
         } else {
@@ -659,7 +664,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mDialpadFragment.setAnimate(animate);
 
         updateSearchFragmentPosition();
-        updateFloatingActionButton();
+        mFloatingActionButtonController.updateByDialpadVisibility(false);
         if (animate) {
             mDialpadFragment.getView().startAnimation(mSlideOut);
         } else {
@@ -993,7 +998,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void setFloatingActionButtonVisible(boolean visible) {
-        mFloatingActionButtonContainer.setVisibility(visible ? View.VISIBLE : View.GONE);
+        mFloatingActionButtonController.setVisible(visible);
     }
 
     private boolean phoneIsInUse() {
@@ -1091,70 +1096,17 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+        mFloatingActionButtonController.onPageScrolled(position, positionOffset);
     }
 
     @Override
     public void onPageSelected(int position) {
         mCurrentTabPosition = position;
-        // If the dialpad is showing, the floating action button should always be middle aligned.
-        if (!mIsDialpadShown) {
-            alignFloatingActionButtonByTab(mCurrentTabPosition);
-        }
+        mFloatingActionButtonController.updateByTab(position);
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-    }
-
-    private void updateFloatingActionButton() {
-        if (mIsDialpadShown) {
-            mFloatingActionButton.setImageResource(R.drawable.fab_ic_call);
-            mFloatingActionButton.setContentDescription(
-                    getResources().getString(R.string.description_dial_button));
-            alignFloatingActionButtonMiddle();
-        } else {
-            mFloatingActionButton.setImageResource(R.drawable.fab_ic_dial);
-            mFloatingActionButton.setContentDescription(
-                    getResources().getString(R.string.action_menu_dialpad_button));
-            alignFloatingActionButtonByTab(mCurrentTabPosition);
-        }
-    }
-
-    private void alignFloatingActionButtonByTab(int position) {
-        if (position == ListsFragment.TAB_INDEX_SPEED_DIAL) {
-            alignFloatingActionButtonMiddle();
-        } else {
-            alignFloatingActionButtonRight();
-        }
-    }
-
-    private void alignFloatingActionButtonRight() {
-        final RelativeLayout.LayoutParams params =
-                (RelativeLayout.LayoutParams) mFloatingActionButtonContainer.getLayoutParams();
-        params.removeRule(RelativeLayout.CENTER_HORIZONTAL);
-        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        updateFloatingActionButtonMargin(params);
-        mFloatingActionButtonContainer.setLayoutParams(params);
-    }
-
-    private void alignFloatingActionButtonMiddle() {
-        final RelativeLayout.LayoutParams params =
-                (RelativeLayout.LayoutParams) mFloatingActionButtonContainer.getLayoutParams();
-        params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        updateFloatingActionButtonMargin(params);
-        mFloatingActionButtonContainer.setLayoutParams(params);
-    }
-
-    private void updateFloatingActionButtonMargin(RelativeLayout.LayoutParams params) {
-        params.setMarginsRelative(
-                params.getMarginStart(),
-                params.topMargin,
-                params.getMarginEnd(),
-                mIsDialpadShown ?
-                        mFloatingActionButtonDialpadMarginBottom :
-                        mFloatingActionButtonMarginBottom);
     }
 
     private TelephonyManager getTelephonyManager() {
