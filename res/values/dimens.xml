@@ -98,12 +98,18 @@
     <dimen name="search_top_margin">8dp</dimen>
     <!-- Margin below the search box. -->
     <dimen name="search_bottom_margin">8dp</dimen>
+    <dimen name="search_collapsed_text_size">14sp</dimen>
+    <dimen name="search_expanded_text_size">20sp</dimen>
     <!-- Search box interior padding - left -->
     <dimen name="search_box_left_padding">8dp</dimen>
     <!-- Search box interior padding - right -->
     <dimen name="search_box_right_padding">8dp</dimen>
     <dimen name="search_box_search_icon_padding">4dp</dimen>
-    <!-- Elevation of the search box -->
+    <dimen name="search_box_collapsed_text_margin_left">24dp</dimen>
+    <dimen name="search_box_expanded_text_margin_left">26dp</dimen>
+    <!-- Size of the icon (voice search, close search) in the search box. -->
+    <dimen name="search_box_icon_size">28dp</dimen>
+    <dimen name="search_list_padding_top">8dp</dimen>
     <dimen name="search_box_elevation">3dp</dimen>
 
     <!-- Size of text in tabs. -->
