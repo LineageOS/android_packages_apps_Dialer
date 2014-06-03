@@ -73,6 +73,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
     public interface HostInterface {
         public void showCallHistory();
+        public int getActionBarHeight();
     }
 
     private ActionBar mActionBar;
@@ -348,6 +349,8 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         paneLayout.setCapturableView(mViewPagerTabs);
         paneLayout.openPane();
         paneLayout.setPanelSlideListener(mPanelSlideListener);
+        paneLayout.setIntermediatePinnedOffset(
+                ((HostInterface) getActivity()).getActionBarHeight());
 
         LayoutTransition transition = paneLayout.getLayoutTransition();
         // Turns on animations for all types of layout changes so that they occur for
