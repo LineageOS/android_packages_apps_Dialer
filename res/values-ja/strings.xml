@@ -115,7 +115,6 @@
     <string name="description_num_calls" msgid="1601505153694540074">"通話回数は<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>回。"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g>にテキストメッセージを送信"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"未再生のボイスメール"</string>
-    <string name="description_clear_search" msgid="688023606766232904">"検索をクリア"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"音声検索を開始"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g>に発信"</string>
     <string name="unknown" msgid="740067747858270469">"通知不可能"</string>

@@ -115,7 +115,6 @@
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> zvani."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Sūtīt īsziņu šim: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nenoklausīti balss pasta ziņojumi"</string>
-    <string name="description_clear_search" msgid="688023606766232904">"Notīrīt meklēšanas lauku"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Sākt meklēšanu ar balsi"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Zvaniet: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Nezināms"</string>
