@@ -33,6 +33,24 @@
       "revId": "ade77aa574e5ffe2deee3b13952bdbe85bfead42",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da0c15f0_95b6c088",
+        "filename": "src/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2014-06-03T07:50:32Z",
+      "side": 1,
+      "message": "It\u0027s per OpenCNAM docs. https://www.opencnam.com/docs/v2/apiref\n\n\"You should always check the HTTP status code of the request if possible, to determine whether or not your CNAM request was successful. If you receive anything other than an HTTP 200 OK, the request has failed for some reason.\"\n\netc.",
+      "parentUuid": "da0c15f0_f590dcee",
+      "revId": "ade77aa574e5ffe2deee3b13952bdbe85bfead42",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
