@@ -160,21 +160,9 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Հպեք նկարին՝ բոլոր համարները տեսնելու, կամ հպեք ու պահեք՝ վերադասավորելու համար:"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Անտեսել"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Հեռացնել"</string>
-    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Ազդանշան չկա՞: Խնդիր չէ:"</string>
-    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Միացնել զանգերի կատարումը Wi-Fi-ի միջոցով"</string>
-    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Երբ միացված է ուժեղ Wi-Fi ազդանշանին՝"</string>
-    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Միշտ օգտագործել Wi-Fi զանգերի համար"</string>
-    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Միշտ հարցնել"</string>
-    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Չօգտագործել Wi-Fi զանգերի համար"</string>
-    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Հաջորդը"</string>
-    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Հետ"</string>
-    <string name="wifi_setup_completed" msgid="2823266959975201512">"Զանգերի կատարումը Wi-Fi-ի միջոցով կարգավորված է: Դուք կարող եք ցանկացած ժամանակ անջատել այն կամ փոխել ձեր նախընտրությունները կարգավորումներում:"</string>
-    <string name="wifi_setup_ok" msgid="7801061518697115555">"Լավ, հասկացա"</string>
-    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Զանգերի կարգավորումները"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Արագ համարահավաքում"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ԲՈԼՈՐ ԿՈՆՏԱԿՏՆԵՐԸ"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ՀԵՏ ԶԱՆԳԵԼ"</string>
-    <string name="call_log_action_delete" msgid="7371990297839987600">"ՋՆՋԵԼ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ԼՍԵԼ"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"ՄԱՆՐԱՄԱՍՆԵՐ"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Բաց թողնված զանգ՝ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>:"</string>
@@ -182,11 +170,8 @@
     <string name="description_outgoing_call" msgid="3964211633673659733">"Կատարված զանգ՝ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>:"</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Հետ զանգել <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>-ին"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Լսել ձայնային փոստը <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>-ից"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"Ջնջել <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>-ը զանգերի ցանկից"</string>
-    <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> համարին/բաժանորդին կատարած և նրանից ստացած զանգերի մանրամասներ"</string>
+    <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> զանգի մասին տվյալներ"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Գրառումը ջնջվեց:"</string>
-    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
-    <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
-    <skip />
+    <string name="call_log_header_last_week" msgid="5197040511028258038">"Անցյալ շաբաթ"</string>
+    <string name="call_log_header_other" msgid="8209775016508312763">"Այլ"</string>
 </resources>

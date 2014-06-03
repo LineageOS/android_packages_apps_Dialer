@@ -160,21 +160,9 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Торкніться зображення, щоб побачити всі номери, або натисніть і утримуйте, щоб змінити порядок"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Закрити"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Видалити"</string>
-    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Немає сигналу? Не хвилюйтеся."</string>
-    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Увімкнути дзвінки через Wi-Fi від Google"</string>
-    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Коли є потужний сигнал Wi-Fi…"</string>
-    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Завжди телефонувати через Wi-Fi"</string>
-    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Завжди запитувати"</string>
-    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Ніколи не телефонувати через Wi-Fi"</string>
-    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Далі"</string>
-    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Назад"</string>
-    <string name="wifi_setup_completed" msgid="2823266959975201512">"Дзвінки через Wi-Fi налаштовано. Ви можете будь-коли змінити параметри або вимкнути дзвінки через Wi-Fi у налаштуваннях."</string>
-    <string name="wifi_setup_ok" msgid="7801061518697115555">"Зрозуміло"</string>
-    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Налаштування дзвінків"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Швидкий набір"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"УСІ КОНТАКТИ"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ТЕЛЕФОНУВАТИ"</string>
-    <string name="call_log_action_delete" msgid="7371990297839987600">"ВИДАЛИТИ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"СЛУХАТИ"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"ДЕТАЛІ"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Пропущений дзвінок: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
@@ -182,11 +170,8 @@
     <string name="description_outgoing_call" msgid="3964211633673659733">"Дзвінок: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Телефонувати: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Слухати голосову пошту: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"Видалити запис журналу дзвінків: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>: деталі дзвінків"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Запис журналу дзвінків видалено."</string>
-    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
-    <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
-    <skip />
+    <string name="call_log_header_last_week" msgid="5197040511028258038">"Останній тиждень"</string>
+    <string name="call_log_header_other" msgid="8209775016508312763">"Інше"</string>
 </resources>

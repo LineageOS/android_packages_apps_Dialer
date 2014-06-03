@@ -160,21 +160,9 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Chạm vào hình ảnh để xem tất cả các số hoặc nhấn và giữ để sắp xếp lại"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Loại bỏ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Xóa"</string>
-    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Không có tín hiệu? Không vấn đề gì."</string>
-    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Bật Gọi bằng Wi-Fi của Google"</string>
-    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Khi kết nối với tín hiệu Wi-Fi mạnh:"</string>
-    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Luôn sử dụng Wi-Fi để thực hiện cuộc gọi"</string>
-    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Luôn hỏi"</string>
-    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Không bao giờ sử dụng Wi-Fi để thực hiện cuộc gọi"</string>
-    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Tiếp theo"</string>
-    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Quay lại"</string>
-    <string name="wifi_setup_completed" msgid="2823266959975201512">"Gọi bằng Wi-Fi đã được thiết lập. Bạn có thể thay đổi tùy chọn của mình hoặc tắt tùy chọn bất cứ lúc nào trong cài đặt."</string>
-    <string name="wifi_setup_ok" msgid="7801061518697115555">"OK"</string>
-    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Cài đặt cuộc gọi"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Quay số nhanh"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TẤT CẢ NGƯỜI LIÊN HỆ"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"GỌI LẠI"</string>
-    <string name="call_log_action_delete" msgid="7371990297839987600">"XÓA"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"NGHE"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"CHI TIẾT"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Cuộc gọi nhỡ từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
@@ -182,11 +170,8 @@
     <string name="description_outgoing_call" msgid="3964211633673659733">"Cuộc gọi đến <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Gọi lại <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Nghe thư thoại từ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"Xóa mục nhật ký cuộc gọi cho <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Chi tiết cuộc gọi cho <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Đã xóa mục nhật ký cuộc gọi."</string>
-    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
-    <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
-    <skip />
+    <string name="call_log_header_last_week" msgid="5197040511028258038">"Tuần trước"</string>
+    <string name="call_log_header_other" msgid="8209775016508312763">"Khác"</string>
 </resources>
