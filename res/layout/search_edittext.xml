@@ -9,17 +9,27 @@
     android:layout_marginBottom="@dimen/search_bottom_margin"
     android:layout_marginLeft="@dimen/search_margin_horizontal"
     android:layout_marginRight="@dimen/search_margin_horizontal"
-    android:paddingLeft="@dimen/search_box_left_padding"
-    android:paddingRight="@dimen/search_box_right_padding"
     android:background="@drawable/rounded_corner"
-    android:elevation="@dimen/search_box_elevation"
-    >
+    android:elevation="@dimen/search_box_elevation">
+
     <LinearLayout
         android:id="@+id/search_box_collapsed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingStart="@dimen/search_box_left_padding"
+        android:paddingEnd="@dimen/search_box_right_padding"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/search_magnifying_glass"
+            android:layout_height="@dimen/search_box_icon_size"
+            android:layout_width="@dimen/search_box_icon_size"
+            android:layout_margin="@dimen/search_box_icon_margin"
+            android:padding="@dimen/search_box_search_icon_padding"
+            android:src="@drawable/ic_ab_search"
+            android:importantForAccessibility="no"
+            android:tint="@color/searchbox_icon_tint" />
 
         <!-- Portion of the search box that starts a search when clicked -->
         <LinearLayout
@@ -29,21 +39,11 @@
             android:layout_weight="1"
             android:gravity="center_vertical" >
 
-            <ImageView
-                android:id="@+id/search_magnifying_glass"
-                android:layout_height="@dimen/search_box_icon_size"
-                android:layout_width="@dimen/search_box_icon_size"
-                android:layout_margin="@dimen/search_box_icon_margin"
-                android:padding="@dimen/search_box_search_icon_padding"
-                android:src="@drawable/ic_ab_search"
-                android:importantForAccessibility="no"
-                android:tint="@color/searchbox_icon_tint" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/search_box_icon_size"
-                android:layout_marginLeft="@dimen/search_box_text_left_margin"
-                android:textSize="@dimen/search_text_size"
+                android:layout_marginLeft="@dimen/search_box_collapsed_text_margin_left"
+                android:textSize="@dimen/search_collapsed_text_size"
                 android:fontFamily="@string/search_font_family"
                 android:textColor="@color/searchbox_text_color"
                 android:textColorHint="@color/searchbox_hint_text_color"
@@ -88,7 +88,7 @@
             android:id="@+id/search_back_button"
             android:layout_width="@dimen/search_box_icon_size"
             android:layout_height="@dimen/search_box_icon_size"
-            android:layout_margin="@dimen/search_box_icon_margin"
+            android:layout_marginLeft="8dp"
             android:src="@drawable/ic_back_arrow"
             android:background="?android:attr/selectableItemBackground"
             android:contentDescription="@string/action_menu_overflow_description"
@@ -97,10 +97,10 @@
         <EditText
             android:id="@+id/search_view"
             android:layout_width="0dp"
-            android:layout_height="@dimen/search_box_icon_size"
+            android:layout_height="@dimen/action_bar_height"
             android:layout_weight="1"
-            android:layout_marginLeft="@dimen/search_box_text_left_margin"
-            android:textSize="@dimen/search_text_size"
+            android:layout_marginLeft="@dimen/search_box_expanded_text_margin_left"
+            android:textSize="@dimen/search_expanded_text_size"
             android:fontFamily="@string/search_font_family"
             android:textColor="@color/searchbox_text_color"
             android:inputType="textFilter" />
@@ -109,7 +109,7 @@
             android:id="@+id/search_close_button"
             android:layout_height="@dimen/search_box_icon_size"
             android:layout_width="@dimen/search_box_icon_size"
-            android:layout_margin="@dimen/search_box_icon_margin"
+            android:layout_marginRight="8dp"
             android:src="@drawable/ic_close_dk"
             android:clickable="true"
             android:background="?android:attr/selectableItemBackground"

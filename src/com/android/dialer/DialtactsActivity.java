@@ -141,8 +141,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
 
-    private static final int ANIMATION_DURATION = 250;
-
     private RelativeLayout parentLayout;
 
     /**
@@ -206,8 +204,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private View mRemoveViewContainer;
 
-    final Interpolator hideActionBarInterpolator = new AccelerateInterpolator(1.5f);
-    final Interpolator showActionBarInterpolator = new DecelerateInterpolator(1.5f);
     private String mSearchQuery;
 
     private DialerDatabaseHelper mDialerDatabaseHelper;
@@ -662,7 +658,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     private void updateSearchFragmentPosition() {
-        int translationValue = mIsDialpadShown ?  -mActionBarHeight : 0;
         SearchFragment fragment = null;
         if (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()) {
             fragment = mSmartDialSearchFragment;
@@ -670,8 +665,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             fragment = mRegularSearchFragment;
         }
         if (fragment != null && fragment.isVisible()) {
-            fragment.getView().animate().translationY(translationValue)
-                    .setInterpolator(hideActionBarInterpolator).setDuration(ANIMATION_DURATION);
+            fragment.updatePosition(true /* animate */);
         }
     }
 
@@ -1143,6 +1137,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public boolean isActionBarShowing() {
         return mActionBarController.isActionBarShowing();
+    }
+
+    public boolean isDialpadShown() {
+        return mIsDialpadShown;
     }
 
     @Override
