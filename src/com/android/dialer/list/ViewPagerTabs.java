@@ -3,6 +3,7 @@ package com.android.dialer.list;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Outline;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -38,6 +39,7 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
     final boolean mTextAllCaps;
     int mPrevSelected = -1;
     int mSidePadding;
+    Outline mOutline;
 
     private static final int TAB_SIDE_PADDING_IN_DPS = 10;
 
@@ -94,6 +96,7 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
         setFillViewport(true);
 
         mSidePadding = (int) (getResources().getDisplayMetrics().density * TAB_SIDE_PADDING_IN_DPS);
+        mOutline = new Outline();
 
         final TypedArray a = context.obtainStyledAttributes(attrs, ATTRS);
         mTextSize = a.getDimensionPixelSize(0, 0);
@@ -154,6 +157,14 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
             mPrevSelected = 0;
             textView.setSelected(true);
         }
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+      // An outline is necessary to enable shadows
+      mOutline.setRect(l, t, r, b);
+      setOutline(mOutline);
+      super.onLayout(changed, l, t, r, b);
     }
 
     @Override
