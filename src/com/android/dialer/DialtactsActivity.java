@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.net.Uri;
@@ -159,6 +160,31 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Fragment for searching phone numbers using the dialpad.
      */
     private SmartDialSearchFragment mSmartDialSearchFragment;
+
+    /**
+     * Animation that slides in.
+     */
+    private Animation mSlideIn;
+
+    /**
+     * Animation that slides out.
+     */
+    private Animation mSlideOut;
+
+    /**
+     * Listener for after slide out animation completes on dialer fragment.
+     */
+    AnimationListenerAdapter mSlideOutListener = new AnimationListenerAdapter() {
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            commitDialpadFragmentHide();
+        }
+    };
+
+    /**
+     * Set to true if the device is in landscape orientation.
+     */
+    private boolean mIsLandscape;
 
     /**
      * Fragment containing the speed dial list, recents list, and all contacts list.
@@ -382,6 +408,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mShowDialpadOnResume = savedInstanceState.getBoolean(KEY_IS_DIALPAD_SHOWN);
             mActionBarController.restoreInstanceState(savedInstanceState);
         }
+        mIsLandscape = getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE;
+
+        mSlideIn = AnimationUtils.loadAnimation(this,
+                mIsLandscape ? R.anim.slide_in_right : R.anim.slide_in);
+        mSlideOut = AnimationUtils.loadAnimation(this,
+                mIsLandscape ? R.anim.slide_out_right : R.anim.slide_out);
+
+        mSlideOut.setAnimationListener(mSlideOutListener);
 
         parentLayout = (RelativeLayout) findViewById(R.id.dialtacts_mainlayout);
         parentLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
@@ -601,8 +636,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onDialpadShown() {
         updateFloatingActionButton();
         if (mDialpadFragment.getAnimate()) {
-            Animation slideIn = AnimationUtils.loadAnimation(this, R.anim.slide_in);
-            mDialpadFragment.getView().startAnimation(slideIn);
+            mDialpadFragment.getView().startAnimation(mSlideIn);
         } else {
             mDialpadFragment.setYFraction(0);
         }
@@ -631,14 +665,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         updateSearchFragmentPosition();
         updateFloatingActionButton();
         if (animate) {
-            Animation slideOut = AnimationUtils.loadAnimation(this, R.anim.slide_out);
-            slideOut.setAnimationListener(new AnimationListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    commitDialpadFragmentHide();
-                }
-            });
-            mDialpadFragment.getView().startAnimation(slideOut);
+            mDialpadFragment.getView().startAnimation(mSlideOut);
         } else {
             commitDialpadFragmentHide();
         }
