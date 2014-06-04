@@ -40,6 +40,7 @@
             android:textAllCaps="true"
             android:orientation="horizontal"
             android:layout_gravity="top"
+            android:elevation="@dimen/tab_elevation"
             style="@style/DialtactsActionBarTabTextStyle" />
         <android.support.v4.view.ViewPager
             android:id="@+id/lists_pager"
