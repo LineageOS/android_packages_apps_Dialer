@@ -72,6 +72,7 @@ import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.util.ViewUtil;
+import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.dialer.calllog.CallLogActivity;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpad.DialpadFragment;
@@ -89,7 +90,6 @@ import com.android.dialer.list.RemoveView;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.widget.ActionBarController;
-import com.android.dialer.widget.FloatingActionButtonController;
 import com.android.dialer.widget.SearchEditTextLayout;
 import com.android.dialer.widget.SearchEditTextLayout.OnBackButtonClickedListener;
 import com.android.dialerbind.DatabaseHelperManager;
@@ -234,7 +234,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private DialerDatabaseHelper mDialerDatabaseHelper;
     private DragDropController mDragDropController;
     private ActionBarController mActionBarController;
+
+    private String mDescriptionDialButtonStr;
+    private String mActionMenuDialpadButtonStr;
+    private ImageButton mFloatingActionButton;
     private FloatingActionButtonController mFloatingActionButtonController;
+    /**
+     * Additional offset for FAB to be lowered when dialpad is open.
+     */
+    private int mFloatingActionButtonDialpadMarginBottomOffset;
 
     private int mActionBarHeight;
 
@@ -350,6 +358,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         final Resources resources = getResources();
         mActionBarHeight = resources.getDimensionPixelSize(R.dimen.action_bar_height);
+        mDescriptionDialButtonStr = resources.getString(R.string.description_dial_button);
+        mActionMenuDialpadButtonStr = resources.getString(R.string.action_menu_dialpad_button);
 
         setContentView(R.layout.dialtacts_activity);
         getWindow().setBackgroundDrawable(null);
@@ -377,13 +387,18 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             }
         });
 
-        boolean mIsLandscape = getResources().getConfiguration().orientation
+        mIsLandscape = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
-        View floatingActionButtonContainer = findViewById(R.id.floating_action_button_container);
-        ImageButton floatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
-        floatingActionButton.setOnClickListener(this);
-        mFloatingActionButtonController = new FloatingActionButtonController(this, mIsLandscape,
+        final View floatingActionButtonContainer = findViewById(
+                R.id.floating_action_button_container);
+        mFloatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
+        int floatingActionButtonWidth = resources.getDimensionPixelSize(
+                R.dimen.floating_action_button_width);
+        mFloatingActionButton.setOnClickListener(this);
+        mFloatingActionButtonController = new FloatingActionButtonController(this,
                 floatingActionButtonContainer);
+        mFloatingActionButtonDialpadMarginBottomOffset = resources.getDimensionPixelOffset(
+                R.dimen.floating_action_button_dialpad_margin_bottom_offset);
 
         ImageButton optionsMenuButton = (ImageButton) mSearchEditTextLayout.findViewById(
                 R.id.dialtacts_options_menu_button);
@@ -405,7 +420,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mFirstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH);
             mShowDialpadOnResume = savedInstanceState.getBoolean(KEY_IS_DIALPAD_SHOWN);
             mActionBarController.restoreInstanceState(savedInstanceState);
-            mFloatingActionButtonController.restoreInstanceState(savedInstanceState);
         }
 
         mSlideIn = AnimationUtils.loadAnimation(this,
@@ -418,13 +432,19 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         parentLayout = (RelativeLayout) findViewById(R.id.dialtacts_mainlayout);
         parentLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         parentLayout.setOnDragListener(new LayoutOnDragListener());
-        parentLayout.getViewTreeObserver().addOnGlobalLayoutListener(
+        floatingActionButtonContainer.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
+                        final ViewTreeObserver observer = floatingActionButtonContainer
+                                .getViewTreeObserver();
+                        if (!observer.isAlive()) {
+                            return;
+                        }
+                        observer.removeOnGlobalLayoutListener(this);
                         int screenWidth = parentLayout.getWidth();
                         mFloatingActionButtonController.setScreenWidth(screenWidth);
-                        parentLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        updateFloatingActionButtonControllerAlignment(false /* animate */);
                     }
                 });
 
@@ -464,6 +484,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mFirstLaunch = false;
         prepareVoiceSearchButton();
         mDialerDatabaseHelper.startSmartDialUpdateThread();
+        updateFloatingActionButtonControllerAlignment(false /* animate */);
     }
 
     @Override
@@ -484,7 +505,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         outState.putBoolean(KEY_FIRST_LAUNCH, mFirstLaunch);
         outState.putBoolean(KEY_IS_DIALPAD_SHOWN, mIsDialpadShown);
         mActionBarController.saveInstanceState(outState);
-        mFloatingActionButtonController.saveInstanceState(outState);
     }
 
     @Override
@@ -635,7 +655,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Callback from child DialpadFragment when the dialpad is shown.
      */
     public void onDialpadShown() {
-        mFloatingActionButtonController.updateByDialpadVisibility(true);
+        mFloatingActionButton.setImageResource(R.drawable.fab_ic_call);
+        mFloatingActionButton.setContentDescription(mDescriptionDialButtonStr);
+        updateFloatingActionButtonControllerAlignment(mDialpadFragment.getAnimate());
         if (mDialpadFragment.getAnimate()) {
             mDialpadFragment.getView().startAnimation(mSlideIn);
         } else {
@@ -664,7 +686,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mDialpadFragment.setAnimate(animate);
 
         updateSearchFragmentPosition();
-        mFloatingActionButtonController.updateByDialpadVisibility(false);
+        mFloatingActionButton.setImageResource(R.drawable.fab_ic_dial);
+        mFloatingActionButton.setContentDescription(mActionMenuDialpadButtonStr);
+
+        updateFloatingActionButtonControllerAlignment(animate);
         if (animate) {
             mDialpadFragment.getView().startAnimation(mSlideOut);
         } else {
@@ -1096,13 +1121,23 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        mFloatingActionButtonController.onPageScrolled(position, positionOffset);
+        // Only scroll the button when the first tab is selected. The button should scroll from
+        // the middle to right position only on the transition from the first tab to the second
+        // tab.
+        if (position == ListsFragment.TAB_INDEX_SPEED_DIAL) {
+            mFloatingActionButtonController.onPageScrolled(positionOffset);
+        }
     }
 
     @Override
     public void onPageSelected(int position) {
         mCurrentTabPosition = position;
-        mFloatingActionButtonController.updateByTab(position);
+        // Prevents jittery movement when clicking on tabs.
+        if (mCurrentTabPosition != ListsFragment.TAB_INDEX_SPEED_DIAL) {
+            mFloatingActionButtonController.manuallyTranslate(
+                    mFloatingActionButtonController.getTranslationXForAlignment(
+                            FloatingActionButtonController.ALIGN_RIGHT), 0);
+        }
     }
 
     @Override
@@ -1135,5 +1170,26 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void setActionBarHideOffset(int hideOffset) {
         getActionBar().setHideOffset(hideOffset);
+    }
+
+    /**
+     * Updates controller based on currently known information.
+     *
+     * @param animate Whether or not to animate the transition.
+     */
+    private void updateFloatingActionButtonControllerAlignment(boolean animate) {
+        int align;
+        if (mIsDialpadShown) {
+            align = mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_RIGHT
+                    : FloatingActionButtonController.ALIGN_MIDDLE;
+        } else {
+            align = mCurrentTabPosition == ListsFragment.TAB_INDEX_SPEED_DIAL
+                    ? FloatingActionButtonController.ALIGN_MIDDLE
+                        : FloatingActionButtonController.ALIGN_RIGHT;
+        }
+        mFloatingActionButtonController.align(align,
+                0 /* offsetX */,
+                mIsDialpadShown ? mFloatingActionButtonDialpadMarginBottomOffset : 0 /* offsetY */,
+                animate);
     }
 }
