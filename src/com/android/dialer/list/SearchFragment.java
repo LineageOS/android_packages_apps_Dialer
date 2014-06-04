@@ -172,9 +172,12 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         // Use negative shadow height instead of 0 to account for the 9-patch's shadow.
         int startTranslationValue =
                 mActivity.isDialpadShown() ? mActionBarHeight - mShadowHeight: -mShadowHeight;
-        int endTranslationValue =
-                mActivity.isDialpadShown() ? -mShadowHeight : mActionBarHeight -mShadowHeight;
-
+        int endTranslationValue = 0;
+        // Prevents ListView from being translated down after a rotation when the ActionBar is up.
+        if (animate || mActivity.isActionBarShowing()) {
+            endTranslationValue =
+                    mActivity.isDialpadShown() ? 0 : mActionBarHeight -mShadowHeight;
+        }
         if (animate) {
             Interpolator interpolator =
                     mActivity.isDialpadShown() ? AnimUtils.EASE_IN : AnimUtils.EASE_OUT ;
