@@ -23,15 +23,14 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.ImageView;
 
 /**
  * Utilities for Animation.
  */
-public class AnimationUtils {
-    private static final String LOG_TAG = AnimationUtils.class.getSimpleName();
+public class InCallAnimationUtils {
+    private static final String LOG_TAG = InCallAnimationUtils.class.getSimpleName();
     /**
      * Turn on when you're interested in fading animation. Intentionally untied from other debug
      * settings.
@@ -44,7 +43,7 @@ public class AnimationUtils {
      */
     public static final int ANIMATION_DURATION = 250;
 
-    private AnimationUtils() {
+    private InCallAnimationUtils() {
     }
 
     /**

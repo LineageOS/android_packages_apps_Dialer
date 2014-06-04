@@ -48,6 +48,7 @@
                 android:orientation="vertical"
                 android:elevation="@dimen/primary_call_elevation"
                 android:background="@color/incall_call_banner_background_color"
+                android:paddingTop="@dimen/call_banner_primary_call_container_top_padding"
                 android:clipChildren="false"
                 android:clipToPadding="false" >
 
@@ -62,7 +63,8 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <!-- Contact photo for primary call info -->
                 <ImageView android:id="@+id/photo"
@@ -119,8 +121,8 @@
 
             <ImageButton android:id="@+id/handoffButton"
                 android:enabled="false"
-            android:layout_width="@dimen/floating_action_button_width"
-            android:layout_height="@dimen/floating_action_button_height"
+                android:layout_width="@dimen/floating_action_button_width"
+                android:layout_height="@dimen/floating_action_button_height"
                 android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
                 android:background="@drawable/floating_handoff_button_compound_background"
                 android:src="@drawable/ic_in_call_pstn" />

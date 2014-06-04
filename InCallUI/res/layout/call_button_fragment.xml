@@ -61,7 +61,7 @@
         android:paddingStart="@dimen/button_cluster_horizontal_padding"
         android:paddingEnd="@dimen/button_cluster_horizontal_padding"
         android:background="@color/button_background_color"
-        android:gravity="center">
+        android:gravity="bottom|center_horizontal">
 
         <!-- This row has either 4 or 5 buttons, depending on
        whether the device supports "Hold" (i.e. 4 buttons on
