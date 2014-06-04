@@ -160,35 +160,18 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Atingeți imaginea pentru a vedea toate numerele sau apăsați și țineți apăsat pentru a reordona"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Închideți"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Eliminați"</string>
-    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Nu aveți semnal? Nicio problemă."</string>
-    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Activați funcția Google de apelare prin Wi-Fi"</string>
-    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Când există conexiune la un semnal puternic Wi-Fi:"</string>
-    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Utilizați întotdeauna Wi-Fi pentru a efectua apeluri"</string>
-    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Doresc să fiu întrebat(ă) întotdeauna"</string>
-    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Nu utilizați niciodată Wi-Fi pentru a efectua apeluri"</string>
-    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Înainte"</string>
-    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Înapoi"</string>
-    <string name="wifi_setup_completed" msgid="2823266959975201512">"Gata. Apelarea prin Wi-Fi este configurată. Puteți să o dezactivați sau să vă modificați preferințele în setări oricând."</string>
-    <string name="wifi_setup_ok" msgid="7801061518697115555">"Ok, am înţeles"</string>
-    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Setări pentru apeluri"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Apelare rapidă"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TOATĂ AGENDA"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"SUNAȚI"</string>
-    <string name="call_log_action_delete" msgid="7371990297839987600">"ȘTERGEȚI"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ASCULTAȚI"</string>
-    <!-- no translation found for call_log_action_details (6252596497021563115) -->
-    <skip />
+    <string name="call_log_action_details" msgid="6252596497021563115">"DETALII"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Apel pierdut de la <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"Apel preluat de la <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"Sunați la <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Sunați <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Ascultați mesajul vocal de la <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"Ștergeți intrarea din jurnalul de apeluri pentru <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <!-- no translation found for description_details_action (2433827152749491785) -->
-    <skip />
+    <string name="description_details_action" msgid="2433827152749491785">"Detaliile apelului pentru <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Intrarea din jurnalul de apeluri a fost ștearsă."</string>
-    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
-    <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
-    <skip />
+    <string name="call_log_header_last_week" msgid="5197040511028258038">"Săptămâna trecută"</string>
+    <string name="call_log_header_other" msgid="8209775016508312763">"Altă dată"</string>
 </resources>

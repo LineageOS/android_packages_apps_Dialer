@@ -160,21 +160,9 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"ប៉ះ​រូបភាព ដើម្បី​មើល​លេខ​ទាំងអស់ ឬ​ចុច និង​សង្កត់​ដើម្បី​តម្រៀប​ឡើងវិញ"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"បដិសេធ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"លុបចេញ"</string>
-    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"គ្មាន​សញ្ញា? គ្មាន​បញ្ហា។"</string>
-    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"បើក​ការ​ហៅ​តាម Google វ៉ាយហ្វាយ"</string>
-    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"នៅ​ពេល​បាន​ភ្ជាប់​ទៅ​សញ្ញា​វ៉ាយហ្វាយ​ខ្លាំង៖"</string>
-    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"ប្រើ​វ៉ាយហ្វាយ​ជា​និច្ច​ដើម្បី​ហៅ​"</string>
-    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"សួរ​ជានិច្ច"</string>
-    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"កុំ​ប្រើ​វ៉ាយហ្វាយ​​ដើម្បី​​ហៅ"</string>
-    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"បន្ទាប់"</string>
-    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"ថយក្រោយ"</string>
-    <string name="wifi_setup_completed" msgid="2823266959975201512">"ការ​ហៅ​តាម​វ៉ាយហ្វាយ​ត្រូវ​បាន​រៀបចំ​ទាំង​អស់។ ​អ្នក​អាច​ប្ដូរ​ចំណូល​ចិត្ត ឬ​បិទ​វា​នៅ​ពេល​ណា​មួយ​ក្នុង​ការ​កំណត់។"</string>
-    <string name="wifi_setup_ok" msgid="7801061518697115555">"យល់​ហើយ"</string>
-    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"កំណត់​ការ​ហៅ"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"ការ​ហៅ​រហ័ស"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ទំនាក់ទំនង​ទាំងអស់"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ហៅ​ទៅវិញ"</string>
-    <string name="call_log_action_delete" msgid="7371990297839987600">"លុប"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ស្ដាប់"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"ព័ត៌មាន​លម្អិត"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"ខកខាន​ទទួល​ពី <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ។"</string>
@@ -182,11 +170,8 @@
     <string name="description_outgoing_call" msgid="3964211633673659733">"ហៅ​ទៅ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ។"</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"ហៅ​ទៅ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> វិញ"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"ស្ដាប់​សារ​ជា​សំឡេង​ពី <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"លុប​ធាតុ​កំណត់ហេតុ​ហៅ​​សម្រាប់ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"ព័ត៌មាន​លម្អិត​ហៅ​សម្រាប់ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"បាន​លុប​ធាតុ​កំណត់​ហេតុ​ហៅ។"</string>
-    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
-    <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
-    <skip />
+    <string name="call_log_header_last_week" msgid="5197040511028258038">"សប្ដាហ៍​មុន"</string>
+    <string name="call_log_header_other" msgid="8209775016508312763">"ផ្សេងៗ"</string>
 </resources>

@@ -160,35 +160,18 @@
     <string name="contact_tooltip" msgid="7817483485692282287">"Ketik imej untuk melihat semua nombor atau tekan dan tahan imej untuk menyusun semula"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ketepikan"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Alih keluar"</string>
-    <string name="wifi_no_signal_no_problem" msgid="5905489120009368358">"Tiada Isyarat? Tiada Masalah."</string>
-    <string name="wifi_enable_google_wifi_calling" msgid="889688113802116339">"Dayakan Panggilan Wi-Fi Google"</string>
-    <string name="wifi_when_connected_to_a_signal" msgid="1380410417434941662">"Apabila disambungkan kepada isyarat Wi-Fi yang kuat:"</string>
-    <string name="wifi_always_use_wifi" msgid="5090531595867169067">"Sentiasa gunakan Wi-Fi untuk membuat panggilan"</string>
-    <string name="wifi_ask_use_wifi" msgid="2530040568117536243">"Sentiasa tanya"</string>
-    <string name="wifi_never_use_wifi" msgid="8523176164034184009">"Jangan sekali-kali menggunakan Wi-Fi untuk membuat panggilan"</string>
-    <string name="wifi_next_setup_screen" msgid="6468744966620746912">"Seterusnya"</string>
-    <string name="wifi_previous_setup_screen" msgid="8525707359376859298">"Kembali"</string>
-    <string name="wifi_setup_completed" msgid="2823266959975201512">"Boom. Panggilan Wi-Fi sudah disediakan. Anda boleh menukar pilihan anda atau mematikan pada bila-bila masa dalam tetapan."</string>
-    <string name="wifi_setup_ok" msgid="7801061518697115555">"Ok, faham"</string>
-    <string name="wifi_setup_settings_shortcut" msgid="278329876445606742">"Tetapan panggilan"</string>
     <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Dail Laju"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"SEMUA KENALAN"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"PANGGIL BALIK"</string>
-    <string name="call_log_action_delete" msgid="7371990297839987600">"PADAM"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"DENGAR"</string>
-    <!-- no translation found for call_log_action_details (6252596497021563115) -->
-    <skip />
+    <string name="call_log_action_details" msgid="6252596497021563115">"BUTIRAN"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Panggilan yang tidak dijawab daripada <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"Panggilan yang dijawab daripada <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"Panggilan kepada <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Panggil balik <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Dengar mel suara daripada <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_delete_action" msgid="7188614068459616450">"Padam entri log panggilan untuk <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <!-- no translation found for description_details_action (2433827152749491785) -->
-    <skip />
+    <string name="description_details_action" msgid="2433827152749491785">"Butiran panggilan untuk <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Entri log panggilan dihapuskan."</string>
-    <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
-    <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
-    <skip />
+    <string name="call_log_header_last_week" msgid="5197040511028258038">"Minggu lepas"</string>
+    <string name="call_log_header_other" msgid="8209775016508312763">"Lain-lain"</string>
 </resources>
