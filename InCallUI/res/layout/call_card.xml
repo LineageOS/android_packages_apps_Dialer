@@ -36,77 +36,18 @@
         android:layout_height="0dp"
         android:layout_weight="5" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <LinearLayout
-                android:id="@+id/primary_call_info_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:elevation="@dimen/primary_call_elevation"
-                android:background="@color/incall_call_banner_background_color"
-                android:paddingTop="@dimen/call_banner_primary_call_container_top_padding"
-                android:clipChildren="false"
-                android:clipToPadding="false" >
-
-                <include layout="@layout/primary_call_info" />
-
-                <fragment android:name="com.android.incallui.CallButtonFragment"
-                    android:id="@+id/callButtonFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <!-- Contact photo for primary call info -->
-                <ImageView android:id="@+id/photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="top|center_horizontal"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@string/contactPhoto"
-                    android:src="@drawable/picture_unknown"/>
-
-                <!-- Secondary "Call info" block, for the background ("on hold") call. -->
-                <include layout="@layout/secondary_call_info" />
-
-                <fragment android:name="com.android.incallui.DialpadFragment"
-                    android:id="@+id/dialpadFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <fragment android:name="com.android.incallui.AnswerFragment"
-                    android:id="@+id/answerFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="top"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="@dimen/glowpadview_margin_bottom"
-                    android:visibility="gone" />
-
-            </FrameLayout>
-
-        </LinearLayout>
+        <include layout="@layout/call_card_content" />
 
         <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/floating_end_call_action_button_container"
+            android:layout_width="@dimen/floating_action_button_width"
+            android:layout_height="@dimen/floating_action_button_height"
+            android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
             android:layout_gravity="bottom|center">
 
-            <ImageButton android:id="@+id/endButton"
-                android:layout_width="@dimen/floating_action_button_width"
-                android:layout_height="@dimen/floating_action_button_height"
-                android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
+            <ImageButton android:id="@+id/floating_end_call_action_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@drawable/end_call_background"
                 android:src="@drawable/fab_ic_end_call"
                 android:contentDescription="@string/onscreenEndCallText" />
@@ -117,13 +58,13 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
             android:layout_gravity="bottom|right">
 
             <ImageButton android:id="@+id/handoffButton"
                 android:enabled="false"
                 android:layout_width="@dimen/floating_action_button_width"
                 android:layout_height="@dimen/floating_action_button_height"
-                android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
                 android:background="@drawable/floating_handoff_button_compound_background"
                 android:src="@drawable/ic_in_call_pstn" />
         </FrameLayout>

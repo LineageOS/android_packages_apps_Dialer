@@ -23,6 +23,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ import android.widget.TextView;
 
 import com.android.contacts.common.animation.AnimUtils;
 import com.android.contacts.common.util.ViewUtil;
+import com.android.contacts.common.widget.FloatingActionButtonController;
 
 import java.util.List;
 
@@ -53,8 +55,9 @@ import java.util.List;
 public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPresenter.CallCardUi>
         implements CallCardPresenter.CallCardUi {
 
-    private static final int REVEAL_ANIMATION_DURATION = 333;
-    private static final int SHRINK_ANIMATION_DURATION = 333;
+    private int mRevealAnimationDuration;
+    private int mShrinkAnimationDuration;
+    private boolean mIsLandscape;
 
     // Primary caller info
     private TextView mPhoneNumber;
@@ -76,8 +79,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mSecondaryCallInfo;
     private TextView mSecondaryCallName;
 
-    private View mEndCallButton;
+    private FloatingActionButtonController mFloatingActionButtonController;
+    private View mFloatingActionButtonContainer;
     private ImageButton mHandoffButton;
+    private int mFloatingActionButtonHideOffset;
 
     // Cached DisplayMetrics density.
     private float mDensity;
@@ -98,6 +103,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mRevealAnimationDuration = getResources().getInteger(R.integer.reveal_animation_duration);
+        mShrinkAnimationDuration = getResources().getInteger(R.integer.shrink_animation_duration);
+        mFloatingActionButtonHideOffset = getResources().getDimensionPixelOffset(
+                R.dimen.end_call_button_hide_offset);
+        mIsLandscape = getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
     }
 
 
@@ -142,14 +154,41 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mPrimaryCallInfo = view.findViewById(R.id.primary_call_banner);
         mCallButtonsContainer = view.findViewById(R.id.callButtonFragment);
 
-        mEndCallButton = view.findViewById(R.id.endButton);
-        mEndCallButton.setOnClickListener(new View.OnClickListener() {
+        mFloatingActionButtonContainer = view.findViewById(
+                R.id.floating_end_call_action_button_container);
+        ImageButton floatingActionButton = (ImageButton) view.findViewById(
+                R.id.floating_end_call_action_button);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getPresenter().endCallClicked();
             }
         });
-        ViewUtil.setupFloatingActionButton(mEndCallButton, getResources());
+        int floatingActionButtonWidth = getResources().getDimensionPixelSize(
+                R.dimen.floating_action_button_width);
+        mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
+                mFloatingActionButtonContainer);
+        if (savedInstanceState != null) {
+            final ViewGroup parent = (ViewGroup) mPrimaryCallCardContainer.getParent();
+            final ViewTreeObserver observer = getView().getViewTreeObserver();
+            observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    final ViewTreeObserver observer = getView().getViewTreeObserver();
+                    if (!observer.isAlive()) {
+                        return;
+                    }
+                    observer.removeOnGlobalLayoutListener(this);
+                    mFloatingActionButtonController.setScreenWidth(parent.getWidth());
+                    mFloatingActionButtonController.align(
+                            mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_RIGHT
+                                : FloatingActionButtonController.ALIGN_MIDDLE,
+                            0 /* offsetX */,
+                            0 /* offsetY */,
+                            false);
+                }
+            });
+        }
 
         mHandoffButton = (ImageButton) view.findViewById(R.id.handoffButton);
         mHandoffButton.setOnClickListener(new View.OnClickListener() {
@@ -544,7 +583,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setEndCallButtonEnabled(boolean enabled) {
-        mEndCallButton.setVisibility(enabled ? View.VISIBLE : View.GONE);
+        mFloatingActionButtonController.setVisible(enabled);
     }
 
     private void dispatchPopulateAccessibilityEvent(AccessibilityEvent event, View view) {
@@ -577,7 +616,15 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
                 // Prepare the state of views before the circular reveal animation
                 mPrimaryCallCardContainer.setBottom(parent.getHeight());
-                mEndCallButton.setTranslationY(200);
+
+                // Set up FAB.
+                mFloatingActionButtonController.setScreenWidth(parent.getWidth());
+                // Move it below the screen.
+                mFloatingActionButtonController.manuallyTranslate(
+                        mFloatingActionButtonController.getTranslationXForAlignment(
+                                mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_RIGHT
+                                        : FloatingActionButtonController.ALIGN_MIDDLE),
+                        mFloatingActionButtonHideOffset);
                 mCallButtonsContainer.setAlpha(0);
                 mCallStateLabel.setAlpha(0);
                 mPrimaryName.setAlpha(0);
@@ -615,7 +662,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         final Animator shrinkAnimator =
                 ObjectAnimator.ofInt(mPrimaryCallCardContainer, "bottom",
                         startHeight, endHeight);
-        shrinkAnimator.setDuration(SHRINK_ANIMATION_DURATION);
+        shrinkAnimator.setDuration(mShrinkAnimationDuration);
         shrinkAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -625,8 +672,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 assignTranslateAnimation(mCallTypeLabel, 4);
                 assignTranslateAnimation(mCallButtonsContainer, 5);
 
-                mEndCallButton.animate().translationY(0)
-                        .setDuration(SHRINK_ANIMATION_DURATION);
+                mFloatingActionButtonController.align(
+                        mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_RIGHT
+                            : FloatingActionButtonController.ALIGN_MIDDLE,
+                        0 /* offsetX */,
+                        0 /* offsetY */,
+                        true);
             }
         });
         shrinkAnimator.setInterpolator(AnimUtils.EASE_IN);
@@ -642,14 +693,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         final ValueAnimator valueAnimator = ViewAnimationUtils.createCircularReveal(view,
                 size.x / 2, size.y / 2, 0, Math.max(size.x, size.y));
-        valueAnimator.setDuration(REVEAL_ANIMATION_DURATION);
+        valueAnimator.setDuration(mRevealAnimationDuration);
         return valueAnimator;
     }
 
     private void assignTranslateAnimation(View view, int offset) {
         view.setTranslationY(mTranslationOffset * offset);
         view.animate().translationY(0).alpha(1).withLayer()
-                .setDuration(SHRINK_ANIMATION_DURATION).setInterpolator(AnimUtils.EASE_IN);
+                .setDuration(mShrinkAnimationDuration).setInterpolator(AnimUtils.EASE_IN);
     }
 
     private final class LayoutIgnoringListener implements View.OnLayoutChangeListener {

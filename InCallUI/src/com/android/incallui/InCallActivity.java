@@ -346,6 +346,7 @@ public class InCallActivity extends Activity {
             }
 
             if (intent.getBooleanExtra(NEW_OUTGOING_CALL, false)) {
+                intent.removeExtra(NEW_OUTGOING_CALL);
                 mCallCardFragment.animateForNewOutgoingCall();
             }
 
