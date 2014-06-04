@@ -61,7 +61,7 @@
     <!-- In-call screen: call failure reason (SIM error) -->
     <string name="callFailed_simError">No SIM or SIM error</string>
     <!-- In-call screen: call failure reason (out of service) -->
-    <string name="callFailed_outOfService">Out of service area</string>
+    <string name="callFailed_outOfService">Mobile network not available</string>
     <!-- In-call screen: call failure reason (call denied because of current FDN setting) -->
     <string name="callFailed_fdn_only">Outgoing calls are restricted by FDN.</string>
     <!-- In-call screen: call failure reason (call denied because call barring is on) -->
@@ -225,6 +225,8 @@
     <string name="incall_error_supp_service_reject">Unable to reject call.</string>
     <!-- In-call screen: message displayed in an error dialog -->
     <string name="incall_error_supp_service_hangup">Unable to release call(s).</string>
+    <!-- In-call screen: message displayed in an error dialog -->
+    <string name="incall_error_missing_voicemail_number">Voicemail number unknown.</string>
 
     <!-- In-call screen: "call type" indication for a SIP call [CHAR LIMIT=30]  -->
     <string name="incall_call_type_label_sip">Internet call</string>
