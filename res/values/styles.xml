@@ -79,12 +79,19 @@
         <item name="android:src">@drawable/ic_menu_overflow_lt</item>
     </style>
 
+    <!-- Action bar overflow menu icon.  White with no shadow. -->
+    <style name="DialtactsActionBarOverflowWhite"
+           parent="@android:style/Widget.Quantum.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/overflow_menu</item>
+    </style>
+
     <style name="DialpadTheme" parent="DialtactsTheme">
         <item name="android:textColorPrimary">#FFFFFF</item>
     </style>
 
     <style name="DialtactsThemeWithoutActionBarOverlay" parent="DialtactsTheme">
         <item name="android:windowActionBarOverlay">false</item>
+        <item name="android:actionOverflowButtonStyle">@style/DialtactsActionBarOverflowWhite</item>
     </style>
 
     <!-- Hide the actionbar title during the activity preview -->
@@ -105,6 +112,7 @@
         <item name="call_log_voicemail_status_background_color">#262626</item>
         <item name="call_log_voicemail_status_text_color">#888888</item>
         <item name="call_log_voicemail_status_action_text_color">#33b5e5</item>
+        <item name="android:actionOverflowButtonStyle">@style/DialtactsActionBarOverflowWhite</item>
     </style>
 
     <style name="DialtactsActionBarStyle" parent="android:Widget.Quantum.ActionBar">
