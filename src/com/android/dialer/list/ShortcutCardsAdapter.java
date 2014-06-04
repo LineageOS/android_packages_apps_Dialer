@@ -31,6 +31,7 @@ import android.widget.LinearLayout;
 
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapter;
+import com.android.dialer.calllog.CallLogListItemView;
 import com.android.dialer.calllog.CallLogNotificationsHelper;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.list.SwipeHelper.OnItemGestureListener;
@@ -188,10 +189,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
         final View view = mCallLogAdapter.getView(position, convertView == null ?
                 null : wrapper.getChildAt(0), parent);
         wrapper.removeAllViews();
-        final View callLogItem = view.findViewById(R.id.call_log_list_item);
-        // Reset the internal call log item view if it is being recycled
-        callLogItem.setTranslationX(0);
-        callLogItem.setAlpha(1);
+        wrapper.prepareChildView(view);
         wrapper.addView(view);
         return wrapper;
     }
@@ -225,8 +223,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
                     densityScale, pagingTouchSlop);
         }
 
-        @Override
-        public void addView(View view) {
+        private void prepareChildView(View view) {
             view.setBackgroundResource(R.drawable.rounded_corner_bg);
 
             final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
@@ -251,7 +248,13 @@ public class ShortcutCardsAdapter extends BaseAdapter {
                     R.dimen.recent_call_log_item_translation_z);
             view.setTranslationZ(mPreviousTranslationZ);
 
-            super.addView(view);
+            final CallLogListItemView callLogItem =
+                    (CallLogListItemView) view.findViewById(R.id.call_log_list_item);
+            // Reset the internal call log item view if it is being recycled
+            callLogItem.setTranslationX(0);
+            callLogItem.setAlpha(1);
+            callLogItem.setClipBounds(null);
+            setChildrenOpacity(callLogItem, 1.0f);
         }
 
         @Override
@@ -346,9 +349,13 @@ public class ShortcutCardsAdapter extends BaseAdapter {
 
             // If the view has any children, fade them out of view.
             final ViewGroup viewGroup = (ViewGroup) viewToClip;
+            setChildrenOpacity(viewGroup, Math.max(0, 1 - 3 * ratioHidden));
+        }
+
+        private void setChildrenOpacity(ViewGroup viewGroup, float alpha) {
             final int count = viewGroup.getChildCount();
             for (int i = 0; i < count; i++) {
-                viewGroup.getChildAt(i).setAlpha(Math.max(0, 1 - 3 * ratioHidden));
+                viewGroup.getChildAt(i).setAlpha(alpha);
             }
         }
     }
