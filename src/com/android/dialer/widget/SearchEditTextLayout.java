@@ -49,10 +49,12 @@ public class SearchEditTextLayout extends FrameLayout {
     private View mCollapsed;
     private View mExpanded;
     private EditText mSearchView;
+    private View mSearchIcon;
     private View mCollapsedSearchBox;
     private View mVoiceSearchButtonView;
     private View mOverflowButtonView;
     private View mBackButtonView;
+    private View mExpandedSearchBox;
     private View mClearButtonView;
 
     private ValueAnimator mAnimator;
@@ -92,10 +94,12 @@ public class SearchEditTextLayout extends FrameLayout {
         mExpanded = findViewById(R.id.search_box_expanded);
         mSearchView = (EditText) mExpanded.findViewById(R.id.search_view);
 
+        mSearchIcon = findViewById(R.id.search_magnifying_glass);
         mCollapsedSearchBox = findViewById(R.id.search_box_start_search);
         mVoiceSearchButtonView = findViewById(R.id.voice_search_button);
         mOverflowButtonView = findViewById(R.id.dialtacts_options_menu_button);
         mBackButtonView = findViewById(R.id.search_back_button);
+        mExpandedSearchBox = findViewById(R.id.search_box_expanded);
         mClearButtonView = findViewById(R.id.search_close_button);
 
         mSearchView.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -162,11 +166,7 @@ public class SearchEditTextLayout extends FrameLayout {
         }
     }
     public void expand(boolean animate, boolean requestFocus) {
-        mCollapsedSearchBox.setVisibility(View.GONE);
-        mVoiceSearchButtonView.setVisibility(View.GONE);
-        mOverflowButtonView.setVisibility(View.GONE);
-        mBackButtonView.setVisibility(View.VISIBLE);
-        mClearButtonView.setVisibility(View.VISIBLE);
+        updateVisibility(true /* isExpand */);
 
         if (animate) {
             AnimUtils.crossFadeViews(mExpanded, mCollapsed, ANIMATION_DURATION);
@@ -180,7 +180,15 @@ public class SearchEditTextLayout extends FrameLayout {
             mCollapsed.setVisibility(View.GONE);
         }
 
+        // Set 9-patch background. This owns the padding, so we need to restore the original values.
+        int paddingTop = this.getPaddingTop();
+        int paddingStart = this.getPaddingStart();
+        int paddingBottom = this.getPaddingBottom();
+        int paddingEnd = this.getPaddingEnd();
         setBackgroundResource(R.drawable.search_shadow);
+        setElevation(0);
+        setPaddingRelative(paddingStart, paddingTop, paddingEnd, paddingBottom);
+
         setElevation(0);
         if (requestFocus) {
             mSearchView.requestFocus();
@@ -189,11 +197,7 @@ public class SearchEditTextLayout extends FrameLayout {
     }
 
     public void collapse(boolean animate) {
-        mCollapsedSearchBox.setVisibility(View.VISIBLE);
-        mVoiceSearchButtonView.setVisibility(View.VISIBLE);
-        mOverflowButtonView.setVisibility(View.VISIBLE);
-        mBackButtonView.setVisibility(View.GONE);
-        mClearButtonView.setVisibility(View.GONE);
+        updateVisibility(false /* isExpand */);
 
         if (animate) {
             AnimUtils.crossFadeViews(mCollapsed, mExpanded, ANIMATION_DURATION);
@@ -209,6 +213,25 @@ public class SearchEditTextLayout extends FrameLayout {
         mIsExpanded = false;
         setElevation(mCollapsedElevation);
         setBackgroundResource(R.drawable.rounded_corner);
+    }
+
+    /**
+     * Updates the visibility of views depending on whether we will show the expanded or collapsed
+     * search view. This helps prevent some jank with the crossfading if we are animating.
+     *
+     * @param isExpand Whether we are about to show the expanded search box.
+     */
+    private void updateVisibility(boolean isExpand) {
+        int collapsedViewVisibility = isExpand ? View.GONE : View.VISIBLE;
+        int expandedViewVisibility = isExpand ? View.VISIBLE : View.GONE;
+
+        mSearchIcon.setVisibility(collapsedViewVisibility);
+        mCollapsedSearchBox.setVisibility(collapsedViewVisibility);
+        mVoiceSearchButtonView.setVisibility(collapsedViewVisibility);
+        mOverflowButtonView.setVisibility(collapsedViewVisibility);
+        mBackButtonView.setVisibility(expandedViewVisibility);
+        mExpandedSearchBox.setVisibility(expandedViewVisibility);
+        mClearButtonView.setVisibility(expandedViewVisibility);
     }
 
     private void prepareAnimator(final boolean expand) {
