@@ -82,7 +82,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:visibility="gone">
+        android:visibility="gone" >
 
         <ImageButton
             android:id="@+id/search_back_button"
@@ -113,7 +113,8 @@
             android:src="@drawable/ic_close_dk"
             android:clickable="true"
             android:background="?android:attr/selectableItemBackground"
-            android:contentDescription="@string/description_clear_search" />
+            android:contentDescription="@string/description_clear_search"
+            android:tint="@color/searchbox_icon_tint" />
 
     </LinearLayout>
 
