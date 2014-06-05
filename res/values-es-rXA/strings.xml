@@ -116,7 +116,7 @@
   <string name="description_send_text_message">Unviar mensaxe de testu a <xliff:g id="NAME">%1$s</xliff:g></string>
   <string name="description_call_log_unheard_voicemail">Mensaxe de voz ensin oyer</string>
   <string name="description_start_voice_search">Aniciar gueta por voz</string>
-  <string name="call_log_empty_gecode"> </string>
+  <string name="call_log_empty_geocode"> </string>
   <string name="menu_callNumber">Llamar a <xliff:g id="NUMBER">%s</xliff:g></string>
   <string name="unknown">Desconocíos</string>
   <string name="voicemail">Buzón de voz</string>

@@ -113,7 +113,7 @@
     <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g> غا تېكىست ئۇچۇر يوللا"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"ئاڭلىمىغان ئۈنخەت"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"تاۋۇش ئىزدەشنى باشلا"</string>
-    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
+    <string name="call_log_empty_geocode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> نى چاقىر"</string>
     <string name="unknown" msgid="740067747858270469">"يوچۇن"</string>
     <string name="voicemail" msgid="3851469869202611441">"ئۈنخەت"</string>
