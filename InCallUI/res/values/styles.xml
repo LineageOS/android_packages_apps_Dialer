@@ -55,7 +55,6 @@
         <item name="android:layout_width">@dimen/in_call_button_dimension</item>
         <item name="android:layout_height">@dimen/in_call_button_dimension</item>
         <item name="android:layout_marginBottom">@dimen/call_button_margin_vertical</item>
-        <item name="android:layout_marginTop">@dimen/call_button_margin_vertical</item>
         <item name="android:layout_marginLeft">@dimen/call_button_margin_horizontal</item>
         <item name="android:layout_marginRight">@dimen/call_button_margin_horizontal</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
@@ -116,16 +115,14 @@
          circular reveal animation for a new outgoing call to work correctly. We don't just use
          Theme.Black.NoTitleBar directly, since we want any popups or dialogs
          from the InCallActivity to have the correct holo style. -->
-    <style name="Theme.InCallScreen" parent="@android:style/Theme.Holo.NoActionBar">
+    <style name="Theme.InCallScreen" parent="@android:style/Theme.Quantum.Light">
         <item name="android:windowAnimationStyle">@style/InCallAnimationStyle</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="dialpad_key_button_touch_tint">@color/incall_dialpad_touch_tint</item>
-    </style>
-
-    <style name="PrimaryCallInfoPrimaryCallBanner">
-        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:textColorPrimary">@color/incall_call_banner_text_color</item>
+        <item name="android:colorPrimaryDark">@color/actionbar_background_color_dark</item>
     </style>
 </resources>

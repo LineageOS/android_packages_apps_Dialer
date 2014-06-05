@@ -35,8 +35,8 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.accessibility.AccessibilityEvent;
-import android.view.animation.Interpolator;
-import android.view.animation.PathInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -82,6 +82,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private float mDensity;
 
     private float mTranslationOffset;
+    private Animation mPulseAnimation;
 
     @Override
     CallCardPresenter.CallCardUi getUi() {
@@ -124,6 +125,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mPulseAnimation =
+                AnimationUtils.loadAnimation(view.getContext(), R.anim.call_status_pulse);
+
         mPhoneNumber = (TextView) view.findViewById(R.id.phoneNumber);
         mPrimaryName = (TextView) view.findViewById(R.id.name);
         mNumberLabel = (TextView) view.findViewById(R.id.label);
@@ -153,6 +157,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             }
         });
         ViewUtil.setupFloatingActionButton(mHandoffButton, getResources());
+
+        mPrimaryName.setElegantTextHeight(false);
+        mCallStateLabel.setElegantTextHeight(false);
     }
 
     @Override
@@ -293,7 +300,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         if (!TextUtils.isEmpty(callStateLabel)) {
             mCallStateLabel.setText(callStateLabel);
             mCallStateLabel.setVisibility(View.VISIBLE);
+            if (state != Call.State.CONFERENCED) {
+                mCallStateLabel.startAnimation(mPulseAnimation);
+            }
         } else {
+            mCallStateLabel.getAnimation().cancel();
+            mCallStateLabel.setAlpha(0);
             mCallStateLabel.setVisibility(View.GONE);
         }
 
@@ -342,7 +354,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             view.setImageDrawable(photo);
             AnimUtils.fadeIn(mElapsedTime, AnimUtils.DEFAULT_DURATION);
         } else {
-            AnimationUtils.startCrossFade(view, current, photo);
+            InCallAnimationUtils.startCrossFade(view, current, photo);
             view.setVisibility(View.VISIBLE);
         }
     }
