@@ -100,7 +100,7 @@
     <!-- Color for icons in the actionbar -->
     <color name="actionbar_icon_color">#ffffff</color>
 
-    <color name="dialer_dialpad_touch_tint">#1a1dc7db</color>
+    <color name="dialer_dialpad_touch_tint">#331dc7db</color>
 
     <color name="tab_ripple_color">@color/dialer_accent_color</color>
     <color name="tab_selected_underline_color">@color/dialer_accent_color</color>
