@@ -21,8 +21,6 @@
     <color name="dialtacts_secondary_text_color">#888888</color>
     <color name="dialer_accent_color">#eeff41</color>
 
-    <color name="contact_list_background_color">#f2f2f2</color>
-
     <!-- Color of the text describing an unconsumed missed call. -->
     <color name="call_log_missed_call_highlight_color">#FF0000</color>
 
@@ -42,10 +40,9 @@
     <color name="item_selected">#660099cc</color>
 
     <!-- Background color of new dialer activity -->
-    <color name="background_dialer_light">#ffffff</color>
-
+    <color name="background_dialer_light">#fbfbfb</color>
     <!-- Background color of dialer list items (contacts, call log entries) -->
-    <color name="background_dialer_list_items">#fbfbfb</color>
+    <color name="background_dialer_list_items">@color/background_dialer_light</color>
 
     <color name="search_shortcut_background_color">#b6b6b6</color>
     <color name="search_shortcut_icon_color">#f8f8f8</color>

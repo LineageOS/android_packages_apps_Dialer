@@ -53,7 +53,7 @@
         <item name="list_item_label_width_weight">3</item>
         <item name="contact_browser_list_padding_left">16dp</item>
         <item name="contact_browser_list_padding_right">0dp</item>
-        <item name="contact_browser_background">@color/contact_list_background_color</item>
+        <item name="contact_browser_background">@color/background_dialer_light</item>
         <item name="list_item_name_text_color">@color/contact_list_name_text_color</item>
         <item name="list_item_name_text_size">16sp</item>
         <item name="list_item_text_indent">@dimen/contact_browser_list_item_text_indent</item>
