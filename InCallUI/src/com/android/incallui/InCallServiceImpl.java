@@ -97,7 +97,7 @@ public class InCallServiceImpl extends InCallService {
     /** {@inheritDoc} */
     @Override
     protected void setPostDialWait(String callId, String remaining) {
-        // TODO(ihab): Add post-dial state to user interface
+        InCallPresenter.getInstance().onPostDialCharWait(callId, remaining);
     }
 
     /** {@inheritDoc} */
