@@ -123,6 +123,7 @@
         <item name="android:height">@dimen/action_bar_height</item>
         <!-- Empty icon -->
         <item name="android:icon">@android:color/transparent</item>
+        <item name="android:contentInsetStart">@dimen/search_margin_horizontal</item>
     </style>
 
     <style name="DialtactsActionBarWithoutTitleStyle" parent="DialtactsActionBarStyle">
