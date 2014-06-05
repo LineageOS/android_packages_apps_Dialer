@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -635,8 +636,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         final Point size = new Point();
         display.getSize(size);
 
-        final ValueAnimator valueAnimator = view.createRevealAnimator(size.x / 2, size.y / 2,
-                0, Math.max(size.x, size.y));
+        final ValueAnimator valueAnimator = ViewAnimationUtils.createCircularReveal(view,
+                size.x / 2, size.y / 2, 0, Math.max(size.x, size.y));
         valueAnimator.setDuration(REVEAL_ANIMATION_DURATION);
         return valueAnimator;
     }
