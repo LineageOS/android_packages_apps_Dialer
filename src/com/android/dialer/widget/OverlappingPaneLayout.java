@@ -44,6 +44,7 @@ import android.view.accessibility.AccessibilityEvent;
  */
 public class OverlappingPaneLayout extends ViewGroup {
     private static final String TAG = "SlidingPaneLayout";
+    private static final boolean DEBUG = false;
 
     /**
      * Default size of the overhang for a pane in the open state.
@@ -92,6 +93,12 @@ public class OverlappingPaneLayout extends ViewGroup {
     private float mSlideOffset;
 
     /**
+     * How far the panel is offset from its closed position, in pixels.
+     * range [0, {@link #mSlideRange}] where 0 is completely closed.
+     */
+    private int mSlideOffsetPx;
+
+    /**
      * How far in pixels the slideable panel may move.
      */
     private int mSlideRange;
@@ -106,6 +113,20 @@ public class OverlappingPaneLayout extends ViewGroup {
      * Tracks whether or not a child view is in the process of a nested scroll.
      */
     private boolean mIsInNestedScroll;
+
+    /**
+     * Indicates that the layout is currently in the process of a nested pre-scroll operation where
+     * the child is being dragged downwards. If so, we should open the pane up to the maximum
+     * offset defined in {@link #mIntermediateOffset}, and no further.
+     */
+    boolean mInNestedPreScrollDownwards = false;
+
+    /**
+     * Stores an offset used to represent a point somewhere in between the panel's fully closed
+     * state and fully opened state where the panel can be temporarily pinned or opened up to
+     * during scrolling.
+     */
+    private int mIntermediateOffset = 0;
 
     private float mInitialMotionX;
     private float mInitialMotionY;
@@ -170,6 +191,16 @@ public class OverlappingPaneLayout extends ViewGroup {
 
         mDragHelper = ViewDragHelper.create(this, 0.5f, new DragHelperCallback());
         mDragHelper.setMinVelocity(MIN_FLING_VELOCITY * density);
+    }
+
+    /**
+     * Set an offset, somewhere in between the panel's fully closed state and fully opened state,
+     * where the panel can be temporarily pinned or opened up to.
+     *
+     * @param offset Offset in pixels
+     */
+    public void setIntermediatePinnedOffset(int offset) {
+        mIntermediateOffset = offset;
     }
 
     /**
@@ -525,7 +556,7 @@ public class OverlappingPaneLayout extends ViewGroup {
                 final int lpMargin = lp.topMargin;
                 final int pos = (int) (range * mSlideOffset);
                 yStart += pos + lpMargin;
-                mSlideOffset = (float) pos / mSlideRange;
+                updateSlideOffset(pos);
             } else {
                 yStart = nextYStart;
             }
@@ -664,6 +695,11 @@ public class OverlappingPaneLayout extends ViewGroup {
         return false;
     }
 
+    private void updateSlideOffset(int offsetPx) {
+        mSlideOffsetPx = offsetPx;
+        mSlideOffset = (float) mSlideOffsetPx / mSlideRange;
+    }
+
     /**
      * Open the sliding pane if it is currently slideable. If first layout
      * has already completed this will animate.
@@ -685,13 +721,13 @@ public class OverlappingPaneLayout extends ViewGroup {
     }
 
     /**
-     * Check if the layout is completely open. It can be open either because the slider
+     * Check if the layout is open. It can be open either because the slider
      * itself is open revealing the left pane, or if all content fits without sliding.
      *
-     * @return true if sliding panels are completely open
+     * @return true if sliding panels are open
      */
     public boolean isOpen() {
-        return !mCanSlide || mSlideOffset == 1;
+        return !mCanSlide || mSlideOffset > 0;
     }
 
     /**
@@ -715,7 +751,7 @@ public class OverlappingPaneLayout extends ViewGroup {
         final int lpMargin = lp.topMargin;
         final int topBound = getPaddingTop() + lpMargin;
 
-        mSlideOffset = (float) (newTop - topBound) / mSlideRange;
+        updateSlideOffset(newTop - topBound);
 
         dispatchOnPanelSlide(mSlideableView);
     }
@@ -855,17 +891,44 @@ public class OverlappingPaneLayout extends ViewGroup {
             mIsInNestedScroll = true;
             mDragHelper.startNestedScroll(mSlideableView);
         }
+        if (DEBUG) {
+            Log.d(TAG, "onStartNestedScroll: " + startNestedScroll);
+        }
         return startNestedScroll;
     }
 
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
+        if (dy == 0) {
+            // Nothing to do
+            return;
+        }
+        if (DEBUG) {
+            Log.d(TAG, "onNestedPreScroll: " + dy);
+        }
+        mInNestedPreScrollDownwards = (dy > 0 && mSlideOffsetPx <= mIntermediateOffset);
         mDragHelper.processNestedScroll(mSlideableView, 0, dy, consumed);
     }
 
     @Override
+    public void onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed,
+            int dyUnconsumed) {
+        if (DEBUG) {
+            Log.d(TAG, "onNestedScroll: " + dyUnconsumed);
+        }
+        mInNestedPreScrollDownwards = false;
+        // We need to flip dyUnconsumed here, because its magnitude is reversed. b/14585990
+        mDragHelper.processNestedScroll(mSlideableView, 0, -dyUnconsumed, null);
+    }
+
+    @Override
     public void onStopNestedScroll(View child) {
-        mDragHelper.stopNestedScroll(mSlideableView);
+        if (DEBUG) {
+            Log.d(TAG, "onStopNestedScroll");
+        }
+        if (mIsInNestedScroll) {
+            mDragHelper.stopNestedScroll(mSlideableView);
+        }
         mIsInNestedScroll = false;
     }
 
@@ -914,7 +977,25 @@ public class OverlappingPaneLayout extends ViewGroup {
             final LayoutParams lp = (LayoutParams) releasedChild.getLayoutParams();
 
             int top = getPaddingTop() + lp.topMargin;
-            if (yvel > 0 || (yvel == 0 && mSlideOffset > 0.5f)) {
+
+            if (mInNestedPreScrollDownwards) {
+                // Snap to the closest pinnable position based on the current slide offset
+                // (in pixels)   [0  -  mIntermediateoffset  - mSlideRange]
+                if (yvel > 0) {
+                    top += mSlideRange;
+                } else if (0 <= mSlideOffsetPx && mSlideOffsetPx <= mIntermediateOffset / 2) {
+                    // Offset is between 0 and mIntermediateOffset, but closer to 0
+                    // Leave top unchanged
+                } else if (mIntermediateOffset / 2 <= mSlideOffsetPx
+                        && mSlideOffsetPx <= (mIntermediateOffset + mSlideRange) / 2) {
+                    // Offset is closest to mIntermediateOffset
+                    top += mIntermediateOffset;
+                } else {
+                    // Offset is between mIntermediateOffset and mSlideRange, but closer to
+                    // mSlideRange
+                    top += mSlideRange;
+                }
+            } else if (yvel > 0 || (yvel == 0 && mSlideOffset > 0.5f)) {
                 top += mSlideRange;
             }
 
@@ -939,7 +1020,8 @@ public class OverlappingPaneLayout extends ViewGroup {
 
             final int newTop;
             int topBound = getPaddingTop() + lp.topMargin;
-            int bottomBound = topBound + mSlideRange;
+            int bottomBound = topBound
+                    + (mInNestedPreScrollDownwards ? mIntermediateOffset : mSlideRange);
             newTop = Math.min(Math.max(top, topBound), bottomBound);
 
             return newTop;
