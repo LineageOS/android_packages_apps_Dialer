@@ -16,7 +16,7 @@
   -->
 <resources>
     <style name="DialtactsTheme"
-           parent="android:Theme.Quantum.Light">
+           parent="android:Theme.Material.Light">
         <item name="android:textColorPrimary">@color/dialtacts_primary_text_color</item>
         <item name="android:textColorSecondary">@color/dialtacts_secondary_text_color</item>
         <item name="android:windowActionBarOverlay">true</item>
@@ -75,13 +75,13 @@
 
     <!-- Action bar overflow menu icon. -->
     <style name="DialtactsActionBarOverflow"
-           parent="@android:style/Widget.Quantum.Light.ActionButton.Overflow">
+           parent="@android:style/Widget.Material.Light.ActionButton.Overflow">
         <item name="android:src">@drawable/ic_menu_overflow_lt</item>
     </style>
 
     <!-- Action bar overflow menu icon.  White with no shadow. -->
     <style name="DialtactsActionBarOverflowWhite"
-           parent="@android:style/Widget.Quantum.Light.ActionButton.Overflow">
+           parent="@android:style/Widget.Material.Light.ActionButton.Overflow">
         <item name="android:src">@drawable/overflow_menu</item>
     </style>
 
@@ -115,7 +115,7 @@
         <item name="android:actionOverflowButtonStyle">@style/DialtactsActionBarOverflowWhite</item>
     </style>
 
-    <style name="DialtactsActionBarStyle" parent="android:Widget.Quantum.ActionBar">
+    <style name="DialtactsActionBarStyle" parent="android:Widget.Material.ActionBar">
         <item name="android:background">@color/actionbar_background_color</item>
         <item name="android:titleTextStyle">@style/DialtactsActionBarTitleText</item>
         <item name="android:height">@dimen/action_bar_height</item>
@@ -130,20 +130,20 @@
 
     <!-- Text in the action bar at the top of the screen -->
     <style name="DialtactsActionBarTitleText"
-           parent="@android:style/TextAppearance.Quantum.Widget.ActionBar.Title">
+           parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">
         <item name="android:textColor">@color/actionbar_text_color</item>
     </style>
 
     <!-- Text style for tabs. -->
     <style name="DialtactsActionBarTabTextStyle"
-           parent="android:style/Widget.Quantum.Light.ActionBar.TabText">
+           parent="android:style/Widget.Material.Light.ActionBar.TabText">
         <item name="android:textColor">@color/tab_text_color</item>
         <item name="android:textSize">@dimen/tab_text_size</item>
         <item name="android:fontFamily">@string/tab_font_family</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="ListViewStyle" parent="@android:style/Widget.Quantum.Light.ListView">
+    <style name="ListViewStyle" parent="@android:style/Widget.Material.Light.ListView">
         <item name="android:overScrollMode">always</item>
     </style>
 
