@@ -211,7 +211,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void mergeClicked() {
-        TelecommAdapter.getInstance().merge();
+        TelecommAdapter.getInstance().merge(mCall.getCallId());
     }
 
     public void addCallClicked() {
