@@ -141,8 +141,7 @@
            parent="android:style/Widget.Quantum.Light.ActionBar.TabText">
         <item name="android:textColor">@color/tab_text_color</item>
         <item name="android:textSize">@dimen/tab_text_size</item>
-        <item name="android:fontFamily">@string/tab_font_family</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">"sans-serif-medium"</item>
     </style>
 
     <style name="ListViewStyle" parent="@android:style/Widget.Quantum.Light.ListView">

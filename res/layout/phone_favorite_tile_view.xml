@@ -17,7 +17,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/contact_tile"
     class="com.android.dialer.list.PhoneFavoriteSquareTileView"
-    android:paddingEnd="@dimen/contact_tile_divider_width">
+    android:paddingEnd="@dimen/contact_tile_divider_width"
+    android:paddingBottom="@dimen/contact_tile_divider_width">
 
     <RelativeLayout
         android:id="@+id/contact_favorite_card"
@@ -50,8 +51,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/contact_tile_text_side_padding"
-            android:paddingRight="@dimen/contact_tile_text_side_padding"
             android:paddingStart="@dimen/contact_tile_text_side_padding"
             android:paddingEnd="@dimen/contact_tile_text_side_padding"
             android:paddingBottom="@dimen/contact_tile_text_bottom_padding"
