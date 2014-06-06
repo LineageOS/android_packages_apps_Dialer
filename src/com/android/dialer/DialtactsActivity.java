@@ -59,6 +59,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -195,7 +196,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private EditText mSearchView;
     private View mVoiceSearchButton;
-    private SearchEditTextLayout mSearchEditTextLayout;
 
     /**
      * View that contains the "Remove" dialog that shows up when the user long presses a contact.
@@ -342,23 +342,27 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mActionBarController = new ActionBarController(this,
                 (SearchEditTextLayout) actionBar.getCustomView());
 
-        mSearchEditTextLayout = (SearchEditTextLayout) actionBar.getCustomView();
-        mSearchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
 
-        mSearchView = (EditText) mSearchEditTextLayout.findViewById(R.id.search_view);
+        SearchEditTextLayout searchEditTextLayout =
+                (SearchEditTextLayout) actionBar.getCustomView();
+        searchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
+
+        mSearchView = (EditText) searchEditTextLayout.findViewById(R.id.search_view);
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
-        mVoiceSearchButton = mSearchEditTextLayout.findViewById(R.id.voice_search_button);
-        mSearchEditTextLayout.findViewById(R.id.search_box_start_search).setOnClickListener(
-                mSearchViewOnClickListener);
-        mSearchEditTextLayout.setOnBackButtonClickedListener(new OnBackButtonClickedListener() {
+        mVoiceSearchButton = searchEditTextLayout.findViewById(R.id.voice_search_button);
+        searchEditTextLayout.findViewById(R.id.search_magnifying_glass)
+                .setOnClickListener(mSearchViewOnClickListener);
+        searchEditTextLayout.findViewById(R.id.search_box_start_search)
+                .setOnClickListener(mSearchViewOnClickListener);
+        searchEditTextLayout.setOnBackButtonClickedListener(new OnBackButtonClickedListener() {
             @Override
             public void onBackButtonClicked() {
                 onBackPressed();
             }
         });
 
-        ImageButton optionsMenuButton = (ImageButton) mSearchEditTextLayout.findViewById(
-                R.id.dialtacts_options_menu_button);
+        ImageButton optionsMenuButton =
+                (ImageButton) searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
         optionsMenuButton.setOnClickListener(this);
         final OptionsPopupMenu optionsMenu = buildOptionsMenu(optionsMenuButton);
         optionsMenuButton.setOnTouchListener(optionsMenu.getDragToOpenListener());
