@@ -187,6 +187,10 @@ public class ActionBarController {
         mIsActionBarSlidUp = false;
     }
 
+    public void setAlpha(float alphaValue) {
+        mSearchBox.animate().alpha(alphaValue).start();
+    }
+
     /**
      * Saves the current state of the action bar into a provided {@link Bundle}
      */
