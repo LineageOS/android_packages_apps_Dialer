@@ -449,28 +449,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
             configureKeypadListeners(mDialpadView);
         }
 
-        final ViewTreeObserver vto = parent.getViewTreeObserver();
-        // Adjust the translation of the DialpadFragment in a preDrawListener instead of in
-        // DialtactsActivity, because at the point in time when the DialpadFragment is added,
-        // its views have not been laid out yet.
-        final ViewTreeObserver.OnPreDrawListener
-                preDrawListener = new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public boolean onPreDraw() {
-                if (isHidden()) return true;
-                if (parent.getTranslationY() == 0) {
-                    ((DialpadSlidingLinearLayout) parent)
-                            .setYFraction(DIALPAD_SLIDE_FRACTION);
-                }
-                final ViewTreeObserver vto = parent.getViewTreeObserver();
-                vto.removeOnPreDrawListener(this);
-                return true;
-            }
-
-        };
-
-        vto.addOnPreDrawListener(preDrawListener);
-
         return parent;
     }
 
