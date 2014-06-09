@@ -42,8 +42,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
@@ -200,7 +198,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
     private PhoneFavoriteListView mListView;
 
     private View mPhoneFavoritesMenu;
-    private View mContactTileFrame;
 
     private TileInteractionTeaserView mTileInteractionTeaserView;
 
@@ -294,8 +291,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         mPhoneFavoritesMenu = inflater.inflate(R.layout.phone_favorites_menu, mListView, false);
         prepareFavoritesMenu(mPhoneFavoritesMenu);
 
-        mContactTileFrame = mParentView.findViewById(R.id.contact_tile_frame);
-
         mTileInteractionTeaserView = (TileInteractionTeaserView) inflater.inflate(
                 R.layout.tile_interactions_teaser_view, mListView, false);
 
@@ -323,10 +318,6 @@ public class PhoneFavoriteFragment extends Fragment implements OnItemClickListen
         final int newVisibility = visible ? View.VISIBLE : View.GONE;
 
         if (previousVisibility != newVisibility) {
-            final RelativeLayout.LayoutParams params = (LayoutParams) mContactTileFrame
-                    .getLayoutParams();
-            params.height = visible ? LayoutParams.WRAP_CONTENT : LayoutParams.MATCH_PARENT;
-            mContactTileFrame.setLayoutParams(params);
             mEmptyView.setVisibility(newVisibility);
         }
     }

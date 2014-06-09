@@ -100,6 +100,8 @@
     <dimen name="favorites_menu_all_contacts_text_size">12sp</dimen>
     <!-- Height of the all contacts Button in the favorites menu. -->
     <dimen name="favorites_menu_all_contacts_height">24dp</dimen>
+    <!-- Margin top of the no favourites panel in phone dialer -->
+    <dimen name="favorites_nofav_top_space">128dip</dimen>
 
     <!-- Margin to the left and right of the search box. -->
     <dimen name="search_margin_horizontal">7dp</dimen>
