@@ -16,8 +16,6 @@
   -->
 <resources>
     <integer name="fade_duration">300</integer>
-    <integer name="dialpad_slide_in_duration">532</integer>
-    <integer name="dialpad_slide_out_duration">257</integer>
 
     <!-- Swipe constants -->
     <integer name="swipe_escape_velocity">100</integer>
