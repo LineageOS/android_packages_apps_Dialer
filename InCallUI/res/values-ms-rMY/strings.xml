@@ -34,7 +34,8 @@
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Melebihi had ACM"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"Radio dimatikan"</string>
     <string name="callFailed_simError" msgid="4476360200030635828">"Tiada SIM atau ralat SIM"</string>
-    <string name="callFailed_outOfService" msgid="4825791466557236225">"Di luar kawasan perkhidmatan"</string>
+    <!-- no translation found for callFailed_outOfService (682300184520329366) -->
+    <skip />
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"Panggilan keluar dihadkan oleh FDN."</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Anda tidak boleh membuat panggilan keluar semasa sekatan panggilan dihidupkan."</string>
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Semua panggilan dihadkan oleh kawalan akses."</string>
@@ -95,6 +96,8 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Tidak boleh membuat panggilan sidang."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Tidak dapat menolak panggilan."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Tidak dapat melepaskan panggilan."</string>
+    <!-- no translation found for incall_error_missing_voicemail_number (2995137160077097934) -->
+    <skip />
     <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Panggilan internet"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Panggilan kecemasan"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Menghidupkan radio..."</string>

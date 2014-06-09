@@ -34,7 +34,7 @@
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"‏تم تعدي حد ACM"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"تم إيقاف اللاسلكي"</string>
     <string name="callFailed_simError" msgid="4476360200030635828">"‏لا تتوفر بطاقة SIM أو حدث خطأ في البطاقة"</string>
-    <string name="callFailed_outOfService" msgid="4825791466557236225">"خارج نطاق الخدمة"</string>
+    <string name="callFailed_outOfService" msgid="682300184520329366">"شبكة الجوال غير متاحة"</string>
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"‏يتم تقييد المكالمات الصادرة بواسطة FDN."</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"لا يمكنك إجراء مكالمات صادرة أثناء تشغيل حظر المكالمات."</string>
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"تم تقييد كل المكالمات بواسطة التحكم في الدخول."</string>
@@ -95,6 +95,7 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"يتعذر إجراء مكالمات جماعية."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"يتعذر رفض المكالمة."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"يتعذر إجراء مكالمات."</string>
+    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"رقم البريد الصوتي غير معروف."</string>
     <string name="incall_call_type_label_sip" msgid="2310958283037924371">"مكالمة عبر الإنترنت"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"مكالمة الطوارئ"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"جارٍ تشغيل اللاسلكي..."</string>

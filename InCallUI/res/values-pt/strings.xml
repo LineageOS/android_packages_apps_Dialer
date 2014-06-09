@@ -34,7 +34,7 @@
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Limite de ACM excedido"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"Rádio desativado"</string>
     <string name="callFailed_simError" msgid="4476360200030635828">"Sem SIM ou erro de SIM"</string>
-    <string name="callFailed_outOfService" msgid="4825791466557236225">"Área fora de serviço"</string>
+    <string name="callFailed_outOfService" msgid="682300184520329366">"Rede móvel não disponível"</string>
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"As chamadas enviadas são restringidas pelo FDN."</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Você não pode fazer chamadas enquanto o bloqueio de chamadas estiver ativado."</string>
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Todas as chamada são restringidas pelo controle de acesso."</string>
@@ -95,6 +95,7 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Não é possível realizar conferências telefônicas."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Não é possível rejeitar a chamada."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Não é possível liberar a(s) chamada(s)."</string>
+    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Número de correio de voz desconhecido."</string>
     <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Chamada pela internet"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Chamada de emergência"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Ativando o rádio…"</string>

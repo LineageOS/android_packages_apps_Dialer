@@ -34,7 +34,7 @@
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Límit d\'ACM superat"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"Senyal mòbil desactivat"</string>
     <string name="callFailed_simError" msgid="4476360200030635828">"Cap SIM o error de la SIM"</string>
-    <string name="callFailed_outOfService" msgid="4825791466557236225">"Fora de l\'àrea de servei"</string>
+    <string name="callFailed_outOfService" msgid="682300184520329366">"La xarxa de telefonia mòbil no està disponible."</string>
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"FDN restringeix les trucades de sortida."</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"No pots fer trucades de sortida mentre la restricció de trucades estigui activada."</string>
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Totes les trucades estan restringides pel control d\'accés."</string>
@@ -95,6 +95,7 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"No es poden fer trucades de conferència."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"No es pot rebutjar la trucada."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"No es pot alliberar les trucades."</string>
+    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"El número de la bústia de veu és desconegut."</string>
     <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Trucada per Internet"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Trucada d\'emergència"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"S\'està activant el senyal mòbil..."</string>
