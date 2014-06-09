@@ -694,4 +694,41 @@
     <!-- String used as a header in the call log above calls which ocurred more than a week ago.
          [CHAR LIMIT=65] -->
     <string name="call_log_header_other">Other</string>
+
+    <!-- String a header on the call details screen.  Appears above the list calls to or from a
+         particular number.
+         [CHAR LIMIT=65] -->
+    <string name="call_detail_list_header">Call List</string>
+
+    <!-- String describing the "speaker on" button on the playback control used to listen to a
+         voicemail message.  When speaker is on, playback of the voicemail will occur through the
+         phone speaker.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <string name="voicemail_speaker_on">Turn speaker on.</string>
+
+    <!-- String describing the "speaker off" button on the playback control used to listen to a
+         voicemail message.  When speaker is off, playback of the voicemail will occur through the
+         phone earpiece.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <string name="voicemail_speaker_off">Turn speaker off.</string>
+
+    <!-- String describing the "play faster" button in the playback control used to listen to a
+         voicemail message.  Speeds up playback of the voicemail message.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <string name="voicemail_play_faster">Play faster.</string>
+
+    <!-- String describing the "play slower" button in the playback control used to listen to a
+         voicemail message.  Slows down playback of the voicemail message.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <string name="voicemail_play_slower">Play slower.</string>
+
+    <!-- String describing the "play/pause" button in the playback control used to listen to a
+         voicemail message.  Starts playback or pauses ongoing playback.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <string name="voicemail_play_start_pause">Start or pause playback.</string>
 </resources>

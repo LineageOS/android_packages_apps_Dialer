@@ -39,6 +39,8 @@
     <!-- Standard color for selected items. -->
     <color name="item_selected">#660099cc</color>
 
+    <!-- White background for dialer -->
+    <color name="background_dialer_white">#ffffff</color>
     <!-- Background color of new dialer activity -->
     <color name="background_dialer_light">#fbfbfb</color>
     <!-- Background color of dialer list items (contacts, call log entries) -->

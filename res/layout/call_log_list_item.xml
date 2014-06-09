@@ -64,8 +64,8 @@
             android:nextFocusLeft="@+id/quick_contact_photo" >
             <QuickContactBadge
                 android:id="@+id/quick_contact_photo"
-                android:layout_width="@dimen/call_log_list_contact_photo_size"
-                android:layout_height="@dimen/call_log_list_contact_photo_size"
+                android:layout_width="@dimen/contact_photo_size"
+                android:layout_height="@dimen/contact_photo_size"
                 android:nextFocusRight="@id/primary_action_view"
                 android:layout_alignParentStart="true"
                 android:focusable="true"

@@ -219,7 +219,6 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         mFakeAsyncTaskExecutor.runTask(PREPARE_MEDIA_PLAYER);
         mTestUtils.clickButton(mActivityUnderTest, R.id.playback_speakerphone);
         mTestUtils.clickButton(mActivityUnderTest, R.id.playback_start_stop);
-        mTestUtils.clickButton(mActivityUnderTest, R.id.call_and_sms_main_action);
         Thread.sleep(2000);
         // TODO: Suppressed the test for now, because I'm looking for an easy way to say "the audio
         // is not playing at this point", and I can't find it without doing dirty things.
