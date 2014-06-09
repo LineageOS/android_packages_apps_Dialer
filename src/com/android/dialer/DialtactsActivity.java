@@ -1128,7 +1128,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // Only scroll the button when the first tab is selected. The button should scroll from
         // the middle to right position only on the transition from the first tab to the second
         // tab.
-        if (position == ListsFragment.TAB_INDEX_SPEED_DIAL) {
+        if (position == ListsFragment.TAB_INDEX_SPEED_DIAL && !mIsLandscape) {
             mFloatingActionButtonController.onPageScrolled(positionOffset);
         }
     }
@@ -1187,9 +1187,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             align = mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_RIGHT
                     : FloatingActionButtonController.ALIGN_MIDDLE;
         } else {
-            align = mCurrentTabPosition == ListsFragment.TAB_INDEX_SPEED_DIAL
-                    ? FloatingActionButtonController.ALIGN_MIDDLE
-                        : FloatingActionButtonController.ALIGN_RIGHT;
+            if (!mIsLandscape) {
+                align = mCurrentTabPosition == ListsFragment.TAB_INDEX_SPEED_DIAL
+                        ? FloatingActionButtonController.ALIGN_MIDDLE
+                            : FloatingActionButtonController.ALIGN_RIGHT;
+            } else {
+                align = FloatingActionButtonController.ALIGN_RIGHT;
+            }
         }
         mFloatingActionButtonController.align(align,
                 0 /* offsetX */,
