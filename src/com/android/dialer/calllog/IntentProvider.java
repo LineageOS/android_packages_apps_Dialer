@@ -61,8 +61,6 @@ public abstract class IntentProvider {
                     return intent;
                 } else {
                     Intent intent = CallUtil.getCallIntent(number);
-                    intent.putExtra(MSimConstants.SUBSCRIPTION_KEY,
-                            subscription);
                     return intent;
                 }
             }
