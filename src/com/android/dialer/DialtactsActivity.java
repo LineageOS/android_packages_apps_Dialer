@@ -49,17 +49,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
 import android.view.View.OnTouchListener;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.Interpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -84,7 +79,6 @@ import com.android.dialer.list.OnListFragmentScrolledListener;
 import com.android.dialer.list.SpeedDialFragment;
 import com.android.dialer.list.PhoneFavoriteSquareTileView;
 import com.android.dialer.list.RegularSearchFragment;
-import com.android.dialer.list.RemoveView;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.widget.ActionBarController;
@@ -197,13 +191,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private EditText mSearchView;
     private View mVoiceSearchButton;
 
-    /**
-     * View that contains the "Remove" dialog that shows up when the user long presses a contact.
-     * If the user releases a contact when hovering on top of this, the contact is unfavorited and
-     * removed from the speed dial list.
-     */
-    private View mRemoveViewContainer;
-
     private String mSearchQuery;
 
     private DialerDatabaseHelper mDialerDatabaseHelper;
@@ -238,8 +225,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         @Override
         public boolean onDrag(View v, DragEvent event) {
             if (event.getAction() == DragEvent.ACTION_DRAG_LOCATION) {
-                mDragDropController.handleDragHovered(v, (int) event.getX(),
-                        (int) event.getY());
+                mDragDropController.handleDragHovered(v, (int) event.getX(), (int) event.getY());
             }
             return true;
         }
@@ -394,8 +380,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mFloatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
         mFloatingActionButton.setOnClickListener(this);
-
-        mRemoveViewContainer = findViewById(R.id.remove_view_container);
 
         mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
         SmartDialPrefix.initializeNanpSettings(this);
@@ -1006,9 +990,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView view) {
         if (mListsFragment.isPaneOpen()) {
-            mActionBarController.slideActionBarUp(true);
+            mActionBarController.setAlpha(ListsFragment.REMOVE_VIEW_SHOWN_ALPHA);
         }
-        mRemoveViewContainer.setVisibility(View.VISIBLE);
+        mListsFragment.showRemoveView(true);
     }
 
     @Override
@@ -1021,9 +1005,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onDragFinished(int x, int y) {
         if (mListsFragment.isPaneOpen()) {
-            mActionBarController.slideActionBarDown(true);
+            mActionBarController.setAlpha(ListsFragment.REMOVE_VIEW_HIDDEN_ALPHA);
         }
-        mRemoveViewContainer.setVisibility(View.GONE);
+        mListsFragment.showRemoveView(false);
     }
 
     @Override
@@ -1036,8 +1020,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void setDragDropController(DragDropController dragController) {
         mDragDropController = dragController;
-        ((RemoveView) findViewById(R.id.remove_view))
-                .setDragDropController(dragController);
+        mListsFragment.getRemoveView().setDragDropController(dragController);
     }
 
     @Override
