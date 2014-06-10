@@ -17,13 +17,10 @@
 package com.android.incallui;
 
 import android.telecomm.CallAudioState;
-import android.telecomm.CallCapabilities;
 import android.telecomm.CallState;
-import android.telecomm.GatewayInfo;
 import android.telecomm.InCallAdapter;
 import android.telecomm.InCallCall;
 import android.telecomm.InCallService;
-import android.telephony.DisconnectCause;
 
 import com.google.common.collect.ImmutableList;
 
@@ -68,7 +65,7 @@ public class InCallServiceImpl extends InCallService {
         Log.i(this, "addCall: " + call);
 
         if (call.getState() == Call.State.INCOMING) {
-            CallList.getInstance().onIncoming(call, EMPTY_RESPONSE_TEXTS);
+            CallList.getInstance().onIncoming(call, call.getCannedSmsResponses());
         } else {
             CallList.getInstance().onUpdate(call);
         }
@@ -122,6 +119,7 @@ public class InCallServiceImpl extends InCallService {
     private void updateCall(Call call, InCallCall telecommCall) {
         call.setHandle(telecommCall.getHandle());
         call.setDisconnectCause(telecommCall.getDisconnectCauseCode());
+        call.setCannedSmsResponses(telecommCall.getCannedSmsResponses());
         call.setCapabilities(telecommCall.getCapabilities());
         call.setConnectTimeMillis(telecommCall.getConnectTimeMillis());
         call.setGatewayInfo(telecommCall.getGatewayInfo());

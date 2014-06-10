@@ -58,7 +58,9 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
      */
     private AlertDialog mCustomMessagePopup = null;
 
-    private ArrayAdapter<String> mTextResponsesAdapter = null;
+    private ArrayAdapter<String> mSmsResponsesAdapter;
+
+    private final List<String> mSmsResponses = new ArrayList<>();
 
     private GlowPadWrapper mGlowpad;
 
@@ -139,24 +141,26 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
 
     @Override
     public void showMessageDialog() {
-        final ListView lv = new ListView(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        Preconditions.checkNotNull(mTextResponsesAdapter);
-        lv.setAdapter(mTextResponsesAdapter);
+        mSmsResponsesAdapter = new ArrayAdapter<>(builder.getContext(),
+                android.R.layout.simple_list_item_1, android.R.id.text1, mSmsResponses);
+
+        final ListView lv = new ListView(getActivity());
+        lv.setAdapter(mSmsResponsesAdapter);
         lv.setOnItemClickListener(new RespondViaSmsItemClickListener());
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setCancelable(
-                true).setView(lv);
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialogInterface) {
-                if (mGlowpad != null) {
-                    mGlowpad.startPing();
-                }
-                dismissCannedResponsePopup();
-                getPresenter().onDismissDialog();
-            }
-        });
+        builder.setCancelable(true).setView(lv).setOnCancelListener(
+                new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        if (mGlowpad != null) {
+                            mGlowpad.startPing();
+                        }
+                        dismissCannedResponsePopup();
+                        getPresenter().onDismissDialog();
+                    }
+                });
         mCannedResponsePopup = builder.create();
         mCannedResponsePopup.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         mCannedResponsePopup.show();
@@ -274,12 +278,13 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
 
     @Override
     public void configureMessageDialog(List<String> textResponses) {
-        final List<String> textResponsesForDisplay = Lists.newArrayList(textResponses);
-
-        textResponsesForDisplay.add(getResources().getString(
+        mSmsResponses.clear();
+        mSmsResponses.addAll(textResponses);
+        mSmsResponses.add(getResources().getString(
                 R.string.respond_via_sms_custom_message));
-        mTextResponsesAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, textResponsesForDisplay);
+        if (mSmsResponsesAdapter != null) {
+            mSmsResponsesAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

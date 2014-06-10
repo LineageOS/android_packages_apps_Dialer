@@ -123,7 +123,7 @@ public class CallList {
         final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getCallId());
         if (listeners != null) {
             for (CallUpdateListener listener : listeners) {
-                listener.onCallStateChanged(call);
+                listener.onCallChanged(call);
             }
         }
     }
@@ -474,6 +474,6 @@ public class CallList {
 
     public interface CallUpdateListener {
         // TODO: refactor and limit arg to be call state.  Caller info is not needed.
-        public void onCallStateChanged(Call call);
+        public void onCallChanged(Call call);
     }
 }
