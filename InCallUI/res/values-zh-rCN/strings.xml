@@ -34,7 +34,7 @@
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"超出 ACM 限制"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"已关闭天线"</string>
     <string name="callFailed_simError" msgid="4476360200030635828">"无 SIM 卡或 SIM 卡出错"</string>
-    <string name="callFailed_outOfService" msgid="4825791466557236225">"不在服务区"</string>
+    <string name="callFailed_outOfService" msgid="682300184520329366">"没有移动网络"</string>
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"外拨电话受固定拨号限制。"</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"您无法在已启用通话限制的情况下拨出电话。"</string>
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"所有通话都受访问控制限制。"</string>
@@ -95,6 +95,7 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"无法进行电话会议。"</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"无法拒绝呼叫。"</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"无法挂断。"</string>
+    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"语音信箱号码未知。"</string>
     <string name="incall_call_type_label_sip" msgid="2310958283037924371">"互联网电话"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"紧急呼救"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"正在打开天线..."</string>

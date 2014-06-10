@@ -34,7 +34,7 @@
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Υπέρβαση ορίου ACM"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"Ο πομπός είναι απενεργοποιημένος"</string>
     <string name="callFailed_simError" msgid="4476360200030635828">"Δεν υπάρχει κάρτα SIM ή σφάλμα κάρτας SIM"</string>
-    <string name="callFailed_outOfService" msgid="4825791466557236225">"Εκτός περιοχής κάλυψης"</string>
+    <string name="callFailed_outOfService" msgid="682300184520329366">"Μη διαθέσιμο δίκτυο κινητής τηλεφωνίας"</string>
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"Οι εξερχόμενες κλήσεις περιορίζονται από το FDN."</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Δεν μπορείτε να πραγματοποιήσετε εξερχόμενες κλήσεις όσο η φραγή κλήσεων είναι ενεργοποιημένη."</string>
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Όλες οι κλήσεις περιορίζονται από τον έλεγχο πρόσβασης."</string>
@@ -95,6 +95,7 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Αδύνατη η πραγματοποίηση κλήσεων συνδιάσκεψης."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Δεν ήταν δυνατή η απόρριψη της κλήσης."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Αδύνατη η επαναφορά κλήσης (κλήσεων)."</string>
+    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Άγνωστος αριθμός αυτόματου τηλεφωνητή"</string>
     <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Κλήση Διαδικτύου"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Κλήσεις επείγουσας ανάγκης"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Ενεργοποίηση πομπού..."</string>

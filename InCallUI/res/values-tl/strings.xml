@@ -34,7 +34,7 @@
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Lumagpas na sa limitasyon ng ACM"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"Naka-off ang radyo"</string>
     <string name="callFailed_simError" msgid="4476360200030635828">"Walang SIM, o error sa SIM"</string>
-    <string name="callFailed_outOfService" msgid="4825791466557236225">"Lugar na Hindi Nagseserbisyo"</string>
+    <string name="callFailed_outOfService" msgid="682300184520329366">"Hindi available ang mobile network"</string>
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"Pinaghihigpitan ng FDN ang mga papalabas na tawag."</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Hindi ka makakagawa ng mga papalabas na tawag habang naka-on ang pag-bar ng tawag."</string>
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Pinaghihigpitan ang lahat ng mga tawag ng kontrol sa access."</string>
@@ -95,6 +95,7 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Hindi nagawang i-conference ang mga tawag."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Hindi nagawang tanggihan ang tawag."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Hindi nagawang mapalabas ang (mga) tawag."</string>
+    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Hindi kilala ang numero ng voicemail."</string>
     <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Tawag sa internet"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Emergency na tawag"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Ino-on ang radyo…"</string>
