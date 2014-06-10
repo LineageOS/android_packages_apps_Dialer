@@ -44,6 +44,7 @@ import com.android.incallui.Call.State;
 public class InCallActivity extends Activity {
 
     public static final String SHOW_DIALPAD_EXTRA = "InCallActivity.show_dialpad";
+    public static final String DIALPAD_TEXT_EXTRA = "InCallActivity.dialpad_text";
     public static final String NEW_OUTGOING_CALL = "InCallActivity.new_outgoing_call";
 
     private static final int INVALID_RES_ID = -1;
@@ -112,6 +113,7 @@ public class InCallActivity extends Activity {
             if (icicle.getBoolean(SHOW_DIALPAD_EXTRA)) {
                 mCallButtonFragment.displayDialpad(true /* show */, false /* animate */);
             }
+            mDialpadFragment.setDtmfText(icicle.getString(DIALPAD_TEXT_EXTRA));
         }
         Log.d(this, "onCreate(): exit");
     }
@@ -119,6 +121,7 @@ public class InCallActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle out) {
         out.putBoolean(SHOW_DIALPAD_EXTRA, mCallButtonFragment.isDialpadVisible());
+        out.putString(DIALPAD_TEXT_EXTRA, mDialpadFragment.getDtmfText());
     }
 
     @Override

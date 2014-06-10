@@ -458,6 +458,24 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         super.onDestroyView();
     }
 
+    /**
+     * Getter for Dialpad text.
+     *
+     * @return String containing current Dialpad EditText text.
+     */
+    public String getDtmfText() {
+        return mDtmfDialerField.getText().toString();
+    }
+
+    /**
+     * Sets the Dialpad text field with some text.
+     *
+     * @param text Text to set Dialpad EditText to.
+     */
+    public void setDtmfText(String text) {
+        mDtmfDialerField.setText(text);
+    }
+
     @Override
     public void setVisible(boolean on) {
         if (on) {
