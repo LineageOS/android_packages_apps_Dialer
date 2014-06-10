@@ -37,5 +37,17 @@
     <string name="numberOfCallLogEntries">Number of call log entries to add:</string>
     <string name="addedLogEntriesToast">Added %1$d call log entries.</string>
     <string name="noLogEntriesToast">No entries in the call log yet.  Need at least one record for the template.  Or use random numbers.</string>
-
+    <string name="add_custom_entry">Add custom call log entry:</string>
+    <string name="call_type_incoming">Incoming</string>
+    <string name="call_type_missed">Missed</string>
+    <string name="call_type_outgoing">Outgoing</string>
+    <string name="call_date">Call date</string>
+    <string name="call_time">Call time</string>
+    <string name="edit">Edit</string>
+    <string name="number">Number</string>
+    <string name="call_presentation">Presentation</string>
+    <string name="presentation_allowed">Allowed</string>
+    <string name="presentation_restricted">Restricted</string>
+    <string name="presentation_unknown">Unknown</string>
+    <string name="presentation_payphone">Payphone</string>
 </resources>

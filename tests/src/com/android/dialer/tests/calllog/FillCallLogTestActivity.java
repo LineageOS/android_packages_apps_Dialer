@@ -17,7 +17,11 @@
 package com.android.dialer.tests.calllog;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.LoaderManager;
+import android.app.TimePickerDialog;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.content.CursorLoader;
@@ -27,16 +31,21 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.provider.CallLog.Calls;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.dialer.tests.R;
 
+import java.util.Calendar;
 import java.util.Random;
 
 /**
@@ -56,6 +65,22 @@ public class FillCallLogTestActivity extends Activity {
     private Button mAddButton;
     private ProgressBar mProgressBar;
     private CheckBox mUseRandomNumbers;
+    private RadioButton mCallTypeIncoming;
+    private RadioButton mCallTypeMissed;
+    private RadioButton mCallTypeOutgoing;
+    private RadioButton mPresentationAllowed;
+    private RadioButton mPresentationRestricted;
+    private RadioButton mPresentationUnknown;
+    private RadioButton mPresentationPayphone;
+    private TextView mCallDate;
+    private TextView mCallTime;
+    private TextView mPhoneNumber;
+
+    private int mCallTimeHour;
+    private int mCallTimeMinute;
+    private int mCallDateYear;
+    private int mCallDateMonth;
+    private int mCallDateDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +113,27 @@ public class FillCallLogTestActivity extends Activity {
                 mProgressBar.setVisibility(View.VISIBLE);
             }
         });
+
+        mCallTypeIncoming = (RadioButton) findViewById(R.id.call_type_incoming);
+        mCallTypeMissed = (RadioButton) findViewById(R.id.call_type_missed);
+        mCallTypeOutgoing = (RadioButton) findViewById(R.id.call_type_outgoing);
+        mPresentationAllowed = (RadioButton) findViewById(R.id.presentation_allowed);
+        mPresentationPayphone = (RadioButton) findViewById(R.id.presentation_payphone);
+        mPresentationUnknown = (RadioButton) findViewById(R.id.presentation_unknown);
+        mPresentationRestricted = (RadioButton) findViewById(R.id.presentation_restricted);
+        mCallTime = (TextView) findViewById(R.id.call_time);
+        mCallDate = (TextView) findViewById(R.id.call_date);
+        mPhoneNumber = (TextView) findViewById(R.id.phone_number);
+
+        // Use the current time as the default values for the picker
+        final Calendar c = Calendar.getInstance();
+        mCallTimeHour = c.get(Calendar.HOUR_OF_DAY);
+        mCallTimeMinute = c.get(Calendar.MINUTE);
+        mCallDateYear = c.get(Calendar.YEAR);
+        mCallDateMonth = c.get(Calendar.MONTH);
+        mCallDateDay = c.get(Calendar.DAY_OF_MONTH);
+        setDisplayDate();
+        setDisplayTime();
     }
 
     /**
@@ -305,5 +351,123 @@ public class FillCallLogTestActivity extends Activity {
      */
     public void updateCount(Integer count) {
         mProgressBar.setProgress(count);
+    }
+
+    /**
+     * Determines the call type for a manually entered call.
+     *
+     * @return Call type.
+     */
+    private int getManualCallType() {
+        if (mCallTypeIncoming.isChecked()) {
+            return Calls.INCOMING_TYPE;
+        } else if (mCallTypeOutgoing.isChecked()) {
+            return Calls.OUTGOING_TYPE;
+        } else {
+            return Calls.MISSED_TYPE;
+        }
+    }
+
+    /**
+     * Determines the presentation for a manually entered call.
+     *
+     * @return Presentation.
+     */
+    private int getManualPresentation() {
+        if (mPresentationAllowed.isChecked()) {
+            return Calls.PRESENTATION_ALLOWED;
+        } else if (mPresentationPayphone.isChecked()) {
+            return Calls.PRESENTATION_PAYPHONE;
+        } else if (mPresentationRestricted.isChecked()) {
+            return Calls.PRESENTATION_RESTRICTED;
+        } else {
+            return Calls.PRESENTATION_UNKNOWN;
+        }
+    }
+
+    /**
+     * Shows a time picker dialog, storing the results in the time field.
+     */
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(),"timePicker");
+    }
+
+    /**
+     * Helper class to display time picker and store the hour/minute.
+     */
+    public class TimePickerFragment extends DialogFragment
+            implements TimePickerDialog.OnTimeSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Create a new instance of TimePickerDialog and return it
+            return new TimePickerDialog(getActivity(), this, mCallTimeHour, mCallTimeMinute,
+                    DateFormat.is24HourFormat(getActivity()));
+        }
+
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            mCallTimeHour = hourOfDay;
+            mCallTimeMinute = minute;
+            setDisplayTime();
+        }
+    }
+
+    /**
+     * Sets the call time TextView to the current selected time.
+     */
+    private void setDisplayTime() {
+        mCallTime.setText(String.format("%02d:%02d", mCallTimeHour, mCallTimeMinute));
+    }
+
+    /**
+     * Sets the call date Textview to the current selected date
+     */
+    private void setDisplayDate() {
+        mCallDate.setText(String.format("%04d-%02d-%02d", mCallDateYear, mCallDateMonth,
+                mCallDateDay));
+    }
+
+    /**
+     * Shows a date picker dialog.
+     */
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getFragmentManager(),"datePicker");
+    }
+
+    /**
+     * Helper class to show a date picker.
+     */
+    public class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, mCallDateYear, mCallDateMonth,
+                    mCallDateDay);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            mCallDateYear = year;
+            mCallDateMonth = month;
+            mCallDateDay = day;
+            setDisplayDate();
+        }
+    }
+
+    /**
+     * OnClick handler for the button that adds a manual call log entry to the call log.
+     *
+     * @param v Calling view.
+     */
+    public void addManualEntry(View v) {
+        Calendar dateTime = Calendar.getInstance();
+        dateTime.set(mCallDateYear, mCallDateMonth, mCallDateDay, mCallTimeHour, mCallTimeMinute);
+
+        Calls.addCall(null, this, mPhoneNumber.getText().toString(), getManualPresentation(),
+                getManualCallType(), dateTime.getTimeInMillis(), RNG.nextInt(60 * 60));
+
     }
 }
