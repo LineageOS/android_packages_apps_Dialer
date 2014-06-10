@@ -116,10 +116,18 @@ public class OverlappingPaneLayout extends ViewGroup {
 
     /**
      * Indicates that the layout is currently in the process of a nested pre-scroll operation where
-     * the child is being dragged downwards. If so, we should open the pane up to the maximum
-     * offset defined in {@link #mIntermediateOffset}, and no further.
+     * the child scrolling view is being dragged downwards, and still has the ability to consume
+     * scroll events itself. If so, we should open the pane up to the maximum offset defined in
+     * {@link #mIntermediateOffset}, and no further, so that the child view can continue performing
+     * its own scroll.
      */
-    boolean mInNestedPreScrollDownwards = false;
+    private boolean mInNestedPreScrollDownwards = false;
+
+    /**
+     * Indicates whether or not a nested scrolling child is able to scroll internally at this point
+     * in time.
+     */
+    private boolean mChildCannotConsumeScroll;
 
     /**
      * Stores an offset used to represent a point somewhere in between the panel's fully closed
@@ -889,6 +897,7 @@ public class OverlappingPaneLayout extends ViewGroup {
         final boolean startNestedScroll = (nestedScrollAxes & SCROLL_AXIS_VERTICAL) != 0;
         if (startNestedScroll) {
             mIsInNestedScroll = true;
+            mChildCannotConsumeScroll = true;
             mDragHelper.startNestedScroll(mSlideableView);
         }
         if (DEBUG) {
@@ -906,7 +915,8 @@ public class OverlappingPaneLayout extends ViewGroup {
         if (DEBUG) {
             Log.d(TAG, "onNestedPreScroll: " + dy);
         }
-        mInNestedPreScrollDownwards = (dy > 0 && mSlideOffsetPx <= mIntermediateOffset);
+        mInNestedPreScrollDownwards =
+                mChildCannotConsumeScroll && dy > 0 && mSlideOffsetPx <= mIntermediateOffset;
         mDragHelper.processNestedScroll(mSlideableView, 0, dy, consumed);
     }
 
@@ -916,6 +926,7 @@ public class OverlappingPaneLayout extends ViewGroup {
         if (DEBUG) {
             Log.d(TAG, "onNestedScroll: " + dyUnconsumed);
         }
+        mChildCannotConsumeScroll = false;
         mInNestedPreScrollDownwards = false;
         // We need to flip dyUnconsumed here, because its magnitude is reversed. b/14585990
         mDragHelper.processNestedScroll(mSlideableView, 0, -dyUnconsumed, null);
