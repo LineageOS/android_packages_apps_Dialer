@@ -427,9 +427,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         mSlideIn = AnimationUtils.loadAnimation(this,
-                mIsLandscape ? R.anim.slide_in_right : R.anim.slide_in);
+                mIsLandscape ? R.anim.dialpad_slide_in_right : R.anim.dialpad_slide_in_bottom);
         mSlideOut = AnimationUtils.loadAnimation(this,
-                mIsLandscape ? R.anim.slide_out_right : R.anim.slide_out);
+                mIsLandscape ? R.anim.dialpad_slide_out_right : R.anim.dialpad_slide_out_bottom);
 
         mSlideOut.setAnimationListener(mSlideOutListener);
 
