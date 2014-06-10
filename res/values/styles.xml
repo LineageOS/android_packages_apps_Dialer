@@ -36,7 +36,7 @@
         <item name="list_item_padding_top">12dp</item>
         <item name="list_item_padding_right">0dip</item>
         <item name="list_item_padding_bottom">12dp</item>
-        <item name="list_item_padding_left">0dip</item>
+        <item name="list_item_padding_left">16dp</item>
         <item name="list_item_gap_between_image_and_text">8dip</item>
         <item name="list_item_gap_between_label_and_data">5dip</item>
         <item name="list_item_presence_icon_margin">4dip</item>
@@ -51,7 +51,7 @@
         <item name="list_item_header_height">30dip</item>
         <item name="list_item_data_width_weight">5</item>
         <item name="list_item_label_width_weight">3</item>
-        <item name="contact_browser_list_padding_left">16dp</item>
+        <item name="contact_browser_list_padding_left">0dp</item>
         <item name="contact_browser_list_padding_right">0dp</item>
         <item name="contact_browser_background">@color/background_dialer_light</item>
         <item name="list_item_name_text_color">@color/contact_list_name_text_color</item>
