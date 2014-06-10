@@ -19,8 +19,7 @@
      These buttons have two states (checked and unchecked), and
      show a blue bar along the bottom edge when checked. -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:tint="@color/incall_accent_color"
-    android:pinned="true">
+    android:color="@color/incall_accent_color">
     <item>
         <selector>
 
