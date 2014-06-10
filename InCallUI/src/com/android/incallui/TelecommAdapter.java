@@ -51,8 +51,7 @@ final class TelecommAdapter {
 
     void rejectCall(String callId, boolean rejectWithMessage, String message) {
         if (mAdapter != null) {
-            // TODO(sail): Add support for reject with message.
-            mAdapter.rejectCall(callId);
+            mAdapter.rejectCall(callId, rejectWithMessage, message);
         } else {
             Log.e(this, "error rejectCall, mAdapter is null");
         }

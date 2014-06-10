@@ -26,6 +26,7 @@ import android.telephony.DisconnectCause;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.primitives.Ints;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -100,6 +101,7 @@ public final class Call {
     private String mCallId;
     private int mState = State.INVALID;
     private int mDisconnectCause = DisconnectCause.NOT_VALID;
+    private List<String> mCannedSmsResponses = Collections.EMPTY_LIST;
     private int mCapabilities;
     private long mConnectTimeMillis = 0;
     private Uri mHandle;
@@ -168,6 +170,16 @@ public final class Call {
     /** Sets the call disconnect cause; values are defined in {@link DisconnectCause}. */
     public void setDisconnectCause(int cause) {
         mDisconnectCause = cause;
+    }
+
+    /** Sets the possible text message responses. */
+    public void setCannedSmsResponses(List<String> cannedSmsResponses) {
+        mCannedSmsResponses = cannedSmsResponses;
+    }
+
+    /** Returns the possible text message responses. */
+    public List<String> getCannedSmsResponses() {
+        return mCannedSmsResponses;
     }
 
     /** Sets a bit mask of capabilities unique to this call. */
