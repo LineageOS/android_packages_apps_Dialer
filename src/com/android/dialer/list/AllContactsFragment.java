@@ -23,8 +23,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.QuickContactBadge;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactEntryListFragment;
@@ -32,6 +30,7 @@ import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.list.DefaultContactListAdapter;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
+import com.android.dialer.util.DialerUtils;
 
 /**
  * Fragments to show all contacts with phone numbers.
@@ -50,6 +49,12 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
     @Override
     public void onViewCreated(View view, android.os.Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        View emptyListView = view.findViewById(R.id.empty_list_view);
+        DialerUtils.configureEmptyListView(emptyListView, R.drawable.empty_contacts,
+                R.string.listFoundAllContactsZero, getResources());
+        getListView().setEmptyView(emptyListView);
+
         ViewUtil.addBottomPaddingToListViewForFab(getListView(), getResources());
     }
 

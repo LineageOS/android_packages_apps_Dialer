@@ -23,6 +23,7 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -47,6 +48,7 @@ import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.R;
+import com.android.dialer.util.DialerUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -208,7 +210,10 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
                 (ImageView) getActivity().findViewById(R.id.contact_tile_drag_shadow_overlay);
         mListView.setDragShadowOverlay(dragShadowOverlay);
 
-        mEmptyView = mParentView.findViewById(R.id.phone_no_favorites_view);
+        final Resources resources = getResources();
+        mEmptyView = mParentView.findViewById(R.id.empty_list_view);
+        DialerUtils.configureEmptyListView(
+                mEmptyView, R.drawable.empty_speed_dial, R.string.no_favorites, getResources());
 
         mContactTileFrame = mParentView.findViewById(R.id.contact_tile_frame);
 
