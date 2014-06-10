@@ -34,7 +34,7 @@
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Przekroczono limit ACM"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"Sieci bezprzewodowe są wyłączone"</string>
     <string name="callFailed_simError" msgid="4476360200030635828">"Brak lub błąd karty SIM"</string>
-    <string name="callFailed_outOfService" msgid="4825791466557236225">"Obszar nieobsługiwany"</string>
+    <string name="callFailed_outOfService" msgid="682300184520329366">"Sieć komórkowa niedostępna"</string>
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"Połączenia są ograniczone do listy ustalonych numerów."</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Nie można wykonywać połączeń wychodzących, gdy włączona jest blokada dzwonienia."</string>
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Wszystkie połączenia są zablokowane przez funkcję kontroli dostępu."</string>
@@ -95,6 +95,7 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Nie można prowadzić rozmów konferencyjnych."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Nie można odrzucić połączenia."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Nie można zakończyć połączenia (połączeń)."</string>
+    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Nieznany numer poczty głosowej."</string>
     <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Połączenie przez internet"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Połączenie alarmowe"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Trwa włączanie sieci bezprzewodowych..."</string>

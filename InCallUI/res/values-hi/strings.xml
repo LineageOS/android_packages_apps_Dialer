@@ -34,7 +34,7 @@
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM सीमा पार हो गई"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"रेडियो बंद"</string>
     <string name="callFailed_simError" msgid="4476360200030635828">"कोई सिम नहीं या सिम त्रुटि"</string>
-    <string name="callFailed_outOfService" msgid="4825791466557236225">"सेवा क्षेत्र के बाहर"</string>
+    <string name="callFailed_outOfService" msgid="682300184520329366">"मोबाइल नेटवर्क उपलब्ध नहीं"</string>
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"आउटगोइंग कॉल FDN द्वारा प्रतिबंधित हैं."</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"जब कॉल अवरोधन चालू हो, तो आप आउटगोइंग कॉल नहीं कर सकते."</string>
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"सभी कॉल पहुंच नियंत्रण द्वारा प्रतिबंधित हैं."</string>
@@ -95,6 +95,7 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"कॉंन्फ़्रेंस कॉल करने में असमर्थ."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"कॉल अस्वीकृत करने में असमर्थ."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"कॉल छोड़ने में असमर्थ."</string>
+    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"ध्वनिमेल नंबर अज्ञात है."</string>
     <string name="incall_call_type_label_sip" msgid="2310958283037924371">"इंटरनेट कॉल"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"आपातकालीन कॉल"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"रेडियो चालू कर रहा है..."</string>
