@@ -26,6 +26,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.telephony.DisconnectCause;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -33,6 +35,7 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Toast;
 
+import com.android.contacts.common.animation.AnimationListenerAdapter;
 import com.android.incallui.Call.State;
 
 /**
@@ -61,6 +64,16 @@ public class InCallActivity extends Activity {
     private String mShowPostCharWaitDialogCallId;
     private String mShowPostCharWaitDialogChars;
 
+    private boolean mIsLandscape;
+    private Animation mSlideIn;
+    private Animation mSlideOut;
+    AnimationListenerAdapter mSlideOutListener = new AnimationListenerAdapter() {
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            showDialpad(false);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle icicle) {
         Log.d(this, "onCreate()...  this = " + this);
@@ -86,7 +99,26 @@ public class InCallActivity extends Activity {
         initializeInCall();
 
         internalResolveIntent(getIntent());
+
+        mIsLandscape = getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
+        mSlideIn = AnimationUtils.loadAnimation(this,
+                mIsLandscape ? R.anim.dialpad_slide_in_right : R.anim.dialpad_slide_in_bottom);
+        mSlideOut = AnimationUtils.loadAnimation(this,
+                mIsLandscape ? R.anim.dialpad_slide_out_right : R.anim.dialpad_slide_out_bottom);
+
+        mSlideOut.setAnimationListener(mSlideOutListener);
+        if (icicle != null) {
+            if (icicle.getBoolean(SHOW_DIALPAD_EXTRA)) {
+                mCallButtonFragment.displayDialpad(true /* show */, false /* animate */);
+            }
+        }
         Log.d(this, "onCreate(): exit");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle out) {
+        out.putBoolean(SHOW_DIALPAD_EXTRA, mCallButtonFragment.isDialpadVisible());
     }
 
     @Override
@@ -107,7 +139,7 @@ public class InCallActivity extends Activity {
         InCallPresenter.getInstance().onUiShowing(true);
 
         if (mShowDialpadRequested) {
-            mCallButtonFragment.displayDialpad(true);
+            mCallButtonFragment.displayDialpad(true /* show */, true /* animate */);
             mShowDialpadRequested = false;
         }
 
@@ -209,7 +241,7 @@ public class InCallActivity extends Activity {
         // in-call UI:
 
         if (mDialpadFragment.isVisible()) {
-            mCallButtonFragment.displayDialpad(false);  // do the "closing" animation
+            mCallButtonFragment.displayDialpad(false /* show */, true /* animate */);
             return;
         } else if (mConferenceManagerFragment.isVisible()) {
             mConferenceManagerFragment.setVisible(false);
@@ -408,7 +440,7 @@ public class InCallActivity extends Activity {
      * update the checked state of the dialpad button, and update the proximity sensor state.
      */
     public void hideDialpadForDisconnect() {
-        mCallButtonFragment.displayDialpad(false);
+        mCallButtonFragment.displayDialpad(false /* show */, true /* animate */);
     }
 
     public void dismissKeyguard(boolean dismiss) {
@@ -419,16 +451,31 @@ public class InCallActivity extends Activity {
         }
     }
 
-    public void displayDialpad(boolean showDialpad) {
+    private void showDialpad(boolean showDialpad) {
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         if (showDialpad) {
-            ft.setCustomAnimations(R.anim.incall_dialpad_slide_in, 0);
             ft.show(mDialpadFragment);
         } else {
-            ft.setCustomAnimations(0, R.anim.incall_dialpad_slide_out);
             ft.hide(mDialpadFragment);
         }
         ft.commitAllowingStateLoss();
+    }
+
+    public void displayDialpad(boolean showDialpad, boolean animate) {
+        // If the dialpad is already visible, don't animate in. If it's gone, don't animate out.
+        if ((showDialpad && isDialpadVisible()) || (!showDialpad && !isDialpadVisible())) {
+            return;
+        }
+        // We don't do a FragmentTransaction on the hide case because it will be dealt with when
+        // the listener is fired after an animation finishes.
+        if (!animate) {
+            showDialpad(showDialpad);
+        } else {
+            if (showDialpad) {
+                showDialpad(true);
+            }
+            mDialpadFragment.getView().startAnimation(showDialpad ? mSlideIn : mSlideOut);
+        }
 
         InCallPresenter.getInstance().getProximitySensor().onDialpadVisible(showDialpad);
     }

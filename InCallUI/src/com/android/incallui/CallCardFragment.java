@@ -168,27 +168,25 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 R.dimen.floating_action_button_width);
         mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
                 mFloatingActionButtonContainer);
-        if (savedInstanceState != null) {
-            final ViewGroup parent = (ViewGroup) mPrimaryCallCardContainer.getParent();
-            final ViewTreeObserver observer = getView().getViewTreeObserver();
-            observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    final ViewTreeObserver observer = getView().getViewTreeObserver();
-                    if (!observer.isAlive()) {
-                        return;
-                    }
-                    observer.removeOnGlobalLayoutListener(this);
-                    mFloatingActionButtonController.setScreenWidth(parent.getWidth());
-                    mFloatingActionButtonController.align(
-                            mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_RIGHT
-                                : FloatingActionButtonController.ALIGN_MIDDLE,
-                            0 /* offsetX */,
-                            0 /* offsetY */,
-                            false);
+        final ViewGroup parent = (ViewGroup) mPrimaryCallCardContainer.getParent();
+        final ViewTreeObserver observer = getView().getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                final ViewTreeObserver observer = getView().getViewTreeObserver();
+                if (!observer.isAlive()) {
+                    return;
                 }
-            });
-        }
+                observer.removeOnGlobalLayoutListener(this);
+                mFloatingActionButtonController.setScreenWidth(parent.getWidth());
+                mFloatingActionButtonController.align(
+                        mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_RIGHT
+                            : FloatingActionButtonController.ALIGN_MIDDLE,
+                        0 /* offsetX */,
+                        0 /* offsetY */,
+                        false);
+            }
+        });
 
         mHandoffButton = (ImageButton) view.findViewById(R.id.handoffButton);
         mHandoffButton.setOnClickListener(new View.OnClickListener() {

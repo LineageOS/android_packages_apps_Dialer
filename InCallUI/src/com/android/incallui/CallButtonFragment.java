@@ -493,10 +493,10 @@ public class CallButtonFragment
     }
 
     @Override
-    public void displayDialpad(boolean value) {
+    public void displayDialpad(boolean value, boolean animate) {
         mShowDialpadButton.setSelected(value);
         if (getActivity() != null && getActivity() instanceof InCallActivity) {
-            ((InCallActivity) getActivity()).displayDialpad(value);
+            ((InCallActivity) getActivity()).displayDialpad(value, animate);
         }
     }
 

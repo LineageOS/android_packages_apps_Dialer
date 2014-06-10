@@ -100,12 +100,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 if (mPreviousState == InCallState.OUTGOING && mCall != null
                         && TelephonyManagerUtils.isVoiceMailNumber(mCall.getNumber(),
                                 callButtonFragment.getActivity())) {
-                    ui.displayDialpad(true);
+                    ui.displayDialpad(true /* show */, true /* animate */);
                 }
             }
         } else if (state == InCallState.INCOMING) {
             if (ui != null) {
-                ui.displayDialpad(false);
+                ui.displayDialpad(false /* show */, true /* animate */);
             }
             mCall = null;
         } else {
@@ -230,7 +230,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     public void showDialpadClicked(boolean checked) {
         Log.v(this, "Show dialpad " + String.valueOf(checked));
-        getUi().displayDialpad(checked);
+        getUi().displayDialpad(checked /* show */, true /* animate */);
         updateExtraButtonRow();
     }
 
@@ -385,7 +385,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void showSwap(boolean show);
         void showAddCall(boolean show);
         void enableAddCall(boolean enabled);
-        void displayDialpad(boolean on);
+        void displayDialpad(boolean on, boolean animate);
         boolean isDialpadVisible();
         void setAudio(int mode);
         void setSupportedAudio(int mask);
