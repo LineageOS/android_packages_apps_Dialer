@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da0c15f0_d7a7934d",
+        "filename": "src/com/android/dialer/lookup/cyngn/CyngnChineseReverseLookup.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-10T19:44:50Z",
+      "side": 1,
+      "message": "String pre \u003d normalizedNumber.substring(2, 5); (and nuke strPhoneNum - and better rename the variable to e.g. areaPrefix)\n\nor am I missing something here?",
+      "revId": "dce9eac593a8bfdc2b3d08d1def120464cde5983",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da0c15f0_57bb8372",
+        "filename": "src/com/android/dialer/lookup/cyngn/CyngnChineseReverseLookup.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-10T19:44:50Z",
+      "side": 1,
+      "message": "Formatting issue here.",
+      "revId": "dce9eac593a8bfdc2b3d08d1def120464cde5983",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da0c15f0_b7b01f8d",
+        "filename": "src/com/android/dialer/lookup/cyngn/CyngnChineseReverseLookup.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-10T19:44:50Z",
+      "side": 1,
+      "message": "if (",
+      "revId": "dce9eac593a8bfdc2b3d08d1def120464cde5983",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da0c15f0_97ad1b34",
+        "filename": "src/com/android/dialer/lookup/cyngn/CyngnChineseReverseLookup.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-06-10T19:44:50Z",
+      "side": 1,
+      "message": "cursor needs closing here.",
+      "revId": "dce9eac593a8bfdc2b3d08d1def120464cde5983",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
