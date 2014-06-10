@@ -41,34 +41,13 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
     private final LayoutInflater mLayoutInflater;
     private final CallTypeHelper mCallTypeHelper;
     private final PhoneCallDetails[] mPhoneCallDetails;
-    /** Whether the voicemail controls are shown. */
-    private final boolean mShowVoicemail;
-    /** Whether the call and SMS controls are shown. */
-    private final boolean mShowCallAndSms;
-    /** The controls that are shown on top of the history list. */
-    private final View mControls;
-    /** The listener to changes of focus of the header. */
-    private View.OnFocusChangeListener mHeaderFocusChangeListener =
-            new View.OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-            // When the header is focused, focus the controls above it instead.
-            if (hasFocus) {
-                mControls.requestFocus();
-            }
-        }
-    };
 
     public CallDetailHistoryAdapter(Context context, LayoutInflater layoutInflater,
-            CallTypeHelper callTypeHelper, PhoneCallDetails[] phoneCallDetails,
-            boolean showVoicemail, boolean showCallAndSms, View controls) {
+            CallTypeHelper callTypeHelper, PhoneCallDetails[] phoneCallDetails) {
         mContext = context;
         mLayoutInflater = layoutInflater;
         mCallTypeHelper = callTypeHelper;
         mPhoneCallDetails = phoneCallDetails;
-        mShowVoicemail = showVoicemail;
-        mShowCallAndSms = showCallAndSms;
-        mControls = controls;
     }
 
     @Override
@@ -117,14 +96,6 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
             final View header = convertView == null
                     ? mLayoutInflater.inflate(R.layout.call_detail_history_header, parent, false)
                     : convertView;
-            // Voicemail controls are only shown in the main UI if there is a voicemail.
-            View voicemailContainer = header.findViewById(R.id.header_voicemail_container);
-            voicemailContainer.setVisibility(mShowVoicemail ? View.VISIBLE : View.GONE);
-            // Call and SMS controls are only shown in the main UI if there is a known number.
-            View callAndSmsContainer = header.findViewById(R.id.header_call_and_sms_container);
-            callAndSmsContainer.setVisibility(mShowCallAndSms ? View.VISIBLE : View.GONE);
-            header.setFocusable(true);
-            header.setOnFocusChangeListener(mHeaderFocusChangeListener);
             return header;
         }
 

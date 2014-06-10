@@ -18,10 +18,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="@dimen/call_log_list_item_height"
     android:paddingTop="@dimen/call_log_inner_margin"
     android:paddingBottom="@dimen/call_log_inner_margin"
-    android:paddingStart="@dimen/call_log_indent_margin"
+    android:paddingStart="@dimen/call_detail_horizontal_margin"
     android:paddingEnd="@dimen/call_log_outer_margin"
     android:orientation="vertical"
     android:background="@color/background_dialer_list_items"
@@ -43,22 +42,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/call_log_icon_margin"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?attr/call_log_secondary_text_color"
+            android:textColor="?attr/call_log_primary_text_color"
+            android:textSize="@dimen/call_log_primary_text_size"
         />
     </LinearLayout>
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="?attr/call_log_secondary_text_color"
+        android:textSize="@dimen/call_log_secondary_text_size"
     />
     <TextView
         android:id="@+id/duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="?attr/call_log_secondary_text_color"
+        android:textSize="@dimen/call_log_secondary_text_size"
     />
 </LinearLayout>

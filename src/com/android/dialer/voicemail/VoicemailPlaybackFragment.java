@@ -423,8 +423,14 @@ public class VoicemailPlaybackFragment extends Fragment {
             getAudioManager().setSpeakerphoneOn(on);
             if (on) {
                 mPlaybackSpeakerphone.setImageResource(R.drawable.ic_speakerphone_on);
+                // Speaker is now on, tapping button will turn it off.
+                mPlaybackSpeakerphone.setContentDescription(
+                        mApplicationContext.getString(R.string.voicemail_speaker_off));
             } else {
                 mPlaybackSpeakerphone.setImageResource(R.drawable.ic_speakerphone_off);
+                // Speaker is now off, tapping button will turn it on.
+                mPlaybackSpeakerphone.setContentDescription(
+                        mApplicationContext.getString(R.string.voicemail_speaker_on));
             }
         }
 
