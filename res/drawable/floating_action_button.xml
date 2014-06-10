@@ -16,7 +16,6 @@
 -->
 
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:tint="@color/dialer_accent_color"
-    android:pinned="true">
+    android:color="@color/dialer_accent_color">
     <item android:drawable="@drawable/fab_teal_background" />
 </ripple>
