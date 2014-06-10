@@ -17,11 +17,13 @@
 package com.android.incallui;
 
 import android.telecomm.CallAudioState;
+import android.telecomm.CallCapabilities;
 import android.telecomm.CallState;
-import android.telecomm.ConnectionRequest;
+import android.telecomm.GatewayInfo;
 import android.telecomm.InCallAdapter;
 import android.telecomm.InCallCall;
 import android.telecomm.InCallService;
+import android.telephony.DisconnectCause;
 
 import com.google.common.collect.ImmutableList;
 
@@ -59,9 +61,10 @@ public class InCallServiceImpl extends InCallService {
 
     /** {@inheritDoc} */
     @Override protected void addCall(InCallCall telecommCall) {
-        Log.v(this, "addCall, state: " + telecommCall.getState());
         Call call = new Call(telecommCall.getId());
         updateCall(call, telecommCall);
+        Log.i(this, "addCall: " + call);
+
         if (call.getState() == Call.State.INCOMING) {
             CallList.getInstance().onIncoming(call, EMPTY_RESPONSE_TEXTS);
         } else {
@@ -77,9 +80,9 @@ public class InCallServiceImpl extends InCallService {
             return;
         }
 
-        Log.v(this, "updateCall: " + call);
         int oldState = call.getState();
         updateCall(call, telecommCall);
+        Log.i(this, "updateCall: " + telecommCall + " => " + call);
 
         if (oldState != call.getState() && call.getState() == Call.State.DISCONNECTED) {
             CallList.getInstance().onDisconnect(call);
@@ -123,6 +126,8 @@ public class InCallServiceImpl extends InCallService {
         call.setCurrentCallServiceDescriptor(telecommCall.getCurrentCallServiceDescriptor());
         call.setHandoffCallServiceDescriptor(telecommCall.getHandoffCallServiceDescriptor());
         call.setState(translateState(telecommCall.getState()));
+        call.setParentId(telecommCall.getParentCallId());
+        call.setChildCallIds(telecommCall.getChildCallIds());
     }
 
     private static int translateState(CallState state) {

@@ -99,11 +99,19 @@ final class TelecommAdapter {
     }
 
     void separateCall(String callId) {
-        Log.wtf(this, "separateCall not implemented");
+        if (mAdapter != null) {
+            mAdapter.splitFromConference(callId);
+        } else {
+            Log.e(this, "error separateCall, mAdapter is null.");
+        }
     }
 
-    void merge() {
-        Log.wtf(this, "merge not implemented");
+    void merge(String callId) {
+        if (mAdapter != null) {
+            mAdapter.conference(callId);
+        } else {
+            Log.e(this, "error merge, mAdapter is null.");
+        }
     }
 
     void swap() {

@@ -26,6 +26,7 @@ import android.telephony.DisconnectCause;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.primitives.Ints;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -105,6 +106,8 @@ public final class Call {
     private GatewayInfo mGatewayInfo;
     private CallServiceDescriptor mCurrentCallServiceDescriptor;
     private CallServiceDescriptor mHandoffCallServiceDescriptor;
+    private String mParentCallId;
+    private List<String> mChildCallIds;
 
     public Call(String callId) {
         mCallId = callId;
@@ -118,7 +121,7 @@ public final class Call {
         if (mGatewayInfo != null) {
             return mGatewayInfo.getOriginalHandle().getSchemeSpecificPart();
         }
-        return getHandle().getSchemeSpecificPart();
+        return mHandle == null ? null : mHandle.getSchemeSpecificPart();
     }
 
     public Uri getHandle() {
@@ -130,7 +133,11 @@ public final class Call {
     }
 
     public int getState() {
-        return mState;
+        if (mParentCallId != null) {
+            return State.CONFERENCED;
+        } else {
+            return mState;
+        }
     }
 
     public void setState(int state) {
@@ -183,12 +190,8 @@ public final class Call {
         return mConnectTimeMillis;
     }
 
-    public ImmutableSortedSet<Integer> getChildCallIds() {
-        return ImmutableSortedSet.of();
-    }
-
     public boolean isConferenceCall() {
-        return false;
+        return mChildCallIds != null && !mChildCallIds.isEmpty();
     }
 
     public GatewayInfo getGatewayInfo() {
@@ -220,8 +223,29 @@ public final class Call {
         mHandoffCallServiceDescriptor = descriptor;
     }
 
+    public void setChildCallIds(List<String> callIds) {
+        mChildCallIds = callIds;
+    }
+
+    public List<String> getChildCallIds() {
+        return mChildCallIds;
+    }
+
+    public void setParentId(String callId) {
+        mParentCallId = callId;
+    }
+
+    public String getParentId() {
+        return mParentCallId;
+    }
+
     @Override
     public String toString() {
-        return String.format(Locale.US, "[%s, %s]", mCallId, State.toString(mState));
+        return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s]",
+                mCallId,
+                State.toString(mState),
+                CallCapabilities.toString(mCapabilities),
+                mChildCallIds,
+                mParentCallId);
     }
 }
