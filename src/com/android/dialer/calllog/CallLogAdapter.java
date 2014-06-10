@@ -122,12 +122,6 @@ public class CallLogAdapter extends GroupingListAdapter
     /** The size of the cache of contact info. */
     private static final int CONTACT_INFO_CACHE_SIZE = 100;
 
-    /** Localized string representing the word "Today". */
-    private final CharSequence mTodayLabel = DateUtils.getTodayString();
-
-    /** Localized string representing the word "Yesterday". */
-    private final CharSequence mYesterdayLabel = DateUtils.getYesterdayString();
-
     /** Constant used to indicate no row is expanded. */
     private static final long NONE_EXPANDED = -1;
 
@@ -1318,9 +1312,9 @@ public class CallLogAdapter extends GroupingListAdapter
      */
     private CharSequence getGroupDescription(int group) {
        if (group == CallLogGroupBuilder.DAY_GROUP_TODAY) {
-           return mTodayLabel;
+           return mContext.getResources().getString(R.string.call_log_header_today);
        } else if (group == CallLogGroupBuilder.DAY_GROUP_YESTERDAY) {
-           return mYesterdayLabel;
+           return mContext.getResources().getString(R.string.call_log_header_yesterday);
        } else if (group == CallLogGroupBuilder.DAY_GROUP_LAST_WEEK) {
            return mContext.getResources().getString(R.string.call_log_header_last_week);
        } else {

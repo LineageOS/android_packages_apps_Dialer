@@ -687,11 +687,19 @@
          [CHAR LIMIT=NONE] -->
     <string name="toast_entry_removed">Call log entry deleted.</string>
 
+    <!-- String used as a header in the call log above calls which occurred today.
+         [CHAR LIMIT=65] -->
+    <string name="call_log_header_today">Today</string>
+
+    <!-- String used as a header in the call log above calls which occurred yesterday.
+         [CHAR LIMIT=65] -->
+    <string name="call_log_header_yesterday">Yesterday</string>
+
     <!-- String used as a header in the call log above calls which occurred last week.
          [CHAR LIMIT=65] -->
     <string name="call_log_header_last_week">Last week</string>
 
-    <!-- String used as a header in the call log above calls which ocurred more than a week ago.
+    <!-- String used as a header in the call log above calls which occurred more than a week ago.
          [CHAR LIMIT=65] -->
     <string name="call_log_header_other">Other</string>
 </resources>
