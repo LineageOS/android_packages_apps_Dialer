@@ -254,6 +254,10 @@ public class CallLogAdapter extends GroupingListAdapter
     private ImageView mBadgeImageView;
     private TextView mBadgeText;
 
+    private int mCallLogBackgroundColor;
+    private int mExpandedBackgroundColor;
+    private float mExpandedTranslationZ;
+
     /** Listener for the primary or secondary actions in the list.
      *  Primary opens the call details.
      *  Secondary calls or plays.
@@ -355,6 +359,9 @@ public class CallLogAdapter extends GroupingListAdapter
 
         Resources resources = mContext.getResources();
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
+        mCallLogBackgroundColor = resources.getColor(R.color.background_dialer_list_items);
+        mExpandedBackgroundColor = resources.getColor(R.color.call_log_expanded_background_color);
+        mExpandedTranslationZ = resources.getDimension(R.dimen.call_log_expanded_translation_z);
 
         mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
         mPhoneNumberHelper = new PhoneNumberDisplayHelper(resources);
@@ -862,10 +869,8 @@ public class CallLogAdapter extends GroupingListAdapter
 
             views.actionsView.setVisibility(View.VISIBLE);
             views.actionsView.setAlpha(1.0f);
-            views.callLogEntryView.setBackgroundColor(
-                    callLogItem.getResources().getColor(R.color.background_dialer_light));
-            callLogItem.setTranslationZ(callLogItem.getResources().getDimension(
-                    R.dimen.call_log_expanded_translation_z));
+            views.callLogEntryView.setBackgroundColor(mExpandedBackgroundColor);
+            callLogItem.setTranslationZ(mExpandedTranslationZ);
 
             // Attempt to give accessibility focus to one of the action buttons.
             // This ensures that a user realizes the expansion occurred.
@@ -882,8 +887,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 views.actionsView.setVisibility(View.GONE);
             }
 
-            views.callLogEntryView.setBackgroundColor(
-                    callLogItem.getResources().getColor(R.color.background_dialer_list_items));
+            views.callLogEntryView.setBackgroundColor(mCallLogBackgroundColor);
             callLogItem.setTranslationZ(0);
         }
     }

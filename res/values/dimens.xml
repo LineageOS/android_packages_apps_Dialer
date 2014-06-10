@@ -51,7 +51,7 @@
     <item name="contact_tile_height_to_width_ratio" type="dimen">76%</item>
     <dimen name="contact_tile_text_side_padding">12dp</dimen>
     <dimen name="contact_tile_text_bottom_padding">9dp</dimen>
-    <dimen name="favorites_row_top_padding">1dp</dimen>
+    <dimen name="favorites_row_top_padding">2dp</dimen>
     <dimen name="favorites_row_bottom_padding">0dp</dimen>
     <dimen name="favorites_row_start_padding">1dp</dimen>
 
