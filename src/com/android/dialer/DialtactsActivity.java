@@ -810,7 +810,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         if (mDialpadFragment != null) {
             final boolean phoneIsInUse = phoneIsInUse();
-            if (phoneIsInUse || isDialIntent(intent)) {
+            if (phoneIsInUse || (intent.getData() !=  null && isDialIntent(intent))) {
                 mDialpadFragment.setStartedFromNewIntent(true);
                 if (phoneIsInUse && !mDialpadFragment.isVisible()) {
                     mInCallDialpadUp = true;
