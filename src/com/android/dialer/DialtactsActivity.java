@@ -56,6 +56,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -139,7 +140,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
 
-    private RelativeLayout parentLayout;
+    private FrameLayout parentLayout;
 
     /**
      * Fragment containing the dialpad that slides into view
@@ -419,7 +420,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mSlideOut.setAnimationListener(mSlideOutListener);
 
-        parentLayout = (RelativeLayout) findViewById(R.id.dialtacts_mainlayout);
+        parentLayout = (FrameLayout) findViewById(R.id.dialtacts_mainlayout);
         parentLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         parentLayout.setOnDragListener(new LayoutOnDragListener());
         floatingActionButtonContainer.getViewTreeObserver().addOnGlobalLayoutListener(

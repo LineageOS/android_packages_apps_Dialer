@@ -13,7 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dialtacts_mainlayout"
     android:layout_width="match_parent"
@@ -25,7 +25,7 @@
     android:animateLayoutChanges="true"
     android:background="@color/background_dialer_light"
     >
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/dialtacts_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,15 +36,14 @@
             android:layout_width="match_parent"
             android:id="@+id/dialtacts_frame"
             android:clipChildren="false" />
-    </RelativeLayout>
+    </FrameLayout>
     <FrameLayout
         android:id="@+id/floating_action_button_container"
         android:layout_width="@dimen/floating_action_button_width"
         android:layout_height="@dimen/floating_action_button_height"
         android:layout_marginRight="@dimen/floating_action_button_margin_right"
         android:layout_marginBottom="@dimen/floating_action_button_margin_bottom"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true">
+        android:layout_gravity="center_horizontal|bottom" >
 
         <ImageButton
             android:id="@+id/floating_action_button"
@@ -67,4 +66,4 @@
             android:visibility="gone"
             android:importantForAccessibility="no" />
     </FrameLayout>
-</RelativeLayout>
+</FrameLayout>
