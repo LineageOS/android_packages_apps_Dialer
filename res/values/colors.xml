@@ -42,7 +42,7 @@
     <!-- White background for dialer -->
     <color name="background_dialer_white">#ffffff</color>
     <!-- Background color of new dialer activity -->
-    <color name="background_dialer_light">#fbfbfb</color>
+    <color name="background_dialer_light">#f6f6f6</color>
     <!-- Background color of dialer list items (contacts, call log entries) -->
     <color name="background_dialer_list_items">@color/background_dialer_light</color>
 
@@ -74,6 +74,7 @@
     <!-- Color of the bottom border below the contacts grid on the main dialer screen. -->
     <color name="contacts_grid_bottom_border_color">#16000000</color>
 
+    <color name="call_log_expanded_background_color">#ffffff</color>
     <!-- Color of actions in expanded call log entries.  This text color represents actions such
          as call back, play voicemail, etc. -->
     <color name="call_log_action_text">#1dc7db</color>
