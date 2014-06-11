@@ -485,13 +485,12 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         }
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
-            final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
-            dialpadView.animateShow();
-        }
+    /**
+     * Starts the slide up animation for the Dialpad keys when the Dialpad is revealed.
+     */
+    public void animateShowDialpad() {
+        final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
+        dialpadView.animateShow();
     }
 
     @Override
