@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.graphics.Rect;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -252,6 +253,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
                     (CallLogListItemView) view.findViewById(R.id.call_log_list_item);
             // Reset the internal call log item view if it is being recycled
             callLogItem.setTranslationX(0);
+            callLogItem.setTranslationY(0);
             callLogItem.setAlpha(1);
             callLogItem.setClipBounds(null);
             setChildrenOpacity(callLogItem, 1.0f);
@@ -344,12 +346,17 @@ public class ShortcutCardsAdapter extends BaseAdapter {
                 int newTop = (int) (ratioHidden * height);
                 int newBottom = (height - newTop);
                 mClipRect.set(newLeft, newTop, newRight, newBottom);
+
+                // Since the pane will be overlapping with the action bar, apply a vertical offset
+                // to visually center the clipped card in the viewable area;
+                int verticalOffset = -newTop / 2;
+                viewToClip.setTranslationY(verticalOffset);
             }
             viewToClip.setClipBounds(mClipRect);
 
             // If the view has any children, fade them out of view.
             final ViewGroup viewGroup = (ViewGroup) viewToClip;
-            setChildrenOpacity(viewGroup, Math.max(0, 1 - 3 * ratioHidden));
+            setChildrenOpacity(viewGroup, Math.max(0, 1 - 4.5f * ratioHidden));
         }
 
         private void setChildrenOpacity(ViewGroup viewGroup, float alpha) {
