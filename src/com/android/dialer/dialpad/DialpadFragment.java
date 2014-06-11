@@ -71,6 +71,7 @@ import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.dialog.SelectSIMDialogFragment;
 import com.android.contacts.common.dialpad.DialpadKeyButton;
 import com.android.contacts.common.dialpad.DialpadView;
 import com.android.contacts.common.util.PhoneNumberFormatter;
@@ -97,6 +98,16 @@ public class DialpadFragment extends Fragment
         PopupMenu.OnMenuItemClickListener,
         DialpadKeyButton.OnPressedListener {
     private static final String TAG = DialpadFragment.class.getSimpleName();
+
+    /**
+     * Constant to indicate there is only a single service provider available
+     */
+    private static final int NO_MULTI_SIM = -1;
+
+    /**
+     * Information about the currently selected SIM card.
+     */
+    private int mCurrentSimCard = NO_MULTI_SIM;
 
     /**
      * This interface allows the DialpadFragment to tell its hosting Activity when and when not
@@ -850,7 +861,9 @@ public class DialpadFragment extends Fragment
             @Override
             public void show() {
                 final Menu menu = getMenu();
+                final MenuItem selectSim = menu.findItem(R.id.menu_select_sim);
                 final MenuItem sendMessage = menu.findItem(R.id.menu_send_message);
+                selectSim.setVisible(mCurrentSimCard != NO_MULTI_SIM);
                 sendMessage.setVisible(mSmsPackageComponentName != null);
 
                 boolean enable = !isDigitsEmpty();
@@ -1435,6 +1448,10 @@ public class DialpadFragment extends Fragment
                 smsIntent.setComponent(mSmsPackageComponentName);
                 DialerUtils.startActivityWithErrorToast(getActivity(), smsIntent);
             }
+            case R.id.menu_select_sim:
+              SelectSIMDialogFragment.show(getFragmentManager(), mCurrentSimCard);
+              return true;
+
             default:
                 return false;
         }
@@ -1602,6 +1619,10 @@ public class DialpadFragment extends Fragment
 
     public boolean getAnimate() {
         return mAnimate;
+    }
+
+    public void setSimCard(int simId) {
+        mCurrentSimCard = simId;
     }
 
     public void setYFraction(float yFraction) {

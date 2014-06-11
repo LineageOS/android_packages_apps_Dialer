@@ -609,6 +609,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void passSimUpdate(int simId) {
         mCurrentSimCard = simId;
+        if (mIsDialpadShown) {
+            mDialpadFragment.setSimCard(simId);
+        }
     }
 
     @Override
@@ -641,6 +644,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         mIsDialpadShown = true;
         mDialpadFragment.setAnimate(animate);
+        mDialpadFragment.setSimCard(mCurrentSimCard);
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.show(mDialpadFragment);
