@@ -68,6 +68,9 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
     private static final String KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE =
             "key_last_dismissed_call_shortcut_date";
 
+    public static final float REMOVE_VIEW_SHOWN_ALPHA = 0.5f;
+    public static final float REMOVE_VIEW_HIDDEN_ALPHA = 1;
+
     // Used with LoaderManager
     private static int MISSED_CALL_LOADER = 1;
 
@@ -81,6 +84,8 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
     private ViewPagerTabs mViewPagerTabs;
     private ViewPagerAdapter mViewPagerAdapter;
     private ListView mShortcutCardsListView;
+    private RemoveView mRemoveView;
+    private View mRemoveViewContent;
     private SpeedDialFragment mSpeedDialFragment;
     private CallLogFragment mRecentsFragment;
     private AllContactsFragment mAllContactsFragment;
@@ -267,6 +272,9 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mShortcutCardsListView = (ListView) parentView.findViewById(R.id.shortcut_card_list);
         mShortcutCardsListView.setAdapter(mMergedAdapter);
 
+        mRemoveView = (RemoveView) parentView.findViewById(R.id.remove_view);
+        mRemoveViewContent = parentView.findViewById(R.id.remove_view_content);
+
         setupPaneLayout((OverlappingPaneLayout) parentView);
 
         return parentView;
@@ -335,6 +343,19 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         }
     }
 
+    public void showRemoveView(boolean show) {
+        mRemoveViewContent.setVisibility(show ? View.VISIBLE : View.GONE);
+        mRemoveView.setAlpha(show ? 0 : 1);
+        mRemoveView.animate().alpha(show ? 1 : 0).start();
+
+        if (mShortcutCardsListView.getCount() > 0) {
+            View v = mShortcutCardsListView.getChildAt(0);
+            v.animate().withLayer()
+                    .alpha(show ? REMOVE_VIEW_SHOWN_ALPHA : REMOVE_VIEW_HIDDEN_ALPHA)
+                    .start();
+        }
+    }
+
     public boolean shouldShowActionBar() {
         return mIsPanelOpen && mActionBar != null;
     }
@@ -360,5 +381,9 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
     public SpeedDialFragment getSpeedDialFragment() {
         return mSpeedDialFragment;
+    }
+
+    public RemoveView getRemoveView() {
+        return mRemoveView;
     }
 }

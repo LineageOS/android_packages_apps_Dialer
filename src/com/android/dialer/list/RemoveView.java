@@ -21,7 +21,6 @@ public class RemoveView extends FrameLayout {
     int mUnhighlightedColor;
     int mHighlightedColor;
     Drawable mRemoveDrawable;
-    Drawable mRemoveHighlightedDrawable;
 
     public RemoveView(Context context) {
       super(context);
@@ -43,7 +42,6 @@ public class RemoveView extends FrameLayout {
         mUnhighlightedColor = r.getColor(R.color.remove_text_color);
         mHighlightedColor = r.getColor(R.color.remove_highlighted_text_color);
         mRemoveDrawable = r.getDrawable(R.drawable.ic_remove);
-        mRemoveHighlightedDrawable = r.getDrawable(R.drawable.ic_remove_highlight);
     }
 
     public void setDragDropController(DragDropController controller) {
@@ -79,13 +77,13 @@ public class RemoveView extends FrameLayout {
 
     private void setAppearanceNormal() {
         mRemoveText.setTextColor(mUnhighlightedColor);
-        mRemoveIcon.setImageDrawable(mRemoveDrawable);
+        mRemoveIcon.setColorFilter(mUnhighlightedColor);
         invalidate();
     }
 
     private void setAppearanceHighlighted() {
         mRemoveText.setTextColor(mHighlightedColor);
-        mRemoveIcon.setImageDrawable(mRemoveHighlightedDrawable);
+        mRemoveIcon.setColorFilter(mHighlightedColor);
         invalidate();
     }
 }

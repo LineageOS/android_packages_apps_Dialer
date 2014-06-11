@@ -35,49 +35,8 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:id="@+id/dialtacts_frame"
-            android:clipChildren="false"
-            >
-        </FrameLayout>
-        <!-- Search entry box and remove view -->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:id="@+id/search_and_remove_view_container"
-            android:visibility="gone"
-            >
-        </FrameLayout>
+            android:clipChildren="false" />
     </RelativeLayout>
-    <com.android.dialer.list.RemoveView
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:id="@+id/remove_view"
-        android:layout_alignParentTop="true"
-        >
-        <LinearLayout
-            android:id="@+id/remove_view_container"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="gone" >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/remove_view_icon"
-                android:src="@drawable/ic_remove"
-                android:contentDescription="@string/remove_contact"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/remove_view_text"
-                android:textSize="@dimen/remove_text_size"
-                android:textColor="@color/remove_text_color"
-                android:text="@string/remove_contact"
-                />
-        </LinearLayout>
-    </com.android.dialer.list.RemoveView >
     <FrameLayout
         android:id="@+id/floating_action_button_container"
         android:layout_width="@dimen/floating_action_button_width"
