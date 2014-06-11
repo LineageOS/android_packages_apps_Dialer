@@ -321,18 +321,21 @@
     <!-- Menu item used to show all calls in the call log. [CHAR LIMIT=30] -->
     <string name="menu_show_all_calls">Show all calls</string>
 
-    <!-- Menu items for dialpad options as part of Pause and Wait ftr -->
+    <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
     <string name="add_contact">Add contact</string>
     <string name="add_2sec_pause">Add 2-sec pause</string>
     <string name="add_wait">Add wait</string>
 
+    <!-- Menu item to select SIM card [CHAR LIMIT=30] -->
+    <string name="menu_select_sim">Select SIM card</string>
+
     <!-- Menu item label for call settings [CHAR LIMIT=30] -->
     <string name="call_settings">Settings</string>
 
-    <!-- Menu item to create a new contact -->
+    <!-- Menu item to create a new contact [CHAR LIMIT=30] -->
     <string name="menu_newContact">New contact</string>
 
-    <!-- Menu item to display all contacts -->
+    <!-- Menu item to display all contacts [CHAR LIMIT=30] -->
     <string name="menu_allContacts">All contacts</string>
 
     <!-- Title bar for call detail screen -->
