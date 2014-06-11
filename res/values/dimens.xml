@@ -96,6 +96,10 @@
     <!-- Height of the actionBar - this is 8dps bigger than the platform standard to give more
     room to the search box-->
     <dimen name="action_bar_height">64dp</dimen>
+    <dimen name="tab_height">43dp</dimen>
+    <dimen name="tab_elevation">2dp</dimen>
+    <!-- actionbar height + tab height -->
+    <dimen name="actionbar_and_tab_height">107dp</dimen>
 
     <!-- Margin to the left and right of the search box. -->
     <dimen name="search_margin_horizontal">8dp</dimen>
@@ -119,10 +123,6 @@
     <dimen name="search_list_padding_top">8dp</dimen>
     <dimen name="search_box_elevation">2dp</dimen>
 
-    <!-- Size of text in tabs. -->
-    <dimen name="tab_height">43dp</dimen>
-    <dimen name="tab_elevation">2dp</dimen>
-
     <!-- Padding to the left and right of call log action buttons. -->
     <dimen name="call_log_action_horizontal_padding">8dp</dimen>
     <!-- Left-padding for the call log action buttons - ensures the buttons align with the text
@@ -144,4 +144,6 @@
 
     <!-- Length of dialpad's shadows in dialer. -->
     <dimen name="shadow_length">10dp</dimen>
+
+    <dimen name="empty_list_message_text_size">16sp</dimen>
 </resources>

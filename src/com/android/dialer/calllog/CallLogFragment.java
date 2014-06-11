@@ -40,6 +40,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -50,6 +51,7 @@ import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
 import com.android.dialer.list.ListsFragment.HostInterface;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
@@ -298,9 +300,11 @@ public class CallLogFragment extends ListFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        updateEmptyMessage(mCallTypeFilter);
+        getListView().setEmptyView(view.findViewById(R.id.empty_list_view));
         getListView().setItemsCanFocus(true);
         maybeAddFooterView();
+
+        updateEmptyMessage(mCallTypeFilter);
     }
 
     /**
@@ -413,22 +417,23 @@ public class CallLogFragment extends ListFragment
     }
 
     private void updateEmptyMessage(int filterType) {
-        final String message;
+        final int messageId;
         switch (filterType) {
             case Calls.MISSED_TYPE:
-                message = getString(R.string.recentMissed_empty);
+                messageId = R.string.recentMissed_empty;
                 break;
             case Calls.VOICEMAIL_TYPE:
-                message = getString(R.string.recentVoicemails_empty);
+                messageId = R.string.recentVoicemails_empty;
                 break;
             case CallLogQueryHandler.CALL_TYPE_ALL:
-                message = getString(R.string.recentCalls_empty);
+                messageId = R.string.recentCalls_empty;
                 break;
             default:
                 throw new IllegalArgumentException("Unexpected filter type in CallLogFragment: "
                         + filterType);
         }
-        ((TextView) getListView().getEmptyView()).setText(message);
+        DialerUtils.configureEmptyListView(
+                getListView().getEmptyView(), R.drawable.empty_call_log, messageId, getResources());
     }
 
     public void callSelectedEntry() {

@@ -45,13 +45,10 @@
     </FrameLayout>
 
     <include
-        android:id="@+id/phone_no_favorites_view"
+        android:id="@+id/empty_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/contact_tile_frame"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        layout="@layout/phone_no_favorites"
+        layout="@layout/empty_list_view"
         android:visibility="gone"/>
+
 </RelativeLayout>

@@ -62,8 +62,7 @@
     <!-- Undo dialogue color -->
     <color name="undo_dialogue_text_color">#4d4d4d</color>
 
-    <!-- Text color for no favorites message -->
-    <color name="nofavorite_text_color">#777777</color>
+    <color name="empty_list_text_color">#b2b2b2</color>
 
     <color name="remove_text_color">#ffffff</color>
 
