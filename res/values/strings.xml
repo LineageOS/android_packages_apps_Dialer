@@ -613,23 +613,11 @@
     <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
     <string name="remove_contact">Remove</string>
 
-    <!-- Header text displayed on the main dialer screen above the list of favorite phone numbers.
-         [CHAR LIMIT=21] -->
-    <string name="favorites_menu_speed_dial">Speed Dial</string>
-
     <!-- Button text for the "all contacts" button displayed on the main dialer screen above the
          list of favorite phone numbers.  Navigates the user to the "All Contacts" list.
          This text represents the same action as the text in string "menu_allContacts".
          [CHAR LIMIT=21] -->
     <string name="favorites_menu_all_contacts">ALL CONTACTS</string>
-
-    <!-- The font-family to use for the "speed dial" label on the favorites menu.
-         Do not translate. -->
-    <string name="favorites_menu_speed_dial_font_family">sans-serif-light</string>
-
-    <!-- The font-family to use for the "all contacts" label on the favorites menu.
-         Do not translate. -->
-    <string name="favorites_menu_all_contacts_font_family">sans-serif</string>
 
     <!-- Button text for the "call back" button displayed underneath an entry in the call log.
          Tapping causes a call to be placed to the caller represented by the call log entry.
@@ -700,7 +688,7 @@
 
     <!-- String used as a header in the call log above calls which occurred more than a week ago.
          [CHAR LIMIT=65] -->
-    <string name="call_log_header_other">Other</string>
+    <string name="call_log_header_other">Older</string>
 
     <!-- String a header on the call details screen.  Appears above the list calls to or from a
          particular number.
