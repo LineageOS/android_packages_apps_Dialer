@@ -65,6 +65,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         super.onAttach(activity);
 
         setQuickContactEnabled(true);
+        setAdjustSelectionBoundsEnabled(false);
         setDarkTheme(false);
         setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(false /* opposite */));
         setUseCallableUri(true);
@@ -98,6 +99,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         final ListView listView = getListView();
 
         listView.setClipToPadding(false);
+        setVisibleScrollbarEnabled(false);
         listView.setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {

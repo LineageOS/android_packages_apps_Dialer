@@ -40,6 +40,7 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
 
     public AllContactsFragment() {
         setQuickContactEnabled(false);
+        setAdjustSelectionBoundsEnabled(true);
         setPhotoLoaderEnabled(true);
         setSectionHeaderDisplayEnabled(true);
         setDarkTheme(false);
