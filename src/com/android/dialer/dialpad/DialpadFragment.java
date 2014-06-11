@@ -174,7 +174,7 @@ public class DialpadFragment extends Fragment
     /** Remembers if we need to clear digits field when the screen is completely gone. */
     private boolean mClearDigitsOnStop;
 
-    private View mOverflowMenuButton;
+    private PopupMenu mOverflowPopupMenu;
     private View mDelete;
     private ToneGenerator mToneGenerator;
     private final Object mToneGeneratorLock = new Object();
@@ -310,10 +310,6 @@ public class DialpadFragment extends Fragment
         if (isDigitsEmpty()) {
             mDigitsFilledByIntent = false;
             mDigits.setCursorVisible(false);
-            // Set to INVISIBLE instead of GONE so that text (eg. "Type number to add") is centered.
-            mOverflowMenuButton.setVisibility(View.INVISIBLE);
-        } else if (mDialpadView.canDigitsBeEdited()){
-            mOverflowMenuButton.setVisibility(View.VISIBLE);
         }
 
         if (mDialpadQueryListener != null) {
@@ -391,9 +387,6 @@ public class DialpadFragment extends Fragment
         // Set up the "dialpad chooser" UI; see showDialpadChooser().
         mDialpadChooser = (ListView) fragmentView.findViewById(R.id.dialpadChooser);
         mDialpadChooser.setOnItemClickListener(this);
-
-        mOverflowMenuButton = mDialpadView.getOverflowMenuButton();
-        mOverflowMenuButton.setOnClickListener(this);
 
         return fragmentView;
     }
@@ -657,8 +650,10 @@ public class DialpadFragment extends Fragment
 
         mSmsPackageComponentName = DialerUtils.getSmsComponent(activity);
 
-        final PopupMenu overflowMenu = buildOptionsMenu(mOverflowMenuButton);
-        mOverflowMenuButton.setOnTouchListener(overflowMenu.getDragToOpenListener());
+        View overflowMenuButton = mDialpadView.getOverflowMenuButton();
+        mOverflowPopupMenu = buildOptionsMenu(overflowMenuButton);
+        overflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
+        overflowMenuButton.setOnClickListener(this);
     }
 
     @Override
@@ -851,11 +846,22 @@ public class DialpadFragment extends Fragment
      * @param invoker the View that invoked the options menu, to act as an anchor location.
      */
     private PopupMenu buildOptionsMenu(View invoker) {
-        final PopupMenu popupMenu = new PopupMenu(getActivity(), invoker);
+        final PopupMenu popupMenu = new PopupMenu(getActivity(), invoker) {
+            @Override
+            public void show() {
+                final Menu menu = getMenu();
+                final MenuItem sendMessage = menu.findItem(R.id.menu_send_message);
+                sendMessage.setVisible(mSmsPackageComponentName != null);
+
+                boolean enable = !isDigitsEmpty();
+                for (int i = 0; i < menu.size(); i++) {
+                    menu.getItem(i).setEnabled(enable);
+                }
+
+                super.show();
+            }
+        };
         popupMenu.inflate(R.menu.dialpad_options);
-        final Menu menu = popupMenu.getMenu();
-        final MenuItem sendMessage = menu.findItem(R.id.menu_send_message);
-        sendMessage.setVisible(mSmsPackageComponentName != null);
         popupMenu.setOnMenuItemClickListener(this);
         return popupMenu;
     }
@@ -883,7 +889,7 @@ public class DialpadFragment extends Fragment
                 return;
             }
             case R.id.dialpad_overflow: {
-                buildOptionsMenu(view).show();
+                mOverflowPopupMenu.show();
                 break;
             }
             default: {
