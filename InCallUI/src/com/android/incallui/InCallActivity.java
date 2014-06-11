@@ -476,6 +476,7 @@ public class InCallActivity extends Activity {
         } else {
             if (showDialpad) {
                 showDialpad(true);
+                mDialpadFragment.animateShowDialpad();
             }
             mDialpadFragment.getView().startAnimation(showDialpad ? mSlideIn : mSlideOut);
         }
