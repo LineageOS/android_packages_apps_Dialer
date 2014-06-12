@@ -1096,7 +1096,9 @@ public class CallLogAdapter extends GroupingListAdapter
                 values.put(Calls.CACHED_LOOKUP_URI, UriUtils.uriToString(updatedInfo.lookupUri));
                 needsUpdate = true;
             }
-            if (!TextUtils.equals(updatedInfo.normalizedNumber, callLogInfo.normalizedNumber)) {
+            // Only replace the normalized number if the new updated normalized number isn't empty.
+            if (!TextUtils.isEmpty(updatedInfo.normalizedNumber) &&
+                    !TextUtils.equals(updatedInfo.normalizedNumber, callLogInfo.normalizedNumber)) {
                 values.put(Calls.CACHED_NORMALIZED_NUMBER, updatedInfo.normalizedNumber);
                 needsUpdate = true;
             }

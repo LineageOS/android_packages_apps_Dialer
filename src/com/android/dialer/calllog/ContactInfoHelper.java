@@ -101,6 +101,8 @@ public class ContactInfoHelper {
                 updatedInfo = new ContactInfo();
                 updatedInfo.number = number;
                 updatedInfo.formattedNumber = formatPhoneNumber(number, null, countryIso);
+                updatedInfo.normalizedNumber = PhoneNumberUtils.formatNumberToE164(
+                        number, countryIso);
                 updatedInfo.lookupUri = createTemporaryContactUri(updatedInfo.formattedNumber);
             } else {
                 updatedInfo = info;
