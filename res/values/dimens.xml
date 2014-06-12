@@ -137,7 +137,8 @@
     <dimen name="call_log_action_height">44dp</dimen>
     <!-- Z Translation of expanded call log items. -->
     <dimen name="call_log_expanded_translation_z">4dp</dimen>
-    <dimen name="call_log_day_group_padding">15dp</dimen>
+    <dimen name="call_log_day_group_padding_top">15dp</dimen>
+    <dimen name="call_log_day_group_padding_bottom">9dp</dimen>
 
     <!-- Size of icon for contacts number shortcuts -->
     <dimen name="search_shortcut_radius">40dp</dimen>
