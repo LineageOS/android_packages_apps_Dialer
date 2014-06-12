@@ -324,14 +324,6 @@ public class InCallPresenter implements CallList.Listener {
         mListeners.remove(listener);
     }
 
-    public AudioModeProvider getAudioModeProvider() {
-        return mAudioModeProvider;
-    }
-
-    public ContactInfoCache getContactInfoCache() {
-        return mContactInfoCache;
-    }
-
     public ProximitySensor getProximitySensor() {
         return mProximitySensor;
     }
