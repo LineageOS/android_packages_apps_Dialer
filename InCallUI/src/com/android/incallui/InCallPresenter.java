@@ -501,7 +501,7 @@ public class InCallPresenter implements CallList.Listener {
             // (2) Attempt actions on Generic conference calls
             if (activeCall.isConferenceCall() && isGeneric) {
                 if (canMerge) {
-                    TelecommAdapter.getInstance().merge();
+                    TelecommAdapter.getInstance().merge(activeCall.getCallId());
                     return true;
                 } else if (canSwap) {
                     TelecommAdapter.getInstance().swap();
