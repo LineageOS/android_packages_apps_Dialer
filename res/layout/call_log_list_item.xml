@@ -33,9 +33,8 @@
         android:fontFamily="sans-serif-medium"
         android:textColor="?attr/call_log_secondary_text_color"
         android:textSize="@dimen/call_log_secondary_text_size"
-        android:paddingTop="@dimen/call_log_day_group_padding"
-        android:paddingBottom="1dp"
-        />
+        android:paddingTop="@dimen/call_log_day_group_padding_top"
+        android:paddingBottom="@dimen/call_log_day_group_padding_bottom" />
 
     <!-- Linear layout to separate the primary area containing the contact badge and caller
          information and the secondary action (call details / play voicemail). -->
