@@ -17,17 +17,15 @@
 package com.android.dialer.calllog;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.provider.CallLog.Calls;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.android.contacts.common.testing.NeededForTesting;
+import com.android.contacts.common.util.BitmapUtil;
 import com.android.dialer.R;
 import com.google.common.collect.Lists;
 
@@ -156,7 +154,7 @@ public class CallTypeIconsView extends View {
             incoming.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
 
             // Create a rotated instance of the call arrow for outgoing calls.
-            outgoing = getRotatedDrawable(r, R.drawable.ic_call_arrow, 180f);
+            outgoing = BitmapUtil.getRotatedDrawable(r, R.drawable.ic_call_arrow, 180f);
             outgoing.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
 
             // Need to make a copy of the arrow drawable, otherwise the same instance colored
@@ -166,30 +164,6 @@ public class CallTypeIconsView extends View {
 
             voicemail = r.getDrawable(R.drawable.ic_call_voicemail_holo_dark);
             iconMargin = r.getDimensionPixelSize(R.dimen.call_log_icon_margin);
-        }
-
-        /**
-         * Retrieves a copy of the specified drawable resource, rotated by a specified angle.
-         *
-         * @param resources The current resources.
-         * @param resourceId The resource ID of the drawable to rotate.
-         * @param angle The angle of rotation.
-         * @return Rotated drawable.
-         */
-        private Drawable getRotatedDrawable(
-                android.content.res.Resources resources, int resourceId, float angle) {
-
-            // Get the original drawable and make a copy which will be rotated.
-            Bitmap original = BitmapFactory.decodeResource(resources, resourceId);
-            Bitmap rotated = Bitmap.createBitmap(
-                    original.getWidth(), original.getHeight(), Bitmap.Config.ARGB_8888);
-
-            // Perform the rotation.
-            Canvas tempCanvas = new Canvas(rotated);
-            tempCanvas.rotate(angle, original.getWidth()/2, original.getHeight()/2);
-            tempCanvas.drawBitmap(original, 0, 0, null);
-
-            return new BitmapDrawable(resources,rotated);
         }
     }
 }
