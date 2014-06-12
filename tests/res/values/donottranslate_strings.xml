@@ -51,4 +51,8 @@
     <string name="presentation_unknown">Unknown</string>
     <string name="presentation_payphone">Payphone</string>
     <string name="delta_after_add">Offset call time after add (min): </string>
+    <string name="call_subscription">Subscription</string>
+    <string name="subscription0">Subscription 0</string>
+    <string name="subscription1">Subscription 1</string>
+    <string name="no_subscription">No Subscription</string>
 </resources>

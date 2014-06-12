@@ -436,47 +436,6 @@ public class CallLogFragment extends ListFragment
                 getListView().getEmptyView(), R.drawable.empty_call_log, messageId, getResources());
     }
 
-    public void callSelectedEntry() {
-        int position = getListView().getSelectedItemPosition();
-        if (position < 0) {
-            // In touch mode you may often not have something selected, so
-            // just call the first entry to make sure that [send] [send] calls the
-            // most recent entry.
-            position = 0;
-        }
-        final Cursor cursor = (Cursor)mAdapter.getItem(position);
-        if (cursor != null) {
-            String number = cursor.getString(CallLogQuery.NUMBER);
-            int numberPresentation = cursor.getInt(CallLogQuery.NUMBER_PRESENTATION);
-            if (!PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
-                // This number can't be called, do nothing
-                return;
-            }
-            Intent intent;
-            // If "number" is really a SIP address, construct a sip: URI.
-            if (PhoneNumberHelper.isUriNumber(number)) {
-                intent = CallUtil.getCallIntent(
-                        Uri.fromParts(CallUtil.SCHEME_SIP, number, null));
-            } else {
-                // We're calling a regular PSTN phone number.
-                // Construct a tel: URI, but do some other possible cleanup first.
-                int callType = cursor.getInt(CallLogQuery.CALL_TYPE);
-                if (!number.startsWith("+") &&
-                       (callType == Calls.INCOMING_TYPE
-                                || callType == Calls.MISSED_TYPE)) {
-                    // If the caller-id matches a contact with a better qualified number, use it
-                    String countryIso = cursor.getString(CallLogQuery.COUNTRY_ISO);
-                    number = mAdapter.getBetterNumberFromContacts(number, countryIso);
-                }
-                intent = CallUtil.getCallIntent(
-                        Uri.fromParts(CallUtil.SCHEME_TEL, number, null));
-            }
-            intent.setFlags(
-                    Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-            startActivity(intent);
-        }
-    }
-
     CallLogAdapter getAdapter() {
         return mAdapter;
     }

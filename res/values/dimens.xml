@@ -41,9 +41,11 @@
     <dimen name="call_detail_header_top_margin">24dp</dimen>
     <dimen name="call_detail_translation_z">0.5dp</dimen>
 
+    <!-- Size of call provider icon width and height -->
+    <dimen name="call_provider_small_icon_size">12dp</dimen>
+
     <!-- Match call_button_height to Phone's dimens/in_call_end_button_height -->
     <dimen name="call_button_height">74dp</dimen>
-
 
     <!-- Dimensions for speed dial tiles -->
     <dimen name="contact_tile_divider_width">1dp</dimen>

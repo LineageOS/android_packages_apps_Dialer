@@ -31,6 +31,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.provider.CallLog.Calls;
+import android.telecomm.Subscription;
+import android.telephony.TelephonyManager;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +49,7 @@ import android.widget.Toast;
 import com.android.dialer.tests.R;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -83,6 +86,8 @@ public class FillCallLogTestActivity extends Activity {
     private int mCallDateYear;
     private int mCallDateMonth;
     private int mCallDateDay;
+    private RadioButton mSubscription0;
+    private RadioButton mSubscription1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +132,8 @@ public class FillCallLogTestActivity extends Activity {
         mCallDate = (TextView) findViewById(R.id.call_date);
         mPhoneNumber = (TextView) findViewById(R.id.phone_number);
         mOffset = (EditText) findViewById(R.id.delta_after_add);
+        mSubscription0 = (RadioButton) findViewById(R.id.subscription0);
+        mSubscription1 = (RadioButton) findViewById(R.id.subscription1);
 
         // Use the current time as the default values for the picker
         final Calendar c = Calendar.getInstance();
@@ -388,6 +395,18 @@ public class FillCallLogTestActivity extends Activity {
         }
     }
 
+    private Subscription getManualSubscription() {
+        TelephonyManager telephonyManager = new TelephonyManager(this);
+        List <Subscription> subscriptions = telephonyManager.getSubscriptions();
+        if (mSubscription0.isChecked()) {
+            return subscriptions.get(0);
+        } else if (mSubscription1.isChecked()){
+            return subscriptions.get(1);
+        } else {
+            return null;
+        }
+    }
+
     /**
      * Shows a time picker dialog, storing the results in the time field.
      */
@@ -470,7 +489,8 @@ public class FillCallLogTestActivity extends Activity {
         dateTime.set(mCallDateYear, mCallDateMonth, mCallDateDay, mCallTimeHour, mCallTimeMinute);
 
         Calls.addCall(null, this, mPhoneNumber.getText().toString(), getManualPresentation(),
-                getManualCallType(), dateTime.getTimeInMillis(), RNG.nextInt(60 * 60));
+                getManualCallType(), getManualSubscription(), dateTime.getTimeInMillis(),
+                RNG.nextInt(60 * 60));
 
         // Subtract offset from the call date/time and store as new date/time
         int offset = Integer.parseInt(mOffset.getText().toString());

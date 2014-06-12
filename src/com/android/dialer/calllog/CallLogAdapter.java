@@ -21,12 +21,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
+import android.telecomm.Subscription;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +54,7 @@ import com.google.common.base.Objects;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Adapter class to fill in data for the Call Log.
@@ -630,6 +634,9 @@ public class CallLogAdapter extends GroupingListAdapter
         final long date = c.getLong(CallLogQuery.DATE);
         final long duration = c.getLong(CallLogQuery.DURATION);
         final int callType = c.getInt(CallLogQuery.CALL_TYPE);
+        final Subscription subscription = getSubscription(c);
+        final Drawable subscriptionIcon = subscription != null?
+                subscription.getIcon(mContext) : null;
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final long rowId = c.getLong(CallLogQuery.ID);
         views.rowId = rowId;
@@ -654,6 +661,7 @@ public class CallLogAdapter extends GroupingListAdapter
         views.number = number;
         views.numberPresentation = numberPresentation;
         views.callType = callType;
+        views.subscription = subscription;
         views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
         // Stash away the Ids of the calls so that we can support deleting a row in the call log.
         views.callIds = getCallIds(c, count);
@@ -671,7 +679,8 @@ public class CallLogAdapter extends GroupingListAdapter
             // Set return call intent, otherwise null.
             if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
                 // Sets the primary action to call the number.
-                views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number));
+                views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number,
+                        subscription));
             } else {
                 // Number is not callable, so hide button.
                 views.primaryActionView.setTag(null);
@@ -741,11 +750,12 @@ public class CallLogAdapter extends GroupingListAdapter
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
-                    duration);
+                    duration, subscriptionIcon);
         } else {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, name, ntype, label, lookupUri, photoUri, sourceType);
+                    duration, name, ntype, label, lookupUri, photoUri, sourceType,
+                    subscriptionIcon);
         }
 
         mCallLogViewsHelper.setPhoneCallDetails(views, details);
@@ -929,7 +939,7 @@ public class CallLogAdapter extends GroupingListAdapter
         if (PhoneNumberUtilsWrapper.canPlaceCallsTo(views.number, views.numberPresentation)) {
             // Sets the primary action to call the number.
             views.callBackButtonView.setTag(
-                    IntentProvider.getReturnCallIntentProvider(views.number));
+                    IntentProvider.getReturnCallIntentProvider(views.number, views.subscription));
             views.callBackButtonView.setVisibility(View.VISIBLE);
             views.callBackButtonView.setOnClickListener(mActionListener);
         } else {
@@ -1173,6 +1183,14 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         cursor.moveToPosition(position);
         return callTypes;
+    }
+
+    private Subscription getSubscription(Cursor c) {
+        final String component_name = c.getString(CallLogQuery.SUBSCRIPTION_COMPONENT_NAME);
+        final String subscription_id = c.getString(CallLogQuery.SUBSCRIPTION_ID);
+
+        // TODO: actually pull data from the database
+        return null;
     }
 
     private void setPhoto(CallLogListItemViews views, long photoId, Uri contactUri,

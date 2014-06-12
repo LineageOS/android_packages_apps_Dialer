@@ -26,24 +26,26 @@ public final class CallLogQuery {
     // If you alter this, you must also alter the method that inserts a fake row to the headers
     // in the CallLogQueryHandler class called createHeaderCursorFor().
     public static final String[] _PROJECTION = new String[] {
-            Calls._ID,                       // 0
-            Calls.NUMBER,                    // 1
-            Calls.DATE,                      // 2
-            Calls.DURATION,                  // 3
-            Calls.TYPE,                      // 4
-            Calls.COUNTRY_ISO,               // 5
-            Calls.VOICEMAIL_URI,             // 6
-            Calls.GEOCODED_LOCATION,         // 7
-            Calls.CACHED_NAME,               // 8
-            Calls.CACHED_NUMBER_TYPE,        // 9
-            Calls.CACHED_NUMBER_LABEL,       // 10
-            Calls.CACHED_LOOKUP_URI,         // 11
-            Calls.CACHED_MATCHED_NUMBER,     // 12
-            Calls.CACHED_NORMALIZED_NUMBER,  // 13
-            Calls.CACHED_PHOTO_ID,           // 14
-            Calls.CACHED_FORMATTED_NUMBER,   // 15
-            Calls.IS_READ,                   // 16
-            Calls.NUMBER_PRESENTATION,       // 17
+            Calls._ID,                          // 0
+            Calls.NUMBER,                       // 1
+            Calls.DATE,                         // 2
+            Calls.DURATION,                     // 3
+            Calls.TYPE,                         // 4
+            Calls.COUNTRY_ISO,                  // 5
+            Calls.VOICEMAIL_URI,                // 6
+            Calls.GEOCODED_LOCATION,            // 7
+            Calls.CACHED_NAME,                  // 8
+            Calls.CACHED_NUMBER_TYPE,           // 9
+            Calls.CACHED_NUMBER_LABEL,          // 10
+            Calls.CACHED_LOOKUP_URI,            // 11
+            Calls.CACHED_MATCHED_NUMBER,        // 12
+            Calls.CACHED_NORMALIZED_NUMBER,     // 13
+            Calls.CACHED_PHOTO_ID,              // 14
+            Calls.CACHED_FORMATTED_NUMBER,      // 15
+            Calls.IS_READ,                      // 16
+            Calls.NUMBER_PRESENTATION,          // 17
+            Calls.SUBSCRIPTION_COMPONENT_NAME,  // 18
+            Calls.SUBSCRIPTION_ID,              // 19
     };
 
     public static final int ID = 0;
@@ -64,4 +66,6 @@ public final class CallLogQuery {
     public static final int CACHED_FORMATTED_NUMBER = 15;
     public static final int IS_READ = 16;
     public static final int NUMBER_PRESENTATION = 17;
+    public static final int SUBSCRIPTION_COMPONENT_NAME = 18;
+    public static final int SUBSCRIPTION_ID = 19;
 }

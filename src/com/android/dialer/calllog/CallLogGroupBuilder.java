@@ -27,6 +27,8 @@ import com.android.contacts.common.util.PhoneNumberHelper;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import java.util.Objects;
+
 /**
  * Groups together calls in the call log.  The primary grouping attempts to group together calls
  * to and from the same number into a single row on the call log.
@@ -124,6 +126,10 @@ public class CallLogGroupBuilder {
         // This is the type of the first call in the group.
         int firstCallType = cursor.getInt(CallLogQuery.CALL_TYPE);
 
+        // The subscription information of the first entry in the group.
+        String firstSubscriptionComponentName = cursor.getString(CallLogQuery.SUBSCRIPTION_COMPONENT_NAME);
+        String firstSubscriptionId = cursor.getString(CallLogQuery.SUBSCRIPTION_ID);
+
         // Determine the day group for the first call in the cursor.
         final long firstDate = cursor.getLong(CallLogQuery.DATE);
         final long firstRowId = cursor.getLong(CallLogQuery.ID);
@@ -134,12 +140,24 @@ public class CallLogGroupBuilder {
             // The number of the current row in the cursor.
             final String currentNumber = cursor.getString(CallLogQuery.NUMBER);
             final int callType = cursor.getInt(CallLogQuery.CALL_TYPE);
+            final String currentSubscriptionComponentName = cursor.getString(
+                    CallLogQuery.SUBSCRIPTION_COMPONENT_NAME);
+            final String currentSubscriptionId = cursor.getString(CallLogQuery.SUBSCRIPTION_ID);
+
             final boolean sameNumber = equalNumbers(firstNumber, currentNumber);
+            final boolean sameSubscriptionComponentName = Objects.equals(
+                    firstSubscriptionComponentName,
+                    currentSubscriptionComponentName);
+            final boolean sameSubscriptionId = Objects.equals(
+                    firstSubscriptionId,
+                    currentSubscriptionId);
+            final boolean sameSubscription = sameSubscriptionComponentName && sameSubscriptionId;
+
             final boolean shouldGroup;
             final long currentCallId = cursor.getLong(CallLogQuery.ID);
             final long date = cursor.getLong(CallLogQuery.DATE);
 
-            if (!sameNumber) {
+            if (!sameNumber || !sameSubscription) {
                 // Should only group with calls from the same number.
                 shouldGroup = false;
             } else if (firstCallType == Calls.VOICEMAIL_TYPE) {
@@ -170,6 +188,8 @@ public class CallLogGroupBuilder {
                 // The current entry is now the first in the group.
                 firstNumber = currentNumber;
                 firstCallType = callType;
+                firstSubscriptionComponentName = currentSubscriptionComponentName;
+                firstSubscriptionId = currentSubscriptionId;
             }
 
             // Save the day group associated with the current call.
