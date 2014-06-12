@@ -576,10 +576,6 @@
 
     <string name="tab_all_contacts">Contacts</string>
 
-    <!--  Title of fragment that displays all contacts -->
-    <string name="show_all_contacts_title">All contacts</string>
-    <!--  Title of show all contacts button -->
-    <string name="show_all_contacts_button_text">All contacts</string>
     <!--  Text displayed when user swipes out a favorite contact -->
     <string name="favorite_hidden">Removed from favorites</string>
     <!--  Text displayed for the undo button to undo removing a favorite contact -->
