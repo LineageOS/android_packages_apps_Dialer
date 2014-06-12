@@ -52,7 +52,7 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
 
         View emptyListView = view.findViewById(R.id.empty_list_view);
         DialerUtils.configureEmptyListView(emptyListView, R.drawable.empty_contacts,
-                R.string.listFoundAllContactsZero, getResources());
+                R.string.all_contacts_empty, getResources());
         getListView().setEmptyView(emptyListView);
 
         ViewUtil.addBottomPaddingToListViewForFab(getListView(), getResources());

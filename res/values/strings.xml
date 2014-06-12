@@ -66,8 +66,8 @@
     <!-- Menu item used to share a voicemail. [CHAR LIMIT=30] -->
     <string name="recentCalls_shareVoicemail">Share voicemail</string>
 
-    <!-- Text displayed when the call log is empty -->
-    <string name="recentCalls_empty">Call log is empty.</string>
+    <!-- Text displayed when the call log is empty. -->
+    <string name="recentCalls_empty">Your call log is empty.</string>
 
     <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
     <string name="clearCallLogConfirmation_title">Clear call log?</string>
@@ -547,10 +547,10 @@
     <string name="view_full_call_history_font_family">sans-serif</string>
 
     <!-- Text displayed when the list of missed calls is empty -->
-    <string name="recentMissed_empty">No recent missed calls.</string>
+    <string name="recentMissed_empty">You have no recent missed calls.</string>
 
     <!-- Text displayed when the list of voicemails is empty -->
-    <string name="recentVoicemails_empty">No recent voicemails.</string>
+    <string name="recentVoicemails_empty">You have no recent voicemails.</string>
 
     <!--  Menu option to show favorite contacts only -->
     <string name="show_favorites_only">Show favorites only</string>
@@ -599,8 +599,11 @@
     <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
     <string name="num_missed_calls"><xliff:g id="number">%s</xliff:g> new missed calls</string>
 
-    <!-- Shows when there are no favorites. -->
-    <string name="no_favorites">Favorites &amp; contacts you\ncall often will show here.\nSo, start calling.</string>
+    <!-- Shown when there are no speed dial favorites. -->
+    <string name="speed_dial_empty">Speed dial is one touch dialing\nfor favorites and numbers\n you call frequently.</string>
+
+    <!-- Shown when there are no contacts in the all contacts list. -->
+    <string name="all_contacts_empty">You have no contacts.</string>
 
     <!-- Shows up as a tooltip to provide a hint to the user that the profile pic in a contact
          card can be tapped to bring up a list of all numbers, or long pressed to start reordering
