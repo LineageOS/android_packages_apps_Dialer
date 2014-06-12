@@ -141,4 +141,10 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
             mShadowOverlay.setVisibility(isDefaultImage ? View.GONE : View.VISIBLE);
         }
     }
+
+    @Override
+    protected boolean isContactPhotoCircular() {
+        // Unlike Contacts' tiles, the Dialer's favorites tiles are square.
+        return false;
+    }
 }
