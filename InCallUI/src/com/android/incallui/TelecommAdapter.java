@@ -16,6 +16,9 @@
 
 package com.android.incallui;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Looper;
 import android.telecomm.InCallAdapter;
 
@@ -23,7 +26,10 @@ import com.google.common.base.Preconditions;
 
 /** Wrapper around {@link InCallAdapter} that only forwards calls to the adapter when it's valid. */
 final class TelecommAdapter {
+    private static final String ADD_CALL_MODE_KEY = "add_call_mode";
+
     private static TelecommAdapter sInstance;
+    private Context mContext;
     private InCallAdapter mAdapter;
 
     static TelecommAdapter getInstance() {
@@ -35,6 +41,10 @@ final class TelecommAdapter {
     }
 
     private TelecommAdapter() {
+    }
+
+    void setContext(Context context) {
+        mContext = context;
     }
 
     void setAdapter(InCallAdapter adapter) {
@@ -119,7 +129,24 @@ final class TelecommAdapter {
     }
 
     void addCall() {
-        Log.wtf(this, "addCall not implemented");
+        if (mContext != null) {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            // when we request the dialer come up, we also want to inform
+            // it that we're going through the "add call" option from the
+            // InCallScreen / PhoneUtils.
+            intent.putExtra(ADD_CALL_MODE_KEY, true);
+            try {
+                Log.d(this, "Sending the add Call intent");
+                mContext.startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                // This is rather rare but possible.
+                // Note: this method is used even when the phone is encrypted. At that moment
+                // the system may not find any Activity which can accept this Intent.
+                Log.e(this, "Activity for adding calls isn't found.", e);
+            }
+        }
     }
 
     void playDtmfTone(String callId, char digit) {

@@ -42,6 +42,7 @@ public class InCallServiceImpl extends InCallService {
         InCallPresenter inCallPresenter = InCallPresenter.getInstance();
         inCallPresenter.setUp(
                 getApplicationContext(), CallList.getInstance(), AudioModeProvider.getInstance());
+        TelecommAdapter.getInstance().setContext(this);
     }
 
     /** {@inheritDoc} */
@@ -49,6 +50,7 @@ public class InCallServiceImpl extends InCallService {
         Log.v(this, "onDestroy");
         // Tear down the InCall system
         TelecommAdapter.getInstance().setAdapter(null);
+        TelecommAdapter.getInstance().setContext(null);
         CallList.getInstance().clearOnDisconnect();
         InCallPresenter.getInstance().tearDown();
     }
