@@ -139,8 +139,7 @@ public class PhoneCallDetailsHelper {
         mDescriptionItems.add(getCallDate(details));
 
         // Create a comma separated list from the call type or location, and call date.
-        // TextUtils.join ensures a locale appropriate list separator is used.
-        return TextUtils.join((List<CharSequence>)mDescriptionItems);
+        return TextUtils.join(", " , mDescriptionItems);
     }
 
     /**
