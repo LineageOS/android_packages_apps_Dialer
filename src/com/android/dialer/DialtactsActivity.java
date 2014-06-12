@@ -66,6 +66,7 @@ import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.animation.AnimationListenerAdapter;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
+import com.android.contacts.common.dialog.SelectSIMDialogFragment;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.util.ViewUtil;
@@ -106,6 +107,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         OnDragDropListener,
         OnPhoneNumberPickerActionListener,
         PopupMenu.OnMenuItemClickListener,
+        SelectSIMDialogFragment.OnClickOkListener,
         ViewPager.OnPageChangeListener,
         ActionBarController.ActivityUi {
     private static final String TAG = "DialtactsActivity";
@@ -139,6 +141,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private static final String ACTION_TOUCH_DIALER = "com.android.phone.action.TOUCH_DIALER";
 
     private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
+
+    /**
+     * Constant to indicate there is only one service provider available.
+     */
+    private static final int NO_MULTI_SIM = -1;
 
     private FrameLayout parentLayout;
 
@@ -192,6 +199,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Whether or not the device is in landscape orientation.
      */
     private boolean mIsLandscape;
+
+    /**
+     * Information about the currently selected SIM card.
+     */
+    private int mCurrentSimCard = NO_MULTI_SIM;
 
     /**
      * The position of the currently selected tab in the attached {@link ListsFragment}.
@@ -594,8 +606,16 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             case R.id.menu_call_settings:
                 handleMenuSettings();
                 return true;
+            case R.id.menu_select_sim:
+                SelectSIMDialogFragment.show(getFragmentManager(), mCurrentSimCard);
+                return true;
         }
         return false;
+    }
+
+    @Override
+    public void passSimUpdate(int simId) {
+        mCurrentSimCard = simId;
     }
 
     @Override
@@ -764,6 +784,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private OptionsPopupMenu buildOptionsMenu(View invoker) {
         final OptionsPopupMenu popupMenu = new OptionsPopupMenu(this, invoker);
         popupMenu.inflate(R.menu.dialtacts_options);
+        final Menu menu = popupMenu.getMenu();
+        final MenuItem selectSim = menu.findItem(R.id.menu_select_sim);
+        selectSim.setVisible(mCurrentSimCard != NO_MULTI_SIM);
         popupMenu.setOnMenuItemClickListener(this);
         return popupMenu;
     }
