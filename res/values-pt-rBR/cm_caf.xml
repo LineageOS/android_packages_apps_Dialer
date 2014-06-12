@@ -17,5 +17,4 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="calllog_search_hint">Pesquisar no registro de chamadas</string>
-  <string name="dial_conference">Discar conferência</string>
 </resources>

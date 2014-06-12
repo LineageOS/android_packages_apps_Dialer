@@ -17,5 +17,4 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="calllog_search_hint">البحث عن سجل المكالمات</string>
-  <string name="dial_conference">مؤتمر هاتفي</string>
 </resources>

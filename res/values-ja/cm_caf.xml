@@ -17,5 +17,4 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="calllog_search_hint">通話履歴を検索</string>
-  <string name="dial_conference">会議通話</string>
 </resources>

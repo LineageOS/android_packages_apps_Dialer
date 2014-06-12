@@ -16,5 +16,5 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="calllog_search_hint">Recherche du journal d\'appels</string>
+  <string name="calllog_search_hint">Otsi kõnelogist</string>
 </resources>

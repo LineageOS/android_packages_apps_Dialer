@@ -23,12 +23,14 @@
   <string name="call_stats_nav_all">全部</string>
   <string name="call_stats_nav_incoming">來電</string>
   <string name="call_stats_missed_percent">未接來電：<xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">總計：<xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">總計：<xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">開始日期</string>
   <string name="call_stats_filter_to">結束日期</string>
   <string name="date_quick_selection">快速選取</string>
   <string name="date_qs_currentmonth">本月</string>
   <string name="date_qs_currentyear">今年</string>
+  <string name="date_qs_lastweek">上週</string>
   <string name="date_qs_lastmonth">上個月</string>
   <string name="date_qs_lastyear">去年</string>
 </resources>
