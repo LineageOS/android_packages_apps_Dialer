@@ -64,6 +64,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
     private final int mCallLogPaddingTop;
     private final int mCallLogPaddingBottom;
     private final int mCardMaxHorizontalClip;
+    private final int mShortCardBackgroundColor;
 
     private final Context mContext;
 
@@ -124,6 +125,8 @@ public class ShortcutCardsAdapter extends BaseAdapter {
                 resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding_top);
         mCallLogPaddingBottom =
                 resources.getDimensionPixelSize(R.dimen.recent_call_log_item_padding_bottom);
+        mShortCardBackgroundColor = resources.getColor(R.color.call_log_expanded_background_color);
+
 
         mCallLogAdapter = callLogAdapter;
         mObserver = new CustomDataSetObserver();
@@ -257,6 +260,9 @@ public class ShortcutCardsAdapter extends BaseAdapter {
             callLogItem.setAlpha(1);
             callLogItem.setClipBounds(null);
             setChildrenOpacity(callLogItem, 1.0f);
+
+            callLogItem.findViewById(R.id.call_log_row)
+                    .setBackgroundColor(mShortCardBackgroundColor);
         }
 
         @Override
