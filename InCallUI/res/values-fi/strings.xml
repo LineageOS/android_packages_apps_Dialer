@@ -34,8 +34,7 @@
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM-raja ylitetty"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"Radio pois käytöstä"</string>
     <string name="callFailed_simError" msgid="4476360200030635828">"Ei SIM-korttia tai SIM-korttivirhe"</string>
-    <!-- no translation found for callFailed_outOfService (682300184520329366) -->
-    <skip />
+    <string name="callFailed_outOfService" msgid="682300184520329366">"Mobiiliverkko ei ole käytettävissä"</string>
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"Sallitut numerot rajoittavat soitettavia puheluita."</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Et voi soittaa puheluita puheluiden eston ollessa käytössä."</string>
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Käyttörajoitus rajoittaa kaikki puhelut"</string>
@@ -96,8 +95,7 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Puhelujen yhdistäminen epäonnistui."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Puhelun hylkääminen epäonnistui."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Puhelujen suorittaminen epäonnistui."</string>
-    <!-- no translation found for incall_error_missing_voicemail_number (2995137160077097934) -->
-    <skip />
+    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Puhelinvastaajan numero on tuntematon"</string>
     <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Internetpuhelu"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Hätäpuhelu"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Käynnistetään radiota…"</string>
@@ -154,7 +152,7 @@
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Ääni"</string>
     <string name="default_notification_description" msgid="78174796906240970">"Oletusääni (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Puhelimen soittoääni"</string>
-    <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Värinä ja soittoääni"</string>
+    <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Käytä värinää"</string>
     <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Valintanäppäimien näppäinäänet"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"Näppäimistön automaattinen täydennys"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Soittoääni ja värinä"</string>
