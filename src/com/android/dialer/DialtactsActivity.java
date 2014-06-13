@@ -310,9 +310,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 }
             }
 
-            if (mIsDialpadShown && mSmartDialSearchFragment != null) {
+            if (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()) {
                 mSmartDialSearchFragment.setQueryString(mSearchQuery, false /* delaySelection */);
-            } else if (mRegularSearchFragment != null) {
+            } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
                 mRegularSearchFragment.setQueryString(mSearchQuery, false /* delaySelection */);
             }
         }
@@ -548,13 +548,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 } else {
                     // Dial button was pressed; tell the Dialpad fragment
                     mDialpadFragment.dialButtonPressed();
-                }
-                break;
-            case R.id.search_close_button:
-                // Clear the search field
-                if (!TextUtils.isEmpty(mSearchView.getText())) {
-                    mDialpadFragment.clearDialpad();
-                    mSearchView.setText(null);
                 }
                 break;
             case R.id.voice_search_button:
