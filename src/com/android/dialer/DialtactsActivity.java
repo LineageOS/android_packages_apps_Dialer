@@ -1137,18 +1137,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // tab.
         if (position == ListsFragment.TAB_INDEX_SPEED_DIAL && !mIsLandscape) {
             mFloatingActionButtonController.onPageScrolled(positionOffset);
+        } else if (position != ListsFragment.TAB_INDEX_SPEED_DIAL) {
+            mFloatingActionButtonController.onPageScrolled(1);
         }
     }
 
     @Override
     public void onPageSelected(int position) {
         mCurrentTabPosition = position;
-        // Prevents jittery movement when clicking on tabs.
-        if (mCurrentTabPosition != ListsFragment.TAB_INDEX_SPEED_DIAL) {
-            mFloatingActionButtonController.manuallyTranslate(
-                    mFloatingActionButtonController.getTranslationXForAlignment(
-                            FloatingActionButtonController.ALIGN_RIGHT), 0);
-        }
     }
 
     @Override
