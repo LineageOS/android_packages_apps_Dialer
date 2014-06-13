@@ -183,4 +183,23 @@
         android:text="@string/addToCallLogButton"
         android:onClick="addManualEntry"
         />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delta_after_add"
+            />
+        <EditText
+            android:id="@+id/delta_after_add"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:text="-1"
+            android:inputType="number"
+            />
+    </LinearLayout>
 </LinearLayout>

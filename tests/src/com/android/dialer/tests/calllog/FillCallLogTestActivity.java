@@ -37,6 +37,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -75,6 +76,7 @@ public class FillCallLogTestActivity extends Activity {
     private TextView mCallDate;
     private TextView mCallTime;
     private TextView mPhoneNumber;
+    private EditText mOffset;
 
     private int mCallTimeHour;
     private int mCallTimeMinute;
@@ -124,6 +126,7 @@ public class FillCallLogTestActivity extends Activity {
         mCallTime = (TextView) findViewById(R.id.call_time);
         mCallDate = (TextView) findViewById(R.id.call_date);
         mPhoneNumber = (TextView) findViewById(R.id.phone_number);
+        mOffset = (EditText) findViewById(R.id.delta_after_add);
 
         // Use the current time as the default values for the picker
         final Calendar c = Calendar.getInstance();
@@ -469,5 +472,16 @@ public class FillCallLogTestActivity extends Activity {
         Calls.addCall(null, this, mPhoneNumber.getText().toString(), getManualPresentation(),
                 getManualCallType(), dateTime.getTimeInMillis(), RNG.nextInt(60 * 60));
 
+        // Subtract offset from the call date/time and store as new date/time
+        int offset = Integer.parseInt(mOffset.getText().toString());
+
+        dateTime.add(Calendar.MINUTE, offset);
+        mCallDateYear = dateTime.get(Calendar.YEAR);
+        mCallDateMonth = dateTime.get(Calendar.MONTH);
+        mCallDateDay = dateTime.get(Calendar.DAY_OF_MONTH);
+        mCallTimeHour = dateTime.get(Calendar.HOUR_OF_DAY);
+        mCallTimeMinute = dateTime.get(Calendar.MINUTE);
+        setDisplayDate();
+        setDisplayTime();
     }
 }
