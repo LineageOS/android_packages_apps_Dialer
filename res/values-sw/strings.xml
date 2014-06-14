@@ -29,7 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Futa rekodi ya simu"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Futa ujumbe wa sauti"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Shiriki ujumbe wa sauti"</string>
-    <string name="recentCalls_empty" msgid="247053222448663107">"Orodha ya kupiga simu haina chochote."</string>
+    <string name="recentCalls_empty" msgid="7711926651216108723">"Rekodi yako ya nambari za simu haina kitu."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Ungependa kufuta rekodi ya simu?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Kumbukumbu zako zote za simu zitafutwa."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Inafuta rekodi ya simu ..."</string>
@@ -90,6 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Ongeza anwani"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Ongeza usitishaji wa sekunde 2"</string>
     <string name="add_wait" msgid="3360818652790319634">"Ongeza kusubiri"</string>
+    <string name="menu_select_sim" msgid="3603578201960504010">"Chagua SIM kadi"</string>
     <string name="call_settings" msgid="7666474782093693667">"Mipangilio"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Anwani mpya"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Anwani zote"</string>
@@ -137,8 +138,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Haiwezi kupiga simu kwa sababu programu ya Simu imezimwa."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Hakuna shughuli iliyosakinishwa imepatikana ya kushughulikia kitendo kilichochaguliwa."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Andika jina au nambari ya simu"</string>
-    <string name="recentMissed_empty" msgid="5427113551557296665">"Hakuna simu za hivi karibuni ambazo hazikupokewa."</string>
-    <string name="recentVoicemails_empty" msgid="5163114119598014048">"Hakuna ujumbe wa sauti wa hivi karibuni."</string>
+    <string name="recentMissed_empty" msgid="4177320482947526015">"Huna simu za hivi majuzi ambazo hukuzipokea."</string>
+    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Huna ujumbe wa sauti wa hivi majuzi."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Onyesha zinazopendwa tu"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historia"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Zote"</string>
@@ -147,19 +148,17 @@
     <string name="tab_speed_dial" msgid="7807567599021643864">"Unaowasiliana nao zaidi"</string>
     <string name="tab_recents" msgid="929949073851377206">"Zilizotumika majuzi"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Walioalikwa"</string>
-    <string name="show_all_contacts_title" msgid="8395378484578221791">"Anwani zote"</string>
-    <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Anwani zote"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Imeondolowa kwenye vipendwa"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Tendua"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Piga simu <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Ongeza kwenye anwani"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Angalia historia kamili ya simu zilizopigwa"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Simu <xliff:g id="NUMBER">%s</xliff:g> za karibuni ambazo hazikujibiwa"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Vipendwa na nambari \n unazopiga mara nyingi zitaonekana hapa.\nKwa hivyo, anza kupiga simu."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"Kupiga simu kwa haraka ni kupiga simu kwa kugusa mara moja\n nambari na watu unaowapigia mara kwa mara\n."</string>
+    <string name="all_contacts_empty" msgid="4536082452651392894">"Huna anwani."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Gonga picha ili uone nambari zote au bonyeza na ushikilie ili upange upya"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ondoa"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Ondoa"</string>
-    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Unaowasiliana nao zaidi"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ANWANI ZOTE"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"PIGA SIMU"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"SIKILIZA"</string>
@@ -171,6 +170,14 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Sikiliza ujumbe wa sauti kutoka kwa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Maelezo ya simu ya <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Kumbukumbu ya simu imefutwa."</string>
+    <string name="call_log_header_today" msgid="3225248682434212981">"Leo"</string>
+    <string name="call_log_header_yesterday" msgid="9139172458834033092">"Jana"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Wiki iliyopita"</string>
-    <string name="call_log_header_other" msgid="8209775016508312763">"Nyingine"</string>
+    <string name="call_log_header_other" msgid="5769921959940709084">"Nzee zaidi"</string>
+    <string name="call_detail_list_header" msgid="866455969433213220">"Orodha ya Simu"</string>
+    <string name="voicemail_speaker_on" msgid="209154030283487068">"Washa spika."</string>
+    <string name="voicemail_speaker_off" msgid="7390530056413093958">"Zima spika."</string>
+    <string name="voicemail_play_faster" msgid="3444751008615323006">"Cheza kwa kasi zaidi."</string>
+    <string name="voicemail_play_slower" msgid="4544796503902818832">"Cheza polepole."</string>
+    <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Anzisha au usitishe kucheza."</string>
 </resources>

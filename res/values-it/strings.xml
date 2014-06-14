@@ -29,7 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Cancella registro chiamate"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Elimina messaggio vocale"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Condividi messaggio vocale"</string>
-    <string name="recentCalls_empty" msgid="247053222448663107">"Il registro chiamate è vuoto."</string>
+    <string name="recentCalls_empty" msgid="7711926651216108723">"Il registro chiamate è vuoto."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Cancellare registro?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Tutte le voci nel registro chiamate verranno eliminate."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Cancellazione registro chiamate..."</string>
@@ -90,6 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Aggiungi contatto"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Aggiungi pausa 2 sec"</string>
     <string name="add_wait" msgid="3360818652790319634">"Aggiungi attesa"</string>
+    <string name="menu_select_sim" msgid="3603578201960504010">"Seleziona scheda SIM"</string>
     <string name="call_settings" msgid="7666474782093693667">"Impostazioni"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nuovo contatto"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Tutti i contatti"</string>
@@ -137,8 +138,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Impossibile effettuare una telefonata perché l\'applicazione Telefono è stata disattivata."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Nessuna applicazione installata disponibile per gestire l\'azione selezionata."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Digita nome o numero telefono"</string>
-    <string name="recentMissed_empty" msgid="5427113551557296665">"Nessuna chiamata persa recente."</string>
-    <string name="recentVoicemails_empty" msgid="5163114119598014048">"Nessun messaggio vocale recente."</string>
+    <string name="recentMissed_empty" msgid="4177320482947526015">"Nessuna chiamata senza risposta recente."</string>
+    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Nessun messaggio vocale recente."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostra solo i preferiti"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Cronologia"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Tutti"</string>
@@ -147,19 +148,17 @@
     <string name="tab_speed_dial" msgid="7807567599021643864">"Chiamata rapida"</string>
     <string name="tab_recents" msgid="929949073851377206">"Recenti"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Contatti"</string>
-    <string name="show_all_contacts_title" msgid="8395378484578221791">"Tutti i contatti"</string>
-    <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Tutti i contatti"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Rimosso dai preferiti"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Annulla"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Chiama <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Aggiungi ai contatti"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Visualizza cronologia completa delle chiamate"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nuove chiamate senza risposta"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Preferiti e contatti che\nchiami spesso verranno mostrati qui.\nInizia a chiamarli."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"La composizione veloce è la composizione con un tocco\ndi preferiti e numeri\n che chiami spesso."</string>
+    <string name="all_contacts_empty" msgid="4536082452651392894">"Nessun contatto presente."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Tocca l\'immagine per visualizzare tutti i numeri o tieni premuto per cambiare l\'ordine"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ignora"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Rimuovi"</string>
-    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Chiamata rapida"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TUTTI I CONTATTI"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"RICHIAMA"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ASCOLTA"</string>
@@ -171,6 +170,14 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Ascolta il messaggio vocale di: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Dettagli chiamata per <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Voce del registro chiamate eliminata."</string>
+    <string name="call_log_header_today" msgid="3225248682434212981">"Oggi"</string>
+    <string name="call_log_header_yesterday" msgid="9139172458834033092">"Ieri"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Settimana scorsa"</string>
-    <string name="call_log_header_other" msgid="8209775016508312763">"Altro"</string>
+    <string name="call_log_header_other" msgid="5769921959940709084">"Meno recenti"</string>
+    <string name="call_detail_list_header" msgid="866455969433213220">"Elenco chiamate"</string>
+    <string name="voicemail_speaker_on" msgid="209154030283487068">"Attiva altoparlante."</string>
+    <string name="voicemail_speaker_off" msgid="7390530056413093958">"Disattiva altoparlante."</string>
+    <string name="voicemail_play_faster" msgid="3444751008615323006">"Riproduci più velocemente."</string>
+    <string name="voicemail_play_slower" msgid="4544796503902818832">"Riproduci più lentamente."</string>
+    <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Avvia o metti in pausa la riproduzione."</string>
 </resources>
