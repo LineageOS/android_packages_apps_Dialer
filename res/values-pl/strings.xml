@@ -29,7 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Wyczyść rejestr połączeń"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Usuń pocztę głosową"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Udostępnij pocztę głosową"</string>
-    <string name="recentCalls_empty" msgid="247053222448663107">"Rejestr połączeń jest pusty."</string>
+    <string name="recentCalls_empty" msgid="7711926651216108723">"Rejestr połączeń jest pusty."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Usunąć rejestr połączeń?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Wszystkie dane połączeń zostaną usunięte."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Czyszczenie rejestru połączeń…"</string>
@@ -90,6 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Dodaj kontakt"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Dodaj 2-sekundową pauzę"</string>
     <string name="add_wait" msgid="3360818652790319634">"Dodaj oczekiwanie"</string>
+    <string name="menu_select_sim" msgid="3603578201960504010">"Wybierz kartę SIM"</string>
     <string name="call_settings" msgid="7666474782093693667">"Ustawienia"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nowy kontakt"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Wszystkie kontakty"</string>
@@ -137,8 +138,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Nie można zadzwonić, ponieważ aplikacja Telefon została wyłączona."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Brak zainstalowanej aplikacji wykonującej wybrane działanie."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Wpisz nazwisko/numer telefonu"</string>
-    <string name="recentMissed_empty" msgid="5427113551557296665">"Brak nowych nieodebranych połączeń."</string>
-    <string name="recentVoicemails_empty" msgid="5163114119598014048">"Brak nowej poczty głosowej."</string>
+    <string name="recentMissed_empty" msgid="4177320482947526015">"Nie masz nowych nieodebranych połączeń."</string>
+    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Nie masz nowej poczty głosowej."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Pokaż tylko ulubione"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historia"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Wszystkie"</string>
@@ -147,19 +148,17 @@
     <string name="tab_speed_dial" msgid="7807567599021643864">"Szybkie wybieranie"</string>
     <string name="tab_recents" msgid="929949073851377206">"Niedawne"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontakty"</string>
-    <string name="show_all_contacts_title" msgid="8395378484578221791">"Wszystkie kontakty"</string>
-    <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Wszystkie kontakty"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Usunięto z ulubionych"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Cofnij"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Zadzwoń: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Dodaj do kontaktów"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Wyświetl pełną historię połączeń"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Nowe nieodebrane połączenia: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Tutaj będą widoczne Twoje\nulubione i najczęstsze kontakty.\nPora zacząć dzwonić."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"Używając szybkiego wybierania,\nmożesz jednym dotknięciem dzwonić\ndo ulubionych kontaktów i pod często wybierane numery."</string>
+    <string name="all_contacts_empty" msgid="4536082452651392894">"Nie masz żadnych kontaktów."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Kliknij zdjęcie, by zobaczyć wszystkie numery, lub kliknij je i przytrzymaj, by zmienić kolejność"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Zamknij"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Usuń"</string>
-    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Szybkie wybieranie"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"WSZYSTKIE KONTAKTY"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ODDZWOŃ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"POSŁUCHAJ"</string>
@@ -171,6 +170,14 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Posłuchaj wiadomości głosowej od: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Szczegóły połączeń: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Wpis dziennika połączeń został usunięty."</string>
+    <string name="call_log_header_today" msgid="3225248682434212981">"Dzisiaj"</string>
+    <string name="call_log_header_yesterday" msgid="9139172458834033092">"Wczoraj"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Ostatni tydzień"</string>
-    <string name="call_log_header_other" msgid="8209775016508312763">"Inne"</string>
+    <string name="call_log_header_other" msgid="5769921959940709084">"Starsze"</string>
+    <string name="call_detail_list_header" msgid="866455969433213220">"Lista połączeń"</string>
+    <string name="voicemail_speaker_on" msgid="209154030283487068">"Włącz głośnik."</string>
+    <string name="voicemail_speaker_off" msgid="7390530056413093958">"Wyłącz głośnik."</string>
+    <string name="voicemail_play_faster" msgid="3444751008615323006">"Odtwarzaj szybciej."</string>
+    <string name="voicemail_play_slower" msgid="4544796503902818832">"Odtwarzaj wolniej."</string>
+    <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Rozpocznij lub wstrzymaj odtwarzanie."</string>
 </resources>

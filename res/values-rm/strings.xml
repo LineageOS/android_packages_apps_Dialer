@@ -32,7 +32,8 @@
     <skip />
     <!-- no translation found for recentCalls_shareVoicemail (1416112847592942840) -->
     <skip />
-    <string name="recentCalls_empty" msgid="247053222448663107">"La glista da cloms e vida"</string>
+    <!-- no translation found for recentCalls_empty (7711926651216108723) -->
+    <skip />
     <!-- no translation found for clearCallLogConfirmation_title (6427524640461816332) -->
     <skip />
     <!-- no translation found for clearCallLogConfirmation (5043563133171583152) -->
@@ -131,6 +132,8 @@
     <skip />
     <string name="add_2sec_pause" msgid="9214012315201040129">"Agiuntar ina pausa da 2 secundas"</string>
     <string name="add_wait" msgid="3360818652790319634">"Agiuntar Spetgar"</string>
+    <!-- no translation found for menu_select_sim (3603578201960504010) -->
+    <skip />
     <!-- no translation found for call_settings (7666474782093693667) -->
     <skip />
     <string name="menu_newContact" msgid="1209922412763274638">"Nov contact"</string>
@@ -203,9 +206,9 @@
     <skip />
     <!-- no translation found for dialer_hint_find_contact (8798845521253672403) -->
     <skip />
-    <!-- no translation found for recentMissed_empty (5427113551557296665) -->
+    <!-- no translation found for recentMissed_empty (4177320482947526015) -->
     <skip />
-    <!-- no translation found for recentVoicemails_empty (5163114119598014048) -->
+    <!-- no translation found for recentVoicemails_empty (4905583746647459963) -->
     <skip />
     <!-- no translation found for show_favorites_only (5520072531022614595) -->
     <skip />
@@ -223,10 +226,6 @@
     <skip />
     <!-- no translation found for tab_all_contacts (1410922767166533690) -->
     <skip />
-    <!-- no translation found for show_all_contacts_title (8395378484578221791) -->
-    <skip />
-    <!-- no translation found for show_all_contacts_button_text (8057452310403090131) -->
-    <skip />
     <!-- no translation found for favorite_hidden (5011234945140912047) -->
     <skip />
     <!-- no translation found for favorite_hidden_undo (2508998611039406474) -->
@@ -239,15 +238,15 @@
     <skip />
     <!-- no translation found for num_missed_calls (8081736535604293886) -->
     <skip />
-    <!-- no translation found for no_favorites (5212485868783382971) -->
+    <!-- no translation found for speed_dial_empty (5476435149276295630) -->
+    <skip />
+    <!-- no translation found for all_contacts_empty (4536082452651392894) -->
     <skip />
     <!-- no translation found for contact_tooltip (7817483485692282287) -->
     <skip />
     <!-- no translation found for description_dismiss (2146276780562549643) -->
     <skip />
     <!-- no translation found for remove_contact (1080555335283662961) -->
-    <skip />
-    <!-- no translation found for favorites_menu_speed_dial (3832518092014707628) -->
     <skip />
     <!-- no translation found for favorites_menu_all_contacts (992506284449891186) -->
     <skip />
@@ -271,8 +270,24 @@
     <skip />
     <!-- no translation found for toast_entry_removed (3389119736202317999) -->
     <skip />
+    <!-- no translation found for call_log_header_today (3225248682434212981) -->
+    <skip />
+    <!-- no translation found for call_log_header_yesterday (9139172458834033092) -->
+    <skip />
     <!-- no translation found for call_log_header_last_week (5197040511028258038) -->
     <skip />
-    <!-- no translation found for call_log_header_other (8209775016508312763) -->
+    <!-- no translation found for call_log_header_other (5769921959940709084) -->
+    <skip />
+    <!-- no translation found for call_detail_list_header (866455969433213220) -->
+    <skip />
+    <!-- no translation found for voicemail_speaker_on (209154030283487068) -->
+    <skip />
+    <!-- no translation found for voicemail_speaker_off (7390530056413093958) -->
+    <skip />
+    <!-- no translation found for voicemail_play_faster (3444751008615323006) -->
+    <skip />
+    <!-- no translation found for voicemail_play_slower (4544796503902818832) -->
+    <skip />
+    <!-- no translation found for voicemail_play_start_pause (3687447935787768983) -->
     <skip />
 </resources>

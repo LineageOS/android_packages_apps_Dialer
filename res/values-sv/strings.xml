@@ -29,7 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Rensa samtalshistorik"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ta bort röstmeddelande"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Dela röstmeddelande"</string>
-    <string name="recentCalls_empty" msgid="247053222448663107">"Samtalshistoriken är tom."</string>
+    <string name="recentCalls_empty" msgid="7711926651216108723">"Samtalsloggen är tom."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Rensa samtalslista?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Alla samtalslistor kommer att tas bort."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Samtalshistoriken rensas …"</string>
@@ -90,6 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Lägg till kontakt"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Lägg till en paus på 2 sek."</string>
     <string name="add_wait" msgid="3360818652790319634">"Lägg till väntetid"</string>
+    <string name="menu_select_sim" msgid="3603578201960504010">"Välj SIM-kort"</string>
     <string name="call_settings" msgid="7666474782093693667">"Inställningar"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Ny kontakt"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Alla kontakter"</string>
@@ -137,8 +138,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Det går inte att ringa eftersom appen Telefon har inaktiverats."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Det finns ingen installerad app som är tillgänglig för att hantera den valda åtgärden."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Ange ett namn eller telefonnummer"</string>
-    <string name="recentMissed_empty" msgid="5427113551557296665">"Inga nya missade samtal."</string>
-    <string name="recentVoicemails_empty" msgid="5163114119598014048">"Inga nya röstmeddelanden."</string>
+    <string name="recentMissed_empty" msgid="4177320482947526015">"Du har inga nya missade samtal."</string>
+    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Du har inga nya röstmeddelanden."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Visa endast favoriter"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historik"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Alla"</string>
@@ -147,19 +148,17 @@
     <string name="tab_speed_dial" msgid="7807567599021643864">"Snabbval"</string>
     <string name="tab_recents" msgid="929949073851377206">"Senaste"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontakter"</string>
-    <string name="show_all_contacts_title" msgid="8395378484578221791">"Alla kontakter"</string>
-    <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Alla kontakter"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Borttagen från favoriter"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Ångra"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Ring <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Lägg till i Kontakter"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Visa hela samtalshistoriken"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nya missade samtal"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Dina favoriter och kontakterna du\nofta ringer till visas här.\nSå det är bara att börja ringa."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"Med kortnummer ringer du med en enda knapptryckning\ntill favoritkontakter och nummer\n som du ringer till ofta."</string>
+    <string name="all_contacts_empty" msgid="4536082452651392894">"Du har inga kontakter."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Tryck på bilden om du vill visa alla nummer eller tryck länge om du vill flytta den"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Avvisa"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Ta bort"</string>
-    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Snabbval"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ALLA KONTAKTER"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"RING UPP"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"LYSSNA"</string>
@@ -171,6 +170,14 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Lyssna på ett röstmeddelande från <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Samtalsinformation för <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Posten i samtalsloggen har tagits bort."</string>
+    <string name="call_log_header_today" msgid="3225248682434212981">"I dag"</string>
+    <string name="call_log_header_yesterday" msgid="9139172458834033092">"I går"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Förra veckan"</string>
-    <string name="call_log_header_other" msgid="8209775016508312763">"Övrigt"</string>
+    <string name="call_log_header_other" msgid="5769921959940709084">"Äldre"</string>
+    <string name="call_detail_list_header" msgid="866455969433213220">"Samtalslista"</string>
+    <string name="voicemail_speaker_on" msgid="209154030283487068">"Slå på högtalaren."</string>
+    <string name="voicemail_speaker_off" msgid="7390530056413093958">"Stäng av högtalaren."</string>
+    <string name="voicemail_play_faster" msgid="3444751008615323006">"Spela upp snabbare."</string>
+    <string name="voicemail_play_slower" msgid="4544796503902818832">"Spela upp långsammare."</string>
+    <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Starta eller pausa uppspelning."</string>
 </resources>

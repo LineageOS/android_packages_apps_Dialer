@@ -29,7 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Vymazať záznam hovorov"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Odstrániť hlasovú správu"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Zdieľať hlasovú správu"</string>
-    <string name="recentCalls_empty" msgid="247053222448663107">"Záznam hovorov je prázdny."</string>
+    <string name="recentCalls_empty" msgid="7711926651216108723">"Váš denník hovorov je prázdny."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Vymazať hovory?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Všetky záznamy o hovoroch budú odstránené."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Vymazávanie denníka hovorov..."</string>
@@ -90,6 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Pridať kontakt"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Pridať dvojsekundovú pauzu"</string>
     <string name="add_wait" msgid="3360818652790319634">"Pridať čakanie"</string>
+    <string name="menu_select_sim" msgid="3603578201960504010">"Vybrať SIM kartu"</string>
     <string name="call_settings" msgid="7666474782093693667">"Nastavenia"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nový kontakt"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Všetky kontakty"</string>
@@ -137,8 +138,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Nie je možné volať, pretože aplikácia Telefón bola deaktivovaná."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Nie je nainštalovaná žiadna aplikácia na spracovanie vybranej akcie."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Zadajte meno alebo tel. číslo"</string>
-    <string name="recentMissed_empty" msgid="5427113551557296665">"Žiadne nedávne zmeškané hovory."</string>
-    <string name="recentVoicemails_empty" msgid="5163114119598014048">"Žiadne nedávne hlasové správy."</string>
+    <string name="recentMissed_empty" msgid="4177320482947526015">"Nemáte žiadne nové zmeškané hovory."</string>
+    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Nemáte žiadne nové hlasové schránky."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Zobraziť iba obľúbené"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"História"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Všetky"</string>
@@ -147,19 +148,17 @@
     <string name="tab_speed_dial" msgid="7807567599021643864">"Rýchla voľba"</string>
     <string name="tab_recents" msgid="929949073851377206">"Nedávne"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontakty"</string>
-    <string name="show_all_contacts_title" msgid="8395378484578221791">"Všetky kontakty"</string>
-    <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Všetky kontakty"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Odstránené z obľúbených"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Späť"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Volať na číslo <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Pridať do kontaktov"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Zobraziť úplnú históriu hovorov"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Počet nových zmeškaných hovorov: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Obľúbení ľudia a kontakty,\nktorým často voláte, sa zobrazia tu.\nZačnite teda volať."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"Rýchla voľba je funkcia umožňujúca jedným klepnutím vytočiť \nobľúbené kontakty a čísla\n, na ktoré často voláte."</string>
+    <string name="all_contacts_empty" msgid="4536082452651392894">"Nemáte žiadne kontakty."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Klepnutím na obrázok zobrazíte všetky čísla a pridržaním ich zoradíte"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Zatvoriť"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Odstrániť"</string>
-    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Rýchla voľba"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"VŠETKY KONTAKTY"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ZAVOLAŤ SPÄŤ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"POČÚVAŤ"</string>
@@ -171,6 +170,14 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Vypočuť si správu v hlasovej schránke od používateľa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Podrobnosti hovoru pre kontakt <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Záznam v denníku hovorov bol odstránený."</string>
+    <string name="call_log_header_today" msgid="3225248682434212981">"Dnes"</string>
+    <string name="call_log_header_yesterday" msgid="9139172458834033092">"Včera"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Posledný týždeň"</string>
-    <string name="call_log_header_other" msgid="8209775016508312763">"Iné"</string>
+    <string name="call_log_header_other" msgid="5769921959940709084">"Staršie"</string>
+    <string name="call_detail_list_header" msgid="866455969433213220">"Zoznam hovorov"</string>
+    <string name="voicemail_speaker_on" msgid="209154030283487068">"Zapnúť reproduktor"</string>
+    <string name="voicemail_speaker_off" msgid="7390530056413093958">"Vypnúť reproduktor"</string>
+    <string name="voicemail_play_faster" msgid="3444751008615323006">"Prehrať rýchlejšie"</string>
+    <string name="voicemail_play_slower" msgid="4544796503902818832">"Prehrať pomalšie"</string>
+    <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Spustiť alebo pozastaviť prehrávanie"</string>
 </resources>

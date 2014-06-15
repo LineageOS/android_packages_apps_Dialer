@@ -29,7 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Hapus log panggilan"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Hapus pesan suara"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Bagikan kotak pesan"</string>
-    <string name="recentCalls_empty" msgid="247053222448663107">"Log panggilan kosong."</string>
+    <string name="recentCalls_empty" msgid="7711926651216108723">"Log panggilan Anda kosong."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Hapus log panggilan?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Semua catatan panggilan Anda akan dihapus."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Menghapus log panggilan..."</string>
@@ -90,6 +90,8 @@
     <string name="add_contact" msgid="8875804371377471164">"Tambahkan kontak"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Tambahkan jeda 2 dtk"</string>
     <string name="add_wait" msgid="3360818652790319634">"Tambahkan tunggu"</string>
+    <!-- no translation found for menu_select_sim (3603578201960504010) -->
+    <skip />
     <string name="call_settings" msgid="7666474782093693667">"Setelan"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Kontak baru"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Semua kontak"</string>
@@ -137,8 +139,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Tidak dapat melakukan panggilan telepon karena aplikasi Telepon telah dinonaktifkan."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Tidak ada aktivitas terpasang yang tersedia untuk menangani tindakan yang dipilih."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Ketikkan nama/nomor ponsel"</string>
-    <string name="recentMissed_empty" msgid="5427113551557296665">"Tidak ada panggilan tak terjawab terbaru."</string>
-    <string name="recentVoicemails_empty" msgid="5163114119598014048">"Tidak ada pesan suara terbaru."</string>
+    <string name="recentMissed_empty" msgid="4177320482947526015">"Tidak ada panggilan tidak terjawab baru-baru ini."</string>
+    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Tidak ada kotak pesan baru-baru ini."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Hanya tampilkan favorit"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Riwayat"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Semua"</string>
@@ -147,19 +149,17 @@
     <string name="tab_speed_dial" msgid="7807567599021643864">"Panggilan Cepat"</string>
     <string name="tab_recents" msgid="929949073851377206">"Terbaru"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontak"</string>
-    <string name="show_all_contacts_title" msgid="8395378484578221791">"Semua kontak"</string>
-    <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Semua kontak"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Dihapus dari favorit"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Batalkan"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Telepon <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Tambahkan ke kontak"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Lihat riwayat panggilan telepon lengkap"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> panggilan tidak terjawab baru"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Favorit &amp; kontak yang\nsering Anda hubungi akan muncul di sini.\nJadi, mulailah menelepon."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"Panggilan cepat adalah satu sentuhan guna menelepon\nfavorit dan nomor\n yang sering Anda telepon."</string>
+    <string name="all_contacts_empty" msgid="4536082452651392894">"Anda tidak memiliki kontak."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Ketuk gambar untuk melihat semua nomor atau tekan terus untuk mengatur ulang"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Tutup"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Hapus"</string>
-    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Panggilan Cepat"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"SEMUA KONTAK"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"HUBUNGI KEMBALI"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"DENGAR"</string>
@@ -171,6 +171,15 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Dengarkan kotak pesan dari <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detail panggilan telepon untuk <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Entri log panggilan telepon dihapus."</string>
+    <string name="call_log_header_today" msgid="3225248682434212981">"Hari ini"</string>
+    <string name="call_log_header_yesterday" msgid="9139172458834033092">"Kemarin"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Minggu lalu"</string>
-    <string name="call_log_header_other" msgid="8209775016508312763">"Lainnya"</string>
+    <!-- no translation found for call_log_header_other (5769921959940709084) -->
+    <skip />
+    <string name="call_detail_list_header" msgid="866455969433213220">"Daftar Panggilan"</string>
+    <string name="voicemail_speaker_on" msgid="209154030283487068">"Aktifkan pengeras suara."</string>
+    <string name="voicemail_speaker_off" msgid="7390530056413093958">"Nonaktifkan pengeras suara."</string>
+    <string name="voicemail_play_faster" msgid="3444751008615323006">"Putar lebih cepat."</string>
+    <string name="voicemail_play_slower" msgid="4544796503902818832">"Putar lebih lambat."</string>
+    <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Mulai atau jeda pemutaran."</string>
 </resources>

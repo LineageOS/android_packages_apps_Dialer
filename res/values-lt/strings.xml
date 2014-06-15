@@ -29,7 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Išvalyti skambučių žurnalą"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ištrinti balso pašto pran."</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Bendrinti balso paštą"</string>
-    <string name="recentCalls_empty" msgid="247053222448663107">"Skambučių žurnalas tuščias."</string>
+    <string name="recentCalls_empty" msgid="7711926651216108723">"Skambučių žurnalas yra tuščias."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Išv. skamb. žurnalą?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Visi jūsų skambučių įrašai bus ištrinti."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Valomas skambučių žurnalas…"</string>
@@ -90,6 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Pridėti kontaktą"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Pridėti 2 sek. pauzę"</string>
     <string name="add_wait" msgid="3360818652790319634">"Pridėti laukimą"</string>
+    <string name="menu_select_sim" msgid="3603578201960504010">"Pasirinkti SIM kortelę"</string>
     <string name="call_settings" msgid="7666474782093693667">"Nustatymai"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Naujas adresatas"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Visi kontaktai"</string>
@@ -137,8 +138,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Negalima skambinti telefonu, nes Telefono programa išjungta."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Nepasiekiama jokia įdiegta veikla pasirinktam veiksmui atlikti."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Įveskite vardą arba tel. nr."</string>
-    <string name="recentMissed_empty" msgid="5427113551557296665">"Nėra neseniai praleistų skambučių."</string>
-    <string name="recentVoicemails_empty" msgid="5163114119598014048">"Nėra neseniai gauto balso pašto."</string>
+    <string name="recentMissed_empty" msgid="4177320482947526015">"Nėra neseniai praleistų skambučių."</string>
+    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Nėra neseniai gautų balso pašto pranešimų."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Rodyti tik mėgstamiausius"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Istorija"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Visi"</string>
@@ -147,19 +148,17 @@
     <string name="tab_speed_dial" msgid="7807567599021643864">"Spartusis rinkimas"</string>
     <string name="tab_recents" msgid="929949073851377206">"Naujausi"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontaktai"</string>
-    <string name="show_all_contacts_title" msgid="8395378484578221791">"Visi kontaktai"</string>
-    <string name="show_all_contacts_button_text" msgid="8057452310403090131">"Visi kontaktai"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Pašalintas iš adresyno"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Anuliuoti"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Skambinti numeriu <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Pridėti prie kontaktų"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Visos skambučių istorijos peržiūra"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Naujų praleistų skambučių: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"Mėgstamiausieji ir kontaktai,\nkuriems dažnai skambinate, bus rodomi čia.\nTad pradėkite skambinti."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"Greitasis numerio rinkimas yra numerio rinkimas vienu palietimu. Jis naudojamas skambinant \nį mėgstamiausių sąrašą įtrauktiems asmenims ir numeriais\n, kuriais dažnai skambinate."</string>
+    <string name="all_contacts_empty" msgid="4536082452651392894">"Nėra kontaktų."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Palieskite vaizdą, kad pamatytumėte visus skaičius, arba paspauskite ir palaikykite, kad pakeistumėte tvarką"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Atsisakyti"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Pašalinti"</string>
-    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"Spartusis rinkimas"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"VISI KONTAKTAI"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ATSKAMBINTI"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"KLAUSYTI"</string>
@@ -171,6 +170,14 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Klausyti balso pašto nuo <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Išsami skambučio informacija (<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>)"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Skambučių žurnalo įrašas ištrintas."</string>
+    <string name="call_log_header_today" msgid="3225248682434212981">"Šiandien"</string>
+    <string name="call_log_header_yesterday" msgid="9139172458834033092">"Vakar"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Paskutinė savaitė"</string>
-    <string name="call_log_header_other" msgid="8209775016508312763">"Kita"</string>
+    <string name="call_log_header_other" msgid="5769921959940709084">"Senesni"</string>
+    <string name="call_detail_list_header" msgid="866455969433213220">"Skambučių sąrašas"</string>
+    <string name="voicemail_speaker_on" msgid="209154030283487068">"Įjungti garsiakalbį."</string>
+    <string name="voicemail_speaker_off" msgid="7390530056413093958">"Išjungti garsiakalbį."</string>
+    <string name="voicemail_play_faster" msgid="3444751008615323006">"Leisti greičiau."</string>
+    <string name="voicemail_play_slower" msgid="4544796503902818832">"Leisti lėčiau."</string>
+    <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Pradėti arba pristabdyti atkūrimą."</string>
 </resources>
