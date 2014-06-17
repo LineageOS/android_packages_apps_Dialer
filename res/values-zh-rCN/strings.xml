@@ -29,8 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"清除通话记录"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"删除语音邮件"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"分享语音邮件"</string>
-    <!-- no translation found for recentCalls_empty (7711926651216108723) -->
-    <skip />
+    <string name="recentCalls_empty" msgid="7711926651216108723">"您没有通话记录。"</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"要清除通话记录吗？"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"系统将删除您的所有通话记录。"</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"正在清除通话记录..."</string>
@@ -140,10 +139,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"“电话”应用已被停用，因此无法拨打电话。"</string>
     <string name="activity_not_available" msgid="8265265380537872585">"没有任何已安装的应用可以处理所选操作。"</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"输入姓名或手机号"</string>
-    <!-- no translation found for recentMissed_empty (4177320482947526015) -->
-    <skip />
-    <!-- no translation found for recentVoicemails_empty (4905583746647459963) -->
-    <skip />
+    <string name="recentMissed_empty" msgid="4177320482947526015">"您最近没有未接电话。"</string>
+    <string name="recentVoicemails_empty" msgid="4905583746647459963">"您最近没有语音邮件。"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"仅显示收藏的联系人"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"通话记录"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
@@ -158,10 +155,8 @@
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"添加到通讯录"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"查看全部通话记录"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>个新的未接电话"</string>
-    <!-- no translation found for speed_dial_empty (5476435149276295630) -->
-    <skip />
-    <!-- no translation found for all_contacts_empty (4536082452651392894) -->
-    <skip />
+    <string name="speed_dial_empty" msgid="5476435149276295630">"使用快速拨号功能，只需触摸一下即可拨打\n收藏联系人的电话号码\n以及经常拨打的电话号码。"</string>
+    <string name="all_contacts_empty" msgid="4536082452651392894">"您没有联系人。"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"点按图片可查看所有号码，按住图片可重新排序"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"关闭"</string>
     <string name="remove_contact" msgid="1080555335283662961">"移除"</string>
