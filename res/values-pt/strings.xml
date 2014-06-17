@@ -29,8 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Limpar registro de chamadas"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Excluir correio de voz"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Compartilhar correio de voz"</string>
-    <!-- no translation found for recentCalls_empty (7711926651216108723) -->
-    <skip />
+    <string name="recentCalls_empty" msgid="7711926651216108723">"Seu registo de chamadas está vazio."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Limpar registro de chamadas?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Todos os registros de chamada serão eliminados."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Limpando o registro de chamadas..."</string>
@@ -91,8 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Adicionar contato"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Adicionar pausa de 2 segundos"</string>
     <string name="add_wait" msgid="3360818652790319634">"Adicionar espera"</string>
-    <!-- no translation found for menu_select_sim (3603578201960504010) -->
-    <skip />
+    <string name="menu_select_sim" msgid="3603578201960504010">"Selecionar cartão SIM"</string>
     <string name="call_settings" msgid="7666474782093693667">"Configurações"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Novo contato"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Todos os contatos"</string>
@@ -140,10 +138,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Não é possível fazer uma chamada porque o aplicativo Telefone foi desativado."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Nenhuma atividade instalada disponível para a ação selecionada."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Digite um nome ou telefone"</string>
-    <!-- no translation found for recentMissed_empty (4177320482947526015) -->
-    <skip />
-    <!-- no translation found for recentVoicemails_empty (4905583746647459963) -->
-    <skip />
+    <string name="recentMissed_empty" msgid="4177320482947526015">"Você não tem chamadas perdidas recentes."</string>
+    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Você não tem correios de voz recentes."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostrar somente favoritos"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Histórico"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Tudo"</string>
@@ -158,10 +154,8 @@
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Adicionar aos contatos"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Ver todo o histórico de chamadas"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> novas chamadas perdidas"</string>
-    <!-- no translation found for speed_dial_empty (5476435149276295630) -->
-    <skip />
-    <!-- no translation found for all_contacts_empty (4536082452651392894) -->
-    <skip />
+    <string name="speed_dial_empty" msgid="5476435149276295630">"A discagem rápida é uma discagem por um toque\npara favoritos e números\naos quais você liga com frequência."</string>
+    <string name="all_contacts_empty" msgid="4536082452651392894">"Você não tem contatos."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Toque na imagem para ver todos os números ou pressione e segure para reordenar"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Descartar"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Remover"</string>
@@ -179,8 +173,7 @@
     <string name="call_log_header_today" msgid="3225248682434212981">"Hoje"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Ontem"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Última semana"</string>
-    <!-- no translation found for call_log_header_other (5769921959940709084) -->
-    <skip />
+    <string name="call_log_header_other" msgid="5769921959940709084">"Antiga"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"Lista de chamadas"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"Ative o alto-falante."</string>
     <string name="voicemail_speaker_off" msgid="7390530056413093958">"Desative o alto-falante."</string>

@@ -90,8 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Magdagdag ng contact"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Magdagdag ng pag-pause na 2-seg"</string>
     <string name="add_wait" msgid="3360818652790319634">"Magdagdag ng paghihintay"</string>
-    <!-- no translation found for menu_select_sim (3603578201960504010) -->
-    <skip />
+    <string name="menu_select_sim" msgid="3603578201960504010">"Pumili ng SIM card"</string>
     <string name="call_settings" msgid="7666474782093693667">"Mga Setting"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Bagong contact"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Lahat ng contact"</string>
@@ -174,8 +173,7 @@
     <string name="call_log_header_today" msgid="3225248682434212981">"Ngayon"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Kahapon"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Nakaraang linggo"</string>
-    <!-- no translation found for call_log_header_other (5769921959940709084) -->
-    <skip />
+    <string name="call_log_header_other" msgid="5769921959940709084">"Mas Luma"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"Listahan ng Tawag"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"I-on ang speaker."</string>
     <string name="voicemail_speaker_off" msgid="7390530056413093958">"I-off ang speaker."</string>
