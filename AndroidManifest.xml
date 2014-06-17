@@ -72,7 +72,7 @@
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
             android:icon="@mipmap/ic_launcher_phone"
-            android:screenOrientation="portrait"
+            android:screenOrientation="sensor"
             android:enabled="@*android:bool/config_voice_capable"
             android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
             <intent-filter>
@@ -127,7 +127,7 @@
         <activity android:name="com.android.dialer.calllog.CallLogActivity"
             android:label="@string/call_log_activity_title"
             android:theme="@style/DialtactsThemeWithoutActionBarOverlay"
-            android:screenOrientation="portrait"
+            android:screenOrientation="sensor"
             android:icon="@mipmap/ic_launcher_phone">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -140,7 +140,7 @@
         <activity android:name="com.android.dialer.CallDetailActivity"
                   android:label="@string/callDetailTitle"
                   android:theme="@style/CallDetailActivityTheme"
-                  android:screenOrientation="portrait"
+                  android:screenOrientation="sensor"
                   android:icon="@mipmap/ic_launcher_phone"
                   android:parentActivityName="com.android.dialer.calllog.CallLogActivity"
             >
@@ -265,7 +265,7 @@
                   android:label="@string/phoneAppLabel"
                   android:excludeFromRecents="true"
                   android:launchMode="singleInstance"
-                  android:screenOrientation="nosensor"
+                  android:screenOrientation="sensor"
                   android:configChanges="keyboardHidden"
                   android:exported="false"
                   android:process="com.android.incallui">
