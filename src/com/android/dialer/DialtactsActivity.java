@@ -59,7 +59,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.contacts.common.CallUtil;
@@ -69,7 +68,6 @@ import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.dialog.SelectSIMDialogFragment;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
-import com.android.contacts.common.util.ViewUtil;
 import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.dialer.calllog.CallLogActivity;
 import com.android.dialer.database.DialerDatabaseHelper;
@@ -964,7 +962,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onBackPressed() {
         if (mIsDialpadShown) {
-            if (TextUtils.isEmpty(mSearchQuery)) {
+            if (TextUtils.isEmpty(mSearchQuery) ||
+                    (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()
+                            && mSmartDialSearchFragment.getAdapter().getCount() == 0)) {
                 exitSearchUi();
             }
             hideDialpadFragment(true, false);
