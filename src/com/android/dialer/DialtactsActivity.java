@@ -573,6 +573,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             case R.id.overflow_menu: {
                 if (isDialpadShowing()) {
                     mDialpadOverflowMenu.show();
+                    mDialpadFragment.setupMenuItems(mDialpadOverflowMenu.getMenu());
                 } else {
                     mOverflowMenu.show();
                 }
