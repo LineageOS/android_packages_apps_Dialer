@@ -34,7 +34,7 @@
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM-grænsen er overskredet"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"Slå radio fra"</string>
     <string name="callFailed_simError" msgid="4476360200030635828">"Der er intet SIM-kort, eller der er SIM-kortfejl"</string>
-    <string name="callFailed_outOfService" msgid="4825791466557236225">"Området er uden for netværksdækning"</string>
+    <string name="callFailed_outOfService" msgid="4825791466557236225">"Uden for dækning"</string>
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"Udgående opkald er begrænset til angivne opkaldsnumre."</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Du kan ikke foretage udgående opkald, mens opkaldsspærring er slået til."</string>
     <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Alle opkald er begrænset af adgangskontrol."</string>
@@ -98,7 +98,7 @@
     <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Internetopkald"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Nødopkald"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Tænder for radio ..."</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Området er ude af drift. Prøver igen ..."</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Uden for dækning. Prøver igen ..."</string>
     <string name="dial_emergency_error" msgid="7969515493359619960">"Opkaldet blev ikke sendt. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> er ikke et nødnummer."</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Opkaldet blev ikke sendt. Indtast et nødnummer."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Brug tastatur til at ringe op"</string>
