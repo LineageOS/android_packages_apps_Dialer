@@ -37,6 +37,7 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
+import android.telecomm.Subscription;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -62,10 +63,11 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.SubscriptionManager;
 import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.animation.AnimationListenerAdapter;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
-import com.android.contacts.common.dialog.SelectSIMDialogFragment;
+import com.android.contacts.common.dialog.SelectSubscriptionDialogFragment;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.widget.FloatingActionButtonController;
@@ -105,12 +107,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         OnDragDropListener,
         OnPhoneNumberPickerActionListener,
         PopupMenu.OnMenuItemClickListener,
-        SelectSIMDialogFragment.OnClickOkListener,
         ViewPager.OnPageChangeListener,
         ActionBarController.ActivityUi {
     private static final String TAG = "DialtactsActivity";
 
     public static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+
+    /** Temporary flag for disabling subscription selection menu */
+    public static final boolean ENABLE_SUBSCRIPTION_SELECT = false;
 
     public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
 
@@ -139,11 +143,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private static final String ACTION_TOUCH_DIALER = "com.android.phone.action.TOUCH_DIALER";
 
     private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
-
-    /**
-     * Constant to indicate there is only one service provider available.
-     */
-    private static final int NO_MULTI_SIM = -1;
 
     private FrameLayout parentLayout;
 
@@ -199,9 +198,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean mIsLandscape;
 
     /**
-     * Information about the currently selected SIM card.
+     * Information about the currently selected subscription.
      */
-    private int mCurrentSimCard = NO_MULTI_SIM;
+    private SubscriptionManager mSubscriptionManager = null;
 
     /**
      * The position of the currently selected tab in the attached {@link ListsFragment}.
@@ -369,7 +368,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mActionBarController = new ActionBarController(this,
                 (SearchEditTextLayout) actionBar.getCustomView());
 
-
         SearchEditTextLayout searchEditTextLayout =
                 (SearchEditTextLayout) actionBar.getCustomView();
         searchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
@@ -390,6 +388,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mIsLandscape = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
+
+        if (getTelephonyManager().getSubscriptions().size() > 1 && ENABLE_SUBSCRIPTION_SELECT) {
+            mSubscriptionManager = new SubscriptionManager(getTelephonyManager());
+        }
+
         final View floatingActionButtonContainer = findViewById(
                 R.id.floating_action_button_container);
         mFloatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
@@ -597,19 +600,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             case R.id.menu_call_settings:
                 handleMenuSettings();
                 return true;
-            case R.id.menu_select_sim:
-                SelectSIMDialogFragment.show(getFragmentManager(), mCurrentSimCard);
+            case R.id.menu_select_subscription:
+                SelectSubscriptionDialogFragment.show(getFragmentManager(), mSubscriptionManager);
                 return true;
         }
         return false;
-    }
-
-    @Override
-    public void passSimUpdate(int simId) {
-        mCurrentSimCard = simId;
-        if (mIsDialpadShown) {
-            mDialpadFragment.setSimCard(simId);
-        }
     }
 
     @Override
@@ -642,7 +637,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         mIsDialpadShown = true;
         mDialpadFragment.setAnimate(animate);
-        mDialpadFragment.setSimCard(mCurrentSimCard);
+        mDialpadFragment.setSubscriptionManager(mSubscriptionManager);
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.show(mDialpadFragment);
@@ -780,8 +775,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final OptionsPopupMenu popupMenu = new OptionsPopupMenu(this, invoker);
         popupMenu.inflate(R.menu.dialtacts_options);
         final Menu menu = popupMenu.getMenu();
-        final MenuItem selectSim = menu.findItem(R.id.menu_select_sim);
-        selectSim.setVisible(mCurrentSimCard != NO_MULTI_SIM);
+        final MenuItem selectSubscription = menu.findItem(R.id.menu_select_subscription);
+        selectSubscription.setVisible(mSubscriptionManager != null);
         popupMenu.setOnMenuItemClickListener(this);
         return popupMenu;
     }
