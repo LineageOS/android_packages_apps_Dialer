@@ -294,9 +294,12 @@
     <!-- Title displayed above settings coming after voicemail in the call features screen -->
     <string name="other_settings">Other call settings</string>
 
-    <!-- Title displayed in the overlay when a call is placed using a 3rd party provider.
+    <!-- Title displayed in the overlay for outgoing calls which include the name of the provider.
          [CHAR LIMIT=40] -->
     <string name="calling_via_template">Calling via <xliff:g id="provider_name">%s</xliff:g></string>
+    <!-- Title displayed in the overlay for incoming calls which include the name of the provider.
+         [CHAR LIMIT=40] -->
+    <string name="incoming_via_template">Incoming via <xliff:g id="provider_name">%s</xliff:g></string>
 
     <!-- Use this as a default to describe the contact photo; currently for screen readers through accessibility. -->
     <string name="contactPhoto">contact photo</string>
@@ -496,6 +499,9 @@
     <string name="emergency_call_dialog_number_for_display">Emergency number</string>
 
     <string name="in_call_wifi_connected">Connected via <xliff:g id="wifi_ssid">%s</xliff:g></string>
+
+    <!-- Filler string to display as the provider in WiFi calling cases -->
+    <string name="wifi_constant">WiFi</string>
 
     <!-- The digit to be displayed on the 0 key of the dialpad [CHAR LIMIT=1]-->
     <string name="dialpad_0_number">0</string>

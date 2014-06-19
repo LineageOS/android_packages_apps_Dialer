@@ -63,6 +63,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mPhoneNumber;
     private TextView mNumberLabel;
     private TextView mPrimaryName;
+    private ImageView mCallStateIcon;
     private TextView mCallStateLabel;
     private TextView mCallTypeLabel;
     private View mCallNumberAndLabel;
@@ -78,6 +79,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     // Secondary caller info
     private View mSecondaryCallInfo;
     private TextView mSecondaryCallName;
+    private View mSecondaryCallProviderInfo;
+    private TextView mSecondaryCallProviderLabel;
+    private ImageView mSecondaryCallProviderIcon;
 
     private FloatingActionButtonController mFloatingActionButtonController;
     private View mFloatingActionButtonContainer;
@@ -145,7 +149,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mPrimaryName = (TextView) view.findViewById(R.id.name);
         mNumberLabel = (TextView) view.findViewById(R.id.label);
         mSecondaryCallInfo = (View) view.findViewById(R.id.secondary_call_info);
+        mSecondaryCallProviderInfo = (View) view.findViewById(R.id.secondary_call_provider_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
+        mCallStateIcon = (ImageView) view.findViewById(R.id.callStateIcon);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mCallNumberAndLabel = view.findViewById(R.id.labelAndNumber);
         mCallTypeLabel = (TextView) view.findViewById(R.id.callTypeLabel);
@@ -292,7 +298,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-            boolean isConference, boolean isGeneric) {
+            String providerLabel, Drawable providerIcon, boolean isConference, boolean isGeneric) {
 
         if (show) {
             if (isConference) {
@@ -300,8 +306,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 nameIsNumber = false;
             }
 
-            showAndInitializeSecondaryCallInfo();
+            boolean hasProvider = !TextUtils.isEmpty(providerLabel);
+            showAndInitializeSecondaryCallInfo(hasProvider);
+
             mSecondaryCallName.setText(name);
+            if (hasProvider) {
+                mSecondaryCallProviderLabel.setText(providerLabel);
+                mSecondaryCallProviderIcon.setImageDrawable(providerIcon);
+            }
 
             int nameDirection = View.TEXT_DIRECTION_INHERIT;
             if (nameIsNumber) {
@@ -314,31 +326,40 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setCallState(int state, int cause, boolean bluetoothOn, String gatewayLabel,
-            String gatewayNumber, boolean isWiFi, boolean isHandoffCapable,
+    public void setCallState(int state, int cause, boolean bluetoothOn, String connectionLabel,
+            Drawable connectionIcon, String gatewayNumber, boolean isWiFi, boolean isHandoffCapable,
             boolean isHandoffPending) {
         String callStateLabel = null;
 
-        if (Call.State.isDialing(state) && !TextUtils.isEmpty(gatewayLabel)) {
-            // Provider info: (e.g. "Calling via <gatewayLabel>")
-            callStateLabel = gatewayLabel;
-        } else {
-            callStateLabel = getCallStateLabelFromState(state, cause);
-        }
+        boolean isGatewayCall = !TextUtils.isEmpty(gatewayNumber);
+        callStateLabel = getCallStateLabelFromState(state, cause, connectionLabel, isWiFi,
+                isGatewayCall);
 
         Log.v(this, "setCallState " + callStateLabel);
         Log.v(this, "DisconnectCause " + DisconnectCause.toString(cause));
         Log.v(this, "bluetooth on " + bluetoothOn);
-        Log.v(this, "gateway " + gatewayLabel + gatewayNumber);
+        Log.v(this, "gateway " + connectionLabel + gatewayNumber);
         Log.v(this, "isWiFi " + isWiFi);
         Log.v(this, "isHandoffCapable " + isHandoffCapable);
         Log.v(this, "isHandoffPending " + isHandoffPending);
 
-        // Update the call state label.
+        // Update the call state label and icon.
         if (!TextUtils.isEmpty(callStateLabel)) {
             mCallStateLabel.setText(callStateLabel);
+            mCallStateLabel.setAlpha(1);
             mCallStateLabel.setVisibility(View.VISIBLE);
-            if (state != Call.State.CONFERENCED) {
+
+            if (connectionIcon == null) {
+                mCallStateIcon.setVisibility(View.GONE);
+            } else {
+                mCallStateIcon.setVisibility(View.VISIBLE);
+                mCallStateIcon.setImageDrawable(connectionIcon);
+            }
+
+            if (state == Call.State.ACTIVE || state == Call.State.CONFERENCED) {
+                mCallStateLabel.clearAnimation();
+            } else {
+                //TODO: add WiFi animation
                 mCallStateLabel.startAnimation(mPulseAnimation);
             }
         } else {
@@ -430,43 +451,68 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     /**
      * Gets the call state label based on the state of the call and
      * cause of disconnect
+     *
+     * Additional labels are applied as follows:
+     *         1. All outgoing calls with display "Calling via [Provider]"
+     *         2. Ongoing calls will display the name of the provider or wifi connection
+     *         2. Incoming calls will only display "Incoming via..." for subscriptions
      */
-    private String getCallStateLabelFromState(int state, int cause) {
+    private String getCallStateLabelFromState(int state, int cause, String label, boolean isWiFi,
+            boolean isGatewayCall) {
         final Context context = getView().getContext();
         String callStateLabel = null;  // Label to display as part of the call banner
 
-        if (Call.State.IDLE == state) {
-            // "Call state" is meaningless in this state.
+        boolean isSpecialCall = label != null;
+        boolean isSubscriptionOrWifi = isSpecialCall && !isGatewayCall;
+        boolean isSubscriptionOnly = isSubscriptionOrWifi && !isWiFi;
 
-        } else if (Call.State.ACTIVE == state) {
-            // We normally don't show a "call state label" at all in
-            // this state (but see below for some special cases).
-
-        } else if (Call.State.ONHOLD == state) {
-            callStateLabel = context.getString(R.string.card_title_on_hold);
-        } else if (Call.State.DIALING == state) {
-            callStateLabel = context.getString(R.string.card_title_dialing);
-        } else if (Call.State.REDIALING == state) {
-            callStateLabel = context.getString(R.string.card_title_redialing);
-        } else if (Call.State.INCOMING == state || Call.State.CALL_WAITING == state) {
-            callStateLabel = context.getString(R.string.card_title_incoming_call);
-
-        } else if (Call.State.DISCONNECTING == state) {
-            // While in the DISCONNECTING state we display a "Hanging up"
-            // message in order to make the UI feel more responsive.  (In
-            // GSM it's normal to see a delay of a couple of seconds while
-            // negotiating the disconnect with the network, so the "Hanging
-            // up" state at least lets the user know that we're doing
-            // something.  This state is currently not used with CDMA.)
-            callStateLabel = context.getString(R.string.card_title_hanging_up);
-
-        } else if (Call.State.DISCONNECTED == state) {
-            callStateLabel = getCallFailedString(cause);
-
-        } else {
-            Log.wtf(this, "updateCallStateWidgets: unexpected call: " + state);
+        switch  (state) {
+            case Call.State.IDLE:
+                // "Call state" is meaningless in this state.
+                break;
+            case Call.State.ACTIVE:
+                // We normally don't show a "call state label" at all in this state
+                // (but we can use the call state label to display the provider name).
+                if (isSubscriptionOrWifi) {
+                    callStateLabel = label;
+                }
+                break;
+            case Call.State.ONHOLD:
+                callStateLabel = context.getString(R.string.card_title_on_hold);
+                break;
+            case Call.State.DIALING:
+                if (isSpecialCall) {
+                    callStateLabel = context.getString(R.string.calling_via_template, label);
+                } else {
+                    callStateLabel = context.getString(R.string.card_title_dialing);
+                }
+                break;
+            case Call.State.REDIALING:
+                callStateLabel = context.getString(R.string.card_title_redialing);
+                break;
+            case Call.State.INCOMING:
+            case Call.State.CALL_WAITING:
+                if (isSubscriptionOnly) {
+                    callStateLabel = context.getString(R.string.incoming_via_template, label);
+                } else {
+                    callStateLabel = context.getString(R.string.card_title_incoming_call);
+                }
+                break;
+            case Call.State.DISCONNECTING:
+                // While in the DISCONNECTING state we display a "Hanging up"
+                // message in order to make the UI feel more responsive.  (In
+                // GSM it's normal to see a delay of a couple of seconds while
+                // negotiating the disconnect with the network, so the "Hanging
+                // up" state at least lets the user know that we're doing
+                // something.  This state is currently not used with CDMA.)
+                callStateLabel = context.getString(R.string.card_title_hanging_up);
+                break;
+            case Call.State.DISCONNECTED:
+                callStateLabel = getCallFailedString(cause);
+                break;
+            default:
+                Log.wtf(this, "updateCallStateWidgets: unexpected call: " + state);
         }
-
         return callStateLabel;
     }
 
@@ -548,13 +594,20 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         return this.getView().getContext().getString(resID);
     }
 
-    private void showAndInitializeSecondaryCallInfo() {
+    private void showAndInitializeSecondaryCallInfo(boolean hasProvider) {
         mSecondaryCallInfo.setVisibility(View.VISIBLE);
 
-        // mSecondaryCallName is initialized here (vs. onViewCreated) because it is inaccesible
+        // mSecondaryCallName is initialized here (vs. onViewCreated) because it is inaccessible
         // until mSecondaryCallInfo is inflated in the call above.
         if (mSecondaryCallName == null) {
             mSecondaryCallName = (TextView) getView().findViewById(R.id.secondaryCallName);
+            if (hasProvider) {
+                mSecondaryCallProviderInfo.setVisibility(View.VISIBLE);
+                mSecondaryCallProviderLabel = (TextView) getView()
+                        .findViewById(R.id.secondaryCallProviderLabel);
+                mSecondaryCallProviderIcon = (ImageView) getView()
+                        .findViewById(R.id.secondaryCallProviderIcon);
+            }
         }
         mSecondaryCallInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -575,6 +628,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         dispatchPopulateAccessibilityEvent(event, mPhoneNumber);
         dispatchPopulateAccessibilityEvent(event, mCallTypeLabel);
         dispatchPopulateAccessibilityEvent(event, mSecondaryCallName);
+        dispatchPopulateAccessibilityEvent(event, mSecondaryCallProviderLabel);
 
         return;
     }

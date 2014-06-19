@@ -21,6 +21,7 @@ import android.telecomm.CallCapabilities;
 import android.telecomm.CallNumberPresentation;
 import android.telecomm.CallServiceDescriptor;
 import android.telecomm.GatewayInfo;
+import android.telecomm.Subscription;
 import android.telephony.DisconnectCause;
 
 import com.google.common.collect.ImmutableSortedSet;
@@ -106,6 +107,7 @@ public final class Call {
     private long mConnectTimeMillis = 0;
     private Uri mHandle;
     private GatewayInfo mGatewayInfo;
+    private Subscription mSubscription;
     private CallServiceDescriptor mCurrentCallServiceDescriptor;
     private CallServiceDescriptor mHandoffCallServiceDescriptor;
     private String mParentCallId;
@@ -212,6 +214,14 @@ public final class Call {
 
     public void setGatewayInfo(GatewayInfo gatewayInfo) {
         mGatewayInfo = gatewayInfo;
+    }
+
+    public Subscription getSubscription() {
+        return mSubscription;
+    }
+
+    public void setSubscription(Subscription subscription) {
+        mSubscription = subscription;
     }
 
     /** The descriptor for the call service currently routing this call. */
