@@ -20,8 +20,8 @@
         android:icon="@drawable/ic_menu_history_lt"
         android:title="@string/action_menu_call_history_description" />
     <item
-        android:id="@+id/menu_select_sim"
-        android:title="@string/menu_select_sim" />
+        android:id="@+id/menu_select_subscription"
+        android:title="@string/menu_select_subscription" />
     <item
         android:id="@+id/menu_import_export"
         android:title="@string/menu_import_export" />

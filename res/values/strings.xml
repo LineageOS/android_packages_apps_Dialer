@@ -327,7 +327,7 @@
     <string name="add_wait">Add wait</string>
 
     <!-- Menu item to select SIM card [CHAR LIMIT=30] -->
-    <string name="menu_select_sim">Select SIM card</string>
+    <string name="menu_select_subscription">Select Subscription</string>
 
     <!-- Menu item label for call settings [CHAR LIMIT=30] -->
     <string name="call_settings">Settings</string>
