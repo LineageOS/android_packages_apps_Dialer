@@ -43,9 +43,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.contacts.common.animation.AnimUtils;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.contacts.common.widget.FloatingActionButtonController;
+import com.android.phone.common.animation.AnimUtils;
 
 import java.util.List;
 
