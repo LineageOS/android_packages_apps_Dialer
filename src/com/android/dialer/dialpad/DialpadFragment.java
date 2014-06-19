@@ -73,8 +73,6 @@ import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.SubscriptionManager;
 import com.android.contacts.common.dialog.SelectSubscriptionDialogFragment;
-import com.android.contacts.common.dialpad.DialpadKeyButton;
-import com.android.contacts.common.dialpad.DialpadView;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.NeededForReflection;
@@ -84,6 +82,8 @@ import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.util.DialerUtils;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
+import com.android.phone.common.dialpad.DialpadKeyButton;
+import com.android.phone.common.dialpad.DialpadView;
 
 import com.google.common.annotations.VisibleForTesting;
 

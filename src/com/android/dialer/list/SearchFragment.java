@@ -26,7 +26,6 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 
-import com.android.contacts.common.animation.AnimUtils;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
@@ -35,6 +34,7 @@ import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
+import com.android.phone.common.animation.AnimUtils;
 
 public class SearchFragment extends PhoneNumberPickerFragment {
 
