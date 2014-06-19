@@ -65,7 +65,6 @@ import android.widget.Toast;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.SubscriptionManager;
 import com.android.contacts.common.activity.TransactionSafeActivity;
-import com.android.contacts.common.animation.AnimationListenerAdapter;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.dialog.SelectSubscriptionDialogFragment;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
@@ -91,6 +90,7 @@ import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
 import com.android.dialer.widget.SearchEditTextLayout.OnBackButtonClickedListener;
 import com.android.dialerbind.DatabaseHelperManager;
+import com.android.phone.common.animation.AnimationListenerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

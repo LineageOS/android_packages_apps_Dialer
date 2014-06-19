@@ -27,8 +27,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
-import com.android.contacts.common.animation.AnimUtils;
 import com.android.dialer.R;
+import com.android.phone.common.animation.AnimUtils;
 
 public class SearchEditTextLayout extends FrameLayout {
     private static final float EXPAND_MARGIN_FRACTION_START = 0.8f;
