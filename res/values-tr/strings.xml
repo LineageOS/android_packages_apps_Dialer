@@ -139,7 +139,7 @@
     <string name="activity_not_available" msgid="8265265380537872585">"Seçilen işlemi gerçekleştirmek için kullanılabilir yüklü etkinlik yok."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Ad veya telefon numarası yazın"</string>
     <string name="recentMissed_empty" msgid="4177320482947526015">"Yakın zamanda cevapsız çağrınız yok."</string>
-    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Yakın zamanda sesli mesajız yok."</string>
+    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Yakın zamanda sesli mesajınız yok."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Yalnızca favori kişileri göster"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Geçmiş"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Tümü"</string>

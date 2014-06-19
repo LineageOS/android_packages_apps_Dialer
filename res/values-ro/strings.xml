@@ -90,8 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Adăugați o persoană de contact"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Pauză 2 secunde"</string>
     <string name="add_wait" msgid="3360818652790319634">"Adăugaţi interval de aşteptare"</string>
-    <!-- no translation found for menu_select_sim (3603578201960504010) -->
-    <skip />
+    <string name="menu_select_sim" msgid="3603578201960504010">"Selectați cardul SIM"</string>
     <string name="call_settings" msgid="7666474782093693667">"Setări"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Persoană nouă în agendă"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Toată agenda"</string>
@@ -174,8 +173,7 @@
     <string name="call_log_header_today" msgid="3225248682434212981">"Astăzi"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Ieri"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Săptămâna trecută"</string>
-    <!-- no translation found for call_log_header_other (5769921959940709084) -->
-    <skip />
+    <string name="call_log_header_other" msgid="5769921959940709084">"Mai vechi"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"Lista de apeluri"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"Porniți difuzorul."</string>
     <string name="voicemail_speaker_off" msgid="7390530056413093958">"Opriți difuzorul."</string>
