@@ -20,7 +20,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -37,7 +36,6 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
-import android.provider.ContactsContract.PinnedPositions;
 import android.provider.ContactsContract.RawContacts;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +53,8 @@ import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
 import com.android.dialer.contact.ContactUpdateService;
+import com.android.dialer.util.DialerUtils;
+
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.ArrayList;
@@ -325,7 +325,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                 intent = CallUtil.getCallIntent(phoneNumber, callOrigin);
                 break;
         }
-        context.startActivity(intent);
+        DialerUtils.startActivityWithErrorToast(context, intent);
     }
 
     /**

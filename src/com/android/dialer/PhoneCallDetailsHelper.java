@@ -185,6 +185,7 @@ public class PhoneCallDetailsHelper {
     }
 
     /** Sets the text of the header view for the details page of a phone call. */
+    @NeededForTesting
     public void setCallDetailsHeader(TextView nameView, PhoneCallDetails details) {
         final CharSequence nameText;
         final CharSequence displayNumber =
