@@ -35,7 +35,7 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Toast;
 
-import com.android.phone.common.animation.AnimationListenerAdapter;
+import com.android.contacts.common.animation.AnimationListenerAdapter;
 import com.android.incallui.Call.State;
 
 /**
