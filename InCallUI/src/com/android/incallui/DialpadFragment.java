@@ -32,8 +32,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.phone.common.dialpad.DialpadKeyButton;
-import com.android.phone.common.dialpad.DialpadView;
+import com.android.contacts.common.dialpad.DialpadKeyButton;
+import com.android.contacts.common.dialpad.DialpadView;
 
 import java.util.HashMap;
 
