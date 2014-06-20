@@ -43,6 +43,7 @@ import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.ExpirableCache;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -304,7 +305,7 @@ public class CallLogAdapter extends GroupingListAdapter
             final Intent intent = intentProvider.getIntent(mContext);
             // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
             if (intent != null) {
-                mContext.startActivity(intent);
+                DialerUtils.startActivityWithErrorToast(mContext, intent);
             }
         }
     }

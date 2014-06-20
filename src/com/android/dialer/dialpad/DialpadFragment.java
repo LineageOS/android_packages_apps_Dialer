@@ -272,10 +272,7 @@ public class DialpadFragment extends Fragment
      * Return an Intent for launching voicemail screen.
      */
     private static Intent getVoicemailIntent() {
-        final Intent intent = new Intent(Intent.ACTION_CALL_PRIVILEGED,
-                Uri.fromParts("voicemail", "", null));
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return intent;
+        return CallUtil.getCallIntent(Uri.fromParts("voicemail", "", null));
     }
 
     private TelephonyManager getTelephonyManager() {
@@ -979,7 +976,7 @@ public class DialpadFragment extends Fragment
     }
 
     public void callVoicemail() {
-        startActivity(getVoicemailIntent());
+        DialerUtils.startActivityWithErrorToast(getActivity(), getVoicemailIntent());
         hideAndClearDialpad(false);
     }
 
@@ -1078,7 +1075,7 @@ public class DialpadFragment extends Fragment
                 final Intent intent = CallUtil.getCallIntent(number,
                         (getActivity() instanceof DialtactsActivity ?
                                 ((DialtactsActivity) getActivity()).getCallOrigin() : null));
-                startActivity(intent);
+                DialerUtils.startActivityWithErrorToast(getActivity(), intent);
                 hideAndClearDialpad(false);
             }
         }

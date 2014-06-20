@@ -86,6 +86,7 @@ import com.android.dialer.list.PhoneFavoriteSquareTileView;
 import com.android.dialer.list.RegularSearchFragment;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
 import com.android.dialer.widget.SearchEditTextLayout.OnBackButtonClickedListener;
@@ -1108,7 +1109,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onCallNumberDirectly(String phoneNumber) {
         Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin());
-        startActivity(intent);
+        DialerUtils.startActivityWithErrorToast(this, intent);
         mClearSearchOnPause = true;
     }
 
