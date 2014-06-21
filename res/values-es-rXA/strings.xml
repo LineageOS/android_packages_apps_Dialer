@@ -113,10 +113,20 @@
   <string name="description_add_contact">Amestar contautu</string>
   <string name="description_view_contact">Ver contautu <xliff:g id="NAME">%1$s</xliff:g></string>
   <string name="description_call">Llamar a <xliff:g id="NAME">%1$s</xliff:g></string>
+  <string name="description_contact_details">Detalles de contautu pa <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <string name="description_call_details">Detalles de la llamada</string>
+  <string name="description_new_voicemail">Mensaxe de voz nuevu.</string>
+  <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> llamaes.</string>
+  <string name="description_return_missed_call">Devolver llamada perdida de <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
+  <string name="description_return_answered_call">Devolver llamada contestada de <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
+  <string name="description_unknown_missed_call">Llamada perdida de <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
+  <string name="description_unknown_answered_call">Llamada contestada de <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
+  <string name="description_call_last_multiple">Llamada a <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g>.  Postrera llamada <xliff:g id="timeOfCall">%3$s</xliff:g>.</string>
+  <string name="description_call_last">Llamar a <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g>.  Cabera llamada <xliff:g id="timeOfCall">%3$s</xliff:g>.</string>
   <string name="description_send_text_message">Unviar mensaxe de testu a <xliff:g id="NAME">%1$s</xliff:g></string>
   <string name="description_call_log_unheard_voicemail">Mensaxe de voz ensin oyer</string>
+  <string name="description_clear_search">Llimpiar gueta</string>
   <string name="description_start_voice_search">Aniciar gueta por voz</string>
-  <string name="call_log_empty_geocode"> </string>
   <string name="menu_callNumber">Llamar a <xliff:g id="NUMBER">%s</xliff:g></string>
   <string name="unknown">Desconocíos</string>
   <string name="voicemail">Buzón de voz</string>
@@ -134,6 +144,7 @@
   <string name="simContacts_emptyLoading">Cargando dende tarxeta SIM…</string>
   <string name="simContacts_title">Contautos de tarxeta SIM</string>
   <string name="add_contact_not_available">Vuelvi a habilitar l\'aplicación Contautos pa usar esta función.</string>
+  <string name="voice_search_not_available">Nun ta disponible la gueta por voz.</string>
   <string name="dialer_hint_find_contact">Escribi un nome o teléfonu</string>
   <string name="call_log_all_title">Too</string>
   <string name="call_log_missed_title">Perdíes</string>
@@ -144,6 +155,7 @@
   <string name="show_all_contacts">Amosar tolos contautos</string>
   <string name="show_favorites_only">Amosar namái favoritos</string>
   <string name="call_log_activity_title">Historial</string>
+  <string name="dialpad_0_number">0</string>
   <string name="dialpad_1_number">1</string>
   <string name="dialpad_2_number">2</string>
   <string name="dialpad_3_number">3</string>
@@ -174,4 +186,11 @@
   <string name="no_favorites">Los favoritos y contautos a los que\nllames davezu, van amosase equí.\nYá pues llamar.</string>
   <string name="contact_tooltip">Toca la imaxe pa ver tolos númberos o cantenla primida pa camudar l\'orde</string>
   <string name="description_dismiss">Inorar</string>
+  <string name="remove_contact">Desaniciar</string>
+  <string name="favorites_menu_speed_dial">Marcáu rápidu</string>
+  <string name="favorites_menu_all_contacts">TOLOS CONTAUTOS</string>
+  <string name="favorites_menu_speed_dial_font_family">sans-serif-light</string>
+  <string name="favorites_menu_all_contacts_font_family">sans-serif</string>
+  <string name="search_font_family">sans-serif</string>
+  <string name="tab_font_family">sans-serif</string>
 </resources>
