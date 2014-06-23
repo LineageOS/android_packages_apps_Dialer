@@ -37,10 +37,10 @@ import android.widget.FrameLayout;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
-import com.android.contacts.common.R;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileAdapter.DisplayType;
 import com.android.contacts.common.list.ContactTileView;
+import com.android.dialer.R;
 
 import java.util.ArrayList;
 import java.util.Comparator;
