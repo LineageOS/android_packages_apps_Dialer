@@ -1076,7 +1076,6 @@ public class DialpadFragment extends Fragment
                         (getActivity() instanceof DialtactsActivity ?
                                 ((DialtactsActivity) getActivity()).getCallOrigin() : null));
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent);
-                hideAndClearDialpad(false);
             }
         }
     }
