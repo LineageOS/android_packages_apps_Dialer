@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Lisää kontakti"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Lisää 2 sekunnin tauko"</string>
     <string name="add_wait" msgid="3360818652790319634">"Lisää tauko"</string>
-    <string name="menu_select_sim" msgid="3603578201960504010">"Valitse SIM-kortti"</string>
+    <string name="menu_select_subscription" msgid="363190251770943468">"Valitse liittymä"</string>
     <string name="call_settings" msgid="7666474782093693667">"Asetukset"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Uusi yhteystieto"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Kaikki yhteystiedot"</string>

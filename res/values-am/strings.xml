@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"እውቂያ አክል"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"2 ሴኮንድ ፋታ አክል"</string>
     <string name="add_wait" msgid="3360818652790319634">"መጠበቅ አክል"</string>
-    <string name="menu_select_sim" msgid="3603578201960504010">"ሲም ካርድ ይምረጡ"</string>
+    <string name="menu_select_subscription" msgid="363190251770943468">"የደንበኝነት ምዝገባ ምረጥ"</string>
     <string name="call_settings" msgid="7666474782093693667">"ቅንብሮች"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"አዲስ ዕውቅያ"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"ሁሉም ዕውቂያዎች"</string>

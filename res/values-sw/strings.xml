@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Ongeza anwani"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Ongeza usitishaji wa sekunde 2"</string>
     <string name="add_wait" msgid="3360818652790319634">"Ongeza kusubiri"</string>
-    <string name="menu_select_sim" msgid="3603578201960504010">"Chagua SIM kadi"</string>
+    <string name="menu_select_subscription" msgid="363190251770943468">"Chagua Usajili"</string>
     <string name="call_settings" msgid="7666474782093693667">"Mipangilio"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Anwani mpya"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Anwani zote"</string>

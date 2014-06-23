@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Pievienot kontaktpersonu"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Pievienot 2 sekundes ilgu pauzi"</string>
     <string name="add_wait" msgid="3360818652790319634">"Pievienot gaidīšanu"</string>
-    <string name="menu_select_sim" msgid="3603578201960504010">"Atlasiet SIM karti"</string>
+    <string name="menu_select_subscription" msgid="363190251770943468">"Atlasīt abonementu"</string>
     <string name="call_settings" msgid="7666474782093693667">"Iestatījumi"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Jauna kontaktpersona"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Visas kontaktpersonas"</string>

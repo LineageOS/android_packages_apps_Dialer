@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Přidat kontakt"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Přidat pauzu 2 s"</string>
     <string name="add_wait" msgid="3360818652790319634">"Přidat čekání"</string>
-    <string name="menu_select_sim" msgid="3603578201960504010">"Vybrat SIM kartu"</string>
+    <string name="menu_select_subscription" msgid="363190251770943468">"Vybrat odběr"</string>
     <string name="call_settings" msgid="7666474782093693667">"Nastavení"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nový kontakt"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Všechny kontakty"</string>

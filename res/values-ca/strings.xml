@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Afegeix un contacte"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Afegeix una pausa de 2 segons"</string>
     <string name="add_wait" msgid="3360818652790319634">"Afegeix espera"</string>
-    <string name="menu_select_sim" msgid="3603578201960504010">"Selecciona una targeta SIM"</string>
+    <string name="menu_select_subscription" msgid="363190251770943468">"Selecciona la subscripció"</string>
     <string name="call_settings" msgid="7666474782093693667">"Configuració"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Contacte nou"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Tots els contactes"</string>
