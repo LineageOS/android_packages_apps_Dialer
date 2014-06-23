@@ -23,8 +23,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.android.contacts.common.R;
 import com.android.contacts.common.list.ContactEntry;
+import com.android.dialer.R;
 
 /**
  * Displays the contact's picture overlaid with their name and number type in a tile.
