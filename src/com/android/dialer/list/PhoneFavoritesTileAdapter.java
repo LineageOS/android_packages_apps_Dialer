@@ -17,13 +17,18 @@ package com.android.dialer.list;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ComparisonChain;
+import com.google.common.collect.Lists;
 
+import android.content.ContentProviderOperation;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.OperationApplicationException;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.RemoteException;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.PinnedPositions;
@@ -473,11 +478,18 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             }
 
             if (changed && mDropEntryIndex < PIN_LIMIT) {
-                final ContentValues cv = getReflowedPinnedPositions(mContactEntries, mDraggedEntry,
-                        mDraggedEntryIndex, mDropEntryIndex);
-                final Uri pinUri = PinnedPositions.UPDATE_URI.buildUpon().build();
-                // update the database here with the new pinned positions
-                mContext.getContentResolver().update(pinUri, cv, null, null);
+                final ArrayList<ContentProviderOperation> operations =
+                        getReflowedPinningOperations(mContactEntries, mDraggedEntryIndex,
+                                mDropEntryIndex);
+                if (!operations.isEmpty()) {
+                    // update the database here with the new pinned positions
+                    try {
+                        mContext.getContentResolver().applyBatch(ContactsContract.AUTHORITY,
+                                operations);
+                    } catch (RemoteException | OperationApplicationException e) {
+                        Log.e(TAG, "Exception thrown when pinning contacts", e);
+                    }
+                }
             }
             mDraggedEntry = null;
         }
@@ -580,27 +592,30 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
 
     /**
      * Given an existing list of contact entries and a single entry that is to be pinned at a
-     * particular position, return a ContentValues object that contains new pinned positions for
-     * all contacts that are forced to be pinned at new positions, trying as much as possible to
-     * keep pinned contacts at their original location.
+     * particular position, return a list of {@link ContentProviderOperation}s that contains new
+     * pinned positions for all contacts that are forced to be pinned at new positions, trying as
+     * much as possible to keep pinned contacts at their original location.
      *
      * At this point in time the pinned position of each contact in the list has already been
      * updated by {@link #arrangeContactsByPinnedPosition}, so we can assume that all pinned
      * positions(within {@link #PIN_LIMIT} are unique positive integers.
      */
     @VisibleForTesting
-    /* package */ ContentValues getReflowedPinnedPositions(ArrayList<ContactEntry> list,
-            ContactEntry entryToPin, int oldPos, int newPinPos) {
-
-        final ContentValues cv = new ContentValues();
+    /* package */ ArrayList<ContentProviderOperation> getReflowedPinningOperations(
+            ArrayList<ContactEntry> list, int oldPos, int newPinPos) {
+        final ArrayList<ContentProviderOperation> positions = Lists.newArrayList();
         final int lowerBound = Math.min(oldPos, newPinPos);
         final int upperBound = Math.max(oldPos, newPinPos);
         for (int i = lowerBound; i <= upperBound; i++) {
             final ContactEntry entry = list.get(i);
             if (entry.pinned == i) continue;
-            cv.put(String.valueOf(entry.id), i);
+
+            final Uri uri = Uri.withAppendedPath(Contacts.CONTENT_URI, String.valueOf(entry.id));
+            final ContentValues values = new ContentValues();
+            values.put(Contacts.PINNED, i);
+            positions.add(ContentProviderOperation.newUpdate(uri).withValues(values).build());
         }
-        return cv;
+        return positions;
     }
 
     protected static class ViewTypes {
