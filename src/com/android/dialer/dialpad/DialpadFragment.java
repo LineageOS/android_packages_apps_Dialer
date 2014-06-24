@@ -1437,6 +1437,7 @@ public class DialpadFragment extends Fragment
                         Uri.fromParts(CallUtil.SCHEME_SMSTO, digits.toString(), null));
                 smsIntent.setComponent(mSmsPackageComponentName);
                 DialerUtils.startActivityWithErrorToast(getActivity(), smsIntent);
+                return true;
             }
             case R.id.menu_select_subscription:
               SelectSubscriptionDialogFragment.show(getFragmentManager(), mSubscriptionManager);
