@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"संपर्क जोड़ें"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"2-सेकंड का विराम जोड़ें"</string>
     <string name="add_wait" msgid="3360818652790319634">"प्रतीक्षा का समय बढ़ाएं"</string>
-    <string name="menu_select_sim" msgid="3603578201960504010">"SIM कार्ड चुनें"</string>
+    <string name="menu_select_subscription" msgid="363190251770943468">"सदस्यता चुनें"</string>
     <string name="call_settings" msgid="7666474782093693667">"सेटिंग"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"नया संपर्क"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"सभी संपर्क"</string>

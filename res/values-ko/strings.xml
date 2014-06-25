@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"연락처 추가"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"2초 간 일시 정지 추가"</string>
     <string name="add_wait" msgid="3360818652790319634">"대기 시간 추가"</string>
-    <string name="menu_select_sim" msgid="3603578201960504010">"SIM 카드 선택"</string>
+    <string name="menu_select_subscription" msgid="363190251770943468">"구독 선택"</string>
     <string name="call_settings" msgid="7666474782093693667">"설정"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"새 연락처"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"전체 주소록"</string>

@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Magdagdag ng contact"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Magdagdag ng pag-pause na 2-seg"</string>
     <string name="add_wait" msgid="3360818652790319634">"Magdagdag ng paghihintay"</string>
-    <string name="menu_select_sim" msgid="3603578201960504010">"Pumili ng SIM card"</string>
+    <string name="menu_select_subscription" msgid="363190251770943468">"Pumili ng Subscription"</string>
     <string name="call_settings" msgid="7666474782093693667">"Mga Setting"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Bagong contact"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Lahat ng contact"</string>

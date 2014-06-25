@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"ເພີ່ມ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"ເພີ່ມການຂັ້ນເວລາ 2 ວິນາທີ"</string>
     <string name="add_wait" msgid="3360818652790319634">"ເພີ່ມການລໍຖ້າ"</string>
-    <string name="menu_select_sim" msgid="3603578201960504010">"ເລືອກ SIM ກາດ"</string>
+    <string name="menu_select_subscription" msgid="363190251770943468">"ເລືອກ​​ແພັກ​ເກດ"</string>
     <string name="call_settings" msgid="7666474782093693667">"ການຕັ້ງຄ່າ"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"ສ້າງລາຍຊື່ຜູ່ຕິດຕໍ່ໃໝ່"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"ລາຍຊື່ຜູ່ຕິດຕໍ່ທັງໝົດ"</string>
