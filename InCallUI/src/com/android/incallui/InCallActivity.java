@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -54,6 +55,8 @@ public class InCallActivity extends Activity {
     private AnswerFragment mAnswerFragment;
     private DialpadFragment mDialpadFragment;
     private ConferenceManagerFragment mConferenceManagerFragment;
+    private FragmentManager mChildFragmentManager;
+
     private boolean mIsForegroundActivity;
     private AlertDialog mDialog;
 
@@ -403,26 +406,28 @@ public class InCallActivity extends Activity {
     }
 
     private void initializeInCall() {
-        if (mCallButtonFragment == null) {
-            mCallButtonFragment = (CallButtonFragment) getFragmentManager()
-                    .findFragmentById(R.id.callButtonFragment);
-            mCallButtonFragment.getView().setVisibility(View.INVISIBLE);
-        }
-
         if (mCallCardFragment == null) {
             mCallCardFragment = (CallCardFragment) getFragmentManager()
                     .findFragmentById(R.id.callCardFragment);
         }
 
+        mChildFragmentManager = mCallCardFragment.getChildFragmentManager();
+
+        if (mCallButtonFragment == null) {
+            mCallButtonFragment = (CallButtonFragment) mChildFragmentManager
+                    .findFragmentById(R.id.callButtonFragment);
+            mCallButtonFragment.getView().setVisibility(View.INVISIBLE);
+        }
+
         if (mAnswerFragment == null) {
-            mAnswerFragment = (AnswerFragment) getFragmentManager()
+            mAnswerFragment = (AnswerFragment) mChildFragmentManager
                     .findFragmentById(R.id.answerFragment);
         }
 
         if (mDialpadFragment == null) {
-            mDialpadFragment = (DialpadFragment) getFragmentManager()
+            mDialpadFragment = (DialpadFragment) mChildFragmentManager
                     .findFragmentById(R.id.dialpadFragment);
-            getFragmentManager().beginTransaction().hide(mDialpadFragment).commit();
+            mChildFragmentManager.beginTransaction().hide(mDialpadFragment).commit();
         }
 
         if (mConferenceManagerFragment == null) {
@@ -430,12 +435,6 @@ public class InCallActivity extends Activity {
                     .findFragmentById(R.id.conferenceManagerFragment);
             mConferenceManagerFragment.getView().setVisibility(View.INVISIBLE);
         }
-    }
-
-    private void toast(String text) {
-        final Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
-
-        toast.show();
     }
 
     /**
@@ -455,7 +454,7 @@ public class InCallActivity extends Activity {
     }
 
     private void showDialpad(boolean showDialpad) {
-        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        final FragmentTransaction ft = mChildFragmentManager.beginTransaction();
         if (showDialpad) {
             ft.show(mDialpadFragment);
         } else {
