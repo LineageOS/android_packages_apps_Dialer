@@ -48,8 +48,8 @@
             android:orientation="horizontal"
             android:visibility="gone" >
             <ImageView android:id="@+id/secondaryCallProviderIcon"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
+                android:layout_width="@dimen/call_provider_small_icon_size"
+                android:layout_height="@dimen/call_provider_small_icon_size"
                 android:layout_marginRight="2dp"
                 android:baselineAlignBottom="true"
                 android:scaleType="centerInside"
