@@ -119,6 +119,7 @@
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;सेट नहीं है&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"अन्य कॉल सेटिंग"</string>
     <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> के माध्यम से कॉल किया जा रहा है"</string>
+    <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> की ओर से इनकमिंग"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"संपर्क का फ़ोटो"</string>
     <string name="goPrivate" msgid="865837794424530980">"निजी हो जाएं"</string>
     <string name="selectContact" msgid="781975788478987237">"संपर्क को चुनें"</string>
@@ -159,6 +160,7 @@
     <string name="manageConferenceLabel" msgid="4691922394301969053">"कॉन्फ़्रेंस कॉल प्रबंधित करें"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"आपातकालीन नंबर"</string>
     <string name="in_call_wifi_connected" msgid="8179928320848155569">"<xliff:g id="WIFI_SSID">%s</xliff:g> के द्वारा कनेक्ट किया गया"</string>
+    <string name="wifi_constant" msgid="8747212717516448916">"WiFi"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>

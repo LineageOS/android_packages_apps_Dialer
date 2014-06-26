@@ -119,6 +119,7 @@
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Sin configurar&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Otras configuraciones de llamada"</string>
     <string name="calling_via_template" msgid="4839419581866928142">"Llamada a través de <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="incoming_via_template" msgid="1696993226115570960">"Recibidas a través de <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"foto de contacto"</string>
     <string name="goPrivate" msgid="865837794424530980">"pasar a modo privado"</string>
     <string name="selectContact" msgid="781975788478987237">"seleccionar contacto"</string>
@@ -159,6 +160,7 @@
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Administrar conferencia telefónica"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Número de emergencia"</string>
     <string name="in_call_wifi_connected" msgid="8179928320848155569">"Conexión a través de <xliff:g id="WIFI_SSID">%s</xliff:g>"</string>
+    <string name="wifi_constant" msgid="8747212717516448916">"Wi-Fi"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>

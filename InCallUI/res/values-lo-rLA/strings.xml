@@ -119,6 +119,7 @@
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;ຍັງບໍ່ໄດ້ຕັ້ງ&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"ການຕັ້ງຄ່າການໂທອື່ນໆ"</string>
     <string name="calling_via_template" msgid="4839419581866928142">"ກຳລັງໂທຜ່ານ <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="incoming_via_template" msgid="1696993226115570960">"ເຂົ້າ​ມາ​ຈາກ <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"ຮູບພາບລາຍຊື່ຜູ່ຕິດຕໍ່"</string>
     <string name="goPrivate" msgid="865837794424530980">"ໃຊ້ແບບສ່ວນໂຕ"</string>
     <string name="selectContact" msgid="781975788478987237">"ເລືອກລາຍຊື່ຜູ່ຕິດຕໍ່"</string>
@@ -159,6 +160,7 @@
     <string name="manageConferenceLabel" msgid="4691922394301969053">"ຈັດການການປະຊຸມສາຍ"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"ເບີໂທສຸກເສີນ"</string>
     <string name="in_call_wifi_connected" msgid="8179928320848155569">"ເຊື່ອມ​ຕໍ່​ຜ່ານ <xliff:g id="WIFI_SSID">%s</xliff:g> ແລ້ວ"</string>
+    <string name="wifi_constant" msgid="8747212717516448916">"WiFi"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
