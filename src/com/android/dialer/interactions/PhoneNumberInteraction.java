@@ -127,6 +127,13 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                     Phone.CONTENT_ITEM_TYPE, phoneItem.phoneNumber);
         }
 
+        /**
+         * Temp method so build doesn't break while other CLs go in
+         */
+        public boolean shouldCollapseWith(PhoneItem phoneItem, Context context) {
+            return false;
+        }
+
         @Override
         public String toString() {
             return phoneNumber;
