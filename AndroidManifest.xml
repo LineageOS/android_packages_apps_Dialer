@@ -282,5 +282,11 @@
             </intent-filter>
         </receiver>
 
+        <service android:name="com.android.incallui.InCallServiceImpl"
+                 android:process="com.android.incallui">
+            <intent-filter>
+                <action android:name="android.telecomm.InCallService"/>
+            </intent-filter>
+        </service>
     </application>
 </manifest>
