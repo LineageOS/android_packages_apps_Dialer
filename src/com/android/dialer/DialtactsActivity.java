@@ -1108,7 +1108,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onCallNumberDirectly(String phoneNumber) {
-        Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin());
+        final Subscription subscription = mSubscriptionManager != null?
+                mSubscriptionManager.getCurrentSubscription(): null;
+        Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin(), subscription);
         DialerUtils.startActivityWithErrorToast(this, intent);
         mClearSearchOnPause = true;
     }

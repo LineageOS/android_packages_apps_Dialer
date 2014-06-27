@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.telecomm.Subscription;
 import android.util.Log;
 
 import com.android.contacts.common.CallUtil;
@@ -38,11 +39,12 @@ public abstract class IntentProvider {
 
     public abstract Intent getIntent(Context context);
 
-    public static IntentProvider getReturnCallIntentProvider(final String number) {
+    public static IntentProvider getReturnCallIntentProvider(final String number,
+            final Subscription subscription) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return CallUtil.getCallIntent(number);
+                return CallUtil.getCallIntent(number, subscription);
             }
         };
     }

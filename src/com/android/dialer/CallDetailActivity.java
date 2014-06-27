@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract.Voicemails;
+import android.telecomm.Subscription;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -194,6 +196,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         CallLog.Calls.COUNTRY_ISO,
         CallLog.Calls.GEOCODED_LOCATION,
         CallLog.Calls.NUMBER_PRESENTATION,
+        CallLog.Calls.SUBSCRIPTION_COMPONENT_NAME,
+        CallLog.Calls.SUBSCRIPTION_ID,
     };
 
     static final int DATE_COLUMN_INDEX = 0;
@@ -203,6 +207,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     static final int COUNTRY_ISO_COLUMN_INDEX = 4;
     static final int GEOCODED_LOCATION_COLUMN_INDEX = 5;
     static final int NUMBER_PRESENTATION_COLUMN_INDEX = 6;
+    static final int SUBSCRIPTION_COMPONENT_NAME = 7;
+    static final int SUBSCRIPTION_ID = 8;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -328,8 +334,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                 if (tm.getCallState() == TelephonyManager.CALL_STATE_IDLE) {
                     DialerUtils.startActivityWithErrorToast(this,
                             CallUtil.getCallIntent(Uri.fromParts(CallUtil.SCHEME_TEL, mNumber,
-                                    null)),
-                            R.string.call_not_available);
+                                    null)), R.string.call_not_available);
                     return true;
                 }
             }
@@ -482,6 +487,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             final int callType = callCursor.getInt(CALL_TYPE_COLUMN_INDEX);
             String countryIso = callCursor.getString(COUNTRY_ISO_COLUMN_INDEX);
             final String geocode = callCursor.getString(GEOCODED_LOCATION_COLUMN_INDEX);
+            final Drawable subscriptionIcon = getSubscriptionIcon(callCursor);
 
             if (TextUtils.isEmpty(countryIso)) {
                 countryIso = mDefaultCountryIso;
@@ -523,12 +529,24 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             return new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode,
                     new int[]{ callType }, date, duration,
-                    nameText, numberType, numberLabel, lookupUri, photoUri, sourceType);
+                    nameText, numberType, numberLabel, lookupUri, photoUri, sourceType,
+                    subscriptionIcon);
         } finally {
             if (callCursor != null) {
                 callCursor.close();
             }
         }
+    }
+
+    /**
+     * Generate subscription object from data in Telecomm database
+     */
+    private Drawable getSubscriptionIcon(Cursor c) {
+        final String component_name = c.getString(SUBSCRIPTION_COMPONENT_NAME);
+        final String subscription_id = c.getString(SUBSCRIPTION_ID);
+
+        // TODO: actually pull data from the database
+        return null;
     }
 
     /** Load the contact photos and places them in the corresponding views. */

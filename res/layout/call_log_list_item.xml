@@ -112,6 +112,14 @@
                         android:layout_marginEnd="@dimen/call_log_icon_margin"
                         android:layout_gravity="center_vertical"
                         />
+                    <ImageView
+                        android:id="@+id/call_subscription_icon"
+                        android:layout_width="@dimen/call_provider_small_icon_size"
+                        android:layout_height="@dimen/call_provider_small_icon_size"
+                        android:layout_marginEnd="@dimen/call_log_icon_margin"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="centerInside"
+                        />
                     <TextView
                         android:id="@+id/call_location_and_date"
                         android:layout_width="wrap_content"

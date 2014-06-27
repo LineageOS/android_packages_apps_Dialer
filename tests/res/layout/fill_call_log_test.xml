@@ -176,6 +176,33 @@
             android:inputType="phone"
             />
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/call_subscription" />
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/subscription0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/subscription0"
+            android:textSize="9sp" />
+        <RadioButton
+            android:id="@+id/subscription1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/subscription1"
+            android:textSize="9sp" />
+        <RadioButton
+            android:id="@+id/no_subscription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_subscription"
+            android:textSize="9sp" />
+    </RadioGroup>
     <Button
         android:id="@+id/add_custom"
         android:layout_width="match_parent"

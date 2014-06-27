@@ -18,6 +18,7 @@ package com.android.dialer;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.dialer.calllog.CallTypeIconsView;
@@ -29,15 +30,17 @@ public final class PhoneCallDetailsViews {
     public final TextView nameView;
     public final View callTypeView;
     public final CallTypeIconsView callTypeIcons;
+    public final ImageView callSubscriptionIcon;
     public final TextView callLocationAndDate;
     public final TextView voicemailTranscriptionView;
 
     private PhoneCallDetailsViews(TextView nameView, View callTypeView,
-            CallTypeIconsView callTypeIcons, TextView callLocationAndDate,
-            TextView voicemailTranscriptionView) {
+            CallTypeIconsView callTypeIcons, ImageView callSubscriptionIcon,
+            TextView callLocationAndDate, TextView voicemailTranscriptionView) {
         this.nameView = nameView;
         this.callTypeView = callTypeView;
         this.callTypeIcons = callTypeIcons;
+        this.callSubscriptionIcon = callSubscriptionIcon;
         this.callLocationAndDate = callLocationAndDate;
         this.voicemailTranscriptionView = voicemailTranscriptionView;
     }
@@ -53,6 +56,7 @@ public final class PhoneCallDetailsViews {
         return new PhoneCallDetailsViews((TextView) view.findViewById(R.id.name),
                 view.findViewById(R.id.call_type),
                 (CallTypeIconsView) view.findViewById(R.id.call_type_icons),
+                (ImageView) view.findViewById(R.id.call_subscription_icon),
                 (TextView) view.findViewById(R.id.call_location_and_date),
                 (TextView) view.findViewById(R.id.voicemail_transcription));
     }
@@ -62,6 +66,7 @@ public final class PhoneCallDetailsViews {
                 new TextView(context),
                 new View(context),
                 new CallTypeIconsView(context),
+                new ImageView(context),
                 new TextView(context),
                 new TextView(context));
     }
