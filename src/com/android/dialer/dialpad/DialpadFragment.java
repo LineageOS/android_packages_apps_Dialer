@@ -41,6 +41,7 @@ import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
 import android.telecomm.Subscription;
+import android.telecomm.TelecommManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -85,7 +86,6 @@ import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
 import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
-
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
@@ -278,6 +278,10 @@ public class DialpadFragment extends Fragment
 
     private TelephonyManager getTelephonyManager() {
         return (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+    }
+
+    private TelecommManager getTelecommManager() {
+        return (TelecommManager) getActivity().getSystemService(Context.TELECOMM_SERVICE);
     }
 
     @Override
@@ -510,7 +514,7 @@ public class DialpadFragment extends Fragment
                         || Intent.ACTION_MAIN.equals(action)) {
                     // If there's already an active call, bring up an intermediate UI to
                     // make the user confirm what they really want to do.
-                    if (phoneIsInUse()) {
+                    if (isPhoneInUse()) {
                         needToShowDialpadChooser = true;
                     }
                 }
@@ -626,7 +630,7 @@ public class DialpadFragment extends Fragment
         // are currently in use.  (Right now we let the user try to add
         // another call, but that call is guaranteed to fail.  Perhaps the
         // entire dialer UI should be disabled instead.)
-        if (phoneIsInUse()) {
+        if (isPhoneInUse()) {
             final SpannableString hint = new SpannableString(
                     getActivity().getString(R.string.dialerDialpadHintText));
             hint.setSpan(new RelativeSizeSpan(0.8f), 0, hint.length(), 0);
@@ -1092,7 +1096,9 @@ public class DialpadFragment extends Fragment
     }
 
     private void handleDialButtonClickWithEmptyDigits() {
-        if (phoneIsCdma() && phoneIsOffhook()) {
+        if (phoneIsCdma() && isPhoneInUse()) {
+            // TODO(santoscordon): Move this logic into services/Telephony
+            //
             // This is really CDMA specific. On GSM is it possible
             // to be off hook and wanted to add a 3rd party using
             // the redial feature.
@@ -1402,10 +1408,10 @@ public class DialpadFragment extends Fragment
 
     /**
      * @return true if the phone is "in use", meaning that at least one line
-     *              is active (ie. off hook or ringing or dialing).
+     *              is active (ie. off hook or ringing or dialing, or on hold).
      */
-    public boolean phoneIsInUse() {
-        return getTelephonyManager().getCallState() != TelephonyManager.CALL_STATE_IDLE;
+    public boolean isPhoneInUse() {
+        return getTelecommManager().isInAPhoneCall();
     }
 
     /**
@@ -1413,13 +1419,6 @@ public class DialpadFragment extends Fragment
      */
     private boolean phoneIsCdma() {
         return getTelephonyManager().getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA;
-    }
-
-    /**
-     * @return true if the phone state is OFFHOOK
-     */
-    private boolean phoneIsOffhook() {
-        return getTelephonyManager().getCallState() == TelephonyManager.CALL_STATE_OFFHOOK;
     }
 
     @Override
