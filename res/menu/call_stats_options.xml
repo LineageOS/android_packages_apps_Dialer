@@ -18,7 +18,7 @@
     <item
         android:id="@+id/filter"
         android:showAsAction="always"
-        android:actionViewClass="android.widget.Spinner" />
+        android:actionLayout="@layout/call_stats_filter_spinner" />
 
     <item
         android:id="@+id/date_filter"
