@@ -56,6 +56,12 @@
             </intent-filter>
         </service>
 
+        <service android:name="InCallVideoClient">
+            <intent-filter>
+                <action android:name="android.telecomm.CallVideoClient" />
+            </intent-filter>
+        </service>
+
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
         <receiver android:name="InCallApp$NotificationBroadcastReceiver" android:exported="false">
             <intent-filter>
