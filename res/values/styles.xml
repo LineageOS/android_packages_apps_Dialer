@@ -110,6 +110,17 @@
         <item name="android:windowActionBarOverlay">true</item>
     </style>
 
+    <!-- A theme for inflation of spinners in the dialtacts action bar -->
+    <style name="DialtactsSpinnerTheme" parent="DialtactsTheme">
+        <item name="android:textAppearanceListItemSmall">@android:style/TextAppearance.Holo.Medium.Inverse</item>
+    </style>
+
+    <style name="DialtactsActionBarSpinner"
+        parent="@*android:style/Widget.Holo.Light.Spinner.DropDown.ActionBar">
+
+        <item name="android:background">@drawable/spinner_ab_holo_dark</item>
+    </style>
+
     <style name="CallDetailActivityTheme1" parent="android:Theme.Holo.Light">
         <item name="android:windowBackground">@color/background_dialer_list_items</item>
         <item name="android:gravity">top</item>
