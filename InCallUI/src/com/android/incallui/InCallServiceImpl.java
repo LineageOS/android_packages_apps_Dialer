@@ -126,6 +126,7 @@ public class InCallServiceImpl extends InCallService {
         call.setSubscription(telecommCall.getSubscription());
         call.setCurrentCallServiceDescriptor(telecommCall.getCurrentCallServiceDescriptor());
         call.setHandoffCallServiceDescriptor(telecommCall.getHandoffCallServiceDescriptor());
+        call.setCallVideoProvider(telecommCall.getCallVideoProvider());
         call.setState(translateState(telecommCall.getState()));
         call.setParentId(telecommCall.getParentCallId());
         call.setChildCallIds(telecommCall.getChildCallIds());

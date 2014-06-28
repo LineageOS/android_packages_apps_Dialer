@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.telecomm.CallCapabilities;
 import android.telecomm.CallNumberPresentation;
 import android.telecomm.CallServiceDescriptor;
+import android.telecomm.RemoteCallVideoProvider;
 import android.telecomm.GatewayInfo;
 import android.telecomm.Subscription;
 import android.telephony.DisconnectCause;
@@ -110,6 +111,7 @@ public final class Call {
     private Subscription mSubscription;
     private CallServiceDescriptor mCurrentCallServiceDescriptor;
     private CallServiceDescriptor mHandoffCallServiceDescriptor;
+    private RemoteCallVideoProvider mCallVideoProvider;
     private String mParentCallId;
     private List<String> mChildCallIds;
 
@@ -243,6 +245,14 @@ public final class Call {
 
     public void setHandoffCallServiceDescriptor(CallServiceDescriptor descriptor) {
         mHandoffCallServiceDescriptor = descriptor;
+    }
+
+    public RemoteCallVideoProvider getCallVideoProvider() {
+        return mCallVideoProvider;
+    }
+
+    public void setCallVideoProvider(RemoteCallVideoProvider callVideoProvider) {
+        mCallVideoProvider = callVideoProvider;
     }
 
     public void setChildCallIds(List<String> callIds) {
