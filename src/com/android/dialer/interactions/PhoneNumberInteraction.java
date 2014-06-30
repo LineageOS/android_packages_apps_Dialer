@@ -418,7 +418,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
             return;
         }
 
-        Collapser.collapseList(phoneList);
+        Collapser.collapseList(phoneList, mContext);
 
         if (phoneList.size() == 0) {
             onDismiss();
