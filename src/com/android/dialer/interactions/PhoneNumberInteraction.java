@@ -122,7 +122,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         }
 
         @Override
-        public boolean shouldCollapseWith(PhoneItem phoneItem) {
+        public boolean shouldCollapseWith(PhoneItem phoneItem, Context context) {
             return MoreContactUtils.shouldCollapse(Phone.CONTENT_ITEM_TYPE, phoneNumber,
                     Phone.CONTENT_ITEM_TYPE, phoneItem.phoneNumber);
         }
