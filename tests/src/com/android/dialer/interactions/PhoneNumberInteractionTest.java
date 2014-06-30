@@ -42,12 +42,8 @@ import java.util.List;
 /**
  * Tests for {@link com.android.contacts.common.interactions.PhoneNumberInteraction}.
  *
- * Running all tests:
- *
- *   runtest contacts
- * or
  *   adb shell am instrument \
- *     -w com.android.contacts.tests/android.test.InstrumentationTestRunner
+ *     -w com.android.dialer.tests/android.test.InstrumentationTestRunner
  */
 @SmallTest
 public class PhoneNumberInteractionTest extends InstrumentationTestCase {
@@ -146,25 +142,25 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
         assertEquals("sms:456", intent.getDataString());
     }
 
-    /*public void testShouldCollapseWith() {
+    public void testShouldCollapseWith() {
         PhoneNumberInteraction.PhoneItem phoneItem1 = new PhoneNumberInteraction.PhoneItem();
         PhoneNumberInteraction.PhoneItem phoneItem2 = new PhoneNumberInteraction.PhoneItem();
 
         phoneItem1.phoneNumber = "123";
         phoneItem2.phoneNumber = "123";
 
-        assertTrue(phoneItem1.shouldCollapseWith(phoneItem2, this.));
+        assertTrue(phoneItem1.shouldCollapseWith(phoneItem2, mContext));
 
         phoneItem1.phoneNumber = "123";
         phoneItem2.phoneNumber = "456";
 
-        assertFalse(phoneItem1.shouldCollapseWith(phoneItem2));
+        assertFalse(phoneItem1.shouldCollapseWith(phoneItem2, mContext));
 
         phoneItem1.phoneNumber = "123#,123";
         phoneItem2.phoneNumber = "123#,456";
 
-        assertFalse(phoneItem1.shouldCollapseWith(phoneItem2));
-    }*/
+        assertFalse(phoneItem1.shouldCollapseWith(phoneItem2, mContext));
+    }
 
     public void testCallNumberWhenThereAreDuplicates() {
         Uri contactUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, 13);
