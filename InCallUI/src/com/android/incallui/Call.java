@@ -17,6 +17,7 @@
 package com.android.incallui;
 
 import android.net.Uri;
+import android.os.RemoteException;
 import android.telecomm.CallCapabilities;
 import android.telecomm.CallNumberPresentation;
 import android.telecomm.CallServiceDescriptor;
@@ -114,6 +115,8 @@ public final class Call {
     private RemoteCallVideoProvider mCallVideoProvider;
     private String mParentCallId;
     private List<String> mChildCallIds;
+
+    private InCallVideoClient mCallVideoClient;
 
     public Call(String callId) {
         mCallId = callId;
@@ -253,6 +256,16 @@ public final class Call {
 
     public void setCallVideoProvider(RemoteCallVideoProvider callVideoProvider) {
         mCallVideoProvider = callVideoProvider;
+
+        if (mCallVideoProvider != null) {
+            try {
+                if (mCallVideoClient == null) {
+                    mCallVideoClient = new InCallVideoClient();
+                }
+                mCallVideoProvider.setCallVideoClient(mCallVideoClient);
+            } catch (RemoteException ignored) {
+            }
+        }
     }
 
     public void setChildCallIds(List<String> callIds) {

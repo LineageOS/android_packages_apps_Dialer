@@ -36,12 +36,12 @@ public class InCallVideoClient extends CallVideoClient {
     }
 
     @Override
-    public void onCallSessionEvent(int event) {
+    public void onHandleCallSessionEvent(int event) {
 
     }
 
     @Override
-    public void onUpdatedPeerDimensions(int width, int height) {
+    public void onUpdatePeerDimensions(int width, int height) {
 
     }
 
@@ -51,7 +51,7 @@ public class InCallVideoClient extends CallVideoClient {
     }
 
     @Override
-    public void onCameraCapabilitiesChange(CallCameraCapabilities callCameraCapabilities) {
+    public void onHandleCameraCapabilitiesChange(CallCameraCapabilities callCameraCapabilities) {
 
     }
 }
