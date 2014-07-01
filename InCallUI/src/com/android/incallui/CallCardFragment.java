@@ -455,7 +455,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      * Additional labels are applied as follows:
      *         1. All outgoing calls with display "Calling via [Provider]"
      *         2. Ongoing calls will display the name of the provider or wifi connection
-     *         2. Incoming calls will only display "Incoming via..." for subscriptions
+     *         2. Incoming calls will only display "Incoming via..." for accounts
      */
     private String getCallStateLabelFromState(int state, int cause, String label, boolean isWiFi,
             boolean isGatewayCall) {
@@ -463,8 +463,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         String callStateLabel = null;  // Label to display as part of the call banner
 
         boolean isSpecialCall = label != null;
-        boolean isSubscriptionOrWifi = isSpecialCall && !isGatewayCall;
-        boolean isSubscriptionOnly = isSubscriptionOrWifi && !isWiFi;
+        boolean isAccountOrWifi = isSpecialCall && !isGatewayCall;
+        boolean isAccountOnly = isAccountOrWifi && !isWiFi;
 
         switch  (state) {
             case Call.State.IDLE:
@@ -473,7 +473,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             case Call.State.ACTIVE:
                 // We normally don't show a "call state label" at all in this state
                 // (but we can use the call state label to display the provider name).
-                if (isSubscriptionOrWifi) {
+                if (isAccountOrWifi) {
                     callStateLabel = label;
                 }
                 break;
@@ -492,7 +492,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 break;
             case Call.State.INCOMING:
             case Call.State.CALL_WAITING:
-                if (isSubscriptionOnly) {
+                if (isAccountOnly) {
                     callStateLabel = context.getString(R.string.incoming_via_template, label);
                 } else {
                     callStateLabel = context.getString(R.string.card_title_incoming_call);

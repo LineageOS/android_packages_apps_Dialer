@@ -21,9 +21,9 @@ import android.os.RemoteException;
 import android.telecomm.CallCapabilities;
 import android.telecomm.CallNumberPresentation;
 import android.telecomm.CallServiceDescriptor;
+import android.telecomm.PhoneAccount;
 import android.telecomm.RemoteCallVideoProvider;
 import android.telecomm.GatewayInfo;
-import android.telecomm.Subscription;
 import android.telephony.DisconnectCause;
 
 import com.google.common.collect.ImmutableSortedSet;
@@ -109,7 +109,7 @@ public final class Call {
     private long mConnectTimeMillis = 0;
     private Uri mHandle;
     private GatewayInfo mGatewayInfo;
-    private Subscription mSubscription;
+    private PhoneAccount mAccount;
     private CallServiceDescriptor mCurrentCallServiceDescriptor;
     private CallServiceDescriptor mHandoffCallServiceDescriptor;
     private RemoteCallVideoProvider mCallVideoProvider;
@@ -222,12 +222,12 @@ public final class Call {
         mGatewayInfo = gatewayInfo;
     }
 
-    public Subscription getSubscription() {
-        return mSubscription;
+    public PhoneAccount getAccount() {
+        return mAccount;
     }
 
-    public void setSubscription(Subscription subscription) {
-        mSubscription = subscription;
+    public void setAccount(PhoneAccount account) {
+        mAccount = account;
     }
 
     /** The descriptor for the call service currently routing this call. */

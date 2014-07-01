@@ -16,20 +16,14 @@
 
 package com.android.incallui;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.telecomm.CallCapabilities;
 import android.telecomm.CallServiceDescriptor;
-import android.telecomm.Subscription;
+import android.telecomm.PhoneAccount;
 import android.telephony.DisconnectCause;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
@@ -40,8 +34,6 @@ import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.services.telephony.common.AudioMode;
-
-import java.util.List;
 
 import com.google.common.base.Preconditions;
 
@@ -448,16 +440,16 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (mIsWiFiCachedValue == true) {
             return mContext.getResources().getDrawable(R.drawable.ic_in_call_wifi);
         }
-        Subscription subscription = mPrimary.getSubscription();
-        if (subscription != null) {
-            return subscription.getIcon(mContext);
+        PhoneAccount account = mPrimary.getAccount();
+        if (account != null) {
+            return account.getIcon(mContext);
         }
         return null;
     }
 
     /**
      * Returns the label (line of text above the number/name) for any given call.
-     * For example, "calling via [Subscription/Google Voice/Wifi]" for outgoing calls.
+     * For example, "calling via [Account/Google Voice/Wifi]" for outgoing calls.
      */
     private String getConnectionLabel() {
         if (hasOutgoingGatewayCall() && getUi() != null) {
@@ -472,28 +464,28 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 return null;
             }
         }
-        Subscription subscription = mPrimary.getSubscription();
-        if (mIsWiFiCachedValue == true || subscription != null) {
-            // Label will be either subscription name or WiFi connection
+        PhoneAccount account = mPrimary.getAccount();
+        if (mIsWiFiCachedValue == true || account != null) {
+            // Label will be either account name or WiFi connection
             // TODO: get the name of the wifi connection
             String wifiString = mContext.getString(R.string.wifi_constant);
-            return subscription == null? wifiString : subscription.getLabel(mContext);
+            return account == null? wifiString : account.getLabel(mContext);
         }
         return null;
     }
 
     private String getSecondaryCallProviderLabel() {
-        Subscription subscription = mSecondary.getSubscription();
-        if (subscription != null) {
-            return subscription.getLabel(mContext);
+        PhoneAccount account = mSecondary.getAccount();
+        if (account != null) {
+            return account.getLabel(mContext);
         }
         return null;
     }
 
     private Drawable getSecondaryCallProviderIcon() {
-        Subscription subscription = mSecondary.getSubscription();
-        if (subscription != null) {
-            return subscription.getIcon(mContext);
+        PhoneAccount account = mSecondary.getAccount();
+        if (account != null) {
+            return account.getIcon(mContext);
         }
         return null;
     }
