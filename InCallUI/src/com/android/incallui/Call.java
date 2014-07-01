@@ -115,6 +115,7 @@ public final class Call {
     private RemoteCallVideoProvider mCallVideoProvider;
     private String mParentCallId;
     private List<String> mChildCallIds;
+    private int mFeatures;
 
     private InCallVideoClient mCallVideoClient;
 
@@ -282,6 +283,14 @@ public final class Call {
 
     public String getParentId() {
         return mParentCallId;
+    }
+
+    public int getFeatures() {
+        return mFeatures;
+    }
+
+    public void setFeatures(int features) {
+        mFeatures = features;
     }
 
     @Override
