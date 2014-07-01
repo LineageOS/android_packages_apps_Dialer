@@ -17,5 +17,4 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="calllog_search_hint">Søg opkaldsliste</string>
-  <string name="dial_conference">Gruppeopkald</string>
 </resources>

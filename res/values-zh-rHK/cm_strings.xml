@@ -46,8 +46,8 @@
   <string name="call_stats_reset_filter">重設時間範圍</string>
   <string name="call_stats_sort_by_duration">以通話時間排序</string>
   <string name="call_stats_sort_by_count">以通話次數排序</string>
-  <string name="menu_add_to_blacklist">添加到黑名單</string>
-  <string name="toast_added_to_blacklist">%s 已添加到黑名單。</string>
+  <string name="menu_add_to_blacklist">新增至黑名單</string>
+  <string name="toast_added_to_blacklist">%s 已新增到黑名單。</string>
   <string name="nearby_places">接近的地點</string>
   <string name="people">聯絡人</string>
 </resources>

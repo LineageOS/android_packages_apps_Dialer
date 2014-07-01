@@ -112,10 +112,20 @@
     <string name="description_add_contact" msgid="3103414772502485851">"連絡先を追加"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g>の連絡先を表示"</string>
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g>に発信"</string>
+    <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>の連絡先の詳細"</string>
+    <string name="description_call_details" msgid="8936017517290240089">"通話の詳細"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"新着のボイスメール。"</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"通話回数は<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>回。"</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>の<xliff:g id="TYPEORLOCATION">%2$s</xliff:g><xliff:g id="NAMEORNUMBER">%1$s</xliff:g>の不在着信に折り返し発信"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>の<xliff:g id="TYPEORLOCATION">%2$s</xliff:g><xliff:g id="NAMEORNUMBER">%1$s</xliff:g>の着信に折り返し発信"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>の<xliff:g id="TYPEORLOCATION">%2$s</xliff:g><xliff:g id="NAMEORNUMBER">%1$s</xliff:g>からの不在着信"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>の<xliff:g id="TYPEORLOCATION">%2$s</xliff:g><xliff:g id="NAMEORNUMBER">%1$s</xliff:g>からの着信"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"<xliff:g id="TYPEORLOCATION">%2$s</xliff:g><xliff:g id="NAMEORNUMBER">%1$s</xliff:g>に発信。前回の通話は<xliff:g id="TIMEOFCALL">%3$s</xliff:g>。"</string>
+    <string name="description_call_last" msgid="491385778814705302">"<xliff:g id="TYPEORLOCATION">%2$s</xliff:g><xliff:g id="NAMEORNUMBER">%1$s</xliff:g>に発信。前回の通話は<xliff:g id="TIMEOFCALL">%3$s</xliff:g>。"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g>にテキストメッセージを送信"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"未再生のボイスメール"</string>
+    <string name="description_clear_search" msgid="688023606766232904">"検索をクリア"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"音声検索を開始"</string>
-    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g>に発信"</string>
     <string name="unknown" msgid="740067747858270469">"通知不可能"</string>
     <string name="voicemail" msgid="3851469869202611441">"ボイスメール"</string>
@@ -133,6 +143,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIMカードから読み取り中..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIMカードの連絡先"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"この機能を使用するには連絡帳アプリを再度有効にしてください。"</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"音声検索は利用できません。"</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"名前または電話番号を入力"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"すべて"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"不在着信"</string>
@@ -161,4 +172,7 @@
     <string name="no_favorites" msgid="5212485868783382971">"ここにはお気に入りや\n頻繁に通話する\n連絡先が表示されます。"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"画像をタップするとすべての番号を表示でき、押し続けると並び替えることができます"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"閉じる"</string>
+    <string name="remove_contact" msgid="1080555335283662961">"削除"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"クイックアクセス"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"すべての連絡先"</string>
 </resources>

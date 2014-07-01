@@ -25,7 +25,8 @@
         android:id="@+id/contact_favorite_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusable="true">
+        android:focusable="true"
+        android:background="@drawable/ic_contacts_tiles">
 
         <com.android.contacts.common.widget.LayoutSuppressingImageView
             android:id="@+id/contact_tile_image"
@@ -42,11 +43,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:paddingRight="@dimen/contact_tile_info_button_height_and_width"
-            android:paddingStart="8dp"
-            android:paddingEnd="@dimen/contact_tile_info_button_height_and_width"
-            android:paddingBottom="4dp"
+            android:paddingLeft="@dimen/contact_tile_text_side_padding"
+            android:paddingRight="@dimen/contact_tile_text_side_padding"
+            android:paddingStart="@dimen/contact_tile_text_side_padding"
+            android:paddingEnd="@dimen/contact_tile_text_side_padding"
+            android:paddingBottom="@dimen/contact_tile_text_bottom_padding"
             android:layout_alignParentBottom="true"
             android:orientation="vertical" >
             <TextView
@@ -57,7 +58,7 @@
                 android:textColor="@color/contact_tile_name_color"
                 android:fontFamily="sans-serif"
                 android:singleLine="true"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:fadingEdge="horizontal"
                 android:fadingEdgeLength="3dip"
                 android:ellipsize="marquee"
@@ -70,8 +71,7 @@
                 android:textColor="@color/contact_tile_name_color"
                 android:fontFamily="sans-serif"
                 android:singleLine="true"
-                android:textSize="12sp"
-                android:paddingBottom="2dp"
+                android:textSize="11sp"
                 android:fadingEdge="horizontal"
                 android:fadingEdgeLength="3dip"
                 android:ellipsize="marquee"
@@ -85,40 +85,22 @@
             android:nextFocusRight="@+id/contact_tile_secondary_button"
             android:background="?android:attr/selectableItemBackground" />
 
-        <ImageView
-            android:id="@+id/contact_favorite_star"
-            android:background="?android:attr/selectableItemBackground"
-            android:layout_height="@dimen/contact_tile_info_button_height_and_width"
-            android:layout_width="@dimen/contact_tile_info_button_height_and_width"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_star_marked_as_fav"
-            android:scaleType="center"
-            android:visibility="gone" />
-
-
         <ImageButton
             android:id="@id/contact_tile_secondary_button"
-            android:src="@drawable/ic_contact_info"
+            android:src="@drawable/overflow_thumbnail"
             android:background="?android:attr/selectableItemBackground"
             android:layout_height="@dimen/contact_tile_info_button_height_and_width"
             android:layout_width="@dimen/contact_tile_info_button_height_and_width"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:layout_alignParentBottom="true"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:scaleType="center"
             android:contentDescription="@string/description_view_contact_detail" />
 
     </RelativeLayout>

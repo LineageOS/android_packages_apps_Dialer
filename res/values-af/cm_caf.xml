@@ -17,5 +17,4 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="calllog_search_hint">Soek deur geskakelde lys</string>
-  <string name="dial_conference">Skakel-konferensie</string>
 </resources>

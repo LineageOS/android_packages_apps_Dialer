@@ -29,7 +29,6 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -44,7 +43,8 @@ import com.android.dialer.list.SwipeHelper.SwipeHelperCallback;
  * - Swiping, which is borrowed from packages/apps/UnifiedEmail (com.android.mail.ui.Swipeable)
  * - Drag and drop
  */
-public class PhoneFavoriteListView extends ListView implements SwipeHelperCallback {
+public class PhoneFavoriteListView extends ListView implements SwipeHelperCallback,
+        OnDragDropListener {
 
     public static final String LOG_TAG = PhoneFavoriteListView.class.getSimpleName();
 
@@ -52,7 +52,6 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
     private boolean mEnableSwipe = true;
 
     private OnItemGestureListener mOnItemGestureListener;
-    private OnDragDropListener mOnDragDropListener;
 
     private float mDensityScale;
     private float mTouchSlop;
@@ -63,7 +62,7 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
 
     private Handler mScrollHandler;
     private final long SCROLL_HANDLER_DELAY_MILLIS = 5;
-    private final int DRAG_SCROLL_PX_UNIT = 10;
+    private final int DRAG_SCROLL_PX_UNIT = 25;
 
     private boolean mIsDragScrollerRunning = false;
     private int mTouchDownForDragStartX;
@@ -80,6 +79,8 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
 
     private int mDragShadowLeft;
     private int mDragShadowTop;
+
+    private DragDropController mDragDropController = new DragDropController();
 
     private final float DRAG_SHADOW_ALPHA = 0.7f;
 
@@ -130,6 +131,7 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
         mSwipeHelper = new SwipeHelper(context, SwipeHelper.X, this,
                 mDensityScale, mTouchSlop);
         setItemsCanFocus(true);
+        mDragDropController.addOnDragDropListener(this);
     }
 
     @Override
@@ -156,10 +158,10 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
         mOnItemGestureListener = listener;
     }
 
-    public void setOnDragDropListener(OnDragDropListener listener) {
-        mOnDragDropListener = listener;
-    }
-
+    /**
+     * TODO: This is all swipe to remove code (nothing to do with drag to remove). This should
+     * be cleaned up and removed once drag to remove becomes the only way to remove contacts.
+     */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
@@ -232,6 +234,10 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
         requestDisallowInterceptTouchEvent(true);
     }
 
+    /**
+     * End of swipe-to-remove code
+     */
+
     @Override
     public boolean dispatchDragEvent(DragEvent event) {
         final int action = event.getAction();
@@ -239,13 +245,34 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
         final int eY = (int) event.getY();
         switch (action) {
             case DragEvent.ACTION_DRAG_STARTED:
-                if (!handleDragStarted(mTouchDownForDragStartX, mTouchDownForDragStartY)) {
+                final int[] coordinates = new int[2];
+                getLocationOnScreen(coordinates);
+                // Calculate the X and Y coordinates of the drag event relative to the view
+                final int viewX = eX - coordinates[0];
+                final int viewY = eY - coordinates[1];
+                final View child = getViewAtPosition(viewX, viewY);
+
+                if (!(child instanceof ContactTileRow)) {
+                    // Bail early.
                     return false;
-                };
+                }
+
+                final ContactTileRow tile = (ContactTileRow) child;
+
+                // Disable drag and drop if there is a contact that has been swiped and is currently
+                // in the pending remove state
+                if (tile.getTileAdapter().hasPotentialRemoveEntryIndex()) {
+                    return false;
+                }
+
+                if (!mDragDropController.handleDragStarted(viewX, viewY, tile)) {
+                    return false;
+                }
                 break;
             case DragEvent.ACTION_DRAG_LOCATION:
                 mLastDragY = eY;
-                handleDragHovered(eX, eY);
+                final View view = getViewAtPosition(eX, eY);
+                mDragDropController.handleDragHovered(eX, eY, view);
                 // Kick off {@link #mScrollHandler} if it's not started yet.
                 if (!mIsDragScrollerRunning &&
                         // And if the distance traveled while dragging exceeds the touch slop
@@ -268,13 +295,13 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
                 mIsDragScrollerRunning = false;
                 // Either a successful drop or it's ended with out drop.
                 if (action == DragEvent.ACTION_DROP || action == DragEvent.ACTION_DRAG_ENDED) {
-                    handleDragFinished(eX, eY);
+                    mDragDropController.handleDragFinished(eX, eY, false);
                 }
                 break;
             default:
                 break;
         }
-        // This ListView will consumer the drag events on behalf of its children.
+        // This ListView will consume the drag events on behalf of its children.
         return true;
     }
 
@@ -303,69 +330,48 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
         }
     }
 
-    /**
-     * @return True if the drag is started.
-     */
-    private boolean handleDragStarted(int x, int y) {
-        final View child = getViewAtPosition(x, y);
-        if (!(child instanceof ContactTileRow)) {
-            // Bail early.
-            return false;
-        }
-
-        final ContactTileRow tile = (ContactTileRow) child;
-
-        if (tile.getTileAdapter().hasPotentialRemoveEntryIndex()) {
-            return false;
-        }
-
-        final int itemIndex = tile.getItemIndex(x, y);
-        if (itemIndex != -1 && mOnDragDropListener != null) {
-            final PhoneFavoriteTileView tileView =
-                    (PhoneFavoriteTileView) tile.getViewAtPosition(x, y);
-            if (mDragShadowOverlay == null) {
-                return false;
-            }
-
-            mDragShadowOverlay.clearAnimation();
-            mDragShadowBitmap = createDraggedChildBitmap(tileView);
-            if (mDragShadowBitmap == null) {
-                return false;
-            }
-
-            if (tileView instanceof PhoneFavoriteRegularRowView) {
-                mDragShadowLeft = tile.getLeft();
-                mDragShadowTop = tile.getTop();
-            } else {
-                // Square tile is relative to the contact tile,
-                // and contact tile is relative to this list view.
-                mDragShadowLeft = tileView.getLeft() + tileView.getParentRow().getLeft();
-                mDragShadowTop = tileView.getTop() + tileView.getParentRow().getTop();
-            }
-
-            mDragShadowOverlay.setImageBitmap(mDragShadowBitmap);
-            mDragShadowOverlay.setVisibility(VISIBLE);
-            mDragShadowOverlay.setAlpha(DRAG_SHADOW_ALPHA);
-
-            mDragShadowOverlay.setX(mDragShadowLeft);
-            mDragShadowOverlay.setY(mDragShadowTop);
-
-            // x and y passed in are the coordinates of where the user has touched down, calculate
-            // the offset to the top left coordinate of the dragged child.  This will be used for
-            // drawing the drag shadow.
-            mTouchOffsetToChildLeft = x - mDragShadowLeft;
-            mTouchOffsetToChildTop = y - mDragShadowTop;
-
-            // invalidate to trigger a redraw of the drag shadow.
-            invalidate();
-
-            mOnDragDropListener.onDragStarted(itemIndex);
-        }
-
-        return true;
+    public DragDropController getDragDropController() {
+        return mDragDropController;
     }
 
-    private void handleDragHovered(int x, int y) {
+    @Override
+    public void onDragStarted(int itemIndex, int x, int y, PhoneFavoriteTileView tileView) {
+        if (mDragShadowOverlay == null) {
+            return;
+        }
+
+        mDragShadowOverlay.clearAnimation();
+        mDragShadowBitmap = createDraggedChildBitmap(tileView);
+        if (mDragShadowBitmap == null) {
+            return;
+        }
+
+        if (tileView instanceof PhoneFavoriteRegularRowView) {
+            mDragShadowLeft = tileView.getParentRow().getLeft();
+            mDragShadowTop = tileView.getParentRow().getTop();
+        } else {
+            // Square tile is relative to the contact tile,
+            // and contact tile is relative to this list view.
+            mDragShadowLeft = tileView.getLeft() + tileView.getParentRow().getLeft();
+            mDragShadowTop = tileView.getTop() + tileView.getParentRow().getTop();
+        }
+
+        mDragShadowOverlay.setImageBitmap(mDragShadowBitmap);
+        mDragShadowOverlay.setVisibility(VISIBLE);
+        mDragShadowOverlay.setAlpha(DRAG_SHADOW_ALPHA);
+
+        mDragShadowOverlay.setX(mDragShadowLeft);
+        mDragShadowOverlay.setY(mDragShadowTop);
+
+        // x and y passed in are the coordinates of where the user has touched down,
+        // calculate the offset to the top left coordinate of the dragged child.  This
+        // will be used for drawing the drag shadow.
+        mTouchOffsetToChildLeft = x - mDragShadowLeft;
+        mTouchOffsetToChildTop = y - mDragShadowTop;
+    }
+
+    @Override
+    public void onDragHovered(int itemIndex, int x, int y) {
         // Update the drag shadow location.
         mDragShadowLeft = x - mTouchOffsetToChildLeft;
         mDragShadowTop = y - mTouchOffsetToChildTop;
@@ -374,21 +380,10 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
             mDragShadowOverlay.setX(mDragShadowLeft);
             mDragShadowOverlay.setY(mDragShadowTop);
         }
-
-        final View child = getViewAtPosition(x, y);
-        if (!(child instanceof ContactTileRow)) {
-            // Bail early.
-            return;
-        }
-
-        final ContactTileRow tile = (ContactTileRow) child;
-        final int itemIndex = tile.getItemIndex(x, y);
-        if (itemIndex != -1 && mOnDragDropListener != null) {
-            mOnDragDropListener.onDragHovered(itemIndex);
-        }
     }
 
-    private void handleDragFinished(int x, int y) {
+    @Override
+    public void onDragFinished(int x, int y) {
         // Update the drag shadow location.
         mDragShadowLeft = x - mTouchOffsetToChildLeft;
         mDragShadowTop = y - mTouchOffsetToChildTop;
@@ -400,11 +395,10 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
                     .setListener(mDragShadowOverAnimatorListener)
                     .start();
         }
-
-        if (mOnDragDropListener != null) {
-            mOnDragDropListener.onDragFinished();
-        }
     }
+
+    @Override
+    public void onDroppedOnRemove() {}
 
     private Bitmap createDraggedChildBitmap(View view) {
         view.setDrawingCacheEnabled(true);
@@ -424,11 +418,5 @@ public class PhoneFavoriteListView extends ListView implements SwipeHelperCallba
         view.setDrawingCacheEnabled(false);
 
         return bitmap;
-    }
-
-    public interface OnDragDropListener {
-        public void onDragStarted(int itemIndex);
-        public void onDragHovered(int itemIndex);
-        public void onDragFinished();
     }
 }

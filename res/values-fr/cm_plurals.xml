@@ -25,8 +25,8 @@
     <item quantity="other">%d min</item>
   </plurals>
   <plurals name="second">
-    <item quantity="one">%d sec</item>
-    <item quantity="other">%d sec</item>
+    <item quantity="one">%d s.</item>
+    <item quantity="other">%d s.</item>
   </plurals>
   <plurals name="call">
     <item quantity="one">%d appel</item>

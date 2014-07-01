@@ -33,7 +33,7 @@ import android.widget.TextView;
 import com.android.contacts.common.test.NeededForTesting;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
-import com.android.dialer.calllog.PhoneNumberHelper;
+import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 
 /**
@@ -48,7 +48,7 @@ public class PhoneCallDetailsHelper {
     private Long mCurrentTimeMillisForTest;
     // Helper classes.
     private final CallTypeHelper mCallTypeHelper;
-    private final PhoneNumberHelper mPhoneNumberHelper;
+    private final PhoneNumberDisplayHelper mPhoneNumberHelper;
     private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
 
     /**
@@ -62,8 +62,8 @@ public class PhoneCallDetailsHelper {
             PhoneNumberUtilsWrapper phoneUtils) {
         mResources = resources;
         mCallTypeHelper = callTypeHelper;
-        mPhoneNumberHelper = new PhoneNumberHelper(resources);
         mPhoneNumberUtilsWrapper = phoneUtils;
+        mPhoneNumberHelper = new PhoneNumberDisplayHelper(mPhoneNumberUtilsWrapper, resources);
     }
 
     /** Fills the call details views with content. */
@@ -90,26 +90,13 @@ public class PhoneCallDetailsHelper {
                 isHighlighted ? mCallTypeHelper.getHighlightedColor(details.callTypes[0]) : null;
 
         // The date of this call, relative to the current time.
-        CharSequence dateText =
-            DateUtils.getRelativeTimeSpanString(details.date,
-                    getCurrentTimeMillis(),
-                    DateUtils.MINUTE_IN_MILLIS,
-                    DateUtils.FORMAT_ABBREV_RELATIVE);
+        CharSequence dateText = getCallDate(details);
 
         // Set the call count and date.
         setCallCountAndDate(views, callCount, dateText, highlightColor);
 
-        CharSequence numberFormattedLabel = null;
-        // Only show a label if the number is shown and it is not a SIP address.
-        if (!TextUtils.isEmpty(details.number)
-                && !PhoneNumberUtils.isUriNumber(details.number.toString())) {
-            if (details.numberLabel == ContactInfo.GEOCODE_AS_LABEL) {
-                numberFormattedLabel = details.geocode;
-            } else {
-                numberFormattedLabel = Phone.getTypeLabel(mResources, details.numberType,
-                        details.numberLabel);
-            }
-        }
+        // Get type of call (ie mobile, home, etc) if known, or the caller's
+        CharSequence numberFormattedLabel = getCallTypeOrLocation(details);
 
         final CharSequence nameText;
         final CharSequence numberText;
@@ -121,7 +108,7 @@ public class PhoneCallDetailsHelper {
             nameText = displayNumber;
             if (TextUtils.isEmpty(details.geocode)
                     || mPhoneNumberUtilsWrapper.isVoicemailNumber(details.number)) {
-                numberText = mResources.getString(R.string.call_log_empty_gecode);
+                numberText = mResources.getString(R.string.call_log_empty_geocode);
             } else {
                 numberText = details.geocode;
             }
@@ -136,9 +123,43 @@ public class PhoneCallDetailsHelper {
         }
 
         views.nameView.setText(nameText);
-
         views.labelView.setText(labelText);
         views.labelView.setVisibility(TextUtils.isEmpty(labelText) ? View.GONE : View.VISIBLE);
+    }
+
+    /**
+     * For a call, if there is an associated contact for the caller, return the known call type
+     * (e.g. mobile, home, work).  If there is no associated contact, attempt to use the caller's
+     * location if known.
+     * @param details Call details to use.
+     * @return Type of call (mobile/home) if known, or the location of the caller (if known).
+     */
+    public CharSequence getCallTypeOrLocation(PhoneCallDetails details) {
+        CharSequence numberFormattedLabel = null;
+        // Only show a label if the number is shown and it is not a SIP address.
+        if (!TextUtils.isEmpty(details.number)
+                && !PhoneNumberUtils.isUriNumber(details.number.toString())) {
+            if (details.numberLabel == ContactInfo.GEOCODE_AS_LABEL) {
+                numberFormattedLabel = details.geocode;
+            } else {
+                numberFormattedLabel = Phone.getTypeLabel(mResources, details.numberType,
+                        details.numberLabel);
+            }
+        }
+        return numberFormattedLabel;
+    }
+
+    /**
+     * Get the call date/time of the call, relative to the current time.
+     * e.g. 3 minutes ago
+     * @param details Call details to use.
+     * @return String representing when the call occurred.
+     */
+    public CharSequence getCallDate(PhoneCallDetails details) {
+        return DateUtils.getRelativeTimeSpanString(details.date,
+                getCurrentTimeMillis(),
+                DateUtils.MINUTE_IN_MILLIS,
+                DateUtils.FORMAT_ABBREV_RELATIVE);
     }
 
     /** Sets the text of the header view for the details page of a phone call. */

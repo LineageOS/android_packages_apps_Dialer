@@ -435,6 +435,86 @@
     -->
     <string name="description_call">Call <xliff:g id="name">%1$s</xliff:g></string>
 
+    <!-- String describing the button to access the contact details for a name or number.
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_contact_details">Contact details for <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+
+    <!-- String describing the button to access call details in the call log.
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_call_details">Call details</string>
+
+    <!-- String indicating a call log entry has an associated voicemail.
+
+    Note: AccessibilityServices use this attribute to announce what the view represents.
+          This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_new_voicemail">New voicemail.</string>
+
+    <!-- String indicating the number of calls to/from a caller in the call log.
+
+    Note: AccessibilityServices use this attribute to announce what the view represents.
+          This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> calls.</string>
+
+
+    <!-- Call history description for a missed call from a caller.
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_return_missed_call">Return missed call from <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
+
+
+    <!-- Call history description for an answered call for a caller.
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_return_answered_call">Return answered call from <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
+
+    <!-- Call history description for a missed call from an unknown caller.
+         Drops the "return" part of description_return_missed_call since it is not
+         possible to actually call an unknown number.
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_unknown_missed_call">Missed call from <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
+
+
+    <!-- Call history description for an answered call from an unknown caller.
+        Drops the "return" part of description_return_answered_call since it is not
+         possible to actually call an unknown number.
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_unknown_answered_call">Answered call from <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
+
+    <!-- String describing an outgoing call entry in the call log.  Used to indicate that
+         a call will be made to the specified caller.  Used when there are multiple calls to/from
+         the caller.
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_call_last_multiple">Call <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g>.  Last called <xliff:g id="timeOfCall">%3$s</xliff:g>.</string>
+
+    <!-- String describing an outgoing call entry in the call log.  Used to indicate that
+         a call will be made to the specified caller.  Used when there is only a single call
+         related to/from the caller.
+
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+              This is especially valuable for views without textual representation like ImageView.
+    -->
+    <string name="description_call_last">Call <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g>.  Called <xliff:g id="timeOfCall">%3$s</xliff:g>.</string>
+
 
     <!-- String describing the button to SMS a number or contact.
 
@@ -453,11 +533,15 @@
     -->
     <string name="description_call_log_unheard_voicemail">Unheard voicemail</string>
 
+    <!--  String describing the icon used to clear the search field -->
+    <string name="description_clear_search">Clear search</string>
+
     <!-- String describing the icon used to start a voice search -->
     <string name="description_start_voice_search">Start voice search</string>
 
-    <!-- The string used to represent an unknown location for a phone number in the call log [CHAR LIMIT=3] -->
-    <string name="call_log_empty_gecode">\u0020</string>
+    <!-- The string used to represent an unknown location for a phone number in the call log
+        Do not translate. -->
+    <string name="call_log_empty_geocode"></string>
 
     <!-- Menu item used to call a contact, containing the number of the contact to call -->
     <string name="menu_callNumber">Call <xliff:g id="number">%s</xliff:g></string>
@@ -518,6 +602,9 @@
 
     <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
     <string name="add_contact_not_available">Re-enable the People application to use this feature.</string>
+
+    <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
+    <string name="voice_search_not_available">Voice search is not available.</string>
 
     <!-- Hint displayed in dialer search box when there is no query that is currently typed.
          [CHAR LIMIT=30] -->
@@ -636,7 +723,34 @@
     <!-- Content description for dismiss button on badge. [CHAR LIMIT=NONE] -->
     <string name="description_dismiss">Dismiss</string>
 
+    <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
+    <string name="remove_contact">Remove</string>
+
+    <!-- Header text displayed on the main dialer screen above the list of favorite phone numbers.
+         [CHAR LIMIT=21] -->
+    <string name="favorites_menu_speed_dial">Speed Dial</string>
+
+    <!-- Button text for the "all contacts" button displayed on the main dialer screen above the
+         list of favorite phone numbers.  Navigates the user to the "All Contacts" list.
+         This text represents the same action as the text in string "menu_allContacts".
+         [CHAR LIMIT=21] -->
+    <string name="favorites_menu_all_contacts">ALL CONTACTS</string>
+
+    <!-- The font-family to use for the "speed dial" label on the favorites menu.
+         Do not translate. -->
+    <string name="favorites_menu_speed_dial_font_family">sans-serif-light</string>
+
+    <!-- The font-family to use for the "all contacts" label on the favorites menu.
+         Do not translate. -->
+    <string name="favorites_menu_all_contacts_font_family">sans-serif</string>
+
+    <!-- The font-family to use for the text inside the searchbox.
+         Do not translate. -->
+    <string name="search_font_family">sans-serif</string>
+
+    <!-- The font-family to use for tab text.
+         Do not translate. -->
+    <string name="tab_font_family">sans-serif</string>
+
     <string name="calllog_search_hint">Search call log</string>
-    <string name="dial_conference">Dial conference</string>
-    <string name="to_hint" translatable="false">1111:to;sip:abby@example.com:bcc;sip:bill@example.com:cc;</string>
 </resources>

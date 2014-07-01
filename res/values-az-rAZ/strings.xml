@@ -115,7 +115,7 @@
     <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g> mesaj göndər"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Eşidilməmiş səsli mesaj"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Səs axtarışına başlayın"</string>
-    <string name="call_log_empty_gecode" msgid="5588904744812100846">"-"</string>
+    <string name="call_log_empty_geocode" msgid="5588904744812100846">"-"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> zəng edin"</string>
     <string name="unknown" msgid="740067747858270469">"Naməlum"</string>
     <string name="voicemail" msgid="3851469869202611441">"Səsli poçt"</string>

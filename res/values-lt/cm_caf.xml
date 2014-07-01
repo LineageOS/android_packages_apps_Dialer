@@ -17,5 +17,4 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="calllog_search_hint">Ieškoti skambučių žurnalo</string>
-  <string name="dial_conference">Rinkti konferenciją</string>
 </resources>

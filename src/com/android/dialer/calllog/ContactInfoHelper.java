@@ -1,17 +1,15 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.android.dialer.calllog;
@@ -41,6 +39,8 @@ import com.android.dialerbind.ObjectFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * Utility class to look up the contact information for a given number.
@@ -106,7 +106,7 @@ public class ContactInfoHelper {
                 updatedInfo = new ContactInfo();
                 updatedInfo.number = number;
                 updatedInfo.formattedNumber = formatPhoneNumber(number, null, countryIso);
-                updatedInfo.lookupUri = createTemporaryContactUri(number);
+                updatedInfo.lookupUri = createTemporaryContactUri(updatedInfo.formattedNumber);
             } else {
                 updatedInfo = info;
             }
@@ -118,23 +118,20 @@ public class ContactInfoHelper {
      * Creates a JSON-encoded lookup uri for a unknown number without an associated contact
      *
      * @param number - Unknown phone number
-     * @return JSON-encoded URI that can be used to perform a lookup when clicking
-     * on the quick contact card.
+     * @return JSON-encoded URI that can be used to perform a lookup when clicking on the quick
+     *         contact card.
      */
     private static Uri createTemporaryContactUri(String number) {
         try {
-            final JSONObject contactRows = new JSONObject()
-                    .put(Phone.CONTENT_ITEM_TYPE, new JSONObject()
-                            .put(Phone.NUMBER, number)
-                                    .put(Phone.TYPE, Phone.TYPE_CUSTOM));
+            final JSONObject contactRows = new JSONObject().put(Phone.CONTENT_ITEM_TYPE,
+                    new JSONObject().put(Phone.NUMBER, number).put(Phone.TYPE, Phone.TYPE_CUSTOM));
 
-            final String jsonString = new JSONObject()
-                    .put(Contacts.DISPLAY_NAME, number)
-                            .put(Contacts.DISPLAY_NAME_SOURCE, DisplayNameSources.PHONE)
-                            .put(Contacts.CONTENT_ITEM_TYPE, contactRows)
-                            .toString();
+            final String jsonString = new JSONObject().put(Contacts.DISPLAY_NAME, number)
+                    .put(Contacts.DISPLAY_NAME_SOURCE, DisplayNameSources.PHONE)
+                    .put(Contacts.CONTENT_ITEM_TYPE, contactRows).toString();
 
-            return Contacts.CONTENT_LOOKUP_URI.buildUpon()
+            return Contacts.CONTENT_LOOKUP_URI
+                    .buildUpon()
                     .appendPath(Constants.LOOKUP_URI_ENCODED)
                     .appendQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY,
                             String.valueOf(Long.MAX_VALUE))
@@ -157,8 +154,7 @@ public class ContactInfoHelper {
     private ContactInfo lookupContactFromUri(Uri uri) {
         final ContactInfo info;
         Cursor phonesCursor =
-                mContext.getContentResolver().query(
-                        uri, PhoneQuery._PROJECTION, null, null, null);
+                mContext.getContentResolver().query(uri, PhoneQuery._PROJECTION, null, null, null);
 
         if (phonesCursor != null) {
             try {
@@ -166,6 +162,7 @@ public class ContactInfoHelper {
                     info = new ContactInfo();
                     long contactId = phonesCursor.getLong(PhoneQuery.PERSON_ID);
                     String lookupKey = phonesCursor.getString(PhoneQuery.LOOKUP_KEY);
+                    info.lookupKey = lookupKey;
                     info.lookupUri = Contacts.getLookupUri(contactId, lookupKey);
                     info.name = phonesCursor.getString(PhoneQuery.NAME);
                     info.type = phonesCursor.getInt(PhoneQuery.PHONE_TYPE);
@@ -237,8 +234,8 @@ public class ContactInfoHelper {
         } else if (LookupCache.hasCachedContact(mContext, number)) {
             info = LookupCache.getCachedContact(mContext, number);
         } else if (mCachedNumberLookupService != null) {
-            CachedContactInfo cacheInfo = mCachedNumberLookupService
-                .lookupCachedContactFromNumber(mContext, number);
+            CachedContactInfo cacheInfo =
+                    mCachedNumberLookupService.lookupCachedContactFromNumber(mContext, number);
             info = cacheInfo != null ? cacheInfo.getContactInfo() : null;
         }
         return info;
@@ -249,14 +246,12 @@ public class ContactInfoHelper {
      *
      * @param number the number to be formatted.
      * @param normalizedNumber the normalized number of the given number.
-     * @param countryIso the ISO 3166-1 two letters country code, the country's
-     *        convention will be used to format the number if the normalized
-     *        phone is null.
+     * @param countryIso the ISO 3166-1 two letters country code, the country's convention will be
+     *        used to format the number if the normalized phone is null.
      *
      * @return the formatted number, or the given number if it was formatted.
      */
-    private String formatPhoneNumber(String number, String normalizedNumber,
-            String countryIso) {
+    private String formatPhoneNumber(String number, String normalizedNumber, String countryIso) {
         if (TextUtils.isEmpty(number)) {
             return "";
         }
@@ -296,5 +291,34 @@ public class ContactInfoHelper {
             String message = mContext.getString(R.string.toast_added_to_blacklist, number);
             Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * Parses the given URI to determine the original lookup key of the contact.
+     */
+    public static String getLookupKeyFromUri(Uri lookupUri) {
+        // Would be nice to be able to persist the lookup key somehow to avoid having to parse
+        // the uri entirely just to retrieve the lookup key, but every uri is already parsed
+        // once anyway to check if it is an encoded JSON uri, so this has negligible effect
+        // on performance.
+        if (lookupUri != null && !UriUtils.isEncodedContactUri(lookupUri)) {
+            final List<String> segments = lookupUri.getPathSegments();
+            // This returns the third path segment of the uri, where the lookup key is located.
+            // See {@link android.provider.ContactsContract.Contacts#CONTENT_LOOKUP_URI}.
+            return (segments.size() < 3) ? null : segments.get(2);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Given a contact's sourceType, return true if the contact is a business
+     *
+     * @param sourceType sourceType of the contact. This is usually populated by
+     *        {@link #mCachedNumberLookupService}.
+     */
+    public boolean isBusiness(int sourceType) {
+        return mCachedNumberLookupService != null
+                && mCachedNumberLookupService.isBusiness(sourceType);
     }
 }

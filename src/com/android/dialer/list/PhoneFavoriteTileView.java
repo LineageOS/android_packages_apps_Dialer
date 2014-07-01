@@ -24,13 +24,12 @@ import android.content.ClipData;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 
+import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.MoreContactUtils;
+import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.dialer.R;
@@ -49,7 +48,13 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     private static final String TAG = PhoneFavoriteTileView.class.getSimpleName();
     private static final boolean DEBUG = false;
 
-    /** Length of all animations in miniseconds. */
+    // These parameters instruct the photo manager to display the default image/letter at 70% of
+    // its normal size, and vertically offset upwards 14% towards the top of the letter tile, to
+    // make room for the contact name and number label at the bottom of the image.
+    private static final float DEFAULT_IMAGE_LETTER_OFFSET = -0.14f;
+    private static final float DEFAULT_IMAGE_LETTER_SCALE = 0.70f;
+
+    /** Length of all animations in milliseconds. */
     private int mAnimationDuration;
 
     /** The view that holds the front layer of the favorite contact card. */
@@ -60,8 +65,8 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     private View mUndoRemovalButton;
     /** The view that holds the list view row. */
     protected ContactTileRow mParentRow;
-    /** The view that indicates whether the contact is a favorate. */
-    protected ImageView mStarView;
+    /** View that contains the transparent shadow that is overlaid on top of the contact image. */
+    private View mShadowOverlay;
 
     /** Users' most frequent phone number. */
     private String mPhoneNumberString;
@@ -85,11 +90,10 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mFavoriteContactCard = findViewById(com.android.dialer.R.id.contact_favorite_card);
-        mRemovalDialogue = findViewById(com.android.dialer.R.id.favorite_remove_dialogue);
-        mUndoRemovalButton = findViewById(com.android.dialer.R.id
-                .favorite_remove_undo_button);
-        mStarView = (ImageView) findViewById(com.android.dialer.R.id.contact_favorite_star);
+        mShadowOverlay = findViewById(R.id.shadow_overlay);
+        mFavoriteContactCard = findViewById(R.id.contact_favorite_card);
+        mRemovalDialogue = findViewById(R.id.favorite_remove_dialogue);
+        mUndoRemovalButton = findViewById(R.id.favorite_remove_undo_button);
 
         mUndoRemovalButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -127,7 +131,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
             // Grab the phone-number to call directly... see {@link onClick()}
             mPhoneNumberString = entry.phoneNumber;
 
-            mStarView.setVisibility(entry.isFavorite ? VISIBLE : GONE);
             // If this is a blank entry, don't show anything.
             // TODO krelease:Just hide the view for now. For this to truly look like an empty row
             // the entire ContactTileRow needs to be hidden.
@@ -240,5 +243,19 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
                 }
             }
         };
+    }
+
+    @Override
+    protected DefaultImageRequest getDefaultImageRequest(String displayName, String lookupKey) {
+        return new DefaultImageRequest(displayName, lookupKey, ContactPhotoManager.TYPE_DEFAULT,
+                DEFAULT_IMAGE_LETTER_SCALE, DEFAULT_IMAGE_LETTER_OFFSET);
+    }
+
+    @Override
+    protected void configureViewForImage(boolean isDefaultImage) {
+        // Hide the shadow overlay if the image is a default image (i.e. colored letter tile)
+        if (mShadowOverlay != null) {
+            mShadowOverlay.setVisibility(isDefaultImage ? View.GONE : View.VISIBLE);
+        }
     }
 }

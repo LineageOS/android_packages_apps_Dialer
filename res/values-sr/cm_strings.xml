@@ -21,7 +21,7 @@
   <string name="call_stats">Статистика позива</string>
   <string name="call_stats_refresh">Освежи</string>
   <string name="activity_title_call_stats">Статистика позива</string>
-  <string name="call_stats_nav_all">Све</string>
+  <string name="call_stats_nav_all">Сви</string>
   <string name="call_stats_nav_incoming">Долазни</string>
   <string name="call_stats_nav_outgoing">Одлазни</string>
   <string name="call_stats_nav_missed">Пропуштени</string>
@@ -42,11 +42,11 @@
   <string name="date_qs_lastmonth">Прошли месец</string>
   <string name="date_qs_lastquarter">Прошли квартал</string>
   <string name="date_qs_lastyear">Прошла година</string>
-  <string name="call_stats_date_filter">Подесите временски опсег</string>
-  <string name="call_stats_reset_filter">Ресетујте временски опсег</string>
-  <string name="call_stats_sort_by_duration">Сортирајте по трајању позива</string>
-  <string name="call_stats_sort_by_count">Сортирајте по броју позива</string>
-  <string name="menu_add_to_blacklist">Додајте на црну листу</string>
+  <string name="call_stats_date_filter">Подеси временски опсег</string>
+  <string name="call_stats_reset_filter">Ресетуј временски опсег</string>
+  <string name="call_stats_sort_by_duration">Сортирај по трајању позива</string>
+  <string name="call_stats_sort_by_count">Сортирај по броју позива</string>
+  <string name="menu_add_to_blacklist">Додај на црну листу</string>
   <string name="toast_added_to_blacklist">%s додато на црну листу.</string>
   <string name="nearby_places">Оближња места</string>
   <string name="people">Особе</string>

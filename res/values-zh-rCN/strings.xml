@@ -89,7 +89,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"仅显示未接来电"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"只显示语音邮件"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"显示所有通话"</string>
-    <string name="add_2sec_pause" msgid="9214012315201040129">"暂停时间延长2秒"</string>
+    <string name="add_2sec_pause" msgid="9214012315201040129">"延长暂停时间2秒"</string>
     <string name="add_wait" msgid="3360818652790319634">"延长等待时间"</string>
     <string name="call_settings" msgid="7666474782093693667">"设置"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"新建联系人"</string>
@@ -112,10 +112,20 @@
     <string name="description_add_contact" msgid="3103414772502485851">"添加联系人"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"查看联系人<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"呼叫<xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的详细联系信息"</string>
+    <string name="description_call_details" msgid="8936017517290240089">"通话详情"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"有新的语音邮件。"</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>次通话。"</string>
+    <string name="description_return_missed_call" msgid="5832103397942825774">"回拨<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的未接电话"</string>
+    <string name="description_return_answered_call" msgid="6038958518509163218">"回拨<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的已接电话"</string>
+    <string name="description_unknown_missed_call" msgid="8736195520010578126">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的未接电话"</string>
+    <string name="description_unknown_answered_call" msgid="1470971301999791460">"<xliff:g id="TIMEOFCALL">%3$s</xliff:g>来自<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）的已接电话"</string>
+    <string name="description_call_last_multiple" msgid="271456796151369411">"与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）通话。上次通话时间是<xliff:g id="TIMEOFCALL">%3$s</xliff:g>。"</string>
+    <string name="description_call_last" msgid="491385778814705302">"与<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>（<xliff:g id="TYPEORLOCATION">%2$s</xliff:g>）通话。上次通话时间是<xliff:g id="TIMEOFCALL">%3$s</xliff:g>。"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"向<xliff:g id="NAME">%1$s</xliff:g>发送短信"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"未收听的语音邮件"</string>
+    <string name="description_clear_search" msgid="688023606766232904">"清除搜索内容"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"开始语音搜索"</string>
-    <string name="call_log_empty_gecode" msgid="2019639420045039861">" "</string>
     <string name="menu_callNumber" msgid="997146291983360266">"拨打 <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"未知"</string>
     <string name="voicemail" msgid="3851469869202611441">"语音信箱"</string>
@@ -133,6 +143,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"正从 SIM 卡中加载..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM 卡联系人"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"必须重新启用联系人应用才能使用此功能。"</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"无法使用语音搜索。"</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"输入姓名或手机号"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"未接电话"</string>
@@ -161,5 +172,8 @@
     <string name="no_favorites" msgid="5212485868783382971">"您收藏的联系人和经常通话\n的联系人都会显示在这里。\n现在就开始与联系人通话吧。"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"点按图片可查看所有号码，按住图片可重新排序"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"关闭"</string>
+    <string name="remove_contact" msgid="1080555335283662961">"移除"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"快速拨号"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"所有联系人"</string>
     <string name="calllog_search_hint">"搜索通话记录"</string>
 </resources>

@@ -163,6 +163,17 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         /** Selects only rows that have been updated after a certain time stamp.*/
         static final String SELECT_UPDATED_CLAUSE =
                 Phone.CONTACT_LAST_UPDATED_TIMESTAMP + " > ?";
+
+        /** Ignores contacts that have an unreasonably long lookup key. These are likely to be
+         * the result of multiple (> 50) merged raw contacts, and are likely to cause
+         * OutOfMemoryExceptions within SQLite, or cause memory allocation problems later on
+         * when iterating through the cursor set (see b/13133579)
+         */
+        static final String SELECT_IGNORE_LOOKUP_KEY_TOO_LONG_CLAUSE =
+                "length(" + Phone.LOOKUP_KEY + ") < 1000";
+
+        static final String SELECTION = SELECT_UPDATED_CLAUSE + " AND " +
+                SELECT_IGNORE_LOOKUP_KEY_TOO_LONG_CLAUSE;
     }
 
     /** Query options for querying the deleted contact database.*/
@@ -514,6 +525,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 DeleteContactQuery.PROJECTION,
                 DeleteContactQuery.SELECT_UPDATED_CLAUSE,
                 new String[] {last_update_time}, null);
+        if (deletedContactCursor == null) {
+            return;
+        }
 
         db.beginTransaction();
         try {
@@ -631,10 +645,26 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
             updatedContactCursor.moveToPosition(-1);
             while (updatedContactCursor.moveToNext()) {
-                insert.bindLong(1, updatedContactCursor.getLong(PhoneQuery.PHONE_ID));
-                insert.bindString(2, updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER));
-                insert.bindLong(3, updatedContactCursor.getLong(PhoneQuery.PHONE_CONTACT_ID));
-                insert.bindString(4, updatedContactCursor.getString(PhoneQuery.PHONE_LOOKUP_KEY));
+                insert.clearBindings();
+
+                // Handle string columns which can possibly be null first. In the case of certain
+                // null columns (due to malformed rows possibly inserted by third-party apps
+                // or sync adapters), skip the phone number row.
+                final String number = updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER);
+                if (TextUtils.isEmpty(number)) {
+                    continue;
+                } else {
+                    insert.bindString(2, number);
+                }
+
+                final String lookupKey = updatedContactCursor.getString(
+                        PhoneQuery.PHONE_LOOKUP_KEY);
+                if (TextUtils.isEmpty(lookupKey)) {
+                    continue;
+                } else {
+                    insert.bindString(4, lookupKey);
+                }
+
                 final String displayName = updatedContactCursor.getString(
                         PhoneQuery.PHONE_DISPLAY_NAME);
                 if (displayName == null) {
@@ -642,6 +672,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 } else {
                     insert.bindString(5, displayName);
                 }
+                insert.bindLong(1, updatedContactCursor.getLong(PhoneQuery.PHONE_ID));
+                insert.bindLong(3, updatedContactCursor.getLong(PhoneQuery.PHONE_CONTACT_ID));
                 insert.bindLong(6, updatedContactCursor.getLong(PhoneQuery.PHONE_PHOTO_ID));
                 insert.bindLong(7, updatedContactCursor.getLong(PhoneQuery.PHONE_LAST_TIME_USED));
                 insert.bindLong(8, updatedContactCursor.getInt(PhoneQuery.PHONE_TIMES_USED));
@@ -651,8 +683,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 insert.bindLong(12, updatedContactCursor.getInt(PhoneQuery.PHONE_IS_PRIMARY));
                 insert.bindLong(13, currentMillis);
                 insert.executeInsert();
-                insert.clearBindings();
-
                 final String contactPhoneNumber =
                         updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER);
                 final ArrayList<String> numberPrefixes =
@@ -741,7 +771,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
              * update time.
              */
             final Cursor updatedContactCursor = mContext.getContentResolver().query(PhoneQuery.URI,
-                    PhoneQuery.PROJECTION, PhoneQuery.SELECT_UPDATED_CLAUSE,
+                    PhoneQuery.PROJECTION, PhoneQuery.SELECTION,
                     new String[]{lastUpdateMillis}, null);
 
             /** Sets the time after querying the database as the current update time. */

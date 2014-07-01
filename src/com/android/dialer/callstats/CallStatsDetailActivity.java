@@ -24,6 +24,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.CallLog.Calls;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -32,12 +33,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.GeoUtil;
 import com.android.dialer.CallDetailHeader;
 import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
-import com.android.dialer.calllog.PhoneNumberHelper;
+import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.widget.PieChartView;
 
@@ -69,6 +71,7 @@ public class CallStatsDetailActivity extends Activity {
     private TextView mMissedSummary;
     private TextView mMissedCount;
     private PieChartView mPieChart;
+    private PhoneNumberDisplayHelper mPhoneNumberDisplayHelper;
 
     private CallStatsDetails mData;
     private String mNumber = null;
@@ -93,10 +96,11 @@ public class CallStatsDetailActivity extends Activity {
 
         mResources = getResources();
 
-        PhoneNumberHelper phoneNumberHelper = new PhoneNumberHelper(mResources);
-        mCallDetailHeader = new CallDetailHeader(this, phoneNumberHelper);
+        final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper = new PhoneNumberUtilsWrapper();
+        mPhoneNumberDisplayHelper = new PhoneNumberDisplayHelper(mPhoneNumberUtilsWrapper, mResources);
+        mCallDetailHeader = new CallDetailHeader(this, mPhoneNumberDisplayHelper);
         mCallStatsDetailHelper = new CallStatsDetailHelper(mResources,
-                new PhoneNumberUtilsWrapper());
+                mPhoneNumberUtilsWrapper);
         mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
 
         mHeaderTextView = (TextView) findViewById(R.id.header_text);
@@ -148,7 +152,27 @@ public class CallStatsDetailActivity extends Activity {
         // Set the details header, based on the first phone call.
         mCallStatsDetailHelper.setCallStatsDetailHeader(mHeaderTextView, mData);
         mCallDetailHeader.updateViews(mNumber, mData.numberPresentation, mData);
-        mCallDetailHeader.loadContactPhotos(mData.photoUri);
+
+        final CharSequence displayNumber =
+            mPhoneNumberDisplayHelper.getDisplayNumber(
+                    mData.number,
+                    mData.numberPresentation,
+                    mData.formattedNumber);
+
+        final String displayNameForDefaultImage = TextUtils.isEmpty(mData.name) ?
+            displayNumber.toString() : mData.name.toString();
+
+        final String lookupKey = ContactInfoHelper.getLookupKeyFromUri(mData.contactUri);
+
+        final boolean isVoicemailNumber =
+                PhoneNumberUtilsWrapper.INSTANCE.isVoicemailNumber(mData.number);
+
+        final int contactType =
+            isVoicemailNumber? ContactPhotoManager.TYPE_VOICEMAIL :
+            ContactPhotoManager.TYPE_DEFAULT;
+
+        mCallDetailHeader.loadContactPhotos(mData.photoUri, displayNameForDefaultImage, lookupKey, contactType);
+
         invalidateOptionsMenu();
 
         mPieChart.setOriginAngle(240);

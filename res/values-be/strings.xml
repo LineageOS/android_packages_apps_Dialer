@@ -119,7 +119,7 @@
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Непраслуханая галасавая пошта"</string>
     <!-- no translation found for description_start_voice_search (520539488194946012) -->
     <skip />
-    <!-- no translation found for call_log_empty_gecode (2019639420045039861) -->
+    <!-- no translation found for call_log_empty_geocode (2019639420045039861) -->
     <skip />
     <string name="menu_callNumber" msgid="997146291983360266">"Выклікаць <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Невядомы"</string>

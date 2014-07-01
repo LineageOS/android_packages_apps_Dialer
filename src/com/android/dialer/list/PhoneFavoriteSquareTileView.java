@@ -36,10 +36,6 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
     private static final String TAG = PhoneFavoriteSquareTileView.class.getSimpleName();
     private ImageButton mSecondaryButton;
 
-    // TODO: Use a more expansive name token separator if needed. For now it should be fine to
-    // not split by dashes, underscore etc.
-    private static final Pattern NAME_TOKEN_SEPARATOR_PATTERN = Pattern.compile("\\s+");
-
     public PhoneFavoriteSquareTileView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -63,35 +59,15 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
     }
 
     @Override
-    protected String getNameForView(String name) {
-        if (TextUtils.isEmpty(name)) return name;
-        final String[] tokens = NAME_TOKEN_SEPARATOR_PATTERN.split(name, 2);
-        if (tokens.length < 1) return name;
-        return tokens[0];
-    }
-
-    @Override
     public void loadFromContact(ContactEntry entry) {
         super.loadFromContact(entry);
         if (entry != null) {
-            final boolean contactIsFavorite = entry.isFavorite;
-            mSecondaryButton.setVisibility(contactIsFavorite ? GONE : VISIBLE);
-
-            if (contactIsFavorite) {
-                mStarView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        launchQuickContact();
-                    }
-                });
-            } else {
-                mSecondaryButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        launchQuickContact();
-                    }
-                });
-            }
+            mSecondaryButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    launchQuickContact();
+                }
+            });
         }
     }
 }
