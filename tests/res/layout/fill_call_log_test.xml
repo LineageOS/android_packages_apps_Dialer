@@ -179,28 +179,28 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/call_subscription" />
+        android:text="@string/call_account" />
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <RadioButton
-            android:id="@+id/subscription0"
+            android:id="@+id/account0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/subscription0"
+            android:text="@string/account0"
             android:textSize="9sp" />
         <RadioButton
-            android:id="@+id/subscription1"
+            android:id="@+id/account1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/subscription1"
+            android:text="@string/account1"
             android:textSize="9sp" />
         <RadioButton
-            android:id="@+id/no_subscription"
+            android:id="@+id/no_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_subscription"
+            android:text="@string/no_account"
             android:textSize="9sp" />
     </RadioGroup>
     <Button

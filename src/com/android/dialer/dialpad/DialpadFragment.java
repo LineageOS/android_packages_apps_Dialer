@@ -34,13 +34,11 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
-import android.telecomm.Subscription;
+import android.telecomm.PhoneAccount;
 import android.telecomm.TelecommManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
@@ -59,8 +57,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -68,13 +64,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
-import com.android.contacts.common.SubscriptionManager;
-import com.android.contacts.common.dialog.SelectSubscriptionDialogFragment;
+import com.android.contacts.common.PhoneAccountManager;
+import com.android.contacts.common.dialog.SelectAccountDialogFragment;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.NeededForReflection;
@@ -101,7 +96,7 @@ public class DialpadFragment extends Fragment
         DialpadKeyButton.OnPressedListener {
     private static final String TAG = DialpadFragment.class.getSimpleName();
 
-    private static SubscriptionManager mSubscriptionManager;
+    private static PhoneAccountManager mAccountManager;
 
     /**
      * This interface allows the DialpadFragment to tell its hosting Activity when and when not
@@ -856,9 +851,9 @@ public class DialpadFragment extends Fragment
             @Override
             public void show() {
                 final Menu menu = getMenu();
-                final MenuItem selectSubscription = menu.findItem(R.id.menu_select_subscription);
+                final MenuItem selectAccount = menu.findItem(R.id.menu_select_account);
                 final MenuItem sendMessage = menu.findItem(R.id.menu_send_message);
-                selectSubscription.setVisible(mSubscriptionManager != null);
+                selectAccount.setVisible(mAccountManager != null);
                 sendMessage.setVisible(mSmsPackageComponentName != null);
 
                 boolean enable = !isDigitsEmpty();
@@ -1077,14 +1072,15 @@ public class DialpadFragment extends Fragment
                 // Clear the digits just in case.
                 clearDialpad();
             } else {
-                final Subscription subscription = mSubscriptionManager != null?
-                        mSubscriptionManager.getCurrentSubscription() : null;
+                final PhoneAccount account = mAccountManager != null?
+                        mAccountManager.getCurrentAccount() : null;
 
 
                 final Intent intent = CallUtil.getCallIntent(number,
                         (getActivity() instanceof DialtactsActivity ?
                                 ((DialtactsActivity) getActivity()).getCallOrigin() : null),
-                                subscription);
+                        account
+                );
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent);
                 hideAndClearDialpad(false);
             }
@@ -1444,8 +1440,8 @@ public class DialpadFragment extends Fragment
                 DialerUtils.startActivityWithErrorToast(getActivity(), smsIntent);
                 return true;
             }
-            case R.id.menu_select_subscription:
-              SelectSubscriptionDialogFragment.show(getFragmentManager(), mSubscriptionManager);
+            case R.id.menu_select_account:
+              SelectAccountDialogFragment.show(getFragmentManager(), mAccountManager);
               return true;
 
             default:
@@ -1617,8 +1613,8 @@ public class DialpadFragment extends Fragment
         return mAnimate;
     }
 
-    public void setSubscriptionManager(SubscriptionManager subscriptionManager) {
-        mSubscriptionManager = subscriptionManager;
+    public void setAccountManager(PhoneAccountManager accountManager) {
+        mAccountManager = accountManager;
     }
 
     public void setYFraction(float yFraction) {

@@ -20,7 +20,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.telecomm.Subscription;
 
 /**
  * The details of a phone call to be shown in the UI.
@@ -68,14 +67,14 @@ public class PhoneCallDetails {
     /**
      * The unique identifier for the provider associated with the call.
      */
-    public final Drawable subscriptionIcon;
+    public final Drawable accountIcon;
 
     /** Create the details for a call with a number not associated with a contact. */
     public PhoneCallDetails(CharSequence number, int numberPresentation,
             CharSequence formattedNumber, String countryIso, String geocode,
-            int[] callTypes, long date, long duration, Drawable subscriptionIcon) {
+            int[] callTypes, long date, long duration, Drawable accountIcon) {
         this(number, numberPresentation, formattedNumber, countryIso, geocode,
-                callTypes, date, duration, "", 0, "", null, null, 0, subscriptionIcon);
+                callTypes, date, duration, "", 0, "", null, null, 0, accountIcon);
     }
 
     /** Create the details for a call with a number associated with a contact. */
@@ -83,7 +82,7 @@ public class PhoneCallDetails {
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration, CharSequence name,
             int numberType, CharSequence numberLabel, Uri contactUri,
-            Uri photoUri, int sourceType, Drawable subscriptionIcon) {
+            Uri photoUri, int sourceType, Drawable accountIcon) {
         this.number = number;
         this.numberPresentation = numberPresentation;
         this.formattedNumber = formattedNumber;
@@ -98,6 +97,6 @@ public class PhoneCallDetails {
         this.contactUri = contactUri;
         this.photoUri = photoUri;
         this.sourceType = sourceType;
-        this.subscriptionIcon = subscriptionIcon;
+        this.accountIcon = accountIcon;
     }
 }
