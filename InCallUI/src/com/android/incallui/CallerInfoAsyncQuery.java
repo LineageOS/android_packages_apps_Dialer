@@ -27,6 +27,7 @@ import android.os.Message;
 import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -403,7 +404,7 @@ public class CallerInfoAsyncQuery {
         // check to see if these are recognized numbers, and use shortcuts if we can.
         if (PhoneNumberHelper.isLocalEmergencyNumber(number, context)) {
             cw.event = EVENT_EMERGENCY_NUMBER;
-        } else if (TelephonyManagerUtils.isVoiceMailNumber(number, context)) {
+        } else if (PhoneNumberUtils.isVoiceMailNumber(number)) {
             cw.event = EVENT_VOICEMAIL_NUMBER;
         } else {
             cw.event = EVENT_NEW_QUERY;

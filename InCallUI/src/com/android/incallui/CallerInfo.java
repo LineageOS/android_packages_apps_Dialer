@@ -284,7 +284,7 @@ public class CallerInfo {
         // shortcut and skip the query.
         if (PhoneNumberHelper.isLocalEmergencyNumber(number, context)) {
             return new CallerInfo().markAsEmergency(context);
-        } else if (TelephonyManagerUtils.isVoiceMailNumber(number, context)) {
+        } else if (PhoneNumberUtils.isVoiceMailNumber(number)) {
             return new CallerInfo().markAsVoiceMail(context);
         }
 

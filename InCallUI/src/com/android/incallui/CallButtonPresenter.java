@@ -31,6 +31,7 @@ import com.android.incalluibind.ServiceFactory;
 import com.android.services.telephony.common.AudioMode;
 
 import android.app.Fragment;
+import android.telephony.PhoneNumberUtils;
 
 /**
  * Logic for call buttons.
@@ -98,8 +99,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             if (ui != null) {
                 final Fragment callButtonFragment = (Fragment) ui;
                 if (mPreviousState == InCallState.OUTGOING && mCall != null
-                        && TelephonyManagerUtils.isVoiceMailNumber(mCall.getNumber(),
-                                callButtonFragment.getActivity())) {
+                        && PhoneNumberUtils.isVoiceMailNumber(mCall.getNumber())) {
                     ui.displayDialpad(true /* show */, true /* animate */);
                 }
             }
