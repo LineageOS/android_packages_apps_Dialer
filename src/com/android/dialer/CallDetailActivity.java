@@ -195,8 +195,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         CallLog.Calls.COUNTRY_ISO,
         CallLog.Calls.GEOCODED_LOCATION,
         CallLog.Calls.NUMBER_PRESENTATION,
-        CallLog.Calls.ACCOUNT_COMPONENT_NAME,
-        CallLog.Calls.ACCOUNT_ID,
+        CallLog.Calls.PHONE_ACCOUNT_COMPONENT_NAME,
+        CallLog.Calls.PHONE_ACCOUNT_ID,
     };
 
     static final int DATE_COLUMN_INDEX = 0;
