@@ -489,7 +489,7 @@ public class CallLogFragment extends ListFragment
             if (!onEntry) {
                 mCallLogQueryHandler.markMissedCallsAsRead();
             }
-            CallLogNotificationsHelper.removeMissedCallNotifications();
+            CallLogNotificationsHelper.removeMissedCallNotifications(getActivity());
             CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
         }
     }
