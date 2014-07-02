@@ -28,8 +28,9 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     public final static int SHORTCUT_INVALID = -1;
     public final static int SHORTCUT_DIRECT_CALL = 0;
     public final static int SHORTCUT_ADD_NUMBER_TO_CONTACTS = 1;
+    public final static int SHORTCUT_MAKE_VIDEO_CALL = 2;
 
-    public final static int SHORTCUT_COUNT = 2;
+    public final static int SHORTCUT_COUNT = 3;
 
     private final boolean[] mShortcutEnabled = new boolean[SHORTCUT_COUNT];
 
@@ -145,12 +146,17 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                 text = resources.getString(R.string.search_shortcut_add_to_contacts);
                 drawableId = R.drawable.ic_search_add_contact;
                 break;
+            case SHORTCUT_MAKE_VIDEO_CALL:
+                text = resources.getString(R.string.search_shortcut_make_video_call);
+                drawableId = R.drawable.ic_videocam;
+                break;
             default:
                 throw new IllegalArgumentException("Invalid shortcut type");
         }
         v.setDrawableResource(R.drawable.search_shortcut_background, drawableId);
         v.setDisplayName(text);
         v.setPhotoPosition(super.getPhotoPosition());
+        v.setAdjustSelectionBoundsEnabled(false);
     }
 
     public void setShortcutEnabled(int shortcutType, boolean visible) {

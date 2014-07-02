@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Callable;
 import android.telephony.PhoneNumberUtils;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.list.ContactListItemView;
@@ -111,5 +112,15 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
             Log.w(TAG, "Cursor was null in getDataUri() call. Returning null instead.");
             return null;
         }
+    }
+
+    @Override
+    public void setQueryString(String queryString) {
+        final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString());
+        setShortcutEnabled(SHORTCUT_ADD_NUMBER_TO_CONTACTS, showNumberShortcuts);
+        // TODO: Write utility method to check subscriptions and settings, and use it to determine
+        // whether to enable or disable video call shortcut.
+        setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL, showNumberShortcuts);
+        super.setQueryString(queryString);
     }
 }

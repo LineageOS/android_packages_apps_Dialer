@@ -592,6 +592,9 @@
     <!-- Shortcut item used to add a number directly from search -->
     <string name="search_shortcut_add_to_contacts">Add to contacts</string>
 
+    <!-- Shortcut item used to make a video call directly from search. -->
+    <string name="search_shortcut_make_video_call">Make video call</string>
+
     <!-- Title for the recent calls footer that brings users to the full call history when clicked -->
     <string name="recents_footer_text">View full call history</string>
 

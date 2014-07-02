@@ -147,21 +147,31 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     protected void onItemClick(int position, long id) {
         final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
         final int shortcutType = adapter.getShortcutTypeFromPosition(position);
+        final OnPhoneNumberPickerActionListener listener;
 
-        if (shortcutType == DialerPhoneNumberListAdapter.SHORTCUT_INVALID) {
-            super.onItemClick(position, id);
-        } else if (shortcutType == DialerPhoneNumberListAdapter.SHORTCUT_DIRECT_CALL) {
-            final OnPhoneNumberPickerActionListener listener =
-                    getOnPhoneNumberPickerListener();
-            if (listener != null) {
-                listener.onCallNumberDirectly(getQueryString());
-            }
-        } else if (shortcutType == DialerPhoneNumberListAdapter.SHORTCUT_ADD_NUMBER_TO_CONTACTS) {
-            final String number = TextUtils.isEmpty(mAddToContactNumber) ?
-                    adapter.getFormattedQueryString() : mAddToContactNumber;
-            final Intent intent = DialtactsActivity.getAddNumberToContactIntent(number);
-            DialerUtils.startActivityWithErrorToast(getActivity(), intent,
-                    R.string.add_contact_not_available);
+        switch (shortcutType) {
+            case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
+                super.onItemClick(position, id);
+                break;
+            case DialerPhoneNumberListAdapter.SHORTCUT_DIRECT_CALL:
+                listener = getOnPhoneNumberPickerListener();
+                if (listener != null) {
+                    listener.onCallNumberDirectly(getQueryString());
+                }
+                break;
+            case DialerPhoneNumberListAdapter.SHORTCUT_ADD_NUMBER_TO_CONTACTS:
+                final String number = TextUtils.isEmpty(mAddToContactNumber) ?
+                        adapter.getFormattedQueryString() : mAddToContactNumber;
+                final Intent intent = DialtactsActivity.getAddNumberToContactIntent(number);
+                DialerUtils.startActivityWithErrorToast(getActivity(), intent,
+                        R.string.add_contact_not_available);
+                break;
+            case DialerPhoneNumberListAdapter.SHORTCUT_MAKE_VIDEO_CALL:
+                listener = getOnPhoneNumberPickerListener();
+                if (listener != null) {
+                    listener.onCallNumberDirectly(getQueryString(), true /* isVideoCall */);
+                }
+                break;
         }
     }
 
