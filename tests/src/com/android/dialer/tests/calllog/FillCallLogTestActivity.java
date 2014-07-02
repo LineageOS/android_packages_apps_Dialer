@@ -31,7 +31,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.provider.CallLog.Calls;
-import android.telecomm.Subscription;
+import android.telecomm.PhoneAccount;
 import android.telephony.TelephonyManager;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -86,8 +86,8 @@ public class FillCallLogTestActivity extends Activity {
     private int mCallDateYear;
     private int mCallDateMonth;
     private int mCallDateDay;
-    private RadioButton mSubscription0;
-    private RadioButton mSubscription1;
+    private RadioButton mAccount0;
+    private RadioButton mAccount1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,8 +132,8 @@ public class FillCallLogTestActivity extends Activity {
         mCallDate = (TextView) findViewById(R.id.call_date);
         mPhoneNumber = (TextView) findViewById(R.id.phone_number);
         mOffset = (EditText) findViewById(R.id.delta_after_add);
-        mSubscription0 = (RadioButton) findViewById(R.id.subscription0);
-        mSubscription1 = (RadioButton) findViewById(R.id.subscription1);
+        mAccount0 = (RadioButton) findViewById(R.id.account0);
+        mAccount1 = (RadioButton) findViewById(R.id.account1);
 
         // Use the current time as the default values for the picker
         final Calendar c = Calendar.getInstance();
@@ -395,13 +395,13 @@ public class FillCallLogTestActivity extends Activity {
         }
     }
 
-    private Subscription getManualSubscription() {
+    private PhoneAccount getManualAccount() {
         TelephonyManager telephonyManager = new TelephonyManager(this);
-        List <Subscription> subscriptions = telephonyManager.getSubscriptions();
-        if (mSubscription0.isChecked()) {
-            return subscriptions.get(0);
-        } else if (mSubscription1.isChecked()){
-            return subscriptions.get(1);
+        List <PhoneAccount> accounts = telephonyManager.getAccounts();
+        if (mAccount0.isChecked()) {
+            return accounts.get(0);
+        } else if (mAccount1.isChecked()){
+            return accounts.get(1);
         } else {
             return null;
         }
@@ -489,7 +489,7 @@ public class FillCallLogTestActivity extends Activity {
         dateTime.set(mCallDateYear, mCallDateMonth, mCallDateDay, mCallTimeHour, mCallTimeMinute);
 
         Calls.addCall(null, this, mPhoneNumber.getText().toString(), getManualPresentation(),
-                getManualCallType(), getManualSubscription(), dateTime.getTimeInMillis(),
+                getManualCallType(), getManualAccount(), dateTime.getTimeInMillis(),
                 RNG.nextInt(60 * 60));
 
         // Subtract offset from the call date/time and store as new date/time

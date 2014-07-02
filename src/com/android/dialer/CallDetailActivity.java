@@ -32,7 +32,6 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract.Voicemails;
-import android.telecomm.Subscription;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -196,8 +195,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         CallLog.Calls.COUNTRY_ISO,
         CallLog.Calls.GEOCODED_LOCATION,
         CallLog.Calls.NUMBER_PRESENTATION,
-        CallLog.Calls.SUBSCRIPTION_COMPONENT_NAME,
-        CallLog.Calls.SUBSCRIPTION_ID,
+        CallLog.Calls.ACCOUNT_COMPONENT_NAME,
+        CallLog.Calls.ACCOUNT_ID,
     };
 
     static final int DATE_COLUMN_INDEX = 0;
@@ -207,8 +206,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     static final int COUNTRY_ISO_COLUMN_INDEX = 4;
     static final int GEOCODED_LOCATION_COLUMN_INDEX = 5;
     static final int NUMBER_PRESENTATION_COLUMN_INDEX = 6;
-    static final int SUBSCRIPTION_COMPONENT_NAME = 7;
-    static final int SUBSCRIPTION_ID = 8;
+    static final int ACCOUNT_COMPONENT_NAME = 7;
+    static final int ACCOUNT_ID = 8;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -487,7 +486,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             final int callType = callCursor.getInt(CALL_TYPE_COLUMN_INDEX);
             String countryIso = callCursor.getString(COUNTRY_ISO_COLUMN_INDEX);
             final String geocode = callCursor.getString(GEOCODED_LOCATION_COLUMN_INDEX);
-            final Drawable subscriptionIcon = getSubscriptionIcon(callCursor);
+            final Drawable accountIcon = getAccountIcon(callCursor);
 
             if (TextUtils.isEmpty(countryIso)) {
                 countryIso = mDefaultCountryIso;
@@ -530,7 +529,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     formattedNumber, countryIso, geocode,
                     new int[]{ callType }, date, duration,
                     nameText, numberType, numberLabel, lookupUri, photoUri, sourceType,
-                    subscriptionIcon);
+                    accountIcon);
         } finally {
             if (callCursor != null) {
                 callCursor.close();
@@ -539,11 +538,11 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     }
 
     /**
-     * Generate subscription object from data in Telecomm database
+     * Generate account object from data in Telecomm database
      */
-    private Drawable getSubscriptionIcon(Cursor c) {
-        final String component_name = c.getString(SUBSCRIPTION_COMPONENT_NAME);
-        final String subscription_id = c.getString(SUBSCRIPTION_ID);
+    private Drawable getAccountIcon(Cursor c) {
+        final String component_name = c.getString(ACCOUNT_COMPONENT_NAME);
+        final String account_id = c.getString(ACCOUNT_ID);
 
         // TODO: actually pull data from the database
         return null;

@@ -17,9 +17,8 @@
 package com.android.dialer.calllog;
 
 import android.content.Context;
-import android.telecomm.Subscription;
+import android.telecomm.PhoneAccount;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
@@ -81,10 +80,10 @@ public final class CallLogListItemViews {
     public int callType;
 
     /**
-     * The subscription for the current call log entry.  Cached here as the call back
+     * The account for the current call log entry.  Cached here as the call back
      * intent is set only when the actions ViewStub is inflated.
      */
-    public Subscription subscription;
+    public PhoneAccount mAccount;
 
     /**
      * If the call has an associated voicemail message, the URI of the voicemail message for

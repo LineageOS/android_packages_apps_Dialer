@@ -17,19 +17,11 @@
 package com.android.dialer;
 
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.Typeface;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.telecomm.Subscription;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.ImageView;
 
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -41,7 +33,6 @@ import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Helper class to fill in the views in {@link PhoneCallDetailsViews}.
@@ -102,12 +93,12 @@ public class PhoneCallDetailsHelper {
         // Set the call count, location and date.
         setCallCountAndDate(views, callCount, callLocationAndDate);
 
-        // set the subscription icon if it exists
-        if (details.subscriptionIcon != null) {
-            views.callSubscriptionIcon.setVisibility(View.VISIBLE);
-            views.callSubscriptionIcon.setImageDrawable(details.subscriptionIcon);
+        // set the account icon if it exists
+        if (details.accountIcon != null) {
+            views.callAccountIcon.setVisibility(View.VISIBLE);
+            views.callAccountIcon.setImageDrawable(details.accountIcon);
         } else {
-            views.callSubscriptionIcon.setVisibility(View.GONE);
+            views.callAccountIcon.setVisibility(View.GONE);
         }
 
         final CharSequence nameText;

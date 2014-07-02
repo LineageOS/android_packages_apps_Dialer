@@ -326,8 +326,8 @@
     <string name="add_2sec_pause">Add 2-sec pause</string>
     <string name="add_wait">Add wait</string>
 
-    <!-- Menu item to select subscription (connection provider) to place call from [CHAR LIMIT=30] -->
-    <string name="menu_select_subscription">Select Subscription</string>
+    <!-- Menu item to select account used to make phone calls [CHAR LIMIT=30] -->
+    <string name="menu_select_account">Select Account</string>
 
     <!-- Menu item label for call settings [CHAR LIMIT=30] -->
     <string name="call_settings">Settings</string>

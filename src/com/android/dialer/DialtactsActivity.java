@@ -28,16 +28,13 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
-import android.telecomm.Subscription;
+import android.telecomm.PhoneAccount;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -63,10 +60,10 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.android.contacts.common.CallUtil;
-import com.android.contacts.common.SubscriptionManager;
+import com.android.contacts.common.PhoneAccountManager;
 import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
-import com.android.contacts.common.dialog.SelectSubscriptionDialogFragment;
+import com.android.contacts.common.dialog.SelectAccountDialogFragment;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.widget.FloatingActionButtonController;
@@ -114,8 +111,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     public static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    /** Temporary flag for disabling subscription selection menu */
-    public static final boolean ENABLE_SUBSCRIPTION_SELECT = false;
+    /** Temporary flag for disabling account selection menu */
+    public static final boolean ENABLE_ACCOUNT_SELECT = false;
 
     public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
 
@@ -199,9 +196,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean mIsLandscape;
 
     /**
-     * Information about the currently selected subscription.
+     * Information about the currently selected account.
      */
-    private SubscriptionManager mSubscriptionManager = null;
+    private PhoneAccountManager mAccountManager = null;
 
     /**
      * The position of the currently selected tab in the attached {@link ListsFragment}.
@@ -390,8 +387,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mIsLandscape = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
 
-        if (getTelephonyManager().getSubscriptions().size() > 1 && ENABLE_SUBSCRIPTION_SELECT) {
-            mSubscriptionManager = new SubscriptionManager(getTelephonyManager());
+        if (getTelephonyManager().getAccounts().size() > 1 && ENABLE_ACCOUNT_SELECT) {
+            mAccountManager = new PhoneAccountManager(getTelephonyManager());
         }
 
         final View floatingActionButtonContainer = findViewById(
@@ -601,8 +598,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             case R.id.menu_call_settings:
                 handleMenuSettings();
                 return true;
-            case R.id.menu_select_subscription:
-                SelectSubscriptionDialogFragment.show(getFragmentManager(), mSubscriptionManager);
+            case R.id.menu_select_account:
+                SelectAccountDialogFragment.show(getFragmentManager(), mAccountManager);
                 return true;
         }
         return false;
@@ -638,7 +635,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         mIsDialpadShown = true;
         mDialpadFragment.setAnimate(animate);
-        mDialpadFragment.setSubscriptionManager(mSubscriptionManager);
+        mDialpadFragment.setAccountManager(mAccountManager);
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.show(mDialpadFragment);
@@ -776,8 +773,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final OptionsPopupMenu popupMenu = new OptionsPopupMenu(this, invoker);
         popupMenu.inflate(R.menu.dialtacts_options);
         final Menu menu = popupMenu.getMenu();
-        final MenuItem selectSubscription = menu.findItem(R.id.menu_select_subscription);
-        selectSubscription.setVisible(mSubscriptionManager != null);
+        final MenuItem selectAccount = menu.findItem(R.id.menu_select_account);
+        selectAccount.setVisible(mAccountManager != null);
         popupMenu.setOnMenuItemClickListener(this);
         return popupMenu;
     }
@@ -1108,9 +1105,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onCallNumberDirectly(String phoneNumber) {
-        final Subscription subscription = mSubscriptionManager != null?
-                mSubscriptionManager.getCurrentSubscription(): null;
-        Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin(), subscription);
+        final PhoneAccount account = mAccountManager != null?
+                mAccountManager.getCurrentAccount(): null;
+        Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin(), account);
         DialerUtils.startActivityWithErrorToast(this, intent);
         mClearSearchOnPause = true;
     }
