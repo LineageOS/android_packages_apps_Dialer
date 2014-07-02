@@ -141,8 +141,8 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
             // slideOffset is 1 when the shortcut card is fully exposed, and 0 when completely
             // hidden.
             float ratioCardHidden = (1 - slideOffset) * 1.5f;
-            if (mShortcutCardsListView.getCount() > 0) {
-                SwipeableShortcutCard v =
+            if (mShortcutCardsListView.getChildCount() > 0) {
+                final SwipeableShortcutCard v =
                         (SwipeableShortcutCard) mShortcutCardsListView.getChildAt(0);
                 v.clipCard(ratioCardHidden);
             }
@@ -348,7 +348,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mRemoveView.setAlpha(show ? 0 : 1);
         mRemoveView.animate().alpha(show ? 1 : 0).start();
 
-        if (mShortcutCardsListView.getCount() > 0) {
+        if (mShortcutCardsListView.getChildCount() > 0) {
             View v = mShortcutCardsListView.getChildAt(0);
             v.animate().withLayer()
                     .alpha(show ? REMOVE_VIEW_SHOWN_ALPHA : REMOVE_VIEW_HIDDEN_ALPHA)
