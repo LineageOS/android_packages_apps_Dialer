@@ -20,7 +20,6 @@ import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,8 +27,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Looper;
-import android.os.RemoteException;
-import android.os.ServiceManager;
+import android.phone.PhoneManager;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
@@ -39,7 +37,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
-import com.android.internal.telephony.ITelephony;
 
 /**
  * Helper class to listen for some magic character sequences
@@ -228,13 +225,9 @@ public class SpecialCharSequenceMgr {
 
     static boolean handlePinEntry(Context context, String input) {
         if ((input.startsWith("**04") || input.startsWith("**05")) && input.endsWith("#")) {
-            try {
-                return ITelephony.Stub.asInterface(ServiceManager.getService("phone"))
-                        .handlePinMmi(input);
-            } catch (RemoteException e) {
-                Log.e(TAG, "Failed to handlePinMmi due to remote exception");
-                return false;
-            }
+            PhoneManager phoneManager =
+                    (PhoneManager) context.getSystemService(Context.PHONE_SERVICE);
+            return phoneManager.handlePinMmi(input);
         }
         return false;
     }
