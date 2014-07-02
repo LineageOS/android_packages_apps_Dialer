@@ -44,8 +44,8 @@ public final class CallLogQuery {
             Calls.CACHED_FORMATTED_NUMBER,      // 15
             Calls.IS_READ,                      // 16
             Calls.NUMBER_PRESENTATION,          // 17
-            Calls.ACCOUNT_COMPONENT_NAME,  // 18
-            Calls.ACCOUNT_ID,              // 19
+            Calls.PHONE_ACCOUNT_COMPONENT_NAME, // 18
+            Calls.PHONE_ACCOUNT_ID,             // 19
     };
 
     public static final int ID = 0;
