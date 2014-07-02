@@ -78,7 +78,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
         public void onSwipe(View view) {
             mCallLogQueryHandler.markNewCallsAsOld();
             mCallLogQueryHandler.markNewVoicemailsAsOld();
-            CallLogNotificationsHelper.removeMissedCallNotifications();
+            CallLogNotificationsHelper.removeMissedCallNotifications(mContext);
             CallLogNotificationsHelper.updateVoicemailNotifications(mContext);
             mFragment.dismissShortcut(view);
         }

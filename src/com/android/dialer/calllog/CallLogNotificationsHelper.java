@@ -18,32 +18,16 @@ package com.android.dialer.calllog;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.RemoteException;
-import android.os.ServiceManager;
-import android.util.Log;
-
-import com.android.internal.telephony.ITelephony;
+import android.phone.PhoneManager;
 
 /**
  * Helper class operating on call log notifications.
  */
 public class CallLogNotificationsHelper {
-    private static final String TAG = "CallLogNotificationsHelper";
-
     /** Removes the missed call notifications. */
-    public static void removeMissedCallNotifications() {
-        try {
-            ITelephony telephony =
-                    ITelephony.Stub.asInterface(ServiceManager.getService("phone"));
-            if (telephony != null) {
-                telephony.cancelMissedCallsNotification();
-            } else {
-                Log.w(TAG, "Telephony service is null, can't call " +
-                        "cancelMissedCallsNotification");
-            }
-        } catch (RemoteException e) {
-            Log.e(TAG, "Failed to clear missed calls notification due to remote exception");
-        }
+    public static void removeMissedCallNotifications(Context context) {
+        PhoneManager phoneManager = (PhoneManager) context.getSystemService(Context.PHONE_SERVICE);
+        phoneManager.cancelMissedCallsNotification();
     }
 
     /** Update the voice mail notifications. */
