@@ -265,14 +265,6 @@
                   android:process="com.android.incallui">
         </activity>
 
-        <service android:name="com.android.incallui.CallHandlerService"
-                 android:process="com.android.incallui"
-                 android:permission="android.permission.BIND_CALL_SERVICE">
-            <intent-filter>
-                <action android:name="com.android.services.telephony.common.ICallHandlerService" />
-            </intent-filter>
-        </service>
-
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
         <receiver android:name="com.android.incallui.InCallApp$NotificationBroadcastReceiver"
                   android:exported="false"
