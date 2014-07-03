@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba0121b8_1ed5a642",
+        "filename": "src/com/android/dialer/list/PhoneFavoriteMergedAdapter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 3134
+      },
+      "writtenOn": "2014-07-03T19:33:19Z",
+      "side": 1,
+      "message": "Danesh, afaik convertView could be the wrong type of view, doesn\u0027t it?",
+      "revId": "757920b6910eebc29fc5779b11d821f3bf2a2b23",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
