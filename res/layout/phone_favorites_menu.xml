@@ -41,6 +41,7 @@
     <Button
             android:id="@+id/all_contacts_button"
             android:fontFamily="@string/favorites_menu_all_contacts_font_family"
+            android:onClick="allContactsClick"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/favorites_menu_all_contacts_height"
             android:paddingLeft="@dimen/favorites_menu_padding_horizontal"

@@ -54,7 +54,6 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
     private static final int FAVORITES_MENU_ITEM_ID = -3;
     private final PhoneFavoritesTileAdapter mContactTileAdapter;
     private final CallLogAdapter mCallLogAdapter;
-    private final View mPhoneFavoritesMenu;
     private final PhoneFavoriteFragment mFragment;
     private final TileInteractionTeaserView mTileInteractionTeaserView;
 
@@ -103,7 +102,6 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             PhoneFavoriteFragment fragment,
             PhoneFavoritesTileAdapter contactTileAdapter,
             CallLogAdapter callLogAdapter,
-            View phoneFavoritesMenu,
             TileInteractionTeaserView tileInteractionTeaserView) {
         final Resources resources = context.getResources();
         mContext = context;
@@ -114,7 +112,6 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
         mObserver = new CustomDataSetObserver();
         mCallLogAdapter.registerDataSetObserver(mObserver);
         mContactTileAdapter.registerDataSetObserver(mObserver);
-        mPhoneFavoritesMenu = phoneFavoritesMenu;
         mTileInteractionTeaserView = tileInteractionTeaserView;
         mCallLogQueryHandler = new CallLogQueryHandler(mContext.getContentResolver(),
                 mCallLogQueryHandlerListener);
@@ -262,9 +259,12 @@ public class PhoneFavoriteMergedAdapter extends BaseAdapter {
             wrapper.addView(view);
             return wrapper;
         } else if (position == callLogAdapterCount) {
+            if (convertView == null) {
+                convertView = View.inflate(mContext, R.layout.phone_favorites_menu, null);
+            }
             // If position is just after the entries in the mCallLogAdapter (most recent call),
             // return the favorites menu.
-            return mPhoneFavoritesMenu;
+            return convertView;
         }
 
         // Set position to the position of the actual favorite contact in the favorites adapter.
