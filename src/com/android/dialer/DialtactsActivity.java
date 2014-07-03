@@ -1037,6 +1037,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         return tm.getCallState() != TelephonyManager.CALL_STATE_IDLE;
     }
 
+    public void allContactsClick(View v) {
+        onShowAllContacts();
+    }
+
     @Override
     public void onShowAllContacts() {
         final Intent intent = new Intent(this, AllContactsActivity.class);
