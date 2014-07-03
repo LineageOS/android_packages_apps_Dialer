@@ -44,12 +44,6 @@
                   android:exported="false">
         </activity>
 
-        <service android:name="CallHandlerService">
-            <intent-filter>
-                <action android:name="com.android.services.telephony.common.ICallHandlerService" />
-            </intent-filter>
-        </service>
-
         <service android:name="InCallServiceImpl">
             <intent-filter>
                 <action android:name="android.telecomm.InCallService" />

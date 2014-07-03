@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Class object used across CallHandlerService APIs.
  * Describes a single call and its state.
  */
 public final class Call {
