@@ -172,11 +172,11 @@ final class TelecommAdapter {
         }
     }
 
-    void handoffCall(String callId) {
+    void phoneAccountClicked(String callId) {
         if (mAdapter != null) {
-            mAdapter.handoffCall(callId);
+            mAdapter.phoneAccountClicked(callId);
         } else {
-            Log.e(this, "error handoffCall, mAdapter is null");
+            Log.e(this, "error phoneAccountClicked, mAdapter is null");
         }
     }
 

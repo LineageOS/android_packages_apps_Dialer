@@ -63,6 +63,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mPhoneNumber;
     private TextView mNumberLabel;
     private TextView mPrimaryName;
+    private View mCallStateButton;
     private ImageView mCallStateIcon;
     private TextView mCallStateLabel;
     private TextView mCallTypeLabel;
@@ -85,7 +86,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private FloatingActionButtonController mFloatingActionButtonController;
     private View mFloatingActionButtonContainer;
-    private ImageButton mHandoffButton;
     private int mFloatingActionButtonHideOffset;
 
     // Cached DisplayMetrics density.
@@ -151,6 +151,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mSecondaryCallInfo = (View) view.findViewById(R.id.secondary_call_info);
         mSecondaryCallProviderInfo = (View) view.findViewById(R.id.secondary_call_provider_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
+        mCallStateButton = view.findViewById(R.id.callStateButton);
         mCallStateIcon = (ImageView) view.findViewById(R.id.callStateIcon);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mCallNumberAndLabel = view.findViewById(R.id.labelAndNumber);
@@ -194,16 +195,15 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             }
         });
 
-        mHandoffButton = (ImageButton) view.findViewById(R.id.handoffButton);
-        mHandoffButton.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                getPresenter().connectionHandoffClicked();
-            }
-        });
-        ViewUtil.setupFloatingActionButton(mHandoffButton, getResources());
-
         mPrimaryName.setElegantTextHeight(false);
         mCallStateLabel.setElegantTextHeight(false);
+
+        mCallStateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().phoneAccountClicked();
+            }
+        });
     }
 
     @Override
@@ -213,10 +213,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         } else {
             getView().setVisibility(View.INVISIBLE);
         }
-    }
-
-    public void setShowConnectionHandoff(boolean showConnectionHandoff) {
-        Log.v(this, "setShowConnectionHandoff: " + showConnectionHandoff);
     }
 
     @Override
@@ -327,21 +323,15 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setCallState(int state, int cause, boolean bluetoothOn, String connectionLabel,
-            Drawable connectionIcon, String gatewayNumber, boolean isWiFi, boolean isHandoffCapable,
-            boolean isHandoffPending) {
-        String callStateLabel = null;
-
+            Drawable connectionIcon, String gatewayNumber) {
         boolean isGatewayCall = !TextUtils.isEmpty(gatewayNumber);
-        callStateLabel = getCallStateLabelFromState(state, cause, connectionLabel, isWiFi,
-                isGatewayCall);
+        String callStateLabel = getCallStateLabelFromState(
+                state, cause, connectionLabel, isGatewayCall);
 
         Log.v(this, "setCallState " + callStateLabel);
         Log.v(this, "DisconnectCause " + DisconnectCause.toString(cause));
         Log.v(this, "bluetooth on " + bluetoothOn);
         Log.v(this, "gateway " + connectionLabel + gatewayNumber);
-        Log.v(this, "isWiFi " + isWiFi);
-        Log.v(this, "isHandoffCapable " + isHandoffCapable);
-        Log.v(this, "isHandoffPending " + isHandoffPending);
 
         // Update the call state label and icon.
         if (!TextUtils.isEmpty(callStateLabel)) {
@@ -359,7 +349,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             if (state == Call.State.ACTIVE || state == Call.State.CONFERENCED) {
                 mCallStateLabel.clearAnimation();
             } else {
-                //TODO: add WiFi animation
                 mCallStateLabel.startAnimation(mPulseAnimation);
             }
         } else {
@@ -374,12 +363,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         if (Call.State.INCOMING == state) {
             setBluetoothOn(bluetoothOn);
         }
-
-        mHandoffButton.setEnabled(isHandoffCapable && !isHandoffPending);
-        mHandoffButton.setVisibility(isWiFi || mHandoffButton.isEnabled() ?
-                View.VISIBLE : View.GONE);
-        mHandoffButton.setImageResource(isWiFi ?
-                R.drawable.ic_in_call_wifi : R.drawable.ic_in_call_pstn);
     }
 
     private void showInternetCallLabel(boolean show) {
@@ -454,17 +437,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      *
      * Additional labels are applied as follows:
      *         1. All outgoing calls with display "Calling via [Provider]"
-     *         2. Ongoing calls will display the name of the provider or wifi connection
+     *         2. Ongoing calls will display the name of the provider
      *         2. Incoming calls will only display "Incoming via..." for accounts
      */
-    private String getCallStateLabelFromState(int state, int cause, String label, boolean isWiFi,
+    private String getCallStateLabelFromState(int state, int cause, String label,
             boolean isGatewayCall) {
         final Context context = getView().getContext();
         String callStateLabel = null;  // Label to display as part of the call banner
 
         boolean isSpecialCall = label != null;
-        boolean isAccountOrWifi = isSpecialCall && !isGatewayCall;
-        boolean isAccountOnly = isAccountOrWifi && !isWiFi;
+        boolean isAccount = isSpecialCall && !isGatewayCall;
 
         switch  (state) {
             case Call.State.IDLE:
@@ -473,7 +455,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             case Call.State.ACTIVE:
                 // We normally don't show a "call state label" at all in this state
                 // (but we can use the call state label to display the provider name).
-                if (isAccountOrWifi) {
+                if (isAccount) {
                     callStateLabel = label;
                 }
                 break;
@@ -492,7 +474,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 break;
             case Call.State.INCOMING:
             case Call.State.CALL_WAITING:
-                if (isAccountOnly) {
+                if (isAccount) {
                     callStateLabel = context.getString(R.string.incoming_via_template, label);
                 } else {
                     callStateLabel = context.getString(R.string.card_title_incoming_call);

@@ -33,7 +33,7 @@
     android:animateLayoutChanges="true"
     android:gravity="center">
 
-    <LinearLayout
+    <LinearLayout android:id="@+id/callStateButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -48,8 +48,7 @@
             android:baselineAlignBottom="true"
             android:tint="@color/incall_accent_color"
             android:scaleType="centerInside"
-            android:visibility="gone"
-            android:src="@drawable/ic_in_call_wifi"/>
+            android:visibility="gone" />
 
         <TextView android:id="@+id/callStateLabel"
             android:layout_width="match_parent"

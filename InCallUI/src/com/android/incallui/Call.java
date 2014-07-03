@@ -111,7 +111,6 @@ public final class Call {
     private GatewayInfo mGatewayInfo;
     private PhoneAccount mAccount;
     private CallServiceDescriptor mCurrentCallServiceDescriptor;
-    private CallServiceDescriptor mHandoffCallServiceDescriptor;
     private RemoteCallVideoProvider mCallVideoProvider;
     private String mParentCallId;
     private List<String> mChildCallIds;
@@ -237,18 +236,6 @@ public final class Call {
 
     public void setCurrentCallServiceDescriptor(CallServiceDescriptor descriptor) {
         mCurrentCallServiceDescriptor = descriptor;
-    }
-
-    /**
-     * The descriptor for the call service that this call is being switched to, null if handoff is
-     * not in progress.
-     */
-    public CallServiceDescriptor getHandoffCallServiceDescriptor() {
-        return mHandoffCallServiceDescriptor;
-    }
-
-    public void setHandoffCallServiceDescriptor(CallServiceDescriptor descriptor) {
-        mHandoffCallServiceDescriptor = descriptor;
     }
 
     public RemoteCallVideoProvider getCallVideoProvider() {

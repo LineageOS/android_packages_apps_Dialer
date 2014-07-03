@@ -55,8 +55,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private CallTimer mCallTimer;
     private Context mContext;
 
-    private boolean mIsWiFiCachedValue;
-
     public CallCardPresenter() {
         // create the call timer
         mCallTimer = new CallTimer(new Runnable() {
@@ -189,19 +187,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             callState = mPrimary.getState();
             final boolean bluetoothOn =
                     (AudioModeProvider.getInstance().getAudioMode() == AudioMode.BLUETOOTH);
-            boolean isHandoffCapable = isHandoffCapable();
-            boolean isHandoffPending = isHandoffPending();
-
-            boolean isWiFi = isWifiCall();
-            // Cache the value so the UI doesn't change when the call ends.
-            mIsWiFiCachedValue = isWiFi;
 
             getUi().setCallState(callState, mPrimary.getDisconnectCause(), bluetoothOn,
-                    getConnectionLabel(), getConnectionIcon(), getGatewayNumber(), isWiFi,
-                    isHandoffCapable, isHandoffPending);
+                    getConnectionLabel(), getConnectionIcon(), getGatewayNumber());
         } else {
-            getUi().setCallState(callState, DisconnectCause.NOT_VALID, false, null, null, null,
-                    mIsWiFiCachedValue, false, false);
+            getUi().setCallState(callState, DisconnectCause.NOT_VALID, false, null, null, null);
         }
 
         final boolean enableEndCallButton = Call.State.isConnected(callState) &&
@@ -215,23 +205,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             final boolean bluetoothOn = (AudioMode.BLUETOOTH == mode);
 
             getUi().setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
-                    getConnectionLabel(), getConnectionIcon(), getGatewayNumber(), isWifiCall(),
-                    isHandoffCapable(), isHandoffPending());
+                    getConnectionLabel(), getConnectionIcon(), getGatewayNumber());
         }
-    }
-
-    private boolean isWifiCall() {
-        CallServiceDescriptor descriptor = mPrimary.getCurrentCallServiceDescriptor();
-        return descriptor != null &&
-                descriptor.getNetworkType() == CallServiceDescriptor.FLAG_WIFI;
-    }
-
-    private boolean isHandoffCapable() {
-        return mPrimary.can(CallCapabilities.CONNECTION_HANDOFF);
-    }
-
-    private boolean isHandoffPending() {
-        return mPrimary.getHandoffCallServiceDescriptor() != null;
     }
 
     @Override
@@ -257,12 +232,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
     }
 
-    public void connectionHandoffClicked() {
+    public void phoneAccountClicked() {
         if (mPrimary == null) {
             return;
         }
-
-        TelecommAdapter.getInstance().handoffCall(mPrimary.getCallId());
+        TelecommAdapter.getInstance().phoneAccountClicked(mPrimary.getCallId());
     }
 
     private boolean areCallsSame(Call call1, Call call2) {
@@ -437,9 +411,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      * Return the Drawable object of the icon to display to the left of the connection label.
      */
     private Drawable getConnectionIcon() {
-        if (mIsWiFiCachedValue == true) {
-            return mContext.getResources().getDrawable(R.drawable.ic_in_call_wifi);
-        }
         PhoneAccount account = mPrimary.getAccount();
         if (account != null) {
             return account.getIcon(mContext);
@@ -449,7 +420,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     /**
      * Returns the label (line of text above the number/name) for any given call.
-     * For example, "calling via [Account/Google Voice/Wifi]" for outgoing calls.
+     * For example, "calling via [Account/Google Voice]" for outgoing calls.
      */
     private String getConnectionLabel() {
         if (hasOutgoingGatewayCall() && getUi() != null) {
@@ -465,11 +436,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             }
         }
         PhoneAccount account = mPrimary.getAccount();
-        if (mIsWiFiCachedValue == true || account != null) {
-            // Label will be either account name or WiFi connection
-            // TODO: get the name of the wifi connection
-            String wifiString = mContext.getString(R.string.wifi_constant);
-            return account == null? wifiString : account.getLabel(mContext);
+        if (account != null) {
+            return account.getLabel(mContext);
         }
         return null;
     }
@@ -552,8 +520,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 String providerLabel, Drawable providerIcon, boolean isConference,
                 boolean isGeneric);
         void setCallState(int state, int cause, boolean bluetoothOn, String connectionLabel,
-                Drawable connectionIcon, String gatewayNumber, boolean isWifi,
-                boolean isHandoffCapable, boolean isHandoffPending);
+                Drawable connectionIcon, String gatewayNumber);
         void setPrimaryCallElapsedTime(boolean show, String duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Drawable image);

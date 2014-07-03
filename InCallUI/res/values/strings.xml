@@ -498,11 +498,6 @@
     <!-- This can be used in any application wanting to disable the text "Emergency number" -->
     <string name="emergency_call_dialog_number_for_display">Emergency number</string>
 
-    <string name="in_call_wifi_connected">Connected via <xliff:g id="wifi_ssid">%s</xliff:g></string>
-
-    <!-- Filler string to display as the provider in WiFi calling cases -->
-    <string name="wifi_constant">WiFi</string>
-
     <!-- The digit to be displayed on the 0 key of the dialpad [CHAR LIMIT=1]-->
     <string name="dialpad_0_number">0</string>
     <!-- The digit to be displayed on the 1 key of the dialpad [CHAR LIMIT=1]-->
@@ -552,7 +547,4 @@
     <string name="dialpad_star_letters"></string>
     <!--  Do not translate. -->
     <string name="dialpad_pound_letters"></string>
-
-    <!-- Text for the onscreen connection handoff button -->
-    <string name="connection_handoff_text">Handoff</string>
 </resources>

@@ -52,8 +52,7 @@
                 android:layout_height="@dimen/call_provider_small_icon_size"
                 android:layout_marginRight="2dp"
                 android:baselineAlignBottom="true"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_in_call_wifi"/>
+                android:scaleType="centerInside" />
             <TextView android:id="@+id/secondaryCallProviderLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
