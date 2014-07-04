@@ -16,6 +16,24 @@
       "revId": "757920b6910eebc29fc5779b11d821f3bf2a2b23",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba0121b8_3e5eaae9",
+        "filename": "src/com/android/dialer/list/PhoneFavoriteMergedAdapter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 940
+      },
+      "writtenOn": "2014-07-04T01:38:32Z",
+      "side": 1,
+      "message": "Android uses the getItemViewType() to return the correct view type for the position.\nThis way it can still recycle views and return the correct type for position.",
+      "parentUuid": "ba0121b8_1ed5a642",
+      "revId": "757920b6910eebc29fc5779b11d821f3bf2a2b23",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
