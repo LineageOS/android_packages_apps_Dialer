@@ -159,8 +159,6 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Toque e vibração"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Gerenciar conferência telefônica"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Número de emergência"</string>
-    <string name="in_call_wifi_connected" msgid="8179928320848155569">"Conectado via <xliff:g id="WIFI_SSID">%s</xliff:g>"</string>
-    <string name="wifi_constant" msgid="8747212717516448916">"Wi-Fi"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
@@ -171,5 +169,4 @@
     <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
     <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
     <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
-    <string name="connection_handoff_text" msgid="394933522990446004">"Entregar"</string>
 </resources>

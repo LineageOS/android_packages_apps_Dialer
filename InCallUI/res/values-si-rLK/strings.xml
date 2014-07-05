@@ -119,8 +119,7 @@
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;පිහිටුවා නැත&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"වෙනත් ඇමතුම් සැකසුම්"</string>
     <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> හරහා අමතමින්"</string>
-    <!-- no translation found for incoming_via_template (1696993226115570960) -->
-    <skip />
+    <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> මගින් ඇතුළට එන"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"සම්බන්ධතා ඡායාරූපය"</string>
     <string name="goPrivate" msgid="865837794424530980">"පොද්ගලික බවට යන්න"</string>
     <string name="selectContact" msgid="781975788478987237">"සම්බන්ධතාවය තෝරාගන්න"</string>
@@ -160,9 +159,6 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"රිගින් ටෝන් සහ කම්පනය කරන්න"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"සම්මන්ත්‍රණ ඇමතුම කළමනාකරණය කරන්න"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"හදිසි ඇමතුම් අංකය"</string>
-    <string name="in_call_wifi_connected" msgid="8179928320848155569">"<xliff:g id="WIFI_SSID">%s</xliff:g> හරහා සම්බන්ධ කරන ලදි"</string>
-    <!-- no translation found for wifi_constant (8747212717516448916) -->
-    <skip />
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
@@ -173,5 +169,4 @@
     <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
     <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
     <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
-    <string name="connection_handoff_text" msgid="394933522990446004">"ඇත දීම"</string>
 </resources>
