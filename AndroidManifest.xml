@@ -251,6 +251,13 @@
             android:name=".contact.ContactUpdateService"
             android:exported="false" />
 
+        <!-- Broadcast receiver that passively listens to location updates -->
+        <receiver android:name="com.android.contacts.common.location.CountryDetector$LocationChangedReceiver"/>
+
+        <!-- IntentService to update the user's current country -->
+        <service android:name="com.android.contacts.common.location.UpdateCountryService"
+            android:exported="false"/>
+
         <!-- Main in-call UI activity.  This is never launched directly
              from outside the phone app; instead, it's either launched by
              the OutgoingCallBroadcaster (for outgoing calls), or as the
