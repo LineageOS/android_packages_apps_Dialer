@@ -30,6 +30,9 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.phone.PhoneManager;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
@@ -801,7 +804,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final boolean callKey = Intent.ACTION_CALL_BUTTON.equals(intent.getAction());
 
         if (callKey) {
-            getTelephonyManager().showCallScreen();
+            getPhoneManager().showCallScreen(false);
             return true;
         }
 
@@ -1029,8 +1032,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     private boolean phoneIsInUse() {
-        // TODO(santoscordon): Replace with a TelecommService method call.
-        return getTelephonyManager().getCallState() != TelephonyManager.CALL_STATE_IDLE;
+        return getPhoneManager().isInAPhoneCall();
     }
 
     public static Intent getAddNumberToContactIntent(CharSequence text) {
@@ -1158,6 +1160,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private TelephonyManager getTelephonyManager() {
         return (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+    }
+
+    private PhoneManager getPhoneManager() {
+        return (PhoneManager) getSystemService(Context.PHONE_SERVICE);
     }
 
     @Override
