@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"ເພີ່ມ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"ເພີ່ມການຂັ້ນເວລາ 2 ວິນາທີ"</string>
     <string name="add_wait" msgid="3360818652790319634">"ເພີ່ມການລໍຖ້າ"</string>
-    <string name="menu_select_subscription" msgid="363190251770943468">"ເລືອກ​​ແພັກ​ເກດ"</string>
+    <string name="menu_select_account" msgid="5576598753317289565">"ເລືອກ​ບັນ​ຊີ"</string>
     <string name="call_settings" msgid="7666474782093693667">"ການຕັ້ງຄ່າ"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"ສ້າງລາຍຊື່ຜູ່ຕິດຕໍ່ໃໝ່"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"ລາຍຊື່ຜູ່ຕິດຕໍ່ທັງໝົດ"</string>
@@ -152,6 +152,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"ຍົກເລີກ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"ໂທ​ຫາ <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"ເພີ່ມໃສ່ລາຍຊື່ຕິດຕໍ່"</string>
+    <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"​ໂທ​ອອກ​ດ້ວຍ​ວິ​ດີ​ໂອ"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"ເບິ່ງ​ປະ​ຫວັດ​ການ​ໂທ​ແບບເຕັມ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ສາຍທີ່ບໍ່ໄດ້ຮັບໃໝ່"</string>
     <string name="speed_dial_empty" msgid="5476435149276295630">"ການໂທດ່ວນ​ແມ່ນ​ການ​ໂທ​ອອກ​ດ້ວຍ​ການ​ກົດ​ພຽງ​ເທື່ອ​ດຽວ\nສຳ​ລັບ​ເບີ​ໂທ ແລະ​ລາຍຊື່ຜູ່ຕິດຕໍ່\n ທີ່​ທ່ານ​ໂທ​ເລື້ອຍໆ."</string>

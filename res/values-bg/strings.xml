@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Добавяне на контакт"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Добавяне на 2-сек пауза"</string>
     <string name="add_wait" msgid="3360818652790319634">"Добавяне на изчакване"</string>
-    <string name="menu_select_subscription" msgid="363190251770943468">"Избиране на абонамент"</string>
+    <string name="menu_select_account" msgid="5576598753317289565">"Избиране на профил"</string>
     <string name="call_settings" msgid="7666474782093693667">"Настройки"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Нов контакт"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Всички контакти"</string>
@@ -152,6 +152,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Отмяна"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Обаждане на <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Добавяне в контактите"</string>
+    <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Провеждане на видеообаждане"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Преглед на цялата история на обажданията"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> нови пропуснати обаждания"</string>
     <string name="speed_dial_empty" msgid="5476435149276295630">"Бързото набиране е набиране с едно докосване\nза любимите контакти и номерата\n, на които се обаждате често."</string>

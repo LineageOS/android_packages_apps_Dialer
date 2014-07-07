@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"კონტაქტის დამატება"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"ორწამიანი პაუზის დამატება"</string>
     <string name="add_wait" msgid="3360818652790319634">"ლოდინის დამატება"</string>
-    <string name="menu_select_subscription" msgid="363190251770943468">"SIM სერვისის არჩევა"</string>
+    <string name="menu_select_account" msgid="5576598753317289565">"ანგარიშის არჩევა"</string>
     <string name="call_settings" msgid="7666474782093693667">"პარამეტრები"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"ახალი კონტაქტი"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"ყველა კონტაქტი"</string>
@@ -152,6 +152,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"დაბრუნება"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"დარეკვა <xliff:g id="NUMBER">%s</xliff:g>-ზე"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"კონტაქტებში დამატება"</string>
+    <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ვიდეოზარის განხორციელება"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"ზარების სრული ისტორიის ნახვა"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ახალი გაცდენილი ზარი"</string>
     <string name="speed_dial_empty" msgid="5476435149276295630">"სწრაფი დარეკვით შეგიძლიათ ერთი შეხებით დაურეკოთ \nრჩეულებსა და იმ ნომრებს\n, რომლებსაც ხშირად უკავშირდებით."</string>
