@@ -916,8 +916,8 @@ public class OverlappingPaneLayout extends ViewGroup {
             Log.d(TAG, "onNestedPreScroll: " + dy);
         }
         mInNestedPreScrollDownwards =
-                mChildCannotConsumeScroll && dy > 0 && mSlideOffsetPx <= mIntermediateOffset;
-        mDragHelper.processNestedScroll(mSlideableView, 0, dy, consumed);
+                mChildCannotConsumeScroll && dy < 0 && mSlideOffsetPx <= mIntermediateOffset;
+        mDragHelper.processNestedScroll(mSlideableView, 0, -dy, consumed);
     }
 
     @Override
@@ -928,7 +928,6 @@ public class OverlappingPaneLayout extends ViewGroup {
         }
         mChildCannotConsumeScroll = false;
         mInNestedPreScrollDownwards = false;
-        // We need to flip dyUnconsumed here, because its magnitude is reversed. b/14585990
         mDragHelper.processNestedScroll(mSlideableView, 0, -dyUnconsumed, null);
     }
 
