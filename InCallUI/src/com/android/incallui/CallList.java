@@ -30,9 +30,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Maintains the list of active calls received from CallHandlerService and notifies interested
- * classes of changes to the call list as they are received from the telephony stack.
- * Primary lister of changes to this class is InCallPresenter.
+ * Maintains the list of active calls and notifies interested classes of changes to the call list
+ * as they are received from the telephony stack. Primary listener of changes to this class is
+ * InCallPresenter.
  */
 public class CallList {
 
