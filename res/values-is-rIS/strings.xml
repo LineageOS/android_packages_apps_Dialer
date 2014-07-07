@@ -90,7 +90,7 @@
     <string name="add_contact" msgid="8875804371377471164">"Bæta tengilið við"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Bæta við 2 sekúndna töf"</string>
     <string name="add_wait" msgid="3360818652790319634">"Bæta töf við"</string>
-    <string name="menu_select_subscription" msgid="363190251770943468">"Velja áskrift"</string>
+    <string name="menu_select_account" msgid="5576598753317289565">"Velja reikning"</string>
     <string name="call_settings" msgid="7666474782093693667">"Stillingar"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nýr tengiliður"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Allir tengiliðir"</string>
@@ -152,6 +152,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Afturkalla"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Hringja í <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Bæta við tengiliði"</string>
+    <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Hringja myndsímtal"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Skoða símtalaferil í heild"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ný ósvöruð símtöl"</string>
     <string name="speed_dial_empty" msgid="5476435149276295630">"Með hraðvali geturðu hringt með einni snertingu\ní uppáhaldstengiliðina og númer\n sem þú hringir oft í."</string>
