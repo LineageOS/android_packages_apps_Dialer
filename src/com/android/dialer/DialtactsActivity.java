@@ -1110,17 +1110,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall) {
-        if (isVideoCall) {
-            //TODO: Dispatch intent with video call extras specified, then remove this toast.
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "Feature development in progress.", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
-
         final PhoneAccount account = mAccountManager != null ?
                 mAccountManager.getCurrentAccount() : null;
-        Intent intent = CallUtil.getCallIntent(phoneNumber, getCallOrigin(), account);
+        Intent intent = isVideoCall ?
+                CallUtil.getVideoCallIntent(phoneNumber, getCallOrigin(), account) :
+                CallUtil.getCallIntent(phoneNumber, getCallOrigin(), account);
         DialerUtils.startActivityWithErrorToast(this, intent);
         mClearSearchOnPause = true;
     }
