@@ -368,6 +368,15 @@
     <!-- Title for missed call details screen -->
     <string name="type_missed">Missed call</string>
 
+    <!-- Title for incoming video call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_incoming_video">Incoming video call</string>
+
+    <!-- Title for outgoing video call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_outgoing_video">Outgoing video call</string>
+
+    <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_missed_video">Missed video call</string>
+
     <!-- Title for voicemail details screen -->
     <string name="type_voicemail">Voicemail</string>
 
@@ -380,36 +389,6 @@
               This is especially valuable for views without textual representation like ImageView.
     -->
     <string name="description_call_log_play_button">Play voicemail</string>
-
-    <!-- String describing the icon in the call log used to represent an incoming call.
-
-        Note: AccessibilityServices use this attribute to announce what the view represents.
-              This is especially valuable for views without textual representation like ImageView.
-    -->
-    <string name="description_call_log_incoming_call">Incoming call</string>
-
-    <!-- String describing the icon in the call log used to represent an outgoing call.
-
-        Note: AccessibilityServices use this attribute to announce what the view represents.
-              This is especially valuable for views without textual representation like ImageView.
-    -->
-
-    <string name="description_call_log_outgoing_call">Outgoing call</string>
-
-    <!-- String describing the icon in the call log used to represent a missed call.
-
-        Note: AccessibilityServices use this attribute to announce what the view represents.
-              This is especially valuable for views without textual representation like ImageView.
-    -->
-
-    <string name="description_call_log_missed_call">Missed call</string>
-
-    <!-- String describing the icon in the call log used to represent a voicemail left to the user.
-
-        Note: AccessibilityServices use this attribute to announce what the view represents.
-              This is especially valuable for views without textual representation like ImageView.
-    -->
-    <string name="description_call_log_voicemail">Voicemail</string>
 
     <!-- String describing the button to view the contact for the current number.
 
@@ -630,6 +609,11 @@
          [CHAR LIMIT=30] -->
     <string name="call_log_action_call_back">CALL BACK</string>
 
+    <!-- Button text for the "video call" button displayed underneath an entry in the call log.
+         Tapping causes a video call to be placed to the caller represented by the call log entry.
+         [CHAR LIMIT=30] -->
+    <string name="call_log_action_video_call">VIDEO CALL</string>
+
     <!-- Button text for the "LISTEN" button displayed underneath an entry in the call log.
          Tapping navigates the user to the call details screen where the user can listen to the
          voicemail represented by the call log entry.
@@ -657,11 +641,32 @@
          [CHAR LIMIT=NONE] -->
     <string name="description_outgoing_call">Call to <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
 
+    <!-- String describing an incoming missed video call entry in the call log.
+         Note: AccessibilityServices uses this attribute to announce what the view represents.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_incoming_missed_video_call">Missed video call from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
+
+    <!-- String describing an incoming answered video call entry in the call log.
+         Note: AccessibilityServices uses this attribute to announce what the view represents.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_incoming_answered_video_call">Answered video call from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
+
+    <!-- String describing an outgoing video call entry in the call log.
+         Note: AccessibilityServices uses this attribute to announce what the view represents.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_outgoing_video_call">Video call to <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
+
     <!-- String describing the "call back" action for an entry in the call log.  The call back
          action triggers a return call to the named user.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
     <string name="description_call_back_action">Call back <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
+
+    <!-- String describing the "video call" action for an entry in the call log.  The video call
+         action triggers a return video call to the named person/number.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_video_call_action">Video call to <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>.</string>
 
     <!-- String describing the "listen" action for an entry in the call log.  The listen
          action is shown for call log entries representing a voicemail message and this button
