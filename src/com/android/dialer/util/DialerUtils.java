@@ -107,4 +107,21 @@ public class DialerUtils {
                 (TextView) emptyListView.findViewById(R.id.emptyListViewMessage);
         emptyListViewMessage.setText(res.getString(strResId));
     }
+
+    /**
+     * Closes an {@link AutoCloseable}, silently ignoring any checked exceptions. Does nothing if
+     * null.
+     *
+     * @param closeable to close.
+     */
+    public static void closeQuietly(AutoCloseable closeable) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (RuntimeException rethrown) {
+                throw rethrown;
+            } catch (Exception ignored) {
+            }
+        }
+    }
 }
