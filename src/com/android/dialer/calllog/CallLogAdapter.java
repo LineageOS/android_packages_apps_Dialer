@@ -28,6 +28,7 @@ import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telecomm.PhoneAccount;
+import android.telecomm.TelecommManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -632,8 +633,8 @@ public class CallLogAdapter extends GroupingListAdapter
         final long duration = c.getLong(CallLogQuery.DURATION);
         final int callType = c.getInt(CallLogQuery.CALL_TYPE);
         final PhoneAccount account = getAccount(c);
-        final Drawable accountIcon = account != null?
-                account.getIcon(mContext) : null;
+        final Drawable accountIcon = account == null ? null :
+                TelecommManager.from(mContext).getPhoneAccountMetadata(account).getIcon(mContext);
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final long rowId = c.getLong(CallLogQuery.ID);
         views.rowId = rowId;
