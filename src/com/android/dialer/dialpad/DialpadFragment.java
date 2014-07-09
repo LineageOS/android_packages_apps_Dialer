@@ -39,7 +39,6 @@ import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
-import android.telecomm.PhoneAccount;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -68,9 +67,6 @@ import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
-
-import com.android.contacts.common.PhoneAccountManager;
-import com.android.contacts.common.dialog.SelectAccountDialogFragment;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.DialtactsActivity;
@@ -96,8 +92,6 @@ public class DialpadFragment extends Fragment
         PopupMenu.OnMenuItemClickListener,
         DialpadKeyButton.OnPressedListener {
     private static final String TAG = DialpadFragment.class.getSimpleName();
-
-    private static PhoneAccountManager mAccountManager;
 
     /**
      * This interface allows the DialpadFragment to tell its hosting Activity when and when not
@@ -852,9 +846,7 @@ public class DialpadFragment extends Fragment
             @Override
             public void show() {
                 final Menu menu = getMenu();
-                final MenuItem selectAccount = menu.findItem(R.id.menu_select_account);
                 final MenuItem sendMessage = menu.findItem(R.id.menu_send_message);
-                selectAccount.setVisible(mAccountManager != null);
                 sendMessage.setVisible(mSmsPackageComponentName != null);
 
                 boolean enable = !isDigitsEmpty();
@@ -1073,15 +1065,9 @@ public class DialpadFragment extends Fragment
                 // Clear the digits just in case.
                 clearDialpad();
             } else {
-                final PhoneAccount account = mAccountManager != null?
-                        mAccountManager.getCurrentAccount() : null;
-
-
                 final Intent intent = CallUtil.getCallIntent(number,
                         (getActivity() instanceof DialtactsActivity ?
-                                ((DialtactsActivity) getActivity()).getCallOrigin() : null),
-                        account
-                );
+                                ((DialtactsActivity) getActivity()).getCallOrigin() : null));
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent);
                 hideAndClearDialpad(false);
             }
@@ -1441,10 +1427,6 @@ public class DialpadFragment extends Fragment
                 DialerUtils.startActivityWithErrorToast(getActivity(), smsIntent);
                 return true;
             }
-            case R.id.menu_select_account:
-              SelectAccountDialogFragment.show(getFragmentManager(), mAccountManager);
-              return true;
-
             default:
                 return false;
         }
@@ -1612,10 +1594,6 @@ public class DialpadFragment extends Fragment
 
     public boolean getAnimate() {
         return mAnimate;
-    }
-
-    public void setAccountManager(PhoneAccountManager accountManager) {
-        mAccountManager = accountManager;
     }
 
     public void setYFraction(float yFraction) {

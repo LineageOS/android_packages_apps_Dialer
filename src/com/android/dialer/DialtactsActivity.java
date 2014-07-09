@@ -37,7 +37,6 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
-import android.telecomm.PhoneAccount;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -63,10 +62,8 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.android.contacts.common.CallUtil;
-import com.android.contacts.common.PhoneAccountManager;
 import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
-import com.android.contacts.common.dialog.SelectAccountDialogFragment;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.widget.FloatingActionButtonController;
@@ -197,11 +194,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Whether or not the device is in landscape orientation.
      */
     private boolean mIsLandscape;
-
-    /**
-     * Information about the currently selected account.
-     */
-    private PhoneAccountManager mAccountManager = null;
 
     /**
      * The position of the currently selected tab in the attached {@link ListsFragment}.
@@ -389,10 +381,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mIsLandscape = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
-
-        if (getTelephonyManager().getAccounts().size() > 1 && ENABLE_ACCOUNT_SELECT) {
-            mAccountManager = new PhoneAccountManager(getTelephonyManager());
-        }
 
         final View floatingActionButtonContainer = findViewById(
                 R.id.floating_action_button_container);
@@ -601,9 +589,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             case R.id.menu_call_settings:
                 handleMenuSettings();
                 return true;
-            case R.id.menu_select_account:
-                SelectAccountDialogFragment.show(getFragmentManager(), mAccountManager);
-                return true;
         }
         return false;
     }
@@ -638,7 +623,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         mIsDialpadShown = true;
         mDialpadFragment.setAnimate(animate);
-        mDialpadFragment.setAccountManager(mAccountManager);
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.show(mDialpadFragment);
@@ -776,8 +760,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final OptionsPopupMenu popupMenu = new OptionsPopupMenu(this, invoker);
         popupMenu.inflate(R.menu.dialtacts_options);
         final Menu menu = popupMenu.getMenu();
-        final MenuItem selectAccount = menu.findItem(R.id.menu_select_account);
-        selectAccount.setVisible(mAccountManager != null);
         popupMenu.setOnMenuItemClickListener(this);
         return popupMenu;
     }
@@ -1112,11 +1094,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall) {
-        final PhoneAccount account = mAccountManager != null ?
-                mAccountManager.getCurrentAccount() : null;
         Intent intent = isVideoCall ?
-                CallUtil.getVideoCallIntent(phoneNumber, getCallOrigin(), account) :
-                CallUtil.getCallIntent(phoneNumber, getCallOrigin(), account);
+                CallUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
+                CallUtil.getCallIntent(phoneNumber, getCallOrigin());
         DialerUtils.startActivityWithErrorToast(this, intent);
         mClearSearchOnPause = true;
     }

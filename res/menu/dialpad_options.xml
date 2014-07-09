@@ -19,10 +19,6 @@
         android:title="@string/add_contact"
         android:showAsAction="withText" />
     <item
-        android:id="@+id/menu_select_account"
-        android:title="@string/menu_select_account"
-        android:showAsAction="withText" />
-    <item
         android:id="@+id/menu_2s_pause"
         android:title="@string/add_2sec_pause"
         android:showAsAction="withText" />
