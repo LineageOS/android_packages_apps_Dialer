@@ -197,6 +197,13 @@ public class CallList implements InCallPhoneListener {
         return retval;
     }
 
+    /**
+     * A call that is waiting for {@link PhoneAccount} selection
+     */
+    public Call getWaitingForAccountCall() {
+        return getFirstCallWithState(Call.State.PRE_DIAL_WAIT);
+    }
+
     public Call getOutgoingCall() {
         Call call = getFirstCallWithState(Call.State.DIALING);
         if (call == null) {

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.telecomm.CallCapabilities;
 import android.telecomm.Phone;
+import android.telecomm.PhoneAccount;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
@@ -53,6 +54,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     private InCallState mInCallState = InCallState.NO_CALLS;
     private ProximitySensor mProximitySensor;
     private boolean mServiceConnected = false;
+    private boolean mAccountSelectionCancelled = false;
 
     private final Phone.Listener mPhoneListener = new Phone.Listener() {
         @Override
@@ -172,6 +174,12 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         if (doFinish) {
             mInCallActivity.finish();
+
+            if (mAccountSelectionCancelled) {
+                // This finish is a result of account selection cancellation
+                // do not include activity ending transition
+                mInCallActivity.overridePendingTransition(0, 0);
+            }
         }
     }
 
@@ -327,6 +335,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         }
         if (callList.getIncomingCall() != null) {
             newState = InCallState.INCOMING;
+        } else if (callList.getWaitingForAccountCall() != null) {
+            newState = InCallState.WAITING_FOR_ACCOUNT;
         } else if (callList.getOutgoingCall() != null) {
             newState = InCallState.OUTGOING;
         } else if (callList.getActiveCall() != null ||
@@ -361,6 +371,23 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
     public ProximitySensor getProximitySensor() {
         return mProximitySensor;
+    }
+
+    public void handleAccountSelection(PhoneAccount account) {
+        Call call = mCallList.getWaitingForAccountCall();
+        if (call != null) {
+            String callId = call.getId();
+            TelecommAdapter.getInstance().phoneAccountSelected(callId, account);
+        }
+    }
+
+    public void cancelAccountSelection() {
+        mAccountSelectionCancelled = true;
+        Call call = mCallList.getWaitingForAccountCall();
+        if (call != null) {
+            String callId = call.getId();
+            TelecommAdapter.getInstance().disconnectCall(callId);
+        }
     }
 
     /**
@@ -402,7 +429,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         Call call = mCallList.getIncomingCall();
         if (call != null) {
             TelecommAdapter.getInstance().answerCall(call.getId());
-            showInCall(false, false/* newOutgoingCall */);
+            showInCall(false, false /* newOutgoingCall */);
         }
     }
 
@@ -431,7 +458,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     /**
-     * Returns true of the activity has been created and is running.
+     * Returns true if the activity has been created and is running.
      * Returns true as long as activity is not destroyed or finishing.  This ensures that we return
      * true even if the activity is paused (not in foreground).
      */
@@ -612,7 +639,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         // A new Incoming call means that the user needs to be notified of the the call (since
         // it wasn't them who initiated it).  We do this through full screen notifications and
-        // happens indirectly through {@link StatusBarListener}.
+        // happens indirectly through {@link StatusBarNotifier}.
         //
         // The process for incoming calls is as follows:
         //
@@ -636,12 +663,16 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         // we get an incoming call.
         final boolean startStartupSequence = (InCallState.INCOMING == newState);
 
+        // A dialog to show on top of the InCallUI to select a PhoneAccount
+        final boolean showAccountPicker = (InCallState.WAITING_FOR_ACCOUNT == newState);
+
         // A new outgoing call indicates that the user just now dialed a number and when that
-        // happens we need to display the screen immediateley.
+        // happens we need to display the screen immediately or show an account picker dialog if
+        // no default is set.
         //
         // This is different from the incoming call sequence because we do not need to shock the
         // user with a top-level notification.  Just show the call UI normally.
-        final boolean showCallUi = (InCallState.OUTGOING == newState);
+        final boolean showCallUi = (InCallState.OUTGOING == newState || showAccountPicker);
 
         // TODO: Can we be suddenly in a call without it having been in the outgoing or incoming
         // state?  I havent seen that but if it can happen, the code below should be enabled.
@@ -659,7 +690,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         if (showCallUi) {
             Log.i(this, "Start in call UI");
-            showInCall(false /* showDialpad */, true /* newOutgoingCall */);
+            showInCall(false /* showDialpad */, !showAccountPicker /* newOutgoingCall */);
         } else if (startStartupSequence) {
             Log.i(this, "Start Full Screen in call UI");
 
@@ -782,6 +813,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         // In-call experience is showing
         INCALL,
+
+        // Waiting for user input before placing outgoing call
+        WAITING_FOR_ACCOUNT,
 
         // User is dialing out
         OUTGOING;

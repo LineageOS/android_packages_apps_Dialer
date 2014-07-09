@@ -537,6 +537,9 @@
     <!-- This can be used in any application wanting to disable the text "Emergency number" -->
     <string name="emergency_call_dialog_number_for_display">Emergency number</string>
 
+    <!-- Title for Select Account Dialog [CHAR LIMIT=30] -->
+    <string name="select_account_dialog_title">Select Account</string>
+
     <!-- The digit to be displayed on the 0 key of the dialpad [CHAR LIMIT=1]-->
     <string name="dialpad_0_number">0</string>
     <!-- The digit to be displayed on the 1 key of the dialpad [CHAR LIMIT=1]-->
