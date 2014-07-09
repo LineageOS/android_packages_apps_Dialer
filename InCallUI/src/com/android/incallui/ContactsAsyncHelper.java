@@ -19,6 +19,7 @@ package com.android.incallui;
 import android.app.Notification;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -68,7 +69,7 @@ public class ContactsAsyncHelper {
                 case EVENT_LOAD_IMAGE:
                     if (args.listener != null) {
                         Log.d(this, "Notifying listener: " + args.listener.toString() +
-                                " image: " + args.uri + " completed");
+                                " image: " + args.displayPhotoUri + " completed");
                         args.listener.onImageLoadComplete(msg.what, args.photo, args.photoIcon,
                                 args.cookie);
                     }
@@ -91,83 +92,11 @@ public class ContactsAsyncHelper {
 
     private static final class WorkerArgs {
         public Context context;
-        public Uri uri;
+        public Uri displayPhotoUri;
         public Drawable photo;
         public Bitmap photoIcon;
         public Object cookie;
         public OnImageLoadCompleteListener listener;
-    }
-
-    /**
-     * public inner class to help out the ContactsAsyncHelper callers
-     * with tracking the state of the CallerInfo Queries and image
-     * loading.
-     *
-     * Logic contained herein is used to remove the race conditions
-     * that exist as the CallerInfo queries run and mix with the image
-     * loads, which then mix with the Phone state changes.
-     */
-    public static class ImageTracker {
-
-        // Image display states
-        public static final int DISPLAY_UNDEFINED = 0;
-        public static final int DISPLAY_IMAGE = -1;
-        public static final int DISPLAY_DEFAULT = -2;
-
-        // State of the image on the imageview.
-        private CallerInfo mCurrentCallerInfo;
-        private int displayMode;
-
-        public ImageTracker() {
-            mCurrentCallerInfo = null;
-            displayMode = DISPLAY_UNDEFINED;
-        }
-
-        /**
-         * Used to see if the requested call / connection has a
-         * different caller attached to it than the one we currently
-         * have in the CallCard.
-         */
-        public boolean isDifferentImageRequest(CallerInfo ci) {
-            // note, since the connections are around for the lifetime of the
-            // call, and the CallerInfo-related items as well, we can
-            // definitely use a simple != comparison.
-            return (mCurrentCallerInfo != ci);
-        }
-
-        /**
-         * Simple setter for the CallerInfo object.
-         */
-        public void setPhotoRequest(CallerInfo info) {
-            mCurrentCallerInfo = info;
-        }
-
-        /**
-         * Convenience method used to retrieve the URI
-         * representing the Photo file recorded in the attached
-         * CallerInfo Object.
-         */
-        public Uri getPhotoUri() {
-            if (mCurrentCallerInfo != null) {
-                return ContentUris.withAppendedId(Contacts.CONTENT_URI,
-                        mCurrentCallerInfo.person_id);
-            }
-            return null;
-        }
-
-        /**
-         * Simple setter for the Photo state.
-         */
-        public void setPhotoState(int state) {
-            displayMode = state;
-        }
-
-        /**
-         * Simple getter for the Photo state.
-         */
-        public int getPhotoState() {
-            return displayMode;
-        }
     }
 
     /**
@@ -188,27 +117,27 @@ public class ContactsAsyncHelper {
                     InputStream inputStream = null;
                     try {
                         try {
-                            inputStream = Contacts.openContactPhotoInputStream(
-                                    args.context.getContentResolver(), args.uri, true);
+                            inputStream = args.context.getContentResolver()
+                                    .openInputStream(args.displayPhotoUri);
                         } catch (Exception e) {
                             Log.e(this, "Error opening photo input stream", e);
                         }
 
                         if (inputStream != null) {
                             args.photo = Drawable.createFromStream(inputStream,
-                                    args.uri.toString());
+                                    args.displayPhotoUri.toString());
 
                             // This assumes Drawable coming from contact database is usually
                             // BitmapDrawable and thus we can have (down)scaled version of it.
                             args.photoIcon = getPhotoIconWhenAppropriate(args.context, args.photo);
 
                             Log.d(ContactsAsyncHelper.this, "Loading image: " + msg.arg1 +
-                                    " token: " + msg.what + " image URI: " + args.uri);
+                                    " token: " + msg.what + " image URI: " + args.displayPhotoUri);
                         } else {
                             args.photo = null;
                             args.photoIcon = null;
                             Log.d(ContactsAsyncHelper.this, "Problem with image: " + msg.arg1 +
-                                    " token: " + msg.what + " image URI: " + args.uri +
+                                    " token: " + msg.what + " image URI: " + args.displayPhotoUri +
                                     ", using default image.");
                         }
                     } finally {
@@ -284,7 +213,7 @@ public class ContactsAsyncHelper {
      * @param token Arbitrary integer which will be returned as the first argument of
      * {@link OnImageLoadCompleteListener#onImageLoadComplete(int, Drawable, Bitmap, Object)}
      * @param context Context object used to do the time-consuming operation.
-     * @param personUri Uri to be used to fetch the photo
+     * @param displayPhotoUri Uri to be used to fetch the photo
      * @param listener Callback object which will be used when the asynchronous load is done.
      * Can be null, which means only the asynchronous load is done while there's no way to
      * obtain the loaded photos.
@@ -292,11 +221,11 @@ public class ContactsAsyncHelper {
      * fourth argument of {@link OnImageLoadCompleteListener#onImageLoadComplete(int, Drawable,
      * Bitmap, Object)}. Can be null, at which the callback will also has null for the argument.
      */
-    public static final void startObtainPhotoAsync(int token, Context context, Uri personUri,
+    public static final void startObtainPhotoAsync(int token, Context context, Uri displayPhotoUri,
             OnImageLoadCompleteListener listener, Object cookie) {
         // in case the source caller info is null, the URI will be null as well.
         // just update using the placeholder image in this case.
-        if (personUri == null) {
+        if (displayPhotoUri == null) {
             Log.wtf("startObjectPhotoAsync", "Uri is missing");
             return;
         }
@@ -308,7 +237,7 @@ public class ContactsAsyncHelper {
         WorkerArgs args = new WorkerArgs();
         args.cookie = cookie;
         args.context = context;
-        args.uri = personUri;
+        args.displayPhotoUri = displayPhotoUri;
         args.listener = listener;
 
         // setup message arguments
@@ -316,7 +245,7 @@ public class ContactsAsyncHelper {
         msg.arg1 = EVENT_LOAD_IMAGE;
         msg.obj = args;
 
-        Log.d("startObjectPhotoAsync", "Begin loading image: " + args.uri +
+        Log.d("startObjectPhotoAsync", "Begin loading image: " + args.displayPhotoUri +
                 ", displaying default image for now.");
 
         // notify the thread to begin working

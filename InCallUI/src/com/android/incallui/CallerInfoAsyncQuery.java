@@ -24,8 +24,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.provider.ContactsContract.CommonDataKinds.SipAddress;
-import android.provider.ContactsContract.Data;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -33,6 +32,7 @@ import android.text.TextUtils;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.TelephonyManagerUtils;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 /**
@@ -94,6 +94,20 @@ public class CallerInfoAsyncQuery {
      * Our own implementation of the AsyncQueryHandler.
      */
     private class CallerInfoAsyncQueryHandler extends AsyncQueryHandler {
+
+        @Override
+        public void startQuery(int token, Object cookie, Uri uri, String[] projection,
+                String selection, String[] selectionArgs, String orderBy) {
+            if (DBG) {
+                // Show stack trace with the arguments.
+                android.util.Log.d(LOG_TAG, "InCall: startQuery: url=" + uri +
+                                " projection=[" + Arrays.toString(projection) + "]" +
+                                " selection=" + selection + " " +
+                                " args=[" + Arrays.toString(selectionArgs) + "]",
+                        new RuntimeException("STACKTRACE"));
+            }
+            super.startQuery(token, cookie, uri, projection, selection, selectionArgs, orderBy);
+        }
 
         /**
          * The information relevant to each CallerInfo query.  Each query may have multiple
@@ -303,29 +317,6 @@ public class CallerInfoAsyncQuery {
     private CallerInfoAsyncQuery() {
     }
 
-
-    /**
-     * Factory method to start query with a Uri query spec
-     */
-    public static CallerInfoAsyncQuery startQuery(int token, Context context, Uri contactRef,
-            OnQueryCompleteListener listener, Object cookie) {
-
-        CallerInfoAsyncQuery c = new CallerInfoAsyncQuery();
-        c.allocate(context, contactRef);
-
-        Log.d(LOG_TAG, "starting query for URI: " + contactRef + " handler: " + c.toString());
-
-        //create cookieWrapper, start query
-        CookieWrapper cw = new CookieWrapper();
-        cw.listener = listener;
-        cw.cookie = cookie;
-        cw.event = EVENT_NEW_QUERY;
-
-        c.mHandler.startQuery(token, cw, contactRef, null, null, null, null);
-
-        return c;
-    }
-
     /**
      * Factory method to start the query based on a number.
      *
@@ -340,56 +331,19 @@ public class CallerInfoAsyncQuery {
     public static CallerInfoAsyncQuery startQuery(int token, Context context, String number,
             OnQueryCompleteListener listener, Object cookie) {
         Log.d(LOG_TAG, "##### CallerInfoAsyncQuery startQuery()... #####");
-        Log.d(LOG_TAG, "- number: " + /* number */"xxxxxxx");
+        Log.d(LOG_TAG, "- number: " + number);
         Log.d(LOG_TAG, "- cookie: " + cookie);
 
         // Construct the URI object and query params, and start the query.
 
-        Uri contactRef;
-        String selection;
-        String[] selectionArgs;
-
-        if (PhoneNumberHelper.isUriNumber(number)) {
-            // "number" is really a SIP address.
-            Log.d(LOG_TAG, "  - Treating number as a SIP address: " + /* number */"xxxxxxx");
-
-            // We look up SIP addresses directly in the Data table:
-            contactRef = Data.CONTENT_URI;
-
-            // Note Data.DATA1 and SipAddress.SIP_ADDRESS are equivalent.
-            //
-            // Also note we use "upper(data1)" in the WHERE clause, and
-            // uppercase the incoming SIP address, in order to do a
-            // case-insensitive match.
-            //
-            // TODO: need to confirm that the use of upper() doesn't
-            // prevent us from using the index!  (Linear scan of the whole
-            // contacts DB can be very slow.)
-            //
-            // TODO: May also need to normalize by adding "sip:" as a
-            // prefix, if we start storing SIP addresses that way in the
-            // database.
-
-            selection = "upper(" + Data.DATA1 + ")=?"
-                    + " AND "
-                    + Data.MIMETYPE + "='" + SipAddress.CONTENT_ITEM_TYPE + "'";
-            selectionArgs = new String[] { number.toUpperCase() };
-
-        } else {
-            // "number" is a regular phone number.  Use the PhoneLookup table:
-            contactRef = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
-            selection = null;
-            selectionArgs = null;
-        }
+        final Uri contactRef = PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI.buildUpon()
+                .appendPath(number)
+                .appendQueryParameter(PhoneLookup.QUERY_PARAMETER_SIP_ADDRESS,
+                        String.valueOf(PhoneNumberHelper.isUriNumber(number)))
+                .build();
 
         if (DBG) {
             Log.d(LOG_TAG, "==> contactRef: " + sanitizeUriToString(contactRef));
-            Log.d(LOG_TAG, "==> selection: " + selection);
-            if (selectionArgs != null) {
-                for (int i = 0; i < selectionArgs.length; i++) {
-                    Log.d(LOG_TAG, "==> selectionArgs[" + i + "]: " + selectionArgs[i]);
-                }
-            }
         }
 
         CallerInfoAsyncQuery c = new CallerInfoAsyncQuery();
@@ -414,27 +368,10 @@ public class CallerInfoAsyncQuery {
                               cw,  // cookie
                               contactRef,  // uri
                               null,  // projection
-                              selection,  // selection
-                              selectionArgs,  // selectionArgs
+                              null,  // selection
+                              null,  // selectionArgs
                               null);  // orderBy
         return c;
-    }
-
-    /**
-     * Method to add listeners to a currently running query
-     */
-    public void addQueryListener(int token, OnQueryCompleteListener listener, Object cookie) {
-
-        Log.d(this, "adding listener to query: " + sanitizeUriToString(mHandler.mQueryUri) +
-                " handler: " + mHandler.toString());
-
-        //create cookieWrapper, add query request to end of queue.
-        CookieWrapper cw = new CookieWrapper();
-        cw.listener = listener;
-        cw.cookie = cookie;
-        cw.event = EVENT_ADD_LISTENER;
-
-        mHandler.startQuery(token, cw, null, null, null, null, null);
     }
 
     /**

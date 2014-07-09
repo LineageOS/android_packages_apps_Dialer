@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import android.content.ContentUris;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -32,14 +31,12 @@ import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.incallui.service.PhoneNumberService;
 import com.android.incalluibind.ServiceFactory;
 import com.android.services.telephony.common.MoreStrings;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -173,12 +170,12 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                 final PhoneNumberServiceListener listener = new PhoneNumberServiceListener(callId);
                 mPhoneNumberService.getPhoneNumberInfo(cacheEntry.number, listener, listener,
                         isIncoming);
-            } else if (cacheEntry.personUri != null) {
+            } else if (cacheEntry.displayPhotoUri != null) {
                 Log.d(TAG, "Contact lookup. Local contact found, starting image load");
                 // Load the image with a callback to update the image state.
                 // When the load is finished, onImageLoadComplete() will be called.
                 ContactsAsyncHelper.startObtainPhotoAsync(TOKEN_UPDATE_PHOTO_FOR_CALL_STATE,
-                        mContext, cacheEntry.personUri, ContactInfoCache.this, callId);
+                        mContext, cacheEntry.displayPhotoUri, ContactInfoCache.this, callId);
             } else {
                 if (callerInfo.contactExists) {
                     Log.d(TAG, "Contact lookup done. Local contact found, no image.");
@@ -317,26 +314,17 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             } else {
                 photo = context.getResources().getDrawable(R.drawable.picture_unknown);
             }
-        } else if (info.person_id == 0) {
+        } else if (info.contactDisplayPhotoUri == null) {
             photo = context.getResources().getDrawable(R.drawable.picture_unknown);
         } else {
-            Uri personUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, info.person_id);
-            Log.d(TAG, "- got personUri: '" + personUri + "', based on info.person_id: " +
-                    info.person_id);
+            cce.displayPhotoUri = info.contactDisplayPhotoUri;
+        }
 
-            if (personUri == null) {
-                Log.v(TAG, "personUri is null. Just use unknown picture.");
-                photo = context.getResources().getDrawable(R.drawable.picture_unknown);
-            } else {
-                cce.personUri = personUri;
-            }
-
-            if (info.lookupKey == null) {
-                Log.v(TAG, "lookup key is null. Don't create a lookup uri.");
-                cce.lookupUri = null;
-            } else {
-                cce.lookupUri = Contacts.getLookupUri(info.person_id, info.lookupKey);
-            }
+        if (info.lookupKeyOrNull == null || info.contactIdOrZero == 0) {
+            Log.v(TAG, "lookup key is null or contact ID is 0. Don't create a lookup uri.");
+            cce.lookupUri = null;
+        } else {
+            cce.lookupUri = Contacts.getLookupUri(info.contactIdOrZero, info.lookupKeyOrNull);
         }
 
         cce.photo = photo;
@@ -511,7 +499,10 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         public String label;
         public Drawable photo;
         public boolean isSipCall;
-        public Uri personUri; // Used for local photo load
+        /** This will be used for the "view" notification. */
+        public Uri contactUri;
+        /** Either a display photo or a thumbnail URI. */
+        public Uri displayPhotoUri;
         public Uri lookupUri; // Sent to NotificationMananger
 
         @Override
@@ -523,6 +514,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     .add("label", label)
                     .add("photo", photo)
                     .add("isSipCall", isSipCall)
+                    .add("contactUri", contactUri)
+                    .add("displayPhotoUri", displayPhotoUri)
                     .toString();
         }
     }
