@@ -185,13 +185,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         int callState = Call.State.IDLE;
         if (mPrimary != null) {
             callState = mPrimary.getState();
-            final boolean bluetoothOn =
-                    (AudioModeProvider.getInstance().getAudioMode() == AudioMode.BLUETOOTH);
 
-            getUi().setCallState(callState, mPrimary.getDisconnectCause(), bluetoothOn,
-                    getConnectionLabel(), getConnectionIcon(), getGatewayNumber());
+            getUi().setCallState(callState, mPrimary.getDisconnectCause(), getConnectionLabel(),
+                    getConnectionIcon(), getGatewayNumber());
         } else {
-            getUi().setCallState(callState, DisconnectCause.NOT_VALID, false, null, null, null);
+            getUi().setCallState(callState, DisconnectCause.NOT_VALID, null, null, null);
         }
 
         final boolean enableEndCallButton = Call.State.isConnected(callState) &&
@@ -201,12 +199,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     @Override
     public void onAudioMode(int mode) {
-        if (mPrimary != null && getUi() != null) {
-            final boolean bluetoothOn = (AudioMode.BLUETOOTH == mode);
-
-            getUi().setCallState(mPrimary.getState(), mPrimary.getDisconnectCause(), bluetoothOn,
-                    getConnectionLabel(), getConnectionIcon(), getGatewayNumber());
-        }
     }
 
     @Override
@@ -519,8 +511,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
                 String providerLabel, Drawable providerIcon, boolean isConference,
                 boolean isGeneric);
-        void setCallState(int state, int cause, boolean bluetoothOn, String connectionLabel,
-                Drawable connectionIcon, String gatewayNumber);
+        void setCallState(int state, int cause, String connectionLabel, Drawable connectionIcon,
+                String gatewayNumber);
         void setPrimaryCallElapsedTime(boolean show, String duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Drawable image);
