@@ -17,6 +17,8 @@
 package com.android.dialer;
 
 import android.content.res.Resources;
+import android.provider.CallLog;
+import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -29,6 +31,7 @@ import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
+import com.android.dialer.util.DialerUtils;
 
 import com.google.common.collect.Lists;
 
@@ -77,6 +80,10 @@ public class PhoneCallDetailsHelper {
         for (int index = 0; index < count && index < MAX_CALL_TYPE_ICONS; ++index) {
             views.callTypeIcons.add(details.callTypes[index]);
         }
+
+        // Show the video icon if the call had video enabled.
+        views.callTypeIcons.setShowVideo(
+                (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
         views.callTypeIcons.requestLayout();
         views.callTypeIcons.setVisibility(View.VISIBLE);
 
@@ -142,7 +149,7 @@ public class PhoneCallDetailsHelper {
         mDescriptionItems.add(getCallDate(details));
 
         // Create a comma separated list from the call type or location, and call date.
-        return TextUtils.join(", " , mDescriptionItems);
+        return DialerUtils.join(mResources, mDescriptionItems);
     }
 
     /**

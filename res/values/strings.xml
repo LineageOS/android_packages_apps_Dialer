@@ -737,4 +737,8 @@
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
     <string name="voicemail_play_start_pause">Start or pause playback.</string>
+
+    <!-- Delimeter used between each item in a textual list; for example "Alpha, Beta".
+         [CHAR LIMIT=3] -->
+    <string name="list_delimeter">", "</string>
 </resources>

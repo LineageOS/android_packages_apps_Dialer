@@ -24,6 +24,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Telephony;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -123,5 +124,18 @@ public class DialerUtils {
             } catch (Exception ignored) {
             }
         }
+    }
+
+    /**
+     * Joins a list of {@link CharSequence} into a single {@link CharSequence} seperated by a
+     * localized delimiter such as ", ".
+     *
+     * @param resources Resources used to get list delimiter.
+     * @param list List of char sequences to join.
+     * @return Joined char sequences.
+     */
+    public static CharSequence join(Resources resources, Iterable<CharSequence> list) {
+        final CharSequence separator = resources.getString(R.string.list_delimeter);
+        return TextUtils.join(separator, list);
     }
 }

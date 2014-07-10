@@ -290,7 +290,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(number, presentation, formattedNumber,
                         TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION, null)
+                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION, null,
+                        Calls.FEATURES_NONE, null)
         );
     }
 
@@ -300,7 +301,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(number, Calls.PRESENTATION_ALLOWED,
                         formattedNumber, TEST_COUNTRY_ISO, geocodedLocation,
-                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION, null)
+                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION, null,
+                        Calls.FEATURES_NONE, null)
         );
     }
 
@@ -309,7 +311,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.INCOMING_TYPE }, date, TEST_DURATION, null)
+                        new int[]{ Calls.INCOMING_TYPE }, date, TEST_DURATION, null,
+                        Calls.FEATURES_NONE, null)
         );
     }
 
@@ -318,7 +321,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        callTypes, TEST_DATE, TEST_DURATION, null)
+                        callTypes, TEST_DATE, TEST_DURATION, null, Calls.FEATURES_NONE, null)
         );
     }
 
@@ -326,7 +329,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setCallDetailsHeader(mNameView,
                 new PhoneCallDetails(number, presentation,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION, null));
+                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION, null,
+                        Calls.FEATURES_NONE, null));
     }
 
     private void setCallDetailsHeader(String name) {
@@ -334,6 +338,6 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                         new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION,
-                        name, 0, "", null, null, 0, null));
+                        name, 0, "", null, null, 0, null, Calls.FEATURES_NONE, null));
     }
 }
