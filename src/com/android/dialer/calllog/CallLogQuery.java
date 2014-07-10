@@ -46,6 +46,8 @@ public final class CallLogQuery {
             Calls.NUMBER_PRESENTATION,          // 17
             Calls.PHONE_ACCOUNT_COMPONENT_NAME, // 18
             Calls.PHONE_ACCOUNT_ID,             // 19
+            Calls.FEATURES,                     // 20
+            Calls.DATA_USAGE                    // 21
     };
 
     public static final int ID = 0;
@@ -68,4 +70,6 @@ public final class CallLogQuery {
     public static final int NUMBER_PRESENTATION = 17;
     public static final int ACCOUNT_COMPONENT_NAME = 18;
     public static final int ACCOUNT_ID = 19;
+    public static final int FEATURES = 20;
+    public static final int DATA_USAGE = 21;
 }

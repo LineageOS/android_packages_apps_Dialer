@@ -19,6 +19,7 @@ package com.android.dialer.calllog;
 import android.content.Context;
 import android.provider.CallLog.Calls;
 import android.text.format.DateUtils;
+import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,10 @@ import android.widget.TextView;
 
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
+import com.android.dialer.util.DialerUtils;
+import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
 
 /**
  * Adapter for a ListView containing history items from the details of a call.
@@ -41,6 +46,11 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
     private final LayoutInflater mLayoutInflater;
     private final CallTypeHelper mCallTypeHelper;
     private final PhoneCallDetails[] mPhoneCallDetails;
+
+    /**
+     * List of items to be concatenated together for duration strings.
+     */
+    private ArrayList<CharSequence> mDurationItems = Lists.newArrayList();
 
     public CallDetailHistoryAdapter(Context context, LayoutInflater layoutInflater,
             CallTypeHelper callTypeHelper, PhoneCallDetails[] phoneCallDetails) {
@@ -114,6 +124,8 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
         int callType = details.callTypes[0];
         callTypeIconView.clear();
         callTypeIconView.add(callType);
+        callTypeIconView.setShowVideo(
+                (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
         callTypeTextView.setText(mCallTypeHelper.getCallTypeText(callType));
         // Set the date.
         CharSequence dateValue = DateUtils.formatDateRange(mContext, details.date, details.date,
@@ -125,13 +137,13 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
             durationView.setVisibility(View.GONE);
         } else {
             durationView.setVisibility(View.VISIBLE);
-            durationView.setText(formatDuration(details.duration));
+            durationView.setText(formatDurationAndDataUsage(details.duration, details.dataUsage));
         }
 
         return result;
     }
 
-    private String formatDuration(long elapsedSeconds) {
+    private CharSequence formatDuration(long elapsedSeconds) {
         long minutes = 0;
         long seconds = 0;
 
@@ -142,5 +154,26 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
         seconds = elapsedSeconds;
 
         return mContext.getString(R.string.callDetailsDurationFormat, minutes, seconds);
+    }
+
+    /**
+     * Formats a string containing the call duration and the data usage (if specified).
+     *
+     * @param elapsedSeconds Total elapsed seconds.
+     * @param dataUsage Data usage in bytes, or null if not specified.
+     * @return String containing call duration and data usage.
+     */
+    private CharSequence formatDurationAndDataUsage(long elapsedSeconds, Long dataUsage) {
+        CharSequence duration = formatDuration(elapsedSeconds);
+
+        if (dataUsage != null) {
+            mDurationItems.clear();
+            mDurationItems.add(duration);
+            mDurationItems.add(Formatter.formatShortFileSize(mContext, dataUsage));
+
+            return DialerUtils.join(mContext.getResources(), mDurationItems);
+        } else {
+            return duration;
+        }
     }
 }

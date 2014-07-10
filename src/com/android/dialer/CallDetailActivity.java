@@ -50,6 +50,7 @@ import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.GeoUtil;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
+import com.android.dialer.calllog.CallLogQuery;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
@@ -197,6 +198,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         CallLog.Calls.NUMBER_PRESENTATION,
         CallLog.Calls.PHONE_ACCOUNT_COMPONENT_NAME,
         CallLog.Calls.PHONE_ACCOUNT_ID,
+        CallLog.Calls.FEATURES,
+        CallLog.Calls.DATA_USAGE
     };
 
     static final int DATE_COLUMN_INDEX = 0;
@@ -208,6 +211,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     static final int NUMBER_PRESENTATION_COLUMN_INDEX = 6;
     static final int ACCOUNT_COMPONENT_NAME = 7;
     static final int ACCOUNT_ID = 8;
+    static final int FEATURES = 9;
+    static final int DATA_USAGE = 10;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -525,11 +530,16 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                 lookupUri = info.lookupUri;
                 sourceType = info.sourceType;
             }
+            final int features = callCursor.getInt(FEATURES);
+            Long dataUsage = null;
+            if (!callCursor.isNull(DATA_USAGE)) {
+                dataUsage = callCursor.getLong(DATA_USAGE);
+            }
             return new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode,
                     new int[]{ callType }, date, duration,
                     nameText, numberType, numberLabel, lookupUri, photoUri, sourceType,
-                    accountIcon);
+                    accountIcon, features, dataUsage);
         } finally {
             if (callCursor != null) {
                 callCursor.close();

@@ -17,8 +17,11 @@
 package com.android.dialer.calllog;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.provider.CallLog.Calls;
 import android.util.AttributeSet;
@@ -38,6 +41,7 @@ import java.util.List;
  */
 public class CallTypeIconsView extends View {
     private List<Integer> mCallTypes = Lists.newArrayListWithCapacity(3);
+    private boolean mShowVideo = false;
     private Resources mResources;
     private int mWidth;
     private int mHeight;
@@ -65,6 +69,20 @@ public class CallTypeIconsView extends View {
         mWidth += drawable.getIntrinsicWidth() + mResources.iconMargin;
         mHeight = Math.max(mHeight, drawable.getIntrinsicHeight());
         invalidate();
+    }
+
+    /**
+     * Determines whether the video call icon will be shown.
+     *
+     * @param showVideo True where the video icon should be shown.
+     */
+    public void setShowVideo(boolean showVideo) {
+        mShowVideo = showVideo;
+        if (showVideo) {
+            mWidth += mResources.videoCall.getIntrinsicWidth();
+            mHeight = Math.max(mHeight, mResources.videoCall.getIntrinsicHeight());
+            invalidate();
+        }
     }
 
     @NeededForTesting
@@ -111,6 +129,14 @@ public class CallTypeIconsView extends View {
             drawable.draw(canvas);
             left = right + mResources.iconMargin;
         }
+
+        // If showing the video call icon, draw it scaled appropriately.
+        if (mShowVideo) {
+            final Drawable drawable = mResources.videoCall;
+            final int right = left + mResources.videoCall.getIntrinsicWidth();
+            drawable.setBounds(left, 0, right, mResources.videoCall.getIntrinsicHeight());
+            drawable.draw(canvas);
+        }
     }
 
     private static class Resources {
@@ -134,6 +160,11 @@ public class CallTypeIconsView extends View {
          * Drawable representing a voicemail.
          */
         public final Drawable voicemail;
+
+        /**
+         * Drawable repesenting a video call.
+         */
+        public final Drawable videoCall;
 
         /**
          * The margin to use for icons.
@@ -163,6 +194,21 @@ public class CallTypeIconsView extends View {
             missed.setColorFilter(r.getColor(R.color.missed_call), PorterDuff.Mode.MULTIPLY);
 
             voicemail = r.getDrawable(R.drawable.ic_call_voicemail_holo_dark);
+
+            // Get the video call icon, scaled to match the height of the call arrows.
+            // We want the video call icon to be the same height as the call arrows, while keeping
+            // the same width aspect ratio.
+            Bitmap videoIcon = BitmapFactory.decodeResource(context.getResources(),
+                    R.drawable.ic_videocam_wht_24dp);
+            int scaledHeight = missed.getIntrinsicHeight();
+            int scaledWidth = (int) ((float) videoIcon.getWidth() *
+                    ((float) missed.getIntrinsicHeight() /
+                            (float) videoIcon.getHeight()));
+            Bitmap scaled = Bitmap.createScaledBitmap(videoIcon, scaledWidth, scaledHeight, false);
+            videoCall = new BitmapDrawable(context.getResources(), scaled);
+            videoCall.setColorFilter(r.getColor(R.color.dialtacts_secondary_text_color),
+                    PorterDuff.Mode.MULTIPLY);
+
             iconMargin = r.getDimensionPixelSize(R.dimen.call_log_icon_margin);
         }
     }

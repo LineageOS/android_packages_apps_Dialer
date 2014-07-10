@@ -742,17 +742,23 @@ public class CallLogAdapter extends GroupingListAdapter
         final int[] callTypes = getCallTypes(c, count);
         final String geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
         final int sourceType = info.sourceType;
+        final int features = getCallFeatures(c, count);
+        Long dataUsage = null;
+        if (!c.isNull(CallLogQuery.DATA_USAGE)) {
+            dataUsage = c.getLong(CallLogQuery.DATA_USAGE);
+        }
+
         final PhoneCallDetails details;
 
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, accountIcon);
+                    duration, accountIcon, features, dataUsage);
         } else {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
                     duration, name, ntype, label, lookupUri, photoUri, sourceType,
-                    accountIcon);
+                    accountIcon, features, dataUsage);
         }
 
         mCallLogViewsHelper.setPhoneCallDetails(views, details);
@@ -1180,6 +1186,25 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         cursor.moveToPosition(position);
         return callTypes;
+    }
+
+    /**
+     * Determine the features which were enabled for any of the calls that make up a call log
+     * entry.
+     *
+     * @param cursor The cursor.
+     * @param count The number of calls for the current call log entry.
+     * @return The features.
+     */
+    private int getCallFeatures(Cursor cursor, int count) {
+        int features = Calls.FEATURES_NONE;
+        int position = cursor.getPosition();
+        for (int index = 0; index < count; ++index) {
+            features |= cursor.getInt(CallLogQuery.FEATURES);
+            cursor.moveToNext();
+        }
+        cursor.moveToPosition(position);
+        return features;
     }
 
     private PhoneAccount getAccount(Cursor c) {

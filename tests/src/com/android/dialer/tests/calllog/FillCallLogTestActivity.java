@@ -72,6 +72,7 @@ public class FillCallLogTestActivity extends Activity {
     private RadioButton mCallTypeIncoming;
     private RadioButton mCallTypeMissed;
     private RadioButton mCallTypeOutgoing;
+    private CheckBox mCallTypeVideo;
     private RadioButton mPresentationAllowed;
     private RadioButton mPresentationRestricted;
     private RadioButton mPresentationUnknown;
@@ -124,6 +125,7 @@ public class FillCallLogTestActivity extends Activity {
         mCallTypeIncoming = (RadioButton) findViewById(R.id.call_type_incoming);
         mCallTypeMissed = (RadioButton) findViewById(R.id.call_type_missed);
         mCallTypeOutgoing = (RadioButton) findViewById(R.id.call_type_outgoing);
+        mCallTypeVideo = (CheckBox) findViewById(R.id.call_type_video);
         mPresentationAllowed = (RadioButton) findViewById(R.id.presentation_allowed);
         mPresentationPayphone = (RadioButton) findViewById(R.id.presentation_payphone);
         mPresentationUnknown = (RadioButton) findViewById(R.id.presentation_unknown);
@@ -488,9 +490,16 @@ public class FillCallLogTestActivity extends Activity {
         Calendar dateTime = Calendar.getInstance();
         dateTime.set(mCallDateYear, mCallDateMonth, mCallDateDay, mCallTimeHour, mCallTimeMinute);
 
+        int features = mCallTypeVideo.isChecked() ? Calls.FEATURES_VIDEO : Calls.FEATURES_NONE;
+        Long dataUsage = null;
+        if (mCallTypeVideo.isChecked()) {
+            // Some random data usage up to 50MB.
+            dataUsage = (long) RNG.nextInt(52428800);
+        }
+
         Calls.addCall(null, this, mPhoneNumber.getText().toString(), getManualPresentation(),
-                getManualCallType(), getManualAccount(), dateTime.getTimeInMillis(),
-                RNG.nextInt(60 * 60));
+                getManualCallType(), features, getManualAccount(),
+                dateTime.getTimeInMillis(), RNG.nextInt(60 * 60), dataUsage);
 
         // Subtract offset from the call date/time and store as new date/time
         int offset = Integer.parseInt(mOffset.getText().toString());

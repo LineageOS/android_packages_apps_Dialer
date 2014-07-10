@@ -58,26 +58,43 @@
         android:layout_height="wrap_content"
         android:text="@string/add_custom_entry"
         />
-    <RadioGroup
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <RadioButton
-            android:id="@+id/call_type_incoming"
+        android:gravity="left"
+        >
+        <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/call_type_incoming" />
-        <RadioButton
-            android:id="@+id/call_type_missed"
-            android:layout_width="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/call_type_incoming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/call_type_incoming"
+                android:textSize="9sp" />
+            <RadioButton
+                android:id="@+id/call_type_missed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/call_type_missed"
+                android:textSize="9sp" />
+            <RadioButton
+                android:id="@+id/call_type_outgoing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/call_type_outgoing"
+                android:textSize="9sp" />
+        </RadioGroup>
+        <CheckBox
+            android:id="@+id/call_type_video"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/call_type_missed" />
-        <RadioButton
-            android:id="@+id/call_type_outgoing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/call_type_outgoing" />
-    </RadioGroup>
+            android:text="@string/call_type_video"
+            android:textSize="9sp"
+            />
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

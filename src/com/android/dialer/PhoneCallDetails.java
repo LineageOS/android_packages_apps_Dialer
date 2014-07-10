@@ -68,13 +68,23 @@ public class PhoneCallDetails {
      * The unique identifier for the provider associated with the call.
      */
     public final Drawable accountIcon;
+    /**
+     * Features applicable to this call.
+     */
+    public final int features;
+    /**
+     * Total data usage for this call.
+     */
+    public final Long dataUsage;
 
     /** Create the details for a call with a number not associated with a contact. */
     public PhoneCallDetails(CharSequence number, int numberPresentation,
             CharSequence formattedNumber, String countryIso, String geocode,
-            int[] callTypes, long date, long duration, Drawable accountIcon) {
+            int[] callTypes, long date, long duration, Drawable accountIcon, int features,
+            Long dataUsage) {
         this(number, numberPresentation, formattedNumber, countryIso, geocode,
-                callTypes, date, duration, "", 0, "", null, null, 0, accountIcon);
+                callTypes, date, duration, "", 0, "", null, null, 0, accountIcon, features,
+                dataUsage);
     }
 
     /** Create the details for a call with a number associated with a contact. */
@@ -82,7 +92,7 @@ public class PhoneCallDetails {
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration, CharSequence name,
             int numberType, CharSequence numberLabel, Uri contactUri,
-            Uri photoUri, int sourceType, Drawable accountIcon) {
+            Uri photoUri, int sourceType, Drawable accountIcon, int features, Long dataUsage) {
         this.number = number;
         this.numberPresentation = numberPresentation;
         this.formattedNumber = formattedNumber;
@@ -98,5 +108,7 @@ public class PhoneCallDetails {
         this.photoUri = photoUri;
         this.sourceType = sourceType;
         this.accountIcon = accountIcon;
+        this.features = features;
+        this.dataUsage = dataUsage;
     }
 }
