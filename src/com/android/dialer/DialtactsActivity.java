@@ -31,7 +31,6 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.phone.PhoneManager;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
