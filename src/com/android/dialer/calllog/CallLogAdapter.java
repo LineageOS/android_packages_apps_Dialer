@@ -37,6 +37,7 @@ import android.view.ViewStub;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.ContactPhotoManager;
@@ -133,6 +134,7 @@ public class CallLogAdapter extends GroupingListAdapter
     protected final Context mContext;
     private final ContactInfoHelper mContactInfoHelper;
     private final CallFetcher mCallFetcher;
+    private final Toast mReportedToast;
     private ViewTreeObserver mViewTreeObserver = null;
 
     /**
@@ -352,6 +354,9 @@ public class CallLogAdapter extends GroupingListAdapter
         mContactInfoHelper = contactInfoHelper;
         mIsCallLog = isCallLog;
         mCallItemExpandedListener = callItemExpandedListener;
+
+        mReportedToast = Toast.makeText(mContext, R.string.toast_caller_id_reported,
+                Toast.LENGTH_SHORT);
 
         mContactInfoCache = ExpirableCache.create(CONTACT_INFO_CACHE_SIZE);
         mRequests = new LinkedList<ContactInfoRequest>();
@@ -747,6 +752,9 @@ public class CallLogAdapter extends GroupingListAdapter
         final int sourceType = info.sourceType;
         final PhoneCallDetails details;
 
+        views.reported = info.isBadData;
+        views.isExternal = mContactInfoHelper.isExternal(info.sourceType);
+
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
@@ -904,7 +912,7 @@ public class CallLogAdapter extends GroupingListAdapter
      *
      * @param callLogItem The call log list item view.
      */
-    private void inflateActionViewStub(View callLogItem) {
+    private void inflateActionViewStub(final View callLogItem) {
         final CallLogListItemViews views = (CallLogListItemViews)callLogItem.getTag();
 
         ViewStub stub = (ViewStub)callLogItem.findViewById(R.id.call_log_entry_actions_stub);
@@ -924,6 +932,19 @@ public class CallLogAdapter extends GroupingListAdapter
 
         if (views.detailsButtonView == null) {
             views.detailsButtonView = (TextView)views.actionsView.findViewById(R.id.details_action);
+        }
+
+        if (views.reportButtonView == null) {
+            views.reportButtonView = (TextView)views.actionsView.findViewById(R.id.report_action);
+            views.reportButtonView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mReportedToast.show();
+                    ((CallLogListItemViews) callLogItem.getTag()).reported = true;
+                    v.setVisibility(View.GONE);
+                    // TODO: Set the entry as reported in the database.
+                }
+            });
         }
 
         bindActionButtons(views);
@@ -966,7 +987,9 @@ public class CallLogAdapter extends GroupingListAdapter
                     IntentProvider.getCallDetailIntentProvider(
                             views.rowId, views.callIds, null)
             );
-
+            if (views.isExternal && !views.reported) {
+                views.reportButtonView.setVisibility(View.VISIBLE);
+            }
         }
 
         mCallLogViewsHelper.setActionContentDescriptions(views);

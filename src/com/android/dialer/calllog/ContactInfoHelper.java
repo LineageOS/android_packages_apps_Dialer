@@ -288,4 +288,16 @@ public class ContactInfoHelper {
         return mCachedNumberLookupService != null
                 && mCachedNumberLookupService.isBusiness(sourceType);
     }
+
+    /**
+     * Given a contact's sourceType, return true if the contact came from an
+     * external source.
+     *
+     * @param sourceType sourceType of the contact. This is usually populated by
+     *        {@link #mCachedNumberLookupService}.
+     */
+    public boolean isExternal(int sourceType) {
+        return mCachedNumberLookupService != null
+                && mCachedNumberLookupService.isExternal(sourceType);
+    }
 }

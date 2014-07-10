@@ -677,6 +677,15 @@
          [CHAR LIMIT=NONE] -->
     <string name="toast_entry_removed">Call log entry deleted.</string>
 
+    <!-- Toast message which appears when a call log contact is reported.
+         [CHAR LIMIT=NONE] -->
+    <string name="toast_caller_id_reported">Contact reported.</string>
+
+    <!-- Button text for the "report" button displayed underneath an entry in the call log.
+         Tapping causes the call log entry to be reported to Google as a bad id.
+         [CHAR LIMIT=30] -->
+    <string name="call_log_action_report">REPORT</string>
+
     <!-- String used as a header in the call log above calls which occurred today.
          [CHAR LIMIT=65] -->
     <string name="call_log_header_today">Today</string>
