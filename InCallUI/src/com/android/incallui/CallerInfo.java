@@ -24,6 +24,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
 import android.provider.ContactsContract.RawContacts;
@@ -212,17 +213,20 @@ public class CallerInfo {
                 // Look for the person_id.
                 columnIndex = getColumnIndexForPersonId(contactRef, cursor);
                 if (columnIndex != -1) {
-                    info.contactIdOrZero = cursor.getLong(columnIndex);
-                    Log.v(TAG, "==> got info.contactIdOrZero: " + info.contactIdOrZero);
+                    final long contactId = cursor.getLong(columnIndex);
+                    if (contactId != 0 && !Contacts.isCorpContactId(contactId)) {
+                        info.contactIdOrZero = contactId;
+                        Log.v(TAG, "==> got info.contactIdOrZero: " + info.contactIdOrZero);
 
-                    // cache the lookup key for later use with person_id to create lookup URIs
-                    columnIndex = cursor.getColumnIndex(PhoneLookup.LOOKUP_KEY);
-                    if (columnIndex != -1) {
-                        info.lookupKeyOrNull = cursor.getString(columnIndex);
+                        // cache the lookup key for later use with person_id to create lookup URIs
+                        columnIndex = cursor.getColumnIndex(PhoneLookup.LOOKUP_KEY);
+                        if (columnIndex != -1) {
+                            info.lookupKeyOrNull = cursor.getString(columnIndex);
+                        }
                     }
                 } else {
                     // No valid columnIndex, so we can't look up person_id.
-                    Log.v(TAG, "Couldn't find person_id column for " + contactRef);
+                    Log.v(TAG, "Couldn't find contactId column for " + contactRef);
                     // Watch out: this means that anything that depends on
                     // person_id will be broken (like contact photo lookups in
                     // the in-call UI, for example.)
