@@ -147,6 +147,14 @@
     <!-- In-call screen: special status label that shows your own phone
          number during emergency callback mode (ECM) [CHAR LIMIT=30] -->
     <string name="card_title_my_phone_number">My number is <xliff:g id="my_phone_number">%s</xliff:g></string>
+    <!-- In-call screen: status label when connecting video. -->
+    <string name="card_title_video_call_connecting">Connecting video</string>
+    <!-- In-call screen: status label when in a video call. -->
+    <string name="card_title_video_call">Video call</string>
+    <!-- In-call screen: status label when requesting video. -->
+    <string name="card_title_video_call_requesting">Requesting video</string>
+    <!-- In-call screen: status label when there is a problem connecting a video call. -->
+    <string name="card_title_video_call_error">Cannot connect video call</string>
 
     <!-- Notification strings -->
     <!-- The "label" of the in-call Notification for a dialing call, used
@@ -168,6 +176,10 @@
     <string name="notification_on_hold">On hold</string>
     <!-- The "label" of the in-call Notification for an incoming ringing call -->
     <string name="notification_incoming_call">Incoming call</string>
+    <!-- The "label" of the in-call Notification for an incoming ringing video call. -->
+    <string name="notification_incoming_video_call">Incoming video call</string>
+    <!-- The "label" of the in-call Notification for upgrading an existing call to a video call. -->
+    <string name="notification_requesting_video_call">Incoming video request</string>
     <!-- Label for the "Voicemail" notification item, when expanded. -->
     <string name="notification_voicemail_title">New voicemail</string>
     <!-- Label for the expanded "Voicemail" notification item,
@@ -184,11 +196,26 @@
     <!-- Label for the expanded "No service" notification item, including the
          operator name set by user -->
     <string name="notification_network_selection_text">Selected network (<xliff:g id="operator_name">%s</xliff:g>) unavailable</string>
-    <!-- Message for "end call" Action.
+    <!-- Label for "end call" Action.
          It is displayed in the "Ongoing call" notification, which is shown
          when the user is outside the in-call screen while the phone call is still
          active. [CHAR LIMIT=40] -->
     <string name="notification_action_end_call">Hang up</string>
+    <!-- Label for "Video Call" notification action. This is a displayed on the notification for an
+         incoming video call, and answers the call as a video call. [CHAR LIMIT=40] -->
+    <string name="notification_action_answer_video">Video call</string>
+    <!-- Label for "Voice" notification action. This is a displayed on the notification for an
+         incoming video call, and answers the call as an audio call. [CHAR LIMIT=40] -->
+    <string name="notification_action_answer_voice">Voice</string>
+    <!-- Label for "Accept" notification action. This is somewhat generic, and may refer to
+         scenarios such as accepting an incoming call or accepting a video call request.
+         [CHAR LIMIT=40] -->
+    <string name="notification_action_accept">Accept</string>
+    <!-- Label for "Decline" notification action. This is somewhat generic, and may refer to
+         scenarios such as declining an incoming call or declining a video call request.
+         [CHAR LIMIT=40] -->
+    <string name="notification_action_decline">Decline</string>
+
     <!-- Message for "call back" Action, which is displayed in the missed call notificaiton.
          The user will be able to call back to the person or the phone number.
          [CHAR LIMIT=60] -->
@@ -272,6 +299,14 @@
     <!-- Text for the onscreen "Video call" button used to change a voice call
          to a video call. [CHAR LIMIT=10] -->
     <string name="onscreenVideoCallText">Video call</string>
+    <!-- Text for the onscreen "Change to audio" button. When clicked, this downgrades a video call
+         to an audio call. -->
+    <string name="onscreenChangeToAudioText">Change to audio call</string>
+    <!-- Text for the onscreen "Switch camera" button. When clicked, this switches the user's camera
+         for video calling between the front-facing camera and the back-facing camera. -->
+    <string name="onscreenSwitchCameraText">Switch camera</string>
+    <!-- Text for the onscreen "Pause video" button. -->
+    <string name="onscreenPauseVideoText">Pause video</string>
 
     <!-- For incoming calls, this is a string we can get from a CDMA network instead of
          the actual phone number, to indicate there's no number present.  DO NOT TRANSLATE. -->
@@ -435,8 +470,14 @@
     <string name="description_target_answer">Answer</string>
     <!-- Description of the send_sms target in the Slide unlock screen of Phone. [CHAR LIMIT=NONE] -->
     <string name="description_target_send_sms">Send SMS</string>
-    <!-- Description of the decline on target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+    <!-- Description of the decline target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
     <string name="description_target_decline">Decline</string>
+    <!-- Description of the target to answer a call as a video call in the Slide unlock screen.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_target_answer_video_call">Answer as video call</string>
+    <!-- Description of the target to answer a call as an audio call in the Slide unlock screen.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_target_answer_audio_call">Answer as audio call</string>
 
     <!-- Description of the up direction in which one can to slide the handle in the phone answer screen. [CHAR LIMIT=NONE] -->
     <string name="description_direction_up">Slide up for <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
@@ -444,6 +485,8 @@
     <string name="description_direction_left">"Slide left for <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
     <!-- Description of the right direction in which one can to slide the handle in the phone answer screen. [CHAR LIMIT=NONE] -->
     <string name="description_direction_right">Slide right for <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
+    <!-- Description of the down direction in which one can to slide the handle in the phone answer screen. [CHAR LIMIT=NONE] -->
+    <string name="description_direction_down">Slide down for <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
 
     <!-- Dialog title for the vibration settings for voicemail notifications [CHAR LIMIT=40] -->
     <string name="voicemail_notification_vibrate_when_title" msgid="8731372580674292759">Vibrate</string>
