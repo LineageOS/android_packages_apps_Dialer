@@ -48,6 +48,8 @@ public final class CallLogListItemViews {
     public TextView voicemailButtonView;
     /** The "details" action button - assigned only when the action section is expanded. */
     public TextView detailsButtonView;
+    /** The "report" action button. */
+    public TextView reportButtonView;
 
     /**
      * The row Id for the first call associated with the call log entry.  Used as a key for the
@@ -98,6 +100,16 @@ public final class CallLogListItemViews {
      */
     public CharSequence nameOrNumber;
 
+    /**
+     * Whether or not the item has been reported by user as incorrect.
+     */
+    public boolean reported;
+
+    /**
+     * Whether or not the contact info came from a source other than the android contacts provider.
+     */
+    public boolean isExternal;
+
     private CallLogListItemViews(QuickContactBadge quickContactView, View primaryActionView,
             PhoneCallDetailsViews phoneCallDetailsViews, View callLogEntryView,
             TextView dayGroupHeader) {
@@ -128,6 +140,7 @@ public final class CallLogListItemViews {
         views.callBackButtonView = new TextView(context);
         views.voicemailButtonView = new TextView(context);
         views.detailsButtonView = new TextView(context);
+        views.reportButtonView = new TextView(context);
         views.actionsView = new View(context);
         return views;
     }
