@@ -322,15 +322,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setCallState(int state, int cause, boolean bluetoothOn, String connectionLabel,
-            Drawable connectionIcon, String gatewayNumber) {
+    public void setCallState(int state, int cause, String connectionLabel, Drawable connectionIcon,
+            String gatewayNumber) {
         boolean isGatewayCall = !TextUtils.isEmpty(gatewayNumber);
         String callStateLabel = getCallStateLabelFromState(
                 state, cause, connectionLabel, isGatewayCall);
 
         Log.v(this, "setCallState " + callStateLabel);
         Log.v(this, "DisconnectCause " + DisconnectCause.toString(cause));
-        Log.v(this, "bluetooth on " + bluetoothOn);
         Log.v(this, "gateway " + connectionLabel + gatewayNumber);
 
         // Update the call state label and icon.
@@ -358,10 +357,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             }
             mCallStateLabel.setAlpha(0);
             mCallStateLabel.setVisibility(View.GONE);
-        }
-
-        if (Call.State.INCOMING == state) {
-            setBluetoothOn(bluetoothOn);
         }
     }
 
@@ -414,21 +409,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         Log.v(this, "isGenericPhoto: " + isGeneric);
         final int resId = isGeneric ? R.drawable.picture_dialing : R.drawable.picture_conference;
         return getView().getResources().getDrawable(resId);
-    }
-
-    private void setBluetoothOn(boolean onOff) {
-        // Also, display a special icon (alongside the "Incoming call"
-        // label) if there's an incoming call and audio will be routed
-        // to bluetooth when you answer it.
-        final int bluetoothIconId = R.drawable.ic_in_call_bt_dk;
-
-        if (onOff) {
-            mCallStateLabel.setCompoundDrawablesWithIntrinsicBounds(bluetoothIconId, 0, 0, 0);
-            mCallStateLabel.setCompoundDrawablePadding((int) (mDensity * 5));
-        } else {
-            // Clear out any icons
-            mCallStateLabel.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-        }
     }
 
     /**

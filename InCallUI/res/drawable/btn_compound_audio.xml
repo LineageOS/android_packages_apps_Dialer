@@ -45,7 +45,7 @@
     <!-- Use an explicit <bitmap> to avoid scaling the icon up to the full
          size of the button. -->
     <item android:id="@+id/moreIndicatorItem">
-        <bitmap android:src="@drawable/ic_more_indicator_holo_dark"
+        <bitmap android:src="@drawable/ic_toolbar_arrow_whitespace"
                 android:gravity="center"
                 android:tint="@color/selectable_icon_tint" />
     </item>
