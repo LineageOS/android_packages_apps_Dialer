@@ -28,10 +28,10 @@
         android:background="@color/glowpad_background_color"
         android:visibility="gone"
 
-        dc:targetDrawables="@array/incoming_call_widget_3way_targets"
-        dc:targetDescriptions="@array/incoming_call_widget_3way_target_descriptions"
-        dc:directionDescriptions="@array/incoming_call_widget_3way_direction_descriptions"
-        dc:handleDrawable="@drawable/ic_in_call_touch_handle"
+        dc:targetDrawables="@array/incoming_call_widget_audio_with_sms_targets"
+        dc:targetDescriptions="@array/incoming_call_widget_audio_with_sms_target_descriptions"
+        dc:directionDescriptions="@array/incoming_call_widget_audio_with_sms_direction_descriptions"
+        dc:handleDrawable="@drawable/ic_incall_audio_handle"
         dc:outerRingDrawable="@drawable/ic_lockscreen_outerring"
         dc:outerRadius="@dimen/glowpadview_target_placement_radius"
         dc:innerRadius="@dimen/glowpadview_inner_radius"
@@ -40,5 +40,4 @@
         dc:vibrationDuration="20"
         dc:glowRadius="@dimen/glowpadview_glow_radius"
         dc:pointDrawable="@drawable/ic_lockscreen_glowdot"
-        dc:allowScaling="true"
-        />
+        dc:allowScaling="true" />

@@ -20,50 +20,95 @@
     <!-- "Target" resources for the GlowPadView widget used for incoming calls;
          see InCallTouchUi.showIncomingCallWidget() and incall_touch_ui.xml.  -->
 
-    <!-- For most incoming calls the GlowPadView widget provides 3 choices:
+    <!-- For audio calls, if respond via SMS is disabled:
          - Answer (drag right)
-         - Reject (drag left)
-         - Respond via SMS (drag up) -->
-    <array name="incoming_call_widget_3way_targets">
+         - Decline (drag left) -->
+    <array name="incoming_call_widget_audio_without_sms_targets">
+        <item>@drawable/ic_lockscreen_answer</item>
+        <item>@null</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@null</item>"
+    </array>
+    <array name="incoming_call_widget_audio_without_sms_target_descriptions">
+        <item>@string/description_target_answer</item>
+        <item>@null</item>
+        <item>@string/description_target_decline</item>
+        <item>@null</item>"
+    </array>
+    <array name="incoming_call_widget_audio_without_sms_direction_descriptions">
+        <item>@string/description_direction_right</item>
+        <item>@null</item>
+        <item>@string/description_direction_left</item>
+        <item>@null</item>
+    </array>
+
+    <!-- For audio calls, if respond via SMS is enabled:
+         - Answer (drag right)
+         - Respond via SMS (drag up)
+         - Decline (drag left) -->
+    <array name="incoming_call_widget_audio_with_sms_targets">
         <item>@drawable/ic_lockscreen_answer</item>
         <item>@drawable/ic_lockscreen_text</item>
         <item>@drawable/ic_lockscreen_decline</item>
         <item>@null</item>"
     </array>
-    <array name="incoming_call_widget_3way_target_descriptions">
+    <array name="incoming_call_widget_audio_with_sms_target_descriptions">
         <item>@string/description_target_answer</item>
         <item>@string/description_target_send_sms</item>
         <item>@string/description_target_decline</item>
         <item>@null</item>"
     </array>
-    <array name="incoming_call_widget_3way_direction_descriptions">
+    <array name="incoming_call_widget_audio_with_sms_direction_descriptions">
         <item>@string/description_direction_right</item>
         <item>@string/description_direction_up</item>
         <item>@string/description_direction_left</item>
         <item>@null</item>
     </array>
 
-    <!-- But in some cases "Respond via SMS" isn't available, so there are
-         only 2 choices:
-         - Answer (drag right)
-         - Reject (drag left) -->
-    <array name="incoming_call_widget_2way_targets">
+    <!-- For video calls, if respond via SMS is disabled:
+         - Answer as video call (drag right)
+         - Decline (drag left)
+         - Answer as audio call (drag down) -->
+    <array name="incoming_call_widget_video_without_sms_targets">
         <item>@drawable/ic_lockscreen_answer</item>
         <item>@null</item>
         <item>@drawable/ic_lockscreen_decline</item>
-        <item>@null</item>"
+        <item>@drawable/ic_lockscreen_answer_video</item>
     </array>
-    <array name="incoming_call_widget_2way_target_descriptions">
-        <item>@string/description_target_answer</item>
+    <array name="incoming_call_widget_video_without_sms_target_descriptions">
+        <item>@string/description_target_answer_video_call</item>
         <item>@null</item>
         <item>@string/description_target_decline</item>
-        <item>@null</item>"
+        <item>@string/description_target_answer_audio_call</item>
     </array>
-    <array name="incoming_call_widget_2way_direction_descriptions">
+    <array name="incoming_call_widget_video_without_sms_direction_descriptions">
         <item>@string/description_direction_right</item>
         <item>@null</item>
         <item>@string/description_direction_left</item>
-        <item>@null</item>
+        <item>@string/description_direction_down</item>
     </array>
 
+    <!-- For video calls, if respond via SMS is enabled:
+         - Answer as video call (drag right)
+         - Respond via SMS (drag up)
+         - Decline (drag left)
+         - Answer as audio call (drag down) -->
+    <array name="incoming_call_widget_video_with_sms_targets">
+        <item>@drawable/ic_lockscreen_answer_video</item>
+        <item>@drawable/ic_lockscreen_text</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@drawable/ic_lockscreen_answer</item>
+    </array>
+    <array name="incoming_call_widget_video_with_sms_target_descriptions">
+        <item>@string/description_target_answer_video_call</item>
+        <item>@string/description_target_send_sms</item>
+        <item>@string/description_target_decline</item>
+        <item>@string/description_target_answer_audio_call</item>
+    </array>
+    <array name="incoming_call_widget_video_with_sms_direction_descriptions">
+        <item>@string/description_direction_right</item>
+        <item>@string/description_direction_up</item>
+        <item>@string/description_direction_left</item>
+        <item>@string/description_direction_down</item>
+    </array>
 </resources>

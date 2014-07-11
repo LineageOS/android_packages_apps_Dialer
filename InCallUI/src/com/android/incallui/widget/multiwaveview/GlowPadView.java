@@ -223,8 +223,7 @@ public class GlowPadView extends View {
                 mFeedbackCount);
         mAllowScaling = a.getBoolean(R.styleable.GlowPadView_allowScaling, false);
         TypedValue handle = a.peekValue(R.styleable.GlowPadView_handleDrawable);
-        mHandleDrawable = new TargetDrawable(res, handle != null ? handle.resourceId : 0, 2);
-        mHandleDrawable.setState(TargetDrawable.STATE_INACTIVE);
+        setHandleDrawable(handle != null ? handle.resourceId : R.drawable.ic_incall_audio_handle);
         mOuterRing = new TargetDrawable(res,
                 getResourceId(a, R.styleable.GlowPadView_outerRingDrawable), 1);
 
@@ -620,7 +619,6 @@ public class GlowPadView extends View {
             updatePointCloudPosition(mWaveCenterX, mWaveCenterY);
         }
     }
-
     /**
      * Loads an array of drawables from the given resourceId.
      *
@@ -637,6 +635,15 @@ public class GlowPadView extends View {
 
     public int getTargetResourceId() {
         return mTargetResourceId;
+    }
+
+    /**
+     * Sets teh handle drawable to the drawable specified by the resource ID.
+     * @param resourceId
+     */
+    public void setHandleDrawable(int resourceId) {
+        mHandleDrawable = new TargetDrawable(getResources(), resourceId, 2);
+        mHandleDrawable.setState(TargetDrawable.STATE_INACTIVE);
     }
 
     /**
