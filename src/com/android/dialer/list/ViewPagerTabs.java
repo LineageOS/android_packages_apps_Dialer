@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
@@ -39,7 +40,15 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
     final boolean mTextAllCaps;
     int mPrevSelected = -1;
     int mSidePadding;
-    Outline mOutline;
+
+    private static final ViewOutlineProvider VIEW_BOUNDS_OUTLINE_PROVIDER =
+            new ViewOutlineProvider() {
+        @Override
+        public boolean getOutline(View view, Outline outline) {
+            outline.setRect(0, 0, view.getWidth(), view.getHeight());
+            return true;
+        }
+    };
 
     private static final int TAB_SIDE_PADDING_IN_DPS = 10;
 
@@ -96,7 +105,6 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
         setFillViewport(true);
 
         mSidePadding = (int) (getResources().getDisplayMetrics().density * TAB_SIDE_PADDING_IN_DPS);
-        mOutline = new Outline();
 
         final TypedArray a = context.obtainStyledAttributes(attrs, ATTRS);
         mTextSize = a.getDimensionPixelSize(0, 0);
@@ -108,6 +116,9 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
         addView(mTabStrip,
                 new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
         a.recycle();
+
+        // enable shadow casting from view bounds
+        setOutlineProvider(VIEW_BOUNDS_OUTLINE_PROVIDER);
     }
 
     public void setViewPager(ViewPager viewPager) {
@@ -157,14 +168,6 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
             mPrevSelected = 0;
             textView.setSelected(true);
         }
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-      // An outline is necessary to enable shadows
-      mOutline.setRect(l, t, r, b);
-      setOutline(mOutline);
-      super.onLayout(changed, l, t, r, b);
     }
 
     @Override
