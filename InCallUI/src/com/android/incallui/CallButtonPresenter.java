@@ -203,15 +203,15 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
         if (checked) {
             Log.i(this, "Putting the call on hold: " + mCall);
-            TelecommAdapter.getInstance().holdCall(mCall.getCallId());
+            TelecommAdapter.getInstance().holdCall(mCall.getId());
         } else {
             Log.i(this, "Removing the call from hold: " + mCall);
-            TelecommAdapter.getInstance().unholdCall(mCall.getCallId());
+            TelecommAdapter.getInstance().unholdCall(mCall.getId());
         }
     }
 
     public void mergeClicked() {
-        TelecommAdapter.getInstance().merge(mCall.getCallId());
+        TelecommAdapter.getInstance().merge(mCall.getId());
     }
 
     public void addCallClicked() {
@@ -225,7 +225,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void swapClicked() {
-        TelecommAdapter.getInstance().swap(mCall.getCallId());
+        TelecommAdapter.getInstance().swap(mCall.getId());
     }
 
     public void showDialpadClicked(boolean checked) {

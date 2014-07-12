@@ -16,14 +16,11 @@
 
 package com.android.incallui;
 
-import android.os.RemoteException;
-import android.telecomm.CallAudioState;
-import android.telecomm.CallState;
-import android.telecomm.InCallAdapter;
-import android.telecomm.InCallCall;
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
 import android.telecomm.InCallService;
-
-import com.google.common.collect.ImmutableList;
+import android.telecomm.Phone;
 
 /**
  * Used to receive updates about calls from the Telecomm component.  This service is bound to
@@ -31,132 +28,38 @@ import com.google.common.collect.ImmutableList;
  * dialing (outgoing), and active calls. When the last call is disconnected, Telecomm will unbind to
  * the service triggering InCallActivity (via CallList) to finish soon after.
  */
-public class InCallServiceImpl extends InCallService {
-    private static final ImmutableList<String> EMPTY_RESPONSE_TEXTS = ImmutableList.of();
+public class InCallServiceImpl extends Service {
 
-    /** {@inheritDoc} */
-    @Override public void onCreate() {
-        Log.v(this, "onCreate");
-        InCallPresenter inCallPresenter = InCallPresenter.getInstance();
-        inCallPresenter.setUp(
-                getApplicationContext(), CallList.getInstance(), AudioModeProvider.getInstance());
-        TelecommAdapter.getInstance().setContext(this);
-    }
-
-    /** {@inheritDoc} */
-    @Override public void onDestroy() {
-        Log.v(this, "onDestroy");
-        // Tear down the InCall system
-        TelecommAdapter.getInstance().setAdapter(null);
-        TelecommAdapter.getInstance().setContext(null);
-        CallList.getInstance().clearOnDisconnect();
-        InCallPresenter.getInstance().tearDown();
-    }
-
-    /** {@inheritDoc} */
-    @Override protected void onAdapterAttached(InCallAdapter inCallAdapter) {
-        Log.v(this, "onAdapterAttached");
-        TelecommAdapter.getInstance().setAdapter(inCallAdapter);
-    }
-
-    /** {@inheritDoc} */
-    @Override protected void addCall(InCallCall telecommCall) {
-        Call call = new Call(telecommCall.getId());
-        updateCall(call, telecommCall);
-        Log.i(this, "addCall: " + call);
-
-        if (call.getState() == Call.State.INCOMING) {
-            CallList.getInstance().onIncoming(call, call.getCannedSmsResponses());
-        } else {
-            CallList.getInstance().onUpdate(call);
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override protected void updateCall(InCallCall telecommCall) {
-        Call call = CallList.getInstance().getCall(telecommCall.getId());
-        if (call == null) {
-            Log.v(this, "updateCall for unknown call: " + telecommCall.getId());
-            return;
+    private final InCallService mInCallServiceInstance = new InCallService() {
+        @Override
+        public void onPhoneCreated(Phone phone) {
+            Log.v(this, "onPhoneCreated");
+            CallList.getInstance().setPhone(phone);
+            AudioModeProvider.getInstance().setPhone(phone);
+            TelecommAdapter.getInstance().setPhone(phone);
+            InCallPresenter.getInstance().setPhone(phone);
+            InCallPresenter.getInstance().setUp(
+                    getApplicationContext(),
+                    CallList.getInstance(),
+                    AudioModeProvider.getInstance());
+            TelecommAdapter.getInstance().setContext(InCallServiceImpl.this);
         }
 
-        int oldState = call.getState();
-        updateCall(call, telecommCall);
-        Log.i(this, "updateCall: " + telecommCall + " => " + call);
-
-        if (oldState != call.getState() && call.getState() == Call.State.DISCONNECTED) {
-            CallList.getInstance().onDisconnect(call);
-        } else {
-            CallList.getInstance().onUpdate(call);
+        @Override
+        public void onPhoneDestroyed(Phone phone) {
+            Log.v(this, "onPhoneDestroyed");
+            // Tear down the InCall system
+            CallList.getInstance().clearPhone();
+            AudioModeProvider.getInstance().clearPhone();
+            TelecommAdapter.getInstance().clearPhone();
+            TelecommAdapter.getInstance().setContext(null);
+            CallList.getInstance().clearOnDisconnect();
+            InCallPresenter.getInstance().tearDown();
         }
-    }
+    };
 
-    /** {@inheritDoc} */
     @Override
-    protected void setPostDial(String callId, String remaining) {
-        // TODO(ihab): Add post-dial state to user interface
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected void setPostDialWait(String callId, String remaining) {
-        InCallPresenter.getInstance().onPostDialCharWait(callId, remaining);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected void onAudioStateChanged(CallAudioState audioState) {
-        AudioModeProvider.getInstance().onAudioModeChange(audioState.route, audioState.isMuted);
-        AudioModeProvider.getInstance().onSupportedAudioModeChange(audioState.supportedRouteMask);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected void bringToForeground(boolean showDialpad) {
-        Log.i(this, "Bringing UI to foreground.");
-        InCallPresenter.getInstance().bringToForeground(showDialpad);
-    }
-
-    private void updateCall(Call call, InCallCall telecommCall) {
-        call.setHandle(telecommCall.getHandle());
-        call.setNumberPresentation(telecommCall.getHandlePresentation());
-        call.setCnapName(telecommCall.getCallerDisplayName());
-        call.setCnapNamePresentation(telecommCall.getCallerDisplayNamePresentation());
-        call.setDisconnectCause(telecommCall.getDisconnectCauseCode());
-        call.setCannedSmsResponses(telecommCall.getCannedSmsResponses());
-        call.setCapabilities(telecommCall.getCapabilities());
-        call.setConnectTimeMillis(telecommCall.getConnectTimeMillis());
-        call.setGatewayInfo(telecommCall.getGatewayInfo());
-        call.setAccount(telecommCall.getAccount());
-        call.setCurrentCallServiceDescriptor(telecommCall.getCurrentCallServiceDescriptor());
-        call.setState(translateState(telecommCall.getState()));
-        call.setParentId(telecommCall.getParentCallId());
-        call.setChildCallIds(telecommCall.getChildCallIds());
-
-        try {
-            call.setCallVideoProvider(telecommCall.getCallVideoProvider());
-        } catch (RemoteException ignore) {
-            // Do nothing.
-        }
-    }
-
-    private static int translateState(CallState state) {
-        switch (state) {
-            case DIALING:
-            case NEW:
-                return Call.State.DIALING;
-            case RINGING:
-                return Call.State.INCOMING;
-            case POST_DIAL:
-            case POST_DIAL_WAIT:
-            case ACTIVE:
-                return Call.State.ACTIVE;
-            case ON_HOLD:
-                return Call.State.ONHOLD;
-            case DISCONNECTED:
-                return Call.State.DISCONNECTED;
-            default:
-                return Call.State.INVALID;
-        }
+    public IBinder onBind(Intent intent) {
+        return mInCallServiceInstance.getBinder();
     }
 }

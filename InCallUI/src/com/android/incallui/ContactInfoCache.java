@@ -109,7 +109,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         Preconditions.checkState(Looper.getMainLooper().getThread() == Thread.currentThread());
         Preconditions.checkNotNull(callback);
 
-        final String callId = call.getCallId();
+        final String callId = call.getId();
         final ContactCacheEntry cacheEntry = mInfoMap.get(callId);
         Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
 
@@ -149,7 +149,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
     private void findInfoQueryComplete(Call call, CallerInfo callerInfo, boolean isIncoming,
             boolean didLocalLookup) {
-        final String callId = call.getCallId();
+        final String callId = call.getId();
         int presentationMode = call.getNumberPresentation();
         if (callerInfo.contactExists || callerInfo.isEmergencyNumber() ||
                 callerInfo.isVoiceMailNumber()) {

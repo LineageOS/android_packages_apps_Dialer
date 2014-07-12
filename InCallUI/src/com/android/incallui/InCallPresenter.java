@@ -19,6 +19,7 @@ package com.android.incallui;
 import android.content.Context;
 import android.content.Intent;
 import android.telecomm.CallCapabilities;
+import android.telecomm.Phone;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
@@ -36,7 +37,7 @@ import java.util.Set;
  * that want to listen in on the in-call state changes.
  * TODO: This class has become more of a state machine at this point.  Consider renaming.
  */
-public class InCallPresenter implements CallList.Listener {
+public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
     private static InCallPresenter sInCallPresenter;
 
@@ -53,6 +54,32 @@ public class InCallPresenter implements CallList.Listener {
     private ProximitySensor mProximitySensor;
     private boolean mServiceConnected = false;
 
+    private final Phone.Listener mPhoneListener = new Phone.Listener() {
+        @Override
+        public void onBringToForeground(Phone phone, boolean showDialpad) {
+            Log.i(this, "Bringing UI to foreground.");
+            bringToForeground(showDialpad);
+        }
+        @Override
+        public void onCallAdded(Phone phone, android.telecomm.Call call) {
+            call.addListener(mCallListener);
+        }
+        @Override
+        public void onCallRemoved(Phone phone, android.telecomm.Call call) {
+            call.removeListener(mCallListener);
+        }
+    };
+
+    private final android.telecomm.Call.Listener mCallListener =
+            new android.telecomm.Call.Listener() {
+        @Override
+        public void onPostDialWait(android.telecomm.Call call, String remainingPostDialSequence) {
+            onPostDialCharWait(
+                    CallList.getInstance().getCallByTelecommCall(call).getId(),
+                    remainingPostDialSequence);
+        }
+    };
+
     /**
      * Is true when the activity has been previously started. Some code needs to know not just if
      * the activity is currently up, but if it had been previously shown in foreground for this
@@ -61,11 +88,25 @@ public class InCallPresenter implements CallList.Listener {
      */
     private boolean mIsActivityPreviouslyStarted = false;
 
+    private Phone mPhone;
+
     public static synchronized InCallPresenter getInstance() {
         if (sInCallPresenter == null) {
             sInCallPresenter = new InCallPresenter();
         }
         return sInCallPresenter;
+    }
+
+    @Override
+    public void setPhone(Phone phone) {
+        mPhone = phone;
+        mPhone.addListener(mPhoneListener);
+    }
+
+    @Override
+    public void clearPhone() {
+        mPhone.removeListener(mPhoneListener);
+        mPhone = null;
     }
 
     public InCallState getInCallState() {
@@ -343,7 +384,7 @@ public class InCallPresenter implements CallList.Listener {
         }
 
         if (call != null) {
-            TelecommAdapter.getInstance().disconnectCall(call.getCallId());
+            TelecommAdapter.getInstance().disconnectCall(call.getId());
         }
     }
 
@@ -360,7 +401,7 @@ public class InCallPresenter implements CallList.Listener {
 
         Call call = mCallList.getIncomingCall();
         if (call != null) {
-            TelecommAdapter.getInstance().answerCall(call.getCallId());
+            TelecommAdapter.getInstance().answerCall(call.getId());
             showInCall(false, false/* newOutgoingCall */);
         }
     }
@@ -378,7 +419,7 @@ public class InCallPresenter implements CallList.Listener {
 
         Call call = mCallList.getIncomingCall();
         if (call != null) {
-            TelecommAdapter.getInstance().rejectCall(call.getCallId(), false, null);
+            TelecommAdapter.getInstance().rejectCall(call.getId(), false, null);
         }
     }
 
@@ -463,7 +504,7 @@ public class InCallPresenter implements CallList.Listener {
 
         // (1) Attempt to answer a call
         if (incomingCall != null) {
-            TelecommAdapter.getInstance().answerCall(incomingCall.getCallId());
+            TelecommAdapter.getInstance().answerCall(incomingCall.getId());
             return true;
         }
 
@@ -484,17 +525,17 @@ public class InCallPresenter implements CallList.Listener {
             // (2) Attempt actions on Generic conference calls
             if (activeCall.isConferenceCall() && isGeneric) {
                 if (canMerge) {
-                    TelecommAdapter.getInstance().merge(activeCall.getCallId());
+                    TelecommAdapter.getInstance().merge(activeCall.getId());
                     return true;
                 } else if (canSwap) {
-                    TelecommAdapter.getInstance().swap(activeCall.getCallId());
+                    TelecommAdapter.getInstance().swap(activeCall.getId());
                     return true;
                 }
             }
 
             // (3) Swap calls
             if (canSwap) {
-                TelecommAdapter.getInstance().swap(activeCall.getCallId());
+                TelecommAdapter.getInstance().swap(activeCall.getId());
                 return true;
             }
         }
@@ -512,7 +553,7 @@ public class InCallPresenter implements CallList.Listener {
 
             // (4) unhold call
             if (heldCall.getState() == Call.State.ONHOLD && canHold) {
-                TelecommAdapter.getInstance().unholdCall(heldCall.getCallId());
+                TelecommAdapter.getInstance().unholdCall(heldCall.getId());
                 return true;
             }
         }
