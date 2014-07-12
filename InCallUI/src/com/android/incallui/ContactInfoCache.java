@@ -24,7 +24,7 @@ import android.net.Uri;
 import android.os.Looper;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.telecomm.CallNumberPresentation;
+import android.telecomm.CallPropertyPresentation;
 import android.text.TextUtils;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -150,10 +150,10 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
     private void findInfoQueryComplete(Call call, CallerInfo callerInfo, boolean isIncoming,
             boolean didLocalLookup) {
         final String callId = call.getCallId();
-        CallNumberPresentation presentationMode = call.getNumberPresentation();
+        int presentationMode = call.getNumberPresentation();
         if (callerInfo.contactExists || callerInfo.isEmergencyNumber() ||
                 callerInfo.isVoiceMailNumber()) {
-            presentationMode = CallNumberPresentation.ALLOWED;
+            presentationMode = CallPropertyPresentation.ALLOWED;
         }
 
         final ContactCacheEntry cacheEntry = buildEntry(mContext, callId,
@@ -298,7 +298,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
     }
 
     private ContactCacheEntry buildEntry(Context context, String callId,
-            CallerInfo info, CallNumberPresentation presentation, boolean isIncoming) {
+            CallerInfo info, int presentation, boolean isIncoming) {
         // The actual strings we're going to display onscreen:
         Drawable photo = null;
 
@@ -335,7 +335,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
      * Populate a cache entry from a call (which got converted into a caller info).
      */
     public static void populateCacheEntry(Context context, CallerInfo info, ContactCacheEntry cce,
-            CallNumberPresentation presentation, boolean isIncoming) {
+            int presentation, boolean isIncoming) {
         Preconditions.checkNotNull(info);
         String displayName = null;
         String displayNumber = null;
@@ -385,7 +385,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     // (or potentially some other default based on the presentation.)
                     displayName = getPresentationString(context, presentation);
                     Log.d(TAG, "  ==> no name *or* number! displayName = " + displayName);
-                } else if (presentation != CallNumberPresentation.ALLOWED) {
+                } else if (presentation != CallPropertyPresentation.ALLOWED) {
                     // This case should never happen since the network should never send a phone #
                     // AND a restricted presentation. However we leave it here in case of weird
                     // network behavior
@@ -422,7 +422,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             } else {
                 // We do have a valid "name" in the CallerInfo. Display that
                 // in the "name" slot, and the phone number in the "number" slot.
-                if (presentation != CallNumberPresentation.ALLOWED) {
+                if (presentation != CallPropertyPresentation.ALLOWED) {
                     // This case should never happen since the network should never send a name
                     // AND a restricted presentation. However we leave it here in case of weird
                     // network behavior
@@ -473,12 +473,11 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
     /**
      * Gets name strings based on some special presentation modes.
      */
-    private static String getPresentationString(Context context,
-            CallNumberPresentation presentation) {
+    private static String getPresentationString(Context context, int presentation) {
         String name = context.getString(R.string.unknown);
-        if (presentation == CallNumberPresentation.RESTRICTED) {
+        if (presentation == CallPropertyPresentation.RESTRICTED) {
             name = context.getString(R.string.private_num);
-        } else if (presentation == CallNumberPresentation.PAYPHONE) {
+        } else if (presentation == CallPropertyPresentation.PAYPHONE) {
             name = context.getString(R.string.payphone);
         }
         return name;

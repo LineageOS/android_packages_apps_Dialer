@@ -19,7 +19,7 @@ package com.android.incallui;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.telecomm.CallCapabilities;
-import android.telecomm.CallNumberPresentation;
+import android.telecomm.CallPropertyPresentation;
 import android.telecomm.CallServiceDescriptor;
 import android.telecomm.PhoneAccount;
 import android.telecomm.RemoteCallVideoProvider;
@@ -107,13 +107,15 @@ public final class Call {
     private int mCapabilities;
     private long mConnectTimeMillis = 0;
     private Uri mHandle;
+    private int mNumberPresentation;
+    private String mCnapName;
+    private int mCnapNamePresentation;
     private GatewayInfo mGatewayInfo;
     private PhoneAccount mAccount;
     private CallServiceDescriptor mCurrentCallServiceDescriptor;
     private RemoteCallVideoProvider mCallVideoProvider;
     private String mParentCallId;
     private List<String> mChildCallIds;
-    private int mFeatures;
 
     private InCallVideoClient mCallVideoClient;
 
@@ -140,6 +142,18 @@ public final class Call {
         mHandle = handle;
     }
 
+    public void setNumberPresentation(int presentation) {
+        mNumberPresentation = presentation;
+    }
+
+    public void setCnapName(String cnapName) {
+        mCnapName = cnapName;
+    }
+
+    public void setCnapNamePresentation(int presentation) {
+        mCnapNamePresentation = presentation;
+    }
+
     public int getState() {
         if (mParentCallId != null) {
             return State.CONFERENCED;
@@ -152,16 +166,16 @@ public final class Call {
         mState = state;
     }
 
-    public CallNumberPresentation getNumberPresentation() {
-        return CallNumberPresentation.ALLOWED;
+    public int getNumberPresentation() {
+        return mNumberPresentation;
     }
 
-    public CallNumberPresentation getCnapNamePresentation() {
-        return CallNumberPresentation.ALLOWED;
+    public int getCnapNamePresentation() {
+        return mCnapNamePresentation;
     }
 
     public String getCnapName() {
-        return "";
+        return mCnapName;
     }
 
     /** Returns call disconnect cause; values are defined in {@link DisconnectCause}. */
@@ -269,14 +283,6 @@ public final class Call {
 
     public String getParentId() {
         return mParentCallId;
-    }
-
-    public int getFeatures() {
-        return mFeatures;
-    }
-
-    public void setFeatures(int features) {
-        mFeatures = features;
     }
 
     @Override

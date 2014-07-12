@@ -225,7 +225,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void swapClicked() {
-        TelecommAdapter.getInstance().swap();
+        TelecommAdapter.getInstance().swap(mCall.getCallId());
     }
 
     public void showDialpadClicked(boolean checked) {
