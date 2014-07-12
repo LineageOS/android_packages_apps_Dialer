@@ -23,6 +23,7 @@ import com.google.common.base.Preconditions;
 
 import android.os.Handler;
 import android.os.Message;
+import android.telecomm.Phone;
 import android.telephony.DisconnectCause;
 
 import java.util.HashMap;
@@ -34,7 +35,7 @@ import java.util.Set;
  * as they are received from the telephony stack. Primary listener of changes to this class is
  * InCallPresenter.
  */
-public class CallList {
+public class CallList implements InCallPhoneListener {
 
     private static final int DISCONNECTED_CALL_SHORT_TIMEOUT_MS = 200;
     private static final int DISCONNECTED_CALL_MEDIUM_TIMEOUT_MS = 2000;
@@ -44,12 +45,14 @@ public class CallList {
 
     private static CallList sInstance = new CallList();
 
-    private final HashMap<String, Call> mCallMap = Maps.newHashMap();
+    private final HashMap<String, Call> mCallById = new HashMap<>();
+    private final HashMap<android.telecomm.Call, Call> mCallByTelecommCall = new HashMap<>();
     private final HashMap<String, List<String>> mCallTextReponsesMap = Maps.newHashMap();
     private final Set<Listener> mListeners = Sets.newHashSet();
     private final HashMap<String, List<CallUpdateListener>> mCallUpdateListenerMap = Maps
             .newHashMap();
 
+    private Phone mPhone;
 
     /**
      * Static singleton accessor method.
@@ -58,10 +61,36 @@ public class CallList {
         return sInstance;
     }
 
+    private Phone.Listener mPhoneListener = new Phone.Listener() {
+        @Override
+        public void onCallAdded(Phone phone, android.telecomm.Call call) {
+            // TODO(ihab): The Call adds itself to various singletons within its ctor. Refactor
+            // so that this is done more explicitly; otherwise, the below looks like we're creating
+            // an object and never using it.
+            new Call(call);
+        }
+        @Override
+        public void onCallRemoved(Phone phone, android.telecomm.Call call) {
+            // Handled by disconnection cascade from the Call itself
+        }
+    };
+
     /**
      * Private constructor.  Instance should only be acquired through getInstance().
      */
     private CallList() {
+    }
+
+    @Override
+    public void setPhone(Phone phone) {
+        mPhone = phone;
+        mPhone.addListener(mPhoneListener);
+    }
+
+    @Override
+    public void clearPhone() {
+        mPhone.removeListener(mPhoneListener);
+        mPhone = null;
     }
 
     /**
@@ -100,27 +129,12 @@ public class CallList {
      */
     public void onUpdate(Call call) {
         Log.d(this, "onUpdate - ", call);
-
         onUpdateCall(call);
         notifyGenericListeners();
     }
 
-    /**
-     * Called when multiple calls have changed.
-     */
-    public void onUpdate(List<Call> callsToUpdate) {
-        Log.d(this, "onUpdate(...)");
-
-        Preconditions.checkNotNull(callsToUpdate);
-        for (Call call : callsToUpdate) {
-            onUpdateCall(call);
-        }
-
-        notifyGenericListeners();
-    }
-
     public void notifyCallUpdateListeners(Call call) {
-        final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getCallId());
+        final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getId());
         if (listeners != null) {
             for (CallUpdateListener listener : listeners) {
                 listener.onCallChanged(call);
@@ -245,17 +259,12 @@ public class CallList {
         return result;
     }
 
-    public Call getCall(String callId) {
-        return mCallMap.get(callId);
+    public Call getCallById(String callId) {
+        return mCallById.get(callId);
     }
 
-    public boolean existsLiveCall() {
-        for (Call call : mCallMap.values()) {
-            if (!isCallDead(call)) {
-                return true;
-            }
-        }
-        return false;
+    public Call getCallByTelecommCall(android.telecomm.Call telecommCall) {
+        return mCallByTelecommCall.get(telecommCall);
     }
 
     public List<String> getTextResponses(String callId) {
@@ -276,7 +285,7 @@ public class CallList {
     public Call getCallWithState(int state, int positionToFind) {
         Call retval = null;
         int position = 0;
-        for (Call call : mCallMap.values()) {
+        for (Call call : mCallById.values()) {
             if (call.getState() == state) {
                 if (position >= positionToFind) {
                     retval = call;
@@ -297,7 +306,7 @@ public class CallList {
      * there can be no active calls, so this is relatively safe thing to do.
      */
     public void clearOnDisconnect() {
-        for (Call call : mCallMap.values()) {
+        for (Call call : mCallById.values()) {
             final int state = call.getState();
             if (state != Call.State.IDLE &&
                     state != Call.State.INVALID &&
@@ -350,7 +359,7 @@ public class CallList {
 
         if (call.getState() == Call.State.DISCONNECTED) {
             // update existing (but do not add!!) disconnected calls
-            if (mCallMap.containsKey(call.getCallId())) {
+            if (mCallById.containsKey(call.getId())) {
 
                 // For disconnected calls, we want to keep them alive for a few seconds so that the
                 // UI has a chance to display anything it needs when a call is disconnected.
@@ -359,14 +368,17 @@ public class CallList {
                 final Message msg = mHandler.obtainMessage(EVENT_DISCONNECTED_TIMEOUT, call);
                 mHandler.sendMessageDelayed(msg, getDelayForDisconnect(call));
 
-                mCallMap.put(call.getCallId(), call);
+                mCallById.put(call.getId(), call);
+                mCallByTelecommCall.put(call.getTelecommCall(), call);
                 updated = true;
             }
         } else if (!isCallDead(call)) {
-            mCallMap.put(call.getCallId(), call);
+            mCallById.put(call.getId(), call);
+            mCallByTelecommCall.put(call.getTelecommCall(), call);
             updated = true;
-        } else if (mCallMap.containsKey(call.getCallId())) {
-            mCallMap.remove(call.getCallId());
+        } else if (mCallById.containsKey(call.getId())) {
+            mCallById.remove(call.getId());
+            mCallByTelecommCall.remove(call.getTelecommCall());
             updated = true;
         }
 
@@ -404,10 +416,10 @@ public class CallList {
 
         if (!isCallDead(call)) {
             if (textResponses != null) {
-                mCallTextReponsesMap.put(call.getCallId(), textResponses);
+                mCallTextReponsesMap.put(call.getId(), textResponses);
             }
-        } else if (mCallMap.containsKey(call.getCallId())) {
-            mCallTextReponsesMap.remove(call.getCallId());
+        } else if (mCallById.containsKey(call.getId())) {
+            mCallTextReponsesMap.remove(call.getId());
         }
     }
 

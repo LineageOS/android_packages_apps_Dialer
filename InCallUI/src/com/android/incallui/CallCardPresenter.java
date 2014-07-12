@@ -21,7 +21,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.telecomm.CallCapabilities;
-import android.telecomm.CallServiceDescriptor;
 import android.telecomm.PhoneAccount;
 import android.telecomm.TelecommManager;
 import android.telephony.DisconnectCause;
@@ -230,7 +229,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (mPrimary == null) {
             return;
         }
-        TelecommAdapter.getInstance().phoneAccountClicked(mPrimary.getCallId());
+        TelecommAdapter.getInstance().phoneAccountClicked(mPrimary.getId());
     }
 
     private boolean areCallsSame(Call call1, Call call2) {
@@ -241,7 +240,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         // otherwise compare call Ids
-        return call1.getCallId().equals(call2.getCallId());
+        return call1.getId().equals(call2.getId());
     }
 
     private void maybeStartSearch(Call call, boolean isPrimary) {
@@ -276,7 +275,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                         return;
                     }
                     if (entry.photo != null) {
-                        if (mPrimary != null && callId.equals(mPrimary.getCallId())) {
+                        if (mPrimary != null && callId.equals(mPrimary.getId())) {
                             getUi().setPrimaryImage(entry.photo);
                         }
                     }
@@ -496,7 +495,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         Log.i(this, "Swapping call to foreground: " + mSecondary);
-        TelecommAdapter.getInstance().unholdCall(mSecondary.getCallId());
+        TelecommAdapter.getInstance().unholdCall(mSecondary.getId());
     }
 
     public void endCallClicked() {
@@ -505,7 +504,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         Log.i(this, "Disconnecting call: " + mPrimary);
-        TelecommAdapter.getInstance().disconnectCall(mPrimary.getCallId());
+        TelecommAdapter.getInstance().disconnectCall(mPrimary.getId());
     }
 
     public interface CallCardUi extends Ui {

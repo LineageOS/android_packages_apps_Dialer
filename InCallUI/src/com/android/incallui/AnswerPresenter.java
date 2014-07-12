@@ -75,7 +75,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         // getting updates here.
         Log.d(this, "onIncomingCall: " + this);
         if (getUi() != null) {
-            if (!call.getCallId().equals(mCallId)) {
+            if (!call.getId().equals(mCallId)) {
                 // A new call is coming in.
                 processIncomingCall(call);
             }
@@ -83,14 +83,14 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     private void processIncomingCall(Call call) {
-        mCallId = call.getCallId();
+        mCallId = call.getId();
         mCall = call;
 
         // Listen for call updates for the current call.
         CallList.getInstance().addCallUpdateListener(mCallId, this);
 
         Log.d(TAG, "Showing incoming for call id: " + mCallId + " " + this);
-        final List<String> textMsgs = CallList.getInstance().getTextResponses(call.getCallId());
+        final List<String> textMsgs = CallList.getInstance().getTextResponses(call.getId());
         getUi().showAnswerUi(true);
 
         if (call.can(CallCapabilities.RESPOND_VIA_TEXT) && textMsgs != null) {
@@ -123,7 +123,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         }
 
         Log.d(this, "onAnswer " + mCallId);
-        TelecommAdapter.getInstance().answerCall(mCall.getCallId());
+        TelecommAdapter.getInstance().answerCall(mCall.getId());
     }
 
     /**
@@ -132,7 +132,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
      */
     public void onDecline() {
         Log.d(this, "onDecline " + mCallId);
-        TelecommAdapter.getInstance().rejectCall(mCall.getCallId(), false, null);
+        TelecommAdapter.getInstance().rejectCall(mCall.getId(), false, null);
     }
 
     public void onText() {
@@ -143,7 +143,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     public void rejectCallWithMessage(String message) {
         Log.d(this, "sendTextToDefaultActivity()...");
-        TelecommAdapter.getInstance().rejectCall(mCall.getCallId(), true, message);
+        TelecommAdapter.getInstance().rejectCall(mCall.getId(), true, message);
 
         onDismissDialog();
     }

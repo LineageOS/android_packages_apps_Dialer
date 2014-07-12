@@ -21,16 +21,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Looper;
 import android.telecomm.InCallAdapter;
+import android.telecomm.Phone;
 
 import com.google.common.base.Preconditions;
 
 /** Wrapper around {@link InCallAdapter} that only forwards calls to the adapter when it's valid. */
-final class TelecommAdapter {
+final class TelecommAdapter implements InCallPhoneListener {
     private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
     private static TelecommAdapter sInstance;
     private Context mContext;
-    private InCallAdapter mAdapter;
+    private Phone mPhone;
 
     static TelecommAdapter getInstance() {
         Preconditions.checkState(Looper.getMainLooper().getThread() == Thread.currentThread());
@@ -47,85 +48,95 @@ final class TelecommAdapter {
         mContext = context;
     }
 
-    void setAdapter(InCallAdapter adapter) {
-        mAdapter = adapter;
+    @Override
+    public void setPhone(Phone phone) {
+        mPhone = phone;
+    }
+
+    @Override
+    public void clearPhone() {
+        mPhone = null;
+    }
+
+    private android.telecomm.Call getTelecommCallById(String callId) {
+        return CallList.getInstance().getCallById(callId).getTelecommCall();
     }
 
     void answerCall(String callId) {
-        if (mAdapter != null) {
-            mAdapter.answerCall(callId);
+        if (mPhone != null) {
+            getTelecommCallById(callId).answer();
         } else {
-            Log.e(this, "error answerCall, mAdapter is null");
+            Log.e(this, "error answerCall, mPhone is null");
         }
     }
 
     void rejectCall(String callId, boolean rejectWithMessage, String message) {
-        if (mAdapter != null) {
-            mAdapter.rejectCall(callId, rejectWithMessage, message);
+        if (mPhone != null) {
+            getTelecommCallById(callId).reject(rejectWithMessage, message);
         } else {
-            Log.e(this, "error rejectCall, mAdapter is null");
+            Log.e(this, "error rejectCall, mPhone is null");
         }
     }
 
     void disconnectCall(String callId) {
-        if (mAdapter != null) {
-            mAdapter.disconnectCall(callId);
+        if (mPhone != null) {
+            getTelecommCallById(callId).disconnect();
         } else {
-            Log.e(this, "error disconnectCall, mAdapter is null");
+            Log.e(this, "error disconnectCall, mPhone is null");
         }
     }
 
     void holdCall(String callId) {
-        if (mAdapter != null) {
-            mAdapter.holdCall(callId);
+        if (mPhone != null) {
+            getTelecommCallById(callId).hold();
         } else {
-            Log.e(this, "error holdCall, mAdapter is null");
+            Log.e(this, "error holdCall, mPhone is null");
         }
     }
 
     void unholdCall(String callId) {
-        if (mAdapter != null) {
-            mAdapter.unholdCall(callId);
+        if (mPhone != null) {
+            getTelecommCallById(callId).unhold();
         } else {
-            Log.e(this, "error unholdCall, mAdapter is null");
+            Log.e(this, "error unholdCall, mPhone is null");
         }
     }
 
     void mute(boolean shouldMute) {
-        if (mAdapter != null) {
-            mAdapter.mute(shouldMute);
+        if (mPhone != null) {
+            mPhone.setMuted(shouldMute);
         } else {
-            Log.e(this, "error mute, mAdapter is null");
+            Log.e(this, "error mute, mPhone is null");
         }
     }
 
     void setAudioRoute(int route) {
-        if (mAdapter != null) {
-            mAdapter.setAudioRoute(route);
+        if (mPhone != null) {
+            mPhone.setAudioRoute(route);
         } else {
-            Log.e(this, "error setAudioRoute, mAdapter is null");
+            Log.e(this, "error setAudioRoute, mPhone is null");
         }
     }
 
     void separateCall(String callId) {
-        if (mAdapter != null) {
-            mAdapter.splitFromConference(callId);
+        if (mPhone != null) {
+            getTelecommCallById(callId).splitFromConference();
         } else {
-            Log.e(this, "error separateCall, mAdapter is null.");
+            Log.e(this, "error separateCall, mPhone is null.");
         }
     }
 
     void merge(String callId) {
-        if (mAdapter != null) {
-            mAdapter.conference(callId);
+        if (mPhone != null) {
+            getTelecommCallById(callId).conference();
         } else {
-            Log.e(this, "error merge, mAdapter is null.");
+            Log.e(this, "error merge, mPhone is null.");
         }
     }
 
     void swap(String callId) {
-         if (mAdapter != null) {
-            mAdapter.swapWithBackgroundCall(callId);
+         if (mPhone != null) {
+            getTelecommCallById(callId).swapWithBackgroundCall();
         } else {
             Log.e(this, "error swapWithBackgroundCall, mAdapter is null.");
         }
@@ -153,34 +164,34 @@ final class TelecommAdapter {
     }
 
     void playDtmfTone(String callId, char digit) {
-        if (mAdapter != null) {
-            mAdapter.playDtmfTone(callId, digit);
+        if (mPhone != null) {
+            getTelecommCallById(callId).playDtmfTone(digit);
         } else {
-            Log.e(this, "error playDtmfTone, mAdapter is null");
+            Log.e(this, "error playDtmfTone, mPhone is null");
         }
     }
 
     void stopDtmfTone(String callId) {
-        if (mAdapter != null) {
-            mAdapter.stopDtmfTone(callId);
+        if (mPhone != null) {
+            getTelecommCallById(callId).stopDtmfTone();
         } else {
-            Log.e(this, "error stopDtmfTone, mAdapter is null");
+            Log.e(this, "error stopDtmfTone, mPhone is null");
         }
     }
 
     void postDialContinue(String callId, boolean proceed) {
-        if (mAdapter != null) {
-            mAdapter.postDialContinue(callId, proceed);
+        if (mPhone != null) {
+            getTelecommCallById(callId).postDialContinue(proceed);
         } else {
-            Log.e(this, "error postDialContinue, mAdapter is null");
+            Log.e(this, "error postDialContinue, mPhone is null");
         }
     }
 
     void phoneAccountClicked(String callId) {
-        if (mAdapter != null) {
-            mAdapter.phoneAccountClicked(callId);
+        if (mPhone != null) {
+            getTelecommCallById(callId).phoneAccountClicked();
         } else {
-            Log.e(this, "error phoneAccountClicked, mAdapter is null");
+            Log.e(this, "error phoneAccountClicked, mPhone is null");
         }
     }
 }

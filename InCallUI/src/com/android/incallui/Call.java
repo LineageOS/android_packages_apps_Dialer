@@ -17,19 +17,13 @@
 package com.android.incallui;
 
 import android.net.Uri;
-import android.os.RemoteException;
 import android.telecomm.CallCapabilities;
-import android.telecomm.CallPropertyPresentation;
-import android.telecomm.CallServiceDescriptor;
 import android.telecomm.PhoneAccount;
 import android.telecomm.RemoteCallVideoProvider;
 import android.telecomm.GatewayInfo;
 import android.telephony.DisconnectCause;
 
-import com.google.common.collect.ImmutableSortedSet;
-import com.google.common.primitives.Ints;
-
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -100,58 +94,154 @@ public final class Call {
         }
     }
 
-    private String mCallId;
-    private int mState = State.INVALID;
-    private int mDisconnectCause = DisconnectCause.NOT_VALID;
-    private List<String> mCannedSmsResponses = Collections.EMPTY_LIST;
-    private int mCapabilities;
-    private long mConnectTimeMillis = 0;
-    private Uri mHandle;
-    private int mNumberPresentation;
-    private String mCnapName;
-    private int mCnapNamePresentation;
-    private GatewayInfo mGatewayInfo;
-    private PhoneAccount mAccount;
-    private CallServiceDescriptor mCurrentCallServiceDescriptor;
-    private RemoteCallVideoProvider mCallVideoProvider;
-    private String mParentCallId;
-    private List<String> mChildCallIds;
+    private static final String ID_PREFIX = Call.class.getSimpleName() + "_";
+    private static int sIdCounter = 0;
 
+    private android.telecomm.Call.Listener mTelecommCallListener =
+            new android.telecomm.Call.Listener() {
+                @Override
+                public void onStateChanged(android.telecomm.Call call, int newState) {
+                    update();
+                }
+
+                @Override
+                public void onParentChanged(android.telecomm.Call call,
+                        android.telecomm.Call newParent) {
+                    update();
+                }
+
+                @Override
+                public void onChildrenChanged(android.telecomm.Call call,
+                        List<android.telecomm.Call> children) {
+                    update();
+                }
+
+                @Override
+                public void onDetailsChanged(android.telecomm.Call call,
+                        android.telecomm.Call.Details details) {
+                    update();
+                }
+
+                @Override
+                public void onCannedTextResponsesLoaded(android.telecomm.Call call,
+                        List<String> cannedTextResponses) {
+                    update();
+                }
+
+                @Override
+                public void onPostDial(android.telecomm.Call call,
+                        String remainingPostDialSequence) {
+                    update();
+                }
+
+                @Override
+                public void onPostDialWait(android.telecomm.Call call,
+                        String remainingPostDialSequence) {
+                    update();
+                }
+
+                @Override
+                public void onCallVideoProviderChanged(android.telecomm.Call call,
+                        RemoteCallVideoProvider callVideoProvider) {
+                    update();
+                }
+
+                @Override
+                public void onCallDestroyed(android.telecomm.Call call) {
+                    call.removeListener(mTelecommCallListener);
+                }
+            };
+
+    private final android.telecomm.Call mTelecommCall;
+    private final String mId;
+    private int mState = State.INVALID;
+    private int mDisconnectCause;
+    private String mParentCallId;
+    private final List<String> mChildCallIds = new ArrayList<>();
     private InCallVideoClient mCallVideoClient;
 
-    public Call(String callId) {
-        mCallId = callId;
+    public Call(android.telecomm.Call telecommCall) {
+        mTelecommCall = telecommCall;
+        mId = ID_PREFIX + Integer.toString(sIdCounter++);
+        updateFromTelecommCall();
+        if (getState() == Call.State.INCOMING) {
+            CallList.getInstance().onIncoming(this, getCannedSmsResponses());
+        } else {
+            CallList.getInstance().onUpdate(this);
+        }
+        mTelecommCall.addListener(mTelecommCallListener);
     }
 
-    public String getCallId() {
-        return mCallId;
+    public android.telecomm.Call getTelecommCall() {
+        return mTelecommCall;
+    }
+
+    private void update() {
+        int oldState = getState();
+        updateFromTelecommCall();
+        if (oldState != getState() && getState() == Call.State.DISCONNECTED) {
+            CallList.getInstance().onDisconnect(this);
+        } else {
+            CallList.getInstance().onUpdate(this);
+        }
+    }
+
+    private void updateFromTelecommCall() {
+        setState(translateState(mTelecommCall.getState()));
+        setDisconnectCause(mTelecommCall.getDetails().getDisconnectCauseCode());
+
+        if (mTelecommCall.getParent() != null) {
+            mParentCallId = CallList.getInstance().getCallByTelecommCall(
+                    mTelecommCall.getParent()).getId();
+        }
+
+        if (mTelecommCall.getCallVideoProvider() != null) {
+            if (mCallVideoClient == null) {
+                mCallVideoClient = new InCallVideoClient();
+            }
+            mTelecommCall.getCallVideoProvider().setCallVideoClient(mCallVideoClient);
+        }
+
+        mChildCallIds.clear();
+        for (int i = 0; i < mTelecommCall.getChildren().size(); i++) {
+            mChildCallIds.add(
+                    CallList.getInstance().getCallByTelecommCall(
+                            mTelecommCall.getChildren().get(i)).getId());
+        }
+    }
+
+    private static int translateState(int state) {
+        switch (state) {
+            case android.telecomm.Call.STATE_DIALING:
+            case android.telecomm.Call.STATE_NEW:
+                return Call.State.DIALING;
+            case android.telecomm.Call.STATE_RINGING:
+                return Call.State.INCOMING;
+            case android.telecomm.Call.STATE_ACTIVE:
+                return Call.State.ACTIVE;
+            case android.telecomm.Call.STATE_HOLDING:
+                return Call.State.ONHOLD;
+            case android.telecomm.Call.STATE_DISCONNECTED:
+                return Call.State.DISCONNECTED;
+            default:
+                return Call.State.INVALID;
+        }
+    }
+
+    public String getId() {
+        return mId;
     }
 
     public String getNumber() {
-        if (mGatewayInfo != null) {
-            return mGatewayInfo.getOriginalHandle().getSchemeSpecificPart();
+        if (mTelecommCall.getDetails().getGatewayInfo() != null) {
+            return mTelecommCall.getDetails().getGatewayInfo()
+                    .getOriginalHandle().getSchemeSpecificPart();
         }
-        return mHandle == null ? null : mHandle.getSchemeSpecificPart();
+        return getHandle() == null ? null : getHandle().getSchemeSpecificPart();
     }
 
     public Uri getHandle() {
-        return mHandle;
-    }
-
-    public void setHandle(Uri handle) {
-        mHandle = handle;
-    }
-
-    public void setNumberPresentation(int presentation) {
-        mNumberPresentation = presentation;
-    }
-
-    public void setCnapName(String cnapName) {
-        mCnapName = cnapName;
-    }
-
-    public void setCnapNamePresentation(int presentation) {
-        mCnapNamePresentation = presentation;
+        return mTelecommCall.getDetails().getHandle();
     }
 
     public int getState() {
@@ -167,15 +257,15 @@ public final class Call {
     }
 
     public int getNumberPresentation() {
-        return mNumberPresentation;
+        return getTelecommCall().getDetails().getHandlePresentation();
     }
 
     public int getCnapNamePresentation() {
-        return mCnapNamePresentation;
+        return getTelecommCall().getDetails().getCallerDisplayNamePresentation();
     }
 
     public String getCnapName() {
-        return mCnapName;
+        return getTelecommCall().getDetails().getCallerDisplayName();
     }
 
     /** Returns call disconnect cause; values are defined in {@link DisconnectCause}. */
@@ -187,39 +277,23 @@ public final class Call {
         return DisconnectCause.NOT_DISCONNECTED;
     }
 
-    /** Sets the call disconnect cause; values are defined in {@link DisconnectCause}. */
-    public void setDisconnectCause(int cause) {
-        mDisconnectCause = cause;
-    }
-
-    /** Sets the possible text message responses. */
-    public void setCannedSmsResponses(List<String> cannedSmsResponses) {
-        mCannedSmsResponses = cannedSmsResponses;
+    public void setDisconnectCause(int disconnectCause) {
+        mDisconnectCause = disconnectCause;
     }
 
     /** Returns the possible text message responses. */
     public List<String> getCannedSmsResponses() {
-        return mCannedSmsResponses;
-    }
-
-    /** Sets a bit mask of capabilities unique to this call. */
-    public void setCapabilities(int capabilities) {
-        mCapabilities = (CallCapabilities.ALL & capabilities);
+        return mTelecommCall.getCannedTextResponses();
     }
 
     /** Checks if the call supports the given set of capabilities supplied as a bit mask. */
     public boolean can(int capabilities) {
-        return (capabilities == (capabilities & mCapabilities));
-    }
-
-    /** Sets the time when the call first became active. */
-    public void setConnectTimeMillis(long connectTimeMillis) {
-        mConnectTimeMillis = connectTimeMillis;
+        return (capabilities == (capabilities & mTelecommCall.getDetails().getCapabilities()));
     }
 
     /** Gets the time when the call first became active. */
     public long getConnectTimeMillis() {
-        return mConnectTimeMillis;
+        return mTelecommCall.getDetails().getConnectTimeMillis();
     }
 
     public boolean isConferenceCall() {
@@ -227,58 +301,19 @@ public final class Call {
     }
 
     public GatewayInfo getGatewayInfo() {
-        return mGatewayInfo;
-    }
-
-    public void setGatewayInfo(GatewayInfo gatewayInfo) {
-        mGatewayInfo = gatewayInfo;
+        return mTelecommCall.getDetails().getGatewayInfo();
     }
 
     public PhoneAccount getAccount() {
-        return mAccount;
-    }
-
-    public void setAccount(PhoneAccount account) {
-        mAccount = account;
-    }
-
-    /** The descriptor for the call service currently routing this call. */
-    public CallServiceDescriptor getCurrentCallServiceDescriptor() {
-        return mCurrentCallServiceDescriptor;
-    }
-
-    public void setCurrentCallServiceDescriptor(CallServiceDescriptor descriptor) {
-        mCurrentCallServiceDescriptor = descriptor;
+        return mTelecommCall.getDetails().getAccount();
     }
 
     public RemoteCallVideoProvider getCallVideoProvider() {
-        return mCallVideoProvider;
-    }
-
-    public void setCallVideoProvider(RemoteCallVideoProvider callVideoProvider) {
-        mCallVideoProvider = callVideoProvider;
-
-        if (mCallVideoProvider != null) {
-            try {
-                if (mCallVideoClient == null) {
-                    mCallVideoClient = new InCallVideoClient();
-                }
-                mCallVideoProvider.setCallVideoClient(mCallVideoClient);
-            } catch (RemoteException ignored) {
-            }
-        }
-    }
-
-    public void setChildCallIds(List<String> callIds) {
-        mChildCallIds = callIds;
+        return mTelecommCall.getCallVideoProvider();
     }
 
     public List<String> getChildCallIds() {
         return mChildCallIds;
-    }
-
-    public void setParentId(String callId) {
-        mParentCallId = callId;
     }
 
     public String getParentId() {
@@ -288,9 +323,9 @@ public final class Call {
     @Override
     public String toString() {
         return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s]",
-                mCallId,
+                mId,
                 State.toString(mState),
-                CallCapabilities.toString(mCapabilities),
+                CallCapabilities.toString(mTelecommCall.getDetails().getCapabilities()),
                 mChildCallIds,
                 mParentCallId);
     }

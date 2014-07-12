@@ -34,7 +34,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.Toast;
 
 import com.android.phone.common.animation.AnimationListenerAdapter;
 import com.android.incallui.Call.State;
@@ -400,7 +399,7 @@ public class InCallActivity extends Activity {
             // wants to use the dialpad toward the exact line, so un-hold the holding line.
             final Call call = CallList.getInstance().getActiveOrBackgroundCall();
             if (call != null && call.getState() == State.ONHOLD) {
-                TelecommAdapter.getInstance().unholdCall(call.getCallId());
+                TelecommAdapter.getInstance().unholdCall(call.getId());
             }
         }
     }

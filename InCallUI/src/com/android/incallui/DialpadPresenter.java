@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import android.telecomm.InCallAdapter;
 import android.telephony.PhoneNumberUtils;
 
 /**
@@ -60,7 +59,7 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
             // Append this key to the "digits" widget.
             getUi().appendDigitsToField(c);
             // Plays the tone through Telecomm.
-            TelecommAdapter.getInstance().playDtmfTone(mCall.getCallId(), c);
+            TelecommAdapter.getInstance().playDtmfTone(mCall.getId(), c);
         } else {
             Log.d(this, "ignoring dtmf request for '" + c + "'");
         }
@@ -72,7 +71,7 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
     public void stopTone() {
         if (mCall != null) {
             Log.d(this, "stopping remote tone");
-            TelecommAdapter.getInstance().stopDtmfTone(mCall.getCallId());
+            TelecommAdapter.getInstance().stopDtmfTone(mCall.getId());
         }
     }
 

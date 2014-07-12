@@ -20,21 +20,45 @@ import com.google.common.collect.Lists;
 
 import com.android.services.telephony.common.AudioMode;
 
+import android.telecomm.CallAudioState;
+import android.telecomm.Phone;
+
 import java.util.List;
 
 /**
  * Proxy class for getting and setting the audio mode.
  */
-/* package */ class AudioModeProvider {
+/* package */ class AudioModeProvider implements InCallPhoneListener {
 
     private static AudioModeProvider sAudioModeProvider = new AudioModeProvider();
     private int mAudioMode = AudioMode.EARPIECE;
     private boolean mMuted = false;
     private int mSupportedModes = AudioMode.ALL_MODES;
     private final List<AudioModeListener> mListeners = Lists.newArrayList();
+    private Phone mPhone;
+
+    private Phone.Listener mPhoneListener = new Phone.Listener() {
+        @Override
+        public void onAudioStateChanged(Phone phone, CallAudioState audioState) {
+            onAudioModeChange(audioState.route, audioState.isMuted);
+            onSupportedAudioModeChange(audioState.supportedRouteMask);
+        }
+    };
 
     public static AudioModeProvider getInstance() {
         return sAudioModeProvider;
+    }
+
+    @Override
+    public void setPhone(Phone phone) {
+        mPhone = phone;
+        mPhone.addListener(mPhoneListener);
+    }
+
+    @Override
+    public void clearPhone() {
+        mPhone.removeListener(mPhoneListener);
+        mPhone = null;
     }
 
     public void onAudioModeChange(int newMode, boolean muted) {
