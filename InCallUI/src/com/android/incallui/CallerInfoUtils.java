@@ -3,7 +3,7 @@ package com.android.incallui;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.telecomm.CallNumberPresentation;
+import android.telecomm.CallPropertyPresentation;
 import android.text.TextUtils;
 
 import java.util.Arrays;
@@ -42,7 +42,7 @@ public class CallerInfoUtils {
 
         // TODO: Have phoneapp send a Uri when it knows the contact that triggered this call.
 
-        if (info.numberPresentation == CallNumberPresentation.ALLOWED) {
+        if (info.numberPresentation == CallPropertyPresentation.ALLOWED) {
             // Start the query with the number provided from the call.
             Log.d(TAG, "==> Actually starting CallerInfoAsyncQuery.startQuery()...");
             CallerInfoAsyncQuery.startQuery(QUERY_TOKEN, context, number, listener, call);
@@ -83,7 +83,7 @@ public class CallerInfoUtils {
      * @return the new String that should be used for the phone number
      */
     /* package */static String modifyForSpecialCnapCases(Context context, CallerInfo ci,
-            String number, CallNumberPresentation presentation) {
+            String number, int presentation) {
         // Obviously we return number if ci == null, but still return number if
         // number == null, because in these cases the correct string will still be
         // displayed/logged after this function returns based on the presentation value.
@@ -99,9 +99,9 @@ public class CallerInfoUtils {
         final String[] absentNumberValues =
                 context.getResources().getStringArray(R.array.absent_num);
         if (Arrays.asList(absentNumberValues).contains(number)
-                && presentation == CallNumberPresentation.ALLOWED) {
+                && presentation == CallPropertyPresentation.ALLOWED) {
             number = context.getString(R.string.unknown);
-            ci.numberPresentation = CallNumberPresentation.UNKNOWN;
+            ci.numberPresentation = CallPropertyPresentation.UNKNOWN;
         }
 
         // Check for other special "corner cases" for CNAP and fix them similarly. Corner
@@ -109,16 +109,16 @@ public class CallerInfoUtils {
         // if we think we have an allowed presentation, or if the CallerInfo presentation doesn't
         // match the presentation passed in for verification (meaning we changed it previously
         // because it's a corner case and we're being called from a different entry point).
-        if (ci.numberPresentation == CallNumberPresentation.ALLOWED
+        if (ci.numberPresentation == CallPropertyPresentation.ALLOWED
                 || (ci.numberPresentation != presentation
-                        && presentation == CallNumberPresentation.ALLOWED)) {
+                        && presentation == CallPropertyPresentation.ALLOWED)) {
             // For all special strings, change number & numberPrentation.
             if (isCnapSpecialCaseRestricted(number)) {
                 number = context.getString(R.string.private_num);
-                ci.numberPresentation = CallNumberPresentation.RESTRICTED;
+                ci.numberPresentation = CallPropertyPresentation.RESTRICTED;
             } else if (isCnapSpecialCaseUnknown(number)) {
                 number = context.getString(R.string.unknown);
-                ci.numberPresentation = CallNumberPresentation.UNKNOWN;
+                ci.numberPresentation = CallPropertyPresentation.UNKNOWN;
             }
             Log.d(TAG, "SpecialCnap: number=" + toLogSafePhoneNumber(number)
                     + "; presentation now=" + ci.numberPresentation);

@@ -123,8 +123,12 @@ final class TelecommAdapter {
         }
     }
 
-    void swap() {
-        Log.wtf(this, "swap not implemented");
+    void swap(String callId) {
+         if (mAdapter != null) {
+            mAdapter.swapWithBackgroundCall(callId);
+        } else {
+            Log.e(this, "error swapWithBackgroundCall, mAdapter is null.");
+        }
     }
 
     void addCall() {
@@ -178,9 +182,5 @@ final class TelecommAdapter {
         } else {
             Log.e(this, "error phoneAccountClicked, mAdapter is null");
         }
-    }
-
-    void setSystemBarNavigationEnabled(boolean enable) {
-        // TODO(sail): Implement this.
     }
 }

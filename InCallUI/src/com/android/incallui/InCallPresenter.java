@@ -223,12 +223,6 @@ public class InCallPresenter implements CallList.Listener {
         InCallState newState = getPotentialStateFromCallList(callList);
         newState = startOrFinishUi(newState);
 
-        // Renable notification shade and soft navigation buttons, if we are no longer in the
-        // incoming call screen
-        if (!newState.isIncoming()) {
-            TelecommAdapter.getInstance().setSystemBarNavigationEnabled(true);
-        }
-
         // Set the new state before announcing it to the world
         Log.i(this, "Phone switching state: " + mInCallState + " -> " + newState);
         mInCallState = newState;
@@ -427,9 +421,6 @@ public class InCallPresenter implements CallList.Listener {
         if (showing) {
             mIsActivityPreviouslyStarted = true;
         }
-
-        final boolean shouldLockBars = showing && mInCallState.isIncoming();
-        TelecommAdapter.getInstance().setSystemBarNavigationEnabled(!shouldLockBars);
     }
 
     /**
@@ -496,14 +487,14 @@ public class InCallPresenter implements CallList.Listener {
                     TelecommAdapter.getInstance().merge(activeCall.getCallId());
                     return true;
                 } else if (canSwap) {
-                    TelecommAdapter.getInstance().swap();
+                    TelecommAdapter.getInstance().swap(activeCall.getCallId());
                     return true;
                 }
             }
 
             // (3) Swap calls
             if (canSwap) {
-                TelecommAdapter.getInstance().swap();
+                TelecommAdapter.getInstance().swap(activeCall.getCallId());
                 return true;
             }
         }

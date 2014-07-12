@@ -119,6 +119,9 @@ public class InCallServiceImpl extends InCallService {
 
     private void updateCall(Call call, InCallCall telecommCall) {
         call.setHandle(telecommCall.getHandle());
+        call.setNumberPresentation(telecommCall.getHandlePresentation());
+        call.setCnapName(telecommCall.getCallerDisplayName());
+        call.setCnapNamePresentation(telecommCall.getCallerDisplayNamePresentation());
         call.setDisconnectCause(telecommCall.getDisconnectCauseCode());
         call.setCannedSmsResponses(telecommCall.getCannedSmsResponses());
         call.setCapabilities(telecommCall.getCapabilities());
@@ -129,7 +132,6 @@ public class InCallServiceImpl extends InCallService {
         call.setState(translateState(telecommCall.getState()));
         call.setParentId(telecommCall.getParentCallId());
         call.setChildCallIds(telecommCall.getChildCallIds());
-        call.setFeatures(telecommCall.getFeatures());
 
         try {
             call.setCallVideoProvider(telecommCall.getCallVideoProvider());
