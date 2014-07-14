@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.telecomm.CallCapabilities;
 import android.telecomm.PhoneAccount;
+import android.telecomm.TelecommManager;
 import android.telephony.DisconnectCause;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -53,6 +54,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private ContactCacheEntry mSecondaryContactInfo;
     private CallTimer mCallTimer;
     private Context mContext;
+    private TelecommManager mTelecommManager;
 
     public CallCardPresenter() {
         // create the call timer
@@ -404,7 +406,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private Drawable getConnectionIcon() {
         PhoneAccount account = mPrimary.getAccount();
         if (account != null) {
-            return account.getIcon(mContext);
+            return getTelecommManager().getPhoneAccountMetadata(account)
+                    .getIcon(mContext);
         }
         return null;
     }
@@ -428,7 +431,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
         PhoneAccount account = mPrimary.getAccount();
         if (account != null) {
-            return account.getLabel(mContext);
+            return getTelecommManager().getPhoneAccountMetadata(account).getLabel();
         }
         return null;
     }
@@ -436,7 +439,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private String getSecondaryCallProviderLabel() {
         PhoneAccount account = mSecondary.getAccount();
         if (account != null) {
-            return account.getLabel(mContext);
+            return getTelecommManager().getPhoneAccountMetadata(account).getLabel();
         }
         return null;
     }
@@ -444,7 +447,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private Drawable getSecondaryCallProviderIcon() {
         PhoneAccount account = mSecondary.getAccount();
         if (account != null) {
-            return account.getIcon(mContext);
+            return getTelecommManager().getPhoneAccountMetadata(account)
+                    .getIcon(mContext);
         }
         return null;
     }
@@ -518,5 +522,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimaryPhoneNumber(String phoneNumber);
         void setPrimaryLabel(String label);
         void setEndCallButtonEnabled(boolean enabled);
+    }
+
+    private TelecommManager getTelecommManager() {
+        if (mTelecommManager == null) {
+            mTelecommManager = TelecommManager.from(mContext);
+        }
+        return mTelecommManager;
     }
 }
