@@ -38,6 +38,7 @@ public class ContactInfo {
     public long photoId;
     /** The high-res photo for the contact, if available. */
     public Uri photoUri;
+    public boolean isBadData;
 
     public static ContactInfo EMPTY = new ContactInfo();
 
