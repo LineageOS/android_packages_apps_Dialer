@@ -110,9 +110,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     public static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    /** Temporary flag for disabling account selection menu */
-    public static final boolean ENABLE_ACCOUNT_SELECT = false;
-
     public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
 
     /** Used to open Call Setting */
