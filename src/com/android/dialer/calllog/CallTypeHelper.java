@@ -31,6 +31,12 @@ public class CallTypeHelper {
     private final CharSequence mOutgoingName;
     /** Name used to identify missed calls. */
     private final CharSequence mMissedName;
+    /** Name used to identify incoming video calls. */
+    private final CharSequence mIncomingVideoName;
+    /** Name used to identify outgoing video calls. */
+    private final CharSequence mOutgoingVideoName;
+    /** Name used to identify missed video calls. */
+    private final CharSequence mMissedVideoName;
     /** Name used to identify voicemail calls. */
     private final CharSequence mVoicemailName;
     /** Color used to identify new missed calls. */
@@ -43,22 +49,37 @@ public class CallTypeHelper {
         mIncomingName = resources.getString(R.string.type_incoming);
         mOutgoingName = resources.getString(R.string.type_outgoing);
         mMissedName = resources.getString(R.string.type_missed);
+        mIncomingVideoName = resources.getString(R.string.type_incoming_video);
+        mOutgoingVideoName = resources.getString(R.string.type_outgoing_video);
+        mMissedVideoName = resources.getString(R.string.type_missed_video);
         mVoicemailName = resources.getString(R.string.type_voicemail);
         mNewMissedColor = resources.getColor(R.color.call_log_missed_call_highlight_color);
         mNewVoicemailColor = resources.getColor(R.color.call_log_voicemail_highlight_color);
     }
 
     /** Returns the text used to represent the given call type. */
-    public CharSequence getCallTypeText(int callType) {
+    public CharSequence getCallTypeText(int callType, boolean isVideoCall) {
         switch (callType) {
             case Calls.INCOMING_TYPE:
-                return mIncomingName;
+                if (isVideoCall) {
+                    return mIncomingVideoName;
+                } else {
+                    return mIncomingName;
+                }
 
             case Calls.OUTGOING_TYPE:
-                return mOutgoingName;
+                if (isVideoCall) {
+                    return mOutgoingVideoName;
+                } else {
+                    return mOutgoingName;
+                }
 
             case Calls.MISSED_TYPE:
-                return mMissedName;
+                if (isVideoCall) {
+                    return mMissedVideoName;
+                } else {
+                    return mMissedName;
+                }
 
             case Calls.VOICEMAIL_TYPE:
                 return mVoicemailName;

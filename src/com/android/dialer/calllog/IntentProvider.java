@@ -47,6 +47,16 @@ public abstract class IntentProvider {
         };
     }
 
+    public static IntentProvider getReturnVideoCallIntentProvider(final String number,
+            final PhoneAccount account) {
+        return new IntentProvider() {
+            @Override
+            public Intent getIntent(Context context) {
+                return CallUtil.getVideoCallIntent(number, account);
+            }
+        };
+    }
+
     public static IntentProvider getPlayVoicemailIntentProvider(final long rowId,
             final String voicemailUri) {
         return new IntentProvider() {

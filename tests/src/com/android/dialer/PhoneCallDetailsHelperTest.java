@@ -159,6 +159,22 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         assertCallTypeIconsEquals(Calls.VOICEMAIL_TYPE);
     }
 
+    /**
+     * Tests a case where the video call feature is present.
+     */
+    public void testSetPhoneCallDetails_Video() {
+        setPhoneCallDetailsWithFeatures(Calls.FEATURES_VIDEO);
+        assertIsVideoCall(true);
+    }
+
+    /**
+     * Tests a case where the video call feature is not present.
+     */
+    public void testSetPhoneCallDetails_NoVideo() {
+        setPhoneCallDetailsWithFeatures(Calls.FEATURES_NONE);
+        assertIsVideoCall(false);
+    }
+
     public void testSetPhoneCallDetails_MultipleCallTypeIcons() {
         setPhoneCallDetailsWithCallTypeIcons(Calls.INCOMING_TYPE, Calls.OUTGOING_TYPE);
         assertCallTypeIconsEquals(Calls.INCOMING_TYPE, Calls.OUTGOING_TYPE);
@@ -258,6 +274,11 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         assertTrue(mViews.callLocationAndDate.getText().toString().contains(text));
     }
 
+    /** Asserts that the video icon is shown. */
+    private void assertIsVideoCall(boolean isVideoCall) {
+        assertEquals(isVideoCall, mViews.callTypeIcons.isVideoShown());
+    }
+
     /** Asserts that the call type contains the images with the given drawables. */
     private void assertCallTypeIconsEquals(int... ids) {
         assertEquals(ids.length, mViews.callTypeIcons.getCount());
@@ -322,6 +343,18 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                         callTypes, TEST_DATE, TEST_DURATION, null, Calls.FEATURES_NONE, null)
+        );
+    }
+
+    /**
+     * Sets the phone call details with default values and the given call features.
+     */
+    private void setPhoneCallDetailsWithFeatures(int features) {
+        mHelper.setPhoneCallDetails(mViews,
+                new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                        TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
+                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION, null,
+                        features, null)
         );
     }
 

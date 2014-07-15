@@ -85,6 +85,15 @@ public class CallTypeIconsView extends View {
         }
     }
 
+    /**
+     * Determines if the video icon should be shown.
+     *
+     * @return True if the video icon should be shown.
+     */
+    public boolean isVideoShown() {
+        return mShowVideo;
+    }
+
     @NeededForTesting
     public int getCount() {
         return mCallTypes.size();
