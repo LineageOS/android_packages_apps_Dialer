@@ -31,6 +31,7 @@ import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.text.format.DateUtils;
 import android.text.TextUtils;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -68,7 +69,6 @@ public class CallStatsFragment extends ListFragment implements
         R.drawable.ic_call_missed_holo_dark
     };
 
-    private String[] mNavItems;
     private Spinner mFilterSpinner;
 
     private int mCallTypeFilter = CallStatsQueryHandler.CALL_TYPE_ALL;
@@ -91,29 +91,35 @@ public class CallStatsFragment extends ListFragment implements
         }
     };
 
-    public class CallStatsNavAdapter extends ArrayAdapter<String> {
-        public CallStatsNavAdapter(Context context, int textResourceId, Object[] objects) {
-            super(context, textResourceId, mNavItems);
+    public static class CallStatsNavAdapter extends ArrayAdapter<String> {
+        private LayoutInflater mMainInflater;
+        private LayoutInflater mDropdownInflater;
+
+        public CallStatsNavAdapter(Context context, int textResourceId, String[] objects) {
+            super(context, textResourceId, objects);
+            mMainInflater = LayoutInflater.from(
+                    new ContextThemeWrapper(context, R.style.DialtactsSpinnerTheme));
+            mDropdownInflater = LayoutInflater.from(context);
         }
 
         @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return getCustomView(position, convertView, parent);
+            return getCustomView(position, convertView, parent, mDropdownInflater);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            return getCustomView(position, convertView, parent);
+            return getCustomView(position, convertView, parent, mMainInflater);
         }
 
-        public View getCustomView(int position, View convertView, ViewGroup parent) {
+        public View getCustomView(int position, View convertView,
+                ViewGroup parent, LayoutInflater inflater) {
             if (convertView == null) {
-                convertView = getLayoutInflater(null).inflate(
-                        R.layout.call_stats_nav_item, parent, false);
+                convertView = inflater.inflate(R.layout.call_stats_nav_item, parent, false);
             }
 
             TextView label = (TextView) convertView.findViewById(R.id.call_stats_nav_text);
-            label.setText(mNavItems[position]);
+            label.setText(getItem(position));
 
             ImageView icon = (ImageView) convertView.findViewById(R.id.call_stats_nav_icon);
             icon.setImageResource(CALL_DIRECTION_RESOURCES[position]);
@@ -164,9 +170,9 @@ public class CallStatsFragment extends ListFragment implements
         sortCountItem.setVisible(mSortByDuration);
 
         mFilterSpinner = (Spinner) filterItem.getActionView();
-        mNavItems = getResources().getStringArray(R.array.call_stats_nav_items);
         CallStatsNavAdapter filterAdapter = new CallStatsNavAdapter(getActivity(),
-                android.R.layout.simple_list_item_1, mNavItems);
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.call_stats_nav_items));
         mFilterSpinner.setAdapter(filterAdapter);
         mFilterSpinner.setOnItemSelectedListener(this);
 
