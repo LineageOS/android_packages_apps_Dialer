@@ -81,6 +81,7 @@ import com.android.dialer.list.RegularSearchFragment;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.list.SpeedDialFragment;
+import com.android.dialer.settings.DialerSettingsActivity;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
@@ -519,12 +520,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     protected void handleMenuSettings() {
-        openTelephonySetting(this);
-    }
-
-    public static void openTelephonySetting(Activity activity) {
-        final Intent settingsIntent = getCallSettingsIntent();
-        activity.startActivity(settingsIntent);
+        final Intent intent = new Intent(this, DialerSettingsActivity.class);
+        startActivity(intent);
     }
 
     @Override

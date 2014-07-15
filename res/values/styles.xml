@@ -150,4 +150,13 @@
         <item name="android:paddingLeft">@dimen/dismiss_button_padding_start</item>
         <item name="android:paddingRight">@dimen/dismiss_button_padding_end</item>
     </style>
+
+    <!-- Style applied to the "Settings" screen.  Keep in sync with SettingsLight in Telephony. -->
+    <style name="SettingsStyle" parent="DialtactsThemeWithoutActionBarOverlay">
+        <!-- Setting text. -->
+        <item name="android:textColorSecondary">@color/setting_primary_color</item>
+        <!-- Setting description. -->
+        <item name="android:textColorTertiary">@color/setting_secondary_color</item>
+        <item name="android:windowBackground">@color/setting_background_color</item>
+    </style>
 </resources>
