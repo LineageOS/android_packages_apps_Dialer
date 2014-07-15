@@ -327,6 +327,21 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 .contains(this.mResources.getString(R.string.description_num_calls, 2)));
     }
 
+    /**
+     * Test getCallDescription method used to get the accessibility description for calls.
+     * Test that the "Video call." message is present if the call had video capability.
+     */
+    public void testGetCallDescription_Video() {
+        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.INCOMING_TYPE, Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION,
+                null, Calls.FEATURES_VIDEO, null);
+        CharSequence description = mHelper.getCallDescription(details);
+        assertTrue(description.toString()
+                .contains(this.mResources.getString(R.string.description_video_call, 2)));
+    }
+
     /** Asserts that the primary action view does not have a call intent. */
     private void assertNoCallIntent() {
         Object intentProvider = (IntentProvider)mViews.primaryActionView.getTag();

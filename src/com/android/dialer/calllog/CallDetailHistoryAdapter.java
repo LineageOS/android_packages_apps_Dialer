@@ -122,11 +122,12 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
         TextView durationView = (TextView) result.findViewById(R.id.duration);
 
         int callType = details.callTypes[0];
+        boolean isVideoCall = (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO;
+
         callTypeIconView.clear();
         callTypeIconView.add(callType);
-        callTypeIconView.setShowVideo(
-                (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
-        callTypeTextView.setText(mCallTypeHelper.getCallTypeText(callType));
+        callTypeIconView.setShowVideo(isVideoCall);
+        callTypeTextView.setText(mCallTypeHelper.getCallTypeText(callType, isVideoCall));
         // Set the date.
         CharSequence dateValue = DateUtils.formatDateRange(mContext, details.date, details.date,
                 DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE |

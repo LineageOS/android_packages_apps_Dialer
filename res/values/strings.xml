@@ -425,6 +425,14 @@
     -->
     <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> calls.</string>
 
+    <!-- String indicating a call log entry had video capabilities.
+
+    Note: AccessibilityServices use this attribute to announce what the view represents.
+          This is especially valuable for views without textual representation like ImageView.
+          [CHAR LIMIT=NONE]
+    -->
+    <string name="description_video_call">Video call.</string>
+
     <!-- String describing the button to SMS a number or contact.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -640,21 +648,6 @@
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
     <string name="description_outgoing_call">Call to <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
-
-    <!-- String describing an incoming missed video call entry in the call log.
-         Note: AccessibilityServices uses this attribute to announce what the view represents.
-         [CHAR LIMIT=NONE] -->
-    <string name="description_incoming_missed_video_call">Missed video call from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
-
-    <!-- String describing an incoming answered video call entry in the call log.
-         Note: AccessibilityServices uses this attribute to announce what the view represents.
-         [CHAR LIMIT=NONE] -->
-    <string name="description_incoming_answered_video_call">Answered video call from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
-
-    <!-- String describing an outgoing video call entry in the call log.
-         Note: AccessibilityServices uses this attribute to announce what the view represents.
-         [CHAR LIMIT=NONE] -->
-    <string name="description_outgoing_video_call">Video call to <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
 
     <!-- String describing the "call back" action for an entry in the call log.  The call back
          action triggers a return call to the named user.

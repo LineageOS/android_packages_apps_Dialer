@@ -77,6 +77,9 @@ import com.android.dialer.R;
         views.callBackButtonView.setContentDescription(
                 mResources.getString(R.string.description_call_back_action, views.nameOrNumber));
 
+        views.videoCallButtonView.setContentDescription(
+                mResources.getString(R.string.description_video_call_action, views.nameOrNumber));
+
         views.voicemailButtonView.setContentDescription(
                 mResources.getString(R.string.description_voicemail_action, views.nameOrNumber));
 
@@ -147,6 +150,11 @@ import com.android.dialer.R;
         if (details.callTypes.length > 1) {
             callDescription.append(mResources.getString(R.string.description_num_calls,
                     details.callTypes.length));
+        }
+
+        // If call had video capabilities, add the "Video Call" string.
+        if ((details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
+            callDescription.append(mResources.getString(R.string.description_video_call));
         }
 
         int stringID = getCallDescriptionStringID(details);

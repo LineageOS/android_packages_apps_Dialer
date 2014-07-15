@@ -41,6 +41,22 @@
             android:textSize="@dimen/call_log_list_item_actions_text_size"
             android:textStyle="bold"
             android:nextFocusLeft="@+id/primary_action_view"
+            android:nextFocusRight="@+id/video_call_action"
+            android:focusable="true"
+            android:singleLine="true"/>
+        <TextView
+            android:id="@+id/video_call_action"
+            android:background="@drawable/action_button_background"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/call_log_action_horizontal_padding"
+            android:paddingEnd="@dimen/call_log_action_horizontal_padding"
+            android:text="@string/call_log_action_video_call"
+            android:textColor="?attr/call_log_secondary_text_color"
+            android:textSize="@dimen/call_log_list_item_actions_text_size"
+            android:textStyle="bold"
+            android:nextFocusLeft="@+id/call_back_action"
             android:nextFocusRight="@+id/voicemail_action"
             android:focusable="true"
             android:singleLine="true"/>
@@ -56,7 +72,7 @@
             android:textColor="@color/call_log_action_text"
             android:textSize="@dimen/call_log_list_item_actions_text_size"
             android:textStyle="bold"
-            android:nextFocusLeft="@+id/call_back_action"
+            android:nextFocusLeft="@+id/video_call_action"
             android:nextFocusRight="@+id/details_action"
             android:focusable="true"
             android:singleLine="true"/>

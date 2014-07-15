@@ -895,6 +895,7 @@ public class CallLogAdapter extends GroupingListAdapter
             // focus was successful.  The first successful focus will satisfy the OR
             // block and block further attempts to set focus.
             boolean focused = views.callBackButtonView.requestAccessibilityFocus() ||
+                    views.videoCallButtonView.requestAccessibilityFocus() ||
                     views.voicemailButtonView.requestAccessibilityFocus() ||
                     views.detailsButtonView.requestAccessibilityFocus();
         } else {
@@ -929,6 +930,11 @@ public class CallLogAdapter extends GroupingListAdapter
                     R.id.call_back_action);
         }
 
+        if (views.videoCallButtonView == null) {
+            views.videoCallButtonView = (TextView)views.actionsView.findViewById(
+                    R.id.video_call_action);
+        }
+
         if (views.voicemailButtonView == null) {
             views.voicemailButtonView = (TextView)views.actionsView.findViewById(
                     R.id.voicemail_action);
@@ -960,8 +966,10 @@ public class CallLogAdapter extends GroupingListAdapter
      * @param views  The call log item views.
      */
     private void bindActionButtons(CallLogListItemViews views) {
+        boolean canPlaceCallToNumber =
+                PhoneNumberUtilsWrapper.canPlaceCallsTo(views.number, views.numberPresentation);
         // Set return call intent, otherwise null.
-        if (PhoneNumberUtilsWrapper.canPlaceCallsTo(views.number, views.numberPresentation)) {
+        if (canPlaceCallToNumber) {
             // Sets the primary action to call the number.
             views.callBackButtonView.setTag(
                     IntentProvider.getReturnCallIntentProvider(views.number, views.mAccount));
@@ -971,6 +979,18 @@ public class CallLogAdapter extends GroupingListAdapter
             // Number is not callable, so hide button.
             views.callBackButtonView.setTag(null);
             views.callBackButtonView.setVisibility(View.GONE);
+        }
+
+        // If one of the calls had video capabilities, show the video call button.
+        if (canPlaceCallToNumber && views.phoneCallDetailsViews.callTypeIcons.isVideoShown()) {
+            views.videoCallButtonView.setTag(
+                    IntentProvider.getReturnVideoCallIntentProvider(views.number,
+                            views.mAccount));
+            views.videoCallButtonView.setVisibility(View.VISIBLE);
+            views.videoCallButtonView.setOnClickListener(mActionListener);
+        } else {
+            views.videoCallButtonView.setTag(null);
+            views.videoCallButtonView.setVisibility(View.GONE);
         }
 
         // For voicemail calls, show the "VOICEMAIL" action button; hide otherwise.
@@ -991,6 +1011,7 @@ public class CallLogAdapter extends GroupingListAdapter
                     IntentProvider.getCallDetailIntentProvider(
                             views.rowId, views.callIds, null)
             );
+
             if (views.isExternal && !views.reported) {
                 views.reportButtonView.setVisibility(View.VISIBLE);
             }

@@ -44,6 +44,8 @@ public final class CallLogListItemViews {
     public View actionsView;
     /** The "call back" action button - assigned only when the action section is expanded. */
     public TextView callBackButtonView;
+    /** The "video call" action button - assigned only when the action section is expanded. */
+    public TextView videoCallButtonView;
     /** The "voicemail" action button - assigned only when the action section is expanded. */
     public TextView voicemailButtonView;
     /** The "details" action button - assigned only when the action section is expanded. */
