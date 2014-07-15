@@ -44,6 +44,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
     private final Set<InCallStateListener> mListeners = Sets.newHashSet();
     private final ArrayList<IncomingCallListener> mIncomingCallListeners = Lists.newArrayList();
+    private final Set<InCallDetailsListener> mDetailsListeners = Sets.newHashSet();
 
     private AudioModeProvider mAudioModeProvider;
     private StatusBarNotifier mStatusBarNotifier;
@@ -79,6 +80,14 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             onPostDialCharWait(
                     CallList.getInstance().getCallByTelecommCall(call).getId(),
                     remainingPostDialSequence);
+        }
+
+        @Override
+        public void onDetailsChanged(android.telecomm.Call call,
+                android.telecomm.Call.Details details) {
+            for (InCallDetailsListener listener : mDetailsListeners) {
+                listener.onDetailsChanged(details);
+            }
         }
     };
 
@@ -367,6 +376,16 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     public void removeListener(InCallStateListener listener) {
         Preconditions.checkNotNull(listener);
         mListeners.remove(listener);
+    }
+
+    public void addDetailsListener(InCallDetailsListener listener) {
+        Preconditions.checkNotNull(listener);
+        mDetailsListeners.add(listener);
+    }
+
+    public void removeDetailsListener(InCallDetailsListener listener) {
+        Preconditions.checkNotNull(listener);
+        mDetailsListeners.remove(listener);
     }
 
     public ProximitySensor getProximitySensor() {
@@ -841,5 +860,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
     public interface IncomingCallListener {
         public void onIncomingCall(InCallState state, Call call);
+    }
+
+    public interface InCallDetailsListener {
+        public void onDetailsChanged(android.telecomm.Call.Details details);
     }
 }
