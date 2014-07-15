@@ -203,7 +203,7 @@
     <string name="notification_action_end_call">Hang up</string>
     <!-- Label for "Video Call" notification action. This is a displayed on the notification for an
          incoming video call, and answers the call as a video call. [CHAR LIMIT=40] -->
-    <string name="notification_action_answer_video">Video call</string>
+    <string name="notification_action_answer_video">Video</string>
     <!-- Label for "Voice" notification action. This is a displayed on the notification for an
          incoming video call, and answers the call as an audio call. [CHAR LIMIT=40] -->
     <string name="notification_action_answer_voice">Voice</string>
