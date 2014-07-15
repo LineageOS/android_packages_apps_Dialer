@@ -94,13 +94,12 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         getUi().showAnswerUi(true);
 
         if (call.can(CallCapabilities.RESPOND_VIA_TEXT) && textMsgs != null) {
-            getUi().showTextButton(true);
+            getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITH_SMS);
             getUi().configureMessageDialog(textMsgs);
         } else {
-            getUi().showTextButton(false);
+            getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITHOUT_SMS);
         }
     }
-
 
     @Override
     public void onCallChanged(Call call) {
@@ -154,7 +153,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     interface AnswerUi extends Ui {
         public void showAnswerUi(boolean show);
-        public void showTextButton(boolean show);
+        public void showTargets(int targetSet);
         public void showMessageDialog();
         public void configureMessageDialog(List<String> textResponses);
     }

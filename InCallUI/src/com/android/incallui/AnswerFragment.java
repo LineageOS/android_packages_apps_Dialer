@@ -44,6 +44,11 @@ import java.util.List;
 public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresenter.AnswerUi>
         implements GlowPadWrapper.AnswerListener, AnswerPresenter.AnswerUi {
 
+    public static final int TARGET_SET_FOR_AUDIO_WITHOUT_SMS = 0;
+    public static final int TARGET_SET_FOR_AUDIO_WITH_SMS = 1;
+    public static final int TARGET_SET_FOR_VIDEO_WITHOUT_SMS = 2;
+    public static final int TARGET_SET_FOR_VIDEO_WITH_SMS = 3;
+
     /**
      * The popup showing the list of canned responses.
      *
@@ -112,29 +117,58 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
         }
     }
 
+    /**
+     * Sets targets on the glowpad according to target set identified by the parameter.
+     * @param targetSet Integer identifying the set of targets to use.
+     */
     @Override
-    public void showTextButton(boolean show) {
-        final int targetResourceId = show
-                ? R.array.incoming_call_widget_3way_targets
-                : R.array.incoming_call_widget_2way_targets;
+    public void showTargets(int targetSet) {
+        final int targetResourceId;
+        final int targetDescriptionsResourceId;
+        final int directionDescriptionsResourceId;
+        final int handleDrawableResourceId;
+
+        switch (targetSet) {
+            case TARGET_SET_FOR_AUDIO_WITH_SMS:
+                targetResourceId = R.array.incoming_call_widget_audio_with_sms_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_audio_with_sms_target_descriptions;
+                directionDescriptionsResourceId =
+                        R.array.incoming_call_widget_audio_with_sms_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_audio_handle;
+                break;
+            case TARGET_SET_FOR_VIDEO_WITHOUT_SMS:
+                targetResourceId = R.array.incoming_call_widget_video_without_sms_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_without_sms_target_descriptions;
+                directionDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_without_sms_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_video_handle;
+                break;
+            case TARGET_SET_FOR_VIDEO_WITH_SMS:
+                targetResourceId = R.array.incoming_call_widget_video_with_sms_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_with_sms_target_descriptions;
+                directionDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_with_sms_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_video_handle;
+                break;
+            case TARGET_SET_FOR_AUDIO_WITHOUT_SMS:
+            default:
+                targetResourceId = R.array.incoming_call_widget_audio_without_sms_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_audio_without_sms_target_descriptions;
+                directionDescriptionsResourceId =
+                        R.array.incoming_call_widget_audio_without_sms_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_audio_handle;
+                break;
+        }
 
         if (targetResourceId != mGlowpad.getTargetResourceId()) {
-            if (show) {
-                // Answer, Decline, and Respond via SMS.
-                mGlowpad.setTargetResources(targetResourceId);
-                mGlowpad.setTargetDescriptionsResourceId(
-                        R.array.incoming_call_widget_3way_target_descriptions);
-                mGlowpad.setDirectionDescriptionsResourceId(
-                        R.array.incoming_call_widget_3way_direction_descriptions);
-            } else {
-                // Answer or Decline.
-                mGlowpad.setTargetResources(targetResourceId);
-                mGlowpad.setTargetDescriptionsResourceId(
-                        R.array.incoming_call_widget_2way_target_descriptions);
-                mGlowpad.setDirectionDescriptionsResourceId(
-                        R.array.incoming_call_widget_2way_direction_descriptions);
-            }
-
+            mGlowpad.setTargetResources(targetResourceId);
+            mGlowpad.setTargetDescriptionsResourceId(targetDescriptionsResourceId);
+            mGlowpad.setDirectionDescriptionsResourceId(directionDescriptionsResourceId);
+            mGlowpad.setHandleDrawable(handleDrawableResourceId);
             mGlowpad.reset(false);
         }
     }
