@@ -147,11 +147,6 @@ public final class Call {
                 }
 
                 @Override
-                public void onVideoStateChanged(android.telecomm.Call call, int videoState) {
-                    update();
-                }
-
-                @Override
                 public void onCallDestroyed(android.telecomm.Call call) {
                     call.removeListener(mTelecommCallListener);
                 }
@@ -215,8 +210,6 @@ public final class Call {
                     CallList.getInstance().getCallByTelecommCall(
                             mTelecommCall.getChildren().get(i)).getId());
         }
-
-        mVideoState = mTelecommCall.getVideoState();
     }
 
     private static int translateState(int state) {
