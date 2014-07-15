@@ -42,6 +42,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -212,6 +213,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private String mPendingSearchViewQuery;
 
+    private PopupMenu mOverflowMenu;
     private EditText mSearchView;
     private View mVoiceSearchButton;
 
@@ -234,7 +236,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private class OptionsPopupMenu extends PopupMenu {
         public OptionsPopupMenu(Context context, View anchor) {
-            super(context, anchor);
+            super(context, anchor, Gravity.END);
         }
 
         @Override
@@ -392,8 +394,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ImageButton optionsMenuButton =
                 (ImageButton) searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
         optionsMenuButton.setOnClickListener(this);
-        final OptionsPopupMenu optionsMenu = buildOptionsMenu(optionsMenuButton);
-        optionsMenuButton.setOnTouchListener(optionsMenu.getDragToOpenListener());
+        mOverflowMenu = buildOptionsMenu(searchEditTextLayout);
+        optionsMenuButton.setOnTouchListener(mOverflowMenu.getDragToOpenListener());
 
         // Add the favorites fragment, and the dialpad fragment, but only if savedInstanceState
         // is null. Otherwise the fragment manager takes care of recreating these fragments.
@@ -546,7 +548,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 }
                 break;
             case R.id.dialtacts_options_menu_button:
-                buildOptionsMenu(view).show();
+                mOverflowMenu.show();
                 break;
             default: {
                 Log.wtf(TAG, "Unexpected onClick event from " + view);
