@@ -60,7 +60,8 @@
         <receiver android:name="InCallApp$NotificationBroadcastReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="com.android.incallui.ACTION_HANG_UP_ONGOING_CALL" />
-                <action android:name="com.android.incallui.ACTION_ANSWER_INCOMING_CALL" />
+                <action android:name="com.android.incallui.ACTION_ANSWER_VIDEO_INCOMING_CALL" />
+                <action android:name="com.android.incallui.ACTION_ANSWER_VOICE_INCOMING_CALL" />
                 <action android:name="com.android.incallui.ACTION_DECLINE_INCOMING_CALL" />
             </intent-filter>
         </receiver>
