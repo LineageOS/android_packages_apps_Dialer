@@ -50,6 +50,10 @@
     <!-- allow broadcasting secret code intents that reboot the phone -->
     <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- allow brodcasting across all users -->
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
+    <!-- send analytic events through internal package -->
+    <uses-permission android:name="com.cyngn.cmstats.SEND_ANALYTICS" />
     <!-- This tells the activity manager to not delay any of our activity
      start requests, even if they happen immediately after the user
      presses home. -->

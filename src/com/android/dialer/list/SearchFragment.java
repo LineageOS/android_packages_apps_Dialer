@@ -18,16 +18,19 @@ package com.android.dialer.list;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Toast;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
+import com.android.contacts.common.list.DirectoryPartition;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
+import com.android.dialer.cmstats.DialerStats;
 import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.list.OnListFragmentScrolledListener;
 
@@ -95,6 +98,12 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         final int shortcutType = adapter.getShortcutTypeFromPosition(position);
 
         if (shortcutType == DialerPhoneNumberListAdapter.SHORTCUT_INVALID) {
+            DirectoryPartition partition =
+                    (DirectoryPartition)adapter.getPartition(adapter.getPartitionForPosition(position));
+            if (TextUtils.equals(partition.getLabel(),
+                    getResources().getString(R.string.nearby_places))) {
+                DialerStats.sendEvent(getContext(), "lookup", "nearby_lookup");
+            }
             super.onItemClick(position, id);
         } else if (shortcutType == DialerPhoneNumberListAdapter.SHORTCUT_DIRECT_CALL) {
             final OnPhoneNumberPickerActionListener listener =
