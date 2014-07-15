@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.telecomm.CallCapabilities;
 import android.telecomm.PhoneAccount;
+import android.telecomm.PhoneAccountMetadata;
 import android.telecomm.TelecommManager;
 import android.telephony.DisconnectCause;
 import android.text.TextUtils;
@@ -406,8 +407,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private Drawable getConnectionIcon() {
         PhoneAccount account = mPrimary.getAccount();
         if (account != null) {
-            return getTelecommManager().getPhoneAccountMetadata(account)
-                    .getIcon(mContext);
+            PhoneAccountMetadata data = getTelecommManager().getPhoneAccountMetadata(account);
+            if (data != null) {
+                return data.getIcon(mContext);
+            }
         }
         return null;
     }
@@ -431,7 +434,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
         PhoneAccount account = mPrimary.getAccount();
         if (account != null) {
-            return getTelecommManager().getPhoneAccountMetadata(account).getLabel();
+            PhoneAccountMetadata data = getTelecommManager().getPhoneAccountMetadata(account);
+            if (data != null) {
+                return data.getLabel();
+            }
         }
         return null;
     }
@@ -439,7 +445,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private String getSecondaryCallProviderLabel() {
         PhoneAccount account = mSecondary.getAccount();
         if (account != null) {
-            return getTelecommManager().getPhoneAccountMetadata(account).getLabel();
+            PhoneAccountMetadata data = getTelecommManager().getPhoneAccountMetadata(account);
+            if (data != null) {
+                return data.getLabel();
+            }
         }
         return null;
     }
@@ -447,8 +456,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private Drawable getSecondaryCallProviderIcon() {
         PhoneAccount account = mSecondary.getAccount();
         if (account != null) {
-            return getTelecommManager().getPhoneAccountMetadata(account)
-                    .getIcon(mContext);
+            PhoneAccountMetadata data = getTelecommManager().getPhoneAccountMetadata(account);
+            if (data != null) {
+                return data.getIcon(mContext);
+            }
         }
         return null;
     }
