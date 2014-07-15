@@ -147,6 +147,11 @@ public final class Call {
                 }
 
                 @Override
+                public void onVideoStateChanged(android.telecomm.Call call, int videoState) {
+                    update();
+                }
+
+                @Override
                 public void onCallDestroyed(android.telecomm.Call call) {
                     call.removeListener(mTelecommCallListener);
                 }
@@ -158,6 +163,8 @@ public final class Call {
     private int mDisconnectCause;
     private String mParentCallId;
     private final List<String> mChildCallIds = new ArrayList<>();
+    private int mVideoState;
+
     private InCallVideoClient mCallVideoClient;
 
     public Call(android.telecomm.Call telecommCall) {
@@ -208,6 +215,8 @@ public final class Call {
                     CallList.getInstance().getCallByTelecommCall(
                             mTelecommCall.getChildren().get(i)).getId());
         }
+
+        mVideoState = mTelecommCall.getVideoState();
     }
 
     private static int translateState(int state) {
@@ -318,6 +327,10 @@ public final class Call {
 
     public String getParentId() {
         return mParentCallId;
+    }
+
+    public int getVideoState() {
+        return mVideoState;
     }
 
     @Override
