@@ -89,11 +89,6 @@ public class CallLogAdapter extends GroupingListAdapter
         public void fetchCalls();
     }
 
-    /** Implements onClickListener for the report button. */
-    public interface OnReportButtonClickListener {
-        public void onReportButtonClick(String number);
-    }
-
     /**
      * Stores a phone number of a call with the country code where it originally occurred.
      * <p>
@@ -138,7 +133,6 @@ public class CallLogAdapter extends GroupingListAdapter
     private final ContactInfoHelper mContactInfoHelper;
     private final CallFetcher mCallFetcher;
     private final Toast mReportedToast;
-    private final OnReportButtonClickListener mOnReportButtonClickListener;
     private ViewTreeObserver mViewTreeObserver = null;
 
     /**
@@ -350,7 +344,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
     public CallLogAdapter(Context context, CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper, CallItemExpandedListener callItemExpandedListener,
-            OnReportButtonClickListener onReportButtonClickListener, boolean isCallLog) {
+            boolean isCallLog) {
         super(context);
 
         mContext = context;
@@ -359,7 +353,6 @@ public class CallLogAdapter extends GroupingListAdapter
         mIsCallLog = isCallLog;
         mCallItemExpandedListener = callItemExpandedListener;
 
-        mOnReportButtonClickListener = onReportButtonClickListener;
         mReportedToast = Toast.makeText(mContext, R.string.toast_caller_id_reported,
                 Toast.LENGTH_SHORT);
 
@@ -704,6 +697,10 @@ public class CallLogAdapter extends GroupingListAdapter
             // when the user expands the actions ViewStub.
         }
 
+        // Restore expansion state of the row on rebind.  Inflate the actions ViewStub if required,
+        // and set its visibility state accordingly.
+        expandOrCollapseActions(callLogItemView, isExpanded(rowId));
+
         // Lookup contacts with this number
         NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
         ExpirableCache.CachedValue<ContactInfo> cachedInfo =
@@ -761,10 +758,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
         views.reported = info.isBadData;
         views.isExternal = mContactInfoHelper.isExternal(info.sourceType);
-
-        // Restore expansion state of the row on rebind.  Inflate the actions ViewStub if required,
-        // and set its visibility state accordingly.
-        expandOrCollapseActions(callLogItemView, isExpanded(rowId));
 
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation,
@@ -956,9 +949,10 @@ public class CallLogAdapter extends GroupingListAdapter
             views.reportButtonView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mOnReportButtonClickListener != null) {
-                        mOnReportButtonClickListener.onReportButtonClick(views.number);
-                    }
+                    mReportedToast.show();
+                    ((CallLogListItemViews) callLogItem.getTag()).reported = true;
+                    v.setVisibility(View.GONE);
+                    // TODO: Set the entry as reported in the database.
                 }
             });
         }
@@ -1020,8 +1014,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
             if (views.isExternal && !views.reported) {
                 views.reportButtonView.setVisibility(View.VISIBLE);
-            } else {
-                views.reportButtonView.setVisibility(View.GONE);
             }
         }
 
@@ -1420,10 +1412,5 @@ public class CallLogAdapter extends GroupingListAdapter
        } else {
            return mContext.getResources().getString(R.string.call_log_header_other);
        }
-    }
-
-    public void onBadDataReported(String number) {
-        mContactInfoCache.expireAll();
-        mReportedToast.show();
     }
 }
