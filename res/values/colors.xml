@@ -21,6 +21,12 @@
     <color name="dialtacts_secondary_text_color">#888888</color>
     <color name="dialer_accent_color">#eeff41</color>
 
+    <!-- Color for the setting text. -->
+    <color name="setting_primary_color">#4d4c4c</color>
+    <!-- Color for the setting description text. -->
+    <color name="setting_secondary_color">#989898</color>
+    <color name="setting_background_color">#ffffff</color>
+
     <!-- Color of the text describing an unconsumed missed call. -->
     <color name="call_log_missed_call_highlight_color">#FF0000</color>
 
