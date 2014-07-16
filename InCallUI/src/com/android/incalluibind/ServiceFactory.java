@@ -18,7 +18,6 @@ package com.android.incalluibind;
 
 import android.content.Context;
 
-import com.android.incallui.service.AuxiliaryActionService;
 import com.android.incallui.service.PhoneNumberService;
 
 /**
@@ -28,11 +27,6 @@ public class ServiceFactory {
 
     public static PhoneNumberService newPhoneNumberService(Context context) {
         // no phone number service.
-        return null;
-    }
-
-    public static AuxiliaryActionService newAuxiliaryActionService(Context context) {
-        // no auxiliary action service.
         return null;
     }
 }

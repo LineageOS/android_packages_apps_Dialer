@@ -26,7 +26,6 @@ import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
-import com.android.incallui.service.AuxiliaryActionService;
 import com.android.incalluibind.ServiceFactory;
 import com.android.services.telephony.common.AudioMode;
 
@@ -37,8 +36,7 @@ import android.telephony.PhoneNumberUtils;
  * Logic for call buttons.
  */
 public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButtonUi>
-        implements InCallStateListener, AudioModeListener, IncomingCallListener,
-        AuxiliaryActionService.Client {
+        implements InCallStateListener, AudioModeListener, IncomingCallListener {
 
     private Call mCall;
     private boolean mAutomaticallyMuted = false;
@@ -48,8 +46,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private boolean mShowManageConference = false;
 
     private InCallState mPreviousState = null;
-
-    private AuxiliaryActionService mAuxiliaryActionService = null;
 
     public CallButtonPresenter() {
     }
@@ -65,10 +61,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         InCallPresenter.getInstance().addIncomingCallListener(this);
 
         Context context = ((Fragment) ui).getActivity();
-        mAuxiliaryActionService = ServiceFactory.newAuxiliaryActionService(context);
-        if (mAuxiliaryActionService != null) {
-            mAuxiliaryActionService.setClient(this);
-        }
     }
 
     @Override
@@ -78,9 +70,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         InCallPresenter.getInstance().removeListener(this);
         AudioModeProvider.getInstance().removeListener(this);
         InCallPresenter.getInstance().removeIncomingCallListener(this);
-        if (mAuxiliaryActionService != null) {
-            mAuxiliaryActionService.setClient(null);
-        }
     }
 
     @Override
@@ -140,11 +129,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         if (getUi() != null && !mAutomaticallyMuted) {
             getUi().setMute(muted);
         }
-    }
-
-    @Override
-    public void onAuxiliaryActionStateChanged() {
-        updateAuxiliaryActionButton();
     }
 
     public int getAudioMode() {
@@ -234,10 +218,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         updateExtraButtonRow();
     }
 
-    public void auxiliaryActionButtonClicked() {
-        mAuxiliaryActionService.performAction();
-    }
-
     private void updateUi(InCallState state, Call call) {
         final CallButtonUi ui = getUi();
         if (ui == null) {
@@ -324,7 +304,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             mShowManageConference = (call.isConferenceCall() && !isGenericConference);
 
             updateExtraButtonRow();
-            updateAuxiliaryActionButton();
         }
     }
 
@@ -344,22 +323,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         } else {
             getUi().hideExtraRow();
         }
-    }
-
-    private void updateAuxiliaryActionButton() {
-        if (mAuxiliaryActionService == null) {
-            return;
-        }
-        final CallButtonUi ui = getUi();
-        if (ui == null) {
-            return;
-        }
-        if (mCall != null) {
-            mAuxiliaryActionService.setRemotePhoneNumber(mCall.getNumber());
-        }
-        ui.updateAuxiliaryActionButton(mAuxiliaryActionService.isActionEnabled(),
-                mAuxiliaryActionService.getActionDescription(),
-                mAuxiliaryActionService.getActionDrawable());
     }
 
     public void refreshMuteState() {
@@ -393,6 +356,5 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void showGenericMergeButton();
         void hideExtraRow();
         void displayManageConferencePanel(boolean on);
-        void updateAuxiliaryActionButton(boolean show, String description, Drawable drawable);
     }
 }
