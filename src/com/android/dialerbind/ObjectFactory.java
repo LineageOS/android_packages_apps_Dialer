@@ -18,10 +18,12 @@ package com.android.dialerbind;
 
 import static com.android.dialer.calllog.CallLogAdapter.CallFetcher;
 
+import android.app.DialogFragment;
 import android.content.Context;
 
 import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.CallLogAdapter.CallItemExpandedListener;
+import com.android.dialer.calllog.CallLogAdapter.OnReportButtonClickListener;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.service.CachedNumberLookupService;
 
@@ -43,10 +45,15 @@ public class ObjectFactory {
      * @param isCallLog Is this call log adapter being used on the call log?
      * @return Instance of CallLogAdapter.
      */
-    public static CallLogAdapter newCallLogAdapter(Context context, CallFetcher callFetcher,
-            ContactInfoHelper contactInfoHelper, CallItemExpandedListener callItemExpandedListener,
-            boolean isCallLog) {
-        return new CallLogAdapter(context, callFetcher, contactInfoHelper, callItemExpandedListener,
-                isCallLog);
+    public static CallLogAdapter newCallLogAdapter(Context context,
+            CallFetcher callFetcher, ContactInfoHelper contactInfoHelper,
+            CallItemExpandedListener callItemExpandedListener,
+            OnReportButtonClickListener onReportButtonClickListener, boolean isCallLog) {
+        return new CallLogAdapter(context, callFetcher, contactInfoHelper,
+                callItemExpandedListener, onReportButtonClickListener, isCallLog);
+    }
+
+    public static DialogFragment getReportDialogFragment(String number) {
+        return null;
     }
 }

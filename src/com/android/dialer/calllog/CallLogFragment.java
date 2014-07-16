@@ -20,6 +20,7 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.animation.Animator.AnimatorListener;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.KeyguardManager;
 import android.app.ListFragment;
 import android.content.Context;
@@ -65,7 +66,7 @@ import java.util.List;
  * (all, missed or voicemails), specify it in the constructor.
  */
 public class CallLogFragment extends ListFragment
-        implements CallLogQueryHandler.Listener,
+        implements CallLogQueryHandler.Listener, CallLogAdapter.OnReportButtonClickListener,
         CallLogAdapter.CallFetcher,
         CallLogAdapter.CallItemExpandedListener {
     private static final String TAG = "CallLogFragment";
@@ -178,7 +179,6 @@ public class CallLogFragment extends ListFragment
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
-
         if (state != null) {
             mCallTypeFilter = state.getInt(KEY_FILTER_TYPE, mCallTypeFilter);
             mLogLimit = state.getInt(KEY_LOG_LIMIT, mLogLimit);
@@ -187,8 +187,8 @@ public class CallLogFragment extends ListFragment
         }
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this, new ContactInfoHelper(
-                getActivity(), currentCountryIso), this, true);
+        mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
+                new ContactInfoHelper(getActivity(), currentCountryIso), this, this, true);
         setListAdapter(mAdapter);
         mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
                 this, mLogLimit);
@@ -665,5 +665,18 @@ public class CallLogFragment extends ListFragment
         }
 
         return null;
+    }
+
+    public void onBadDataReported(String number) {
+        mAdapter.onBadDataReported(number);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void onReportButtonClick(String number) {
+        DialogFragment df = ObjectFactory.getReportDialogFragment(number);
+        if (df != null) {
+            df.setTargetFragment(this, 0);
+            df.show(getActivity().getFragmentManager(), "report_dialog");
+        }
     }
 }
