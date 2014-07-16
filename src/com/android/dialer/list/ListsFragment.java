@@ -220,7 +220,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
                 this, 1);
         final String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mCallLogAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso), null, false);
+                new ContactInfoHelper(getActivity(), currentCountryIso), null, null, false);
 
         mMergedAdapter = new ShortcutCardsAdapter(getActivity(), this, mCallLogAdapter);
     }
