@@ -211,10 +211,10 @@
          scenarios such as accepting an incoming call or accepting a video call request.
          [CHAR LIMIT=40] -->
     <string name="notification_action_accept">Accept</string>
-    <!-- Label for "Decline" notification action. This is somewhat generic, and may refer to
+    <!-- Label for "Dismiss" notification action. This is somewhat generic, and may refer to
          scenarios such as declining an incoming call or declining a video call request.
          [CHAR LIMIT=40] -->
-    <string name="notification_action_decline">Decline</string>
+    <string name="notification_action_dismiss">Dismiss</string>
 
     <!-- Message for "call back" Action, which is displayed in the missed call notificaiton.
          The user will be able to call back to the person or the phone number.

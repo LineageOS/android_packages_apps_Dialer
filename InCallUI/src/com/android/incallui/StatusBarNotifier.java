@@ -225,21 +225,22 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         // it has available, and may make a subsequent call later (same thread) if it had to
         // call into the contacts provider for more data.
         mContactInfoCache.findInfo(call, isIncoming, new ContactInfoCacheCallback() {
-                @Override
-                public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
-                    Call call = CallList.getInstance().getCallById(callId);
-                    if (call != null) {
-                        buildAndSendNotification(call, entry);
-                    }
+            @Override
+            public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
+                Call call = CallList.getInstance().getCallById(callId);
+                if (call != null) {
+                    buildAndSendNotification(call, entry);
                 }
+            }
 
-                @Override
-                public void onImageLoadComplete(String callId, ContactCacheEntry entry) {
-                    Call call = CallList.getInstance().getCallById(callId);
-                    if (call != null) {
-                        buildAndSendNotification(call, entry);
-                    }
-                } });
+            @Override
+            public void onImageLoadComplete(String callId, ContactCacheEntry entry) {
+                Call call = CallList.getInstance().getCallById(callId);
+                if (call != null) {
+                    buildAndSendNotification(call, entry);
+                }
+            }
+        });
     }
 
     /**
@@ -300,12 +301,14 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
                 state == Call.State.ONHOLD ||
                 Call.State.isDialing(state)) {
             addHangupAction(builder);
-        }
-        // Add answer/decline options for incomng calls (incoming | call_waiting)
-        if (state == Call.State.INCOMING ||
-                state == Call.State.CALL_WAITING) {
-            addDeclineAction(builder);
-            addAnswerAction(builder);
+        } else if (state == Call.State.INCOMING || state == Call.State.CALL_WAITING) {
+            addDismissAction(builder);
+            if (call.isVideoCall()) {
+                addVoiceAction(builder);
+                addVideoCallAction(builder);
+            } else {
+                addAnswerAction(builder);
+            }
         }
 
         addPersonReference(builder, contactInfo, call);
@@ -420,7 +423,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         if (call.getState() == Call.State.ONHOLD) {
             return R.drawable.stat_sys_phone_call_on_hold;
         }
-        return R.drawable.stat_sys_phone_call;
+        return R.drawable.fab_ic_call;
     }
 
     /**
@@ -459,31 +462,54 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         return call;
     }
 
-    private void addHangupAction(Notification.Builder builder) {
-        Log.i(this, "Will show \"hang-up\" action in the ongoing active call Notification");
-
-        // TODO: use better asset.
-        builder.addAction(R.drawable.stat_sys_phone_call_end,
-                mContext.getText(R.string.notification_action_end_call),
-                createHangUpOngoingCallPendingIntent(mContext));
-    }
-
     private void addAnswerAction(Notification.Builder builder) {
         Log.i(this, "Will show \"answer\" action in the incoming call Notification");
 
-        // TODO: use better asset and string
-        builder.addAction(R.drawable.stat_sys_phone_call,
+        PendingIntent answerVoicePendingIntent = createNotificationPendingIntent(
+                mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
+        builder.addAction(R.drawable.fab_ic_call,
                 mContext.getText(R.string.description_target_answer),
-                createAnswerCallPendingIntent(mContext));
+                answerVoicePendingIntent);
     }
 
-    private void addDeclineAction(Notification.Builder builder) {
-        Log.i(this, "Will show \"decline\" action in the incoming call Notification");
+    private void addDismissAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"dismiss\" action in the incoming call Notification");
 
-        // TODO: use better asset and string
-        builder.addAction(R.drawable.stat_sys_phone_call_end,
-                mContext.getText(R.string.description_target_decline),
-                createDeclineCallPendingIntent(mContext));
+        PendingIntent declinePendingIntent =
+                createNotificationPendingIntent(mContext, InCallApp.ACTION_DECLINE_INCOMING_CALL);
+        builder.addAction(R.drawable.ic_close_dk,
+                mContext.getText(R.string.notification_action_dismiss),
+                declinePendingIntent);
+    }
+
+    private void addHangupAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"hang-up\" action in the ongoing active call Notification");
+
+        PendingIntent hangupPendingIntent =
+                createNotificationPendingIntent(mContext, InCallApp.ACTION_HANG_UP_ONGOING_CALL);
+        builder.addAction(R.drawable.fab_ic_end_call,
+                mContext.getText(R.string.notification_action_end_call),
+                hangupPendingIntent);
+    }
+
+    private void addVideoCallAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"video\" action in the incoming call Notification");
+
+        PendingIntent answerVideoPendingIntent = createNotificationPendingIntent(
+                mContext, InCallApp.ACTION_ANSWER_VIDEO_INCOMING_CALL);
+        builder.addAction(R.drawable.ic_videocam,
+                mContext.getText(R.string.notification_action_answer_video),
+                answerVideoPendingIntent);
+    }
+
+    private void addVoiceAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"voice\" action in the incoming call Notification");
+
+        PendingIntent answerVoicePendingIntent = createNotificationPendingIntent(
+                mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
+        builder.addAction(R.drawable.fab_ic_call,
+                mContext.getText(R.string.notification_action_answer_voice),
+                answerVoicePendingIntent);
     }
 
     /**
@@ -545,6 +571,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
 
         return builder;
     }
+
     private PendingIntent createLaunchPendingIntent() {
 
         final Intent intent = InCallPresenter.getInstance().getInCallIntent(
@@ -558,30 +585,6 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         PendingIntent inCallPendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
 
         return inCallPendingIntent;
-    }
-
-    /**
-     * Returns PendingIntent for hanging up ongoing phone call. This will typically be used from
-     * Notification context.
-     */
-    private static PendingIntent createHangUpOngoingCallPendingIntent(Context context) {
-        return createNotificationPendingIntent(context, InCallApp.ACTION_HANG_UP_ONGOING_CALL);
-    }
-
-    /**
-     * Returns PendingIntent for answering a phone call. This will typically be used from
-     * Notification context.
-     */
-    private static PendingIntent createAnswerCallPendingIntent(Context context) {
-        return createNotificationPendingIntent(context, InCallApp.ACTION_ANSWER_INCOMING_CALL);
-    }
-
-    /**
-     * Returns PendingIntent for declining a phone call. This will typically be used from
-     * Notification context.
-     */
-    private static PendingIntent createDeclineCallPendingIntent(Context context) {
-        return createNotificationPendingIntent(context, InCallApp.ACTION_DECLINE_INCOMING_CALL);
     }
 
     /**

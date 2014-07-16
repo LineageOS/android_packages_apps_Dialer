@@ -93,11 +93,21 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         final List<String> textMsgs = CallList.getInstance().getTextResponses(call.getId());
         getUi().showAnswerUi(true);
 
-        if (call.can(CallCapabilities.RESPOND_VIA_TEXT) && textMsgs != null) {
-            getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITH_SMS);
-            getUi().configureMessageDialog(textMsgs);
+        boolean withSms = call.can(CallCapabilities.RESPOND_VIA_TEXT) && textMsgs != null;
+        if (call.isVideoCall()) {
+            if (withSms) {
+                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS);
+                getUi().configureMessageDialog(textMsgs);
+            } else {
+                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITHOUT_SMS);
+            }
         } else {
-            getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITHOUT_SMS);
+            if (withSms) {
+                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITH_SMS);
+                getUi().configureMessageDialog(textMsgs);
+            } else {
+                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITHOUT_SMS);
+            }
         }
     }
 

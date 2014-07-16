@@ -32,12 +32,14 @@ public class InCallApp extends Application {
      * choose first ringing call, first active call, or first background call (typically in
      * HOLDING state).
      */
-    public static final String ACTION_HANG_UP_ONGOING_CALL =
-            "com.android.incallui.ACTION_HANG_UP_ONGOING_CALL";
-    public static final String ACTION_ANSWER_INCOMING_CALL =
-            "com.android.incallui.ACTION_ANSWER_INCOMING_CALL";
     public static final String ACTION_DECLINE_INCOMING_CALL =
             "com.android.incallui.ACTION_DECLINE_INCOMING_CALL";
+    public static final String ACTION_HANG_UP_ONGOING_CALL =
+            "com.android.incallui.ACTION_HANG_UP_ONGOING_CALL";
+    public static final String ACTION_ANSWER_VIDEO_INCOMING_CALL =
+            "com.android.incallui.ACTION_ANSWER_VIDEO_INCOMING_CALL";
+    public static final String ACTION_ANSWER_VOICE_INCOMING_CALL =
+            "com.android.incallui.ACTION_ANSWER_VOICE_INCOMING_CALL";
 
     public InCallApp() {
     }
@@ -64,12 +66,15 @@ public class InCallApp extends Application {
             Log.i(this, "Broadcast from Notification: " + action);
 
             // TODO: Commands of this nature should exist in the CallList.
-            if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
-                InCallPresenter.getInstance().hangUpOngoingCall(context);
-            } else if (action.equals(ACTION_ANSWER_INCOMING_CALL)) {
-                InCallPresenter.getInstance().answerIncomingCall(context);
-            } else if (action.equals(ACTION_DECLINE_INCOMING_CALL)) {
+            if (action.equals(ACTION_DECLINE_INCOMING_CALL)) {
                 InCallPresenter.getInstance().declineIncomingCall(context);
+            } else if (action.equals(ACTION_ANSWER_VOICE_INCOMING_CALL)) {
+                InCallPresenter.getInstance().answerIncomingCall(context);
+            } else if (action.equals(ACTION_ANSWER_VIDEO_INCOMING_CALL)) {
+                //TODO: Answer as a video call here instead of an audio call.
+                InCallPresenter.getInstance().answerIncomingCall(context);
+            } else if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
+                InCallPresenter.getInstance().hangUpOngoingCall(context);
             }
         }
     }

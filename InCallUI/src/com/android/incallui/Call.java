@@ -21,6 +21,7 @@ import android.telecomm.CallCapabilities;
 import android.telecomm.PhoneAccount;
 import android.telecomm.RemoteCallVideoProvider;
 import android.telecomm.GatewayInfo;
+import android.telecomm.VideoCallProfile;
 import android.telephony.DisconnectCause;
 
 import java.util.ArrayList;
@@ -158,7 +159,6 @@ public final class Call {
     private int mDisconnectCause;
     private String mParentCallId;
     private final List<String> mChildCallIds = new ArrayList<>();
-    private int mVideoState;
 
     private InCallVideoClient mCallVideoClient;
 
@@ -322,8 +322,10 @@ public final class Call {
         return mParentCallId;
     }
 
-    public int getVideoState() {
-        return mVideoState;
+    public boolean isVideoCall() {
+        int videoState = mTelecommCall.getDetails().getVideoState();
+        return (videoState & VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL)
+                == VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL;
     }
 
     @Override
