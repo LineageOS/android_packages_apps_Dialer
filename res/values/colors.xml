@@ -52,9 +52,6 @@
     <!-- Background color of dialer list items (contacts, call log entries) -->
     <color name="background_dialer_list_items">@color/background_dialer_light</color>
 
-    <color name="search_shortcut_background_color">#b6b6b6</color>
-    <color name="search_shortcut_icon_color">#f8f8f8</color>
-
     <!-- Color of the 1dp divider that separates favorites -->
     <color name="favorite_contacts_separator_color">#d0d0d0</color>
 
