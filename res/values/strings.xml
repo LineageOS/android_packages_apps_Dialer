@@ -329,8 +329,8 @@
     <!-- Menu item to select account used to make phone calls [CHAR LIMIT=30] -->
     <string name="menu_select_account">Select Account</string>
 
-    <!-- Menu item label for call settings [CHAR LIMIT=30] -->
-    <string name="call_settings">Settings</string>
+    <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
+    <string name="dialer_settings_label">Settings</string>
 
     <!-- Menu item to create a new contact [CHAR LIMIT=30] -->
     <string name="menu_newContact">New contact</string>
@@ -743,4 +743,12 @@
     <!-- Delimeter used between each item in a textual list; for example "Alpha, Beta".
          [CHAR LIMIT=3] -->
     <string name="list_delimeter">", "</string>
+
+    <!-- Dialer settings related strings-->
+
+    <!-- Label for the call settings section [CHAR LIMIT=30]-->
+    <string name="call_settings_label">Call Settings</string>
+
+    <!-- Label for the call settings section description [CHAR LIMIT=80]-->
+    <string name="call_settings_description">Ringtones, voicemail settings, VoIP calling, etc</string>
 </resources>

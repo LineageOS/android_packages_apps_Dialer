@@ -122,6 +122,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.android.dialer.settings.DialerSettingsActivity"
+                  android:label="@string/dialer_settings_label"
+                  android:parentActivityName="com.android.dialer.DialtactsActivity"
+                  android:theme="@style/SettingsStyle"
+                  android:exported="false">
+        </activity>
+
         <activity android:name="com.android.dialer.calllog.CallLogActivity"
             android:label="@string/call_log_activity_title"
             android:theme="@style/DialtactsThemeWithoutActionBarOverlay"
