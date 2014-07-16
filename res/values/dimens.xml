@@ -95,11 +95,11 @@
     <!-- Text size for the "speed dial" text in the favorites menu. -->
     <dimen name="favorites_menu_speed_dial_text_size">18sp</dimen>
     <!-- Height of the speed dial TextView in the favorites menu. -->
-    <dimen name="favorites_menu_speed_dial_height">36dp</dimen>
+    <dimen name="favorites_menu_speed_dial_height">42dp</dimen>
     <!-- Text size for the "All Contacts" text in the favorites menu. -->
-    <dimen name="favorites_menu_all_contacts_text_size">12sp</dimen>
+    <dimen name="favorites_menu_all_contacts_text_size">18sp</dimen>
     <!-- Height of the all contacts Button in the favorites menu. -->
-    <dimen name="favorites_menu_all_contacts_height">36dp</dimen>
+    <dimen name="favorites_menu_all_contacts_height">42dp</dimen>
 
     <!-- Margin to the left and right of the search box. -->
     <dimen name="search_margin_horizontal">7dp</dimen>
