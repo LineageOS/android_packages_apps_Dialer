@@ -70,6 +70,7 @@
         <item name="call_log_voicemail_status_action_text_color">#33b5e5</item>
             <!-- Favorites -->
         <item name="favorites_padding_bottom">?android:attr/actionBarSize</item>
+        <item name="android:colorPrimary">@color/actionbar_background_color</item>
         <item name="android:colorPrimaryDark">@color/actionbar_background_color_dark</item>
         <item name="dialpad_key_button_touch_tint">@color/dialer_dialpad_touch_tint</item>
     </style>
