@@ -45,6 +45,7 @@ public final class Call {
         public static final int DISCONNECTING = 8;  /* A call is being ended. */
         public static final int DISCONNECTED = 9;   /* State after a call disconnects */
         public static final int CONFERENCED = 10;   /* Call part of a conference call */
+        public static final int PRE_DIAL_WAIT = 11; /* Waiting for user before outgoing call */
 
         public static boolean isConnected(int state) {
             switch(state) {
@@ -89,6 +90,8 @@ public final class Call {
                     return "DISCONNECTED";
                 case CONFERENCED:
                     return "CONFERENCED";
+                case PRE_DIAL_WAIT:
+                    return "PRE_DIAL_WAIT";
                 default:
                     return "UNKOWN";
             }
@@ -214,6 +217,8 @@ public final class Call {
 
     private static int translateState(int state) {
         switch (state) {
+            case android.telecomm.Call.STATE_PRE_DIAL_WAIT:
+                return Call.State.PRE_DIAL_WAIT;
             case android.telecomm.Call.STATE_DIALING:
             case android.telecomm.Call.STATE_NEW:
                 return Call.State.DIALING;
