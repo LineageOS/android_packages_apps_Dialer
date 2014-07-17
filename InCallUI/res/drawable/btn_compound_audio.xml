@@ -70,7 +70,7 @@
 
     <!-- Bluetooth is active -->
     <item android:id="@+id/bluetoothItem">
-        <bitmap android:src="@drawable/ic_sound_bluetooth_holo_dark"
+        <bitmap android:src="@drawable/ic_toolbar_audio_bluetooth"
                 android:gravity="center"
                 android:tint="@color/selectable_icon_tint"  />
     </item>
@@ -78,7 +78,7 @@
 
     <!-- Handset earpiece is active -->
     <item android:id="@+id/handsetItem">
-        <bitmap android:src="@drawable/ic_sound_handset_holo_dark"
+        <bitmap android:src="@drawable/ic_toolbar_audio_phone"
                 android:gravity="center"
                 android:tint="@color/selectable_icon_tint" />
     </item>
