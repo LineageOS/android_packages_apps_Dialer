@@ -17,7 +17,6 @@
 package com.android.incallui;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.telecomm.CallCapabilities;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -26,7 +25,6 @@ import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
-import com.android.incalluibind.ServiceFactory;
 import com.android.services.telephony.common.AudioMode;
 
 import android.app.Fragment;
@@ -59,8 +57,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // register for call state changes last
         InCallPresenter.getInstance().addListener(this);
         InCallPresenter.getInstance().addIncomingCallListener(this);
-
-        Context context = ((Fragment) ui).getActivity();
     }
 
     @Override
@@ -86,7 +82,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             // OUTGOING.  We may want to do that once we start showing "Voice mail" label on
             // the dialpad too.)
             if (ui != null) {
-                final Fragment callButtonFragment = (Fragment) ui;
                 if (mPreviousState == InCallState.OUTGOING && mCall != null
                         && PhoneNumberUtils.isVoiceMailNumber(mCall.getNumber())) {
                     ui.displayDialpad(true /* show */, true /* animate */);
@@ -219,92 +214,65 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     private void updateUi(InCallState state, Call call) {
+        Log.d(this, "Updating call UI for call: ", call);
+
         final CallButtonUi ui = getUi();
         if (ui == null) {
             return;
         }
 
-        final boolean isEnabled = state.isConnectingOrConnected() &&
-                !state.isIncoming() && call != null;
-
+        final boolean isEnabled =
+                state.isConnectingOrConnected() &&!state.isIncoming() && call != null;
         ui.setEnabled(isEnabled);
 
-        Log.d(this, "Updating call UI for call: ", call);
-
-        if (isEnabled) {
-            Log.v(this, "Show hold ", call.can(CallCapabilities.SUPPORT_HOLD));
-            Log.v(this, "Enable hold", call.can(CallCapabilities.HOLD));
-            Log.v(this, "Show merge ", call.can(CallCapabilities.MERGE_CALLS));
-            Log.v(this, "Show swap ", call.can(CallCapabilities.SWAP_CALLS));
-            Log.v(this, "Show add call ", call.can(CallCapabilities.ADD_CALL));
-            Log.v(this, "Show mute ", call.can(CallCapabilities.MUTE));
-
-            final boolean canMerge = call.can(CallCapabilities.MERGE_CALLS);
-            final boolean canAdd = call.can(CallCapabilities.ADD_CALL);
-            final boolean isGenericConference = call.can(CallCapabilities.GENERIC_CONFERENCE);
-
-
-            final boolean showMerge = !isGenericConference && canMerge;
-
-            if (showMerge) {
-                ui.showMerge(true);
-                ui.showAddCall(false);
-            } else {
-                ui.showMerge(false);
-                ui.showAddCall(true);
-                ui.enableAddCall(canAdd);
-            }
-
-            final boolean canHold = call.can(CallCapabilities.HOLD);
-            final boolean canSwap = call.can(CallCapabilities.SWAP_CALLS);
-            final boolean supportHold = call.can(CallCapabilities.SUPPORT_HOLD);
-
-            if (canHold) {
-                ui.showHold(true);
-                ui.setHold(call.getState() == Call.State.ONHOLD);
-                ui.enableHold(true);
-                ui.showSwap(false);
-            } else if (canSwap) {
-                ui.showHold(false);
-                ui.showSwap(true);
-            } else {
-                // Neither "Hold" nor "Swap" is available.  This can happen for two
-                // reasons:
-                //   (1) this is a transient state on a device that *can*
-                //       normally hold or swap, or
-                //   (2) this device just doesn't have the concept of hold/swap.
-                //
-                // In case (1), show the "Hold" button in a disabled state.  In case
-                // (2), remove the button entirely.  (This means that the button row
-                // will only have 4 buttons on some devices.)
-
-                if (supportHold) {
-                    ui.showHold(true);
-                    ui.enableHold(false);
-                    ui.setHold(call.getState() == Call.State.ONHOLD);
-                    ui.showSwap(false);
-                } else {
-                    ui.showHold(false);
-                    ui.showSwap(false);
-                }
-            }
-
-            ui.enableMute(call.can(CallCapabilities.MUTE));
-
-            // Finally, update the "extra button row": It's displayed above the
-            // "End" button, but only if necessary.  Also, it's never displayed
-            // while the dialpad is visible (since it would overlap.)
-            //
-            // The row contains two buttons:
-            //
-            // - "Manage conference" (used only on GSM devices)
-            // - "Merge" button (used only on CDMA devices)
-
-            mShowGenericMerge = isGenericConference && canMerge;
-            mShowManageConference = (call.isConferenceCall() && !isGenericConference);
-
-            updateExtraButtonRow();
+        if (!isEnabled) {
+            return;
         }
+
+        Log.v(this, "Show hold ", call.can(CallCapabilities.SUPPORT_HOLD));
+        Log.v(this, "Enable hold", call.can(CallCapabilities.HOLD));
+        Log.v(this, "Show merge ", call.can(CallCapabilities.MERGE_CALLS));
+        Log.v(this, "Show swap ", call.can(CallCapabilities.SWAP_CALLS));
+        Log.v(this, "Show add call ", call.can(CallCapabilities.ADD_CALL));
+        Log.v(this, "Show mute ", call.can(CallCapabilities.MUTE));
+
+        final boolean canMerge = call.can(CallCapabilities.MERGE_CALLS);
+        final boolean canAdd = call.can(CallCapabilities.ADD_CALL);
+        final boolean isGenericConference = call.can(CallCapabilities.GENERIC_CONFERENCE);
+        final boolean canHold = call.can(CallCapabilities.HOLD);
+        final boolean canSwap = call.can(CallCapabilities.SWAP_CALLS);
+        final boolean supportHold = call.can(CallCapabilities.SUPPORT_HOLD);
+
+        final boolean showMerge = !isGenericConference && canMerge;
+
+        // Show either MERGE or ADD button, but not both.
+        ui.showMerge(showMerge);
+        ui.showAddCall(!showMerge);
+        ui.enableAddCall(!showMerge && canAdd);
+
+        // Show either HOLD or SWAP button, but not both.
+        // If neither HOLD or SWAP is available:
+        //     (1) If the device normally can hold/swap, show HOLD in a disabled state.
+        //     (2) If the device doesn't have the concept of hold/swap, remove the button.
+        ui.showHold(canHold || (!canSwap && supportHold));
+        ui.showSwap(!canHold && canSwap);
+        ui.setHold(call.getState() == Call.State.ONHOLD);
+        ui.enableHold(canHold);
+
+        ui.enableMute(call.can(CallCapabilities.MUTE));
+
+        // Finally, update the "extra button row": It's displayed above the
+        // "End" button, but only if necessary.  Also, it's never displayed
+        // while the dialpad is visible (since it would overlap.)
+        //
+        // The row contains two buttons:
+        //
+        // - "Manage conference" (used only on GSM devices)
+        // - "Merge" button (used only on CDMA devices)
+
+        mShowGenericMerge = isGenericConference && canMerge;
+        mShowManageConference = (call.isConferenceCall() && !isGenericConference);
+        updateExtraButtonRow();
     }
 
     private void updateExtraButtonRow() {
