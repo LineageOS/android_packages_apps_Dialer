@@ -39,6 +39,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <TextView android:id="@+id/connectionServiceMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone"
+            android:padding="@dimen/call_banner_side_padding"
+            android:background="@android:color/white" />
+
     </LinearLayout>
 
     <FrameLayout
