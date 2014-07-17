@@ -65,6 +65,10 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"Hanging up"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"In call"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"My number is <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"Connecting video"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"Video call"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Requesting video"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"Cannot connect video call"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Dialling"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Missed call"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Missed calls"</string>
@@ -73,6 +77,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"On-going call"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"On hold"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Incoming call"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Incoming video call"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Incoming video request"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"New voicemail"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"New voicemail (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Dial <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
@@ -80,6 +86,12 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"No service"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Selected network (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) unavailable"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Hang up"</string>
+    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
+    <skip />
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Voice"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"Accept"</string>
+    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
+    <skip />
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Call back"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Message"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"To place a call, first turn off Aeroplane mode."</string>
@@ -114,6 +126,9 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Manage conference"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Audio"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Video call"</string>
+    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"Change to audio call"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Switch camera"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Pause video"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Service"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Setup"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Not set&gt;"</string>
@@ -145,16 +160,18 @@
     <string name="description_target_answer" msgid="7205604197797472471">"Answer"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Send SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Decline"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Answer as video call"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Answer as audio call"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"Slide up for <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"Slide left for <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"Slide right for <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"Slide down for <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Vibrate"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Vibrate"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Sound"</string>
     <string name="default_notification_description" msgid="78174796906240970">"Default sound (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Phone ringtone"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Vibrate when ringing"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Dial pad touch tones"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"Dial pad autocomplete"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Ringtone &amp; Vibrate"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Manage conference call"</string>

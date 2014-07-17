@@ -65,6 +65,10 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"Auflegen"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"Anruf"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"Meine Nummer lautet <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>."</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"Videoverbindung wird hergestellt."</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"Videoanruf"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Videoanfrage wird gesendet."</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"Fehler bei der Verbindung für den Videoanruf"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Verbindung wird aufgebaut..."</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Entgangener Anruf"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Entgangene Anrufe"</string>
@@ -73,6 +77,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Aktueller Anruf"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"Gehaltener Anruf"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Eingehender Anruf"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Eingehender Videoanruf"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Eingehende Videoanfrage"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Neue Nachricht"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Neue Nachricht (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> wählen"</string>
@@ -80,6 +86,12 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"kein Dienst"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Ausgewähltes Netzwerk (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) nicht verfügbar"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Beenden"</string>
+    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
+    <skip />
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Nur Audio"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"Akzeptieren"</string>
+    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
+    <skip />
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Zurückrufen"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Nachricht"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Deaktivieren Sie zunächst den Flugmodus, um einen Anruf zu tätigen."</string>
@@ -114,6 +126,9 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Konferenz verwalten"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Audio"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videoanruf"</string>
+    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"Zu Audioanruf wechseln"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Kamera wechseln"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Video pausieren"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Dienst"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Einrichtung"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Nicht festgelegt&gt;"</string>
@@ -145,16 +160,18 @@
     <string name="description_target_answer" msgid="7205604197797472471">"Antworten"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS senden"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Ablehnen"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Antworten mit Videoanruf"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Antworten mit Audioanruf"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"Zum <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> nach oben schieben"</string>
     <string name="description_direction_left" msgid="7129873384376533287">"Zum <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> nach links schieben"</string>
     <string name="description_direction_right" msgid="2122584234531957308">"Zum <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> nach rechts schieben"</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"Zum <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> nach unten schieben"</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Vibration"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Vibration"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Töne"</string>
     <string name="default_notification_description" msgid="78174796906240970">"Standardklingelton (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Klingelton"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Beim Klingeln vibrieren"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Wähltastentöne"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"Autovervollst. für Wähltasten"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Klingelton &amp; Vibration"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Telefonkonferenz verwalten"</string>

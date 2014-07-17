@@ -65,6 +65,10 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"बंद कर रहा है"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"कॉल में"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"मेरा नंबर <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g> है"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"वीडियो कनेक्ट हो रहा है"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"वीडियो कॉल"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"वीडियो का अनुरोध किया जा रहा है"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"वीडियो कॉल कनेक्ट नहीं किया जा सकता"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"डायल हो रहा है"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"छूटी कॉल"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"छूटी कॉल"</string>
@@ -73,6 +77,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"चल रही कॉल"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"होल्ड पर"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"इनकमिंग कॉल"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"इनकमिंग वीडियो कॉल"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"इनकमिंग वीडियो अनुरोध"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"नया ध्वनिमेल"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"नई ध्वनिमेल (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> डायल करें"</string>
@@ -80,6 +86,12 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"कोई सेवा नहीं"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"चयनित नेटवर्क (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) अनुपलब्ध"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"समाप्त करें"</string>
+    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
+    <skip />
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"ध्वनि"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"स्वीकार करें"</string>
+    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
+    <skip />
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"वापस कॉल करें"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"संदेश"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"कॉल करने के लिए, पहले विमान मोड बंद करें."</string>
@@ -114,6 +126,9 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"कॉन्फ़्रेंस प्रबंधित करें"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"ऑडियो"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"वीडियो कॉल"</string>
+    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"ऑडियो कॉल में बदलें"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"कैमरा स्विच करें"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"वीडियो रोकें"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"सेवा"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"सेटअप"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;सेट नहीं है&gt;"</string>
@@ -145,16 +160,18 @@
     <string name="description_target_answer" msgid="7205604197797472471">"उत्तर"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS भेजें"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"अस्वीकार करें"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"वीडियो कॉल के रूप में उत्तर दें"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"ऑडियो कॉल के रूप में उत्तर दें"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> के लिए ऊपर स्‍लाइड करें."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> के लिए बाएं स्‍लाइड करें."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> के लिए दाएं स्‍लाइड करें."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> के लिए नीचे स्‍लाइड करें."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"कंपन करें"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"कंपन करें"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"ध्वनि"</string>
     <string name="default_notification_description" msgid="78174796906240970">"डिफ़ॉल्ट ध्वनि (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"फ़ोन रिंगटोन"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"रिंग आने पर कंपन करें"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"कॉल करते समय ध्वनी सुने"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"डायलपैड स्वत: पूर्ण"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"रिंगटोन और कंपन"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"कॉन्फ़्रेंस कॉल प्रबंधित करें"</string>

@@ -65,6 +65,10 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"전화 끊는 중"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"통화 상태"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"내 전화번호는 <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>입니다."</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"동영상 연결 중"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"화상 통화"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"동영상 요청 중"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"화상 통화를 연결할 수 없음"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"전화 거는 중"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"부재중 전화"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"부재중 통화"</string>
@@ -73,6 +77,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"현재 통화"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"대기 중"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"수신 전화"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"수신 화상 통화"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"수신 동영상 요청"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"새 음성사서함"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"새 음성사서함(<xliff:g id="COUNT">%d</xliff:g>개)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>(으)로 전화걸기"</string>
@@ -80,6 +86,12 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"서비스 불가"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"선택한 네트워크(<xliff:g id="OPERATOR_NAME">%s</xliff:g>)를 사용할 수 없음"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"전화 끊기"</string>
+    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
+    <skip />
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"음성"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"수락"</string>
+    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
+    <skip />
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"통화하기"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"문자 메시지"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"전화를 걸려면 먼저 비행기 모드를 해제하세요."</string>
@@ -114,6 +126,9 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"다자간 통화 관리"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"오디오"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"화상 통화"</string>
+    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"음성 통화로 변경"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"카메라 전환"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"동영상 일지중지"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"서비스"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"설정"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;설정 안됨&gt;"</string>
@@ -145,16 +160,18 @@
     <string name="description_target_answer" msgid="7205604197797472471">"답변"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS 보내기"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"거부"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"화상 통화로 받기"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"음성 전화로 받기"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>하려면 위로 슬라이드합니다."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>하려면 왼쪽으로 슬라이드합니다."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>하려면 오른쪽으로 슬라이드합니다."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>하려면 아래로 슬라이드합니다."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"진동"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"진동"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"알림음"</string>
     <string name="default_notification_description" msgid="78174796906240970">"기본 알림음(<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"전화 벨소리"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"전화 수신 시 진동"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"다이얼패드 터치음"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"다이얼패드 자동완성"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"벨소리 및 진동"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"다자간 통화 관리"</string>

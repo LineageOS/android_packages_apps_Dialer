@@ -65,6 +65,10 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"กำลังวางสาย"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"กำลังใช้สาย"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"หมายเลขของฉันคือ <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"กำลังเชื่อมต่อวิดีโอ"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"แฮงเอาท์วิดีโอ"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"กำลังขอวิดีโอ"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"ไม่สามารถเชื่อมต่อแฮงเอาท์วิดีโอ"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"กำลังโทรออก"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"สายที่ไม่ได้รับ"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"สายที่ไม่ได้รับ"</string>
@@ -73,6 +77,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"โทรต่อเนื่อง"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"พักสาย"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"สายเรียกเข้า"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"สายเรียกเข้าแฮงเอาท์วิดีโอ"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"คำขอโทรเข้าเป็นวิดีโอ"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"ข้อความเสียงใหม่"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"ข้อความเสียงใหม่ (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"หมุนหมายเลข <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
@@ -80,6 +86,12 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"ไม่มีบริการ"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"เครือข่ายที่เลือกไว้ (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) ใช้งานไม่ได้"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"วางสาย"</string>
+    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
+    <skip />
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"เสียง"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"ยอมรับ"</string>
+    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
+    <skip />
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"โทรกลับ"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"ข้อความ"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"หากต้องการโทรออก ให้ปิดโหมดใช้งานบนเครื่องบินก่อน"</string>
@@ -114,6 +126,9 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"จัดการการประชุม"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"เสียง"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"แฮงเอาท์วิดีโอ"</string>
+    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"เปลี่ยนเป็นการโทรด้วยเสียง"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"สลับกล้องถ่ายรูป"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"หยุดวิดีโอชั่วคราว"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"บริการ"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"การตั้งค่า"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;ไม่ได้ตั้งค่า&gt;"</string>
@@ -145,16 +160,18 @@
     <string name="description_target_answer" msgid="7205604197797472471">"คำตอบ"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"ส่ง SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"ปฏิเสธ"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"รับสายเป็นแฮงเอาท์วิดีโอ"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"รับสายเป็นการโทรด้วยเสียง"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"เลื่อนขึ้นเพื่อ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>"</string>
     <string name="description_direction_left" msgid="7129873384376533287">"เลื่อนไปทางซ้ายเพื่อ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>"</string>
     <string name="description_direction_right" msgid="2122584234531957308">"เลื่อนไปทางขวาเพื่อ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>"</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"เลื่อนลงเพื่อ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>"</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"สั่น"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"สั่น"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"เสียง"</string>
     <string name="default_notification_description" msgid="78174796906240970">"เสียงเริ่มต้น (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"เสียงเรียกเข้าโทรศัพท์"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"สั่นเมื่อมีสายเข้า"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"เสียงแตะแป้นหมายเลข"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"ช่วยเติมอัตโนมัติในแป้นหมายเลข"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"เสียงเรียกเข้าและสั่น"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"จัดการการประชุมสาย"</string>
