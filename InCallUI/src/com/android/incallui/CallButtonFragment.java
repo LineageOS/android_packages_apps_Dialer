@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,7 +29,6 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnDismissListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
-import android.widget.ToggleButton;
 
 import com.android.services.telephony.common.AudioMode;
 
@@ -49,7 +47,6 @@ public class CallButtonFragment
     private ImageButton mMergeButton;
     private ImageButton mAddCallButton;
     private ImageButton mSwapButton;
-    private ImageButton mAuxiliaryActionButton;
 
     private PopupMenu mAudioModePopup;
     private boolean mAudioModePopupVisible;
@@ -136,8 +133,6 @@ public class CallButtonFragment
         mMergeButton.setOnClickListener(this);
         mSwapButton = (ImageButton) parent.findViewById(R.id.swapButton);
         mSwapButton.setOnClickListener(this);
-        mAuxiliaryActionButton = (ImageButton) parent.findViewById(R.id.auxiliaryActionButton);
-        mAuxiliaryActionButton.setOnClickListener(this);
 
         return parent;
     }
@@ -179,9 +174,6 @@ public class CallButtonFragment
                 break;
             case R.id.dialpadButton:
                 getPresenter().showDialpadClicked(!mShowDialpadButton.isSelected());
-                break;
-            case R.id.auxiliaryActionButton:
-                getPresenter().auxiliaryActionButtonClicked();
                 break;
             default:
                 Log.wtf(this, "onClick: unexpected");
@@ -512,15 +504,6 @@ public class CallButtonFragment
     public void displayManageConferencePanel(boolean value) {
         if (getActivity() != null && getActivity() instanceof InCallActivity) {
             ((InCallActivity) getActivity()).displayManageConferencePanel(value);
-        }
-    }
-
-    @Override
-    public void updateAuxiliaryActionButton(boolean show, String description, Drawable drawable) {
-        mAuxiliaryActionButton.setVisibility(show ? View.VISIBLE : View.GONE);
-        if (show) {
-            mAuxiliaryActionButton.setContentDescription(description);
-            mAuxiliaryActionButton.setImageDrawable(drawable);
         }
     }
 
