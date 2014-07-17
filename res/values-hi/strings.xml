@@ -87,11 +87,12 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"केवल छूटे हुए ही दिखाएं"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"केवल ध्‍वनि‍मेल दि‍खाएं"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"सभी कॉल दि‍खाएं"</string>
-    <string name="add_contact" msgid="8875804371377471164">"संपर्क जोड़ें"</string>
+    <string name="add_contact" msgid="4579643070374941999">"संपर्कों में जोड़ें"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"2-सेकंड का विराम जोड़ें"</string>
     <string name="add_wait" msgid="3360818652790319634">"प्रतीक्षा का समय बढ़ाएं"</string>
     <string name="menu_select_account" msgid="5576598753317289565">"खाता चुनें"</string>
-    <string name="call_settings" msgid="7666474782093693667">"सेटिंग"</string>
+    <!-- no translation found for dialer_settings_label (4305043242594150479) -->
+    <skip />
     <string name="menu_newContact" msgid="1209922412763274638">"नया संपर्क"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"सभी संपर्क"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"कॉल विवरण"</string>
@@ -102,18 +103,19 @@
     <string name="type_incoming" msgid="6502076603836088532">"इनकमिंग कॉल"</string>
     <string name="type_outgoing" msgid="343108709599392641">"आउटगोइंग कॉल"</string>
     <string name="type_missed" msgid="2720502601640509542">"छूटी कॉल"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"आवक वीडियो कॉल"</string>
+    <string name="type_outgoing_video" msgid="2858140021680755266">"जावक वीडियो कॉल"</string>
+    <string name="type_missed_video" msgid="954396897034220545">"छूटे वीडियो कॉल"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"ध्वनिमेल"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"इनकमिंग कॉल"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"ध्‍वनिमेल चलाएं"</string>
-    <string name="description_call_log_incoming_call" msgid="4485427487637250143">"इनकमिंग कॉल"</string>
-    <string name="description_call_log_outgoing_call" msgid="604831756853471658">"आउटगोइंग कॉल"</string>
-    <string name="description_call_log_missed_call" msgid="2242805209983708825">"छूटी कॉल"</string>
-    <string name="description_call_log_voicemail" msgid="4600798771975158948">"ध्वनिमेल"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> संपर्क देखें"</string>
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g> को कॉल करें"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> का संपर्क विवरण"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"नया ध्वनि मेल."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> कॉल."</string>
+    <!-- no translation found for description_video_call (2933838090743214204) -->
+    <skip />
     <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g> को पाठ संदेश भेजें"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"नहीं सुना गया ध्वनिमेल"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"बोलकर खोजें शुरु करें"</string>
@@ -162,15 +164,19 @@
     <string name="remove_contact" msgid="1080555335283662961">"निकालें"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"सभी संपर्क"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"वापस कॉल करें"</string>
+    <string name="call_log_action_video_call" msgid="3818588654537490948">"वीडियो कॉल"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"सुनें"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"विवरण"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"छूटे कॉल का विवरण: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"उत्तर दिए गए कॉल का विवरण: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"किए जाने वाले कॉल का विवरण: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"वापस कॉल करें: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> को वीडियो कॉल."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> की ध्वनिमेल सुनें"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> के कॉल विवरण"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"कॉल लॉग प्रविष्टि हटा दी गई."</string>
+    <string name="toast_caller_id_reported" msgid="1127087402649645557">"संपर्क की रिपोर्ट की गई."</string>
+    <string name="call_log_action_report" msgid="561229827189128879">"रिपोर्ट करें"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"आज"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"कल"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"पिछले सप्ताह"</string>
@@ -181,4 +187,9 @@
     <string name="voicemail_play_faster" msgid="3444751008615323006">"तेज़ी से चलाएं."</string>
     <string name="voicemail_play_slower" msgid="4544796503902818832">"धीरे चलाएं."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"प्लेबैक प्रारंभ करें या रोकें."</string>
+    <string name="list_delimeter" msgid="4571593167738725100">", "</string>
+    <!-- no translation found for call_settings_label (2934215322075055446) -->
+    <skip />
+    <!-- no translation found for call_settings_description (7955465849094897305) -->
+    <skip />
 </resources>
