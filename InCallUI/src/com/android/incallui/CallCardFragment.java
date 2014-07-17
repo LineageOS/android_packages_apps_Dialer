@@ -28,6 +28,7 @@ import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.telephony.DisconnectCause;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -43,7 +44,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.contacts.common.util.ViewUtil;
 import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.phone.common.animation.AnimUtils;
 
@@ -83,6 +83,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mSecondaryCallProviderInfo;
     private TextView mSecondaryCallProviderLabel;
     private ImageView mSecondaryCallProviderIcon;
+
+    // Dark number info bar
+    private TextView mInCallMessageLabel;
 
     private FloatingActionButtonController mFloatingActionButtonController;
     private View mFloatingActionButtonContainer;
@@ -160,6 +163,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mPrimaryCallCardContainer = view.findViewById(R.id.primary_call_info_container);
         mPrimaryCallInfo = view.findViewById(R.id.primary_call_banner);
         mCallButtonsContainer = view.findViewById(R.id.callButtonFragment);
+        mInCallMessageLabel = (TextView) view.findViewById(R.id.connectionServiceMessage);
 
         mFloatingActionButtonContainer = view.findViewById(
                 R.id.floating_end_call_action_button_container);
@@ -358,6 +362,27 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mCallStateLabel.setAlpha(0);
             mCallStateLabel.setVisibility(View.GONE);
         }
+    }
+
+
+    @Override
+    public void setCallDetails(android.telecomm.Call.Details details) {
+    }
+
+    @Override
+    public void setEmergencyCallbackNumber(String callbackNumber) {
+        if (TextUtils.isEmpty(callbackNumber)) {
+            mInCallMessageLabel.setVisibility(View.GONE);
+            return;
+        }
+
+        // TODO: The new Locale-specific methods don't seem to be working. Revisit this.
+        callbackNumber = PhoneNumberUtils.formatNumber(callbackNumber);
+
+        String text = getString(R.string.card_title_callback_number_emergency, callbackNumber);
+        mInCallMessageLabel.setText(text);
+
+        mInCallMessageLabel.setVisibility(View.VISIBLE);
     }
 
     private void showInternetCallLabel(boolean show) {
@@ -637,8 +662,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mFloatingActionButtonController.manuallyTranslate(
                         mFloatingActionButtonController.getTranslationXForAlignment(
                                 mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_RIGHT
-                                        : FloatingActionButtonController.ALIGN_MIDDLE),
-                        mFloatingActionButtonHideOffset);
+                                        : FloatingActionButtonController.ALIGN_MIDDLE
+                        ),
+                        mFloatingActionButtonHideOffset
+                );
                 mCallButtonsContainer.setAlpha(0);
                 mCallStateLabel.setAlpha(0);
                 mPrimaryName.setAlpha(0);

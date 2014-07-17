@@ -20,21 +20,25 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.telecomm.CallCapabilities;
 import android.telecomm.PhoneAccount;
 import android.telecomm.PhoneAccountMetadata;
+import android.telecomm.StatusHints;
+import android.telecomm.TelecommConstants;
 import android.telecomm.TelecommManager;
 import android.telephony.DisconnectCause;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
+import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
-import com.android.services.telephony.common.AudioMode;
 
 import com.google.common.base.Preconditions;
 
@@ -44,7 +48,8 @@ import com.google.common.base.Preconditions;
  * This class listens for changes to InCallState and passes it along to the fragment.
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
-        implements InCallStateListener, AudioModeListener, IncomingCallListener {
+        implements InCallStateListener, AudioModeListener, IncomingCallListener,
+        InCallDetailsListener {
 
     private static final String TAG = CallCardPresenter.class.getSimpleName();
     private static final long CALL_TIME_UPDATE_INTERVAL = 1000; // in milliseconds
@@ -98,6 +103,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // Register for call state changes last
         InCallPresenter.getInstance().addListener(this);
         InCallPresenter.getInstance().addIncomingCallListener(this);
+        InCallPresenter.getInstance().addDetailsListener(this);
     }
 
     @Override
@@ -107,6 +113,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // stop getting call state changes
         InCallPresenter.getInstance().removeListener(this);
         InCallPresenter.getInstance().removeIncomingCallListener(this);
+        InCallPresenter.getInstance().removeDetailsListener(this);
 
         AudioModeProvider.getInstance().removeListener(this);
 
@@ -197,6 +204,35 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         final boolean enableEndCallButton = Call.State.isConnected(callState) &&
                 callState != Call.State.INCOMING && mPrimary != null;
         getUi().setEndCallButtonEnabled(enableEndCallButton);
+    }
+
+    @Override
+    public void onDetailsChanged(android.telecomm.Call.Details details) {
+        getUi().setCallDetails(details);
+
+        String currentNumber = mPrimary.getHandle().getSchemeSpecificPart();
+        if (PhoneNumberUtils.isEmergencyNumber(currentNumber)) {
+            setEmergencyNumberIfSet(details);
+        }
+    }
+
+    private void setEmergencyNumberIfSet(android.telecomm.Call.Details details) {
+        String callbackNumber = null;
+
+        StatusHints statusHints = details.getStatusHints();
+        if (statusHints != null) {
+            Bundle extras = statusHints.getExtras();
+            if (extras != null) {
+                callbackNumber = extras.getString(
+                        TelecommConstants.EXTRA_EMERGENCY_CALL_BACK_NUMBER, null);
+            } else {
+                Log.d(this, "No extras; not updating callback number");
+            }
+        } else {
+            Log.d(this, "No status hints; not updating callback number");
+        }
+
+        getUi().setEmergencyCallbackNumber(callbackNumber);
     }
 
     @Override
@@ -533,6 +569,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimaryPhoneNumber(String phoneNumber);
         void setPrimaryLabel(String label);
         void setEndCallButtonEnabled(boolean enabled);
+        void setEmergencyCallbackNumber(String number);
+        void setCallDetails(android.telecomm.Call.Details details);
     }
 
     private TelecommManager getTelecommManager() {
