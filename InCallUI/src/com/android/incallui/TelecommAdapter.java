@@ -63,9 +63,9 @@ final class TelecommAdapter implements InCallPhoneListener {
         return CallList.getInstance().getCallById(callId).getTelecommCall();
     }
 
-    void answerCall(String callId) {
+    void answerCall(String callId, int videoState) {
         if (mPhone != null) {
-            getTelecommCallById(callId).answer();
+            getTelecommCallById(callId).answer(videoState);
         } else {
             Log.e(this, "error answerCall, mPhone is null");
         }
