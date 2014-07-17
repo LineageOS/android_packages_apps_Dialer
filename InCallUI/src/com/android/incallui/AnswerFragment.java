@@ -256,9 +256,9 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
      */
     public void showCustomMessageDialog() {
         // Create an alert dialog containing an EditText
-        final EditText et = new EditText(getActivity());
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setCancelable(
-                true).setView(et)
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final EditText et = new EditText(builder.getContext());
+        builder.setCancelable(true).setView(et)
                 .setPositiveButton(R.string.custom_message_send,
                         new DialogInterface.OnClickListener() {
                     @Override
