@@ -192,6 +192,7 @@ public class InCallActivity extends Activity {
     private boolean hasPendingErrorDialog() {
         return mDialog != null;
     }
+
     /**
      * Dismisses the in-call screen.
      *
@@ -245,6 +246,10 @@ public class InCallActivity extends Activity {
         // BACK is also used to exit out of any "special modes" of the
         // in-call UI:
 
+        if (!mCallCardFragment.isVisible()) {
+            return;
+        }
+
         if (mDialpadFragment.isVisible()) {
             mCallButtonFragment.displayDialpad(false /* show */, true /* animate */);
             return;
@@ -256,7 +261,7 @@ public class InCallActivity extends Activity {
         // Always disable the Back key while an incoming call is ringing
         final Call call = CallList.getInstance().getIncomingCall();
         if (call != null) {
-            Log.d(this, "Consume Back press for an inconing call");
+            Log.d(this, "Consume Back press for an incoming call");
             return;
         }
 
@@ -385,6 +390,13 @@ public class InCallActivity extends Activity {
             if (intent.getBooleanExtra(NEW_OUTGOING_CALL, false)) {
                 intent.removeExtra(NEW_OUTGOING_CALL);
                 mCallCardFragment.animateForNewOutgoingCall();
+            }
+
+            if (CallList.getInstance().getWaitingForAccountCall() != null) {
+                mCallCardFragment.setVisible(false);
+                SelectPhoneAccountDialogFragment.show(getFragmentManager());
+            } else {
+                mCallCardFragment.setVisible(true);
             }
 
             return;
