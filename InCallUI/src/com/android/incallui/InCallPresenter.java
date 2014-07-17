@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.telecomm.CallCapabilities;
@@ -77,6 +78,16 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             onPostDialCharWait(
                     CallList.getInstance().getCallByTelecommCall(call).getId(),
                     remainingPostDialSequence);
+        }
+
+        @Override
+        public void onStartActivity(android.telecomm.Call call, PendingIntent intent) {
+            Log.i(this, "onStartActivity, intent: " + intent);
+            try {
+                intent.send();
+            } catch (PendingIntent.CanceledException e) {
+                Log.e(this, "onStartActivity, exception", e);
+            }
         }
     };
 
