@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.telecomm.CallCapabilities;
 import android.telecomm.Phone;
 import android.telecomm.PhoneAccount;
+import android.telecomm.VideoCallProfile;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
@@ -437,7 +438,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     /**
      * Answers any incoming call.
      */
-    public void answerIncomingCall(Context context) {
+    public void answerIncomingCall(Context context, int videoState) {
         // By the time we receive this intent, we could be shut down and call list
         // could be null.  Bail in those cases.
         if (mCallList == null) {
@@ -447,8 +448,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         Call call = mCallList.getIncomingCall();
         if (call != null) {
-            TelecommAdapter.getInstance().answerCall(call.getId());
-            showInCall(false, false /* newOutgoingCall */);
+            TelecommAdapter.getInstance().answerCall(call.getId(), videoState);
+            showInCall(false, false/* newOutgoingCall */);
         }
     }
 
@@ -550,7 +551,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         // (1) Attempt to answer a call
         if (incomingCall != null) {
-            TelecommAdapter.getInstance().answerCall(incomingCall.getId());
+            TelecommAdapter.getInstance().answerCall(
+                    incomingCall.getId(), VideoCallProfile.VIDEO_STATE_AUDIO_ONLY);
             return true;
         }
 

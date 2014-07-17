@@ -322,8 +322,8 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     }
 
     @Override
-    public void onAnswer() {
-        getPresenter().onAnswer();
+    public void onAnswer(int videoState) {
+        getPresenter().onAnswer(videoState);
     }
 
     @Override

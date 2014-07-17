@@ -21,6 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.telecomm.VideoCallProfile;
 
 /**
  * Top-level Application class for the InCall app.
@@ -57,7 +58,6 @@ public class InCallApp extends Application {
      * Accepts broadcast Intents which will be prepared by {@link StatusBarNotifier} and thus
      * sent from framework's notification mechanism (which is outside Phone context).
      * This should be visible from outside, but shouldn't be in "exported" state.
-     *
      */
     public static class NotificationBroadcastReceiver extends BroadcastReceiver {
         @Override
@@ -66,13 +66,14 @@ public class InCallApp extends Application {
             Log.i(this, "Broadcast from Notification: " + action);
 
             // TODO: Commands of this nature should exist in the CallList.
-            if (action.equals(ACTION_DECLINE_INCOMING_CALL)) {
-                InCallPresenter.getInstance().declineIncomingCall(context);
+            if (action.equals(ACTION_ANSWER_VIDEO_INCOMING_CALL)) {
+                InCallPresenter.getInstance().answerIncomingCall(
+                        context, VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL);
             } else if (action.equals(ACTION_ANSWER_VOICE_INCOMING_CALL)) {
-                InCallPresenter.getInstance().answerIncomingCall(context);
-            } else if (action.equals(ACTION_ANSWER_VIDEO_INCOMING_CALL)) {
-                //TODO: Answer as a video call here instead of an audio call.
-                InCallPresenter.getInstance().answerIncomingCall(context);
+                InCallPresenter.getInstance().answerIncomingCall(
+                        context, VideoCallProfile.VIDEO_STATE_AUDIO_ONLY);
+            } else if (action.equals(ACTION_DECLINE_INCOMING_CALL)) {
+                InCallPresenter.getInstance().declineIncomingCall(context);
             } else if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
                 InCallPresenter.getInstance().hangUpOngoingCall(context);
             }

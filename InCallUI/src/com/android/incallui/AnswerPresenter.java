@@ -126,13 +126,13 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         }
     }
 
-    public void onAnswer() {
+    public void onAnswer(int videoState) {
         if (mCallId == null) {
             return;
         }
 
         Log.d(this, "onAnswer " + mCallId);
-        TelecommAdapter.getInstance().answerCall(mCall.getId());
+        TelecommAdapter.getInstance().answerCall(mCall.getId(), videoState);
     }
 
     /**
