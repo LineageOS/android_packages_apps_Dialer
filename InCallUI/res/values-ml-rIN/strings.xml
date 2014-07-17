@@ -65,6 +65,12 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"ഹാംഗിംഗ് അപ്പ്"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"കോളിലാണ്"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"എന്റെ നമ്പർ <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g> ആണ്"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"വീഡിയോ കണക്‌റ്റുചെയ്യുന്നു"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"വീഡിയോ കോള്‍"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"വീഡിയോ അഭ്യർത്ഥിക്കുന്നു"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"വീഡിയോ കോൾ കണക്‌റ്റ് ചെയ്യാനാകില്ല"</string>
+    <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
+    <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"ഡയൽ ചെയ്യുന്നു"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"മിസ്‌ഡ് കോൾ"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"മിസ്‌ഡ് കോളുകൾ"</string>
@@ -73,6 +79,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"കോൾ സജീവമാണ്"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"ഹോള്‍ഡിലാണ്"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"ഇന്‍കമിംഗ് കോള്‍"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"ഇൻകമിംഗ് വീഡിയോ കോൾ"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"ഇൻകമിംഗ് വീഡിയോ അഭ്യർത്ഥന"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"പുതിയ വോയ്‌സ്‌മെയിൽ"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"പുതിയ വോയ്‌സ്‌മെയിൽ (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> ഡയൽ ചെയ്യുക"</string>
@@ -80,6 +88,12 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"സേവനമില്ല"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"തിരഞ്ഞെടുത്ത നെറ്റ്‌വർക്ക് (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) ലഭ്യമല്ല"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"ഹാംഗ് അപ്പ് ചെയ്യുക"</string>
+    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
+    <skip />
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"വോയ്‌സ്"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"അംഗീകരിക്കുക"</string>
+    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
+    <skip />
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"കോൾബാക്ക്"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"സന്ദേശം"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"ഒരു കോൾ വിളിക്കാൻ, ആദ്യം വിമാന മോഡ് ഓഫുചെയ്യുക."</string>
@@ -114,6 +128,9 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"കോൺഫറൻസ് നിയന്ത്രിക്കുക"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"ഓഡിയോ"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"വീഡിയോ കോൾ"</string>
+    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"ഓഡിയോ കോളിലേക്ക് മാറ്റുക"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"ക്യാമറയിലേക്ക് മാറുക"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"വീഡിയോ താൽക്കലികമായി നിർത്തുക"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"സേവനം"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"സജ്ജീകരിക്കുക"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;സജ്ജീകരിച്ചിട്ടില്ല&gt;"</string>
@@ -145,20 +162,24 @@
     <string name="description_target_answer" msgid="7205604197797472471">"മറുപടി നൽകുക"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS അയയ്ക്കുക"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"നിരസിക്കുക"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"വീഡിയോ കോളായി മറുപടി നൽകുക"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"ഓഡിയോ കോളായി മറുപടി നൽകുക"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> എന്നതിനായി മുകളിലേയ്‌ക്ക് സ്ലൈഡുചെയ്യുക."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> എന്നതിനായി ഇടത്തേയ്‌ക്ക് സ്ലൈഡുചെയ്യുക."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> എന്നതിനായി വലത്തേയ്‌ക്ക് സ്ലൈഡുചെയ്യുക."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> എന്നതിനായി താഴേക്ക് സ്ലൈഡുചെയ്യുക."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"വൈബ്രേറ്റുചെയ്യുക"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"വൈബ്രേറ്റുചെയ്യുക"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"ശബ്‌ദം"</string>
     <string name="default_notification_description" msgid="78174796906240970">"സ്ഥിര ശബ്‌ദം (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"ഫോൺ റിംഗ്ടോൺ"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"റിംഗുചെയ്യുമ്പോൾ വൈബ്രേറ്റുചെയ്യുക"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"ഡയൽ പാഡ് ടച്ച് ടോണുകൾ"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"ഡയൽ പാഡ് യാന്ത്രികപൂർത്തീകരണം"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"റിംഗ്ടോണും വൈബ്രേറ്റുചെയ്യലും"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"കോൺഫറൻസ് കോൾ നിയന്ത്രിക്കുക"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"അടിയന്തര നമ്പർ"</string>
+    <!-- no translation found for select_account_dialog_title (5730339500156684204) -->
+    <skip />
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>

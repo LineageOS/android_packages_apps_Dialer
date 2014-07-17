@@ -69,6 +69,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"የቪዲዮ ጥሪ"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"ቪዲዮ በመጠየቅ ላይ"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"የቪዲዮ ጥሪን ማገናኘት አይቻልም"</string>
+    <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
+    <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"በመደወል ላይ"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"ያመለጠጥሪ"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"ያመለጡ ጥሪዎች"</string>
@@ -86,8 +88,7 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"ምንም አገልግሎት የለም"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"የተመረጠ አውታረመረብ(<xliff:g id="OPERATOR_NAME">%s</xliff:g>) የለም"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"ዝጋ"</string>
-    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
-    <skip />
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"ቪዲዮ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"ድምፅ"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"ተቀበል"</string>
     <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
@@ -176,6 +177,8 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"የደወል ቅላጼ እና ንዘረት"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"የስብሰባስልክ ጥሪ አደራጅ"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"የአደጋ ጊዜ ቁጥር"</string>
+    <!-- no translation found for select_account_dialog_title (5730339500156684204) -->
+    <skip />
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
