@@ -126,9 +126,6 @@
     <dimen name="call_log_day_group_padding_top">15dp</dimen>
     <dimen name="call_log_day_group_padding_bottom">9dp</dimen>
 
-    <!-- Size of icon for contacts number shortcuts -->
-    <dimen name="search_shortcut_radius">40dp</dimen>
-
     <!-- Length of dialpad's shadows in dialer. -->
     <dimen name="shadow_length">10dp</dimen>
 
