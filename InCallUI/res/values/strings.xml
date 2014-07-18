@@ -303,9 +303,9 @@
     <!-- Text for the onscreen "Video call" button used to change a voice call
          to a video call. [CHAR LIMIT=10] -->
     <string name="onscreenVideoCallText">Video call</string>
-    <!-- Text for the onscreen "Change to audio" button. When clicked, this downgrades a video call
-         to an audio call. -->
-    <string name="onscreenChangeToAudioText">Change to audio call</string>
+    <!-- Text for the onscreen "Change to voice" button. When clicked, this downgrades a video call
+         to a voice call. -->
+    <string name="onscreenChangeToVoiceText">Change to voice call</string>
     <!-- Text for the onscreen "Switch camera" button. When clicked, this switches the user's camera
          for video calling between the front-facing camera and the back-facing camera. -->
     <string name="onscreenSwitchCameraText">Switch camera</string>

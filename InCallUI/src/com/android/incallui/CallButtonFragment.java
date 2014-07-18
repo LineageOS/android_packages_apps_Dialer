@@ -40,13 +40,18 @@ public class CallButtonFragment
         implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener, OnDismissListener,
         View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
-    private ImageButton mMuteButton;
     private ImageButton mAudioButton;
-    private ImageButton mHoldButton;
+    private ImageButton mChangeToVoiceButton;
+    private ImageButton mMuteButton;
     private ImageButton mShowDialpadButton;
-    private ImageButton mMergeButton;
-    private ImageButton mAddCallButton;
+    private ImageButton mHoldButton;
     private ImageButton mSwapButton;
+    private ImageButton mChangeToVideoButton;
+    private ImageButton mSwitchCameraButton;
+    private ImageButton mAddCallButton;
+    private ImageButton mMergeButton;
+    private ImageButton mPauseVideoButton;
+    private ImageButton mOverflowButton;
 
     private PopupMenu mAudioModePopup;
     private boolean mAudioModePopupVisible;
@@ -125,14 +130,24 @@ public class CallButtonFragment
             }
         });
 
+        mChangeToVoiceButton = (ImageButton) parent.findViewById(R.id.changeToVoiceButton);
+        mChangeToVoiceButton. setOnClickListener(this);
         mShowDialpadButton = (ImageButton) parent.findViewById(R.id.dialpadButton);
         mShowDialpadButton.setOnClickListener(this);
+        mSwapButton = (ImageButton) parent.findViewById(R.id.swapButton);
+        mSwapButton.setOnClickListener(this);
+        mChangeToVideoButton = (ImageButton) parent.findViewById(R.id.changeToVideoButton);
+        mChangeToVideoButton.setOnClickListener(this);
+        mSwitchCameraButton = (ImageButton) parent.findViewById(R.id.switchCameraButton);
+        mSwitchCameraButton.setOnClickListener(this);
         mAddCallButton = (ImageButton) parent.findViewById(R.id.addButton);
         mAddCallButton.setOnClickListener(this);
         mMergeButton = (ImageButton) parent.findViewById(R.id.mergeButton);
         mMergeButton.setOnClickListener(this);
-        mSwapButton = (ImageButton) parent.findViewById(R.id.swapButton);
-        mSwapButton.setOnClickListener(this);
+        mPauseVideoButton = (ImageButton) parent.findViewById(R.id.pauseVideoButton);
+        mPauseVideoButton.setOnClickListener(this);
+        mOverflowButton = (ImageButton) parent.findViewById(R.id.overflowButton);
+        mOverflowButton.setOnClickListener(this);
 
         return parent;
     }
@@ -175,6 +190,13 @@ public class CallButtonFragment
             case R.id.dialpadButton:
                 getPresenter().showDialpadClicked(!mShowDialpadButton.isSelected());
                 break;
+            case R.id.changeToVoiceButton:
+            case R.id.changeToVideoButton:
+            case R.id.switchCameraButton:
+            case R.id.pauseVideoButton:
+            case R.id.overflowButton:
+                // TODO: Implement these button behaviors.
+                break;
             default:
                 Log.wtf(this, "onClick: unexpected");
                 break;
@@ -189,14 +211,18 @@ public class CallButtonFragment
             view.setVisibility(View.VISIBLE);
         }
 
-        // The smaller buttons laid out horizontally just below the end-call button.
-        mMuteButton.setEnabled(isEnabled);
         mAudioButton.setEnabled(isEnabled);
-        mHoldButton.setEnabled(isEnabled);
+        mChangeToVoiceButton.setEnabled(isEnabled);
+        mMuteButton.setEnabled(isEnabled);
         mShowDialpadButton.setEnabled(isEnabled);
-        mMergeButton.setEnabled(isEnabled);
-        mAddCallButton.setEnabled(isEnabled);
+        mHoldButton.setEnabled(isEnabled);
         mSwapButton.setEnabled(isEnabled);
+        mChangeToVideoButton.setEnabled(isEnabled);
+        mSwitchCameraButton.setEnabled(isEnabled);
+        mAddCallButton.setEnabled(isEnabled);
+        mMergeButton.setEnabled(isEnabled);
+        mPauseVideoButton.setEnabled(isEnabled);
+        mOverflowButton.setEnabled(isEnabled);
     }
 
     @Override
@@ -205,8 +231,23 @@ public class CallButtonFragment
     }
 
     @Override
+    public void showAudioButton(boolean show) {
+        mAudioButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showChangeToVoiceButton(boolean show) {
+        mChangeToVoiceButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
     public void enableMute(boolean enabled) {
         mMuteButton.setEnabled(enabled);
+    }
+
+    @Override
+    public void showDialpadButton(boolean show) {
+        mShowDialpadButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -215,7 +256,7 @@ public class CallButtonFragment
     }
 
     @Override
-    public void showHold(boolean show) {
+    public void showHoldButton(boolean show) {
         mHoldButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
@@ -225,23 +266,43 @@ public class CallButtonFragment
     }
 
     @Override
-    public void showMerge(boolean show) {
-        mMergeButton.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void showSwap(boolean show) {
+    public void showSwapButton(boolean show) {
         mSwapButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public void showAddCall(boolean show) {
+    public void showChangeToVideoButton(boolean show) {
+        mChangeToVideoButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showSwitchCameraButton(boolean show) {
+        mSwitchCameraButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showAddCallButton(boolean show) {
         mAddCallButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void enableAddCall(boolean enabled) {
         mAddCallButton.setEnabled(enabled);
+    }
+
+    @Override
+    public void showMergeButton(boolean show) {
+        mMergeButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showPauseVideoButton(boolean show) {
+        mPauseVideoButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showOverflowButton(boolean show) {
+        mOverflowButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
