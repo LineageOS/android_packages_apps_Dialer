@@ -575,21 +575,6 @@ public class CallLogFragment extends ListFragment
                     viewHolder.actionsView.setVisibility(View.VISIBLE);
                 }
 
-                // If the day group header is shown, subtract the header from the outline of the
-                // view. The outline is used for generating the shadow of the view, but we only want
-                // a shadow on the call log list item and not the header. This is a slight hack, but
-                // the hierarchy of the call log list items makes it hard to achieve the desired
-                // shadow behavior otherwise.
-                if (viewHolder.dayGroupHeader.isShown()) {
-                    Outline outline = new Outline();
-                    outline.setRect(
-                            0 /* left */,
-                            viewHolder.dayGroupHeader.getHeight() /* top */,
-                            view.getWidth() /* right */,
-                            view.getHeight() /* bottom */);
-                    view.setOutline(outline);
-                }
-
                 // Set up the fade effect for the action buttons.
                 if (isExpand) {
                     // Start the fade in after the expansion has partly completed, otherwise it
@@ -620,7 +605,9 @@ public class CallLogFragment extends ListFragment
 
                         // For each value from 0 to 1, animate the various parts of the layout.
                         view.getLayoutParams().height = (int) (value * distance + baseHeight);
-                        view.setTranslationZ(mExpandedItemTranslationZ * value);
+                        float z = mExpandedItemTranslationZ * value;
+                        viewHolder.callLogEntryView.setTranslationZ(z);
+                        view.setTranslationZ(z); // WAR
                         view.requestLayout();
                     }
                 });

@@ -894,7 +894,8 @@ public class CallLogAdapter extends GroupingListAdapter
             views.actionsView.setVisibility(View.VISIBLE);
             views.actionsView.setAlpha(1.0f);
             views.callLogEntryView.setBackgroundColor(mExpandedBackgroundColor);
-            callLogItem.setTranslationZ(mExpandedTranslationZ);
+            views.callLogEntryView.setTranslationZ(mExpandedTranslationZ);
+            callLogItem.setTranslationZ(mExpandedTranslationZ); // WAR
 
             // Attempt to give accessibility focus to one of the action buttons.
             // This ensures that a user realizes the expansion occurred.
@@ -913,7 +914,8 @@ public class CallLogAdapter extends GroupingListAdapter
             }
 
             views.callLogEntryView.setBackgroundColor(mCallLogBackgroundColor);
-            callLogItem.setTranslationZ(0);
+            views.callLogEntryView.setTranslationZ(0);
+            callLogItem.setTranslationZ(0); // WAR
         }
     }
 
