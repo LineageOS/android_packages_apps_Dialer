@@ -210,9 +210,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     public void onDetailsChanged(android.telecomm.Call.Details details) {
         getUi().setCallDetails(details);
 
-        String currentNumber = mPrimary.getHandle().getSchemeSpecificPart();
-        if (PhoneNumberUtils.isEmergencyNumber(currentNumber)) {
-            setEmergencyNumberIfSet(details);
+        if (mPrimary != null) {
+            String currentNumber = mPrimary.getHandle().getSchemeSpecificPart();
+            if (PhoneNumberUtils.isEmergencyNumber(currentNumber)) {
+                setEmergencyNumberIfSet(details);
+            }
         }
     }
 
