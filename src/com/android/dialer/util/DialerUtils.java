@@ -15,6 +15,7 @@
  */
 package com.android.dialer.util;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -64,7 +65,11 @@ public class DialerUtils {
      */
     public static void startActivityWithErrorToast(Context context, Intent intent, int msgId) {
         try {
-          context.startActivity(intent);
+            if (Intent.ACTION_CALL.equals(intent.getAction())) {
+                ((Activity) context).startActivityForResult(intent, 0);
+            } else {
+                context.startActivity(intent);
+            }
         } catch (ActivityNotFoundException e) {
             Toast.makeText(context, msgId, Toast.LENGTH_SHORT).show();
         }
