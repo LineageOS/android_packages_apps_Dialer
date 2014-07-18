@@ -83,10 +83,10 @@
             android:contentDescription="@string/onscreenAudioText" />
 
         <!-- "Change to audio call" for video calls. -->
-        <ImageButton android:id="@+id/changeToAudioButton"
+        <ImageButton android:id="@+id/changeToVoiceButton"
             style="@style/InCallButton"
-            android:background="@drawable/btn_change_to_audio"
-            android:contentDescription="@string/onscreenChangeToAudioText"
+            android:background="@drawable/btn_change_to_voice"
+            android:contentDescription="@string/onscreenChangeToVoiceText"
             android:visibility="gone" />
 
         <!-- MIDDLE LEFT SLOT ================================================================== -->
