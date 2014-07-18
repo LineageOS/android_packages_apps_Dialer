@@ -87,8 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Visa endast missade samtal"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Visa bara röstmeddelanden"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Visa alla samtal"</string>
-    <!-- no translation found for add_contact (4579643070374941999) -->
-    <skip />
+    <string name="add_contact" msgid="4579643070374941999">"Lägg till i Kontakter"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Lägg till en paus på 2 sek."</string>
     <string name="add_wait" msgid="3360818652790319634">"Lägg till väntetid"</string>
     <string name="menu_select_account" msgid="5576598753317289565">"Välj konto"</string>
@@ -176,10 +175,8 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Lyssna på ett röstmeddelande från <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Samtalsinformation för <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Posten i samtalsloggen har tagits bort."</string>
-    <!-- no translation found for toast_caller_id_reported (1127087402649645557) -->
-    <skip />
-    <!-- no translation found for call_log_action_report (561229827189128879) -->
-    <skip />
+    <string name="toast_caller_id_reported" msgid="1127087402649645557">"Kontakten har rapporterats."</string>
+    <string name="call_log_action_report" msgid="561229827189128879">"RAPPORTERA"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"I dag"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"I går"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Förra veckan"</string>
