@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import android.content.Context;
 import android.telecomm.CallCapabilities;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -27,7 +26,6 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.services.telephony.common.AudioMode;
 
-import android.app.Fragment;
 import android.telephony.PhoneNumberUtils;
 
 /**
@@ -229,6 +227,60 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
+        if (call.isVideoCall()) {
+            updateVideoCallButtons(call);
+        } else {
+            updateVoiceCallButtons(call);
+        }
+
+        ui.enableMute(call.can(CallCapabilities.MUTE));
+
+        // Finally, update the "extra button row": It's displayed above the "End" button, but only
+        // if necessary. It's never displayed while the dialpad is visible since it would overlap.
+        //
+        // The row contains two buttons:
+        //     - "Manage conference" (used only on GSM devices)
+        //     - "Merge" button (used only on CDMA devices)
+        final boolean canMerge = call.can(CallCapabilities.MERGE_CALLS);
+        final boolean isGenericConference = call.can(CallCapabilities.GENERIC_CONFERENCE);
+        mShowGenericMerge = isGenericConference && canMerge;
+        mShowManageConference = (call.isConferenceCall() && !isGenericConference);
+        updateExtraButtonRow();
+    }
+
+    private void updateVideoCallButtons(Call call) {
+        Log.v(this, "Showing buttons for video call.");
+        final CallButtonUi ui = getUi();
+
+        // Hide all voice-call-related buttons.
+        ui.showAudioButton(false);
+        ui.showDialpadButton(false);
+        ui.showHoldButton(false);
+        ui.showSwapButton(false);
+        ui.showChangeToVideoButton(false);
+        ui.showAddCallButton(false);
+        ui.showMergeButton(false);
+        ui.showOverflowButton(false);
+
+        // Show all video-call-related buttons.
+        ui.showChangeToVoiceButton(true);
+        ui.showSwitchCameraButton(true);
+        ui.showPauseVideoButton(true);
+    }
+
+    private void updateVoiceCallButtons(Call call) {
+        Log.v(this, "Showing buttons for voice call.");
+        final CallButtonUi ui = getUi();
+
+        // Hide all video-call-related buttons.
+        ui.showChangeToVoiceButton(false);
+        ui.showSwitchCameraButton(false);
+        ui.showPauseVideoButton(false);
+
+        // Show all voice-call-related buttons.
+        ui.showAudioButton(true);
+        ui.showDialpadButton(true);
+
         Log.v(this, "Show hold ", call.can(CallCapabilities.SUPPORT_HOLD));
         Log.v(this, "Enable hold", call.can(CallCapabilities.HOLD));
         Log.v(this, "Show merge ", call.can(CallCapabilities.MERGE_CALLS));
@@ -242,37 +294,35 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean canHold = call.can(CallCapabilities.HOLD);
         final boolean canSwap = call.can(CallCapabilities.SWAP_CALLS);
         final boolean supportHold = call.can(CallCapabilities.SUPPORT_HOLD);
+        boolean canVideoCall = call.can(CallCapabilities.SUPPORTS_VT_LOCAL)
+                && call.can(CallCapabilities.SUPPORTS_VT_REMOTE);
 
         final boolean showMerge = !isGenericConference && canMerge;
 
-        // Show either MERGE or ADD button, but not both.
-        ui.showMerge(showMerge);
-        ui.showAddCall(!showMerge);
-        ui.enableAddCall(!showMerge && canAdd);
+        ui.showChangeToVideoButton(canVideoCall);
 
-        // Show either HOLD or SWAP button, but not both.
-        // If neither HOLD or SWAP is available:
-        //     (1) If the device normally can hold/swap, show HOLD in a disabled state.
-        //     (2) If the device doesn't have the concept of hold/swap, remove the button.
-        ui.showHold(canHold || (!canSwap && supportHold));
-        ui.showSwap(!canHold && canSwap);
-        ui.setHold(call.getState() == Call.State.ONHOLD);
-        ui.enableHold(canHold);
+        if (canVideoCall && (canHold || canSwap || supportHold)) {
+            ui.showHoldButton(false);
+            ui.showSwapButton(false);
+            ui.showAddCallButton(false);
+            ui.showMergeButton(false);
 
-        ui.enableMute(call.can(CallCapabilities.MUTE));
+            ui.showOverflowButton(true);
+        } else {
+            // Show either MERGE or ADD button, but not both.
+            ui.showMergeButton(showMerge);
+            ui.showAddCallButton(!showMerge);
+            ui.enableAddCall(!showMerge && canAdd);
 
-        // Finally, update the "extra button row": It's displayed above the
-        // "End" button, but only if necessary.  Also, it's never displayed
-        // while the dialpad is visible (since it would overlap.)
-        //
-        // The row contains two buttons:
-        //
-        // - "Manage conference" (used only on GSM devices)
-        // - "Merge" button (used only on CDMA devices)
-
-        mShowGenericMerge = isGenericConference && canMerge;
-        mShowManageConference = (call.isConferenceCall() && !isGenericConference);
-        updateExtraButtonRow();
+            // Show either HOLD or SWAP button, but not both.
+            // If neither HOLD or SWAP is available:
+            //     (1) If the device normally can hold/swap, show HOLD in a disabled state.
+            //     (2) If the device doesn't have the concept of hold/swap, remove the button.
+            ui.showHoldButton(canHold || (!canSwap && supportHold));
+            ui.showSwapButton(!canHold && canSwap);
+            ui.setHold(call.getState() == Call.State.ONHOLD);
+            ui.enableHold(canHold);
+        }
     }
 
     private void updateExtraButtonRow() {
@@ -309,13 +359,20 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void setEnabled(boolean on);
         void setMute(boolean on);
         void enableMute(boolean enabled);
+        void showAudioButton(boolean show);
+        void showChangeToVoiceButton(boolean show);
+        void showDialpadButton(boolean show);
         void setHold(boolean on);
-        void showHold(boolean show);
+        void showHoldButton(boolean show);
         void enableHold(boolean enabled);
-        void showMerge(boolean show);
-        void showSwap(boolean show);
-        void showAddCall(boolean show);
+        void showSwapButton(boolean show);
+        void showChangeToVideoButton(boolean show);
+        void showSwitchCameraButton(boolean show);
+        void showAddCallButton(boolean show);
         void enableAddCall(boolean enabled);
+        void showMergeButton(boolean show);
+        void showPauseVideoButton(boolean show);
+        void showOverflowButton(boolean show);
         void displayDialpad(boolean on, boolean animate);
         boolean isDialpadVisible();
         void setAudio(int mode);
