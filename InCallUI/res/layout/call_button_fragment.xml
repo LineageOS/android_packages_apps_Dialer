@@ -50,10 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <!-- Row 2: The main batch of in-call buttons:
-         Dialpad / Audio mode / Mute / Hold / Add call
-         Visible in all states except while an incoming call is
-         ringing. -->
+    <!-- Row 2: The main batch of in-call buttons. -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -63,44 +60,59 @@
         android:background="@color/button_background_color"
         android:gravity="bottom|center_horizontal">
 
-        <!-- This row has either 4 or 5 buttons. This may depend on whether the device supports
-             "Hold" (i.e. 4 buttons on CDMA devices, 5 buttons on GSM devices.) or whether it is in
-             a video call.
+        <!-- This row only ever shows either 4 or 5 buttons. This may depend on whether the device
+             supports "Hold" (i.e. 4 buttons on CDMA devices, 5 buttons on GSM devices.) or whether
+             it is in a video call.
 
              There are a couple of *pairs* of buttons that share a single "slot", namely Hold/Swap
              and Add/Merge.  For these, the code in InCallTouchUi is responsible for making sure
-             that at any point exactly one of the pair is VISIBLE and the other is GONE. -->
+             that at any point exactly one of the pair is VISIBLE and the other is GONE.
 
-        <!-- "Audio mode" -->
-        <!-- This is a multi-mode button that can behave either like a simple "compound button" with
-             two states *or* like an action button that brings up a popup menu; see
-             btn_compound_audio.xml and InCallTouchUi.updateAudioButton() for the full details. -->
+             If there are more than 5 buttons eligible to be shown, the presenter is responsible for
+             collapsing those options into an overflow menu, which appears as one of the buttons
+             in the row instead. -->
+
+        <!-- FAR LEFT SLOT ===================================================================== -->
+
+        <!-- "Audio mode". this is a multi-mode button that can behave either like a simple
+             "compound button" with two states *or* like an action button that brings up a popup
+             menu; see btn_compound_audio.xml and CallButtonFragment.updateAudioButtons(). -->
         <ImageButton android:id="@+id/audioButton"
-            style="@style/InCallButton"
+            style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_audio"
             android:contentDescription="@string/onscreenAudioText" />
 
-        <!-- "Mute" -->
-        <!-- This is a "compound button": it has checked and unchecked states. -->
-        <ImageButton android:id="@+id/muteButton"
+        <!-- "Change to audio call" for video calls. -->
+        <ImageButton android:id="@+id/changeToAudioButton"
             style="@style/InCallButton"
+            android:background="@drawable/btn_change_to_audio"
+            android:contentDescription="@string/onscreenChangeToAudioText"
+            android:visibility="gone" />
+
+        <!-- MIDDLE LEFT SLOT ================================================================== -->
+
+        <!-- "Mute" -->
+        <ImageButton android:id="@+id/muteButton"
+            style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_mute"
             android:contentDescription="@string/onscreenMuteText" />
 
+        <!-- CENTER SLOT ======================================================================= -->
+
         <!-- "Dialpad" -->
-        <!-- This is a "compound button": it has checked and unchecked states. -->
         <ImageButton android:id="@+id/dialpadButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_dialpad"
             android:contentDescription="@string/onscreenShowDialpadText" />
 
+        <!-- MIDDLE RIGHT SLOT ================================================================= -->
+
         <!-- This slot is either "Hold" or "Swap", depending on the state of the call. One or the
              other of these must always be set to GONE. -->
 
         <!-- "Hold" -->
-        <!-- This is a "compound button": it has checked and unchecked states. -->
         <ImageButton android:id="@+id/holdButton"
-            style="@style/InCallButton"
+            style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_hold"
             android:contentDescription="@string/onscreenHoldText" />
 
@@ -110,6 +122,22 @@
             android:background="@drawable/btn_swap"
             android:contentDescription="@string/onscreenSwapCallsText"
             android:visibility="gone" />
+
+        <!-- "Change to video call" -->
+        <ImageButton android:id="@+id/changeToVideoButton"
+            style="@style/InCallButton"
+            android:background="@drawable/btn_change_to_video"
+            android:contentDescription="@string/onscreenVideoCallText"
+            android:visibility="gone" />
+
+        <!-- "Switch camera" for video calls. -->
+        <ImageButton android:id="@+id/switchCameraButton"
+            style="@style/InCallCompoundButton"
+            android:background="@drawable/btn_compound_video_switch"
+            android:contentDescription="@string/onscreenSwitchCameraText"
+            android:visibility="gone" />
+
+        <!-- FAR RIGHT SLOT ==================================================================== -->
 
         <!-- This slot is either "Add" or "Merge", depending on the state of the call.  One or the
              other of these must always be set to GONE. -->
@@ -121,14 +149,27 @@
             android:contentDescription="@string/onscreenAddCallText"
             android:visibility="gone" />
 
-        <!-- "Merge calls" -->
-        <!-- This button is used only on GSM devices, where we know that "Add" and "Merge" are never
-             available at the same time. The "Merge" button for CDMA devices is "cdmaMergeButton"
-             above. -->
+        <!-- "Merge calls". This button is used only on GSM devices, where we know that "Add" and
+             "Merge" are never available at the same time. The "Merge" button for CDMA devices is
+             "cdmaMergeButton" above. -->
         <ImageButton android:id="@+id/mergeButton"
             style="@style/InCallButton"
             android:background="@drawable/btn_merge"
             android:contentDescription="@string/onscreenMergeCallsText"
+            android:visibility="gone" />
+
+        <!-- "Switch camera" for video calls. -->
+        <ImageButton android:id="@+id/pauseVideoButton"
+            style="@style/InCallCompoundButton"
+            android:background="@drawable/btn_compound_video_off"
+            android:contentDescription="@string/onscreenPauseVideoText"
+            android:visibility="gone" />
+
+        <!-- "Overflow" -->
+        <ImageButton android:id="@+id/overflowButton"
+            style="@style/InCallButton"
+            android:background="@drawable/btn_overflow"
+            android:contentDescription="@string/onscreenOverflowText"
             android:visibility="gone" />
 
     </LinearLayout>
