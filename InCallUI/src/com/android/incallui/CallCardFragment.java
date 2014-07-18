@@ -369,7 +369,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setEmergencyCallbackNumber(String callbackNumber) {
+    public void setCallbackNumber(String callbackNumber, boolean isEmergencyCall) {
         if (TextUtils.isEmpty(callbackNumber)) {
             mInCallMessageLabel.setVisibility(View.GONE);
             return;
@@ -378,7 +378,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         // TODO: The new Locale-specific methods don't seem to be working. Revisit this.
         callbackNumber = PhoneNumberUtils.formatNumber(callbackNumber);
 
-        String text = getString(R.string.card_title_callback_number_emergency, callbackNumber);
+        int stringResourceId = isEmergencyCall ? R.string.card_title_callback_number_emergency
+                : R.string.card_title_callback_number;
+
+        String text = getString(stringResourceId, callbackNumber);
         mInCallMessageLabel.setText(text);
 
         mInCallMessageLabel.setVisibility(View.VISIBLE);
