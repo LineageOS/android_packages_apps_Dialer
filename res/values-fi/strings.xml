@@ -87,8 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Näytä vain vastaamattomat"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Näytä vain vastaajaviestit"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Näytä kaikki puhelut"</string>
-    <!-- no translation found for add_contact (4579643070374941999) -->
-    <skip />
+    <string name="add_contact" msgid="4579643070374941999">"Lisää yhteystietoihin"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Lisää 2 sekunnin tauko"</string>
     <string name="add_wait" msgid="3360818652790319634">"Lisää tauko"</string>
     <string name="menu_select_account" msgid="5576598753317289565">"Valitse tili"</string>
@@ -176,10 +175,8 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Kuuntele vastaajaviesti: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Yhteystiedon <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> puhelutiedot"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Puhelulokimerkintä poistettiin."</string>
-    <!-- no translation found for toast_caller_id_reported (1127087402649645557) -->
-    <skip />
-    <!-- no translation found for call_log_action_report (561229827189128879) -->
-    <skip />
+    <string name="toast_caller_id_reported" msgid="1127087402649645557">"Yhteystiedosta tehtiin ilmoitus."</string>
+    <string name="call_log_action_report" msgid="561229827189128879">"TEE ILMOITUS"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Tänään"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Eilen"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Viime viikko"</string>

@@ -87,8 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"只顯示未接來電"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"僅顯示語音留言"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"顯示所有通話"</string>
-    <!-- no translation found for add_contact (4579643070374941999) -->
-    <skip />
+    <string name="add_contact" msgid="4579643070374941999">"加入通訊錄"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"新增 2 秒暫停功能"</string>
     <string name="add_wait" msgid="3360818652790319634">"新增插播功能"</string>
     <string name="menu_select_account" msgid="5576598753317289565">"選取帳戶"</string>
@@ -176,10 +175,8 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"收聽來自「<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>」的留言信箱"</string>
     <string name="description_details_action" msgid="2433827152749491785">"與「<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>」通話的詳細資料"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"已刪除通話記錄項目。"</string>
-    <!-- no translation found for toast_caller_id_reported (1127087402649645557) -->
-    <skip />
-    <!-- no translation found for call_log_action_report (561229827189128879) -->
-    <skip />
+    <string name="toast_caller_id_reported" msgid="1127087402649645557">"已報告聯絡人。"</string>
+    <string name="call_log_action_report" msgid="561229827189128879">"報告"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"今天"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"昨天"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"上星期"</string>

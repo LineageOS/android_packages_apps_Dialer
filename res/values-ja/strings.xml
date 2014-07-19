@@ -87,8 +87,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"不在着信のみを表示"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"ボイスメールのみ表示"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"すべての通話を表示"</string>
-    <!-- no translation found for add_contact (4579643070374941999) -->
-    <skip />
+    <string name="add_contact" msgid="4579643070374941999">"連絡先に追加"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"2秒間の停止を追加"</string>
     <string name="add_wait" msgid="3360818652790319634">"待機を追加"</string>
     <string name="menu_select_account" msgid="5576598753317289565">"アカウントを選択"</string>
@@ -176,10 +175,8 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>からのボイスメールを再生"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>の通話の詳細"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"通話履歴エントリを削除しました。"</string>
-    <!-- no translation found for toast_caller_id_reported (1127087402649645557) -->
-    <skip />
-    <!-- no translation found for call_log_action_report (561229827189128879) -->
-    <skip />
+    <string name="toast_caller_id_reported" msgid="1127087402649645557">"連絡先がレポートされました。"</string>
+    <string name="call_log_action_report" msgid="561229827189128879">"レポート"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"今日"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"昨日"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"過去1週間"</string>
