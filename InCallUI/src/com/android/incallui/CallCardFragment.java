@@ -20,7 +20,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -732,7 +731,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         final Point size = new Point();
         display.getSize(size);
 
-        final ValueAnimator valueAnimator = ViewAnimationUtils.createCircularReveal(view,
+        final Animator valueAnimator = ViewAnimationUtils.createCircularReveal(view,
                 size.x / 2, size.y / 2, 0, Math.max(size.x, size.y));
         valueAnimator.setDuration(mRevealAnimationDuration);
         return valueAnimator;
