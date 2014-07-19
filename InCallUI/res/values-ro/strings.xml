@@ -69,6 +69,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Apel video"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Se solicită video"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Nu se poate conecta apelul video"</string>
+    <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
+    <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"Apelează"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Apel nepreluat"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Apeluri nepreluate"</string>
@@ -176,6 +178,8 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Ton de sonerie și vibrare"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Gestionaţi teleconferinţa"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Număr de urgență"</string>
+    <!-- no translation found for select_account_dialog_title (5730339500156684204) -->
+    <skip />
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
