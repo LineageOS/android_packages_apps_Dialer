@@ -38,21 +38,21 @@ public abstract class IntentProvider {
     public abstract Intent getIntent(Context context);
 
     public static IntentProvider getReturnCallIntentProvider(final String number,
-            final PhoneAccountHandle account) {
+            final PhoneAccountHandle accountHandle) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return CallUtil.getCallIntent(number, account);
+                return CallUtil.getCallIntent(number, accountHandle);
             }
         };
     }
 
     public static IntentProvider getReturnVideoCallIntentProvider(final String number,
-            final PhoneAccountHandle account) {
+            final PhoneAccountHandle accountHandle) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return CallUtil.getVideoCallIntent(number, account);
+                return CallUtil.getVideoCallIntent(number, accountHandle);
             }
         };
     }
