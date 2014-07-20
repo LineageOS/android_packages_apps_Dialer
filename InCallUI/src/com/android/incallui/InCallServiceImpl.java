@@ -28,38 +28,31 @@ import android.telecomm.Phone;
  * dialing (outgoing), and active calls. When the last call is disconnected, Telecomm will unbind to
  * the service triggering InCallActivity (via CallList) to finish soon after.
  */
-public class InCallServiceImpl extends Service {
-
-    private final InCallService mInCallServiceInstance = new InCallService() {
-        @Override
-        public void onPhoneCreated(Phone phone) {
-            Log.v(this, "onPhoneCreated");
-            CallList.getInstance().setPhone(phone);
-            AudioModeProvider.getInstance().setPhone(phone);
-            TelecommAdapter.getInstance().setPhone(phone);
-            InCallPresenter.getInstance().setPhone(phone);
-            InCallPresenter.getInstance().setUp(
-                    getApplicationContext(),
-                    CallList.getInstance(),
-                    AudioModeProvider.getInstance());
-            TelecommAdapter.getInstance().setContext(InCallServiceImpl.this);
-        }
-
-        @Override
-        public void onPhoneDestroyed(Phone phone) {
-            Log.v(this, "onPhoneDestroyed");
-            // Tear down the InCall system
-            CallList.getInstance().clearPhone();
-            AudioModeProvider.getInstance().clearPhone();
-            TelecommAdapter.getInstance().clearPhone();
-            TelecommAdapter.getInstance().setContext(null);
-            CallList.getInstance().clearOnDisconnect();
-            InCallPresenter.getInstance().tearDown();
-        }
-    };
+public class InCallServiceImpl extends InCallService {
 
     @Override
-    public IBinder onBind(Intent intent) {
-        return mInCallServiceInstance.getBinder();
+    public void onPhoneCreated(Phone phone) {
+        Log.v(this, "onPhoneCreated");
+        CallList.getInstance().setPhone(phone);
+        AudioModeProvider.getInstance().setPhone(phone);
+        TelecommAdapter.getInstance().setPhone(phone);
+        InCallPresenter.getInstance().setPhone(phone);
+        InCallPresenter.getInstance().setUp(
+                getApplicationContext(),
+                CallList.getInstance(),
+                AudioModeProvider.getInstance());
+        TelecommAdapter.getInstance().setContext(InCallServiceImpl.this);
+    }
+
+    @Override
+    public void onPhoneDestroyed(Phone phone) {
+        Log.v(this, "onPhoneDestroyed");
+        // Tear down the InCall system
+        CallList.getInstance().clearPhone();
+        AudioModeProvider.getInstance().clearPhone();
+        TelecommAdapter.getInstance().clearPhone();
+        TelecommAdapter.getInstance().setContext(null);
+        CallList.getInstance().clearOnDisconnect();
+        InCallPresenter.getInstance().tearDown();
     }
 }
