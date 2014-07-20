@@ -22,7 +22,7 @@ import android.content.Intent;
 import android.os.Looper;
 import android.telecomm.InCallAdapter;
 import android.telecomm.Phone;
-import android.telecomm.PhoneAccount;
+import android.telecomm.PhoneAccountHandle;
 
 import com.google.common.base.Preconditions;
 
@@ -196,9 +196,9 @@ final class TelecommAdapter implements InCallPhoneListener {
         }
     }
 
-    void phoneAccountSelected(String callId, PhoneAccount account) {
+    void phoneAccountSelected(String callId, PhoneAccountHandle accountHandle) {
         if (mPhone != null) {
-            getTelecommCallById(callId).phoneAccountSelected(account);
+            getTelecommCallById(callId).phoneAccountSelected(accountHandle);
         }  else {
             Log.e(this, "error phoneAccountSelected, mAdapter is null");
         }

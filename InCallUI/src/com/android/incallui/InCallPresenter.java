@@ -21,7 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.telecomm.CallCapabilities;
 import android.telecomm.Phone;
-import android.telecomm.PhoneAccount;
+import android.telecomm.PhoneAccountHandle;
 import android.telecomm.VideoCallProfile;
 
 import com.google.common.base.Preconditions;
@@ -404,11 +404,11 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         return mProximitySensor;
     }
 
-    public void handleAccountSelection(PhoneAccount account) {
+    public void handleAccountSelection(PhoneAccountHandle accountHandle) {
         Call call = mCallList.getWaitingForAccountCall();
         if (call != null) {
             String callId = call.getId();
-            TelecommAdapter.getInstance().phoneAccountSelected(callId, account);
+            TelecommAdapter.getInstance().phoneAccountSelected(callId, accountHandle);
         }
     }
 
@@ -695,7 +695,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         // we get an incoming call.
         final boolean startStartupSequence = (InCallState.INCOMING == newState);
 
-        // A dialog to show on top of the InCallUI to select a PhoneAccount
+        // A dialog to show on top of the InCallUI to select a PhoneAccountHandle
         final boolean showAccountPicker = (InCallState.WAITING_FOR_ACCOUNT == newState);
 
         // A new outgoing call indicates that the user just now dialed a number and when that
