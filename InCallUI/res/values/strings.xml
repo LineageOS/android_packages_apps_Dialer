@@ -156,6 +156,15 @@
     <!-- In-call screen: status label when there is a problem connecting a video call. -->
     <string name="card_title_video_call_error">Cannot connect video call</string>
 
+    <!-- In-call screen: string shown to the user when their outgoing number is different than the
+         number reported by TelephonyManager#getLine1Number() -->
+    <string name="card_title_callback_number">Your call back number\n
+        <xliff:g id="dark_number">%1$s</xliff:g>
+    </string>
+
+    <!-- In-call screen: string shown to the user when their outgoing number is different than the
+         number reported by TelephonyManager#getLine1Number() and they're calling emergency
+         services. -->
     <string name="card_title_callback_number_emergency">Your emergency call back number\n
         <xliff:g id="dark_number">%1$s</xliff:g>
     </string>
