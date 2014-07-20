@@ -69,6 +69,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Видео позив"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Захтевање видео позива"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Повезивање са видео позивом није могуће"</string>
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
+    <skip />
     <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
     <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"Бирање"</string>
@@ -127,9 +129,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Управљај конференцијом"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Аудио"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Видео поз."</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"Промени у аудио позив"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Промени камеру"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Паузирај видео"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"Услуга"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Подешавање"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Није подешено&gt;"</string>

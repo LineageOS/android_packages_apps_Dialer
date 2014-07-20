@@ -69,6 +69,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"වීඩියෝ ඇමතුම"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"වීඩියෝවක් ඉල්ලමින්"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"වීඩියෝ ඇමතුමකට සම්බන්ධ කිරීම කළ නොහැක"</string>
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
+    <skip />
     <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
     <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"අමතමින්"</string>
@@ -128,9 +130,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"සම්මන්ත්‍රණය කළමනාකරණය කරන්න"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"ශ්‍රව්‍ය"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"වීඩියෝ ඇමතුම"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"ශබ්ද ඇමතුමක් වෙත මාරු කරන ලදි"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"කැමරාව මාරු කරන්න"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"විඩියෝව විරාම කරන්න"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"සේවාව"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"ස්ථාපනය කරන්න"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;පිහිටුවා නැත&gt;"</string>

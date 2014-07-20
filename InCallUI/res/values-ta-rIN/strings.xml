@@ -69,8 +69,9 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"வீடியோ அழைப்பு"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"வீடியோவைக் கோருகிறது"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"வீடியோ அழைப்பை இணைக்க முடியவில்லை"</string>
-    <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
     <skip />
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"அவசர அழைப்பு எண்\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"அழைக்கிறது"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"தவறிய அழைப்பு"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"தவறிய அழைப்புகள்"</string>
@@ -88,12 +89,10 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"சேவை இல்லை"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"தேர்ந்தெடுத்த நெட்வொர்க் (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) கிடைக்கவில்லை"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"துண்டி"</string>
-    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
-    <skip />
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"வீடியோ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"குரல்"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"ஏற்கிறேன்"</string>
-    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
-    <skip />
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"நிராகரி"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"திருப்பி அழை"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"செய்தி"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"அழைப்பதற்கு, முதலில் விமானப் பயன்முறையை முடக்கவும்."</string>
@@ -128,9 +127,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"குழு அழைப்பை நிர்வகி"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"ஆடியோ"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"வீடியோ அழைப்பு"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"ஆடியோ அழைப்பிற்கு மாறு"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"கேமராவை மாற்று"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"வீடியோவை இடைநிறுத்து"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"சேவை"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"அமைவு"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;அமைக்கப்படவில்லை&gt;"</string>
@@ -178,8 +180,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"ரிங்டோன் &amp; அதிர்வு"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"குழு அழைப்பை நிர்வகிக்கவும்"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"அவசரகால எண்"</string>
-    <!-- no translation found for select_account_dialog_title (5730339500156684204) -->
-    <skip />
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"கணக்கைத் தேர்ந்தெடு"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>

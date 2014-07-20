@@ -69,6 +69,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Video call"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Meminta video"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Tidak dapat menyambungkan video call"</string>
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
+    <skip />
     <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
     <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"Memanggil"</string>
@@ -88,8 +90,7 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Tidak ada layanan"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Jaringan yang dipilih (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) tidak tersedia"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Akhiri"</string>
-    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
-    <skip />
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Video"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Suara"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Terima"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Tutup"</string>
@@ -127,9 +128,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Kelola konferensi"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Audio"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Video call"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"Ubah ke panggilan audio"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Beralih kamera"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Jeda video"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"Layanan"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Penyiapan"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Tidak disetel&gt;"</string>

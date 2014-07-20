@@ -69,6 +69,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Cuộc gọi điện video"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Đang yêu cầu video"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Không thể kết nối cuộc gọi điện video"</string>
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
+    <skip />
     <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
     <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"Đang gọi"</string>
@@ -88,12 +90,10 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Không có dịch vụ nào"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Mạng được chọn (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) không khả dụng"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Kết thúc"</string>
-    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
-    <skip />
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Video"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Thoại"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Chấp nhận"</string>
-    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
-    <skip />
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Loại bỏ"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Gọi lại"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Tin nhắn"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Để thực hiện cuộc gọi, trước tiên, hãy tắt chế độ trên Máy bay."</string>
@@ -128,9 +128,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Quản lý hội nghị"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Âm thanh"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"C.gọi video"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"Thay đổi thành cuộc gọi âm thanh"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Chuyển đổi máy ảnh"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Tạm dừng video"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"Dịch vụ"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Thiết lập"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Chưa được đặt&gt;"</string>

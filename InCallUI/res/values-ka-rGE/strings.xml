@@ -65,10 +65,12 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"გათშვა"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"მიმდინარეობს საუბარი"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"ჩემი ნომერია <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
-    <string name="card_title_video_call_connecting" msgid="297586766381973954">"Connecting video"</string>
-    <string name="card_title_video_call" msgid="5898636679563320218">"ვიდეო ზარი"</string>
-    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Requesting video"</string>
-    <string name="card_title_video_call_error" msgid="5520555528871673801">"Cannot connect video call"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"მიმდინარეობს ვიდეოს დაკავშირება"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"ვიდეოზარი"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"მიმდინარეობს ვიდეოს მოთხოვნა"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"ვიდეოზართან დაკავშირება ვერ ხერხდება"</string>
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
+    <skip />
     <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
     <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"აკრეფვა"</string>
@@ -80,7 +82,7 @@
     <string name="notification_on_hold" msgid="3480694969511790465">"შეყოვნების რეჟიმში"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"შემომავალი ზარი"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"შემომავალი ვიდეოზარი"</string>
-    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Incoming video request"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"შემომავალი ვიდეოს მოთხოვნა"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"ახალი ხმოვანი ფოსტა"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"ახალი ხმოვანი ფოსტა (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>-ზე დარეკვა"</string>
@@ -128,9 +130,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"კონფერენციის მართვა"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"აუდიო"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"ვიდეოზარი"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"Change to audio call"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"კამერის გადართვა"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"ვიდეოს შეჩერება"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"სერვისი"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"დაყენება"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;არ არის დაყენებული&gt;"</string>
@@ -162,12 +167,12 @@
     <string name="description_target_answer" msgid="7205604197797472471">"პასუხი"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS-ის გაგზავნა"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"უარყოფა"</string>
-    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Answer as video call"</string>
-    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Answer as audio call"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"პასუხი ვიდეოზარის სახით"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"პასუხი აუდიო ზარის სახით"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"გაასრიალეთ ზემოთ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>-ისთვის."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>-ისათვის გაასრიალეთ მარცხნივ."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>-ისათვის გაასრიალეთ მარჯვნივ."</string>
-    <string name="description_direction_down" msgid="4317245625565166742">"გაასრიალეთ ქვემოთ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>-თვის."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"გაასრიალეთ ქვემოთ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>-ისთვის."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"ვიბრაცია"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"ვიბრაცია"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"ხმა"</string>

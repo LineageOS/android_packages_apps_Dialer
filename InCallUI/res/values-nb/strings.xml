@@ -69,8 +69,9 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videoanrop"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Ber om video"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Kan ikke koble til videoanropet"</string>
-    <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
     <skip />
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"Kontaktnummeret ditt for nødstilfeller\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Slår nummeret"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Tapt anrop"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Tapte anrop"</string>
@@ -88,12 +89,10 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Ingen tjeneste"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Valgt nettverk (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) er ikke tilgjengelig"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Legg på"</string>
-    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
-    <skip />
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Video"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Google Voice"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Godta"</string>
-    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
-    <skip />
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Avvis"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Ring tilbake"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Melding"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"For å ringe, slå av flymodus først."</string>
@@ -128,9 +127,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Administ. konferanse"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Lyd"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videosamtale"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"Bytt til lydanrop"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Bytt kamera"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Sett videoen på pause"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"Tjeneste"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Konfigurering"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Ikke angitt&gt;"</string>
@@ -178,8 +180,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Ringetone og vibrering"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Administrer konferansesamtale"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Nødnummer"</string>
-    <!-- no translation found for select_account_dialog_title (5730339500156684204) -->
-    <skip />
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"Velg konto"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>

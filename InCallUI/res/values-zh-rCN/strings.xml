@@ -69,6 +69,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"视频通话"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"正在发出视频请求"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"无法连接视频通话"</string>
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
+    <skip />
     <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
     <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"正在拨号"</string>
@@ -128,9 +130,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"管理会议"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"音频"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"视频通话"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"更改为音频通话"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"切换摄像头"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"暂停视频"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"服务"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"设置"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;未设置&gt;"</string>

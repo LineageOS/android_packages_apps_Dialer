@@ -69,6 +69,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"مكالمة فيديو"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"جارٍ طلب الفيديو"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"يتعذر الاتصال بمكالمة الفيديو"</string>
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
+    <skip />
     <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
     <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"جارٍ الطلب"</string>
@@ -126,9 +128,10 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"إدارة المؤتمر"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"الصوت"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"مكالمة فيديو"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"التغيير إلى مكالمة صوتية"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"التغيير إلى مكالمة صوتية"</string>
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"تبديل الكاميرا"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"إيقاف الفيديو مؤقتًا"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"خيارات أخرى"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"الخدمة"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"الإعداد"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"‏&lt;لم يتم التعيين&gt;"</string>

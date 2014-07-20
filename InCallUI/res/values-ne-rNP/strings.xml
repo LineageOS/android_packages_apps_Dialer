@@ -69,6 +69,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"भिडियो कल"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"भिडियो अनुरोध"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"भिडियो कल जडान गर्न सकिएन"</string>
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
+    <skip />
     <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
     <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"डायल गर्ने"</string>
@@ -88,8 +90,7 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"सेवा छैन"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"चयन गरिएको नेटवर्क ( <xliff:g id="OPERATOR_NAME">%s</xliff:g> ) अनुपलब्ध"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"छुटाउनुहोस्"</string>
-    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
-    <skip />
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"भिडियो"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"आवाज"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"स्वीकार्नुहोस्"</string>
     <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
@@ -128,9 +129,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"सम्मेलन प्रबन्ध गर्नुहोस्"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"अडियो"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"भिडियो कल"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"अडियो कलमा परिवर्तन गर्नुहोस्"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"क्यामेरा फेर्नुहोस्"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"भिडियो स्थगित गर्नुहोस्"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"सेवा"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"सेटअप"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"सेट गरेको छैन"</string>

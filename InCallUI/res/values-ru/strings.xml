@@ -69,6 +69,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Видеовстреча"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Запрос видео"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Не удается начать видеовстречу"</string>
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
+    <skip />
     <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
     <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"Набор номера"</string>
@@ -92,8 +94,7 @@
     <skip />
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Голосовой вызов"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Принять"</string>
-    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
-    <skip />
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Закрыть"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Позвонить"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Написать"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Перед тем как звонить, отключите режим полета."</string>
@@ -128,9 +129,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Управление конференцией"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Аудио"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Видео"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"Отключить видео"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Переключение камеры"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Приостановить видео"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"Служба"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Настройка"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Не задано&gt;"</string>

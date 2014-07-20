@@ -69,6 +69,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videozvans"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Notiek video pieprasīšana"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Nevar pievienoties šim videozvanam"</string>
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
+    <skip />
     <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
     <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"Notiek numura sastādīšana"</string>
@@ -88,12 +90,10 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Nav pakalpojuma"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Atlasītais tīkls (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) nav pieejams"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Pārtraukt"</string>
-    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
-    <skip />
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Video"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Balss"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Pieņemt"</string>
-    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
-    <skip />
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Nerādīt"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Atzvanīt"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Ziņojums"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Lai veiktu zvanu, vispirms izslēdziet lidojuma režīmu."</string>
@@ -128,9 +128,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Pārvaldīt konferenci"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Audio"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videozvans"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"Nomainīt uz audiozvanu"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Pārslēgt kameru"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Pārtraukt videoklipa atskaņošanu"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"Pakalpojums"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Iestatīšana"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Nav iestatīts&gt;"</string>

@@ -69,8 +69,9 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"ವೀಡಿಯೊ ಕರೆ"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"ವೀಡಿಯೊ ವಿನಂತಿಸಲಾಗುತ್ತಿದೆ"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"ವೀಡಿಯೊ ಕರೆಯನ್ನು ಸಂಪರ್ಕಪಡಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
-    <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
     <skip />
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"ನಿಮ್ಮ ತುರ್ತು ಕರೆಯ ಸಂಖ್ಯೆ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"ಡಯಲ್‌ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"ತಪ್ಪಿ ಹೋದ ಕರೆ"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"ತಪ್ಪಿದ ಕರೆಗಳು"</string>
@@ -88,8 +89,7 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"ಯಾವುದೇ ಸೇವೆಯಿಲ್ಲ"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"ಆಯ್ಕೆಮಾಡಿದ (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) ನೆಟ್‌ವರ್ಕ್‌ ಲಭ್ಯವಿಲ್ಲ"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"ಹ್ಯಾಂಗ್ ಅಪ್ ಮಾಡಿ"</string>
-    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
-    <skip />
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"ವೀಡಿಯೊ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"ಧ್ವನಿ"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"ಸಮ್ಮತಿಸು"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"ವಜಾಗೊಳಿಸು"</string>
@@ -127,9 +127,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"ಕಾನ್ಫರೆನ್ಸ್ ನಿರ್ವಹಿಸಿ"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"ಆಡಿಯೊ"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"ವೀಡಿಯೊ ಕರೆ"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"ಆಡಿಯೊ ಕರೆಗೆ ಬದಲಾಯಿಸಿ"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"ಕ್ಯಾಮರಾ ಬದಲಿಸಿ"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"ವೀಡಿಯೊ ವಿರಾಮಗೊಳಿಸು"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"ಸೇವೆ"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"ಸೆಟಪ್"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;ಹೊಂದಿಸಿಲ್ಲ&gt;"</string>
@@ -177,8 +180,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"ರಿಂಗ್‌ಟೋನ್‌‌ &amp; ವೈಬ್ರೇಟ್‌"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"ಕಾನ್ಫರೆನ್ಸ್ ಕರೆಯನ್ನು ನಿರ್ವಹಿಸಿ"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"ತುರ್ತು ಸಂಖ್ಯೆ"</string>
-    <!-- no translation found for select_account_dialog_title (5730339500156684204) -->
-    <skip />
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"ಖಾತೆ ಆಯ್ಕೆಮಾಡಿ"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>

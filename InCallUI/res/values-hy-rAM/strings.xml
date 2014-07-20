@@ -67,8 +67,10 @@
     <string name="card_title_my_phone_number" msgid="112428362494434191">"Իմ համարը՝ <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"Տեսակապը միանում է"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"Տեսազանգել"</string>
-    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Սպասում է տեսակապին"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Տեսակապի հայցում"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Հնարավոր չէ միացնել տեսազանգը"</string>
+    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
+    <skip />
     <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
     <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"Համարարկում է"</string>
@@ -80,7 +82,7 @@
     <string name="notification_on_hold" msgid="3480694969511790465">"Սպասում"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Մուտքային զանգ"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"Մուտքային տեսազանգ"</string>
-    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Մուտքային տեսազանգի հայց"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Մուտքային տեսազանգի հայցում"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Նոր ձայնային հաղորդագրություն"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Նոր ձայնային նամակ (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Զանգել <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
@@ -92,8 +94,7 @@
     <skip />
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Ձայնային"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Ընդունել"</string>
-    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
-    <skip />
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Անտեսել"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Հետ զանգել"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Ուղարկել հաղորդագրություն"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Զանգի կատարման համար նախ անջատեք թռիչքային ռեժիմը:"</string>
@@ -128,9 +129,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Կառավարել կոնֆերանսը"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Ձայնանյութ"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Տեսազանգել"</string>
-    <string name="onscreenChangeToAudioText" msgid="7054831314025114136">"Փոխարկել ձայնային կանչի"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Փոխարկել խցիկը"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Դադարեցնել տեսանյութի դիտումը"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"Ծառայություն"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Կարգավորում"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Նշված չէ&gt;"</string>
@@ -163,7 +167,7 @@
     <string name="description_target_send_sms" msgid="2098326025587950144">"Ուղարկել SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Մերժել"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"Պատասխանել տեսազանգով"</string>
-    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Պատասխանել աուդիո զանգով"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Պատասխանել ձայնային զանգով"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"Սահեցրեք վերև` <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>-ի համար:"</string>
     <string name="description_direction_left" msgid="7129873384376533287">"Սահեցրեք ձախ` <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>-ի համար:"</string>
     <string name="description_direction_right" msgid="2122584234531957308">"Սահեցրեք աջ` <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>-ի համար:"</string>
