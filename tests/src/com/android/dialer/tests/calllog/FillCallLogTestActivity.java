@@ -31,7 +31,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.provider.CallLog.Calls;
-import android.telecomm.PhoneAccount;
+import android.telecomm.PhoneAccountHandle;
 import android.telecomm.TelecommManager;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -397,9 +397,9 @@ public class FillCallLogTestActivity extends Activity {
         }
     }
 
-    private PhoneAccount getManualAccount() {
+    private PhoneAccountHandle getManualAccount() {
         TelecommManager telecommManager = TelecommManager.from(this);
-        List <PhoneAccount> accounts = telecommManager.getEnabledPhoneAccounts();
+        List <PhoneAccountHandle> accounts = telecommManager.getEnabledPhoneAccounts();
         if (mAccount0.isChecked()) {
             return accounts.get(0);
         } else if (mAccount1.isChecked()){

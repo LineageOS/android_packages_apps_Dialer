@@ -17,7 +17,7 @@
 package com.android.dialer.calllog;
 
 import android.content.Context;
-import android.telecomm.PhoneAccount;
+import android.telecomm.PhoneAccountHandle;
 import android.view.View;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
@@ -87,7 +87,7 @@ public final class CallLogListItemViews {
      * The account for the current call log entry.  Cached here as the call back
      * intent is set only when the actions ViewStub is inflated.
      */
-    public PhoneAccount mAccount;
+    public PhoneAccountHandle mAccount;
 
     /**
      * If the call has an associated voicemail message, the URI of the voicemail message for
