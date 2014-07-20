@@ -25,7 +25,6 @@ import android.telecomm.CallCapabilities;
 import android.telecomm.PhoneAccount;
 import android.telecomm.PhoneAccountMetadata;
 import android.telecomm.StatusHints;
-import android.telecomm.TelecommConstants;
 import android.telecomm.TelecommManager;
 import android.telephony.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
@@ -248,7 +247,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             Bundle extras = statusHints.getExtras();
             if (extras != null) {
                 callbackNumber = extras.getString(
-                        TelecommConstants.EXTRA_CALL_BACK_NUMBER, null);
+                        TelecommManager.EXTRA_CALL_BACK_NUMBER, null);
 
                 if (isEmergencyCall) {
                     callbackNumber = getSubscriptionNumber();
