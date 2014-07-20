@@ -112,8 +112,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Өткөз. чалуу-ды гана көрсөтүү"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Үнкаттарды гана көрсөтүү"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Бардык чалууларды көрсөтүү"</string>
-    <!-- no translation found for add_contact (4579643070374941999) -->
-    <skip />
+    <string name="add_contact" msgid="4579643070374941999">"Байланыштарга кошуу"</string>
     <!-- no translation found for add_2sec_pause (9214012315201040129) -->
     <skip />
     <!-- no translation found for add_wait (3360818652790319634) -->
@@ -225,10 +224,8 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> үн катын угуу"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> чалуу чоо-жайы"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Чалуулар таржымалынан бир чалуу жок кылынган."</string>
-    <!-- no translation found for toast_caller_id_reported (1127087402649645557) -->
-    <skip />
-    <!-- no translation found for call_log_action_report (561229827189128879) -->
-    <skip />
+    <string name="toast_caller_id_reported" msgid="1127087402649645557">"Байланышка кабар берилди."</string>
+    <string name="call_log_action_report" msgid="561229827189128879">"КАБАРЛОО"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Бүгүн"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Кечээ"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Өткөн апта"</string>
