@@ -21,7 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
-import android.telecomm.PhoneAccount;
+import android.telecomm.PhoneAccountHandle;
 
 import com.android.contacts.common.CallUtil;
 import com.android.dialer.CallDetailActivity;
@@ -38,7 +38,7 @@ public abstract class IntentProvider {
     public abstract Intent getIntent(Context context);
 
     public static IntentProvider getReturnCallIntentProvider(final String number,
-            final PhoneAccount account) {
+            final PhoneAccountHandle account) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
@@ -48,7 +48,7 @@ public abstract class IntentProvider {
     }
 
     public static IntentProvider getReturnVideoCallIntentProvider(final String number,
-            final PhoneAccount account) {
+            final PhoneAccountHandle account) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
