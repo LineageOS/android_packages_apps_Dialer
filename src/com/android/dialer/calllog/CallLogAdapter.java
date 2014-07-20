@@ -27,7 +27,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
-import android.telecomm.PhoneAccount;
+import android.telecomm.PhoneAccountHandle;
 import android.telecomm.TelecommManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -592,7 +592,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
     @Override
     protected View newChildView(Context context, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
 
         // Get the views to bind to and cache them.
@@ -644,7 +644,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final long date = c.getLong(CallLogQuery.DATE);
         final long duration = c.getLong(CallLogQuery.DURATION);
         final int callType = c.getInt(CallLogQuery.CALL_TYPE);
-        final PhoneAccount account = getAccount(c);
+        final PhoneAccountHandle account = getAccount(c);
         final Drawable accountIcon = account == null ? null :
                 TelecommManager.from(mContext).getPhoneAccountMetadata(account).getIcon(mContext);
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
@@ -1262,7 +1262,7 @@ public class CallLogAdapter extends GroupingListAdapter
         return features;
     }
 
-    private PhoneAccount getAccount(Cursor c) {
+    private PhoneAccountHandle getAccount(Cursor c) {
         final String component_name = c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
         final String account_id = c.getString(CallLogQuery.ACCOUNT_ID);
 
