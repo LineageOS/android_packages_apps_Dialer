@@ -22,8 +22,8 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.telecomm.CallCapabilities;
+import android.telecomm.PhoneAccount;
 import android.telecomm.PhoneAccountHandle;
-import android.telecomm.PhoneAccountMetadata;
 import android.telecomm.StatusHints;
 import android.telecomm.TelecommManager;
 import android.telephony.DisconnectCause;
@@ -228,9 +228,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         PhoneAccountHandle accountHandle = mPrimary.getAccountHandle();
         if (accountHandle != null) {
             TelecommManager mgr = TelecommManager.from(mContext);
-            PhoneAccountMetadata metadata = mgr.getPhoneAccountMetadata(accountHandle);
-            if (metadata != null) {
-                return metadata.getSubscriptionNumber();
+            PhoneAccount account = mgr.getPhoneAccount(accountHandle);
+            if (account != null) {
+                return account.getSubscriptionNumber();
             }
         }
         return null;
@@ -484,9 +484,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private Drawable getConnectionIcon() {
         PhoneAccountHandle accountHandle = mPrimary.getAccountHandle();
         if (accountHandle != null) {
-            PhoneAccountMetadata data = getTelecommManager().getPhoneAccountMetadata(accountHandle);
-            if (data != null) {
-                return data.getIcon(mContext);
+            PhoneAccount account = getTelecommManager().getPhoneAccount(accountHandle);
+            if (account != null) {
+                return account.getIcon(mContext);
             }
         }
         return null;
@@ -511,9 +511,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
         PhoneAccountHandle accountHandle = mPrimary.getAccountHandle();
         if (accountHandle != null) {
-            PhoneAccountMetadata data = getTelecommManager().getPhoneAccountMetadata(accountHandle);
-            if (data != null) {
-                return data.getLabel();
+            PhoneAccount account = getTelecommManager().getPhoneAccount(accountHandle);
+            if (account != null) {
+                return account.getLabel();
             }
         }
         return null;
@@ -522,9 +522,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private String getSecondaryCallProviderLabel() {
         PhoneAccountHandle accountHandle = mSecondary.getAccountHandle();
         if (accountHandle != null) {
-            PhoneAccountMetadata data = getTelecommManager().getPhoneAccountMetadata(accountHandle);
-            if (data != null) {
-                return data.getLabel();
+            PhoneAccount account = getTelecommManager().getPhoneAccount(accountHandle);
+            if (account != null) {
+                return account.getLabel();
             }
         }
         return null;
@@ -533,9 +533,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private Drawable getSecondaryCallProviderIcon() {
         PhoneAccountHandle accountHandle = mSecondary.getAccountHandle();
         if (accountHandle != null) {
-            PhoneAccountMetadata data = getTelecommManager().getPhoneAccountMetadata(accountHandle);
-            if (data != null) {
-                return data.getIcon(mContext);
+            PhoneAccount account = getTelecommManager().getPhoneAccount(accountHandle);
+            if (account != null) {
+                return account.getIcon(mContext);
             }
         }
         return null;
