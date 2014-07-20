@@ -644,9 +644,9 @@ public class CallLogAdapter extends GroupingListAdapter
         final long date = c.getLong(CallLogQuery.DATE);
         final long duration = c.getLong(CallLogQuery.DURATION);
         final int callType = c.getInt(CallLogQuery.CALL_TYPE);
-        final PhoneAccountHandle account = getAccount(c);
-        final Drawable accountIcon = account == null ? null :
-                TelecommManager.from(mContext).getPhoneAccountMetadata(account).getIcon(mContext);
+        final PhoneAccountHandle accountHandle = getAccountHandle(c);
+        final Drawable accountIcon = accountHandle == null ? null :
+                TelecommManager.from(mContext).getPhoneAccount(accountHandle).getIcon(mContext);
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final long rowId = c.getLong(CallLogQuery.ID);
         views.rowId = rowId;
@@ -671,7 +671,7 @@ public class CallLogAdapter extends GroupingListAdapter
         views.number = number;
         views.numberPresentation = numberPresentation;
         views.callType = callType;
-        views.mAccount = account;
+        views.mAccountHandle = accountHandle;
         views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
         // Stash away the Ids of the calls so that we can support deleting a row in the call log.
         views.callIds = getCallIds(c, count);
@@ -690,7 +690,7 @@ public class CallLogAdapter extends GroupingListAdapter
             if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
                 // Sets the primary action to call the number.
                 views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number,
-                        account));
+                        accountHandle));
             } else {
                 // Number is not callable, so hide button.
                 views.primaryActionView.setTag(null);
@@ -980,7 +980,7 @@ public class CallLogAdapter extends GroupingListAdapter
         if (canPlaceCallToNumber) {
             // Sets the primary action to call the number.
             views.callBackButtonView.setTag(
-                    IntentProvider.getReturnCallIntentProvider(views.number, views.mAccount));
+                    IntentProvider.getReturnCallIntentProvider(views.number, views.mAccountHandle));
             views.callBackButtonView.setVisibility(View.VISIBLE);
             views.callBackButtonView.setOnClickListener(mActionListener);
         } else {
@@ -993,7 +993,7 @@ public class CallLogAdapter extends GroupingListAdapter
         if (canPlaceCallToNumber && views.phoneCallDetailsViews.callTypeIcons.isVideoShown()) {
             views.videoCallButtonView.setTag(
                     IntentProvider.getReturnVideoCallIntentProvider(views.number,
-                            views.mAccount));
+                            views.mAccountHandle));
             views.videoCallButtonView.setVisibility(View.VISIBLE);
             views.videoCallButtonView.setOnClickListener(mActionListener);
         } else {
@@ -1262,7 +1262,7 @@ public class CallLogAdapter extends GroupingListAdapter
         return features;
     }
 
-    private PhoneAccountHandle getAccount(Cursor c) {
+    private PhoneAccountHandle getAccountHandle(Cursor c) {
         final String component_name = c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
         final String account_id = c.getString(CallLogQuery.ACCOUNT_ID);
 
