@@ -44,9 +44,8 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
     private static final ViewOutlineProvider VIEW_BOUNDS_OUTLINE_PROVIDER =
             new ViewOutlineProvider() {
         @Override
-        public boolean getOutline(View view, Outline outline) {
+        public void getOutline(View view, Outline outline) {
             outline.setRect(0, 0, view.getWidth(), view.getHeight());
-            return true;
         }
     };
 
