@@ -124,5 +124,10 @@
         <item name="dialpad_key_button_touch_tint">@color/incall_dialpad_touch_tint</item>
         <item name="android:textColorPrimary">@color/incall_call_banner_text_color</item>
         <item name="android:colorPrimaryDark">@color/actionbar_background_color_dark</item>
+        <item name="android:popupMenuStyle">@style/InCallPopupMenuStyle</item>
+    </style>
+
+    <style name="InCallPopupMenuStyle" parent="@android:style/Theme.Material.Light">
+        <item name="android:textColorPrimary">@color/popup_menu_color</item>
     </style>
 </resources>
