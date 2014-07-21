@@ -2,9 +2,15 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
+import android.content.Loader.OnLoadCompleteListener;
 import android.net.Uri;
 import android.telecomm.CallPropertyPresentation;
 import android.text.TextUtils;
+import android.util.Log;
+
+import com.android.contacts.common.model.Contact;
+import com.android.contacts.common.model.ContactLoader;
 
 import java.util.Arrays;
 
@@ -17,12 +23,6 @@ public class CallerInfoUtils {
 
     /** Define for not a special CNAP string */
     private static final int CNAP_SPECIAL_CASE_NO = -1;
-
-    private static final String VIEW_NOTIFICATION_ACTION =
-            "com.android.contacts.VIEW_NOTIFICATION";
-    private static final String VIEW_NOTIFICATION_PACKAGE = "com.android.contacts";
-    private static final String VIEW_NOTIFICATION_CLASS =
-            "com.android.contacts.ViewNotificationService";
 
     public CallerInfoUtils() {
     }
@@ -163,12 +163,23 @@ public class CallerInfoUtils {
     }
 
     /**
-     * Send a notification that that we are viewing a particular contact, so that the high-res
-     * photo is downloaded by the sync adapter.
+     * Send a notification using a {@link ContactLoader} to inform the sync adapter that we are
+     * viewing a particular contact, so that it can download the high-res photo.
      */
     public static void sendViewNotification(Context context, Uri contactUri) {
-        final Intent intent = new Intent(VIEW_NOTIFICATION_ACTION, contactUri);
-        intent.setClassName(VIEW_NOTIFICATION_PACKAGE, VIEW_NOTIFICATION_CLASS);
-        context.startService(intent);
+        final ContactLoader loader = new ContactLoader(context, contactUri,
+                true /* postViewNotification */);
+        loader.registerListener(0, new OnLoadCompleteListener<Contact>() {
+            @Override
+            public void onLoadComplete(
+                    Loader<Contact> loader, Contact contact) {
+                try {
+                    loader.reset();
+                } catch (RuntimeException e) {
+                    Log.e(TAG, "Error resetting loader", e);
+                }
+            }
+        });
+        loader.startLoading();
     }
 }
