@@ -29,6 +29,7 @@ import android.telecomm.TelecommConstants;
 import android.telecomm.TelecommManager;
 import android.telephony.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
@@ -197,6 +198,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
             getUi().setCallState(callState, mPrimary.getDisconnectCause(), getConnectionLabel(),
                     getConnectionIcon(), getGatewayNumber());
+
+            String currentNumber = mPrimary.getHandle().getSchemeSpecificPart();
+            if (PhoneNumberUtils.isEmergencyNumber(currentNumber)) {
+                String callbackNumber = getSubscriptionNumber();
+                setCallbackNumber(callbackNumber, true);
+            }
         } else {
             getUi().setCallState(callState, DisconnectCause.NOT_VALID, null, null, null);
         }
@@ -211,22 +218,41 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         getUi().setCallDetails(details);
 
         if (mPrimary != null) {
-            String currentNumber = mPrimary.getHandle().getSchemeSpecificPart();
-            if (PhoneNumberUtils.isEmergencyNumber(currentNumber)) {
-                setEmergencyNumberIfSet(details);
-            }
+            setCallbackNumberIfSet(details);
         }
     }
 
-    private void setEmergencyNumberIfSet(android.telecomm.Call.Details details) {
+    private String getSubscriptionNumber() {
+        // If it's an emergency call, and they're not populating the callback number,
+        // then try to fall back to the phone sub info (to hopefully get the SIM's
+        // number directly from the telephony layer).
+        PhoneAccount account = mPrimary.getAccount();
+        if (account != null) {
+            TelecommManager mgr = TelecommManager.from(mContext);
+            PhoneAccountMetadata metadata = mgr.getPhoneAccountMetadata(account);
+            if (metadata != null) {
+                return metadata.getSubscriptionNumber();
+            }
+        }
+        return null;
+    }
+
+    private void setCallbackNumberIfSet(android.telecomm.Call.Details details) {
         String callbackNumber = null;
+
+        String currentNumber = mPrimary.getHandle().getSchemeSpecificPart();
+        boolean isEmergencyCall = PhoneNumberUtils.isEmergencyNumber(currentNumber);
 
         StatusHints statusHints = details.getStatusHints();
         if (statusHints != null) {
             Bundle extras = statusHints.getExtras();
             if (extras != null) {
                 callbackNumber = extras.getString(
-                        TelecommConstants.EXTRA_EMERGENCY_CALL_BACK_NUMBER, null);
+                        TelecommConstants.EXTRA_CALL_BACK_NUMBER, null);
+
+                if (isEmergencyCall) {
+                    callbackNumber = getSubscriptionNumber();
+                }
             } else {
                 Log.d(this, "No extras; not updating callback number");
             }
@@ -234,7 +260,21 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             Log.d(this, "No status hints; not updating callback number");
         }
 
-        getUi().setEmergencyCallbackNumber(callbackNumber);
+        setCallbackNumber(callbackNumber, isEmergencyCall);
+    }
+
+    private void setCallbackNumber(String callbackNumber, boolean isEmergencyCall) {
+        if (TextUtils.isEmpty(callbackNumber)) {
+            Log.d(this, "No callback number; aborting");
+            return;
+        }
+
+        String simNumber = TelephonyManager.from(mContext).getLine1Number();
+        if (!PhoneNumberUtils.compare(callbackNumber, simNumber) && !isEmergencyCall) {
+            Log.d(this, "Numbers are the same; not showing the callback number");
+            return;
+        }
+        getUi().setCallbackNumber(callbackNumber, isEmergencyCall);
     }
 
     @Override
@@ -571,7 +611,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimaryPhoneNumber(String phoneNumber);
         void setPrimaryLabel(String label);
         void setEndCallButtonEnabled(boolean enabled);
-        void setEmergencyCallbackNumber(String number);
+        void setCallbackNumber(String number, boolean isEmergencyCalls);
         void setCallDetails(android.telecomm.Call.Details details);
     }
 
