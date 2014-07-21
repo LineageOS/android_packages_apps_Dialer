@@ -327,8 +327,12 @@ public final class Call {
         return mParentCallId;
     }
 
+    public int getVideoState() {
+        return mTelecommCall.getDetails().getVideoState();
+    }
+
     public boolean isVideoCall() {
-        int videoState = mTelecommCall.getDetails().getVideoState();
+        int videoState = getVideoState();
         return (videoState & VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL)
                 == VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL;
     }

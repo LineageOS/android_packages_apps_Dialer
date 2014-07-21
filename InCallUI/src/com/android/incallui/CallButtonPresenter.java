@@ -16,7 +16,13 @@
 
 package com.android.incallui;
 
+import android.content.Context;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraManager;
 import android.telecomm.CallCapabilities;
+import android.telecomm.RemoteCallVideoProvider;
+import android.telecomm.VideoCallProfile;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.TelephonyManagerUtils;
@@ -37,13 +43,18 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private Call mCall;
     private boolean mAutomaticallyMuted = false;
     private boolean mPreviousMuteState = false;
-
     private boolean mShowGenericMerge = false;
     private boolean mShowManageConference = false;
+    private boolean mUseFrontFacingCamera = true;
 
     private InCallState mPreviousState = null;
+    private CameraManager mCameraManager;
 
     public CallButtonPresenter() {
+    }
+
+    public void initializeCameraManager(Context context) {
+        mCameraManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
     }
 
     @Override
@@ -201,6 +212,17 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         TelecommAdapter.getInstance().addCall();
     }
 
+    public void changeToVoiceClicked() {
+        RemoteCallVideoProvider callVideoProvider = mCall.getCallVideoProvider();
+        if (callVideoProvider == null) {
+            return;
+        }
+
+        VideoCallProfile videoCallProfile = new VideoCallProfile(
+                VideoCallProfile.VIDEO_STATE_AUDIO_ONLY, VideoCallProfile.QUALITY_DEFAULT);
+        callVideoProvider.sendSessionModifyRequest(videoCallProfile);
+    }
+
     public void swapClicked() {
         TelecommAdapter.getInstance().swap(mCall.getId());
     }
@@ -209,6 +231,62 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         Log.v(this, "Show dialpad " + String.valueOf(checked));
         getUi().displayDialpad(checked /* show */, true /* animate */);
         updateExtraButtonRow();
+    }
+
+    public void changeToVideoClicked() {
+        RemoteCallVideoProvider callVideoProvider = mCall.getCallVideoProvider();
+        if (callVideoProvider == null) {
+            return;
+        }
+
+        VideoCallProfile videoCallProfile =
+                new VideoCallProfile(VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL);
+        callVideoProvider.sendSessionModifyRequest(videoCallProfile);
+    }
+
+    /**
+     * Switches the camera between the front-facing and back-facing camera.
+     * @param useFrontFacingCamera True if we should switch to using the front-facing camera, or
+     *     false if we should switch to using the back-facing camera.
+     */
+    public void switchCameraClicked(boolean useFrontFacingCamera) {
+        mUseFrontFacingCamera = useFrontFacingCamera;
+
+        RemoteCallVideoProvider callVideoProvider = mCall.getCallVideoProvider();
+        if (callVideoProvider == null) {
+            return;
+        }
+
+        String cameraId = getCameraId();
+        if (cameraId != null) {
+            callVideoProvider.setCamera(cameraId);
+        }
+        getUi().setSwitchCameraButton(!useFrontFacingCamera);
+    }
+
+    /**
+     * Stop or start client's video transmission.
+     * @param pause True if pausing the local user's video, or false if starting the local user's
+     *    video.
+     */
+    public void pauseVideoClicked(boolean pause) {
+        RemoteCallVideoProvider callVideoProvider = mCall.getCallVideoProvider();
+        if (callVideoProvider == null) {
+            return;
+        }
+
+        if (pause) {
+            callVideoProvider.setCamera(null);
+            VideoCallProfile videoCallProfile = new VideoCallProfile(
+                    mCall.getVideoState() | VideoCallProfile.VIDEO_STATE_PAUSED);
+            callVideoProvider.sendSessionModifyRequest(videoCallProfile);
+        } else {
+            callVideoProvider.setCamera(getCameraId());
+            VideoCallProfile videoCallProfile = new VideoCallProfile(
+                    mCall.getVideoState() & ~VideoCallProfile.VIDEO_STATE_PAUSED);
+            callVideoProvider.sendSessionModifyRequest(videoCallProfile);
+        }
+        getUi().setPauseVideoButton(pause);
     }
 
     private void updateUi(InCallState state, Call call) {
@@ -343,6 +421,39 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
     }
 
+    private String getCameraId() {
+        String[] cameraIds = {};
+        String cameraId = null;
+        int targetCharacteristic = mUseFrontFacingCamera
+                ? CameraCharacteristics.LENS_FACING_FRONT : CameraCharacteristics.LENS_FACING_BACK;
+
+        try {
+            cameraIds = mCameraManager.getCameraIdList();
+        } catch (CameraAccessException e) {
+            // Camera disabled by device policy.
+        }
+
+        for (int i = 0; i < cameraIds.length; i++) {
+            CameraCharacteristics c = null;
+            try {
+                c = mCameraManager.getCameraCharacteristics(cameraIds[i]);
+            } catch (IllegalArgumentException e) {
+                // Device Id is unknown.
+            } catch (CameraAccessException e) {
+                // Camera disabled by device policy.
+            }
+            if (c != null) {
+                int facingCharacteristic = c.get(CameraCharacteristics.LENS_FACING);
+                if (facingCharacteristic == targetCharacteristic) {
+                    cameraId = cameraIds[i];
+                    break;
+                }
+            }
+        }
+
+        return cameraId;
+    }
+
     public void refreshMuteState() {
         // Restore the previous mute state
         if (mAutomaticallyMuted &&
@@ -368,10 +479,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void showSwapButton(boolean show);
         void showChangeToVideoButton(boolean show);
         void showSwitchCameraButton(boolean show);
+        void setSwitchCameraButton(boolean isBackFacingCamera);
         void showAddCallButton(boolean show);
         void enableAddCall(boolean enabled);
         void showMergeButton(boolean show);
         void showPauseVideoButton(boolean show);
+        void setPauseVideoButton(boolean isPaused);
         void showOverflowButton(boolean show);
         void displayDialpad(boolean on, boolean animate);
         boolean isDialpadVisible();
