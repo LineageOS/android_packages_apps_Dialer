@@ -312,7 +312,7 @@ public final class Call {
     }
 
     public PhoneAccountHandle getAccountHandle() {
-        return mTelecommCall.getDetails().getAccount();
+        return mTelecommCall.getDetails().getAccountHandle();
     }
 
     public RemoteCallVideoProvider getCallVideoProvider() {

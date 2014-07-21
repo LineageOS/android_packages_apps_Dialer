@@ -695,7 +695,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         // we get an incoming call.
         final boolean startStartupSequence = (InCallState.INCOMING == newState);
 
-        // A dialog to show on top of the InCallUI to select a PhoneAccountHandle
+        // A dialog to show on top of the InCallUI to select a PhoneAccount
         final boolean showAccountPicker = (InCallState.WAITING_FOR_ACCOUNT == newState);
 
         // A new outgoing call indicates that the user just now dialed a number and when that
