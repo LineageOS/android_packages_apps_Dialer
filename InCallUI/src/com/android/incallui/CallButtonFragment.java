@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -492,7 +493,9 @@ public class CallButtonFragment
     private void showAudioModePopup() {
         Log.d(this, "showAudioPopup()...");
 
-        mAudioModePopup = new PopupMenu(getView().getContext(), mAudioButton /* anchorView */);
+        final ContextThemeWrapper contextWrapper = new ContextThemeWrapper(getActivity(),
+                R.style.InCallPopupMenuStyle);
+        mAudioModePopup = new PopupMenu(contextWrapper, mAudioButton /* anchorView */);
         mAudioModePopup.getMenuInflater().inflate(R.menu.incall_audio_mode_menu,
                 mAudioModePopup.getMenu());
         mAudioModePopup.setOnMenuItemClickListener(this);
