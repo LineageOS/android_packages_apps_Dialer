@@ -98,7 +98,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     private View[] mList;
 
     public CallLogFragmentTest() {
-        super("com.android.dialer", FragmentTestActivity.class);
+        super(FragmentTestActivity.class);
         mIndex = 1;
         mRnd = new Random();
     }
@@ -400,7 +400,8 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
      */
     private Bitmap getBitmap(String resName) {
         Resources r = mActivity.getResources();
-        int resid = r.getIdentifier(resName, "drawable", "com.android.dialer");
+        int resid = r.getIdentifier(resName, "drawable",
+                getInstrumentation().getTargetContext().getPackageName());
         BitmapDrawable d = (BitmapDrawable) r.getDrawable(resid);
         assertNotNull(d);
         return d.getBitmap();
