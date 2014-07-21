@@ -127,12 +127,10 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Konferenz verwalten"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Audio"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videoanruf"</string>
-    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
-    <skip />
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Zu Sprachanruf wechseln"</string>
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Kamera wechseln"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Video pausieren"</string>
-    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
-    <skip />
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"Weitere Optionen"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Dienst"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Einrichtung"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Nicht festgelegt&gt;"</string>

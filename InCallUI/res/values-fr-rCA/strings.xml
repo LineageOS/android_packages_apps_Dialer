@@ -89,8 +89,7 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Aucun service"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Réseau sélectionné (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) non disponible"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Raccrocher"</string>
-    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
-    <skip />
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Vidéo"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Vocal"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Accepter"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Fermer"</string>

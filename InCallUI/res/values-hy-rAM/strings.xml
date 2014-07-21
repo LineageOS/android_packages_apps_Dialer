@@ -90,8 +90,7 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Ծառայություններ չկան"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Ընտրված ցանցը (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) անհասանելի է"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Վայր դնել"</string>
-    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
-    <skip />
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Տեսազանգ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Ձայնային"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Ընդունել"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Անտեսել"</string>

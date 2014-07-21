@@ -127,12 +127,10 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"परिषद व्यवस्थापित करा"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"ऑडिओ"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"व्हिडिओ कॉल"</string>
-    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
-    <skip />
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"व्हॉइस कॉल वर बदला"</string>
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"कॅमेरा स्विच करा"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"व्हिडिओला विराम द्या"</string>
-    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
-    <skip />
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"अधिक पर्याय"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"सेवा"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"सेटअप"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;सेट नाही&gt;"</string>

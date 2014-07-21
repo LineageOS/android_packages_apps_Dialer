@@ -71,8 +71,7 @@
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Videopuheluun liittyminen ei onnistu"</string>
     <!-- no translation found for card_title_callback_number (4604563437776874016) -->
     <skip />
-    <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
-    <skip />
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"Hätätilanteiden takaisinsoittonumero\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Soitetaan"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Vastaamatta jäänyt puhelu"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Vastaamattomat puhelut"</string>
@@ -181,8 +180,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Soittoääni ja värinä"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Hallinnoi puhelinneuvottelua"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Hätänumero"</string>
-    <!-- no translation found for select_account_dialog_title (5730339500156684204) -->
-    <skip />
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"Valitse tili"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
