@@ -65,6 +65,11 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"قطع تماس"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"در تماس"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"شماره من <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g> است"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"در حال برقراری تماس ویدیویی"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"تماس ویدیویی"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"درحال درخواست تماس ویدیویی"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"برقرار کردن اتصال تماس ویدیویی انجام نشد"</string>
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"شماره تماس اضطراری شما\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"شماره‌گیری"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"تماس بی پاسخ"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"تماس‌های بی پاسخ"</string>
@@ -73,6 +78,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"تماس جاری"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"در انتظار"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"تماس ورودی"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"تماس ویدیویی ورودی"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"درخواست تماس ویدیویی ورودی"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"پست صوتی جدید"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"پست صوتی جدید (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"شماره گیری <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
@@ -80,6 +87,10 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"بدون سرویس"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"شبکه انتخابی (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) قابل دسترس نیست"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"قطع تماس"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"ویدیو"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"صدا"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"پذیرش"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"ردکردن"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"پاسخ تماس"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"پیام"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"برای برقراری یک تماس، ابتدا حالت هواپیما را خاموش کنید."</string>
@@ -114,6 +125,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"مدیریت کنفرانس"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"صوتی"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"تماس ویدیویی"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"تغییر دوربین"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"توقف موقت ویدیو"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"سرویس"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"تنظیم"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"‏&lt;تنظیم نشده&gt;"</string>
@@ -145,20 +162,23 @@
     <string name="description_target_answer" msgid="7205604197797472471">"پاسخ"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"ارسال پیامک"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"عدم پذیرش"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"پاسخ به صورت تماس ویدیویی"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"پاسخ به صورت تماس صوتی"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به بالا بلغزانید."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به چپ بلغزانید."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به راست بلغزانید."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به پایین بلغزانید."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"لرزش"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"لرزش"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"صدا"</string>
     <string name="default_notification_description" msgid="78174796906240970">"صدای پیش‌فرض (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"آهنگ زنگ تلفن"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"ارتعاش هنگام زنگ زدن"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"صداهای پد لمسی شماره‌گیری"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"تکمیل خودکار صفحه شماره‌گیری"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"آهنگ‌ زنگ و لرزش"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"مدیریت تماس کنفرانس"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"شماره اضطراری"</string>
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"انتخاب حساب"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"۰"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"۱"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"۲"</string>

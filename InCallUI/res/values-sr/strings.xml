@@ -65,6 +65,11 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"Прекид везе"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"У позиву"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"Мој број је <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"Повезивање са видео позивом"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"Видео позив"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Захтевање видео позива"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"Повезивање са видео позивом није могуће"</string>
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"Број за хитни повратни позив\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Бирање"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Пропуштен позив"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Пропуштени позиви"</string>
@@ -73,6 +78,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Актуелни позив"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"На чекању"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Долазни позив"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Долазни видео позив"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Захтев за долазни видео позив"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Нова говорна пошта"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Нова говорна пошта (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Позови <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
@@ -80,6 +87,10 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Нема услуге"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Изабрана мрежа (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) није доступна"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Прекини везу"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Видео"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Гласовни"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"Прихвати"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Одбиј"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Узврати позив"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Порука"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Да бисте упутили позив, прво искључите режим рада у авиону."</string>
@@ -114,6 +125,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Управљај конференцијом"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Аудио"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Видео поз."</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Промени камеру"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Паузирај видео"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"Услуга"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Подешавање"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Није подешено&gt;"</string>
@@ -145,20 +162,23 @@
     <string name="description_target_answer" msgid="7205604197797472471">"Одговори"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Пошаљи SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Одбиј"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Одговорите видео позивом"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Одговорите аудио-позивом"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"Превуците нагоре за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"Превуците улево за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"Превуците удесно за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"Превуците надоле за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Вибрација"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Вибрација"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Звук"</string>
     <string name="default_notification_description" msgid="78174796906240970">"Подразумевани звук (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Мелодија звона телефона"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Вибрирај када звони"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Тонови при додиру нумеричке тастатуре"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"Аутом. довршавање нумеричке тастатуре"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Мелодија звона и вибрација"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Управљање конференцијским позивом"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Број за хитне случајеве"</string>
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"Изаберите налог"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>

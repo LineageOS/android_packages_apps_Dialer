@@ -65,6 +65,11 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"Завершение разговора"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"Поступающий вызов"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"Мой номер: <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"Подключение видео"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"Видеовстреча"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Запрос видео"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"Не удается начать видеовстречу"</string>
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"Ваш номер отображается как:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Набор номера"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Пропущенный вызов"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Пропущенные вызовы"</string>
@@ -73,6 +78,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Текущий вызов"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"На удержании"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Входящий вызов"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Входящий видеовызов"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Входящий видеовызов"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Новое сообщение голосовой почты"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Новое сообщение голосовой почты (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Набор <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
@@ -80,6 +87,10 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Сеть не найдена"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Выбранная сеть (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) недоступна."</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Завершить разговор"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Видео"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Голосовой вызов"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"Принять"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Закрыть"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Позвонить"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Написать"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Перед тем как звонить, отключите режим полета."</string>
@@ -114,6 +125,12 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Управление конференцией"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Аудио"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Видео"</string>
+    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
+    <skip />
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Переключение камеры"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Приостановить видео"</string>
+    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"Служба"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Настройка"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Не задано&gt;"</string>
@@ -142,23 +159,26 @@
     <string name="description_delete_button" msgid="4015842181592283903">"возврат"</string>
     <string name="accessibility_speakerphone_enabled" msgid="1988512040421036359">"Громкая связь включена."</string>
     <string name="accessibility_call_muted" msgid="2776111226185342220">"Звук выключен."</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"Правильный вариант"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Ответить"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Отправить SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Отклонить"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Ответить с видео"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Ответить на голосовой вызов"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"Проведите вверх, чтобы <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"Проведите влево, чтобы <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"Проведите вправо, чтобы <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"Проведите вниз, чтобы <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Вибросигнал"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Вибросигнал"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Звук"</string>
     <string name="default_notification_description" msgid="78174796906240970">"По умолчанию (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Рингтон"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Вибросигнал и рингтон"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Звук клавиш"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"Автозаполнение номера"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Рингтон и вибросигнал"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Управление конференц-связью"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Экстренная служба"</string>
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"Выбрать аккаунт"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
