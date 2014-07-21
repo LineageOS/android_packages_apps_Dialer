@@ -627,6 +627,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mFloatingActionButtonController.setVisible(enabled);
     }
 
+    /**
+     * Changes the visibility of the contact photo.
+     *
+     * @param isVisible {@code True} if the UI should show the contact photo.
+     */
+    @Override
+    public void setPhotoVisible(boolean isVisible) {
+        mPhoto.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
     private void dispatchPopulateAccessibilityEvent(AccessibilityEvent event, View view) {
         if (view == null) return;
         final List<CharSequence> eventText = event.getText();
