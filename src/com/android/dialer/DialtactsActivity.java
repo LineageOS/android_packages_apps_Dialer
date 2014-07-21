@@ -36,6 +36,7 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
+import android.telecomm.TelecommManager;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -114,10 +115,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
 
-    /** Used to open Call Setting */
-    private static final String PHONE_PACKAGE = "com.android.phone";
-    private static final String CALL_SETTINGS_CLASS_NAME =
-            "com.android.phone.CallFeaturesSetting";
     /** @see #getCallOrigin() */
     private static final String CALL_ORIGIN_DIALTACTS =
             "com.android.dialer.DialtactsActivity";
@@ -926,8 +923,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     /** Returns an Intent to launch Call Settings screen */
     public static Intent getCallSettingsIntent() {
-        final Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setClassName(PHONE_PACKAGE, CALL_SETTINGS_CLASS_NAME);
+        final Intent intent = new Intent(TelecommManager.ACTION_SHOW_CALL_SETTINGS);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         return intent;
     }
