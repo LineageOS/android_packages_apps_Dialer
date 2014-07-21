@@ -56,6 +56,7 @@ public class CallButtonFragment
 
     private PopupMenu mAudioModePopup;
     private boolean mAudioModePopupVisible;
+    private PopupMenu mOverflowPopup;
     private View mExtraRowButton;
     private View mManageConferenceButton;
     private View mGenericMergeButton;
@@ -190,7 +191,7 @@ public class CallButtonFragment
                         !mPauseVideoButton.isSelected() /* pause */);
                 break;
             case R.id.overflowButton:
-                // TODO: Implement.
+                mOverflowPopup.show();
                 break;
             case R.id.manageConferenceButton:
                 getPresenter().manageConferenceButtonClicked();
@@ -311,6 +312,61 @@ public class CallButtonFragment
     @Override
     public void showOverflowButton(boolean show) {
         mOverflowButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void configureOverflowMenu(boolean showMergeMenuOption, boolean showAddMenuOption,
+            boolean showHoldMenuOption, boolean showSwapMenuOption) {
+        if (mOverflowPopup == null) {
+            final ContextThemeWrapper contextWrapper = new ContextThemeWrapper(getActivity(),
+                    R.style.InCallPopupMenuStyle);
+            mOverflowPopup = new PopupMenu(contextWrapper, mOverflowButton);
+            mOverflowPopup.getMenuInflater().inflate(R.menu.incall_overflow_menu,
+                    mOverflowPopup.getMenu());
+            mOverflowPopup.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.overflow_merge_menu_item:
+                            getPresenter().mergeClicked();
+                            break;
+                        case R.id.overflow_add_menu_item:
+                            getPresenter().addCallClicked();
+                            break;
+                        case R.id.overflow_hold_menu_item:
+                            getPresenter().holdClicked(true /* checked */);
+                            break;
+                        case R.id.overflow_resume_menu_item:
+                            getPresenter().holdClicked(false /* checked */);
+                            break;
+                        case R.id.overflow_swap_menu_item:
+                            getPresenter().addCallClicked();
+                            break;
+                        default:
+                            Log.wtf(this, "onMenuItemClick: unexpected overflow menu click");
+                            break;
+                    }
+                    return true;
+                }
+            });
+            mOverflowPopup.setOnDismissListener(new OnDismissListener() {
+                @Override
+                public void onDismiss(PopupMenu popupMenu) {
+                    popupMenu.dismiss();
+                }
+            });
+        }
+
+        final Menu menu = mOverflowPopup.getMenu();
+        menu.findItem(R.id.overflow_merge_menu_item).setVisible(showMergeMenuOption);
+        menu.findItem(R.id.overflow_add_menu_item).setVisible(showAddMenuOption);
+        menu.findItem(R.id.overflow_hold_menu_item).setVisible(
+                showHoldMenuOption && !mHoldButton.isSelected());
+        menu.findItem(R.id.overflow_resume_menu_item).setVisible(
+                showHoldMenuOption && mHoldButton.isSelected());
+        menu.findItem(R.id.overflow_swap_menu_item).setVisible(showSwapMenuOption);
+
+        mOverflowButton.setEnabled(menu.hasVisibleItems());
     }
 
     @Override
