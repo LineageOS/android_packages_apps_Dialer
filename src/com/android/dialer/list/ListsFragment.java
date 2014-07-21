@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.DialtactsActivity;
 
 import android.view.View.OnClickListener;
