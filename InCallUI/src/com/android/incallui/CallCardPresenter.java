@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+
+import android.net.Uri;
 import android.os.Bundle;
 import android.telecomm.CallCapabilities;
 import android.telecomm.PhoneAccount;
@@ -39,7 +41,6 @@ import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
-
 import com.google.common.base.Preconditions;
 
 /**
@@ -198,7 +199,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             getUi().setCallState(callState, mPrimary.getDisconnectCause(), getConnectionLabel(),
                     getConnectionIcon(), getGatewayNumber());
 
-            String currentNumber = mPrimary.getHandle().getSchemeSpecificPart();
+            Uri handle = mPrimary.getHandle();
+            String currentNumber = getNumberFromHandle(mPrimary.getHandle());
             if (PhoneNumberUtils.isEmergencyNumber(currentNumber)) {
                 String callbackNumber = getSubscriptionNumber();
                 setCallbackNumber(callbackNumber, true);
@@ -239,7 +241,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private void setCallbackNumberIfSet(android.telecomm.Call.Details details) {
         String callbackNumber = null;
 
-        String currentNumber = mPrimary.getHandle().getSchemeSpecificPart();
+        String currentNumber = getNumberFromHandle(mPrimary.getHandle());
         boolean isEmergencyCall = PhoneNumberUtils.isEmergencyNumber(currentNumber);
 
         StatusHints statusHints = details.getStatusHints();
@@ -473,7 +475,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     private String getGatewayNumber() {
         if (hasOutgoingGatewayCall()) {
-            return mPrimary.getGatewayInfo().getGatewayHandle().getSchemeSpecificPart();
+            return getNumberFromHandle(mPrimary.getGatewayInfo().getGatewayHandle());
         }
         return null;
     }
@@ -593,6 +595,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         Log.i(this, "Disconnecting call: " + mPrimary);
         TelecommAdapter.getInstance().disconnectCall(mPrimary.getId());
+    }
+
+    private String getNumberFromHandle(Uri handle) {
+        return handle == null ? "" : handle.getSchemeSpecificPart();
     }
 
     public interface CallCardUi extends Ui {
