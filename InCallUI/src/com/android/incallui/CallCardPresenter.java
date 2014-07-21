@@ -207,6 +207,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             getUi().setCallState(callState, DisconnectCause.NOT_VALID, null, null, null);
         }
 
+        // Hide/show the contact photo depending if this is a video call
+        if (mPrimary != null) {
+            getUi().setPhotoVisible(!mPrimary.isVideoCall());
+        }
+
         final boolean enableEndCallButton = Call.State.isConnected(callState) &&
                 callState != Call.State.INCOMING && mPrimary != null;
         getUi().setEndCallButtonEnabled(enableEndCallButton);
@@ -612,6 +617,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setEndCallButtonEnabled(boolean enabled);
         void setCallbackNumber(String number, boolean isEmergencyCalls);
         void setCallDetails(android.telecomm.Call.Details details);
+        void setPhotoVisible(boolean isVisible);
     }
 
     private TelecommManager getTelecommManager() {

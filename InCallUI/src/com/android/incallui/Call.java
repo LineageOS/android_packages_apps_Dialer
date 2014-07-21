@@ -335,11 +335,12 @@ public final class Call {
 
     @Override
     public String toString() {
-        return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s]",
+        return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s, videoState:%d]",
                 mId,
                 State.toString(mState),
                 CallCapabilities.toString(mTelecommCall.getDetails().getCapabilities()),
                 mChildCallIds,
-                mParentCallId);
+                mParentCallId,
+                mTelecommCall.getDetails().getVideoState());
     }
 }
