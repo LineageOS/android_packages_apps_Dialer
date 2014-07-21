@@ -18,7 +18,7 @@ package com.android.incallui;
 
 import android.net.Uri;
 import android.telecomm.CallCapabilities;
-import android.telecomm.PhoneAccount;
+import android.telecomm.PhoneAccountHandle;
 import android.telecomm.RemoteCallVideoProvider;
 import android.telecomm.GatewayInfo;
 import android.telecomm.VideoCallProfile;
@@ -311,7 +311,7 @@ public final class Call {
         return mTelecommCall.getDetails().getGatewayInfo();
     }
 
-    public PhoneAccount getAccount() {
+    public PhoneAccountHandle getAccountHandle() {
         return mTelecommCall.getDetails().getAccount();
     }
 

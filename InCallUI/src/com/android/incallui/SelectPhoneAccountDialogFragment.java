@@ -16,7 +16,7 @@
 
 package com.android.incallui;
 
-import com.google.android.collect.Lists;
+import android.telecomm.PhoneAccountHandle;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -25,7 +25,6 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.telecomm.PhoneAccount;
 import android.telecomm.PhoneAccountMetadata;
 import android.telecomm.TelecommManager;
 import android.view.LayoutInflater;
@@ -38,15 +37,13 @@ import android.widget.TextView;
 
 import com.android.contacts.common.R;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Dialog that allows the user to switch between default SIM cards
  */
 public class SelectPhoneAccountDialogFragment extends DialogFragment {
-    private List<PhoneAccount> mAccounts;
+    private List<PhoneAccountHandle> mAccountHandless;
     private boolean mIsSelected;
     private TelecommManager mTelecommManager;
 
@@ -60,15 +57,15 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         mIsSelected = false;
         mTelecommManager = TelecommManager.from(getActivity());
-        mAccounts = mTelecommManager.getEnabledPhoneAccounts();
+        mAccountHandless = mTelecommManager.getEnabledPhoneAccounts();
 
         final DialogInterface.OnClickListener selectionListener =
                 new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mIsSelected = true;
-                PhoneAccount selectedAccount = mAccounts.get(which);
-                InCallPresenter.getInstance().handleAccountSelection(selectedAccount);
+                PhoneAccountHandle selectedAccountHandle = mAccountHandless.get(which);
+                InCallPresenter.getInstance().handleAccountSelection(selectedAccountHandle);
             }
         };
 
@@ -77,18 +74,19 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
         ListAdapter selectAccountListAdapter = new SelectAccountListAdapter(
                 builder.getContext(),
                 R.layout.select_account_list_item,
-                mAccounts);
+                mAccountHandless);
 
         return builder.setTitle(R.string.select_account_dialog_title)
                 .setAdapter(selectAccountListAdapter, selectionListener)
                 .create();
     }
 
-    private class SelectAccountListAdapter extends ArrayAdapter<PhoneAccount> {
+    private class SelectAccountListAdapter extends ArrayAdapter<PhoneAccountHandle> {
         private Context mContext;
         private int mResId;
 
-        public SelectAccountListAdapter(Context context, int resource, List<PhoneAccount> objects) {
+        public SelectAccountListAdapter(
+                Context context, int resource, List<PhoneAccountHandle> objects) {
             super(context, resource, objects);
             mContext = context;
             mResId = resource;
@@ -115,7 +113,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
                 holder = (ViewHolder) rowView.getTag();
             }
 
-            PhoneAccount item = getItem(position);
+            PhoneAccountHandle item = getItem(position);
             PhoneAccountMetadata itemMetadata = mTelecommManager.getPhoneAccountMetadata(item);
             holder.textView.setText(itemMetadata.getLabel());
             holder.imageView.setImageDrawable(itemMetadata.getIcon(mContext));
