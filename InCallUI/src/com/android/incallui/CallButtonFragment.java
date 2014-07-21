@@ -68,8 +68,7 @@ public class CallButtonFragment
 
     @Override
     CallButtonPresenter createPresenter() {
-        // TODO: find a cleaner way to include audio mode provider than
-        // having a singleton instance.
+        // TODO: find a cleaner way to include audio mode provider than having a singleton instance.
         return new CallButtonPresenter();
     }
 
@@ -91,50 +90,20 @@ public class CallButtonFragment
         mExtraRowButton = parent.findViewById(R.id.extraButtonRow);
 
         mManageConferenceButton = parent.findViewById(R.id.manageConferenceButton);
-        mManageConferenceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getPresenter().manageConferenceButtonClicked();
-            }
-        });
+        mManageConferenceButton.setOnClickListener(this);
         mGenericMergeButton = parent.findViewById(R.id.cdmaMergeButton);
-        mGenericMergeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getPresenter().mergeClicked();
-            }
-        });
-
-        mMuteButton = (ImageButton) parent.findViewById(R.id.muteButton);
-        mMuteButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final ImageButton button = (ImageButton) v;
-                getPresenter().muteClicked(!button.isSelected());
-            }
-        });
+        mGenericMergeButton.setOnClickListener(this);
 
         mAudioButton = (ImageButton) parent.findViewById(R.id.audioButton);
-        mAudioButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onAudioButtonClicked();
-            }
-        });
-
-        mHoldButton = (ImageButton) parent.findViewById(R.id.holdButton);
-        mHoldButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final ImageButton button = (ImageButton) v;
-                getPresenter().holdClicked(!button.isSelected());
-            }
-        });
-
+        mAudioButton.setOnClickListener(this);
         mChangeToVoiceButton = (ImageButton) parent.findViewById(R.id.changeToVoiceButton);
         mChangeToVoiceButton. setOnClickListener(this);
+        mMuteButton = (ImageButton) parent.findViewById(R.id.muteButton);
+        mMuteButton.setOnClickListener(this);
         mShowDialpadButton = (ImageButton) parent.findViewById(R.id.dialpadButton);
         mShowDialpadButton.setOnClickListener(this);
+        mHoldButton = (ImageButton) parent.findViewById(R.id.holdButton);
+        mHoldButton.setOnClickListener(this);
         mSwapButton = (ImageButton) parent.findViewById(R.id.swapButton);
         mSwapButton.setOnClickListener(this);
         mChangeToVideoButton = (ImageButton) parent.findViewById(R.id.changeToVideoButton);
@@ -159,6 +128,7 @@ public class CallButtonFragment
 
         // set the buttons
         updateAudioButtons(getPresenter().getSupportedAudio());
+        getPresenter().initializeCameraManager(getActivity().getApplicationContext());
     }
 
     @Override
@@ -179,24 +149,51 @@ public class CallButtonFragment
         Log.d(this, "onClick(View " + view + ", id " + id + ")...");
 
         switch(id) {
+            case R.id.audioButton:
+                onAudioButtonClicked();
+                break;
             case R.id.addButton:
                 getPresenter().addCallClicked();
                 break;
+            case R.id.changeToVoiceButton:
+                getPresenter().changeToVoiceClicked();
+                break;
+            case R.id.muteButton: {
+                final ImageButton button = (ImageButton) view;
+                getPresenter().muteClicked(!button.isSelected());
+                break;
+            }
+            case R.id.cdmaMergeButton:
             case R.id.mergeButton:
                 getPresenter().mergeClicked();
                 break;
+            case R.id.holdButton: {
+                final ImageButton button = (ImageButton) view;
+                getPresenter().holdClicked(!button.isSelected());
+                break;
+            }
             case R.id.swapButton:
                 getPresenter().swapClicked();
                 break;
             case R.id.dialpadButton:
                 getPresenter().showDialpadClicked(!mShowDialpadButton.isSelected());
                 break;
-            case R.id.changeToVoiceButton:
             case R.id.changeToVideoButton:
+                getPresenter().changeToVideoClicked();
+                break;
             case R.id.switchCameraButton:
+                getPresenter().switchCameraClicked(
+                        mSwitchCameraButton.isSelected() /* useFrontFacingCamera */);
+                break;
             case R.id.pauseVideoButton:
+                getPresenter().pauseVideoClicked(
+                        !mPauseVideoButton.isSelected() /* pause */);
+                break;
             case R.id.overflowButton:
-                // TODO: Implement these button behaviors.
+                // TODO: Implement.
+                break;
+            case R.id.manageConferenceButton:
+                getPresenter().manageConferenceButtonClicked();
                 break;
             default:
                 Log.wtf(this, "onClick: unexpected");
@@ -282,6 +279,11 @@ public class CallButtonFragment
     }
 
     @Override
+    public void setSwitchCameraButton(boolean isBackFacingCamera) {
+        mSwitchCameraButton.setSelected(isBackFacingCamera);
+    }
+
+    @Override
     public void showAddCallButton(boolean show) {
         mAddCallButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
@@ -299,6 +301,11 @@ public class CallButtonFragment
     @Override
     public void showPauseVideoButton(boolean show) {
         mPauseVideoButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void setPauseVideoButton(boolean isPaused) {
+        mPauseVideoButton.setSelected(isPaused);
     }
 
     @Override
