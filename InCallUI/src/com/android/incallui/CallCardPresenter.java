@@ -72,7 +72,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         });
     }
 
-
     public void init(Context context, Call call) {
         mContext = Preconditions.checkNotNull(context);
 
@@ -196,7 +195,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             callState = mPrimary.getState();
 
             getUi().setCallState(callState, mPrimary.getDisconnectCause(), getConnectionLabel(),
-                    getConnectionIcon(), getGatewayNumber());
+                    getCallProviderIcon(mPrimary), getGatewayNumber());
 
             String currentNumber = getNumberFromHandle(mPrimary.getHandle());
             if (PhoneNumberUtils.isEmergencyNumber(currentNumber)) {
@@ -465,12 +464,24 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             final boolean nameIsNumber = nameForCall != null && nameForCall.equals(
                     mSecondaryContactInfo.number);
             ui.setSecondary(true /* show */, nameForCall, nameIsNumber, mSecondaryContactInfo.label,
-                    getSecondaryCallProviderLabel(), getSecondaryCallProviderIcon(),
+                    getCallProviderLabel(mSecondary), getCallProviderIcon(mSecondary),
                     isConference, isGenericConf);
         } else {
             // reset to nothing so that it starts off blank next time we use it.
             ui.setSecondary(false, null, false, null, null, null, isConference, isGenericConf);
         }
+    }
+
+
+    /**
+     * Gets the phone account to display for a call.
+     */
+    private PhoneAccount getAccountForCall(Call call) {
+        PhoneAccountHandle accountHandle = call.getAccountHandle();
+        if (accountHandle == null) {
+            return null;
+        }
+        return getTelecommManager().getPhoneAccount(accountHandle);
     }
 
     /**
@@ -486,13 +497,21 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     /**
      * Return the Drawable object of the icon to display to the left of the connection label.
      */
-    private Drawable getConnectionIcon() {
-        PhoneAccountHandle accountHandle = mPrimary.getAccountHandle();
-        if (accountHandle != null) {
-            PhoneAccount account = getTelecommManager().getPhoneAccount(accountHandle);
-            if (account != null) {
-                return account.getIcon(mContext);
-            }
+    private Drawable getCallProviderIcon(Call call) {
+        PhoneAccount account = getAccountForCall(call);
+        if (account != null && getTelecommManager().hasMultipleEnabledAccounts()) {
+            return account.getIcon(mContext);
+        }
+        return null;
+    }
+
+    /**
+     * Return the string label to represent the call provider
+     */
+    private String getCallProviderLabel(Call call) {
+        PhoneAccount account = getAccountForCall(call);
+        if (account != null && getTelecommManager().hasMultipleEnabledAccounts()) {
+            return account.getLabel().toString();
         }
         return null;
     }
@@ -514,36 +533,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 return null;
             }
         }
-        PhoneAccountHandle accountHandle = mPrimary.getAccountHandle();
-        if (accountHandle != null) {
-            PhoneAccount account = getTelecommManager().getPhoneAccount(accountHandle);
-            if (account != null) {
-                return getAccountLabel(account);
-            }
-        }
-        return null;
-    }
-
-    private String getSecondaryCallProviderLabel() {
-        PhoneAccountHandle accountHandle = mSecondary.getAccountHandle();
-        if (accountHandle != null) {
-            PhoneAccount account = getTelecommManager().getPhoneAccount(accountHandle);
-            if (account != null) {
-                return getAccountLabel(account);
-            }
-        }
-        return null;
-    }
-
-    private Drawable getSecondaryCallProviderIcon() {
-        PhoneAccountHandle accountHandle = mSecondary.getAccountHandle();
-        if (accountHandle != null) {
-            PhoneAccount account = getTelecommManager().getPhoneAccount(accountHandle);
-            if (account != null) {
-                return account.getIcon(mContext);
-            }
-        }
-        return null;
+        return getCallProviderLabel(mPrimary);
     }
 
     private boolean hasOutgoingGatewayCall() {
@@ -602,10 +592,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     private String getNumberFromHandle(Uri handle) {
         return handle == null ? "" : handle.getSchemeSpecificPart();
-    }
-
-    private String getAccountLabel(PhoneAccount account) {
-        return account.getLabel() == null ? null : account.getLabel().toString();
     }
 
     public interface CallCardUi extends Ui {
