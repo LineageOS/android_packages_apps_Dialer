@@ -379,27 +379,40 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
         ui.showChangeToVideoButton(canVideoCall);
 
-        if (canVideoCall && (canHold || canSwap || supportHold)) {
+        // Show either MERGE or ADD, but not both.
+        final boolean showMergeOption = showMerge;
+        final boolean showAddCallOption = !showMerge;
+        final boolean enableAddCallOption = showAddCallOption && canAdd;
+        // Show either HOLD or SWAP, but not both.
+        // If neither HOLD or SWAP is available:
+        //     (1) If the device normally can hold/swap, show HOLD in a disabled state.
+        //     (2) If the device doesn't have the concept of hold/swap, remove the button.
+        final boolean showHoldOption = canHold || (!canSwap && supportHold);
+        final boolean enableHoldOption = canHold;
+        final boolean showSwapOption = !canHold && canSwap;
+
+        ui.setHold(call.getState() == Call.State.ONHOLD);
+        if (canVideoCall && (showAddCallOption || showMergeOption)
+                && (showHoldOption || showSwapOption)) {
             ui.showHoldButton(false);
             ui.showSwapButton(false);
             ui.showAddCallButton(false);
             ui.showMergeButton(false);
 
             ui.showOverflowButton(true);
+            ui.configureOverflowMenu(
+                    showMergeOption,
+                    showAddCallOption && enableAddCallOption /* showAddMenuOption */,
+                    showHoldOption && enableHoldOption /* showHoldMenuOption */,
+                    showSwapOption);
         } else {
-            // Show either MERGE or ADD button, but not both.
-            ui.showMergeButton(showMerge);
-            ui.showAddCallButton(!showMerge);
-            ui.enableAddCall(!showMerge && canAdd);
+            ui.showMergeButton(showMergeOption);
+            ui.showAddCallButton(showAddCallOption);
+            ui.enableAddCall(enableAddCallOption);
 
-            // Show either HOLD or SWAP button, but not both.
-            // If neither HOLD or SWAP is available:
-            //     (1) If the device normally can hold/swap, show HOLD in a disabled state.
-            //     (2) If the device doesn't have the concept of hold/swap, remove the button.
-            ui.showHoldButton(canHold || (!canSwap && supportHold));
-            ui.showSwapButton(!canHold && canSwap);
-            ui.setHold(call.getState() == Call.State.ONHOLD);
-            ui.enableHold(canHold);
+            ui.showHoldButton(showHoldOption);
+            ui.enableHold(enableHoldOption);
+            ui.showSwapButton(showSwapOption);
         }
     }
 
@@ -490,6 +503,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         boolean isDialpadVisible();
         void setAudio(int mode);
         void setSupportedAudio(int mask);
+        void configureOverflowMenu(boolean showMergeMenuOption, boolean showAddMenuOption,
+                boolean showHoldMenuOption, boolean showSwapMenuOption);
         void showManageConferenceCallButton();
         void showGenericMergeButton();
         void hideExtraRow();
