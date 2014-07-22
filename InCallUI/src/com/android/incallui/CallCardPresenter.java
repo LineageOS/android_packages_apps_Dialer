@@ -220,7 +220,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     @Override
-    public void onDetailsChanged(android.telecomm.Call.Details details) {
+    public void onDetailsChanged(Call call, android.telecomm.Call.Details details) {
         getUi().setCallDetails(details);
 
         if (mPrimary != null) {

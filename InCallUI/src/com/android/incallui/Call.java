@@ -202,7 +202,7 @@ public final class Call {
 
         if (mTelecommCall.getCallVideoProvider() != null) {
             if (mCallVideoClient == null) {
-                mCallVideoClient = new InCallVideoClient();
+                mCallVideoClient = new InCallVideoClient(this);
             }
             mTelecommCall.getCallVideoProvider().setCallVideoClient(mCallVideoClient);
         }
