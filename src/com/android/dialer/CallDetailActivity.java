@@ -17,6 +17,7 @@
 package com.android.dialer;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -32,6 +33,8 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract.Voicemails;
+import android.telecomm.PhoneAccount;
+import android.telecomm.TelecommManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -54,6 +57,7 @@ import com.android.dialer.calllog.CallLogQuery;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
+import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.AsyncTaskExecutor;
@@ -491,7 +495,11 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             final int callType = callCursor.getInt(CALL_TYPE_COLUMN_INDEX);
             String countryIso = callCursor.getString(COUNTRY_ISO_COLUMN_INDEX);
             final String geocode = callCursor.getString(GEOCODED_LOCATION_COLUMN_INDEX);
-            final Drawable accountIcon = getAccountIcon(callCursor);
+
+            final Drawable accountIcon = PhoneAccountUtils.getAccountIcon(this,
+                    PhoneAccountUtils.getAccount(
+                    callCursor.getString(ACCOUNT_COMPONENT_NAME),
+                    callCursor.getString(ACCOUNT_ID)));
 
             if (TextUtils.isEmpty(countryIso)) {
                 countryIso = mDefaultCountryIso;
@@ -545,17 +553,6 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                 callCursor.close();
             }
         }
-    }
-
-    /**
-     * Generate account object from data in Telecomm database
-     */
-    private Drawable getAccountIcon(Cursor c) {
-        final String component_name = c.getString(ACCOUNT_COMPONENT_NAME);
-        final String account_id = c.getString(ACCOUNT_ID);
-
-        // TODO: actually pull data from the database
-        return null;
     }
 
     /** Load the contact photos and places them in the corresponding views. */
