@@ -84,7 +84,6 @@
     room to the search box-->
     <dimen name="action_bar_height">64dp</dimen>
     <dimen name="tab_height">43dp</dimen>
-    <dimen name="tab_elevation">2dp</dimen>
     <!-- actionbar height + tab height -->
     <dimen name="actionbar_and_tab_height">107dp</dimen>
 
