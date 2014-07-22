@@ -288,6 +288,17 @@
          to dial using the physical keyboard -->
     <string name="dialerKeyboardHintText">Use keyboard to dial</string>
 
+    <!-- Text for the overflow "Hold call" menu item. -->
+    <string name="overflowHoldMenuItemText">Hold call</string>
+    <!-- Text for the overflow "Resume call" menu item. -->
+    <string name="overflowResumeMenuItemText">Resume call</string>
+    <!-- Text for the overflow "Add call" menu item. -->
+    <string name="overflowAddMenuItemText">Add call</string>
+    <!-- Text for the onscreen "Merge calls" menu item. -->
+    <string name="overflowMergeMenuItemText">Merge calls</string>
+    <!-- Text for the onscreen "Swap calls" menu item. -->
+    <string name="overflowSwapMenuItemText">Swap calls</string>
+
     <!-- Text for the onscreen "Hold" button -->
     <string name="onscreenHoldText">Hold</string>
     <!-- Text for the onscreen "End call" button -->
