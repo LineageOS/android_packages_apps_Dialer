@@ -296,6 +296,36 @@
     -->
     <string name="description_digits_edittext">number to dial</string>
 
+    <!-- String describing the button in the voicemail playback to start/stop playback.
+
+         Used by AccessibilityService to announce the purpose of the view.
+    -->
+    <string name="description_playback_start_stop">Play or stop playback</string>
+
+    <!-- String describing the button in the voicemail playback to switch on/off speakerphone.
+
+         Used by AccessibilityService to announce the purpose of the view.
+    -->
+    <string name="description_playback_speakerphone">Switch on or off speakerphone</string>
+
+    <!-- String describing the seekbar in the voicemail playback to seek playback position.
+
+         Used by AccessibilityService to announce the purpose of the view.
+    -->
+    <string name="description_playback_seek">Seek playback position</string>
+
+    <!-- String describing the button in the voicemail playback to decrease playback rate.
+
+         Used by AccessibilityService to announce the purpose of the view.
+    -->
+    <string name="description_rate_decrease">Decrease playback rate</string>
+
+    <!-- String describing the button in the voicemail playback to increase playback rate.
+
+         Used by AccessibilityService to announce the purpose of the view.
+    -->
+    <string name="description_rate_increase">Increase playback rate</string>
+
     <!-- Content description for the fake action menu button that brings up the call history
          activity -->
     <string name="action_menu_call_history_description">Call History</string>
