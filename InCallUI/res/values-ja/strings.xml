@@ -65,6 +65,11 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"通話終了"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"着信"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"この電話の番号: <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"ビデオハングアウトに接続しています"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"ビデオハングアウト"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"ビデオハングアウトをリクエストしています"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"ビデオハングアウトに接続できません"</string>
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"緊急通報コールバック番号\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"発信中"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"不在着信"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"不在着信"</string>
@@ -73,6 +78,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"通話中"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"保留中"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"通話着信"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"ビデオハングアウト着信"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"ビデオハングアウトリクエスト着信"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"新しいボイスメール"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"新しいボイスメール（<xliff:g id="COUNT">%d</xliff:g>）"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>にダイヤル"</string>
@@ -80,6 +87,10 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"通信サービスなし"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"選択したネットワーク（<xliff:g id="OPERATOR_NAME">%s</xliff:g>）が利用できません"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"通話終了"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"ビデオ"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"音声"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"同意する"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"拒否"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"コールバック"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"メッセージ"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"機内モードをOFFにしてから発信してください。"</string>
@@ -114,6 +125,10 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"グループ通話の管理"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"音声"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"ビデオハングアウト"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"音声通話に変更"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"カメラを切り替え"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"動画を一時停止"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"その他のオプション"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"サービス"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"セットアップ"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;未設定&gt;"</string>
@@ -145,20 +160,23 @@
     <string name="description_target_answer" msgid="7205604197797472471">"電話に出る"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMSを送信"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"着信拒否"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"ビデオハングアウトで電話に出る"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"音声通話で電話に出る"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"上にスライドして<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>を行います。"</string>
     <string name="description_direction_left" msgid="7129873384376533287">"左にスライドして<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>を行います。"</string>
     <string name="description_direction_right" msgid="2122584234531957308">"右にスライドして<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>を行います。"</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"下にスライドして<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>を行います。"</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"バイブレーション"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"バイブレーション"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"通知音"</string>
     <string name="default_notification_description" msgid="78174796906240970">"デフォルトの通知音（<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>）"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"着信音"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"着信時のバイブレーション"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"ダイヤルパッドのタッチ操作音"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"ダイヤルのオートコンプリート"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"着信音とバイブレーション"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"グループ通話オプション"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"緊急通報番号"</string>
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"アカウントの選択"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>

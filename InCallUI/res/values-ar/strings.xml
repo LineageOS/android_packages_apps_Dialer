@@ -65,6 +65,11 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"إنهاء المكالمة"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"قيد الاتصال"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"رقمي هو <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"جارٍ الاتصال بالفيديو"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"مكالمة فيديو"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"جارٍ طلب الفيديو"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"يتعذر الاتصال بمكالمة الفيديو"</string>
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"رقم مكالمات الطوارئ \n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"جارٍ الطلب"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"مكالمة فائتة"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"المكالمات الفائتة"</string>
@@ -73,6 +78,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"مكالمة حالية"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"معلقة"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"مكالمة واردة"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"مكالمة فيديو واردة"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"طلب فيديو وارد"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"بريد صوتي جديد"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"بريد صوتي جديد (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"طلب <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
@@ -80,6 +87,10 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"لا خدمة"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"الشبكة المحددة (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) غير متاحة"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"قطع الاتصال"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"فيديو"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"الصوت"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"قبول"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"تجاهل"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"معاودة الاتصال"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"رسالة"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"لإجراء مكالمة، أوقف تشغيل وضع الطائرة أولاً."</string>
@@ -114,6 +125,10 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"إدارة المؤتمر"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"الصوت"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"مكالمة فيديو"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"التغيير إلى مكالمة صوتية"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"تبديل الكاميرا"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"إيقاف الفيديو مؤقتًا"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"خيارات أخرى"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"الخدمة"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"الإعداد"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"‏&lt;لم يتم التعيين&gt;"</string>
@@ -145,20 +160,23 @@
     <string name="description_target_answer" msgid="7205604197797472471">"رد"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"‏إرسال رسائل قصيرة SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"رفض"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"الرد بمكالمة فيديو"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"الرد بمكالمة صوتية"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"تمرير لأعلى لـ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"تمرير لليسار لـ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"تمرير لليمين لـ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"تمرير لأسفل لـ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"الاهتزاز"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"الاهتزاز"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"الصوت"</string>
     <string name="default_notification_description" msgid="78174796906240970">"الصوت الافتراضي (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"نغمة رنين الهاتف"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"اهتزاز عند الرنين"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"نغمات لمس لوحة الطلب"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"الإكمال التلقائي للوحة الاتصال"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"نغمة الرنين والاهتزاز"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"إدارة مكالمة جماعية"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"رقم الطوارئ"</string>
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"تحديد الحساب"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>

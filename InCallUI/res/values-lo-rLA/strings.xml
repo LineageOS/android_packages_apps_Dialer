@@ -65,6 +65,11 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"ກຳລັງວາງສາຍ"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"ກຳລັງໃຊ້ສາຍ"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"ເບີໂທຂອງຂ້ອຍແມ່ນ <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"​ກຳ​ລັງ​ເຊື່ອມ​ຕໍ່​ວິ​ດີ​ໂອ"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"ໂທ​ແບບ​ເຫັນ​ໜ້າ"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"​ກຳ​ລັງ​ຮ້ອງ​ຂໍ​ວິ​ດີ​ໂອ"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"ບໍ່​ສາ​ມາດ​​ເຊື່ອມ​ຕໍ່​​ສາຍວິ​ດີ​ໂອໄດ້"</string>
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"​ໝາຍ​ເລກ​ໂທ​ກັບ​ສຸກ​ເສີນ​ຂອງ​ທ່ານ​ຄື\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"ກຳລັງໂທ"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"ສາຍທີ່ບໍ່ໄດ້ຮັບ"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"ສາຍທີ່ບໍ່ໄດ້ຮັບ"</string>
@@ -73,6 +78,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"ສາຍທີ່ກຳລັງໂທອອກ"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"ພັກສາຍຊົ່ວຄາວ"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"ສາຍໂທເຂົ້າ"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"ສາຍ​ວິດີໂອ​ເຂົ້າ"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"​ຄຳ​ຮ້ອງ​ຂໍ​ວິ​ດີ​ໂອ​ເຂົ້າ​ມາ"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"ຂໍ້ຄວາມສຽງໃໝ່"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"ຂໍ້ຄວາມສຽງໃໝ່ (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"ໂທຫາ <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
@@ -80,6 +87,10 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"ບໍ່ມີບໍລິການ"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"ບໍ່ສາມາດໃຊ້ເຄືອຂ່າຍທີ່ເລືອກ (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) ໄດ້"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"ວາງສາຍ"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"ວິດີໂອ"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"ສຽງ"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"ຍອມຮັບ"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"ປິດໄວ້"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"ໂທກັບ"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"ຂໍ້ຄວາມ"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"ເພື່ອໂທລະສັບ, ໃຫ້ປິດໂໝດຢູ່ເທິງຍົນກ່ອນ."</string>
@@ -114,6 +125,10 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"ຈັດການການປະຊຸມສາຍ"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"ສຽງ"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"ໂທແບບເຫັນໜ້າ"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"ປ່ຽນ​ເປັນ​ການ​ໂທ​ດ້ວຍ​ສຽງ"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"ສະລັບກ້ອງ"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"ຢຸດວິດີໂອຊົ່ວຄາວ"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"ໂຕ​ເລືອກ​ເພີ່ມ​ເຕີມ"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"ບໍລິການ"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"ຕັ້ງຄ່າ"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;ຍັງບໍ່ໄດ້ຕັ້ງ&gt;"</string>
@@ -145,20 +160,23 @@
     <string name="description_target_answer" msgid="7205604197797472471">"ຄໍາ​ຕອບ"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"ສົ່ງ SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"ປະຕິເສດ"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"​ຕອບ​ເປັນ​ສາຍ​ວິ​ດີ​ໂອ"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"​ຕອບ​ເປັນ​ສາຍ​ສຽງ"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"ເລື່ອນຂຶ້ນເພື່ອ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"ເລື່ອນໄປທາງຊ້າຍເພື່ອ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"ເລື່ອນໄປທາງຂວາເພື່ອ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"ເລື່ອນລົງເພື່ອ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"ສັ່ນເຕືອນ"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"ສັ່ນເຕືອນ"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"ສຽງ"</string>
     <string name="default_notification_description" msgid="78174796906240970">"ສຽງເລີ່ມຕົ້ນ (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"ຣິງໂທນໂທລະສັບ"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"ສັ່ນເຕືອນເມື່ອມີສາຍໂທເຂົ້າ"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"ໂທນສຽງປຸ່ມໂທລະສັບ"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"Dial pad autocomplete"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"ຣິງໂທນ &amp; ການສັ່ນເຕືອນ"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"ຈັດການການປະຊຸມສາຍ"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"ເບີໂທສຸກເສີນ"</string>
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"ເລືອກ​ບັນ​ຊີ"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
