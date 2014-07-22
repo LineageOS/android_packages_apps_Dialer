@@ -90,12 +90,10 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"სერვისი არ არის"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"ხელმისაწვდომია არჩეული ქსელი (<xliff:g id="OPERATOR_NAME">%s</xliff:g>)"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"გათიშვა"</string>
-    <!-- no translation found for notification_action_answer_video (7809271910870211729) -->
-    <skip />
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"ვიდეო"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"ხმა"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"მიღება"</string>
-    <!-- no translation found for notification_action_dismiss (2679969397930852858) -->
-    <skip />
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"დახურვა"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"გადარეკვა"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"შეტყობინების გაგზავნა"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"ზარის განსახორციელებლად, ჯერ თვითმფრინავის რეჟიმი უნდა გამორთოთ."</string>

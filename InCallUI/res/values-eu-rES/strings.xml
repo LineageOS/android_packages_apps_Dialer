@@ -69,8 +69,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Bideo-deia"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Bideoa eskatzen"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Ezin da konektatu bideo-deia"</string>
-    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
-    <skip />
+    <string name="card_title_callback_number" msgid="4604563437776874016">"Deiak itzultzeko telefono-zenbakia\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="85588345502265075">"Larrialdi-deiak itzultzeko zenbakia\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Markatzen"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Dei galdua"</string>
