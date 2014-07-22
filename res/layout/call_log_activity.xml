@@ -19,7 +19,7 @@
     android:layout_height="match_parent"
     android:id="@+id/calllog_frame"
     android:orientation="vertical">
-    <com.android.dialer.list.ViewPagerTabs
+    <com.android.contacts.common.list.ViewPagerTabs
         android:id="@+id/viewpager_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_height"
