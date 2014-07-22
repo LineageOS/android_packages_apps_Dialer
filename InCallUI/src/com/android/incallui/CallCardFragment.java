@@ -190,7 +190,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 observer.removeOnGlobalLayoutListener(this);
                 mFloatingActionButtonController.setScreenWidth(parent.getWidth());
                 mFloatingActionButtonController.align(
-                        mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_RIGHT
+                        mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
                             : FloatingActionButtonController.ALIGN_MIDDLE,
                         0 /* offsetX */,
                         0 /* offsetY */,
@@ -663,7 +663,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 // Move it below the screen.
                 mFloatingActionButtonController.manuallyTranslate(
                         mFloatingActionButtonController.getTranslationXForAlignment(
-                                mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_RIGHT
+                                mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
                                         : FloatingActionButtonController.ALIGN_MIDDLE
                         ),
                         mFloatingActionButtonHideOffset
@@ -716,7 +716,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 assignTranslateAnimation(mCallButtonsContainer, 5);
 
                 mFloatingActionButtonController.align(
-                        mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_RIGHT
+                        mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
                             : FloatingActionButtonController.ALIGN_MIDDLE,
                         0 /* offsetX */,
                         0 /* offsetY */,
