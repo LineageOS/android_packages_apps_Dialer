@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllog;
 
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -644,9 +645,11 @@ public class CallLogAdapter extends GroupingListAdapter
         final long date = c.getLong(CallLogQuery.DATE);
         final long duration = c.getLong(CallLogQuery.DURATION);
         final int callType = c.getInt(CallLogQuery.CALL_TYPE);
-        final PhoneAccountHandle accountHandle = getAccountHandle(c);
-        final Drawable accountIcon = accountHandle == null ? null :
-                TelecommManager.from(mContext).getPhoneAccount(accountHandle).getIcon(mContext);
+        final PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
+                c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME),
+                c.getString(CallLogQuery.ACCOUNT_ID));
+        final Drawable accountIcon = PhoneAccountUtils.getAccountIcon(mContext,
+                accountHandle);
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final long rowId = c.getLong(CallLogQuery.ID);
         views.rowId = rowId;
@@ -1260,14 +1263,6 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         cursor.moveToPosition(position);
         return features;
-    }
-
-    private PhoneAccountHandle getAccountHandle(Cursor c) {
-        final String component_name = c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
-        final String account_id = c.getString(CallLogQuery.ACCOUNT_ID);
-
-        // TODO: actually pull data from the database
-        return null;
     }
 
     private void setPhoto(CallLogListItemViews views, long photoId, Uri contactUri,
