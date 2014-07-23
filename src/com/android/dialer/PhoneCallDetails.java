@@ -16,6 +16,8 @@
 
 package com.android.dialer;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
@@ -76,15 +78,32 @@ public class PhoneCallDetails {
      * Total data usage for this call.
      */
     public final Long dataUsage;
+    /**
+     * Voicemail transcription
+     */
+    public final String transcription;
+
+    /**
+     * Create the details for a call, with empty defaults specified for extra fields that are
+     * not necessary for testing.
+     */
+    @VisibleForTesting
+    public PhoneCallDetails(CharSequence number, int numberPresentation,
+            CharSequence formattedNumber, String countryIso, String geocode,
+            int[] callTypes, long date, long duration) {
+        this (number, numberPresentation, formattedNumber, countryIso, geocode,
+        callTypes, date, duration, "", 0, "", null, null, 0, null, Calls.FEATURES_NONE,
+        null, null);
+    }
 
     /** Create the details for a call with a number not associated with a contact. */
     public PhoneCallDetails(CharSequence number, int numberPresentation,
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration, Drawable accountIcon, int features,
-            Long dataUsage) {
+            Long dataUsage, String transcription) {
         this(number, numberPresentation, formattedNumber, countryIso, geocode,
                 callTypes, date, duration, "", 0, "", null, null, 0, accountIcon, features,
-                dataUsage);
+                dataUsage, transcription);
     }
 
     /** Create the details for a call with a number associated with a contact. */
@@ -92,7 +111,8 @@ public class PhoneCallDetails {
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration, CharSequence name,
             int numberType, CharSequence numberLabel, Uri contactUri,
-            Uri photoUri, int sourceType, Drawable accountIcon, int features, Long dataUsage) {
+            Uri photoUri, int sourceType, Drawable accountIcon, int features, Long dataUsage,
+            String transcription) {
         this.number = number;
         this.numberPresentation = numberPresentation;
         this.formattedNumber = formattedNumber;
@@ -110,5 +130,6 @@ public class PhoneCallDetails {
         this.accountIcon = accountIcon;
         this.features = features;
         this.dataUsage = dataUsage;
+        this.transcription = transcription;
     }
 }
