@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Surface;
@@ -27,7 +26,6 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * Fragment containing video calling surfaces.
@@ -47,11 +45,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         void onSurfaceDestroyed(int surface);
         void onSurfaceChanged(int surface, int format, int width, int height);
     }
-
-    /**
-     * Listeners to video surface changes.
-     */
-    private final Set<VideoCallSurfaceListener> mListeners = new CopyOnWriteArraySet<>();
 
     /**
      * {@link ViewStub} holding the video call surfaces.  This is the parent for the
@@ -195,7 +188,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
          */
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-            Log.d(this, "surfaceChanged %s", holder.getSurface().toString());
             getPresenter().onSurfaceChanged(getSurfaceId(holder), format, width, height);
         }
 
@@ -206,8 +198,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
          */
         @Override
         public void surfaceDestroyed(SurfaceHolder holder) {
-            Log.d(this, "surfaceDestroyed %s", holder.getSurface().toString());
-
             int surfaceId = getSurfaceId(holder);
 
             if (surfaceId == SURFACE_DISPLAY) {
@@ -228,10 +218,8 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         private int getSurfaceId(SurfaceHolder holder) {
             int surface;
             if (holder == mDisplayVideoSurface.getHolder()) {
-                Log.d(this, "surfaceCreated: DISPLAY");
                 surface = SURFACE_DISPLAY;
             } else {
-                Log.d(this, "surfaceCreated: PREVIEW");
                 surface = SURFACE_PREVIEW;
             }
             return surface;
@@ -247,7 +235,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     public void showVideoUi(boolean show) {
         getView().setVisibility(show ? View.VISIBLE : View.GONE);
 
-        Log.d(this, "Show video call UI: " + show);
         if (show) {
             inflateVideoCallViews();
         }
