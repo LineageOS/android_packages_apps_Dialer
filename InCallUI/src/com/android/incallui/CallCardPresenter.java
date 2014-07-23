@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.telecomm.CallCapabilities;
@@ -199,7 +198,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             getUi().setCallState(callState, mPrimary.getDisconnectCause(), getConnectionLabel(),
                     getConnectionIcon(), getGatewayNumber());
 
-            Uri handle = mPrimary.getHandle();
             String currentNumber = getNumberFromHandle(mPrimary.getHandle());
             if (PhoneNumberUtils.isEmergencyNumber(currentNumber)) {
                 String callbackNumber = getSubscriptionNumber();
@@ -520,7 +518,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (accountHandle != null) {
             PhoneAccount account = getTelecommManager().getPhoneAccount(accountHandle);
             if (account != null) {
-                return account.getLabel();
+                return getAccountLabel(account);
             }
         }
         return null;
@@ -531,7 +529,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (accountHandle != null) {
             PhoneAccount account = getTelecommManager().getPhoneAccount(accountHandle);
             if (account != null) {
-                return account.getLabel();
+                return getAccountLabel(account);
             }
         }
         return null;
@@ -604,6 +602,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     private String getNumberFromHandle(Uri handle) {
         return handle == null ? "" : handle.getSchemeSpecificPart();
+    }
+
+    private String getAccountLabel(PhoneAccount account) {
+        return account.getLabel() == null ? null : account.getLabel().toString();
     }
 
     public interface CallCardUi extends Ui {
