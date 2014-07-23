@@ -88,7 +88,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         public void onDetailsChanged(android.telecomm.Call call,
                 android.telecomm.Call.Details details) {
             for (InCallDetailsListener listener : mDetailsListeners) {
-                listener.onDetailsChanged(details);
+                listener.onDetailsChanged(CallList.getInstance().getCallByTelecommCall(call),
+                        details);
             }
         }
 
@@ -876,6 +877,6 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     public interface InCallDetailsListener {
-        public void onDetailsChanged(android.telecomm.Call.Details details);
+        public void onDetailsChanged(Call call, android.telecomm.Call.Details details);
     }
 }
