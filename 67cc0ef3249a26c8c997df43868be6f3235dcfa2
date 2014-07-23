@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a061dce_0c88f921",
+        "filename": "src/com/android/dialer/dialpad/KoreanSmartDialMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 10293
+      },
+      "writtenOn": "2014-07-23T05:09:39Z",
+      "side": 1,
+      "message": "Interesting... so if you want to lookup a name in your contacts you just enter the leading letter of each syllable (spelling it out fully won\u0027t work?)\n\nIf this is the standard way that people expect it to work then looks good",
+      "revId": "67cc0ef3249a26c8c997df43868be6f3235dcfa2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
