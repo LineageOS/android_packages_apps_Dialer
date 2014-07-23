@@ -100,6 +100,8 @@ public class SmartDialPrefix {
             mMap = new HebrewSmartDialMap();
         } else if (locale.equals("KR")) {
             mMap = new KoreanSmartDialMap();
+        } else if (locale.equals("CN")) {
+            mMap = new ChineseSmartDialMap();
         } else {
             mMap = new LatinSmartDialMap();
         }
@@ -180,7 +182,7 @@ public class SmartDialPrefix {
      */
     public static ArrayList<String> generateNamePrefixes(String index) {
         final ArrayList<String> result = Lists.newArrayList();
-
+        index = mMap.transliterateName(index);
         /** Parses the name into a list of tokens.*/
         final ArrayList<String> indexTokens = parseToIndexTokens(index);
 
