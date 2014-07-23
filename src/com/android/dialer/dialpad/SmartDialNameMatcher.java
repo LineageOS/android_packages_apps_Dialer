@@ -415,7 +415,7 @@ public class SmartDialNameMatcher {
         if (mMultiMatchObject != null && mMultiMatchMethod != null) {
             return matchesMultiLanguage(displayName, mQuery, mMatchPositions);
         } else {
-            return matchesCombination(displayName, mQuery, mMatchPositions);
+            return mMap.matchesCombination(this, displayName, mQuery, mMatchPositions);
         }
     }
 
