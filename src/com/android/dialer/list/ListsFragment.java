@@ -10,7 +10,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CallLog;
@@ -26,9 +25,6 @@ import android.widget.ListView;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.DialtactsActivity;
-
-import android.view.View.OnClickListener;
-
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.CallLogFragment;
@@ -36,6 +32,7 @@ import com.android.dialer.calllog.CallLogQuery;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.list.ShortcutCardsAdapter.SwipeableShortcutCard;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.OverlappingPaneLayout;
 import com.android.dialer.widget.OverlappingPaneLayout.PanelSlideListener;
 import com.android.dialerbind.ObjectFactory;
@@ -60,7 +57,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
     public static final int TAB_INDEX_RECENTS = 1;
     public static final int TAB_INDEX_ALL_CONTACTS = 2;
 
-    private static final int TAB_INDEX_COUNT = 3;
+    public static final int TAB_INDEX_COUNT = 3;
 
     private static final int MAX_RECENTS_ENTRIES = 20;
     // Oldest recents entry to display is 2 weeks old.
@@ -186,7 +183,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
         @Override
         public Fragment getItem(int position) {
-            switch (position) {
+            switch (getRtlPosition(position)) {
                 case TAB_INDEX_SPEED_DIAL:
                     mSpeedDialFragment = new SpeedDialFragment();
                     return mSpeedDialFragment;
@@ -260,6 +257,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setOffscreenPageLimit(2);
         mViewPager.setOnPageChangeListener(this);
+        mViewPager.setCurrentItem(getRtlPosition(TAB_INDEX_SPEED_DIAL));
 
         mTabTitles = new String[TAB_INDEX_COUNT];
         mTabTitles[TAB_INDEX_SPEED_DIAL] = getResources().getString(R.string.tab_speed_dial);
@@ -386,5 +384,12 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
     public RemoveView getRemoveView() {
         return mRemoveView;
+    }
+
+    public int getRtlPosition(int position) {
+        if (DialerUtils.isRtl()) {
+            return TAB_INDEX_COUNT - 1 - position;
+        }
+        return position;
     }
 }
