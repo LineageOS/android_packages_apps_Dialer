@@ -28,4 +28,11 @@
         android:title="@string/display_options_view_names_as"
         android:dialogTitle="@string/display_options_view_names_as" />
 
+    <ListPreference
+        android:key="button_t9_search_input"
+        android:title="@string/t9_search_input_locale"
+        android:summary="%s"
+        android:defaultValue=""
+        android:persistent="false" />
+
 </PreferenceScreen>

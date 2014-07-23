@@ -16,6 +16,15 @@
 
 package com.android.dialer.dialpad;
 
+import com.android.providers.contacts.NameSplitter;
+
+import android.app.AppGlobals;
+import android.content.Context;
+import android.provider.ContactsContract;
+
+import java.util.ArrayList;
+import java.util.Locale;
+
 /**
  * Ported the logic from 10.1:
  * https://github.com/CyanogenMod/android_packages_apps_Contacts/blob/cm-10.1/src/com/android/contacts/dialpad/util/NameToNumberKorean.java
@@ -500,4 +509,91 @@ public class KoreanSmartDialMap implements SmartDialMap {
         }
     }
 
+    /**
+     * Splits the displayName into lastname/first names
+     */
+    private NameSplitter.Name splitName(String displayName) {
+        Context context = AppGlobals.getInitialApplication();
+        NameSplitter nameSplitter = new NameSplitter(
+                context.getString(com.android.internal.R.string.common_name_prefixes),
+                context.getString(com.android.internal.R.string.common_last_name_prefixes),
+                context.getString(com.android.internal.R.string.common_name_suffixes),
+                context.getString(com.android.internal.R.string.common_name_conjunctions),
+                Locale.KOREA);
+        NameSplitter.Name name = new NameSplitter.Name();
+        nameSplitter.split(name, displayName, ContactsContract.FullNameStyle.KOREAN);
+        return name;
+    }
+
+    /**
+     * Korean names don't contain spaces between lastname/first names.
+     * Split the name and add a space so better prefixes can be generated.
+     * @return lastname + " " + firstname
+     */
+    private String separateFirstNameLastName(String displayName) {
+        for (int i=0; i<displayName.length(); i++) {
+            char ch = (char)displayName.codePointAt(i);
+            if (ch <= UNICODE_HANGUL_START || ch >= UNICODE_HANGUL_END) {
+                return displayName;
+            }
+        }
+        NameSplitter.Name name = splitName(displayName);
+        if (name.familyName != null && name.givenNames != null) {
+            return  name.familyName + " " + name.givenNames;
+        } else {
+            return displayName;
+        }
+    }
+
+    @Override
+    public String transliterateName(String index) {
+       return separateFirstNameLastName(index);
+    }
+
+    @Override
+    public boolean matchesCombination(SmartDialNameMatcher smartDialNameMatcher,
+            String displayName, String query, ArrayList<SmartDialMatchPosition> matchList) {
+        matchList.clear();
+        final int nameLength = displayName.length();
+        final int queryLength = query.length();
+
+        if (nameLength < queryLength) {
+            return false;
+        }
+
+        if (queryLength == 0) {
+            return false;
+        }
+        for (int i=0; i<nameLength; i++) {
+            char ch = (char)displayName.codePointAt(i);
+            if (ch <= UNICODE_HANGUL_START || ch >= UNICODE_HANGUL_END) {
+                return smartDialNameMatcher.matchesCombination(displayName, query, matchList);
+            }
+        }
+        /*
+         * For the matcher to work, we need to separate first/last names.
+         * Adjust the positions of the matches to account for the added space.
+         */
+        NameSplitter.Name name = splitName(displayName);
+        if (name.familyName != null && name.givenNames != null) {
+            int separatorIndex = name.familyName.length();
+            boolean matches = smartDialNameMatcher.matchesCombination(name.familyName + " " + name.givenNames,
+                    query, matchList);
+            if (matches) {
+                for (SmartDialMatchPosition smartDialMatchPosition : matchList) {
+                    if (smartDialMatchPosition.start > separatorIndex) {
+                        smartDialMatchPosition.start--;
+                    }
+                    if (smartDialMatchPosition.end > separatorIndex) {
+                        smartDialMatchPosition.end--;
+                    }
+                }
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return smartDialNameMatcher.matchesCombination(displayName, query, matchList);
+        }
+    }
 }
