@@ -1,8 +1,24 @@
+/*
+ * Copyright (C) 2014 The CyanogenMod Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.android.dialer.dialpad;
 
 import java.util.ArrayList;
 
-public class LatinSmartDialMap implements SmartDialMap {
+public class GreekSmartDialMap implements SmartDialMap {
 
     private static final char[] LATIN_LETTERS_TO_DIGITS = {
         '2', '2', '2', // A,B,C -> 2
@@ -15,9 +31,20 @@ public class LatinSmartDialMap implements SmartDialMap {
         '9', '9', '9', '9' // W,X,Y,Z -> 9
     };
 
+    private static final char[] GREEK_LETTERS_TO_DIGITS = {
+        '2', '2', '2', // Α,Β,Γ -> 2
+        '3', '3', '3', // Δ,Ε,Ζ -> 3
+        '4', '4', '4', // Η,Θ,Ι -> 4
+        '5', '5', '5', // Κ,Λ,Μ -> 5
+        '6', '6', '6', // Ν,Ξ,Ο -> 6
+        '7', '7', '7', '7', // Π,Ρ,Σ,ς -> 7
+        '8', '8', '8', // Τ,Υ,Φ -> 8
+        '9', '9', '9'  // Χ,Ψ,Ω -> 9
+    };
+
     @Override
     public boolean isValidDialpadAlphabeticChar(char ch) {
-        return (ch >= 'a' && ch <= 'z');
+        return (ch >= 'a' && ch <= 'z') || (ch >= 'α' && ch <= 'ω');
     }
 
     @Override
@@ -388,6 +415,44 @@ public class LatinSmartDialMap implements SmartDialMap {
             case 'X': return 'x';
             case 'Y': return 'y';
             case 'Z': return 'z';
+            case 'Α': return 'α';
+            case 'Ά': return 'α';
+            case 'ά': return 'α';
+            case 'Β': return 'β';
+            case 'Γ': return 'γ';
+            case 'Δ': return 'δ';
+            case 'Ε': return 'ε';
+            case 'Έ': return 'ε';
+            case 'έ': return 'ε';
+            case 'Ζ': return 'ζ';
+            case 'Η': return 'η';
+            case 'Ή': return 'η';
+            case 'ή': return 'η';
+            case 'Θ': return 'θ';
+            case 'Ι': return 'ι';
+            case 'Ί': return 'ι';
+            case 'ί': return 'ι';
+            case 'Κ': return 'κ';
+            case 'Λ': return 'λ';
+            case 'Μ': return 'μ';
+            case 'Ν': return 'ν';
+            case 'Ξ': return 'ξ';
+            case 'Ο': return 'ο';
+            case 'Ό': return 'ο';
+            case 'ό': return 'ο';
+            case 'Π': return 'π';
+            case 'Ρ': return 'ρ';
+            case 'Σ': return 'σ';
+            case 'Τ': return 'τ';
+            case 'Υ': return 'υ';
+            case 'Ύ': return 'υ';
+            case 'ύ': return 'υ';
+            case 'Φ': return 'φ';
+            case 'Χ': return 'χ';
+            case 'Ψ': return 'ψ';
+            case 'Ω': return 'ω';
+            case 'Ώ': return 'ω';
+            case 'ώ': return 'ω';
             default:
                 return ch;
         }
@@ -399,6 +464,8 @@ public class LatinSmartDialMap implements SmartDialMap {
             return (byte) (ch - '0');
         } else if (ch >= 'a' && ch <= 'z') {
             return (byte) (LATIN_LETTERS_TO_DIGITS[ch - 'a'] - '0');
+        } else if (ch >= 'α' && ch <= 'ω') {
+            return (byte) (GREEK_LETTERS_TO_DIGITS[ch - 'α'] - '0');
         } else {
             return -1;
         }
@@ -408,6 +475,9 @@ public class LatinSmartDialMap implements SmartDialMap {
     public char getDialpadNumericCharacter(char ch) {
         if (ch >= 'a' && ch <= 'z') {
             return LATIN_LETTERS_TO_DIGITS[ch - 'a'];
+        }
+        if (ch >= 'α' && ch <= 'ω') {
+            return GREEK_LETTERS_TO_DIGITS[ch - 'α'];
         }
         return ch;
     }
