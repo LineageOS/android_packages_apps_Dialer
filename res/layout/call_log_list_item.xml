@@ -132,6 +132,16 @@
                         />
                 </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:id="@+id/call_indicator_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_results_phone"
+                android:tint="@color/recent_call_log_item_phone_icon_tint"
+                android:alpha="0.3"
+                android:visibility="gone"
+                />
         </LinearLayout>
 
         <!-- Viewstub with additional expandable actions for a call log entry -->
