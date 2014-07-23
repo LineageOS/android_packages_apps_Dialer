@@ -34,6 +34,7 @@ import com.android.contacts.common.CallUtil;
 import com.android.dialer.R;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * General purpose utility methods for the Dialer.
@@ -137,5 +138,13 @@ public class DialerUtils {
     public static CharSequence join(Resources resources, Iterable<CharSequence> list) {
         final CharSequence separator = resources.getString(R.string.list_delimeter);
         return TextUtils.join(separator, list);
+    }
+
+    /**
+     * @return True if the application is currently in RTL mode.
+     */
+    public static boolean isRtl() {
+        return TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) ==
+            View.LAYOUT_DIRECTION_RTL;
     }
 }

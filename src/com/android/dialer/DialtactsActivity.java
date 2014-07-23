@@ -93,6 +93,7 @@ import com.android.phone.common.animation.AnimationListenerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
@@ -1104,11 +1105,20 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        position = mListsFragment.getRtlPosition(position);
         // Only scroll the button when the first tab is selected. The button should scroll from
         // the middle to right position only on the transition from the first tab to the second
         // tab.
-        if (position == ListsFragment.TAB_INDEX_SPEED_DIAL && !mIsLandscape) {
-            mFloatingActionButtonController.onPageScrolled(positionOffset);
+        // If the app is in RTL mode, we need to check against the second tab, rather than the
+        // first. This is because if we are scrolling between the first and second tabs, the
+        // viewpager will report that the starting tab position is 1 rather than 0, due to the
+        // reversal of the order of the tabs.
+        final boolean isLayoutRtl = DialerUtils.isRtl();
+        final boolean shouldScrollButton = position == (isLayoutRtl
+                ? ListsFragment.TAB_INDEX_RECENTS : ListsFragment.TAB_INDEX_SPEED_DIAL);
+        if (shouldScrollButton && !mIsLandscape) {
+            mFloatingActionButtonController.onPageScrolled(
+                    isLayoutRtl ? 1 - positionOffset : positionOffset);
         } else if (position != ListsFragment.TAB_INDEX_SPEED_DIAL) {
             mFloatingActionButtonController.onPageScrolled(1);
         }
@@ -1116,6 +1126,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onPageSelected(int position) {
+        position = mListsFragment.getRtlPosition(position);
         mCurrentTabPosition = position;
     }
 
@@ -1163,15 +1174,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private void updateFloatingActionButtonControllerAlignment(boolean animate) {
         int align;
         if (mIsDialpadShown) {
-            align = mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_RIGHT
+            align = mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
                     : FloatingActionButtonController.ALIGN_MIDDLE;
         } else {
             if (!mIsLandscape) {
                 align = mCurrentTabPosition == ListsFragment.TAB_INDEX_SPEED_DIAL
                         ? FloatingActionButtonController.ALIGN_MIDDLE
-                            : FloatingActionButtonController.ALIGN_RIGHT;
+                            : FloatingActionButtonController.ALIGN_END;
             } else {
-                align = FloatingActionButtonController.ALIGN_RIGHT;
+                align = FloatingActionButtonController.ALIGN_END;
             }
         }
         mFloatingActionButtonController.align(align,
