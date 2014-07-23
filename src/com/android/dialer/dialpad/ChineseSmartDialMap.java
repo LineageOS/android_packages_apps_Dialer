@@ -1,8 +1,12 @@
 package com.android.dialer.dialpad;
 
+import com.android.providers.contacts.HanziToPinyin;
+
+import android.text.TextUtils;
+
 import java.util.ArrayList;
 
-public class LatinSmartDialMap implements SmartDialMap {
+public class ChineseSmartDialMap implements SmartDialMap {
 
     private static final char[] LATIN_LETTERS_TO_DIGITS = {
         '2', '2', '2', // A,B,C -> 2
@@ -412,14 +416,54 @@ public class LatinSmartDialMap implements SmartDialMap {
         return ch;
     }
 
-    @Override
-    public ArrayList<String> generateNamePrefixes(String index) {
-        return SmartDialPrefix.generateNamePrefixes(index);
+    /*
+     * Generates a space delimited string of pinyins
+     */
+    private String tokenizeToPinyins(String displayName) {
+        HanziToPinyin hanziToPinyin = HanziToPinyin.getInstance();
+        ArrayList<HanziToPinyin.Token> tokens = hanziToPinyin.get(displayName);
+        ArrayList<String> pinyins = new ArrayList<String>();
+        for (HanziToPinyin.Token token : tokens) {
+            if (token.type != HanziToPinyin.Token.PINYIN) {
+                return displayName;
+            } else {
+                pinyins.add(token.target);
+            }
+        }
+        return TextUtils.join(" ", pinyins);
     }
 
     @Override
+    public ArrayList<String> generateNamePrefixes(String index) {
+        String newIndex = tokenizeToPinyins(index);
+        return SmartDialPrefix.generateNamePrefixes(newIndex);
+    }
+
+    /*
+     * Since the dialpad is matching off the generated pinyin, the
+     * Chinese characters can't be highlighted. Just return true if
+     * there is a match without highlighting a character position.
+     */
+    @Override
     public boolean matchesCombination(SmartDialNameMatcher smartDialNameMatcher,
             String displayName, String query, ArrayList<SmartDialMatchPosition> matchList) {
-        return smartDialNameMatcher.matchesCombination(displayName, query, matchList);
+        String pinyinName = tokenizeToPinyins(displayName);
+        if (displayName.equals(pinyinName)) {
+            return smartDialNameMatcher.matchesCombination(displayName, query, matchList);
+        }
+        final int nameLength = pinyinName.length();
+        final int queryLength = query.length();
+
+        if (nameLength < queryLength) {
+            return false;
+        }
+
+        if (queryLength == 0) {
+            return false;
+        }
+
+        return true;
     }
+
+
 }
