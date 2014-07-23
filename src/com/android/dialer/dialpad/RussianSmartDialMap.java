@@ -16,6 +16,8 @@
 
 package com.android.dialer.dialpad;
 
+import java.util.ArrayList;
+
 public class RussianSmartDialMap implements SmartDialMap {
 
     private static final char[] LATIN_LETTERS_TO_DIGITS = {
@@ -476,4 +478,14 @@ public class RussianSmartDialMap implements SmartDialMap {
         return ch;
     }
 
+    @Override
+    public ArrayList<String> generateNamePrefixes(String index) {
+        return SmartDialPrefix.generateNamePrefixes(index);
+    }
+
+    @Override
+    public boolean matchesCombination(SmartDialNameMatcher smartDialNameMatcher,
+            String displayName, String query, ArrayList<SmartDialMatchPosition> matchList) {
+        return smartDialNameMatcher.matchesCombination(displayName, query, matchList);
+    }
 }

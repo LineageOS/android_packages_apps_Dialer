@@ -46,8 +46,8 @@ public class SmartDialPrefix {
      * Users can look up this contact by combinations of his initials such as "AF" "BF" "EF" "ABF"
      * "BEF" "ABEF" etc, but can not use combinations such as "CF" "DF" "ACF" "ADF" etc.
      */
-    private static final int LAST_TOKENS_FOR_INITIALS = 2;
-    private static final int FIRST_TOKENS_FOR_INITIALS = 2;
+    static final int LAST_TOKENS_FOR_INITIALS = 2;
+    static final int FIRST_TOKENS_FOR_INITIALS = 2;
 
     /** The country code of the user's sim card obtained by calling getSimCountryIso*/
     private static final String PREF_USER_SIM_COUNTRY_CODE =
@@ -98,8 +98,10 @@ public class SmartDialPrefix {
             mMap = new GreekSmartDialMap();
         } else if (locale.equals("IL")) {
             mMap = new HebrewSmartDialMap();
-        } else if (locale.equals("KR")) {
+        } else if (locale.equals("KR") || locale.equals("ko_KR")) {
             mMap = new KoreanSmartDialMap();
+        } else if (locale.equals("CN")) {
+            mMap = new ChineseSmartDialMap();
         } else {
             mMap = new LatinSmartDialMap();
         }
@@ -227,6 +229,15 @@ public class SmartDialPrefix {
         }
 
         return result;
+    }
+
+    /**
+     * Let the localized SmartDialMaps handle generating name prefixes.
+     * @param index The contact's name in string.
+     * @return A List of strings, whose prefix can be used to look up the contact.
+     */
+    public static ArrayList<String> getNamePrefixes(String index) {
+        return mMap.generateNamePrefixes(index);
     }
 
     /**

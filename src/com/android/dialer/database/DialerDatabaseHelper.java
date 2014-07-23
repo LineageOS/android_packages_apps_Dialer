@@ -726,7 +726,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             while (nameCursor.moveToNext()) {
                 /** Computes a list of prefixes of a given contact name. */
                 final ArrayList<String> namePrefixes =
-                        SmartDialPrefix.generateNamePrefixes(nameCursor.getString(columnIndexName));
+                        SmartDialPrefix.getNamePrefixes(nameCursor.getString(columnIndexName));
 
                 for (String namePrefix : namePrefixes) {
                     insert.bindLong(1, nameCursor.getLong(columnIndexContactId));
