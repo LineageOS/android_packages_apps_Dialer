@@ -16,6 +16,11 @@
 
 package com.android.incallui;
 
+import com.android.incallui.CallVideoClientNotifier.SurfaceChangeListener;
+import com.android.incallui.CallVideoClientNotifier.VideoEventListener;
+import com.android.incallui.InCallPresenter.InCallDetailsListener;
+import com.android.incallui.InCallPresenter.InCallStateListener;
+import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.internal.util.Preconditions;
 
 import android.content.Context;
@@ -30,7 +35,8 @@ import java.util.Objects;
  * {@class CallVideoClient}.
  */
 public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi>  implements
-        InCallPresenter.IncomingCallListener, InCallPresenter.InCallStateListener {
+        IncomingCallListener, InCallStateListener,
+        InCallDetailsListener, SurfaceChangeListener, VideoEventListener {
 
     /**
      * The current context.
@@ -74,7 +80,26 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         // Register for call state changes last
         InCallPresenter.getInstance().addListener(this);
         InCallPresenter.getInstance().addIncomingCallListener(this);
+
+        // Register for surface and video events from {@link InCallVideoProvider}s.
+        CallVideoClientNotifier.getInstance().addSurfaceChangeListener(this);
+        CallVideoClientNotifier.getInstance().addVideoEventListener(this);
+
         mIsVideoCall = false;
+    }
+
+    /**
+     * Called when the user interface is no longer ready to be used.
+     *
+     * @param ui The Ui implementation that is no longer ready to be used.
+     */
+    public void unUiUnready(VideoCallUi ui) {
+        super.onUiUnready(ui);
+
+        InCallPresenter.getInstance().removeListener(this);
+        InCallPresenter.getInstance().removeIncomingCallListener(this);
+        CallVideoClientNotifier.getInstance().removeSurfaceChangeListener(this);
+        CallVideoClientNotifier.getInstance().removeVideoEventListener(this);
     }
 
     /**
@@ -166,6 +191,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         if (call == null || getUi() == null) {
             return;
         }
+
+        Log.d(this, "onStateChange "+call);
+
         final boolean callChanged = !Objects.equals(mCall, call);
 
         // If the call changed track it now.
@@ -173,13 +201,45 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             mCall = call;
         }
 
-        RemoteCallVideoProvider callVideoProvider =
-                mCall.getTelecommCall().getCallVideoProvider();
-        if (callVideoProvider != mCallVideoProvider) {
-            changeCallVideoProvider(callVideoProvider);
+        checkForCallVideoProviderChange();
+        checkForVideoStateChange();
+    }
+
+    /**
+     * Handles changes to the details of the call.  The {@link VideoCallPresenter} is interested in
+     * changes to the video state.
+     *
+     * @param call The call for which the details changed.
+     * @param details The new call details.
+     */
+    @Override
+    public void onDetailsChanged(Call call, android.telecomm.Call.Details details) {
+        Log.d(this, "onDetailsChanged "+call);
+
+        // If the details change is not for the currently active call no update is required.
+        if (!call.equals(mCall)) {
+            return;
         }
 
-        boolean newVideoState = call.isVideoCall();
+        checkForVideoStateChange();
+    }
+
+    /**
+     * Checks for a change to the call video provider and changes it if required.
+     */
+    private void checkForCallVideoProviderChange() {
+        RemoteCallVideoProvider callVideoProvider =
+                mCall.getTelecommCall().getCallVideoProvider();
+        if (!Objects.equals(callVideoProvider, mCallVideoProvider)) {
+            changeCallVideoProvider(callVideoProvider);
+        }
+    }
+
+    /**
+     * Checks to see if the current video state has changed and updates the UI if required.
+     */
+    private void checkForVideoStateChange() {
+        boolean newVideoState = mCall.isVideoCall();
 
         // Check if video state changed
         if (mIsVideoCall != newVideoState) {
@@ -200,6 +260,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @param callVideoProvider The new call video provider.
      */
     private void changeCallVideoProvider(RemoteCallVideoProvider callVideoProvider) {
+        Log.d(this, "changeCallVideoProvider");
+
         // Null out the surfaces on the previous provider
         if (mCallVideoProvider != null) {
             mCallVideoProvider.setDisplaySurface(null);
@@ -216,6 +278,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * TODO(vt): Need to adjust size and orientation of preview surface here.
      */
     private void enterVideoState() {
+        Log.d(this, "enterVideoState");
         VideoCallUi ui = getUi();
         if (ui == null) {
             return;
@@ -228,6 +291,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * Sets the surfaces on the specified {@link RemoteCallVideoProvider}.
      */
     private void setSurfaces() {
+        Log.d(this, "setSurfaces");
         VideoCallUi ui = getUi();
         if (ui == null || mCallVideoProvider == null) {
             return;
@@ -246,12 +310,45 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * Exits video mode by hiding the video surfaces.
      */
     private void exitVideoState() {
+        Log.d(this, "exitVideoState");
         VideoCallUi ui = getUi();
         if (ui == null) {
             return;
         }
 
         ui.showVideoUi(false);
+    }
+
+    /**
+     * Handles peer video pause state changes.
+     *
+     * @param call The call which paused or un-pausedvideo transmission.
+     * @param paused {@code True} when the video transmission is paused, {@code false} when video
+     *               transmission resumes.
+     */
+    @Override
+    public void onPeerPauseStateChanged(Call call, boolean paused) {
+        if (!call.equals(mCall)) {
+            return;
+        }
+
+        // TODO(vt): Show/hide the peer contact photo.
+    }
+
+    /**
+     * Handles peer video dimension changes.
+     *
+     * @param call The call which experienced a peer video dimension change.
+     * @param width The new peer video width .
+     * @param height The new peer video height.
+     */
+    @Override
+    public void onUpdatePeerDimensions(Call call, int width, int height) {
+        if (!call.equals(mCall)) {
+            return;
+        }
+
+        // TODO(vt): Change display surface aspect ratio.
     }
 
     /**
