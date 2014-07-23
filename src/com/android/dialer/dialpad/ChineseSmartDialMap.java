@@ -1,8 +1,14 @@
 package com.android.dialer.dialpad;
 
-import java.util.ArrayList;
+import com.android.providers.contacts.HanziToPinyin;
 
-public class HebrewSmartDialMap implements SmartDialMap {
+import android.text.TextUtils;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+public class ChineseSmartDialMap implements SmartDialMap {
 
     private static final char[] LATIN_LETTERS_TO_DIGITS = {
         '2', '2', '2', // A,B,C -> 2
@@ -15,20 +21,9 @@ public class HebrewSmartDialMap implements SmartDialMap {
         '9', '9', '9', '9' // W,X,Y,Z -> 9
     };
 
-    private static final char[] HEBREW_LETTERS_TO_DIGITS = {
-        '3', '3', '3',      // אבג -> 3
-        '2', '2', '2',      // דהו -> 2
-        '6', '6', '6',      // זחט -> 6
-        '5', '5', '5', '5', // יךכל -> 5
-        '4', '4', '4', '4', // םמןנ -> 4
-        '9', '9', '9', '9', // סעףפ -> 9
-        '8', '8', '8',      // ץצק -> 8
-        '7', '7', '7',      // רשת -> 7
-    };
-
     @Override
     public boolean isValidDialpadAlphabeticChar(char ch) {
-        return (ch >= 'a' && ch <= 'z') || (ch >= 'א' && ch <= 'ת');
+        return (ch >= 'a' && ch <= 'z');
     }
 
     @Override
@@ -41,6 +36,23 @@ public class HebrewSmartDialMap implements SmartDialMap {
         return (isValidDialpadAlphabeticChar(ch) || isValidDialpadNumericChar(ch));
     }
 
+    /*
+     * The switch statement in this function was generated using the python code:
+     * from unidecode import unidecode
+     * for i in range(192, 564):
+     *     char = unichr(i)
+     *     decoded = unidecode(char)
+     *     # Unicode characters that decompose into multiple characters i.e.
+     *     #  into ss are not supported for now
+     *     if (len(decoded) == 1 and decoded.isalpha()):
+     *         print "case '" + char + "': return '" + unidecode(char) +  "';"
+     *
+     * This gives us a way to map characters containing accents/diacritics to their
+     * alphabetic equivalents. The unidecode library can be found at:
+     * http://pypi.python.org/pypi/Unidecode/0.04.1
+     *
+     * Also remaps all upper case latin characters to their lower case equivalents.
+     */
     @Override
     public char normalizeCharacter(char ch) {
         switch (ch) {
@@ -382,12 +394,6 @@ public class HebrewSmartDialMap implements SmartDialMap {
             case 'X': return 'x';
             case 'Y': return 'y';
             case 'Z': return 'z';
-            // ending letter in Hebrew (מןץףך)
-            case 'ך': return 'כ';
-            case 'ם': return 'מ';
-            case 'ן': return 'נ';
-            case 'ף': return 'פ';
-            case 'ץ': return 'צ';
             default:
                 return ch;
         }
@@ -399,8 +405,6 @@ public class HebrewSmartDialMap implements SmartDialMap {
             return (byte) (ch - '0');
         } else if (ch >= 'a' && ch <= 'z') {
             return (byte) (LATIN_LETTERS_TO_DIGITS[ch - 'a'] - '0');
-        } else if (ch >= 'א' && ch <= 'ת') {
-            return (byte) (HEBREW_LETTERS_TO_DIGITS[ch - 'א'] - '0');
         } else {
             return -1;
         }
@@ -411,20 +415,91 @@ public class HebrewSmartDialMap implements SmartDialMap {
         if (ch >= 'a' && ch <= 'z') {
             return LATIN_LETTERS_TO_DIGITS[ch - 'a'];
         }
-        if (ch >= 'א' && ch <= 'ת') {
-            return HEBREW_LETTERS_TO_DIGITS[ch - 'א'];
-        }
         return ch;
+    }
+
+    /*
+     * Generates a space delimited string of pinyins
+     */
+    private String tokenizeToPinyins(String displayName) {
+        HanziToPinyin hanziToPinyin = HanziToPinyin.getInstance();
+        ArrayList<HanziToPinyin.Token> tokens = hanziToPinyin.getTokens(displayName);
+        ArrayList<String> pinyins = new ArrayList<String>();
+        for (HanziToPinyin.Token token : tokens) {
+            if (token.type != HanziToPinyin.Token.PINYIN) {
+                return displayName;
+            } else {
+                pinyins.add(token.target);
+            }
+        }
+        return TextUtils.join(" ", pinyins);
     }
 
     @Override
     public String transliterateName(String index) {
-        return index;
+        return tokenizeToPinyins(index);
     }
 
+    /*
+     * Uses the default matching logic on the pinyin name and attempts to map the match positions
+     * back to the original display name
+     */
     @Override
     public boolean matchesCombination(SmartDialNameMatcher smartDialNameMatcher,
             String displayName, String query, ArrayList<SmartDialMatchPosition> matchList) {
-        return smartDialNameMatcher.matchesCombination(displayName, query, matchList);
+
+        String pinyinName = tokenizeToPinyins(displayName);
+
+        ArrayList<SmartDialMatchPosition> computedMatchList = new ArrayList<SmartDialMatchPosition>();
+        boolean matches = smartDialNameMatcher.matchesCombination(pinyinName, query, computedMatchList);
+        if (!matches)
+            return false;
+
+        // name was translated to pinyin before matching.  attempt to map the match positions
+        // back to the original display string
+        if (!displayName.equals(pinyinName)) {
+
+            // construct an array that maps each character of the pinyin name back to the index of
+            // the hanzi token from which it came
+            // For example, if:
+            //  displayName = 红霞李
+            //  pinyinName =  "hong xia li"
+            // then:
+            //  pinyinMapping = 0,0,0,0,-1,1,1,1,-1,2,2
+            int[] pinyinMapping = new int[pinyinName.length()];
+            int curToken = 0;
+            for (int i=0; i < pinyinName.length(); ++i) {
+                char c = pinyinName.charAt(i);
+                if (c == ' ') {
+                    ++curToken;
+                    pinyinMapping[i] = -1;
+                }
+                else {
+                    pinyinMapping[i] = curToken;
+                }
+            }
+
+            // calculate unique hanzi characters that are matched
+            Set<Integer> positionsToHighlight = new HashSet<Integer>();
+            for (SmartDialMatchPosition matchPosition : computedMatchList) {
+                for (int pos = matchPosition.start; pos < matchPosition.end; ++pos) {
+                    int mappedPos = pinyinMapping[pos];
+                    if (mappedPos >= 0)
+                        positionsToHighlight.add(mappedPos);
+                }
+            }
+
+            // reset computed matches
+            computedMatchList = new ArrayList<SmartDialMatchPosition>();
+            for (int matchPos : positionsToHighlight) {
+                // use one object per position for simplicity
+                computedMatchList.add(new SmartDialMatchPosition(matchPos, matchPos+1));
+            }
+        }
+
+        matchList.addAll(computedMatchList);
+        return true;
     }
+
+
 }
