@@ -203,4 +203,17 @@
     <string name="call_settings_description" msgid="2756622428019213052">"语音信箱、来电等待及其他"</string>
 
     <string name="device_id">设备标识符</string>
+
+    <!--  for speed dial -->
+    <string name="set_speed_dial">快速拨号设置</string>
+    <string name="dialog_title">提示</string>
+    <string name="not_set">(未设置)</string>
+    <string name="replace">替换</string>
+    <string name="delete">删除</string>
+    <string name="speed_call">通话</string>
+    <string name="speed_sms">信息</string>
+    <string name="is_set_speed">数字键<xliff:g id="number">%s</xliff:g>未设置快速拨号，是否设置？\n</string>
+    <string name="dialog_speed_dial_airplane_mode_message" >"要呼叫快速拨号，请先关闭飞行模式。"</string>
+    <string name="assignSpeedDialFailToast">此号码已分配了快速拨号键，请选择其它号码。</string>
+
 </resources>
