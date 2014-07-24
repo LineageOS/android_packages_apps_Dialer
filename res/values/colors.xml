@@ -33,6 +33,9 @@
     <!-- Color of the text describing an unconsumed voicemail. -->
     <color name="call_log_voicemail_highlight_color">#33b5e5</color>
 
+    <!-- Tint of the recent card phone icon -->
+    <color name="recent_call_log_item_phone_icon_tint">#000000</color>
+
     <!--
          Colour of voicemail progress bar to the right of position indicator.
          Same as the background color of the dialer
@@ -93,4 +96,6 @@
     <color name="actionbar_icon_color">#ffffff</color>
 
     <color name="dialer_dialpad_touch_tint">#331dc7db</color>
+
+
 </resources>

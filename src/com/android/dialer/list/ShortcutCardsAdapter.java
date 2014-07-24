@@ -263,6 +263,8 @@ public class ShortcutCardsAdapter extends BaseAdapter {
 
             callLogItem.findViewById(R.id.call_log_row)
                     .setBackgroundColor(mShortCardBackgroundColor);
+
+            callLogItem.findViewById(R.id.call_indicator_icon).setVisibility(View.VISIBLE);
         }
 
         @Override
