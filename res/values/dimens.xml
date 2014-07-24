@@ -40,6 +40,8 @@
     <dimen name="call_detail_bottom_margin">32dp</dimen>
     <dimen name="call_detail_header_top_margin">24dp</dimen>
     <dimen name="call_detail_translation_z">0.5dp</dimen>
+    <dimen name="transcription_top_margin">18dp</dimen>
+    <dimen name="transcription_bottom_margin">18dp</dimen>
 
     <!-- Size of call provider icon width and height -->
     <dimen name="call_provider_small_icon_size">12dp</dimen>
