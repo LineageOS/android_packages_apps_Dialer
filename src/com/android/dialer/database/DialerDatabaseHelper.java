@@ -512,6 +512,48 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             super.onPostExecute(o);
         }
     }
+
+    /**
+     * Deletes all smart dial data and recreates it from contacts
+     */
+    public void recreateSmartDialDatabaseInBackground() { new SmartDialRecreateAsyncTask().execute(); }
+
+    private class SmartDialRecreateAsyncTask extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            if (DEBUG) {
+                Log.v(TAG, "Recreating database");
+            }
+
+            // reset last updated so that we query for all contacts
+            resetSmartDialLastUpdatedTime();
+
+            // clear all contacts
+            final SQLiteDatabase db = getWritableDatabase();
+            removeAllContacts(db);
+
+            // repopulate
+            updateSmartDialDatabase();
+            return null;
+        }
+
+        @Override
+        protected void onCancelled() {
+            if (DEBUG) {
+                Log.v(TAG, "Recreate Cancelled");
+            }
+            super.onCancelled();
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            if (DEBUG) {
+                Log.v(TAG, "Recreate Finished");
+            }
+            super.onPostExecute(o);
+        }
+    }
+
     /**
      * Removes rows in the smartdial database that matches the contacts that have been deleted
      * by other apps since last update.

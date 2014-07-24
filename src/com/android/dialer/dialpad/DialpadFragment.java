@@ -27,6 +27,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -87,6 +88,7 @@ import com.android.phone.common.HapticFeedback;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
+import java.util.Locale;
 
 /**
  * Fragment that displays a twelve-key phone dialpad.
@@ -410,11 +412,7 @@ public class DialpadFragment extends Fragment
         mDigits.setOnLongClickListener(this);
         mDigits.addTextChangedListener(this);
         PhoneNumberFormatter.setPhoneNumberFormattingTextWatcher(getActivity(), mDigits);
-        // Check for the presence of the keypad
-        View oneButton = fragmentView.findViewById(R.id.one);
-        if (oneButton != null) {
-            setupKeypad(fragmentView);
-        }
+        setupKeypad(fragmentView);
 
         mDelete = fragmentView.findViewById(R.id.deleteButton);
         if (mDelete != null) {
@@ -605,6 +603,11 @@ public class DialpadFragment extends Fragment
     }
 
     private void setupKeypad(View fragmentView) {
+        // make sure keypad is there
+        View oneButton = fragmentView.findViewById(R.id.one);
+        if (oneButton == null)
+            return;
+
         final int[] buttonIds = new int[] {R.id.zero, R.id.one, R.id.two, R.id.three, R.id.four,
                 R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.star, R.id.pound};
 
@@ -626,7 +629,9 @@ public class DialpadFragment extends Fragment
                 R.string.dialpad_8_2_letters, R.string.dialpad_9_2_letters,
                 R.string.dialpad_star_2_letters, R.string.dialpad_pound_2_letters};
 
-        final Resources resources = getResources();
+        // load the dialpad resources based on the t9 serach input locale
+        Locale t9SearchInputLocale = SmartDialPrefix.getT9SearchInputLocale(getActivity());
+        final Resources resources = getResourcesForLocale(t9SearchInputLocale);
 
         DialpadKeyButton dialpadKey;
         TextView numberView;
@@ -662,6 +667,12 @@ public class DialpadFragment extends Fragment
         // Long-pressing zero button will enter '+' instead.
         fragmentView.findViewById(R.id.zero).setOnLongClickListener(this);
 
+    }
+
+    public void refreshKeypad() {
+        View fragmentView = getView();
+        if (fragmentView != null)
+            setupKeypad(fragmentView);
     }
 
     @Override
@@ -1751,5 +1762,13 @@ public class DialpadFragment extends Fragment
 
     public void setYFraction(float yFraction) {
         ((DialpadSlidingLinearLayout) getView()).setYFraction(yFraction);
+    }
+
+    private Resources getResourcesForLocale(Locale locale) {
+        Configuration defaultConfig = getResources().getConfiguration();
+        Configuration overrideConfig = new Configuration(defaultConfig);
+        overrideConfig.setLocale(locale);
+        Context localeContext = getActivity().createConfigurationContext(overrideConfig);
+        return localeContext.getResources();
     }
 }

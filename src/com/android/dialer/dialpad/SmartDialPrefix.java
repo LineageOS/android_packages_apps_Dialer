@@ -23,12 +23,19 @@ import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
+import com.android.dialer.database.DialerDatabaseHelper;
+import com.android.dialerbind.DatabaseHelperManager;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Locale;
+import java.util.Map;
+import java.util.HashMap;
+
+import android.util.Log;
 
 /**
  * Smart Dial utility class to find prefixes of contacts. It contains both methods to find supported
@@ -69,6 +76,24 @@ public class SmartDialPrefix {
 
     private static boolean sNanpInitialized = false;
 
+    private static final Map<String, SmartDialMap> languageToSmartDialMap = new HashMap<String, SmartDialMap>();
+    static {
+        languageToSmartDialMap.put("ko", new KoreanSmartDialMap());
+        languageToSmartDialMap.put("el", new GreekSmartDialMap());
+        languageToSmartDialMap.put("ru", new RussianSmartDialMap());
+        languageToSmartDialMap.put("he", new HebrewSmartDialMap());
+        languageToSmartDialMap.put("zh", new ChineseSmartDialMap());
+    }
+
+    private static final Map<String, SmartDialMap> countryToSmartDialMap = new HashMap<String, SmartDialMap>();
+    static {
+        languageToSmartDialMap.put("KR", new KoreanSmartDialMap());
+        languageToSmartDialMap.put("GR", new GreekSmartDialMap());
+        languageToSmartDialMap.put("RU", new RussianSmartDialMap());
+        languageToSmartDialMap.put("IL", new HebrewSmartDialMap());
+        languageToSmartDialMap.put("CN", new ChineseSmartDialMap());
+    }
+
     /** Initializes the Nanp settings, and finds out whether user is in a NANP region.*/
     public static void initializeNanpSettings(Context context){
         final TelephonyManager manager = (TelephonyManager) context.getSystemService(
@@ -90,23 +115,34 @@ public class SmartDialPrefix {
         /** Queries the NANP country list to find out whether user is in a NANP region.*/
         sUserInNanpRegion = isCountryNanp(sUserSimCountryCode);
 
-        /** Sets a layout for SmartDial depending on current UI language.*/
-        String locale = context.getResources().getConfiguration().locale.getCountry();
-        if (locale.equals("RU")) {
-            mMap = new RussianSmartDialMap();
-        } else if (locale.equals("GR")) {
-            mMap = new GreekSmartDialMap();
-        } else if (locale.equals("IL")) {
-            mMap = new HebrewSmartDialMap();
-        } else if (locale.equals("KR")) {
-            mMap = new KoreanSmartDialMap();
-        } else if (locale.equals("CN")) {
-            mMap = new ChineseSmartDialMap();
-        } else {
+        /** Sets a layout for SmartDial based on locale.  Lookup by language first and fallback to country */
+        Locale locale = getT9SearchInputLocale(context);
+        mMap = languageToSmartDialMap.get(locale.getLanguage());
+        if (mMap == null)
+            mMap = countryToSmartDialMap.get(locale.getCountry());
+        if (mMap == null)
             mMap = new LatinSmartDialMap();
-        }
 
         sNanpInitialized = true;
+    }
+
+    public static Locale getT9SearchInputLocale(Context context) {
+        // Use system locale by default
+        Locale locale = context.getResources().getConfiguration().locale;
+
+        // Override with t9 search input locale from settings if provided
+        String overrideLocaleString = android.provider.Settings.System.getString(
+                context.getContentResolver(),
+                android.provider.Settings.System.T9_SEARCH_INPUT_LOCALE);
+        if (overrideLocaleString != null && !overrideLocaleString.isEmpty()) {
+            String[] tokens = overrideLocaleString.split("_");
+            String lang = tokens.length > 0 ? tokens[0] : "";
+            String country = tokens.length > 1 ? tokens[1] : "";
+            String variant = tokens.length > 2 ? tokens[2] : "";
+            locale = new Locale(lang, country, variant);
+        }
+
+        return locale;
     }
 
     /**
