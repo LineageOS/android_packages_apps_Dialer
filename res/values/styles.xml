@@ -45,7 +45,7 @@
         <item name="list_item_prefix_highlight_color">@color/people_app_theme_color</item>
         <item name="list_item_background_color">@color/background_dialer_light</item>
         <item name="list_item_header_text_indent">8dip</item>
-        <item name="list_item_header_text_color">@color/people_app_theme_color</item>
+        <item name="list_item_header_text_color">@color/dialtacts_secondary_text_color</item>
         <item name="list_item_header_text_size">14sp</item>
         <item name="list_item_header_height">30dip</item>
         <item name="list_item_data_width_weight">5</item>
@@ -58,8 +58,8 @@
         <item name="list_item_text_indent">@dimen/contact_browser_list_item_text_indent</item>
         <item name="list_item_text_offset_top">-2dp</item>
         <!-- CallLog -->
-        <item name="call_log_primary_text_color">@color/contact_list_name_text_color</item>
-        <item name="call_log_primary_background_color">#000000</item>
+        <item name="call_log_primary_text_color">@color/dialtacts_primary_text_color</item>
+        <item name="call_log_primary_background_color">@color/background_dialer_secondary</item>
         <item name="call_log_secondary_text_color">@color/dialtacts_secondary_text_color</item>
         <item name="call_log_secondary_background_color">#333333</item>
         <item name="call_log_header_color">#33b5e5</item>
@@ -70,8 +70,8 @@
         <item name="call_log_voicemail_status_action_text_color">#33b5e5</item>
             <!-- Favorites -->
         <item name="favorites_padding_bottom">?android:attr/actionBarSize</item>
-        <item name="android:colorPrimary">@color/actionbar_background_color</item>
-        <item name="android:colorPrimaryDark">@color/actionbar_background_color_dark</item>
+        <item name="android:colorPrimary">@color/dialer_theme_color</item>
+        <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
         <item name="dialpad_key_button_touch_tint">@color/dialer_dialpad_touch_tint</item>
     </style>
 

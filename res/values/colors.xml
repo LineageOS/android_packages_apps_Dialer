@@ -16,9 +16,9 @@
 
 <resources>
     <!--  Primary text color in the Dialer -->
-    <color name="dialtacts_primary_text_color">#000000</color>
+    <color name="dialtacts_primary_text_color">#333</color>
     <!-- Secondary text color in the Dialer -->
-    <color name="dialtacts_secondary_text_color">#888888</color>
+    <color name="dialtacts_secondary_text_color">#737373</color>
     <color name="dialer_accent_color">#eeff41</color>
 
     <!-- Color for the setting text. -->
@@ -48,6 +48,11 @@
     <!-- Standard color for selected items. -->
     <color name="item_selected">#660099cc</color>
 
+
+    <!-- Primary background color for dialer -->
+    <color name="background_dialer_primary">#fafafa</color>
+    <!-- Secondary background color for dialer -->
+    <color name="background_dialer_secondary">#f9f9f9</color>
     <!-- White background for dialer -->
     <color name="background_dialer_white">#ffffff</color>
     <!-- Background color of new dialer activity -->
@@ -81,10 +86,10 @@
     <color name="call_log_expanded_background_color">#ffffff</color>
     <!-- Color of actions in expanded call log entries.  This text color represents actions such
          as call back, play voicemail, etc. -->
-    <color name="call_log_action_text">#1dc7db</color>
+    <color name="call_log_action_text">@color/dialer_theme_color</color>
 
     <!-- Color of view full call history item text. -->
-    <color name="view_full_call_history_color">#1dc7db</color>
+    <color name="view_full_call_history_color">@color/dialer_theme_color</color>
 
     <!-- Color for missed call icons. -->
     <color name="missed_call">#ff2e58</color>
