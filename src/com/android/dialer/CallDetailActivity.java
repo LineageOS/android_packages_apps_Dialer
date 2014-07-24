@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.telecomm.PhoneAccount;
 import android.telecomm.TelecommManager;
@@ -107,6 +108,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     /** If the activity was triggered from a notification. */
     public static final String EXTRA_FROM_NOTIFICATION = "EXTRA_FROM_NOTIFICATION";
 
+    public static final String VOICEMAIL_FRAGMENT_TAG = "voicemail_fragment";
+
     private CallTypeHelper mCallTypeHelper;
     private PhoneNumberDisplayHelper mPhoneNumberHelper;
     private QuickContactBadge mQuickContactBadge;
@@ -130,6 +133,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     private View mStatusMessageView;
     private TextView mStatusMessageText;
     private TextView mStatusMessageAction;
+    private TextView mVoicemailTranscription;
 
     /** Whether we should show "edit number before call" in the options menu. */
     private boolean mHasEditNumberBeforeCallOption;
@@ -203,7 +207,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         CallLog.Calls.PHONE_ACCOUNT_COMPONENT_NAME,
         CallLog.Calls.PHONE_ACCOUNT_ID,
         CallLog.Calls.FEATURES,
-        CallLog.Calls.DATA_USAGE
+        CallLog.Calls.DATA_USAGE,
+        CallLog.Calls.TRANSCRIPTION
     };
 
     static final int DATE_COLUMN_INDEX = 0;
@@ -217,6 +222,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     static final int ACCOUNT_ID = 8;
     static final int FEATURES = 9;
     static final int DATA_USAGE = 10;
+    static final int TRANSCRIPTION_COLUMN_INDEX = 11;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -235,6 +241,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         mStatusMessageView = findViewById(R.id.voicemail_status);
         mStatusMessageText = (TextView) findViewById(R.id.voicemail_status_message);
         mStatusMessageAction = (TextView) findViewById(R.id.voicemail_status_action);
+        mVoicemailTranscription = (TextView) findViewById(R.id.voicemail_transcription);
         mQuickContactBadge = (QuickContactBadge) findViewById(R.id.quick_contact_photo);
         mQuickContactBadge.setOverlay(null);
         mCallerName = (TextView) findViewById(R.id.caller_name);
@@ -268,17 +275,25 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             // Has voicemail: add the voicemail fragment.  Add suitable arguments to set the uri
             // to play and optionally start the playback.
             // Do a query to fetch the voicemail status messages.
-            VoicemailPlaybackFragment playbackFragment = new VoicemailPlaybackFragment();
-            Bundle fragmentArguments = new Bundle();
-            fragmentArguments.putParcelable(EXTRA_VOICEMAIL_URI, getVoicemailUri());
-            if (getIntent().getBooleanExtra(EXTRA_VOICEMAIL_START_PLAYBACK, false)) {
-                fragmentArguments.putBoolean(EXTRA_VOICEMAIL_START_PLAYBACK, true);
+            VoicemailPlaybackFragment playbackFragment;
+
+            playbackFragment = (VoicemailPlaybackFragment) getFragmentManager().findFragmentByTag(
+                    VOICEMAIL_FRAGMENT_TAG);
+
+            if (playbackFragment == null) {
+                playbackFragment = new VoicemailPlaybackFragment();
+                Bundle fragmentArguments = new Bundle();
+                fragmentArguments.putParcelable(EXTRA_VOICEMAIL_URI, getVoicemailUri());
+                if (getIntent().getBooleanExtra(EXTRA_VOICEMAIL_START_PLAYBACK, false)) {
+                    fragmentArguments.putBoolean(EXTRA_VOICEMAIL_START_PLAYBACK, true);
+                }
+                playbackFragment.setArguments(fragmentArguments);
+                getFragmentManager().beginTransaction()
+                        .add(R.id.voicemail_container, playbackFragment, VOICEMAIL_FRAGMENT_TAG)
+                                .commitAllowingStateLoss();
             }
-            playbackFragment.setArguments(fragmentArguments);
+
             voicemailContainer.setVisibility(View.VISIBLE);
-            getFragmentManager().beginTransaction()
-                    .add(R.id.voicemail_container, playbackFragment)
-                    .commitAllowingStateLoss();
             mAsyncQueryHandler.startVoicemailStatusQuery(getVoicemailUri());
             markVoicemailAsRead(getVoicemailUri());
         } else {
@@ -453,6 +468,14 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     nameForDefaultImage = firstDetails.name.toString();
                 }
 
+                if (hasVoicemail() && !TextUtils.isEmpty(firstDetails.transcription)) {
+                    mVoicemailTranscription.setText(firstDetails.transcription);
+                    mVoicemailTranscription.setVisibility(View.VISIBLE);
+                } else {
+                    mVoicemailTranscription.setText(null);
+                    mVoicemailTranscription.setVisibility(View.GONE);
+                }
+
                 loadContactPhotos(
                         contactUri, photoUri, nameForDefaultImage, lookupKey, contactType);
                 findViewById(R.id.call_detail).setVisibility(View.VISIBLE);
@@ -495,6 +518,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             final int callType = callCursor.getInt(CALL_TYPE_COLUMN_INDEX);
             String countryIso = callCursor.getString(COUNTRY_ISO_COLUMN_INDEX);
             final String geocode = callCursor.getString(GEOCODED_LOCATION_COLUMN_INDEX);
+            final String transcription = callCursor.getString(TRANSCRIPTION_COLUMN_INDEX);
 
             final Drawable accountIcon = PhoneAccountUtils.getAccountIcon(this,
                     PhoneAccountUtils.getAccount(
@@ -547,7 +571,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     formattedNumber, countryIso, geocode,
                     new int[]{ callType }, date, duration,
                     nameText, numberType, numberLabel, lookupUri, photoUri, sourceType,
-                    accountIcon, features, dataUsage);
+                    accountIcon, features, dataUsage, transcription);
         } finally {
             if (callCursor != null) {
                 callCursor.close();

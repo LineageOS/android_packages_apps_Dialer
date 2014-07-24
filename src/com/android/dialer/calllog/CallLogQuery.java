@@ -16,15 +16,12 @@
 
 package com.android.dialer.calllog;
 
-import android.database.Cursor;
 import android.provider.CallLog.Calls;
 
 /**
  * The query for the call log table.
  */
 public final class CallLogQuery {
-    // If you alter this, you must also alter the method that inserts a fake row to the headers
-    // in the CallLogQueryHandler class called createHeaderCursorFor().
     public static final String[] _PROJECTION = new String[] {
             Calls._ID,                          // 0
             Calls.NUMBER,                       // 1
@@ -47,7 +44,8 @@ public final class CallLogQuery {
             Calls.PHONE_ACCOUNT_COMPONENT_NAME, // 18
             Calls.PHONE_ACCOUNT_ID,             // 19
             Calls.FEATURES,                     // 20
-            Calls.DATA_USAGE                    // 21
+            Calls.DATA_USAGE,                   // 21
+            Calls.TRANSCRIPTION                 // 22
     };
 
     public static final int ID = 0;
@@ -72,4 +70,5 @@ public final class CallLogQuery {
     public static final int ACCOUNT_ID = 19;
     public static final int FEATURES = 20;
     public static final int DATA_USAGE = 21;
+    public static final int TRANSCRIPTION = 22;
 }

@@ -15,17 +15,16 @@
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id/call_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/background_dialer_list_items"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-    >
+        android:background="@color/background_dialer_list_items" >
         <!-- Caller information "card" -->
         <LinearLayout
             android:id="@+id/caller_information"
@@ -39,7 +38,7 @@
             android:gravity="center_vertical"
             android:translationZ="@dimen/call_detail_translation_z"
             android:focusable="true"
-            android:background="@color/background_dialer_white">
+            android:background="@color/background_dialer_white" >
 
             <QuickContactBadge
                 android:id="@+id/quick_contact_photo"
@@ -85,11 +84,20 @@
             >
             <include layout="@layout/call_log_voicemail_status"/>
         </FrameLayout>
+        <TextView
+            android:id="@+id/voicemail_transcription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/call_detail_horizontal_margin"
+            android:paddingEnd="@dimen/call_detail_horizontal_margin"
+            android:paddingTop="@dimen/transcription_top_margin"
+            android:paddingBottom="@dimen/transcription_bottom_margin"
+            android:background="@color/background_dialer_list_items" />
         <LinearLayout
             android:id="@+id/voicemail_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:paddingBottom="@dimen/call_detail_button_spacing"
             android:visibility="gone"
             >

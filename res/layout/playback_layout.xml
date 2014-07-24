@@ -14,10 +14,11 @@
      limitations under the License.
 -->
 
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="@color/background_dialer_list_items"
 >
     <!-- Mute, playback, trash buttons. -->
@@ -26,44 +27,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_alignParentTop="true"
     >
-        <LinearLayout
+        <ImageButton
+            android:id="@+id/playback_start_stop"
             android:layout_width="match_parent"
-            android:layout_height="58dip"
+            android:layout_height="58dp"
             android:layout_marginEnd="@dimen/call_detail_button_spacing"
             android:layout_weight="1"
-        >
-            <ImageButton
-                android:id="@+id/playback_start_stop"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_hold_pause"
-                android:contentDescription="@string/voicemail_play_start_pause"
-            />
-        </LinearLayout>
-        <LinearLayout
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_hold_pause"
+            android:contentDescription="@string/voicemail_play_start_pause"
+        />
+        <ImageButton
+            android:id="@+id/playback_speakerphone"
             android:layout_width="match_parent"
             android:layout_height="58dip"
             android:layout_weight="1"
-            android:background="@color/background_dialer_list_items"
-        >
-            <ImageButton
-                android:id="@+id/playback_speakerphone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_speakerphone_on"
-                android:contentDescription="@string/description_playback_speakerphone"
-            />
-        </LinearLayout>
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_speakerphone_on"
+            android:contentDescription="@string/description_playback_speakerphone"
+        />
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/seek_container"
         android:layout_width="match_parent"
         android:layout_height="80dip"
-        android:layout_below="@id/buttons_linear_layout"
         android:layout_marginTop="@dimen/call_detail_button_spacing"
     >
         <!-- SeekBar left-right margin decreased from redlines 72dip by 8dip to account for
@@ -137,4 +125,4 @@
             android:layout_height="2dp"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>
