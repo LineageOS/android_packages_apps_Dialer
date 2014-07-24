@@ -250,6 +250,10 @@ public class SpecialCharSequenceMgr {
             int phoneType;
             long subId = SubscriptionManager.getDefaultVoiceSubId();
             phoneType = telephonyManager.getCurrentPhoneType(subId);
+            if (telephonyManager.isMultiSimEnabled()) {
+                return handleMSimIMEIDisplay(context, telephonyManager);
+            }
+
             if (phoneType == TelephonyManager.PHONE_TYPE_GSM) {
                 showIMEIPanel(context, useSystemWindow, telephonyManager);
                 return true;
@@ -260,6 +264,35 @@ public class SpecialCharSequenceMgr {
         }
 
         return false;
+    }
+
+    private static boolean handleMSimIMEIDisplay(Context context,
+            TelephonyManager telephonyManager) {
+        StringBuffer deviceIds = new StringBuffer();
+        int titleId = R.string.device_id;
+        int count = telephonyManager.getPhoneCount();
+
+        for (int i = 0; i < count; i++) {
+            if (i != 0) {
+                deviceIds.append("\n");
+            }
+            int phoneType = telephonyManager.getCurrentPhoneType(i);
+            if (phoneType != TelephonyManager.PHONE_TYPE_GSM
+                    && phoneType != TelephonyManager.PHONE_TYPE_CDMA) {
+                return false;
+            }
+            deviceIds.append(context.getString(TelephonyManager.PHONE_TYPE_CDMA == phoneType
+                    ? R.string.meid : R.string.imei) + " ");
+            deviceIds.append(telephonyManager.getDeviceId(i));
+        }
+
+        AlertDialog alert = new AlertDialog.Builder(context)
+                .setTitle(titleId)
+                .setMessage(deviceIds.toString())
+                .setPositiveButton(android.R.string.ok, null)
+                .setCancelable(false)
+                .show();
+        return true;
     }
 
     private static boolean handleRegulatoryInfoDisplay(Context context, String input) {

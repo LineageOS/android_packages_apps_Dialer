@@ -810,4 +810,5 @@
     <!-- Label for the call settings section description [CHAR LIMIT=80]-->
     <string name="call_settings_description">Voicemail, call waiting, and others</string>
 
+    <string name="device_id">Device Identifier</string>
 </resources>

@@ -201,4 +201,6 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"快速回复"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"通话设置"</string>
     <string name="call_settings_description" msgid="2756622428019213052">"语音信箱、来电等待及其他"</string>
+
+    <string name="device_id">设备标识符</string>
 </resources>
