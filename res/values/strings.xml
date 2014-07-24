@@ -811,4 +811,18 @@
     <string name="call_settings_description">Voicemail, call waiting, and others</string>
 
     <string name="device_id">Device Identifier</string>
+
+    <!--  for speed dial -->
+    <string name="set_speed_dial">Speed dial settings</string>
+    <string name="dialog_title">Tip</string>
+    <string name="not_set">(not set)</string>
+    <string name="replace">Replace</string>
+    <string name="delete">Delete</string>
+    <string name="speed_call">Call</string>
+    <string name="speed_sms">Message</string>
+    <string name="speed_item"><xliff:g id="index">%s</xliff:g>. <xliff:g id="content">%s</xliff:g></string>
+    <string name="is_set_speed">Number key <xliff:g id="number">%s</xliff:g> is not set up speed dial, set now?\n</string>
+    <string name="dialog_speed_dial_airplane_mode_message" >"To call Speed dial, first turn off Airplane mode."</string>
+    <string name="assignSpeedDialFailToast">The number has already been assigned to a speed dial key, please select another number.</string>
+
 </resources>
