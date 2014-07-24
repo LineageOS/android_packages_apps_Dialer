@@ -731,14 +731,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
     }
 
-    private void hideInputMethod(View view) {
-        final InputMethodManager imm = (InputMethodManager) getSystemService(
-                Context.INPUT_METHOD_SERVICE);
-        if (imm != null && view != null) {
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
     private void prepareVoiceSearchButton() {
         final Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         if (canIntentBeHandled(voiceIntent)) {
@@ -940,7 +932,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             hideDialpadFragment(true, false);
         } else if (isInSearchUi()) {
             exitSearchUi();
-            hideInputMethod(parentLayout);
+            DialerUtils.hideInputMethod(parentLayout);
         } else {
             super.onBackPressed();
         }
@@ -952,7 +944,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean maybeExitSearchUi() {
         if (isInSearchUi() && TextUtils.isEmpty(mSearchQuery)) {
             exitSearchUi();
-            hideInputMethod(parentLayout);
+            DialerUtils.hideInputMethod(parentLayout);
             return true;
         }
         return false;
@@ -989,7 +981,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onListFragmentScrollStateChange(int scrollState) {
         if (scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
             hideDialpadFragment(true, false);
-            hideInputMethod(getCurrentFocus());
+            DialerUtils.hideInputMethod(getCurrentFocus());
         }
     }
 
