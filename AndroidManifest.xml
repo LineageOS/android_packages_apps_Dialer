@@ -264,6 +264,16 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".SpeedDialListActivity"
+            android:theme="@style/DialtactsTheme"
+            android:label="@string/speed_dial_settings"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.android.phone.action.SPEED_DIAL_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
         <receiver android:name=".interactions.UndemoteOutgoingCallReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />

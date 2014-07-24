@@ -96,6 +96,12 @@ public class DialerSettingsActivity extends PreferenceActivity {
                 accessibilitySettingsHeader.intent = accessibilitySettingsIntent;
                 target.add(accessibilitySettingsHeader);
             }
+
+            Header speedDialHeader = new Header();
+            Intent speedDialIntent = new Intent("com.android.phone.action.SPEED_DIAL_SETTINGS");
+            speedDialHeader.titleRes = R.string.speed_dial_settings;
+            speedDialHeader.intent = speedDialIntent;
+            target.add(speedDialHeader);
         }
     }
 
