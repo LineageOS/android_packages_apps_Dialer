@@ -44,11 +44,35 @@ public class PhoneAccountUtils {
      * Generate account icon from data in Telecomm database
      */
     public static Drawable getAccountIcon(Context context, PhoneAccountHandle phoneAccount) {
-        final PhoneAccount accountMetadata = TelecommManager.from(context)
-                .getPhoneAccount(phoneAccount);
-        if (accountMetadata == null) {
+        final PhoneAccount account = getAccountOrNull(context, phoneAccount);
+        if (account == null) {
             return null;
         }
-        return accountMetadata.getIcon(context);
+        return account.getIcon(context);
+    }
+
+    /**
+     * Generate account label from data in Telecomm database
+     */
+    public static CharSequence getAccountLabel(Context context, PhoneAccountHandle phoneAccount) {
+        final PhoneAccount account = getAccountOrNull(context, phoneAccount);
+        if (account == null) {
+            return null;
+        }
+        return account.getLabel();
+    }
+
+    /**
+     * Retrieve the account metadata, but if the account does not exist or the device has only a
+     * single registered and enabled account, return null.
+     */
+    private static PhoneAccount getAccountOrNull(Context context,
+            PhoneAccountHandle phoneAccount) {
+        final TelecommManager telecommManager = TelecommManager.from(context);
+        final PhoneAccount account = telecommManager.getPhoneAccount(phoneAccount);
+        if (account == null || !telecommManager.hasMultipleEnabledAccounts()) {
+            return null;
+        }
+        return account;
     }
 }
