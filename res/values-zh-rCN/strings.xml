@@ -204,4 +204,5 @@
 
     <string name="call_log_show_all_slots">"所有卡"</string>
     <string name="call_log_all_calls_header">"所有通话"</string>
+    <string name="device_id">设备标识符</string>
 </resources>
