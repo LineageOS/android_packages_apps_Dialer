@@ -69,10 +69,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"වීඩියෝ ඇමතුම"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"වීඩියෝවක් ඉල්ලමින්"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"වීඩියෝ ඇමතුමකට සම්බන්ධ කිරීම කළ නොහැක"</string>
-    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number_emergency (85588345502265075) -->
-    <skip />
+    <string name="card_title_callback_number" msgid="4604563437776874016">"ඔබගේ ඇමතුම් ආපසු අංකය\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"ඔබගේ හදිසි ඇමතුම් ආපසු අංකය\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"අමතමින්"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"මඟ හැරුණු ඇමතුම"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"මඟ හැරුණු ඇමතුම්"</string>
@@ -117,6 +115,16 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"ඇමතුම නොයැවිණි, <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> හදිසි අංකයක් නොවේ!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"ඇමතුම නොයැවිණි, හදිසි අංකයක් අමතන්න!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"ඇමතීමට කිරීමට යතුරු පුවරුව භාවිතා කරන්න"</string>
+    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
+    <skip />
+    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
+    <skip />
+    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
+    <skip />
+    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
+    <skip />
+    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
+    <skip />
     <string name="onscreenHoldText" msgid="2285258239691145872">"රඳවා සිටින්න"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"අවසානයි"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"ඇමතුම් පෑඩය"</string>
@@ -128,12 +136,10 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"සම්මන්ත්‍රණය කළමනාකරණය කරන්න"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"ශ්‍රව්‍ය"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"වීඩියෝ ඇමතුම"</string>
-    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
-    <skip />
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"හඬ ඇමතුමක් වෙත මාරු කරන ලදි"</string>
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"කැමරාව මාරු කරන්න"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"විඩියෝව විරාම කරන්න"</string>
-    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
-    <skip />
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"තවත් විකල්ප"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"සේවාව"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"ස්ථාපනය කරන්න"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;පිහිටුවා නැත&gt;"</string>
@@ -181,8 +187,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"රිගින් ටෝන් සහ කම්පනය කරන්න"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"සම්මන්ත්‍රණ ඇමතුම කළමනාකරණය කරන්න"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"හදිසි ඇමතුම් අංකය"</string>
-    <!-- no translation found for select_account_dialog_title (5730339500156684204) -->
-    <skip />
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"ගිණුම තෝරන්න"</string>
     <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
     <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
     <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>

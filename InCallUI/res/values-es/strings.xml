@@ -115,6 +115,16 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"No se ha enviado la llamada. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> no es un número de emergencia."</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"La llamada no se ha enviado. Marca un número de emergencia."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Utilizar teclado para marcar"</string>
+    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
+    <skip />
+    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
+    <skip />
+    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
+    <skip />
+    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
+    <skip />
+    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
+    <skip />
     <string name="onscreenHoldText" msgid="2285258239691145872">"Retener"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Finalizar"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Teclado"</string>
@@ -126,12 +136,10 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Administrar conferencia"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Audio"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videollamada"</string>
-    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
-    <skip />
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Cambiar a llamada de voz"</string>
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Cambiar cámara"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Pausar vídeo"</string>
-    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
-    <skip />
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"Más opciones"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Servicio"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Configuración"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;No definido&gt;"</string>

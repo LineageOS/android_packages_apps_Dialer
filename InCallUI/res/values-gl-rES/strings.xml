@@ -69,8 +69,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videochamada"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Solicitando vídeo"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Non se pode conectar a videochamada"</string>
-    <!-- no translation found for card_title_callback_number (4604563437776874016) -->
-    <skip />
+    <string name="card_title_callback_number" msgid="4604563437776874016">"O teu número de devolución de chamada \n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="85588345502265075">"O número de devolución da chamada de emerxencia\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Marcación"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Chamada perdida"</string>
@@ -116,6 +115,16 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"Chamada non efectuada. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> non é un número de emerxencia."</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Chamada non enviada. Marca un número de emerxencia."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Utiliza o teclado para chamar"</string>
+    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
+    <skip />
+    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
+    <skip />
+    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
+    <skip />
+    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
+    <skip />
+    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
+    <skip />
     <string name="onscreenHoldText" msgid="2285258239691145872">"Poñer en espera"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Finalizar"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Teclado de marcación"</string>
@@ -127,12 +136,10 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Xestión conferencia"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Audio"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videochamada"</string>
-    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
-    <skip />
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Cambiar para chamada de voz"</string>
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Cambiar cámara"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Pausar vídeo"</string>
-    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
-    <skip />
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"Máis opcións"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Servizo"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Configuración"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Sen configurar&gt;"</string>
