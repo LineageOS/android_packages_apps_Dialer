@@ -69,6 +69,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videohovor"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Požadování videa"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Spojení videohovoru se nezdařilo"</string>
+    <string name="card_title_callback_number" msgid="4604563437776874016">"Vaše číslo pro zpětná volání\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="85588345502265075">"Vaše číslo pro tísňové zpětné volání\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Vytáčení"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Zmeškaný hovor"</string>
@@ -114,6 +115,16 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"Hovor nelze spojit, <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> není číslo nouzového volání."</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Hovor nebyl spojen. Vytočte prosím číslo tísňového volání."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Číslo vytočíte pomocí klávesnice."</string>
+    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
+    <skip />
+    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
+    <skip />
+    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
+    <skip />
+    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
+    <skip />
+    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
+    <skip />
     <string name="onscreenHoldText" msgid="2285258239691145872">"Přidržet"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Ukončit"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Číselník"</string>
@@ -125,12 +136,10 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Spravovat konferenci"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Zvuk"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videohovor"</string>
-    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
-    <skip />
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Změnit na hlasové volání"</string>
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Přepnout fotoaparát"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Pozastavit video"</string>
-    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
-    <skip />
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"Další možnosti"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Služba"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Konfigurace"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Nenastaveno&gt;"</string>

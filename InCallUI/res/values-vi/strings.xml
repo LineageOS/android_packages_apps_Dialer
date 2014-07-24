@@ -69,6 +69,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Cuộc gọi điện video"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Đang yêu cầu video"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"Không thể kết nối cuộc gọi điện video"</string>
+    <string name="card_title_callback_number" msgid="4604563437776874016">"Số gọi lại của bạn\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="85588345502265075">"Số gọi lại khẩn cấp của bạn\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Đang gọi"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Cuộc gọi nhỡ"</string>
@@ -114,6 +115,16 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"Cuộc gọi không được gửi đi. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> không phải là số khẩn cấp!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Cuộc gọi không được gửi đi. Hãy quay số số khẩn cấp!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Sử dụng bàn phím để quay số"</string>
+    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
+    <skip />
+    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
+    <skip />
+    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
+    <skip />
+    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
+    <skip />
+    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
+    <skip />
     <string name="onscreenHoldText" msgid="2285258239691145872">"Giữ"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Kết thúc"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Bàn phím số"</string>

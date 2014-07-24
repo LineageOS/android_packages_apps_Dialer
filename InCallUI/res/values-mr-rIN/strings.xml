@@ -69,6 +69,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"व्हिडिओ कॉल"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"व्हिडिओ विनंती करत आहे"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"व्हिडिओ कॉल कनेक्ट करू शकत नाही"</string>
+    <string name="card_title_callback_number" msgid="4604563437776874016">"आपला परत कॉल करण्‍याचा नंबर\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="85588345502265075">"आपला आणीबाणीचा परत कॉल करण्‍याचा नंबर\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"डायल करीत आहे"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"सुटलेला कॉल"</string>
@@ -114,6 +115,16 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"कॉल पाठविला नाही. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> हा आणीबाणीचा नंबर नाही!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"कॉल पाठविला नाही. आणीबाणीचा नंबर डायल करा!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"डायल करण्‍यासाठी कीबोर्डचा वापर करा"</string>
+    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
+    <skip />
+    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
+    <skip />
+    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
+    <skip />
+    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
+    <skip />
+    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
+    <skip />
     <string name="onscreenHoldText" msgid="2285258239691145872">"होल्ड करा"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"शेवट"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"डायलपॅड"</string>

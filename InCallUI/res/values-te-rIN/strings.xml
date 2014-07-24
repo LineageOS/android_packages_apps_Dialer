@@ -69,6 +69,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"వీడియో కాల్"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"వీడియో కోసం అభ్యర్థిస్తోంది"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"వీడియో కాల్‌ను కనెక్ట్ చేయడం సాధ్యపడదు"</string>
+    <string name="card_title_callback_number" msgid="4604563437776874016">"మీ కాల్ బ్యాక్ నంబర్\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="85588345502265075">"మీ అత్యవసర కాల్ బ్యాక్ నంబర్\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"డయల్ చేస్తోంది"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"సమాధానం ఇవ్వని కాల్"</string>
@@ -114,6 +115,16 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"కాల్ వెళ్లలేదు. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> అత్యవసర నంబర్ కాదు!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"కాల్ వెళ్లలేదు. అత్యవసర నంబర్‌కు డయల్ చేయండి!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"డయల్ చేయడానికి కీబోర్డ్‌ను ఉపయోగించండి"</string>
+    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
+    <skip />
+    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
+    <skip />
+    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
+    <skip />
+    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
+    <skip />
+    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
+    <skip />
     <string name="onscreenHoldText" msgid="2285258239691145872">"హోల్డ్ చేయి"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"ముగించు"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"డయల్‌ప్యాడ్"</string>
@@ -125,12 +136,10 @@
     <string name="onscreenManageConferenceText" msgid="6485935856534311346">"కాన్ఫరెన్స్‌ను నిర్వహించు"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"ఆడియో"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"వీడియో కాల్"</string>
-    <!-- no translation found for onscreenChangeToVoiceText (5311407863653867937) -->
-    <skip />
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"వాయిస్ కాల్‌కి మార్చు"</string>
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"కెమెరాను మార్చు"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"వీడియోను పాజ్ చేయి"</string>
-    <!-- no translation found for onscreenOverflowText (2702376562345723132) -->
-    <skip />
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"మరిన్ని ఎంపికలు"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"సేవ"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"సెటప్"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;సెట్ చేయలేదు&gt;"</string>
