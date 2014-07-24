@@ -78,6 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"search"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"dial"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"number to dial"</string>
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Play or stop playback"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Switch on or off speakerphone"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Seek playback position"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Decrease playback rate"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Increase playback rate"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Call History"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"More options"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"dial pad"</string>

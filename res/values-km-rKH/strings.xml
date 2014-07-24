@@ -78,6 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"ស្វែងរក"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"dial"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"លេខ​ដែល​ត្រូវ​ហៅ"</string>
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"ចាក់ ឬ​បញ្ជាក់​ការ​ចាក់​ឡើងវិញ"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"បិទ ឬ​បើក​អូប៉ាល័រទូរស័ព្ទ"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"រកមើល​ទីតាំង​ចាក់​ឡើងវិញ"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"បន្ថយ​អត្រា​ចាក់​ឡើង​វិញ"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"បង្កើន​អត្រា​ចាក់​ឡើងវិញ"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"ប្រវត្តិ​ហៅ"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"ជម្រើស​បន្ថែម"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"បន្ទះ​លេខ"</string>

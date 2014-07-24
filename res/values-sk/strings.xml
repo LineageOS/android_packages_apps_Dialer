@@ -78,6 +78,16 @@
     <string name="description_search_button" msgid="3660807558587384889">"hľadať"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"vytáčanie"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"číslo, ktoré chcete vytočiť"</string>
+    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
+    <skip />
+    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
+    <skip />
+    <!-- no translation found for description_playback_seek (4509404274968530055) -->
+    <skip />
+    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
+    <skip />
+    <!-- no translation found for description_rate_increase (6324606574127052385) -->
+    <skip />
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"História hovorov"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Ďalšie možnosti"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"číselná klávesnica"</string>
@@ -100,7 +110,7 @@
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Návrat k prebiehajúcemu hovoru"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Pridať hovor"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Prichádzajúci hovor"</string>
-    <string name="type_outgoing" msgid="343108709599392641">"Odchádzajúce volania"</string>
+    <string name="type_outgoing" msgid="343108709599392641">"Odchádzajúce volanie"</string>
     <string name="type_missed" msgid="2720502601640509542">"Zmeškaný hovor"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Prichádzajúci videohovor"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Odchádzajúci videohovor"</string>
