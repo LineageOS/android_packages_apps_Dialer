@@ -651,6 +651,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final Drawable accountIcon = PhoneAccountUtils.getAccountIcon(mContext,
                 accountHandle);
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
+
         final long rowId = c.getLong(CallLogQuery.ID);
         views.rowId = rowId;
 
@@ -755,6 +756,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final String geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
         final int sourceType = info.sourceType;
         final int features = getCallFeatures(c, count);
+        final String transcription = c.getString(CallLogQuery.TRANSCRIPTION);
         Long dataUsage = null;
         if (!c.isNull(CallLogQuery.DATA_USAGE)) {
             dataUsage = c.getLong(CallLogQuery.DATA_USAGE);
@@ -772,12 +774,12 @@ public class CallLogAdapter extends GroupingListAdapter
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, accountIcon, features, dataUsage);
+                    duration, accountIcon, features, dataUsage, transcription);
         } else {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
                     duration, name, ntype, label, lookupUri, photoUri, sourceType,
-                    accountIcon, features, dataUsage);
+                    accountIcon, features, dataUsage, transcription);
         }
 
         mCallLogViewsHelper.setPhoneCallDetails(views, details);

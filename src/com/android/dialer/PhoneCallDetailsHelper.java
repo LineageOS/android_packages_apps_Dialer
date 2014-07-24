@@ -77,8 +77,12 @@ public class PhoneCallDetailsHelper {
         // Display up to a given number of icons.
         views.callTypeIcons.clear();
         int count = details.callTypes.length;
+        boolean isVoicemail = false;
         for (int index = 0; index < count && index < MAX_CALL_TYPE_ICONS; ++index) {
             views.callTypeIcons.add(details.callTypes[index]);
+            if (index == 0) {
+                isVoicemail = details.callTypes[index] == Calls.VOICEMAIL_TYPE;
+            }
         }
 
         // Show the video icon if the call had video enabled.
@@ -122,10 +126,13 @@ public class PhoneCallDetailsHelper {
 
         views.nameView.setText(nameText);
 
-        // TODO: At the current time the voicemail transcription is not supported.  This view
-        // is kept for future expansion when we may wish to show a transcription of voicemail.
-        views.voicemailTranscriptionView.setText("");
-        views.voicemailTranscriptionView.setVisibility(View.GONE);
+        if (isVoicemail && !TextUtils.isEmpty(details.transcription)) {
+            views.voicemailTranscriptionView.setText(details.transcription);
+            views.voicemailTranscriptionView.setVisibility(View.VISIBLE);
+        } else {
+            views.voicemailTranscriptionView.setText(null);
+            views.voicemailTranscriptionView.setVisibility(View.GONE);
+        }
     }
 
     /**
