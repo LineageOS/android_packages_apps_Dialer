@@ -17,6 +17,8 @@
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telefon</string>
+  <string name="launcherDialer">Telefon</string>
+  <string name="dialerIconLabel">Telefon</string>
   <string name="recentCallsIconLabel">Urufflëscht</string>
   <string name="menu_sendTextMessage">SMS/MMS schécken</string>
   <string name="recentCalls_callNumber"><xliff:g id="name">%s</xliff:g> uruffen</string>

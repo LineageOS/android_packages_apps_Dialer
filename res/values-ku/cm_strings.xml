@@ -35,6 +35,7 @@
   <string name="call_stats_filter_to">بەرواری کۆتایهاتن</string>
   <string name="call_stats_filter_picker_title">ڕێژەی ڕێگریکردن</string>
   <string name="date_quick_selection">هەڵبژاردنی خێرا</string>
+  <string name="date_qs_currentmonth">ئەم مانگە</string>
   <string name="date_qs_currentquarter">چارەکی ئێستا</string>
   <string name="date_qs_currentyear">ئەمساڵ</string>
   <string name="date_qs_lastweek">هەمتەی پێشوو</string>
