@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.provider.Telephony;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -146,5 +147,21 @@ public class DialerUtils {
     public static boolean isRtl() {
         return TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) ==
             View.LAYOUT_DIRECTION_RTL;
+    }
+
+    public static void showInputMethod(View view) {
+        final InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(view, 0);
+        }
+    }
+
+    public static void hideInputMethod(View view) {
+        final InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

@@ -19,15 +19,14 @@ package com.android.dialer.widget;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import com.android.dialer.R;
+import com.android.dialer.util.DialerUtils;
 import com.android.phone.common.animation.AnimUtils;
 
 public class SearchEditTextLayout extends FrameLayout {
@@ -106,7 +105,9 @@ public class SearchEditTextLayout extends FrameLayout {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    showInputMethod(v);
+                    DialerUtils.showInputMethod(v);
+                } else {
+                    DialerUtils.hideInputMethod(v);
                 }
             }
         });
@@ -259,14 +260,6 @@ public class SearchEditTextLayout extends FrameLayout {
 
     public boolean isFadedOut() {
         return mIsFadedOut;
-    }
-
-    private void showInputMethod(View view) {
-        final InputMethodManager imm = (InputMethodManager) getContext().getSystemService(
-                Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.showSoftInput(view, 0);
-        }
     }
 
     /**
