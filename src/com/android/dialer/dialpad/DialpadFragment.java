@@ -25,6 +25,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -94,6 +95,7 @@ import com.android.phone.common.dialpad.DialpadView;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
+import java.util.Locale;
 
 /**
  * Fragment that displays a twelve-key phone dialpad.
@@ -617,6 +619,12 @@ public class DialpadFragment extends AnalyticsFragment
         // Long-pressing pound button will enter ';'(wait) instead.
         final DialpadKeyButton pound = (DialpadKeyButton) fragmentView.findViewById(R.id.pound);
         pound.setOnLongClickListener(this);
+    }
+
+    public void refreshKeypad() {
+        if (mDialpadView != null) {
+            mDialpadView.refreshKeypad();
+        }
     }
 
     @Override

@@ -22,6 +22,7 @@ import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
@@ -29,6 +30,10 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.preference.PreferenceManager;
+import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
@@ -90,6 +95,7 @@ import com.android.dialer.widget.SearchEditTextLayout.OnBackButtonClickedListene
 import com.android.dialerbind.DatabaseHelperManager;
 import com.android.incallui.CallCardFragment;
 import com.android.phone.common.animation.AnimUtils;
+import com.android.phone.common.util.SettingsUtil;
 import com.android.ims.ImsManager;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.phone.common.animation.AnimationListenerAdapter;
@@ -97,6 +103,7 @@ import com.android.phone.common.animation.AnimationListenerAdapter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
@@ -118,6 +125,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
+    private static final String PREF_LAST_T9_LOCALE = "smart_dial_prefix_last_t9_locale";
 
     /** @see #getCallOrigin() */
     private static final String CALL_ORIGIN_DIALTACTS =
@@ -456,7 +464,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         setupActivityOverlay();
 
         mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
-        SmartDialPrefix.initializeNanpSettings(this);
     }
 
     private void setupActivityOverlay() {
@@ -491,7 +498,24 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         setConferenceDialButtonImage(false);
         setConferenceDialButtonVisibility(true);
 
+        // make this call on resume in case user changed t9 locale in settings
         SmartDialPrefix.initializeNanpSettings(this);
+
+        // if locale has changed since last time, refresh the smart dial db
+        Locale locale = SettingsUtil.getT9SearchInputLocale(this);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String prevLocale = prefs.getString(PREF_LAST_T9_LOCALE, null);
+
+        if (!TextUtils.equals(locale.toString(), prevLocale)) {
+            mDialerDatabaseHelper.recreateSmartDialDatabaseInBackground();
+            if (mDialpadFragment != null)
+                mDialpadFragment.refreshKeypad();
+
+            prefs.edit().putString(PREF_LAST_T9_LOCALE, locale.toString()).apply();
+        }
+        else {
+            mDialerDatabaseHelper.startSmartDialUpdateThread();
+        }
     }
 
     @Override
