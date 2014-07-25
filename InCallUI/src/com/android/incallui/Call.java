@@ -98,6 +98,16 @@ public final class Call {
         }
     }
 
+    /**
+     * Defines different states of session modify requests, which are used to upgrade to video, or
+     * downgrade to audio.
+     */
+    public static class SessionModificationState {
+        public static final int NO_REQUEST = 0;
+        public static final int WAITING_FOR_RESPONSE = 1;
+        public static final int REQUEST_FAILED = 1;
+    }
+
     private static final String ID_PREFIX = Call.class.getSimpleName() + "_";
     private static int sIdCounter = 0;
 
@@ -161,6 +171,7 @@ public final class Call {
     private int mState = State.INVALID;
     private int mDisconnectCause;
     private String mParentCallId;
+    private int mSessionModificationState;
     private final List<String> mChildCallIds = new ArrayList<>();
 
     private InCallVideoCallListener mVideoCallListener;
@@ -333,6 +344,19 @@ public final class Call {
 
     public boolean isVideoCall() {
         return VideoCallProfile.VideoState.isBidirectional(getVideoState());
+    }
+
+    public void setSessionModificationState(int state) {
+        boolean hasChanged = mSessionModificationState != state;
+        mSessionModificationState = state;
+
+        if (hasChanged) {
+            update();
+        }
+    }
+
+    public int getSessionModificationState() {
+        return mSessionModificationState;
     }
 
     @Override

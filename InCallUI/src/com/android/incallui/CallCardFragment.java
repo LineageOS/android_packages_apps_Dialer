@@ -26,6 +26,7 @@ import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.telecomm.VideoCallProfile;
 import android.telephony.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -65,6 +66,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mPrimaryName;
     private View mCallStateButton;
     private ImageView mCallStateIcon;
+    private ImageView mCallStateVideoCallIcon;
     private TextView mCallStateLabel;
     private TextView mCallTypeLabel;
     private View mCallNumberAndLabel;
@@ -159,6 +161,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mPhoto = (ImageView) view.findViewById(R.id.photo);
         mCallStateButton = view.findViewById(R.id.callStateButton);
         mCallStateIcon = (ImageView) view.findViewById(R.id.callStateIcon);
+        mCallStateVideoCallIcon = (ImageView) view.findViewById(R.id.videoCallIcon);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mCallNumberAndLabel = view.findViewById(R.id.labelAndNumber);
         mCallTypeLabel = (TextView) view.findViewById(R.id.callTypeLabel);
@@ -461,11 +464,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setCallState(int state, int cause, String connectionLabel, Drawable connectionIcon,
-            String gatewayNumber) {
+    public void setCallState(int state, int videoState, int sessionModificationState, int cause,
+            String connectionLabel, Drawable connectionIcon, String gatewayNumber) {
         boolean isGatewayCall = !TextUtils.isEmpty(gatewayNumber);
         String callStateLabel = getCallStateLabelFromState(
-                state, cause, connectionLabel, isGatewayCall);
+                state, videoState, sessionModificationState, cause, connectionLabel, isGatewayCall);
 
         Log.v(this, "setCallState " + callStateLabel);
         Log.v(this, "DisconnectCause " + DisconnectCause.toString(cause));
@@ -484,6 +487,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mCallStateIcon.setImageDrawable(connectionIcon);
             }
 
+            if (VideoCallProfile.VideoState.isBidirectional(videoState)
+                    || (state == Call.State.ACTIVE && sessionModificationState
+                            == Call.SessionModificationState.WAITING_FOR_RESPONSE)) {
+                mCallStateVideoCallIcon.setVisibility(View.VISIBLE);
+            } else {
+                mCallStateVideoCallIcon.setVisibility(View.GONE);
+            }
+
             if (state == Call.State.ACTIVE || state == Call.State.CONFERENCED) {
                 mCallStateLabel.clearAnimation();
             } else {
@@ -496,9 +507,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             }
             mCallStateLabel.setAlpha(0);
             mCallStateLabel.setVisibility(View.GONE);
+
+            mCallStateVideoCallIcon.setVisibility(View.GONE);
         }
     }
-
 
     @Override
     public void setCallDetails(android.telecomm.Call.Details details) {
@@ -575,15 +587,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     /**
-     * Gets the call state label based on the state of the call and
-     * cause of disconnect
+     * Gets the call state label based on the state of the call or cause of disconnect.
      *
      * Additional labels are applied as follows:
-     *         1. All outgoing calls with display "Calling via [Provider]"
-     *         2. Ongoing calls will display the name of the provider
-     *         2. Incoming calls will only display "Incoming via..." for accounts
+     *         1. All outgoing calls with display "Calling via [Provider]".
+     *         2. Ongoing calls will display the name of the provider.
+     *         3. Incoming calls will only display "Incoming via..." for accounts.
+     *         4. Video calls, and session modification states (eg. requesting video).
      */
-    private String getCallStateLabelFromState(int state, int cause, String label,
+    private String getCallStateLabelFromState(int state, int videoState,
+            int sessionModificationState, int disconnectCause, String label,
             boolean isGatewayCall) {
         final Context context = getView().getContext();
         String callStateLabel = null;  // Label to display as part of the call banner
@@ -600,6 +613,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 // (but we can use the call state label to display the provider name).
                 if (isAccount) {
                     callStateLabel = label;
+                } else if (sessionModificationState
+                        == Call.SessionModificationState.REQUEST_FAILED) {
+                    callStateLabel = context.getString(R.string.card_title_video_call_error);
+                } else if (sessionModificationState
+                        == Call.SessionModificationState.WAITING_FOR_RESPONSE) {
+                    callStateLabel = context.getString(R.string.card_title_video_call_requesting);
+                } else if (VideoCallProfile.VideoState.isBidirectional(videoState)) {
+                    callStateLabel = context.getString(R.string.card_title_video_call);
                 }
                 break;
             case Call.State.ONHOLD:
@@ -619,6 +640,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             case Call.State.CALL_WAITING:
                 if (isAccount) {
                     callStateLabel = context.getString(R.string.incoming_via_template, label);
+                } else if (VideoCallProfile.VideoState.isBidirectional(videoState)) {
+                    callStateLabel = context.getString(R.string.notification_incoming_video_call);
                 } else {
                     callStateLabel = context.getString(R.string.card_title_incoming_call);
                 }
@@ -633,7 +656,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 callStateLabel = context.getString(R.string.card_title_hanging_up);
                 break;
             case Call.State.DISCONNECTED:
-                callStateLabel = getCallFailedString(cause);
+                callStateLabel = getCallFailedString(disconnectCause);
                 break;
             default:
                 Log.wtf(this, "updateCallStateWidgets: unexpected call: " + state);
@@ -646,14 +669,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      *
      * @param cause disconnect cause as defined in {@link DisconnectCause}
      */
-    private String getCallFailedString(int cause) {
+    private String getCallFailedString(int disconnectCause) {
         int resID = R.string.card_title_call_ended;
 
         // TODO: The card *title* should probably be "Call ended" in all
         // cases, but if the DisconnectCause was an error condition we should
         // probably also display the specific failure reason somewhere...
 
-        switch (cause) {
+        switch (disconnectCause) {
             case DisconnectCause.BUSY:
                 resID = R.string.callFailed_userBusy;
                 break;
