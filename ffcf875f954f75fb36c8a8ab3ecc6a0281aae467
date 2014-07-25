@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a061dce_18730fb3",
+        "filename": "src/com/android/dialer/DialtactsActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2014-07-25T11:50:22Z",
+      "side": 1,
+      "message": "Can do \n\n if (!TextUtils.equals(locale.toString(), prevLocale)) {\n     localeChanged \u003d true;\n     prefs.edit().putString(PREF_LAST_T9_LOCALE, locale.toString()).apply();\n }\n\ninstead of checking specifically to see if prevLocale is null. TextUtils.equals does this for you.",
+      "revId": "ffcf875f954f75fb36c8a8ab3ecc6a0281aae467",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
