@@ -120,6 +120,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.TAB" />
             </intent-filter>
+            <meta-data
+                android:name="com.android.keyguard.layout"
+                android:resource="@layout/keyguard_preview" />
         </activity>
 
         <activity android:name="com.android.dialer.settings.DialerSettingsActivity"
