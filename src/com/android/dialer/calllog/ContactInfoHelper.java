@@ -231,7 +231,11 @@ public class ContactInfoHelper {
         } else if (mCachedNumberLookupService != null) {
             CachedContactInfo cacheInfo =
                     mCachedNumberLookupService.lookupCachedContactFromNumber(mContext, number);
-            info = cacheInfo != null ? cacheInfo.getContactInfo() : null;
+            if (cacheInfo != null) {
+                info = cacheInfo.getContactInfo().isBadData ? null : cacheInfo.getContactInfo();
+            } else {
+                info = null;
+            }
         }
         return info;
     }
