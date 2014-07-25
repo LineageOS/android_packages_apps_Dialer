@@ -216,4 +216,6 @@
     <string name="dialog_speed_dial_airplane_mode_message" >"要呼叫快速拨号，请先关闭飞行模式。"</string>
     <string name="assignSpeedDialFailToast">此号码已分配了快速拨号键，请选择其它号码。</string>
 
+    <string name="call_log_show_all_slots">"所有卡"</string>
+    <string name="call_log_all_calls_header">"所有通话"</string>
 </resources>

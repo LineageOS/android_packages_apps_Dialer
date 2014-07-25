@@ -68,6 +68,11 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
      */
     public static final int CALL_TYPE_ALL = -1;
 
+    /**
+     * To specify all slots.
+     */
+    public static final int CALL_SUB_ALL = -1;
+
     private final WeakReference<Listener> mListener;
 
     /**
@@ -123,6 +128,12 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, newerThan);
     }
 
+    public void fetchCalls(int callType, long newerThan, int sub) {
+        cancelFetch();
+        int requestId = newCallsRequest();
+        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType, false /* newOnly */, newerThan, sub);
+    }
+
     public void fetchCalls(int callType) {
         fetchCalls(callType, 0);
     }
@@ -172,6 +183,56 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
                 CallLogQuery._PROJECTION, selection, selectionArgs.toArray(EMPTY_STRING_ARRAY),
                 Calls.DEFAULT_SORT_ORDER);
     }
+
+    private void fetchCalls(int token, int requestId, int callType, boolean newOnly,
+            long newerThan, int sub) {
+        // We need to check for NULL explicitly otherwise entries with where READ is NULL
+        // may not match either the query or its negation.
+        // We consider the calls that are not yet consumed (i.e. IS_READ = 0) as "new".
+        StringBuilder where = new StringBuilder();
+        List<String> selectionArgs = Lists.newArrayList();
+
+        if (newOnly) {
+            where.append(Calls.NEW);
+            where.append(" = 1");
+        }
+
+        if (callType > CALL_TYPE_ALL) {
+            if (where.length() > 0) {
+                where.append(" AND ");
+            }
+            // Add a clause to fetch only items of type voicemail.
+            where.append(String.format("(%s = ?)", Calls.TYPE));
+            // Add a clause to fetch only items newer than the requested date
+            selectionArgs.add(Integer.toString(callType));
+        }
+
+        if (sub > CALL_SUB_ALL) {
+            if (where.length() > 0) {
+                where.append(" AND ");
+            }
+            where.append(String.format("(%s = ?)", Calls.PHONE_ACCOUNT_ID));
+            selectionArgs.add(Integer.toString(sub));
+        }
+
+        if (newerThan > 0) {
+            if (where.length() > 0) {
+                where.append(" AND ");
+            }
+            where.append(String.format("(%s > ?)", Calls.DATE));
+            selectionArgs.add(Long.toString(newerThan));
+        }
+
+        final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;
+        final String selection = where.length() > 0 ? where.toString() : null;
+        Uri uri = Calls.CONTENT_URI_WITH_VOICEMAIL.buildUpon()
+                .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
+                .build();
+        startQuery(token, requestId, uri,
+                CallLogQuery._PROJECTION, selection, selectionArgs.toArray(EMPTY_STRING_ARRAY),
+                Calls.DEFAULT_SORT_ORDER);
+    }
+
 
     /** Cancel any pending fetch request. */
     private void cancelFetch() {

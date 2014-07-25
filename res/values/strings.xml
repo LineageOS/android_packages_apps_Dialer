@@ -825,4 +825,6 @@
     <string name="dialog_speed_dial_airplane_mode_message" >"To call Speed dial, first turn off Airplane mode."</string>
     <string name="assignSpeedDialFailToast">The number has already been assigned to a speed dial key, please select another number.</string>
 
+    <string name="call_log_show_all_slots">All SIMs</string>
+    <string name="call_log_all_calls_header">All calls</string>
 </resources>
