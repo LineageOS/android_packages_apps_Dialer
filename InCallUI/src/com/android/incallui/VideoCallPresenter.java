@@ -16,12 +16,13 @@
 
 package com.android.incallui;
 
+import com.google.common.base.Preconditions;
+
 import com.android.incallui.CallVideoClientNotifier.SurfaceChangeListener;
 import com.android.incallui.CallVideoClientNotifier.VideoEventListener;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
-import com.android.internal.util.Preconditions;
 
 import android.content.Context;
 import android.telecomm.RemoteCallVideoProvider;
