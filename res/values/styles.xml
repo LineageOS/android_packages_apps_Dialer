@@ -78,7 +78,7 @@
     <!-- Action bar overflow menu icon. -->
     <style name="DialtactsActionBarOverflow"
            parent="@android:style/Widget.Material.Light.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_menu_overflow_lt</item>
+        <item name="android:src">@drawable/ic_overflow_menu</item>
     </style>
 
     <!-- Action bar overflow menu icon.  White with no shadow. -->
