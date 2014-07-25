@@ -78,6 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"بحث"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"طلب"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"الرقم الذي سيتم طلبه"</string>
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"بدء التشغيل أو إيقافه"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"تشغيل مكبر الصوت أو تعطيله"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"طلب موضع تشغيل"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"خفض معدل التشغيل"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"زيادة معدل التشغيل"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"سجل المكالمات"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"مزيد من الخيارات"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"لوحة الطلب"</string>
