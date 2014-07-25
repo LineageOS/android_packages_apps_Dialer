@@ -107,7 +107,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     /** Indicates whether a drag is in process. */
     private boolean mInDragging = false;
 
-    public static final int PIN_LIMIT = 20;
+    // Pinned positions start from 1, so there are a total of 20 maximum pinned contacts
+    public static final int PIN_LIMIT = 21;
 
     /**
      * The soft limit on how many contact tiles to show.
@@ -551,7 +552,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         for (int i = 0; i < length; i++) {
             final ContactEntry contact = toArrange.get(i);
             // Decide whether the contact is hidden(demoted), pinned, or unpinned
-            if (contact.pinned > PIN_LIMIT) {
+            if (contact.pinned > PIN_LIMIT || contact.pinned == PinnedPositions.UNPINNED) {
                 unpinnedContacts.add(contact);
             } else if (contact.pinned > PinnedPositions.DEMOTED) {
                 // Demoted or contacts with negative pinned positions are ignored.
@@ -565,7 +566,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         final int maxToPin = Math.min(PIN_LIMIT, pinnedQueue.size() + unpinnedContacts.size());
 
         toArrange.clear();
-        for (int i = 0; i < maxToPin; i++) {
+        for (int i = 1; i < maxToPin + 1; i++) {
             if (!pinnedQueue.isEmpty() && pinnedQueue.peek().pinned <= i) {
                 final ContactEntry toPin = pinnedQueue.poll();
                 toPin.pinned = i;
