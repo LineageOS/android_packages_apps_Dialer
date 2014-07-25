@@ -588,7 +588,8 @@ public class InCallActivity extends Activity {
                 return R.string.callFailed_dsac_restricted_emergency;
             case DisconnectCause.CS_RESTRICTED_NORMAL:
                 return R.string.callFailed_dsac_restricted_normal;
-            case DisconnectCause.ERROR_UNSPECIFIED:
+            case DisconnectCause.OUTGOING_FAILURE:
+            case DisconnectCause.OUTGOING_CANCELED:
                 // We couldn't successfully place the call; there was some
                 // failure in the telephony layer.
                 // TODO: Need UI spec for this failure case; for now just
