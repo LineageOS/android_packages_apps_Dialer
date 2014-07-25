@@ -56,7 +56,8 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         mIsSelected = false;
-        mTelecommManager = TelecommManager.from(getActivity());
+        mTelecommManager =
+                (TelecommManager) getActivity().getSystemService(Context.TELECOMM_SERVICE);
         mAccountHandles = mTelecommManager.getEnabledPhoneAccounts();
 
         final DialogInterface.OnClickListener selectionListener =

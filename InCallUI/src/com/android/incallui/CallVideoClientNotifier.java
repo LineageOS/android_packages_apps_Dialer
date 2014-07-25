@@ -16,8 +16,8 @@
 
 package com.android.incallui;
 
-import com.google.android.collect.Sets;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Sets;
 
 import java.util.Set;
 
