@@ -67,7 +67,11 @@ public class PhoneCallDetails {
      */
     public final int sourceType;
     /**
-     * The unique identifier for the provider associated with the call.
+     * The unique identifier for the account associated with the call.
+     */
+    public final String accountLabel;
+    /**
+     * The icon for the account associated with the call.
      */
     public final Drawable accountIcon;
     /**
@@ -92,18 +96,18 @@ public class PhoneCallDetails {
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration) {
         this (number, numberPresentation, formattedNumber, countryIso, geocode,
-        callTypes, date, duration, "", 0, "", null, null, 0, null, Calls.FEATURES_NONE,
+        callTypes, date, duration, "", 0, "", null, null, 0, null, null, Calls.FEATURES_NONE,
         null, null);
     }
 
     /** Create the details for a call with a number not associated with a contact. */
     public PhoneCallDetails(CharSequence number, int numberPresentation,
             CharSequence formattedNumber, String countryIso, String geocode,
-            int[] callTypes, long date, long duration, Drawable accountIcon, int features,
-            Long dataUsage, String transcription) {
+            int[] callTypes, long date, long duration, String accountLabel, Drawable accountIcon,
+            int features, Long dataUsage, String transcription) {
         this(number, numberPresentation, formattedNumber, countryIso, geocode,
-                callTypes, date, duration, "", 0, "", null, null, 0, accountIcon, features,
-                dataUsage, transcription);
+                callTypes, date, duration, "", 0, "", null, null, 0, accountLabel, accountIcon,
+                features, dataUsage, transcription);
     }
 
     /** Create the details for a call with a number associated with a contact. */
@@ -111,8 +115,8 @@ public class PhoneCallDetails {
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration, CharSequence name,
             int numberType, CharSequence numberLabel, Uri contactUri,
-            Uri photoUri, int sourceType, Drawable accountIcon, int features, Long dataUsage,
-            String transcription) {
+            Uri photoUri, int sourceType, String accountLabel, Drawable accountIcon, int features,
+            Long dataUsage, String transcription) {
         this.number = number;
         this.numberPresentation = numberPresentation;
         this.formattedNumber = formattedNumber;
@@ -127,6 +131,7 @@ public class PhoneCallDetails {
         this.contactUri = contactUri;
         this.photoUri = photoUri;
         this.sourceType = sourceType;
+        this.accountLabel = accountLabel;
         this.accountIcon = accountIcon;
         this.features = features;
         this.dataUsage = dataUsage;
