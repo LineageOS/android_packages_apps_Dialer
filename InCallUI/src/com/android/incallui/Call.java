@@ -18,9 +18,9 @@ package com.android.incallui;
 
 import android.net.Uri;
 import android.telecomm.CallCapabilities;
-import android.telecomm.PhoneAccountHandle;
-import android.telecomm.RemoteCallVideoProvider;
 import android.telecomm.GatewayInfo;
+import android.telecomm.InCallService.VideoCall;
+import android.telecomm.PhoneAccountHandle;
 import android.telecomm.VideoCallProfile;
 import android.telephony.DisconnectCause;
 
@@ -145,8 +145,8 @@ public final class Call {
                 }
 
                 @Override
-                public void onCallVideoProviderChanged(android.telecomm.Call call,
-                        RemoteCallVideoProvider callVideoProvider) {
+                public void onVideoCallChanged(android.telecomm.Call call,
+                        VideoCall videoCall) {
                     update();
                 }
 
@@ -163,7 +163,7 @@ public final class Call {
     private String mParentCallId;
     private final List<String> mChildCallIds = new ArrayList<>();
 
-    private InCallVideoClient mCallVideoClient;
+    private InCallVideoCallListener mVideoCallListener;
 
     public Call(android.telecomm.Call telecommCall) {
         mTelecommCall = telecommCall;
@@ -200,11 +200,11 @@ public final class Call {
                     mTelecommCall.getParent()).getId();
         }
 
-        if (mTelecommCall.getCallVideoProvider() != null) {
-            if (mCallVideoClient == null) {
-                mCallVideoClient = new InCallVideoClient(this);
+        if (mTelecommCall.getVideoCall() != null) {
+            if (mVideoCallListener == null) {
+                mVideoCallListener = new InCallVideoCallListener(this);
             }
-            mTelecommCall.getCallVideoProvider().setCallVideoClient(mCallVideoClient);
+            mTelecommCall.getVideoCall().setVideoCallListener(mVideoCallListener);
         }
 
         mChildCallIds.clear();
@@ -315,8 +315,8 @@ public final class Call {
         return mTelecommCall.getDetails().getAccountHandle();
     }
 
-    public RemoteCallVideoProvider getCallVideoProvider() {
-        return mTelecommCall.getCallVideoProvider();
+    public VideoCall getVideoCall() {
+        return mTelecommCall.getVideoCall();
     }
 
     public List<String> getChildCallIds() {
