@@ -231,7 +231,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // number directly from the telephony layer).
         PhoneAccountHandle accountHandle = mPrimary.getAccountHandle();
         if (accountHandle != null) {
-            TelecommManager mgr = TelecommManager.from(mContext);
+            TelecommManager mgr =
+                    (TelecommManager) mContext.getSystemService(Context.TELECOMM_SERVICE);
             PhoneAccount account = mgr.getPhoneAccount(accountHandle);
             if (account != null) {
                 return account.getSubscriptionNumber();
@@ -272,7 +273,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return;
         }
 
-        String simNumber = TelephonyManager.from(mContext).getLine1Number();
+        final TelephonyManager telephonyManager =
+                (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+        String simNumber = telephonyManager.getLine1Number();
         if (!PhoneNumberUtils.compare(callbackNumber, simNumber) && !isEmergencyCall) {
             Log.d(this, "Numbers are the same; not showing the callback number");
             return;
@@ -616,7 +619,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     private TelecommManager getTelecommManager() {
         if (mTelecommManager == null) {
-            mTelecommManager = TelecommManager.from(mContext);
+            mTelecommManager =
+                    (TelecommManager) mContext.getSystemService(Context.TELECOMM_SERVICE);
         }
         return mTelecommManager;
     }
