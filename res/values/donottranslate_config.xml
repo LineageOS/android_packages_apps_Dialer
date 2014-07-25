@@ -34,4 +34,5 @@
          Ignored if empty. -->
     <string name="config_prohibited_phone_number_regexp"></string>
 
+    <bool name="call_duration_enabled">true</bool>
 </resources>
