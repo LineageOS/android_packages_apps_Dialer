@@ -21,7 +21,7 @@ import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.telecomm.CallCapabilities;
-import android.telecomm.RemoteCallVideoProvider;
+import android.telecomm.InCallService.VideoCall;
 import android.telecomm.VideoCallProfile;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -213,14 +213,14 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void changeToVoiceClicked() {
-        RemoteCallVideoProvider callVideoProvider = mCall.getCallVideoProvider();
-        if (callVideoProvider == null) {
+        VideoCall videoCall = mCall.getVideoCall();
+        if (videoCall == null) {
             return;
         }
 
         VideoCallProfile videoCallProfile = new VideoCallProfile(
                 VideoCallProfile.VIDEO_STATE_AUDIO_ONLY, VideoCallProfile.QUALITY_DEFAULT);
-        callVideoProvider.sendSessionModifyRequest(videoCallProfile);
+        videoCall.sendSessionModifyRequest(videoCallProfile);
     }
 
     public void swapClicked() {
@@ -234,14 +234,14 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void changeToVideoClicked() {
-        RemoteCallVideoProvider callVideoProvider = mCall.getCallVideoProvider();
-        if (callVideoProvider == null) {
+        VideoCall videoCall = mCall.getVideoCall();
+        if (videoCall == null) {
             return;
         }
 
         VideoCallProfile videoCallProfile =
                 new VideoCallProfile(VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL);
-        callVideoProvider.sendSessionModifyRequest(videoCallProfile);
+        videoCall.sendSessionModifyRequest(videoCallProfile);
     }
 
     /**
@@ -252,14 +252,14 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     public void switchCameraClicked(boolean useFrontFacingCamera) {
         mUseFrontFacingCamera = useFrontFacingCamera;
 
-        RemoteCallVideoProvider callVideoProvider = mCall.getCallVideoProvider();
-        if (callVideoProvider == null) {
+        VideoCall videoCall = mCall.getVideoCall();
+        if (videoCall == null) {
             return;
         }
 
         String cameraId = getCameraId();
         if (cameraId != null) {
-            callVideoProvider.setCamera(cameraId);
+            videoCall.setCamera(cameraId);
         }
         getUi().setSwitchCameraButton(!useFrontFacingCamera);
     }
@@ -270,21 +270,21 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
      *    video.
      */
     public void pauseVideoClicked(boolean pause) {
-        RemoteCallVideoProvider callVideoProvider = mCall.getCallVideoProvider();
-        if (callVideoProvider == null) {
+        VideoCall videoCall = mCall.getVideoCall();
+        if (videoCall == null) {
             return;
         }
 
         if (pause) {
-            callVideoProvider.setCamera(null);
+            videoCall.setCamera(null);
             VideoCallProfile videoCallProfile = new VideoCallProfile(
                     mCall.getVideoState() | VideoCallProfile.VIDEO_STATE_PAUSED);
-            callVideoProvider.sendSessionModifyRequest(videoCallProfile);
+            videoCall.sendSessionModifyRequest(videoCallProfile);
         } else {
-            callVideoProvider.setCamera(getCameraId());
+            videoCall.setCamera(getCameraId());
             VideoCallProfile videoCallProfile = new VideoCallProfile(
                     mCall.getVideoState() & ~VideoCallProfile.VIDEO_STATE_PAUSED);
-            callVideoProvider.sendSessionModifyRequest(videoCallProfile);
+            videoCall.sendSessionModifyRequest(videoCallProfile);
         }
         getUi().setPauseVideoButton(pause);
     }
@@ -306,7 +306,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
 
         if (call.isVideoCall()) {
-            updateVideoCallButtons(call);
+            updateVideoCallButtons();
         } else {
             updateVoiceCallButtons(call);
         }
@@ -326,7 +326,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         updateExtraButtonRow();
     }
 
-    private void updateVideoCallButtons(Call call) {
+    private void updateVideoCallButtons() {
         Log.v(this, "Showing buttons for video call.");
         final CallButtonUi ui = getUi();
 

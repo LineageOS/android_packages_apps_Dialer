@@ -17,13 +17,13 @@
 package com.android.incallui;
 
 import android.telecomm.CallCameraCapabilities;
+import android.telecomm.InCallService.VideoCall;
 import android.telecomm.VideoCallProfile;
-import android.telecomm.CallVideoClient;
 
 /**
- * Implements the InCall-UI Call Video client.
+ * Implements the InCallUI Video Call Listener.
  */
-public class InCallVideoClient extends CallVideoClient {
+public class InCallVideoCallListener extends VideoCall.Listener {
 
     /**
      * The call associated with this {@link InCallVideoClient}.
@@ -35,7 +35,7 @@ public class InCallVideoClient extends CallVideoClient {
      *
      * @param call The call.
      */
-    public InCallVideoClient(Call call) {
+    public InCallVideoCallListener(Call call) {
         mCall = call;
     }
 
@@ -45,7 +45,7 @@ public class InCallVideoClient extends CallVideoClient {
      * @param videoCallProfile The requested video call profile.
      */
     @Override
-    public void onReceiveSessionModifyRequest(VideoCallProfile videoCallProfile) {
+    public void onSessionModifyRequestReceived(VideoCallProfile videoCallProfile) {
         int previousVideoState = mCall.getVideoState();
         int newVideoState = videoCallProfile.getVideoState();
 
@@ -76,14 +76,14 @@ public class InCallVideoClient extends CallVideoClient {
      * Handles a session modification response.
      *
      * @param status Status of the session modify request.  Valid values are
-     *               {@link CallVideoClient#SESSION_MODIFY_REQUEST_SUCCESS},
-     *               {@link CallVideoClient#SESSION_MODIFY_REQUEST_FAIL},
-     *               {@link CallVideoClient#SESSION_MODIFY_REQUEST_INVALID}
+     *               {@link VideoCall#SESSION_MODIFY_REQUEST_SUCCESS},
+     *               {@link VideoCall#SESSION_MODIFY_REQUEST_FAIL},
+     *               {@link VideoCall#SESSION_MODIFY_REQUEST_INVALID}
      * @param requestedProfile
      * @param responseProfile The actual profile changes made by the peer device.
      */
     @Override
-    public void onReceiveSessionModifyResponse(int status, VideoCallProfile requestedProfile,
+    public void onSessionModifyResponseReceived(int status, VideoCallProfile requestedProfile,
             VideoCallProfile responseProfile) {
     }
 
@@ -93,7 +93,7 @@ public class InCallVideoClient extends CallVideoClient {
      * @param event The event.
      */
     @Override
-    public void onHandleCallSessionEvent(int event) {
+    public void onCallSessionEvent(int event) {
     }
 
     /**
@@ -103,7 +103,7 @@ public class InCallVideoClient extends CallVideoClient {
      * @param height The updated peer video height.
      */
     @Override
-    public void onUpdatePeerDimensions(int width, int height) {
+    public void onPeerDimensionsChanged(int width, int height) {
         CallVideoClientNotifier.getInstance().peerDimensionsChanged(mCall, width, height);
     }
 
@@ -114,7 +114,7 @@ public class InCallVideoClient extends CallVideoClient {
      * @param dataUsage The updated data usage.
      */
     @Override
-    public void onUpdateCallDataUsage(int dataUsage) {
+    public void onCallDataUsageChanged(int dataUsage) {
     }
 
     /**
@@ -124,7 +124,7 @@ public class InCallVideoClient extends CallVideoClient {
      * @param callCameraCapabilities The changed camera capabilities.
      */
     @Override
-    public void onHandleCameraCapabilitiesChange(CallCameraCapabilities callCameraCapabilities) {
+    public void onCameraCapabilitiesChanged(CallCameraCapabilities callCameraCapabilities) {
     }
 
     /**
