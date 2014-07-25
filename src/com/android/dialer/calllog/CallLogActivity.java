@@ -22,6 +22,8 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -36,6 +38,7 @@ import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 
 public class CallLogActivity extends Activity implements CallLogQueryHandler.Listener {
+    private Handler mHandler;
     private ViewPager mViewPager;
     private ViewPagerTabs mViewPagerTabs;
     private ViewPagerAdapter mViewPagerAdapter;
@@ -43,6 +46,9 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
     private CallLogFragment mMissedCallsFragment;
     private CallLogFragment mVoicemailFragment;
     private VoicemailStatusHelper mVoicemailStatusHelper;
+
+    private static final int WAIT_FOR_VOICEMAIL_PROVIDER_TIMEOUT_MS = 300;
+    private boolean mSwitchToVoicemailTab;
 
     private String[] mTabTitles;
 
@@ -54,6 +60,15 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
     private static final int TAB_INDEX_COUNT_WITH_VOICEMAIL = 3;
 
     private boolean mHasActiveVoicemailProvider;
+
+    private final Runnable mWaitForVoicemailTimeoutRunnable = new Runnable() {
+        @Override
+        public void run() {
+            mViewPagerTabs.setViewPager(mViewPager);
+            mViewPager.setCurrentItem(TAB_INDEX_ALL);
+            mSwitchToVoicemailTab = false;
+        }
+    };
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager fm) {
@@ -92,6 +107,8 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mHandler = new Handler();
+
         setContentView(R.layout.call_log_activity);
         getWindow().setBackgroundDrawable(null);
 
@@ -99,6 +116,17 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
+
+        int startingTab = TAB_INDEX_ALL;
+        final Intent intent = getIntent();
+        if (intent != null) {
+            final int callType = intent.getIntExtra(CallLog.Calls.EXTRA_CALL_TYPE_FILTER, -1);
+            if (callType == CallLog.Calls.MISSED_TYPE) {
+                startingTab = TAB_INDEX_MISSED;
+            } else if (callType == CallLog.Calls.VOICEMAIL_TYPE) {
+                startingTab = TAB_INDEX_VOICEMAIL;
+            }
+        }
 
         mTabTitles = new String[TAB_INDEX_COUNT_WITH_VOICEMAIL];
         mTabTitles[0] = getString(R.string.call_log_all_title);
@@ -112,8 +140,19 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
         mViewPager.setOffscreenPageLimit(2);
 
         mViewPagerTabs = (ViewPagerTabs) findViewById(R.id.viewpager_header);
-        mViewPagerTabs.setViewPager(mViewPager);
         mViewPager.setOnPageChangeListener(mViewPagerTabs);
+
+        if (startingTab == TAB_INDEX_VOICEMAIL) {
+            // The addition of the voicemail tab is an asynchronous process, so wait till the tab
+            // is added, before attempting to switch to it. If the querying of CP2 for voicemail
+            // providers takes too long, give up and show the first tab instead.
+            mSwitchToVoicemailTab = true;
+            mHandler.postDelayed(mWaitForVoicemailTimeoutRunnable,
+                    WAIT_FOR_VOICEMAIL_PROVIDER_TIMEOUT_MS);
+        } else {
+            mViewPagerTabs.setViewPager(mViewPager);
+            mViewPager.setCurrentItem(startingTab);
+        }
 
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
     }
@@ -166,11 +205,19 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
             return;
         }
 
+        mHandler.removeCallbacks(mWaitForVoicemailTimeoutRunnable);
         // Update mHasActiveVoicemailProvider, which controls the number of tabs displayed.
         int activeSources = mVoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor);
         if (activeSources > 0 != mHasActiveVoicemailProvider) {
             mHasActiveVoicemailProvider = activeSources > 0;
             mViewPagerAdapter.notifyDataSetChanged();
+            mViewPagerTabs.setViewPager(mViewPager);
+            if (mSwitchToVoicemailTab) {
+                mViewPager.setCurrentItem(TAB_INDEX_VOICEMAIL, false);
+            }
+        } else if (mSwitchToVoicemailTab) {
+            // The voicemail tab was requested, but it does not exist because there are no
+            // voicemail sources. Just fallback to the first item instead.
             mViewPagerTabs.setViewPager(mViewPager);
         }
     }
