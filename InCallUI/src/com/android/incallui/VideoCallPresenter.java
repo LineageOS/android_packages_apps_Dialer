@@ -24,7 +24,7 @@ import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.internal.util.Preconditions;
 
 import android.content.Context;
-import android.telecomm.RemoteCallVideoProvider;
+import android.telecomm.InCallService.VideoCall;
 import android.view.Surface;
 
 import java.util.Objects;
@@ -49,10 +49,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     private Call mCall;
 
     /**
-     * The {@link RemoteCallVideoProvider} used to inform the video telephony layer of changes
-     * to the video surfaces.
+     * The {@link VideoCall} used to inform the video telephony layer of changes to the video
+     * surfaces.
      */
-    private RemoteCallVideoProvider mCallVideoProvider;
+    private VideoCall mVideoCall;
 
     /**
      * Determines if the current UI state represents a video call.
@@ -103,10 +103,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
-     * @return The {@link RemoteCallVideoProvider}.
+     * @return The {@link VideoCall}.
      */
-    private RemoteCallVideoProvider getCallVideoProvider() {
-        return mCallVideoProvider;
+    private VideoCall getVideoCall() {
+        return mVideoCall;
     }
 
     /**
@@ -116,16 +116,15 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      */
     public void onSurfaceCreated(int surface) {
         final VideoCallUi ui = getUi();
-        final RemoteCallVideoProvider callVideoProvider = getCallVideoProvider();
 
-        if (ui == null || callVideoProvider == null) {
+        if (ui == null || mVideoCall == null) {
             return;
         }
 
         if (surface == VideoCallFragment.SURFACE_DISPLAY) {
-            mCallVideoProvider.setDisplaySurface(ui.getDisplayVideoSurface());
+            mVideoCall.setDisplaySurface(ui.getDisplayVideoSurface());
         } else if (surface == VideoCallFragment.SURFACE_PREVIEW) {
-            mCallVideoProvider.setPreviewSurface(ui.getPreviewVideoSurface());
+            mVideoCall.setPreviewSurface(ui.getPreviewVideoSurface());
         }
     }
 
@@ -148,16 +147,15 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      */
     public void onSurfaceDestroyed(int surface) {
         final VideoCallUi ui = getUi();
-        final RemoteCallVideoProvider callVideoProvider = getCallVideoProvider();
 
-        if (ui == null || callVideoProvider == null) {
+        if (ui == null || mVideoCall == null) {
             return;
         }
 
         if (surface == VideoCallFragment.SURFACE_DISPLAY) {
-            mCallVideoProvider.setDisplaySurface(null);
+            mVideoCall.setDisplaySurface(null);
         } else if (surface == VideoCallFragment.SURFACE_PREVIEW) {
-            mCallVideoProvider.setPreviewSurface(null);
+            mVideoCall.setPreviewSurface(null);
         }
     }
 
@@ -228,10 +226,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * Checks for a change to the call video provider and changes it if required.
      */
     private void checkForCallVideoProviderChange() {
-        RemoteCallVideoProvider callVideoProvider =
-                mCall.getTelecommCall().getCallVideoProvider();
-        if (!Objects.equals(callVideoProvider, mCallVideoProvider)) {
-            changeCallVideoProvider(callVideoProvider);
+        VideoCall videoCall = mCall.getTelecommCall().getVideoCall();
+        if (!Objects.equals(videoCall, mVideoCall)) {
+            changeVideoCall(videoCall);
         }
     }
 
@@ -254,21 +251,21 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
-     * Handles a change to the call video provider.  Sets the surfaces on the previous provider
-     * to null and sets the surfaces on the new provider accordingly.
+     * Handles a change to the video call.  Sets the surfaces on the previous call to null and sets
+     * the surfaces on the new provider accordingly.
      *
-     * @param callVideoProvider The new call video provider.
+     * @param videoCall The new video call.
      */
-    private void changeCallVideoProvider(RemoteCallVideoProvider callVideoProvider) {
+    private void changeVideoCall(VideoCall videoCall) {
         Log.d(this, "changeCallVideoProvider");
 
         // Null out the surfaces on the previous provider
-        if (mCallVideoProvider != null) {
-            mCallVideoProvider.setDisplaySurface(null);
-            mCallVideoProvider.setPreviewSurface(null);
+        if (mVideoCall != null) {
+            mVideoCall.setDisplaySurface(null);
+            mVideoCall.setPreviewSurface(null);
         }
 
-        mCallVideoProvider = callVideoProvider;
+        mVideoCall = videoCall;
         setSurfaces();
 
     }
@@ -288,21 +285,21 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
-     * Sets the surfaces on the specified {@link RemoteCallVideoProvider}.
+     * Sets the surfaces on the specified {@link Call.VideoCall}.
      */
     private void setSurfaces() {
         Log.d(this, "setSurfaces");
         VideoCallUi ui = getUi();
-        if (ui == null || mCallVideoProvider == null) {
+        if (ui == null || mVideoCall == null) {
             return;
         }
 
         if (getUi().isDisplayVideoSurfaceCreated()) {
-            mCallVideoProvider.setDisplaySurface(ui.getDisplayVideoSurface());
+            mVideoCall.setDisplaySurface(ui.getDisplayVideoSurface());
         }
 
         if (getUi().isPreviewVideoSurfaceCreated()) {
-            mCallVideoProvider.setPreviewSurface(ui.getPreviewVideoSurface());
+            mVideoCall.setPreviewSurface(ui.getPreviewVideoSurface());
         }
     }
 
