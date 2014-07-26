@@ -126,6 +126,12 @@ public class SmartDialPrefix {
         sNanpInitialized = true;
     }
 
+    // for testing only
+    @VisibleForTesting
+    static void setSmartDialMap(SmartDialMap map) {
+        mMap = map;
+    }
+
     public static Locale getT9SearchInputLocale(Context context) {
         // Use system locale by default
         Locale locale = context.getResources().getConfiguration().locale;

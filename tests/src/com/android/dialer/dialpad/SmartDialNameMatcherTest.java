@@ -33,6 +33,12 @@ import junit.framework.TestCase;
 public class SmartDialNameMatcherTest extends TestCase {
     private static final String TAG = "SmartDialNameMatcherTest";
 
+    @Override
+    public void setUp() {
+        SmartDialPrefix.setSmartDialMap(new LatinSmartDialMap());
+        SmartDialPrefix.setUserInNanpRegion(true);
+    }
+
     public void testMatches() {
         // Test to ensure that all alphabetic characters are covered
         checkMatches("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
@@ -162,6 +168,30 @@ public class SmartDialNameMatcherTest extends TestCase {
         fail("Cyrillic letters aren't supported yet.");
     }
 
+    public void testMatches_chinese() {
+        SmartDialPrefix.setSmartDialMap(new ChineseSmartDialMap());
+
+        // basic cases
+        checkMatches("红霞李", "46", true, 0, 1);
+        checkMatches("红霞李", "46649", true, 0, 1, 1, 2);
+        checkMatches("红霞李", "5", true, 2, 3);
+        checkMatches("红霞李", "466494254", true, 0, 1, 1, 2, 2, 3);
+
+        // test with spaces
+        checkMatches("红霞 李", "466494254", true, 0, 1, 1, 2, 2, 3);
+        checkMatches(" 红  霞    李", "466494254", true, 0, 1, 1, 2, 2, 3);
+
+        // when character sets are mixed, match english only
+        checkMatches("Hongxia 李", "46", true, 0, 2);
+        checkMatches("Hongxia 李", "5", false);
+
+        // make sure regular english cases still work
+        checkMatches("Meow Face", "63", true, 0, 2);
+        checkMatches("Meow Face", "32", true, 5, 7);
+        checkMatches("Meow Face", "632", true, 0, 1, 5, 7);
+
+        SmartDialPrefix.setSmartDialMap(new LatinSmartDialMap());
+    }
 
     public void testMatches_NumberBasic() {
         // Simple basic examples that start the match from the start of the number
@@ -198,6 +228,7 @@ public class SmartDialNameMatcherTest extends TestCase {
     }
 
     public void testMatches_NumberNANP() {
+
         // An 11 digit number prefixed with 1 should be matched by the 10 digit number, as well as
         // the 7 digit number (without area code)
         checkMatchesNumber("1-510-333-7596", "5103337596", true, true, 2, 14);
@@ -252,8 +283,8 @@ public class SmartDialNameMatcherTest extends TestCase {
         final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query);
         final ArrayList<SmartDialMatchPosition> matchPositions =
                 new ArrayList<SmartDialMatchPosition>();
-        final boolean matches = matcher.matchesCombination(
-                displayName, query, matchPositions);
+        final boolean matches =
+                SmartDialPrefix.getMap().matchesCombination(matcher, displayName, query, matchPositions);
         Log.d(TAG, "query=" + query + "  text=" + displayName
                 + "  nfd=" + Normalizer.normalize(displayName, Normalizer.Form.NFD)
                 + "  nfc=" + Normalizer.normalize(displayName, Normalizer.Form.NFC)
