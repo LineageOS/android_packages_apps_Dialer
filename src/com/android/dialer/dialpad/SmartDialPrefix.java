@@ -127,6 +127,12 @@ public class SmartDialPrefix {
         sNanpInitialized = true;
     }
 
+    // for testing only
+    @VisibleForTesting
+    static void setSmartDialMap(SmartDialMap map) {
+        mMap = map;
+    }
+
     /**
      * Explicitly setting the user Nanp to the given boolean
      */
