@@ -77,6 +77,7 @@
             android:value="AEdPqrEAAAAIBXgtCEKQ6W0PXVnW-ZVia2KmlV2AxsTw3GjAeQ" />
 
         <uses-library android:name="org.apache.http.legacy" />
+        <uses-library android:name="com.qualcomm.qti.smartsearch" />
 
         <!-- The entrance point for Phone UI.
              stateAlwaysHidden is set to suppress keyboard show up on
