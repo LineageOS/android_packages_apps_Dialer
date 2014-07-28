@@ -409,7 +409,7 @@ public class SmartDialNameMatcher {
 
     public boolean matches(String displayName) {
         mMatchPositions.clear();
-        return matchesCombination(displayName, mQuery, mMatchPositions);
+        return mMap.matchesCombination(this, displayName, mQuery, mMatchPositions);
     }
 
     public ArrayList<SmartDialMatchPosition> getMatchPositions() {
