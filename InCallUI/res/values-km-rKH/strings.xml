@@ -115,16 +115,11 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"មិន​បាន​ផ្ញើ​ការ​ហៅ។ <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> គឺ​មិន​មែន​ជា​លេខ​ហៅ​ពេល​មាន​អាសន្ន!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"មិន​បាន​ផ្ញើ​​​ការ​​​ហៅ​។ ហៅ​បាន​តែ​លេខ​ពេល​មាន​​​អាសន្ន!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"ប្រើ​​ក្ដារចុច​ដើម្បី​ចុច​លេខ"</string>
-    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
-    <skip />
-    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
-    <skip />
-    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
-    <skip />
-    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
-    <skip />
-    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
-    <skip />
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"រង់ចាំ​ការ​ហៅ"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"បន្ត​ការហៅ"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"បន្ថែម​ការ​ហៅ"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"បញ្ចូល​ការ​ហៅ​ចូល​គ្នា"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"ប្ដូរ​ការ​ហៅ"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"រង់ចាំ"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"បញ្ចប់"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"បន្ទះ​លេខ"</string>

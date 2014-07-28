@@ -115,16 +115,11 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"அழைக்க முடியவில்லை, <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> ஆனது அவசரகால எண் அல்ல!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"அழைக்க முடியாது. அவசரகால எண்ணை டயல் செய்யவும்!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"டயல் செய்வதற்கு விசைப்பலகையைப் பயன்படுத்துக"</string>
-    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
-    <skip />
-    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
-    <skip />
-    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
-    <skip />
-    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
-    <skip />
-    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
-    <skip />
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"அழைப்பை இடைநிறுத்து"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"அழைப்பைத் தொடர்"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"அழைப்பைச் சேர்"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"அழைப்புகளை இணை"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"அழைப்புக்களில் மாறு"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"காத்திரு"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"முடி"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"டயல்பேடு"</string>
