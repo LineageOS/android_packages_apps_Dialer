@@ -48,7 +48,6 @@ public class PhoneCallDetailsHelper {
     /** The injected current time in milliseconds since the epoch. Used only by tests. */
     private Long mCurrentTimeMillisForTest;
     // Helper classes.
-    private final CallTypeHelper mCallTypeHelper;
     private final PhoneNumberDisplayHelper mPhoneNumberHelper;
     private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
 
@@ -67,7 +66,6 @@ public class PhoneCallDetailsHelper {
     public PhoneCallDetailsHelper(Resources resources, CallTypeHelper callTypeHelper,
             PhoneNumberUtilsWrapper phoneUtils) {
         mResources = resources;
-        mCallTypeHelper = callTypeHelper;
         mPhoneNumberUtilsWrapper = phoneUtils;
         mPhoneNumberHelper = new PhoneNumberDisplayHelper(mPhoneNumberUtilsWrapper, resources);
     }
