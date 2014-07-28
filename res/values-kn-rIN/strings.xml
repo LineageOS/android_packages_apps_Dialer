@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"ಹುಡುಕಾಟ"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"ಡಯಲ್‌"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"ಡಯಲ್‌ ಮಾಡಬೇಕಾದ ಸಂಖ್ಯೆ"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"ಪ್ಲೇಬ್ಯಾಕ್ ಅನ್ನು ಪ್ಲೇ ಮಾಡಿ ಅಥವಾ ನಿಲ್ಲಿಸಿ"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"ಸ್ಪೀಕರ್‌ಫೋನ್ ಸ್ವಿಚ್ ಆನ್ ಅಥವಾ ಆಫ್ ಮಾಡಿ"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"ಪ್ಲೇಬ್ಯಾಕ್ ಸ್ಥಾನವನ್ನು ಪಡೆಯಿರಿ"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"ಪ್ಲೇಬ್ಯಾಕ್ ರೇಟ್ ಅನ್ನು ಕಡಿಮೆ ಮಾಡು"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"ಪ್ಲೇಬ್ಯಾಕ್ ರೇಟ್ ಅನ್ನು ಹೆಚ್ಚು ಮಾಡು"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"ಕರೆ ಇತಿಹಾಸ"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"ಇನ್ನಷ್ಟು ಆಯ್ಕೆಗಳು"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"ಡಯಲ್‌ ಪ್ಯಾಡ್‌"</string>

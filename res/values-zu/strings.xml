@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"sesha"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"dayela"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"inombolo okumele uyidayele"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Dlala noma misa ukudlala"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Vula noma vala isipikha sefoni"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Funa indawo yokudlala"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Yehlisa isilinganiso sokudlala"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Yenyusa isilinganiso sokudlala"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Umlando wekholi"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Izinketho eziningi"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"okokudayila"</string>
@@ -104,8 +99,8 @@
     <string name="dialer_settings_label" msgid="4305043242594150479">"Izilungiselelo"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Othintana naye omusha"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Bonke oxhumana nabo"</string>
-    <string name="callDetailTitle" msgid="5340227785196217938">"Imininingwane yokushayela"</string>
-    <string name="toast_call_detail_error" msgid="7200975244804730096">"Ayikwazanga ukufunda imininingwane yokushayela okuceliwe."</string>
+    <string name="callDetailTitle" msgid="5340227785196217938">"Imininingwane yekholi"</string>
+    <string name="toast_call_detail_error" msgid="7200975244804730096">"Ayikwazanga ukufunda imininingwane yekholi eceliwe."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Sebenzisa ikhiphedi yethoni yokuthinta"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Buyela kukholi eqhubekayo"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Yengeza ikholi"</string>

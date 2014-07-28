@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"검색"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"전화걸기"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"전화를 걸 번호"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"재생 실행 또는 중지"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"스피커폰을 켜거나 끄기"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"재생 위치 찾기"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"재생 속도 낮추기"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"재생 속도 높이기"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"통화 기록"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"옵션 더보기"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"다이얼패드"</string>

@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"தேடு"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"டயல்"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"டயல் செய்வதற்கான எண்"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"பிளேபேக்கை இயக்கு அல்லது நிறுத்து"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"ஸ்பீக்கர்போனை இயக்கு அல்லது முடக்கு"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"பிளேபேக் நிலையைத் தேடு"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"பிளேபேக் விகிதத்தைக் குறை"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"பிளேபேக் விகிதத்தை அதிகரி"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"அழைப்பு வரலாறு"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"மேலும் விருப்பங்கள்"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"டயல்பேடு"</string>
