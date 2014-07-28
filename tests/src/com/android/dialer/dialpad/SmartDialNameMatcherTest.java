@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import junit.framework.TestCase;
 
 @SmallTest
-public class SmartDialNameMatcherTest extends TestCase {
+public class SmartDialNameMatcherTest extends AndroidTestCase {
     private static final String TAG = "SmartDialNameMatcherTest";
 
     public void testMatches() {
@@ -239,7 +239,7 @@ public class SmartDialNameMatcherTest extends TestCase {
 
     private void checkMatchesNumber(String number, String query, boolean expectedMatches,
             boolean matchNanp, int matchStart, int matchEnd) {
-        final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query);
+        final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query, getContext());
         final SmartDialMatchPosition pos = matcher.matchesNumber(number, query, matchNanp);
         assertEquals(expectedMatches, pos != null);
         if (expectedMatches) {
@@ -250,7 +250,7 @@ public class SmartDialNameMatcherTest extends TestCase {
 
     private void checkMatches(String displayName, String query, boolean expectedMatches,
             int... expectedMatchPositions) {
-        final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query);
+        final SmartDialNameMatcher matcher = new SmartDialNameMatcher(query, getContext());
         final ArrayList<SmartDialMatchPosition> matchPositions =
                 new ArrayList<SmartDialMatchPosition>();
         final boolean matches = matcher.matchesCombination(
