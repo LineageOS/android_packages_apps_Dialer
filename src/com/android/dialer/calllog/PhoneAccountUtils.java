@@ -54,12 +54,12 @@ public class PhoneAccountUtils {
     /**
      * Generate account label from data in Telecomm database
      */
-    public static CharSequence getAccountLabel(Context context, PhoneAccountHandle phoneAccount) {
+    public static String getAccountLabel(Context context, PhoneAccountHandle phoneAccount) {
         final PhoneAccount account = getAccountOrNull(context, phoneAccount);
         if (account == null) {
             return null;
         }
-        return account.getLabel();
+        return account.getLabel().toString();
     }
 
     /**
@@ -75,4 +75,5 @@ public class PhoneAccountUtils {
         }
         return account;
     }
+
 }

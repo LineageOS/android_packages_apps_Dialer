@@ -774,12 +774,12 @@ public class CallLogAdapter extends GroupingListAdapter
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, accountIcon, features, dataUsage, transcription);
+                    duration, null, accountIcon, features, dataUsage, transcription);
         } else {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
                     duration, name, ntype, label, lookupUri, photoUri, sourceType,
-                    accountIcon, features, dataUsage, transcription);
+                    null, accountIcon, features, dataUsage, transcription);
         }
 
         mCallLogViewsHelper.setPhoneCallDetails(views, details);

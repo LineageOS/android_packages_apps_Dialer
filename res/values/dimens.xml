@@ -25,7 +25,7 @@
     <dimen name="call_log_call_action_size">32dip</dimen>
     <dimen name="call_log_call_action_width">54dp</dimen>
     <dimen name="call_log_icon_margin">4dip</dimen>
-    <dimen name="call_log_inner_margin">8dip</dimen>
+    <dimen name="call_log_inner_margin">13dip</dimen>
     <dimen name="call_log_outer_margin">8dp</dimen>
     <dimen name="call_log_start_margin">16dp</dimen>
     <dimen name="call_log_indent_margin">24dip</dimen>
@@ -38,7 +38,8 @@
     <dimen name="call_detail_horizontal_margin">16dp</dimen>
     <dimen name="call_detail_top_margin">36dp</dimen>
     <dimen name="call_detail_bottom_margin">32dp</dimen>
-    <dimen name="call_detail_header_top_margin">24dp</dimen>
+    <dimen name="call_detail_header_top_margin">20dp</dimen>
+    <dimen name="call_detail_header_bottom_margin">9dp</dimen>
     <dimen name="call_detail_translation_z">0.5dp</dimen>
     <dimen name="transcription_top_margin">18dp</dimen>
     <dimen name="transcription_bottom_margin">18dp</dimen>

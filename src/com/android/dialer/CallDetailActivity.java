@@ -115,6 +115,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     private QuickContactBadge mQuickContactBadge;
     private TextView mCallerName;
     private TextView mCallerNumber;
+    private TextView mAccountLabel;
     private AsyncTaskExecutor mAsyncTaskExecutor;
     private ContactInfoHelper mContactInfoHelper;
 
@@ -246,6 +247,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         mQuickContactBadge.setOverlay(null);
         mCallerName = (TextView) findViewById(R.id.caller_name);
         mCallerNumber = (TextView) findViewById(R.id.caller_number);
+        mAccountLabel = (TextView) findViewById(R.id.phone_account_label);
         mDefaultCountryIso = GeoUtil.getCurrentCountryIso(this);
         mContactPhotoManager = ContactPhotoManager.getInstance(this);
         mProximitySensorManager = new ProximitySensorManager(this, mProximitySensorListener);
@@ -438,6 +440,13 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
 
                 }
 
+                if (!TextUtils.isEmpty(firstDetails.accountLabel)) {
+                    mAccountLabel.setText(firstDetails.accountLabel);
+                    mAccountLabel.setVisibility(View.VISIBLE);
+                } else {
+                    mAccountLabel.setVisibility(View.GONE);
+                }
+
                 mHasEditNumberBeforeCallOption =
                         canPlaceCallsTo && !isSipNumber && !isVoicemailNumber;
                 mHasTrashOption = hasVoicemail();
@@ -520,7 +529,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             final String geocode = callCursor.getString(GEOCODED_LOCATION_COLUMN_INDEX);
             final String transcription = callCursor.getString(TRANSCRIPTION_COLUMN_INDEX);
 
-            final Drawable accountIcon = PhoneAccountUtils.getAccountIcon(this,
+            final String accountLabel = PhoneAccountUtils.getAccountLabel(this,
                     PhoneAccountUtils.getAccount(
                     callCursor.getString(ACCOUNT_COMPONENT_NAME),
                     callCursor.getString(ACCOUNT_ID)));
@@ -571,7 +580,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     formattedNumber, countryIso, geocode,
                     new int[]{ callType }, date, duration,
                     nameText, numberType, numberLabel, lookupUri, photoUri, sourceType,
-                    accountIcon, features, dataUsage, transcription);
+                    accountLabel, null, features, dataUsage, transcription);
         } finally {
             if (callCursor != null) {
                 callCursor.close();
