@@ -87,7 +87,7 @@ public final class CallLogListItemViews {
      * The account for the current call log entry.  Cached here as the call back
      * intent is set only when the actions ViewStub is inflated.
      */
-    public PhoneAccountHandle mAccountHandle;
+    public PhoneAccountHandle accountHandle;
 
     /**
      * If the call has an associated voicemail message, the URI of the voicemail message for
