@@ -343,7 +343,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mFirstLaunch = true;
 
         final Resources resources = getResources();
-        mActionBarHeight = resources.getDimensionPixelSize(R.dimen.action_bar_height);
+        mActionBarHeight = resources.getDimensionPixelSize(R.dimen.action_bar_height_large);
         mDescriptionDialButtonStr = resources.getString(R.string.description_dial_button);
         mActionMenuDialpadButtonStr = resources.getString(R.string.action_menu_dialpad_button);
 

@@ -128,6 +128,7 @@
 
     <style name="DialtactsActionBarWithoutTitleStyle" parent="DialtactsActionBarStyle">
         <item name="android:displayOptions"></item>
+        <item name="android:height">@dimen/action_bar_height_large</item>
     </style>
 
     <!-- Text in the action bar at the top of the screen -->
