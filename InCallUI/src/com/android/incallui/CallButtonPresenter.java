@@ -219,7 +219,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
 
         VideoCallProfile videoCallProfile = new VideoCallProfile(
-                VideoCallProfile.VIDEO_STATE_AUDIO_ONLY, VideoCallProfile.QUALITY_DEFAULT);
+                VideoCallProfile.VideoState.AUDIO_ONLY, VideoCallProfile.QUALITY_DEFAULT);
         videoCall.sendSessionModifyRequest(videoCallProfile);
     }
 
@@ -240,7 +240,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
 
         VideoCallProfile videoCallProfile =
-                new VideoCallProfile(VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL);
+                new VideoCallProfile(VideoCallProfile.VideoState.BIDIRECTIONAL);
         videoCall.sendSessionModifyRequest(videoCallProfile);
     }
 
@@ -278,12 +278,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         if (pause) {
             videoCall.setCamera(null);
             VideoCallProfile videoCallProfile = new VideoCallProfile(
-                    mCall.getVideoState() | VideoCallProfile.VIDEO_STATE_PAUSED);
+                    mCall.getVideoState() | VideoCallProfile.VideoState.PAUSED);
             videoCall.sendSessionModifyRequest(videoCallProfile);
         } else {
             videoCall.setCamera(getCameraId());
             VideoCallProfile videoCallProfile = new VideoCallProfile(
-                    mCall.getVideoState() & ~VideoCallProfile.VIDEO_STATE_PAUSED);
+                    mCall.getVideoState() & ~VideoCallProfile.VideoState.PAUSED);
             videoCall.sendSessionModifyRequest(videoCallProfile);
         }
         getUi().setPauseVideoButton(pause);

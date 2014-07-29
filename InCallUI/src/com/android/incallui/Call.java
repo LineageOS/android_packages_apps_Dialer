@@ -332,9 +332,7 @@ public final class Call {
     }
 
     public boolean isVideoCall() {
-        int videoState = getVideoState();
-        return (videoState & VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL)
-                == VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL;
+        return VideoCallProfile.VideoState.isBidirectional(getVideoState());
     }
 
     @Override
