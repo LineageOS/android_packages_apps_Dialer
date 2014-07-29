@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -74,6 +73,7 @@ import com.android.dialer.NeededForReflection;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialerbind.analytics.AnalyticsFragment;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
 import com.android.phone.common.animation.AnimUtils;
@@ -87,7 +87,7 @@ import java.util.HashSet;
 /**
  * Fragment that displays a twelve-key phone dialpad.
  */
-public class DialpadFragment extends Fragment
+public class DialpadFragment extends AnalyticsFragment
         implements View.OnClickListener,
         View.OnLongClickListener, View.OnKeyListener,
         AdapterView.OnItemClickListener, TextWatcher,

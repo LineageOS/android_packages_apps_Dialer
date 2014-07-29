@@ -35,6 +35,7 @@ import com.android.dialer.list.ShortcutCardsAdapter.SwipeableShortcutCard;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.OverlappingPaneLayout;
 import com.android.dialer.widget.OverlappingPaneLayout.PanelSlideListener;
+import com.android.dialerbind.analytics.AnalyticsFragment;
 import com.android.dialerbind.ObjectFactory;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ import java.util.ArrayList;
  * ViewPager containing the lists up above the shortcut cards and pin it against the top of the
  * screen.
  */
-public class ListsFragment extends Fragment implements CallLogQueryHandler.Listener,
+public class ListsFragment extends AnalyticsFragment implements CallLogQueryHandler.Listener,
         CallLogAdapter.CallFetcher, ViewPager.OnPageChangeListener {
 
     private static final boolean DEBUG = DialtactsActivity.DEBUG;
