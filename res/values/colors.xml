@@ -48,15 +48,12 @@
     <!-- Standard color for selected items. -->
     <color name="item_selected">#660099cc</color>
 
-
-    <!-- Primary background color for dialer -->
-    <color name="background_dialer_primary">#fafafa</color>
     <!-- Secondary background color for dialer -->
     <color name="background_dialer_secondary">#f9f9f9</color>
     <!-- White background for dialer -->
     <color name="background_dialer_white">#ffffff</color>
     <!-- Background color of new dialer activity -->
-    <color name="background_dialer_light">#f6f6f6</color>
+    <color name="background_dialer_light">#fafafa</color>
     <!-- Background color of dialer list items (contacts, call log entries) -->
     <color name="background_dialer_list_items">@color/background_dialer_light</color>
 
