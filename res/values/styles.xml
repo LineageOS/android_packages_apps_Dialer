@@ -123,12 +123,15 @@
         <item name="android:height">@dimen/action_bar_height</item>
         <!-- Empty icon -->
         <item name="android:icon">@android:color/transparent</item>
-        <item name="android:contentInsetStart">0px</item>
+        <!-- Shift the title text to the right -->
+        <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
     </style>
 
     <style name="DialtactsActionBarWithoutTitleStyle" parent="DialtactsActionBarStyle">
         <item name="android:displayOptions"></item>
         <item name="android:height">@dimen/action_bar_height_large</item>
+        <!-- Override ActionBar title offset to keep search box aligned left -->
+        <item name="android:contentInsetStart">0px</item>
     </style>
 
     <!-- Text in the action bar at the top of the screen -->
