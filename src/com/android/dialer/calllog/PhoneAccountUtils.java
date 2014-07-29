@@ -68,7 +68,8 @@ public class PhoneAccountUtils {
      */
     private static PhoneAccount getAccountOrNull(Context context,
             PhoneAccountHandle phoneAccount) {
-        final TelecommManager telecommManager = TelecommManager.from(context);
+        final TelecommManager telecommManager =
+                (TelecommManager) context.getSystemService(Context.TELECOMM_SERVICE);
         final PhoneAccount account = telecommManager.getPhoneAccount(phoneAccount);
         if (account == null || !telecommManager.hasMultipleEnabledAccounts()) {
             return null;
