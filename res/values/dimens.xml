@@ -90,6 +90,7 @@
     <dimen name="tab_height">43dp</dimen>
     <!-- actionbar height + tab height -->
     <dimen name="actionbar_and_tab_height">107dp</dimen>
+    <dimen name="actionbar_contentInsetStart">72dp</dimen>
 
     <!-- Margin to the left and right of the search box. -->
     <dimen name="search_margin_horizontal">8dp</dimen>
