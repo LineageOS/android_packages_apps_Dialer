@@ -16,7 +16,6 @@
 package com.android.dialer.calllog;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -36,8 +35,9 @@ import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
+import com.android.dialerbind.analytics.AnalyticsActivity;
 
-public class CallLogActivity extends Activity implements CallLogQueryHandler.Listener {
+public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHandler.Listener {
     private Handler mHandler;
     private ViewPager mViewPager;
     private ViewPagerTabs mViewPagerTabs;
