@@ -40,7 +40,6 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
     private static final String TAG = ProximitySensor.class.getSimpleName();
 
     private final PowerManager mPowerManager;
-    private final PowerManager.WakeLock mProximityWakeLock;
     private final AudioModeProvider mAudioModeProvider;
     private final AccelerometerListener mAccelerometerListener;
     private int mOrientation = AccelerometerListener.ORIENTATION_UNKNOWN;
@@ -54,15 +53,6 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
 
     public ProximitySensor(Context context, AudioModeProvider audioModeProvider) {
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-
-        if (mPowerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
-            mProximityWakeLock = mPowerManager.newWakeLock(
-                    PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, TAG);
-        } else {
-            mProximityWakeLock = null;
-        }
-        Log.d(this, "onCreate: mProximityWakeLock: ", mProximityWakeLock);
-
         mAccelerometerListener = new AccelerometerListener(context, this);
         mAudioModeProvider = audioModeProvider;
         mAudioModeProvider.addListener(this);
@@ -73,9 +63,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
 
         mAccelerometerListener.enable(false);
 
-        if (mProximityWakeLock != null && mProximityWakeLock.isHeld()) {
-            mProximityWakeLock.release();
-        }
+        TelecommAdapter.getInstance().turnOffProximitySensor(true);
     }
 
     /**
@@ -163,16 +151,6 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
     }
 
     /**
-     * @return true if this device supports the "proximity sensor
-     * auto-lock" feature while in-call (see updateProximitySensorMode()).
-     */
-    private boolean proximitySensorModeEnabled() {
-        // TODO: Do we disable notification's expanded view when app is in foreground and
-        // proximity sensor is on? Is it even possible to do this any more?
-        return (mProximityWakeLock != null);
-    }
-
-    /**
      * Updates the wake lock used to control proximity sensor behavior,
      * based on the current state of the phone.
      *
@@ -192,71 +170,50 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
      * 3) if the speaker is ON
      * 4) If the slider is open(i.e. the hardkeyboard is *not* hidden)
      */
-    private void updateProximitySensorMode() {
-        if (proximitySensorModeEnabled()) {
-            synchronized (mProximityWakeLock) {
+    private synchronized void updateProximitySensorMode() {
+        final int audioMode = mAudioModeProvider.getAudioMode();
 
-                final int audioMode = mAudioModeProvider.getAudioMode();
+        // turn proximity sensor off and turn screen on immediately if
+        // we are using a headset, the keyboard is open, or the device
+        // is being held in a horizontal position.
+            boolean screenOnImmediately = (AudioMode.WIRED_HEADSET == audioMode
+                    || AudioMode.SPEAKER == audioMode
+                    || AudioMode.BLUETOOTH == audioMode
+                    || mIsHardKeyboardOpen);
 
-                // turn proximity sensor off and turn screen on immediately if
-                // we are using a headset, the keyboard is open, or the device
-                // is being held in a horizontal position.
-                boolean screenOnImmediately = (AudioMode.WIRED_HEADSET == audioMode
-                        || AudioMode.SPEAKER == audioMode
-                        || AudioMode.BLUETOOTH == audioMode
-                        || mIsHardKeyboardOpen);
+            // We do not keep the screen off when the user is outside in-call screen and we are
+            // horizontal, but we do not force it on when we become horizontal until the
+            // proximity sensor goes negative.
+            final boolean horizontal =
+                    (mOrientation == AccelerometerListener.ORIENTATION_HORIZONTAL);
+            screenOnImmediately |= !mUiShowing && horizontal;
 
-                // We do not keep the screen off when the user is outside in-call screen and we are
-                // horizontal, but we do not force it on when we become horizontal until the
-                // proximity sensor goes negative.
-                final boolean horizontal =
-                        (mOrientation == AccelerometerListener.ORIENTATION_HORIZONTAL);
-                screenOnImmediately |= !mUiShowing && horizontal;
+            // We do not keep the screen off when dialpad is visible, we are horizontal, and
+            // the in-call screen is being shown.
+            // At that moment we're pretty sure users want to use it, instead of letting the
+            // proximity sensor turn off the screen by their hands.
+            screenOnImmediately |= mDialpadVisible && horizontal;
 
-                // We do not keep the screen off when dialpad is visible, we are horizontal, and
-                // the in-call screen is being shown.
-                // At that moment we're pretty sure users want to use it, instead of letting the
-                // proximity sensor turn off the screen by their hands.
-                screenOnImmediately |= mDialpadVisible && horizontal;
+            Log.v(this, "screenonImmediately: ", screenOnImmediately);
 
-                Log.v(this, "screenonImmediately: ", screenOnImmediately);
+            Log.i(this, Objects.toStringHelper(this)
+                    .add("keybrd", mIsHardKeyboardOpen ? 1 : 0)
+                    .add("dpad", mDialpadVisible ? 1 : 0)
+                    .add("offhook", mIsPhoneOffhook ? 1 : 0)
+                    .add("hor", horizontal ? 1 : 0)
+                    .add("ui", mUiShowing ? 1 : 0)
+                    .add("aud", AudioMode.toString(audioMode)).toString());
 
-                Log.i(this, Objects.toStringHelper(this)
-                        .add("keybrd", mIsHardKeyboardOpen ? 1 : 0)
-                        .add("dpad", mDialpadVisible ? 1 : 0)
-                        .add("offhook", mIsPhoneOffhook ? 1 : 0)
-                        .add("hor", horizontal ? 1 : 0)
-                        .add("ui", mUiShowing ? 1 : 0)
-                        .add("aud", AudioMode.toString(audioMode)).toString());
-
-                if (mIsPhoneOffhook && !screenOnImmediately) {
-                    final String logStr = "turning on proximity sensor: ";
-                    // Phone is in use!  Arrange for the screen to turn off
-                    // automatically when the sensor detects a close object.
-                    if (!mProximityWakeLock.isHeld()) {
-                        Log.i(this, logStr + "acquiring");
-                        mProximityWakeLock.acquire();
-                    } else {
-                        Log.i(this, logStr + "already acquired");
-                    }
-                } else {
-                    final String logStr = "turning off proximity sensor: ";
-                    // Phone is either idle, or ringing.  We don't want any
-                    // special proximity sensor behavior in either case.
-                    if (mProximityWakeLock.isHeld()) {
-                        Log.i(this, logStr + "releasing");
-                        // Wait until user has moved the phone away from his head if we are
-                        // releasing due to the phone call ending.
-                        // Qtherwise, turn screen on immediately
-                        int flags =
-                            (screenOnImmediately ? 0 : PowerManager.WAIT_FOR_PROXIMITY_NEGATIVE);
-                        mProximityWakeLock.release(flags);
-                    } else {
-                        Log.i(this, logStr + "already released");
-                    }
-                }
+            if (mIsPhoneOffhook && !screenOnImmediately) {
+                Log.d(this, "Turning on proximity sensor");
+                // Phone is in use!  Arrange for the screen to turn off
+                // automatically when the sensor detects a close object.
+                TelecommAdapter.getInstance().turnOnProximitySensor();
+            } else {
+                Log.d(this, "Turning off proximity sensor");
+                // Phone is either idle, or ringing.  We don't want any special proximity sensor
+                // behavior in either case.
+                TelecommAdapter.getInstance().turnOffProximitySensor(screenOnImmediately);
             }
         }
-    }
-
 }
