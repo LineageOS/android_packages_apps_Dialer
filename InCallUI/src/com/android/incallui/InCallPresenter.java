@@ -564,7 +564,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         // (1) Attempt to answer a call
         if (incomingCall != null) {
             TelecommAdapter.getInstance().answerCall(
-                    incomingCall.getId(), VideoCallProfile.VIDEO_STATE_AUDIO_ONLY);
+                    incomingCall.getId(), VideoCallProfile.VideoState.AUDIO_ONLY);
             return true;
         }
 

@@ -50,12 +50,12 @@ public class InCallVideoCallListener extends VideoCall.Listener {
         int newVideoState = videoCallProfile.getVideoState();
 
         boolean wasVideoState = isVideoStateSet(previousVideoState,
-                VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL);
+                VideoCallProfile.VideoState.BIDIRECTIONAL);
         boolean isVideoState = isVideoStateSet(newVideoState,
-                VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL);
+                VideoCallProfile.VideoState.BIDIRECTIONAL);
 
-        boolean wasPaused = isVideoStateSet(previousVideoState, VideoCallProfile.VIDEO_STATE_PAUSED);
-        boolean isPaused = isVideoStateSet(newVideoState, VideoCallProfile.VIDEO_STATE_PAUSED);
+        boolean wasPaused = isVideoStateSet(previousVideoState, VideoCallProfile.VideoState.PAUSED);
+        boolean isPaused = isVideoStateSet(newVideoState, VideoCallProfile.VideoState.PAUSED);
 
         // Check for upgrades to video and downgrades to audio.
         if (!wasVideoState && isVideoState) {

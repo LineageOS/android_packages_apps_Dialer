@@ -112,7 +112,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
         final int resId = getResourceIdForTarget(target);
         switch (resId) {
             case R.drawable.ic_lockscreen_answer:
-                mAnswerListener.onAnswer(VideoCallProfile.VIDEO_STATE_AUDIO_ONLY);
+                mAnswerListener.onAnswer(VideoCallProfile.VideoState.AUDIO_ONLY);
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_lockscreen_decline:
@@ -124,7 +124,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_videocam:
-                mAnswerListener.onAnswer(VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL);
+                mAnswerListener.onAnswer(VideoCallProfile.VideoState.BIDIRECTIONAL);
                 mTargetTriggered = true;
                 break;
             default:

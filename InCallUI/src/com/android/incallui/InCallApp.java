@@ -55,7 +55,7 @@ public class InCallApp extends Application {
     }
 
     /**
-     * Accepts broadcast Intents which will be prepared by {@link StatusBarNotifier} and thus
+     * Accepts broadcatst Intents which will be prepared by {@link StatusBarNotifier} and thus
      * sent from framework's notification mechanism (which is outside Phone context).
      * This should be visible from outside, but shouldn't be in "exported" state.
      */
@@ -68,10 +68,10 @@ public class InCallApp extends Application {
             // TODO: Commands of this nature should exist in the CallList.
             if (action.equals(ACTION_ANSWER_VIDEO_INCOMING_CALL)) {
                 InCallPresenter.getInstance().answerIncomingCall(
-                        context, VideoCallProfile.VIDEO_STATE_BIDIRECTIONAL);
+                        context, VideoCallProfile.VideoState.BIDIRECTIONAL);
             } else if (action.equals(ACTION_ANSWER_VOICE_INCOMING_CALL)) {
                 InCallPresenter.getInstance().answerIncomingCall(
-                        context, VideoCallProfile.VIDEO_STATE_AUDIO_ONLY);
+                        context, VideoCallProfile.VideoState.AUDIO_ONLY);
             } else if (action.equals(ACTION_DECLINE_INCOMING_CALL)) {
                 InCallPresenter.getInstance().declineIncomingCall(context);
             } else if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
