@@ -19,16 +19,21 @@ package com.android.incallui;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.telecomm.CallCapabilities;
 import android.telecomm.Phone;
 import android.telecomm.PhoneAccountHandle;
 import android.telecomm.VideoCallProfile;
+import android.text.TextUtils;
+import android.view.Surface;
+import android.view.View;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -47,6 +52,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     private final Set<InCallStateListener> mListeners = Sets.newHashSet();
     private final ArrayList<IncomingCallListener> mIncomingCallListeners = Lists.newArrayList();
     private final Set<InCallDetailsListener> mDetailsListeners = Sets.newHashSet();
+    private final Set<InCallOrientationListener> mOrientationListeners = Sets.newHashSet();
+    private final Set<InCallEventListener> mInCallEventListeners = Sets.newHashSet();
 
     private AudioModeProvider mAudioModeProvider;
     private StatusBarNotifier mStatusBarNotifier;
@@ -58,6 +65,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     private ProximitySensor mProximitySensor;
     private boolean mServiceConnected = false;
     private boolean mAccountSelectionCancelled = false;
+    private InCallCameraManager mInCallCameraManager = null;
 
     private final Phone.Listener mPhoneListener = new Phone.Listener() {
         @Override
@@ -401,6 +409,26 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         mDetailsListeners.remove(listener);
     }
 
+    public void addOrientationListener(InCallOrientationListener listener) {
+        Preconditions.checkNotNull(listener);
+        mOrientationListeners.add(listener);
+    }
+
+    public void removeOrientationListener(InCallOrientationListener listener) {
+        Preconditions.checkNotNull(listener);
+        mOrientationListeners.remove(listener);
+    }
+
+    public void addInCallEventListener(InCallEventListener listener) {
+        Preconditions.checkNotNull(listener);
+        mInCallEventListeners.add(listener);
+    }
+
+    public void removeInCallEventListener(InCallEventListener listener) {
+        Preconditions.checkNotNull(listener);
+        mInCallEventListeners.remove(listener);
+    }
+
     public ProximitySensor getProximitySensor() {
         return mProximitySensor;
     }
@@ -636,6 +664,17 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     /**
+     * Called by the {@link VideoCallPresenter} to inform of a change in full screen video status.
+     *
+     * @param isFullScreenVideo {@code True} if entering full screen video mode.
+     */
+    public void setFullScreenVideoState(boolean isFullScreenVideo) {
+        for (InCallEventListener listener : mInCallEventListeners) {
+            listener.onFullScreenVideoStateChanged(isFullScreenVideo);
+        }
+    }
+
+    /**
      * For some disconnected causes, we show a dialog.  This calls into the activity to show
      * the dialog if appropriate for the call.
      */
@@ -829,6 +868,91 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     /**
+     * Retrieves the current in-call camera manager instance, creating if necessary.
+     *
+     * @return The {@link InCallCameraManager}.
+     */
+    public InCallCameraManager getInCallCameraManager() {
+        synchronized(this) {
+            if (mInCallCameraManager == null) {
+                mInCallCameraManager = new InCallCameraManager(mContext);
+            }
+
+            return mInCallCameraManager;
+        }
+    }
+
+    /**
+     * Handles changes to the device rotation.
+     *
+     * @param rotation The device rotation.
+     */
+    public void onDeviceRotationChange(int rotation) {
+        // First translate to rotation in degrees.
+        int rotationAngle;
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                rotationAngle = 0;
+                break;
+            case Surface.ROTATION_90:
+                rotationAngle = 90;
+                break;
+            case Surface.ROTATION_180:
+                rotationAngle = 180;
+                break;
+            case Surface.ROTATION_270:
+                rotationAngle = 270;
+                break;
+            default:
+                rotationAngle = 0;
+        }
+
+        mCallList.notifyCallsOfDeviceRotation(rotationAngle);
+    }
+
+    /**
+     * Notifies listeners of changes in orientation (e.g. portrait/landscape).
+     *
+     * @param orientation The orientation of the device.
+     */
+    public void onDeviceOrientationChange(int orientation) {
+        for (InCallOrientationListener listener : mOrientationListeners) {
+            listener.onDeviceOrientationChanged(orientation);
+        }
+    }
+
+    /**
+     * Configures the in-call UI activity so it can change orientations or not.
+     *
+     * @param allowOrientationChange {@code True} if the in-call UI can change between portrait
+     *      and landscape.  {@Code False} if the in-call UI should be locked in portrait.
+     */
+    public void setInCallAllowsOrientationChange(boolean allowOrientationChange) {
+        if (!allowOrientationChange) {
+            mInCallActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        } else {
+            mInCallActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        }
+    }
+
+    /**
+     * Returns the space available beside the call card.
+     *
+     * @return The space beside the call card.
+     */
+    public float getSpaceBesideCallCard() {
+        return mInCallActivity.getCallCardFragment().getSpaceBesideCallCard();
+    }
+
+    /**
+     * @return True if the application is currently running in a right-to-left locale.
+     */
+    public static boolean isRtl() {
+        return TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) ==
+                View.LAYOUT_DIRECTION_RTL;
+    }
+
+    /**
      * Private constructor. Must use getInstance() to get this singleton.
      */
     private InCallPresenter() {
@@ -878,5 +1002,17 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
     public interface InCallDetailsListener {
         public void onDetailsChanged(Call call, android.telecomm.Call.Details details);
+    }
+
+    public interface InCallOrientationListener {
+        public void onDeviceOrientationChanged(int orientation);
+    }
+
+    /**
+     * Interface implemented by classes that need to know about events which occur within the
+     * In-Call UI.  Used as a means of communicating between fragments that make up the UI.
+     */
+    public interface InCallEventListener {
+        public void onFullScreenVideoStateChanged(boolean isFullScreenVideo);
     }
 }

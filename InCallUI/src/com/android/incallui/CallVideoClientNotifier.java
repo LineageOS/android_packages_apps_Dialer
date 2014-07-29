@@ -156,6 +156,19 @@ public class CallVideoClientNotifier {
     }
 
     /**
+     * Inform listeners of a change to camera dimensions.
+     *
+     * @param call The call.
+     * @param width The new camera video width.
+     * @param height The new camera video height.
+     */
+    public void cameraDimensionsChanged(Call call, int width, int height) {
+        for (SurfaceChangeListener listener : mSurfaceChangeListeners) {
+            listener.onCameraDimensionsChange(call, width, height);
+        }
+    }
+
+    /**
      * Listener interface for any class that wants to be notified of upgrade to video and downgrade
      * to audio session modification requests.
      */
@@ -203,5 +216,15 @@ public class CallVideoClientNotifier {
          * @param height
          */
         public void onUpdatePeerDimensions(Call call, int width, int height);
+
+        /**
+         * Called when the local camera changes dimensions.  This occurs when a change in camera
+         * occurs.
+         *
+         * @param call The call which experienced the camera dimension change.
+         * @param width The new camera video width.
+         * @param height The new camera video height.
+         */
+        public void onCameraDimensionsChange(Call call, int width, int height);
     }
 }

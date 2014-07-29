@@ -125,6 +125,8 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      */
     @Override
     public void onCameraCapabilitiesChanged(CallCameraCapabilities callCameraCapabilities) {
+        CallVideoClientNotifier.getInstance().cameraDimensionsChanged(mCall,
+                callCameraCapabilities.getWidth(), callCameraCapabilities.getHeight());
     }
 
     /**
