@@ -63,11 +63,11 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.android.contacts.common.CallUtil;
-import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.widget.FloatingActionButtonController;
+import com.android.dialer.activity.TransactionSafeActivity;
 import com.android.dialer.calllog.CallLogActivity;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpad.DialpadFragment;
