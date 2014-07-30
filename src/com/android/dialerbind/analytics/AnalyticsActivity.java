@@ -18,5 +18,7 @@ package com.android.dialerbind.analytics;
 
 import android.app.Activity;
 
-public class AnalyticsActivity extends Activity {
+public class AnalyticsActivity extends Activity implements AnalyticsInterface {
+    public void sendHitEvent(String categoryId, String actionId, String labelId) {
+    }
 }

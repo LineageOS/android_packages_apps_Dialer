@@ -16,9 +16,6 @@
 
 package com.android.dialerbind.analytics;
 
-import android.app.Fragment;
-
-public class AnalyticsFragment extends Fragment implements AnalyticsInterface {
-    public void sendHitEvent(String categoryId, String actionId, String labelId) {
-    }
+public interface AnalyticsInterface {
+    public void sendHitEvent(String categoryId, String actionId, String labelId);
 }

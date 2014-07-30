@@ -16,9 +16,9 @@
 
 package com.android.dialerbind.analytics;
 
-import android.app.Fragment;
+import android.preference.PreferenceActivity;
 
-public class AnalyticsFragment extends Fragment implements AnalyticsInterface {
+public class AnalyticsPreferenceActivity extends PreferenceActivity implements AnalyticsInterface {
     public void sendHitEvent(String categoryId, String actionId, String labelId) {
     }
 }
