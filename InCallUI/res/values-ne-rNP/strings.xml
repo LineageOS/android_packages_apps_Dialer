@@ -116,10 +116,10 @@
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"कल पठाएको छैन। एउटा आपतकालीन नम्बर डायल गर्नुहोस्!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"डायल गर्न किबोर्ड प्रयोग गर्नुहोस्"</string>
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"कल होल्ड गर्नुहोस्"</string>
-    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"कल पुन: निरन्तरता दिनुहोस्"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"कललाई पुन: निरन्तरता दिनुहोस्"</string>
     <string name="overflowAddMenuItemText" msgid="5605615101930811453">"कल थप्नुहोस्"</string>
     <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"कलहरू जोड्नुहोस्"</string>
-    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"कलहरू साट्नुहोस्"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"कलहरू स्वाप गर्नुहोस्"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"होल्ड गर्नुहोस्"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"अन्त्य​ गर्नुहोस्"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"डायलप्याड"</string>

@@ -116,7 +116,7 @@
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Panggilan tidak dihantar. Dail nombor kecemasan!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Gunakan papan kekunci untuk mendail"</string>
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Tahan panggilan"</string>
-    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Sambung panggilan"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Sambung semula panggilan"</string>
     <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Tambah panggilan"</string>
     <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Gabung panggilan"</string>
     <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Silih panggilan"</string>

@@ -119,7 +119,7 @@
     <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Nastavi poziv"</string>
     <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Dodaj poziv"</string>
     <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Spoji pozive"</string>
-    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Zamijeni pozive"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Prebaci na drugi poziv"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"Na čekanju"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Kraj"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Površina za biranje brojeva"</string>
