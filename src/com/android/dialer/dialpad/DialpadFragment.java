@@ -288,9 +288,7 @@ public class DialpadFragment extends Fragment
             final Activity activity = getActivity();
             if (activity != null) {
                 activity.invalidateOptionsMenu();
-
-                boolean transitionIn = mWasEmptyBeforeTextChange? true : false;
-                updateMenuOverflowButton(transitionIn);
+                updateMenuOverflowButton(mWasEmptyBeforeTextChange);
             }
         }
 
