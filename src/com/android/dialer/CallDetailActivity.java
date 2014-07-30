@@ -16,7 +16,6 @@
 
 package com.android.dialer;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -68,6 +67,7 @@ import com.android.dialer.voicemail.VoicemailPlaybackFragment;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
+import com.android.dialerbind.analytics.AnalyticsActivity;
 
 import java.util.List;
 
@@ -77,7 +77,7 @@ import java.util.List;
  * This activity can be either started with the URI of a single call log entry, or with the
  * {@link #EXTRA_CALL_LOG_IDS} extra to specify a group of call log entries.
  */
-public class CallDetailActivity extends Activity implements ProximitySensorAware {
+public class CallDetailActivity extends AnalyticsActivity implements ProximitySensorAware {
     private static final String TAG = "CallDetail";
 
     private static final int LOADER_ID = 0;

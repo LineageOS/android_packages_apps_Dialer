@@ -18,5 +18,7 @@ package com.android.dialerbind.analytics;
 
 import android.app.ListFragment;
 
-public class AnalyticsListFragment extends ListFragment {
+public class AnalyticsListFragment extends ListFragment implements AnalyticsInterface {
+    public void sendHitEvent(String categoryId, String actionId, String labelId) {
+    }
 }
