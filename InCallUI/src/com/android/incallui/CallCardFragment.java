@@ -34,6 +34,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.accessibility.AccessibilityEvent;
@@ -82,6 +83,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mSecondaryCallProviderInfo;
     private TextView mSecondaryCallProviderLabel;
     private ImageView mSecondaryCallProviderIcon;
+    private View mProgressSpinner;
 
     // Dark number info bar
     private TextView mInCallMessageLabel;
@@ -95,6 +97,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private float mTranslationOffset;
     private Animation mPulseAnimation;
+    private int mVideoAnimationDuration;
 
     @Override
     CallCardPresenter.CallCardUi getUi() {
@@ -112,6 +115,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         mRevealAnimationDuration = getResources().getInteger(R.integer.reveal_animation_duration);
         mShrinkAnimationDuration = getResources().getInteger(R.integer.shrink_animation_duration);
+        mVideoAnimationDuration = getResources().getInteger(R.integer.video_animation_duration);
         mFloatingActionButtonHideOffset = getResources().getDimensionPixelOffset(
                 R.dimen.end_call_button_hide_offset);
         mIsLandscape = getResources().getConfiguration().orientation
@@ -163,6 +167,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mPrimaryCallInfo = view.findViewById(R.id.primary_call_banner);
         mCallButtonsContainer = view.findViewById(R.id.callButtonFragment);
         mInCallMessageLabel = (TextView) view.findViewById(R.id.connectionServiceMessage);
+        mProgressSpinner = view.findViewById(R.id.progressSpinner);
 
         mFloatingActionButtonContainer = view.findViewById(
                 R.id.floating_end_call_action_button_container);
@@ -215,6 +220,137 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             getView().setVisibility(View.VISIBLE);
         } else {
             getView().setVisibility(View.INVISIBLE);
+        }
+    }
+
+    /**
+     * Hides or shows the progress spinner.
+     *
+     * @param visible {@code True} if the progress spinner should be visible.
+     */
+    @Override
+    public void setProgressSpinnerVisible(boolean visible) {
+        mProgressSpinner.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    /**
+     * Sets the visibility of the primary call card.
+     * Ensures that when the primary call card is hidden, the video surface slides over to fill the
+     * entire screen.
+     *
+     * @param visible {@code True} if the primary call card should be visible.
+     */
+    @Override
+    public void setCallCardVisible(final boolean visible) {
+        // When animating the hide/show of the views in a landscape layout, we need to take into
+        // account whether we are in a left-to-right locale or a right-to-left locale and adjust
+        // the animations accordingly.
+        final boolean isLayoutRtl = InCallPresenter.isRtl();
+
+        // Retrieve here since at fragment creation time the incoming video view is not inflated.
+        final View videoView = getView().findViewById(R.id.incomingVideo);
+
+        // Determine how much space there is below or to the side of the call card.
+        final float spaceBesideCallCard = getSpaceBesideCallCard();
+
+        // We need to translate the video surface, but we need to know its position after the layout
+        // has occurred so use a {@code ViewTreeObserver}.
+        final ViewTreeObserver observer = getView().getViewTreeObserver();
+        observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                // We don't want to continue getting called.
+                if (observer.isAlive()) {
+                    observer.removeOnPreDrawListener(this);
+                }
+
+                float videoViewTranslation = 0f;
+
+                // Translate the call card to its pre-animation state.
+                if (mIsLandscape) {
+                    float translationX = mPrimaryCallCardContainer.getWidth();
+                    translationX *= isLayoutRtl ? 1 : -1;
+
+                    mPrimaryCallCardContainer.setTranslationX(visible ? translationX : 0);
+
+                    if (visible) {
+                        videoViewTranslation = videoView.getWidth() / 2 - spaceBesideCallCard / 2;
+                        videoViewTranslation *= isLayoutRtl ? -1 : 1;
+                    }
+                } else {
+                    mPrimaryCallCardContainer.setTranslationY(visible ?
+                            -mPrimaryCallCardContainer.getHeight() : 0);
+
+                    if (visible) {
+                        videoViewTranslation = videoView.getHeight() / 2 - spaceBesideCallCard / 2;
+                    }
+                }
+
+                // Perform animation of video view.
+                ViewPropertyAnimator videoViewAnimator = videoView.animate()
+                        .setInterpolator(AnimUtils.EASE_OUT_EASE_IN)
+                        .setDuration(mVideoAnimationDuration);
+                if (mIsLandscape) {
+                    videoViewAnimator
+                            .translationX(videoViewTranslation)
+                            .start();
+                } else {
+                    videoViewAnimator
+                            .translationY(videoViewTranslation)
+                            .start();
+                }
+                videoViewAnimator.start();
+
+                // Animate the call card sliding.
+                ViewPropertyAnimator callCardAnimator = mPrimaryCallCardContainer.animate()
+                        .setInterpolator(AnimUtils.EASE_OUT_EASE_IN)
+                        .setDuration(mVideoAnimationDuration)
+                        .setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                if (!visible) {
+                                    mPrimaryCallCardContainer.setVisibility(View.GONE);
+                                }
+                            }
+
+                            @Override
+                            public void onAnimationStart(Animator animation) {
+                                super.onAnimationStart(animation);
+                                if (visible) {
+                                    mPrimaryCallCardContainer.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        });
+
+                if (mIsLandscape) {
+                    float translationX = mPrimaryCallCardContainer.getWidth();
+                    translationX *= isLayoutRtl ? 1 : -1;
+                    callCardAnimator
+                            .translationX(visible ? 0 : translationX)
+                            .start();
+                } else {
+                    callCardAnimator
+                            .translationY(visible ? 0 : -mPrimaryCallCardContainer.getHeight())
+                            .start();
+                }
+
+                return true;
+            }
+        });
+    }
+
+    /**
+     * Determines the amount of space below the call card for portrait layouts), or beside the
+     * call card for landscape layouts.
+     *
+     * @return The amount of space below or beside the call card.
+     */
+    public float getSpaceBesideCallCard() {
+        if (mIsLandscape) {
+            return getView().getWidth() - mPrimaryCallCardContainer.getWidth();
+        } else {
+            return getView().getHeight() - mPrimaryCallCardContainer.getHeight();
         }
     }
 

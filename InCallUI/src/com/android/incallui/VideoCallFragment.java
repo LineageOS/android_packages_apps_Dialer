@@ -16,16 +16,18 @@
 
 package com.android.incallui;
 
+import android.content.res.Configuration;
+import android.graphics.Point;
+import android.graphics.SurfaceTexture;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Surface;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
-
-import java.util.Set;
+import android.view.ViewTreeObserver;
 
 /**
  * Fragment containing video calling surfaces.
@@ -33,18 +35,21 @@ import java.util.Set;
 public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         VideoCallPresenter.VideoCallUi> implements VideoCallPresenter.VideoCallUi {
 
+    /**
+     * Surface ID for the display surface.
+     */
     public static final int SURFACE_DISPLAY = 1;
-    public static final int SURFACE_PREVIEW = 2;
 
     /**
-     * Listener interface used by classes interested in changed to the video telephony surfaces
-     * in the {@link CallCardFragment}.
+     * Surface ID for the preview surface.
      */
-    public interface VideoCallSurfaceListener {
-        void onSurfaceCreated(int surface);
-        void onSurfaceDestroyed(int surface);
-        void onSurfaceChanged(int surface, int format, int width, int height);
-    }
+    public static final int SURFACE_PREVIEW = 2;
+
+    // Static storage used to retain the video surfaces across Activity restart.
+    // TextureViews are not parcelable, so it is not possible to store them in the saved state.
+    private static boolean sVideoSurfacesInUse = false;
+    private static VideoCallSurface sPreviewSurface = null;
+    private static VideoCallSurface sDisplaySurface = null;
 
     /**
      * {@link ViewStub} holding the video call surfaces.  This is the parent for the
@@ -59,42 +64,177 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     private View mVideoViews;
 
     /**
-     * The display video {@link SurfaceView}.  Incoming video from the remote party of the video
-     * call is displayed here.
+     * {@code True} when the entering the activity again after a restart due to orientation change.
      */
-    private SurfaceView mDisplayVideoSurface;
+    private boolean mIsActivityRestart;
 
     /**
-     * The surface holder for the display surface.  Provides access to the underlying
-     * {@link Surface} in the {@link SurfaceView} and allows listening to surface related events.
+     * {@code True} when the layout of the activity has been completed.
      */
-    private SurfaceHolder mDisplayVideoSurfaceHolder;
+    private boolean mIsLayoutComplete = false;
 
     /**
-     * Determines if the display surface has been created or not.
+     * {@code True} if in landscape mode.
      */
-    private boolean mDisplayVideoSurfaceCreated;
+    private boolean mIsLandscape;
 
     /**
-     * The preview video {@link SurfaceView}.  A preview of the outgoing video to the remote party
-     * of the video call is displayed here.
+     * Inner-class representing a {@link TextureView} and its associated {@link SurfaceTexture} and
+     * {@link Surface}.  Used to manage the lifecycle of these objects across device orientation
+     * changes.
      */
-    private SurfaceView mPreviewVideoSurface;
+    private class VideoCallSurface implements TextureView.SurfaceTextureListener,
+            View.OnClickListener {
+        private int mSurfaceId;
+        private TextureView mTextureView;
+        private SurfaceTexture mSavedSurfaceTexture;
+        private Surface mSavedSurface;
 
-    /**
-     * The surface holder for the preview surface.  Provides access to the underlying
-     * {@link Surface} in the {@link SurfaceView} and allows listening to surface related events.
-     */
-    private SurfaceHolder mPreviewVideoSurfaceHolder;
+        /**
+         * Creates an instance of a {@link VideoCallSurface}.
+         *
+         * @param surfaceId The surface ID of the surface.
+         * @param textureView The {@link TextureView} for the surface.
+         */
+        public VideoCallSurface(int surfaceId, TextureView textureView) {
+            mSurfaceId = surfaceId;
+            recreateView(textureView);
+        }
 
-    /**
-     * Determines if the preview surface has been created or not.
-     */
-    private boolean mPreviewVideoSurfaceCreated;
+        /**
+         * Recreates a {@link VideoCallSurface} after a device orientation change.  Re-applies the
+         * saved {@link SurfaceTexture} to the
+         *
+         * @param view The {@link TextureView}.
+         */
+        public void recreateView(TextureView view) {
+            mTextureView = view;
+            mTextureView.setSurfaceTextureListener(this);
+            mTextureView.setOnClickListener(this);
+
+            if (mSavedSurfaceTexture != null) {
+                mTextureView.setSurfaceTexture(mSavedSurfaceTexture);
+            }
+        }
+
+        /**
+         * Handles {@link SurfaceTexture} callback to indicate that a {@link SurfaceTexture} has
+         * been successfully created.
+         *
+         * @param surfaceTexture The {@link SurfaceTexture} which has been created.
+         * @param width The width of the {@link SurfaceTexture}.
+         * @param height The height of the {@link SurfaceTexture}.
+         */
+        @Override
+        public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width,
+                int height) {
+            // Where there is no saved {@link SurfaceTexture} available, use the newly created one.
+            // If a saved {@link SurfaceTexture} is available, we are re-creating after an
+            // orientation change.
+            if (mSavedSurfaceTexture == null) {
+                mSavedSurfaceTexture = surfaceTexture;
+                mSavedSurface = new Surface(mSavedSurfaceTexture);
+            }
+
+            // Inform presenter that the surface is available.
+            getPresenter().onSurfaceCreated(mSurfaceId);
+        }
+
+        /**
+         * Handles a change in the {@link SurfaceTexture}'s size.
+         *
+         * @param surfaceTexture The {@link SurfaceTexture}.
+         * @param width The new width.
+         * @param height The new height.
+         */
+        @Override
+        public void onSurfaceTextureSizeChanged(SurfaceTexture surfaceTexture, int width,
+                int height) {
+            // Not handled
+        }
+
+        /**
+         * Handles {@link SurfaceTexture} destruct callback, indicating that it has been destroyed.
+         *
+         * @param surfaceTexture The {@link SurfaceTexture}.
+         * @return {@code True} if the {@link TextureView} can release the {@link SurfaceTexture}.
+         */
+        @Override
+        public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
+            /**
+             * Destroying the surface texture; inform the presenter so it can null the surfaces.
+             */
+            if (mSavedSurfaceTexture == null) {
+                getPresenter().onSurfaceDestroyed(mSurfaceId);
+                if (mSavedSurface != null) {
+                    mSavedSurface.release();
+                    mSavedSurface = null;
+                }
+            }
+
+            // The saved SurfaceTexture will be null if we're shutting down, so we want to
+            // return "true" in that case (indicating that TextureView can release the ST).
+            return (mSavedSurfaceTexture == null);
+        }
+
+        /**
+         * Handles {@link SurfaceTexture} update callback.
+         * @param surface
+         */
+        @Override
+        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+            // Not Handled
+        }
+
+        /**
+         * Retrieves the current {@link TextureView}.
+         *
+         * @return The {@link TextureView}.
+         */
+        public TextureView getTextureView() {
+            return mTextureView;
+        }
+
+        /**
+         * Called by the user presenter to indicate that the surface is no longer required due to a
+         * change in video state.  Releases and clears out the saved surface and surface textures.
+         */
+        public void setDoneWithSurface() {
+            if (mSavedSurface != null) {
+                mSavedSurface.release();
+                mSavedSurface = null;
+            }
+            if (mSavedSurfaceTexture != null) {
+                mSavedSurfaceTexture.release();
+                mSavedSurfaceTexture = null;
+            }
+        }
+
+        /**
+         * Retrieves the saved surface instance.
+         *
+         * @return The surface.
+         */
+        public Surface getSurface() {
+            return mSavedSurface;
+        }
+
+        /**
+         * Handles a user clicking the surface, which is the trigger to toggle the full screen
+         * Video UI.
+         *
+         * @param view The view receiving the click.
+         */
+        @Override
+        public void onClick(View view) {
+            getPresenter().onSurfaceClick(mSurfaceId);
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mIsActivityRestart = sVideoSurfacesInUse;
     }
 
     /**
@@ -105,6 +245,9 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        mIsLandscape = getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
 
         getPresenter().init(getActivity());
     }
@@ -120,9 +263,66 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+
         super.onCreateView(inflater, container, savedInstanceState);
 
-        return inflater.inflate(R.layout.video_call_fragment, container, false);
+        final View view = inflater.inflate(R.layout.video_call_fragment, container, false);
+
+        // Attempt to center the incoming video view, if it is in the layout.
+        final ViewTreeObserver observer = view.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                // Check if the layout includes the incoming video surface -- this will only be the
+                // case for a video call.
+                View displayVideo = view.findViewById(R.id.incomingVideo);
+                if (displayVideo != null) {
+                    centerDisplayView(displayVideo);
+                }
+
+                mIsLayoutComplete = true;
+
+                // Remove the listener so we don't continually re-layout.
+                ViewTreeObserver observer = view.getViewTreeObserver();
+                if (observer.isAlive()) {
+                    observer.removeOnGlobalLayoutListener(this);
+                }
+            }
+        });
+
+        return view;
+    }
+
+    /**
+     * Centers the display view vertically for portrait orientation, and horizontally for
+     * lanscape orientations.  The view is centered within the available space not occupied by
+     * the call card.
+     *
+     * @param displayVideo The video view to center.
+     */
+    private void centerDisplayView(View displayVideo) {
+        // In a lansdcape layout we need to ensure we horizontally center the view based on whether
+        // the layout is left-to-right or right-to-left.
+        // In a left-to-right locale, the space for the video view is to the right of the call card
+        // so we need to translate it in the +X direction.
+        // In a right-to-left locale, the space for the video view is to the left of the call card
+        // so we need to translate it in the -X direction.
+        final boolean isLayoutRtl = InCallPresenter.isRtl();
+
+        float spaceBesideCallCard = InCallPresenter.getInstance().getSpaceBesideCallCard();
+        if (mIsLandscape) {
+            float videoViewTranslation = displayVideo.getWidth() / 2
+                    - spaceBesideCallCard / 2;
+            if (isLayoutRtl) {
+                displayVideo.setTranslationX(-videoViewTranslation);
+            } else {
+                displayVideo.setTranslationX(videoViewTranslation);
+            }
+        } else {
+            float videoViewTranslation = displayVideo.getHeight() / 2
+                    - spaceBesideCallCard / 2;
+            displayVideo.setTranslationY(videoViewTranslation);
+        }
     }
 
     /**
@@ -136,6 +336,13 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         super.onViewCreated(view, savedInstanceState);
 
         mVideoViewsStub = (ViewStub) view.findViewById(R.id.videoCallViewsStub);
+
+        // If the surfaces are already in use, we have just changed orientation or otherwise
+        // re-created the fragment.  In this case we need to inflate the video call views and
+        // restore the surfaces.
+        if (sVideoSurfacesInUse) {
+            inflateVideoCallViews();
+        }
     }
 
     /**
@@ -156,96 +363,47 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     }
 
     /**
-     * SurfaceHolder callback used to track lifecycle changes to the surfaces.
-     */
-    private SurfaceHolder.Callback mSurfaceHolderCallBack = new SurfaceHolder.Callback() {
-        /**
-         * Called immediately after the surface is first created.
-         *
-         * @param holder The surface holder.
-         */
-        @Override
-        public void surfaceCreated(SurfaceHolder holder) {
-            int surfaceId = getSurfaceId(holder);
-
-            if (surfaceId == SURFACE_DISPLAY) {
-                mDisplayVideoSurfaceCreated = true;
-            } else {
-                mPreviewVideoSurfaceCreated = true;
-            }
-
-            getPresenter().onSurfaceCreated(surfaceId);
-        }
-
-        /**
-         * Called immediately after any structural changes (format or size) have been made to the
-         * surface.
-         *
-         * @param holder The surface holder.
-         * @param format
-         * @param width
-         * @param height
-         */
-        @Override
-        public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-            getPresenter().onSurfaceChanged(getSurfaceId(holder), format, width, height);
-        }
-
-        /**
-         * Called immediately before a surface is being destroyed.
-         *
-         * @param holder The surface holder.
-         */
-        @Override
-        public void surfaceDestroyed(SurfaceHolder holder) {
-            int surfaceId = getSurfaceId(holder);
-
-            if (surfaceId == SURFACE_DISPLAY) {
-                mDisplayVideoSurfaceCreated = false;
-            } else {
-                mPreviewVideoSurfaceCreated = false;
-            }
-
-            getPresenter().onSurfaceDestroyed(surfaceId);
-        }
-
-        /**
-         * Determines the surface ID for a specified surface.
-         *
-         * @param holder The surface holder.
-         * @return The surface ID.
-         */
-        private int getSurfaceId(SurfaceHolder holder) {
-            int surface;
-            if (holder == mDisplayVideoSurface.getHolder()) {
-                surface = SURFACE_DISPLAY;
-            } else {
-                surface = SURFACE_PREVIEW;
-            }
-            return surface;
-        }
-    };
-
-    /**
      * Toggles visibility of the video UI.
      *
      * @param show {@code True} if the video surfaces should be shown.
      */
     @Override
     public void showVideoUi(boolean show) {
-        getView().setVisibility(show ? View.VISIBLE : View.GONE);
+        int visibility = show ? View.VISIBLE : View.GONE;
+        getView().setVisibility(visibility);
 
         if (show) {
             inflateVideoCallViews();
+        } else {
+            cleanupSurfaces();
         }
 
         if (mVideoViews != null ) {
-            int newVisibility = show ? View.VISIBLE : View.GONE;
-            mVideoViews.setVisibility(newVisibility);
-            mDisplayVideoSurface.setVisibility(newVisibility);
-            mPreviewVideoSurface.setVisibility(newVisibility);
-            mPreviewVideoSurface.setZOrderOnTop(show);
+            mVideoViews.setVisibility(visibility);
         }
+    }
+
+    /**
+     * Cleans up the video telephony surfaces.  Used when the presenter indicates a change to an
+     * audio-only state.  Since the surfaces are static, it is important to ensure they are cleaned
+     * up promptly.
+     */
+    @Override
+    public void cleanupSurfaces() {
+        if (sDisplaySurface != null) {
+            sDisplaySurface.setDoneWithSurface();
+            sDisplaySurface = null;
+        }
+        if (sPreviewSurface != null) {
+            sPreviewSurface.setDoneWithSurface();
+            sPreviewSurface = null;
+        }
+        sVideoSurfacesInUse = false;
+    }
+
+    @Override
+    public boolean isActivityRestart() {
+        return mIsActivityRestart;
     }
 
     /**
@@ -253,7 +411,7 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      */
     @Override
     public boolean isDisplayVideoSurfaceCreated() {
-        return mDisplayVideoSurfaceCreated;
+        return sDisplaySurface != null && sDisplaySurface.getSurface() != null;
     }
 
     /**
@@ -261,49 +419,107 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      */
     @Override
     public boolean isPreviewVideoSurfaceCreated() {
-        return mPreviewVideoSurfaceCreated;
+        return sPreviewSurface != null && sPreviewSurface.getSurface() != null;
     }
 
     /**
      * {@link android.view.Surface} on which incoming video for a video call is displayed.
      * {@code Null} until the video views {@link android.view.ViewStub} is inflated.
      */
+    @Override
     public Surface getDisplayVideoSurface() {
-        if (mDisplayVideoSurfaceHolder != null) {
-            return mDisplayVideoSurfaceHolder.getSurface();
-        }
-        return null;
+        return sDisplaySurface == null ? null : sDisplaySurface.getSurface();
     }
 
     /**
      * {@link android.view.Surface} on which a preview of the outgoing video for a video call is
      * displayed.  {@code Null} until the video views {@link android.view.ViewStub} is inflated.
      */
+    @Override
     public Surface getPreviewVideoSurface() {
-        if (mPreviewVideoSurfaceHolder != null) {
-            return mPreviewVideoSurfaceHolder.getSurface();
-        }
-        return null;
+        return sPreviewSurface == null ? null : sPreviewSurface.getSurface();
     }
 
     /**
-     * Inflates the {@link ViewStub} containing the incoming and outgoing video surfaces and sets
-     * up a callback to listen for lifecycle changes to the surface.
+     * Changes the dimensions of the preview surface.  Called when the dimensions change due to a
+     * device orientation change.
+     *
+     * @param width The new width.
+     * @param height The new height.
+     */
+    @Override
+    public void setPreviewSize(int width, int height) {
+        if (sPreviewSurface != null) {
+            TextureView preview = sPreviewSurface.getTextureView();
+
+            if (preview == null ) {
+                return;
+            }
+
+            ViewGroup.LayoutParams params = preview.getLayoutParams();
+            params.width = width;
+            params.height = height;
+            preview.setLayoutParams(params);
+        }
+    }
+
+    /**
+     * Inflates the {@link ViewStub} containing the incoming and outgoing surfaces, if necessary,
+     * and creates {@link VideoCallSurface} instances to track the surfaces.
      */
     private void inflateVideoCallViews() {
-        if (mDisplayVideoSurface == null && mPreviewVideoSurface == null && mVideoViews == null ) {
+        if (mVideoViews == null ) {
             mVideoViews = mVideoViewsStub.inflate();
+        }
 
-            if (mVideoViews != null) {
-                mDisplayVideoSurface = (SurfaceView) mVideoViews.findViewById(R.id.incomingVideo);
-                mDisplayVideoSurfaceHolder = mDisplayVideoSurface.getHolder();
-                mDisplayVideoSurfaceHolder.addCallback(mSurfaceHolderCallBack);
+        if (mVideoViews != null) {
+            TextureView displaySurface = (TextureView) mVideoViews.findViewById(R.id.incomingVideo);
+            setSurfaceSizeAndTranslation(displaySurface);
 
-                mPreviewVideoSurface = (SurfaceView) mVideoViews.findViewById(R.id.previewVideo);
-                mPreviewVideoSurfaceHolder = mPreviewVideoSurface.getHolder();
-                mPreviewVideoSurfaceHolder.addCallback(mSurfaceHolderCallBack);
-                mPreviewVideoSurface.setZOrderOnTop(true);
+            if (!sVideoSurfacesInUse) {
+                // Where the video surfaces are not already in use (first time creating them),
+                // setup new VideoCallSurface instances to track them.
+                sDisplaySurface = new VideoCallSurface(SURFACE_DISPLAY,
+                        (TextureView) mVideoViews.findViewById(R.id.incomingVideo));
+                sPreviewSurface = new VideoCallSurface(SURFACE_PREVIEW,
+                        (TextureView) mVideoViews.findViewById(R.id.previewVideo));
+                sVideoSurfacesInUse = true;
+            } else {
+                // In this case, the video surfaces are already in use (we are recreating the
+                // Fragment after a destroy/create cycle resulting from a rotation.
+                sDisplaySurface.recreateView((TextureView) mVideoViews.findViewById(
+                        R.id.incomingVideo));
+                sPreviewSurface.recreateView((TextureView) mVideoViews.findViewById(
+                        R.id.previewVideo));
             }
+        }
+    }
+
+    /**
+     * Resizes a surface so that it has the same size as the full screen and so that it is
+     * centered vertically below the call card.
+     *
+     * @param textureView The {@link TextureView} to resize and position.
+     */
+    private void setSurfaceSizeAndTranslation(TextureView textureView) {
+        // Get current screen size.
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        // Set the surface to have that size.
+        ViewGroup.LayoutParams params = textureView.getLayoutParams();
+        params.width = size.x;
+        params.height = size.y;
+        textureView.setLayoutParams(params);
+
+        // It is only possible to center the display view if layout of the views has completed.
+        // It is only after layout is complete that the dimensions of the Call Card has been
+        // established, which is a prerequisite to centering the view.
+        // Incoming video calls will center the view
+        if (mIsLayoutComplete && ((mIsLandscape && textureView.getTranslationX() == 0) || (
+                !mIsLandscape && textureView.getTranslationY() == 0))) {
+            centerDisplayView(textureView);
         }
     }
 }

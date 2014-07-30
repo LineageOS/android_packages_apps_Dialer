@@ -16,10 +16,9 @@
   ~ limitations under the License
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id/primary_call_info_container"
@@ -27,6 +26,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:elevation="@dimen/primary_call_elevation"
+        android:layout_centerHorizontal="true"
         android:background="@color/incall_call_banner_background_color"
         android:paddingTop="@dimen/call_banner_primary_call_container_top_padding"
         android:clipChildren="false"
@@ -46,45 +46,66 @@
             android:visibility="gone"
             android:padding="@dimen/call_banner_side_padding"
             android:background="@android:color/white" />
-
     </LinearLayout>
 
-    <FrameLayout
+    <!-- Contact photo for primary call info -->
+    <ImageView android:id="@+id/photo"
+        android:layout_below="@id/primary_call_info_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="top|center_horizontal"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/contactPhoto"
+        android:src="@drawable/picture_unknown" />
 
-        <!-- Contact photo for primary call info -->
-        <ImageView android:id="@+id/photo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="top|center_horizontal"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/contactPhoto"
-            android:src="@drawable/picture_unknown" />
+    <fragment android:name="com.android.incallui.VideoCallFragment"
+        android:id="@+id/videoCallFragment"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-        <fragment android:name="com.android.incallui.VideoCallFragment"
-            android:id="@+id/videoCallFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <!-- Progress spinner, useful for indicating pending operations such as upgrade to video. -->
+    <FrameLayout
+        android:id="@+id/progressSpinner"
+        android:layout_below="@id/primary_call_info_container"
+        android:background="#63000000"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" >
 
-        <!-- Secondary "Call info" block, for the background ("on hold") call. -->
-        <include layout="@layout/secondary_call_info" />
-
-        <fragment android:name="com.android.incallui.DialpadFragment"
-            android:id="@+id/dialpadFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <fragment android:name="com.android.incallui.AnswerFragment"
-            android:id="@+id/answerFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="top"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="@dimen/glowpadview_margin_bottom"
-            android:visibility="gone" />
-
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@android:style/Widget.Material.ProgressBar"
+            android:layout_gravity="center"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:indeterminate="true" />
     </FrameLayout>
 
-</LinearLayout>
+    <!-- Secondary "Call info" block, for the background ("on hold") call. -->
+    <include layout="@layout/secondary_call_info"
+         android:layout_below="@id/primary_call_info_container"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content" />
+
+    <fragment android:name="com.android.incallui.DialpadFragment"
+        android:id="@+id/dialpadFragment"
+        android:layout_below="@id/primary_call_info_container"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <fragment android:name="com.android.incallui.AnswerFragment"
+        android:id="@+id/answerFragment"
+        android:layout_below="@id/primary_call_info_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/glowpadview_margin_bottom"
+        android:visibility="gone" />
+</RelativeLayout>

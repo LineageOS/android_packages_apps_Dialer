@@ -37,6 +37,7 @@ import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
+import com.android.incallui.InCallPresenter.InCallEventListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
@@ -49,7 +50,7 @@ import com.google.common.base.Preconditions;
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         implements InCallStateListener, AudioModeListener, IncomingCallListener,
-        InCallDetailsListener {
+        InCallDetailsListener, InCallEventListener {
 
     private static final String TAG = CallCardPresenter.class.getSimpleName();
     private static final long CALL_TIME_UPDATE_INTERVAL = 1000; // in milliseconds
@@ -103,6 +104,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         InCallPresenter.getInstance().addListener(this);
         InCallPresenter.getInstance().addIncomingCallListener(this);
         InCallPresenter.getInstance().addDetailsListener(this);
+        InCallPresenter.getInstance().addInCallEventListener(this);
     }
 
     @Override
@@ -113,6 +115,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         InCallPresenter.getInstance().removeListener(this);
         InCallPresenter.getInstance().removeIncomingCallListener(this);
         InCallPresenter.getInstance().removeDetailsListener(this);
+        InCallPresenter.getInstance().removeInCallEventListener(this);
 
         AudioModeProvider.getInstance().removeListener(this);
 
@@ -206,9 +209,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             getUi().setCallState(callState, DisconnectCause.NOT_VALID, null, null, null);
         }
 
-        // Hide/show the contact photo depending if this is a video call
+        // Hide/show the contact photo based on the video state.
+        // If the primary call is a video call on hold, still show the contact photo.
+        // If the primary call is an active video call, hide the contact photo.
         if (mPrimary != null) {
-            getUi().setPhotoVisible(!mPrimary.isVideoCall());
+            getUi().setPhotoVisible(!(mPrimary.isVideoCall() && callState != Call.State.ONHOLD));
         }
 
         final boolean enableEndCallButton = Call.State.isConnected(callState) &&
@@ -597,8 +602,23 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         return handle == null ? "" : handle.getSchemeSpecificPart();
     }
 
+    /**
+     * Handles a change to the full screen video state.
+     *
+     * @param isFullScreenVideo {@code True} if the application is entering full screen video mode.
+     */
+    @Override
+    public void onFullScreenVideoStateChanged(boolean isFullScreenVideo) {
+        final CallCardUi ui = getUi();
+        if (ui == null) {
+            return;
+        }
+        ui.setCallCardVisible(!isFullScreenVideo);
+    }
+
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
+        void setCallCardVisible(boolean visible);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isConference, boolean isGeneric, boolean isSipCall);
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
@@ -615,6 +635,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setCallbackNumber(String number, boolean isEmergencyCalls);
         void setCallDetails(android.telecomm.Call.Details details);
         void setPhotoVisible(boolean isVisible);
+        void setProgressSpinnerVisible(boolean visible);
     }
 
     private TelecommManager getTelecommManager() {
