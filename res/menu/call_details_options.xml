@@ -15,6 +15,16 @@
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/menu_ip_call_by_slot1"
+        android:showAsAction="withText"
+        android:onClick="onMenuIpCallBySlot1"
+    />
+    <item
+        android:id="@+id/menu_ip_call_by_slot2"
+        android:showAsAction="withText"
+        android:onClick="onMenuIpCallBySlot2"
+    />
+    <item
         android:id="@+id/menu_trash"
         android:icon="@drawable/ic_calllog_delete"
         android:showAsAction="ifRoom"

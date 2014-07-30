@@ -31,6 +31,7 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -51,6 +52,7 @@ import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
@@ -66,6 +68,7 @@ import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.android.dialerbind.analytics.AnalyticsActivity;
+import com.android.internal.telephony.PhoneConstants;
 
 import java.util.List;
 
@@ -144,6 +147,10 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     private boolean mHasTrashOption;
     /** Whether we should show "remove from call log" in the options menu. */
     private boolean mHasRemoveFromCallLogOption;
+    /** Whether we should show "Ip Call by SIM1" in the options menu. */
+    private boolean mHasSub1IpCallOption;
+    /** Whether we should show "Ip Call by SIM2" in the options menu. */
+    private boolean mHasSub2IpCallOption;
 
     private ProximitySensorManager mProximitySensorManager;
     private final ProximitySensorListener mProximitySensorListener = new ProximitySensorListener();
@@ -460,6 +467,16 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                         canPlaceCallsTo && !isSipNumber && !isVoicemailNumber;
                 mHasTrashOption = hasVoicemail();
                 mHasRemoveFromCallLogOption = !hasVoicemail();
+                mHasSub1IpCallOption = canPlaceCallsTo
+                        && !isSipNumber
+                        && !isVoicemailNumber
+                        && MoreContactUtils
+                                .isMultiSimEnable(CallDetailActivity.this, PhoneConstants.SUB1);
+                mHasSub2IpCallOption = canPlaceCallsTo
+                        && !isSipNumber
+                        && !isVoicemailNumber
+                        && MoreContactUtils
+                                .isMultiSimEnable(CallDetailActivity.this, PhoneConstants.SUB2);
                 invalidateOptionsMenu();
 
                 ListView historyList = (ListView) findViewById(R.id.history);
@@ -693,7 +710,54 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
         menu.findItem(R.id.menu_remove_from_call_log).setVisible(mHasRemoveFromCallLogOption);
         menu.findItem(R.id.menu_edit_number_before_call).setVisible(mHasEditNumberBeforeCallOption);
         menu.findItem(R.id.menu_trash).setVisible(mHasTrashOption);
+
+        menu.findItem(R.id.menu_ip_call_by_slot1).setVisible(mHasSub1IpCallOption);
+        menu.findItem(R.id.menu_ip_call_by_slot2).setVisible(mHasSub2IpCallOption);
+
+        if (mHasSub1IpCallOption) {
+            String sub1Name = MoreContactUtils.getMultiSimAliasesName(this, PhoneConstants.SUB1);
+            menu.findItem(R.id.menu_ip_call_by_slot1).setTitle(getString(
+                    com.android.contacts.common.R.string.ip_call_by_slot, sub1Name));
+        }
+        if (mHasSub2IpCallOption) {
+            String sub2Name = MoreContactUtils.getMultiSimAliasesName(this, PhoneConstants.SUB2);
+            menu.findItem(R.id.menu_ip_call_by_slot2).setTitle(getString(
+                    com.android.contacts.common.R.string.ip_call_by_slot, sub2Name));
+        }
+
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    public void onMenuIpCallBySlot1(MenuItem menuItem) {
+        String prefix = MoreContactUtils.getIPCallPrefix(this, PhoneConstants.SUB1);
+        if (!TextUtils.isEmpty(prefix)) {
+            ComponentName serviceName =
+                    new ComponentName("com.android.phone",
+                    "com.android.services.telephony.TelephonyConnectionService");
+            PhoneAccountHandle account = new PhoneAccountHandle(serviceName,
+                    String.valueOf(PhoneConstants.SUB1));
+            Intent callIntent = new Intent(CallUtil.getCallIntent(
+                    prefix + "" + mNumber, account));
+            startActivity(callIntent);
+        } else {
+            MoreContactUtils.showNoIPNumberDialog(this, PhoneConstants.SUB1);
+        }
+    }
+
+    public void onMenuIpCallBySlot2(MenuItem menuItem) {
+        String prefix = MoreContactUtils.getIPCallPrefix(this, PhoneConstants.SUB2);
+        if (!TextUtils.isEmpty(prefix)) {
+            ComponentName serviceName =
+                    new ComponentName("com.android.phone",
+                    "com.android.services.telephony.TelephonyConnectionService");
+            PhoneAccountHandle account = new PhoneAccountHandle(serviceName,
+                    String.valueOf(PhoneConstants.SUB2));
+            Intent callIntent = new Intent(CallUtil.getCallIntent(
+                    prefix + "" + mNumber, account));
+            startActivity(callIntent);
+        } else {
+            MoreContactUtils.showNoIPNumberDialog(this, PhoneConstants.SUB2);
+        }
     }
 
     public void onMenuRemoveFromCallLog(MenuItem menuItem) {

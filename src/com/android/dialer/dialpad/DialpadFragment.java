@@ -70,6 +70,7 @@ import android.widget.TextView;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
 import com.android.contacts.common.widget.FloatingActionButtonController;
@@ -81,6 +82,7 @@ import com.android.dialer.SpeedDialListActivity;
 import com.android.dialer.SpeedDialUtils;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialerbind.analytics.AnalyticsFragment;
+import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
@@ -102,6 +104,8 @@ public class DialpadFragment extends AnalyticsFragment
         PopupMenu.OnMenuItemClickListener,
         DialpadKeyButton.OnPressedListener {
     private static final String TAG = DialpadFragment.class.getSimpleName();
+
+    private Context mContext;
 
     /**
      * This interface allows the DialpadFragment to tell its hosting Activity when and when not
@@ -903,6 +907,27 @@ public class DialpadFragment extends AnalyticsFragment
                 final MenuItem sendMessage = menu.findItem(R.id.menu_send_message);
                 sendMessage.setVisible(mSmsPackageComponentName != null);
 
+                final MenuItem ipCallBySlot1 = menu.findItem(R.id.menu_ip_call_by_slot1);
+                final MenuItem ipCallBySlot2 = menu.findItem(R.id.menu_ip_call_by_slot2);
+                if (MoreContactUtils.isMultiSimEnable(mContext, PhoneConstants.SUB1)) {
+                    String sub1Name = MoreContactUtils.getMultiSimAliasesName(
+                            mContext, PhoneConstants.SUB1);
+                    ipCallBySlot1.setTitle(mContext.getString(
+                            com.android.contacts.common.R.string.ip_call_by_slot, sub1Name));
+                    ipCallBySlot1.setVisible(true);
+                } else {
+                    ipCallBySlot1.setVisible(false);
+                }
+                if (MoreContactUtils.isMultiSimEnable(mContext, PhoneConstants.SUB2)) {
+                    String sub2Name = MoreContactUtils.getMultiSimAliasesName(
+                            mContext, PhoneConstants.SUB2);
+                    ipCallBySlot2.setTitle(mContext.getString(
+                            com.android.contacts.common.R.string.ip_call_by_slot, sub2Name));
+                    ipCallBySlot2.setVisible(true);
+                } else {
+                    ipCallBySlot2.setVisible(false);
+                }
+
                 boolean enable = !isDigitsEmpty();
                 for (int i = 0; i < menu.size(); i++) {
                     menu.getItem(i).setEnabled(enable);
@@ -1101,6 +1126,35 @@ public class DialpadFragment extends AnalyticsFragment
             }
         }
         return false;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mContext = activity;
+    }
+
+    private void ipCallBySlot(int subscription) {
+        String prefix = MoreContactUtils.getIPCallPrefix(mContext, subscription);
+        if (!TextUtils.isEmpty(prefix)) {
+            ComponentName serviceName =
+                    new ComponentName("com.android.phone",
+                    "com.android.services.telephony.TelephonyConnectionService");
+            PhoneAccountHandle account = new PhoneAccountHandle(serviceName,
+                    String.valueOf(subscription));
+            Intent callIntent = new Intent(CallUtil.getCallIntent(
+                    prefix + "" + getValidDialNumber(), account));
+            startActivity(callIntent);
+        } else {
+            MoreContactUtils.showNoIPNumberDialog(mContext, subscription);
+        }
+    }
+
+    private String getValidDialNumber() {
+        if (mDigits != null)
+            return mDigits.getText().toString();
+        else
+            return "";
     }
 
     /**
@@ -1597,6 +1651,12 @@ public class DialpadFragment extends AnalyticsFragment
                 DialerUtils.startActivityWithErrorToast(getActivity(), smsIntent);
                 return true;
             }
+            case R.id.menu_ip_call_by_slot1:
+                ipCallBySlot(PhoneConstants.SUB1);
+                return true;
+            case R.id.menu_ip_call_by_slot2:
+                ipCallBySlot(PhoneConstants.SUB2);
+                return true;
             default:
                 return false;
         }
