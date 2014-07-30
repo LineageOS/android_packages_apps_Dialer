@@ -14,6 +14,7 @@
 
 package com.android.dialer.calllog;
 
+import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -22,6 +23,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.PhoneLookup;
+import android.provider.ContactsContract.RawContacts;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
@@ -152,6 +154,7 @@ public class ContactInfoHelper {
         final ContactInfo info;
         Cursor phonesCursor =
                 mContext.getContentResolver().query(uri, PhoneQuery._PROJECTION, null, null, null);
+        long id = -1;
 
         if (phonesCursor != null) {
             try {
@@ -170,8 +173,22 @@ public class ContactInfoHelper {
                     info.photoUri =
                             UriUtils.parseUriOrNull(phonesCursor.getString(PhoneQuery.PHOTO_URI));
                     info.formattedNumber = null;
+                    id = contactId;
                 } else {
                     info = ContactInfo.EMPTY;
+                }
+                if (id != -1) {
+                    Uri contactUri = ContentUris.withAppendedId(
+                            Contacts.CONTENT_URI, id);
+                    Cursor cursor = mContext.getContentResolver().query(
+                            contactUri,
+                            new String[] { RawContacts.ACCOUNT_TYPE, RawContacts.ACCOUNT_NAME },
+                            null, null, null);
+                    if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
+                        info.accountType = cursor.getString(0);
+                        info.accountName = cursor.getString(1);
+                        cursor.close();
+                    }
                 }
             } finally {
                 phonesCursor.close();
