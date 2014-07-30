@@ -59,7 +59,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
     public static synchronized ContactInfoCache getInstance(Context mContext) {
         if (sCache == null) {
-            sCache = new ContactInfoCache(mContext);
+            sCache = new ContactInfoCache(mContext.getApplicationContext());
         }
         return sCache;
     }

@@ -41,6 +41,9 @@ import com.android.incallui.InCallPresenter.InCallEventListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
+
+import java.lang.ref.WeakReference;
+
 import com.google.common.base.Preconditions;
 
 /**
@@ -62,6 +65,33 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private CallTimer mCallTimer;
     private Context mContext;
     private TelecommManager mTelecommManager;
+
+    public static class ContactLookupCallback implements ContactInfoCacheCallback {
+        private final WeakReference<CallCardPresenter> mCallCardPresenter;
+        private final boolean mIsPrimary;
+
+        public ContactLookupCallback(CallCardPresenter callCardPresenter, boolean isPrimary) {
+            mCallCardPresenter = new WeakReference<CallCardPresenter>(callCardPresenter);
+            mIsPrimary = isPrimary;
+        }
+
+        @Override
+        public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
+            CallCardPresenter presenter = mCallCardPresenter.get();
+            if (presenter != null) {
+                presenter.onContactInfoComplete(callId, entry, mIsPrimary);
+            }
+        }
+
+        @Override
+        public void onImageLoadComplete(String callId, ContactCacheEntry entry) {
+            CallCardPresenter presenter = mCallCardPresenter.get();
+            if (presenter != null) {
+                presenter.onImageLoadComplete(callId, entry);
+            }
+        }
+
+    }
 
     public CallCardPresenter() {
         // create the call timer
@@ -347,30 +377,28 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             boolean isIncoming) {
         final ContactInfoCache cache = ContactInfoCache.getInstance(mContext);
 
-        cache.findInfo(call, isIncoming, new ContactInfoCacheCallback() {
-                @Override
-                public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
-                    updateContactEntry(entry, isPrimary, false);
-                    if (entry.name != null) {
-                        Log.d(TAG, "Contact found: " + entry);
-                    }
-                    if (entry.contactUri != null) {
-                        CallerInfoUtils.sendViewNotification(mContext, entry.contactUri);
-                    }
-                }
+        cache.findInfo(call, isIncoming, new ContactLookupCallback(this, isPrimary));
+    }
 
-                @Override
-                public void onImageLoadComplete(String callId, ContactCacheEntry entry) {
-                    if (getUi() == null) {
-                        return;
-                    }
-                    if (entry.photo != null) {
-                        if (mPrimary != null && callId.equals(mPrimary.getId())) {
-                            getUi().setPrimaryImage(entry.photo);
-                        }
-                    }
-                }
-            });
+    private void onContactInfoComplete(String callId, ContactCacheEntry entry, boolean isPrimary) {
+        updateContactEntry(entry, isPrimary, false);
+        if (entry.name != null) {
+            Log.d(TAG, "Contact found: " + entry);
+        }
+        if (entry.contactUri != null) {
+            CallerInfoUtils.sendViewNotification(mContext, entry.contactUri);
+        }
+    }
+
+    private void onImageLoadComplete(String callId, ContactCacheEntry entry) {
+        if (getUi() == null) {
+            return;
+        }
+        if (entry.photo != null) {
+            if (mPrimary != null && callId.equals(mPrimary.getId())) {
+                getUi().setPrimaryImage(entry.photo);
+            }
+        }
     }
 
     private static boolean isConference(Call call) {
