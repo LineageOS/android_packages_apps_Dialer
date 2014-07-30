@@ -105,4 +105,10 @@
     <dimen name="end_call_button_hide_offset">70dp</dimen>
 
     <dimen name="call_card_anim_translate_y_offset">50dp</dimen>
+
+    <!-- The smaller dimension of the video preview.  When in portrait orientation this is the
+         width of the preview.  When in landscape, this is the height. -->
+    <dimen name="video_preview_small_dimension">90dp</dimen>
+
+    <dimen name="video_preview_margin">20dp</dimen>
 </resources>
