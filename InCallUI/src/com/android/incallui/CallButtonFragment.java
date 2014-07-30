@@ -129,7 +129,6 @@ public class CallButtonFragment
 
         // set the buttons
         updateAudioButtons(getPresenter().getSupportedAudio());
-        getPresenter().initializeCameraManager(getActivity().getApplicationContext());
     }
 
     @Override

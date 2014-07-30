@@ -445,6 +445,19 @@ public class CallList implements InCallPhoneListener {
     }
 
     /**
+     * Notifies all video calls of a change in device orientation.
+     *
+     * @param rotation The new rotation angle (in degrees).
+     */
+    public void notifyCallsOfDeviceRotation(int rotation) {
+        for (Call call : mCallById.values()) {
+            if (call.getVideoCall() != null) {
+                call.getVideoCall().setDeviceOrientation(rotation);
+            }
+        }
+    }
+
+    /**
      * Handles the timeout for destroying disconnected calls.
      */
     private Handler mHandler = new Handler() {

@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.telephony.DisconnectCause;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.KeyEvent;
@@ -77,6 +78,12 @@ public class InCallActivity extends Activity {
         }
     };
 
+    /**
+     * Stores the current orientation of the activity.  Used to determine if a change in orientation
+     * has occurred.
+     */
+    private int mCurrentOrientation;
+
     @Override
     protected void onCreate(Bundle icicle) {
         Log.d(this, "onCreate()...  this = " + this);
@@ -103,6 +110,7 @@ public class InCallActivity extends Activity {
 
         internalResolveIntent(getIntent());
 
+        mCurrentOrientation = getResources().getConfiguration().orientation;
         mIsLandscape = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
         mSlideIn = AnimationUtils.loadAnimation(this,
@@ -361,10 +369,25 @@ public class InCallActivity extends Activity {
     @Override
     public void onConfigurationChanged(Configuration config) {
         InCallPresenter.getInstance().getProximitySensor().onConfigurationChanged(config);
+        Log.d(this, "onConfigurationChanged "+config.orientation);
+
+        // Check to see if the orientation changed to prevent triggering orientation change events
+        // for other configuration changes.
+        if (config.orientation != mCurrentOrientation) {
+            mCurrentOrientation = config.orientation;
+            InCallPresenter.getInstance().onDeviceRotationChange(
+                    getWindowManager().getDefaultDisplay().getRotation());
+            InCallPresenter.getInstance().onDeviceOrientationChange(mCurrentOrientation);
+        }
+        super.onConfigurationChanged(config);
     }
 
     public CallButtonFragment getCallButtonFragment() {
         return mCallButtonFragment;
+    }
+
+    public CallCardFragment getCallCardFragment() {
+        return mCallCardFragment;
     }
 
     private void internalResolveIntent(Intent intent) {

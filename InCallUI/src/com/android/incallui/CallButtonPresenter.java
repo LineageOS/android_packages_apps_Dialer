@@ -16,10 +16,6 @@
 
 package com.android.incallui;
 
-import android.content.Context;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CameraManager;
 import android.telecomm.CallCapabilities;
 import android.telecomm.InCallService.VideoCall;
 import android.telecomm.VideoCallProfile;
@@ -45,16 +41,10 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private boolean mPreviousMuteState = false;
     private boolean mShowGenericMerge = false;
     private boolean mShowManageConference = false;
-    private boolean mUseFrontFacingCamera = true;
-
     private InCallState mPreviousState = null;
-    private CameraManager mCameraManager;
+    private InCallCameraManager mInCallCameraManager;
 
     public CallButtonPresenter() {
-    }
-
-    public void initializeCameraManager(Context context) {
-        mCameraManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
     }
 
     @Override
@@ -66,6 +56,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // register for call state changes last
         InCallPresenter.getInstance().addListener(this);
         InCallPresenter.getInstance().addIncomingCallListener(this);
+        mInCallCameraManager = InCallPresenter.getInstance().getInCallCameraManager();
     }
 
     @Override
@@ -75,6 +66,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         InCallPresenter.getInstance().removeListener(this);
         AudioModeProvider.getInstance().removeListener(this);
         InCallPresenter.getInstance().removeIncomingCallListener(this);
+        mInCallCameraManager = null;
     }
 
     @Override
@@ -250,14 +242,14 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
      *     false if we should switch to using the back-facing camera.
      */
     public void switchCameraClicked(boolean useFrontFacingCamera) {
-        mUseFrontFacingCamera = useFrontFacingCamera;
+        mInCallCameraManager.setUseFrontFacingCamera(useFrontFacingCamera);
 
         VideoCall videoCall = mCall.getVideoCall();
         if (videoCall == null) {
             return;
         }
 
-        String cameraId = getCameraId();
+        String cameraId = mInCallCameraManager.getActiveCameraId();
         if (cameraId != null) {
             videoCall.setCamera(cameraId);
         }
@@ -281,7 +273,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                     mCall.getVideoState() | VideoCallProfile.VideoState.PAUSED);
             videoCall.sendSessionModifyRequest(videoCallProfile);
         } else {
-            videoCall.setCamera(getCameraId());
+            videoCall.setCamera(mInCallCameraManager.getActiveCameraId());
             VideoCallProfile videoCallProfile = new VideoCallProfile(
                     mCall.getVideoState() & ~VideoCallProfile.VideoState.PAUSED);
             videoCall.sendSessionModifyRequest(videoCallProfile);
@@ -432,39 +424,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         } else {
             getUi().hideExtraRow();
         }
-    }
-
-    private String getCameraId() {
-        String[] cameraIds = {};
-        String cameraId = null;
-        int targetCharacteristic = mUseFrontFacingCamera
-                ? CameraCharacteristics.LENS_FACING_FRONT : CameraCharacteristics.LENS_FACING_BACK;
-
-        try {
-            cameraIds = mCameraManager.getCameraIdList();
-        } catch (CameraAccessException e) {
-            // Camera disabled by device policy.
-        }
-
-        for (int i = 0; i < cameraIds.length; i++) {
-            CameraCharacteristics c = null;
-            try {
-                c = mCameraManager.getCameraCharacteristics(cameraIds[i]);
-            } catch (IllegalArgumentException e) {
-                // Device Id is unknown.
-            } catch (CameraAccessException e) {
-                // Camera disabled by device policy.
-            }
-            if (c != null) {
-                int facingCharacteristic = c.get(CameraCharacteristics.LENS_FACING);
-                if (facingCharacteristic == targetCharacteristic) {
-                    cameraId = cameraIds[i];
-                    break;
-                }
-            }
-        }
-
-        return cameraId;
     }
 
     public void refreshMuteState() {
