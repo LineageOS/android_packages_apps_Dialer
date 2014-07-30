@@ -76,8 +76,10 @@ import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.util.DialerUtils;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
+import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
+
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
@@ -169,6 +171,7 @@ public class DialpadFragment extends Fragment
     /** Remembers if we need to clear digits field when the screen is completely gone. */
     private boolean mClearDigitsOnStop;
 
+    private View mOverflowMenuButton;
     private PopupMenu mOverflowPopupMenu;
     private View mDelete;
     private ToneGenerator mToneGenerator;
@@ -285,6 +288,9 @@ public class DialpadFragment extends Fragment
             final Activity activity = getActivity();
             if (activity != null) {
                 activity.invalidateOptionsMenu();
+
+                boolean transitionIn = mWasEmptyBeforeTextChange? true : false;
+                updateMenuOverflowButton(transitionIn);
             }
         }
 
@@ -646,10 +652,11 @@ public class DialpadFragment extends Fragment
 
         mSmsPackageComponentName = DialerUtils.getSmsComponent(activity);
 
-        View overflowMenuButton = mDialpadView.getOverflowMenuButton();
-        mOverflowPopupMenu = buildOptionsMenu(overflowMenuButton);
-        overflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
-        overflowMenuButton.setOnClickListener(this);
+        mOverflowMenuButton = mDialpadView.getOverflowMenuButton();
+        mOverflowPopupMenu = buildOptionsMenu(mOverflowMenuButton);
+        mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
+        mOverflowMenuButton.setOnClickListener(this);
+        mOverflowMenuButton.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -1477,6 +1484,21 @@ public class DialpadFragment extends Fragment
         }
         final boolean digitsNotEmpty = !isDigitsEmpty();
         mDelete.setEnabled(digitsNotEmpty);
+    }
+
+    /**
+     * Handle transitions for the menu button depending on the state of the digits edit text.
+     * Transition out when going from digits to no digits and transition in when the first digit
+     * is pressed.
+     * @param transitionIn True if transitioning in, False if transitioning out
+     */
+    private void updateMenuOverflowButton(boolean transitionIn) {
+        mOverflowMenuButton = mDialpadView.getOverflowMenuButton();
+        if (transitionIn) {
+            AnimUtils.fadeIn(mOverflowMenuButton, AnimUtils.DEFAULT_DURATION);
+        } else {
+            AnimUtils.fadeOut(mOverflowMenuButton, AnimUtils.DEFAULT_DURATION);
+        }
     }
 
     /**
