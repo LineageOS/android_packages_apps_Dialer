@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceActivity.Header;
 import android.text.TextUtils;
@@ -21,10 +20,11 @@ import android.widget.TextView;
 import com.android.contacts.common.preference.DisplayOptionsPreferenceFragment;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
+import com.android.dialerbind.analytics.AnalyticsPreferenceActivity;
 
 import java.util.List;
 
-public class DialerSettingsActivity extends PreferenceActivity {
+public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
 
     protected SharedPreferences mPreferences;
     private HeaderAdapter mHeaderAdapter;
