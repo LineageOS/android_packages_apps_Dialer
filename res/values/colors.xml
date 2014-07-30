@@ -20,6 +20,8 @@
     <!-- Secondary text color in the Dialer -->
     <color name="dialtacts_secondary_text_color">#737373</color>
     <color name="dialer_accent_color">#eeff41</color>
+    <color name="dialer_red_highlight_color">#ff1744</color>
+    <color name="dialer_green_highlight_color">#00c853</color>
 
     <!-- Color for the setting text. -->
     <color name="setting_primary_color">#4d4c4c</color>
@@ -28,7 +30,7 @@
     <color name="setting_background_color">#ffffff</color>
 
     <!-- Color of the text describing an unconsumed missed call. -->
-    <color name="call_log_missed_call_highlight_color">#FF0000</color>
+    <color name="call_log_missed_call_highlight_color">@color/dialer_red_highlight_color</color>
 
     <!-- Color of the text describing an unconsumed voicemail. -->
     <color name="call_log_voicemail_highlight_color">#33b5e5</color>
@@ -93,7 +95,7 @@
     <color name="missed_call">#ff2e58</color>
 
     <!-- Color for answered or outgoing call icons. -->
-    <color name="answered_call">#2aad6f</color>
+    <color name="answered_call">@color/dialer_green_highlight_color</color>
 
     <!-- Color for icons in the actionbar -->
     <color name="actionbar_icon_color">#ffffff</color>
