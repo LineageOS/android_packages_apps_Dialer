@@ -115,16 +115,11 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"ඇමතුම නොයැවිණි, <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> හදිසි අංකයක් නොවේ!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"ඇමතුම නොයැවිණි, හදිසි අංකයක් අමතන්න!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"ඇමතීමට කිරීමට යතුරු පුවරුව භාවිතා කරන්න"</string>
-    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
-    <skip />
-    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
-    <skip />
-    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
-    <skip />
-    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
-    <skip />
-    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
-    <skip />
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"ඇමතුම නවතා සිටින්න"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"ඇමතුම නැවත පටන්ගන්න"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"ඇමතුමක් එක් කරන්න"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"ඇමතුම් එකට මුසු කරන්න"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"ඇමතුම් මාරු කරන්න"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"රඳවා සිටින්න"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"අවසානයි"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"ඇමතුම් පෑඩය"</string>
@@ -176,7 +171,7 @@
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> සඳහා උඩට සර්පණය කරන්න."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> සඳහා වමට සර්පණය කරන්න."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> සඳහා දකුණට සර්පණය කරන්න."</string>
-    <string name="description_direction_down" msgid="4317245625565166742">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> සඳහා පහලට සර්පණය කරන්න."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> සඳහා පහළට සර්පණය කරන්න."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"කම්පනය වීම"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"කම්පනය වීම"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"ශබ්දය"</string>
