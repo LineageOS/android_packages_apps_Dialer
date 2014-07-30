@@ -606,7 +606,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                 mResources.getString(R.string.description_contact_details, displayName));
 
         mContactPhotoManager.loadDirectoryPhoto(mQuickContactBadge, photoUri,
-                false /* darkTheme */, true /* isCircular */, request);
+                null, false /* darkTheme */, true /* isCircular */, request);
     }
 
     static final class ViewEntry {
