@@ -59,8 +59,7 @@ public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
         // If the contact is not demoted, this will not do anything. Otherwise, it will
         // restore it to an unpinned position. If it was a frequently called contact, it will
         // show up once again show up on the favorites screen.
-        context.getContentResolver().call(ContactsContract.AUTHORITY_URI,
-                PinnedPositions.UNDEMOTE_METHOD, String.valueOf(id), null);
+        PinnedPositions.undemote(context.getContentResolver(), id);
     }
 
     private long getContactIdFromPhoneNumber(Context context, String number) {
