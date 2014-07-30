@@ -281,7 +281,7 @@
                   android:configChanges="keyboardHidden"
                   android:exported="false"
                   android:process="com.android.incallui"
-                  android:screenOrientation="nosensor">
+                  android:screenOrientation="sensor" >
         </activity>
 
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
