@@ -115,16 +115,11 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"Oproep niet verzonden. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> is geen alarmnummer!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Oproep niet verzonden. Kies een alarmnummer!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Toetsen gebruiken om te bellen"</string>
-    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
-    <skip />
-    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
-    <skip />
-    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
-    <skip />
-    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
-    <skip />
-    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
-    <skip />
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Gesprek in de wacht zetten"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Gesprek hervatten"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Oproep toevoegen"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Oproepen samenvoegen"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Oproepen wisselen"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"In de wacht"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Beëindigen"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Toetsenblok"</string>
