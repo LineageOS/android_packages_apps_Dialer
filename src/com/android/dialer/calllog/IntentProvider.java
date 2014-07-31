@@ -37,6 +37,10 @@ public abstract class IntentProvider {
 
     public abstract Intent getIntent(Context context);
 
+    public static IntentProvider getReturnCallIntentProvider(final String number) {
+        return getReturnCallIntentProvider(number, null);
+    }
+
     public static IntentProvider getReturnCallIntentProvider(final String number,
             final PhoneAccountHandle accountHandle) {
         return new IntentProvider() {
@@ -45,6 +49,10 @@ public abstract class IntentProvider {
                 return CallUtil.getCallIntent(number, accountHandle);
             }
         };
+    }
+
+    public static IntentProvider getReturnVideoCallIntentProvider(final String number) {
+        return getReturnVideoCallIntentProvider(number, null);
     }
 
     public static IntentProvider getReturnVideoCallIntentProvider(final String number,
