@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"пошук"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"дзвон."</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"номер для набору"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Почати або зупинити відтворення"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Увімкнути або вимкнути гучний зв’язок"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Шукати місце відтворення"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Зменшити швидкість відтворення"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Збільшити швидкість відтворення"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Історія викликів"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Інші варіанти"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"цифрова клавіатура"</string>
@@ -127,7 +122,7 @@
     <string name="description_send_text_message" msgid="7803126439934046891">"Надіслати текстове повідомлення: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Непрослухана голосова пошта"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Розпочати голосовий пошук"</string>
-    <string name="menu_callNumber" msgid="997146291983360266">"Телефонувати <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="menu_callNumber" msgid="997146291983360266">"Подзвонити на <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Невідомий"</string>
     <string name="voicemail" msgid="3851469869202611441">"Голос. пошта"</string>
     <string name="private_num" msgid="6374339738119166953">"Приватний номер"</string>
@@ -178,7 +173,7 @@
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Пропущений дзвінок: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"Прийнятий дзвінок: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"Дзвінок: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_call_back_action" msgid="3012837380108884260">"Телефонувати: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_call_back_action" msgid="3012837380108884260">"Передзвонити на <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_video_call_action" msgid="4303952636480252389">"Відеодзвінок: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Слухати голосову пошту: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>: деталі дзвінків"</string>

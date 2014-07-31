@@ -78,23 +78,18 @@
     <string name="description_search_button" msgid="3660807558587384889">"搜索"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"拨打"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"要拨打的号码"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"开始或停止播放"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"打开或关闭扬声器"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"拖动到播放位置"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"减慢播放速度"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"加快播放速度"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"通话记录"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"更多选项"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"拨号键盘"</string>
     <string name="menu_copy" msgid="6108677035381940698">"复制"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"仅显示外拨电话"</string>
-    <string name="menu_show_incoming_only" msgid="7534206815238877417">"仅显示来电"</string>
-    <string name="menu_show_missed_only" msgid="154473166059743996">"仅显示未接来电"</string>
+    <string name="menu_show_incoming_only" msgid="7534206815238877417">"只显示来电"</string>
+    <string name="menu_show_missed_only" msgid="154473166059743996">"只显示未接来电"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"只显示语音邮件"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"显示所有通话"</string>
     <string name="add_contact" msgid="4579643070374941999">"添加到通讯录"</string>

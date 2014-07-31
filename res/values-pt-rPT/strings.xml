@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"pesquisar"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"marcar"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"número a marcar"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Reproduzir ou interromper a reprodução"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Ligar ou desligar o altifalante"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Procurar a posição da reprodução"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Diminuir a velocidade de reprodução"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Aumentar a velocidade de reprodução"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Histórico de Chamadas"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Mais opções"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"teclado"</string>
@@ -152,7 +147,7 @@
     <string name="recentVoicemails_empty" msgid="4905583746647459963">"Não existem mensagens de correio de voz recentes."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostrar apenas os favoritos"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Histórico"</string>
-    <string name="call_log_all_title" msgid="3566738938889333307">"Todos"</string>
+    <string name="call_log_all_title" msgid="3566738938889333307">"Todas"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Não atendidas"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Corr. Voz"</string>
     <string name="tab_speed_dial" msgid="7807567599021643864">"Marcação rápida"</string>

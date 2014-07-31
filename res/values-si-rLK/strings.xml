@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"සෙවීම"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"අමතන්න"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"ඇමතීමට අංකය"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Playback ධාවනය කරන්න හෝ නවත්වන්න"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"ස්පීකර්ෆෝන් ක්‍රියා කරන්න හෝ නොකරන්න"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Playback ස්ථානය සොයාබලන්න"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Playback අනුපාතය අඩුවේ"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Playback අනුපාතය වැඩිවේ"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"ඇමතුම් ඉතිහාසය"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"තවත් විකල්ප"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"ඩයල් පෑඩය"</string>
@@ -183,7 +178,7 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> වෙතින් හඬ තැපෑලට සවන් දෙන්න"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> සඳහා ඇමතුම් විස්තර"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"ඇමතුම් ලෝග ඇතුළත් කිරීම මකන ලදි."</string>
-    <string name="toast_caller_id_reported" msgid="1127087402649645557">"Contact reported."</string>
+    <string name="toast_caller_id_reported" msgid="1127087402649645557">"සම්බන්ධතා වාර්තා කරන ලදි."</string>
     <string name="call_log_action_report" msgid="561229827189128879">"වාර්තාව"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"අද"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"ඊයේ"</string>

@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"搜尋"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"撥號"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"致電號碼"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"播放或停止播放"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"開啟或關閉揚聲器"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"指定播放位置"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"減慢播放速度"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"加快播放速度"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"通話記錄"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"更多選項"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"撥號鍵盤"</string>

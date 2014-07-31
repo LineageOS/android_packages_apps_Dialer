@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"iskanje"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"pokliči"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"številka, ki bo poklicana"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Začetek ali konec predvajanja"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Vklop ali izklop zvočnika"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Iskanje položaja predvajanja"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Zmanjšanje hitrosti predvajanja"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Povečanje hitrosti predvajanja"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Zgodovina klicev"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Več možnosti"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"številčnica"</string>
@@ -152,8 +147,8 @@
     <string name="recentVoicemails_empty" msgid="4905583746647459963">"Nimate nedavnih sporočil v odzivniku."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Pokaži samo priljubljene"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Zgodovina"</string>
-    <string name="call_log_all_title" msgid="3566738938889333307">"Vsa"</string>
-    <string name="call_log_missed_title" msgid="4541142293870638971">"Neodgovorjena"</string>
+    <string name="call_log_all_title" msgid="3566738938889333307">"Vsi"</string>
+    <string name="call_log_missed_title" msgid="4541142293870638971">"Neodgovorjeni"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Odzivnik"</string>
     <string name="tab_speed_dial" msgid="7807567599021643864">"Hitro izbiranje"</string>
     <string name="tab_recents" msgid="929949073851377206">"Nedavni"</string>

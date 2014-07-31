@@ -22,7 +22,7 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefone"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Chamadas"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Enviar SMS/MMS"</string>
-    <string name="recentCalls_callNumber" msgid="1756372533999226126">"Chamar <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="recentCalls_callNumber" msgid="1756372533999226126">"Ligar para <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Editar número antes da chamada"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Adicionar aos contatos"</string>
     <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Remover do registro de chamadas"</string>
@@ -53,7 +53,7 @@
     <string name="voicemail_status_configure_voicemail" msgid="3738537770636895689">"Configure seu correio de voz."</string>
     <string name="voicemail_status_audio_not_available" msgid="3369618334553341626">"Áudio não disponível."</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Configurar"</string>
-    <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Chamar correio voz"</string>
+    <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Ligar p/ correio voz"</string>
     <string name="voicemail_speed_slowest" msgid="1733460666177707312">"Velocidade mais lenta"</string>
     <string name="voicemail_speed_slower" msgid="1508601287347216244">"Baixa velocidade"</string>
     <string name="voicemail_speed_normal" msgid="9033988544627228892">"Velocidade normal"</string>
@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"pesquisar"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"discar"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"número para discagem"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Iniciar ou interromper a reprodução"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Ligar ou desligar o vivavoz"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Procurar posição de reprodução"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Reduzir a taxa de reprodução"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Aumentar a taxa de reprodução"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Histórico de chamadas"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Mais opções"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"teclado numérico"</string>
@@ -109,8 +104,8 @@
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Usar teclado multifrequencial"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Retornar para a chamada em espera"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Ad. cham."</string>
-    <string name="type_incoming" msgid="6502076603836088532">"Recebendo chamada"</string>
-    <string name="type_outgoing" msgid="343108709599392641">"Chamada enviada"</string>
+    <string name="type_incoming" msgid="6502076603836088532">"Chamada recebida"</string>
+    <string name="type_outgoing" msgid="343108709599392641">"Chamada efetuada"</string>
     <string name="type_missed" msgid="2720502601640509542">"Chamada perdida"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Vídeo chamada recebida"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Vídeo chamada realizada"</string>
@@ -137,7 +132,7 @@
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Chamada não realizada"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Para configurar o correio de voz, vá para Menu &gt; Configurações."</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Para chamar o correio de voz, primeiro desative o modo avião."</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Para ligar para o correio de voz, primeiro desative o modo avião."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Carregando…"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
@@ -152,7 +147,7 @@
     <string name="recentVoicemails_empty" msgid="4905583746647459963">"Você não tem correios de voz recentes."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostrar somente favoritos"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Histórico"</string>
-    <string name="call_log_all_title" msgid="3566738938889333307">"Tudo"</string>
+    <string name="call_log_all_title" msgid="3566738938889333307">"Todas"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Perdidas"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Correio de voz"</string>
     <string name="tab_speed_dial" msgid="7807567599021643864">"Discagem rápida"</string>

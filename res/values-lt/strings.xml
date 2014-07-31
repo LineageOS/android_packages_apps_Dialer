@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"ieškoti"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"rinkti numerį"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"renkamas numeris"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Paleisti arba sustabdyti atkūrimą"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Įjungti arba išjungti garsiakalbį"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Ieškoti atkūrimo pozicijos"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Sumažinti atkūrimo spartą"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Padidinti atkūrimo spartą"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Skambučių istorija"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Daugiau parinkčių"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"skambinimo skydelis"</string>
@@ -102,15 +97,15 @@
     <string name="add_wait" msgid="3360818652790319634">"Pridėti laukimą"</string>
     <string name="menu_select_account" msgid="5576598753317289565">"Pasirinkti paskyrą"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Nustatymai"</string>
-    <string name="menu_newContact" msgid="1209922412763274638">"Naujas adresatas"</string>
+    <string name="menu_newContact" msgid="1209922412763274638">"Naujas kontaktas"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Visi kontaktai"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Išsami skambučio informacija"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"Nepavyko nuskaityti išsamios skambučio, dėl kurio buvo pateikta užklausa, informacijos."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Naudoti jutiklinę klaviatūrą"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Grįžti prie vykdomo skambučio"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Pridėti skambutį"</string>
-    <string name="type_incoming" msgid="6502076603836088532">"Gaunamas skambutis"</string>
-    <string name="type_outgoing" msgid="343108709599392641">"Išeinantis skambutis"</string>
+    <string name="type_incoming" msgid="6502076603836088532">"Gaunamasis skambutis"</string>
+    <string name="type_outgoing" msgid="343108709599392641">"Sunčiamasis skambutis"</string>
     <string name="type_missed" msgid="2720502601640509542">"Praleistas skambutis"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Gaunamasis vaizdo skambutis"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Siunčiamasis vaizdo skambutis"</string>
