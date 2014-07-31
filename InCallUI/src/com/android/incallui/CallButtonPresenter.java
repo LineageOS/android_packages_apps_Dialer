@@ -234,6 +234,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         VideoCallProfile videoCallProfile =
                 new VideoCallProfile(VideoCallProfile.VideoState.BIDIRECTIONAL);
         videoCall.sendSessionModifyRequest(videoCallProfile);
+
+        mCall.setSessionModificationState(Call.SessionModificationState.REQUEST_FAILED);
     }
 
     /**

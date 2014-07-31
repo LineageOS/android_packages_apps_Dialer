@@ -22,11 +22,13 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.telecomm.CallCapabilities;
 import android.telecomm.PhoneAccount;
 import android.telecomm.PhoneAccountHandle;
 import android.telecomm.StatusHints;
 import android.telecomm.TelecommManager;
+import android.telecomm.VideoCallProfile;
 import android.telephony.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
@@ -53,16 +55,19 @@ import com.google.common.base.Preconditions;
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         implements InCallStateListener, AudioModeListener, IncomingCallListener,
-        InCallDetailsListener, InCallEventListener {
+        InCallDetailsListener, InCallEventListener,
+        InCallVideoCallListenerNotifier.SessionModificationListener {
 
     private static final String TAG = CallCardPresenter.class.getSimpleName();
-    private static final long CALL_TIME_UPDATE_INTERVAL = 1000; // in milliseconds
+    private static final long CALL_TIME_UPDATE_INTERVAL_MS = 1000;
+    private static final long SESSION_MODIFICATION_RESET_DELAY_MS = 3000;
 
     private Call mPrimary;
     private Call mSecondary;
     private ContactCacheEntry mPrimaryContactInfo;
     private ContactCacheEntry mSecondaryContactInfo;
     private CallTimer mCallTimer;
+    private Handler mSessionModificationResetHandler;
     private Context mContext;
     private TelecommManager mTelecommManager;
 
@@ -101,6 +106,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 updateCallTime();
             }
         });
+        mSessionModificationResetHandler = new Handler();
     }
 
     public void init(Context context, Call call) {
@@ -135,11 +141,15 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         InCallPresenter.getInstance().addIncomingCallListener(this);
         InCallPresenter.getInstance().addDetailsListener(this);
         InCallPresenter.getInstance().addInCallEventListener(this);
+
+        InCallVideoCallListenerNotifier.getInstance().addSessionModificationListener(this);
     }
 
     @Override
     public void onUiUnready(CallCardUi ui) {
         super.onUiUnready(ui);
+
+        InCallVideoCallListenerNotifier.getInstance().removeSessionModificationListener(this);
 
         // stop getting call state changes
         InCallPresenter.getInstance().removeListener(this);
@@ -198,6 +208,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     mPrimary.getState() == Call.State.INCOMING);
             updatePrimaryDisplayInfo(mPrimaryContactInfo, isConference(mPrimary));
             maybeStartSearch(mPrimary, true);
+            mPrimary.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
         }
 
         if (mSecondary == null) {
@@ -210,12 +221,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     mSecondary.getState() == Call.State.INCOMING);
             updateSecondaryDisplayInfo(mSecondary.isConferenceCall());
             maybeStartSearch(mSecondary, false);
+            mSecondary.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
         }
 
-        // Start/Stop the call time update timer
+        // Start/stop timers.
         if (mPrimary != null && mPrimary.getState() == Call.State.ACTIVE) {
             Log.d(this, "Starting the calltime timer");
-            mCallTimer.start(CALL_TIME_UPDATE_INTERVAL);
+            mCallTimer.start(CALL_TIME_UPDATE_INTERVAL_MS);
         } else {
             Log.d(this, "Canceling the calltime timer");
             mCallTimer.cancel();
@@ -227,8 +239,14 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (mPrimary != null) {
             callState = mPrimary.getState();
 
-            getUi().setCallState(callState, mPrimary.getDisconnectCause(), getConnectionLabel(),
-                    getCallProviderIcon(mPrimary), getGatewayNumber());
+            getUi().setCallState(
+                    callState,
+                    mPrimary.getVideoState(),
+                    mPrimary.getSessionModificationState(),
+                    mPrimary.getDisconnectCause(),
+                    getConnectionLabel(),
+                    getCallProviderIcon(mPrimary),
+                    getGatewayNumber());
 
             String currentNumber = getNumberFromHandle(mPrimary.getHandle());
             if (PhoneNumberUtils.isEmergencyNumber(currentNumber)) {
@@ -236,7 +254,14 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 setCallbackNumber(callbackNumber, true);
             }
         } else {
-            getUi().setCallState(callState, DisconnectCause.NOT_VALID, null, null, null);
+            getUi().setCallState(
+                    callState,
+                    VideoCallProfile.VideoState.AUDIO_ONLY,
+                    Call.SessionModificationState.NO_REQUEST,
+                    DisconnectCause.NOT_VALID,
+                    null,
+                    null,
+                    null);
         }
 
         // Hide/show the contact photo based on the video state.
@@ -350,6 +375,42 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return;
         }
         TelecommAdapter.getInstance().phoneAccountClicked(mPrimary.getId());
+    }
+
+    @Override
+    public void onUpgradeToVideoRequest(Call call) {
+        // Implementing to satsify interface.
+    }
+
+    @Override
+    public void onUpgradeToVideoSuccess(Call call) {
+        if (mPrimary == null || !areCallsSame(mPrimary, call)) {
+            return;
+        }
+
+        mPrimary.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
+    }
+
+    @Override
+    public void onUpgradeToVideoFail(Call call) {
+        if (mPrimary == null || !areCallsSame(mPrimary, call)) {
+            return;
+        }
+
+        call.setSessionModificationState(Call.SessionModificationState.REQUEST_FAILED);
+
+        // Start handler to change state from REQUEST_FAILED to NO_REQUEST after an interval.
+        mSessionModificationResetHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mPrimary.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
+            }
+        }, SESSION_MODIFICATION_RESET_DELAY_MS);
+    }
+
+    @Override
+    public void onDowngradeToAudio(Call call) {
+        // Implementing to satsify interface.
     }
 
     private boolean areCallsSame(Call call1, Call call2) {
@@ -652,8 +713,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
                 String providerLabel, Drawable providerIcon, boolean isConference,
                 boolean isGeneric);
-        void setCallState(int state, int cause, String connectionLabel, Drawable connectionIcon,
-                String gatewayNumber);
+        void setCallState(int state, int videoState, int sessionModificationState, int cause,
+                String connectionLabel, Drawable connectionIcon, String gatewayNumber);
         void setPrimaryCallElapsedTime(boolean show, String duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Drawable image);
