@@ -43,6 +43,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
@@ -135,6 +136,9 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     private TextView mStatusMessageText;
     private TextView mStatusMessageAction;
     private TextView mVoicemailTranscription;
+    private LinearLayout mVoicemailHeader;
+
+    private Uri mVoicemailUri;
 
     /** Whether we should show "edit number before call" in the options menu. */
     private boolean mHasEditNumberBeforeCallOption;
@@ -239,10 +243,9 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
         mPhoneNumberHelper = new PhoneNumberDisplayHelper(mResources);
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
         mAsyncQueryHandler = new CallDetailActivityQueryHandler(this);
-        mStatusMessageView = findViewById(R.id.voicemail_status);
-        mStatusMessageText = (TextView) findViewById(R.id.voicemail_status_message);
-        mStatusMessageAction = (TextView) findViewById(R.id.voicemail_status_action);
-        mVoicemailTranscription = (TextView) findViewById(R.id.voicemail_transcription);
+
+        mVoicemailUri = getIntent().getParcelableExtra(EXTRA_VOICEMAIL_URI);
+
         mQuickContactBadge = (QuickContactBadge) findViewById(R.id.quick_contact_photo);
         mQuickContactBadge.setOverlay(null);
         mCallerName = (TextView) findViewById(R.id.caller_name);
@@ -253,6 +256,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
         mProximitySensorManager = new ProximitySensorManager(this, mProximitySensorListener);
         mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
         optionallyHandleVoicemail();
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
             closeSystemDialogs();
@@ -269,11 +273,25 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
      * Handle voicemail playback or hide voicemail ui.
      * <p>
      * If the Intent used to start this Activity contains the suitable extras, then start voicemail
-     * playback.  If it doesn't, then hide the voicemail ui.
+     * playback.  If it doesn't, then don't inflate the voicemail ui.
      */
     private void optionallyHandleVoicemail() {
-        View voicemailContainer = findViewById(R.id.voicemail_container);
+
         if (hasVoicemail()) {
+            LayoutInflater inflater =
+                    (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mVoicemailHeader =
+                    (LinearLayout) inflater.inflate(R.layout.call_details_voicemail_header, null);
+            View voicemailContainer = mVoicemailHeader.findViewById(R.id.voicemail_container);
+            mStatusMessageView = mVoicemailHeader.findViewById(R.id.voicemail_status);
+            mStatusMessageText =
+                    (TextView) mVoicemailHeader.findViewById(R.id.voicemail_status_message);
+            mStatusMessageAction =
+                    (TextView) mVoicemailHeader.findViewById(R.id.voicemail_status_action);
+            mVoicemailTranscription = (
+                    TextView) mVoicemailHeader.findViewById(R.id.voicemail_transcription);
+            ListView historyList = (ListView) findViewById(R.id.history);
+            historyList.addHeaderView(mVoicemailHeader);
             // Has voicemail: add the voicemail fragment.  Add suitable arguments to set the uri
             // to play and optionally start the playback.
             // Do a query to fetch the voicemail status messages.
@@ -285,7 +303,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
             if (playbackFragment == null) {
                 playbackFragment = new VoicemailPlaybackFragment();
                 Bundle fragmentArguments = new Bundle();
-                fragmentArguments.putParcelable(EXTRA_VOICEMAIL_URI, getVoicemailUri());
+                fragmentArguments.putParcelable(EXTRA_VOICEMAIL_URI, mVoicemailUri);
                 if (getIntent().getBooleanExtra(EXTRA_VOICEMAIL_START_PLAYBACK, false)) {
                     fragmentArguments.putBoolean(EXTRA_VOICEMAIL_START_PLAYBACK, true);
                 }
@@ -296,21 +314,13 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
             }
 
             voicemailContainer.setVisibility(View.VISIBLE);
-            mAsyncQueryHandler.startVoicemailStatusQuery(getVoicemailUri());
-            markVoicemailAsRead(getVoicemailUri());
-        } else {
-            // No voicemail uri: hide the status view.
-            mStatusMessageView.setVisibility(View.GONE);
-            voicemailContainer.setVisibility(View.GONE);
+            mAsyncQueryHandler.startVoicemailStatusQuery(mVoicemailUri);
+            markVoicemailAsRead(mVoicemailUri);
         }
     }
 
     private boolean hasVoicemail() {
-        return getVoicemailUri() != null;
-    }
-
-    private Uri getVoicemailUri() {
-        return getIntent().getParcelableExtra(EXTRA_VOICEMAIL_URI);
+        return mVoicemailUri != null;
     }
 
     private void markVoicemailAsRead(final Uri voicemailUri) {
@@ -480,9 +490,6 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                 if (hasVoicemail() && !TextUtils.isEmpty(firstDetails.transcription)) {
                     mVoicemailTranscription.setText(firstDetails.transcription);
                     mVoicemailTranscription.setVisibility(View.VISIBLE);
-                } else {
-                    mVoicemailTranscription.setText(null);
-                    mVoicemailTranscription.setVisibility(View.GONE);
                 }
 
                 loadContactPhotos(
@@ -720,12 +727,11 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     }
 
     public void onMenuTrashVoicemail(MenuItem menuItem) {
-        final Uri voicemailUri = getVoicemailUri();
         mAsyncTaskExecutor.submit(Tasks.DELETE_VOICEMAIL_AND_FINISH,
                 new AsyncTask<Void, Void, Void>() {
                     @Override
                     public Void doInBackground(Void... params) {
-                        getContentResolver().delete(voicemailUri, null, null);
+                        getContentResolver().delete(mVoicemailUri, null, null);
                         return null;
                     }
 
