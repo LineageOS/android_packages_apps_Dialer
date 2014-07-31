@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"శోధించు"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"డయల్ చేయి"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"డయల్ చేయాల్సిన నంబర్"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"ప్లేబ్యాక్‌ని ప్లే చేయి లేదా ఆపివేయి"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"స్పీకర్‌ఫోన్‌ను స్విచ్ ఆన్ లేదా స్విచ్ ఆఫ్ చేయి"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"ప్లేబ్యాక్ స్థానాన్ని కావాల్సిన చోటుకి జరపండి"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"ప్లేబ్యాక్ రేటుని తగ్గించు"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"ప్లేబ్యాక్ రేటుని పెంచు"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"కాల్ చరిత్ర"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"మరిన్ని ఎంపికలు"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"డయల్ ప్యాడ్"</string>

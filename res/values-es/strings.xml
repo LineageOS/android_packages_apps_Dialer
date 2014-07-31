@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"buscar"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"marcar"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"número que se va a marcar"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Iniciar o detener la reproducción"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Activar o desactivar el altavoz"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Buscar posición de reproducción"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Disminuir la velocidad de reproducción"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Aumentar la velocidad de reproducción"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Historial de llamadas"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Más opciones"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"teclado"</string>
@@ -134,7 +129,7 @@
     <string name="payphone" msgid="4864313342828942922">"Teléfono público"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Utilizar teclado para marcar"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Añadir llamada"</string>
-    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> min. y <xliff:g id="SECONDS">%s</xliff:g> seg."</string>
+    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> min y <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Llamada no enviada"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Para configurar el buzón de voz, toca la tecla de menú y, a continuación, toca Ajustes."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Para llamar al buzón de voz, debes desactivar el modo avión."</string>

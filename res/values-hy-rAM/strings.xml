@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"որոնել"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"համարարկել"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"համարհավաքման հեռախոսահամարը"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Միացնել կամ անջատել նվագարկումը"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Միացնել կամ անջատել բարձրախոսը"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Փնտրել նվագարկման դիրքը"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Իջեցնել նվագարկման վարկանիշը"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Բարձրացնել նվագարկման վարկանիշը"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Զանգերի պատմությունը"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Այլ ընտրանքներ"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"թվաշար"</string>
@@ -134,7 +129,7 @@
     <string name="payphone" msgid="4864313342828942922">"Վճարել հեռախոսը"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Օգտագործել ստեղնաշարը` համարհավաքելու համար"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Համարհավաքել՝ զանգելու համար"</string>
-    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> րոպ <xliff:g id="SECONDS">%s</xliff:g> վրկ"</string>
+    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g>:<xliff:g id="SECONDS">%s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Զանգը չի առաքվել"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Ձայնային փոստը կարգավորելու համար գնացեք Ցանկ &gt; Կարգավորումներ:"</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Ձայնային փոստին զանգելու համար նախ անջատեք թռիչքային ռեժիմը:"</string>

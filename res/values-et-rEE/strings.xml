@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"otsing"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"Helista"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"number valimiseks"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Taasesituse alustamine või peatamine"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Valjuhääldi sisse- või väljalülitamine"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Taasesituse positsiooni otsimine"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Taasesituse kiiruse vähendamine"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Taasesituse kiiruse suurendamine"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Kõneajalugu"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Rohkem valikuid"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"valimisklahvistik"</string>
@@ -127,7 +122,7 @@
     <string name="description_send_text_message" msgid="7803126439934046891">"Saada tekstsõnum kontaktile <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Kuulamata kõnepostisõnum"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Häälotsingu alustamine"</string>
-    <string name="menu_callNumber" msgid="997146291983360266">"Helistage: <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="menu_callNumber" msgid="997146291983360266">"Helista: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Tundmatu"</string>
     <string name="voicemail" msgid="3851469869202611441">"Kõnepost"</string>
     <string name="private_num" msgid="6374339738119166953">"Varjatud number"</string>

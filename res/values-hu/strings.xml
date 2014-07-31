@@ -78,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"keresés"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"tárcsázás"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"a tárcsázandó szám"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Lejátszás indítása vagy leállítása"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Kihangosító be- vagy kikapcsolása"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Lejátszási pozíció módosítása"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Lejátszás sebességének csökkentése"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Lejátszás sebességének növelése"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Hívási előzmények"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"További beállítások"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"tárcsázó"</string>
@@ -141,8 +136,8 @@
     <string name="contact_list_loading" msgid="5488620820563977329">"Betöltés..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Betöltés a SIM-kártyáról..."</string>
-    <string name="simContacts_title" msgid="27341688347689769">"Névjegyek a SIM-kártyán"</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Betöltés a SIM kártyáról..."</string>
+    <string name="simContacts_title" msgid="27341688347689769">"Névjegyek a SIM kártyán"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"A funkció használatához aktiválja újra a Személyek alkalmazást."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"A hangalapú keresés nem érhető el."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Nem lehet telefonhívást kezdeményezni, mert a Telefon alkalmazást letiltották."</string>
