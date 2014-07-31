@@ -675,7 +675,8 @@ public class CallLogAdapter extends GroupingListAdapter
         views.number = number;
         views.numberPresentation = numberPresentation;
         views.callType = callType;
-        views.mAccountHandle = accountHandle;
+        // NOTE: This is currently not being used, but can be used in future versions.
+        views.accountHandle = accountHandle;
         views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
         // Stash away the Ids of the calls so that we can support deleting a row in the call log.
         views.callIds = getCallIds(c, count);
@@ -693,8 +694,7 @@ public class CallLogAdapter extends GroupingListAdapter
             // Set return call intent, otherwise null.
             if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
                 // Sets the primary action to call the number.
-                views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number,
-                        accountHandle));
+                views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number));
             } else {
                 // Number is not callable, so hide button.
                 views.primaryActionView.setTag(null);
@@ -985,7 +985,7 @@ public class CallLogAdapter extends GroupingListAdapter
         if (canPlaceCallToNumber) {
             // Sets the primary action to call the number.
             views.callBackButtonView.setTag(
-                    IntentProvider.getReturnCallIntentProvider(views.number, views.mAccountHandle));
+                    IntentProvider.getReturnCallIntentProvider(views.number));
             views.callBackButtonView.setVisibility(View.VISIBLE);
             views.callBackButtonView.setOnClickListener(mActionListener);
         } else {
@@ -997,8 +997,7 @@ public class CallLogAdapter extends GroupingListAdapter
         // If one of the calls had video capabilities, show the video call button.
         if (canPlaceCallToNumber && views.phoneCallDetailsViews.callTypeIcons.isVideoShown()) {
             views.videoCallButtonView.setTag(
-                    IntentProvider.getReturnVideoCallIntentProvider(views.number,
-                            views.mAccountHandle));
+                    IntentProvider.getReturnVideoCallIntentProvider(views.number));
             views.videoCallButtonView.setVisibility(View.VISIBLE);
             views.videoCallButtonView.setOnClickListener(mActionListener);
         } else {
