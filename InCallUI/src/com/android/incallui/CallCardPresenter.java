@@ -35,7 +35,6 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
-import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
@@ -54,9 +53,8 @@ import com.google.common.base.Preconditions;
  * This class listens for changes to InCallState and passes it along to the fragment.
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
-        implements InCallStateListener, AudioModeListener, IncomingCallListener,
-        InCallDetailsListener, InCallEventListener,
-        InCallVideoCallListenerNotifier.SessionModificationListener {
+        implements InCallStateListener, IncomingCallListener, InCallDetailsListener,
+        InCallEventListener, InCallVideoCallListenerNotifier.SessionModificationListener {
 
     private static final String TAG = CallCardPresenter.class.getSimpleName();
     private static final long CALL_TIME_UPDATE_INTERVAL_MS = 1000;
@@ -129,8 +127,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     public void onUiReady(CallCardUi ui) {
         super.onUiReady(ui);
 
-        AudioModeProvider.getInstance().addListener(this);
-
         // Contact search may have completed before ui is ready.
         if (mPrimaryContactInfo != null) {
             updatePrimaryDisplayInfo(mPrimaryContactInfo, isConference(mPrimary));
@@ -156,8 +152,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         InCallPresenter.getInstance().removeIncomingCallListener(this);
         InCallPresenter.getInstance().removeDetailsListener(this);
         InCallPresenter.getInstance().removeInCallEventListener(this);
-
-        AudioModeProvider.getInstance().removeListener(this);
 
         mPrimary = null;
         mPrimaryContactInfo = null;
@@ -341,18 +335,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return;
         }
         getUi().setCallbackNumber(callbackNumber, isEmergencyCall);
-    }
-
-    @Override
-    public void onAudioMode(int mode) {
-    }
-
-    @Override
-    public void onSupportedAudioMode(int mask) {
-    }
-
-    @Override
-    public void onMute(boolean muted) {
     }
 
     public void updateCallTime() {
