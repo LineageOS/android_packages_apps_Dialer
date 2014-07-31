@@ -19,7 +19,6 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -49,6 +48,7 @@ import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialerbind.analytics.AnalyticsFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,7 +56,7 @@ import java.util.HashMap;
 /**
  * This fragment displays the user's favorite/frequent contacts in a grid.
  */
-public class SpeedDialFragment extends Fragment implements OnItemClickListener,
+public class SpeedDialFragment extends AnalyticsFragment implements OnItemClickListener,
         PhoneFavoritesTileAdapter.OnDataSetChangedForAnimationListener {
 
     /**
