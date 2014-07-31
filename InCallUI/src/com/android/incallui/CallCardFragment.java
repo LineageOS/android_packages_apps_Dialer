@@ -474,6 +474,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         Log.v(this, "DisconnectCause " + DisconnectCause.toString(cause));
         Log.v(this, "gateway " + connectionLabel + gatewayNumber);
 
+        if (TextUtils.equals(callStateLabel, mCallStateLabel.getText())) {
+            // Nothing to do if the labels are the same
+            return;
+        }
+
         // Update the call state label and icon.
         if (!TextUtils.isEmpty(callStateLabel)) {
             mCallStateLabel.setText(callStateLabel);
@@ -626,6 +631,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             case Call.State.ONHOLD:
                 callStateLabel = context.getString(R.string.card_title_on_hold);
                 break;
+            case Call.State.CONNECTING:
             case Call.State.DIALING:
                 if (isSpecialCall) {
                     callStateLabel = context.getString(R.string.calling_via_template, label);

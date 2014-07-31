@@ -204,6 +204,10 @@ public class CallList implements InCallPhoneListener {
         return getFirstCallWithState(Call.State.PRE_DIAL_WAIT);
     }
 
+    public Call getPendingOutgoingCall() {
+        return getFirstCallWithState(Call.State.CONNECTING);
+    }
+
     public Call getOutgoingCall() {
         Call call = getFirstCallWithState(Call.State.DIALING);
         if (call == null) {
@@ -251,6 +255,9 @@ public class CallList implements InCallPhoneListener {
 
     public Call getFirstCall() {
         Call result = getIncomingCall();
+        if (result == null) {
+            result = getPendingOutgoingCall();
+        }
         if (result == null) {
             result = getOutgoingCall();
         }

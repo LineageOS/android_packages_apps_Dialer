@@ -41,7 +41,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private boolean mPreviousMuteState = false;
     private boolean mShowGenericMerge = false;
     private boolean mShowManageConference = false;
-    private InCallState mPreviousState = null;
     private InCallCameraManager mInCallCameraManager;
 
     public CallButtonPresenter() {
@@ -70,12 +69,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     @Override
-    public void onStateChange(InCallState state, CallList callList) {
+    public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
         CallButtonUi ui = getUi();
 
-        if (state == InCallState.OUTGOING) {
+        if (newState == InCallState.OUTGOING) {
             mCall = callList.getOutgoingCall();
-        } else if (state == InCallState.INCALL) {
+        } else if (newState == InCallState.INCALL) {
             mCall = callList.getActiveOrBackgroundCall();
 
             // When connected to voice mail, automatically shows the dialpad.
@@ -83,12 +82,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             // OUTGOING.  We may want to do that once we start showing "Voice mail" label on
             // the dialpad too.)
             if (ui != null) {
-                if (mPreviousState == InCallState.OUTGOING && mCall != null
+                if (oldState == InCallState.OUTGOING && mCall != null
                         && PhoneNumberUtils.isVoiceMailNumber(mCall.getNumber())) {
                     ui.displayDialpad(true /* show */, true /* animate */);
                 }
             }
-        } else if (state == InCallState.INCOMING) {
+        } else if (newState == InCallState.INCOMING) {
             if (ui != null) {
                 ui.displayDialpad(false /* show */, true /* animate */);
             }
@@ -96,14 +95,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         } else {
             mCall = null;
         }
-        updateUi(state, mCall);
-
-        mPreviousState = state;
+        updateUi(newState, mCall);
     }
 
     @Override
-    public void onIncomingCall(InCallState state, Call call) {
-        onStateChange(state, CallList.getInstance());
+    public void onIncomingCall(InCallState oldState, InCallState newState, Call call) {
+        onStateChange(oldState, newState, CallList.getInstance());
     }
 
     @Override

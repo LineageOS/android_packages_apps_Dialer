@@ -277,30 +277,32 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @param call The call.
      */
     @Override
-    public void onIncomingCall(InCallPresenter.InCallState state, Call call) {
+    public void onIncomingCall(InCallPresenter.InCallState oldState,
+            InCallPresenter.InCallState newState, Call call) {
         // same logic should happen as with onStateChange()
-        onStateChange(state, CallList.getInstance());
+        onStateChange(oldState, newState, CallList.getInstance());
     }
 
     /**
      * Handles state changes (including incoming calls)
      *
-     * @param state The in call state.
+     * @param newState The in call state.
      * @param callList The call list.
      */
     @Override
-    public void onStateChange(InCallPresenter.InCallState state, CallList callList) {
-        if (state == InCallPresenter.InCallState.NO_CALLS) {
+    public void onStateChange(InCallPresenter.InCallState oldState,
+            InCallPresenter.InCallState newState, CallList callList) {
+        if (newState == InCallPresenter.InCallState.NO_CALLS) {
             exitVideoMode();
         }
 
         // Determine the primary active call).
         Call primary = null;
-        if (state == InCallPresenter.InCallState.INCOMING) {
+        if (newState == InCallPresenter.InCallState.INCOMING) {
             primary = callList.getIncomingCall();
-        } else if (state == InCallPresenter.InCallState.OUTGOING) {
+        } else if (newState == InCallPresenter.InCallState.OUTGOING) {
             primary = callList.getOutgoingCall();
-        } else if (state == InCallPresenter.InCallState.INCALL) {
+        } else if (newState == InCallPresenter.InCallState.INCALL) {
             primary = callList.getActiveCall();
         }
 
