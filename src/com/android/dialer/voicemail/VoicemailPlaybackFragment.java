@@ -20,7 +20,6 @@ import static com.android.dialer.CallDetailActivity.EXTRA_VOICEMAIL_START_PLAYBA
 import static com.android.dialer.CallDetailActivity.EXTRA_VOICEMAIL_URI;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +42,7 @@ import com.android.common.io.MoreCloseables;
 import com.android.dialer.ProximitySensorAware;
 import com.android.dialer.R;
 import com.android.dialer.util.AsyncTaskExecutors;
+import com.android.dialerbind.analytics.AnalyticsFragment;
 import com.android.ex.variablespeed.MediaPlayerProxy;
 import com.android.ex.variablespeed.VariableSpeed;
 import com.google.common.base.Preconditions;
@@ -66,7 +66,7 @@ import javax.annotation.concurrent.NotThreadSafe;
  * methods on this class are expected to come from the main ui thread.
  */
 @NotThreadSafe
-public class VoicemailPlaybackFragment extends Fragment {
+public class VoicemailPlaybackFragment extends AnalyticsFragment {
     private static final String TAG = "VoicemailPlayback";
     private static final int NUMBER_OF_THREADS_IN_POOL = 2;
     private static final String[] HAS_CONTENT_PROJECTION = new String[] {
