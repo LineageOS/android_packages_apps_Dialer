@@ -78,7 +78,7 @@
     <string name="description_search_button" msgid="3660807558587384889">"cari"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"dail"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"nombor untuk didail"</string>
-    <string name="description_playback_start_stop" msgid="5060732345522492292">"Main atau berhenti main balik"</string>
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Mainkan atau berhenti main balik"</string>
     <string name="description_playback_speakerphone" msgid="6008323900245707504">"Hidupkan atau matikan pembesar suara"</string>
     <string name="description_playback_seek" msgid="4509404274968530055">"Dapatkan kedudukan main balik"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"Kurangkan kadar main balik"</string>

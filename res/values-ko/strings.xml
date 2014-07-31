@@ -79,7 +79,7 @@
     <string name="description_dial_button" msgid="1274091017188142646">"전화걸기"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"전화를 걸 번호"</string>
     <string name="description_playback_start_stop" msgid="5060732345522492292">"재생 실행 또는 중지"</string>
-    <string name="description_playback_speakerphone" msgid="6008323900245707504">"스피커폰을 켜거나 끄기"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"스피커폰 켜고 끄기"</string>
     <string name="description_playback_seek" msgid="4509404274968530055">"재생 위치 찾기"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"재생 속도 낮추기"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"재생 속도 높이기"</string>

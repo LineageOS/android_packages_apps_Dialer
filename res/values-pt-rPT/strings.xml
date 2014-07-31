@@ -147,7 +147,7 @@
     <string name="recentVoicemails_empty" msgid="4905583746647459963">"Não existem mensagens de correio de voz recentes."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostrar apenas os favoritos"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Histórico"</string>
-    <string name="call_log_all_title" msgid="3566738938889333307">"Todos"</string>
+    <string name="call_log_all_title" msgid="3566738938889333307">"Todas"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Não atendidas"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Corr. Voz"</string>
     <string name="tab_speed_dial" msgid="7807567599021643864">"Marcação rápida"</string>
