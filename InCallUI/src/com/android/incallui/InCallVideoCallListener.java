@@ -49,27 +49,21 @@ public class InCallVideoCallListener extends VideoCall.Listener {
         int previousVideoState = mCall.getVideoState();
         int newVideoState = videoCallProfile.getVideoState();
 
-        boolean wasVideoState = isVideoStateSet(previousVideoState,
-                VideoCallProfile.VideoState.BIDIRECTIONAL);
-        boolean isVideoState = isVideoStateSet(newVideoState,
-                VideoCallProfile.VideoState.BIDIRECTIONAL);
+        boolean wasVideoCall = VideoCallProfile.VideoState.isBidirectional(previousVideoState);
+        boolean isVideoCall = VideoCallProfile.VideoState.isBidirectional(newVideoState);
 
-        boolean wasPaused = isVideoStateSet(previousVideoState, VideoCallProfile.VideoState.PAUSED);
-        boolean isPaused = isVideoStateSet(newVideoState, VideoCallProfile.VideoState.PAUSED);
+        boolean wasPaused = VideoCallProfile.VideoState.isPaused(previousVideoState);
+        boolean isPaused = VideoCallProfile.VideoState.isPaused(newVideoState);
 
         // Check for upgrades to video and downgrades to audio.
-        if (!wasVideoState && isVideoState) {
-            CallVideoClientNotifier.getInstance().upgradeToVideoRequest(mCall);
-        } else if (wasVideoState && !isVideoState) {
-            CallVideoClientNotifier.getInstance().downgradeToAudio(mCall);
+        if (!wasVideoCall && isVideoCall) {
+            InCallVideoCallListenerNotifier.getInstance().upgradeToVideoRequest(mCall);
+        } else if (wasVideoCall && !isVideoCall) {
+            InCallVideoCallListenerNotifier.getInstance().downgradeToAudio(mCall);
         }
 
-        // Check for pause/un-pause
-        if (!wasPaused && isPaused) {
-            CallVideoClientNotifier.getInstance().peerPausedStateChanged(mCall, true /* pause */);
-        } else {
-            CallVideoClientNotifier.getInstance().peerPausedStateChanged(mCall, false /* resume */);
-        }
+        boolean pause = !wasPaused && isPaused;
+        InCallVideoCallListenerNotifier.getInstance().peerPausedStateChanged(mCall, pause);
     }
 
     /**
@@ -83,8 +77,18 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      * @param responseProfile The actual profile changes made by the peer device.
      */
     @Override
-    public void onSessionModifyResponseReceived(int status, VideoCallProfile requestedProfile,
-            VideoCallProfile responseProfile) {
+    public void onSessionModifyResponseReceived(
+            int status, VideoCallProfile requestedProfile, VideoCallProfile responseProfile) {
+        boolean modifySucceeded =
+                requestedProfile.getVideoState() == responseProfile.getVideoState();
+        boolean isVideoCall =
+                VideoCallProfile.VideoState.isBidirectional(responseProfile.getVideoState());
+
+        if (modifySucceeded && isVideoCall) {
+            InCallVideoCallListenerNotifier.getInstance().upgradeToVideoSuccess(mCall);
+        } else if (!modifySucceeded || status != VideoCall.SESSION_MODIFY_REQUEST_SUCCESS) {
+            InCallVideoCallListenerNotifier.getInstance().upgradeToVideoFail(mCall);
+        }
     }
 
     /**
@@ -104,7 +108,7 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      */
     @Override
     public void onPeerDimensionsChanged(int width, int height) {
-        CallVideoClientNotifier.getInstance().peerDimensionsChanged(mCall, width, height);
+        InCallVideoCallListenerNotifier.getInstance().peerDimensionsChanged(mCall, width, height);
     }
 
     /**
@@ -125,18 +129,7 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      */
     @Override
     public void onCameraCapabilitiesChanged(CallCameraCapabilities callCameraCapabilities) {
-        CallVideoClientNotifier.getInstance().cameraDimensionsChanged(mCall,
-                callCameraCapabilities.getWidth(), callCameraCapabilities.getHeight());
-    }
-
-    /**
-     * Determines if a specified state is set in a videoState bit-mask.
-     *
-     * @param videoState The video state bit-mask.
-     * @param state The state to check.
-     * @return {@code True} if the state is set.
-     */
-    private boolean isVideoStateSet(int videoState, int state) {
-        return (videoState & state) == state;
+        InCallVideoCallListenerNotifier.getInstance().cameraDimensionsChanged(
+                mCall, callCameraCapabilities.getWidth(), callCameraCapabilities.getHeight());
     }
 }

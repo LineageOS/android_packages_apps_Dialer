@@ -17,9 +17,8 @@
 package com.android.incallui;
 
 import com.google.common.base.Preconditions;
-
-import com.android.incallui.CallVideoClientNotifier.SurfaceChangeListener;
-import com.android.incallui.CallVideoClientNotifier.VideoEventListener;
+import com.android.incallui.InCallVideoCallListenerNotifier.SurfaceChangeListener;
+import com.android.incallui.InCallVideoCallListenerNotifier.VideoEventListener;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallOrientationListener;
 import com.android.incallui.InCallPresenter.InCallStateListener;
@@ -166,8 +165,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallPresenter.getInstance().addOrientationListener(this);
 
         // Register for surface and video events from {@link InCallVideoProvider}s.
-        CallVideoClientNotifier.getInstance().addSurfaceChangeListener(this);
-        CallVideoClientNotifier.getInstance().addVideoEventListener(this);
+        InCallVideoCallListenerNotifier.getInstance().addSurfaceChangeListener(this);
+        InCallVideoCallListenerNotifier.getInstance().addVideoEventListener(this);
 
         mInCallCameraManager = InCallPresenter.getInstance().getInCallCameraManager();
         mIsVideoCall = false;
@@ -185,8 +184,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallPresenter.getInstance().removeListener(this);
         InCallPresenter.getInstance().removeIncomingCallListener(this);
         InCallPresenter.getInstance().removeOrientationListener(this);
-        CallVideoClientNotifier.getInstance().removeSurfaceChangeListener(this);
-        CallVideoClientNotifier.getInstance().removeVideoEventListener(this);
+        InCallVideoCallListenerNotifier.getInstance().removeSurfaceChangeListener(this);
+        InCallVideoCallListenerNotifier.getInstance().removeVideoEventListener(this);
 
         mInCallCameraManager = null;
     }

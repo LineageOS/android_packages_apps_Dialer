@@ -22,13 +22,14 @@ import com.google.common.collect.Sets;
 import java.util.Set;
 
 /**
- * Class used by {@link InCallVideoClient}s to notify interested parties of incoming events.
+ * Class used by {@link InCallService.VideoCallListener} to notify interested parties of incoming
+ * events.
  */
-public class CallVideoClientNotifier {
+public class InCallVideoCallListenerNotifier {
     /**
      * Singleton instance of this class.
      */
-    private static CallVideoClientNotifier sInstance = new CallVideoClientNotifier();
+    private static InCallVideoCallListenerNotifier sInstance = new InCallVideoCallListenerNotifier();
 
     private final Set<SessionModificationListener> mSessionModificationListeners =
             Sets.newHashSet();
@@ -38,14 +39,14 @@ public class CallVideoClientNotifier {
     /**
      * Static singleton accessor method.
      */
-    public static CallVideoClientNotifier getInstance() {
+    public static InCallVideoCallListenerNotifier getInstance() {
         return sInstance;
     }
 
     /**
      * Private constructor.  Instance should only be acquired through getInstance().
      */
-    private CallVideoClientNotifier() {
+    private InCallVideoCallListenerNotifier() {
     }
 
     /**
@@ -120,6 +121,28 @@ public class CallVideoClientNotifier {
     }
 
     /**
+     * Inform listeners of a successful response to a video request for a call.
+     *
+     * @param call The call.
+     */
+    public void upgradeToVideoSuccess(Call call) {
+        for (SessionModificationListener listener : mSessionModificationListeners) {
+            listener.onUpgradeToVideoSuccess(call);
+        }
+    }
+
+    /**
+     * Inform listeners of an unsuccessful response to a video request for a call.
+     *
+     * @param call The call.
+     */
+    public void upgradeToVideoFail(Call call) {
+        for (SessionModificationListener listener : mSessionModificationListeners) {
+            listener.onUpgradeToVideoFail(call);
+        }
+    }
+
+    /**
      * Inform listeners of a downgrade to audio.
      *
      * @param call The call.
@@ -179,6 +202,23 @@ public class CallVideoClientNotifier {
          * @param call The call the request was received for.
          */
         public void onUpgradeToVideoRequest(Call call);
+
+        /**
+         * Called when a request to a peer to upgrade an audio-only call to a video call is
+         * successful.
+         *
+         * @param call The call the request was successful for.
+         */
+        public void onUpgradeToVideoSuccess(Call call);
+
+        /**
+         * Called when a request to a peer to upgrade an audio-only call to a video call is
+         * NOT successful. This can be if the peer chooses rejects the the video call, or if the
+         * peer does not support video calling, or if there is some error in sending the request.
+         *
+         * @param call The call the request was successful for.
+         */
+        public void onUpgradeToVideoFail(Call call);
 
         /**
          * Called when a call has been downgraded to audio-only.
