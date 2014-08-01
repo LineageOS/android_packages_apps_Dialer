@@ -20,6 +20,24 @@
     <item quantity="one">%d сат</item>
     <item quantity="few">%d сата</item>
     <item quantity="many">%d сати</item>
-    <item quantity="other">%d сати</item>
+    <item quantity="other">%d сата</item>
+  </plurals>
+  <plurals name="minute">
+    <item quantity="one">%d минут</item>
+    <item quantity="few">%d минута</item>
+    <item quantity="many">%d минута</item>
+    <item quantity="other">%d минута</item>
+  </plurals>
+  <plurals name="second">
+    <item quantity="one">%d секунда</item>
+    <item quantity="few">%d секунде</item>
+    <item quantity="many">%d секунди</item>
+    <item quantity="other">%d секунде</item>
+  </plurals>
+  <plurals name="call">
+    <item quantity="one">%d позив</item>
+    <item quantity="few">%d позива</item>
+    <item quantity="many">%d позива</item>
+    <item quantity="other">%d позива</item>
   </plurals>
 </resources>
