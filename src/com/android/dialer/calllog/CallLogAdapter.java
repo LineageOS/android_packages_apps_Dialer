@@ -31,11 +31,15 @@ import android.provider.ContactsContract.PhoneLookup;
 import android.telecomm.PhoneAccountHandle;
 import android.telecomm.TelecommManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.ViewTreeObserver;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityRecord;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -283,30 +287,19 @@ public class CallLogAdapter extends GroupingListAdapter
         @Override
         public void onClick(View v) {
             final CallLogListItemView callLogItem = (CallLogListItemView) v.getParent().getParent();
-            final CallLogListItemViews views = (CallLogListItemViews) callLogItem.getTag();
+            handleRowExpanded(callLogItem, true /* animate */, false /* forceExpand */);
+        }
+    };
 
-            // Hide or show the actions view.
-            boolean expanded = toggleExpansion(views.rowId);
-
-            // Trigger loading of the viewstub and visual expand or collapse.
-            expandOrCollapseActions(callLogItem, expanded);
-
-            // Animate the expansion or collapse.
-            if (mCallItemExpandedListener != null) {
-                mCallItemExpandedListener.onItemExpanded(callLogItem);
-
-                // Animate the collapse of the previous item if it is still visible on screen.
-                if (mPreviouslyExpanded != NONE_EXPANDED) {
-                    CallLogListItemView previousItem = mCallItemExpandedListener.getViewForCallId(
-                            mPreviouslyExpanded);
-
-                    if (previousItem != null) {
-                        expandOrCollapseActions(previousItem, false);
-                        mCallItemExpandedListener.onItemExpanded(previousItem);
-                    }
-                    mPreviouslyExpanded = NONE_EXPANDED;
-                }
+    private AccessibilityDelegate mAccessibilityDelegate = new AccessibilityDelegate() {
+        @Override
+        public boolean onRequestSendAccessibilityEvent(ViewGroup host, View child,
+                AccessibilityEvent event) {
+            if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
+                handleRowExpanded((CallLogListItemView) host, false /* animate */,
+                        true /* forceExpand */);
             }
+            return super.onRequestSendAccessibilityEvent(host, child, event);
         }
     };
 
@@ -594,7 +587,8 @@ public class CallLogAdapter extends GroupingListAdapter
     @Override
     protected View newChildView(Context context, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
+        CallLogListItemView view =
+                (CallLogListItemView) inflater.inflate(R.layout.call_log_list_item, parent, false);
 
         // Get the views to bind to and cache them.
         CallLogListItemViews views = CallLogListItemViews.fromView(view);
@@ -634,6 +628,7 @@ public class CallLogAdapter extends GroupingListAdapter
      * @param count the number of entries in the current item, greater than 1 if it is a group
      */
     private void bindView(View view, Cursor c, int count) {
+        view.setAccessibilityDelegate(mAccessibilityDelegate);
         final CallLogListItemView callLogItemView = (CallLogListItemView) view;
         final CallLogListItemViews views = (CallLogListItemViews) view.getTag();
 
@@ -901,16 +896,6 @@ public class CallLogAdapter extends GroupingListAdapter
             views.callLogEntryView.setBackgroundColor(mExpandedBackgroundColor);
             views.callLogEntryView.setTranslationZ(mExpandedTranslationZ);
             callLogItem.setTranslationZ(mExpandedTranslationZ); // WAR
-
-            // Attempt to give accessibility focus to one of the action buttons.
-            // This ensures that a user realizes the expansion occurred.
-            // NOTE(tgunn): requestAccessibilityFocus returns true if the requested
-            // focus was successful.  The first successful focus will satisfy the OR
-            // block and block further attempts to set focus.
-            boolean focused = views.callBackButtonView.requestAccessibilityFocus() ||
-                    views.videoCallButtonView.requestAccessibilityFocus() ||
-                    views.voicemailButtonView.requestAccessibilityFocus() ||
-                    views.detailsButtonView.requestAccessibilityFocus();
         } else {
             // When recycling a view, it is possible the actionsView ViewStub was previously
             // inflated so we should hide it in this case.
@@ -936,7 +921,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
         ViewStub stub = (ViewStub)callLogItem.findViewById(R.id.call_log_entry_actions_stub);
         if (stub != null) {
-            views.actionsView = stub.inflate();
+            views.actionsView = (ViewGroup) stub.inflate();
         }
 
         if (views.callBackButtonView == null) {
@@ -1423,5 +1408,48 @@ public class CallLogAdapter extends GroupingListAdapter
     public void onBadDataReported(String number) {
         mContactInfoCache.expireAll();
         mReportedToast.show();
+    }
+
+    /**
+     * Manages the state changes for the UI interaction where a call log row is expanded.
+     *
+     * @param view The view that was tapped
+     * @param animate Whether or not to animate the expansion/collapse
+     * @param forceExpand Whether or not to force the call log row into an expanded state regardless
+     *        of its previous state
+     */
+    private void handleRowExpanded(CallLogListItemView view, boolean animate, boolean forceExpand) {
+        final CallLogListItemViews views = (CallLogListItemViews) view.getTag();
+
+        if (forceExpand && isExpanded(views.rowId)) {
+            return;
+        }
+
+        // Hide or show the actions view.
+        boolean expanded = toggleExpansion(views.rowId);
+
+        // Trigger loading of the viewstub and visual expand or collapse.
+        expandOrCollapseActions(view, expanded);
+
+        // Animate the expansion or collapse.
+        if (mCallItemExpandedListener != null) {
+            if (animate) {
+                mCallItemExpandedListener.onItemExpanded(view);
+            }
+
+            // Animate the collapse of the previous item if it is still visible on screen.
+            if (mPreviouslyExpanded != NONE_EXPANDED) {
+                CallLogListItemView previousItem = mCallItemExpandedListener.getViewForCallId(
+                        mPreviouslyExpanded);
+
+                if (previousItem != null) {
+                    expandOrCollapseActions(previousItem, false);
+                    if (animate) {
+                        mCallItemExpandedListener.onItemExpanded(previousItem);
+                    }
+                }
+                mPreviouslyExpanded = NONE_EXPANDED;
+            }
+        }
     }
 }
