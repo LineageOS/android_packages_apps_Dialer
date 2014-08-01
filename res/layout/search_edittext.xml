@@ -28,6 +28,7 @@
             android:layout_margin="@dimen/search_box_icon_margin"
             android:padding="@dimen/search_box_search_icon_padding"
             android:src="@drawable/ic_ab_search"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:importantForAccessibility="no"
             android:tint="@color/searchbox_icon_tint" />
 
