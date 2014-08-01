@@ -29,12 +29,14 @@ import android.content.res.Configuration;
 import android.telecomm.InCallService.VideoCall;
 import android.view.Surface;
 
+import com.android.services.telephony.common.AudioMode;
+
 import java.util.Objects;
 
 /**
  * Logic related to the {@link VideoCallFragment} and for managing changes to the video calling
  * surfaces based on other user interface events and incoming events from the
- * {@class CallVideoClient}.
+ * {@class VideoCallListener}.
  * <p>
  * When a call's video state changes to bi-directional video, the
  * {@link com.android.incallui.VideoCallPresenter} performs the following negotiation with the
@@ -164,7 +166,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallPresenter.getInstance().addIncomingCallListener(this);
         InCallPresenter.getInstance().addOrientationListener(this);
 
-        // Register for surface and video events from {@link InCallVideoProvider}s.
+        // Register for surface and video events from {@link InCallVideoCallListener}s.
         InCallVideoCallListenerNotifier.getInstance().addSurfaceChangeListener(this);
         InCallVideoCallListenerNotifier.getInstance().addVideoEventListener(this);
 
@@ -285,7 +287,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     @Override
     public void onStateChange(InCallPresenter.InCallState state, CallList callList) {
         if (state == InCallPresenter.InCallState.NO_CALLS) {
-            exitVideoState();
+            exitVideoMode();
         }
 
         // Determine the primary active call).
@@ -303,16 +305,16 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             mPrimaryCall = primary;
 
             if (primary != null) {
-                checkForCallVideoProviderChange();
+                checkForVideoCallChange();
                 mIsVideoCall = mPrimaryCall.isVideoCall();
                 if (mIsVideoCall) {
-                    enterVideoState();
+                    enterVideoMode();
                 } else {
-                    exitVideoState();
+                    exitVideoMode();
                 }
             } else if (primary == null) {
                 // If no primary call, ensure we exit video state and clean up the video surfaces.
-                exitVideoState();
+                exitVideoMode();
             }
         }
     }
@@ -335,9 +337,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
-     * Checks for a change to the call video provider and changes it if required.
+     * Checks for a change to the video call and changes it if required.
      */
-    private void checkForCallVideoProviderChange() {
+    private void checkForVideoCallChange() {
         VideoCall videoCall = mPrimaryCall.getTelecommCall().getVideoCall();
         if (!Objects.equals(videoCall, mVideoCall)) {
             changeVideoCall(videoCall);
@@ -355,21 +357,21 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             mIsVideoCall = newVideoState;
 
             if (mIsVideoCall) {
-                enterVideoState();
+                enterVideoMode();
             } else {
-                exitVideoState();
+                exitVideoMode();
             }
         }
     }
 
     /**
      * Handles a change to the video call.  Sets the surfaces on the previous call to null and sets
-     * the surfaces on the new provider accordingly.
+     * the surfaces on the new video call accordingly.
      *
      * @param videoCall The new video call.
      */
     private void changeVideoCall(VideoCall videoCall) {
-        // Null out the surfaces on the previous provider
+        // Null out the surfaces on the previous video call.
         if (mVideoCall != null) {
             mVideoCall.setDisplaySurface(null);
             mVideoCall.setPreviewSurface(null);
@@ -379,10 +381,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
-     * Enters video mode by showing the video surfaces.
+     * Enters video mode by showing the video surfaces and making other adjustments (eg. audio).
      * TODO(vt): Need to adjust size and orientation of preview surface here.
      */
-    private void enterVideoState() {
+    private void enterVideoMode() {
         VideoCallUi ui = getUi();
         if (ui == null) {
             return;
@@ -407,18 +409,22 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                 mVideoCall.setDisplaySurface(ui.getDisplayVideoSurface());
             }
         }
+
+        TelecommAdapter.getInstance().setAudioRoute(AudioMode.SPEAKER);
     }
 
     /**
-     * Exits video mode by hiding the video surfaces.
+     * Exits video mode by hiding the video surfaces  and making other adjustments (eg. audio).
      */
-    private void exitVideoState() {
+    private void exitVideoMode() {
         VideoCallUi ui = getUi();
         if (ui == null) {
             return;
         }
         InCallPresenter.getInstance().setInCallAllowsOrientationChange(false);
         ui.showVideoUi(false);
+
+        TelecommAdapter.getInstance().setAudioRoute(AudioMode.WIRED_OR_EARPIECE);
     }
 
     /**
