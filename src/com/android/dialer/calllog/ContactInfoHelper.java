@@ -280,6 +280,12 @@ public class ContactInfoHelper {
      * @param number the number to be blacklisted
      */
     public void addNumberToBlacklist(String number) {
+        if (TextUtils.isEmpty(number)) {
+            String message = mContext.getString(R.string.toast_nan_in_blacklist);
+            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         ContentValues cv = new ContentValues();
         cv.put(Telephony.Blacklist.PHONE_MODE, 1);
 
