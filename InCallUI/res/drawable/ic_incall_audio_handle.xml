@@ -25,7 +25,7 @@
         <layer-list>
             <item>
                 <bitmap
-                    android:src="@drawable/fab_teal_background"
+                    android:src="@drawable/fab_blue"
                     android:tint="@color/glowpad_incoming_widget_background_tint" />
             </item>
             <item>
