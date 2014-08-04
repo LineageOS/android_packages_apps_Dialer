@@ -37,6 +37,7 @@ import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialerbind.ObjectFactory;
 
+import com.android.internal.telephony.util.BlacklistUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -280,13 +281,16 @@ public class ContactInfoHelper {
      * @param number the number to be blacklisted
      */
     public void addNumberToBlacklist(String number) {
-        ContentValues cv = new ContentValues();
-        cv.put(Telephony.Blacklist.PHONE_MODE, 1);
+        if (TextUtils.isEmpty(number)) {
+            String message = mContext.getString(R.string.toast_nan_in_blacklist);
+            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        Uri uri = Uri.withAppendedPath(Telephony.Blacklist.CONTENT_FILTER_BYNUMBER_URI, number);
-        int count = mContext.getContentResolver().update(uri, cv, null, null);
+        boolean added = BlacklistUtils.addOrUpdate(mContext, number,
+                BlacklistUtils.BLOCK_CALLS, BlacklistUtils.BLOCK_CALLS);
 
-        if (count != 0) {
+        if (added) {
             // Give the user some feedback
             String message = mContext.getString(R.string.toast_added_to_blacklist, number);
             Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
