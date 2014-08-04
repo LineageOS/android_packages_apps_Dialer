@@ -556,6 +556,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         menu.findItem(R.id.menu_remove_from_call_log).setVisible(mHasRemoveFromCallLogOption);
         menu.findItem(R.id.menu_edit_number_before_call).setVisible(mHasEditNumberBeforeCallOption);
         menu.findItem(R.id.menu_trash).setVisible(mHasTrashOption);
+        menu.findItem(R.id.menu_add_to_blacklist).setVisible(TextUtils.isEmpty(mNumber));
         return super.onPrepareOptionsMenu(menu);
     }
 
