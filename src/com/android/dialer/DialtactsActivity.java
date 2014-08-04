@@ -616,6 +616,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         mIsDialpadShown = true;
         mDialpadFragment.setAnimate(animate);
+        mDialpadFragment.sendScreenView();
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.show(mDialpadFragment);
@@ -878,7 +879,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else {
             transaction.show(fragment);
         }
-
         // DialtactsActivity will provide the options menu
         fragment.setHasOptionsMenu(false);
         fragment.setShowEmptyListForNullQuery(true);
