@@ -17,5 +17,5 @@
 <!-- Background drawable used to render the "end call" button. -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/end_call_touch_feedback_tint">
-    <item android:drawable="@drawable/fab_red_background" />
+    <item android:drawable="@drawable/fab_red" />
 </ripple>
