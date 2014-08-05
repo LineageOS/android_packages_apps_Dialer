@@ -23,10 +23,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.callrecorder.CallRecorder;
+import com.android.callrecorder.CallRecordingDataStore;
+import com.android.callrecorder.CallRecordingPlayer;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
+import com.android.services.callrecorder.common.CallRecording;
+
+import java.util.List;
 
 /**
  * Adapter for a ListView containing history items from the details of a call.
@@ -59,9 +66,14 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
         }
     };
 
+    private CallRecordingDataStore mCallRecordingDataStore;
+    private CallRecordingPlayer mCallRecordingPlayer;
+
     public CallDetailHistoryAdapter(Context context, LayoutInflater layoutInflater,
             CallTypeHelper callTypeHelper, PhoneCallDetails[] phoneCallDetails,
-            boolean showVoicemail, boolean showCallAndSms, View controls) {
+            boolean showVoicemail, boolean showCallAndSms, View controls,
+            CallRecordingDataStore callRecordingDataStore,
+            CallRecordingPlayer callRecordingPlayer) {
         mContext = context;
         mLayoutInflater = layoutInflater;
         mCallTypeHelper = callTypeHelper;
@@ -69,6 +81,8 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
         mShowVoicemail = showVoicemail;
         mShowCallAndSms = showCallAndSms;
         mControls = controls;
+        mCallRecordingDataStore = callRecordingDataStore;
+        mCallRecordingPlayer = callRecordingPlayer;
     }
 
     @Override
@@ -155,6 +169,22 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
         } else {
             durationView.setVisibility(View.VISIBLE);
             durationView.setText(formatDuration(details.duration));
+        }
+
+        // do this synchronously to prevent recordings from "popping in"
+        // after detail item is displayed
+        if (CallRecorder.isEnabled()) {
+            mCallRecordingDataStore.open(mContext); // opens unless already open
+            List<CallRecording> recordings =
+                    mCallRecordingDataStore.getRecordings(details.number.toString(), details.date);
+
+            ViewGroup playbackView =
+                    (ViewGroup) result.findViewById(R.id.recording_playback_layout);
+            playbackView.removeAllViews();
+            for (CallRecording recording : recordings) {
+                Button button = mCallRecordingPlayer.createPlaybackButton(mContext, recording);
+                playbackView.addView(button);
+            }
         }
 
         return result;

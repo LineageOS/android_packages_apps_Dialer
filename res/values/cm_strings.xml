@@ -56,4 +56,9 @@
     <!-- Forward lookup -->
     <string name="nearby_places">Nearby places</string>
     <string name="people">People</string>
+
+    <string name="start_call_playback">Play recording</string>
+    <string name="stop_call_playback">Stop</string>
+    <string name="call_playback_error_message">Failed to play recording</string>
+
 </resources>
