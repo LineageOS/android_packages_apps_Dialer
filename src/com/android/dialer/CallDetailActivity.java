@@ -128,6 +128,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     private boolean mHasTrashOption;
     /** Whether we should show "remove from call log" in the options menu. */
     private boolean mHasRemoveFromCallLogOption;
+    /** Whether we should show "add to blacklist" in the options menu. */
+    private boolean mHasAddToBlacklistOption;
 
     private ProximitySensorManager mProximitySensorManager;
     private final ProximitySensorListener mProximitySensorListener = new ProximitySensorListener();
@@ -370,6 +372,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                 mHasEditNumberBeforeCallOption = mCallDetailHeader.canEditNumberBeforeCall();
                 mHasTrashOption = hasVoicemail();
                 mHasRemoveFromCallLogOption = !hasVoicemail();
+                mHasAddToBlacklistOption = mCallDetailHeader.canPlaceCallsTo();
                 invalidateOptionsMenu();
 
                 ListView historyList = (ListView) findViewById(R.id.history);
@@ -555,6 +558,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         // We don't have this action for voicemails, because you can just use the trash button.
         menu.findItem(R.id.menu_remove_from_call_log).setVisible(mHasRemoveFromCallLogOption);
         menu.findItem(R.id.menu_edit_number_before_call).setVisible(mHasEditNumberBeforeCallOption);
+        menu.findItem(R.id.menu_add_to_blacklist).setVisible(mHasAddToBlacklistOption);
         menu.findItem(R.id.menu_trash).setVisible(mHasTrashOption);
         return super.onPrepareOptionsMenu(menu);
     }

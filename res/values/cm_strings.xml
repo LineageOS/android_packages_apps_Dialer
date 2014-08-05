@@ -51,7 +51,7 @@
     <string name="call_stats_sort_by_count">Sort by call count</string>
 
     <string name="menu_add_to_blacklist">Add to blacklist</string>
-    <string name="toast_added_to_blacklist">%s added to blacklist.</string>
+    <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> added to blacklist</string>
 
     <!-- Forward lookup -->
     <string name="nearby_places">Nearby places</string>
