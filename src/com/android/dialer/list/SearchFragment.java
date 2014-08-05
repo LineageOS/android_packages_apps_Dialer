@@ -144,6 +144,15 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     }
 
     @Override
+    protected void configureAdapter() {
+        super.configureAdapter();
+        final ContactEntryListAdapter adapter = getAdapter();
+        if (adapter != null) {
+            getAdapter().setPinnedPartitionHeadersEnabled(false);
+        }
+    }
+
+    @Override
     protected void onItemClick(int position, long id) {
         final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
         final int shortcutType = adapter.getShortcutTypeFromPosition(position);
