@@ -63,7 +63,8 @@
                     android:gravity="center_vertical">
                     <TextView
                         android:id="@+id/contact_tile_name"
-                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textColor="@color/contact_tile_name_color"
                         android:fontFamily="sans-serif-medium"
@@ -101,7 +102,7 @@
             android:layout_height="match_parent"
             android:focusable="true"
             android:nextFocusRight="@+id/contact_tile_secondary_button"
-            android:background="?android:attr/selectableItemBackground" />
+            android:background="@drawable/item_background_material_dark" />
 
         <ImageButton
             android:id="@id/contact_tile_secondary_button"
