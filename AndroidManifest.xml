@@ -301,6 +301,10 @@
                   android:screenOrientation="nosensor" >
         </activity>
 
+        <service android:name="com.android.services.callrecorder.CallRecorderService"
+                 android:process="com.android.incallui">
+        </service>
+
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
         <receiver android:name="com.android.incallui.InCallApp$NotificationBroadcastReceiver"
                   android:exported="false"
