@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a061dce_47f3da73",
+        "filename": "src/com/android/dialer/calllog/ContactInfoHelper.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-08-05T19:06:46Z",
+      "side": 1,
+      "message": "The empty line should be below this import, not above.",
+      "revId": "9d708f7c05b43523bd9327a296aa0c33b7a96071",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a061dce_e702ee3d",
+        "filename": "src/com/android/dialer/calllog/ContactInfoHelper.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-08-05T19:06:46Z",
+      "side": 1,
+      "message": "Instead of displaying this toast, I would prefer to actually not show the menu item for those numbers.",
+      "revId": "9d708f7c05b43523bd9327a296aa0c33b7a96071",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
