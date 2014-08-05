@@ -63,12 +63,14 @@ import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.CallRecordingPlayer;
 import com.android.dialer.voicemail.VoicemailPlaybackFragment;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.android.dialerbind.analytics.AnalyticsActivity;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.services.callrecorder.CallRecordingDataStore;
 
 import java.util.List;
 
@@ -141,6 +143,9 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
 
     private ProximitySensorManager mProximitySensorManager;
     private final ProximitySensorListener mProximitySensorListener = new ProximitySensorListener();
+
+    private CallRecordingDataStore mCallRecordingDataStore = new CallRecordingDataStore();
+    private CallRecordingPlayer mCallRecordingPlayer = new CallRecordingPlayer();
 
     /** Listener to changes in the proximity sensor state. */
     private class ProximitySensorListener implements ProximitySensorManager.Listener {
@@ -250,6 +255,13 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
             closeSystemDialogs();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mCallRecordingDataStore.close();
+        mCallRecordingPlayer.stop();
     }
 
     @Override
@@ -428,7 +440,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                 ListView historyList = (ListView) findViewById(R.id.history);
                 historyList.setAdapter(
                         new CallDetailHistoryAdapter(CallDetailActivity.this, mInflater,
-                                mCallTypeHelper, details));
+                                mCallTypeHelper, details, mCallRecordingDataStore, mCallRecordingPlayer));
                 mCallDetailHeader.loadContactPhotos(firstDetails, contactType);
                 findViewById(R.id.call_detail).setVisibility(View.VISIBLE);
             }
