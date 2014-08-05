@@ -143,12 +143,6 @@ public final class Call {
                 }
 
                 @Override
-                public void onPostDial(android.telecomm.Call call,
-                        String remainingPostDialSequence) {
-                    update();
-                }
-
-                @Override
                 public void onPostDialWait(android.telecomm.Call call,
                         String remainingPostDialSequence) {
                     update();
@@ -306,7 +300,7 @@ public final class Call {
 
     /** Checks if the call supports the given set of capabilities supplied as a bit mask. */
     public boolean can(int capabilities) {
-        return (capabilities == (capabilities & mTelecommCall.getDetails().getCapabilities()));
+        return (capabilities == (capabilities & mTelecommCall.getDetails().getCallCapabilities()));
     }
 
     /** Gets the time when the call first became active. */
@@ -364,7 +358,7 @@ public final class Call {
         return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s, videoState:%d]",
                 mId,
                 State.toString(mState),
-                CallCapabilities.toString(mTelecommCall.getDetails().getCapabilities()),
+                CallCapabilities.toString(mTelecommCall.getDetails().getCallCapabilities()),
                 mChildCallIds,
                 mParentCallId,
                 mTelecommCall.getDetails().getVideoState());
