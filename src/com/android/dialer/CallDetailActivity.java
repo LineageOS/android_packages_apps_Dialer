@@ -49,6 +49,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.callrecorder.CallRecorder;
+import com.android.callrecorder.CallRecordingDataStore;
+import com.android.callrecorder.CallRecordingPlayer;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
@@ -131,6 +134,9 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
 
     private ProximitySensorManager mProximitySensorManager;
     private final ProximitySensorListener mProximitySensorListener = new ProximitySensorListener();
+
+    private CallRecordingDataStore mCallRecordingDataStore = new CallRecordingDataStore();
+    private CallRecordingPlayer mCallRecordingPlayer = new CallRecordingPlayer();
 
     /** Listener to changes in the proximity sensor state. */
     private class ProximitySensorListener implements ProximitySensorManager.Listener {
@@ -230,6 +236,13 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
             closeSystemDialogs();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mCallRecordingDataStore.close();
+        mCallRecordingPlayer.stop();
     }
 
     @Override
@@ -377,7 +390,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                         new CallDetailHistoryAdapter(CallDetailActivity.this, mInflater,
                                 mCallTypeHelper, details, hasVoicemail(),
                                 mCallDetailHeader.canPlaceCallsTo(),
-                                findViewById(R.id.controls)));
+                                findViewById(R.id.controls), mCallRecordingDataStore, mCallRecordingPlayer));
                 BackScrollManager.bind(
                         new ScrollableHeader() {
                             private View mControls = findViewById(R.id.controls);

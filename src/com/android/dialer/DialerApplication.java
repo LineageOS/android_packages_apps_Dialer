@@ -4,8 +4,10 @@ package com.android.dialer;
 
 import android.app.Application;
 
+import com.android.callrecorder.CallRecorder;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.extensions.ExtensionsFactory;
+import com.android.incallui.CallList;
 
 public class DialerApplication extends Application {
     private ContactPhotoManager mContactPhotoManager;
@@ -14,6 +16,8 @@ public class DialerApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ExtensionsFactory.init(getApplicationContext());
+        CallRecorder.getInstance().setContext(this);
+        CallList.getInstance().addListener(CallRecorder.getInstance());
     }
 
     @Override
@@ -29,4 +33,5 @@ public class DialerApplication extends Application {
 
         return super.getSystemService(name);
     }
+
 }
