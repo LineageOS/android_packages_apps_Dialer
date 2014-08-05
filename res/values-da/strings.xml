@@ -99,7 +99,7 @@
     <string name="dialer_settings_label" msgid="4305043242594150479">"Indstillinger"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Ny kontaktperson"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Alle kontaktpersoner"</string>
-    <string name="callDetailTitle" msgid="5340227785196217938">"Opkaldsdetaljer"</string>
+    <string name="callDetailTitle" msgid="5340227785196217938">"Opkaldsinfo"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"Detaljerne for det anmodede opkald kunne ikke læses."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Brug touch-tone-tastatur"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Vend tilbage til igangværende opkald"</string>
