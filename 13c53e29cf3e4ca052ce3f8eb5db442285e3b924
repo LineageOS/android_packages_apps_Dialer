@@ -50,6 +50,24 @@
       "revId": "13c53e29cf3e4ca052ce3f8eb5db442285e3b924",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a061dce_07b7223a",
+        "filename": "src/com/android/dialer/calllog/ContactInfoHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2014-08-05T10:32:30Z",
+      "side": 1,
+      "message": "Oh derp. Flying through patches today.",
+      "parentUuid": "9a061dce_c7ac0af0",
+      "revId": "13c53e29cf3e4ca052ce3f8eb5db442285e3b924",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
