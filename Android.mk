@@ -9,7 +9,7 @@ incallui_dir := ../InCallUI
 src_dirs := src $(contacts_common_dir)/src $(incallui_dir)/src
 res_dirs := res $(contacts_common_dir)/res $(incallui_dir)/res
 
-LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs))
+LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs)) $(call all-Iaidl-files-under, $(src_dirs))
 LOCAL_SRC_FILES += ../../providers/ContactsProvider/src/com/android/providers/contacts/NameSplitter.java \
                    ../../providers/ContactsProvider/src/com/android/providers/contacts/HanziToPinyin.java \
                    ../../providers/ContactsProvider/src/com/android/providers/contacts/util/NeededForTesting.java
