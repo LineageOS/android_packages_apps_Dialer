@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
@@ -32,7 +33,13 @@ import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
 import com.google.common.collect.Lists;
 
+import com.android.dialer.util.CallRecordingPlayer;
+import com.android.services.callrecorder.common.CallRecording;
+import com.android.services.callrecorder.CallRecorderService;
+import com.android.services.callrecorder.CallRecordingDataStore;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Adapter for a ListView containing history items from the details of a call.
@@ -53,12 +60,19 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
      */
     private ArrayList<CharSequence> mDurationItems = Lists.newArrayList();
 
+    private CallRecordingDataStore mCallRecordingDataStore;
+    private CallRecordingPlayer mCallRecordingPlayer;
+
     public CallDetailHistoryAdapter(Context context, LayoutInflater layoutInflater,
-            CallTypeHelper callTypeHelper, PhoneCallDetails[] phoneCallDetails) {
+            CallTypeHelper callTypeHelper, PhoneCallDetails[] phoneCallDetails,
+            CallRecordingDataStore callRecordingDataStore,
+            CallRecordingPlayer callRecordingPlayer) {
         mContext = context;
         mLayoutInflater = layoutInflater;
         mCallTypeHelper = callTypeHelper;
         mPhoneCallDetails = phoneCallDetails;
+        mCallRecordingDataStore = callRecordingDataStore;
+        mCallRecordingPlayer = callRecordingPlayer;
     }
 
     @Override
@@ -142,6 +156,22 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
             durationView.setVisibility(View.VISIBLE);
             durationView.setText(
                     formatDurationAndDataUsage(details.duration, details.dataUsage, details.durationType));
+        }
+
+        // do this synchronously to prevent recordings from "popping in"
+        // after detail item is displayed
+        if (CallRecorderService.isEnabled(mContext)) {
+            mCallRecordingDataStore.open(mContext); // opens unless already open
+            List<CallRecording> recordings =
+                    mCallRecordingDataStore.getRecordings(details.number.toString(), details.date);
+
+            ViewGroup playbackView =
+                    (ViewGroup) result.findViewById(R.id.recording_playback_layout);
+            playbackView.removeAllViews();
+            for (CallRecording recording : recordings) {
+                Button button = mCallRecordingPlayer.createPlaybackButton(mContext, recording);
+                playbackView.addView(button);
+            }
         }
 
         return result;
