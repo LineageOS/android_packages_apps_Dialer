@@ -61,4 +61,11 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="?attr/call_log_secondary_text_color"
     />
+
+    <LinearLayout
+        android:id="@+id/recording_playback_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+    />
 </LinearLayout>
