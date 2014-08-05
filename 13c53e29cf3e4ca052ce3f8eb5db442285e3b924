@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a061dce_a7a59605",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3134
+      },
+      "writtenOn": "2014-08-05T10:30:45Z",
+      "side": 1,
+      "message": "https://developer.android.com/design/style/writing.html:\n\nPeriod. Don\u0027t use a period after a single sentence or phrase used in isolation, such as in a toast, label, or notification. Wherever two or more sentences run together, use a period for each sentence.",
+      "revId": "13c53e29cf3e4ca052ce3f8eb5db442285e3b924",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a061dce_47a0faf4",
+        "filename": "src/com/android/dialer/calllog/ContactInfoHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 3134
+      },
+      "writtenOn": "2014-08-05T10:30:45Z",
+      "side": 1,
+      "message": "TextUtils.isEmpty",
+      "revId": "13c53e29cf3e4ca052ce3f8eb5db442285e3b924",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a061dce_c7ac0af0",
+        "filename": "src/com/android/dialer/calllog/ContactInfoHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 3134
+      },
+      "writtenOn": "2014-08-05T10:30:45Z",
+      "side": 1,
+      "message": "number? This string doesn\u0027t use quantity.",
+      "revId": "13c53e29cf3e4ca052ce3f8eb5db442285e3b924",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
