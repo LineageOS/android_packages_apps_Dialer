@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9a061dce_8781724d",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2014-08-05T10:33:48Z",
+      "side": 1,
+      "message": "I\u0027ll fix the toast above it as well.",
+      "parentUuid": "9a061dce_a7a59605",
+      "revId": "13c53e29cf3e4ca052ce3f8eb5db442285e3b924",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a061dce_47a0faf4",
         "filename": "src/com/android/dialer/calllog/ContactInfoHelper.java",
         "patchSetId": 3
