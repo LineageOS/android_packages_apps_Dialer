@@ -16,6 +16,7 @@
 
 package com.android.dialer.widget;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
@@ -57,13 +58,8 @@ public class ActionBarControllerTest extends InstrumentationTestCase {
         }
 
         @Override
-        public int getActionBarHideOffset() {
-            return actionBarHideOffset;
-        }
-
-        @Override
-        public void setActionBarHideOffset(int hideOffset) {
-            actionBarHideOffset = hideOffset;
+        public ActionBar getActionBar() {
+            return null;
         }
     }
 
@@ -139,7 +135,7 @@ public class ActionBarControllerTest extends InstrumentationTestCase {
         assertActionBarState(false, false, false);
 
         // No search query typed in the dialpad, but action bar was not showing before
-        mActionBarController.slideActionBarUp(false);
+        mActionBarController.slideActionBar(true /* slideUp */, false /* animate */);
         mActivityUi.shouldShowActionBar = false;
         mSearchBox.setVisible(false);
         mActionBarController.onDialpadDown();
@@ -147,7 +143,7 @@ public class ActionBarControllerTest extends InstrumentationTestCase {
 
         // Something typed in the dialpad - so remain in search UI and slide the expanded search
         // box down
-        mActionBarController.slideActionBarUp(false);
+        mActionBarController.slideActionBar(true /* slideUp */, false /* animate */);
         mActivityUi.shouldShowActionBar = true;
         mActivityUi.hasSearchQuery= true;
         mSearchBox.setVisible(false);
@@ -168,7 +164,7 @@ public class ActionBarControllerTest extends InstrumentationTestCase {
         mActivityUi.hasSearchQuery = true;
         mSearchBox.expand(true, false);
         mSearchBox.setVisible(true);
-        mActionBarController.slideActionBarUp(false);
+        mActionBarController.slideActionBar(true /* slideUp */, false /* animate */);
         mActionBarController.onDialpadUp();
         assertActionBarState(true, false, true);
     }
