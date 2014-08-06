@@ -29,10 +29,11 @@ import android.view.Surface;
 import android.view.View;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Sets;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -108,6 +109,16 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
                 intent.send();
             } catch (PendingIntent.CanceledException e) {
                 Log.e(this, "onStartActivity, exception", e);
+            }
+        }
+
+        @Override
+        public void onConferenceableCallsChanged(
+                android.telecomm.Call call, List<android.telecomm.Call> conferenceableCalls) {
+            Log.i(this, "onConferenceableCallsChanged: " + call);
+            for (InCallDetailsListener listener : mDetailsListeners) {
+                listener.onDetailsChanged(CallList.getInstance().getCallByTelecommCall(call),
+                        call.getDetails());
             }
         }
     };

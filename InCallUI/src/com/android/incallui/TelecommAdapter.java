@@ -26,6 +26,8 @@ import android.telecomm.PhoneAccountHandle;
 
 import com.google.common.base.Preconditions;
 
+import java.util.List;
+
 /** Wrapper around {@link InCallAdapter} that only forwards calls to the adapter when it's valid. */
 final class TelecommAdapter implements InCallPhoneListener {
     private static final String ADD_CALL_MODE_KEY = "add_call_mode";
@@ -145,7 +147,11 @@ final class TelecommAdapter implements InCallPhoneListener {
 
     void merge(String callId) {
         if (mPhone != null) {
-            getTelecommCallById(callId).conference();
+            android.telecomm.Call call = getTelecommCallById(callId);
+            List<android.telecomm.Call> conferenceable = call.getConferenceableCalls();
+            if (!conferenceable.isEmpty()) {
+                call.conference(conferenceable.get(0));
+            }
         } else {
             Log.e(this, "error merge, mPhone is null.");
         }
