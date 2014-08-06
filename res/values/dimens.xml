@@ -110,7 +110,7 @@
     <dimen name="search_box_expanded_text_margin_left">26dp</dimen>
     <!-- Size of the icon (voice search, close search) in the search box. -->
     <dimen name="search_box_icon_size">28dp</dimen>
-    <dimen name="search_list_padding_top">8dp</dimen>
+    <dimen name="search_list_padding_top">16dp</dimen>
     <dimen name="search_box_elevation">2dp</dimen>
 
     <!-- Padding to the left and right of call log action buttons. -->
