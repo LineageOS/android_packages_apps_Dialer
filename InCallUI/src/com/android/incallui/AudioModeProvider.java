@@ -18,8 +18,6 @@ package com.android.incallui;
 
 import com.google.common.collect.Lists;
 
-import com.android.services.telephony.common.AudioMode;
-
 import android.telecomm.CallAudioState;
 import android.telecomm.Phone;
 
@@ -30,10 +28,12 @@ import java.util.List;
  */
 /* package */ class AudioModeProvider implements InCallPhoneListener {
 
+    static final int AUDIO_MODE_INVALID = 0;
+
     private static AudioModeProvider sAudioModeProvider = new AudioModeProvider();
-    private int mAudioMode = AudioMode.EARPIECE;
+    private int mAudioMode = CallAudioState.ROUTE_EARPIECE;
     private boolean mMuted = false;
-    private int mSupportedModes = AudioMode.ALL_MODES;
+    private int mSupportedModes = CallAudioState.ROUTE_ALL;
     private final List<AudioModeListener> mListeners = Lists.newArrayList();
     private Phone mPhone;
 
