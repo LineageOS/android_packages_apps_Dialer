@@ -285,6 +285,7 @@ public class CallButtonFragment
 
     @Override
     public void showAddCallButton(boolean show) {
+        Log.d(this, "show Add call button: " + show);
         mAddCallButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
