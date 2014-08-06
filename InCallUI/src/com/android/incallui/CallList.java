@@ -64,7 +64,7 @@ public class CallList implements InCallPhoneListener {
     private Phone.Listener mPhoneListener = new Phone.Listener() {
         @Override
         public void onCallAdded(Phone phone, android.telecomm.Call call) {
-            // TODO(ihab): The Call adds itself to various singletons within its ctor. Refactor
+            // TODO: The Call adds itself to various singletons within its ctor. Refactor
             // so that this is done more explicitly; otherwise, the below looks like we're creating
             // an object and never using it.
             new Call(call);
