@@ -87,35 +87,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/voicemail_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:visibility="gone"
-            >
-            <include layout="@layout/call_log_voicemail_status"/>
-        </FrameLayout>
-        <TextView
-            android:id="@+id/voicemail_transcription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/call_detail_horizontal_margin"
-            android:paddingEnd="@dimen/call_detail_horizontal_margin"
-            android:paddingTop="@dimen/transcription_top_margin"
-            android:paddingBottom="@dimen/transcription_bottom_margin" />
-        <LinearLayout
-            android:id="@+id/voicemail_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/call_detail_button_spacing"
-            android:visibility="gone"
-            >
-            <!-- The voicemail fragment will be put here. -->
-        </LinearLayout>
-
         <!--
           The list view is under everything.
           It contains a first header element which is hidden under the controls UI.
