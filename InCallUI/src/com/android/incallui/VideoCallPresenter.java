@@ -16,20 +16,19 @@
 
 package com.android.incallui;
 
-import com.google.common.base.Preconditions;
-import com.android.incallui.InCallVideoCallListenerNotifier.SurfaceChangeListener;
-import com.android.incallui.InCallVideoCallListenerNotifier.VideoEventListener;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.telecomm.CallAudioState;
+import android.telecomm.InCallService.VideoCall;
+import android.view.Surface;
+
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallOrientationListener;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
-
-import android.content.Context;
-import android.content.res.Configuration;
-import android.telecomm.InCallService.VideoCall;
-import android.view.Surface;
-
-import com.android.services.telephony.common.AudioMode;
+import com.android.incallui.InCallVideoCallListenerNotifier.SurfaceChangeListener;
+import com.android.incallui.InCallVideoCallListenerNotifier.VideoEventListener;
+import com.google.common.base.Preconditions;
 
 import java.util.Objects;
 
@@ -140,6 +139,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * Determines whether the video surface is in full-screen mode.
      */
     private boolean mIsFullScreen = false;
+
+    /**
+     * Saves the audio mode which was selected prior to going into a video call.
+     */
+    private int mPreVideoAudioMode = AudioModeProvider.AUDIO_MODE_INVALID;
 
     /**
      * Initializes the presenter.
@@ -410,7 +414,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             }
         }
 
-        TelecommAdapter.getInstance().setAudioRoute(AudioMode.SPEAKER);
+        mPreVideoAudioMode = AudioModeProvider.getInstance().getAudioMode();
+        TelecommAdapter.getInstance().setAudioRoute(CallAudioState.ROUTE_SPEAKER);
     }
 
     /**
@@ -424,7 +429,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallPresenter.getInstance().setInCallAllowsOrientationChange(false);
         ui.showVideoUi(false);
 
-        TelecommAdapter.getInstance().setAudioRoute(AudioMode.WIRED_OR_EARPIECE);
+        if (mPreVideoAudioMode != AudioModeProvider.AUDIO_MODE_INVALID) {
+            TelecommAdapter.getInstance().setAudioRoute(mPreVideoAudioMode);
+            mPreVideoAudioMode = AudioModeProvider.AUDIO_MODE_INVALID;
+        }
     }
 
     /**

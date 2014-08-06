@@ -20,10 +20,11 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.PowerManager;
 
+import android.telecomm.CallAudioState;
+
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
-import com.android.services.telephony.common.AudioMode;
 import com.google.common.base.Objects;
 
 /**
@@ -176,9 +177,9 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
         // turn proximity sensor off and turn screen on immediately if
         // we are using a headset, the keyboard is open, or the device
         // is being held in a horizontal position.
-            boolean screenOnImmediately = (AudioMode.WIRED_HEADSET == audioMode
-                    || AudioMode.SPEAKER == audioMode
-                    || AudioMode.BLUETOOTH == audioMode
+            boolean screenOnImmediately = (CallAudioState.ROUTE_WIRED_HEADSET == audioMode
+                    || CallAudioState.ROUTE_SPEAKER == audioMode
+                    || CallAudioState.ROUTE_BLUETOOTH == audioMode
                     || mIsHardKeyboardOpen);
 
             // We do not keep the screen off when the user is outside in-call screen and we are
@@ -202,7 +203,8 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                     .add("offhook", mIsPhoneOffhook ? 1 : 0)
                     .add("hor", horizontal ? 1 : 0)
                     .add("ui", mUiShowing ? 1 : 0)
-                    .add("aud", AudioMode.toString(audioMode)).toString());
+                    .add("aud", CallAudioState.audioRouteToString(audioMode))
+                    .toString());
 
             if (mIsPhoneOffhook && !screenOnImmediately) {
                 Log.d(this, "Turning on proximity sensor");
