@@ -609,11 +609,15 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         final int upperBound = Math.max(oldPos, newPinPos);
         for (int i = lowerBound; i <= upperBound; i++) {
             final ContactEntry entry = list.get(i);
-            if (entry.pinned == i) continue;
+
+            // Pinned positions in the database start from 1 instead of being zero-indexed like
+            // arrays, so offset by 1.
+            final int databasePinnedPosition = i + 1;
+            if (entry.pinned == databasePinnedPosition) continue;
 
             final Uri uri = Uri.withAppendedPath(Contacts.CONTENT_URI, String.valueOf(entry.id));
             final ContentValues values = new ContentValues();
-            values.put(Contacts.PINNED, i);
+            values.put(Contacts.PINNED, databasePinnedPosition);
             positions.add(ContentProviderOperation.newUpdate(uri).withValues(values).build());
         }
         return positions;
