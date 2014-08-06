@@ -348,7 +348,9 @@ public class ShortcutCardsAdapter extends BaseAdapter {
 
             if (ratioHidden > 0.5f) {
                 mClipRect.set(0, 0 , 0, 0);
+                setVisibility(View.INVISIBLE);
             } else {
+                setVisibility(View.VISIBLE);
                 int newLeft = (int) (ratioHidden * mCardMaxHorizontalClip);
                 int newRight = width - newLeft;
                 int newTop = (int) (ratioHidden * height);
