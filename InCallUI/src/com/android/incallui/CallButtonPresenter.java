@@ -222,7 +222,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     public void showDialpadClicked(boolean checked) {
         Log.v(this, "Show dialpad " + String.valueOf(checked));
         getUi().displayDialpad(checked /* show */, true /* animate */);
-        updateExtraButtonRow();
+        updateExtraButtonRow(checked);
     }
 
     public void changeToVideoClicked() {
@@ -317,7 +317,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean isGenericConference = call.can(CallCapabilities.GENERIC_CONFERENCE);
         mShowGenericMerge = isGenericConference && canMerge;
         mShowManageConference = (call.isConferenceCall() && !isGenericConference);
-        updateExtraButtonRow();
+        updateExtraButtonRow(ui.isDialpadVisible());
     }
 
     private void updateVideoCallButtons() {
@@ -410,13 +410,14 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
     }
 
-    private void updateExtraButtonRow() {
+    private void updateExtraButtonRow(boolean isDialpadVisible) {
         final boolean showExtraButtonRow = (mShowGenericMerge || mShowManageConference) &&
-                !getUi().isDialpadVisible();
+                !isDialpadVisible;
 
         Log.d(this, "isGeneric: " + mShowGenericMerge);
         Log.d(this, "mShowManageConference : " + mShowManageConference);
         Log.d(this, "mShowGenericMerge: " + mShowGenericMerge);
+        Log.d(this, "isDialpadVisible: " + isDialpadVisible);
         if (showExtraButtonRow) {
             if (mShowGenericMerge) {
                 getUi().showGenericMergeButton();
