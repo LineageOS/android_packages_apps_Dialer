@@ -36,6 +36,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 import com.android.incallui.Call.State;
 
@@ -117,6 +118,9 @@ public class InCallActivity extends Activity {
                 mIsLandscape ? R.anim.dialpad_slide_in_right : R.anim.dialpad_slide_in_bottom);
         mSlideOut = AnimationUtils.loadAnimation(this,
                 mIsLandscape ? R.anim.dialpad_slide_out_right : R.anim.dialpad_slide_out_bottom);
+
+        mSlideIn.setInterpolator(AnimUtils.EASE_IN);
+        mSlideOut.setInterpolator(AnimUtils.EASE_OUT);
 
         mSlideOut.setAnimationListener(mSlideOutListener);
         if (icicle != null) {
