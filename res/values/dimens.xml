@@ -65,7 +65,7 @@
     <dimen name="favorites_row_undo_text_side_padding">32dp</dimen>
 
     <!-- Dimensions for most recent call shortcut cards -->
-    <dimen name="recent_call_log_item_translation_z">1dp</dimen>
+    <dimen name="recent_call_log_item_translation_z">3dp</dimen>
     <dimen name="recent_call_log_item_margin_horizontal">8dp</dimen>
     <dimen name="recent_call_log_item_margin_top">4dp</dimen>
     <dimen name="recent_call_log_item_margin_bottom">6dp</dimen>
@@ -87,6 +87,7 @@
     room to the search box-->
     <dimen name="action_bar_height">56dp</dimen>
     <dimen name="action_bar_height_large">64dp</dimen>
+    <dimen name="action_bar_elevation">2dp</dimen>
     <dimen name="tab_height">43dp</dimen>
     <!-- actionbar height + tab height -->
     <dimen name="actionbar_and_tab_height">107dp</dimen>
@@ -111,7 +112,7 @@
     <!-- Size of the icon (voice search, close search) in the search box. -->
     <dimen name="search_box_icon_size">28dp</dimen>
     <dimen name="search_list_padding_top">16dp</dimen>
-    <dimen name="search_box_elevation">2dp</dimen>
+    <dimen name="search_box_elevation">3dp</dimen>
 
     <!-- Padding to the left and right of call log action buttons. -->
     <dimen name="call_log_action_horizontal_padding">8dp</dimen>
