@@ -98,6 +98,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
 
         final ListView listView = getListView();
 
+        listView.setBackgroundColor(res.getColor(R.color.background_dialer_results));
         listView.setClipToPadding(false);
         setVisibleScrollbarEnabled(false);
         listView.setOnScrollListener(new OnScrollListener() {
