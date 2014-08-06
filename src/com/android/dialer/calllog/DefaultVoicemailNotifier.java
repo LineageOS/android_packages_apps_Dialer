@@ -181,6 +181,7 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
         } else {
             // Open the call log.
             contentIntent = new Intent(Intent.ACTION_VIEW, Calls.CONTENT_URI);
+            contentIntent.putExtra(Calls.EXTRA_CALL_TYPE_FILTER, Calls.VOICEMAIL_TYPE);
         }
         notificationBuilder.setContentIntent(
                 PendingIntent.getActivity(mContext, 0, contentIntent, 0));
