@@ -329,6 +329,13 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
 
     @Override
     public void onPageSelected(int position) {
+        if (position == TAB_INDEX_SPEED_DIAL) {
+            mSpeedDialFragment.sendScreenView();
+        } else if (position == TAB_INDEX_RECENTS) {
+            mRecentsFragment.sendScreenView();
+        } else if (position == TAB_INDEX_ALL_CONTACTS) {
+            mAllContactsFragment.sendScreenView();
+        }
         final int count = mOnPageChangeListeners.size();
         for (int i = 0; i < count; i++) {
             mOnPageChangeListeners.get(i).onPageSelected(position);
