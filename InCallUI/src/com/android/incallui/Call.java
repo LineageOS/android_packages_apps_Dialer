@@ -300,6 +300,13 @@ public final class Call {
 
     /** Checks if the call supports the given set of capabilities supplied as a bit mask. */
     public boolean can(int capabilities) {
+        if (CallCapabilities.MERGE_CALLS == (capabilities & CallCapabilities.MERGE_CALLS)) {
+            if (mTelecommCall.getConferenceableCalls().isEmpty()) {
+                // Cannot merge calls if there are no calls to merge with.
+                return false;
+            }
+            capabilities &= ~CallCapabilities.MERGE_CALLS;
+        }
         return (capabilities == (capabilities & mTelecommCall.getDetails().getCallCapabilities()));
     }
 
