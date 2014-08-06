@@ -136,7 +136,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     /**
-     * TODO(santoscordon): We are using reject and decline interchangeably. We should settle on
+     * TODO: We are using reject and decline interchangeably. We should settle on
      * reject since it seems to be more prevalent.
      */
     public void onDecline() {
