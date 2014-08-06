@@ -18,6 +18,8 @@ package com.android.incallui;
 
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+
+import android.telecomm.CallAudioState;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,8 +32,6 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnDismissListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
-
-import com.android.services.telephony.common.AudioMode;
 
 /**
  * Fragment for call control buttons
@@ -387,20 +387,20 @@ public class CallButtonFragment
         Log.d(this, "  id: " + item.getItemId());
         Log.d(this, "  title: '" + item.getTitle() + "'");
 
-        int mode = AudioMode.WIRED_OR_EARPIECE;
+        int mode = CallAudioState.ROUTE_WIRED_OR_EARPIECE;
 
         switch (item.getItemId()) {
             case R.id.audio_mode_speaker:
-                mode = AudioMode.SPEAKER;
+                mode = CallAudioState.ROUTE_SPEAKER;
                 break;
             case R.id.audio_mode_earpiece:
             case R.id.audio_mode_wired_headset:
-                // InCallAudioMode.EARPIECE means either the handset earpiece,
+                // InCallCallAudioState.ROUTE_EARPIECE means either the handset earpiece,
                 // or the wired headset (if connected.)
-                mode = AudioMode.WIRED_OR_EARPIECE;
+                mode = CallAudioState.ROUTE_WIRED_OR_EARPIECE;
                 break;
             case R.id.audio_mode_bluetooth:
-                mode = AudioMode.BLUETOOTH;
+                mode = CallAudioState.ROUTE_BLUETOOTH;
                 break;
             default:
                 Log.e(this, "onMenuItemClick:  unexpected View ID " + item.getItemId()
@@ -429,9 +429,9 @@ public class CallButtonFragment
      */
     private void onAudioButtonClicked() {
         Log.d(this, "onAudioButtonClicked: " +
-                AudioMode.toString(getPresenter().getSupportedAudio()));
+                CallAudioState.audioRouteToString(getPresenter().getSupportedAudio()));
 
-        if (isSupported(AudioMode.BLUETOOTH)) {
+        if (isSupported(CallAudioState.ROUTE_BLUETOOTH)) {
             showAudioModePopup();
         } else {
             getPresenter().toggleSpeakerphone();
@@ -461,8 +461,8 @@ public class CallButtonFragment
      * are visible based on the supported audio formats.
      */
     private void updateAudioButtons(int supportedModes) {
-        final boolean bluetoothSupported = isSupported(AudioMode.BLUETOOTH);
-        final boolean speakerSupported = isSupported(AudioMode.SPEAKER);
+        final boolean bluetoothSupported = isSupported(CallAudioState.ROUTE_BLUETOOTH);
+        final boolean speakerSupported = isSupported(CallAudioState.ROUTE_SPEAKER);
 
         boolean audioButtonEnabled = false;
         boolean audioButtonChecked = false;
@@ -484,9 +484,9 @@ public class CallButtonFragment
             // btn_compound_background layer anyway.)
 
             // Update desired layers:
-            if (isAudio(AudioMode.BLUETOOTH)) {
+            if (isAudio(CallAudioState.ROUTE_BLUETOOTH)) {
                 showBluetoothIcon = true;
-            } else if (isAudio(AudioMode.SPEAKER)) {
+            } else if (isAudio(CallAudioState.ROUTE_SPEAKER)) {
                 showSpeakerphoneIcon = true;
             } else {
                 showHandsetIcon = true;
@@ -502,7 +502,7 @@ public class CallButtonFragment
 
             // The audio button *is* a toggle in this state, and indicated the
             // current state of the speakerphone.
-            audioButtonChecked = isAudio(AudioMode.SPEAKER);
+            audioButtonChecked = isAudio(CallAudioState.ROUTE_SPEAKER);
 
             // update desired layers:
             showToggleIndicator = true;
@@ -572,7 +572,7 @@ public class CallButtonFragment
         // See comments below for the exact logic.
 
         final MenuItem speakerItem = menu.findItem(R.id.audio_mode_speaker);
-        speakerItem.setEnabled(isSupported(AudioMode.SPEAKER));
+        speakerItem.setEnabled(isSupported(CallAudioState.ROUTE_SPEAKER));
         // TODO: Show speakerItem as initially "selected" if
         // speaker is on.
 
@@ -581,7 +581,7 @@ public class CallButtonFragment
         final MenuItem earpieceItem = menu.findItem(R.id.audio_mode_earpiece);
         final MenuItem wiredHeadsetItem = menu.findItem(R.id.audio_mode_wired_headset);
 
-        final boolean usingHeadset = isSupported(AudioMode.WIRED_HEADSET);
+        final boolean usingHeadset = isSupported(CallAudioState.ROUTE_WIRED_HEADSET);
         earpieceItem.setVisible(!usingHeadset);
         earpieceItem.setEnabled(!usingHeadset);
         wiredHeadsetItem.setVisible(usingHeadset);
@@ -591,7 +591,7 @@ public class CallButtonFragment
         // bluetoothIndicatorOn are both false.
 
         final MenuItem bluetoothItem = menu.findItem(R.id.audio_mode_bluetooth);
-        bluetoothItem.setEnabled(isSupported(AudioMode.BLUETOOTH));
+        bluetoothItem.setEnabled(isSupported(CallAudioState.ROUTE_BLUETOOTH));
         // TODO: Show bluetoothItem as initially "selected" if
         // bluetoothIndicatorOn is true.
 
