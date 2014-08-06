@@ -755,6 +755,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mSearchView.setText(mPendingSearchViewQuery);
             mPendingSearchViewQuery = null;
         }
+        mActionBarController.restoreActionBarOffset();
         return false;
     }
 
@@ -1155,7 +1156,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void setActionBarHideOffset(int hideOffset) {
-        getActionBar().setHideOffset(hideOffset);
+        mActionBarController.setHideOffset(hideOffset);
     }
 
     /**

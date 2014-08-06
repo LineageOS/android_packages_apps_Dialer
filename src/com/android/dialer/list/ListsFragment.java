@@ -76,6 +76,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
     public interface HostInterface {
         public void showCallHistory();
         public int getActionBarHeight();
+        public void setActionBarHideOffset(int offset);
     }
 
     private ActionBar mActionBar;
@@ -152,7 +153,8 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
 
                 final int availableActionBarHeight =
                         Math.min(mActionBar.getHeight(), topPaneHeight);
-                mActionBar.setHideOffset(mActionBar.getHeight() - availableActionBarHeight);
+                ((HostInterface) getActivity()).setActionBarHideOffset(
+                        mActionBar.getHeight() - availableActionBarHeight);
 
                 if (!mActionBar.isShowing()) {
                     mActionBar.show();
