@@ -68,7 +68,7 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
     /**
      * Stops the local tone based on the phone type.
      */
-    public void stopTone() {
+    public void stopDtmf() {
         if (mCall != null) {
             Log.d(this, "stopping remote tone");
             TelecommAdapter.getInstance().stopDtmfTone(mCall.getId());

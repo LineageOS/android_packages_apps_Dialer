@@ -18,6 +18,8 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.method.DialerKeyListener;
 import android.util.AttributeSet;
@@ -45,6 +47,8 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         View.OnHoverListener, View.OnClickListener {
 
     private static final float DIALPAD_SLIDE_FRACTION = 1.0f;
+
+    private static final int ACCESSIBILITY_DTMF_STOP_DELAY_MILLIS = 50;
 
     /**
      * LinearLayout with getter and setter methods for the translationY property using floats,
@@ -104,6 +108,9 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
     /** Hash Map to map a view id to a character*/
     private static final HashMap<Integer, Character> mDisplayMap =
         new HashMap<Integer, Character>();
+
+    private static final Handler sHandler = new Handler(Looper.getMainLooper());
+
 
     /** Set up the static maps*/
     static {
@@ -222,7 +229,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
 
             if (keyOK) {
                 Log.d(this, "Stopping the tone for '" + c + "'");
-                getPresenter().stopTone();
+                getPresenter().stopDtmf();
                 return true;
             }
 
@@ -274,7 +281,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
             // consider checking for this ourselves.
             if (ok(getAcceptedChars(), c)) {
                 Log.d(this, "Stopping the tone for '" + c + "'");
-                getPresenter().stopTone();
+                getPresenter().stopDtmf();
                 return true;
             }
 
@@ -327,6 +334,12 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
             // Checking the press state prevents double activation.
             if (!v.isPressed() && mDisplayMap.containsKey(id)) {
                 getPresenter().processDtmf(mDisplayMap.get(id));
+                sHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getPresenter().stopDtmf();
+                    }
+                }, ACCESSIBILITY_DTMF_STOP_DELAY_MILLIS);
             }
         }
     }
@@ -378,7 +391,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
                     }
                     break;
                 case KeyEvent.ACTION_UP:
-                    getPresenter().stopTone();
+                    getPresenter().stopDtmf();
                     break;
                 }
                 // do not return true [handled] here, since we want the
@@ -404,7 +417,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
                     // stop the tone on ANY other event, except for MOVE.
-                    getPresenter().stopTone();
+                    getPresenter().stopDtmf();
                     break;
             }
             // do not return true [handled] here, since we want the
