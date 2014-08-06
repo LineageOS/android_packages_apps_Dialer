@@ -89,6 +89,7 @@ import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
 import com.android.dialer.widget.SearchEditTextLayout.OnBackButtonClickedListener;
 import com.android.dialerbind.DatabaseHelperManager;
+import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
 import java.util.ArrayList;
@@ -417,6 +418,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 mIsLandscape ? R.anim.dialpad_slide_in_right : R.anim.dialpad_slide_in_bottom);
         mSlideOut = AnimationUtils.loadAnimation(this,
                 mIsLandscape ? R.anim.dialpad_slide_out_right : R.anim.dialpad_slide_out_bottom);
+
+        mSlideIn.setInterpolator(AnimUtils.EASE_IN);
+        mSlideOut.setInterpolator(AnimUtils.EASE_OUT);
 
         mSlideOut.setAnimationListener(mSlideOutListener);
 
