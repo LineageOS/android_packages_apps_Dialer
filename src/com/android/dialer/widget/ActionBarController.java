@@ -4,6 +4,7 @@ import com.google.common.annotations.VisibleForTesting;
 
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -31,12 +32,12 @@ public class ActionBarController {
     private final AnimationCallback mFadeOutCallback = new AnimationCallback() {
         @Override
         public void onAnimationEnd() {
-            slideActionBarUp(false);
+            slideActionBar(true /* slideUp */, false /* animate */);
         }
 
         @Override
         public void onAnimationCancel() {
-            slideActionBarUp(false);
+            slideActionBar(true /* slideUp */, false /* animate */);
         }
     };
 
@@ -45,20 +46,12 @@ public class ActionBarController {
         public boolean hasSearchQuery();
         public boolean shouldShowActionBar();
         public int getActionBarHeight();
-        public int getActionBarHideOffset();
-        public void setActionBarHideOffset(int hideOffset);
+        public ActionBar getActionBar();
     }
 
     public ActionBarController(ActivityUi activityUi, SearchEditTextLayout searchBox) {
         mActivityUi = activityUi;
         mSearchBox = searchBox;
-    }
-
-    /**
-     * @return The offset the action bar is being translated upwards by
-     */
-    public int getHideOffset() {
-        return mActivityUi.getActionBarHideOffset();
     }
 
     /**
@@ -97,9 +90,9 @@ public class ActionBarController {
         }
 
         if (mActivityUi.shouldShowActionBar()) {
-            slideActionBarDown(false /* animate */);
+            slideActionBar(false /* slideUp */, false /* animate */);
         } else {
-            slideActionBarUp(false /* animate */);
+            slideActionBar(true /* slideUp */, false /* animate */);
         }
     }
 
@@ -122,7 +115,7 @@ public class ActionBarController {
                 if (!mSearchBox.isExpanded()) {
                     mSearchBox.expand(false /* animate */, false /* requestFocus */);
                 }
-                slideActionBarDown(true /* animate */);
+                slideActionBar(false /* slideUp */, true /* animate */);
             } else {
                 mSearchBox.fadeIn();
             }
@@ -138,57 +131,49 @@ public class ActionBarController {
             Log.d(TAG, "OnDialpadUp: isInSearchUi " + mActivityUi.isInSearchUi());
         }
         if (mActivityUi.isInSearchUi()) {
-            slideActionBarUp(true);
+            slideActionBar(true /* slideUp */, true /* animate */);
         } else {
             // From the lists fragment
             mSearchBox.fadeOut(mFadeOutCallback);
         }
     }
 
-    public void slideActionBarUp(boolean animate) {
+    public void slideActionBar(boolean slideUp, boolean animate) {
         if (DEBUG) {
-            Log.d(TAG, "Sliding actionBar up - animate: " + animate);
+            Log.d(TAG, "Sliding actionBar - up: " + slideUp + " animate: " + animate);
         }
         if (animate) {
-            ValueAnimator animator = ValueAnimator.ofFloat(0, 1);
+            ValueAnimator animator =
+                    slideUp ? ValueAnimator.ofFloat(0, 1) : ValueAnimator.ofFloat(1, 0);
             animator.addUpdateListener(new AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     final float value = (float) animation.getAnimatedValue();
-                    mActivityUi.setActionBarHideOffset(
+                    setHideOffset(
                             (int) (mActivityUi.getActionBarHeight() * value));
                 }
             });
             animator.start();
         } else {
-           mActivityUi.setActionBarHideOffset(mActivityUi.getActionBarHeight());
+           setHideOffset(slideUp ? mActivityUi.getActionBarHeight() : 0);
         }
-        mIsActionBarSlidUp = true;
-    }
-
-    public void slideActionBarDown(boolean animate) {
-        if (DEBUG) {
-            Log.d(TAG, "Sliding actionBar down - animate: " + animate);
-        }
-        if (animate) {
-            ValueAnimator animator = ValueAnimator.ofFloat(1, 0);
-            animator.addUpdateListener(new AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    final float value = (float) animation.getAnimatedValue();
-                    mActivityUi.setActionBarHideOffset(
-                            (int) (mActivityUi.getActionBarHeight() * value));
-                }
-            });
-            animator.start();
-        } else {
-            mActivityUi.setActionBarHideOffset(0);
-        }
-        mIsActionBarSlidUp = false;
+        mIsActionBarSlidUp = slideUp;
     }
 
     public void setAlpha(float alphaValue) {
         mSearchBox.animate().alpha(alphaValue).start();
+    }
+
+    public void setHideOffset(int offset) {
+        mIsActionBarSlidUp = offset >= mActivityUi.getActionBarHeight();
+        mActivityUi.getActionBar().setHideOffset(offset);
+    }
+
+    /**
+     * @return The offset the action bar is being translated upwards by
+     */
+    public int getHideOffset() {
+        return mActivityUi.getActionBar().getHideOffset();
     }
 
     /**
@@ -201,15 +186,10 @@ public class ActionBarController {
     }
 
     /**
-     * Restores the action bar state from a provided {@link Bundle}
+     * Restores the action bar state from a provided {@link Bundle}.
      */
     public void restoreInstanceState(Bundle inState) {
         mIsActionBarSlidUp = inState.getBoolean(KEY_IS_SLID_UP);
-        if (mIsActionBarSlidUp) {
-            slideActionBarUp(false);
-        } else {
-            slideActionBarDown(false);
-        }
 
         final boolean isSearchBoxFadedOut = inState.getBoolean(KEY_IS_FADED_OUT);
         if (isSearchBoxFadedOut) {
@@ -228,6 +208,14 @@ public class ActionBarController {
         } else if (mSearchBox.isExpanded()) {
                 mSearchBox.collapse(false);
         }
+    }
+
+    /**
+     * This should be called after onCreateOptionsMenu has been called, when the actionbar has
+     * been laid out and actually has a height.
+     */
+    public void restoreActionBarOffset() {
+        slideActionBar(mIsActionBarSlidUp /* slideUp */, false /* animate */);
     }
 
     @VisibleForTesting
