@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">ඇමතුම් කාලමාත්‍රාව අනුව සුබෙදන්න</string>
   <string name="call_stats_sort_by_count">ඇමතුම් ගණන අනුව සුබෙදන්න</string>
   <string name="menu_add_to_blacklist">අපලේඛණයට එක් කරන්න</string>
-  <string name="toast_added_to_blacklist">%s අපලේඛණයට එක් කෙරුණි.</string>
   <string name="nearby_places">අවට ස්ථාන</string>
   <string name="people">ප්‍රජාව</string>
 </resources>

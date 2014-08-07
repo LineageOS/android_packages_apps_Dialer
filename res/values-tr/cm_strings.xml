@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">Arama süresine göre sırala</string>
   <string name="call_stats_sort_by_count">Arama sayısına göre sırala</string>
   <string name="menu_add_to_blacklist">Karalisteye ekle</string>
-  <string name="toast_added_to_blacklist">%s karalisteye eklendi.</string>
   <string name="nearby_places">Yakın yerler</string>
   <string name="people">Kişiler</string>
 </resources>

@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">فرز حسب مدة المكالمة</string>
   <string name="call_stats_sort_by_count">فرز حسب عدد المكالمات</string>
   <string name="menu_add_to_blacklist">إضافة إلى القائمة السوداء</string>
-  <string name="toast_added_to_blacklist">%s أضيف إلى القائمة السوداء.</string>
   <string name="nearby_places">الأماكن القريبة</string>
   <string name="people">الناس</string>
 </resources>

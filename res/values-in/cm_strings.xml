@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">Urut sesuai durasi panggilan</string>
   <string name="call_stats_sort_by_count">Urut sesuai jumlah panggilan</string>
   <string name="menu_add_to_blacklist">Tambahkan ke daftar hitam</string>
-  <string name="toast_added_to_blacklist">%s ditambahkan ke daftar hitam.</string>
   <string name="nearby_places">Tempat terdekat</string>
   <string name="people">Orang</string>
 </resources>

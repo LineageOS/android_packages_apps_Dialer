@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">Iraupenaren arabera sailkatu</string>
   <string name="call_stats_sort_by_count">Dei kopuruen arabera sailkatu</string>
   <string name="menu_add_to_blacklist">Zerrenda beltzera gehitu</string>
-  <string name="toast_added_to_blacklist">%s zerrenda beltzera gehitu da.</string>
   <string name="nearby_places">Kokapen hurbilak</string>
   <string name="people">Jendea</string>
 </resources>

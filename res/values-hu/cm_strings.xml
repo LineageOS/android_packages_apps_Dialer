@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">Rendezés hívások időtartama szerint</string>
   <string name="call_stats_sort_by_count">Rendezés hívások száma szerint</string>
   <string name="menu_add_to_blacklist">Hozzáadás a tiltólistához</string>
-  <string name="toast_added_to_blacklist">%s hozzáadva a tiltólistához.</string>
   <string name="nearby_places">Közeli helyek</string>
   <string name="people">Emberek</string>
 </resources>

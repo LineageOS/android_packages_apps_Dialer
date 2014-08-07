@@ -23,6 +23,7 @@
   <string name="menu_sendTextMessage">SMS/MMS schécken</string>
   <string name="recentCalls_callNumber"><xliff:g id="name">%s</xliff:g> uruffen</string>
   <string name="recentCalls_editNumberBeforeCall">Nr. virum Uruff änneren</string>
+  <string name="recentCalls_addToContact">Bei d\'Kontakter dobäisetzen</string>
   <string name="recentCalls_removeFromRecentList">Aus der Urufflëscht läschen</string>
   <string name="recentCalls_deleteAll">Urufflëscht eidel maachen</string>
   <string name="recentCalls_empty">Urufflëscht ass eidel.</string>
@@ -31,6 +32,7 @@
   <string name="notification_voicemail_callers_list"><xliff:g id="newer_callers">%1$s</xliff:g>,
         <xliff:g id="older_caller">%2$s</xliff:g>
     </string>
+  <string name="voicemail_buffering">Pufferung\u2026</string>
   <string name="voicemail_status_action_configure">Ariichten</string>
   <string name="voicemail_speed_slower">Lues Vitesse</string>
   <string name="voicemail_speed_normal">Normal Vitesse</string>
