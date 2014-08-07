@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a061dce_685eabea",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4884
+      },
+      "writtenOn": "2014-08-07T10:32:54Z",
+      "side": 1,
+      "message": "\u003cstring name\u003d\"toast_added_to_blacklist\"\u003e\u003cxliff:g id\u003d\"blacklisted_number\"\u003e%s\u003c/xliff:g\u003e added to blacklist\u003c/string\u003e",
+      "revId": "e111b12d715582ac4fc07308c12e78dcce094194",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
