@@ -1085,7 +1085,7 @@ public class DialpadFragment extends AnalyticsFragment
 
     private void handleDialButtonClickWithEmptyDigits() {
         if (phoneIsCdma() && isPhoneInUse()) {
-            // TODO(santoscordon): Move this logic into services/Telephony
+            // TODO: Move this logic into services/Telephony
             //
             // This is really CDMA specific. On GSM is it possible
             // to be off hook and wanted to add a 3rd party using
