@@ -60,6 +60,7 @@ public class SpecialCharSequenceMgr {
     private static final String SECRET_CODE_ACTION = "android.provider.Telephony.SECRET_CODE";
     private static final String MMI_IMEI_DISPLAY = "*#06#";
     private static final String MMI_REGULATORY_INFO_DISPLAY = "*#07#";
+    private static final String PRL_VERSION_DISPLAY = "*#0000#";
 
     /**
      * Remembers the previous {@link QueryHandler} and cancel the operation when needed, to
@@ -96,7 +97,8 @@ public class SpecialCharSequenceMgr {
         //get rid of the separators so that the string gets parsed correctly
         String dialString = PhoneNumberUtils.stripSeparators(input);
 
-        if (handleIMEIDisplay(context, dialString, useSystemWindow)
+        if (handlePRLVersion(context, dialString)
+                || handleIMEIDisplay(context, dialString, useSystemWindow)
                 || handleRegulatoryInfoDisplay(context, dialString)
                 || handlePinEntry(context, dialString)
                 || handleAdnEntry(context, dialString, textField)
@@ -104,6 +106,20 @@ public class SpecialCharSequenceMgr {
             return true;
         }
 
+        return false;
+    }
+
+    static private boolean handlePRLVersion(Context context, String input) {
+        if (input.equals(PRL_VERSION_DISPLAY)) {
+            try {
+                Intent intent = new Intent("android.intent.action.ENGINEER_MODE_DEVICEINFO");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                return true;
+            } catch (ActivityNotFoundException e) {
+                Log.d(TAG, "no activity to handle showing device info");
+            }
+        }
         return false;
     }
 
