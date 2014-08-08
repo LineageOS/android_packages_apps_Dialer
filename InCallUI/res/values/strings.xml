@@ -269,7 +269,7 @@
     <string name="incall_error_missing_voicemail_number">Voicemail number unknown.</string>
 
     <!-- In-call screen: "call type" indication for a SIP call [CHAR LIMIT=30]  -->
-    <string name="incall_call_type_label_sip">Internet call</string>
+    <string name="incall_call_type_label_sip">SIP call</string>
 
     <!-- Dialog title for the "radio enable" UI for emergency calls -->
     <string name="emergency_enable_radio_dialog_title">Emergency call</string>
