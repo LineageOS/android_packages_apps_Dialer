@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a061dce_92236905",
+        "filename": "src/com/android/dialer/calllog/CallDetailHistoryAdapter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-08-08T19:49:04Z",
+      "side": 1,
+      "message": "This should probably become a ListView with adapter.",
+      "revId": "609361ad4c7e54ec3f03f9d477c02279b801ec4d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
