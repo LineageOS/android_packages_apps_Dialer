@@ -134,7 +134,7 @@
     </LinearLayout>
 
     <!-- Call type indication: a special label and/or branding
-     for certain kinds of calls (like "Internet call" for a SIP call.) -->
+     for certain kinds of calls (like "SIP call" for a SIP call.) -->
     <TextView android:id="@+id/callTypeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
