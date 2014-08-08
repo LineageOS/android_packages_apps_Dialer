@@ -321,7 +321,9 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
                 TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.INCOMING_TYPE, Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION);
+                new int[]{Calls.INCOMING_TYPE, Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION,
+                null, null, Calls.FEATURES_VIDEO, null, null);
+
         CharSequence description = mHelper.getCallDescription(details);
         assertTrue(description.toString()
                 .contains(this.mResources.getString(R.string.description_video_call, 2)));
