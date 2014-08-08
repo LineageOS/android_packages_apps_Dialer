@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a061dce_3f186684",
+        "filename": "src/com/android/services/callrecorder/common/CallRecording.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2014-08-08T09:47:27Z",
+      "side": 1,
+      "message": "Maybe \"CallRecordings\" instead of generic \"Recordings\"?",
+      "revId": "2bc4bab2604ded0b81bf495b0e581d9564c11721",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a061dce_1f364203",
+        "filename": "src/com/android/services/callrecorder/common/CallRecording.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2014-08-08T09:47:27Z",
+      "side": 1,
+      "message": "100 char",
+      "revId": "2bc4bab2604ded0b81bf495b0e581d9564c11721",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a061dce_9f2252b8",
+        "filename": "src/com/android/services/callrecorder/common/CallRecording.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2014-08-08T09:47:27Z",
+      "side": 1,
+      "message": "100 char",
+      "revId": "2bc4bab2604ded0b81bf495b0e581d9564c11721",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
