@@ -158,11 +158,7 @@ final class TelecommAdapter implements InCallPhoneListener {
     }
 
     void swap(String callId) {
-         if (mPhone != null) {
-            getTelecommCallById(callId).swapWithBackgroundCall();
-        } else {
-            Log.e(this, "error swapWithBackgroundCall, mAdapter is null.");
-        }
+        // TODO: Remove (obsolete)
     }
 
     void addCall() {

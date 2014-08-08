@@ -16,8 +16,8 @@
 
 package com.android.incallui;
 
+import android.telecomm.PhoneCapabilities;
 import android.content.Context;
-import android.telecomm.CallCapabilities;
 
 import java.util.List;
 
@@ -98,7 +98,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         final List<String> textMsgs = CallList.getInstance().getTextResponses(call.getId());
         getUi().showAnswerUi(true);
 
-        boolean withSms = call.can(CallCapabilities.RESPOND_VIA_TEXT) && textMsgs != null;
+        boolean withSms = call.can(PhoneCapabilities.RESPOND_VIA_TEXT) && textMsgs != null;
         if (call.isVideoCall()) {
             if (withSms) {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS);

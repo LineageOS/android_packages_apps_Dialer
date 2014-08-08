@@ -19,7 +19,7 @@ package com.android.incallui;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.telecomm.VideoCallProfile;
+import android.telecomm.VideoProfile;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -112,7 +112,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
         final int resId = getResourceIdForTarget(target);
         switch (resId) {
             case R.drawable.ic_lockscreen_answer:
-                mAnswerListener.onAnswer(VideoCallProfile.VideoState.AUDIO_ONLY, getContext());
+                mAnswerListener.onAnswer(VideoProfile.VideoState.AUDIO_ONLY, getContext());
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_lockscreen_decline:
@@ -124,7 +124,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_videocam:
-                mAnswerListener.onAnswer(VideoCallProfile.VideoState.BIDIRECTIONAL, getContext());
+                mAnswerListener.onAnswer(VideoProfile.VideoState.BIDIRECTIONAL, getContext());
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_toolbar_video_off:

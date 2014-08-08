@@ -26,7 +26,7 @@ import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.telecomm.VideoCallProfile;
+import android.telecomm.VideoProfile;
 import android.telephony.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -492,7 +492,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mCallStateIcon.setImageDrawable(connectionIcon);
             }
 
-            if (VideoCallProfile.VideoState.isBidirectional(videoState)
+            if (VideoProfile.VideoState.isBidirectional(videoState)
                     || (state == Call.State.ACTIVE && sessionModificationState
                             == Call.SessionModificationState.WAITING_FOR_RESPONSE)) {
                 mCallStateVideoCallIcon.setVisibility(View.VISIBLE);
@@ -624,7 +624,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 } else if (sessionModificationState
                         == Call.SessionModificationState.WAITING_FOR_RESPONSE) {
                     callStateLabel = context.getString(R.string.card_title_video_call_requesting);
-                } else if (VideoCallProfile.VideoState.isBidirectional(videoState)) {
+                } else if (VideoProfile.VideoState.isBidirectional(videoState)) {
                     callStateLabel = context.getString(R.string.card_title_video_call);
                 }
                 break;
@@ -646,7 +646,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             case Call.State.CALL_WAITING:
                 if (isAccount) {
                     callStateLabel = context.getString(R.string.incoming_via_template, label);
-                } else if (VideoCallProfile.VideoState.isBidirectional(videoState)) {
+                } else if (VideoProfile.VideoState.isBidirectional(videoState)) {
                     callStateLabel = context.getString(R.string.notification_incoming_video_call);
                 } else {
                     callStateLabel = context.getString(R.string.card_title_incoming_call);

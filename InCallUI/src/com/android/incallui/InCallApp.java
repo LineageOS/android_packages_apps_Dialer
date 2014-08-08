@@ -21,7 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.telecomm.VideoCallProfile;
+import android.telecomm.VideoProfile;
 
 /**
  * Top-level Application class for the InCall app.
@@ -31,7 +31,7 @@ public class InCallApp extends Application {
     /**
      * Intent Action used for hanging up the current call from Notification bar. This will
      * choose first ringing call, first active call, or first background call (typically in
-     * HOLDING state).
+     * STATE_HOLDING state).
      */
     public static final String ACTION_DECLINE_INCOMING_CALL =
             "com.android.incallui.ACTION_DECLINE_INCOMING_CALL";
@@ -72,10 +72,10 @@ public class InCallApp extends Application {
             // TODO: Commands of this nature should exist in the CallList.
             if (action.equals(ACTION_ANSWER_VIDEO_INCOMING_CALL)) {
                 InCallPresenter.getInstance().answerIncomingCall(
-                        context, VideoCallProfile.VideoState.BIDIRECTIONAL);
+                        context, VideoProfile.VideoState.BIDIRECTIONAL);
             } else if (action.equals(ACTION_ANSWER_VOICE_INCOMING_CALL)) {
                 InCallPresenter.getInstance().answerIncomingCall(
-                        context, VideoCallProfile.VideoState.AUDIO_ONLY);
+                        context, VideoProfile.VideoState.AUDIO_ONLY);
             } else if (action.equals(ACTION_DECLINE_INCOMING_CALL)) {
                 InCallPresenter.getInstance().declineIncomingCall(context);
             } else if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
