@@ -187,8 +187,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         Log.d(this, "Primary call: " + primary);
         Log.d(this, "Secondary call: " + secondary);
 
-        final boolean outgoingCallReady = newState == InCallState.OUTGOING &&
-                oldState == InCallState.PENDING_OUTGOING;
         final boolean primaryChanged = !Call.areSame(mPrimary, primary);
         final boolean secondaryChanged = !Call.areSame(mSecondary, secondary);
 

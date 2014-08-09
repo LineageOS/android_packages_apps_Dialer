@@ -360,7 +360,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public void setPrimaryName(String name, boolean nameIsNumber) {
         if (TextUtils.isEmpty(name)) {
-            mPrimaryName.setText("");
+            mPrimaryName.setText(null);
         } else {
             mPrimaryName.setText(name);
 
@@ -384,7 +384,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void setPrimaryPhoneNumber(String number) {
         // Set the number
         if (TextUtils.isEmpty(number)) {
-            mPhoneNumber.setText("");
+            mPhoneNumber.setText(null);
             mPhoneNumber.setVisibility(View.GONE);
         } else {
             mPhoneNumber.setText(number);
@@ -510,6 +510,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             if (callStateAnimation != null) {
                 callStateAnimation.cancel();
             }
+            mCallStateLabel.setText(null);
             mCallStateLabel.setAlpha(0);
             mCallStateLabel.setVisibility(View.GONE);
 
