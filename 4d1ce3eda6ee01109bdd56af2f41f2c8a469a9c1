@@ -34,6 +34,24 @@
       "revId": "4d1ce3eda6ee01109bdd56af2f41f2c8a469a9c1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a061dce_3537e7b1",
+        "filename": "src/com/android/services/callrecorder/CallRecorderService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1448
+      },
+      "writtenOn": "2014-08-09T05:09:07Z",
+      "side": 1,
+      "message": "The plan is to be disabled by default and enabled on a case by case basis.",
+      "parentUuid": "9a061dce_75caffa2",
+      "revId": "4d1ce3eda6ee01109bdd56af2f41f2c8a469a9c1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
