@@ -16,6 +16,24 @@
       "revId": "609361ad4c7e54ec3f03f9d477c02279b801ec4d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a061dce_75831fcd",
+        "filename": "src/com/android/dialer/calllog/CallDetailHistoryAdapter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 10293
+      },
+      "writtenOn": "2014-08-09T09:33:54Z",
+      "side": 1,
+      "message": "An adapter would make sense if we had enough recordings to warrant scrolling, but in that scenario we would probably want to display them in a new activity (rather than a list view within a list view).  \n\nI would expect the case where we have more than a few recordings per call to be pretty rare, so I\u0027m more inclined to optimize the experience for the case where we have 1-2 recordings.",
+      "parentUuid": "9a061dce_92236905",
+      "revId": "609361ad4c7e54ec3f03f9d477c02279b801ec4d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
