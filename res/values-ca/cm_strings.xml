@@ -47,7 +47,7 @@
   <string name="call_stats_sort_by_duration">Ordena per duració de trucada</string>
   <string name="call_stats_sort_by_count">Ordena per nombre de trucades</string>
   <string name="menu_add_to_blacklist">Afegeix a la llista negra</string>
-  <string name="toast_added_to_blacklist">%s afegits a la llista negra.</string>
+  <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> afegit a la llista negra</string>
   <string name="nearby_places">Llocs propers</string>
   <string name="people">Persones</string>
 </resources>

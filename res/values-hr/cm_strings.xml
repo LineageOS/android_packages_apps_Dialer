@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">Sortiraj po trajanju poziva</string>
   <string name="call_stats_sort_by_count">Sortiraj po broju poziva</string>
   <string name="menu_add_to_blacklist">Blokiraj broj</string>
-  <string name="toast_added_to_blacklist">Pozivi sa broja %s blokirani.</string>
   <string name="nearby_places">Mjesta u blizini</string>
   <string name="people">Osobe</string>
 </resources>

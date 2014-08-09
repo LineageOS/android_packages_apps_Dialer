@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">Sortér på opkaldsvarighed</string>
   <string name="call_stats_sort_by_count">Sortér på antal opkald</string>
   <string name="menu_add_to_blacklist">Føj til sortliste</string>
-  <string name="toast_added_to_blacklist">%s føjet til sortliste.</string>
   <string name="nearby_places">Steder i nærheden</string>
   <string name="people">Mennesker</string>
 </resources>

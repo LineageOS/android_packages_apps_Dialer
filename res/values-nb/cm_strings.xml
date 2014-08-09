@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">Sorter etter samtalevarighet</string>
   <string name="call_stats_sort_by_count">Sorter etter antall samtaler</string>
   <string name="menu_add_to_blacklist">Legg til i blokkeringsliste</string>
-  <string name="toast_added_to_blacklist">%s lagt til i svartelisten.</string>
   <string name="nearby_places">Nærliggende steder</string>
   <string name="people">Folk</string>
 </resources>

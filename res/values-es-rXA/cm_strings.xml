@@ -47,7 +47,7 @@
   <string name="call_stats_sort_by_duration">Ordenar por duración</string>
   <string name="call_stats_sort_by_count">Ordenar por númb. llamaes</string>
   <string name="menu_add_to_blacklist">Amestar a la llista prieta</string>
-  <string name="toast_added_to_blacklist">%s amestáu a la llista prieta.</string>
+  <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> amestáu a la llista prieta</string>
   <string name="nearby_places">Llugares cercanos</string>
   <string name="people">Persones</string>
 </resources>

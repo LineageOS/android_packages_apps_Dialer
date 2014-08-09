@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">Sortare după durata apelului</string>
   <string name="call_stats_sort_by_count">Sortare după numărul de apeluri</string>
   <string name="menu_add_to_blacklist">Adaugă la lista neagră</string>
-  <string name="toast_added_to_blacklist">%s adăugat pe lista neagră.</string>
   <string name="nearby_places">Locații în apropiere</string>
   <string name="people">Oameni</string>
 </resources>

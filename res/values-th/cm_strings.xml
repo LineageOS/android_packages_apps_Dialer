@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">เรียงตามระยะเวลาโทร</string>
   <string name="call_stats_sort_by_count">เรียงตามจำนวนครั้งการโทร</string>
   <string name="menu_add_to_blacklist">เพิ่มไปยังบัญชีดำ</string>
-  <string name="toast_added_to_blacklist">%s เพิ่มไปยังบัญชีดำ</string>
   <string name="nearby_places">สถานใกล้เคียง</string>
   <string name="people">ผู้คน</string>
 </resources>

@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">Tri par durée d\'appel</string>
   <string name="call_stats_sort_by_count">Trier par nombre d\'appel</string>
   <string name="menu_add_to_blacklist">Ajouter à la liste noire</string>
-  <string name="toast_added_to_blacklist">%s ajouté à la liste noire.</string>
   <string name="nearby_places">Lieux à proximité</string>
   <string name="people">Personnes</string>
 </resources>

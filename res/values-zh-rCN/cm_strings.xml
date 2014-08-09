@@ -47,7 +47,7 @@
   <string name="call_stats_sort_by_duration">以通话时间排序</string>
   <string name="call_stats_sort_by_count">以通话次数排序</string>
   <string name="menu_add_to_blacklist">添加到黑名单</string>
-  <string name="toast_added_to_blacklist">%s 已添加到黑名单。</string>
+  <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> 已添加到黑名单中</string>
   <string name="nearby_places">附近地点</string>
   <string name="people">人</string>
 </resources>

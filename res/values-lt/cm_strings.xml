@@ -47,7 +47,7 @@
   <string name="call_stats_sort_by_duration">Rikiuoti pagal trukmę</string>
   <string name="call_stats_sort_by_count">Rikiuoti pagal skaičių</string>
   <string name="menu_add_to_blacklist">Įtraukti į juodąjį sąrašą</string>
-  <string name="toast_added_to_blacklist">%s pridėtas į juodąjį sąrašą.</string>
+  <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> pridėtas į juodąjį sąrašą</string>
   <string name="nearby_places">Artimos vietos</string>
   <string name="people">Žmonės</string>
 </resources>

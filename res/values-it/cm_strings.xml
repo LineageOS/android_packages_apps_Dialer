@@ -47,7 +47,7 @@
   <string name="call_stats_sort_by_duration">Ordina per durata</string>
   <string name="call_stats_sort_by_count">Ordina per numero</string>
   <string name="menu_add_to_blacklist">Aggiungi a blacklist</string>
-  <string name="toast_added_to_blacklist">%s aggiunto a blacklist.</string>
+  <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> aggiunto in blacklist</string>
   <string name="nearby_places">Posti nelle vicinanze</string>
   <string name="people">Persone</string>
 </resources>

@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">Sortera efter samtalstid</string>
   <string name="call_stats_sort_by_count">Sortera efter antal samtal</string>
   <string name="menu_add_to_blacklist">Lägg till svartlista</string>
-  <string name="toast_added_to_blacklist">%s lades till svartlistan.</string>
   <string name="nearby_places">Platser i närheten</string>
   <string name="people">Personer</string>
 </resources>

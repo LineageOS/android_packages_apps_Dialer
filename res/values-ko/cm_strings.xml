@@ -47,7 +47,7 @@
   <string name="call_stats_sort_by_duration">통화 시간으로 정렬</string>
   <string name="call_stats_sort_by_count">통화 횟수로 정렬</string>
   <string name="menu_add_to_blacklist">블랙리스트에 추가</string>
-  <string name="toast_added_to_blacklist">%s이(가) 블랙리스트에 추가되었습니다.</string>
+  <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g>을(를) 블랙리스트에 추가했습니다</string>
   <string name="nearby_places">주변 장소</string>
   <string name="people">사람</string>
 </resources>

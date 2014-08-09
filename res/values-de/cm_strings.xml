@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">Nach Anrufdauer sortieren</string>
   <string name="call_stats_sort_by_count">Nach Anrufanzahl sortieren</string>
   <string name="menu_add_to_blacklist">Zur Sperrliste hinzufügen</string>
-  <string name="toast_added_to_blacklist">%s wurde zur Sperrliste hinzugefügt</string>
   <string name="nearby_places">Orte in der Nähe</string>
   <string name="people">Personen</string>
 </resources>

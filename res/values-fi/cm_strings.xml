@@ -47,7 +47,7 @@
   <string name="call_stats_sort_by_duration">Järjestä puhelun keston mukaan</string>
   <string name="call_stats_sort_by_count">Järjestä puheluiden määrän mukaan</string>
   <string name="menu_add_to_blacklist">Lisää mustalle listalle</string>
-  <string name="toast_added_to_blacklist">%s lisätty mustalle listalle.</string>
+  <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> lisätty mustalle listalle</string>
   <string name="nearby_places">Lähellä olevat sijainnit</string>
   <string name="people">Ihmiset</string>
 </resources>

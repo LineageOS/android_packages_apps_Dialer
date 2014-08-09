@@ -47,7 +47,6 @@
   <string name="call_stats_sort_by_duration">Sorteer volgens oproep tydsduur</string>
   <string name="call_stats_sort_by_count">Sorteer volgens oproepe</string>
   <string name="menu_add_to_blacklist">Voeg tot verban lys</string>
-  <string name="toast_added_to_blacklist">%s bygevoeg tot verban lys.</string>
   <string name="nearby_places">Nabygeleë plekke</string>
   <string name="people">Mense</string>
 </resources>

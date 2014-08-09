@@ -47,7 +47,7 @@
   <string name="call_stats_sort_by_duration">ڕیزکردن بەپێی ماوەی پەیوەندی</string>
   <string name="call_stats_sort_by_count">ڕیزکردن بەپێی ژمارەی پەیوەندی</string>
   <string name="menu_add_to_blacklist">زیادکردن بۆ لیستی ڕەش</string>
-  <string name="toast_added_to_blacklist">%s زیادکرا بۆ لیستی ڕەش.</string>
+  <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> زیادکرا بۆ لیستی ڕه‌ش</string>
   <string name="nearby_places">شوێنە نزیەکاکان</string>
   <string name="people">ناوەکان</string>
 </resources>

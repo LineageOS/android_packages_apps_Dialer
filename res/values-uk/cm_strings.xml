@@ -47,7 +47,7 @@
   <string name="call_stats_sort_by_duration">Сортувати за тривалістю виклику</string>
   <string name="call_stats_sort_by_count">Сортувати за кількістю викликів</string>
   <string name="menu_add_to_blacklist">Додати в чорний список</string>
-  <string name="toast_added_to_blacklist">%s додано до чорного списку.</string>
+  <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> додано до чорного списку</string>
   <string name="nearby_places">Місця поруч</string>
   <string name="people">Люди</string>
 </resources>
