@@ -254,6 +254,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         String cameraId = mInCallCameraManager.getActiveCameraId();
         if (cameraId != null) {
             videoCall.setCamera(cameraId);
+            videoCall.requestCameraCapabilities();
         }
         getUi().setSwitchCameraButton(!useFrontFacingCamera);
     }
