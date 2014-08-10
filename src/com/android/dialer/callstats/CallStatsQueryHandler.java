@@ -122,7 +122,10 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
             selectionArgs.add(String.valueOf(to));
         }
 
-        startQuery(QUERY_CALLS_TOKEN, null, Calls.CONTENT_URI, CallStatsQuery._PROJECTION,
+        Uri uri = Calls.CONTENT_URI.buildUpon()
+                .appendQueryParameter("include_expired", "1")
+                .build();
+        startQuery(QUERY_CALLS_TOKEN, null, uri, CallStatsQuery._PROJECTION,
                 selection.toString(), selectionArgs.toArray(EMPTY_STRING_ARRAY),
                 Calls.NUMBER + " ASC");
     }
