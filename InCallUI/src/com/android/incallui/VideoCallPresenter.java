@@ -397,7 +397,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         ui.showVideoUi(true);
         InCallPresenter.getInstance().setInCallAllowsOrientationChange(true);
 
-        // Communicate the current camera to telephony; expect to get call-back with camera
+        // Communicate the current camera to telephony and make a request for the camera
         // capabilities.
         if (mVideoCall != null) {
             // Do not reset the surfaces if we just restarted the activity due to an orientation
@@ -408,6 +408,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
             mPreviewSurfaceState = PreviewSurfaceState.CAMERA_SET;
             mVideoCall.setCamera(mInCallCameraManager.getActiveCameraId());
+            mVideoCall.requestCameraCapabilities();
 
             if (ui.isDisplayVideoSurfaceCreated()) {
                 mVideoCall.setDisplaySurface(ui.getDisplayVideoSurface());
