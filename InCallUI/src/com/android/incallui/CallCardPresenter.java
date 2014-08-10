@@ -232,21 +232,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         int callState = Call.State.IDLE;
         if (mPrimary != null) {
             callState = mPrimary.getState();
-
-            getUi().setCallState(
-                    callState,
-                    mPrimary.getVideoState(),
-                    mPrimary.getSessionModificationState(),
-                    mPrimary.getDisconnectCause(),
-                    getConnectionLabel(),
-                    getCallProviderIcon(mPrimary),
-                    getGatewayNumber());
-
-            String currentNumber = getNumberFromHandle(mPrimary.getHandle());
-            if (PhoneNumberUtils.isEmergencyNumber(currentNumber)) {
-                String callbackNumber = getSubscriptionNumber();
-                setCallbackNumber(callbackNumber, true);
-            }
+            updatePrimaryCallState();
         } else {
             getUi().setCallState(
                     callState,
@@ -272,11 +258,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     @Override
     public void onDetailsChanged(Call call, android.telecomm.Call.Details details) {
-        getUi().setCallDetails(details);
-
-        if (mPrimary != null) {
-            setCallbackNumberIfSet(details);
-        }
+        updatePrimaryCallState();
     }
 
     private String getSubscriptionNumber() {
@@ -295,45 +277,45 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         return null;
     }
 
-    private void setCallbackNumberIfSet(android.telecomm.Call.Details details) {
-        String callbackNumber = null;
-
-        String currentNumber = getNumberFromHandle(mPrimary.getHandle());
-        boolean isEmergencyCall = PhoneNumberUtils.isEmergencyNumber(currentNumber);
-
-        StatusHints statusHints = details.getStatusHints();
-        if (statusHints != null) {
-            Bundle extras = statusHints.getExtras();
-            if (extras != null) {
-                callbackNumber = extras.getString(
-                        TelecommManager.EXTRA_CALL_BACK_NUMBER, null);
-
-                if (isEmergencyCall) {
-                    callbackNumber = getSubscriptionNumber();
-                }
-            } else {
-                Log.d(this, "No extras; not updating callback number");
-            }
-        } else {
-            Log.d(this, "No status hints; not updating callback number");
+    private void updatePrimaryCallState() {
+        if (getUi() != null && mPrimary != null) {
+            getUi().setCallState(
+                    mPrimary.getState(),
+                    mPrimary.getVideoState(),
+                    mPrimary.getSessionModificationState(),
+                    mPrimary.getDisconnectCause(),
+                    getConnectionLabel(),
+                    getConnectionIcon(),
+                    getGatewayNumber());
+            setCallbackNumber();
         }
-
-        setCallbackNumber(callbackNumber, isEmergencyCall);
     }
 
-    private void setCallbackNumber(String callbackNumber, boolean isEmergencyCall) {
-        if (TextUtils.isEmpty(callbackNumber)) {
-            Log.d(this, "No callback number; aborting");
-            return;
+    private void setCallbackNumber() {
+        String callbackNumber = null;
+
+        boolean isEmergencyCall = PhoneNumberUtils.isEmergencyNumber(
+                getNumberFromHandle(mPrimary.getHandle()));
+        if (isEmergencyCall) {
+            callbackNumber = getSubscriptionNumber();
+        } else {
+            StatusHints statusHints = mPrimary.getTelecommCall().getDetails().getStatusHints();
+            if (statusHints != null) {
+                Bundle extras = statusHints.getExtras();
+                if (extras != null) {
+                    callbackNumber = extras.getString(TelecommManager.EXTRA_CALL_BACK_NUMBER);
+                }
+            }
         }
 
-        final TelephonyManager telephonyManager =
+        TelephonyManager telephonyManager =
                 (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
         String simNumber = telephonyManager.getLine1Number();
-        if (!PhoneNumberUtils.compare(callbackNumber, simNumber) && !isEmergencyCall) {
+        if (PhoneNumberUtils.compare(callbackNumber, simNumber)) {
             Log.d(this, "Numbers are the same; not showing the callback number");
-            return;
+            callbackNumber = null;
         }
+
         getUi().setCallbackNumber(callbackNumber, isEmergencyCall);
     }
 
@@ -600,6 +582,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      * For example, "calling via [Account/Google Voice]" for outgoing calls.
      */
     private String getConnectionLabel() {
+        StatusHints statusHints = mPrimary.getTelecommCall().getDetails().getStatusHints();
+        if (statusHints != null && !TextUtils.isEmpty(statusHints.getLabel())) {
+            return statusHints.getLabel().toString();
+        }
+
         if (hasOutgoingGatewayCall() && getUi() != null) {
             // Return the label for the gateway app on outgoing calls.
             final PackageManager pm = mContext.getPackageManager();
@@ -613,6 +600,17 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             }
         }
         return getCallProviderLabel(mPrimary);
+    }
+
+    private Drawable getConnectionIcon() {
+        StatusHints statusHints = mPrimary.getTelecommCall().getDetails().getStatusHints();
+        if (statusHints != null && statusHints.getIconId() != 0) {
+            Drawable icon = statusHints.getIcon(mContext);
+            if (icon != null) {
+                return icon;
+            }
+        }
+        return getCallProviderIcon(mPrimary);
     }
 
     private boolean hasOutgoingGatewayCall() {
@@ -704,7 +702,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimaryLabel(String label);
         void setEndCallButtonEnabled(boolean enabled);
         void setCallbackNumber(String number, boolean isEmergencyCalls);
-        void setCallDetails(android.telecomm.Call.Details details);
         void setPhotoVisible(boolean isVisible);
         void setProgressSpinnerVisible(boolean visible);
     }
