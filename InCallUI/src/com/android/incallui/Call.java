@@ -109,7 +109,8 @@ public final class Call {
     public static class SessionModificationState {
         public static final int NO_REQUEST = 0;
         public static final int WAITING_FOR_RESPONSE = 1;
-        public static final int REQUEST_FAILED = 1;
+        public static final int REQUEST_FAILED = 2;
+        public static final int RECEIVED_UPGRADE_TO_VIDEO_REQUEST = 3;
     }
 
     private static final String ID_PREFIX = Call.class.getSimpleName() + "_";
@@ -360,6 +361,17 @@ public final class Call {
         if (hasChanged) {
             update();
         }
+    }
+
+    public static boolean areSame(Call call1, Call call2) {
+        if (call1 == null && call2 == null) {
+            return true;
+        } else if (call1 == null || call2 == null) {
+            return false;
+        }
+
+        // otherwise compare call Ids
+        return call1.getId().equals(call2.getId());
     }
 
     public int getSessionModificationState() {

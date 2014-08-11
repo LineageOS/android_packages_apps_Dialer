@@ -41,6 +41,10 @@ public class InCallApp extends Application {
             "com.android.incallui.ACTION_ANSWER_VIDEO_INCOMING_CALL";
     public static final String ACTION_ANSWER_VOICE_INCOMING_CALL =
             "com.android.incallui.ACTION_ANSWER_VOICE_INCOMING_CALL";
+    public static final String ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST =
+            "com.android.incallui.ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST";
+    public static final String ACTION_DECLINE_VIDEO_UPGRADE_REQUEST =
+            "com.android.incallui.ACTION_DECLINE_VIDEO_UPGRADE_REQUEST";
 
     public InCallApp() {
     }
@@ -76,6 +80,10 @@ public class InCallApp extends Application {
                 InCallPresenter.getInstance().declineIncomingCall(context);
             } else if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
                 InCallPresenter.getInstance().hangUpOngoingCall(context);
+            } else if (action.equals(ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST)) {
+                InCallPresenter.getInstance().acceptUpgradeRequest(context);
+            } else if (action.equals(ACTION_DECLINE_VIDEO_UPGRADE_REQUEST)) {
+                InCallPresenter.getInstance().declineUpgradeRequest(context);
             }
         }
     }

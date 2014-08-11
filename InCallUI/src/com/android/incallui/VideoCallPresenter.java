@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.Handler;
 import android.telecomm.CallAudioState;
 import android.telecomm.InCallService.VideoCall;
 import android.view.Surface;
@@ -56,7 +57,8 @@ import java.util.Objects;
  */
 public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi>  implements
         IncomingCallListener, InCallOrientationListener, InCallStateListener,
-        InCallDetailsListener, SurfaceChangeListener, VideoEventListener {
+        InCallDetailsListener, SurfaceChangeListener, VideoEventListener,
+        InCallVideoCallListenerNotifier.SessionModificationListener {
 
     /**
      * Determines the device orientation (portrait/lanscape).
@@ -145,6 +147,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      */
     private int mPreVideoAudioMode = AudioModeProvider.AUDIO_MODE_INVALID;
 
+    /** Handler which resets request state to NO_REQUEST after an interval. */
+    private Handler mSessionModificationResetHandler;
+    private static final long SESSION_MODIFICATION_RESET_DELAY_MS = 3000;
+
     /**
      * Initializes the presenter.
      *
@@ -154,6 +160,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         mContext = Preconditions.checkNotNull(context);
         mMinimumVideoDimension = mContext.getResources().getDimension(
                 R.dimen.video_preview_small_dimension);
+        mSessionModificationResetHandler = new Handler();
     }
 
     /**
@@ -173,6 +180,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         // Register for surface and video events from {@link InCallVideoCallListener}s.
         InCallVideoCallListenerNotifier.getInstance().addSurfaceChangeListener(this);
         InCallVideoCallListenerNotifier.getInstance().addVideoEventListener(this);
+        InCallVideoCallListenerNotifier.getInstance().addSessionModificationListener(this);
 
         mInCallCameraManager = InCallPresenter.getInstance().getInCallCameraManager();
         mIsVideoCall = false;
@@ -192,6 +200,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallPresenter.getInstance().removeOrientationListener(this);
         InCallVideoCallListenerNotifier.getInstance().removeSurfaceChangeListener(this);
         InCallVideoCallListenerNotifier.getInstance().removeVideoEventListener(this);
+        InCallVideoCallListenerNotifier.getInstance().removeSessionModificationListener(this);
 
         mInCallCameraManager = null;
     }
@@ -514,6 +523,43 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     @Override
     public void onDeviceOrientationChanged(int orientation) {
         mDeviceOrientation = orientation;
+    }
+
+    @Override
+    public void onUpgradeToVideoRequest(Call call) {
+        mPrimaryCall.setSessionModificationState(
+                Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST);
+    }
+
+    @Override
+    public void onUpgradeToVideoSuccess(Call call) {
+        if (mPrimaryCall == null || !Call.areSame(mPrimaryCall, call)) {
+            return;
+        }
+
+        mPrimaryCall.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
+    }
+
+    @Override
+    public void onUpgradeToVideoFail(Call call) {
+        if (mPrimaryCall == null || !Call.areSame(mPrimaryCall, call)) {
+            return;
+        }
+
+        call.setSessionModificationState(Call.SessionModificationState.REQUEST_FAILED);
+
+        // Start handler to change state from REQUEST_FAILED to NO_REQUEST after an interval.
+        mSessionModificationResetHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mPrimaryCall.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
+            }
+        }, SESSION_MODIFICATION_RESET_DELAY_MS);
+    }
+
+    @Override
+    public void onDowngradeToAudio(Call call) {
+        // Implementing to satsify interface.
     }
 
     /**
