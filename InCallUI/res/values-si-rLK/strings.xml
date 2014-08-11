@@ -108,7 +108,8 @@
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"ඇමතුම ප්‍රතික්ෂේප කළ නොහැකි විය."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"ඇමතුම(ම්) නිදහස් කිරීමට නොහැකි විය."</string>
     <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"හඬ තැපැල් අංකය නොදනී."</string>
-    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"අන්තර්ජාල ඇමතුම"</string>
+    <!-- no translation found for incall_call_type_label_sip (4931428719494190371) -->
+    <skip />
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"හදිසි ඇමතුම"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"රේඩියෝව ආරම්භ කරමින්…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"සේවා රහිත ප්‍රදේශය, යළි උත්සාහ කරමින්..."</string>
