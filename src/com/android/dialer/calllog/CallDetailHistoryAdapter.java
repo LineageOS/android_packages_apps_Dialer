@@ -122,7 +122,8 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
         TextView durationView = (TextView) result.findViewById(R.id.duration);
 
         int callType = details.callTypes[0];
-        boolean isVideoCall = (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO;
+        boolean isVideoCall = (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
+                && DialerUtils.isVideoEnabled();
 
         callTypeIconView.clear();
         callTypeIconView.add(callType);

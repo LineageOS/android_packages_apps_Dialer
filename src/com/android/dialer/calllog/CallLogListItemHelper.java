@@ -23,6 +23,7 @@ import android.text.TextUtils;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
+import com.android.dialer.util.DialerUtils;
 
 /**
  * Helper class to fill in the views of a call log entry.
@@ -153,7 +154,8 @@ import com.android.dialer.R;
         }
 
         // If call had video capabilities, add the "Video Call" string.
-        if ((details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
+        if ((details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO &&
+                DialerUtils.isVideoEnabled()) {
             callDescription.append(mResources.getString(R.string.description_video_call));
         }
 
