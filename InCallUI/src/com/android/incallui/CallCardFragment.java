@@ -767,6 +767,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     public void dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
         if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            dispatchPopulateAccessibilityEvent(event, mCallStateLabel);
             dispatchPopulateAccessibilityEvent(event, mPrimaryName);
             dispatchPopulateAccessibilityEvent(event, mPhoneNumber);
             return;
