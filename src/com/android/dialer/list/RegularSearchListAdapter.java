@@ -26,6 +26,7 @@ import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
+import com.android.dialer.util.DialerUtils;
 
 /**
  * List adapter to display regular search results.
@@ -73,9 +74,8 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
         // a dialable number, then clicking add to contact should add it as a number.
         // Otherwise, it should add it to a new contact as a name.
         setShortcutEnabled(SHORTCUT_ADD_NUMBER_TO_CONTACTS, showNumberShortcuts);
-        // TODO: Write utility method to check subscriptions and settings, and use it to determine
-        // whether to enable or disable video call shortcut.
-        setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL, showNumberShortcuts);
+        setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
+                showNumberShortcuts && DialerUtils.isVideoEnabled());
         super.setQueryString(queryString);
     }
 }
