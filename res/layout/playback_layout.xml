@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:progressDrawable="@drawable/seekbar_drawable"
-            android:thumb="@drawable/seek_bar_thumb"
+            android:thumb="@drawable/ic_voicemail_seek_handle"
             android:thumbOffset="8dip"
             android:progress="0"
             android:paddingStart="8dip"
