@@ -518,11 +518,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setCallDetails(android.telecomm.Call.Details details) {
-    }
-
-    @Override
     public void setCallbackNumber(String callbackNumber, boolean isEmergencyCall) {
+        if (mInCallMessageLabel == null) {
+            return;
+        }
+
         if (TextUtils.isEmpty(callbackNumber)) {
             mInCallMessageLabel.setVisibility(View.GONE);
             return;
