@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -48,6 +49,7 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     public static final int TARGET_SET_FOR_AUDIO_WITH_SMS = 1;
     public static final int TARGET_SET_FOR_VIDEO_WITHOUT_SMS = 2;
     public static final int TARGET_SET_FOR_VIDEO_WITH_SMS = 3;
+    public static final int TARGET_SET_FOR_VIDEO_UPGRADE_REQUEST = 4;
 
     /**
      * The popup showing the list of canned responses.
@@ -151,6 +153,14 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
                         R.array.incoming_call_widget_video_with_sms_target_descriptions;
                 directionDescriptionsResourceId =
                         R.array.incoming_call_widget_video_with_sms_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_video_handle;
+                break;
+            case TARGET_SET_FOR_VIDEO_UPGRADE_REQUEST:
+                targetResourceId = R.array.incoming_call_widget_video_upgrade_request_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_upgrade_request_target_descriptions;
+                directionDescriptionsResourceId = R.array
+                        .incoming_call_widget_video_upgrade_request_target_direction_descriptions;
                 handleDrawableResourceId = R.drawable.ic_incall_video_handle;
                 break;
             case TARGET_SET_FOR_AUDIO_WITHOUT_SMS:
@@ -322,8 +332,8 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     }
 
     @Override
-    public void onAnswer(int videoState) {
-        getPresenter().onAnswer(videoState);
+    public void onAnswer(int videoState, Context context) {
+        getPresenter().onAnswer(videoState, context);
     }
 
     @Override

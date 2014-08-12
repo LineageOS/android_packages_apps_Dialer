@@ -525,6 +525,38 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         }
     }
 
+    public void acceptUpgradeRequest(Context context) {
+        // Bail if we have been shut down and the call list is null.
+        if (mCallList == null) {
+            StatusBarNotifier.clearInCallNotification(context);
+            return;
+        }
+
+        Call call = mCallList.getVideoUpgradeRequestCall();
+        if (call != null) {
+            VideoCallProfile videoProfile =
+                    new VideoCallProfile(VideoCallProfile.VideoState.BIDIRECTIONAL);
+            call.getVideoCall().sendSessionModifyResponse(videoProfile);
+            call.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
+        }
+    }
+
+    public void declineUpgradeRequest(Context context) {
+        // Bail if we have been shut down and the call list is null.
+        if (mCallList == null) {
+            StatusBarNotifier.clearInCallNotification(context);
+            return;
+        }
+
+        Call call = mCallList.getVideoUpgradeRequestCall();
+        if (call != null) {
+            VideoCallProfile videoProfile =
+                    new VideoCallProfile(VideoCallProfile.VideoState.AUDIO_ONLY);
+            call.getVideoCall().sendSessionModifyResponse(videoProfile);
+            call.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
+        }
+    }
+
     /**
      * Returns true if the incall app is the foreground application.
      */

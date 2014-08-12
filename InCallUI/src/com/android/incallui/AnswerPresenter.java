@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.content.Context;
 import android.telecomm.CallCapabilities;
 
 import java.util.List;
@@ -36,10 +37,14 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         super.onUiReady(ui);
 
         final CallList calls = CallList.getInstance();
-        final Call call = calls.getIncomingCall();
-        // TODO: change so that answer presenter never starts up if it's not incoming.
+        Call call;
+        call = calls.getIncomingCall();
         if (call != null) {
             processIncomingCall(call);
+        }
+        call = calls.getVideoUpgradeRequestCall();
+        if (call != null) {
+            processVideoUpgradeRequestCall(call);
         }
 
         // Listen for incoming calls.
@@ -111,6 +116,17 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         }
     }
 
+    private void processVideoUpgradeRequestCall(Call call) {
+        mCallId = call.getId();
+        mCall = call;
+
+        // Listen for call updates for the current call.
+        CallList.getInstance().addCallUpdateListener(mCallId, this);
+        getUi().showAnswerUi(true);
+
+        getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_UPGRADE_REQUEST);
+    }
+
     @Override
     public void onCallChanged(Call call) {
         Log.d(this, "onCallStateChange() " + call + " " + this);
@@ -126,13 +142,18 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         }
     }
 
-    public void onAnswer(int videoState) {
+    public void onAnswer(int videoState, Context context) {
         if (mCallId == null) {
             return;
         }
 
         Log.d(this, "onAnswer " + mCallId);
-        TelecommAdapter.getInstance().answerCall(mCall.getId(), videoState);
+        if (mCall.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+            InCallPresenter.getInstance().acceptUpgradeRequest(context);
+        } else {
+            TelecommAdapter.getInstance().answerCall(mCall.getId(), videoState);
+        }
     }
 
     /**

@@ -504,6 +504,12 @@
     <!-- Description of the target to answer a call as an audio call in the Slide unlock screen.
          [CHAR LIMIT=NONE] -->
     <string name="description_target_answer_audio_call">Answer as audio call</string>
+    <!-- Description of the target to accept a request to upgrade from an audio call to a video call.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_target_accept_upgrade_to_video_request">Accept video request</string>
+    <!-- Description of the target to decline a request to upgrade from an audio call to a video call.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_target_decline_upgrade_to_video_request">Decline video request</string>
 
     <!-- Description of the up direction in which one can to slide the handle in the phone answer screen. [CHAR LIMIT=NONE] -->
     <string name="description_direction_up">Slide up for <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
