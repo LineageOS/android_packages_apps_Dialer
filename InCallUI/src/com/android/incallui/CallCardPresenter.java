@@ -62,7 +62,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private Call mSecondary;
     private ContactCacheEntry mPrimaryContactInfo;
     private ContactCacheEntry mSecondaryContactInfo;
-    private CallTimer mCallT\imer;
+    private CallTimer mCallTimer;
     private Context mContext;
     private TelecommManager mTelecommManager;
 
