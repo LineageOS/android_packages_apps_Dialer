@@ -108,7 +108,7 @@
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Дуудлагыг таслах боломжгүй."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Дуудлагыг нээх боломжгүй."</string>
     <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Дуут шуудангийн дугаар тодорхойгүй."</string>
-    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Интернет дуудлага"</string>
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP дуудлага"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Ослын дуудлага"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Радиог асааж байна…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Үйлчилгээний хүрээнээс гарлаа, дахин оролдож байна ..."</string>

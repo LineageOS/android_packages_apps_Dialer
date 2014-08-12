@@ -108,7 +108,8 @@
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"통화를 거부할 수 없습니다."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"통화를 끊을 수 없습니다."</string>
     <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"음성사서함 번호를 알 수 없음"</string>
-    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"인터넷 전화"</string>
+    <!-- no translation found for incall_call_type_label_sip (4931428719494190371) -->
+    <skip />
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"긴급 전화"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"무선을 켜는 중..."</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"서비스 지역을 벗어났습니다. 다시 시도하는 중..."</string>

@@ -43,7 +43,7 @@
     <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"លេខ​មិន​ត្រឹមត្រូវ"</string>
     <string name="confCall" msgid="1904840547188336828">"ការ​ហៅ​ជា​សន្និសីទ"</string>
     <string name="call_lost" msgid="317670617901479594">"បាត់បង់​ការ​ហៅ។"</string>
-    <string name="ok" msgid="3811371167865772377">"យល់​ព្រម"</string>
+    <string name="ok" msgid="3811371167865772377">"យល់​ព្រម​"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"អូប៉ាល័រ"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"កាស"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"កាស​មាន​ខ្សែ"</string>
@@ -108,7 +108,7 @@
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"មិន​អាច​បដិសេធ​ការ​ហៅ​។"</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"មិន​អាច​ហៅ​បាន​ទេ។"</string>
     <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"មិន​ស្គាល់​លេខ​សារ​ជា​សំឡេង។"</string>
-    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"ហៅ​តាម​អ៊ីនធឺណិត"</string>
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"ការ​ហៅ SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"ការ​ហៅ​នៅ​ពេល​មាន​អាសន្ន"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"កំពុង​បើក​វិទ្យុ…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"នៅ​ក្រៅ​តំបន់​សេវា​ កំពុង​ព្យាយាម​ម្ដងទៀត…"</string>
