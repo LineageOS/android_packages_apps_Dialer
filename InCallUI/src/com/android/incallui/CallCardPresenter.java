@@ -22,7 +22,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.telecomm.CallCapabilities;
 import android.telecomm.PhoneAccount;
 import android.telecomm.PhoneAccountHandle;
@@ -54,18 +53,16 @@ import com.google.common.base.Preconditions;
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         implements InCallStateListener, IncomingCallListener, InCallDetailsListener,
-        InCallEventListener, InCallVideoCallListenerNotifier.SessionModificationListener {
+        InCallEventListener {
 
     private static final String TAG = CallCardPresenter.class.getSimpleName();
     private static final long CALL_TIME_UPDATE_INTERVAL_MS = 1000;
-    private static final long SESSION_MODIFICATION_RESET_DELAY_MS = 3000;
 
     private Call mPrimary;
     private Call mSecondary;
     private ContactCacheEntry mPrimaryContactInfo;
     private ContactCacheEntry mSecondaryContactInfo;
-    private CallTimer mCallTimer;
-    private Handler mSessionModificationResetHandler;
+    private CallTimer mCallT\imer;
     private Context mContext;
     private TelecommManager mTelecommManager;
 
@@ -104,7 +101,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 updateCallTime();
             }
         });
-        mSessionModificationResetHandler = new Handler();
     }
 
     public void init(Context context, Call call) {
@@ -137,15 +133,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         InCallPresenter.getInstance().addIncomingCallListener(this);
         InCallPresenter.getInstance().addDetailsListener(this);
         InCallPresenter.getInstance().addInCallEventListener(this);
-
-        InCallVideoCallListenerNotifier.getInstance().addSessionModificationListener(this);
     }
 
     @Override
     public void onUiUnready(CallCardUi ui) {
         super.onUiUnready(ui);
-
-        InCallVideoCallListenerNotifier.getInstance().removeSessionModificationListener(this);
 
         // stop getting call state changes
         InCallPresenter.getInstance().removeListener(this);
@@ -196,8 +188,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         final boolean outgoingCallReady = newState == InCallState.OUTGOING &&
                 oldState == InCallState.PENDING_OUTGOING;
-        final boolean primaryChanged = !areCallsSame(mPrimary, primary) || outgoingCallReady;
-        final boolean secondaryChanged = !areCallsSame(mSecondary, secondary);
+        final boolean primaryChanged = !Call.areSame(mPrimary, primary);
+        final boolean secondaryChanged = !Call.areSame(mSecondary, secondary);
+
         mSecondary = secondary;
         mPrimary = primary;
 
@@ -362,53 +355,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return;
         }
         TelecommAdapter.getInstance().phoneAccountClicked(mPrimary.getId());
-    }
-
-    @Override
-    public void onUpgradeToVideoRequest(Call call) {
-        // Implementing to satsify interface.
-    }
-
-    @Override
-    public void onUpgradeToVideoSuccess(Call call) {
-        if (mPrimary == null || !areCallsSame(mPrimary, call)) {
-            return;
-        }
-
-        mPrimary.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
-    }
-
-    @Override
-    public void onUpgradeToVideoFail(Call call) {
-        if (mPrimary == null || !areCallsSame(mPrimary, call)) {
-            return;
-        }
-
-        call.setSessionModificationState(Call.SessionModificationState.REQUEST_FAILED);
-
-        // Start handler to change state from REQUEST_FAILED to NO_REQUEST after an interval.
-        mSessionModificationResetHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mPrimary.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
-            }
-        }, SESSION_MODIFICATION_RESET_DELAY_MS);
-    }
-
-    @Override
-    public void onDowngradeToAudio(Call call) {
-        // Implementing to satsify interface.
-    }
-
-    private boolean areCallsSame(Call call1, Call call2) {
-        if (call1 == null && call2 == null) {
-            return true;
-        } else if (call1 == null || call2 == null) {
-            return false;
-        }
-
-        // otherwise compare call Ids
-        return call1.getId().equals(call2.getId());
     }
 
     private void maybeStartSearch(Call call, boolean isPrimary) {
