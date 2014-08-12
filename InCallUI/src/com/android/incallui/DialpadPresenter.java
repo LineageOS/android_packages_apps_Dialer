@@ -39,7 +39,8 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
     }
 
     @Override
-    public void onStateChange(InCallPresenter.InCallState state, CallList callList) {
+    public void onStateChange(InCallPresenter.InCallState oldState,
+            InCallPresenter.InCallState newState, CallList callList) {
         mCall = callList.getActiveCall();
         Log.d(this, "DialpadPresenter mCall = " + mCall);
     }
