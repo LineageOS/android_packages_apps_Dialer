@@ -109,10 +109,10 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      * Creates notifications according to the state we receive from {@link InCallPresenter}.
      */
     @Override
-    public void onStateChange(InCallState state, CallList callList) {
+    public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
         Log.d(this, "onStateChange");
 
-        updateNotification(state, callList);
+        updateNotification(newState, callList);
     }
 
     /**
