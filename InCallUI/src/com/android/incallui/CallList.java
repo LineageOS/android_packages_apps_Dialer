@@ -273,6 +273,21 @@ public class CallList implements InCallPhoneListener {
         return result;
     }
 
+    /**
+     * Returns the first call found in the call map with the specified call modification state.
+     * @param state The session modification state to search for.
+     * @return The first call with the specified state.
+     */
+    public Call getVideoUpgradeRequestCall() {
+        for(Call call : mCallById.values()) {
+            if (call.getSessionModificationState() ==
+                    Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+                return call;
+            }
+        }
+        return null;
+    }
+
     public Call getCallById(String callId) {
         return mCallById.get(callId);
     }

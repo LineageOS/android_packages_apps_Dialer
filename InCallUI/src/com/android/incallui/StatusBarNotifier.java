@@ -258,12 +258,15 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
 
         final int state = call.getState();
         final boolean isConference = call.isConferenceCall();
+        final boolean isVideoUpgradeRequest = call.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
+
+        // Check if data has changed; if nothing is different, don't issue another notification.
         final int iconResId = getIconToDisplay(call);
         final Bitmap largeIcon = getLargeIconToDisplay(contactInfo, isConference);
         final int contentResId = getContentString(call);
         final String contentTitle = getContentTitle(contactInfo, isConference);
 
-        // If we checked and found that nothing is different, dont issue another notification.
         if (!checkForChangeAndSaveData(iconResId, contentResId, largeIcon, contentTitle, state)) {
             return;
         }
@@ -283,12 +286,33 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
             configureFullScreenIntent(builder, inCallPendingIntent, call);
         }
 
-        // set the content
+        // Set the content
         builder.setContentText(mContext.getString(contentResId));
         builder.setSmallIcon(iconResId);
         builder.setContentTitle(contentTitle);
         builder.setLargeIcon(largeIcon);
 
+        if (isVideoUpgradeRequest) {
+            builder.setUsesChronometer(false);
+            addDismissUpgradeRequestAction(builder);
+            addAcceptUpgradeRequestAction(builder);
+        } else {
+            createIncomingCallNotification(call, state, builder);
+        }
+
+        addPersonReference(builder, contactInfo, call);
+
+        /*
+         * Fire off the notification
+         */
+        Notification notification = builder.build();
+        Log.d(this, "Notifying IN_CALL_NOTIFICATION: " + notification);
+        mNotificationManager.notify(IN_CALL_NOTIFICATION, notification);
+        mIsShowingNotification = true;
+    }
+
+    private void createIncomingCallNotification(
+            Call call, int state, Notification.Builder builder) {
         if (state == Call.State.ACTIVE) {
             builder.setUsesChronometer(true);
             builder.setWhen(call.getConnectTimeMillis());
@@ -310,16 +334,6 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
                 addAnswerAction(builder);
             }
         }
-
-        addPersonReference(builder, contactInfo, call);
-
-        /*
-         * Fire off the notification
-         */
-        Notification notification = builder.build();
-        Log.d(this, "Notifying IN_CALL_NOTIFICATION: " + notification);
-        mNotificationManager.notify(IN_CALL_NOTIFICATION, notification);
-        mIsShowingNotification = true;
     }
 
     /**
@@ -422,6 +436,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         // display that regardless of the state of the other calls.
         if (call.getState() == Call.State.ONHOLD) {
             return R.drawable.stat_sys_phone_call_on_hold;
+        } else if (call.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+            return R.drawable.ic_videocam;
         }
         return R.drawable.fab_ic_call;
     }
@@ -434,12 +451,13 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
 
         if (call.getState() == Call.State.INCOMING || call.getState() == Call.State.CALL_WAITING) {
             resId = R.string.notification_incoming_call;
-
         } else if (call.getState() == Call.State.ONHOLD) {
             resId = R.string.notification_on_hold;
-
         } else if (Call.State.isDialing(call.getState())) {
             resId = R.string.notification_dialing;
+        } else if (call.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+            resId = R.string.notification_requesting_video_call;
         }
 
         return resId;
@@ -455,6 +473,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         Call call = callList.getIncomingCall();
         if (call == null) {
             call = callList.getOutgoingCall();
+        }
+        if (call == null) {
+            call = callList.getVideoUpgradeRequestCall();
         }
         if (call == null) {
             call = callList.getActiveOrBackgroundCall();
@@ -510,6 +531,24 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         builder.addAction(R.drawable.fab_ic_call,
                 mContext.getText(R.string.notification_action_answer_voice),
                 answerVoicePendingIntent);
+    }
+
+    private void addAcceptUpgradeRequestAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"accept\" action in the incoming call Notification");
+
+        PendingIntent acceptVideoPendingIntent = createNotificationPendingIntent(
+                mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
+        builder.addAction(0, mContext.getText(R.string.notification_action_accept),
+        acceptVideoPendingIntent);
+    }
+
+    private void addDismissUpgradeRequestAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"dismiss\" action in the incoming call Notification");
+
+        PendingIntent declineVideoPendingIntent = createNotificationPendingIntent(
+                mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
+        builder.addAction(0, mContext.getText(R.string.notification_action_dismiss),
+                declineVideoPendingIntent);
     }
 
     /**
