@@ -108,7 +108,8 @@
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Hovor nie je možné odmietnuť."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Hovor nie je možné uvoľniť."</string>
     <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Číslo hlasovej schránky je neznáme"</string>
-    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Internetový hovor"</string>
+    <!-- no translation found for incall_call_type_label_sip (4931428719494190371) -->
+    <skip />
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Tiesňové volanie"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Prebieha zapínanie rádia..."</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Nepokrytá oblasť, opakovanie pokusu..."</string>

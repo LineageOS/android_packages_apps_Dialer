@@ -108,7 +108,8 @@
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"কল প্রত্যাখ্যান করা যায়নি৷"</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"কল(গুলি) রিলিজ করা যায়নি৷"</string>
     <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"ভয়েসমেল নম্বর অজানা৷"</string>
-    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"ইন্টারনেট কল"</string>
+    <!-- no translation found for incall_call_type_label_sip (4931428719494190371) -->
+    <skip />
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"জরুরি কল"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"রেডিও চালু করা হচ্ছে…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"পরিষেবা এলাকার বাইরে, আবার চেষ্টা করা হচ্ছে…"</string>
