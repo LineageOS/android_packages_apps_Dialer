@@ -53,10 +53,10 @@ public class ConferenceManagerPresenter
     }
 
     @Override
-    public void onStateChange(InCallState state, CallList callList) {
+    public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
         if (getUi().isFragmentVisible()) {
-            Log.v(this, "onStateChange" + state);
-            if (state == InCallState.INCALL) {
+            Log.v(this, "onStateChange" + newState);
+            if (newState == InCallState.INCALL) {
                 final Call call = callList.getActiveOrBackgroundCall();
                 if (call != null && call.isConferenceCall()) {
                     Log.v(this, "Number of existing calls is " +
