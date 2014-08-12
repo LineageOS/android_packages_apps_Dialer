@@ -311,16 +311,17 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             return;
         }
         InCallState newState = getPotentialStateFromCallList(callList);
+        InCallState oldState = mInCallState;
         newState = startOrFinishUi(newState);
 
         // Set the new state before announcing it to the world
-        Log.i(this, "Phone switching state: " + mInCallState + " -> " + newState);
+        Log.i(this, "Phone switching state: " + oldState + " -> " + newState);
         mInCallState = newState;
 
         // notify listeners of new state
         for (InCallStateListener listener : mListeners) {
             Log.d(this, "Notify " + listener + " of state " + mInCallState.toString());
-            listener.onStateChange(mInCallState, callList);
+            listener.onStateChange(oldState, mInCallState, callList);
         }
 
         if (isActivityStarted()) {
@@ -338,12 +339,13 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     @Override
     public void onIncomingCall(Call call) {
         InCallState newState = startOrFinishUi(InCallState.INCOMING);
+        InCallState oldState = mInCallState;
 
-        Log.i(this, "Phone switching state: " + mInCallState + " -> " + newState);
+        Log.i(this, "Phone switching state: " + oldState + " -> " + newState);
         mInCallState = newState;
 
         for (IncomingCallListener listener : mIncomingCallListeners) {
-            listener.onIncomingCall(mInCallState, call);
+            listener.onIncomingCall(oldState, mInCallState, call);
         }
     }
 
@@ -378,6 +380,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             newState = InCallState.INCOMING;
         } else if (callList.getWaitingForAccountCall() != null) {
             newState = InCallState.WAITING_FOR_ACCOUNT;
+        } else if (callList.getPendingOutgoingCall() != null) {
+            newState = InCallState.PENDING_OUTGOING;
         } else if (callList.getOutgoingCall() != null) {
             newState = InCallState.OUTGOING;
         } else if (callList.getActiveCall() != null ||
@@ -714,9 +718,12 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         // TODO: Consider a proper state machine implementation
 
-        // If the state isn't changing, we have already done any starting/stopping of
-        // activities in a previous pass...so lets cut out early
-        if (newState == mInCallState) {
+        // If the state isn't changing or if we're transitioning from pending outgoing to actual
+        // outgoing, we have already done any starting/stopping of activities in a previous pass
+        // ...so lets cut out early
+        boolean alreadyOutgoing = mInCallState == InCallState.PENDING_OUTGOING &&
+                newState == InCallState.OUTGOING;
+        if (newState == mInCallState || alreadyOutgoing) {
             return newState;
         }
 
@@ -753,9 +760,14 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         // happens we need to display the screen immediately or show an account picker dialog if
         // no default is set.
         //
+        // It is also possible to go into an intermediate state where the call has been initiated
+        // but Telecomm has not yet returned with the details of the call (handle, gateway, etc.).
+        // This pending outgoing state also launches the call screen.
+        //
         // This is different from the incoming call sequence because we do not need to shock the
         // user with a top-level notification.  Just show the call UI normally.
-        final boolean showCallUi = (InCallState.OUTGOING == newState || showAccountPicker);
+        final boolean showCallUi = ((InCallState.PENDING_OUTGOING == newState ||
+                InCallState.OUTGOING == newState) || showAccountPicker);
 
         // TODO: Can we be suddenly in a call without it having been in the outgoing or incoming
         // state?  I havent seen that but if it can happen, the code below should be enabled.
@@ -985,6 +997,10 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         // Waiting for user input before placing outgoing call
         WAITING_FOR_ACCOUNT,
 
+        // UI is starting up but no call has been initiated yet.
+        // The UI is waiting for Telecomm to respond.
+        PENDING_OUTGOING,
+
         // User is dialing out
         OUTGOING;
 
@@ -1004,11 +1020,11 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      */
     public interface InCallStateListener {
         // TODO: Enhance state to contain the call objects instead of passing CallList
-        public void onStateChange(InCallState state, CallList callList);
+        public void onStateChange(InCallState oldState, InCallState newState, CallList callList);
     }
 
     public interface IncomingCallListener {
-        public void onIncomingCall(InCallState state, Call call);
+        public void onIncomingCall(InCallState oldState, InCallState newState, Call call);
     }
 
     public interface InCallDetailsListener {

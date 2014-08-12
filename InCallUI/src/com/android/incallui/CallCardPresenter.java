@@ -159,14 +159,14 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     @Override
-    public void onIncomingCall(InCallState state, Call call) {
+    public void onIncomingCall(InCallState oldState, InCallState newState, Call call) {
         // same logic should happen as with onStateChange()
-        onStateChange(state, CallList.getInstance());
+        onStateChange(oldState, newState, CallList.getInstance());
     }
 
     @Override
-    public void onStateChange(InCallState state, CallList callList) {
-        Log.d(this, "onStateChange() " + state);
+    public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
+        Log.d(this, "onStateChange() " + newState);
         final CallCardUi ui = getUi();
         if (ui == null) {
             return;
@@ -175,15 +175,18 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         Call primary = null;
         Call secondary = null;
 
-        if (state == InCallState.INCOMING) {
+        if (newState == InCallState.INCOMING) {
             primary = callList.getIncomingCall();
-        } else if (state == InCallState.OUTGOING) {
+        } else if (newState == InCallState.PENDING_OUTGOING || newState == InCallState.OUTGOING) {
             primary = callList.getOutgoingCall();
+            if (primary == null) {
+                primary = callList.getPendingOutgoingCall();
+            }
 
             // getCallToDisplay doesn't go through outgoing or incoming calls. It will return the
             // highest priority call to display as the secondary call.
             secondary = getCallToDisplay(callList, null, true);
-        } else if (state == InCallState.INCALL) {
+        } else if (newState == InCallState.INCALL) {
             primary = getCallToDisplay(callList, null, false);
             secondary = getCallToDisplay(callList, primary, true);
         }
@@ -191,7 +194,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         Log.d(this, "Primary call: " + primary);
         Log.d(this, "Secondary call: " + secondary);
 
-        final boolean primaryChanged = !areCallsSame(mPrimary, primary);
+        final boolean outgoingCallReady = newState == InCallState.OUTGOING &&
+                oldState == InCallState.PENDING_OUTGOING;
+        final boolean primaryChanged = !areCallsSame(mPrimary, primary) || outgoingCallReady;
         final boolean secondaryChanged = !areCallsSame(mSecondary, secondary);
         mSecondary = secondary;
         mPrimary = primary;
@@ -265,7 +270,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             getUi().setPhotoVisible(!(mPrimary.isVideoCall() && callState != Call.State.ONHOLD));
         }
 
-        final boolean enableEndCallButton = Call.State.isConnected(callState) &&
+        final boolean enableEndCallButton = Call.State.isConnectingOrConnected(callState) &&
                 callState != Call.State.INCOMING && mPrimary != null;
         getUi().setEndCallButtonEnabled(enableEndCallButton);
     }
@@ -437,6 +442,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (getUi() == null) {
             return;
         }
+
         if (entry.photo != null) {
             if (mPrimary != null && callId.equals(mPrimary.getId())) {
                 getUi().setPrimaryImage(entry.photo);
