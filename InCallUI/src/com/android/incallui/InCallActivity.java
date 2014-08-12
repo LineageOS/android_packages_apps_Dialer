@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.telephony.DisconnectCause;
+import android.text.TextUtils;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -39,6 +40,8 @@ import android.view.accessibility.AccessibilityEvent;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 import com.android.incallui.Call.State;
+
+import java.util.Locale;
 
 /**
  * Phone app "in call" screen.
@@ -114,10 +117,19 @@ public class InCallActivity extends Activity {
         mCurrentOrientation = getResources().getConfiguration().orientation;
         mIsLandscape = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
-        mSlideIn = AnimationUtils.loadAnimation(this,
-                mIsLandscape ? R.anim.dialpad_slide_in_right : R.anim.dialpad_slide_in_bottom);
-        mSlideOut = AnimationUtils.loadAnimation(this,
-                mIsLandscape ? R.anim.dialpad_slide_out_right : R.anim.dialpad_slide_out_bottom);
+
+        final boolean isRtl = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) ==
+                View.LAYOUT_DIRECTION_RTL;
+
+        if (mIsLandscape) {
+            mSlideIn = AnimationUtils.loadAnimation(this,
+                    isRtl ? R.anim.dialpad_slide_in_left : R.anim.dialpad_slide_in_right);
+            mSlideOut = AnimationUtils.loadAnimation(this,
+                    isRtl ? R.anim.dialpad_slide_out_left : R.anim.dialpad_slide_out_right);
+        } else {
+            mSlideIn = AnimationUtils.loadAnimation(this, R.anim.dialpad_slide_in_bottom);
+            mSlideOut = AnimationUtils.loadAnimation(this, R.anim.dialpad_slide_out_bottom);
+        }
 
         mSlideIn.setInterpolator(AnimUtils.EASE_IN);
         mSlideOut.setInterpolator(AnimUtils.EASE_OUT);
