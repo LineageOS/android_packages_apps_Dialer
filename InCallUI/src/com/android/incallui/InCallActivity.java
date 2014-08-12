@@ -64,6 +64,12 @@ public class InCallActivity extends Activity {
     /** Use to pass 'showDialpad' from {@link #onNewIntent} to {@link #onResume} */
     private boolean mShowDialpadRequested;
 
+    /** Use to determine if the dialpad should be animated on show. */
+    private boolean mAnimateDialpadOnShow;
+
+    /** Use to determine the DTMF Text which should be pre-populated in the dialpad. */
+    private String mDtmfText;
+
     /** Use to pass parameters for showing the PostCharDialog to {@link #onResume} */
     private boolean mShowPostCharWaitDialogOnResume;
     private String mShowPostCharWaitDialogCallId;
@@ -123,11 +129,15 @@ public class InCallActivity extends Activity {
         mSlideOut.setInterpolator(AnimUtils.EASE_OUT);
 
         mSlideOut.setAnimationListener(mSlideOutListener);
+
         if (icicle != null) {
-            if (icicle.getBoolean(SHOW_DIALPAD_EXTRA)) {
-                mCallButtonFragment.displayDialpad(true /* show */, false /* animate */);
-            }
-            mDialpadFragment.setDtmfText(icicle.getString(DIALPAD_TEXT_EXTRA));
+            // If the dialpad was shown before, set variables indicating it should be shown and
+            // populated with the previous DTMF text.  The dialpad is actually shown and populated
+            // in onResume() to ensure the hosting CallCardFragment has been inflated and is ready
+            // to receive it.
+            mShowDialpadRequested = icicle.getBoolean(SHOW_DIALPAD_EXTRA);
+            mAnimateDialpadOnShow = false;
+            mDtmfText = icicle.getString(DIALPAD_TEXT_EXTRA);
         }
         Log.d(this, "onCreate(): exit");
     }
@@ -135,7 +145,9 @@ public class InCallActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle out) {
         out.putBoolean(SHOW_DIALPAD_EXTRA, mCallButtonFragment.isDialpadVisible());
-        out.putString(DIALPAD_TEXT_EXTRA, mDialpadFragment.getDtmfText());
+        if (mDialpadFragment != null) {
+            out.putString(DIALPAD_TEXT_EXTRA, mDialpadFragment.getDtmfText());
+        }
     }
 
     @Override
@@ -156,8 +168,15 @@ public class InCallActivity extends Activity {
         InCallPresenter.getInstance().onUiShowing(true);
 
         if (mShowDialpadRequested) {
-            mCallButtonFragment.displayDialpad(true /* show */, true /* animate */);
+            mCallButtonFragment.displayDialpad(true /* show */,
+                    mAnimateDialpadOnShow /* animate */);
             mShowDialpadRequested = false;
+            mAnimateDialpadOnShow = false;
+
+            if (mDialpadFragment != null) {
+                mDialpadFragment.setDtmfText(mDtmfText);
+                mDtmfText = null;
+            }
         }
 
         if (mShowPostCharWaitDialogOnResume) {
@@ -174,7 +193,9 @@ public class InCallActivity extends Activity {
 
         mIsForegroundActivity = false;
 
-        mDialpadFragment.onDialerKeyUp(null);
+        if (mDialpadFragment != null ) {
+            mDialpadFragment.onDialerKeyUp(null);
+        }
 
         InCallPresenter.getInstance().onUiShowing(false);
     }
@@ -262,7 +283,7 @@ public class InCallActivity extends Activity {
             return;
         }
 
-        if (mDialpadFragment.isVisible()) {
+        if (mDialpadFragment != null && mDialpadFragment.isVisible()) {
             mCallButtonFragment.displayDialpad(false /* show */, true /* animate */);
             return;
         } else if (mConferenceManagerFragment.isVisible()) {
@@ -284,7 +305,8 @@ public class InCallActivity extends Activity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         // push input to the dialer.
-        if ((mDialpadFragment.isVisible()) && (mDialpadFragment.onDialerKeyUp(event))){
+        if (mDialpadFragment != null && (mDialpadFragment.isVisible()) &&
+                (mDialpadFragment.onDialerKeyUp(event))){
             return true;
         } else if (keyCode == KeyEvent.KEYCODE_CALL) {
             // Always consume CALL to be sure the PhoneWindow won't do anything with it
@@ -356,7 +378,7 @@ public class InCallActivity extends Activity {
         // As soon as the user starts typing valid dialable keys on the
         // keyboard (presumably to type DTMF tones) we start passing the
         // key events to the DTMFDialer's onDialerKeyDown.
-        if (mDialpadFragment.isVisible()) {
+        if (mDialpadFragment != null && mDialpadFragment.isVisible()) {
             return mDialpadFragment.onDialerKeyDown(event);
 
             // TODO: If the dialpad isn't currently visible, maybe
@@ -432,6 +454,7 @@ public class InCallActivity extends Activity {
 
     private void relaunchedFromDialer(boolean showDialpad) {
         mShowDialpadRequested = showDialpad;
+        mAnimateDialpadOnShow = true;
 
         if (mShowDialpadRequested) {
             // If there's only one line in use, AND it's on hold, then we're sure the user
@@ -462,12 +485,6 @@ public class InCallActivity extends Activity {
                     .findFragmentById(R.id.answerFragment);
         }
 
-        if (mDialpadFragment == null) {
-            mDialpadFragment = (DialpadFragment) mChildFragmentManager
-                    .findFragmentById(R.id.dialpadFragment);
-            mChildFragmentManager.beginTransaction().hide(mDialpadFragment).commit();
-        }
-
         if (mConferenceManagerFragment == null) {
             mConferenceManagerFragment = (ConferenceManagerFragment) getFragmentManager()
                     .findFragmentById(R.id.conferenceManagerFragment);
@@ -492,6 +509,18 @@ public class InCallActivity extends Activity {
     }
 
     private void showDialpad(boolean showDialpad) {
+        // If the dialpad is being shown and it has not already been loaded, replace the dialpad
+        // placeholder with the actual fragment before continuing.
+        if (mDialpadFragment == null && showDialpad) {
+            final FragmentTransaction loadTransaction = mChildFragmentManager.beginTransaction();
+            View fragmentContainer = findViewById(R.id.dialpadFragmentContainer);
+            mDialpadFragment = new DialpadFragment();
+            loadTransaction.replace(fragmentContainer.getId(), mDialpadFragment,
+                    DialpadFragment.class.getName());
+            loadTransaction.commitAllowingStateLoss();
+            mChildFragmentManager.executePendingTransactions();
+        }
+
         final FragmentTransaction ft = mChildFragmentManager.beginTransaction();
         if (showDialpad) {
             ft.show(mDialpadFragment);
@@ -522,7 +551,7 @@ public class InCallActivity extends Activity {
     }
 
     public boolean isDialpadVisible() {
-        return mDialpadFragment.isVisible();
+        return mDialpadFragment != null && mDialpadFragment.isVisible();
     }
 
     public void displayManageConferencePanel(boolean showPanel) {

@@ -30,6 +30,7 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
     public void onUiReady(DialpadUi ui) {
         super.onUiReady(ui);
         InCallPresenter.getInstance().addListener(this);
+        mCall = CallList.getInstance().getActiveCall();
     }
 
     @Override
