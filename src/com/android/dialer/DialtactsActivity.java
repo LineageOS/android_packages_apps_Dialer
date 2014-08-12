@@ -65,6 +65,7 @@ import android.widget.Toast;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
+import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.dialer.activity.TransactionSafeActivity;
@@ -89,6 +90,7 @@ import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
 import com.android.dialer.widget.SearchEditTextLayout.OnBackButtonClickedListener;
 import com.android.dialerbind.DatabaseHelperManager;
+import com.android.incallui.CallCardFragment;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
@@ -100,6 +102,7 @@ import java.util.Locale;
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
  */
 public class DialtactsActivity extends TransactionSafeActivity implements View.OnClickListener,
+        View.OnTouchListener,
         DialpadFragment.OnDialpadQueryChangedListener,
         OnListFragmentScrolledListener,
         DialpadFragment.HostInterface,
@@ -387,6 +390,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         int floatingActionButtonWidth = resources.getDimensionPixelSize(
                 R.dimen.floating_action_button_width);
         mFloatingActionButton.setOnClickListener(this);
+        mFloatingActionButton.setOnTouchListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(this,
                 floatingActionButtonContainer);
         mFloatingActionButtonDialpadMarginBottomOffset = resources.getDimensionPixelOffset(
@@ -463,6 +467,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 if (!mIsDialpadShown) {
                     maybeExitSearchUi();
                 }
+
+                recordTouchEvent(v, event);
                 return false;
             }
         });
@@ -560,6 +566,18 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 Log.wtf(TAG, "Unexpected onClick event from " + view);
                 break;
             }
+        }
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent event) {
+        recordTouchEvent(view, event);
+        return false;
+    }
+
+    private void recordTouchEvent(View view, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            TouchPointManager.getInstance().setPoint((int) event.getRawX(), (int) event.getRawY());
         }
     }
 
