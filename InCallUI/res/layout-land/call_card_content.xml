@@ -89,8 +89,9 @@
             android:indeterminate="true" />
     </FrameLayout>
 
-    <fragment android:name="com.android.incallui.DialpadFragment"
-        android:id="@+id/dialpadFragment"
+    <!-- Placeholder for the dialpad which is replaced with the dialpad fragment when shown. -->
+    <FrameLayout
+        android:id="@+id/dialpadFragmentContainer"
         android:layout_toEndOf="@id/primary_call_info_container"
         android:layout_gravity="end|center_vertical"
         android:layout_alignParentEnd="true"
@@ -106,4 +107,20 @@
         android:layout_gravity="end|center_vertical"
         android:layout_marginBottom="@dimen/glowpadview_margin_bottom"
         android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/floating_end_call_action_button_container"
+        android:layout_width="@dimen/floating_action_button_width"
+        android:layout_height="@dimen/floating_action_button_height"
+        android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+
+        <ImageButton android:id="@+id/floating_end_call_action_button"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:background="@drawable/end_call_background"
+                     android:src="@drawable/fab_ic_end_call"
+                     android:contentDescription="@string/onscreenEndCallText" />
+    </FrameLayout>
 </RelativeLayout>
