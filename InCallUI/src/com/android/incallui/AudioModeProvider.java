@@ -18,7 +18,7 @@ package com.android.incallui;
 
 import com.google.common.collect.Lists;
 
-import android.telecomm.CallAudioState;
+import android.telecomm.AudioState;
 import android.telecomm.Phone;
 
 import java.util.List;
@@ -31,15 +31,15 @@ import java.util.List;
     static final int AUDIO_MODE_INVALID = 0;
 
     private static AudioModeProvider sAudioModeProvider = new AudioModeProvider();
-    private int mAudioMode = CallAudioState.ROUTE_EARPIECE;
+    private int mAudioMode = AudioState.ROUTE_EARPIECE;
     private boolean mMuted = false;
-    private int mSupportedModes = CallAudioState.ROUTE_ALL;
+    private int mSupportedModes = AudioState.ROUTE_ALL;
     private final List<AudioModeListener> mListeners = Lists.newArrayList();
     private Phone mPhone;
 
     private Phone.Listener mPhoneListener = new Phone.Listener() {
         @Override
-        public void onAudioStateChanged(Phone phone, CallAudioState audioState) {
+        public void onAudioStateChanged(Phone phone, AudioState audioState) {
             onAudioModeChange(audioState.route, audioState.isMuted);
             onSupportedAudioModeChange(audioState.supportedRouteMask);
         }
