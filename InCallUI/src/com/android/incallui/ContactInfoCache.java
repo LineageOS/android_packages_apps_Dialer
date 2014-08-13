@@ -24,7 +24,7 @@ import android.net.Uri;
 import android.os.Looper;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.telecomm.CallPropertyPresentation;
+import android.telecomm.PropertyPresentation;
 import android.text.TextUtils;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -153,7 +153,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         int presentationMode = call.getNumberPresentation();
         if (callerInfo.contactExists || callerInfo.isEmergencyNumber() ||
                 callerInfo.isVoiceMailNumber()) {
-            presentationMode = CallPropertyPresentation.ALLOWED;
+            presentationMode = PropertyPresentation.ALLOWED;
         }
 
         final ContactCacheEntry cacheEntry = buildEntry(mContext, callId,
@@ -385,7 +385,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     // (or potentially some other default based on the presentation.)
                     displayName = getPresentationString(context, presentation);
                     Log.d(TAG, "  ==> no name *or* number! displayName = " + displayName);
-                } else if (presentation != CallPropertyPresentation.ALLOWED) {
+                } else if (presentation != PropertyPresentation.ALLOWED) {
                     // This case should never happen since the network should never send a phone #
                     // AND a restricted presentation. However we leave it here in case of weird
                     // network behavior
@@ -422,7 +422,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             } else {
                 // We do have a valid "name" in the CallerInfo. Display that
                 // in the "name" slot, and the phone number in the "number" slot.
-                if (presentation != CallPropertyPresentation.ALLOWED) {
+                if (presentation != PropertyPresentation.ALLOWED) {
                     // This case should never happen since the network should never send a name
                     // AND a restricted presentation. However we leave it here in case of weird
                     // network behavior
@@ -475,9 +475,9 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
      */
     private static String getPresentationString(Context context, int presentation) {
         String name = context.getString(R.string.unknown);
-        if (presentation == CallPropertyPresentation.RESTRICTED) {
+        if (presentation == PropertyPresentation.RESTRICTED) {
             name = context.getString(R.string.private_num);
-        } else if (presentation == CallPropertyPresentation.PAYPHONE) {
+        } else if (presentation == PropertyPresentation.PAYPHONE) {
             name = context.getString(R.string.payphone);
         }
         return name;

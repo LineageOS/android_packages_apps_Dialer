@@ -17,11 +17,11 @@
 package com.android.incallui;
 
 import android.net.Uri;
-import android.telecomm.CallCapabilities;
+import android.telecomm.PhoneCapabilities;
 import android.telecomm.GatewayInfo;
 import android.telecomm.InCallService.VideoCall;
 import android.telecomm.PhoneAccountHandle;
-import android.telecomm.VideoCallProfile;
+import android.telecomm.VideoProfile;
 import android.telephony.DisconnectCause;
 
 import java.util.ArrayList;
@@ -307,12 +307,12 @@ public final class Call {
 
     /** Checks if the call supports the given set of capabilities supplied as a bit mask. */
     public boolean can(int capabilities) {
-        if (CallCapabilities.MERGE_CALLS == (capabilities & CallCapabilities.MERGE_CALLS)) {
+        if (PhoneCapabilities.MERGE_CALLS == (capabilities & PhoneCapabilities.MERGE_CALLS)) {
             if (mTelecommCall.getConferenceableCalls().isEmpty()) {
                 // Cannot merge calls if there are no calls to merge with.
                 return false;
             }
-            capabilities &= ~CallCapabilities.MERGE_CALLS;
+            capabilities &= ~PhoneCapabilities.MERGE_CALLS;
         }
         return (capabilities == (capabilities & mTelecommCall.getDetails().getCallCapabilities()));
     }
@@ -351,7 +351,7 @@ public final class Call {
     }
 
     public boolean isVideoCall() {
-        return VideoCallProfile.VideoState.isBidirectional(getVideoState());
+        return VideoProfile.VideoState.isBidirectional(getVideoState());
     }
 
     public void setSessionModificationState(int state) {
@@ -383,7 +383,7 @@ public final class Call {
         return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s, videoState:%d]",
                 mId,
                 State.toString(mState),
-                CallCapabilities.toString(mTelecommCall.getDetails().getCallCapabilities()),
+                PhoneCapabilities.toString(mTelecommCall.getDetails().getCallCapabilities()),
                 mChildCallIds,
                 mParentCallId,
                 mTelecommCall.getDetails().getVideoState());

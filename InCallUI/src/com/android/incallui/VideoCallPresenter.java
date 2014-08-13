@@ -19,7 +19,8 @@ package com.android.incallui;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Handler;
-import android.telecomm.CallAudioState;
+import android.telecomm.AudioState;
+import android.telecomm.CameraCapabilities;
 import android.telecomm.InCallService.VideoCall;
 import android.view.Surface;
 
@@ -45,7 +46,7 @@ import java.util.Objects;
  *     <li>{@code VideoCallPresenter} creates and informs telephony of the display surface.</li>
  *     <li>{@code VideoCallPresenter} creates the preview surface.</li>
  *     <li>{@code VideoCallPresenter} informs telephony of the currently selected camera.</li>
- *     <li>Telephony layer sends {@link android.telecomm.CallCameraCapabilities}, including the
+ *     <li>Telephony layer sends {@link CameraCapabilities}, including the
  *     dimensions of the video for the current camera.</li>
  *     <li>{@code VideoCallPresenter} adjusts size of the preview surface to match the aspect
  *     ratio of the camera.</li>
@@ -427,7 +428,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
 
         mPreVideoAudioMode = AudioModeProvider.getInstance().getAudioMode();
-        TelecommAdapter.getInstance().setAudioRoute(CallAudioState.ROUTE_SPEAKER);
+        TelecommAdapter.getInstance().setAudioRoute(AudioState.ROUTE_SPEAKER);
     }
 
     /**

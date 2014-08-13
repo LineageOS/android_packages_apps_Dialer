@@ -28,7 +28,6 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
 import android.provider.ContactsContract.RawContacts;
-import android.telecomm.CallPropertyPresentation;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 

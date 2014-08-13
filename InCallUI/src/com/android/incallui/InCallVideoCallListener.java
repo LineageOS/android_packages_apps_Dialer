@@ -16,9 +16,10 @@
 
 package com.android.incallui;
 
-import android.telecomm.CallCameraCapabilities;
+import android.telecomm.CameraCapabilities;
+import android.telecomm.Connection;
 import android.telecomm.InCallService.VideoCall;
-import android.telecomm.VideoCallProfile;
+import android.telecomm.VideoProfile;
 
 /**
  * Implements the InCallUI Video Call Listener.
@@ -42,18 +43,18 @@ public class InCallVideoCallListener extends VideoCall.Listener {
     /**
      * Handles an incoming session modification request.
      *
-     * @param videoCallProfile The requested video call profile.
+     * @param videoProfile The requested video call profile.
      */
     @Override
-    public void onSessionModifyRequestReceived(VideoCallProfile videoCallProfile) {
+    public void onSessionModifyRequestReceived(VideoProfile videoProfile) {
         int previousVideoState = mCall.getVideoState();
-        int newVideoState = videoCallProfile.getVideoState();
+        int newVideoState = videoProfile.getVideoState();
 
-        boolean wasVideoCall = VideoCallProfile.VideoState.isBidirectional(previousVideoState);
-        boolean isVideoCall = VideoCallProfile.VideoState.isBidirectional(newVideoState);
+        boolean wasVideoCall = VideoProfile.VideoState.isBidirectional(previousVideoState);
+        boolean isVideoCall = VideoProfile.VideoState.isBidirectional(newVideoState);
 
-        boolean wasPaused = VideoCallProfile.VideoState.isPaused(previousVideoState);
-        boolean isPaused = VideoCallProfile.VideoState.isPaused(newVideoState);
+        boolean wasPaused = VideoProfile.VideoState.isPaused(previousVideoState);
+        boolean isPaused = VideoProfile.VideoState.isPaused(newVideoState);
 
         // Check for upgrades to video and downgrades to audio.
         if (!wasVideoCall && isVideoCall) {
@@ -70,23 +71,23 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      * Handles a session modification response.
      *
      * @param status Status of the session modify request.  Valid values are
-     *               {@link VideoCall#SESSION_MODIFY_REQUEST_SUCCESS},
-     *               {@link VideoCall#SESSION_MODIFY_REQUEST_FAIL},
-     *               {@link VideoCall#SESSION_MODIFY_REQUEST_INVALID}
+     *               {@link Connection.VideoProvider#SESSION_MODIFY_REQUEST_SUCCESS},
+     *               {@link Connection.VideoProvider#SESSION_MODIFY_REQUEST_FAIL},
+     *               {@link Connection.VideoProvider#SESSION_MODIFY_REQUEST_INVALID}
      * @param requestedProfile
      * @param responseProfile The actual profile changes made by the peer device.
      */
     @Override
     public void onSessionModifyResponseReceived(
-            int status, VideoCallProfile requestedProfile, VideoCallProfile responseProfile) {
+            int status, VideoProfile requestedProfile, VideoProfile responseProfile) {
         boolean modifySucceeded =
                 requestedProfile.getVideoState() == responseProfile.getVideoState();
         boolean isVideoCall =
-                VideoCallProfile.VideoState.isBidirectional(responseProfile.getVideoState());
+                VideoProfile.VideoState.isBidirectional(responseProfile.getVideoState());
 
         if (modifySucceeded && isVideoCall) {
             InCallVideoCallListenerNotifier.getInstance().upgradeToVideoSuccess(mCall);
-        } else if (!modifySucceeded || status != VideoCall.SESSION_MODIFY_REQUEST_SUCCESS) {
+        } else if (!modifySucceeded || status != Connection.VideoProvider.SESSION_MODIFY_REQUEST_SUCCESS) {
             InCallVideoCallListenerNotifier.getInstance().upgradeToVideoFail(mCall);
         }
     }
@@ -125,11 +126,11 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      * Handles changes to the camera capabilities.  No implementation as the in-call UI does not
      * make use of camera capabilities.
      *
-     * @param callCameraCapabilities The changed camera capabilities.
+     * @param cameraCapabilities The changed camera capabilities.
      */
     @Override
-    public void onCameraCapabilitiesChanged(CallCameraCapabilities callCameraCapabilities) {
+    public void onCameraCapabilitiesChanged(CameraCapabilities cameraCapabilities) {
         InCallVideoCallListenerNotifier.getInstance().cameraDimensionsChanged(
-                mCall, callCameraCapabilities.getWidth(), callCameraCapabilities.getHeight());
+                mCall, cameraCapabilities.getWidth(), cameraCapabilities.getHeight());
     }
 }
