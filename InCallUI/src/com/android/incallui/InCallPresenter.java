@@ -20,10 +20,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.telecomm.CallCapabilities;
+import android.telecomm.PhoneCapabilities;
 import android.telecomm.Phone;
 import android.telecomm.PhoneAccountHandle;
-import android.telecomm.VideoCallProfile;
+import android.telecomm.VideoProfile;
 import android.text.TextUtils;
 import android.view.Surface;
 import android.view.View;
@@ -534,8 +534,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         Call call = mCallList.getVideoUpgradeRequestCall();
         if (call != null) {
-            VideoCallProfile videoProfile =
-                    new VideoCallProfile(VideoCallProfile.VideoState.BIDIRECTIONAL);
+            VideoProfile videoProfile =
+                    new VideoProfile(VideoProfile.VideoState.BIDIRECTIONAL);
             call.getVideoCall().sendSessionModifyResponse(videoProfile);
             call.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
         }
@@ -550,8 +550,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         Call call = mCallList.getVideoUpgradeRequestCall();
         if (call != null) {
-            VideoCallProfile videoProfile =
-                    new VideoCallProfile(VideoCallProfile.VideoState.AUDIO_ONLY);
+            VideoProfile videoProfile =
+                    new VideoProfile(VideoProfile.VideoState.AUDIO_ONLY);
             call.getVideoCall().sendSessionModifyResponse(videoProfile);
             call.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
         }
@@ -639,20 +639,20 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         // (1) Attempt to answer a call
         if (incomingCall != null) {
             TelecommAdapter.getInstance().answerCall(
-                    incomingCall.getId(), VideoCallProfile.VideoState.AUDIO_ONLY);
+                    incomingCall.getId(), VideoProfile.VideoState.AUDIO_ONLY);
             return true;
         }
 
         /**
-         * ACTIVE CALL
+         * STATE_ACTIVE CALL
          */
         final Call activeCall = calls.getActiveCall();
         if (activeCall != null) {
             // TODO: This logic is repeated from CallButtonPresenter.java. We should
             // consolidate this logic.
-            final boolean isGeneric = activeCall.can(CallCapabilities.GENERIC_CONFERENCE);
-            final boolean canMerge = activeCall.can(CallCapabilities.MERGE_CALLS);
-            final boolean canSwap = activeCall.can(CallCapabilities.SWAP_CALLS);
+            final boolean isGeneric = activeCall.can(PhoneCapabilities.GENERIC_CONFERENCE);
+            final boolean canMerge = activeCall.can(PhoneCapabilities.MERGE_CALLS);
+            final boolean canSwap = activeCall.can(PhoneCapabilities.SWAP_CALLS);
 
             Log.v(this, "activeCall: " + activeCall + ", isGeneric: " + isGeneric + ", canMerge: " +
                     canMerge + ", canSwap: " + canSwap);
@@ -682,7 +682,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         if (heldCall != null) {
             // We have a hold call so presumeable it will always support HOLD...but
             // there is no harm in double checking.
-            final boolean canHold = heldCall.can(CallCapabilities.HOLD);
+            final boolean canHold = heldCall.can(PhoneCapabilities.HOLD);
 
             Log.v(this, "heldCall: " + heldCall + ", canHold: " + canHold);
 

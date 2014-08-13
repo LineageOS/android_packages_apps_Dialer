@@ -22,12 +22,13 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.telecomm.CallCapabilities;
+import android.os.Handler;
+import android.telecomm.PhoneCapabilities;
 import android.telecomm.PhoneAccount;
 import android.telecomm.PhoneAccountHandle;
 import android.telecomm.StatusHints;
 import android.telecomm.TelecommManager;
-import android.telecomm.VideoCallProfile;
+import android.telecomm.VideoProfile;
 import android.telephony.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
@@ -234,7 +235,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         } else {
             getUi().setCallState(
                     callState,
-                    VideoCallProfile.VideoState.AUDIO_ONLY,
+                    VideoProfile.VideoState.AUDIO_ONLY,
                     Call.SessionModificationState.NO_REQUEST,
                     DisconnectCause.NOT_VALID,
                     null,
@@ -383,7 +384,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private static boolean isGenericConference(Call call) {
-        return call != null && call.can(CallCapabilities.GENERIC_CONFERENCE);
+        return call != null && call.can(PhoneCapabilities.GENERIC_CONFERENCE);
     }
 
     private void updateContactEntry(ContactCacheEntry entry, boolean isPrimary,
@@ -556,7 +557,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     private Drawable getConnectionIcon() {
         StatusHints statusHints = mPrimary.getTelecommCall().getDetails().getStatusHints();
-        if (statusHints != null && statusHints.getIconId() != 0) {
+        if (statusHints != null && statusHints.getIconResId() != 0) {
             Drawable icon = statusHints.getIcon(mContext);
             if (icon != null) {
                 return icon;
@@ -566,7 +567,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private boolean hasOutgoingGatewayCall() {
-        // We only display the gateway information while DIALING so return false for any othe
+        // We only display the gateway information while STATE_DIALING so return false for any othe
         // call state.
         // TODO: mPrimary can be null because this is called from updatePrimaryDisplayInfo which
         // is also called after a contact search completes (call is not present yet).  Split the
