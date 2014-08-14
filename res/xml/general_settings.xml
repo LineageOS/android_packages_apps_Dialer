@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (C) 2014 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="dialer_contact_display_options_category_key"
+        android:title="@string/contact_display_options_category_title"
+        android:persistent="false">
+
+        <com.android.contacts.common.preference.SortOrderPreference
+            android:key="sortOrder"
+            android:title="@string/display_options_sort_list_by"
+            android:dialogTitle="@string/display_options_sort_list_by" />
+
+        <com.android.contacts.common.preference.DisplayOrderPreference
+            android:key="displayOrder"
+            android:title="@string/display_options_view_names_as"
+            android:dialogTitle="@string/display_options_view_names_as" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="dialer_general_sounds_category_key"
+        android:title="@string/sounds_and_vibrate_category_title"
+        android:persistent="false">
+
+        <com.android.dialer.settings.DefaultRingtonePreference
+            android:key="button_ringtone_key"
+            android:title="@string/ringtone_title"
+            android:dialogTitle="@string/ringtone_title"
+            android:persistent="false"
+            android:ringtoneType="ringtone" />
+
+        <CheckBoxPreference
+            android:key="button_vibrate_on_ring"
+            android:title="@string/vibrate_on_ring_title"
+            android:persistent="false"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="button_play_dtmf_tone"
+            android:title="@string/dtmf_tone_enable_title"
+            android:persistent="false"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="dialer_general_other_settings_category_key"
+        android:title="@string/other_settings_title"
+        android:persistent="false" >
+
+        <PreferenceScreen
+            android:key="button_respond_via_sms_key"
+            android:title="@string/respond_via_sms_setting_title"
+            android:persistent="false">
+
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.telecomm"
+                android:targetClass="com.android.telecomm.RespondViaSmsSettings$Settings" />
+
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
