@@ -25,6 +25,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.telephony.DisconnectCause;
 import android.text.TextUtils;
@@ -39,6 +40,7 @@ import android.view.accessibility.AccessibilityEvent;
 
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
+import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.incallui.Call.State;
 
 import java.util.Locale;
@@ -450,7 +452,16 @@ public class InCallActivity extends Activity {
 
             if (intent.getBooleanExtra(NEW_OUTGOING_CALL, false)) {
                 intent.removeExtra(NEW_OUTGOING_CALL);
-                mCallCardFragment.animateForNewOutgoingCall();
+
+                Call call = CallList.getInstance().getOutgoingCall();
+                if (call == null) {
+                    call = CallList.getInstance().getPendingOutgoingCall();
+                }
+
+                Bundle extras = call.getTelecommCall().getDetails().getExtras();
+                Point touchPoint = (Point) (extras == null?
+                        null : extras.getParcelable(TouchPointManager.TOUCH_POINT));
+                mCallCardFragment.animateForNewOutgoingCall(touchPoint, call);
             }
 
             if (CallList.getInstance().getWaitingForAccountCall() != null) {
