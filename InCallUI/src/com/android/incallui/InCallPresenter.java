@@ -29,13 +29,13 @@ import android.view.Surface;
 import android.view.View;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Takes updates from the CallList and notifies the InCallActivity (UI)
@@ -50,11 +50,21 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
     private static InCallPresenter sInCallPresenter;
 
-    private final Set<InCallStateListener> mListeners = Sets.newHashSet();
-    private final ArrayList<IncomingCallListener> mIncomingCallListeners = Lists.newArrayList();
-    private final Set<InCallDetailsListener> mDetailsListeners = Sets.newHashSet();
-    private final Set<InCallOrientationListener> mOrientationListeners = Sets.newHashSet();
-    private final Set<InCallEventListener> mInCallEventListeners = Sets.newHashSet();
+    /**
+     * ConcurrentHashMap constructor params: 8 is initial table size, 0.9f is
+     * load factor before resizing, 1 means we only expect a single thread to
+     * access the map so make only a single shard
+     */
+    private final Set<InCallStateListener> mListeners = Collections.newSetFromMap(
+            new ConcurrentHashMap<InCallStateListener, Boolean>(8, 0.9f, 1));
+    private final List<IncomingCallListener> mIncomingCallListeners =
+        new CopyOnWriteArrayList<IncomingCallListener>();
+    private final Set<InCallDetailsListener> mDetailsListeners = Collections.newSetFromMap(
+            new ConcurrentHashMap<InCallDetailsListener, Boolean>(8, 0.9f, 1));
+    private final Set<InCallOrientationListener> mOrientationListeners = Collections.newSetFromMap(
+            new ConcurrentHashMap<InCallOrientationListener, Boolean>(8, 0.9f, 1));
+    private final Set<InCallEventListener> mInCallEventListeners = Collections.newSetFromMap(
+            new ConcurrentHashMap<InCallEventListener, Boolean>(8, 0.9f, 1));
 
     private AudioModeProvider mAudioModeProvider;
     private StatusBarNotifier mStatusBarNotifier;
@@ -400,8 +410,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     public void removeIncomingCallListener(IncomingCallListener listener) {
-        Preconditions.checkNotNull(listener);
-        mIncomingCallListeners.remove(listener);
+        if (listener != null) {
+            mIncomingCallListeners.remove(listener);
+        }
     }
 
     public void addListener(InCallStateListener listener) {
@@ -410,8 +421,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     public void removeListener(InCallStateListener listener) {
-        Preconditions.checkNotNull(listener);
-        mListeners.remove(listener);
+        if (listener != null) {
+            mListeners.remove(listener);
+        }
     }
 
     public void addDetailsListener(InCallDetailsListener listener) {
@@ -420,8 +432,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     public void removeDetailsListener(InCallDetailsListener listener) {
-        Preconditions.checkNotNull(listener);
-        mDetailsListeners.remove(listener);
+        if (listener != null) {
+            mDetailsListeners.remove(listener);
+        }
     }
 
     public void addOrientationListener(InCallOrientationListener listener) {
@@ -430,8 +443,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     public void removeOrientationListener(InCallOrientationListener listener) {
-        Preconditions.checkNotNull(listener);
-        mOrientationListeners.remove(listener);
+        if (listener != null) {
+            mOrientationListeners.remove(listener);
+        }
     }
 
     public void addInCallEventListener(InCallEventListener listener) {
@@ -440,8 +454,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     public void removeInCallEventListener(InCallEventListener listener) {
-        Preconditions.checkNotNull(listener);
-        mInCallEventListeners.remove(listener);
+        if (listener != null) {
+            mInCallEventListeners.remove(listener);
+        }
     }
 
     public ProximitySensor getProximitySensor() {
