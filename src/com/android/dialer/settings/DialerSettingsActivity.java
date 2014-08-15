@@ -5,6 +5,8 @@ import com.google.common.collect.Lists;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceActivity.Header;
 import android.text.TextUtils;
@@ -29,6 +31,8 @@ public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
     protected SharedPreferences mPreferences;
     private HeaderAdapter mHeaderAdapter;
 
+    private static final int OWNER_HANDLE_ID = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +46,17 @@ public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
     public void onBuildHeaders(List<Header> target) {
         final Header contactDisplayHeader = new Header();
         contactDisplayHeader.titleRes = R.string.settings_contact_display_options_title;
-        contactDisplayHeader.summaryRes = R.string.settings_contact_display_options_description;
         contactDisplayHeader.fragment = DisplayOptionsPreferenceFragment.class.getName();
         target.add(contactDisplayHeader);
 
-        final Header callSettingHeader = new Header();
-        callSettingHeader.titleRes = R.string.call_settings_label;
-        callSettingHeader.summaryRes = R.string.call_settings_description;
-        callSettingHeader.intent = DialtactsActivity.getCallSettingsIntent();
-        target.add(callSettingHeader);
+        // Only add the call settings header if the current user is the primary/owner user.
+        if (isPrimaryUser()) {
+            final Header callSettingHeader = new Header();
+            callSettingHeader.titleRes = R.string.call_settings_label;
+            callSettingHeader.summaryRes = R.string.call_settings_description;
+            callSettingHeader.intent = DialtactsActivity.getCallSettingsIntent();
+            target.add(callSettingHeader);
+        }
     }
 
     @Override
@@ -82,6 +88,23 @@ public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
             mHeaderAdapter = new HeaderAdapter(this, headers);
             super.setListAdapter(mHeaderAdapter);
         }
+    }
+
+    /**
+     * Whether a user handle associated with the current user is that of the primary owner. That is,
+     * whether there is a user handle which has an id which matches the owner's handle.
+     * @return Whether the current user is the primary user.
+     */
+    private boolean isPrimaryUser() {
+        UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
+        List<UserHandle> userHandles = userManager.getUserProfiles();
+        for (int i = 0; i < userHandles.size(); i++){
+            if (userHandles.get(i).myUserId() == OWNER_HANDLE_ID) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -130,7 +153,6 @@ public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
             } else {
                 holder.summary.setVisibility(View.GONE);
             }
-
             return view;
         }
     }
