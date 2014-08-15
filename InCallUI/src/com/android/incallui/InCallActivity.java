@@ -657,12 +657,17 @@ public class InCallActivity extends Activity {
             case DisconnectCause.CS_RESTRICTED_NORMAL:
                 return R.string.callFailed_dsac_restricted_normal;
             case DisconnectCause.OUTGOING_FAILURE:
-            case DisconnectCause.OUTGOING_CANCELED:
                 // We couldn't successfully place the call; there was some
                 // failure in the telephony layer.
                 // TODO: Need UI spec for this failure case; for now just
                 // show a generic error.
                 return R.string.incall_error_call_failed;
+            case DisconnectCause.OUTGOING_CANCELED:
+                // We don't want to show any dialog for the canceled case since the call was
+                // either canceled by the user explicitly (end-call button pushed immediately)
+                // or some other app canceled the call and immediately issued a new CALL to
+                // replace it.
+                return INVALID_RES_ID;
             case DisconnectCause.POWER_OFF:
                 // Radio is explictly powered off, presumably because the
                 // device is in airplane mode.
