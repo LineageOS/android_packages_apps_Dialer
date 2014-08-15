@@ -453,15 +453,17 @@ public class InCallActivity extends Activity {
             if (intent.getBooleanExtra(NEW_OUTGOING_CALL, false)) {
                 intent.removeExtra(NEW_OUTGOING_CALL);
 
+                Point touchPoint = null;
                 Call call = CallList.getInstance().getOutgoingCall();
                 if (call == null) {
                     call = CallList.getInstance().getPendingOutgoingCall();
                 }
-
-                Bundle extras = call.getTelecommCall().getDetails().getExtras();
-                Point touchPoint = (Point) (extras == null?
-                        null : extras.getParcelable(TouchPointManager.TOUCH_POINT));
-                mCallCardFragment.animateForNewOutgoingCall(touchPoint, call);
+                if (call != null) {
+                    Bundle extras = call.getTelecommCall().getDetails().getExtras();
+                    touchPoint = (Point) (extras == null ?
+                            null : extras.getParcelable(TouchPointManager.TOUCH_POINT));
+                }
+                mCallCardFragment.animateForNewOutgoingCall(touchPoint);
             }
 
             if (CallList.getInstance().getWaitingForAccountCall() != null) {
