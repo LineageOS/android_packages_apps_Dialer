@@ -92,21 +92,21 @@
     <string name="add_2sec_pause" msgid="9214012315201040129">"Pridėti 2 sek. pauzę"</string>
     <string name="add_wait" msgid="3360818652790319634">"Pridėti laukimą"</string>
     <string name="call_settings" msgid="7666474782093693667">"Nustatymai"</string>
-    <string name="menu_newContact" msgid="1209922412763274638">"Naujas adresatas"</string>
+    <string name="menu_newContact" msgid="1209922412763274638">"Naujas kontaktas"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Visi kontaktai"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Išsami skambučio informacija"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"Nepavyko nuskaityti išsamios skambučio, dėl kurio buvo pateikta užklausa, informacijos."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Naudoti jutiklinę klaviatūrą"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Grįžti prie vykdomo skambučio"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Pridėti skambutį"</string>
-    <string name="type_incoming" msgid="6502076603836088532">"Gaunamas skambutis"</string>
-    <string name="type_outgoing" msgid="343108709599392641">"Išeinantis skambutis"</string>
+    <string name="type_incoming" msgid="6502076603836088532">"Gaunamasis skambutis"</string>
+    <string name="type_outgoing" msgid="343108709599392641">"Sunčiamasis skambutis"</string>
     <string name="type_missed" msgid="2720502601640509542">"Praleistas skambutis"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Balso paštas"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Gaunami skambučiai"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Paleisti balso pašto pranešimus"</string>
     <string name="description_call_log_incoming_call" msgid="4485427487637250143">"Gaunamasis skambutis"</string>
-    <string name="description_call_log_outgoing_call" msgid="604831756853471658">"Išsiunčiamasis skambutis"</string>
+    <string name="description_call_log_outgoing_call" msgid="604831756853471658">"Siunčiamasis skambutis"</string>
     <string name="description_call_log_missed_call" msgid="2242805209983708825">"Praleistas skambutis"</string>
     <string name="description_call_log_voicemail" msgid="4600798771975158948">"Balso paštas"</string>
     <string name="description_add_contact" msgid="3103414772502485851">"Pridėti kontaktą"</string>

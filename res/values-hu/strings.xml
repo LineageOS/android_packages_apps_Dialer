@@ -140,8 +140,8 @@
     <string name="contact_list_loading" msgid="5488620820563977329">"Betöltés..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Betöltés a SIM-kártyáról..."</string>
-    <string name="simContacts_title" msgid="27341688347689769">"Névjegyek a SIM-kártyán"</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Betöltés a SIM kártyáról..."</string>
+    <string name="simContacts_title" msgid="27341688347689769">"Névjegyek a SIM kártyán"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"A funkció használatához aktiválja újra a Személyek alkalmazást."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"A hangalapú keresés nem érhető el."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Név vagy telefonszám megadása"</string>

@@ -100,7 +100,7 @@
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Návrat k prebiehajúcemu hovoru"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Pridať hovor"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Prichádzajúci hovor"</string>
-    <string name="type_outgoing" msgid="343108709599392641">"Odchádzajúce volania"</string>
+    <string name="type_outgoing" msgid="343108709599392641">"Odchádzajúce volanie"</string>
     <string name="type_missed" msgid="2720502601640509542">"Zmeškaný hovor"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Hlasová schránka"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Prichádzajúce hovory"</string>

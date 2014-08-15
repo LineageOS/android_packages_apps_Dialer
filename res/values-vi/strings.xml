@@ -135,7 +135,7 @@
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Quay số để thêm cuộc gọi"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> phút <xliff:g id="SECONDS">%s</xliff:g> giây"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Không thể thực hiện cuộc gọi"</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Để thiết lập thư thoại, đi tới Trình đơn &gt; Cài đặt."</string>
+    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Để thiết lập thư thoại, đi tới Menu &gt; Cài đặt."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Để gọi thư thoại, trước tiên hãy tắt chế độ trên Máy bay."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Đang tải…"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>

@@ -85,8 +85,8 @@
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"拨号键盘"</string>
     <string name="menu_copy" msgid="6108677035381940698">"复制"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"仅显示外拨电话"</string>
-    <string name="menu_show_incoming_only" msgid="7534206815238877417">"仅显示来电"</string>
-    <string name="menu_show_missed_only" msgid="154473166059743996">"仅显示未接来电"</string>
+    <string name="menu_show_incoming_only" msgid="7534206815238877417">"只显示来电"</string>
+    <string name="menu_show_missed_only" msgid="154473166059743996">"只显示未接来电"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"只显示语音邮件"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"显示所有通话"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"延长暂停时间2秒"</string>
@@ -133,15 +133,15 @@
     <string name="payphone" msgid="4864313342828942922">"公用电话"</string>
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"使用键盘拨号"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"拨号以添加通话"</string>
-    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> 分 <xliff:g id="SECONDS">%s</xliff:g> 秒"</string>
+    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g>分<xliff:g id="SECONDS">%s</xliff:g>秒"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"电话未拨出"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"要设置语音信箱，请转到“菜单”&gt;“设置”。"</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"要呼叫语音信箱，请先关闭飞行模式。"</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"正在加载..."</string>
     <string name="imei" msgid="3045126336951684285">"移动通信国际识别码"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"正从 SIM 卡中加载..."</string>
-    <string name="simContacts_title" msgid="27341688347689769">"SIM 卡联系人"</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"正从SIM卡中加载..."</string>
+    <string name="simContacts_title" msgid="27341688347689769">"SIM卡联系人"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"必须重新启用联系人应用才能使用此功能。"</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"无法使用语音搜索。"</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"输入姓名或手机号"</string>

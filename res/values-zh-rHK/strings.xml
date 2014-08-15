@@ -82,7 +82,7 @@
     <string name="description_digits_edittext" msgid="8760207516497016437">"致電號碼"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"通話記錄"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"更多選項"</string>
-    <string name="action_menu_dialpad_button" msgid="1425910318049008136">"撥號盤"</string>
+    <string name="action_menu_dialpad_button" msgid="1425910318049008136">"撥號鍵盤"</string>
     <string name="menu_copy" msgid="6108677035381940698">"複製"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"只顯示撥出電話"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"只顯示來電"</string>

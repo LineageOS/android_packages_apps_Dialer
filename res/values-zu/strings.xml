@@ -94,8 +94,8 @@
     <string name="call_settings" msgid="7666474782093693667">"Izilungiselelo"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Othintana naye omusha"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Bonke oxhumana nabo"</string>
-    <string name="callDetailTitle" msgid="5340227785196217938">"Imininingwane yokushayela"</string>
-    <string name="toast_call_detail_error" msgid="7200975244804730096">"Ayikwazanga ukufunda imininingwane yokushayela okuceliwe."</string>
+    <string name="callDetailTitle" msgid="5340227785196217938">"Imininingwane yekholi"</string>
+    <string name="toast_call_detail_error" msgid="7200975244804730096">"Ayikwazanga ukufunda imininingwane yekholi eceliwe."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Sebenzisa ikhiphedi yethoni yokuthinta"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Buyela kukholi eqhubekayo"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Yengeza ikholi"</string>

@@ -25,13 +25,13 @@
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"โทรหา <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"แก้ไขหมายเลขก่อนโทร"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"เพิ่มในสมุดโทรศัพท์"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"นำออกจากบันทึกการโทร"</string>
+    <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"ลบจากบันทึกการโทร"</string>
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"ล้างบันทึกการโทร"</string>
-    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"นำออกข้อความเสียง"</string>
+    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ลบข้อความเสียง"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"แชร์ข้อความเสียง"</string>
     <string name="recentCalls_empty" msgid="247053222448663107">"บันทึกการโทรว่างเปล่า"</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"ล้างบันทึกการโทร"</string>
-    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"บันทึกการโทรทั้งหมดของคุณจะถูกนำออกออก"</string>
+    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"บันทึกการโทรทั้งหมดของคุณจะถูกลบออก"</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"กำลังล้างบันทึกการโทร..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="1746619685488504230">"ข้อความเสียง"</item>
@@ -164,15 +164,15 @@
     <string name="dialpad_9_number" msgid="4377059952097526576">"9"</string>
     <string name="show_all_contacts_title" msgid="8395378484578221791">"ที่อยู่ติดต่อทั้งหมด"</string>
     <string name="show_all_contacts_button_text" msgid="8057452310403090131">"ที่อยู่ติดต่อทั้งหมด"</string>
-    <string name="favorite_hidden" msgid="5011234945140912047">"นำออกจากรายการโปรด"</string>
+    <string name="favorite_hidden" msgid="5011234945140912047">"ลบจากรายการโปรด"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"เลิกทำ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"โทร <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"เพิ่มในสมุดติดต่อ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"สายที่ไม่ได้รับใหม่ <xliff:g id="NUMBER">%s</xliff:g> สาย"</string>
-    <string name="no_favorites" msgid="5212485868783382971">"รายการโปรดและรายชื่อติดต่อที่คุณ\nโทรหาบ่อยจะแสดงที่นี่\n เริ่มโทรได้"</string>
+    <string name="no_favorites" msgid="5212485868783382971">"รายการโปรดและรายชื่อติดต่อที่\nโทรหาบ่อยจะแสดงที่นี่\n เริ่มโทรได้เลย"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"แตะรูปภาพเพื่อดูหมายเลขทั้งหมด หรือกดค้างเพื่อจัดลำดับใหม่"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"ปิด"</string>
-    <string name="remove_contact" msgid="1080555335283662961">"นำออก"</string>
-    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"เรียกใช้ฉับไว"</string>
+    <string name="remove_contact" msgid="1080555335283662961">"ลบ"</string>
+    <string name="favorites_menu_speed_dial" msgid="3832518092014707628">"โทรด่วน"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"รายชื่อติดต่อทั้งหมด"</string>
 </resources>

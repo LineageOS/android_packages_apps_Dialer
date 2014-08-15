@@ -99,14 +99,14 @@
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Tumia kibao cha kuchapa cha sauti na kugusa"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Rudi kwa simu inayoendelea"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Ongeza simu"</string>
-    <string name="type_incoming" msgid="6502076603836088532">"Simu inayoingia"</string>
-    <string name="type_outgoing" msgid="343108709599392641">"Simu inayotoka"</string>
+    <string name="type_incoming" msgid="6502076603836088532">"Unapigiwa simu"</string>
+    <string name="type_outgoing" msgid="343108709599392641">"Simu unayopiga"</string>
     <string name="type_missed" msgid="2720502601640509542">"Simu isiyojibiwa"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Barua za sauti"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Simu zinazoingia"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Sikiliza ujumbe wa sauti"</string>
     <string name="description_call_log_incoming_call" msgid="4485427487637250143">"Simu inayoingia"</string>
-    <string name="description_call_log_outgoing_call" msgid="604831756853471658">"Simu inayotoka"</string>
+    <string name="description_call_log_outgoing_call" msgid="604831756853471658">"Simu uliyopiga"</string>
     <string name="description_call_log_missed_call" msgid="2242805209983708825">"Simu isiyojibiwa"</string>
     <string name="description_call_log_voicemail" msgid="4600798771975158948">"Barua za sauti"</string>
     <string name="description_add_contact" msgid="3103414772502485851">"Ongeza anwani"</string>
