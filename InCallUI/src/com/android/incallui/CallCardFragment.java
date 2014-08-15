@@ -32,6 +32,7 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.Display;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
@@ -55,7 +56,6 @@ import java.util.List;
  */
 public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPresenter.CallCardUi>
         implements CallCardPresenter.CallCardUi {
-
     private int mRevealAnimationDuration;
     private int mShrinkAnimationDuration;
     private boolean mIsLandscape;
@@ -814,8 +814,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
     }
 
-    public void animateForNewOutgoingCall() {
+    public void animateForNewOutgoingCall(Point touchPoint, Call call) {
         final ViewGroup parent = (ViewGroup) mPrimaryCallCardContainer.getParent();
+        final Point startPoint = touchPoint;
 
         final ViewTreeObserver observer = getView().getViewTreeObserver();
         observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
@@ -827,11 +828,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 }
                 observer.removeOnGlobalLayoutListener(this);
 
-                final int originalHeight = mPrimaryCallCardContainer.getHeight();
                 final LayoutIgnoringListener listener = new LayoutIgnoringListener();
                 mPrimaryCallCardContainer.addOnLayoutChangeListener(listener);
 
                 // Prepare the state of views before the circular reveal animation
+                final int originalHeight = mPrimaryCallCardContainer.getHeight();
                 mPrimaryCallCardContainer.setBottom(parent.getHeight());
 
                 // Set up FAB.
@@ -850,7 +851,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mCallTypeLabel.setAlpha(0);
                 mCallNumberAndLabel.setAlpha(0);
 
-                final Animator revealAnimator = getRevealAnimator();
+                final Animator revealAnimator = getRevealAnimator(startPoint);
                 final Animator shrinkAnimator =
                         getShrinkAnimator(parent.getHeight(), originalHeight);
 
@@ -903,15 +904,22 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         return shrinkAnimator;
     }
 
-    private Animator getRevealAnimator() {
+    private Animator getRevealAnimator(Point touchPoint) {
         final Activity activity = getActivity();
         final View view  = activity.getWindow().getDecorView();
         final Display display = activity.getWindowManager().getDefaultDisplay();
         final Point size = new Point();
         display.getSize(size);
 
+        int startX = size.x / 2;
+        int startY = size.y / 2;
+        if (touchPoint != null) {
+            startX = touchPoint.x;
+            startY = touchPoint.y;
+        }
+
         final Animator valueAnimator = ViewAnimationUtils.createCircularReveal(view,
-                size.x / 2, size.y / 2, 0, Math.max(size.x, size.y));
+                startX, startY, 0, Math.max(size.x, size.y));
         valueAnimator.setDuration(mRevealAnimationDuration);
         return valueAnimator;
     }
