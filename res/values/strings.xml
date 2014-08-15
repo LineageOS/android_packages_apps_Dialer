@@ -776,9 +776,40 @@
 
     <!-- Dialer settings related strings-->
 
+    <!-- Label for the general dialer settings section [CHAR LIMIT=30]-->
+    <string name="general_settings_label">General settings</string>
+
+    <!-- Label for the general dialer settings section description [CHAR LIMIT=80]-->
+    <string name="general_settings_description">Contact display, sounds, and quick responses</string>
+
+    <!-- Title for "Contact display options" category, which is shown above options which
+         manipulate how contacts are shown. [CHAR LIMIT=40] -->
+    <string name="contact_display_options_category_title">Contact display options</string>
+
+    <!-- Title for the category "sounds", which is shown above sounds and vibration related
+         settings. [CHAR LIMIT=30] -->
+    <string name="sounds_and_vibrate_category_title">Sounds and Vibrate</string>
+
+    <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
+    <string name="ringtone_title">Phone ringtone</string>
+
+    <!-- Setting option name to enable or disable vibration when ringing the phone.
+         [CHAR LIMIT=30] -->
+    <string name="vibrate_on_ring_title">Vibrate when ringing</string>
+
+    <!-- Setting option name to enable or disable DTMF tone sound [CHAR LIMIT=30] -->
+    <string name="dtmf_tone_enable_title">Dialpad touch tones</string>
+
+    <!-- Label for section of general call settings where miscellaneous settings are listed. -->
+    <string name="other_settings_title">Other</string>
+
+    <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
+    <string name="respond_via_sms_setting_title">Quick responses</string>
+
     <!-- Label for the call settings section [CHAR LIMIT=30]-->
-    <string name="call_settings_label">Call Settings</string>
+    <string name="call_settings_label">Call settings</string>
 
     <!-- Label for the call settings section description [CHAR LIMIT=80]-->
-    <string name="call_settings_description">Ringtones, voicemail settings, VoIP calling, etc</string>
+    <string name="call_settings_description">Voicemail, call waiting, and others</string>
+
 </resources>
