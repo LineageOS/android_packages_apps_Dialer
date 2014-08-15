@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.android.contacts.common.preference.DisplayOptionsPreferenceFragment;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialerbind.analytics.AnalyticsPreferenceActivity;
@@ -44,10 +43,11 @@ public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
 
     @Override
     public void onBuildHeaders(List<Header> target) {
-        final Header contactDisplayHeader = new Header();
-        contactDisplayHeader.titleRes = R.string.settings_contact_display_options_title;
-        contactDisplayHeader.fragment = DisplayOptionsPreferenceFragment.class.getName();
-        target.add(contactDisplayHeader);
+        final Header generalSettingsHeader = new Header();
+        generalSettingsHeader.titleRes = R.string.general_settings_label;
+        generalSettingsHeader.summaryRes = R.string.general_settings_description;
+        generalSettingsHeader.fragment = GeneralSettingsFragment.class.getName();
+        target.add(generalSettingsHeader);
 
         // Only add the call settings header if the current user is the primary/owner user.
         if (isPrimaryUser()) {
