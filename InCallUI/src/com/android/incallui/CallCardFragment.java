@@ -814,7 +814,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
     }
 
-    public void animateForNewOutgoingCall(Point touchPoint, Call call) {
+    public void animateForNewOutgoingCall(Point touchPoint) {
         final ViewGroup parent = (ViewGroup) mPrimaryCallCardContainer.getParent();
         final Point startPoint = touchPoint;
 
