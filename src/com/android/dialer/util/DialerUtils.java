@@ -23,8 +23,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.Telephony;
+import android.telecomm.TelecommManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -33,7 +36,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.dialer.R;
+import com.android.incallui.CallCardFragment;
+import com.android.incallui.Log;
 
 import java.util.List;
 import java.util.Locale;
@@ -66,6 +72,14 @@ public class DialerUtils {
     public static void startActivityWithErrorToast(Context context, Intent intent, int msgId) {
         try {
             if (Intent.ACTION_CALL.equals(intent.getAction())) {
+                // All dialer-initiated calls should pass the touch point to the InCallUI
+                Point touchPoint = TouchPointManager.getInstance().getPoint();
+                if (touchPoint.x != 0 || touchPoint.y != 0) {
+                    Bundle extras = new Bundle();
+                    extras.putParcelable(TouchPointManager.TOUCH_POINT, touchPoint);
+                    intent.putExtra(TelecommManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
+                }
+
                 ((Activity) context).startActivityForResult(intent, 0);
             } else {
                 context.startActivity(intent);
