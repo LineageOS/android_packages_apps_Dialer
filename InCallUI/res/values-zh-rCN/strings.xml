@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"手机"</string>
+    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"电话"</string>
     <string name="onHold" msgid="9035493194749959955">"保持"</string>
     <string name="unknown" msgid="6878797917991465859">"未知"</string>
     <string name="private_num" msgid="6713286113000232309">"私密号码"</string>
@@ -33,7 +33,7 @@
     <string name="callFailed_noSignal" msgid="1889803273616031933">"无信号"</string>
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"超出 ACM 限制"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"已关闭天线"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"无 SIM 卡或 SIM 卡出错"</string>
+    <string name="callFailed_simError" msgid="4476360200030635828">"无SIM卡或SIM卡出错"</string>
     <string name="callFailed_outOfService" msgid="4825791466557236225">"不在服务区"</string>
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"外拨电话受固定拨号限制。"</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"您无法在已启用通话限制的情况下拨出电话。"</string>

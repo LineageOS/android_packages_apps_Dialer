@@ -75,7 +75,7 @@
     <string name="notification_incoming_call" msgid="2820429205043529642">"Apel de intrare"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Mesaj vocal nou"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Mesaj vocal nou (<xliff:g id="COUNT">%d</xliff:g>)"</string>
-    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Apelaţi <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Apelați <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Număr mesagerie vocală necunoscut"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Fără serviciu"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Reţeaua selectată (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) nu este disponibilă"</string>

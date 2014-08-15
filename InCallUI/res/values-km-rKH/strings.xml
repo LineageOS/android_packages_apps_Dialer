@@ -43,7 +43,7 @@
     <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"លេខ​មិន​ត្រឹមត្រូវ"</string>
     <string name="confCall" msgid="1904840547188336828">"ការ​ហៅ​ជា​សន្និសីទ"</string>
     <string name="call_lost" msgid="317670617901479594">"បាត់បង់​ការ​ហៅ។"</string>
-    <string name="ok" msgid="3811371167865772377">"យល់​ព្រម​"</string>
+    <string name="ok" msgid="3811371167865772377">"យល់​ព្រម"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"អូប៉ាល័រ"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"កាស"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"កាស​មាន​ខ្សែ"</string>

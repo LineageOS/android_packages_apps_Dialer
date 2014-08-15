@@ -44,7 +44,7 @@
     <string name="confCall" msgid="1904840547188336828">"Telewicara"</string>
     <string name="call_lost" msgid="317670617901479594">"Panggilan telah terputus."</string>
     <string name="ok" msgid="3811371167865772377">"Oke"</string>
-    <string name="audio_mode_speaker" msgid="27649582100085266">"Pelantang"</string>
+    <string name="audio_mode_speaker" msgid="27649582100085266">"Speaker"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Earpiece handset"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Headset berkabel"</string>
     <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
@@ -75,7 +75,7 @@
     <string name="notification_incoming_call" msgid="2820429205043529642">"Panggilan masuk"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Kotak pesan baru"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Kotak pesan baru (<xliff:g id="COUNT">%d</xliff:g>)"</string>
-    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Panggil <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Telepon <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Nomor kotak pesan tidak dikenal"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Tidak ada layanan"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Jaringan yang dipilih (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) tidak tersedia"</string>
@@ -100,7 +100,7 @@
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Menghidupkan radio..."</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Di luar area layanan, mencoba sekali lagi..."</string>
     <string name="dial_emergency_error" msgid="7969515493359619960">"Panggilan tidak terkirim. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> bukan nomor darurat!"</string>
-    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Panggilan tidak terkirim. Panggil nomor darurat!"</string>
+    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Teleponan tidak terkirim. Telepon nomor darurat!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Gunakan keyboard untuk memanggil"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"Tahan"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Akhiri"</string>
