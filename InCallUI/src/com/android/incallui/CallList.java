@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.base.Preconditions;
@@ -26,9 +25,12 @@ import android.os.Message;
 import android.telecomm.Phone;
 import android.telephony.DisconnectCause;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Maintains the list of active calls and notifies interested classes of changes to the call list
@@ -48,7 +50,13 @@ public class CallList implements InCallPhoneListener {
     private final HashMap<String, Call> mCallById = new HashMap<>();
     private final HashMap<android.telecomm.Call, Call> mCallByTelecommCall = new HashMap<>();
     private final HashMap<String, List<String>> mCallTextReponsesMap = Maps.newHashMap();
-    private final Set<Listener> mListeners = Sets.newHashSet();
+    /**
+     * ConcurrentHashMap constructor params: 8 is initial table size, 0.9f is
+     * load factor before resizing, 1 means we only expect a single thread to
+     * access the map so make only a single shard
+     */
+    private final Set<Listener> mListeners = Collections.newSetFromMap(
+            new ConcurrentHashMap<Listener, Boolean>(8, 0.9f, 1));
     private final HashMap<String, List<CallUpdateListener>> mCallUpdateListenerMap = Maps
             .newHashMap();
 
@@ -151,7 +159,7 @@ public class CallList implements InCallPhoneListener {
     public void addCallUpdateListener(String callId, CallUpdateListener listener) {
         List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(callId);
         if (listeners == null) {
-            listeners = Lists.newArrayList();
+            listeners = new CopyOnWriteArrayList<CallUpdateListener>();
             mCallUpdateListenerMap.put(callId, listeners);
         }
         listeners.add(listener);
@@ -180,8 +188,9 @@ public class CallList implements InCallPhoneListener {
     }
 
     public void removeListener(Listener listener) {
-        Preconditions.checkNotNull(listener);
-        mListeners.remove(listener);
+        if (listener != null) {
+            mListeners.remove(listener);
+        }
     }
 
     /**

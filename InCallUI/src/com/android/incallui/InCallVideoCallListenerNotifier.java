@@ -17,9 +17,10 @@
 package com.android.incallui;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Sets;
 
+import java.util.Collections;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Class used by {@link InCallService.VideoCallListener} to notify interested parties of incoming
@@ -31,10 +32,18 @@ public class InCallVideoCallListenerNotifier {
      */
     private static InCallVideoCallListenerNotifier sInstance = new InCallVideoCallListenerNotifier();
 
+    /**
+     * ConcurrentHashMap constructor params: 8 is initial table size, 0.9f is
+     * load factor before resizing, 1 means we only expect a single thread to
+     * access the map so make only a single shard
+     */
     private final Set<SessionModificationListener> mSessionModificationListeners =
-            Sets.newHashSet();
-    private final Set<VideoEventListener> mVideoEventListeners = Sets.newHashSet();
-    private final Set<SurfaceChangeListener> mSurfaceChangeListeners = Sets.newHashSet();
+            Collections.newSetFromMap(new ConcurrentHashMap<SessionModificationListener, Boolean>
+                    (8, 0.9f, 1));
+    private final Set<VideoEventListener> mVideoEventListeners = Collections.newSetFromMap(
+            new ConcurrentHashMap<VideoEventListener, Boolean>(8, 0.9f, 1));
+    private final Set<SurfaceChangeListener> mSurfaceChangeListeners = Collections.newSetFromMap(
+            new ConcurrentHashMap<SurfaceChangeListener, Boolean>(8, 0.9f, 1));
 
     /**
      * Static singleton accessor method.
@@ -65,8 +74,9 @@ public class InCallVideoCallListenerNotifier {
      * @param listener The listener.
      */
     public void removeSessionModificationListener(SessionModificationListener listener) {
-        Preconditions.checkNotNull(listener);
-        mSessionModificationListeners.remove(listener);
+        if (listener != null) {
+            mSessionModificationListeners.remove(listener);
+        }
     }
 
     /**
@@ -85,8 +95,9 @@ public class InCallVideoCallListenerNotifier {
      * @param listener The listener.
      */
     public void removeVideoEventListener(VideoEventListener listener) {
-        Preconditions.checkNotNull(listener);
-        mVideoEventListeners.remove(listener);
+        if (listener != null) {
+            mVideoEventListeners.remove(listener);
+        }
     }
 
     /**
@@ -105,8 +116,9 @@ public class InCallVideoCallListenerNotifier {
      * @param listener The listener.
      */
     public void removeSurfaceChangeListener(SurfaceChangeListener listener) {
-        Preconditions.checkNotNull(listener);
-        mSurfaceChangeListeners.remove(listener);
+        if (listener != null) {
+            mSurfaceChangeListeners.remove(listener);
+        }
     }
 
     /**
