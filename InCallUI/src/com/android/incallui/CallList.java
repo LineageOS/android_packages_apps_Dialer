@@ -438,7 +438,8 @@ public class CallList implements InCallPhoneListener {
                 break;
             case DisconnectCause.INCOMING_REJECTED:
             case DisconnectCause.INCOMING_MISSED:
-                // no delay for missed/rejected incoming calls
+            case DisconnectCause.OUTGOING_CANCELED:
+                // no delay for missed/rejected incoming calls and canceled outgoing calls.
                 delay = 0;
                 break;
             default:
