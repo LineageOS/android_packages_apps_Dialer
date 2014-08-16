@@ -96,7 +96,7 @@
     <string name="add_2sec_pause" msgid="9214012315201040129">"2-வினாடி இடைநிறுத்தத்தைச் சேர்"</string>
     <string name="add_wait" msgid="3360818652790319634">"காத்திருப்பைச் சேர்"</string>
     <string name="menu_select_account" msgid="5576598753317289565">"கணக்கைத் தேர்ந்தெடு"</string>
-    <string name="dialer_settings_label" msgid="4305043242594150479">"அமைப்புகள்"</string>
+    <string name="dialer_settings_label" msgid="4305043242594150479">"அமைப்பு"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"புதிய தொடர்பு"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"எல்லா தொடர்புகளும்"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"அழைப்பு விவரங்கள்"</string>
@@ -131,7 +131,7 @@
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"அழைப்பைச் சேர்க்க டயல் செய்யவும்"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> நிமிடங்கள் <xliff:g id="SECONDS">%s</xliff:g> வினாடிகள்"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"அழைக்க முடியவில்லை"</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"குரலஞ்சலை அமைக்க, செல்க மெனு &gt; அமைப்புகள்."</string>
+    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"குரலஞ்சலை அமைக்க, செல்க மெனு &gt; அமைப்பு."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"குரலஞ்சலை அழைப்பதற்கு, முதலில் விமானப் பயன்முறையை முடக்கவும்."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"ஏற்றுகிறது..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
@@ -191,6 +191,26 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"மெதுவாக இயக்கு."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"பிளேபேக்கைத் தொடங்கு அல்லது இடைநிறுத்து."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="call_settings_label" msgid="2934215322075055446">"அழைப்பு அமைப்புகள்"</string>
-    <string name="call_settings_description" msgid="7955465849094897305">"ரிங்டோன்கள், குரலஞ்சல் அமைப்புகள், VoIP அழைப்பு, மேலும் பல"</string>
+    <!-- no translation found for general_settings_label (4787443826763795004) -->
+    <skip />
+    <!-- no translation found for general_settings_description (4838560696004337578) -->
+    <skip />
+    <!-- no translation found for contact_display_options_category_title (5719485933817512769) -->
+    <skip />
+    <!-- no translation found for sounds_and_vibrate_category_title (8821719295658641733) -->
+    <skip />
+    <!-- no translation found for ringtone_title (760362035635084653) -->
+    <skip />
+    <!-- no translation found for vibrate_on_ring_title (3442694674084884238) -->
+    <skip />
+    <!-- no translation found for dtmf_tone_enable_title (1924260663475511870) -->
+    <skip />
+    <!-- no translation found for other_settings_title (7976283601445863248) -->
+    <skip />
+    <!-- no translation found for respond_via_sms_setting_title (1318281521087951580) -->
+    <skip />
+    <!-- no translation found for call_settings_label (7416182166943714852) -->
+    <skip />
+    <!-- no translation found for call_settings_description (2756622428019213052) -->
+    <skip />
 </resources>
