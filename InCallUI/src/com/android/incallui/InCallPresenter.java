@@ -57,8 +57,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      */
     private final Set<InCallStateListener> mListeners = Collections.newSetFromMap(
             new ConcurrentHashMap<InCallStateListener, Boolean>(8, 0.9f, 1));
-    private final List<IncomingCallListener> mIncomingCallListeners =
-        new CopyOnWriteArrayList<IncomingCallListener>();
+    private final List<IncomingCallListener> mIncomingCallListeners = new CopyOnWriteArrayList<>();
     private final Set<InCallDetailsListener> mDetailsListeners = Collections.newSetFromMap(
             new ConcurrentHashMap<InCallDetailsListener, Boolean>(8, 0.9f, 1));
     private final Set<InCallOrientationListener> mOrientationListeners = Collections.newSetFromMap(
