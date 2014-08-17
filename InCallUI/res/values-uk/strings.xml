@@ -108,8 +108,7 @@
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Неможл. відхилити дзвінок."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Неможл. роз\'єднати виклики."</string>
     <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Невідомий номер голосової пошти."</string>
-    <!-- no translation found for incall_call_type_label_sip (4931428719494190371) -->
-    <skip />
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"Дзвінок через протокол SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Аварійний виклик"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Увімкнення радіо…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Поза межами дії служби, повтор..."</string>
@@ -169,6 +168,10 @@
     <string name="description_target_decline" msgid="4789834364389731957">"Відхилити"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"Відповісти в режимі відеодзвінка"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Відповісти в режимі аудіодзвінка"</string>
+    <!-- no translation found for description_target_accept_upgrade_to_video_request (2894072808324604062) -->
+    <skip />
+    <!-- no translation found for description_target_decline_upgrade_to_video_request (4093888612888538776) -->
+    <skip />
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> – проведіть пальцем угору."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> – проведіть пальцем ліворуч."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> – проведіть пальцем праворуч."</string>

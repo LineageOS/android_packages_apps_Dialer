@@ -108,8 +108,7 @@
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"அழைப்பை நிராகரிக்க முடியவில்லை."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"அழைப்பை(களை) முடிக்க முடியவில்லை."</string>
     <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"குரலஞ்சல் எண் அறியப்படாதது."</string>
-    <!-- no translation found for incall_call_type_label_sip (4931428719494190371) -->
-    <skip />
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP அழைப்பு"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"அவசரகால அழைப்பு"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"ரேடியோவை இயக்குகிறது…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"சேவை பகுதிக்கு வெளியே உள்ளது, மீண்டும் முயற்சிக்கிறது..."</string>
@@ -139,7 +138,7 @@
     <string name="voicemail_provider" msgid="5135942703327136909">"சேவை"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"அமைவு"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;அமைக்கப்படவில்லை&gt;"</string>
-    <string name="other_settings" msgid="3672912580359716394">"பிற அழைப்பு அமைப்புகள்"</string>
+    <string name="other_settings" msgid="3672912580359716394">"பிற அழைப்பு அமைப்பு"</string>
     <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> வழியாக அழைக்கிறது"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> மூலம் உள்வருவது"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"தொடர்பு படம்"</string>
@@ -169,6 +168,10 @@
     <string name="description_target_decline" msgid="4789834364389731957">"நிராகரி"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"வீடியோ அழைப்பில் பதிலளி"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"ஆடியோ அழைப்பில் பதிலளி"</string>
+    <!-- no translation found for description_target_accept_upgrade_to_video_request (2894072808324604062) -->
+    <skip />
+    <!-- no translation found for description_target_decline_upgrade_to_video_request (4093888612888538776) -->
+    <skip />
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> க்கு மேலாக நகர்த்தவும்."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> க்கு இடதுபக்கமாக நகர்த்தவும்."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> வலதுபக்கமாக நகர்த்தவும்."</string>
