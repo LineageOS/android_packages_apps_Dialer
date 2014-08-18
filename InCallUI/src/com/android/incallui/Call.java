@@ -169,7 +169,6 @@ public final class Call {
     private final String mId;
     private int mState = State.INVALID;
     private int mDisconnectCause;
-    private String mParentCallId;
     private int mSessionModificationState;
     private final List<String> mChildCallIds = new ArrayList<>();
 
@@ -204,11 +203,6 @@ public final class Call {
     private void updateFromTelecommCall() {
         setState(translateState(mTelecommCall.getState()));
         setDisconnectCause(mTelecommCall.getDetails().getDisconnectCauseCode());
-
-        if (mTelecommCall.getParent() != null) {
-            mParentCallId = CallList.getInstance().getCallByTelecommCall(
-                    mTelecommCall.getParent()).getId();
-        }
 
         if (mTelecommCall.getVideoCall() != null) {
             if (mVideoCallListener == null) {
@@ -264,7 +258,7 @@ public final class Call {
     }
 
     public int getState() {
-        if (mParentCallId != null) {
+        if (mTelecommCall.getParent() != null) {
             return State.CONFERENCED;
         } else {
             return mState;
@@ -343,7 +337,11 @@ public final class Call {
     }
 
     public String getParentId() {
-        return mParentCallId;
+        android.telecomm.Call parentCall = mTelecommCall.getParent();
+        if (parentCall != null) {
+            return CallList.getInstance().getCallByTelecommCall(parentCall).getId();
+        }
+        return null;
     }
 
     public int getVideoState() {
@@ -385,7 +383,7 @@ public final class Call {
                 State.toString(mState),
                 PhoneCapabilities.toString(mTelecommCall.getDetails().getCallCapabilities()),
                 mChildCallIds,
-                mParentCallId,
+                getParentId(),
                 mTelecommCall.getDetails().getVideoState());
     }
 }
