@@ -520,6 +520,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             if (callStateAnimation != null) {
                 callStateAnimation.cancel();
             }
+            mCallStateLabel.setText(null);
             mCallStateLabel.setAlpha(0);
             mCallStateLabel.setVisibility(View.GONE);
 
