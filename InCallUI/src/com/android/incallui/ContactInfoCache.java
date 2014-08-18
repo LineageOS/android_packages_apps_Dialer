@@ -233,7 +233,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             // If no image and it's a business, switch to using the default business avatar.
             if (info.getImageUrl() == null && info.isBusiness()) {
                 Log.d(TAG, "Business has no image. Using default.");
-                entry.photo = mContext.getResources().getDrawable(R.drawable.business_unknown);
+                entry.photo = mContext.getResources().getDrawable(R.drawable.img_business);
             }
 
             // Add the contact info to the cache.
