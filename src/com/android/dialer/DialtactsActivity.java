@@ -230,10 +230,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private String mActionMenuDialpadButtonStr;
     private ImageButton mFloatingActionButton;
     private FloatingActionButtonController mFloatingActionButtonController;
-    /**
-     * Additional offset for FAB to be lowered when dialpad is open.
-     */
-    private int mFloatingActionButtonDialpadMarginBottomOffset;
 
     private int mActionBarHeight;
 
@@ -393,8 +389,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mFloatingActionButton.setOnTouchListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(this,
                 floatingActionButtonContainer);
-        mFloatingActionButtonDialpadMarginBottomOffset = resources.getDimensionPixelOffset(
-                R.dimen.floating_action_button_dialpad_margin_bottom_offset);
 
         ImageButton optionsMenuButton =
                 (ImageButton) searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
@@ -1207,9 +1201,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 align = FloatingActionButtonController.ALIGN_END;
             }
         }
-        mFloatingActionButtonController.align(align,
-                0 /* offsetX */,
-                mIsDialpadShown ? mFloatingActionButtonDialpadMarginBottomOffset : 0 /* offsetY */,
-                animate);
+        mFloatingActionButtonController.align(align, 0 /* offsetX */, 0 /* offsetY */, animate);
     }
 }
