@@ -40,6 +40,7 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.CONTROL_INCALL_EXPERIENCE" />
     <uses-permission android:name="com.android.voicemail.permission.ADD_VOICEMAIL" />
     <uses-permission android:name="com.android.voicemail.permission.WRITE_VOICEMAIL" />
     <uses-permission android:name="com.android.voicemail.permission.READ_VOICEMAIL" />
@@ -294,7 +295,8 @@
         </receiver>
 
         <service android:name="com.android.incallui.InCallServiceImpl"
-                 android:process="com.android.incallui">
+                 android:process="com.android.incallui"
+                 android:permission="android.permission.BIND_INCALL_SERVICE" >
             <intent-filter>
                 <action android:name="android.telecomm.InCallService"/>
             </intent-filter>
