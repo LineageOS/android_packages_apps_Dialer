@@ -333,7 +333,7 @@ public class CallerInfo {
     // should be displayed.
     /* package */ CallerInfo markAsEmergency(Context context) {
         phoneNumber = context.getString(R.string.emergency_call_dialog_number_for_display);
-        photoResource = R.drawable.picture_emergency;
+        photoResource = R.drawable.img_emergency;
         mIsEmergency = true;
         return this;
     }
