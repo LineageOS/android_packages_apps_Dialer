@@ -110,17 +110,21 @@
 
     <FrameLayout
         android:id="@+id/floating_end_call_action_button_container"
-        android:layout_width="@dimen/floating_action_button_width"
-        android:layout_height="@dimen/floating_action_button_height"
+        android:layout_width="@dimen/end_call_floating_action_button_diameter"
+        android:layout_height="@dimen/end_call_floating_action_button_diameter"
+        android:background="@drawable/fab_red"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" >
+        android:layout_alignParentBottom="true" >
 
         <ImageButton android:id="@+id/floating_end_call_action_button"
-                     android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                     android:background="@drawable/end_call_background"
-                     android:src="@drawable/fab_ic_end_call"
-                     android:contentDescription="@string/onscreenEndCallText" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/end_call_background"
+            android:src="@drawable/fab_ic_end_call"
+            android:scaleType="center"
+            android:contentDescription="@string/onscreenEndCallText" />
+
     </FrameLayout>
+
 </RelativeLayout>
