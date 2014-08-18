@@ -168,10 +168,8 @@
     <string name="description_target_decline" msgid="4789834364389731957">"Απόρριψη"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"Απάντηση ως βιντεοκλήση"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Απάντηση ως φωνητική κλήση"</string>
-    <!-- no translation found for description_target_accept_upgrade_to_video_request (2894072808324604062) -->
-    <skip />
-    <!-- no translation found for description_target_decline_upgrade_to_video_request (4093888612888538776) -->
-    <skip />
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Αποδοχή αιτήματος βίντεο"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Απόρριψη αιτήματος βίντεο"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"Κύλιση προς τα επάνω για <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"Κύλιση προς τα αριστερά για <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"Κύλιση προς τα δεξιά για <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
