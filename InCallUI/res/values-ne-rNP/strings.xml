@@ -108,8 +108,7 @@
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"कल अस्वीकार गर्न असमर्थ।"</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"कल(हरू) छुटाउन असमर्थ।"</string>
     <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"भ्वाइसमेल नम्बर अज्ञात छ।"</string>
-    <!-- no translation found for incall_call_type_label_sip (4931428719494190371) -->
-    <skip />
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP कल"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"आपतकालीन कल"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"रेडियो खोल्दै..."</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"सेवा क्षेत्रभन्दा बाहिर, पुनः प्रयास गर्दै..."</string>
@@ -169,6 +168,10 @@
     <string name="description_target_decline" msgid="4789834364389731957">"अस्वीकार गर्नुहोस्"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"भिडियो कल रूपमा जवाफ दिनुहोस्"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"अडियो कलको रूपमा जवाफ दिनुहोस्"</string>
+    <!-- no translation found for description_target_accept_upgrade_to_video_request (2894072808324604062) -->
+    <skip />
+    <!-- no translation found for description_target_decline_upgrade_to_video_request (4093888612888538776) -->
+    <skip />
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> को लागि माथि सार्नुहोस्।"</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>को लागि बायाँ सार्नुहोस्।"</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>को लागि दायाँ सार्नुहोस्।"</string>

@@ -168,6 +168,8 @@
     <string name="description_target_decline" msgid="4789834364389731957">"Татгалзах"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"Видео дуудлагаар хариулах"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Аудио дуудлагаар хариулах"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Видео хүсэлтийг зөвшөөрөх"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Видео хүсэлтээс татгалзах"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> хийх бол дээш гулсуулна уу."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> хийх бол зүүн талруу гулсуулна уу."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> хийх бол баруун талруу гулсуулна уу."</string>
