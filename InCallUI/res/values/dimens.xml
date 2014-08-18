@@ -59,6 +59,7 @@
     <dimen name="primary_call_elevation">4dp</dimen>
     <dimen name="secondary_call_elevation">4dp</dimen>
 
+    <dimen name="floating_action_bar_vertical_offset">-24dp</dimen>
 
     <!-- Padding at the left and right edges of the incall_touch_ui button
          cluster.  This padding is necessary because we can't allow the
@@ -102,7 +103,7 @@
     <dimen name="translucent_shadow_height">2dp</dimen>
 
     <dimen name="end_call_button_margin_bottom">8dp</dimen>
-    <dimen name="end_call_button_hide_offset">70dp</dimen>
+    <dimen name="end_call_button_hide_offset">80dp</dimen>
 
     <dimen name="call_card_anim_translate_y_offset">50dp</dimen>
 
@@ -111,4 +112,8 @@
     <dimen name="video_preview_small_dimension">90dp</dimen>
 
     <dimen name="video_preview_margin">20dp</dimen>
+
+    <dimen name="end_call_floating_action_button_diameter">72dp</dimen>
+    <dimen name="end_call_floating_action_button_small_diameter">56dp</dimen>
+
 </resources>
