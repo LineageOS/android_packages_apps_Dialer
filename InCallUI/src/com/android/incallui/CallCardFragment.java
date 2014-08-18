@@ -32,7 +32,6 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.Display;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
@@ -56,8 +55,11 @@ import java.util.List;
  */
 public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPresenter.CallCardUi>
         implements CallCardPresenter.CallCardUi {
+
     private int mRevealAnimationDuration;
     private int mShrinkAnimationDuration;
+    private int mFabNormalDiameter;
+    private int mFabSmallDiameter;
     private boolean mIsLandscape;
 
     // Primary caller info
@@ -92,6 +94,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private FloatingActionButtonController mFloatingActionButtonController;
     private View mFloatingActionButtonContainer;
+    private ImageButton mFloatingActionButton;
+    private int mFloatingActionButtonVerticalOffset;
     private int mFloatingActionButtonHideOffset;
 
     // Cached DisplayMetrics density.
@@ -118,8 +122,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mRevealAnimationDuration = getResources().getInteger(R.integer.reveal_animation_duration);
         mShrinkAnimationDuration = getResources().getInteger(R.integer.shrink_animation_duration);
         mVideoAnimationDuration = getResources().getInteger(R.integer.video_animation_duration);
+        mFloatingActionButtonVerticalOffset = getResources().getDimensionPixelOffset(
+                R.dimen.floating_action_bar_vertical_offset);
         mFloatingActionButtonHideOffset = getResources().getDimensionPixelOffset(
                 R.dimen.end_call_button_hide_offset);
+        mFabNormalDiameter = getResources().getDimensionPixelOffset(
+                R.dimen.end_call_floating_action_button_diameter);
+        mFabSmallDiameter = getResources().getDimensionPixelOffset(
+                R.dimen.end_call_floating_action_button_small_diameter);
         mIsLandscape = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
     }
@@ -174,9 +184,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         mFloatingActionButtonContainer = view.findViewById(
                 R.id.floating_end_call_action_button_container);
-        ImageButton floatingActionButton = (ImageButton) view.findViewById(
+        mFloatingActionButton = (ImageButton) view.findViewById(
                 R.id.floating_end_call_action_button);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getPresenter().endCallClicked();
@@ -790,7 +800,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setEndCallButtonEnabled(boolean enabled) {
-        mFloatingActionButtonController.setVisible(enabled);
+        mFloatingActionButtonController.align(
+                mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
+                        : FloatingActionButtonController.ALIGN_MIDDLE,
+                0 /* offsetX */,
+                enabled ? mFloatingActionButtonVerticalOffset /* offsetY */
+                        : mFloatingActionButtonHideOffset,
+                true);
+        mFloatingActionButton.setEnabled(enabled);
     }
 
     /**
@@ -873,6 +890,26 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         });
     }
 
+    public void onDialpadShow() {
+        mFloatingActionButtonController.align(
+                mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
+                        : FloatingActionButtonController.ALIGN_MIDDLE,
+                0 /* offsetX */,
+                0 /* offsetY */,
+                true);
+        mFloatingActionButtonController.resize(mFabSmallDiameter, true);
+    }
+
+    public void onDialpadHide() {
+        mFloatingActionButtonController.align(
+                mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
+                        : FloatingActionButtonController.ALIGN_MIDDLE,
+                0 /* offsetX */,
+                mFloatingActionButtonVerticalOffset /* offsetY */,
+                true);
+        mFloatingActionButtonController.resize(mFabNormalDiameter, true);
+    }
+
     /**
      * Animator that performs the upwards shrinking animation of the blue call card scrim.
      * At the start of the animation, each child view is moved downwards by a pre-specified amount
@@ -880,8 +917,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      */
     private Animator getShrinkAnimator(int startHeight, int endHeight) {
         final Animator shrinkAnimator =
-                ObjectAnimator.ofInt(mPrimaryCallCardContainer, "bottom",
-                        startHeight, endHeight);
+                ObjectAnimator.ofInt(mPrimaryCallCardContainer, "bottom", startHeight, endHeight);
         shrinkAnimator.setDuration(mShrinkAnimationDuration);
         shrinkAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -892,12 +928,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 assignTranslateAnimation(mCallTypeLabel, 4);
                 assignTranslateAnimation(mCallButtonsContainer, 5);
 
-                mFloatingActionButtonController.align(
-                        mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
-                            : FloatingActionButtonController.ALIGN_MIDDLE,
-                        0 /* offsetX */,
-                        0 /* offsetY */,
-                        true);
+                setEndCallButtonEnabled(true);
             }
         });
         shrinkAnimator.setInterpolator(AnimUtils.EASE_IN);
