@@ -16,6 +16,6 @@
 -->
 
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/dialer_accent_color">
+    android:color="@color/floating_action_button_touch_tint">
     <item android:drawable="@drawable/fab_blue" />
 </ripple>
