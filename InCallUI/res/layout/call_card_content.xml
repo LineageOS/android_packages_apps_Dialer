@@ -18,7 +18,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <!-- The main content of the CallCard is either one or two "call info"
          blocks, depending on whether one or two lines are in use.
@@ -39,7 +39,7 @@
         android:background="@color/incall_call_banner_background_color"
         android:paddingTop="@dimen/call_banner_primary_call_container_top_padding"
         android:clipChildren="false"
-        android:clipToPadding="false" >
+        android:clipToPadding="false">
 
         <include layout="@layout/primary_call_info" />
 
@@ -84,7 +84,7 @@
         android:layout_height="fill_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -97,9 +97,9 @@
 
     <!-- Secondary "Call info" block, for the background ("on hold") call. -->
     <include layout="@layout/secondary_call_info"
-         android:layout_below="@id/primary_call_info_container"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
 
     <!-- Placeholder for the dialpad which is replaced with the dialpad fragment when shown. -->
     <FrameLayout

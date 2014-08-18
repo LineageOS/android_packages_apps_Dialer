@@ -568,10 +568,8 @@ public class InCallActivity extends Activity {
             if (showDialpad) {
                 showDialpad(true);
                 mDialpadFragment.animateShowDialpad();
-                mCallCardFragment.onDialpadShow();
-            } else {
-                mCallCardFragment.onDialpadHide();
             }
+            mCallCardFragment.onDialpadVisiblityChange(showDialpad);
             mDialpadFragment.getView().startAnimation(showDialpad ? mSlideIn : mSlideOut);
         }
 

@@ -61,6 +61,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private int mFabNormalDiameter;
     private int mFabSmallDiameter;
     private boolean mIsLandscape;
+    private boolean mIsDialpadShowing;
 
     // Primary caller info
     private TextView mPhoneNumber;
@@ -96,13 +97,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mFloatingActionButtonContainer;
     private ImageButton mFloatingActionButton;
     private int mFloatingActionButtonVerticalOffset;
-    private int mFloatingActionButtonHideOffset;
 
     // Cached DisplayMetrics density.
     private float mDensity;
 
     private float mTranslationOffset;
     private Animation mPulseAnimation;
+
     private int mVideoAnimationDuration;
 
     @Override
@@ -124,8 +125,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mVideoAnimationDuration = getResources().getInteger(R.integer.video_animation_duration);
         mFloatingActionButtonVerticalOffset = getResources().getDimensionPixelOffset(
                 R.dimen.floating_action_bar_vertical_offset);
-        mFloatingActionButtonHideOffset = getResources().getDimensionPixelOffset(
-                R.dimen.end_call_button_hide_offset);
         mFabNormalDiameter = getResources().getDimensionPixelOffset(
                 R.dimen.end_call_floating_action_button_diameter);
         mFabSmallDiameter = getResources().getDimensionPixelOffset(
@@ -195,7 +194,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         int floatingActionButtonWidth = getResources().getDimensionPixelSize(
                 R.dimen.floating_action_button_width);
         mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
-                mFloatingActionButtonContainer);
+                mFloatingActionButtonContainer, mFloatingActionButton);
         final ViewGroup parent = (ViewGroup) mPrimaryCallCardContainer.getParent();
         final ViewTreeObserver observer = getView().getViewTreeObserver();
         observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
@@ -211,7 +210,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                         mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
                             : FloatingActionButtonController.ALIGN_MIDDLE,
                         0 /* offsetX */,
-                        0 /* offsetY */,
+                        mFloatingActionButtonVerticalOffset /* offsetY */,
                         false);
             }
         });
@@ -447,6 +446,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
             String providerLabel, Drawable providerIcon, boolean isConference, boolean isGeneric) {
+
+        if (show != mSecondaryCallInfo.isShown()) {
+            updateFabPositionOnSecondaryCallInfoLayout();
+        }
 
         if (show) {
             if (isConference) {
@@ -778,6 +781,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             @Override
             public void onClick(View v) {
                 getPresenter().secondaryInfoClicked();
+                updateFabPositionOnSecondaryCallInfoLayout();
             }
         });
     }
@@ -800,15 +804,25 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setEndCallButtonEnabled(boolean enabled) {
-        mFloatingActionButtonController.align(
-                mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
-                        : FloatingActionButtonController.ALIGN_MIDDLE,
-                0 /* offsetX */,
-                enabled ? mFloatingActionButtonVerticalOffset /* offsetY */
-                        : mFloatingActionButtonHideOffset,
-                true);
-        mFloatingActionButton.setEnabled(enabled);
+    public void setEndCallButtonEnabled(boolean enabled, boolean animate) {
+        if (enabled != mFloatingActionButton.isEnabled()) {
+            if (animate) {
+                if (enabled) {
+                    mFloatingActionButtonController.scaleIn();
+                } else {
+                    mFloatingActionButtonController.scaleOut();
+                }
+            } else {
+                if (enabled) {
+                    mFloatingActionButtonContainer.setScaleX(1);
+                    mFloatingActionButtonContainer.setScaleY(1);
+                    mFloatingActionButtonContainer.setVisibility(View.VISIBLE);
+                } else {
+                    mFloatingActionButtonContainer.setVisibility(View.GONE);
+                }
+            }
+            mFloatingActionButton.setEnabled(enabled);
+        }
     }
 
     /**
@@ -854,15 +868,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mPrimaryCallCardContainer.setBottom(parent.getHeight());
 
                 // Set up FAB.
+                mFloatingActionButtonContainer.setVisibility(View.GONE);
                 mFloatingActionButtonController.setScreenWidth(parent.getWidth());
-                // Move it below the screen.
-                mFloatingActionButtonController.manuallyTranslate(
-                        mFloatingActionButtonController.getTranslationXForAlignment(
-                                mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
-                                        : FloatingActionButtonController.ALIGN_MIDDLE
-                        ),
-                        mFloatingActionButtonHideOffset
-                );
+                mFloatingActionButtonController.align(
+                        mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
+                                : FloatingActionButtonController.ALIGN_MIDDLE,
+                        0 /* offsetX */,
+                        mFloatingActionButtonVerticalOffset /* offsetY */,
+                        false);
                 mCallButtonsContainer.setAlpha(0);
                 mCallStateLabel.setAlpha(0);
                 mPrimaryName.setAlpha(0);
@@ -879,11 +892,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                     @Override
                     public void onAnimationCancel(Animator animation) {
                         mPrimaryCallCardContainer.removeOnLayoutChangeListener(listener);
+                        mFloatingActionButtonController.scaleIn();
                     }
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mPrimaryCallCardContainer.removeOnLayoutChangeListener(listener);
+                        mFloatingActionButtonController.scaleIn();
                     }
                 });
                 set.start();
@@ -891,24 +906,47 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         });
     }
 
-    public void onDialpadShow() {
+    public void onDialpadVisiblityChange(boolean isShown) {
+        mIsDialpadShowing = isShown;
+
+        int offsetY = 0;
+        if (!mIsDialpadShowing) {
+            offsetY = mFloatingActionButtonVerticalOffset;
+            if (mSecondaryCallInfo.isShown()) {
+                offsetY -= mSecondaryCallInfo.getHeight();
+            }
+        }
+
         mFloatingActionButtonController.align(
                 mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
                         : FloatingActionButtonController.ALIGN_MIDDLE,
                 0 /* offsetX */,
-                0 /* offsetY */,
+                offsetY,
                 true);
-        mFloatingActionButtonController.resize(mFabSmallDiameter, true);
+
+        mFloatingActionButtonController.resize(
+                mIsDialpadShowing ? mFabSmallDiameter : mFabNormalDiameter, true);
     }
 
-    public void onDialpadHide() {
-        mFloatingActionButtonController.align(
-                mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
-                        : FloatingActionButtonController.ALIGN_MIDDLE,
-                0 /* offsetX */,
-                mFloatingActionButtonVerticalOffset /* offsetY */,
-                true);
-        mFloatingActionButtonController.resize(mFabNormalDiameter, true);
+    /**
+     * Adds a global layout listener to update the FAB's positioning on the next layout. This allows
+     * us to position the FAB after the secondary call info's height has been calculated.
+     */
+    private void updateFabPositionOnSecondaryCallInfoLayout() {
+        mSecondaryCallInfo.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        final ViewTreeObserver observer =
+                                mSecondaryCallInfo.getViewTreeObserver();
+                        if (!observer.isAlive()) {
+                            return;
+                        }
+                        observer.removeOnGlobalLayoutListener(this);
+
+                        onDialpadVisiblityChange(mIsDialpadShowing);
+                    }
+                });
     }
 
     /**
@@ -929,7 +967,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 assignTranslateAnimation(mCallTypeLabel, 4);
                 assignTranslateAnimation(mCallButtonsContainer, 5);
 
-                setEndCallButtonEnabled(true);
+                mFloatingActionButton.setEnabled(true);
             }
         });
         shrinkAnimator.setInterpolator(AnimUtils.EASE_IN);
