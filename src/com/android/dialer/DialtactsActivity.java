@@ -388,7 +388,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mFloatingActionButton.setOnClickListener(this);
         mFloatingActionButton.setOnTouchListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(this,
-                floatingActionButtonContainer);
+                floatingActionButtonContainer, mFloatingActionButton);
 
         ImageButton optionsMenuButton =
                 (ImageButton) searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
