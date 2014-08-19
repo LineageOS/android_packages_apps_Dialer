@@ -21,12 +21,12 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.list.DirectoryPartition;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
-import com.android.dialer.util.DialerUtils;
 
 /**
  * List adapter to display regular search results.
@@ -75,7 +75,7 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
         // Otherwise, it should add it to a new contact as a name.
         setShortcutEnabled(SHORTCUT_ADD_NUMBER_TO_CONTACTS, showNumberShortcuts);
         setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
-                showNumberShortcuts && DialerUtils.isVideoEnabled());
+                showNumberShortcuts && CallUtil.isVideoEnabled());
         super.setQueryString(queryString);
     }
 }

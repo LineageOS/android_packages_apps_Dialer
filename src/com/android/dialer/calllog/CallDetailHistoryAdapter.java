@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.android.contacts.common.CallUtil;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
@@ -123,7 +124,7 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
 
         int callType = details.callTypes[0];
         boolean isVideoCall = (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
-                && DialerUtils.isVideoEnabled();
+                && CallUtil.isVideoEnabled();
 
         callTypeIconView.clear();
         callTypeIconView.add(callType);

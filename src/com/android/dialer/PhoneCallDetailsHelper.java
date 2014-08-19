@@ -25,6 +25,7 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.CallTypeHelper;
@@ -32,7 +33,6 @@ import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.DialerUtils;
-
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class PhoneCallDetailsHelper {
         // Show the video icon if the call had video enabled.
         views.callTypeIcons.setShowVideo(
                 (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
-                        && DialerUtils.isVideoEnabled());
+                        && CallUtil.isVideoEnabled());
         views.callTypeIcons.requestLayout();
         views.callTypeIcons.setVisibility(View.VISIBLE);
 
