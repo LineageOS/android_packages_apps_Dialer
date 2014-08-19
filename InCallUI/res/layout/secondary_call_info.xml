@@ -20,6 +20,7 @@
     android:id="@+id/secondary_call_info"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
     android:orientation="horizontal"
     android:paddingStart="@dimen/call_banner_side_padding"
     android:paddingEnd="@dimen/secondary_call_banner_right_padding"

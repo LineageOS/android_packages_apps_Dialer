@@ -252,7 +252,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         final boolean enableEndCallButton = Call.State.isConnectingOrConnected(callState) &&
                 callState != Call.State.INCOMING && mPrimary != null;
-        getUi().setEndCallButtonEnabled(enableEndCallButton);
+        // Hide the end call button instantly if we're receiving an incoming call.
+        getUi().setEndCallButtonEnabled(
+                enableEndCallButton, callState != Call.State.INCOMING /* animate */);
     }
 
     @Override
@@ -653,7 +655,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimaryImage(Drawable image);
         void setPrimaryPhoneNumber(String phoneNumber);
         void setPrimaryLabel(String label);
-        void setEndCallButtonEnabled(boolean enabled);
+        void setEndCallButtonEnabled(boolean enabled, boolean animate);
         void setCallbackNumber(String number, boolean isEmergencyCalls);
         void setPhotoVisible(boolean isVisible);
         void setProgressSpinnerVisible(boolean visible);
