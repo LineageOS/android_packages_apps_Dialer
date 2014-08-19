@@ -25,6 +25,7 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.list.PhoneNumberListAdapter.PhoneQuery;
@@ -32,7 +33,6 @@ import com.android.dialer.dialpad.SmartDialCursorLoader;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 import com.android.dialer.dialpad.SmartDialMatchPosition;
-import com.android.dialer.util.DialerUtils;
 
 import java.util.ArrayList;
 
@@ -120,7 +120,7 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
         final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString());
         setShortcutEnabled(SHORTCUT_ADD_NUMBER_TO_CONTACTS, showNumberShortcuts);
         setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
-                showNumberShortcuts && DialerUtils.isVideoEnabled());
+                showNumberShortcuts && CallUtil.isVideoEnabled());
         super.setQueryString(queryString);
     }
 }
