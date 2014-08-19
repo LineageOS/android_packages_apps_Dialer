@@ -102,7 +102,6 @@ import java.util.Locale;
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
  */
 public class DialtactsActivity extends TransactionSafeActivity implements View.OnClickListener,
-        View.OnTouchListener,
         DialpadFragment.OnDialpadQueryChangedListener,
         OnListFragmentScrolledListener,
         DialpadFragment.HostInterface,
@@ -338,6 +337,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     };
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            TouchPointManager.getInstance().setPoint((int) ev.getRawX(), (int) ev.getRawY());
+        }
+        return super.dispatchTouchEvent(ev);
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFirstLaunch = true;
@@ -386,7 +394,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         int floatingActionButtonWidth = resources.getDimensionPixelSize(
                 R.dimen.floating_action_button_width);
         mFloatingActionButton.setOnClickListener(this);
-        mFloatingActionButton.setOnTouchListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(this,
                 floatingActionButtonContainer);
 
@@ -461,8 +468,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 if (!mIsDialpadShown) {
                     maybeExitSearchUi();
                 }
-
-                recordTouchEvent(v, event);
                 return false;
             }
         });
@@ -560,18 +565,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 Log.wtf(TAG, "Unexpected onClick event from " + view);
                 break;
             }
-        }
-    }
-
-    @Override
-    public boolean onTouch(View view, MotionEvent event) {
-        recordTouchEvent(view, event);
-        return false;
-    }
-
-    private void recordTouchEvent(View view, MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            TouchPointManager.getInstance().setPoint((int) event.getRawX(), (int) event.getRawY());
         }
     }
 
