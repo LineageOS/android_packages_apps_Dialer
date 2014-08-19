@@ -19,8 +19,7 @@
     android:id="@+id/dtmf_twelve_key_dialer_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginTop="1dip" >
+    android:orientation="vertical">
 
     <view class="com.android.incallui.DialpadFragment$HoverIgnoringLinearLayout"
         android:orientation="vertical"
