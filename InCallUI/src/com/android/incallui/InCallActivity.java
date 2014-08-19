@@ -454,14 +454,20 @@ public class InCallActivity extends Activity {
                 intent.removeExtra(NEW_OUTGOING_CALL);
 
                 Point touchPoint = null;
-                Call call = CallList.getInstance().getOutgoingCall();
-                if (call == null) {
-                    call = CallList.getInstance().getPendingOutgoingCall();
-                }
-                if (call != null) {
-                    Bundle extras = call.getTelecommCall().getDetails().getExtras();
-                    touchPoint = (Point) (extras == null ?
-                            null : extras.getParcelable(TouchPointManager.TOUCH_POINT));
+                if (TouchPointManager.getInstance().hasValidPoint()) {
+                    // Use the most immediate touch point in the InCallUi if available
+                    touchPoint = TouchPointManager.getInstance().getPoint();
+                } else {
+                    // Otherwise retrieve the touch point from the call intent
+                    Call call = CallList.getInstance().getOutgoingCall();
+                    if (call == null) {
+                        call = CallList.getInstance().getPendingOutgoingCall();
+                    }
+                    if (call != null) {
+                        Bundle extras = call.getTelecommCall().getDetails().getExtras();
+                        touchPoint = (Point) (extras == null ?
+                                null : extras.getParcelable(TouchPointManager.TOUCH_POINT));
+                    }
                 }
                 mCallCardFragment.animateForNewOutgoingCall(touchPoint);
             }
