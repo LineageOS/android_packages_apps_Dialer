@@ -17,8 +17,8 @@
 package com.android.dialer.calllog;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.animation.Animator.AnimatorListener;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.KeyguardManager;
@@ -26,28 +26,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.graphics.Outline;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.VoicemailContract.Status;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.common.io.MoreCloseables;
-import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
-import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
 import com.android.dialer.list.ListsFragment.HostInterface;
@@ -574,6 +570,7 @@ public class CallLogFragment extends AnalyticsListFragment
                 if (!isExpand) {
                     viewHolder.actionsView.setVisibility(View.VISIBLE);
                 }
+                CallLogAdapter.expandVoicemailTranscriptionView(viewHolder, !isExpand);
 
                 // Set up the fade effect for the action buttons.
                 if (isExpand) {
@@ -612,7 +609,7 @@ public class CallLogFragment extends AnalyticsListFragment
                     }
                 });
                 // Set everything to their final values when the animation's done.
-                animator.addListener(new AnimatorListener() {
+                animator.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         view.getLayoutParams().height = LayoutParams.WRAP_CONTENT;
@@ -625,14 +622,8 @@ public class CallLogFragment extends AnalyticsListFragment
                             // is defaulting to the value (0) at the start of the expand animation.
                             viewHolder.actionsView.setAlpha(1);
                         }
+                        CallLogAdapter.expandVoicemailTranscriptionView(viewHolder, isExpand);
                     }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) { }
-                    @Override
-                    public void onAnimationRepeat(Animator animation) { }
-                    @Override
-                    public void onAnimationStart(Animator animation) { }
                 });
 
                 animator.setDuration(mExpandCollapseDuration);

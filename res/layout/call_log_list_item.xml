@@ -65,8 +65,9 @@
                 android:id="@+id/quick_contact_photo"
                 android:layout_width="@dimen/contact_photo_size"
                 android:layout_height="@dimen/contact_photo_size"
+                android:paddingTop="2dp"
                 android:nextFocusRight="@id/primary_action_view"
-                android:layout_alignParentStart="true"
+                android:layout_gravity="top"
                 android:focusable="true"
                 />
             <LinearLayout
@@ -140,6 +141,7 @@
                 android:src="@drawable/ic_card_phone"
                 android:tint="@color/recent_call_log_item_phone_icon_tint"
                 android:alpha="0.3"
+                android:importantForAccessibility="no"
                 android:visibility="gone"
                 />
         </LinearLayout>
