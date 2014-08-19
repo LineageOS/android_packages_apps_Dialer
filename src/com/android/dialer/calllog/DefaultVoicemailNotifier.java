@@ -157,6 +157,7 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
                 .setSmallIcon(icon)
                 .setContentTitle(title)
                 .setContentText(callers)
+                .setColor(resources.getColor(R.color.dialer_theme_color))
                 .setDefaults(callToNotify != null ? Notification.DEFAULT_ALL : 0)
                 .setDeleteIntent(createMarkNewVoicemailsAsOldIntent())
                 .setAutoCancel(true);
