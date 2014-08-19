@@ -16,7 +16,6 @@
 
 package com.android.dialer.calllog;
 
-import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -29,9 +28,7 @@ import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telecomm.PhoneAccountHandle;
-import android.telecomm.TelecommManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
@@ -39,7 +36,6 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityRecord;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +61,8 @@ import java.util.LinkedList;
  */
 public class CallLogAdapter extends GroupingListAdapter
         implements ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
+
+    private static final int VOICEMAIL_TRANSCRIPTION_MAX_LINES = 10;
 
     /** The enumeration of {@link android.os.AsyncTask} objects used in this class. */
     public enum Tasks {
@@ -887,6 +885,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private void expandOrCollapseActions(CallLogListItemView callLogItem, boolean isExpanded) {
         final CallLogListItemViews views = (CallLogListItemViews)callLogItem.getTag();
 
+        expandVoicemailTranscriptionView(views, isExpanded);
         if (isExpanded) {
             // Inflate the view stub if necessary, and wire up the event handlers.
             inflateActionViewStub(callLogItem);
@@ -907,6 +906,20 @@ public class CallLogAdapter extends GroupingListAdapter
             views.callLogEntryView.setTranslationZ(0);
             callLogItem.setTranslationZ(0); // WAR
         }
+    }
+
+    public static void expandVoicemailTranscriptionView(CallLogListItemViews views,
+            boolean isExpanded) {
+        if (views.callType != Calls.VOICEMAIL_TYPE) {
+            return;
+        }
+
+        final TextView view = views.phoneCallDetailsViews.voicemailTranscriptionView;
+        if (TextUtils.isEmpty(view.getText())) {
+            return;
+        }
+        view.setMaxLines(isExpanded ? VOICEMAIL_TRANSCRIPTION_MAX_LINES : 1);
+        view.setSingleLine(!isExpanded);
     }
 
     /**
