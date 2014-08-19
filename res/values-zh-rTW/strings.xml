@@ -151,7 +151,7 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"未接來電"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"語音留言"</string>
     <string name="tab_speed_dial" msgid="7807567599021643864">"快速撥號"</string>
-    <string name="tab_recents" msgid="929949073851377206">"最近存取過"</string>
+    <string name="tab_recents" msgid="929949073851377206">"近期通話"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"聯絡人"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"已從最愛的聯絡人移除"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"復原"</string>
@@ -191,6 +191,26 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"放慢播放速度。"</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"開始或暫停播放。"</string>
     <string name="list_delimeter" msgid="4571593167738725100">"、 "</string>
-    <string name="call_settings_label" msgid="2934215322075055446">"通話設定"</string>
-    <string name="call_settings_description" msgid="7955465849094897305">"鈴聲、語音信箱設定、VoIP 通話功能等"</string>
+    <!-- no translation found for general_settings_label (4787443826763795004) -->
+    <skip />
+    <!-- no translation found for general_settings_description (4838560696004337578) -->
+    <skip />
+    <!-- no translation found for contact_display_options_category_title (5719485933817512769) -->
+    <skip />
+    <!-- no translation found for sounds_and_vibrate_category_title (8821719295658641733) -->
+    <skip />
+    <!-- no translation found for ringtone_title (760362035635084653) -->
+    <skip />
+    <!-- no translation found for vibrate_on_ring_title (3442694674084884238) -->
+    <skip />
+    <!-- no translation found for dtmf_tone_enable_title (1924260663475511870) -->
+    <skip />
+    <!-- no translation found for other_settings_title (7976283601445863248) -->
+    <skip />
+    <!-- no translation found for respond_via_sms_setting_title (1318281521087951580) -->
+    <skip />
+    <!-- no translation found for call_settings_label (7416182166943714852) -->
+    <skip />
+    <!-- no translation found for call_settings_description (2756622428019213052) -->
+    <skip />
 </resources>
