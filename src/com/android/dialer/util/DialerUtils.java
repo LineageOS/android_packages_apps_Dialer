@@ -183,10 +183,4 @@ public class DialerUtils {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-
-    public static boolean isVideoEnabled() {
-        // TODO: Write utility methods to check subscriptions and settings, and use it to determine
-        // whether to enable or disable video call functionality.
-        return false;
-    }
 }
