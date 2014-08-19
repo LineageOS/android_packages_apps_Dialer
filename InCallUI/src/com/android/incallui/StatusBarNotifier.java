@@ -291,6 +291,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         builder.setSmallIcon(iconResId);
         builder.setContentTitle(contentTitle);
         builder.setLargeIcon(largeIcon);
+        builder.setColor(mContext.getResources().getColor(R.color.dialer_theme_color));
 
         if (isVideoUpgradeRequest) {
             builder.setUsesChronometer(false);
@@ -440,7 +441,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
                 == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
             return R.drawable.ic_videocam;
         }
-        return R.drawable.fab_ic_call;
+        return R.drawable.ic_call_white_24dp;
     }
 
     /**
