@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<view class="com.android.contacts.common.widget.ActivityTouchLinearLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -39,4 +40,4 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textDirection="ltr" />
 
-</LinearLayout>
+</view>
