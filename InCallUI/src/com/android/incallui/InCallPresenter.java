@@ -804,16 +804,18 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         // A new outgoing call indicates that the user just now dialed a number and when that
         // happens we need to display the screen immediately or show an account picker dialog if
-        // no default is set.
+        // no default is set. However, if the main InCallUI is already visible, we do not want to
+        // re-initiate the start-up animation, so we do not need to do anything here.
         //
         // It is also possible to go into an intermediate state where the call has been initiated
         // but Telecomm has not yet returned with the details of the call (handle, gateway, etc.).
-        // This pending outgoing state also launches the call screen.
+        // This pending outgoing state can also launch the call screen.
         //
         // This is different from the incoming call sequence because we do not need to shock the
         // user with a top-level notification.  Just show the call UI normally.
+        final boolean mainUiNotVisible = !isShowingInCallUi() || !getCallCardFragmentVisible();
         final boolean showCallUi = ((InCallState.PENDING_OUTGOING == newState ||
-                InCallState.OUTGOING == newState) || showAccountPicker);
+                InCallState.OUTGOING == newState) && mainUiNotVisible);
 
         // TODO: Can we be suddenly in a call without it having been in the outgoing or incoming
         // state?  I havent seen that but if it can happen, the code below should be enabled.
@@ -829,7 +831,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             return mInCallState;
         }
 
-        if (showCallUi) {
+        if (showCallUi || showAccountPicker) {
             Log.i(this, "Start in call UI");
             showInCall(false /* showDialpad */, !showAccountPicker /* newOutgoingCall */);
         } else if (startStartupSequence) {
@@ -1011,6 +1013,18 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      */
     public float getSpaceBesideCallCard() {
         return mInCallActivity.getCallCardFragment().getSpaceBesideCallCard();
+    }
+
+    /**
+     * Returns whether the call card fragment is currently visible.
+     *
+     * @return True if the call card fragment is visible.
+     */
+    public boolean getCallCardFragmentVisible() {
+        if (mInCallActivity != null) {
+            return mInCallActivity.getCallCardFragment().isVisible();
+        }
+        return false;
     }
 
     /**
