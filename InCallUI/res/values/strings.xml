@@ -486,11 +486,29 @@
     -->
     <string name="description_delete_button">backspace</string>
 
-    <!-- Content description of the speakerphone enabled notification icon for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_speakerphone_enabled">Speakerphone enabled.</string>
+    <!-- String used by AccessibilityService to announce that the speakerphone has been selected for audio output [CHAR LIMIT=NONE]-->
+    <string name="accessibility_speakerphone_selected">Speakerphone selected</string>
 
-    <!-- Content description of the call muted notification icon for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <!-- String used by AccessibilityService to announce that the phone's earpiece has been selected for audio output [CHAR LIMIT=NONE]-->
+    <string name="accessibility_earpiece_selected">Earpiece selected</string>
+
+    <!-- String used by AccessibilityService to announce that the wired headset has been selected for audio output [CHAR LIMIT=NONE]-->
+    <string name="accessibility_wired_headset_selected">Wired headset selected</string>
+
+    <!-- String used by AccessibilityService to announce that the bluetooth headset has been selected for audio output [CHAR LIMIT=NONE]-->
+    <string name="accessibility_bluetooth_headset_selected">Bluetooth headset selected</string>
+
+    <!-- String used by AccessibilityService to announce that the call has been muted [CHAR LIMIT=NONE]-->
     <string name="accessibility_call_muted">Call muted.</string>
+
+    <!-- String used by AccessibilityService to announce that the call has been unmuted [CHAR LIMIT=NONE]-->
+    <string name="accessibility_call_unmuted">Call unmuted.</string>
+
+    <!-- String used by AccessibilityService to announce that the call has been put on hold [CHAR LIMIT=NONE]-->
+    <string name="accessibility_call_put_on_hold">Call put on hold.</string>
+
+    <!-- String used by AccessibilityService to announce that the call has been removed from hold [CHAR LIMIT=NONE]-->
+    <string name="accessibility_call_removed_from_hold">Call removed from hold.</string>
 
     <!-- Description of the answer target in the Slide unlock screen of Phone. [CHAR LIMIT=NONE] -->
     <string name="description_target_answer">Answer</string>
