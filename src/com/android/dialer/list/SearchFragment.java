@@ -109,6 +109,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             final OnPhoneNumberPickerActionListener listener =
                     getOnPhoneNumberPickerListener();
             if (listener != null) {
+                DialerStats.sendEvent(getContext(),
+                        DialerStats.Categories.INITIATE_CALL, "call_from_direct_dial_search");
                 listener.onCallNumberDirectly(getQueryString());
             }
         } else if (shortcutType == DialerPhoneNumberListAdapter.SHORTCUT_ADD_NUMBER_TO_CONTACTS) {
