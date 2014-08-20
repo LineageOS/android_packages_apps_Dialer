@@ -775,7 +775,7 @@ public class CallLogAdapter extends GroupingListAdapter
                     null, accountIcon, features, dataUsage, transcription);
         }
 
-        mCallLogViewsHelper.setPhoneCallDetails(views, details);
+        mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
 
         int contactType = ContactPhotoManager.TYPE_DEFAULT;
 
