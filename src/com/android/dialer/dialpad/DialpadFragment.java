@@ -650,11 +650,14 @@ public class DialpadFragment extends AnalyticsFragment
 
         mSmsPackageComponentName = DialerUtils.getSmsComponent(activity);
 
+        // Populate the overflow menu in onResume instead of onCreate, so that if the SMS activity
+        // is disabled while Dialer is paused, the "Send a text message" option can be correctly
+        // removed when resumed.
         mOverflowMenuButton = mDialpadView.getOverflowMenuButton();
         mOverflowPopupMenu = buildOptionsMenu(mOverflowMenuButton);
         mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
         mOverflowMenuButton.setOnClickListener(this);
-        mOverflowMenuButton.setVisibility(View.INVISIBLE);
+        mOverflowMenuButton.setVisibility(isDigitsEmpty() ? View.INVISIBLE : View.VISIBLE);
     }
 
     @Override
