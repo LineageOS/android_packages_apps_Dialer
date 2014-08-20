@@ -220,5 +220,9 @@ final class TelecommAdapter implements InCallPhoneListener {
         }  else {
             Log.e(this, "error phoneAccountSelected, mAdapter is null");
         }
+
+        if (accountHandle == null) {
+            Log.e(this, "error phoneAccountSelected, accountHandle is null");
+        }
     }
 }
