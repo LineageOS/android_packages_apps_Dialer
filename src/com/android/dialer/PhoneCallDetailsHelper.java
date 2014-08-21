@@ -85,8 +85,7 @@ public class PhoneCallDetailsHelper {
 
         // Show the video icon if the call had video enabled.
         views.callTypeIcons.setShowVideo(
-                (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
-                        && CallUtil.isVideoEnabled());
+                (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
         views.callTypeIcons.requestLayout();
         views.callTypeIcons.setVisibility(View.VISIBLE);
 

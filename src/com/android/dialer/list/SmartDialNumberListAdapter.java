@@ -120,7 +120,7 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
         final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString());
         setShortcutEnabled(SHORTCUT_ADD_NUMBER_TO_CONTACTS, showNumberShortcuts);
         setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
-                showNumberShortcuts && CallUtil.isVideoEnabled());
+                showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));
         super.setQueryString(queryString);
     }
 }

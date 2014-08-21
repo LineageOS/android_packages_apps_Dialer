@@ -233,7 +233,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 TEST_FORMATTED_NUMBER,
                 TEST_COUNTRY_ISO, TEST_GEOCODE,
                 new int[]{Calls.OUTGOING_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
-        CharSequence description = mHelper.getCallDescription(details);
+        CharSequence description = mHelper.getCallDescription(getContext(), details);
         assertFalse(description.toString()
                 .contains(this.mResources.getString(R.string.description_new_voicemail)));
     }
@@ -247,7 +247,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 TEST_FORMATTED_NUMBER,
                 TEST_COUNTRY_ISO, TEST_GEOCODE,
                 new int[]{Calls.INCOMING_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
-        CharSequence description = mHelper.getCallDescription(details);
+        CharSequence description = mHelper.getCallDescription(getContext(), details);
         assertFalse(description.toString()
                 .contains(this.mResources.getString(R.string.description_new_voicemail)));
     }
@@ -261,7 +261,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 TEST_FORMATTED_NUMBER,
                 TEST_COUNTRY_ISO, TEST_GEOCODE,
                 new int[]{Calls.MISSED_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
-        CharSequence description = mHelper.getCallDescription(details);
+        CharSequence description = mHelper.getCallDescription(getContext(), details);
         assertFalse(description.toString()
                 .contains(this.mResources.getString(R.string.description_new_voicemail)));
     }
@@ -275,7 +275,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 TEST_FORMATTED_NUMBER,
                 TEST_COUNTRY_ISO, TEST_GEOCODE,
                 new int[]{Calls.VOICEMAIL_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
-        CharSequence description = mHelper.getCallDescription(details);
+        CharSequence description = mHelper.getCallDescription(getContext(), details);
         assertTrue(description.toString()
                 .contains(this.mResources.getString(R.string.description_new_voicemail)));
     }
@@ -289,7 +289,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 TEST_FORMATTED_NUMBER,
                 TEST_COUNTRY_ISO, TEST_GEOCODE,
                 new int[]{Calls.VOICEMAIL_TYPE}, TEST_DATE, TEST_DURATION);
-        CharSequence description = mHelper.getCallDescription(details);
+        CharSequence description = mHelper.getCallDescription(getContext(), details);
 
         // Rather than hard coding the "X calls" string message, we'll generate it with an empty
         // number of calls, and trim the resulting string.  This gets us just the word "calls",
@@ -308,7 +308,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 TEST_FORMATTED_NUMBER,
                 TEST_COUNTRY_ISO, TEST_GEOCODE,
                 new int[]{Calls.VOICEMAIL_TYPE, Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION);
-        CharSequence description = mHelper.getCallDescription(details);
+        CharSequence description = mHelper.getCallDescription(getContext(), details);
         assertTrue(description.toString()
                 .contains(this.mResources.getString(R.string.description_num_calls, 2)));
     }
@@ -324,7 +324,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 new int[]{Calls.INCOMING_TYPE, Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION,
                 null, null, Calls.FEATURES_VIDEO, null, null);
 
-        CharSequence description = mHelper.getCallDescription(details);
+        CharSequence description = mHelper.getCallDescription(getContext(), details);
         assertTrue(description.toString()
                 .contains(this.mResources.getString(R.string.description_video_call, 2)));
     }
@@ -346,7 +346,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     /** Sets the details of a phone call using the specified phone number. */
     private void setPhoneCallDetailsWithNumberAndType(String number,
             int presentation, String formattedNumber, int callType) {
-        mHelper.setPhoneCallDetails(mViews,
+        mHelper.setPhoneCallDetails(getContext(), mViews,
                 new PhoneCallDetails(number, presentation, formattedNumber,
                         TEST_COUNTRY_ISO, TEST_GEOCODE,
                         new int[]{ callType }, TEST_DATE, TEST_DURATION)
@@ -355,7 +355,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
 
     /** Sets the details of a phone call using the specified call type. */
     private void setPhoneCallDetailsWithTypes(int... types) {
-        mHelper.setPhoneCallDetails(mViews,
+        mHelper.setPhoneCallDetails(getContext() ,mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                         types, TEST_DATE, TEST_DURATION)
@@ -364,7 +364,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
 
     /** Sets the details of an unread phone call using the specified call type. */
     private void setUnreadPhoneCallDetailsWithTypes(int... types) {
-        mHelper.setPhoneCallDetails(mViews,
+        mHelper.setPhoneCallDetails(getContext(), mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                         types, TEST_DATE, TEST_DURATION)

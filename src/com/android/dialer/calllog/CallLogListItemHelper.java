@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllog;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.provider.CallLog.Calls;
 import android.text.TextUtils;
@@ -52,17 +53,19 @@ import com.android.dialer.R;
     /**
      * Sets the name, label, and number for a contact.
      *
+     * @param context The application context.
      * @param views the views to populate
      * @param details the details of a phone call needed to fill in the data
      */
-    public void setPhoneCallDetails(CallLogListItemViews views, PhoneCallDetails details) {
+    public void setPhoneCallDetails(
+            Context context, CallLogListItemViews views, PhoneCallDetails details) {
         mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details);
 
         // Set the accessibility text for the contact badge
         views.quickContactView.setContentDescription(getContactBadgeDescription(details));
 
         // Set the primary action accessibility description
-        views.primaryActionView.setContentDescription(getCallDescription(details));
+        views.primaryActionView.setContentDescription(getCallDescription(context, details));
 
         // Cache name or number of caller.  Used when setting the content descriptions of buttons
         // when the actions ViewStub is inflated.
@@ -124,10 +127,12 @@ import com.android.dialer.R;
      * Examples:
      * 3 calls.  New Voicemail.  Missed call from Joe Smith mobile 2 hours ago.
      * 2 calls.  Answered call from John Doe mobile.  Last called 1 hour ago.
+     *
+     * @param context The application context.
      * @param details Details of call.
      * @return Return call action description.
      */
-    public CharSequence getCallDescription(PhoneCallDetails details) {
+    public CharSequence getCallDescription(Context context, PhoneCallDetails details) {
         int lastCallType = getLastCallType(details.callTypes);
         boolean isVoiceMail = lastCallType == Calls.VOICEMAIL_TYPE;
 
@@ -155,7 +160,7 @@ import com.android.dialer.R;
 
         // If call had video capabilities, add the "Video Call" string.
         if ((details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO &&
-                CallUtil.isVideoEnabled()) {
+                CallUtil.isVideoEnabled(context)) {
             callDescription.append(mResources.getString(R.string.description_video_call));
         }
 
