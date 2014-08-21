@@ -16,9 +16,9 @@
 
 package com.android.incallui;
 
+import android.content.Context;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
-
 import android.telecomm.AudioState;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -26,6 +26,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -59,6 +61,8 @@ public class CallButtonFragment
     private View mExtraRowButton;
     private View mManageConferenceButton;
     private View mGenericMergeButton;
+
+    private int mPrevAudioMode = 0;
 
     // Constants for Drawable.setAlpha()
     private static final int HIDDEN = 0;
@@ -224,7 +228,11 @@ public class CallButtonFragment
 
     @Override
     public void setMute(boolean value) {
-        mMuteButton.setSelected(value);
+        if (mMuteButton.isSelected() != value) {
+            mMuteButton.setSelected(value);
+            maybeSendAccessibilityEvent(mMuteButton, value ? R.string.accessibility_call_muted
+                    : R.string.accessibility_call_unmuted);
+        }
     }
 
     @Override
@@ -249,7 +257,12 @@ public class CallButtonFragment
 
     @Override
     public void setHold(boolean value) {
-        mHoldButton.setSelected(value);
+        if (mHoldButton.isSelected() != value) {
+            mHoldButton.setSelected(value);
+            maybeSendAccessibilityEvent(mHoldButton,
+                    value ? R.string.accessibility_call_put_on_hold :
+                            R.string.accessibility_call_removed_from_hold);
+        }
     }
 
     @Override
@@ -372,6 +385,30 @@ public class CallButtonFragment
     public void setAudio(int mode) {
         updateAudioButtons(getPresenter().getSupportedAudio());
         refreshAudioModePopup();
+
+        if (mPrevAudioMode != mode) {
+            if (mPrevAudioMode != 0) {
+                int stringId = 0;
+                switch (mode) {
+                    case AudioState.ROUTE_EARPIECE:
+                        stringId = R.string.accessibility_earpiece_selected;
+                        break;
+                    case AudioState.ROUTE_BLUETOOTH:
+                        stringId = R.string.accessibility_bluetooth_headset_selected;
+                        break;
+                    case AudioState.ROUTE_WIRED_HEADSET:
+                        stringId = R.string.accessibility_wired_headset_selected;
+                        break;
+                    case AudioState.ROUTE_SPEAKER:
+                        stringId = R.string.accessibility_speakerphone_selected;
+                        break;
+                }
+                if (stringId != 0) {
+                    maybeSendAccessibilityEvent(mAudioButton, stringId);
+                }
+            }
+            mPrevAudioMode = mode;
+        }
     }
 
     @Override
@@ -650,5 +687,20 @@ public class CallButtonFragment
     @Override
     public void hideExtraRow() {
        mExtraRowButton.setVisibility(View.GONE);
+    }
+
+    private void maybeSendAccessibilityEvent(View view, int stringId) {
+        final Context context = getActivity();
+        AccessibilityManager manager =
+                (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
+        if (manager != null && manager.isEnabled()) {
+            AccessibilityEvent e = AccessibilityEvent.obtain();
+            e.setSource(view);
+            e.setEventType(AccessibilityEvent.TYPE_ANNOUNCEMENT);
+            e.setClassName(getClass().getName());
+            e.setPackageName(context.getPackageName());
+            e.getText().add(context.getResources().getString(stringId));
+            manager.sendAccessibilityEvent(e);
+        }
     }
 }
