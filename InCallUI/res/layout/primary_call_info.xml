@@ -47,7 +47,7 @@
             android:layout_marginEnd="4dp"
             android:baselineAlignBottom="true"
             android:tint="@color/incall_accent_color"
-            android:alpha="0.7"
+            android:alpha="0.0"
             android:scaleType="centerInside"
             android:visibility="gone" />
 
