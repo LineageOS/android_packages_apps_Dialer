@@ -502,6 +502,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mCallStateIcon.setVisibility(View.GONE);
             } else {
                 mCallStateIcon.setVisibility(View.VISIBLE);
+                mCallStateIcon.setImageAlpha(255);
                 mCallStateIcon.setImageDrawable(connectionIcon);
             }
 
@@ -515,8 +516,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
             if (state == Call.State.ACTIVE || state == Call.State.CONFERENCED) {
                 mCallStateLabel.clearAnimation();
+                mCallStateIcon.clearAnimation();
             } else {
                 mCallStateLabel.startAnimation(mPulseAnimation);
+                mCallStateIcon.startAnimation(mPulseAnimation);
             }
         } else {
             Animation callStateAnimation = mCallStateLabel.getAnimation();
@@ -526,6 +529,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mCallStateLabel.setText(null);
             mCallStateLabel.setAlpha(0);
             mCallStateLabel.setVisibility(View.GONE);
+            mCallStateIcon.setImageAlpha(0);
+            mCallStateIcon.setVisibility(View.GONE);
 
             mCallStateVideoCallIcon.setVisibility(View.GONE);
         }
@@ -962,6 +967,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             @Override
             public void onAnimationStart(Animator animation) {
                 assignTranslateAnimation(mCallStateLabel, 1);
+                assignTranslateAnimation(mCallStateIcon, 1);
                 assignTranslateAnimation(mPrimaryName, 2);
                 assignTranslateAnimation(mCallNumberAndLabel, 3);
                 assignTranslateAnimation(mCallTypeLabel, 4);
