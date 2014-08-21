@@ -119,6 +119,7 @@
                         android:layout_height="@dimen/call_provider_small_icon_size"
                         android:layout_marginEnd="@dimen/call_log_icon_margin"
                         android:layout_gravity="center_vertical"
+                        android:tint="?attr/call_log_secondary_text_color"
                         android:scaleType="centerInside"
                         />
                     <TextView
