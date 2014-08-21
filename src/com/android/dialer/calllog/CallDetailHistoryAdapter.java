@@ -124,7 +124,7 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
 
         int callType = details.callTypes[0];
         boolean isVideoCall = (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
-                && CallUtil.isVideoEnabled();
+                && CallUtil.isVideoEnabled(mContext);
 
         callTypeIconView.clear();
         callTypeIconView.add(callType);
