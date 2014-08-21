@@ -24,8 +24,6 @@
 
     <View android:layout_width="match_parent"
           android:layout_height="1px"
-          android:layout_marginStart="@dimen/call_log_outer_margin"
-          android:layout_marginEnd="@dimen/call_log_outer_margin"
           android:background="@color/favorite_contacts_separator_color"/>
 
     <LinearLayout android:id="@+id/badge_link_container"
@@ -40,9 +38,11 @@
         <ImageView android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:id="@+id/badge_image"
+                   android:tint="@color/dialpad_primary_text_color"
                    android:padding="@dimen/call_log_outer_margin"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:paddingStart="@dimen/call_log_start_margin"
                   android:id="@+id/badge_text"
                   android:textColor="@color/dialpad_primary_text_color"
                   android:layout_gravity="center_vertical"
@@ -50,8 +50,11 @@
         <ImageView android:id="@+id/dismiss_button"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:paddingTop="8dip"
+                   android:layout_gravity="center_vertical"
+                   android:layout_marginEnd="@dimen/call_log_icon_margin"
                    android:src="@drawable/ic_close_dk"
+                   android:tint="@color/recent_call_log_item_phone_icon_tint"
+                   android:alpha="0.3"
                    android:background="?android:attr/selectableItemBackground"
                    android:visibility="gone"
                    android:contentDescription="@string/description_dismiss"/>
