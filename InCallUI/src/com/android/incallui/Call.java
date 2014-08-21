@@ -201,6 +201,7 @@ public final class Call {
     }
 
     private void updateFromTelecommCall() {
+        Log.d(this, "updateFromTelecommCall: " + mTelecommCall);
         setState(translateState(mTelecommCall.getState()));
         setDisconnectCause(mTelecommCall.getDetails().getDisconnectCauseCode());
 
@@ -380,7 +381,7 @@ public final class Call {
     public String toString() {
         return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s, videoState:%d]",
                 mId,
-                State.toString(mState),
+                State.toString(getState()),
                 PhoneCapabilities.toString(mTelecommCall.getDetails().getCallCapabilities()),
                 mChildCallIds,
                 getParentId(),
