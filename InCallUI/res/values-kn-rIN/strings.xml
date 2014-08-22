@@ -108,8 +108,7 @@
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"ಕರೆಯನ್ನು ತಿರಸ್ಕರಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"ಕರೆ(ಗಳನ್ನು) ಬಿಡುಗಡೆಗೊಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ."</string>
     <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"ಅಪರಿಚಿತ ಧ್ವನಿಮೇಲ್ ಸಂಖ್ಯೆ."</string>
-    <!-- no translation found for incall_call_type_label_sip (4931428719494190371) -->
-    <skip />
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP ಕರೆ"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"ತುರ್ತು ಕರೆಗಳು"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"ರೇಡಿಯೋ ಆನ್‌ ಮಾಡಲಾಗುತ್ತಿದೆ…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"ಸೇವಾ ಪ್ರದೇಶದ ಹೊರಗಿದೆ, ಮರುಪ್ರಯತ್ನಿಸಲಾಗುತ್ತಿದೆ…"</string>
@@ -169,6 +168,10 @@
     <string name="description_target_decline" msgid="4789834364389731957">"ನಿರಾಕರಿಸು"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"ವೀಡಿಯೊ ಕರೆ ರೂಪದಲ್ಲಿ ಉತ್ತರಿಸಿ"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"ಆಡಿಯೊ ಕರೆಯಂತೆ ಉತ್ತರಿಸಿ"</string>
+    <!-- no translation found for description_target_accept_upgrade_to_video_request (2894072808324604062) -->
+    <skip />
+    <!-- no translation found for description_target_decline_upgrade_to_video_request (4093888612888538776) -->
+    <skip />
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> ಗಾಗಿ ಮೇಲಕ್ಕೆ ಸ್ಲೈಡ್ ಮಾಡಿ."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> ಗಾಗಿ ಎಡಕ್ಕೆ ಸ್ಲೈಡ್ ಮಾಡಿ."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> ಗಾಗಿ ಬಲಗಡೆಗೆ ಸ್ಲೈಡ್ ಮಾಡಿ."</string>
