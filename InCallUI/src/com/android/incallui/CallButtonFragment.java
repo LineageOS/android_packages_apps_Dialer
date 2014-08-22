@@ -60,7 +60,6 @@ public class CallButtonFragment
     private PopupMenu mOverflowPopup;
     private View mExtraRowButton;
     private View mManageConferenceButton;
-    private View mGenericMergeButton;
 
     private int mPrevAudioMode = 0;
 
@@ -95,8 +94,6 @@ public class CallButtonFragment
 
         mManageConferenceButton = parent.findViewById(R.id.manageConferenceButton);
         mManageConferenceButton.setOnClickListener(this);
-        mGenericMergeButton = parent.findViewById(R.id.cdmaMergeButton);
-        mGenericMergeButton.setOnClickListener(this);
 
         mAudioButton = (ImageButton) parent.findViewById(R.id.audioButton);
         mAudioButton.setOnClickListener(this);
@@ -166,7 +163,6 @@ public class CallButtonFragment
                 getPresenter().muteClicked(!button.isSelected());
                 break;
             }
-            case R.id.cdmaMergeButton:
             case R.id.mergeButton:
                 getPresenter().mergeClicked();
                 break;
@@ -679,14 +675,6 @@ public class CallButtonFragment
     public void showManageConferenceCallButton() {
         mExtraRowButton.setVisibility(View.VISIBLE);
         mManageConferenceButton.setVisibility(View.VISIBLE);
-        mGenericMergeButton.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showGenericMergeButton() {
-        mExtraRowButton.setVisibility(View.VISIBLE);
-        mManageConferenceButton.setVisibility(View.GONE);
-        mGenericMergeButton.setVisibility(View.VISIBLE);
     }
 
     @Override

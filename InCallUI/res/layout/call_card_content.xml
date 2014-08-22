@@ -96,10 +96,7 @@
     </FrameLayout>
 
     <!-- Secondary "Call info" block, for the background ("on hold") call. -->
-    <include layout="@layout/secondary_call_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+    <include layout="@layout/secondary_call_info" />
 
     <!-- Placeholder for the dialpad which is replaced with the dialpad fragment when shown. -->
     <FrameLayout
