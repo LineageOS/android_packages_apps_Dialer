@@ -16,6 +16,9 @@
 
 package com.android.incallui;
 
+import com.android.contacts.common.CallUtil;
+
+import android.content.Context;
 import android.net.Uri;
 import android.telecomm.PhoneCapabilities;
 import android.telecomm.GatewayInfo;
@@ -349,8 +352,9 @@ public final class Call {
         return mTelecommCall.getDetails().getVideoState();
     }
 
-    public boolean isVideoCall() {
-        return VideoProfile.VideoState.isBidirectional(getVideoState());
+    public boolean isVideoCall(Context context) {
+        return CallUtil.isVideoEnabled(context) &&
+                VideoProfile.VideoState.isBidirectional(getVideoState());
     }
 
     public void setSessionModificationState(int state) {

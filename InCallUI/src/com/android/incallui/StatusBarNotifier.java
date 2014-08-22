@@ -328,7 +328,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
             addHangupAction(builder);
         } else if (state == Call.State.INCOMING || state == Call.State.CALL_WAITING) {
             addDismissAction(builder);
-            if (call.isVideoCall()) {
+            if (call.isVideoCall(mContext)) {
                 addVoiceAction(builder);
                 addVideoCallAction(builder);
             } else {
