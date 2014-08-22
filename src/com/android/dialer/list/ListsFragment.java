@@ -70,9 +70,6 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
     public static final float REMOVE_VIEW_SHOWN_ALPHA = 0.5f;
     public static final float REMOVE_VIEW_HIDDEN_ALPHA = 1;
 
-    // Used with LoaderManager
-    private static int MISSED_CALL_LOADER = 1;
-
     public interface HostInterface {
         public void showCallHistory();
         public int getActionBarHeight();
@@ -110,27 +107,6 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
      * The date of the current call shortcut that is showing on screen.
      */
     private long mCurrentCallShortcutDate = 0;
-
-    private class MissedCallLogLoaderListener implements LoaderManager.LoaderCallbacks<Cursor> {
-
-        @Override
-        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-            final Uri uri = CallLog.Calls.CONTENT_URI;
-            final String[] projection = new String[] {CallLog.Calls.TYPE};
-            final String selection = CallLog.Calls.TYPE + " = " + CallLog.Calls.MISSED_TYPE +
-                    " AND " + CallLog.Calls.IS_READ + " = 0";
-            return new CursorLoader(getActivity(), uri, projection, selection, null, null);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor data) {
-            mCallLogAdapter.setMissedCalls(data);
-        }
-
-        @Override
-        public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        }
-    }
 
     private PanelSlideListener mPanelSlideListener = new PanelSlideListener() {
         @Override
@@ -229,7 +205,6 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
     @Override
     public void onStart() {
         super.onStart();
-        getLoaderManager().initLoader(MISSED_CALL_LOADER, null, new MissedCallLogLoaderListener());
     }
 
     @Override

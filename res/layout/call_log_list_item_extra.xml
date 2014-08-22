@@ -18,45 +18,50 @@
 
 <!-- Can't use merge here because this is referenced via a ViewStub -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:id="@+id/badge_container">
+    android:id="@+id/badge_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <View android:layout_width="match_parent"
-          android:layout_height="1px"
-          android:background="@color/favorite_contacts_separator_color"/>
+        android:layout_height="1px"
+        android:background="@color/favorite_contacts_separator_color" />
 
     <LinearLayout android:id="@+id/badge_link_container"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:paddingStart="@dimen/call_log_outer_margin"
-                  android:paddingEnd="@dimen/call_log_outer_margin"
-                  android:paddingTop="0dip"
-                  android:paddingBottom="0dip"
-                  android:background="?android:attr/selectableItemBackground"
-                  android:clickable="true">
-        <ImageView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:id="@+id/badge_image"
-                   android:tint="@color/dialpad_primary_text_color"
-                   android:padding="@dimen/call_log_outer_margin"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:paddingStart="@dimen/call_log_start_margin"
-                  android:id="@+id/badge_text"
-                  android:textColor="@color/dialpad_primary_text_color"
-                  android:layout_gravity="center_vertical"
-                  android:layout_weight="1"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/call_log_outer_margin"
+        android:paddingEnd="@dimen/call_log_outer_margin"
+        android:paddingTop="@dimen/call_log_item_extra_padding_vertical"
+        android:paddingBottom="@dimen/call_log_item_extra_padding_vertical"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true">
+
+        <ImageView android:id="@+id/badge_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/dialpad_primary_text_color"
+            android:padding="@dimen/call_log_outer_margin" />
+
+        <TextView android:id="@+id/badge_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/call_log_start_margin"
+            android:textColor="@color/dialpad_primary_text_color"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1" />
+
         <ImageView android:id="@+id/dismiss_button"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_gravity="center_vertical"
-                   android:layout_marginEnd="@dimen/call_log_icon_margin"
-                   android:src="@drawable/ic_close_dk"
-                   android:tint="@color/recent_call_log_item_phone_icon_tint"
-                   android:alpha="0.3"
-                   android:background="?android:attr/selectableItemBackground"
-                   android:visibility="gone"
-                   android:contentDescription="@string/description_dismiss"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/call_log_icon_margin"
+            android:src="@drawable/ic_close_dk"
+            android:tint="@color/recent_call_log_item_phone_icon_tint"
+            android:alpha="0.3"
+            android:background="?android:attr/selectableItemBackground"
+            android:visibility="gone"
+            android:contentDescription="@string/description_dismiss" />
+
     </LinearLayout>
+
 </FrameLayout>
