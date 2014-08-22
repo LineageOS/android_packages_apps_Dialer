@@ -332,6 +332,11 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     }
 
     @Override
+    public Context getContext() {
+        return getActivity();
+    }
+
+    @Override
     public void onAnswer(int videoState, Context context) {
         getPresenter().onAnswer(videoState, context);
     }

@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.content.Context;
 import android.telecomm.AudioState;
 import android.telecomm.InCallService.VideoCall;
 import android.telecomm.PhoneCapabilities;
@@ -297,7 +298,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
-        if (call.isVideoCall()) {
+        if (call.isVideoCall(ui.getContext())) {
             updateVideoCallButtons();
         } else {
             updateVoiceCallButtons(call);
@@ -469,5 +470,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void showGenericMergeButton();
         void hideExtraRow();
         void displayManageConferencePanel(boolean on);
+        Context getContext();
     }
 }
