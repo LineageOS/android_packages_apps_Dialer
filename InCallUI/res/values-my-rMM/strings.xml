@@ -51,7 +51,7 @@
     <string name="wait_prompt_str" msgid="7601815427707856238">"အောက်ပါ တီးလုံးများကို ပို့မလား?\n"</string>
     <string name="pause_prompt_str" msgid="1789964702154314806">"အသံ ပို့နေစဉ်\n"</string>
     <string name="send_button" msgid="4106860097497818751">"ပို့ခြင်း"</string>
-    <string name="pause_prompt_yes" msgid="3564467212025151797">"ဟုတ်သည်"</string>
+    <string name="pause_prompt_yes" msgid="3564467212025151797">"ဟုတ်ကဲ့"</string>
     <string name="pause_prompt_no" msgid="6686238803236884877">"မဟုတ်ပါ"</string>
     <string name="wild_prompt_str" msgid="5543521676355533577">"wildစာလုံးကို အစားထိုးရန်မှာ"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"ကွန်းဖရင့် ခေါ်ဆိုမှု <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
@@ -168,10 +168,8 @@
     <string name="description_target_decline" msgid="4789834364389731957">"လက်မခံပါ"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"ဗွီဒီယို ခေါ်ဆိုမှုအဖြစ် ဖြေကြားရန်"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"အသံ ခေါ်ဆိုမှုအဖြစ် ဖြေကြားရန်"</string>
-    <!-- no translation found for description_target_accept_upgrade_to_video_request (2894072808324604062) -->
-    <skip />
-    <!-- no translation found for description_target_decline_upgrade_to_video_request (4093888612888538776) -->
-    <skip />
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"ဗီဒီယို တောင်းဆိုမှုကို လက်ခံရန်"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"ဗီဒီယို တောင်းဆိုမှုကို ငြင်းပယ်ရန်"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> အတွက် အပေါ်ကို ပွတ်ဆွဲပါ"</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> အတွက် ဖယ်ဘက်ကို ပွတ်ဆွဲပါ"</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> အတွက် ညာဖက်ကို ပွတ်ဆွဲပါ"</string>
