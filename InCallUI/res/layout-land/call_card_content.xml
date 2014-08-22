@@ -43,12 +43,15 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
+
             <!-- Secondary "Call info" block, for the background ("on hold") call. -->
             <include layout="@layout/secondary_call_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom" />
+
         </FrameLayout>
+
     </LinearLayout>
 
     <!-- Contact photo for primary call info -->

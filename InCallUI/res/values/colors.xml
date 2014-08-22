@@ -62,7 +62,7 @@
     <color name="glowpad_text_widget_ring_color">#ffffff</color>
     <color name="glowpad_widget_active_color">#ffffff</color>
     <color name="glowpad_text_widget_normal_tint">#cccccc</color>
-    <color name="glowpad_call_widget_normal_tint">#00e5ff</color>
+    <color name="glowpad_call_widget_normal_tint">@color/dialtacts_theme_color</color>
     <color name="glowpad_end_call_widget_normal_tint">#ff1744</color>
     <color name="glowpad_incoming_widget_tint">#a3a3a3</color>
     <color name="glowpad_incoming_widget_background_tint">#ffffff</color>
