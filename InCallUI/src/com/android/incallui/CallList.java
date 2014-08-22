@@ -136,8 +136,8 @@ public class CallList implements InCallPhoneListener {
      * Called when a single call has changed.
      */
     public void onUpdate(Call call) {
-        Log.d(this, "onUpdate - ", call);
         onUpdateCall(call);
+        Log.d(this, "onUpdate - ", call);
         notifyGenericListeners();
     }
 
