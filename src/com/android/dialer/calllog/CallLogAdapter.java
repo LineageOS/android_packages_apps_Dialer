@@ -44,6 +44,7 @@ import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.util.UriUtils;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
@@ -255,8 +256,6 @@ public class CallLogAdapter extends GroupingListAdapter
     private volatile boolean mRequestProcessingDisabled = false;
 
     private boolean mIsCallLog = true;
-    private int mNumMissedCalls = 0;
-    private int mNumMissedCallsShown = 0;
 
     private View mBadgeContainer;
     private ImageView mBadgeImageView;
@@ -1032,21 +1031,13 @@ public class CallLogAdapter extends GroupingListAdapter
         mCallLogViewsHelper.setActionContentDescriptions(views);
     }
 
-    protected void bindBadge(View view, ContactInfo info, PhoneCallDetails details, int callType) {
-
+    protected void bindBadge(
+            View view, ContactInfo info, final PhoneCallDetails details, int callType) {
         // Do not show badge in call log.
         if (!mIsCallLog) {
-            final int numMissed = getNumMissedCalls(callType);
             final ViewStub stub = (ViewStub) view.findViewById(R.id.link_stub);
 
-            if (shouldShowBadge(numMissed, info, details)) {
-                // Do not process if the data has not changed (optimization since bind view is
-                // called multiple times due to contact lookup).
-                if (numMissed == mNumMissedCallsShown) {
-                    return;
-                }
-
-                // stub will be null if it was already inflated.
+            if (TextUtils.isEmpty(info.lookupKey)) {
                 if (stub != null) {
                     final View inflated = stub.inflate();
                     inflated.setVisibility(View.VISIBLE);
@@ -1055,11 +1046,16 @@ public class CallLogAdapter extends GroupingListAdapter
                     mBadgeText = (TextView) inflated.findViewById(R.id.badge_text);
                 }
 
-                mBadgeContainer.setOnClickListener(getBadgeClickListener());
-                mBadgeImageView.setImageResource(getBadgeImageResId());
-                mBadgeText.setText(getBadgeText(numMissed));
-
-                mNumMissedCallsShown = numMissed;
+                mBadgeContainer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Intent intent =
+                                DialtactsActivity.getAddNumberToContactIntent(details.number);
+                        mContext.startActivity(intent);
+                    }
+                });
+                mBadgeImageView.setImageResource(R.drawable.ic_person_add_24dp);
+                mBadgeText.setText(R.string.recentCalls_addToContact);
             } else {
                 // Hide badge if it was previously shown.
                 if (stub == null) {
@@ -1070,67 +1066,6 @@ public class CallLogAdapter extends GroupingListAdapter
                 }
             }
         }
-    }
-
-    public void setMissedCalls(Cursor data) {
-        final int missed;
-        if (data == null) {
-            missed = 0;
-        } else {
-            missed = data.getCount();
-        }
-        // Only need to update if the number of calls changed.
-        if (missed != mNumMissedCalls) {
-            mNumMissedCalls = missed;
-            notifyDataSetChanged();
-        }
-    }
-
-    protected View.OnClickListener getBadgeClickListener() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent intent = new Intent(mContext, CallLogActivity.class);
-                mContext.startActivity(intent);
-            }
-        };
-    }
-
-    /**
-     * Get the resource id for the image to be shown for the badge.
-     */
-    protected int getBadgeImageResId() {
-        return R.drawable.ic_call_log_blue;
-    }
-
-    /**
-     * Get the text to be shown for the badge.
-     *
-     * @param numMissed The number of missed calls.
-     */
-    protected String getBadgeText(int numMissed) {
-        return mContext.getResources().getString(R.string.num_missed_calls, numMissed);
-    }
-
-    /**
-     * Whether to show the badge.
-     *
-     * @param numMissedCalls The number of missed calls.
-     * @param info The contact info.
-     * @param details The call detail.
-     * @return {@literal true} if badge should be shown.  {@literal false} otherwise.
-     */
-    protected boolean shouldShowBadge(int numMissedCalls, ContactInfo info,
-            PhoneCallDetails details) {
-        return numMissedCalls > 0;
-    }
-
-    private int getNumMissedCalls(int callType) {
-        if (callType == Calls.MISSED_TYPE) {
-            // Exclude the current missed call shown in the shortcut.
-            return mNumMissedCalls - 1;
-        }
-        return mNumMissedCalls;
     }
 
     /** Checks whether the contact info from the call log matches the one from the contacts db. */
