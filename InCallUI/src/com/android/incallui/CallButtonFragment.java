@@ -671,6 +671,11 @@ public class CallButtonFragment
     }
 
     @Override
+    public Context getContext() {
+        return getActivity();
+    }
+
+    @Override
     public void showManageConferenceCallButton() {
         mExtraRowButton.setVisibility(View.VISIBLE);
         mManageConferenceButton.setVisibility(View.VISIBLE);

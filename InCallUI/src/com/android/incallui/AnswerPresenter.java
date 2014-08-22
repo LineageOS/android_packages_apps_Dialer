@@ -99,7 +99,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         getUi().showAnswerUi(true);
 
         boolean withSms = call.can(PhoneCapabilities.RESPOND_VIA_TEXT) && textMsgs != null;
-        if (call.isVideoCall()) {
+        if (call.isVideoCall(getUi().getContext())) {
             if (withSms) {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS);
                 getUi().configureMessageDialog(textMsgs);
@@ -187,5 +187,6 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         public void showTargets(int targetSet);
         public void showMessageDialog();
         public void configureMessageDialog(List<String> textResponses);
+        public Context getContext();
     }
 }

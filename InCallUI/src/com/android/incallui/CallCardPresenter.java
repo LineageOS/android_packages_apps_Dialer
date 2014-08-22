@@ -245,7 +245,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // If the primary call is a video call on hold, still show the contact photo.
         // If the primary call is an active video call, hide the contact photo.
         if (mPrimary != null) {
-            getUi().setPhotoVisible(!(mPrimary.isVideoCall() && callState != Call.State.ONHOLD));
+            getUi().setPhotoVisible(!(mPrimary.isVideoCall(mContext) &&
+                    callState != Call.State.ONHOLD));
         }
 
         final boolean enableEndCallButton = Call.State.isConnectingOrConnected(callState) &&

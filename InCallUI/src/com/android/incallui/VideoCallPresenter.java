@@ -24,6 +24,7 @@ import android.telecomm.CameraCapabilities;
 import android.telecomm.InCallService.VideoCall;
 import android.view.Surface;
 
+import com.android.contacts.common.CallUtil;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallOrientationListener;
 import com.android.incallui.InCallPresenter.InCallStateListener;
@@ -302,6 +303,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     @Override
     public void onStateChange(InCallPresenter.InCallState oldState,
             InCallPresenter.InCallState newState, CallList callList) {
+        // Bail if video calling is disabled for the device.
+        if (!CallUtil.isVideoEnabled(mContext)) {
+            return;
+        }
+
         if (newState == InCallPresenter.InCallState.NO_CALLS) {
             exitVideoMode();
         }
@@ -322,7 +328,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
             if (primary != null) {
                 checkForVideoCallChange();
-                mIsVideoCall = mPrimaryCall.isVideoCall();
+                mIsVideoCall = mPrimaryCall.isVideoCall(mContext);
                 if (mIsVideoCall) {
                     enterVideoMode();
                 } else {
@@ -366,7 +372,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * Checks to see if the current video state has changed and updates the UI if required.
      */
     private void checkForVideoStateChange() {
-        boolean newVideoState = mPrimaryCall.isVideoCall();
+        boolean newVideoState = mPrimaryCall.isVideoCall(mContext);
 
         // Check if video state changed
         if (mIsVideoCall != newVideoState) {
