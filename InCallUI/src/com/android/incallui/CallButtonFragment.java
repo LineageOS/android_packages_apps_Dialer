@@ -58,8 +58,6 @@ public class CallButtonFragment
     private PopupMenu mAudioModePopup;
     private boolean mAudioModePopupVisible;
     private PopupMenu mOverflowPopup;
-    private View mExtraRowButton;
-    private View mManageConferenceButton;
 
     private int mPrevAudioMode = 0;
 
@@ -89,11 +87,6 @@ public class CallButtonFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View parent = inflater.inflate(R.layout.call_button_fragment, container, false);
-
-        mExtraRowButton = parent.findViewById(R.id.extraButtonRow);
-
-        mManageConferenceButton = parent.findViewById(R.id.manageConferenceButton);
-        mManageConferenceButton.setOnClickListener(this);
 
         mAudioButton = (ImageButton) parent.findViewById(R.id.audioButton);
         mAudioButton.setOnClickListener(this);
@@ -190,9 +183,6 @@ public class CallButtonFragment
                 break;
             case R.id.overflowButton:
                 mOverflowPopup.show();
-                break;
-            case R.id.manageConferenceButton:
-                getPresenter().manageConferenceButtonClicked();
                 break;
             default:
                 Log.wtf(this, "onClick: unexpected");
@@ -660,26 +650,8 @@ public class CallButtonFragment
     }
 
     @Override
-    public void displayManageConferencePanel(boolean value) {
-        if (getActivity() != null && getActivity() instanceof InCallActivity) {
-            ((InCallActivity) getActivity()).displayManageConferencePanel(value);
-        }
-    }
-
-    @Override
     public Context getContext() {
         return getActivity();
-    }
-
-    @Override
-    public void showManageConferenceCallButton() {
-        mExtraRowButton.setVisibility(View.VISIBLE);
-        mManageConferenceButton.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideExtraRow() {
-       mExtraRowButton.setVisibility(View.GONE);
     }
 
     private void maybeSendAccessibilityEvent(View view, int stringId) {
