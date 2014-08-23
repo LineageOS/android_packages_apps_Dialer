@@ -436,7 +436,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         // from the foreground call.  And if there's a ringing call,
         // display that regardless of the state of the other calls.
         if (call.getState() == Call.State.ONHOLD) {
-            return R.drawable.stat_sys_phone_call_on_hold;
+            return R.drawable.ic_phone_paused_white_24dp;
         } else if (call.getSessionModificationState()
                 == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
             return R.drawable.ic_videocam;
