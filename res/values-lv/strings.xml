@@ -191,26 +191,18 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Atskaņot lēnāk."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Sākt vai apturēt atskaņošanu."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <!-- no translation found for general_settings_label (4787443826763795004) -->
+    <string name="general_settings_label" msgid="4787443826763795004">"Vispārīgie iestatījumi"</string>
+    <string name="general_settings_description" msgid="4838560696004337578">"Kontaktpersonu attēlojums, skaņas un ātrās atbildes"</string>
+    <string name="contact_display_options_category_title" msgid="5719485933817512769">"Kontaktpersonu rādīšanas opcijas"</string>
+    <!-- no translation found for sounds_and_vibrate_category_title (7589787045192519254) -->
     <skip />
-    <!-- no translation found for general_settings_description (4838560696004337578) -->
+    <string name="ringtone_title" msgid="760362035635084653">"Tālruņa zvana signāls"</string>
+    <!-- no translation found for vibrate_on_ring_title (3362916460327555241) -->
     <skip />
-    <!-- no translation found for contact_display_options_category_title (5719485933817512769) -->
+    <!-- no translation found for dtmf_tone_enable_title (6571449695997521615) -->
     <skip />
-    <!-- no translation found for sounds_and_vibrate_category_title (8821719295658641733) -->
-    <skip />
-    <!-- no translation found for ringtone_title (760362035635084653) -->
-    <skip />
-    <!-- no translation found for vibrate_on_ring_title (3442694674084884238) -->
-    <skip />
-    <!-- no translation found for dtmf_tone_enable_title (1924260663475511870) -->
-    <skip />
-    <!-- no translation found for other_settings_title (7976283601445863248) -->
-    <skip />
-    <!-- no translation found for respond_via_sms_setting_title (1318281521087951580) -->
-    <skip />
-    <!-- no translation found for call_settings_label (7416182166943714852) -->
-    <skip />
-    <!-- no translation found for call_settings_description (2756622428019213052) -->
-    <skip />
+    <string name="other_settings_title" msgid="7976283601445863248">"Citi"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Ātrās atbildes"</string>
+    <string name="call_settings_label" msgid="7416182166943714852">"Zvanu iestatījumi"</string>
+    <string name="call_settings_description" msgid="2756622428019213052">"Balss pasts, zvanu gaidīšana un citi"</string>
 </resources>
