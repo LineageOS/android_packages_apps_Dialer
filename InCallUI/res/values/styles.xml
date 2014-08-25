@@ -70,27 +70,6 @@
         <item name="android:textOff">@null</item>
     </style>
 
-    <!-- Buttons in extra button row. -->
-    <style name="InCallExtraRowButton">
-        <item name="android:layout_width">@dimen/extra_row_button_width</item>
-        <item name="android:layout_height">@dimen/extra_row_button_height</item>
-        <item name="android:background">@null</item>
-    </style>
-
-    <!-- Text label drawn alongside buttons in the "extra button row" of
-         the in-call onscreen touch UI. -->
-    <style name="InCallExtraRowButtonLabel">
-        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-        <item name="android:textColor">@color/incall_call_banner_text_color</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:layout_marginStart">5dip</item>
-        <item name="android:layout_marginEnd">5dip</item>
-    </style>
-
     <style name="InCallAnimationStyle" parent="@android:style/Animation.Activity">
         <!-- Suppress task-to-task animation happening during the transition from
              OutgoingCallBroadcaster (and SipOptionHandler) to InCallActivity.

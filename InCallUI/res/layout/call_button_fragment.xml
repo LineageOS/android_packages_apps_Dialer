@@ -40,17 +40,6 @@
     android:animateLayoutChanges="true"
     android:visibility="invisible" >
 
-    <!-- Row 1, the "extra button row": A couple of relatively rare
-         buttons used only in certain call states.
-         Most of the time this whole row is GONE.
-         For now, at least, there's only ever one button visible here
-         at a time, so this can be a simple FrameLayout. -->
-    <include android:id="@+id/extraButtonRow"
-        layout="@layout/extra_button_row"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <!-- Row 2: The main batch of in-call buttons. -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

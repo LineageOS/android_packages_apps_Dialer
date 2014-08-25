@@ -50,12 +50,6 @@
     <!-- Height and width of the in-call buttons. -->
     <dimen name="in_call_button_dimension">48dp</dimen>
 
-    <!-- Width of buttons in the extra button row. -->
-    <dimen name="extra_row_button_width">56dp</dimen>
-
-    <!-- Height of buttons in the extra button row. -->
-    <dimen name="extra_row_button_height">@dimen/in_call_button_dimension</dimen>
-
     <dimen name="primary_call_elevation">4dp</dimen>
     <dimen name="secondary_call_elevation">4dp</dimen>
 
