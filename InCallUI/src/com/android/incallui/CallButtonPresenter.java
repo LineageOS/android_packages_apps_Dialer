@@ -40,7 +40,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private Call mCall;
     private boolean mAutomaticallyMuted = false;
     private boolean mPreviousMuteState = false;
-    private boolean mShowGenericMerge = false;
     private boolean mShowManageConference = false;
     private InCallCameraManager mInCallCameraManager;
 
@@ -305,18 +304,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
 
         ui.enableMute(call.can(PhoneCapabilities.MUTE));
-
-        // Finally, update the "extra button row": It's displayed above the "End" button, but only
-        // if necessary. It's never displayed while the dialpad is visible since it would overlap.
-        //
-        // The row contains two buttons:
-        //     - "Manage conference" (used only on GSM devices)
-        //     - "Merge" button (used only on CDMA devices)
-        final boolean canMerge = call.can(PhoneCapabilities.MERGE_CALLS);
-        final boolean isGenericConference = call.can(PhoneCapabilities.GENERIC_CONFERENCE);
-        mShowGenericMerge = isGenericConference && canMerge;
-        mShowManageConference = (call.isConferenceCall() && !isGenericConference);
-        updateExtraButtonRow(ui.isDialpadVisible());
     }
 
     private void updateVideoCallButtons() {
@@ -361,20 +348,18 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
         final boolean canMerge = call.can(PhoneCapabilities.MERGE_CALLS);
         final boolean canAdd = call.can(PhoneCapabilities.ADD_CALL);
-        final boolean isGenericConference = call.can(PhoneCapabilities.GENERIC_CONFERENCE);
         final boolean canHold = call.can(PhoneCapabilities.HOLD);
         final boolean canSwap = call.can(PhoneCapabilities.SWAP_CALLS);
         final boolean supportHold = call.can(PhoneCapabilities.SUPPORT_HOLD);
+        final boolean isGenericConference = call.can(PhoneCapabilities.GENERIC_CONFERENCE);
+
         boolean canVideoCall = call.can(PhoneCapabilities.SUPPORTS_VT_LOCAL)
                 && call.can(PhoneCapabilities.SUPPORTS_VT_REMOTE);
-
-        final boolean showMerge = !isGenericConference && canMerge;
-
         ui.showChangeToVideoButton(canVideoCall);
 
-        // Show either MERGE or ADD, but not both.
-        final boolean showMergeOption = showMerge;
-        final boolean showAddCallOption = !showMerge;
+        // Show either MERGE or ADD. Only show both if, for CDMA, we're in a generic conference.
+        final boolean showMergeOption = canMerge;
+        final boolean showAddCallOption = canAdd && (isGenericConference || !canMerge);
         final boolean enableAddCallOption = showAddCallOption && canAdd;
         // Show either HOLD or SWAP, but not both.
         // If neither HOLD or SWAP is available:
@@ -385,8 +370,14 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showSwapOption = !canHold && canSwap;
 
         ui.setHold(call.getState() == Call.State.ONHOLD);
-        if (canVideoCall && (showAddCallOption || showMergeOption)
-                && (showHoldOption || showSwapOption)) {
+        // If we show video upgrade and add/merge and hold/swap, the overflow menu is needed.
+        final boolean isVideoOverflowScenario = canVideoCall
+                && (showAddCallOption || showMergeOption) && (showHoldOption || showSwapOption);
+        // If we show hold/swap, add, and merge simultaneously, the overflow menu is needed.
+        final boolean isCdmaConferenceOverflowScenario =
+                (showHoldOption || showSwapOption) && showMergeOption && showAddCallOption;
+
+        if (isVideoOverflowScenario) {
             ui.showHoldButton(false);
             ui.showSwapButton(false);
             ui.showAddCallButton(false);
@@ -399,28 +390,39 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                     showHoldOption && enableHoldOption /* showHoldMenuOption */,
                     showSwapOption);
         } else {
-            ui.showMergeButton(showMergeOption);
-            ui.showAddCallButton(showAddCallOption);
-            ui.enableAddCall(enableAddCallOption);
+            if (isCdmaConferenceOverflowScenario) {
+                ui.showAddCallButton(false);
+                ui.showMergeButton(false);
+
+                ui.configureOverflowMenu(
+                        showMergeOption,
+                        showAddCallOption && enableAddCallOption /* showAddMenuOption */,
+                        false /* showHoldMenuOption */,
+                        false /* showSwapMenuOption */);
+            } else {
+                ui.showMergeButton(showMergeOption);
+                ui.showAddCallButton(showAddCallOption);
+                ui.enableAddCall(enableAddCallOption);
+            }
 
             ui.showHoldButton(showHoldOption);
             ui.enableHold(enableHoldOption);
             ui.showSwapButton(showSwapOption);
         }
+
+        // Only show the conference call button if we are not in a generic conference.
+        // On CDMA devices, instead of a conference call button we show "add" and "merge" buttons.
+        mShowManageConference = (call.isConferenceCall() && !isGenericConference);
+        updateExtraButtonRow(ui.isDialpadVisible());
     }
 
     private void updateExtraButtonRow(boolean isDialpadVisible) {
-        final boolean showExtraButtonRow = (mShowGenericMerge || mShowManageConference) &&
-                !isDialpadVisible;
+        final boolean showExtraButtonRow = mShowManageConference && !isDialpadVisible;
 
-        Log.d(this, "isGeneric: " + mShowGenericMerge);
         Log.d(this, "mShowManageConference : " + mShowManageConference);
-        Log.d(this, "mShowGenericMerge: " + mShowGenericMerge);
         Log.d(this, "isDialpadVisible: " + isDialpadVisible);
         if (showExtraButtonRow) {
-            if (mShowGenericMerge) {
-                getUi().showGenericMergeButton();
-            } else if (mShowManageConference) {
+            if (mShowManageConference) {
                 getUi().showManageConferenceCallButton();
             }
         } else {
@@ -467,7 +469,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void configureOverflowMenu(boolean showMergeMenuOption, boolean showAddMenuOption,
                 boolean showHoldMenuOption, boolean showSwapMenuOption);
         void showManageConferenceCallButton();
-        void showGenericMergeButton();
         void hideExtraRow();
         void displayManageConferencePanel(boolean on);
         Context getContext();

@@ -46,28 +46,4 @@
             android:text="@string/onscreenManageConferenceText" />
     </LinearLayout>
 
-    <!-- CDMA-specific "Merge" -->
-    <!-- This button is used only on CDMA devices, where we can't use
-         the Merge button in the main button row (because the "Add Call"
-         button might need to be enabled at the same time.) -->
-    <LinearLayout android:id="@+id/cdmaMergeButton"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/button_cluster_horizontal_padding"
-        android:paddingEnd="@dimen/button_cluster_horizontal_padding"
-        android:background="?android:attr/selectableItemBackground"
-        android:visibility="gone">
-        <!-- The entire LinearLayout here is clickable, so we don't
-             care about clicks on the ImageButton itself. -->
-        <ImageButton android:id="@+id/cdmaMergeButtonImage"
-            android:clickable="false"
-            style="@style/InCallExtraRowButton"
-            android:src="@drawable/ic_toolbar_merge"
-            android:contentDescription="@string/onscreenMergeCallsText" />
-        <TextView android:id="@+id/cdmaMergeButtonLabel"
-            style="@style/InCallExtraRowButtonLabel"
-            android:text="@string/onscreenMergeCallsText" />
-    </LinearLayout>
-
 </FrameLayout>
