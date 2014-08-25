@@ -55,6 +55,7 @@
             android:visibility="gone"
             android:padding="@dimen/call_banner_side_padding"
             android:background="@android:color/white" />
+
     </LinearLayout>
 
     <!-- Contact photo for primary call info -->
@@ -97,6 +98,11 @@
 
     <!-- Secondary "Call info" block, for the background ("on hold") call. -->
     <include layout="@layout/secondary_call_info" />
+
+    <include layout="@layout/manage_conference_call_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/photo" />
 
     <!-- Placeholder for the dialpad which is replaced with the dialpad fragment when shown. -->
     <FrameLayout

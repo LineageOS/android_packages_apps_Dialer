@@ -586,10 +586,8 @@ public class InCallActivity extends Activity {
         return mDialpadFragment != null && mDialpadFragment.isVisible();
     }
 
-    public void displayManageConferencePanel(boolean showPanel) {
-        if (showPanel) {
-            mConferenceManagerFragment.setVisible(true);
-        }
+    public void showConferenceCallManager() {
+        mConferenceManagerFragment.setVisible(true);
     }
 
     public void showPostCharWaitDialog(String callId, String chars) {

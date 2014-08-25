@@ -249,6 +249,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     callState != Call.State.ONHOLD));
         }
 
+        maybeShowManageConferenceCallButton();
+
         final boolean enableEndCallButton = Call.State.isConnectingOrConnected(callState) &&
                 callState != Call.State.INCOMING && mPrimary != null;
         // Hide the end call button instantly if we're receiving an incoming call.
@@ -289,6 +291,16 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     getGatewayNumber());
             setCallbackNumber();
         }
+    }
+
+    /**
+     * Only show the conference call button if we are not in a generic conference.
+     * On CDMA devices, instead of a manage conference call button, we show "add" and "merge"
+     * buttons in the {@link CallButtonFragment}.
+     */
+    private void maybeShowManageConferenceCallButton() {
+        final boolean isGenericConference = mPrimary.can(PhoneCapabilities.GENERIC_CONFERENCE);
+        getUi().showManageConferenceCallButton(mPrimary.isConferenceCall() && !isGenericConference);
     }
 
     private void setCallbackNumber() {
@@ -658,6 +670,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setCallbackNumber(String number, boolean isEmergencyCalls);
         void setPhotoVisible(boolean isVisible);
         void setProgressSpinnerVisible(boolean visible);
+        void showManageConferenceCallButton(boolean visible);
     }
 
     private TelecommManager getTelecommManager() {
