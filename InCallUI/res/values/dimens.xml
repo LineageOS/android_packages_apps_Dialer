@@ -21,6 +21,7 @@
     <!-- Height of the "call banner" overlay on top of the upper part of
          the call info area. -->
     <dimen name="call_banner_height">122dp</dimen>
+    <dimen name="incall_action_bar_elevation">3dp</dimen>
 
     <!-- Margin between the bottom of the "call card" photo
          and the top of the in-call button cluster. -->
@@ -50,8 +51,9 @@
     <!-- Height and width of the in-call buttons. -->
     <dimen name="in_call_button_dimension">48dp</dimen>
 
-    <dimen name="primary_call_elevation">4dp</dimen>
-    <dimen name="secondary_call_elevation">4dp</dimen>
+    <dimen name="primary_call_elevation">5dp</dimen>
+    <dimen name="dialpad_elevation">2dp</dimen>
+    <dimen name="secondary_call_elevation">1dp</dimen>
 
     <dimen name="floating_action_bar_vertical_offset">-24dp</dimen>
 
@@ -109,4 +111,6 @@
     <dimen name="end_call_floating_action_button_diameter">72dp</dimen>
     <dimen name="end_call_floating_action_button_small_diameter">56dp</dimen>
 
+    <dimen name="conference_call_manager_padding_top">64dp</dimen>
+    <dimen name="conference_call_manager_button_dimension">46dp</dimen>
 </resources>
