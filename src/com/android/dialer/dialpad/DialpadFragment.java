@@ -33,11 +33,11 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Bundle;
-import android.phone.PhoneManager;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
+import android.telecomm.TelecommManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -213,7 +213,7 @@ public class DialpadFragment extends AnalyticsFragment
      * press/depress of the "hookswitch" of a landline phone. Aka "empty flash".
      *
      * TODO: Using an intent extra to tell the phone to send this flash is a
-     * temporary measure. To be replaced with an Telephony/PhoneManager call in the future.
+     * temporary measure. To be replaced with an Telephony/TelecommManager call in the future.
      * TODO: Keep in sync with the string defined in OutgoingCallBroadcaster.java
      * in Phone app until this is replaced with the Telephony/Telecomm API.
      */
@@ -273,8 +273,8 @@ public class DialpadFragment extends AnalyticsFragment
         return (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
     }
 
-    private PhoneManager getPhoneManager() {
-        return (PhoneManager) getActivity().getSystemService(Context.PHONE_SERVICE);
+    private TelecommManager getTelecommManager() {
+        return (TelecommManager) getActivity().getSystemService(Context.TELECOMM_SERVICE);
     }
 
     @Override
@@ -1384,7 +1384,7 @@ public class DialpadFragment extends AnalyticsFragment
      * or "return to call" from the dialpad chooser.
      */
     private void returnToInCallScreen(boolean showDialpad) {
-        getPhoneManager().showCallScreen(showDialpad);
+        getTelecommManager().showInCallScreen(showDialpad);
 
         // Finally, finish() ourselves so that we don't stay on the
         // activity stack.
@@ -1402,7 +1402,7 @@ public class DialpadFragment extends AnalyticsFragment
      *              is active (ie. off hook or ringing or dialing, or on hold).
      */
     public boolean isPhoneInUse() {
-        return getPhoneManager().isInAPhoneCall();
+        return getTelecommManager().isInCall();
     }
 
     /**
