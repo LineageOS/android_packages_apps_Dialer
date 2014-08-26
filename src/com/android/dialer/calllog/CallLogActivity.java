@@ -126,6 +126,7 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setElevation(0);
 
         int startingTab = TAB_INDEX_ALL;
         final Intent intent = getIntent();
