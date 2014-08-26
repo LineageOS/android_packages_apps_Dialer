@@ -128,7 +128,7 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"ຮວມສາຍ"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"ສະລັບ"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"ຈັດການການໂທ"</string>
-    <string name="onscreenManageConferenceText" msgid="6485935856534311346">"ຈັດການການປະຊຸມສາຍ"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"ຈັດ​ການ​ການ​ປະ​ຊຸມ​ສາຍ"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"ສຽງ"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"ໂທແບບເຫັນໜ້າ"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"ປ່ຽນ​ເປັນ​ການ​ໂທ​ດ້ວຍ​ສຽງ"</string>
@@ -161,8 +161,14 @@
     <string name="description_image_button_pound" msgid="1716041284529917866">"ພາວ"</string>
     <string name="description_dial_button" msgid="7459705245418435351">"ປຸ່ມໂທ"</string>
     <string name="description_delete_button" msgid="4015842181592283903">"ປຸ່ມ backspace"</string>
-    <string name="accessibility_speakerphone_enabled" msgid="1988512040421036359">"ເປີດລຳໂພງແລ້ວ."</string>
+    <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"​ເລືອກ​ລຳ​ໂພງ​ແລ້ວ"</string>
+    <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"​ເລືອກ​ຫູ​ຟັງ​ແລ້ວ"</string>
+    <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"​ເລືອກ​ຫູ​ຟັງແບບ​ມີ​ສາຍ​ແລ້ວ"</string>
+    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"ເລືອກ​ຫູ​ຟັງ Bluetooth"</string>
     <string name="accessibility_call_muted" msgid="2776111226185342220">"ປິດສຽງການໂທແລ້ວ."</string>
+    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"ເຊົາ​ປິດ​ສຽງ​ສາຍ​ໂທ​ເຂົ້າ​ແລ້ວ​."</string>
+    <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"​ສາຍ​ໂທ​ເຂົ້າ​ຖືກ​ຕັ້ງ​ໃຫ້​​ຖືສາຍລໍ​ຖ້າ​ແລ້ວ."</string>
+    <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"ຍົກ​ເລີກສາຍ​ໂທ​ເຂົ້າ​​​​ໃຫ້ຖື​ສາຍ​ລໍ​​ຖ້າແລ້ວ."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"ຄໍາ​ຕອບ"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"ສົ່ງ SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"ປະຕິເສດ"</string>
@@ -185,14 +191,4 @@
     <string name="manageConferenceLabel" msgid="4691922394301969053">"ຈັດການການປະຊຸມສາຍ"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"ເບີໂທສຸກເສີນ"</string>
     <string name="select_account_dialog_title" msgid="5730339500156684204">"ເລືອກ​ບັນ​ຊີ"</string>
-    <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
-    <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
-    <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
-    <string name="dialpad_3_number" msgid="7146166309009131439">"3"</string>
-    <string name="dialpad_4_number" msgid="9075039274846639476">"4"</string>
-    <string name="dialpad_5_number" msgid="5780019709590672721">"5"</string>
-    <string name="dialpad_6_number" msgid="8261355170951265389">"6"</string>
-    <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
-    <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
-    <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
 </resources>
