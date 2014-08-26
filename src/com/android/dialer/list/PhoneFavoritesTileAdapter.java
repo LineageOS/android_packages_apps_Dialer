@@ -35,9 +35,7 @@ import android.provider.ContactsContract.PinnedPositions;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.LongSparseArray;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
@@ -128,18 +126,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
                     .compare(lhs.pinned, rhs.pinned)
                     .compare(lhs.name, rhs.name)
                     .result();
-        }
-    };
-
-    // Temporary workaround for b/16862804
-    final OnTouchListener mOnTouchListener = new OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (v.getParent() != null) {
-                ViewGroup parent = (ViewGroup) v.getParent();
-                parent.setAddStatesFromChildren(false);
-            }
-            return false;
         }
     };
 
@@ -413,8 +399,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         tileView.setPhotoManager(mPhotoManager);
         tileView.setListener(mListener);
         tileView.loadFromContact(getItem(position));
-
-        tileView.setOnTouchListener(mOnTouchListener);
         return tileView;
     }
 
