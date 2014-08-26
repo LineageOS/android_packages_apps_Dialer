@@ -299,6 +299,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      * buttons in the {@link CallButtonFragment}.
      */
     private void maybeShowManageConferenceCallButton() {
+        if (mPrimary == null) {
+            getUi().showManageConferenceCallButton(false);
+            return;
+        }
+
         final boolean isGenericConference = mPrimary.can(PhoneCapabilities.GENERIC_CONFERENCE);
         getUi().showManageConferenceCallButton(mPrimary.isConferenceCall() && !isGenericConference);
     }
