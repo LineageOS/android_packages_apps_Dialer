@@ -36,6 +36,11 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         VideoCallPresenter.VideoCallUi> implements VideoCallPresenter.VideoCallUi {
 
     /**
+     * Used to indicate that the surface dimensions are not set.
+     */
+    private static final int DIMENSIONS_NOT_SET = -1;
+
+    /**
      * Surface ID for the display surface.
      */
     public static final int SURFACE_DISPLAY = 1;
@@ -79,6 +84,16 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     private boolean mIsLandscape;
 
     /**
+     * The width of the surface.
+     */
+    private int mWidth = DIMENSIONS_NOT_SET;
+
+    /**
+     * The height of the surface.
+     */
+    private int mHeight = DIMENSIONS_NOT_SET;
+
+    /**
      * Inner-class representing a {@link TextureView} and its associated {@link SurfaceTexture} and
      * {@link Surface}.  Used to manage the lifecycle of these objects across device orientation
      * changes.
@@ -97,7 +112,22 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
          * @param textureView The {@link TextureView} for the surface.
          */
         public VideoCallSurface(int surfaceId, TextureView textureView) {
+            this(surfaceId, textureView, DIMENSIONS_NOT_SET, DIMENSIONS_NOT_SET);
+        }
+
+        /**
+         * Creates an instance of a {@link VideoCallSurface}.
+         *
+         * @param surfaceId The surface ID of the surface.
+         * @param textureView The {@link TextureView} for the surface.
+         * @param width The width of the surface.
+         * @param height The height of the surface.
+         */
+        public VideoCallSurface(int surfaceId, TextureView textureView, int width, int height) {
+            mWidth = width;
+            mHeight = height;
             mSurfaceId = surfaceId;
+
             recreateView(textureView);
         }
 
@@ -128,16 +158,22 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width,
                 int height) {
+            boolean surfaceCreated;
             // Where there is no saved {@link SurfaceTexture} available, use the newly created one.
             // If a saved {@link SurfaceTexture} is available, we are re-creating after an
             // orientation change.
             if (mSavedSurfaceTexture == null) {
                 mSavedSurfaceTexture = surfaceTexture;
-                mSavedSurface = new Surface(mSavedSurfaceTexture);
+                surfaceCreated = createSurface();
+            } else {
+                // A saved SurfaceTexture was found.
+                surfaceCreated = true;
             }
 
             // Inform presenter that the surface is available.
-            getPresenter().onSurfaceCreated(mSurfaceId);
+            if (surfaceCreated) {
+                getPresenter().onSurfaceCreated(mSurfaceId);
+            }
         }
 
         /**
@@ -217,6 +253,35 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
          */
         public Surface getSurface() {
             return mSavedSurface;
+        }
+
+        /**
+         * Sets the dimensions of the surface.
+         *
+         * @param width The width of the surface, in pixels.
+         * @param height The height of the surface, in pixels.
+         */
+        public void setSurfaceDimensions(int width, int height) {
+            mWidth = width;
+            mHeight = height;
+
+            if (mSavedSurfaceTexture != null) {
+                createSurface();
+            }
+        }
+
+        /**
+         * Creates the {@link Surface}, adjusting the {@link SurfaceTexture} buffer size.
+         */
+        private boolean createSurface() {
+            if (mWidth != DIMENSIONS_NOT_SET && mHeight != DIMENSIONS_NOT_SET &&
+                    mSavedSurfaceTexture != null) {
+
+                mSavedSurfaceTexture.setDefaultBufferSize(mWidth, mHeight);
+                mSavedSurface = new Surface(mSavedSurfaceTexture);
+                return true;
+            }
+            return false;
         }
 
         /**
@@ -460,6 +525,8 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
             params.width = width;
             params.height = height;
             preview.setLayoutParams(params);
+
+            sPreviewSurface.setSurfaceDimensions(width, height);
         }
     }
 
@@ -474,13 +541,16 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
 
         if (mVideoViews != null) {
             TextureView displaySurface = (TextureView) mVideoViews.findViewById(R.id.incomingVideo);
-            setSurfaceSizeAndTranslation(displaySurface);
+
+            Point screenSize = getScreenSize();
+            setSurfaceSizeAndTranslation(displaySurface, screenSize);
 
             if (!sVideoSurfacesInUse) {
                 // Where the video surfaces are not already in use (first time creating them),
                 // setup new VideoCallSurface instances to track them.
                 sDisplaySurface = new VideoCallSurface(SURFACE_DISPLAY,
-                        (TextureView) mVideoViews.findViewById(R.id.incomingVideo));
+                        (TextureView) mVideoViews.findViewById(R.id.incomingVideo), screenSize.x,
+                        screenSize.y);
                 sPreviewSurface = new VideoCallSurface(SURFACE_PREVIEW,
                         (TextureView) mVideoViews.findViewById(R.id.previewVideo));
                 sVideoSurfacesInUse = true;
@@ -500,13 +570,9 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      * centered vertically below the call card.
      *
      * @param textureView The {@link TextureView} to resize and position.
+     * @param size The size of the screen.
      */
-    private void setSurfaceSizeAndTranslation(TextureView textureView) {
-        // Get current screen size.
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-
+    private void setSurfaceSizeAndTranslation(TextureView textureView, Point size) {
         // Set the surface to have that size.
         ViewGroup.LayoutParams params = textureView.getLayoutParams();
         params.width = size.x;
@@ -521,5 +587,19 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
                 !mIsLandscape && textureView.getTranslationY() == 0))) {
             centerDisplayView(textureView);
         }
+    }
+
+    /**
+     * Determines the size of the device screen.
+     *
+     * @return {@link Point} specifying the width and height of the screen.
+     */
+    private Point getScreenSize() {
+        // Get current screen size.
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        return size;
     }
 }
