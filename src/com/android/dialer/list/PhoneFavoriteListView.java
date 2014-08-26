@@ -317,11 +317,4 @@ public class PhoneFavoriteListView extends GridView implements OnDragDropListene
 
         return (PhoneFavoriteSquareTileView) child;
     }
-
-    // Temporary workaround for b/16862804
-    @Override
-    public void onWindowFocusChanged(boolean hasWindowFocus) {
-        setAddStatesFromChildren(false);
-        super.onWindowFocusChanged(hasWindowFocus);
-    }
 }
