@@ -90,6 +90,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private ImageView mSecondaryCallProviderIcon;
     private View mProgressSpinner;
 
+    private View mManageConferenceCallButton;
+
     // Dark number info bar
     private TextView mInCallMessageLabel;
 
@@ -165,10 +167,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mPhoneNumber = (TextView) view.findViewById(R.id.phoneNumber);
         mPrimaryName = (TextView) view.findViewById(R.id.name);
         mNumberLabel = (TextView) view.findViewById(R.id.label);
-        mSecondaryCallInfo = (View) view.findViewById(R.id.secondary_call_info);
-        mSecondaryCallProviderInfo = (View) view.findViewById(R.id.secondary_call_provider_info);
+        mSecondaryCallInfo = view.findViewById(R.id.secondary_call_info);
+        mSecondaryCallProviderInfo = view.findViewById(R.id.secondary_call_provider_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
-        mCallStateButton = view.findViewById(R.id.callStateButton);
         mCallStateIcon = (ImageView) view.findViewById(R.id.callStateIcon);
         mCallStateVideoCallIcon = (ImageView) view.findViewById(R.id.videoCallIcon);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
@@ -215,15 +216,25 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             }
         });
 
-        mPrimaryName.setElegantTextHeight(false);
-        mCallStateLabel.setElegantTextHeight(false);
-
+        mCallStateButton = view.findViewById(R.id.callStateButton);
         mCallStateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getPresenter().phoneAccountClicked();
             }
         });
+
+        mManageConferenceCallButton = view.findViewById(R.id.manage_conference_call_button);
+        mManageConferenceCallButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InCallActivity activity = (InCallActivity) getActivity();
+                activity.showConferenceCallManager();
+            }
+        });
+
+        mPrimaryName.setElegantTextHeight(false);
+        mCallStateLabel.setElegantTextHeight(false);
     }
 
     @Override
@@ -838,6 +849,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public void setPhotoVisible(boolean isVisible) {
         mPhoto.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
+    /**
+     * Changes the visibility of the "manage conference call" button.
+     *
+     * @param visible Whether to set the button to be visible or not.
+     */
+    @Override
+    public void showManageConferenceCallButton(boolean visible) {
+        mManageConferenceCallButton.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     private void dispatchPopulateAccessibilityEvent(AccessibilityEvent event, View view) {
