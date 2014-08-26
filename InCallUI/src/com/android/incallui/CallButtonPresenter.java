@@ -165,10 +165,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         setAudioMode(newMode);
     }
 
-    public void manageConferenceButtonClicked() {
-        getUi().displayManageConferencePanel(true);
-    }
-
     public void muteClicked(boolean checked) {
         Log.d(this, "turning on mute: " + checked);
         TelecommAdapter.getInstance().mute(checked);
@@ -219,7 +215,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     public void showDialpadClicked(boolean checked) {
         Log.v(this, "Show dialpad " + String.valueOf(checked));
         getUi().displayDialpad(checked /* show */, true /* animate */);
-        updateExtraButtonRow(checked);
     }
 
     public void changeToVideoClicked() {
@@ -409,25 +404,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             ui.enableHold(enableHoldOption);
             ui.showSwapButton(showSwapOption);
         }
-
-        // Only show the conference call button if we are not in a generic conference.
-        // On CDMA devices, instead of a conference call button we show "add" and "merge" buttons.
-        mShowManageConference = (call.isConferenceCall() && !isGenericConference);
-        updateExtraButtonRow(ui.isDialpadVisible());
-    }
-
-    private void updateExtraButtonRow(boolean isDialpadVisible) {
-        final boolean showExtraButtonRow = mShowManageConference && !isDialpadVisible;
-
-        Log.d(this, "mShowManageConference : " + mShowManageConference);
-        Log.d(this, "isDialpadVisible: " + isDialpadVisible);
-        if (showExtraButtonRow) {
-            if (mShowManageConference) {
-                getUi().showManageConferenceCallButton();
-            }
-        } else {
-            getUi().hideExtraRow();
-        }
     }
 
     public void refreshMuteState() {
@@ -468,9 +444,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void setSupportedAudio(int mask);
         void configureOverflowMenu(boolean showMergeMenuOption, boolean showAddMenuOption,
                 boolean showHoldMenuOption, boolean showSwapMenuOption);
-        void showManageConferenceCallButton();
-        void hideExtraRow();
-        void displayManageConferencePanel(boolean on);
         Context getContext();
     }
 }

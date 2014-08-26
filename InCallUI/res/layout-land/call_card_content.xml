@@ -65,6 +65,11 @@
         android:contentDescription="@string/contactPhoto"
         android:src="@drawable/picture_unknown" />
 
+    <include layout="@layout/manage_conference_call_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/photo" />
+
     <fragment android:name="com.android.incallui.VideoCallFragment"
         android:layout_alignParentStart="true"
         android:layout_gravity="start|center_vertical"
