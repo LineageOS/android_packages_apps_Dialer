@@ -128,8 +128,7 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"ဖုန်းခေါ်မှုများကို ပူးပေါင်းသည်"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"လဲပြောင်းသည်"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"ဖုန်းခေါ်မှုကို ကြီးကြပ်သည်"</string>
-    <!-- no translation found for onscreenManageConferenceText (6801708317570467407) -->
-    <skip />
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"ညီလာခံ ခေါ်ဆိုရန်"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"အသံ"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"ဗီဒီယိုခေါ်ဆိုမှု"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"အသံဖြင့် ခေါ်ဆိုမှုသို့ ပြောင်းရန်"</string>

@@ -162,21 +162,14 @@
     <string name="description_image_button_pound" msgid="1716041284529917866">"英镑"</string>
     <string name="description_dial_button" msgid="7459705245418435351">"拨号"</string>
     <string name="description_delete_button" msgid="4015842181592283903">"Backspace 键"</string>
-    <!-- no translation found for accessibility_speakerphone_selected (4389354567657833468) -->
-    <skip />
-    <!-- no translation found for accessibility_earpiece_selected (5749525199671068663) -->
-    <skip />
-    <!-- no translation found for accessibility_wired_headset_selected (2984920743124263932) -->
-    <skip />
-    <!-- no translation found for accessibility_bluetooth_headset_selected (2785473629292181736) -->
-    <skip />
+    <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"已选择扬声器"</string>
+    <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"已选择手机听筒"</string>
+    <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"已选择有线耳机"</string>
+    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"已选择蓝牙耳机"</string>
     <string name="accessibility_call_muted" msgid="2776111226185342220">"通话已静音。"</string>
-    <!-- no translation found for accessibility_call_unmuted (7496527089753980871) -->
-    <skip />
-    <!-- no translation found for accessibility_call_put_on_hold (4226100429657528833) -->
-    <skip />
-    <!-- no translation found for accessibility_call_removed_from_hold (2269352120695851563) -->
-    <skip />
+    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"通话已取消静音。"</string>
+    <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"通话已置于保持状态。"</string>
+    <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"通话已解除保持状态。"</string>
     <string name="description_target_answer" msgid="7205604197797472471">"接听"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"发送短信"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"拒绝"</string>
