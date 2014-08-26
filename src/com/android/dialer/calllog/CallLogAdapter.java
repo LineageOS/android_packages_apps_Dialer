@@ -41,6 +41,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.common.widget.GroupingListAdapter;
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.util.UriUtils;
@@ -992,7 +993,8 @@ public class CallLogAdapter extends GroupingListAdapter
         }
 
         // If one of the calls had video capabilities, show the video call button.
-        if (canPlaceCallToNumber && views.phoneCallDetailsViews.callTypeIcons.isVideoShown()) {
+        if (CallUtil.isVideoEnabled(mContext) && canPlaceCallToNumber &&
+                views.phoneCallDetailsViews.callTypeIcons.isVideoShown()) {
             views.videoCallButtonView.setTag(
                     IntentProvider.getReturnVideoCallIntentProvider(views.number));
             views.videoCallButtonView.setVisibility(View.VISIBLE);
