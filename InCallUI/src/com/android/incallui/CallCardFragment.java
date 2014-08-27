@@ -33,6 +33,7 @@ import android.text.TextUtils;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLayoutChangeListener;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
@@ -56,6 +57,7 @@ import java.util.List;
 public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPresenter.CallCardUi>
         implements CallCardPresenter.CallCardUi {
 
+    private AnimatorSet mAnimatorSet;
     private int mRevealAnimationDuration;
     private int mShrinkAnimationDuration;
     private int mFabNormalDiameter;
@@ -917,22 +919,15 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 final Animator shrinkAnimator =
                         getShrinkAnimator(parent.getHeight(), originalHeight);
 
-                final AnimatorSet set = new AnimatorSet();
-                set.playSequentially(revealAnimator, shrinkAnimator);
-                set.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-                        mPrimaryCallCardContainer.removeOnLayoutChangeListener(listener);
-                        mFloatingActionButtonController.scaleIn();
-                    }
-
+                mAnimatorSet = new AnimatorSet();
+                mAnimatorSet.playSequentially(revealAnimator, shrinkAnimator);
+                mAnimatorSet.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        mPrimaryCallCardContainer.removeOnLayoutChangeListener(listener);
-                        mFloatingActionButtonController.scaleIn();
+                        setViewStatePostAnimation(listener);
                     }
                 });
-                set.start();
+                mAnimatorSet.start();
             }
         });
     }
@@ -957,6 +952,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         mFloatingActionButtonController.resize(
                 mIsDialpadShowing ? mFabSmallDiameter : mFabNormalDiameter, true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // If the previous launch animation is still running, cancel it so that we don't get
+        // stuck in an intermediate animation state.
+        if (mAnimatorSet != null && mAnimatorSet.isRunning()) {
+            mAnimatorSet.cancel();
+        }
     }
 
     /**
@@ -1030,6 +1035,23 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         view.setTranslationY(mTranslationOffset * offset);
         view.animate().translationY(0).alpha(1).withLayer()
                 .setDuration(mShrinkAnimationDuration).setInterpolator(AnimUtils.EASE_IN);
+    }
+
+    private void setViewStatePostAnimation(View view) {
+        view.setTranslationY(0);
+        view.setAlpha(1);
+    }
+
+    private void setViewStatePostAnimation(OnLayoutChangeListener layoutChangeListener) {
+        setViewStatePostAnimation(mCallButtonsContainer);
+        setViewStatePostAnimation(mCallStateLabel);
+        setViewStatePostAnimation(mPrimaryName);
+        setViewStatePostAnimation(mCallTypeLabel);
+        setViewStatePostAnimation(mCallNumberAndLabel);
+        setViewStatePostAnimation(mCallStateIcon);
+
+        mPrimaryCallCardContainer.removeOnLayoutChangeListener(layoutChangeListener);
+        mFloatingActionButtonController.scaleIn();
     }
 
     private final class LayoutIgnoringListener implements View.OnLayoutChangeListener {
