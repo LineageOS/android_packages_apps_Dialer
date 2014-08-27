@@ -194,10 +194,10 @@
     <string name="general_settings_label" msgid="4787443826763795004">"Γενικές ρυθμίσεις"</string>
     <string name="general_settings_description" msgid="4838560696004337578">"Εμφάνιση επαφής, ήχοι και γρήγορες απαντήσεις"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Επιλογές εμφάνισης επαφών"</string>
-    <string name="sounds_and_vibrate_category_title" msgid="8821719295658641733">"Ήχοι και δόνηση"</string>
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Ήχοι και δόνηση"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Ήχος κλήσης τηλεφώνου"</string>
-    <string name="vibrate_on_ring_title" msgid="3442694674084884238">"Δόνηση κατά το κουδούνισμα"</string>
-    <string name="dtmf_tone_enable_title" msgid="1924260663475511870">"Ήχοι αφής πληκτρολογίου κλήσης"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Επίσης δόνηση για κλήσεις"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Τόνοι πληκτρολογίου κλήσης"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"Άλλο"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Γρήγορες απαντήσεις"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"Ρυθμίσεις κλήσεων"</string>
