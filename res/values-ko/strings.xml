@@ -191,26 +191,15 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"더 느리게 재생합니다."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"재생을 시작하거나 일시중지합니다."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <!-- no translation found for general_settings_label (4787443826763795004) -->
-    <skip />
-    <!-- no translation found for general_settings_description (4838560696004337578) -->
-    <skip />
-    <!-- no translation found for contact_display_options_category_title (5719485933817512769) -->
-    <skip />
-    <!-- no translation found for sounds_and_vibrate_category_title (8821719295658641733) -->
-    <skip />
-    <!-- no translation found for ringtone_title (760362035635084653) -->
-    <skip />
-    <!-- no translation found for vibrate_on_ring_title (3442694674084884238) -->
-    <skip />
-    <!-- no translation found for dtmf_tone_enable_title (1924260663475511870) -->
-    <skip />
-    <!-- no translation found for other_settings_title (7976283601445863248) -->
-    <skip />
-    <!-- no translation found for respond_via_sms_setting_title (1318281521087951580) -->
-    <skip />
-    <!-- no translation found for call_settings_label (7416182166943714852) -->
-    <skip />
-    <!-- no translation found for call_settings_description (2756622428019213052) -->
-    <skip />
+    <string name="general_settings_label" msgid="4787443826763795004">"일반 설정"</string>
+    <string name="general_settings_description" msgid="4838560696004337578">"연락처 표시, 소리, 빠른 응답"</string>
+    <string name="contact_display_options_category_title" msgid="5719485933817512769">"연락처 표시 옵션"</string>
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"소리와 진동"</string>
+    <string name="ringtone_title" msgid="760362035635084653">"전화 벨소리"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"전화 올 때 벨소리와 함께 진동"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"다이얼패드 신호음"</string>
+    <string name="other_settings_title" msgid="7976283601445863248">"기타"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"빠른 응답"</string>
+    <string name="call_settings_label" msgid="7416182166943714852">"통화 설정"</string>
+    <string name="call_settings_description" msgid="2756622428019213052">"음성사서함, 통화중 대기, 기타"</string>
 </resources>

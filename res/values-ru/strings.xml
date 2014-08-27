@@ -179,7 +179,7 @@
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> – сведения о вызове"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Запись удалена"</string>
     <string name="toast_caller_id_reported" msgid="1127087402649645557">"Сообщение отправлено."</string>
-    <string name="call_log_action_report" msgid="561229827189128879">"СООБЩИТЬ GOOGLE"</string>
+    <string name="call_log_action_report" msgid="561229827189128879">"СООБЩИТЬ ОБ ОШИБКЕ"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Сегодня"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Вчера"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"Прошлая неделя"</string>
@@ -191,26 +191,15 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Уменьшить скорость воспроизведения."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Начать или приостановить воспроизведение."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <!-- no translation found for general_settings_label (4787443826763795004) -->
-    <skip />
-    <!-- no translation found for general_settings_description (4838560696004337578) -->
-    <skip />
-    <!-- no translation found for contact_display_options_category_title (5719485933817512769) -->
-    <skip />
-    <!-- no translation found for sounds_and_vibrate_category_title (8821719295658641733) -->
-    <skip />
-    <!-- no translation found for ringtone_title (760362035635084653) -->
-    <skip />
-    <!-- no translation found for vibrate_on_ring_title (3442694674084884238) -->
-    <skip />
-    <!-- no translation found for dtmf_tone_enable_title (1924260663475511870) -->
-    <skip />
-    <!-- no translation found for other_settings_title (7976283601445863248) -->
-    <skip />
-    <!-- no translation found for respond_via_sms_setting_title (1318281521087951580) -->
-    <skip />
-    <!-- no translation found for call_settings_label (7416182166943714852) -->
-    <skip />
-    <!-- no translation found for call_settings_description (2756622428019213052) -->
-    <skip />
+    <string name="general_settings_label" msgid="4787443826763795004">"Общие настройки"</string>
+    <string name="general_settings_description" msgid="4838560696004337578">"Отображение контактов, звуки и быстрые ответы"</string>
+    <string name="contact_display_options_category_title" msgid="5719485933817512769">"Отображение контактов"</string>
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Звук и вибросигнал"</string>
+    <string name="ringtone_title" msgid="760362035635084653">"Рингтон"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Вибросигнал при вызове"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Звук при наборе номера"</string>
+    <string name="other_settings_title" msgid="7976283601445863248">"Другие настройки"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Быстрые ответы"</string>
+    <string name="call_settings_label" msgid="7416182166943714852">"Настройки вызовов"</string>
+    <string name="call_settings_description" msgid="2756622428019213052">"Голосовая почта, ожидание вызова и другие функции"</string>
 </resources>
