@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
@@ -29,6 +30,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.telephony.DisconnectCause;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -110,7 +112,14 @@ public class InCallActivity extends Activity {
 
         getWindow().addFlags(flags);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // Setup action bar for the conference call manager.
+        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.hide();
+        }
 
         // TODO(klp): Do we need to add this back when prox sensor is not available?
         // lp.inputFeatures |= WindowManager.LayoutParams.INPUT_FEATURE_DISABLE_USER_ACTIVITY;
@@ -314,6 +323,16 @@ public class InCallActivity extends Activity {
 
         // Nothing special to do.  Fall back to the default behavior.
         super.onBackPressed();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        final int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

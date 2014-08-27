@@ -16,13 +16,19 @@
 
 package com.android.incallui;
 
+import android.app.ActionBar;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.contacts.common.ContactPhotoManager;
+import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 
 /**
  * Fragment for call control buttons
@@ -32,9 +38,9 @@ public class ConferenceManagerFragment
                 ConferenceManagerPresenter.ConferenceManagerUi>
         implements ConferenceManagerPresenter.ConferenceManagerUi {
 
-    private View mButtonManageConferenceDone;
     private ViewGroup[] mConferenceCallList;
-    private Chronometer mConferenceTime;
+    private int mActionBarElevation;
+    private ContactPhotoManager mContactPhotoManager;
 
     @Override
     ConferenceManagerPresenter createPresenter() {
@@ -58,27 +64,19 @@ public class ConferenceManagerFragment
         final View parent = inflater.inflate(R.layout.conference_manager_fragment, container,
                 false);
 
-        // set up the Conference Call chronometer
-        mConferenceTime = (Chronometer) parent.findViewById(R.id.manageConferencePanelHeader);
-        mConferenceTime.setFormat(getActivity().getString(R.string.caller_manage_header));
-
         // Create list of conference call widgets
         mConferenceCallList = new ViewGroup[getPresenter().getMaxCallersInConference()];
-
         final int[] viewGroupIdList = { R.id.caller0, R.id.caller1, R.id.caller2,
                                         R.id.caller3, R.id.caller4 };
         for (int i = 0; i < getPresenter().getMaxCallersInConference(); i++) {
-            mConferenceCallList[i] =
-                    (ViewGroup) parent.findViewById(viewGroupIdList[i]);
+            mConferenceCallList[i] = (ViewGroup) parent.findViewById(viewGroupIdList[i]);
         }
 
-        mButtonManageConferenceDone = parent.findViewById(R.id.manage_done);
-        mButtonManageConferenceDone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getPresenter().manageConferenceDoneClicked();
-            }
-        });
+        mContactPhotoManager =
+                ContactPhotoManager.getInstance(getActivity().getApplicationContext());
+
+        mActionBarElevation =
+                (int) getResources().getDimension(R.dimen.incall_action_bar_elevation);
 
         return parent;
     }
@@ -90,13 +88,22 @@ public class ConferenceManagerFragment
 
     @Override
     public void setVisible(boolean on) {
+        ActionBar actionBar = getActivity().getActionBar();
+
         if (on) {
+            actionBar.setTitle(R.string.manageConferenceLabel);
+            actionBar.setElevation(mActionBarElevation);
+            actionBar.setHideOffset(0);
+            actionBar.show();
+
             final CallList calls = CallList.getInstance();
             getPresenter().init(getActivity(), calls);
             getView().setVisibility(View.VISIBLE);
-
         } else {
             getView().setVisibility(View.GONE);
+
+            actionBar.setElevation(0);
+            actionBar.setHideOffset(actionBar.getHeight());
         }
     }
 
@@ -120,14 +127,20 @@ public class ConferenceManagerFragment
      */
     @Override
     public final void displayCallerInfoForConferenceRow(int rowId, String callerName,
-            String callerNumber, String callerNumberType) {
+            String callerNumber, String callerNumberType, String lookupKey, Uri photoUri) {
 
+        final ImageView photoView = (ImageView) mConferenceCallList[rowId].findViewById(
+                R.id.callerPhoto);
         final TextView nameTextView = (TextView) mConferenceCallList[rowId].findViewById(
                 R.id.conferenceCallerName);
         final TextView numberTextView = (TextView) mConferenceCallList[rowId].findViewById(
                 R.id.conferenceCallerNumber);
         final TextView numberTypeTextView = (TextView) mConferenceCallList[rowId].findViewById(
                 R.id.conferenceCallerNumberType);
+
+        DefaultImageRequest imageRequest = (photoUri != null) ? null :
+                new DefaultImageRequest(callerName, lookupKey, true /* isCircularPhoto */);
+        mContactPhotoManager.loadDirectoryPhoto(photoView, photoUri, false, true, imageRequest);
 
         // set the caller name
         nameTextView.setText(callerName);
@@ -148,50 +161,28 @@ public class ConferenceManagerFragment
     public final void setupEndButtonForRow(final int rowId) {
         View endButton = mConferenceCallList[rowId].findViewById(R.id.conferenceCallerDisconnect);
         endButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getPresenter().endConferenceConnection(rowId);
-                }
+            @Override
+            public void onClick(View v) {
+                getPresenter().endConferenceConnection(rowId);
+            }
         });
     }
 
     @Override
-    public final void setCanSeparateButtonForRow(final int rowId, boolean canSeparate) {
-        final View separateButton = mConferenceCallList[rowId].findViewById(
-                R.id.conferenceCallerSeparate);
+    public final void setupSeparateButtonForRow(final int rowId, boolean canSeparate) {
+        final View separateButton =
+                mConferenceCallList[rowId].findViewById(R.id.conferenceCallerSeparate);
 
         if (canSeparate) {
-            final View.OnClickListener separateThisConnection = new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        getPresenter().separateConferenceConnection(rowId);
-                    }
-                };
-            separateButton.setOnClickListener(separateThisConnection);
+            separateButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getPresenter().separateConferenceConnection(rowId);
+                }
+            });
             separateButton.setVisibility(View.VISIBLE);
         } else {
             separateButton.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    /**
-     * Starts the "conference time" chronometer.
-     */
-    @Override
-    public void startConferenceTime(long base) {
-        if (mConferenceTime != null) {
-            mConferenceTime.setBase(base);
-            mConferenceTime.start();
-        }
-    }
-
-    /**
-     * Stops the "conference time" chronometer.
-     */
-    @Override
-    public void stopConferenceTime() {
-        if (mConferenceTime != null) {
-            mConferenceTime.stop();
         }
     }
 }

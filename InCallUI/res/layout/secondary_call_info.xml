@@ -16,64 +16,73 @@
 
 <!-- XML resource file for secondary call info, which will be used by CallCard. -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/secondary_call_info"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:orientation="horizontal"
-    android:paddingStart="@dimen/call_banner_side_padding"
-    android:paddingEnd="@dimen/secondary_call_banner_right_padding"
-    android:paddingTop="@dimen/call_banner_secondary_call_top_bottom_padding"
-    android:paddingBottom="@dimen/call_banner_secondary_call_top_bottom_padding"
     android:background="@color/incall_banner_secondary_background_color"
     android:elevation="@dimen/secondary_call_elevation">
 
+    <!-- This LinearLayout nested immediately in a FrameLayout is necessary to apply both a
+         background color and ripple to the button. -->
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <!-- Name (or the phone number, if we don't have a name to display). -->
-        <TextView android:id="@+id/secondaryCallName"
-            android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/call_banner_side_padding"
+        android:paddingEnd="@dimen/secondary_call_banner_right_padding"
+        android:paddingTop="@dimen/call_banner_secondary_call_top_bottom_padding"
+        android:paddingBottom="@dimen/call_banner_secondary_call_top_bottom_padding"
+        android:background="?android:attr/selectableItemBackground">
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/incall_banner_secondary_text_color"
-            android:ellipsize="marquee"
-            android:singleLine="true"/>
-        <!-- Provider, e.g. AT&T, that a call is associated with -->
-        <LinearLayout android:id="@+id/secondary_call_provider_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone" >
-            <ImageView android:id="@+id/secondaryCallProviderIcon"
-                android:layout_width="@dimen/call_provider_small_icon_size"
-                android:layout_height="@dimen/call_provider_small_icon_size"
-                android:layout_marginRight="2dp"
-                android:baselineAlignBottom="true"
-                android:scaleType="centerInside" />
-            <TextView android:id="@+id/secondaryCallProviderLabel"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <!-- Name (or the phone number, if we don't have a name to display). -->
+            <TextView android:id="@+id/secondaryCallName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/onHold"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/incall_banner_secondary_text_color"
+                android:ellipsize="marquee"
                 android:singleLine="true"/>
+            <!-- Provider, e.g. AT&T, that a call is associated with -->
+            <LinearLayout android:id="@+id/secondary_call_provider_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone" >
+                <ImageView android:id="@+id/secondaryCallProviderIcon"
+                    android:layout_width="@dimen/call_provider_small_icon_size"
+                    android:layout_height="@dimen/call_provider_small_icon_size"
+                    android:layout_marginRight="2dp"
+                    android:baselineAlignBottom="true"
+                    android:scaleType="centerInside" />
+                <TextView android:id="@+id/secondaryCallProviderLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/onHold"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/incall_banner_secondary_text_color"
+                    android:singleLine="true"/>
+            </LinearLayout>
         </LinearLayout>
+
+        <!-- Call status of the background call, usually the string "On hold". -->
+        <TextView android:id="@+id/secondaryCallStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingEnd="@dimen/call_banner_side_padding"
+            android:text="@string/onHold"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/incall_banner_secondary_text_color"
+            android:textAlignment="textEnd"
+            android:singleLine="true" />
+
     </LinearLayout>
 
-    <!-- Call status of the background call, usually the string "On hold". -->
-    <TextView android:id="@+id/secondaryCallStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:paddingEnd="@dimen/call_banner_side_padding"
-        android:text="@string/onHold"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/incall_banner_secondary_text_color"
-        android:textAlignment="textEnd"
-        android:singleLine="true" />
-
-</LinearLayout>
+</FrameLayout>
