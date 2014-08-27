@@ -107,7 +107,7 @@
     <string name="type_incoming" msgid="6502076603836088532">"इनकमिंग कॉल"</string>
     <string name="type_outgoing" msgid="343108709599392641">"आउटगोइंग कॉल"</string>
     <string name="type_missed" msgid="2720502601640509542">"छूटी कॉल"</string>
-    <string name="type_incoming_video" msgid="82323391702796181">"आवक वीडियो कॉल"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"इनकमिंग वीडियो कॉल"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"जावक वीडियो कॉल"</string>
     <string name="type_missed_video" msgid="954396897034220545">"छूटे वीडियो कॉल"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"ध्वनिमेल"</string>
@@ -194,13 +194,10 @@
     <string name="general_settings_label" msgid="4787443826763795004">"सामान्य सेटिंग"</string>
     <string name="general_settings_description" msgid="4838560696004337578">"संपर्क प्रदर्शन, ध्वनि और त्वरित प्रतिसाद"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"संपर्क प्रदर्शन के विकल्प"</string>
-    <!-- no translation found for sounds_and_vibrate_category_title (7589787045192519254) -->
-    <skip />
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"ध्वनि और कंपन"</string>
     <string name="ringtone_title" msgid="760362035635084653">"फ़ोन रिंगटोन"</string>
-    <!-- no translation found for vibrate_on_ring_title (3362916460327555241) -->
-    <skip />
-    <!-- no translation found for dtmf_tone_enable_title (6571449695997521615) -->
-    <skip />
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"कॉल के लिए भी कंपन"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"डायलपैड टोन"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"अन्य"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"त्वरित प्रतिसाद"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"कॉल सेटिंग"</string>

@@ -194,13 +194,10 @@
     <string name="general_settings_label" msgid="4787443826763795004">"Mga pangkalahatang setting"</string>
     <string name="general_settings_description" msgid="4838560696004337578">"Display ng contact, mga tunog at mabilisang tugon"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Mga opsyon ng display ng contact"</string>
-    <!-- no translation found for sounds_and_vibrate_category_title (7589787045192519254) -->
-    <skip />
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Mga tunog at pag-vibrate"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Ringtone ng telepono"</string>
-    <!-- no translation found for vibrate_on_ring_title (3362916460327555241) -->
-    <skip />
-    <!-- no translation found for dtmf_tone_enable_title (6571449695997521615) -->
-    <skip />
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Mag-vibrate din para sa tawag"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Mga dialpad tone"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"Iba pa"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Mga mabilisang tugon"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"Mga setting ng tawag"</string>
