@@ -20,6 +20,7 @@
         <bitmap
             android:gravity="center"
             android:src="@drawable/ic_videocam"
-            android:tint="@color/glowpad_widget_active_color" />
+            android:tint="@color/glowpad_widget_active_color"
+            android:autoMirrored="true" />
     </item>
 </layer-list>

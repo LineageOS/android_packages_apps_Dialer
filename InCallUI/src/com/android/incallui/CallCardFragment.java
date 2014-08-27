@@ -432,6 +432,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         if (isConference) {
             name = getConferenceString(isGeneric);
             photo = getConferencePhoto(isGeneric);
+            photo.setAutoMirrored(true);
             nameIsNumber = false;
         }
 
@@ -596,7 +597,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private void setDrawableToImageView(ImageView view, Drawable photo) {
         if (photo == null) {
-            photo = view.getResources().getDrawable(R.drawable.picture_unknown);
+            photo = view.getResources().getDrawable(R.drawable.img_no_image);
+            photo.setAutoMirrored(true);
         }
 
         final Drawable current = view.getDrawable();
