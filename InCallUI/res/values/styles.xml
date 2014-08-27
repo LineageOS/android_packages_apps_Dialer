@@ -92,21 +92,27 @@
 
     <!-- Theme for the InCallActivity activity. Should have a transparent background for the
          circular reveal animation for a new outgoing call to work correctly. We don't just use
-         Theme.Black.NoTitleBar directly, since we want any popups or dialogs
-         from the InCallActivity to have the correct holo style. -->
+         Theme.Black.NoTitleBar directly, since we want any popups or dialogs from the
+         InCallActivity to have the correct Material style. -->
     <style name="Theme.InCallScreen" parent="@android:style/Theme.Material.Light">
         <item name="android:windowAnimationStyle">@style/InCallAnimationStyle</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowNoTitle">true</item>
         <item name="dialpad_key_button_touch_tint">@color/incall_dialpad_touch_tint</item>
         <item name="android:textColorPrimary">@color/incall_call_banner_text_color</item>
         <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
         <item name="android:popupMenuStyle">@style/InCallPopupMenuStyle</item>
+        <item name="android:actionBarStyle">@style/InCallActionBarStyle</item>
     </style>
 
     <style name="InCallPopupMenuStyle" parent="@android:style/Theme.Material.Light">
         <item name="android:textColorPrimary">@color/popup_menu_color</item>
     </style>
+
+    <style name="InCallActionBarStyle" parent="@android:style/Widget.Material.Light.ActionBar">
+        <item name="android:background">@color/incall_action_bar_background_color</item>
+        <item name="android:textColor">@color/incall_action_bar_text_color</item>
+    </style>
+
 </resources>

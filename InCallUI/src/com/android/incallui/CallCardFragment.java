@@ -617,7 +617,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private Drawable getConferencePhoto(boolean isGeneric) {
         Log.v(this, "isGenericPhoto: " + isGeneric);
-        final int resId = isGeneric ? R.drawable.picture_dialing : R.drawable.picture_conference;
+        final int resId = isGeneric ? R.drawable.picture_dialing : R.drawable.img_conference;
         return getView().getResources().getDrawable(resId);
     }
 
@@ -693,6 +693,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 break;
             case Call.State.DISCONNECTED:
                 callStateLabel = getCallFailedString(disconnectCause);
+                break;
+            case Call.State.CONFERENCED:
+                callStateLabel = context.getString(R.string.card_title_conf_call);
                 break;
             default:
                 Log.wtf(this, "updateCallStateWidgets: unexpected call: " + state);

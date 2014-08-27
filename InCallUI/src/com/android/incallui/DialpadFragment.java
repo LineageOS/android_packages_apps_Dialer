@@ -46,8 +46,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         implements DialpadPresenter.DialpadUi, View.OnTouchListener, View.OnKeyListener,
         View.OnHoverListener, View.OnClickListener {
 
-    private static final float DIALPAD_SLIDE_FRACTION = 1.0f;
-
     private static final int ACCESSIBILITY_DTMF_STOP_DELAY_MILLIS = 50;
 
     /**
