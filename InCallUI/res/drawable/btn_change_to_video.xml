@@ -23,7 +23,8 @@
     <item>
         <bitmap android:src="@drawable/ic_toolbar_video"
             android:gravity="center"
-            android:tint="@color/selectable_icon_tint" />
+            android:tint="@color/selectable_icon_tint"
+            android:autoMirrored="true" />
     </item>
 
 </layer-list>
