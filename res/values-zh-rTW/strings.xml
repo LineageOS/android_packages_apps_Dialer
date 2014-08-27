@@ -194,13 +194,10 @@
     <string name="general_settings_label" msgid="4787443826763795004">"一般設定"</string>
     <string name="general_settings_description" msgid="4838560696004337578">"聯絡人顯示、音效和快速回應"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"聯絡人顯示選項"</string>
-    <!-- no translation found for sounds_and_vibrate_category_title (7589787045192519254) -->
-    <skip />
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"音效和震動"</string>
     <string name="ringtone_title" msgid="760362035635084653">"手機鈴聲"</string>
-    <!-- no translation found for vibrate_on_ring_title (3362916460327555241) -->
-    <skip />
-    <!-- no translation found for dtmf_tone_enable_title (6571449695997521615) -->
-    <skip />
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"來電時同時震動"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"撥號鍵盤音效"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"其他"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"快速回應"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"通話設定"</string>

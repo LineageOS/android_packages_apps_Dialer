@@ -194,13 +194,10 @@
     <string name="general_settings_label" msgid="4787443826763795004">"การตั้งค่าทั่วไป"</string>
     <string name="general_settings_description" msgid="4838560696004337578">"การแสดงรายชื่อติดต่อ เสียง และคำตอบด่วน"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"ตัวเลือกการแสดงรายชื่อติดต่อ"</string>
-    <!-- no translation found for sounds_and_vibrate_category_title (7589787045192519254) -->
-    <skip />
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"เสียงและสั่น"</string>
     <string name="ringtone_title" msgid="760362035635084653">"เสียงเรียกเข้า"</string>
-    <!-- no translation found for vibrate_on_ring_title (3362916460327555241) -->
-    <skip />
-    <!-- no translation found for dtmf_tone_enable_title (6571449695997521615) -->
-    <skip />
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"สั่นเมื่อมีสายเรียกเข้าด้วย"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"เสียงแป้นหมายเลข"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"อื่นๆ"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"คำตอบด่วน"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"การตั้งค่าการโทร"</string>
