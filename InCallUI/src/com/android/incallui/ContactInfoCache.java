@@ -328,6 +328,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         }
 
         cce.photo = photo;
+        cce.lookupKey = info.lookupKeyOrNull;
+
         return cce;
     }
 
@@ -503,6 +505,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         /** Either a display photo or a thumbnail URI. */
         public Uri displayPhotoUri;
         public Uri lookupUri; // Sent to NotificationMananger
+        public String lookupKey;
 
         @Override
         public String toString() {

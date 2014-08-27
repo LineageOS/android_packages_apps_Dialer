@@ -406,7 +406,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         Bitmap largeIcon = null;
         if (isConference) {
             largeIcon = BitmapFactory.decodeResource(mContext.getResources(),
-                    R.drawable.picture_conference);
+                    R.drawable.img_conference);
         }
         if (contactInfo.photo != null && (contactInfo.photo instanceof BitmapDrawable)) {
             largeIcon = ((BitmapDrawable) contactInfo.photo).getBitmap();
