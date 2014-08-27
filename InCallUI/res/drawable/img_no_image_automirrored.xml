@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
   ~ Copyright (C) 2014 The Android Open Source Project
   ~
@@ -14,13 +15,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/fab_red" />
-    <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@drawable/ic_toolbar_video_off"
-            android:tint="@color/glowpad_widget_active_color"
-            android:autoMirrored="true" />
-    </item>
-</layer-list>
+
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/img_no_image"
+    android:autoMirrored="true" />

@@ -72,7 +72,7 @@
     <item android:id="@+id/bluetoothItem">
         <bitmap android:src="@drawable/ic_toolbar_audio_bluetooth"
                 android:gravity="center"
-                android:tint="@color/selectable_icon_tint"  />
+                android:tint="@color/selectable_icon_tint" />
     </item>
 
 
@@ -86,8 +86,9 @@
     <!-- Speakerphone icon showing 'speaker on' state -->
     <item android:id="@+id/speakerphoneItem">
         <bitmap android:src="@drawable/ic_toolbar_speaker_on"
-                android:gravity="center"
-                android:tint="@color/selectable_icon_tint" />
+            android:gravity="center"
+            android:tint="@color/selectable_icon_tint"
+            android:autoMirrored="true" />
     </item>
 
     <!-- Generic "audio mode" icon. -->
