@@ -128,8 +128,7 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Anrufe verbinden"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Wechseln"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Anrufe verwalten"</string>
-    <!-- no translation found for onscreenManageConferenceText (6801708317570467407) -->
-    <skip />
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Konferenz verwalten"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Audio"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videoanruf"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Zu Sprachanruf wechseln"</string>

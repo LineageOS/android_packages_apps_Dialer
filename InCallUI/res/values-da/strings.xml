@@ -128,8 +128,7 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Slå opkald sammen"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Skift"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Administrer opkald"</string>
-    <!-- no translation found for onscreenManageConferenceText (6801708317570467407) -->
-    <skip />
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Administrer telefonmøde"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Lyd"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videoopkald"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Skift til stemmeopkald"</string>

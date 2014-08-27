@@ -128,8 +128,7 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"కాల్‌లను విలీనం చేయి"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"స్వాప్ చేయి"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"కాల్‌లను నిర్వహించు"</string>
-    <!-- no translation found for onscreenManageConferenceText (6801708317570467407) -->
-    <skip />
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"సమావేశ కాల్‌ను నిర్వహించు"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"ఆడియో"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"వీడియో కాల్"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"వాయిస్ కాల్‌కి మార్చు"</string>
