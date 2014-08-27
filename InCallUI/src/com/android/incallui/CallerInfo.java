@@ -213,7 +213,7 @@ public class CallerInfo {
                 columnIndex = getColumnIndexForPersonId(contactRef, cursor);
                 if (columnIndex != -1) {
                     final long contactId = cursor.getLong(columnIndex);
-                    if (contactId != 0 && !Contacts.isCorpContactId(contactId)) {
+                    if (contactId != 0 && !Contacts.isEnterpriseContactId(contactId)) {
                         info.contactIdOrZero = contactId;
                         Log.v(TAG, "==> got info.contactIdOrZero: " + info.contactIdOrZero);
 
