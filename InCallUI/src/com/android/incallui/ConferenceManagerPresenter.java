@@ -17,6 +17,9 @@
 package com.android.incallui;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.text.TextUtils;
 
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.InCallPresenter.InCallState;
@@ -128,23 +131,26 @@ public class ConferenceManagerPresenter
             // Activate this row of the Manage conference panel:
             getUi().setRowVisible(i, true);
 
-            final String name = contactCacheEntry.name;
-            final String number = contactCacheEntry.number;
+            String name = contactCacheEntry.name;
+            String number = contactCacheEntry.number;
+
+            if (TextUtils.isEmpty(name)) {
+                name = number;
+                number = null;
+            }
 
             if (canSeparate) {
-                getUi().setCanSeparateButtonForRow(i, canSeparate);
+                getUi().setupSeparateButtonForRow(i, canSeparate);
             }
             // display the CallerInfo.
             getUi().setupEndButtonForRow(i);
-            getUi().displayCallerInfoForConferenceRow(i, name, number, contactCacheEntry.label);
+
+            getUi().displayCallerInfoForConferenceRow(i, name, number, contactCacheEntry.label,
+                    contactCacheEntry.lookupKey, contactCacheEntry.displayPhotoUri);
         } else {
             // Disable this row of the Manage conference panel:
             getUi().setRowVisible(i, false);
         }
-    }
-
-    public void manageConferenceDoneClicked() {
-        getUi().setVisible(false);
     }
 
     public int getMaxCallersInConference() {
@@ -168,10 +174,8 @@ public class ConferenceManagerPresenter
         boolean isFragmentVisible();
         void setRowVisible(int rowId, boolean on);
         void displayCallerInfoForConferenceRow(int rowId, String callerName, String callerNumber,
-                String callerNumberType);
-        void setCanSeparateButtonForRow(int rowId, boolean canSeparate);
+                String callerNumberType, String lookupKey, Uri photoUri);
+        void setupSeparateButtonForRow(int rowId, boolean canSeparate);
         void setupEndButtonForRow(int rowId);
-        void startConferenceTime(long base);
-        void stopConferenceTime();
     }
 }
