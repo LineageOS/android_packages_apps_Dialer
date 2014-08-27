@@ -943,7 +943,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private void exitSearchUi() {
         // See related bug in enterSearchUI();
-        if (getFragmentManager().isDestroyed()) {
+        if (getFragmentManager().isDestroyed() || !isSafeToCommitTransactions()) {
             return;
         }
 
