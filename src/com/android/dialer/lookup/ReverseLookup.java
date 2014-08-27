@@ -18,6 +18,7 @@ package com.android.dialer.lookup;
 
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.lookup.cyngn.CyngnChineseReverseLookup;
+import com.android.dialer.lookup.dastelefonbuch.TelefonbuchReverseLookup;
 import com.android.dialer.lookup.opencnam.OpenCnamReverseLookup;
 import com.android.dialer.lookup.whitepages.WhitePagesReverseLookup;
 import com.android.dialer.lookup.yellowpages.YellowPagesReverseLookup;
@@ -52,6 +53,8 @@ public abstract class ReverseLookup {
                 INSTANCE = new ZabaSearchReverseLookup(context);
             } else if (provider.equals(LookupSettings.RLP_CYNGN_CHINESE)) {
                 INSTANCE = new CyngnChineseReverseLookup(context);
+            } else if (provider.equals(LookupSettings.RLP_DASTELEFONBUCH)) {
+                INSTANCE = new TelefonbuchReverseLookup(context);
             }
         }
 
@@ -75,6 +78,9 @@ public abstract class ReverseLookup {
             return true;
         } else if (provider.equals(LookupSettings.RLP_CYNGN_CHINESE)
                 && INSTANCE instanceof CyngnChineseReverseLookup) {
+            return true;
+        } else if (provider.equals(LookupSettings.RLP_DASTELEFONBUCH)
+                && INSTANCE instanceof TelefonbuchReverseLookup) {
             return true;
         } else {
             return false;
