@@ -312,10 +312,12 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             if (info.cachedPhoto != null) {
                 photo = info.cachedPhoto;
             } else {
-                photo = context.getResources().getDrawable(R.drawable.picture_unknown);
+                photo = context.getResources().getDrawable(R.drawable.img_no_image);
+                photo.setAutoMirrored(true);
             }
         } else if (info.contactDisplayPhotoUri == null) {
-            photo = context.getResources().getDrawable(R.drawable.picture_unknown);
+            photo = context.getResources().getDrawable(R.drawable.img_no_image);
+            photo.setAutoMirrored(true);
         } else {
             cce.displayPhotoUri = info.contactDisplayPhotoUri;
         }

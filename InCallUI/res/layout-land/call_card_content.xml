@@ -63,7 +63,7 @@
         android:gravity="start|center_vertical"
         android:scaleType="centerCrop"
         android:contentDescription="@string/contactPhoto"
-        android:src="@drawable/picture_unknown" />
+        android:src="@drawable/img_no_image_automirrored" />
 
     <include layout="@layout/manage_conference_call_button"
         android:layout_width="match_parent"
