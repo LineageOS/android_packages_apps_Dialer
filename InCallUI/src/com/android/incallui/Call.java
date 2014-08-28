@@ -20,6 +20,7 @@ import com.android.contacts.common.CallUtil;
 
 import android.content.Context;
 import android.net.Uri;
+import android.telecomm.CallProperties;
 import android.telecomm.PhoneCapabilities;
 import android.telecomm.GatewayInfo;
 import android.telecomm.InCallService.VideoCall;
@@ -315,13 +316,17 @@ public final class Call {
         return (capabilities == (capabilities & mTelecommCall.getDetails().getCallCapabilities()));
     }
 
+    private boolean hasProperty(int property) {
+        return property == (property & mTelecommCall.getDetails().getCallProperties());
+    }
+
     /** Gets the time when the call first became active. */
     public long getConnectTimeMillis() {
         return mTelecommCall.getDetails().getConnectTimeMillis();
     }
 
     public boolean isConferenceCall() {
-        return mChildCallIds != null && !mChildCallIds.isEmpty();
+        return hasProperty(CallProperties.CONFERENCE);
     }
 
     public GatewayInfo getGatewayInfo() {
