@@ -469,7 +469,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         final boolean isGenericConf = isGenericConference(mPrimary);
-        if (entry != null) {
+        if (entry != null && mPrimary != null) {
             final String name = getNameForCall(entry);
             final String number = getNumberForCall(entry);
             final boolean nameIsNumber = name != null && name.equals(entry.number);
@@ -482,14 +482,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private void updateSecondaryDisplayInfo(boolean isConference) {
-
         final CallCardUi ui = getUi();
         if (ui == null) {
             return;
         }
 
         final boolean isGenericConf = isGenericConference(mSecondary);
-        if (mSecondaryContactInfo != null) {
+        if (mSecondaryContactInfo != null && mSecondary != null) {
             Log.d(TAG, "updateSecondaryDisplayInfo() " + mSecondaryContactInfo);
             final String nameForCall = getNameForCall(mSecondaryContactInfo);
 
