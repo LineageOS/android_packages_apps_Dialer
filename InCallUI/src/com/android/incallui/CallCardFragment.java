@@ -90,6 +90,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mSecondaryCallProviderInfo;
     private TextView mSecondaryCallProviderLabel;
     private ImageView mSecondaryCallProviderIcon;
+    private View mSecondaryCallConferenceCallIcon;
     private View mProgressSpinner;
 
     private View mManageConferenceCallButton;
@@ -466,13 +467,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
 
         if (show) {
+            boolean hasProvider = !TextUtils.isEmpty(providerLabel);
+            showAndInitializeSecondaryCallInfo(hasProvider);
+
             if (isConference) {
                 name = getConferenceString(isGeneric);
                 nameIsNumber = false;
+                mSecondaryCallConferenceCallIcon.setVisibility(View.VISIBLE);
+            } else {
+                mSecondaryCallConferenceCallIcon.setVisibility(View.GONE);
             }
-
-            boolean hasProvider = !TextUtils.isEmpty(providerLabel);
-            showAndInitializeSecondaryCallInfo(hasProvider);
 
             mSecondaryCallName.setText(name);
             if (hasProvider) {
@@ -488,6 +492,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         } else {
             mSecondaryCallInfo.setVisibility(View.GONE);
         }
+
+
     }
 
     @Override
@@ -792,6 +798,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         // until mSecondaryCallInfo is inflated in the call above.
         if (mSecondaryCallName == null) {
             mSecondaryCallName = (TextView) getView().findViewById(R.id.secondaryCallName);
+            mSecondaryCallConferenceCallIcon =
+                    getView().findViewById(R.id.secondaryCallConferenceCallIcon);
             if (hasProvider) {
                 mSecondaryCallProviderInfo.setVisibility(View.VISIBLE);
                 mSecondaryCallProviderLabel = (TextView) getView()
