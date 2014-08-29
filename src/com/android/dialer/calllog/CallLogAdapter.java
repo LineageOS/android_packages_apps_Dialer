@@ -1038,8 +1038,7 @@ public class CallLogAdapter extends GroupingListAdapter
         // Do not show badge in call log.
         if (!mIsCallLog) {
             final ViewStub stub = (ViewStub) view.findViewById(R.id.link_stub);
-
-            if (TextUtils.isEmpty(info.lookupKey)) {
+            if (UriUtils.isEncodedContactUri(info.lookupUri)) {
                 if (stub != null) {
                     final View inflated = stub.inflate();
                     inflated.setVisibility(View.VISIBLE);
