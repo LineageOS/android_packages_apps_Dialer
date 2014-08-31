@@ -128,8 +128,7 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"合并通话"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"交换"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"管理通话"</string>
-    <!-- no translation found for onscreenManageConferenceText (6801708317570467407) -->
-    <skip />
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"管理电话会议"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"音频"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"视频通话"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"改为语音通话"</string>

@@ -128,8 +128,7 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Çağrıları birleştir"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Değiştir"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Aramaları yönet"</string>
-    <!-- no translation found for onscreenManageConferenceText (6801708317570467407) -->
-    <skip />
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Konferans çağrısını yönet"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Ses"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Video görüşmesi"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Sesli çağrıya geç"</string>
