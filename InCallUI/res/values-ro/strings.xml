@@ -173,7 +173,7 @@
     <string name="accessibility_call_muted" msgid="2776111226185342220">"Apel cu sunet dezactivat."</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"S-a activat sunetul pentru apel."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Apelul a fost pus în așteptare."</string>
-    <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"Apel a fost scos din așteptare."</string>
+    <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"Apelul a fost scos din așteptare."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Răspundeţi"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Trimiteţi SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Refuzaţi"</string>
