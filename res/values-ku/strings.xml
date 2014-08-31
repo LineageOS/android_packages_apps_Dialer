@@ -25,7 +25,7 @@
         <xliff:g id="name">%s</xliff:g>
     </string>
   <string name="recentCalls_editNumberBeforeCall">ده‌ستکاری کردنی ژماره‌ پێش په‌یوه‌ندیکردن</string>
-  <string name="recentCalls_addToContact">زیادکردن بۆ ناوەکان</string>
+  <string name="recentCalls_addToContact">زیادیکه‌ بۆ ناوه‌کان</string>
   <string name="recentCalls_removeFromRecentList">سڕینه‌وه‌ له‌ تۆماری ته‌له‌فۆنکردن</string>
   <string name="recentCalls_deleteAll">پاککردنه‌وه‌ی تۆماری ته‌له‌فۆنکردن</string>
   <string name="recentCalls_trashVoicemail">سڕینه‌وه‌ی ده‌نگه‌نامه‌</string>
@@ -188,7 +188,7 @@
   <string name="search_shortcut_call_number">په‌یوه‌ندی
         <xliff:g id="number">%s</xliff:g>
     </string>
-  <string name="search_shortcut_add_to_contacts">زیادکردن بۆ ناوەکان</string>
+  <string name="search_shortcut_add_to_contacts">زیادیکه‌ بۆ ناوه‌کان</string>
   <string name="num_missed_calls"><xliff:g id="number">%s</xliff:g> په‌یوه‌ندی وه‌ڵام نه‌دراوه‌ی نوێ هه‌یه‌</string>
   <string name="no_favorites">دڵخوازه‌کان وamp; په‌یوه‌ندییه‌کانی تۆ\nپه‌یوه‌ندی زۆرجار لێره‌ نیشان ئه‌درێت.\n.</string>
   <string name="contact_tooltip">تاپ له‌ وێنه‌که‌ بکه‌ بۆ بینینی هه‌موو ژماره‌کان یان ده‌ستی پێدابنێ بۆ ماوه‌یه‌کی درێژ بۆ تۆمارکردن</string>

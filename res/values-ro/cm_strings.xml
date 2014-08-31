@@ -47,6 +47,10 @@
   <string name="call_stats_sort_by_duration">Sortare după durata apelului</string>
   <string name="call_stats_sort_by_count">Sortare după numărul de apeluri</string>
   <string name="menu_add_to_blacklist">Adaugă la lista neagră</string>
+  <string name="toast_added_to_blacklist"><xliff:g id="number"> %s </xliff:g> adăugat la lista neagră</string>
   <string name="nearby_places">Locații în apropiere</string>
   <string name="people">Oameni</string>
+  <string name="start_call_playback">Redă înregistrarea</string>
+  <string name="stop_call_playback">Stop</string>
+  <string name="call_playback_error_message">Nu s-a reuşit să se redea înregistrarea</string>
 </resources>
