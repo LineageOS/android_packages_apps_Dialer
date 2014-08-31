@@ -128,7 +128,7 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Bateratu deiak"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Trukatu"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Kudeatu deiak"</string>
-    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Kudeatu konferentzia-deia"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Kudeatu deia"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Audioa"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Bideo-deia"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Aldatu ahots-deira"</string>
@@ -166,7 +166,7 @@
     <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"Kabledun entzungailua hautatu da"</string>
     <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"Bluetooth entzungailua hautatu da"</string>
     <string name="accessibility_call_muted" msgid="2776111226185342220">"Deiaren audioa desaktibatu da."</string>
-    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Aktibatu deiaren audioa."</string>
+    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Deiaren audioa aktibatu da."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Deia zain utzi da."</string>
     <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"Deia berreskuratu da."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Erantzun"</string>
