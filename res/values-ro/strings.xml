@@ -201,8 +201,8 @@
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Opțiuni de afișare a agendei"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Sunete și vibrații"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Ton de apel al telefonului"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrații și pentru apeluri"</string>
-    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tonuri pentru tastatură"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrează și pentru apeluri"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tonuri pt. tastatura numerică"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"Altele"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Răspunsuri rapide"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"Setări pentru apeluri"</string>
