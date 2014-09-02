@@ -125,11 +125,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     private boolean mIsVideoCall;
 
     /**
-     * Determines the active camera for transmitted video.
-     */
-    private InCallCameraManager mInCallCameraManager;
-
-    /**
      * Determines the device orientation (portrait/lanscape).
      */
     private int mDeviceOrientation;
@@ -183,8 +178,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallVideoCallListenerNotifier.getInstance().addSurfaceChangeListener(this);
         InCallVideoCallListenerNotifier.getInstance().addVideoEventListener(this);
         InCallVideoCallListenerNotifier.getInstance().addSessionModificationListener(this);
-
-        mInCallCameraManager = InCallPresenter.getInstance().getInCallCameraManager();
         mIsVideoCall = false;
     }
 
@@ -203,8 +196,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallVideoCallListenerNotifier.getInstance().removeSurfaceChangeListener(this);
         InCallVideoCallListenerNotifier.getInstance().removeVideoEventListener(this);
         InCallVideoCallListenerNotifier.getInstance().removeSessionModificationListener(this);
-
-        mInCallCameraManager = null;
     }
 
     /**
@@ -425,7 +416,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             }
 
             mPreviewSurfaceState = PreviewSurfaceState.CAMERA_SET;
-            mVideoCall.setCamera(mInCallCameraManager.getActiveCameraId());
+            InCallCameraManager cameraManager = InCallPresenter.getInstance().
+                    getInCallCameraManager();
+            mVideoCall.setCamera(cameraManager.getActiveCameraId());
             mVideoCall.requestCameraCapabilities();
 
             if (ui.isDisplayVideoSurfaceCreated()) {
