@@ -20,8 +20,12 @@ import android.content.res.Resources;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.graphics.Typeface;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
 
@@ -71,7 +75,13 @@ public class PhoneCallDetailsHelper {
     }
 
     /** Fills the call details views with content. */
-    public void setPhoneCallDetails(PhoneCallDetailsViews views, PhoneCallDetails details) {
+    public void setPhoneCallDetails(PhoneCallDetailsViews views,
+            PhoneCallDetails details) {
+        setPhoneCallDetails(views, details, null);
+    }
+
+    public void setPhoneCallDetails(PhoneCallDetailsViews views,
+            PhoneCallDetails details, String filter) {
         // Display up to a given number of icons.
         views.callTypeIcons.clear();
         int count = details.callTypes.length;
@@ -110,16 +120,35 @@ public class PhoneCallDetailsHelper {
             views.callAccountIcon.setVisibility(View.GONE);
         }
 
-        final CharSequence nameText;
-        final CharSequence displayNumber =
+        CharSequence nameText;
+        CharSequence displayNumber =
             mPhoneNumberHelper.getDisplayNumber(details.number,
                     details.numberPresentation, details.formattedNumber);
+        String phoneNum = (String) details.number;
+        if (!TextUtils.isEmpty(filter) && phoneNum.contains(filter)) {
+            int start, end;
+            start = phoneNum.indexOf(filter);
+            end = start + filter.length();
+            SpannableString result = new SpannableString(phoneNum);
+            result.setSpan(new StyleSpan(Typeface.BOLD), start, end,
+                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+            displayNumber = result;
+        }
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
             // We have a real phone number as "nameView" so make it always LTR
             views.nameView.setTextDirection(View.TEXT_DIRECTION_LTR);
         } else {
             nameText = details.name;
+            if (!TextUtils.isEmpty(filter) && nameText.toString().contains(filter)) {
+                int start,end;
+                start = nameText.toString().indexOf(filter);
+                end = start + filter.length();
+                SpannableString style = new SpannableString(nameText);
+                style.setSpan(new StyleSpan(Typeface.BOLD), start, end,
+                        Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                nameText = style;
+            }
         }
 
         views.nameView.setText(nameText);
