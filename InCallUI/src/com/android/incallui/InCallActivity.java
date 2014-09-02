@@ -27,6 +27,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.DisconnectCause;
 import android.text.TextUtils;
@@ -491,9 +492,12 @@ public class InCallActivity extends Activity {
                 mCallCardFragment.animateForNewOutgoingCall(touchPoint);
             }
 
-            if (CallList.getInstance().getWaitingForAccountCall() != null) {
+            Call pendingAccountSelectionCall = CallList.getInstance().getWaitingForAccountCall();
+            if (pendingAccountSelectionCall != null) {
                 mCallCardFragment.setVisible(false);
-                SelectPhoneAccountDialogFragment.show(getFragmentManager());
+                Uri handle = pendingAccountSelectionCall.getHandle();
+                SelectPhoneAccountDialogFragment.showAccountDialog(getFragmentManager(),
+                        handle.getScheme());
             } else {
                 mCallCardFragment.setVisible(true);
             }
