@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"மொபைல்"</string>
+    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"ஃபோன்"</string>
     <string name="onHold" msgid="9035493194749959955">"காத்திருப்பில்"</string>
     <string name="unknown" msgid="6878797917991465859">"தெரியாதவர்"</string>
     <string name="private_num" msgid="6713286113000232309">"தனிப்பட்ட எண்"</string>
@@ -33,7 +33,7 @@
     <string name="callFailed_noSignal" msgid="1889803273616031933">"சிக்னல் இல்லை"</string>
     <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM வரம்பு மீறப்பட்டது"</string>
     <string name="callFailed_powerOff" msgid="2766035859391549713">"ரேடியோ முடக்கப்பட்டது"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"SIM இல்லை அல்லது SIM பிழை"</string>
+    <string name="callFailed_simError" msgid="4476360200030635828">"சிம் இல்லை அல்லது சிம் பிழை"</string>
     <string name="callFailed_outOfService" msgid="682300184520329366">"மொபைல் நெட்வொர்க் இல்லை"</string>
     <string name="callFailed_fdn_only" msgid="2850204579765430641">"வெளிச்செல்லும் அழைப்புகள் FDN ஆல் தடுக்கப்பட்டன."</string>
     <string name="callFailed_cb_enabled" msgid="3686963693629739680">"அழைப்பு தடுப்பில் இருக்கும்போது பிறரை அழைக்க முடியாது."</string>
