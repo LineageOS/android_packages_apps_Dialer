@@ -58,16 +58,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
+import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.NeededForReflection;
 import com.android.dialer.R;
@@ -96,34 +99,20 @@ public class DialpadFragment extends AnalyticsFragment
     private static final String TAG = DialpadFragment.class.getSimpleName();
 
     /**
-     * This interface allows the DialpadFragment to tell its hosting Activity when and when not
-     * to display the "dial" button. While this is logically part of the DialpadFragment, the
-     * need to have a particular kind of slick animation puts the "dial" button in the parent.
-     *
-     * The parent calls dialButtonPressed() and optionsMenuInvoked() on the dialpad fragment
-     * when appropriate.
-     *
-     * TODO: Refactor the app so this interchange is a bit cleaner.
-     */
-    public interface HostInterface {
-        void setFloatingActionButtonVisible(boolean visible);
-    }
-
-    /**
      * LinearLayout with getter and setter methods for the translationY property using floats,
      * for animation purposes.
      */
-    public static class DialpadSlidingLinearLayout extends LinearLayout {
+    public static class DialpadSlidingRelativeLayout extends RelativeLayout {
 
-        public DialpadSlidingLinearLayout(Context context) {
+        public DialpadSlidingRelativeLayout(Context context) {
             super(context);
         }
 
-        public DialpadSlidingLinearLayout(Context context, AttributeSet attrs) {
+        public DialpadSlidingRelativeLayout(Context context, AttributeSet attrs) {
             super(context, attrs);
         }
 
-        public DialpadSlidingLinearLayout(Context context, AttributeSet attrs, int defStyle) {
+        public DialpadSlidingRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
             super(context, attrs, defStyle);
         }
 
@@ -167,6 +156,7 @@ public class DialpadFragment extends AnalyticsFragment
 
     private DialpadView mDialpadView;
     private EditText mDigits;
+    private int mDialpadSlideInDuration;
 
     /** Remembers if we need to clear digits field when the screen is completely gone. */
     private boolean mClearDigitsOnStop;
@@ -177,6 +167,8 @@ public class DialpadFragment extends AnalyticsFragment
     private ToneGenerator mToneGenerator;
     private final Object mToneGeneratorLock = new Object();
     private View mSpacer;
+
+    private FloatingActionButtonController mFloatingActionButtonController;
 
     /**
      * Set of dialpad keys that are currently being pressed
@@ -337,6 +329,8 @@ public class DialpadFragment extends AnalyticsFragment
         if (state != null) {
             mDigitsFilledByIntent = state.getBoolean(PREF_DIGITS_FILLED_BY_INTENT);
         }
+
+        mDialpadSlideInDuration = getResources().getInteger(R.integer.dialpad_slide_in_duration);
     }
 
     @Override
@@ -387,6 +381,14 @@ public class DialpadFragment extends AnalyticsFragment
         // Set up the "dialpad chooser" UI; see showDialpadChooser().
         mDialpadChooser = (ListView) fragmentView.findViewById(R.id.dialpadChooser);
         mDialpadChooser.setOnItemClickListener(this);
+
+        final View floatingActionButtonContainer =
+                fragmentView.findViewById(R.id.dialpad_floating_action_button_container);
+        final View floatingActionButton =
+                (ImageButton) fragmentView.findViewById(R.id.dialpad_floating_action_button);
+        floatingActionButton.setOnClickListener(this);
+        mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
+                floatingActionButtonContainer, floatingActionButton);
 
         return fragmentView;
     }
@@ -870,27 +872,22 @@ public class DialpadFragment extends AnalyticsFragment
         return popupMenu;
     }
 
-    /**
-     * Called by the containing Activity to tell this Fragment that the dial button has been
-     * pressed.
-     */
-    public void dialButtonPressed() {
-        mHaptic.vibrate();
-        handleDialButtonPressed();
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.dialpad_floating_action_button:
+                mHaptic.vibrate();
+                handleDialButtonPressed();
+                break;
             case R.id.deleteButton: {
                 keyPressed(KeyEvent.KEYCODE_DEL);
-                return;
+                break;
             }
             case R.id.digits: {
                 if (!isDigitsEmpty()) {
                     mDigits.setCursorVisible(true);
                 }
-                return;
+                break;
             }
             case R.id.dialpad_overflow: {
                 mOverflowPopupMenu.show();
@@ -1217,8 +1214,8 @@ public class DialpadFragment extends AnalyticsFragment
             if (mDialpadView != null) {
                 mDialpadView.setVisibility(View.GONE);
             }
-            ((HostInterface) getActivity()).setFloatingActionButtonVisible(false);
 
+            mFloatingActionButtonController.setVisible(false);
             mDialpadChooser.setVisibility(View.VISIBLE);
 
             // Instantiate the DialpadChooserAdapter and hook it up to the
@@ -1234,7 +1231,8 @@ public class DialpadFragment extends AnalyticsFragment
             } else {
                 mDigits.setVisibility(View.VISIBLE);
             }
-            ((HostInterface) getActivity()).setFloatingActionButtonVisible(true);
+
+            mFloatingActionButtonController.setVisible(true);
             mDialpadChooser.setVisibility(View.GONE);
         }
     }
@@ -1608,9 +1606,13 @@ public class DialpadFragment extends AnalyticsFragment
         if (!hidden) {
             if (mAnimate) {
                 dialpadView.animateShow();
+                mFloatingActionButtonController.scaleIn(mDialpadSlideInDuration);
             }
             activity.onDialpadShown();
             mDigits.requestFocus();
+        }
+        if (hidden && mAnimate) {
+            mFloatingActionButtonController.scaleOut();
         }
     }
 
@@ -1623,6 +1625,6 @@ public class DialpadFragment extends AnalyticsFragment
     }
 
     public void setYFraction(float yFraction) {
-        ((DialpadSlidingLinearLayout) getView()).setYFraction(yFraction);
+        ((DialpadSlidingRelativeLayout) getView()).setYFraction(yFraction);
     }
 }
