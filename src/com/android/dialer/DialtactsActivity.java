@@ -16,9 +16,7 @@
 
 package com.android.dialer;
 
-import android.animation.LayoutTransition;
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
@@ -30,7 +28,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
@@ -53,7 +50,6 @@ import android.view.View.OnTouchListener;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -103,7 +99,6 @@ import java.util.Locale;
 public class DialtactsActivity extends TransactionSafeActivity implements View.OnClickListener,
         DialpadFragment.OnDialpadQueryChangedListener,
         OnListFragmentScrolledListener,
-        DialpadFragment.HostInterface,
         ListsFragment.HostInterface,
         SpeedDialFragment.HostInterface,
         SearchFragment.HostInterface,
@@ -224,9 +219,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private DragDropController mDragDropController;
     private ActionBarController mActionBarController;
 
-    private String mDescriptionDialButtonStr;
-    private String mActionMenuDialpadButtonStr;
-    private ImageButton mFloatingActionButton;
     private FloatingActionButtonController mFloatingActionButtonController;
 
     private int mActionBarHeight;
@@ -351,8 +343,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         final Resources resources = getResources();
         mActionBarHeight = resources.getDimensionPixelSize(R.dimen.action_bar_height_large);
-        mDescriptionDialButtonStr = resources.getString(R.string.description_dial_button);
-        mActionMenuDialpadButtonStr = resources.getString(R.string.action_menu_dialpad_button);
 
         setContentView(R.layout.dialtacts_activity);
         getWindow().setBackgroundDrawable(null);
@@ -389,12 +379,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         final View floatingActionButtonContainer = findViewById(
                 R.id.floating_action_button_container);
-        mFloatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
-        int floatingActionButtonWidth = resources.getDimensionPixelSize(
-                R.dimen.floating_action_button_width);
-        mFloatingActionButton.setOnClickListener(this);
+        ImageButton floatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
+        floatingActionButton.setOnClickListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(this,
-                floatingActionButtonContainer, mFloatingActionButton);
+                floatingActionButtonContainer, floatingActionButton);
 
         ImageButton optionsMenuButton =
                 (ImageButton) searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
@@ -435,14 +423,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mSlideOut.setAnimationListener(mSlideOutListener);
 
         parentLayout = (FrameLayout) findViewById(R.id.dialtacts_mainlayout);
-        parentLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         parentLayout.setOnDragListener(new LayoutOnDragListener());
         floatingActionButtonContainer.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
-                        final ViewTreeObserver observer = floatingActionButtonContainer
-                                .getViewTreeObserver();
+                        final ViewTreeObserver observer =
+                                floatingActionButtonContainer.getViewTreeObserver();
                         if (!observer.isAlive()) {
                             return;
                         }
@@ -543,9 +530,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 if (!mIsDialpadShown) {
                     mInCallDialpadUp = false;
                     showDialpadFragment(true);
-                } else {
-                    // Dial button was pressed; tell the Dialpad fragment
-                    mDialpadFragment.dialButtonPressed();
                 }
                 break;
             case R.id.voice_search_button:
@@ -637,6 +621,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ft.show(mDialpadFragment);
         ft.commit();
 
+        mFloatingActionButtonController.scaleOut();
         mActionBarController.onDialpadUp();
 
         if (!isInSearchUi()) {
@@ -648,9 +633,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Callback from child DialpadFragment when the dialpad is shown.
      */
     public void onDialpadShown() {
-        mFloatingActionButton.setImageResource(R.drawable.fab_ic_call);
-        mFloatingActionButton.setContentDescription(mDescriptionDialButtonStr);
-        updateFloatingActionButtonControllerAlignment(mDialpadFragment.getAnimate());
         if (mDialpadFragment.getAnimate()) {
             mDialpadFragment.getView().startAnimation(mSlideIn);
         } else {
@@ -679,8 +661,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mDialpadFragment.setAnimate(animate);
 
         updateSearchFragmentPosition();
-        mFloatingActionButton.setImageResource(R.drawable.fab_ic_dial);
-        mFloatingActionButton.setContentDescription(mActionMenuDialpadButtonStr);
 
         updateFloatingActionButtonControllerAlignment(animate);
         if (animate) {
@@ -705,6 +685,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.hide(mDialpadFragment);
         ft.commit();
+
+        mFloatingActionButtonController.scaleIn(AnimUtils.NO_DELAY);
     }
 
     private void updateSearchFragmentPosition() {
@@ -1008,11 +990,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // interactions with the ListsFragments.
     }
 
-    @Override
-    public void setFloatingActionButtonVisible(boolean visible) {
-        mFloatingActionButtonController.setVisible(visible);
-    }
-
     private boolean phoneIsInUse() {
         return getTelecommManager().isInCall();
     }
@@ -1180,19 +1157,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * @param animate Whether or not to animate the transition.
      */
     private void updateFloatingActionButtonControllerAlignment(boolean animate) {
-        int align;
-        if (mIsDialpadShown) {
-            align = mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
-                    : FloatingActionButtonController.ALIGN_MIDDLE;
-        } else {
-            if (!mIsLandscape) {
-                align = mCurrentTabPosition == ListsFragment.TAB_INDEX_SPEED_DIAL
-                        ? FloatingActionButtonController.ALIGN_MIDDLE
-                            : FloatingActionButtonController.ALIGN_END;
-            } else {
-                align = FloatingActionButtonController.ALIGN_END;
-            }
-        }
+        int align = (!mIsLandscape && mCurrentTabPosition == ListsFragment.TAB_INDEX_SPEED_DIAL) ?
+                FloatingActionButtonController.ALIGN_MIDDLE :
+                        FloatingActionButtonController.ALIGN_END;
         mFloatingActionButtonController.align(align, 0 /* offsetX */, 0 /* offsetY */, animate);
     }
 }
