@@ -36,6 +36,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.android.contacts.common.R;
+import com.android.contacts.common.editor.SelectAccountDialogFragment;
 
 import java.util.List;
 
@@ -46,11 +47,23 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     private List<PhoneAccountHandle> mAccountHandles;
     private boolean mIsSelected;
     private TelecommManager mTelecommManager;
+    private final String mUriScheme;
 
-    /* Preferred way to show this dialog */
-    public static void show(FragmentManager fragmentManager) {
-        SelectPhoneAccountDialogFragment fragment = new SelectPhoneAccountDialogFragment();
+    /**
+     * Shows the account selection dialog.
+     * This is the preferred way to show this dialog.
+     *
+     * @param fragmentManager The fragment manager.
+     * @param uriScheme The URI scheme of the call we need to choose an account for.
+     */
+    public static void showAccountDialog(FragmentManager fragmentManager, String uriScheme) {
+        SelectPhoneAccountDialogFragment fragment = new SelectPhoneAccountDialogFragment(uriScheme);
         fragment.show(fragmentManager, "selectAccount");
+    }
+
+    public SelectPhoneAccountDialogFragment(String uriScheme) {
+        super();
+        mUriScheme = uriScheme;
     }
 
     @Override
@@ -58,7 +71,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
         mIsSelected = false;
         mTelecommManager =
                 (TelecommManager) getActivity().getSystemService(Context.TELECOMM_SERVICE);
-        mAccountHandles = mTelecommManager.getEnabledPhoneAccounts();
+        mAccountHandles = mTelecommManager.getPhoneAccountsSupportingScheme(mUriScheme);
 
         final DialogInterface.OnClickListener selectionListener =
                 new DialogInterface.OnClickListener() {
