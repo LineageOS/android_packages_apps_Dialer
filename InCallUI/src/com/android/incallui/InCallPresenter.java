@@ -112,16 +112,6 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         }
 
         @Override
-        public void onStartActivity(android.telecomm.Call call, PendingIntent intent) {
-            Log.i(this, "onStartActivity, intent: " + intent);
-            try {
-                intent.send();
-            } catch (PendingIntent.CanceledException e) {
-                Log.e(this, "onStartActivity, exception", e);
-            }
-        }
-
-        @Override
         public void onConferenceableCallsChanged(
                 android.telecomm.Call call, List<android.telecomm.Call> conferenceableCalls) {
             Log.i(this, "onConferenceableCallsChanged: " + call);
