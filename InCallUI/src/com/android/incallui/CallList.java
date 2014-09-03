@@ -282,6 +282,14 @@ public class CallList implements InCallPhoneListener {
         return result;
     }
 
+    public boolean hasLiveCall() {
+        Call call = getFirstCall();
+        if (call == null) {
+            return false;
+        }
+        return call != getDisconnectingCall() && call != getDisconnectedCall();
+    }
+
     /**
      * Returns the first call found in the call map with the specified call modification state.
      * @param state The session modification state to search for.
