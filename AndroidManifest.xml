@@ -67,7 +67,7 @@
              stateAlwaysHidden is set to suppress keyboard show up on
              dialpad screen. -->
         <activity android:name=".DialtactsActivity"
-            android:label="@string/launcherDialer"
+            android:label="@string/launcherActivityLabel"
             android:theme="@style/DialtactsActivityTheme"
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
