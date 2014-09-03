@@ -165,7 +165,7 @@ public class CallButtonFragment
                 break;
             }
             case R.id.swapButton:
-                getPresenter().swapClicked();
+                getPresenter().holdClicked(true /* checked */);
                 break;
             case R.id.dialpadButton:
                 getPresenter().showDialpadClicked(!mShowDialpadButton.isSelected());
