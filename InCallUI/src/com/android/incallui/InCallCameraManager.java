@@ -103,8 +103,22 @@ public class InCallCameraManager {
      * @param context The context.
      */
     private void initializeCameraList(Context context) {
-        CameraManager cameraManager = (CameraManager) context.getSystemService(
-                Context.CAMERA_SERVICE);
+        if (context == null) {
+            return;
+        }
+
+        CameraManager cameraManager = null;
+        try {
+            cameraManager = (CameraManager) context.getSystemService(
+                    Context.CAMERA_SERVICE);
+        } catch (Exception e) {
+            Log.e(this, "Could not get camera service.");
+            return;
+        }
+
+        if (cameraManager == null) {
+            return;
+        }
 
         String[] cameraIds = {};
         try {

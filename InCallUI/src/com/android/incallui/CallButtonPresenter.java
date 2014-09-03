@@ -41,7 +41,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private boolean mAutomaticallyMuted = false;
     private boolean mPreviousMuteState = false;
     private boolean mShowManageConference = false;
-    private InCallCameraManager mInCallCameraManager;
 
     public CallButtonPresenter() {
     }
@@ -55,7 +54,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // register for call state changes last
         InCallPresenter.getInstance().addListener(this);
         InCallPresenter.getInstance().addIncomingCallListener(this);
-        mInCallCameraManager = InCallPresenter.getInstance().getInCallCameraManager();
     }
 
     @Override
@@ -65,7 +63,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         InCallPresenter.getInstance().removeListener(this);
         AudioModeProvider.getInstance().removeListener(this);
         InCallPresenter.getInstance().removeIncomingCallListener(this);
-        mInCallCameraManager = null;
     }
 
     @Override
@@ -236,14 +233,15 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
      *     false if we should switch to using the back-facing camera.
      */
     public void switchCameraClicked(boolean useFrontFacingCamera) {
-        mInCallCameraManager.setUseFrontFacingCamera(useFrontFacingCamera);
+        InCallCameraManager cameraManager = InCallPresenter.getInstance().getInCallCameraManager();
+        cameraManager.setUseFrontFacingCamera(useFrontFacingCamera);
 
         VideoCall videoCall = mCall.getVideoCall();
         if (videoCall == null) {
             return;
         }
 
-        String cameraId = mInCallCameraManager.getActiveCameraId();
+        String cameraId = cameraManager.getActiveCameraId();
         if (cameraId != null) {
             videoCall.setCamera(cameraId);
             videoCall.requestCameraCapabilities();
@@ -268,7 +266,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                     mCall.getVideoState() | VideoProfile.VideoState.PAUSED);
             videoCall.sendSessionModifyRequest(videoProfile);
         } else {
-            videoCall.setCamera(mInCallCameraManager.getActiveCameraId());
+            InCallCameraManager cameraManager = InCallPresenter.getInstance().
+                    getInCallCameraManager();
+            videoCall.setCamera(cameraManager.getActiveCameraId());
             VideoProfile videoProfile = new VideoProfile(
                     mCall.getVideoState() & ~VideoProfile.VideoState.PAUSED);
             videoCall.sendSessionModifyRequest(videoProfile);
