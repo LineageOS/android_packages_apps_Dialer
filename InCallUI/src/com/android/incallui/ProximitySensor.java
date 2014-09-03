@@ -81,9 +81,10 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
     @Override
     public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
         // We ignore incoming state because we do not want to enable proximity
-        // sensor during incoming call screen
-        boolean isOffhook = (InCallState.INCALL == newState
-                || InCallState.OUTGOING == newState);
+        // sensor during incoming call screen. We check hasLiveCall() because a disconnected call
+        // can also put the in-call screen in the INCALL state.
+        boolean hasOngoingCall = InCallState.INCALL == newState && callList.hasLiveCall();
+        boolean isOffhook = (InCallState.OUTGOING == newState) || hasOngoingCall;
 
         if (isOffhook != mIsPhoneOffhook) {
             mIsPhoneOffhook = isOffhook;
