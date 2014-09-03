@@ -839,7 +839,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         if (enabled != mFloatingActionButton.isEnabled()) {
             if (animate) {
                 if (enabled) {
-                    mFloatingActionButtonController.scaleIn();
+                    mFloatingActionButtonController.scaleIn(AnimUtils.NO_DELAY);
                 } else {
                     mFloatingActionButtonController.scaleOut();
                 }
@@ -1059,7 +1059,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         setViewStatePostAnimation(mCallStateIcon);
 
         mPrimaryCallCardContainer.removeOnLayoutChangeListener(layoutChangeListener);
-        mFloatingActionButtonController.scaleIn();
+        mFloatingActionButtonController.scaleIn(AnimUtils.NO_DELAY);
     }
 
     private final class LayoutIgnoringListener implements View.OnLayoutChangeListener {
