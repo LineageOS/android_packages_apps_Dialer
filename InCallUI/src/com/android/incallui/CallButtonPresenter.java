@@ -22,8 +22,7 @@ import android.telecomm.InCallService.VideoCall;
 import android.telecomm.PhoneCapabilities;
 import android.telecomm.VideoProfile;
 
-import com.android.contacts.common.util.PhoneNumberHelper;
-import com.android.contacts.common.util.TelephonyManagerUtils;
+
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
@@ -40,7 +39,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private Call mCall;
     private boolean mAutomaticallyMuted = false;
     private boolean mPreviousMuteState = false;
-    private boolean mShowManageConference = false;
 
     public CallButtonPresenter() {
     }
@@ -205,10 +203,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         videoCall.sendSessionModifyRequest(videoProfile);
     }
 
-    public void swapClicked() {
-        TelecommAdapter.getInstance().swap(mCall.getId());
-    }
-
     public void showDialpadClicked(boolean checked) {
         Log.v(this, "Show dialpad " + String.valueOf(checked));
         getUi().displayDialpad(checked /* show */, true /* animate */);
@@ -341,10 +335,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         Log.v(this, "Show add call ", call.can(PhoneCapabilities.ADD_CALL));
         Log.v(this, "Show mute ", call.can(PhoneCapabilities.MUTE));
 
-        final boolean canMerge = call.can(PhoneCapabilities.MERGE_CALLS);
         final boolean canAdd = call.can(PhoneCapabilities.ADD_CALL);
-        final boolean canHold = call.can(PhoneCapabilities.HOLD);
-        final boolean canSwap = call.can(PhoneCapabilities.SWAP_CALLS);
+        final boolean enableHoldOption = call.can(PhoneCapabilities.HOLD);
         final boolean supportHold = call.can(PhoneCapabilities.SUPPORT_HOLD);
         final boolean isGenericConference = call.can(PhoneCapabilities.GENERIC_CONFERENCE);
 
@@ -353,16 +345,16 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.showChangeToVideoButton(canVideoCall);
 
         // Show either MERGE or ADD. Only show both if, for CDMA, we're in a generic conference.
-        final boolean showMergeOption = canMerge;
-        final boolean showAddCallOption = canAdd && (isGenericConference || !canMerge);
+        final boolean showMergeOption = call.can(PhoneCapabilities.MERGE_CALLS);
+        final boolean showAddCallOption = canAdd && (isGenericConference || !showMergeOption);
         final boolean enableAddCallOption = showAddCallOption && canAdd;
-        // Show either HOLD or SWAP, but not both.
-        // If neither HOLD or SWAP is available:
-        //     (1) If the device normally can hold/swap, show HOLD in a disabled state.
+        // Show either HOLD or SWAP, but not both. If neither HOLD or SWAP is available:
+        //     (1) If the device normally can hold, show HOLD in a disabled state.
         //     (2) If the device doesn't have the concept of hold/swap, remove the button.
-        final boolean showHoldOption = canHold || (!canSwap && supportHold);
-        final boolean enableHoldOption = canHold;
-        final boolean showSwapOption = !canHold && canSwap;
+        final CallList callList = CallList.getInstance();
+        final boolean showSwapOption = enableHoldOption && (callList.getActiveCall() != null)
+                && (callList.getBackgroundCall() != null);
+        final boolean showHoldOption = !showSwapOption && (enableHoldOption || supportHold);
 
         ui.setHold(call.getState() == Call.State.ONHOLD);
         // If we show video upgrade and add/merge and hold/swap, the overflow menu is needed.
