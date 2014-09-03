@@ -5,6 +5,8 @@ import com.android.providers.contacts.HanziToPinyin;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ChineseSmartDialMap implements SmartDialMap {
 
@@ -439,28 +441,63 @@ public class ChineseSmartDialMap implements SmartDialMap {
     }
 
     /*
-     * Since the dialpad is matching off the generated pinyin, the
-     * Chinese characters can't be highlighted. Just return true if
-     * there is a match without highlighting a character position.
+     * Uses the default matching logic on the pinyin name and attempts to map the match positions
+     * back to the original display name
      */
     @Override
     public boolean matchesCombination(SmartDialNameMatcher smartDialNameMatcher,
             String displayName, String query, ArrayList<SmartDialMatchPosition> matchList) {
+
         String pinyinName = tokenizeToPinyins(displayName);
-        if (displayName.equals(pinyinName)) {
-            return smartDialNameMatcher.matchesCombination(displayName, query, matchList);
-        }
-        final int nameLength = pinyinName.length();
-        final int queryLength = query.length();
 
-        if (nameLength < queryLength) {
+        ArrayList<SmartDialMatchPosition> computedMatchList = new ArrayList<SmartDialMatchPosition>();
+        boolean matches = smartDialNameMatcher.matchesCombination(pinyinName, query, computedMatchList);
+        if (!matches)
             return false;
+
+        // name was translated to pinyin before matching.  attempt to map the match positions
+        // back to the original display string
+        if (!displayName.equals(pinyinName)) {
+
+            // construct an array that maps each character of the pinyin name back to the index of
+            // the hanzi token from which it came
+            // For example, if:
+            //  displayName = 红霞李
+            //  pinyinName =  "hong xia li"
+            // then:
+            //  pinyinMapping = 0,0,0,0,-1,1,1,1,-1,2,2
+            int[] pinyinMapping = new int[pinyinName.length()];
+            int curToken = 0;
+            for (int i=0; i < pinyinName.length(); ++i) {
+                char c = pinyinName.charAt(i);
+                if (c == ' ') {
+                    ++curToken;
+                    pinyinMapping[i] = -1;
+                }
+                else {
+                    pinyinMapping[i] = curToken;
+                }
+            }
+
+            // calculate unique hanzi characters that are matched
+            Set<Integer> positionsToHighlight = new HashSet<Integer>();
+            for (SmartDialMatchPosition matchPosition : computedMatchList) {
+                for (int pos = matchPosition.start; pos < matchPosition.end; ++pos) {
+                    int mappedPos = pinyinMapping[pos];
+                    if (mappedPos >= 0)
+                        positionsToHighlight.add(mappedPos);
+                }
+            }
+
+            // reset computed matches
+            computedMatchList = new ArrayList<SmartDialMatchPosition>();
+            for (int matchPos : positionsToHighlight) {
+                // use one object per position for simplicity
+                computedMatchList.add(new SmartDialMatchPosition(matchPos, matchPos+1));
+            }
         }
 
-        if (queryLength == 0) {
-            return false;
-        }
-
+        matchList.addAll(computedMatchList);
         return true;
     }
 

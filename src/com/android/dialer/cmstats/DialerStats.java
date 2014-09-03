@@ -36,6 +36,12 @@ public class DialerStats {
         public static final String EVENT_VALUE = "value";
     }
 
+    public static final class Categories {
+        public static final String APP_LAUNCH = "app_launch";
+        public static final String BUTTON_EVENT = "button_event";
+        public static final String INITIATE_CALL = "initiate_call";
+    }
+
     public static void sendEvent(Context context, String category, String action,
                                  String label, String value) {
 

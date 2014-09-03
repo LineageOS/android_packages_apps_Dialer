@@ -62,10 +62,12 @@ import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
+import com.android.dialer.util.CallRecordingPlayer;
 import com.android.dialer.voicemail.VoicemailPlaybackFragment;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
+import com.android.services.callrecorder.CallRecordingDataStore;
 
 import java.util.List;
 
@@ -128,9 +130,14 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     private boolean mHasTrashOption;
     /** Whether we should show "remove from call log" in the options menu. */
     private boolean mHasRemoveFromCallLogOption;
+    /** Whether we should show "add to blacklist" in the options menu. */
+    private boolean mHasAddToBlacklistOption;
 
     private ProximitySensorManager mProximitySensorManager;
     private final ProximitySensorListener mProximitySensorListener = new ProximitySensorListener();
+
+    private CallRecordingDataStore mCallRecordingDataStore = new CallRecordingDataStore();
+    private CallRecordingPlayer mCallRecordingPlayer = new CallRecordingPlayer();
 
     /** Listener to changes in the proximity sensor state. */
     private class ProximitySensorListener implements ProximitySensorManager.Listener {
@@ -230,6 +237,13 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
             closeSystemDialogs();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mCallRecordingDataStore.close();
+        mCallRecordingPlayer.stop();
     }
 
     @Override
@@ -370,6 +384,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                 mHasEditNumberBeforeCallOption = mCallDetailHeader.canEditNumberBeforeCall();
                 mHasTrashOption = hasVoicemail();
                 mHasRemoveFromCallLogOption = !hasVoicemail();
+                mHasAddToBlacklistOption = mCallDetailHeader.canPlaceCallsTo();
                 invalidateOptionsMenu();
 
                 ListView historyList = (ListView) findViewById(R.id.history);
@@ -377,7 +392,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                         new CallDetailHistoryAdapter(CallDetailActivity.this, mInflater,
                                 mCallTypeHelper, details, hasVoicemail(),
                                 mCallDetailHeader.canPlaceCallsTo(),
-                                findViewById(R.id.controls)));
+                                findViewById(R.id.controls),
+                                mCallRecordingDataStore, mCallRecordingPlayer));
                 BackScrollManager.bind(
                         new ScrollableHeader() {
                             private View mControls = findViewById(R.id.controls);
@@ -555,6 +571,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         // We don't have this action for voicemails, because you can just use the trash button.
         menu.findItem(R.id.menu_remove_from_call_log).setVisible(mHasRemoveFromCallLogOption);
         menu.findItem(R.id.menu_edit_number_before_call).setVisible(mHasEditNumberBeforeCallOption);
+        menu.findItem(R.id.menu_add_to_blacklist).setVisible(mHasAddToBlacklistOption);
         menu.findItem(R.id.menu_trash).setVisible(mHasTrashOption);
         return super.onPrepareOptionsMenu(menu);
     }

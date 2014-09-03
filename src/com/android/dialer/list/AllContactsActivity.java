@@ -30,6 +30,7 @@ import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
+import com.android.dialer.cmstats.DialerStats;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 
 public class AllContactsActivity extends TransactionSafeActivity {
@@ -42,6 +43,9 @@ public class AllContactsActivity extends TransactionSafeActivity {
             new OnPhoneNumberPickerActionListener() {
                 @Override
                 public void onPickPhoneNumberAction(Uri dataUri) {
+                    DialerStats.sendEvent(AllContactsActivity.this,
+                            DialerStats.Categories.INITIATE_CALL, "call_from_all_contacts");
+
                     // Specify call-origin so that users will see the previous tab instead of
                     // CallLog screen (search UI will be automatically exited).
                     PhoneNumberInteraction.startInteractionForPhoneCall(
