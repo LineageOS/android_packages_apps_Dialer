@@ -318,7 +318,7 @@ public class CallerInfoAsyncQuery {
     }
 
     /**
-     * Factory method to start the query based on a number.
+     * Factory method to start the query based on a CallerInfo object.
      *
      * Note: if the number contains an "@" character we treat it
      * as a SIP address, and look it up directly in the Data table
@@ -328,18 +328,18 @@ public class CallerInfoAsyncQuery {
      * PhoneUtils.startGetCallerInfo() decide which one to call based on
      * the phone type of the incoming connection.
      */
-    public static CallerInfoAsyncQuery startQuery(int token, Context context, String number,
+    public static CallerInfoAsyncQuery startQuery(int token, Context context, CallerInfo info,
             OnQueryCompleteListener listener, Object cookie) {
         Log.d(LOG_TAG, "##### CallerInfoAsyncQuery startQuery()... #####");
-        Log.d(LOG_TAG, "- number: " + number);
+        Log.d(LOG_TAG, "- number: " + info.phoneNumber);
         Log.d(LOG_TAG, "- cookie: " + cookie);
 
         // Construct the URI object and query params, and start the query.
 
         final Uri contactRef = PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI.buildUpon()
-                .appendPath(number)
+                .appendPath(info.phoneNumber)
                 .appendQueryParameter(PhoneLookup.QUERY_PARAMETER_SIP_ADDRESS,
-                        String.valueOf(PhoneNumberHelper.isUriNumber(number)))
+                        String.valueOf(PhoneNumberHelper.isUriNumber(info.phoneNumber)))
                 .build();
 
         if (DBG) {
@@ -353,12 +353,13 @@ public class CallerInfoAsyncQuery {
         CookieWrapper cw = new CookieWrapper();
         cw.listener = listener;
         cw.cookie = cookie;
-        cw.number = number;
+        cw.number = info.phoneNumber;
 
         // check to see if these are recognized numbers, and use shortcuts if we can.
-        if (PhoneNumberHelper.isLocalEmergencyNumber(number, context)) {
+        if (PhoneNumberHelper.isLocalEmergencyNumber(info.phoneNumber, context)) {
             cw.event = EVENT_EMERGENCY_NUMBER;
-        } else if (PhoneNumberUtils.isVoiceMailNumber(number)) {
+        } else if (info.isVoiceMailNumber()
+                || PhoneNumberUtils.isVoiceMailNumber(info.phoneNumber)) {
             cw.event = EVENT_VOICEMAIL_NUMBER;
         } else {
             cw.event = EVENT_NEW_QUERY;
