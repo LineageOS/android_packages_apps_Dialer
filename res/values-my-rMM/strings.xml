@@ -132,7 +132,7 @@
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> မိနစ် <xliff:g id="SECONDS">%s</xliff:g> စက္ကန့်"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"ဖုန်းခေါ်မှု မထွက်ပါ"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"အသံစာပို့စနစ်ကို ပြင်ဆင်ရန်၊ မီနူး ပြီးနောက် ဆက်တင် သို့သွားပါ"</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"အသံစာပို့စနစ်ကို ခေါ်ဆိုမှုပြုရန်, လေယာဉ်ပျံပေါ်အသုံးပြုသောစနစ်ကို ပိတ်ပါ"</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"အသံစာပို့စနစ်ကို ခေါ်ဆိုမှုပြုရန် လေယာဉ်ပျံပေါ်သုံးစနစ်ကို ပိတ်ပါ"</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"ဖွင့်နေစဉ်"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEIDနံပါတ်"</string>
