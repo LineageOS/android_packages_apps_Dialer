@@ -273,7 +273,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     (TelecommManager) mContext.getSystemService(Context.TELECOMM_SERVICE);
             PhoneAccount account = mgr.getPhoneAccount(accountHandle);
             if (account != null) {
-                return account.getSubscriptionNumber();
+                return getNumberFromHandle(account.getSubscriptionAddress());
             }
         }
         return null;
