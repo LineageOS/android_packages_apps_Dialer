@@ -654,26 +654,17 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         if (activeCall != null) {
             // TODO: This logic is repeated from CallButtonPresenter.java. We should
             // consolidate this logic.
-            final boolean isGeneric = activeCall.can(PhoneCapabilities.GENERIC_CONFERENCE);
-            final boolean canMerge = activeCall.can(PhoneCapabilities.MERGE_CALLS);
-            final boolean canSwap = activeCall.can(PhoneCapabilities.SWAP_CALLS);
+            final boolean canMerge = activeCall.can(PhoneCapabilities.MERGE_CONFERENCE);
+            final boolean canSwap = activeCall.can(PhoneCapabilities.SWAP_CONFERENCE);
 
-            Log.v(this, "activeCall: " + activeCall + ", isGeneric: " + isGeneric + ", canMerge: " +
-                    canMerge + ", canSwap: " + canSwap);
+            Log.v(this, "activeCall: " + activeCall + ", canMerge: " + canMerge +
+                    ", canSwap: " + canSwap);
 
-            // (2) Attempt actions on Generic conference calls
-            if (activeCall.isConferenceCall() && isGeneric) {
-                if (canMerge) {
-                    TelecommAdapter.getInstance().merge(activeCall.getId());
-                    return true;
-                } else if (canSwap) {
-                    TelecommAdapter.getInstance().swap(activeCall.getId());
-                    return true;
-                }
-            }
-
-            // (3) Swap calls
-            if (canSwap) {
+            // (2) Attempt actions on conference calls
+            if (canMerge) {
+                TelecommAdapter.getInstance().merge(activeCall.getId());
+                return true;
+            } else if (canSwap) {
                 TelecommAdapter.getInstance().swap(activeCall.getId());
                 return true;
             }
