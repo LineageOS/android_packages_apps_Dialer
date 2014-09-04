@@ -8,6 +8,7 @@ import android.telecomm.PropertyPresentation;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
 
@@ -37,14 +38,13 @@ public class CallerInfoUtils {
     public static CallerInfo getCallerInfoForCall(Context context, Call call,
             CallerInfoAsyncQuery.OnQueryCompleteListener listener) {
         CallerInfo info = buildCallerInfo(context, call);
-        String number = info.phoneNumber;
 
         // TODO: Have phoneapp send a Uri when it knows the contact that triggered this call.
 
         if (info.numberPresentation == PropertyPresentation.ALLOWED) {
             // Start the query with the number provided from the call.
             Log.d(TAG, "==> Actually starting CallerInfoAsyncQuery.startQuery()...");
-            CallerInfoAsyncQuery.startQuery(QUERY_TOKEN, context, number, listener, call);
+            CallerInfoAsyncQuery.startQuery(QUERY_TOKEN, context, info, listener, call);
         }
         return info;
     }
@@ -70,6 +70,14 @@ public class CallerInfoUtils {
             number = modifyForSpecialCnapCases(context, info, number, info.numberPresentation);
             info.phoneNumber = number;
         }
+
+        // Because the InCallUI is immediately launched before the call is connected, occasionally
+        // a voicemail call will be passed to InCallUI as a "voicemail:" URI without a number.
+        // This call should still be handled as a voicemail call.
+        if (CallUtil.SCHEME_VOICEMAIL.equals(call.getHandle().getScheme())) {
+            info.markAsVoiceMail(context);
+        }
+
         return info;
     }
 
