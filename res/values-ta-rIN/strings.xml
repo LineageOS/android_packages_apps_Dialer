@@ -18,8 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"டயலர்"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"மொபைல்"</string>
-    <string name="dialerIconLabel" msgid="6500826552823403796">"மொபைல்"</string>
+    <string name="launcherDialer" msgid="8636288196618486553">"ஃபோன்"</string>
+    <string name="dialerIconLabel" msgid="6500826552823403796">"ஃபோன்"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"அழைப்புப் பதிவு"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"உரைச் செய்தியை அனுப்பு"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ஐ அழை"</string>
@@ -136,8 +136,8 @@
     <string name="contact_list_loading" msgid="5488620820563977329">"ஏற்றுகிறது..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM கார்டிலிருந்து ஏற்றுகிறது…"</string>
-    <string name="simContacts_title" msgid="27341688347689769">"SIM கார்டின் தொடர்புகள்"</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"சிம் கார்டிலிருந்து ஏற்றுகிறது…"</string>
+    <string name="simContacts_title" msgid="27341688347689769">"சிம் கார்டின் தொடர்புகள்"</string>
     <string name="add_contact_not_available" msgid="1419207765446461366">"அம்சத்தைப் பயன்படுத்த நபர்கள் பயன்பாட்டை மீண்டும் இயக்கவும்."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"வீடியோ தேடல் இல்லை."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Phone பயன்பாடு முடக்கப்பட்டுள்ளதால், ஃபோன் அழைப்பைச் செய்ய முடியாது."</string>
