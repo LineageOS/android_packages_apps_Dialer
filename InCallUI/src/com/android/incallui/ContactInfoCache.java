@@ -420,7 +420,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     }
 
                     Log.d(TAG, "  ==>  no name; falling back to number:"
-                            + " displayNumber '" + displayNumber
+                            + " displayNumber '" + Log.pii(displayNumber)
                             + "', displayLocation '" + displayLocation + "'");
                 }
             } else {
