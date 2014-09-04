@@ -198,24 +198,11 @@
         <activity android:name="com.android.contacts.common.vcard.ImportVCardActivity"
                   android:configChanges="orientation|screenSize|keyboardHidden"
                   android:theme="@style/BackgroundOnlyTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <data android:mimeType="text/directory"/>
-                <data android:mimeType="text/vcard"/>
-                <data android:mimeType="text/x-vcard"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
         </activity>
 
         <activity android:name="com.android.contacts.common.vcard.NfcImportVCardActivity"
                   android:configChanges="orientation|screenSize|keyboardHidden"
                   android:theme="@style/BackgroundOnlyTheme">
-            <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-                <data android:mimeType="text/vcard"/>
-                <data android:mimeType="text/x-vcard"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
         </activity>
 
         <activity android:name="com.android.contacts.common.vcard.CancelActivity"
