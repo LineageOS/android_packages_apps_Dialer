@@ -294,9 +294,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     /**
-     * Only show the conference call button if we are not in a generic conference.
-     * On CDMA devices, instead of a manage conference call button, we show "add" and "merge"
-     * buttons in the {@link CallButtonFragment}.
+     * Only show the conference call button if we can manage the conference.
      */
     private void maybeShowManageConferenceCallButton() {
         if (mPrimary == null) {
@@ -304,8 +302,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return;
         }
 
-        final boolean isGenericConference = mPrimary.can(PhoneCapabilities.GENERIC_CONFERENCE);
-        getUi().showManageConferenceCallButton(mPrimary.isConferenceCall() && !isGenericConference);
+        final boolean canManageConference = mPrimary.can(PhoneCapabilities.MANAGE_CONFERENCE);
+        getUi().showManageConferenceCallButton(mPrimary.isConferenceCall() && canManageConference);
     }
 
     private void setCallbackNumber() {
@@ -401,8 +399,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         return call != null && call.isConferenceCall();
     }
 
-    private static boolean isGenericConference(Call call) {
-        return call != null && call.can(PhoneCapabilities.GENERIC_CONFERENCE);
+    private static boolean canManageConference(Call call) {
+        return call != null && call.can(PhoneCapabilities.MANAGE_CONFERENCE);
     }
 
     private void updateContactEntry(ContactCacheEntry entry, boolean isPrimary,
@@ -468,15 +466,15 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return;
         }
 
-        final boolean isGenericConf = isGenericConference(mPrimary);
+        final boolean canManageConference = canManageConference(mPrimary);
         if (entry != null && mPrimary != null) {
             final String name = getNameForCall(entry);
             final String number = getNumberForCall(entry);
             final boolean nameIsNumber = name != null && name.equals(entry.number);
             ui.setPrimary(number, name, nameIsNumber, entry.label,
-                    entry.photo, isConference, isGenericConf, entry.isSipCall);
+                    entry.photo, isConference, canManageConference, entry.isSipCall);
         } else {
-            ui.setPrimary(null, null, false, null, null, isConference, isGenericConf, false);
+            ui.setPrimary(null, null, false, null, null, isConference, canManageConference, false);
         }
 
     }
@@ -487,7 +485,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return;
         }
 
-        final boolean isGenericConf = isGenericConference(mSecondary);
+        final boolean canManageConference = canManageConference(mSecondary);
         if (mSecondaryContactInfo != null && mSecondary != null) {
             Log.d(TAG, "updateSecondaryDisplayInfo() " + mSecondaryContactInfo);
             final String nameForCall = getNameForCall(mSecondaryContactInfo);
@@ -496,10 +494,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     mSecondaryContactInfo.number);
             ui.setSecondary(true /* show */, nameForCall, nameIsNumber, mSecondaryContactInfo.label,
                     getCallProviderLabel(mSecondary), getCallProviderIcon(mSecondary),
-                    isConference, isGenericConf);
+                    isConference, canManageConference);
         } else {
             // reset to nothing so that it starts off blank next time we use it.
-            ui.setSecondary(false, null, false, null, null, null, isConference, isGenericConf);
+            ui.setSecondary(false, null, false, null, null, null, isConference, canManageConference);
         }
     }
 
@@ -659,10 +657,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setVisible(boolean on);
         void setCallCardVisible(boolean visible);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
-                Drawable photo, boolean isConference, boolean isGeneric, boolean isSipCall);
+                Drawable photo, boolean isConference, boolean canManageConference,
+                boolean isSipCall);
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
                 String providerLabel, Drawable providerIcon, boolean isConference,
-                boolean isGeneric);
+                boolean canManageConference);
         void setCallState(int state, int videoState, int sessionModificationState, int cause,
                 String connectionLabel, Drawable connectionIcon, String gatewayNumber);
         void setPrimaryCallElapsedTime(boolean show, String duration);

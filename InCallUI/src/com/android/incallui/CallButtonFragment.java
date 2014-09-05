@@ -165,7 +165,7 @@ public class CallButtonFragment
                 break;
             }
             case R.id.swapButton:
-                getPresenter().holdClicked(true /* checked */);
+                getPresenter().swapClicked();
                 break;
             case R.id.dialpadButton:
                 getPresenter().showDialpadClicked(!mShowDialpadButton.isSelected());
@@ -285,11 +285,6 @@ public class CallButtonFragment
     public void showAddCallButton(boolean show) {
         Log.d(this, "show Add call button: " + show);
         mAddCallButton.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void enableAddCall(boolean enabled) {
-        mAddCallButton.setEnabled(enabled);
     }
 
     @Override

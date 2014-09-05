@@ -74,7 +74,8 @@ public class CallerInfoUtils {
         // Because the InCallUI is immediately launched before the call is connected, occasionally
         // a voicemail call will be passed to InCallUI as a "voicemail:" URI without a number.
         // This call should still be handled as a voicemail call.
-        if (CallUtil.SCHEME_VOICEMAIL.equals(call.getHandle().getScheme())) {
+        if (call.getHandle() != null &&
+                CallUtil.SCHEME_VOICEMAIL.equals(call.getHandle().getScheme())) {
             info.markAsVoiceMail(context);
         }
 

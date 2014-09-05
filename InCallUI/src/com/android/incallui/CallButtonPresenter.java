@@ -178,6 +178,15 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
     }
 
+    public void swapClicked() {
+        if (mCall == null) {
+            return;
+        }
+
+        Log.i(this, "Swapping the call: " + mCall);
+        TelecommAdapter.getInstance().swap(mCall.getId());
+    }
+
     public void mergeClicked() {
         TelecommAdapter.getInstance().merge(mCall.getId());
     }
@@ -330,30 +339,26 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
         Log.v(this, "Show hold ", call.can(PhoneCapabilities.SUPPORT_HOLD));
         Log.v(this, "Enable hold", call.can(PhoneCapabilities.HOLD));
-        Log.v(this, "Show merge ", call.can(PhoneCapabilities.MERGE_CALLS));
-        Log.v(this, "Show swap ", call.can(PhoneCapabilities.SWAP_CALLS));
+        Log.v(this, "Show merge ", call.can(PhoneCapabilities.MERGE_CONFERENCE));
+        Log.v(this, "Show swap ", call.can(PhoneCapabilities.SWAP_CONFERENCE));
         Log.v(this, "Show add call ", call.can(PhoneCapabilities.ADD_CALL));
         Log.v(this, "Show mute ", call.can(PhoneCapabilities.MUTE));
 
         final boolean canAdd = call.can(PhoneCapabilities.ADD_CALL);
         final boolean enableHoldOption = call.can(PhoneCapabilities.HOLD);
         final boolean supportHold = call.can(PhoneCapabilities.SUPPORT_HOLD);
-        final boolean isGenericConference = call.can(PhoneCapabilities.GENERIC_CONFERENCE);
 
         boolean canVideoCall = call.can(PhoneCapabilities.SUPPORTS_VT_LOCAL)
                 && call.can(PhoneCapabilities.SUPPORTS_VT_REMOTE);
         ui.showChangeToVideoButton(canVideoCall);
 
-        // Show either MERGE or ADD. Only show both if, for CDMA, we're in a generic conference.
-        final boolean showMergeOption = call.can(PhoneCapabilities.MERGE_CALLS);
-        final boolean showAddCallOption = canAdd && (isGenericConference || !showMergeOption);
-        final boolean enableAddCallOption = showAddCallOption && canAdd;
+        final boolean showMergeOption = call.can(PhoneCapabilities.MERGE_CONFERENCE);
+        final boolean showAddCallOption = canAdd;
+
         // Show either HOLD or SWAP, but not both. If neither HOLD or SWAP is available:
         //     (1) If the device normally can hold, show HOLD in a disabled state.
         //     (2) If the device doesn't have the concept of hold/swap, remove the button.
-        final CallList callList = CallList.getInstance();
-        final boolean showSwapOption = enableHoldOption && (callList.getActiveCall() != null)
-                && (callList.getBackgroundCall() != null);
+        final boolean showSwapOption = call.can(PhoneCapabilities.SWAP_CONFERENCE);
         final boolean showHoldOption = !showSwapOption && (enableHoldOption || supportHold);
 
         ui.setHold(call.getState() == Call.State.ONHOLD);
@@ -373,7 +378,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             ui.showOverflowButton(true);
             ui.configureOverflowMenu(
                     showMergeOption,
-                    showAddCallOption && enableAddCallOption /* showAddMenuOption */,
+                    showAddCallOption /* showAddMenuOption */,
                     showHoldOption && enableHoldOption /* showHoldMenuOption */,
                     showSwapOption);
         } else {
@@ -383,13 +388,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
                 ui.configureOverflowMenu(
                         showMergeOption,
-                        showAddCallOption && enableAddCallOption /* showAddMenuOption */,
+                        showAddCallOption /* showAddMenuOption */,
                         false /* showHoldMenuOption */,
                         false /* showSwapMenuOption */);
             } else {
                 ui.showMergeButton(showMergeOption);
                 ui.showAddCallButton(showAddCallOption);
-                ui.enableAddCall(enableAddCallOption);
             }
 
             ui.showHoldButton(showHoldOption);
@@ -425,7 +429,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void showSwitchCameraButton(boolean show);
         void setSwitchCameraButton(boolean isBackFacingCamera);
         void showAddCallButton(boolean show);
-        void enableAddCall(boolean enabled);
         void showMergeButton(boolean show);
         void showPauseVideoButton(boolean show);
         void setPauseVideoButton(boolean isPaused);
