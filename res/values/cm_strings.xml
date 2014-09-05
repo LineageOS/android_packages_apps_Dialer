@@ -60,4 +60,15 @@
 
     <string name="menu_add_to_blacklist">Add to blacklist</string>
     <string name="toast_added_to_blacklist">%s added to blacklist.</string>
+
+    <!--  for speed dial -->
+    <string name="speed_dial_settings">Speed dial settings</string>
+    <string name="speed_dial_not_set">(not set)</string>
+    <string name="speed_dial_replace">Replace</string>
+    <string name="speed_dial_delete">Delete</string>
+    <string name="speed_dial_unassigned_dialog_title">Key unassigned</string>
+    <string name="speed_dial_unassigned_dialog_message">No speed dial action is assigned to number key \'<xliff:g id="number">%s</xliff:g>\'. Do you want to assign an action now?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">To use speed dial, first turn off Airplane mode.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
