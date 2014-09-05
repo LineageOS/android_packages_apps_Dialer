@@ -49,4 +49,9 @@
         android:showAsAction="withText"
         android:orderInCategory="1" />
 <!-- add for CSVT -->
+    <item
+        android:id="@+id/speed_dial"
+        android:title="@string/speed_dial_settings"
+        android:showAsAction="withText"
+        android:orderInCategory="1" />
 </menu>

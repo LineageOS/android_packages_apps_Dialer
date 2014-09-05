@@ -133,4 +133,6 @@
 
     <!-- Size of the pie chart in the call stats detail activity -->
     <dimen name="call_stats_details_chart_size">140dip</dimen>
+
+    <dimen name="speed_dial_list_contact_photo_size">40dp</dimen>
 </resources>

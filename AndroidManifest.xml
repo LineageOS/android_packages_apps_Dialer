@@ -292,8 +292,8 @@
         </receiver>
 
         <activity android:name=".SpeedDialListActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden|uiMode"
-            android:label="@string/set_speed_dial" >
+            android:theme="@style/DialtactsTheme"
+            android:label="@string/speed_dial_settings" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
