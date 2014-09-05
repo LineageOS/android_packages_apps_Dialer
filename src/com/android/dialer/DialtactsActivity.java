@@ -1153,7 +1153,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         String name = Settings.System.getString(context.getContentResolver(),
                 MULTI_SIM_NAME[subscription]);
         if (TextUtils.isEmpty(name)) {
-            return context.getString(R.string.slot_name) + " " + (subscription + 1);
+            return context.getString(R.string.multi_sim_slot_name, subscription + 1);
         }
         return name;
     }

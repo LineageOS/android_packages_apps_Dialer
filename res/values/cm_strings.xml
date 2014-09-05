@@ -61,4 +61,30 @@
     <string name="stop_call_playback">Stop</string>
     <string name="call_playback_error_message">Failed to play recording</string>
 
+    <string name="calllog_search_hint">Search call log</string>
+
+    <!--add for csvt, Menu item label for call settings [CHAR LIMIT=30] -->
+    <string name="video_call">Video call</string>
+    <string name="video_call_settings">Video call settings</string>
+
+    <!-- add for csvt, String describing the text for a  Video call number in quick contact.
+        Note: AccessibilityServices use this attribute to announce what the view represents.
+        This is especially valuable for views without textual representation like ImageView. -->
+    <string name="description_videocall">Video call <xliff:g id="name">%1$s</xliff:g></string>
+
+    <!--  for speed dial -->
+    <string name="set_speed_dial">Speed dial settings</string>
+    <string name="speed_dial_not_set">(not set)</string>
+    <string name="speed_dial_replace">Replace</string>
+    <string name="speed_dial_delete">Delete</string>
+    <string name="speed_call">Call</string>
+    <string name="speed_sms">Message</string>
+    <string name="speed_item" translatable="false">&lt;b&gt;<xliff:g id="index">%s</xliff:g>&lt;/b&gt; <xliff:g id="content">%s</xliff:g></string>
+    <string name="speed_dial_unassigned_dialog_title">Key unassigned</string>
+    <string name="speed_dial_unassigned_dialog_message">No speed dial action is assigned to number key \'<xliff:g id="number">%s</xliff:g>\'. Do you want to assign an action now?</string>
+    <string name="dialog_speed_dial_airplane_mode_message" >"To use speed dial, first turn off Airplane mode."</string>
+    <string name="speed_dial_assign_failure_toast">The number \'<xliff:g id="number">%s</xliff:g>\' is already assigned to different speed dial key</string>
+    <string name="msim_ime_dialog_title">Device identifier</string>
+    <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+    <string name="call_log_show_all_slots">All SIMs</string>
 </resources>

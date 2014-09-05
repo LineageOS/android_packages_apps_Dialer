@@ -316,7 +316,6 @@ public class SpecialCharSequenceMgr {
 
     static boolean handleMSimIMEIDisplay(Context context) {
         StringBuffer deviceIds = new StringBuffer();
-        int titleId = R.string.device_id;
         for (int i = 0; i < MSimTelephonyManager.getDefault().getPhoneCount(); i++) {
             if (i != 0) {
                 deviceIds.append("\n");
@@ -333,7 +332,7 @@ public class SpecialCharSequenceMgr {
             deviceIds.append(MSimTelephonyManager.getDefault().getDeviceId(i));
         }
         AlertDialog alert = new AlertDialog.Builder(context)
-                .setTitle(titleId)
+                .setTitle(R.string.msim_ime_dialog_title)
                 .setMessage(deviceIds.toString())
                 .setPositiveButton(android.R.string.ok, null)
                 .setCancelable(false)
