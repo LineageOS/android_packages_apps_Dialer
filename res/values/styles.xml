@@ -115,6 +115,16 @@
         <item name="android:textAppearanceListItemSmall">@android:style/TextAppearance.Holo.Medium.Inverse</item>
     </style>
 
+    <!-- A theme for inflation of a search view dialtacts action bar -->
+    <style name="DialtactsSearchTheme" parent="DialtactsTheme">
+        <item name="android:textColorPrimary">@color/actionbar_text_color</item>
+        <item name="android:textColorHint">@color/searchbox_hint_text_color</item>
+        <item name="*android:searchViewSearchIcon">@drawable/ic_search_lt</item>
+        <item name="*android:searchViewCloseIcon">@drawable/ic_cancel_lt</item>
+        <item name="*android:searchViewTextField">@drawable/textfield_search_lt</item>
+        <item name="android:textCursorDrawable">@*android:drawable/text_cursor_holo_dark</item>
+    </style>
+
     <style name="DialtactsActionBarSpinner"
         parent="@*android:style/Widget.Holo.Light.Spinner.DropDown.ActionBar">
 
