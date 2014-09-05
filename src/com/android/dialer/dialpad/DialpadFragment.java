@@ -1928,67 +1928,47 @@ public class DialpadFragment extends AnalyticsFragment
     }
 
     private void callSpeedNumber(int id) {
-        int numId = 0;
-        SpeedDialUtils speedDialUtils = new SpeedDialUtils(getActivity());
+        int number;
 
-        switch (id) {
-            case R.id.two:
-                numId = speedDialUtils.NUM_TWO;
-                break;
-            case R.id.three:
-                numId = speedDialUtils.NUM_THREE;
-                break;
-            case R.id.four:
-                numId = speedDialUtils.NUM_FOUR;
-                break;
-            case R.id.five:
-                numId = speedDialUtils.NUM_FIVE;
-                break;
-            case R.id.six:
-                numId = speedDialUtils.NUM_SIX;
-                break;
-            case R.id.seven:
-                numId = speedDialUtils.NUM_SEVEN;
-                break;
-            case R.id.eight:
-                numId = speedDialUtils.NUM_EIGHT;
-                break;
-            case R.id.nine:
-                numId = speedDialUtils.NUM_NINE;
-                break;
+        switch(id) {
+            case R.id.two: number = 2; break;
+            case R.id.three: number = 3; break;
+            case R.id.four: number = 4; break;
+            case R.id.five: number = 5; break;
+            case R.id.six: number = 6; break;
+            case R.id.seven: number = 7; break;
+            case R.id.eight: number = 8; break;
+            case R.id.nine: number = 9; break;
+            default: return;
         }
 
-        String speedNumber = speedDialUtils.getContactDataNumber(numId);
-        if (speedNumber == null || speedNumber.length() == 0) {
-            showNoSpeedNumberDialog(numId);
+        String phoneNumber = SpeedDialUtils.getNumber(getActivity(), number);
+        if (phoneNumber == null) {
+            showNoSpeedNumberDialog(number);
         } else {
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.fromParts("tel", speedNumber, null));
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            final DialtactsActivity activity = getActivity() instanceof DialtactsActivity
+                    ? (DialtactsActivity) getActivity() : null;
+            final Intent intent = CallUtil.getCallIntent(phoneNumber,
+                    activity != null ? activity.getCallOrigin() : null);
+            DialerUtils.startActivityWithErrorToast(getActivity(), intent);
             getActivity().finish();
         }
     }
 
-    private void showNoSpeedNumberDialog(int numId) {
-        // numId's range is [0,7], but numKey's range is [2,9], so need to plus two.
-        int numKey = numId + 2;
-        String dialogTxt = getString(R.string.is_set_speed, String.valueOf(numKey));
-        final Activity thisActivity = getActivity();
-        new AlertDialog.Builder(thisActivity)
-            .setTitle(R.string.dialog_title)
-            .setMessage(dialogTxt)
-            .setPositiveButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
+    private void showNoSpeedNumberDialog(final int number) {
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.speed_dial_unassigned_dialog_title)
+                .setMessage(getString(R.string.speed_dial_unassigned_dialog_message, number))
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
                         // go to speed dial setting screen to set speed dial number.
-                        Intent intent = new Intent(thisActivity, SpeedDialListActivity.class);
+                        Intent intent = new Intent(getActivity(), SpeedDialListActivity.class);
+                        intent.putExtra(SpeedDialListActivity.EXTRA_INITIAL_PICK_NUMBER, number);
                         startActivity(intent);
                     }
                 })
-            .setNegativeButton(android.R.string.cancel, null)
-            .show();
+                .setNegativeButton(R.string.no, null)
+                .show();
     }
 }
