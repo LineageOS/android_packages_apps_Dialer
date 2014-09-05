@@ -16,7 +16,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_calllog_detail_video_call"
-        android:title="@string/videocall"
+        android:title="@string/video_call"
         android:onClick="onMenuVTCall"
     />
     <item

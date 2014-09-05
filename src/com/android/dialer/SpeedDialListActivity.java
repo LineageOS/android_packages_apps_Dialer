@@ -139,7 +139,7 @@ public class SpeedDialListActivity extends ListActivity implements OnItemClickLi
                 mContactSimKey[i - 1] = false;
 
                 mSpeedListItems[i] = getString(R.string.speed_item, String.valueOf(i + 1),
-                        getString(R.string.not_set));
+                        getString(R.string.speed_dial_not_set));
             } else {
                 mContactDataName[i - 1] = mSpeedDialUtils.getValidName(mContactDataNumber[i - 1]);
                 if (TextUtils.isEmpty(mContactDataName[i - 1])) {
@@ -254,8 +254,9 @@ public class SpeedDialListActivity extends ListActivity implements OnItemClickLi
                             name = c.getString(c.getColumnIndexOrThrow("display_name"));
                             accountType = c.getString(c.getColumnIndexOrThrow("account_type"));
                             if (!okToSet(number)) {
-                                Toast.makeText(this, R.string.assignSpeedDialFailToast,
-                                        Toast.LENGTH_LONG).show();
+                                String text = getString(R.string.speed_dial_assign_failure_toast,
+                                        number);
+                                Toast.makeText(this, text, Toast.LENGTH_LONG).show();
                                 return ;
                             } else {
                                 mContactDataName[numId] = name;
@@ -303,8 +304,8 @@ public class SpeedDialListActivity extends ListActivity implements OnItemClickLi
                 String contactName = mContactDataName[pos - 1];
                 String hdrTitle = !("".equals(contactName)) ? contactName : contactNum;
                 menu.setHeaderTitle(hdrTitle);
-                menu.add(0, MENU_REPLACE, 0, R.string.replace);
-                menu.add(0, MENU_DELETE, 0, R.string.delete);
+                menu.add(0, MENU_REPLACE, 0, R.string.speed_dial_replace);
+                menu.add(0, MENU_DELETE, 0, R.string.speed_dial_delete);
             }
         }
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -327,7 +328,7 @@ public class SpeedDialListActivity extends ListActivity implements OnItemClickLi
             mContactDataNumber[pos-1] = "";
             mContactDataName[pos-1] = "";
             mSpeedListItems[pos] = getString(R.string.speed_item, String.valueOf(pos+1),
-                getString(R.string.not_set));
+                getString(R.string.speed_dial_not_set));
             mSpeedDialUtils.storeContactDataNumber(pos-1, "");
             mSpeedDialUtils.storeContactDataName(pos-1, "");
             mSpeedDialUtils.storeContactSimKey(pos - 1, false);

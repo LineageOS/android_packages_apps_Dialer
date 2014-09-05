@@ -2004,9 +2004,12 @@ public class DialpadFragment extends Fragment
     private void showNoSpeedNumberDialog(int numId) {
         //because numId start from 0, but numKey from 2 that represent num 2-9, so here add two
         int numKey = numId + 2;
-        String dialogTxt = getString(R.string.is_set_speed, String.valueOf(numKey));
+        String dialogTxt = getString(R.string.speed_dial_unassigned_dialog_message,
+                String.valueOf(numKey));
         final Activity thisActivity = getActivity();
-        new AlertDialog.Builder(thisActivity).setTitle(R.string.dialog_title).setMessage(dialogTxt)
+        new AlertDialog.Builder(thisActivity)
+            .setTitle(R.string.speed_dial_unassigned_dialog_title)
+            .setMessage(dialogTxt)
           .setPositiveButton(android.R.string.ok,
                  new DialogInterface.OnClickListener() {
                      @Override
