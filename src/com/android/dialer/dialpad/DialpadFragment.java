@@ -1677,6 +1677,9 @@ public class DialpadFragment extends Fragment
             case R.id.menu_ip_call_by_slot2:
                 ipCallBySlot(MSimConstants.SUB2);
                 return true;
+            case R.id.speed_dial:
+                startActivity(new Intent(getActivity(), SpeedDialListActivity.class));
+                return true;
             default:
                 return false;
         }
@@ -1959,67 +1962,46 @@ public class DialpadFragment extends Fragment
     }
 
     private void callSpeedNumber(int id) {
-        SpeedDialUtils speedDialUtils = new SpeedDialUtils(getActivity());
-        int numId = 0;
-        String speedNumber;
-        String speedName;
+        int number;
+
         switch(id) {
-        case R.id.two:
-            numId = speedDialUtils.NUM_TWO;
-            break;
-        case R.id.three:
-            numId = speedDialUtils.NUM_THREE;
-            break;
-        case R.id.four:
-            numId = speedDialUtils.NUM_FOUR;
-            break;
-        case R.id.five:
-            numId = speedDialUtils.NUM_FIVE;
-            break;
-        case R.id.six:
-            numId = speedDialUtils.NUM_SIX;
-            break;
-        case R.id.seven:
-            numId = speedDialUtils.NUM_SEVEN;
-            break;
-        case R.id.eight:
-            numId = speedDialUtils.NUM_EIGHT;
-            break;
-        case R.id.nine:
-            numId = speedDialUtils.NUM_NINE;
-            break;
+            case R.id.two: number = 2; break;
+            case R.id.three: number = 3; break;
+            case R.id.four: number = 4; break;
+            case R.id.five: number = 5; break;
+            case R.id.six: number = 6; break;
+            case R.id.seven: number = 7; break;
+            case R.id.eight: number = 8; break;
+            case R.id.nine: number = 9; break;
+            default: return;
         }
-        speedNumber = speedDialUtils.getContactDataNumber(numId);
-        speedName = speedDialUtils.getContactDataName(numId);
-        if (speedNumber == null || speedNumber.length() == 0) {
-            showNoSpeedNumberDialog(numId);
+
+        String phoneNumber = SpeedDialUtils.getNumber(getActivity(), number);
+        if (phoneNumber == null) {
+            showNoSpeedNumberDialog(number);
         } else {
             Intent intent = new Intent(Intent.ACTION_CALL_PRIVILEGED);
-            intent.setData(Uri.fromParts("tel", speedNumber, null));
+            intent.setData(Uri.fromParts("tel", phoneNumber, null));
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             getActivity().finish();
         }
     }
-    private void showNoSpeedNumberDialog(int numId) {
-        //because numId start from 0, but numKey from 2 that represent num 2-9, so here add two
-        int numKey = numId + 2;
-        String dialogTxt = getString(R.string.speed_dial_unassigned_dialog_message,
-                String.valueOf(numKey));
-        final Activity thisActivity = getActivity();
-        new AlertDialog.Builder(thisActivity)
-            .setTitle(R.string.speed_dial_unassigned_dialog_title)
-            .setMessage(dialogTxt)
-          .setPositiveButton(android.R.string.ok,
-                 new DialogInterface.OnClickListener() {
-                     @Override
-                     public void onClick(DialogInterface dialog, int which) {
-                         // TODO Auto-generated method stub
-                         //go to speed dial setting screen to set speed dial number.
-                         Intent intent = new Intent(thisActivity, SpeedDialListActivity.class);
-                         startActivity(intent);
-                     }
-                }).setNegativeButton(android.R.string.cancel,null)
+
+    private void showNoSpeedNumberDialog(final int number) {
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.speed_dial_unassigned_dialog_title)
+                .setMessage(getString(R.string.speed_dial_unassigned_dialog_message, number))
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // go to speed dial setting screen to set speed dial number.
+                        Intent intent = new Intent(getActivity(), SpeedDialListActivity.class);
+                        intent.putExtra(SpeedDialListActivity.EXTRA_INITIAL_PICK_NUMBER, number);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
                 .show();
     }
 }
