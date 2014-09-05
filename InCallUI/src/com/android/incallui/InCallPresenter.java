@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +30,8 @@ import android.view.Surface;
 import android.view.View;
 
 import com.google.common.base.Preconditions;
+
+import com.android.incalluibind.ObjectFactory;
 
 import java.util.Collections;
 import java.util.List;
@@ -47,6 +50,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * TODO: This class has become more of a state machine at this point.  Consider renaming.
  */
 public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
+
+    private static final String EXTRA_FIRST_TIME_SHOWN =
+            "com.android.incallui.intent.extra.FIRST_TIME_SHOWN";
 
     private static InCallPresenter sInCallPresenter;
 
@@ -598,6 +604,12 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         }
 
         if (showing) {
+            Intent broadcastIntent = ObjectFactory.getUiReadyBroadcastIntent();
+            if (broadcastIntent != null) {
+                broadcastIntent.putExtra(EXTRA_FIRST_TIME_SHOWN, !mIsActivityPreviouslyStarted);
+                mContext.sendBroadcast(broadcastIntent, Manifest.permission.READ_PHONE_STATE);
+            }
+
             mIsActivityPreviouslyStarted = true;
         }
     }
