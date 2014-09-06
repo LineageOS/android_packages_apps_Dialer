@@ -35,7 +35,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.dialer.R;
 import com.android.incallui.CallCardFragment;
@@ -98,7 +98,7 @@ public class DialerUtils {
         if (smsPackage != null) {
             final PackageManager packageManager = context.getPackageManager();
             final Intent intent = new Intent(Intent.ACTION_SENDTO,
-                    Uri.fromParts(CallUtil.SCHEME_SMSTO, "", null));
+                    Uri.fromParts(ContactsUtils.SCHEME_SMSTO, "", null));
             final List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, 0);
             for (ResolveInfo resolveInfo : resolveInfos) {
                 if (smsPackage.equals(resolveInfo.activityInfo.packageName)) {
