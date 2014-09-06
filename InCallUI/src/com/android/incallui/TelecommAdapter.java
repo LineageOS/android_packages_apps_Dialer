@@ -24,6 +24,8 @@ import android.telecomm.InCallAdapter;
 import android.telecomm.Phone;
 import android.telecomm.PhoneAccountHandle;
 
+import android.telecomm.PhoneCapabilities;
+
 import com.google.common.base.Preconditions;
 
 import java.util.List;
@@ -151,6 +153,11 @@ final class TelecommAdapter implements InCallPhoneListener {
             List<android.telecomm.Call> conferenceable = call.getConferenceableCalls();
             if (!conferenceable.isEmpty()) {
                 call.conference(conferenceable.get(0));
+            } else {
+                int capabilities = call.getDetails().getCallCapabilities();
+                if (0 != (capabilities & PhoneCapabilities.MERGE_CONFERENCE)) {
+                    call.mergeConference();
+                }
             }
         } else {
             Log.e(this, "error merge, mPhone is null.");
@@ -158,7 +165,15 @@ final class TelecommAdapter implements InCallPhoneListener {
     }
 
     void swap(String callId) {
-        // TODO: Remove (obsolete)
+        if (mPhone != null) {
+            android.telecomm.Call call = getTelecommCallById(callId);
+            int capabilities = call.getDetails().getCallCapabilities();
+            if (0 != (capabilities & PhoneCapabilities.SWAP_CONFERENCE)) {
+                call.swapConference();
+            }
+        } else {
+            Log.e(this, "Error swap, mPhone is null.");
+        }
     }
 
     void addCall() {
