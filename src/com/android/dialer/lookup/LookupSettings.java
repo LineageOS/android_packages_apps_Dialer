@@ -45,6 +45,7 @@ public final class LookupSettings {
     public static final String RLP_ZABASEARCH = "ZabaSearch";
     public static final String RLP_CYNGN_CHINESE = "CyngnChinese";
     public static final String RLP_DASTELEFONBUCH = "DasTelefonbuch";
+    public static final String RLP_PAGINEBIANCHE = "PagineBianche";
     public static final String RLP_DEFAULT = RLP_OPENCNAM;
 
     private LookupSettings() {
