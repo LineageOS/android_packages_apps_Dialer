@@ -71,15 +71,24 @@ public class CallList implements InCallPhoneListener {
 
     private Phone.Listener mPhoneListener = new Phone.Listener() {
         @Override
-        public void onCallAdded(Phone phone, android.telecomm.Call call) {
-            // TODO: The Call adds itself to various singletons within its ctor. Refactor
-            // so that this is done more explicitly; otherwise, the below looks like we're creating
-            // an object and never using it.
-            new Call(call);
+        public void onCallAdded(Phone phone, android.telecomm.Call telecommCall) {
+            Call call = new Call(telecommCall);
+            if (call.getState() == Call.State.INCOMING) {
+                onIncoming(call, call.getCannedSmsResponses());
+            } else {
+                onUpdate(call);
+            }
         }
         @Override
-        public void onCallRemoved(Phone phone, android.telecomm.Call call) {
-            // Handled by disconnection cascade from the Call itself
+        public void onCallRemoved(Phone phone, android.telecomm.Call telecommCall) {
+            if (mCallByTelecommCall.containsKey(telecommCall)) {
+                Call call = mCallByTelecommCall.get(telecommCall);
+                call.setState(Call.State.DISCONNECTED);
+                call.setDisconnectCause(DisconnectCause.NOT_VALID);
+                if (updateCallInMap(call)) {
+                    Log.w(this, "Removing call not previously disconnected " + call.getId());
+                }
+            }
         }
     };
 
@@ -105,14 +114,10 @@ public class CallList implements InCallPhoneListener {
      * Called when a single call disconnects.
      */
     public void onDisconnect(Call call) {
-        Log.d(this, "onDisconnect: ", call);
-
-        boolean updated = updateCallInMap(call);
-
-        if (updated) {
+        if (updateCallInMap(call)) {
+            Log.i(this, "onDisconnect: " + call);
             // notify those listening for changes on this specific change
             notifyCallUpdateListeners(call);
-
             // notify those listening for all disconnects
             notifyListenersOfDisconnect(call);
         }
@@ -122,9 +127,9 @@ public class CallList implements InCallPhoneListener {
      * Called when a single call has changed.
      */
     public void onIncoming(Call call, List<String> textMessages) {
-        Log.d(this, "onIncoming - " + call);
-
-        updateCallInMap(call);
+        if (updateCallInMap(call)) {
+            Log.i(this, "onIncoming - " + call);
+        }
         updateCallTextMap(call, textMessages);
 
         for (Listener listener : mListeners) {
@@ -137,7 +142,6 @@ public class CallList implements InCallPhoneListener {
      */
     public void onUpdate(Call call) {
         onUpdateCall(call);
-        Log.d(this, "onUpdate - ", call);
         notifyGenericListeners();
     }
 
@@ -373,7 +377,9 @@ public class CallList implements InCallPhoneListener {
      */
     private void onUpdateCall(Call call) {
         Log.d(this, "\t" + call);
-        updateCallInMap(call);
+        if (updateCallInMap(call)) {
+            Log.i(this, "onUpdate - " + call);
+        }
         updateCallTextMap(call, null);
         notifyCallUpdateListeners(call);
     }

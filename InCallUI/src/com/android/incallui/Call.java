@@ -182,11 +182,6 @@ public final class Call {
         mTelecommCall = telecommCall;
         mId = ID_PREFIX + Integer.toString(sIdCounter++);
         updateFromTelecommCall();
-        if (getState() == Call.State.INCOMING) {
-            CallList.getInstance().onIncoming(this, getCannedSmsResponses());
-        } else {
-            CallList.getInstance().onUpdate(this);
-        }
         mTelecommCall.addListener(mTelecommCallListener);
     }
 
@@ -306,12 +301,17 @@ public final class Call {
 
     /** Checks if the call supports the given set of capabilities supplied as a bit mask. */
     public boolean can(int capabilities) {
-        if (PhoneCapabilities.MERGE_CALLS == (capabilities & PhoneCapabilities.MERGE_CALLS)) {
-            if (mTelecommCall.getConferenceableCalls().isEmpty()) {
+        int supportedCapabilities = mTelecommCall.getDetails().getCallCapabilities();
+
+        if ((capabilities & PhoneCapabilities.MERGE_CONFERENCE) != 0) {
+            // We allow you to merge if the capabilities allow it or if it is a call with
+            // conferenceable calls.
+            if (mTelecommCall.getConferenceableCalls().isEmpty() &&
+                    ((PhoneCapabilities.MERGE_CONFERENCE & supportedCapabilities) == 0)) {
                 // Cannot merge calls if there are no calls to merge with.
                 return false;
             }
-            capabilities &= ~PhoneCapabilities.MERGE_CALLS;
+            capabilities &= ~PhoneCapabilities.MERGE_CONFERENCE;
         }
         return (capabilities == (capabilities & mTelecommCall.getDetails().getCallCapabilities()));
     }
