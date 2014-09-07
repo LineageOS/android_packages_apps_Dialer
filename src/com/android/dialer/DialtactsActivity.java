@@ -32,6 +32,7 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
+import android.telecomm.PhoneAccount;
 import android.telecomm.TelecommManager;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
@@ -817,7 +818,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         if (Intent.ACTION_VIEW.equals(action)) {
             final Uri data = intent.getData();
-            if (data != null && CallUtil.SCHEME_TEL.equals(data.getScheme())) {
+            if (data != null && PhoneAccount.SCHEME_TEL.equals(data.getScheme())) {
                 return true;
             }
         }

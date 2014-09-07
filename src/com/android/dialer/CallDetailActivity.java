@@ -368,7 +368,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                         getSystemService(Context.TELEPHONY_SERVICE);
                 if (tm.getCallState() == TelephonyManager.CALL_STATE_IDLE) {
                     DialerUtils.startActivityWithErrorToast(this,
-                            CallUtil.getCallIntent(Uri.fromParts(CallUtil.SCHEME_TEL, mNumber,
+                            CallUtil.getCallIntent(Uri.fromParts(PhoneAccount.SCHEME_TEL, mNumber,
                                     null)), R.string.call_not_available);
                     return true;
                 }
