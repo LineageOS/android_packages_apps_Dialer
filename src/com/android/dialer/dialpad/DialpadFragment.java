@@ -37,6 +37,7 @@ import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
+import android.telecomm.PhoneAccount;
 import android.telecomm.TelecommManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
@@ -67,6 +68,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
@@ -258,7 +260,7 @@ public class DialpadFragment extends AnalyticsFragment
      * Return an Intent for launching voicemail screen.
      */
     private static Intent getVoicemailIntent() {
-        return CallUtil.getCallIntent(Uri.fromParts("voicemail", "", null));
+        return CallUtil.getCallIntent(Uri.fromParts(PhoneAccount.SCHEME_VOICEMAIL, "", null));
     }
 
     private TelephonyManager getTelephonyManager() {
@@ -415,7 +417,7 @@ public class DialpadFragment extends AnalyticsFragment
         if (Intent.ACTION_DIAL.equals(action) || Intent.ACTION_VIEW.equals(action)) {
             Uri uri = intent.getData();
             if (uri != null) {
-                if (CallUtil.SCHEME_TEL.equals(uri.getScheme())) {
+                if (PhoneAccount.SCHEME_TEL.equals(uri.getScheme())) {
                     // Put the requested number into the input area
                     String data = uri.getSchemeSpecificPart();
                     // Remember it is filled via Intent.
@@ -1431,7 +1433,7 @@ public class DialpadFragment extends AnalyticsFragment
             case R.id.menu_send_message: {
                 final CharSequence digits = mDigits.getText();
                 final Intent smsIntent = new Intent(Intent.ACTION_SENDTO,
-                        Uri.fromParts(CallUtil.SCHEME_SMSTO, digits.toString(), null));
+                        Uri.fromParts(ContactsUtils.SCHEME_SMSTO, digits.toString(), null));
                 smsIntent.setComponent(mSmsPackageComponentName);
                 DialerUtils.startActivityWithErrorToast(getActivity(), smsIntent);
                 return true;
