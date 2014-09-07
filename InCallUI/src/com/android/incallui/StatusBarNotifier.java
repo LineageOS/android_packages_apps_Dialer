@@ -29,6 +29,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
+import android.telecomm.PhoneAccount;
 import android.text.TextUtils;
 
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
@@ -395,7 +396,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         if (contactInfo.lookupUri != null) {
             builder.addPerson(contactInfo.lookupUri.toString());
         } else if (!TextUtils.isEmpty(call.getNumber())) {
-            builder.addPerson(Uri.fromParts("tel", call.getNumber(), null).toString());
+            builder.addPerson(Uri.fromParts(PhoneAccount.SCHEME_TEL,
+                            call.getNumber(), null).toString());
         }
     }
 

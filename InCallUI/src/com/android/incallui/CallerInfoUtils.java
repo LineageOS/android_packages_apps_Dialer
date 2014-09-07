@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.Loader;
 import android.content.Loader.OnLoadCompleteListener;
 import android.net.Uri;
+import android.telecomm.PhoneAccount;
 import android.telecomm.PropertyPresentation;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
 
@@ -75,7 +75,7 @@ public class CallerInfoUtils {
         // a voicemail call will be passed to InCallUI as a "voicemail:" URI without a number.
         // This call should still be handled as a voicemail call.
         if (call.getHandle() != null &&
-                CallUtil.SCHEME_VOICEMAIL.equals(call.getHandle().getScheme())) {
+                PhoneAccount.SCHEME_VOICEMAIL.equals(call.getHandle().getScheme())) {
             info.markAsVoiceMail(context);
         }
 
