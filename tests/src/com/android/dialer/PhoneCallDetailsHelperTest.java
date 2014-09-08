@@ -171,7 +171,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
      * Tests a case where the video call feature is not present.
      */
     public void testSetPhoneCallDetails_NoVideo() {
-        setPhoneCallDetailsWithFeatures(Calls.FEATURES_NONE);
+        setPhoneCallDetailsWithFeatures(0);
         assertIsVideoCall(false);
     }
 
@@ -311,8 +311,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(number, presentation, formattedNumber,
                         TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION, null, null,
-                        Calls.FEATURES_NONE, null, null)
+                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION, null, null, 0,
+                        null, null)
         );
     }
 
@@ -322,8 +322,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(number, Calls.PRESENTATION_ALLOWED,
                         formattedNumber, TEST_COUNTRY_ISO, geocodedLocation,
-                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION, null, null,
-                        Calls.FEATURES_NONE, null, null)
+                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION, null, null, 0,
+                        null, null)
         );
     }
 
@@ -361,8 +361,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setCallDetailsHeader(mNameView,
                 new PhoneCallDetails(number, presentation,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION, null, null,
-                        Calls.FEATURES_NONE, null, null));
+                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION, null, null, 0,
+                        null, null));
     }
 
     private void setCallDetailsHeader(String name) {
@@ -370,6 +370,6 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                         new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION,
-                        name, 0, "", null, null, 0, null, null, Calls.FEATURES_NONE, null, null));
+                        name, 0, "", null, null, 0, null, null, 0, null, null));
     }
 }

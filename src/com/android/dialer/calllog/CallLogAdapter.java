@@ -1190,7 +1190,7 @@ public class CallLogAdapter extends GroupingListAdapter
      * @return The features.
      */
     private int getCallFeatures(Cursor cursor, int count) {
-        int features = Calls.FEATURES_NONE;
+        int features = 0;
         int position = cursor.getPosition();
         for (int index = 0; index < count; ++index) {
             features |= cursor.getInt(CallLogQuery.FEATURES);
