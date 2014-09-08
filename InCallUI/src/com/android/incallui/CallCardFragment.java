@@ -19,6 +19,7 @@ package com.android.incallui;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
+import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
@@ -81,7 +82,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     // Container view that houses the entire primary call card, including the call buttons
     private View mPrimaryCallCardContainer;
     // Container view that houses the primary call information
-    private View mPrimaryCallInfo;
+    private ViewGroup mPrimaryCallInfo;
     private View mCallButtonsContainer;
 
     // Secondary caller info
@@ -180,7 +181,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mCallTypeLabel = (TextView) view.findViewById(R.id.callTypeLabel);
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
         mPrimaryCallCardContainer = view.findViewById(R.id.primary_call_info_container);
-        mPrimaryCallInfo = view.findViewById(R.id.primary_call_banner);
+        mPrimaryCallInfo = (ViewGroup) view.findViewById(R.id.primary_call_banner);
         mCallButtonsContainer = view.findViewById(R.id.callButtonFragment);
         mInCallMessageLabel = (TextView) view.findViewById(R.id.connectionServiceMessage);
         mProgressSpinner = view.findViewById(R.id.progressSpinner);
@@ -893,6 +894,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         final Point startPoint = touchPoint;
 
         final ViewTreeObserver observer = getView().getViewTreeObserver();
+
+        mPrimaryCallInfo.getLayoutTransition().disableTransitionType(LayoutTransition.CHANGING);
+
         observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -1060,6 +1064,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         setViewStatePostAnimation(mCallStateIcon);
 
         mPrimaryCallCardContainer.removeOnLayoutChangeListener(layoutChangeListener);
+        mPrimaryCallInfo.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         mFloatingActionButtonController.scaleIn(AnimUtils.NO_DELAY);
     }
 
