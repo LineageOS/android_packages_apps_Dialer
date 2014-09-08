@@ -29,8 +29,7 @@ public class CallLogQueryTestUtils {
     public static Object[] createTestValues() {
         Object[] values = new Object[]{
                 0L, "", 0L, 0L, Calls.INCOMING_TYPE, "", "", "", null, 0, null, null, null, null,
-                0L, null, 0, Calls.PRESENTATION_ALLOWED, null, null, Calls.FEATURES_NONE, null,
-                null
+                0L, null, 0, Calls.PRESENTATION_ALLOWED, null, null, 0, null, null
         };
         assertEquals(CallLogQuery._PROJECTION.length, values.length);
         return values;

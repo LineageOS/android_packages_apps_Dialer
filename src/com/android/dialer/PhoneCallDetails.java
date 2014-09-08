@@ -96,8 +96,7 @@ public class PhoneCallDetails {
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration) {
         this (number, numberPresentation, formattedNumber, countryIso, geocode,
-        callTypes, date, duration, "", 0, "", null, null, 0, null, null, Calls.FEATURES_NONE,
-        null, null);
+        callTypes, date, duration, "", 0, "", null, null, 0, null, null, 0, null, null);
     }
 
     /** Create the details for a call with a number not associated with a contact. */
