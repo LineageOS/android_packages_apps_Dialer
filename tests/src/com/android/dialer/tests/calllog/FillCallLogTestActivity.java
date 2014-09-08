@@ -490,7 +490,7 @@ public class FillCallLogTestActivity extends Activity {
         Calendar dateTime = Calendar.getInstance();
         dateTime.set(mCallDateYear, mCallDateMonth, mCallDateDay, mCallTimeHour, mCallTimeMinute);
 
-        int features = mCallTypeVideo.isChecked() ? Calls.FEATURES_VIDEO : Calls.FEATURES_NONE;
+        int features = mCallTypeVideo.isChecked() ? Calls.FEATURES_VIDEO : 0;
         Long dataUsage = null;
         if (mCallTypeVideo.isChecked()) {
             // Some random data usage up to 50MB.
