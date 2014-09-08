@@ -79,7 +79,7 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"চালু থাকা কল"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"সাময়িকভাবে স্থগিত রাখা হয়েছে"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"ইনকামিং কল"</string>
-    <string name="notification_incoming_video_call" msgid="7356836933934464805">"আগত ভিডিও কল"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"ইনকামিং ভিডিও কল"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"আগত ভিডিও অনুরোধ"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"নতুন ভয়েসমেল"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"নতুন ভয়েসমেল (<xliff:g id="COUNT">%d</xliff:g>)"</string>
