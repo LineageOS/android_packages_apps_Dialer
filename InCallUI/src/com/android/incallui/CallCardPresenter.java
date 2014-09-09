@@ -349,13 +349,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
     }
 
-    public void phoneAccountClicked() {
-        if (mPrimary == null) {
-            return;
-        }
-        TelecommAdapter.getInstance().phoneAccountClicked(mPrimary.getId());
-    }
-
     private void maybeStartSearch(Call call, boolean isPrimary) {
         // no need to start search for conference calls which show generic info.
         if (call != null && !call.isConferenceCall()) {
