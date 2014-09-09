@@ -18,7 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"డయలర్"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"ఫోన్"</string>
+    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"ఫోన్"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"కాల్ లాగ్"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"వచన సందేశాన్ని పంపు"</string>
@@ -138,7 +139,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM కార్డు నుండి లోడ్ చేస్తోంది…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM కార్డు పరిచయాలు"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"ఈ లక్షణాన్ని ఉపయోగించడానికి వ్యక్తుల అనువర్తనాన్ని పునఃప్రారంభించండి."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"ఈ లక్షణాన్ని ఉపయోగించడానికి పరిచయాల అనువర్తనాన్ని పునఃప్రారంభించండి."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"వాయిస్ శోధన అందుబాటులో లేదు."</string>
     <string name="call_not_available" msgid="8941576511946492225">"ఫోన్ అనువర్తనం నిలిపివేయబడినందున ఫోన్ కాల్ చేయలేరు."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"ఎంచుకున్న చర్యను నిర్వహించడానికి ఇన్‌స్టాల్ చేయబడిన కార్యాచరణ ఏదీ అందుబాటులో లేదు."</string>

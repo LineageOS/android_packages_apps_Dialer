@@ -18,7 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Kibonyezi"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Simu"</string>
+    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"Simu"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Logi ya orodha ya kupiga simu"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Tuma ujumbe wa maandishi"</string>
@@ -138,7 +139,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Inapakia kutoka SIM kadi..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Anwani za SIM kadi"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Washa tena Programu ya watu ili itumie kipengele hiki."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Washa tena programu ya Anwani ili utumie kipengele hiki."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Utafutaji kwa kutamka haupatikani."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Haiwezi kupiga simu kwa sababu programu ya Simu imezimwa."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Hakuna shughuli iliyosakinishwa imepatikana ya kushughulikia kitendo kilichochaguliwa."</string>

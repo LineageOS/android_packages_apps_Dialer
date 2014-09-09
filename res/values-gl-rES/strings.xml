@@ -18,7 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Marcador"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Teléfono"</string>
+    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"Teléfono"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Rexistro de chamadas"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Enviar mensaxe de texto"</string>
@@ -138,7 +139,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Cargando da tarxeta SIM..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contactos da tarxeta SIM"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Volve activar a aplicación Contactos para utilizar esta función."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Volve activar a aplicación de Contactos para utilizar esta función."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"A busca de voz non está dispoñible."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Non se pode facer unha chamada telefónica porque se desactivou a aplicación de teléfono."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Ningunha actividade instalada dispoñible para procesar a acción seleccionada."</string>

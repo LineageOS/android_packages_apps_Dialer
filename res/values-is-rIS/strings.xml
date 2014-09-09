@@ -18,7 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Símaforrit"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Sími"</string>
+    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"Sími"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Símtalaskrá"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Senda textaskilaboð"</string>
@@ -138,7 +139,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Hleður af SIM-kortinu…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Tengiliðir á SIM-korti"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Gerðu forritið Fólk virkt aftur til að nota þennan eiginleika."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Virkjaðu tengiliðaforritið aftur til þess að geta notað þennan eiginleika."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Raddleit er ekki í boði."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Ekki er hægt að hringja vegna þess að forritið Sími hefur verið gert óvirkt."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Engin uppsett virkni tiltæk til að meðhöndla valda aðgerð."</string>
