@@ -387,7 +387,9 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
         transaction.commitAllowingStateLoss();
         getFragmentManager().executePendingTransactions();
         mViewPager.setVisibility(View.GONE);
-        mViewPagerTabs.setVisibility(View.GONE);
+        if (!getTelephonyManager().isMultiSimEnabled()) {
+            mViewPagerTabs.setVisibility(View.GONE);
+        }
         // We need to call this and onActionViewCollapsed() manually, since we
         // are using a custom
         // layout instead of asking the search menu item to take care of
@@ -552,7 +554,9 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
         }
 
         mViewPager.setVisibility(View.VISIBLE);
-        mViewPagerTabs.setVisibility(View.VISIBLE);
+        if (!getTelephonyManager().isMultiSimEnabled()) {
+            mViewPagerTabs.setVisibility(View.VISIBLE);
+        }
         hideInputMethod(getCurrentFocus());
 
         // Request to update option menu.
