@@ -38,6 +38,8 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
 import android.text.TextUtils;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.inputmethod.InputMethodManager;
@@ -377,29 +379,27 @@ public class CallLogActivity extends Activity implements
     }
 
     private void prepareSearchView() {
-        final View searchViewLayout = getLayoutInflater().inflate(
-                R.layout.custom_action_bar, null);
-        mSearchView = (SearchView) searchViewLayout
-                .findViewById(R.id.search_view);
+        final LayoutInflater inflater = LayoutInflater.from(
+                new ContextThemeWrapper(this, R.style.DialtactsSearchTheme));
+        final View searchViewLayout = inflater.inflate(R.layout.custom_action_bar, null);
+        mSearchView = (SearchView) searchViewLayout.findViewById(R.id.search_view);
         mSearchView.setOnQueryTextListener(mPhoneSearchQueryTextListener);
         mSearchView.setOnCloseListener(mPhoneSearchCloseListener);
         mSearchView.setQueryHint(getString(R.string.calllog_search_hint));
         mSearchView.setIconifiedByDefault(true);
         mSearchView.setIconified(false);
 
-        mSearchView
-                .setOnQueryTextFocusChangeListener(new OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View view, boolean hasFocus) {
-                        if (hasFocus) {
-                            showInputMethod(view.findFocus());
-                        }
-                    }
-                });
+        mSearchView.setOnQueryTextFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    showInputMethod(view.findFocus());
+                }
+            }
+        });
 
         getActionBar().setCustomView(searchViewLayout,
-                new LayoutParams(LayoutParams.MATCH_PARENT,
-                        LayoutParams.WRAP_CONTENT));
+                new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
     }
 
     private void showInputMethod(View view) {
