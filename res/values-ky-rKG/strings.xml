@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Чалгыч"</string>
-    <!-- no translation found for launcherDialer (8636288196618486553) -->
+    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
     <skip />
     <!-- no translation found for dialerIconLabel (6500826552823403796) -->
     <skip />
@@ -187,7 +187,8 @@
     <skip />
     <!-- no translation found for simContacts_title (27341688347689769) -->
     <skip />
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Бул мүмкүнчүлүктү пайдалануу үчүн Кишилер колдонмосун кайра иштетишиңиз керек."</string>
+    <!-- no translation found for add_contact_not_available (2731922990890769322) -->
+    <skip />
     <string name="voice_search_not_available" msgid="7580616740587850828">"Үн менен издөө иштебейт."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Телефон колдонмосу өчүрүлгөндүктөн, чалуу мүмкүн болбой жатат."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Тандалган аракетти аткаруу үчүн талап кылынган колдонмо орнотулган эмес."</string>

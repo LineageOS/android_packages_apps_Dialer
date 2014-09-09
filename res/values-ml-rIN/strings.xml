@@ -18,7 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"ഡയലർ"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"ഫോണ്‍"</string>
+    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"ഫോണ്‍"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"കോൾ ലോഗ്"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"വാചകസന്ദേശമയയ്‌ക്കുക"</string>
@@ -138,7 +139,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM കാർഡിൽ നിന്നും ലോഡുചെയ്യുന്നു…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM കാർഡ് കോൺടാക്റ്റുകൾ"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"ഈ സവിശേഷത ഉപയോഗിക്കാൻ ആളുകളുടെ അപ്ലിക്കേഷൻ വീണ്ടും പ്രവർത്തനക്ഷമമാക്കുക."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"ഈ സവിശേഷത ഉപയോഗിക്കാൻ കോൺടാക്‌റ്റുകളുടെ അപ്ലിക്കേഷൻ വീണ്ടും പ്രവർത്തനക്ഷമമാക്കുക."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"വോയ്‌സ് തിരയൽ ലഭ്യമല്ല."</string>
     <string name="call_not_available" msgid="8941576511946492225">"ഫോൺ അപ്ലിക്കേഷൻ പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നതിനാൽ ഫോൺ കോൾ ചെയ്യാനാകില്ല."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"തിരഞ്ഞെടുത്ത പ്രവർത്തനം കൈകാര്യം ചെയ്യാൻ ഇൻസ്‌റ്റാളുചെയ്‌ത പ്രവർത്തനമൊന്നും ലഭ്യമല്ല."</string>

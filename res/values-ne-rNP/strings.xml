@@ -18,7 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"डायलर"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"फोन"</string>
+    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"फोन"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"कल लग"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"पाठ सन्देश पठाउनुहोस्"</string>
@@ -138,7 +139,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM कार्डबाट लोड हुँदै"</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM कार्ड सम्पर्कहरू"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"यो सुविधा प्रयोग गर्नका लागि मानिसहरूको अनुप्रयोग पुनःसक्षम गर्नुहोस्।"</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"यो सुविधा प्रयोग गर्न सम्पर्क अनुप्रयोग पुनःसक्षम गर्नुहोस्।"</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"ध्वनि खोज उपलब्ध छैन।"</string>
     <string name="call_not_available" msgid="8941576511946492225">"फोन अनुप्रयोग असक्षम गरिएकोले फोन गर्न सकिँदैन।"</string>
     <string name="activity_not_available" msgid="8265265380537872585">"चयन गरिएको कार्य चलाउन कुनै गतिविधि स्थापित उपलब्ध छैन।"</string>
