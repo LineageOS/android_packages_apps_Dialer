@@ -517,7 +517,9 @@ public class CallDetailHeader {
             icon_third.setTag(entry);
             icon_third.setContentDescription(entry.thirdDescription);
         }
-        icon_third.setVisibility(entry.thirdIntent != null? View.VISIBLE : View.GONE);
+        if (icon_third != null) {
+            icon_third.setVisibility(entry.thirdIntent != null? View.VISIBLE : View.GONE);
+        }
 
         TextView label = (TextView) convertView.findViewById(R.id.call_and_sms_label);
         if (TextUtils.isEmpty(entry.label)) {
