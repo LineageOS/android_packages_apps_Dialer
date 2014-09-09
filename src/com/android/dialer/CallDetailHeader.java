@@ -511,13 +511,13 @@ public class CallDetailHeader {
         }
         text.setText(entry.text);
 
-        if(entry.thirdIntent != null) {
+        if (entry.thirdIntent != null) {
             icon_third.setOnClickListener(mThirdActionListener);
             icon_third.setImageResource(R.drawable.ic_contact_quick_contact_call_video_holo_dark);
             icon_third.setTag(entry);
             icon_third.setContentDescription(entry.thirdDescription);
+            icon_third.setVisibility(View.VISIBLE);
         }
-        icon_third.setVisibility(entry.thirdIntent != null? View.VISIBLE : View.GONE);
 
         TextView label = (TextView) convertView.findViewById(R.id.call_and_sms_label);
         if (TextUtils.isEmpty(entry.label)) {
