@@ -56,7 +56,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
 
     // Dummy clip data object that is attached to drag shadows so that text views
     // don't crash with an NPE if the drag shadow is released in their bounds
-    private static final ClipData EMPTY_CLIP_DATA = ClipData.newPlainText("", "");
+    static final ClipData EMPTY_CLIP_DATA = ClipData.newPlainText("", "");
 
     public PhoneFavoriteTileView(Context context, AttributeSet attrs) {
         super(context, attrs);
