@@ -116,6 +116,8 @@ public class CallStatsDetailActivity extends Activity {
         mMissedCount = (TextView) findViewById(R.id.missed_count);
         mPieChart = (PieChartView) findViewById(R.id.pie_chart);
 
+        findViewById(R.id.voicemail_container).setVisibility(View.GONE);
+
         getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent launchIntent = getIntent();
         mData = (CallStatsDetails) launchIntent.getParcelableExtra(EXTRA_DETAILS);
