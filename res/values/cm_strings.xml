@@ -85,4 +85,9 @@
     <string name="call_log_show_all_slots">All SIMs</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
+    <string name="call_duration_active">Active duration:</string>
+    <string name="call_duration_call_out">Call duration:</string>
+
+    <string name="call_log_all_calls_header">All calls</string>
 </resources>
