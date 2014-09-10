@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1b2928_26bfb7d1",
+        "filename": "src/com/android/dialer/CallDetailHeader.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1576
+      },
+      "writtenOn": "2014-09-10T12:29:13Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the visibility be set to GONE in an else statement to ensure the same functionality?",
+      "revId": "d8ebf219d7716a9da16abc2bad9e5cb5c12e1d56",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
