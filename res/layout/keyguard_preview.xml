@@ -24,10 +24,6 @@
         android:background="@color/dialer_theme_color_dark" />
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_and_tab_height"
-        android:background="@color/dialer_theme_color" />
-    <View
-        android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp"
         android:background="#ffffff" />
