@@ -21,8 +21,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@color/incall_banner_secondary_background_color"
-    android:elevation="@dimen/secondary_call_elevation">
+    android:background="@color/incall_banner_secondary_background_color">
+
+    <Space android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/secondary_call_info_divider_highlight_color" />
 
     <!-- This LinearLayout nested immediately in a FrameLayout is necessary to apply both a
          background color and ripple to the button. -->
@@ -30,10 +33,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/call_banner_side_padding"
-        android:paddingEnd="@dimen/secondary_call_banner_right_padding"
-        android:paddingTop="@dimen/call_banner_secondary_call_top_bottom_padding"
-        android:paddingBottom="@dimen/call_banner_secondary_call_top_bottom_padding"
+        android:paddingStart="@dimen/secondary_call_info_horizontal_padding"
+        android:paddingEnd="@dimen/secondary_call_info_horizontal_padding"
+        android:paddingTop="@dimen/secondary_call_info_vertical_padding"
+        android:paddingBottom="@dimen/secondary_call_info_vertical_padding"
         android:background="?android:attr/selectableItemBackground">
 
         <ImageView android:id="@+id/secondaryCallConferenceCallIcon"
@@ -53,8 +56,8 @@
             <TextView android:id="@+id/secondaryCallName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/incall_banner_secondary_text_color"
+                android:textSize="@dimen/secondary_call_info_text_size"
                 android:ellipsize="marquee"
                 android:singleLine="true"/>
 
@@ -75,9 +78,8 @@
                 <TextView android:id="@+id/secondaryCallProviderLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/onHold"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/incall_banner_secondary_text_color"
+                    android:textSize="@dimen/secondary_call_info_text_size"
                     android:singleLine="true"/>
 
             </LinearLayout>
@@ -89,10 +91,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingEnd="@dimen/call_banner_side_padding"
+            android:paddingEnd="18dp"
             android:text="@string/onHold"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/incall_banner_secondary_text_color"
+            android:textSize="@dimen/secondary_call_info_text_size"
             android:textAlignment="textEnd"
             android:singleLine="true" />
 
