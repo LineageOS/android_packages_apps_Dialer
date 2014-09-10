@@ -622,7 +622,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ft.show(mDialpadFragment);
         ft.commit();
 
-        mFloatingActionButtonController.scaleOut();
+        if (animate) {
+            mFloatingActionButtonController.scaleOut();
+        } else {
+            mFloatingActionButtonController.setVisible(false);
+        }
         mActionBarController.onDialpadUp();
 
         if (!isInSearchUi()) {
