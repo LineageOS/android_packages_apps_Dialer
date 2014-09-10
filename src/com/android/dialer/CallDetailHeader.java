@@ -489,8 +489,8 @@ public class CallDetailHeader {
         ImageView icon = (ImageView) convertView.findViewById(R.id.call_and_sms_icon);
         View divider = convertView.findViewById(R.id.call_and_sms_divider);
         TextView text = (TextView) convertView.findViewById(R.id.call_and_sms_text);
-        ImageView icon_third = (ImageView) convertView.findViewById(R.id.videocall);
-        View divider_third = convertView.findViewById(R.id.videocall_and_sms_divider);
+        ImageView secondaryIcon = (ImageView) convertView.findViewById(R.id.videocall);
+        View secondaryIconDivider = convertView.findViewById(R.id.videocall_and_sms_divider);
 
         View mainAction = convertView.findViewById(R.id.call_and_sms_main_action);
         mainAction.setOnClickListener(mPrimaryActionListener);
@@ -512,11 +512,16 @@ public class CallDetailHeader {
         text.setText(entry.text);
 
         if (entry.thirdIntent != null) {
-            icon_third.setOnClickListener(mThirdActionListener);
-            icon_third.setImageResource(R.drawable.ic_contact_quick_contact_call_video_holo_dark);
-            icon_third.setTag(entry);
-            icon_third.setContentDescription(entry.thirdDescription);
-            icon_third.setVisibility(View.VISIBLE);
+            secondaryIcon.setOnClickListener(mThirdActionListener);
+            secondaryIcon.setImageResource(
+                    R.drawable.ic_contact_quick_contact_call_video_holo_dark);
+            secondaryIcon.setTag(entry);
+            secondaryIcon.setContentDescription(entry.thirdDescription);
+            secondaryIcon.setVisibility(View.VISIBLE);
+            secondaryIconDivider.setVisibility(View.VISIBLE);
+        } else {
+            secondaryIcon.setVisibility(View.GONE);
+            secondaryIconDivider.setVisibility(View.GONE);
         }
 
         TextView label = (TextView) convertView.findViewById(R.id.call_and_sms_label);
