@@ -116,7 +116,7 @@ public class CallStatsDetailActivity extends Activity {
         mMissedCount = (TextView) findViewById(R.id.missed_count);
         mPieChart = (PieChartView) findViewById(R.id.pie_chart);
 
-        configureActionBar();
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent launchIntent = getIntent();
         mData = (CallStatsDetails) launchIntent.getParcelableExtra(EXTRA_DETAILS);
 
@@ -281,14 +281,6 @@ public class CallStatsDetailActivity extends Activity {
 
     public void onMenuAddToBlacklist(MenuItem menuItem) {
         mContactInfoHelper.addNumberToBlacklist(mNumber);
-    }
-
-    private void configureActionBar() {
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP
-                    | ActionBar.DISPLAY_SHOW_HOME);
-        }
     }
 
     private void onHomeSelected() {
