@@ -149,6 +149,11 @@ public class PhoneFavoriteListView extends GridView implements OnDragDropListene
         final int eY = (int) event.getY();
         switch (action) {
             case DragEvent.ACTION_DRAG_STARTED: {
+                if (PhoneFavoriteTileView.EMPTY_CLIP_DATA != event.getClipData()) {
+                    // Ignore any drag events that were not propagated by long pressing
+                    // on a {@link PhoneFavoriteTileView}
+                    return false;
+                }
                 if (!mDragDropController.handleDragStarted(eX, eY)) {
                     return false;
                 }
