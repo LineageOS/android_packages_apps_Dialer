@@ -29,11 +29,11 @@
 
     <!-- Padding at the left and right edges of the "call banner". -->
     <dimen name="call_banner_side_padding">24dp</dimen>
-    <!-- Padding at the right edges of the secondary call banner. -->
-    <dimen name="secondary_call_banner_right_padding">24dp</dimen>
     <!-- Padding at the top and bottom edges of the "call banner". -->
     <dimen name="call_banner_primary_call_container_top_padding">16dp</dimen>
-    <dimen name="call_banner_secondary_call_top_bottom_padding">24dp</dimen>
+    <dimen name="secondary_call_info_horizontal_padding">24dp</dimen>
+    <dimen name="secondary_call_info_vertical_padding">32dp</dimen>
+    <dimen name="secondary_call_info_text_size">16sp</dimen>
 
     <!-- Padding at the top and bottom edges of the "provider information" -->
     <dimen name="provider_info_top_bottom_padding">8dp</dimen>
@@ -53,7 +53,6 @@
 
     <dimen name="primary_call_elevation">5dp</dimen>
     <dimen name="dialpad_elevation">2dp</dimen>
-    <dimen name="secondary_call_elevation">1dp</dimen>
 
     <dimen name="floating_action_bar_vertical_offset">-24dp</dimen>
 
