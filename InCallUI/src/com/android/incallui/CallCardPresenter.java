@@ -518,7 +518,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     private String getGatewayNumber() {
         if (hasOutgoingGatewayCall()) {
-            return getNumberFromHandle(mPrimary.getGatewayInfo().getGatewayHandle());
+            return getNumberFromHandle(mPrimary.getGatewayInfo().getGatewayAddress());
         }
         return null;
     }
