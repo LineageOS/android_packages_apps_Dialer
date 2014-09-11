@@ -123,6 +123,7 @@
         <item name="android:background">@color/actionbar_background_color</item>
         <item name="android:titleTextStyle">@style/DialtactsActionBarTitleText</item>
         <item name="android:height">@dimen/action_bar_height</item>
+        <item name="android:elevation">@dimen/action_bar_elevation</item>
         <!-- Empty icon -->
         <item name="android:icon">@android:color/transparent</item>
         <!-- Shift the title text to the right -->
