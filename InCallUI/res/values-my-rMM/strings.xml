@@ -145,7 +145,7 @@
     <string name="goPrivate" msgid="865837794424530980">"ပရိုက်ဗိတ်သို့ သွားပါ"</string>
     <string name="selectContact" msgid="781975788478987237">"လိပ်စာရွေးပါ"</string>
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"သင့်ကိုယ်ပိုင် စာသား ရေးပါ..."</string>
-    <string name="custom_message_cancel" msgid="7516406059429609296">"ပယ်ဖျက်သည်"</string>
+    <string name="custom_message_cancel" msgid="7516406059429609296">"နေတော့"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"ပို့ခြင်း"</string>
     <string name="description_image_button_one" msgid="5502718871331943463">"တစ်"</string>
     <string name="description_image_button_two" msgid="4903738528222924522">"နှစ်"</string>
