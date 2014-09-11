@@ -1608,8 +1608,8 @@ public class DialpadFragment extends AnalyticsFragment
         if (!hidden) {
             if (mAnimate) {
                 dialpadView.animateShow();
-                mFloatingActionButtonController.scaleIn(mDialpadSlideInDuration);
             }
+            mFloatingActionButtonController.scaleIn(mAnimate ? mDialpadSlideInDuration : 0);
             activity.onDialpadShown();
             mDigits.requestFocus();
         }
