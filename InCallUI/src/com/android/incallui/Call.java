@@ -248,7 +248,7 @@ public final class Call {
     public String getNumber() {
         if (mTelecommCall.getDetails().getGatewayInfo() != null) {
             return mTelecommCall.getDetails().getGatewayInfo()
-                    .getOriginalHandle().getSchemeSpecificPart();
+                    .getOriginalAddress().getSchemeSpecificPart();
         }
         return getHandle() == null ? null : getHandle().getSchemeSpecificPart();
     }
