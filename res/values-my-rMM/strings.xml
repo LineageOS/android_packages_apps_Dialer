@@ -18,7 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"ခေါ်ဆိုရန်နံပါတ်ကွက်"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"ဖုန်း"</string>
+    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"ဖုန်း"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"ခေါ်ဆိုထားသော မှတ်တမ်း"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"စာတိုပို့ရန်"</string>
@@ -138,7 +139,7 @@
     <string name="meid" msgid="6210568493746275750">"MEIDနံပါတ်"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"ဆင်းမ်ကဒ်မှ ဖွင့်နေပါသည်..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"ဆင်းမ်ကဒ်မှ အဆက်အသွယ်များ"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"ပီးပဲလ် အပ်ပလီကေးရှင်းကို ဤအရာအား အသုံးပြုခွင့် ပြန်လည်ပေးရန်"</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"ဒီအင်္ဂါရပ်ကို သုံးနိုင်ရန် အဆက်အသွယ်များ အပလီကေးရှင်းကို ပြန်-ဖွင့်ပေးပါ။"</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"အသံဖြင့် ရှာဖွေခြင်းကို လုပ်၍မရနိုင်ပါ"</string>
     <string name="call_not_available" msgid="8941576511946492225">"ဖုန်း အပလီကေးရှင်းကို ပိတ်ထား၍ ဖုန်း ခေါ်ဆိုမှု မပြုလုပ်နိုင်ခဲ့ပါ။"</string>
     <string name="activity_not_available" msgid="8265265380537872585">"ရွေးချယ်ထားသည့် လုပ်ဆောင်ချက်ကို ကိုင်တွယ်ရန် ထည့်သွင်းထားသည့် လှုပ်ရှားမှု မရှိပါ။"</string>
@@ -194,10 +195,10 @@
     <string name="general_settings_label" msgid="4787443826763795004">"အထွေထွေ ဆက်တင်များ"</string>
     <string name="general_settings_description" msgid="4838560696004337578">"အဆက်အသွယ် ပြသမှု၊ အသံများ၊ နှင့် အမြန် တုံ့ပြန်ချက်များ"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"အဆက်အသွယ် ပြသမှု ရွေးစရာများ"</string>
-    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"အသံများ နှင့် တုန်ခါမှု"</string>
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"အသံနှင့် တုန်ခါမှု"</string>
     <string name="ringtone_title" msgid="760362035635084653">"ဖုန်း သံစဉ်"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"ခေါ်ဆိုမှု အတွက်ပါ တုန်ခါရန်"</string>
-    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"ဒိုင်ခွက် သံစဉ်များ"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"ဖုန်းဝင်လျှင် တုန်ခါရန်"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"ဖုန်းဒိုင်ခွက် အသံ"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"အခြား"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"အမြန် တုံ့ပြန်ချက်များ"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"ခေါ်ဆိုမှု ဆက်တင်များ"</string>

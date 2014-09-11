@@ -18,7 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"ডায়ালার"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"ফোন"</string>
+    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"ফোন"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"কল লগ"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"পাঠ্য বার্তা পাঠান"</string>
@@ -99,8 +100,8 @@
     <string name="dialer_settings_label" msgid="4305043242594150479">"সেটিংস"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"নতুন পরিচিতি"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"সকল পরিচিতি"</string>
-    <string name="callDetailTitle" msgid="5340227785196217938">"কলের বিশদ বিবরণ"</string>
-    <string name="toast_call_detail_error" msgid="7200975244804730096">"অনুরোধ করা কলের জন্য বিশদ বিবরণ পড়া যায়নি৷"</string>
+    <string name="callDetailTitle" msgid="5340227785196217938">"কলের বিবরণ"</string>
+    <string name="toast_call_detail_error" msgid="7200975244804730096">"অনুরোধ করা কলের জন্য বিবরণ পড়া যায়নি৷"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"স্পর্শ স্বর কীপ্যাড ব্যবহার করুন"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"প্রগতিতে থাকা কলে প্রত্যাবর্তন"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"কল যোগ করুন"</string>
@@ -138,7 +139,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM কার্ড থেকে লোড করা হচ্ছে…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM কার্ডের পরিচিতিগুলি"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"এই বৈশিষ্ট্যটি ব্যবহার করতে People অ্যাপ্লিকেশানটিকে পুনঃ-সক্ষমিত করুন৷"</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"এই বৈশিষ্ট্যটি ব্যবহার করতে পরিচিতি অ্যাপ্লিকেশানটিকে পুনরায় সক্রিয় করুন৷"</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"ভয়েস অনুসন্ধান অনুপলব্ধ৷"</string>
     <string name="call_not_available" msgid="8941576511946492225">"কোনো ফোন কল করা যাবে না কারণ ফোন অ্যাপ্লিকেশানটি অক্ষম করা হয়েছে৷"</string>
     <string name="activity_not_available" msgid="8265265380537872585">"নির্বাচিত ক্রিয়াটি নিয়ন্ত্রণ করার জন্য কোনো ইনস্টল করা কার্যকলাপ নেই৷"</string>
@@ -176,7 +177,7 @@
     <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>কে কল করুন"</string>
     <string name="description_video_call_action" msgid="4303952636480252389">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> এর জন্য ভিডিও কল৷"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> এর থেকে আসা ভয়েসমেল শোনা হয়েছে"</string>
-    <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> এর কলের বিশদ বিবরণ"</string>
+    <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> এর কলের বিবরণ"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"কল লগের এন্ট্রি মুছে ফেলা হয়েছে৷"</string>
     <string name="toast_caller_id_reported" msgid="1127087402649645557">"পরিচিতির প্রতিবেদন করা হয়েছে।"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"প্রতিবেদন করুন"</string>

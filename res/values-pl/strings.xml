@@ -18,7 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Telefon"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
+    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Rejestr"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Wyślij wiadomość tekstową"</string>
@@ -138,7 +139,7 @@
     <string name="meid" msgid="6210568493746275750">"Numer MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Wczytywanie z karty SIM…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Kontakty z karty SIM"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Aby korzystać z tej funkcji, włącz ponownie aplikację Kontakty."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Aby używać tej funkcji, włącz ponownie aplikację Kontakty."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Wyszukiwanie głosowe jest niedostępne."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Nie można zadzwonić, ponieważ aplikacja Telefon została wyłączona."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Brak zainstalowanej aplikacji wykonującej wybrane działanie."</string>

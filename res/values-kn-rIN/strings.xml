@@ -18,7 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"ಡಯಲರ್"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"ಫೋನ್"</string>
+    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"ಫೋನ್"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"ಕರೆಯ ಲಾಗ್‌"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"ಪಠ್ಯ ಸಂದೇಶವನ್ನು ಕಳುಹಿಸು"</string>
@@ -139,7 +140,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM ಕಾರ್ಡ್‌ನಿಂದ ಲೋಡ್‌ ಮಾಡಲಾಗುತ್ತಿದೆ…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM ಕಾರ್ಡ್‌ ಸಂಪರ್ಕಗಳು"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಬಳಸಲು ಜನರ ಅಪ್ಲಿಕೇಶನ್‌ ಮರುಸಕ್ರಿಯಗೊಳಿಸಿ."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಬಳಸಲು ಸಂಪರ್ಕಗಳ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಮರು-ಸಕ್ರಿಯಗೊಳಿಸಿ."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"ಧ್ವನಿ ಹುಡುಕಾಟ ಲಭ್ಯವಿಲ್ಲ."</string>
     <string name="call_not_available" msgid="8941576511946492225">"ಫೋನ್ ಅಪ್ಲಿಕೇಶನ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿರುವುದರಿಂದ ಫೋನ್ ಕರೆ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"ಆಯ್ಕೆಮಾಡಿದ ಕ್ರಮವನ್ನು ನಿರ್ವಹಿಸಲು ಯಾವುದೇ ಸ್ಥಾಪಿಸಿದ ಚಟುವಟಿಕೆ ಲಭ್ಯವಿಲ್ಲ."</string>
