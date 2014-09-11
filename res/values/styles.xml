@@ -103,6 +103,7 @@
     <!-- Hide the actionbar title during the activity preview -->
     <style name="DialtactsActivityTheme" parent="DialtactsTheme">
         <item name="android:actionBarStyle">@style/DialtactsActionBarWithoutTitleStyle</item>
+        <item name="android:fastScrollThumbDrawable">@drawable/fastscroll_thumb</item>
     </style>
 
     <style name="CallDetailActivityTheme" parent="DialtactsThemeWithoutActionBarOverlay">
