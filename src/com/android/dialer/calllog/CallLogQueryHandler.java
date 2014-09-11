@@ -42,8 +42,6 @@ import com.google.common.collect.Lists;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import javax.annotation.concurrent.GuardedBy;
-
 /** Handles asynchronous queries to the call log. */
 public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
@@ -71,26 +69,6 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     public static final int CALL_TYPE_ALL = -1;
 
     private final WeakReference<Listener> mListener;
-
-    /** The cursor containing the old calls, or null if they have not yet been fetched. */
-    @GuardedBy("this") private Cursor mCallLogCursor;
-    /**
-     * The identifier of the latest calls request.
-     * <p>
-     * A request for the list of calls requires two queries and hence the two cursor
-     * and {@link #mCallLogCursor} above, corresponding to {@link #QUERY_CALLLOG_TOKEN}.
-     * <p>
-     * When a new request is about to be started, existing cursors are closed. However, it is
-     * possible that one of the queries completes after the new request has started. This means that
-     * we might merge two cursors that do not correspond to the same request. Moreover, this may
-     * lead to a resource leak if the same query completes and we override the cursor without
-     * closing it first.
-     * <p>
-     * To make sure we only join two cursors from the same request, we use this variable to store
-     * the request id of the latest request and make sure we only process cursors corresponding to
-     * the this request.
-     */
-    @GuardedBy("this") private int mCallsRequestId;
 
     /**
      * Simple handler that wraps background calls to catch
@@ -142,8 +120,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
      */
     public void fetchCalls(int callType, long newerThan) {
         cancelFetch();
-        int requestId = newCallsRequest();
-        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType, false /* newOnly */, newerThan);
+        fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, newerThan);
     }
 
     public void fetchCalls(int callType) {
@@ -156,8 +133,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     }
 
     /** Fetches the list of calls in the call log. */
-    private void fetchCalls(int token, int requestId, int callType, boolean newOnly,
-            long newerThan) {
+    private void fetchCalls(int token, int callType, boolean newOnly, long newerThan) {
         // We need to check for NULL explicitly otherwise entries with where READ is NULL
         // may not match either the query or its negation.
         // We consider the calls that are not yet consumed (i.e. IS_READ = 0) as "new".
@@ -192,7 +168,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         Uri uri = Calls.CONTENT_URI_WITH_VOICEMAIL.buildUpon()
                 .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
                 .build();
-        startQuery(token, requestId, uri,
+        startQuery(token, null, uri,
                 CallLogQuery._PROJECTION, selection, selectionArgs.toArray(EMPTY_STRING_ARRAY),
                 Calls.DEFAULT_SORT_ORDER);
     }
@@ -247,52 +223,39 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
                 where.toString(), null);
     }
 
-    /**
-     * Start a new request and return its id. The request id will be used as the cookie for the
-     * background request.
-     * <p>
-     * Closes any open cursor that has not yet been sent to the requester.
-     */
-    private synchronized int newCallsRequest() {
-        MoreCloseables.closeQuietly(mCallLogCursor);
-        mCallLogCursor = null;
-        return ++mCallsRequestId;
-    }
-
     @Override
     protected synchronized void onNotNullableQueryComplete(int token, Object cookie, Cursor cursor) {
-        if (token == QUERY_CALLLOG_TOKEN) {
-            int requestId = ((Integer) cookie).intValue();
-            if (requestId != mCallsRequestId) {
-                // Ignore this query since it does not correspond to the latest request.
-                return;
-            }
-
-            // Store the returned cursor.
-            MoreCloseables.closeQuietly(mCallLogCursor);
-            mCallLogCursor = cursor;
-        } else if (token == QUERY_VOICEMAIL_STATUS_TOKEN) {
-            updateVoicemailStatus(cursor);
-            return;
-        } else {
-            Log.w(TAG, "Unknown query completed: ignoring: " + token);
+        if (cursor == null) {
             return;
         }
-
-        if (mCallLogCursor != null) {
-            updateAdapterData(mCallLogCursor);
-            mCallLogCursor = null;
+        try {
+            if (token == QUERY_CALLLOG_TOKEN) {
+                if (updateAdapterData(cursor)) {
+                    cursor = null;
+                }
+            } else if (token == QUERY_VOICEMAIL_STATUS_TOKEN) {
+                updateVoicemailStatus(cursor);
+            } else {
+                Log.w(TAG, "Unknown query completed: ignoring: " + token);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
     }
 
     /**
      * Updates the adapter in the call log fragment to show the new cursor data.
+     * Returns true if the listener took ownership of the cursor.
      */
-    private void updateAdapterData(Cursor combinedCursor) {
+    private boolean updateAdapterData(Cursor cursor) {
         final Listener listener = mListener.get();
         if (listener != null) {
-            listener.onCallsFetched(combinedCursor);
+            return listener.onCallsFetched(cursor);
         }
+        return false;
+
     }
 
     private void updateVoicemailStatus(Cursor statusCursor) {
@@ -309,7 +272,8 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
         /**
          * Called when {@link CallLogQueryHandler#fetchCalls(int)}complete.
+         * Returns true if takes ownership of cursor.
          */
-        void onCallsFetched(Cursor combinedCursor);
+        boolean onCallsFetched(Cursor combinedCursor);
     }
 }
