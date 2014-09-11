@@ -380,13 +380,17 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
     @Override
     public void onLoadComplete(Loader<Cursor> loader, Cursor cursor) {
-        if (cursor == null || !isSafeToCommitTransactions()) {
+        if (cursor == null) {
             onDismiss();
             return;
         }
-        ArrayList<PhoneItem> phoneList = new ArrayList<PhoneItem>();
-        String primaryPhone = null;
         try {
+            ArrayList<PhoneItem> phoneList = new ArrayList<PhoneItem>();
+            String primaryPhone = null;
+            if (!isSafeToCommitTransactions()) {
+                onDismiss();
+                return;
+            }
             while (cursor.moveToNext()) {
                 if (mContactId == UNKNOWN_CONTACT_ID) {
                     mContactId = cursor.getLong(CONTACT_ID);
@@ -408,27 +412,26 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
                 phoneList.add(item);
             }
+
+            if (mUseDefault && primaryPhone != null) {
+                performAction(primaryPhone);
+                onDismiss();
+                return;
+            }
+
+            Collapser.collapseList(phoneList, mContext);
+            if (phoneList.size() == 0) {
+                onDismiss();
+            } else if (phoneList.size() == 1) {
+                PhoneItem item = phoneList.get(0);
+                onDismiss();
+                performAction(item.phoneNumber);
+            } else {
+                // There are multiple candidates. Let the user choose one.
+                showDisambiguationDialog(phoneList);
+            }
         } finally {
             cursor.close();
-        }
-
-        if (mUseDefault && primaryPhone != null) {
-            performAction(primaryPhone);
-            onDismiss();
-            return;
-        }
-
-        Collapser.collapseList(phoneList, mContext);
-
-        if (phoneList.size() == 0) {
-            onDismiss();
-        } else if (phoneList.size() == 1) {
-            PhoneItem item = phoneList.get(0);
-            onDismiss();
-            performAction(item.phoneNumber);
-        } else {
-            // There are multiple candidates. Let the user choose one.
-            showDisambiguationDialog(phoneList);
         }
     }
 

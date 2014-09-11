@@ -36,6 +36,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 
 /**
@@ -377,34 +378,38 @@ public class SpecialCharSequenceMgr {
          */
         @Override
         protected void onNotNullableQueryComplete(int token, Object cookie, Cursor c) {
-            sPreviousAdnQueryHandler = null;
-            if (mCanceled) {
-                return;
-            }
+            try {
+                sPreviousAdnQueryHandler = null;
+                if (mCanceled) {
+                    return;
+                }
 
-            SimContactQueryCookie sc = (SimContactQueryCookie) cookie;
+                SimContactQueryCookie sc = (SimContactQueryCookie) cookie;
 
-            // close the progress dialog.
-            sc.progressDialog.dismiss();
+                // close the progress dialog.
+                sc.progressDialog.dismiss();
 
-            // get the EditText to update or see if the request was cancelled.
-            EditText text = sc.getTextField();
+                // get the EditText to update or see if the request was cancelled.
+                EditText text = sc.getTextField();
 
-            // if the textview is valid, and the cursor is valid and postionable
-            // on the Nth number, then we update the text field and display a
-            // toast indicating the caller name.
-            if ((c != null) && (text != null) && (c.moveToPosition(sc.contactNum))) {
-                String name = c.getString(c.getColumnIndexOrThrow(ADN_NAME_COLUMN_NAME));
-                String number = c.getString(c.getColumnIndexOrThrow(ADN_PHONE_NUMBER_COLUMN_NAME));
+                // if the textview is valid, and the cursor is valid and postionable
+                // on the Nth number, then we update the text field and display a
+                // toast indicating the caller name.
+                if ((c != null) && (text != null) && (c.moveToPosition(sc.contactNum))) {
+                    String name = c.getString(c.getColumnIndexOrThrow(ADN_NAME_COLUMN_NAME));
+                    String number = c.getString(c.getColumnIndexOrThrow(ADN_PHONE_NUMBER_COLUMN_NAME));
 
-                // fill the text in.
-                text.getText().replace(0, 0, number);
+                    // fill the text in.
+                    text.getText().replace(0, 0, number);
 
-                // display the name as a toast
-                Context context = sc.progressDialog.getContext();
-                name = context.getString(R.string.menu_callNumber, name);
-                Toast.makeText(context, name, Toast.LENGTH_SHORT)
-                    .show();
+                    // display the name as a toast
+                    Context context = sc.progressDialog.getContext();
+                    name = context.getString(R.string.menu_callNumber, name);
+                    Toast.makeText(context, name, Toast.LENGTH_SHORT)
+                        .show();
+                }
+            } finally {
+                MoreCloseables.closeQuietly(c);
             }
         }
 
