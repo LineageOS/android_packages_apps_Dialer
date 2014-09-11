@@ -94,7 +94,7 @@
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Zavřít"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Zavolat zpět"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Zpráva"</string>
-    <string name="incall_error_power_off" msgid="6550191216405193368">"Chcete-li telefonovat, vypněte nejprve režim V letadle."</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Chcete-li telefonovat, vypněte nejprve režim Letadlo."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Přihlášení k síti nebylo úspěšné."</string>
     <string name="incall_error_out_of_service" msgid="8587993036435080418">"Mobilní síť je nedostupná."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Hovor nelze spojit, nebylo zadáno platné číslo."</string>
