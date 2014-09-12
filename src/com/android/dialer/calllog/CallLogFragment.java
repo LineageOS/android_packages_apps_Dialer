@@ -26,13 +26,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.VoicemailContract.Status;
-import android.util.Log;
+import android.util.MutableInt;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -595,7 +596,16 @@ public class CallLogFragment extends AnalyticsListFragment
                 ValueAnimator animator = isExpand ? ValueAnimator.ofFloat(0f, 1f)
                         : ValueAnimator.ofFloat(1f, 0f);
 
+                // Figure out how much scrolling is needed to make the view fully visible.
+                final Rect localVisibleRect = new Rect();
+                view.getLocalVisibleRect(localVisibleRect);
+                final int scrollingNeeded = localVisibleRect.top > 0 ? -localVisibleRect.top
+                        : view.getMeasuredHeight() - localVisibleRect.height();
+
                 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                    private int mCurrentScroll = 0;
+
                     @Override
                     public void onAnimationUpdate(ValueAnimator animator) {
                         Float value = (Float) animator.getAnimatedValue();
@@ -606,6 +616,12 @@ public class CallLogFragment extends AnalyticsListFragment
                         viewHolder.callLogEntryView.setTranslationZ(z);
                         view.setTranslationZ(z); // WAR
                         view.requestLayout();
+
+                        if (isExpand) {
+                            int scrollBy = (int) (value * scrollingNeeded) - mCurrentScroll;
+                            getListView().smoothScrollBy(scrollBy, /* duration = */ 0);
+                            mCurrentScroll += scrollBy;
+                        }
                     }
                 });
                 // Set everything to their final values when the animation's done.
