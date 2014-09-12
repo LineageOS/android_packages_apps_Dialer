@@ -32,6 +32,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract.Status;
+import android.telephony.SubscriptionManager;
 import android.util.Log;
 
 import com.android.common.io.MoreCloseables;
@@ -200,7 +201,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     }
 
     private void fetchCalls(int token, int requestId, int callType, boolean newOnly,
-            long newerThan, int sub) {
+            long newerThan, int slotId) {
         // We need to check for NULL explicitly otherwise entries with where READ is NULL
         // may not match either the query or its negation.
         // We consider the calls that are not yet consumed (i.e. IS_READ = 0) as "new".
@@ -222,12 +223,15 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             selectionArgs.add(Integer.toString(callType));
         }
 
-        if (sub > CALL_SUB_ALL) {
-            if (where.length() > 0) {
-                where.append(" AND ");
+        if (slotId > CALL_SUB_ALL) {
+            long[] subId = SubscriptionManager.getSubId(slotId);
+            if (subId != null && subId.length >= 1) {
+                if (where.length() > 0) {
+                    where.append(" AND ");
+                }
+                where.append(String.format("(%s = ?)", Calls.PHONE_ACCOUNT_ID));
+                selectionArgs.add(Long.toString(subId[0]));
             }
-            where.append(String.format("(%s = ?)", Calls.PHONE_ACCOUNT_ID));
-            selectionArgs.add(Integer.toString(sub));
         }
 
         if (newerThan > 0) {
