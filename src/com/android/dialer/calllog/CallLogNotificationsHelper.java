@@ -18,7 +18,7 @@ package com.android.dialer.calllog;
 
 import android.content.Context;
 import android.content.Intent;
-import android.telecomm.TelecommManager;
+import android.telecom.TelecomManager;
 
 /**
  * Helper class operating on call log notifications.
@@ -26,9 +26,9 @@ import android.telecomm.TelecommManager;
 public class CallLogNotificationsHelper {
     /** Removes the missed call notifications. */
     public static void removeMissedCallNotifications(Context context) {
-        TelecommManager telecommManager = (TelecommManager)
-                context.getSystemService(Context.TELECOMM_SERVICE);
-        telecommManager.cancelMissedCallsNotification();
+        TelecomManager telecomManager = (TelecomManager)
+                context.getSystemService(Context.TELECOM_SERVICE);
+        telecomManager.cancelMissedCallsNotification();
     }
 
     /** Update the voice mail notifications. */

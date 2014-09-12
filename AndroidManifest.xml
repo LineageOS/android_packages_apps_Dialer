@@ -285,7 +285,7 @@
                  android:process="com.android.incallui"
                  android:permission="android.permission.BIND_INCALL_SERVICE" >
             <intent-filter>
-                <action android:name="android.telecomm.InCallService"/>
+                <action android:name="android.telecom.InCallService"/>
             </intent-filter>
         </service>
     </application>
