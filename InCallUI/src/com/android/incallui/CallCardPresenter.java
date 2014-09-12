@@ -16,7 +16,9 @@
 
 package com.android.incallui;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -42,6 +44,7 @@ import com.android.incallui.InCallPresenter.InCallEventListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
+import com.android.incalluibind.ObjectFactory;
 
 import java.lang.ref.WeakReference;
 
@@ -346,6 +349,14 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             final long callStart = mPrimary.getConnectTimeMillis();
             final long duration = System.currentTimeMillis() - callStart;
             ui.setPrimaryCallElapsedTime(true, DateUtils.formatElapsedTime(duration / 1000));
+        }
+    }
+
+    public void onCallStateButtonTouched() {
+        Intent broadcastIntent = ObjectFactory.getCallStateButtonBroadcastIntent();
+        if (broadcastIntent != null) {
+            Log.d(this, "Sending call state button broadcast: ", broadcastIntent);
+            mContext.sendBroadcast(broadcastIntent, Manifest.permission.READ_PHONE_STATE);
         }
     }
 
