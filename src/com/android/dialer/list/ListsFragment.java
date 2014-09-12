@@ -111,12 +111,11 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
     private PanelSlideListener mPanelSlideListener = new PanelSlideListener() {
         @Override
         public void onPanelSlide(View panel, float slideOffset) {
-            // For every 1 percent that the panel is slid upwards, clip 1.5 percent from each edge
-            // of the shortcut card, to achieve the animated effect of the shortcut card
-            // rapidly shrinking and disappearing from view when the panel is slid upwards.
-            // slideOffset is 1 when the shortcut card is fully exposed, and 0 when completely
-            // hidden.
-            float ratioCardHidden = (1 - slideOffset) * 1.5f;
+            // For every 1 percent that the panel is slid upwards, clip 1 percent off the top
+            // edge of the shortcut card, to achieve the animated effect of the shortcut card
+            // being pushed out of view when the panel is slid upwards. slideOffset is 1 when
+            // the shortcut card is fully exposed, and 0 when completely hidden.
+            float ratioCardHidden = (1 - slideOffset);
             if (mShortcutCardsListView.getChildCount() > 0) {
                 final SwipeableShortcutCard v =
                         (SwipeableShortcutCard) mShortcutCardsListView.getChildAt(0);
