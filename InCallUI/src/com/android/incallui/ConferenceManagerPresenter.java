@@ -17,8 +17,8 @@
 package com.android.incallui;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.telecomm.PhoneCapabilities;
 import android.text.TextUtils;
 
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
@@ -26,7 +26,6 @@ import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableSortedSet;
 
 /**
  * Logic for call buttons.
@@ -100,14 +99,24 @@ public class ConferenceManagerPresenter
 
         for (int i = 0; i < MAX_CALLERS_IN_CONFERENCE; i++) {
             if (i < mCallerIds.length) {
+                int callCapabilities =
+                        callList.getCallById(currentCall.getChildCallIds().get(i))
+                        .getTelecommCall().getDetails().getCallCapabilities();
+                boolean thisRowCanSeparate = canSeparate &&
+                        ((callCapabilities & PhoneCapabilities.SEPARATE_FROM_CONFERENCE) != 0);
+                boolean thisRowCanDisconnect =
+                        ((callCapabilities & PhoneCapabilities.DISCONNECT_FROM_CONFERENCE) != 0);
                 // Fill in the row in the UI for this caller.
-
                 final ContactCacheEntry contactCache = ContactInfoCache.getInstance(mContext).
                         getInfo(mCallerIds[i]);
-                updateManageConferenceRow(i, contactCache, canSeparate);
+                updateManageConferenceRow(
+                        i,
+                        contactCache,
+                        thisRowCanSeparate,
+                        thisRowCanDisconnect);
             } else {
                 // Blank out this row in the UI
-                updateManageConferenceRow(i, null, false);
+                updateManageConferenceRow(i, null, false, false);
             }
         }
     }
@@ -122,10 +131,12 @@ public class ConferenceManagerPresenter
       *        so hide this row in the UI.
       * @param canSeparate if true, show a "Separate" (i.e. "Private") button
       *        on this row in the UI.
+      * @param canDisconnect if true, show a "Disconnect" button on this row in the UI.
       */
     public void updateManageConferenceRow(final int i,
                                           final ContactCacheEntry contactCacheEntry,
-                                          boolean canSeparate) {
+                                          boolean canSeparate,
+                                          boolean canDisconnect) {
 
         if (contactCacheEntry != null) {
             // Activate this row of the Manage conference panel:
@@ -139,12 +150,8 @@ public class ConferenceManagerPresenter
                 number = null;
             }
 
-            if (canSeparate) {
-                getUi().setupSeparateButtonForRow(i, canSeparate);
-            }
-            // display the CallerInfo.
-            getUi().setupEndButtonForRow(i);
-
+            getUi().setupSeparateButtonForRow(i, canSeparate);
+            getUi().setupEndButtonForRow(i, canDisconnect);
             getUi().displayCallerInfoForConferenceRow(i, name, number, contactCacheEntry.label,
                     contactCacheEntry.lookupKey, contactCacheEntry.displayPhotoUri);
         } else {
@@ -176,6 +183,6 @@ public class ConferenceManagerPresenter
         void displayCallerInfoForConferenceRow(int rowId, String callerName, String callerNumber,
                 String callerNumberType, String lookupKey, Uri photoUri);
         void setupSeparateButtonForRow(int rowId, boolean canSeparate);
-        void setupEndButtonForRow(int rowId);
+        void setupEndButtonForRow(int rowId, boolean canDisconnect);
     }
 }
