@@ -52,6 +52,10 @@ public class ShortcutCardsAdapter extends BaseAdapter {
     }
 
     private static final String TAG = ShortcutCardsAdapter.class.getSimpleName();
+    private static final float CLIP_CARD_BARELY_HIDDEN_RATIO = 0.001f;
+    private static final float CLIP_CARD_MOSTLY_HIDDEN_RATIO = 0.9f;
+    // Fade out 5x faster than the hidden ratio.
+    private static final float CLIP_CARD_OPACITY_RATIO = 5f;
 
     private final CallLogAdapter mCallLogAdapter;
 
@@ -339,34 +343,31 @@ public class ShortcutCardsAdapter extends BaseAdapter {
             int width = viewToClip.getWidth();
             int height = viewToClip.getHeight();
 
-            if (ratioHidden <= 0.001f) {
+            if (ratioHidden <= CLIP_CARD_BARELY_HIDDEN_RATIO) {
                 viewToClip.setTranslationZ(mPreviousTranslationZ);
             } else if (viewToClip.getTranslationZ() != 0){
                 mPreviousTranslationZ = viewToClip.getTranslationZ();
                 viewToClip.setTranslationZ(0);
             }
 
-            if (ratioHidden > 0.5f) {
+            if (ratioHidden > CLIP_CARD_MOSTLY_HIDDEN_RATIO) {
                 mClipRect.set(0, 0 , 0, 0);
                 setVisibility(View.INVISIBLE);
             } else {
                 setVisibility(View.VISIBLE);
-                int newLeft = (int) (ratioHidden * mCardMaxHorizontalClip);
-                int newRight = width - newLeft;
                 int newTop = (int) (ratioHidden * height);
-                int newBottom = (height - newTop);
-                mClipRect.set(newLeft, newTop, newRight, newBottom);
+                mClipRect.set(0, newTop, width, height);
 
                 // Since the pane will be overlapping with the action bar, apply a vertical offset
-                // to visually center the clipped card in the viewable area;
-                int verticalOffset = -newTop / 2;
-                viewToClip.setTranslationY(verticalOffset);
+                // to top align the clipped card in the viewable area;
+                viewToClip.setTranslationY(-newTop);
             }
             viewToClip.setClipBounds(mClipRect);
 
             // If the view has any children, fade them out of view.
             final ViewGroup viewGroup = (ViewGroup) viewToClip;
-            setChildrenOpacity(viewGroup, Math.max(0, 1 - 4.5f * ratioHidden));
+            setChildrenOpacity(
+                    viewGroup, Math.max(0, 1 - (CLIP_CARD_OPACITY_RATIO  * ratioHidden)));
         }
 
         private void setChildrenOpacity(ViewGroup viewGroup, float alpha) {
