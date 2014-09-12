@@ -1299,10 +1299,13 @@ public class CallLogAdapter extends GroupingListAdapter
                         Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, number),
                         PhoneQuery._PROJECTION, null, null, null);
                 if (phonesCursor != null) {
-                    if (phonesCursor.moveToFirst()) {
-                        matchingNumber = phonesCursor.getString(PhoneQuery.MATCHED_NUMBER);
+                    try {
+                        if (phonesCursor.moveToFirst()) {
+                            matchingNumber = phonesCursor.getString(PhoneQuery.MATCHED_NUMBER);
+                        }
+                    } finally {
+                        phonesCursor.close();
                     }
-                    phonesCursor.close();
                 }
             } catch (Exception e) {
                 // Use the number from the call log
