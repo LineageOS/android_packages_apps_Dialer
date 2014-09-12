@@ -158,14 +158,21 @@ public class ConferenceManagerFragment
     }
 
     @Override
-    public final void setupEndButtonForRow(final int rowId) {
+    public final void setupEndButtonForRow(final int rowId, boolean canDisconnect) {
         View endButton = mConferenceCallList[rowId].findViewById(R.id.conferenceCallerDisconnect);
-        endButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getPresenter().endConferenceConnection(rowId);
-            }
-        });
+
+        // Comment
+        if (canDisconnect) {
+            endButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getPresenter().endConferenceConnection(rowId);
+                }
+            });
+            endButton.setVisibility(View.VISIBLE);
+        } else {
+            endButton.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
