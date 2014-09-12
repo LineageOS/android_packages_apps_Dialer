@@ -823,7 +823,12 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             if (isActivityStarted()) {
                 mInCallActivity.dismissPendingDialogs();
             }
-            startUi(newState);
+            if (!startUi(newState)) {
+                // startUI refused to start the UI. This indicates that it needed to restart the
+                // activity.  When it finally restarts, it will call us back, so we do not actually
+                // change the state yet (we return mInCallState instead of newState).
+                return mInCallState;
+            }
         } else if (newState == InCallState.NO_CALLS) {
             // The new state is the no calls state.  Tear everything down.
             attemptFinishActivity();
@@ -833,10 +838,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         return newState;
     }
 
-    private void startUi(InCallState inCallState) {
-        final Call incomingCall = mCallList.getIncomingCall();
-        final boolean isCallWaiting = (incomingCall != null &&
-                incomingCall.getState() == Call.State.CALL_WAITING);
+    private boolean startUi(InCallState inCallState) {
+        boolean isCallWaiting = mCallList.getActiveCall() != null &&
+                mCallList.getIncomingCall() != null;
 
         // If the screen is off, we need to make sure it gets turned on for incoming calls.
         // This normally works just fine thanks to FLAG_TURN_SCREEN_ON but that only works
@@ -844,14 +848,23 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         // for the call waiting case, we finish() the current activity and start a new one.
         // There should be no jank from this since the screen is already off and will remain so
         // until our new activity is up.
-        if (mProximitySensor.isScreenReallyOff() && isCallWaiting) {
-            if (isActivityStarted()) {
-                mInCallActivity.finish();
-            }
-            mInCallActivity = null;
-        }
 
-        mStatusBarNotifier.updateNotification(inCallState, mCallList);
+        if (isCallWaiting) {
+            if (mProximitySensor.isScreenReallyOff() && isActivityStarted()) {
+                mInCallActivity.finish();
+                // When the activity actually finishes, we will start it again if there are
+                // any active calls, so we do not need to start it explicitly here. Note, we
+                // actually get called back on this function to restart it.
+
+                // We return false to indicate that we did not actually start the UI.
+                return false;
+            } else {
+                showInCall(false, false);
+            }
+        } else {
+            mStatusBarNotifier.updateNotification(inCallState, mCallList);
+        }
+        return true;
     }
 
     /**
