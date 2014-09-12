@@ -102,10 +102,12 @@ public class ShortcutCardsAdapter extends BaseAdapter {
         public void onVoicemailStatusFetched(Cursor statusCursor) {}
 
         @Override
-        public void onCallsFetched(Cursor combinedCursor) {
+        public boolean onCallsFetched(Cursor combinedCursor) {
             mCallLogAdapter.invalidateCache();
             mCallLogAdapter.changeCursor(combinedCursor);
             mCallLogAdapter.notifyDataSetChanged();
+            // Return true; took ownership of cursor
+            return true;
         }
     };
 
