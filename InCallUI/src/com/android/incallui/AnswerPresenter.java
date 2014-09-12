@@ -17,6 +17,7 @@
 package com.android.incallui;
 
 import android.telecomm.PhoneCapabilities;
+import android.app.KeyguardManager;
 import android.content.Context;
 
 import java.util.List;
@@ -98,16 +99,21 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         final List<String> textMsgs = CallList.getInstance().getTextResponses(call.getId());
         getUi().showAnswerUi(true);
 
+        final Context context = getUi().getContext();
+        final KeyguardManager km =
+                (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        final boolean isLockScreenShowing = km.inKeyguardRestrictedInputMode();
+
         boolean withSms = call.can(PhoneCapabilities.RESPOND_VIA_TEXT) && textMsgs != null;
-        if (call.isVideoCall(getUi().getContext())) {
-            if (withSms) {
+        if (call.isVideoCall(context)) {
+            if (withSms && !isLockScreenShowing) {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS);
                 getUi().configureMessageDialog(textMsgs);
             } else {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITHOUT_SMS);
             }
         } else {
-            if (withSms) {
+            if (withSms && !isLockScreenShowing) {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITH_SMS);
                 getUi().configureMessageDialog(textMsgs);
             } else {
