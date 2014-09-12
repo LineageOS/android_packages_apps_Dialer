@@ -22,8 +22,8 @@ import com.google.common.base.Preconditions;
 
 import android.os.Handler;
 import android.os.Message;
+import android.telecom.DisconnectCause;
 import android.telecom.Phone;
-import android.telephony.DisconnectCause;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -84,7 +84,7 @@ public class CallList implements InCallPhoneListener {
             if (mCallByTelecommCall.containsKey(telecommCall)) {
                 Call call = mCallByTelecommCall.get(telecommCall);
                 call.setState(Call.State.DISCONNECTED);
-                call.setDisconnectCause(DisconnectCause.NOT_VALID);
+                call.setDisconnectCause(new DisconnectCause(DisconnectCause.UNKNOWN));
                 if (updateCallInMap(call)) {
                     Log.w(this, "Removing call not previously disconnected " + call.getId());
                 }
@@ -364,7 +364,7 @@ public class CallList implements InCallPhoneListener {
                     state != Call.State.DISCONNECTED) {
 
                 call.setState(Call.State.DISCONNECTED);
-                call.setDisconnectCause(DisconnectCause.NOT_VALID);
+                call.setDisconnectCause(new DisconnectCause(DisconnectCause.UNKNOWN));
                 updateCallInMap(call);
             }
         }
@@ -442,18 +442,18 @@ public class CallList implements InCallPhoneListener {
         Preconditions.checkState(call.getState() == Call.State.DISCONNECTED);
 
 
-        final int cause = call.getDisconnectCause();
+        final int cause = call.getDisconnectCause().getCode();
         final int delay;
         switch (cause) {
             case DisconnectCause.LOCAL:
                 delay = DISCONNECTED_CALL_SHORT_TIMEOUT_MS;
                 break;
-            case DisconnectCause.NORMAL:
+            case DisconnectCause.REMOTE:
                 delay = DISCONNECTED_CALL_MEDIUM_TIMEOUT_MS;
                 break;
-            case DisconnectCause.INCOMING_REJECTED:
-            case DisconnectCause.INCOMING_MISSED:
-            case DisconnectCause.OUTGOING_CANCELED:
+            case DisconnectCause.REJECTED:
+            case DisconnectCause.MISSED:
+            case DisconnectCause.CANCELED:
                 // no delay for missed/rejected incoming calls and canceled outgoing calls.
                 delay = 0;
                 break;

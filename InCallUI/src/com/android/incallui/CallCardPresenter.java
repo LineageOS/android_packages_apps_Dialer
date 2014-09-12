@@ -22,13 +22,14 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.telecom.DisconnectCause;
 import android.telecom.PhoneCapabilities;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.StatusHints;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
-import android.telephony.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -234,7 +235,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     callState,
                     VideoProfile.VideoState.AUDIO_ONLY,
                     Call.SessionModificationState.NO_REQUEST,
-                    DisconnectCause.NOT_VALID,
+                    new DisconnectCause(DisconnectCause.UNKNOWN),
                     null,
                     null,
                     null);
@@ -654,8 +655,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
                 String providerLabel, Drawable providerIcon, boolean isConference,
                 boolean canManageConference);
-        void setCallState(int state, int videoState, int sessionModificationState, int cause,
-                String connectionLabel, Drawable connectionIcon, String gatewayNumber);
+        void setCallState(int state, int videoState, int sessionModificationState,
+                DisconnectCause disconnectCause, String connectionLabel,
+                Drawable connectionIcon, String gatewayNumber);
         void setPrimaryCallElapsedTime(boolean show, String duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Drawable image);
