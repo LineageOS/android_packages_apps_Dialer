@@ -21,7 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.telecomm.VideoProfile;
+import android.telecom.VideoProfile;
 
 /**
  * Top-level Application class for the InCall app.

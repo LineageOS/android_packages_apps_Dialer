@@ -16,10 +16,10 @@
 
 package com.android.incallui;
 
-import android.telecomm.CameraCapabilities;
-import android.telecomm.Connection;
-import android.telecomm.InCallService.VideoCall;
-import android.telecomm.VideoProfile;
+import android.telecom.CameraCapabilities;
+import android.telecom.Connection;
+import android.telecom.InCallService.VideoCall;
+import android.telecom.VideoProfile;
 
 /**
  * Implements the InCallUI Video Call Listener.

@@ -32,7 +32,6 @@ import android.os.Bundle;
 import android.telephony.DisconnectCause;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.KeyEvent;
@@ -380,7 +379,7 @@ public class InCallActivity extends Activity {
 
             case KeyEvent.KEYCODE_MUTE:
                 // toggle mute
-                TelecommAdapter.getInstance().mute(!AudioModeProvider.getInstance().getMute());
+                TelecomAdapter.getInstance().mute(!AudioModeProvider.getInstance().getMute());
                 return true;
 
             // Various testing/debugging features, enabled ONLY when VERBOSE == true.
@@ -515,7 +514,7 @@ public class InCallActivity extends Activity {
             // wants to use the dialpad toward the exact line, so un-hold the holding line.
             final Call call = CallList.getInstance().getActiveOrBackgroundCall();
             if (call != null && call.getState() == State.ONHOLD) {
-                TelecommAdapter.getInstance().unholdCall(call.getId());
+                TelecomAdapter.getInstance().unholdCall(call.getId());
             }
         }
     }
