@@ -20,33 +20,33 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Looper;
-import android.telecomm.InCallAdapter;
-import android.telecomm.Phone;
-import android.telecomm.PhoneAccountHandle;
+import android.telecom.InCallAdapter;
+import android.telecom.Phone;
+import android.telecom.PhoneAccountHandle;
 
-import android.telecomm.PhoneCapabilities;
+import android.telecom.PhoneCapabilities;
 
 import com.google.common.base.Preconditions;
 
 import java.util.List;
 
 /** Wrapper around {@link InCallAdapter} that only forwards calls to the adapter when it's valid. */
-final class TelecommAdapter implements InCallPhoneListener {
+final class TelecomAdapter implements InCallPhoneListener {
     private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
-    private static TelecommAdapter sInstance;
+    private static TelecomAdapter sInstance;
     private Context mContext;
     private Phone mPhone;
 
-    static TelecommAdapter getInstance() {
+    static TelecomAdapter getInstance() {
         Preconditions.checkState(Looper.getMainLooper().getThread() == Thread.currentThread());
         if (sInstance == null) {
-            sInstance = new TelecommAdapter();
+            sInstance = new TelecomAdapter();
         }
         return sInstance;
     }
 
-    private TelecommAdapter() {
+    private TelecomAdapter() {
     }
 
     void setContext(Context context) {
@@ -63,7 +63,7 @@ final class TelecommAdapter implements InCallPhoneListener {
         mPhone = null;
     }
 
-    private android.telecomm.Call getTelecommCallById(String callId) {
+    private android.telecom.Call getTelecommCallById(String callId) {
         return CallList.getInstance().getCallById(callId).getTelecommCall();
     }
 
@@ -149,8 +149,8 @@ final class TelecommAdapter implements InCallPhoneListener {
 
     void merge(String callId) {
         if (mPhone != null) {
-            android.telecomm.Call call = getTelecommCallById(callId);
-            List<android.telecomm.Call> conferenceable = call.getConferenceableCalls();
+            android.telecom.Call call = getTelecommCallById(callId);
+            List<android.telecom.Call> conferenceable = call.getConferenceableCalls();
             if (!conferenceable.isEmpty()) {
                 call.conference(conferenceable.get(0));
             } else {
@@ -166,7 +166,7 @@ final class TelecommAdapter implements InCallPhoneListener {
 
     void swap(String callId) {
         if (mPhone != null) {
-            android.telecomm.Call call = getTelecommCallById(callId);
+            android.telecom.Call call = getTelecommCallById(callId);
             int capabilities = call.getDetails().getCallCapabilities();
             if (0 != (capabilities & PhoneCapabilities.SWAP_CONFERENCE)) {
                 call.swapConference();
