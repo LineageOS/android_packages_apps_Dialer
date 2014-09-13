@@ -42,7 +42,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
@@ -227,9 +226,10 @@ public class CallLogFragment extends AnalyticsListFragment
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
     @Override
-    public void onCallsFetched(Cursor cursor) {
+    public boolean onCallsFetched(Cursor cursor) {
         if (getActivity() == null || getActivity().isFinishing()) {
-            return;
+            // Return false; we did not take ownership of the cursor
+            return false;
         }
         mAdapter.setLoading(false);
         mAdapter.changeCursor(cursor);
@@ -262,6 +262,7 @@ public class CallLogFragment extends AnalyticsListFragment
         }
         mCallLogFetched = true;
         destroyEmptyLoaderIfAllDataFetched();
+        return true;
     }
 
     /**
@@ -276,7 +277,6 @@ public class CallLogFragment extends AnalyticsListFragment
 
         int activeSources = mVoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor);
         setVoicemailSourcesAvailable(activeSources != 0);
-        MoreCloseables.closeQuietly(statusCursor);
         mVoicemailStatusFetched = true;
         destroyEmptyLoaderIfAllDataFetched();
     }

@@ -234,7 +234,8 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
     }
 
     @Override
-    public void onCallsFetched(Cursor statusCursor) {
-        // Do nothing. Implemented to satisfy CallLogQueryHandler.Listener.
+    public boolean onCallsFetched(Cursor statusCursor) {
+        // Return false; did not take ownership of cursor
+        return false;
     }
 }
