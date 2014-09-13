@@ -20,12 +20,12 @@ import com.android.contacts.common.CallUtil;
 
 import android.content.Context;
 import android.net.Uri;
-import android.telecomm.CallProperties;
-import android.telecomm.PhoneCapabilities;
-import android.telecomm.GatewayInfo;
-import android.telecomm.InCallService.VideoCall;
-import android.telecomm.PhoneAccountHandle;
-import android.telecomm.VideoProfile;
+import android.telecom.CallProperties;
+import android.telecom.PhoneCapabilities;
+import android.telecom.GatewayInfo;
+import android.telecom.InCallService.VideoCall;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.VideoProfile;
 import android.telephony.DisconnectCause;
 
 import java.util.ArrayList;
@@ -120,56 +120,56 @@ public final class Call {
     private static final String ID_PREFIX = Call.class.getSimpleName() + "_";
     private static int sIdCounter = 0;
 
-    private android.telecomm.Call.Listener mTelecommCallListener =
-            new android.telecomm.Call.Listener() {
+    private android.telecom.Call.Listener mTelecommCallListener =
+            new android.telecom.Call.Listener() {
                 @Override
-                public void onStateChanged(android.telecomm.Call call, int newState) {
+                public void onStateChanged(android.telecom.Call call, int newState) {
                     update();
                 }
 
                 @Override
-                public void onParentChanged(android.telecomm.Call call,
-                        android.telecomm.Call newParent) {
+                public void onParentChanged(android.telecom.Call call,
+                        android.telecom.Call newParent) {
                     update();
                 }
 
                 @Override
-                public void onChildrenChanged(android.telecomm.Call call,
-                        List<android.telecomm.Call> children) {
+                public void onChildrenChanged(android.telecom.Call call,
+                        List<android.telecom.Call> children) {
                     update();
                 }
 
                 @Override
-                public void onDetailsChanged(android.telecomm.Call call,
-                        android.telecomm.Call.Details details) {
+                public void onDetailsChanged(android.telecom.Call call,
+                        android.telecom.Call.Details details) {
                     update();
                 }
 
                 @Override
-                public void onCannedTextResponsesLoaded(android.telecomm.Call call,
+                public void onCannedTextResponsesLoaded(android.telecom.Call call,
                         List<String> cannedTextResponses) {
                     update();
                 }
 
                 @Override
-                public void onPostDialWait(android.telecomm.Call call,
+                public void onPostDialWait(android.telecom.Call call,
                         String remainingPostDialSequence) {
                     update();
                 }
 
                 @Override
-                public void onVideoCallChanged(android.telecomm.Call call,
+                public void onVideoCallChanged(android.telecom.Call call,
                         VideoCall videoCall) {
                     update();
                 }
 
                 @Override
-                public void onCallDestroyed(android.telecomm.Call call) {
+                public void onCallDestroyed(android.telecom.Call call) {
                     call.removeListener(mTelecommCallListener);
                 }
             };
 
-    private final android.telecomm.Call mTelecommCall;
+    private final android.telecom.Call mTelecommCall;
     private final String mId;
     private int mState = State.INVALID;
     private int mDisconnectCause;
@@ -178,14 +178,14 @@ public final class Call {
 
     private InCallVideoCallListener mVideoCallListener;
 
-    public Call(android.telecomm.Call telecommCall) {
+    public Call(android.telecom.Call telecommCall) {
         mTelecommCall = telecommCall;
         mId = ID_PREFIX + Integer.toString(sIdCounter++);
         updateFromTelecommCall();
         mTelecommCall.addListener(mTelecommCallListener);
     }
 
-    public android.telecomm.Call getTelecommCall() {
+    public android.telecom.Call getTelecommCall() {
         return mTelecommCall;
     }
 
@@ -221,20 +221,20 @@ public final class Call {
 
     private static int translateState(int state) {
         switch (state) {
-            case android.telecomm.Call.STATE_CONNECTING:
+            case android.telecom.Call.STATE_CONNECTING:
                 return Call.State.CONNECTING;
-            case android.telecomm.Call.STATE_PRE_DIAL_WAIT:
+            case android.telecom.Call.STATE_PRE_DIAL_WAIT:
                 return Call.State.PRE_DIAL_WAIT;
-            case android.telecomm.Call.STATE_DIALING:
-            case android.telecomm.Call.STATE_NEW:
+            case android.telecom.Call.STATE_DIALING:
+            case android.telecom.Call.STATE_NEW:
                 return Call.State.DIALING;
-            case android.telecomm.Call.STATE_RINGING:
+            case android.telecom.Call.STATE_RINGING:
                 return Call.State.INCOMING;
-            case android.telecomm.Call.STATE_ACTIVE:
+            case android.telecom.Call.STATE_ACTIVE:
                 return Call.State.ACTIVE;
-            case android.telecomm.Call.STATE_HOLDING:
+            case android.telecom.Call.STATE_HOLDING:
                 return Call.State.ONHOLD;
-            case android.telecomm.Call.STATE_DISCONNECTED:
+            case android.telecom.Call.STATE_DISCONNECTED:
                 return Call.State.DISCONNECTED;
             default:
                 return Call.State.INVALID;
@@ -346,7 +346,7 @@ public final class Call {
     }
 
     public String getParentId() {
-        android.telecomm.Call parentCall = mTelecommCall.getParent();
+        android.telecom.Call parentCall = mTelecommCall.getParent();
         if (parentCall != null) {
             return CallList.getInstance().getCallByTelecommCall(parentCall).getId();
         }

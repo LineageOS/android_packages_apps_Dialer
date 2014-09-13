@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -52,7 +51,7 @@ public class PostCharDialogFragment extends DialogFragment {
         builder.setPositiveButton(R.string.pause_prompt_yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int whichButton) {
-                TelecommAdapter.getInstance().postDialContinue(mCallId, true);
+                TelecomAdapter.getInstance().postDialContinue(mCallId, true);
             }
         });
         builder.setNegativeButton(R.string.pause_prompt_no, new DialogInterface.OnClickListener() {
@@ -71,6 +70,6 @@ public class PostCharDialogFragment extends DialogFragment {
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
 
-        TelecommAdapter.getInstance().postDialContinue(mCallId, false);
+        TelecomAdapter.getInstance().postDialContinue(mCallId, false);
     }
 }

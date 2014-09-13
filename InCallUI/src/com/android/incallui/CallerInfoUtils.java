@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Loader;
 import android.content.Loader.OnLoadCompleteListener;
 import android.net.Uri;
-import android.telecomm.PhoneAccount;
-import android.telecomm.TelecommManager;
+import android.telecom.PhoneAccount;
+import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -41,7 +41,7 @@ public class CallerInfoUtils {
 
         // TODO: Have phoneapp send a Uri when it knows the contact that triggered this call.
 
-        if (info.numberPresentation == TelecommManager.PRESENTATION_ALLOWED) {
+        if (info.numberPresentation == TelecomManager.PRESENTATION_ALLOWED) {
             // Start the query with the number provided from the call.
             Log.d(TAG, "==> Actually starting CallerInfoAsyncQuery.startQuery()...");
             CallerInfoAsyncQuery.startQuery(QUERY_TOKEN, context, info, listener, call);
@@ -107,9 +107,9 @@ public class CallerInfoUtils {
         final String[] absentNumberValues =
                 context.getResources().getStringArray(R.array.absent_num);
         if (Arrays.asList(absentNumberValues).contains(number)
-                && presentation == TelecommManager.PRESENTATION_ALLOWED) {
+                && presentation == TelecomManager.PRESENTATION_ALLOWED) {
             number = context.getString(R.string.unknown);
-            ci.numberPresentation = TelecommManager.PRESENTATION_UNKNOWN;
+            ci.numberPresentation = TelecomManager.PRESENTATION_UNKNOWN;
         }
 
         // Check for other special "corner cases" for CNAP and fix them similarly. Corner
@@ -117,16 +117,16 @@ public class CallerInfoUtils {
         // if we think we have an allowed presentation, or if the CallerInfo presentation doesn't
         // match the presentation passed in for verification (meaning we changed it previously
         // because it's a corner case and we're being called from a different entry point).
-        if (ci.numberPresentation == TelecommManager.PRESENTATION_ALLOWED
+        if (ci.numberPresentation == TelecomManager.PRESENTATION_ALLOWED
                 || (ci.numberPresentation != presentation
-                        && presentation == TelecommManager.PRESENTATION_ALLOWED)) {
+                        && presentation == TelecomManager.PRESENTATION_ALLOWED)) {
             // For all special strings, change number & numberPrentation.
             if (isCnapSpecialCaseRestricted(number)) {
                 number = context.getString(R.string.private_num);
-                ci.numberPresentation = TelecommManager.PRESENTATION_RESTRICTED;
+                ci.numberPresentation = TelecomManager.PRESENTATION_RESTRICTED;
             } else if (isCnapSpecialCaseUnknown(number)) {
                 number = context.getString(R.string.unknown);
-                ci.numberPresentation = TelecommManager.PRESENTATION_UNKNOWN;
+                ci.numberPresentation = TelecomManager.PRESENTATION_UNKNOWN;
             }
             Log.d(TAG, "SpecialCnap: number=" + toLogSafePhoneNumber(number)
                     + "; presentation now=" + ci.numberPresentation);

@@ -18,8 +18,8 @@ package com.android.incallui;
 
 import com.google.common.collect.Lists;
 
-import android.telecomm.AudioState;
-import android.telecomm.Phone;
+import android.telecom.AudioState;
+import android.telecom.Phone;
 
 import java.util.List;
 

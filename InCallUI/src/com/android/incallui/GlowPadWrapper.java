@@ -19,7 +19,7 @@ package com.android.incallui;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.telecomm.VideoProfile;
+import android.telecom.VideoProfile;
 import android.util.AttributeSet;
 import android.view.View;
 
