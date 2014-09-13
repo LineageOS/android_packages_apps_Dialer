@@ -29,7 +29,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
-import android.telecomm.PhoneAccount;
+import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;

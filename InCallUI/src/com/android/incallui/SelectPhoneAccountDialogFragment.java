@@ -16,8 +16,8 @@
 
 package com.android.incallui;
 
-import android.telecomm.PhoneAccount;
-import android.telecomm.PhoneAccountHandle;
+import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -26,7 +26,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.telecomm.TelecommManager;
+import android.telecom.TelecomManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +36,6 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.android.contacts.common.R;
-import com.android.contacts.common.editor.SelectAccountDialogFragment;
 
 import java.util.List;
 
@@ -46,7 +45,7 @@ import java.util.List;
 public class SelectPhoneAccountDialogFragment extends DialogFragment {
     private List<PhoneAccountHandle> mAccountHandles;
     private boolean mIsSelected;
-    private TelecommManager mTelecommManager;
+    private TelecomManager mTelecomManager;
     private final String mUriScheme;
 
     /**
@@ -69,9 +68,9 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         mIsSelected = false;
-        mTelecommManager =
-                (TelecommManager) getActivity().getSystemService(Context.TELECOMM_SERVICE);
-        mAccountHandles = mTelecommManager.getPhoneAccountsSupportingScheme(mUriScheme);
+        mTelecomManager =
+                (TelecomManager) getActivity().getSystemService(Context.TELECOM_SERVICE);
+        mAccountHandles = mTelecomManager.getPhoneAccountsSupportingScheme(mUriScheme);
 
         final DialogInterface.OnClickListener selectionListener =
                 new DialogInterface.OnClickListener() {
@@ -128,7 +127,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
             }
 
             PhoneAccountHandle accountHandle = getItem(position);
-            PhoneAccount account = mTelecommManager.getPhoneAccount(accountHandle);
+            PhoneAccount account = mTelecomManager.getPhoneAccount(accountHandle);
             holder.textView.setText(account.getLabel());
             holder.imageView.setImageDrawable(account.getIcon(mContext));
             return rowView;

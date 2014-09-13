@@ -22,7 +22,7 @@ import com.google.common.base.Preconditions;
 
 import android.os.Handler;
 import android.os.Message;
-import android.telecomm.Phone;
+import android.telecom.Phone;
 import android.telephony.DisconnectCause;
 
 import java.util.Collections;
@@ -48,7 +48,7 @@ public class CallList implements InCallPhoneListener {
     private static CallList sInstance = new CallList();
 
     private final HashMap<String, Call> mCallById = new HashMap<>();
-    private final HashMap<android.telecomm.Call, Call> mCallByTelecommCall = new HashMap<>();
+    private final HashMap<android.telecom.Call, Call> mCallByTelecommCall = new HashMap<>();
     private final HashMap<String, List<String>> mCallTextReponsesMap = Maps.newHashMap();
     /**
      * ConcurrentHashMap constructor params: 8 is initial table size, 0.9f is
@@ -71,7 +71,7 @@ public class CallList implements InCallPhoneListener {
 
     private Phone.Listener mPhoneListener = new Phone.Listener() {
         @Override
-        public void onCallAdded(Phone phone, android.telecomm.Call telecommCall) {
+        public void onCallAdded(Phone phone, android.telecom.Call telecommCall) {
             Call call = new Call(telecommCall);
             if (call.getState() == Call.State.INCOMING) {
                 onIncoming(call, call.getCannedSmsResponses());
@@ -80,7 +80,7 @@ public class CallList implements InCallPhoneListener {
             }
         }
         @Override
-        public void onCallRemoved(Phone phone, android.telecomm.Call telecommCall) {
+        public void onCallRemoved(Phone phone, android.telecom.Call telecommCall) {
             if (mCallByTelecommCall.containsKey(telecommCall)) {
                 Call call = mCallByTelecommCall.get(telecommCall);
                 call.setState(Call.State.DISCONNECTED);
@@ -313,7 +313,7 @@ public class CallList implements InCallPhoneListener {
         return mCallById.get(callId);
     }
 
-    public Call getCallByTelecommCall(android.telecomm.Call telecommCall) {
+    public Call getCallByTelecommCall(android.telecom.Call telecommCall) {
         return mCallByTelecommCall.get(telecommCall);
     }
 

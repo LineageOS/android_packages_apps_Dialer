@@ -22,13 +22,12 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.telecomm.PhoneCapabilities;
-import android.telecomm.PhoneAccount;
-import android.telecomm.PhoneAccountHandle;
-import android.telecomm.StatusHints;
-import android.telecomm.TelecommManager;
-import android.telecomm.VideoProfile;
+import android.telecom.PhoneCapabilities;
+import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.StatusHints;
+import android.telecom.TelecomManager;
+import android.telecom.VideoProfile;
 import android.telephony.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
@@ -65,7 +64,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private ContactCacheEntry mSecondaryContactInfo;
     private CallTimer mCallTimer;
     private Context mContext;
-    private TelecommManager mTelecommManager;
+    private TelecomManager mTelecomManager;
 
     public static class ContactLookupCallback implements ContactInfoCacheCallback {
         private final WeakReference<CallCardPresenter> mCallCardPresenter;
@@ -259,7 +258,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     @Override
-    public void onDetailsChanged(Call call, android.telecomm.Call.Details details) {
+    public void onDetailsChanged(Call call, android.telecom.Call.Details details) {
         updatePrimaryCallState();
     }
 
@@ -269,8 +268,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // number directly from the telephony layer).
         PhoneAccountHandle accountHandle = mPrimary.getAccountHandle();
         if (accountHandle != null) {
-            TelecommManager mgr =
-                    (TelecommManager) mContext.getSystemService(Context.TELECOMM_SERVICE);
+            TelecomManager mgr =
+                    (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
             PhoneAccount account = mgr.getPhoneAccount(accountHandle);
             if (account != null) {
                 return getNumberFromHandle(account.getSubscriptionAddress());
@@ -318,7 +317,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             if (statusHints != null) {
                 Bundle extras = statusHints.getExtras();
                 if (extras != null) {
-                    callbackNumber = extras.getString(TelecommManager.EXTRA_CALL_BACK_NUMBER);
+                    callbackNumber = extras.getString(TelecomManager.EXTRA_CALL_BACK_NUMBER);
                 }
             }
         }
@@ -503,7 +502,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (accountHandle == null) {
             return null;
         }
-        return getTelecommManager().getPhoneAccount(accountHandle);
+        return getTelecomManager().getPhoneAccount(accountHandle);
     }
 
     /**
@@ -521,7 +520,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     private Drawable getCallProviderIcon(Call call) {
         PhoneAccount account = getAccountForCall(call);
-        if (account != null && getTelecommManager().hasMultipleEnabledAccounts()) {
+        if (account != null && getTelecomManager().hasMultipleEnabledAccounts()) {
             return account.getIcon(mContext);
         }
         return null;
@@ -532,7 +531,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     private String getCallProviderLabel(Call call) {
         PhoneAccount account = getAccountForCall(call);
-        if (account != null && getTelecommManager().hasMultipleEnabledAccounts()) {
+        if (account != null && getTelecomManager().hasMultipleEnabledAccounts()) {
             return account.getLabel().toString();
         }
         return null;
@@ -616,7 +615,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         Log.i(this, "Swapping call to foreground: " + mSecondary);
-        TelecommAdapter.getInstance().unholdCall(mSecondary.getId());
+        TelecomAdapter.getInstance().unholdCall(mSecondary.getId());
     }
 
     public void endCallClicked() {
@@ -625,7 +624,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         Log.i(this, "Disconnecting call: " + mPrimary);
-        TelecommAdapter.getInstance().disconnectCall(mPrimary.getId());
+        TelecomAdapter.getInstance().disconnectCall(mPrimary.getId());
     }
 
     private String getNumberFromHandle(Uri handle) {
@@ -669,11 +668,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void showManageConferenceCallButton(boolean visible);
     }
 
-    private TelecommManager getTelecommManager() {
-        if (mTelecommManager == null) {
-            mTelecommManager =
-                    (TelecommManager) mContext.getSystemService(Context.TELECOMM_SERVICE);
+    private TelecomManager getTelecomManager() {
+        if (mTelecomManager == null) {
+            mTelecomManager =
+                    (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
         }
-        return mTelecommManager;
+        return mTelecomManager;
     }
 }
