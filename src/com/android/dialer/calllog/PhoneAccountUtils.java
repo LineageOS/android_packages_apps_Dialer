@@ -19,9 +19,9 @@ package com.android.dialer.calllog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.telecomm.PhoneAccount;
-import android.telecomm.PhoneAccountHandle;
-import android.telecomm.TelecommManager;
+import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
 /**
@@ -68,10 +68,10 @@ public class PhoneAccountUtils {
      */
     private static PhoneAccount getAccountOrNull(Context context,
             PhoneAccountHandle phoneAccount) {
-        final TelecommManager telecommManager =
-                (TelecommManager) context.getSystemService(Context.TELECOMM_SERVICE);
-        final PhoneAccount account = telecommManager.getPhoneAccount(phoneAccount);
-        if (account == null || !telecommManager.hasMultipleEnabledAccounts()) {
+        final TelecomManager telecomManager =
+                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+        final PhoneAccount account = telecomManager.getPhoneAccount(phoneAccount);
+        if (account == null || !telecomManager.hasMultipleEnabledAccounts()) {
             return null;
         }
         return account;

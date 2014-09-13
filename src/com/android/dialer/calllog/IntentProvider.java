@@ -21,7 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
-import android.telecomm.PhoneAccountHandle;
+import android.telecom.PhoneAccountHandle;
 
 import com.android.contacts.common.CallUtil;
 import com.android.dialer.CallDetailActivity;
