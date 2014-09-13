@@ -60,6 +60,7 @@ import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
+import com.android.dialer.cmstats.DialerStats;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.CallRecordingPlayer;
@@ -447,6 +448,12 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                         isVoicemailNumber? ContactPhotoManager.TYPE_VOICEMAIL :
                         isBusiness ? ContactPhotoManager.TYPE_BUSINESS :
                         ContactPhotoManager.TYPE_DEFAULT;
+
+                // Track percentage of time that contact photo is present on details page
+                String imageFound = firstDetails.photoUri != null ?
+                        "details_image_found" : "details_image_not_found";
+                DialerStats.sendEvent(CallDetailActivity.this,
+                            DialerStats.Categories.DETAILS_CONTACT_IMAGE, imageFound);
 
                 mCallDetailHeader.loadContactPhotos(firstDetails.photoUri, displayNameForDefaultImage, lookupKey, contactType);
 
