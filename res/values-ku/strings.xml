@@ -151,7 +151,7 @@
   <string name="add_contact_not_available">دوباره‌کارکردنه‌وه‌ی به‌رنامه‌ی خه‌ڵک بۆ ئه‌م خزمه‌تگوزارییه‌.</string>
   <string name="voice_search_not_available">گه‌ڕانی ده‌نگی ئاماده‌نییه‌.</string>
   <string name="dialer_hint_find_contact">ناوێک یان ژماره‌یه‌ک بنووسه‌</string>
-  <string name="call_log_all_title">هەموو</string>
+  <string name="call_log_all_title">گشت</string>
   <string name="call_log_missed_title">وەڵام نەدراوه‌</string>
   <string name="call_log_activity_title_font_family">sans-serif-light</string>
   <string name="show_all_contacts_title_font_family">sans-serif-light</string>
