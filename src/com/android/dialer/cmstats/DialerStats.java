@@ -40,6 +40,8 @@ public class DialerStats {
         public static final String APP_LAUNCH = "app_launch";
         public static final String BUTTON_EVENT = "button_event";
         public static final String INITIATE_CALL = "initiate_call";
+        public static final String INCALL_CONTACT_IMAGE = "incall_contact_image";
+        public static final String DETAILS_CONTACT_IMAGE = "details_contact_image";
     }
 
     public static void sendEvent(Context context, String category, String action,
