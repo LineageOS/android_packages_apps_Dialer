@@ -17,10 +17,10 @@
 package com.android.incallui;
 
 import android.content.Context;
-import android.telecomm.AudioState;
-import android.telecomm.InCallService.VideoCall;
-import android.telecomm.PhoneCapabilities;
-import android.telecomm.VideoProfile;
+import android.telecom.AudioState;
+import android.telecom.InCallService.VideoCall;
+import android.telecom.PhoneCapabilities;
+import android.telecom.VideoProfile;
 
 
 import com.android.incallui.AudioModeProvider.AudioModeListener;
@@ -134,7 +134,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // if it turns out to be slow
 
         Log.d(this, "Sending new Audio Mode: " + AudioState.audioRouteToString(mode));
-        TelecommAdapter.getInstance().setAudioRoute(mode);
+        TelecomAdapter.getInstance().setAudioRoute(mode);
     }
 
     /**
@@ -162,7 +162,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     public void muteClicked(boolean checked) {
         Log.d(this, "turning on mute: " + checked);
-        TelecommAdapter.getInstance().mute(checked);
+        TelecomAdapter.getInstance().mute(checked);
     }
 
     public void holdClicked(boolean checked) {
@@ -171,10 +171,10 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
         if (checked) {
             Log.i(this, "Putting the call on hold: " + mCall);
-            TelecommAdapter.getInstance().holdCall(mCall.getId());
+            TelecomAdapter.getInstance().holdCall(mCall.getId());
         } else {
             Log.i(this, "Removing the call from hold: " + mCall);
-            TelecommAdapter.getInstance().unholdCall(mCall.getId());
+            TelecomAdapter.getInstance().unholdCall(mCall.getId());
         }
     }
 
@@ -184,11 +184,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
 
         Log.i(this, "Swapping the call: " + mCall);
-        TelecommAdapter.getInstance().swap(mCall.getId());
+        TelecomAdapter.getInstance().swap(mCall.getId());
     }
 
     public void mergeClicked() {
-        TelecommAdapter.getInstance().merge(mCall.getId());
+        TelecomAdapter.getInstance().merge(mCall.getId());
     }
 
     public void addCallClicked() {
@@ -198,7 +198,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // Simulate a click on the mute button
         muteClicked(true);
 
-        TelecommAdapter.getInstance().addCall();
+        TelecomAdapter.getInstance().addCall();
     }
 
     public void changeToVoiceClicked() {

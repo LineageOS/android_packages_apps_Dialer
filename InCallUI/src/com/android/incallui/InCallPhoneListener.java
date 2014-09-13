@@ -16,7 +16,7 @@
 
 package com.android.incallui;
 
-import android.telecomm.Phone;
+import android.telecom.Phone;
 
 /**
  * Interface implemented by In-Call components that maintain a reference to the Telecomm API
