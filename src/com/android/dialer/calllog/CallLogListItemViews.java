@@ -17,7 +17,7 @@
 package com.android.dialer.calllog;
 
 import android.content.Context;
-import android.telecomm.PhoneAccountHandle;
+import android.telecom.PhoneAccountHandle;
 import android.view.View;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;

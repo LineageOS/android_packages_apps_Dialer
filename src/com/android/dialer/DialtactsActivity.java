@@ -32,8 +32,8 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
-import android.telecomm.PhoneAccount;
-import android.telecomm.TelecommManager;
+import android.telecom.PhoneAccount;
+import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -92,7 +92,6 @@ import com.android.phone.common.animation.AnimationListenerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
@@ -774,7 +773,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final boolean callKey = Intent.ACTION_CALL_BUTTON.equals(intent.getAction());
 
         if (callKey) {
-            getTelecommManager().showInCallScreen(false);
+            getTelecomManager().showInCallScreen(false);
             return true;
         }
 
@@ -918,7 +917,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     /** Returns an Intent to launch Call Settings screen */
     public static Intent getCallSettingsIntent() {
-        final Intent intent = new Intent(TelecommManager.ACTION_SHOW_CALL_SETTINGS);
+        final Intent intent = new Intent(TelecomManager.ACTION_SHOW_CALL_SETTINGS);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         return intent;
     }
@@ -995,7 +994,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     private boolean phoneIsInUse() {
-        return getTelecommManager().isInCall();
+        return getTelecomManager().isInCall();
     }
 
     public static Intent getAddNumberToContactIntent(CharSequence text) {
@@ -1127,8 +1126,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         return (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
     }
 
-    private TelecommManager getTelecommManager() {
-        return (TelecommManager) getSystemService(Context.TELECOMM_SERVICE);
+    private TelecomManager getTelecomManager() {
+        return (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
     }
 
     @Override

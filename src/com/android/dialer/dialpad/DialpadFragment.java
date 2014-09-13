@@ -37,8 +37,8 @@ import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
-import android.telecomm.PhoneAccount;
-import android.telecomm.TelecommManager;
+import android.telecom.PhoneAccount;
+import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -61,7 +61,6 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -207,9 +206,9 @@ public class DialpadFragment extends AnalyticsFragment
      * press/depress of the "hookswitch" of a landline phone. Aka "empty flash".
      *
      * TODO: Using an intent extra to tell the phone to send this flash is a
-     * temporary measure. To be replaced with an Telephony/TelecommManager call in the future.
+     * temporary measure. To be replaced with an Telephony/TelecomManager call in the future.
      * TODO: Keep in sync with the string defined in OutgoingCallBroadcaster.java
-     * in Phone app until this is replaced with the Telephony/Telecomm API.
+     * in Phone app until this is replaced with the Telephony/Telecom API.
      */
     private static final String EXTRA_SEND_EMPTY_FLASH
             = "com.android.phone.extra.SEND_EMPTY_FLASH";
@@ -267,8 +266,8 @@ public class DialpadFragment extends AnalyticsFragment
         return (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
     }
 
-    private TelecommManager getTelecommManager() {
-        return (TelecommManager) getActivity().getSystemService(Context.TELECOMM_SERVICE);
+    private TelecomManager getTelecomManager() {
+        return (TelecomManager) getActivity().getSystemService(Context.TELECOM_SERVICE);
     }
 
     @Override
@@ -1387,7 +1386,7 @@ public class DialpadFragment extends AnalyticsFragment
      * or "return to call" from the dialpad chooser.
      */
     private void returnToInCallScreen(boolean showDialpad) {
-        getTelecommManager().showInCallScreen(showDialpad);
+        getTelecomManager().showInCallScreen(showDialpad);
 
         // Finally, finish() ourselves so that we don't stay on the
         // activity stack.
@@ -1405,7 +1404,7 @@ public class DialpadFragment extends AnalyticsFragment
      *              is active (ie. off hook or ringing or dialing, or on hold).
      */
     public boolean isPhoneInUse() {
-        return getTelecommManager().isInCall();
+        return getTelecomManager().isInCall();
     }
 
     /**
