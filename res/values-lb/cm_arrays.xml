@@ -20,11 +20,9 @@
     <item><xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
     <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
     <item><xliff:g id="minutes" example="2 mins">%2$s</xliff:g>, <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-    <item>
-      <xliff:g id="hours" example="2 hrs">%1$s</xliff:g>
-    </item>
+    <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g></item>
     <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g>, <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
-    <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
-    <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
+    <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g>, <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
+    <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g>, <xliff:g id="minutes" example="2 mins">%2$s</xliff:g>, <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
   </string-array>
 </resources>
