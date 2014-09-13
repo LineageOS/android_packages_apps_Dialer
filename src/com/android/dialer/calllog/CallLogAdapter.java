@@ -27,7 +27,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
-import android.telecomm.PhoneAccountHandle;
+import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
