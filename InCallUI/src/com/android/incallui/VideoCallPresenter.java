@@ -19,9 +19,9 @@ package com.android.incallui;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Handler;
-import android.telecomm.AudioState;
-import android.telecomm.CameraCapabilities;
-import android.telecomm.InCallService.VideoCall;
+import android.telecom.AudioState;
+import android.telecom.CameraCapabilities;
+import android.telecom.InCallService.VideoCall;
 import android.view.Surface;
 
 import com.android.contacts.common.CallUtil;
@@ -340,7 +340,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @param details The new call details.
      */
     @Override
-    public void onDetailsChanged(Call call, android.telecomm.Call.Details details) {
+    public void onDetailsChanged(Call call, android.telecom.Call.Details details) {
         // If the details change is not for the currently active call no update is required.
         if (!call.equals(mPrimaryCall)) {
             return;
@@ -427,7 +427,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
 
         mPreVideoAudioMode = AudioModeProvider.getInstance().getAudioMode();
-        TelecommAdapter.getInstance().setAudioRoute(AudioState.ROUTE_SPEAKER);
+        TelecomAdapter.getInstance().setAudioRoute(AudioState.ROUTE_SPEAKER);
     }
 
     /**
@@ -442,7 +442,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         ui.showVideoUi(false);
 
         if (mPreVideoAudioMode != AudioModeProvider.AUDIO_MODE_INVALID) {
-            TelecommAdapter.getInstance().setAudioRoute(mPreVideoAudioMode);
+            TelecomAdapter.getInstance().setAudioRoute(mPreVideoAudioMode);
             mPreVideoAudioMode = AudioModeProvider.AUDIO_MODE_INVALID;
         }
     }

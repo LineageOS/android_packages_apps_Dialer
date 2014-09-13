@@ -21,10 +21,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.telecomm.PhoneCapabilities;
-import android.telecomm.Phone;
-import android.telecomm.PhoneAccountHandle;
-import android.telecomm.VideoProfile;
+import android.telecom.PhoneCapabilities;
+import android.telecom.Phone;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.VideoProfile;
 import android.text.TextUtils;
 import android.view.Surface;
 import android.view.View;
@@ -90,27 +90,27 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             bringToForeground(showDialpad);
         }
         @Override
-        public void onCallAdded(Phone phone, android.telecomm.Call call) {
+        public void onCallAdded(Phone phone, android.telecom.Call call) {
             call.addListener(mCallListener);
         }
         @Override
-        public void onCallRemoved(Phone phone, android.telecomm.Call call) {
+        public void onCallRemoved(Phone phone, android.telecom.Call call) {
             call.removeListener(mCallListener);
         }
     };
 
-    private final android.telecomm.Call.Listener mCallListener =
-            new android.telecomm.Call.Listener() {
+    private final android.telecom.Call.Listener mCallListener =
+            new android.telecom.Call.Listener() {
         @Override
-        public void onPostDialWait(android.telecomm.Call call, String remainingPostDialSequence) {
+        public void onPostDialWait(android.telecom.Call call, String remainingPostDialSequence) {
             onPostDialCharWait(
                     CallList.getInstance().getCallByTelecommCall(call).getId(),
                     remainingPostDialSequence);
         }
 
         @Override
-        public void onDetailsChanged(android.telecomm.Call call,
-                android.telecomm.Call.Details details) {
+        public void onDetailsChanged(android.telecom.Call call,
+                android.telecom.Call.Details details) {
             for (InCallDetailsListener listener : mDetailsListeners) {
                 listener.onDetailsChanged(CallList.getInstance().getCallByTelecommCall(call),
                         details);
@@ -119,7 +119,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         @Override
         public void onConferenceableCallsChanged(
-                android.telecomm.Call call, List<android.telecomm.Call> conferenceableCalls) {
+                android.telecom.Call call, List<android.telecom.Call> conferenceableCalls) {
             Log.i(this, "onConferenceableCallsChanged: " + call);
             for (InCallDetailsListener listener : mDetailsListeners) {
                 listener.onDetailsChanged(CallList.getInstance().getCallByTelecommCall(call),
@@ -462,7 +462,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         Call call = mCallList.getWaitingForAccountCall();
         if (call != null) {
             String callId = call.getId();
-            TelecommAdapter.getInstance().phoneAccountSelected(callId, accountHandle);
+            TelecomAdapter.getInstance().phoneAccountSelected(callId, accountHandle);
         }
     }
 
@@ -471,7 +471,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         Call call = mCallList.getWaitingForAccountCall();
         if (call != null) {
             String callId = call.getId();
-            TelecommAdapter.getInstance().disconnectCall(callId);
+            TelecomAdapter.getInstance().disconnectCall(callId);
         }
     }
 
@@ -496,7 +496,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         }
 
         if (call != null) {
-            TelecommAdapter.getInstance().disconnectCall(call.getId());
+            TelecomAdapter.getInstance().disconnectCall(call.getId());
         }
     }
 
@@ -513,7 +513,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         Call call = mCallList.getIncomingCall();
         if (call != null) {
-            TelecommAdapter.getInstance().answerCall(call.getId(), videoState);
+            TelecomAdapter.getInstance().answerCall(call.getId(), videoState);
             showInCall(false, false/* newOutgoingCall */);
         }
     }
@@ -531,7 +531,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         Call call = mCallList.getIncomingCall();
         if (call != null) {
-            TelecommAdapter.getInstance().rejectCall(call.getId(), false, null);
+            TelecomAdapter.getInstance().rejectCall(call.getId(), false, null);
         }
     }
 
@@ -654,7 +654,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         // (1) Attempt to answer a call
         if (incomingCall != null) {
-            TelecommAdapter.getInstance().answerCall(
+            TelecomAdapter.getInstance().answerCall(
                     incomingCall.getId(), VideoProfile.VideoState.AUDIO_ONLY);
             return true;
         }
@@ -674,10 +674,10 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
             // (2) Attempt actions on conference calls
             if (canMerge) {
-                TelecommAdapter.getInstance().merge(activeCall.getId());
+                TelecomAdapter.getInstance().merge(activeCall.getId());
                 return true;
             } else if (canSwap) {
-                TelecommAdapter.getInstance().swap(activeCall.getId());
+                TelecomAdapter.getInstance().swap(activeCall.getId());
                 return true;
             }
         }
@@ -695,7 +695,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
             // (4) unhold call
             if (heldCall.getState() == Call.State.ONHOLD && canHold) {
-                TelecommAdapter.getInstance().unholdCall(heldCall.getId());
+                TelecomAdapter.getInstance().unholdCall(heldCall.getId());
                 return true;
             }
         }
@@ -1094,7 +1094,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     public interface InCallDetailsListener {
-        public void onDetailsChanged(Call call, android.telecomm.Call.Details details);
+        public void onDetailsChanged(Call call, android.telecom.Call.Details details);
     }
 
     public interface InCallOrientationListener {

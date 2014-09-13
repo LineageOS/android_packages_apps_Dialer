@@ -19,7 +19,7 @@ package com.android.incallui;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.PowerManager;
-import android.telecomm.AudioState;
+import android.telecom.AudioState;
 
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
@@ -63,7 +63,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
 
         mAccelerometerListener.enable(false);
 
-        TelecommAdapter.getInstance().turnOffProximitySensor(true);
+        TelecomAdapter.getInstance().turnOffProximitySensor(true);
     }
 
     /**
@@ -210,12 +210,12 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                 Log.d(this, "Turning on proximity sensor");
                 // Phone is in use!  Arrange for the screen to turn off
                 // automatically when the sensor detects a close object.
-                TelecommAdapter.getInstance().turnOnProximitySensor();
+                TelecomAdapter.getInstance().turnOnProximitySensor();
             } else {
                 Log.d(this, "Turning off proximity sensor");
                 // Phone is either idle, or ringing.  We don't want any special proximity sensor
                 // behavior in either case.
-                TelecommAdapter.getInstance().turnOffProximitySensor(screenOnImmediately);
+                TelecomAdapter.getInstance().turnOffProximitySensor(screenOnImmediately);
             }
         }
 }

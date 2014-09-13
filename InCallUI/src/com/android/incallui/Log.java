@@ -17,7 +17,7 @@
 package com.android.incallui;
 
 import android.net.Uri;
-import android.telecomm.PhoneAccount;
+import android.telecom.PhoneAccount;
 import android.telephony.PhoneNumberUtils;
 
 import java.security.MessageDigest;
