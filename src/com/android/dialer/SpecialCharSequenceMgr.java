@@ -28,7 +28,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Looper;
 import android.provider.Settings;
-import android.telecomm.TelecommManager;
+import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -226,9 +226,9 @@ public class SpecialCharSequenceMgr {
 
     static boolean handlePinEntry(Context context, String input) {
         if ((input.startsWith("**04") || input.startsWith("**05")) && input.endsWith("#")) {
-            TelecommManager telecommManager =
-                    (TelecommManager) context.getSystemService(Context.TELECOMM_SERVICE);
-            return telecommManager.handleMmi(input);
+            TelecomManager telecomManager =
+                    (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+            return telecomManager.handleMmi(input);
         }
         return false;
     }
