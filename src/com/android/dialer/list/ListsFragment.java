@@ -262,7 +262,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
     }
 
     @Override
-    public void onCallsFetched(Cursor cursor) {
+    public boolean onCallsFetched(Cursor cursor) {
         mCallLogAdapter.setLoading(false);
 
         // Save the date of the most recent call log item
@@ -272,6 +272,8 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
 
         mCallLogAdapter.changeCursor(cursor);
         mMergedAdapter.notifyDataSetChanged();
+        // Return true; took ownership of cursor
+        return true;
     }
 
     @Override
