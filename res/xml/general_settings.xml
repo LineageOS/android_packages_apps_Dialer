@@ -73,8 +73,8 @@
 
             <intent
                 android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.telecomm"
-                android:targetClass="com.android.telecomm.RespondViaSmsSettings$Settings" />
+                android:targetPackage="com.android.server.telecom"
+                android:targetClass="com.android.server.telecom.RespondViaSmsSettings$Settings" />
 
         </PreferenceScreen>
 

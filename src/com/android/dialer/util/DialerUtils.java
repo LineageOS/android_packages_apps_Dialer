@@ -27,7 +27,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Telephony;
-import android.telecomm.TelecommManager;
+import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -77,7 +77,7 @@ public class DialerUtils {
                 if (touchPoint.x != 0 || touchPoint.y != 0) {
                     Bundle extras = new Bundle();
                     extras.putParcelable(TouchPointManager.TOUCH_POINT, touchPoint);
-                    intent.putExtra(TelecommManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
+                    intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
                 }
 
                 ((Activity) context).startActivityForResult(intent, 0);
