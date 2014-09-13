@@ -16,11 +16,8 @@
 
 package com.android.incallui;
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.IBinder;
-import android.telecomm.InCallService;
-import android.telecomm.Phone;
+import android.telecom.InCallService;
+import android.telecom.Phone;
 
 /**
  * Used to receive updates about calls from the Telecomm component.  This service is bound to
@@ -35,13 +32,13 @@ public class InCallServiceImpl extends InCallService {
         Log.v(this, "onPhoneCreated");
         CallList.getInstance().setPhone(phone);
         AudioModeProvider.getInstance().setPhone(phone);
-        TelecommAdapter.getInstance().setPhone(phone);
+        TelecomAdapter.getInstance().setPhone(phone);
         InCallPresenter.getInstance().setPhone(phone);
         InCallPresenter.getInstance().setUp(
                 getApplicationContext(),
                 CallList.getInstance(),
                 AudioModeProvider.getInstance());
-        TelecommAdapter.getInstance().setContext(InCallServiceImpl.this);
+        TelecomAdapter.getInstance().setContext(InCallServiceImpl.this);
     }
 
     @Override
@@ -50,8 +47,8 @@ public class InCallServiceImpl extends InCallService {
         // Tear down the InCall system
         CallList.getInstance().clearPhone();
         AudioModeProvider.getInstance().clearPhone();
-        TelecommAdapter.getInstance().clearPhone();
-        TelecommAdapter.getInstance().setContext(null);
+        TelecomAdapter.getInstance().clearPhone();
+        TelecomAdapter.getInstance().setContext(null);
         CallList.getInstance().clearOnDisconnect();
         InCallPresenter.getInstance().tearDown();
     }

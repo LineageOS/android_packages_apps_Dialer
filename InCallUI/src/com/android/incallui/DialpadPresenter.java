@@ -61,7 +61,7 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
             // Append this key to the "digits" widget.
             getUi().appendDigitsToField(c);
             // Plays the tone through Telecomm.
-            TelecommAdapter.getInstance().playDtmfTone(mCall.getId(), c);
+            TelecomAdapter.getInstance().playDtmfTone(mCall.getId(), c);
         } else {
             Log.d(this, "ignoring dtmf request for '" + c + "'");
         }
@@ -73,7 +73,7 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
     public void stopDtmf() {
         if (mCall != null) {
             Log.d(this, "stopping remote tone");
-            TelecommAdapter.getInstance().stopDtmfTone(mCall.getId());
+            TelecomAdapter.getInstance().stopDtmfTone(mCall.getId());
         }
     }
 

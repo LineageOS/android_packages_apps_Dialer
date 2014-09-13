@@ -16,7 +16,7 @@
 
 package com.android.incallui;
 
-import android.telecomm.PhoneCapabilities;
+import android.telecom.PhoneCapabilities;
 import android.app.KeyguardManager;
 import android.content.Context;
 
@@ -158,7 +158,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
                 == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
             InCallPresenter.getInstance().acceptUpgradeRequest(context);
         } else {
-            TelecommAdapter.getInstance().answerCall(mCall.getId(), videoState);
+            TelecomAdapter.getInstance().answerCall(mCall.getId(), videoState);
         }
     }
 
@@ -168,7 +168,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
      */
     public void onDecline() {
         Log.d(this, "onDecline " + mCallId);
-        TelecommAdapter.getInstance().rejectCall(mCall.getId(), false, null);
+        TelecomAdapter.getInstance().rejectCall(mCall.getId(), false, null);
     }
 
     public void onText() {
@@ -179,7 +179,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     public void rejectCallWithMessage(String message) {
         Log.d(this, "sendTextToDefaultActivity()...");
-        TelecommAdapter.getInstance().rejectCall(mCall.getId(), true, message);
+        TelecomAdapter.getInstance().rejectCall(mCall.getId(), true, message);
 
         onDismissDialog();
     }

@@ -18,7 +18,7 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.net.Uri;
-import android.telecomm.PhoneCapabilities;
+import android.telecom.PhoneCapabilities;
 import android.text.TextUtils;
 
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
@@ -166,13 +166,13 @@ public class ConferenceManagerPresenter
 
     public void separateConferenceConnection(int rowId) {
         if (rowId < mCallerIds.length) {
-            TelecommAdapter.getInstance().separateCall(mCallerIds[rowId]);
+            TelecomAdapter.getInstance().separateCall(mCallerIds[rowId]);
         }
     }
 
     public void endConferenceConnection(int rowId) {
         if (rowId < mCallerIds.length) {
-            TelecommAdapter.getInstance().disconnectCall(mCallerIds[rowId]);
+            TelecomAdapter.getInstance().disconnectCall(mCallerIds[rowId]);
         }
     }
 
