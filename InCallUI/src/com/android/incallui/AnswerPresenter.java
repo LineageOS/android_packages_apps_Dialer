@@ -32,6 +32,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     private String mCallId;
     private Call mCall = null;
+    private boolean mHasTextMessages = false;
 
     @Override
     public void onUiReady(AnswerUi ui) {
@@ -98,28 +99,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         Log.d(TAG, "Showing incoming for call id: " + mCallId + " " + this);
         final List<String> textMsgs = CallList.getInstance().getTextResponses(call.getId());
         getUi().showAnswerUi(true);
-
-        final Context context = getUi().getContext();
-        final KeyguardManager km =
-                (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-        final boolean isLockScreenShowing = km.inKeyguardRestrictedInputMode();
-
-        boolean withSms = call.can(PhoneCapabilities.RESPOND_VIA_TEXT) && textMsgs != null;
-        if (call.isVideoCall(context)) {
-            if (withSms && !isLockScreenShowing) {
-                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS);
-                getUi().configureMessageDialog(textMsgs);
-            } else {
-                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITHOUT_SMS);
-            }
-        } else {
-            if (withSms && !isLockScreenShowing) {
-                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITH_SMS);
-                getUi().configureMessageDialog(textMsgs);
-            } else {
-                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITHOUT_SMS);
-            }
-        }
+        configureAnswerTargetsForSms(call, textMsgs);
     }
 
     private void processVideoUpgradeRequestCall(Call call) {
@@ -136,7 +116,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     @Override
     public void onCallChanged(Call call) {
         Log.d(this, "onCallStateChange() " + call + " " + this);
-        if (call.getState() != Call.State.INCOMING && call.getState() != Call.State.CALL_WAITING) {
+        if (call.getState() != Call.State.INCOMING) {
             // Stop listening for updates.
             CallList.getInstance().removeCallUpdateListener(mCallId, this);
 
@@ -145,6 +125,12 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             // mCallId will hold the state of the call. We don't clear the mCall variable here as
             // it may be useful for sending text messages after phone disconnects.
             mCallId = null;
+            mHasTextMessages = false;
+        } else if (!mHasTextMessages) {
+            final List<String> textMsgs = CallList.getInstance().getTextResponses(call.getId());
+            if (textMsgs != null) {
+                configureAnswerTargetsForSms(call, textMsgs);
+            }
         }
     }
 
@@ -186,6 +172,31 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     public void onDismissDialog() {
         InCallPresenter.getInstance().onDismissDialog();
+    }
+
+    private void configureAnswerTargetsForSms(Call call, List<String> textMsgs) {
+        final Context context = getUi().getContext();
+        final KeyguardManager km =
+                (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        final boolean isLockScreenShowing = km.inKeyguardRestrictedInputMode();
+
+        mHasTextMessages = textMsgs != null;
+        boolean withSms = call.can(PhoneCapabilities.RESPOND_VIA_TEXT) && mHasTextMessages;
+        if (call.isVideoCall(context)) {
+            if (withSms && !isLockScreenShowing) {
+                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS);
+                getUi().configureMessageDialog(textMsgs);
+            } else {
+                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITHOUT_SMS);
+            }
+        } else {
+            if (withSms && !isLockScreenShowing) {
+                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITH_SMS);
+                getUi().configureMessageDialog(textMsgs);
+            } else {
+                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITHOUT_SMS);
+            }
+        }
     }
 
     interface AnswerUi extends Ui {
