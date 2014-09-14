@@ -88,6 +88,7 @@ public class CallList implements InCallPhoneListener {
                 if (updateCallInMap(call)) {
                     Log.w(this, "Removing call not previously disconnected " + call.getId());
                 }
+                updateCallTextMap(call, null);
             }
         }
     };
@@ -380,7 +381,7 @@ public class CallList implements InCallPhoneListener {
         if (updateCallInMap(call)) {
             Log.i(this, "onUpdate - " + call);
         }
-        updateCallTextMap(call, null);
+        updateCallTextMap(call, call.getCannedSmsResponses());
         notifyCallUpdateListeners(call);
     }
 
