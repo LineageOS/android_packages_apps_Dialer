@@ -70,6 +70,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mPhoneNumber;
     private TextView mNumberLabel;
     private TextView mPrimaryName;
+    private View mCallStateButton;
     private ImageView mCallStateIcon;
     private ImageView mCallStateVideoCallIcon;
     private TextView mCallStateLabel;
@@ -216,6 +217,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                         0 /* offsetX */,
                         mFloatingActionButtonVerticalOffset /* offsetY */,
                         false);
+            }
+        });
+
+        mCallStateButton = view.findViewById(R.id.callStateButton);
+        mCallStateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().onCallStateButtonTouched();
             }
         });
 
