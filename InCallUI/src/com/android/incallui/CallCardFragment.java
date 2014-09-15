@@ -515,7 +515,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mCallStateIcon.setVisibility(View.GONE);
             } else {
                 mCallStateIcon.setVisibility(View.VISIBLE);
-                mCallStateIcon.setImageAlpha(255);
+                // Invoke setAlpha(float) instead of setAlpha(int) to set the view's alpha. This is
+                // needed because the pulse animation operates on the view alpha.
+                mCallStateIcon.setAlpha(1.0f);
                 mCallStateIcon.setImageDrawable(connectionIcon);
             }
 
@@ -542,7 +544,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mCallStateLabel.setText(null);
             mCallStateLabel.setAlpha(0);
             mCallStateLabel.setVisibility(View.GONE);
-            mCallStateIcon.setImageAlpha(0);
+            // Invoke setAlpha(float) instead of setAlpha(int) to set the view's alpha. This is
+            // needed because the pulse animation operates on the view alpha.
+            mCallStateIcon.setAlpha(0.0f);
             mCallStateIcon.setVisibility(View.GONE);
 
             mCallStateVideoCallIcon.setVisibility(View.GONE);
