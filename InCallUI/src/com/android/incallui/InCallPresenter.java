@@ -20,6 +20,7 @@ import com.google.common.base.Preconditions;
 
 import android.app.ActivityManager.TaskDescription;
 import android.app.FragmentManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -1607,6 +1608,25 @@ public class InCallPresenter implements CallList.Listener,
         }
         intent.putExtra(InCallActivity.NEW_OUTGOING_CALL_EXTRA, newOutgoingCall);
         return intent;
+    }
+
+    public void sendAddParticipantIntent() {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // when we request the dialer come up, we also want to inform
+        // it that we're going through the "add participant" option from the
+        // InCallScreen.
+        intent.putExtra(TelecomAdapter.ADD_CALL_MODE_KEY, true);
+        intent.putExtra(TelecomAdapter.ADD_PARTICIPANT_KEY, true);
+        try {
+            mContext.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            // This is rather rare but possible.
+            // Note: this method is used even when the phone is encrypted. At
+            // that moment
+            // the system may not find any Activity which can accept this Intent
+            Log.e(this, "Activity for adding calls isn't found.");
+        }
     }
 
     /**

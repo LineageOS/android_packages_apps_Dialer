@@ -36,7 +36,9 @@ LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(res_dirs)) \
     $(support_library_root_dir)/v7/appcompat/res \
     $(support_library_root_dir)/design/res
 
-LOCAL_JAVA_LIBRARIES := telephony-common telephony-ext
+LOCAL_JAVA_LIBRARIES := telephony-common \
+                        telephony-ext \
+                        ims-common
 
 LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \

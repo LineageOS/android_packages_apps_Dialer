@@ -151,6 +151,12 @@
             android:background="@drawable/btn_merge"
             android:contentDescription="@string/onscreenMergeCallsText"
             android:visibility="gone" />
+        <!-- "Add Participant" -->
+        <ImageButton android:id="@+id/addParticipant"
+            style="@style/InCallButton"
+            android:background="@drawable/btn_addparticipant"
+            android:contentDescription="@string/onscreenAddParticipant"
+            android:visibility="gone" />
 
         <!-- "Blind transfer" -->
         <ImageButton android:id="@+id/blindTransfer"

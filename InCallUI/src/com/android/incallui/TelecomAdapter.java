@@ -27,7 +27,8 @@ import android.telecom.PhoneAccountHandle;
 import java.util.List;
 
 final class TelecomAdapter implements InCallServiceListener {
-    private static final String ADD_CALL_MODE_KEY = "add_call_mode";
+    public static final String ADD_CALL_MODE_KEY = "add_call_mode";
+    public static final String ADD_PARTICIPANT_KEY = "add_participant";
 
     private static TelecomAdapter sInstance;
     private InCallService mInCallService;

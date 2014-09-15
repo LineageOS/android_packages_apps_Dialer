@@ -94,4 +94,7 @@
     <string name="qti_description_deflect_service_error">Call Deflection service is not supported.</string>
     <!-- Message indicating call failed due to handover not feasible -->
     <string name="call_failed_ho_not_feasible">Call was ended as LTE to 3G/2G handover was not feasible.</string>
+
+    <!-- Text for the onscreen "Add Participant" button -->
+    <string name="onscreenAddParticipant">Add Participant</string>
 </resources>
