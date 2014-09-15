@@ -102,7 +102,7 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"Tots els contactes"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Detalls de la trucada"</string>
     <string name="toast_call_detail_error" msgid="7200975244804730096">"No s\'han pogut llegir els detalls de la trucada sol·licitada."</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Utilitza el teclat de tons"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Utilitza el teclat per tons"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Torna a la trucada en curs"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Afegeix una trucada"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Trucada entrant"</string>

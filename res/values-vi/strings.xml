@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Trình quay số"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Điện thoại"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Điện thoại"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Nhật ký cuộc gọi"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Gửi tin nhắn văn bản"</string>
@@ -31,7 +30,7 @@
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Xóa thư thoại"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Hiển thị thư thoại"</string>
     <string name="recentCalls_empty" msgid="7711926651216108723">"Nhật ký cuộc gọi của bạn trống."</string>
-    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Xóa nhật ký c.gọi?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Xóa nhật ký cuộc gọi?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Tất cả bản ghi cuộc gọi của bạn sẽ bị xóa."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Đang xóa nhật ký cuộc gọi…"</string>
   <plurals name="notification_voicemail_title">
