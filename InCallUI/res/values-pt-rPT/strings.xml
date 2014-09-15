@@ -79,7 +79,7 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Chamada em curso"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"Em espera"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Chamada recebida"</string>
-    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Videochamada recebida"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"A receber videochamada"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"Pedido de vídeo recebido"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Novo correio de voz"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Novo correio de voz (<xliff:g id="COUNT">%d</xliff:g>)"</string>
