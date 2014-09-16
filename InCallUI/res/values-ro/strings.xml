@@ -115,16 +115,11 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"Apelul nu s-a trimis. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> nu este un număr de urgenţă!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Apelul nu s-a trimis. Apelaţi un număr de urgenţă!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Utilizaţi tastatura pentru a forma"</string>
-    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
-    <skip />
-    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
-    <skip />
-    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
-    <skip />
-    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
-    <skip />
-    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
-    <skip />
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Puneți apelul în așteptare"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Reluați apelul"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Adăugaţi un apel"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Îmbinaţi apelurile"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Schimbaţi apelurile"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"Reţineţi"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Terminat"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Tastatură numerică"</string>
