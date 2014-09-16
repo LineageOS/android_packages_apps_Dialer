@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Tālrunis"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Tālrunis"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Zvanīt"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Zvanu žurnāls"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Sūtīt īsziņu"</string>
@@ -161,7 +160,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Veikt videozvanu"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Visas zvanu vēstures skatīšana"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Jauni neatbildēti zvani: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"Izmantojot ātro zvanu funkciju, varat ar vienu pieskārienu zvanīt \nizlasei pievienotajām kontaktpersonām un uz numuriem\n, uz kuriem bieži zvanāt."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"Izmantojot ātro zvanu funkciju, varat ar vienu pieskārienu zvanīt \nizlasei pievienotajām kontaktpersonām un uz numuriem,\n uz kuriem bieži zvanāt."</string>
     <string name="all_contacts_empty" msgid="4536082452651392894">"Jums nav kontaktpersonu."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Pieskarieties attēlam, lai skatītu visus tālruņa numurus, vai pieskarieties un turiet, lai mainītu secību."</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Noraidīt"</string>

@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Opkald"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Opk.liste"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Send sms"</string>
@@ -154,14 +153,14 @@
     <string name="tab_speed_dial" msgid="7807567599021643864">"Hurtigopkald"</string>
     <string name="tab_recents" msgid="929949073851377206">"Seneste"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontaktpersoner"</string>
-    <string name="favorite_hidden" msgid="5011234945140912047">"Fjernet fra favoritter"</string>
+    <string name="favorite_hidden" msgid="5011234945140912047">"Fjernet fra foretrukne"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Fortryd"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Ring til <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Føj til kontaktpersoner"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Foretag videoopkald"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Se komplet opkaldshistorik"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nye ubesvarede opkald"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"Hurtigopkald er opkald med ét enkelt tryk\ntil favoritter og numre\n, du ofte ringer til."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"Med Hurtigopkald kan du ringe op \nmed ét enkelt tryk til dine foretrukne \nog numre, du ofte ringer til."</string>
     <string name="all_contacts_empty" msgid="4536082452651392894">"Du har ingen kontaktpersoner."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Tryk på billedet for at se alle telefonnumre, eller tryk på billedet, og hold det nede, for at omarrangere"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Luk"</string>

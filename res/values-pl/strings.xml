@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Telefon"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Rejestr"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Wyślij wiadomość tekstową"</string>
@@ -152,7 +151,7 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Nieodebrane"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Poczta gł."</string>
     <string name="tab_speed_dial" msgid="7807567599021643864">"Szybkie wybieranie"</string>
-    <string name="tab_recents" msgid="929949073851377206">"Niedawne"</string>
+    <string name="tab_recents" msgid="929949073851377206">"Ostatnie"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontakty"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Usunięto z ulubionych"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Cofnij"</string>

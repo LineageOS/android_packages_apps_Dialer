@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"ခေါ်ဆိုရန်နံပါတ်ကွက်"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"ဖုန်း"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ဖုန်း"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"ခေါ်ဆိုထားသော မှတ်တမ်း"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"စာတိုပို့ရန်"</string>

@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Samtal"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Samtalshistorik"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Skicka SMS"</string>
@@ -197,7 +196,7 @@
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Visningsalternativ för kontakter"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Ljud och vibrationer"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Ringsignal"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrera även vid samtal"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrera också vid samtal"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Knappsatsljud"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"Övrigt"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Snabbsvar"</string>
