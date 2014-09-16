@@ -27,8 +27,8 @@ import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.telecom.DisconnectCause;
 import android.telecom.VideoProfile;
-import android.telephony.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.Display;
@@ -494,19 +494,23 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         } else {
             mSecondaryCallInfo.setVisibility(View.GONE);
         }
-
-
     }
 
     @Override
-    public void setCallState(int state, int videoState, int sessionModificationState, int cause,
-            String connectionLabel, Drawable connectionIcon, String gatewayNumber) {
+    public void setCallState(
+            int state,
+            int videoState,
+            int sessionModificationState,
+            DisconnectCause disconnectCause,
+            String connectionLabel,
+            Drawable connectionIcon,
+            String gatewayNumber) {
         boolean isGatewayCall = !TextUtils.isEmpty(gatewayNumber);
-        String callStateLabel = getCallStateLabelFromState(
-                state, videoState, sessionModificationState, cause, connectionLabel, isGatewayCall);
+        CharSequence callStateLabel = getCallStateLabelFromState(state, videoState,
+                sessionModificationState, disconnectCause, connectionLabel, isGatewayCall);
 
         Log.v(this, "setCallState " + callStateLabel);
-        Log.v(this, "DisconnectCause " + DisconnectCause.toString(cause));
+        Log.v(this, "DisconnectCause " + disconnectCause.toString());
         Log.v(this, "gateway " + connectionLabel + gatewayNumber);
 
         if (TextUtils.equals(callStateLabel, mCallStateLabel.getText())) {
@@ -646,11 +650,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      *         3. Incoming calls will only display "Incoming via..." for accounts.
      *         4. Video calls, and session modification states (eg. requesting video).
      */
-    private String getCallStateLabelFromState(int state, int videoState,
-            int sessionModificationState, int disconnectCause, String label,
+    private CharSequence getCallStateLabelFromState(int state, int videoState,
+            int sessionModificationState, DisconnectCause disconnectCause, String label,
             boolean isGatewayCall) {
         final Context context = getView().getContext();
-        String callStateLabel = null;  // Label to display as part of the call banner
+        CharSequence callStateLabel = null;  // Label to display as part of the call banner
 
         boolean isSpecialCall = label != null;
         boolean isAccount = isSpecialCall && !isGatewayCall;
@@ -708,7 +712,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 callStateLabel = context.getString(R.string.card_title_hanging_up);
                 break;
             case Call.State.DISCONNECTED:
-                callStateLabel = getCallFailedString(disconnectCause);
+                callStateLabel = disconnectCause.getLabel();
+                if (TextUtils.isEmpty(callStateLabel)) {
+                    callStateLabel = context.getString(R.string.card_title_call_ended);
+                }
                 break;
             case Call.State.CONFERENCED:
                 callStateLabel = context.getString(R.string.card_title_conf_call);
@@ -717,84 +724,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 Log.wtf(this, "updateCallStateWidgets: unexpected call: " + state);
         }
         return callStateLabel;
-    }
-
-    /**
-     * Maps the disconnect cause to a resource string.
-     *
-     * @param cause disconnect cause as defined in {@link DisconnectCause}
-     */
-    private String getCallFailedString(int disconnectCause) {
-        int resID = R.string.card_title_call_ended;
-
-        // TODO: The card *title* should probably be "Call ended" in all
-        // cases, but if the DisconnectCause was an error condition we should
-        // probably also display the specific failure reason somewhere...
-
-        switch (disconnectCause) {
-            case DisconnectCause.BUSY:
-                resID = R.string.callFailed_userBusy;
-                break;
-
-            case DisconnectCause.CONGESTION:
-                resID = R.string.callFailed_congestion;
-                break;
-
-            case DisconnectCause.TIMED_OUT:
-                resID = R.string.callFailed_timedOut;
-                break;
-
-            case DisconnectCause.SERVER_UNREACHABLE:
-                resID = R.string.callFailed_server_unreachable;
-                break;
-
-            case DisconnectCause.NUMBER_UNREACHABLE:
-                resID = R.string.callFailed_number_unreachable;
-                break;
-
-            case DisconnectCause.INVALID_CREDENTIALS:
-                resID = R.string.callFailed_invalid_credentials;
-                break;
-
-            case DisconnectCause.SERVER_ERROR:
-                resID = R.string.callFailed_server_error;
-                break;
-
-            case DisconnectCause.OUT_OF_NETWORK:
-                resID = R.string.callFailed_out_of_network;
-                break;
-
-            case DisconnectCause.LOST_SIGNAL:
-            case DisconnectCause.CDMA_DROP:
-                resID = R.string.callFailed_noSignal;
-                break;
-
-            case DisconnectCause.LIMIT_EXCEEDED:
-                resID = R.string.callFailed_limitExceeded;
-                break;
-
-            case DisconnectCause.POWER_OFF:
-                resID = R.string.callFailed_powerOff;
-                break;
-
-            case DisconnectCause.ICC_ERROR:
-                resID = R.string.callFailed_simError;
-                break;
-
-            case DisconnectCause.OUT_OF_SERVICE:
-                resID = R.string.callFailed_outOfService;
-                break;
-
-            case DisconnectCause.INVALID_NUMBER:
-            case DisconnectCause.UNOBTAINABLE_NUMBER:
-                resID = R.string.callFailed_unobtainable_number;
-                break;
-
-            default:
-                resID = R.string.card_title_call_ended;
-                break;
-        }
-        return this.getView().getContext().getString(resID);
     }
 
     private void showAndInitializeSecondaryCallInfo(boolean hasProvider) {
