@@ -21,7 +21,11 @@ import android.content.Intent;
 public class ObjectFactory {
 
     /** @return An {@link Intent} to be broadcast when the InCallUI is visible. */
-    public static Intent getUiReadyBroadcastIntent() {
-        return null;
-    }
+    public static Intent getUiReadyBroadcastIntent() { return null; }
+
+    /**
+     * @return An {@link Intent} to be broadcast when the call state button in the InCallUI is
+     * touched while in a call.
+     */
+    public static Intent getCallStateButtonBroadcastIntent() { return null; }
 }
