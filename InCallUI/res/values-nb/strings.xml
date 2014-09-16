@@ -60,7 +60,7 @@
     <string name="card_title_redialing" msgid="4831412164303596395">"Prøver på nytt"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Telefonmøte"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Innkommende anrop"</string>
-    <string name="card_title_call_ended" msgid="5544730338889702298">"Samtale avsluttet"</string>
+    <string name="card_title_call_ended" msgid="5544730338889702298">"Samtalen er avsluttet"</string>
     <string name="card_title_on_hold" msgid="821463117892339942">"Parkert"</string>
     <string name="card_title_hanging_up" msgid="3999101620995182450">"Legger på"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"Samtale pågår"</string>

@@ -79,7 +79,7 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"โทรต่อเนื่อง"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"พักสาย"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"สายเรียกเข้า"</string>
-    <string name="notification_incoming_video_call" msgid="7356836933934464805">"สายเรียกเข้าแฮงเอาท์วิดีโอ"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"แฮงเอาท์วิดีโอเรียกเข้า"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"คำขอโทรเข้าเป็นวิดีโอ"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"ข้อความเสียงใหม่"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"ข้อความเสียงใหม่ (<xliff:g id="COUNT">%d</xliff:g>)"</string>

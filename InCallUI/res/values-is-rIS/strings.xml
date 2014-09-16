@@ -98,7 +98,7 @@
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Ekki skráð á símkerfi."</string>
     <string name="incall_error_out_of_service" msgid="8587993036435080418">"Farsímakerfi ekki tiltækt."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Símtalið var ekki sent, gilt símanúmer var ekki slegið inn."</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"Símtalið var ekki sent."</string>
+    <string name="incall_error_call_failed" msgid="4313552620858880999">"Símtalið fór ekki í gegn."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"Ræsir MMI-runu…"</string>
     <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"Óstudd þjónusta."</string>
     <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"Ekki hægt að skipta milli símtala."</string>

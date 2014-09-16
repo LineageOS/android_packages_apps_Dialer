@@ -47,7 +47,7 @@
     <string name="audio_mode_speaker" msgid="27649582100085266">"Bozgorailua"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Aurikularrak"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Kabledun entzungailua"</string>
-    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetootha"</string>
+    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
     <string name="wait_prompt_str" msgid="7601815427707856238">"Ondorengo tonuak bidali?\n"</string>
     <string name="pause_prompt_str" msgid="1789964702154314806">"Tonuak bidaltzen\n"</string>
     <string name="send_button" msgid="4106860097497818751">"Bidali"</string>
@@ -98,7 +98,7 @@
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Ez dago sarean erregistratuta."</string>
     <string name="incall_error_out_of_service" msgid="8587993036435080418">"Sare mugikorra ez dago erabilgarri."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Ez da deia bidali ez delako baliozko zenbakirik idatzi."</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"Ez da deia bidali."</string>
+    <string name="incall_error_call_failed" msgid="4313552620858880999">"Ez da deia egin."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI sekuentzia hasten…"</string>
     <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"Ez da zerbitzua onartzen."</string>
     <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"Ezin da dei batetik bestera pasa."</string>
