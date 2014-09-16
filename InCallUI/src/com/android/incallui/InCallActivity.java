@@ -29,7 +29,7 @@ import android.content.res.Configuration;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.DisconnectCause;
+import android.telecom.DisconnectCause;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.animation.Animation;
@@ -55,8 +55,6 @@ public class InCallActivity extends Activity {
     public static final String SHOW_DIALPAD_EXTRA = "InCallActivity.show_dialpad";
     public static final String DIALPAD_TEXT_EXTRA = "InCallActivity.dialpad_text";
     public static final String NEW_OUTGOING_CALL = "InCallActivity.new_outgoing_call";
-
-    private static final int INVALID_RES_ID = -1;
 
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
@@ -635,17 +633,13 @@ public class InCallActivity extends Activity {
         return super.dispatchPopulateAccessibilityEvent(event);
     }
 
-    /**
-     * @param cause disconnect cause as defined in {@link DisconnectCause}
-     */
-    public void maybeShowErrorDialogOnDisconnect(int cause) {
+    public void maybeShowErrorDialogOnDisconnect(DisconnectCause disconnectCause) {
         Log.d(this, "maybeShowErrorDialogOnDisconnect");
 
-        if (!isFinishing()) {
-            final int resId = getResIdForDisconnectCause(cause);
-            if (resId != INVALID_RES_ID) {
-                showErrorDialog(resId);
-            }
+        if (!isFinishing() && !TextUtils.isEmpty(disconnectCause.getDescription())
+                && (disconnectCause.getCode() == DisconnectCause.ERROR ||
+                        disconnectCause.getCode() == DisconnectCause.RESTRICTED)) {
+            showErrorDialog(disconnectCause.getDescription());
         }
     }
 
@@ -660,8 +654,7 @@ public class InCallActivity extends Activity {
     /**
      * Utility function to bring up a generic "error" dialog.
      */
-    private void showErrorDialog(int resId) {
-        final CharSequence msg = getResources().getText(resId);
+    private void showErrorDialog(CharSequence msg) {
         Log.i(this, "Show Dialog: " + msg);
 
         dismissPendingDialogs();
@@ -682,64 +675,6 @@ public class InCallActivity extends Activity {
 
         mDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         mDialog.show();
-    }
-
-    private int getResIdForDisconnectCause(int cause) {
-        switch (cause) {
-            case DisconnectCause.CALL_BARRED:
-                return R.string.callFailed_cb_enabled;
-            case DisconnectCause.FDN_BLOCKED:
-                return R.string.callFailed_fdn_only;
-            case DisconnectCause.CS_RESTRICTED:
-                return R.string.callFailed_dsac_restricted;
-            case DisconnectCause.CS_RESTRICTED_EMERGENCY:
-                return R.string.callFailed_dsac_restricted_emergency;
-            case DisconnectCause.CS_RESTRICTED_NORMAL:
-                return R.string.callFailed_dsac_restricted_normal;
-            case DisconnectCause.OUTGOING_FAILURE:
-                // We couldn't successfully place the call; there was some
-                // failure in the telephony layer.
-                // TODO: Need UI spec for this failure case; for now just
-                // show a generic error.
-                return R.string.incall_error_call_failed;
-            case DisconnectCause.OUTGOING_CANCELED:
-                // We don't want to show any dialog for the canceled case since the call was
-                // either canceled by the user explicitly (end-call button pushed immediately)
-                // or some other app canceled the call and immediately issued a new CALL to
-                // replace it.
-                return INVALID_RES_ID;
-            case DisconnectCause.POWER_OFF:
-                // Radio is explictly powered off, presumably because the
-                // device is in airplane mode.
-                //
-                // TODO: For now this UI is ultra-simple: we simply display
-                // a message telling the user to turn off airplane mode.
-                // But it might be nicer for the dialog to offer the option
-                // to turn the radio on right there (and automatically retry
-                // the call once network registration is complete.)
-                return R.string.incall_error_power_off;
-            case DisconnectCause.EMERGENCY_ONLY:
-                // Only emergency numbers are allowed, but we tried to dial
-                // a non-emergency number.
-                return R.string.incall_error_emergency_only;
-            case DisconnectCause.OUT_OF_SERVICE:
-                // No network connection.
-                return R.string.incall_error_out_of_service;
-            case DisconnectCause.NO_PHONE_NUMBER_SUPPLIED:
-                // The supplied Intent didn't contain a valid phone number.
-                // (This is rare and should only ever happen with broken
-                // 3rd-party apps.) For now just show a generic error.
-                return R.string.incall_error_no_phone_number_supplied;
-            case DisconnectCause.VOICEMAIL_NUMBER_MISSING:
-                // TODO: Need to bring up the "Missing Voicemail Number" dialog, which
-                // will ultimately take us to the Call Settings.
-                return R.string.incall_error_missing_voicemail_number;
-            case DisconnectCause.DIALED_MMI:
-                // TODO: Implement MMI; see MMIDialogActivity in packages/services/Telephony
-                return INVALID_RES_ID;
-            default:
-                return INVALID_RES_ID;
-        }
     }
 
     private void onDialogDismissed() {
