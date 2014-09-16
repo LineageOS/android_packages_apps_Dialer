@@ -21,12 +21,12 @@ import com.android.contacts.common.CallUtil;
 import android.content.Context;
 import android.net.Uri;
 import android.telecom.CallProperties;
+import android.telecom.DisconnectCause;
 import android.telecom.PhoneCapabilities;
 import android.telecom.GatewayInfo;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.VideoProfile;
-import android.telephony.DisconnectCause;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -172,7 +172,7 @@ public final class Call {
     private final android.telecom.Call mTelecommCall;
     private final String mId;
     private int mState = State.INVALID;
-    private int mDisconnectCause;
+    private DisconnectCause mDisconnectCause;
     private int mSessionModificationState;
     private final List<String> mChildCallIds = new ArrayList<>();
 
@@ -202,7 +202,7 @@ public final class Call {
     private void updateFromTelecommCall() {
         Log.d(this, "updateFromTelecommCall: " + mTelecommCall);
         setState(translateState(mTelecommCall.getState()));
-        setDisconnectCause(mTelecommCall.getDetails().getDisconnectCauseCode());
+        setDisconnectCause(mTelecommCall.getDetails().getDisconnectCause());
 
         if (mTelecommCall.getVideoCall() != null) {
             if (mVideoCallListener == null) {
@@ -281,16 +281,16 @@ public final class Call {
         return getTelecommCall().getDetails().getCallerDisplayName();
     }
 
-    /** Returns call disconnect cause; values are defined in {@link DisconnectCause}. */
-    public int getDisconnectCause() {
+    /** Returns call disconnect cause, defined by {@link DisconnectCause}. */
+    public DisconnectCause getDisconnectCause() {
         if (mState == State.DISCONNECTED || mState == State.IDLE) {
             return mDisconnectCause;
         }
 
-        return DisconnectCause.NOT_DISCONNECTED;
+        return new DisconnectCause(DisconnectCause.UNKNOWN);
     }
 
-    public void setDisconnectCause(int disconnectCause) {
+    public void setDisconnectCause(DisconnectCause disconnectCause) {
         mDisconnectCause = disconnectCause;
     }
 
