@@ -520,7 +520,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     private Drawable getCallProviderIcon(Call call) {
         PhoneAccount account = getAccountForCall(call);
-        if (account != null && getTelecomManager().hasMultipleEnabledAccounts()) {
+        if (account != null && getTelecomManager().hasMultipleCallCapableAccounts()) {
             return account.getIcon(mContext);
         }
         return null;
@@ -531,7 +531,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     private String getCallProviderLabel(Call call) {
         PhoneAccount account = getAccountForCall(call);
-        if (account != null && getTelecomManager().hasMultipleEnabledAccounts()) {
+        if (account != null && getTelecomManager().hasMultipleCallCapableAccounts()) {
             return account.getLabel().toString();
         }
         return null;
