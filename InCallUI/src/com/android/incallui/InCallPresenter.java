@@ -603,13 +603,20 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             mProximitySensor.onInCallShowing(showing);
         }
 
-        if (showing) {
-            Intent broadcastIntent = ObjectFactory.getUiReadyBroadcastIntent();
-            if (broadcastIntent != null) {
-                broadcastIntent.putExtra(EXTRA_FIRST_TIME_SHOWN, !mIsActivityPreviouslyStarted);
-                mContext.sendBroadcast(broadcastIntent, Manifest.permission.READ_PHONE_STATE);
-            }
+        Intent broadcastIntent = ObjectFactory.getUiReadyBroadcastIntent();
+        if (broadcastIntent != null) {
+            broadcastIntent.putExtra(EXTRA_FIRST_TIME_SHOWN, !mIsActivityPreviouslyStarted);
 
+            if (showing) {
+                Log.d(this, "Sending sticky broadcast: ", broadcastIntent);
+                mContext.sendStickyBroadcast(broadcastIntent);
+            } else {
+                Log.d(this, "Removing sticky broadcast: ", broadcastIntent);
+                mContext.removeStickyBroadcast(broadcastIntent);
+            }
+        }
+
+        if (showing) {
             mIsActivityPreviouslyStarted = true;
         }
     }
