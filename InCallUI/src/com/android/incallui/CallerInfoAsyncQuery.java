@@ -363,7 +363,7 @@ public class CallerInfoAsyncQuery {
         cw.number = info.phoneNumber;
 
         // check to see if these are recognized numbers, and use shortcuts if we can.
-        if (PhoneNumberHelper.isLocalEmergencyNumber(info.phoneNumber, context)) {
+        if (PhoneNumberUtils.isLocalEmergencyNumber(context, info.phoneNumber)) {
             cw.event = EVENT_EMERGENCY_NUMBER;
         } else if (info.isVoiceMailNumber()
                 || PhoneNumberUtils.isVoiceMailNumber(info.phoneNumber)) {
