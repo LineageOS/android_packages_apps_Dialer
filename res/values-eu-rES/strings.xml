@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Telefonoa"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Deitu"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefonoa"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Deien erregistroa"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Bidali testu-mezua"</string>
@@ -131,7 +130,7 @@
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Erabili teklatua markatzeko"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Markatu dei bat gehitzeko"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> minutu <xliff:g id="SECONDS">%s</xliff:g> segundo"</string>
-    <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Ez da deia bidali"</string>
+    <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Ez da deia egin"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Erantzungailua konfiguratzeko, joan Menua &gt; Ezarpenak atalera."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Erantzungailua entzuteko, Hegaldi modua desaktibatu behar duzu."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Kargatzen…"</string>

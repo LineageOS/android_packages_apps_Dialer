@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"ഡയലർ"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"ഫോണ്‍"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ഫോണ്‍"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"കോൾ ലോഗ്"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"വാചകസന്ദേശമയയ്‌ക്കുക"</string>
@@ -161,7 +160,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"വീഡിയോ കോൾ ചെയ്യുക"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"മുഴുവൻ കോൾ ചരിത്രവും കാണുക"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> പുതിയ മിസ്‌ഡ് കോളുകൾ"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"നിങ്ങൾ പതിവായി വിളിക്കുന്ന \nപ്രിയപ്പെട്ടവയ്‌ക്കും സംഖ്യകൾക്കുമായുള്ള\n ഏക സ്‌പർശ ഡയലിംഗാണ് സ്‌പീഡ് ഡയൽ."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"നിങ്ങൾ പതിവായി വിളിക്കുന്ന \nപ്രിയപ്പെട്ടവയ്‌ക്കും നമ്പറുകൾക്കുമായുള്ള\n വൺ ടച്ച് ഡയലിംഗാണ് സ്‌പീഡ് ഡയൽ."</string>
     <string name="all_contacts_empty" msgid="4536082452651392894">"നിങ്ങൾക്ക് കോൺടാക്‌റ്റുകളൊന്നുമില്ല."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"എല്ലാ നമ്പറുകളും കാണാൻ ചിത്രം ടാപ്പുചെയ്യുക അല്ലെങ്കിൽ പുനഃക്രമീകരിക്കാൻ അമർത്തിപ്പിടിക്കുക"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"നിരസിക്കുക"</string>
