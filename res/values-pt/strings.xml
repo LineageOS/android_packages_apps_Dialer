@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Discador"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Smartphone"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefone"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Chamadas"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Enviar SMS/MMS"</string>
@@ -139,8 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Carregando do cartão SIM..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contatos do cartão SIM"</string>
-    <!-- no translation found for add_contact_not_available (2731922990890769322) -->
-    <skip />
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Reative o aplicativo \"Contatos\" para usar este recurso."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"A pesquisa por voz não está disponível."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Não é possível fazer uma chamada porque o aplicativo Telefone foi desativado."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Nenhuma atividade instalada disponível para a ação selecionada."</string>
@@ -162,7 +160,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Fazer vídeo chamada"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Ver todo o histórico de chamadas"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> novas chamadas perdidas"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"A discagem rápida é uma discagem por um toque\npara favoritos e números\nusados com frequência."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"A discagem rápida é feita com apenas um toque\npara favoritos e números\nusados com frequência."</string>
     <string name="all_contacts_empty" msgid="4536082452651392894">"Você não tem contatos."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Toque na imagem para ver todos os números ou pressione e segure para reordenar"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Descartar"</string>
