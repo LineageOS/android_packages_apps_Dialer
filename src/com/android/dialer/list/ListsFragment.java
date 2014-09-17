@@ -226,6 +226,12 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
     }
 
     @Override
+    public void onDestroy() {
+        mCallLogAdapter.stopRequestProcessing();
+        super.onDestroy();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View parentView = inflater.inflate(R.layout.lists_fragment, container, false);
