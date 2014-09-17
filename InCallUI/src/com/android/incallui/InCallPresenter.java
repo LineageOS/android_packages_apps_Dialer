@@ -603,7 +603,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             mProximitySensor.onInCallShowing(showing);
         }
 
-        Intent broadcastIntent = ObjectFactory.getUiReadyBroadcastIntent();
+        Intent broadcastIntent = ObjectFactory.getUiReadyBroadcastIntent(mContext);
         if (broadcastIntent != null) {
             broadcastIntent.putExtra(EXTRA_FIRST_TIME_SHOWN, !mIsActivityPreviouslyStarted);
 
