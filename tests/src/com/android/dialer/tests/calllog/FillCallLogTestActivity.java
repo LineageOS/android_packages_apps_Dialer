@@ -399,7 +399,7 @@ public class FillCallLogTestActivity extends Activity {
 
     private PhoneAccountHandle getManualAccount() {
         TelecomManager telecomManager = TelecomManager.from(this);
-        List <PhoneAccountHandle> accountHandles = telecomManager.getEnabledPhoneAccounts();
+        List <PhoneAccountHandle> accountHandles = telecomManager.getCallCapablePhoneAccounts();
         if (mAccount0.isChecked()) {
             return accountHandles.get(0);
         } else if (mAccount1.isChecked()){
