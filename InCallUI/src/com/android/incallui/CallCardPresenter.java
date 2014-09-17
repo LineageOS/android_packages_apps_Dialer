@@ -353,7 +353,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     public void onCallStateButtonTouched() {
-        Intent broadcastIntent = ObjectFactory.getCallStateButtonBroadcastIntent();
+        Intent broadcastIntent = ObjectFactory.getCallStateButtonBroadcastIntent(mContext);
         if (broadcastIntent != null) {
             Log.d(this, "Sending call state button broadcast: ", broadcastIntent);
             mContext.sendBroadcast(broadcastIntent, Manifest.permission.READ_PHONE_STATE);
