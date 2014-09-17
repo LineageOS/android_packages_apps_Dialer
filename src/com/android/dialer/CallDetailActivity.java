@@ -32,6 +32,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -731,14 +732,21 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     public void onMenuIpCallBySlot1(MenuItem menuItem) {
         String prefix = MoreContactUtils.getIPCallPrefix(this, PhoneConstants.SUB1);
         if (!TextUtils.isEmpty(prefix)) {
-            ComponentName serviceName =
-                    new ComponentName("com.android.phone",
-                    "com.android.services.telephony.TelephonyConnectionService");
-            PhoneAccountHandle account = new PhoneAccountHandle(serviceName,
-                    String.valueOf(PhoneConstants.SUB1));
-            Intent callIntent = new Intent(CallUtil.getCallIntent(
-                    prefix + "" + mNumber, account));
-            startActivity(callIntent);
+            long[] subId = SubscriptionManager.getSubId(PhoneConstants.SUB1);
+            if (subId != null && subId.length >= 1) {
+                ComponentName serviceName =
+                        new ComponentName("com.android.phone",
+                        "com.android.services.telephony.TelephonyConnectionService");
+                PhoneAccountHandle account = new PhoneAccountHandle(serviceName,
+                        String.valueOf(subId[0]));
+                Intent callIntent = new Intent(CallUtil.getCallIntent(
+                        prefix + mNumber, account));
+                startActivity(callIntent);
+            } else {
+                Intent callIntent = new Intent(CallUtil.getCallIntent(
+                        prefix + mNumber));
+                startActivity(callIntent);
+            }
         } else {
             MoreContactUtils.showNoIPNumberDialog(this, PhoneConstants.SUB1);
         }
@@ -747,14 +755,21 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     public void onMenuIpCallBySlot2(MenuItem menuItem) {
         String prefix = MoreContactUtils.getIPCallPrefix(this, PhoneConstants.SUB2);
         if (!TextUtils.isEmpty(prefix)) {
-            ComponentName serviceName =
-                    new ComponentName("com.android.phone",
-                    "com.android.services.telephony.TelephonyConnectionService");
-            PhoneAccountHandle account = new PhoneAccountHandle(serviceName,
-                    String.valueOf(PhoneConstants.SUB2));
-            Intent callIntent = new Intent(CallUtil.getCallIntent(
-                    prefix + "" + mNumber, account));
-            startActivity(callIntent);
+            long[] subId = SubscriptionManager.getSubId(PhoneConstants.SUB2);
+            if (subId != null && subId.length >= 1) {
+                ComponentName serviceName =
+                        new ComponentName("com.android.phone",
+                        "com.android.services.telephony.TelephonyConnectionService");
+                PhoneAccountHandle account = new PhoneAccountHandle(serviceName,
+                        String.valueOf(subId[0]));
+                Intent callIntent = new Intent(CallUtil.getCallIntent(
+                        prefix + mNumber, account));
+                startActivity(callIntent);
+            } else {
+                Intent callIntent = new Intent(CallUtil.getCallIntent(
+                        prefix + mNumber));
+                startActivity(callIntent);
+            }
         } else {
             MoreContactUtils.showNoIPNumberDialog(this, PhoneConstants.SUB2);
         }

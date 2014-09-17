@@ -1134,19 +1134,26 @@ public class DialpadFragment extends AnalyticsFragment
         mContext = activity;
     }
 
-    private void ipCallBySlot(int subscription) {
-        String prefix = MoreContactUtils.getIPCallPrefix(mContext, subscription);
+    private void ipCallBySlot(int slotId) {
+        String prefix = MoreContactUtils.getIPCallPrefix(mContext, slotId);
         if (!TextUtils.isEmpty(prefix)) {
-            ComponentName serviceName =
-                    new ComponentName("com.android.phone",
-                    "com.android.services.telephony.TelephonyConnectionService");
-            PhoneAccountHandle account = new PhoneAccountHandle(serviceName,
-                    String.valueOf(subscription));
-            Intent callIntent = new Intent(CallUtil.getCallIntent(
-                    prefix + "" + getValidDialNumber(), account));
-            startActivity(callIntent);
+            long[] subId = SubscriptionManager.getSubId(slotId);
+            if (subId != null && subId.length >= 1) {
+                ComponentName serviceName =
+                        new ComponentName("com.android.phone",
+                        "com.android.services.telephony.TelephonyConnectionService");
+                PhoneAccountHandle account = new PhoneAccountHandle(serviceName,
+                        String.valueOf(subId[0]));
+                Intent callIntent = new Intent(CallUtil.getCallIntent(
+                        prefix + getValidDialNumber(), account));
+                startActivity(callIntent);
+            } else {
+                Intent callIntent = new Intent(CallUtil.getCallIntent(
+                        prefix + getValidDialNumber()));
+                startActivity(callIntent);
+            }
         } else {
-            MoreContactUtils.showNoIPNumberDialog(mContext, subscription);
+            MoreContactUtils.showNoIPNumberDialog(mContext, slotId);
         }
     }
 
