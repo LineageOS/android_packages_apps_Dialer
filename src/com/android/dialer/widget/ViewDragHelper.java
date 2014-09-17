@@ -1487,8 +1487,8 @@ public class ViewDragHelper {
         if (consumed != null) {
             final int unconsumedX = targetX - mCapturedView.getLeft();
             final int unconsumedY = targetY - mCapturedView.getTop();
-            consumed[0] = dx - unconsumedX;
-            consumed[1] = dy - unconsumedY;
+            consumed[0] = unconsumedX - dx;
+            consumed[1] = unconsumedY - dy;
         }
     }
 
