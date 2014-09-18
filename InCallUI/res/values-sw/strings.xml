@@ -98,7 +98,7 @@
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Haijasajiliwa kwa mitandao"</string>
     <string name="incall_error_out_of_service" msgid="8587993036435080418">"Mtandao wa simu haupatikani."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Simu haijatumwa, hakuna nambari halali iliyoingizwa."</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"Simu haijatumwa."</string>
+    <string name="incall_error_call_failed" msgid="4313552620858880999">"Simu haijapigwa."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"Inaanzisha msururu wa MMI…"</string>
     <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"Kifaa ambacho hakijahiliwa."</string>
     <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"Imeshindwa kubadilisha simu"</string>
