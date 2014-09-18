@@ -46,23 +46,24 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     private List<PhoneAccountHandle> mAccountHandles;
     private boolean mIsSelected;
     private TelecomManager mTelecomManager;
-    private final String mUriScheme;
 
     /**
      * Shows the account selection dialog.
      * This is the preferred way to show this dialog.
      *
      * @param fragmentManager The fragment manager.
-     * @param uriScheme The URI scheme of the call we need to choose an account for.
+     * @param accountHandles The {@code PhoneAccountHandle}s available to select from.
      */
-    public static void showAccountDialog(FragmentManager fragmentManager, String uriScheme) {
-        SelectPhoneAccountDialogFragment fragment = new SelectPhoneAccountDialogFragment(uriScheme);
+    public static void showAccountDialog(FragmentManager fragmentManager,
+            List<PhoneAccountHandle> accountHandles) {
+        SelectPhoneAccountDialogFragment fragment =
+                new SelectPhoneAccountDialogFragment(accountHandles);
         fragment.show(fragmentManager, "selectAccount");
     }
 
-    public SelectPhoneAccountDialogFragment(String uriScheme) {
+    public SelectPhoneAccountDialogFragment(List<PhoneAccountHandle> accountHandles) {
         super();
-        mUriScheme = uriScheme;
+        mAccountHandles = accountHandles;
     }
 
     @Override
@@ -70,7 +71,6 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
         mIsSelected = false;
         mTelecomManager =
                 (TelecomManager) getActivity().getSystemService(Context.TELECOM_SERVICE);
-        mAccountHandles = mTelecomManager.getPhoneAccountsSupportingScheme(mUriScheme);
 
         final DialogInterface.OnClickListener selectionListener =
                 new DialogInterface.OnClickListener() {
