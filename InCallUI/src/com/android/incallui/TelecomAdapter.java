@@ -64,12 +64,18 @@ final class TelecomAdapter implements InCallPhoneListener {
     }
 
     private android.telecom.Call getTelecommCallById(String callId) {
-        return CallList.getInstance().getCallById(callId).getTelecommCall();
+        final Call call = CallList.getInstance().getCallById(callId);
+        return call == null ? null : call.getTelecommCall();
     }
 
     void answerCall(String callId, int videoState) {
         if (mPhone != null) {
-            getTelecommCallById(callId).answer(videoState);
+            final android.telecom.Call call = getTelecommCallById(callId);
+            if (call != null) {
+                call.answer(videoState);
+            } else {
+                Log.e(this, "error answerCall, call not in call list: " + callId);
+            }
         } else {
             Log.e(this, "error answerCall, mPhone is null");
         }
@@ -77,7 +83,12 @@ final class TelecomAdapter implements InCallPhoneListener {
 
     void rejectCall(String callId, boolean rejectWithMessage, String message) {
         if (mPhone != null) {
-            getTelecommCallById(callId).reject(rejectWithMessage, message);
+            final android.telecom.Call call = getTelecommCallById(callId);
+            if (call != null) {
+                call.reject(rejectWithMessage, message);
+            } else {
+                Log.e(this, "error rejectCall, call not in call list: " + callId);
+            }
         } else {
             Log.e(this, "error rejectCall, mPhone is null");
         }
