@@ -27,7 +27,7 @@
     <string name="callFailed_timedOut" msgid="7590961703135543346">"沒有回應，已逾時"</string>
     <string name="callFailed_server_unreachable" msgid="2133506577423869729">"無法連接伺服器"</string>
     <string name="callFailed_number_unreachable" msgid="7632566442515734778">"無法撥通的號碼"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"用戶名稱或密碼不正確"</string>
+    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"使用者名稱或密碼不正確"</string>
     <string name="callFailed_out_of_network" msgid="8740943329772180507">"無法在網外撥號"</string>
     <string name="callFailed_server_error" msgid="5717915213586193217">"伺服器錯誤，請稍後再試一次。"</string>
     <string name="callFailed_noSignal" msgid="1889803273616031933">"沒有訊號"</string>
