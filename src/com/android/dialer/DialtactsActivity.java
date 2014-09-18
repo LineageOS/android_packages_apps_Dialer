@@ -442,6 +442,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         hideDialpadFragment(false, false);
 
         mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
+        
+        boolean callRecEnabled = getResources().getBoolean(R.bool.call_recording_enabled);
+        int callRecValue = 0;
+        if(callRecEnabled){
+            callRecValue = 1;
+        }
+        Settings.System.putInt(getContentResolver(), Settings.System.CALL_RECORDING_ENABLED, callRecValue);
+
     }
 
     @Override
