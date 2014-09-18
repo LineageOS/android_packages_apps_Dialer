@@ -115,8 +115,8 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"Apelul nu s-a trimis. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> nu este un număr de urgenţă!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Apelul nu s-a trimis. Apelaţi un număr de urgenţă!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Utilizaţi tastatura pentru a forma"</string>
-    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Hold call"</string>
-    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Resume call"</string>
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Puneți apelul în așteptare"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Reluați apelul"</string>
     <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Adăugaţi un apel"</string>
     <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Îmbinaţi apelurile"</string>
     <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Schimbaţi apelurile"</string>
