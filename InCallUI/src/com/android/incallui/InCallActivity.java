@@ -30,6 +30,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telecom.DisconnectCause;
+import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.animation.Animation;
@@ -45,6 +46,8 @@ import com.android.phone.common.animation.AnimationListenerAdapter;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.incallui.Call.State;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -492,9 +495,19 @@ public class InCallActivity extends Activity {
             Call pendingAccountSelectionCall = CallList.getInstance().getWaitingForAccountCall();
             if (pendingAccountSelectionCall != null) {
                 mCallCardFragment.setVisible(false);
-                Uri handle = pendingAccountSelectionCall.getHandle();
+                Bundle extras = pendingAccountSelectionCall
+                        .getTelecommCall().getDetails().getExtras();
+
+                final List<PhoneAccountHandle> phoneAccountHandles;
+                if (extras != null) {
+                    phoneAccountHandles = extras.getParcelableArrayList(
+                            android.telecom.Call.AVAILABLE_PHONE_ACCOUNTS);
+                } else {
+                    phoneAccountHandles = new ArrayList<>();
+                }
+
                 SelectPhoneAccountDialogFragment.showAccountDialog(getFragmentManager(),
-                        handle.getScheme());
+                        phoneAccountHandles);
             } else {
                 mCallCardFragment.setVisible(true);
             }
