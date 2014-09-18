@@ -17,4 +17,5 @@
 <resources>
     <bool name="call_recording_enabled">false</bool>
     <integer name="call_recording_audio_source">1</integer>
+    <integer name="call_recording_audio_encoder">0</integer>
 </resources>
