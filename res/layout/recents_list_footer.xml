@@ -27,7 +27,7 @@
     android:gravity="center"
     android:fontFamily="@string/view_full_call_history_font_family"
     android:textStyle="bold"
-    android:textColor="@color/view_full_call_history_color"
+    android:textColor="@color/dialtacts_secondary_text_color"
     android:textSize="14sp"
     android:text="@string/recents_footer_text"
     android:background="@drawable/recent_lists_footer_background" />
