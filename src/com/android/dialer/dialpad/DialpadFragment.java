@@ -1922,7 +1922,7 @@ public class DialpadFragment extends AnalyticsFragment
         if (speedNumber == null || speedNumber.length() == 0) {
             showNoSpeedNumberDialog(numId);
         } else {
-            Intent intent = new Intent(Intent.ACTION_CALL_PRIVILEGED);
+            Intent intent = new Intent(Intent.ACTION_CALL);
             intent.setData(Uri.fromParts("tel", speedNumber, null));
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
