@@ -19,6 +19,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Lists;
 
+import android.accounts.Account;
 import android.content.ContentProviderOperation;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -104,6 +105,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     protected int mPinnedIndex;
     protected int mContactIdIndex;
 
+    protected int mAccountTypeIndex;
+    protected int mAccountNameIndex;
+
     /** Indicates whether a drag is in process. */
     private boolean mInDragging = false;
 
@@ -185,6 +189,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         mIsDefaultNumberIndex = ContactTileLoaderFactory.IS_DEFAULT_NUMBER;
         mPinnedIndex = ContactTileLoaderFactory.PINNED;
         mContactIdIndex = ContactTileLoaderFactory.CONTACT_ID_FOR_DATA;
+
+        mAccountTypeIndex = ContactTileLoaderFactory.ACCOUNT_TYPE;
+        mAccountNameIndex = ContactTileLoaderFactory.ACCOUNT_NAME;
     }
 
     /**
@@ -264,6 +271,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             final String name = cursor.getString(mNameIndex);
             final boolean isStarred = cursor.getInt(mStarredIndex) > 0;
             final boolean isDefaultNumber = cursor.getInt(mIsDefaultNumberIndex) > 0;
+            final String accountName = cursor.getString(mAccountNameIndex);
+            final String accountType = cursor.getString(mAccountTypeIndex);
 
             final ContactEntry contact = new ContactEntry();
 
@@ -285,6 +294,15 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             contact.phoneNumber = cursor.getString(mPhoneNumberIndex);
 
             contact.pinned = pinned;
+
+            Account account;
+            if (!TextUtils.isEmpty(accountName) && !TextUtils.isEmpty(accountType)) {
+                account = new Account(accountName, accountType);
+            } else {
+                account = null;
+            }
+            contact.account = account;
+
             mContactEntries.add(contact);
 
             duplicates.put(id, contact);

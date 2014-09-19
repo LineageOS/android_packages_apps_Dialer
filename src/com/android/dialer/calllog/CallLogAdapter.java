@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllog;
 
+import android.accounts.Account;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -763,6 +764,9 @@ public class CallLogAdapter extends GroupingListAdapter
         }
 
         final PhoneCallDetails details;
+        final String accountName = info.accountName;
+        final String accountType = info.accountType;
+        Account contactAccount;
 
         views.reported = info.isBadData;
 
@@ -808,10 +812,17 @@ public class CallLogAdapter extends GroupingListAdapter
             nameForDefaultImage = name;
         }
 
-        if (photoId == 0 && photoUri != null) {
-            setPhoto(views, photoUri, lookupUri, nameForDefaultImage, lookupKey, contactType);
+        if (!TextUtils.isEmpty(accountName) && !TextUtils.isEmpty(accountType)) {
+            contactAccount = new Account(accountName, accountType);
         } else {
-            setPhoto(views, photoId, lookupUri, nameForDefaultImage, lookupKey, contactType);
+            contactAccount = null;
+        }
+        if (photoId == 0 && photoUri != null) {
+            setPhoto(views, photoUri, lookupUri, nameForDefaultImage, lookupKey, contactType,
+                    contactAccount);
+        } else {
+            setPhoto(views, photoId, lookupUri, nameForDefaultImage, lookupKey, contactType,
+                    contactAccount);
         }
 
         // Listen for the first draw
@@ -1213,22 +1224,22 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     private void setPhoto(CallLogListItemViews views, long photoId, Uri contactUri,
-            String displayName, String identifier, int contactType) {
+            String displayName, String identifier, int contactType, Account account) {
         views.quickContactView.assignContactUri(contactUri);
         views.quickContactView.setOverlay(null);
         DefaultImageRequest request = new DefaultImageRequest(displayName, identifier,
                 contactType, true /* isCircular */);
-        mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, false /* darkTheme */,
-                true /* isCircular */, request);
+        mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, account,
+                false /* darkTheme */, true /* isCircular */, request);
     }
 
     private void setPhoto(CallLogListItemViews views, Uri photoUri, Uri contactUri,
-            String displayName, String identifier, int contactType) {
+            String displayName, String identifier, int contactType, Account account) {
         views.quickContactView.assignContactUri(contactUri);
         views.quickContactView.setOverlay(null);
         DefaultImageRequest request = new DefaultImageRequest(displayName, identifier,
                 contactType, true /* isCircular */);
-        mContactPhotoManager.loadDirectoryPhoto(views.quickContactView, photoUri,
+        mContactPhotoManager.loadDirectoryPhoto(views.quickContactView, photoUri, account,
                 false /* darkTheme */, true /* isCircular */, request);
     }
 
