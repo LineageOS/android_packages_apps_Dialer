@@ -18,12 +18,14 @@ package com.android.dialer.calllog;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
+import android.telephony.TelephonyManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -43,7 +45,7 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
     private Handler mHandler;
     private ViewPager mViewPager;
     private ViewPagerTabs mViewPagerTabs;
-    private ViewPagerAdapter mViewPagerAdapter;
+    private FragmentPagerAdapter mViewPagerAdapter;
     private CallLogFragment mAllCallsFragment;
     private CallLogFragment mMissedCallsFragment;
     private CallLogFragment mVoicemailFragment;
@@ -51,6 +53,8 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
 
     private static final int WAIT_FOR_VOICEMAIL_PROVIDER_TIMEOUT_MS = 300;
     private boolean mSwitchToVoicemailTab;
+
+    private MSimCallLogFragment mMSimCallsFragment;
 
     private String[] mTabTitles;
 
@@ -71,6 +75,9 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
             mSwitchToVoicemailTab = false;
         }
     };
+
+    private static final int TAB_INDEX_MSIM = 0;
+    private static final int TAB_INDEX_COUNT_MSIM = 1;
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager fm) {
@@ -105,6 +112,27 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
         }
     }
 
+    public class MSimViewPagerAdapter extends FragmentPagerAdapter {
+        public MSimViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case TAB_INDEX_MSIM:
+                    mMSimCallsFragment = new MSimCallLogFragment();
+                    return mMSimCallsFragment;
+            }
+            throw new IllegalStateException("No fragment at position " + position);
+        }
+
+        @Override
+        public int getCount() {
+            return TAB_INDEX_COUNT_MSIM;
+        }
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
@@ -116,6 +144,11 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getTelephonyManager().isMultiSimEnabled()) {
+            initMSimCallLog();
+            return;
+        }
 
         mHandler = new Handler();
 
@@ -171,9 +204,33 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
     @Override
     protected void onResume() {
         super.onResume();
+
+        if (getTelephonyManager().isMultiSimEnabled())
+            return;
+
         CallLogQueryHandler callLogQueryHandler =
                 new CallLogQueryHandler(this.getContentResolver(), this);
         callLogQueryHandler.fetchVoicemailStatus();
+    }
+
+    private TelephonyManager getTelephonyManager() {
+        return (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+    }
+
+    private void initMSimCallLog() {
+        setContentView(R.layout.msim_call_log_activity);
+        getWindow().setBackgroundDrawable(null);
+
+        final ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
+
+        mViewPager = (ViewPager) findViewById(R.id.call_log_pager);
+
+        mViewPagerAdapter = new MSimViewPagerAdapter(getFragmentManager());
+        mViewPager.setAdapter(mViewPagerAdapter);
+        mViewPager.setOffscreenPageLimit(1);
     }
 
     @Override
@@ -192,6 +249,12 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
             final CallLogAdapter adapter = mAllCallsFragment.getAdapter();
             itemDeleteAll.setVisible(adapter != null && !adapter.isEmpty());
         }
+
+        if (mMSimCallsFragment != null && itemDeleteAll != null) {
+            final CallLogAdapter adapter = mMSimCallsFragment.getAdapter();
+            itemDeleteAll.setVisible(adapter != null && !adapter.isEmpty());
+        }
+
         return true;
     }
 
@@ -204,12 +267,17 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
                 startActivity(intent);
                 return true;
             case R.id.delete_all:
-                ClearCallLogDialog.show(getFragmentManager());
+                onDelCallLog();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void onDelCallLog() {
+        Intent intent = new Intent(
+                "com.android.contacts.action.MULTI_PICK_CALL");
+        startActivity(intent);
+    }
     @Override
     public void onVoicemailStatusFetched(Cursor statusCursor) {
         if (this.isFinishing()) {

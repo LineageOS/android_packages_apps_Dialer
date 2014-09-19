@@ -83,17 +83,17 @@ public class CallLogFragment extends AnalyticsListFragment
     private static final String KEY_IS_REPORT_DIALOG_SHOWING = "is_report_dialog_showing";
     private static final String KEY_REPORT_DIALOG_NUMBER = "report_dialog_number";
 
-    private CallLogAdapter mAdapter;
-    private CallLogQueryHandler mCallLogQueryHandler;
+    protected CallLogAdapter mAdapter;
+    protected CallLogQueryHandler mCallLogQueryHandler;
     private boolean mScrollToTop;
 
     /** Whether there is at least one voicemail source installed. */
-    private boolean mVoicemailSourcesAvailable = false;
+    protected boolean mVoicemailSourcesAvailable = false;
 
-    private VoicemailStatusHelper mVoicemailStatusHelper;
-    private View mStatusMessageView;
-    private TextView mStatusMessageText;
-    private TextView mStatusMessageAction;
+    protected VoicemailStatusHelper mVoicemailStatusHelper;
+    protected View mStatusMessageView;
+    protected TextView mStatusMessageText;
+    protected TextView mStatusMessageAction;
     private KeyguardManager mKeyguardManager;
     private View mFooterView;
 
@@ -129,7 +129,7 @@ public class CallLogFragment extends AnalyticsListFragment
     private boolean mMenuVisible = true;
 
     // Default to all calls.
-    private int mCallTypeFilter = CallLogQueryHandler.CALL_TYPE_ALL;
+    protected int mCallTypeFilter = CallLogQueryHandler.CALL_TYPE_ALL;
 
     // Log limit - if no limit is specified, then the default in {@link CallLogQueryHandler}
     // will be used.
@@ -290,7 +290,7 @@ public class CallLogFragment extends AnalyticsListFragment
     }
 
     /** Sets whether there are any voicemail sources available in the platform. */
-    private void setVoicemailSourcesAvailable(boolean voicemailSourcesAvailable) {
+    protected void setVoicemailSourcesAvailable(boolean voicemailSourcesAvailable) {
         if (mVoicemailSourcesAvailable == voicemailSourcesAvailable) return;
         mVoicemailSourcesAvailable = voicemailSourcesAvailable;
 
