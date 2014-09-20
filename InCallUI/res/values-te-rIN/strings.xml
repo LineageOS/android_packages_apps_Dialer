@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"తెలియదు"</string>
     <string name="private_num" msgid="6713286113000232309">"ప్రైవేట్ నంబర్"</string>
     <string name="payphone" msgid="1931775086311769314">"పే ఫోన్"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"లైన్ బిజీగా ఉంది"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"నెట్‌వర్క్ బిజీగా ఉంది"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"ప్రతిస్పందన లేదు, సమయం ముగిసింది"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"సర్వర్‌ను చేరుకోవడం సాధ్యపడలేదు"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"నంబర్‌ను చేరుకోవడం సాధ్యపడలేదు"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"చెల్లని వినియోగదారు పేరు లేదా పాస్‌వర్డ్"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"నెట్‌వర్క్ లేని చోటు నుండి కాల్ చేయబడింది"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"సర్వర్ లోపం. తర్వాత మళ్లీ ప్రయత్నించండి."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"సిగ్నల్ లేదు"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM పరిమితి మించిపోయింది"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"రేడియో ఆఫ్‌లో ఉంది"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"SIM లేదు లేదా SIM లోపం"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"మొబైల్ నెట్‌వర్క్ అందుబాటులో లేదు"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"FDN ద్వారా అవుట్‌గోయింగ్ కాల్‌లు పరిమితం చేయబడ్డాయి."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"కాల్ బేరింగ్ ఆన్‌లో ఉన్నప్పుడు మీరు అవుట్‌గోయింగ్ కాల్‌లు చేయలేరు."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"ప్రాప్యత నియంత్రణ ద్వారా అన్ని కాల్‌లు పరిమితం చేయబడ్డాయి."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"ప్రాప్యత నియంత్రణ ద్వారా అత్యవసర కాల్‌లు పరిమితం చేయబడ్డాయి."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"ప్రాప్యత నియంత్రణ ద్వారా సాధారణ కాల్‌లు పరిమితం చేయబడ్డాయి."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"నంబర్ చెల్లదు"</string>
     <string name="confCall" msgid="1904840547188336828">"కాన్ఫరెన్స్ కాల్"</string>
     <string name="call_lost" msgid="317670617901479594">"కాల్‌ను కోల్పోయారు."</string>
     <string name="ok" msgid="3811371167865772377">"సరే"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"కాన్ఫరెన్స్ కాల్‌లు చేయడం సాధ్యపడలేదు."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"కాల్‌ను తిరస్కరించడం సాధ్యపడలేదు."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"కాల్(లు)ను చేయడం సాధ్యపడలేదు."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"వాయిస్‌మెయిల్ నంబర్ తెలియదు."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP కాల్"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"అత్యవసర కాల్"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"రేడియోను ప్రారంభిస్తోంది…"</string>

@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"Onbekend"</string>
     <string name="private_num" msgid="6713286113000232309">"Privaat nommer"</string>
     <string name="payphone" msgid="1931775086311769314">"Betaalfoon"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Lyn is besig"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Netwerk besig"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Geen reaksie nie, uitgetel"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Bediener onbereikbaar"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Nommer onbereikbaar"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Verkeerde gebruikernaam of wagwoord"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Geskakel van buite netwerk"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Bedienerfout. Probeer later weer."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Geen sein"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM-grens oorskry"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Radio af"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Geen SIM of SIM-fout"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Mobiele netwerk is nie beskikbaar nie"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Uitgaande oproepe word beperk deur FDN."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Jy kan nie uitgaande oproepe maak terwyl oproepblokkeer aan is nie."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Alle oproepe word deur toegangbeheer beperk."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Noodoproepe word beperk deur toegangbeheer."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Gewone oproepe word beperk deur toegangbeheer."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Ongeldige nommer"</string>
     <string name="confCall" msgid="1904840547188336828">"Konferensie-oproep"</string>
     <string name="call_lost" msgid="317670617901479594">"Oproep is verlore."</string>
     <string name="ok" msgid="3811371167865772377">"OK"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Kan nie konferensie-oproepe doen nie."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Kan nie oproep verwerp nie."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Kan nie oproepe los nie."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Stemboodskapnommer is onbekend."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP-oproep"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Noodoproep"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Skakel tans radio aan…"</string>

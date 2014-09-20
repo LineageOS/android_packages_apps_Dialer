@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"Ezezaguna"</string>
     <string name="private_num" msgid="6713286113000232309">"Zenbaki pribatua"</string>
     <string name="payphone" msgid="1931775086311769314">"Telefono publikoa"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Linea okupatuta"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Sarea okupatuta"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Ez dago erantzunik, denbora-muga gainditu da"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Ezin da zerbitzariarekin konektatu"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Zenbakia ez dago eskuragarri"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Erabiltzaile-izen edo pasahitz okerra"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Sarearen kanpotik deitu da"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Zerbitzariaren errorea. Saiatu berriro geroago."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Ez dago seinalerik"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM datuen muga gainditu da"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Irratia desaktibatuta"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Ez dago SIM txartelik edo SIM txartelaren errore bat gertatu da"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Sare mugikorra ez dago erabilgarri"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Irteerako deiak FDN ezarpen bidez murrizten dira."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Ezin duzu irteerako deirik egin deien debekuak aktibatuta dauden bitartean."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Dei guztiak sarbide-kontrolaren bidez murrizten dira."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Larrialdi-deiak sarbide-kontrolaren bidez murrizten dira."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Dei normalak sarbide-kontrolaren bidez murrizten dira."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Zenbaki baliogabea"</string>
     <string name="confCall" msgid="1904840547188336828">"Konferentzia-deia"</string>
     <string name="call_lost" msgid="317670617901479594">"Deia galdu da."</string>
     <string name="ok" msgid="3811371167865772377">"Ados"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Ezin da konferentzia-deirik egin."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Ezin da deia baztertu."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Ezin dira deiak askatu."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Erantzungailuaren zenbaki ezezaguna."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP deia"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Larrialdi-deia"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Irratia pizten…"</string>

@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"알 수 없음"</string>
     <string name="private_num" msgid="6713286113000232309">"비공개 번호"</string>
     <string name="payphone" msgid="1931775086311769314">"공중전화"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"통화 중입니다."</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"네트워크 사용량이 많습니다."</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"응답 없음, 시간 초과"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"서버에 연결할 수 없음"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"연결할 수 없는 전화 번호"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"사용자 이름 또는 비밀번호가 잘못되었습니다"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"네트워크 외부에서 온 전화입니다."</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"서버 오류입니다. 잠시 후에 다시 시도해 보세요."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"신호 없음"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM 제한 초과"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"무선 연결 끊김"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"SIM이 없거나 SIM에 오류가 있습니다."</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"모바일 네트워크를 사용할 수 없음"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"발신전화가 FDN으로 제한됩니다."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"착발신 제한이 설정되어 있는 동안에는 전화를 걸 수 없습니다."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"모든 전화가 액세스 제어에 의해 제한되어 있습니다."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"긴급 전화가 액세스 제어에 의해 제한되어 있습니다."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"일반 전화가 액세스 제어에 의해 제한되어 있습니다."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"잘못된 번호입니다."</string>
     <string name="confCall" msgid="1904840547188336828">"다자간 통화"</string>
     <string name="call_lost" msgid="317670617901479594">"통화가 끊겼습니다."</string>
     <string name="ok" msgid="3811371167865772377">"확인"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"다자간 통화를 할 수 없습니다."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"통화를 거부할 수 없습니다."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"통화를 끊을 수 없습니다."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"음성사서함 번호를 알 수 없음"</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP 통화"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"긴급 전화"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"무선을 켜는 중..."</string>

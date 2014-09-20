@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"தெரியாதவர்"</string>
     <string name="private_num" msgid="6713286113000232309">"தனிப்பட்ட எண்"</string>
     <string name="payphone" msgid="1931775086311769314">"கட்டண மொபைல்"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"லைன் பிஸியாக உள்ளது"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"நெட்வொர்க் பிஸி"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"பதில் இல்லை, நேரம் முடிந்தது"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"சேவையகம் தொடர்பில் இல்லை"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"தொடர்புகொள்ள முடியவில்லை"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"பயனர்பெயர் அல்லது கடவுச்சொல் தவறானது"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"நெட்வொர்க்கிற்கு அப்பாற்பட்ட எல்லையிலிருந்து அழைக்கப்பட்டது"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"சேவையகப் பிழை. பிறகு முயலவும்."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"சிக்னல் இல்லை"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM வரம்பு மீறப்பட்டது"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"ரேடியோ முடக்கப்பட்டது"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"சிம் இல்லை அல்லது சிம் பிழை"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"மொபைல் நெட்வொர்க் இல்லை"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"வெளிச்செல்லும் அழைப்புகள் FDN ஆல் தடுக்கப்பட்டன."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"அழைப்பு தடுப்பில் இருக்கும்போது பிறரை அழைக்க முடியாது."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"அணுகல் கட்டுப்பாட்டின் மூலம் எல்லா அழைப்புகளும் தடுக்கப்பட்டன."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"அணுகல் கட்டுப்பாட்டின் மூலம் அவசர அழைப்புகள் தடுக்கப்பட்டன."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"அணுகல் கட்டுப்பாட்டின் மூலம் இயல்பான அழைப்புகள் தடுக்கப்பட்டன."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"எண் தவறானது"</string>
     <string name="confCall" msgid="1904840547188336828">"குழு அழைப்பு"</string>
     <string name="call_lost" msgid="317670617901479594">"அழைப்பு முடிந்தது."</string>
     <string name="ok" msgid="3811371167865772377">"சரி"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"குழு அழைப்புகளை மேற்கொள்ள முடியவில்லை."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"அழைப்பை நிராகரிக்க முடியவில்லை."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"அழைப்பை(களை) முடிக்க முடியவில்லை."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"குரலஞ்சல் எண் அறியப்படாதது."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP அழைப்பு"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"அவசரகால அழைப்பு"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"ரேடியோவை இயக்குகிறது…"</string>

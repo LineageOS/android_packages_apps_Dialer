@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"अज्ञात"</string>
     <string name="private_num" msgid="6713286113000232309">"निजी नम्बर"</string>
     <string name="payphone" msgid="1931775086311769314">"फोन तिर्नुहोस्"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"लाइन व्यस्त"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"नेटवर्क व्यस्त"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"कुनै पनि जवाफ छैन, समय सकियो।"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"सर्भर पहुँचयोग्य"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"सङ्ख्या पहुँचयोग्य छैन"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"गलत प्रयोगकर्ता नाम वा पासवर्ड"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"नेटवर्कको बाहिरबाट कल भयो"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"सर्भर त्रुटि। पछि पुनःप्रयास गर्नुहोस्।"</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"सङ्केत छैन"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM सीमा पार भयो"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"रेडियो बन्द"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"SIM छैन वा SIM त्रुटि"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"मोबाइल सञ्जाल उपलब्ध छैन"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"FDN द्वारा बहिर्गमन कल निषेधित गरिएको छ।"</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"कल ब्यारिङ हुँदा तपाईं बहिर्गमन कलहरू गर्न सक्नु हुन्न।"</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"पहुँच नियन्त्रणद्वारा सबै कलहरू प्रतिबन्धित छन्।"</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"पहुँच नियन्त्रणद्वारा आपतकालीन कलहरू प्रतिबन्धित छन्।"</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"पहुँच नियन्त्रणद्वारा सामान्य कलहरू प्रतिबन्धित छन्।"</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"अमान्य सङ्ख्या"</string>
     <string name="confCall" msgid="1904840547188336828">"सम्मेलन कल"</string>
     <string name="call_lost" msgid="317670617901479594">"कल हराएको छ।"</string>
     <string name="ok" msgid="3811371167865772377">"ठिक छ"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"सम्मेलन कलहरू गर्न असमर्थ।"</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"कल अस्वीकार गर्न असमर्थ।"</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"कल(हरू) छुटाउन असमर्थ।"</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"भ्वाइसमेल नम्बर अज्ञात छ।"</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP कल"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"आपतकालीन कल"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"रेडियो खोल्दै..."</string>
