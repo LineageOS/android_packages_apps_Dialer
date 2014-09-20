@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"Descoñecido"</string>
     <string name="private_num" msgid="6713286113000232309">"Número privado"</string>
     <string name="payphone" msgid="1931775086311769314">"Teléfono público"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Liña ocupada"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Rede ocupada"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Sen resposta; superouse o tempo de espera"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Non se pode acceder ao servidor"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Non se pode contactar co número"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Nome de usuario ou contrasinal incorrecto"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Chamada desde fóra da rede"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Erro no servidor. Téntao de novo máis tarde."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Sen cobertura"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Límite de ACM superado"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Radio desactivada"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Non hai SIM ou hai un erro na SIM"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"A rede móbil non está dispoñible"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"As chamadas saíntes están restrinxidas por FDN."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Non podes facer chamadas saíntes coa restrición de chamadas activada."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Todas as chamadas están restrinxidas polo control de acceso."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"As chamadas de emerxencia están restrinxidas polo control de acceso."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"As chamadas normais están restrinxidas polo control de acceso."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Número non válido"</string>
     <string name="confCall" msgid="1904840547188336828">"Conferencia telefónica"</string>
     <string name="call_lost" msgid="317670617901479594">"Perdeuse a chamada."</string>
     <string name="ok" msgid="3811371167865772377">"Aceptar"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Non se poden efectuar conferencias."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Non se pode rexeitar a chamada."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Non se poden efectuar chamadas."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Número de correo de voz descoñecido."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"Chamada SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Chamada de emerxencia"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Activando radio..."</string>

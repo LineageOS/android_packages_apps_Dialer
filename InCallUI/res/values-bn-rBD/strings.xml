@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"অজানা"</string>
     <string name="private_num" msgid="6713286113000232309">"ব্যক্তিগত নম্বর"</string>
     <string name="payphone" msgid="1931775086311769314">"অর্থের বিনিময়ে কল করার ফোন"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"লাইন ব্যস্ত"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"নেটওয়ার্ক ব্যস্ত"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"কোনো প্রতিক্রিয়া নেই, সময় শেষ হয়ে গেছে"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"সার্ভারে পৌঁছানো যাচ্ছে না"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"নম্বরটিতে সংযোগ স্থাপন করা যাচ্ছে না"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"ভুল ব্যবহারকারীর নাম বা পাসওয়ার্ড"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"নেটওয়ার্কের বাইরে থেকে কল করা হয়েছে"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"সার্ভার ত্রুটি৷ পরে আবার চেষ্টা করুন৷"</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"কোনো সংকেত নেই"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM এর সীমা অতিক্রম করেছে"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"রেডিও বন্ধ"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"কোনো সিম নেই বা সিম ত্রুটি"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"মোবাইল নেটওয়ার্ক অনুপলব্ধ"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"FDN এর দ্বারা আউটগোয়িং কলগুলি সীমাবদ্ধ করা আছে৷"</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"কল প্রতিবন্ধকতা চালু থাকা অবস্থায় আপনি আউটগোয়িং কল করতে পারবেন না৷"</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"অ্যাক্সেস নিয়ন্ত্রণের দ্বারা সমস্ত কল সীমাবদ্ধ করা আছে৷"</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"অ্যাক্সেস নিয়ন্ত্রণের দ্বারা জরুরি কলগুলি সীমাবদ্ধ করা আছে৷"</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"অ্যাক্সেস নিয়ন্ত্রণের দ্বারা সাধারণ কলগুলি সীমাবদ্ধ করা আছে৷"</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"অবৈধ নম্বর"</string>
     <string name="confCall" msgid="1904840547188336828">"কনফারেন্স কল"</string>
     <string name="call_lost" msgid="317670617901479594">"কলের সংযোগ বিচ্ছিন্ন হয়ে গেছে৷"</string>
     <string name="ok" msgid="3811371167865772377">"ঠিক আছে"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"কনফারেন্স কলগুলি করা যায়নি৷"</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"কল প্রত্যাখ্যান করা যায়নি৷"</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"কল(গুলি) রিলিজ করা যায়নি৷"</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"ভয়েসমেল নম্বর অজানা৷"</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP কল"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"জরুরি কল"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"রেডিও চালু করা হচ্ছে…"</string>
