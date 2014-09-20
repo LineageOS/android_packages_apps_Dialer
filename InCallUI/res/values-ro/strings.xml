@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"Necunoscut"</string>
     <string name="private_num" msgid="6713286113000232309">"Număr privat"</string>
     <string name="payphone" msgid="1931775086311769314">"Telefon public"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Linie ocupată"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Reţea ocupată"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Fără răspuns, durata a expirat"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Server neaccesibil"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Numărul nu poate fi contactat"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Nume de utilizator sau parolă incorecte"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Apelat din afara reţelei"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Eroare de server. Încercaţi din nou mai târziu."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Niciun semnal"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Limită ACM depăşită"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Radio oprit"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Nu există SIM sau eroare de SIM"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Rețeaua mobilă nu este disponibilă"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Apelurile trimise sunt restricţionate de FDN."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Nu puteţi efectua apeluri de ieşire în timp ce blocarea apelurilor este activă."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Toate apelurile sunt restricţionate de controlul de acces."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Apelurile de urgenţă sunt restricţionate de controlul de acces."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Apelurile normale sunt restricţionate de controlul de acces."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Număr nevalid"</string>
     <string name="confCall" msgid="1904840547188336828">"Teleconferinţă"</string>
     <string name="call_lost" msgid="317670617901479594">"Apelul s-a pierdut."</string>
     <string name="ok" msgid="3811371167865772377">"OK"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Teleconferinţa nu se poate efectua."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Apelul nu poate fi respins."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Apelul (apelurile) nu poate (pot) fi eliberat (eliberate)."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Număr de mesagerie vocală necunoscut."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"apel SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Apel de urgenţă"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Se activează semnalul radio..."</string>
@@ -115,16 +95,11 @@
     <string name="dial_emergency_error" msgid="7969515493359619960">"Apelul nu s-a trimis. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> nu este un număr de urgenţă!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Apelul nu s-a trimis. Apelaţi un număr de urgenţă!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Utilizaţi tastatura pentru a forma"</string>
-    <!-- no translation found for overflowHoldMenuItemText (7382457697092158039) -->
-    <skip />
-    <!-- no translation found for overflowResumeMenuItemText (8826360006222366843) -->
-    <skip />
-    <!-- no translation found for overflowAddMenuItemText (5605615101930811453) -->
-    <skip />
-    <!-- no translation found for overflowMergeMenuItemText (6305762210377655389) -->
-    <skip />
-    <!-- no translation found for overflowSwapMenuItemText (6603717809137071603) -->
-    <skip />
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Puneți apelul în așteptare"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Reluați apelul"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Adăugaţi un apel"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Îmbinaţi apelurile"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Schimbaţi apelurile"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"Reţineţi"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Terminat"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Tastatură numerică"</string>

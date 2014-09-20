@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"Haijulikani"</string>
     <string name="private_num" msgid="6713286113000232309">" Number isiyojulikana"</string>
     <string name="payphone" msgid="1931775086311769314">"Simu ya kulipia"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Simu inatumika"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Mtandao unatumika"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Hakuna jibu, muda umekwisha"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Seva haiwezi kufikiwa"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Nambari haifikiwi"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Jina la mtumiaji au nenosiri sio sahihi"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Ilipigwa kutoka nje ya mtandao"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Hitilafu ya seva: Tafadhali jaribu tena baadaye."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Hakuna mtandao"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Kiwango cha ACM kimezidishwa"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Radio imezima"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Hakuna SIM au kuna hitilafu ya SIM"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Mtandao wa simu za mkononi haupatikani"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Simu zinazopigwa zimezuiliwa na FDN"</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Huwezi kupiga simu za kutoka wakati kupiga simu kumezuiwa."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Simu zote zimezuiwa na kidhibiti ufikiaji."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Simu za dharura zimezuiwa na kidhibiti ufikiaji."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Simu za kawaida zimezuiwa na kidhibiti ufikiaji."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Nambari isiyo sahihi"</string>
     <string name="confCall" msgid="1904840547188336828">"Simu ya kongamano"</string>
     <string name="call_lost" msgid="317670617901479594">"Simu imepotea."</string>
     <string name="ok" msgid="3811371167865772377">"Sawa"</string>
@@ -98,7 +79,7 @@
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Haijasajiliwa kwa mitandao"</string>
     <string name="incall_error_out_of_service" msgid="8587993036435080418">"Mtandao wa simu haupatikani."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Simu haijatumwa, hakuna nambari halali iliyoingizwa."</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"Simu haijatumwa."</string>
+    <string name="incall_error_call_failed" msgid="4313552620858880999">"Simu haijapigwa."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"Inaanzisha msururu wa MMI…"</string>
     <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"Kifaa ambacho hakijahiliwa."</string>
     <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"Imeshindwa kubadilisha simu"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Imeshindwa kupigia watu wengi."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Imeshindwa kukataa simu."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Imeshindwa kuachilia simu."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Nambari ya ujumbe wa sauti haijulikani."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"Simu ya SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Simu ya dharura"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Inawasha redio..."</string>

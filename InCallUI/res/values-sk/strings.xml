@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"Neznáme"</string>
     <string name="private_num" msgid="6713286113000232309">"Súkromné číslo"</string>
     <string name="payphone" msgid="1931775086311769314">"Verejný telefón"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Linka je obsadená"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Sieť je zaneprázdnená"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Bez odozvy, vypršal časový limit"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Server je nedostupný"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Volané číslo je nedostupné"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Nesprávne používateľské meno alebo heslo"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Volanie z priestoru mimo siete"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Chyba servera: Skúste to znova neskôr."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Žiadny signál"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Bol prekročený limit ACM"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Rádio je vypnuté"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Karta SIM chýba alebo nefunguje"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Mobilná sieť nie je k dispozícii"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Odchádzajúce hovory sú obmedzené na pevne určené čísla (FDN)."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Ak je zapnuté blokovanie hovorov, nie je možné uskutočňovať odchádzajúce hovory."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Všetky hovory sú obmedzené ovládaním prístupu."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Tiesňové volania sú obmedzené ovládaním prístupu."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Bežné volania sú obmedzené ovládaním prístupu."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Neplatné číslo"</string>
     <string name="confCall" msgid="1904840547188336828">"Konferenčný hovor"</string>
     <string name="call_lost" msgid="317670617901479594">"Hovor bol prerušený."</string>
     <string name="ok" msgid="3811371167865772377">"OK"</string>
@@ -94,7 +75,7 @@
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Zatvoriť"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Zavolať späť"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Správa"</string>
-    <string name="incall_error_power_off" msgid="6550191216405193368">"Ak chcete telefonovať, vypnite najprv režim V lietadle."</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Ak chcete telefonovať, vypnite najprv režim v lietadle."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Prihlásenie do siete nebolo úspešné."</string>
     <string name="incall_error_out_of_service" msgid="8587993036435080418">"Mobilná sieť nie je k dispozícii."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Hovor sa nepodarilo spojiť, nebolo zadané platné číslo."</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Hovory nie je možné spojiť do konferenčného hovoru."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Hovor nie je možné odmietnuť."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Hovor nie je možné uvoľniť."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Číslo hlasovej schránky je neznáme"</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"Hovory SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Tiesňové volanie"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Prebieha zapínanie rádia..."</string>

@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"Ukendt"</string>
     <string name="private_num" msgid="6713286113000232309">"Privat nummer"</string>
     <string name="payphone" msgid="1931775086311769314">"Betalingstelefon"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Linjen er optaget"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Netværket er optaget"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Intet svar, timeout"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Serveren er ikke tilgængelig"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Nummeret er ikke tilgængeligt"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Forkert brugernavn eller adgangskode"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Opkald uden for netværk"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Serverfejl. Prøv igen senere."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Der er intet signal"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM-grænsen er overskredet"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Slå radio fra"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Der er intet SIM-kort, eller der er SIM-kortfejl"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Mobilnetværket er ikke tilgængeligt"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Udgående opkald er begrænset til angivne opkaldsnumre."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Du kan ikke foretage udgående opkald, mens opkaldsspærring er slået til."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Alle opkald er begrænset af adgangskontrol."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Nødopkald er begrænset af adgangskontrol."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Normale opkald er begrænset af adgangskontrol."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Ugyldigt antal"</string>
     <string name="confCall" msgid="1904840547188336828">"Telefonmøde"</string>
     <string name="call_lost" msgid="317670617901479594">"Opkaldet er mistet."</string>
     <string name="ok" msgid="3811371167865772377">"OK"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Der kunne ikke oprettes mødeopkald."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Opkaldet kunne ikke afvises."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Der kunne ikke foretages opkald."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Telefonsvarernummeret er ukendt"</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP-opkald"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Nødopkald"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Tænder for radio ..."</string>

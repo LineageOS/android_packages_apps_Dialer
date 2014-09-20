@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"Ukjent"</string>
     <string name="private_num" msgid="6713286113000232309">"Hemmelig nummer"</string>
     <string name="payphone" msgid="1931775086311769314">"Telefonkiosk"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Opptatt"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Nettverket er opptatt"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Ingen respons, tidsavbrudd"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Tjeneren kan ikke nås"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Nummeret kan ikke nås"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Feil brukernavn eller passord"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Anrop utenfor nettverk"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Tjenerfeil. Prøv igjen senere."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Mangler signal"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM-grense nådd"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Radioen er av"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Ikke noe SIM-kort eller SIM-kortfeil"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Mobilnettverket er ikke tilgjengelig"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Utgående samtaler er begrenset til faste nummer."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Du kan ikke foreta utgående anrop når samtalesperre er på."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Alle samtaler er begrenset av tilgangskontroll."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Nødsamtaler er begrenset av tilgangskontroll."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Vanlige samtaler er begrenset av tilgangskontroll."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Ugyldig tall"</string>
     <string name="confCall" msgid="1904840547188336828">"Telefonmøte"</string>
     <string name="call_lost" msgid="317670617901479594">"Samtalen er mistet."</string>
     <string name="ok" msgid="3811371167865772377">"OK"</string>
@@ -60,7 +41,7 @@
     <string name="card_title_redialing" msgid="4831412164303596395">"Prøver på nytt"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Telefonmøte"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Innkommende anrop"</string>
-    <string name="card_title_call_ended" msgid="5544730338889702298">"Samtale avsluttet"</string>
+    <string name="card_title_call_ended" msgid="5544730338889702298">"Samtalen er avsluttet"</string>
     <string name="card_title_on_hold" msgid="821463117892339942">"Parkert"</string>
     <string name="card_title_hanging_up" msgid="3999101620995182450">"Legger på"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"Samtale pågår"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Kan ikke opprette telefonmøte."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Kan ikke avvise anrop."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Kan ikke legge på."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Nummeret til talepostkassen mangler."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP-anrop"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Nødanrop"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Slår på radio…"</string>
