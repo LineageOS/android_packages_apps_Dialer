@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Telefon"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Jurnal de apeluri"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Trimiteţi un mesaj text"</string>
@@ -79,16 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"căutare"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"apelaţi"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"numărul de apelat"</string>
-    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
-    <skip />
-    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
-    <skip />
-    <!-- no translation found for description_playback_seek (4509404274968530055) -->
-    <skip />
-    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
-    <skip />
-    <!-- no translation found for description_rate_increase (6324606574127052385) -->
-    <skip />
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Porniți sau opriți redarea"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Activați sau dezactivați difuzorul"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Căutați poziția de redare"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Reduceți viteza redării"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Măriți viteza redării"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Istoricul apelurilor"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Mai multe opţiuni"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"tastatură numerică"</string>
@@ -144,8 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Se încarcă de pe cardul SIM..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Persoanele din agendă de pe cardul SIM"</string>
-    <!-- no translation found for add_contact_not_available (2731922990890769322) -->
-    <skip />
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Pentru a utiliza această funcție, reactivați aplicația Agendă."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Funcția Căutare vocală nu este disponibilă."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Nu se poate efectua un apel telefonic, deoarece aplicația Telefon a fost dezactivată."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Nu este disponibilă nicio aplicație instalată pentru efectuarea acțiunii selectate."</string>

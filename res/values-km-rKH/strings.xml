@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"អ្នក​ហៅ"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"ទូរសព្ទ"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ទូរស័ព្ទ"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"បញ្ជី​ហៅ"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"ផ្ញើ​សារ​អត្ថបទ"</string>
@@ -108,7 +107,7 @@
     <string name="type_incoming" msgid="6502076603836088532">"ការ​ហៅ​ចូល"</string>
     <string name="type_outgoing" msgid="343108709599392641">"ការ​ហៅ​ចេញ"</string>
     <string name="type_missed" msgid="2720502601640509542">"ខកខាន​ទទួល"</string>
-    <string name="type_incoming_video" msgid="82323391702796181">"ការ​ហៅ​ជា​វីដេអូ​ចូល"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"ការ​ហៅចូលជា​វីដេអូ​"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"ការ​ហៅ​ជា​វីដេអូ​ចេញ"</string>
     <string name="type_missed_video" msgid="954396897034220545">"ខកខាន​ទទួល​ការ​ហៅ​ជា​វីដេអូ"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"សារ​ជា​សំឡេង"</string>
@@ -161,7 +160,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ការ​ហៅ​ជា​វីដេអូ"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"មើលប្រវត្តិហៅពេញលេញ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"ខកខាន​ទទួល​ថ្មី <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"ការ​ហៅ​រហ័ស​គឺ​ជា​​ការ​ហៅ​ដោយ​ប៉ះ​ម្ដង\nសម្រាប់​លេខ​​ដែល​អ្នក​ពេញ​ចិត្ត និង​លេខ\n អ្នក​ហៅ​​ញឹកញាប់។"</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"ការ​ហៅ​រហ័ស​គឺ​ជា​​ការ​ហៅ​ដោយ​ប៉ះ​តែ​ម្ដង\nសម្រាប់​លេខ​​ដែល​អ្នក​ពេញ​ចិត្ត និង​លេខ\n អ្នក​ហៅ​​ញឹកញាប់។"</string>
     <string name="all_contacts_empty" msgid="4536082452651392894">"អ្នក​មិន​មាន​​ទំនាក់ទំនង​ទេ។"</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"ប៉ះ​រូបភាព ដើម្បី​មើល​លេខ​ទាំងអស់ ឬ​ចុច និង​សង្កត់​ដើម្បី​តម្រៀប​ឡើងវិញ"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"បដិសេធ"</string>

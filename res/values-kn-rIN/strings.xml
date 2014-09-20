@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"ಡಯಲರ್"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"ಫೋನ್"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ಫೋನ್"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"ಕರೆಯ ಲಾಗ್‌"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"ಪಠ್ಯ ಸಂದೇಶವನ್ನು ಕಳುಹಿಸು"</string>
@@ -162,7 +161,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ವೀಡಿಯೊ ಕರೆ ಮಾಡಿ"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"ಕರೆಯ ಪೂರ್ಣ ಇತಿಹಾಸವನ್ನು ವೀಕ್ಷಿಸಿ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ಹೊಸ ತಪ್ಪಿದ ಕರೆಗಳು"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"ಸ್ಪೀಡ್ ಡಯಲ್ ಎಂಬುದು ನೀವು ಪದೇಪದೇ ಕರೆ ಮಾಡುವ \nಸಂಖ್ಯೆಗಳು ಮತ್ತು ಮೆಚ್ಚಿನವುಗಳಿಗೆ\n ಒಂದೇ ಸ್ಪರ್ಶದ ಡಯಲಿಂಗ್ ಆಗಿದೆ."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"ಸ್ಪೀಡ್ ಡಯಲ್ ಎಂದರೆ, ನೀವು ಪದೇಪದೇ ಕರೆ ಮಾಡುವ \nಸಂಖ್ಯೆಗಳು ಮತ್ತು ಮೆಚ್ಚಿನವುಗಳಿಗೆ\n ಒಂದೇ ಸ್ಪರ್ಶದಲ್ಲಿ ಡಯಲ್‌ ಮಾಡುವುದು."</string>
     <string name="all_contacts_empty" msgid="4536082452651392894">"ನೀವು ಯಾವುದೇ ಸಂಪರ್ಕಗಳನ್ನು ಹೊಂದಿಲ್ಲ."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"ಎಲ್ಲ ಸಂಖ್ಯೆಗಳನ್ನು ನೋಡಲು ಚಿತ್ರವನ್ನು ಟ್ಯಾಪ್‌ ಮಾಡಿ ಅಥವಾ ಮರುಕ್ರಮಗೊಳಿಸಲು ಒತ್ತಿ ಹಿಡಿದುಕೊಳ್ಳಿ"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"ವಜಾಗೊಳಿಸಿ"</string>

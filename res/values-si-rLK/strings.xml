@@ -18,8 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"අංකිත මුහුණ"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"දුරකථනය"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"දුරකථනය"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"ඇමතුම් ලොගය"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"කෙටි පණිවිඩය යවන්න"</string>
@@ -139,8 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM පතෙන් පූරණය කරමින්…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM පත් සම්බන්ධතා"</string>
-    <!-- no translation found for add_contact_not_available (2731922990890769322) -->
-    <skip />
+    <string name="add_contact_not_available" msgid="2731922990890769322">"මෙම අංගය භාවිතා කිරීමට සම්බන්ධතා යෙදුම නැවත සබල කරන්න."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"හඬ සෙවුම පවතින්නේ නැත"</string>
     <string name="call_not_available" msgid="8941576511946492225">"දුරකථන යෙදුම අබල කර ඇති නිසා දුරකථන ඇමතුම ලබාගැනීම කළ නොහැක."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"තෝරාගන්නා ලද ක්‍රියාව හසුරුවීමට ස්ථාපනය කරන ලද ක්‍රියාකරකම් නොතිබේ."</string>
@@ -186,7 +184,7 @@
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"ඊයේ"</string>
     <string name="call_log_header_last_week" msgid="5197040511028258038">"අවසාන සතිය"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"වඩා පරණ"</string>
-    <string name="call_detail_list_header" msgid="866455969433213220">"ඇමතුම ලැයිස්තුව"</string>
+    <string name="call_detail_list_header" msgid="866455969433213220">"ඇමතුම් ලැයිස්තුව"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"ශබ්දවාහිනී සක්‍රිය කරන්න."</string>
     <string name="voicemail_speaker_off" msgid="7390530056413093958">"ශබ්දවාහිනී අක්‍රිය කරන්න."</string>
     <string name="voicemail_play_faster" msgid="3444751008615323006">"වේගයෙන් ධාවනය කරන්න."</string>
@@ -198,7 +196,7 @@
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"සම්බන්ධතා දර්ශනය කිරීමේ විකල්ප"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"හඬ සහ කම්පන"</string>
     <string name="ringtone_title" msgid="760362035635084653">"දුරකථන රිගින්ටෝනය"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"අමතරව ඇමතුම් සඳහා කම්පනය කරන්න"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"ඇමතුම් සඳහා කම්පනයද කරන්න"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"ඩයල්පෑඩ ස්පර්ශක හඬ"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"වෙනත්"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ක්ෂණික ප්‍රතිචාර"</string>
