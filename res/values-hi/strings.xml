@@ -18,11 +18,10 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"डायलर"</string>
-    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
-    <skip />
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"फ़ोन"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"फ़ोन"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"कॉल लॉग"</string>
-    <string name="menu_sendTextMessage" msgid="6937343460284499306">"पाठ संदेश भेजें"</string>
+    <string name="menu_sendTextMessage" msgid="6937343460284499306">"लेख संदेश भेजें"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> को कॉल करें"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"कॉल करने से पहले नंबर संपादित करें"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"संपर्कों में जोड़ें"</string>
@@ -30,7 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="6352364392762163704">"कॉल लॉग साफ़ करें"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ध्वनि मेल हटाएं"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"ध्‍वनिमेल साझा करें"</string>
-    <string name="recentCalls_empty" msgid="7711926651216108723">"आपका कॉल लॉग रिक्त है."</string>
+    <string name="recentCalls_empty" msgid="7711926651216108723">"आपका कॉल लॉग खाली है."</string>
     <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"कॉल लॉग साफ़ करें?"</string>
     <string name="clearCallLogConfirmation" msgid="5043563133171583152">"आपके सभी कॉल रिकॉर्ड हटा दिए जाएंगे."</string>
     <string name="clearCallLogProgress_title" msgid="8365943000154295771">"कॉल लॉग साफ़ हो रहा है..."</string>
@@ -120,7 +119,7 @@
     <string name="description_new_voicemail" msgid="2133792360865517746">"नया ध्वनि मेल."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> कॉल."</string>
     <string name="description_video_call" msgid="2933838090743214204">"वीडियो कॉल."</string>
-    <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g> को पाठ संदेश भेजें"</string>
+    <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g> को लेख संदेश भेजें"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"नहीं सुना गया ध्वनिमेल"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"बोलकर खोजें शुरु करें"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> पर कॉल करें"</string>
