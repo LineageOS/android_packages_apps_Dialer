@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"Nepoznato"</string>
     <string name="private_num" msgid="6713286113000232309">"Privatni broj"</string>
     <string name="payphone" msgid="1931775086311769314">"Telefonska govornica"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Linija je zauzeta"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Mreža je zauzeta"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Nema odgovora, privremeno zaustavljeno"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Poslužitelj nedostupan"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Broj je nedostupan"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Netočno korisničko ime ili zaporka"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Poziv izvan mreže"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Pogreška poslužitelja. Pokušajte ponovno kasnije."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Nema signala"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Prekoračeno je ACM ograničenje"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Radio je isključen"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Nema SIM-a ili SIM ima pogrešku"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Mobilna mreža nije dostupna"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Odlazne pozive ograničava FDN."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Ne možete uspostavljati odlazne pozive ako je uključena zabrana poziva."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Sve je pozive ograničila pristupna kontrola."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Hitne pozive ograničila je pristupna kontrola."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Uobičajene pozive ograničila je pristupna kontrola."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Nevažeći broj"</string>
     <string name="confCall" msgid="1904840547188336828">"Konferencijski poziv"</string>
     <string name="call_lost" msgid="317670617901479594">"Poziv je prekinut."</string>
     <string name="ok" msgid="3811371167865772377">"U redu"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Nije moguće uspostaviti konferencijske pozive."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Nije moguće odbiti poziv."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Nije moguće ostvariti pozi(e)."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Broj govorne pošte nije poznat."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP poziv"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Hitan poziv"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Uključivanje radija…"</string>
