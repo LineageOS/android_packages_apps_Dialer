@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"Desconhecido"</string>
     <string name="private_num" msgid="6713286113000232309">"Número particular"</string>
     <string name="payphone" msgid="1931775086311769314">"Telefone público"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Linha ocupada"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Rede ocupada"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Sem resposta, tempo limite excedido"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Servidor inacessível"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Número incontactável"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Nome de utilizador ou palavra-passe incorretos"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Chamada efetuada de fora da rede"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Erro do servidor. Tente novamente mais tarde."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Sem sinal"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Limite de ACM excedido"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Rádio desativado"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Sem cartão SIM ou erro do cartão"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Rede móvel não disponível"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"As chamadas efectuadas são restringidas por FDN."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Não é possível efetuar chamadas com o barramento de chamadas ativado."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Todas as chamadas são restringidas por controlo de acesso."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"As chamadas de emergência são restringidas por controlo de acesso."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"As chamadas normais são restringidas por controlo de acesso."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Número inválido"</string>
     <string name="confCall" msgid="1904840547188336828">"Chamada de conferência"</string>
     <string name="call_lost" msgid="317670617901479594">"A chamada perdeu-se."</string>
     <string name="ok" msgid="3811371167865772377">"OK"</string>
@@ -79,7 +60,7 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Chamada em curso"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"Em espera"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Chamada recebida"</string>
-    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Videochamada recebida"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"A receber videochamada"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"Pedido de vídeo recebido"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Novo correio de voz"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Novo correio de voz (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Não é possível efectuar chamadas de conferência."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Não é possível rejeitar a chamada."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Não é possível efectuar chamada(s)."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Número do correio de voz desconhecido."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"Chamada SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Chamada de emergência"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"A ligar o rádio..."</string>

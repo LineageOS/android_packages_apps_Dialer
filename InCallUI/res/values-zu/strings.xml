@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"Akwaziwa"</string>
     <string name="private_num" msgid="6713286113000232309">"Inombolo eyimfihlo"</string>
     <string name="payphone" msgid="1931775086311769314">"Ifoni ekhokhelwayo"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Ulayini umatasa"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Inethiwekhi imatasa"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Ayikho impendulo, isikhathi siphelile"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Iseva ayitholakali"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Inombolo ayifinyeleleki"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Igama lomsebenzisi noma iphasiwedi engalungile"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Kushayelwe kwinethiwekhi yangaphandle"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Iphutha leseva. Zama futhi emva kwesikhathi."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Ayikho isignali"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Umkhawulo we-ACM ufinyelelwe"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Umsakazo uvaliwe"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Ayikho i-SIM, noma iphutha le-SIM"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Inethiwekhi yeselula ayitholakali"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Amakholi aphumayo avinjelwe i-FDN."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Awukwazi ukwenza amakholi aphumayo ngenkathi ukuvimba kuvuliwe."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Wonke amakholi avimbelwa ngesilawuli sokufinyelela."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Amakholi aphuthumayo avinjelwe isilawuli sokufinyelela."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Amakholi avamile avinjelwe ukulawula kokufinyelela."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Inombolo Engalungile"</string>
     <string name="confCall" msgid="1904840547188336828">"Ikholi yengqungquthela"</string>
     <string name="call_lost" msgid="317670617901479594">"Ikholi ikulahlekele."</string>
     <string name="ok" msgid="3811371167865772377">"KULUNGILE"</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Ayikwazi ukwenza amakholi engqungquthela."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Ayikwazi ukwenqaba ikholi."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Ayikwazi ukuyeka ikholi (ama)."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Inombolo yevoyisimeyili ayaziwa."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"Ikholi ye-SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Ikholi ephuthumayo"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Ivula umsakazo..."</string>
