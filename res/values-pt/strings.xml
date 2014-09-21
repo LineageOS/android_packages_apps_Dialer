@@ -119,7 +119,7 @@
     <string name="description_new_voicemail" msgid="2133792360865517746">"Nova mensagem de voz."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> chamadas."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Vídeo chamada."</string>
-    <string name="description_send_text_message" msgid="7803126439934046891">"Enviar mensagem de texto para <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_send_text_message" msgid="7803126439934046891">"Enviar SMS para <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nova mensagem de voz"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Iniciar pesquisa por voz"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Ligar para <xliff:g id="NUMBER">%s</xliff:g>"</string>
@@ -138,9 +138,9 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Carregando do cartão SIM..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contatos do cartão SIM"</string>
-    <string name="add_contact_not_available" msgid="2731922990890769322">"Reative o aplicativo \"Contatos\" para usar este recurso."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Reative o app \"Contatos\" para usar este recurso."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"A pesquisa por voz não está disponível."</string>
-    <string name="call_not_available" msgid="8941576511946492225">"Não é possível fazer uma chamada porque o aplicativo Telefone foi desativado."</string>
+    <string name="call_not_available" msgid="8941576511946492225">"Não é possível fazer uma chamada porque o app Telefone foi desativado."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Nenhuma atividade instalada disponível para a ação selecionada."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Digite um nome ou telefone"</string>
     <string name="recentMissed_empty" msgid="4177320482947526015">"Você não tem chamadas perdidas recentes."</string>
