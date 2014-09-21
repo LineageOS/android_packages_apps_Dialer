@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Telefon"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Rejestr"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Wyślij wiadomość tekstową"</string>
@@ -138,7 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"Numer MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Wczytywanie z karty SIM…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Kontakty z karty SIM"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Aby korzystać z tej funkcji, włącz ponownie aplikację Kontakty."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Aby używać tej funkcji, włącz ponownie aplikację Kontakty."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Wyszukiwanie głosowe jest niedostępne."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Nie można zadzwonić, ponieważ aplikacja Telefon została wyłączona."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Brak zainstalowanej aplikacji wykonującej wybrane działanie."</string>
@@ -151,7 +151,7 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Nieodebrane"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Poczta gł."</string>
     <string name="tab_speed_dial" msgid="7807567599021643864">"Szybkie wybieranie"</string>
-    <string name="tab_recents" msgid="929949073851377206">"Niedawne"</string>
+    <string name="tab_recents" msgid="929949073851377206">"Ostatnie"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontakty"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Usunięto z ulubionych"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Cofnij"</string>
