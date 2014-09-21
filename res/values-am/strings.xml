@@ -144,7 +144,7 @@
     <string name="activity_not_available" msgid="8265265380537872585">"የተመረጠውን ድርጊት ለማከናወን ምንም የተጫነ እንቅስቃሴ አይገኝም።"</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"ስም ወይም ስልክ ቁጥር ይተይቡ"</string>
     <string name="recentMissed_empty" msgid="4177320482947526015">"ምንም የቅርብ ጊዜ ያመለጡ ጥሪዎች የልዎትም።"</string>
-    <string name="recentVoicemails_empty" msgid="4905583746647459963">"ምንም የቅርብ ጊዜ የድምጽ መልእክቶች የልዎትም።"</string>
+    <string name="recentVoicemails_empty" msgid="4905583746647459963">"ምንም የቅርብ ጊዜ የድምጽ መልዕክቶች የልዎትም።"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ተወዳጆችን ብቻ አሳይ"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ታሪክ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ሁሉም"</string>
