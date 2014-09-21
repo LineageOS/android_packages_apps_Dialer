@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Kibonyezi"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Simu"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Nambari ya simu"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Simu"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Logi ya orodha ya kupiga simu"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Tuma ujumbe wa maandishi"</string>
@@ -130,7 +130,7 @@
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Tumia kibodi kubonyeza"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"Piga ili kuongeza simu"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"Dakika <xliff:g id="MINUTES">%s</xliff:g> sekunde <xliff:g id="SECONDS">%s</xliff:g>"</string>
-    <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Simu haijatumwa"</string>
+    <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Simu haijapigwa"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Ili kusanidi ujumbe wa sauti, nenda kwa Menyu &gt; Mipangilio."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Kupigia simu ujumbe wa sauti, kwanza zima hali ya ndege."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Inapakia…"</string>
@@ -138,7 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Inapakia kutoka SIM kadi..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Anwani za SIM kadi"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Washa tena Programu ya watu ili itumie kipengele hiki."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Washa tena programu ya Anwani ili utumie kipengele hiki."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Utafutaji kwa kutamka haupatikani."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Haiwezi kupiga simu kwa sababu programu ya Simu imezimwa."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Hakuna shughuli iliyosakinishwa imepatikana ya kushughulikia kitendo kilichochaguliwa."</string>
@@ -152,7 +152,7 @@
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Ujumbe wa sauti"</string>
     <string name="tab_speed_dial" msgid="7807567599021643864">"Unaowasiliana nao zaidi"</string>
     <string name="tab_recents" msgid="929949073851377206">"Zilizotumika majuzi"</string>
-    <string name="tab_all_contacts" msgid="1410922767166533690">"Walioalikwa"</string>
+    <string name="tab_all_contacts" msgid="1410922767166533690">"Anwani zote"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Imeondolowa kwenye vipendwa"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Tendua"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Piga simu <xliff:g id="NUMBER">%s</xliff:g>"</string>
@@ -161,7 +161,7 @@
     <string name="recents_footer_text" msgid="7315554578957453359">"Angalia historia kamili ya simu zilizopigwa"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Simu <xliff:g id="NUMBER">%s</xliff:g> za karibuni ambazo hazikujibiwa"</string>
     <string name="speed_dial_empty" msgid="5476435149276295630">"Kupiga simu kwa haraka kunahusisha kupiga simu kwa kugusa mara moja\n nambari na watu unaowapigia mara kwa mara\n."</string>
-    <string name="all_contacts_empty" msgid="4536082452651392894">"Huna anwani."</string>
+    <string name="all_contacts_empty" msgid="4536082452651392894">"Hauna anwani zozote."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Gonga picha ili uone nambari zote au bonyeza na ushikilie ili upange upya"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ondoa"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Ondoa"</string>

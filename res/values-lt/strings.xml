@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Skambučiai"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Telefonas"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefonas"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefonas"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Skambučių žurnalas"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Siųsti teksto pranešimą"</string>
@@ -138,7 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Įkeliama iš SIM kortelės..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM kortelės adresatai"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Iš naujo įgalinti programą Žmonės, kad būtų galima naudoti šią funkciją."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Iš naujo įgalinkite Kontaktų programą, kad galėtumėte naudoti šią funkciją."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Paieška balsu negalima."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Negalima skambinti telefonu, nes Telefono programa išjungta."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Nepasiekiama jokia įdiegta veikla pasirinktam veiksmui atlikti."</string>

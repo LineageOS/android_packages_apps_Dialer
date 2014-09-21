@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Marcador"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Teléfono"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Teléfono"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Teléfono"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Llamadas"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Enviar un mensaje de texto"</string>
@@ -138,7 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Cargando desde tarjeta SIM…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contactos de tarjeta SIM"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Vuelve a habilitar la aplicación Contactos para usar esta función."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Vuelve a habilitar la aplicación Contactos para usar esta función."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"La búsqueda por voz no está disponible."</string>
     <string name="call_not_available" msgid="8941576511946492225">"No se puede hacer llamadas porque se ha inhabilitado la aplicación Teléfono."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Ninguna actividad instalada puede procesar la acción seleccionada."</string>
