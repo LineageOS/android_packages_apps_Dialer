@@ -60,6 +60,9 @@ public class SpecialCharSequenceMgr {
     private static final String SECRET_CODE_ACTION = "android.provider.Telephony.SECRET_CODE";
     private static final String MMI_IMEI_DISPLAY = "*#06#";
     private static final String MMI_REGULATORY_INFO_DISPLAY = "*#07#";
+    private static final String MMI_OPEN_DIAG_MENU_DISPLAY = "*76278#";
+    private static final String MMI_FACTORY_MODE_DISPLAY = "#38378#";
+    private static final String MMI_ENGINEER_MODE_DISPLAY = "*#7548135*#";
     private static final String PRL_VERSION_DISPLAY = "*#0000#";
 
     /**
@@ -97,13 +100,29 @@ public class SpecialCharSequenceMgr {
         //get rid of the separators so that the string gets parsed correctly
         String dialString = PhoneNumberUtils.stripSeparators(input);
 
-        if (handlePRLVersion(context, dialString)
-                || handleIMEIDisplay(context, dialString, useSystemWindow)
-                || handleRegulatoryInfoDisplay(context, dialString)
-                || handlePinEntry(context, dialString)
-                || handleAdnEntry(context, dialString, textField)
-                || handleSecretCode(context, dialString)) {
-            return true;
+        if (context.getResources().getBoolean(R.bool.def_dialer_secretcode_enabled) ||
+                context.getResources().getBoolean(R.bool.def_dialer_settings_diagport_enabled)) {
+            if (handlePRLVersion(context, dialString)
+                    || handleIMEIDisplay(context, dialString, useSystemWindow)
+                    || handleRegulatoryInfoDisplay(context, dialString)
+                    || handleEngineerModeDisplay(context, dialString)
+                    || handlePinEntry(context, dialString)
+                    || handleAdnEntry(context, dialString, textField)
+                    || handleSecretCode(context, dialString)
+                    || handleFactorySetCode(context, dialString)
+                    || handleSetDiagPortCode(context, dialString)) {
+                return true;
+            }
+        } else {
+            if (handlePRLVersion(context, dialString)
+                    || handleIMEIDisplay(context, dialString, useSystemWindow)
+                    || handleRegulatoryInfoDisplay(context, dialString)
+                    || handleEngineerModeDisplay(context, dialString)
+                    || handlePinEntry(context, dialString)
+                    || handleAdnEntry(context, dialString, textField)
+                    || handleSecretCode(context, dialString)) {
+                return true;
+            }
         }
 
         return false;
@@ -119,6 +138,17 @@ public class SpecialCharSequenceMgr {
             } catch (ActivityNotFoundException e) {
                 Log.d(TAG, "no activity to handle showing device info");
             }
+        }
+        return false;
+    }
+
+    static private boolean handleSetDiagPortCode(Context context, String input) {
+        int len = input.length();
+        if (input.equals(MMI_OPEN_DIAG_MENU_DISPLAY)) {
+            Intent intent = new Intent(SECRET_CODE_ACTION,
+                    Uri.parse("android_secret_code://" + input.substring(1, len - 1)));
+            context.sendBroadcast(intent);
+            return true;
         }
         return false;
     }
@@ -159,6 +189,17 @@ public class SpecialCharSequenceMgr {
             return true;
         }
 
+        return false;
+    }
+
+    static boolean handleFactorySetCode(Context context, String input) {
+        int len = input.length();
+        if (input.equals(MMI_FACTORY_MODE_DISPLAY)) {
+            Intent intent = new Intent(SECRET_CODE_ACTION,
+                    Uri.parse("android_secret_code://" + input.substring(1, len - 1)));
+            context.sendBroadcast(intent);
+            return true;
+        }
         return false;
     }
 
@@ -359,6 +400,16 @@ public class SpecialCharSequenceMgr {
                 .setPositiveButton(android.R.string.ok, null)
                 .setCancelable(false)
                 .show();
+    }
+
+    static boolean handleEngineerModeDisplay(Context context, String input) {
+        if (input.equals(MMI_ENGINEER_MODE_DISPLAY)) {
+            Intent intent = new Intent(SECRET_CODE_ACTION,
+                    Uri.parse("android_secret_code://3878"));
+            context.sendBroadcast(intent);
+            return true;
+        }
+        return false;
     }
 
     /*******
