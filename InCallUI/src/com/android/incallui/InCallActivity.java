@@ -30,7 +30,9 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telecom.DisconnectCause;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.animation.Animation;
@@ -472,6 +474,20 @@ public class InCallActivity extends Activity {
 
             if (intent.getBooleanExtra(NEW_OUTGOING_CALL, false)) {
                 intent.removeExtra(NEW_OUTGOING_CALL);
+                Call call = CallList.getInstance().getOutgoingCall();
+                if (call == null) {
+                    call = CallList.getInstance().getPendingOutgoingCall();
+                }
+
+                Bundle extras = null;
+                if (call != null) {
+                    extras = call.getTelecommCall().getDetails().getExtras();
+                }
+                if (extras == null) {
+                    // Initialize the extras bundle to avoid NPE
+                    extras = new Bundle();
+                }
+
 
                 Point touchPoint = null;
                 if (TouchPointManager.getInstance().hasValidPoint()) {
@@ -479,17 +495,27 @@ public class InCallActivity extends Activity {
                     touchPoint = TouchPointManager.getInstance().getPoint();
                 } else {
                     // Otherwise retrieve the touch point from the call intent
-                    Call call = CallList.getInstance().getOutgoingCall();
-                    if (call == null) {
-                        call = CallList.getInstance().getPendingOutgoingCall();
-                    }
                     if (call != null) {
-                        Bundle extras = call.getTelecommCall().getDetails().getExtras();
-                        touchPoint = (Point) (extras == null ?
-                                null : extras.getParcelable(TouchPointManager.TOUCH_POINT));
+                        touchPoint = (Point) extras.getParcelable(TouchPointManager.TOUCH_POINT);
                     }
                 }
                 mCallCardFragment.animateForNewOutgoingCall(touchPoint);
+
+                /*
+                 * If both a phone account handle and a list of phone accounts to choose from are
+                 * missing, then disconnect the call because there is no way to place an outgoing
+                 * call.
+                 * The exception is emergency calls, which may be waiting for the ConnectionService
+                 * to set the PhoneAccount during the PENDING_OUTGOING state.
+                 */
+                if (call != null && !isEmergencyCall(call)) {
+                    final List<PhoneAccountHandle> phoneAccountHandles = extras
+                            .getParcelableArrayList(android.telecom.Call.AVAILABLE_PHONE_ACCOUNTS);
+                    if (call.getAccountHandle() == null &&
+                            (phoneAccountHandles == null || phoneAccountHandles.isEmpty())) {
+                        TelecomAdapter.getInstance().disconnectCall(call.getId());
+                    }
+                }
             }
 
             Call pendingAccountSelectionCall = CallList.getInstance().getWaitingForAccountCall();
@@ -514,6 +540,14 @@ public class InCallActivity extends Activity {
 
             return;
         }
+    }
+
+    private boolean isEmergencyCall(Call call) {
+        final Uri handle = call.getHandle();
+        if (handle == null) {
+            return false;
+        }
+        return PhoneNumberUtils.isEmergencyNumber(handle.getSchemeSpecificPart());
     }
 
     private void relaunchedFromDialer(boolean showDialpad) {
