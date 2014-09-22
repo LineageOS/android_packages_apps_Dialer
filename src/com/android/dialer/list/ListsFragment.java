@@ -4,15 +4,10 @@ import android.animation.LayoutTransition;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CallLog;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -20,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.android.contacts.common.GeoUtil;
@@ -34,7 +30,7 @@ import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.list.ShortcutCardsAdapter.SwipeableShortcutCard;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.OverlappingPaneLayout;
-import com.android.dialer.widget.OverlappingPaneLayout.PanelSlideListener;
+import com.android.dialer.widget.OverlappingPaneLayout.PanelSlideCallbacks;
 import com.android.dialerbind.analytics.AnalyticsFragment;
 import com.android.dialerbind.ObjectFactory;
 
@@ -108,7 +104,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
      */
     private long mCurrentCallShortcutDate = 0;
 
-    private PanelSlideListener mPanelSlideListener = new PanelSlideListener() {
+    private PanelSlideCallbacks mPanelSlideCallbacks = new PanelSlideCallbacks() {
         @Override
         public void onPanelSlide(View panel, float slideOffset) {
             // For every 1 percent that the panel is slid upwards, clip 1 percent off the top
@@ -152,7 +148,34 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
             }
             mIsPanelOpen = false;
         }
+
+        @Override
+        public void onPanelFlingReachesEdge(int velocityY) {
+            if (getCurrentListView() != null) {
+                getCurrentListView().fling(velocityY);
+            }
+        }
+
+        @Override
+        public boolean isScrollableChildUnscrolled() {
+            final AbsListView listView = getCurrentListView();
+            return listView != null && (listView.getChildCount() == 0
+                    || listView.getChildAt(0).getTop() == listView.getPaddingTop());
+        }
     };
+
+    private AbsListView getCurrentListView() {
+        final int position = mViewPager.getCurrentItem();
+        switch (getRtlPosition(position)) {
+            case TAB_INDEX_SPEED_DIAL:
+                return mSpeedDialFragment == null ? null : mSpeedDialFragment.getListView();
+            case TAB_INDEX_RECENTS:
+                return mRecentsFragment == null ? null : mRecentsFragment.getListView();
+            case TAB_INDEX_ALL_CONTACTS:
+                return mAllContactsFragment == null ? null : mAllContactsFragment.getListView();
+        }
+        throw new IllegalStateException("No fragment at position " + position);
+    }
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager fm) {
@@ -175,6 +198,26 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
                     return mAllContactsFragment;
             }
             throw new IllegalStateException("No fragment at position " + position);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            // On rotation the FragmentManager handles rotation. Therefore getItem() isn't called.
+            // Copy the fragments that the FragmentManager finds so that we can store them in
+            // instance variables for later.
+            final Fragment fragment = (Fragment) super.instantiateItem(container, position);
+            switch (getRtlPosition(position)) {
+                case TAB_INDEX_SPEED_DIAL:
+                    mSpeedDialFragment = (SpeedDialFragment) fragment;
+                    return mSpeedDialFragment;
+                case TAB_INDEX_RECENTS:
+                    mRecentsFragment = (CallLogFragment) fragment;
+                    return mRecentsFragment;
+                case TAB_INDEX_ALL_CONTACTS:
+                    mAllContactsFragment = (AllContactsFragment) fragment;
+                    return mAllContactsFragment;
+            }
+            return super.instantiateItem(container, position);
         }
 
         @Override
@@ -360,7 +403,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
         // the framework better supports nested scrolling.
         paneLayout.setCapturableView(mViewPagerTabs);
         paneLayout.openPane();
-        paneLayout.setPanelSlideListener(mPanelSlideListener);
+        paneLayout.setPanelSlideCallbacks(mPanelSlideCallbacks);
         paneLayout.setIntermediatePinnedOffset(
                 ((HostInterface) getActivity()).getActionBarHeight());
 
