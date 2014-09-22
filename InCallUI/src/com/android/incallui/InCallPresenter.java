@@ -21,6 +21,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
+import android.telecom.DisconnectCause;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneCapabilities;
 import android.telecom.Phone;
 import android.telecom.PhoneAccountHandle;
@@ -742,6 +745,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     private void maybeShowErrorDialogOnDisconnect(Call call) {
         // For newly disconnected calls, we may want to show a dialog on specific error conditions
         if (isActivityStarted() && call.getState() == Call.State.DISCONNECTED) {
+            if (call.getAccountHandle() == null && !call.isConferenceCall()) {
+                setDisconnectCauseForMissingAccounts(call);
+            }
             mInCallActivity.maybeShowErrorDialogOnDisconnect(call.getDisconnectCause());
         }
     }
@@ -855,6 +861,34 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         }
 
         return newState;
+    }
+
+    /**
+     * Sets the DisconnectCause for a call that was disconnected because it was missing a
+     * PhoneAccount or PhoneAccounts to select from.
+     * @param call
+     */
+    private void setDisconnectCauseForMissingAccounts(Call call) {
+        android.telecom.Call telecomCall = call.getTelecommCall();
+
+        Bundle extras = telecomCall.getDetails().getExtras();
+        // Initialize the extras bundle to avoid NPE
+        if (extras == null) {
+            extras = new Bundle();
+        }
+
+        final List<PhoneAccountHandle> phoneAccountHandles = extras.getParcelableArrayList(
+                android.telecom.Call.AVAILABLE_PHONE_ACCOUNTS);
+
+        if (phoneAccountHandles == null || phoneAccountHandles.isEmpty()) {
+            String scheme = telecomCall.getDetails().getHandle().getScheme();
+            final String errorMsg = PhoneAccount.SCHEME_TEL.equals(scheme) ?
+                    mContext.getString(R.string.callFailed_simError) :
+                        mContext.getString(R.string.incall_error_supp_service_unknown);
+            DisconnectCause disconnectCause =
+                    new DisconnectCause(DisconnectCause.ERROR, null, errorMsg, errorMsg);
+            call.setDisconnectCause(disconnectCause);
+        }
     }
 
     private boolean startUi(InCallState inCallState) {
