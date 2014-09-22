@@ -200,23 +200,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 R.dimen.floating_action_button_width);
         mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
                 mFloatingActionButtonContainer, mFloatingActionButton);
-        final ViewGroup parent = (ViewGroup) mPrimaryCallCardContainer.getParent();
-        final ViewTreeObserver observer = getView().getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+
+        mSecondaryCallInfo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onGlobalLayout() {
-                final ViewTreeObserver observer = getView().getViewTreeObserver();
-                if (!observer.isAlive()) {
-                    return;
-                }
-                observer.removeOnGlobalLayoutListener(this);
-                mFloatingActionButtonController.setScreenWidth(parent.getWidth());
-                mFloatingActionButtonController.align(
-                        mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
-                            : FloatingActionButtonController.ALIGN_MIDDLE,
-                        0 /* offsetX */,
-                        mFloatingActionButtonVerticalOffset /* offsetY */,
-                        false);
+            public void onClick(View v) {
+                getPresenter().secondaryInfoClicked();
+                updateFabPosition();
             }
         });
 
@@ -465,7 +454,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             boolean canManageConference) {
 
         if (show != mSecondaryCallInfo.isShown()) {
-            updateFabPositionOnSecondaryCallInfoLayout();
+            updateFabPosition();
         }
 
         if (show) {
@@ -631,13 +620,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private String getConferenceString(boolean canManageConference) {
         Log.v(this, "canManageConferenceString: " + canManageConference);
-        final int resId = canManageConference ? R.string.card_title_conf_call : R.string.card_title_in_call;
+        final int resId = canManageConference
+                ? R.string.card_title_conf_call : R.string.card_title_in_call;
         return getView().getResources().getString(resId);
     }
 
     private Drawable getConferencePhoto(boolean canManageConference) {
         Log.v(this, "canManageConferencePhoto: " + canManageConference);
-        final int resId = canManageConference ? R.drawable.img_conference : R.drawable.picture_dialing;
+        final int resId = canManageConference ? R.drawable.img_conference : R.drawable.img_phone;
         return getView().getResources().getDrawable(resId);
     }
 
@@ -743,13 +733,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                         .findViewById(R.id.secondaryCallProviderIcon);
             }
         }
-        mSecondaryCallInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getPresenter().secondaryInfoClicked();
-                updateFabPositionOnSecondaryCallInfoLayout();
-            }
-        });
     }
 
     public void dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
@@ -908,19 +891,20 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         if (mAnimatorSet != null && mAnimatorSet.isRunning()) {
             mAnimatorSet.cancel();
         }
+
+        updateFabPosition();
     }
 
     /**
      * Adds a global layout listener to update the FAB's positioning on the next layout. This allows
      * us to position the FAB after the secondary call info's height has been calculated.
      */
-    private void updateFabPositionOnSecondaryCallInfoLayout() {
+    private void updateFabPosition() {
         mSecondaryCallInfo.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
-                        final ViewTreeObserver observer =
-                                mSecondaryCallInfo.getViewTreeObserver();
+                        final ViewTreeObserver observer = mSecondaryCallInfo.getViewTreeObserver();
                         if (!observer.isAlive()) {
                             return;
                         }
