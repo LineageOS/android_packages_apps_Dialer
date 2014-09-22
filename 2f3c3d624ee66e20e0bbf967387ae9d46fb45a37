@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1b2928_616ea897",
+        "filename": "src/com/android/dialer/DialtactsActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-09-22T21:30:18Z",
+      "side": 1,
+      "message": "This can be nuked, see TeleService patch.",
+      "revId": "2f3c3d624ee66e20e0bbf967387ae9d46fb45a37",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1b2928_c16dfc99",
+        "filename": "src/com/android/services/callrecorder/CallRecorderService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-09-22T21:30:18Z",
+      "side": 1,
+      "message": "Space missing before { (here and below), also trailing whitespace.",
+      "revId": "2f3c3d624ee66e20e0bbf967387ae9d46fb45a37",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1b2928_a168c088",
+        "filename": "src/com/android/services/callrecorder/CallRecorderService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-09-22T21:30:18Z",
+      "side": 1,
+      "message": "Can inline this into the set...() lines.",
+      "revId": "2f3c3d624ee66e20e0bbf967387ae9d46fb45a37",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
