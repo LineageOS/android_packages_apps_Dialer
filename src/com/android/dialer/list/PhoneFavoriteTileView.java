@@ -56,7 +56,11 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
 
     // Dummy clip data object that is attached to drag shadows so that text views
     // don't crash with an NPE if the drag shadow is released in their bounds
-    static final ClipData EMPTY_CLIP_DATA = ClipData.newPlainText("", "");
+    private static final ClipData EMPTY_CLIP_DATA = ClipData.newPlainText("", "");
+
+    // Constant to pass to the drag event so that the drag action only happens when a phone favorite
+    // tile is long pressed.
+    static final String DRAG_PHONE_FAVORITE_TILE = "PHONE_FAVORITE_TILE";
 
     public PhoneFavoriteTileView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -72,7 +76,8 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
             public boolean onLongClick(View v) {
                 final PhoneFavoriteTileView view = (PhoneFavoriteTileView) v;
                 // NOTE The drag shadow is handled in the ListView.
-                view.startDrag(EMPTY_CLIP_DATA, new View.DragShadowBuilder(), null, 0);
+                view.startDrag(EMPTY_CLIP_DATA, new View.DragShadowBuilder(),
+                        DRAG_PHONE_FAVORITE_TILE, 0);
                 return true;
             }
         });
