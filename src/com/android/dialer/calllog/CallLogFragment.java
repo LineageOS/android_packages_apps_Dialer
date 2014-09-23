@@ -601,7 +601,7 @@ public class CallLogFragment extends AnalyticsListFragment
                 view.getLocalVisibleRect(localVisibleRect);
                 final int scrollingNeeded = localVisibleRect.top > 0 ? -localVisibleRect.top
                         : view.getMeasuredHeight() - localVisibleRect.height();
-
+                final ListView listView = getListView();
                 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
                     private int mCurrentScroll = 0;
@@ -618,9 +618,11 @@ public class CallLogFragment extends AnalyticsListFragment
                         view.requestLayout();
 
                         if (isExpand) {
-                            int scrollBy = (int) (value * scrollingNeeded) - mCurrentScroll;
-                            getListView().smoothScrollBy(scrollBy, /* duration = */ 0);
-                            mCurrentScroll += scrollBy;
+                            if (listView != null) {
+                                int scrollBy = (int) (value * scrollingNeeded) - mCurrentScroll;
+                                listView.smoothScrollBy(scrollBy, /* duration = */ 0);
+                                mCurrentScroll += scrollBy;
+                            }
                         }
                     }
                 });
