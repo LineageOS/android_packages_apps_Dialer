@@ -838,7 +838,6 @@ public class DialpadFragment extends AnalyticsFragment
             }
             mPressedDialpadKeys.add(view);
         } else {
-            view.jumpDrawablesToCurrentState();
             mPressedDialpadKeys.remove(view);
             if (mPressedDialpadKeys.isEmpty()) {
                 stopTone();
