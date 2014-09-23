@@ -420,4 +420,8 @@ public class SpeedDialFragment extends AnalyticsFragment implements OnItemClickL
     public void cacheOffsetsForDatasetChange() {
         saveOffsets(0);
     }
+
+    public AbsListView getListView() {
+        return mListView;
+    }
 }
