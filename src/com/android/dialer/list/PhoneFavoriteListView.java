@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.DragEvent;
@@ -149,7 +150,7 @@ public class PhoneFavoriteListView extends GridView implements OnDragDropListene
         final int eY = (int) event.getY();
         switch (action) {
             case DragEvent.ACTION_DRAG_STARTED: {
-                if (PhoneFavoriteTileView.EMPTY_CLIP_DATA != event.getClipData()) {
+                if (!PhoneFavoriteTileView.DRAG_PHONE_FAVORITE_TILE.equals(event.getLocalState())) {
                     // Ignore any drag events that were not propagated by long pressing
                     // on a {@link PhoneFavoriteTileView}
                     return false;
