@@ -140,7 +140,8 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
             durationView.setVisibility(View.GONE);
         } else {
             durationView.setVisibility(View.VISIBLE);
-            durationView.setText(formatDurationAndDataUsage(details.duration, details.dataUsage));
+            durationView.setText(
+                    formatDurationAndDataUsage(details.duration, details.dataUsage, details.durationType));
         }
 
         return result;
@@ -166,7 +167,8 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
      * @param dataUsage Data usage in bytes, or null if not specified.
      * @return String containing call duration and data usage.
      */
-    private CharSequence formatDurationAndDataUsage(long elapsedSeconds, Long dataUsage) {
+    private CharSequence formatDurationAndDataUsage(long elapsedSeconds, Long dataUsage,
+            int durationType) {
         CharSequence duration = formatDuration(elapsedSeconds);
 
         if (dataUsage != null) {
@@ -176,7 +178,19 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
 
             return DialerUtils.join(mContext.getResources(), mDurationItems);
         } else {
-            return duration;
+            boolean enabled = mContext.getResources().getBoolean(R.bool.call_durationtype_enabled);
+            if (enabled) {
+                switch (durationType) {
+                    case Calls.DURATION_TYPE_ACTIVE:
+                        return mContext.getString(R.string.call_duration_active) + duration;
+                    case Calls.DURATION_TYPE_CALLOUT:
+                        return mContext.getString(R.string.call_duration_call_out) + duration;
+                    default:
+                        return duration;
+                }
+            } else {
+                return duration;
+            }
         }
     }
 }
