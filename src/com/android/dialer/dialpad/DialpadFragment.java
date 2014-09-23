@@ -225,7 +225,7 @@ public class DialpadFragment extends AnalyticsFragment
         public void onCallStateChanged(int state, String incomingNumber) {
             // Log.i(TAG, "PhoneStateListener.onCallStateChanged: "
             //       + state + ", '" + incomingNumber + "'");
-            if ((state == TelephonyManager.CALL_STATE_IDLE) && dialpadChooserVisible()) {
+            if ((state == TelephonyManager.CALL_STATE_IDLE) && isDialpadChooserVisible()) {
                 // Log.i(TAG, "Call ended with dialpad chooser visible!  Taking it down...");
                 // Note there's a race condition in the UI here: the
                 // dialpad chooser could conceivably disappear (on its
@@ -1211,7 +1211,7 @@ public class DialpadFragment extends AnalyticsFragment
         }
 
         if (enabled) {
-            // Log.i(TAG, "Showing dialpad chooser!");
+            Log.i(TAG, "Showing dialpad chooser!");
             if (mDialpadView != null) {
                 mDialpadView.setVisibility(View.GONE);
             }
@@ -1226,7 +1226,7 @@ public class DialpadFragment extends AnalyticsFragment
             }
             mDialpadChooser.setAdapter(mDialpadChooserAdapter);
         } else {
-            // Log.i(TAG, "Displaying normal Dialer UI.");
+            Log.i(TAG, "Displaying normal Dialer UI.");
             if (mDialpadView != null) {
                 mDialpadView.setVisibility(View.VISIBLE);
             } else {
@@ -1241,7 +1241,7 @@ public class DialpadFragment extends AnalyticsFragment
     /**
      * @return true if we're currently showing the "dialpad chooser" UI.
      */
-    private boolean dialpadChooserVisible() {
+    private boolean isDialpadChooserVisible() {
         return mDialpadChooser.getVisibility() == View.VISIBLE;
     }
 
@@ -1604,7 +1604,7 @@ public class DialpadFragment extends AnalyticsFragment
         final DialtactsActivity activity = (DialtactsActivity) getActivity();
         final DialpadView dialpadView = (DialpadView) getView().findViewById(R.id.dialpad_view);
         if (activity == null) return;
-        if (!hidden) {
+        if (!hidden && !isDialpadChooserVisible()) {
             if (mAnimate) {
                 dialpadView.animateShow();
             }
