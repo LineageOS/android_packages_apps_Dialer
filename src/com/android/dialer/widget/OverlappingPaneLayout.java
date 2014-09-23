@@ -33,6 +33,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.accessibility.AccessibilityEvent;
@@ -116,18 +117,27 @@ public class OverlappingPaneLayout extends ViewGroup {
 
     /**
      * Indicates that the layout is currently in the process of a nested pre-scroll operation where
-     * the child scrolling view is being dragged downwards, and still has the ability to consume
-     * scroll events itself. If so, we should open the pane up to the maximum offset defined in
-     * {@link #mIntermediateOffset}, and no further, so that the child view can continue performing
-     * its own scroll.
+     * the child scrolling view is being dragged downwards.
      */
-    private boolean mInNestedPreScrollDownwards = false;
+    private boolean mInNestedPreScrollDownwards;
 
     /**
-     * Indicates whether or not a nested scrolling child is able to scroll internally at this point
-     * in time.
+     * Indicates that the layout is currently in the process of a nested pre-scroll operation where
+     * the child scrolling view is being dragged upwards.
      */
-    private boolean mChildCannotConsumeScroll;
+    private boolean mInNestedPreScrollUpwards;
+
+    /**
+     * Indicates that the layout is currently in the process of a fling initiated by a pre-fling
+     * from the child scrolling view.
+     */
+    private boolean mIsInNestedFling;
+
+    /**
+     * Indicates the direction of the pre fling. We need to store this information since
+     * OverScoller doesn't expose the direction of its velocity.
+     */
+    private boolean mInUpwardsPreFling;
 
     /**
      * Stores an offset used to represent a point somewhere in between the panel's fully closed
@@ -139,7 +149,7 @@ public class OverlappingPaneLayout extends ViewGroup {
     private float mInitialMotionX;
     private float mInitialMotionY;
 
-    private PanelSlideListener mPanelSlideListener;
+    private PanelSlideCallbacks mPanelSlideCallbacks;
 
     private final ViewDragHelper mDragHelper;
 
@@ -154,9 +164,18 @@ public class OverlappingPaneLayout extends ViewGroup {
     private final Rect mTmpRect = new Rect();
 
     /**
-     * Listener for monitoring events about sliding panes.
+     * How many dips we need to scroll past a position before we can snap to the next position
+     * on release. Using this prevents accidentally snapping to positions.
+     *
+     * This is needed since vertical nested scrolling can be passed to this class even if the
+     * vertical scroll is less than the the nested list's touch slop.
      */
-    public interface PanelSlideListener {
+    private final int mReleaseScrollSlop;
+
+    /**
+     * Callbacks for interacting with sliding panes.
+     */
+    public interface PanelSlideCallbacks {
         /**
          * Called when a sliding pane's position changes.
          * @param panel The child view that was moved
@@ -176,6 +195,22 @@ public class OverlappingPaneLayout extends ViewGroup {
          * @param panel The child view that was slid to a closed position
          */
         public void onPanelClosed(View panel);
+
+        /**
+         * Called when a sliding pane is flung as far open/closed as it can be.
+         * @param velocityY Velocity of the panel once its fling goes as far as it can.
+         */
+        public void onPanelFlingReachesEdge(int velocityY);
+
+        /**
+         * Returns true if the second panel's contents haven't been scrolled at all. This value is
+         * used to determine whether or not we can fully expand the header on downwards scrolls.
+         *
+         * Instead of using this callback, it would be preferable to instead fully expand the header
+         * on a View#onNestedFlingOver() callback. The behavior would be nicer. Unfortunately,
+         * no such callback exists yet (b/17547693).
+         */
+        public boolean isScrollableChildUnscrolled();
     }
 
     public OverlappingPaneLayout(Context context) {
@@ -199,6 +234,8 @@ public class OverlappingPaneLayout extends ViewGroup {
 
         mDragHelper = ViewDragHelper.create(this, 0.5f, new DragHelperCallback());
         mDragHelper.setMinVelocity(MIN_FLING_VELOCITY * density);
+
+        mReleaseScrollSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
     }
 
     /**
@@ -218,27 +255,21 @@ public class OverlappingPaneLayout extends ViewGroup {
         mCapturableView = capturableView;
     }
 
-    public void setPanelSlideListener(PanelSlideListener listener) {
-        mPanelSlideListener = listener;
+    public void setPanelSlideCallbacks(PanelSlideCallbacks listener) {
+        mPanelSlideCallbacks = listener;
     }
 
     void dispatchOnPanelSlide(View panel) {
-        if (mPanelSlideListener != null) {
-            mPanelSlideListener.onPanelSlide(panel, mSlideOffset);
-        }
+        mPanelSlideCallbacks.onPanelSlide(panel, mSlideOffset);
     }
 
     void dispatchOnPanelOpened(View panel) {
-        if (mPanelSlideListener != null) {
-            mPanelSlideListener.onPanelOpened(panel);
-        }
+        mPanelSlideCallbacks.onPanelOpened(panel);
         sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
     }
 
     void dispatchOnPanelClosed(View panel) {
-        if (mPanelSlideListener != null) {
-            mPanelSlideListener.onPanelClosed(panel);
-        }
+        mPanelSlideCallbacks.onPanelClosed(panel);
         sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
     }
 
@@ -820,7 +851,7 @@ public class OverlappingPaneLayout extends ViewGroup {
 
     @Override
     public void computeScroll() {
-        if (mDragHelper.continueSettling(true)) {
+        if (mDragHelper.continueSettling(/* deferCallbacks = */ false)) {
             if (!mCanSlide) {
                 mDragHelper.abort();
                 return;
@@ -897,7 +928,6 @@ public class OverlappingPaneLayout extends ViewGroup {
         final boolean startNestedScroll = (nestedScrollAxes & SCROLL_AXIS_VERTICAL) != 0;
         if (startNestedScroll) {
             mIsInNestedScroll = true;
-            mChildCannotConsumeScroll = true;
             mDragHelper.startNestedScroll(mSlideableView);
         }
         if (DEBUG) {
@@ -915,9 +945,32 @@ public class OverlappingPaneLayout extends ViewGroup {
         if (DEBUG) {
             Log.d(TAG, "onNestedPreScroll: " + dy);
         }
-        mInNestedPreScrollDownwards =
-                mChildCannotConsumeScroll && dy < 0 && mSlideOffsetPx <= mIntermediateOffset;
+
+        mInNestedPreScrollDownwards = dy < 0;
+        mInNestedPreScrollUpwards = dy > 0;
+        mIsInNestedFling = false;
         mDragHelper.processNestedScroll(mSlideableView, 0, -dy, consumed);
+    }
+
+    @Override
+    public boolean onNestedPreFling(View target, float velocityX, float velocityY) {
+        if (!(velocityY > 0 && mSlideOffsetPx != 0
+                || velocityY < 0 && mSlideOffsetPx < mIntermediateOffset
+                || velocityY < 0 && mSlideOffsetPx < mSlideRange
+                && mPanelSlideCallbacks.isScrollableChildUnscrolled())) {
+            // No need to consume the fling if the fling won't collapse or expand the header.
+            // How far we are willing to expand the header depends on isScrollableChildUnscrolled().
+            return false;
+        }
+
+        if (DEBUG) {
+            Log.d(TAG, "onNestedPreFling: " + velocityY);
+        }
+        mInUpwardsPreFling = velocityY > 0;
+        mIsInNestedFling = true;
+        mIsInNestedScroll = false;
+        mDragHelper.processNestedFling(mSlideableView, (int) -velocityY);
+        return true;
     }
 
     @Override
@@ -926,8 +979,7 @@ public class OverlappingPaneLayout extends ViewGroup {
         if (DEBUG) {
             Log.d(TAG, "onNestedScroll: " + dyUnconsumed);
         }
-        mChildCannotConsumeScroll = false;
-        mInNestedPreScrollDownwards = false;
+        mIsInNestedFling = false;
         mDragHelper.processNestedScroll(mSlideableView, 0, -dyUnconsumed, null);
     }
 
@@ -938,8 +990,10 @@ public class OverlappingPaneLayout extends ViewGroup {
         }
         if (mIsInNestedScroll) {
             mDragHelper.stopNestedScroll(mSlideableView);
+            mInNestedPreScrollDownwards = false;
+            mInNestedPreScrollUpwards = false;
+            mIsInNestedScroll = false;
         }
-        mIsInNestedScroll = false;
     }
 
     private class DragHelperCallback extends ViewDragHelper.Callback {
@@ -955,6 +1009,10 @@ public class OverlappingPaneLayout extends ViewGroup {
 
         @Override
         public void onViewDragStateChanged(int state) {
+            if (DEBUG) {
+                Log.d(TAG, "onViewDragStateChanged: " + state);
+            }
+
             if (mDragHelper.getViewDragState() == ViewDragHelper.STATE_IDLE) {
                 if (mSlideOffset == 0) {
                     updateObscuredViewsVisibility(mSlideableView);
@@ -964,6 +1022,16 @@ public class OverlappingPaneLayout extends ViewGroup {
                     dispatchOnPanelOpened(mSlideableView);
                     mPreservedOpenState = true;
                 }
+            }
+
+            if (mDragHelper.getVelocityMagnitude() > 0
+                    && (mDragHelper.getCurrentScrollY() == 0
+                    || mDragHelper.getCurrentScrollY() == mIntermediateOffset)
+                    && mIsInNestedFling) {
+                mIsInNestedFling = false;
+                final int flingVelocity = !mInUpwardsPreFling ?
+                        -mDragHelper.getVelocityMagnitude() : mDragHelper.getVelocityMagnitude();
+                mPanelSlideCallbacks.onPanelFlingReachesEdge(flingVelocity);
             }
         }
 
@@ -980,20 +1048,96 @@ public class OverlappingPaneLayout extends ViewGroup {
         }
 
         @Override
-        public void onViewReleased(View releasedChild, float xvel, float yvel) {
+        public void onViewFling(View releasedChild, float xVelocity, float yVelocity) {
             if (releasedChild == null) {
                 return;
             }
-            final LayoutParams lp = (LayoutParams) releasedChild.getLayoutParams();
+            if (DEBUG) {
+                Log.d(TAG, "onViewFling: " + yVelocity);
+            }
 
+            // Flings won't always fully expand or collapse the header. Instead of performing the
+            // fling and then waiting for the fling to end before snapping into place, we
+            // immediately snap into place if we predict the fling won't fully expand or collapse
+            // the header.
+            int yOffsetPx = mDragHelper.predictFlingYOffset((int) yVelocity);
+            if (yVelocity < 0) {
+                // Only perform a fling if we know the fling will fully compress the header.
+                if (-yOffsetPx > mSlideOffsetPx) {
+                    mDragHelper.flingCapturedView(releasedChild.getLeft(), /* minTop = */ 0,
+                            mSlideRange, Integer.MAX_VALUE, (int) yVelocity);
+                } else {
+                    mIsInNestedFling = false;
+                    onViewReleased(releasedChild, xVelocity, yVelocity);
+                }
+            } else {
+                // Only perform a fling if we know the fling will expand the header as far
+                // as it can possible be expanded, given the isScrollableChildUnscrolled() value.
+                if (yOffsetPx + mSlideOffsetPx >= mSlideRange
+                        && mPanelSlideCallbacks.isScrollableChildUnscrolled()) {
+                    mDragHelper.flingCapturedView(releasedChild.getLeft(), /* minTop = */ 0,
+                            Integer.MAX_VALUE, mSlideRange, (int) yVelocity);
+                } else if (yOffsetPx + mSlideOffsetPx >= mIntermediateOffset
+                        && mSlideOffsetPx <= mIntermediateOffset
+                        && !mPanelSlideCallbacks.isScrollableChildUnscrolled()) {
+                    mDragHelper.flingCapturedView(releasedChild.getLeft(), /* minTop = */ 0,
+                            Integer.MAX_VALUE, mIntermediateOffset, (int) yVelocity);
+                } else {
+                    mIsInNestedFling = false;
+                    onViewReleased(releasedChild, xVelocity, yVelocity);
+                }
+            }
+
+            mInNestedPreScrollDownwards = false;
+            mInNestedPreScrollUpwards = false;
+
+            // Without this invalidate, some calls to flingCapturedView can have no affect.
+            invalidate();
+        }
+
+        @Override
+        public void onViewReleased(View releasedChild, float xvel, float yvel) {
+            if (DEBUG) {
+                Log.d(TAG, "onViewReleased: "
+                        + " unscrolled=" + mPanelSlideCallbacks.isScrollableChildUnscrolled()
+                        + ", mInNestedPreScrollDownwards = " + mInNestedPreScrollDownwards
+                        + ", mInNestedPreScrollUpwards = " + mInNestedPreScrollUpwards
+                        + ", yvel=" + yvel);
+            }
+            if (releasedChild == null) {
+                return;
+            }
+
+            final LayoutParams lp = (LayoutParams) releasedChild.getLayoutParams();
             int top = getPaddingTop() + lp.topMargin;
 
-            if (mInNestedPreScrollDownwards) {
-                // Snap to the closest pinnable position based on the current slide offset
-                // (in pixels)   [0  -  mIntermediateoffset  - mSlideRange]
-                if (yvel > 0) {
+            // Decide where to snap to according to the current direction of motion and the current
+            // position. The velocity's magnitude has no bearing on this.
+            if (mInNestedPreScrollDownwards || yvel > 0) {
+                // Scrolling downwards
+                if (mSlideOffsetPx > mIntermediateOffset + mReleaseScrollSlop) {
                     top += mSlideRange;
-                } else if (0 <= mSlideOffsetPx && mSlideOffsetPx <= mIntermediateOffset / 2) {
+                } else if (mSlideOffsetPx > mReleaseScrollSlop) {
+                    top += mIntermediateOffset;
+                } else {
+                    // Offset is very close to 0
+                }
+            } else if (mInNestedPreScrollUpwards || yvel < 0) {
+                // Scrolling upwards
+                if (mSlideOffsetPx > mSlideRange - mReleaseScrollSlop) {
+                    // Offset is very close to mSlideRange
+                    top += mSlideRange;
+                } else if (mSlideOffsetPx > mIntermediateOffset - mReleaseScrollSlop) {
+                    // Offset is between mIntermediateOffset and mSlideRange.
+                    top += mIntermediateOffset;
+                } else {
+                    // Offset is between 0 and mIntermediateOffset.
+                }
+            } else {
+                // Not moving upwards or downwards. This case can only be triggered when directly
+                // dragging the tabs. We don't bother to remember previous scroll direction
+                // when directly dragging the tabs.
+                if (0 <= mSlideOffsetPx && mSlideOffsetPx <= mIntermediateOffset / 2) {
                     // Offset is between 0 and mIntermediateOffset, but closer to 0
                     // Leave top unchanged
                 } else if (mIntermediateOffset / 2 <= mSlideOffsetPx
@@ -1005,8 +1149,6 @@ public class OverlappingPaneLayout extends ViewGroup {
                     // mSlideRange
                     top += mSlideRange;
                 }
-            } else if (yvel > 0 || (yvel == 0 && mSlideOffset > 0.5f)) {
-                top += mSlideRange;
             }
 
             mDragHelper.settleCapturedViewAt(releasedChild.getLeft(), top);
@@ -1029,9 +1171,15 @@ public class OverlappingPaneLayout extends ViewGroup {
             final LayoutParams lp = (LayoutParams) mSlideableView.getLayoutParams();
 
             final int newTop;
+            int previousTop = top - dy;
             int topBound = getPaddingTop() + lp.topMargin;
-            int bottomBound = topBound
-                    + (mInNestedPreScrollDownwards ? mIntermediateOffset : mSlideRange);
+            int bottomBound = topBound + (mPanelSlideCallbacks.isScrollableChildUnscrolled()
+                    || !mIsInNestedScroll ? mSlideRange : mIntermediateOffset);
+            if (previousTop > bottomBound) {
+                // We were previously below the bottomBound, so loosen the bottomBound so that this
+                // makes sense. This can occur after the view was directly dragged by the tabs.
+                bottomBound = Math.max(bottomBound, mSlideRange);
+            }
             newTop = Math.min(Math.max(top, topBound), bottomBound);
 
             return newTop;
