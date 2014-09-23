@@ -514,6 +514,9 @@
     <!-- A nicely formatted call duration displayed when viewing call details. For example "42 mins 28 secs" -->
     <string name="callDetailsDurationFormat"><xliff:g id="minutes" example="42">%s</xliff:g> mins <xliff:g id="seconds" example="28">%s</xliff:g> secs</string>
 
+    <string name="call_duration_active">Active duration:</string>
+    <string name="call_duration_call_out">Call duration:</string>
+
     <!-- Dialog message which is shown when the user tries to make a phone call
          to prohibited phone numbers [CHAR LIMIT=NONE] -->
     <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Call not sent</string>

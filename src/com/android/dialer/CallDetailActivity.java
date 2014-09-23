@@ -220,7 +220,8 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
         CallLog.Calls.PHONE_ACCOUNT_ID,
         CallLog.Calls.FEATURES,
         CallLog.Calls.DATA_USAGE,
-        CallLog.Calls.TRANSCRIPTION
+        CallLog.Calls.TRANSCRIPTION,
+        CallLog.Calls.DURATION_TYPE
     };
 
     static final int DATE_COLUMN_INDEX = 0;
@@ -235,6 +236,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     static final int FEATURES = 9;
     static final int DATA_USAGE = 10;
     static final int TRANSCRIPTION_COLUMN_INDEX = 11;
+    static final int DURATION_TYPE_COLUMN_INDEX = 12;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -553,6 +555,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
             String countryIso = callCursor.getString(COUNTRY_ISO_COLUMN_INDEX);
             final String geocode = callCursor.getString(GEOCODED_LOCATION_COLUMN_INDEX);
             final String transcription = callCursor.getString(TRANSCRIPTION_COLUMN_INDEX);
+            final int durationType = callCursor.getInt(DURATION_TYPE_COLUMN_INDEX);
 
             final String accountLabel = PhoneAccountUtils.getAccountLabel(this,
                     PhoneAccountUtils.getAccount(
@@ -605,7 +608,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                     formattedNumber, countryIso, geocode,
                     new int[]{ callType }, date, duration,
                     nameText, numberType, numberLabel, lookupUri, photoUri, sourceType,
-                    accountLabel, null, features, dataUsage, transcription);
+                    accountLabel, null, features, dataUsage, transcription, durationType);
         } finally {
             if (callCursor != null) {
                 callCursor.close();
