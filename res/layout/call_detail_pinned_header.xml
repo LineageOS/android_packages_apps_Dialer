@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@id/voicemail_status"
-        ex:ratio="0.5"
+        ex:ratio="@dimen/call_detail_header_photo_ratio"
         ex:direction="widthToHeight"
     >
         <ImageView

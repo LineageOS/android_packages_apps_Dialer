@@ -15,7 +15,5 @@
   -->
 
 <resources>
-    <style name="CallLogFragment">
-        <item name="android:paddingTop">0dp</item>
-    </style>
+    <item name="call_detail_header_photo_ratio" type="dimen" format="float">0.25</item>
 </resources>

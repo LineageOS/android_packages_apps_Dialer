@@ -135,4 +135,6 @@
     <dimen name="call_stats_details_chart_size">140dip</dimen>
 
     <dimen name="speed_dial_list_contact_photo_size">40dp</dimen>
+
+    <item name="call_detail_header_photo_ratio" type="dimen" format="float">0.5</item>
 </resources>
