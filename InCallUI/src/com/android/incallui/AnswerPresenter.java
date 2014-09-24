@@ -176,21 +176,18 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     private void configureAnswerTargetsForSms(Call call, List<String> textMsgs) {
         final Context context = getUi().getContext();
-        final KeyguardManager km =
-                (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-        final boolean isLockScreenShowing = km.inKeyguardRestrictedInputMode();
 
         mHasTextMessages = textMsgs != null;
         boolean withSms = call.can(PhoneCapabilities.RESPOND_VIA_TEXT) && mHasTextMessages;
         if (call.isVideoCall(context)) {
-            if (withSms && !isLockScreenShowing) {
+            if (withSms) {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS);
                 getUi().configureMessageDialog(textMsgs);
             } else {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITHOUT_SMS);
             }
         } else {
-            if (withSms && !isLockScreenShowing) {
+            if (withSms) {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITH_SMS);
                 getUi().configureMessageDialog(textMsgs);
             } else {
