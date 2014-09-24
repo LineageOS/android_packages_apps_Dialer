@@ -18,10 +18,6 @@
     <string name="call_log_stats_title">Statistics</string>
     <string name="callStatsDetailTitle">Call stat details</string>
 
-    <string name="call_stats">Call statistics</string>
-    <string name="call_stats_refresh">Refresh</string>
-    <string name="activity_title_call_stats">Call statistics</string>
-
     <string name="call_stats_nav_all">All</string>
     <string name="call_stats_nav_incoming">Incoming</string>
     <string name="call_stats_nav_outgoing">Outgoing</string>
