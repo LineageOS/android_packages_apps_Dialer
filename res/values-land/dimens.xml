@@ -15,8 +15,6 @@
   -->
 
 <resources>
-
-    <style name="FragmentActionBarPadding">
-        <item name="android:paddingBottom">0dp</item>
-    </style>
+    <dimen name="call_log_fragment_top_padding">0dp</dimen>
+    <item name="call_detail_header_photo_ratio" type="dimen" format="float">0.25</item>
 </resources>
