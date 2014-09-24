@@ -80,11 +80,8 @@ public class CallLogGroupBuilder {
     /** Day grouping for calls which occurred yesterday. */
     public static final int DAY_GROUP_YESTERDAY = 1;
 
-    /** Day grouping for calls which occurred last week. */
-    public static final int DAY_GROUP_LAST_WEEK = 2;
-
     /** Day grouping for calls which occurred before last week. */
-    public static final int DAY_GROUP_OTHER = 3;
+    public static final int DAY_GROUP_OTHER = 2;
 
     /** Instance of the time object used for time calculations. */
     private static final Time TIME = new Time();
@@ -264,8 +261,6 @@ public class CallLogGroupBuilder {
             return DAY_GROUP_TODAY;
         } else if (days == 1) {
             return DAY_GROUP_YESTERDAY;
-        } else if (days > 1 && days <=7) {
-            return DAY_GROUP_LAST_WEEK;
         } else {
             return DAY_GROUP_OTHER;
         }
