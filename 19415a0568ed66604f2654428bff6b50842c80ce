@@ -34,6 +34,24 @@
       "revId": "19415a0568ed66604f2654428bff6b50842c80ce",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1b2928_72d95883",
+        "filename": "res/values/dimens.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 10293
+      },
+      "writtenOn": "2014-09-25T05:20:38Z",
+      "side": 1,
+      "message": "I see.  Yeah using a style seems better imho",
+      "parentUuid": "7a1b2928_b28c9080",
+      "revId": "19415a0568ed66604f2654428bff6b50842c80ce",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
