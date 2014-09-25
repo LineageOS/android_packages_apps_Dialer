@@ -60,6 +60,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.interactions.TouchPointManager;
@@ -93,6 +94,7 @@ import com.android.internal.telephony.TelephonyProperties;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -638,8 +640,54 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             } else {
                 Log.e(TAG, "Voice search failed");
             }
+        } else if (requestCode == ImportExportDialogFragment.SUBACTIVITY_SHARE_VISILBLE_CONTACTS) {
+            if (resultCode == RESULT_OK) {
+                Bundle result = data.getExtras().getBundle(
+                        SimContactsConstants.RESULT_KEY);
+                StringBuilder uriList = buildUriList(result);
+                if (uriList == null) {
+                    return;
+                }
+                Uri uri = Uri.withAppendedPath(
+                        Contacts.CONTENT_MULTI_VCARD_URI,
+                        Uri.encode(uriList.toString()));
+                final Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType(Contacts.CONTENT_VCARD_TYPE);
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                startActivity(intent);
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private StringBuilder buildUriList(Bundle result) {
+        if (result == null) {
+            return null;
+        }
+        int size = result.keySet().size();
+        // The premise of allowing to share contacts is that the
+        // amount of those contacts which have been selected to
+        // append and will be put into intent as extra data to
+        // deliver is not more that 2000, because too long arguments
+        // will cause TransactionTooLargeException in binder.
+        if (size > ImportExportDialogFragment.MAX_COUNT_ALLOW_SHARE_CONTACT) {
+            Toast.makeText(this, R.string.share_failed,
+                    Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        StringBuilder uriListBuilder = new StringBuilder();
+        int index = 0;
+        Iterator<String> it = result.keySet().iterator();
+        String[] values = null;
+        while (it.hasNext()) {
+            if (index != 0) {
+                uriListBuilder.append(':');
+            }
+            values = result.getStringArray(it.next());
+            uriListBuilder.append(values[0]);
+            index++;
+        }
+        return uriListBuilder;
     }
 
     /**
