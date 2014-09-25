@@ -137,9 +137,8 @@
     <dimen name="empty_list_message_text_size">16sp</dimen>
 
     <!-- Dimensions for individual preference cards -->
-    <dimen name="preference_padding_top">18dp</dimen>
+    <dimen name="preference_padding_top">16dp</dimen>
     <dimen name="preference_padding_bottom">16dp</dimen>
     <dimen name="preference_side_margin">16dp</dimen>
-    <dimen name="preference_list_top_padding">4dp</dimen>
     <dimen name="preference_summary_line_spacing_extra">4dp</dimen>
 </resources>

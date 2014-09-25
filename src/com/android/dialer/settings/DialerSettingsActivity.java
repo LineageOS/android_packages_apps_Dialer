@@ -36,9 +36,6 @@ public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        final int topPadding = getResources().getDimensionPixelSize(
-                R.dimen.preference_list_top_padding);
-        getListView().setPadding(0, topPadding, 0, 0);
     }
 
     @Override
@@ -113,7 +110,6 @@ public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
      */
     private static class HeaderAdapter extends ArrayAdapter<Header> {
         static class HeaderViewHolder {
-            ImageView icon;
             TextView title;
             TextView summary;
         }
@@ -133,7 +129,6 @@ public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
             if (convertView == null) {
                 view = mInflater.inflate(R.layout.dialer_preferences, parent, false);
                 holder = new HeaderViewHolder();
-                holder.icon = (ImageView) view.findViewById(R.id.icon);
                 holder.title = (TextView) view.findViewById(R.id.title);
                 holder.summary = (TextView) view.findViewById(R.id.summary);
                 view.setTag(holder);
@@ -144,7 +139,6 @@ public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
 
             // All view fields must be updated every time, because the view may be recycled
             Header header = getItem(position);
-            holder.icon.setImageResource(header.iconRes);
             holder.title.setText(header.getTitle(getContext().getResources()));
             CharSequence summary = header.getSummary(getContext().getResources());
             if (!TextUtils.isEmpty(summary)) {
