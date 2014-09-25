@@ -16,6 +16,24 @@
       "revId": "19415a0568ed66604f2654428bff6b50842c80ce",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1b2928_b28c9080",
+        "filename": "res/values/dimens.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-09-25T05:06:28Z",
+      "side": 1,
+      "message": "Resolving attributes doesn\u0027t work for dimension values, the app will simply crash at runtime complaining about a wrong resource type (I tried). The only other option I see is using a custom style for the fragment layouts. I can probably do that as well.",
+      "parentUuid": "7a1b2928_32808046",
+      "revId": "19415a0568ed66604f2654428bff6b50842c80ce",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
