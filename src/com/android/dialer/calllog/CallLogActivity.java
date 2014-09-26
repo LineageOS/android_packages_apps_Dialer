@@ -42,6 +42,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -82,6 +83,9 @@ public class CallLogActivity extends Activity implements
 
     private static final int TAB_INDEX_COUNT = 3;
 
+    private static final String STATE_KEY_SEARCH = "calllog:search";
+    private static final String STATE_KEY_QUERY = "calllog:query";
+
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -91,16 +95,30 @@ public class CallLogActivity extends Activity implements
         public Fragment getItem(int position) {
             switch (position) {
                 case TAB_INDEX_ALL:
-                    mAllCallsFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
-                    return mAllCallsFragment;
+                    return CallLogFragment.newInstance(CallLogQueryHandler.CALL_TYPE_ALL);
                 case TAB_INDEX_MISSED:
-                    mMissedCallsFragment = new CallLogFragment(Calls.MISSED_TYPE);
-                    return mMissedCallsFragment;
+                    return CallLogFragment.newInstance(Calls.MISSED_TYPE);
                 case TAB_INDEX_STATS:
                     mStatsFragment = new CallStatsFragment();
                     return mStatsFragment;
             }
             throw new IllegalStateException("No fragment at position " + position);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            // We can't distinguish the two fragments in onAttach, which is
+            // why we differentiate between them here
+            Object result = super.instantiateItem(container, position);
+            switch (position) {
+                case TAB_INDEX_ALL:
+                    mAllCallsFragment = (CallLogFragment) result;
+                    break;
+                case TAB_INDEX_MISSED:
+                    mMissedCallsFragment = (CallLogFragment) result;
+                    break;
+            }
+            return result;
         }
 
         @Override
@@ -169,7 +187,7 @@ public class CallLogActivity extends Activity implements
         super.onCreate(savedInstanceState);
         if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
             initMSimCallLog();
-            addSearchFragment();
+            initSearchFragment();
             return;
         }
 
@@ -208,7 +226,20 @@ public class CallLogActivity extends Activity implements
         mViewPager.setOnPageChangeListener(mOnPageChangeListener);
         mViewPager.setOffscreenPageLimit(2);
 
-        addSearchFragment();
+        initSearchFragment();
+        if (savedInstanceState != null && savedInstanceState.getBoolean(STATE_KEY_SEARCH, false)) {
+            enterSearchUi();
+            mSearchView.setQuery(savedInstanceState.getString(STATE_KEY_QUERY), false);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        state.putBoolean(STATE_KEY_SEARCH, mInSearchUi);
+        if (mInSearchUi) {
+            state.putString(STATE_KEY_QUERY, mSearchFragment.getQueryString());
+        }
     }
 
     @Override
@@ -217,6 +248,8 @@ public class CallLogActivity extends Activity implements
             mSearchFragment = (CallLogSearchFragment) fragment;
         } else if (fragment instanceof MSimCallLogFragment) {
             mMSimCallsFragment = (MSimCallLogFragment) fragment;
+        } else if (fragment instanceof CallStatsFragment) {
+            mStatsFragment = (CallStatsFragment) fragment;
         }
     }
 
@@ -366,14 +399,19 @@ public class CallLogActivity extends Activity implements
         }
     }
 
-    private void addSearchFragment() {
+    private void initSearchFragment() {
+        final FragmentManager fm = getFragmentManager();
+        if (mSearchFragment == null) {
+            mSearchFragment = (CallLogSearchFragment) fm.findFragmentByTag("search");
+        }
         if (mSearchFragment != null) {
+            fm.beginTransaction().hide(mSearchFragment).commit();
             return;
         }
-        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        final FragmentTransaction ft = fm.beginTransaction();
         final Fragment searchFragment = new CallLogSearchFragment();
         searchFragment.setUserVisibleHint(false);
-        ft.add(R.id.calllog_frame, searchFragment);
+        ft.add(R.id.calllog_frame, searchFragment, "search");
         ft.hide(searchFragment);
         ft.commitAllowingStateLoss();
     }

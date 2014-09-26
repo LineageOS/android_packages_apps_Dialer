@@ -62,6 +62,11 @@ public class CallStatsFragment extends ListFragment implements
         AdapterView.OnItemSelectedListener, DoubleDatePickerDialog.OnDateSetListener {
     private static final String TAG = "CallStatsFragment";
 
+    private static final String STATE_KEY_FILTER = "callstats:filter";
+    private static final String STATE_KEY_FROM = "callstats:from";
+    private static final String STATE_KEY_TO = "callstats:to";
+    private static final String STATE_KEY_SORT_DURATION = "callstats:sort_by_duration";
+
     private static final int[] CALL_DIRECTION_RESOURCES = new int[] {
         R.drawable.ic_call_inout_holo_dark,
         R.drawable.ic_call_incoming_holo_dark,
@@ -157,6 +162,17 @@ public class CallStatsFragment extends ListFragment implements
     }
 
     @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null) {
+            mCallTypeFilter = savedInstanceState.getInt(STATE_KEY_FILTER);
+            mFilterFrom = savedInstanceState.getLong(STATE_KEY_FROM);
+            mFilterTo = savedInstanceState.getLong(STATE_KEY_TO);
+            mSortByDuration = savedInstanceState.getBoolean(STATE_KEY_SORT_DURATION);
+        }
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.call_stats_options, menu);
 
@@ -174,9 +190,19 @@ public class CallStatsFragment extends ListFragment implements
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.call_stats_nav_items));
         mFilterSpinner.setAdapter(filterAdapter);
+        mFilterSpinner.setSelection(mCallTypeFilter);
         mFilterSpinner.setOnItemSelectedListener(this);
 
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        state.putInt(STATE_KEY_FILTER, mCallTypeFilter);
+        state.putLong(STATE_KEY_FROM, mFilterFrom);
+        state.putLong(STATE_KEY_TO, mFilterTo);
+        state.putBoolean(STATE_KEY_SORT_DURATION, mSortByDuration);
     }
 
     @Override

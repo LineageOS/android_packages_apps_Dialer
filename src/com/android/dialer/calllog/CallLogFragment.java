@@ -140,23 +140,24 @@ public class CallLogFragment extends ListFragment
     // will be used.
     private int mLogLimit = -1;
 
+    public static CallLogFragment newInstance(int filterType) {
+        CallLogFragment f = new CallLogFragment();
+        Bundle args = new Bundle();
+        args.putInt("filter", filterType);
+        f.setArguments(args);
+        return f;
+    }
+
     public CallLogFragment() {
-        this(CallLogQueryHandler.CALL_TYPE_ALL, -1);
-    }
-
-    public CallLogFragment(int filterType) {
-        this(filterType, -1);
-    }
-
-    public CallLogFragment(int filterType, int logLimit) {
-        super();
-        mCallTypeFilter = filterType;
-        mLogLimit = logLimit;
     }
 
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
+
+        Bundle args = getArguments();
+        mCallTypeFilter = args != null ? args.getInt("filter", -1) : -1;
+        mLogLimit = args != null ? args.getInt("limit", -1) : -1;
 
         mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
                 this, mLogLimit);
