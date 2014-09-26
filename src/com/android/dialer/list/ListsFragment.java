@@ -205,19 +205,16 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
             // On rotation the FragmentManager handles rotation. Therefore getItem() isn't called.
             // Copy the fragments that the FragmentManager finds so that we can store them in
             // instance variables for later.
-            final Fragment fragment = (Fragment) super.instantiateItem(container, position);
-            switch (getRtlPosition(position)) {
-                case TAB_INDEX_SPEED_DIAL:
-                    mSpeedDialFragment = (SpeedDialFragment) fragment;
-                    return mSpeedDialFragment;
-                case TAB_INDEX_RECENTS:
-                    mRecentsFragment = (CallLogFragment) fragment;
-                    return mRecentsFragment;
-                case TAB_INDEX_ALL_CONTACTS:
-                    mAllContactsFragment = (AllContactsFragment) fragment;
-                    return mAllContactsFragment;
+            final Fragment fragment =
+                    (Fragment) super.instantiateItem(container, getRtlPosition(position));
+            if (fragment instanceof SpeedDialFragment) {
+                mSpeedDialFragment = (SpeedDialFragment) fragment;
+            } else if (fragment instanceof CallLogFragment) {
+                mRecentsFragment = (CallLogFragment) fragment;
+            } else if (fragment instanceof AllContactsFragment) {
+                mAllContactsFragment = (AllContactsFragment) fragment;
             }
-            return super.instantiateItem(container, position);
+            return fragment;
         }
 
         @Override
