@@ -629,11 +629,13 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      */
     public void bringToForeground(boolean showDialpad) {
         // Before we bring the incall UI to the foreground, we check to see if:
-        // 1. We've already started the activity once for this session
-        // 2. If it exists, the activity is not already in the foreground
-        // 3. We are in a state where we want to show the incall ui
-        if (mIsActivityPreviouslyStarted && !isShowingInCallUi() &&
-                mInCallState != InCallState.NO_CALLS) {
+        // 1. It is not currently in the foreground
+        // 2. We are in a state where we want to show the incall ui (i.e. there are calls to
+        // be displayed)
+        // If the activity hadn't actually been started previously, yet there are still calls
+        // present (e.g. a call was accepted by a bluetooth or wired headset), we want to
+        // bring it up the UI regardless.
+        if (!isShowingInCallUi() && mInCallState != InCallState.NO_CALLS) {
             showInCall(showDialpad, false /* newOutgoingCall */);
         }
     }
