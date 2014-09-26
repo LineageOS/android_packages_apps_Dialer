@@ -636,6 +636,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         Log.i(this, "Disconnecting call: " + mPrimary);
+        mPrimary.setState(Call.State.DISCONNECTING);
+        CallList.getInstance().onUpdate(mPrimary);
         TelecomAdapter.getInstance().disconnectCall(mPrimary.getId());
     }
 
