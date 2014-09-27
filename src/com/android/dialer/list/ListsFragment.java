@@ -183,6 +183,11 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
         }
 
         @Override
+        public long getItemId(int position) {
+            return getRtlPosition(position);
+        }
+
+        @Override
         public Fragment getItem(int position) {
             switch (getRtlPosition(position)) {
                 case TAB_INDEX_SPEED_DIAL:
@@ -206,7 +211,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
             // Copy the fragments that the FragmentManager finds so that we can store them in
             // instance variables for later.
             final Fragment fragment =
-                    (Fragment) super.instantiateItem(container, getRtlPosition(position));
+                    (Fragment) super.instantiateItem(container, position);
             if (fragment instanceof SpeedDialFragment) {
                 mSpeedDialFragment = (SpeedDialFragment) fragment;
             } else if (fragment instanceof CallLogFragment) {
