@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Statistiken</string>
   <string name="callStatsDetailTitle">Anrufstatistikdetails</string>
-  <string name="call_stats">Anrufstatistik</string>
-  <string name="call_stats_refresh">Aktualisieren</string>
-  <string name="activity_title_call_stats">Anrufstatistik</string>
   <string name="call_stats_nav_all">Alle</string>
   <string name="call_stats_nav_incoming">Eingehend</string>
   <string name="call_stats_nav_outgoing">Ausgehend</string>
@@ -53,4 +50,14 @@
   <string name="start_call_playback">Aufzeichnung abspielen</string>
   <string name="stop_call_playback">Stopp</string>
   <string name="call_playback_error_message">Wiedergabe der Aufzeichnung fehlgeschlagen</string>
+  <string name="calllog_search_hint">Anrufprotokoll durchsuchen</string>
+  <string name="speed_dial_settings">Kurzwahl-Einstellungen</string>
+  <string name="speed_dial_replace">Ersetzen</string>
+  <string name="speed_dial_delete">Löschen</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Alle SIM-Karten</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nein</string>
+  <string name="call_duration_call_out">Gesprächsdauer:</string>
+  <string name="call_log_all_calls_header">Alle Anrufe</string>
 </resources>

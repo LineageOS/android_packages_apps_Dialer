@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Statistieken</string>
   <string name="callStatsDetailTitle">Gespreksstatistiekdetails</string>
-  <string name="call_stats">Gespreksstatistieken</string>
-  <string name="call_stats_refresh">Vernieuwen</string>
-  <string name="activity_title_call_stats">Gespreksstatistieken</string>
   <string name="call_stats_nav_all">Alles</string>
   <string name="call_stats_nav_incoming">Inkomend</string>
   <string name="call_stats_nav_outgoing">Uitgaand</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Opname afspelen</string>
   <string name="stop_call_playback">Stoppen</string>
   <string name="call_playback_error_message">Opname afspelen mislukt</string>
+  <string name="calllog_search_hint">Gespreksstatistieken doorzoeken</string>
+  <string name="video_call">Videogesprek</string>
+  <string name="video_call_settings">Instellingen videogesprek</string>
+  <string name="description_videocall">Videogesprek <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Instellingen snelkiesnummers</string>
+  <string name="speed_dial_not_set">(niet ingesteld)</string>
+  <string name="speed_dial_replace">Vervangen</string>
+  <string name="speed_dial_delete">Verwijderen</string>
+  <string name="speed_dial_unassigned_dialog_title">Toets niet toegewezen</string>
+  <string name="speed_dial_unassigned_dialog_message">Er is geen contact toegewezen aan snelkiesnummer \'<xliff:g id="number">%s</xliff:g>\'. Wilt u nu een contact toewijzen?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Om snelkiesnummers te gebruiken dient u eerst Vliegmodus uit te schakelen."</string>
+  <string name="msim_ime_dialog_title">Apparaat-ID</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Alle simkaarten</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nee</string>
+  <string name="call_duration_active">Actieve duur:</string>
+  <string name="call_duration_call_out">Gespreksduur:</string>
+  <string name="call_log_all_calls_header">Alle gesprekken</string>
 </resources>

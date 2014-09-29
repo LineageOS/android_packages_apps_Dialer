@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Statistieke</string>
   <string name="callStatsDetailTitle">Oproep stat besonderhede</string>
-  <string name="call_stats">Oproep statistieke</string>
-  <string name="call_stats_refresh">Herlaai</string>
-  <string name="activity_title_call_stats">Oproep statistieke</string>
   <string name="call_stats_nav_all">Alles</string>
   <string name="call_stats_nav_incoming">Inkomende</string>
   <string name="call_stats_nav_outgoing">Uitgaande</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Speel opname</string>
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Kon nie opname speel nie</string>
+  <string name="calllog_search_hint">Soek deur geskakelde lys</string>
+  <string name="video_call">Video oproep</string>
+  <string name="video_call_settings">Video oproep instellings</string>
+  <string name="description_videocall">Video oproep <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Snel keuse instellings</string>
+  <string name="speed_dial_not_set">(nie gestel)</string>
+  <string name="speed_dial_replace">Vervang</string>
+  <string name="speed_dial_delete">Verwyder</string>
+  <string name="speed_dial_unassigned_dialog_title">Sleutel nie toegeken</string>
+  <string name="speed_dial_unassigned_dialog_message">Geen vinnige skakel aksie toegeken aan nommer sleutel \'<xliff:g id="number">%s</xliff:g>\'. Wil jy \'n aksie toe ken?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Om vinnige skakel aksie te gebruik skakel vliegtuigmodus eers af."</string>
+  <string name="msim_ime_dialog_title">Toestel identifiseerder</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Alle SIMs</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nee</string>
+  <string name="call_duration_active">Aktiewe tydsduur:</string>
+  <string name="call_duration_call_out">Oproep tydsduur:</string>
+  <string name="call_log_all_calls_header">Alle oproepe</string>
 </resources>

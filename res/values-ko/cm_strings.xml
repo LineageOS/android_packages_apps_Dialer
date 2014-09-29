@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">통계</string>
   <string name="callStatsDetailTitle">전화 통계 정보</string>
-  <string name="call_stats">전화 통계</string>
-  <string name="call_stats_refresh">새로 고침</string>
-  <string name="activity_title_call_stats">전화 통계</string>
   <string name="call_stats_nav_all">전부</string>
   <string name="call_stats_nav_incoming">수신</string>
   <string name="call_stats_nav_outgoing">발신</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">녹음 재생</string>
   <string name="stop_call_playback">정지</string>
   <string name="call_playback_error_message">녹음을 재생할 수 없습니다</string>
+  <string name="calllog_search_hint">통화 기록 검색</string>
+  <string name="video_call">영상통화</string>
+  <string name="video_call_settings">영상통화 설정</string>
+  <string name="description_videocall">영상 통화 <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">스피드 다이얼 설정</string>
+  <string name="speed_dial_not_set">(설정되지 않음)</string>
+  <string name="speed_dial_replace">바꾸기</string>
+  <string name="speed_dial_delete">삭제</string>
+  <string name="speed_dial_unassigned_dialog_title">할당되지 않은 키</string>
+  <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' 키에 스피드 다이얼 동작이 할당되어 있지 않습니다. 지금 동작을 할당할까요?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"스피드 다이얼을 사용하려면 비행기 모드를 해제하십시오."</string>
+  <string name="msim_ime_dialog_title">장치 식별자</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">모든 SIM</string>
+  <string name="yes">예</string>
+  <string name="no">아니오</string>
+  <string name="call_duration_active">활성 통화 시간:</string>
+  <string name="call_duration_call_out">통화 시간:</string>
+  <string name="call_log_all_calls_header">모든 통화</string>
 </resources>

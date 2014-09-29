@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Estatistikak</string>
   <string name="callStatsDetailTitle">Deiaren xehetasunak</string>
-  <string name="call_stats">Deien estatistikak</string>
-  <string name="call_stats_refresh">Eguneratu</string>
-  <string name="activity_title_call_stats">Deien estatistikak</string>
   <string name="call_stats_nav_all">Denak</string>
   <string name="call_stats_nav_incoming">Sartzen diren deiak</string>
   <string name="call_stats_nav_outgoing">Irtetzen diren deiak</string>

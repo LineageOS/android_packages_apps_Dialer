@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Statystyki</string>
   <string name="callStatsDetailTitle">Szczegółowe statystyki połączeń</string>
-  <string name="call_stats">Statystyki połączeń</string>
-  <string name="call_stats_refresh">Odśwież</string>
-  <string name="activity_title_call_stats">Statystyki połączeń</string>
   <string name="call_stats_nav_all">Wszystkie</string>
   <string name="call_stats_nav_incoming">Przychodzące</string>
   <string name="call_stats_nav_outgoing">Wychodzące</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Rozpocznij nagrywanie</string>
   <string name="stop_call_playback">Zatrzymaj</string>
   <string name="call_playback_error_message">Nie udało się zarejestrować nagrania</string>
+  <string name="calllog_search_hint">Szukaj w historii połączeń</string>
+  <string name="video_call">Połączenie wideo</string>
+  <string name="video_call_settings">Ustawienia połączeń wideo</string>
+  <string name="description_videocall">Połączenie wideo <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Ustawienia szybkiego wybierania</string>
+  <string name="speed_dial_not_set">(nieustawione)</string>
+  <string name="speed_dial_replace">Zastąp</string>
+  <string name="speed_dial_delete">Usuń</string>
+  <string name="speed_dial_unassigned_dialog_title">Klawisz nieprzypisany</string>
+  <string name="speed_dial_unassigned_dialog_message">Brak akcji szybkiego wybierania dla przycisku numer \'<xliff:g id="number">%s</xliff:g>\'. Chcesz przypisać akcję teraz?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Aby korzystać z szybkiego wybierania, najpierw należy wyłączyć tryb samolotowy."</string>
+  <string name="msim_ime_dialog_title">Identyfikator urządzenia</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Wszystkie karty SIM</string>
+  <string name="yes">Tak</string>
+  <string name="no">Nie</string>
+  <string name="call_duration_active">Aktywny czas trwania:</string>
+  <string name="call_duration_call_out">Czas trwania połączenia:</string>
+  <string name="call_log_all_calls_header">Wszystkie połączenia</string>
 </resources>

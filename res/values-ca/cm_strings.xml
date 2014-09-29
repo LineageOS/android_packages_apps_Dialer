@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Estadístiques</string>
   <string name="callStatsDetailTitle">Detalls de les trucades</string>
-  <string name="call_stats">Estadístiques de les trucades</string>
-  <string name="call_stats_refresh">Refresca</string>
-  <string name="activity_title_call_stats">Estadístiques de les trucades</string>
   <string name="call_stats_nav_all">Totes</string>
   <string name="call_stats_nav_incoming">Entrants</string>
   <string name="call_stats_nav_outgoing">Sortints</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Reprodueix gravació</string>
   <string name="stop_call_playback">Para</string>
   <string name="call_playback_error_message">No s\'ha pogut reproduir la gravació</string>
+  <string name="calllog_search_hint">Cerca el registre de trucades</string>
+  <string name="video_call">Videotrucada</string>
+  <string name="video_call_settings">Ajustaments de videotrucada</string>
+  <string name="description_videocall">Videotrucada <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Ajustaments de trucada ràpida</string>
+  <string name="speed_dial_not_set">(no configurat)</string>
+  <string name="speed_dial_replace">Substitueix</string>
+  <string name="speed_dial_delete">Esborra</string>
+  <string name="speed_dial_unassigned_dialog_title">Tecla no assignada</string>
+  <string name="speed_dial_unassigned_dialog_message">No hi ha una acció de trucada ràpida assignada a la tecla número \'<xliff:g id="number">%s</xliff:g>\'. Vols assignar una acció ara?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Per utilitzar la trucada ràpida, primer has d'apagar el mode avió."</string>
+  <string name="msim_ime_dialog_title">Identificador del dispositiu</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Totes les SIMs</string>
+  <string name="yes">Sí</string>
+  <string name="no">No</string>
+  <string name="call_duration_active">Durada actiu:</string>
+  <string name="call_duration_call_out">Durada de la trucada:</string>
+  <string name="call_log_all_calls_header">Totes les trucades</string>
 </resources>

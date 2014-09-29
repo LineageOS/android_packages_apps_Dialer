@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Tilastot</string>
   <string name="callStatsDetailTitle">Puheluiden lisätiedot</string>
-  <string name="call_stats">Puhelutiedot</string>
-  <string name="call_stats_refresh">Päivitä</string>
-  <string name="activity_title_call_stats">Puhelutiedot</string>
   <string name="call_stats_nav_all">Kaikki</string>
   <string name="call_stats_nav_incoming">Vastatut</string>
   <string name="call_stats_nav_outgoing">Soitetut</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Toista nauhoitus</string>
   <string name="stop_call_playback">Lopeta</string>
   <string name="call_playback_error_message">Nauhoituksen toisto epäonnistui</string>
+  <string name="calllog_search_hint">Etsi puhelulokista</string>
+  <string name="video_call">Videopuhelu</string>
+  <string name="video_call_settings">Videopuhelun asetukset</string>
+  <string name="description_videocall">Videopuhelu <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Pikavalinta-asetukset</string>
+  <string name="speed_dial_not_set">(ei määritetty)</string>
+  <string name="speed_dial_replace">Korvaa</string>
+  <string name="speed_dial_delete">Poista</string>
+  <string name="speed_dial_unassigned_dialog_title">Näppäinta ei määritetty</string>
+  <string name="speed_dial_unassigned_dialog_message">Mitään pikavalintaa ei ole määritetty numerolle \'<xliff:g id="number">%s</xliff:g>\'. Haluatko määrittää tehtävän nyt?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Käyttääksesi pikavalintaa, ota lentokonetila pois käytöstä."</string>
+  <string name="msim_ime_dialog_title">Laitteen tunnus</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Kaikki SIMit</string>
+  <string name="yes">Kyllä</string>
+  <string name="no">Ei</string>
+  <string name="call_duration_active">Aktiivisena:</string>
+  <string name="call_duration_call_out">Puhelun kesto:</string>
+  <string name="call_log_all_calls_header">Kaikki puhelut</string>
 </resources>

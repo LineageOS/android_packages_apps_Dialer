@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Statistikk</string>
   <string name="callStatsDetailTitle">Detaljer for samtalestatus</string>
-  <string name="call_stats">Samtalestatistikk</string>
-  <string name="call_stats_refresh">Oppdater</string>
-  <string name="activity_title_call_stats">Samtalestatistikk</string>
   <string name="call_stats_nav_all">Alle</string>
   <string name="call_stats_nav_incoming">Innkommende</string>
   <string name="call_stats_nav_outgoing">Utgående</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Spill av opptak</string>
   <string name="stop_call_playback">Stopp</string>
   <string name="call_playback_error_message">Kunne ikke spille av opptak</string>
+  <string name="calllog_search_hint">Søk i samtaleloggen</string>
+  <string name="video_call">Videoanrop</string>
+  <string name="video_call_settings">Innstillinger for videoanrop</string>
+  <string name="description_videocall">Videoanrop <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Innstillinger for hurtigringing</string>
+  <string name="speed_dial_not_set">(ikke angitt)</string>
+  <string name="speed_dial_replace">Erstatt</string>
+  <string name="speed_dial_delete">Slett</string>
+  <string name="speed_dial_unassigned_dialog_title">Nøkkel utilordnet</string>
+  <string name="speed_dial_unassigned_dialog_message">Ingen hurtigringing er angitt til denne nummertasten \'<xliff:g id="number">%s</xliff:g>\'. Vil du angi ett nå?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"For å bruke hurtigoppringing må du skru av flymodus."</string>
+  <string name="msim_ime_dialog_title">Enhetsidentifikator</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index"> %d </xliff:g></string>
+  <string name="call_log_show_all_slots">Alle SIM-kort</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nei</string>
+  <string name="call_duration_active">Aktiv varighet:</string>
+  <string name="call_duration_call_out">Samtalevarighet:</string>
+  <string name="call_log_all_calls_header">Alle samtaler</string>
 </resources>

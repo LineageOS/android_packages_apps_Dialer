@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">สถิติ</string>
   <string name="callStatsDetailTitle">รายละเอียดสถิติการโทร</string>
-  <string name="call_stats">สถิติการโทร</string>
-  <string name="call_stats_refresh">โหลดใหม่</string>
-  <string name="activity_title_call_stats">สถิติการโทร</string>
   <string name="call_stats_nav_all">ทั้งหมด</string>
   <string name="call_stats_nav_incoming">สายเรียกเข้า</string>
   <string name="call_stats_nav_outgoing">สายโทรออก</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">เล่นบันทึก</string>
   <string name="stop_call_playback">หยุด</string>
   <string name="call_playback_error_message">ไม่สามารถเล่นบันทึกได้</string>
+  <string name="calllog_search_hint">ค้นหาประวัติการโทร</string>
+  <string name="video_call">สนทนาวิดีโอ</string>
+  <string name="video_call_settings">ตั้งค่าการสนทนาวีดีโอ</string>
+  <string name="description_videocall">สนทนาวิดีโอ <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">ตั้งค่าการโทรอย่างรวดเร็ว</string>
+  <string name="speed_dial_not_set">(ไม่ได้กำหนด)</string>
+  <string name="speed_dial_replace">แทน​ที่</string>
+  <string name="speed_dial_delete">ลบ</string>
+  <string name="speed_dial_unassigned_dialog_title">ไม่ได้ระบุปุ่ม</string>
+  <string name="speed_dial_unassigned_dialog_message">ไม่ได้ตั้งการโทรอย่างรวดเร็วไว้บนปุ่ม \'<xliff:g id="number">%s</xliff:g>\' คุณต้องการตั้งเดี๋ยวนี้?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"เพื่อใช้การโทรอย่างรวดเร็ว, ต้องปิดโหมดเครื่องบินก่อน"</string>
+  <string name="msim_ime_dialog_title">รหัสอุปกรณ์</string>
+  <string name="multi_sim_slot_name">ซิม<xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">ทุกซิม</string>
+  <string name="yes">ใช่</string>
+  <string name="no">ไม่</string>
+  <string name="call_duration_active">ระยะเวลาใช้งาน:</string>
+  <string name="call_duration_call_out">ระยะเวลาการโทร:</string>
+  <string name="call_log_all_calls_header">การใช้สายทั้งหมด</string>
 </resources>

@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">İstatistikler</string>
   <string name="callStatsDetailTitle">Arama istatistik detayları</string>
-  <string name="call_stats">Arama istatistikleri</string>
-  <string name="call_stats_refresh">Yenile</string>
-  <string name="activity_title_call_stats">Arama istatistikleri</string>
   <string name="call_stats_nav_all">Tümü</string>
   <string name="call_stats_nav_incoming">Gelen</string>
   <string name="call_stats_nav_outgoing">Giden</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Kaydı oynat</string>
   <string name="stop_call_playback">Durdur</string>
   <string name="call_playback_error_message">Kayıt oynatılamadı</string>
+  <string name="calllog_search_hint">Arama kaydını araştır</string>
+  <string name="video_call">Görüntülü arama</string>
+  <string name="video_call_settings">Görüntülü arama ayarları</string>
+  <string name="description_videocall">Görüntülü ara : <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Hızlı arama ayarları</string>
+  <string name="speed_dial_not_set">(ayarlanmadı)</string>
+  <string name="speed_dial_replace">Değiştir</string>
+  <string name="speed_dial_delete">Sil</string>
+  <string name="speed_dial_unassigned_dialog_title">Numara atanmadı</string>
+  <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' numarasına hızlı arama işlevi atanmadı. Şimdi atamak ister misiniz?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Hızlı aramayı kullanmak için, önce uçak modunu kapatın."</string>
+  <string name="msim_ime_dialog_title">Cihaz tanımlayıcısı</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Tüm SIMler</string>
+  <string name="yes">Evet</string>
+  <string name="no">Hayır</string>
+  <string name="call_duration_active">Etkin süre:</string>
+  <string name="call_duration_call_out">Arama süresi:</string>
+  <string name="call_log_all_calls_header">Tüm aramalar</string>
 </resources>

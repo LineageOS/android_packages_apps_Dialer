@@ -17,10 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Статистика</string>
-  <string name="callStatsDetailTitle">Статистика звонков</string>
-  <string name="call_stats">Статистика звонков</string>
-  <string name="call_stats_refresh">Обновить</string>
-  <string name="activity_title_call_stats">Статистика звонков</string>
+  <string name="callStatsDetailTitle">Статистика вызовов</string>
   <string name="call_stats_nav_all">Все</string>
   <string name="call_stats_nav_incoming">Входящие</string>
   <string name="call_stats_nav_outgoing">Исходящие</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Воспроизвести запись</string>
   <string name="stop_call_playback">Остановить</string>
   <string name="call_playback_error_message">Не удалось воспроизвести запись</string>
+  <string name="calllog_search_hint">Искать в журнале вызовов</string>
+  <string name="video_call">Видеовызов</string>
+  <string name="video_call_settings">Настройки видеовызовов</string>
+  <string name="description_videocall">Видеовызов <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Настройки быстрого набора</string>
+  <string name="speed_dial_not_set">(не установлено)</string>
+  <string name="speed_dial_replace">Изменить</string>
+  <string name="speed_dial_delete">Удалить</string>
+  <string name="speed_dial_unassigned_dialog_title">Нет назначенного номера</string>
+  <string name="speed_dial_unassigned_dialog_message">Клавише «<xliff:g id="number">%s</xliff:g>» не присвоен номер быстрого набора. Назначить его?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Чтобы использовать Быстрый набор, выключите режим полёта."</string>
+  <string name="msim_ime_dialog_title">Идентификатор устройства</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Все SIM-карты</string>
+  <string name="yes">Да</string>
+  <string name="no">Нет</string>
+  <string name="call_duration_active">Длительность активн.:</string>
+  <string name="call_duration_call_out">Длительность вызова:</string>
+  <string name="call_log_all_calls_header">Все вызовы</string>
 </resources>

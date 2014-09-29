@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Statistiques</string>
   <string name="callStatsDetailTitle">Détails des statistiques d\'appels</string>
-  <string name="call_stats">Statistiques d\'appels</string>
-  <string name="call_stats_refresh">Actualiser</string>
-  <string name="activity_title_call_stats">Statistiques d\'appels</string>
   <string name="call_stats_nav_all">Tous</string>
   <string name="call_stats_nav_incoming">Entrants</string>
   <string name="call_stats_nav_outgoing">Sortants</string>
@@ -53,4 +50,7 @@
   <string name="start_call_playback">Lire l\'enregistrement</string>
   <string name="stop_call_playback">Arrêter</string>
   <string name="call_playback_error_message">Impossible de lire l\'enregistrement</string>
+  <string name="speed_dial_not_set">(non défini)</string>
+  <string name="speed_dial_replace">Remplacer</string>
+  <string name="speed_dial_delete">Supprimer</string>
 </resources>
