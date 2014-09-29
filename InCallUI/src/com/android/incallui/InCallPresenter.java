@@ -500,6 +500,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         if (call != null) {
             TelecomAdapter.getInstance().disconnectCall(call.getId());
+            call.setState(Call.State.DISCONNECTING);
+            mCallList.onUpdate(call);
         }
     }
 
