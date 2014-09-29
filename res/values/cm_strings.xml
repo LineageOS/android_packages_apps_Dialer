@@ -74,8 +74,8 @@
     <string name="speed_dial_replace">Replace</string>
     <string name="speed_dial_delete">Delete</string>
     <string name="speed_dial_unassigned_dialog_title">Key unassigned</string>
-    <string name="speed_dial_unassigned_dialog_message">No speed dial action is assigned to number key \'<xliff:g id="number">%s</xliff:g>\'. Do you want to assign an action now?</string>
-    <string name="dialog_speed_dial_airplane_mode_message" >"To use speed dial, first turn off Airplane mode."</string>
+    <string name="speed_dial_unassigned_dialog_message">No speed dial contact is assigned to number key \'<xliff:g id="number">%s</xliff:g>\'. Do you want to assign a contact now?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">"To use speed dial, first turn off Airplane mode."</string>
     <string name="msim_ime_dialog_title">Device identifier</string>
     <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
     <string name="call_log_show_all_slots">All SIMs</string>
