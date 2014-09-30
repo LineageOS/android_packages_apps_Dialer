@@ -294,14 +294,17 @@ public class ContactInfoHelper {
     }
 
     /**
-     * Given a contact's sourceType, return true if the contact came from an
-     * external source.
+     * This function looks at a contact's source and determines if the user can
+     * mark caller ids from this source as invalid.
      *
-     * @param sourceType sourceType of the contact. This is usually populated by
-     *        {@link #mCachedNumberLookupService}.
+     * @param sourceType The source type to be checked
+     * @param objectId The ID of the Contact object.
+     * @return true if contacts from this source can be marked with an invalid caller id
      */
-    public boolean isExternal(int sourceType) {
+    public boolean canReportAsInvalid(int sourceType, String objectId) {
         return mCachedNumberLookupService != null
-                && mCachedNumberLookupService.isExternal(sourceType);
+                && mCachedNumberLookupService.canReportAsInvalid(sourceType, objectId);
     }
+
+
 }
