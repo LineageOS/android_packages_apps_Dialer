@@ -1026,8 +1026,6 @@ public class OverlappingPaneLayout extends ViewGroup {
 
             if (state == ViewDragHelper.STATE_IDLE
                     && mDragHelper.getVelocityMagnitude() > 0
-                    && (mDragHelper.getCurrentScrollY() == 0
-                    || mDragHelper.getCurrentScrollY() == mIntermediateOffset)
                     && mIsInNestedFling) {
                 mIsInNestedFling = false;
                 final int flingVelocity = !mInUpwardsPreFling ?
