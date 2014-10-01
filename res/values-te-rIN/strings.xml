@@ -182,7 +182,6 @@
     <string name="call_log_action_report" msgid="561229827189128879">"నివేదించండి"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ఈ రోజు"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"నిన్న"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"గత వారం"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"పాతది"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"కాల్ జాబితా"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"స్పీకర్‌ను ఆన్ చేయి."</string>

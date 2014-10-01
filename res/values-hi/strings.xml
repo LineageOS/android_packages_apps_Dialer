@@ -182,7 +182,6 @@
     <string name="call_log_action_report" msgid="561229827189128879">"रिपोर्ट करें"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"आज"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"कल"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"पिछले सप्ताह"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"पुराना"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"कॉल सूची"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"स्पीकर चालू करें."</string>

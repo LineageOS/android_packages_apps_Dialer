@@ -106,10 +106,10 @@
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"ಕರೆಯನ್ನು ಸೇರಿಸಿ"</string>
     <string name="type_incoming" msgid="6502076603836088532">"ಒಳಬರುವ ಕರೆ"</string>
     <string name="type_outgoing" msgid="343108709599392641">"ಹೊರಹೋಗುವ ಕರೆ"</string>
-    <string name="type_missed" msgid="2720502601640509542">"ತಪ್ಪಿ ಹೋದ ಕರೆ"</string>
+    <string name="type_missed" msgid="2720502601640509542">"ಮಿಸ್ಡ್‌ ಕಾಲ್‌"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"ಒಳಬರುವ ವೀಡಿಯೊ ಕರೆ"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"ಹೊರಹೋಗುವ ವೀಡಿಯೊ ಕರೆ"</string>
-    <string name="type_missed_video" msgid="954396897034220545">"ತಪ್ಪಿದ ವೀಡಿಯೊ ಕರೆ"</string>
+    <string name="type_missed_video" msgid="954396897034220545">"ಮಿಸ್ಡ್‌ ವೀಡಿಯೊ ಕಾಲ್‌"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"ಧ್ವನಿಮೇಲ್"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"ಒಳಬರುವ ಕರೆಗಳು"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"ಧ್ವನಿಮೇಲ್‌ ಪ್ಲೇ ಮಾಡಿ"</string>
@@ -171,7 +171,7 @@
     <string name="call_log_action_video_call" msgid="3818588654537490948">"ವೀಡಿಯೊ ಕರೆ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ಆಲಿಸಿ"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"ವಿವರಗಳು"</string>
-    <string name="description_incoming_missed_call" msgid="2610535352863246949">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ರಿಂದ ತಪ್ಪಿದ ಕರೆ."</string>
+    <string name="description_incoming_missed_call" msgid="2610535352863246949">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ರಿಂದ ಮಿಸ್ಡ್‌ ಕಾಲ್‌."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g> ರಿಂದ ಕರೆಗೆ ಉತ್ತರಿಸಲಾಗಿದೆ."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>.ಅವರಿಗೆ ಕರೆ"</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> ಗೆ ಮರಳಿ ಕರೆ ಮಾಡಿ"</string>
@@ -183,7 +183,6 @@
     <string name="call_log_action_report" msgid="561229827189128879">"ವರದಿ"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ಇಂದು"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"ನಿನ್ನೆ"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"ಕಳೆದ ವಾರ"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"ಹಳೆಯದು"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"ಕರೆ ಪಟ್ಟಿ"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"ಸ್ಪೀಕರ್ ಆನ್ ಮಾಡಿ."</string>
