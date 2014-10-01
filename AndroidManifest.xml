@@ -115,6 +115,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="tel" />
+                <data android:scheme="sip" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.CALL_BUTTON" />
@@ -289,6 +290,14 @@
                  <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <activity android:name=".SpeedDialListActivity"
+            android:theme="@style/DialtactsTheme"
+            android:label="@string/speed_dial_settings" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
 
         <receiver android:name=".interactions.UndemoteOutgoingCallReceiver">
             <intent-filter>

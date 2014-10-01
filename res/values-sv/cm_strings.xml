@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Detaljer för samtalsstatus</string>
-  <string name="call_stats">Samtalsstatistik</string>
-  <string name="call_stats_refresh">Uppdatera</string>
-  <string name="activity_title_call_stats">Samtalsstatistik</string>
   <string name="call_stats_nav_all">Alla</string>
   <string name="call_stats_nav_incoming">Inkommande</string>
   <string name="call_stats_nav_outgoing">Utgående</string>

@@ -15,8 +15,7 @@
   -->
 
 <resources>
-
-    <style name="FragmentActionBarPadding">
-        <item name="android:paddingBottom">0dp</item>
+    <style name="CallLogFragment">
+        <item name="android:paddingTop">0dp</item>
     </style>
 </resources>

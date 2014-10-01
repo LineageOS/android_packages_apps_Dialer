@@ -17,10 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Статистика</string>
-  <string name="callStatsDetailTitle">Детаљи статистике позива</string>
-  <string name="call_stats">Статистика позива</string>
-  <string name="call_stats_refresh">Освежи</string>
-  <string name="activity_title_call_stats">Статистика позива</string>
+  <string name="callStatsDetailTitle">Детаљи статистике</string>
   <string name="call_stats_nav_all">Сви</string>
   <string name="call_stats_nav_incoming">Долазни</string>
   <string name="call_stats_nav_outgoing">Одлазни</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Пусти снимак</string>
   <string name="stop_call_playback">Заустави</string>
   <string name="call_playback_error_message">Пуштање снимка није успело</string>
+  <string name="calllog_search_hint">Претражи евиденцију позива</string>
+  <string name="video_call">Видео позив</string>
+  <string name="video_call_settings">Подешавања видео позива</string>
+  <string name="description_videocall">Видео позив <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Подешавања брзог бирања</string>
+  <string name="speed_dial_not_set">(није постављено)</string>
+  <string name="speed_dial_replace">Замени</string>
+  <string name="speed_dial_delete">Избриши</string>
+  <string name="speed_dial_unassigned_dialog_title">Тастер недодељен</string>
+  <string name="speed_dial_unassigned_dialog_message">Нема додељене акције брзог бирања нумеричком тастеру \'<xliff:g id="number">%s</xliff:g>\'. Да ли желиш сада да доделиш акцију?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Да би користио брзо бирање, прво искључи режим рада у авиону."</string>
+  <string name="msim_ime_dialog_title">Идентификатор уређаја</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Све SIM картице</string>
+  <string name="yes">Да</string>
+  <string name="no">Не</string>
+  <string name="call_duration_active">Активно трајање:</string>
+  <string name="call_duration_call_out">Трајање позива:</string>
+  <string name="call_log_all_calls_header">Сви позиви</string>
 </resources>

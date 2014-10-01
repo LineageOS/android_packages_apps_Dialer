@@ -23,6 +23,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.provider.ContactsContract.Intents.Insert;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
@@ -56,6 +57,7 @@ import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 
 import android.provider.ContactsContract.DisplayNameSources;
 import com.android.dialer.cmstats.DialerStats;
+import com.android.internal.telephony.MSimConstants;
 
 public class CallDetailHeader {
     private static final String TAG = "CallDetail";
@@ -66,12 +68,15 @@ public class CallDetailHeader {
     private static final char LEFT_TO_RIGHT_EMBEDDING = '\u202A';
     private static final char POP_DIRECTIONAL_FORMATTING = '\u202C';
 
+    private static final boolean MOVE_VTCALL_BTN_TO_OPTIONSMENU = true;
+
     private Activity mActivity;
     private Resources mResources;
     private PhoneNumberDisplayHelper mPhoneNumberDisplayHelper;
     private ContactPhotoManager mContactPhotoManager;
 
     private String mNumber;
+    private int mSubscription;
 
     private TextView mHeaderTextView;
     private View mHeaderOverlayView;
@@ -85,6 +90,8 @@ public class CallDetailHeader {
 
     private CharSequence mPhoneNumberLabelToCopy;
     private CharSequence mPhoneNumberToCopy;
+
+    private boolean mHasVideoCallOption = false;
 
     public interface Data {
         CharSequence getName();
@@ -117,6 +124,13 @@ public class CallDetailHeader {
                 return;
             }
             mActivity.startActivity(((ViewEntry) view.getTag()).secondaryIntent);
+        }
+    };
+
+    private final View.OnClickListener mThirdActionListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            mActivity.startActivity(((ViewEntry) view.getTag()).thirdIntent);
         }
     };
 
@@ -235,7 +249,7 @@ public class CallDetailHeader {
         }
     }
 
-    public void updateViews(String number, int numberPresentation, Data data) {
+    public void updateViews(String number, int numberPresentation, Data data, int subscription) {
         // Cache the details about the phone number.
         final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper();
         final boolean isVoicemailNumber = phoneUtils.isVoicemailNumber(number);
@@ -248,6 +262,7 @@ public class CallDetailHeader {
         boolean skipBind = false;
 
         mNumber = number;
+        mSubscription = subscription;
         mCanPlaceCallsTo = PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation);
 
         // Let user view contact details if they exist, otherwise add option to create new
@@ -322,10 +337,16 @@ public class CallDetailHeader {
                 mPhoneNumberDisplayHelper.getDisplayNumber(
                         dataNumber, data.getNumberPresentation(), data.getFormattedNumber());
 
+            Intent intent = CallUtil.getCallIntent(mNumber);
+            if (mSubscription != -1) {
+                intent.putExtra(MSimConstants.SUBSCRIPTION_KEY, mSubscription);
+                Log.d(TAG, "Start the activity and the call log sub is: " + mSubscription);
+            }
+
             ViewEntry entry = new ViewEntry(
                     mResources.getString(R.string.menu_callNumber,
                         forceLeftToRight(displayNumber)),
-                    CallUtil.getCallIntent(number),
+                    intent,
                     mResources.getString(R.string.description_call, nameOrNumber));
 
             // Only show a label if the number is shown and it is not a SIP address.
@@ -344,6 +365,23 @@ public class CallDetailHeader {
                         new Intent(Intent.ACTION_SENDTO,
                             Uri.fromParts("sms", number, null)),
                         mResources.getString(R.string.description_send_text_message, nameOrNumber));
+            }
+
+            boolean isVTSupported =
+                    SystemProperties.getBoolean("persist.radio.csvt.enabled", false);
+
+            // The third action allows to invoke videocall to the number that placed the
+            // call.
+            final boolean canVTCall = isVTSupported && !isSipNumber;
+            if (!MOVE_VTCALL_BTN_TO_OPTIONSMENU && canVTCall) {
+                entry.setThirdAction(
+                        R.drawable.ic_contact_quick_contact_call_video_holo_dark,
+                        getVTCallIntent(mNumber),
+                        mResources.getString(R.string.description_videocall,
+                                nameOrNumber));
+                mHasVideoCallOption = false;
+            } else {
+                mHasVideoCallOption = canVTCall;
             }
 
             configureCallButton(entry);
@@ -412,6 +450,12 @@ public class CallDetailHeader {
         public Intent secondaryIntent = null;
         /** The description for accessibility of the secondary action. */
         public String secondaryDescription = null;
+        /** add for csvt Icon for the third action. */
+        public int thirdIcon = 0;
+        /** Intent for the third action. If not null, an icon must be defined. */
+        public Intent thirdIntent = null;
+        /** The description for accessibility of the third action. */
+        public String thirdDescription = null;
 
         public ViewEntry(String text, Intent intent, String description) {
             this.text = text;
@@ -423,6 +467,12 @@ public class CallDetailHeader {
             secondaryIcon = icon;
             secondaryIntent = intent;
             secondaryDescription = description;
+        }
+
+        public void setThirdAction(int icon, Intent intent, String description) {
+            thirdIcon = icon;
+            thirdIntent = intent;
+            thirdDescription = description;
         }
     }
 
@@ -439,6 +489,8 @@ public class CallDetailHeader {
         ImageView icon = (ImageView) convertView.findViewById(R.id.call_and_sms_icon);
         View divider = convertView.findViewById(R.id.call_and_sms_divider);
         TextView text = (TextView) convertView.findViewById(R.id.call_and_sms_text);
+        ImageView secondaryIcon = (ImageView) convertView.findViewById(R.id.videocall);
+        View secondaryIconDivider = convertView.findViewById(R.id.videocall_and_sms_divider);
 
         View mainAction = convertView.findViewById(R.id.call_and_sms_main_action);
         mainAction.setOnClickListener(mPrimaryActionListener);
@@ -459,6 +511,19 @@ public class CallDetailHeader {
         }
         text.setText(entry.text);
 
+        if (entry.thirdIntent != null) {
+            secondaryIcon.setOnClickListener(mThirdActionListener);
+            secondaryIcon.setImageResource(
+                    R.drawable.ic_contact_quick_contact_call_video_holo_dark);
+            secondaryIcon.setTag(entry);
+            secondaryIcon.setContentDescription(entry.thirdDescription);
+            secondaryIcon.setVisibility(View.VISIBLE);
+            secondaryIconDivider.setVisibility(View.VISIBLE);
+        } else {
+            secondaryIcon.setVisibility(View.GONE);
+            secondaryIconDivider.setVisibility(View.GONE);
+        }
+
         TextView label = (TextView) convertView.findViewById(R.id.call_and_sms_label);
         if (TextUtils.isEmpty(entry.label)) {
             label.setVisibility(View.GONE);
@@ -475,8 +540,13 @@ public class CallDetailHeader {
                 TelephonyManager tm = (TelephonyManager)
                         mActivity.getSystemService(Context.TELEPHONY_SERVICE);
                 if (tm.getCallState() == TelephonyManager.CALL_STATE_IDLE) {
-                    mActivity.startActivity(CallUtil.getCallIntent(
-                            Uri.fromParts(CallUtil.SCHEME_TEL, mNumber, null)));
+                    Intent intent = CallUtil.getCallIntent(
+                            Uri.fromParts(CallUtil.SCHEME_TEL, mNumber, null));
+                    if (mSubscription != -1) {
+                        intent.putExtra(MSimConstants.SUBSCRIPTION_KEY, mSubscription);
+                        Log.d(TAG, "Start the activity and the call log sub is: " + mSubscription);
+                    }
+                    mActivity.startActivity(intent);
                     return true;
                 }
             }
@@ -492,5 +562,29 @@ public class CallDetailHeader {
         sb.append(text);
         sb.append(POP_DIRECTIONAL_FORMATTING);
         return sb.toString();
+    }
+
+    //add for csvt
+    public static Intent getVTCallIntent(String number) {
+        Intent intent = new Intent("com.borqs.videocall.action.LaunchVideoCallScreen");
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+
+        intent.putExtra("IsCallOrAnswer", true); // true as a
+        // call,
+        // while
+        // false as
+        // answer
+
+        intent.putExtra("LaunchMode", 1); // nLaunchMode: 1 as
+        // telephony, while
+        // 0 as socket
+        intent.putExtra("call_number_key", number);
+        return intent;
+    }
+
+    public boolean hasVideoCallOption() {
+        return mHasVideoCallOption;
     }
 }

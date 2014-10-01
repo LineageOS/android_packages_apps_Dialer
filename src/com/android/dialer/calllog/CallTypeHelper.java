@@ -38,6 +38,16 @@ public class CallTypeHelper {
     /** Color used to identify new voicemail calls. */
     private final int mNewVoicemailColor;
 
+    //add for csvt call log type
+    public static final int INCOMING_CSVT_TYPE = 5;
+    public static final int OUTGOING_CSVT_TYPE = 6;
+    public static final int MISSED_CSVT_TYPE = 7;
+
+    // Call log type for ims call
+    public static final int INCOMING_IMS_TYPE = 21;
+    public static final int OUTGOING_IMS_TYPE = 22;
+    public static final int MISSED_IMS_TYPE = 23;
+
     public CallTypeHelper(Resources resources) {
         // Cache these values so that we do not need to look them up each time.
         mIncomingName = resources.getString(R.string.type_incoming);
@@ -63,6 +73,25 @@ public class CallTypeHelper {
             case Calls.VOICEMAIL_TYPE:
                 return mVoicemailName;
 
+            //add for csvt call log type
+            case INCOMING_CSVT_TYPE:
+                return mIncomingName;
+
+            case OUTGOING_CSVT_TYPE:
+                return mOutgoingName;
+
+            case MISSED_CSVT_TYPE:
+                return mMissedName;
+
+            //add for csvt call log type
+            case INCOMING_IMS_TYPE:
+                return mIncomingName;
+
+            case OUTGOING_IMS_TYPE:
+                return mOutgoingName;
+
+            case MISSED_IMS_TYPE:
+                return mMissedName;
             default:
                 return mMissedName;
         }
@@ -72,14 +101,20 @@ public class CallTypeHelper {
     public Integer getHighlightedColor(int callType) {
         switch (callType) {
             case Calls.INCOMING_TYPE:
+            case INCOMING_CSVT_TYPE:
+            case INCOMING_IMS_TYPE:
                 // New incoming calls are not highlighted.
                 return null;
 
             case Calls.OUTGOING_TYPE:
+            case OUTGOING_CSVT_TYPE:
+            case OUTGOING_IMS_TYPE:
                 // New outgoing calls are not highlighted.
                 return null;
 
             case Calls.MISSED_TYPE:
+            case MISSED_CSVT_TYPE:
+            case MISSED_IMS_TYPE:
                 return mNewMissedColor;
 
             case Calls.VOICEMAIL_TYPE:
@@ -95,6 +130,7 @@ public class CallTypeHelper {
 
     public static boolean isMissedCallType(int callType) {
         return (callType != Calls.INCOMING_TYPE && callType != Calls.OUTGOING_TYPE &&
-                callType != Calls.VOICEMAIL_TYPE);
+                callType != Calls.VOICEMAIL_TYPE && callType != INCOMING_CSVT_TYPE &&
+                callType != OUTGOING_CSVT_TYPE);
     }
 }

@@ -115,6 +115,16 @@
         <item name="android:textAppearanceListItemSmall">@android:style/TextAppearance.Holo.Medium.Inverse</item>
     </style>
 
+    <!-- A theme for inflation of a search view dialtacts action bar -->
+    <style name="DialtactsSearchTheme" parent="DialtactsTheme">
+        <item name="android:textColorPrimary">@color/actionbar_text_color</item>
+        <item name="android:textColorHint">@color/searchbox_hint_text_color</item>
+        <item name="*android:searchViewSearchIcon">@drawable/ic_search_lt</item>
+        <item name="*android:searchViewCloseIcon">@drawable/ic_cancel_lt</item>
+        <item name="*android:searchViewTextField">@drawable/textfield_search_lt</item>
+        <item name="android:textCursorDrawable">@*android:drawable/text_cursor_holo_dark</item>
+    </style>
+
     <style name="DialtactsActionBarSpinner"
         parent="@*android:style/Widget.Holo.Light.Spinner.DropDown.ActionBar">
 
@@ -228,8 +238,14 @@
         <item name="android:overScrollMode">always</item>
     </style>
 
-    <style name="FragmentActionBarPadding">
-        <item name="android:paddingBottom">?android:attr/actionBarSize</item>
+    <style name="CallLogSpinnerStyle">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="DialtactsSearchboxStyle" parent="@android:style/Widget.EditText">
@@ -240,5 +256,9 @@
     <style name="DismissButtonStyle">
         <item name="android:paddingLeft">@dimen/dismiss_button_padding_start</item>
         <item name="android:paddingRight">@dimen/dismiss_button_padding_end</item>
+    </style>
+
+    <style name="CallLogFragment">
+        <item name="android:paddingTop">?android:attr/actionBarSize</item>
     </style>
 </resources>

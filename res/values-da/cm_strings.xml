@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Detaljer om opkaldsstatistik</string>
-  <string name="call_stats">Opkaldsstatistik</string>
-  <string name="call_stats_refresh">Opdatér</string>
-  <string name="activity_title_call_stats">Opkaldsstatistik</string>
   <string name="call_stats_nav_all">Alle</string>
   <string name="call_stats_nav_incoming">Indgående</string>
   <string name="call_stats_nav_outgoing">Udgående</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Afspil optagelse</string>
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Kunne ikke afspille optagelse</string>
+  <string name="calllog_search_hint">Søg i opkaldsloggen</string>
+  <string name="video_call">Videoopkald</string>
+  <string name="video_call_settings">Indstillinger for videoopkald</string>
+  <string name="description_videocall">Videoopkald <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Indstillinger for hurtigopkald</string>
+  <string name="speed_dial_not_set">(ikke angivet)</string>
+  <string name="speed_dial_replace">Erstat</string>
+  <string name="speed_dial_delete">Slet</string>
+  <string name="speed_dial_unassigned_dialog_title">Tast ikke tildelt</string>
+  <string name="speed_dial_unassigned_dialog_message">Intet hurtigopkald tildelt tasten \'<xliff:g id="number">%s</xliff:g>\'. Vil du tildele et opkald nu?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"For at bruge hurtigopkald, skal du først deaktivere Flytilstand."</string>
+  <string name="msim_ime_dialog_title">Enheds-id</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Alle SIM-kort</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nej</string>
+  <string name="call_duration_active">Aktiv i:</string>
+  <string name="call_duration_call_out">Varighed af opkald:</string>
+  <string name="call_log_all_calls_header">Alle opkald</string>
 </resources>

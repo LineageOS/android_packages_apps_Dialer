@@ -15,6 +15,14 @@
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/menu_ip_call_by_slot1"
+        android:showAsAction="withText"
+        android:orderInCategory="1" />
+    <item
+        android:id="@+id/menu_ip_call_by_slot2"
+        android:showAsAction="withText"
+        android:orderInCategory="1" />
+    <item
         android:id="@+id/menu_add_contacts"
         android:title="@string/recentCalls_addToContact"
         android:showAsAction="withText"
@@ -27,6 +35,23 @@
     <item
         android:id="@+id/menu_add_wait"
         android:title="@string/add_wait"
+        android:showAsAction="withText"
+        android:orderInCategory="1" />
+<!-- add for CSVT -->
+    <item
+        android:id="@+id/menu_video_call"
+        android:title="@string/video_call"
+        android:showAsAction="withText"
+        android:orderInCategory="1" />
+    <item
+        android:id="@+id/menu_video_call_settings"
+        android:title="@string/video_call_settings"
+        android:showAsAction="withText"
+        android:orderInCategory="1" />
+<!-- add for CSVT -->
+    <item
+        android:id="@+id/speed_dial"
+        android:title="@string/speed_dial_settings"
         android:showAsAction="withText"
         android:orderInCategory="1" />
 </menu>

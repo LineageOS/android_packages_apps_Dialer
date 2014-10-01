@@ -33,6 +33,7 @@ import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract.Status;
 import android.util.Log;
+import android.os.SystemProperties;
 
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
@@ -69,6 +70,11 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
      * type.
      */
     public static final int CALL_TYPE_ALL = -1;
+
+    /**
+     * To specify all slots.
+     */
+    public static final int CALL_SUB_ALL = -1;
 
     private final WeakReference<Listener> mListener;
 
@@ -138,14 +144,33 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
      * <p>
      * It will asynchronously update the content of the list view when the fetch completes.
      */
-    public void fetchCalls(int callType, long newerThan) {
+    public void fetchCalls(int callType, long newerThan, int sub) {
         cancelFetch();
         int requestId = newCallsRequest();
-        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType, false /* newOnly */, newerThan);
+        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType, false /* newOnly */, newerThan, sub);
+    }
+
+    public void fetchCalls(int callType, long newerThan) {
+        fetchCalls(callType, newerThan, CallLogQueryHandler.CALL_SUB_ALL);
     }
 
     public void fetchCalls(int callType) {
-        fetchCalls(callType, 0);
+        fetchCalls(callType, 0, CallLogQueryHandler.CALL_SUB_ALL);
+    }
+
+    public void fetchCalls(String filter) {
+        cancelFetch();
+        int requestId = newCallsRequest();
+        fetchCalls(QUERY_CALLLOG_TOKEN ,requestId,filter);
+    }
+
+    public void fetchCalls(int token,int requestId,String filter) {
+        String selection = "(" + Calls.NUMBER + " like '%" + filter
+                + "%'  or  " + Calls.CACHED_NAME + " like '%" + filter + "%' )";
+
+        startQuery(token, requestId, Calls.CONTENT_URI_WITH_VOICEMAIL,
+                CallLogQuery._PROJECTION, selection, null,
+                Calls.DEFAULT_SORT_ORDER);
     }
 
     public void fetchVoicemailStatus() {
@@ -155,7 +180,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     /** Fetches the list of calls in the call log. */
     private void fetchCalls(int token, int requestId, int callType, boolean newOnly,
-            long newerThan) {
+            long newerThan, int sub) {
         // We need to check for NULL explicitly otherwise entries with where READ is NULL
         // may not match either the query or its negation.
         // We consider the calls that are not yet consumed (i.e. IS_READ = 0) as "new".
@@ -172,9 +197,40 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
                 where.append(" AND ");
             }
             // Add a clause to fetch only items of type voicemail.
-            where.append(String.format("(%s = ?)", Calls.TYPE));
+            if ((callType == Calls.INCOMING_TYPE) || (callType == Calls.OUTGOING_TYPE)
+                    || (callType == Calls.MISSED_TYPE)) {
+                where.append(String.format("(%s = ? OR %s = ?)", Calls.TYPE, Calls.TYPE));
+            } else {
+                where.append(String.format("(%s = ?)", Calls.TYPE));
+            }
             // Add a clause to fetch only items newer than the requested date
             selectionArgs.add(Integer.toString(callType));
+            if (isVTSupported()) {
+                if (callType == Calls.INCOMING_TYPE) {
+                    selectionArgs.add(Integer.toString(CallTypeHelper.INCOMING_CSVT_TYPE));
+                } else if (callType == Calls.OUTGOING_TYPE) {
+                    selectionArgs.add(Integer.toString(CallTypeHelper.OUTGOING_CSVT_TYPE));
+                } else if (callType == Calls.MISSED_TYPE) {
+                    selectionArgs.add(Integer.toString(CallTypeHelper.MISSED_CSVT_TYPE));
+                }
+            }
+            else {
+                if (callType == Calls.INCOMING_TYPE) {
+                    selectionArgs.add(Integer.toString(CallTypeHelper.INCOMING_IMS_TYPE));
+                } else if (callType == Calls.OUTGOING_TYPE) {
+                    selectionArgs.add(Integer.toString(CallTypeHelper.OUTGOING_IMS_TYPE));
+                } else if (callType == Calls.MISSED_TYPE) {
+                    selectionArgs.add(Integer.toString(CallTypeHelper.MISSED_IMS_TYPE));
+                }
+            }
+        }
+
+        if (sub > CALL_SUB_ALL) {
+            if (where.length() > 0) {
+                where.append(" AND ");
+            }
+            where.append(String.format("(%s = ?)", Calls.SUBSCRIPTION));
+            selectionArgs.add(Integer.toString(sub));
         }
 
         if (newerThan > 0) {
@@ -309,5 +365,11 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
          * Called when {@link CallLogQueryHandler#fetchCalls(int)}complete.
          */
         void onCallsFetched(Cursor combinedCursor);
+    }
+
+    public boolean isVTSupported(){
+        return SystemProperties.getBoolean(
+                "persist.radio.csvt.enabled"
+       /* TelephonyProperties.PROPERTY_CSVT_ENABLED*/, false);
     }
 }

@@ -751,6 +751,4 @@
     <!-- The font-family to use for tab text.
          Do not translate. -->
     <string name="tab_font_family">sans-serif</string>
-
-    <string name="calllog_search_hint">Search call log</string>
 </resources>

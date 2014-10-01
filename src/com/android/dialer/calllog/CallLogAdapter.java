@@ -21,8 +21,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteFullException;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.provider.ContactsContract.PhoneLookup;
+import android.telephony.MSimTelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +39,7 @@ import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.util.UriUtils;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
@@ -91,6 +95,8 @@ public class CallLogAdapter extends GroupingListAdapter
 
     private String mStatsLabel = null;
 
+    private String mFilterString;
+
     /** Listener for the primary or secondary actions in the list.
      *  Primary opens the call details.
      *  Secondary calls or plays.
@@ -99,6 +105,15 @@ public class CallLogAdapter extends GroupingListAdapter
         @Override
         public void onClick(View view) {
             startActivityForAction(view);
+        }
+    };
+    
+    private final View.OnLongClickListener mPrimaryActionLongClickListener
+            = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            // Override this method to show context menu
+            return false;
         }
     };
 
@@ -136,7 +151,7 @@ public class CallLogAdapter extends GroupingListAdapter
         mAdapterHelper = new CallLogAdapterHelper(context, this,
                 contactInfoHelper, mPhoneNumberDisplayHelper);
         PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
-                resources, callTypeHelper, mPhoneNumberUtilsWrapper);
+                mContext, callTypeHelper, mPhoneNumberUtilsWrapper);
         mCallLogViewsHelper =
                 new CallLogListItemHelper(
                         phoneCallDetailsHelper, mPhoneNumberDisplayHelper, resources);
@@ -208,6 +223,7 @@ public class CallLogAdapter extends GroupingListAdapter
         // Get the views to bind to.
         CallLogListItemViews views = CallLogListItemViews.fromView(view);
         views.primaryActionView.setOnClickListener(mActionListener);
+        views.primaryActionView.setOnLongClickListener(mPrimaryActionLongClickListener);
         views.secondaryActionButtonView.setOnClickListener(mActionListener);
         view.setTag(views);
     }
@@ -232,6 +248,8 @@ public class CallLogAdapter extends GroupingListAdapter
         final long duration = c.getLong(CallLogQuery.DURATION);
         final int callType = c.getInt(CallLogQuery.CALL_TYPE);
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
+        final int subscription = c.getInt(CallLogQuery.SUBSCRIPTION);
+        final int durationType = c.getInt(CallLogQuery.DURATION_TYPE);
 
         final ContactInfo cachedContactInfo = getContactInfoFromCallLog(c);
 
@@ -241,7 +259,8 @@ public class CallLogAdapter extends GroupingListAdapter
         // Primary action is always to call, if possible.
         if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
             // Sets the primary action to call the number.
-            views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number));
+            views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number,
+                    subscription));
         } else {
             views.primaryActionView.setTag(null);
         }
@@ -252,12 +271,22 @@ public class CallLogAdapter extends GroupingListAdapter
                 String voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
                 final long rowId = c.getLong(CallLogQuery.ID);
                 views.secondaryActionButtonView.setTag(
-                        IntentProvider.getPlayVoicemailIntentProvider(rowId, voicemailUri));
+                        IntentProvider.getPlayVoicemailIntentProvider(rowId, voicemailUri, subscription));
+                views.subIconView.setVisibility(View.GONE);
             } else {
                 // Store the call details information.
                 views.secondaryActionButtonView.setTag(
                         IntentProvider.getCallDetailIntentProvider(
-                                getCursor(), c.getPosition(), c.getLong(CallLogQuery.ID), count));
+                                getCursor(), c.getPosition(), c.getLong(CallLogQuery.ID), count, 
+                                subscription));
+            
+                if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+                    views.subIconView.setVisibility(View.VISIBLE);
+                    views.subIconView.setImageDrawable(
+                            DialtactsActivity.getMultiSimIcon(mContext, subscription));
+                } else {
+                    views.subIconView.setVisibility(View.GONE);
+                }
             }
         } else {
             // No action enabled.
@@ -282,18 +311,19 @@ public class CallLogAdapter extends GroupingListAdapter
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
-                    duration);
+                    duration, subscription, durationType);
         } else {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, name, ntype, label, lookupUri, photoUri, sourceType);
+                    duration, name, ntype, label, lookupUri, photoUri, sourceType, 
+                    subscription, durationType);
         }
 
         final boolean isNew = c.getInt(CallLogQuery.IS_READ) == 0;
         // New items also use the highlighted version of the text.
         final boolean isHighlighted = isNew;
         mCallLogViewsHelper.setPhoneCallDetails(views, details, isHighlighted,
-                mShowSecondaryActionButton);
+                mShowSecondaryActionButton, mFilterString);
 
         int contactType = ContactPhotoManager.TYPE_DEFAULT;
 
@@ -489,14 +519,18 @@ public class CallLogAdapter extends GroupingListAdapter
 
         if (!needsUpdate) return;
 
-        if (countryIso == null) {
-            mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
-                    Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " IS NULL",
-                    new String[]{ number });
-        } else {
-            mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
-                    Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " = ?",
-                    new String[]{ number, countryIso });
+        try {
+            if (countryIso == null) {
+                mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
+                        Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " IS NULL",
+                        new String[]{ number });
+            } else {
+                mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
+                        Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " = ?",
+                        new String[]{ number, countryIso });
+            }
+        } catch (SQLiteFullException e) {
+            e.printStackTrace();
         }
     }
 
@@ -598,5 +632,9 @@ public class CallLogAdapter extends GroupingListAdapter
 
     public String getStatsLabel() {
         return mStatsLabel;
+    }
+
+    public void setQueryString(String filter) {
+        mFilterString = filter;
     }
 }

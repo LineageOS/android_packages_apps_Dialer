@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Statistika</string>
   <string name="callStatsDetailTitle">Detaily statiskitky hovorů</string>
-  <string name="call_stats">Statistiky hovoru</string>
-  <string name="call_stats_refresh">Obnovit</string>
-  <string name="activity_title_call_stats">Statistiky hovoru</string>
   <string name="call_stats_nav_all">Vše</string>
   <string name="call_stats_nav_incoming">Příchozí</string>
   <string name="call_stats_nav_outgoing">Odchozí</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Přehrát záznam</string>
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Selhalo přehrávání záznamu</string>
+  <string name="calllog_search_hint">Prohledávat výpis hovorů</string>
+  <string name="video_call">Video hovor</string>
+  <string name="video_call_settings">Nastavení video hovoru</string>
+  <string name="description_videocall">Video hovor <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Nastavení rychlého vytáčení</string>
+  <string name="speed_dial_not_set">(nenastaveno)</string>
+  <string name="speed_dial_replace">Nahradit</string>
+  <string name="speed_dial_delete">Odstranit</string>
+  <string name="speed_dial_unassigned_dialog_title">Klávesa nepřiřazena</string>
+  <string name="speed_dial_unassigned_dialog_message">Akce pro rychlé vytáčení není pro tuto klávesu „<xliff:g id="number">%s</xliff:g>“ přiřazena. Chcete jí nyní přiřadit?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Pro použití rychlého vytáčení nejprve vypněte režim „V letadle“."</string>
+  <string name="msim_ime_dialog_title">Identifikátor zařízení</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Všechny SIM karty</string>
+  <string name="yes">Ano</string>
+  <string name="no">Ne</string>
+  <string name="call_duration_active">Aktivní trvání:</string>
+  <string name="call_duration_call_out">Dálka hovoru:</string>
+  <string name="call_log_all_calls_header">Všechny hovory</string>
 </resources>

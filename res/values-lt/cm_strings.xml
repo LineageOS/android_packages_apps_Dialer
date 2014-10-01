@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Statistika</string>
   <string name="callStatsDetailTitle">Skambučių statistikos informacija</string>
-  <string name="call_stats">Skambučių statistika</string>
-  <string name="call_stats_refresh">Atnaujinti</string>
-  <string name="activity_title_call_stats">Skambučių statistika</string>
   <string name="call_stats_nav_all">Visi</string>
   <string name="call_stats_nav_incoming">Įeinantys</string>
   <string name="call_stats_nav_outgoing">Išeinantys</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Paleisti įrašą</string>
   <string name="stop_call_playback">Sustabdyti</string>
   <string name="call_playback_error_message">Nepavyko paleisti įrašo</string>
+  <string name="calllog_search_hint">Ieškoti skambučių žurnalo</string>
+  <string name="video_call">Vaizdo skambutis</string>
+  <string name="video_call_settings">Vaizdo skambučio nustatymai</string>
+  <string name="description_videocall">Vaizdo skambutis <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Greitojo rinkimo nustatymai</string>
+  <string name="speed_dial_not_set">(nenustatyta)</string>
+  <string name="speed_dial_replace">Pakeisti</string>
+  <string name="speed_dial_delete">Ištrinti</string>
+  <string name="speed_dial_unassigned_dialog_title">Klavišas nepriskirtas</string>
+  <string name="speed_dial_unassigned_dialog_message">Nėra priskirto greitojo rinkimo numerio klavišui „<xliff:g id="number">%s</xliff:g>“. Ar norite priskirtį veiksmą dabar?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Norėdami naudotis greituoju rinkimu, pirmiausiai išjunkite lėktuvo režimą."</string>
+  <string name="msim_ime_dialog_title">Įrenginio identifikavimo kodas</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Visos SIM</string>
+  <string name="yes">Taip</string>
+  <string name="no">Ne</string>
+  <string name="call_duration_active">Aktyvi trukmė:</string>
+  <string name="call_duration_call_out">Skambučio trukmė:</string>
+  <string name="call_log_all_calls_header">Visi skambučiai</string>
 </resources>

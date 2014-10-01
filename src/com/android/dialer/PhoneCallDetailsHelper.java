@@ -16,10 +16,12 @@
 
 package com.android.dialer;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.telephony.MSimTelephonyManager;
 import android.telephony.PhoneNumberUtils;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -30,6 +32,7 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.contacts.common.format.TextHighlighter;
 import com.android.contacts.common.test.NeededForTesting;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
@@ -43,6 +46,7 @@ public class PhoneCallDetailsHelper {
     /** The maximum number of icons will be shown to represent the call types in a group. */
     private static final int MAX_CALL_TYPE_ICONS = 3;
 
+    private final Context mContext;
     private final Resources mResources;
     /** The injected current time in milliseconds since the epoch. Used only by tests. */
     private Long mCurrentTimeMillisForTest;
@@ -50,6 +54,7 @@ public class PhoneCallDetailsHelper {
     private final CallTypeHelper mCallTypeHelper;
     private final PhoneNumberDisplayHelper mPhoneNumberHelper;
     private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
+    private final TextHighlighter mHighlighter;
 
     /**
      * Creates a new instance of the helper.
@@ -58,17 +63,34 @@ public class PhoneCallDetailsHelper {
      *
      * @param resources used to look up strings
      */
-    public PhoneCallDetailsHelper(Resources resources, CallTypeHelper callTypeHelper,
+    public PhoneCallDetailsHelper(Context context, CallTypeHelper callTypeHelper,
             PhoneNumberUtilsWrapper phoneUtils) {
-        mResources = resources;
+        mContext = context;
+        mResources = mContext.getResources();
         mCallTypeHelper = callTypeHelper;
         mPhoneNumberUtilsWrapper = phoneUtils;
-        mPhoneNumberHelper = new PhoneNumberDisplayHelper(mPhoneNumberUtilsWrapper, resources);
+        mPhoneNumberHelper = new PhoneNumberDisplayHelper(mPhoneNumberUtilsWrapper, mResources);
+        mHighlighter = new TextHighlighter(Typeface.BOLD,
+                mResources.getColor(R.color.text_highlight_color));
     }
 
     /** Fills the call details views with content. */
+    public void setPhoneCallDetails(PhoneCallDetailsViews views,
+            PhoneCallDetails details, boolean isHighlighted) {
+        setPhoneCallDetails(views, details, isHighlighted, null);
+    }
+
     public void setPhoneCallDetails(PhoneCallDetailsViews views, PhoneCallDetails details,
-            boolean isHighlighted) {
+            boolean isHighlighted, String filter) {
+        // Display the icon for the last call sub.
+        if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+            views.subIconView.setVisibility(View.VISIBLE);
+            views.subIconView.setImageDrawable(
+                    DialtactsActivity.getMultiSimIcon(mContext, details.subscription));
+        } else {
+            views.subIconView.setVisibility(View.GONE);
+        }
+
         // Display up to a given number of icons.
         views.callTypeIcons.clear();
         int count = details.callTypes.length;
@@ -98,12 +120,13 @@ public class PhoneCallDetailsHelper {
         // Get type of call (ie mobile, home, etc) if known, or the caller's
         CharSequence numberFormattedLabel = getCallTypeOrLocation(details);
 
-        final CharSequence nameText;
+        CharSequence nameText;
         final CharSequence numberText;
         final CharSequence labelText;
-        final CharSequence displayNumber =
+        CharSequence displayNumber =
             mPhoneNumberHelper.getDisplayNumber(details.number,
                     details.numberPresentation, details.formattedNumber);
+
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
             if (TextUtils.isEmpty(details.geocode)
@@ -122,8 +145,12 @@ public class PhoneCallDetailsHelper {
                     numberFormattedLabel;
         }
 
-        views.nameView.setText(nameText);
-        views.labelView.setText(labelText);
+        if (filter != null) {
+            // TextHighlighter expects upper case prefix
+            filter = filter.toUpperCase();
+        }
+        mHighlighter.setPrefixText(views.nameView, nameText.toString(), filter);
+        mHighlighter.setPrefixText(views.labelView, labelText.toString(), filter);
         views.labelView.setVisibility(TextUtils.isEmpty(labelText) ? View.GONE : View.VISIBLE);
     }
 

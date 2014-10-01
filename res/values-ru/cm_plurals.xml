@@ -32,8 +32,8 @@
     <item quantity="other">%d сек.</item>
   </plurals>
   <plurals name="call">
-    <item quantity="one">%d звонок</item>
-    <item quantity="few">%d звонка</item>
-    <item quantity="other">%d звонков</item>
+    <item quantity="one">%d вызов</item>
+    <item quantity="few">%d вызова</item>
+    <item quantity="other">%d вызовов</item>
   </plurals>
 </resources>

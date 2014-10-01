@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.internal.telephony.ITelephony;
+import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.msim.ITelephonyMSim;
 import com.android.internal.telephony.TelephonyCapabilities;
 import com.android.internal.telephony.TelephonyIntents;
@@ -65,6 +66,7 @@ public class SpecialCharSequenceMgr {
 
     private static final String MMI_IMEI_DISPLAY = "*#06#";
     private static final String MMI_REGULATORY_INFO_DISPLAY = "*#07#";
+    private static final String PRL_VERSION_DISPLAY = "*#0000#";
 
     /**
      * Remembers the previous {@link QueryHandler} and cancel the operation when needed, to
@@ -101,7 +103,8 @@ public class SpecialCharSequenceMgr {
         //get rid of the separators so that the string gets parsed correctly
         String dialString = PhoneNumberUtils.stripSeparators(input);
 
-        if (handleIMEIDisplay(context, dialString, useSystemWindow)
+        if (handlePRLVersion(context, dialString)
+                || handleIMEIDisplay(context, dialString, useSystemWindow)
                 || handleRegulatoryInfoDisplay(context, dialString)
                 || handlePinEntry(context, dialString)
                 || handleAdnEntry(context, dialString, textField)
@@ -109,6 +112,20 @@ public class SpecialCharSequenceMgr {
             return true;
         }
 
+        return false;
+    }
+
+    static private boolean handlePRLVersion(Context context, String input) {
+        if (input.equals(PRL_VERSION_DISPLAY)) {
+            try {
+                Intent intent = new Intent("android.intent.action.ENGINEER_MODE_DEVICEINFO");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                return true;
+            } catch (ActivityNotFoundException e) {
+                Log.d(TAG, "no activity to handle showing device info");
+            }
+        }
         return false;
     }
 
@@ -270,6 +287,9 @@ public class SpecialCharSequenceMgr {
 
     static boolean handleIMEIDisplay(Context context, String input, boolean useSystemWindow) {
         if (input.equals(MMI_IMEI_DISPLAY)) {
+            if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+                return handleMSimIMEIDisplay(context);
+            }
             int phoneType;
             if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
                 int subscription = MSimTelephonyManager.getDefault().
@@ -292,6 +312,32 @@ public class SpecialCharSequenceMgr {
         }
 
         return false;
+    }
+
+    static boolean handleMSimIMEIDisplay(Context context) {
+        StringBuffer deviceIds = new StringBuffer();
+        for (int i = 0; i < MSimTelephonyManager.getDefault().getPhoneCount(); i++) {
+            if (i != 0) {
+                deviceIds.append("\n");
+            }
+            int phoneType = MSimTelephonyManager.getDefault().getCurrentPhoneType(i);
+            if (phoneType != TelephonyManager.PHONE_TYPE_GSM
+                    && phoneType != TelephonyManager.PHONE_TYPE_CDMA) {
+                return false;
+            }
+            deviceIds.append(context
+                    .getString(PhoneConstants.PHONE_TYPE_CDMA == phoneType ? R.string.meid
+                            : R.string.imei)
+                    + " ");
+            deviceIds.append(MSimTelephonyManager.getDefault().getDeviceId(i));
+        }
+        AlertDialog alert = new AlertDialog.Builder(context)
+                .setTitle(R.string.msim_ime_dialog_title)
+                .setMessage(deviceIds.toString())
+                .setPositiveButton(android.R.string.ok, null)
+                .setCancelable(false)
+                .show();
+        return true;
     }
 
     private static boolean handleRegulatoryInfoDisplay(Context context, String input) {

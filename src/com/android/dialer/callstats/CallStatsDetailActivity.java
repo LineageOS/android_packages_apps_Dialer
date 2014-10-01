@@ -116,7 +116,9 @@ public class CallStatsDetailActivity extends Activity {
         mMissedCount = (TextView) findViewById(R.id.missed_count);
         mPieChart = (PieChartView) findViewById(R.id.pie_chart);
 
-        configureActionBar();
+        findViewById(R.id.voicemail_container).setVisibility(View.GONE);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent launchIntent = getIntent();
         mData = (CallStatsDetails) launchIntent.getParcelableExtra(EXTRA_DETAILS);
 
@@ -151,7 +153,8 @@ public class CallStatsDetailActivity extends Activity {
 
         // Set the details header, based on the first phone call.
         mCallStatsDetailHelper.setCallStatsDetailHeader(mHeaderTextView, mData);
-        mCallDetailHeader.updateViews(mNumber, mData.numberPresentation, mData);
+        // TODO: can we pass subscription from here?
+        mCallDetailHeader.updateViews(mNumber, mData.numberPresentation, mData, -1);
 
         final CharSequence displayNumber =
             mPhoneNumberDisplayHelper.getDisplayNumber(
@@ -280,14 +283,6 @@ public class CallStatsDetailActivity extends Activity {
 
     public void onMenuAddToBlacklist(MenuItem menuItem) {
         mContactInfoHelper.addNumberToBlacklist(mNumber);
-    }
-
-    private void configureActionBar() {
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP
-                    | ActionBar.DISPLAY_SHOW_HOME);
-        }
     }
 
     private void onHomeSelected() {

@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Rincian statistik panggilan</string>
-  <string name="call_stats">Statistik panggilan</string>
-  <string name="call_stats_refresh">Refresh</string>
-  <string name="activity_title_call_stats">Statistik panggilan</string>
   <string name="call_stats_nav_all">Semua</string>
   <string name="call_stats_nav_incoming">Masuk</string>
   <string name="call_stats_nav_outgoing">Keluar</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Putar rekaman</string>
   <string name="stop_call_playback">Hentikan</string>
   <string name="call_playback_error_message">Gagal untuk memutar rekaman</string>
+  <string name="calllog_search_hint">Cari log panggilan</string>
+  <string name="video_call">Panggilan video</string>
+  <string name="video_call_settings">Pengaturan panggilan video</string>
+  <string name="description_videocall">Panggilan video <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Pengaturan panggilan cepat</string>
+  <string name="speed_dial_not_set">(tidak ditetapkan)</string>
+  <string name="speed_dial_replace">Ganti</string>
+  <string name="speed_dial_delete">Hapus</string>
+  <string name="speed_dial_unassigned_dialog_title">Tombol belum ditetapkan</string>
+  <string name="speed_dial_unassigned_dialog_message">Tidak ada tindakan panggilan cepat ditugaskan untuk tombol angka \'<xliff:g id="angka">%s</xliff:g>\'. Apakah Anda ingin menentukan sebuah tindakan sekarang?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Untuk menggunakan panggilan cepat, pertama matikan mode Pesawat."</string>
+  <string name="msim_ime_dialog_title">Identifikasi perangkat</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Semua SIM</string>
+  <string name="yes">Ya</string>
+  <string name="no">Tidak</string>
+  <string name="call_duration_active">Durasi aktif:</string>
+  <string name="call_duration_call_out">Durasi panggilan:</string>
+  <string name="call_log_all_calls_header">Semua panggilan</string>
 </resources>

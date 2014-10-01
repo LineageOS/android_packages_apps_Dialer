@@ -108,13 +108,13 @@
   <string name="type_incoming">په‌یوه‌ندی هاتوو</string>
   <string name="type_outgoing">په‌یوه‌ندی ڕۆشتوو</string>
   <string name="type_missed">په‌یوه‌ندی وه‌ڵامنه‌دراوه‌</string>
-  <string name="type_voicemail">دەنگەنامە</string>
+  <string name="type_voicemail">پۆستی دەنگی</string>
   <string name="actionIncomingCall">په‌یوه‌ندی هاتوو</string>
   <string name="description_call_log_play_button">لێدانی ده‌نگه‌نامه‌</string>
   <string name="description_call_log_incoming_call">په‌یوه‌ندی هاتوو</string>
   <string name="description_call_log_outgoing_call">په‌یوه‌ندی ڕۆشتوو</string>
   <string name="description_call_log_missed_call">په‌یوه‌ندی وه‌ڵامنه‌دراوه‌</string>
-  <string name="description_call_log_voicemail">دەنگەنامە</string>
+  <string name="description_call_log_voicemail">پۆستی دەنگی</string>
   <string name="description_add_contact">زیادکردن بۆ پەیوەندەکان</string>
   <string name="description_view_contact">بینینی په‌یوه‌ندی <xliff:g id="name">%1$s</xliff:g></string>
   <string name="description_call">په‌یوه‌ندی <xliff:g id="name">%1$s</xliff:g></string>
@@ -134,7 +134,7 @@
   <string name="description_start_voice_search">ده‌ستپێکردن ده‌نگه‌ گه‌ڕان</string>
   <string name="menu_callNumber">په‌یوه‌ندی  <xliff:g id="number">%s</xliff:g></string>
   <string name="unknown">نەناسراو</string>
-  <string name="voicemail">دەنگەنامە</string>
+  <string name="voicemail">پۆستی دەنگی</string>
   <string name="private_num">ژمارەی تایبەتی</string>
   <string name="payphone">کڕینی مۆبایل</string>
   <string name="dialerKeyboardHintText">به‌کارهێنانی ته‌خته‌کلیل بۆ لێدانی ژماره‌</string>
@@ -151,7 +151,7 @@
   <string name="add_contact_not_available">دوباره‌کارکردنه‌وه‌ی به‌رنامه‌ی خه‌ڵک بۆ ئه‌م خزمه‌تگوزارییه‌.</string>
   <string name="voice_search_not_available">گه‌ڕانی ده‌نگی ئاماده‌نییه‌.</string>
   <string name="dialer_hint_find_contact">ناوێک یان ژماره‌یه‌ک بنووسه‌</string>
-  <string name="call_log_all_title">هەموو</string>
+  <string name="call_log_all_title">گشت</string>
   <string name="call_log_missed_title">وەڵام نەدراوه‌</string>
   <string name="call_log_activity_title_font_family">sans-serif-light</string>
   <string name="show_all_contacts_title_font_family">sans-serif-light</string>

@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">الإحصائيات</string>
   <string name="callStatsDetailTitle">اإحصائيات تفاصيل الإتصال</string>
-  <string name="call_stats">إحصاءات مكالمة</string>
-  <string name="call_stats_refresh">تحديث</string>
-  <string name="activity_title_call_stats">إحصاءات المكالمات</string>
   <string name="call_stats_nav_all">الكل</string>
   <string name="call_stats_nav_incoming">الوارد</string>
   <string name="call_stats_nav_outgoing">الفائتة</string>

@@ -18,9 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Στατιστικά</string>
   <string name="callStatsDetailTitle">Λεπτομέρειες στατιστικών κλήσεων</string>
-  <string name="call_stats">Στατιστικά κλήσεων</string>
-  <string name="call_stats_refresh">Ανανέωση</string>
-  <string name="activity_title_call_stats">Στατιστικά κλήσεων</string>
   <string name="call_stats_nav_all">Όλες</string>
   <string name="call_stats_nav_incoming">Εισερχόμενες</string>
   <string name="call_stats_nav_outgoing">Εξερχόμενες</string>
@@ -53,4 +50,23 @@
   <string name="start_call_playback">Αναπαραγωγή καταγραφής</string>
   <string name="stop_call_playback">Διακοπή</string>
   <string name="call_playback_error_message">Αποτυχία αναπαραγωγής της καταγραφής κλήσης</string>
+  <string name="calllog_search_hint">Αναζήτηση αρχείου κλήσεων</string>
+  <string name="video_call">Βίντεο κλήση</string>
+  <string name="video_call_settings">Ρυθμίσεις κλήσεων βίντεο</string>
+  <string name="description_videocall">Βίντεο κλήση <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Ρυθμίσεις ταχείας κλήσης</string>
+  <string name="speed_dial_not_set">(δεν έχει οριστεί)</string>
+  <string name="speed_dial_replace">Αντικατάσταση</string>
+  <string name="speed_dial_delete">Διαγραφή</string>
+  <string name="speed_dial_unassigned_dialog_title">Μη εκχωρημένο πλήκτρο</string>
+  <string name="speed_dial_unassigned_dialog_message">Καμία ενέργεια ταχείας κλήσης δεν έχει εκχωρηθεί στο πλήκτρο \'<xliff:g id="number">%s</xliff:g>\'. Θέλετε να ορίσετε μια ενέργεια τώρα;</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Για να χρησιμοποιήσετε την ταχεία κλήση, πρώτα απενεργοποιήστε την λειτουργία πτήσης."</string>
+  <string name="msim_ime_dialog_title">Αναγνωριστικό συσκευής</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Όλες οι SIM</string>
+  <string name="yes">Ναί</string>
+  <string name="no">Όχι</string>
+  <string name="call_duration_active">Διάρκεια κλήσης:</string>
+  <string name="call_duration_call_out">Διάρκεια κλήσης:</string>
+  <string name="call_log_all_calls_header">Όλες οι κλήσεις</string>
 </resources>

@@ -18,8 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">統計資料</string>
   <string name="callStatsDetailTitle">通話統計詳細資料</string>
-  <string name="call_stats_refresh">重新整理</string>
-  <string name="activity_title_call_stats">通話統計</string>
   <string name="call_stats_nav_all">全部</string>
   <string name="call_stats_nav_incoming">來電</string>
   <string name="call_stats_missed_percent">未接來電：<xliff:g id="percent">%d</xliff:g>%%</string>

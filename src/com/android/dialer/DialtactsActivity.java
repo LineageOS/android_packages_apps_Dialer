@@ -32,6 +32,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -41,6 +43,7 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.provider.ContactsContract.Intents.UI;
+import android.provider.Settings;
 import android.speech.RecognizerIntent;
 import android.telephony.MSimTelephonyManager;
 import android.telephony.TelephonyManager;
@@ -91,6 +94,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+//add for CSVT
+import android.content.ServiceConnection;
+import org.codeaurora.ims.csvt.ICsvtService;
+import android.content.ComponentName;
+import android.os.IBinder;
+import android.os.SystemProperties;
+
+
 /**
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
  */
@@ -107,6 +118,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
     private static final String PREF_LAST_T9_LOCALE = "smart_dial_prefix_last_t9_locale";
+
+    public static final String PREFERRED_SIM_ICON_INDEX = "preferred_sim_icon_index";
+    public static final String[] MULTI_SIM_NAME = {
+        "perferred_name_sub1", "perferred_name_sub2"
+    };
+
 
     /** Used to open Call Setting */
     private static final String PHONE_PACKAGE = "com.android.phone";
@@ -173,9 +190,59 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private View mFragmentsSpacer;
     private View mFragmentsFrame;
 
+    private String mRegularNumber;
+
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
+
+    //add for CSVT
+
+    public static ICsvtService mCsvtService;
+
+    public static boolean isCsvtActive() {
+        boolean result = false;
+        if (mCsvtService != null) {
+            try{
+                result = mCsvtService.isActive();
+                if (DEBUG) Log.d(TAG, "mCsvtService.isActive = " + result);
+            } catch (RemoteException e) {
+                Log.e(TAG, Log.getStackTraceString(new Throwable()));
+            }
+        }
+        return result;
+    }
+
+    private boolean isVTSupported() {
+        return SystemProperties.getBoolean("persist.radio.csvt.enabled", false);
+        //return this.getResources().getBoolean(R.bool.csvt_enabled);
+    }
+
+
+    private void createCsvtService() {
+        if (isVTSupported()) {
+            try {
+                Intent intent = new Intent("org.codeaurora.ims.csvt.ICsvtService");
+                boolean bound = bindService(intent,
+                        mCsvtServiceConnection, Context.BIND_AUTO_CREATE);
+                if (DEBUG) Log.d(TAG, "ICsvtService bound request : " + bound);
+            } catch (NoClassDefFoundError e) {
+                Log.e(TAG, "Ignoring ICsvtService class not found exception " + e);
+            }
+        }
+    }
+
+    private static ServiceConnection mCsvtServiceConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mCsvtService = ICsvtService.Stub.asInterface(service);
+            if (DEBUG) Log.d(TAG,"Csvt Service Connected: " + mCsvtService);
+        }
+
+        public void onServiceDisconnected(ComponentName arg0) {
+            if (DEBUG) Log.d(TAG,"Csvt Service onServiceDisconnected");
+        }
+    };
+    //add for CSVT
 
     /**
      * True if the dialpad is only temporarily showing due to being in call
@@ -298,6 +365,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     if (dialpadSearch && mSmartDialSearchFragment != null) {
                             mSmartDialSearchFragment.setQueryString(newText, false);
                             mSmartDialSearchFragment.setDialpadQueryString(s.toString());
+                            mSmartDialSearchFragment.setRegularQueryString(mRegularNumber);
                     } else if (mRegularSearchFragment != null) {
                         mRegularSearchFragment.setQueryString(newText, false);
                     }
@@ -379,6 +447,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     protected void onResume() {
         super.onResume();
+        //when already in vt call screen, click dialer should go to video call screen also.
+        Intent mIntent = new Intent("restore_video_call");
+        sendBroadcast(mIntent);
         if (mFirstLaunch) {
             displayFragment(getIntent());
         } else if (!phoneIsInUse() && mInCallDialpadUp) {
@@ -502,6 +573,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             case R.id.overflow_menu: {
                 if (isDialpadShowing()) {
                     mDialpadOverflowMenu.show();
+                    mDialpadFragment.setupMenuItems(mDialpadOverflowMenu.getMenu());
                 } else {
                     mOverflowMenu.show();
                 }
@@ -1032,6 +1104,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onDialpadQueryChanged(String query) {
         final String normalizedQuery = query;
+        mRegularNumber = query;
         if (!TextUtils.equals(mSearchView.getText(), normalizedQuery)) {
             if (DEBUG) {
                 Log.d(TAG, "onDialpadQueryChanged - new query: " + query);
@@ -1066,6 +1139,51 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void setDialButtonContainerVisible(boolean visible) {
         mFakeActionBar.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    /**
+     * @return the SIM name for the special subscription.
+     */
+    public static String getMultiSimName(Context context, int subscription) {
+        if (context == null) {
+            // If the context is null, return null.
+            return null;
+        }
+
+        String name = Settings.System.getString(context.getContentResolver(),
+                MULTI_SIM_NAME[subscription]);
+        if (TextUtils.isEmpty(name)) {
+            return context.getString(R.string.multi_sim_slot_name, subscription + 1);
+        }
+        return name;
+    }
+
+    /**
+     * @return the SIM icon for the special subscription.
+     */
+    public static Drawable getMultiSimIcon(Context context, int subscription) {
+        if (context == null) {
+            // If the context is null, return 0 as no resource found.
+            return null;
+        }
+
+        TypedArray icons = context.getResources().obtainTypedArray(
+                R.array.sim_icons);
+        String simIconIndex = Settings.System.getString(context.getContentResolver(),
+                PREFERRED_SIM_ICON_INDEX);
+        if (TextUtils.isEmpty(simIconIndex)) {
+            return icons.getDrawable(subscription);
+        }
+        return getPreferredIcon(icons, simIconIndex, subscription);
+    }
+
+    public static Drawable getPreferredIcon(TypedArray icons, String iconIndex, int subscription) {
+        String[] indexs = iconIndex.split(",");
+
+        if (subscription >= indexs.length) {
+            return null;
+        }
+        return icons.getDrawable(Integer.parseInt(indexs[subscription]));
     }
 
     private boolean phoneIsInUse() {

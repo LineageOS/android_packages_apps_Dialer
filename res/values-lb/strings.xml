@@ -51,6 +51,9 @@
   <string name="description_image_button_pound">Pond</string>
   <string name="description_search_button">sichen</string>
   <string name="description_dial_button">wielen</string>
+  <string name="description_delete_button">Récktast</string>
+  <string name="action_menu_call_history_description">Urufffhistorique</string>
+  <string name="action_menu_overflow_description" msgid="2295659037509008453">Méi Optiounen</string>
   <string name="menu_copy">Kopéieren</string>
   <string name="call_settings">Astellungen</string>
   <string name="menu_newContact">Neie Kontakt</string>
@@ -63,6 +66,7 @@
   <string name="imei">IMEI</string>
   <string name="meid">MEID</string>
   <string name="call_log_all_title">All</string>
+  <string name="show_all_contacts">All d\'Kontakter uweisen</string>
   <string name="call_log_activity_title">Historique</string>
   <string name="dialpad_0_number">0</string>
   <string name="dialpad_1_number">1</string>
