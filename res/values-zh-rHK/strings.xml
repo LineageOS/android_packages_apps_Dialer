@@ -182,7 +182,6 @@
     <string name="call_log_action_report" msgid="561229827189128879">"報告"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"今天"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"昨天"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"上星期"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"較早"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"通話清單"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"開啟揚聲器。"</string>
