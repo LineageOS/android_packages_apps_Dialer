@@ -182,7 +182,6 @@
     <string name="call_log_action_report" msgid="561229827189128879">"SEGNALA"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Oggi"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Ieri"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"Settimana scorsa"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Meno recenti"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"Elenco chiamate"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"Attiva altoparlante."</string>
