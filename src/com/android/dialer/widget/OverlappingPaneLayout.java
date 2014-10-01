@@ -988,7 +988,7 @@ public class OverlappingPaneLayout extends ViewGroup {
         if (DEBUG) {
             Log.d(TAG, "onStopNestedScroll");
         }
-        if (mIsInNestedScroll) {
+        if (mIsInNestedScroll && !mIsInNestedFling) {
             mDragHelper.stopNestedScroll(mSlideableView);
             mInNestedPreScrollDownwards = false;
             mInNestedPreScrollUpwards = false;
@@ -1024,7 +1024,8 @@ public class OverlappingPaneLayout extends ViewGroup {
                 }
             }
 
-            if (mDragHelper.getVelocityMagnitude() > 0
+            if (state == ViewDragHelper.STATE_IDLE
+                    && mDragHelper.getVelocityMagnitude() > 0
                     && (mDragHelper.getCurrentScrollY() == 0
                     || mDragHelper.getCurrentScrollY() == mIntermediateOffset)
                     && mIsInNestedFling) {
@@ -1099,6 +1100,7 @@ public class OverlappingPaneLayout extends ViewGroup {
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             if (DEBUG) {
                 Log.d(TAG, "onViewReleased: "
+                        + " mIsInNestedFling=" + mIsInNestedFling
                         + " unscrolled=" + mPanelSlideCallbacks.isScrollableChildUnscrolled()
                         + ", mInNestedPreScrollDownwards = " + mInNestedPreScrollDownwards
                         + ", mInNestedPreScrollUpwards = " + mInNestedPreScrollUpwards
