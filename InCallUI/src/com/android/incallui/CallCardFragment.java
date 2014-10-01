@@ -135,8 +135,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 R.dimen.end_call_floating_action_button_diameter);
         mFabSmallDiameter = getResources().getDimensionPixelOffset(
                 R.dimen.end_call_floating_action_button_small_diameter);
-        mIsLandscape = getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE;
     }
 
 
@@ -196,8 +194,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 getPresenter().endCallClicked();
             }
         });
-        int floatingActionButtonWidth = getResources().getDimensionPixelSize(
-                R.dimen.floating_action_button_width);
         mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
                 mFloatingActionButtonContainer, mFloatingActionButton);
 
@@ -205,7 +201,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             @Override
             public void onClick(View v) {
                 getPresenter().secondaryInfoClicked();
-                updateFabPosition();
+                updateFabPositionForSecondaryCallInfo();
             }
         });
 
@@ -454,7 +450,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             boolean canManageConference) {
 
         if (show != mSecondaryCallInfo.isShown()) {
-            updateFabPosition();
+            updateFabPositionForSecondaryCallInfo();
         }
 
         if (show) {
@@ -771,6 +767,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 }
             }
             mFloatingActionButton.setEnabled(enabled);
+            updateFabPosition();
         }
     }
 
@@ -832,12 +829,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 // Set up FAB.
                 mFloatingActionButtonContainer.setVisibility(View.GONE);
                 mFloatingActionButtonController.setScreenWidth(parent.getWidth());
-                mFloatingActionButtonController.align(
-                        mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
-                                : FloatingActionButtonController.ALIGN_MIDDLE,
-                        0 /* offsetX */,
-                        mFloatingActionButtonVerticalOffset /* offsetY */,
-                        false);
                 mCallButtonsContainer.setAlpha(0);
                 mCallStateLabel.setAlpha(0);
                 mPrimaryName.setAlpha(0);
@@ -863,7 +854,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     public void onDialpadVisiblityChange(boolean isShown) {
         mIsDialpadShowing = isShown;
+        updateFabPosition();
+    }
 
+    private void updateFabPosition() {
         int offsetY = 0;
         if (!mIsDialpadShowing) {
             offsetY = mFloatingActionButtonVerticalOffset;
@@ -892,14 +886,30 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mAnimatorSet.cancel();
         }
 
-        updateFabPosition();
+        mIsLandscape = getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
+
+        final ViewGroup parent = ((ViewGroup) mPrimaryCallCardContainer.getParent());
+        final ViewTreeObserver observer = parent.getViewTreeObserver();
+        parent.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                ViewTreeObserver viewTreeObserver = observer;
+                if (!viewTreeObserver.isAlive()) {
+                    viewTreeObserver = parent.getViewTreeObserver();
+                }
+                viewTreeObserver.removeOnGlobalLayoutListener(this);
+                mFloatingActionButtonController.setScreenWidth(parent.getWidth());
+                updateFabPosition();
+            }
+        });
     }
 
     /**
      * Adds a global layout listener to update the FAB's positioning on the next layout. This allows
      * us to position the FAB after the secondary call info's height has been calculated.
      */
-    private void updateFabPosition() {
+    private void updateFabPositionForSecondaryCallInfo() {
         mSecondaryCallInfo.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
