@@ -87,8 +87,7 @@
     <item android:id="@+id/speakerphoneItem">
         <bitmap android:src="@drawable/ic_toolbar_speaker_on"
             android:gravity="center"
-            android:tint="@color/selectable_icon_tint"
-            android:autoMirrored="true" />
+            android:tint="@color/selectable_icon_tint" />
     </item>
 
     <!-- Generic "audio mode" icon. -->
