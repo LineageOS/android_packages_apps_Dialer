@@ -21,12 +21,12 @@ import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.VelocityTrackerCompat;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.ScrollerCompat;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.Scroller;
 
 import java.util.Arrays;
 
@@ -129,7 +129,11 @@ public class ViewDragHelper {
     private int mEdgeSize;
     private int mTrackingEdges;
 
-    private ScrollerCompat mScroller;
+    // We need to use a Scroller instead of an OverScroller (b/17700698) and as a result, we need
+    // to keep track of the final scroll position ourselves in mFinalScrollY (b/17704016) whenever
+    // we programmatically scroll or fling mScroller.
+    private Scroller mScroller;
+    private int mFinalScrollY;
 
     private final Callback mCallback;
 
@@ -390,7 +394,7 @@ public class ViewDragHelper {
         mTouchSlop = vc.getScaledTouchSlop();
         mMaxVelocity = vc.getScaledMaximumFlingVelocity();
         mMinVelocity = vc.getScaledMinimumFlingVelocity();
-        mScroller = ScrollerCompat.create(context);
+        mScroller = new Scroller(context);
     }
 
     /**
@@ -590,6 +594,7 @@ public class ViewDragHelper {
 
         final int duration = computeSettleDuration(mCapturedView, dx, dy, xvel, yvel);
         mScroller.startScroll(startLeft, startTop, dx, dy, duration);
+        mFinalScrollY = startTop + dy;
 
         setDragState(STATE_SETTLING);
         return true;
@@ -694,10 +699,12 @@ public class ViewDragHelper {
                     "Callback#onViewReleased");
         }
 
+        final int yVelocity = (int) VelocityTrackerCompat
+                .getYVelocity(mVelocityTracker, mActivePointerId);
         mScroller.fling(mCapturedView.getLeft(), mCapturedView.getTop(),
                 (int) VelocityTrackerCompat.getXVelocity(mVelocityTracker, mActivePointerId),
-                (int) VelocityTrackerCompat.getYVelocity(mVelocityTracker, mActivePointerId),
-                minLeft, maxLeft, minTop, maxTop);
+                yVelocity, minLeft, maxLeft, minTop, maxTop);
+        mFinalScrollY = yVelocity < 0 ? minTop : maxTop;
 
         setDragState(STATE_SETTLING);
     }
@@ -719,8 +726,9 @@ public class ViewDragHelper {
                     "Callback#onViewReleased");
         }
         mScroller.abortAnimation();
-        mScroller.fling(mCapturedView.getLeft(), mCapturedView.getTop(), 0, yvel, minLeft, maxLeft,
-                minTop, maxTop);
+        mScroller.fling(mCapturedView.getLeft(), mCapturedView.getTop(), 0, yvel,
+                Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        mFinalScrollY = yvel < 0 ? minTop : maxTop;
 
         setDragState(STATE_SETTLING);
     }
@@ -738,10 +746,6 @@ public class ViewDragHelper {
         return finalY;
     }
 
-    public int getCurrentScrollY() {
-        return mScroller.getCurrY();
-    }
-
     /**
      * Move the captured settling view by the appropriate amount for the current time.
      * If <code>continueSettling</code> returns true, the caller should call it again
@@ -756,23 +760,23 @@ public class ViewDragHelper {
     public boolean continueSettling(boolean deferCallbacks) {
         if (mDragState == STATE_SETTLING) {
             boolean keepGoing = mScroller.computeScrollOffset();
-            final int x = mScroller.getCurrX();
-            final int y = mScroller.getCurrY();
-            final int dx = x - mCapturedView.getLeft();
+            int y = mScroller.getCurrY();
+
+            // Since Scroller's getFinalY() can't be properly set (b/17704016), we need to
+            // perform clamping of mScroller.getCurrY() here.
+            if (y - mCapturedView.getTop() > 0) {
+                y = Math.min(y, mFinalScrollY);
+            } else {
+                y = Math.max(y, mFinalScrollY);
+            }
             final int dy = y - mCapturedView.getTop();
 
-            if (dx != 0) {
-                mCapturedView.offsetLeftAndRight(dx);
-            }
             if (dy != 0) {
                 mCapturedView.offsetTopAndBottom(dy);
+                mCallback.onViewPositionChanged(mCapturedView, 0, y, 0, dy);
             }
 
-            if (dx != 0 || dy != 0) {
-                mCallback.onViewPositionChanged(mCapturedView, x, y, dx, dy);
-            }
-
-            if (keepGoing && x == mScroller.getFinalX() && y == mScroller.getFinalY()) {
+            if (keepGoing && y == mFinalScrollY) {
                 // Close enough. The interpolator/scroller might think we're still moving
                 // but the user sure doesn't.
                 mScroller.abortAnimation();
