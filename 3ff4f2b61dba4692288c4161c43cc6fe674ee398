@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1b2928_d9196c7b",
+        "filename": "src/com/android/dialer/lookup/paginebianche/PagineBiancheApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2014-10-02T07:24:33Z",
+      "side": 1,
+      "message": "Please set the Copyright for The CyanogenMod Project.\n\nPer our Contributor License Agreement: http://review.cyanogenmod.org/static/cla_individual.html",
+      "revId": "3ff4f2b61dba4692288c4161c43cc6fe674ee398",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1b2928_59243cae",
+        "filename": "src/com/android/dialer/lookup/paginebianche/PagineBiancheReverseLookup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2014-10-02T07:24:33Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "3ff4f2b61dba4692288c4161c43cc6fe674ee398",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
