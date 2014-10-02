@@ -25,12 +25,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.util.Log;
-import android.util.Pair;
-
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
-import android.provider.ContactsContract.CommonDataKinds.Website;
+import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -54,9 +50,8 @@ public class YellowPagesReverseLookup extends ReverseLookup {
      *
      * @param context The application context
      * @param uri The image URI
-     * @param data Extra data (a authentication token, perhaps)
      */
-    public Bitmap lookupImage(Context context, Uri uri, Object data) {
+    public Bitmap lookupImage(Context context, Uri uri) {
         if (uri == null) {
             throw new NullPointerException("URI is null");
         }
@@ -107,16 +102,10 @@ public class YellowPagesReverseLookup extends ReverseLookup {
      * @param formattedNumber The formatted phone number
      * @return The phone number info object
      */
-    public Pair<ContactInfo, Object> lookupNumber(Context context,
-            String normalizedNumber, String formattedNumber) {
+    public ContactInfo lookupNumber(Context context,
+            String normalizedNumber, String formattedNumber) throws IOException {
         YellowPagesApi ypa = new YellowPagesApi(context, normalizedNumber);
-        YellowPagesApi.ContactInfo info = null;
-
-        try {
-            info = ypa.getContactInfo();
-        } catch (IOException e) {
-            return null;
-        }
+        YellowPagesApi.ContactInfo info = ypa.getContactInfo();
 
         if (info.name == null) {
             return null;
@@ -126,14 +115,9 @@ public class YellowPagesReverseLookup extends ReverseLookup {
                 ContactBuilder.REVERSE_LOOKUP,
                 normalizedNumber, formattedNumber);
 
-        ContactBuilder.Name n = new ContactBuilder.Name();
-        n.displayName = info.name;
-        builder.setName(n);
-
-        ContactBuilder.PhoneNumber pn = new ContactBuilder.PhoneNumber();
-        pn.number = info.formattedNumber;
-        pn.type = Phone.TYPE_MAIN;
-        builder.addPhoneNumber(pn);
+        builder.setName(ContactBuilder.Name.createDisplayName(info.name));
+        builder.addPhoneNumber(ContactBuilder.PhoneNumber.createMainNumber(info.formattedNumber));
+        builder.addWebsite(ContactBuilder.WebsiteUrl.createProfile(info.website));
 
         if (info.address != null) {
             ContactBuilder.Address a = new ContactBuilder.Address();
@@ -142,17 +126,12 @@ public class YellowPagesReverseLookup extends ReverseLookup {
             builder.addAddress(a);
         }
 
-        ContactBuilder.WebsiteUrl w = new ContactBuilder.WebsiteUrl();
-        w.url = info.website;
-        w.type = Website.TYPE_PROFILE;
-        builder.addWebsite(w);
-
         if (info.photoUrl != null) {
             builder.setPhotoUri(info.photoUrl);
         } else {
             builder.setPhotoUri(ContactBuilder.PHOTO_URI_BUSINESS);
         }
 
-        return Pair.create(builder.build(), null);
+        return builder.build();
     }
 }

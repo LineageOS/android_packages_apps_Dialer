@@ -21,7 +21,6 @@ import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
-import android.util.Pair;
 
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.lookup.ContactBuilder;
@@ -43,21 +42,15 @@ public class PagineBiancheReverseLookup extends ReverseLookup {
      * @param formattedNumber The formatted phone number
      * @return The phone number info object
      */
-    public Pair<ContactInfo, Object> lookupNumber(Context context,
-            String normalizedNumber, String formattedNumber) {
-        PagineBiancheApi.ContactInfo info = null;
-
+    public ContactInfo lookupNumber(Context context,
+            String normalizedNumber, String formattedNumber) throws IOException {
         if (normalizedNumber.startsWith("+") && !normalizedNumber.startsWith("+39")) {
             // PagineBianche only supports Italian numbers
             return null;
         }
 
-        try {
-            info = PagineBiancheApi.reverseLookup(context, normalizedNumber.replace("+39",""));
-        } catch (IOException e) {
-            return null;
-        }
-
+        PagineBiancheApi.ContactInfo info =
+                PagineBiancheApi.reverseLookup(context, normalizedNumber.replace("+39",""));
         if (info == null) {
             return null;
         }
@@ -66,24 +59,12 @@ public class PagineBiancheReverseLookup extends ReverseLookup {
                 ContactBuilder.REVERSE_LOOKUP,
                 normalizedNumber, formattedNumber);
 
-        ContactBuilder.Name n = new ContactBuilder.Name();
-        n.displayName = info.name;
-        builder.setName(n);
-
-        ContactBuilder.PhoneNumber pn = new ContactBuilder.PhoneNumber();
-        pn.number = info.formattedNumber;
-        pn.type = Phone.TYPE_MAIN;
-        builder.addPhoneNumber(pn);
-
+        builder.setName(ContactBuilder.Name.createDisplayName(info.name));
+        builder.addPhoneNumber(ContactBuilder.PhoneNumber.createMainNumber(info.formattedNumber));
         if (info.address != null) {
-            ContactBuilder.Address a = new ContactBuilder.Address();
-            a.formattedAddress = info.address;
-            a.type = StructuredPostal.TYPE_HOME;
-            builder.addAddress(a);
+            builder.addAddress(ContactBuilder.Address.createFormattedHome(info.address));
         }
 
-        // No website information because PagineBianche does not provide any
-
-        return Pair.create(builder.build(), null);
+        return builder.build();
     }
 }

@@ -27,8 +27,8 @@ import android.os.Looper;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.util.Pair;
 
+import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 
@@ -91,26 +91,23 @@ public class ReverseLookupThread extends Thread {
         }
 
         // Lookup contact if it's not cached
-        Object data = null;
         if (info == null) {
-            Pair<ContactInfo, Object> results =
-                    ReverseLookup.getInstance(mContext).lookupNumber(
-                            mContext, mNormalizedNumber, mFormattedNumber);
+            try {
+                info = ReverseLookup.getInstance(mContext).lookupNumber(mContext,
+                        mNormalizedNumber, mFormattedNumber);
+            } catch (IOException e) {
+                // ignored, we'll return below
+            }
 
-            if (results == null) {
+            if (info == null) {
                 return;
             }
 
-            info = results.first;
-            data = results.second;
-
             // Put in cache only if the contact is valid
-            if (info != null) {
-                if (info.equals(ContactInfo.EMPTY)) {
-                    return;
-                } else if (info.name != null) {
-                    LookupCache.cacheContact(mContext, info);
-                }
+            if (info.equals(ContactInfo.EMPTY)) {
+                return;
+            } else if (info.name != null) {
+                LookupCache.cacheContact(mContext, info);
             }
         }
 
@@ -126,7 +123,7 @@ public class ReverseLookupThread extends Thread {
         if (info.photoUri != null) {
             if (!LookupCache.hasCachedImage(mContext, mNormalizedNumber)) {
                 Bitmap bmp = ReverseLookup.getInstance(mContext).lookupImage(
-                        mContext, info.photoUri, data);
+                        mContext, info.photoUri);
 
                 if (bmp != null) {
                     LookupCache.cacheImage(mContext, mNormalizedNumber, bmp);
