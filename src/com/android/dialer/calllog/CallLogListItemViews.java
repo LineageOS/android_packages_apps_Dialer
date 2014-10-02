@@ -108,9 +108,10 @@ public final class CallLogListItemViews {
     public boolean reported;
 
     /**
-     * Whether or not the contact info came from a source other than the android contacts provider.
+     * Whether or not the contact info can be marked as invalid from the source where
+     * it was obtained.
      */
-    public boolean isExternal;
+    public boolean canBeReportedAsInvalid;
 
     private CallLogListItemViews(QuickContactBadge quickContactView, View primaryActionView,
             PhoneCallDetailsViews phoneCallDetailsViews, View callLogEntryView,
