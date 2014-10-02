@@ -84,7 +84,7 @@ public class ContactBuilder {
     }
 
     public void addAddress(Address address) {
-        if (DEBUG) Log.d(TAG, "Adding address: " + address);
+        if (DEBUG) Log.d(TAG, "Adding address");
         if (address != null) {
             mAddresses.add(address);
         }
@@ -95,7 +95,7 @@ public class ContactBuilder {
     }
 
     public void addPhoneNumber(PhoneNumber phoneNumber) {
-        if (DEBUG) Log.d(TAG, "Adding phone number: " + phoneNumber);
+        if (DEBUG) Log.d(TAG, "Adding phone number");
         if (phoneNumber != null) {
             mPhoneNumbers.add(phoneNumber);
         }
@@ -107,7 +107,7 @@ public class ContactBuilder {
     }
 
     public void addWebsite(WebsiteUrl website) {
-        if (DEBUG) Log.d(TAG, "Adding website: " + website);
+        if (DEBUG) Log.d(TAG, "Adding website");
         if (website != null) {
             mWebsites.add(website);
         }
@@ -118,7 +118,7 @@ public class ContactBuilder {
     }
 
     public void setName(Name name) {
-        if (DEBUG) Log.d(TAG, "Setting name: " + name);
+        if (DEBUG) Log.d(TAG, "Setting name");
         if (name != null) {
             mName = name;
         }
@@ -133,7 +133,7 @@ public class ContactBuilder {
     }
 
     public void setPhotoUri(Uri photoUri) {
-        if (DEBUG) Log.d(TAG, "Setting photo URI: " + photoUri);
+        if (DEBUG) Log.d(TAG, "Setting photo URI");
         mPhotoUri = photoUri;
     }
 
@@ -142,7 +142,7 @@ public class ContactBuilder {
     }
 
     public void setIsBusiness(boolean isBusiness) {
-        if (DEBUG) Log.d(TAG, "Setting isBusiness to: " + isBusiness);
+        if (DEBUG) Log.d(TAG, "Setting isBusiness to " + isBusiness);
         mIsBusiness = isBusiness;
     }
 

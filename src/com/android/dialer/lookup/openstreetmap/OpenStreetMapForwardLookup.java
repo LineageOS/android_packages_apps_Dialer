@@ -88,8 +88,6 @@ public class OpenStreetMapForwardLookup extends ForwardLookup {
         String request = String.format(Locale.ENGLISH, LOOKUP_QUERY, regex,
                 RADIUS, lastLocation.getLatitude(), lastLocation.getLongitude());
 
-        Log.v(TAG, "POST'ing: " + request);
-
         try {
             String httpResponse = httpPostRequest(request);
 
