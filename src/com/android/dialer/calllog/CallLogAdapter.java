@@ -758,7 +758,11 @@ public class CallLogAdapter extends GroupingListAdapter
         final PhoneCallDetails details;
 
         views.reported = info.isBadData;
-        views.isExternal = mContactInfoHelper.isExternal(info.sourceType);
+
+        // The entry can only be reported as invalid if it has a valid ID and the source of the
+        // entry supports marking entries as invalid.
+        views.canBeReportedAsInvalid = mContactInfoHelper.canReportAsInvalid(info.sourceType,
+                info.objectId);
 
         // Restore expansion state of the row on rebind.  Inflate the actions ViewStub if required,
         // and set its visibility state accordingly.
@@ -1023,7 +1027,7 @@ public class CallLogAdapter extends GroupingListAdapter
                             views.rowId, views.callIds, null)
             );
 
-            if (views.isExternal && !views.reported) {
+            if (views.canBeReportedAsInvalid && !views.reported) {
                 views.reportButtonView.setVisibility(View.VISIBLE);
             } else {
                 views.reportButtonView.setVisibility(View.GONE);
