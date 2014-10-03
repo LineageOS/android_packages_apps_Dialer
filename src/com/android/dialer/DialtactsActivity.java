@@ -135,7 +135,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
 
-    private FrameLayout parentLayout;
+    private FrameLayout mParentLayout;
 
     /**
      * Fragment containing the dialpad that slides into view
@@ -421,8 +421,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mSlideOut.setAnimationListener(mSlideOutListener);
 
-        parentLayout = (FrameLayout) findViewById(R.id.dialtacts_mainlayout);
-        parentLayout.setOnDragListener(new LayoutOnDragListener());
+        mParentLayout = (FrameLayout) findViewById(R.id.dialtacts_mainlayout);
+        mParentLayout.setOnDragListener(new LayoutOnDragListener());
         floatingActionButtonContainer.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
@@ -433,7 +433,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                             return;
                         }
                         observer.removeOnGlobalLayoutListener(this);
-                        int screenWidth = parentLayout.getWidth();
+                        int screenWidth = mParentLayout.getWidth();
                         mFloatingActionButtonController.setScreenWidth(screenWidth);
                         updateFloatingActionButtonControllerAlignment(false /* animate */);
                     }
@@ -933,7 +933,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             hideDialpadFragment(true, false);
         } else if (isInSearchUi()) {
             exitSearchUi();
-            DialerUtils.hideInputMethod(parentLayout);
+            DialerUtils.hideInputMethod(mParentLayout);
         } else {
             super.onBackPressed();
         }
@@ -945,7 +945,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean maybeExitSearchUi() {
         if (isInSearchUi() && TextUtils.isEmpty(mSearchQuery)) {
             exitSearchUi();
-            DialerUtils.hideInputMethod(parentLayout);
+            DialerUtils.hideInputMethod(mParentLayout);
             return true;
         }
         return false;
@@ -982,7 +982,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onListFragmentScrollStateChange(int scrollState) {
         if (scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
             hideDialpadFragment(true, false);
-            DialerUtils.hideInputMethod(getCurrentFocus());
+            DialerUtils.hideInputMethod(mParentLayout);
         }
     }
 
