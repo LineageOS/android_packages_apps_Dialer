@@ -167,6 +167,12 @@ public final class Call {
                 public void onCallDestroyed(android.telecom.Call call) {
                     call.removeListener(mTelecommCallListener);
                 }
+
+                @Override
+                public void onConferenceableCallsChanged(android.telecom.Call call,
+                        List<android.telecom.Call> conferenceableCalls) {
+                    update();
+                }
             };
 
     private final android.telecom.Call mTelecommCall;
