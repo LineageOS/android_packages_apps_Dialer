@@ -131,8 +131,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     public void fetchCalls(int callType, long newerThan, int sub) {
         cancelFetch();
-        int requestId = newCallsRequest();
-        fetchCalls(QUERY_CALLLOG_TOKEN, requestId, callType, false /* newOnly */, newerThan, sub);
+        fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, newerThan, sub);
     }
 
     public void fetchCalls(int callType) {
@@ -141,15 +140,14 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     public void fetchCalls(String filter) {
         cancelFetch();
-        int requestId = newCallsRequest();
-        fetchCalls(QUERY_CALLLOG_TOKEN ,requestId,filter);
+        fetchCalls(QUERY_CALLLOG_TOKEN, filter);
     }
 
-    public void fetchCalls(int token,int requestId,String filter) {
+    public void fetchCalls(int token, String filter) {
         String selection = "(" + Calls.NUMBER + " like '%" + filter
                 + "%'  or  " + Calls.CACHED_NAME + " like '%" + filter + "%' )";
 
-        startQuery(token, requestId, Calls.CONTENT_URI_WITH_VOICEMAIL,
+        startQuery(token, null, Calls.CONTENT_URI_WITH_VOICEMAIL,
                 CallLogQuery._PROJECTION, selection, null,
                 Calls.DEFAULT_SORT_ORDER);
     }
@@ -200,7 +198,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
                 Calls.DEFAULT_SORT_ORDER);
     }
 
-    private void fetchCalls(int token, int requestId, int callType, boolean newOnly,
+    private void fetchCalls(int token, int callType, boolean newOnly,
             long newerThan, int slotId) {
         // We need to check for NULL explicitly otherwise entries with where READ is NULL
         // may not match either the query or its negation.
@@ -247,7 +245,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         Uri uri = Calls.CONTENT_URI_WITH_VOICEMAIL.buildUpon()
                 .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
                 .build();
-        startQuery(token, requestId, uri,
+        startQuery(token, null, uri,
                 CallLogQuery._PROJECTION, selection, selectionArgs.toArray(EMPTY_STRING_ARRAY),
                 Calls.DEFAULT_SORT_ORDER);
     }

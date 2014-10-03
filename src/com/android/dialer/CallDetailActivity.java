@@ -16,6 +16,7 @@
 
 package com.android.dialer;
 
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
