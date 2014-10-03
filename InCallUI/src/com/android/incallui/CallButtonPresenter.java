@@ -27,14 +27,18 @@ import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
+import com.android.incallui.InCallPresenter.InCallDetailsListener;
 
 import android.telephony.PhoneNumberUtils;
+
+import java.util.Objects;
 
 /**
  * Logic for call buttons.
  */
 public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButtonUi>
-        implements InCallStateListener, AudioModeListener, IncomingCallListener {
+        implements InCallStateListener, AudioModeListener, IncomingCallListener,
+        InCallDetailsListener {
 
     private Call mCall;
     private boolean mAutomaticallyMuted = false;
@@ -52,6 +56,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // register for call state changes last
         InCallPresenter.getInstance().addListener(this);
         InCallPresenter.getInstance().addIncomingCallListener(this);
+        InCallPresenter.getInstance().addDetailsListener(this);
     }
 
     @Override
@@ -61,6 +66,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         InCallPresenter.getInstance().removeListener(this);
         AudioModeProvider.getInstance().removeListener(this);
         InCallPresenter.getInstance().removeIncomingCallListener(this);
+        InCallPresenter.getInstance().removeDetailsListener(this);
     }
 
     @Override
@@ -91,6 +97,25 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             mCall = null;
         }
         updateUi(newState, mCall);
+    }
+
+    /**
+     * Updates the user interface in response to a change in the details of a call.
+     * Currently handles changes to the call buttons in response to a change in the details for a
+     * call.  This is important to ensure changes to the active call are reflected in the available
+     * buttons.
+     *
+     * @param call The active call.
+     * @param details The call details.
+     */
+    @Override
+    public void onDetailsChanged(Call call, android.telecom.Call.Details details) {
+        // If the details change is not for the currently active call no update is required.
+        if (!Objects.equals(call, mCall)) {
+            return;
+        }
+
+        updateCallButtons(call, getUi().getContext());
     }
 
     @Override
@@ -295,13 +320,23 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
-        if (call.isVideoCall(ui.getContext())) {
+        updateCallButtons(call, ui.getContext());
+
+        ui.enableMute(call.can(PhoneCapabilities.MUTE));
+    }
+
+    /**
+     * Updates the buttons applicable for the UI.
+     *
+     * @param call The active call.
+     * @param context The context.
+     */
+    private void updateCallButtons(Call call, Context context) {
+        if (call.isVideoCall(context)) {
             updateVideoCallButtons();
         } else {
             updateVoiceCallButtons(call);
         }
-
-        ui.enableMute(call.can(PhoneCapabilities.MUTE));
     }
 
     private void updateVideoCallButtons() {
