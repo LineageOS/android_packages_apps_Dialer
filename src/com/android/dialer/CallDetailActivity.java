@@ -32,6 +32,8 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccount;
 import android.telephony.TelephonyManager;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -134,6 +136,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     private LinearLayout mVoicemailHeader;
 
     private Uri mVoicemailUri;
+    private BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
 
     /** Whether we should show "edit number before call" in the options menu. */
     private boolean mHasEditNumberBeforeCallOption;
@@ -425,24 +428,25 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
 
                 final CharSequence callLocationOrType = getNumberTypeOrLocation(firstDetails);
 
-                final CharSequence displayNumber =
-                        mPhoneNumberHelper.getDisplayNumber(
-                                firstDetails.number,
-                                firstDetails.numberPresentation,
-                                firstDetails.formattedNumber);
+                final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(
+                        firstDetails.number,
+                        firstDetails.numberPresentation,
+                        firstDetails.formattedNumber);
+                final String displayNumberStr = mBidiFormatter.unicodeWrap(
+                        displayNumber.toString(), TextDirectionHeuristics.LTR);
+
 
                 if (!TextUtils.isEmpty(firstDetails.name)) {
                     mCallerName.setText(firstDetails.name);
-                    mCallerNumber.setText(callLocationOrType + " " + displayNumber);
+                    mCallerNumber.setText(callLocationOrType + " " + displayNumberStr);
                 } else {
-                    mCallerName.setText(displayNumber);
+                    mCallerName.setText(displayNumberStr);
                     if (!TextUtils.isEmpty(callLocationOrType)) {
                         mCallerNumber.setText(callLocationOrType);
                         mCallerNumber.setVisibility(View.VISIBLE);
                     } else {
                         mCallerNumber.setVisibility(View.GONE);
                     }
-
                 }
 
                 if (!TextUtils.isEmpty(firstDetails.accountLabel)) {
