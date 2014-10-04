@@ -59,7 +59,7 @@
   <string name="speed_dial_replace">替换</string>
   <string name="speed_dial_delete">删除</string>
   <string name="speed_dial_unassigned_dialog_title">按键未分配</string>
-  <string name="speed_dial_unassigned_dialog_message">此快速拨号按键 “<xliff:g id="number">%s</xliff:g>” 尚未被使用，您现在想要指定一个动作吗？</string>
+  <string name="speed_dial_unassigned_dialog_message">数字键 “<xliff:g id="number">%s</xliff:g>” 尚未分配快速拨号联系人，您想要立刻指定一位联系人吗？</string>
   <string name="dialog_speed_dial_airplane_mode_message">"若要使用快速拨号，请先关闭飞行模式。"</string>
   <string name="msim_ime_dialog_title">设备标识符</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>

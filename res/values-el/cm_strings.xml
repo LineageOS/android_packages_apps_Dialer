@@ -59,7 +59,7 @@
   <string name="speed_dial_replace">Αντικατάσταση</string>
   <string name="speed_dial_delete">Διαγραφή</string>
   <string name="speed_dial_unassigned_dialog_title">Μη εκχωρημένο πλήκτρο</string>
-  <string name="speed_dial_unassigned_dialog_message">Καμία ενέργεια ταχείας κλήσης δεν έχει εκχωρηθεί στο πλήκτρο \'<xliff:g id="number">%s</xliff:g>\'. Θέλετε να ορίσετε μια ενέργεια τώρα;</string>
+  <string name="speed_dial_unassigned_dialog_message">Καμία επαφή ταχείας κλήσης δεν έχει αντιστοιχισθεί στο πλήκτρο \'<xliff:g id="number">%s</xliff:g>\'. Θέλετε να αντιστοιχίσετε μια επαφή τώρα;</string>
   <string name="dialog_speed_dial_airplane_mode_message">"Για να χρησιμοποιήσετε την ταχεία κλήση, πρώτα απενεργοποιήστε την λειτουργία πτήσης."</string>
   <string name="msim_ime_dialog_title">Αναγνωριστικό συσκευής</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>

@@ -51,9 +51,17 @@
   <string name="stop_call_playback">Stopp</string>
   <string name="call_playback_error_message">Wiedergabe der Aufzeichnung fehlgeschlagen</string>
   <string name="calllog_search_hint">Anrufprotokoll durchsuchen</string>
+  <string name="video_call">Video-Anruf</string>
+  <string name="video_call_settings">Video-Anruf-Einstellungen</string>
+  <string name="description_videocall">Video-Anruf <xliff:g id="name">%1$s</xliff:g></string>
   <string name="speed_dial_settings">Kurzwahl-Einstellungen</string>
+  <string name="speed_dial_not_set">(nicht festgelegt)</string>
   <string name="speed_dial_replace">Ersetzen</string>
   <string name="speed_dial_delete">Löschen</string>
+  <string name="speed_dial_unassigned_dialog_title">Nicht zugewiesene Taste</string>
+  <string name="speed_dial_unassigned_dialog_message">Der Taste \'<xliff:g id="number">%s</xliff:g>\' wurde noch kein Schnellwahlkontakt zugewiesen. Möchten Sie jetzt einen zuweisen?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Um die Kurzwahl verwenden zu können, muss der Flugmodus deaktiviert sein."</string>
+  <string name="msim_ime_dialog_title">Geräte-Identifikator</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
   <string name="call_log_show_all_slots">Alle SIM-Karten</string>
   <string name="yes">Ja</string>

@@ -59,7 +59,7 @@
   <string name="speed_dial_replace">Substitueix</string>
   <string name="speed_dial_delete">Esborra</string>
   <string name="speed_dial_unassigned_dialog_title">Tecla no assignada</string>
-  <string name="speed_dial_unassigned_dialog_message">No hi ha una acció de trucada ràpida assignada a la tecla número \'<xliff:g id="number">%s</xliff:g>\'. Vols assignar una acció ara?</string>
+  <string name="speed_dial_unassigned_dialog_message">No hi cap contacte assignat amb trucada ràpida a la tecla número \'<xliff:g id="number">%s</xliff:g>\'. Vols assignar ara un contacte?</string>
   <string name="dialog_speed_dial_airplane_mode_message">"Per utilitzar la trucada ràpida, primer has d'apagar el mode avió."</string>
   <string name="msim_ime_dialog_title">Identificador del dispositiu</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>

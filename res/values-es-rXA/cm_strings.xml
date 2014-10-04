@@ -59,7 +59,7 @@
   <string name="speed_dial_replace">Trocar</string>
   <string name="speed_dial_delete">Desaniciar</string>
   <string name="speed_dial_unassigned_dialog_title">Tecla ensin asignar</string>
-  <string name="speed_dial_unassigned_dialog_message">Nun hai una aición de marcáu rápidu asignada a la tecla númberu \'<xliff:g id="number">%s</xliff:g>\'. Quies asigna-y agora una aición?</string>
+  <string name="speed_dial_unassigned_dialog_message">La tecla \u00AB<xliff:g id="number">%s</xliff:g>\u00BB nun tien un contautu asignáu pa marcáu rápido. ¿Quies asignar un contautu agora?</string>
   <string name="dialog_speed_dial_airplane_mode_message">"Pa usar el marcáu rápidu, primero desactiva'l mou avión."</string>
   <string name="msim_ime_dialog_title">Identificador del preséu</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>

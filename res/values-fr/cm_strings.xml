@@ -23,7 +23,7 @@
   <string name="call_stats_nav_outgoing">Sortants</string>
   <string name="call_stats_nav_missed">Manqués</string>
   <string name="call_stats_incoming">Entrants : <xliff:g id="percent"> %d </xliff:g> %%</string>
-  <string name="call_stats_outgoing">Sortants: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_outgoing">Sortants : <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Manqués</string>
   <string name="call_stats_missed_percent">Manqués : <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total : <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
@@ -35,13 +35,13 @@
   <string name="date_qs_currentmonth">Mois en cours</string>
   <string name="date_qs_currentquarter">Trimestre en cours</string>
   <string name="date_qs_currentyear">Année en cours</string>
-  <string name="date_qs_lastweek">La semaine dernière</string>
+  <string name="date_qs_lastweek">Semaine dernière</string>
   <string name="date_qs_lastmonth">Mois dernier</string>
   <string name="date_qs_lastquarter">Dernier trimestre</string>
   <string name="date_qs_lastyear">An dernier</string>
   <string name="call_stats_date_filter">Régler l\'intervalle de temps</string>
   <string name="call_stats_reset_filter">Réinitialiser l\'intervalle de temps</string>
-  <string name="call_stats_sort_by_duration">Tri par durée d\'appel</string>
+  <string name="call_stats_sort_by_duration">Trier par durée d\'appel</string>
   <string name="call_stats_sort_by_count">Trier par nombre d\'appel</string>
   <string name="menu_add_to_blacklist">Ajouter à la liste noire</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> ajouté à la liste noire</string>
@@ -50,7 +50,23 @@
   <string name="start_call_playback">Lire l\'enregistrement</string>
   <string name="stop_call_playback">Arrêter</string>
   <string name="call_playback_error_message">Impossible de lire l\'enregistrement</string>
+  <string name="calllog_search_hint">Rechercher dans le journal d\'appels</string>
+  <string name="video_call">Appel vidéo</string>
+  <string name="video_call_settings">Paramètres d\'appel vidéo</string>
+  <string name="description_videocall">Appel vidéo <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Paramètres de la numérotation rapide</string>
   <string name="speed_dial_not_set">(non défini)</string>
   <string name="speed_dial_replace">Remplacer</string>
   <string name="speed_dial_delete">Supprimer</string>
+  <string name="speed_dial_unassigned_dialog_title">Action non assignée</string>
+  <string name="speed_dial_unassigned_dialog_message">Aucun contact de numérotation rapide n\'est affecté au numéro \'<xliff:g id="number">%s</xliff:g>\'. Voulez-vous assigner un contact maintenant ?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Pour utiliser la numérotation rapide, désactiver d'abord le mode avion."</string>
+  <string name="msim_ime_dialog_title">Identifiant de l\'appareil</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Tous les SIMs</string>
+  <string name="yes">Oui</string>
+  <string name="no">Non</string>
+  <string name="call_duration_active">Durée d\'activité :</string>
+  <string name="call_duration_call_out">Durée de l’appel :</string>
+  <string name="call_log_all_calls_header">Tous les appels</string>
 </resources>
