@@ -116,7 +116,7 @@
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"വീഡിയോ താൽക്കലികമായി നിർത്തുക"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"കൂടുതൽ ഓപ്‌ഷനുകൾ"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"സേവനം"</string>
-    <string name="voicemail_settings" msgid="72448049107749316">"സജ്ജീകരിക്കുക"</string>
+    <string name="voicemail_settings" msgid="72448049107749316">"സജ്ജമാക്കുക"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;സജ്ജീകരിച്ചിട്ടില്ല&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"മറ്റ് കോൾ ക്രമീകരണങ്ങൾ"</string>
     <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> മുഖേന വിളിക്കുന്നു"</string>
