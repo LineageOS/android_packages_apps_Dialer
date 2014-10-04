@@ -59,7 +59,6 @@
   <string name="speed_dial_replace">Zastąp</string>
   <string name="speed_dial_delete">Usuń</string>
   <string name="speed_dial_unassigned_dialog_title">Klawisz nieprzypisany</string>
-  <string name="speed_dial_unassigned_dialog_message">Brak akcji szybkiego wybierania dla przycisku numer \'<xliff:g id="number">%s</xliff:g>\'. Chcesz przypisać akcję teraz?</string>
   <string name="dialog_speed_dial_airplane_mode_message">"Aby korzystać z szybkiego wybierania, najpierw należy wyłączyć tryb samolotowy."</string>
   <string name="msim_ime_dialog_title">Identyfikator urządzenia</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>

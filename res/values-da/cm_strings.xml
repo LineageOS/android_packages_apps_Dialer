@@ -59,7 +59,7 @@
   <string name="speed_dial_replace">Erstat</string>
   <string name="speed_dial_delete">Slet</string>
   <string name="speed_dial_unassigned_dialog_title">Tast ikke tildelt</string>
-  <string name="speed_dial_unassigned_dialog_message">Intet hurtigopkald tildelt tasten \'<xliff:g id="number">%s</xliff:g>\'. Vil du tildele et opkald nu?</string>
+  <string name="speed_dial_unassigned_dialog_message">Der er ikke tildelt en kontaktperson til hurtigopkaldsnummer \'<xliff:g id="number">%s</xliff:g>\'. Vil du tildele en kontaktperson nu?</string>
   <string name="dialog_speed_dial_airplane_mode_message">"For at bruge hurtigopkald, skal du først deaktivere Flytilstand."</string>
   <string name="msim_ime_dialog_title">Enheds-id</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>

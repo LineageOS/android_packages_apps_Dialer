@@ -59,7 +59,7 @@
   <string name="speed_dial_replace">Nahradiť</string>
   <string name="speed_dial_delete">Odstrániť</string>
   <string name="speed_dial_unassigned_dialog_title">Nepriradené tlačidlo</string>
-  <string name="speed_dial_unassigned_dialog_message">Nie je priradená žiadna akcia rýchleho vytáčania pre tlačidlo s číslom \'<xliff:g id="number">%s</xliff:g>\'. Chcete priradiť akciu teraz?</string>
+  <string name="speed_dial_unassigned_dialog_message">Žiadny kontakt rýchleho vytáčania nebol priradený k tlačidlu s číslom \"<xliff:g id="number">%s</xliff:g>\". Chcete priradiť kontakt teraz?</string>
   <string name="dialog_speed_dial_airplane_mode_message">"Pre použitie rýchleho vytáčania najprv vypnite režim V lietadle."</string>
   <string name="msim_ime_dialog_title">Identifikátor zariadenia</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>

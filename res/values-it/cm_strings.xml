@@ -59,7 +59,7 @@
   <string name="speed_dial_replace">Sostituisci</string>
   <string name="speed_dial_delete">Elimina</string>
   <string name="speed_dial_unassigned_dialog_title">Pulsante non assegnato</string>
-  <string name="speed_dial_unassigned_dialog_message">Nessuna azione di composizione rapida assegnata al pulsante numero <xliff:g id="number">%s</xliff:g>. Vuoi assegnare un\'azione ora?</string>
+  <string name="speed_dial_unassigned_dialog_message">Nessun contatto è assegnato alla composizione rapida con il numero \'<xliff:g id="number">%s\'.</xliff:g> Si desidera assegnare un contatto ora?</string>
   <string name="dialog_speed_dial_airplane_mode_message">"Per usare la composizione rapida occorre disattivare la modalità aereo."</string>
   <string name="msim_ime_dialog_title">Identificativo del dispositivo</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>

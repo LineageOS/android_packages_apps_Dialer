@@ -59,7 +59,7 @@
   <string name="speed_dial_replace">Korvaa</string>
   <string name="speed_dial_delete">Poista</string>
   <string name="speed_dial_unassigned_dialog_title">Näppäinta ei määritetty</string>
-  <string name="speed_dial_unassigned_dialog_message">Mitään pikavalintaa ei ole määritetty numerolle \'<xliff:g id="number">%s</xliff:g>\'. Haluatko määrittää tehtävän nyt?</string>
+  <string name="speed_dial_unassigned_dialog_message">Pikavalintaa ei asetettu numerolle \'<xliff:g id="number">%s</xliff:g>\'. Haluatko asettaa valinnan nyt?</string>
   <string name="dialog_speed_dial_airplane_mode_message">"Käyttääksesi pikavalintaa, ota lentokonetila pois käytöstä."</string>
   <string name="msim_ime_dialog_title">Laitteen tunnus</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
