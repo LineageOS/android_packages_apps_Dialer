@@ -121,7 +121,7 @@
     <string name="description_video_call" msgid="2933838090743214204">"Videoopkald."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Send sms til <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Uaflyttet besked på telefonsvareren"</string>
-    <string name="description_start_voice_search" msgid="520539488194946012">"Start stemmesøgning"</string>
+    <string name="description_start_voice_search" msgid="520539488194946012">"Start talesøgning"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Ring til <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Ukendte"</string>
     <string name="voicemail" msgid="3851469869202611441">"Telefonsvarer"</string>
@@ -139,7 +139,7 @@
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Indlæser fra SIM-kort ..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Kontakter på SIM-kort"</string>
     <string name="add_contact_not_available" msgid="2731922990890769322">"Genaktiver applikationen Kontaktpersoner for at bruge denne funktion."</string>
-    <string name="voice_search_not_available" msgid="7580616740587850828">"Stemmesøgning er ikke tilgængeligt."</string>
+    <string name="voice_search_not_available" msgid="7580616740587850828">"Talesøgning er ikke tilgængeligt."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Det er ikke muligt at foretage et telefonopkald, fordi applikationen Telefon er deaktiveret."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Der er ingen installerede apps til at håndtere den valgte handling."</string>
     <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Skriv navn eller telefonnummer"</string>
