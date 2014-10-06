@@ -50,7 +50,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"ဗီဒီယို ခေါ်ဆိုမှု"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"ဗွီဒီယိုကို တောင်းဆိုနေ"</string>
     <string name="card_title_video_call_error" msgid="5520555528871673801">"ဗွီဒီယို ခေါ်ဆိုမှု ချိတ်ဆက် မရနိုင်"</string>
-    <string name="card_title_callback_number" msgid="4604563437776874016">"သင် ပြန်ခေါ်ရမည့် နံပါတ်\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number" msgid="4604563437776874016">"သင် ပြန်ခေါ်ရမည့် နံပါတ်\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="85588345502265075">"သင်၏ အရေးပေါ် ပြန်ခေါ်ရန် နံပါတ်\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"ဖုန်းခေါ်နေစဉ်"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"လွဲသွားသော ဖုန်းခေါ်မှု"</string>
@@ -60,7 +60,7 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"ဆက်သွားနေသော ဖုန်းခေါ်မှု"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"ခဏ ကိုင်ထားစဉ်"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"အဝင်ခေါ်ဆိုမှု"</string>
-    <string name="notification_incoming_video_call" msgid="7356836933934464805">"ဝင်လာသည့် ဗီဒီယို ခေါ်ဆိုမှု"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"ဝင်လာသည့် ဗီဒီယို ခေါ်ဆိုမှု"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"အသံ ခေါ်ဆိုမှုအဖြစ် တောင်းဆိုမှု"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"အသံမေးလ်အသစ်"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"အသံစာ အသစ် (<xliff:g id="COUNT">%d</xliff:g>) စောင်"</string>
@@ -97,22 +97,22 @@
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"ကီးဘုတ်သုံး၍ခလုတ်နှိပ်ပါ"</string>
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"ခေါ်ဆိုမှု ခဏရပ်ပါ"</string>
     <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"ခေါ်ဆိုမှု ဆက်လုပ်ရန်"</string>
-    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"ခေါ်ဆိုမှု ထည့်ရန်"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"ခေါ်ဆိုမှု ထည့်ရန်"</string>
     <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"ခေါ်ဆိုမှုများကို ပေါင်းစည်းရန်"</string>
     <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"ခေါ်ဆိုမှုများကို ဖလှယ်ရန်"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"ကိုင်ထားသည်"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"ပြီးပါပြီ"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"နံပါတ်ကွက်"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"အသံတိတ်"</string>
-    <string name="onscreenAddCallText" msgid="5140385634712287403">"ဖုန်းခေါ်မှု ထပ်ထည့်ပါ"</string>
+    <string name="onscreenAddCallText" msgid="5140385634712287403">"ဖုန်းခေါ်မှု ထပ်ထည့်ပါ"</string>
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"ဖုန်းခေါ်မှုများကို ပူးပေါင်းသည်"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"လဲပြောင်းသည်"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"ဖုန်းခေါ်မှုကို ကြီးကြပ်သည်"</string>
     <string name="onscreenManageConferenceText" msgid="6801708317570467407">"ညီလာခံ ခေါ်ဆိုရန်"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"အသံ"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"ဗီဒီယိုခေါ်ဆိုမှု"</string>
-    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"အသံဖြင့် ခေါ်ဆိုမှုသို့ ပြောင်းရန်"</string>
-    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"ကင်မရာကို ဖွင့်ရန်"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"အသံဖြင့် ခေါ်ဆိုမှုသို့ ပြောင်းရန်"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"ကင်မရာကို ဖွင့်ရန်"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"ဗီဒီယို ဆိုင်းငံ့ရန်"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"နောက်ထပ် ရွေးစရာများ"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"ဝန်ဆောင်မှု"</string>
@@ -120,7 +120,7 @@
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"မသတ်မှတ်ထားပါ"</string>
     <string name="other_settings" msgid="3672912580359716394">"တခြားခေါ်ဆိုမှုဆိုင်ရာ ဆက်တင်"</string>
     <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> မှ ခေါ်ဆိုခြင်း"</string>
-    <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g>မှ တစ်ဆင့် ခေါ်ဆိုမှု"</string>
+    <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g>မှ တစ်ဆင့် ခေါ်ဆိုမှု"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"အဆက်အသွယ်များ၏ ဓာတ်ပုံ"</string>
     <string name="goPrivate" msgid="865837794424530980">"ပရိုက်ဗိတ်သို့ သွားပါ"</string>
     <string name="selectContact" msgid="781975788478987237">"လိပ်စာရွေးပါ"</string>
@@ -170,5 +170,5 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"ဖုန်းမြည်သံ &amp; တုန်ခါသံ"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"ကွန်းဖရင့် ခေါ်ဆိုမှုကို ထိန်းချုပ်သည်"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"အရေးပေါ်နံပါတ်"</string>
-    <string name="select_account_dialog_title" msgid="5730339500156684204">"အကောင့်ကို ရွေးရန်"</string>
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"အကောင့်ကို ရွေးရန်"</string>
 </resources>
