@@ -24,7 +24,7 @@
     <string name="payphone" msgid="1931775086311769314">"ទូរស័ព្ទ​ប្រើ​កាក់"</string>
     <string name="confCall" msgid="1904840547188336828">"ការ​ហៅ​ជា​សន្និសីទ"</string>
     <string name="call_lost" msgid="317670617901479594">"បាត់បង់​ការ​ហៅ។"</string>
-    <string name="ok" msgid="3811371167865772377">"យល់​ព្រម​"</string>
+    <string name="ok" msgid="3811371167865772377">"យល់​ព្រម"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"អូប៉ាល័រ"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"កាស"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"កាស​មាន​ខ្សែ"</string>
@@ -60,7 +60,7 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"កំពុង​បន្ត​ការ​ហៅ"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"រង់ចាំ"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"ការ​ហៅ​ចូល"</string>
-    <string name="notification_incoming_video_call" msgid="7356836933934464805">"ការ​ហៅចូលជា​វីដេអូ​"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"ការ​ហៅចូលជា​វីដេអូ"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"សំណើ​ការ​ហៅ​ជា​វីដេអូ​ចូល"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"សារ​ជា​សំឡេង​ថ្មី"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"សារ​ជា​សំឡេង​ថ្មី (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -108,7 +108,7 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"បញ្ចូល​ការ​ហៅ​រួម​​គ្នា"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"ប្ដូរ"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"គ្រប់គ្រង​ការ​ហៅ"</string>
-    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"គ្រប់គ្រងការហៅ​ជាសន្និសីទ​"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"គ្រប់គ្រងការហៅ​ជាសន្និសីទ"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"សំឡេង"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"ហៅ​ជា​វីដេអូ"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"ប្ដូរ​ទៅ​ការ​ហៅ​ជា​សំឡេង"</string>
