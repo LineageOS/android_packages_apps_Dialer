@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"Telefon"</string>
+    <string name="onHold" msgid="9035493194749959955">"Kutmoqda"</string>
+    <string name="unknown" msgid="6878797917991465859">"Noma’lum"</string>
+    <string name="private_num" msgid="6713286113000232309">"Shaxsiy raqam"</string>
+    <string name="payphone" msgid="1931775086311769314">"Pullik telefon"</string>
+    <string name="confCall" msgid="1904840547188336828">"Konferensiya qo‘ng‘irog‘i"</string>
+    <string name="call_lost" msgid="317670617901479594">"Qo‘ng‘iroq tugatildi."</string>
+    <string name="ok" msgid="3811371167865772377">"OK"</string>
+    <string name="audio_mode_speaker" msgid="27649582100085266">"Karnay"</string>
+    <string name="audio_mode_earpiece" msgid="4156527186373869107">"Telefon quloq eshitgichlari"</string>
+    <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Simli garnitura"</string>
+    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
+    <string name="wait_prompt_str" msgid="7601815427707856238">"Ushbu tovushlar jo‘natilsinmi?\n"</string>
+    <string name="pause_prompt_str" msgid="1789964702154314806">"Tovushlar jo‘natilmoqda\n"</string>
+    <string name="send_button" msgid="4106860097497818751">"Jo‘natish"</string>
+    <string name="pause_prompt_yes" msgid="3564467212025151797">"Ha"</string>
+    <string name="pause_prompt_no" msgid="6686238803236884877">"Yo‘q"</string>
+    <string name="wild_prompt_str" msgid="5543521676355533577">"Belgilarni quyidagilar bilan almashtiring:"</string>
+    <string name="caller_manage_header" msgid="3231519674734638786">"Konferensiya qo‘ng‘irog‘i <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Ovozli xabar raqami"</string>
+    <string name="card_title_dialing" msgid="5769417478498348054">"Raqam terilmoqda"</string>
+    <string name="card_title_redialing" msgid="4831412164303596395">"Qaytadan urinilmoqda"</string>
+    <string name="card_title_conf_call" msgid="1162980346189744501">"Konferensiya qo‘ng‘irog‘i"</string>
+    <string name="card_title_incoming_call" msgid="7364539451234646909">"Kiruvchi qo‘ng‘iroq"</string>
+    <string name="card_title_call_ended" msgid="5544730338889702298">"Qo‘ng‘iroq tugadi"</string>
+    <string name="card_title_on_hold" msgid="821463117892339942">"Kutish holatida"</string>
+    <string name="card_title_hanging_up" msgid="3999101620995182450">"Go‘shak qo‘yilmoqda"</string>
+    <string name="card_title_in_call" msgid="6346543933068225205">"Qo‘ng‘iroqda"</string>
+    <string name="card_title_my_phone_number" msgid="112428362494434191">"Mening raqamim - <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"Videoga ulanmoqda"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"Video qo‘ng‘iroq"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Video so\'ralmoqda"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"Video qo\'ng\'iroqqa ulanish imkoni yo\'q"</string>
+    <string name="card_title_callback_number" msgid="4604563437776874016">"Sizning teskari qo‘ng‘iroq raqamingiz\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"Favqulodda holatlar uchun teskari qo‘ng‘iroq raqamingiz\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="notification_dialing" msgid="2107666444937350731">"Terilmoqda"</string>
+    <string name="notification_missedCallTitle" msgid="7554385905572364535">"Javob berilmagan qo‘ng‘iroq"</string>
+    <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Javobsiz qo‘ng‘iroqlar"</string>
+    <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> ta javobsiz qo‘ng‘iroq"</string>
+    <string name="notification_missedCallTicker" msgid="504686252427747209">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g>dan javobsiz qo‘ng‘iroq"</string>
+    <string name="notification_ongoing_call" msgid="7068688957273482989">"Joriy qo‘ng‘iroq"</string>
+    <string name="notification_on_hold" msgid="3480694969511790465">"Kutmoqda"</string>
+    <string name="notification_incoming_call" msgid="2820429205043529642">"Kiruvchi qo‘ng‘iroq"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Kiruvchi videoqo‘ng‘iroq"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Kiruvchi video so\'rovi"</string>
+    <string name="notification_voicemail_title" msgid="8933468752045550523">"Yangi ovozli xabar"</string>
+    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Yangi ovozli xabar (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>ni terish"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Ovozli qo‘ng‘iroq raqami noma’lum"</string>
+    <string name="notification_network_selection_title" msgid="4224455487793492772">"Xizmat mavjud emas"</string>
+    <string name="notification_network_selection_text" msgid="2607085729661923269">"Tanlangan tarmoq (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) mavjud emas"</string>
+    <string name="notification_action_end_call" msgid="6069460915123531620">"Go‘shakni qo‘yish"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Video"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Ovoz"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"Roziman"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Yopish"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Teskari qo‘ng‘iroq"</string>
+    <string name="notification_missedCall_message" msgid="3049928912736917988">"Xabar"</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Qo‘ng‘iroq qilish uchun, avval \"Parvoz rejimi\" o‘chirilishi kerak."</string>
+    <string name="incall_error_emergency_only" msgid="4678640422710818317">"Tarmoqda ro‘yxatdan o‘tmagan."</string>
+    <string name="incall_error_out_of_service" msgid="8587993036435080418">"Uyali tarmoq mavjud emas."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Qo‘ng‘iroq jo‘natilmadi, chunki xato raqam kiritilgan"</string>
+    <string name="incall_error_call_failed" msgid="4313552620858880999">"Qo‘ng‘iroq jo‘natilmadi."</string>
+    <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI tartibi ishga tushmoqda..."</string>
+    <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"Mos kelmaydigan xizmat."</string>
+    <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"Qo‘ng‘iroqlarni almashtirib bo‘lmadi."</string>
+    <string name="incall_error_supp_service_separate" msgid="914362338192301746">"Qo‘ng‘iroqni ajratib bo‘lmadi."</string>
+    <string name="incall_error_supp_service_transfer" msgid="2509871374644921632">"Qo‘ng‘iroq uzatilmadi."</string>
+    <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Konferensiya qo‘ng‘iroqlarini amalga oshirib bo‘lmaydi."</string>
+    <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Qo‘ng‘iroqni rad qilib bo‘lmadi."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Qo‘ng‘iroq(lar)ni chiqarib bo‘lmadi."</string>
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP qo‘ng‘iroq"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Favqulodda qo‘ng‘iroq"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Radio yoqilmoqda…"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Xizmat ko‘rsatish doirasidan tashqarida, qayta urinilmoqda…"</string>
+    <string name="dial_emergency_error" msgid="7969515493359619960">"Qo‘ng‘iroq jo‘natilmadi. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> favqulodda raqam emas!"</string>
+    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Qo‘ng‘iroq jo‘natilmadi. Favqulodda raqamni tering!"</string>
+    <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Terish uchun tugmatagdan foydalaning"</string>
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Qo‘ng‘iroqni ushlab turish"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Qo‘ng‘iroqni davom ettirish"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Qo‘ng‘iroq qo‘shish"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Qo‘ng‘iroqlarni birlashtirish"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Boshqa qo‘ng‘iroq"</string>
+    <string name="onscreenHoldText" msgid="2285258239691145872">"Ushlab turish"</string>
+    <string name="onscreenEndCallText" msgid="4403855834875398585">"Tugatish"</string>
+    <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Terish paneli"</string>
+    <string name="onscreenMuteText" msgid="5011369181754261374">"Ovozni o‘chirish"</string>
+    <string name="onscreenAddCallText" msgid="5140385634712287403">"Qo‘ng‘iroq qo‘shish"</string>
+    <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Qo‘ng‘iroqlarni birlashtirish"</string>
+    <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Almashish"</string>
+    <string name="onscreenManageCallsText" msgid="5473231160123254154">"Qo‘ng‘iroqlarni boshqarish"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Konf. aloqani boshqarish"</string>
+    <string name="onscreenAudioText" msgid="1710087112800041743">"Audio"</string>
+    <string name="onscreenVideoCallText" msgid="4800924186056115442">"Video qo‘ng‘iroq"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Ovozli qo‘ng‘iroqqa o‘zgartirish"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Kamerani almashtirish"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Videoni vaqtincha to‘xtatish"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"Ko‘proq"</string>
+    <string name="voicemail_provider" msgid="5135942703327136909">"Xizmat"</string>
+    <string name="voicemail_settings" msgid="72448049107749316">"Moslash"</string>
+    <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;O‘rnatilmagan&gt;"</string>
+    <string name="other_settings" msgid="3672912580359716394">"Boshqa qo‘ng‘iroq sozlamalari"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> orqali qo‘ng‘rioq qilinmoqda"</string>
+    <string name="incoming_via_template" msgid="1696993226115570960">"Kiruvchi qo‘ng‘iroqlar <xliff:g id="PROVIDER_NAME">%s</xliff:g> orqali"</string>
+    <string name="contactPhoto" msgid="4713193418046639466">"kontakt surati"</string>
+    <string name="goPrivate" msgid="865837794424530980">"alohidaga o‘tish"</string>
+    <string name="selectContact" msgid="781975788478987237">"kontaktni tanlash"</string>
+    <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"O‘z javobingizni yozing..."</string>
+    <string name="custom_message_cancel" msgid="7516406059429609296">"Bekor qilish"</string>
+    <string name="custom_message_send" msgid="5795754217085747742">"Jo‘natish"</string>
+    <string name="description_image_button_one" msgid="5502718871331943463">"bir"</string>
+    <string name="description_image_button_two" msgid="4903738528222924522">"ikki"</string>
+    <string name="description_image_button_three" msgid="5570985408463782329">"uch"</string>
+    <string name="description_image_button_four" msgid="1697520001239289074">"to‘rt"</string>
+    <string name="description_image_button_five" msgid="3450276493026943454">"besh"</string>
+    <string name="description_image_button_six" msgid="2070376172268675300">"olti"</string>
+    <string name="description_image_button_seven" msgid="1757351311199993371">"yetti"</string>
+    <string name="description_image_button_eight" msgid="4734693919020613227">"sakkiz"</string>
+    <string name="description_image_button_nine" msgid="5568534122590597040">"to‘qqiz"</string>
+    <string name="description_image_button_star" msgid="1976280813017254462">"yulduz"</string>
+    <string name="description_image_button_zero" msgid="4211255756866893605">"nol"</string>
+    <string name="description_image_button_pound" msgid="1716041284529917866">"funt"</string>
+    <string name="description_dial_button" msgid="7459705245418435351">"terish"</string>
+    <string name="description_delete_button" msgid="4015842181592283903">"orqaga"</string>
+    <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"Karnay tanlandi"</string>
+    <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"Quloqlik tanlandi"</string>
+    <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"Simsiz moslama tanlandi"</string>
+    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"Bluetooth moslamasi tanlandi"</string>
+    <string name="accessibility_call_muted" msgid="2776111226185342220">"Qo‘ng‘iroq ovozi o‘chirildi."</string>
+    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Qo‘ng‘iroq ovozli qilindi."</string>
+    <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Qo‘ng‘iroq kutish rejimiga qo‘yildi."</string>
+    <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"Qo‘ng‘iroq kutish rejimidan chiqarildi."</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Javob berish"</string>
+    <string name="description_target_send_sms" msgid="2098326025587950144">"SMS yuborish"</string>
+    <string name="description_target_decline" msgid="4789834364389731957">"Rad qilish"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Video qo\'ng\'iroq sifatida javob berish"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Audio qo\'ng\'iroq sifatida javob berish"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Video qo‘ng‘iroq so‘rovini qabul qilish"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Video qo‘ng‘iroq so‘rovini rad qilish"</string>
+    <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> uchun tepaga suring."</string>
+    <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> uchun chapga suring."</string>
+    <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> uchun o‘ngga suring."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> uchun pastga suring."</string>
+    <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Tebranish"</string>
+    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Tebratish"</string>
+    <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Ovoz"</string>
+    <string name="default_notification_description" msgid="78174796906240970">"Standart ovoz (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
+    <string name="ringtone_title" msgid="6374978286202084684">"Telefon qo‘ng‘iroq ohangi"</string>
+    <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Jiringlash vaqtida tebranish"</string>
+    <string name="dial_pad_autocomplete" msgid="494525952035761075">"Tugmatagda terganda avtoto‘ldirish"</string>
+    <string name="preference_category_ringtone" msgid="5197960752529332721">"Qo‘ng‘iroq ohangi &amp; tebranish"</string>
+    <string name="manageConferenceLabel" msgid="4691922394301969053">"Konferensiya qo‘ng‘irog‘ini boshqarish"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Favqulodda qo‘ng‘iroq raqamlari"</string>
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"Hisob tanlash"</string>
+</resources>

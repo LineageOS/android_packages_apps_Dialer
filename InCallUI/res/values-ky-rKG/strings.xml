@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- no translation found for phoneAppLabel (906161039445636857) -->
+    <skip />
+    <!-- no translation found for onHold (9035493194749959955) -->
+    <skip />
+    <!-- no translation found for unknown (6878797917991465859) -->
+    <skip />
+    <!-- no translation found for private_num (6713286113000232309) -->
+    <skip />
+    <!-- no translation found for payphone (1931775086311769314) -->
+    <skip />
+    <!-- no translation found for confCall (1904840547188336828) -->
+    <skip />
+    <!-- no translation found for call_lost (317670617901479594) -->
+    <skip />
+    <!-- no translation found for ok (3811371167865772377) -->
+    <skip />
+    <!-- no translation found for audio_mode_speaker (27649582100085266) -->
+    <skip />
+    <!-- no translation found for audio_mode_earpiece (4156527186373869107) -->
+    <skip />
+    <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Зымдуу кулакчын"</string>
+    <!-- no translation found for audio_mode_bluetooth (3047641300848211128) -->
+    <skip />
+    <!-- no translation found for wait_prompt_str (7601815427707856238) -->
+    <skip />
+    <string name="pause_prompt_str" msgid="1789964702154314806">"Тоналдык жөнөтүү болууда \n"</string>
+    <!-- no translation found for send_button (4106860097497818751) -->
+    <skip />
+    <!-- no translation found for pause_prompt_yes (3564467212025151797) -->
+    <skip />
+    <!-- no translation found for pause_prompt_no (6686238803236884877) -->
+    <skip />
+    <string name="wild_prompt_str" msgid="5543521676355533577">"Атайын белгини муну менен алмаштыр"</string>
+    <!-- no translation found for caller_manage_header (3231519674734638786) -->
+    <skip />
+    <!-- no translation found for voicemail_settings_number_label (8524164258691887790) -->
+    <skip />
+    <!-- no translation found for card_title_dialing (5769417478498348054) -->
+    <skip />
+    <!-- no translation found for card_title_redialing (4831412164303596395) -->
+    <skip />
+    <!-- no translation found for card_title_conf_call (1162980346189744501) -->
+    <skip />
+    <!-- no translation found for card_title_incoming_call (7364539451234646909) -->
+    <skip />
+    <!-- no translation found for card_title_call_ended (5544730338889702298) -->
+    <skip />
+    <!-- no translation found for card_title_on_hold (821463117892339942) -->
+    <skip />
+    <!-- no translation found for card_title_hanging_up (3999101620995182450) -->
+    <skip />
+    <!-- no translation found for card_title_in_call (6346543933068225205) -->
+    <skip />
+    <!-- no translation found for card_title_my_phone_number (112428362494434191) -->
+    <skip />
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"Видео туташтырылууда"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"Видео чалуу"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Видео"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"Видео чалуу туташа албай жатат"</string>
+    <string name="card_title_callback_number" msgid="4604563437776874016">"Чалына турган номер\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"Шашылыш чалына турган номериңиз \n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="notification_dialing" msgid="2107666444937350731">"Терилүүдө"</string>
+    <!-- no translation found for notification_missedCallTitle (7554385905572364535) -->
+    <skip />
+    <!-- no translation found for notification_missedCallsTitle (1361677948941502522) -->
+    <skip />
+    <!-- no translation found for notification_missedCallsMsg (4575787816055205600) -->
+    <skip />
+    <!-- no translation found for notification_missedCallTicker (504686252427747209) -->
+    <skip />
+    <string name="notification_ongoing_call" msgid="7068688957273482989">"Учурдагы чалуу"</string>
+    <!-- no translation found for notification_on_hold (3480694969511790465) -->
+    <skip />
+    <!-- no translation found for notification_incoming_call (2820429205043529642) -->
+    <skip />
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Келип жаткан видео чалуу"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Келип жаткан видео сурамы"</string>
+    <!-- no translation found for notification_voicemail_title (8933468752045550523) -->
+    <skip />
+    <!-- no translation found for notification_voicemail_title_count (4366360747660929916) -->
+    <skip />
+    <!-- no translation found for notification_voicemail_text_format (4447323569453981685) -->
+    <skip />
+    <!-- no translation found for notification_voicemail_no_vm_number (760963466895609716) -->
+    <skip />
+    <!-- no translation found for notification_network_selection_title (4224455487793492772) -->
+    <skip />
+    <!-- no translation found for notification_network_selection_text (2607085729661923269) -->
+    <skip />
+    <string name="notification_action_end_call" msgid="6069460915123531620">"Телефонду коюу"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Видео"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Үн"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"Кабыл алуу"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Этибарга албоо"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Кайра чалуу"</string>
+    <string name="notification_missedCall_message" msgid="3049928912736917988">"Билдирүү"</string>
+    <!-- no translation found for incall_error_power_off (6550191216405193368) -->
+    <skip />
+    <!-- no translation found for incall_error_emergency_only (4678640422710818317) -->
+    <skip />
+    <!-- no translation found for incall_error_out_of_service (8587993036435080418) -->
+    <skip />
+    <!-- no translation found for incall_error_no_phone_number_supplied (4197432103471807739) -->
+    <skip />
+    <!-- no translation found for incall_error_call_failed (4313552620858880999) -->
+    <skip />
+    <!-- no translation found for incall_status_dialed_mmi (3672498861336189563) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_unknown (2991054870745666038) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_switch (3503552565745872241) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_separate (914362338192301746) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_transfer (2509871374644921632) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_conference (2505727299596357312) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_reject (7055164130563826216) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_hangup (7417583238334762737) -->
+    <skip />
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP чалуу"</string>
+    <!-- no translation found for emergency_enable_radio_dialog_title (4627849966634578257) -->
+    <skip />
+    <!-- no translation found for emergency_enable_radio_dialog_message (207613549344420291) -->
+    <skip />
+    <!-- no translation found for emergency_enable_radio_dialog_retry (3724423402363063736) -->
+    <skip />
+    <string name="dial_emergency_error" msgid="7969515493359619960">"Чалуу болгон жок. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> куткаруучулар номуру эмес!"</string>
+    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Чалуу болгон жок. Куткаруучулар номуруна чалыңыз!"</string>
+    <!-- no translation found for dialerKeyboardHintText (9192914825413747792) -->
+    <skip />
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Чалууну кармоо"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Чалууну улантуу"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Чалуу кошуу"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Чалууларды бириктирүү"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Чалууларды которуштуруу"</string>
+    <!-- no translation found for onscreenHoldText (2285258239691145872) -->
+    <skip />
+    <!-- no translation found for onscreenEndCallText (4403855834875398585) -->
+    <skip />
+    <!-- no translation found for onscreenShowDialpadText (8561805492659639893) -->
+    <skip />
+    <!-- no translation found for onscreenMuteText (5011369181754261374) -->
+    <skip />
+    <!-- no translation found for onscreenAddCallText (5140385634712287403) -->
+    <skip />
+    <!-- no translation found for onscreenMergeCallsText (6640195098064538950) -->
+    <skip />
+    <!-- no translation found for onscreenSwapCallsText (1602990689244030047) -->
+    <skip />
+    <!-- no translation found for onscreenManageCallsText (5473231160123254154) -->
+    <skip />
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Конференц-чалууну башкаруу"</string>
+    <!-- no translation found for onscreenAudioText (1710087112800041743) -->
+    <skip />
+    <string name="onscreenVideoCallText" msgid="4800924186056115442">"Видео чалуу"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Үн чалууга өзгөртүү"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Камерага которулуу"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Видеону бир азга токтото туруу"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"Көбүрөөк параметрлер"</string>
+    <string name="voicemail_provider" msgid="5135942703327136909">"Кызмат"</string>
+    <string name="voicemail_settings" msgid="72448049107749316">"Орнотуу"</string>
+    <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Орнотулган эмес&gt;"</string>
+    <!-- no translation found for other_settings (3672912580359716394) -->
+    <skip />
+    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> аркылуу чалуу"</string>
+    <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> аркылуу келүүдө"</string>
+    <!-- no translation found for contactPhoto (4713193418046639466) -->
+    <skip />
+    <!-- no translation found for goPrivate (865837794424530980) -->
+    <skip />
+    <!-- no translation found for selectContact (781975788478987237) -->
+    <skip />
+    <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Каалганыңызды жазыңыз..."</string>
+    <string name="custom_message_cancel" msgid="7516406059429609296">"Жокко чыгаруу"</string>
+    <string name="custom_message_send" msgid="5795754217085747742">"Жөнөтүү"</string>
+    <!-- no translation found for description_image_button_one (5502718871331943463) -->
+    <skip />
+    <!-- no translation found for description_image_button_two (4903738528222924522) -->
+    <skip />
+    <!-- no translation found for description_image_button_three (5570985408463782329) -->
+    <skip />
+    <!-- no translation found for description_image_button_four (1697520001239289074) -->
+    <skip />
+    <!-- no translation found for description_image_button_five (3450276493026943454) -->
+    <skip />
+    <!-- no translation found for description_image_button_six (2070376172268675300) -->
+    <skip />
+    <!-- no translation found for description_image_button_seven (1757351311199993371) -->
+    <skip />
+    <!-- no translation found for description_image_button_eight (4734693919020613227) -->
+    <skip />
+    <!-- no translation found for description_image_button_nine (5568534122590597040) -->
+    <skip />
+    <!-- no translation found for description_image_button_star (1976280813017254462) -->
+    <skip />
+    <!-- no translation found for description_image_button_zero (4211255756866893605) -->
+    <skip />
+    <!-- no translation found for description_image_button_pound (1716041284529917866) -->
+    <skip />
+    <!-- no translation found for description_dial_button (7459705245418435351) -->
+    <skip />
+    <!-- no translation found for description_delete_button (4015842181592283903) -->
+    <skip />
+    <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"Катуу сүйлөгүч тандалды"</string>
+    <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"Кулакчын тандалды"</string>
+    <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"Зымдуу гарнитура тандалды"</string>
+    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"Bluetooth гарнитурасы тандалды"</string>
+    <string name="accessibility_call_muted" msgid="2776111226185342220">"Чалуу үнсүз тартипте."</string>
+    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Чалуу үнсүз режимден чыгарылды."</string>
+    <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Чалуу күтүүгө коюлду."</string>
+    <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"Чалуу күтүүдөн алынып салынды."</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Жооп берүү"</string>
+    <string name="description_target_send_sms" msgid="2098326025587950144">"SMS жөнөтүү"</string>
+    <string name="description_target_decline" msgid="4789834364389731957">"Четке кагуу"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Видео чалуу түрүндө жооп берүү"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Аудио чалуу жооп берүү"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Видео сурамын кабыл алуу"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Видео сурамын четке кагуу"</string>
+    <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> үчүн жогору жылмыштырыңыз."</string>
+    <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> үчүн солго жылмыштырыңыз."</string>
+    <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> үчүн оңго жылмыштырыңыз."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> үчүн төмөн сылап коюңуз."</string>
+    <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Титиретүү"</string>
+    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Титиретүү"</string>
+    <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Үнү"</string>
+    <string name="default_notification_description" msgid="78174796906240970">"Абалкы үнү (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
+    <string name="ringtone_title" msgid="6374978286202084684">"Телефондун рингтону"</string>
+    <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Шыңгырап жатканда титиретүү"</string>
+    <string name="dial_pad_autocomplete" msgid="494525952035761075">"Терүүнү авто-толтуруу"</string>
+    <string name="preference_category_ringtone" msgid="5197960752529332721">"Рингтон жана Титирөө"</string>
+    <string name="manageConferenceLabel" msgid="4691922394301969053">"Конференц-чалууну башкаруу"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Куткаруучулардын номуру"</string>
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"Каттоо эсебин тандаңыз"</string>
+</resources>
