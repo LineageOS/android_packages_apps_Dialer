@@ -159,8 +159,13 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
         v.setAdjustSelectionBoundsEnabled(false);
     }
 
-    public void setShortcutEnabled(int shortcutType, boolean visible) {
+    /**
+     * @return True if the shortcut state (disabled vs enabled) was changed by this operation
+     */
+    public boolean setShortcutEnabled(int shortcutType, boolean visible) {
+        final boolean changed = mShortcutEnabled[shortcutType] != visible;
         mShortcutEnabled[shortcutType] = visible;
+        return changed;
     }
 
     public String getFormattedQueryString() {
