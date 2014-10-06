@@ -16,25 +16,20 @@
 
 package com.android.dialer.lookup.whitepages;
 
-import com.android.dialer.lookup.LookupSettings;
+import android.content.Context;
+import android.net.Uri;
+import android.text.TextUtils;
+import android.util.Log;
 
-import java.io.ByteArrayOutputStream;
+import com.android.dialer.lookup.LookupSettings;
+import com.android.dialer.lookup.LookupUtils;
+
+import org.apache.http.client.methods.HttpGet;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import android.content.Context;
-import android.net.Uri;
-import android.text.Html;
-import android.util.Log;
 
 public class WhitePagesApi {
     private static final String TAG = WhitePagesApi.class.getSimpleName();
@@ -97,7 +92,7 @@ public class WhitePagesApi {
                 continue;
             }
 
-            String name = unHtml(extractXmlRegex(section,
+            String name = LookupUtils.fromHtml(extractXmlRegex(section,
                     "<span[^>]+?itemprop=\"name\">", "span"));
 
             if (name == null) {
@@ -105,11 +100,11 @@ public class WhitePagesApi {
             }
 
             // Address
-            String addrCountry = unHtml(extractXmlRegex(section,
+            String addrCountry = LookupUtils.fromHtml(extractXmlRegex(section,
                     "<span[^>]+?itemprop=\"addressCountry\">", "span"));
-            String addrState = unHtml(extractXmlRegex(section,
+            String addrState = LookupUtils.fromHtml(extractXmlRegex(section,
                     "<span[^>]+?itemprop=\"addressRegion\">", "span"));
-            String addrCity = unHtml(extractXmlRegex(section,
+            String addrCity = LookupUtils.fromHtml(extractXmlRegex(section,
                     "<span[^>]+?itemprop=\"addressLocality\">", "span"));
 
             StringBuilder sb = new StringBuilder();
@@ -145,13 +140,12 @@ public class WhitePagesApi {
             }
 
             String profile = httpGet(website);
-            String phoneNumber = unHtml(extractXmlRegex(profile,
+            String phoneNumber = LookupUtils.fromHtml(extractXmlRegex(profile,
                     "<li[^>]+?class=\"no-overflow tel\">", "li"));
             String address = parseAddressUnitedStates(profile);
 
             if (phoneNumber == null) {
-                Log.e(TAG,
-                        "Phone number is null. Either cookie is bad or regex is broken");
+                Log.e(TAG, "Phone number is null. Either cookie is bad or regex is broken");
                 continue;
             }
 
@@ -209,14 +203,6 @@ public class WhitePagesApi {
         return str.substring(realBegin, realEnd);
     }
 
-    private static String unHtml(String html) {
-        if (html == null) {
-            return null;
-        }
-
-        return Html.fromHtml(html).toString().trim();
-    }
-
     public static ContactInfo reverseLookup(Context context, String number)
             throws IOException {
         String provider = LookupSettings.getReverseLookupProvider(context);
@@ -257,36 +243,13 @@ public class WhitePagesApi {
     }
 
     private static String httpGet(String url) throws IOException {
-        HttpClient client = new DefaultHttpClient();
         HttpGet get = new HttpGet(url);
-
-        get.setHeader("User-Agent", USER_AGENT);
 
         if (mCookie != null) {
             get.setHeader("Cookie", COOKIE + "=" + mCookie);
         }
 
-        HttpResponse response = client.execute(get);
-        int status = response.getStatusLine().getStatusCode();
-
-        // Android's org.apache.http doesn't have the RedirectStrategy class
-        if (status == HttpStatus.SC_MOVED_PERMANENTLY
-                || status == HttpStatus.SC_MOVED_TEMPORARILY) {
-            Header[] headers = response.getHeaders("Location");
-
-            if (headers != null && headers.length != 0) {
-                String newUrl = headers[headers.length - 1].getValue();
-                return httpGet(newUrl);
-            } else {
-                return null;
-            }
-        }
-
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        response.getEntity().writeTo(out);
-
-        String output = new String(out.toByteArray());
-
+        String output = LookupUtils.httpGet(get);
         // If we can find a new cookie, use it
         Pattern p = Pattern.compile(COOKIE_REGEX, Pattern.DOTALL);
         Matcher m = p.matcher(output);
@@ -309,28 +272,13 @@ public class WhitePagesApi {
     }
 
     private static String parseNameUnitedStates(String output) {
-        Matcher m;
-
-        Pattern regexName = Pattern
-                .compile("<h2.*?>Send (.*?)&#39;s details to phone</h2>",
-                        Pattern.DOTALL);
-        String name = null;
-
-        m = regexName.matcher(output);
-        if (m.find()) {
-            name = m.group(1).trim();
-        }
+        String name = LookupUtils.firstRegexResult(output,
+                "<h2.*?>Send (.*?)&#39;s details to phone</h2>", true);
 
         // Use summary if name doesn't exist
         if (name == null) {
-            Pattern regexSummary = Pattern.compile(
-                    "<span\\s*class=\"subtitle.*?>\\s*\n?(.*?)\n?\\s*</span>",
-                    Pattern.DOTALL);
-
-            m = regexSummary.matcher(output);
-            if (m.find()) {
-                name = m.group(1).trim();
-            }
+            name = LookupUtils.firstRegexResult(output,
+                    "<span\\s*class=\"subtitle.*?>\\s*\n?(.*?)\n?\\s*</span>", true);
         }
 
         if (name != null) {
@@ -341,80 +289,36 @@ public class WhitePagesApi {
     }
 
     private static String parseNameCanada(String output) {
-        Matcher m;
-
-        Pattern regexName = Pattern.compile(
-                "(<li\\s+class=\"listing_info\">.*?</li>)", Pattern.DOTALL);
-        String name = null;
-
-        m = regexName.matcher(output);
-        if (m.find()) {
-            name = m.group(1).trim();
-        }
-
-        if (name != null) {
-            name = Html.fromHtml(name).toString().trim();
-        }
-
-        return name;
+        String name = LookupUtils.firstRegexResult(output,
+                "(<li\\s+class=\"listing_info\">.*?</li>)", true);
+        return LookupUtils.fromHtml(name);
     }
 
     private static String parseNumberUnitedStates(String output) {
-        Matcher m;
-
-        Pattern regexPhoneNumber = Pattern.compile(
-                "Full Number:</span>([0-9\\-\\+\\(\\)]+)</li>", Pattern.DOTALL);
-        String phoneNumber = null;
-
-        m = regexPhoneNumber.matcher(output);
-        if (m.find()) {
-            phoneNumber = m.group(1).trim();
-        }
-
-        return phoneNumber;
+        return LookupUtils.firstRegexResult(output,
+                "Full Number:</span>([0-9\\-\\+\\(\\)]+)</li>", true);
     }
 
     private static String parseAddressUnitedStates(String output) {
-        Matcher m;
-
         String regexBase = "<span\\s+class=\"%s[^\"]+\"\\s*>([^<]*)</span>";
 
-        Pattern regexAddressPrimary = Pattern.compile(
-                String.format(regexBase, "address-primary"), Pattern.DOTALL);
-        Pattern regexAddressSecondary = Pattern.compile(
-                String.format(regexBase, "address-secondary"), Pattern.DOTALL);
-        Pattern regexAddressLocation = Pattern.compile(
-                String.format(regexBase, "address-location"), Pattern.DOTALL);
-
-        String addressPrimary = null;
-        String addressSecondary = null;
-        String addressLocation = null;
-
-        m = regexAddressPrimary.matcher(output);
-        if (m.find()) {
-            addressPrimary = m.group(1).trim();
-        }
-
-        m = regexAddressSecondary.matcher(output);
-        if (m.find()) {
-            addressSecondary = m.group(1).trim();
-        }
-
-        m = regexAddressLocation.matcher(output);
-        if (m.find()) {
-            addressLocation = m.group(1).trim();
-        }
+        String addressPrimary = LookupUtils.firstRegexResult(output,
+                String.format(regexBase, "address-primary"), true);
+        String addressSecondary = LookupUtils.firstRegexResult(output,
+                String.format(regexBase, "address-secondary"), true);
+        String addressLocation = LookupUtils.firstRegexResult(output,
+                String.format(regexBase, "address-location"), true);
 
         StringBuilder sb = new StringBuilder();
 
-        if (addressPrimary != null && addressPrimary.length() != 0) {
+        if (!TextUtils.isEmpty(addressPrimary)) {
             sb.append(addressPrimary);
         }
-        if (addressSecondary != null && addressSecondary.length() != 0) {
+        if (!TextUtils.isEmpty(addressSecondary)) {
             sb.append(", ");
             sb.append(addressSecondary);
         }
-        if (addressLocation != null && addressLocation.length() != 0) {
+        if (!TextUtils.isEmpty(addressLocation)) {
             sb.append(", ");
             sb.append(addressLocation);
         }
@@ -428,22 +332,12 @@ public class WhitePagesApi {
     }
 
     private static String parseAddressCanada(String output) {
-        Matcher m;
-
-        Pattern regexAddress = Pattern
-                .compile(
-                        "<ol class=\"result people_result\">.*?(<li\\s+class=\"col_location\">.*?</li>).*?</ol>",
-                        Pattern.DOTALL);
-        String address = null;
-
-        m = regexAddress.matcher(output);
-        if (m.find()) {
-            address = m.group(1).trim();
-        }
+        String address = LookupUtils.firstRegexResult(output,
+                "<ol class=\"result people_result\">.*?(<li\\s+class=\"col_location\">.*?</li>)" +
+                ".*?</ol>", true);
 
         if (address != null) {
-            address = Html.fromHtml(address).toString().replace("\n", ", ")
-                    .trim();
+            address = LookupUtils.fromHtml(address).replace("\n", ", ");
         }
 
         return address;

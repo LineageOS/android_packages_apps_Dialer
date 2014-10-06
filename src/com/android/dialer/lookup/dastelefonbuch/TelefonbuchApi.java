@@ -18,21 +18,12 @@ package com.android.dialer.lookup.dastelefonbuch;
 
 import android.content.Context;
 import android.net.Uri;
-import android.text.Html;
 
-import com.android.dialer.lookup.LookupSettings;
+import com.android.dialer.lookup.LookupUtils;
 
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class TelefonbuchApi {
     private static final String TAG = TelefonbuchApi.class.getSimpleName();
@@ -41,8 +32,9 @@ public class TelefonbuchApi {
             "http://www.dastelefonbuch.de/?s=a20000" +
             "&cmd=search&sort_ok=0&sp=55&vert_ok=0&aktion=23";
 
-    private static final String USER_AGENT =
-            "Mozilla/5.0 (X11; Linux x86_64; rv:26.0) Gecko/20100101 Firefox/26.0";
+    private static String NAME_REGEX ="<a id=\"name0.*?>\\s*\n?(.*?)\n?\\s*</a>";
+    private static String NUMBER_REGEX = "<span\\s+class=\"ico fon.*>.*<span>(.*?)</span><br/>";
+    private static String ADDRESS_REGEX = "<address.*?>\n?(.*?)</address>";
 
     private TelefonbuchApi() {
     }
@@ -53,28 +45,19 @@ public class TelefonbuchApi {
                 .buildUpon()
                 .appendQueryParameter("kw", number)
                 .build();
-        String output = httpGet(uri.toString());
-        if (output == null) {
-            return null;
-        }
-
         // Cut out everything we're not interested in (scripts etc.) to
         // speed up the subsequent matching.
-        Pattern regex = Pattern.compile(": Treffer(.*)Ende Treffer", Pattern.DOTALL);
-        Matcher matcher = regex.matcher(output);
-        if (!matcher.find()) {
-            return null;
-        }
+        String output = LookupUtils.firstRegexResult(
+                LookupUtils.httpGet(new HttpGet(uri.toString())),
+                ": Treffer(.*)Ende Treffer", true);
 
-        output = matcher.group(1);
-
-        String name = parseName(output);
+        String name = parseValue(output, NAME_REGEX, true, false);
         if (name == null) {
             return null;
         }
 
-        String phoneNumber = parseNumber(output);
-        String address = parseAddress(output);
+        String phoneNumber = parseValue(output, NUMBER_REGEX, false, true);
+        String address = parseValue(output, ADDRESS_REGEX, true, true);
 
         ContactInfo info = new ContactInfo();
         info.name = name;
@@ -85,72 +68,13 @@ public class TelefonbuchApi {
         return info;
     }
 
-    private static String httpGet(String url) throws IOException {
-        HttpClient client = new DefaultHttpClient();
-        HttpGet get = new HttpGet(url);
-
-        get.setHeader("User-Agent", USER_AGENT);
-
-        HttpResponse response = client.execute(get);
-        int status = response.getStatusLine().getStatusCode();
-
-        // Android's org.apache.http doesn't have the RedirectStrategy class
-        if (status == HttpStatus.SC_MOVED_PERMANENTLY
-                || status == HttpStatus.SC_MOVED_TEMPORARILY) {
-            Header[] headers = response.getHeaders("Location");
-
-            if (headers != null && headers.length != 0) {
-                String newUrl = headers[headers.length - 1].getValue();
-                return httpGet(newUrl);
-            } else {
-                return null;
-            }
+    private static String parseValue(String output, String regex,
+            boolean dotall, boolean removeSpans) {
+        String result = LookupUtils.firstRegexResult(output, regex, dotall);
+        if (result != null && removeSpans) {
+            result = result.replaceAll("</?span.*?>", "");
         }
-
-        if (status != HttpStatus.SC_OK) {
-            return null;
-        }
-
-        return EntityUtils.toString(response.getEntity());
-    }
-
-    private static String parseName(String output) {
-        Pattern regex = Pattern.compile("<a id=\"name0.*?>\\s*\n?(.*?)\n?\\s*</a>",
-                Pattern.DOTALL);
-        Matcher m = regex.matcher(output);
-
-        if (m.find()) {
-            return fromHtml(m.group(1));
-        }
-
-        return null;
-    }
-
-    private static String parseNumber(String output) {
-        Pattern regex = Pattern.compile("<span\\s+class=\"ico fon.*>.*<span>(.*?)</span><br/>", 0);
-        Matcher m = regex.matcher(output);
-        if (m.find()) {
-            return fromHtml(m.group(1).replaceAll("</?span.*?>", ""));
-        }
-
-        return null;
-    }
-
-    private static String parseAddress(String output) {
-        Pattern regex = Pattern.compile("<address.*?>\n?(.*?)</address>", Pattern.DOTALL);
-        Matcher m = regex.matcher(output);
-        if (m.find()) {
-            return fromHtml(m.group(1).replaceAll("</?span.*?>", ""));
-        }
-
-        return null;
-    }
-
-    private static String fromHtml(String input) {
-        if (input == null) {
-            return null;
-        }
-        return Html.fromHtml(input).toString().trim();
+        return LookupUtils.fromHtml(result);
     }
 
     public static class ContactInfo {

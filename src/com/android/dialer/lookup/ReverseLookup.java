@@ -29,7 +29,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
-import android.util.Pair;
+
+import java.io.IOException;
 
 public abstract class ReverseLookup {
     private static final String TAG = ReverseLookup.class.getSimpleName();
@@ -98,9 +99,8 @@ public abstract class ReverseLookup {
      *
      * @param context The application context
      * @param uri The image URI
-     * @param data Extra data (a authentication token, perhaps)
      */
-    public Bitmap lookupImage(Context context, Uri uri, Object data) {
+    public Bitmap lookupImage(Context context, Uri uri) {
         return null;
     }
 
@@ -112,6 +112,6 @@ public abstract class ReverseLookup {
      * @param formattedNumber The formatted phone number
      * @return The phone number info object
      */
-    public abstract Pair<ContactInfo, Object> lookupNumber(Context context,
-            String normalizedNumber, String formattedNumber);
+    public abstract ContactInfo lookupNumber(Context context,
+            String normalizedNumber, String formattedNumber) throws IOException;
 }

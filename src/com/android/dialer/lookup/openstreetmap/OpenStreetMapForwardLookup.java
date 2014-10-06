@@ -19,31 +19,30 @@
 
 package com.android.dialer.lookup.openstreetmap;
 
-import com.android.dialer.calllog.ContactInfo;
-import com.android.dialer.lookup.ContactBuilder;
-import com.android.dialer.lookup.ForwardLookup;
-
 import android.content.Context;
 import android.location.Location;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.util.Log;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Locale;
+import com.android.dialer.calllog.ContactInfo;
+import com.android.dialer.lookup.ContactBuilder;
+import com.android.dialer.lookup.ForwardLookup;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class OpenStreetMapForwardLookup extends ForwardLookup {
     private static final String TAG =
@@ -149,14 +148,8 @@ public class OpenStreetMapForwardLookup extends ForwardLookup {
                 ContactBuilder builder = new ContactBuilder(
                         ContactBuilder.FORWARD_LOOKUP, null, phoneNumber);
 
-                ContactBuilder.Name n = new ContactBuilder.Name();
-                n.displayName = displayName;
-                builder.setName(n);
-
-                ContactBuilder.PhoneNumber pn = new ContactBuilder.PhoneNumber();
-                pn.number = phoneNumber;
-                pn.type = Phone.TYPE_MAIN;
-                builder.addPhoneNumber(pn);
+                builder.setName(ContactBuilder.Name.createDisplayName(displayName));
+                builder.addPhoneNumber(ContactBuilder.PhoneNumber.createMainNumber(phoneNumber));
 
                 ContactBuilder.Address a = new ContactBuilder.Address();
                 a.formattedAddress = address;
@@ -192,11 +185,6 @@ public class OpenStreetMapForwardLookup extends ForwardLookup {
 
         post.setEntity(new StringEntity(query));
 
-        HttpResponse response = client.execute(post);
-
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        response.getEntity().writeTo(out);
-
-        return new String(out.toByteArray());
+        return EntityUtils.toString(client.execute(post).getEntity());
     }
 }

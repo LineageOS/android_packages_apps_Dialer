@@ -16,15 +16,13 @@
 
 package com.android.dialer.lookup.zabasearch;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import android.text.TextUtils;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
+import com.android.dialer.lookup.LookupUtils;
+
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.IOException;
 
 public class ZabaSearchApi {
     private static final String TAG = ZabaSearchApi.class.getSimpleName();
@@ -40,93 +38,40 @@ public class ZabaSearchApi {
     }
 
     private void fetchPage() throws IOException {
-        mOutput = httpGet(LOOKUP_URL + mNumber);
-    }
-
-    private String httpGet(String url) throws IOException {
-        HttpClient client = new DefaultHttpClient();
-        HttpGet get = new HttpGet(url);
-
-        HttpResponse response = client.execute(get);
-
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        response.getEntity().writeTo(out);
-
-        return new String(out.toByteArray());
+        mOutput = LookupUtils.httpGet(new HttpGet(LOOKUP_URL + mNumber));
     }
 
     private void buildContactInfo() {
-        Matcher m;
-
         // Name
-        Pattern regexName = Pattern.compile(
-                "itemprop=\"?name\"?>([^<]+)<", Pattern.DOTALL);
-        String name = null;
-
-        m = regexName.matcher(mOutput);
-        if (m.find()) {
-            name = m.group(1).trim();
-        }
-
+        String name = LookupUtils.firstRegexResult(mOutput,
+                "itemprop=\"?name\"?>([^<]+)<", true);
         // Formatted phone number
-        Pattern regexPhoneNumber = Pattern.compile(
-                "itemprop=\"?telephone\"?>([^<]+)<", Pattern.DOTALL);
-        String phoneNumber = null;
-
-        m = regexPhoneNumber.matcher(mOutput);
-        if (m.find()) {
-            phoneNumber = m.group(1).trim();
-        }
-
+        String phoneNumber = LookupUtils.firstRegexResult(mOutput,
+                "itemprop=\"?telephone\"?>([^<]+)<", true);
         // Address
-        Pattern regexStreet = Pattern.compile(
-                "itemprop=\"?streetAddress\"?>([^<]+?)(&nbsp;)*<", Pattern.DOTALL);
-        Pattern regexCity = Pattern.compile(
-                "itemprop=\"?addressLocality\"?>([^<]+)<", Pattern.DOTALL);
-        Pattern regexState = Pattern.compile(
-                "itemprop=\"?addressRegion\"?>([^<]+)<", Pattern.DOTALL);
-        Pattern regexZip = Pattern.compile(
-                "itemprop=\"?postalCode\"?>([^<]+)<", Pattern.DOTALL);
-
-        String addressStreet = null;
-        String addressCity = null;
-        String addressState = null;
-        String addressZip = null;
-
-        m = regexStreet.matcher(mOutput);
-        if (m.find()) {
-            addressStreet = m.group(1).trim();
-        }
-
-        m = regexCity.matcher(mOutput);
-        if (m.find()) {
-            addressCity = m.group(1).trim();
-        }
-
-        m = regexState.matcher(mOutput);
-        if (m.find()) {
-            addressState = m.group(1).trim();
-        }
-
-        m = regexZip.matcher(mOutput);
-        if (m.find()) {
-            addressZip = m.group(1).trim();
-        }
+        String addressStreet = LookupUtils.firstRegexResult(mOutput,
+                "itemprop=\"?streetAddress\"?>([^<]+?)(&nbsp;)*<", true);
+        String addressCity = LookupUtils.firstRegexResult(mOutput,
+                "itemprop=\"?addressLocality\"?>([^<]+)<", true);
+        String addressState = LookupUtils.firstRegexResult(mOutput,
+                "itemprop=\"?addressRegion\"?>([^<]+)<", true);
+        String addressZip = LookupUtils.firstRegexResult(mOutput,
+                "itemprop=\"?postalCode\"?>([^<]+)<", true);
 
         StringBuilder sb = new StringBuilder();
 
-        if (addressStreet != null && addressStreet.length() != 0) {
+        if (!TextUtils.isEmpty(addressStreet)) {
             sb.append(addressStreet);
         }
-        if (addressCity != null && addressCity.length() != 0) {
+        if (!TextUtils.isEmpty(addressCity)) {
             sb.append(", ");
             sb.append(addressCity);
         }
-        if (addressState != null && addressState.length() != 0) {
+        if (!TextUtils.isEmpty(addressState)) {
             sb.append(", ");
             sb.append(addressState);
         }
-        if (addressZip != null && addressZip.length() != 0) {
+        if (!TextUtils.isEmpty(addressZip)) {
             sb.append(", ");
             sb.append(addressZip);
         }

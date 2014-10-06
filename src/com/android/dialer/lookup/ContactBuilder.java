@@ -259,6 +259,13 @@ public class ContactBuilder {
         public String postCode;
         public String country;
 
+        public static Address createFormattedHome(String address) {
+            Address a = new Address();
+            a.formattedAddress = address;
+            a.type = StructuredPostal.TYPE_HOME;
+            return a;
+        }
+
         public JSONObject getJsonObject() throws JSONException {
             JSONObject json = new JSONObject();
             json.putOpt(StructuredPostal.FORMATTED_ADDRESS,
@@ -301,6 +308,12 @@ public class ContactBuilder {
         public String phoneticMiddleName;
         public String phoneticFamilyName;
 
+        public static Name createDisplayName(String displayName) {
+            Name name = new Name();
+            name.displayName = displayName;
+            return name;
+        }
+
         public JSONObject getJsonObject() throws JSONException {
             JSONObject json = new JSONObject();
             json.putOpt(StructuredName.DISPLAY_NAME, displayName);
@@ -337,6 +350,13 @@ public class ContactBuilder {
         public int type;
         public String label;
 
+        public static PhoneNumber createMainNumber(String number) {
+            PhoneNumber n = new PhoneNumber();
+            n.number = number;
+            n.type = Phone.TYPE_MAIN;
+            return n;
+        }
+
         public JSONObject getJsonObject() throws JSONException {
             JSONObject json = new JSONObject();
             json.put(Phone.NUMBER, number);
@@ -357,6 +377,13 @@ public class ContactBuilder {
         public String url;
         public int type;
         public String label;
+
+        public static WebsiteUrl createProfile(String url) {
+            WebsiteUrl u = new WebsiteUrl();
+            u.url = url;
+            u.type = Website.TYPE_PROFILE;
+            return u;
+        }
 
         public JSONObject getJsonObject() throws JSONException {
             JSONObject json = new JSONObject();

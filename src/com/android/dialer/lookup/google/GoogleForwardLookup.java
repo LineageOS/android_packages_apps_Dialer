@@ -179,26 +179,15 @@ public class GoogleForwardLookup extends ForwardLookup {
 
                 ContactBuilder builder = new ContactBuilder(
                         ContactBuilder.FORWARD_LOOKUP, null, phoneNumber);
-
-                ContactBuilder.Name n = new ContactBuilder.Name();
-                n.displayName = displayName;
-                builder.setName(n);
-
-                ContactBuilder.PhoneNumber pn = new ContactBuilder.PhoneNumber();
-                pn.number = phoneNumber;
-                pn.type = Phone.TYPE_MAIN;
-                builder.addPhoneNumber(pn);
+                builder.setName(ContactBuilder.Name.createDisplayName(displayName));
+                builder.addPhoneNumber(ContactBuilder.PhoneNumber.createMainNumber(phoneNumber));
+                builder.addWebsite(ContactBuilder.WebsiteUrl.createProfile(profileUrl));
 
                 ContactBuilder.Address a = new ContactBuilder.Address();
                 a.formattedAddress = address;
                 a.city = city;
                 a.type = StructuredPostal.TYPE_WORK;
                 builder.addAddress(a);
-
-                ContactBuilder.WebsiteUrl w = new ContactBuilder.WebsiteUrl();
-                w.url = profileUrl;
-                w.type = Website.TYPE_PROFILE;
-                builder.addWebsite(w);
 
                 if (photoUri != null) {
                     builder.setPhotoUri(photoUri);
