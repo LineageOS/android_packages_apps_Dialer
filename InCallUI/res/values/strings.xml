@@ -174,21 +174,21 @@
     <!-- Label for "end call" Action.
          It is displayed in the "Ongoing call" notification, which is shown
          when the user is outside the in-call screen while the phone call is still
-         active. [CHAR LIMIT=40] -->
+         active. [CHAR LIMIT=12] -->
     <string name="notification_action_end_call">Hang up</string>
     <!-- Label for "Video Call" notification action. This is a displayed on the notification for an
-         incoming video call, and answers the call as a video call. [CHAR LIMIT=40] -->
+         incoming video call, and answers the call as a video call. [CHAR LIMIT=12] -->
     <string name="notification_action_answer_video">Video</string>
     <!-- Label for "Voice" notification action. This is a displayed on the notification for an
-         incoming video call, and answers the call as an audio call. [CHAR LIMIT=40] -->
+         incoming video call, and answers the call as an audio call. [CHAR LIMIT=12] -->
     <string name="notification_action_answer_voice">Voice</string>
     <!-- Label for "Accept" notification action. This is somewhat generic, and may refer to
          scenarios such as accepting an incoming call or accepting a video call request.
-         [CHAR LIMIT=40] -->
+         [CHAR LIMIT=12] -->
     <string name="notification_action_accept">Accept</string>
     <!-- Label for "Dismiss" notification action. This is somewhat generic, and may refer to
          scenarios such as declining an incoming call or declining a video call request.
-         [CHAR LIMIT=40] -->
+         [CHAR LIMIT=12] -->
     <string name="notification_action_dismiss">Dismiss</string>
 
     <!-- Message for "call back" Action, which is displayed in the missed call notificaiton.
@@ -470,7 +470,7 @@
     <!-- String used by AccessibilityService to announce that the call has been removed from hold [CHAR LIMIT=NONE]-->
     <string name="accessibility_call_removed_from_hold">Call removed from hold.</string>
 
-    <!-- Description of the answer target in the Slide unlock screen of Phone. [CHAR LIMIT=NONE] -->
+    <!-- Description of the answer target in the Slide unlock screen of Phone. [CHAR LIMIT=12] -->
     <string name="description_target_answer">Answer</string>
     <!-- Description of the send_sms target in the Slide unlock screen of Phone. [CHAR LIMIT=NONE] -->
     <string name="description_target_send_sms">Send SMS</string>
