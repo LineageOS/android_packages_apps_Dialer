@@ -242,6 +242,8 @@ public final class Call {
                 return Call.State.ONHOLD;
             case android.telecom.Call.STATE_DISCONNECTED:
                 return Call.State.DISCONNECTED;
+            case android.telecom.Call.STATE_DISCONNECTING:
+                return Call.State.DISCONNECTING;
             default:
                 return Call.State.INVALID;
         }
