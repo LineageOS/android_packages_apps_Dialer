@@ -207,8 +207,9 @@ public class MSimCallLogFragment extends CallLogFragment {
         filterSub[0] = new SpinnerContent(CallLogQueryHandler.CALL_SUB_ALL,
                 getString(R.string.call_log_show_all_slots));
         for (int i = 0; i < count; i++) {
-            filterSub[i + 1] = new SpinnerContent(i,
-                    MoreContactUtils.getMultiSimAliasesName(getActivity(), i));
+            String subDisplayName = PhoneAccountUtils.getAccountLabel(getActivity(),
+                    MoreContactUtils.getAccount(i));
+            filterSub[i + 1] = new SpinnerContent(i, subDisplayName);
         }
         return filterSub;
     }
