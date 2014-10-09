@@ -29,10 +29,9 @@ import android.text.TextUtils;
  */
 public class PhoneAccountUtils {
     /**
-     * Generate account info from data in Telecomm database
+     * Compose PhoneAccount object from component name and account id
      */
-    public static PhoneAccountHandle getAccount(String componentString,
-            String accountId) {
+    public static PhoneAccountHandle getAccount(String componentString, String accountId) {
         if (TextUtils.isEmpty(componentString) || TextUtils.isEmpty(accountId)) {
             return null;
         }
@@ -41,7 +40,7 @@ public class PhoneAccountUtils {
     }
 
     /**
-     * Generate account icon from data in Telecomm database
+     * Extract account icon from PhoneAccount object
      */
     public static Drawable getAccountIcon(Context context, PhoneAccountHandle phoneAccount) {
         final PhoneAccount account = getAccountOrNull(context, phoneAccount);
@@ -52,7 +51,7 @@ public class PhoneAccountUtils {
     }
 
     /**
-     * Generate account label from data in Telecomm database
+     * Extract account label from PhoneAccount object
      */
     public static String getAccountLabel(Context context, PhoneAccountHandle phoneAccount) {
         final PhoneAccount account = getAccountOrNull(context, phoneAccount);
@@ -66,8 +65,7 @@ public class PhoneAccountUtils {
      * Retrieve the account metadata, but if the account does not exist or the device has only a
      * single registered and enabled account, return null.
      */
-    private static PhoneAccount getAccountOrNull(Context context,
-            PhoneAccountHandle phoneAccount) {
+    private static PhoneAccount getAccountOrNull(Context context, PhoneAccountHandle phoneAccount) {
         final TelecomManager telecomManager =
                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
         final PhoneAccount account = telecomManager.getPhoneAccount(phoneAccount);
