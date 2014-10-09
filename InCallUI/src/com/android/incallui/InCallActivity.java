@@ -46,6 +46,8 @@ import android.view.accessibility.AccessibilityEvent;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 import com.android.contacts.common.interactions.TouchPointManager;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
 import com.android.incallui.Call.State;
 
 import java.util.ArrayList;
@@ -488,7 +490,6 @@ public class InCallActivity extends Activity {
                     extras = new Bundle();
                 }
 
-
                 Point touchPoint = null;
                 if (TouchPointManager.getInstance().hasValidPoint()) {
                     // Use the most immediate touch point in the InCallUi if available
@@ -532,8 +533,19 @@ public class InCallActivity extends Activity {
                     phoneAccountHandles = new ArrayList<>();
                 }
 
+                SelectPhoneAccountListener listener = new SelectPhoneAccountListener() {
+                    @Override
+                    public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle) {
+                        InCallPresenter.getInstance().handleAccountSelection(selectedAccountHandle);
+                    }
+                    @Override
+                    public void onDialogDismissed() {
+                        InCallPresenter.getInstance().cancelAccountSelection();
+                    }
+                };
+
                 SelectPhoneAccountDialogFragment.showAccountDialog(getFragmentManager(),
-                        phoneAccountHandles);
+                        phoneAccountHandles, listener);
             } else {
                 mCallCardFragment.setVisible(true);
             }
