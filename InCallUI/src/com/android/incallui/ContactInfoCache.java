@@ -156,16 +156,24 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             presentationMode = TelecomManager.PRESENTATION_ALLOWED;
         }
 
-        final ContactCacheEntry cacheEntry = buildEntry(mContext, callId,
-                callerInfo, presentationMode, isIncoming);
+        ContactCacheEntry cacheEntry = mInfoMap.get(callId);
+        // Rebuild the entry from the new data if:
+        // 1) This is NOT the asynchronous local lookup (IOW, this is the first pass)
+        // 2) The local lookup was done and the contact exists
+        // 3) The existing cached entry is empty (no name).
+        if (!didLocalLookup || callerInfo.contactExists ||
+                (cacheEntry != null && TextUtils.isEmpty(cacheEntry.name))) {
+            cacheEntry = buildEntry(mContext, callId, callerInfo, presentationMode, isIncoming);
+            mInfoMap.put(callId, cacheEntry);
+        }
 
-        // Add the contact info to the cache.
-        mInfoMap.put(callId, cacheEntry);
         sendInfoNotifications(callId, cacheEntry);
 
         if (didLocalLookup) {
-            if (!callerInfo.contactExists && cacheEntry.name == null &&
-                    mPhoneNumberService != null) {
+            // Before issuing a request for more data from other services, We only check that the
+            // contact wasn't found in the local DB.  We don't check the if the cache entry already
+            // has a name because we allow overriding cnap data with data from other services.
+            if (!callerInfo.contactExists && mPhoneNumberService != null) {
                 Log.d(TAG, "Contact lookup. Local contacts miss, checking remote");
                 final PhoneNumberServiceListener listener = new PhoneNumberServiceListener(callId);
                 mPhoneNumberService.getPhoneNumberInfo(cacheEntry.number, listener, listener,
@@ -179,8 +187,6 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             } else {
                 if (callerInfo.contactExists) {
                     Log.d(TAG, "Contact lookup done. Local contact found, no image.");
-                } else if (cacheEntry.name != null) {
-                    Log.d(TAG, "Contact lookup done. Special contact type.");
                 } else {
                     Log.d(TAG, "Contact lookup done. Local contact not found and"
                             + " no remote lookup service available.");
