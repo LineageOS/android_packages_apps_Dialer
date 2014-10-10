@@ -21,7 +21,6 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.graphics.Rect;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -29,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapter;
@@ -197,7 +197,8 @@ public class ShortcutCardsAdapter extends BaseAdapter {
         // the PhoneFavoriteMergedAdapter, but keep the original look of the item in
         // the CallLogAdapter.
         final View view = mCallLogAdapter.getView(position, convertView == null ?
-                null : wrapper.getChildAt(0), parent);
+                null : wrapper.getChildAt(0), parent
+        );
         wrapper.removeAllViews();
         wrapper.prepareChildView(view);
         wrapper.addView(view);
@@ -234,6 +235,8 @@ public class ShortcutCardsAdapter extends BaseAdapter {
         }
 
         private void prepareChildView(View view) {
+            // Override CallLogAdapter's accessibility behavior; don't expand the shortcut card.
+            view.setAccessibilityDelegate(null);
             view.setBackgroundResource(R.drawable.rounded_corner_bg);
 
             final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
@@ -247,12 +250,17 @@ public class ShortcutCardsAdapter extends BaseAdapter {
             view.setLayoutParams(params);
 
             LinearLayout actionView =
-                    (LinearLayout)view.findViewById(R.id.primary_action_view);
+                    (LinearLayout) view.findViewById(R.id.primary_action_view);
             actionView.setPaddingRelative(
                     mCallLogPaddingStart,
                     mCallLogPaddingTop,
                     actionView.getPaddingEnd(),
                     mCallLogPaddingBottom);
+
+            // TODO: Set content description including type/location and time information.
+            TextView nameView = (TextView) actionView.findViewById(R.id.name);
+            actionView.setContentDescription(getResources().getString(
+                    R.string.description_call_back_action, nameView.getText()));
 
             mPreviousTranslationZ = getResources().getDimensionPixelSize(
                     R.dimen.recent_call_log_item_translation_z);
