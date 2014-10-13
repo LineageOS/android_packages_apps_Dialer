@@ -160,7 +160,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"वीडियो कॉल करें"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"पूर्ण काल ​​इतिहास देखें"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>  छूटे हुए नए कॉल"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"स्पीड डायल उन \nपसंदीदा और नंबरों के लिए\n एकल स्पर्श डायलिंग है जिन्हें आप अक्सर कॉल करते हैं."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"स्पीड डायल उन \nपसंदीदा नंबरों के लिए\n केवल एक बार स्पर्श करके डायलिंग सुविधा है जिन्हें आप अक्सर कॉल करते हैं."</string>
     <string name="all_contacts_empty" msgid="4536082452651392894">"आपके पास कोई संपर्क नहीं है."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"सभी नंबर देखने के लिए चित्र को टैप करें या पुनः क्रमित करने के लिए दबाए रखें"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"ख़ारिज करें"</string>
