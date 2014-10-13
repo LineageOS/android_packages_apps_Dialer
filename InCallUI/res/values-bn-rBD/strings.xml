@@ -170,5 +170,4 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"রিংটোন ও কম্পন"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"কনফারেন্স কল পরিচালনা করুন"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"জরুরি নম্বর"</string>
-    <string name="select_account_dialog_title" msgid="5730339500156684204">"অ্যাকাউন্ট নির্বাচন করুন"</string>
 </resources>
