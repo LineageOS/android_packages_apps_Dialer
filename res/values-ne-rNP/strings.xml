@@ -106,7 +106,7 @@
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"कल थप्नुहोस्"</string>
     <string name="type_incoming" msgid="6502076603836088532">"आगमन कल"</string>
     <string name="type_outgoing" msgid="343108709599392641">"बहिर्गमन कल"</string>
-    <string name="type_missed" msgid="2720502601640509542">"मिस कल"</string>
+    <string name="type_missed" msgid="2720502601640509542">"छुटेको कल"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"आगमन भिडियो कल"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"बहिर्गमन भिडियो कल"</string>
     <string name="type_missed_video" msgid="954396897034220545">"छुटेको भिडियो कल"</string>
@@ -150,7 +150,7 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"सबै"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"छुटेको"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Voicemail"</string>
-    <string name="tab_speed_dial" msgid="7807567599021643864">"Speed Dial"</string>
+    <string name="tab_speed_dial" msgid="7807567599021643864">"स्पिड डायल"</string>
     <string name="tab_recents" msgid="929949073851377206">"हालैका"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"सम्पर्कहरू"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"मनपर्नेहरूबाट हटाइयो"</string>
@@ -166,10 +166,10 @@
     <string name="description_dismiss" msgid="2146276780562549643">"खारेज गर्नुहोस्"</string>
     <string name="remove_contact" msgid="1080555335283662961">"हटाउँनुहोस्"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"सबै सम्पर्कहरू"</string>
-    <string name="call_log_action_call_back" msgid="4944463006859852473">"CALL BACK"</string>
+    <string name="call_log_action_call_back" msgid="4944463006859852473">"कल फर्काउने"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"VIDEO CALL"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"LISTEN"</string>
-    <string name="call_log_action_details" msgid="6252596497021563115">"DETAILS"</string>
+    <string name="call_log_action_details" msgid="6252596497021563115">"जानकारी"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>बाट छुटेका कल।"</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g> बाट कलको जवाफ फर्काइयो।"</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g> मा कल गर्नुहोस्।"</string>
