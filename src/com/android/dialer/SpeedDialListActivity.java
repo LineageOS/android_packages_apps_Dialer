@@ -44,6 +44,8 @@ import android.provider.ContactsContract.Contacts.Data;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -56,6 +58,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import static com.android.internal.telephony.PhoneConstants.SUBSCRIPTION_KEY;
 
 public class SpeedDialListActivity extends ListActivity
         implements OnItemClickListener, OnCreateContextMenuListener {
@@ -162,6 +166,15 @@ public class SpeedDialListActivity extends ListActivity
         // TODO Auto-generated method stub
         if (position == 0) {
             Intent intent = new Intent(ACTION_ADD_VOICEMAIL);
+            if (TelephonyManager.getDefault().getPhoneCount() > 1) {
+                long sub = SubscriptionManager.getDefaultVoiceSubId();
+                intent.setClassName("com.android.phone",
+                        "com.android.phone.MSimCallFeaturesSubSetting");
+                intent.putExtra(SUBSCRIPTION_KEY, sub);
+            } else {
+                intent.setClassName("com.android.phone",
+                        "com.android.phone.CallFeaturesSetting");
+            }
             try {
                 startActivity(intent);
             } catch(ActivityNotFoundException e) {
