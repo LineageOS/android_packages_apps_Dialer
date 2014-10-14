@@ -17,10 +17,14 @@
 package com.android.dialer.dialpad;
 
 import android.content.AsyncTaskLoader;
+import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.RawContacts;
 import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 
@@ -95,6 +99,22 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
             row[PhoneQuery.LOOKUP_KEY] = contact.lookupKey;
             row[PhoneQuery.PHOTO_ID] = contact.photoId;
             row[PhoneQuery.DISPLAY_NAME] = contact.displayName;
+
+            String accountType = null;
+            String accountName = null;
+            Uri contactUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, contact.id);
+            Cursor c = mContext.getContentResolver().query(
+                    contactUri,
+                    new String[] { RawContacts.ACCOUNT_TYPE, RawContacts.ACCOUNT_NAME },
+                    null, null, null);
+            if (c != null && c.moveToFirst()) {
+                accountType = c.getString(0);
+                accountName = c.getString(1);
+                c.close();
+            }
+            row[PhoneQuery.PHONE_ACCOUNT_TYPE] = accountType;
+            row[PhoneQuery.PHONE_ACCOUNT_NAME] = accountName;
+
             cursor.addRow(row);
         }
         return cursor;
