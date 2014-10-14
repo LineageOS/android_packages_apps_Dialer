@@ -170,5 +170,4 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"벨소리 및 진동"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"다자간 통화 관리"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"비상 전화번호"</string>
-    <string name="select_account_dialog_title" msgid="5730339500156684204">"계정 선택"</string>
 </resources>
