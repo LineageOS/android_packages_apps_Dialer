@@ -101,6 +101,17 @@ public class SearchEditTextLayout extends FrameLayout {
         mExpandedSearchBox = findViewById(R.id.search_box_expanded);
         mClearButtonView = findViewById(R.id.search_close_button);
 
+        // Convert a long click into a click to expand the search box, and then long click on the
+        // search view. This accelerates the long-press scenario for copy/paste.
+        mCollapsedSearchBox.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mCollapsedSearchBox.performClick();
+                mSearchView.performLongClick();
+                return false;
+            }
+        });
+
         mSearchView.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
