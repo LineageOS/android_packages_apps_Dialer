@@ -170,5 +170,4 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"रिंगटोन आणि कंपन"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"परिषद कॉल व्यवस्थापित करा"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"आणीबाणीचा नंबर"</string>
-    <string name="select_account_dialog_title" msgid="5730339500156684204">"खाते निवडा"</string>
 </resources>

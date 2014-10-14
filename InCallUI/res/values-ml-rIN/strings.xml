@@ -170,5 +170,4 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"റിംഗ്ടോണും വൈബ്രേറ്റുചെയ്യലും"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"കോൺഫറൻസ് കോൾ നിയന്ത്രിക്കുക"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"അടിയന്തര നമ്പർ"</string>
-    <string name="select_account_dialog_title" msgid="5730339500156684204">"അക്കൗണ്ട് തിരഞ്ഞെടുക്കുക"</string>
 </resources>
