@@ -59,6 +59,7 @@
   <string name="speed_dial_replace">Ganti</string>
   <string name="speed_dial_delete">Hapus</string>
   <string name="speed_dial_unassigned_dialog_title">Tombol belum ditetapkan</string>
+  <string name="speed_dial_unassigned_dialog_message">Tidak ada kontak panggil cepat yang ditetapkan ke tombol angka \'<xliff:g id="number">%s</xliff:g>\'. Apakah Anda ingin menetapkan sebuah kontak sekarang?</string>
   <string name="dialog_speed_dial_airplane_mode_message">"Untuk menggunakan panggilan cepat, pertama matikan mode Pesawat."</string>
   <string name="msim_ime_dialog_title">Identifikasi perangkat</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>

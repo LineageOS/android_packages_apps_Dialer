@@ -58,7 +58,7 @@
   <string name="speed_dial_not_set">（未設定）</string>
   <string name="speed_dial_replace">書き換える</string>
   <string name="speed_dial_delete">削除</string>
-  <string name="speed_dial_unassigned_dialog_title">キーが割り当てられていません</string>
+  <string name="speed_dial_unassigned_dialog_title">キーに割り当てがありません</string>
   <string name="speed_dial_unassigned_dialog_message">数字キー「<xliff:g id="number">%s</xliff:g>」にはスピードダイヤルの連絡先が割り当てられていません。連絡先を割り当てますか？</string>
   <string name="dialog_speed_dial_airplane_mode_message">"スピードダイヤルを使用するには、機内モードをOFFにしてください。"</string>
   <string name="msim_ime_dialog_title">端末識別子</string>

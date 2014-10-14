@@ -50,4 +50,23 @@
   <string name="start_call_playback">נגן הקלטה</string>
   <string name="stop_call_playback">עצור</string>
   <string name="call_playback_error_message">נכשל בניגון הקלטה</string>
+  <string name="calllog_search_hint">חיפוש ביומן שיחות</string>
+  <string name="video_call">שיחת וידאו</string>
+  <string name="video_call_settings">הגדרות שיחת וידאו</string>
+  <string name="description_videocall">שיחת וידאו <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">הגדרות חיוג מהיר</string>
+  <string name="speed_dial_not_set">(לא מוגדר)</string>
+  <string name="speed_dial_replace">החלף</string>
+  <string name="speed_dial_delete">מחק</string>
+  <string name="speed_dial_unassigned_dialog_title">לא הוגדר מקש</string>
+  <string name="speed_dial_unassigned_dialog_message">שום איש קשר מהיר אינו מחובר למספר \'<xliff:g id="number">%s</xliff:g>\'. האם ברצונך להגדיר איש קשר?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"כדי להשתמש בחיוג מהיר, בטל תחילה את מצב טיסה."</string>
+  <string name="msim_ime_dialog_title">מזהה התקן</string>
+  <string name="multi_sim_slot_name">סים  <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">כל הסימים</string>
+  <string name="yes">כן</string>
+  <string name="no">לא</string>
+  <string name="call_duration_active">זמן שיחה פעילה:</string>
+  <string name="call_duration_call_out">משך השיחה:</string>
+  <string name="call_log_all_calls_header">כל השיחות</string>
 </resources>
