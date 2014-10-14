@@ -20,6 +20,7 @@ import android.content.Context;
 import android.telecom.AudioState;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.PhoneCapabilities;
+import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 
 
@@ -83,9 +84,10 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             // OUTGOING.  We may want to do that once we start showing "Voice mail" label on
             // the dialpad too.)
             if (ui != null) {
-                if (oldState == InCallState.OUTGOING && mCall != null
-                        && PhoneNumberUtils.isVoiceMailNumber(mCall.getNumber())) {
-                    ui.displayDialpad(true /* show */, true /* animate */);
+                if (oldState == InCallState.OUTGOING && mCall != null) {
+                    if (CallerInfoUtils.isVoiceMailNumber(ui.getContext(), mCall)) {
+                        ui.displayDialpad(true /* show */, true /* animate */);
+                    }
                 }
             }
         } else if (newState == InCallState.INCOMING) {
