@@ -53,6 +53,7 @@
         <ImageView android:id="@+id/dismiss_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/icon_padding"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/call_log_icon_margin"
             android:src="@drawable/ic_close_dk"
