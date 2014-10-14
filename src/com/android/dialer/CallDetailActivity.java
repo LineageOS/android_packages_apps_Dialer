@@ -16,6 +16,7 @@
 
 package com.android.dialer;
 
+import android.accounts.Account;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -30,6 +31,8 @@ import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.RawContacts;
 import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -620,6 +623,24 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     private void loadContactPhotos(Uri contactUri, Uri photoUri, String displayName,
             String lookupKey, int contactType) {
 
+        Account contactAccount = null;
+        if (contactUri != null) {
+            ContentResolver resolver = getContentResolver();
+            Uri uri = Contacts.lookupContact(resolver, contactUri);
+            Cursor cursor = resolver.query(
+                    uri,
+                    new String[] { RawContacts.ACCOUNT_TYPE, RawContacts.ACCOUNT_NAME },
+                    null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                String accountType = cursor.getString(0);
+                String accountName = cursor.getString(1);
+                if (!TextUtils.isEmpty(accountName) && !TextUtils.isEmpty(accountType)) {
+                    contactAccount = new Account(accountName, accountType);
+                }
+                cursor.close();
+            }
+        }
+
         final DefaultImageRequest request = new DefaultImageRequest(displayName, lookupKey,
                 contactType, true /* isCircular */);
 
@@ -628,7 +649,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                 mResources.getString(R.string.description_contact_details, displayName));
 
         mContactPhotoManager.loadDirectoryPhoto(mQuickContactBadge, photoUri,
-                null, false /* darkTheme */, true /* isCircular */, request);
+                contactAccount, false /* darkTheme */, true /* isCircular */, request);
     }
 
     static final class ViewEntry {
