@@ -61,8 +61,8 @@ public class ConferenceManagerFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final View parent = inflater.inflate(R.layout.conference_manager_fragment, container,
-                false);
+        final View parent =
+                inflater.inflate(R.layout.conference_manager_fragment, container, false);
 
         // Create list of conference call widgets
         mConferenceCallList = new ViewGroup[getPresenter().getMaxCallersInConference()];
@@ -70,6 +70,7 @@ public class ConferenceManagerFragment
                                         R.id.caller3, R.id.caller4 };
         for (int i = 0; i < getPresenter().getMaxCallersInConference(); i++) {
             mConferenceCallList[i] = (ViewGroup) parent.findViewById(viewGroupIdList[i]);
+            initializeRow(mConferenceCallList[i], i);
         }
 
         mContactPhotoManager =
@@ -79,6 +80,27 @@ public class ConferenceManagerFragment
                 (int) getResources().getDimension(R.dimen.incall_action_bar_elevation);
 
         return parent;
+    }
+
+    /**
+     * Setup listeners for disconnecting and separating child calls.
+     */
+    private void initializeRow(View rowView, final int rowId) {
+        View endButton = rowView.findViewById(R.id.conferenceCallerDisconnect);
+        endButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().endConferenceConnection(rowId);
+            }
+        });
+
+        View separateButton = rowView.findViewById(R.id.conferenceCallerSeparate);
+        separateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().separateConferenceConnection(rowId);
+            }
+        });
     }
 
     @Override
@@ -114,11 +136,7 @@ public class ConferenceManagerFragment
 
     @Override
     public void setRowVisible(int rowId, boolean on) {
-        if (on) {
-            mConferenceCallList[rowId].setVisibility(View.VISIBLE);
-        } else {
-            mConferenceCallList[rowId].setVisibility(View.GONE);
-        }
+        mConferenceCallList[rowId].setVisibility(on ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -158,38 +176,15 @@ public class ConferenceManagerFragment
     }
 
     @Override
-    public final void setupEndButtonForRow(final int rowId, boolean canDisconnect) {
+    public void updateEndButtonForRow(int rowId, boolean canDisconnect) {
         View endButton = mConferenceCallList[rowId].findViewById(R.id.conferenceCallerDisconnect);
-
-        // Comment
-        if (canDisconnect) {
-            endButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getPresenter().endConferenceConnection(rowId);
-                }
-            });
-            endButton.setVisibility(View.VISIBLE);
-        } else {
-            endButton.setVisibility(View.INVISIBLE);
-        }
+        endButton.setVisibility(canDisconnect ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public final void setupSeparateButtonForRow(final int rowId, boolean canSeparate) {
-        final View separateButton =
+    public void updateSeparateButtonForRow(int rowId, boolean canSeparate) {
+        View separateButton =
                 mConferenceCallList[rowId].findViewById(R.id.conferenceCallerSeparate);
-
-        if (canSeparate) {
-            separateButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getPresenter().separateConferenceConnection(rowId);
-                }
-            });
-            separateButton.setVisibility(View.VISIBLE);
-        } else {
-            separateButton.setVisibility(View.INVISIBLE);
-        }
+        separateButton.setVisibility(canSeparate ? View.VISIBLE : View.GONE);
     }
 }
