@@ -68,6 +68,8 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"알 수 없는 음성사서함 번호"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"서비스 불가"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"선택한 네트워크(<xliff:g id="OPERATOR_NAME">%s</xliff:g>)를 사용할 수 없음"</string>
+    <!-- no translation found for notification_action_answer (6700362365135365143) -->
+    <skip />
     <string name="notification_action_end_call" msgid="6069460915123531620">"전화 끊기"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"동영상"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"음성"</string>
