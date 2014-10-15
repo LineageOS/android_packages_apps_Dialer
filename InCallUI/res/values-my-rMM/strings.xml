@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"အကြောင်းအရာ မသိရှိ"</string>
     <string name="private_num" msgid="6713286113000232309">"လျို့ဝှက် နံပါတ်"</string>
     <string name="payphone" msgid="1931775086311769314">"အများသုံးတယ်လီဖုန်း"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"ဖုန်းလိုင်းမအားပါ"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"အလုပ်များနေသော ကွန်ယက်"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"အကြောင်းပြန်မှုမရှိ၊ အချိန်ကျော်လွန်သွား"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"ဆာဗာကို ဆက်သွယ်၍မရပါ"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"ဖုန်းနံပါတ်အား ခေါ်ဆို၍ မရပါ"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"သုံးစွဲသူအမည် သို့မဟုတ် စကားဝှက် မှားနေပါသည်"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"ကွန်ယက်ပြင်ပမှ ခေါ်ဆိုမှု"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"ဆာဗာမှားယွင်းမှု။ နောင်မှ ပြန်ကြိုးစားပါ"</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"ထုတ်လွှင့်မှု မရှိပါ"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM အတိုင်းအတာ ကျော်လွန်ပါသည်။"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"ရေဒီယိုအားပိတ်သည်"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"ဆင်းမ်ကဒ်မရှိ သို့မဟုတ် ဆင်းမ်ကဒ်အမှား"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"မိုဘိုင်း ကွန်ရက် မရှိ"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"အထွက် ခေါ်ဆိုမှုများအားFDN မှ ကန့်သတ်ထားပါသည်"</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"ဖုန်းခေါ်ဆိုမှု ပိတ်ထားစဉ် အထွက်ဖုန်းခေါ်ဆိုမှု မပြုနိုင်ပါ"</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"ဖုန်းခေါ်ဆိုမှုအားလုံးအား ခွင့်ပြုမှု ထိန်းချုပ်ခြင်းစနစ်မှကန့်သတ်ထားပါသည်"</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"အရေးပေါ် ခေါ်ဆိုမှုများအား ခွင့်ပြုမှု ထိန်းချုပ်ခြင်းစနစ်မှ ကန့်သတ်ထားပါသည်"</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"ပုံမှန် ခေါ်ဆိုမှုများအား ခွင့်ပြုမှု ထိန်းချုပ်ခြင်းစနစ်မှ ကန့်သတ်ထားပါသည်"</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"နံပါတ်အမှား"</string>
     <string name="confCall" msgid="1904840547188336828">"ကွန်းဖရင့်ခေါ်ဆိုမှု"</string>
     <string name="call_lost" msgid="317670617901479594">"ဖုန်းခေါ်မှု ပျောက်ဆုံးသွားပါသည်"</string>
     <string name="ok" msgid="3811371167865772377">"ကောင်းပြီ"</string>
@@ -86,7 +67,8 @@
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> ကိုခေါ်ပါ"</string>
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"အသံဖုန်းခေါ်မှုနံပါတ် မသိပါ"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"ဝန်ဆောင်မှု မရှိပါ"</string>
-    <string name="notification_network_selection_text" msgid="2607085729661923269">"ရွေးချယ်ထားသော ကွန်ယက် (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) မရရှိနိုင်ပါ"</string>
+    <string name="notification_network_selection_text" msgid="2607085729661923269">"ရွေးချယ်ထားသော ကွန်ရက် (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) မရရှိနိုင်ပါ"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"ဖြေကြားရန်"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"ဖုန်းချလိုက်ပါပြီ"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"ဗီဒီယို"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"အသံ"</string>
@@ -107,7 +89,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"ကွန်းဖရင့် ပြုလုပ်၍ မရပါ"</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"ဖုန်းခေါ်မှုကို ငြင်းလို့မရပါ"</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"ဖုန်းခေါ်ဆိုမှု(များ) လွှတ်လို့ မရပါ"</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"အသံစာ နံပါတ် မသိရ။"</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP ခေါ်ဆိုမှုများ"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"အရေးပေါ်ခေါ်ဆိုမှု"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"ရေဒီယို ဖွင့်နေစဉ်…"</string>
@@ -145,7 +126,7 @@
     <string name="goPrivate" msgid="865837794424530980">"ပရိုက်ဗိတ်သို့ သွားပါ"</string>
     <string name="selectContact" msgid="781975788478987237">"လိပ်စာရွေးပါ"</string>
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"သင့်ကိုယ်ပိုင် စာသား ရေးပါ..."</string>
-    <string name="custom_message_cancel" msgid="7516406059429609296">"ပယ်ဖျက်သည်"</string>
+    <string name="custom_message_cancel" msgid="7516406059429609296">"ထားတော့"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"ပို့ခြင်း"</string>
     <string name="description_image_button_one" msgid="5502718871331943463">"တစ်"</string>
     <string name="description_image_button_two" msgid="4903738528222924522">"နှစ်"</string>
@@ -190,5 +171,4 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"ဖုန်းမြည်သံ &amp; တုန်ခါသံ"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"ကွန်းဖရင့် ခေါ်ဆိုမှုကို ထိန်းချုပ်သည်"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"အရေးပေါ်နံပါတ်"</string>
-    <string name="select_account_dialog_title" msgid="5730339500156684204">"အကောင့်ကို ရွေးရန်"</string>
 </resources>

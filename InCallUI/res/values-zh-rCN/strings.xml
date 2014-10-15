@@ -68,6 +68,8 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"语音信箱号码未知"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"无服务"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"所选网络（<xliff:g id="OPERATOR_NAME">%s</xliff:g>）不可用"</string>
+    <!-- no translation found for notification_action_answer (6700362365135365143) -->
+    <skip />
     <string name="notification_action_end_call" msgid="6069460915123531620">"挂断"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"视频"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"语音"</string>

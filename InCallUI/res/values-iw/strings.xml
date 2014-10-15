@@ -68,6 +68,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"המספר של הדואר הקולי אינו ידוע"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"אין שירות"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"הרשת שנבחרה (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) לא זמינה"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"ענה"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"נתק"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"סרטון"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"קול"</string>

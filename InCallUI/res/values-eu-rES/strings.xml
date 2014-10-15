@@ -22,32 +22,13 @@
     <string name="unknown" msgid="6878797917991465859">"Ezezaguna"</string>
     <string name="private_num" msgid="6713286113000232309">"Zenbaki pribatua"</string>
     <string name="payphone" msgid="1931775086311769314">"Telefono publikoa"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Linea okupatuta"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Sarea okupatuta"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Ez dago erantzunik, denbora-muga gainditu da"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Ezin da zerbitzariarekin konektatu"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Zenbakia ez dago eskuragarri"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Erabiltzaile-izen edo pasahitz okerra"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Sarearen kanpotik deitu da"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Zerbitzariaren errorea. Saiatu berriro geroago."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Ez dago seinalerik"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM datuen muga gainditu da"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Irratia desaktibatuta"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Ez dago SIM txartelik edo SIM txartelaren errore bat gertatu da"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Sare mugikorra ez dago erabilgarri"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Irteerako deiak FDN ezarpen bidez murrizten dira."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Ezin duzu irteerako deirik egin deien debekuak aktibatuta dauden bitartean."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Dei guztiak sarbide-kontrolaren bidez murrizten dira."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Larrialdi-deiak sarbide-kontrolaren bidez murrizten dira."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Dei normalak sarbide-kontrolaren bidez murrizten dira."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Zenbaki baliogabea"</string>
     <string name="confCall" msgid="1904840547188336828">"Konferentzia-deia"</string>
     <string name="call_lost" msgid="317670617901479594">"Deia galdu da."</string>
     <string name="ok" msgid="3811371167865772377">"Ados"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"Bozgorailua"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Aurikularrak"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Kabledun entzungailua"</string>
-    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetootha"</string>
+    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
     <string name="wait_prompt_str" msgid="7601815427707856238">"Ondorengo tonuak bidali?\n"</string>
     <string name="pause_prompt_str" msgid="1789964702154314806">"Tonuak bidaltzen\n"</string>
     <string name="send_button" msgid="4106860097497818751">"Bidali"</string>
@@ -87,6 +68,8 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Erantzungailuaren zenbakia ezezaguna da"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Ez dago zerbitzurik"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Hautatutako sarea (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) ez dago erabilgarri"</string>
+    <!-- no translation found for notification_action_answer (6700362365135365143) -->
+    <skip />
     <string name="notification_action_end_call" msgid="6069460915123531620">"Amaitu deia"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"Bideoa"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Ahotsa"</string>
@@ -98,7 +81,7 @@
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Ez dago sarean erregistratuta."</string>
     <string name="incall_error_out_of_service" msgid="8587993036435080418">"Sare mugikorra ez dago erabilgarri."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Ez da deia bidali ez delako baliozko zenbakirik idatzi."</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"Ez da deia bidali."</string>
+    <string name="incall_error_call_failed" msgid="4313552620858880999">"Ez da deia egin."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI sekuentzia hasten…"</string>
     <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"Ez da zerbitzua onartzen."</string>
     <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"Ezin da dei batetik bestera pasa."</string>
@@ -107,7 +90,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Ezin da konferentzia-deirik egin."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Ezin da deia baztertu."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Ezin dira deiak askatu."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Erantzungailuaren zenbaki ezezaguna."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP deia"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Larrialdi-deia"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Irratia pizten…"</string>
@@ -128,7 +110,7 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Bateratu deiak"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Trukatu"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Kudeatu deiak"</string>
-    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Kudeatu konferentzia-deia"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Kudeatu deia"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Audioa"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Bideo-deia"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Aldatu ahots-deira"</string>
@@ -166,7 +148,7 @@
     <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"Kabledun entzungailua hautatu da"</string>
     <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"Bluetooth entzungailua hautatu da"</string>
     <string name="accessibility_call_muted" msgid="2776111226185342220">"Deiaren audioa desaktibatu da."</string>
-    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Aktibatu deiaren audioa."</string>
+    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Deiaren audioa aktibatu da."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Deia zain utzi da."</string>
     <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"Deia berreskuratu da."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Erantzun"</string>
@@ -190,5 +172,4 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Tonua eta dardara"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Kudeatu konferentzia-deia"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Larrialdietarako zenbakia"</string>
-    <string name="select_account_dialog_title" msgid="5730339500156684204">"Hautatu kontua"</string>
 </resources>
