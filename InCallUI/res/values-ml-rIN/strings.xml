@@ -68,6 +68,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"വോയ്‌സ്‌മെയിൽ നമ്പർ അജ്ഞാതമാണ്"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"സേവനമില്ല"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"തിരഞ്ഞെടുത്ത നെറ്റ്‌വർക്ക് (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) ലഭ്യമല്ല"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"മറുപടി നൽകുക"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"ഹാംഗ് അപ്പ് ചെയ്യുക"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"വീഡിയോ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"വോയ്‌സ്"</string>

@@ -68,6 +68,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"వాయిస్ మెయిల్ నంబర్ తెలియదు"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"సేవ లేదు"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"ఎంచుకున్న నెట్‌వర్క్ (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) అందుబాటులో లేదు"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"సమాధానం"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"కాల్‌ను ముగించు"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"వీడియో"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"వాయిస్"</string>

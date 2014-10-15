@@ -68,6 +68,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"व्हॉइसमेल नंबर अज्ञात"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"सेवा नाही"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"निवडलेले नेटवर्क (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) अनुपलब्‍ध"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"उत्तर"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"हँग अप"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"व्हिडिओ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"व्हॉइस"</string>

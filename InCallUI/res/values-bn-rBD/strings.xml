@@ -68,6 +68,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"ভয়েসমেল নম্বর অজানা"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"কোনো পরিষেবা নেই"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"নির্বাচিত নেটওয়ার্ক (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) অনুপলব্ধ"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"উত্তর"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"কল নামিয়ে রাখুন"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"ভিডিও"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"ভয়েস"</string>
