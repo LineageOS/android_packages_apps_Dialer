@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"ഡയലർ"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"ഫോണ്‍"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"ഫോണ്‍"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ഫോണ്‍"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"കോൾ ലോഗ്"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"വാചകസന്ദേശമയയ്‌ക്കുക"</string>
@@ -52,7 +52,7 @@
     <string name="voicemail_status_messages_waiting" msgid="7113421459602803605">"വോയ്‌സ്‌മെയിൽ സെർവറിൽ കണക്റ്റുചെയ്യാനായില്ല. പുതിയ വോയ്‌സ്‌മെയിലുകൾ കാത്തിരിക്കുന്നു."</string>
     <string name="voicemail_status_configure_voicemail" msgid="3738537770636895689">"നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ സജ്ജീകരിക്കുക."</string>
     <string name="voicemail_status_audio_not_available" msgid="3369618334553341626">"ഓഡിയോ ലഭ്യമല്ല."</string>
-    <string name="voicemail_status_action_configure" msgid="8671796489912239589">"സജ്ജീകരിക്കുക"</string>
+    <string name="voicemail_status_action_configure" msgid="8671796489912239589">"സജ്ജമാക്കുക"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"വോയ്‌സ്‌മെയിൽ വിളിക്കുക"</string>
     <string name="voicemail_speed_slowest" msgid="1733460666177707312">"വളരെ കുറഞ്ഞ വേഗത"</string>
     <string name="voicemail_speed_slower" msgid="1508601287347216244">"കുറഞ്ഞ വേഗത"</string>
@@ -138,7 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM കാർഡിൽ നിന്നും ലോഡുചെയ്യുന്നു…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM കാർഡ് കോൺടാക്റ്റുകൾ"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"ഈ സവിശേഷത ഉപയോഗിക്കാൻ ആളുകളുടെ അപ്ലിക്കേഷൻ വീണ്ടും പ്രവർത്തനക്ഷമമാക്കുക."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"ഈ സവിശേഷത ഉപയോഗിക്കാൻ കോൺടാക്‌റ്റുകളുടെ അപ്ലിക്കേഷൻ വീണ്ടും പ്രവർത്തനക്ഷമമാക്കുക."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"വോയ്‌സ് തിരയൽ ലഭ്യമല്ല."</string>
     <string name="call_not_available" msgid="8941576511946492225">"ഫോൺ അപ്ലിക്കേഷൻ പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നതിനാൽ ഫോൺ കോൾ ചെയ്യാനാകില്ല."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"തിരഞ്ഞെടുത്ത പ്രവർത്തനം കൈകാര്യം ചെയ്യാൻ ഇൻസ്‌റ്റാളുചെയ്‌ത പ്രവർത്തനമൊന്നും ലഭ്യമല്ല."</string>
@@ -160,7 +160,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"വീഡിയോ കോൾ ചെയ്യുക"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"മുഴുവൻ കോൾ ചരിത്രവും കാണുക"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> പുതിയ മിസ്‌ഡ് കോളുകൾ"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"നിങ്ങൾ പതിവായി വിളിക്കുന്ന \nപ്രിയപ്പെട്ടവയ്‌ക്കും സംഖ്യകൾക്കുമായുള്ള\n ഏക സ്‌പർശ ഡയലിംഗാണ് സ്‌പീഡ് ഡയൽ."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"നിങ്ങൾ പതിവായി വിളിക്കുന്ന \nപ്രിയപ്പെട്ടവയ്‌ക്കും നമ്പറുകൾക്കുമായുള്ള\n വൺ ടച്ച് ഡയലിംഗാണ് സ്‌പീഡ് ഡയൽ."</string>
     <string name="all_contacts_empty" msgid="4536082452651392894">"നിങ്ങൾക്ക് കോൺടാക്‌റ്റുകളൊന്നുമില്ല."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"എല്ലാ നമ്പറുകളും കാണാൻ ചിത്രം ടാപ്പുചെയ്യുക അല്ലെങ്കിൽ പുനഃക്രമീകരിക്കാൻ അമർത്തിപ്പിടിക്കുക"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"നിരസിക്കുക"</string>
@@ -182,7 +182,6 @@
     <string name="call_log_action_report" msgid="561229827189128879">"റിപ്പോർട്ടുചെയ്യുക"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ഇന്ന്"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"ഇന്നലെ"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"കഴിഞ്ഞ ആഴ്ച"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"പഴയത്"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"കോൾ ലിസ്‌റ്റ്"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"സ്‌പീക്കർ ഓണാക്കുക."</string>

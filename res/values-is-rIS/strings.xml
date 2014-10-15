@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Símaforrit"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Sími"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Sími"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Sími"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Símtalaskrá"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Senda textaskilaboð"</string>
@@ -138,7 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Hleður af SIM-kortinu…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Tengiliðir á SIM-korti"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Gerðu forritið Fólk virkt aftur til að nota þennan eiginleika."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Virkjaðu tengiliðaforritið aftur til þess að geta notað þennan eiginleika."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Raddleit er ekki í boði."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Ekki er hægt að hringja vegna þess að forritið Sími hefur verið gert óvirkt."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Engin uppsett virkni tiltæk til að meðhöndla valda aðgerð."</string>
@@ -182,7 +182,6 @@
     <string name="call_log_action_report" msgid="561229827189128879">"TILKYNNA"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Í dag"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Í gær"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"Í síðustu viku"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Eldra"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"Símtalalisti"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"Kveikja á hátalara."</string>

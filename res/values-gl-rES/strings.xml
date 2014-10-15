@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Marcador"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Teléfono"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Teléfono"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Teléfono"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Rexistro de chamadas"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Enviar mensaxe de texto"</string>
@@ -138,7 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Cargando da tarxeta SIM..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contactos da tarxeta SIM"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Volve activar a aplicación Contactos para utilizar esta función."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Volve activar a aplicación de Contactos para utilizar esta función."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"A busca de voz non está dispoñible."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Non se pode facer unha chamada telefónica porque se desactivou a aplicación de teléfono."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Ningunha actividade instalada dispoñible para procesar a acción seleccionada."</string>
@@ -160,7 +160,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Realizar unha videochamada"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Ver historial de chamadas completo"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> chamadas perdidas novas"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"Coa marcación rápida marcas cun só toque \nfavoritos e números\n aos que chamas con frecuencia."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"A marcación rápida permíteche marcar cun só toque \nos números e contactos favoritos\n aos que chamas con frecuencia."</string>
     <string name="all_contacts_empty" msgid="4536082452651392894">"Non tes contactos."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Toca a imaxe para ver todos os números ou mantena premida para reordenalos"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Rexeitar"</string>
@@ -182,7 +182,6 @@
     <string name="call_log_action_report" msgid="561229827189128879">"INFORMAR"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Hoxe"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Onte"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"Semana pasada"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Anteriores"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"Lista de chamadas"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"Activar o altofalante."</string>
