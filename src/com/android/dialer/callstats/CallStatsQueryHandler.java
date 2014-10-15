@@ -164,7 +164,8 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
             final long duration = cursor.getLong(CallStatsQuery.DURATION);
             final int callType = cursor.getInt(CallStatsQuery.CALL_TYPE);
 
-            if (pending == null || !CallUtil.phoneNumbersEqual(pending.number.toString(), number)) {
+            if (pending == null || pending.number == null ||
+                    !CallUtil.phoneNumbersEqual(pending.number.toString(), number)) {
                 final long date = cursor.getLong(CallStatsQuery.DATE);
                 final int numberPresentation = cursor.getInt(CallStatsQuery.NUMBER_PRESENTATION);
                 final String countryIso = cursor.getString(CallStatsQuery.COUNTRY_ISO);
