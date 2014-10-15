@@ -131,6 +131,10 @@
     <dimen name="call_log_day_group_padding_top">15dp</dimen>
     <dimen name="call_log_day_group_padding_bottom">9dp</dimen>
 
+    <!-- Padding for icons to increase their touch target. Icons are typically 24 dps in size
+         so this extra padding makes the entire touch target 40dp -->
+    <dimen name="icon_padding">8dp</dimen>
+
     <!-- Length of dialpad's shadows in dialer. -->
     <dimen name="shadow_length">10dp</dimen>
 
