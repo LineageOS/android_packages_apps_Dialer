@@ -161,6 +161,9 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
 
         while (!cursor.isAfterLast()) {
             final String number = cursor.getString(CallStatsQuery.NUMBER);
+            if (number == null) {
+                continue;
+            }
             final long duration = cursor.getLong(CallStatsQuery.DURATION);
             final int callType = cursor.getInt(CallStatsQuery.CALL_TYPE);
 
