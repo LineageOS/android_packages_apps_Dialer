@@ -150,8 +150,6 @@ public class SpeedDialFragment extends AnalyticsFragment implements OnItemClickL
 
     private View mContactTileFrame;
 
-    private TileInteractionTeaserView mTileInteractionTeaserView;
-
     private final HashMap<Long, Integer> mItemIdTopMap = new HashMap<Long, Integer>();
     private final HashMap<Long, Integer> mItemIdLeftMap = new HashMap<Long, Integer>();
 
@@ -216,9 +214,6 @@ public class SpeedDialFragment extends AnalyticsFragment implements OnItemClickL
                 mEmptyView, R.drawable.empty_speed_dial, R.string.speed_dial_empty, getResources());
 
         mContactTileFrame = mParentView.findViewById(R.id.contact_tile_frame);
-
-        mTileInteractionTeaserView = (TileInteractionTeaserView) inflater.inflate(
-                R.layout.tile_interactions_teaser_view, mListView, false);
 
         final LayoutAnimationController controller = new LayoutAnimationController(
                 AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
