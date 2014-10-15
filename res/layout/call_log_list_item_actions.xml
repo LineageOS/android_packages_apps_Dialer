@@ -30,7 +30,7 @@
         >
         <TextView
             android:id="@+id/call_back_action"
-            android:background="@drawable/action_button_background"
+            android:background="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -46,7 +46,7 @@
             android:singleLine="true"/>
         <TextView
             android:id="@+id/video_call_action"
-            android:background="@drawable/action_button_background"
+            android:background="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -62,7 +62,7 @@
             android:singleLine="true"/>
         <TextView
             android:id="@+id/voicemail_action"
-            android:background="@drawable/action_button_background"
+            android:background="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -78,7 +78,7 @@
             android:singleLine="true"/>
         <TextView
             android:id="@+id/details_action"
-            android:background="@drawable/action_button_background"
+            android:background="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -94,7 +94,7 @@
             android:singleLine="true"/>
         <TextView
             android:id="@+id/report_action"
-            android:background="@drawable/action_button_background"
+            android:background="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
