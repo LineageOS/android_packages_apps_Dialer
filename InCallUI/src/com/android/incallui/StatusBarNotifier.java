@@ -492,7 +492,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         PendingIntent answerVoicePendingIntent = createNotificationPendingIntent(
                 mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
         builder.addAction(R.drawable.ic_call_white_24dp,
-                mContext.getText(R.string.description_target_answer),
+                mContext.getText(R.string.notification_action_answer),
                 answerVoicePendingIntent);
     }
 
