@@ -36,7 +36,7 @@ import java.util.List;
  * for ListView-recycling that a regular LinearLayout using ImageViews.
  */
 public class CallTypeIconsView extends View {
-    private List<Integer> mCallTypes = Lists.newArrayListWithCapacity(3);
+    private List<Integer> mCallTypes = Lists.newArrayListWithCapacity(4);
     private Resources mResources;
     private int mWidth;
     private int mHeight;
@@ -86,6 +86,8 @@ public class CallTypeIconsView extends View {
                 return mResources.missed;
             case Calls.VOICEMAIL_TYPE:
                 return mResources.voicemail;
+            case Calls.BLACKLIST_TYPE:
+                return mResources.blacklist;
             //add for csvt call log type
             case CallTypeHelper.INCOMING_CSVT_TYPE:
                 if (isVTSupported()) {
@@ -152,6 +154,7 @@ public class CallTypeIconsView extends View {
         public final Drawable ims_outgoing;
         public final Drawable ims_missed;
         public final Drawable voicemail;
+        public final Drawable blacklist;
         public final int iconMargin;
 
         public Resources(Context context) {
@@ -159,6 +162,7 @@ public class CallTypeIconsView extends View {
             incoming = r.getDrawable(R.drawable.ic_call_incoming_holo_dark);
             outgoing = r.getDrawable(R.drawable.ic_call_outgoing_holo_dark);
             missed = r.getDrawable(R.drawable.ic_call_missed_holo_dark);
+            blacklist = r.getDrawable(R.drawable.ic_ims_missed_holo_dark);
             //add for csvt call log type
             csvt_incoming = r.getDrawable(R.drawable.ic_video_incoming_holo_dark);
             csvt_outgoing = r.getDrawable(R.drawable.ic_video_outgoing_holo_dark);

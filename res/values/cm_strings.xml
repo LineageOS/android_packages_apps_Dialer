@@ -86,4 +86,7 @@
     <string name="call_duration_call_out">Call duration:</string>
 
     <string name="call_log_all_calls_header">All calls</string>
+
+    <!-- Description for incoming calls that were blacklisted -->
+    <string name="type_blacklist">Blacklisted call</string>
 </resources>
