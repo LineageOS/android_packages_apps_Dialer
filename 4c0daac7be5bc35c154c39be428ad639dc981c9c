@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a18252c_d5a97ce1",
+        "filename": "src/com/android/dialer/callstats/CallStatsQueryHandler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 10293
+      },
+      "writtenOn": "2014-10-16T06:11:36Z",
+      "side": 1,
+      "message": "still need to moveToNext right?",
+      "revId": "4c0daac7be5bc35c154c39be428ad639dc981c9c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
