@@ -266,7 +266,7 @@ public class DialpadFragment extends AnalyticsFragment
                 // onscreen, but useless...)
                 showDialpadChooser(false);
             }
-            if (state == TelephonyManager.CALL_STATE_IDLE) {
+            if (state == TelephonyManager.CALL_STATE_IDLE && getActivity() != null) {
                 ((HostInterface) getActivity()).setConferenceDialButtonVisibility(true);
             }
         }
