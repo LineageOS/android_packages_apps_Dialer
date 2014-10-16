@@ -16,6 +16,24 @@
       "revId": "6df4db1893d7822c64eff731d9055c51ea913d93",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1b2928_825129db",
+        "filename": "src/com/android/dialer/callstats/CallStatsQueryHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1448
+      },
+      "writtenOn": "2014-10-16T05:09:19Z",
+      "side": 1,
+      "message": "Somehow, an NPE is being thrown at pending.number.toString(). Any ideas?",
+      "parentUuid": "7a1b2928_4247111d",
+      "revId": "6df4db1893d7822c64eff731d9055c51ea913d93",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
