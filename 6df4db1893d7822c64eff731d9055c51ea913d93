@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1b2928_4247111d",
+        "filename": "src/com/android/dialer/callstats/CallStatsQueryHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 10293
+      },
+      "writtenOn": "2014-10-16T05:05:55Z",
+      "side": 1,
+      "message": "I\u0027m confused by this code... given that pending is a local var set to null here, how could it ever be non-null in the check below?",
+      "revId": "6df4db1893d7822c64eff731d9055c51ea913d93",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
