@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1b2928_c20841dc",
+        "filename": "src/com/android/dialer/calllog/CallTypeIconsView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 9045
+      },
+      "writtenOn": "2014-10-16T05:20:21Z",
+      "side": 1,
+      "message": "We need another icon for this",
+      "revId": "14016bbc4e62d9bebf5e53d9c3c1c9e5a4dd3c12",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
