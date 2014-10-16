@@ -81,16 +81,20 @@ public class ConferenceManagerPresenter
         boolean canSeparate = PhoneCapabilities.can(
                 details.getCallCapabilities(), PhoneCapabilities.SEPARATE_FROM_CONFERENCE);
 
-        if (call.can(PhoneCapabilities.DISCONNECT_FROM_CONFERENCE) == canDisconnect
-                && call.can(PhoneCapabilities.SEPARATE_FROM_CONFERENCE) == canSeparate) {
-            return;
+        if (call.can(PhoneCapabilities.DISCONNECT_FROM_CONFERENCE) != canDisconnect
+                || call.can(PhoneCapabilities.SEPARATE_FROM_CONFERENCE) != canSeparate) {
+            for (int i = 0; i < mCallerIds.length; i++) {
+                if (mCallerIds[i] == call.getId()) {
+                    getUi().updateSeparateButtonForRow(i, canSeparate);
+                    getUi().updateEndButtonForRow(i, canDisconnect);
+                    break;
+                }
+            }
         }
 
-        for (int i = 0; i < mCallerIds.length; i++) {
-            if (mCallerIds[i] == call.getId()) {
-                getUi().updateSeparateButtonForRow(i, canSeparate);
-                getUi().updateEndButtonForRow(i, canDisconnect);
-            }
+        if (!PhoneCapabilities.can(
+                details.getCallCapabilities(), PhoneCapabilities.MANAGE_CONFERENCE)) {
+            getUi().setVisible(false);
         }
     }
 
