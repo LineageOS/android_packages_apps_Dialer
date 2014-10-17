@@ -16,19 +16,23 @@
 
 package com.android.dialer.calllog;
 
+import android.content.Context;
+import android.telecom.PhoneAccountHandle;
+
 /**
- * Modified version of {@link com.android.dialer.calllog.PhoneNumberDisplayHelper} to be used in tests
- * that allows injecting the voicemail number.
+ * Modified version of {@link com.android.dialer.calllog.PhoneNumberDisplayHelper} to be used in
+ * tests that allows injecting the voicemail number.
  */
 public final class TestPhoneNumberUtilsWrapper extends PhoneNumberUtilsWrapper {
     private CharSequence mVoicemailNumber;
 
-    public TestPhoneNumberUtilsWrapper(CharSequence voicemailNumber) {
+    public TestPhoneNumberUtilsWrapper(Context context, CharSequence voicemailNumber) {
+        super(context);
         mVoicemailNumber = voicemailNumber;
     }
 
     @Override
-    public boolean isVoicemailNumber(CharSequence number) {
+    public boolean isVoicemailNumber(PhoneAccountHandle accountHandle, CharSequence number) {
         return mVoicemailNumber.equals(number);
     }
 }

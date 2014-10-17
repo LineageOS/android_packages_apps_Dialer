@@ -28,12 +28,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
+import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.common.io.MoreCloseables;
 import com.android.dialer.CallDetailActivity;
 import com.android.dialer.R;
+import com.android.dialer.calllog.PhoneAccountUtils;
 import com.google.common.collect.Maps;
 
 import java.util.Map;
@@ -118,7 +120,10 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
             // Check if we already know the name associated with this number.
             String name = names.get(newCall.number);
             if (name == null) {
-                name = mPhoneNumberHelper.getDisplayName(newCall.number,
+                PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
+                        newCall.accountComponentName,
+                        newCall.accountId);
+                name = mPhoneNumberHelper.getDisplayName(accountHandle, newCall.number,
                         newCall.numberPresentation).toString();
                 // If we cannot lookup the contact, use the number instead.
                 if (TextUtils.isEmpty(name)) {
@@ -214,13 +219,17 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
         public final Uri voicemailUri;
         public final String number;
         public final int numberPresentation;
+        public final String accountComponentName;
+        public final String accountId;
 
         public NewCall(Uri callsUri, Uri voicemailUri, String number,
-                int numberPresentation) {
+                int numberPresentation, String accountComponentName, String accountId) {
             this.callsUri = callsUri;
             this.voicemailUri = voicemailUri;
             this.number = number;
             this.numberPresentation = numberPresentation;
+            this.accountComponentName = accountComponentName;
+            this.accountId = accountId;
         }
     }
 
@@ -243,12 +252,15 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
      */
     private static final class DefaultNewCallsQuery implements NewCallsQuery {
         private static final String[] PROJECTION = {
-            Calls._ID, Calls.NUMBER, Calls.VOICEMAIL_URI, Calls.NUMBER_PRESENTATION
+            Calls._ID, Calls.NUMBER, Calls.VOICEMAIL_URI, Calls.NUMBER_PRESENTATION,
+            Calls.PHONE_ACCOUNT_COMPONENT_NAME, Calls.PHONE_ACCOUNT_ID
         };
         private static final int ID_COLUMN_INDEX = 0;
         private static final int NUMBER_COLUMN_INDEX = 1;
         private static final int VOICEMAIL_URI_COLUMN_INDEX = 2;
         private static final int NUMBER_PRESENTATION_COLUMN_INDEX = 3;
+        private static final int PHONE_ACCOUNT_COMPONENT_NAME_COLUMN_INDEX = 4;
+        private static final int PHONE_ACCOUNT_ID_COLUMN_INDEX = 5;
 
         private final ContentResolver mContentResolver;
 
@@ -284,7 +296,9 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
                     Calls.CONTENT_URI_WITH_VOICEMAIL, cursor.getLong(ID_COLUMN_INDEX));
             Uri voicemailUri = voicemailUriString == null ? null : Uri.parse(voicemailUriString);
             return new NewCall(callsUri, voicemailUri, cursor.getString(NUMBER_COLUMN_INDEX),
-                    cursor.getInt(NUMBER_PRESENTATION_COLUMN_INDEX));
+                    cursor.getInt(NUMBER_PRESENTATION_COLUMN_INDEX),
+                    cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME_COLUMN_INDEX),
+                    cursor.getString(PHONE_ACCOUNT_ID_COLUMN_INDEX));
         }
     }
 
@@ -343,6 +357,6 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
      * called from the main thread.
      */
     public static PhoneNumberDisplayHelper createPhoneNumberHelper(Context context) {
-        return new PhoneNumberDisplayHelper(context.getResources());
+        return new PhoneNumberDisplayHelper(context, context.getResources());
     }
 }
