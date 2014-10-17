@@ -22,6 +22,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.telecom.PhoneAccountHandle;
 
 /**
  * The details of a phone call to be shown in the UI.
@@ -66,14 +67,11 @@ public class PhoneCallDetails {
      * The source type of the contact associated with this call.
      */
     public final int sourceType;
+
     /**
      * The unique identifier for the account associated with the call.
      */
-    public final String accountLabel;
-    /**
-     * The icon for the account associated with the call.
-     */
-    public final Drawable accountIcon;
+    public final PhoneAccountHandle accountHandle;
     /**
      * Features applicable to this call.
      */
@@ -96,26 +94,26 @@ public class PhoneCallDetails {
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration) {
         this (number, numberPresentation, formattedNumber, countryIso, geocode,
-        callTypes, date, duration, "", 0, "", null, null, 0, null, null, 0, null, null);
+                callTypes, date, duration, "", 0, "", null, null, 0, null, 0, null, null);
     }
 
     /** Create the details for a call with a number not associated with a contact. */
     public PhoneCallDetails(CharSequence number, int numberPresentation,
             CharSequence formattedNumber, String countryIso, String geocode,
-            int[] callTypes, long date, long duration, String accountLabel, Drawable accountIcon,
-            int features, Long dataUsage, String transcription) {
-        this(number, numberPresentation, formattedNumber, countryIso, geocode,
-                callTypes, date, duration, "", 0, "", null, null, 0, accountLabel, accountIcon,
-                features, dataUsage, transcription);
+            int[] callTypes, long date, long duration,
+            PhoneAccountHandle accountHandle, int features, Long dataUsage, String transcription) {
+        this(number, numberPresentation, formattedNumber, countryIso, geocode, callTypes, date,
+                duration, "", 0, "", null, null, 0, accountHandle, features, dataUsage,
+                transcription);
     }
 
     /** Create the details for a call with a number associated with a contact. */
     public PhoneCallDetails(CharSequence number, int numberPresentation,
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration, CharSequence name,
-            int numberType, CharSequence numberLabel, Uri contactUri,
-            Uri photoUri, int sourceType, String accountLabel, Drawable accountIcon, int features,
-            Long dataUsage, String transcription) {
+            int numberType, CharSequence numberLabel, Uri contactUri, Uri photoUri,
+            int sourceType, PhoneAccountHandle accountHandle, int features, Long dataUsage,
+            String transcription) {
         this.number = number;
         this.numberPresentation = numberPresentation;
         this.formattedNumber = formattedNumber;
@@ -130,8 +128,7 @@ public class PhoneCallDetails {
         this.contactUri = contactUri;
         this.photoUri = photoUri;
         this.sourceType = sourceType;
-        this.accountLabel = accountLabel;
-        this.accountIcon = accountIcon;
+        this.accountHandle = accountHandle;
         this.features = features;
         this.dataUsage = dataUsage;
         this.transcription = transcription;

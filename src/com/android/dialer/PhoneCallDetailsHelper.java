@@ -16,7 +16,9 @@
 
 package com.android.dialer;
 
+import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -28,8 +30,8 @@ import android.widget.TextView;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.PhoneNumberHelper;
-import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
+import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.DialerUtils;
@@ -44,6 +46,7 @@ public class PhoneCallDetailsHelper {
     /** The maximum number of icons will be shown to represent the call types in a group. */
     private static final int MAX_CALL_TYPE_ICONS = 3;
 
+    private final Context mContext;
     private final Resources mResources;
     /** The injected current time in milliseconds since the epoch. Used only by tests. */
     private Long mCurrentTimeMillisForTest;
@@ -63,11 +66,12 @@ public class PhoneCallDetailsHelper {
      *
      * @param resources used to look up strings
      */
-    public PhoneCallDetailsHelper(Resources resources, CallTypeHelper callTypeHelper,
+    public PhoneCallDetailsHelper(Context context, Resources resources,
             PhoneNumberUtilsWrapper phoneUtils) {
+        mContext = context;
         mResources = resources;
         mPhoneNumberUtilsWrapper = phoneUtils;
-        mPhoneNumberHelper = new PhoneNumberDisplayHelper(mPhoneNumberUtilsWrapper, resources);
+        mPhoneNumberHelper = new PhoneNumberDisplayHelper(context, resources, phoneUtils);
     }
 
     /** Fills the call details views with content. */
@@ -103,16 +107,17 @@ public class PhoneCallDetailsHelper {
         setCallCountAndDate(views, callCount, callLocationAndDate);
 
         // set the account icon if it exists
-        if (details.accountIcon != null) {
+        Drawable accountIcon = PhoneAccountUtils.getAccountIcon(mContext, details.accountHandle);
+        if (accountIcon != null) {
             views.callAccountIcon.setVisibility(View.VISIBLE);
-            views.callAccountIcon.setImageDrawable(details.accountIcon);
+            views.callAccountIcon.setImageDrawable(accountIcon);
         } else {
             views.callAccountIcon.setVisibility(View.GONE);
         }
 
         final CharSequence nameText;
         final CharSequence displayNumber =
-            mPhoneNumberHelper.getDisplayNumber(details.number,
+            mPhoneNumberHelper.getDisplayNumber(details.accountHandle, details.number,
                     details.numberPresentation, details.formattedNumber);
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
@@ -169,7 +174,8 @@ public class PhoneCallDetailsHelper {
         // Only show a label if the number is shown and it is not a SIP address.
         if (!TextUtils.isEmpty(details.number)
                 && !PhoneNumberHelper.isUriNumber(details.number.toString())
-                && !mPhoneNumberUtilsWrapper.isVoicemailNumber(details.number)) {
+                && !mPhoneNumberUtilsWrapper.isVoicemailNumber(details.accountHandle,
+                        details.number)) {
 
             if (details.numberLabel == ContactInfo.GEOCODE_AS_LABEL) {
                 numberFormattedLabel = details.geocode;
@@ -180,8 +186,8 @@ public class PhoneCallDetailsHelper {
         }
 
         if (!TextUtils.isEmpty(details.name) && TextUtils.isEmpty(numberFormattedLabel)) {
-            numberFormattedLabel = mPhoneNumberHelper.getDisplayNumber(details.number,
-                    details.numberPresentation, details.formattedNumber);
+            numberFormattedLabel = mPhoneNumberHelper.getDisplayNumber(details.accountHandle,
+                    details.number, details.numberPresentation, details.formattedNumber);
         }
         return numberFormattedLabel;
     }
@@ -204,8 +210,9 @@ public class PhoneCallDetailsHelper {
     public void setCallDetailsHeader(TextView nameView, PhoneCallDetails details) {
         final CharSequence nameText;
         final CharSequence displayNumber =
-            mPhoneNumberHelper.getDisplayNumber(details.number, details.numberPresentation,
-                        mResources.getString(R.string.recentCalls_addToContact));
+            mPhoneNumberHelper.getDisplayNumber(details.accountHandle, details.number,
+                    details.numberPresentation,
+                    mResources.getString(R.string.recentCalls_addToContact));
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
         } else {

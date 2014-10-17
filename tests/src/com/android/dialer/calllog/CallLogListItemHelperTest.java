@@ -60,12 +60,11 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         super.setUp();
         Context context = getContext();
         mResources = context.getResources();
-        CallTypeHelper callTypeHelper = new CallTypeHelper(mResources);
-        final TestPhoneNumberUtilsWrapper phoneUtils = new TestPhoneNumberUtilsWrapper(
-                TEST_VOICEMAIL_NUMBER);
-        PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
-                mResources, callTypeHelper, phoneUtils);
-        mPhoneNumberDisplayHelper = new PhoneNumberDisplayHelper(mResources);
+        final TestPhoneNumberUtilsWrapper phoneUtils =
+                new TestPhoneNumberUtilsWrapper(context, TEST_VOICEMAIL_NUMBER);
+        PhoneCallDetailsHelper phoneCallDetailsHelper =
+                new PhoneCallDetailsHelper(context, mResources, phoneUtils);
+        mPhoneNumberDisplayHelper = new PhoneNumberDisplayHelper(context, mResources, phoneUtils);
         mHelper = new CallLogListItemHelper(phoneCallDetailsHelper, mPhoneNumberDisplayHelper,
                 mResources);
         mViews = CallLogListItemViews.createForTest(context);
@@ -319,10 +318,9 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      */
     public void testGetCallDescription_Video() {
         PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
-                TEST_FORMATTED_NUMBER,
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                 new int[]{Calls.INCOMING_TYPE, Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION,
-                null, null, Calls.FEATURES_VIDEO, null, null);
+                null, Calls.FEATURES_VIDEO, null, null);
 
         CharSequence description = mHelper.getCallDescription(getContext(), details);
         assertTrue(description.toString()
