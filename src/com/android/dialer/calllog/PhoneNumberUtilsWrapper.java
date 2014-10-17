@@ -16,7 +16,10 @@
 
 package com.android.dialer.calllog;
 
+import android.content.Context;
 import android.provider.CallLog;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
@@ -30,8 +33,12 @@ import java.util.Set;
  *
  */
 public class PhoneNumberUtilsWrapper {
-    public static final PhoneNumberUtilsWrapper INSTANCE = new PhoneNumberUtilsWrapper();
     private static final Set<String> LEGACY_UNKNOWN_NUMBERS = Sets.newHashSet("-1", "-2", "-3");
+    private final Context mContext;
+
+    public PhoneNumberUtilsWrapper(Context context) {
+        mContext = context;
+    }
 
     /** Returns true if it is possible to place a call to the given number. */
     public static boolean canPlaceCallsTo(CharSequence number, int presentation) {
@@ -40,30 +47,26 @@ public class PhoneNumberUtilsWrapper {
     }
 
     /**
-     * Returns true if it is possible to send an SMS to the given number.
-     */
-    public boolean canSendSmsTo(CharSequence number, int presentation) {
-        return canPlaceCallsTo(number, presentation) && !isVoicemailNumber(number) && !isSipNumber(
-                number);
-    }
-
-    /**
      * Returns true if the given number is the number of the configured voicemail. To be able to
      * mock-out this, it is not a static method.
      */
-    public boolean isVoicemailNumber(CharSequence number) {
-        return number!= null && PhoneNumberUtils.isVoiceMailNumber(number.toString());
+    public boolean isVoicemailNumber(PhoneAccountHandle accountHandle,
+            CharSequence number) {
+        final TelecomManager telecomManager =
+                (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
+        return number!= null && telecomManager.isVoiceMailNumber(accountHandle, number.toString());
     }
 
     /**
      * Returns true if the given number is a SIP address. To be able to mock-out this, it is not a
      * static method.
      */
-    public boolean isSipNumber(CharSequence number) {
+    public static boolean isSipNumber(CharSequence number) {
         return number != null && PhoneNumberHelper.isUriNumber(number.toString());
     }
 
-    public static boolean isUnknownNumberThatCanBeLookedUp(CharSequence number, int presentation) {
+    public boolean isUnknownNumberThatCanBeLookedUp(PhoneAccountHandle accountHandle,
+            CharSequence number, int presentation) {
         if (presentation == CallLog.Calls.PRESENTATION_UNKNOWN) {
             return false;
         }
@@ -76,7 +79,7 @@ public class PhoneNumberUtilsWrapper {
         if (TextUtils.isEmpty(number)) {
             return false;
         }
-        if (INSTANCE.isVoicemailNumber(number)) {
+        if (isVoicemailNumber(accountHandle, number)) {
             return false;
         }
         if (isLegacyUnknownNumbers(number)) {
