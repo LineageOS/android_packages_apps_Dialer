@@ -255,13 +255,6 @@ public class DialpadFragment extends AnalyticsFragment
 
     private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
 
-    /**
-     * Return an Intent for launching voicemail screen.
-     */
-    private static Intent getVoicemailIntent() {
-        return CallUtil.getCallIntent(Uri.fromParts(PhoneAccount.SCHEME_VOICEMAIL, "", null));
-    }
-
     private TelephonyManager getTelephonyManager() {
         return (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
     }
@@ -974,7 +967,7 @@ public class DialpadFragment extends AnalyticsFragment
     }
 
     public void callVoicemail() {
-        DialerUtils.startActivityWithErrorToast(getActivity(), getVoicemailIntent());
+        DialerUtils.startActivityWithErrorToast(getActivity(), CallUtil.getVoicemailIntent());
         hideAndClearDialpad(false);
     }
 
