@@ -6,6 +6,7 @@ import android.content.Loader.OnLoadCompleteListener;
 import android.net.Uri;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -74,12 +75,20 @@ public class CallerInfoUtils {
         // Because the InCallUI is immediately launched before the call is connected, occasionally
         // a voicemail call will be passed to InCallUI as a "voicemail:" URI without a number.
         // This call should still be handled as a voicemail call.
-        if (call.getHandle() != null &&
-                PhoneAccount.SCHEME_VOICEMAIL.equals(call.getHandle().getScheme())) {
+        if ((call.getHandle() != null &&
+                PhoneAccount.SCHEME_VOICEMAIL.equals(call.getHandle().getScheme())) ||
+                isVoiceMailNumber(context, call)) {
             info.markAsVoiceMail(context);
         }
 
         return info;
+    }
+
+    public static boolean isVoiceMailNumber(Context context, Call call) {
+         TelecomManager telecomManager =
+                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+         return telecomManager.isVoiceMailNumber(
+                 call.getTelecommCall().getDetails().getAccountHandle(), call.getNumber());
     }
 
     /**
