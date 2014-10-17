@@ -669,7 +669,6 @@ public class CallLogAdapter extends GroupingListAdapter
         views.number = number;
         views.numberPresentation = numberPresentation;
         views.callType = callType;
-        // NOTE: This is currently not being used, but can be used in future versions.
         views.accountHandle = accountHandle;
         views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
         // Stash away the Ids of the calls so that we can support deleting a row in the call log.
@@ -688,7 +687,13 @@ public class CallLogAdapter extends GroupingListAdapter
             // Set return call intent, otherwise null.
             if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
                 // Sets the primary action to call the number.
-                views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number));
+                if (isVoicemailNumber) {
+                    views.primaryActionView.setTag(
+                            IntentProvider.getReturnVoicemailCallIntentProvider());
+                } else {
+                    views.primaryActionView.setTag(
+                            IntentProvider.getReturnCallIntentProvider(number));
+                }
             } else {
                 // Number is not callable, so hide button.
                 views.primaryActionView.setTag(null);
@@ -985,9 +990,18 @@ public class CallLogAdapter extends GroupingListAdapter
                 PhoneNumberUtilsWrapper.canPlaceCallsTo(views.number, views.numberPresentation);
         // Set return call intent, otherwise null.
         if (canPlaceCallToNumber) {
-            // Sets the primary action to call the number.
-            views.callBackButtonView.setTag(
-                    IntentProvider.getReturnCallIntentProvider(views.number));
+            boolean isVoicemailNumber =
+                    mPhoneNumberUtilsWrapper.isVoicemailNumber(views.accountHandle, views.number);
+            if (isVoicemailNumber) {
+                // Make a general call to voicemail to ensure that if there are multiple accounts
+                // it does not call the voicemail number of a specific phone account.
+                views.callBackButtonView.setTag(
+                        IntentProvider.getReturnVoicemailCallIntentProvider());
+            } else {
+                // Sets the primary action to call the number.
+                views.callBackButtonView.setTag(
+                        IntentProvider.getReturnCallIntentProvider(views.number));
+            }
             views.callBackButtonView.setVisibility(View.VISIBLE);
             views.callBackButtonView.setOnClickListener(mActionListener);
         } else {
