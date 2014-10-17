@@ -248,6 +248,8 @@ public class CallLogAdapter extends GroupingListAdapter
     private final ContactPhotoManager mContactPhotoManager;
     /** Helper to parse and process phone numbers. */
     private PhoneNumberDisplayHelper mPhoneNumberHelper;
+    /** Helper to access Telephony phone number utils class */
+    protected final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
     /** Helper to group call log entries. */
     private final CallLogGroupBuilder mCallLogGroupBuilder;
 
@@ -365,9 +367,10 @@ public class CallLogAdapter extends GroupingListAdapter
         mExpandedTranslationZ = resources.getDimension(R.dimen.call_log_expanded_translation_z);
 
         mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
-        mPhoneNumberHelper = new PhoneNumberDisplayHelper(resources);
-        PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
-                resources, callTypeHelper, new PhoneNumberUtilsWrapper());
+        mPhoneNumberHelper = new PhoneNumberDisplayHelper(mContext, resources);
+        mPhoneNumberUtilsWrapper = new PhoneNumberUtilsWrapper(mContext);
+        PhoneCallDetailsHelper phoneCallDetailsHelper =
+                new PhoneCallDetailsHelper(mContext, resources, mPhoneNumberUtilsWrapper);
         mCallLogViewsHelper =
                 new CallLogListItemHelper(
                         phoneCallDetailsHelper, mPhoneNumberHelper, resources);
@@ -641,8 +644,6 @@ public class CallLogAdapter extends GroupingListAdapter
         final PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
                 c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME),
                 c.getString(CallLogQuery.ACCOUNT_ID));
-        final Drawable accountIcon = PhoneAccountUtils.getAccountIcon(mContext,
-                accountHandle);
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
 
         final long rowId = c.getLong(CallLogQuery.ID);
@@ -677,7 +678,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final ContactInfo cachedContactInfo = getContactInfoFromCallLog(c);
 
         final boolean isVoicemailNumber =
-                PhoneNumberUtilsWrapper.INSTANCE.isVoicemailNumber(number);
+                mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number);
 
         // Where binding and not in the call log, use default behaviour of invoking a call when
         // tapping the primary view.
@@ -769,14 +770,13 @@ public class CallLogAdapter extends GroupingListAdapter
         expandOrCollapseActions(callLogItemView, isExpanded(rowId));
 
         if (TextUtils.isEmpty(name)) {
-            details = new PhoneCallDetails(number, numberPresentation,
-                    formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, null, accountIcon, features, dataUsage, transcription);
+            details = new PhoneCallDetails(number, numberPresentation, formattedNumber, countryIso,
+                    geocode, callTypes, date, duration, accountHandle, features, dataUsage,
+                    transcription);
         } else {
-            details = new PhoneCallDetails(number, numberPresentation,
-                    formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, name, ntype, label, lookupUri, photoUri, sourceType,
-                    null, accountIcon, features, dataUsage, transcription);
+            details = new PhoneCallDetails(number, numberPresentation, formattedNumber, countryIso,
+                    geocode, callTypes, date, duration, name, ntype, label, lookupUri, photoUri,
+                    sourceType, accountHandle, features, dataUsage, transcription);
         }
 
         mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
@@ -794,8 +794,8 @@ public class CallLogAdapter extends GroupingListAdapter
 
         String nameForDefaultImage = null;
         if (TextUtils.isEmpty(name)) {
-            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(details.number,
-                    details.numberPresentation, details.formattedNumber).toString();
+            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(details.accountHandle,
+                    details.number, details.numberPresentation, details.formattedNumber).toString();
         } else {
             nameForDefaultImage = name;
         }
