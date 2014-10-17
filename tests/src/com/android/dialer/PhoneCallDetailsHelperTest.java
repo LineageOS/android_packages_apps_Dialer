@@ -25,7 +25,6 @@ import android.text.Spanned;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.TestPhoneNumberUtilsWrapper;
 import com.android.dialer.util.LocaleTestUtils;
 
@@ -60,16 +59,17 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     private PhoneCallDetailsViews mViews;
     private TextView mNameView;
     private LocaleTestUtils mLocaleTestUtils;
+    private TestPhoneNumberUtilsWrapper mPhoneUtils;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         Context context = getContext();
         Resources resources = context.getResources();
-        CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
+        mPhoneUtils = new TestPhoneNumberUtilsWrapper(context, TEST_VOICEMAIL_NUMBER);
         final TestPhoneNumberUtilsWrapper phoneUtils = new TestPhoneNumberUtilsWrapper(
-                TEST_VOICEMAIL_NUMBER);
-        mHelper = new PhoneCallDetailsHelper(resources, callTypeHelper, phoneUtils);
+                context, TEST_VOICEMAIL_NUMBER);
+        mHelper = new PhoneCallDetailsHelper(context, resources, phoneUtils);
         mHelper.setCurrentTimeForTest(
                 new GregorianCalendar(2011, 5, 4, 13, 0, 0).getTimeInMillis());
         mViews = PhoneCallDetailsViews.createForTest(context);
@@ -311,8 +311,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(number, presentation, formattedNumber,
                         TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION, null, null, 0,
-                        null, null)
+                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION)
         );
     }
 
@@ -322,8 +321,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(number, Calls.PRESENTATION_ALLOWED,
                         formattedNumber, TEST_COUNTRY_ISO, geocodedLocation,
-                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION, null, null, 0,
-                        null, null)
+                        new int[]{ Calls.VOICEMAIL_TYPE }, TEST_DATE, TEST_DURATION)
         );
     }
 
@@ -352,7 +350,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION, null, null,
+                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION, null,
                         features, null, null)
         );
     }
@@ -361,8 +359,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         mHelper.setCallDetailsHeader(mNameView,
                 new PhoneCallDetails(number, presentation,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION, null, null, 0,
-                        null, null));
+                        new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION, null,
+                        0, null, null));
     }
 
     private void setCallDetailsHeader(String name) {
@@ -370,6 +368,6 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                         new int[]{ Calls.INCOMING_TYPE }, TEST_DATE, TEST_DURATION,
-                        name, 0, "", null, null, 0, null, null, 0, null, null));
+                        name, 0, "", null, null, 0, null, 0, null, null));
     }
 }
