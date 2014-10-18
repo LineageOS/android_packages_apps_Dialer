@@ -158,7 +158,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             case DialerPhoneNumberListAdapter.SHORTCUT_DIRECT_CALL:
                 listener = getOnPhoneNumberPickerListener();
                 if (listener != null) {
-                    listener.onCallNumberDirectly(getQueryString());
+                    listener.onCallNumberDirectly(adapter.getFormattedQueryString());
                 }
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_ADD_NUMBER_TO_CONTACTS:
