@@ -264,6 +264,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     @Override
     public void onDetailsChanged(Call call, android.telecom.Call.Details details) {
         updatePrimaryCallState();
+
+        if (call.can(PhoneCapabilities.MANAGE_CONFERENCE) != PhoneCapabilities.can(
+                details.getCallCapabilities(), PhoneCapabilities.MANAGE_CONFERENCE)) {
+            maybeShowManageConferenceCallButton();
+        }
     }
 
     private String getSubscriptionNumber() {
