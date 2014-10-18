@@ -333,13 +333,13 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
      */
     private void updateCallButtons(Call call, Context context) {
         if (call.isVideoCall(context)) {
-            updateVideoCallButtons();
+            updateVideoCallButtons(call);
         } else {
             updateVoiceCallButtons(call);
         }
     }
 
-    private void updateVideoCallButtons() {
+    private void updateVideoCallButtons(Call call) {
         Log.v(this, "Showing buttons for video call.");
         final CallButtonUi ui = getUi();
 
@@ -357,6 +357,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.showChangeToVoiceButton(true);
         ui.showSwitchCameraButton(true);
         ui.showPauseVideoButton(true);
+
+        final boolean supportHold = call.can(PhoneCapabilities.SUPPORT_HOLD);
+        final boolean enableHoldOption = call.can(PhoneCapabilities.HOLD);
+        ui.showHoldButton(supportHold);
+        ui.enableHold(enableHoldOption);
+        ui.setHold(call.getState() == Call.State.ONHOLD);
     }
 
     private void updateVoiceCallButtons(Call call) {
