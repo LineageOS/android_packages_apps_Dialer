@@ -382,10 +382,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean canAdd = call.can(PhoneCapabilities.ADD_CALL);
         final boolean enableHoldOption = call.can(PhoneCapabilities.HOLD);
         final boolean supportHold = call.can(PhoneCapabilities.SUPPORT_HOLD);
+        final boolean isCallOnHold = call.getState() == Call.State.ONHOLD;
 
         boolean canVideoCall = call.can(PhoneCapabilities.SUPPORTS_VT_LOCAL)
                 && call.can(PhoneCapabilities.SUPPORTS_VT_REMOTE);
         ui.showChangeToVideoButton(canVideoCall);
+        ui.enableChangeToVideoButton(!isCallOnHold);
 
         final boolean showMergeOption = call.can(PhoneCapabilities.MERGE_CONFERENCE);
         final boolean showAddCallOption = canAdd;
@@ -396,7 +398,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showSwapOption = call.can(PhoneCapabilities.SWAP_CONFERENCE);
         final boolean showHoldOption = !showSwapOption && (enableHoldOption || supportHold);
 
-        ui.setHold(call.getState() == Call.State.ONHOLD);
+        ui.setHold(isCallOnHold);
         // If we show video upgrade and add/merge and hold/swap, the overflow menu is needed.
         final boolean isVideoOverflowScenario = canVideoCall
                 && (showAddCallOption || showMergeOption) && (showHoldOption || showSwapOption);
@@ -461,6 +463,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void enableHold(boolean enabled);
         void showSwapButton(boolean show);
         void showChangeToVideoButton(boolean show);
+        void enableChangeToVideoButton(boolean enable);
         void showSwitchCameraButton(boolean show);
         void setSwitchCameraButton(boolean isBackFacingCamera);
         void showAddCallButton(boolean show);
