@@ -17,6 +17,7 @@
 package com.android.incallui;
 
 import android.net.Uri;
+
 import com.google.common.base.Preconditions;
 
 import android.app.Notification;
@@ -32,6 +33,7 @@ import android.os.Message;
 import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 
+import com.android.contacts.common.util.BitmapUtil;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallApp.NotificationBroadcastReceiver;
@@ -419,9 +421,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
                     android.R.dimen.notification_large_icon_height);
             final int width = (int) mContext.getResources().getDimension(
                     android.R.dimen.notification_large_icon_width);
-            largeIcon = Bitmap.createScaledBitmap(largeIcon, width, height, false);
+            largeIcon = BitmapUtil.getRoundedBitmap(largeIcon, width, height);
         }
-
         return largeIcon;
     }
 
