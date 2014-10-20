@@ -83,7 +83,7 @@
     <string name="description_playback_seek" msgid="4509404274968530055">"பிளேபேக் நிலையைத் தேடு"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"பிளேபேக் விகிதத்தைக் குறை"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"பிளேபேக் விகிதத்தை அதிகரி"</string>
-    <string name="action_menu_call_history_description" msgid="9018442816219748968">"அழைப்பு வரலாறு"</string>
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"அழைப்பு பட்டியல்"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"மேலும் விருப்பங்கள்"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"டயல்பேடு"</string>
     <string name="menu_copy" msgid="6108677035381940698">"நகலெடு"</string>
@@ -158,9 +158,9 @@
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> ஐ அழை"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"தொடர்புகளில் சேர்"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"வீடியோவில் அழை"</string>
-    <string name="recents_footer_text" msgid="7315554578957453359">"அழைப்பு வரலாறு முழுவதையும் காட்டு"</string>
+    <string name="recents_footer_text" msgid="7315554578957453359">"அழைப்பு பட்டியல் முழுவதையும் காட்டு"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> புதிய தவறிய அழைப்புகள்"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"விரைவு டயல் என்பது நீங்கள் அடிக்கடி தொடர்புகொள்ளும்\nபிடித்தவை மற்றும் எண்களை\n ஒரு முறை தொடுவதன் மூலம் டயல் செய்யும் அம்சமாகும்."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"விரைவு டயல் என்பது நீங்கள் அடிக்கடி கூப்பிடும் \nஎண்களை\n ஒரு முறை தொடுவதன் மூலம் அழைக்கும் வசதியாகும்."</string>
     <string name="all_contacts_empty" msgid="4536082452651392894">"உங்களிடம் தொடர்புகள் எதுவுமில்லை."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"எல்லா எண்களையும் பார்க்க படத்தைத் தட்டவும் அல்லது மீண்டும் வரிசைப்படுத்த அழுத்திப் பிடிக்கவும்"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"விலக்கு"</string>
