@@ -38,12 +38,12 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"कॉन्फ़्रेंस कॉल <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"ध्‍वनिमेल नबंर"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"डायल कर रहा है"</string>
-    <string name="card_title_redialing" msgid="4831412164303596395">"पुनः प्रयास कर रहा है"</string>
+    <string name="card_title_redialing" msgid="4831412164303596395">"फिर से प्रयास कर रहा है"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"कॉन्फ़्रेंस कॉल"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"इनकमिंग कॉल"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"कॉल समाप्त"</string>
     <string name="card_title_on_hold" msgid="821463117892339942">"होल्ड पर"</string>
-    <string name="card_title_hanging_up" msgid="3999101620995182450">"बंद कर रहा है"</string>
+    <string name="card_title_hanging_up" msgid="3999101620995182450">"कॉल समाप्त हो रहा है"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"कॉल में"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"मेरा नंबर <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g> है"</string>
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"वीडियो कनेक्ट हो रहा है"</string>
@@ -62,10 +62,10 @@
     <string name="notification_incoming_call" msgid="2820429205043529642">"इनकमिंग कॉल"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"इनकमिंग वीडियो कॉल"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"इनकमिंग वीडियो अनुरोध"</string>
-    <string name="notification_voicemail_title" msgid="8933468752045550523">"नया ध्वनिमेल"</string>
-    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"नई ध्वनिमेल (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_title" msgid="8933468752045550523">"नया वॉयस मेल"</string>
+    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"नई वॉयस मेल (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> डायल करें"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"ध्वनिमेल नंबर अज्ञात"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"वॉयस मेल नंबर अज्ञात"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"कोई सेवा नहीं"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"चयनित नेटवर्क (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) अनुपलब्ध"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"समाप्त करें"</string>
@@ -91,7 +91,7 @@
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP कॉल"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"आपातकालीन कॉल"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"रेडियो चालू कर रहा है..."</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"सेवा क्षेत्र के बाहर, पुनः प्रयास कर रहा है..."</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"सेवा क्षेत्र के बाहर, फिर से प्रयास कर रहा है..."</string>
     <string name="dial_emergency_error" msgid="7969515493359619960">"कॉल नहीं भेजा गया, <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> कोई आपातकालीन नंबर नहीं है!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"कॉल नहीं भेजा गया. कोई आपातकालीन नंबर डायल करें!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"डायल करने के लिए कीबोर्ड का उपयोग करें"</string>
