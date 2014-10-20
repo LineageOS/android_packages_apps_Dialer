@@ -272,6 +272,11 @@ public class CallButtonFragment
     }
 
     @Override
+    public void enableChangeToVideoButton(boolean enable) {
+        mChangeToVideoButton.setEnabled(enable);
+    }
+
+    @Override
     public void showSwitchCameraButton(boolean show) {
         mSwitchCameraButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
