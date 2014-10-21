@@ -22,32 +22,13 @@
     <string name="unknown" msgid="6878797917991465859">"അജ്ഞാതം"</string>
     <string name="private_num" msgid="6713286113000232309">"സ്വകാര്യ നമ്പർ"</string>
     <string name="payphone" msgid="1931775086311769314">"പണം നൽകി ഉപയോഗിക്കുന്ന ഫോൺ"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"ലൈൻ തിരക്കിലാണ്"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"നെറ്റ്‌വർക്ക് തിരക്കിലാണ്"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"പ്രതികരണമില്ല, കാലഹരണപ്പെട്ടു"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"സെർവറിൽ പരിധിയ്‌ക്ക് പുറത്താണ്"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"നമ്പർ പരിധിയ്‌ക്ക് പുറത്താണ്"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"ഉപയോക്തൃനാമമോ പാസ്‌വേഡോ തെറ്റാണ്"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"നെറ്റ്‌വർക്കില്ലാത്ത സ്ഥലത്തുനിന്നും കോൾ ചെയ്‌തു"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"സെർവർ പിശക്. പിന്നീട് വീണ്ടും ശ്രമിക്കുക."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"സിഗ്‌നൽ ഇല്ല"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM പരിധി കഴിഞ്ഞു"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"റേഡിയോ ഓഫാക്കുക"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"SIM ഇല്ല അല്ലെങ്കിൽ SIM പിശക്"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"മൊബൈൽ നെറ്റ്‌വർക്ക് ലഭ്യമല്ല"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"FDN, ഔട്ട്ഗോയിംഗ് കോളുകൾ നിയന്ത്രിച്ചിരിക്കുന്നു."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"കോൾ ബാറിംഗ് ഓണായിരിക്കുമ്പോൾ നിങ്ങൾ ഔട്ട്‌ഗോയിംഗ് കോളുകൾ വിളിക്കാനാകില്ല."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"ആക്‌സസ്സ് നിയന്ത്രണം, എല്ലാ കോളുകളും നിയന്ത്രിച്ചിരിക്കുന്നു."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"ആക്‌സസ്സ് നിയന്ത്രണം, അടിയന്തര കോളുകൾ നിയന്ത്രിച്ചിരിക്കുന്നു."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"ആക്‌സസ്സ് നിയന്ത്രണം, സാധാരണ കോളുകൾ നിയന്ത്രിച്ചിരിക്കുന്നു."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"സാധുതയില്ലാത്ത ന‍മ്പര്‍"</string>
     <string name="confCall" msgid="1904840547188336828">"കോൺഫറൻസ് കോൾ"</string>
     <string name="call_lost" msgid="317670617901479594">"കോൾ നഷ്‌ടപ്പെട്ടു."</string>
     <string name="ok" msgid="3811371167865772377">"ശരി"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"സ്പീക്കർ"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"ഹാൻഡ്‌സെറ്റ് ഇയർപീസ്"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"വയർ മുഖേന ബന്ധിപ്പിച്ച ഹെഡ്‌സെറ്റ്"</string>
-    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
+    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"ബ്ലൂടൂത്ത്"</string>
     <string name="wait_prompt_str" msgid="7601815427707856238">"ഇനിപ്പറയുന്ന ടോണുകൾ അയയ്‌ക്കണോ?\n"</string>
     <string name="pause_prompt_str" msgid="1789964702154314806">"ടോണുകൾ അയയ്‌ക്കുന്നു\n"</string>
     <string name="send_button" msgid="4106860097497818751">"അയയ്‌ക്കുക"</string>
@@ -94,7 +75,7 @@
     <string name="notification_action_dismiss" msgid="2679969397930852858">"നിരസിക്കുക"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"കോൾബാക്ക്"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"സന്ദേശം"</string>
-    <string name="incall_error_power_off" msgid="6550191216405193368">"ഒരു കോൾ വിളിക്കാൻ, ആദ്യം വിമാന മോഡ് ഓഫുചെയ്യുക."</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"ഒരു കോൾ വിളിക്കാൻ, ആദ്യം ഫ്ലൈറ്റ് മോഡ് ഓഫുചെയ്യുക."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"നെറ്റ്‌വർക്കിൽ രജിസ്റ്റർ ചെയ്‌തിട്ടില്ല."</string>
     <string name="incall_error_out_of_service" msgid="8587993036435080418">"മൊബൈൽ നെറ്റ്‌വർക്ക് ലഭ്യമല്ല."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"കോൽ ചെയ്യാനായില്ല. സാധുവായ നമ്പറൊന്നും നൽകിയില്ല."</string>
@@ -107,7 +88,6 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"കോൺഫറൻസ് കോളുകൾ ചെയ്യാനായില്ല."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"കോൾ നിരസിക്കാനായില്ല."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"കോൾ (കോളുകൾ) റിലീസുചെയ്യാനായില്ല."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"വോയ്‌സ് മെയിൽ നമ്പർ അജ്ഞാതമാണ്."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP കോൾ"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"അടിയന്തര കോൾ"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"റേഡിയോ ഓൺ ചെയ്യുന്നു…"</string>
@@ -136,7 +116,7 @@
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"വീഡിയോ താൽക്കലികമായി നിർത്തുക"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"കൂടുതൽ ഓപ്‌ഷനുകൾ"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"സേവനം"</string>
-    <string name="voicemail_settings" msgid="72448049107749316">"സജ്ജീകരിക്കുക"</string>
+    <string name="voicemail_settings" msgid="72448049107749316">"സജ്ജമാക്കുക"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;സജ്ജീകരിച്ചിട്ടില്ല&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"മറ്റ് കോൾ ക്രമീകരണങ്ങൾ"</string>
     <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> മുഖേന വിളിക്കുന്നു"</string>
@@ -164,7 +144,7 @@
     <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"സ്‌പീക്കർഫോൺ തിരഞ്ഞെടുത്തു"</string>
     <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"ഇയർഫോൺ തിരഞ്ഞെടുത്തു"</string>
     <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"വയർ മുഖേന ബന്ധിപ്പിച്ച ഹെഡ്‌സെറ്റ് തിരഞ്ഞെടുത്തു"</string>
-    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"Bluetooth ഹെഡ്‌സെറ്റ് തിരഞ്ഞെടുത്തു"</string>
+    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"ബ്ലൂടൂത്ത് ഹെഡ്‌സെറ്റ് തിരഞ്ഞെടുത്തു"</string>
     <string name="accessibility_call_muted" msgid="2776111226185342220">"കോൾ നിശബ്‌ദമാക്കി."</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"കോൾ അൺ‌മ്യൂട്ടുചെയ്‌തു."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"കോൾ ഹോൾഡുചെയ്‌തു."</string>
@@ -190,5 +170,4 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"റിംഗ്ടോണും വൈബ്രേറ്റുചെയ്യലും"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"കോൺഫറൻസ് കോൾ നിയന്ത്രിക്കുക"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"അടിയന്തര നമ്പർ"</string>
-    <string name="select_account_dialog_title" msgid="5730339500156684204">"അക്കൗണ്ട് തിരഞ്ഞെടുക്കുക"</string>
 </resources>
