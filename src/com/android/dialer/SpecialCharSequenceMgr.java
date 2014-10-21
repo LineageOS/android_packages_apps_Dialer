@@ -42,6 +42,8 @@ import android.widget.Toast;
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.internal.telephony.ITelephony;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Helper class to listen for some magic character sequences
  * that are handled specially by the dialer.
@@ -87,23 +89,13 @@ public class SpecialCharSequenceMgr {
     }
 
     public static boolean handleChars(Context context, String input, EditText textField) {
-        return handleChars(context, input, false, textField);
-    }
-
-    static boolean handleChars(Context context, String input) {
-        return handleChars(context, input, false, null);
-    }
-
-    static boolean handleChars(Context context, String input, boolean useSystemWindow,
-            EditText textField) {
-
         //get rid of the separators so that the string gets parsed correctly
         String dialString = PhoneNumberUtils.stripSeparators(input);
 
         if (context.getResources().getBoolean(R.bool.def_dialer_secretcode_enabled) ||
                 context.getResources().getBoolean(R.bool.def_dialer_settings_diagport_enabled)) {
             if (handlePRLVersion(context, dialString)
-                    || handleIMEIDisplay(context, dialString, useSystemWindow)
+                    || handleDeviceIdDisplay(context, dialString)
                     || handleRegulatoryInfoDisplay(context, dialString)
                     || handleEngineerModeDisplay(context, dialString)
                     || handlePinEntry(context, dialString)
@@ -115,7 +107,7 @@ public class SpecialCharSequenceMgr {
             }
         } else {
             if (handlePRLVersion(context, dialString)
-                    || handleIMEIDisplay(context, dialString, useSystemWindow)
+                    || handleDeviceIdDisplay(context, dialString)
                     || handleRegulatoryInfoDisplay(context, dialString)
                     || handleEngineerModeDisplay(context, dialString)
                     || handlePinEntry(context, dialString)
@@ -300,26 +292,30 @@ public class SpecialCharSequenceMgr {
         return false;
     }
 
-    static boolean handleIMEIDisplay(Context context, String input, boolean useSystemWindow) {
+
+    // TODO: Use TelephonyCapabilities.getDeviceIdLabel() to get the device id label instead of a
+    // hard-coded string.
+    static boolean handleDeviceIdDisplay(Context context, String input) {
         TelephonyManager telephonyManager =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+
         if (telephonyManager != null && input.equals(MMI_IMEI_DISPLAY)) {
-            int phoneType;
-            long subId = SubscriptionManager.getDefaultVoiceSubId();
-            phoneType = telephonyManager.getCurrentPhoneType(subId);
-            if (telephonyManager.isMultiSimEnabled()) {
-                return handleMSimIMEIDisplay(context, telephonyManager);
+            int labelResId = (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM) ?
+                    R.string.imei : R.string.meid;
+
+            List<String> deviceIds = new ArrayList<String>();
+            for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
+                deviceIds.add(telephonyManager.getDeviceId(slot));
             }
 
-            if (phoneType == TelephonyManager.PHONE_TYPE_GSM) {
-                showIMEIPanel(context, useSystemWindow, telephonyManager);
-                return true;
-            } else if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
-                showMEIDPanel(context, useSystemWindow, telephonyManager);
-                return true;
-            }
+            AlertDialog alert = new AlertDialog.Builder(context)
+                    .setTitle(labelResId)
+                    .setItems(deviceIds.toArray(new String[deviceIds.size()]), null)
+                    .setPositiveButton(R.string.ok, null)
+                    .setCancelable(false)
+                    .show();
+            return true;
         }
-
         return false;
     }
 
@@ -363,42 +359,6 @@ public class SpecialCharSequenceMgr {
             return true;
         }
         return false;
-    }
-
-    // TODO: Combine showIMEIPanel() and showMEIDPanel() into a single
-    // generic "showDeviceIdPanel()" method, like in the apps/Phone
-    // version of SpecialCharSequenceMgr.java.  (This will require moving
-    // the phone app's TelephonyCapabilities.getDeviceIdLabel() method
-    // into the telephony framework, though.)
-
-    private static void showIMEIPanel(Context context, boolean useSystemWindow,
-            TelephonyManager telephonyManager) {
-        String imeiStr = null;
-        long subId = SubscriptionManager.getDefaultVoiceSubId();
-        int slotId = SubscriptionManager.getSlotId(subId);
-        imeiStr = telephonyManager.getDeviceId(slotId);
-
-        AlertDialog alert = new AlertDialog.Builder(context)
-                .setTitle(R.string.imei)
-                .setMessage(imeiStr)
-                .setPositiveButton(android.R.string.ok, null)
-                .setCancelable(false)
-                .show();
-    }
-
-    private static void showMEIDPanel(Context context, boolean useSystemWindow,
-            TelephonyManager telephonyManager) {
-        String meidStr = null;
-        long subId = SubscriptionManager.getDefaultVoiceSubId();
-        int slotId = SubscriptionManager.getSlotId(subId);
-        meidStr = telephonyManager.getDeviceId(slotId);
-
-        AlertDialog alert = new AlertDialog.Builder(context)
-                .setTitle(R.string.meid)
-                .setMessage(meidStr)
-                .setPositiveButton(android.R.string.ok, null)
-                .setCancelable(false)
-                .show();
     }
 
     static boolean handleEngineerModeDisplay(Context context, String input) {
