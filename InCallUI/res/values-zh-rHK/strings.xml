@@ -68,8 +68,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"沒有可用的留言信箱號碼"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"沒有服務"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"您所選取的網絡 (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) 無法使用"</string>
-    <!-- no translation found for notification_action_answer (6700362365135365143) -->
-    <skip />
+    <string name="notification_action_answer" msgid="6700362365135365143">"接聽"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"掛斷"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"影片"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"語音"</string>
