@@ -106,8 +106,7 @@
     <skip />
     <!-- no translation found for notification_network_selection_text (2607085729661923269) -->
     <skip />
-    <!-- no translation found for notification_action_answer (6700362365135365143) -->
-    <skip />
+    <string name="notification_action_answer" msgid="6700362365135365143">"Жооп берүү"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Телефонду коюу"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"Видео"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Үн"</string>

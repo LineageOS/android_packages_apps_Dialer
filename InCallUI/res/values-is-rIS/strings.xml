@@ -68,8 +68,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Talhólfsnúmer ekki þekkt"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Ekkert símasamband"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Valið símkerfi (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) er ekki tiltækt"</string>
-    <!-- no translation found for notification_action_answer (6700362365135365143) -->
-    <skip />
+    <string name="notification_action_answer" msgid="6700362365135365143">"Svara"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Leggja á"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"Myndskeið"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Tal"</string>
