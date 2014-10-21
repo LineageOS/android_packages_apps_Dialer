@@ -68,8 +68,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Nombor mel suara tidak dikenali"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Tiada perkhidmatan"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Rangkaian pilihan (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) tidak tersedia"</string>
-    <!-- no translation found for notification_action_answer (6700362365135365143) -->
-    <skip />
+    <string name="notification_action_answer" msgid="6700362365135365143">"Jawab"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Letakkan gagang"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"Video dalam strim"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Suara"</string>
