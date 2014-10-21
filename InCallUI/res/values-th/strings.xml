@@ -68,8 +68,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"ไม่ทราบหมายเลขข้อความเสียง"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"ไม่มีบริการ"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"เครือข่ายที่เลือกไว้ (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) ใช้งานไม่ได้"</string>
-    <!-- no translation found for notification_action_answer (6700362365135365143) -->
-    <skip />
+    <string name="notification_action_answer" msgid="6700362365135365143">"ตอบ"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"วางสาย"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"วิดีโอ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"เสียง"</string>
