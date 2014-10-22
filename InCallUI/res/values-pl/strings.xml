@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"Telefon"</string>
+    <string name="onHold" msgid="9035493194749959955">"Oczekujące"</string>
+    <string name="unknown" msgid="6878797917991465859">"Nieznany"</string>
+    <string name="private_num" msgid="6713286113000232309">"Numer prywatny"</string>
+    <string name="payphone" msgid="1931775086311769314">"Płatny telefon"</string>
+    <string name="callFailed_userBusy" msgid="8851106999809294904">"Linia jest zajęta"</string>
+    <string name="callFailed_congestion" msgid="8737761615702718375">"Sieć zajęta"</string>
+    <string name="callFailed_timedOut" msgid="7590961703135543346">"Brak odpowiedzi, przekroczono limit czasu"</string>
+    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Serwer nieosiągalny"</string>
+    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Numer nieosiągalny"</string>
+    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Nieprawidłowa nazwa użytkownika lub hasło"</string>
+    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Połączenie spoza sieci"</string>
+    <string name="callFailed_server_error" msgid="5717915213586193217">"Błąd serwera. Spróbuj ponownie później."</string>
+    <string name="callFailed_noSignal" msgid="1889803273616031933">"Brak sygnału"</string>
+    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Przekroczono limit ACM"</string>
+    <string name="callFailed_powerOff" msgid="2766035859391549713">"Sieci bezprzewodowe są wyłączone"</string>
+    <string name="callFailed_simError" msgid="4476360200030635828">"Brak lub błąd karty SIM"</string>
+    <string name="callFailed_outOfService" msgid="682300184520329366">"Sieć komórkowa niedostępna"</string>
+    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Połączenia są ograniczone do listy ustalonych numerów."</string>
+    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Nie można wykonywać połączeń wychodzących, gdy włączona jest blokada dzwonienia."</string>
+    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Wszystkie połączenia są zablokowane przez funkcję kontroli dostępu."</string>
+    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Połączenia alarmowe są zablokowane przez funkcję kontroli dostępu."</string>
+    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Zwykłe połączenia są zablokowane przez funkcję kontroli dostępu."</string>
+    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Nieprawidłowy numer"</string>
+    <string name="confCall" msgid="1904840547188336828">"Poł. konferencyjne"</string>
+    <string name="call_lost" msgid="317670617901479594">"Połączenie zostało zerwane."</string>
+    <string name="ok" msgid="3811371167865772377">"OK"</string>
+    <string name="audio_mode_speaker" msgid="27649582100085266">"Głośnik"</string>
+    <string name="audio_mode_earpiece" msgid="4156527186373869107">"Słuchawka telefonu"</string>
+    <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Przewodowy zestaw słuch."</string>
+    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
+    <string name="wait_prompt_str" msgid="7601815427707856238">"Wysłać następujące dzwonki?\n"</string>
+    <string name="pause_prompt_str" msgid="1789964702154314806">"Wysyłanie sygnałów\n"</string>
+    <string name="send_button" msgid="4106860097497818751">"Wyślij"</string>
+    <string name="pause_prompt_yes" msgid="3564467212025151797">"Tak"</string>
+    <string name="pause_prompt_no" msgid="6686238803236884877">"Nie"</string>
+    <string name="wild_prompt_str" msgid="5543521676355533577">"Zastąp symbol wieloznaczny"</string>
+    <string name="caller_manage_header" msgid="3231519674734638786">"Poł. konferencyjne <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Numer poczty głosowej"</string>
+    <string name="card_title_dialing" msgid="5769417478498348054">"Wybieranie"</string>
+    <string name="card_title_redialing" msgid="4831412164303596395">"Ponawianie próby"</string>
+    <string name="card_title_conf_call" msgid="1162980346189744501">"Poł. konferencyjne"</string>
+    <string name="card_title_incoming_call" msgid="7364539451234646909">"Połączenie"</string>
+    <string name="card_title_call_ended" msgid="5544730338889702298">"Połączenie zakończone"</string>
+    <string name="card_title_on_hold" msgid="821463117892339942">"Oczekujące"</string>
+    <string name="card_title_hanging_up" msgid="3999101620995182450">"Trwa rozłączanie"</string>
+    <string name="card_title_in_call" msgid="6346543933068225205">"Trwa połączenie"</string>
+    <string name="card_title_my_phone_number" msgid="112428362494434191">"Mój numer to <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_dialing" msgid="2107666444937350731">"Trwa wybieranie numeru"</string>
+    <string name="notification_missedCallTitle" msgid="7554385905572364535">"Nieodebrane połączenie"</string>
+    <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Połączenia nieodebrane"</string>
+    <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> nieodebranych połączeń"</string>
+    <string name="notification_missedCallTicker" msgid="504686252427747209">"Nieodebrane połączenie z <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="7068688957273482989">"Trwa połączenie"</string>
+    <string name="notification_on_hold" msgid="3480694969511790465">"Oczekujące"</string>
+    <string name="notification_incoming_call" msgid="2820429205043529642">"Połączenie przychodzące"</string>
+    <string name="notification_voicemail_title" msgid="8933468752045550523">"Nowa poczta głosowa"</string>
+    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Nowa poczta głosowa (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Zadzwoń do <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Nieznany numer poczty głosowej"</string>
+    <string name="notification_network_selection_title" msgid="4224455487793492772">"Brak usługi"</string>
+    <string name="notification_network_selection_text" msgid="2607085729661923269">"Wybrana sieć (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) jest niedostępna"</string>
+    <string name="notification_action_end_call" msgid="6069460915123531620">"Rozłącz"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Oddzwoń"</string>
+    <string name="notification_missedCall_message" msgid="3049928912736917988">"Wiadomość"</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Aby rozpocząć połączenie, wyłącz najpierw tryb samolotowy"</string>
+    <string name="incall_error_emergency_only" msgid="4678640422710818317">"Nie zarejestrowano w sieci"</string>
+    <string name="incall_error_out_of_service" msgid="8587993036435080418">"Sieć komórkowa jest niedostępna."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Połączenie niezrealizowane, nie wprowadzono poprawnego numeru."</string>
+    <string name="incall_error_call_failed" msgid="4313552620858880999">"Połączenie nie zostało zrealizowane."</string>
+    <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"Rozpoczynanie sekwencji MMI..."</string>
+    <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"Nieobsługiwana usługa."</string>
+    <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"Nie można przełączyć rozmów."</string>
+    <string name="incall_error_supp_service_separate" msgid="914362338192301746">"Nie można rozdzielić połączenia."</string>
+    <string name="incall_error_supp_service_transfer" msgid="2509871374644921632">"Nie można przekazać połączenia."</string>
+    <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Nie można prowadzić rozmów konferencyjnych."</string>
+    <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Nie można odrzucić połączenia."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Nie można zakończyć połączenia (połączeń)."</string>
+    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Nieznany numer poczty głosowej."</string>
+    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Połączenie przez internet"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Połączenie alarmowe"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Trwa włączanie sieci bezprzewodowych..."</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Obszar nieobsługiwany, ponowna próba..."</string>
+    <string name="dial_emergency_error" msgid="7969515493359619960">"Połączenie niezrealizowane. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> nie jest numerem alarmowym!"</string>
+    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Połączenie niezrealizowane. Wybierz numer alarmowy!"</string>
+    <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Aby zadzwonić, użyj klawiatury."</string>
+    <string name="onscreenHoldText" msgid="2285258239691145872">"Wstrzymaj"</string>
+    <string name="onscreenEndCallText" msgid="4403855834875398585">"Zakończ"</string>
+    <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Klawiatura"</string>
+    <string name="onscreenMuteText" msgid="5011369181754261374">"Wycisz"</string>
+    <string name="onscreenAddCallText" msgid="5140385634712287403">"Dodaj połączenie"</string>
+    <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Scal połączenia"</string>
+    <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Przełącz"</string>
+    <string name="onscreenManageCallsText" msgid="5473231160123254154">"Zarządzaj połączeniami"</string>
+    <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Zarządzaj konferencją"</string>
+    <string name="onscreenAudioText" msgid="1710087112800041743">"Dźwięk"</string>
+    <string name="onscreenVideoCallText" msgid="4800924186056115442">"Rozmowa wideo"</string>
+    <string name="voicemail_provider" msgid="5135942703327136909">"Usługa"</string>
+    <string name="voicemail_settings" msgid="72448049107749316">"Konfiguracja"</string>
+    <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Nie ustawiono&gt;"</string>
+    <string name="other_settings" msgid="3672912580359716394">"Inne ustawienia połączeń"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Nawiązywanie połączenia przez <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="incoming_via_template" msgid="1696993226115570960">"Przychodzące przez <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="contactPhoto" msgid="4713193418046639466">"zdjęcie kontaktu"</string>
+    <string name="goPrivate" msgid="865837794424530980">"przejdź do rozmowy prywatnej"</string>
+    <string name="selectContact" msgid="781975788478987237">"wybierz kontakt"</string>
+    <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Napisz własną..."</string>
+    <string name="custom_message_cancel" msgid="7516406059429609296">"Anuluj"</string>
+    <string name="custom_message_send" msgid="5795754217085747742">"Wyślij"</string>
+    <string name="description_image_button_one" msgid="5502718871331943463">"jeden"</string>
+    <string name="description_image_button_two" msgid="4903738528222924522">"dwa"</string>
+    <string name="description_image_button_three" msgid="5570985408463782329">"trzy"</string>
+    <string name="description_image_button_four" msgid="1697520001239289074">"cztery"</string>
+    <string name="description_image_button_five" msgid="3450276493026943454">"pięć"</string>
+    <string name="description_image_button_six" msgid="2070376172268675300">"sześć"</string>
+    <string name="description_image_button_seven" msgid="1757351311199993371">"siedem"</string>
+    <string name="description_image_button_eight" msgid="4734693919020613227">"osiem"</string>
+    <string name="description_image_button_nine" msgid="5568534122590597040">"dziewięć"</string>
+    <string name="description_image_button_star" msgid="1976280813017254462">"gwiazdka"</string>
+    <string name="description_image_button_zero" msgid="4211255756866893605">"zero"</string>
+    <string name="description_image_button_pound" msgid="1716041284529917866">"znak funta"</string>
+    <string name="description_dial_button" msgid="7459705245418435351">"wybierz numer"</string>
+    <string name="description_delete_button" msgid="4015842181592283903">"cofnij"</string>
+    <string name="accessibility_speakerphone_enabled" msgid="1988512040421036359">"Głośnik włączony."</string>
+    <string name="accessibility_call_muted" msgid="2776111226185342220">"Połączenie wyciszone."</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Odpowiedz"</string>
+    <string name="description_target_send_sms" msgid="2098326025587950144">"Wyślij SMS"</string>
+    <string name="description_target_decline" msgid="4789834364389731957">"Odrzuć"</string>
+    <string name="description_direction_up" msgid="4441409581444516690">"Przesuń w górę: <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_left" msgid="7129873384376533287">"Przesuń w lewo: <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_right" msgid="2122584234531957308">"Przesuń w prawo: <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Wibracje"</string>
+    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Wibracje"</string>
+    <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Dźwięk"</string>
+    <string name="default_notification_description" msgid="78174796906240970">"Domyślny dźwięk (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
+    <string name="ringtone_title" msgid="6374978286202084684">"Dzwonek telefonu"</string>
+    <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Wibracje i dzwonek"</string>
+    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Dźwięki wybierania numeru"</string>
+    <string name="dial_pad_autocomplete" msgid="494525952035761075">"Autouzupełnianie klawiatury"</string>
+    <string name="preference_category_ringtone" msgid="5197960752529332721">"Dzwonek i wibracje"</string>
+    <string name="manageConferenceLabel" msgid="4691922394301969053">"Zarządzaj połączeniem konferencyjnym"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Numer alarmowy"</string>
+    <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
+    <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
+    <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
+    <string name="dialpad_3_number" msgid="7146166309009131439">"3"</string>
+    <string name="dialpad_4_number" msgid="9075039274846639476">"4"</string>
+    <string name="dialpad_5_number" msgid="5780019709590672721">"5"</string>
+    <string name="dialpad_6_number" msgid="8261355170951265389">"6"</string>
+    <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
+    <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
+    <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
+</resources>

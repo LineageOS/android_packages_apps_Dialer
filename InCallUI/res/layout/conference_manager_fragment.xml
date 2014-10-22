@@ -17,85 +17,27 @@
 <!-- The "Manage conference" UI.  This panel is displayed (instead of
      the inCallPanel) when the user clicks the "Manage conference"
      button while on a conference call. -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/manageConferencePanel"
-                android:background="#FF000000"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                >
-    <!-- This original header (with timer) is currently not being used,
-         but may be of use in the future. -->
-    <!-- Header, including chronometer and List divider -->
-    <Chronometer
-        android:id="@+id/manageConferencePanelHeader"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="5dip"
-        android:layout_marginBottom="5dip"
-        android:visibility="gone"/>
-
-    <ImageView
-        android:id="@+id/manageConferencePanelDivider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/divider_horizontal_dark"
-        android:scaleType="fitXY"
-        android:layout_below="@id/manageConferencePanelHeader"
-        android:visibility="gone"/>
-    <!-- End of the original header -->
-
-    <!-- Header which looks like ActionBar. -->
-    <FrameLayout
-        android:id="@+id/manageConferenceHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ab_transparent_dark_holo">
-
-        <LinearLayout
-            android:id="@+id/manage_done"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:src="?android:attr/homeAsUpIndicator"
-                android:layout_gravity="center_vertical|left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                style="@android:style/TextAppearance.Holo.Widget.ActionBar.Title"
-                android:gravity="center_vertical"
-                android:text="@string/manageConferenceLabel"/>
-        </LinearLayout>
-
-    </FrameLayout>  <!-- End of header -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/manageConferencePanel"
+    android:background="@color/conference_call_manager_background_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/conference_call_manager_padding_top"
+    android:visibility="gone">
 
     <!-- The scrollview wrapper for the list of callers on
          the conference call (in case the list gets too long). -->
     <ScrollView
         android:id="@+id/conferenceList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/manageConferenceHeader">
+        android:layout_height="wrap_content">
 
         <!-- The actual list of callers; this embedded LinearLayout
              required since scrollview only supports a single child. -->
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:showDividers="middle|end"
-            android:divider="?android:attr/listDivider">
+            android:layout_height="wrap_content">
 
             <!-- A conference can have at most MAX_CALLERS_IN_CONFERENCE (= 5) callers,
                  so just define all those UI elements here. -->
@@ -129,4 +71,4 @@
 
     </ScrollView>  <!-- End of scrolling list wrapper for the linear layout -->
 
-</RelativeLayout>
+</FrameLayout>

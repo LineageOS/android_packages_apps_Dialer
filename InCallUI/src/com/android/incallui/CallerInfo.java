@@ -16,28 +16,27 @@
 
 package com.android.incallui;
 
+import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.contacts.common.util.TelephonyManagerUtils;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.location.Country;
-import android.location.CountryDetector;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
 import android.provider.ContactsContract.RawContacts;
 import android.telephony.PhoneNumberUtils;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import com.android.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
-import com.android.i18n.phonenumbers.NumberParseException;
-import com.android.i18n.phonenumbers.PhoneNumberUtil;
-import com.android.i18n.phonenumbers.Phonenumber.PhoneNumber;
+import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 
 import java.util.Locale;
-
 
 /**
  * Looks up caller information for the given phone number.
@@ -91,9 +90,18 @@ public class CallerInfo {
     public String numberLabel;
 
     public int photoResource;
-    public long person_id;
+
+    // Contact ID, which will be 0 if a contact comes from the corp CP2.
+    public long contactIdOrZero;
+    public String lookupKeyOrNull;
     public boolean needUpdate;
     public Uri contactRefUri;
+
+    /**
+     * Contact display photo URI.  If a contact has no display photo but a thumbnail, it'll be
+     * the thumbnail URI instead.
+     */
+    public Uri contactDisplayPhotoUri;
 
     // fields to hold individual contact preference data,
     // including the send to voicemail flag and the ringtone
@@ -195,7 +203,7 @@ public class CallerInfo {
                     if (typeColumnIndex != -1) {
                         info.numberType = cursor.getInt(typeColumnIndex);
                         info.numberLabel = cursor.getString(columnIndex);
-                        info.phoneLabel = Phone.getDisplayLabel(context,
+                        info.phoneLabel = Phone.getTypeLabel(context.getResources(),
                                 info.numberType, info.numberLabel)
                                 .toString();
                     }
@@ -204,14 +212,31 @@ public class CallerInfo {
                 // Look for the person_id.
                 columnIndex = getColumnIndexForPersonId(contactRef, cursor);
                 if (columnIndex != -1) {
-                    info.person_id = cursor.getLong(columnIndex);
-                    Log.v(TAG, "==> got info.person_id: " + info.person_id);
+                    final long contactId = cursor.getLong(columnIndex);
+                    if (contactId != 0 && !Contacts.isEnterpriseContactId(contactId)) {
+                        info.contactIdOrZero = contactId;
+                        Log.v(TAG, "==> got info.contactIdOrZero: " + info.contactIdOrZero);
+
+                        // cache the lookup key for later use with person_id to create lookup URIs
+                        columnIndex = cursor.getColumnIndex(PhoneLookup.LOOKUP_KEY);
+                        if (columnIndex != -1) {
+                            info.lookupKeyOrNull = cursor.getString(columnIndex);
+                        }
+                    }
                 } else {
                     // No valid columnIndex, so we can't look up person_id.
-                    Log.v(TAG, "Couldn't find person_id column for " + contactRef);
+                    Log.v(TAG, "Couldn't find contactId column for " + contactRef);
                     // Watch out: this means that anything that depends on
                     // person_id will be broken (like contact photo lookups in
                     // the in-call UI, for example.)
+                }
+
+                // Display photo URI.
+                columnIndex = cursor.getColumnIndex(PhoneLookup.PHOTO_URI);
+                if ((columnIndex != -1) && (cursor.getString(columnIndex) != null)) {
+                    info.contactDisplayPhotoUri = Uri.parse(cursor.getString(columnIndex));
+                } else {
+                    info.contactDisplayPhotoUri = null;
                 }
 
                 // look for the custom ringtone, create from the string stored
@@ -248,50 +273,10 @@ public class CallerInfo {
      * @return the CallerInfo which contains the caller id for the given
      * number. The returned CallerInfo is null if no number is supplied.
      */
-    public static CallerInfo getCallerInfo(Context context, Uri contactRef) {
+    private static CallerInfo getCallerInfo(Context context, Uri contactRef) {
 
         return getCallerInfo(context, contactRef,
                 context.getContentResolver().query(contactRef, null, null, null, null));
-    }
-
-    /**
-     * getCallerInfo given a phone number, look up in the call-log database
-     * for the matching caller id info.
-     * @param context the context used to get the ContentResolver
-     * @param number the phone number used to lookup caller id
-     * @return the CallerInfo which contains the caller id for the given
-     * number. The returned CallerInfo is null if no number is supplied. If
-     * a matching number is not found, then a generic caller info is returned,
-     * with all relevant fields empty or null.
-     */
-    public static CallerInfo getCallerInfo(Context context, String number) {
-        Log.v(TAG, "getCallerInfo() based on number...");
-
-        if (TextUtils.isEmpty(number)) {
-            return null;
-        }
-
-        // Change the callerInfo number ONLY if it is an emergency number
-        // or if it is the voicemail number.  If it is either, take a
-        // shortcut and skip the query.
-        if (PhoneNumberUtils.isLocalEmergencyNumber(number, context)) {
-            return new CallerInfo().markAsEmergency(context);
-        } else if (PhoneNumberUtils.isVoiceMailNumber(number)) {
-            return new CallerInfo().markAsVoiceMail();
-        }
-
-        Uri contactUri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
-
-        CallerInfo info = getCallerInfo(context, contactUri);
-        info = doSecondaryLookupIfNecessary(context, number, info);
-
-        // if no query results were returned with a viable number,
-        // fill in the original number value we used to query with.
-        if (TextUtils.isEmpty(info.phoneNumber)) {
-            info.phoneNumber = number;
-        }
-
-        return info;
     }
 
     /**
@@ -307,48 +292,15 @@ public class CallerInfo {
     static CallerInfo doSecondaryLookupIfNecessary(Context context,
             String number, CallerInfo previousResult) {
         if (!previousResult.contactExists
-                && PhoneNumberUtils.isUriNumber(number)) {
-            String username = PhoneNumberUtils.getUsernameFromUriNumber(number);
+                && PhoneNumberHelper.isUriNumber(number)) {
+            String username = PhoneNumberHelper.getUsernameFromUriNumber(number);
             if (PhoneNumberUtils.isGlobalPhoneNumber(username)) {
                 previousResult = getCallerInfo(context,
-                        Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI,
+                        Uri.withAppendedPath(PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI,
                                 Uri.encode(username)));
             }
         }
         return previousResult;
-    }
-
-    /**
-     * getCallerId: a convenience method to get the caller id for a given
-     * number.
-     *
-     * @param context the context used to get the ContentResolver.
-     * @param number a phone number.
-     * @return if the number belongs to a contact, the contact's name is
-     * returned; otherwise, the number itself is returned.
-     *
-     * TODO NOTE: This MAY need to refer to the Asynchronous Query API
-     * [startQuery()], instead of getCallerInfo, but since it looks like
-     * it is only being used by the provider calls in the messaging app:
-     *   1. android.provider.Telephony.Mms.getDisplayAddress()
-     *   2. android.provider.Telephony.Sms.getDisplayAddress()
-     * We may not need to make the change.
-     */
-    public static String getCallerId(Context context, String number) {
-        CallerInfo info = getCallerInfo(context, number);
-        String callerID = null;
-
-        if (info != null) {
-            String name = info.name;
-
-            if (!TextUtils.isEmpty(name)) {
-                callerID = name;
-            } else {
-                callerID = number;
-            }
-        }
-
-        return callerID;
     }
 
     // Accessors
@@ -381,7 +333,7 @@ public class CallerInfo {
     // should be displayed.
     /* package */ CallerInfo markAsEmergency(Context context) {
         phoneNumber = context.getString(R.string.emergency_call_dialog_number_for_display);
-        photoResource = R.drawable.picture_emergency;
+        photoResource = R.drawable.img_phone;
         mIsEmergency = true;
         return this;
     }
@@ -396,13 +348,14 @@ public class CallerInfo {
      */
     // TODO: As in the emergency number handling, we end up writing a
     // string in the phone number field.
-    /* package */ CallerInfo markAsVoiceMail() {
+    /* package */ CallerInfo markAsVoiceMail(Context context) {
         mIsVoiceMail = true;
 
         try {
-            String voiceMailLabel = TelephonyManager.getDefault().getVoiceMailAlphaTag();
-
-            phoneNumber = voiceMailLabel;
+            // For voicemail calls, we display the voice mail tag
+            // instead of the real phone number in the "number"
+            // field.
+            phoneNumber = TelephonyManagerUtils.getVoiceMailAlphaTag(context);
         } catch (SecurityException se) {
             // Should never happen: if this process does not have
             // permission to retrieve VM tag, it should not have
@@ -534,7 +487,7 @@ public class CallerInfo {
         PhoneNumberOfflineGeocoder geocoder = PhoneNumberOfflineGeocoder.getInstance();
 
         Locale locale = context.getResources().getConfiguration().locale;
-        String countryIso = getCurrentCountryIso(context, locale);
+        String countryIso = TelephonyManagerUtils.getCurrentCountryIso(context, locale);
         PhoneNumber pn = null;
         try {
             Log.v(TAG, "parsing '" + number
@@ -550,37 +503,9 @@ public class CallerInfo {
             String description = geocoder.getDescriptionForNumber(pn, locale);
             Log.v(TAG, "- got description: '" + description + "'");
             return description;
-        } else {
-            return null;
         }
-    }
 
-    /**
-     * @return The ISO 3166-1 two letters country code of the country the user
-     *         is in.
-     */
-    private static String getCurrentCountryIso(Context context, Locale locale) {
-        String countryIso = null;
-        CountryDetector detector = (CountryDetector) context.getSystemService(
-                Context.COUNTRY_DETECTOR);
-        if (detector != null) {
-            Country country = detector.detectCountry();
-            if (country != null) {
-                countryIso = country.getCountryIso();
-            } else {
-                Log.e(TAG, "CountryDetector.detectCountry() returned null.");
-            }
-        }
-        if (countryIso == null) {
-            countryIso = locale.getCountry();
-            Log.w(TAG, "No CountryDetector; falling back to countryIso based on locale: "
-                    + countryIso);
-        }
-        return countryIso;
-    }
-
-    protected static String getCurrentCountryIso(Context context) {
-        return getCurrentCountryIso(context, Locale.getDefault());
+        return null;
     }
 
     /**
@@ -608,10 +533,11 @@ public class CallerInfo {
                     .append("\nnumberType: " + numberType)
                     .append("\nnumberLabel: " + numberLabel)
                     .append("\nphotoResource: " + photoResource)
-                    .append("\nperson_id: " + person_id)
+                    .append("\ncontactIdOrZero: " + contactIdOrZero)
                     .append("\nneedUpdate: " + needUpdate)
                     .append("\ncontactRefUri: " + contactRefUri)
-                    .append("\ncontactRingtoneUri: " + contactRefUri)
+                    .append("\ncontactRingtoneUri: " + contactRingtoneUri)
+                    .append("\ncontactDisplayPhotoUri: " + contactDisplayPhotoUri)
                     .append("\nshouldSendToVoicemail: " + shouldSendToVoicemail)
                     .append("\ncachedPhoto: " + cachedPhoto)
                     .append("\nisCachedPhotoCurrent: " + isCachedPhotoCurrent)

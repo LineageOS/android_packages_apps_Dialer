@@ -52,9 +52,11 @@
 
     <!-- Buttons in the main "button row" of the in-call onscreen touch UI. -->
     <style name="InCallButton">
-        <item name="android:layout_width">0px</item>
-        <item name="android:layout_height">@dimen/in_call_button_height</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">@dimen/in_call_button_dimension</item>
+        <item name="android:layout_height">@dimen/in_call_button_dimension</item>
+        <item name="android:layout_marginBottom">@dimen/call_button_margin_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/call_button_margin_horizontal</item>
+        <item name="android:layout_marginRight">@dimen/call_button_margin_horizontal</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
@@ -66,40 +68,6 @@
     <style name="InCallCompoundButton" parent="InCallButton">
         <item name="android:textOn">@null</item>
         <item name="android:textOff">@null</item>
-    </style>
-
-    <style name="VerticalSeparator">
-        <item name="android:layout_width">2dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@android:color/black</item>
-    </style>
-
-    <!-- "End" button; similar to InCallButton. -->
-    <style name="InCallEndButton">
-        <item name="android:layout_width">0dip</item>
-        <item name="android:layout_height">@dimen/in_call_end_button_height</item>
-        <item name="android:layout_weight">1</item>
-    </style>
-
-    <!-- Buttons in extra button row. -->
-    <style name="InCallExtraRowButton">
-        <item name="android:layout_width">@dimen/extra_row_button_width</item>
-        <item name="android:layout_height">@dimen/extra_row_button_height</item>
-        <item name="android:background">@null</item>
-    </style>
-
-    <!-- Text label drawn alongside buttons in the "extra button row" of
-         the in-call onscreen touch UI. -->
-    <style name="InCallExtraRowButtonLabel">
-        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-        <item name="android:textColor">@color/incall_call_banner_text_color</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:layout_marginStart">5dip</item>
-        <item name="android:layout_marginEnd">5dip</item>
     </style>
 
     <style name="InCallAnimationStyle" parent="@android:style/Animation.Activity">
@@ -122,74 +90,29 @@
         <item name="android:taskToFrontExitAnimation">@anim/activity_open_exit</item>
     </style>
 
-    <!-- Theme for the InCallActivity activity.  This gives us a totally black
-         window background instead of the default dark grey.  (We don't just use
-         Theme.Black.NoTitleBar directly, since we want any popups or dialogs
-         from the InCallActivity to have the correct holo style. -->
-    <style name="Theme.InCallScreen" parent="@android:style/Theme.Holo.NoActionBar">
-        <item name="android:windowBackground">@android:color/black</item>
+    <!-- Theme for the InCallActivity activity. Should have a transparent background for the
+         circular reveal animation for a new outgoing call to work correctly. We don't just use
+         Theme.Black.NoTitleBar directly, since we want any popups or dialogs from the
+         InCallActivity to have the correct Material style. -->
+    <style name="Theme.InCallScreen" parent="@android:style/Theme.Material.Light">
         <item name="android:windowAnimationStyle">@style/InCallAnimationStyle</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="dialpad_key_button_touch_tint">@color/incall_dialpad_touch_tint</item>
+        <item name="android:textColorPrimary">@color/incall_call_banner_text_color</item>
+        <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
+        <item name="android:popupMenuStyle">@style/InCallPopupMenuStyle</item>
+        <item name="android:actionBarStyle">@style/InCallActionBarStyle</item>
     </style>
 
-    <style name="InCallDialpadTableRowStyle">
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_width">match_parent</item>
+    <style name="InCallPopupMenuStyle" parent="@android:style/Theme.Material.Light">
+        <item name="android:textColorPrimary">@color/popup_menu_color</item>
     </style>
 
-    <style name="InCallDialpadKeyNumberStyle">
-        <item name="android:textColor">@color/actionbar_background_color</item>
-        <item name="android:textSize">@dimen/dialpad_key_numbers_size</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:layout_width">@dimen/dialpad_key_numbers_width</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
+    <style name="InCallActionBarStyle" parent="@android:style/Widget.Material.Light.ActionBar">
+        <item name="android:background">@color/incall_action_bar_background_color</item>
+        <item name="android:textColor">@color/incall_action_bar_text_color</item>
     </style>
 
-    <style name="InCallDialpadKeyStarPoundStyle">
-        <item name="android:textColor">@color/dialpad_secondary_text_color</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:layout_width">@dimen/dialpad_key_numbers_width</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="InCallDialpadKeyLettersStyle">
-        <item name="android:textColor">@color/dialpad_secondary_text_color</item>
-        <item name="android:textSize">@dimen/dialpad_key_letters_size</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:layout_width">@dimen/dialpad_key_letters_width</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">@dimen/dialpad_number_to_letters_padding</item>
-    </style>
-
-    <style name="InCallDialpadKeyButtonStyle">
-        <item name="android:soundEffectsEnabled">false</item>
-        <item name="android:clickable">true</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/dialpad_key_height</item>
-        <item name="android:background">@drawable/dialpad_key_colors</item>
-        <item name="android:focusable">true</item>
-    </style>
-
-    <style name="InCallDialpadKeyInternalLayoutStyle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="PrimaryCallInfoPrimaryCallBanner">
-        <item name="android:layout_alignParentTop">true</item>
-    </style>
-    <style name="PrimaryCallInfoSupplementaryInfoContainer">
-        <item name="android:layout_below">@id/primary_call_banner</item>
-    </style>
-
-    <style name="SecondaryCallInfoSecondaryCallName">
-        <item name="android:layout_gravity">top|left</item>
-    </style>
-    <style name="SecondaryCallInfoSecondaryCallStatus">
-        <item name="android:layout_gravity">top|right</item>
-    </style>
 </resources>

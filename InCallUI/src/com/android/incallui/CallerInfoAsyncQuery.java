@@ -24,11 +24,16 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.provider.ContactsContract.CommonDataKinds.SipAddress;
-import android.provider.ContactsContract.Data;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+
+import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.contacts.common.util.TelephonyManagerUtils;
+
+import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Helper class to make it easier to run asynchronous caller-id lookup queries.
@@ -89,6 +94,20 @@ public class CallerInfoAsyncQuery {
      * Our own implementation of the AsyncQueryHandler.
      */
     private class CallerInfoAsyncQueryHandler extends AsyncQueryHandler {
+
+        @Override
+        public void startQuery(int token, Object cookie, Uri uri, String[] projection,
+                String selection, String[] selectionArgs, String orderBy) {
+            if (DBG) {
+                // Show stack trace with the arguments.
+                android.util.Log.d(LOG_TAG, "InCall: startQuery: url=" + uri +
+                                " projection=[" + Arrays.toString(projection) + "]" +
+                                " selection=" + selection + " " +
+                                " args=[" + Arrays.toString(selectionArgs) + "]",
+                        new RuntimeException("STACKTRACE"));
+            }
+            super.startQuery(token, cookie, uri, projection, selection, selectionArgs, orderBy);
+        }
 
         /**
          * The information relevant to each CallerInfo query.  Each query may have multiple
@@ -196,97 +215,105 @@ public class CallerInfoAsyncQuery {
          */
         @Override
         protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-            Log.d(this, "##### onQueryComplete() #####   query complete for token: " + token);
+            try {
+                Log.d(this, "##### onQueryComplete() #####   query complete for token: " + token);
 
-            //get the cookie and notify the listener.
-            CookieWrapper cw = (CookieWrapper) cookie;
-            if (cw == null) {
-                // Normally, this should never be the case for calls originating
-                // from within this code.
-                // However, if there is any code that calls this method, we should
-                // check the parameters to make sure they're viable.
-                Log.d(this, "Cookie is null, ignoring onQueryComplete() request.");
-                return;
-            }
-
-            if (cw.event == EVENT_END_OF_QUEUE) {
-                release();
-                return;
-            }
-
-            // check the token and if needed, create the callerinfo object.
-            if (mCallerInfo == null) {
-                if ((mQueryContext == null) || (mQueryUri == null)) {
-                    throw new QueryPoolException
-                            ("Bad context or query uri, or CallerInfoAsyncQuery already released.");
+                //get the cookie and notify the listener.
+                CookieWrapper cw = (CookieWrapper) cookie;
+                if (cw == null) {
+                    // Normally, this should never be the case for calls originating
+                    // from within this code.
+                    // However, if there is any code that calls this method, we should
+                    // check the parameters to make sure they're viable.
+                    Log.d(this, "Cookie is null, ignoring onQueryComplete() request.");
+                    return;
                 }
 
-                // adjust the callerInfo data as needed, and only if it was set from the
-                // initial query request.
-                // Change the callerInfo number ONLY if it is an emergency number or the
-                // voicemail number, and adjust other data (including photoResource)
-                // accordingly.
-                if (cw.event == EVENT_EMERGENCY_NUMBER) {
-                    // Note we're setting the phone number here (refer to javadoc
-                    // comments at the top of CallerInfo class).
-                    mCallerInfo = new CallerInfo().markAsEmergency(mQueryContext);
-                } else if (cw.event == EVENT_VOICEMAIL_NUMBER) {
-                    mCallerInfo = new CallerInfo().markAsVoiceMail();
-                } else {
-                    mCallerInfo = CallerInfo.getCallerInfo(mQueryContext, mQueryUri, cursor);
-                    Log.d(this, "==> Got mCallerInfo: " + mCallerInfo);
+                if (cw.event == EVENT_END_OF_QUEUE) {
+                    release();
+                    return;
+                }
 
-                    CallerInfo newCallerInfo = CallerInfo.doSecondaryLookupIfNecessary(
-                            mQueryContext, cw.number, mCallerInfo);
-                    if (newCallerInfo != mCallerInfo) {
-                        mCallerInfo = newCallerInfo;
-                        Log.d(this, "#####async contact look up with numeric username"
-                                + mCallerInfo);
+                // check the token and if needed, create the callerinfo object.
+                if (mCallerInfo == null) {
+                    if ((mQueryContext == null) || (mQueryUri == null)) {
+                        throw new QueryPoolException
+                            ("Bad context or query uri, or CallerInfoAsyncQuery already released.");
                     }
 
-                    // Final step: look up the geocoded description.
-                    if (ENABLE_UNKNOWN_NUMBER_GEO_DESCRIPTION) {
-                        // Note we do this only if we *don't* have a valid name (i.e. if
-                        // no contacts matched the phone number of the incoming call),
-                        // since that's the only case where the incoming-call UI cares
-                        // about this field.
-                        //
-                        // (TODO: But if we ever want the UI to show the geoDescription
-                        // even when we *do* match a contact, we'll need to either call
-                        // updateGeoDescription() unconditionally here, or possibly add a
-                        // new parameter to CallerInfoAsyncQuery.startQuery() to force
-                        // the geoDescription field to be populated.)
+                    // adjust the callerInfo data as needed, and only if it was set from the
+                    // initial query request.
+                    // Change the callerInfo number ONLY if it is an emergency number or the
+                    // voicemail number, and adjust other data (including photoResource)
+                    // accordingly.
+                    if (cw.event == EVENT_EMERGENCY_NUMBER) {
+                        // Note we're setting the phone number here (refer to javadoc
+                        // comments at the top of CallerInfo class).
+                        mCallerInfo = new CallerInfo().markAsEmergency(mQueryContext);
+                    } else if (cw.event == EVENT_VOICEMAIL_NUMBER) {
+                        mCallerInfo = new CallerInfo().markAsVoiceMail(mQueryContext);
+                    } else {
+                        mCallerInfo = CallerInfo.getCallerInfo(mQueryContext, mQueryUri, cursor);
+                        Log.d(this, "==> Got mCallerInfo: " + mCallerInfo);
 
-                        if (TextUtils.isEmpty(mCallerInfo.name)) {
-                            // Actually when no contacts match the incoming phone number,
-                            // the CallerInfo object is totally blank here (i.e. no name
-                            // *or* phoneNumber).  So we need to pass in cw.number as
-                            // a fallback number.
-                            mCallerInfo.updateGeoDescription(mQueryContext, cw.number);
+                        CallerInfo newCallerInfo = CallerInfo.doSecondaryLookupIfNecessary(
+                                mQueryContext, cw.number, mCallerInfo);
+                        if (newCallerInfo != mCallerInfo) {
+                            mCallerInfo = newCallerInfo;
+                            Log.d(this, "#####async contact look up with numeric username"
+                                    + mCallerInfo);
+                        }
+
+                        // Final step: look up the geocoded description.
+                        if (ENABLE_UNKNOWN_NUMBER_GEO_DESCRIPTION) {
+                            // Note we do this only if we *don't* have a valid name (i.e. if
+                            // no contacts matched the phone number of the incoming call),
+                            // since that's the only case where the incoming-call UI cares
+                            // about this field.
+                            //
+                            // (TODO: But if we ever want the UI to show the geoDescription
+                            // even when we *do* match a contact, we'll need to either call
+                            // updateGeoDescription() unconditionally here, or possibly add a
+                            // new parameter to CallerInfoAsyncQuery.startQuery() to force
+                            // the geoDescription field to be populated.)
+
+                            if (TextUtils.isEmpty(mCallerInfo.name)) {
+                                // Actually when no contacts match the incoming phone number,
+                                // the CallerInfo object is totally blank here (i.e. no name
+                                // *or* phoneNumber).  So we need to pass in cw.number as
+                                // a fallback number.
+                                mCallerInfo.updateGeoDescription(mQueryContext, cw.number);
+                            }
+                        }
+
+                        // Use the number entered by the user for display.
+                        if (!TextUtils.isEmpty(cw.number)) {
+                            mCallerInfo.phoneNumber = PhoneNumberHelper.formatNumber(cw.number,
+                                    mCallerInfo.normalizedNumber,
+                                    TelephonyManagerUtils.getCurrentCountryIso(mQueryContext,
+                                            Locale.getDefault()));
                         }
                     }
 
-                    // Use the number entered by the user for display.
-                    if (!TextUtils.isEmpty(cw.number)) {
-                        mCallerInfo.phoneNumber = PhoneNumberUtils.formatNumber(cw.number,
-                                mCallerInfo.normalizedNumber,
-                                CallerInfo.getCurrentCountryIso(mQueryContext));
-                    }
+                    Log.d(this, "constructing CallerInfo object for token: " + token);
+
+                    //notify that we can clean up the queue after this.
+                    CookieWrapper endMarker = new CookieWrapper();
+                    endMarker.event = EVENT_END_OF_QUEUE;
+                    startQuery(token, endMarker, null, null, null, null, null);
                 }
 
-                Log.d(this, "constructing CallerInfo object for token: " + token);
-
-                //notify that we can clean up the queue after this.
-                CookieWrapper endMarker = new CookieWrapper();
-                endMarker.event = EVENT_END_OF_QUEUE;
-                startQuery(token, endMarker, null, null, null, null, null);
-            }
-
-            //notify the listener that the query is complete.
-            if (cw.listener != null) {
-                Log.d(this, "notifying listener: " + cw.listener.getClass().toString() +
-                        " for token: " + token + mCallerInfo);
-                cw.listener.onQueryComplete(token, cw.cookie, mCallerInfo);
+                //notify the listener that the query is complete.
+                if (cw.listener != null) {
+                    Log.d(this, "notifying listener: " + cw.listener.getClass().toString() +
+                            " for token: " + token + mCallerInfo);
+                    cw.listener.onQueryComplete(token, cw.cookie, mCallerInfo);
+                }
+            } finally {
+                // The cursor may have been closed in CallerInfo.getCallerInfo()
+                if (cursor != null && !cursor.isClosed()) {
+                    cursor.close();
+                }
             }
         }
     }
@@ -297,31 +324,8 @@ public class CallerInfoAsyncQuery {
     private CallerInfoAsyncQuery() {
     }
 
-
     /**
-     * Factory method to start query with a Uri query spec
-     */
-    public static CallerInfoAsyncQuery startQuery(int token, Context context, Uri contactRef,
-            OnQueryCompleteListener listener, Object cookie) {
-
-        CallerInfoAsyncQuery c = new CallerInfoAsyncQuery();
-        c.allocate(context, contactRef);
-
-        Log.d(LOG_TAG, "starting query for URI: " + contactRef + " handler: " + c.toString());
-
-        //create cookieWrapper, start query
-        CookieWrapper cw = new CookieWrapper();
-        cw.listener = listener;
-        cw.cookie = cookie;
-        cw.event = EVENT_NEW_QUERY;
-
-        c.mHandler.startQuery(token, cw, contactRef, null, null, null, null);
-
-        return c;
-    }
-
-    /**
-     * Factory method to start the query based on a number.
+     * Factory method to start the query based on a CallerInfo object.
      *
      * Note: if the number contains an "@" character we treat it
      * as a SIP address, and look it up directly in the Data table
@@ -331,59 +335,22 @@ public class CallerInfoAsyncQuery {
      * PhoneUtils.startGetCallerInfo() decide which one to call based on
      * the phone type of the incoming connection.
      */
-    public static CallerInfoAsyncQuery startQuery(int token, Context context, String number,
+    public static CallerInfoAsyncQuery startQuery(int token, Context context, CallerInfo info,
             OnQueryCompleteListener listener, Object cookie) {
         Log.d(LOG_TAG, "##### CallerInfoAsyncQuery startQuery()... #####");
-        Log.d(LOG_TAG, "- number: " + /* number */"xxxxxxx");
+        Log.d(LOG_TAG, "- number: " + info.phoneNumber);
         Log.d(LOG_TAG, "- cookie: " + cookie);
 
         // Construct the URI object and query params, and start the query.
 
-        Uri contactRef;
-        String selection;
-        String[] selectionArgs;
-
-        if (PhoneNumberUtils.isUriNumber(number)) {
-            // "number" is really a SIP address.
-            Log.d(LOG_TAG, "  - Treating number as a SIP address: " + /* number */"xxxxxxx");
-
-            // We look up SIP addresses directly in the Data table:
-            contactRef = Data.CONTENT_URI;
-
-            // Note Data.DATA1 and SipAddress.SIP_ADDRESS are equivalent.
-            //
-            // Also note we use "upper(data1)" in the WHERE clause, and
-            // uppercase the incoming SIP address, in order to do a
-            // case-insensitive match.
-            //
-            // TODO: need to confirm that the use of upper() doesn't
-            // prevent us from using the index!  (Linear scan of the whole
-            // contacts DB can be very slow.)
-            //
-            // TODO: May also need to normalize by adding "sip:" as a
-            // prefix, if we start storing SIP addresses that way in the
-            // database.
-
-            selection = "upper(" + Data.DATA1 + ")=?"
-                    + " AND "
-                    + Data.MIMETYPE + "='" + SipAddress.CONTENT_ITEM_TYPE + "'";
-            selectionArgs = new String[] { number.toUpperCase() };
-
-        } else {
-            // "number" is a regular phone number.  Use the PhoneLookup table:
-            contactRef = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
-            selection = null;
-            selectionArgs = null;
-        }
+        final Uri contactRef = PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI.buildUpon()
+                .appendPath(info.phoneNumber)
+                .appendQueryParameter(PhoneLookup.QUERY_PARAMETER_SIP_ADDRESS,
+                        String.valueOf(PhoneNumberHelper.isUriNumber(info.phoneNumber)))
+                .build();
 
         if (DBG) {
             Log.d(LOG_TAG, "==> contactRef: " + sanitizeUriToString(contactRef));
-            Log.d(LOG_TAG, "==> selection: " + selection);
-            if (selectionArgs != null) {
-                for (int i = 0; i < selectionArgs.length; i++) {
-                    Log.d(LOG_TAG, "==> selectionArgs[" + i + "]: " + selectionArgs[i]);
-                }
-            }
         }
 
         CallerInfoAsyncQuery c = new CallerInfoAsyncQuery();
@@ -393,12 +360,13 @@ public class CallerInfoAsyncQuery {
         CookieWrapper cw = new CookieWrapper();
         cw.listener = listener;
         cw.cookie = cookie;
-        cw.number = number;
+        cw.number = info.phoneNumber;
 
         // check to see if these are recognized numbers, and use shortcuts if we can.
-        if (PhoneNumberUtils.isLocalEmergencyNumber(number, context)) {
+        if (PhoneNumberUtils.isLocalEmergencyNumber(context, info.phoneNumber)) {
             cw.event = EVENT_EMERGENCY_NUMBER;
-        } else if (PhoneNumberUtils.isVoiceMailNumber(number)) {
+        } else if (info.isVoiceMailNumber()
+                || PhoneNumberUtils.isVoiceMailNumber(info.phoneNumber)) {
             cw.event = EVENT_VOICEMAIL_NUMBER;
         } else {
             cw.event = EVENT_NEW_QUERY;
@@ -408,27 +376,10 @@ public class CallerInfoAsyncQuery {
                               cw,  // cookie
                               contactRef,  // uri
                               null,  // projection
-                              selection,  // selection
-                              selectionArgs,  // selectionArgs
+                              null,  // selection
+                              null,  // selectionArgs
                               null);  // orderBy
         return c;
-    }
-
-    /**
-     * Method to add listeners to a currently running query
-     */
-    public void addQueryListener(int token, OnQueryCompleteListener listener, Object cookie) {
-
-        Log.d(this, "adding listener to query: " + sanitizeUriToString(mHandler.mQueryUri) +
-                " handler: " + mHandler.toString());
-
-        //create cookieWrapper, add query request to end of queue.
-        CookieWrapper cw = new CookieWrapper();
-        cw.listener = listener;
-        cw.cookie = cookie;
-        cw.event = EVENT_ADD_LISTENER;
-
-        mHandler.startQuery(token, cw, null, null, null, null, null);
     }
 
     /**

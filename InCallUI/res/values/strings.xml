@@ -36,44 +36,6 @@
     <!-- Incoming call screen, string when called from a pay phone -->
     <string name="payphone">Pay phone</string>
 
-    <!-- In-call screen: call failure reason (busy) -->
-    <string name="callFailed_userBusy">Line busy</string>
-    <!-- In-call screen: call failure reason (network congestion) -->
-    <string name="callFailed_congestion">Network busy</string>
-    <!-- In-call screen: call failure reason (client timed out) -->
-    <string name="callFailed_timedOut">No response, timed out</string>
-    <!-- In-call screen: call failure reason (server unreachable) -->
-    <string name="callFailed_server_unreachable">Server unreachable</string>
-    <!-- In-call screen: call failure reason (peer unreachable) -->
-    <string name="callFailed_number_unreachable">Number unreachable</string>
-    <!-- In-call screen: call failure reason (incorrect username or password) -->
-    <string name="callFailed_invalid_credentials">Incorrect username or password</string>
-    <!-- In-call screen: call failure reason (calling from out of network is not allowed) -->
-    <string name="callFailed_out_of_network">Called from out-of-network</string>
-    <!-- In-call screen: call failure reason (server error) -->
-    <string name="callFailed_server_error">Server error. Try again later.</string>
-    <!-- In-call screen: call failure reason (no signal) -->
-    <string name="callFailed_noSignal">No signal</string>
-    <!-- In-call screen: call failure reason (GSM ACM limit exceeded) -->
-    <string name="callFailed_limitExceeded">ACM limit exceeded</string>
-    <!-- In-call screen: call failure reason (radio is off) -->
-    <string name="callFailed_powerOff">Radio off</string>
-    <!-- In-call screen: call failure reason (SIM error) -->
-    <string name="callFailed_simError">No SIM or SIM error</string>
-    <!-- In-call screen: call failure reason (out of service) -->
-    <string name="callFailed_outOfService">Out of service area</string>
-    <!-- In-call screen: call failure reason (call denied because of current FDN setting) -->
-    <string name="callFailed_fdn_only">Outgoing calls are restricted by FDN.</string>
-    <!-- In-call screen: call failure reason (call denied because call barring is on) -->
-    <string name="callFailed_cb_enabled">You can\'t make outgoing calls while call barring is on.</string>
-    <!-- In-call screen: call failure reason (call denied because domain specific access control is on) -->
-    <string name="callFailed_dsac_restricted">All calls are restricted by access control.</string>
-    <!-- In-call screen: call failure reason (Emergency call denied because domain specific access control is on)-->
-    <string name="callFailed_dsac_restricted_emergency">Emergency calls are restricted by access control.</string>
-    <!-- In-call screen: call failure reason (Normal call denied because domain specific access control is on)-->
-    <string name="callFailed_dsac_restricted_normal">Normal calls are restricted by access control.</string>
-    <!-- In-call screen: call failure reason (Dialed number doesn't exist) -->
-    <string name="callFailed_unobtainable_number">Invalid number</string>
     <!-- In-call screen: status label for a conference call -->
     <string name="confCall">Conference call</string>
     <!-- In-call screen: call lost dialog text -->
@@ -147,6 +109,27 @@
     <!-- In-call screen: special status label that shows your own phone
          number during emergency callback mode (ECM) [CHAR LIMIT=30] -->
     <string name="card_title_my_phone_number">My number is <xliff:g id="my_phone_number">%s</xliff:g></string>
+    <!-- In-call screen: status label when connecting video. -->
+    <string name="card_title_video_call_connecting">Connecting video</string>
+    <!-- In-call screen: status label when in a video call. -->
+    <string name="card_title_video_call">Video call</string>
+    <!-- In-call screen: status label when requesting video. -->
+    <string name="card_title_video_call_requesting">Requesting video</string>
+    <!-- In-call screen: status label when there is a problem connecting a video call. -->
+    <string name="card_title_video_call_error">Cannot connect video call</string>
+
+    <!-- In-call screen: string shown to the user when their outgoing number is different than the
+         number reported by TelephonyManager#getLine1Number() -->
+    <string name="card_title_callback_number">Your call back number\n
+        <xliff:g id="dark_number">%1$s</xliff:g>
+    </string>
+
+    <!-- In-call screen: string shown to the user when their outgoing number is different than the
+         number reported by TelephonyManager#getLine1Number() and they're calling emergency
+         services. -->
+    <string name="card_title_callback_number_emergency">Your emergency call back number\n
+        <xliff:g id="dark_number">%1$s</xliff:g>
+    </string>
 
     <!-- Notification strings -->
     <!-- The "label" of the in-call Notification for a dialing call, used
@@ -168,6 +151,10 @@
     <string name="notification_on_hold">On hold</string>
     <!-- The "label" of the in-call Notification for an incoming ringing call -->
     <string name="notification_incoming_call">Incoming call</string>
+    <!-- The "label" of the in-call Notification for an incoming ringing video call. -->
+    <string name="notification_incoming_video_call">Incoming video call</string>
+    <!-- The "label" of the in-call Notification for upgrading an existing call to a video call. -->
+    <string name="notification_requesting_video_call">Incoming video request</string>
     <!-- Label for the "Voicemail" notification item, when expanded. -->
     <string name="notification_voicemail_title">New voicemail</string>
     <!-- Label for the expanded "Voicemail" notification item,
@@ -184,11 +171,26 @@
     <!-- Label for the expanded "No service" notification item, including the
          operator name set by user -->
     <string name="notification_network_selection_text">Selected network (<xliff:g id="operator_name">%s</xliff:g>) unavailable</string>
-    <!-- Message for "end call" Action.
+    <!-- Label for "end call" Action.
          It is displayed in the "Ongoing call" notification, which is shown
          when the user is outside the in-call screen while the phone call is still
-         active. [CHAR LIMIT=40] -->
+         active. [CHAR LIMIT=12] -->
     <string name="notification_action_end_call">Hang up</string>
+    <!-- Label for "Video Call" notification action. This is a displayed on the notification for an
+         incoming video call, and answers the call as a video call. [CHAR LIMIT=12] -->
+    <string name="notification_action_answer_video">Video</string>
+    <!-- Label for "Voice" notification action. This is a displayed on the notification for an
+         incoming video call, and answers the call as an audio call. [CHAR LIMIT=12] -->
+    <string name="notification_action_answer_voice">Voice</string>
+    <!-- Label for "Accept" notification action. This is somewhat generic, and may refer to
+         scenarios such as accepting an incoming call or accepting a video call request.
+         [CHAR LIMIT=12] -->
+    <string name="notification_action_accept">Accept</string>
+    <!-- Label for "Dismiss" notification action. This is somewhat generic, and may refer to
+         scenarios such as declining an incoming call or declining a video call request.
+         [CHAR LIMIT=12] -->
+    <string name="notification_action_dismiss">Dismiss</string>
+
     <!-- Message for "call back" Action, which is displayed in the missed call notificaiton.
          The user will be able to call back to the person or the phone number.
          [CHAR LIMIT=60] -->
@@ -227,7 +229,7 @@
     <string name="incall_error_supp_service_hangup">Unable to release call(s).</string>
 
     <!-- In-call screen: "call type" indication for a SIP call [CHAR LIMIT=30]  -->
-    <string name="incall_call_type_label_sip">Internet call</string>
+    <string name="incall_call_type_label_sip">SIP call</string>
 
     <!-- Dialog title for the "radio enable" UI for emergency calls -->
     <string name="emergency_enable_radio_dialog_title">Emergency call</string>
@@ -246,6 +248,17 @@
          to dial using the physical keyboard -->
     <string name="dialerKeyboardHintText">Use keyboard to dial</string>
 
+    <!-- Text for the overflow "Hold call" menu item. -->
+    <string name="overflowHoldMenuItemText">Hold call</string>
+    <!-- Text for the overflow "Resume call" menu item. -->
+    <string name="overflowResumeMenuItemText">Resume call</string>
+    <!-- Text for the overflow "Add call" menu item. -->
+    <string name="overflowAddMenuItemText">Add call</string>
+    <!-- Text for the onscreen "Merge calls" menu item. -->
+    <string name="overflowMergeMenuItemText">Merge calls</string>
+    <!-- Text for the onscreen "Swap calls" menu item. -->
+    <string name="overflowSwapMenuItemText">Swap calls</string>
+
     <!-- Text for the onscreen "Hold" button -->
     <string name="onscreenHoldText">Hold</string>
     <!-- Text for the onscreen "End call" button -->
@@ -262,14 +275,24 @@
     <string name="onscreenSwapCallsText">Swap</string>
     <!-- Text for the onscreen "Manage calls" button -->
     <string name="onscreenManageCallsText">Manage calls</string>
-    <!-- Text for the onscreen "Manage conference" button [CHAR LIMIT=20] -->
-    <string name="onscreenManageConferenceText">Manage conference</string>
+    <!-- Text for the onscreen "Manage conference" button [CHAR LIMIT=30] -->
+    <string name="onscreenManageConferenceText">Manage conference call</string>
     <!-- Text for the onscreen "Audio" button that lets you switch
          between speaker / bluetooth / earpiece [CHAR LIMIT=10] -->
     <string name="onscreenAudioText">Audio</string>
     <!-- Text for the onscreen "Video call" button used to change a voice call
          to a video call. [CHAR LIMIT=10] -->
     <string name="onscreenVideoCallText">Video call</string>
+    <!-- Text for the onscreen "Change to voice" button. When clicked, this downgrades a video call
+         to a voice call. -->
+    <string name="onscreenChangeToVoiceText">Change to voice call</string>
+    <!-- Text for the onscreen "Switch camera" button. When clicked, this switches the user's camera
+         for video calling between the front-facing camera and the back-facing camera. -->
+    <string name="onscreenSwitchCameraText">Switch camera</string>
+    <!-- Text for the onscreen "Pause video" button. -->
+    <string name="onscreenPauseVideoText">Pause video</string>
+    <!-- Text for the onscreen overflow button, to see additional actions which can be done. -->
+    <string name="onscreenOverflowText">More options</string>
 
     <!-- For incoming calls, this is a string we can get from a CDMA network instead of
          the actual phone number, to indicate there's no number present.  DO NOT TRANSLATE. -->
@@ -292,9 +315,12 @@
     <!-- Title displayed above settings coming after voicemail in the call features screen -->
     <string name="other_settings">Other call settings</string>
 
-    <!-- Title displayed in the overlay when a call is placed using a 3rd party provider.
+    <!-- Title displayed in the overlay for outgoing calls which include the name of the provider.
          [CHAR LIMIT=40] -->
     <string name="calling_via_template">Calling via <xliff:g id="provider_name">%s</xliff:g></string>
+    <!-- Title displayed in the overlay for incoming calls which include the name of the provider.
+         [CHAR LIMIT=40] -->
+    <string name="incoming_via_template">Incoming via <xliff:g id="provider_name">%s</xliff:g></string>
 
     <!-- Use this as a default to describe the contact photo; currently for screen readers through accessibility. -->
     <string name="contactPhoto">contact photo</string>
@@ -303,37 +329,12 @@
     <!--  Use this to describe the select contact button in EditPhoneNumberPreference; currently for screen readers through accessibility. -->
     <string name="selectContact">select contact</string>
 
-    <!-- Canned response for the "Respond via SMS" feature for incoming calls. [CHAR LIMIT=35] -->
-    <string name="respond_via_sms_canned_response_1">Can\'t talk now. What\'s up?</string>
-    <!-- Canned response for the "Respond via SMS" feature for incoming calls. [CHAR LIMIT=35] -->
-    <string name="respond_via_sms_canned_response_2">I\'ll call you right back.</string>
-    <!-- Canned response for the "Respond via SMS" feature for incoming calls. [CHAR LIMIT=35] -->
-    <string name="respond_via_sms_canned_response_3">I\'ll call you later.</string>
-    <!-- Canned response for the "Respond via SMS" feature for incoming calls. [CHAR LIMIT=35] -->
-    <string name="respond_via_sms_canned_response_4">Can\'t talk now. Call me later?</string>
     <!-- "Respond via SMS" option that lets you compose a custom response. [CHAR LIMIT=30] -->
     <string name="respond_via_sms_custom_message">Write your own...</string>
     <!-- "Custom Message" Cancel alert dialog button -->
     <string name="custom_message_cancel">Cancel</string>
     <!-- "Custom Message" Send alert dialog button -->
     <string name="custom_message_send">Send</string>
-
-    <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
-    <string name="respond_via_sms_setting_title">Quick responses</string>
-    <!-- Slightly more verbose title of settings screen for managing the
-         "Respond via SMS" feature. [CHAR LIMIT=30] -->
-    <string name="respond_via_sms_setting_title_2">Edit quick responses</string>
-    <!-- Settings summary string for the "Respond via SMS" feature. [CHAR LIMIT=40] -->
-    <string name="respond_via_sms_setting_summary"></string>
-    <!-- Dialog title when changing a string for the "Respond via SMS" feature. [CHAR LIMIT=30] -->
-    <string name="respond_via_sms_edittext_dialog_title">Quick response</string>
-    <!-- Menu option in  "Respond via SMS" that allows user to reset the default
-         activity used to handle "Respond via SMS" [CHAR LIMIT=30] -->
-    <string name="respond_via_sms_menu_reset_default_activity">Reset default app</string>
-
-    <!-- "Respond via SMS": Confirmation message shown after sending
-         a text response. [CHAR LIMIT=40] -->
-    <string name="respond_via_sms_confirmation_format">Message sent to <xliff:g id="phone_number">%s</xliff:g>.</string>
 
     <!-- String describing the image on ImageButton one
 
@@ -445,18 +446,48 @@
     -->
     <string name="description_delete_button">backspace</string>
 
-    <!-- Content description of the speakerphone enabled notification icon for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_speakerphone_enabled">Speakerphone enabled.</string>
+    <!-- String used by AccessibilityService to announce that the speakerphone has been selected for audio output [CHAR LIMIT=NONE]-->
+    <string name="accessibility_speakerphone_selected">Speakerphone selected</string>
 
-    <!-- Content description of the call muted notification icon for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <!-- String used by AccessibilityService to announce that the phone's earpiece has been selected for audio output [CHAR LIMIT=NONE]-->
+    <string name="accessibility_earpiece_selected">Earpiece selected</string>
+
+    <!-- String used by AccessibilityService to announce that the wired headset has been selected for audio output [CHAR LIMIT=NONE]-->
+    <string name="accessibility_wired_headset_selected">Wired headset selected</string>
+
+    <!-- String used by AccessibilityService to announce that the bluetooth headset has been selected for audio output [CHAR LIMIT=NONE]-->
+    <string name="accessibility_bluetooth_headset_selected">Bluetooth headset selected</string>
+
+    <!-- String used by AccessibilityService to announce that the call has been muted [CHAR LIMIT=NONE]-->
     <string name="accessibility_call_muted">Call muted.</string>
 
-    <!-- Description of the answer target in the Slide unlock screen of Phone. [CHAR LIMIT=NONE] -->
+    <!-- String used by AccessibilityService to announce that the call has been unmuted [CHAR LIMIT=NONE]-->
+    <string name="accessibility_call_unmuted">Call unmuted.</string>
+
+    <!-- String used by AccessibilityService to announce that the call has been put on hold [CHAR LIMIT=NONE]-->
+    <string name="accessibility_call_put_on_hold">Call put on hold.</string>
+
+    <!-- String used by AccessibilityService to announce that the call has been removed from hold [CHAR LIMIT=NONE]-->
+    <string name="accessibility_call_removed_from_hold">Call removed from hold.</string>
+
+    <!-- Description of the answer target in the Slide unlock screen of Phone. [CHAR LIMIT=12] -->
     <string name="description_target_answer">Answer</string>
     <!-- Description of the send_sms target in the Slide unlock screen of Phone. [CHAR LIMIT=NONE] -->
     <string name="description_target_send_sms">Send SMS</string>
-    <!-- Description of the decline on target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+    <!-- Description of the decline target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
     <string name="description_target_decline">Decline</string>
+    <!-- Description of the target to answer a call as a video call in the Slide unlock screen.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_target_answer_video_call">Answer as video call</string>
+    <!-- Description of the target to answer a call as an audio call in the Slide unlock screen.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_target_answer_audio_call">Answer as audio call</string>
+    <!-- Description of the target to accept a request to upgrade from an audio call to a video call.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_target_accept_upgrade_to_video_request">Accept video request</string>
+    <!-- Description of the target to decline a request to upgrade from an audio call to a video call.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_target_decline_upgrade_to_video_request">Decline video request</string>
 
     <!-- Description of the up direction in which one can to slide the handle in the phone answer screen. [CHAR LIMIT=NONE] -->
     <string name="description_direction_up">Slide up for <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
@@ -464,6 +495,8 @@
     <string name="description_direction_left">"Slide left for <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
     <!-- Description of the right direction in which one can to slide the handle in the phone answer screen. [CHAR LIMIT=NONE] -->
     <string name="description_direction_right">Slide right for <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
+    <!-- Description of the down direction in which one can to slide the handle in the phone answer screen. [CHAR LIMIT=NONE] -->
+    <string name="description_direction_down">Slide down for <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
 
     <!-- Dialog title for the vibration settings for voicemail notifications [CHAR LIMIT=40] -->
     <string name="voicemail_notification_vibrate_when_title" msgid="8731372580674292759">Vibrate</string>
@@ -499,10 +532,6 @@
          [CHAR LIMIT=30] -->
     <string name="vibrate_on_ring_title">Vibrate when ringing</string>
 
-    <!-- Setting option name to enable or disable DTMF tone sound
-         [CHAR LIMIT=30] -->
-    <string name="dtmf_tone_enable_title">Dial pad touch tones</string>
-
     <!--  Setting option name to enable or disable dialpad autocomplete functionality
          [CHAR LIMIT=30] -->
     <string name="dial_pad_autocomplete">Dial pad autocomplete</string>
@@ -518,53 +547,6 @@
     <!-- This can be used in any application wanting to disable the text "Emergency number" -->
     <string name="emergency_call_dialog_number_for_display">Emergency number</string>
 
-    <!-- The digit to be displayed on the 0 key of the dialpad [CHAR LIMIT=1]-->
-    <string name="dialpad_0_number">0</string>
-    <!-- The digit to be displayed on the 1 key of the dialpad [CHAR LIMIT=1]-->
-    <string name="dialpad_1_number">1</string>
-    <!-- The digit to be displayed on the 2 key of the dialpad [CHAR LIMIT=1]-->
-    <string name="dialpad_2_number">2</string>
-    <!-- The digit to be displayed on the 3 key of the dialpad [CHAR LIMIT=1]-->
-    <string name="dialpad_3_number">3</string>
-    <!-- The digit to be displayed on the 4 key of the dialpad [CHAR LIMIT=1]-->
-    <string name="dialpad_4_number">4</string>
-    <!-- The digit to be displayed on the 5 key of the dialpad [CHAR LIMIT=1]-->
-    <string name="dialpad_5_number">5</string>
-    <!-- The digit to be displayed on the 6 key of the dialpad [CHAR LIMIT=1]-->
-    <string name="dialpad_6_number">6</string>
-    <!-- The digit to be displayed on the 7 key of the dialpad [CHAR LIMIT=1]-->
-    <string name="dialpad_7_number">7</string>
-    <!-- The digit to be displayed on the 8 key of the dialpad [CHAR LIMIT=1]-->
-    <string name="dialpad_8_number">8</string>
-    <!-- The digit to be displayed on the 9 key of the dialpad [CHAR LIMIT=1]-->
-    <string name="dialpad_9_number">9</string>
-    <!--  Do not translate. -->
-    <string name="dialpad_star_number">*</string>
-    <!--  Do not translate. -->
-    <string name="dialpad_pound_number">#</string>
-
-    <!--  Do not translate. -->
-    <string name="dialpad_0_letters">+</string>
-    <!--  Do not translate. -->
-    <string name="dialpad_1_letters"></string>
-    <!--  Do not translate. -->
-    <string name="dialpad_2_letters">ABC</string>
-    <!--  Do not translate. -->
-    <string name="dialpad_3_letters">DEF</string>
-    <!--  Do not translate. -->
-    <string name="dialpad_4_letters">GHI</string>
-    <!--  Do not translate. -->
-    <string name="dialpad_5_letters">JKL</string>
-    <!--  Do not translate. -->
-    <string name="dialpad_6_letters">MNO</string>
-    <!--  Do not translate. -->
-    <string name="dialpad_7_letters">PQRS</string>
-    <!--  Do not translate. -->
-    <string name="dialpad_8_letters">TUV</string>
-    <!--  Do not translate. -->
-    <string name="dialpad_9_letters">WXYZ</string>
-    <!--  Do not translate. -->
-    <string name="dialpad_star_letters"></string>
-    <!--  Do not translate. -->
-    <string name="dialpad_pound_letters"></string>
+    <!-- Title for Select Account Dialog [CHAR LIMIT=30] -->
+    <string name="select_account_dialog_title">Select Account</string>
 </resources>

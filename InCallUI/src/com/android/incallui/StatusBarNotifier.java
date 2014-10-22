@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.net.Uri;
 import com.google.common.base.Preconditions;
 
 import android.app.Notification;
@@ -28,13 +29,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
+import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallApp.NotificationBroadcastReceiver;
 import com.android.incallui.InCallPresenter.InCallState;
-import com.android.services.telephony.common.Call;
 
 /**
  * This class adds Notifications to the status bar for the in-call experience.
@@ -109,49 +110,24 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      * Creates notifications according to the state we receive from {@link InCallPresenter}.
      */
     @Override
-    public void onStateChange(InCallState state, CallList callList) {
+    public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
         Log.d(this, "onStateChange");
 
-        updateNotification(state, callList);
-    }
-
-    /**
-     * Updates the phone app's status bar notification based on the
-     * current telephony state, or cancels the notification if the phone
-     * is totally idle.
-     *
-     * This method will never actually launch the incoming-call UI.
-     * (Use updateNotificationAndLaunchIncomingCallUi() for that.)
-     */
-    public void updateNotification(InCallState state, CallList callList) {
-        Log.d(this, "updateNotification");
-        // allowFullScreenIntent=false means *don't* allow the incoming
-        // call UI to be launched.
-        updateInCallNotification(false, state, callList);
+        updateNotification(newState, callList);
     }
 
     /**
      * Updates the phone app's status bar notification *and* launches the
      * incoming call UI in response to a new incoming call.
      *
-     * This is just like updateInCallNotification(), with one exception:
      * If an incoming call is ringing (or call-waiting), the notification
      * will also include a "fullScreenIntent" that will cause the
-     * InCallScreen to be launched immediately, unless the current
-     * foreground activity is marked as "immersive".
+     * InCallScreen to be launched, unless the current foreground activity
+     * is marked as "immersive".
      *
      * (This is the mechanism that actually brings up the incoming call UI
      * when we receive a "new ringing connection" event from the telephony
      * layer.)
-     *
-     * Watch out: this method should ONLY be called directly from the code
-     * path in CallNotifier that handles the "new ringing connection"
-     * event from the telephony layer.  All other places that update the
-     * in-call notification (like for phone state changes) should call
-     * updateInCallNotification() instead.  (This ensures that we don't
-     * end up launching the InCallScreen multiple times for a single
-     * incoming call, which could cause slow responsiveness and/or visible
-     * glitches.)
      *
      * Also note that this method is safe to call even if the phone isn't
      * actually ringing (or, more likely, if an incoming call *was*
@@ -159,17 +135,15 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      * update or cancel the in-call notification based on the current
      * phone state.
      *
-     * @see #updateInCallNotification(boolean,InCallState,CallList)
+     * @see #updateInCallNotification(InCallState,CallList)
      */
-    public void updateNotificationAndLaunchIncomingCallUi(InCallState state, CallList callList) {
-        // Set allowFullScreenIntent=true to indicate that we *should*
-        // launch the incoming call UI if necessary.
-        updateInCallNotification(true, state, callList);
+    public void updateNotification(InCallState state, CallList callList) {
+        updateInCallNotification(state, callList);
     }
 
     /**
      * Take down the in-call notification.
-     * @see #updateInCallNotification(boolean,InCallState,CallList)
+     * @see #updateInCallNotification(InCallState,CallList)
      */
     private void cancelInCall() {
         Log.d(this, "cancelInCall()...");
@@ -188,21 +162,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
 
     /**
      * Helper method for updateInCallNotification() and
-     * updateNotificationAndLaunchIncomingCallUi(): Update the phone app's
+     * updateNotification(): Update the phone app's
      * status bar notification based on the current telephony state, or
      * cancels the notification if the phone is totally idle.
-     *
-     * @param allowFullScreenIntent If true, *and* an incoming call is
-     *   ringing, the notification will include a "fullScreenIntent"
-     *   pointing at the InCallActivity (which will cause the InCallActivity
-     *   to be launched.)
-     *   Watch out: This should be set to true *only* when directly
-     *   handling a new incoming call for the first time.
      */
-    private void updateInCallNotification(final boolean allowFullScreenIntent,
-            final InCallState state, CallList callList) {
-        Log.d(this, "updateInCallNotification(allowFullScreenIntent = "
-                + allowFullScreenIntent + ")...");
+    private void updateInCallNotification(final InCallState state, CallList callList) {
+        Log.d(this, "updateInCallNotification...");
 
         Call call = getCallToShow(callList);
 
@@ -236,7 +201,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
                         mNotificationTimer.getState() == NotificationTimer.State.FIRED);
 
         if (showNotificationNow) {
-            showNotification(call, allowFullScreenIntent);
+            showNotification(call);
         } else {
             cancelInCall();
             if (isOutgoingWithoutIncallUi &&
@@ -251,7 +216,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         }
     }
 
-    private void showNotification(final Call call, final boolean allowFullScreenIntent) {
+    private void showNotification(final Call call) {
         final boolean isIncoming = (call.getState() == Call.State.INCOMING ||
                 call.getState() == Call.State.CALL_WAITING);
 
@@ -260,55 +225,50 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         // This callback will always get called immediately and synchronously with whatever data
         // it has available, and may make a subsequent call later (same thread) if it had to
         // call into the contacts provider for more data.
-        mContactInfoCache.findInfo(call.getIdentification(), isIncoming,
-                new ContactInfoCacheCallback() {
-                    private boolean mAllowFullScreenIntent = allowFullScreenIntent;
+        mContactInfoCache.findInfo(call, isIncoming, new ContactInfoCacheCallback() {
+            @Override
+            public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
+                Call call = CallList.getInstance().getCallById(callId);
+                if (call != null) {
+                    buildAndSendNotification(call, entry);
+                }
+            }
 
-                    @Override
-                    public void onContactInfoComplete(int callId, ContactCacheEntry entry) {
-                        Call call = CallList.getInstance().getCall(callId);
-                        if (call != null) {
-                            buildAndSendNotification(call, entry, mAllowFullScreenIntent);
-                        }
-
-                        // Full screen intents are what bring up the in call screen. We only want
-                        // to do this the first time we are called back.
-                        mAllowFullScreenIntent = false;
-                    }
-
-                    @Override
-                    public void onImageLoadComplete(int callId, ContactCacheEntry entry) {
-                        Call call = CallList.getInstance().getCall(callId);
-                        if (call != null) {
-                            buildAndSendNotification(call, entry, mAllowFullScreenIntent);
-                        }
-                    } });
+            @Override
+            public void onImageLoadComplete(String callId, ContactCacheEntry entry) {
+                Call call = CallList.getInstance().getCallById(callId);
+                if (call != null) {
+                    buildAndSendNotification(call, entry);
+                }
+            }
+        });
     }
 
     /**
      * Sets up the main Ui for the notification
      */
-    private void buildAndSendNotification(Call originalCall, ContactCacheEntry contactInfo,
-            boolean allowFullScreenIntent) {
+    private void buildAndSendNotification(Call originalCall, ContactCacheEntry contactInfo) {
 
         // This can get called to update an existing notification after contact information has come
         // back. However, it can happen much later. Before we continue, we need to make sure that
         // the call being passed in is still the one we want to show in the notification.
         final Call call = getCallToShow(CallList.getInstance());
-        if (call == null || call.getCallId() != originalCall.getCallId()) {
+        if (call == null || !call.getId().equals(originalCall.getId())) {
             return;
         }
 
         final int state = call.getState();
         final boolean isConference = call.isConferenceCall();
+        final boolean isVideoUpgradeRequest = call.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
+
+        // Check if data has changed; if nothing is different, don't issue another notification.
         final int iconResId = getIconToDisplay(call);
         final Bitmap largeIcon = getLargeIconToDisplay(contactInfo, isConference);
         final int contentResId = getContentString(call);
         final String contentTitle = getContentTitle(contactInfo, isConference);
 
-        // If we checked and found that nothing is different, dont issue another notification.
-        if (!checkForChangeAndSaveData(iconResId, contentResId, largeIcon, contentTitle, state,
-                allowFullScreenIntent)) {
+        if (!checkForChangeAndSaveData(iconResId, contentResId, largeIcon, contentTitle, state)) {
             return;
         }
 
@@ -321,30 +281,28 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         final PendingIntent inCallPendingIntent = createLaunchPendingIntent();
         builder.setContentIntent(inCallPendingIntent);
 
-        // Set the intent as a full screen intent as well if requested
-        if (allowFullScreenIntent) {
+        // Set the intent as a full screen intent as well if a call is incoming
+        if ((state == Call.State.INCOMING || state == Call.State.CALL_WAITING) &&
+                !InCallPresenter.getInstance().isShowingInCallUi()) {
             configureFullScreenIntent(builder, inCallPendingIntent, call);
         }
 
-        // set the content
+        // Set the content
         builder.setContentText(mContext.getString(contentResId));
         builder.setSmallIcon(iconResId);
         builder.setContentTitle(contentTitle);
         builder.setLargeIcon(largeIcon);
+        builder.setColor(mContext.getResources().getColor(R.color.dialer_theme_color));
 
-        if (state == Call.State.ACTIVE) {
-            builder.setUsesChronometer(true);
-            builder.setWhen(call.getConnectTime());
-        } else {
+        if (isVideoUpgradeRequest) {
             builder.setUsesChronometer(false);
+            addDismissUpgradeRequestAction(builder);
+            addAcceptUpgradeRequestAction(builder);
+        } else {
+            createIncomingCallNotification(call, state, builder);
         }
 
-        // Add hang up option for any active calls (active | onhold), outgoing calls (dialing).
-        if (state == Call.State.ACTIVE ||
-                state == Call.State.ONHOLD ||
-                Call.State.isDialing(state)) {
-            addHangupAction(builder);
-        }
+        addPersonReference(builder, contactInfo, call);
 
         /*
          * Fire off the notification
@@ -355,13 +313,38 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         mIsShowingNotification = true;
     }
 
+    private void createIncomingCallNotification(
+            Call call, int state, Notification.Builder builder) {
+        if (state == Call.State.ACTIVE) {
+            builder.setUsesChronometer(true);
+            builder.setWhen(call.getConnectTimeMillis());
+        } else {
+            builder.setUsesChronometer(false);
+        }
+
+        // Add hang up option for any active calls (active | onhold), outgoing calls (dialing).
+        if (state == Call.State.ACTIVE ||
+                state == Call.State.ONHOLD ||
+                Call.State.isDialing(state)) {
+            addHangupAction(builder);
+        } else if (state == Call.State.INCOMING || state == Call.State.CALL_WAITING) {
+            addDismissAction(builder);
+            if (call.isVideoCall(mContext)) {
+                addVoiceAction(builder);
+                addVideoCallAction(builder);
+            } else {
+                addAnswerAction(builder);
+            }
+        }
+    }
+
     /**
      * Checks the new notification data and compares it against any notification that we
      * are already displaying. If the data is exactly the same, we return false so that
      * we do not issue a new notification for the exact same data.
      */
     private boolean checkForChangeAndSaveData(int icon, int content, Bitmap largeIcon,
-            String contentTitle, int state, boolean showFullScreenIntent) {
+            String contentTitle, int state) {
 
         // The two are different:
         // if new title is not null, it should be different from saved version OR
@@ -374,13 +357,6 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         boolean retval = (mSavedIcon != icon) || (mSavedContent != content) ||
                 (mCallState != state) || (mSavedLargeIcon != largeIcon) ||
                 contentTitleChanged;
-
-        // A full screen intent means that we have been asked to interrupt an activity,
-        // so we definitely want to show it.
-        if (showFullScreenIntent) {
-            Log.d(this, "Forcing full screen intent");
-            retval = true;
-        }
 
         // If we aren't showing a notification right now, definitely start showing one.
         if (!mIsShowingNotification) {
@@ -415,6 +391,16 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         return contactInfo.name;
     }
 
+    private void addPersonReference(Notification.Builder builder, ContactCacheEntry contactInfo,
+            Call call) {
+        if (contactInfo.lookupUri != null) {
+            builder.addPerson(contactInfo.lookupUri.toString());
+        } else if (!TextUtils.isEmpty(call.getNumber())) {
+            builder.addPerson(Uri.fromParts(PhoneAccount.SCHEME_TEL,
+                            call.getNumber(), null).toString());
+        }
+    }
+
     /**
      * Gets a large icon from the contact info object to display in the notification.
      */
@@ -422,7 +408,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         Bitmap largeIcon = null;
         if (isConference) {
             largeIcon = BitmapFactory.decodeResource(mContext.getResources(),
-                    R.drawable.picture_conference);
+                    R.drawable.img_conference);
         }
         if (contactInfo.photo != null && (contactInfo.photo instanceof BitmapDrawable)) {
             largeIcon = ((BitmapDrawable) contactInfo.photo).getBitmap();
@@ -452,9 +438,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         // from the foreground call.  And if there's a ringing call,
         // display that regardless of the state of the other calls.
         if (call.getState() == Call.State.ONHOLD) {
-            return R.drawable.stat_sys_phone_call_on_hold;
+            return R.drawable.ic_phone_paused_white_24dp;
+        } else if (call.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+            return R.drawable.ic_videocam;
         }
-        return R.drawable.stat_sys_phone_call;
+        return R.drawable.ic_call_white_24dp;
     }
 
     /**
@@ -465,12 +454,13 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
 
         if (call.getState() == Call.State.INCOMING || call.getState() == Call.State.CALL_WAITING) {
             resId = R.string.notification_incoming_call;
-
         } else if (call.getState() == Call.State.ONHOLD) {
             resId = R.string.notification_on_hold;
-
         } else if (Call.State.isDialing(call.getState())) {
             resId = R.string.notification_dialing;
+        } else if (call.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+            resId = R.string.notification_requesting_video_call;
         }
 
         return resId;
@@ -488,18 +478,80 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
             call = callList.getOutgoingCall();
         }
         if (call == null) {
+            call = callList.getVideoUpgradeRequestCall();
+        }
+        if (call == null) {
             call = callList.getActiveOrBackgroundCall();
         }
         return call;
     }
 
+    private void addAnswerAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"answer\" action in the incoming call Notification");
+
+        PendingIntent answerVoicePendingIntent = createNotificationPendingIntent(
+                mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
+        builder.addAction(R.drawable.ic_call_white_24dp,
+                mContext.getText(R.string.description_target_answer),
+                answerVoicePendingIntent);
+    }
+
+    private void addDismissAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"dismiss\" action in the incoming call Notification");
+
+        PendingIntent declinePendingIntent =
+                createNotificationPendingIntent(mContext, InCallApp.ACTION_DECLINE_INCOMING_CALL);
+        builder.addAction(R.drawable.ic_close_dk,
+                mContext.getText(R.string.notification_action_dismiss),
+                declinePendingIntent);
+    }
+
     private void addHangupAction(Notification.Builder builder) {
         Log.i(this, "Will show \"hang-up\" action in the ongoing active call Notification");
 
-        // TODO: use better asset.
-        builder.addAction(R.drawable.stat_sys_phone_call_end,
+        PendingIntent hangupPendingIntent =
+                createNotificationPendingIntent(mContext, InCallApp.ACTION_HANG_UP_ONGOING_CALL);
+        builder.addAction(R.drawable.ic_call_end_white_24dp,
                 mContext.getText(R.string.notification_action_end_call),
-                createHangUpOngoingCallPendingIntent(mContext));
+                hangupPendingIntent);
+    }
+
+    private void addVideoCallAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"video\" action in the incoming call Notification");
+
+        PendingIntent answerVideoPendingIntent = createNotificationPendingIntent(
+                mContext, InCallApp.ACTION_ANSWER_VIDEO_INCOMING_CALL);
+        builder.addAction(R.drawable.ic_videocam,
+                mContext.getText(R.string.notification_action_answer_video),
+                answerVideoPendingIntent);
+    }
+
+    private void addVoiceAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"voice\" action in the incoming call Notification");
+
+        PendingIntent answerVoicePendingIntent = createNotificationPendingIntent(
+                mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
+        builder.addAction(R.drawable.ic_call_white_24dp,
+                mContext.getText(R.string.notification_action_answer_voice),
+                answerVoicePendingIntent);
+    }
+
+    private void addAcceptUpgradeRequestAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"accept\" action in the incoming call Notification");
+
+        PendingIntent acceptVideoPendingIntent = createNotificationPendingIntent(
+                mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
+        builder.addAction(0, mContext.getText(R.string.notification_action_accept),
+        acceptVideoPendingIntent);
+    }
+
+    private void addDismissUpgradeRequestAction(Notification.Builder builder) {
+        Log.i(this, "Will show \"dismiss\" action in the incoming call Notification");
+
+        PendingIntent declineVideoPendingIntent = createNotificationPendingIntent(
+                mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
+        builder.addAction(0, mContext.getText(R.string.notification_action_dismiss),
+                declineVideoPendingIntent);
     }
 
     /**
@@ -561,9 +613,11 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
 
         return builder;
     }
+
     private PendingIntent createLaunchPendingIntent() {
 
-        final Intent intent = InCallPresenter.getInstance().getInCallIntent(/*showdialpad=*/false);
+        final Intent intent = InCallPresenter.getInstance().getInCallIntent(
+                false /* showDialpad */, false /* newOutgoingCall */);
 
         // PendingIntent that can be used to launch the InCallActivity.  The
         // system fires off this intent if the user pulls down the windowshade
@@ -576,12 +630,13 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     }
 
     /**
-     * Returns PendingIntent for hanging up ongoing phone call. This will typically be used from
+     * Returns PendingIntent for answering a phone call. This will typically be used from
      * Notification context.
      */
-    private static PendingIntent createHangUpOngoingCallPendingIntent(Context context) {
-        final Intent intent = new Intent(InCallApp.ACTION_HANG_UP_ONGOING_CALL, null,
+    private static PendingIntent createNotificationPendingIntent(Context context, String action) {
+        final Intent intent = new Intent(action, null,
                 context, NotificationBroadcastReceiver.class);
         return PendingIntent.getBroadcast(context, 0, intent, 0);
     }
+
 }

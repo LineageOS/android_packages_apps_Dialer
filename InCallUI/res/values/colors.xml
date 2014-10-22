@@ -17,48 +17,63 @@
 
 <resources>
 
-    <!-- In-call UI -->
-    <color name="incall_callTypeSip">#99CE3F</color> <!-- green -->
-    <color name="incall_call_banner_background">#A0000000</color> <!-- semitransparent black -->
-    <color name="incall_secondary_info_background">#8033b5e5</color> <!-- semitransparent blueish grey -->
-    <color name="incall_call_banner_text_color">#FFFFFF</color> <!-- white -->
+    <!-- In-call UI background color. -->
+    <color name="incall_background_color">@color/dialer_theme_color</color>
+    <color name="incall_accent_color">#ffffff</color>
 
-    <!-- Color of the theme of the People app -->
-    <color name="people_app_theme_color">#33B5E5</color>
+    <!-- Background color of main banner. -->
+    <color name="incall_call_banner_background_color">@color/incall_background_color</color>
+    <color name="incall_call_banner_text_color">#ffffff</color>
+    <!-- 80% opacity, white -->
+    <color name="incall_call_banner_subtext_color">#ccffffff</color>
+    <color name="incall_banner_secondary_background_color">#f5f5f5</color>
+    <color name="incall_banner_secondary_text_color">#333333</color>
+
+    <color name="incall_action_bar_background_color">@color/incall_background_color</color>
+    <color name="incall_action_bar_text_color">@color/incall_call_banner_text_color</color>
 
     <!-- Put on top of each photo, implying 80% darker than usual. -->
     <color name="on_hold_dim_effect">#cc000000</color>
 
+    <color name="conference_call_manager_background_color">#f8f8f8</color>
+    <color name="conference_call_manager_caller_name_text_color">#4d4d4d</color>
+    <color name="conference_call_manager_icon_color">#999999</color>
     <!-- Used with some smaller texts in manage conference screen. -->
-    <color name="manage_conference_secondary_text_color">#888888</color>
+    <color name="conference_call_manager_secondary_text_color">#999999</color>
+    <color name="secondary_call_info_divider_highlight_color">#ffffff</color>
 
-    <!-- Used when the End Call button is active -->
-    <drawable name="end_call_active_state">#f22121</drawable>
-
-    <!-- Used when the End Call button is pressed -->
-    <drawable name="end_call_pressed_state">#ff4e4e</drawable>
-
-    <!-- Used when the End Call button is disabled -->
-    <drawable name="end_call_disabled_state">#303030</drawable>
+    <color name="end_call_touch_feedback_tint">#dddddd</color>
 
     <!-- Color of dialpad digits -->
-    <color name="dialpad_digits_text_color">#000000</color>
+    <color name="dialpad_digits_text_color">#333</color>
 
-    <!-- Background color of dialpad -->
-    <color name="background_dialpad">#ffffff</color>
+    <color name="incall_dialpad_background">#ffffff</color>
+    <color name="incall_dialpad_background_pressed">#ccaaaaaa</color>
 
-    <!-- Pressed color of dialpad buttons -->
-    <color name="background_dialpad_pressed">#ececec</color>
-
-    <!-- Button background -->
-    <color name="button_background">#000000</color>
+    <color name="button_background_color">@color/incall_background_color</color>
+    <color name="button_selected_color">@color/dialer_theme_color_dark</color>
+    <!-- 70% opacity, white. -->
+    <color name="button_default_color">#b3ffffff</color>
+    <!-- 20% opacity, white. -->
+    <color name="button_disabled_color">#33ffffff</color>
 
     <!-- Background color of action bars -->
-    <color name="actionbar_background_color">#3B77E7</color>
+    <color name="actionbar_background_color">@color/dialer_theme_color</color>
 
-    <!-- Secondary color of dialpad text (used for the letters corresponding to each digit -->
-    <color name="dialpad_secondary_text_color">#8b8b8b</color>
-
-    <!-- Translucent shadow color -->
     <color name="translucent_shadow">#33999999</color>
+
+    <!-- 70% opacity, black. -->
+    <color name="glowpad_background_color">#b3000000</color>
+    <!-- 15% opacity, white. -->
+    <color name="glowpad_outer_ring_color">#26ffffff</color>
+    <color name="glowpad_text_widget_ring_color">#ffffff</color>
+    <color name="glowpad_widget_active_color">#ffffff</color>
+    <color name="glowpad_text_widget_normal_tint">#cccccc</color>
+    <color name="glowpad_call_widget_normal_tint">@color/dialtacts_theme_color</color>
+    <color name="glowpad_end_call_widget_normal_tint">#ff1744</color>
+    <color name="glowpad_incoming_widget_tint">#a3a3a3</color>
+    <color name="glowpad_incoming_widget_background_tint">#ffffff</color>
+
+    <!-- 20% opacity, theme color. -->
+    <color name="incall_dialpad_touch_tint">#330288d1</color>
 </resources>

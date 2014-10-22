@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"Simu"</string>
+    <string name="onHold" msgid="9035493194749959955">"Inangoja"</string>
+    <string name="unknown" msgid="6878797917991465859">"Haijulikani"</string>
+    <string name="private_num" msgid="6713286113000232309">" Number isiyojulikana"</string>
+    <string name="payphone" msgid="1931775086311769314">"Simu ya kulipia"</string>
+    <string name="callFailed_userBusy" msgid="8851106999809294904">"Simu inatumika"</string>
+    <string name="callFailed_congestion" msgid="8737761615702718375">"Mtandao unatumika"</string>
+    <string name="callFailed_timedOut" msgid="7590961703135543346">"Hakuna jibu, muda umekwisha"</string>
+    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Seva haiwezi kufikiwa"</string>
+    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Nambari haifikiwi"</string>
+    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Jina la mtumiaji au nenosiri sio sahihi"</string>
+    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Ilipigwa kutoka nje ya mtandao"</string>
+    <string name="callFailed_server_error" msgid="5717915213586193217">"Hitilafu ya seva: Tafadhali jaribu tena baadaye."</string>
+    <string name="callFailed_noSignal" msgid="1889803273616031933">"Hakuna mtandao"</string>
+    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Kiwango cha ACM kimezidishwa"</string>
+    <string name="callFailed_powerOff" msgid="2766035859391549713">"Radio imezima"</string>
+    <string name="callFailed_simError" msgid="4476360200030635828">"Hakuna SIM au kuna hitilafu ya SIM"</string>
+    <string name="callFailed_outOfService" msgid="682300184520329366">"Mtandao wa simu za mkononi haupatikani"</string>
+    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Simu zinazopigwa zimezuiliwa na FDN"</string>
+    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Huwezi kupiga simu za kutoka wakati kupiga simu kumezuiwa."</string>
+    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Simu zote zimezuiwa na kidhibiti ufikiaji."</string>
+    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Simu za dharura zimezuiwa na kidhibiti ufikiaji."</string>
+    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Simu za kawaida zimezuiwa na kidhibiti ufikiaji."</string>
+    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Nambari isiyo sahihi"</string>
+    <string name="confCall" msgid="1904840547188336828">"Simu ya kongamano"</string>
+    <string name="call_lost" msgid="317670617901479594">"Simu imepotea."</string>
+    <string name="ok" msgid="3811371167865772377">"Sawa"</string>
+    <string name="audio_mode_speaker" msgid="27649582100085266">"Spika"</string>
+    <string name="audio_mode_earpiece" msgid="4156527186373869107">"Kipaza sauti cha kichwani"</string>
+    <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Viskizi vya maskio pasiwaya"</string>
+    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
+    <string name="wait_prompt_str" msgid="7601815427707856238">"Ungependa kutuma toni zifuatazo? \n"</string>
+    <string name="pause_prompt_str" msgid="1789964702154314806">"Inatuma toni\n"</string>
+    <string name="send_button" msgid="4106860097497818751">"Tuma"</string>
+    <string name="pause_prompt_yes" msgid="3564467212025151797">"Ndiyo"</string>
+    <string name="pause_prompt_no" msgid="6686238803236884877">"Hapana"</string>
+    <string name="wild_prompt_str" msgid="5543521676355533577">"Badilisha kibambo egemezi na"</string>
+    <string name="caller_manage_header" msgid="3231519674734638786">"Simu ya kongamano <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Nambari ya ujumbe wa sauti"</string>
+    <string name="card_title_dialing" msgid="5769417478498348054">"Inapiga"</string>
+    <string name="card_title_redialing" msgid="4831412164303596395">"Inajaribu tena"</string>
+    <string name="card_title_conf_call" msgid="1162980346189744501">"Simu ya kongamano"</string>
+    <string name="card_title_incoming_call" msgid="7364539451234646909">"Simu inayoingia"</string>
+    <string name="card_title_call_ended" msgid="5544730338889702298">"Simu imekamilika"</string>
+    <string name="card_title_on_hold" msgid="821463117892339942">"Inangoja"</string>
+    <string name="card_title_hanging_up" msgid="3999101620995182450">"Kukata simu"</string>
+    <string name="card_title_in_call" msgid="6346543933068225205">"Katika simu"</string>
+    <string name="card_title_my_phone_number" msgid="112428362494434191">"Nambari yangu ni <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_dialing" msgid="2107666444937350731">"Inapiga"</string>
+    <string name="notification_missedCallTitle" msgid="7554385905572364535">"Simu isiyojibiwa"</string>
+    <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Simu zisizojibiwa"</string>
+    <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> simu ambazo hazijajibiwa"</string>
+    <string name="notification_missedCallTicker" msgid="504686252427747209">"Simu isiyojibiwa kutoka <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="7068688957273482989">"Simu inayoendelea"</string>
+    <string name="notification_on_hold" msgid="3480694969511790465">"Inangoja"</string>
+    <string name="notification_incoming_call" msgid="2820429205043529642">"Simu inayoingia"</string>
+    <string name="notification_voicemail_title" msgid="8933468752045550523">"Ujumbe mpya wa sauti"</string>
+    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Barua mpya ya sauti <xliff:g id="COUNT">%d</xliff:g>"</string>
+    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Piga <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Nambari ya ujumbe wa sauti haijulikani."</string>
+    <string name="notification_network_selection_title" msgid="4224455487793492772">"Hakuna huduma"</string>
+    <string name="notification_network_selection_text" msgid="2607085729661923269">"Mtandao uliochaguliwa <xliff:g id="OPERATOR_NAME">%s</xliff:g> haupatikani"</string>
+    <string name="notification_action_end_call" msgid="6069460915123531620">"Kata simu"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Mpigie"</string>
+    <string name="notification_missedCall_message" msgid="3049928912736917988">"Ujumbe"</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Kupiga simu, kwanza zima hali ya ndege."</string>
+    <string name="incall_error_emergency_only" msgid="4678640422710818317">"Haijasajiliwa kwa mitandao"</string>
+    <string name="incall_error_out_of_service" msgid="8587993036435080418">"Mtandao wa simu haupatikani."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Simu haijatumwa, hakuna nambari halali iliyoingizwa."</string>
+    <string name="incall_error_call_failed" msgid="4313552620858880999">"Simu haijatumwa."</string>
+    <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"Inaanzisha msururu wa MMI…"</string>
+    <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"Kifaa ambacho hakijahiliwa."</string>
+    <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"Imeshindwa kubadilisha simu"</string>
+    <string name="incall_error_supp_service_separate" msgid="914362338192301746">"Imeshindwa kutenganisha simu."</string>
+    <string name="incall_error_supp_service_transfer" msgid="2509871374644921632">"Imeshindwa kutuma simu"</string>
+    <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Imeshindwa kupigia watu wengi."</string>
+    <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Imeshindwa kukataa simu."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Imeshindwa kuachilia simu."</string>
+    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Nambari ya ujumbe wa sauti haijulikani."</string>
+    <string name="incall_call_type_label_sip" msgid="2310958283037924371">" Simu ya wavuti"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Simu ya dharura"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Inawasha redio..."</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Uko mahali pasipokuwa na huduma, inajaribu tena…."</string>
+    <string name="dial_emergency_error" msgid="7969515493359619960">"Simu haijatumwa. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> sio nambari ya dharura!"</string>
+    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Simu haijatumwa. Piga nambari ya dharura!"</string>
+    <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Tumia kibodi kubonyeza"</string>
+    <string name="onscreenHoldText" msgid="2285258239691145872">"Shikilia"</string>
+    <string name="onscreenEndCallText" msgid="4403855834875398585">"Mwisho"</string>
+    <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Kibao cha kupiga"</string>
+    <string name="onscreenMuteText" msgid="5011369181754261374">"Nyamazisha"</string>
+    <string name="onscreenAddCallText" msgid="5140385634712287403">"Ongeza simu"</string>
+    <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Changanyisha simu"</string>
+    <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Badili"</string>
+    <string name="onscreenManageCallsText" msgid="5473231160123254154">"Dhibiti simu"</string>
+    <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Dhibiti kongamano"</string>
+    <string name="onscreenAudioText" msgid="1710087112800041743">"Kusikika"</string>
+    <string name="onscreenVideoCallText" msgid="4800924186056115442">"Hangout ya Video"</string>
+    <string name="voicemail_provider" msgid="5135942703327136909">"Huduma"</string>
+    <string name="voicemail_settings" msgid="72448049107749316">"Sanidi"</string>
+    <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Haijawekwa&gt;"</string>
+    <string name="other_settings" msgid="3672912580359716394">"Mipangilio mingine ya simu"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Kupiga simu kupitia <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="incoming_via_template" msgid="1696993226115570960">"Simu zinazoingia kupitia <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="contactPhoto" msgid="4713193418046639466">"picha ya anwani"</string>
+    <string name="goPrivate" msgid="865837794424530980">"nenda kwa faragha"</string>
+    <string name="selectContact" msgid="781975788478987237">"chagua anwani"</string>
+    <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Andika yako binafsi..."</string>
+    <string name="custom_message_cancel" msgid="7516406059429609296">"Ghairi"</string>
+    <string name="custom_message_send" msgid="5795754217085747742">"Tuma"</string>
+    <string name="description_image_button_one" msgid="5502718871331943463">"moja"</string>
+    <string name="description_image_button_two" msgid="4903738528222924522">"mbili"</string>
+    <string name="description_image_button_three" msgid="5570985408463782329">"tatu"</string>
+    <string name="description_image_button_four" msgid="1697520001239289074">"nne"</string>
+    <string name="description_image_button_five" msgid="3450276493026943454">"tano"</string>
+    <string name="description_image_button_six" msgid="2070376172268675300">"sita"</string>
+    <string name="description_image_button_seven" msgid="1757351311199993371">"saba"</string>
+    <string name="description_image_button_eight" msgid="4734693919020613227">"nane"</string>
+    <string name="description_image_button_nine" msgid="5568534122590597040">"tisa"</string>
+    <string name="description_image_button_star" msgid="1976280813017254462">"nyota"</string>
+    <string name="description_image_button_zero" msgid="4211255756866893605">"sufuri"</string>
+    <string name="description_image_button_pound" msgid="1716041284529917866">"pauni"</string>
+    <string name="description_dial_button" msgid="7459705245418435351">"piga simu"</string>
+    <string name="description_delete_button" msgid="4015842181592283903">"nafasi ya nyuma"</string>
+    <string name="accessibility_speakerphone_enabled" msgid="1988512040421036359">"Spika za simu zimewezeshwa"</string>
+    <string name="accessibility_call_muted" msgid="2776111226185342220">"Simu imezimwa."</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Jibu"</string>
+    <string name="description_target_send_sms" msgid="2098326025587950144">"Tuma SMS"</string>
+    <string name="description_target_decline" msgid="4789834364389731957">"Kataa"</string>
+    <string name="description_direction_up" msgid="4441409581444516690">"Sogeza juu ili <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> ."</string>
+    <string name="description_direction_left" msgid="7129873384376533287">"Sogeza kushoto ili <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_right" msgid="2122584234531957308">"Sogeza kulia ili <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Mtetemo"</string>
+    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Mtetemo"</string>
+    <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Sauti"</string>
+    <string name="default_notification_description" msgid="78174796906240970">"Sauti chaguo-msingi (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
+    <string name="ringtone_title" msgid="6374978286202084684">"Mlio wa simu"</string>
+    <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Tetema wakati wa kulia"</string>
+    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Toa sauti vitufe vya kupiga vinapoguswa"</string>
+    <string name="dial_pad_autocomplete" msgid="494525952035761075">"Jaza nambari kiotomatiki"</string>
+    <string name="preference_category_ringtone" msgid="5197960752529332721">"Mlio wa simu na Mtetemo"</string>
+    <string name="manageConferenceLabel" msgid="4691922394301969053">"Dhibiti simu ya kongamano"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Nambari ya dharura"</string>
+    <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
+    <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
+    <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
+    <string name="dialpad_3_number" msgid="7146166309009131439">"3"</string>
+    <string name="dialpad_4_number" msgid="9075039274846639476">"4"</string>
+    <string name="dialpad_5_number" msgid="5780019709590672721">"5"</string>
+    <string name="dialpad_6_number" msgid="8261355170951265389">"6"</string>
+    <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
+    <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
+    <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
+</resources>

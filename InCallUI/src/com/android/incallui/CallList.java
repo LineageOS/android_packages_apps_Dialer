@@ -16,28 +16,28 @@
 
 package com.android.incallui;
 
-import com.google.android.collect.Lists;
-import com.google.android.collect.Maps;
-import com.google.android.collect.Sets;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.common.base.Preconditions;
 
 import android.os.Handler;
 import android.os.Message;
-import android.telephony.DisconnectCause;
+import android.telecom.DisconnectCause;
+import android.telecom.Phone;
 
-import com.android.services.telephony.common.Call;
-
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Maintains the list of active calls received from CallHandlerService and notifies interested
- * classes of changes to the call list as they are received from the telephony stack.
- * Primary lister of changes to this class is InCallPresenter.
+ * Maintains the list of active calls and notifies interested classes of changes to the call list
+ * as they are received from the telephony stack. Primary listener of changes to this class is
+ * InCallPresenter.
  */
-public class CallList {
+public class CallList implements InCallPhoneListener {
 
     private static final int DISCONNECTED_CALL_SHORT_TIMEOUT_MS = 200;
     private static final int DISCONNECTED_CALL_MEDIUM_TIMEOUT_MS = 2000;
@@ -47,13 +47,20 @@ public class CallList {
 
     private static CallList sInstance = new CallList();
 
-    private final HashMap<Integer, Call> mCallMap = Maps.newHashMap();
-    private final HashMap<Integer, ArrayList<String>> mCallTextReponsesMap =
-            Maps.newHashMap();
-    private final Set<Listener> mListeners = Sets.newArraySet();
-    private final HashMap<Integer, List<CallUpdateListener>> mCallUpdateListenerMap = Maps
+    private final HashMap<String, Call> mCallById = new HashMap<>();
+    private final HashMap<android.telecom.Call, Call> mCallByTelecommCall = new HashMap<>();
+    private final HashMap<String, List<String>> mCallTextReponsesMap = Maps.newHashMap();
+    /**
+     * ConcurrentHashMap constructor params: 8 is initial table size, 0.9f is
+     * load factor before resizing, 1 means we only expect a single thread to
+     * access the map so make only a single shard
+     */
+    private final Set<Listener> mListeners = Collections.newSetFromMap(
+            new ConcurrentHashMap<Listener, Boolean>(8, 0.9f, 1));
+    private final HashMap<String, List<CallUpdateListener>> mCallUpdateListenerMap = Maps
             .newHashMap();
 
+    private Phone mPhone;
 
     /**
      * Static singleton accessor method.
@@ -62,34 +69,56 @@ public class CallList {
         return sInstance;
     }
 
+    private Phone.Listener mPhoneListener = new Phone.Listener() {
+        @Override
+        public void onCallAdded(Phone phone, android.telecom.Call telecommCall) {
+            Call call = new Call(telecommCall);
+            if (call.getState() == Call.State.INCOMING) {
+                onIncoming(call, call.getCannedSmsResponses());
+            } else {
+                onUpdate(call);
+            }
+        }
+        @Override
+        public void onCallRemoved(Phone phone, android.telecom.Call telecommCall) {
+            if (mCallByTelecommCall.containsKey(telecommCall)) {
+                Call call = mCallByTelecommCall.get(telecommCall);
+                call.setState(Call.State.DISCONNECTED);
+                call.setDisconnectCause(new DisconnectCause(DisconnectCause.UNKNOWN));
+                if (updateCallInMap(call)) {
+                    Log.w(this, "Removing call not previously disconnected " + call.getId());
+                }
+                updateCallTextMap(call, null);
+            }
+        }
+    };
+
     /**
      * Private constructor.  Instance should only be acquired through getInstance().
      */
     private CallList() {
     }
 
-    /**
-     * Called when a single call has changed.
-     */
-    public void onUpdate(Call call) {
-        Log.d(this, "onUpdate - ", call);
+    @Override
+    public void setPhone(Phone phone) {
+        mPhone = phone;
+        mPhone.addListener(mPhoneListener);
+    }
 
-        updateCallInMap(call);
-        notifyListenersOfChange();
+    @Override
+    public void clearPhone() {
+        mPhone.removeListener(mPhoneListener);
+        mPhone = null;
     }
 
     /**
      * Called when a single call disconnects.
      */
     public void onDisconnect(Call call) {
-        Log.d(this, "onDisconnect: ", call);
-
-        boolean updated = updateCallInMap(call);
-
-        if (updated) {
+        if (updateCallInMap(call)) {
+            Log.i(this, "onDisconnect: " + call);
             // notify those listening for changes on this specific change
             notifyCallUpdateListeners(call);
-
             // notify those listening for all disconnects
             notifyListenersOfDisconnect(call);
         }
@@ -99,9 +128,9 @@ public class CallList {
      * Called when a single call has changed.
      */
     public void onIncoming(Call call, List<String> textMessages) {
-        Log.d(this, "onIncoming - " + call);
-
-        updateCallInMap(call);
+        if (updateCallInMap(call)) {
+            Log.i(this, "onIncoming - " + call);
+        }
         updateCallTextMap(call, textMessages);
 
         for (Listener listener : mListeners) {
@@ -110,29 +139,18 @@ public class CallList {
     }
 
     /**
-     * Called when multiple calls have changed.
+     * Called when a single call has changed.
      */
-    public void onUpdate(List<Call> callsToUpdate) {
-        Log.d(this, "onUpdate(...)");
-
-        Preconditions.checkNotNull(callsToUpdate);
-        for (Call call : callsToUpdate) {
-            Log.d(this, "\t" + call);
-
-            updateCallInMap(call);
-            updateCallTextMap(call, null);
-
-            notifyCallUpdateListeners(call);
-        }
-
-        notifyListenersOfChange();
+    public void onUpdate(Call call) {
+        onUpdateCall(call);
+        notifyGenericListeners();
     }
 
     public void notifyCallUpdateListeners(Call call) {
-        final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getCallId());
+        final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getId());
         if (listeners != null) {
             for (CallUpdateListener listener : listeners) {
-                listener.onCallStateChanged(call);
+                listener.onCallChanged(call);
             }
         }
     }
@@ -143,10 +161,10 @@ public class CallList {
      * @param callId The call id to get updates for.
      * @param listener The listener to add.
      */
-    public void addCallUpdateListener(int callId, CallUpdateListener listener) {
+    public void addCallUpdateListener(String callId, CallUpdateListener listener) {
         List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(callId);
         if (listeners == null) {
-            listeners = Lists.newArrayList();
+            listeners = new CopyOnWriteArrayList<CallUpdateListener>();
             mCallUpdateListenerMap.put(callId, listeners);
         }
         listeners.add(listener);
@@ -158,7 +176,7 @@ public class CallList {
      * @param callId The call id to remove the listener for.
      * @param listener The listener to remove.
      */
-    public void removeCallUpdateListener(int callId, CallUpdateListener listener) {
+    public void removeCallUpdateListener(String callId, CallUpdateListener listener) {
         List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(callId);
         if (listeners != null) {
             listeners.remove(listener);
@@ -175,8 +193,9 @@ public class CallList {
     }
 
     public void removeListener(Listener listener) {
-        Preconditions.checkNotNull(listener);
-        mListeners.remove(listener);
+        if (listener != null) {
+            mListeners.remove(listener);
+        }
     }
 
     /**
@@ -190,6 +209,17 @@ public class CallList {
             retval = getActiveCall();
         }
         return retval;
+    }
+
+    /**
+     * A call that is waiting for {@link PhoneAccount} selection
+     */
+    public Call getWaitingForAccountCall() {
+        return getFirstCallWithState(Call.State.PRE_DIAL_WAIT);
+    }
+
+    public Call getPendingOutgoingCall() {
+        return getFirstCallWithState(Call.State.CONNECTING);
     }
 
     public Call getOutgoingCall() {
@@ -240,6 +270,9 @@ public class CallList {
     public Call getFirstCall() {
         Call result = getIncomingCall();
         if (result == null) {
+            result = getPendingOutgoingCall();
+        }
+        if (result == null) {
             result = getOutgoingCall();
         }
         if (result == null) {
@@ -254,20 +287,38 @@ public class CallList {
         return result;
     }
 
-    public Call getCall(int callId) {
-        return mCallMap.get(callId);
+    public boolean hasLiveCall() {
+        Call call = getFirstCall();
+        if (call == null) {
+            return false;
+        }
+        return call != getDisconnectingCall() && call != getDisconnectedCall();
     }
 
-    public boolean existsLiveCall() {
-        for (Call call : mCallMap.values()) {
-            if (!isCallDead(call)) {
-                return true;
+    /**
+     * Returns the first call found in the call map with the specified call modification state.
+     * @param state The session modification state to search for.
+     * @return The first call with the specified state.
+     */
+    public Call getVideoUpgradeRequestCall() {
+        for(Call call : mCallById.values()) {
+            if (call.getSessionModificationState() ==
+                    Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+                return call;
             }
         }
-        return false;
+        return null;
     }
 
-    public ArrayList<String> getTextResponses(int callId) {
+    public Call getCallById(String callId) {
+        return mCallById.get(callId);
+    }
+
+    public Call getCallByTelecommCall(android.telecom.Call telecommCall) {
+        return mCallByTelecommCall.get(telecommCall);
+    }
+
+    public List<String> getTextResponses(String callId) {
         return mCallTextReponsesMap.get(callId);
     }
 
@@ -285,7 +336,7 @@ public class CallList {
     public Call getCallWithState(int state, int positionToFind) {
         Call retval = null;
         int position = 0;
-        for (Call call : mCallMap.values()) {
+        for (Call call : mCallById.values()) {
             if (call.getState() == state) {
                 if (position >= positionToFind) {
                     retval = call;
@@ -306,25 +357,39 @@ public class CallList {
      * there can be no active calls, so this is relatively safe thing to do.
      */
     public void clearOnDisconnect() {
-        for (Call call : mCallMap.values()) {
+        for (Call call : mCallById.values()) {
             final int state = call.getState();
             if (state != Call.State.IDLE &&
                     state != Call.State.INVALID &&
                     state != Call.State.DISCONNECTED) {
 
                 call.setState(Call.State.DISCONNECTED);
-                call.setDisconnectCause(DisconnectCause.NOT_VALID);
+                call.setDisconnectCause(new DisconnectCause(DisconnectCause.UNKNOWN));
                 updateCallInMap(call);
             }
         }
-        notifyListenersOfChange();
+        notifyGenericListeners();
+    }
+
+    /**
+     * Processes an update for a single call.
+     *
+     * @param call The call to update.
+     */
+    private void onUpdateCall(Call call) {
+        Log.d(this, "\t" + call);
+        if (updateCallInMap(call)) {
+            Log.i(this, "onUpdate - " + call);
+        }
+        updateCallTextMap(call, call.getCannedSmsResponses());
+        notifyCallUpdateListeners(call);
     }
 
     /**
      * Sends a generic notification to all listeners that something has changed.
      * It is up to the listeners to call back to determine what changed.
      */
-    private void notifyListenersOfChange() {
+    private void notifyGenericListeners() {
         for (Listener listener : mListeners) {
             listener.onCallListChange(this);
         }
@@ -345,11 +410,9 @@ public class CallList {
 
         boolean updated = false;
 
-        final Integer id = new Integer(call.getCallId());
-
         if (call.getState() == Call.State.DISCONNECTED) {
             // update existing (but do not add!!) disconnected calls
-            if (mCallMap.containsKey(id)) {
+            if (mCallById.containsKey(call.getId())) {
 
                 // For disconnected calls, we want to keep them alive for a few seconds so that the
                 // UI has a chance to display anything it needs when a call is disconnected.
@@ -358,14 +421,17 @@ public class CallList {
                 final Message msg = mHandler.obtainMessage(EVENT_DISCONNECTED_TIMEOUT, call);
                 mHandler.sendMessageDelayed(msg, getDelayForDisconnect(call));
 
-                mCallMap.put(id, call);
+                mCallById.put(call.getId(), call);
+                mCallByTelecommCall.put(call.getTelecommCall(), call);
                 updated = true;
             }
         } else if (!isCallDead(call)) {
-            mCallMap.put(id, call);
+            mCallById.put(call.getId(), call);
+            mCallByTelecommCall.put(call.getTelecommCall(), call);
             updated = true;
-        } else if (mCallMap.containsKey(id)) {
-            mCallMap.remove(id);
+        } else if (mCallById.containsKey(call.getId())) {
+            mCallById.remove(call.getId());
+            mCallByTelecommCall.remove(call.getTelecommCall());
             updated = true;
         }
 
@@ -376,18 +442,19 @@ public class CallList {
         Preconditions.checkState(call.getState() == Call.State.DISCONNECTED);
 
 
-        final int cause = call.getDisconnectCause();
+        final int cause = call.getDisconnectCause().getCode();
         final int delay;
         switch (cause) {
             case DisconnectCause.LOCAL:
                 delay = DISCONNECTED_CALL_SHORT_TIMEOUT_MS;
                 break;
-            case DisconnectCause.NORMAL:
+            case DisconnectCause.REMOTE:
                 delay = DISCONNECTED_CALL_MEDIUM_TIMEOUT_MS;
                 break;
-            case DisconnectCause.INCOMING_REJECTED:
-            case DisconnectCause.INCOMING_MISSED:
-                // no delay for missed/rejected incoming calls
+            case DisconnectCause.REJECTED:
+            case DisconnectCause.MISSED:
+            case DisconnectCause.CANCELED:
+                // no delay for missed/rejected incoming calls and canceled outgoing calls.
                 delay = 0;
                 break;
             default:
@@ -401,14 +468,12 @@ public class CallList {
     private void updateCallTextMap(Call call, List<String> textResponses) {
         Preconditions.checkNotNull(call);
 
-        final Integer id = new Integer(call.getCallId());
-
         if (!isCallDead(call)) {
             if (textResponses != null) {
-                mCallTextReponsesMap.put(id, (ArrayList<String>) textResponses);
+                mCallTextReponsesMap.put(call.getId(), textResponses);
             }
-        } else if (mCallMap.containsKey(id)) {
-            mCallTextReponsesMap.remove(id);
+        } else if (mCallById.containsKey(call.getId())) {
+            mCallTextReponsesMap.remove(call.getId());
         }
     }
 
@@ -423,7 +488,20 @@ public class CallList {
     private void finishDisconnectedCall(Call call) {
         call.setState(Call.State.IDLE);
         updateCallInMap(call);
-        notifyListenersOfChange();
+        notifyGenericListeners();
+    }
+
+    /**
+     * Notifies all video calls of a change in device orientation.
+     *
+     * @param rotation The new rotation angle (in degrees).
+     */
+    public void notifyCallsOfDeviceRotation(int rotation) {
+        for (Call call : mCallById.values()) {
+            if (call.getVideoCall() != null) {
+                call.getVideoCall().setDeviceOrientation(rotation);
+            }
+        }
     }
 
     /**
@@ -475,6 +553,6 @@ public class CallList {
 
     public interface CallUpdateListener {
         // TODO: refactor and limit arg to be call state.  Caller info is not needed.
-        public void onCallStateChanged(Call call);
+        public void onCallChanged(Call call);
     }
 }

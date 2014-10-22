@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"Telefon"</string>
+    <string name="onHold" msgid="9035493194749959955">"Ventende"</string>
+    <string name="unknown" msgid="6878797917991465859">"Ukendt"</string>
+    <string name="private_num" msgid="6713286113000232309">"Privat nummer"</string>
+    <string name="payphone" msgid="1931775086311769314">"Betalingstelefon"</string>
+    <string name="callFailed_userBusy" msgid="8851106999809294904">"Linjen er optaget"</string>
+    <string name="callFailed_congestion" msgid="8737761615702718375">"Netværket er optaget"</string>
+    <string name="callFailed_timedOut" msgid="7590961703135543346">"Intet svar, timeout"</string>
+    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Serveren er ikke tilgængelig"</string>
+    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Nummeret er ikke tilgængeligt"</string>
+    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Forkert brugernavn eller adgangskode"</string>
+    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Opkald uden for netværk"</string>
+    <string name="callFailed_server_error" msgid="5717915213586193217">"Serverfejl. Prøv igen senere."</string>
+    <string name="callFailed_noSignal" msgid="1889803273616031933">"Der er intet signal"</string>
+    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM-grænsen er overskredet"</string>
+    <string name="callFailed_powerOff" msgid="2766035859391549713">"Slå radio fra"</string>
+    <string name="callFailed_simError" msgid="4476360200030635828">"Der er intet SIM-kort, eller der er SIM-kortfejl"</string>
+    <string name="callFailed_outOfService" msgid="682300184520329366">"Mobilnetværket er ikke tilgængeligt"</string>
+    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Udgående opkald er begrænset til angivne opkaldsnumre."</string>
+    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Du kan ikke foretage udgående opkald, mens opkaldsspærring er slået til."</string>
+    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Alle opkald er begrænset af adgangskontrol."</string>
+    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Nødopkald er begrænset af adgangskontrol."</string>
+    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Normale opkald er begrænset af adgangskontrol."</string>
+    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Ugyldigt antal"</string>
+    <string name="confCall" msgid="1904840547188336828">"Telefonmøde"</string>
+    <string name="call_lost" msgid="317670617901479594">"Opkaldet er mistet."</string>
+    <string name="ok" msgid="3811371167865772377">"OK"</string>
+    <string name="audio_mode_speaker" msgid="27649582100085266">"Højttaler"</string>
+    <string name="audio_mode_earpiece" msgid="4156527186373869107">"Ørestykke til håndsæt"</string>
+    <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Headset med ledning"</string>
+    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
+    <string name="wait_prompt_str" msgid="7601815427707856238">"Send følgende toner?\n"</string>
+    <string name="pause_prompt_str" msgid="1789964702154314806">"Sender toner\n"</string>
+    <string name="send_button" msgid="4106860097497818751">"Send"</string>
+    <string name="pause_prompt_yes" msgid="3564467212025151797">"Ja"</string>
+    <string name="pause_prompt_no" msgid="6686238803236884877">"Nej"</string>
+    <string name="wild_prompt_str" msgid="5543521676355533577">"Erstat jokertegnet med"</string>
+    <string name="caller_manage_header" msgid="3231519674734638786">"Telefonmøde <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Telefonsvarernummer"</string>
+    <string name="card_title_dialing" msgid="5769417478498348054">"Ringer op"</string>
+    <string name="card_title_redialing" msgid="4831412164303596395">"Prøver igen"</string>
+    <string name="card_title_conf_call" msgid="1162980346189744501">"Telefonmøde"</string>
+    <string name="card_title_incoming_call" msgid="7364539451234646909">"Indgående opkald"</string>
+    <string name="card_title_call_ended" msgid="5544730338889702298">"Opkaldet er afsluttet"</string>
+    <string name="card_title_on_hold" msgid="821463117892339942">"Ventende"</string>
+    <string name="card_title_hanging_up" msgid="3999101620995182450">"Lægger på"</string>
+    <string name="card_title_in_call" msgid="6346543933068225205">"Opkald i gang"</string>
+    <string name="card_title_my_phone_number" msgid="112428362494434191">"Mit nummer er <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_dialing" msgid="2107666444937350731">"Ringer op"</string>
+    <string name="notification_missedCallTitle" msgid="7554385905572364535">"Ubesvarede opkald"</string>
+    <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Ubesvarede opkald"</string>
+    <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> ubesvarede opkald"</string>
+    <string name="notification_missedCallTicker" msgid="504686252427747209">"Ubesvarede opkald fra <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="7068688957273482989">"Igangværende opkald"</string>
+    <string name="notification_on_hold" msgid="3480694969511790465">"Ventende"</string>
+    <string name="notification_incoming_call" msgid="2820429205043529642">"Indgående opkald"</string>
+    <string name="notification_voicemail_title" msgid="8933468752045550523">"Ny telefonsvarerbesked"</string>
+    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Nye telefonsvarerbeskeder (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Ring til <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Telefonsvarernummeret er ukendt"</string>
+    <string name="notification_network_selection_title" msgid="4224455487793492772">"Ingen dækning"</string>
+    <string name="notification_network_selection_text" msgid="2607085729661923269">"Det valgte netværk (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) er ikke tilgængeligt"</string>
+    <string name="notification_action_end_call" msgid="6069460915123531620">"Læg på"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Ring tilbage"</string>
+    <string name="notification_missedCall_message" msgid="3049928912736917988">"Besked"</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Slå Flytilstand fra først for at foretage et opkald."</string>
+    <string name="incall_error_emergency_only" msgid="4678640422710818317">"Ikke registreret på netværk."</string>
+    <string name="incall_error_out_of_service" msgid="8587993036435080418">"Mobilnetværket er ikke tilgængeligt."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Opkaldet blev ikke sendt. Der blev ikke indtastet et gyldigt nummer."</string>
+    <string name="incall_error_call_failed" msgid="4313552620858880999">"Opkaldet blev ikke sendt."</string>
+    <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"Starter MMI-sekvens ..."</string>
+    <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"Tjenesten understøttes ikke."</string>
+    <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"Der kan ikke skiftes mellem opkald."</string>
+    <string name="incall_error_supp_service_separate" msgid="914362338192301746">"Opkaldet kunne ikke separeres."</string>
+    <string name="incall_error_supp_service_transfer" msgid="2509871374644921632">"Opkaldet kunne ikke overføres."</string>
+    <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Der kunne ikke oprettes mødeopkald."</string>
+    <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Opkaldet kunne ikke afvises."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Der kunne ikke foretages opkald."</string>
+    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Telefonsvarernummeret er ukendt"</string>
+    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Internetopkald"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Nødopkald"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Tænder for radio ..."</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Uden for dækning. Prøver igen ..."</string>
+    <string name="dial_emergency_error" msgid="7969515493359619960">"Opkaldet blev ikke sendt. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> er ikke et nødnummer."</string>
+    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Opkaldet blev ikke sendt. Indtast et nødnummer."</string>
+    <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Brug tastatur til at ringe op"</string>
+    <string name="onscreenHoldText" msgid="2285258239691145872">"Hold"</string>
+    <string name="onscreenEndCallText" msgid="4403855834875398585">"Afslut"</string>
+    <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Nummerblok"</string>
+    <string name="onscreenMuteText" msgid="5011369181754261374">"Lyd fra"</string>
+    <string name="onscreenAddCallText" msgid="5140385634712287403">"Tilføj opkald"</string>
+    <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Slå opkald sammen"</string>
+    <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Skift"</string>
+    <string name="onscreenManageCallsText" msgid="5473231160123254154">"Administrer opkald"</string>
+    <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Admin. konference"</string>
+    <string name="onscreenAudioText" msgid="1710087112800041743">"Lyd"</string>
+    <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videoopkald"</string>
+    <string name="voicemail_provider" msgid="5135942703327136909">"Tjeneste"</string>
+    <string name="voicemail_settings" msgid="72448049107749316">"Konfiguration"</string>
+    <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Ikke angivet&gt;"</string>
+    <string name="other_settings" msgid="3672912580359716394">"Andre indstillinger for opkald"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Opkald via <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="incoming_via_template" msgid="1696993226115570960">"Indgående opkald via <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="contactPhoto" msgid="4713193418046639466">"billede af kontaktperson"</string>
+    <string name="goPrivate" msgid="865837794424530980">"gør privat"</string>
+    <string name="selectContact" msgid="781975788478987237">"vælg kontaktperson"</string>
+    <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Skriv dit eget svar..."</string>
+    <string name="custom_message_cancel" msgid="7516406059429609296">"Annuller"</string>
+    <string name="custom_message_send" msgid="5795754217085747742">"Send"</string>
+    <string name="description_image_button_one" msgid="5502718871331943463">"en"</string>
+    <string name="description_image_button_two" msgid="4903738528222924522">"to"</string>
+    <string name="description_image_button_three" msgid="5570985408463782329">"tre"</string>
+    <string name="description_image_button_four" msgid="1697520001239289074">"fire"</string>
+    <string name="description_image_button_five" msgid="3450276493026943454">"fem"</string>
+    <string name="description_image_button_six" msgid="2070376172268675300">"seks"</string>
+    <string name="description_image_button_seven" msgid="1757351311199993371">"syv"</string>
+    <string name="description_image_button_eight" msgid="4734693919020613227">"otte"</string>
+    <string name="description_image_button_nine" msgid="5568534122590597040">"ni"</string>
+    <string name="description_image_button_star" msgid="1976280813017254462">"stjerne"</string>
+    <string name="description_image_button_zero" msgid="4211255756866893605">"nul"</string>
+    <string name="description_image_button_pound" msgid="1716041284529917866">"pund"</string>
+    <string name="description_dial_button" msgid="7459705245418435351">"ring op"</string>
+    <string name="description_delete_button" msgid="4015842181592283903">"tilbage"</string>
+    <string name="accessibility_speakerphone_enabled" msgid="1988512040421036359">"Højttalertelefon aktiveret."</string>
+    <string name="accessibility_call_muted" msgid="2776111226185342220">"Lyd slået fra opkald."</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Svar"</string>
+    <string name="description_target_send_sms" msgid="2098326025587950144">"Send sms"</string>
+    <string name="description_target_decline" msgid="4789834364389731957">"Afvis"</string>
+    <string name="description_direction_up" msgid="4441409581444516690">"Skub op for at <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_left" msgid="7129873384376533287">"Skub til venstre for at <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_right" msgid="2122584234531957308">"Skub til højre for at <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Vibration"</string>
+    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Vibration"</string>
+    <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Lyd"</string>
+    <string name="default_notification_description" msgid="78174796906240970">"Standardlyd (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
+    <string name="ringtone_title" msgid="6374978286202084684">"Ringetone for opkald"</string>
+    <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Vibrer ved opringning"</string>
+    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Tastaturtoner"</string>
+    <string name="dial_pad_autocomplete" msgid="494525952035761075">"Autofuldfør på num. tastatur"</string>
+    <string name="preference_category_ringtone" msgid="5197960752529332721">"Ringetone og vibration"</string>
+    <string name="manageConferenceLabel" msgid="4691922394301969053">"Administrer telefonmøde"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Nødnummer"</string>
+    <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
+    <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
+    <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
+    <string name="dialpad_3_number" msgid="7146166309009131439">"3"</string>
+    <string name="dialpad_4_number" msgid="9075039274846639476">"4"</string>
+    <string name="dialpad_5_number" msgid="5780019709590672721">"5"</string>
+    <string name="dialpad_6_number" msgid="8261355170951265389">"6"</string>
+    <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
+    <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
+    <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
+</resources>

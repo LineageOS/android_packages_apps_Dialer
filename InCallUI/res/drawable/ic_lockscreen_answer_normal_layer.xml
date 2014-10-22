@@ -23,10 +23,11 @@
                 android:height="@dimen/incoming_call_widget_circle_size" />
         </shape>
     </item>
-    <item
-        android:top="@dimen/incoming_call_widget_asset_margin"
-        android:right="@dimen/incoming_call_widget_asset_margin"
-        android:bottom="@dimen/incoming_call_widget_asset_margin"
-        android:left="@dimen/incoming_call_widget_asset_margin"
-        android:drawable="@drawable/ic_lockscreen_answer_normal" />
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/fab_ic_call"
+            android:tint="@color/glowpad_call_widget_normal_tint"
+            android:autoMirrored="true" />
+    </item>
 </layer-list>

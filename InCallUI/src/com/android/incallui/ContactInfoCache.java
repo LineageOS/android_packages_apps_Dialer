@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import android.content.ContentUris;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,22 +24,19 @@ import android.net.Uri;
 import android.os.Looper;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.telephony.PhoneNumberUtils;
+import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.incallui.service.PhoneNumberService;
 import com.android.incalluibind.ServiceFactory;
-import com.android.services.telephony.common.Call;
-import com.android.services.telephony.common.CallIdentification;
 import com.android.services.telephony.common.MoreStrings;
-import com.google.android.collect.Lists;
-import com.google.android.collect.Maps;
-import com.google.android.collect.Sets;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -56,14 +52,14 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
     private final Context mContext;
     private final PhoneNumberService mPhoneNumberService;
-    private final HashMap<Integer, ContactCacheEntry> mInfoMap = Maps.newHashMap();
-    private final HashMap<Integer, Set<ContactInfoCacheCallback>> mCallBacks = Maps.newHashMap();
+    private final HashMap<String, ContactCacheEntry> mInfoMap = Maps.newHashMap();
+    private final HashMap<String, Set<ContactInfoCacheCallback>> mCallBacks = Maps.newHashMap();
 
     private static ContactInfoCache sCache = null;
 
     public static synchronized ContactInfoCache getInstance(Context mContext) {
         if (sCache == null) {
-            sCache = new ContactInfoCache(mContext);
+            sCache = new ContactInfoCache(mContext.getApplicationContext());
         }
         return sCache;
     }
@@ -73,18 +69,18 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         mPhoneNumberService = ServiceFactory.newPhoneNumberService(context);
     }
 
-    public ContactCacheEntry getInfo(int callId) {
+    public ContactCacheEntry getInfo(String callId) {
         return mInfoMap.get(callId);
     }
 
-    public static ContactCacheEntry buildCacheEntryFromCall(Context context,
-            CallIdentification identification, boolean isIncoming) {
+    public static ContactCacheEntry buildCacheEntryFromCall(Context context, Call call,
+            boolean isIncoming) {
         final ContactCacheEntry entry = new ContactCacheEntry();
 
         // TODO: get rid of caller info.
-        final CallerInfo info = CallerInfoUtils.buildCallerInfo(context, identification);
-        ContactInfoCache.populateCacheEntry(context, info, entry,
-                identification.getNumberPresentation(), isIncoming);
+        final CallerInfo info = CallerInfoUtils.buildCallerInfo(context, call);
+        ContactInfoCache.populateCacheEntry(context, info, entry, call.getNumberPresentation(),
+                isIncoming);
         return entry;
     }
 
@@ -97,8 +93,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
         @Override
         public void onQueryComplete(int token, Object cookie, CallerInfo callerInfo) {
-            final CallIdentification identification = (CallIdentification) cookie;
-            findInfoQueryComplete(identification, callerInfo, mIsIncoming, true);
+            findInfoQueryComplete((Call) cookie, callerInfo, mIsIncoming, true);
         }
     }
 
@@ -107,15 +102,14 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
      * Returns the data through callback.  If callback is null, no response is made, however the
      * query is still performed and cached.
      *
-     * @param identification The call identification
      * @param callback The function to call back when the call is found. Can be null.
      */
-    public void findInfo(final CallIdentification identification, final boolean isIncoming,
+    public void findInfo(final Call call, final boolean isIncoming,
             ContactInfoCacheCallback callback) {
         Preconditions.checkState(Looper.getMainLooper().getThread() == Thread.currentThread());
         Preconditions.checkNotNull(callback);
 
-        final int callId = identification.getCallId();
+        final String callId = call.getId();
         final ContactCacheEntry cacheEntry = mInfoMap.get(callId);
         Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
 
@@ -148,44 +142,51 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
          * emergency call information, will not perform an additional asynchronous query.
          */
         final CallerInfo callerInfo = CallerInfoUtils.getCallerInfoForCall(
-                mContext, identification, new FindInfoCallback(isIncoming));
+                mContext, call, new FindInfoCallback(isIncoming));
 
-        findInfoQueryComplete(identification, callerInfo, isIncoming, false);
+        findInfoQueryComplete(call, callerInfo, isIncoming, false);
     }
 
-    private void findInfoQueryComplete(CallIdentification identification,
-            CallerInfo callerInfo, boolean isIncoming, boolean didLocalLookup) {
-        final int callId = identification.getCallId();
-        int presentationMode = identification.getNumberPresentation();
-        if (callerInfo.contactExists || callerInfo.isEmergencyNumber() || callerInfo.isVoiceMailNumber()) {
-            presentationMode = Call.PRESENTATION_ALLOWED;
+    private void findInfoQueryComplete(Call call, CallerInfo callerInfo, boolean isIncoming,
+            boolean didLocalLookup) {
+        final String callId = call.getId();
+        int presentationMode = call.getNumberPresentation();
+        if (callerInfo.contactExists || callerInfo.isEmergencyNumber() ||
+                callerInfo.isVoiceMailNumber()) {
+            presentationMode = TelecomManager.PRESENTATION_ALLOWED;
         }
 
-        final ContactCacheEntry cacheEntry = buildEntry(mContext, callId,
-                callerInfo, presentationMode, isIncoming);
+        ContactCacheEntry cacheEntry = mInfoMap.get(callId);
+        // Rebuild the entry from the new data if:
+        // 1) This is NOT the asynchronous local lookup (IOW, this is the first pass)
+        // 2) The local lookup was done and the contact exists
+        // 3) The existing cached entry is empty (no name).
+        if (!didLocalLookup || callerInfo.contactExists ||
+                (cacheEntry != null && TextUtils.isEmpty(cacheEntry.name))) {
+            cacheEntry = buildEntry(mContext, callId, callerInfo, presentationMode, isIncoming);
+            mInfoMap.put(callId, cacheEntry);
+        }
 
-        // Add the contact info to the cache.
-        mInfoMap.put(callId, cacheEntry);
         sendInfoNotifications(callId, cacheEntry);
 
         if (didLocalLookup) {
-            if (!callerInfo.contactExists && cacheEntry.name == null &&
-                    mPhoneNumberService != null) {
+            // Before issuing a request for more data from other services, We only check that the
+            // contact wasn't found in the local DB.  We don't check the if the cache entry already
+            // has a name because we allow overriding cnap data with data from other services.
+            if (!callerInfo.contactExists && mPhoneNumberService != null) {
                 Log.d(TAG, "Contact lookup. Local contacts miss, checking remote");
                 final PhoneNumberServiceListener listener = new PhoneNumberServiceListener(callId);
                 mPhoneNumberService.getPhoneNumberInfo(cacheEntry.number, listener, listener,
                         isIncoming);
-            } else if (cacheEntry.personUri != null) {
+            } else if (cacheEntry.displayPhotoUri != null) {
                 Log.d(TAG, "Contact lookup. Local contact found, starting image load");
                 // Load the image with a callback to update the image state.
                 // When the load is finished, onImageLoadComplete() will be called.
                 ContactsAsyncHelper.startObtainPhotoAsync(TOKEN_UPDATE_PHOTO_FOR_CALL_STATE,
-                        mContext, cacheEntry.personUri, ContactInfoCache.this, callId);
+                        mContext, cacheEntry.displayPhotoUri, ContactInfoCache.this, callId);
             } else {
                 if (callerInfo.contactExists) {
                     Log.d(TAG, "Contact lookup done. Local contact found, no image.");
-                } else if (cacheEntry.name != null) {
-                    Log.d(TAG, "Contact lookup done. Special contact type.");
                 } else {
                     Log.d(TAG, "Contact lookup done. Local contact not found and"
                             + " no remote lookup service available.");
@@ -197,9 +198,9 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
     class PhoneNumberServiceListener implements PhoneNumberService.NumberLookupListener,
                                      PhoneNumberService.ImageLookupListener {
-        private final int mCallId;
+        private final String mCallId;
 
-        PhoneNumberServiceListener(int callId) {
+        PhoneNumberServiceListener(String callId) {
             mCallId = callId;
         }
 
@@ -238,7 +239,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             // If no image and it's a business, switch to using the default business avatar.
             if (info.getImageUrl() == null && info.isBusiness()) {
                 Log.d(TAG, "Business has no image. Using default.");
-                entry.photo = mContext.getResources().getDrawable(R.drawable.business_unknown);
+                entry.photo = mContext.getResources().getDrawable(R.drawable.img_business);
             }
 
             // Add the contact info to the cache.
@@ -254,8 +255,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
         @Override
         public void onImageFetchComplete(Bitmap bitmap) {
-            onImageLoadComplete(TOKEN_UPDATE_PHOTO_FOR_CALL_STATE, null,
-                    bitmap, (Integer) mCallId);
+            onImageLoadComplete(TOKEN_UPDATE_PHOTO_FOR_CALL_STATE, null, bitmap, mCallId);
         }
     }
 
@@ -269,7 +269,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         // TODO: may be nice to update the image view again once the newer one
         // is available on contacts database.
 
-        final int callId = (Integer) cookie;
+        final String callId = (String) cookie;
         final ContactCacheEntry entry = mInfoMap.get(callId);
 
         if (entry == null) {
@@ -303,7 +303,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         mCallBacks.clear();
     }
 
-    private ContactCacheEntry buildEntry(Context context, int callId,
+    private ContactCacheEntry buildEntry(Context context, String callId,
             CallerInfo info, int presentation, boolean isIncoming) {
         // The actual strings we're going to display onscreen:
         Drawable photo = null;
@@ -318,29 +318,31 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             if (info.cachedPhoto != null) {
                 photo = info.cachedPhoto;
             } else {
-                photo = context.getResources().getDrawable(R.drawable.picture_unknown);
+                photo = context.getResources().getDrawable(R.drawable.img_no_image);
+                photo.setAutoMirrored(true);
             }
-        } else if (info.person_id == 0) {
-            photo = context.getResources().getDrawable(R.drawable.picture_unknown);
+        } else if (info.contactDisplayPhotoUri == null) {
+            photo = context.getResources().getDrawable(R.drawable.img_no_image);
+            photo.setAutoMirrored(true);
         } else {
-            Uri personUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, info.person_id);
-            Log.d(TAG, "- got personUri: '" + personUri + "', based on info.person_id: " +
-                    info.person_id);
+            cce.displayPhotoUri = info.contactDisplayPhotoUri;
+        }
 
-            if (personUri == null) {
-                Log.v(TAG, "personUri is null. Just use unknown picture.");
-                photo = context.getResources().getDrawable(R.drawable.picture_unknown);
-            } else {
-                cce.personUri = personUri;
-            }
+        if (info.lookupKeyOrNull == null || info.contactIdOrZero == 0) {
+            Log.v(TAG, "lookup key is null or contact ID is 0. Don't create a lookup uri.");
+            cce.lookupUri = null;
+        } else {
+            cce.lookupUri = Contacts.getLookupUri(info.contactIdOrZero, info.lookupKeyOrNull);
         }
 
         cce.photo = photo;
+        cce.lookupKey = info.lookupKeyOrNull;
+
         return cce;
     }
 
     /**
-     * Populate a cache entry from a caller identification (which got converted into a caller info).
+     * Populate a cache entry from a call (which got converted into a caller info).
      */
     public static void populateCacheEntry(Context context, CallerInfo info, ContactCacheEntry cce,
             int presentation, boolean isIncoming) {
@@ -376,7 +378,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             String number = info.phoneNumber;
 
             if (!TextUtils.isEmpty(number)) {
-                isSipCall = PhoneNumberUtils.isUriNumber(number);
+                isSipCall = PhoneNumberHelper.isUriNumber(number);
                 if (number.startsWith("sip:")) {
                     number = number.substring(4);
                 }
@@ -393,7 +395,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     // (or potentially some other default based on the presentation.)
                     displayName = getPresentationString(context, presentation);
                     Log.d(TAG, "  ==> no name *or* number! displayName = " + displayName);
-                } else if (presentation != Call.PRESENTATION_ALLOWED) {
+                } else if (presentation != TelecomManager.PRESENTATION_ALLOWED) {
                     // This case should never happen since the network should never send a phone #
                     // AND a restricted presentation. However we leave it here in case of weird
                     // network behavior
@@ -424,13 +426,13 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     }
 
                     Log.d(TAG, "  ==>  no name; falling back to number:"
-                            + " displayNumber '" + displayNumber
+                            + " displayNumber '" + Log.pii(displayNumber)
                             + "', displayLocation '" + displayLocation + "'");
                 }
             } else {
                 // We do have a valid "name" in the CallerInfo. Display that
                 // in the "name" slot, and the phone number in the "number" slot.
-                if (presentation != Call.PRESENTATION_ALLOWED) {
+                if (presentation != TelecomManager.PRESENTATION_ALLOWED) {
                     // This case should never happen since the network should never send a name
                     // AND a restricted presentation. However we leave it here in case of weird
                     // network behavior
@@ -456,7 +458,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
     /**
      * Sends the updated information to call the callbacks for the entry.
      */
-    private void sendInfoNotifications(int callId, ContactCacheEntry entry) {
+    private void sendInfoNotifications(String callId, ContactCacheEntry entry) {
         final Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
         if (callBacks != null) {
             for (ContactInfoCacheCallback callBack : callBacks) {
@@ -465,7 +467,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         }
     }
 
-    private void sendImageNotifications(int callId, ContactCacheEntry entry) {
+    private void sendImageNotifications(String callId, ContactCacheEntry entry) {
         final Set<ContactInfoCacheCallback> callBacks = mCallBacks.get(callId);
         if (callBacks != null && entry.photo != null) {
             for (ContactInfoCacheCallback callBack : callBacks) {
@@ -474,7 +476,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         }
     }
 
-    private void clearCallbacks(int callId) {
+    private void clearCallbacks(String callId) {
         mCallBacks.remove(callId);
     }
 
@@ -483,9 +485,9 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
      */
     private static String getPresentationString(Context context, int presentation) {
         String name = context.getString(R.string.unknown);
-        if (presentation == Call.PRESENTATION_RESTRICTED) {
+        if (presentation == TelecomManager.PRESENTATION_RESTRICTED) {
             name = context.getString(R.string.private_num);
-        } else if (presentation == Call.PRESENTATION_PAYPHONE) {
+        } else if (presentation == TelecomManager.PRESENTATION_PAYPHONE) {
             name = context.getString(R.string.payphone);
         }
         return name;
@@ -495,8 +497,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
      * Callback interface for the contact query.
      */
     public interface ContactInfoCacheCallback {
-        public void onContactInfoComplete(int callId, ContactCacheEntry entry);
-        public void onImageLoadComplete(int callId, ContactCacheEntry entry);
+        public void onContactInfoComplete(String callId, ContactCacheEntry entry);
+        public void onImageLoadComplete(String callId, ContactCacheEntry entry);
     }
 
     public static class ContactCacheEntry {
@@ -506,7 +508,12 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         public String label;
         public Drawable photo;
         public boolean isSipCall;
-        public Uri personUri; // Used for local photo load
+        /** This will be used for the "view" notification. */
+        public Uri contactUri;
+        /** Either a display photo or a thumbnail URI. */
+        public Uri displayPhotoUri;
+        public Uri lookupUri; // Sent to NotificationMananger
+        public String lookupKey;
 
         @Override
         public String toString() {
@@ -517,6 +524,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     .add("label", label)
                     .add("photo", photo)
                     .add("isSipCall", isSipCall)
+                    .add("contactUri", contactUri)
+                    .add("displayPhotoUri", displayPhotoUri)
                     .toString();
         }
     }

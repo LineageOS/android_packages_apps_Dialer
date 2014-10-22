@@ -16,26 +16,49 @@
 
 package com.android.incallui;
 
-import com.google.android.collect.Lists;
+import com.google.common.collect.Lists;
 
-import com.android.services.telephony.common.AudioMode;
+import android.telecom.AudioState;
+import android.telecom.Phone;
 
 import java.util.List;
-
 
 /**
  * Proxy class for getting and setting the audio mode.
  */
-/* package */ class AudioModeProvider {
+/* package */ class AudioModeProvider implements InCallPhoneListener {
+
+    static final int AUDIO_MODE_INVALID = 0;
 
     private static AudioModeProvider sAudioModeProvider = new AudioModeProvider();
-    private int mAudioMode = AudioMode.EARPIECE;
+    private int mAudioMode = AudioState.ROUTE_EARPIECE;
     private boolean mMuted = false;
-    private int mSupportedModes = AudioMode.ALL_MODES;
+    private int mSupportedModes = AudioState.ROUTE_ALL;
     private final List<AudioModeListener> mListeners = Lists.newArrayList();
+    private Phone mPhone;
+
+    private Phone.Listener mPhoneListener = new Phone.Listener() {
+        @Override
+        public void onAudioStateChanged(Phone phone, AudioState audioState) {
+            onAudioModeChange(audioState.route, audioState.isMuted);
+            onSupportedAudioModeChange(audioState.supportedRouteMask);
+        }
+    };
 
     public static AudioModeProvider getInstance() {
         return sAudioModeProvider;
+    }
+
+    @Override
+    public void setPhone(Phone phone) {
+        mPhone = phone;
+        mPhone.addListener(mPhoneListener);
+    }
+
+    @Override
+    public void clearPhone() {
+        mPhone.removeListener(mPhoneListener);
+        mPhone = null;
     }
 
     public void onAudioModeChange(int newMode, boolean muted) {

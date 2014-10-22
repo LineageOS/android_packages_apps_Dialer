@@ -19,44 +19,12 @@
     android:id="@+id/dtmf_twelve_key_dialer_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginTop="1dip" >
+    android:orientation="vertical">
 
     <view class="com.android.incallui.DialpadFragment$HoverIgnoringLinearLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_dialpad">
-
-
-        <!-- Display of the digits you've typed so far.
-             This widget appears completely non-interactive to the user: you
-             can't edit or "hit backspace" since these are DTMF tones you've
-             already sent over the network.  But it's still an EditText rather
-             than a TextView because it needs to receive key events from a
-             hard keyboard, if present (see mDialerKeyListener). -->
-        <EditText
-            android:id="@+id/dtmfDialerField"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:singleLine="true"
-            android:scrollHorizontally="true"
-            android:gravity="center"
-            android:freezesText="true"
-            android:background="@color/background_dialpad"
-            android:fontFamily="sans-serif-light"
-            android:textSize="@dimen/dialpad_digits_text_size"
-            android:textColor="@color/dialpad_digits_text_color"
-            android:focusableInTouchMode="false"
-            android:clickable="false"/>
-
-        <include layout="@layout/dialpad_incall"/>
+        android:layout_height="match_parent" >
+        <include layout="@layout/dialpad_view"/>
     </view>
 </view>

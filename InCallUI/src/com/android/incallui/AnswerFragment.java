@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -33,14 +34,22 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  */
 public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresenter.AnswerUi>
         implements GlowPadWrapper.AnswerListener, AnswerPresenter.AnswerUi {
+
+    public static final int TARGET_SET_FOR_AUDIO_WITHOUT_SMS = 0;
+    public static final int TARGET_SET_FOR_AUDIO_WITH_SMS = 1;
+    public static final int TARGET_SET_FOR_VIDEO_WITHOUT_SMS = 2;
+    public static final int TARGET_SET_FOR_VIDEO_WITH_SMS = 3;
+    public static final int TARGET_SET_FOR_VIDEO_UPGRADE_REQUEST = 4;
 
     /**
      * The popup showing the list of canned responses.
@@ -56,7 +65,9 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
      */
     private AlertDialog mCustomMessagePopup = null;
 
-    private ArrayAdapter<String> mTextResponsesAdapter = null;
+    private ArrayAdapter<String> mSmsResponsesAdapter;
+
+    private final List<String> mSmsResponses = new ArrayList<>();
 
     private GlowPadWrapper mGlowpad;
 
@@ -108,53 +119,92 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
         }
     }
 
+    /**
+     * Sets targets on the glowpad according to target set identified by the parameter.
+     * @param targetSet Integer identifying the set of targets to use.
+     */
     @Override
-    public void showTextButton(boolean show) {
-        final int targetResourceId = show
-                ? R.array.incoming_call_widget_3way_targets
-                : R.array.incoming_call_widget_2way_targets;
+    public void showTargets(int targetSet) {
+        final int targetResourceId;
+        final int targetDescriptionsResourceId;
+        final int directionDescriptionsResourceId;
+        final int handleDrawableResourceId;
+
+        switch (targetSet) {
+            case TARGET_SET_FOR_AUDIO_WITH_SMS:
+                targetResourceId = R.array.incoming_call_widget_audio_with_sms_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_audio_with_sms_target_descriptions;
+                directionDescriptionsResourceId =
+                        R.array.incoming_call_widget_audio_with_sms_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_audio_handle;
+                break;
+            case TARGET_SET_FOR_VIDEO_WITHOUT_SMS:
+                targetResourceId = R.array.incoming_call_widget_video_without_sms_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_without_sms_target_descriptions;
+                directionDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_without_sms_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_video_handle;
+                break;
+            case TARGET_SET_FOR_VIDEO_WITH_SMS:
+                targetResourceId = R.array.incoming_call_widget_video_with_sms_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_with_sms_target_descriptions;
+                directionDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_with_sms_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_video_handle;
+                break;
+            case TARGET_SET_FOR_VIDEO_UPGRADE_REQUEST:
+                targetResourceId = R.array.incoming_call_widget_video_upgrade_request_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_upgrade_request_target_descriptions;
+                directionDescriptionsResourceId = R.array
+                        .incoming_call_widget_video_upgrade_request_target_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_video_handle;
+                break;
+            case TARGET_SET_FOR_AUDIO_WITHOUT_SMS:
+            default:
+                targetResourceId = R.array.incoming_call_widget_audio_without_sms_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_audio_without_sms_target_descriptions;
+                directionDescriptionsResourceId =
+                        R.array.incoming_call_widget_audio_without_sms_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_audio_handle;
+                break;
+        }
 
         if (targetResourceId != mGlowpad.getTargetResourceId()) {
-            if (show) {
-                // Answer, Decline, and Respond via SMS.
-                mGlowpad.setTargetResources(targetResourceId);
-                mGlowpad.setTargetDescriptionsResourceId(
-                        R.array.incoming_call_widget_3way_target_descriptions);
-                mGlowpad.setDirectionDescriptionsResourceId(
-                        R.array.incoming_call_widget_3way_direction_descriptions);
-            } else {
-                // Answer or Decline.
-                mGlowpad.setTargetResources(targetResourceId);
-                mGlowpad.setTargetDescriptionsResourceId(
-                        R.array.incoming_call_widget_2way_target_descriptions);
-                mGlowpad.setDirectionDescriptionsResourceId(
-                        R.array.incoming_call_widget_2way_direction_descriptions);
-            }
-
+            mGlowpad.setTargetResources(targetResourceId);
+            mGlowpad.setTargetDescriptionsResourceId(targetDescriptionsResourceId);
+            mGlowpad.setDirectionDescriptionsResourceId(directionDescriptionsResourceId);
+            mGlowpad.setHandleDrawable(handleDrawableResourceId);
             mGlowpad.reset(false);
         }
     }
 
     @Override
     public void showMessageDialog() {
-        final ListView lv = new ListView(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        Preconditions.checkNotNull(mTextResponsesAdapter);
-        lv.setAdapter(mTextResponsesAdapter);
+        mSmsResponsesAdapter = new ArrayAdapter<>(builder.getContext(),
+                android.R.layout.simple_list_item_1, android.R.id.text1, mSmsResponses);
+
+        final ListView lv = new ListView(getActivity());
+        lv.setAdapter(mSmsResponsesAdapter);
         lv.setOnItemClickListener(new RespondViaSmsItemClickListener());
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setCancelable(
-                true).setView(lv);
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialogInterface) {
-                if (mGlowpad != null) {
-                    mGlowpad.startPing();
-                }
-                dismissCannedResponsePopup();
-                getPresenter().onDismissDialog();
-            }
-        });
+        builder.setCancelable(true).setView(lv).setOnCancelListener(
+                new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        if (mGlowpad != null) {
+                            mGlowpad.startPing();
+                        }
+                        dismissCannedResponsePopup();
+                        getPresenter().onDismissDialog();
+                    }
+                });
         mCannedResponsePopup = builder.create();
         mCannedResponsePopup.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         mCannedResponsePopup.show();
@@ -216,9 +266,9 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
      */
     public void showCustomMessageDialog() {
         // Create an alert dialog containing an EditText
-        final EditText et = new EditText(getActivity());
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setCancelable(
-                true).setView(et)
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final EditText et = new EditText(builder.getContext());
+        builder.setCancelable(true).setView(et)
                 .setPositiveButton(R.string.custom_message_send,
                         new DialogInterface.OnClickListener() {
                     @Override
@@ -271,18 +321,24 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     }
 
     @Override
-    public void configureMessageDialog(ArrayList<String> textResponses) {
-        final ArrayList<String> textResponsesForDisplay = new ArrayList<String>(textResponses);
-
-        textResponsesForDisplay.add(getResources().getString(
+    public void configureMessageDialog(List<String> textResponses) {
+        mSmsResponses.clear();
+        mSmsResponses.addAll(textResponses);
+        mSmsResponses.add(getResources().getString(
                 R.string.respond_via_sms_custom_message));
-        mTextResponsesAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, textResponsesForDisplay);
+        if (mSmsResponsesAdapter != null) {
+            mSmsResponsesAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
-    public void onAnswer() {
-        getPresenter().onAnswer();
+    public Context getContext() {
+        return getActivity();
+    }
+
+    @Override
+    public void onAnswer(int videoState, Context context) {
+        getPresenter().onAnswer(videoState, context);
     }
 
     @Override
