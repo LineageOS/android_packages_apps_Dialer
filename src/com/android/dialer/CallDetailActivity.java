@@ -737,6 +737,8 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
         menu.findItem(R.id.menu_edit_number_before_call).setVisible(mHasEditNumberBeforeCallOption);
         menu.findItem(R.id.menu_trash).setVisible(mHasTrashOption);
 
+        menu.findItem(R.id.menu_video_call).setVisible(CallUtil.isCSVTEnabled());
+
         menu.findItem(R.id.menu_ip_call_by_slot1).setVisible(mHasSub1IpCallOption);
         menu.findItem(R.id.menu_ip_call_by_slot2).setVisible(mHasSub2IpCallOption);
 
@@ -752,6 +754,14 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
         }
 
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    public void onMenuVideoCall(MenuItem menuItem) {
+        if (CallUtil.isCSVTEnabled()) {
+            startActivity(CallUtil.getCSVTCallIntent(mNumber));
+        } else if (false) {
+            //add support for ims video call;
+        }
     }
 
     public void onMenuIpCallBySlot1(MenuItem menuItem) {

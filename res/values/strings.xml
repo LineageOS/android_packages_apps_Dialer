@@ -354,6 +354,7 @@
     <string name="menu_show_all_calls">Show all calls</string>
 
     <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
+    <string name="video_call">Video call</string>
     <string name="add_contact">Add to contacts</string>
     <string name="add_2sec_pause">Add 2-sec pause</string>
     <string name="add_wait">Add wait</string>

@@ -928,6 +928,9 @@ public class DialpadFragment extends AnalyticsFragment
                     ipCallBySlot2.setVisible(false);
                 }
 
+                final MenuItem VideoCallOption = menu.findItem(R.id.menu_video_call);
+                VideoCallOption.setVisible(CallUtil.isCSVTEnabled());
+
                 boolean enable = !isDigitsEmpty();
                 for (int i = 0; i < menu.size(); i++) {
                     menu.getItem(i).setEnabled(enable);
@@ -1664,6 +1667,13 @@ public class DialpadFragment extends AnalyticsFragment
             case R.id.menu_ip_call_by_slot2:
                 ipCallBySlot(PhoneConstants.SUB2);
                 return true;
+            case R.id.menu_video_call:
+                final String number = mDigits.getText().toString();
+                if (CallUtil.isCSVTEnabled()) {
+                    getActivity().startActivity(CallUtil.getCSVTCallIntent(number));
+                } else if (false) {
+                    //add support for ims video call;
+                }
             default:
                 return false;
         }

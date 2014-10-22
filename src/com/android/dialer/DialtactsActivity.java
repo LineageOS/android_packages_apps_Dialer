@@ -1202,6 +1202,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall) {
+        if (isVideoCall && CallUtil.isCSVTEnabled()){
+            this.startActivity(CallUtil.getCSVTCallIntent(phoneNumber));
+            mClearSearchOnPause = true;
+            return;
+        }
         Intent intent = isVideoCall ?
                 CallUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
                 CallUtil.getCallIntent(phoneNumber, getCallOrigin());
