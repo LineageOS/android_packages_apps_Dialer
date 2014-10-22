@@ -15,6 +15,12 @@
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/menu_video_call"
+        android:showAsAction="withText"
+        android:title="@string/video_call"
+        android:onClick="onMenuVideoCall"
+    />
+    <item
         android:id="@+id/menu_ip_call_by_slot1"
         android:showAsAction="withText"
         android:onClick="onMenuIpCallBySlot1"
