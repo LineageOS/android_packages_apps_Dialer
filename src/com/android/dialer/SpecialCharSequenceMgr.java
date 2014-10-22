@@ -39,6 +39,9 @@ import android.widget.Toast;
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Helper class to listen for some magic character sequences
  * that are handled specially by the dialer.
@@ -80,20 +83,10 @@ public class SpecialCharSequenceMgr {
     }
 
     public static boolean handleChars(Context context, String input, EditText textField) {
-        return handleChars(context, input, false, textField);
-    }
-
-    static boolean handleChars(Context context, String input) {
-        return handleChars(context, input, false, null);
-    }
-
-    static boolean handleChars(Context context, String input, boolean useSystemWindow,
-            EditText textField) {
-
         //get rid of the separators so that the string gets parsed correctly
         String dialString = PhoneNumberUtils.stripSeparators(input);
 
-        if (handleIMEIDisplay(context, dialString, useSystemWindow)
+        if (handleDeviceIdDisplay(context, dialString)
                 || handleRegulatoryInfoDisplay(context, dialString)
                 || handlePinEntry(context, dialString)
                 || handleAdnEntry(context, dialString, textField)
@@ -233,20 +226,30 @@ public class SpecialCharSequenceMgr {
         return false;
     }
 
-    static boolean handleIMEIDisplay(Context context, String input, boolean useSystemWindow) {
+
+    // TODO: Use TelephonyCapabilities.getDeviceIdLabel() to get the device id label instead of a
+    // hard-coded string.
+    static boolean handleDeviceIdDisplay(Context context, String input) {
         TelephonyManager telephonyManager =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        if (telephonyManager != null && input.equals(MMI_IMEI_DISPLAY)) {
-            int phoneType = telephonyManager.getPhoneType();
-            if (phoneType == TelephonyManager.PHONE_TYPE_GSM) {
-                showIMEIPanel(context, useSystemWindow, telephonyManager);
-                return true;
-            } else if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
-                showMEIDPanel(context, useSystemWindow, telephonyManager);
-                return true;
-            }
-        }
 
+        if (telephonyManager != null && input.equals(MMI_IMEI_DISPLAY)) {
+            int labelResId = (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM) ?
+                    R.string.imei : R.string.meid;
+
+            List<String> deviceIds = new ArrayList<String>();
+            for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
+                deviceIds.add(telephonyManager.getDeviceId(slot));
+            }
+
+            AlertDialog alert = new AlertDialog.Builder(context)
+                    .setTitle(labelResId)
+                    .setItems(deviceIds.toArray(new String[deviceIds.size()]), null)
+                    .setPositiveButton(R.string.ok, null)
+                    .setCancelable(false)
+                    .show();
+            return true;
+        }
         return false;
     }
 
@@ -262,36 +265,6 @@ public class SpecialCharSequenceMgr {
             return true;
         }
         return false;
-    }
-
-    // TODO: Combine showIMEIPanel() and showMEIDPanel() into a single
-    // generic "showDeviceIdPanel()" method, like in the apps/Phone
-    // version of SpecialCharSequenceMgr.java.  (This will require moving
-    // the phone app's TelephonyCapabilities.getDeviceIdLabel() method
-    // into the telephony framework, though.)
-
-    private static void showIMEIPanel(Context context, boolean useSystemWindow,
-            TelephonyManager telephonyManager) {
-        String imeiStr = telephonyManager.getDeviceId();
-
-        AlertDialog alert = new AlertDialog.Builder(context)
-                .setTitle(R.string.imei)
-                .setMessage(imeiStr)
-                .setPositiveButton(android.R.string.ok, null)
-                .setCancelable(false)
-                .show();
-    }
-
-    private static void showMEIDPanel(Context context, boolean useSystemWindow,
-            TelephonyManager telephonyManager) {
-        String meidStr = telephonyManager.getDeviceId();
-
-        AlertDialog alert = new AlertDialog.Builder(context)
-                .setTitle(R.string.meid)
-                .setMessage(meidStr)
-                .setPositiveButton(android.R.string.ok, null)
-                .setCancelable(false)
-                .show();
     }
 
     /*******
