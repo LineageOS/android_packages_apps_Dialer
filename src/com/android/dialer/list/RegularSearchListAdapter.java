@@ -75,8 +75,8 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
         // a dialable number, then clicking add to contact should add it as a number.
         // Otherwise, it should add it to a new contact as a name.
         changed |= setShortcutEnabled(SHORTCUT_ADD_NUMBER_TO_CONTACTS, showNumberShortcuts);
-        changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
-                showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));
+        changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL, showNumberShortcuts
+                && (CallUtil.isVideoEnabled(getContext()) || CallUtil.isCSVTEnabled()));
         if (changed) {
             notifyDataSetChanged();
         }

@@ -1019,6 +1019,17 @@ public class CallLogAdapter extends GroupingListAdapter
             views.videoCallButtonView.setVisibility(View.GONE);
         }
 
+        // if csvt is enabled, shoue video call options.
+        if (CallUtil.isCSVTEnabled() && canPlaceCallToNumber) {
+            views.videoCallButtonView.setTag(
+                    IntentProvider.getReturnCSVTCallIntentProvider(views.number));
+            views.videoCallButtonView.setVisibility(View.VISIBLE);
+            views.videoCallButtonView.setOnClickListener(mActionListener);
+        } else {
+            views.videoCallButtonView.setTag(null);
+            views.videoCallButtonView.setVisibility(View.GONE);
+        }
+
         // For voicemail calls, show the "VOICEMAIL" action button; hide otherwise.
         if (views.callType == Calls.VOICEMAIL_TYPE) {
             views.voicemailButtonView.setOnClickListener(mActionListener);
