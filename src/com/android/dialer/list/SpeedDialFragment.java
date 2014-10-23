@@ -46,9 +46,9 @@ import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
+import com.android.contacts.commonbind.analytics.AnalyticsFragment;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
-import com.android.dialerbind.analytics.AnalyticsFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;

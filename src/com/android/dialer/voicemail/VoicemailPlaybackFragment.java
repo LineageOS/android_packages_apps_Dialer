@@ -39,15 +39,14 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.android.common.io.MoreCloseables;
+import com.android.contacts.commonbind.analytics.AnalyticsFragment;
 import com.android.dialer.ProximitySensorAware;
 import com.android.dialer.R;
 import com.android.dialer.util.AsyncTaskExecutors;
-import com.android.dialerbind.analytics.AnalyticsFragment;
 import com.android.ex.variablespeed.MediaPlayerProxy;
 import com.android.ex.variablespeed.VariableSpeed;
 import com.google.common.base.Preconditions;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
