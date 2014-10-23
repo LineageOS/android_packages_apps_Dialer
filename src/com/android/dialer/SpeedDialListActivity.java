@@ -194,7 +194,7 @@ public class SpeedDialListActivity extends ListActivity
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // TODO Auto-generated method stub
-                                Intent callIntent = new Intent(Intent.ACTION_CALL_PRIVILEGED);
+                                Intent callIntent = new Intent(Intent.ACTION_CALL);
                                 callIntent.setData(Uri.fromParts("tel", numStr, null));
                                 callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(callIntent);
