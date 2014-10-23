@@ -37,7 +37,7 @@ import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
-import com.android.dialerbind.analytics.AnalyticsActivity;
+import com.android.contacts.commonbind.analytics.AnalyticsActivity;
 
 public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHandler.Listener {
     private Handler mHandler;

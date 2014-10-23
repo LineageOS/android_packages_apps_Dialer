@@ -33,7 +33,6 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.VoicemailContract.Status;
-import android.util.MutableInt;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +52,7 @@ import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.android.dialerbind.ObjectFactory;
-import com.android.dialerbind.analytics.AnalyticsListFragment;
+import com.android.contacts.commonbind.analytics.AnalyticsListFragment;
 
 import java.util.List;
 

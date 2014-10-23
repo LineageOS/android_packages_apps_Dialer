@@ -20,6 +20,7 @@ import android.widget.ListView;
 
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ViewPagerTabs;
+import com.android.contacts.commonbind.analytics.AnalyticsFragment;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapter;
@@ -31,7 +32,6 @@ import com.android.dialer.list.ShortcutCardsAdapter.SwipeableShortcutCard;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.OverlappingPaneLayout;
 import com.android.dialer.widget.OverlappingPaneLayout.PanelSlideCallbacks;
-import com.android.dialerbind.analytics.AnalyticsFragment;
 import com.android.dialerbind.ObjectFactory;
 
 import java.util.ArrayList;

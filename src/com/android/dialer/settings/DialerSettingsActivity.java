@@ -8,20 +8,19 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceManager;
-import android.preference.PreferenceActivity.Header;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.android.contacts.commonbind.analytics.AnalyticsPreferenceActivity;
+
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
-import com.android.dialerbind.analytics.AnalyticsPreferenceActivity;
 
 import java.util.List;
 
