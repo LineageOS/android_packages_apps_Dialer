@@ -120,7 +120,7 @@ public final class AccelerometerListener {
         if (x == 0.0 || y == 0.0 || z == 0.0) return;
 
         // magnitude of the acceleration vector projected onto XY plane
-        final double xy = Math.sqrt(x*x + y*y);
+        final double xy = Math.hypot(x, y);
         // compute the vertical angle
         double angle = Math.atan2(xy, z);
         // convert to degrees
