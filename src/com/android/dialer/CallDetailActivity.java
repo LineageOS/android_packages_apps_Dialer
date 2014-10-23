@@ -66,7 +66,7 @@ import com.android.dialer.voicemail.VoicemailPlaybackFragment;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
-import com.android.dialerbind.analytics.AnalyticsActivity;
+import com.android.contacts.commonbind.analytics.AnalyticsActivity;
 
 import java.util.List;
 

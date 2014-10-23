@@ -49,9 +49,9 @@ import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.Collapser;
 import com.android.contacts.common.Collapser.Collapsible;
 import com.android.contacts.common.MoreContactUtils;
+import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
-import com.android.dialer.activity.TransactionSafeActivity;
 import com.android.dialer.contact.ContactUpdateService;
 import com.android.dialer.util.DialerUtils;
 
