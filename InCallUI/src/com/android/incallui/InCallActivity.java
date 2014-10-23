@@ -528,8 +528,10 @@ public class InCallActivity extends Activity {
 
                 SelectPhoneAccountListener listener = new SelectPhoneAccountListener() {
                     @Override
-                    public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle) {
-                        InCallPresenter.getInstance().handleAccountSelection(selectedAccountHandle);
+                    public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
+                            boolean setDefault) {
+                        InCallPresenter.getInstance().handleAccountSelection(selectedAccountHandle,
+                                setDefault);
                     }
                     @Override
                     public void onDialogDismissed() {
@@ -537,7 +539,7 @@ public class InCallActivity extends Activity {
                     }
                 };
 
-                SelectPhoneAccountDialogFragment.showAccountDialog(getFragmentManager(),
+                SelectPhoneAccountDialogFragment.showAccountDialog(getFragmentManager(), true,
                         phoneAccountHandles, listener);
             } else {
                 mCallCardFragment.setVisible(true);
