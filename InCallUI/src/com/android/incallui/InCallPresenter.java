@@ -69,6 +69,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     private final List<IncomingCallListener> mIncomingCallListeners = new CopyOnWriteArrayList<>();
     private final Set<InCallDetailsListener> mDetailsListeners = Collections.newSetFromMap(
             new ConcurrentHashMap<InCallDetailsListener, Boolean>(8, 0.9f, 1));
+    private final Set<InCallUiListener> mInCallUiListeners = Collections.newSetFromMap(
+            new ConcurrentHashMap<InCallUiListener, Boolean>(8, 0.9f, 1));
     private final Set<InCallOrientationListener> mOrientationListeners = Collections.newSetFromMap(
             new ConcurrentHashMap<InCallOrientationListener, Boolean>(8, 0.9f, 1));
     private final Set<InCallEventListener> mInCallEventListeners = Collections.newSetFromMap(
@@ -624,6 +626,18 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         if (showing) {
             mIsActivityPreviouslyStarted = true;
         }
+
+        for (InCallUiListener listener : mInCallUiListeners) {
+            listener.onUiShowing(showing);
+        }
+    }
+
+    public void addInCallUiListener(InCallUiListener listener) {
+        mInCallUiListeners.add(listener);
+    }
+
+    public boolean removeInCallUiListener(InCallUiListener listener) {
+        return mInCallUiListeners.remove(listener);
     }
 
     /**
@@ -1152,5 +1166,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      */
     public interface InCallEventListener {
         public void onFullScreenVideoStateChanged(boolean isFullScreenVideo);
+    }
+
+    public interface InCallUiListener {
+        void onUiShowing(boolean showing);
     }
 }
