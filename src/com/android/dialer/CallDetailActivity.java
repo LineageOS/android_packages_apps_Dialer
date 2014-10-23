@@ -627,17 +627,19 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
         if (contactUri != null) {
             ContentResolver resolver = getContentResolver();
             Uri uri = Contacts.lookupContact(resolver, contactUri);
-            Cursor cursor = resolver.query(
-                    uri,
-                    new String[] { RawContacts.ACCOUNT_TYPE, RawContacts.ACCOUNT_NAME },
-                    null, null, null);
-            if (cursor != null && cursor.moveToFirst()) {
-                String accountType = cursor.getString(0);
-                String accountName = cursor.getString(1);
-                if (!TextUtils.isEmpty(accountName) && !TextUtils.isEmpty(accountType)) {
-                    contactAccount = new Account(accountName, accountType);
+            if (uri != null) {
+                Cursor cursor = resolver.query(
+                        uri,
+                        new String[] { RawContacts.ACCOUNT_TYPE, RawContacts.ACCOUNT_NAME },
+                        null, null, null);
+                if (cursor != null && cursor.moveToFirst()) {
+                    String accountType = cursor.getString(0);
+                    String accountName = cursor.getString(1);
+                    if (!TextUtils.isEmpty(accountName) && !TextUtils.isEmpty(accountType)) {
+                        contactAccount = new Account(accountName, accountType);
+                    }
+                    cursor.close();
                 }
-                cursor.close();
             }
         }
 
