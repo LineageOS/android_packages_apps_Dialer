@@ -20,8 +20,6 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 
 import com.android.contacts.common.list.PhoneNumberListAdapter.PhoneQuery;
