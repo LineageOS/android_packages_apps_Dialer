@@ -19,6 +19,10 @@
         android:title="@string/video_call"
         android:showAsAction="withText" />
     <item
+        android:id="@+id/menu_add_to_4g_conference_call"
+        android:title="@string/menu_add_to_4g_conference_call"
+        android:showAsAction="withText" />
+    <item
         android:id="@+id/menu_ip_call_by_slot1"
         android:showAsAction="withText" />
     <item
