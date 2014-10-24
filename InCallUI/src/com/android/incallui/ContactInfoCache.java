@@ -157,12 +157,10 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         }
 
         ContactCacheEntry cacheEntry = mInfoMap.get(callId);
-        // Rebuild the entry from the new data if:
-        // 1) This is NOT the asynchronous local lookup (IOW, this is the first pass)
-        // 2) The local lookup was done and the contact exists
-        // 3) The existing cached entry is empty (no name).
-        if (!didLocalLookup || callerInfo.contactExists ||
-                (cacheEntry != null && TextUtils.isEmpty(cacheEntry.name))) {
+        // Ensure we always have a cacheEntry. Replace the existing entry if
+        // it has no name or if we found a local contact.
+        if (cacheEntry == null || TextUtils.isEmpty(cacheEntry.name) ||
+                callerInfo.contactExists) {
             cacheEntry = buildEntry(mContext, callId, callerInfo, presentationMode, isIncoming);
             mInfoMap.put(callId, cacheEntry);
         }
@@ -170,7 +168,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         sendInfoNotifications(callId, cacheEntry);
 
         if (didLocalLookup) {
-            // Before issuing a request for more data from other services, We only check that the
+            // Before issuing a request for more data from other services, we only check that the
             // contact wasn't found in the local DB.  We don't check the if the cache entry already
             // has a name because we allow overriding cnap data with data from other services.
             if (!callerInfo.contactExists && mPhoneNumberService != null) {
