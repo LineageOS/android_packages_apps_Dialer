@@ -35,6 +35,7 @@
     android:layout_width="match_parent"
     android:layout_margin="0dp"
     android:padding="0dp"
+    android:background="@color/button_background_color"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:animateLayoutChanges="true"
@@ -46,7 +47,6 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/button_cluster_horizontal_padding"
         android:paddingEnd="@dimen/button_cluster_horizontal_padding"
-        android:background="@color/button_background_color"
         android:gravity="bottom|center_horizontal">
 
         <!-- This row only ever shows either 4 or 5 buttons. This may depend on whether the device
