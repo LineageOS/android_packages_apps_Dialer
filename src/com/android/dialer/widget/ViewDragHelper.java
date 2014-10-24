@@ -1548,6 +1548,12 @@ public class ViewDragHelper {
      *         deltas that it consumed.
      */
     public void processNestedScroll(View target, int dx, int dy, int[] consumed) {
+        if (mCapturedView == null) {
+            // This is safe because consumed array is null when called from
+            // onNestedScroll, and pre-initialized to {0, 0} when called from
+            // onNestedPreScroll.
+            return;
+        }
         final int targetX = mCapturedView.getLeft() + dx;
         final int targetY = mCapturedView.getTop() + dy;
         dragTo(targetX, targetY, dx, dy);
