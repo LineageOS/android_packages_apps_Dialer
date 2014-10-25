@@ -32,7 +32,6 @@ import android.widget.TextView;
 
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapter;
-import com.android.dialer.calllog.CallLogListItemView;
 import com.android.dialer.calllog.CallLogNotificationsHelper;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.list.SwipeHelper.OnItemGestureListener;
@@ -266,8 +265,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
                     R.dimen.recent_call_log_item_translation_z);
             view.setTranslationZ(mPreviousTranslationZ);
 
-            final CallLogListItemView callLogItem =
-                    (CallLogListItemView) view.findViewById(R.id.call_log_list_item);
+            final ViewGroup callLogItem = (ViewGroup) view.findViewById(R.id.call_log_list_item);
             // Reset the internal call log item view if it is being recycled
             callLogItem.setTranslationX(0);
             callLogItem.setTranslationY(0);

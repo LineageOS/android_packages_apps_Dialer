@@ -21,6 +21,7 @@ import android.database.MatrixCursor;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.google.common.collect.Lists;
 
@@ -68,7 +69,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mCursor = new MatrixCursor(CallLogQuery._PROJECTION);
         mCursor.moveToFirst();
         // The views into which to store the data.
-        mView = new CallLogListItemView(getContext());
+        mView = new LinearLayout(getContext());
         mView.setTag(CallLogListItemViews.createForTest(getContext()));
     }
 
