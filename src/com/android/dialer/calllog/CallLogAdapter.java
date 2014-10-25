@@ -74,10 +74,10 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Interface used to inform a parent UI element that a list item has been expanded. */
     public interface CallItemExpandedListener {
         /**
-         * @param view The {@link CallLogListItemView} that represents the item that was clicked
+         * @param view The {@link View} that represents the item that was clicked
          *         on.
          */
-        public void onItemExpanded(CallLogListItemView view);
+        public void onItemExpanded(View view);
 
         /**
          * Retrieves the call log view for the specified call Id.  If the view is not currently
@@ -86,7 +86,7 @@ public class CallLogAdapter extends GroupingListAdapter
          * @param callId The call Id.
          * @return The call log view.
          */
-        public CallLogListItemView getViewForCallId(long callId);
+        public View getViewForCallId(long callId);
     }
 
     /** Interface used to initiate a refresh of the content. */
@@ -286,7 +286,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private final View.OnClickListener mExpandCollapseListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            final CallLogListItemView callLogItem = (CallLogListItemView) v.getParent().getParent();
+            final View callLogItem = (View) v.getParent().getParent();
             handleRowExpanded(callLogItem, true /* animate */, false /* forceExpand */);
         }
     };
@@ -296,7 +296,7 @@ public class CallLogAdapter extends GroupingListAdapter
         public boolean onRequestSendAccessibilityEvent(ViewGroup host, View child,
                 AccessibilityEvent event) {
             if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
-                handleRowExpanded((CallLogListItemView) host, false /* animate */,
+                handleRowExpanded(host, false /* animate */,
                         true /* forceExpand */);
             }
             return super.onRequestSendAccessibilityEvent(host, child, event);
@@ -588,8 +588,7 @@ public class CallLogAdapter extends GroupingListAdapter
     @Override
     protected View newChildView(Context context, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        CallLogListItemView view =
-                (CallLogListItemView) inflater.inflate(R.layout.call_log_list_item, parent, false);
+        View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
 
         // Get the views to bind to and cache them.
         CallLogListItemViews views = CallLogListItemViews.fromView(view);
@@ -624,14 +623,13 @@ public class CallLogAdapter extends GroupingListAdapter
     /**
      * Binds the views in the entry to the data in the call log.
      *
-     * @param view the view corresponding to this entry
+     * @param callLogItemView the view corresponding to this entry
      * @param c the cursor pointing to the entry in the call log
      * @param count the number of entries in the current item, greater than 1 if it is a group
      */
-    private void bindView(View view, Cursor c, int count) {
-        view.setAccessibilityDelegate(mAccessibilityDelegate);
-        final CallLogListItemView callLogItemView = (CallLogListItemView) view;
-        final CallLogListItemViews views = (CallLogListItemViews) view.getTag();
+    private void bindView(View callLogItemView, Cursor c, int count) {
+        callLogItemView.setAccessibilityDelegate(mAccessibilityDelegate);
+        final CallLogListItemViews views = (CallLogListItemViews) callLogItemView.getTag();
 
         // Default case: an item in the call log.
         views.primaryActionView.setVisibility(View.VISIBLE);
@@ -813,11 +811,11 @@ public class CallLogAdapter extends GroupingListAdapter
 
         // Listen for the first draw
         if (mViewTreeObserver == null) {
-            mViewTreeObserver = view.getViewTreeObserver();
+            mViewTreeObserver = callLogItemView.getViewTreeObserver();
             mViewTreeObserver.addOnPreDrawListener(this);
         }
 
-        bindBadge(view, info, details, callType);
+        bindBadge(callLogItemView, info, details, callType);
     }
 
     /**
@@ -886,12 +884,13 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     /**
-     * Expands or collapses the view containing the CALLBACK, VOICEMAIL and DETAILS action buttons.
+     * Expands or collapses the view containing the CALLBACK/REDIAL, VOICEMAIL and DETAILS action
+     * buttons.
      *
      * @param callLogItem The call log entry parent view.
      * @param isExpanded The new expansion state of the view.
      */
-    private void expandOrCollapseActions(CallLogListItemView callLogItem, boolean isExpanded) {
+    private void expandOrCollapseActions(View callLogItem, boolean isExpanded) {
         final CallLogListItemViews views = (CallLogListItemViews)callLogItem.getTag();
 
         expandVoicemailTranscriptionView(views, isExpanded);
@@ -1386,7 +1385,7 @@ public class CallLogAdapter extends GroupingListAdapter
      * @param forceExpand Whether or not to force the call log row into an expanded state regardless
      *        of its previous state
      */
-    private void handleRowExpanded(CallLogListItemView view, boolean animate, boolean forceExpand) {
+    private void handleRowExpanded(View view, boolean animate, boolean forceExpand) {
         final CallLogListItemViews views = (CallLogListItemViews) view.getTag();
 
         if (forceExpand && isExpanded(views.rowId)) {
@@ -1407,7 +1406,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
             // Animate the collapse of the previous item if it is still visible on screen.
             if (mPreviouslyExpanded != NONE_EXPANDED) {
-                CallLogListItemView previousItem = mCallItemExpandedListener.getViewForCallId(
+                View previousItem = mCallItemExpandedListener.getViewForCallId(
                         mPreviouslyExpanded);
 
                 if (previousItem != null) {
