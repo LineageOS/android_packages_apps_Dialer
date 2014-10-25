@@ -3,11 +3,15 @@ package com.android.dialer.settings;
 import com.google.common.collect.Lists;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceActivity.Header;
+import android.telecom.TelecomManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -45,13 +49,28 @@ public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
         generalSettingsHeader.fragment = GeneralSettingsFragment.class.getName();
         target.add(generalSettingsHeader);
 
-        // Only add the call settings header if the current user is the primary/owner user.
+        // Only show call setting menus if the current user is the primary/owner user.
         if (isPrimaryUser()) {
-            final Header callSettingHeader = new Header();
-            callSettingHeader.titleRes = R.string.call_settings_label;
-            callSettingHeader.summaryRes = R.string.call_settings_description;
-            callSettingHeader.intent = DialtactsActivity.getCallSettingsIntent();
-            target.add(callSettingHeader);
+            final TelephonyManager telephonyManager =
+                    (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+            // Show "Call Settings" if there is one SIM and "Phone Accounts" if there are more.
+            if (telephonyManager.getPhoneCount() <= 1) {
+                final Header callSettingsHeader = new Header();
+                callSettingsHeader.titleRes = R.string.call_settings_label;
+                callSettingsHeader.summaryRes = R.string.call_settings_description;
+                callSettingsHeader.intent = DialtactsActivity.getCallSettingsIntent();
+                target.add(callSettingsHeader);
+            } else {
+                final Header phoneAccountSettingsHeader = new Header();
+                final Intent phoneAccountSettingsIntent =
+                        new Intent(TelecomManager.ACTION_CHANGE_PHONE_ACCOUNTS);
+                phoneAccountSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                phoneAccountSettingsHeader.titleRes = R.string.phone_account_settings_label;
+                phoneAccountSettingsHeader.summaryRes = R.string.phone_account_settings_description;
+                phoneAccountSettingsHeader.intent = phoneAccountSettingsIntent;
+                target.add(phoneAccountSettingsHeader);
+            }
         }
     }
 
