@@ -804,10 +804,15 @@
     <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
     <string name="respond_via_sms_setting_title">Quick responses</string>
 
-    <!-- Label for the call settings section [CHAR LIMIT=30]-->
+    <!-- Label for the call settings section [CHAR LIMIT=30] -->
     <string name="call_settings_label">Call settings</string>
 
-    <!-- Label for the call settings section description [CHAR LIMIT=80]-->
+    <!-- Label for the call settings section description [CHAR LIMIT=80] -->
     <string name="call_settings_description">Voicemail, call waiting, and others</string>
 
+    <!-- Label for the phone account settings [CHAR LIMIT=30] -->
+    <string name="phone_account_settings_label">Phone account settings</string>
+
+    <!-- Label for the phone account settings description [CHAR LIMIT=80] -->
+    <string name="phone_account_settings_description">Manage SIM and call settings</string>
 </resources>
