@@ -35,6 +35,7 @@ import com.android.contacts.common.test.mocks.MockContentProvider;
 import com.android.contacts.common.test.mocks.MockContentProvider.Query;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.interactions.PhoneNumberInteraction.PhoneItem;
+import com.android.dialer.util.TestConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -179,7 +180,7 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
         Intent intent = mContext.getIntentForStartActivity();
         assertNotNull(intent);
 
-        assertEquals(Intent.ACTION_CALL_PRIVILEGED, intent.getAction());
+        assertEquals(TestConstants.CALL_INTENT_ACTION, intent.getAction());
         assertEquals("tel:123", intent.getDataString());
     }
 
@@ -197,7 +198,7 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
         Intent intent = mContext.getIntentForStartActivity();
         assertNotNull(intent);
 
-        assertEquals(Intent.ACTION_CALL_PRIVILEGED, intent.getAction());
+        assertEquals(TestConstants.CALL_INTENT_ACTION, intent.getAction());
         assertEquals("sip:example%40example.com", intent.getDataString());
     }
 
