@@ -548,7 +548,7 @@ public class CallLogFragment extends AnalyticsListFragment
     }
 
     @Override
-    public void onItemExpanded(final CallLogListItemView view) {
+    public void onItemExpanded(final View view) {
         final int startingHeight = view.getHeight();
         final CallLogListItemViews viewHolder = (CallLogListItemViews) view.getTag();
         final ViewTreeObserver observer = getListView().getViewTreeObserver();
@@ -661,7 +661,7 @@ public class CallLogFragment extends AnalyticsListFragment
      * @return The call log view.
      */
     @Override
-    public CallLogListItemView getViewForCallId(long callId) {
+    public View getViewForCallId(long callId) {
         ListView listView = getListView();
 
         int firstPosition = listView.getFirstVisiblePosition();
@@ -673,7 +673,7 @@ public class CallLogFragment extends AnalyticsListFragment
             if (view != null) {
                 final CallLogListItemViews viewHolder = (CallLogListItemViews) view.getTag();
                 if (viewHolder != null && viewHolder.rowId == callId) {
-                    return (CallLogListItemView)view;
+                    return view;
                 }
             }
         }

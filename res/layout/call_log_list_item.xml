@@ -14,8 +14,7 @@
      limitations under the License.
 -->
 
-<view xmlns:android="http://schemas.android.com/apk/res/android"
-    class="com.android.dialer.calllog.CallLogListItemView"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/call_log_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -160,4 +159,4 @@
               android:layout="@layout/call_log_list_item_extra"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"/>
-</view>
+</LinearLayout>
