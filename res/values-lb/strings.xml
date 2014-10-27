@@ -97,7 +97,7 @@
   <string name="add_wait">Paus dobäisetzen</string>
   <string name="call_settings">Astellungen</string>
   <string name="menu_newContact">Neie Kontakt</string>
-  <string name="menu_allContacts">All Kontakter</string>
+  <string name="menu_allContacts">All d\'Kontakter</string>
   <string name="callDetailTitle">Uruffdetailer</string>
   <string name="toast_call_detail_error">Konnt d\'Detailer fir de gefroten Uruff net liesen.</string>
   <string name="dialer_useDtmfDialpad">Telefonstastatur benotzen</string>
@@ -179,8 +179,8 @@
   <string name="dialpad_7_letters">PQRS</string>
   <string name="dialpad_8_letters">TUV</string>
   <string name="dialpad_9_letters">WXYZ</string>
-  <string name="show_all_contacts_title">All Kontakter</string>
-  <string name="show_all_contacts_button_text">All Kontakter</string>
+  <string name="show_all_contacts_title">All d\'Kontakter</string>
+  <string name="show_all_contacts_button_text">All d\'Kontakter</string>
   <string name="favorite_hidden">Aus de Favoritte läschen</string>
   <string name="favorite_hidden_undo">Réckgängeg maachen</string>
   <string name="search_shortcut_call_number"><xliff:g id="number">%s</xliff:g>

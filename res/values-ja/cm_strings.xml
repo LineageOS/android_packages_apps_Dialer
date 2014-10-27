@@ -39,8 +39,8 @@
   <string name="date_qs_lastmonth">先月</string>
   <string name="date_qs_lastquarter">下四半期</string>
   <string name="date_qs_lastyear">昨年</string>
-  <string name="call_stats_date_filter">時間の範囲を調整</string>
-  <string name="call_stats_reset_filter">時間の範囲をリセット</string>
+  <string name="call_stats_date_filter">時間範囲を調整</string>
+  <string name="call_stats_reset_filter">時間範囲をリセット</string>
   <string name="call_stats_sort_by_duration">通話時間で並べ替え</string>
   <string name="call_stats_sort_by_count">通話回数で並べ替え</string>
   <string name="menu_add_to_blacklist">ブラックリストに追加</string>

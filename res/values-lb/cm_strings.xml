@@ -16,9 +16,27 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_log_stats_title">Statistiken</string>
+  <string name="callStatsDetailTitle">Detailer vun den Uruffstatistiken</string>
+  <string name="call_stats_nav_all">All</string>
+  <string name="call_stats_nav_incoming">Erakommend</string>
+  <string name="call_stats_nav_outgoing">Erausgoend</string>
   <string name="call_stats_nav_missed">Verpasst</string>
+  <string name="call_stats_incoming">Erakommend: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_outgoing">Erausgoend: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_missed">Verpasst</string>
+  <string name="call_stats_missed_percent">Verpasst: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_filter_from">Startdatum</string>
+  <string name="call_stats_filter_to">Schlussdatum</string>
+  <string name="call_stats_filter_picker_title">Zäitfënster</string>
+  <string name="date_quick_selection">Séier Auswiel</string>
+  <string name="date_qs_currentmonth">Aktuelle Mount</string>
+  <string name="date_qs_currentquarter">Aktuellt Trimester</string>
   <string name="date_qs_currentyear">Aktuellt Joer</string>
   <string name="date_qs_lastweek">Lescht Woch</string>
   <string name="date_qs_lastmonth">Leschte Mount</string>
+  <string name="date_qs_lastquarter">Lescht Trimester</string>
   <string name="date_qs_lastyear">Lescht Joer</string>
+  <string name="call_stats_date_filter">Zäitfënster ajustéieren</string>
+  <string name="menu_add_to_blacklist">Op d\'schwaarz Lëscht setzen</string>
 </resources>
