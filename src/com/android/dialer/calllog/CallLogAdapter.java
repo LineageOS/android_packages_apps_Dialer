@@ -267,6 +267,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private int mCallLogBackgroundColor;
     private int mExpandedBackgroundColor;
     private float mExpandedTranslationZ;
+    private int mPhotoSize;
 
     /** Listener for the primary or secondary actions in the list.
      *  Primary opens the call details.
@@ -365,6 +366,7 @@ public class CallLogAdapter extends GroupingListAdapter
         mCallLogBackgroundColor = resources.getColor(R.color.background_dialer_list_items);
         mExpandedBackgroundColor = resources.getColor(R.color.call_log_expanded_background_color);
         mExpandedTranslationZ = resources.getDimension(R.dimen.call_log_expanded_translation_z);
+        mPhotoSize = resources.getDimensionPixelSize(R.dimen.contact_photo_size);
 
         mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
         mPhoneNumberHelper = new PhoneNumberDisplayHelper(mContext, resources);
@@ -1233,7 +1235,7 @@ public class CallLogAdapter extends GroupingListAdapter
         views.quickContactView.setOverlay(null);
         DefaultImageRequest request = new DefaultImageRequest(displayName, identifier,
                 contactType, true /* isCircular */);
-        mContactPhotoManager.loadDirectoryPhoto(views.quickContactView, photoUri,
+        mContactPhotoManager.loadPhoto(views.quickContactView, photoUri, mPhotoSize,
                 false /* darkTheme */, true /* isCircular */, request);
     }
 
