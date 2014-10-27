@@ -65,6 +65,7 @@ import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.widget.FloatingActionButtonController;
+import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.calllog.CallLogActivity;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpad.DialpadFragment;
@@ -613,7 +614,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         mIsDialpadShown = true;
         mDialpadFragment.setAnimate(animate);
-        mDialpadFragment.sendScreenView();
+        AnalyticsUtil.sendScreenView(mDialpadFragment);
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.show(mDialpadFragment);

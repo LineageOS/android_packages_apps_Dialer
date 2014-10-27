@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,14 +18,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.android.contacts.commonbind.analytics.AnalyticsPreferenceActivity;
-
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 
 import java.util.List;
 
-public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
+public class DialerSettingsActivity extends PreferenceActivity {
 
     protected SharedPreferences mPreferences;
     private HeaderAdapter mHeaderAdapter;

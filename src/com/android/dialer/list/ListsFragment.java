@@ -20,7 +20,7 @@ import android.widget.ListView;
 
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ViewPagerTabs;
-import com.android.contacts.commonbind.analytics.AnalyticsFragment;
+import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapter;
@@ -44,7 +44,7 @@ import java.util.ArrayList;
  * ViewPager containing the lists up above the shortcut cards and pin it against the top of the
  * screen.
  */
-public class ListsFragment extends AnalyticsFragment implements CallLogQueryHandler.Listener,
+public class ListsFragment extends Fragment implements CallLogQueryHandler.Listener,
         CallLogAdapter.CallFetcher, ViewPager.OnPageChangeListener {
 
     private static final boolean DEBUG = DialtactsActivity.DEBUG;
@@ -359,11 +359,11 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
     @Override
     public void onPageSelected(int position) {
         if (position == TAB_INDEX_SPEED_DIAL && mSpeedDialFragment != null) {
-            mSpeedDialFragment.sendScreenView();
+            AnalyticsUtil.sendScreenView(mSpeedDialFragment);
         } else if (position == TAB_INDEX_RECENTS && mRecentsFragment != null) {
-            mRecentsFragment.sendScreenView();
+            AnalyticsUtil.sendScreenView(mRecentsFragment);
         } else if (position == TAB_INDEX_ALL_CONTACTS && mAllContactsFragment != null) {
-            mAllContactsFragment.sendScreenView();
+            AnalyticsUtil.sendScreenView(mAllContactsFragment);
         }
         final int count = mOnPageChangeListeners.size();
         for (int i = 0; i < count; i++) {
