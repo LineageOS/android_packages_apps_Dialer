@@ -64,7 +64,7 @@
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"Входящий видеовызов"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Новое сообщение голосовой почты"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Новое сообщение голосовой почты (<xliff:g id="COUNT">%d</xliff:g>)"</string>
-    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Набор <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Позвонить <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Номер голосовой почты неизвестен"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Сеть не найдена"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Выбранная сеть (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) недоступна."</string>
