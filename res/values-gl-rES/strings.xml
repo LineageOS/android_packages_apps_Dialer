@@ -201,4 +201,8 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respostas rápidas"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"Configuración de chamada"</string>
     <string name="call_settings_description" msgid="2756622428019213052">"Correo de voz, chamada en espera e outros"</string>
+    <!-- no translation found for phone_account_settings_label (8298076824934324281) -->
+    <skip />
+    <!-- no translation found for phone_account_settings_description (435745546649702086) -->
+    <skip />
 </resources>
