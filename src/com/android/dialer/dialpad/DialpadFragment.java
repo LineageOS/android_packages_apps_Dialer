@@ -1751,7 +1751,7 @@ public class DialpadFragment extends AnalyticsFragment
     private boolean isVoicemailAvailable() {
         boolean promptEnabled = SubscriptionManager.isVoicePromptEnabled();
         if (promptEnabled) {
-            hasVMNumber();
+            return hasVMNumber();
         } else {
             long subId = SubscriptionManager.getDefaultVoiceSubId();
             try {
