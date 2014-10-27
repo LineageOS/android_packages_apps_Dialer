@@ -130,9 +130,7 @@
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"ಡಯಲ್‌ ಮಾಡಲು ಕೀಬೋರ್ಡ್‌ ಬಳಸಿ"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"ಕರೆಯನ್ನು ಸೇರಿಸಲು ಡಯಲ್‌ ಮಾಡಿ"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> ನಿಮಿಷಗಳು <xliff:g id="SECONDS">%s</xliff:g> ಸೆಕೆಂಡುಗಳು"</string>
-    <!-- no translation found for dialog_phone_call_prohibited_message (6554711866586660441) -->
-    <!-- no translation found for dialog_phone_call_prohibited_message (4313552620858880999) -->
-    <skip />
+    <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"ಕರೆ ಮಾಡಲಾಗಲಿಲ್ಲ."</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ಧ್ವನಿಮೇಲ್‌ ಹೊಂದಿಸಲು, ಮೆನು &gt; ಸೆಟ್ಟಿಂಗ್‌ಗಳುಗೆ ಹೋಗಿ."</string>
     <!-- no translation found for dialog_voicemail_airplane_mode_message (530922773669546093) -->
     <skip />
@@ -204,4 +202,8 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ತ್ವರಿತ ಪ್ರತಿಕ್ರಿಯೆಗಳು"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"ಕರೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="call_settings_description" msgid="2756622428019213052">"ಧ್ವನಿಮೇಲ್‌, ಕರೆ ನಿರೀಕ್ಷೆ, ಹಾಗೂ ಇತರೆ"</string>
+    <!-- no translation found for phone_account_settings_label (8298076824934324281) -->
+    <skip />
+    <!-- no translation found for phone_account_settings_description (435745546649702086) -->
+    <skip />
 </resources>
