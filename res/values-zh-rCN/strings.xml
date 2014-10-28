@@ -221,4 +221,7 @@
     <string name="call_log_show_all_slots">"所有卡"</string>
     <string name="call_log_all_calls_header">"所有通话"</string>
     <string name="calllog_search_hint">"搜索通话记录"</string>
+
+    <string name="add_to_white_list">加入白名单</string>
+    <string name="add_to_black_list">加入黑名单</string>
 </resources>
