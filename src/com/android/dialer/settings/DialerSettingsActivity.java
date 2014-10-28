@@ -52,17 +52,20 @@ public class DialerSettingsActivity extends AnalyticsPreferenceActivity {
         // Only show call setting menus if the current user is the primary/owner user.
         if (isPrimaryUser()) {
             final TelephonyManager telephonyManager =
-                    (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+                    (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             // Show "Call Settings" if there is one SIM and "Phone Accounts" if there are more.
             if (telephonyManager.getPhoneCount() <= 1) {
                 final Header callSettingsHeader = new Header();
+                Intent callSettingsIntent = new Intent(TelecomManager.ACTION_SHOW_CALL_SETTINGS);
+                callSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
                 callSettingsHeader.titleRes = R.string.call_settings_label;
                 callSettingsHeader.summaryRes = R.string.call_settings_description;
-                callSettingsHeader.intent = DialtactsActivity.getCallSettingsIntent();
+                callSettingsHeader.intent = callSettingsIntent;
                 target.add(callSettingsHeader);
             } else {
                 final Header phoneAccountSettingsHeader = new Header();
-                final Intent phoneAccountSettingsIntent =
+                Intent phoneAccountSettingsIntent =
                         new Intent(TelecomManager.ACTION_CHANGE_PHONE_ACCOUNTS);
                 phoneAccountSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
