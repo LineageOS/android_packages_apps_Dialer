@@ -46,7 +46,8 @@ public class ActionBarController {
         public boolean hasSearchQuery();
         public boolean shouldShowActionBar();
         public int getActionBarHeight();
-        public ActionBar getActionBar();
+        public int getActionBarHideOffset();
+        public void setActionBarHideOffset(int offset);
     }
 
     public ActionBarController(ActivityUi activityUi, SearchEditTextLayout searchBox) {
@@ -166,14 +167,18 @@ public class ActionBarController {
 
     public void setHideOffset(int offset) {
         mIsActionBarSlidUp = offset >= mActivityUi.getActionBarHeight();
-        mActivityUi.getActionBar().setHideOffset(offset);
+        mActivityUi.setActionBarHideOffset(offset);
     }
 
     /**
      * @return The offset the action bar is being translated upwards by
      */
     public int getHideOffset() {
-        return mActivityUi.getActionBar().getHideOffset();
+        return mActivityUi.getActionBarHideOffset();
+    }
+
+    public int getActionBarHeight() {
+        return mActivityUi.getActionBarHeight();
     }
 
     /**

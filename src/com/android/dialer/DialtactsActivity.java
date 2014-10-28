@@ -1134,6 +1134,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         return mActionBarController.isActionBarShowing();
     }
 
+    @Override
+    public ActionBarController getActionBarController() {
+        return mActionBarController;
+    }
+
     public boolean isDialpadShown() {
         return mIsDialpadShown;
     }
@@ -1144,13 +1149,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     @Override
-    public int getActionBarHeight() {
-        return mActionBarHeight;
+    public void setActionBarHideOffset(int offset) {
+        getActionBar().setHideOffset(offset);
     }
 
     @Override
-    public void setActionBarHideOffset(int hideOffset) {
-        mActionBarController.setHideOffset(hideOffset);
+    public int getActionBarHeight() {
+        return mActionBarHeight;
     }
 
     /**
