@@ -183,6 +183,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private ListsFragment mListsFragment;
 
+    /**
+     * Tracks whether onSaveInstanceState has been called. If true, no fragment transactions can
+     * be commited.
+     */
+    private boolean mStateSaved;
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
@@ -473,6 +478,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     protected void onResume() {
         super.onResume();
+        mStateSaved = false;
         if (mFirstLaunch) {
             displayFragment(getIntent());
         } else if (!phoneIsInUse() && mInCallDialpadUp) {
@@ -496,6 +502,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             hideDialpadAndSearchUi();
             mClearSearchOnPause = false;
         }
+        if (mSlideOut.hasStarted() && !mSlideOut.hasEnded()) {
+            commitDialpadFragmentHide();
+        }
         super.onPause();
     }
 
@@ -508,6 +517,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         outState.putBoolean(KEY_FIRST_LAUNCH, mFirstLaunch);
         outState.putBoolean(KEY_IS_DIALPAD_SHOWN, mIsDialpadShown);
         mActionBarController.saveInstanceState(outState);
+        mStateSaved = true;
     }
 
     @Override
@@ -644,7 +654,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * @see #onDialpadShown
      */
     private void showDialpadFragment(boolean animate) {
-        if (mIsDialpadShown) {
+        if (mIsDialpadShown || mStateSaved) {
             return;
         }
         mIsDialpadShown = true;
@@ -730,10 +740,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Finishes hiding the dialpad fragment after any animations are completed.
      */
     public void commitDialpadFragmentHide() {
-        final FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.hide(mDialpadFragment);
-        ft.commit();
-
+        if (!mStateSaved && !mDialpadFragment.isHidden()) {
+            final FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.hide(mDialpadFragment);
+            ft.commit();
+        }
         mFloatingActionButtonController.scaleIn(AnimUtils.NO_DELAY);
     }
 
@@ -886,7 +897,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Shows the search fragment
      */
     private void enterSearchUi(boolean smartDialSearch, String query) {
-        if (getFragmentManager().isDestroyed()) {
+        if (mStateSaved || getFragmentManager().isDestroyed()) {
             // Weird race condition where fragment is doing work after the activity is destroyed
             // due to talkback being on (b/10209937). Just return since we can't do any
             // constructive here.
@@ -939,7 +950,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private void exitSearchUi() {
         // See related bug in enterSearchUI();
-        if (getFragmentManager().isDestroyed()) {
+        if (getFragmentManager().isDestroyed() || mStateSaved) {
             return;
         }
 
@@ -969,6 +980,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onBackPressed() {
+        if (mStateSaved) {
+            return;
+        }
         setConferenceDialButtonImage(false);
         setConferenceDialButtonVisibility(true);
         boolean mIsRecipientsShown = mDialpadFragment.isRecipientsShown();
