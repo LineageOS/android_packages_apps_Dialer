@@ -500,17 +500,6 @@
     <!-- String used to display calls from pay phone in the call log -->
     <string name="payphone">Pay phone</string>
 
-    <!-- Displayed in the text entry box in the dialer when in landscape mode to guide the user
-         to dial using the physical keyboard -->
-    <string name="dialerKeyboardHintText">Use keyboard to dial</string>
-
-    <!-- Hint text displayed in the "digits" field above the dialer's
-         dialpad, if there's already a call in progress.  (This hint
-         reminds the user that the dialer will add a new call, as opposed
-         to sending DTMF tones over the current call.)
-         [CHAR LIMIT=40] -->
-    <string name="dialerDialpadHintText">Dial to add a call</string>
-
     <!-- A nicely formatted call duration displayed when viewing call details. For example "42 mins 28 secs" -->
     <string name="callDetailsDurationFormat"><xliff:g id="minutes" example="42">%s</xliff:g> mins <xliff:g id="seconds" example="28">%s</xliff:g> secs</string>
 

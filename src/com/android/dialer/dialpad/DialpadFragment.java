@@ -611,26 +611,8 @@ public class DialpadFragment extends AnalyticsFragment
 
         stopWatch.lap("tm");
 
-        // Potentially show hint text in the mDigits field when the user
-        // hasn't typed any digits yet.  (If there's already an active call,
-        // this hint text will remind the user that he's about to add a new
-        // call.)
-        //
-        // TODO: consider adding better UI for the case where *both* lines
-        // are currently in use.  (Right now we let the user try to add
-        // another call, but that call is guaranteed to fail.  Perhaps the
-        // entire dialer UI should be disabled instead.)
-        if (isPhoneInUse()) {
-            final SpannableString hint = new SpannableString(
-                    getActivity().getString(R.string.dialerDialpadHintText));
-            hint.setSpan(new RelativeSizeSpan(0.8f), 0, hint.length(), 0);
-            mDigits.setHint(hint);
-        } else {
-            // Common case; no hint necessary.
-            mDigits.setHint(null);
-
-            // Also, a sanity-check: the "dialpad chooser" UI should NEVER
-            // be visible if the phone is idle!
+        if (!isPhoneInUse()) {
+            // A sanity-check: the "dialpad chooser" UI should not be visible if the phone is idle.
             showDialpadChooser(false);
         }
 
@@ -1203,7 +1185,7 @@ public class DialpadFragment extends AnalyticsFragment
         }
 
         if (enabled) {
-            Log.i(TAG, "Showing dialpad chooser!");
+            Log.d(TAG, "Showing dialpad chooser!");
             if (mDialpadView != null) {
                 mDialpadView.setVisibility(View.GONE);
             }
@@ -1218,7 +1200,7 @@ public class DialpadFragment extends AnalyticsFragment
             }
             mDialpadChooser.setAdapter(mDialpadChooserAdapter);
         } else {
-            Log.i(TAG, "Displaying normal Dialer UI.");
+            Log.d(TAG, "Displaying normal Dialer UI.");
             if (mDialpadView != null) {
                 mDialpadView.setVisibility(View.VISIBLE);
             } else {
