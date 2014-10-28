@@ -914,13 +914,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mActionBarController.onSearchUiExited();
     }
 
-    /** Returns an Intent to launch Call Settings screen */
-    public static Intent getCallSettingsIntent() {
-        final Intent intent = new Intent(TelecomManager.ACTION_SHOW_CALL_SETTINGS);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        return intent;
-    }
-
     @Override
     public void onBackPressed() {
         if (mIsDialpadShown) {
