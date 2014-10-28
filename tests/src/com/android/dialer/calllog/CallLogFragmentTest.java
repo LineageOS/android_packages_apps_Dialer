@@ -42,6 +42,7 @@ import android.widget.FrameLayout;
 import com.android.contacts.common.test.FragmentTestActivity;
 import com.android.dialer.CallDetailActivity;
 import com.android.dialer.R;
+import com.android.dialer.util.TestConstants;
 
 import java.util.Date;
 import java.util.Formatter;
@@ -323,7 +324,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         IntentProvider intentProvider = (IntentProvider) views.callBackButtonView.getTag();
         Intent intent = intentProvider.getIntent(mActivity);
         // Starts a call.
-        assertEquals(Intent.ACTION_CALL_PRIVILEGED, intent.getAction());
+        assertEquals(TestConstants.CALL_INTENT_ACTION, intent.getAction());
         // To the entry's number.
         assertEquals(Uri.parse("tel:" + TEST_NUMBER), intent.getData());
     }
@@ -385,7 +386,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
                 Intent callIntent = intentProvider.getIntent(mActivity);
 
                 //The intent should be to make the call
-                assertEquals(Intent.ACTION_CALL_PRIVILEGED, callIntent.getAction());
+                assertEquals(TestConstants.CALL_INTENT_ACTION, callIntent.getAction());
             }
         }
     }
