@@ -609,6 +609,14 @@ public class DialpadFragment extends AnalyticsFragment
         // Long-pressing zero button will enter '+' instead.
         final DialpadKeyButton zero = (DialpadKeyButton) fragmentView.findViewById(R.id.zero);
         zero.setOnLongClickListener(this);
+
+        // Long-pressing star button will enter ','(pause) instead.
+        final DialpadKeyButton star = (DialpadKeyButton) fragmentView.findViewById(R.id.star);
+        star.setOnLongClickListener(this);
+
+        // Long-pressing pound button will enter ';'(wait) instead.
+        final DialpadKeyButton pound = (DialpadKeyButton) fragmentView.findViewById(R.id.pound);
+        pound.setOnLongClickListener(this);
     }
 
     @Override
@@ -1100,6 +1108,28 @@ public class DialpadFragment extends AnalyticsFragment
                 // To show that, make the cursor visible, and return false, letting the EditText
                 // show the option by itself.
                 mDigits.setCursorVisible(true);
+                return false;
+            }
+            case R.id.star: {
+                if (mDigits.length() > 1) {
+                    // Remove tentative input ('*') done by onTouch().
+                    removePreviousDigitIfPossible();
+                    keyPressed(KeyEvent.KEYCODE_COMMA);
+                    stopTone();
+                    mPressedDialpadKeys.remove(view);
+                    return true;
+                }
+                return false;
+            }
+            case R.id.pound: {
+                if (mDigits.length() > 1) {
+                    // Remove tentative input ('#') done by onTouch().
+                    removePreviousDigitIfPossible();
+                    keyPressed(KeyEvent.KEYCODE_SEMICOLON);
+                    stopTone();
+                    mPressedDialpadKeys.remove(view);
+                    return true;
+                }
                 return false;
             }
             case R.id.two:
