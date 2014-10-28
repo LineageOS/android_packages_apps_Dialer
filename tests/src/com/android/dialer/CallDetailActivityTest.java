@@ -48,7 +48,8 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Unit tests for the {@link CallDetailActivity}.
+ * Unit tests for the {@link CallDetailActivity}. NOTE: The screen needs to be on for the
+ * UI-related tests to pass.
  */
 @LargeTest
 public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<CallDetailActivity> {
