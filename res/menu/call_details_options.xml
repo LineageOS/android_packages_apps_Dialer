@@ -21,14 +21,16 @@
         android:onClick="onMenuVideoCall"
     />
     <item
-        android:id="@+id/menu_ip_call_by_slot1"
+        android:id="@+id/menu_add_to_black_list"
         android:showAsAction="withText"
-        android:onClick="onMenuIpCallBySlot1"
+        android:title="@string/add_to_black_list"
+        android:onClick="onMenuAddToBlackList"
     />
     <item
-        android:id="@+id/menu_ip_call_by_slot2"
+        android:id="@+id/menu_add_to_white_list"
         android:showAsAction="withText"
-        android:onClick="onMenuIpCallBySlot2"
+        android:title="@string/add_to_white_list"
+        android:onClick="onMenuAddToWhiteList"
     />
     <item
         android:id="@+id/menu_trash"
