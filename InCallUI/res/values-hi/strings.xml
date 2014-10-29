@@ -128,20 +128,6 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"अपना स्वयं का लिखें..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"रहने दें"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"भेजें"</string>
-    <string name="description_image_button_one" msgid="5502718871331943463">"एक"</string>
-    <string name="description_image_button_two" msgid="4903738528222924522">"दो"</string>
-    <string name="description_image_button_three" msgid="5570985408463782329">"तीन"</string>
-    <string name="description_image_button_four" msgid="1697520001239289074">"चार"</string>
-    <string name="description_image_button_five" msgid="3450276493026943454">"पांच"</string>
-    <string name="description_image_button_six" msgid="2070376172268675300">"छ:"</string>
-    <string name="description_image_button_seven" msgid="1757351311199993371">"सात"</string>
-    <string name="description_image_button_eight" msgid="4734693919020613227">"आठ"</string>
-    <string name="description_image_button_nine" msgid="5568534122590597040">"नौ"</string>
-    <string name="description_image_button_star" msgid="1976280813017254462">"तारा"</string>
-    <string name="description_image_button_zero" msgid="4211255756866893605">"शून्‍य"</string>
-    <string name="description_image_button_pound" msgid="1716041284529917866">"पाउंड"</string>
-    <string name="description_dial_button" msgid="7459705245418435351">"डायल करें"</string>
-    <string name="description_delete_button" msgid="4015842181592283903">"बैकस्पेस"</string>
     <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"स्पीकरफ़ोन चुना गया"</string>
     <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"इयरपीस चुना गया"</string>
     <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"वायर्ड हैडसेट चुना गया"</string>

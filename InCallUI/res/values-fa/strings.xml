@@ -128,20 +128,6 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"نوشتن پاسخ خود…"</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"لغو"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"ارسال"</string>
-    <string name="description_image_button_one" msgid="5502718871331943463">"یک"</string>
-    <string name="description_image_button_two" msgid="4903738528222924522">"دو"</string>
-    <string name="description_image_button_three" msgid="5570985408463782329">"سه"</string>
-    <string name="description_image_button_four" msgid="1697520001239289074">"چهار"</string>
-    <string name="description_image_button_five" msgid="3450276493026943454">"پنج"</string>
-    <string name="description_image_button_six" msgid="2070376172268675300">"شش"</string>
-    <string name="description_image_button_seven" msgid="1757351311199993371">"هفت"</string>
-    <string name="description_image_button_eight" msgid="4734693919020613227">"هشت"</string>
-    <string name="description_image_button_nine" msgid="5568534122590597040">"نه"</string>
-    <string name="description_image_button_star" msgid="1976280813017254462">"ستاره"</string>
-    <string name="description_image_button_zero" msgid="4211255756866893605">"صفر"</string>
-    <string name="description_image_button_pound" msgid="1716041284529917866">"پوند"</string>
-    <string name="description_dial_button" msgid="7459705245418435351">"شماره گیری"</string>
-    <string name="description_delete_button" msgid="4015842181592283903">"Backspace"</string>
     <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"بلندگو انتخاب شد"</string>
     <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"گوشی انتخاب شد"</string>
     <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"هدست سیم‌دار انتخاب شد"</string>
