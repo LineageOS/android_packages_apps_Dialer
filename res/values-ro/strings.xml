@@ -63,18 +63,6 @@
     <string name="sms_disambig_title" msgid="5846266399240630846">"Selectaţi numărul"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Selectaţi numărul"</string>
     <string name="make_primary" msgid="5829291915305113983">"Reţineţi această alegere"</string>
-    <string name="description_image_button_one" msgid="1740638037139856139">"unu"</string>
-    <string name="description_image_button_two" msgid="5882638439003731308">"doi"</string>
-    <string name="description_image_button_three" msgid="8709731759376015180">"trei"</string>
-    <string name="description_image_button_four" msgid="3530239685642246130">"patru"</string>
-    <string name="description_image_button_five" msgid="1182465427501188413">"cinci"</string>
-    <string name="description_image_button_six" msgid="2093656269261415475">"şase"</string>
-    <string name="description_image_button_seven" msgid="2450357020447676481">"şapte"</string>
-    <string name="description_image_button_eight" msgid="6969435115163287801">"opt"</string>
-    <string name="description_image_button_nine" msgid="7857248695662558323">"nouă"</string>
-    <string name="description_image_button_star" msgid="3365919907520767866">"stea"</string>
-    <string name="description_image_button_zero" msgid="4133108949401820710">"zero"</string>
-    <string name="description_image_button_pound" msgid="3039765597595889230">"clar"</string>
     <string name="description_search_button" msgid="3660807558587384889">"căutare"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"apelaţi"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"numărul de apelat"</string>
