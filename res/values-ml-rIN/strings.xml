@@ -63,18 +63,6 @@
     <string name="sms_disambig_title" msgid="5846266399240630846">"നമ്പർ തിരഞ്ഞെടുക്കുക"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"നമ്പർ തിരഞ്ഞെടുക്കുക"</string>
     <string name="make_primary" msgid="5829291915305113983">"ഈ തിരഞ്ഞെടുക്കൽ ഓർക്കുക"</string>
-    <string name="description_image_button_one" msgid="1740638037139856139">"ഒന്ന്"</string>
-    <string name="description_image_button_two" msgid="5882638439003731308">"രണ്ട്"</string>
-    <string name="description_image_button_three" msgid="8709731759376015180">"മൂന്ന്"</string>
-    <string name="description_image_button_four" msgid="3530239685642246130">"നാല്"</string>
-    <string name="description_image_button_five" msgid="1182465427501188413">"അഞ്ച്"</string>
-    <string name="description_image_button_six" msgid="2093656269261415475">"ആറ്"</string>
-    <string name="description_image_button_seven" msgid="2450357020447676481">"ഏഴ്"</string>
-    <string name="description_image_button_eight" msgid="6969435115163287801">"എട്ട്"</string>
-    <string name="description_image_button_nine" msgid="7857248695662558323">"ഒമ്പത്"</string>
-    <string name="description_image_button_star" msgid="3365919907520767866">"സ്റ്റാർ"</string>
-    <string name="description_image_button_zero" msgid="4133108949401820710">"പൂജ്യം"</string>
-    <string name="description_image_button_pound" msgid="3039765597595889230">"പൗണ്ട്"</string>
     <string name="description_search_button" msgid="3660807558587384889">"തിരയുക"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"ഡയൽ ചെയ്യുക"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"ഡയൽ ചെയ്യാനുള്ള നമ്പർ"</string>
@@ -201,8 +189,6 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ദ്രുത പ്രതികരണങ്ങൾ"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"കോൾ ക്രമീകരണങ്ങൾ"</string>
     <string name="call_settings_description" msgid="2756622428019213052">"വോയ്‌സ്മെയിൽ, കോൾ വെയ്‌റ്റിംഗ് എന്നിവയും മറ്റുള്ളവയും"</string>
-    <!-- no translation found for phone_account_settings_label (8298076824934324281) -->
-    <skip />
-    <!-- no translation found for phone_account_settings_description (435745546649702086) -->
-    <skip />
+    <string name="phone_account_settings_label" msgid="8298076824934324281">"ഫോൺ അക്കൗണ്ട് ക്രമീകരണങ്ങൾ"</string>
+    <string name="phone_account_settings_description" msgid="435745546649702086">"SIM, കോൾ ക്രമീകരണങ്ങൾ നിയന്ത്രിക്കുക"</string>
 </resources>

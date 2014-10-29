@@ -63,18 +63,6 @@
     <string name="sms_disambig_title" msgid="5846266399240630846">"Выбор номера"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Выбор номера"</string>
     <string name="make_primary" msgid="5829291915305113983">"Запомнить выбранное"</string>
-    <string name="description_image_button_one" msgid="1740638037139856139">"один"</string>
-    <string name="description_image_button_two" msgid="5882638439003731308">"два"</string>
-    <string name="description_image_button_three" msgid="8709731759376015180">"три"</string>
-    <string name="description_image_button_four" msgid="3530239685642246130">"четыре"</string>
-    <string name="description_image_button_five" msgid="1182465427501188413">"пять"</string>
-    <string name="description_image_button_six" msgid="2093656269261415475">"шесть"</string>
-    <string name="description_image_button_seven" msgid="2450357020447676481">"семь"</string>
-    <string name="description_image_button_eight" msgid="6969435115163287801">"восемь"</string>
-    <string name="description_image_button_nine" msgid="7857248695662558323">"девять"</string>
-    <string name="description_image_button_star" msgid="3365919907520767866">"пометить"</string>
-    <string name="description_image_button_zero" msgid="4133108949401820710">"нуль"</string>
-    <string name="description_image_button_pound" msgid="3039765597595889230">"решетка"</string>
     <string name="description_search_button" msgid="3660807558587384889">"поиск"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"набор номера"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"набираемый номер"</string>
@@ -201,8 +189,6 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Быстрые ответы"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"Настройки вызовов"</string>
     <string name="call_settings_description" msgid="2756622428019213052">"Голосовая почта, ожидание вызова и другие функции"</string>
-    <!-- no translation found for phone_account_settings_label (8298076824934324281) -->
-    <skip />
-    <!-- no translation found for phone_account_settings_description (435745546649702086) -->
-    <skip />
+    <string name="phone_account_settings_label" msgid="8298076824934324281">"Настройки аккаунта телефона"</string>
+    <string name="phone_account_settings_description" msgid="435745546649702086">"Параметры SIM-карты и вызовов"</string>
 </resources>

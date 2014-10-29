@@ -72,30 +72,6 @@
     <string name="call_disambig_title" msgid="4392886850104795739">"Номур тандаңыз"</string>
     <!-- no translation found for make_primary (5829291915305113983) -->
     <skip />
-    <!-- no translation found for description_image_button_one (1740638037139856139) -->
-    <skip />
-    <!-- no translation found for description_image_button_two (5882638439003731308) -->
-    <skip />
-    <!-- no translation found for description_image_button_three (8709731759376015180) -->
-    <skip />
-    <!-- no translation found for description_image_button_four (3530239685642246130) -->
-    <skip />
-    <!-- no translation found for description_image_button_five (1182465427501188413) -->
-    <skip />
-    <!-- no translation found for description_image_button_six (2093656269261415475) -->
-    <skip />
-    <!-- no translation found for description_image_button_seven (2450357020447676481) -->
-    <skip />
-    <!-- no translation found for description_image_button_eight (6969435115163287801) -->
-    <skip />
-    <!-- no translation found for description_image_button_nine (7857248695662558323) -->
-    <skip />
-    <!-- no translation found for description_image_button_star (3365919907520767866) -->
-    <skip />
-    <!-- no translation found for description_image_button_zero (4133108949401820710) -->
-    <skip />
-    <!-- no translation found for description_image_button_pound (3039765597595889230) -->
-    <skip />
     <!-- no translation found for description_search_button (3660807558587384889) -->
     <skip />
     <!-- no translation found for description_dial_button (1274091017188142646) -->
@@ -249,8 +225,6 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Тез жооптор"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"Чалуу жөндөөлөрү"</string>
     <string name="call_settings_description" msgid="2756622428019213052">"Үн почтасы, чалууну күтүү жана башкалар"</string>
-    <!-- no translation found for phone_account_settings_label (8298076824934324281) -->
-    <skip />
-    <!-- no translation found for phone_account_settings_description (435745546649702086) -->
-    <skip />
+    <string name="phone_account_settings_label" msgid="8298076824934324281">"Телфн каттоо эсебнн жөндөөлөрү"</string>
+    <string name="phone_account_settings_description" msgid="435745546649702086">"SIM жана чалуу жөндөөлөрүн башкаруу"</string>
 </resources>
