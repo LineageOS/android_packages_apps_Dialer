@@ -18,8 +18,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"டயலர்"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"மொபைல்"</string>
-    <string name="dialerIconLabel" msgid="6500826552823403796">"மொபைல்"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"ஃபோன்"</string>
+    <string name="dialerIconLabel" msgid="6500826552823403796">"ஃபோன்"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"அழைப்புப் பதிவு"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"உரைச் செய்தியை அனுப்பு"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ஐ அழை"</string>
@@ -78,7 +78,12 @@
     <string name="description_search_button" msgid="3660807558587384889">"தேடு"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"டயல்"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"டயல் செய்வதற்கான எண்"</string>
-    <string name="action_menu_call_history_description" msgid="9018442816219748968">"அழைப்பு வரலாறு"</string>
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"பிளேபேக்கை இயக்கு அல்லது நிறுத்து"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"ஸ்பீக்கர்போனை இயக்கு அல்லது முடக்கு"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"பிளேபேக் நிலையைத் தேடு"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"பிளேபேக் விகிதத்தைக் குறை"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"பிளேபேக் விகிதத்தை அதிகரி"</string>
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"அழைப்பு பட்டியல்"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"மேலும் விருப்பங்கள்"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"டயல்பேடு"</string>
     <string name="menu_copy" msgid="6108677035381940698">"நகலெடு"</string>
@@ -87,11 +92,11 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"தவறியதை மட்டும் காட்டு"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"குரலஞ்சல்களை மட்டும் காட்டு"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"எல்லா அழைப்புகளையும் காட்டு"</string>
-    <string name="add_contact" msgid="8875804371377471164">"தொடர்பைச் சேர்"</string>
+    <string name="add_contact" msgid="4579643070374941999">"தொடர்புகளில் சேர்"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"2-வினாடி இடைநிறுத்தத்தைச் சேர்"</string>
     <string name="add_wait" msgid="3360818652790319634">"காத்திருப்பைச் சேர்"</string>
     <string name="menu_select_account" msgid="5576598753317289565">"கணக்கைத் தேர்ந்தெடு"</string>
-    <string name="call_settings" msgid="7666474782093693667">"அமைப்புகள்"</string>
+    <string name="dialer_settings_label" msgid="4305043242594150479">"அமைப்பு"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"புதிய தொடர்பு"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"எல்லா தொடர்புகளும்"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"அழைப்பு விவரங்கள்"</string>
@@ -102,18 +107,18 @@
     <string name="type_incoming" msgid="6502076603836088532">"உள்வரும் அழைப்பு"</string>
     <string name="type_outgoing" msgid="343108709599392641">"வெளிச்செல்லும் அழைப்பு"</string>
     <string name="type_missed" msgid="2720502601640509542">"தவறிய அழைப்பு"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"உள்வரும் வீடியோ அழைப்பு"</string>
+    <string name="type_outgoing_video" msgid="2858140021680755266">"வெளிச்செல்லும் வீடியோ அழைப்பு"</string>
+    <string name="type_missed_video" msgid="954396897034220545">"தவறிய வீடியோ அழைப்பு"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"குரலஞ்சல்"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"உள்வரும் அழைப்புகள்"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"குரலஞ்சலை இயக்கு"</string>
-    <string name="description_call_log_incoming_call" msgid="4485427487637250143">"உள்வரும் அழைப்பு"</string>
-    <string name="description_call_log_outgoing_call" msgid="604831756853471658">"வெளிச்செல்லும் அழைப்பு"</string>
-    <string name="description_call_log_missed_call" msgid="2242805209983708825">"தவறிய அழைப்பு"</string>
-    <string name="description_call_log_voicemail" msgid="4600798771975158948">"குரலஞ்சல்"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> தொடர்பைக் காட்டு"</string>
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g> ஐ அழை"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> க்கான தொடர்பு விவரங்கள்"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"புதிய குரலஞ்சல்."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> அழைப்புகள்."</string>
+    <string name="description_video_call" msgid="2933838090743214204">"வீடியோ அழைப்பு."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g> க்கு உரைச் செய்தியை அனுப்பு"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"கேட்கப்படாத குரலஞ்சல்"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"குரல் தேடலைத் தொடங்கு"</string>
@@ -126,14 +131,14 @@
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"அழைப்பைச் சேர்க்க டயல் செய்யவும்"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> நிமிடங்கள் <xliff:g id="SECONDS">%s</xliff:g> வினாடிகள்"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"அழைக்க முடியவில்லை"</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"குரலஞ்சலை அமைக்க, செல்க மெனு &gt; அமைப்புகள்."</string>
+    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"குரலஞ்சலை அமைக்க, செல்க மெனு &gt; அமைப்பு."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"குரலஞ்சலை அழைப்பதற்கு, முதலில் விமானப் பயன்முறையை முடக்கவும்."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"ஏற்றுகிறது..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM கார்டிலிருந்து ஏற்றுகிறது…"</string>
-    <string name="simContacts_title" msgid="27341688347689769">"SIM கார்டின் தொடர்புகள்"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"அம்சத்தைப் பயன்படுத்த நபர்கள் பயன்பாட்டை மீண்டும் இயக்கவும்."</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"சிம் கார்டிலிருந்து ஏற்றுகிறது…"</string>
+    <string name="simContacts_title" msgid="27341688347689769">"சிம் கார்டின் தொடர்புகள்"</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"இந்த அம்சத்தைப் பயன்படுத்த, தொடர்புகள் பயன்பாட்டை மீண்டும் இயக்கவும்."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"வீடியோ தேடல் இல்லை."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Phone பயன்பாடு முடக்கப்பட்டுள்ளதால், ஃபோன் அழைப்பைச் செய்ய முடியாது."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"தேர்ந்தெடுத்த செயலைச் செய்வதற்கான நிறுவப்பட்ட செயல்பாடு எதுவுமில்லை."</string>
@@ -152,28 +157,31 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"செயல்தவிர்"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> ஐ அழை"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"தொடர்புகளில் சேர்"</string>
-    <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"வீடியோ அழைப்பைச் செய்"</string>
-    <string name="recents_footer_text" msgid="7315554578957453359">"அழைப்பு வரலாறு முழுவதையும் காட்டு"</string>
+    <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"வீடியோவில் அழை"</string>
+    <string name="recents_footer_text" msgid="7315554578957453359">"அழைப்பு பட்டியல் முழுவதையும் காட்டு"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> புதிய தவறிய அழைப்புகள்"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"விரைவு டயல் என்பது நீங்கள் அடிக்கடி தொடர்புகொள்ளும்\nபிடித்தவை மற்றும் எண்களை\n ஒரு முறை தொடுவதன் மூலம் டயல் செய்யும் அம்சமாகும்."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"விரைவு டயல் என்பது நீங்கள் அடிக்கடி கூப்பிடும் \nஎண்களை\n ஒரு முறை தொடுவதன் மூலம் அழைக்கும் வசதியாகும்."</string>
     <string name="all_contacts_empty" msgid="4536082452651392894">"உங்களிடம் தொடர்புகள் எதுவுமில்லை."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"எல்லா எண்களையும் பார்க்க படத்தைத் தட்டவும் அல்லது மீண்டும் வரிசைப்படுத்த அழுத்திப் பிடிக்கவும்"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"விலக்கு"</string>
     <string name="remove_contact" msgid="1080555335283662961">"அகற்று"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"எல்லா தொடர்புகளும்"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"திரும்ப அழை"</string>
+    <string name="call_log_action_video_call" msgid="3818588654537490948">"வீடியோ அழைப்பு"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"கேள்"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"விவரங்கள்"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"தவறிய அழைப்பு: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"பேசிய அழைப்புகள்: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"அழைத்த அழைப்பு: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> , <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> ஐத் திரும்ப அழை"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"அழைத்த வீடியோ அழைப்பு: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> இன் குரலஞ்சலைக் கேள்"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> இன் அழைப்பு விவரங்கள்"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"அழைப்புப் பதிவு நீக்கப்பட்டது."</string>
+    <string name="toast_caller_id_reported" msgid="1127087402649645557">"தொடர்பு புகாரளிக்கப்பட்டது."</string>
+    <string name="call_log_action_report" msgid="561229827189128879">"புகாரளி"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"இன்று"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"நேற்று"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"கடந்த வாரம்"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"பழையது"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"அழைப்பு பட்டியல்"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"ஸ்பீக்கரை இயக்கு."</string>
@@ -181,4 +189,16 @@
     <string name="voicemail_play_faster" msgid="3444751008615323006">"வேகமாக இயக்கு."</string>
     <string name="voicemail_play_slower" msgid="4544796503902818832">"மெதுவாக இயக்கு."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"பிளேபேக்கைத் தொடங்கு அல்லது இடைநிறுத்து."</string>
+    <string name="list_delimeter" msgid="4571593167738725100">", "</string>
+    <string name="general_settings_label" msgid="4787443826763795004">"பொது அமைப்புகள்"</string>
+    <string name="general_settings_description" msgid="4838560696004337578">"தொடர்பின் காட்சி, ஒலிகள் மற்றும் விரைவு பதில்கள்"</string>
+    <string name="contact_display_options_category_title" msgid="5719485933817512769">"தொடர்பின் காட்சி விருப்பங்கள்"</string>
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"ஒலிகளும் அதிர்வுறுதலும்"</string>
+    <string name="ringtone_title" msgid="760362035635084653">"மொபைலின் ரிங்டோன்"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"அழைப்புகளுக்கும் அதிர்வுறு"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"டயல்பேட் ஒலிகள்"</string>
+    <string name="other_settings_title" msgid="7976283601445863248">"பிற"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"விரைவு பதில்கள்"</string>
+    <string name="call_settings_label" msgid="7416182166943714852">"அழைப்பு அமைப்புகள்"</string>
+    <string name="call_settings_description" msgid="2756622428019213052">"குரலஞ்சல், அழைப்பு காத்திருப்பு, மேலும் பிற"</string>
 </resources>

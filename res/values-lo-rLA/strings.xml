@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"ແປ້ນໂທລະສັບ"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"ໂທລະສັບ"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"ໂທລະສັບ"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ໂທລະສັບ"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"ບັນທຶກການໂທ"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"ສົ່ງຂໍ້ຄວາມ"</string>
@@ -78,6 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"ຊອກຫາ"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"ແປ້ນໂທ"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"ໝາຍເລກທີ່ຈະໂທ"</string>
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"​ຫຼິ້ນ ຫຼື​ຢຸດ​ການຫຼິ້ນ"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"​ປິດຫຼື​ເປີດ​ລຳ​ໂພງ​ມື​ຖື"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"​ຊອກ​ຫາ​ຕຳ​​ແໜ່ງ​ຫຼິ້ນ"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"ຫຼ​ຸດ​ອັດ​ຕາ​ການຫຼິ້ນ"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"​ເພີ​່ມ​ອັດ​ຕາ​ການຫຼິ້ນ"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"ປະຫວັດການໂທ"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"ໂຕເລືອກເພີ່ມເຕີມ"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"ປຸ່ມໂທລະສັບ"</string>
@@ -87,11 +92,11 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"ສະແດງສະເພາະສາຍບໍ່ໄດ້ຮັບ"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"ສະແດງສະເພາະຂໍ້ຄວາມສຽງ"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"ສະແດງການໂທທັງໝົດ"</string>
-    <string name="add_contact" msgid="8875804371377471164">"ເພີ່ມ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່"</string>
+    <string name="add_contact" msgid="4579643070374941999">"​ເພີ່ມ​ໃນ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"ເພີ່ມການຂັ້ນເວລາ 2 ວິນາທີ"</string>
     <string name="add_wait" msgid="3360818652790319634">"ເພີ່ມການລໍຖ້າ"</string>
     <string name="menu_select_account" msgid="5576598753317289565">"ເລືອກ​ບັນ​ຊີ"</string>
-    <string name="call_settings" msgid="7666474782093693667">"ການຕັ້ງຄ່າ"</string>
+    <string name="dialer_settings_label" msgid="4305043242594150479">"ການ​ຕັ້ງ​ຄ່າ"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"ສ້າງລາຍຊື່ຜູ່ຕິດຕໍ່ໃໝ່"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"ລາຍຊື່ຜູ່ຕິດຕໍ່ທັງໝົດ"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"ລາຍລະອຽດການໂທ"</string>
@@ -102,18 +107,18 @@
     <string name="type_incoming" msgid="6502076603836088532">"ສາຍໂທເຂົ້າ"</string>
     <string name="type_outgoing" msgid="343108709599392641">"ສາຍໂທອອກ"</string>
     <string name="type_missed" msgid="2720502601640509542">"ສາຍບໍ່ໄດ້ຮັບ"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"ສາຍ​ວິດີໂອ​ເຂົ້າ"</string>
+    <string name="type_outgoing_video" msgid="2858140021680755266">"ສາຍ​ໂທ​ອອກ​ດ້ວຍ​ວິດີໂອ"</string>
+    <string name="type_missed_video" msgid="954396897034220545">"ສາຍ​ວິດີໂອ​ທີ່​ບໍ່​ໄດ້​ຮັບ"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"ຂໍ້ຄວາມສຽງ"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"ສາຍໂທເຂົ້າ"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"ເປີດຂໍ້ຄວາມສຽງ"</string>
-    <string name="description_call_log_incoming_call" msgid="4485427487637250143">"ສາຍໂທເຂົ້າ"</string>
-    <string name="description_call_log_outgoing_call" msgid="604831756853471658">"ສາຍໂທອອກ"</string>
-    <string name="description_call_log_missed_call" msgid="2242805209983708825">"ສາຍທີ່ບໍ່ໄດ້ຮັບ"</string>
-    <string name="description_call_log_voicemail" msgid="4600798771975158948">"ຂໍ້ຄວາມສຽງ"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"ເບິ່ງລາຍຊື່ຜູ່ຕິດຕໍ່ <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"ໂທຫາ <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"ລາຍລະອຽດ​ລາຍຊື່​ຜູ່ຕິດຕໍ່​ສຳລັບ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"ຂໍ້ຄວາມ​ສຽງ​ໃໝ່."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> ການໂທ."</string>
+    <string name="description_video_call" msgid="2933838090743214204">"ການ​ໂທ​ດ້ວຍ​ວິ​ດີ​ໂອ."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"ສົ່ງຂໍ້ຄວາມຫາ <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"ຂໍ້ຄວາມສຽງທີ່ຍັງບໍ່ໄດ້ຟັງ"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"ເລີ່ມການຊອກຫາດ້ວຍສຽງ"</string>
@@ -133,7 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"ກຳລັງໂຫລດຈາກ SIM card..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"ລາຍຊື່ຜູ່ຕິດຕໍ່ SIM card"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"ເປີດການນຳໃຊ້ແອັບພລິເຄຊັນ People ຄືນ ເພື່ອໃຊ້ຄຸນສົມບັດນີ້."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"ເປີດນຳ​ໃຊ້ແອັບ​ພລິເຄ​ຊັນລາຍ​ຊື່ຜູ່ຕິດ​ຕໍ່ອີກ​ຄັ້ງເພື່ອນຳ​ໃຊ້ຄວາມ​ສາມາດ​ນີ້."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"ບໍ່ສາມາດນຳໃຊ້ການຊອກຫາດ້ວຍສຽງໄດ້."</string>
     <string name="call_not_available" msgid="8941576511946492225">"ບໍ່​ສາ​ມາດ​ໂທ​ໄດ​້​ເນື່ອງ​ຈາກ​ແອັບ​ພ​ລິ​ເຄ​ຊັນ​ໂທ​ລະ​ສັບ​ຖືກ​ປິດ​ການ​ນຳ​ໃຊ້​ໄວ້."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"​ບໍ່​ມີ​ຄຳ​ສັ່ງ​ທີ່​ຕິດ​ຕັ້ງ​ໄວ້​ທີ່​ໃຊ້​ຈັດ​ການ​ການ​ເຮັດ​ວຽກ​ທີ່​ເລືອກ​ໄດ້."</string>
@@ -162,18 +167,21 @@
     <string name="remove_contact" msgid="1080555335283662961">"​ລຶບ​ອອກ"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່​ທັງ​ໝົດ"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ໂທ​ກັບ"</string>
+    <string name="call_log_action_video_call" msgid="3818588654537490948">"ການ​ໂທ​ດ້ວຍ​ວິດີໂອ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ຟັງ"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"ລາຍ​ລະ​ອຽດ"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"ສາຍ​ທີ່ບໍ່​ໄດ້​ຮັບ​ຈາກ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"ສາຍ​ທີ່​ໄດ້​ຮັບ​ຈາກ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"ໂທ​ຫາ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"ໂທ​ກັບ​ຫາ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"ການ​ໂທ​ດ້ວຍ​ວິດີໂອ​ຫາ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"​ຟັງ​ຂໍ້​ຄວາມ​ສຽງ​ຈາກ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"ລາຍລະອຽດ​ການ​ໂທ​ສຳລັບ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"​ລຶບ​ບັນ​ທຶກ​ການ​ໂທ​ແລ້ວ."</string>
+    <string name="toast_caller_id_reported" msgid="1127087402649645557">"ລາຍ​ງານ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່​ແລ້ວ."</string>
+    <string name="call_log_action_report" msgid="561229827189128879">"ລາຍ​ງານ"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ມື້ນີ້"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"ມື້​ວານ​ນີ້"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"ອາທິດແລ້ວ"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"ເກົ່າກວ່າ"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"ລາຍຊື່​ການໂທ"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"ເປີດ​ລຳໂພງ."</string>
@@ -181,4 +189,16 @@
     <string name="voicemail_play_faster" msgid="3444751008615323006">"ຫຼິ້ນໄວຂຶ້ນ."</string>
     <string name="voicemail_play_slower" msgid="4544796503902818832">"ຫຼິ້ນຊ້າລົງ."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"ເລີ່ມຫຼືຢຸດ​ການ​ຫຼິ້ນຊົ່ວຄາວ."</string>
+    <string name="list_delimeter" msgid="4571593167738725100">", "</string>
+    <string name="general_settings_label" msgid="4787443826763795004">"ການຕັ້ງຄ່າທົ່ວໄປ"</string>
+    <string name="general_settings_description" msgid="4838560696004337578">"​ການ​ສະ​ແດງ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່, ສຽງ ແລະ​ການ​ຕອບ​ກັບ​ດ່ວນ"</string>
+    <string name="contact_display_options_category_title" msgid="5719485933817512769">"​ໂຕ​ເລືອກ​ການ​ສະ​ແດງ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່"</string>
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"​ສຽງ ແລະ​ການ​ສັ່ນ​ເຕືອນ"</string>
+    <string name="ringtone_title" msgid="760362035635084653">"ຣິງໂທນໂທລະສັບ"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"ສັ່ນ​ເຕືອນ​ເມື່ອ​ມີ​ການ​ໂທ​ເຂົ້າ"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"ສຽງ​ກົດ​ປຸ່ມ​ໂທ"</string>
+    <string name="other_settings_title" msgid="7976283601445863248">"ອື່ນໆ"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ການຕອບແບບວ່ອງໄວ"</string>
+    <string name="call_settings_label" msgid="7416182166943714852">"​ການ​ຕັ້ງ​ຄ່າ​ການ​ໂທ"</string>
+    <string name="call_settings_description" msgid="2756622428019213052">"​ຂໍ້​ຄວາມ​ສຽງ, ສາຍ​ຊ້ອນ ແລະ​ອື່ນໆ"</string>
 </resources>

@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Appeler"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Téléphone"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Téléphone"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Téléphone"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Journal d\'appels"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Envoyer un SMS"</string>
@@ -78,6 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"rechercher"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"composer"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"numéro à composer"</string>
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Lire ou arrêter la lecture"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Activer ou désactiver le haut-parleur"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Rechercher une position de lecture"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Réduire la vitesse de lecture"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Accroître la vitesse de lecture"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Historique des appels"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Plus d\'options"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"clavier numérique"</string>
@@ -87,11 +92,11 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Afficher appels manqués uniq."</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Messages vocaux uniquement"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Afficher tous les appels"</string>
-    <string name="add_contact" msgid="8875804371377471164">"Ajouter un contact"</string>
+    <string name="add_contact" msgid="4579643070374941999">"Ajouter aux contacts"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Ajouter une pause de 2 s"</string>
     <string name="add_wait" msgid="3360818652790319634">"Ajouter Attendre"</string>
     <string name="menu_select_account" msgid="5576598753317289565">"Sélectionnez un compte"</string>
-    <string name="call_settings" msgid="7666474782093693667">"Paramètres"</string>
+    <string name="dialer_settings_label" msgid="4305043242594150479">"Paramètres"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nouveau contact"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Tous les contacts"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Détails sur l\'appel"</string>
@@ -102,18 +107,18 @@
     <string name="type_incoming" msgid="6502076603836088532">"Appel entrant"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Appel sortant"</string>
     <string name="type_missed" msgid="2720502601640509542">"Appel manqué"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"Appel vidéo entrant"</string>
+    <string name="type_outgoing_video" msgid="2858140021680755266">"Appel vidéo sortant"</string>
+    <string name="type_missed_video" msgid="954396897034220545">"Appel vidéo manqué"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Messagerie vocale"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Appels entrants"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Écouter le message vocal"</string>
-    <string name="description_call_log_incoming_call" msgid="4485427487637250143">"Appel entrant"</string>
-    <string name="description_call_log_outgoing_call" msgid="604831756853471658">"Appel sortant"</string>
-    <string name="description_call_log_missed_call" msgid="2242805209983708825">"Appel manqué"</string>
-    <string name="description_call_log_voicemail" msgid="4600798771975158948">"Messagerie vocale"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Afficher le contact <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Appeler <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Coordonnées de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"Nouveau message vocal."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> appels."</string>
+    <string name="description_video_call" msgid="2933838090743214204">"Appel vidéo."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Envoyer un SMS à <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nouveau message vocal"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Démarrer la recherche vocale"</string>
@@ -133,7 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Chargement depuis la carte SIM..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contacts de carte SIM"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Réactivez l\'application Contacts pour utiliser cette fonctionnalité."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Réactivez l\'application Contacts pour utiliser cette fonctionnalité."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"La recherche vocale n\'est pas accessible."</string>
     <string name="call_not_available" msgid="8941576511946492225">"Impossible d\'effectuer un appel téléphonique, car l\'application Téléphone a été désactivée."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Aucune des applications installées ne peut effectuer l\'action sélectionnée."</string>
@@ -162,18 +167,21 @@
     <string name="remove_contact" msgid="1080555335283662961">"Supprimer"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TOUS LES CONTACTS"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"RAPPELER"</string>
+    <string name="call_log_action_video_call" msgid="3818588654537490948">"APPEL VIDÉO"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ÉCOUTER"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"DÉTAILS"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Appel manqué de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> à <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"Appel reçu de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> à <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"Appel à <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g> à <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Rappeler <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"Appel vidéo à <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Écouter le message vocal de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Détails de l\'appel pour <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Entrée du journal d\'appels supprimée."</string>
+    <string name="toast_caller_id_reported" msgid="1127087402649645557">"Le contact a été signalé."</string>
+    <string name="call_log_action_report" msgid="561229827189128879">"SIGNALER"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Aujourd\'hui"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Hier"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"La semaine dernière"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Plus anciens"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"Liste d\'appels"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"Activer le haut-parleur."</string>
@@ -181,4 +189,16 @@
     <string name="voicemail_play_faster" msgid="3444751008615323006">"Lire plus vite."</string>
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Lire moins vite."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Lancer ou interrompre la lecture."</string>
+    <string name="list_delimeter" msgid="4571593167738725100">", "</string>
+    <string name="general_settings_label" msgid="4787443826763795004">"Paramètres généraux"</string>
+    <string name="general_settings_description" msgid="4838560696004337578">"Affichage des contacts, sons et réponses rapides"</string>
+    <string name="contact_display_options_category_title" msgid="5719485933817512769">"Options d\'affichage des contacts"</string>
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Sons et vibrations"</string>
+    <string name="ringtone_title" msgid="760362035635084653">"Sonnerie du téléphone"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrer aussi pour les appels"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tonalités du clavier"</string>
+    <string name="other_settings_title" msgid="7976283601445863248">"Autre"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Réponses rapides"</string>
+    <string name="call_settings_label" msgid="7416182166943714852">"Paramètres d\'appel"</string>
+    <string name="call_settings_description" msgid="2756622428019213052">"Messagerie vocale, appel en attente et autres"</string>
 </resources>

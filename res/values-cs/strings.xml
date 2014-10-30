@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Vytáčení"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Hovory"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Odeslat textovou zprávu"</string>
@@ -78,6 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"vyhledat"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"vytáčení"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"číslo, které chcete vytočit"</string>
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Spuštění a zastavení přehrávání"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Zapnutí a vypnutí reproduktoru"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Vyhledání pozice přehrávání"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Snížení rychlosti přehrávání"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Zvýšení rychlosti přehrávání"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Historie volání"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Více možností"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"číselník"</string>
@@ -87,11 +92,11 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Zobrazit pouze zmeškané"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Zobrazit pouze hlas. schránku"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Zobrazit všechny hovory"</string>
-    <string name="add_contact" msgid="8875804371377471164">"Přidat kontakt"</string>
+    <string name="add_contact" msgid="4579643070374941999">"Přidat do kontaktů"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Přidat pauzu 2 s"</string>
     <string name="add_wait" msgid="3360818652790319634">"Přidat čekání"</string>
     <string name="menu_select_account" msgid="5576598753317289565">"Vybrat účet"</string>
-    <string name="call_settings" msgid="7666474782093693667">"Nastavení"</string>
+    <string name="dialer_settings_label" msgid="4305043242594150479">"Nastavení"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nový kontakt"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Všechny kontakty"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Podrobnosti hovoru"</string>
@@ -102,18 +107,18 @@
     <string name="type_incoming" msgid="6502076603836088532">"Příchozí hovor"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Odchozí volání"</string>
     <string name="type_missed" msgid="2720502601640509542">"Zmeškaný hovor"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"Příchozí videohovor"</string>
+    <string name="type_outgoing_video" msgid="2858140021680755266">"Odchozí videohovor"</string>
+    <string name="type_missed_video" msgid="954396897034220545">"Zmeškaný videohovor"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Hlasová schránka"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Příchozí volání"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Přehrát hlasovou schránku"</string>
-    <string name="description_call_log_incoming_call" msgid="4485427487637250143">"Příchozí hovor"</string>
-    <string name="description_call_log_outgoing_call" msgid="604831756853471658">"Odchozí hovor"</string>
-    <string name="description_call_log_missed_call" msgid="2242805209983708825">"Zmeškaný hovor"</string>
-    <string name="description_call_log_voicemail" msgid="4600798771975158948">"Hlasová schránka"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Zobrazit kontakt <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Volat kontakt <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Podrobnosti kontaktu pro <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"Nová hlasová zpráva"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"Počet hovorů: <xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>"</string>
+    <string name="description_video_call" msgid="2933838090743214204">"Videohovor"</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Odeslat textovou zprávu kontaktu <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nevyslechnutá hlasová zpráva"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Spustit hlasové vyhledávání"</string>
@@ -127,13 +132,13 @@
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Hovor nebyl odeslán"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Chcete-li nastavit hlasovou schránku, přejděte do části Menu &gt; Nastavení."</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Chcete-li volat hlasovou schránku, nejdříve vypněte režim V letadle."</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Chcete-li volat hlasovou schránku, nejdříve vypněte režim Letadlo."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Načítá se..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Načítání ze SIM karty..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Kontakty na SIM kartě"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Chcete-li použít tuto funkci, znovu povolte aplikaci Lidé."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Chcete-li tuto funkci použít, znovu aktivujte aplikaci Kontakty."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Hlasové vyhledávání není k dispozici"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Telefonický hovor nelze uskutečnit, protože aplikace Telefon byla zakázána."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Není k dispozici žádná nainstalovaná aktivita, pomocí které by bylo možné vybranou akci provést."</string>
@@ -162,18 +167,21 @@
     <string name="remove_contact" msgid="1080555335283662961">"Odstranit"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"VŠECHNY KONTAKTY"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"VOLAT ZPĚT"</string>
+    <string name="call_log_action_video_call" msgid="3818588654537490948">"VIDEOHOVOR"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"POSLOUCHAT"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"PODROBNOSTI"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Zmeškaný hovor od <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"Přijatý hovor od <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"Hovor s <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Zpětné volání <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"Odchozí videohovor s: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Poslech hlasové schránky od <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Podrobnosti volání <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Záznam v seznamu hovorů byl smazán."</string>
+    <string name="toast_caller_id_reported" msgid="1127087402649645557">"Kontakt byl nahlášen."</string>
+    <string name="call_log_action_report" msgid="561229827189128879">"NAHLÁSIT"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Dnes"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Včera"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"Poslední týden"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Starší"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"Seznam volání"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"Zapnout reproduktor."</string>
@@ -181,4 +189,16 @@
     <string name="voicemail_play_faster" msgid="3444751008615323006">"Přehrávat rychleji."</string>
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Přehrávat pomaleji."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Spustit nebo pozastavit přehrávání."</string>
+    <string name="list_delimeter" msgid="4571593167738725100">", "</string>
+    <string name="general_settings_label" msgid="4787443826763795004">"Obecná nastavení"</string>
+    <string name="general_settings_description" msgid="4838560696004337578">"Zobrazení kontaktů, zvuky a rychlé odpovědi"</string>
+    <string name="contact_display_options_category_title" msgid="5719485933817512769">"Možnosti zobrazení kontaktů"</string>
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Zvuky a vibrace"</string>
+    <string name="ringtone_title" msgid="760362035635084653">"Vyzváněcí tón telefonu"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrovat také u volání"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tóny číselníku"</string>
+    <string name="other_settings_title" msgid="7976283601445863248">"Další"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Rychlé odpovědi"</string>
+    <string name="call_settings_label" msgid="7416182166943714852">"Nastavení hovorů"</string>
+    <string name="call_settings_description" msgid="2756622428019213052">"Hlasová schránka, další hovor na lince atd."</string>
 </resources>

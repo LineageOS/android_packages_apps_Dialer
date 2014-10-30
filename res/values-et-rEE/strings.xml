@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Dialer"</string>
-    <string name="launcherDialer" msgid="8636288196618486553">"Telefon"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Kõnelogi"</string>
     <string name="menu_sendTextMessage" msgid="6937343460284499306">"Tekstsõnumi saatmine"</string>
@@ -78,6 +78,11 @@
     <string name="description_search_button" msgid="3660807558587384889">"otsing"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"Helista"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"number valimiseks"</string>
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Taasesituse alustamine või peatamine"</string>
+    <string name="description_playback_speakerphone" msgid="6008323900245707504">"Valjuhääldi sisse- või väljalülitamine"</string>
+    <string name="description_playback_seek" msgid="4509404274968530055">"Taasesituse positsiooni otsimine"</string>
+    <string name="description_rate_decrease" msgid="3161652589401708284">"Taasesituse kiiruse vähendamine"</string>
+    <string name="description_rate_increase" msgid="6324606574127052385">"Taasesituse kiiruse suurendamine"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Kõneajalugu"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Rohkem valikuid"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"valimisklahvistik"</string>
@@ -87,11 +92,11 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Kuva ainult vastamata"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Kuva ainult kõnepostisõnumeid"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Kuva kõik kõned"</string>
-    <string name="add_contact" msgid="8875804371377471164">"Lisa kontakt"</string>
+    <string name="add_contact" msgid="4579643070374941999">"Lisa kontaktide hulka"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Lisa 2-sekundiline paus"</string>
     <string name="add_wait" msgid="3360818652790319634">"Lisa ootama"</string>
     <string name="menu_select_account" msgid="5576598753317289565">"Konto valimine"</string>
-    <string name="call_settings" msgid="7666474782093693667">"Seaded"</string>
+    <string name="dialer_settings_label" msgid="4305043242594150479">"Seaded"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Uus kontakt"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Kõik kontaktid"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Kõne üksikasjad"</string>
@@ -102,22 +107,22 @@
     <string name="type_incoming" msgid="6502076603836088532">"Sissetulev kõne"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Väljuv kõne"</string>
     <string name="type_missed" msgid="2720502601640509542">"Vastamata kõne"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"Sissetulev videokõne"</string>
+    <string name="type_outgoing_video" msgid="2858140021680755266">"Väljaminev videokõne"</string>
+    <string name="type_missed_video" msgid="954396897034220545">"Vastamata videokõne"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Kõnepost"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Sissetulevad kõned"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Esita kõnepostisõnum"</string>
-    <string name="description_call_log_incoming_call" msgid="4485427487637250143">"Sissetulev kõne"</string>
-    <string name="description_call_log_outgoing_call" msgid="604831756853471658">"Väljuv kõne"</string>
-    <string name="description_call_log_missed_call" msgid="2242805209983708825">"Vastamata kõne"</string>
-    <string name="description_call_log_voicemail" msgid="4600798771975158948">"Kõnepost"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Kuva kontakt <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Helista: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Kontakti <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> üksikasjad"</string>
     <string name="description_new_voicemail" msgid="2133792360865517746">"Uus kõnepost."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> kõnet."</string>
+    <string name="description_video_call" msgid="2933838090743214204">"Videokõne."</string>
     <string name="description_send_text_message" msgid="7803126439934046891">"Saada tekstsõnum kontaktile <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Kuulamata kõnepostisõnum"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Häälotsingu alustamine"</string>
-    <string name="menu_callNumber" msgid="997146291983360266">"Helistage: <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="menu_callNumber" msgid="997146291983360266">"Helista: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Tundmatu"</string>
     <string name="voicemail" msgid="3851469869202611441">"Kõnepost"</string>
     <string name="private_num" msgid="6374339738119166953">"Varjatud number"</string>
@@ -133,7 +138,7 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Laadimine SIM-kaardilt ..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM-kaardi kontaktid"</string>
-    <string name="add_contact_not_available" msgid="1419207765446461366">"Funktsiooni kasutamiseks lubage uuesti rakendus Inimesed."</string>
+    <string name="add_contact_not_available" msgid="2731922990890769322">"Funktsiooni kasutamiseks lubage uuesti rakendus Kontaktid."</string>
     <string name="voice_search_not_available" msgid="7580616740587850828">"Häälotsing pole saadaval"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Helistada ei saa, sest telefonirakendus on keelatud."</string>
     <string name="activity_not_available" msgid="8265265380537872585">"Pole installitud ühtegi rakendust, mis suudaks käsitleda valitud tegevust."</string>
@@ -155,25 +160,28 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Videokõne tegemine"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Kogu kõneajaloo vaatamine"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> uus/uut vastamata kõne(t)"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"Kiirvalimine on ühe puutega nende\nlemmikute ja numbrite valimine\n, kellele sageli helistate."</string>
+    <string name="speed_dial_empty" msgid="5476435149276295630">"Kiirvalimine on ühe puutega nende\nlemmikute ja numbrite valimine,\n kellele sageli helistate."</string>
     <string name="all_contacts_empty" msgid="4536082452651392894">"Teil pole ühtegi kontakti."</string>
     <string name="contact_tooltip" msgid="7817483485692282287">"Puudutage kujutist, et näha kõiki numbreid, või vajutage ja hoidke all ümberkorraldamiseks"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Loobu"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Eemalda"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"KÕIK KONTAKTID"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"HELISTA TAGASI"</string>
+    <string name="call_log_action_video_call" msgid="3818588654537490948">"VIDEOKÕNE"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"KUULA"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"ÜKSIKASJAD"</string>
     <string name="description_incoming_missed_call" msgid="2610535352863246949">"Vastamata kõne: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7206670204016969740">"Vastatud kõne: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="3964211633673659733">"Helistamine: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"Tagasi helistamine: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"Videokõne kontaktile <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Kontakti <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> kõneposti kuulamine"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Kontakti <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> kõne üksikasjad"</string>
     <string name="toast_entry_removed" msgid="3389119736202317999">"Kõnelogi kanne on kustutatud."</string>
+    <string name="toast_caller_id_reported" msgid="1127087402649645557">"Kontaktist on teavitatud."</string>
+    <string name="call_log_action_report" msgid="561229827189128879">"TEAVITA"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Täna"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Eile"</string>
-    <string name="call_log_header_last_week" msgid="5197040511028258038">"Eelmine nädal"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Vanem"</string>
     <string name="call_detail_list_header" msgid="866455969433213220">"Kõneloend"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"Kõlari sisselülitamine."</string>
@@ -181,4 +189,16 @@
     <string name="voicemail_play_faster" msgid="3444751008615323006">"Kiirem esitus."</string>
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Aeglasem esitus."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Esituse alustamine või peatamine."</string>
+    <string name="list_delimeter" msgid="4571593167738725100">", "</string>
+    <string name="general_settings_label" msgid="4787443826763795004">"Üldseaded"</string>
+    <string name="general_settings_description" msgid="4838560696004337578">"Kontakti kuva, helid ja kiirvastused"</string>
+    <string name="contact_display_options_category_title" msgid="5719485933817512769">"Kontaktide kuvavalikud"</string>
+    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Helid ja vibreerimine"</string>
+    <string name="ringtone_title" msgid="760362035635084653">"Telefoni helin"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibreeri ka kõnede puhul"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Valimisklahvistiku toonid"</string>
+    <string name="other_settings_title" msgid="7976283601445863248">"Muu"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Kiirvastused"</string>
+    <string name="call_settings_label" msgid="7416182166943714852">"Kõneseaded"</string>
+    <string name="call_settings_description" msgid="2756622428019213052">"Kõnepost, ootel kõne ja muud"</string>
 </resources>
