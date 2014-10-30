@@ -22,6 +22,7 @@ import android.provider.CallLog.Calls;
 import android.test.AndroidTestCase;
 import android.view.View;
 
+import com.android.contacts.common.CallUtil;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
@@ -323,8 +324,13 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 null, Calls.FEATURES_VIDEO, null, null);
 
         CharSequence description = mHelper.getCallDescription(getContext(), details);
+        final boolean isVideoEnabled = CallUtil.isVideoEnabled(getContext());
         assertTrue(description.toString()
-                .contains(this.mResources.getString(R.string.description_video_call, 2)));
+                .contains(this.mResources.getString(
+                        isVideoEnabled
+                        ? R.string.description_video_call
+                        : R.string.description_num_calls,
+                                2)));
     }
 
     /** Asserts that the primary action view does not have a call intent. */
