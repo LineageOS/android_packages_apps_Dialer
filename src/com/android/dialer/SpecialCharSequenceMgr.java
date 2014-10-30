@@ -43,10 +43,8 @@ import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
 import com.android.dialer.calllog.PhoneAccountUtils;
-import com.android.incallui.InCallPresenter;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,7 +149,7 @@ public class SpecialCharSequenceMgr {
      * This code works alongside the Asynchronous query handler {@link QueryHandler}
      * and query cancel handler implemented in {@link SimContactQueryCookie}.
      */
-    static boolean handleAdnEntry(Context context, String input, EditText textField) {
+    static boolean handleAdnEntry(final Context context, String input, EditText textField) {
         /* ADN entries are of the form "N(N)(N)#" */
 
         TelephonyManager telephonyManager =
@@ -175,7 +173,7 @@ public class SpecialCharSequenceMgr {
         if ((len > 1) && (len < 5) && (input.endsWith("#"))) {
             try {
                 // get the ordinal number of the sim contact
-                int index = Integer.parseInt(input.substring(0, len-1));
+                final int index = Integer.parseInt(input.substring(0, len-1));
 
                 // The original code that navigated to a SIM Contacts list view did not
                 // highlight the requested contact correctly, a requirement for PTCRB
@@ -185,10 +183,10 @@ public class SpecialCharSequenceMgr {
                 // the dialer text field.
 
                 // create the async query handler
-                QueryHandler handler = new QueryHandler (context.getContentResolver());
+                final QueryHandler handler = new QueryHandler (context.getContentResolver());
 
                 // create the cookie object
-                SimContactQueryCookie sc = new SimContactQueryCookie(index - 1, handler,
+                final SimContactQueryCookie sc = new SimContactQueryCookie(index - 1, handler,
                         ADN_QUERY_TOKEN);
 
                 // setup the cookie fields
@@ -205,24 +203,65 @@ public class SpecialCharSequenceMgr {
                 sc.progressDialog.getWindow().addFlags(
                         WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
 
-                // display the progress dialog
-                sc.progressDialog.show();
+                final TelecomManager telecomManager =
+                        (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+                List<PhoneAccountHandle> phoneAccountHandles =
+                        PhoneAccountUtils.getSubscriptionPhoneAccounts(context);
 
-                // run the query.
-                handler.startQuery(ADN_QUERY_TOKEN, sc, Uri.parse("content://icc/adn"),
-                        new String[]{ADN_PHONE_NUMBER_COLUMN_NAME}, null, null, null);
+                boolean hasUserSelectedDefault = hasDefaultSubscriptionAccount(
+                        telecomManager.getUserSelectedOutgoingPhoneAccount(), phoneAccountHandles);
 
-                if (sPreviousAdnQueryHandler != null) {
-                    // It is harmless to call cancel() even after the handler's gone.
-                    sPreviousAdnQueryHandler.cancel();
+                if (phoneAccountHandles.size() == 1 || hasUserSelectedDefault) {
+                    Uri uri = telecomManager.getAdnUriForPhoneAccount(null);
+                    handleAdnQuery(handler, sc, uri);
+                } else if (phoneAccountHandles.size() > 1){
+                    SelectPhoneAccountListener listener = new SelectPhoneAccountListener() {
+                        @Override
+                        public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
+                                boolean setDefault) {
+                            Uri uri =
+                                    telecomManager.getAdnUriForPhoneAccount(selectedAccountHandle);
+                            handleAdnQuery(handler, sc, uri);
+                            //TODO: show error dialog if result isn't valid
+                        }
+                        @Override
+                        public void onDialogDismissed() {}
+                    };
+
+                    SelectPhoneAccountDialogFragment.showAccountDialog(
+                            ((Activity) context).getFragmentManager(), false, phoneAccountHandles,
+                            listener);
+                } else {
+                    return false;
                 }
-                sPreviousAdnQueryHandler = handler;
+
                 return true;
             } catch (NumberFormatException ex) {
                 // Ignore
             }
         }
         return false;
+    }
+
+    private static void handleAdnQuery(QueryHandler handler, SimContactQueryCookie cookie,
+            Uri uri) {
+        if (handler == null || cookie == null || uri == null) {
+            Log.w(TAG, "queryAdn parameters incorrect");
+            return;
+        }
+
+        // display the progress dialog
+        cookie.progressDialog.show();
+
+        // run the query.
+        handler.startQuery(ADN_QUERY_TOKEN, cookie, uri, new String[]{ADN_PHONE_NUMBER_COLUMN_NAME},
+                null, null, null);
+
+        if (sPreviousAdnQueryHandler != null) {
+            // It is harmless to call cancel() even after the handler's gone.
+            sPreviousAdnQueryHandler.cancel();
+        }
+        sPreviousAdnQueryHandler = handler;
     }
 
     static boolean handlePinEntry(Context context, final String input) {
@@ -411,12 +450,13 @@ public class SpecialCharSequenceMgr {
                 // get the EditText to update or see if the request was cancelled.
                 EditText text = sc.getTextField();
 
-                // if the textview is valid, and the cursor is valid and postionable
-                // on the Nth number, then we update the text field and display a
-                // toast indicating the caller name.
+                // if the TextView is valid, and the cursor is valid and positionable on the
+                // Nth number, then we update the text field and display a toast indicating the
+                // caller name.
                 if ((c != null) && (text != null) && (c.moveToPosition(sc.contactNum))) {
                     String name = c.getString(c.getColumnIndexOrThrow(ADN_NAME_COLUMN_NAME));
-                    String number = c.getString(c.getColumnIndexOrThrow(ADN_PHONE_NUMBER_COLUMN_NAME));
+                    String number =
+                            c.getString(c.getColumnIndexOrThrow(ADN_PHONE_NUMBER_COLUMN_NAME));
 
                     // fill the text in.
                     text.getText().replace(0, 0, number);
@@ -434,8 +474,8 @@ public class SpecialCharSequenceMgr {
 
         public void cancel() {
             mCanceled = true;
-            // Ask AsyncQueryHandler to cancel the whole request. This will fails when the
-            // query already started.
+            // Ask AsyncQueryHandler to cancel the whole request. This will fail when the query is
+            // already started.
             cancelOperation(ADN_QUERY_TOKEN);
         }
     }

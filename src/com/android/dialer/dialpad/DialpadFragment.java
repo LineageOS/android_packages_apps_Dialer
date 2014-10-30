@@ -284,7 +284,7 @@ public class DialpadFragment extends Fragment
 
     @Override
     public void afterTextChanged(Editable input) {
-        // When DTMF dialpad buttons are being pressed, we delay SpecialCharSequencMgr sequence,
+        // When DTMF dialpad buttons are being pressed, we delay SpecialCharSequenceMgr sequence,
         // since some of SpecialCharSequenceMgr's behavior is too abrupt for the "touch-down"
         // behavior.
         if (!mDigitsFilledByIntent &&
