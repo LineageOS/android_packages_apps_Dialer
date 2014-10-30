@@ -22,25 +22,6 @@
     <string name="unknown" msgid="6878797917991465859">"Desconhecido"</string>
     <string name="private_num" msgid="6713286113000232309">"Número particular"</string>
     <string name="payphone" msgid="1931775086311769314">"Telefone público"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Linha ocupada"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Rede ocupada"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Sem resposta, tempo limite excedido"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Servidor inacessível"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Número incontactável"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Nome de utilizador ou palavra-passe incorretos"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Chamada efetuada de fora da rede"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Erro do servidor. Tente novamente mais tarde."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Sem sinal"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Limite de ACM excedido"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Rádio desativado"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Sem cartão SIM ou erro do cartão"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Rede móvel não disponível"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"As chamadas efectuadas são restringidas por FDN."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Não é possível efetuar chamadas com o barramento de chamadas ativado."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Todas as chamadas são restringidas por controlo de acesso."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"As chamadas de emergência são restringidas por controlo de acesso."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"As chamadas normais são restringidas por controlo de acesso."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Número inválido"</string>
     <string name="confCall" msgid="1904840547188336828">"Chamada de conferência"</string>
     <string name="call_lost" msgid="317670617901479594">"A chamada perdeu-se."</string>
     <string name="ok" msgid="3811371167865772377">"OK"</string>
@@ -65,6 +46,12 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"A desligar"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"A chamar"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"O meu número é <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"A ligar vídeo"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"Videochamada"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"A solicitar vídeo"</string>
+    <string name="card_title_video_call_error" msgid="5520555528871673801">"Não é possível ligar a videochamada"</string>
+    <string name="card_title_callback_number" msgid="4604563437776874016">"O seu número de retorno de chamadas\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"O seu número de retorno de chamadas de emergência\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"A marcar"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Chamada não atendida"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Chamadas não atendidas"</string>
@@ -73,6 +60,8 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Chamada em curso"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"Em espera"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Chamada recebida"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"A receber videochamada"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Pedido de vídeo recebido"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Novo correio de voz"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Novo correio de voz (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Marcar <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
@@ -80,6 +69,10 @@
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Nenhum serviço"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Rede selecionada (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) indisponível"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Desligar"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Vídeo"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Voz"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"Aceitar"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Ignorar"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Ligar de volta"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Mensagem"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Para efectuar uma chamada, desactive primeiro o modo para Avião."</string>
@@ -95,14 +88,18 @@
     <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Não é possível efectuar chamadas de conferência."</string>
     <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Não é possível rejeitar a chamada."</string>
     <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Não é possível efectuar chamada(s)."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Número do correio de voz desconhecido."</string>
-    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Chamada por internet"</string>
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"Chamada SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Chamada de emergência"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"A ligar o rádio..."</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Fora da área do serviço, a tentar novamente..."</string>
     <string name="dial_emergency_error" msgid="7969515493359619960">"A chamada não foi efetuada. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> não é um número de emergência!"</string>
     <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Chamada não efetuada. Marque um número de emergência!"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Utilizar o teclado para marcar"</string>
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Colocar a chamada em espera"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Retomar a chamada"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Adicionar chamada"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Intercalar chamadas"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Alternar entre chamadas"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"Suspender"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Terminar"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Teclado de marcação"</string>
@@ -111,9 +108,13 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Intercalar chamadas"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Trocar"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Gerir chamadas"</string>
-    <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Gerir conferência"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Gerir chamada de conferência"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Áudio"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videochamada"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Mudar para chamada de voz"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Mudar de câmara"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Interromper vídeo"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"Mais opções"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Serviço"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Configuração"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Não definido&gt;"</string>
@@ -140,33 +141,34 @@
     <string name="description_image_button_pound" msgid="1716041284529917866">"cardinal"</string>
     <string name="description_dial_button" msgid="7459705245418435351">"marcar"</string>
     <string name="description_delete_button" msgid="4015842181592283903">"retrocesso"</string>
-    <string name="accessibility_speakerphone_enabled" msgid="1988512040421036359">"Alta voz ativada."</string>
+    <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"Alta-voz selecionado"</string>
+    <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"Auricular selecionado"</string>
+    <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"Auscultadores com microfone integrado com fios selecionados"</string>
+    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"Auscultadores Bluetooth com microfone integrado selecionados"</string>
     <string name="accessibility_call_muted" msgid="2776111226185342220">"Chamada sem som."</string>
+    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Chamada com som."</string>
+    <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Chamada colocada em espera."</string>
+    <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"Chamada removida de espera."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Atender"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Enviar SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Recusar"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Responder como videochamada"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Responder como chamada de áudio"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Aceitar o pedido de vídeo"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Recusar o pedido de vídeo"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"Deslize lentamente para cima para <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"Deslize lentamente para a esquerda para <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"Deslize lentamente para a direita para <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"Deslize lentamente para baixo para <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Vibrar"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Vibrar"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Som"</string>
     <string name="default_notification_description" msgid="78174796906240970">"Som predefinido (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Toque do telemóvel"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Vibrar ao tocar"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Sons dos toques no teclado"</string>
     <string name="dial_pad_autocomplete" msgid="494525952035761075">"Preenchimento automático do teclado"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Tocar e Vibrar"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Gerir chamada de conferência"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Número de emergência"</string>
-    <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
-    <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
-    <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
-    <string name="dialpad_3_number" msgid="7146166309009131439">"3"</string>
-    <string name="dialpad_4_number" msgid="9075039274846639476">"4"</string>
-    <string name="dialpad_5_number" msgid="5780019709590672721">"5"</string>
-    <string name="dialpad_6_number" msgid="8261355170951265389">"6"</string>
-    <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
-    <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
-    <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
+    <string name="select_account_dialog_title" msgid="5730339500156684204">"Selecionar conta"</string>
 </resources>
