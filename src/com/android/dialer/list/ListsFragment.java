@@ -30,6 +30,7 @@ import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.list.ShortcutCardsAdapter.SwipeableShortcutCard;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.OverlappingPaneLayout;
 import com.android.dialer.widget.OverlappingPaneLayout.PanelSlideCallbacks;
 import com.android.dialerbind.ObjectFactory;
@@ -68,8 +69,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
 
     public interface HostInterface {
         public void showCallHistory();
-        public int getActionBarHeight();
-        public void setActionBarHideOffset(int offset);
+        public ActionBarController getActionBarController();
     }
 
     private ActionBar mActionBar;
@@ -124,8 +124,9 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
 
                 final int availableActionBarHeight =
                         Math.min(mActionBar.getHeight(), topPaneHeight);
-                ((HostInterface) getActivity()).setActionBarHideOffset(
-                        mActionBar.getHeight() - availableActionBarHeight);
+                final ActionBarController controller =
+                        ((HostInterface) getActivity()).getActionBarController();
+                controller.setHideOffset(mActionBar.getHeight() - availableActionBarHeight);
 
                 if (!mActionBar.isShowing()) {
                     mActionBar.show();
@@ -407,7 +408,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
         paneLayout.openPane();
         paneLayout.setPanelSlideCallbacks(mPanelSlideCallbacks);
         paneLayout.setIntermediatePinnedOffset(
-                ((HostInterface) getActivity()).getActionBarHeight());
+                ((HostInterface) getActivity()).getActionBarController().getActionBarHeight());
 
         LayoutTransition transition = paneLayout.getLayoutTransition();
         // Turns on animations for all types of layout changes so that they occur for
