@@ -30,6 +30,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telecom.DisconnectCause;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -225,10 +226,6 @@ public class InCallActivity extends Activity {
         }
 
         InCallPresenter.getInstance().onUiShowing(false);
-
-        if (isFinishing()) {
-            InCallPresenter.getInstance().setActivity(null);
-        }
     }
 
     @Override
@@ -240,6 +237,9 @@ public class InCallActivity extends Activity {
     @Override
     protected void onDestroy() {
         Log.d(this, "onDestroy()...  this = " + this);
+
+        InCallPresenter.getInstance().setActivity(null);
+
         super.onDestroy();
     }
 
