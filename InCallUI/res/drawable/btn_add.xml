@@ -18,12 +18,13 @@
 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/btn_background" />
+    <item android:id="@+id/backgroundItem"
+          android:drawable="@drawable/btn_background" />
 
     <item>
         <bitmap android:src="@drawable/ic_toolbar_add_call"
             android:gravity="center"
             android:tint="@color/selectable_icon_tint" />
     </item>
-    
+
 </layer-list>

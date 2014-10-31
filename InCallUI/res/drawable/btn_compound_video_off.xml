@@ -19,7 +19,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- The standard "compound button" background. -->
-    <item android:drawable="@drawable/btn_compound_background" />
+    <item android:id="@+id/compoundBackgroundItem"
+          android:drawable="@drawable/btn_compound_background" />
 
     <!-- Use an explicit <bitmap> to avoid scaling the icon up to the full size of the button. -->
     <item>

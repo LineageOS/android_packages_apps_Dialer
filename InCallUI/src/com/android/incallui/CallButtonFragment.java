@@ -17,7 +17,11 @@
 package com.android.incallui;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.telecom.AudioState;
 import android.view.ContextThemeWrapper;
@@ -34,6 +38,9 @@ import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnDismissListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+import com.android.contacts.common.util.MaterialColorMapUtils;
+import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
+
 /**
  * Fragment for call control buttons
  */
@@ -41,7 +48,6 @@ public class CallButtonFragment
         extends BaseFragment<CallButtonPresenter, CallButtonPresenter.CallButtonUi>
         implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener, OnDismissListener,
         View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-
     private ImageButton mAudioButton;
     private ImageButton mChangeToVoiceButton;
     private ImageButton mMuteButton;
@@ -66,6 +72,7 @@ public class CallButtonFragment
     private static final int VISIBLE = 255;
 
     private boolean mIsEnabled;
+    private MaterialPalette mCurrentThemeColors;
 
     @Override
     CallButtonPresenter createPresenter() {
@@ -130,6 +137,8 @@ public class CallButtonFragment
             getPresenter().refreshMuteState();
         }
         super.onResume();
+
+        updateColors();
     }
 
     @Override
@@ -188,6 +197,108 @@ public class CallButtonFragment
                 Log.wtf(this, "onClick: unexpected");
                 break;
         }
+    }
+
+    public void updateColors() {
+        MaterialPalette themeColors = InCallPresenter.getInstance().getThemeColors();
+
+        if (mCurrentThemeColors != null && mCurrentThemeColors.equals(themeColors)) {
+            return;
+        }
+
+        Resources res = getActivity().getResources();
+        ImageButton[] compoundButtons = {
+                mAudioButton,
+                mMuteButton,
+                mShowDialpadButton,
+                mHoldButton,
+                mSwitchCameraButton,
+                mPauseVideoButton
+        };
+
+        for (ImageButton button : compoundButtons) {
+            final LayerDrawable layers = (LayerDrawable) button.getBackground();
+            final StateListDrawable btnCompoundDrawable = compoundBackgroundDrawable(themeColors);
+            layers.setDrawableByLayerId(R.id.compoundBackgroundItem, btnCompoundDrawable);
+        }
+
+        ImageButton[] normalButtons = {
+            mChangeToVoiceButton,
+            mSwapButton,
+            mChangeToVideoButton,
+            mAddCallButton,
+            mMergeButton,
+            mOverflowButton
+        };
+
+        for (ImageButton button : normalButtons) {
+            final LayerDrawable layers = (LayerDrawable) button.getBackground();
+            final StateListDrawable btnCompoundDrawable = backgroundDrawable(themeColors);
+            layers.setDrawableByLayerId(R.id.backgroundItem, btnCompoundDrawable);
+        }
+
+        mCurrentThemeColors = themeColors;
+    }
+
+    /**
+     * Generate a StateListDrawable which will be the background for a compound button, i.e.
+     * a button with pressed and unpressed states. The unpressed state will be the same color
+     * as the rest of the call card, the pressed state will be the dark version of that color.
+     */
+    private StateListDrawable compoundBackgroundDrawable(MaterialPalette palette) {
+        Resources res = getResources();
+        StateListDrawable stateListDrawable = new StateListDrawable();
+
+        addSelectedAndFocused(res, stateListDrawable);
+        addFocused(res, stateListDrawable);
+        addSelected(res, stateListDrawable, palette);
+        addUnselected(res, stateListDrawable, palette);
+
+        return stateListDrawable;
+    }
+
+    /**
+     * Generate a StateListDrawable which will be the background of a button to ensure it
+     * is the same color as the rest of the call card.
+     */
+    private StateListDrawable backgroundDrawable(MaterialPalette palette) {
+        Resources res = getResources();
+        StateListDrawable stateListDrawable = new StateListDrawable();
+
+        addFocused(res, stateListDrawable);
+        addUnselected(res, stateListDrawable, palette);
+
+        return stateListDrawable;
+    }
+
+    // state_selected and state_focused
+    private void addSelectedAndFocused(Resources res, StateListDrawable drawable) {
+        int[] selectedAndFocused = {android.R.attr.state_selected, android.R.attr.state_focused};
+        Drawable selectedAndFocusedDrawable = res.getDrawable(R.drawable.btn_selected_focused);
+        drawable.addState(selectedAndFocused, selectedAndFocusedDrawable);
+    }
+
+    // state_focused
+    private void addFocused(Resources res, StateListDrawable drawable) {
+        int[] focused = {android.R.attr.state_focused};
+        Drawable focusedDrawable = res.getDrawable(R.drawable.btn_unselected_focused);
+        drawable.addState(focused, focusedDrawable);
+    }
+
+    // state_selected
+    private void addSelected(Resources res, StateListDrawable drawable, MaterialPalette palette) {
+        int[] selected = {android.R.attr.state_selected};
+        LayerDrawable selectedDrawable = (LayerDrawable) res.getDrawable(R.drawable.btn_selected);
+        ((GradientDrawable) selectedDrawable.getDrawable(0)).setColor(palette.mSecondaryColor);
+        drawable.addState(selected, selectedDrawable);
+    }
+
+    // default
+    private void addUnselected(Resources res, StateListDrawable drawable, MaterialPalette palette) {
+        LayerDrawable unselectedDrawable =
+                (LayerDrawable) res.getDrawable(R.drawable.btn_unselected);
+        ((GradientDrawable) unselectedDrawable.getDrawable(0)).setColor(palette.mPrimaryColor);
+        drawable.addState(new int[0], unselectedDrawable);
     }
 
     @Override
