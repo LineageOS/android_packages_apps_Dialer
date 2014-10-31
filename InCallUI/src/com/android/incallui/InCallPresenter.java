@@ -235,11 +235,44 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     /**
-     * Called when the UI begins or ends. Starts the callstate callbacks if the UI just began.
-     * Attempts to tear down everything if the UI just ended. See #tearDown for more insight on
-     * the tear-down process.
+     * Called when the UI begins, and starts the callstate callbacks if necessary.
      */
     public void setActivity(InCallActivity inCallActivity) {
+        if (inCallActivity == null) {
+            throw new IllegalArgumentException("registerActivity cannot be called with null");
+        }
+        if (mInCallActivity != null && mInCallActivity != inCallActivity) {
+            Log.wtf(this, "Setting a second activity before destroying the first.");
+        }
+        updateActivity(inCallActivity);
+    }
+
+    /**
+     * Called when the UI ends. Attempts to tear down everything if necessary. See
+     * {@link #tearDown()} for more insight on the tear-down process.
+     */
+    public void unsetActivity(InCallActivity inCallActivity) {
+        if (inCallActivity == null) {
+            throw new IllegalArgumentException("unregisterActivity cannot be called with null");
+        }
+        if (mInCallActivity == null) {
+            Log.i(this, "No InCallActivity currently set, no need to unset.");
+            return;
+        }
+        if (mInCallActivity != inCallActivity) {
+            Log.w(this, "Second instance of InCallActivity is trying to unregister when another"
+                    + " instance is active. Ignoring.");
+            return;
+        }
+        updateActivity(null);
+    }
+
+    /**
+     * Updates the current instance of {@link InCallActivity} with the provided one. If a
+     * {@code null} activity is provided, it means that the activity was finished and we should
+     * attempt to cleanup.
+     */
+    private void updateActivity(InCallActivity inCallActivity) {
         boolean updateListeners = false;
         boolean doAttemptCleanup = false;
 
@@ -247,8 +280,6 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             if (mInCallActivity == null) {
                 updateListeners = true;
                 Log.i(this, "UI Initialized");
-            } else if (mInCallActivity != inCallActivity) {
-                Log.wtf(this, "Setting a second activity before destroying the first.");
             } else {
                 // since setActivity is called onStart(), it can be called multiple times.
                 // This is fine and ignorable, but we do not want to update the world every time
@@ -270,18 +301,18 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             // NOTE: This code relies on {@link #mInCallActivity} being set so we run it after
             // it has been set.
             if (mInCallState == InCallState.NO_CALLS) {
-                Log.i(this, "UI Intialized, but no calls left.  shut down.");
+                Log.i(this, "UI Initialized, but no calls left.  shut down.");
                 attemptFinishActivity();
                 return;
             }
         } else {
-            Log.i(this, "UI Destroyed)");
+            Log.i(this, "UI Destroyed");
             updateListeners = true;
             mInCallActivity = null;
 
             // We attempt cleanup for the destroy case but only after we recalculate the state
-            // to see if we need to come back up or stay shut down. This is why we do the cleanup
-            // after the call to onCallListChange() instead of directly here.
+            // to see if we need to come back up or stay shut down. This is why we do the
+            // cleanup after the call to onCallListChange() instead of directly here.
             doAttemptCleanup = true;
         }
 
