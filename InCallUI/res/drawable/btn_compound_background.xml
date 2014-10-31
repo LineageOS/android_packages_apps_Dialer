@@ -24,7 +24,7 @@
                   android:drawable="@drawable/btn_selected_focused" />
 
             <item android:state_focused="true"
-                  android:drawable="@drawable/btn_unselected_focused" />cd
+                  android:drawable="@drawable/btn_unselected_focused" />
 
             <item android:state_selected="true"
                 android:drawable="@drawable/btn_selected" />

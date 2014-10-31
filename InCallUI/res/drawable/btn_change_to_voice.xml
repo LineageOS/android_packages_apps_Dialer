@@ -18,7 +18,8 @@
 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/btn_background" />
+    <item android:id="@+id/backgroundItem"
+          android:drawable="@drawable/btn_background" />
 
     <item>
         <bitmap android:src="@drawable/ic_toolbar_audio_phone"
