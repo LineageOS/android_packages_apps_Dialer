@@ -275,7 +275,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
                 return;
             }
         } else {
-            Log.i(this, "UI Destroyed)");
+            Log.i(this, "UI Destroyed");
             updateListeners = true;
             mInCallActivity = null;
 
