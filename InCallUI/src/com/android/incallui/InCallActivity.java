@@ -90,6 +90,8 @@ public class InCallActivity extends Activity {
     private boolean mIsLandscape;
     private Animation mSlideIn;
     private Animation mSlideOut;
+    private boolean mDismissKeyguard = false;
+
     AnimationListenerAdapter mSlideOutListener = new AnimationListenerAdapter() {
         @Override
         public void onAnimationEnd(Animation animation) {
@@ -510,6 +512,8 @@ public class InCallActivity extends Activity {
                         TelecomAdapter.getInstance().disconnectCall(call.getId());
                     }
                 }
+
+                dismissKeyguard(true);
             }
 
             Call pendingAccountSelectionCall = CallList.getInstance().getWaitingForAccountCall();
@@ -606,6 +610,10 @@ public class InCallActivity extends Activity {
     }
 
     public void dismissKeyguard(boolean dismiss) {
+        if (mDismissKeyguard == dismiss) {
+            return;
+        }
+        mDismissKeyguard = dismiss;
         if (dismiss) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         } else {
