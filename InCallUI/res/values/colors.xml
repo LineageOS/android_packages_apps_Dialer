@@ -76,4 +76,31 @@
 
     <!-- 20% opacity, theme color. -->
     <color name="incall_dialpad_touch_tint">#330288d1</color>
+
+    <!-- Background colors for InCallUI. This set of colors is a subset of
+        https://spec.googleplex.com/quantumpalette#extended which pass WCAG AA and all have a
+        contrast ratio over 5:1.
+
+        These colors are also used by InCallUIMaterialColorMapUtils to generate primary
+        activity colors.
+    -->
+    <array name="background_colors">
+        <item>#00796B</item>
+        <item>#3367D6</item>
+        <item>#303F9F</item>
+        <item>#7B1FA2</item>
+        <item>#C2185B</item>
+        <item>#C53929</item>
+    </array>
+
+    <!-- Darker versions of background_colors, two shades darker. These colors are used for the
+         status bar. -->
+    <array name="background_colors_dark">
+        <item>#004D40</item>
+        <item>#1C3AA9</item>
+        <item>#1A237E</item>
+        <item>#4A148C</item>
+        <item>#880E4F</item>
+        <item>#A52714</item>
+    </array>
 </resources>
