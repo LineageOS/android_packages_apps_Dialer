@@ -27,6 +27,7 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneCapabilities;
 import android.telecom.Phone;
 import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.text.TextUtils;
 import android.view.Surface;
@@ -34,6 +35,8 @@ import android.view.View;
 
 import com.google.common.base.Preconditions;
 
+import com.android.contacts.common.util.MaterialColorMapUtils;
+import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.incalluibind.ObjectFactory;
 
 import java.util.Collections;
@@ -142,6 +145,11 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     private boolean mIsActivityPreviouslyStarted = false;
 
     private Phone mPhone;
+
+    /** Display colors for the UI. Consists of a primary color and secondary (darker) color */
+    private MaterialPalette mThemeColors;
+
+    private TelecomManager mTelecomManager;
 
     public static synchronized InCallPresenter getInstance() {
         if (sInCallPresenter == null) {
@@ -1099,6 +1107,53 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         return TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) ==
                 View.LAYOUT_DIRECTION_RTL;
     }
+
+    /**
+     * Extract background color from call object. The theme colors will include a primary color
+     * and a secondary color.
+     */
+    public void setThemeColors() {
+        if (mInCallActivity == null) {
+            return;
+        }
+
+        Call call = CallList.getInstance().getFirstCall();
+        TelecomManager tm = getTelecomManager();
+
+        int color = PhoneAccount.NO_COLOR;
+
+        if (call != null && tm != null && tm.hasMultipleCallCapableAccounts()) {
+            PhoneAccount account = tm.getPhoneAccount(call.getAccountHandle());
+            if (account != null) {
+                color = account.getColor();
+            }
+        }
+
+        // This method will set the background to default if the color is PhoneAccount.NO_COLOR.
+        mThemeColors = new InCallUIMaterialColorMapUtils(mContext.getResources()).
+                calculatePrimaryAndSecondaryColor(color);
+
+        mInCallActivity.getWindow().setStatusBarColor(mThemeColors.mSecondaryColor);
+    }
+
+    /**
+     * @return A palette for colors to display in the UI.
+     */
+    public MaterialPalette getThemeColors() {
+        return mThemeColors;
+    }
+
+    /**
+     * @return An instance of TelecomManager.
+     */
+    private TelecomManager getTelecomManager() {
+        if (mTelecomManager == null) {
+            mTelecomManager = (TelecomManager)
+                    mInCallActivity.getSystemService(Context.TELECOM_SERVICE);
+        }
+        return mTelecomManager;
+    }
+
 
     /**
      * Private constructor. Must use getInstance() to get this singleton.
