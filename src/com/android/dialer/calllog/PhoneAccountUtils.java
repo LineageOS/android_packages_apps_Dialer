@@ -24,12 +24,33 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Methods to help extract {@code PhoneAccount} information from database and Telecomm sources
  */
 public class PhoneAccountUtils {
     /**
-     * Compose PhoneAccount object from component name and account id
+     * Return a list of phone accounts that are subscription/SIM accounts.
+     */
+    public static List<PhoneAccountHandle> getSubscriptionPhoneAccounts(Context context) {
+        final TelecomManager telecomManager =
+                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+
+        List<PhoneAccountHandle> subscriptionAccountHandles = new ArrayList<PhoneAccountHandle>();
+        List<PhoneAccountHandle> accountHandles = telecomManager.getCallCapablePhoneAccounts();
+        for (PhoneAccountHandle accountHandle : accountHandles) {
+            PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+            if (account.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)) {
+                subscriptionAccountHandles.add(accountHandle);
+            }
+        }
+        return subscriptionAccountHandles;
+    }
+
+    /**
+     * Compose PhoneAccount object from component name and account id.
      */
     public static PhoneAccountHandle getAccount(String componentString, String accountId) {
         if (TextUtils.isEmpty(componentString) || TextUtils.isEmpty(accountId)) {
@@ -40,7 +61,7 @@ public class PhoneAccountUtils {
     }
 
     /**
-     * Extract account icon from PhoneAccount object
+     * Extract account icon from PhoneAccount object.
      */
     public static Drawable getAccountIcon(Context context, PhoneAccountHandle phoneAccount) {
         final PhoneAccount account = getAccountOrNull(context, phoneAccount);
@@ -51,7 +72,7 @@ public class PhoneAccountUtils {
     }
 
     /**
-     * Extract account label from PhoneAccount object
+     * Extract account label from PhoneAccount object.
      */
     public static String getAccountLabel(Context context, PhoneAccountHandle phoneAccount) {
         final PhoneAccount account = getAccountOrNull(context, phoneAccount);
@@ -74,5 +95,4 @@ public class PhoneAccountUtils {
         }
         return account;
     }
-
 }

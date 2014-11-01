@@ -16,6 +16,7 @@
 
 package com.android.dialer;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.app.ProgressDialog;
@@ -28,6 +29,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Looper;
 import android.provider.Settings;
+import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
@@ -38,7 +40,13 @@ import android.widget.Toast;
 
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
+import com.android.dialer.calllog.PhoneAccountUtils;
+import com.android.incallui.InCallPresenter;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -217,11 +225,49 @@ public class SpecialCharSequenceMgr {
         return false;
     }
 
-    static boolean handlePinEntry(Context context, String input) {
+    static boolean handlePinEntry(Context context, final String input) {
         if ((input.startsWith("**04") || input.startsWith("**05")) && input.endsWith("#")) {
-            TelecomManager telecomManager =
+            final TelecomManager telecomManager =
                     (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-            return telecomManager.handleMmi(input);
+            List<PhoneAccountHandle> phoneAccountHandles =
+                    PhoneAccountUtils.getSubscriptionPhoneAccounts(context);
+            boolean hasUserSelectedDefault = hasDefaultSubscriptionAccount(
+                    telecomManager.getUserSelectedOutgoingPhoneAccount(), phoneAccountHandles);
+
+            if (phoneAccountHandles.size() == 1 || hasUserSelectedDefault) {
+                // Don't bring up the dialog for single-SIM or if the default outgoing account is
+                // a subscription account.
+                return telecomManager.handleMmi(input);
+            } else if (phoneAccountHandles.size() > 1){
+                SelectPhoneAccountListener listener = new SelectPhoneAccountListener() {
+                    @Override
+                    public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
+                            boolean setDefault) {
+                        telecomManager.handleMmi(selectedAccountHandle, input);
+                        //TODO: show error dialog if result isn't valid
+                    }
+                    @Override
+                    public void onDialogDismissed() {}
+                };
+
+                SelectPhoneAccountDialogFragment.showAccountDialog(
+                        ((Activity) context).getFragmentManager(), false, phoneAccountHandles,
+                        listener);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Check if the default outgoing phone account set is a subscription phone account.
+     */
+    static private boolean hasDefaultSubscriptionAccount(PhoneAccountHandle defaultOutgoingAccount,
+            List<PhoneAccountHandle> phoneAccountHandles) {
+        for (PhoneAccountHandle accountHandle : phoneAccountHandles) {
+            if (accountHandle.equals(defaultOutgoingAccount)) {
+                return true;
+            }
         }
         return false;
     }
