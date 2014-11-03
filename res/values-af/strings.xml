@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Stemboodskap"</string>
     <string name="private_num" msgid="6374339738119166953">"Private nommer"</string>
     <string name="payphone" msgid="4864313342828942922">"Betaalfoon"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Gebruik sleutelbord om te skakel"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Skakel om \'n oproep by te voeg"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> sek."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Oproep nie gestuur nie"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Om stemboodskapdiens op te stel, gaan na Kieslys &gt; Instellings."</string>

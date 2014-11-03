@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"留言"</string>
     <string name="private_num" msgid="6374339738119166953">"私人號碼"</string>
     <string name="payphone" msgid="4864313342828942922">"公共電話"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"使用鍵盤撥號"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"撥號即可新增通話"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> 分 <xliff:g id="SECONDS">%s</xliff:g> 秒"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"未傳送通話"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"如要設定留言信箱，請移至 [選單] &gt; [設定]。"</string>

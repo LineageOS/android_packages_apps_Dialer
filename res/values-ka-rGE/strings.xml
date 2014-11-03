@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"ხმოვანი ფოსტა"</string>
     <string name="private_num" msgid="6374339738119166953">"დაფარული ნომერი"</string>
     <string name="payphone" msgid="4864313342828942922">"საზოგადოებრივი ტელეფონი"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"კლავიატურის გამოყენება დასარეკად"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"დარეკეთ ზარის დასამატებლად"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> წთ <xliff:g id="SECONDS">%s</xliff:g> წმ"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"ზარი ვერ განხორციელდა"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ხმოვანი ფოსტის დასაყენებლად გადადით მენიუს &gt; პარამეტრებზე."</string>

@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"ຂໍ້ຄວາມສຽງ"</string>
     <string name="private_num" msgid="6374339738119166953">"ເບີສ່ວນໂຕ"</string>
     <string name="payphone" msgid="4864313342828942922">"ໂທລະສັບສາທາລະນະ"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"ໃຊ້ແປ້ນພິມເພື່ອກົດໂທ"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"ກົດໝາຍເລກເພື່ອເພີ່ມການໂທ"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> ນທ <xliff:g id="SECONDS">%s</xliff:g> ວິ"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"ສາຍບໍ່ໄດ້ສົ່ງ"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ເພື່ອຕັ້ງຄ່າຂໍ້ຄວາມສຽງ ໃຫ້ໄປທີ່ ເມນູ &gt; ການຕັ້ງຄ່າ."</string>

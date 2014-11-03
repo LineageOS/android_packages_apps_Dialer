@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Thư thoại"</string>
     <string name="private_num" msgid="6374339738119166953">"Số cá nhân"</string>
     <string name="payphone" msgid="4864313342828942922">"Điện thoại tự động"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Sử dụng bàn phím để quay số"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Quay số để thêm cuộc gọi"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> phút <xliff:g id="SECONDS">%s</xliff:g> giây"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Không thể thực hiện cuộc gọi"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Để thiết lập thư thoại, đi tới Menu &gt; Cài đặt."</string>

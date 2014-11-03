@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"အသံစာပို့စနစ်"</string>
     <string name="private_num" msgid="6374339738119166953">"လျို့ဝှက် နံပါတ်"</string>
     <string name="payphone" msgid="4864313342828942922">"အများသုံးဖုန်း"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"ကီးဘုတ်သုံး၍ခလုတ်နှိပ်ပါ"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"ဂဏန်းများနှိပ်၍ ဖုန်းခေါ်မှုကို ထည့်ပါ"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> မိနစ် <xliff:g id="SECONDS">%s</xliff:g> စက္ကန့်"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"ဖုန်းခေါ်မှု မထွက်ပါ"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"အသံစာပို့စနစ်ကို ပြင်ဆင်ရန်၊ မီနူး ပြီးနောက် ဆက်တင် သို့သွားပါ"</string>

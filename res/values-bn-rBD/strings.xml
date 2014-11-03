@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"ভয়েসমেল"</string>
     <string name="private_num" msgid="6374339738119166953">"ব্যক্তিগত নম্বর"</string>
     <string name="payphone" msgid="4864313342828942922">"পে ফোন"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"ডায়াল করতে কীবোর্ড ব্যবহার করুন"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"একটি কল যোগ করার জন্য ডায়াল করুন"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> মিনিট <xliff:g id="SECONDS">%s</xliff:g> সেকেন্ড"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"কল করা যায়নি"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ভয়েসমেল সেট আপ করতে, মেনু &gt; সেটিংস এ যান৷"</string>

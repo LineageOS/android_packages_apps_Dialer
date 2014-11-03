@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"ಧ್ವನಿಮೇಲ್"</string>
     <string name="private_num" msgid="6374339738119166953">"ಖಾಸಗಿ ಸಂಖ್ಯೆ"</string>
     <string name="payphone" msgid="4864313342828942922">"ಪಾವತಿ ಫೋನ್"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"ಡಯಲ್‌ ಮಾಡಲು ಕೀಬೋರ್ಡ್‌ ಬಳಸಿ"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"ಕರೆಯನ್ನು ಸೇರಿಸಲು ಡಯಲ್‌ ಮಾಡಿ"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> ನಿಮಿಷಗಳು <xliff:g id="SECONDS">%s</xliff:g> ಸೆಕೆಂಡುಗಳು"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"ಕರೆ ಮಾಡಲಾಗಲಿಲ್ಲ."</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ಧ್ವನಿಮೇಲ್‌ ಹೊಂದಿಸಲು, ಮೆನು &gt; ಸೆಟ್ಟಿಂಗ್‌ಗಳುಗೆ ಹೋಗಿ."</string>

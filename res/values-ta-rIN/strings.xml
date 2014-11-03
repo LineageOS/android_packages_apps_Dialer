@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"குரலஞ்சல்"</string>
     <string name="private_num" msgid="6374339738119166953">"தனிப்பட்ட எண்"</string>
     <string name="payphone" msgid="4864313342828942922">"கட்டண மொபைல்"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"டயல் செய்வதற்கு விசைப்பலகையைப் பயன்படுத்தவும்"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"அழைப்பைச் சேர்க்க டயல் செய்யவும்"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> நிமிடங்கள் <xliff:g id="SECONDS">%s</xliff:g> வினாடிகள்"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"அழைக்க முடியவில்லை"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"குரலஞ்சலை அமைக்க, செல்க மெனு &gt; அமைப்பு."</string>

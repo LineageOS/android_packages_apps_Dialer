@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"හඬ තැපෑල"</string>
     <string name="private_num" msgid="6374339738119166953">"පුද්ගලික අංකය"</string>
     <string name="payphone" msgid="4864313342828942922">"ගෙවුම් දුරකථනය"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"ඩයල් කිරීමට යතුරු පුවරුව භාවිතා කරන්න"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"ඇමතුමක් එක් කිරීමට අමතන්න"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"මිනිත්තු <xliff:g id="MINUTES">%s</xliff:g> තත්පර <xliff:g id="SECONDS">%s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"ඇමතුම යැව්වේ නැත"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"හඬ තැපෑල සකස් කර ගැනීමට, මෙනු &gt; සැකසීම් වෙත යන්න."</string>
@@ -189,8 +187,6 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ක්ෂණික ප්‍රතිචාර"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"ඇමතුම් සැකසීම්"</string>
     <string name="call_settings_description" msgid="2756622428019213052">"හඬ තැපෑල , ඇමතුමේ රැඳී සිටීම, සහ වෙනත්"</string>
-    <!-- no translation found for phone_account_settings_label (8298076824934324281) -->
-    <skip />
-    <!-- no translation found for phone_account_settings_description (435745546649702086) -->
-    <skip />
+    <string name="phone_account_settings_label" msgid="8298076824934324281">"දුරකථන ගිණුම සැකසීම"</string>
+    <string name="phone_account_settings_description" msgid="435745546649702086">"SIM සහ ඇමතුම් සැකසීම් කළමනාකරණය කරන්න"</string>
 </resources>
