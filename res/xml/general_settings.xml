@@ -40,13 +40,6 @@
         android:title="@string/sounds_and_vibrate_category_title"
         android:persistent="false">
 
-        <com.android.dialer.settings.DefaultRingtonePreference
-            android:key="button_ringtone_key"
-            android:title="@string/ringtone_title"
-            android:dialogTitle="@string/ringtone_title"
-            android:persistent="false"
-            android:ringtoneType="ringtone" />
-
         <CheckBoxPreference
             android:key="button_play_dtmf_tone"
             android:title="@string/dtmf_tone_enable_title"
