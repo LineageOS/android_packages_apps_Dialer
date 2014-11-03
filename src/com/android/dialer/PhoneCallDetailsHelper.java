@@ -22,6 +22,7 @@ import android.graphics.drawable.Drawable;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -35,6 +36,7 @@ import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.DialerUtils;
+
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -106,13 +108,21 @@ public class PhoneCallDetailsHelper {
         // Set the call count, location and date.
         setCallCountAndDate(views, callCount, callLocationAndDate);
 
-        // set the account icon if it exists
-        Drawable accountIcon = PhoneAccountUtils.getAccountIcon(mContext, details.accountHandle);
-        if (accountIcon != null) {
-            views.callAccountIcon.setVisibility(View.VISIBLE);
-            views.callAccountIcon.setImageDrawable(accountIcon);
+        // Set the account label if it exists.
+        String accountLabel = PhoneAccountUtils.getAccountLabel(mContext, details.accountHandle);
+
+        if (accountLabel != null) {
+            views.callAccountLabel.setVisibility(View.VISIBLE);
+            views.callAccountLabel.setText(accountLabel);
+            int color = PhoneAccountUtils.getAccountColor(mContext, details.accountHandle);
+            if (color == PhoneAccount.NO_COLOR) {
+                int defaultColor = R.color.dialtacts_secondary_text_color;
+                views.callAccountLabel.setTextColor(mContext.getResources().getColor(defaultColor));
+            } else {
+                views.callAccountLabel.setTextColor(color);
+            }
         } else {
-            views.callAccountIcon.setVisibility(View.GONE);
+            views.callAccountLabel.setVisibility(View.GONE);
         }
 
         final CharSequence nameText;
