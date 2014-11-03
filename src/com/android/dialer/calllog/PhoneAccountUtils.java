@@ -61,35 +61,30 @@ public class PhoneAccountUtils {
     }
 
     /**
-     * Extract account icon from PhoneAccount object.
+     * Extract account label from PhoneAccount object.
      */
-    public static Drawable getAccountIcon(Context context, PhoneAccountHandle phoneAccount) {
-        final PhoneAccount account = getAccountOrNull(context, phoneAccount);
-        if (account == null) {
-            return null;
-        }
-        return account.getIcon(context);
+    public static String getAccountLabel(Context context, PhoneAccountHandle accountHandle) {
+        PhoneAccount account = getAccountOrNull(context, accountHandle);
+        return account == null ? null : account.getLabel().toString();
     }
 
     /**
-     * Extract account label from PhoneAccount object.
+     * Extract account color from PhoneAccount object.
      */
-    public static String getAccountLabel(Context context, PhoneAccountHandle phoneAccount) {
-        final PhoneAccount account = getAccountOrNull(context, phoneAccount);
-        if (account == null) {
-            return null;
-        }
-        return account.getLabel().toString();
+    public static int getAccountColor(Context context, PhoneAccountHandle accountHandle) {
+        PhoneAccount account = getAccountOrNull(context, accountHandle);
+        return account == null ? PhoneAccount.NO_COLOR : account.getColor();
     }
 
     /**
      * Retrieve the account metadata, but if the account does not exist or the device has only a
      * single registered and enabled account, return null.
      */
-    private static PhoneAccount getAccountOrNull(Context context, PhoneAccountHandle phoneAccount) {
-        final TelecomManager telecomManager =
+    private static PhoneAccount getAccountOrNull(Context context,
+            PhoneAccountHandle accountHandle) {
+        TelecomManager telecomManager =
                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        final PhoneAccount account = telecomManager.getPhoneAccount(phoneAccount);
+        final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
         if (account == null || !telecomManager.hasMultipleCallCapableAccounts()) {
             return null;
         }
