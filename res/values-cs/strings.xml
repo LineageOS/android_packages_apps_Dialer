@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Hlasová schránka"</string>
     <string name="private_num" msgid="6374339738119166953">"Soukromé číslo"</string>
     <string name="payphone" msgid="4864313342828942922">"Veřejný telefon"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Číslo vytočíte pomocí klávesnice."</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Přidáváte hovor"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Hovor nebyl odeslán"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Chcete-li nastavit hlasovou schránku, přejděte do části Menu &gt; Nastavení."</string>

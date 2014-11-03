@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Correo de voz"</string>
     <string name="private_num" msgid="6374339738119166953">"Número privado"</string>
     <string name="payphone" msgid="4864313342828942922">"Teléfono público"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Utilizar teclado para marcar"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Marcar para agreg."</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> seg."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"No se realizó la llamada."</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Para configurar el buzón de voz, ve a a Menú &gt; Configuración."</string>
