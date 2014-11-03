@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Ujumbe wa sauti"</string>
     <string name="private_num" msgid="6374339738119166953">" Nambari isiyojulikana"</string>
     <string name="payphone" msgid="4864313342828942922">"Simu ya kulipia"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Tumia kibodi kubonyeza"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Piga ili kuongeza simu"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"Dakika <xliff:g id="MINUTES">%s</xliff:g> sekunde <xliff:g id="SECONDS">%s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Simu haijapigwa"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Ili kusanidi ujumbe wa sauti, nenda kwa Menyu &gt; Mipangilio."</string>

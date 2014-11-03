@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Mel suara"</string>
     <string name="private_num" msgid="6374339738119166953">"Nombor peribadi"</string>
     <string name="payphone" msgid="4864313342828942922">"Telefon awam"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Gunakan papan kekunci untuk mendail"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Dail untuk menambah panggilan"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> saat"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Panggilan tidak dihantar"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Untuuk menyediakan mel suara, pergi ke Menu &gt; Tetapan."</string>
@@ -189,8 +187,6 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respons pantas"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"Tetapan panggilan"</string>
     <string name="call_settings_description" msgid="2756622428019213052">"Mel suara, panggilan menunggu dan lain-lain"</string>
-    <!-- no translation found for phone_account_settings_label (8298076824934324281) -->
-    <skip />
-    <!-- no translation found for phone_account_settings_description (435745546649702086) -->
-    <skip />
+    <string name="phone_account_settings_label" msgid="8298076824934324281">"Tetapan akaun telefon"</string>
+    <string name="phone_account_settings_description" msgid="435745546649702086">"Urus SIM dan tetapan panggilan"</string>
 </resources>

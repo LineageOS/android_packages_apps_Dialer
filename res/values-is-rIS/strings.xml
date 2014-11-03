@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Talhólf"</string>
     <string name="private_num" msgid="6374339738119166953">"Leyninúmer"</string>
     <string name="payphone" msgid="4864313342828942922">"Almenningssími"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Notaðu lyklaborðið til að hringja"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Hringdu til að bæta við símtali"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> mín. og <xliff:g id="SECONDS">%s</xliff:g> sek."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Símtal ekki sent"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Til að setja upp talhólf þarftu að opna valmyndina og velja Stillingar."</string>

@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"व्हॉइसमेल"</string>
     <string name="private_num" msgid="6374339738119166953">"खाजगी नंबर"</string>
     <string name="payphone" msgid="4864313342828942922">"देय फोन"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"डायल करण्‍यासाठी कीबोर्डचा वापर करा"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"कॉल जोडण्यासाठी डायल करा"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> मिनिटे <xliff:g id="SECONDS">%s</xliff:g> सेकंद"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"कॉल पाठविला नाही"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"व्हॉइसमेल सेट करण्‍यासाठी, मेनू आणि सेटिंग्‍ज वर जा."</string>

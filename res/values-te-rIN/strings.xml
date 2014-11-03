@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"వాయిస్ మెయిల్"</string>
     <string name="private_num" msgid="6374339738119166953">"ప్రైవేట్ నంబర్"</string>
     <string name="payphone" msgid="4864313342828942922">"పే ఫోన్"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"డయల్ చేయడానికి కీబోర్డ్‌ను ఉపయోగించండి"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"కాల్‌ను జోడించడానికి డయల్ చేయండి"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> నిమిషాలు <xliff:g id="SECONDS">%s</xliff:g> సెకన్లు"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"కాల్ చేయలేదు"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"వాయిస్ మెయిల్ సెటప్ చేయడానికి, మెను &gt; సెట్టింగ్‌లకు వెళ్లండి."</string>

@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Voicemail"</string>
     <string name="private_num" msgid="6374339738119166953">"Pribadong numero"</string>
     <string name="payphone" msgid="4864313342828942922">"Pay phone"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Gamitin ang keyboard upang mag-dial"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Mag-dial upang magdagdag ng tawag"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> (na) min <xliff:g id="SECONDS">%s</xliff:g> (na) seg"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Hindi naipadala ang tawag"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Upang mag-set up ng voicemail, pumunta sa Menu &gt; Mga Setting."</string>

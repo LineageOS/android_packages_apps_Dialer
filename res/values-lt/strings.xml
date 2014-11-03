@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Balso paštas"</string>
     <string name="private_num" msgid="6374339738119166953">"Privatus numeris"</string>
     <string name="payphone" msgid="4864313342828942922">"Mokamas telefonas"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Naudokite klaviatūrą ir rinkite numerius"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Rinkti numerį ir pridėti skambutį"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> sek."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Skambutis neišsiųstas"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Jei norite nustatyti balso paštą, eikite į „Meniu“ &gt; „Nustatymai“."</string>

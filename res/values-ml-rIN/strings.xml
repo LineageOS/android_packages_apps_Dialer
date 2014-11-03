@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"വോയ്‌സ്‌മെയിൽ"</string>
     <string name="private_num" msgid="6374339738119166953">"സ്വകാര്യ നമ്പർ"</string>
     <string name="payphone" msgid="4864313342828942922">"പണം നൽകി ഉപയോഗിക്കുന്ന ഫോൺ"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"ഡയൽ ചെയ്യാൽ കീബോർഡ് ഉപയോഗിക്കുക"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"ഒരു കോൾ ചേർക്കാൻ ഡയൽ ചെയ്യുക"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> മിനിറ്റ് <xliff:g id="SECONDS">%s</xliff:g> സെക്കൻഡ്"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"കോൾ ചെയ്യാനായില്ല"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"വോയ്‌സ്‌മെയിൽ സജ്ജീകരിക്കുന്നതിന്, മെനു &gt; ക്രമീകരണങ്ങൾ എന്നതിലേക്ക് പോകുക."</string>

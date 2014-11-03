@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Αυτόματος τηλεφωνητής"</string>
     <string name="private_num" msgid="6374339738119166953">"Απόκρυψη"</string>
     <string name="payphone" msgid="4864313342828942922">"Καρτοτηλέφωνο"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Χρησιμοποιήστε το πληκτρολόγιο για να καλέσετε έναν αριθμό"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Καλέστε έναν αρ. για προσθ. μιας κλήσ."</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> λεπτά <xliff:g id="SECONDS">%s</xliff:g> δευτερόλεπτα"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Η κλήση δεν πραγματοποιήθηκε"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Για τη r;yumish του αυτόματου τηλεφωνητή, μεταβείτε στο στοιχείο Μενού &gt; Ρυθμίσεις."</string>

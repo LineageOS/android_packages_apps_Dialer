@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Ձայնային փոստ"</string>
     <string name="private_num" msgid="6374339738119166953">"Անձնական համարը"</string>
     <string name="payphone" msgid="4864313342828942922">"Վճարել հեռախոսը"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Օգտագործել ստեղնաշարը` համարհավաքելու համար"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Համարհավաքել՝ զանգելու համար"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g>:<xliff:g id="SECONDS">%s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Զանգը չի առաքվել"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Ձայնային փոստը կարգավորելու համար գնացեք Ցանկ &gt; Կարգավորումներ:"</string>

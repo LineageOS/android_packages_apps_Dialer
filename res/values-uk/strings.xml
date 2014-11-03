@@ -115,8 +115,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Голос. пошта"</string>
     <string name="private_num" msgid="6374339738119166953">"Приватний номер"</string>
     <string name="payphone" msgid="4864313342828942922">"Таксофон"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Викор. клав. для набору"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Дзвон., щоб дод. виклик"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> хв. <xliff:g id="SECONDS">%s</xliff:g> сек."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Виклик не здійснено"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Щоб налаштувати голосову пошту, перейдіть у Меню &gt; Налаштування."</string>
@@ -189,6 +187,6 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Швидкі відповіді"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"Налаштування дзвінків"</string>
     <string name="call_settings_description" msgid="2756622428019213052">"Голосова пошта, паралельний виклик та інше"</string>
-    <string name="phone_account_settings_label" msgid="8298076824934324281">"Налаш. обл. запису на телефоні"</string>
+    <string name="phone_account_settings_label" msgid="8298076824934324281">"Обліковий запис на телефоні"</string>
     <string name="phone_account_settings_description" msgid="435745546649702086">"Керування налаштуваннями SIM-карти та дзвінків"</string>
 </resources>

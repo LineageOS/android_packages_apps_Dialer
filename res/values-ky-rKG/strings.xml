@@ -144,10 +144,6 @@
     <skip />
     <!-- no translation found for payphone (4864313342828942922) -->
     <skip />
-    <!-- no translation found for dialerKeyboardHintText (5401660096579787344) -->
-    <skip />
-    <!-- no translation found for dialerDialpadHintText (5824490365898349041) -->
-    <skip />
     <!-- no translation found for callDetailsDurationFormat (8157706382818184268) -->
     <skip />
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Чалуу болгон жок"</string>
