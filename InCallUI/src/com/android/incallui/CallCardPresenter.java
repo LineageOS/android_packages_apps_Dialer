@@ -502,11 +502,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             final boolean nameIsNumber = nameForCall != null && nameForCall.equals(
                     mSecondaryContactInfo.number);
             ui.setSecondary(true /* show */, nameForCall, nameIsNumber, mSecondaryContactInfo.label,
-                    getCallProviderLabel(mSecondary), getCallProviderIcon(mSecondary),
-                    isConference, canManageConference);
+                    getCallProviderLabel(mSecondary), isConference, canManageConference);
         } else {
             // reset to nothing so that it starts off blank next time we use it.
-            ui.setSecondary(false, null, false, null, null, null, isConference, canManageConference);
+            ui.setSecondary(false, null, false, null, null, isConference, canManageConference);
         }
     }
 
@@ -528,17 +527,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private String getGatewayNumber() {
         if (hasOutgoingGatewayCall()) {
             return getNumberFromHandle(mPrimary.getGatewayInfo().getGatewayAddress());
-        }
-        return null;
-    }
-
-    /**
-     * Return the Drawable object of the icon to display to the left of the connection label.
-     */
-    private Drawable getCallProviderIcon(Call call) {
-        PhoneAccount account = getAccountForCall(call);
-        if (account != null && getTelecomManager().hasMultipleCallCapableAccounts()) {
-            return account.getIcon(mContext);
         }
         return null;
     }
@@ -587,7 +575,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 return icon;
             }
         }
-        return getCallProviderIcon(mPrimary);
+        return null;
     }
 
     private boolean hasOutgoingGatewayCall() {
@@ -671,8 +659,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 Drawable photo, boolean isConference, boolean canManageConference,
                 boolean isSipCall);
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-                String providerLabel, Drawable providerIcon, boolean isConference,
-                boolean canManageConference);
+                String providerLabel, boolean isConference, boolean canManageConference);
         void setCallState(int state, int videoState, int sessionModificationState,
                 DisconnectCause disconnectCause, String connectionLabel,
                 Drawable connectionIcon, String gatewayNumber);
