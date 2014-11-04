@@ -40,11 +40,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.android.common.io.MoreCloseables;
+import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.ProximitySensorAware;
 import com.android.dialer.R;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.ex.variablespeed.MediaPlayerProxy;
 import com.android.ex.variablespeed.VariableSpeed;
+
 import com.google.common.base.Preconditions;
 
 import java.util.concurrent.Executors;
@@ -109,6 +111,12 @@ public class VoicemailPlaybackFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         mPresenter.onSaveInstanceState(outState);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        AnalyticsUtil.sendScreenView(this);
     }
 
     @Override
