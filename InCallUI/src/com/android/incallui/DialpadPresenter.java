@@ -30,7 +30,7 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
     public void onUiReady(DialpadUi ui) {
         super.onUiReady(ui);
         InCallPresenter.getInstance().addListener(this);
-        mCall = CallList.getInstance().getActiveCall();
+        mCall = CallList.getInstance().getOutgoingOrActive();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
     @Override
     public void onStateChange(InCallPresenter.InCallState oldState,
             InCallPresenter.InCallState newState, CallList callList) {
-        mCall = callList.getActiveCall();
+        mCall = callList.getOutgoingOrActive();
         Log.d(this, "DialpadPresenter mCall = " + mCall);
     }
 
