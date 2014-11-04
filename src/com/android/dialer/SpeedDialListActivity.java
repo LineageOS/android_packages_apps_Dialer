@@ -29,6 +29,7 @@
 
 package com.android.dialer;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -48,11 +49,8 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnCreateContextMenuListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -62,7 +60,7 @@ import android.widget.Toast;
 import static com.android.internal.telephony.PhoneConstants.SUBSCRIPTION_KEY;
 
 public class SpeedDialListActivity extends ListActivity
-        implements OnItemClickListener, OnCreateContextMenuListener {
+        implements OnItemClickListener {
 
     private static final String TAG = "SpeedDial";
     private static final String ACTION_ADD_VOICEMAIL
@@ -84,15 +82,14 @@ public class SpeedDialListActivity extends ListActivity
 
     private static int mPosition;
 
-    private static final int MENU_REPLACE = 0;
-    private static final int MENU_DELETE = 1;
-
     private static final int PICK_CONTACT_RESULT = 0;
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         mSpeedDialUtils = new SpeedDialUtils(this);
         // the first item is the "1.voice mail", it doesn't change for ever
@@ -108,7 +105,6 @@ public class SpeedDialListActivity extends ListActivity
 
         ListView listview = getListView();
         listview.setOnItemClickListener(this);
-        listview.setOnCreateContextMenuListener(this);
     }
 
     @Override
@@ -122,6 +118,15 @@ public class SpeedDialListActivity extends ListActivity
         matchInfoFromContacts();
         setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
                 mSpeedListItems));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -186,28 +191,35 @@ public class SpeedDialListActivity extends ListActivity
             } else {
                 final String numStr = mContactDataNumber[position - 1];
                 final String nameStr = mContactDataName[position - 1];
+                final int pos = position;
                 new AlertDialog.Builder(this)
                     .setTitle(nameStr)
                     .setMessage(numStr)
-                    .setPositiveButton(R.string.speed_call,
+                    .setNegativeButton(R.string.replace,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // TODO Auto-generated method stub
-                                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                                callIntent.setData(Uri.fromParts("tel", numStr, null));
-                                callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(callIntent);
+                                goContactsToPick(pos);
                             }
                         })
-                    .setNegativeButton(R.string.speed_sms,
+                    .setPositiveButton(R.string.delete,
                         new DialogInterface.OnClickListener() {
                             @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    // TODO Auto-generated method stub
-                                    Intent smsIntent = new Intent(Intent.ACTION_SENDTO,
-                                            Uri.fromParts("sms", numStr, null));
-                                    startActivity(smsIntent);
+                                    // delete speed number, only need set array data to "",
+                                    // and clear speed number in preference.
+                                    mContactDataNumber[pos - 1] = "";
+                                    mContactDataName[pos - 1] = "";
+                                    mSpeedListItems[pos] = getString(R.string.speed_item,
+                                            String.valueOf(pos + 1),
+                                            getString(R.string.not_set));
+                                    mSpeedDialUtils.storeContactDataNumber(pos - 1, "");
+                                    mSpeedDialUtils.storeContactDataName(pos - 1, "");
+                                    mSpeedDialUtils.storeContactSimKey(pos - 1, false);
+                                    // update listview item
+                                    setListAdapter(
+                                            new ArrayAdapter<String>(SpeedDialListActivity.this,
+                                            android.R.layout.simple_list_item_1, mSpeedListItems));
                                 }
                             })
                     .show();
@@ -291,56 +303,6 @@ public class SpeedDialListActivity extends ListActivity
             }
         }
         return isCheckOk;
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-        // TODO Auto-generated method stub
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        int pos = info.position;
-        if (pos > 0 && pos < SPEED_ITEMS) {
-            if (!("".equals(mContactDataNumber[pos - 1]))) {
-                String contactNum = mContactDataNumber[pos - 1];
-                String contactName = mContactDataName[pos - 1];
-                String hdrTitle = !("".equals(contactName)) ? contactName : contactNum;
-                menu.setHeaderTitle(hdrTitle);
-                menu.add(0, MENU_REPLACE, 0, R.string.replace);
-                menu.add(0, MENU_DELETE, 0, R.string.delete);
-            }
-        }
-        super.onCreateContextMenu(menu, v, menuInfo);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        // TODO Auto-generated method stub
-        int itemId = item.getItemId();
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item
-            .getMenuInfo();
-        int pos = info.position;
-
-        switch (itemId) {
-            case MENU_REPLACE:
-                goContactsToPick(pos);
-                break;
-            case MENU_DELETE:
-                // delete speed number, only need set array data to "",
-                // and clear speed number in preference.
-                mContactDataNumber[pos - 1] = "";
-                mContactDataName[pos - 1] = "";
-                mSpeedListItems[pos] = getString(R.string.speed_item, String.valueOf(pos + 1),
-                        getString(R.string.not_set));
-                mSpeedDialUtils.storeContactDataNumber(pos - 1, "");
-                mSpeedDialUtils.storeContactDataName(pos - 1, "");
-                mSpeedDialUtils.storeContactSimKey(pos - 1, false);
-                // update listview item
-                setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                        mSpeedListItems));
-                break;
-            default:
-                break;
-        }
-        return super.onContextItemSelected(item);
     }
 
 }
