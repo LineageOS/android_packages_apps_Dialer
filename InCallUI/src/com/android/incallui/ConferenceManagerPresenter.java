@@ -130,8 +130,13 @@ public class ConferenceManagerPresenter
                 boolean thisRowCanDisconnect = PhoneCapabilities.can(
                         callCapabilities, PhoneCapabilities.DISCONNECT_FROM_CONFERENCE);
                 // Fill in the row in the UI for this caller.
-                final ContactCacheEntry contactCache =
+                ContactCacheEntry contactCache =
                         ContactInfoCache.getInstance(mContext).getInfo(mCallerIds[i]);
+                if (contactCache == null) {
+                    contactCache = ContactInfoCache.buildCacheEntryFromCall(mContext, call,
+                                call.getState() == Call.State.INCOMING);
+                }
+
                 updateManageConferenceRow(
                         i /* row index */,
                         contactCache,
