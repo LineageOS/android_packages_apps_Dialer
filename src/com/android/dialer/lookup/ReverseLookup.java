@@ -19,6 +19,7 @@ package com.android.dialer.lookup;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.lookup.cyngn.CyngnChineseReverseLookup;
 import com.android.dialer.lookup.dastelefonbuch.TelefonbuchReverseLookup;
+import com.android.dialer.lookup.paginebianche.PagineBiancheReverseLookup;
 import com.android.dialer.lookup.opencnam.OpenCnamReverseLookup;
 import com.android.dialer.lookup.whitepages.WhitePagesReverseLookup;
 import com.android.dialer.lookup.yellowpages.YellowPagesReverseLookup;
@@ -28,7 +29,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
-import android.util.Pair;
+
+import java.io.IOException;
 
 public abstract class ReverseLookup {
     private static final String TAG = ReverseLookup.class.getSimpleName();
@@ -55,6 +57,8 @@ public abstract class ReverseLookup {
                 INSTANCE = new CyngnChineseReverseLookup(context);
             } else if (provider.equals(LookupSettings.RLP_DASTELEFONBUCH)) {
                 INSTANCE = new TelefonbuchReverseLookup(context);
+            } else if (provider.equals(LookupSettings.RLP_PAGINEBIANCHE)) {
+                INSTANCE = new PagineBiancheReverseLookup(context);
             }
         }
 
@@ -82,6 +86,9 @@ public abstract class ReverseLookup {
         } else if (provider.equals(LookupSettings.RLP_DASTELEFONBUCH)
                 && INSTANCE instanceof TelefonbuchReverseLookup) {
             return true;
+        } else if (provider.equals(LookupSettings.RLP_PAGINEBIANCHE)
+                && INSTANCE instanceof PagineBiancheReverseLookup) {
+            return true;
         } else {
             return false;
         }
@@ -92,9 +99,8 @@ public abstract class ReverseLookup {
      *
      * @param context The application context
      * @param uri The image URI
-     * @param data Extra data (a authentication token, perhaps)
      */
-    public Bitmap lookupImage(Context context, Uri uri, Object data) {
+    public Bitmap lookupImage(Context context, Uri uri) {
         return null;
     }
 
@@ -106,6 +112,6 @@ public abstract class ReverseLookup {
      * @param formattedNumber The formatted phone number
      * @return The phone number info object
      */
-    public abstract Pair<ContactInfo, Object> lookupNumber(Context context,
-            String normalizedNumber, String formattedNumber);
+    public abstract ContactInfo lookupNumber(Context context,
+            String normalizedNumber, String formattedNumber) throws IOException;
 }

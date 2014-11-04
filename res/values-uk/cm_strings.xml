@@ -50,4 +50,23 @@
   <string name="start_call_playback">Відтворення запису</string>
   <string name="stop_call_playback">Зупинити</string>
   <string name="call_playback_error_message">Не вдалося відтворити запис</string>
+  <string name="calllog_search_hint">Шукати в журналі викликів</string>
+  <string name="video_call">Відео-дзвінок</string>
+  <string name="video_call_settings">Налаштування відео-дзвінка</string>
+  <string name="description_videocall">Відео-дзвінок <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Налаштування швидкого набору</string>
+  <string name="speed_dial_not_set">(не вказано)</string>
+  <string name="speed_dial_replace">Замінити</string>
+  <string name="speed_dial_delete">Видалити</string>
+  <string name="speed_dial_unassigned_dialog_title">Ключ непризначений</string>
+  <string name="speed_dial_unassigned_dialog_message">Клавіші \'<xliff:g id="number">%s</xliff:g>\' не присвоєно номер швидкого набору. Призначити його?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Щоб використовувати швидкий набір, спершу вимкніть режим польоту."</string>
+  <string name="msim_ime_dialog_title">Ідентифікатор пристрою</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Усі SIM</string>
+  <string name="yes">Так</string>
+  <string name="no">Ні</string>
+  <string name="call_duration_active">Тривалість активних:</string>
+  <string name="call_duration_call_out">Тривалість виклику:</string>
+  <string name="call_log_all_calls_header">Усі дзвінки</string>
 </resources>

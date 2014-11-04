@@ -84,7 +84,7 @@ public class ContactBuilder {
     }
 
     public void addAddress(Address address) {
-        if (DEBUG) Log.d(TAG, "Adding address: " + address);
+        if (DEBUG) Log.d(TAG, "Adding address");
         if (address != null) {
             mAddresses.add(address);
         }
@@ -95,7 +95,7 @@ public class ContactBuilder {
     }
 
     public void addPhoneNumber(PhoneNumber phoneNumber) {
-        if (DEBUG) Log.d(TAG, "Adding phone number: " + phoneNumber);
+        if (DEBUG) Log.d(TAG, "Adding phone number");
         if (phoneNumber != null) {
             mPhoneNumbers.add(phoneNumber);
         }
@@ -107,7 +107,7 @@ public class ContactBuilder {
     }
 
     public void addWebsite(WebsiteUrl website) {
-        if (DEBUG) Log.d(TAG, "Adding website: " + website);
+        if (DEBUG) Log.d(TAG, "Adding website");
         if (website != null) {
             mWebsites.add(website);
         }
@@ -118,7 +118,7 @@ public class ContactBuilder {
     }
 
     public void setName(Name name) {
-        if (DEBUG) Log.d(TAG, "Setting name: " + name);
+        if (DEBUG) Log.d(TAG, "Setting name");
         if (name != null) {
             mName = name;
         }
@@ -133,7 +133,7 @@ public class ContactBuilder {
     }
 
     public void setPhotoUri(Uri photoUri) {
-        if (DEBUG) Log.d(TAG, "Setting photo URI: " + photoUri);
+        if (DEBUG) Log.d(TAG, "Setting photo URI");
         mPhotoUri = photoUri;
     }
 
@@ -142,7 +142,7 @@ public class ContactBuilder {
     }
 
     public void setIsBusiness(boolean isBusiness) {
-        if (DEBUG) Log.d(TAG, "Setting isBusiness to: " + isBusiness);
+        if (DEBUG) Log.d(TAG, "Setting isBusiness to " + isBusiness);
         mIsBusiness = isBusiness;
     }
 
@@ -259,6 +259,13 @@ public class ContactBuilder {
         public String postCode;
         public String country;
 
+        public static Address createFormattedHome(String address) {
+            Address a = new Address();
+            a.formattedAddress = address;
+            a.type = StructuredPostal.TYPE_HOME;
+            return a;
+        }
+
         public JSONObject getJsonObject() throws JSONException {
             JSONObject json = new JSONObject();
             json.putOpt(StructuredPostal.FORMATTED_ADDRESS,
@@ -301,6 +308,12 @@ public class ContactBuilder {
         public String phoneticMiddleName;
         public String phoneticFamilyName;
 
+        public static Name createDisplayName(String displayName) {
+            Name name = new Name();
+            name.displayName = displayName;
+            return name;
+        }
+
         public JSONObject getJsonObject() throws JSONException {
             JSONObject json = new JSONObject();
             json.putOpt(StructuredName.DISPLAY_NAME, displayName);
@@ -337,6 +350,13 @@ public class ContactBuilder {
         public int type;
         public String label;
 
+        public static PhoneNumber createMainNumber(String number) {
+            PhoneNumber n = new PhoneNumber();
+            n.number = number;
+            n.type = Phone.TYPE_MAIN;
+            return n;
+        }
+
         public JSONObject getJsonObject() throws JSONException {
             JSONObject json = new JSONObject();
             json.put(Phone.NUMBER, number);
@@ -357,6 +377,13 @@ public class ContactBuilder {
         public String url;
         public int type;
         public String label;
+
+        public static WebsiteUrl createProfile(String url) {
+            WebsiteUrl u = new WebsiteUrl();
+            u.url = url;
+            u.type = Website.TYPE_PROFILE;
+            return u;
+        }
 
         public JSONObject getJsonObject() throws JSONException {
             JSONObject json = new JSONObject();

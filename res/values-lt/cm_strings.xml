@@ -59,7 +59,7 @@
   <string name="speed_dial_replace">Pakeisti</string>
   <string name="speed_dial_delete">Ištrinti</string>
   <string name="speed_dial_unassigned_dialog_title">Klavišas nepriskirtas</string>
-  <string name="speed_dial_unassigned_dialog_message">Joks kontaktas šiam greito rinkimo numeriui nepriskirtas \'<xliff:g id="number">%s</xliff:g>\'. Ar norite priskirti kontaktą dabar?</string>
+  <string name="speed_dial_unassigned_dialog_message">Joks kontaktas šiam greitojo rinkimo numeriui nepriskirtas „<xliff:g id="number">%s</xliff:g>“. Ar norite priskirti kontaktą dabar?</string>
   <string name="dialog_speed_dial_airplane_mode_message">"Norėdami naudotis greituoju rinkimu, pirmiausiai išjunkite lėktuvo režimą."</string>
   <string name="msim_ime_dialog_title">Įrenginio identifikavimo kodas</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>

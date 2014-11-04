@@ -51,20 +51,16 @@ public class WhitePagesPeopleLookup extends PeopleLookup {
             return null;
         }
 
-        ArrayList<ContactInfo> details = new ArrayList<ContactInfo>();
-
-        for (WhitePagesApi.ContactInfo info : infos) {
+        ContactInfo[] details = new ContactInfo[infos.length];
+        for (int i = 0; i < infos.length; i++) {
+            WhitePagesApi.ContactInfo info = infos[i];
             ContactBuilder builder = new ContactBuilder(
                     ContactBuilder.PEOPLE_LOOKUP, null, info.formattedNumber);
 
-            ContactBuilder.Name n = new ContactBuilder.Name();
-            n.displayName = info.name;
-            builder.setName(n);
-
-            ContactBuilder.PhoneNumber pn = new ContactBuilder.PhoneNumber();
-            pn.number = info.formattedNumber;
-            pn.type = Phone.TYPE_MAIN;
-            builder.addPhoneNumber(pn);
+            builder.setName(ContactBuilder.Name.createDisplayName(info.name));
+            builder.addPhoneNumber(
+                    ContactBuilder.PhoneNumber.createMainNumber(info.formattedNumber));
+            builder.addWebsite(ContactBuilder.WebsiteUrl.createProfile(info.website));
 
             if (info.address != null || info.city != null) {
                 ContactBuilder.Address a = new ContactBuilder.Address();
@@ -74,18 +70,9 @@ public class WhitePagesPeopleLookup extends PeopleLookup {
                 builder.addAddress(a);
             }
 
-            ContactBuilder.WebsiteUrl w = new ContactBuilder.WebsiteUrl();
-            w.url = info.website;
-            w.type = Website.TYPE_PROFILE;
-            builder.addWebsite(w);
-
-            details.add(builder.build());
+            details[i] = builder.build();
         }
 
-        if (details.size() > 0) {
-            return details.toArray(new ContactInfo[details.size()]);
-        } else {
-            return null;
-        }
+        return details;
     }
 }

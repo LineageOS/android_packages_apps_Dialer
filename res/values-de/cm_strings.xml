@@ -66,6 +66,7 @@
   <string name="call_log_show_all_slots">Alle SIM-Karten</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
+  <string name="call_duration_active">Aktive Dauer:</string>
   <string name="call_duration_call_out">Gesprächsdauer:</string>
   <string name="call_log_all_calls_header">Alle Anrufe</string>
 </resources>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Xiao-Long Chen <chillermillerlong@hotmail.com>
+ * Copyright (C) 2014 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,24 @@
  * limitations under the License.
  */
 
-package com.android.dialer.lookup.whitepages;
+package com.android.dialer.lookup.paginebianche;
+
+import android.content.Context;
+import android.net.Uri;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
+import android.provider.ContactsContract.CommonDataKinds.Website;
 
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.ReverseLookup;
 
-import android.content.Context;
-
 import java.io.IOException;
 
-public class WhitePagesReverseLookup extends ReverseLookup {
-    private static final String TAG =
-            WhitePagesReverseLookup.class.getSimpleName();
+public class PagineBiancheReverseLookup extends ReverseLookup {
+    private static final String TAG = PagineBiancheReverseLookup.class.getSimpleName();
 
-    public WhitePagesReverseLookup(Context context) {
+    public PagineBiancheReverseLookup(Context context) {
     }
 
     /**
@@ -41,8 +44,14 @@ public class WhitePagesReverseLookup extends ReverseLookup {
      */
     public ContactInfo lookupNumber(Context context,
             String normalizedNumber, String formattedNumber) throws IOException {
-        WhitePagesApi.ContactInfo info = WhitePagesApi.reverseLookup(context, normalizedNumber);
-        if (info == null || info.name == null) {
+        if (normalizedNumber.startsWith("+") && !normalizedNumber.startsWith("+39")) {
+            // PagineBianche only supports Italian numbers
+            return null;
+        }
+
+        PagineBiancheApi.ContactInfo info =
+                PagineBiancheApi.reverseLookup(context, normalizedNumber.replace("+39",""));
+        if (info == null) {
             return null;
         }
 
@@ -52,7 +61,6 @@ public class WhitePagesReverseLookup extends ReverseLookup {
 
         builder.setName(ContactBuilder.Name.createDisplayName(info.name));
         builder.addPhoneNumber(ContactBuilder.PhoneNumber.createMainNumber(info.formattedNumber));
-        builder.addWebsite(ContactBuilder.WebsiteUrl.createProfile(info.website));
         if (info.address != null) {
             builder.addAddress(ContactBuilder.Address.createFormattedHome(info.address));
         }

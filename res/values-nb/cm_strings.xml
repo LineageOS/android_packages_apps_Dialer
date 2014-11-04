@@ -59,6 +59,7 @@
   <string name="speed_dial_replace">Erstatt</string>
   <string name="speed_dial_delete">Slett</string>
   <string name="speed_dial_unassigned_dialog_title">Nøkkel utilordnet</string>
+  <string name="speed_dial_unassigned_dialog_message">Ingen hurtigoppringerkontakt er tilegnet nummertasten \'<xliff:g id="number">%s</xliff:g>\'. Vil du tilegne en kontakt nå?</string>
   <string name="dialog_speed_dial_airplane_mode_message">"For å bruke hurtigoppringing må du skru av flymodus."</string>
   <string name="msim_ime_dialog_title">Enhetsidentifikator</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index"> %d </xliff:g></string>
