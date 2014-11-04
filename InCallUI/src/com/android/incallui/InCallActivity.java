@@ -552,8 +552,9 @@ public class InCallActivity extends Activity {
                     }
                 };
 
-                SelectPhoneAccountDialogFragment.showAccountDialog(getFragmentManager(), true,
-                        phoneAccountHandles, listener);
+                SelectPhoneAccountDialogFragment.showAccountDialog(getFragmentManager(),
+                        R.string.select_phone_account_for_calls, true, phoneAccountHandles,
+                        listener);
             } else {
                 mCallCardFragment.setVisible(true);
             }
