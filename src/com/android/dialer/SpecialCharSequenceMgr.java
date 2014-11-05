@@ -229,7 +229,7 @@ public class SpecialCharSequenceMgr {
                     };
 
                     SelectPhoneAccountDialogFragment.showAccountDialog(
-                            ((Activity) context).getFragmentManager(), false, phoneAccountHandles,
+                            ((Activity) context).getFragmentManager(), phoneAccountHandles,
                             listener);
                 } else {
                     return false;
@@ -290,7 +290,7 @@ public class SpecialCharSequenceMgr {
                 };
 
                 SelectPhoneAccountDialogFragment.showAccountDialog(
-                        ((Activity) context).getFragmentManager(), false, phoneAccountHandles,
+                        ((Activity) context).getFragmentManager(), phoneAccountHandles,
                         listener);
             }
             return true;
