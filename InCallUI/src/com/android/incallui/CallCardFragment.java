@@ -90,7 +90,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mSecondaryCallName;
     private View mSecondaryCallProviderInfo;
     private TextView mSecondaryCallProviderLabel;
-    private ImageView mSecondaryCallProviderIcon;
     private View mSecondaryCallConferenceCallIcon;
     private View mProgressSpinner;
 
@@ -448,8 +447,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-            String providerLabel, Drawable providerIcon, boolean isConference,
-            boolean canManageConference) {
+            String providerLabel, boolean isConference, boolean canManageConference) {
 
         if (show != mSecondaryCallInfo.isShown()) {
             updateFabPositionForSecondaryCallInfo();
@@ -470,7 +468,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mSecondaryCallName.setText(name);
             if (hasProvider) {
                 mSecondaryCallProviderLabel.setText(providerLabel);
-                mSecondaryCallProviderIcon.setImageDrawable(providerIcon);
             }
 
             int nameDirection = View.TEXT_DIRECTION_INHERIT;
@@ -727,8 +724,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mSecondaryCallProviderInfo.setVisibility(View.VISIBLE);
                 mSecondaryCallProviderLabel = (TextView) getView()
                         .findViewById(R.id.secondaryCallProviderLabel);
-                mSecondaryCallProviderIcon = (ImageView) getView()
-                        .findViewById(R.id.secondaryCallProviderIcon);
             }
         }
     }
