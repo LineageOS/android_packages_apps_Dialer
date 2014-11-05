@@ -846,7 +846,8 @@ public class DialpadFragment extends Fragment
         final MenuItem videocallsettingsMenuItem = menu.findItem(R.id.menu_video_call_settings);
         final MenuItem ipCallBySlot1MenuItem = menu.findItem(R.id.menu_ip_call_by_slot1);
         final MenuItem ipCallBySlot2MenuItem = menu.findItem(R.id.menu_ip_call_by_slot2);
-
+        final boolean isIPPrefixEnabled =
+                getResources().getBoolean(R.bool.config_ip_prefix_enable);
         // We show "video call setting" menu only when the csvt is supported
         //which means the prop "persist.radio.csvt.enabled" = true
         videocallsettingsMenuItem.setVisible(isVTSupported());
@@ -860,16 +861,22 @@ public class DialpadFragment extends Fragment
             ipCallBySlot1MenuItem.setVisible(false);
             ipCallBySlot2MenuItem.setVisible(false);
         } else {
-            if (MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB1)) {
+            if (isIPPrefixEnabled && MoreContactUtils.isMultiSimEnable(mContext,
+                    MSimConstants.SUB1)) {
                 String sub1Name = MoreContactUtils.getSimSpnName(MSimConstants.SUB1);
+                sub1Name = Settings.Global.getSimNameForSubscription(getActivity(),
+                        MSimConstants.SUB1, sub1Name);
                 ipCallBySlot1MenuItem.setTitle(getActivity().getString(
                         com.android.contacts.common.R.string.ip_call_by_slot, sub1Name));
                 ipCallBySlot1MenuItem.setVisible(true);
             } else {
                 ipCallBySlot1MenuItem.setVisible(false);
             }
-            if (MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB2)) {
+            if (isIPPrefixEnabled && MoreContactUtils.isMultiSimEnable(mContext,
+                    MSimConstants.SUB2)) {
                 String sub2Name = MoreContactUtils.getSimSpnName(MSimConstants.SUB2);
+                sub2Name = Settings.Global.getSimNameForSubscription(getActivity(),
+                        MSimConstants.SUB2, sub2Name);
                 ipCallBySlot2MenuItem.setTitle(getActivity().getString(
                         com.android.contacts.common.R.string.ip_call_by_slot, sub2Name));
                 ipCallBySlot2MenuItem.setVisible(true);
