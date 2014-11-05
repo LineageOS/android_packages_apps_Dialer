@@ -31,6 +31,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.ViewGroup;
 
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.list.ViewPagerTabs;
@@ -81,16 +82,31 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
         public Fragment getItem(int position) {
             switch (position) {
                 case TAB_INDEX_ALL:
-                    mAllCallsFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
-                    return mAllCallsFragment;
+                    return new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
                 case TAB_INDEX_MISSED:
-                    mMissedCallsFragment = new CallLogFragment(Calls.MISSED_TYPE);
-                    return mMissedCallsFragment;
+                    return new CallLogFragment(Calls.MISSED_TYPE);
                 case TAB_INDEX_VOICEMAIL:
-                    mVoicemailFragment = new CallLogFragment(Calls.VOICEMAIL_TYPE);
-                    return mVoicemailFragment;
+                    return new CallLogFragment(Calls.VOICEMAIL_TYPE);
             }
             throw new IllegalStateException("No fragment at position " + position);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            final CallLogFragment fragment =
+                    (CallLogFragment) super.instantiateItem(container, position);
+            switch (position) {
+                case TAB_INDEX_ALL:
+                    mAllCallsFragment = fragment;
+                    break;
+                case TAB_INDEX_MISSED:
+                    mMissedCallsFragment = fragment;
+                    break;
+                case TAB_INDEX_VOICEMAIL:
+                    mVoicemailFragment = fragment;
+                    break;
+            }
+            return fragment;
         }
 
         @Override
@@ -186,9 +202,8 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         final MenuItem itemDeleteAll = menu.findItem(R.id.delete_all);
-
-        // If onPrepareOptionsMenu is called before fragments loaded. Don't do anything.
         if (mAllCallsFragment != null && itemDeleteAll != null) {
+            // If onPrepareOptionsMenu is called before fragments are loaded, don't do anything.
             final CallLogAdapter adapter = mAllCallsFragment.getAdapter();
             itemDeleteAll.setVisible(adapter != null && !adapter.isEmpty());
         }
