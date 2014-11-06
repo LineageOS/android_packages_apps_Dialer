@@ -248,11 +248,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         final SharedPreferences prefs = getActivity().getSharedPreferences(
@@ -261,6 +256,9 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mActionBar = getActivity().getActionBar();
         fetchCalls();
         mCallLogAdapter.setLoading(true);
+        if (getUserVisibleHint()) {
+            sendScreenViewForPosition(mViewPager.getCurrentItem());
+        }
     }
 
     @Override
@@ -359,17 +357,11 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
     @Override
     public void onPageSelected(int position) {
-        if (position == TAB_INDEX_SPEED_DIAL && mSpeedDialFragment != null) {
-            AnalyticsUtil.sendScreenView(mSpeedDialFragment);
-        } else if (position == TAB_INDEX_RECENTS && mRecentsFragment != null) {
-            AnalyticsUtil.sendScreenView(mRecentsFragment);
-        } else if (position == TAB_INDEX_ALL_CONTACTS && mAllContactsFragment != null) {
-            AnalyticsUtil.sendScreenView(mAllContactsFragment);
-        }
         final int count = mOnPageChangeListeners.size();
         for (int i = 0; i < count; i++) {
             mOnPageChangeListeners.get(i).onPageSelected(position);
         }
+        sendScreenViewForPosition(position);
     }
 
     @Override
@@ -429,5 +421,30 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
             return TAB_INDEX_COUNT - 1 - position;
         }
         return position;
+    }
+
+    public void sendScreenViewForCurrentPosition() {
+        sendScreenViewForPosition(mViewPager.getCurrentItem());
+    }
+
+    private void sendScreenViewForPosition(int position) {
+        if (!isResumed()) {
+            return;
+        }
+        String fragmentName;
+        switch (getRtlPosition(position)) {
+            case TAB_INDEX_SPEED_DIAL:
+                fragmentName = SpeedDialFragment.class.getSimpleName();
+                break;
+            case TAB_INDEX_RECENTS:
+                fragmentName = CallLogFragment.class.getSimpleName();
+                break;
+            case TAB_INDEX_ALL_CONTACTS:
+                fragmentName = AllContactsFragment.class.getSimpleName();
+                break;
+            default:
+                return;
+        }
+        AnalyticsUtil.sendScreenView(fragmentName, getActivity(), null);
     }
 }
