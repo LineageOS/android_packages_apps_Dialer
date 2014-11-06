@@ -39,18 +39,20 @@ public final class Call {
     /* Defines different states of this call */
     public static class State {
         public static final int INVALID = 0;
-        public static final int IDLE = 1;           /* The call is idle.  Nothing active */
-        public static final int ACTIVE = 2;         /* There is an active call */
-        public static final int INCOMING = 3;       /* A normal incoming phone call */
-        public static final int CALL_WAITING = 4;   /* Incoming call while another is active */
-        public static final int DIALING = 5;        /* An outgoing call during dial phase */
-        public static final int REDIALING = 6;      /* Subsequent dialing attempt after a failure */
-        public static final int ONHOLD = 7;         /* An active phone call placed on hold */
-        public static final int DISCONNECTING = 8;  /* A call is being ended. */
-        public static final int DISCONNECTED = 9;   /* State after a call disconnects */
-        public static final int CONFERENCED = 10;   /* Call part of a conference call */
-        public static final int PRE_DIAL_WAIT = 11; /* Waiting for user before outgoing call */
-        public static final int CONNECTING = 12;    /* Waiting for Telecomm broadcast to finish */
+        public static final int NEW = 1;            /* The call is new. */
+        public static final int IDLE = 2;           /* The call is idle.  Nothing active */
+        public static final int ACTIVE = 3;         /* There is an active call */
+        public static final int INCOMING = 4;       /* A normal incoming phone call */
+        public static final int CALL_WAITING = 5;   /* Incoming call while another is active */
+        public static final int DIALING = 6;        /* An outgoing call during dial phase */
+        public static final int REDIALING = 7;      /* Subsequent dialing attempt after a failure */
+        public static final int ONHOLD = 8;         /* An active phone call placed on hold */
+        public static final int DISCONNECTING = 9;  /* A call is being ended. */
+        public static final int DISCONNECTED = 10;  /* State after a call disconnects */
+        public static final int CONFERENCED = 11;   /* Call part of a conference call */
+        public static final int PRE_DIAL_WAIT = 12; /* Waiting for user before outgoing call */
+        public static final int CONNECTING = 13;    /* Waiting for Telecomm broadcast to finish */
+
 
         public static boolean isConnectingOrConnected(int state) {
             switch(state) {
@@ -76,6 +78,8 @@ public final class Call {
             switch (state) {
                 case INVALID:
                     return "INVALID";
+                case NEW:
+                    return "NEW";
                 case IDLE:
                     return "IDLE";
                 case ACTIVE:
@@ -227,12 +231,13 @@ public final class Call {
 
     private static int translateState(int state) {
         switch (state) {
+            case android.telecom.Call.STATE_NEW:
+                return Call.State.NEW;
             case android.telecom.Call.STATE_CONNECTING:
                 return Call.State.CONNECTING;
             case android.telecom.Call.STATE_PRE_DIAL_WAIT:
                 return Call.State.PRE_DIAL_WAIT;
             case android.telecom.Call.STATE_DIALING:
-            case android.telecom.Call.STATE_NEW:
                 return Call.State.DIALING;
             case android.telecom.Call.STATE_RINGING:
                 return Call.State.INCOMING;
