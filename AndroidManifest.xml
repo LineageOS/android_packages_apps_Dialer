@@ -240,8 +240,9 @@
         </receiver>
 
         <activity android:name=".SpeedDialListActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden|uiMode"
-            android:label="@string/set_speed_dial" >
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/set_speed_dial"
+            android:theme="@style/SettingsStyle" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
