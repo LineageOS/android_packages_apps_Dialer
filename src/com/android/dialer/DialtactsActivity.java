@@ -182,6 +182,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * be commited.
      */
     private boolean mStateSaved;
+    private boolean mIsRestarting;
     private boolean mInDialpadSearch;
     private boolean mInRegularSearch;
     private boolean mClearSearchOnPause;
@@ -477,9 +478,24 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mShowDialpadOnResume = false;
         }
         mFirstLaunch = false;
+
+        if (mIsRestarting) {
+            // This is only called when the activity goes from resumed -> paused -> resumed, so it
+            // will not cause an extra view to be sent out on rotation
+            if (mIsDialpadShown) {
+                AnalyticsUtil.sendScreenView(mDialpadFragment, this);
+            }
+            mIsRestarting = false;
+        }
         prepareVoiceSearchButton();
         mDialerDatabaseHelper.startSmartDialUpdateThread();
         updateFloatingActionButtonControllerAlignment(false /* animate */);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mIsRestarting = true;
     }
 
     @Override
@@ -624,6 +640,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         mIsDialpadShown = true;
         mDialpadFragment.setAnimate(animate);
+        mListsFragment.setUserVisibleHint(false);
         AnalyticsUtil.sendScreenView(mDialpadFragment);
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -672,6 +689,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         mIsDialpadShown = false;
         mDialpadFragment.setAnimate(animate);
+        mListsFragment.setUserVisibleHint(true);
+        mListsFragment.sendScreenViewForCurrentPosition();
 
         updateSearchFragmentPosition();
 
@@ -899,6 +918,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         transaction.commit();
 
         mListsFragment.getView().animate().alpha(0).withLayer();
+        mListsFragment.setUserVisibleHint(false);
     }
 
     /**
@@ -924,6 +944,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         transaction.commit();
 
         mListsFragment.getView().animate().alpha(1).withLayer();
+        if (!mDialpadFragment.isVisible()) {
+            // If the dialpad fragment wasn't previously visible, then send a screen view because
+            // we are exiting regular search. Otherwise, the screen view will be sent by
+            // {@link #hideDialpadFragment}.
+            mListsFragment.sendScreenViewForCurrentPosition();
+            mListsFragment.setUserVisibleHint(true);
+        }
+
         mActionBarController.onSearchUiExited();
     }
 

@@ -70,7 +70,6 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         setDarkTheme(false);
         setPhotoPosition(ContactListItemView.getDefaultPhotoPosition(false /* opposite */));
         setUseCallableUri(true);
-        AnalyticsUtil.sendScreenView(this);
 
         try {
             mActivityScrollListener = (OnListFragmentScrolledListener) activity;
