@@ -20,6 +20,7 @@ import android.content.res.Resources;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -112,7 +113,7 @@ public class PhoneCallDetailsHelper {
 
         final CharSequence nameText;
         final CharSequence displayNumber =
-            mPhoneNumberHelper.getDisplayNumber(details.number,
+            mPhoneNumberHelper.getDisplayNumber(details.accountId, details.number,
                     details.numberPresentation, details.formattedNumber);
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
@@ -169,7 +170,7 @@ public class PhoneCallDetailsHelper {
         // Only show a label if the number is shown and it is not a SIP address.
         if (!TextUtils.isEmpty(details.number)
                 && !PhoneNumberHelper.isUriNumber(details.number.toString())
-                && !mPhoneNumberUtilsWrapper.isVoicemailNumber(details.number)) {
+                && !mPhoneNumberUtilsWrapper.isVoicemailNumber(details.accountId, details.number)) {
 
             if (details.numberLabel == ContactInfo.GEOCODE_AS_LABEL) {
                 numberFormattedLabel = details.geocode;
@@ -180,8 +181,8 @@ public class PhoneCallDetailsHelper {
         }
 
         if (!TextUtils.isEmpty(details.name) && TextUtils.isEmpty(numberFormattedLabel)) {
-            numberFormattedLabel = mPhoneNumberHelper.getDisplayNumber(details.number,
-                    details.numberPresentation, details.formattedNumber);
+            numberFormattedLabel = mPhoneNumberHelper.getDisplayNumber(details.accountId,
+                    details.number, details.numberPresentation, details.formattedNumber);
         }
         return numberFormattedLabel;
     }
@@ -204,7 +205,8 @@ public class PhoneCallDetailsHelper {
     public void setCallDetailsHeader(TextView nameView, PhoneCallDetails details) {
         final CharSequence nameText;
         final CharSequence displayNumber =
-            mPhoneNumberHelper.getDisplayNumber(details.number, details.numberPresentation,
+            mPhoneNumberHelper.getDisplayNumber(details.accountId, details.number,
+                        details.numberPresentation,
                         mResources.getString(R.string.recentCalls_addToContact));
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
