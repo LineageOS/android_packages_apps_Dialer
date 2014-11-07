@@ -290,6 +290,20 @@ public class ContactInfoHelper {
     }
 
     /**
+     * Requests the given number to be added to the phone blacklist
+     *
+     * @param number the number to be blacklisted
+     */
+    public void removeNumberFromBlacklist(String number) {
+        if (BlacklistUtils.addOrUpdate(mContext, number,
+                BlacklistUtils.MATCH_NONE, BlacklistUtils.BLOCK_CALLS)) {
+            // Give the user some feedback
+            String message = mContext.getString(R.string.toast_deleted_from_blacklist, number);
+            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
      * Parses the given URI to determine the original lookup key of the contact.
      */
     public static String getLookupKeyFromUri(Uri lookupUri) {
