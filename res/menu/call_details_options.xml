@@ -39,6 +39,6 @@
     <item
         android:id="@+id/menu_add_to_blacklist"
         android:title="@string/menu_add_to_blacklist"
-        android:onClick="onMenuAddToBlacklist"
+        android:onClick="onMenuBlacklist"
     />
 </menu>

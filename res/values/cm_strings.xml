@@ -48,6 +48,8 @@
 
     <string name="menu_add_to_blacklist">Add to blacklist</string>
     <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> added to blacklist</string>
+    <string name="menu_delete_from_blacklist">Delete from blacklist</string>
+    <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> deleted from blacklist</string>
 
     <!-- Forward lookup -->
     <string name="nearby_places">Nearby places</string>
