@@ -676,7 +676,6 @@ public class DialpadFragment extends AnalyticsFragment
             // Also, a sanity-check: the "dialpad chooser" UI should NEVER
             // be visible if the phone is idle!
             showDialpadChooser(false);
-            hideAndClearDialpad(true);
         }
 
         mFirstLaunch = false;
