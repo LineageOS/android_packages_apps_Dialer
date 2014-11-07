@@ -79,6 +79,7 @@ import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
+import com.android.dialer.DialerApplication;
 import com.android.dialer.NeededForReflection;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
@@ -847,7 +848,7 @@ public class DialpadFragment extends Fragment
         final MenuItem ipCallBySlot1MenuItem = menu.findItem(R.id.menu_ip_call_by_slot1);
         final MenuItem ipCallBySlot2MenuItem = menu.findItem(R.id.menu_ip_call_by_slot2);
         final boolean isIPPrefixEnabled =
-                getResources().getBoolean(R.bool.config_ip_prefix_enable);
+                DialerApplication.isIPCallEnabled();
         // We show "video call setting" menu only when the csvt is supported
         //which means the prop "persist.radio.csvt.enabled" = true
         videocallsettingsMenuItem.setVisible(isVTSupported());

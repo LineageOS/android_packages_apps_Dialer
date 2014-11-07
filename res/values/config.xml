@@ -19,7 +19,4 @@
     <integer name="call_recording_audio_source">1</integer>
     <integer name="call_recording_audio_encoder">0</integer>
     <bool name="call_durationtype_enabled">false</bool>
-
-    <!-- Flag whether to enable IP Prefix setting-->
-    <bool name="config_ip_prefix_enable" translatable="false">false</bool>
 </resources>

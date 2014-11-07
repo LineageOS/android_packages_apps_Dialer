@@ -51,6 +51,7 @@ import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.MoreContactUtils;
+import com.android.dialer.DialerApplication;
 import com.android.dialer.R;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
@@ -289,7 +290,7 @@ public class CallLogFragment extends ListFragment
         final MenuItem sendTextMessageMenuItem = menu.findItem(R.id.menu_send_text_message);
         final MenuItem addToContactMenuItem = menu.findItem(R.id.menu_add_to_contacts);
         final boolean isIPPrefixEnabled =
-                getResources().getBoolean(R.bool.config_ip_prefix_enable);
+                DialerApplication.isIPCallEnabled();
         AdapterView.AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         mNumber = getValidCallLogNumber(info.position);
 
