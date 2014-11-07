@@ -36,6 +36,7 @@ import com.android.dialer.lookup.LookupCache;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialerbind.ObjectFactory;
+import com.android.i18n.phonenumbers.PhoneNumberUtil;
 import com.android.internal.telephony.util.BlacklistUtils;
 
 import org.json.JSONException;
@@ -281,6 +282,7 @@ public class ContactInfoHelper {
      * @param number the number to be blacklisted
      */
     public void addNumberToBlacklist(String number) {
+        number = PhoneNumberUtil.getInstance().stripExtension(number);
         if (BlacklistUtils.addOrUpdate(mContext, number,
                 BlacklistUtils.BLOCK_CALLS, BlacklistUtils.BLOCK_CALLS)) {
             // Give the user some feedback
@@ -295,6 +297,7 @@ public class ContactInfoHelper {
      * @param number the number to be blacklisted
      */
     public void removeNumberFromBlacklist(String number) {
+        number = PhoneNumberUtil.getInstance().stripExtension(number);
         if (BlacklistUtils.addOrUpdate(mContext, number,
                 BlacklistUtils.MATCH_NONE, BlacklistUtils.BLOCK_CALLS)) {
             // Give the user some feedback
