@@ -944,6 +944,10 @@ public class DialpadFragment extends AnalyticsFragment
                 final MenuItem VideoCallOption = menu.findItem(R.id.menu_video_call);
                 VideoCallOption.setVisible(CallUtil.isCSVTEnabled());
 
+                final MenuItem ConferDialerOption
+                        = menu.findItem(R.id.menu_add_to_4g_conference_call);
+                ConferDialerOption.setVisible(CallUtil.isConferDialerEnabled());
+
                 boolean enable = !isDigitsEmpty();
                 for (int i = 0; i < menu.size(); i++) {
                     menu.getItem(i).setEnabled(enable);
@@ -1707,6 +1711,10 @@ public class DialpadFragment extends AnalyticsFragment
                 } else if (false) {
                     //add support for ims video call;
                 }
+            case R.id.menu_add_to_4g_conference_call:
+                getActivity().startActivity(CallUtil.getConferenceDialerIntent(
+                        mDigits.getText().toString()));
+                return true;
             default:
                 return false;
         }

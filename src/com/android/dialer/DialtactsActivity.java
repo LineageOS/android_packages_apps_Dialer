@@ -245,6 +245,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             clearFrequents.setVisible(mListsFragment != null &&
                     mListsFragment.getSpeedDialFragment() != null &&
                     mListsFragment.getSpeedDialFragment().hasFrequents());
+            final MenuItem ConferDialerOption = menu.findItem(R.id.menu_4g_conference_call);
+            ConferDialerOption.setVisible(CallUtil.isConferDialerEnabled());
             super.show();
         }
     }
@@ -594,6 +596,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_4g_conference_call:
+                this.startActivity(CallUtil.getConferenceDialerIntent(null));
+                break;
             case R.id.menu_history:
                 showCallHistory();
                 break;
