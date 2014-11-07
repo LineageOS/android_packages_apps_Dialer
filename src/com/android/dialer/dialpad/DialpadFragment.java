@@ -95,6 +95,8 @@ import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
 
+import static com.android.internal.telephony.PhoneConstants.SUBSCRIPTION_KEY;
+
 /**
  * Fragment that displays a twelve-key phone dialpad.
  */
@@ -105,6 +107,9 @@ public class DialpadFragment extends AnalyticsFragment
         PopupMenu.OnMenuItemClickListener,
         DialpadKeyButton.OnPressedListener {
     private static final String TAG = DialpadFragment.class.getSimpleName();
+
+    private static final String ACTION_ADD_VOICEMAIL
+            = "com.android.phone.CallFeaturesSetting.ADD_VOICEMAIL";
 
     private Context mContext;
 
@@ -1083,9 +1088,7 @@ public class DialpadFragment extends AnalyticsFragment
                             dialogFragment.show(getFragmentManager(),
                                     "voicemail_request_during_airplane_mode");
                         } else {
-                            DialogFragment dialogFragment = ErrorDialogFragment.newInstance(
-                                    R.string.dialog_voicemail_not_ready_message);
-                            dialogFragment.show(getFragmentManager(), "voicemail_not_ready");
+                            showNoVMNumberDialog();
                         }
                     }
                     return true;
@@ -1781,11 +1784,12 @@ public class DialpadFragment extends AnalyticsFragment
     private boolean isVoicemailAvailable() {
         boolean promptEnabled = SubscriptionManager.isVoicePromptEnabled();
         if (promptEnabled) {
-            return hasVMNumber();
+            //return hasVMNumber();
+            return true;
         } else {
             long subId = SubscriptionManager.getDefaultVoiceSubId();
             try {
-                return getTelephonyManager().getVoiceMailNumber(subId) != null;
+                return !TextUtils.isEmpty(getTelephonyManager().getVoiceMailNumber(subId));
             } catch (SecurityException se) {
                 // Possibly no READ_PHONE_STATE privilege.
                 Log.w(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");
@@ -1810,6 +1814,34 @@ public class DialpadFragment extends AnalyticsFragment
             }
         }
         return hasVMNum;
+    }
+
+    private void showNoVMNumberDialog() {
+        String dialogTxt = getString(R.string.is_set_voicemail_number);
+        final Activity thisActivity = getActivity();
+        new AlertDialog.Builder(thisActivity)
+            .setTitle(R.string.dialog_title)
+            .setMessage(dialogTxt)
+            .setPositiveButton(android.R.string.ok,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // go to voicemail setting screen to set its number.
+                        Intent intent = new Intent(ACTION_ADD_VOICEMAIL);
+                        if (getTelephonyManager().isMultiSimEnabled()) {
+                            long subId = SubscriptionManager.getDefaultVoiceSubId();
+                            intent.setClassName("com.android.phone",
+                                    "com.android.phone.MSimCallFeaturesSubSetting");
+                            intent.putExtra(SUBSCRIPTION_KEY, subId);
+                        } else {
+                            intent.setClassName("com.android.phone",
+                                    "com.android.phone.CallFeaturesSetting");
+                        }
+                        startActivity(intent);
+                    }
+                })
+            .setNegativeButton(android.R.string.cancel, null)
+            .show();
     }
 
     /**
