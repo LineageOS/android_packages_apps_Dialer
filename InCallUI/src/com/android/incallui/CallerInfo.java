@@ -324,15 +324,10 @@ public class CallerInfo {
      * @param context To lookup the localized 'Emergency Number' string.
      * @return this instance.
      */
-    // TODO: Note we're setting the phone number here (refer to
-    // javadoc comments at the top of CallerInfo class) to a localized
-    // string 'Emergency Number'. This is pretty bad because we are
-    // making UI work here instead of just packaging the data. We
-    // should set the phone number to the dialed number and name to
-    // 'Emergency Number' and let the UI make the decision about what
-    // should be displayed.
     /* package */ CallerInfo markAsEmergency(Context context) {
-        phoneNumber = context.getString(R.string.emergency_call_dialog_number_for_display);
+        name = context.getString(R.string.emergency_call_dialog_number_for_display);
+        phoneNumber = null;
+
         photoResource = R.drawable.img_phone;
         mIsEmergency = true;
         return this;
@@ -346,8 +341,6 @@ public class CallerInfo {
      * set to null.
      * @return this instance.
      */
-    // TODO: As in the emergency number handling, we end up writing a
-    // string in the phone number field.
     /* package */ CallerInfo markAsVoiceMail(Context context) {
         mIsVoiceMail = true;
 
@@ -355,7 +348,8 @@ public class CallerInfo {
             // For voicemail calls, we display the voice mail tag
             // instead of the real phone number in the "number"
             // field.
-            phoneNumber = TelephonyManagerUtils.getVoiceMailAlphaTag(context);
+            name = TelephonyManagerUtils.getVoiceMailAlphaTag(context);
+            phoneNumber = null;
         } catch (SecurityException se) {
             // Should never happen: if this process does not have
             // permission to retrieve VM tag, it should not have
