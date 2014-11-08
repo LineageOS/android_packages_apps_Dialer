@@ -269,21 +269,18 @@
                   android:launchMode="singleInstance"
                   android:configChanges="keyboardHidden"
                   android:exported="false"
-                  android:process="com.android.incallui"
                   android:screenOrientation="nosensor" >
         </activity>
 
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
         <receiver android:name="com.android.incallui.InCallApp$NotificationBroadcastReceiver"
-                  android:exported="false"
-                  android:process="com.android.incallui">
+                  android:exported="false">
             <intent-filter>
                 <action android:name="com.android.incallui.ACTION_HANG_UP_ONGOING_CALL" />
             </intent-filter>
         </receiver>
 
         <service android:name="com.android.incallui.InCallServiceImpl"
-                 android:process="com.android.incallui"
                  android:permission="android.permission.BIND_INCALL_SERVICE" >
             <intent-filter>
                 <action android:name="android.telecom.InCallService"/>
