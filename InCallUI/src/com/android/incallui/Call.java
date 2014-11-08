@@ -396,12 +396,14 @@ public final class Call {
 
     @Override
     public String toString() {
-        return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s, videoState:%d]",
+        return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s, conferenceable:%s, " +
+                "videoState:%d]",
                 mId,
                 State.toString(getState()),
                 PhoneCapabilities.toString(mTelecommCall.getDetails().getCallCapabilities()),
                 mChildCallIds,
                 getParentId(),
+                this.mTelecommCall.getConferenceableCalls(),
                 mTelecommCall.getDetails().getVideoState());
     }
 }

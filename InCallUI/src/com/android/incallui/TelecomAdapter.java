@@ -243,4 +243,9 @@ final class TelecomAdapter implements InCallPhoneListener {
             Log.e(this, "error phoneAccountSelected, accountHandle is null");
         }
     }
+
+    boolean canAddCall() {
+        // Default to true if we are not connected to telecom.
+        return mPhone == null ? true : mPhone.canAddCall();
+    }
 }
