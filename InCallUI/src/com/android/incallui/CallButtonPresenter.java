@@ -17,10 +17,10 @@
 package com.android.incallui;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.telecom.AudioState;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.PhoneCapabilities;
-import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 
 import com.android.incallui.AudioModeProvider.AudioModeListener;
@@ -30,8 +30,6 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 
-import android.telephony.PhoneNumberUtils;
-
 import java.util.Objects;
 
 /**
@@ -40,6 +38,9 @@ import java.util.Objects;
 public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButtonUi>
         implements InCallStateListener, AudioModeListener, IncomingCallListener,
         InCallDetailsListener, CanAddCallListener {
+
+    private static final String KEY_AUTOMATICALLY_MUTED = "incall_key_automatically_muted";
+    private static final String KEY_PREVIOUS_MUTE_STATE = "incall_key_previous_mute_state";
 
     private Call mCall;
     private boolean mAutomaticallyMuted = false;
@@ -232,7 +233,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         mPreviousMuteState = AudioModeProvider.getInstance().getMute();
         // Simulate a click on the mute button
         muteClicked(true);
-
         TelecomAdapter.getInstance().addCall();
     }
 
@@ -466,6 +466,22 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             muteClicked(mPreviousMuteState);
         }
         mAutomaticallyMuted = false;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_AUTOMATICALLY_MUTED, mAutomaticallyMuted);
+        outState.putBoolean(KEY_PREVIOUS_MUTE_STATE, mPreviousMuteState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        mAutomaticallyMuted =
+                savedInstanceState.getBoolean(KEY_AUTOMATICALLY_MUTED, mAutomaticallyMuted);
+        mPreviousMuteState =
+                savedInstanceState.getBoolean(KEY_PREVIOUS_MUTE_STATE, mPreviousMuteState);
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     public interface CallButtonUi extends Ui {
