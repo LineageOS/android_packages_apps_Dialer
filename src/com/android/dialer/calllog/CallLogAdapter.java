@@ -28,6 +28,7 @@ import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -648,6 +649,12 @@ public class CallLogAdapter extends GroupingListAdapter
         final long rowId = c.getLong(CallLogQuery.ID);
         views.rowId = rowId;
 
+        String accId = c.getString(CallLogQuery.ACCOUNT_ID);
+        long subId = SubscriptionManager.DEFAULT_SUB_ID;
+        if (accId!= null && !accId.equals("E") && !accId.toLowerCase().contains("sip")) {
+             subId = Long.parseLong(accId);
+        }
+
         // For entries in the call log, check if the day group has changed and display a header
         // if necessary.
         if (mIsCallLog) {
@@ -677,7 +684,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final ContactInfo cachedContactInfo = getContactInfoFromCallLog(c);
 
         final boolean isVoicemailNumber =
-                PhoneNumberUtilsWrapper.INSTANCE.isVoicemailNumber(number);
+                PhoneNumberUtilsWrapper.INSTANCE.isVoicemailNumber(subId, number);
 
         // Where binding and not in the call log, use default behaviour of invoking a call when
         // tapping the primary view.
@@ -771,12 +778,12 @@ public class CallLogAdapter extends GroupingListAdapter
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, null, accountIcon, features, dataUsage, transcription);
+                    duration, null, accountIcon, features, dataUsage, transcription, subId);
         } else {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
                     duration, name, ntype, label, lookupUri, photoUri, sourceType,
-                    null, accountIcon, features, dataUsage, transcription);
+                    null, accountIcon, features, dataUsage, transcription, subId);
         }
 
         mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
@@ -794,8 +801,9 @@ public class CallLogAdapter extends GroupingListAdapter
 
         String nameForDefaultImage = null;
         if (TextUtils.isEmpty(name)) {
-            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(details.number,
-                    details.numberPresentation, details.formattedNumber).toString();
+            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(details.accountId,
+                    details.number, details.numberPresentation,
+                    details.formattedNumber).toString();
         } else {
             nameForDefaultImage = name;
         }

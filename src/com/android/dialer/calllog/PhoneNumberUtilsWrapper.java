@@ -56,6 +56,14 @@ public class PhoneNumberUtilsWrapper {
     }
 
     /**
+     * Returns true if the given number is the number of the configured voicemail of the subId.
+     *  To be able to mock-out this, it is not a static method.
+     */
+    public boolean isVoicemailNumber(long subId, CharSequence number) {
+        return number!= null && PhoneNumberUtils.isVoiceMailNumber(subId, number.toString());
+    }
+
+    /**
      * Returns true if the given number is a SIP address. To be able to mock-out this, it is not a
      * static method.
      */
