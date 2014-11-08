@@ -167,6 +167,7 @@ public class CallButtonFragment
             }
             case R.id.mergeButton:
                 getPresenter().mergeClicked();
+                mMergeButton.setEnabled(false);
                 break;
             case R.id.holdButton: {
                 final ImageButton button = (ImageButton) view;
@@ -406,6 +407,11 @@ public class CallButtonFragment
     @Override
     public void showMergeButton(boolean show) {
         mMergeButton.setVisibility(show ? View.VISIBLE : View.GONE);
+
+        // If the merge button was disabled, re-enable it when hiding it.
+        if (!show) {
+            mMergeButton.setEnabled(true);
+        }
     }
 
     @Override
