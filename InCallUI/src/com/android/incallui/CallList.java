@@ -17,7 +17,6 @@
 package com.android.incallui;
 
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.common.base.Preconditions;
 
 import android.os.Handler;
