@@ -25,50 +25,12 @@
     android:paddingTop="@dimen/conference_call_manager_padding_top"
     android:visibility="gone">
 
-    <!-- The scrollview wrapper for the list of callers on
-         the conference call (in case the list gets too long). -->
-    <ScrollView
-        android:id="@+id/conferenceList"
+    <!-- List of conference participants. -->
+    <ListView
+        android:id="@+id/participantList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <!-- The actual list of callers; this embedded LinearLayout
-             required since scrollview only supports a single child. -->
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!-- A conference can have at most MAX_CALLERS_IN_CONFERENCE (= 5) callers,
-                 so just define all those UI elements here. -->
-
-            <!-- Caller 0 -->
-            <include
-                layout="@layout/caller_in_conference"
-                android:id="@+id/caller0"/>
-
-            <!-- Caller 1 -->
-            <include
-                layout="@layout/caller_in_conference"
-                android:id="@+id/caller1"/>
-
-            <!-- Caller 2 -->
-            <include
-                layout="@layout/caller_in_conference"
-                android:id="@+id/caller2"/>
-
-            <!-- Caller 3 -->
-            <include
-                layout="@layout/caller_in_conference"
-                android:id="@+id/caller3"/>
-
-            <!-- Caller 4 -->
-            <include
-                layout="@layout/caller_in_conference"
-                android:id="@+id/caller4"/>
-
-        </LinearLayout>  <!-- End of "list of callers on conference call" -->
-
-    </ScrollView>  <!-- End of scrolling list wrapper for the linear layout -->
-
+        android:layout_height="match_parent"
+        android:listSelector="@null"
+        android:background="@color/background_dialer_white"
+        android:divider="@null" />
 </FrameLayout>
