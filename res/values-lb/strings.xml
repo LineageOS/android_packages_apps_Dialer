@@ -83,7 +83,7 @@
   <string name="description_search_button">sichen</string>
   <string name="description_dial_button">wielen</string>
   <string name="description_delete_button">Récktast</string>
-  <string name="description_digits_edittext">Nummer déi ze wielen ass</string>
+  <string name="description_digits_edittext">Nummer déi auszewielen ass</string>
   <string name="action_menu_call_history_description">Urufffhistorique</string>
   <string name="action_menu_overflow_description" msgid="2295659037509008453">Méi Optiounen</string>
   <string name="action_menu_dialpad_button">Wieltasten</string>
@@ -135,8 +135,8 @@
   <string name="voicemail">Sproochopnam</string>
   <string name="private_num">Privat Nummer</string>
   <string name="payphone">Telefonskabinn</string>
-  <string name="dialerKeyboardHintText">D\'Tastatur benotze fir ze wielen</string>
-  <string name="dialerDialpadHintText">Nummer wielen</string>
+  <string name="dialerKeyboardHintText">D\'Tastatur benotze fir auszewielen</string>
+  <string name="dialerDialpadHintText">Nummer auswielen</string>
   <string name="callDetailsDurationFormat"><xliff:g id="minutes" example="42">%s</xliff:g> Min. <xliff:g id="seconds" example="28">%s</xliff:g> Sek.</string>
   <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Uruff net ofgesat</string>
   <string name="dialog_voicemail_not_ready_message">Konfiguréier deng Mailbox ënner Menü &gt; Astellungen.</string>
