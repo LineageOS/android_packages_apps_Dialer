@@ -23,6 +23,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/conference_call_manager_padding_top"
+    android:clickable="true"
     android:visibility="gone">
 
     <!-- List of conference participants. -->
