@@ -519,6 +519,14 @@ public class DialpadFragment extends Fragment
         mStartedFromNewIntent = value;
     }
 
+    public void clearCallRateInformation() {
+        setCallRateInformation(null, null);
+    }
+
+    public void setCallRateInformation(String countryName, String displayRate) {
+        mDialpadView.setCallRateInformation(countryName, displayRate);
+    }
+
     /**
      * Sets formatted digits to digits field.
      */
