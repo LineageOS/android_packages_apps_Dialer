@@ -734,7 +734,7 @@ public class InCallActivity extends Activity {
 
         mDialog = new AlertDialog.Builder(this)
                 .setMessage(msg)
-                .setPositiveButton(R.string.ok, new OnClickListener() {
+                .setPositiveButton(android.R.string.ok, new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         onDialogDismissed();
