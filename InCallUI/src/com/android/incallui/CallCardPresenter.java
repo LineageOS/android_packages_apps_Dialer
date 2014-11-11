@@ -24,7 +24,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneCapabilities;
 import android.telecom.PhoneAccount;
@@ -196,7 +195,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         mSecondary = secondary;
         mPrimary = primary;
 
-        if (primaryChanged && mPrimary != null) {
+        // Refresh primary call information if either:
+        // 1. Primary call changed.
+        // 2. The call's ability to manage conference has changed.
+        if (mPrimary != null && (primaryChanged ||
+                ui.isManageConferenceVisible() != shouldShowManageConference())) {
             // primary call has changed
             mPrimaryContactInfo = ContactInfoCache.buildCacheEntryFromCall(mContext, mPrimary,
                     mPrimary.getState() == Call.State.INCOMING);
@@ -305,13 +308,21 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      * Only show the conference call button if we can manage the conference.
      */
     private void maybeShowManageConferenceCallButton() {
+        getUi().showManageConferenceCallButton(shouldShowManageConference());
+    }
+
+    /**
+     * Determines if the manage conference button should be visible, based on the current primary
+     * call.
+     *
+     * @return {@code True} if the manage conference button should be visible.
+     */
+    private boolean shouldShowManageConference() {
         if (mPrimary == null) {
-            getUi().showManageConferenceCallButton(false);
-            return;
+            return false;
         }
 
-        final boolean canManageConference = mPrimary.can(PhoneCapabilities.MANAGE_CONFERENCE);
-        getUi().showManageConferenceCallButton(mPrimary.isConferenceCall() && canManageConference);
+        return mPrimary.can(PhoneCapabilities.MANAGE_CONFERENCE);
     }
 
     private void setCallbackNumber() {
@@ -673,6 +684,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPhotoVisible(boolean isVisible);
         void setProgressSpinnerVisible(boolean visible);
         void showManageConferenceCallButton(boolean visible);
+        boolean isManageConferenceVisible();
     }
 
     private TelecomManager getTelecomManager() {
