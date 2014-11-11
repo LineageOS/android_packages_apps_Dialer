@@ -16,8 +16,6 @@
 
 package com.android.incallui;
 
-import android.Manifest;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -1170,18 +1168,18 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         Call call = CallList.getInstance().getFirstCall();
         TelecomManager tm = getTelecomManager();
 
-        int color = PhoneAccount.NO_COLOR;
+        int iconTint = PhoneAccount.NO_COLOR;
 
         if (call != null && tm != null && tm.hasMultipleCallCapableAccounts()) {
             PhoneAccount account = tm.getPhoneAccount(call.getAccountHandle());
             if (account != null) {
-                color = account.getColor();
+                iconTint = account.getIconTint();
             }
         }
 
         // This method will set the background to default if the color is PhoneAccount.NO_COLOR.
         mThemeColors = new InCallUIMaterialColorMapUtils(mContext.getResources()).
-                calculatePrimaryAndSecondaryColor(color);
+                calculatePrimaryAndSecondaryColor(iconTint);
 
         mInCallActivity.getWindow().setStatusBarColor(mThemeColors.mSecondaryColor);
     }
