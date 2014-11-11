@@ -789,6 +789,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     /**
+     * Determines the current visibility of the manage conference button.
+     *
+     * @return {@code true} if the button is visible.
+     */
+    @Override
+    public boolean isManageConferenceVisible() {
+        return mManageConferenceCallButton.getVisibility() == View.VISIBLE;
+    }
+
+    /**
      * Get the overall InCallUI background colors and apply to call card.
      */
     public void updateColors() {

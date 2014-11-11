@@ -28,6 +28,9 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 
 import com.google.common.base.Preconditions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Logic for call buttons.
  */
@@ -35,9 +38,6 @@ public class ConferenceManagerPresenter
         extends Presenter<ConferenceManagerPresenter.ConferenceManagerUi>
         implements InCallStateListener, InCallDetailsListener {
 
-    private static final int MAX_CALLERS_IN_CONFERENCE = 5;
-
-    private String[] mCallerIds = new String[0];
     private Context mContext;
 
     @Override
@@ -83,13 +83,7 @@ public class ConferenceManagerPresenter
 
         if (call.can(PhoneCapabilities.DISCONNECT_FROM_CONFERENCE) != canDisconnect
                 || call.can(PhoneCapabilities.SEPARATE_FROM_CONFERENCE) != canSeparate) {
-            for (int i = 0; i < mCallerIds.length; i++) {
-                if (mCallerIds[i] == call.getId()) {
-                    getUi().updateSeparateButtonForRow(i, canSeparate);
-                    getUi().updateEndButtonForRow(i, canDisconnect);
-                    break;
-                }
-            }
+            getUi().refreshCall(call);
         }
 
         if (!PhoneCapabilities.can(
@@ -104,6 +98,11 @@ public class ConferenceManagerPresenter
         update(callList);
     }
 
+    /**
+     * Updates the conference participant adapter.
+     *
+     * @param callList The callList.
+     */
     private void update(CallList callList) {
         // callList is non null, but getActiveOrBackgroundCall() may return null
         final Call currentCall = callList.getActiveOrBackgroundCall();
@@ -111,9 +110,12 @@ public class ConferenceManagerPresenter
             return;
         }
 
-        // getChildCallIds() always returns a valid Set
-        mCallerIds = currentCall.getChildCallIds().toArray(new String[0]);
-        Log.d(this, "Number of calls is " + String.valueOf(mCallerIds.length));
+        ArrayList<Call> calls = new ArrayList<>(currentCall.getChildCallIds().size());
+        for (String callerId : currentCall.getChildCallIds()) {
+            calls.add(callList.getCallById(callerId));
+        }
+
+        Log.d(this, "Number of calls is " + String.valueOf(calls.size()));
 
         // Users can split out a call from the conference call if either the active call or the
         // holding call is empty. If both are filled, users can not split out another call.
@@ -121,97 +123,13 @@ public class ConferenceManagerPresenter
         final boolean hasHoldingCall = (callList.getBackgroundCall() != null);
         boolean canSeparate = !(hasActiveCall && hasHoldingCall);
 
-        for (int i = 0; i < MAX_CALLERS_IN_CONFERENCE; i++) {
-            if (i < mCallerIds.length) {
-                Call call = callList.getCallById(currentCall.getChildCallIds().get(i));
-                int callCapabilities = call.getTelecommCall().getDetails().getCallCapabilities();
-                boolean thisRowCanSeparate = canSeparate && PhoneCapabilities.can(
-                        callCapabilities, PhoneCapabilities.SEPARATE_FROM_CONFERENCE);
-                boolean thisRowCanDisconnect = PhoneCapabilities.can(
-                        callCapabilities, PhoneCapabilities.DISCONNECT_FROM_CONFERENCE);
-                // Fill in the row in the UI for this caller.
-                ContactCacheEntry contactCache =
-                        ContactInfoCache.getInstance(mContext).getInfo(mCallerIds[i]);
-                if (contactCache == null) {
-                    contactCache = ContactInfoCache.buildCacheEntryFromCall(mContext, call,
-                                call.getState() == Call.State.INCOMING);
-                }
-
-                updateManageConferenceRow(
-                        i /* row index */,
-                        contactCache,
-                        thisRowCanSeparate,
-                        thisRowCanDisconnect);
-            } else {
-                // Blank out this row in the UI
-                updateManageConferenceRow(i, null, false, false);
-            }
-        }
-    }
-
-    /**
-      * Updates a single row of the "Manage conference" UI.  (One row in this
-      * UI represents a single caller in the conference.)
-      *
-      * @param i the row to update
-      * @param contactCacheEntry the contact details corresponding to this caller.
-      *        If null, that means this is an "empty slot" in the conference,
-      *        so hide this row in the UI.
-      * @param canSeparate if true, show a "Separate" (i.e. "Private") button
-      *        on this row in the UI.
-      * @param canDisconnect if true, show a "Disconnect" button on this row in the UI.
-      */
-    public void updateManageConferenceRow(
-            final int i,
-            final ContactCacheEntry contactCacheEntry,
-            boolean canSeparate,
-            boolean canDisconnect) {
-
-        if (contactCacheEntry != null) {
-            // Activate this row of the Manage conference panel:
-            getUi().setRowVisible(i, true);
-
-            String name = contactCacheEntry.name;
-            String number = contactCacheEntry.number;
-
-            if (TextUtils.isEmpty(name)) {
-                name = number;
-                number = null;
-            }
-
-            getUi().updateSeparateButtonForRow(i, canSeparate);
-            getUi().updateEndButtonForRow(i, canDisconnect);
-            getUi().displayCallerInfoForConferenceRow(i, name, number, contactCacheEntry.label,
-                    contactCacheEntry.lookupKey, contactCacheEntry.displayPhotoUri);
-        } else {
-            // Disable this row of the Manage conference panel:
-            getUi().setRowVisible(i, false);
-        }
-    }
-
-    public int getMaxCallersInConference() {
-        return MAX_CALLERS_IN_CONFERENCE;
-    }
-
-    public void separateConferenceConnection(int rowId) {
-        if (rowId < mCallerIds.length) {
-            TelecomAdapter.getInstance().separateCall(mCallerIds[rowId]);
-        }
-    }
-
-    public void endConferenceConnection(int rowId) {
-        if (rowId < mCallerIds.length) {
-            TelecomAdapter.getInstance().disconnectCall(mCallerIds[rowId]);
-        }
+        getUi().update(mContext, calls, canSeparate);
     }
 
     public interface ConferenceManagerUi extends Ui {
         void setVisible(boolean on);
         boolean isFragmentVisible();
-        void setRowVisible(int rowId, boolean on);
-        void displayCallerInfoForConferenceRow(int rowId, String callerName, String callerNumber,
-                String callerNumberType, String lookupKey, Uri photoUri);
-        void updateSeparateButtonForRow(int rowId, boolean canSeparate);
-        void updateEndButtonForRow(int rowId, boolean canDisconnect);
+        void update(Context context, List<Call> participants, boolean parentCanSeparate);
+        void refreshCall(Call call);
     }
 }
