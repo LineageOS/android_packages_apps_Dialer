@@ -17,10 +17,12 @@
 package com.android.incallui;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.telecom.AudioState;
@@ -219,7 +221,7 @@ public class CallButtonFragment
 
         for (ImageButton button : compoundButtons) {
             final LayerDrawable layers = (LayerDrawable) button.getBackground();
-            final StateListDrawable btnCompoundDrawable = compoundBackgroundDrawable(themeColors);
+            final RippleDrawable btnCompoundDrawable = compoundBackgroundDrawable(themeColors);
             layers.setDrawableByLayerId(R.id.compoundBackgroundItem, btnCompoundDrawable);
         }
 
@@ -234,42 +236,46 @@ public class CallButtonFragment
 
         for (ImageButton button : normalButtons) {
             final LayerDrawable layers = (LayerDrawable) button.getBackground();
-            final StateListDrawable btnCompoundDrawable = backgroundDrawable(themeColors);
-            layers.setDrawableByLayerId(R.id.backgroundItem, btnCompoundDrawable);
+            final RippleDrawable btnDrawable = backgroundDrawable(themeColors);
+            layers.setDrawableByLayerId(R.id.backgroundItem, btnDrawable);
         }
 
         mCurrentThemeColors = themeColors;
     }
 
     /**
-     * Generate a StateListDrawable which will be the background for a compound button, i.e.
+     * Generate a RippleDrawable which will be the background for a compound button, i.e.
      * a button with pressed and unpressed states. The unpressed state will be the same color
      * as the rest of the call card, the pressed state will be the dark version of that color.
      */
-    private StateListDrawable compoundBackgroundDrawable(MaterialPalette palette) {
+    private RippleDrawable compoundBackgroundDrawable(MaterialPalette palette) {
         Resources res = getResources();
-        StateListDrawable stateListDrawable = new StateListDrawable();
+        ColorStateList rippleColor =
+                ColorStateList.valueOf(res.getColor(R.color.incall_accent_color));
 
+        StateListDrawable stateListDrawable = new StateListDrawable();
         addSelectedAndFocused(res, stateListDrawable);
         addFocused(res, stateListDrawable);
         addSelected(res, stateListDrawable, palette);
         addUnselected(res, stateListDrawable, palette);
 
-        return stateListDrawable;
+        return new RippleDrawable(rippleColor, stateListDrawable, null);
     }
 
     /**
-     * Generate a StateListDrawable which will be the background of a button to ensure it
+     * Generate a RippleDrawable which will be the background of a button to ensure it
      * is the same color as the rest of the call card.
      */
-    private StateListDrawable backgroundDrawable(MaterialPalette palette) {
+    private RippleDrawable backgroundDrawable(MaterialPalette palette) {
         Resources res = getResources();
-        StateListDrawable stateListDrawable = new StateListDrawable();
+        ColorStateList rippleColor =
+                ColorStateList.valueOf(res.getColor(R.color.incall_accent_color));
 
+        StateListDrawable stateListDrawable = new StateListDrawable();
         addFocused(res, stateListDrawable);
         addUnselected(res, stateListDrawable, palette);
 
-        return stateListDrawable;
+        return new RippleDrawable(rippleColor, stateListDrawable, null);
     }
 
     // state_selected and state_focused
