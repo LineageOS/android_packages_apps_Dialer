@@ -182,6 +182,7 @@ public class InCallActivity extends Activity {
         if (mDialpadFragment != null) {
             out.putString(DIALPAD_TEXT_EXTRA, mDialpadFragment.getDtmfText());
         }
+        super.onSaveInstanceState(out);
     }
 
     @Override
