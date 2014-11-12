@@ -96,11 +96,11 @@
     <!-- Darker versions of background_colors, two shades darker. These colors are used for the
          status bar. -->
     <array name="background_colors_dark">
-        <item>#004D40</item>
-        <item>#1C3AA9</item>
-        <item>#1A237E</item>
-        <item>#4A148C</item>
-        <item>#880E4F</item>
-        <item>#A52714</item>
+        <item>#00695C</item>
+        <item>#2A56C6</item>
+        <item>#283593</item>
+        <item>#6A1B9A</item>
+        <item>#AD1457</item>
+        <item>#B93221</item>
     </array>
 </resources>

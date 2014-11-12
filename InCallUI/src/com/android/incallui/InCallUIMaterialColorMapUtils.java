@@ -17,7 +17,7 @@ public class InCallUIMaterialColorMapUtils extends MaterialColorMapUtils {
         sPrimaryColors = resources.obtainTypedArray(
                 com.android.incallui.R.array.background_colors);
         sSecondaryColors = resources.obtainTypedArray(
-                com.android.contacts.common.R.array.background_colors_dark);
+                com.android.incallui.R.array.background_colors_dark);
         mResources = resources;
     }
 
