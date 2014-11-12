@@ -1059,31 +1059,34 @@ public class CallLogAdapter extends GroupingListAdapter
             final ViewStub stub = (ViewStub) view.findViewById(R.id.link_stub);
             if (UriUtils.isEncodedContactUri(info.lookupUri)) {
                 if (stub != null) {
-                    final View inflated = stub.inflate();
-                    inflated.setVisibility(View.VISIBLE);
-                    mBadgeContainer = inflated.findViewById(R.id.badge_link_container);
-                    mBadgeImageView = (ImageView) inflated.findViewById(R.id.badge_image);
-                    mBadgeText = (TextView) inflated.findViewById(R.id.badge_text);
+                    mBadgeContainer = stub.inflate();
+                } else {
+                    mBadgeContainer = view.findViewById(R.id.badge_container);
                 }
 
-                mBadgeContainer.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        final Intent intent =
-                                DialtactsActivity.getAddNumberToContactIntent(details.number);
-                        DialerUtils.startActivityWithErrorToast(mContext, intent,
-                                R.string.add_contact_not_available);
-                    }
-                });
+                mBadgeContainer.setVisibility(View.VISIBLE);
+                mBadgeImageView = (ImageView) mBadgeContainer.findViewById(R.id.badge_image);
+                mBadgeText = (TextView) mBadgeContainer.findViewById(R.id.badge_text);
+
+                final View clickableArea = mBadgeContainer.findViewById(R.id.badge_link_container);
+                if (clickableArea != null) {
+                    clickableArea.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final Intent intent =
+                                    DialtactsActivity.getAddNumberToContactIntent(details.number);
+                            DialerUtils.startActivityWithErrorToast(mContext, intent,
+                                    R.string.add_contact_not_available);
+                        }
+                    });
+                }
                 mBadgeImageView.setImageResource(R.drawable.ic_person_add_24dp);
                 mBadgeText.setText(R.string.recentCalls_addToContact);
             } else {
                 // Hide badge if it was previously shown.
-                if (stub == null) {
-                    final View container = view.findViewById(R.id.badge_container);
-                    if (container != null) {
-                        container.setVisibility(View.GONE);
-                    }
+                mBadgeContainer = view.findViewById(R.id.badge_container);
+                if (mBadgeContainer != null) {
+                    mBadgeContainer.setVisibility(View.GONE);
                 }
             }
         }
