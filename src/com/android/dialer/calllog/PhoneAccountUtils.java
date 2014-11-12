@@ -73,7 +73,7 @@ public class PhoneAccountUtils {
      */
     public static int getAccountColor(Context context, PhoneAccountHandle accountHandle) {
         PhoneAccount account = getAccountOrNull(context, accountHandle);
-        return account == null ? PhoneAccount.NO_COLOR : account.getColor();
+        return account == null ? PhoneAccount.NO_COLOR : account.getIconTint();
     }
 
     /**
