@@ -34,15 +34,12 @@
     <!-- Incoming call screen, string when number hidden -->
     <string name="private_num">Private number</string>
     <!-- Incoming call screen, string when called from a pay phone -->
-    <string name="payphone">Pay phone</string>
+    <string name="payphone">Payphone</string>
 
     <!-- In-call screen: status label for a conference call -->
     <string name="confCall">Conference call</string>
     <!-- In-call screen: call lost dialog text -->
-    <string name="call_lost">Call has been lost.</string>
-
-    <!-- Positive button label ("OK") used in several dialogs in the phone UI [CHAR LIMIT=10] -->
-    <string name="ok">OK</string>
+    <string name="call_lost">Call dropped</string>
 
     <!-- MMI dialog strings -->
     <!-- Dialog label when an MMI code starts running -->
@@ -93,7 +90,7 @@
     <!-- In-call screen: status label for a call in the "dialing" state -->
     <string name="card_title_dialing">Dialing</string>
     <!-- In-call screen: status label for a re-dialing call -->
-    <string name="card_title_redialing">Retrying</string>
+    <string name="card_title_redialing">Redialing</string>
     <!-- In-call screen: status label for a conference call -->
     <string name="card_title_conf_call">Conference call</string>
     <!-- In-call screen: status label for an incoming call -->
@@ -116,18 +113,18 @@
     <!-- In-call screen: status label when requesting video. -->
     <string name="card_title_video_call_requesting">Requesting video</string>
     <!-- In-call screen: status label when there is a problem connecting a video call. -->
-    <string name="card_title_video_call_error">Cannot connect video call</string>
+    <string name="card_title_video_call_error">Can\'t connect video call</string>
 
     <!-- In-call screen: string shown to the user when their outgoing number is different than the
          number reported by TelephonyManager#getLine1Number() -->
-    <string name="card_title_callback_number">Your call back number\n
+    <string name="card_title_callback_number">Your callback number\n
         <xliff:g id="dark_number">%1$s</xliff:g>
     </string>
 
     <!-- In-call screen: string shown to the user when their outgoing number is different than the
          number reported by TelephonyManager#getLine1Number() and they're calling emergency
          services. -->
-    <string name="card_title_callback_number_emergency">Your emergency call back number\n
+    <string name="card_title_callback_number_emergency">Your emergency callback number\n
         <xliff:g id="dark_number">%1$s</xliff:g>
     </string>
 
@@ -209,27 +206,27 @@
          This string is currently unused (see comments in InCallActivity.java.) -->
     <string name="incall_error_emergency_only">Not registered on network.</string>
     <!-- In-call screen: call failure message displayed in an error dialog -->
-    <string name="incall_error_out_of_service">Mobile network not available.</string>
+    <string name="incall_error_out_of_service">Cellular network not available.</string>
     <!-- In-call screen: call failure message displayed in an error dialog -->
-    <string name="incall_error_no_phone_number_supplied">Call not sent, no valid number entered.</string>
+    <string name="incall_error_no_phone_number_supplied">To place a call, enter a valid number.</string>
     <!-- In-call screen: call failure message displayed in an error dialog -->
-    <string name="incall_error_call_failed">Call not sent.</string>
+    <string name="incall_error_call_failed">Can\'t call.</string>
     <!-- In-call screen: status message displayed in a dialog when starting an MMI -->
     <string name="incall_status_dialed_mmi">Starting MMI sequence\u2026</string>
     <!-- In-call screen: message displayed in an error dialog -->
-    <string name="incall_error_supp_service_unknown">Unsupported service.</string>
+    <string name="incall_error_supp_service_unknown">Service not supported.</string>
     <!-- In-call screen: message displayed in an error dialog -->
-    <string name="incall_error_supp_service_switch">Unable to switch calls.</string>
+    <string name="incall_error_supp_service_switch">Can\'t switch calls.</string>
     <!-- In-call screen: message displayed in an error dialog -->
-    <string name="incall_error_supp_service_separate">Unable to separate call.</string>
+    <string name="incall_error_supp_service_separate">Can\'t separate call.</string>
     <!-- In-call screen: message displayed in an error dialog -->
-    <string name="incall_error_supp_service_transfer">Unable to transfer call.</string>
+    <string name="incall_error_supp_service_transfer">Can\'t transfer.</string>
     <!-- In-call screen: message displayed in an error dialog -->
-    <string name="incall_error_supp_service_conference">Unable to conference calls.</string>
+    <string name="incall_error_supp_service_conference">Can\'t conference.</string>
     <!-- In-call screen: message displayed in an error dialog -->
-    <string name="incall_error_supp_service_reject">Unable to reject call.</string>
+    <string name="incall_error_supp_service_reject">Can\'t reject call.</string>
     <!-- In-call screen: message displayed in an error dialog -->
-    <string name="incall_error_supp_service_hangup">Unable to release call(s).</string>
+    <string name="incall_error_supp_service_hangup">Can\'t release call(s).</string>
 
     <!-- In-call screen: "call type" indication for a SIP call [CHAR LIMIT=30]  -->
     <string name="incall_call_type_label_sip">SIP call</string>
@@ -239,13 +236,13 @@
     <!-- Status message for the "radio enable" UI for emergency calls -->
     <string name="emergency_enable_radio_dialog_message">Turning on radio\u2026</string>
     <!-- Status message for the "radio enable" UI for emergency calls -->
-    <string name="emergency_enable_radio_dialog_retry">Out of service area, retrying\u2026</string>
+    <string name="emergency_enable_radio_dialog_retry">No service. Trying again\u2026</string>
 
     <!-- Dialer text on Emergency Dialer -->
     <!-- Emergency dialer: message displayed in an error dialog -->
-    <string name="dial_emergency_error">Call not sent. <xliff:g id="non_emergency_number">%s</xliff:g> is not an emergency number!</string>
+    <string name="dial_emergency_error">Can\'t call. <xliff:g id="non_emergency_number">%s</xliff:g> is not an emergency number.</string>
     <!-- Emergency dialer: message displayed in an error dialog -->
-    <string name="dial_emergency_empty_error">Call not sent. Dial an emergency number!</string>
+    <string name="dial_emergency_empty_error">Can\'t call. Dial an emergency number.</string>
 
     <!-- Displayed in the text entry box in the dialer when in landscape mode to guide the user
          to dial using the physical keyboard -->
@@ -361,7 +358,7 @@
     <string name="accessibility_call_put_on_hold">Call put on hold.</string>
 
     <!-- String used by AccessibilityService to announce that the call has been removed from hold [CHAR LIMIT=NONE]-->
-    <string name="accessibility_call_removed_from_hold">Call removed from hold.</string>
+    <string name="accessibility_call_removed_from_hold">Call no longer on hold.</string>
 
     <!-- Description of the answer target in the Slide unlock screen of Phone. [CHAR LIMIT=NONE] -->
     <string name="description_target_answer">Answer</string>
@@ -427,7 +424,7 @@
 
     <!--  Setting option name to enable or disable dialpad autocomplete functionality
          [CHAR LIMIT=30] -->
-    <string name="dial_pad_autocomplete">Dial pad autocomplete</string>
+    <string name="dial_pad_autocomplete">Dialpad autocomplete</string>
 
     <!-- Title for the category "ringtone", which is shown above ringtone and vibration
          related settings.
