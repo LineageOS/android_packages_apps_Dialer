@@ -50,8 +50,22 @@ public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mPresenter.onRestoreInstanceState(savedInstanceState);
+        }
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         mPresenter.onUiDestroy(getUi());
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mPresenter.onSaveInstanceState(outState);
     }
 }

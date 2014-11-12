@@ -16,6 +16,8 @@
 
 package com.android.incallui;
 
+import android.os.Bundle;
+
 /**
  * Base class for Presenters.
  */
@@ -46,6 +48,10 @@ public abstract class Presenter<U extends Ui> {
      */
     public void onUiUnready(U ui) {
     }
+
+    public void onSaveInstanceState(Bundle outState) {}
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {}
 
     public U getUi() {
         return mUi;
