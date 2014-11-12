@@ -21,10 +21,11 @@
     <string name="onHold" msgid="9035493194749959955">"Đang chờ"</string>
     <string name="unknown" msgid="6878797917991465859">"Không xác định"</string>
     <string name="private_num" msgid="6713286113000232309">"Số cá nhân"</string>
-    <string name="payphone" msgid="1931775086311769314">"Điện thoại tự động"</string>
+    <!-- no translation found for payphone (4793877574636445118) -->
+    <skip />
     <string name="confCall" msgid="1904840547188336828">"Cuộc gọi hội nghị"</string>
-    <string name="call_lost" msgid="317670617901479594">"Cuộc gọi đã bị mất."</string>
-    <string name="ok" msgid="3811371167865772377">"OK"</string>
+    <!-- no translation found for call_lost (6183862117003999578) -->
+    <skip />
     <string name="audio_mode_speaker" msgid="27649582100085266">"Loa"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Tai nghe ĐTDĐ"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Tai nghe có dây"</string>
@@ -38,7 +39,8 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"Cuộc gọi hội nghị <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Số thư thoại"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"Đang quay số"</string>
-    <string name="card_title_redialing" msgid="4831412164303596395">"Đang thử lại"</string>
+    <!-- no translation found for card_title_redialing (8253487008234167266) -->
+    <skip />
     <string name="card_title_conf_call" msgid="1162980346189744501">"Cuộc gọi hội nghị"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Cuộc gọi đến"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"Cuộc gọi đã kết thúc"</string>
@@ -49,9 +51,12 @@
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"Đang kết nối video"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"Cuộc gọi điện video"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Đang yêu cầu video"</string>
-    <string name="card_title_video_call_error" msgid="5520555528871673801">"Không thể kết nối cuộc gọi điện video"</string>
-    <string name="card_title_callback_number" msgid="4604563437776874016">"Số gọi lại của bạn\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"Số gọi lại khẩn cấp của bạn\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <!-- no translation found for card_title_video_call_error (9000555878389539225) -->
+    <skip />
+    <!-- no translation found for card_title_callback_number (7307938207564217293) -->
+    <skip />
+    <!-- no translation found for card_title_callback_number_emergency (8634765419223426754) -->
+    <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"Đang gọi"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Cuộc gọi nhỡ"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Cuộc gọi nhỡ"</string>
@@ -78,23 +83,35 @@
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Tin nhắn"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Để thực hiện cuộc gọi, trước tiên, hãy tắt chế độ trên Máy bay."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Chưa được đăng ký trên mạng."</string>
-    <string name="incall_error_out_of_service" msgid="8587993036435080418">"Mạng di động không khả dụng."</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Cuộc gọi không được gửi đi, bạn đã nhập số không hợp lệ."</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"Cuộc gọi không được gửi đi."</string>
+    <string name="incall_error_out_of_service" msgid="4100065333878929223">"Không có mạng di động."</string>
+    <!-- no translation found for incall_error_no_phone_number_supplied (1150414018684246528) -->
+    <skip />
+    <!-- no translation found for incall_error_call_failed (6302746943230078197) -->
+    <skip />
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"Khởi động chuỗi MMI…"</string>
-    <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"Dịch vụ không được hỗ trợ."</string>
-    <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"Không thể chuyển đổi cuộc gọi."</string>
-    <string name="incall_error_supp_service_separate" msgid="914362338192301746">"Không thể tách cuộc gọi."</string>
-    <string name="incall_error_supp_service_transfer" msgid="2509871374644921632">"Không thể chuyển cuộc gọi."</string>
-    <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Không thể thực hiện cuộc gọi hội nghị."</string>
-    <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Không thể từ chối cuộc gọi."</string>
-    <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Không thể thực hiện cuộc gọi."</string>
+    <!-- no translation found for incall_error_supp_service_unknown (323435289607131929) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_switch (5237002176899962862) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_separate (7224393405134545246) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_transfer (7235952238189391438) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_conference (7010354362202271726) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_reject (8998568661508655638) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_hangup (7434513517153834426) -->
+    <skip />
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"Cuộc gọi qua SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Cuộc gọi khẩn cấp"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Đang bật radio..."</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Ngoài vùng dịch vụ, đang thử lại..."</string>
-    <string name="dial_emergency_error" msgid="7969515493359619960">"Cuộc gọi không được gửi đi. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> không phải là số khẩn cấp!"</string>
-    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Cuộc gọi không được gửi đi. Hãy quay số số khẩn cấp!"</string>
+    <!-- no translation found for emergency_enable_radio_dialog_retry (5960061579996526883) -->
+    <skip />
+    <!-- no translation found for dial_emergency_error (1509085166367420355) -->
+    <skip />
+    <!-- no translation found for dial_emergency_empty_error (9130194953830414638) -->
+    <skip />
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Sử dụng bàn phím để quay số"</string>
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Giữ cuộc gọi"</string>
     <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Tiếp tục cuộc gọi"</string>
@@ -135,7 +152,8 @@
     <string name="accessibility_call_muted" msgid="2776111226185342220">"Đã tắt tiếng cuộc gọi."</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Đã bật tiếng cuộc gọi."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Cuộc gọi đã được chuyển sang trạng thái chờ."</string>
-    <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"Đã hủy chờ cuộc gọi."</string>
+    <!-- no translation found for accessibility_call_removed_from_hold (5107480079544990575) -->
+    <skip />
     <string name="description_target_answer" msgid="7205604197797472471">"Trả lời"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Gửi SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Từ chối"</string>
@@ -153,7 +171,8 @@
     <string name="default_notification_description" msgid="78174796906240970">"Âm thanh mặc định (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Nhạc chuông điện thoại"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Rung khi đổ chuông"</string>
-    <string name="dial_pad_autocomplete" msgid="494525952035761075">"Tự động hoàn thành bằng bàn phím số"</string>
+    <!-- no translation found for dial_pad_autocomplete (7683489952557536398) -->
+    <skip />
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Nhạc chuông và rung"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Quản lý cuộc gọi hội nghị"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Số khẩn cấp"</string>

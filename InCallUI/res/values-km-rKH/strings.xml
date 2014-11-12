@@ -21,10 +21,11 @@
     <string name="onHold" msgid="9035493194749959955">"រង់ចាំ"</string>
     <string name="unknown" msgid="6878797917991465859">"មិន​ស្គាល់"</string>
     <string name="private_num" msgid="6713286113000232309">"លេខ​ឯកជន"</string>
-    <string name="payphone" msgid="1931775086311769314">"ទូរស័ព្ទ​ប្រើ​កាក់"</string>
+    <!-- no translation found for payphone (4793877574636445118) -->
+    <skip />
     <string name="confCall" msgid="1904840547188336828">"ការ​ហៅ​ជា​សន្និសីទ"</string>
-    <string name="call_lost" msgid="317670617901479594">"បាត់បង់​ការ​ហៅ។"</string>
-    <string name="ok" msgid="3811371167865772377">"យល់​ព្រម​"</string>
+    <!-- no translation found for call_lost (6183862117003999578) -->
+    <skip />
     <string name="audio_mode_speaker" msgid="27649582100085266">"អូប៉ាល័រ"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"កាស"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"កាស​មាន​ខ្សែ"</string>
@@ -38,7 +39,8 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"ការ​ហៅ​ជា​សន្និសីទ <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"លេខ​សារ​ជា​សំឡេង"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"កំពុង​ហៅ"</string>
-    <string name="card_title_redialing" msgid="4831412164303596395">"ព្យាយាម​ម្ដងទៀត"</string>
+    <!-- no translation found for card_title_redialing (8253487008234167266) -->
+    <skip />
     <string name="card_title_conf_call" msgid="1162980346189744501">"ការ​ហៅ​ជា​សន្និសីទ"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"ការ​ហៅ​ចូល"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"បាន​បញ្ចប់​ការ​ហៅ"</string>
@@ -49,9 +51,12 @@
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"ភ្ជាប់​វីដេអូ"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"ហៅ​ជា​វីដេអូ"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"ស្នើ​វីដេអូ"</string>
-    <string name="card_title_video_call_error" msgid="5520555528871673801">"មិន​អាច​ភ្ជាប់​ការ​ហៅ​ជា​វីដេអូ"</string>
-    <string name="card_title_callback_number" msgid="4604563437776874016">"លេខ​ហៅ​​ទៅ​វិញ​របស់​អ្នក\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"លេខ​ហៅ​ទៅ​វិញ​ពេល​អាសន្ន​របស់​អ្នក\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <!-- no translation found for card_title_video_call_error (9000555878389539225) -->
+    <skip />
+    <!-- no translation found for card_title_callback_number (7307938207564217293) -->
+    <skip />
+    <!-- no translation found for card_title_callback_number_emergency (8634765419223426754) -->
+    <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"ហៅ"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"ខកខាន​ទទួល"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"ខកខាន​ទទួល"</string>
@@ -78,23 +83,35 @@
     <string name="notification_missedCall_message" msgid="3049928912736917988">"សារ"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"ដើម្បី​កំណត់​ការ​ហៅ ដំបូង​ត្រូវ​បិទ​របៀប​នៅ​ពេល​ជិះ​យន្តហោះ។"</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"មិន​បាន​ចុះ​ឈ្មោះ​នៅ​លើ​បណ្ដាញ។"</string>
-    <string name="incall_error_out_of_service" msgid="8587993036435080418">"បណ្ដាញ​​ឧបករណ៍​​ចល័ត​មិន​អាច​ប្រើ​បាន​។"</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"មិន​បាន​ផ្ញើ​ការ​ហៅ លេខ​ដែល​បាន​បញ្ចូល​មិន​ត្រឹមត្រូវ។"</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"មិន​បាន​ផ្ញើ​ការ​ហៅ។"</string>
+    <string name="incall_error_out_of_service" msgid="4100065333878929223">"បណ្ដាញ​ចល័ត​មិន​អាច​ប្រើ​បាន។"</string>
+    <!-- no translation found for incall_error_no_phone_number_supplied (1150414018684246528) -->
+    <skip />
+    <!-- no translation found for incall_error_call_failed (6302746943230078197) -->
+    <skip />
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"កំពុង​ចាប់ផ្ដើម​លំដាប់ MMI ..."</string>
-    <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"សេវាកម្ម​​ដែល​មិន​បាន​គាំទ្រ​។"</string>
-    <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"មិន​អាច​ប្ដូរ​ការ​ហៅ។"</string>
-    <string name="incall_error_supp_service_separate" msgid="914362338192301746">"មិន​អាច​បែងចែក​​ការ​ហៅ។"</string>
-    <string name="incall_error_supp_service_transfer" msgid="2509871374644921632">"មិន​អាច​ផ្ទេរ​ការ​ហៅ​។"</string>
-    <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"មិន​អាច​ហៅ​ជា​សន្និសីទ។"</string>
-    <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"មិន​អាច​បដិសេធ​ការ​ហៅ​។"</string>
-    <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"មិន​អាច​ហៅ​បាន​ទេ។"</string>
+    <!-- no translation found for incall_error_supp_service_unknown (323435289607131929) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_switch (5237002176899962862) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_separate (7224393405134545246) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_transfer (7235952238189391438) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_conference (7010354362202271726) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_reject (8998568661508655638) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_hangup (7434513517153834426) -->
+    <skip />
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"ការ​ហៅ SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"ការ​ហៅ​នៅ​ពេល​មាន​អាសន្ន"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"កំពុង​បើក​វិទ្យុ…"</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"នៅ​ក្រៅ​តំបន់​សេវា​ កំពុង​ព្យាយាម​ម្ដងទៀត…"</string>
-    <string name="dial_emergency_error" msgid="7969515493359619960">"មិន​បាន​ផ្ញើ​ការ​ហៅ។ <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> គឺ​មិន​មែន​ជា​លេខ​ហៅ​ពេល​មាន​អាសន្ន!"</string>
-    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"មិន​បាន​ផ្ញើ​​​ការ​​​ហៅ​។ ហៅ​បាន​តែ​លេខ​ពេល​មាន​​​អាសន្ន!"</string>
+    <!-- no translation found for emergency_enable_radio_dialog_retry (5960061579996526883) -->
+    <skip />
+    <!-- no translation found for dial_emergency_error (1509085166367420355) -->
+    <skip />
+    <!-- no translation found for dial_emergency_empty_error (9130194953830414638) -->
+    <skip />
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"ប្រើ​​ក្ដារចុច​ដើម្បី​ចុច​លេខ"</string>
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"រង់ចាំ​ការ​ហៅ"</string>
     <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"បន្ត​ការហៅ"</string>
@@ -135,7 +152,8 @@
     <string name="accessibility_call_muted" msgid="2776111226185342220">"ការ​ហៅ​បិទ​សំឡេង។"</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"បាន​បើក​សំឡេង​ការ​ហៅ។"</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"ការ​ហៅ​ស្ថិត​​ក្នុង​ការ​រង់ចាំ។"</string>
-    <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"បាន​លុប​ការ​ហៅ​ចេញ​ពី​ការ​រង់ចាំ។"</string>
+    <!-- no translation found for accessibility_call_removed_from_hold (5107480079544990575) -->
+    <skip />
     <string name="description_target_answer" msgid="7205604197797472471">"ឆ្លើយតប"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"ផ្ញើ​សារ SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"បដិសេធ"</string>
@@ -153,7 +171,8 @@
     <string name="default_notification_description" msgid="78174796906240970">"សំឡេង​លំនាំដើម (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"សំឡេង​ទូរស័ព្ទ​រោទ៍"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"ញ័រ​នៅ​ពេល​រោទ៍"</string>
-    <string name="dial_pad_autocomplete" msgid="494525952035761075">"បន្ទះ​លេខ​បំពេញ​ស្វ័យប្រវត្តិ"</string>
+    <!-- no translation found for dial_pad_autocomplete (7683489952557536398) -->
+    <skip />
     <string name="preference_category_ringtone" msgid="5197960752529332721">"សំឡេង​រោទ៍ &amp; ញ័រ"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"គ្រប់គ្រង​ការ​ហៅ​​ជា​សន្និសីទ"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"លេខ​ពេល​អាសន្ន"</string>

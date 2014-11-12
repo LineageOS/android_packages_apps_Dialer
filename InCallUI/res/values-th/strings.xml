@@ -21,10 +21,11 @@
     <string name="onHold" msgid="9035493194749959955">"พักสาย"</string>
     <string name="unknown" msgid="6878797917991465859">"ไม่ทราบ"</string>
     <string name="private_num" msgid="6713286113000232309">"หมายเลขส่วนตัว"</string>
-    <string name="payphone" msgid="1931775086311769314">"โทรศัพท์สาธารณะ"</string>
+    <!-- no translation found for payphone (4793877574636445118) -->
+    <skip />
     <string name="confCall" msgid="1904840547188336828">"การประชุมสาย"</string>
-    <string name="call_lost" msgid="317670617901479594">"สายหลุดไป"</string>
-    <string name="ok" msgid="3811371167865772377">"ตกลง"</string>
+    <!-- no translation found for call_lost (6183862117003999578) -->
+    <skip />
     <string name="audio_mode_speaker" msgid="27649582100085266">"ลำโพง"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"ชุดหูฟังโทรศัพท์"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"ชุดหูฟังแบบมีสาย"</string>
@@ -38,7 +39,8 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"การประชุมสาย <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"หมายเลขข้อความเสียง"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"กำลังโทรออก"</string>
-    <string name="card_title_redialing" msgid="4831412164303596395">"กำลังทดลองซ้ำ"</string>
+    <!-- no translation found for card_title_redialing (8253487008234167266) -->
+    <skip />
     <string name="card_title_conf_call" msgid="1162980346189744501">"การประชุมสาย"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"สายเข้า"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"วางสายแล้ว"</string>
@@ -49,9 +51,12 @@
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"กำลังเชื่อมต่อวิดีโอ"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"แฮงเอาท์วิดีโอ"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"กำลังขอวิดีโอ"</string>
-    <string name="card_title_video_call_error" msgid="5520555528871673801">"ไม่สามารถเชื่อมต่อแฮงเอาท์วิดีโอ"</string>
-    <string name="card_title_callback_number" msgid="4604563437776874016">"หมายเลขโทรกลับของคุณ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"หมายเลขโทรกลับฉุกเฉินของคุณ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <!-- no translation found for card_title_video_call_error (9000555878389539225) -->
+    <skip />
+    <!-- no translation found for card_title_callback_number (7307938207564217293) -->
+    <skip />
+    <!-- no translation found for card_title_callback_number_emergency (8634765419223426754) -->
+    <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"กำลังโทรออก"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"สายที่ไม่ได้รับ"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"สายที่ไม่ได้รับ"</string>
@@ -78,23 +83,35 @@
     <string name="notification_missedCall_message" msgid="3049928912736917988">"ข้อความ"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"หากต้องการโทรออก ให้ปิดโหมดใช้งานบนเครื่องบินก่อน"</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"ยังไม่ได้ลงทะเบียนบนเครือข่าย"</string>
-    <string name="incall_error_out_of_service" msgid="8587993036435080418">"เครือข่ายมือถือใช้งานไม่ได้"</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"ไม่ได้โทรออก ไม่ได้ป้อนหมายเลขที่ถูกต้อง"</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"ไม่ได้โทรออก"</string>
+    <string name="incall_error_out_of_service" msgid="4100065333878929223">"เครือข่ายมือถือใช้งานไม่ได้"</string>
+    <!-- no translation found for incall_error_no_phone_number_supplied (1150414018684246528) -->
+    <skip />
+    <!-- no translation found for incall_error_call_failed (6302746943230078197) -->
+    <skip />
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"กำลังเริ่มต้นลำดับ MMI..."</string>
-    <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"บริการไม่ได้รับการสนับสนุน"</string>
-    <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"สลับสายไม่ได้"</string>
-    <string name="incall_error_supp_service_separate" msgid="914362338192301746">"แยกสายไม่ได้"</string>
-    <string name="incall_error_supp_service_transfer" msgid="2509871374644921632">"โอนสายไม่ได้"</string>
-    <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"ประชุมทางโทรศัพท์ไม่ได้"</string>
-    <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"ปฏิเสธสายไม่ได้"</string>
-    <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"ปล่อยสายไม่ได้"</string>
+    <!-- no translation found for incall_error_supp_service_unknown (323435289607131929) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_switch (5237002176899962862) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_separate (7224393405134545246) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_transfer (7235952238189391438) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_conference (7010354362202271726) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_reject (8998568661508655638) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_hangup (7434513517153834426) -->
+    <skip />
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"โทรแบบ SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"หมายเลขฉุกเฉิน"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"กำลังเปิดวิทยุ…"</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"นอกพื้นที่ให้บริการ กำลังลองซ้ำ..."</string>
-    <string name="dial_emergency_error" msgid="7969515493359619960">"ไม่ได้โทรออก <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> ไม่ใช่หมายเลขฉุกเฉิน!"</string>
-    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"ไม่ได้โทรออก หมุนหมายเลขฉุกเฉิน!"</string>
+    <!-- no translation found for emergency_enable_radio_dialog_retry (5960061579996526883) -->
+    <skip />
+    <!-- no translation found for dial_emergency_error (1509085166367420355) -->
+    <skip />
+    <!-- no translation found for dial_emergency_empty_error (9130194953830414638) -->
+    <skip />
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"ใช้แป้นพิมพ์กดหมายเลขโทรศัพท์"</string>
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"พักสาย"</string>
     <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"โทรต่อ"</string>
@@ -135,7 +152,8 @@
     <string name="accessibility_call_muted" msgid="2776111226185342220">"ปิดเสียงการโทร"</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"เปิดเสียงการโทรแล้ว"</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"พักสายการโทรอยู่"</string>
-    <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"เลิกพักสายการโทรแล้ว"</string>
+    <!-- no translation found for accessibility_call_removed_from_hold (5107480079544990575) -->
+    <skip />
     <string name="description_target_answer" msgid="7205604197797472471">"คำตอบ"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"ส่ง SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"ปฏิเสธ"</string>
@@ -153,7 +171,8 @@
     <string name="default_notification_description" msgid="78174796906240970">"เสียงเริ่มต้น (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"เสียงเรียกเข้าโทรศัพท์"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"สั่นเมื่อมีสายเข้า"</string>
-    <string name="dial_pad_autocomplete" msgid="494525952035761075">"ช่วยเติมอัตโนมัติในแป้นหมายเลข"</string>
+    <!-- no translation found for dial_pad_autocomplete (7683489952557536398) -->
+    <skip />
     <string name="preference_category_ringtone" msgid="5197960752529332721">"เสียงเรียกเข้าและสั่น"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"จัดการการประชุมสาย"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"หมายเลขฉุกเฉิน"</string>
