@@ -44,7 +44,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
     public void onBuildHeaders(List<Header> target) {
         final Header generalSettingsHeader = new Header();
         generalSettingsHeader.titleRes = R.string.general_settings_label;
-        generalSettingsHeader.summaryRes = R.string.general_settings_description;
         generalSettingsHeader.fragment = GeneralSettingsFragment.class.getName();
         target.add(generalSettingsHeader);
 
@@ -59,7 +58,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
                 callSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 callSettingsHeader.titleRes = R.string.call_settings_label;
-                callSettingsHeader.summaryRes = R.string.call_settings_description;
                 callSettingsHeader.intent = callSettingsIntent;
                 target.add(callSettingsHeader);
             } else {
@@ -69,7 +67,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
                 phoneAccountSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 phoneAccountSettingsHeader.titleRes = R.string.phone_account_settings_label;
-                phoneAccountSettingsHeader.summaryRes = R.string.phone_account_settings_description;
                 phoneAccountSettingsHeader.intent = phoneAccountSettingsIntent;
                 target.add(phoneAccountSettingsHeader);
             }
