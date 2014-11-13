@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.provider.CallLog.Calls;
 
 import com.android.dialer.R;
+import com.android.dialer.lookup.LookupCache;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialerbind.ObjectFactory;
 
@@ -65,6 +66,7 @@ public class ClearCallLogDialog extends DialogFragment {
                         if (mCachedNumberLookupService != null) {
                             mCachedNumberLookupService.clearAllCacheEntries(context);
                         }
+                        LookupCache.deleteCachedContacts(context);
                         return null;
                     }
                     @Override
