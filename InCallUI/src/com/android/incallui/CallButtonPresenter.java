@@ -114,12 +114,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
      */
     @Override
     public void onDetailsChanged(Call call, android.telecom.Call.Details details) {
-        // If the details change is not for the currently active call no update is required.
-        if (!Objects.equals(call, mCall)) {
-            return;
+        if (getUi() != null && Objects.equals(call, mCall)) {
+            updateCallButtons(call, getUi().getContext());
         }
-
-        updateCallButtons(call, getUi().getContext());
     }
 
     @Override
@@ -129,7 +126,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
     @Override
     public void onCanAddCallChanged(boolean canAddCall) {
-        if (mCall != null) {
+        if (getUi() != null && mCall != null) {
             updateCallButtons(mCall, getUi().getContext());
         }
     }
