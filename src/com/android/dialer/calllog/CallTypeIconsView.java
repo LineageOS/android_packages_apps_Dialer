@@ -40,7 +40,7 @@ import java.util.List;
  * for ListView-recycling that a regular LinearLayout using ImageViews.
  */
 public class CallTypeIconsView extends View {
-    private List<Integer> mCallTypes = Lists.newArrayListWithCapacity(3);
+    private List<Integer> mCallTypes = Lists.newArrayListWithCapacity(4);
     private boolean mShowVideo = false;
     private Resources mResources;
     private int mWidth;
@@ -114,6 +114,9 @@ public class CallTypeIconsView extends View {
                 return mResources.missed;
             case Calls.VOICEMAIL_TYPE:
                 return mResources.voicemail;
+            case Calls.BLACKLIST_TYPE:
+                return mResources.blacklist;
+
             default:
                 // It is possible for users to end up with calls with unknown call types in their
                 // call history, possibly due to 3rd party call log implementations (e.g. to
@@ -176,9 +179,15 @@ public class CallTypeIconsView extends View {
         public final Drawable videoCall;
 
         /**
+         * Drawable representing blacklisted call.
+         */
+        public final Drawable blacklist;
+
+        /**
          * The margin to use for icons.
          */
         public final int iconMargin;
+
 
         /**
          * Configures the call icon drawables.
@@ -201,6 +210,9 @@ public class CallTypeIconsView extends View {
             // above will be recolored here.
             missed = r.getDrawable(R.drawable.ic_call_arrow).mutate();
             missed.setColorFilter(r.getColor(R.color.missed_call), PorterDuff.Mode.MULTIPLY);
+
+            blacklist = r.getDrawable(R.drawable.ic_call_arrow).mutate();
+            blacklist.setColorFilter(r.getColor(R.color.blacklisted_call), PorterDuff.Mode.MULTIPLY);
 
             voicemail = r.getDrawable(R.drawable.ic_call_voicemail_holo_dark);
 
