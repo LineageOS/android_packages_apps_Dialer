@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+m * limitations under the License.
  */
 package com.android.dialer.calllog;
 
@@ -51,14 +51,19 @@ import com.android.dialer.R;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.android.dialerbind.analytics.AnalyticsActivity;
+import com.android.dialer.calllog.CallLogFragment;
+import com.android.dialer.callstats.CallStatsFragment;
+import com.android.dialer.widget.DoubleDatePickerDialog;
 
-public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHandler.Listener {
+public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHandler.Listener,
+        DoubleDatePickerDialog.OnDateSetListener {
     private Handler mHandler;
     private ViewPager mViewPager;
     private ViewPagerTabs mViewPagerTabs;
     private FragmentPagerAdapter mViewPagerAdapter;
     private CallLogFragment mAllCallsFragment;
     private CallLogFragment mMissedCallsFragment;
+    private CallStatsFragment mStatsFragment;
     private CallLogFragment mVoicemailFragment;
     private VoicemailStatusHelper mVoicemailStatusHelper;
 
@@ -73,10 +78,11 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
 
     private static final int TAB_INDEX_ALL = 0;
     private static final int TAB_INDEX_MISSED = 1;
-    private static final int TAB_INDEX_VOICEMAIL = 2;
+    private static final int TAB_INDEX_STATS = 2;
+    private static final int TAB_INDEX_VOICEMAIL = 3;
 
-    private static final int TAB_INDEX_COUNT_DEFAULT = 2;
-    private static final int TAB_INDEX_COUNT_WITH_VOICEMAIL = 3;
+    private static final int TAB_INDEX_COUNT_DEFAULT = 3;
+    private static final int TAB_INDEX_COUNT_WITH_VOICEMAIL = 4;
 
     private boolean mHasActiveVoicemailProvider;
 
@@ -106,6 +112,8 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
                     return new CallLogFragment(Calls.MISSED_TYPE);
                 case TAB_INDEX_VOICEMAIL:
                     return new CallLogFragment(Calls.VOICEMAIL_TYPE);
+                case TAB_INDEX_STATS:
+                    return new CallStatsFragment();
             }
             throw new IllegalStateException("No fragment at position " + position);
         }
@@ -204,7 +212,8 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
         mTabTitles = new String[TAB_INDEX_COUNT_WITH_VOICEMAIL];
         mTabTitles[0] = getString(R.string.call_log_all_title);
         mTabTitles[1] = getString(R.string.call_log_missed_title);
-        mTabTitles[2] = getString(R.string.call_log_voicemail_title);
+        mTabTitles[2] = getString(R.string.call_log_stats_title);
+        mTabTitles[3] = getString(R.string.call_log_voicemail_title);
 
         mViewPager = (ViewPager) findViewById(R.id.call_log_pager);
 
@@ -266,7 +275,6 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
 
         mViewPagerAdapter = new MSimViewPagerAdapter(getFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
-        mViewPager.setOffscreenPageLimit(1);
     }
 
     @Override
@@ -420,6 +428,8 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
             return mMissedCallsFragment;
         case TAB_INDEX_VOICEMAIL:
             return mVoicemailFragment;
+        case TAB_INDEX_STATS:
+            return mStatsFragment;
         default:
             throw new IllegalStateException("Unknown fragment index: "
                     + position);
@@ -566,5 +576,10 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
         mSearchView.onActionViewCollapsed();
         mSearchView.clearFocus();
         mInSearchUi = false;
+    }
+
+    @Override
+    public void onDateSet(long from, long to) {
+        mStatsFragment.onDateSet(from, to);
     }
 }

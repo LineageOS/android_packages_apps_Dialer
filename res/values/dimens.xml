@@ -31,6 +31,8 @@
     <dimen name="call_log_indent_margin">24dip</dimen>
     <dimen name="call_log_name_margin_bottom">2dp</dimen>
     <dimen name="call_log_list_item_height">56dip</dimen>
+    <dimen name="call_log_list_contact_photo_size">64dip</dimen>
+    <dimen name="call_detail_contact_name_margin">24dip</dimen>
 
     <!-- Size of contact photos in the call log and call details. -->
     <dimen name="contact_photo_size">40dp</dimen>
@@ -141,4 +143,7 @@
     <dimen name="preference_padding_bottom">16dp</dimen>
     <dimen name="preference_side_margin">16dp</dimen>
     <dimen name="preference_summary_line_spacing_extra">4dp</dimen>
+
+    <!-- Size of the pie chart in the call stats detail activity -->
+    <dimen name="call_stats_details_chart_size">140dip</dimen>
 </resources>
