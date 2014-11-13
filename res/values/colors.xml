@@ -22,10 +22,6 @@
     <color name="dialer_red_highlight_color">#ff1744</color>
     <color name="dialer_green_highlight_color">#00c853</color>
 
-    <!-- Color for the setting text. -->
-    <color name="setting_primary_color">@color/dialtacts_primary_text_color</color>
-    <!-- Color for the setting description text. -->
-    <color name="setting_secondary_color">@color/dialtacts_secondary_text_color</color>
     <color name="setting_disabled_color">#aaaaaa</color>
     <color name="setting_background_color">#ffffff</color>
     <color name="setting_button_color">#eee</color>
