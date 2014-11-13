@@ -28,7 +28,7 @@ public class InCallUIMaterialColorMapUtils extends MaterialColorMapUtils {
      */
     @Override
     public MaterialPalette calculatePrimaryAndSecondaryColor(int color) {
-        if (color == PhoneAccount.NO_COLOR) {
+        if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
             return getDefaultPrimaryAndSecondaryColors(mResources);
         }
 

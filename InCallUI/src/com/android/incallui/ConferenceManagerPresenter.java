@@ -17,11 +17,7 @@
 package com.android.incallui;
 
 import android.content.Context;
-import android.net.Uri;
-import android.telecom.PhoneCapabilities;
-import android.text.TextUtils;
 
-import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
@@ -76,18 +72,20 @@ public class ConferenceManagerPresenter
 
     @Override
     public void onDetailsChanged(Call call, android.telecom.Call.Details details) {
-        boolean canDisconnect = PhoneCapabilities.can(
-                details.getCallCapabilities(), PhoneCapabilities.DISCONNECT_FROM_CONFERENCE);
-        boolean canSeparate = PhoneCapabilities.can(
-                details.getCallCapabilities(), PhoneCapabilities.SEPARATE_FROM_CONFERENCE);
+        boolean canDisconnect = details.can(
+                android.telecom.Call.Details.CAPABILITY_DISCONNECT_FROM_CONFERENCE);
+        boolean canSeparate = details.can(
+                android.telecom.Call.Details.CAPABILITY_SEPARATE_FROM_CONFERENCE);
 
-        if (call.can(PhoneCapabilities.DISCONNECT_FROM_CONFERENCE) != canDisconnect
-                || call.can(PhoneCapabilities.SEPARATE_FROM_CONFERENCE) != canSeparate) {
+        if (call.can(android.telecom.Call.Details.CAPABILITY_DISCONNECT_FROM_CONFERENCE)
+                != canDisconnect
+            || call.can(android.telecom.Call.Details.CAPABILITY_SEPARATE_FROM_CONFERENCE)
+                != canSeparate) {
             getUi().refreshCall(call);
         }
 
-        if (!PhoneCapabilities.can(
-                details.getCallCapabilities(), PhoneCapabilities.MANAGE_CONFERENCE)) {
+        if (!details.can(
+                android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE)) {
             getUi().setVisible(false);
         }
     }
