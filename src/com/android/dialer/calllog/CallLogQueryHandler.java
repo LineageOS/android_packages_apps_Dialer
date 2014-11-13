@@ -169,6 +169,12 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             where.append(" AND ");
             where.append(String.format("(%s = ?)", Calls.TYPE));
             selectionArgs.add(Integer.toString(callType));
+            if (callType == Calls.MISSED_TYPE) {
+                // also query for blacklisted calls as they are 'missed'
+                where.append(" OR ");
+                where.append(String.format("(%s = ?)", Calls.TYPE));
+                selectionArgs.add(Integer.toString(Calls.BLACKLIST_TYPE));
+            }
         } else {
             where.append(" AND NOT ");
             where.append("(" + Calls.TYPE + " = " + Calls.VOICEMAIL_TYPE + ")");

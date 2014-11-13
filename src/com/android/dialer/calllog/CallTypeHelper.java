@@ -39,6 +39,8 @@ public class CallTypeHelper {
     private final CharSequence mMissedVideoName;
     /** Name used to identify voicemail calls. */
     private final CharSequence mVoicemailName;
+    /** Name used to identify blacklisted calls */
+    private final CharSequence mBlacklistedName;
     /** Color used to identify new missed calls. */
     private final int mNewMissedColor;
     /** Color used to identify new voicemail calls. */
@@ -53,6 +55,7 @@ public class CallTypeHelper {
         mOutgoingVideoName = resources.getString(R.string.type_outgoing_video);
         mMissedVideoName = resources.getString(R.string.type_missed_video);
         mVoicemailName = resources.getString(R.string.type_voicemail);
+        mBlacklistedName = resources.getText(R.string.type_blacklist);
         mNewMissedColor = resources.getColor(R.color.call_log_missed_call_highlight_color);
         mNewVoicemailColor = resources.getColor(R.color.call_log_voicemail_highlight_color);
     }
@@ -83,6 +86,9 @@ public class CallTypeHelper {
 
             case Calls.VOICEMAIL_TYPE:
                 return mVoicemailName;
+
+            case Calls.BLACKLIST_TYPE:
+                return mBlacklistedName;
 
             default:
                 return mMissedName;

@@ -37,4 +37,8 @@
     <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
     <string name="cyngn_reverse_lookup_provider_value" translatable="false">CyngnChinese</string>
 
+    <!-- Description for incoming calls that were blacklisted -->
+    <string name="type_blacklist">Blacklisted call</string>
+    <string name="menu_add_to_blacklist">Add to blocked caller list</string>
+    <string name="toast_added_to_blacklist">%s added to blocked caller list.</string>
 </resources>

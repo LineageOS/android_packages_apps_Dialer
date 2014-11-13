@@ -365,6 +365,9 @@ public class CallDetailActivity extends Activity
                 CallLogAsyncTaskUtil.deleteVoicemail(
                         this, mVoicemailUri, mCallLogAsyncTaskListener);
                 break;
+            case R.id.menu_add_to_blacklist:
+                mContactInfoHelper.addNumberToBlacklist(mNumber);
+                break;
         }
         return true;
     }
