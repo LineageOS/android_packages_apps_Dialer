@@ -18,4 +18,41 @@
     <!-- Forward lookup -->
     <string name="nearby_places">Nearby places</string>
     <string name="people">People</string>
+    <string name="call_log_stats_title">Statistics</string>
+    <string name="callStatsDetailTitle">Call stat details</string>
+
+    <string name="call_stats">Call statistics</string>
+    <string name="call_stats_refresh">Refresh</string>
+    <string name="activity_title_call_stats">Call statistics</string>
+
+    <string name="call_stats_nav_all">All</string>
+    <string name="call_stats_nav_incoming">Incoming</string>
+    <string name="call_stats_nav_outgoing">Outgoing</string>
+    <string name="call_stats_nav_missed">Missed</string>
+    <string name="call_stats_incoming">Incoming: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_outgoing">Outgoing: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_missed">Missed</string>
+    <string name="call_stats_missed_percent">Missed: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Start date</string>
+    <string name="call_stats_filter_to">End date</string>
+    <string name="call_stats_filter_picker_title">Filter range</string>
+
+    <string name="date_quick_selection">Quick selection</string>
+    <string name="date_qs_currentmonth">Current month</string>
+    <string name="date_qs_currentquarter">Current quarter</string>
+    <string name="date_qs_currentyear">Current year</string>
+    <string name="date_qs_lastweek">Last week</string>
+    <string name="date_qs_lastmonth">Last month</string>
+    <string name="date_qs_lastquarter">Last quarter</string>
+    <string name="date_qs_lastyear">Last year</string>
+
+    <string name="call_stats_date_filter">Adjust time range</string>
+    <string name="call_stats_reset_filter">Reset time range</string>
+    <string name="call_stats_sort_by_duration">Sort by call duration</string>
+    <string name="call_stats_sort_by_count">Sort by call count</string>
+
+    <string name="menu_add_to_blacklist">Add to blacklist</string>
+    <string name="toast_added_to_blacklist">%s added to blacklist.</string>
 </resources>
