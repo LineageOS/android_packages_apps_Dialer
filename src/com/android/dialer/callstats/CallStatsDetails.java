@@ -91,6 +91,18 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
     public Uri getContactUri() {
         return contactUri;
     }
+    @Override
+    public Uri getPhotoUri() {
+        return photoUri;
+    }
+    @Override
+    public CharSequence getAccountLabel() {
+        return null;
+    }
+    @Override
+    public CharSequence getGeocode() {
+        return geocode;
+    }
 
     public void updateFromInfo(ContactInfo info) {
         this.name = info.name;
