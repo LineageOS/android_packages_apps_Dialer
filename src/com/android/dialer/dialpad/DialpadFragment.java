@@ -251,31 +251,8 @@ public class DialpadFragment extends AnalyticsFragment
 
     private String mCurrentCountryIso;
 
-    private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
-        /**
-         * Listen for phone state changes so that we can take down the
-         * "dialpad chooser" if the phone becomes idle while the
-         * chooser UI is visible.
-         */
-        @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
-            // Log.i(TAG, "PhoneStateListener.onCallStateChanged: "
-            //       + state + ", '" + incomingNumber + "'");
-            if ((state == TelephonyManager.CALL_STATE_IDLE) && isDialpadChooserVisible()) {
-                // Log.i(TAG, "Call ended with dialpad chooser visible!  Taking it down...");
-                // Note there's a race condition in the UI here: the
-                // dialpad chooser could conceivably disappear (on its
-                // own) at the exact moment the user was trying to select
-                // one of the choices, which would be confusing.  (But at
-                // least that's better than leaving the dialpad chooser
-                // onscreen, but useless...)
-                showDialpadChooser(false);
-            }
-            if (state == TelephonyManager.CALL_STATE_IDLE && getActivity() != null) {
-                ((HostInterface) getActivity()).setConferenceDialButtonVisibility(true);
-            }
-        }
-    };
+    private PhoneStateListener[] mPhoneStateListener;
+    private int mNumPhones;
 
     private boolean mWasEmptyBeforeTextChange;
 
@@ -355,6 +332,12 @@ public class DialpadFragment extends AnalyticsFragment
         super.onCreate(state);
         mFirstLaunch = true;
         mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
+
+        mNumPhones = getTelephonyManager().getDefault().getPhoneCount();
+        mPhoneStateListener = new PhoneStateListener[mNumPhones];
+        for (int i = 0; i < mNumPhones; i++) {
+            mPhoneStateListener[i] = getPhoneStateListener(i);
+        }
 
         try {
             mHaptic.init(getActivity(),
@@ -675,7 +658,7 @@ public class DialpadFragment extends AnalyticsFragment
         // While we're in the foreground, listen for phone state changes,
         // purely so that we can take down the "dialpad chooser" if the
         // phone becomes idle while the chooser UI is visible.
-        getTelephonyManager().listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+        listen();
 
         stopWatch.lap("tm");
 
@@ -729,7 +712,7 @@ public class DialpadFragment extends AnalyticsFragment
         super.onPause();
 
         // Stop listening for phone state changes.
-        getTelephonyManager().listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+        stopListen();
 
         // Make sure we don't leave this activity with a tone still playing.
         stopTone();
@@ -2037,5 +2020,38 @@ public class DialpadFragment extends AnalyticsFragment
                 })
             .setNegativeButton(android.R.string.cancel, null)
             .show();
+    }
+
+    private void listen() {
+        for (int i = 0; i < mNumPhones; i++) {
+            getTelephonyManager().listen(mPhoneStateListener[i],
+                    PhoneStateListener.LISTEN_CALL_STATE);
+        }
+    }
+
+    private void stopListen() {
+        for (int i = 0; i < mNumPhones; i++) {
+            getTelephonyManager().listen(mPhoneStateListener[i],
+                    PhoneStateListener.LISTEN_NONE);
+        }
+    }
+
+    private PhoneStateListener getPhoneStateListener(int phoneId) {
+        long[] subId = SubscriptionManager.getSubId(phoneId);
+
+        PhoneStateListener phoneStateListener = new PhoneStateListener(subId[0]) {
+            @Override
+            public void onCallStateChanged(int state, String incomingNumber) {
+                if ((getTelephonyManager().getCallState() == TelephonyManager.CALL_STATE_IDLE)
+                        && isDialpadChooserVisible()) {
+                    showDialpadChooser(false);
+                }
+                if (getTelephonyManager().getCallState() == TelephonyManager.CALL_STATE_IDLE
+                        && getActivity() != null) {
+                    ((HostInterface) getActivity()).setConferenceDialButtonVisibility(true);
+                }
+            }
+        };
+        return phoneStateListener;
     }
 }
