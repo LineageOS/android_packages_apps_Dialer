@@ -71,13 +71,6 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/photo" />
 
-    <fragment android:name="com.android.incallui.VideoCallFragment"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="start|center_vertical"
-        android:id="@+id/videoCallFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <!-- Progress spinner, useful for indicating pending operations such as upgrade to video. -->
     <FrameLayout
         android:id="@+id/progressSpinner"
