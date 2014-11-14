@@ -32,9 +32,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.GeoUtil;
 import com.android.dialer.CallDetailHeader;
 import com.android.dialer.R;
+import com.android.dialer.calllog.CallTypeIconsView;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
@@ -112,6 +114,10 @@ public class CallStatsDetailActivity extends Activity {
         mMissedCount = (TextView) findViewById(R.id.missed_count);
         mPieChart = (PieChartView) findViewById(R.id.pie_chart);
 
+        setCallType(R.id.in_icon, Calls.INCOMING_TYPE);
+        setCallType(R.id.out_icon, Calls.OUTGOING_TYPE);
+        setCallType(R.id.missed_icon, Calls.MISSED_TYPE);
+
         configureActionBar();
         Intent launchIntent = getIntent();
         mData = (CallStatsDetails) launchIntent.getParcelableExtra(EXTRA_DETAILS);
@@ -142,13 +148,18 @@ public class CallStatsDetailActivity extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
+    private void setCallType(int id, int type) {
+        CallTypeIconsView view = (CallTypeIconsView) findViewById(id);
+        view.add(type);
+    }
+
     private void updateData() {
         mNumber = mData.number.toString();
 
         // Set the details header, based on the first phone call.
         mCallStatsDetailHelper.setCallStatsDetailHeader(mHeaderTextView, mData);
-        mCallDetailHeader.updateViews(mNumber, mData.numberPresentation, mData);
-        mCallDetailHeader.loadContactPhotos(mData.photoUri);
+        mCallDetailHeader.updateViews(mData);
+        mCallDetailHeader.loadContactPhotos(mData, ContactPhotoManager.TYPE_DEFAULT);
         invalidateOptionsMenu();
 
         mPieChart.setOriginAngle(240);
@@ -230,8 +241,10 @@ public class CallStatsDetailActivity extends Activity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+	/*
         menu.findItem(R.id.menu_edit_number_before_call).setVisible(
                 mCallDetailHeader.canEditNumberBeforeCall());
+		*/
         return super.onPrepareOptionsMenu(menu);
     }
 

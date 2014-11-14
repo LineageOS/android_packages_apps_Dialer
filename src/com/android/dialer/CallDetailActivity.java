@@ -16,7 +16,6 @@
 
 package com.android.dialer;
 
-import android.accounts.Account;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -41,8 +40,6 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.text.BidiFormatter;
-import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -52,19 +49,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.CallUtil;
-import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
+import com.android.contacts.common.ContactPhotoManager;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
@@ -119,10 +114,6 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     private CallDetailHeader mCallDetailHeader;
     private CallTypeHelper mCallTypeHelper;
     private PhoneNumberDisplayHelper mPhoneNumberHelper;
-    private QuickContactBadge mQuickContactBadge;
-    private TextView mCallerName;
-    private TextView mCallerNumber;
-    private TextView mAccountLabel;
     private AsyncTaskExecutor mAsyncTaskExecutor;
     private ContactInfoHelper mContactInfoHelper;
 
@@ -143,7 +134,6 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     private LinearLayout mVoicemailHeader;
 
     private Uri mVoicemailUri;
-    private BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
 
     /** Whether we should show "edit number before call" in the options menu. */
     private boolean mHasEditNumberBeforeCallOption;
@@ -261,11 +251,6 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
 
         mVoicemailUri = getIntent().getParcelableExtra(EXTRA_VOICEMAIL_URI);
 
-        mQuickContactBadge = (QuickContactBadge) findViewById(R.id.quick_contact_photo);
-        mQuickContactBadge.setOverlay(null);
-        mCallerName = (TextView) findViewById(R.id.caller_name);
-        mCallerNumber = (TextView) findViewById(R.id.caller_number);
-        mAccountLabel = (TextView) findViewById(R.id.phone_account_label);
         mDefaultCountryIso = GeoUtil.getCurrentCountryIso(this);
         mProximitySensorManager = new ProximitySensorManager(this, mProximitySensorListener);
         mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
@@ -437,7 +422,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                 mNumber = firstDetails.number.toString();
                 final int numberPresentation = firstDetails.numberPresentation;
                 // Set the details header, based on the first phone call.
-                mCallDetailHeader.updateViews(mNumber, numberPresentation, firstDetails);
+                mCallDetailHeader.updateViews(firstDetails);
 
                 // Cache the details about the phone number.
                 final boolean canPlaceCallsTo =
@@ -446,16 +431,29 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                 final boolean isVoicemailNumber = phoneUtils.isVoicemailNumber(mNumber);
                 final boolean isSipNumber = phoneUtils.isSipNumber(mNumber);
 
-                mHasEditNumberBeforeCallOption = mCallDetailHeader.canEditNumberBeforeCall();
+                mHasEditNumberBeforeCallOption =
+                        canPlaceCallsTo && !isSipNumber && !isVoicemailNumber;
                 mHasTrashOption = hasVoicemail();
                 mHasRemoveFromCallLogOption = !hasVoicemail();
                 invalidateOptionsMenu();
+
+                if (hasVoicemail() && !TextUtils.isEmpty(firstDetails.transcription)) {
+                    mVoicemailTranscription.setText(firstDetails.transcription);
+                    mVoicemailTranscription.setVisibility(View.VISIBLE);
+                }
+
+                final boolean isBusiness = mContactInfoHelper.isBusiness(firstDetails.sourceType);
+
+                final int contactType =
+                        isVoicemailNumber? ContactPhotoManager.TYPE_VOICEMAIL :
+                        isBusiness ? ContactPhotoManager.TYPE_BUSINESS :
+                        ContactPhotoManager.TYPE_DEFAULT;
 
                 ListView historyList = (ListView) findViewById(R.id.history);
                 historyList.setAdapter(
                         new CallDetailHistoryAdapter(CallDetailActivity.this, mInflater,
                                 mCallTypeHelper, details));
-                mCallDetailHeader.loadContactPhotos(firstDetails.photoUri);
+                mCallDetailHeader.loadContactPhotos(firstDetails, contactType);
                 findViewById(R.id.call_detail).setVisibility(View.VISIBLE);
             }
 

@@ -17,21 +17,15 @@
 
 package com.android.dialer.callstats;
 
-import android.app.ActionBar;
 import android.app.ListFragment;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.database.ContentObserver;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
-import android.telecom.PhoneAccount;
-import android.telephony.PhoneNumberUtils;
 import android.text.format.DateUtils;
-import android.text.TextUtils;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,20 +35,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.android.contacts.common.CallUtil;
-import com.android.contacts.common.util.Constants;
-import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfo;
-import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.widget.DoubleDatePickerDialog;
-import com.android.internal.telephony.CallerInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -62,13 +49,6 @@ public class CallStatsFragment extends ListFragment implements
         CallStatsAdapter.CallDataLoader, CallStatsQueryHandler.Listener,
         AdapterView.OnItemSelectedListener, DoubleDatePickerDialog.OnDateSetListener {
     private static final String TAG = "CallStatsFragment";
-
-    private static final int[] CALL_DIRECTION_RESOURCES = new int[] {
-        R.drawable.ic_call_inout_holo_dark,
-        R.drawable.ic_call_incoming_holo_dark,
-        R.drawable.ic_call_outgoing_holo_dark,
-        R.drawable.ic_call_missed_holo_dark
-    };
 
     private Spinner mFilterSpinner;
 
@@ -122,9 +102,6 @@ public class CallStatsFragment extends ListFragment implements
             TextView label = (TextView) convertView.findViewById(R.id.call_stats_nav_text);
             label.setText(getItem(position));
 
-            ImageView icon = (ImageView) convertView.findViewById(R.id.call_stats_nav_icon);
-            icon.setImageResource(CALL_DIRECTION_RESOURCES[position]);
-
             return convertView;
         }
     }
@@ -155,6 +132,7 @@ public class CallStatsFragment extends ListFragment implements
         mAdapter = new CallStatsAdapter(getActivity(), this);
         setListAdapter(mAdapter);
         getListView().setItemsCanFocus(true);
+        getListView().setEmptyView(view.findViewById(R.id.empty_list_view));
     }
 
     @Override
@@ -295,41 +273,6 @@ public class CallStatsFragment extends ListFragment implements
         }
 
         getView().findViewById(R.id.call_stats_header).setVisibility(View.VISIBLE);
-    }
-
-    public void callSelectedEntry() {
-        int position = getListView().getSelectedItemPosition();
-        if (position < 0) {
-            // In touch mode you may often not have something selected, so
-            // just call the first entry to make sure that [send] calls
-            // the most recent entry.
-            position = 0;
-        }
-        final CallStatsDetails item = mAdapter.getItem(position);
-        String number = (String) item.number;
-
-        if (!PhoneNumberUtilsWrapper.canPlaceCallsTo(number, item.numberPresentation)) {
-            // This number can't be called, do nothing
-            return;
-        }
-
-        Uri callUri;
-        // If "number" is really a SIP address, construct a sip: URI.
-        if (PhoneNumberUtils.isUriNumber(number)) {
-            callUri = Uri.fromParts(PhoneAccount.SCHEME_SIP, number, null);
-        } else {
-            if (!number.startsWith("+")) {
-                // If the caller-id matches a contact with a better qualified
-                // number, use it
-                number = mAdapter.getBetterNumberFromContacts(number, item.countryIso);
-            }
-            callUri = Uri.fromParts(PhoneAccount.SCHEME_TEL, number, null);
-        }
-
-        final Intent intent = CallUtil.getCallIntent(callUri);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-        startActivity(intent);
     }
 
     /** Requests updates to the data to be shown. */
