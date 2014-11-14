@@ -19,10 +19,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="?android:attr/actionBarSize"
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="vertical"
-    android:showDividers="end" >
+    android:showDividers="end"
+    android:background="@color/background_dialer_list_items" >
 
     <LinearLayout
         android:id="@+id/call_stats_header"
@@ -70,17 +70,16 @@
             android:layout_height="match_parent"
             android:divider="@null"
             android:fadingEdge="none"
-            android:scrollbarStyle="outsideOverlay" />
+            android:scrollbarStyle="outsideOverlay"
+            android:background="@color/background_dialer_list_items" />
 
-        <TextView
-            android:id="@android:id/empty"
+        <include
+            android:id="@+id/empty_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/empty_message_top_margin"
-            android:gravity="center"
-            android:text="@string/recentCalls_empty"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="?android:attr/textColorSecondary" />
+            layout="@layout/empty_list_view"
+            android:visibility="gone"/>
+
     </FrameLayout>
 
 </LinearLayout>
