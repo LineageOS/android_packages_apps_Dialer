@@ -138,6 +138,7 @@
     <!-- Length of dialpad's shadows in dialer. -->
     <dimen name="shadow_length">10dp</dimen>
 
+    <dimen name="empty_list_message_top_padding">20dp</dimen>
     <dimen name="empty_list_message_text_size">16sp</dimen>
 
     <!-- Dimensions for individual preference cards -->
