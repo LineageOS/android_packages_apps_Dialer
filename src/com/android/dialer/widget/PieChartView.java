@@ -105,7 +105,7 @@ public class PieChartView extends View {
 
         mPaintOutline.setColor(outlineColor);
         mPaintOutline.setStyle(Style.STROKE);
-        mPaintOutline.setStrokeWidth(3f * getResources().getDisplayMetrics().density);
+        mPaintOutline.setStrokeWidth(2f * getResources().getDisplayMetrics().density);
         mPaintOutline.setAntiAlias(true);
 
         mSideWidth = (int) (20 * getResources().getDisplayMetrics().density);

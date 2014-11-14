@@ -63,13 +63,6 @@ public class CallStatsFragment extends ListFragment implements
         AdapterView.OnItemSelectedListener, DoubleDatePickerDialog.OnDateSetListener {
     private static final String TAG = "CallStatsFragment";
 
-    private static final int[] CALL_DIRECTION_RESOURCES = new int[] {
-        R.drawable.ic_call_inout_holo_dark,
-        R.drawable.ic_call_incoming_holo_dark,
-        R.drawable.ic_call_outgoing_holo_dark,
-        R.drawable.ic_call_missed_holo_dark
-    };
-
     private Spinner mFilterSpinner;
 
     private int mCallTypeFilter = CallStatsQueryHandler.CALL_TYPE_ALL;
@@ -121,9 +114,6 @@ public class CallStatsFragment extends ListFragment implements
 
             TextView label = (TextView) convertView.findViewById(R.id.call_stats_nav_text);
             label.setText(getItem(position));
-
-            ImageView icon = (ImageView) convertView.findViewById(R.id.call_stats_nav_icon);
-            icon.setImageResource(CALL_DIRECTION_RESOURCES[position]);
 
             return convertView;
         }
