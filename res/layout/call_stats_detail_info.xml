@@ -16,12 +16,13 @@
 -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ex="http://schemas.android.com/apk/res/com.android.dialer"
     android:id="@+id/call_stats_info"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/call_detail_contact_name_margin"
-    android:layout_marginTop="@dimen/call_log_outer_margin" >
+    android:paddingStart="@dimen/call_detail_horizontal_margin"
+    android:paddingEnd="@dimen/call_log_outer_margin"
+    android:paddingTop="@dimen/call_log_inner_margin"
+    android:paddingBottom="@dimen/call_log_inner_margin">
 
     <TextView
         android:id="@+id/date_filter"
@@ -51,8 +52,8 @@
             android:layout_weight="1"
             android:layout_below="@id/date_filter"
             android:layout_marginStart="@dimen/call_log_icon_margin"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/secondary_text_color" />
+            android:textColor="?attr/call_log_primary_text_color"
+            android:textSize="@dimen/call_log_primary_text_size" />
 
     </LinearLayout>
 
@@ -62,8 +63,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/total_container"
         android:layout_marginBottom="@dimen/call_log_inner_margin"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/secondary_text_color" />
+        android:textColor="?attr/call_log_secondary_text_color"
+        android:textSize="@dimen/call_log_secondary_text_size" />
 
     <com.android.dialer.widget.PieChartView
         android:id="@+id/pie_chart"
@@ -71,8 +72,7 @@
         android:layout_height="@dimen/call_stats_details_chart_size"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_below="@id/total_duration"
-        ex:outlineColor="@color/call_stats_bar_background" />
+        android:layout_below="@id/total_duration" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -96,11 +96,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
-                <ImageView
+                <com.android.dialer.calllog.CallTypeIconsView
+                    android:id="@+id/in_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_call_incoming_holo_dark" />
+                    android:layout_gravity="center_vertical" />
 
                 <TextView
                     android:id="@+id/in_summary"
@@ -108,8 +108,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/call_log_icon_margin"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/secondary_text_color" />
+                    android:textColor="?attr/call_log_primary_text_color"
+                    android:textSize="@dimen/call_log_primary_text_size" />
 
             </LinearLayout>
 
@@ -117,15 +117,15 @@
                 android:id="@+id/in_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/secondary_text_color" />
+                android:textColor="?attr/call_log_secondary_text_color"
+                android:textSize="@dimen/call_log_secondary_text_size" />
 
             <TextView
                 android:id="@+id/in_duration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/secondary_text_color" />
+                android:textColor="?attr/call_log_secondary_text_color"
+                android:textSize="@dimen/call_log_secondary_text_size" />
 
         </LinearLayout>
 
@@ -141,11 +141,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
-                <ImageView
+                <com.android.dialer.calllog.CallTypeIconsView
+                    android:id="@+id/out_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_call_outgoing_holo_dark" />
+                    android:layout_gravity="center_vertical" />
 
                 <TextView
                     android:id="@+id/out_summary"
@@ -153,8 +153,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/call_log_icon_margin"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/secondary_text_color" />
+					android:textColor="?attr/call_log_primary_text_color"
+                    android:textSize="@dimen/call_log_primary_text_size" />
 
             </LinearLayout>
 
@@ -162,15 +162,15 @@
                 android:id="@+id/out_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/secondary_text_color" />
+                android:textColor="?attr/call_log_secondary_text_color"
+                android:textSize="@dimen/call_log_secondary_text_size" />
 
             <TextView
                 android:id="@+id/out_duration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/secondary_text_color" />
+                android:textColor="?attr/call_log_secondary_text_color"
+                android:textSize="@dimen/call_log_secondary_text_size" />
 
         </LinearLayout>
 
@@ -185,19 +185,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
-                <ImageView
+                <com.android.dialer.calllog.CallTypeIconsView
+                    android:id="@+id/missed_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_call_missed_holo_dark" />
+                    android:layout_gravity="center_vertical" />
 
                 <TextView
                     android:id="@+id/missed_summary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/call_log_icon_margin"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/secondary_text_color" />
+                    android:textColor="?attr/call_log_primary_text_color"
+                    android:textSize="@dimen/call_log_primary_text_size" />
 
             </LinearLayout>
 
@@ -205,8 +205,8 @@
                 android:id="@+id/missed_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/secondary_text_color" />
+                android:textColor="?attr/call_log_secondary_text_color"
+                android:textSize="@dimen/call_log_secondary_text_size" />
 
         </LinearLayout>
 

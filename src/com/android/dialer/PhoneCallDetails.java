@@ -203,4 +203,16 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
     public Uri getContactUri() {
         return contactUri;
     }
+    @Override
+    public Uri getPhotoUri() {
+        return photoUri;
+    }
+    @Override
+    public CharSequence getAccountLabel() {
+        return accountLabel;
+    }
+    @Override
+    public CharSequence getGeocode() {
+        return geocode;
+    }
 }
