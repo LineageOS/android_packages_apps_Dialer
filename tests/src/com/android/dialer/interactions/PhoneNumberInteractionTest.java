@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
@@ -48,12 +47,6 @@ import java.util.List;
  */
 @SmallTest
 public class PhoneNumberInteractionTest extends InstrumentationTestCase {
-
-    static {
-        // AsyncTask class needs to be initialized on the main thread.
-        AsyncTask.init();
-    }
-
     private final static class TestPhoneNumberInteraction extends PhoneNumberInteraction {
         private ArrayList<PhoneItem> mPhoneList;
 
