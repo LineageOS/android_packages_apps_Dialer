@@ -28,7 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="12dp"
-        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout
@@ -42,12 +41,16 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textColor="?attr/call_log_primary_text_color"
+            android:textSize="@dimen/call_log_primary_text_size" />
 
         <TextView
             android:id="@+id/number"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/call_log_name_margin_bottom"
+            android:textColor="?attr/call_log_secondary_text_color"
+            android:textSize="@dimen/call_log_secondary_text_size" />
 
     </LinearLayout>
 
