@@ -565,6 +565,28 @@ public class DialpadFragment extends Fragment
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        // if the mToneGenerator creation fails, just continue without it.  It is
+        // a local audio signal, and is not as important as the dtmf tone itself.
+        final long start = System.currentTimeMillis();
+        synchronized (mToneGeneratorLock) {
+            if (mToneGenerator == null) {
+                try {
+                    mToneGenerator = new ToneGenerator(DIAL_TONE_STREAM_TYPE, TONE_RELATIVE_VOLUME);
+                } catch (RuntimeException e) {
+                    Log.w(TAG, "Exception caught while creating local tone generator: " + e);
+                    mToneGenerator = null;
+                }
+            }
+        }
+        final long total = System.currentTimeMillis() - start;
+        if (total > 50) {
+            Log.i(TAG, "Time for ToneGenerator creation: " + total);
+        }
+    };
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -591,20 +613,6 @@ public class DialpadFragment extends Fragment
         mHaptic.checkSystemSetting();
 
         stopWatch.lap("hptc");
-
-        // if the mToneGenerator creation fails, just continue without it.  It is
-        // a local audio signal, and is not as important as the dtmf tone itself.
-        synchronized (mToneGeneratorLock) {
-            if (mToneGenerator == null) {
-                try {
-                    mToneGenerator = new ToneGenerator(DIAL_TONE_STREAM_TYPE, TONE_RELATIVE_VOLUME);
-                } catch (RuntimeException e) {
-                    Log.w(TAG, "Exception caught while creating local tone generator: " + e);
-                    mToneGenerator = null;
-                }
-            }
-        }
-        stopWatch.lap("tg");
 
         mPressedDialpadKeys.clear();
 
@@ -657,12 +665,6 @@ public class DialpadFragment extends Fragment
         stopTone();
         mPressedDialpadKeys.clear();
 
-        synchronized (mToneGeneratorLock) {
-            if (mToneGenerator != null) {
-                mToneGenerator.release();
-                mToneGenerator = null;
-            }
-        }
         // TODO: I wonder if we should not check if the AsyncTask that
         // lookup the last dialed number has completed.
         mLastNumberDialed = EMPTY_NUMBER;  // Since we are going to query again, free stale number.
@@ -673,6 +675,13 @@ public class DialpadFragment extends Fragment
     @Override
     public void onStop() {
         super.onStop();
+
+        synchronized (mToneGeneratorLock) {
+            if (mToneGenerator != null) {
+                mToneGenerator.release();
+                mToneGenerator = null;
+            }
+        }
 
         if (mClearDigitsOnStop) {
             mClearDigitsOnStop = false;
