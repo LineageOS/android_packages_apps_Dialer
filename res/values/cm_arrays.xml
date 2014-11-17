@@ -39,4 +39,41 @@
         <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g></item>
         <item><xliff:g id="hours" example="2 hrs">%1$s</xliff:g> <xliff:g id="minutes" example="2 mins">%2$s</xliff:g> <xliff:g id="seconds" example="2 secs">%3$s</xliff:g></item>
     </string-array>
+
+    <string-array name="forward_lookup_providers" translatable="false">
+        <item>Google</item>
+        <item>OpenStreetMap</item>
+    </string-array>
+
+    <string-array name="forward_lookup_provider_names" translatable="false">
+        <item>Google</item>
+        <item>OpenStreetMap</item>
+    </string-array>
+
+    <string-array name="people_lookup_providers" translatable="false">
+        <item>WhitePages</item>
+    </string-array>
+
+    <string-array name="people_lookup_provider_names" translatable="false">
+        <item>WhitePages (US)</item>
+    </string-array>
+
+    <string-array name="reverse_lookup_providers" translatable="false">
+        <item>OpenCnam</item>
+        <item>WhitePages</item>
+        <item>WhitePages_CA</item>
+        <item>YellowPages</item>
+        <item>YellowPages_CA</item>
+        <item>ZabaSearch</item>
+    </string-array>
+
+    <string-array name="reverse_lookup_provider_names" translatable="false">
+        <item>OpenCnam (US)</item>
+        <item>WhitePages (US)</item>
+        <item>WhitePages (CA)</item>
+        <item>YellowPages (US)</item>
+        <item>YellowPages (CA)</item>
+        <item>ZabaSearch (US)</item>
+    </string-array>
+
 </resources>
