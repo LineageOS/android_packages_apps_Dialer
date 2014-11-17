@@ -538,10 +538,25 @@
          [CHAR LIMIT=21] -->
     <string name="favorites_menu_all_contacts">ALL CONTACTS</string>
 
-    <!-- Button text for the "call back" button displayed underneath an entry in the call log.
-         Tapping causes a call to be placed to the caller represented by the call log entry.
+    <!-- Button text for the "call back" button displayed underneath an entry in the call log. This
+         is used to describe the action of calling a phone number that the user previously received
+         an incoming call from. Tapping causes a call to be placed to the number represented by the
+         call log entry.
          [CHAR LIMIT=30] -->
     <string name="call_log_action_call_back">CALL BACK</string>
+
+    <!-- BUTTON text for the "call" button displayed underneath an entry in the call log. This
+         is used to describe the action of calling a phone number. Tapping causes a call to be
+         placed to the number represented by the call log entry.
+         [CHAR LIMIT=30] -->
+    <string name="call_log_action_redial">CALL</string>
+
+    <!-- BUTTON text for the "redial" button displayed underneath an entry in the call log. This
+         is used to describe the action of calling a phone number that the user previously made an
+         outgoing call to. Tapping causes a call to be placed to the number represented by the call
+         log entry.
+         [CHAR LIMIT=30] -->
+    <string name="call_log_action_redial">REDIAL</string>
 
     <!-- Button text for the "video call" button displayed underneath an entry in the call log.
          Tapping causes a video call to be placed to the caller represented by the call log entry.
