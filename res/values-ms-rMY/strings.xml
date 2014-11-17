@@ -106,7 +106,7 @@
     <string name="description_new_voicemail" msgid="1711579223345163619">"Mel suara baharu"</string>
     <string name="description_num_calls" msgid="3681117647705843445">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> panggilan"</string>
     <string name="description_video_call" msgid="1827338350642669590">"Panggilan video"</string>
-    <string name="description_send_text_message" msgid="3118485319691414221">"Hantar SMS ke <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_send_text_message" msgid="3118485319691414221">"Hantar SMS kepada <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Mel suara belum didengar"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Mulakan carian suara"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Panggil <xliff:g id="NUMBER">%s</xliff:g>"</string>
@@ -147,7 +147,7 @@
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> panggilan terlepas baharu"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"Dail laju ialah pendailan satu sentuhan untuk kegemaran dan nombor yang kerap anda hubungi"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Tiada kenalan"</string>
-    <string name="contact_tooltip" msgid="2019777545923635266">"Sentuh imej untuk melihat semua nombor atau sentuh terus untuk menyusun semula"</string>
+    <string name="contact_tooltip" msgid="2019777545923635266">"Sentuh imej untuk melihat semua nombor atau sentuh &amp; tahan untuk menyusun semula"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ketepikan"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Alih keluar"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"SEMUA KENALAN"</string>

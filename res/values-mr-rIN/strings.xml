@@ -49,7 +49,7 @@
     <string name="call_log_outgoing_header" msgid="761009180766735769">"केवळ केले जाणारे कॉल"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"केवळ सुटलेले कॉल"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"व्हॉइसमेल अद्यतने उपलब्ध नाहीत"</string>
-    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"नवीन व्हॉइसमेल प्रतीक्षा. आत्ता लोड करू शकत नाही."</string>
+    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"नवीन व्हॉइसमेल प्रतीक्षा करत आहे. आत्ता लोड करू शकत नाही."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"आपला व्हॉइसमेल सेट करा"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"ऑडिओ उपलब्ध नाही"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"सेट अप"</string>

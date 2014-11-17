@@ -145,7 +145,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ভিডিও কল করুন"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"সম্পূর্ণ কল ইতিহাস দেখুন"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>টি নতুন মিসড কল"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"আপনি প্রায়শই কল করেন এমন পছন্দসই এবং নম্বরগুলির জন্য দ্রুত ডায়াল হল একবার-স্পর্শের মাধ্যমে ডায়াল করার ব্যবস্থা"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"আপনি প্রায়শই কল করেন এমন পছন্দসই ব্যক্তি এবং নম্বরগুলির জন্য দ্রুত ডায়াল হল একবার-স্পর্শের মাধ্যমে ডায়াল করার ব্যবস্থা"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"কোনো পরিচিতি নেই"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"সমস্ত নম্বর দেখতে চিত্রে স্পর্শ করুন বা রেকর্ড করতে ধরে রাখুন"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"খারিজ"</string>

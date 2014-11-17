@@ -40,7 +40,7 @@
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Reproduzir"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nova mensagem de voz de <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="3356071912353297599">"Não foi possível reproduzir correio voz"</string>
+    <string name="voicemail_playback_error" msgid="3356071912353297599">"Não foi possível repr. correio de voz"</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"Armazenar em buffer…"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Carregando correio de voz..."</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Não foi possível carregar correio de voz"</string>

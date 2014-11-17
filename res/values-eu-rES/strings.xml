@@ -40,7 +40,7 @@
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Erreproduzitu"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> deitzailearen ahots-mezu berria"</string>
-    <string name="voicemail_playback_error" msgid="3356071912353297599">"Ezin izan dira erreproduzitu erantzungailuko mezuak"</string>
+    <string name="voicemail_playback_error" msgid="3356071912353297599">"Ezin izan dira erreproduzitu ahots-mezuak"</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"Buferreratzen…"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Erantzungailua kargatzen…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Ezin izan da kargatu erantzungailua"</string>
@@ -48,7 +48,7 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Sarrerako deiak soilik"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Irteerako deiak soilik"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Dei galduak soilik"</string>
-    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Ez dago erantzungailuaren eguneratzerik erabilgarri"</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Ez dago erantzungailuaren berririk"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Ahots-mezu berri bat duzu zain. Une honetan ezin da kargatu."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Konfiguratu erantzungailua"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Audioa ez dago erabilgarri"</string>
@@ -145,7 +145,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Egin bideo-deia"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Ikusi deien historia osoa"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> dei galdu berri"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Markatze bizkorrak gehien erabiltzen dituzun zenbaki eta gogoetara ukitze bakarrarekin deitzeko balio du"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Markatze bizkorrak gehien erabiltzen dituzun zenbaki eta gogokoetara ukitze bakarrarekin deitzeko balio du"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Ez dago kontakturik"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Ukitu irudia zenbaki guztiak ikusteko, edo eduki ezazu ukituta berrantolatzeko"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Baztertu"</string>
@@ -163,7 +163,7 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Deitzaile honek erantzungailuan utzitako ahots-mezuak entzutea: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> kontaktuaren xehetasunak"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Ezabatu deien historiatik"</string>
-    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Zenbakiaren salaketa bidali zaio Google-ri"</string>
+    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Zenbakiaren berri eman zaio Google-ri"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"SALATU"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Gaur"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Atzo"</string>

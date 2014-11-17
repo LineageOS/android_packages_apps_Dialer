@@ -43,7 +43,7 @@
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Nu s-a putut reda mesageria vocală"</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"Se utilizează memoria tampon..."</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Se încarcă mesageria vocală…"</string>
-    <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Nu se poate încărca mesageria vocală"</string>
+    <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Nu s-a putut încărca mesageria vocală"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Numai apelurile cu mesaje vocale"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Numai apelurile primite"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Numai apelurile efectuate"</string>
@@ -113,7 +113,7 @@
     <string name="unknown" msgid="740067747858270469">"Necunoscut"</string>
     <string name="voicemail" msgid="3851469869202611441">"Mesagerie vocală"</string>
     <string name="private_num" msgid="6374339738119166953">"Număr privat"</string>
-    <string name="payphone" msgid="7726415831153618726">"Telefon public cu plată"</string>
+    <string name="payphone" msgid="7726415831153618726">"Telefon public"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> sec."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Nu puteți apela acest număr"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Pentru a configura mesageria vocală, accesaţi Meniu &gt; Setări."</string>
