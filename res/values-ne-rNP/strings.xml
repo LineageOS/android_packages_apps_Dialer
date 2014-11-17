@@ -176,7 +176,6 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"दोहर्याउने सुरु गर्नुहोस् वा रोक्नुहोस्।"</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="general_settings_label" msgid="5748319557716674189">"सामान्य"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"सम्पर्क प्रदर्शन, ध्वनि, र छिटो प्रतिक्रियाहरू"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"सम्पर्क प्रदर्शन विकल्पहरू"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"ध्वनि र कम्पन"</string>
     <string name="ringtone_title" msgid="760362035635084653">"फोन रिङटोन"</string>
@@ -185,7 +184,6 @@
     <string name="other_settings_title" msgid="7976283601445863248">"अन्य"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"द्रुत प्रतिक्रियाहरू"</string>
     <string name="call_settings_label" msgid="313434211353070209">"कलहरू"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"भ्वाइस मेल, कल पर्खने, र अन्य"</string>
-    <string name="phone_account_settings_label" msgid="8298076824934324281">"फोन खाता सेटिङ्हरू"</string>
-    <string name="phone_account_settings_description" msgid="435745546649702086">"SIM र कल सेटिङ्हरू व्यवस्थापन गर्नुहोस्"</string>
+    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
+    <skip />
 </resources>

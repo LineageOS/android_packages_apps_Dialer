@@ -145,7 +145,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ভিডিও কল করুন"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"সম্পূর্ণ কল ইতিহাস দেখুন"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>টি নতুন মিসড কল"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"আপনি প্রায়শই কল করেন এমন পছন্দসই এবং নম্বরগুলির জন্য দ্রুত ডায়াল হল একবার-স্পর্শের মাধ্যমে ডায়াল করার ব্যবস্থা"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"আপনি প্রায়শই কল করেন এমন পছন্দসই ব্যক্তি এবং নম্বরগুলির জন্য দ্রুত ডায়াল হল একবার-স্পর্শের মাধ্যমে ডায়াল করার ব্যবস্থা"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"কোনো পরিচিতি নেই"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"সমস্ত নম্বর দেখতে চিত্রে স্পর্শ করুন বা রেকর্ড করতে ধরে রাখুন"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"খারিজ"</string>
@@ -176,7 +176,6 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"প্লেব্যাক শুরু করুন বা বিরতি দিন৷"</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="general_settings_label" msgid="5748319557716674189">"সাধারণ"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"পরিচিতি প্রদর্শন, শব্দ এবং দ্রুত প্রতিক্রিয়াগুলি"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"পরিচিতি প্রদর্শনের বিকল্পগুলি"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"শব্দ ও কম্পন"</string>
     <string name="ringtone_title" msgid="760362035635084653">"ফোন রিংটোন"</string>
@@ -185,7 +184,6 @@
     <string name="other_settings_title" msgid="7976283601445863248">"অন্যান্য"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"দ্রুত প্রতিক্রিয়াগুলি"</string>
     <string name="call_settings_label" msgid="313434211353070209">"কল"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"ভয়েসমেল, কল অপেক্ষমান এবং অন্যান্য"</string>
-    <string name="phone_account_settings_label" msgid="8298076824934324281">"ফোন অ্যাকাউন্ট সেটিংস"</string>
-    <string name="phone_account_settings_description" msgid="435745546649702086">"SIM ও কল সেটিংস পরিচালনা করুন"</string>
+    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
+    <skip />
 </resources>

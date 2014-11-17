@@ -176,7 +176,6 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"பிளேபேக்கைத் தொடங்கு அல்லது இடைநிறுத்து."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="general_settings_label" msgid="5748319557716674189">"பொது"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"தொடர்பின் காட்சி, ஒலிகள் மற்றும் விரைவு பதில்கள்"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"தொடர்பின் காட்சி விருப்பங்கள்"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"ஒலிகளும் அதிர்வுறுதலும்"</string>
     <string name="ringtone_title" msgid="760362035635084653">"மொபைலின் ரிங்டோன்"</string>
@@ -185,7 +184,6 @@
     <string name="other_settings_title" msgid="7976283601445863248">"பிற"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"விரைவு பதில்கள்"</string>
     <string name="call_settings_label" msgid="313434211353070209">"அழைப்புகள்"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"குரலஞ்சல், அழைப்பு காத்திருப்பு, மேலும் பிற"</string>
-    <string name="phone_account_settings_label" msgid="8298076824934324281">"ஃபோன் கணக்கு அமைப்பு"</string>
-    <string name="phone_account_settings_description" msgid="435745546649702086">"SIM மற்றும் அழைப்பு அமைப்புகளை நிர்வகிக்கவும்"</string>
+    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
+    <skip />
 </resources>
