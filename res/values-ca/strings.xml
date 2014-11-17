@@ -87,7 +87,7 @@
     <string name="menu_newContact" msgid="1209922412763274638">"Contacte nou"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Tots els contactes"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Detalls de la trucada"</string>
-    <string name="toast_call_detail_error" msgid="6947041258280380832">"No hi ha cap detall disponible."</string>
+    <string name="toast_call_detail_error" msgid="6947041258280380832">"Informació no disponible"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Utilitza el teclat per tons"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Torna a la trucada en curs"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Afegeix una trucada"</string>
@@ -127,7 +127,7 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"La cerca per veu no està disponible."</string>
     <string name="call_not_available" msgid="8941576511946492225">"No es pot fer una trucada telefònica perquè s\'ha desactivat l\'aplicació de telèfon."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"No hi ha cap aplicació per a això en aquest dispositiu."</string>
-    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Escriu nom o número de telèfon"</string>
+    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Escriu un nom o un telèfon"</string>
     <string name="recentMissed_empty" msgid="4901789420356796156">"No hi ha cap trucada."</string>
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"No hi ha cap correu de veu recent."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostra només els preferits"</string>

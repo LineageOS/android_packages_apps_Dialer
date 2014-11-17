@@ -51,7 +51,7 @@
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"無法更新留言"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"有新留言，但目前無法載入。"</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"設定您的留言信箱"</string>
-    <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"無法使用音效檔案"</string>
+    <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"無法使用音效"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"設定"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"致電語音信箱號碼"</string>
     <string name="voicemail_speed_slowest" msgid="1733460666177707312">"最慢速"</string>
@@ -128,7 +128,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"由於「電話」應用程式已停用，因此無法打電話。"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"這部裝置上沒有可用的應用程式"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"請輸入姓名或電話號碼"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"沒有未接來電"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"沒有通話記錄"</string>
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"最近沒有留言"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"只顯示我的最愛"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"記錄"</string>
@@ -145,7 +145,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"進行視像通話"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"查看完整通話記錄"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> 個新的未接來電"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"使用快速撥號，只需點一下螢幕就能撥出常用電話號碼和致電最愛的親友"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"使用快速撥號，只需點一下螢幕就能撥出常用電話號碼並致電最愛的親友"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"沒有聯絡人"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"輕觸圖像以查看所有電話號碼，或輕觸並按住圖像以重新排序"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"關閉"</string>

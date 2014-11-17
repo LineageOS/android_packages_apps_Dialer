@@ -145,7 +145,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Start en videosamtale"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Se hele anropsloggen"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nye tapte anrop"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Hurtigoppringing er ettrykksoppringing for favorittene dine og numrene du ringer ofte"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Hurtigoppringing ringer til favorittene dine og numrene du ringer ofte, med bare ett trykk"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Ingen kontakter"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Trykk på bildet for å se alle numre, eller trykk på og hold nede for å omorganisere"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Fjern"</string>
