@@ -600,6 +600,8 @@
          [CHAR LIMIT=30] -->
     <string name="call_log_voicemail_title">Voicemail</string>
 
+    <string name="select_account_dialog_title">Select Account</string>
+
     <string name="tab_speed_dial">Speed Dial</string>
 
     <string name="tab_recents">Recents</string>
