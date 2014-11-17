@@ -176,7 +176,6 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"再生を開始または一時停止します。"</string>
     <string name="list_delimeter" msgid="4571593167738725100">"、 "</string>
     <string name="general_settings_label" msgid="5748319557716674189">"全般"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"連絡先表示、音、クイック返信"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"連絡先表示オプション"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"音とバイブレーション"</string>
     <string name="ringtone_title" msgid="760362035635084653">"着信音"</string>
@@ -185,7 +184,6 @@
     <string name="other_settings_title" msgid="7976283601445863248">"その他"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"クイック返信"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通話"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"ボイスメール、通話中着信など"</string>
-    <string name="phone_account_settings_label" msgid="8298076824934324281">"携帯端末アカウントの設定"</string>
-    <string name="phone_account_settings_description" msgid="435745546649702086">"SIMと通話設定の管理"</string>
+    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
+    <skip />
 </resources>

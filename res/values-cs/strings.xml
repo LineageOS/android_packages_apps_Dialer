@@ -176,7 +176,6 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Spustit nebo pozastavit přehrávání."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="general_settings_label" msgid="5748319557716674189">"Obecné"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"Zobrazení kontaktů, zvuky a rychlé odpovědi"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Možnosti zobrazení kontaktů"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Zvuky a vibrace"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Vyzváněcí tón telefonu"</string>
@@ -185,7 +184,6 @@
     <string name="other_settings_title" msgid="7976283601445863248">"Další"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Rychlé odpovědi"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Volání"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"Hlasová schránka, další hovor na lince atd."</string>
-    <string name="phone_account_settings_label" msgid="8298076824934324281">"Nastavení telefonního účtu"</string>
-    <string name="phone_account_settings_description" msgid="435745546649702086">"Správa nastavení SIM karet a hovorů"</string>
+    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
+    <skip />
 </resources>

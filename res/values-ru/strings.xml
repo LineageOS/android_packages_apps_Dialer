@@ -176,7 +176,6 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Начать или приостановить воспроизведение."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="general_settings_label" msgid="5748319557716674189">"Общие"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"Отображение контактов, звуки и быстрые ответы"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Отображение контактов"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Звук и вибросигнал"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Рингтон"</string>
@@ -185,7 +184,6 @@
     <string name="other_settings_title" msgid="7976283601445863248">"Другие настройки"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Быстрые ответы"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Вызовы"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"Голосовая почта, ожидание вызова и другие функции"</string>
-    <string name="phone_account_settings_label" msgid="8298076824934324281">"Настройки аккаунта телефона"</string>
-    <string name="phone_account_settings_description" msgid="435745546649702086">"Параметры SIM-карты и вызовов"</string>
+    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
+    <skip />
 </resources>

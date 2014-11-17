@@ -20,7 +20,7 @@
     <string name="applicationLabel" msgid="8490255569343340580">"Çevirici"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
-    <string name="recentCallsIconLabel" msgid="2639489159797075507">"Sesli arama geçmişi"</string>
+    <string name="recentCallsIconLabel" msgid="2639489159797075507">"Çağrı geçmişi"</string>
     <string name="menu_sendTextMessage" msgid="8682056943960339239">"SMS gönder"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Ara: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Önce numarayı düzenle"</string>
@@ -40,7 +40,7 @@
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Oynat"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Yeni sesli mesj gönderen: <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="3356071912353297599">"Sesli mesaj çalınamadı"</string>
+    <string name="voicemail_playback_error" msgid="3356071912353297599">"Sesli mesaj oynatılamadı"</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"Arabelleğe alınıyor..."</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Sesli mesaj yükleniyor…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Sesli mesaj yüklenemedi"</string>
@@ -135,7 +135,7 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Tümü"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Cevapsız"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Sesli Mesaj"</string>
-    <string name="tab_speed_dial" msgid="7552166276545648893">"Çabuk işlemler"</string>
+    <string name="tab_speed_dial" msgid="7552166276545648893">"Hızlı arama"</string>
     <string name="tab_recents" msgid="929949073851377206">"Son Kişiler"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kişiler"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Favorilerden kaldırıldı"</string>
@@ -176,7 +176,6 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Çalmayı başlatın veya duraklatın."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="general_settings_label" msgid="5748319557716674189">"Genel"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"Kişi görüntüleme, sesler ve hızlı yanıtlar"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Kişi görüntüleme seçenekleri"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Sesler ve titreşim"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Telefon zil sesi"</string>
@@ -185,7 +184,6 @@
     <string name="other_settings_title" msgid="7976283601445863248">"Diğer"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Hızlı yanıtlar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Çağrılar"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"Sesli mesaj, çağrı bekletme ve diğerleri"</string>
-    <string name="phone_account_settings_label" msgid="8298076824934324281">"Telefon hesabı ayarları"</string>
-    <string name="phone_account_settings_description" msgid="435745546649702086">"SIM ve çağrı ayarlarını yönetin"</string>
+    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
+    <skip />
 </resources>

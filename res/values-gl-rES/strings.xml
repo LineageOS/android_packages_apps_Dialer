@@ -126,7 +126,7 @@
     <string name="add_contact_not_available" msgid="5547311613368004859">"Non hai aplicacións de contactos dispoñibles"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"Busca de voz non dispoñible"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Non se pode facer unha chamada telefónica porque se desactivou a aplicación de teléfono."</string>
-    <string name="activity_not_available" msgid="2287665636817987623">"Non hai ningunha aplicación para tratar esa acción neste dispositivo"</string>
+    <string name="activity_not_available" msgid="2287665636817987623">"Non hai ningunha aplicación para esa acción neste dispositivo"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Insire un nome/número teléfono"</string>
     <string name="recentMissed_empty" msgid="4901789420356796156">"Non hai chamadas"</string>
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"Non hai correos de voz recentes"</string>
@@ -145,7 +145,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Realizar unha videochamada"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Ver historial de chamadas completo"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> chamadas perdidas novas"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"A marcación rápida e unha marcación dun só toque para favoritos e números aos que chamas a miúdo"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"A marcación rápida é unha marcación dun só toque para favoritos e números aos que chamas a miúdo"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Sen contactos"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Toca a imaxe para ver todos os números ou mantena premida para reordenala"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Rexeitar"</string>
@@ -162,8 +162,8 @@
     <string name="description_video_call_action" msgid="4303952636480252389">"Videochamada a <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Escoitar o correo de voz de <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detalles da chamada para <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="toast_entry_removed" msgid="8010830299576311534">"Eliminada do historial de chamadas"</string>
-    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Número informado a Google"</string>
+    <string name="toast_entry_removed" msgid="8010830299576311534">"Eliminouse do historial de chamadas"</string>
+    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Informouse do número a Google"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"INFORMAR"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Hoxe"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Onte"</string>
@@ -176,7 +176,6 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Iniciar ou pausar a reprodución."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="general_settings_label" msgid="5748319557716674189">"Xeral"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"Visualización de contactos, sons e respostas rápidas"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Opcións de visualización de contactos"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Sons e vibración"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Ton de chamada do teléfono"</string>
@@ -185,7 +184,6 @@
     <string name="other_settings_title" msgid="7976283601445863248">"Outra"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respostas rápidas"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Chamadas"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"Correo de voz, chamada en espera e outros"</string>
-    <string name="phone_account_settings_label" msgid="8298076824934324281">"Configuración da conta do teléfono"</string>
-    <string name="phone_account_settings_description" msgid="435745546649702086">"Xestiona a SIM e a configuración de chamadas"</string>
+    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
+    <skip />
 </resources>

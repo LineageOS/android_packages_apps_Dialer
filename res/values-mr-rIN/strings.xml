@@ -49,7 +49,7 @@
     <string name="call_log_outgoing_header" msgid="761009180766735769">"केवळ केले जाणारे कॉल"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"केवळ सुटलेले कॉल"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"व्हॉइसमेल अद्यतने उपलब्ध नाहीत"</string>
-    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"नवीन व्हॉइसमेल प्रतीक्षा. आत्ता लोड करू शकत नाही."</string>
+    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"नवीन व्हॉइसमेल प्रतीक्षा करत आहे. आत्ता लोड करू शकत नाही."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"आपला व्हॉइसमेल सेट करा"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"ऑडिओ उपलब्ध नाही"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"सेट अप"</string>
@@ -176,7 +176,6 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"प्लेबॅक प्रारंभ करा किंवा त्यास विराम द्या."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="general_settings_label" msgid="5748319557716674189">"सामान्य"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"संपर्क प्रदर्शन, ध्वनी आणि द्रुत प्रतिसाद"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"संपर्क प्रदर्शन पर्याय"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"ध्वनी आणि कंपन"</string>
     <string name="ringtone_title" msgid="760362035635084653">"फोन रिंगटोन"</string>
@@ -185,7 +184,6 @@
     <string name="other_settings_title" msgid="7976283601445863248">"अन्य"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"द्रुत प्रतिसाद"</string>
     <string name="call_settings_label" msgid="313434211353070209">"कॉल"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"व्हॉइसमेल, कॉल प्रतीक्षा आणि अन्य"</string>
-    <string name="phone_account_settings_label" msgid="8298076824934324281">"फोन खाते सेटिंग्ज"</string>
-    <string name="phone_account_settings_description" msgid="435745546649702086">"सिम आणि कॉल सेटिंग्ज व्यवस्थापित करा"</string>
+    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
+    <skip />
 </resources>

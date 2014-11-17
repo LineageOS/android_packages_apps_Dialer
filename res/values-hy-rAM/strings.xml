@@ -20,7 +20,7 @@
     <string name="applicationLabel" msgid="8490255569343340580">"Համարհավաքիչ"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Հեռախոս"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Հեռախոս"</string>
-    <string name="recentCallsIconLabel" msgid="2639489159797075507">"Զանգերի պատմությունը"</string>
+    <string name="recentCallsIconLabel" msgid="2639489159797075507">"Զանգերի պատմություն"</string>
     <string name="menu_sendTextMessage" msgid="8682056943960339239">"Ուղարկել SMS"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Զանգել <xliff:g id="NAME">%s</xliff:g>-ին"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Խմբագրել համարը զանգելուց առաջ"</string>
@@ -40,18 +40,18 @@
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Նվագարկել"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Նոր ձայնային փոստ <xliff:g id="CALLER">%1$s</xliff:g>-ից"</string>
-    <string name="voicemail_playback_error" msgid="3356071912353297599">"Չհաջողվեց նվագարկել ձայնային հաղորդագրթյ"</string>
+    <string name="voicemail_playback_error" msgid="3356071912353297599">"Հաղորդագրությունը չհաջողվեց նվագարկել"</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"Պահնակավորում..."</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Ձայնային հաղորդագրության բեռնում…"</string>
-    <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Չհաջողվեց բեռնել ձայնային հաղորդագրությ"</string>
+    <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Հաղորդագրությունը չհաջողվեց բեռնել"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Միայն ձայնային փոստով զանգերը"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Միայն մուտքային զանգեր"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Միայն ելքային զանգերը"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Միայն բաց թողնված զանգերը"</string>
-    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Ձայնային հաղորդագրության թարմացումները մատչելի չեն"</string>
-    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Նոր ձայն հաղորդագր սպասման մեջ է: Այս պահին հնարավոր չէ բեռնել:"</string>
-    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Կարգավորեք ձեր ձայնային հաղորդագրությունը"</string>
-    <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Աուդիո տարբերակը մատչելի չէ"</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Ձայնային փոստի տվյալները չի հաջողվում բեռնել"</string>
+    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Նոր ձայնային հաղորդագրություն կա: Այս պահին հնարավոր չէ բեռնել:"</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Կարգավորեք ձայնային փոստը"</string>
+    <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Ձայնային տարբերակը հասանելի չէ"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Կարգավորել"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Միանալ ձայնային փոստին"</string>
     <string name="voicemail_speed_slowest" msgid="1733460666177707312">"Ամենադանդաղ արագություն"</string>
@@ -87,7 +87,7 @@
     <string name="menu_newContact" msgid="1209922412763274638">"Նոր կոնտակտ"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Բոլոր կոնտակտները"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Զանգի մանրամասները"</string>
-    <string name="toast_call_detail_error" msgid="6947041258280380832">"Մանրամասները մատչելի չեն"</string>
+    <string name="toast_call_detail_error" msgid="6947041258280380832">"Մանրամասները հասանելի չեն"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Օգտագործել հնչերանգներով ստեղնաշարը"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Վերադառնալ ընթացիկ զանգին"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Ավելացնել զանգ"</string>
@@ -113,7 +113,7 @@
     <string name="unknown" msgid="740067747858270469">"Անհայտ"</string>
     <string name="voicemail" msgid="3851469869202611441">"Ձայնային փոստ"</string>
     <string name="private_num" msgid="6374339738119166953">"Անձնական համարը"</string>
-    <string name="payphone" msgid="7726415831153618726">"Բջջային տերմինալ"</string>
+    <string name="payphone" msgid="7726415831153618726">"Հանրային հեռախոս"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> րոպե <xliff:g id="SECONDS">%s</xliff:g> վայրկյան"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Հնարավոր չէ զանգահարել այս համարով"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Ձայնային փոստը կարգավորելու համար գնացեք Ցանկ &gt; Կարգավորումներ:"</string>
@@ -123,8 +123,8 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM քարտը բեռնվում է..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM քարտի կոնտակտները"</string>
-    <string name="add_contact_not_available" msgid="5547311613368004859">"Կոնտակտների մատչելի հավելված չկա"</string>
-    <string name="voice_search_not_available" msgid="2977719040254285301">"Ձայնային որոնումը մատչելի չէ"</string>
+    <string name="add_contact_not_available" msgid="5547311613368004859">"Կոնտակտների հավելված չկա"</string>
+    <string name="voice_search_not_available" msgid="2977719040254285301">"Ձայնային որոնումը հասանելի չէ"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Հնարավոր չէ զանգահարել, քանի որ Հեռախոս հավելվածն անջատված է:"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Սարքի վրա համապատասխան հավելված չկա"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Մուտքագրեք անուն կամ համար"</string>
@@ -145,9 +145,9 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Կատարել տեսազանգ"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Դիտել բոլոր զանգերի պատմությունը"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> նոր բաց թողնված զանգ"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Արագ համարարկումը մեկ հպումով համարի հավաքման եղանակ է՝ ձեր ընտրյալների և հաճախակի հավաքվող համարների համար"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Արագ համարարկումը մեկ հպումով համարի հավաքման եղանակ է՝ ձեր նախընտրած և հաճախակի հավաքվող համարների համար"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Կոտնակտներ չկան"</string>
-    <string name="contact_tooltip" msgid="2019777545923635266">"Բոլոր համարները տեսնելու համար հպեք պատկերի վրա կամ հպեք և պահեք՝ վերադասավորելու համար"</string>
+    <string name="contact_tooltip" msgid="2019777545923635266">"Բոլոր համարները տեսնելու համար հպեք պատկերին: Վերադասավորելու համար հպեք և պահեք:"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Անտեսել"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Հեռացնել"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ԲՈԼՈՐ ԿՈՆՏԱԿՏՆԵՐԸ"</string>
@@ -176,7 +176,6 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Սկսել կամ դադարեցնել նվագարկումը:"</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="general_settings_label" msgid="5748319557716674189">"Ընդհանուր"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"Կոնտակնտների ցուցադրում, ձայներ և արագ պատասխաններ"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Կոնտակտի ցուցադրման ընտրանքները"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Զանգերանգ և թրթռազանգ"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Հեռախոսի զանգերանգ"</string>
@@ -185,7 +184,6 @@
     <string name="other_settings_title" msgid="7976283601445863248">"Այլ"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Արագ պատասխաններ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Զանգեր"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"Ձայնային փոստը, սպասվող զանգը և այլն"</string>
-    <string name="phone_account_settings_label" msgid="8298076824934324281">"Հեռախոսի հաշիվների կարգավորումներ"</string>
-    <string name="phone_account_settings_description" msgid="435745546649702086">"Կառավարեք SIM քարտի և զանգերի կարգավորումները"</string>
+    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
+    <skip />
 </resources>
