@@ -35,6 +35,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.ActivityNotFoundException;
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -45,6 +46,8 @@ import android.provider.ContactsContract.Contacts.Data;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -58,6 +61,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import static com.android.internal.telephony.PhoneConstants.SUBSCRIPTION_KEY;
+import java.util.List;
 
 public class SpeedDialListActivity extends ListActivity
         implements OnItemClickListener {
@@ -172,10 +176,15 @@ public class SpeedDialListActivity extends ListActivity
         if (position == 0) {
             Intent intent = new Intent(ACTION_ADD_VOICEMAIL);
             if (TelephonyManager.getDefault().getPhoneCount() > 1) {
-                long sub = SubscriptionManager.getDefaultVoiceSubId();
-                intent.setClassName("com.android.phone",
-                        "com.android.phone.MSimCallFeaturesSubSetting");
-                intent.putExtra(SUBSCRIPTION_KEY, sub);
+                if (isMultiAccountAvailable()) {
+                    showSelectAccountDialog(this);
+                    return;
+                } else {
+                    long sub = SubscriptionManager.getDefaultVoiceSubId();
+                    intent.setClassName("com.android.phone",
+                            "com.android.phone.MSimCallFeaturesSubSetting");
+                    intent.putExtra(SUBSCRIPTION_KEY, sub);
+                }
             } else {
                 intent.setClassName("com.android.phone",
                         "com.android.phone.CallFeaturesSetting");
@@ -227,6 +236,50 @@ public class SpeedDialListActivity extends ListActivity
         } else {
             Log.w(TAG, "the invalid item");
         }
+    }
+
+    private boolean isMultiAccountAvailable() {
+        TelecomManager telecomManager = getTelecomManager(this);
+        return (telecomManager.getUserSelectedOutgoingPhoneAccount() == null)
+                && (telecomManager.getAllPhoneAccountsCount() > 1);
+    }
+
+    private void showSelectAccountDialog(Context context) {
+        TelecomManager telecomManager = getTelecomManager(context);
+        List<PhoneAccountHandle> accountsList = telecomManager
+                .getCallCapablePhoneAccounts();
+        final PhoneAccountHandle[] accounts = accountsList
+                .toArray(new PhoneAccountHandle[accountsList.size()]);
+        CharSequence[] accountEntries = new CharSequence[accounts.length];
+        for (int i = 0; i < accounts.length; i++) {
+            CharSequence label = telecomManager.getPhoneAccount(accounts[i])
+                    .getLabel();
+            accountEntries[i] = (label == null) ? null : label.toString();
+        }
+        AlertDialog dialog = new AlertDialog.Builder(context)
+                .setTitle(R.string.select_account_dialog_title)
+                .setItems(accountEntries, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(ACTION_ADD_VOICEMAIL);
+                        long sub = Long.parseLong(accounts[which].getId());
+                        intent.setClassName("com.android.phone",
+                                "com.android.phone.MSimCallFeaturesSubSetting");
+                        intent.putExtra(SUBSCRIPTION_KEY, sub);
+                        try {
+                            startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+                            Log.w(TAG, "can not find activity deal with voice mail");
+                        }
+                    }
+                })
+                .create();
+        dialog.show();
+    }
+
+    private TelecomManager getTelecomManager(Context context) {
+        return TelecomManager.from(context);
     }
 
     /*
