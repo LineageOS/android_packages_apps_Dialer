@@ -70,6 +70,7 @@ import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.android.services.callrecorder.CallRecordingDataStore;
 import com.android.internal.telephony.MSimConstants;
+import com.android.internal.telephony.util.BlacklistUtils;
 
 import java.util.List;
 
@@ -141,6 +142,9 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
 
     private CallRecordingDataStore mCallRecordingDataStore = new CallRecordingDataStore();
     private CallRecordingPlayer mCallRecordingPlayer = new CallRecordingPlayer();
+
+    private MenuItem mBlackListItem;
+    private boolean mBlackListed;
 
     /** Listener to changes in the proximity sensor state. */
     private class ProximitySensorListener implements ProximitySensorManager.Listener {
@@ -589,10 +593,25 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         menu.findItem(R.id.menu_calllog_detail_video_call).setVisible(mCallDetailHeader.hasVideoCallOption());
         menu.findItem(R.id.menu_remove_from_call_log).setVisible(mHasRemoveFromCallLogOption);
         menu.findItem(R.id.menu_edit_number_before_call).setVisible(mHasEditNumberBeforeCallOption);
-        menu.findItem(R.id.menu_add_to_blacklist).setVisible(mHasAddToBlacklistOption);
+        mBlackListItem = menu.findItem(R.id.menu_add_to_blacklist);
+        updateBlacklistItem();
         menu.findItem(R.id.menu_trash).setVisible(mHasTrashOption);
         return super.onPrepareOptionsMenu(menu);
     }
+
+    private void updateBlacklistItem() {
+        int isBlacklisted = BlacklistUtils.isListed(this, mNumber, BlacklistUtils.BLOCK_CALLS);
+        mBlackListed = isBlacklisted != BlacklistUtils.MATCH_NONE;
+        System.out.println("Blacklisted " + mBlackListed);
+        mBlackListItem.setVisible(mHasAddToBlacklistOption);
+
+        int blacklistTitleId = R.string.menu_add_to_blacklist;
+        if (mBlackListed) {
+            blacklistTitleId = R.string.menu_delete_from_blacklist;
+        }
+        mBlackListItem.setTitle(blacklistTitleId);
+    }
+
     public void onMenuVTCall(MenuItem menuItem) {
         startActivity(CallDetailHeader.getVTCallIntent(mNumber));
     }
@@ -625,8 +644,12 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         startActivity(new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(mNumber)));
     }
 
-    public void onMenuAddToBlacklist(MenuItem menuItem) {
-        mContactInfoHelper.addNumberToBlacklist(mNumber);
+    public void onMenuBlacklist(MenuItem menuItem) {
+        if (mBlackListed) {
+            mContactInfoHelper.removeNumberFromBlacklist(mNumber);
+        } else {
+            mContactInfoHelper.addNumberToBlacklist(mNumber);
+        }
     }
 
     public void onMenuTrashVoicemail(MenuItem menuItem) {

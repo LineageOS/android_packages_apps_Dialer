@@ -32,6 +32,7 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents.Insert;
+import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.view.ContextMenu;
@@ -50,6 +51,7 @@ import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.MoreContactUtils;
+import com.android.dialer.DialerApplication;
 import com.android.dialer.R;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
@@ -287,22 +289,27 @@ public class CallLogFragment extends ListFragment
         final MenuItem editBeforeCallMenuItem = menu.findItem(R.id.menu_edit_before_call);
         final MenuItem sendTextMessageMenuItem = menu.findItem(R.id.menu_send_text_message);
         final MenuItem addToContactMenuItem = menu.findItem(R.id.menu_add_to_contacts);
-
+        final boolean isIPPrefixEnabled =
+                DialerApplication.isIPCallEnabled();
         AdapterView.AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         mNumber = getValidCallLogNumber(info.position);
 
         menu.setHeaderTitle(mNumber);
 
-        if (MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB1)) {
+        if (isIPPrefixEnabled && MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB1)) {
             String sub1Name = MoreContactUtils.getSimSpnName(MSimConstants.SUB1);
+            sub1Name = Settings.Global.getSimNameForSubscription(getActivity(),
+                    MSimConstants.SUB1, sub1Name);
             ipCallBySlot1MenuItem.setTitle(getActivity().getString(
                     com.android.contacts.common.R.string.ip_call_by_slot, sub1Name));
             ipCallBySlot1MenuItem.setVisible(true);
         } else {
             ipCallBySlot1MenuItem.setVisible(false);
         }
-        if (MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB2)) {
+        if (isIPPrefixEnabled && MoreContactUtils.isMultiSimEnable(mContext, MSimConstants.SUB2)) {
             String sub2Name = MoreContactUtils.getSimSpnName(MSimConstants.SUB2);
+            sub2Name = Settings.Global.getSimNameForSubscription(getActivity(),
+                    MSimConstants.SUB2, sub2Name);
             ipCallBySlot2MenuItem.setTitle(getActivity().getString(
                     com.android.contacts.common.R.string.ip_call_by_slot, sub2Name));
             ipCallBySlot2MenuItem.setVisible(true);

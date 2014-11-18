@@ -42,6 +42,7 @@ import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.widget.PieChartView;
+import com.android.internal.telephony.util.BlacklistUtils;
 
 /**
  * Activity to display detailed information about a callstat item
@@ -75,6 +76,8 @@ public class CallStatsDetailActivity extends Activity {
 
     private CallStatsDetails mData;
     private String mNumber = null;
+    private MenuItem mBlackListItem;
+    private boolean mBlackListed;
 
     private class UpdateContactTask extends AsyncTask<String, Void, ContactInfo> {
         protected ContactInfo doInBackground(String... strings) {
@@ -259,9 +262,22 @@ public class CallStatsDetailActivity extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.menu_edit_number_before_call).setVisible(
                 mCallDetailHeader.canEditNumberBeforeCall());
-        menu.findItem(R.id.menu_add_to_blacklist).setVisible(
-                mCallDetailHeader.canPlaceCallsTo());
+        mBlackListItem = menu.findItem(R.id.menu_add_to_blacklist);
+        updateBlacklistItem();
+
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    private void updateBlacklistItem() {
+        int isBlacklisted = BlacklistUtils.isListed(this, mNumber, BlacklistUtils.BLOCK_CALLS);
+        mBlackListed = isBlacklisted != BlacklistUtils.MATCH_NONE;
+        System.out.println("Blacklisted " + mBlackListed);
+        mBlackListItem.setVisible(mCallDetailHeader.canPlaceCallsTo());
+        int blacklistTitleId = R.string.menu_add_to_blacklist;
+        if (mBlackListed) {
+            blacklistTitleId = R.string.menu_delete_from_blacklist;
+        }
+        mBlackListItem.setTitle(blacklistTitleId);
     }
 
     @Override
@@ -281,8 +297,12 @@ public class CallStatsDetailActivity extends Activity {
         startActivity(new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(mNumber)));
     }
 
-    public void onMenuAddToBlacklist(MenuItem menuItem) {
-        mContactInfoHelper.addNumberToBlacklist(mNumber);
+    public void onMenuBlacklist(MenuItem menuItem) {
+        if (mBlackListed) {
+            mContactInfoHelper.removeNumberFromBlacklist(mNumber);
+        } else {
+            mContactInfoHelper.addNumberToBlacklist(mNumber);
+        }
     }
 
     private void onHomeSelected() {

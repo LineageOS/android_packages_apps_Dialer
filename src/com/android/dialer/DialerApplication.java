@@ -3,6 +3,7 @@
 package com.android.dialer;
 
 import android.app.Application;
+import android.os.SystemProperties;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.extensions.ExtensionsFactory;
@@ -28,5 +29,9 @@ public class DialerApplication extends Application {
         }
 
         return super.getSystemService(name);
+    }
+
+    public static boolean isIPCallEnabled() {
+        return SystemProperties.getBoolean("persist.radio.ipcall.enabled", false);
     }
 }
