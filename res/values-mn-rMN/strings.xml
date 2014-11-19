@@ -152,6 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"Хасах"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"БҮХ ХАРИЛЦАГЧИД"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"БУЦААЖ ЗАЛГАХ"</string>
+    <string name="call_log_action_redial" msgid="2020173715410473215">"ЗАЛГАХ"</string>
+    <string name="call_log_action_redial" msgid="8159106862639797417">"ДАХИН ЗАЛГАХ"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"ВИДЕО ДУУДЛАГА"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"СОНСОХ"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"ДЭЛГЭРЭНГҮЙ"</string>

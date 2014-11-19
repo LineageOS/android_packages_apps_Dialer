@@ -152,6 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"Уклони"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"СВИ КОНТАКТИ"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"УПУТИ ПОВРАТНИ ПОЗИВ"</string>
+    <string name="call_log_action_redial" msgid="2020173715410473215">"ПОЗОВИ"</string>
+    <string name="call_log_action_redial" msgid="8159106862639797417">"ПОЗОВИ ПОНОВО"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"ВИДЕО ПОЗИВ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ПУСТИ"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"ДЕТАЉИ"</string>

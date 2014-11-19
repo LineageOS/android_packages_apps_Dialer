@@ -152,6 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"Eliminați"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TOATĂ AGENDA"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"SUNAȚI"</string>
+    <string name="call_log_action_redial" msgid="2020173715410473215">"APELAȚI"</string>
+    <string name="call_log_action_redial" msgid="8159106862639797417">"REAPELAȚI"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"APEL VIDEO"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ASCULTAȚI"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"DETALII"</string>
