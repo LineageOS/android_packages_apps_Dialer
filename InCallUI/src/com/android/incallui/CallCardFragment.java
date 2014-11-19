@@ -616,7 +616,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             view.setImageDrawable(photo);
             AnimUtils.fadeIn(mElapsedTime, AnimUtils.DEFAULT_DURATION);
         } else {
-            InCallAnimationUtils.startCrossFade(view, current, photo);
+            // Cross fading is buggy and not noticable due to the multiple calls to this method
+            // that switch drawables in the middle of the cross-fade animations. Just set the
+            // photo directly instead.
+            view.setImageDrawable(photo);
             view.setVisibility(View.VISIBLE);
         }
     }
