@@ -78,6 +78,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mCallNumberAndLabel;
     private ImageView mPhoto;
     private TextView mElapsedTime;
+    private Drawable mPrimaryPhotoDrawable;
 
     // Container view that houses the entire primary call card, including the call buttons
     private View mPrimaryCallCardContainer;
@@ -110,6 +111,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private Animation mPulseAnimation;
 
     private int mVideoAnimationDuration;
+
+    private Drawable mDefaultContactPhoto;
 
     private MaterialPalette mCurrentThemeColors;
 
@@ -599,9 +602,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private void setDrawableToImageView(ImageView view, Drawable photo) {
         if (photo == null) {
-            photo = view.getResources().getDrawable(R.drawable.img_no_image);
-            photo.setAutoMirrored(true);
+            photo = ContactInfoCache.getInstance(
+                    view.getContext()).getDefaultContactPhotoDrawable();
         }
+
+        if (mPrimaryPhotoDrawable == photo) {
+            return;
+        }
+        mPrimaryPhotoDrawable = photo;
 
         final Drawable current = view.getDrawable();
         if (current == null) {
@@ -622,8 +630,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private Drawable getConferencePhoto(boolean canManageConference) {
         Log.v(this, "canManageConferencePhoto: " + canManageConference);
-        final int resId = canManageConference ? R.drawable.img_conference : R.drawable.img_phone;
-        return getView().getResources().getDrawable(resId);
+        final ContactInfoCache cache = ContactInfoCache.getInstance(getView().getContext());
+        return canManageConference ? cache.getConferenceDrawable()
+                : cache.getDefaultContactPhotoDrawable();
     }
 
     /**
