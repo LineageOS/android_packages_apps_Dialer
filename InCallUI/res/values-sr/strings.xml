@@ -104,7 +104,7 @@
     <!-- no translation found for incall_error_supp_service_hangup (7434513517153834426) -->
     <skip />
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP позив"</string>
-    <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Хитни позив"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Хитан позив"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Укључивање радија…"</string>
     <!-- no translation found for emergency_enable_radio_dialog_retry (5960061579996526883) -->
     <skip />
