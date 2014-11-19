@@ -20,6 +20,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.SystemProperties;
@@ -60,6 +61,9 @@ public class CallRecorderService extends Service {
         public CallRecording stopRecording() {
             if (getState() == RecorderState.RECORDING) {
                 stopRecordingInternal();
+                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                intent.setData(Uri.fromFile(mCurrentRecording.getFile()));
+                sendBroadcast(intent);
                 return mCurrentRecording;
             }
             return null;
