@@ -87,7 +87,7 @@
     <string name="menu_newContact" msgid="1209922412763274638">"Contacte nou"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Tots els contactes"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Detalls de la trucada"</string>
-    <string name="toast_call_detail_error" msgid="6947041258280380832">"Informació no disponible"</string>
+    <string name="toast_call_detail_error" msgid="6947041258280380832">"No hi ha cap detall disponible."</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Utilitza el teclat per tons"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Torna a la trucada en curs"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Afegeix una trucada"</string>
@@ -152,6 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"Suprimeix"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TOTS ELS CONTACTES"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"TORNA LA TRUCADA"</string>
+    <string name="call_log_action_redial" msgid="2020173715410473215">"TRUCA"</string>
+    <string name="call_log_action_redial" msgid="8159106862639797417">"TORNA A MARCAR"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"VIDEOTRUCADA"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ESCOLTA"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"DETALLS"</string>

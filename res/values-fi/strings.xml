@@ -152,6 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"Poista"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"KAIKKI YHTEYSTIEDOT"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"SOITA TAKAISIN"</string>
+    <string name="call_log_action_redial" msgid="2020173715410473215">"SOITA"</string>
+    <string name="call_log_action_redial" msgid="8159106862639797417">"SOITA UUDELLEEN"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"VIDEOPUHELU"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"KUUNTELE"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"TIEDOT"</string>
