@@ -237,6 +237,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private int mActionBarHeight;
 
+    /**
+     * The text returned from a voice search query.  Set in {@link #onActivityResult} and used in
+     * {@link #onResume()} to populate the search box.
+     */
+    private String mVoiceSearchQuery;
+
     private class OptionsPopupMenu extends PopupMenu {
         public OptionsPopupMenu(Context context, View anchor) {
             super(context, anchor, Gravity.END);
@@ -488,6 +494,16 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             showDialpadFragment(false);
             mShowDialpadOnResume = false;
         }
+
+        // If there was a voice query result returned in the {@link #onActivityResult} callback, it
+        // will have been stashed in mVoiceSearchQuery since the search results fragment cannot be
+        // shown until onResume has completed.  Active the search UI and set the search term now.
+        if (!TextUtils.isEmpty(mVoiceSearchQuery)) {
+            mActionBarController.onSearchBoxTapped();
+            mSearchView.setText(mVoiceSearchQuery);
+            mVoiceSearchQuery = null;
+        }
+
         mFirstLaunch = false;
         prepareVoiceSearchButton();
         mDialerDatabaseHelper.startSmartDialUpdateThread();
@@ -637,7 +653,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                         RecognizerIntent.EXTRA_RESULTS);
                 if (matches.size() > 0) {
                     final String match = matches.get(0);
-                    mSearchView.setText(match);
+                    mVoiceSearchQuery = match;
                 } else {
                     Log.e(TAG, "Voice search - nothing heard");
                 }
