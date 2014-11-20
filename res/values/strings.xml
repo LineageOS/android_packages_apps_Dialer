@@ -549,7 +549,7 @@
          is used to describe the action of calling a phone number. Tapping causes a call to be
          placed to the number represented by the call log entry.
          [CHAR LIMIT=30] -->
-    <string name="call_log_action_redial">CALL</string>
+    <string name="call_log_action_call">CALL</string>
 
     <!-- BUTTON text for the "redial" button displayed underneath an entry in the call log. This
          is used to describe the action of calling a phone number that the user previously made an

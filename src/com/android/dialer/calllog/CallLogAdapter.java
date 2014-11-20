@@ -982,7 +982,8 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     /***
-     * Binds click handlers and intents to the voicemail, details and callback action buttons.
+     * Binds text titles, click handlers and intents to the voicemail, details and callback action
+     * buttons.
      *
      * @param views  The call log item views.
      */
@@ -1005,6 +1006,14 @@ public class CallLogAdapter extends GroupingListAdapter
             }
             views.callBackButtonView.setVisibility(View.VISIBLE);
             views.callBackButtonView.setOnClickListener(mActionListener);
+
+            final int titleId;
+            if (views.callType == Calls.VOICEMAIL_TYPE || views.callType == Calls.OUTGOING_TYPE) {
+                titleId = R.string.call_log_action_redial;
+            } else {
+                titleId = R.string.call_log_action_call_back;
+            }
+            views.callBackButtonView.setText(mContext.getString(titleId));
         } else {
             // Number is not callable, so hide button.
             views.callBackButtonView.setTag(null);
