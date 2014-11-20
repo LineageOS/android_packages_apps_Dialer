@@ -21,8 +21,6 @@
 
     <!-- Description for incoming calls that were blacklisted -->
     <string name="type_blacklist">Blacklisted call</string>
-    <!-- Description for incoming calls that were blacklisted -->
-    <string name="type_blacklist">Blacklisted call</string>
     <string name="call_log_stats_title">Statistics</string>
     <string name="callStatsDetailTitle">Call stat details</string>
 
@@ -71,4 +69,8 @@
     <string name="dialog_speed_dial_airplane_mode_message">To use speed dial, first turn off Airplane mode.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
+    <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
+    <string name="call_log_empty_geocode" translatable="false"></string>
 </resources>
