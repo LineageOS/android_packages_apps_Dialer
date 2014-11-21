@@ -710,7 +710,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.show(mDialpadFragment);
-        ft.commit();
+        ft.commitAllowingStateLoss();
 
         if (animate) {
             mFloatingActionButtonController.scaleOut();
