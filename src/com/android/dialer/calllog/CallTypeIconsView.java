@@ -210,8 +210,10 @@ public class CallTypeIconsView extends View {
             // above will be recolored here.
             missed = r.getDrawable(R.drawable.ic_call_arrow).mutate();
             missed.setColorFilter(r.getColor(R.color.missed_call), PorterDuff.Mode.MULTIPLY);
+
             blacklist = r.getDrawable(R.drawable.ic_call_arrow).mutate();
-            blacklist.setColorFilter(0x000, PorterDuff.Mode.MULTIPLY);
+            blacklist.setColorFilter(r.getColor(R.color.blacklisted_call), PorterDuff.Mode.MULTIPLY);
+
             voicemail = r.getDrawable(R.drawable.ic_call_voicemail_holo_dark);
 
             // Get the video call icon, scaled to match the height of the call arrows.
