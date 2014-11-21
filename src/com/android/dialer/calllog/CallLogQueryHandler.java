@@ -178,6 +178,12 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             where.append(String.format("(%s = ?)", Calls.TYPE));
             // Add a clause to fetch only items newer than the requested date
             selectionArgs.add(Integer.toString(callType));
+            if (callType == Calls.MISSED_TYPE) {
+                // also query for blacklisted calls as they are 'missed'
+                where.append(" OR ");
+                where.append(String.format("(%s = ?)", Calls.TYPE));
+                selectionArgs.add(Integer.toString(Calls.BLACKLIST_TYPE));
+            }
         }
 
         if (newerThan > 0) {
@@ -219,6 +225,12 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             where.append(String.format("(%s = ?)", Calls.TYPE));
             // Add a clause to fetch only items newer than the requested date
             selectionArgs.add(Integer.toString(callType));
+            if (callType == Calls.MISSED_TYPE) {
+                // also query for blacklisted calls as they are 'missed'
+                where.append(" OR ");
+                where.append(String.format("(%s = ?)", Calls.TYPE));
+                selectionArgs.add(Integer.toString(Calls.BLACKLIST_TYPE));
+            }
         }
 
         if (slotId > CALL_SUB_ALL) {
