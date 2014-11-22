@@ -31,6 +31,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.telecom.PhoneAccount;
+import android.telecom.PhoneCapabilities;
 import android.text.TextUtils;
 
 import com.android.contacts.common.util.BitmapUtil;
@@ -260,15 +261,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         }
 
         final int state = call.getState();
-        final boolean isConference = call.isConferenceCall();
-        final boolean isVideoUpgradeRequest = call.getSessionModificationState()
-                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
 
         // Check if data has changed; if nothing is different, don't issue another notification.
         final int iconResId = getIconToDisplay(call);
-        final Bitmap largeIcon = getLargeIconToDisplay(contactInfo, isConference);
+        final Bitmap largeIcon = getLargeIconToDisplay(contactInfo, call);
         final int contentResId = getContentString(call);
-        final String contentTitle = getContentTitle(contactInfo, isConference);
+        final String contentTitle = getContentTitle(contactInfo, call);
 
         if (!checkForChangeAndSaveData(iconResId, contentResId, largeIcon, contentTitle, state)) {
             return;
@@ -296,6 +294,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         builder.setLargeIcon(largeIcon);
         builder.setColor(mContext.getResources().getColor(R.color.dialer_theme_color));
 
+        final boolean isVideoUpgradeRequest = call.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
         if (isVideoUpgradeRequest) {
             builder.setUsesChronometer(false);
             addDismissUpgradeRequestAction(builder);
@@ -382,8 +382,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     /**
      * Returns the main string to use in the notification.
      */
-    private String getContentTitle(ContactCacheEntry contactInfo, boolean isConference) {
-        if (isConference) {
+    private String getContentTitle(ContactCacheEntry contactInfo, Call call) {
+        if (call.isConferenceCall() && !call.can(PhoneCapabilities.GENERIC_CONFERENCE)) {
             return mContext.getResources().getString(R.string.card_title_conf_call);
         }
         if (TextUtils.isEmpty(contactInfo.name)) {
@@ -406,9 +406,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     /**
      * Gets a large icon from the contact info object to display in the notification.
      */
-    private Bitmap getLargeIconToDisplay(ContactCacheEntry contactInfo, boolean isConference) {
+    private Bitmap getLargeIconToDisplay(ContactCacheEntry contactInfo, Call call) {
         Bitmap largeIcon = null;
-        if (isConference) {
+        if (call.isConferenceCall() && !call.can(PhoneCapabilities.GENERIC_CONFERENCE)) {
             largeIcon = BitmapFactory.decodeResource(mContext.getResources(),
                     R.drawable.img_conference);
         }
