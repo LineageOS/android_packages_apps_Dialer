@@ -41,6 +41,9 @@ public class ContactInfo {
     public boolean isBadData;
     public String objectId;
 
+    public String accountType;
+    public String accountName;
+
     public static ContactInfo EMPTY = new ContactInfo();
 
     public static String GEOCODE_AS_LABEL = "";
