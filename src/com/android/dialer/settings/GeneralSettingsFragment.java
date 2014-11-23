@@ -43,6 +43,8 @@ import java.lang.Thread;
 public class GeneralSettingsFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener {
     private static final String CATEGORY_SOUNDS_KEY    = "dialer_general_sounds_category_key";
+    private static final String CATEGORY_INCALL_VIBRATION_KEY =
+            "dialer_general_incall_vibration_category_key";
     private static final String BUTTON_RINGTONE_KEY    = "button_ringtone_key";
     private static final String BUTTON_VIBRATE_ON_RING = "button_vibrate_on_ring";
     private static final String BUTTON_PLAY_DTMF_TONE  = "button_play_dtmf_tone";
@@ -86,14 +88,19 @@ public class GeneralSettingsFragment extends PreferenceFragment
         mSpeedDialSettings = findPreference(BUTTON_SPEED_DIAL_KEY);
 
         PreferenceCategory soundCategory = (PreferenceCategory) findPreference(CATEGORY_SOUNDS_KEY);
+        Vibrator vibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+        boolean hasVibrator = vibrator != null && vibrator.hasVibrator();
+
         if (mVibrateWhenRinging != null) {
-            Vibrator vibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-            if (vibrator != null && vibrator.hasVibrator()) {
+            if (hasVibrator) {
                 mVibrateWhenRinging.setOnPreferenceChangeListener(this);
             } else {
                 soundCategory.removePreference(mVibrateWhenRinging);
                 mVibrateWhenRinging = null;
             }
+        }
+        if (!hasVibrator) {
+            getPreferenceScreen().removePreference(findPreference(CATEGORY_INCALL_VIBRATION_KEY));
         }
 
         if (mPlayDtmfTone != null) {

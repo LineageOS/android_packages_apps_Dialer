@@ -62,6 +62,25 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="dialer_general_incall_vibration_category_key"
+        android:title="@string/incall_vibration_category_title">
+
+        <CheckBoxPreference
+            android:key="incall_vibrate_outgoing"
+            android:title="@string/incall_vibrate_outgoing_title" />
+
+        <CheckBoxPreference
+            android:key="incall_vibrate_hangup"
+            android:title="@string/incall_vibrate_hangup_title" />
+
+        <CheckBoxPreference
+            android:key="incall_vibrate_45"
+            android:title="@string/incall_vibrate_45_title"
+            android:summary="@string/incall_vibrate_45_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="dialer_general_other_settings_category_key"
         android:title="@string/other_settings_title"
         android:persistent="false" >
