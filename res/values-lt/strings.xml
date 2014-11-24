@@ -152,7 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"Pašalinti"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"VISI KONTAKTAI"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ATSKAMBINTI"</string>
-    <string name="call_log_action_redial" msgid="2020173715410473215">"SKAMBINTI"</string>
+    <!-- no translation found for call_log_action_call (8187991828921352552) -->
+    <skip />
     <string name="call_log_action_redial" msgid="8159106862639797417">"PERRINKTI"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"VAIZDO SKAMBUTIS"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"KLAUSYTI"</string>

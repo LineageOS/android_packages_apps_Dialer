@@ -152,7 +152,7 @@
     <string name="remove_contact" msgid="1080555335283662961">"Remove"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ALL CONTACTS"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"CALL BACK"</string>
-    <string name="call_log_action_redial" msgid="2020173715410473215">"CALL"</string>
+    <string name="call_log_action_call" msgid="8187991828921352552">"CALL"</string>
     <string name="call_log_action_redial" msgid="8159106862639797417">"REDIAL"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"VIDEO CALL"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"LISTEN"</string>
@@ -186,6 +186,5 @@
     <string name="other_settings_title" msgid="7976283601445863248">"Other"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Quick responses"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Calls"</string>
-    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
-    <skip />
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Calling accounts"</string>
 </resources>
