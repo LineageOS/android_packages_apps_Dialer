@@ -627,7 +627,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     private PendingIntent createLaunchPendingIntent() {
 
         final Intent intent = InCallPresenter.getInstance().getInCallIntent(
-                false /* showDialpad */, false /* newOutgoingCall */);
+                false /* showDialpad */, false /* newOutgoingCall */,
+                        false /* showCircularReveal */);
 
         // PendingIntent that can be used to launch the InCallActivity.  The
         // system fires off this intent if the user pulls down the windowshade
