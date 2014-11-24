@@ -148,8 +148,10 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      * @see #updateInCallNotification(InCallState,CallList)
      */
     private void cancelInCall() {
-        Log.d(this, "cancelInCall()...");
-        mNotificationManager.cancel(IN_CALL_NOTIFICATION);
+        if (mIsShowingNotification) {
+            Log.d(this, "cancelInCall()...");
+            mNotificationManager.cancel(IN_CALL_NOTIFICATION);
+        }
         mIsShowingNotification = false;
     }
 
