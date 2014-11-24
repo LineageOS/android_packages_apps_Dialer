@@ -107,7 +107,7 @@ public class GeneralSettingsFragment extends PreferenceFragment
                             mContext,
                             mRingtoneLookupComplete,
                             RingtoneManager.TYPE_RINGTONE,
-                            mRingtonePreference,
+                            mRingtonePreference.getKey(),
                             MSG_UPDATE_RINGTONE_SUMMARY);
                 }
             }
