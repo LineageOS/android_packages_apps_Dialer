@@ -576,7 +576,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     private String getCallProviderLabel(Call call) {
         PhoneAccount account = getAccountForCall(call);
-        if (account != null && getTelecomManager().hasMultipleCallCapableAccounts()) {
+        if (account != null && !TextUtils.isEmpty(account.getLabel())
+                && getTelecomManager().hasMultipleCallCapableAccounts()) {
             return account.getLabel().toString();
         }
         return null;
