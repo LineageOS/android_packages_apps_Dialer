@@ -21,33 +21,15 @@
     <string name="onHold" msgid="9035493194749959955">"होल्ड वर"</string>
     <string name="unknown" msgid="6878797917991465859">"अज्ञात"</string>
     <string name="private_num" msgid="6713286113000232309">"खाजगी नंबर"</string>
-    <string name="payphone" msgid="1931775086311769314">"देय फोन"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"लाइन व्यस्त"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"नेटवर्क व्यस्त"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"कोणताही प्रतिसाद नाही, कालबाह्य झाले"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"सर्व्हर पोहचण्‍यायोग्‍य नाही"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"नंबर पोहचण्‍यायोग्‍य नाही"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"चुकीचे वापरकर्तानाव किंवा संकेतशब्द"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"नेटवर्क-बाहेरून कॉल केला"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"सर्व्हर त्रुटी. कृपया नंतर पुन्हा प्रयत्न करा."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"सिग्नल नाही"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM मर्यादा ओलांडली"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"रेडिओ बंद"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"SIM नाही किंवा SIM त्रुटी"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"मोबाइल नेटवर्क उपलब्ध नाही"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"केले जाणारे कॉल FDN द्वारे प्रतिबंधित केले जातात."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"कॉल वगळणे चालू असताना आपण कॉल करू शकत नाही."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"सर्व कॉल प्रवेश नियंत्रणाद्वारे प्रतिबंधित केले जातात."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"आणीबाणीचे कॉल प्रवेश नियंत्रणाद्वारे प्रतिबंधित केले जातात."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"सामान्‍य कॉल प्रवेश नियंत्रणाद्वारे प्रतिबंधित केले जातात."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"अवैध नंबर"</string>
+    <!-- no translation found for payphone (4793877574636445118) -->
+    <skip />
     <string name="confCall" msgid="1904840547188336828">"परिषद कॉल"</string>
-    <string name="call_lost" msgid="317670617901479594">"कॉल गमावला गेला आहे."</string>
-    <string name="ok" msgid="3811371167865772377">"ठीक"</string>
+    <!-- no translation found for call_lost (6183862117003999578) -->
+    <skip />
     <string name="audio_mode_speaker" msgid="27649582100085266">"स्पीकर"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"हँडसेट इअरपीस"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"वायर्ड हेडसेट"</string>
-    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
+    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"ब"</string>
     <string name="wait_prompt_str" msgid="7601815427707856238">"खालील टोन पाठवायचे?\n"</string>
     <string name="pause_prompt_str" msgid="1789964702154314806">"टोन पाठवित आहे\n"</string>
     <string name="send_button" msgid="4106860097497818751">"पाठवा"</string>
@@ -57,7 +39,8 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"परिषद कॉल <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"व्हॉइसमेल नंबर"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"डायल करीत आहे"</string>
-    <string name="card_title_redialing" msgid="4831412164303596395">"पुन्हा प्रयत्न करत आहे"</string>
+    <!-- no translation found for card_title_redialing (8253487008234167266) -->
+    <skip />
     <string name="card_title_conf_call" msgid="1162980346189744501">"परिषद कॉल"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"येणारे कॉल"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"कॉल संपला"</string>
@@ -68,9 +51,12 @@
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"व्हिडिओ कनेक्ट करत आहे"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"व्हिडिओ कॉल"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"व्हिडिओ विनंती करत आहे"</string>
-    <string name="card_title_video_call_error" msgid="5520555528871673801">"व्हिडिओ कॉल कनेक्ट करू शकत नाही"</string>
-    <string name="card_title_callback_number" msgid="4604563437776874016">"आपला परत कॉल करण्‍याचा नंबर\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="card_title_callback_number_emergency" msgid="85588345502265075">"आपला आणीबाणीचा परत कॉल करण्‍याचा नंबर\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <!-- no translation found for card_title_video_call_error (9000555878389539225) -->
+    <skip />
+    <!-- no translation found for card_title_callback_number (7307938207564217293) -->
+    <skip />
+    <!-- no translation found for card_title_callback_number_emergency (8634765419223426754) -->
+    <skip />
     <string name="notification_dialing" msgid="2107666444937350731">"डायल करीत आहे"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"सुटलेला कॉल"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"सुटलेले कॉल"</string>
@@ -87,6 +73,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"व्हॉइसमेल नंबर अज्ञात"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"सेवा नाही"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"निवडलेले नेटवर्क (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) अनुपलब्‍ध"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"उत्तर"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"हँग अप"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"व्हिडिओ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"व्हॉइस"</string>
@@ -96,24 +83,35 @@
     <string name="notification_missedCall_message" msgid="3049928912736917988">"संदेश"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"कॉल करण्यासाठी, प्रथम विमान मोड बंद करा."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"नेटवर्कवर नोंदणीकृत नाही."</string>
-    <string name="incall_error_out_of_service" msgid="8587993036435080418">"मोबाइल नेटवर्क उपलब्ध नाही."</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"कॉल पाठविला नाही, वैध नंबर प्रविेष्‍ट केला नाही."</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"कॉल पाठविला नाही."</string>
+    <string name="incall_error_out_of_service" msgid="4100065333878929223">"सेल्युलर नेटवर्क उपलब्ध नाही."</string>
+    <!-- no translation found for incall_error_no_phone_number_supplied (1150414018684246528) -->
+    <skip />
+    <!-- no translation found for incall_error_call_failed (6302746943230078197) -->
+    <skip />
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI क्रम प्रारंभ करीत आहे..."</string>
-    <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"असमर्थित सेवा."</string>
-    <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"कॉल स्विच करण्यात अक्षम."</string>
-    <string name="incall_error_supp_service_separate" msgid="914362338192301746">"कॉल वेगळे करण्‍यात अक्षम."</string>
-    <string name="incall_error_supp_service_transfer" msgid="2509871374644921632">"कॉल स्‍थानांतरित करण्यात अक्षम."</string>
-    <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"परिषद कॉल करण्‍यात अक्षम."</string>
-    <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"कॉलला नकार देण्‍यात अक्षम."</string>
-    <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"कॉल रीलिज करण्‍यात अक्षम."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"व्हॉइसमेल क्रमांक अज्ञात."</string>
+    <!-- no translation found for incall_error_supp_service_unknown (323435289607131929) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_switch (5237002176899962862) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_separate (7224393405134545246) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_transfer (7235952238189391438) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_conference (7010354362202271726) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_reject (8998568661508655638) -->
+    <skip />
+    <!-- no translation found for incall_error_supp_service_hangup (7434513517153834426) -->
+    <skip />
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP कॉल"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"आणीबाणीचा कॉल"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"रेडिओ चालू करीत आहे..."</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"सेवा क्षेत्राच्या बाहेर, पुन्हा प्रयत्न करत आहे..."</string>
-    <string name="dial_emergency_error" msgid="7969515493359619960">"कॉल पाठविला नाही. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> हा आणीबाणीचा नंबर नाही!"</string>
-    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"कॉल पाठविला नाही. आणीबाणीचा नंबर डायल करा!"</string>
+    <!-- no translation found for emergency_enable_radio_dialog_retry (5960061579996526883) -->
+    <skip />
+    <!-- no translation found for dial_emergency_error (1509085166367420355) -->
+    <skip />
+    <!-- no translation found for dial_emergency_empty_error (9130194953830414638) -->
+    <skip />
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"डायल करण्‍यासाठी कीबोर्डचा वापर करा"</string>
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"कॉल होल्‍ड करा"</string>
     <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"कॉल सुरु करा"</string>
@@ -147,28 +145,15 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"आपण स्वतः लिहा…"</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"रद्द करा"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"पाठवा"</string>
-    <string name="description_image_button_one" msgid="5502718871331943463">"एक"</string>
-    <string name="description_image_button_two" msgid="4903738528222924522">"दोन"</string>
-    <string name="description_image_button_three" msgid="5570985408463782329">"तीन"</string>
-    <string name="description_image_button_four" msgid="1697520001239289074">"चार"</string>
-    <string name="description_image_button_five" msgid="3450276493026943454">"पाच"</string>
-    <string name="description_image_button_six" msgid="2070376172268675300">"सहा"</string>
-    <string name="description_image_button_seven" msgid="1757351311199993371">"सात"</string>
-    <string name="description_image_button_eight" msgid="4734693919020613227">"आठ"</string>
-    <string name="description_image_button_nine" msgid="5568534122590597040">"नऊ"</string>
-    <string name="description_image_button_star" msgid="1976280813017254462">"तारा"</string>
-    <string name="description_image_button_zero" msgid="4211255756866893605">"शून्य"</string>
-    <string name="description_image_button_pound" msgid="1716041284529917866">"पाऊंड"</string>
-    <string name="description_dial_button" msgid="7459705245418435351">"डायल करा"</string>
-    <string name="description_delete_button" msgid="4015842181592283903">"backspace"</string>
     <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"स्पीकरफोन निवडला"</string>
     <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"इअरपिस निवडला"</string>
     <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"तार असलेला हेडसेट निवडला"</string>
-    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"Bluetooth हेडसेट निवडला"</string>
+    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"ब हेडसेट निवडला"</string>
     <string name="accessibility_call_muted" msgid="2776111226185342220">"कॉल नि.शब्‍द केला."</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"कॉल सशब्द केला."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"कॉल होल्डवर ठेवला."</string>
-    <string name="accessibility_call_removed_from_hold" msgid="2269352120695851563">"कॉल होल्डवरुन काढला."</string>
+    <!-- no translation found for accessibility_call_removed_from_hold (5107480079544990575) -->
+    <skip />
     <string name="description_target_answer" msgid="7205604197797472471">"उत्तर"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS पाठवा"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"नकार द्या"</string>
@@ -186,9 +171,9 @@
     <string name="default_notification_description" msgid="78174796906240970">"डीफॉल्ट आवाज (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"फोन रिंगटोन"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"रिंग करताना कंपन करा"</string>
-    <string name="dial_pad_autocomplete" msgid="494525952035761075">"डायल पॅड स्‍वयंपूर्ण"</string>
+    <!-- no translation found for dial_pad_autocomplete (7683489952557536398) -->
+    <skip />
     <string name="preference_category_ringtone" msgid="5197960752529332721">"रिंगटोन आणि कंपन"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"परिषद कॉल व्यवस्थापित करा"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"आणीबाणीचा नंबर"</string>
-    <string name="select_account_dialog_title" msgid="5730339500156684204">"खाते निवडा"</string>
 </resources>
