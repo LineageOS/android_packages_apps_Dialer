@@ -94,7 +94,7 @@
     <string name="type_incoming" msgid="6502076603836088532">"ការ​ហៅ​ចូល"</string>
     <string name="type_outgoing" msgid="343108709599392641">"ការ​ហៅ​ចេញ"</string>
     <string name="type_missed" msgid="2720502601640509542">"ខកខាន​ទទួល"</string>
-    <string name="type_incoming_video" msgid="82323391702796181">"ការ​ហៅចូលជា​វីដេអូ"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"ការ​ហៅចូលជា​វីដេអូ​"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"ការ​ហៅ​ជា​វីដេអូ​ចេញ"</string>
     <string name="type_missed_video" msgid="954396897034220545">"ខកខាន​ទទួល​ការ​ហៅ​ជា​វីដេអូ"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"សារ​ជា​សំឡេង"</string>
@@ -152,7 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"លុបចេញ"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ទំនាក់ទំនង​ទាំងអស់"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ហៅ​ទៅវិញ"</string>
-    <string name="call_log_action_redial" msgid="2020173715410473215">"ហៅ"</string>
+    <!-- no translation found for call_log_action_call (8187991828921352552) -->
+    <skip />
     <string name="call_log_action_redial" msgid="8159106862639797417">"ហៅឡើងវិញ"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"ការ​ហៅ​ជា​វីដេអូ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ស្ដាប់"</string>
@@ -186,6 +187,5 @@
     <string name="other_settings_title" msgid="7976283601445863248">"ផ្សេងៗ"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ឆ្លើយតប​រហ័ស"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ការហៅ"</string>
-    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
-    <skip />
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"គណនីហៅទូរស័ព្ទ"</string>
 </resources>

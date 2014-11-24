@@ -152,7 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"ඉවත් කරන්න"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"සියලු සම්බන්ධතා"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"නැවත අමතන්න"</string>
-    <string name="call_log_action_redial" msgid="2020173715410473215">"අමතන්න"</string>
+    <!-- no translation found for call_log_action_call (8187991828921352552) -->
+    <skip />
     <string name="call_log_action_redial" msgid="8159106862639797417">"නැවත ඩයල් කරන්න"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"වීඩියෝ ඇමතුම"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"අහනවා"</string>
@@ -186,6 +187,5 @@
     <string name="other_settings_title" msgid="7976283601445863248">"වෙනත්"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ක්ෂණික ප්‍රතිචාර"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ඇමතුම්"</string>
-    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
-    <skip />
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"ගිණුම් ඇමතීම"</string>
 </resources>
