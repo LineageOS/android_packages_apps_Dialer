@@ -25,12 +25,10 @@
     <skip />
     <!-- no translation found for private_num (6713286113000232309) -->
     <skip />
-    <!-- no translation found for payphone (4793877574636445118) -->
-    <skip />
+    <string name="payphone" msgid="4793877574636445118">"Таксофон"</string>
     <!-- no translation found for confCall (1904840547188336828) -->
     <skip />
-    <!-- no translation found for call_lost (6183862117003999578) -->
-    <skip />
+    <string name="call_lost" msgid="6183862117003999578">"Чалуу үзүлдү"</string>
     <!-- no translation found for audio_mode_speaker (27649582100085266) -->
     <skip />
     <!-- no translation found for audio_mode_earpiece (4156527186373869107) -->
@@ -54,8 +52,7 @@
     <skip />
     <!-- no translation found for card_title_dialing (5769417478498348054) -->
     <skip />
-    <!-- no translation found for card_title_redialing (8253487008234167266) -->
-    <skip />
+    <string name="card_title_redialing" msgid="8253487008234167266">"Кайра терүү"</string>
     <!-- no translation found for card_title_conf_call (1162980346189744501) -->
     <skip />
     <!-- no translation found for card_title_incoming_call (7364539451234646909) -->
@@ -73,12 +70,9 @@
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"Видео туташтырылууда"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"Видео чалуу"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Видео"</string>
-    <!-- no translation found for card_title_video_call_error (9000555878389539225) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number (7307938207564217293) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number_emergency (8634765419223426754) -->
-    <skip />
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"Видео чалууга туташуу мүмкүн болбой жатат"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"Төмөнкү номерге кайра чалуу\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Төмөнкү номерге шашылыш кайра чалуу\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Терилүүдө"</string>
     <!-- no translation found for notification_missedCallTitle (7554385905572364535) -->
     <skip />
@@ -120,37 +114,25 @@
     <!-- no translation found for incall_error_emergency_only (4678640422710818317) -->
     <skip />
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Уюктук тармак жеткиликтүү эмес."</string>
-    <!-- no translation found for incall_error_no_phone_number_supplied (1150414018684246528) -->
-    <skip />
-    <!-- no translation found for incall_error_call_failed (6302746943230078197) -->
-    <skip />
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Чалуу үчүн, жарактуу номер киргизиңиз."</string>
+    <string name="incall_error_call_failed" msgid="6302746943230078197">"Чалынбай жатат."</string>
     <!-- no translation found for incall_status_dialed_mmi (3672498861336189563) -->
     <skip />
-    <!-- no translation found for incall_error_supp_service_unknown (323435289607131929) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_switch (5237002176899962862) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_separate (7224393405134545246) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_transfer (7235952238189391438) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_conference (7010354362202271726) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_reject (8998568661508655638) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_hangup (7434513517153834426) -->
-    <skip />
+    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Кызмат колдоого алынбайт."</string>
+    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"Чалуулар которуштурулбай жатат."</string>
+    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"Чалуу бөлүнбөй жатат."</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Өткөрүлбөй жатат."</string>
+    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"Конференц-байланышы түзүлбөй жатат."</string>
+    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"Чалуу четке кагылбай жатат."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Чалуу(лар) бошотулбай жатат."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP чалуу"</string>
     <!-- no translation found for emergency_enable_radio_dialog_title (4627849966634578257) -->
     <skip />
     <!-- no translation found for emergency_enable_radio_dialog_message (207613549344420291) -->
     <skip />
-    <!-- no translation found for emergency_enable_radio_dialog_retry (5960061579996526883) -->
-    <skip />
-    <!-- no translation found for dial_emergency_error (1509085166367420355) -->
-    <skip />
-    <!-- no translation found for dial_emergency_empty_error (9130194953830414638) -->
-    <skip />
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Кызмат жок. Кайра аракет кылууда…"</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"Чалынбай жатат. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> өзгөчө кырдаал номери эмес."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Чалынбай жатат. Өзгөчө кырдаал номерин териңиз."</string>
     <!-- no translation found for dialerKeyboardHintText (9192914825413747792) -->
     <skip />
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Чалууну кармоо"</string>
@@ -205,8 +187,7 @@
     <string name="accessibility_call_muted" msgid="2776111226185342220">"Чалуу үнсүз тартипте."</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Чалуу үнсүз режимден чыгарылды."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Чалуу күтүүгө коюлду."</string>
-    <!-- no translation found for accessibility_call_removed_from_hold (5107480079544990575) -->
-    <skip />
+    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"Чалуу кармалбай калды."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Жооп берүү"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS жөнөтүү"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Четке кагуу"</string>
@@ -224,8 +205,7 @@
     <string name="default_notification_description" msgid="78174796906240970">"Абалкы үнү (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Телефондун рингтону"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Шыңгырап жатканда титиретүү"</string>
-    <!-- no translation found for dial_pad_autocomplete (7683489952557536398) -->
-    <skip />
+    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Тергичти автотолтуруу"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Рингтон жана Титирөө"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Конференц-чалууну башкаруу"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Куткаруучулардын номуру"</string>
