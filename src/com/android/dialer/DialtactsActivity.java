@@ -308,6 +308,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         @Override
         public void afterTextChanged(Editable s) {
+            final String newText = s.toString();
+            if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
+                mRegularSearchFragment.setAddToContactNumber(newText);
+            }
         }
     };
 
