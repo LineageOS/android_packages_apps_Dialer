@@ -21,11 +21,9 @@
     <string name="onHold" msgid="9035493194749959955">"Em espera"</string>
     <string name="unknown" msgid="6878797917991465859">"Desconhecido"</string>
     <string name="private_num" msgid="6713286113000232309">"Número particular"</string>
-    <!-- no translation found for payphone (4793877574636445118) -->
-    <skip />
+    <string name="payphone" msgid="4793877574636445118">"Telefone público"</string>
     <string name="confCall" msgid="1904840547188336828">"Chamada de conferência"</string>
-    <!-- no translation found for call_lost (6183862117003999578) -->
-    <skip />
+    <string name="call_lost" msgid="6183862117003999578">"A chamada caiu"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"Altifalante"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Auricular do aparelho"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Auscultadores com fios"</string>
@@ -39,8 +37,7 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"Chamada de conferência <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Número do correio de voz"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"A marcar"</string>
-    <!-- no translation found for card_title_redialing (8253487008234167266) -->
-    <skip />
+    <string name="card_title_redialing" msgid="8253487008234167266">"A marcar novamente"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Chamada de conferência"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Chamada recebida"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"Chamada terminada"</string>
@@ -51,12 +48,9 @@
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"A ligar vídeo"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"Videochamada"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"A solicitar vídeo"</string>
-    <!-- no translation found for card_title_video_call_error (9000555878389539225) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number (7307938207564217293) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number_emergency (8634765419223426754) -->
-    <skip />
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"Não é possível ligar a videochamada"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"O seu número de retorno de chamada\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"O seu número de retorno de chamadas de emergência\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"A marcar"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Chamada não atendida"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Chamadas não atendidas"</string>
@@ -84,34 +78,22 @@
     <string name="incall_error_power_off" msgid="6550191216405193368">"Para efectuar uma chamada, desactive primeiro o modo para Avião."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Sem registo na rede."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Rede móvel não disponível."</string>
-    <!-- no translation found for incall_error_no_phone_number_supplied (1150414018684246528) -->
-    <skip />
-    <!-- no translation found for incall_error_call_failed (6302746943230078197) -->
-    <skip />
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Para telefonar, introduza um número válido."</string>
+    <string name="incall_error_call_failed" msgid="6302746943230078197">"Não é possível telefonar."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"A iniciar sequência de MMI..."</string>
-    <!-- no translation found for incall_error_supp_service_unknown (323435289607131929) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_switch (5237002176899962862) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_separate (7224393405134545246) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_transfer (7235952238189391438) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_conference (7010354362202271726) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_reject (8998568661508655638) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_hangup (7434513517153834426) -->
-    <skip />
+    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Serviço não suportado."</string>
+    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"Não é possível alternar chamadas."</string>
+    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"Não é possível separar a chamada."</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Não é possível transferir."</string>
+    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"Não é possível efetuar uma conferência."</string>
+    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"Não é possível rejeitar a chamada."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Não é possível libertar a(s) chamada(s)."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"Chamada SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Chamada de emergência"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"A ligar o rádio..."</string>
-    <!-- no translation found for emergency_enable_radio_dialog_retry (5960061579996526883) -->
-    <skip />
-    <!-- no translation found for dial_emergency_error (1509085166367420355) -->
-    <skip />
-    <!-- no translation found for dial_emergency_empty_error (9130194953830414638) -->
-    <skip />
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Sem serviço. A tentar novamente…"</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"Não é possível telefonar. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> não é um número de emergência."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Não é possível telefonar. Marque um número de emergência."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Utilizar o teclado para marcar"</string>
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Colocar a chamada em espera"</string>
     <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Retomar a chamada"</string>
@@ -152,8 +134,7 @@
     <string name="accessibility_call_muted" msgid="2776111226185342220">"Chamada sem som."</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Chamada com som."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Chamada colocada em espera."</string>
-    <!-- no translation found for accessibility_call_removed_from_hold (5107480079544990575) -->
-    <skip />
+    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"A chamada já não está em espera."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Atender"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Enviar SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Recusar"</string>
@@ -171,8 +152,7 @@
     <string name="default_notification_description" msgid="78174796906240970">"Som predefinido (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Toque do telemóvel"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Vibrar ao tocar"</string>
-    <!-- no translation found for dial_pad_autocomplete (7683489952557536398) -->
-    <skip />
+    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Preenchimento aut. do teclado"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Tocar e Vibrar"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Gerir chamada de conferência"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Número de emergência"</string>
