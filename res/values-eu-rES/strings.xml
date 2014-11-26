@@ -187,6 +187,5 @@
     <string name="other_settings_title" msgid="7976283601445863248">"Beste batzuk"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Erantzun bizkorrak"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Deiak"</string>
-    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
-    <skip />
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Deiak egiteko kontuak"</string>
 </resources>
