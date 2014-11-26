@@ -207,6 +207,7 @@
     <string name="select_account_dialog_title">选择账户</string>
 
     <string name="device_id">设备标识符</string>
+    <string name="menu_4g_conference_call">4G会议电话</string>
 
     <!--  for speed dial -->
     <string name="set_speed_dial">快速拨号设置</string>
