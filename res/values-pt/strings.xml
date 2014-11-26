@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="8490255569343340580">"Discador"</string>
-    <string name="launcherActivityLabel" msgid="1129729740601172692">"Smartphone"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefone"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefone"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Histórico de chamadas"</string>
     <string name="menu_sendTextMessage" msgid="8682056943960339239">"Enviar SMS"</string>
@@ -187,6 +187,5 @@
     <string name="other_settings_title" msgid="7976283601445863248">"Outras"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respostas rápidas"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Chamadas"</string>
-    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
-    <skip />
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Contas de chamadas"</string>
 </resources>
