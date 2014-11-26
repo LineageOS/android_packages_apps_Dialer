@@ -1194,14 +1194,13 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     /**
      * @return An instance of TelecomManager.
      */
-    private TelecomManager getTelecomManager() {
+    public TelecomManager getTelecomManager() {
         if (mTelecomManager == null) {
             mTelecomManager = (TelecomManager)
                     mInCallActivity.getSystemService(Context.TELECOM_SERVICE);
         }
         return mTelecomManager;
     }
-
 
     /**
      * Private constructor. Must use getInstance() to get this singleton.
