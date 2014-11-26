@@ -188,6 +188,5 @@
     <string name="other_settings_title" msgid="7976283601445863248">"ಇತರೆ"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ತ್ವರಿತ ಪ್ರತಿಕ್ರಿಯೆಗಳು"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ಕರೆಗಳು"</string>
-    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
-    <skip />
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"ಕರೆ ಮಾಡುವ ಖಾತೆಗಳು"</string>
 </resources>

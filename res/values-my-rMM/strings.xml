@@ -152,8 +152,7 @@
     <string name="remove_contact" msgid="1080555335283662961">"ဖယ်ရှာခြင်း"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"အဆက်အသွယ်များအားလုံး"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ပြန် ခေါ်ဆိုမှု"</string>
-    <!-- no translation found for call_log_action_call (8187991828921352552) -->
-    <skip />
+    <string name="call_log_action_call" msgid="8187991828921352552">"ခေါ်ရန်"</string>
     <string name="call_log_action_redial" msgid="8159106862639797417">"ထပ်ခေါ်ရန်"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"ဗီဒီယို ခေါ်ဆိုမှု"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"နားထောင်ရန်"</string>
@@ -187,6 +186,5 @@
     <string name="other_settings_title" msgid="7976283601445863248">"အခြား"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"အမြန် တုံ့ပြန်ချက်များ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ခေါ်ဆိုမှုများ"</string>
-    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
-    <skip />
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"ခေါ်ဆိုသော အကောင့်များ"</string>
 </resources>
