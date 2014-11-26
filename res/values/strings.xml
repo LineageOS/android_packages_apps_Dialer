@@ -353,14 +353,14 @@
     Note: AccessibilityServices use this attribute to announce what the view represents.
           This is especially valuable for views without textual representation like ImageView.
     -->
-    <string name="description_new_voicemail">New voicemail</string>
+    <string name="description_new_voicemail">New voicemail.</string>
 
     <!-- String indicating the number of calls to/from a caller in the call log.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
           This is especially valuable for views without textual representation like ImageView.
     -->
-    <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> calls</string>
+    <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> calls.</string>
 
     <!-- String indicating a call log entry had video capabilities.
 
@@ -368,7 +368,7 @@
           This is especially valuable for views without textual representation like ImageView.
           [CHAR LIMIT=NONE]
     -->
-    <string name="description_video_call">Video call</string>
+    <string name="description_video_call">Video call.</string>
 
     <!-- String describing the button to SMS a number or contact.
 
@@ -578,17 +578,24 @@
     <!-- String describing an incoming missed call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-    <string name="description_incoming_missed_call">Missed call from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
+    <string name="description_incoming_missed_call">Missed call from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">%4$s</xliff:g>.</string>
 
     <!-- String describing an incoming answered call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-    <string name="description_incoming_answered_call">Answered call from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
+    <string name="description_incoming_answered_call">Answered call from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">%4$s</xliff:g>.</string>
 
     <!-- String describing an outgoing call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-    <string name="description_outgoing_call">Call to <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
+    <string name="description_outgoing_call">Call to <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">%4$s</xliff:g>.</string>
+
+    <!-- String describing the phone account the call was made on or to. This string will be used
+         in description_incoming_missed_call, description_incoming_answered_call, and
+         description_outgoing_call.
+         Note: AccessibilityServices uses this attribute to announce what the view represents.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_phone_account">on <xliff:g id="phoneAccount" example="SIM 1">%1$s</xliff:g></string>
 
     <!-- String describing the "call back" action for an entry in the call log.  The call back
          action triggers a return call to the named user.
