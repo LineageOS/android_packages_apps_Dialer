@@ -21,11 +21,9 @@
     <string name="onHold" msgid="9035493194749959955">"در انتظار"</string>
     <string name="unknown" msgid="6878797917991465859">"ناشناس"</string>
     <string name="private_num" msgid="6713286113000232309">"شماره خصوصی"</string>
-    <!-- no translation found for payphone (4793877574636445118) -->
-    <skip />
+    <string name="payphone" msgid="4793877574636445118">"تلفن عمومی"</string>
     <string name="confCall" msgid="1904840547188336828">"تماس کنفرانسی"</string>
-    <!-- no translation found for call_lost (6183862117003999578) -->
-    <skip />
+    <string name="call_lost" msgid="6183862117003999578">"تماس قطع شد"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"بلندگو"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"گوشی"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"هدست سیمی"</string>
@@ -39,8 +37,7 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"تماس کنفرانسی <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"شماره پست صوتی"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"شماره گیری"</string>
-    <!-- no translation found for card_title_redialing (8253487008234167266) -->
-    <skip />
+    <string name="card_title_redialing" msgid="8253487008234167266">"در حال شماره‌گیری مجدد"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"تماس کنفرانسی"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"تماس ورودی"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"تماس پایان یافت"</string>
@@ -51,12 +48,9 @@
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"در حال برقراری تماس ویدیویی"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"تماس ویدیویی"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"درحال درخواست تماس ویدیویی"</string>
-    <!-- no translation found for card_title_video_call_error (9000555878389539225) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number (7307938207564217293) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number_emergency (8634765419223426754) -->
-    <skip />
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"اتصال تماس ویدیویی ممکن نیست"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"شماره پاسخ تماس شما\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"شماره پاسخ تماس اضطراری شما\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"شماره‌گیری"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"تماس بی پاسخ"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"تماس‌های بی پاسخ"</string>
@@ -84,34 +78,22 @@
     <string name="incall_error_power_off" msgid="6550191216405193368">"برای برقراری یک تماس، ابتدا حالت هواپیما را خاموش کنید."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"در شبکه ثبت نشده است."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"شبکه تلفن همراه در دسترس نیست."</string>
-    <!-- no translation found for incall_error_no_phone_number_supplied (1150414018684246528) -->
-    <skip />
-    <!-- no translation found for incall_error_call_failed (6302746943230078197) -->
-    <skip />
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"برای برقراری تماس، یک شماره معتبر وارد کنید."</string>
+    <string name="incall_error_call_failed" msgid="6302746943230078197">"نمی‌توانید تماس بگیرید."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"‏شروع ترتیب MMI..."</string>
-    <!-- no translation found for incall_error_supp_service_unknown (323435289607131929) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_switch (5237002176899962862) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_separate (7224393405134545246) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_transfer (7235952238189391438) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_conference (7010354362202271726) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_reject (8998568661508655638) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_hangup (7434513517153834426) -->
-    <skip />
+    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"سرویس پشتیبانی نمی‌شود."</string>
+    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"نمی‌توانید بین تماس‌ها جابجا شوید."</string>
+    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"نمی‌توانید تماس را جدا کنید."</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"نمی‌توانید انتقال دهید."</string>
+    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"نمی‌توانید کنفرانس برگزار کنید."</string>
+    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"نمی‌توانید تماس را رد کنید."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"نمی‌توانید تماس(ها) را آزاد کنید."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"‏تماس SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"تماس اضطراری"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"در حال روشن کردن رادیو..."</string>
-    <!-- no translation found for emergency_enable_radio_dialog_retry (5960061579996526883) -->
-    <skip />
-    <!-- no translation found for dial_emergency_error (1509085166367420355) -->
-    <skip />
-    <!-- no translation found for dial_emergency_empty_error (9130194953830414638) -->
-    <skip />
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"سرویسی در دسترس نیست. دوباره امتحان کنید..."</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"نمی‌توانید تماس بگیرید. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> یک شماره اضطراری نیست."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"نمی توانید تماس بگیرید. یک شماره اضطراری را شماره‌گیری کنید."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"استفاده از صفحه‌کلید برای شماره گیری"</string>
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"در انتظار نگه‌داشتن تماس"</string>
     <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"ازسرگیری تماس"</string>
@@ -152,8 +134,7 @@
     <string name="accessibility_call_muted" msgid="2776111226185342220">"تماس نادیده گرفته شد."</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"صدای تماس وصل شد."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"تماس در حالت انتظار نگه داشته شد."</string>
-    <!-- no translation found for accessibility_call_removed_from_hold (5107480079544990575) -->
-    <skip />
+    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"تماس دیگر در حالت انتظار نیست."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"پاسخ"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"ارسال پیامک"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"عدم پذیرش"</string>
@@ -171,8 +152,7 @@
     <string name="default_notification_description" msgid="78174796906240970">"صدای پیش‌فرض (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"آهنگ زنگ تلفن"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"ارتعاش هنگام زنگ زدن"</string>
-    <!-- no translation found for dial_pad_autocomplete (7683489952557536398) -->
-    <skip />
+    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"تکمیل خودکار صفحه شماره‌گیری"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"آهنگ‌ زنگ و لرزش"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"مدیریت تماس کنفرانس"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"شماره اضطراری"</string>

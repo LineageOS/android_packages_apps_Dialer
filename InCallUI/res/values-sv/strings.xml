@@ -21,11 +21,9 @@
     <string name="onHold" msgid="9035493194749959955">"Parkerat"</string>
     <string name="unknown" msgid="6878797917991465859">"Okänd"</string>
     <string name="private_num" msgid="6713286113000232309">"Privat nummer"</string>
-    <!-- no translation found for payphone (4793877574636445118) -->
-    <skip />
+    <string name="payphone" msgid="4793877574636445118">"Telefonautomat"</string>
     <string name="confCall" msgid="1904840547188336828">"Konferenssamtal"</string>
-    <!-- no translation found for call_lost (6183862117003999578) -->
-    <skip />
+    <string name="call_lost" msgid="6183862117003999578">"Samtalet avbröts"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"Högtalare"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Telefonlur"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Trådanslutet headset"</string>
@@ -39,8 +37,7 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"Konferenssamtal <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Nummer till röstbrevlåda"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"Ringer"</string>
-    <!-- no translation found for card_title_redialing (8253487008234167266) -->
-    <skip />
+    <string name="card_title_redialing" msgid="8253487008234167266">"Ringer upp igen"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Konferenssamtal"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Inkommande samtal"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"Samtal avslutat"</string>
@@ -51,12 +48,9 @@
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"Ansluter video"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"Videosamtal"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Begär video"</string>
-    <!-- no translation found for card_title_video_call_error (9000555878389539225) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number (7307938207564217293) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number_emergency (8634765419223426754) -->
-    <skip />
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"Det gick inte att ansluta till videosamtalet"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"Ditt nummer för återuppringning\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Ditt nödnummer för återuppringning\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Ringer"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Missat samtal"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Missade samtal"</string>
@@ -84,34 +78,22 @@
     <string name="incall_error_power_off" msgid="6550191216405193368">"Om du vill ringa ett samtal måste du först inaktivera flygplansläge."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Inte registrerat på nätverk."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Det finns inget mobilnät tillgängligt."</string>
-    <!-- no translation found for incall_error_no_phone_number_supplied (1150414018684246528) -->
-    <skip />
-    <!-- no translation found for incall_error_call_failed (6302746943230078197) -->
-    <skip />
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Ange ett giltigt nummer om du vill ringa ett samtal."</string>
+    <string name="incall_error_call_failed" msgid="6302746943230078197">"Det gick inte att ringa."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"Startar sekvens för MMI-kod…"</string>
-    <!-- no translation found for incall_error_supp_service_unknown (323435289607131929) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_switch (5237002176899962862) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_separate (7224393405134545246) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_transfer (7235952238189391438) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_conference (7010354362202271726) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_reject (8998568661508655638) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_hangup (7434513517153834426) -->
-    <skip />
+    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Tjänsten stöds inte."</string>
+    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"Det gick inte att växla mellan samtal."</string>
+    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"Det gick inte att koppla isär samtalen."</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Det gick inte att överföra."</string>
+    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"Det gick inte att starta en konferens."</string>
+    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"Det gick inte att avvisa samtalet."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Det gick inte att släppa samtal."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP-anrop"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Nödsamtal"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Sätter på radion…"</string>
-    <!-- no translation found for emergency_enable_radio_dialog_retry (5960061579996526883) -->
-    <skip />
-    <!-- no translation found for dial_emergency_error (1509085166367420355) -->
-    <skip />
-    <!-- no translation found for dial_emergency_empty_error (9130194953830414638) -->
-    <skip />
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Ingen tjänst. Försök igen …"</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"Det gick inte att ringa. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> är inget nödnummer."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Det gick inte att ringa. Slå ett nödnummer."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Använd tangentbordet om du vill ringa"</string>
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Parkera samtal"</string>
     <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Återuppta samtal"</string>
@@ -152,8 +134,7 @@
     <string name="accessibility_call_muted" msgid="2776111226185342220">"Samtalets ljud avstängt."</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Ljudet har slagits på för samtalet."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Samtalet har parkerats."</string>
-    <!-- no translation found for accessibility_call_removed_from_hold (5107480079544990575) -->
-    <skip />
+    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"Samtalet är inte längre parkerat."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Svara"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Skicka SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Avvisa"</string>
@@ -171,8 +152,7 @@
     <string name="default_notification_description" msgid="78174796906240970">"Standardsignal (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Ringsignal"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Mobilen vibrerar när det ringer"</string>
-    <!-- no translation found for dial_pad_autocomplete (7683489952557536398) -->
-    <skip />
+    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Autoslutförande för knappsats"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Ringsignal och vibrera"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Hantera konferenssamtal"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Nödsamtalsnummer"</string>
