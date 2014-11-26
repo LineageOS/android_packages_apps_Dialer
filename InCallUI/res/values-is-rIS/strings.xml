@@ -21,11 +21,9 @@
     <string name="onHold" msgid="9035493194749959955">"Í bið"</string>
     <string name="unknown" msgid="6878797917991465859">"Óþekkt"</string>
     <string name="private_num" msgid="6713286113000232309">"Leyninúmer"</string>
-    <!-- no translation found for payphone (4793877574636445118) -->
-    <skip />
+    <string name="payphone" msgid="4793877574636445118">"Símasjálfsali"</string>
     <string name="confCall" msgid="1904840547188336828">"Símafundur"</string>
-    <!-- no translation found for call_lost (6183862117003999578) -->
-    <skip />
+    <string name="call_lost" msgid="6183862117003999578">"Símtali slitið"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"Hátalari"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Símahátalari"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Höfuðtól með snúru"</string>
@@ -39,8 +37,7 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"Símafundur <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Talhólfsnúmer"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"Hringir"</string>
-    <!-- no translation found for card_title_redialing (8253487008234167266) -->
-    <skip />
+    <string name="card_title_redialing" msgid="8253487008234167266">"Hringir aftur"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Símafundur"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Símtal berst"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"Lagt á"</string>
@@ -51,12 +48,9 @@
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"Tengir myndskeið"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"Myndsímtal"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Biður um myndskeið"</string>
-    <!-- no translation found for card_title_video_call_error (9000555878389539225) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number (7307938207564217293) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number_emergency (8634765419223426754) -->
-    <skip />
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"Ekki tókst að tengja myndsímtal"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"Svarhringinúmerið þitt\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Svarhringinúmerið þitt í neyð\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Hringir"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Ósvarað símtal"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Ósvöruð símtöl"</string>
@@ -84,34 +78,22 @@
     <string name="incall_error_power_off" msgid="6550191216405193368">"Til að hringja símtal þarftu fyrst að slökkva á flugstillingu."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Ekki skráð á símkerfi."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Farsímakerfi ekki til staðar."</string>
-    <!-- no translation found for incall_error_no_phone_number_supplied (1150414018684246528) -->
-    <skip />
-    <!-- no translation found for incall_error_call_failed (6302746943230078197) -->
-    <skip />
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Sláðu inn gilt númer til að hringja símtal."</string>
+    <string name="incall_error_call_failed" msgid="6302746943230078197">"Ekki hægt að hringja."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"Ræsir MMI-runu…"</string>
-    <!-- no translation found for incall_error_supp_service_unknown (323435289607131929) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_switch (5237002176899962862) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_separate (7224393405134545246) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_transfer (7235952238189391438) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_conference (7010354362202271726) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_reject (8998568661508655638) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_hangup (7434513517153834426) -->
-    <skip />
+    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Þjónustan er ekki studd."</string>
+    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"Ekki hægt að skipta milli símtala."</string>
+    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"Ekki hægt að aðskilja símtal."</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Ekki hægt að flytja."</string>
+    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"Ekki hægt að halda símafund."</string>
+    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"Ekki hægt að hafna símtali."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Ekki hægt að leggja á."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP-símtal"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Neyðarsímtal"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Kveikir á loftneti…"</string>
-    <!-- no translation found for emergency_enable_radio_dialog_retry (5960061579996526883) -->
-    <skip />
-    <!-- no translation found for dial_emergency_error (1509085166367420355) -->
-    <skip />
-    <!-- no translation found for dial_emergency_empty_error (9130194953830414638) -->
-    <skip />
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Ekkert samband. Reynir aftur…"</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"Ekki hægt að hringja. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> er ekki neyðarnúmer."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Ekki hægt að hringja. Hringdu í neyðarnúmer."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Notaðu lyklaborðið til að hringja"</string>
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Setja símtal í bið"</string>
     <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Halda símtali áfram"</string>
@@ -152,8 +134,7 @@
     <string name="accessibility_call_muted" msgid="2776111226185342220">"Símtal þaggað."</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Kveikt á hljóði í símtali."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Símtal sett í bið."</string>
-    <!-- no translation found for accessibility_call_removed_from_hold (5107480079544990575) -->
-    <skip />
+    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"Símtal ekki lengur í bið."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Svara"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Senda SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Hafna"</string>
@@ -171,8 +152,7 @@
     <string name="default_notification_description" msgid="78174796906240970">"Sjálfgefið hljóð (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Hringitónn síma"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Titra við hringingu"</string>
-    <!-- no translation found for dial_pad_autocomplete (7683489952557536398) -->
-    <skip />
+    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Flýtiritun símatakkaborðs"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Hringitónn og titringur"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Stjórna símafundi"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Neyðarnúmer"</string>

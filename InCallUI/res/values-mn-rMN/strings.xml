@@ -21,11 +21,9 @@
     <string name="onHold" msgid="9035493194749959955">"Хүлээлгэнд"</string>
     <string name="unknown" msgid="6878797917991465859">"Тодорхойгүй"</string>
     <string name="private_num" msgid="6713286113000232309">"Нууцлагдсан дугаар"</string>
-    <!-- no translation found for payphone (4793877574636445118) -->
-    <skip />
+    <string name="payphone" msgid="4793877574636445118">"Payphone"</string>
     <string name="confCall" msgid="1904840547188336828">"Утсан хурал"</string>
-    <!-- no translation found for call_lost (6183862117003999578) -->
-    <skip />
+    <string name="call_lost" msgid="6183862117003999578">"Дуудлага таслагдсан"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"Чанга яригч"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Утасны чихэвч"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Утастай чихэвч"</string>
@@ -39,8 +37,7 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"Утсан хурал <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Дуут шуудангийн дугаар"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"Залгаж байна"</string>
-    <!-- no translation found for card_title_redialing (8253487008234167266) -->
-    <skip />
+    <string name="card_title_redialing" msgid="8253487008234167266">"Дахин залгаж байна"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Утсан хурал"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Ирж буй дуудлага"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"Дуудлага дууссан"</string>
@@ -51,12 +48,9 @@
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"Видеог холбож байна"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"Видео хурал"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Видео хүсэлт гаргасан"</string>
-    <!-- no translation found for card_title_video_call_error (9000555878389539225) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number (7307938207564217293) -->
-    <skip />
-    <!-- no translation found for card_title_callback_number_emergency (8634765419223426754) -->
-    <skip />
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"Видео дуудлага амжилтгүй боллоо"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"Таны залгасан дугаар\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Таны залгасан түргэн тусламжийн дугаар \n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Залгаж байна"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Аваагүй дуудлага"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Аваагүй дуудлагууд"</string>
@@ -84,34 +78,22 @@
     <string name="incall_error_power_off" msgid="6550191216405193368">"Дуудлага хийхийн тулд юуны өмнө Нислэгийн төлвийг идэвхгүйжүүлнэ үү."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Сүлжээнд бүртгэгдээгүй."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Үүрэн сүлжээ байхгүй."</string>
-    <!-- no translation found for incall_error_no_phone_number_supplied (1150414018684246528) -->
-    <skip />
-    <!-- no translation found for incall_error_call_failed (6302746943230078197) -->
-    <skip />
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Дуудлага хийхийн тулд хүчин төгөлдөр дугаар оруулна уу."</string>
+    <string name="incall_error_call_failed" msgid="6302746943230078197">"Дуудлага хийх боломжгүй байна."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI дарааллыг эхлүүлж байна…"</string>
-    <!-- no translation found for incall_error_supp_service_unknown (323435289607131929) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_switch (5237002176899962862) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_separate (7224393405134545246) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_transfer (7235952238189391438) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_conference (7010354362202271726) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_reject (8998568661508655638) -->
-    <skip />
-    <!-- no translation found for incall_error_supp_service_hangup (7434513517153834426) -->
-    <skip />
+    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Дэмжигдээгүй үйлчилгээ байна."</string>
+    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"Дуудлагыг солих боломжгүй байна."</string>
+    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"Дуудлагыг салгаж чадахгүй байна."</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Шилжүүлэх боломжгүй байна."</string>
+    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"Конференц дуудлага хийх боломжгүй байна."</string>
+    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"Дуудлага татгалзах боломжгүй байна."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Дуудлага чөлөөлөх боломжгүй байна."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP дуудлага"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Ослын дуудлага"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Радиог асааж байна…"</string>
-    <!-- no translation found for emergency_enable_radio_dialog_retry (5960061579996526883) -->
-    <skip />
-    <!-- no translation found for dial_emergency_error (1509085166367420355) -->
-    <skip />
-    <!-- no translation found for dial_emergency_empty_error (9130194953830414638) -->
-    <skip />
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Ажиллагаагүй байна. Дахин оролдоно уу..."</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"Дуудлага хийх боломжгүй. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> нь түргэн тусламжийн дугаар биш байна."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Дуудлага хийх боломжгүй. Түргэн тусламжийн дугаар луу залга."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Залгахдаа гар ашиглах"</string>
     <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Дуудлагыг хүлээлгэх"</string>
     <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Дуудлагыг үргэлжлүүлэх"</string>
@@ -152,8 +134,7 @@
     <string name="accessibility_call_muted" msgid="2776111226185342220">"Дууг хаасан."</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Дуудлагыг хаасан."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Дуудлагыг хүлээлгэсэн"</string>
-    <!-- no translation found for accessibility_call_removed_from_hold (5107480079544990575) -->
-    <skip />
+    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"Дуудлага хадгалагдаагүй"</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Хариулах"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS илгээх"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Татгалзах"</string>
@@ -171,8 +152,7 @@
     <string name="default_notification_description" msgid="78174796906240970">"Үндсэн дуу (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Утасны хонхны ая"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Хонх дуугарах үед чичрэх"</string>
-    <!-- no translation found for dial_pad_autocomplete (7683489952557536398) -->
-    <skip />
+    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Дугаарыг автоматиар гүйцээх"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Хонхны ая &amp; Чичиргээ"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Утсан хурлыг удирдах"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Яаралтай дугаар"</string>
