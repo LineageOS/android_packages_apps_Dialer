@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">Sortér på antal opkald</string>
   <string name="menu_add_to_blacklist">Føj til sortliste</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number"> %s </xliff:g> tilføjet blacklisten</string>
+  <string name="menu_delete_from_blacklist">Slet fra sortliste</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> slettet fra sortliste</string>
   <string name="nearby_places">Steder i nærheden</string>
   <string name="people">Mennesker</string>
   <string name="start_call_playback">Afspil optagelse</string>

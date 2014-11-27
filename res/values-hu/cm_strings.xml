@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">Rendezés hívások száma szerint</string>
   <string name="menu_add_to_blacklist">Hozzáadás a tiltólistához</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> hozzáadva a tiltólistához</string>
+  <string name="menu_delete_from_blacklist">Törlés a tiltólistáról</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> törölve a tiltólistáról</string>
   <string name="nearby_places">Közeli helyek</string>
   <string name="people">Emberek</string>
   <string name="start_call_playback">Felvétel lejátszása</string>

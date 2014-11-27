@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">通話回数で並べ替え</string>
   <string name="menu_add_to_blacklist">ブラックリストに追加</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g>をブラックリストに追加しました</string>
+  <string name="menu_delete_from_blacklist">ブラックリストから削除</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g>をブラックリストから削除しました</string>
   <string name="nearby_places">近くの場所</string>
   <string name="people">人物</string>
   <string name="start_call_playback">録音を再生</string>

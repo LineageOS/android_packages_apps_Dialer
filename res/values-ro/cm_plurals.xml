@@ -21,4 +21,19 @@
     <item quantity="few">%d ore</item>
     <item quantity="other">%d de ore</item>
   </plurals>
+  <plurals name="minute">
+    <item quantity="one">%d min</item>
+    <item quantity="few">%d min</item>
+    <item quantity="other">%d min</item>
+  </plurals>
+  <plurals name="second">
+    <item quantity="one">%d sec</item>
+    <item quantity="few">%d sec</item>
+    <item quantity="other">%d sec</item>
+  </plurals>
+  <plurals name="call">
+    <item quantity="one">%d apel</item>
+    <item quantity="few">%d apeluri</item>
+    <item quantity="other">%d apeluri</item>
+  </plurals>
 </resources>

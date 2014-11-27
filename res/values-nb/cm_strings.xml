@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">Sorter etter antall samtaler</string>
   <string name="menu_add_to_blacklist">Legg til i blokkeringsliste</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> er lagt til i svartelisten</string>
+  <string name="menu_delete_from_blacklist">Slett fra svarteliste</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> slettes fra svarteliste</string>
   <string name="nearby_places">Nærliggende steder</string>
   <string name="people">Folk</string>
   <string name="start_call_playback">Spill av opptak</string>

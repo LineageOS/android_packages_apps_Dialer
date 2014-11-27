@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">Сортирај по броју позива</string>
   <string name="menu_add_to_blacklist">Додај на црну листу</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> додат на црну листу</string>
+  <string name="menu_delete_from_blacklist">Брисање из црне листе</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> обрисано из црне листе</string>
   <string name="nearby_places">Оближња места</string>
   <string name="people">Особе</string>
   <string name="start_call_playback">Пусти снимак</string>

@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">Ταξινόμηση ανά αριθμό κλήσεων</string>
   <string name="menu_add_to_blacklist">Προσθήκη στη μαύρη λίστα</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> προστέθηκε στη μαύρη λίστα</string>
+  <string name="menu_delete_from_blacklist">Διαγραφή από την μαύρη λίστα</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> διαγράφηκε από τη μαύρη λίστα</string>
   <string name="nearby_places">Κοντινές τοποθεσίες</string>
   <string name="people">Άτομα</string>
   <string name="start_call_playback">Αναπαραγωγή καταγραφής</string>

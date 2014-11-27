@@ -20,4 +20,16 @@
     <item quantity="one">%d saat</item>
     <item quantity="other">%d saat</item>
   </plurals>
+  <plurals name="minute">
+    <item quantity="one">%d dəq</item>
+    <item quantity="other">%d dəq</item>
+  </plurals>
+  <plurals name="second">
+    <item quantity="one">%d san</item>
+    <item quantity="other">%d san</item>
+  </plurals>
+  <plurals name="call">
+    <item quantity="one">%d zəng</item>
+    <item quantity="other">%d zəng</item>
+  </plurals>
 </resources>

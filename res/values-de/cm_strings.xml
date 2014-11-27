@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">Nach Anrufanzahl sortieren</string>
   <string name="menu_add_to_blacklist">Zur Sperrliste hinzufügen</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> wurde zur Sperrliste hinzugefügt</string>
+  <string name="menu_delete_from_blacklist">Von der Sperrliste entfernen</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> von der Sperrliste gelöscht</string>
   <string name="nearby_places">Orte in der Nähe</string>
   <string name="people">Personen</string>
   <string name="start_call_playback">Aufzeichnung abspielen</string>

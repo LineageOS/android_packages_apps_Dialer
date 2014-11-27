@@ -50,5 +50,16 @@
   <string name="start_call_playback">Spela inspelning</string>
   <string name="stop_call_playback">Stoppa</string>
   <string name="call_playback_error_message">Det gick inte att spela inspelningen</string>
+  <string name="video_call">Videosamtal</string>
+  <string name="video_call_settings">Videosamtalsinställningar</string>
+  <string name="description_videocall">Videosamtal <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_not_set">(ej angivet)</string>
+  <string name="speed_dial_replace">Ersätt</string>
+  <string name="speed_dial_delete">Ta bort</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">Alla SIM</string>
+  <string name="yes">Ja</string>
   <string name="no">Nej</string>
+  <string name="call_duration_call_out">Samtalslängd:</string>
+  <string name="call_log_all_calls_header">Alla samtal</string>
 </resources>

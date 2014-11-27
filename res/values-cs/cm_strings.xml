@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">Řadit podle počtu hovorů</string>
   <string name="menu_add_to_blacklist">Přidat na černou listinu</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> přidáno na černou listinu</string>
+  <string name="menu_delete_from_blacklist">Odsranit z černé listiny</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> smazáno z černé listiny</string>
   <string name="nearby_places">Blízká místa</string>
   <string name="people">Lidé</string>
   <string name="start_call_playback">Přehrát záznam</string>
