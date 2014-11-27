@@ -30,15 +30,20 @@
 package com.android.dialer;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.ActivityNotFoundException;
 import android.content.ContentUris;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.Settings;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -57,6 +62,8 @@ import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.internal.telephony.PhoneConstants;
+import static com.android.internal.telephony.PhoneConstants.SUBSCRIPTION_KEY;
+import java.util.List;
 
 public class SpeedDialListActivity extends ListActivity implements
         AdapterView.OnItemClickListener, PopupMenu.OnMenuItemClickListener {
@@ -85,6 +92,8 @@ public class SpeedDialListActivity extends ListActivity implements
     private static final int COLUMN_PHOTO = 2;
     private static final int COLUMN_NUMBER = 3;
     private static final int COLUMN_NORMALIZED = 4;
+    private static final int MENU_REPLACE = 1001;
+    private static final int MENU_DELETE = 1002;
 
     private static class Record {
         long contactId;
