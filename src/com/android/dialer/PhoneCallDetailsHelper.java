@@ -115,7 +115,7 @@ public class PhoneCallDetailsHelper {
             views.callAccountLabel.setVisibility(View.VISIBLE);
             views.callAccountLabel.setText(accountLabel);
             int color = PhoneAccountUtils.getAccountColor(mContext, details.accountHandle);
-            if (color == PhoneAccount.NO_COLOR) {
+            if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
                 int defaultColor = R.color.dialtacts_secondary_text_color;
                 views.callAccountLabel.setTextColor(mContext.getResources().getColor(defaultColor));
             } else {
