@@ -441,7 +441,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
      * @param itemIndex Position of the contact in {@link #mContactEntries}.
      */
     private void markDropArea(int itemIndex) {
-        if (isIndexInBound(mDragEnteredEntryIndex) && isIndexInBound(itemIndex)) {
+        if (mDraggedEntry != null && isIndexInBound(mDragEnteredEntryIndex) &&
+                isIndexInBound(itemIndex)) {
             mDataSetChangedListener.cacheOffsetsForDatasetChange();
             // Remove the old placeholder item and place the new placeholder item.
             final int oldIndex = mDragEnteredEntryIndex;
