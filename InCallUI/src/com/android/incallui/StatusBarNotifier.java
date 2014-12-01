@@ -31,7 +31,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.telecom.PhoneAccount;
-import android.telecom.PhoneCapabilities;
 import android.text.TextUtils;
 
 import com.android.contacts.common.util.BitmapUtil;
@@ -383,7 +382,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      * Returns the main string to use in the notification.
      */
     private String getContentTitle(ContactCacheEntry contactInfo, Call call) {
-        if (call.isConferenceCall() && !call.can(PhoneCapabilities.GENERIC_CONFERENCE)) {
+        if (call.isConferenceCall()
+                && !call.can(android.telecom.Call.Details.CAPABILITY_GENERIC_CONFERENCE)) {
             return mContext.getResources().getString(R.string.card_title_conf_call);
         }
         if (TextUtils.isEmpty(contactInfo.name)) {
@@ -408,7 +408,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      */
     private Bitmap getLargeIconToDisplay(ContactCacheEntry contactInfo, Call call) {
         Bitmap largeIcon = null;
-        if (call.isConferenceCall() && !call.can(PhoneCapabilities.GENERIC_CONFERENCE)) {
+        if (call.isConferenceCall()
+                && !call.can(android.telecom.Call.Details.CAPABILITY_GENERIC_CONFERENCE)) {
             largeIcon = BitmapFactory.decodeResource(mContext.getResources(),
                     R.drawable.img_conference);
         }
