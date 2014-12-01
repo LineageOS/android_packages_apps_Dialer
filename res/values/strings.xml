@@ -578,49 +578,49 @@
     <!-- String describing an incoming missed call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-    <string name="description_incoming_missed_call">Missed call from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">%4$s</xliff:g>.</string>
+    <string name="description_incoming_missed_call">Missed call from <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
 
     <!-- String describing an incoming answered call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-    <string name="description_incoming_answered_call">Answered call from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">%4$s</xliff:g>.</string>
+    <string name="description_incoming_answered_call">Answered call from <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
 
     <!-- String describing an outgoing call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-    <string name="description_outgoing_call">Call to <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">%4$s</xliff:g>.</string>
+    <string name="description_outgoing_call">Call to <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
 
     <!-- String describing the phone account the call was made on or to. This string will be used
          in description_incoming_missed_call, description_incoming_answered_call, and
          description_outgoing_call.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-    <string name="description_phone_account">on <xliff:g id="phoneAccount" example="SIM 1">%1$s</xliff:g></string>
+    <string name="description_phone_account">on <xliff:g id="phoneAccount" example="SIM 1">^1</xliff:g></string>
 
     <!-- String describing the "call back" action for an entry in the call log.  The call back
          action triggers a return call to the named user.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-    <string name="description_call_back_action">Call back <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
+    <string name="description_call_back_action">Call back <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g></string>
 
     <!-- String describing the "video call" action for an entry in the call log.  The video call
          action triggers a return video call to the named person/number.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-    <string name="description_video_call_action">Video call to <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>.</string>
+    <string name="description_video_call_action">Video call to <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>.</string>
 
     <!-- String describing the "listen" action for an entry in the call log.  The listen
          action is shown for call log entries representing a voicemail message and this button
          triggers playing back the voicemail.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-    <string name="description_voicemail_action">Listen to voicemail from <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
+    <string name="description_voicemail_action">Listen to voicemail from <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g></string>
 
     <!-- String describing the "details" action for an entry in the call log.  The details action
          displays the call details screen for an entry in the call log.  This shows the calls to
          and from the specified number associated with the call log entry.
          [CHAR LIMIT=NONE] -->
-    <string name="description_details_action">Call details for <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
+    <string name="description_details_action">Call details for <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g></string>
 
     <!-- Toast message which appears when a call log entry is deleted.
          [CHAR LIMIT=NONE] -->
