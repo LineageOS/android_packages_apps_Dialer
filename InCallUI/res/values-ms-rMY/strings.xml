@@ -84,7 +84,7 @@
     <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Perkhidmatan tidak disokong."</string>
     <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"Tidak dapat menukar panggilan."</string>
     <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"Tidak dapat mengasingkan panggilan."</string>
-    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Tidak dapat memindahkan."</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Tidak dapat memindahkan panggilan."</string>
     <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"Tidak dapat membuat panggilan persidangan."</string>
     <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"Tidak dapat menolak panggilan."</string>
     <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Tidak dapat melepaskan panggilan."</string>
