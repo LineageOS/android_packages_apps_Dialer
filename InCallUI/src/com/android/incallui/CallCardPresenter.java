@@ -25,7 +25,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telecom.DisconnectCause;
-import android.telecom.PhoneCapabilities;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.StatusHints;
@@ -268,8 +267,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     public void onDetailsChanged(Call call, android.telecom.Call.Details details) {
         updatePrimaryCallState();
 
-        if (call.can(PhoneCapabilities.MANAGE_CONFERENCE) != PhoneCapabilities.can(
-                details.getCallCapabilities(), PhoneCapabilities.MANAGE_CONFERENCE)) {
+        if (call.can(android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE) !=
+                android.telecom.Call.Details.can(
+                        details.getCallCapabilities(),
+                        android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE)) {
             maybeShowManageConferenceCallButton();
         }
     }
@@ -322,7 +323,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return false;
         }
 
-        return mPrimary.can(PhoneCapabilities.MANAGE_CONFERENCE);
+        return mPrimary.can(android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE);
     }
 
     private void setCallbackNumber() {
@@ -702,7 +703,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private String getConferenceString(Call call) {
-        boolean isGenericConference = call.can(PhoneCapabilities.GENERIC_CONFERENCE);
+        boolean isGenericConference = call.can(
+                android.telecom.Call.Details.CAPABILITY_GENERIC_CONFERENCE);
         Log.v(this, "getConferenceString: " + isGenericConference);
 
         final int resId = isGenericConference
@@ -711,7 +713,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private Drawable getConferencePhoto(Call call) {
-        boolean isGenericConference = call.can(PhoneCapabilities.GENERIC_CONFERENCE);
+        boolean isGenericConference = call.can(
+                android.telecom.Call.Details.CAPABILITY_GENERIC_CONFERENCE);
         Log.v(this, "getConferencePhoto: " + isGenericConference);
 
         final int resId = isGenericConference
