@@ -135,11 +135,11 @@
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Panggilan disuarakan lagi."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Panggilan ditahan."</string>
     <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"Panggilan tidak lagi ditunda."</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"Menjawab"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Jawab"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Mengirim SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Menolak"</string>
-    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Menjawab sebagai video call"</string>
-    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Menjawab sebagai panggilan audio"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Jawab sebagai video call"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Jawab sebagai panggilan audio"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Terima permintaan video"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Tolak permintaan video"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"Geser ke atas untuk <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>

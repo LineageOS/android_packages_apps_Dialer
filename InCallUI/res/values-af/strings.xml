@@ -21,9 +21,9 @@
     <string name="onHold" msgid="9035493194749959955">"Hou aan"</string>
     <string name="unknown" msgid="6878797917991465859">"Onbekend"</string>
     <string name="private_num" msgid="6713286113000232309">"Privaat nommer"</string>
-    <string name="payphone" msgid="4793877574636445118">"Betaalfoon"</string>
+    <string name="payphone" msgid="4793877574636445118">"Telefoonhokkie"</string>
     <string name="confCall" msgid="1904840547188336828">"Konferensie-oproep"</string>
-    <string name="call_lost" msgid="6183862117003999578">"Oproep laat val"</string>
+    <string name="call_lost" msgid="6183862117003999578">"Oproep is ontkoppel"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"Luidspreker"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Selfoonoorstuk"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Bedraade kopfoon"</string>
@@ -87,11 +87,11 @@
     <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Kan nie deurskakel nie."</string>
     <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"Kan nie konferensieoproep maak nie."</string>
     <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"Kan nie oproep verwerp nie."</string>
-    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Kan nie oproep(e) laat los nie."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Kan nie oproep(e) vrystel nie."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP-oproep"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Noodoproep"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Skakel tans radio aan…"</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Geen diens nie. Probeer tans weer …"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Geen sein nie. Probeer tans weer …"</string>
     <string name="dial_emergency_error" msgid="1509085166367420355">"Kan nie bel nie. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> is nie \'n noodnommer nie."</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Kan nie bel nie. Skakel \'n noodnommer."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Gebruik sleutelbord om te bel"</string>
@@ -134,7 +134,7 @@
     <string name="accessibility_call_muted" msgid="2776111226185342220">"Oproep stilgemaak."</string>
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Oproep ontdemp."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Oproep is laat wag."</string>
-    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"Oproep word nie meer gehou nie."</string>
+    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"Oproep word nie meer laat wag nie"</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Antwoord"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Stuur SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Wys af"</string>
