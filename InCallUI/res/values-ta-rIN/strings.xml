@@ -87,7 +87,7 @@
     <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"மாற்ற முடியாது."</string>
     <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"குழு அழைப்பு செய்ய முடியாது."</string>
     <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"அழைப்பை நிராகரிக்க முடியாது."</string>
-    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"அழைப்பை(களை) விடுவிக்க முடியாது."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"அழைப்பை(அழைப்புகளை) விடுவிக்க முடியாது."</string>
     <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP அழைப்பு"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"அவசரகால அழைப்பு"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"ரேடியோவை இயக்குகிறது…"</string>
