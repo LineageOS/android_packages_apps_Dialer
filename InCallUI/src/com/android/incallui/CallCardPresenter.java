@@ -66,7 +66,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private ContactCacheEntry mSecondaryContactInfo;
     private CallTimer mCallTimer;
     private Context mContext;
-    private TelecomManager mTelecomManager;
 
     public static class ContactLookupCallback implements ContactInfoCacheCallback {
         private final WeakReference<CallCardPresenter> mCallCardPresenter;
@@ -281,8 +280,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // number directly from the telephony layer).
         PhoneAccountHandle accountHandle = mPrimary.getAccountHandle();
         if (accountHandle != null) {
-            TelecomManager mgr =
-                    (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
+            TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
             PhoneAccount account = mgr.getPhoneAccount(accountHandle);
             if (account != null) {
                 return getNumberFromHandle(account.getSubscriptionAddress());
@@ -559,7 +557,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (accountHandle == null) {
             return null;
         }
-        return getTelecomManager().getPhoneAccount(accountHandle);
+        return InCallPresenter.getInstance().getTelecomManager().getPhoneAccount(accountHandle);
     }
 
     /**
@@ -577,8 +575,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     private String getCallProviderLabel(Call call) {
         PhoneAccount account = getAccountForCall(call);
+        TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
         if (account != null && !TextUtils.isEmpty(account.getLabel())
-                && getTelecomManager().hasMultipleCallCapableAccounts()) {
+                && mgr.hasMultipleCallCapableAccounts()) {
             return account.getLabel().toString();
         }
         return null;
@@ -692,14 +691,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return;
         }
         ui.setCallCardVisible(!isFullScreenVideo);
-    }
-
-    private TelecomManager getTelecomManager() {
-        if (mTelecomManager == null) {
-            mTelecomManager =
-                    (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
-        }
-        return mTelecomManager;
     }
 
     private String getConferenceString(Call call) {
