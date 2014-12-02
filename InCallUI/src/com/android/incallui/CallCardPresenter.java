@@ -657,7 +657,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     public void secondaryInfoClicked() {
         if (mSecondary == null) {
-            Log.wtf(this, "Secondary info clicked but no secondary call.");
+            Log.w(this, "Secondary info clicked but no secondary call.");
             return;
         }
 
