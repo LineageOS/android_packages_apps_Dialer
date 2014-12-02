@@ -105,7 +105,7 @@ import com.android.dialer.R;
      * Returns the accessibility description of the "return call/call" action for a call log
      * entry.
      * Accessibility text is a combination of:
-     * {Voicemail Prefix}. {Number of Calls}. {Caller information}.
+     * {Voicemail Prefix}. {Number of Calls}. {Caller information} {Phone Account}.
      * If most recent call is a voicemail, {Voicemail Prefix} is "New Voicemail.", otherwise "".
      *
      * If more than one call for the caller, {Number of Calls} is:
@@ -124,9 +124,13 @@ import com.android.dialer.R;
      * {Call type} is the contact phone number type (eg mobile) or location.
      * {Call Time} is the time since the last call for the contact occurred.
      *
+     * The {Phone Account} refers to the account/SIM through which the call was placed or received
+     * in multi-SIM devices.
+     *
      * Examples:
-     * 3 calls.  New Voicemail.  Missed call from Joe Smith mobile 2 hours ago.
-     * 2 calls.  Answered call from John Doe mobile.  Last called 1 hour ago.
+     * 3 calls.  New Voicemail.  Missed call from Joe Smith mobile 2 hours ago on SIM 1.
+     *
+     * 2 calls.  Answered call from John Doe mobile 1 hour ago.
      *
      * @param context The application context.
      * @param details Details of call.
@@ -165,13 +169,16 @@ import com.android.dialer.R;
         }
 
         int stringID = getCallDescriptionStringID(details);
+        String accountLabel = PhoneAccountUtils.getAccountLabel(context, details.accountHandle);
 
         // Use chosen string resource to build up the message.
         callDescription.append(mResources.getString(stringID,
                 nameOrNumber,
                 // If no type or location can be determined, sub in empty string.
                 typeOrLocation == null ? "" : typeOrLocation,
-                timeOfCall));
+                timeOfCall,
+                accountLabel == null ? "" :
+                    mResources.getString(R.string.description_phone_account, accountLabel)));
 
         return callDescription;
     }
@@ -187,13 +194,15 @@ import com.android.dialer.R;
         int stringID;
 
         if (lastCallType == Calls.VOICEMAIL_TYPE || lastCallType == Calls.MISSED_TYPE) {
-            //Message: Missed call from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>.
+            //Message: Missed call from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>,
+            //<PhoneAccount>.
             stringID = R.string.description_incoming_missed_call;
         } else if (lastCallType == Calls.INCOMING_TYPE) {
-            //Message: Answered call from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>.
+            //Message: Answered call from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>,
+            //<PhoneAccount>.
             stringID = R.string.description_incoming_answered_call;
         } else {
-            //Message: Call to <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>.
+            //Message: Call to <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>, <PhoneAccount>.
             stringID = R.string.description_outgoing_call;
         }
         return stringID;
