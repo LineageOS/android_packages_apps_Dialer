@@ -314,7 +314,7 @@ public class InCallActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        Log.d(this, "onBackPressed()...");
+        Log.i(this, "onBackPressed");
 
         // BACK is also used to exit out of any "special modes" of the
         // in-call UI:
