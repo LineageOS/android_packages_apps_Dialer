@@ -72,6 +72,9 @@ public class TelefonbuchApi {
             boolean dotall, boolean removeSpans) {
         String result = LookupUtils.firstRegexResult(output, regex, dotall);
         if (result != null && removeSpans) {
+            // completely remove hidden spans (including contents) ...
+            result = result.replaceAll("<span class=\"hide\".*?\\/span>", "");
+            // ... and remove span wrappers around data content
             result = result.replaceAll("</?span.*?>", "");
         }
         return LookupUtils.fromHtml(result);
