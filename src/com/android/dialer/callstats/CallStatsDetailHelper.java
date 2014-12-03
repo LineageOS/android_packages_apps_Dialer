@@ -59,7 +59,7 @@ public class CallStatsDetailHelper {
         final CharSequence nameText;
         final CharSequence numberText;
         final CharSequence labelText;
-        final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(
+        final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(details.accountId,
                 details.number, details.numberPresentation, details.formattedNumber);
 
         if (TextUtils.isEmpty(details.name)) {
@@ -122,7 +122,7 @@ public class CallStatsDetailHelper {
     public void setCallStatsDetailHeader(TextView nameView, CallStatsDetails details) {
         final CharSequence nameText;
         final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(
-                details.number, details.numberPresentation,
+                details.accountId, details.number, details.numberPresentation,
                 mResources.getString(R.string.recentCalls_addToContact));
 
         if (TextUtils.isEmpty(details.name)) {

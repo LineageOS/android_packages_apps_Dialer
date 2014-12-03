@@ -215,4 +215,8 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
     public CharSequence getGeocode() {
         return geocode;
     }
+    @Override
+    public long getAccountId() {
+        return accountId;
+    }
 }

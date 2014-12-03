@@ -108,7 +108,7 @@ class CallStatsAdapter extends ArrayAdapter<CallStatsDetails>
         setNotifyOnChange(false);
 
         mAllItems = new ArrayList<CallStatsDetails>();
-        mTotalItem = new CallStatsDetails(null, 0, null, null, null, 0);
+        mTotalItem = new CallStatsDetails(null, 0, 0, null, null, null, 0);
         mInfoLookup = new ConcurrentHashMap<ContactInfo, CallStatsDetails>();
 
         Resources resources = mContext.getResources();
@@ -219,8 +219,8 @@ class CallStatsAdapter extends ArrayAdapter<CallStatsDetails>
 
         String nameForDefaultImage = null;
         if (TextUtils.isEmpty(details.name)) {
-            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(details.number,
-                    details.numberPresentation, details.formattedNumber).toString();
+            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(details.accountId,
+                    details.number, details.numberPresentation, details.formattedNumber).toString();
         } else {
             nameForDefaultImage = details.name;
         }

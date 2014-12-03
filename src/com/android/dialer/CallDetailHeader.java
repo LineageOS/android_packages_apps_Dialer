@@ -88,6 +88,7 @@ public class CallDetailHeader {
         Uri getPhotoUri();
         CharSequence getAccountLabel();
         CharSequence getGeocode();
+        long getAccountId();
     }
 
     public CallDetailHeader(Activity activity, PhoneNumberDisplayHelper phoneNumberHelper) {
@@ -107,12 +108,13 @@ public class CallDetailHeader {
     public void updateViews(Data data) {
         // Cache the details about the phone number.
         final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper();
+        final long accountId = data.getAccountId();
         final CharSequence dataName = data.getName();
         final CharSequence dataNumber = data.getNumber();
         final CharSequence dataAccount = data.getAccountLabel();
         final CharSequence callLocationOrType = getNumberTypeOrLocation(data);
 
-        final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(
+        final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(accountId,
                 dataNumber, data.getNumberPresentation(), data.getFormattedNumber());
         final String displayNumberStr = mBidiFormatter.unicodeWrap(
                 displayNumber.toString(), TextDirectionHeuristics.LTR);
@@ -172,8 +174,8 @@ public class CallDetailHeader {
 
         String nameForDefaultImage;
         if (TextUtils.isEmpty(data.getName())) {
-            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(data.getNumber(),
-                    data.getNumberPresentation(), data.getFormattedNumber()).toString();
+            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(data.getAccountId(),
+                    data.getNumber(), data.getNumberPresentation(), data.getFormattedNumber()).toString();
         } else {
             nameForDefaultImage = data.getName().toString();
         }
