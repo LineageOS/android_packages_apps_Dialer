@@ -18,7 +18,6 @@ package com.android.dialer.calllog;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -65,7 +64,10 @@ public class PhoneAccountUtils {
      */
     public static String getAccountLabel(Context context, PhoneAccountHandle accountHandle) {
         PhoneAccount account = getAccountOrNull(context, accountHandle);
-        return account == null ? null : account.getLabel().toString();
+        if (account != null && account.getLabel() != null) {
+            return account.getLabel().toString();
+        }
+        return null;
     }
 
     /**
