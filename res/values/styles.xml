@@ -135,7 +135,8 @@
         <item name="android:displayOptions"></item>
         <item name="android:height">@dimen/action_bar_height_large</item>
         <!-- Override ActionBar title offset to keep search box aligned left -->
-        <item name="android:contentInsetStart">0px</item>
+        <item name="android:contentInsetStart">0dp</item>
+        <item name="android:contentInsetEnd">0dp</item>
     </style>
 
     <!-- Text in the action bar at the top of the screen -->
