@@ -477,7 +477,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             int sessionModificationState,
             DisconnectCause disconnectCause,
             String connectionLabel,
-            Drawable connectionIcon,
+            Drawable callStateIcon,
             String gatewayNumber) {
         boolean isGatewayCall = !TextUtils.isEmpty(gatewayNumber);
         CharSequence callStateLabel = getCallStateLabelFromState(state, videoState,
@@ -498,44 +498,51 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mCallStateLabel.setAlpha(1);
             mCallStateLabel.setVisibility(View.VISIBLE);
 
-            if (connectionIcon == null) {
-                mCallStateIcon.setVisibility(View.GONE);
-            } else {
-                mCallStateIcon.setVisibility(View.VISIBLE);
-                // Invoke setAlpha(float) instead of setAlpha(int) to set the view's alpha. This is
-                // needed because the pulse animation operates on the view alpha.
-                mCallStateIcon.setAlpha(1.0f);
-                mCallStateIcon.setImageDrawable(connectionIcon);
-            }
-
-            if (VideoProfile.VideoState.isBidirectional(videoState)
-                    || (state == Call.State.ACTIVE && sessionModificationState
-                            == Call.SessionModificationState.WAITING_FOR_RESPONSE)) {
-                mCallStateVideoCallIcon.setVisibility(View.VISIBLE);
-            } else {
-                mCallStateVideoCallIcon.setVisibility(View.GONE);
-            }
-
             if (state == Call.State.ACTIVE || state == Call.State.CONFERENCED) {
                 mCallStateLabel.clearAnimation();
-                mCallStateIcon.clearAnimation();
             } else {
                 mCallStateLabel.startAnimation(mPulseAnimation);
-                mCallStateIcon.startAnimation(mPulseAnimation);
             }
         } else {
-            Animation callStateAnimation = mCallStateLabel.getAnimation();
-            if (callStateAnimation != null) {
-                callStateAnimation.cancel();
+            Animation callStateLabelAnimation = mCallStateLabel.getAnimation();
+            if (callStateLabelAnimation != null) {
+                callStateLabelAnimation.cancel();
             }
             mCallStateLabel.setText(null);
             mCallStateLabel.setAlpha(0);
             mCallStateLabel.setVisibility(View.GONE);
+        }
+
+        if (callStateIcon != null) {
+            mCallStateIcon.setVisibility(View.VISIBLE);
+            // Invoke setAlpha(float) instead of setAlpha(int) to set the view's alpha. This is
+            // needed because the pulse animation operates on the view alpha.
+            mCallStateIcon.setAlpha(1.0f);
+            mCallStateIcon.setImageDrawable(callStateIcon);
+
+            if (state == Call.State.ACTIVE || state == Call.State.CONFERENCED
+                    || TextUtils.isEmpty(callStateLabel)) {
+                mCallStateIcon.clearAnimation();
+            } else {
+                mCallStateIcon.startAnimation(mPulseAnimation);
+            }
+        } else {
+            Animation callStateIconAnimation = mCallStateIcon.getAnimation();
+            if (callStateIconAnimation != null) {
+                callStateIconAnimation.cancel();
+            }
+
             // Invoke setAlpha(float) instead of setAlpha(int) to set the view's alpha. This is
             // needed because the pulse animation operates on the view alpha.
             mCallStateIcon.setAlpha(0.0f);
             mCallStateIcon.setVisibility(View.GONE);
+        }
 
+        if (VideoProfile.VideoState.isBidirectional(videoState)
+                || (state == Call.State.ACTIVE && sessionModificationState
+                        == Call.SessionModificationState.WAITING_FOR_RESPONSE)) {
+            mCallStateVideoCallIcon.setVisibility(View.VISIBLE);
+        } else {
             mCallStateVideoCallIcon.setVisibility(View.GONE);
         }
     }
