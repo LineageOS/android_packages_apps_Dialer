@@ -38,6 +38,7 @@ public class CallStatsQuery {
             Calls.CACHED_PHOTO_ID, // 13
             Calls.CACHED_FORMATTED_NUMBER, // 14
             Calls.NUMBER_PRESENTATION, // 15
+            Calls.PHONE_ACCOUNT_ID, // 16
     };
 
     public static final int ID = 0;
@@ -56,4 +57,5 @@ public class CallStatsQuery {
     public static final int CACHED_PHOTO_ID = 13;
     public static final int CACHED_FORMATTED_NUMBER = 14;
     public static final int NUMBER_PRESENTATION = 15;
+    public static final int PHONE_ACCOUNT_ID = 16;
 }
