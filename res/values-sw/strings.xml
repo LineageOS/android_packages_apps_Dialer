@@ -103,9 +103,9 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Angalia anwani <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Piga <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Maelezo ya <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="1711579223345163619">"Ujumbe mpya wa sauti"</string>
-    <string name="description_num_calls" msgid="3681117647705843445">"Simu <xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>"</string>
-    <string name="description_video_call" msgid="1827338350642669590">"Hangout ya Video"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"Ujumbe mpya wa sauti."</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"Simu <xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>."</string>
+    <string name="description_video_call" msgid="2933838090743214204">"Hangout ya video."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Tuma SMS kwa <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Barua sauti ambayo haijasikizwa"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Anza kutafuta kwa kutamka"</string>
@@ -157,9 +157,14 @@
     <string name="call_log_action_video_call" msgid="3818588654537490948">"HANGOUT YA VIDEO"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"SIKILIZA"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"MAELEZO"</string>
-    <string name="description_incoming_missed_call" msgid="2610535352863246949">"Simu ambayo haikujibiwa kutoka kwa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_incoming_answered_call" msgid="7206670204016969740">"Simu iliyopokelewa kutoka kwa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_outgoing_call" msgid="3964211633673659733">"Simu kwa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <!-- no translation found for description_incoming_missed_call (2381085098795943627) -->
+    <skip />
+    <!-- no translation found for description_incoming_answered_call (7117665748428816544) -->
+    <skip />
+    <!-- no translation found for description_outgoing_call (6386364390619734734) -->
+    <skip />
+    <!-- no translation found for description_phone_account (1767072759541443861) -->
+    <skip />
     <string name="description_call_back_action" msgid="3012837380108884260">"Piga simu kwa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_video_call_action" msgid="4303952636480252389">"Hangout ya video kwenda kwa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Sikiliza ujumbe wa sauti kutoka kwa <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
