@@ -284,6 +284,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         if ((state == Call.State.INCOMING || state == Call.State.CALL_WAITING) &&
                 !InCallPresenter.getInstance().isShowingInCallUi()) {
             configureFullScreenIntent(builder, inCallPendingIntent, call);
+            // Set the notification category for incoming calls
+            builder.setCategory(Notification.CATEGORY_CALL);
         }
 
         // Set the content
