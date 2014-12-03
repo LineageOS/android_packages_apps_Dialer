@@ -103,4 +103,7 @@
         <item>#AD1457</item>
         <item>#B93221</item>
     </array>
+
+    <!-- Ripple color used over light backgrounds. -->
+    <color name="ripple_light">#40000000</color>
 </resources>
