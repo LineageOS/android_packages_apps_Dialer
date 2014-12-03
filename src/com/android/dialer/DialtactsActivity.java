@@ -89,6 +89,7 @@ import com.android.dialer.widget.SearchEditTextLayout.OnBackButtonClickedListene
 import com.android.dialerbind.DatabaseHelperManager;
 import com.android.incallui.CallCardFragment;
 import com.android.phone.common.animation.AnimUtils;
+import com.android.ims.ImsManager;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
@@ -533,11 +534,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     protected void handleMenuSettings() {
         final Intent intent = new Intent(this, DialerSettingsActivity.class);
         startActivity(intent);
-    }
-
-    public static boolean isCallOnImsEnabled() {
-        return (SystemProperties.getBoolean(
-                TelephonyProperties.PROPERTY_DBG_IMS_VOLTE_ENABLE, false));
     }
 
     @Override
@@ -1051,8 +1047,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void setConferenceDialButtonVisibility(boolean enabled) {
+        boolean imsUseEnabled =
+                ImsManager.isEnhanced4gLteModeSettingEnabledByPlatform(this) &&
+                ImsManager.isEnhanced4gLteModeSettingEnabledByUser(this);
         if(mConferenceDialButton != null) {
-            mConferenceDialButton.setVisibility(enabled && isCallOnImsEnabled() ?
+            mConferenceDialButton.setVisibility((enabled && imsUseEnabled) ?
                     View.VISIBLE : View.GONE);
         }
     }
