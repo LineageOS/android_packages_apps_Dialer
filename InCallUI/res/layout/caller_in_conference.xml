@@ -97,7 +97,8 @@
         android:scaleType="center"
         android:contentDescription="@string/goPrivate"
         android:tint="@color/conference_call_manager_icon_color"
-        android:background="?android:attr/selectableItemBackgroundBorderless" />
+        android:background="@drawable/conference_ripple"
+        android:clickable="true" />
 
     <!-- "Disconnect" button which terminates the connection with this caller. -->
     <ImageButton
@@ -109,6 +110,7 @@
         android:scaleType="center"
         android:contentDescription="@string/onscreenEndCallText"
         android:tint="@color/conference_call_manager_icon_color"
-        android:background="?android:attr/selectableItemBackgroundBorderless" />
+        android:background="@drawable/conference_ripple"
+        android:clickable="true" />
 
 </LinearLayout>  <!-- End of single list element -->
