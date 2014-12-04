@@ -107,10 +107,13 @@ public class CallTypeIconsView extends View {
     private Drawable getCallTypeDrawable(int callType) {
         switch (callType) {
             case Calls.INCOMING_TYPE:
+            case Calls.INCOMING_IMS_TYPE:
                 return mResources.incoming;
             case Calls.OUTGOING_TYPE:
+            case Calls.OUTGOING_IMS_TYPE:
                 return mResources.outgoing;
             case Calls.MISSED_TYPE:
+            case Calls.MISSED_IMS_TYPE:
                 return mResources.missed;
             case Calls.VOICEMAIL_TYPE:
                 return mResources.voicemail;
