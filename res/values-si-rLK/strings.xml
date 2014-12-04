@@ -103,9 +103,9 @@
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> සම්බන්ධතාවය බලන්න"</string>
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g> අමතන්න"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> සඳහා ඇමතුම් විස්තර"</string>
-    <string name="description_new_voicemail" msgid="1711579223345163619">"නව හඬ තැපෑල"</string>
-    <string name="description_num_calls" msgid="3681117647705843445">"ඇමතුම් <xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>"</string>
-    <string name="description_video_call" msgid="1827338350642669590">"වීඩියෝ ඇමතුම"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"නව හඬ තැපෑල."</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"ඇමතුම් <xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>."</string>
+    <string name="description_video_call" msgid="2933838090743214204">"වීඩියෝ ඇමතුම."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"<xliff:g id="NAME">%1$s</xliff:g> වෙත SMS යවන්න"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"අසා නොමැති හඬ තැපෑල"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"හඬ සෙවීම අරඹන්න"</string>
@@ -157,9 +157,14 @@
     <string name="call_log_action_video_call" msgid="3818588654537490948">"වීඩියෝ ඇමතුම"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"අහනවා"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"විස්තර"</string>
-    <string name="description_incoming_missed_call" msgid="2610535352863246949">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g> වෙතින් මඟහැරුණු ඇමතුම."</string>
-    <string name="description_incoming_answered_call" msgid="7206670204016969740">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g> වෙතින් පිළිතුරු දුන් ඇමතුම."</string>
-    <string name="description_outgoing_call" msgid="3964211633673659733">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g> වෙත අමතන්න."</string>
+    <!-- no translation found for description_incoming_missed_call (2381085098795943627) -->
+    <skip />
+    <!-- no translation found for description_incoming_answered_call (7117665748428816544) -->
+    <skip />
+    <!-- no translation found for description_outgoing_call (6386364390619734734) -->
+    <skip />
+    <!-- no translation found for description_phone_account (1767072759541443861) -->
+    <skip />
     <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> නැවත අමතන්න"</string>
     <string name="description_video_call_action" msgid="4303952636480252389">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> වෙත වීඩියෝ ඇමතුම."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> වෙතින් හඬ තැපෑලට සවන් දෙන්න"</string>
