@@ -123,8 +123,8 @@ public class PhoneCallDetailsHelper {
 
         CharSequence nameText;
         CharSequence displayNumber =
-                mPhoneNumberHelper.getDisplayNumber(details.accountId, details.number,
-                details.numberPresentation, details.formattedNumber);
+            mPhoneNumberHelper.getDisplayNumber(details.accountId, details.number,
+                    details.numberPresentation, details.formattedNumber);
         String phoneNum = (String) details.number;
         if (!TextUtils.isEmpty(filter) && phoneNum.contains(filter)) {
             int start, end;
