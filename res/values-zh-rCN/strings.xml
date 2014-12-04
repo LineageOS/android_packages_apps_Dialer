@@ -110,6 +110,9 @@
     <string name="type_incoming_video" msgid="82323391702796181">"视频通话来电"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"拨出的视频通话"</string>
     <string name="type_missed_video" msgid="954396897034220545">"错过的视频通话"</string>
+    <string name="type_incoming_volte">4G语音通话来电</string>
+    <string name="type_outgoing_volte">外拨4G语音通话</string>
+    <string name="type_missed_volte">未接4G语音通话</string>
     <string name="type_voicemail" msgid="5153139450668549908">"语音信箱"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"来电"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"播放语音邮件"</string>

@@ -37,4 +37,6 @@
     <bool name="call_duration_enabled">true</bool>
 
     <bool name="call_durationtype_enabled">false</bool>
+
+    <bool name="ims_call_type_enabled">false</bool>
 </resources>
