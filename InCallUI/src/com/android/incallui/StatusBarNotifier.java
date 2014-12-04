@@ -31,6 +31,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.telecom.PhoneAccount;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 
 import com.android.contacts.common.util.BitmapUtil;
@@ -391,7 +393,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
             return mContext.getResources().getString(R.string.card_title_conf_call);
         }
         if (TextUtils.isEmpty(contactInfo.name)) {
-            return contactInfo.number;
+            return TextUtils.isEmpty(contactInfo.number) ? null
+                    : BidiFormatter.getInstance().unicodeWrap(
+                            contactInfo.number.toString(), TextDirectionHeuristics.LTR);
         }
 
         return contactInfo.name;
