@@ -319,7 +319,7 @@ public class InCallActivity extends Activity {
         // BACK is also used to exit out of any "special modes" of the
         // in-call UI:
 
-        if (!mCallCardFragment.isVisible()) {
+        if (!mConferenceManagerFragment.isVisible() && !mCallCardFragment.isVisible()) {
             return;
         }
 
@@ -328,6 +328,7 @@ public class InCallActivity extends Activity {
             return;
         } else if (mConferenceManagerFragment.isVisible()) {
             mConferenceManagerFragment.setVisible(false);
+            mCallCardFragment.getView().setVisibility(View.VISIBLE);
             return;
         }
 
@@ -682,6 +683,10 @@ public class InCallActivity extends Activity {
 
     public void showConferenceCallManager() {
         mConferenceManagerFragment.setVisible(true);
+
+        // Need to hide the call card fragment to ensure that accessibility service does not try to
+        // give focus to the call card when the conference manager is visible.
+        mCallCardFragment.getView().setVisibility(View.GONE);
     }
 
     public void showPostCharWaitDialog(String callId, String chars) {
