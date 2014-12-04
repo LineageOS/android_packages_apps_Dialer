@@ -103,9 +103,9 @@
     <string name="description_view_contact" msgid="5205669345700598415">"View contact <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Call <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Contact details for <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="1711579223345163619">"New voicemail"</string>
-    <string name="description_num_calls" msgid="3681117647705843445">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> calls"</string>
-    <string name="description_video_call" msgid="1827338350642669590">"Video call"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"New voicemail."</string>
+    <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> calls."</string>
+    <string name="description_video_call" msgid="2933838090743214204">"Video call."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Send SMS to <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Unheard voicemail"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Start voice search"</string>
@@ -157,9 +157,14 @@
     <string name="call_log_action_video_call" msgid="3818588654537490948">"VIDEO CALL"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"LISTEN"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"DETAILS"</string>
-    <string name="description_incoming_missed_call" msgid="2610535352863246949">"Missed call from <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_incoming_answered_call" msgid="7206670204016969740">"Answered call from <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_outgoing_call" msgid="3964211633673659733">"Call to <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
+    <!-- no translation found for description_incoming_missed_call (2381085098795943627) -->
+    <skip />
+    <!-- no translation found for description_incoming_answered_call (7117665748428816544) -->
+    <skip />
+    <!-- no translation found for description_outgoing_call (6386364390619734734) -->
+    <skip />
+    <!-- no translation found for description_phone_account (1767072759541443861) -->
+    <skip />
     <string name="description_call_back_action" msgid="3012837380108884260">"Call back <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_video_call_action" msgid="4303952636480252389">"Video call to <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Listen to voicemail from <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
