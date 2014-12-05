@@ -205,16 +205,16 @@ public class SpecialCharSequenceMgr {
 
                 final TelecomManager telecomManager =
                         (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-                List<PhoneAccountHandle> phoneAccountHandles =
+                List<PhoneAccountHandle> subscriptionAccountHandles =
                         PhoneAccountUtils.getSubscriptionPhoneAccounts(context);
 
-                boolean hasUserSelectedDefault = hasDefaultSubscriptionAccount(
-                        telecomManager.getUserSelectedOutgoingPhoneAccount(), phoneAccountHandles);
+                boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
+                        telecomManager.getUserSelectedOutgoingPhoneAccount());
 
-                if (phoneAccountHandles.size() == 1 || hasUserSelectedDefault) {
+                if (subscriptionAccountHandles.size() == 1 || hasUserSelectedDefault) {
                     Uri uri = telecomManager.getAdnUriForPhoneAccount(null);
                     handleAdnQuery(handler, sc, uri);
-                } else if (phoneAccountHandles.size() > 1){
+                } else if (subscriptionAccountHandles.size() > 1){
                     SelectPhoneAccountListener listener = new SelectPhoneAccountListener() {
                         @Override
                         public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
@@ -229,7 +229,7 @@ public class SpecialCharSequenceMgr {
                     };
 
                     SelectPhoneAccountDialogFragment.showAccountDialog(
-                            ((Activity) context).getFragmentManager(), phoneAccountHandles,
+                            ((Activity) context).getFragmentManager(), subscriptionAccountHandles,
                             listener);
                 } else {
                     return false;
@@ -268,16 +268,16 @@ public class SpecialCharSequenceMgr {
         if ((input.startsWith("**04") || input.startsWith("**05")) && input.endsWith("#")) {
             final TelecomManager telecomManager =
                     (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-            List<PhoneAccountHandle> phoneAccountHandles =
+            List<PhoneAccountHandle> subscriptionAccountHandles =
                     PhoneAccountUtils.getSubscriptionPhoneAccounts(context);
-            boolean hasUserSelectedDefault = hasDefaultSubscriptionAccount(
-                    telecomManager.getUserSelectedOutgoingPhoneAccount(), phoneAccountHandles);
+            boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
+                    telecomManager.getUserSelectedOutgoingPhoneAccount());
 
-            if (phoneAccountHandles.size() == 1 || hasUserSelectedDefault) {
+            if (subscriptionAccountHandles.size() == 1 || hasUserSelectedDefault) {
                 // Don't bring up the dialog for single-SIM or if the default outgoing account is
                 // a subscription account.
                 return telecomManager.handleMmi(input);
-            } else if (phoneAccountHandles.size() > 1){
+            } else if (subscriptionAccountHandles.size() > 1){
                 SelectPhoneAccountListener listener = new SelectPhoneAccountListener() {
                     @Override
                     public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
@@ -290,27 +290,13 @@ public class SpecialCharSequenceMgr {
                 };
 
                 SelectPhoneAccountDialogFragment.showAccountDialog(
-                        ((Activity) context).getFragmentManager(), phoneAccountHandles,
+                        ((Activity) context).getFragmentManager(), subscriptionAccountHandles,
                         listener);
             }
             return true;
         }
         return false;
     }
-
-    /**
-     * Check if the default outgoing phone account set is a subscription phone account.
-     */
-    static private boolean hasDefaultSubscriptionAccount(PhoneAccountHandle defaultOutgoingAccount,
-            List<PhoneAccountHandle> phoneAccountHandles) {
-        for (PhoneAccountHandle accountHandle : phoneAccountHandles) {
-            if (accountHandle.equals(defaultOutgoingAccount)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     // TODO: Use TelephonyCapabilities.getDeviceIdLabel() to get the device id label instead of a
     // hard-coded string.
