@@ -112,8 +112,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private int mVideoAnimationDuration;
 
-    private Drawable mDefaultContactPhoto;
-
     private MaterialPalette mCurrentThemeColors;
 
     @Override
@@ -817,7 +815,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
     }
 
-    public void animateForNewOutgoingCall(final Point touchPoint) {
+    public void animateForNewOutgoingCall(final Point touchPoint,
+            final boolean showCircularReveal) {
         final ViewGroup parent = (ViewGroup) mPrimaryCallCardContainer.getParent();
 
         final ViewTreeObserver observer = getView().getViewTreeObserver();
@@ -849,19 +848,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mCallTypeLabel.setAlpha(0);
                 mCallNumberAndLabel.setAlpha(0);
 
-                final Animator revealAnimator = getRevealAnimator(touchPoint);
-                final Animator shrinkAnimator =
-                        getShrinkAnimator(parent.getHeight(), originalHeight);
+                final Animator animator = getOutgoingCallAnimator(touchPoint,
+                        parent.getHeight(), originalHeight, showCircularReveal);
 
-                mAnimatorSet = new AnimatorSet();
-                mAnimatorSet.playSequentially(revealAnimator, shrinkAnimator);
-                mAnimatorSet.addListener(new AnimatorListenerAdapter() {
+                animator.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         setViewStatePostAnimation(listener);
                     }
                 });
-                mAnimatorSet.start();
+                animator.start();
             }
         });
     }
@@ -985,6 +981,21 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 startX, startY, 0, Math.max(size.x, size.y));
         valueAnimator.setDuration(mRevealAnimationDuration);
         return valueAnimator;
+    }
+
+    private Animator getOutgoingCallAnimator(Point touchPoint, int startHeight, int endHeight,
+            boolean showCircularReveal) {
+
+        final Animator shrinkAnimator = getShrinkAnimator(startHeight, endHeight);
+
+        if (!showCircularReveal) {
+            return shrinkAnimator;
+        }
+
+        final Animator revealAnimator = getRevealAnimator(touchPoint);
+        final AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playSequentially(revealAnimator, shrinkAnimator);
+        return animatorSet;
     }
 
     private void assignTranslateAnimation(View view, int offset) {
