@@ -1108,8 +1108,22 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     public static Intent getAddNumberToContactIntent(CharSequence text) {
-        final Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
-        intent.putExtra(Intents.Insert.PHONE, text);
+        return getAddToContactIntent(null /* name */, text /* phoneNumber */,
+                -1 /* phoneNumberType */);
+    }
+
+    public static Intent getAddToContactIntent(CharSequence name, CharSequence phoneNumber,
+            int phoneNumberType) {
+        Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
+        intent.putExtra(Intents.Insert.PHONE, phoneNumber);
+        // Only include the name and phone type extras if they are specified (the method
+        // getAddNumberToContactIntent does not use them).
+        if (name != null) {
+            intent.putExtra(Intents.Insert.NAME, name);
+        }
+        if (phoneNumberType != -1) {
+            intent.putExtra(Intents.Insert.PHONE_TYPE, phoneNumberType);
+        }
         intent.setType(Contacts.CONTENT_ITEM_TYPE);
         return intent;
     }
