@@ -19,6 +19,7 @@ package com.android.dialer.calllog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.CallLog.Calls;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 
 import com.android.contacts.common.CallUtil;
@@ -79,16 +80,24 @@ import com.android.dialer.R;
      */
     public void setActionContentDescriptions(CallLogListItemViews views) {
         views.callBackButtonView.setContentDescription(
-                mResources.getString(R.string.description_call_back_action, views.nameOrNumber));
+                TextUtils.expandTemplate(
+                        mResources.getString(R.string.description_call_back_action),
+                        views.nameOrNumber));
 
         views.videoCallButtonView.setContentDescription(
-                mResources.getString(R.string.description_video_call_action, views.nameOrNumber));
+                TextUtils.expandTemplate(
+                        mResources.getString(R.string.description_video_call_action),
+                        views.nameOrNumber));
 
         views.voicemailButtonView.setContentDescription(
-                mResources.getString(R.string.description_voicemail_action, views.nameOrNumber));
+                TextUtils.expandTemplate(
+                        mResources.getString(R.string.description_voicemail_action),
+                        views.nameOrNumber));
 
         views.detailsButtonView.setContentDescription(
-                mResources.getString(R.string.description_details_action, views.nameOrNumber));
+                TextUtils.expandTemplate(
+                        mResources.getString(R.string.description_details_action),
+                        views.nameOrNumber));
     }
 
     /**
@@ -149,7 +158,7 @@ import com.android.dialer.R;
         // Get the time/date of the call
         final CharSequence timeOfCall = mPhoneCallDetailsHelper.getCallDate(details);
 
-        StringBuilder callDescription = new StringBuilder();
+        SpannableStringBuilder callDescription = new SpannableStringBuilder();
 
         // Prepend the voicemail indication.
         if (isVoiceMail) {
@@ -172,13 +181,19 @@ import com.android.dialer.R;
         String accountLabel = PhoneAccountUtils.getAccountLabel(context, details.accountHandle);
 
         // Use chosen string resource to build up the message.
-        callDescription.append(mResources.getString(stringID,
-                nameOrNumber,
-                // If no type or location can be determined, sub in empty string.
-                typeOrLocation == null ? "" : typeOrLocation,
-                timeOfCall,
-                accountLabel == null ? "" :
-                    mResources.getString(R.string.description_phone_account, accountLabel)));
+        CharSequence onAccountLabel = accountLabel == null
+                ? ""
+                : TextUtils.expandTemplate(
+                        mResources.getString(R.string.description_phone_account),
+                        accountLabel);
+        callDescription.append(
+                TextUtils.expandTemplate(
+                        mResources.getString(stringID),
+                        nameOrNumber,
+                        // If no type or location can be determined, sub in empty string.
+                        typeOrLocation == null ? "" : typeOrLocation,
+                        timeOfCall,
+                        onAccountLabel));
 
         return callDescription;
     }

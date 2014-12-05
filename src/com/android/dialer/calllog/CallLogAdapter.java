@@ -29,6 +29,7 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,7 @@ import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
 import com.android.contacts.common.util.UriUtils;
@@ -754,7 +756,8 @@ public class CallLogAdapter extends GroupingListAdapter
         final String label = info.label;
         final long photoId = info.photoId;
         final Uri photoUri = info.photoUri;
-        CharSequence formattedNumber = info.formattedNumber;
+        CharSequence formattedNumber = info.formattedNumber == null
+                ? null : PhoneNumberUtils.ttsSpanAsPhoneNumber(info.formattedNumber);
         final int[] callTypes = getCallTypes(c, count);
         final String geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
         final int sourceType = info.sourceType;
