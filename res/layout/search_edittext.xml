@@ -42,7 +42,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/search_box_icon_size"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/search_box_collapsed_text_margin_left"
                 android:textSize="@dimen/search_collapsed_text_size"
                 android:fontFamily="@string/search_font_family"
