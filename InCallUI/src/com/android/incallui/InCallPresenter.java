@@ -1065,7 +1065,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         if (mCircularRevealActivityStarted) {
             mWaitForRevealAnimationStart = true;
             mShowDialpadOnStart = showDialpad;
+            Log.i(this, "Waiting for circular reveal completion to show InCallActivity");
         } else {
+            Log.i(this, "Showing InCallActivity immediately");
             mContext.startActivity(getInCallIntent(showDialpad, newOutgoingCall,
                     newOutgoingCall /* showCircularReveal */));
         }
@@ -1078,6 +1080,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
+                    Log.i(this, "Showing InCallActivity after circular reveal");
                     final Intent intent =
                             getInCallIntent(mShowDialpadOnStart, true, false, false);
                     activity.startActivity(intent);
