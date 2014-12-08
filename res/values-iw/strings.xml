@@ -157,14 +157,10 @@
     <string name="call_log_action_video_call" msgid="3818588654537490948">"שיחת וידאו"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"האזן"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"פרטים"</string>
-    <!-- no translation found for description_incoming_missed_call (2381085098795943627) -->
-    <skip />
-    <!-- no translation found for description_incoming_answered_call (7117665748428816544) -->
-    <skip />
-    <!-- no translation found for description_outgoing_call (6386364390619734734) -->
-    <skip />
-    <!-- no translation found for description_phone_account (1767072759541443861) -->
-    <skip />
+    <string name="description_incoming_missed_call" msgid="2381085098795943627">"שיחה לא נענתה מ-<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>‏, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>‏, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>‏, <xliff:g id="PHONEACCOUNT">%4$s</xliff:g>."</string>
+    <string name="description_incoming_answered_call" msgid="7117665748428816544">"נענתה שיחה מ-<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>‏, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>‏, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>‏, <xliff:g id="PHONEACCOUNT">%4$s</xliff:g>‏."</string>
+    <string name="description_outgoing_call" msgid="6386364390619734734">"שיחה אל <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>‏, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>‏, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>‏, <xliff:g id="PHONEACCOUNT">%4$s</xliff:g>."</string>
+    <string name="description_phone_account" msgid="1767072759541443861">"ב-<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>"</string>
     <string name="description_call_back_action" msgid="3012837380108884260">"התקשר חזרה אל <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_video_call_action" msgid="4303952636480252389">"שיחת וידאו אל <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"האזן לדואר קולי מאת <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
