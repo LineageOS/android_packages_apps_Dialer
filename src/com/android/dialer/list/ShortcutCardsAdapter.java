@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.graphics.Rect;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -258,8 +259,11 @@ public class ShortcutCardsAdapter extends BaseAdapter {
 
             // TODO: Set content description including type/location and time information.
             TextView nameView = (TextView) actionView.findViewById(R.id.name);
-            actionView.setContentDescription(getResources().getString(
-                    R.string.description_call_back_action, nameView.getText()));
+
+            actionView.setContentDescription(
+                    TextUtils.expandTemplate(
+                            getResources().getString(R.string.description_call_back_action),
+                            nameView.getText()));
 
             mPreviousTranslationZ = getResources().getDimensionPixelSize(
                     R.dimen.recent_call_log_item_translation_z);
