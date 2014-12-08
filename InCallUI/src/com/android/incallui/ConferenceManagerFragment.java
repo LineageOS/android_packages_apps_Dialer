@@ -92,6 +92,9 @@ public class ConferenceManagerFragment
             final CallList calls = CallList.getInstance();
             getPresenter().init(getActivity(), calls);
             getView().setVisibility(View.VISIBLE);
+            // Request focus on the list of participants for accessibility purposes.  This ensures
+            // that once the list of participants is shown, the first participant is announced.
+            mConferenceParticipantList.requestFocus();
         } else {
             getView().setVisibility(View.GONE);
 
