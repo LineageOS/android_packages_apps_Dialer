@@ -452,17 +452,19 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                 final int numberPresentation = firstDetails.numberPresentation;
                 final Uri contactUri = firstDetails.contactUri;
                 final Uri photoUri = firstDetails.photoUri;
+                final long subId = firstDetails.accountId;
 
                 // Cache the details about the phone number.
                 final boolean canPlaceCallsTo =
                     PhoneNumberUtilsWrapper.canPlaceCallsTo(mNumber, numberPresentation);
                 final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper();
-                final boolean isVoicemailNumber = phoneUtils.isVoicemailNumber(mNumber);
+                final boolean isVoicemailNumber = phoneUtils.isVoicemailNumber(subId, mNumber);
                 final boolean isSipNumber = phoneUtils.isSipNumber(mNumber);
 
                 final CharSequence callLocationOrType = getNumberTypeOrLocation(firstDetails);
 
                 final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(
+                        subId,
                         firstDetails.number,
                         firstDetails.numberPresentation,
                         firstDetails.formattedNumber);
@@ -513,7 +515,9 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
 
                 String nameForDefaultImage;
                 if (TextUtils.isEmpty(firstDetails.name)) {
-                    nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(firstDetails.number,
+                    nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(
+                            firstDetails.accountId,
+                            firstDetails.number,
                             firstDetails.numberPresentation,
                             firstDetails.formattedNumber).toString();
                 } else {
@@ -574,6 +578,11 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                     PhoneAccountUtils.getAccount(
                     callCursor.getString(ACCOUNT_COMPONENT_NAME),
                     callCursor.getString(ACCOUNT_ID)));
+            String accId = callCursor.getString(ACCOUNT_ID);
+            long subId = SubscriptionManager.DEFAULT_SUB_ID;
+            if (accId!=null && !accId.equals("E") && !accId.toLowerCase().contains("sip")) {
+                subId = Long.parseLong(accId);
+            }
 
             if (TextUtils.isEmpty(countryIso)) {
                 countryIso = mDefaultCountryIso;
@@ -591,11 +600,11 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
             // If this is not a regular number, there is no point in looking it up in the contacts.
             ContactInfo info =
                     PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
-                    && !new PhoneNumberUtilsWrapper().isVoicemailNumber(number)
+                    && !new PhoneNumberUtilsWrapper().isVoicemailNumber(subId, number)
                             ? mContactInfoHelper.lookupNumber(number, countryIso)
                             : null;
             if (info == null) {
-                formattedNumber = mPhoneNumberHelper.getDisplayNumber(number,
+                formattedNumber = mPhoneNumberHelper.getDisplayNumber(subId, number,
                         numberPresentation, null);
                 nameText = "";
                 numberType = 0;
@@ -621,7 +630,8 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                     formattedNumber, countryIso, geocode,
                     new int[]{ callType }, date, duration,
                     nameText, numberType, numberLabel, lookupUri, photoUri, sourceType,
-                    accountLabel, null, features, dataUsage, transcription, durationType);
+                    accountLabel, null, features, dataUsage, transcription, durationType,
+                    subId);
         } finally {
             if (callCursor != null) {
                 callCursor.close();
