@@ -65,7 +65,8 @@ public class InCallActivity extends Activity {
 
     public static final String SHOW_DIALPAD_EXTRA = "InCallActivity.show_dialpad";
     public static final String DIALPAD_TEXT_EXTRA = "InCallActivity.dialpad_text";
-    public static final String NEW_OUTGOING_CALL = "InCallActivity.new_outgoing_call";
+    public static final String NEW_OUTGOING_CALL_EXTRA = "InCallActivity.new_outgoing_call";
+    public static final String SHOW_CIRCULAR_REVEAL_EXTRA = "InCallActivity.show_circular_reveal";
 
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
@@ -202,7 +203,6 @@ public class InCallActivity extends Activity {
         mIsForegroundActivity = true;
 
         InCallPresenter.getInstance().setThemeColors();
-
         InCallPresenter.getInstance().onUiShowing(true);
 
         if (mShowDialpadRequested) {
@@ -236,7 +236,6 @@ public class InCallActivity extends Activity {
         }
 
         InCallPresenter.getInstance().onUiShowing(false);
-
         if (isFinishing()) {
             InCallPresenter.getInstance().unsetActivity(this);
         }
@@ -480,8 +479,8 @@ public class InCallActivity extends Activity {
                 relaunchedFromDialer(showDialpad);
             }
 
-            if (intent.getBooleanExtra(NEW_OUTGOING_CALL, false)) {
-                intent.removeExtra(NEW_OUTGOING_CALL);
+            if (intent.getBooleanExtra(NEW_OUTGOING_CALL_EXTRA, false)) {
+                intent.removeExtra(NEW_OUTGOING_CALL_EXTRA);
                 Call call = CallList.getInstance().getOutgoingCall();
                 if (call == null) {
                     call = CallList.getInstance().getPendingOutgoingCall();
@@ -507,7 +506,12 @@ public class InCallActivity extends Activity {
                     }
                 }
 
-                mCallCardFragment.animateForNewOutgoingCall(touchPoint);
+                // This is only true in the case where an outgoing call is initiated by tapping
+                // on the "Select account dialog", in which case we skip the initial animation. In
+                // most other cases the circular reveal is done by OutgoingCallAnimationActivity.
+                final boolean showCircularReveal =
+                        intent.getBooleanExtra(SHOW_CIRCULAR_REVEAL_EXTRA, false);
+                mCallCardFragment.animateForNewOutgoingCall(touchPoint, showCircularReveal);
 
                 /*
                  * If both a phone account handle and a list of phone accounts to choose from are

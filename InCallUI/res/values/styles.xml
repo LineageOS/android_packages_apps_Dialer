@@ -84,10 +84,21 @@
                (Note that InCallActivity won't be destroyed once it is created)
 
              TODO: try removing the flag instead -->
-        <item name="android:taskOpenEnterAnimation">@anim/activity_open_enter</item>
+        <item name="android:taskOpenEnterAnimation">@null</item>
         <item name="android:taskOpenExitAnimation">@anim/activity_open_exit</item>
         <item name="android:taskToFrontEnterAnimation">@anim/activity_open_enter</item>
         <item name="android:taskToFrontExitAnimation">@anim/activity_open_exit</item>
+    </style>
+
+    <style name="OutgoingCallAnimationStyle" parent="@android:style/Animation.Activity">
+        <item name="android:taskOpenEnterAnimation">@null</item>
+        <item name="android:taskOpenExitAnimation">@null</item>
+        <item name="android:activityOpenEnterAnimation">@null</item>
+        <item name="android:activityOpenExitAnimation">@null</item>
+        <item name="android:activityCloseEnterAnimation">@null</item>
+        <item name="android:activityCloseExitAnimation">@null</item>
+        <item name="android:taskToFrontEnterAnimation">@null</item>
+        <item name="android:taskToFrontExitAnimation">@null</item>
     </style>
 
     <!-- Theme for the InCallActivity activity. Should have a transparent background for the
@@ -99,11 +110,21 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="dialpad_key_button_touch_tint">@color/incall_dialpad_touch_tint</item>
         <item name="android:textColorPrimary">@color/incall_call_banner_text_color</item>
         <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
         <item name="android:popupMenuStyle">@style/InCallPopupMenuStyle</item>
         <item name="android:actionBarStyle">@style/InCallActionBarStyle</item>
+    </style>
+
+    <style name="Theme.CircularRevealAnimation" parent="@android:style/Theme.Material.Light">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 
     <style name="InCallPopupMenuStyle" parent="@android:style/Theme.Material.Light">
