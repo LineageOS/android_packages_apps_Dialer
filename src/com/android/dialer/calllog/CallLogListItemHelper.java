@@ -222,7 +222,7 @@ import com.android.dialer.R;
         if (!TextUtils.isEmpty(details.name)) {
             recipient = details.name;
         } else {
-            recipient = mPhoneNumberHelper.getDisplayNumber(
+            recipient = mPhoneNumberHelper.getDisplayNumber(details.accountId,
                     details.number, details.numberPresentation, details.formattedNumber);
         }
         return recipient;
