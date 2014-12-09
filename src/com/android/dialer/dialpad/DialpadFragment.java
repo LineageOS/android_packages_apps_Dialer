@@ -21,11 +21,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -218,17 +220,21 @@ public class DialpadFragment extends Fragment
 
     private String mCurrentCountryIso;
 
-    private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
+    private CallStateReceiver mCallStateReceiver;
+
+    private class CallStateReceiver extends BroadcastReceiver {
         /**
-         * Listen for phone state changes so that we can take down the
+         * Receive call state changes so that we can take down the
          * "dialpad chooser" if the phone becomes idle while the
          * chooser UI is visible.
          */
         @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
-            // Log.i(TAG, "PhoneStateListener.onCallStateChanged: "
-            //       + state + ", '" + incomingNumber + "'");
-            if ((state == TelephonyManager.CALL_STATE_IDLE) && isDialpadChooserVisible()) {
+        public void onReceive(Context context, Intent intent) {
+            // Log.i(TAG, "CallStateReceiver.onReceive");
+            String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+            if ((TextUtils.equals(state, TelephonyManager.EXTRA_STATE_IDLE) ||
+                    TextUtils.equals(state, TelephonyManager.EXTRA_STATE_OFFHOOK))
+                    && isDialpadChooserVisible()) {
                 // Log.i(TAG, "Call ended with dialpad chooser visible!  Taking it down...");
                 // Note there's a race condition in the UI here: the
                 // dialpad chooser could conceivably disappear (on its
@@ -239,7 +245,7 @@ public class DialpadFragment extends Fragment
                 showDialpadChooser(false);
             }
         }
-    };
+    }
 
     private boolean mWasEmptyBeforeTextChange;
 
@@ -328,6 +334,13 @@ public class DialpadFragment extends Fragment
         }
 
         mDialpadSlideInDuration = getResources().getInteger(R.integer.dialpad_slide_in_duration);
+
+        if (mCallStateReceiver == null) {
+            IntentFilter callStateIntentFilter = new IntentFilter(
+                    TelephonyManager.ACTION_PHONE_STATE_CHANGED);
+            mCallStateReceiver = new CallStateReceiver();
+            ((Context) getActivity()).registerReceiver(mCallStateReceiver, callStateIntentFilter);
+        }
     }
 
     @Override
@@ -623,13 +636,6 @@ public class DialpadFragment extends Fragment
 
         stopWatch.lap("fdin");
 
-        // While we're in the foreground, listen for phone state changes,
-        // purely so that we can take down the "dialpad chooser" if the
-        // phone becomes idle while the chooser UI is visible.
-        getTelephonyManager().listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
-
-        stopWatch.lap("tm");
-
         if (!isPhoneInUse()) {
             // A sanity-check: the "dialpad chooser" UI should not be visible if the phone is idle.
             showDialpadChooser(false);
@@ -660,9 +666,6 @@ public class DialpadFragment extends Fragment
     @Override
     public void onPause() {
         super.onPause();
-
-        // Stop listening for phone state changes.
-        getTelephonyManager().listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
 
         // Make sure we don't leave this activity with a tone still playing.
         stopTone();
@@ -696,6 +699,12 @@ public class DialpadFragment extends Fragment
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(PREF_DIGITS_FILLED_BY_INTENT, mDigitsFilledByIntent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ((Context) getActivity()).unregisterReceiver(mCallStateReceiver);
     }
 
     private void keyPressed(int keyCode) {
