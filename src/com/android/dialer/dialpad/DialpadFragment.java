@@ -39,6 +39,7 @@ import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
 import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
@@ -77,6 +78,7 @@ import com.android.dialer.DialtactsActivity;
 import com.android.dialer.NeededForReflection;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
+import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.util.DialerUtils;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
@@ -87,6 +89,7 @@ import com.android.phone.common.dialpad.DialpadView;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Fragment that displays a twelve-key phone dialpad.
@@ -908,7 +911,16 @@ public class DialpadFragment extends Fragment
                     // We'll try to initiate voicemail and thus we want to remove irrelevant string.
                     removePreviousDigitIfPossible();
 
-                    if (isVoicemailAvailable()) {
+                    List<PhoneAccountHandle> subscriptionAccountHandles =
+                            PhoneAccountUtils.getSubscriptionPhoneAccounts(getActivity());
+                    boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
+                            getTelecomManager().getUserSelectedOutgoingPhoneAccount());
+                    boolean multiSim = subscriptionAccountHandles.size() > 1;
+
+                    if ((multiSim && !hasUserSelectedDefault) || isVoicemailAvailable()) {
+                        // On a multi-SIM phone, if the user has not selected a default
+                        // subscription, initiate a call to voicemail so they can select an account
+                        // from the "Call with" dialog.
                         callVoicemail();
                     } else if (getActivity() != null) {
                         // Voicemail is unavailable maybe because Airplane mode is turned on.
