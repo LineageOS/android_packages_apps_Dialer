@@ -110,7 +110,6 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowNoTitle">true</item>
         <item name="dialpad_key_button_touch_tint">@color/incall_dialpad_touch_tint</item>
         <item name="android:textColorPrimary">@color/incall_call_banner_text_color</item>
         <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
