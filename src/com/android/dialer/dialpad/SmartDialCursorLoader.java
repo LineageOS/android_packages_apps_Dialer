@@ -99,21 +99,8 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
             row[PhoneQuery.LOOKUP_KEY] = contact.lookupKey;
             row[PhoneQuery.PHOTO_ID] = contact.photoId;
             row[PhoneQuery.DISPLAY_NAME] = contact.displayName;
-
-            String accountType = null;
-            String accountName = null;
-            Uri contactUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, contact.id);
-            Cursor c = mContext.getContentResolver().query(
-                    contactUri,
-                    new String[] { RawContacts.ACCOUNT_TYPE, RawContacts.ACCOUNT_NAME },
-                    null, null, null);
-            if (c != null && c.moveToFirst()) {
-                accountType = c.getString(0);
-                accountName = c.getString(1);
-                c.close();
-            }
-            row[PhoneQuery.PHONE_ACCOUNT_TYPE] = accountType;
-            row[PhoneQuery.PHONE_ACCOUNT_NAME] = accountName;
+            row[PhoneQuery.PHONE_ACCOUNT_TYPE] = contact.accountType;
+            row[PhoneQuery.PHONE_ACCOUNT_NAME] = contact.accountName;
 
             cursor.addRow(row);
         }
