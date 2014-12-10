@@ -82,8 +82,6 @@ public class CallList implements InCallPhoneListener {
         public void onCallRemoved(Phone phone, android.telecom.Call telecommCall) {
             if (mCallByTelecommCall.containsKey(telecommCall)) {
                 Call call = mCallByTelecommCall.get(telecommCall);
-                call.setState(Call.State.DISCONNECTED);
-                call.setDisconnectCause(new DisconnectCause(DisconnectCause.UNKNOWN));
                 if (updateCallInMap(call)) {
                     Log.w(this, "Removing call not previously disconnected " + call.getId());
                 }
@@ -420,7 +418,6 @@ public class CallList implements InCallPhoneListener {
         if (call.getState() == Call.State.DISCONNECTED) {
             // update existing (but do not add!!) disconnected calls
             if (mCallById.containsKey(call.getId())) {
-
                 // For disconnected calls, we want to keep them alive for a few seconds so that the
                 // UI has a chance to display anything it needs when a call is disconnected.
 

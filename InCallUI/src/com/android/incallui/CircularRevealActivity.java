@@ -51,13 +51,13 @@ public class CircularRevealActivity extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) {
             clearDisplay();
-            finish();
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(0, 0);
         setContentView(R.layout.outgoing_call_animation);
         final Point touchPoint = getIntent().getParcelableExtra(TouchPointManager.TOUCH_POINT);
         final MaterialPalette palette = getIntent().getParcelableExtra(EXTRA_THEME_COLORS);
@@ -67,6 +67,9 @@ public class CircularRevealActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (!InCallPresenter.getInstance().isServiceBound()) {
+            clearDisplay();
+        }
         final IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_CLEAR_DISPLAY);
         LocalBroadcastManager.getInstance(this).registerReceiver(mClearDisplayReceiver, filter);
@@ -133,6 +136,7 @@ public class CircularRevealActivity extends Activity {
 
     private void clearDisplay() {
         getWindow().getDecorView().setVisibility(View.INVISIBLE);
+        finish();
     }
 
     @Override

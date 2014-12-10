@@ -166,6 +166,11 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
     private boolean mShowDialpadOnStart = false;
 
+    /**
+     * Whether or not InCallService is bound to Telecom.
+     */
+    private boolean mServiceBound = false;
+
     private Phone mPhone;
 
     private Handler mHandler = new Handler();
@@ -914,11 +919,12 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         // This is different from the incoming call sequence because we do not need to shock the
         // user with a top-level notification.  Just show the call UI normally.
         final boolean mainUiNotVisible = !isShowingInCallUi() || !getCallCardFragmentVisible();
-        final boolean showCallUi = InCallState.OUTGOING == newState && mainUiNotVisible;
+        boolean showCallUi = InCallState.OUTGOING == newState && mainUiNotVisible;
 
-        // TODO: Can we be suddenly in a call without it having been in the outgoing or incoming
-        // state?  I havent seen that but if it can happen, the code below should be enabled.
-        // showCallUi |= (InCallState.INCALL && !isActivityStarted());
+        // Direct transition from PENDING_OUTGOING -> INCALL means that there was an error in the
+        // outgoing call process, so the UI should be brought up to show an error dialog.
+        showCallUi |= (InCallState.PENDING_OUTGOING == mInCallState
+                && InCallState.INCALL == newState && !isActivityStarted());
 
         // The only time that we have an instance of mInCallActivity and it isn't started is
         // when it is being destroyed.  In that case, lets avoid bringing up another instance of
@@ -1087,8 +1093,22 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
                     mShowDialpadOnStart = false;
                 }
             });
-
+        } else if (!mServiceBound) {
+            CircularRevealActivity.sendClearDisplayBroadcast(mContext);
+            return;
         }
+    }
+
+    public void onServiceBind() {
+        mServiceBound = true;
+    }
+
+    public void onServiceUnbind() {
+        mServiceBound = false;
+    }
+
+    public boolean isServiceBound() {
+        return mServiceBound;
     }
 
     public void maybeStartRevealAnimation(Intent intent) {
