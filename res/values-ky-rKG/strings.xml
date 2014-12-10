@@ -184,14 +184,14 @@
     <string name="call_log_action_video_call" msgid="3818588654537490948">"ВИДЕО ЧАЛУУ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"УГУУ"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"ЧОО-ЖАЙ"</string>
-    <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>, <xliff:g id="PHONEACCOUNT">%4$s</xliff:g> дегенден жооп берилбей калган чалуу."</string>
-    <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>, <xliff:g id="PHONEACCOUNT">%4$s</xliff:g> дегенден жооп берилген чалуу."</string>
-    <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>, <xliff:g id="PHONEACCOUNT">%4$s</xliff:g> дегенге чалуу."</string>
-    <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> боюнча"</string>
-    <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> кайра чалуу"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"Төмөнкүгө видео чалуу <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
-    <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> үн катын угуу"</string>
-    <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> чалуу чоо-жайы"</string>
+    <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> дегенден жооп берилбей калган чалуу."</string>
+    <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> дегенден жооп берилген чалуу."</string>
+    <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> дегенге чалуу."</string>
+    <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> боюнча"</string>
+    <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> кайра чалуу"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"Төмөнкүгө видео чалуу <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
+    <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> үн катын угуу"</string>
+    <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> чалуу чоо-жайы"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Чалуулар таржымалынан жок кылынды"</string>
     <string name="toast_caller_id_reported" msgid="2240847358945525483">"Номур Google\'га кабарланды"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"КАБАРЛОО"</string>

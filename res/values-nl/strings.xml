@@ -157,14 +157,14 @@
     <string name="call_log_action_video_call" msgid="3818588654537490948">"VIDEOGESPREK"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"LUISTEREN"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"DETAILS"</string>
-    <string name="description_incoming_missed_call" msgid="2381085098795943627">"Oproep gemist van <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>, <xliff:g id="PHONEACCOUNT">%4$s</xliff:g>."</string>
-    <string name="description_incoming_answered_call" msgid="7117665748428816544">"Oproep beantwoord van <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>, <xliff:g id="PHONEACCOUNT">%4$s</xliff:g>."</string>
-    <string name="description_outgoing_call" msgid="6386364390619734734">"Oproep naar <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>, <xliff:g id="PHONEACCOUNT">%4$s</xliff:g>."</string>
-    <string name="description_phone_account" msgid="1767072759541443861">"in <xliff:g id="PHONEACCOUNT">%1$s</xliff:g>"</string>
-    <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> terugbellen"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"Videogesprek naar <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
-    <string name="description_voicemail_action" msgid="8054891873788903063">"Voicemail beluisteren van <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_details_action" msgid="2433827152749491785">"Oproepgegevens voor <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
+    <string name="description_incoming_missed_call" msgid="2381085098795943627">"Oproep gemist van <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_incoming_answered_call" msgid="7117665748428816544">"Oproep beantwoord van <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_outgoing_call" msgid="6386364390619734734">"Oproep naar <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_phone_account" msgid="1767072759541443861">"in <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
+    <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> terugbellen"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"Videogesprek naar <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
+    <string name="description_voicemail_action" msgid="8054891873788903063">"Voicemail beluisteren van <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_details_action" msgid="2433827152749491785">"Oproepgegevens voor <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Verwijderd uit oproepgeschiedenis"</string>
     <string name="toast_caller_id_reported" msgid="2240847358945525483">"Nummer gemeld aan Google"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"MELDEN"</string>
