@@ -326,8 +326,7 @@ public class InCallActivity extends Activity {
             mCallButtonFragment.displayDialpad(false /* show */, true /* animate */);
             return;
         } else if (mConferenceManagerFragment.isVisible()) {
-            mConferenceManagerFragment.setVisible(false);
-            mCallCardFragment.getView().setVisibility(View.VISIBLE);
+            showConferenceCallManager(false);
             return;
         }
 
@@ -685,12 +684,18 @@ public class InCallActivity extends Activity {
         return mDialpadFragment != null && mDialpadFragment.isVisible();
     }
 
-    public void showConferenceCallManager() {
-        mConferenceManagerFragment.setVisible(true);
+    /**
+     * Hides or shows the conference manager fragment.
+     *
+     * @param show {@code true} if the conference manager should be shown, {@code false} if it
+     *                         should be hidden.
+     */
+    public void showConferenceCallManager(boolean show) {
+        mConferenceManagerFragment.setVisible(show);
 
         // Need to hide the call card fragment to ensure that accessibility service does not try to
         // give focus to the call card when the conference manager is visible.
-        mCallCardFragment.getView().setVisibility(View.GONE);
+        mCallCardFragment.getView().setVisibility(show ? View.GONE : View.VISIBLE);
     }
 
     public void showPostCharWaitDialog(String callId, String chars) {
