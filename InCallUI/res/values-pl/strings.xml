@@ -135,7 +135,7 @@
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Połączenie już nie jest ignorowane."</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Połączenie zawieszone."</string>
     <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"Połączenie nie jest już wstrzymane."</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"Odpowiedz"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Odbierz"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Wyślij SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Odrzuć"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"Odbierz jako rozmowę wideo"</string>
