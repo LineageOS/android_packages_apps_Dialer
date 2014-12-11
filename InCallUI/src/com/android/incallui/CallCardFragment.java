@@ -220,7 +220,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             @Override
             public void onClick(View v) {
                 InCallActivity activity = (InCallActivity) getActivity();
-                activity.showConferenceCallManager();
+                activity.showConferenceCallManager(true);
             }
         });
 

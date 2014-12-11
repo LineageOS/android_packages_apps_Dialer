@@ -62,10 +62,10 @@ public class ConferenceManagerPresenter
                             String.valueOf(call.getChildCallIds().size()));
                     update(callList);
                 } else {
-                    getUi().setVisible(false);
+                    InCallPresenter.getInstance().showConferenceCallManager(false);
                 }
             } else {
-                getUi().setVisible(false);
+                InCallPresenter.getInstance().showConferenceCallManager(false);
             }
         }
     }
@@ -86,7 +86,7 @@ public class ConferenceManagerPresenter
 
         if (!details.can(
                 android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE)) {
-            getUi().setVisible(false);
+            InCallPresenter.getInstance().showConferenceCallManager(false);
         }
     }
 
