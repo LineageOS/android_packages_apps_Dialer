@@ -260,7 +260,10 @@ public class DialpadFragment extends AnalyticsFragment
                 showDialpadChooser(false);
             }
             if (state == TelephonyManager.CALL_STATE_IDLE) {
-                ((HostInterface) getActivity()).setConferenceDialButtonVisibility(true);
+                final Activity activity = getActivity();
+                if (activity != null) {
+                    ((HostInterface) activity).setConferenceDialButtonVisibility(true);
+                }
             }
         }
     };
