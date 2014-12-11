@@ -57,9 +57,14 @@ public class InCallServiceImpl extends InCallService {
                 getApplicationContext(),
                 CallList.getInstance(),
                 AudioModeProvider.getInstance());
-
+        InCallPresenter.getInstance().onServiceBind();
         InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
-
         return super.onBind(intent);
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        InCallPresenter.getInstance().onServiceUnbind();
+        return super.onUnbind(intent);
     }
 }
