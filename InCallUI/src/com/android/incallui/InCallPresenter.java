@@ -1258,6 +1258,20 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     /**
+     * Hides or shows the conference manager fragment.
+     *
+     * @param show {@code true} if the conference manager should be shown, {@code false} if it
+     *                         should be hidden.
+     */
+    public void showConferenceCallManager(boolean show) {
+        if (mInCallActivity == null) {
+            return;
+        }
+
+        mInCallActivity.showConferenceCallManager(show);
+    }
+
+    /**
      * @return True if the application is currently running in a right-to-left locale.
      */
     public static boolean isRtl() {
