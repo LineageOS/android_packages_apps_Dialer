@@ -64,6 +64,7 @@
         <TextView android:id="@+id/callStateLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/incall_accent_color"
             android:textSize="@dimen/call_status_text_size"
@@ -71,6 +72,7 @@
             android:singleLine="true"
             android:gravity="start"
             android:ellipsize="end" />
+
     </LinearLayout>
 
     <!-- Name (or the phone number, if we don't have a name to display). -->
@@ -80,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="-5dp"
         android:fontFamily="sans-serif-light"
+        android:textAlignment="viewStart"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="@dimen/call_name_text_size"
         android:singleLine="true"
@@ -95,9 +98,8 @@
 
         <!-- Label (like "Mobile" or "Work", if present) and phone number, side by side -->
         <LinearLayout android:id="@+id/labelAndNumber"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
                 <TextView android:id="@+id/label"
@@ -122,9 +124,11 @@
 
         <!-- Elapsed time indication for a call in progress. -->
         <TextView android:id="@+id/elapsedTime"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_centerVertical="true"
+            android:textAlignment="viewEnd"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/incall_call_banner_subtext_color"
             android:textSize="@dimen/call_label_text_size"
