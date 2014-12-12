@@ -425,8 +425,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         if (TextUtils.isEmpty(number) && TextUtils.isEmpty(label)) {
             mCallNumberAndLabel.setVisibility(View.GONE);
+            mElapsedTime.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         } else {
             mCallNumberAndLabel.setVisibility(View.VISIBLE);
+            mElapsedTime.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
         }
 
         setPrimaryPhoneNumber(number);
