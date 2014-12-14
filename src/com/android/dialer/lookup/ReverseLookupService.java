@@ -120,6 +120,11 @@ public class ReverseLookupService implements PhoneNumberService, Handler.Callbac
     private ContactInfo doLookup(LookupRequest request) {
         final String number = request.normalizedNumber;
 
+        // Can't do reverse lookup without a number
+        if (request.normalizedNumber == null || request.formattedNumber == null) {
+            return null;
+        }
+
         if (LookupCache.hasCachedContact(mContext, number)) {
             ContactInfo info = LookupCache.getCachedContact(mContext, number);
             if (!ContactInfo.EMPTY.equals(info)) {
