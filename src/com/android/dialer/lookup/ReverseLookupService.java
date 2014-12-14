@@ -62,14 +62,17 @@ public class ReverseLookupService implements PhoneNumberService, Handler.Callbac
             return;
         }
 
+        String countryIso = mTelephonyManager.getSimCountryIso().toUpperCase();
+        String normalizedNumber = phoneNumber != null
+                ? PhoneNumberUtils.formatNumberToE164(phoneNumber, countryIso) : null;
+
         // Can't do reverse lookup without a number
-        if (phoneNumber == null) {
+        if (normalizedNumber == null) {
             return;
         }
 
         LookupRequest request = new LookupRequest();
-        String countryIso = mTelephonyManager.getSimCountryIso().toUpperCase();
-        request.normalizedNumber = PhoneNumberUtils.formatNumberToE164(phoneNumber, countryIso);
+        request.normalizedNumber = normalizedNumber;
         request.formattedNumber = PhoneNumberUtils.formatNumber(phoneNumber,
                 request.normalizedNumber, GeoUtil.getCurrentCountryIso(mContext));
         request.numberListener = numberListener;

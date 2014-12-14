@@ -57,7 +57,7 @@ public class OpenCnamReverseLookup extends ReverseLookup {
      */
     public ContactInfo lookupNumber(Context context,
             String normalizedNumber, String formattedNumber) throws IOException {
-        if (normalizedNumber.startsWith("+") &&!normalizedNumber.startsWith("+1")) {
+        if (normalizedNumber.startsWith("+") && !normalizedNumber.startsWith("+1")) {
             // Any non-US number will return "We currently accept only US numbers"
             return null;
         }
