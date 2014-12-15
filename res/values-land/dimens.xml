@@ -16,4 +16,11 @@
 
 <resources>
     <item name="call_detail_header_photo_ratio" type="dimen" format="float">0.25</item>
+
+    <!-- Text dimensions for dialpad keys -->
+    <dimen name="dialpad_key_numbers_size">34sp</dimen>
+    <dimen name="dialpad_key_letters_size">11sp</dimen>
+    <dimen name="dialpad_key_star_pound_size">22sp</dimen>
+    <dimen name="dialpad_key_plus_size">15sp</dimen>
 </resources>
+
