@@ -532,7 +532,7 @@ public class CallLogFragment extends AnalyticsListFragment
 
         if (mFooterView == null) {
             mFooterView = getActivity().getLayoutInflater().inflate(
-                    R.layout.recents_list_footer, (ViewGroup) getView(), false);
+                    R.layout.recents_list_footer, getListView(), false);
             mFooterView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
