@@ -258,7 +258,12 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
     private void attemptFinishActivity() {
         mWaitForRevealAnimationStart = false;
-        CircularRevealActivity.sendClearDisplayBroadcast(mContext);
+
+        Context context = mContext != null ? mContext : mInCallActivity;
+        if (context != null) {
+            CircularRevealActivity.sendClearDisplayBroadcast(context);
+        }
+
         final boolean doFinish = (mInCallActivity != null && isActivityStarted());
         Log.i(this, "Hide in call UI: " + doFinish);
         if (doFinish) {
