@@ -25,6 +25,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.telecom.DisconnectCause;
@@ -524,7 +525,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                     || TextUtils.isEmpty(callStateLabel)) {
                 mCallStateIcon.clearAnimation();
             } else {
-                mCallStateIcon.startAnimation(mPulseAnimation);
+                if (callStateIcon instanceof AnimationDrawable) {
+                    // Animate the drawable instead of the view
+                    ((AnimationDrawable) callStateIcon).start();
+                } else {
+                    mCallStateIcon.startAnimation(mPulseAnimation);
+                }
             }
         } else {
             Animation callStateIconAnimation = mCallStateIcon.getAnimation();
