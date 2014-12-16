@@ -154,6 +154,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             Data.IS_PRIMARY,                    // 13
             RawContacts.ACCOUNT_TYPE,           // 14
             RawContacts.ACCOUNT_NAME,           // 15
+            Phone.NORMALIZED_NUMBER,            // 16
         };
 
         static final int PHONE_ID = 0;
@@ -172,6 +173,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         static final int PHONE_IS_PRIMARY = 13;
         static final int PHONE_ACCOUNT_TYPE = 14;
         static final int PHONE_ACCOUNT_NAME = 15;
+        static final int PHONE_NORMALIZED_NUMBER = 16;
 
         /** Selects only rows that have been updated after a certain time stamp.*/
         static final String SELECT_UPDATED_CLAUSE =
@@ -718,8 +720,12 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 // null columns (due to malformed rows possibly inserted by third-party apps
                 // or sync adapters), skip the phone number row.
                 final String number = updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER);
+                final String normalizedNumber = updatedContactCursor.getString(
+                        PhoneQuery.PHONE_NORMALIZED_NUMBER);
                 if (TextUtils.isEmpty(number)) {
                     continue;
+                } else if (!TextUtils.isEmpty(normalizedNumber)) {
+                    insert.bindString(2, normalizedNumber);
                 } else {
                     insert.bindString(2, number);
                 }
@@ -755,7 +761,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                         .getString(PhoneQuery.PHONE_ACCOUNT_NAME));
                 insert.executeInsert();
                 final String contactPhoneNumber =
-                        updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER);
+                        TextUtils.isEmpty(normalizedNumber) ? number : normalizedNumber;
                 final ArrayList<String> numberPrefixes =
                         SmartDialPrefix.parseToNumberTokens(contactPhoneNumber);
 
