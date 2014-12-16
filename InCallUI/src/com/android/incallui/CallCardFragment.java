@@ -48,6 +48,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.contacts.common.widget.FloatingActionButtonController;
+import com.android.incallui.service.PhoneNumberService;
 import com.android.phone.common.animation.AnimUtils;
 
 import java.util.List;
@@ -373,7 +374,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         if (TextUtils.isEmpty(name)) {
             mPrimaryName.setText(null);
         } else {
-            mPrimaryName.setText(name);
+            mPrimaryName.setText(nameIsNumber
+                    ? PhoneNumberUtils.ttsSpanAsPhoneNumber(name)
+                    : name);
 
             // Set direction of the name field
             int nameDirection = View.TEXT_DIRECTION_INHERIT;
@@ -398,7 +401,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mPhoneNumber.setText(null);
             mPhoneNumber.setVisibility(View.GONE);
         } else {
-            mPhoneNumber.setText(number);
+            mPhoneNumber.setText(PhoneNumberUtils.ttsSpanAsPhoneNumber(number));
             mPhoneNumber.setVisibility(View.VISIBLE);
             mPhoneNumber.setTextDirection(View.TEXT_DIRECTION_LTR);
         }
@@ -455,7 +458,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
             mSecondaryCallConferenceCallIcon.setVisibility(isConference ? View.VISIBLE : View.GONE);
 
-            mSecondaryCallName.setText(name);
+            mSecondaryCallName.setText(nameIsNumber
+                    ? PhoneNumberUtils.ttsSpanAsPhoneNumber(name)
+                    : name);
             if (hasProvider) {
                 mSecondaryCallProviderLabel.setText(providerLabel);
             }

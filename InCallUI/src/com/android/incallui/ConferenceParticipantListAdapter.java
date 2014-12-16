@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.net.Uri;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -417,7 +418,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
             numberTypeTextView.setVisibility(View.GONE);
         } else {
             numberTextView.setVisibility(View.VISIBLE);
-            numberTextView.setText(callerNumber);
+            numberTextView.setText(PhoneNumberUtils.ttsSpanAsPhoneNumber(callerNumber));
             numberTypeTextView.setVisibility(View.VISIBLE);
             numberTypeTextView.setText(callerNumberType);
         }
