@@ -67,7 +67,13 @@ public class ClearCallLogDialog extends DialogFragment {
                     }
                     @Override
                     protected void onPostExecute(Void result) {
-                        progressDialog.dismiss();
+                        if (getActivity() == null || getActivity().isDestroyed()) {
+                            return;
+                        }
+
+                        if (progressDialog != null && progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
                     }
                 };
                 // TODO: Once we have the API, we should configure this ProgressDialog
