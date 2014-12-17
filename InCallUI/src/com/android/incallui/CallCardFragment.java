@@ -530,12 +530,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                     || TextUtils.isEmpty(callStateLabel)) {
                 mCallStateIcon.clearAnimation();
             } else {
-                if (callStateIcon instanceof AnimationDrawable) {
-                    // Animate the drawable instead of the view
-                    ((AnimationDrawable) callStateIcon).start();
-                } else {
-                    mCallStateIcon.startAnimation(mPulseAnimation);
-                }
+                mCallStateIcon.startAnimation(mPulseAnimation);
+            }
+
+            if (callStateIcon instanceof AnimationDrawable) {
+                ((AnimationDrawable) callStateIcon).start();
             }
         } else {
             Animation callStateIconAnimation = mCallStateIcon.getAnimation();
