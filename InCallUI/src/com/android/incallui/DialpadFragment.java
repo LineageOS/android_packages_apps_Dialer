@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.telephony.PhoneNumberUtils;
 import android.text.Editable;
 import android.text.method.DialerKeyListener;
 import android.util.AttributeSet;
@@ -513,7 +514,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
      * @param text Text to set Dialpad EditText to.
      */
     public void setDtmfText(String text) {
-        mDtmfDialerField.setText(text);
+        mDtmfDialerField.setText(PhoneNumberUtils.ttsSpanAsPhoneNumber(text));
     }
 
     @Override
