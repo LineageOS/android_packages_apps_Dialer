@@ -330,6 +330,13 @@ public class InCallActivity extends Activity {
             return;
         }
 
+        // Always disable the Back key while an incoming call is ringing
+        final Call call = CallList.getInstance().getIncomingCall();
+        if (call != null) {
+            Log.d(this, "Consume Back press for an incoming call");
+            return;
+        }
+
         // Nothing special to do.  Fall back to the default behavior.
         super.onBackPressed();
     }
