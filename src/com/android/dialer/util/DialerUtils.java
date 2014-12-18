@@ -125,7 +125,7 @@ public class DialerUtils {
                 (ImageView) emptyListView.findViewById(R.id.emptyListViewImage);
 
         emptyListViewImage.setImageDrawable(res.getDrawable(imageResId));
-        emptyListViewImage.setContentDescription(res.getString(strResId));
+        emptyListViewImage.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
 
         TextView emptyListViewMessage =
                 (TextView) emptyListView.findViewById(R.id.emptyListViewMessage);

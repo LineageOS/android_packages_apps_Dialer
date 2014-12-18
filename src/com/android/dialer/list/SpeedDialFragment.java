@@ -235,14 +235,16 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
 
     /* package */ void setEmptyViewVisibility(final boolean visible) {
         final int previousVisibility = mEmptyView.getVisibility();
-        final int newVisibility = visible ? View.VISIBLE : View.GONE;
+        final int emptyViewVisibility = visible ? View.VISIBLE : View.GONE;
+        final int listViewVisibility = visible ? View.GONE : View.VISIBLE;
 
-        if (previousVisibility != newVisibility) {
+        if (previousVisibility != emptyViewVisibility) {
             final RelativeLayout.LayoutParams params = (LayoutParams) mContactTileFrame
                     .getLayoutParams();
             params.height = visible ? LayoutParams.WRAP_CONTENT : LayoutParams.MATCH_PARENT;
             mContactTileFrame.setLayoutParams(params);
-            mEmptyView.setVisibility(newVisibility);
+            mEmptyView.setVisibility(emptyViewVisibility);
+            mListView.setVisibility(listViewVisibility);
         }
     }
 
