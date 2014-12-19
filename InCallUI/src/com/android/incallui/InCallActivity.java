@@ -519,20 +519,10 @@ public class InCallActivity extends Activity {
                         intent.getBooleanExtra(SHOW_CIRCULAR_REVEAL_EXTRA, false);
                 mCallCardFragment.animateForNewOutgoingCall(touchPoint, showCircularReveal);
 
-                /*
-                 * If both a phone account handle and a list of phone accounts to choose from are
-                 * missing, then disconnect the call because there is no way to place an outgoing
-                 * call.
-                 * The exception is emergency calls, which may be waiting for the ConnectionService
-                 * to set the PhoneAccount during the PENDING_OUTGOING state.
-                 */
-                if (call != null && !isEmergencyCall(call)) {
-                    final List<PhoneAccountHandle> phoneAccountHandles = extras
-                            .getParcelableArrayList(android.telecom.Call.AVAILABLE_PHONE_ACCOUNTS);
-                    if (call.getAccountHandle() == null &&
-                            (phoneAccountHandles == null || phoneAccountHandles.isEmpty())) {
-                        TelecomAdapter.getInstance().disconnectCall(call.getId());
-                    }
+                // InCallActivity is responsible for disconnecting a new outgoing call if there
+                // is no way of making it (i.e. no valid call capable accounts)
+                if (InCallPresenter.isCallWithNoValidAccounts(call)) {
+                    TelecomAdapter.getInstance().disconnectCall(call.getId());
                 }
 
                 dismissKeyguard(true);
@@ -574,14 +564,6 @@ public class InCallActivity extends Activity {
 
             return;
         }
-    }
-
-    private boolean isEmergencyCall(Call call) {
-        final Uri handle = call.getHandle();
-        if (handle == null) {
-            return false;
-        }
-        return PhoneNumberUtils.isEmergencyNumber(handle.getSchemeSpecificPart());
     }
 
     private void relaunchedFromDialer(boolean showDialpad) {
