@@ -555,6 +555,15 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         } else {
             mCallStateVideoCallIcon.setVisibility(View.GONE);
         }
+
+        if (state == Call.State.INCOMING) {
+            if (callStateLabel != null) {
+                getView().announceForAccessibility(callStateLabel);
+            }
+            if (mPrimaryName.getText() != null) {
+                getView().announceForAccessibility(mPrimaryName.getText());
+            }
+        }
     }
 
     @Override
