@@ -150,10 +150,25 @@ public class GeneralSettingsFragment extends PreferenceFragment
         super.onResume();
 
         if (mVibrateWhenRinging != null) {
-            mVibrateWhenRinging.setChecked(SettingsUtil.getVibrateWhenRingingSetting(mContext));
+            mVibrateWhenRinging.setChecked(getVibrateWhenRingingSetting(mContext));
         }
 
         // Lookup the ringtone name asynchronously.
         new Thread(mRingtoneLookupRunnable).start();
+    }
+
+    /**
+     * Obtain the setting for "vibrate when ringing" setting.
+     *
+     * Watch out: if the setting is missing in the device, this will try obtaining the old
+     * "vibrate on ring" setting from AudioManager, and save the previous setting to the new one.
+     */
+    public static boolean getVibrateWhenRingingSetting(Context context) {
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator == null || !vibrator.hasVibrator()) {
+            return false;
+        }
+        return Settings.System.getInt(context.getContentResolver(),
+                Settings.System.VIBRATE_WHEN_RINGING, 0) != 0;
     }
 }
