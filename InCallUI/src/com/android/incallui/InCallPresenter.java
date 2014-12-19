@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telecom.DisconnectCause;
@@ -29,6 +30,7 @@ import android.telecom.Phone;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.Surface;
 import android.view.View;
@@ -59,6 +61,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
     private static final String EXTRA_FIRST_TIME_SHOWN =
             "com.android.incallui.intent.extra.FIRST_TIME_SHOWN";
+
+    private static final Bundle EMPTY_EXTRAS = new Bundle();
 
     private static InCallPresenter sInCallPresenter;
 
@@ -931,6 +935,17 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         showCallUi |= (InCallState.PENDING_OUTGOING == mInCallState
                 && InCallState.INCALL == newState && !isActivityStarted());
 
+        // Another exception - InCallActivity is in charge of disconnecting a call with no
+        // valid accounts set. Bring the UI up if this is true for the current pending outgoing
+        // call so that:
+        // 1) The call can be disconnected correctly
+        // 2) The UI comes up and correctly displays the error dialog.
+        // TODO: Remove these special case conditions by making InCallPresenter a true state
+        // machine. Telecom should also be the component responsible for disconnecting a call
+        // with no valid accounts.
+        showCallUi |= InCallState.PENDING_OUTGOING == newState && mainUiNotVisible
+                && isCallWithNoValidAccounts(CallList.getInstance().getPendingOutgoingCall());
+
         // The only time that we have an instance of mInCallActivity and it isn't started is
         // when it is being destroyed.  In that case, lets avoid bringing up another instance of
         // the activity.  When it is finally destroyed, we double check if we should bring it back
@@ -965,6 +980,43 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         }
 
         return newState;
+    }
+
+    /**
+     * Determines whether or not a call has no valid phone accounts that can be used to make the
+     * call with. Emergency calls do not require a phone account.
+     *
+     * @param call to check accounts for.
+     * @return {@code true} if the call has no call capable phone accounts set, {@code false} if
+     * the call contains a phone account that could be used to initiate it with, or is an emergency
+     * call.
+     */
+    public static boolean isCallWithNoValidAccounts(Call call) {
+        if (call != null && !isEmergencyCall(call)) {
+            Bundle extras = call.getTelecommCall().getDetails().getExtras();
+
+            if (extras == null) {
+                extras = EMPTY_EXTRAS;
+            }
+
+            final List<PhoneAccountHandle> phoneAccountHandles = extras
+                    .getParcelableArrayList(android.telecom.Call.AVAILABLE_PHONE_ACCOUNTS);
+
+            if ((call.getAccountHandle() == null &&
+                    (phoneAccountHandles == null || phoneAccountHandles.isEmpty()))) {
+                Log.i(InCallPresenter.getInstance(), "No valid accounts for call " + call);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isEmergencyCall(Call call) {
+        final Uri handle = call.getHandle();
+        if (handle == null) {
+            return false;
+        }
+        return PhoneNumberUtils.isEmergencyNumber(handle.getSchemeSpecificPart());
     }
 
     /**
