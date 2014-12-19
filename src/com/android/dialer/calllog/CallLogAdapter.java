@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteFullException;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -31,6 +32,7 @@ import android.provider.ContactsContract.PhoneLookup;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
@@ -69,6 +71,7 @@ import java.util.LinkedList;
  */
 public class CallLogAdapter extends GroupingListAdapter
         implements ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
+    private static final String TAG = CallLogAdapter.class.getSimpleName();
 
     private static final int VOICEMAIL_TRANSCRIPTION_MAX_LINES = 10;
 
@@ -1183,14 +1186,18 @@ public class CallLogAdapter extends GroupingListAdapter
 
         if (!needsUpdate) return;
 
-        if (countryIso == null) {
-            mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
-                    Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " IS NULL",
-                    new String[]{ number });
-        } else {
-            mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
-                    Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " = ?",
-                    new String[]{ number, countryIso });
+        try {
+            if (countryIso == null) {
+                mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
+                        Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " IS NULL",
+                        new String[]{ number });
+            } else {
+                mContext.getContentResolver().update(Calls.CONTENT_URI_WITH_VOICEMAIL, values,
+                        Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " = ?",
+                        new String[]{ number, countryIso });
+            }
+        } catch (SQLiteFullException e) {
+            Log.e(TAG, "Unable to update contact info in call log db", e);
         }
     }
 
