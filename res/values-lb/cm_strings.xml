@@ -26,6 +26,8 @@
   <string name="call_stats_outgoing">Erausgoend: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Verpasst</string>
   <string name="call_stats_missed_percent">Verpasst: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Startdatum</string>
   <string name="call_stats_filter_to">Schlussdatum</string>
   <string name="call_stats_filter_picker_title">Zäitfënster</string>
@@ -38,5 +40,35 @@
   <string name="date_qs_lastquarter">Lescht Trimester</string>
   <string name="date_qs_lastyear">Lescht Joer</string>
   <string name="call_stats_date_filter">Zäitfënster ajustéieren</string>
+  <string name="call_stats_reset_filter">Zäitfënster zrécksetzen</string>
+  <string name="call_stats_sort_by_duration">No Gespréichsdauer zortéieren</string>
+  <string name="call_stats_sort_by_count">No Unzuel vun Uriff zortéieren</string>
   <string name="menu_add_to_blacklist">Op d\'schwaarz Lëscht setzen</string>
+  <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> op d\'schwaarz Lëscht gesat</string>
+  <string name="menu_delete_from_blacklist">Vun der schwaarzer Lëscht läschen</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> vun der schwaarzer Lëscht geläscht</string>
+  <string name="nearby_places">No Plazen</string>
+  <string name="people">Persounen</string>
+  <string name="start_call_playback">Opnam ofspillen</string>
+  <string name="stop_call_playback">Stopp</string>
+  <string name="call_playback_error_message">Konnt d\'Opnam net ofspillen</string>
+  <string name="calllog_search_hint">Uruffprotokoll duerchsichen</string>
+  <string name="video_call">Videouruff</string>
+  <string name="video_call_settings">Astellunge vum Videouruff</string>
+  <string name="description_videocall">Videouruff <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Astellunge fir d\'séiert Wielen</string>
+  <string name="speed_dial_not_set">(net gesat)</string>
+  <string name="speed_dial_replace">Ersetzen</string>
+  <string name="speed_dial_delete">Läschen</string>
+  <string name="speed_dial_unassigned_dialog_title">Net zougewisen Tast</string>
+  <string name="speed_dial_unassigned_dialog_message">Keng Kontakter fir d\'séiert Wiele mat der Nummerentast \'<xliff:g id="number">%s</xliff:g>\' definéiert. Wëlls du elo e Kontakt zouweisen?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Fir d'séiert Wielen ze benotze muss de fir d'éischt de Fligermodus ausschalten."</string>
+  <string name="msim_ime_dialog_title">Apparat-Identifikatioun</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">All SIMen</string>
+  <string name="yes">Jo</string>
+  <string name="no">Nee</string>
+  <string name="call_duration_active">Aktiv Dauer:</string>
+  <string name="call_duration_call_out">Gespréichsdauer:</string>
+  <string name="call_log_all_calls_header">All Uriff</string>
 </resources>

@@ -56,7 +56,7 @@
   <string name="video_call">Videochiamata</string>
   <string name="video_call_settings">Impostazioni videochiamata</string>
   <string name="description_videocall">Videochiamata <xliff:g id="name">%1$s</xliff:g></string>
-  <string name="speed_dial_settings">Impostazioni di composizione rapida</string>
+  <string name="speed_dial_settings">Impostazioni composizione rapida</string>
   <string name="speed_dial_not_set">(non impostato)</string>
   <string name="speed_dial_replace">Sostituisci</string>
   <string name="speed_dial_delete">Elimina</string>

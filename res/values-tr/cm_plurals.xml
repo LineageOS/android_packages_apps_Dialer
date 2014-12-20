@@ -17,15 +17,19 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="hour">
+    <item quantity="one">%d sa</item>
     <item quantity="other">%d sa</item>
   </plurals>
   <plurals name="minute">
-    <item quantity="other">%d dk</item>
+    <item quantity="one">%d dk</item>
+    <item quantity="other">%d dak</item>
   </plurals>
   <plurals name="second">
+    <item quantity="one">%d sn</item>
     <item quantity="other">%d sn</item>
   </plurals>
   <plurals name="call">
+    <item quantity="one">%d çağrı</item>
     <item quantity="other">%d çağrı</item>
   </plurals>
 </resources>
