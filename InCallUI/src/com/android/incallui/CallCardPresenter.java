@@ -33,7 +33,6 @@ import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
@@ -226,7 +225,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         } else {
             Log.d(this, "Canceling the calltime timer");
             mCallTimer.cancel();
-            ui.setPrimaryCallElapsedTime(false, null);
+            ui.setPrimaryCallElapsedTime(false, 0);
         }
 
         // Set the call state
@@ -357,13 +356,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         if (ui == null || mPrimary == null || mPrimary.getState() != Call.State.ACTIVE) {
             if (ui != null) {
-                ui.setPrimaryCallElapsedTime(false, null);
+                ui.setPrimaryCallElapsedTime(false, 0);
             }
             mCallTimer.cancel();
         } else {
             final long callStart = mPrimary.getConnectTimeMillis();
             final long duration = System.currentTimeMillis() - callStart;
-            ui.setPrimaryCallElapsedTime(true, DateUtils.formatElapsedTime(duration / 1000));
+            ui.setPrimaryCallElapsedTime(true, duration);
         }
     }
 
@@ -734,7 +733,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setCallState(int state, int videoState, int sessionModificationState,
                 DisconnectCause disconnectCause, String connectionLabel,
                 Drawable connectionIcon, String gatewayNumber);
-        void setPrimaryCallElapsedTime(boolean show, String duration);
+        void setPrimaryCallElapsedTime(boolean show, long duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Drawable image);
         void setPrimaryPhoneNumber(String phoneNumber);
