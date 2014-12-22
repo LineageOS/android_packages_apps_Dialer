@@ -47,6 +47,7 @@ public class GeneralSettingsFragment extends PreferenceFragment
     private static final String BUTTON_VIBRATE_ON_RING = "button_vibrate_on_ring";
     private static final String BUTTON_PLAY_DTMF_TONE  = "button_play_dtmf_tone";
     private static final String BUTTON_RESPOND_VIA_SMS_KEY = "button_respond_via_sms_key";
+    private static final String CATEGORY_OTHER_KEY = "dialer_general_other_settings_category_key";
 
     private static final int MSG_UPDATE_RINGTONE_SUMMARY = 1;
 
@@ -97,6 +98,22 @@ public class GeneralSettingsFragment extends PreferenceFragment
             mPlayDtmfTone.setOnPreferenceChangeListener(this);
             mPlayDtmfTone.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.DTMF_TONE_WHEN_DIALING, 1) != 0);
+        }
+
+        PreferenceCategory categoryOther = (PreferenceCategory)
+                getPreferenceScreen().findPreference(CATEGORY_OTHER_KEY);
+        //remove "respond via sms" preference if config is set to false
+        if (!getResources()
+                .getBoolean(com.android.internal.R.bool.config_reject_call_via_sms_enabled)
+                && categoryOther != null && mRespondViaSms != null) {
+            categoryOther.removePreference(mRespondViaSms);
+            mRespondViaSms = null;
+        }
+
+        //category other will be removed if no preference items are
+        //there under "other" category.
+        if (categoryOther != null && categoryOther.getPreferenceCount() == 0) {
+            getPreferenceScreen().removePreference(categoryOther);
         }
 
         mRingtoneLookupRunnable = new Runnable() {
