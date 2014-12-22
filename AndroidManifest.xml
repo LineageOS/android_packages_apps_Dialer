@@ -46,6 +46,8 @@
     <uses-permission android:name="com.android.voicemail.permission.READ_VOICEMAIL" />
     <uses-permission android:name="android.permission.ALLOW_ANY_CODEC_FOR_PLAYBACK" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    <uses-permission android:name="android.permission.READ_PHONE_BLACKLIST" />
+    <uses-permission android:name="android.permission.CHANGE_PHONE_BLACKLIST" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <!-- This tells the activity manager to not delay any of our activity
@@ -163,6 +165,17 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".callstats.CallStatsDetailActivity"
+            android:label="@string/callStatsDetailTitle"
+            android:theme="@style/CallDetailActivityTheme"
+            android:screenOrientation="portrait"
+            android:icon="@mipmap/ic_launcher_phone" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="com.android.contacts.common.test.FragmentTestActivity">
             <intent-filter>
                 <category android:name="android.intent.category.TEST"/>
@@ -240,9 +253,8 @@
         </receiver>
 
         <activity android:name=".SpeedDialListActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/set_speed_dial"
-            android:theme="@style/SettingsStyle" >
+            android:theme="@style/DialtactsTheme"
+            android:label="@string/speed_dial_settings" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
@@ -302,5 +314,11 @@
                 <action android:name="android.telecom.InCallService"/>
             </intent-filter>
         </service>
+
+        <provider android:name="com.android.dialer.lookup.LookupProvider"
+                  android:authorities="com.android.dialer.provider"
+                  android:exported="false"
+                  android:multiprocess="false" />
+
     </application>
 </manifest>
