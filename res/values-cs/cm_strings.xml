@@ -80,4 +80,6 @@
     <string name="incall_vibrate_hangup_title">Vibrovat při zavěšení</string>
     <string name="incall_vibrate_45_title">Virovat každou minutu</string>
     <string name="incall_vibrate_45_summary">Vibrace každou 45. sekundu každé minuty při odchozím volání</string>
+    <string name="detailed_incall_info_title">Detailní info příchozího hovoru</string>
+    <string name="detailed_incall_info_summary">Zobrazí další informace (společnost, pozici, město a přezdívku) na obrazovce příchozího hovoru.</string>
 </resources>
