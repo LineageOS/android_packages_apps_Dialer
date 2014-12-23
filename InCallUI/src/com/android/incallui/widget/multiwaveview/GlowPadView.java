@@ -402,7 +402,6 @@ public class GlowPadView extends View {
 
             case STATE_TRACKING:
                 mHandleDrawable.setAlpha(0.0f);
-                showGlow(REVEAL_GLOW_DURATION , REVEAL_GLOW_DELAY, 1.0f, null);
                 break;
 
             case STATE_SNAP:
