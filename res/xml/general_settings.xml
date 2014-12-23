@@ -85,6 +85,11 @@
         android:title="@string/other_settings_title"
         android:persistent="false" >
 
+        <CheckBoxPreference
+            android:key="detailed_incall_info"
+            android:title="@string/detailed_incall_info_title"
+            android:summary="@string/detailed_incall_info_summary" />
+
         <PreferenceScreen
             android:key="button_respond_via_sms_key"
             android:title="@string/respond_via_sms_setting_title"
