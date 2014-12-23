@@ -94,7 +94,7 @@
     <string name="type_incoming" msgid="6502076603836088532">"ការ​ហៅ​ចូល"</string>
     <string name="type_outgoing" msgid="343108709599392641">"ការ​ហៅ​ចេញ"</string>
     <string name="type_missed" msgid="2720502601640509542">"ខកខាន​ទទួល"</string>
-    <string name="type_incoming_video" msgid="82323391702796181">"ការ​ហៅចូលជា​វីដេអូ"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"ការ​ហៅចូលជា​វីដេអូ​"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"ការ​ហៅ​ជា​វីដេអូ​ចេញ"</string>
     <string name="type_missed_video" msgid="954396897034220545">"ខកខាន​ទទួល​ការ​ហៅ​ជា​វីដេអូ"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"សារ​ជា​សំឡេង"</string>
