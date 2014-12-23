@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">Sorteer volgens oproepe</string>
   <string name="menu_add_to_blacklist">Voeg tot verban lys</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> bygevoeg tot lys</string>
+  <string name="menu_delete_from_blacklist">Verwyder van swartlys</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> is verwyder van swartlys</string>
   <string name="nearby_places">Nabygeleë plekke</string>
   <string name="people">Mense</string>
   <string name="start_call_playback">Speel opname</string>

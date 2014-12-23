@@ -142,7 +142,6 @@
   <string name="dialog_voicemail_not_ready_message">Konfiguréier deng Mailbox ënner Menü &gt; Astellungen.</string>
   <string name="dialog_voicemail_airplane_mode_message">Schalt de Fligermodus aus fir d\'Mailbox unzeruffen.</string>
   <string name="contact_list_loading">Gëtt gelueden\u2026</string>
-  <string name="imei">IMEI</string>
   <string name="meid">MEID</string>
   <string name="simContacts_emptyLoading">Gëtt vun der SIM-Kaart gelueden\u2026</string>
   <string name="simContacts_title">Kontakter vun der SIM-Kaart</string>
@@ -151,8 +150,6 @@
   <string name="dialer_hint_find_contact">Tipp en Numm oder eng Telefonsnummer</string>
   <string name="call_log_all_title">All</string>
   <string name="call_log_missed_title">Verpasst</string>
-  <string name="call_log_activity_title_font_family">sans-serif-light</string>
-  <string name="show_all_contacts_title_font_family">sans-serif-light</string>
   <string name="recentMissed_empty">Keng rezent verpasst Uriff.</string>
   <string name="recentVoicemails_empty">Keng rezent Mailbox-Opnamen.</string>
   <string name="show_all_contacts">All d\'Kontakter uweisen</string>
@@ -164,21 +161,6 @@
   <string name="dialpad_3_number">3</string>
   <string name="dialpad_4_number">4</string>
   <string name="dialpad_5_number">5</string>
-  <string name="dialpad_6_number">6</string>
-  <string name="dialpad_7_number">7</string>
-  <string name="dialpad_8_number">8</string>
-  <string name="dialpad_9_number">9</string>
-  <string name="dialpad_star_number">*</string>
-  <string name="dialpad_pound_number">#</string>
-  <string name="dialpad_0_letters">+</string>
-  <string name="dialpad_2_letters">ABC</string>
-  <string name="dialpad_3_letters">DEF</string>
-  <string name="dialpad_4_letters">GHI</string>
-  <string name="dialpad_5_letters">JKL</string>
-  <string name="dialpad_6_letters">MNO</string>
-  <string name="dialpad_7_letters">PQRS</string>
-  <string name="dialpad_8_letters">TUV</string>
-  <string name="dialpad_9_letters">WXYZ</string>
   <string name="show_all_contacts_title">All d\'Kontakter</string>
   <string name="show_all_contacts_button_text">All d\'Kontakter</string>
   <string name="favorite_hidden">Aus de Favoritte läschen</string>
@@ -194,8 +176,4 @@
   <string name="remove_contact">Ewechhuelen</string>
   <string name="favorites_menu_speed_dial">Séiert Wielen</string>
   <string name="favorites_menu_all_contacts">ALL D\'KONTAKTER</string>
-  <string name="favorites_menu_speed_dial_font_family">sans-serif-light</string>
-  <string name="favorites_menu_all_contacts_font_family">sans-serif</string>
-  <string name="search_font_family">sans-serif</string>
-  <string name="tab_font_family">sans-serif</string>
 </resources>

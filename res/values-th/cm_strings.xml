@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">เรียงตามจำนวนครั้งการโทร</string>
   <string name="menu_add_to_blacklist">เพิ่มไปยังบัญชีดำ</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number"> %s</xliff:g> เพิ่มไปยังบัญชีดำ</string>
+  <string name="menu_delete_from_blacklist">ลบออกจากบัญชีดำ</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number"> %s</xliff:g> ถูกลบออกจากบัญชีดำ</string>
   <string name="nearby_places">สถานใกล้เคียง</string>
   <string name="people">ผู้คน</string>
   <string name="start_call_playback">เล่นบันทึก</string>

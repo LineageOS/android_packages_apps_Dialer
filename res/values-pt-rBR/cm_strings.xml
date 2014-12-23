@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">Ordenar por quantidade de chamadas</string>
   <string name="menu_add_to_blacklist">Adicionar à lista de bloqueio</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> adicionado à lista negra</string>
+  <string name="menu_delete_from_blacklist">Excluir da lista negra</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> foi excluído da lista negra</string>
   <string name="nearby_places">Locais próximos</string>
   <string name="people">Pessoas</string>
   <string name="start_call_playback">Reproduzir a gravação</string>

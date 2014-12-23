@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">ඇමතුම් ගණන අනුව සුබෙදන්න</string>
   <string name="menu_add_to_blacklist">අපලේඛණයට එක් කරන්න</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> අපලේඛණයට එක් කෙරුණි</string>
+  <string name="menu_delete_from_blacklist">අපලේඛණයෙන් මකා දමන්න</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> අපලේඛණයෙන් මකා දැමිණි</string>
   <string name="nearby_places">අවට ස්ථාන</string>
   <string name="people">ප්‍රජාව</string>
   <string name="start_call_playback">රෙකෝඩිතය ධාවනය කරන්න</string>

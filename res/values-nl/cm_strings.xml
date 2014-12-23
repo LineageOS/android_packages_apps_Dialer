@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">Sorteren op gespreksaantal</string>
   <string name="menu_add_to_blacklist">Toevoegen aan zwarte lijst</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> toegevoegd aan zwarte lijst</string>
+  <string name="menu_delete_from_blacklist">Uit zwarte lijst verwijderen</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> verwijderd uit zwarte lijst</string>
   <string name="nearby_places">Nabijgelegen plaatsen</string>
   <string name="people">Mensen</string>
   <string name="start_call_playback">Opname afspelen</string>
