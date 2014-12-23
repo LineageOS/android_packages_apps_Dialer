@@ -145,7 +145,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Foretag videoopkald"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Se komplet opkaldshistorik"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nye ubesvarede opkald"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Med Hurtigopkald kan du ringe til favoritter og numre, du ofte ringer til, med et enkelt tryk"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Med Hurtigopkald kan du ringe til dine foretrukne kontaktpersoner og numre, du ofte ringer til, med et enkelt tryk"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Ingen kontaktpersoner"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Tryk på billedet for at se alle numre, eller tryk på billedet, og hold det nede for at omarrangere"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Luk"</string>
