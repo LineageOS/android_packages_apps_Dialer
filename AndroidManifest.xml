@@ -83,7 +83,7 @@
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
             android:icon="@mipmap/ic_launcher_phone"
-            android:screenOrientation="nosensor"
+            android:screenOrientation="user"
             android:enabled="@*android:bool/config_voice_capable"
             android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
             <intent-filter>
@@ -150,7 +150,7 @@
         <activity android:name="com.android.dialer.calllog.CallLogActivity"
             android:label="@string/call_log_activity_title"
             android:theme="@style/DialtactsThemeWithActionBarOverlay"
-            android:screenOrientation="nosensor"
+            android:screenOrientation="user"
             android:icon="@mipmap/ic_launcher_phone">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -163,13 +163,13 @@
         <activity android:name="com.android.dialer.list.AllContactsActivity"
             android:label="@string/show_all_contacts_title"
             android:theme="@style/DialtactsThemeWithActionBarOverlay"
-            android:screenOrientation="nosensor">
+            android:screenOrientation="user">
         </activity>
 
         <activity android:name="com.android.dialer.CallDetailActivity"
                   android:label="@string/callDetailTitle"
                   android:theme="@style/CallDetailActivityTheme"
-                  android:screenOrientation="nosensor"
+                  android:screenOrientation="user"
                   android:icon="@mipmap/ic_launcher_phone"
                   android:parentActivityName="com.android.dialer.calllog.CallLogActivity"
             >
@@ -183,7 +183,7 @@
         <activity android:name=".callstats.CallStatsDetailActivity"
             android:label="@string/callStatsDetailTitle"
             android:theme="@style/CallDetailActivityTheme"
-            android:screenOrientation="nosensor"
+            android:screenOrientation="user"
             android:icon="@mipmap/ic_launcher_phone" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -324,7 +324,7 @@
                   android:label="@string/phoneAppLabel"
                   android:excludeFromRecents="true"
                   android:launchMode="singleInstance"
-                  android:screenOrientation="nosensor"
+                  android:screenOrientation="user"
                   android:configChanges="keyboardHidden"
                   android:exported="false"
                   android:process="com.android.incallui">
@@ -335,7 +335,7 @@
                   android:label="@string/phoneAppLabel"
                   android:excludeFromRecents="true"
                   android:launchMode="singleInstance"
-                  android:screenOrientation="nosensor"
+                  android:screenOrientation="user"
                   android:configChanges="keyboardHidden"
                   android:exported="false"
                   android:process="com.android.incallui">
