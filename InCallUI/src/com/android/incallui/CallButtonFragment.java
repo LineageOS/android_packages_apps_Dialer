@@ -27,6 +27,7 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.telecom.AudioState;
 import android.view.ContextThemeWrapper;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -152,6 +153,7 @@ public class CallButtonFragment
         int id = view.getId();
         Log.d(this, "onClick(View " + view + ", id " + id + ")...");
 
+        boolean isClickHandled = true;
         switch(id) {
             case R.id.audioButton:
                 onAudioButtonClicked();
@@ -197,8 +199,15 @@ public class CallButtonFragment
                 mOverflowPopup.show();
                 break;
             default:
+                isClickHandled = false;
                 Log.wtf(this, "onClick: unexpected");
                 break;
+        }
+
+        if (isClickHandled) {
+            view.performHapticFeedback(
+                    HapticFeedbackConstants.VIRTUAL_KEY,
+                    HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
         }
     }
 
