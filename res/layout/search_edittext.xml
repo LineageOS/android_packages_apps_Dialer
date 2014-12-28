@@ -48,6 +48,8 @@
                 android:fontFamily="@string/search_font_family"
                 android:textColorHint="@color/searchbox_hint_text_color"
                 android:gravity="center_vertical"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:hint="@string/dialer_hint_find_contact" />
 
         </LinearLayout>
