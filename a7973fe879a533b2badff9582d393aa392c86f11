@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aa08908_1c793e94",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-12-29T23:16:51Z",
+      "side": 1,
+      "message": "Detailed caller information",
+      "revId": "a7973fe879a533b2badff9582d393aa392c86f11",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aa08908_7c6e82ca",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-12-29T23:16:51Z",
+      "side": 1,
+      "message": "Display additional information about the caller in the incoming call screen",
+      "revId": "a7973fe879a533b2badff9582d393aa392c86f11",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aa08908_3c74fa9a",
+        "filename": "res/xml/general_settings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2014-12-29T23:16:51Z",
+      "side": 1,
+      "message": "I wonder whether this fits better under call settings -\u003e optional settings?",
+      "revId": "a7973fe879a533b2badff9582d393aa392c86f11",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
