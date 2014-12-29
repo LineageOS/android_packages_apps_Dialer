@@ -31,6 +31,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.CallTypeHelper;
@@ -115,8 +116,15 @@ public class PhoneCallDetailsHelper {
 
         // set the account icon if it exists
         if (details.accountIcon != null) {
-            views.callAccountIcon.setVisibility(View.VISIBLE);
-            views.callAccountIcon.setImageDrawable(details.accountIcon);
+            if (MoreContactUtils.shouldShowOperator(mResources)) {
+                views.operator.setVisibility(View.VISIBLE);
+                views.operator.setText(details.operator);
+                views.callAccountIcon.setVisibility(View.GONE);
+            } else {
+                views.operator.setVisibility(View.GONE);
+                views.callAccountIcon.setVisibility(View.VISIBLE);
+                views.callAccountIcon.setImageDrawable(details.accountIcon);
+            }
         } else {
             views.callAccountIcon.setVisibility(View.GONE);
         }

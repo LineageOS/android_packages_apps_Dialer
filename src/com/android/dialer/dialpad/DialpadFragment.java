@@ -210,6 +210,7 @@ public class DialpadFragment extends AnalyticsFragment
 
     private ListView mDialpadChooser;
     private DialpadChooserAdapter mDialpadChooserAdapter;
+    private TextView mOperator;
 
     /**
      * Regular expression prohibiting manual phone call. Can be empty, which means "no rule".
@@ -419,6 +420,8 @@ public class DialpadFragment extends AnalyticsFragment
         floatingActionButton.setOnClickListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
                 floatingActionButtonContainer, floatingActionButton);
+
+        mOperator = (TextView)fragmentView.findViewById(R.id.dialpad_floating_operator);
 
         return fragmentView;
     }
@@ -705,6 +708,20 @@ public class DialpadFragment extends AnalyticsFragment
         mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
         mOverflowMenuButton.setOnClickListener(this);
         mOverflowMenuButton.setVisibility(isDigitsEmpty() ? View.INVISIBLE : View.VISIBLE);
+
+        if (getTelephonyManager().isMultiSimEnabled() &&
+                MoreContactUtils.shouldShowOperator(mContext)) {
+            if (SubscriptionManager.isVoicePromptEnabled()) {
+                mOperator.setVisibility(View.GONE);
+            } else {
+                long subId = SubscriptionManager.getDefaultVoiceSubId();
+                mOperator.setVisibility(View.VISIBLE);
+                mOperator.setText(MoreContactUtils.getNetworkSpnName(mContext, subId));
+            }
+        } else {
+            mOperator.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
