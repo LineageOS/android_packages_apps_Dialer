@@ -32,6 +32,7 @@ import android.telecom.DisconnectCause;
 import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.incallui.service.PhoneNumberService;
@@ -592,12 +594,15 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setPrimaryCallElapsedTime(boolean show, String callTimeElapsed) {
+    public void setPrimaryCallElapsedTime(boolean show, long duration) {
         if (show) {
             if (mElapsedTime.getVisibility() != View.VISIBLE) {
                 AnimUtils.fadeIn(mElapsedTime, AnimUtils.DEFAULT_DURATION);
             }
+            String callTimeElapsed = DateUtils.formatElapsedTime(duration / 1000);
+            String durationDescription = InCallDateUtils.formatDetailedDuration(duration);
             mElapsedTime.setText(callTimeElapsed);
+            mElapsedTime.setContentDescription(durationDescription);
         } else {
             // hide() animation has no effect if it is already hidden.
             AnimUtils.fadeOut(mElapsedTime, AnimUtils.DEFAULT_DURATION);
