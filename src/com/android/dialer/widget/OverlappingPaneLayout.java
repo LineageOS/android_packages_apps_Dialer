@@ -717,6 +717,22 @@ public class OverlappingPaneLayout extends ViewGroup {
         return wantTouchEvents;
     }
 
+    /**
+     * Refreshes the {@link OverlappingPaneLayout} be attempting to re-open or re-close the pane.
+     * This ensures that the overlapping pane is repositioned based on any changes to the view
+     * which is being overlapped.
+     * <p>
+     * The {@link #openPane()} and {@link #closePane()} methods do not perform any animation if the
+     * pane has already been positioned appropriately.
+     */
+    public void refresh() {
+        if (isOpen()) {
+            openPane();
+        } else {
+            closePane();
+        }
+    }
+
     private boolean closePane(View pane, int initialVelocity) {
         if (mFirstLayout || smoothSlideTo(0.f, initialVelocity)) {
             mPreservedOpenState = false;
