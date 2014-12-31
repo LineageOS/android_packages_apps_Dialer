@@ -149,7 +149,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
 
         // Check if actual number had + sign as the first character and query string does not, then
         // return a number with a + sign prefixed to the query string. That will be the dial string.
-        if (actualNumber.startsWith("+") && !(getQueryString().startsWith("+"))) {
+        if ((actualNumber != null) && actualNumber.startsWith("+") &&
+                !(getQueryString().startsWith("+"))) {
             number.append('+');
         }
         number.append(getQueryString());
