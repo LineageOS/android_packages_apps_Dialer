@@ -44,27 +44,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     />
     </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/call_log_outer_margin"
-        android:paddingRight="@dimen/call_log_outer_margin">
-        <Spinner
-            android:id="@+id/filter_sub_spinner"
-            android:layout_width="0dip"
-            android:layout_height="@dimen/list_section_divider_min_height"
-            android:layout_weight="1"
-            android:layout_marginTop="5dip"
-            />
-        <Spinner
-            android:id="@+id/filter_status_spinner"
-            android:layout_width="0dip"
-            android:layout_height="@dimen/list_section_divider_min_height"
-            android:layout_weight="2"
-            android:layout_marginTop="5dip"
-            />
-    </LinearLayout>
+    <include layout="@layout/call_spinner" />
 
     <FrameLayout
         android:layout_width="match_parent"

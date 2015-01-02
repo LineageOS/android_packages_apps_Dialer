@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.dialer.R;
+import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 
@@ -81,7 +82,7 @@ public class CallStatsDetailHelper {
         float ratio = getDetailValue(details, type, byDuration) /
                       getDetailValue(first, type, byDuration);
 
-        if (type == CallStatsQueryHandler.CALL_TYPE_ALL) {
+        if (type == CallLogQueryHandler.CALL_TYPE_ALL) {
             float full = getDetailValue(details, type, byDuration);
             in = getDetailValue(details, Calls.INCOMING_TYPE, byDuration) * ratio / full;
             out = getDetailValue(details, Calls.OUTGOING_TYPE, byDuration) * ratio / full;
