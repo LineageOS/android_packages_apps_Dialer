@@ -22,12 +22,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.CallLog;
-import android.provider.CallLog.Calls;
-import android.telephony.TelephonyManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -42,77 +37,48 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.SearchView.OnCloseListener;
 import android.widget.SearchView.OnQueryTextListener;
-import android.util.Log;
 
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
-import com.android.dialer.voicemail.VoicemailStatusHelper;
-import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.android.dialerbind.analytics.AnalyticsActivity;
-import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.callstats.CallStatsFragment;
 import com.android.dialer.widget.DoubleDatePickerDialog;
 
-public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHandler.Listener,
+public class CallLogActivity extends AnalyticsActivity implements
         DoubleDatePickerDialog.OnDateSetListener {
-    private Handler mHandler;
     private ViewPager mViewPager;
     private ViewPagerTabs mViewPagerTabs;
     private FragmentPagerAdapter mViewPagerAdapter;
-    private CallLogFragment mAllCallsFragment;
-    private CallLogFragment mMissedCallsFragment;
     private CallStatsFragment mStatsFragment;
-    private CallLogFragment mVoicemailFragment;
-    private VoicemailStatusHelper mVoicemailStatusHelper;
-
-    private static final int WAIT_FOR_VOICEMAIL_PROVIDER_TIMEOUT_MS = 300;
-    private boolean mSwitchToVoicemailTab;
 
     private MSimCallLogFragment mMSimCallsFragment;
     private CallLogSearchFragment mSearchFragment;
     private SearchView mSearchView;
     private boolean mInSearchUi;
-    private String[] mTabTitles;
-
-    private static final int TAB_INDEX_ALL = 0;
-    private static final int TAB_INDEX_MISSED = 1;
-    private static final int TAB_INDEX_STATS = 2;
-    private static final int TAB_INDEX_VOICEMAIL = 3;
-
-    private static final int TAB_INDEX_COUNT_DEFAULT = 3;
-    private static final int TAB_INDEX_COUNT_WITH_VOICEMAIL = 4;
-
-    private boolean mHasActiveVoicemailProvider;
-
-    private final Runnable mWaitForVoicemailTimeoutRunnable = new Runnable() {
-        @Override
-        public void run() {
-            mViewPagerTabs.setViewPager(mViewPager);
-            mViewPager.setCurrentItem(TAB_INDEX_ALL);
-            mSwitchToVoicemailTab = false;
-        }
-    };
 
     private static final int TAB_INDEX_MSIM = 0;
-    private static final int TAB_INDEX_COUNT_MSIM = 1;
+    private static final int TAB_INDEX_MSIM_STATS = 1;
+    private static final int TAB_INDEX_COUNT_MSIM = 2;
 
-    public class ViewPagerAdapter extends FragmentPagerAdapter {
-        public ViewPagerAdapter(FragmentManager fm) {
+    public class MSimViewPagerAdapter extends FragmentPagerAdapter {
+        private String[] mTabTitles;
+
+        public MSimViewPagerAdapter(FragmentManager fm) {
             super(fm);
+
+            mTabTitles = new String[TAB_INDEX_COUNT_MSIM];
+            mTabTitles[0] = getString(R.string.call_log_all_title);
+            mTabTitles[1] = getString(R.string.call_log_stats_title);
         }
 
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case TAB_INDEX_ALL:
-                    return new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
-                case TAB_INDEX_MISSED:
-                    return new CallLogFragment(Calls.MISSED_TYPE);
-                case TAB_INDEX_VOICEMAIL:
-                    return new CallLogFragment(Calls.VOICEMAIL_TYPE);
-                case TAB_INDEX_STATS:
+                case TAB_INDEX_MSIM:
+                    return new MSimCallLogFragment();
+                case TAB_INDEX_MSIM_STATS:
                     return new CallStatsFragment();
             }
             throw new IllegalStateException("No fragment at position " + position);
@@ -143,28 +109,6 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
 
         @Override
         public int getCount() {
-            return mHasActiveVoicemailProvider ? TAB_INDEX_COUNT_WITH_VOICEMAIL :
-                    TAB_INDEX_COUNT_DEFAULT;
-        }
-    }
-
-    public class MSimViewPagerAdapter extends FragmentPagerAdapter {
-        public MSimViewPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case TAB_INDEX_MSIM:
-                    mMSimCallsFragment = new MSimCallLogFragment();
-                    return mMSimCallsFragment;
-            }
-            throw new IllegalStateException("No fragment at position " + position);
-        }
-
-        @Override
-        public int getCount() {
             return TAB_INDEX_COUNT_MSIM;
         }
     }
@@ -181,14 +125,6 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getTelephonyManager().isMultiSimEnabled()) {
-            initMSimCallLog();
-            addSearchFragment();
-            return;
-        }
-
-        mHandler = new Handler();
-
         setContentView(R.layout.call_log_activity);
         getWindow().setBackgroundDrawable(null);
 
@@ -198,57 +134,15 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setElevation(0);
 
-        int startingTab = TAB_INDEX_ALL;
-        final Intent intent = getIntent();
-        if (intent != null) {
-            final int callType = intent.getIntExtra(CallLog.Calls.EXTRA_CALL_TYPE_FILTER, -1);
-            if (callType == CallLog.Calls.MISSED_TYPE) {
-                startingTab = TAB_INDEX_MISSED;
-            } else if (callType == CallLog.Calls.VOICEMAIL_TYPE) {
-                startingTab = TAB_INDEX_VOICEMAIL;
-            }
-        }
-
-        mTabTitles = new String[TAB_INDEX_COUNT_WITH_VOICEMAIL];
-        mTabTitles[0] = getString(R.string.call_log_all_title);
-        mTabTitles[1] = getString(R.string.call_log_missed_title);
-        mTabTitles[2] = getString(R.string.call_log_stats_title);
-        mTabTitles[3] = getString(R.string.call_log_voicemail_title);
-
         mViewPager = (ViewPager) findViewById(R.id.call_log_pager);
 
-        mViewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
+        mViewPagerAdapter = new MSimViewPagerAdapter(getFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
-        mViewPager.setOffscreenPageLimit(2);
 
         mViewPagerTabs = (ViewPagerTabs) findViewById(R.id.viewpager_header);
         mViewPager.setOnPageChangeListener(mViewPagerTabs);
-
-        if (startingTab == TAB_INDEX_VOICEMAIL) {
-            // The addition of the voicemail tab is an asynchronous process, so wait till the tab
-            // is added, before attempting to switch to it. If the querying of CP2 for voicemail
-            // providers takes too long, give up and show the first tab instead.
-            mSwitchToVoicemailTab = true;
-            mHandler.postDelayed(mWaitForVoicemailTimeoutRunnable,
-                    WAIT_FOR_VOICEMAIL_PROVIDER_TIMEOUT_MS);
-        } else {
-            mViewPagerTabs.setViewPager(mViewPager);
-            mViewPager.setCurrentItem(startingTab);
-        }
+        mViewPagerTabs.setViewPager(mViewPager);
         addSearchFragment();
-        mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (getTelephonyManager().isMultiSimEnabled())
-            return;
-
-        CallLogQueryHandler callLogQueryHandler =
-                new CallLogQueryHandler(this.getContentResolver(), this);
-        callLogQueryHandler.fetchVoicemailStatus();
     }
 
     @Override
@@ -256,25 +150,6 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
         if (fragment instanceof CallLogSearchFragment) {
             mSearchFragment = (CallLogSearchFragment) fragment;
         }
-    }
-
-    private TelephonyManager getTelephonyManager() {
-        return (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-    }
-
-    private void initMSimCallLog() {
-        setContentView(R.layout.msim_call_log_activity);
-        getWindow().setBackgroundDrawable(null);
-
-        final ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(true);
-
-        mViewPager = (ViewPager) findViewById(R.id.call_log_pager);
-
-        mViewPagerAdapter = new MSimViewPagerAdapter(getFragmentManager());
-        mViewPager.setAdapter(mViewPagerAdapter);
     }
 
     @Override
@@ -301,17 +176,12 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
                 itemSearchCallLog.setVisible(adapter != null
                         && !adapter.isEmpty());
             }
-        // If onPrepareOptionsMenu is called before fragments loaded. Don't do anything.
-        if (mAllCallsFragment != null && itemDeleteAll != null) {
-            // If onPrepareOptionsMenu is called before fragments are loaded, don't do anything.
-            final CallLogAdapter adapter = mAllCallsFragment.getAdapter();
-            itemDeleteAll.setVisible(adapter != null && !adapter.isEmpty());
-        }
 
-        if (mMSimCallsFragment != null && itemDeleteAll != null) {
-            final CallLogAdapter adapter = mMSimCallsFragment.getAdapter();
-            itemDeleteAll.setVisible(adapter != null && !adapter.isEmpty());
-        }
+            // If onPrepareOptionsMenu is called before fragments loaded. Don't do anything.
+            if (mMSimCallsFragment != null && itemDeleteAll != null) {
+                final CallLogAdapter adapter = mMSimCallsFragment.getAdapter();
+                itemDeleteAll.setVisible(adapter != null && !adapter.isEmpty());
+            }
         }
         return true;
     }
@@ -341,35 +211,6 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
         startActivity(intent);
     }
 
-    @Override
-    public void onVoicemailStatusFetched(Cursor statusCursor) {
-        if (this.isFinishing()) {
-            return;
-        }
-
-        mHandler.removeCallbacks(mWaitForVoicemailTimeoutRunnable);
-        // Update mHasActiveVoicemailProvider, which controls the number of tabs displayed.
-        int activeSources = mVoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor);
-        if (activeSources > 0 != mHasActiveVoicemailProvider) {
-            mHasActiveVoicemailProvider = activeSources > 0;
-            mViewPagerAdapter.notifyDataSetChanged();
-            mViewPagerTabs.setViewPager(mViewPager);
-            if (mSwitchToVoicemailTab) {
-                mViewPager.setCurrentItem(TAB_INDEX_VOICEMAIL, false);
-            }
-        } else if (mSwitchToVoicemailTab) {
-            // The voicemail tab was requested, but it does not exist because there are no
-            // voicemail sources. Just fallback to the first item instead.
-            mViewPagerTabs.setViewPager(mViewPager);
-        }
-    }
-
-    @Override
-    public boolean onCallsFetched(Cursor statusCursor) {
-        // Return false; did not take ownership of cursor
-        return false;
-    }
-
     private void enterSearchUi() {
         if (mSearchFragment == null) {
             return;
@@ -395,9 +236,8 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
         transaction.commitAllowingStateLoss();
         getFragmentManager().executePendingTransactions();
         mViewPager.setVisibility(View.GONE);
-        if (!getTelephonyManager().isMultiSimEnabled()) {
-            mViewPagerTabs.setVisibility(View.GONE);
-        }
+        mViewPagerTabs.setVisibility(View.GONE);
+
         // We need to call this and onActionViewCollapsed() manually, since we
         // are using a custom
         // layout instead of asking the search menu item to take care of
@@ -407,7 +247,7 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
     }
 
     private void updateFragmentVisibility(int position, boolean visibility) {
-        if (position >= TAB_INDEX_ALL) {
+        if (position >= TAB_INDEX_MSIM) {
             final Fragment fragment = getFragmentAt(position);
             if (fragment != null) {
                 fragment.setMenuVisibility(visibility);
@@ -418,17 +258,9 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
 
     private Fragment getFragmentAt(int position) {
         switch (position) {
-        case TAB_INDEX_ALL:
-            if (getTelephonyManager().isMultiSimEnabled()) {
-                return mMSimCallsFragment;
-            } else {
-                return mAllCallsFragment;
-            }
-        case TAB_INDEX_MISSED:
-            return mMissedCallsFragment;
-        case TAB_INDEX_VOICEMAIL:
-            return mVoicemailFragment;
-        case TAB_INDEX_STATS:
+        case TAB_INDEX_MSIM:
+            return mMSimCallsFragment;
+        case TAB_INDEX_MSIM_STATS:
             return mStatsFragment;
         default:
             throw new IllegalStateException("Unknown fragment index: "
@@ -564,9 +396,8 @@ public class CallLogActivity extends AnalyticsActivity implements CallLogQueryHa
         }
 
         mViewPager.setVisibility(View.VISIBLE);
-        if (!getTelephonyManager().isMultiSimEnabled()) {
-            mViewPagerTabs.setVisibility(View.VISIBLE);
-        }
+        mViewPagerTabs.setVisibility(View.VISIBLE);
+
         hideInputMethod(getCurrentFocus());
 
         // Request to update option menu.
