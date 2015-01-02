@@ -32,6 +32,7 @@ import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.GeoUtil;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapterHelper;
+import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
@@ -72,7 +73,7 @@ class CallStatsAdapter extends ArrayAdapter<CallStatsDetails>
     private CallStatsDetails mTotalItem;
     private Map<ContactInfo, CallStatsDetails> mInfoLookup;
 
-    private int mType = CallStatsQueryHandler.CALL_TYPE_ALL;
+    private int mType = CallLogQueryHandler.CALL_TYPE_ALL;
     private long mFilterFrom;
     private long mFilterTo;
     private boolean mSortByDuration;
