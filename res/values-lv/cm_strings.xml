@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">Kārtot pēc zvanu skaita</string>
   <string name="menu_add_to_blacklist">Pievienot melnajam sarakstam</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> pievienots melnajam sarakstam</string>
+  <string name="menu_delete_from_blacklist">Dzēst no melnā saraksta</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> izdzēsti no melnā saraksta</string>
   <string name="nearby_places">Tuvākās vietas</string>
   <string name="people">Cilvēki</string>
   <string name="start_call_playback">Atskaņot ierakstu</string>

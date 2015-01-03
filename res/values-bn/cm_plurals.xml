@@ -17,15 +17,19 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="hour">
-    <item quantity="other">%d 小時</item>
+    <item quantity="one">%d ঘণ্টা</item>
+    <item quantity="other">%d ঘণ্টা</item>
   </plurals>
   <plurals name="minute">
-    <item quantity="other">%d 分</item>
+    <item quantity="one">%d মিনিট</item>
+    <item quantity="other">%d মিনিট</item>
   </plurals>
   <plurals name="second">
-    <item quantity="other">%d 秒</item>
+    <item quantity="one">%d সেকেন্ড</item>
+    <item quantity="other">%d সেকেন্ড</item>
   </plurals>
   <plurals name="call">
-    <item quantity="other">%d 個通話</item>
+    <item quantity="one">%d কল</item>
+    <item quantity="other">%d কল</item>
   </plurals>
 </resources>
