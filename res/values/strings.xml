@@ -354,7 +354,6 @@
     <string name="menu_show_all_calls">Show all calls</string>
 
     <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
-    <string name="video_call">Video call</string>
     <string name="add_contact">Add to contacts</string>
     <string name="add_2sec_pause">Add 2-sec pause</string>
     <string name="add_wait">Add wait</string>
@@ -514,9 +513,6 @@
 
     <!-- A nicely formatted call duration displayed when viewing call details. For example "42 mins 28 secs" -->
     <string name="callDetailsDurationFormat"><xliff:g id="minutes" example="42">%s</xliff:g> mins <xliff:g id="seconds" example="28">%s</xliff:g> secs</string>
-
-    <string name="call_duration_active">Active duration:</string>
-    <string name="call_duration_call_out">Call duration:</string>
 
     <!-- Dialog message which is shown when the user tries to make a phone call
          to prohibited phone numbers [CHAR LIMIT=NONE] -->
@@ -814,12 +810,4 @@
     <!-- Label for the call settings section description [CHAR LIMIT=80]-->
     <string name="call_settings_description">Voicemail, call waiting, and others</string>
 
-    <string name="device_id">Device Identifier</string>
-
-    <string name="call_log_show_all_slots">All SIMs</string>
-    <string name="call_log_all_calls_header">All calls</string>
-    <string name="calllog_search_hint">"Search call log"</string>
-
-    <string name="add_to_white_list">Add to white list</string>
-    <string name="add_to_black_list">Add to black list</string>
 </resources>
