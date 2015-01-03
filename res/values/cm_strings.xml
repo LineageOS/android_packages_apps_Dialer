@@ -100,4 +100,14 @@
 
     <string name="detailed_incall_info_title">Detailed caller information</string>
     <string name="detailed_incall_info_summary">Display additional information about the caller in the incoming call screen</string>
+
+    <string name="video_call">Video call</string>
+    <string name="call_duration_active">Active duration:</string>
+    <string name="call_duration_call_out">Call duration:</string>
+    <string name="device_id">Device Identifier</string>
+    <string name="call_log_show_all_slots">All SIMs</string>
+    <string name="call_log_all_calls_header">All calls</string>
+    <string name="calllog_search_hint">"Search call log"</string>
+    <string name="add_to_white_list">Add to white list</string>
+    <string name="add_to_black_list">Add to black list</string>
 </resources>
