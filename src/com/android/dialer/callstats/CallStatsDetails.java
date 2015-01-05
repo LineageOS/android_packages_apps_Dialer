@@ -47,6 +47,7 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
     public int incomingCount;
     public int outgoingCount;
     public int missedCount;
+    public int blacklistCount;
 
     public CallStatsDetails(CharSequence number, int numberPresentation,
             ContactInfo info, String countryIso, String geocode, long date) {
@@ -121,7 +122,7 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
     }
 
     public int getTotalCount() {
-        return incomingCount + outgoingCount + missedCount;
+        return incomingCount + outgoingCount + missedCount + blacklistCount;
     }
 
     public void addTimeOrMissed(int type, long time) {
@@ -136,6 +137,9 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
                 break;
             case Calls.MISSED_TYPE:
                 missedCount++;
+                break;
+            case Calls.BLACKLIST_TYPE:
+                blacklistCount++;
                 break;
         }
     }
@@ -158,6 +162,8 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
                 return outDuration;
             case Calls.MISSED_TYPE:
                 return (long) missedCount;
+            case Calls.BLACKLIST_TYPE:
+                return (long) blacklistCount;
             default:
                 return getFullDuration();
         }
@@ -171,6 +177,8 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
                 return outgoingCount;
             case Calls.MISSED_TYPE:
                 return missedCount;
+            case Calls.BLACKLIST_TYPE:
+                return blacklistCount;
             default:
                 return getTotalCount();
         }
@@ -182,11 +190,12 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
         this.incomingCount += other.incomingCount;
         this.outgoingCount += other.outgoingCount;
         this.missedCount += other.missedCount;
+        this.blacklistCount += other.blacklistCount;
     }
 
     public void reset() {
         this.inDuration = this.outDuration = 0;
-        this.incomingCount = this.outgoingCount = this.missedCount = 0;
+        this.incomingCount = this.outgoingCount = this.missedCount = this.blacklistCount = 0;
     }
 
     /* Parcelable interface */
@@ -215,6 +224,7 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
         out.writeInt(incomingCount);
         out.writeInt(outgoingCount);
         out.writeInt(missedCount);
+        out.writeInt(blacklistCount);
     }
 
     public static final Parcelable.Creator<CallStatsDetails> CREATOR =
@@ -246,5 +256,6 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
         incomingCount = in.readInt();
         outgoingCount = in.readInt();
         missedCount = in.readInt();
+        blacklistCount = in.readInt();
     }
 }
