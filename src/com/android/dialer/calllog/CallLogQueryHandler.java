@@ -159,49 +159,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     /** Fetches the list of calls in the call log. */
     private void fetchCalls(int token, int callType, boolean newOnly, long newerThan) {
-        // We need to check for NULL explicitly otherwise entries with where READ is NULL
-        // may not match either the query or its negation.
-        // We consider the calls that are not yet consumed (i.e. IS_READ = 0) as "new".
-        StringBuilder where = new StringBuilder();
-        List<String> selectionArgs = Lists.newArrayList();
-
-        if (newOnly) {
-            where.append(Calls.NEW);
-            where.append(" = 1");
-        }
-
-        if (callType > CALL_TYPE_ALL) {
-            if (where.length() > 0) {
-                where.append(" AND ");
-            }
-            // Add a clause to fetch only items of type voicemail.
-            where.append(String.format("(%s = ?)", Calls.TYPE));
-            // Add a clause to fetch only items newer than the requested date
-            selectionArgs.add(Integer.toString(callType));
-            if (callType == Calls.MISSED_TYPE) {
-                // also query for blacklisted calls as they are 'missed'
-                where.append(" OR ");
-                where.append(String.format("(%s = ?)", Calls.TYPE));
-                selectionArgs.add(Integer.toString(Calls.BLACKLIST_TYPE));
-            }
-        }
-
-        if (newerThan > 0) {
-            if (where.length() > 0) {
-                where.append(" AND ");
-            }
-            where.append(String.format("(%s > ?)", Calls.DATE));
-            selectionArgs.add(Long.toString(newerThan));
-        }
-
-        final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;
-        final String selection = where.length() > 0 ? where.toString() : null;
-        Uri uri = Calls.CONTENT_URI_WITH_VOICEMAIL.buildUpon()
-                .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
-                .build();
-        startQuery(token, null, uri,
-                CallLogQuery._PROJECTION, selection, selectionArgs.toArray(EMPTY_STRING_ARRAY),
-                Calls.DEFAULT_SORT_ORDER);
+        fetchCalls(token, callType, newOnly, newerThan, CALL_SUB_ALL);
     }
 
     private void fetchCalls(int token, int callType, boolean newOnly,
@@ -225,12 +183,6 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             where.append(String.format("(%s = ?)", Calls.TYPE));
             // Add a clause to fetch only items newer than the requested date
             selectionArgs.add(Integer.toString(callType));
-            if (callType == Calls.MISSED_TYPE) {
-                // also query for blacklisted calls as they are 'missed'
-                where.append(" OR ");
-                where.append(String.format("(%s = ?)", Calls.TYPE));
-                selectionArgs.add(Integer.toString(Calls.BLACKLIST_TYPE));
-            }
         }
 
         if (slotId > CALL_SUB_ALL) {

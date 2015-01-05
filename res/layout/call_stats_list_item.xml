@@ -70,7 +70,8 @@
         ex:backgroundColor="@color/call_stats_bar_background"
         ex:blueColor="@color/call_stats_incoming"
         ex:greenColor="@color/call_stats_outgoing"
-        ex:redColor="@color/call_stats_missed" />
+        ex:redColor="@color/call_stats_missed"
+        ex:orangeColor="@color/call_stats_blacklist"/>
 
     <TextView
         android:id="@+id/number"
