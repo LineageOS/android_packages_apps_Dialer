@@ -42,7 +42,8 @@ public class SpinnerContent {
     private static final int INDEX_CALL_TYPE_INCOMING = 1;
     private static final int INDEX_CALL_TYPE_OUTGOING = 2;
     private static final int INDEX_CALL_TYPE_MISSED = 3;
-    private static final int INDEX_CALL_TYPE_VOICEMAIL = 4;
+    private static final int INDEX_CALL_TYPE_BLACKLIST = 4;
+    private static final int INDEX_CALL_TYPE_VOICEMAIL = 5;
 
     public static void setSpinnerContentValue(Spinner spinner, int value) {
         for (int i = 0, count = spinner.getCount(); i < count; i++) {
@@ -93,7 +94,7 @@ public class SpinnerContent {
     public static List<SpinnerContent> setupStatusFilterContent(Context context,
             boolean voicemailAvailable) {
         // Didn't show the voice mail item if not available.
-        int statusCount = voicemailAvailable ? 5 : 4;
+        int statusCount = voicemailAvailable ? 6 : 5;
         ArrayList<SpinnerContent> values = new ArrayList<SpinnerContent>(statusCount);
         for (int i = 0; i < statusCount; i++) {
             int value = CallLogQueryHandler.CALL_TYPE_ALL;
@@ -114,6 +115,10 @@ public class SpinnerContent {
                 case INDEX_CALL_TYPE_MISSED:
                     value = CallLog.Calls.MISSED_TYPE;
                     label = context.getString(R.string.call_log_missed_header);
+                    break;
+                case INDEX_CALL_TYPE_BLACKLIST:
+                    value = CallLog.Calls.BLACKLIST_TYPE;
+                    label = context.getString(R.string.call_log_blacklist_header);
                     break;
                 case INDEX_CALL_TYPE_VOICEMAIL:
                     value = CallLog.Calls.VOICEMAIL_TYPE;

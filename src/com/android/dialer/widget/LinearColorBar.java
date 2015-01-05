@@ -35,11 +35,13 @@ public class LinearColorBar extends LinearLayout {
     private float mFirstRatio;
     private float mSecondRatio;
     private float mThirdRatio;
+    private float mFourthRatio;
 
     private int mBackgroundColor;
     private int mBlueColor;
     private int mGreenColor;
     private int mRedColor;
+    private int mOrangeColor;
 
     final Rect mRect = new Rect();
     final Paint mPaint = new Paint();
@@ -76,6 +78,9 @@ public class LinearColorBar extends LinearLayout {
                 case R.styleable.LinearColorBar_blueColor:
                     mBlueColor = a.getInt(attr, 0);
                     break;
+                case R.styleable.LinearColorBar_orangeColor:
+                    mOrangeColor = a.getInt(attr, 0);
+                    break;
             }
         }
 
@@ -91,10 +96,11 @@ public class LinearColorBar extends LinearLayout {
         mEdgeGradientPaint.setAntiAlias(true);
     }
 
-    public void setRatios(float blue, float green, float red) {
+    public void setRatios(float blue, float green, float red, float orange) {
         mFirstRatio = blue;
         mSecondRatio = green;
         mThirdRatio = red;
+        mFourthRatio = orange;
         invalidate();
     }
 
@@ -129,8 +135,9 @@ public class LinearColorBar extends LinearLayout {
         int right = left + (int) (width * mFirstRatio);
         int right2 = right + (int) (width * mSecondRatio);
         int right3 = right2 + (int) (width * mThirdRatio);
+        int right4 = right3 + (int) (width * mFourthRatio);
 
-        int indicatorLeft = right3;
+        int indicatorLeft = right4;
         int indicatorRight = width;
 
         if (mLastInterestingLeft != indicatorLeft || mLastInterestingRight != indicatorRight) {
@@ -194,6 +201,17 @@ public class LinearColorBar extends LinearLayout {
             mRect.left = left;
             mRect.right = right;
             mPaint.setColor(mRedColor);
+            canvas.drawRect(mRect, mPaint);
+            width -= (right - left);
+            left = right;
+        }
+
+        right = right4;
+
+        if (left < right) {
+            mRect.left = left;
+            mRect.right = right;
+            mPaint.setColor(mOrangeColor);
             canvas.drawRect(mRect, mPaint);
             width -= (right - left);
             left = right;
