@@ -65,6 +65,8 @@ import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
+import com.android.contacts.common.vcard.ExportVCardActivity;
+import com.android.contacts.common.vcard.VCardCommonArguments;
 import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.dialer.activity.TransactionSafeActivity;
 import com.android.dialer.calllog.CallLogActivity;
@@ -96,6 +98,7 @@ import com.android.phone.common.animation.AnimationListenerAdapter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The dialer tab's title is 'phone', a more common name (see strings.xml).
@@ -664,6 +667,30 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 intent.setType(Contacts.CONTENT_VCARD_TYPE);
                 intent.putExtra(Intent.EXTRA_STREAM, uri);
                 startActivity(intent);
+            }
+        } else if (requestCode == ImportExportDialogFragment.SUBACTIVITY_EXPORT_CONTACTS) {
+            if (resultCode == RESULT_OK) {
+                Bundle result = data.getExtras().getBundle(
+                        SimContactsConstants.RESULT_KEY);
+                Set<String> keySet = result.keySet();
+                Iterator<String> it = keySet.iterator();
+                StringBuilder selExportBuilder = new StringBuilder();
+                while (it.hasNext()) {
+                    String id = it.next();
+                    if (0 != selExportBuilder.length()) {
+                        selExportBuilder.append(",");
+                    }
+                    selExportBuilder.append(id);
+                }
+                selExportBuilder.insert(0, "_id IN (");
+                selExportBuilder.append(")");
+                Intent exportIntent = new Intent(this,
+                        ExportVCardActivity.class);
+                exportIntent.putExtra("SelExport", selExportBuilder.toString());
+                exportIntent.putExtra(
+                        VCardCommonArguments.ARG_CALLING_ACTIVITY,
+                        DialtactsActivity.class.getName());
+                startActivity(exportIntent);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
