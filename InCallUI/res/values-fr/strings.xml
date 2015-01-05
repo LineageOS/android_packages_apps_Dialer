@@ -135,7 +135,7 @@
     <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Son de l\'appel réactivé"</string>
     <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Appel mis en attente"</string>
     <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"L\'appel n\'est plus en attente."</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"Réponse"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Répondre"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Envoyer un SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Refuser"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"Répondre via un appel vidéo"</string>
