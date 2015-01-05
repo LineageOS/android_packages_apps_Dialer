@@ -54,6 +54,8 @@
     <string name="call_stats_outgoing">Outgoing: <xliff:g id="percent">%d</xliff:g>%%</string>
     <string name="call_stats_missed">Missed</string>
     <string name="call_stats_missed_percent">Missed: <xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_blacklist">Blacklist</string>
+    <string name="call_stats_blacklist_percent">Blacklist: <xliff:g id="percent">%d</xliff:g>%%</string>
     <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
     <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
     <string name="call_stats_filter_from">Start date</string>
