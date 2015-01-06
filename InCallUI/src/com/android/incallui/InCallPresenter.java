@@ -1367,8 +1367,10 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         if (phoneAccountHandle != null) {
             final TelecomManager tm = getTelecomManager();
 
-            if (tm != null && tm.hasMultipleCallCapableAccounts()) {
+            if (tm != null) {
                 final PhoneAccount account = tm.getPhoneAccount(phoneAccountHandle);
+                // For single-sim devices, there will be no selected highlight color, so the phone
+                // account will default to NO_HIGHLIGHT_COLOR.
                 if (account != null) {
                     highlightColor = account.getHighlightColor();
                 }
