@@ -37,6 +37,11 @@
     <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
     <string name="cyngn_reverse_lookup_provider_value" translatable="false">CyngnChinese</string>
 
+    <!-- dialpad t9 search -->
+    <string name="preference_category_t9_dialpad_search">Dialpad T9 search</string>
+    <string name="t9_search_input_locale">T9 search input</string>
+    <string name="t9_search_input_locale_default">Default</string>
+
     <!-- Description for incoming calls that were blacklisted -->
     <string name="type_blacklist">Blacklisted call</string>
     <string name="call_log_stats_title">Statistics</string>

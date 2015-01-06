@@ -81,6 +81,19 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="button_dialpad_t9_search_category_key"
+        android:title="@string/preference_category_t9_dialpad_search"
+        android:persistent="false">
+
+        <ListPreference
+            android:key="button_t9_search_input"
+            android:title="@string/t9_search_input_locale"
+            android:summary="%s"
+            android:defaultValue=""
+            android:persistent="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="dialer_general_other_settings_category_key"
         android:title="@string/other_settings_title"
         android:persistent="false" >
