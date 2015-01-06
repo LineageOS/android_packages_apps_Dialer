@@ -50,18 +50,18 @@ import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 public class CallButtonFragment
         extends BaseFragment<CallButtonPresenter, CallButtonPresenter.CallButtonUi>
         implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener, OnDismissListener,
-        View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+        View.OnClickListener {
     private ImageButton mAudioButton;
     private ImageButton mChangeToVoiceButton;
-    private ImageButton mMuteButton;
-    private ImageButton mShowDialpadButton;
-    private ImageButton mHoldButton;
+    private CompoundButton mMuteButton;
+    private CompoundButton mShowDialpadButton;
+    private CompoundButton mHoldButton;
     private ImageButton mSwapButton;
     private ImageButton mChangeToVideoButton;
-    private ImageButton mSwitchCameraButton;
+    private CompoundButton mSwitchCameraButton;
     private ImageButton mAddCallButton;
     private ImageButton mMergeButton;
-    private ImageButton mPauseVideoButton;
+    private CompoundButton mPauseVideoButton;
     private ImageButton mOverflowButton;
 
     private PopupMenu mAudioModePopup;
@@ -102,23 +102,23 @@ public class CallButtonFragment
         mAudioButton.setOnClickListener(this);
         mChangeToVoiceButton = (ImageButton) parent.findViewById(R.id.changeToVoiceButton);
         mChangeToVoiceButton. setOnClickListener(this);
-        mMuteButton = (ImageButton) parent.findViewById(R.id.muteButton);
+        mMuteButton = (CompoundButton) parent.findViewById(R.id.muteButton);
         mMuteButton.setOnClickListener(this);
-        mShowDialpadButton = (ImageButton) parent.findViewById(R.id.dialpadButton);
+        mShowDialpadButton = (CompoundButton) parent.findViewById(R.id.dialpadButton);
         mShowDialpadButton.setOnClickListener(this);
-        mHoldButton = (ImageButton) parent.findViewById(R.id.holdButton);
+        mHoldButton = (CompoundButton) parent.findViewById(R.id.holdButton);
         mHoldButton.setOnClickListener(this);
         mSwapButton = (ImageButton) parent.findViewById(R.id.swapButton);
         mSwapButton.setOnClickListener(this);
         mChangeToVideoButton = (ImageButton) parent.findViewById(R.id.changeToVideoButton);
         mChangeToVideoButton.setOnClickListener(this);
-        mSwitchCameraButton = (ImageButton) parent.findViewById(R.id.switchCameraButton);
+        mSwitchCameraButton = (CompoundButton) parent.findViewById(R.id.switchCameraButton);
         mSwitchCameraButton.setOnClickListener(this);
         mAddCallButton = (ImageButton) parent.findViewById(R.id.addButton);
         mAddCallButton.setOnClickListener(this);
         mMergeButton = (ImageButton) parent.findViewById(R.id.mergeButton);
         mMergeButton.setOnClickListener(this);
-        mPauseVideoButton = (ImageButton) parent.findViewById(R.id.pauseVideoButton);
+        mPauseVideoButton = (CompoundButton) parent.findViewById(R.id.pauseVideoButton);
         mPauseVideoButton.setOnClickListener(this);
         mOverflowButton = (ImageButton) parent.findViewById(R.id.overflowButton);
         mOverflowButton.setOnClickListener(this);
@@ -145,10 +145,6 @@ public class CallButtonFragment
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-    }
-
-    @Override
     public void onClick(View view) {
         int id = view.getId();
         Log.d(this, "onClick(View " + view + ", id " + id + ")...");
@@ -165,8 +161,7 @@ public class CallButtonFragment
                 getPresenter().changeToVoiceClicked();
                 break;
             case R.id.muteButton: {
-                final ImageButton button = (ImageButton) view;
-                getPresenter().muteClicked(!button.isSelected());
+                getPresenter().muteClicked(!mMuteButton.isSelected());
                 break;
             }
             case R.id.mergeButton:
@@ -174,8 +169,7 @@ public class CallButtonFragment
                 mMergeButton.setEnabled(false);
                 break;
             case R.id.holdButton: {
-                final ImageButton button = (ImageButton) view;
-                getPresenter().holdClicked(!button.isSelected());
+                getPresenter().holdClicked(!mHoldButton.isSelected());
                 break;
             }
             case R.id.swapButton:
@@ -219,7 +213,7 @@ public class CallButtonFragment
         }
 
         Resources res = getActivity().getResources();
-        ImageButton[] compoundButtons = {
+        View[] compoundButtons = {
                 mAudioButton,
                 mMuteButton,
                 mShowDialpadButton,
@@ -228,7 +222,7 @@ public class CallButtonFragment
                 mPauseVideoButton
         };
 
-        for (ImageButton button : compoundButtons) {
+        for (View button : compoundButtons) {
             final LayerDrawable layers = (LayerDrawable) button.getBackground();
             final RippleDrawable btnCompoundDrawable = compoundBackgroundDrawable(themeColors);
             layers.setDrawableByLayerId(R.id.compoundBackgroundItem, btnCompoundDrawable);
@@ -770,6 +764,7 @@ public class CallButtonFragment
         mShowDialpadButton.setSelected(value);
         if (getActivity() != null && getActivity() instanceof InCallActivity) {
             ((InCallActivity) getActivity()).displayDialpad(value, animate);
+            maybeSendAccessibilityEvent(mShowDialpadButton, R.string.onscreenShowDialpadText);
         }
     }
 
