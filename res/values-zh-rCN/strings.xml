@@ -216,9 +216,14 @@
     <string name="call_log_show_all_slots">"所有卡"</string>
     <string name="call_log_all_calls_header">"所有通话"</string>
     <string name="calllog_search_hint">"搜索通话记录"</string>
-
+    <string name="firewall_number_len_not_valid">号码错误</string>
+    <string name="firewall_number_in_black">"该号码已在黑名单中"</string>
+    <string name="firewall_number_in_white">"该号码已在白名单中"</string>
+    <string name="firewall_save_success">保存成功</string>
+    <string name="firewall_add_blacklist_warning">如果将该号码加入黑名单，你将不会再收到该号码的消息和来电</string>
     <string name="add_to_white_list">加入白名单</string>
     <string name="add_to_black_list">加入黑名单</string>
     <string name="video_call">视频电话</string>
     <string name="menu_add_to_4g_conference_call">加入4G电话会议</string>
+
 </resources>
