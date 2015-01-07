@@ -35,8 +35,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v13 \
     android-support-v4 \
     android-ex-variablespeed \
-    libphonenumber \
-    libgeocoding
+    libphonenumber
 
 LOCAL_REQUIRED_MODULES := libvariablespeed
 
