@@ -103,7 +103,7 @@
     <style name="DialtactsActivityTheme" parent="DialtactsTheme">
         <item name="android:actionBarStyle">@style/DialtactsActionBarWithoutTitleStyle</item>
         <item name="android:fastScrollThumbDrawable">@drawable/fastscroll_thumb</item>
-
+        <item name="android:fastScrollTrackDrawable">@null</item>
     </style>
     <!-- A theme for inflation of spinners in the dialtacts action bar -->
     <style name="DialtactsSpinnerTheme" parent="DialtactsTheme">
