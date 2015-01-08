@@ -2012,7 +2012,6 @@ public class DialpadFragment extends AnalyticsFragment
                     public void onClick(DialogInterface dialog, int which) {
                         // go to speed dial setting screen to set speed dial number.
                         Intent intent = new Intent(getActivity(), SpeedDialListActivity.class);
-                        intent.putExtra(SpeedDialListActivity.EXTRA_INITIAL_PICK_NUMBER, number);
                         startActivity(intent);
                     }
                 })

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
+  ~ Copyright (C) 2013-2014 The Linux Foundation. All Rights Reserved.
+  ~ Not a Contribution.
   ~ Copyright (C) 2012 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -226,4 +228,8 @@
     <string name="video_call">视频电话</string>
     <string name="menu_add_to_4g_conference_call">加入4G电话会议</string>
 
+    <string name="set_speed_dial">快速拨号设置</string>
+    <string name="input_number">"输入号码"</string>
+    <string name="speed_dial_cancel">"取消"</string>
+    <string name="speed_dial_ok">"确定"</string>
 </resources>
