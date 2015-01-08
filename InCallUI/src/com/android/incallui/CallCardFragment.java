@@ -727,11 +727,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mSecondaryCallName = (TextView) getView().findViewById(R.id.secondaryCallName);
             mSecondaryCallConferenceCallIcon =
                     getView().findViewById(R.id.secondaryCallConferenceCallIcon);
-            if (hasProvider) {
-                mSecondaryCallProviderInfo.setVisibility(View.VISIBLE);
-                mSecondaryCallProviderLabel = (TextView) getView()
-                        .findViewById(R.id.secondaryCallProviderLabel);
-            }
+        }
+
+        if (mSecondaryCallProviderLabel == null && hasProvider) {
+            mSecondaryCallProviderInfo.setVisibility(View.VISIBLE);
+            mSecondaryCallProviderLabel = (TextView) getView()
+                    .findViewById(R.id.secondaryCallProviderLabel);
         }
     }
 
