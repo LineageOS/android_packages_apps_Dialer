@@ -117,4 +117,7 @@
     <string name="calllog_search_hint">"Search call log"</string>
     <string name="add_to_white_list">Add to white list</string>
     <string name="add_to_black_list">Add to black list</string>
+
+    <!-- Filter by blacklist calls option -->
+    <string name="call_log_blacklist_header">Blacklist calls only</string>
 </resources>
