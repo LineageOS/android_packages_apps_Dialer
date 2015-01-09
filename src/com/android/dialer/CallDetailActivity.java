@@ -22,9 +22,6 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
@@ -141,13 +138,6 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     private boolean mHasTrashOption;
     /** Whether we should show "remove from call log" in the options menu. */
     private boolean mHasRemoveFromCallLogOption;
-
-    /** Add for black/white list. */
-    private boolean mHasInstallFireWallOption = false;
-    private static final String NUMBER_KEY = "number";
-    private static final String MODE_KEY = "mode";
-    private static final String FIREWALL_APK_NAME = "com.android.firewall";
-    private static final String FIREWALL_BLACK_WHITE_LIST = "com.android.firewall.FirewallListPage";
 
     private ProximitySensorManager mProximitySensorManager;
     private final ProximitySensorListener mProximitySensorListener = new ProximitySensorListener();
@@ -266,20 +256,6 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     public void onResume() {
         super.onResume();
         updateData(getCallLogEntryUris());
-
-        mHasInstallFireWallOption = isFireWallInstalled();
-    }
-
-    private boolean isFireWallInstalled() {
-        boolean installed = false;
-        try {
-            ApplicationInfo info = getPackageManager().getApplicationInfo(
-                    FIREWALL_APK_NAME, PackageManager.GET_PROVIDERS);
-            installed = (info != null);
-        } catch (NameNotFoundException e) {
-        }
-        Log.d(TAG, "Is Firewall installed ? " + installed);
-        return installed;
     }
 
     /**
@@ -616,9 +592,6 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
 
         menu.findItem(R.id.menu_video_call).setVisible(CallUtil.isCSVTEnabled());
 
-        menu.findItem(R.id.menu_add_to_black_list).setVisible(mHasInstallFireWallOption);
-        menu.findItem(R.id.menu_add_to_white_list).setVisible(mHasInstallFireWallOption);
-
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -628,30 +601,6 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
         } else if (false) {
             //add support for ims video call;
         }
-    }
-
-    public void onMenuAddToBlackList(MenuItem menuItem) {
-        Bundle blackBundle = new Bundle();
-        blackBundle.putString(NUMBER_KEY, mNumber);
-        blackBundle.putString(MODE_KEY, "blacklist");
-
-        Intent blackIntent = new Intent();
-        blackIntent.setClassName(FIREWALL_APK_NAME, FIREWALL_BLACK_WHITE_LIST);
-        blackIntent.setAction(Intent.ACTION_INSERT);
-        blackIntent.putExtras(blackBundle);
-        startActivity(blackIntent);
-    }
-
-    public void onMenuAddToWhiteList(MenuItem menuItem) {
-        Bundle whiteBundle = new Bundle();
-        whiteBundle.putString(NUMBER_KEY, mNumber);
-        whiteBundle.putString(MODE_KEY, "whitelist");
-
-        Intent whiteIntent = new Intent();
-        whiteIntent.setClassName(FIREWALL_APK_NAME, FIREWALL_BLACK_WHITE_LIST);
-        whiteIntent.setAction(Intent.ACTION_INSERT);
-        whiteIntent.putExtras(whiteBundle);
-        startActivity(whiteIntent);
     }
 
     public void onMenuRemoveFromCallLog(MenuItem menuItem) {
