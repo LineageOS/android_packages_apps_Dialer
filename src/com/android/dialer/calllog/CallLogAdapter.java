@@ -418,6 +418,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final int sourceType = info.sourceType;
         final int features = getCallFeatures(c, count);
         final String transcription = c.getString(CallLogQuery.TRANSCRIPTION);
+        final String operator = c.getString(CallLogQuery.OPERATOR);
         Long dataUsage = null;
         if (!c.isNull(CallLogQuery.DATA_USAGE)) {
             dataUsage = c.getLong(CallLogQuery.DATA_USAGE);
@@ -441,14 +442,14 @@ public class CallLogAdapter extends GroupingListAdapter
 
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation,
-                    formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, null, accountIcon, features, dataUsage, transcription, subId);
+                    formattedNumber, countryIso, geocode, callTypes, date, duration, null,
+                    accountIcon, features, dataUsage, transcription, subId, operator);
         } else {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
                     duration, name, ntype, label, lookupUri, photoUri, sourceType,
                     null, accountIcon, features, dataUsage, transcription,
-                    Calls.DURATION_TYPE_ACTIVE, subId);
+                    Calls.DURATION_TYPE_ACTIVE, subId, operator);
         }
 
         mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
