@@ -21,18 +21,6 @@
         android:onClick="onMenuVideoCall"
     />
     <item
-        android:id="@+id/menu_add_to_black_list"
-        android:showAsAction="withText"
-        android:title="@string/add_to_black_list"
-        android:onClick="onMenuAddToBlackList"
-    />
-    <item
-        android:id="@+id/menu_add_to_white_list"
-        android:showAsAction="withText"
-        android:title="@string/add_to_white_list"
-        android:onClick="onMenuAddToWhiteList"
-    />
-    <item
         android:id="@+id/menu_trash"
         android:icon="@drawable/ic_calllog_delete"
         android:showAsAction="ifRoom"
