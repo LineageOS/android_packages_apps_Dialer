@@ -64,6 +64,9 @@ public class ContactInfoHelper {
      * @param countryIso the country associated with this number
      */
     public ContactInfo lookupNumber(String number, String countryIso) {
+        if (TextUtils.isEmpty(number)) {
+            return null;
+        }
         final ContactInfo info;
 
         // Determine the contact info.
@@ -149,6 +152,9 @@ public class ContactInfoHelper {
      * value.
      */
     private ContactInfo lookupContactFromUri(Uri uri) {
+        if (uri == null) {
+            return null;
+        }
         final ContactInfo info;
         Cursor phonesCursor =
                 mContext.getContentResolver().query(uri, PhoneQuery._PROJECTION, null, null, null);
@@ -193,6 +199,9 @@ public class ContactInfoHelper {
      * If the lookup fails for some other reason, it returns null.
      */
     private ContactInfo queryContactInfoForSipAddress(String sipAddress) {
+        if (TextUtils.isEmpty(sipAddress)) {
+            return null;
+        }
         final ContactInfo info;
 
         // "contactNumber" is a SIP address, so use the PhoneLookup table with the SIP parameter.
@@ -212,6 +221,9 @@ public class ContactInfoHelper {
      * If the lookup fails for some other reason, it returns null.
      */
     private ContactInfo queryContactInfoForPhoneNumber(String number, String countryIso) {
+        if (TextUtils.isEmpty(number)) {
+            return null;
+        }
         String contactNumber = number;
         if (!TextUtils.isEmpty(countryIso)) {
             // Normalize the number: this is needed because the PhoneLookup query below does not
