@@ -130,8 +130,6 @@
     <string name="dialerKeyboardHintText" msgid="5401660096579787344">"使用键盘拨号"</string>
     <string name="dialerDialpadHintText" msgid="5824490365898349041">"拨号以添加通话"</string>
     <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g>分<xliff:g id="SECONDS">%s</xliff:g>秒"</string>
-    <string name="call_duration_active">"通话时长:"</string>
-    <string name="call_duration_call_out">"呼叫时长:"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"电话未拨出"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"要设置语音信箱，请转到“菜单”&gt;“设置”。"</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"要呼叫语音信箱，请先关闭飞行模式。"</string>
@@ -203,13 +201,4 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"快速回复"</string>
     <string name="call_settings_label" msgid="7416182166943714852">"通话设置"</string>
     <string name="call_settings_description" msgid="2756622428019213052">"语音信箱、来电等待及其他"</string>
-
-    <string name="device_id">设备标识符</string>
-
-    <string name="call_log_show_all_slots">"所有卡"</string>
-    <string name="call_log_all_calls_header">"所有通话"</string>
-    <string name="calllog_search_hint">"搜索通话记录"</string>
-
-    <string name="add_to_white_list">加入白名单</string>
-    <string name="add_to_black_list">加入黑名单</string>
 </resources>
