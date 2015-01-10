@@ -47,13 +47,13 @@
             android:persistent="false"
             android:ringtoneType="ringtone" />
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="button_play_dtmf_tone"
             android:title="@string/dtmf_tone_enable_title"
             android:persistent="false"
             android:defaultValue="true" />
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="button_vibrate_on_ring"
             android:title="@string/vibrate_on_ring_title"
             android:persistent="false"
@@ -98,7 +98,7 @@
         android:title="@string/other_settings_title"
         android:persistent="false" >
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="detailed_incall_info"
             android:title="@string/detailed_incall_info_title"
             android:summary="@string/detailed_incall_info_summary" />
