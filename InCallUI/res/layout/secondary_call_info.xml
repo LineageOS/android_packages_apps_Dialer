@@ -59,6 +59,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/incall_banner_secondary_text_color"
                 android:textSize="@dimen/secondary_call_info_text_size"
+                android:textAlignment="viewStart"
                 android:ellipsize="marquee"
                 android:singleLine="true"/>
 
@@ -74,6 +75,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/incall_banner_secondary_text_color"
                     android:textSize="@dimen/secondary_call_info_text_size"
+                    android:textAlignment="viewStart"
                     android:singleLine="true"/>
 
             </LinearLayout>
@@ -89,7 +91,6 @@
             android:text="@string/onHold"
             android:textColor="@color/incall_banner_secondary_text_color"
             android:textSize="@dimen/secondary_call_info_text_size"
-            android:textAlignment="textEnd"
             android:singleLine="true" />
 
     </LinearLayout>
