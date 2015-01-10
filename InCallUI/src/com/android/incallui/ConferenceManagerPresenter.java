@@ -21,6 +21,7 @@ import android.content.Context;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
+import com.android.incallui.InCallPresenter.IncomingCallListener;
 
 import com.google.common.base.Preconditions;
 
@@ -32,7 +33,7 @@ import java.util.List;
  */
 public class ConferenceManagerPresenter
         extends Presenter<ConferenceManagerPresenter.ConferenceManagerUi>
-        implements InCallStateListener, InCallDetailsListener {
+        implements InCallStateListener, InCallDetailsListener, IncomingCallListener {
 
     private Context mContext;
 
@@ -42,6 +43,7 @@ public class ConferenceManagerPresenter
 
         // register for call state changes last
         InCallPresenter.getInstance().addListener(this);
+        InCallPresenter.getInstance().addIncomingCallListener(this);
     }
 
     @Override
@@ -49,6 +51,7 @@ public class ConferenceManagerPresenter
         super.onUiUnready(ui);
 
         InCallPresenter.getInstance().removeListener(this);
+        InCallPresenter.getInstance().removeIncomingCallListener(this);
     }
 
     @Override
@@ -86,6 +89,15 @@ public class ConferenceManagerPresenter
 
         if (!details.can(
                 android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE)) {
+            InCallPresenter.getInstance().showConferenceCallManager(false);
+        }
+    }
+
+    @Override
+    public void onIncomingCall(InCallState oldState, InCallState newState, Call call) {
+        // When incoming call exists, set conference ui invisible.
+        if (getUi().isFragmentVisible()) {
+            Log.d(this, "onIncomingCall()... Conference ui is showing, hide it.");
             InCallPresenter.getInstance().showConferenceCallManager(false);
         }
     }
