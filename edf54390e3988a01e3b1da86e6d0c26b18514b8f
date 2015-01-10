@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aa08908_c3dcd114",
+        "filename": "res/xml/general_settings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2015-01-10T20:52:03Z",
+      "side": 1,
+      "message": "Items which are part of the same topic should remain as checkboxes.",
+      "revId": "edf54390e3988a01e3b1da86e6d0c26b18514b8f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
