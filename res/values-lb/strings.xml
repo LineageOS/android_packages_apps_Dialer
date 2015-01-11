@@ -135,7 +135,7 @@
   <string name="voicemail">Sproochopnam</string>
   <string name="private_num">Privat Nummer</string>
   <string name="payphone">Telefonskabinn</string>
-  <string name="dialerKeyboardHintText">D\'Tastatur benotze fir auszewielen</string>
+  <string name="dialerKeyboardHintText">D\'Tastatur benotze fir ze wielen</string>
   <string name="dialerDialpadHintText">Nummer auswielen</string>
   <string name="callDetailsDurationFormat"><xliff:g id="minutes" example="42">%s</xliff:g> Min. <xliff:g id="seconds" example="28">%s</xliff:g> Sek.</string>
   <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Uruff net ofgesat</string>
@@ -166,8 +166,6 @@
   <string name="dialpad_7_number">7</string>
   <string name="dialpad_8_number">8</string>
   <string name="dialpad_9_number">9</string>
-  <string name="dialpad_0_letters">+</string>
-  <string name="dialpad_2_letters">ABC</string>
   <string name="show_all_contacts_title">All d\'Kontakter</string>
   <string name="show_all_contacts_button_text">All d\'Kontakter</string>
   <string name="favorite_hidden">Aus de Favoritte läschen</string>

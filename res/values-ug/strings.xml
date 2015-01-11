@@ -111,7 +111,6 @@
   <string name="description_view_contact"><xliff:g id="NAME">%1$s</xliff:g> ئالاقەداش كۆرسەت</string>
   <string name="description_call"><xliff:g id="NAME">%1$s</xliff:g> نى چاقىر</string>
   <string name="description_contact_details"><xliff:g id="nameOrNumber">%1$s</xliff:g> نىڭ ئالاقەداش تەپسىلاتى</string>
-  <string name="description_call_details">چاقىرىش تەپسىلاتى</string>
   <string name="description_new_voicemail">يېڭى ئۈنخەت.</string>
   <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> چاقىرىش.</string>
   <string name="description_return_missed_call"><xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g> سۆزلەشمىگەن چاقىرىشقا قايتىدۇ</string>
@@ -136,8 +135,6 @@
   <string name="dialog_voicemail_not_ready_message">ئۈنخەت تەڭشەشتە، تىزىملىك›تەڭشەكلەرگە يۆتكىلىڭ.</string>
   <string name="dialog_voicemail_airplane_mode_message">ئۈنخەتنى چاقىرىشتا ئالدى بىلەن ئايروپىلان ھالىتىنى تاقاڭ.</string>
   <string name="contact_list_loading">يۈكلەۋاتىدۇ…</string>
-  <string name="imei">IMEI</string>
-  <string name="meid">MEID</string>
   <string name="simContacts_emptyLoading">SIM كارتىدىن يۈكلەۋاتىدۇ…</string>
   <string name="simContacts_title">SIM كارتىدىكى ئالاقەداشلار</string>
   <string name="add_contact_not_available">كىشىلەر ئەپنى قايتا قوزغاتقاندىلا ئاندىن بۇ ئىقتىدارنى ئىشلەتكىلى بولىدۇ.</string>
@@ -146,7 +143,6 @@
   <string name="call_log_all_title">ھەممىسى</string>
   <string name="call_log_missed_title">سۆزلەشمىگەنلىرى</string>
   <string name="call_log_activity_title_font_family">sans-serif-light</string>
-  <string name="show_all_contacts_title_font_family">sans-serif-light</string>
   <string name="recentMissed_empty">يېقىنقى سۆزلەشمىگەن چاقىرىشلار يوق.</string>
   <string name="recentVoicemails_empty">يېقىنقى ئۈنخەتلەر يوق.</string>
   <string name="show_all_contacts">ھەممە ئالاقەداشنى كۆرسەت</string>
@@ -158,14 +154,8 @@
   <string name="dialpad_3_number">3</string>
   <string name="dialpad_4_number">4</string>
   <string name="dialpad_5_number">5</string>
-  <string name="dialpad_6_number">6</string>
-  <string name="dialpad_7_number">7</string>
-  <string name="dialpad_8_number">8</string>
-  <string name="dialpad_9_number">9</string>
   <string name="dialpad_star_number">*</string>
   <string name="dialpad_pound_number">#</string>
-  <string name="dialpad_0_letters">+</string>
-  <string name="dialpad_2_letters">ABC</string>
   <string name="dialpad_3_letters">DEF</string>
   <string name="dialpad_4_letters">GHI</string>
   <string name="dialpad_5_letters">JKL</string>
@@ -183,10 +173,8 @@
   <string name="no_favorites">سىز يىغقۇچقا قوشقان ئالاقەداش ۋە دائىملىق\nئالاقەداشلارنىڭ ھەممىسى مۇشۇ جايدا كۆرسىتىلىدۇ.\nشۇڭا ھازىرلا سۆزلىشىشنى باشلاڭ.</string>
   <string name="contact_tooltip">سۈرەت چېكىلسە ھەممە نومۇرنى كۆرسىتىدۇ ياكى سۈرەت بېسىپ تۇرۇلسا قايتا تەرتىپلەيدۇ</string>
   <string name="description_dismiss">تاقا</string>
-  <string name="remove_contact">چىقىرىۋەت</string>
   <string name="favorites_menu_speed_dial">تېز نومۇر بۇراش</string>
   <string name="favorites_menu_all_contacts">ھەممە ئالاقەداشلار</string>
-  <string name="favorites_menu_speed_dial_font_family">sans-serif-light</string>
   <string name="favorites_menu_all_contacts_font_family">sans-serif</string>
   <string name="search_font_family">sans-serif</string>
   <string name="tab_font_family">sans-serif</string>

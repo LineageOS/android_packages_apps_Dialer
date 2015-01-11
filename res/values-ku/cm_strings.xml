@@ -45,9 +45,30 @@
   <string name="call_stats_sort_by_count">ڕیزکردن بەپێی ژمارەی پەیوەندی</string>
   <string name="menu_add_to_blacklist">زیادکردن بۆ لیستی ڕەش</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> زیادکرا بۆ لیستی ڕه‌ش</string>
+  <string name="menu_delete_from_blacklist">سڕینەوە لە ناو لیستی ڕەش</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> سڕدرایەوە لە ناو لیستی ڕەش</string>
   <string name="nearby_places">شوێنە نزیەکاکان</string>
   <string name="people">ناوەکان</string>
   <string name="start_call_playback">لێدانی تۆمارکردنه‌که‌</string>
   <string name="stop_call_playback">وه‌ستان</string>
   <string name="call_playback_error_message">نه‌توانرا تۆمارکراوه‌که‌ لێبدرێت</string>
+  <string name="calllog_search_hint">گەڕان بۆ مێژوی پەیوەندی</string>
+  <string name="video_call">په‌یوه‌ندی وێنه‌یی</string>
+  <string name="video_call_settings">ڕێکخستنەکانی پەیوەندیی ڤیدیۆیی</string>
+  <string name="description_videocall">پەیوەندی وێنەیی <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">ڕێکبەندەکانی ژمارەگری خێرا</string>
+  <string name="speed_dial_not_set">(دانەندراوە)</string>
+  <string name="speed_dial_replace">جێگۆڕکردن</string>
+  <string name="speed_dial_delete">سڕینەوە؟</string>
+  <string name="speed_dial_unassigned_dialog_title">کلیل تەرخان نەکراوە</string>
+  <string name="speed_dial_unassigned_dialog_message">هیچ زمارەگرێکی خێرا تەرخان نەکراوە بۆ کلیلی ژمارە \'<xliff:g id="number">%s</xliff:g>\'. دەتەوێت پەیوەندییەکی بۆ دیاری بکەیت؟</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"بۆ بەکارهێنانی ژمارەگری خێرا، یەکەم دۆخی فڕۆکە بکوژێنەوە."</string>
+  <string name="msim_ime_dialog_title">ناسێنەری ئامێر</string>
+  <string name="multi_sim_slot_name">سیمکارت <xliff:g id="index">%d</xliff:g></string>
+  <string name="call_log_show_all_slots">هەموو سیمکارتەکان</string>
+  <string name="yes">بەڵێ</string>
+  <string name="no">نەخێر</string>
+  <string name="call_duration_active">ماوەی چالاکی:</string>
+  <string name="call_duration_call_out">ماوەی پەیوەندیکردن:</string>
+  <string name="call_log_all_calls_header">هەموو پەیوەندییەکان</string>
 </resources>

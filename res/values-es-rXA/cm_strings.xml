@@ -45,6 +45,8 @@
   <string name="call_stats_sort_by_count">Ordenar por númb. llamaes</string>
   <string name="menu_add_to_blacklist">Amestar a la llista prieta</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> amestáu a la llista prieta</string>
+  <string name="menu_delete_from_blacklist">Desaniciar de la llista prieta</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> desaniciáu de la llista prieta</string>
   <string name="nearby_places">Llugares cercanos</string>
   <string name="people">Persones</string>
   <string name="start_call_playback">Reproducir grabación</string>
