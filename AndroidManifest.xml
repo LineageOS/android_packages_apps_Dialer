@@ -277,6 +277,7 @@
                   android:theme="@style/Theme.CircularRevealAnimation"
                   android:exported="false"
                   android:configChanges="keyboardHidden|orientation"
+                  android:launchMode="singleInstance"
                   android:noHistory="true"
                   android:excludeFromRecents="true"
                   android:screenOrientation="nosensor" />
