@@ -126,12 +126,12 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
      */
     public void fetchCalls(int callType, long newerThan) {
         cancelFetch();
-        fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, newerThan);
+        fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, 0, newerThan);
     }
 
     public void fetchCalls(int callType, long newerThan, int sub) {
         cancelFetch();
-        fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, newerThan, sub);
+        fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, 0, newerThan, sub);
     }
 
     public void fetchCalls(int callType) {
@@ -152,18 +152,23 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
                 Calls.DEFAULT_SORT_ORDER);
     }
 
+    public void fetchCallsInDateRange(int callType, long fromDate, long toDate, int subId) {
+        fetchCalls(QUERY_CALLLOG_TOKEN, callType, false, toDate, fromDate, subId);
+    }
+
     public void fetchVoicemailStatus() {
         startQuery(QUERY_VOICEMAIL_STATUS_TOKEN, null, Status.CONTENT_URI,
                 VoicemailStatusHelperImpl.PROJECTION, null, null, null);
     }
 
     /** Fetches the list of calls in the call log. */
-    private void fetchCalls(int token, int callType, boolean newOnly, long newerThan) {
-        fetchCalls(token, callType, newOnly, newerThan, CALL_SUB_ALL);
+    private void fetchCalls(int token, int callType, boolean newOnly,
+                            long olderThan, long newerThan) {
+        fetchCalls(token, callType, newOnly, olderThan, newerThan, CALL_SUB_ALL);
     }
 
     private void fetchCalls(int token, int callType, boolean newOnly,
-            long newerThan, int slotId) {
+            long olderThan, long newerThan, int slotId) {
         // We need to check for NULL explicitly otherwise entries with where READ is NULL
         // may not match either the query or its negation.
         // We consider the calls that are not yet consumed (i.e. IS_READ = 0) as "new".
@@ -202,6 +207,14 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             }
             where.append(String.format("(%s > ?)", Calls.DATE));
             selectionArgs.add(Long.toString(newerThan));
+        }
+
+        if (olderThan > 0) {
+            if (where.length() > 0) {
+                where.append(" AND ");
+            }
+            where.append(String.format("(%s <= ?)", Calls.DATE));
+            selectionArgs.add(Long.toString(olderThan));
         }
 
         final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;

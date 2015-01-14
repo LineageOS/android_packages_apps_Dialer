@@ -33,16 +33,14 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.VoicemailContract.Status;
-import android.util.MutableInt;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewTreeObserver;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
@@ -205,7 +203,6 @@ public class CallLogFragment extends AnalyticsListFragment
                 ContactsContract.Contacts.CONTENT_URI, true, mContactsObserver);
         getActivity().getContentResolver().registerContentObserver(
                 Status.CONTENT_URI, true, mVoicemailStatusObserver);
-        setHasOptionsMenu(true);
         updateCallList(mCallTypeFilter, mDateLimit);
 
         mExpandedItemTranslationZ =
@@ -416,7 +413,13 @@ public class CallLogFragment extends AnalyticsListFragment
 
     @Override
     public void fetchCalls() {
-        mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mDateLimit);
+        fetchCalls(-1, -1, CallLogQueryHandler.CALL_SUB_ALL);
+    }
+
+    protected void fetchCalls(long filterFromDate, long filterToDate, int subId) {
+        mCallLogQueryHandler.fetchCallsInDateRange(
+                mCallTypeFilter, filterFromDate, filterToDate > 0 ? filterToDate : mDateLimit,
+                subId);
     }
 
     public void startCallsQuery() {
