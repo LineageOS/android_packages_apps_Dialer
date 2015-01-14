@@ -70,6 +70,8 @@ public class CallStatsDetailActivity extends Activity {
     private TextView mOutDuration;
     private TextView mMissedSummary;
     private TextView mMissedCount;
+    private TextView mBlacklistSummary;
+    private TextView mBlacklistCount;
     private PieChartView mPieChart;
 
     private CallStatsDetails mData;
@@ -112,11 +114,14 @@ public class CallStatsDetailActivity extends Activity {
         mOutDuration = (TextView) findViewById(R.id.out_duration);
         mMissedSummary = (TextView) findViewById(R.id.missed_summary);
         mMissedCount = (TextView) findViewById(R.id.missed_count);
+        mBlacklistSummary = (TextView) findViewById(R.id.blacklist_summary);
+        mBlacklistCount = (TextView) findViewById(R.id.blacklist_count);
         mPieChart = (PieChartView) findViewById(R.id.pie_chart);
 
         setCallType(R.id.in_icon, Calls.INCOMING_TYPE);
         setCallType(R.id.out_icon, Calls.OUTGOING_TYPE);
         setCallType(R.id.missed_icon, Calls.MISSED_TYPE);
+        setCallType(R.id.blacklist_icon, Calls.BLACKLIST_TYPE);
 
         configureActionBar();
         Intent launchIntent = getIntent();
@@ -219,6 +224,21 @@ public class CallStatsDetailActivity extends Activity {
                     mResources, mData.missedCount));
         } else {
             findViewById(R.id.missed_container).setVisibility(View.GONE);
+        }
+
+        if (shouldDisplay(Calls.BLACKLIST_TYPE, false)) {
+            if (byDuration) {
+                mBlacklistSummary.setText(getString(R.string.call_stats_blacklist));
+            } else {
+                mBlacklistSummary.setText(getString(R.string.call_stats_blacklist_percent,
+                        mData.getCountPercentage(Calls.BLACKLIST_TYPE)));
+                mPieChart.addSlice(mData.blacklistCount,
+                        mResources.getColor(R.color.call_stats_blacklist));
+            }
+            mBlacklistCount.setText(CallStatsDetailHelper.getCallCountString(
+                    mResources, mData.blacklistCount));
+        } else {
+            findViewById(R.id.blacklist_container).setVisibility(View.GONE);
         }
 
         mPieChart.generatePath();

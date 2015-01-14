@@ -107,5 +107,6 @@
     <color name="call_stats_incoming">#33b5e5</color>
     <color name="call_stats_outgoing">#99cc00</color>
     <color name="call_stats_missed">#eb1313</color>
+    <color name="call_stats_blacklist">#ebaf0d</color>
     <color name="call_stats_bar_background">#88888888</color>
 </resources>
