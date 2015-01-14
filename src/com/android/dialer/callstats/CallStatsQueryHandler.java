@@ -28,6 +28,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.CallLog.Calls;
+import android.telephony.SubscriptionManager;
 import android.util.Log;
 
 import com.android.contacts.common.CallUtil;
@@ -51,7 +52,10 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
 
     private static final int QUERY_CALLS_TOKEN = 100;
 
-    public static final int CALL_TYPE_ALL = 0;
+    /**
+     * To specify all slots.
+     */
+    public static final int CALL_SUB_ALL = -1;
 
     private static final String TAG = "CallStatsQueryHandler";
 
@@ -103,7 +107,7 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
         mListener = new WeakReference<Listener>(listener);
     }
 
-    public void fetchCalls(long from, long to) {
+    public void fetchCalls(long from, long to, int slotId) {
         cancelOperation(QUERY_CALLS_TOKEN);
 
         StringBuilder selection = new StringBuilder();
@@ -119,6 +123,16 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
             }
             selection.append(String.format("(%s < ?)", Calls.DATE));
             selectionArgs.add(String.valueOf(to));
+        }
+        if (slotId > CALL_SUB_ALL) {
+            long[] subId = SubscriptionManager.getSubId(slotId);
+            if (subId != null && subId.length >= 1) {
+                if (selection.length() > 0) {
+                    selection.append(" AND ");
+                }
+                selection.append(String.format("(%s = ?)", Calls.PHONE_ACCOUNT_ID));
+                selectionArgs.add(Long.toString(subId[0]));
+            }
         }
 
         startQuery(QUERY_CALLS_TOKEN, null, Calls.CONTENT_URI, CallStatsQuery._PROJECTION,

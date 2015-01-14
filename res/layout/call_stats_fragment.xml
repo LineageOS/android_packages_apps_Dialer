@@ -24,6 +24,8 @@
     android:showDividers="end"
     android:background="@color/background_dialer_list_items" >
 
+    <include layout="@layout/call_spinner" />
+
     <LinearLayout
         android:id="@+id/call_stats_header"
         android:layout_width="wrap_content"
