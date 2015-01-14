@@ -77,7 +77,9 @@ public class CallLogActivity extends AnalyticsActivity implements
         public Fragment getItem(int position) {
             switch (position) {
                 case TAB_INDEX_MSIM:
-                    return new MSimCallLogFragment();
+                    mMSimCallsFragment = new MSimCallLogFragment();
+                    mMSimCallsFragment.setHasOptionsMenu(true);
+                    return mMSimCallsFragment;
                 case TAB_INDEX_MSIM_STATS:
                     return new CallStatsFragment();
             }
@@ -411,6 +413,13 @@ public class CallLogActivity extends AnalyticsActivity implements
 
     @Override
     public void onDateSet(long from, long to) {
-        mStatsFragment.onDateSet(from, to);
+        switch (mViewPager.getCurrentItem()) {
+            case TAB_INDEX_MSIM:
+                mMSimCallsFragment.onDateSet(from, to);
+                break;
+            case TAB_INDEX_MSIM_STATS:
+                mStatsFragment.onDateSet(from, to);
+                break;
+        }
     }
 }
