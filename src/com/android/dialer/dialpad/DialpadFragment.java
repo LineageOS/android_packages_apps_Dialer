@@ -2040,11 +2040,11 @@ public class DialpadFragment extends AnalyticsFragment
         PhoneStateListener phoneStateListener = new PhoneStateListener(subId[0]) {
             @Override
             public void onCallStateChanged(int state, String incomingNumber) {
-                if ((getTelephonyManager().getCallState() == TelephonyManager.CALL_STATE_IDLE)
+                if ((state == TelephonyManager.CALL_STATE_IDLE)
                         && isDialpadChooserVisible()) {
                     showDialpadChooser(false);
                 }
-                if (getTelephonyManager().getCallState() == TelephonyManager.CALL_STATE_IDLE
+                if (state == TelephonyManager.CALL_STATE_IDLE
                         && getActivity() != null) {
                     ((HostInterface) getActivity()).setConferenceDialButtonVisibility(true);
                 }
