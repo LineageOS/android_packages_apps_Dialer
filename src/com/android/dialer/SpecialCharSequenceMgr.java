@@ -336,7 +336,8 @@ public class SpecialCharSequenceMgr {
             if (i != 0) {
                 deviceIds.append("\n");
             }
-            int phoneType = telephonyManager.getCurrentPhoneType(i);
+            long[] subIds = SubscriptionManager.getSubId(i);
+            int phoneType = telephonyManager.getCurrentPhoneType(subIds[0]);
             if (phoneType != TelephonyManager.PHONE_TYPE_GSM
                     && phoneType != TelephonyManager.PHONE_TYPE_CDMA) {
                 return false;
