@@ -418,7 +418,7 @@ public class CallLogFragment extends AnalyticsListFragment
 
     protected void fetchCalls(long filterFromDate, long filterToDate, int subId) {
         mCallLogQueryHandler.fetchCallsInDateRange(
-                mCallTypeFilter, filterFromDate, filterToDate > 0 ? filterToDate : mDateLimit,
+                mCallTypeFilter, filterFromDate > 0 ? filterFromDate : mDateLimit, filterToDate,
                 subId);
     }
 
