@@ -990,7 +990,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         fragment.setHasOptionsMenu(false);
         fragment.setShowEmptyListForNullQuery(true);
         fragment.setQueryString(query, false /* delaySelection */);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
 
         mListsFragment.getView().animate().alpha(0).withLayer();
     }
