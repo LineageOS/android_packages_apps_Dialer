@@ -33,8 +33,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityManager;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -51,7 +49,7 @@ public class CallButtonFragment
         extends BaseFragment<CallButtonPresenter, CallButtonPresenter.CallButtonUi>
         implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener, OnDismissListener,
         View.OnClickListener {
-    private ImageButton mAudioButton;
+    private CompoundButton mAudioButton;
     private ImageButton mChangeToVoiceButton;
     private CompoundButton mMuteButton;
     private CompoundButton mShowDialpadButton;
@@ -98,7 +96,7 @@ public class CallButtonFragment
             Bundle savedInstanceState) {
         final View parent = inflater.inflate(R.layout.call_button_fragment, container, false);
 
-        mAudioButton = (ImageButton) parent.findViewById(R.id.audioButton);
+        mAudioButton = (CompoundButton) parent.findViewById(R.id.audioButton);
         mAudioButton.setOnClickListener(this);
         mChangeToVoiceButton = (ImageButton) parent.findViewById(R.id.changeToVoiceButton);
         mChangeToVoiceButton. setOnClickListener(this);
@@ -337,8 +335,6 @@ public class CallButtonFragment
     public void setMute(boolean value) {
         if (mMuteButton.isSelected() != value) {
             mMuteButton.setSelected(value);
-            maybeSendAccessibilityEvent(mMuteButton, value ? R.string.accessibility_call_muted
-                    : R.string.accessibility_call_unmuted);
         }
     }
 
@@ -366,9 +362,6 @@ public class CallButtonFragment
     public void setHold(boolean value) {
         if (mHoldButton.isSelected() != value) {
             mHoldButton.setSelected(value);
-            maybeSendAccessibilityEvent(mHoldButton,
-                    value ? R.string.accessibility_call_put_on_hold :
-                            R.string.accessibility_call_removed_from_hold);
         }
     }
 
@@ -499,26 +492,7 @@ public class CallButtonFragment
         refreshAudioModePopup();
 
         if (mPrevAudioMode != mode) {
-            if (mPrevAudioMode != 0) {
-                int stringId = 0;
-                switch (mode) {
-                    case AudioState.ROUTE_EARPIECE:
-                        stringId = R.string.accessibility_earpiece_selected;
-                        break;
-                    case AudioState.ROUTE_BLUETOOTH:
-                        stringId = R.string.accessibility_bluetooth_headset_selected;
-                        break;
-                    case AudioState.ROUTE_WIRED_HEADSET:
-                        stringId = R.string.accessibility_wired_headset_selected;
-                        break;
-                    case AudioState.ROUTE_SPEAKER:
-                        stringId = R.string.accessibility_speakerphone_selected;
-                        break;
-                }
-                if (stringId != 0) {
-                    maybeSendAccessibilityEvent(mAudioButton, stringId);
-                }
-            }
+            updateAudioButtonContentDescription(mode);
             mPrevAudioMode = mode;
         }
     }
@@ -569,6 +543,7 @@ public class CallButtonFragment
     public void onDismiss(PopupMenu menu) {
         Log.d(this, "- onDismiss: " + menu);
         mAudioModePopupVisible = false;
+        updateAudioButtons(getPresenter().getSupportedAudio());
     }
 
     /**
@@ -626,10 +601,8 @@ public class CallButtonFragment
             Log.d(this, "updateAudioButtons - popup menu mode");
 
             audioButtonEnabled = true;
+            audioButtonChecked = true;
             showMoreIndicator = true;
-            // The audio button is NOT a toggle in this state.  (And its
-            // setChecked() state is irrelevant since we completely hide the
-            // btn_compound_background layer anyway.)
 
             // Update desired layers:
             if (isAudio(AudioState.ROUTE_BLUETOOTH)) {
@@ -643,6 +616,9 @@ public class CallButtonFragment
                 // sort of "wired headset" icon here instead of the "handset
                 // earpiece" icon.  (Still need an asset for that, though.)
             }
+
+            // The audio button is NOT a toggle in this state, so set selected to false.
+            mAudioButton.setSelected(false);
         } else if (speakerSupported) {
             Log.d(this, "updateAudioButtons - speaker toggle mode");
 
@@ -651,6 +627,7 @@ public class CallButtonFragment
             // The audio button *is* a toggle in this state, and indicated the
             // current state of the speakerphone.
             audioButtonChecked = isAudio(AudioState.ROUTE_SPEAKER);
+            mAudioButton.setSelected(audioButtonChecked);
 
             // update desired layers:
             showToggleIndicator = true;
@@ -662,6 +639,7 @@ public class CallButtonFragment
             // irrelevant since it's always disabled and unchecked.
             audioButtonEnabled = false;
             audioButtonChecked = false;
+            mAudioButton.setSelected(false);
 
             // update desired layers:
             showToggleIndicator = true;
@@ -679,7 +657,7 @@ public class CallButtonFragment
 
         // Only enable the audio button if the fragment is enabled.
         mAudioButton.setEnabled(audioButtonEnabled && mIsEnabled);
-        mAudioButton.setSelected(audioButtonChecked);
+        mAudioButton.setChecked(audioButtonChecked);
 
         final LayerDrawable layers = (LayerDrawable) mAudioButton.getBackground();
         Log.d(this, "'layers' drawable: " + layers);
@@ -699,6 +677,38 @@ public class CallButtonFragment
         layers.findDrawableByLayerId(R.id.speakerphoneItem)
                 .setAlpha(showSpeakerphoneIcon ? VISIBLE : HIDDEN);
 
+    }
+
+    /**
+     * Update the content description of the audio button.
+     */
+    private void updateAudioButtonContentDescription(int mode) {
+        int stringId = 0;
+
+        // If bluetooth is not supported, the audio buttion will toggle, so use the label "speaker".
+        // Otherwise, use the label of the currently selected audio mode.
+        if (!isSupported(AudioState.ROUTE_BLUETOOTH)) {
+            stringId = R.string.audio_mode_speaker;
+        } else {
+            switch (mode) {
+                case AudioState.ROUTE_EARPIECE:
+                    stringId = R.string.audio_mode_earpiece;
+                    break;
+                case AudioState.ROUTE_BLUETOOTH:
+                    stringId = R.string.audio_mode_bluetooth;
+                    break;
+                case AudioState.ROUTE_WIRED_HEADSET:
+                    stringId = R.string.audio_mode_wired_headset;
+                    break;
+                case AudioState.ROUTE_SPEAKER:
+                    stringId = R.string.audio_mode_speaker;
+                    break;
+            }
+        }
+
+        if (stringId != 0) {
+            mAudioButton.setContentDescription(getResources().getString(stringId));
+        }
     }
 
     private void showAudioModePopup() {
@@ -764,7 +774,6 @@ public class CallButtonFragment
         mShowDialpadButton.setSelected(value);
         if (getActivity() != null && getActivity() instanceof InCallActivity) {
             ((InCallActivity) getActivity()).displayDialpad(value, animate);
-            maybeSendAccessibilityEvent(mShowDialpadButton, R.string.onscreenShowDialpadText);
         }
     }
 
@@ -779,20 +788,5 @@ public class CallButtonFragment
     @Override
     public Context getContext() {
         return getActivity();
-    }
-
-    private void maybeSendAccessibilityEvent(View view, int stringId) {
-        final Context context = getActivity();
-        AccessibilityManager manager =
-                (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
-        if (manager != null && manager.isEnabled()) {
-            AccessibilityEvent e = AccessibilityEvent.obtain();
-            e.setSource(view);
-            e.setEventType(AccessibilityEvent.TYPE_ANNOUNCEMENT);
-            e.setClassName(getClass().getName());
-            e.setPackageName(context.getPackageName());
-            e.getText().add(context.getResources().getString(stringId));
-            manager.sendAccessibilityEvent(e);
-        }
     }
 }

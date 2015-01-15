@@ -67,10 +67,10 @@
         <!-- "Audio mode". this is a multi-mode button that can behave either like a simple
              "compound button" with two states *or* like an action button that brings up a popup
              menu; see btn_compound_audio.xml and CallButtonFragment.updateAudioButtons(). -->
-        <ImageButton android:id="@+id/audioButton"
+        <ToggleButton android:id="@+id/audioButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_audio"
-            android:contentDescription="@string/onscreenAudioText" />
+            android:contentDescription="@string/audio_mode_speaker" />
 
         <!-- "Change to audio call" for video calls. -->
         <ImageButton android:id="@+id/changeToVoiceButton"
@@ -82,7 +82,7 @@
         <!-- MIDDLE LEFT SLOT ================================================================== -->
 
         <!-- "Mute" -->
-        <com.android.incallui.CallToggleButton android:id="@+id/muteButton"
+        <ToggleButton android:id="@+id/muteButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_mute"
             android:contentDescription="@string/onscreenMuteText" />
@@ -90,7 +90,7 @@
         <!-- CENTER SLOT ======================================================================= -->
 
         <!-- "Dialpad" -->
-        <com.android.incallui.CallToggleButton android:id="@+id/dialpadButton"
+        <ToggleButton android:id="@+id/dialpadButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_dialpad"
             android:contentDescription="@string/onscreenShowDialpadText" />
@@ -101,7 +101,7 @@
              other of these must always be set to GONE. -->
 
         <!-- "Hold" -->
-        <com.android.incallui.CallToggleButton android:id="@+id/holdButton"
+        <ToggleButton android:id="@+id/holdButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_hold"
             android:contentDescription="@string/onscreenHoldText" />
@@ -121,7 +121,7 @@
             android:visibility="gone" />
 
         <!-- "Switch camera" for video calls. -->
-        <com.android.incallui.CallToggleButton android:id="@+id/switchCameraButton"
+        <ToggleButton android:id="@+id/switchCameraButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_video_switch"
             android:contentDescription="@string/onscreenSwitchCameraText"
@@ -149,7 +149,7 @@
             android:visibility="gone" />
 
         <!-- "Switch camera" for video calls. -->
-        <com.android.incallui.CallToggleButton android:id="@+id/pauseVideoButton"
+        <ToggleButton android:id="@+id/pauseVideoButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_video_off"
             android:contentDescription="@string/onscreenPauseVideoText"
