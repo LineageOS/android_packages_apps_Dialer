@@ -25,7 +25,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
+import android.telephony.TelephonyManager;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,12 +36,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.dialer.R;
+import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfo;
+import com.android.dialer.calllog.SpinnerContent;
 import com.android.dialer.widget.DoubleDatePickerDialog;
 
 import java.util.List;
@@ -50,9 +55,7 @@ public class CallStatsFragment extends ListFragment implements
         AdapterView.OnItemSelectedListener, DoubleDatePickerDialog.OnDateSetListener {
     private static final String TAG = "CallStatsFragment";
 
-    private Spinner mFilterSpinner;
-
-    private int mCallTypeFilter = CallStatsQueryHandler.CALL_TYPE_ALL;
+    private int mCallTypeFilter = CallLogQueryHandler.CALL_TYPE_ALL;
     private long mFilterFrom = -1;
     private long mFilterTo = -1;
     private boolean mSortByDuration = true;
@@ -60,6 +63,13 @@ public class CallStatsFragment extends ListFragment implements
 
     private CallStatsAdapter mAdapter;
     private CallStatsQueryHandler mCallStatsQueryHandler;
+
+    // Add and change for filter call stats.
+    private Spinner mFilterSubSpinnerView;
+    private Spinner mFilterStatusSpinnerView;
+
+    // Default to all slots.
+    private int mCallSubFilter = CallStatsQueryHandler.CALL_SUB_ALL;
 
     private TextView mSumHeaderView;
     private TextView mDateFilterView;
@@ -70,6 +80,23 @@ public class CallStatsFragment extends ListFragment implements
         public void onChange(boolean selfChange) {
             mRefreshDataRequired = true;
         }
+    };
+
+    private OnItemSelectedListener mSubSelectedListener = new OnItemSelectedListener() {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            Log.i(TAG, "Sub selected, position: " + position);
+            int sub = position - 1;
+            mCallSubFilter = sub;
+            mCallStatsQueryHandler.fetchCalls(mFilterFrom, mFilterTo, mCallSubFilter);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            // Do nothing.
+        }
+
     };
 
     public static class CallStatsNavAdapter extends ArrayAdapter<String> {
@@ -123,7 +150,52 @@ public class CallStatsFragment extends ListFragment implements
         View view = inflater.inflate(R.layout.call_stats_fragment, container, false);
         mSumHeaderView = (TextView) view.findViewById(R.id.sum_header);
         mDateFilterView = (TextView) view.findViewById(R.id.date_filter);
+        mFilterSubSpinnerView = (Spinner) view.findViewById(R.id.filter_sub_spinner);
+        mFilterStatusSpinnerView = (Spinner) view.findViewById(R.id.filter_status_spinner);
+
+        // Update the filter views.
+        updateFilterSpinnerViews();
+
         return view;
+    }
+
+    /**
+     * Initialize the filter views content.
+     */
+    private void updateFilterSpinnerViews() {
+        if (mFilterSubSpinnerView == null
+                || mFilterStatusSpinnerView == null) {
+            Log.w(TAG, "The filter spinner view is null!");
+            return;
+        }
+
+        final TelephonyManager telephony = (TelephonyManager) getActivity().getSystemService(
+                Context.TELEPHONY_SERVICE);
+        if (!telephony.isMultiSimEnabled()) {
+            mFilterSubSpinnerView.setVisibility(View.GONE);
+        } else {
+            // Update the sub filter's content.
+            ArrayAdapter<SpinnerContent> filterSubAdapter = new ArrayAdapter<SpinnerContent>(
+                    this.getActivity(), R.layout.call_log_spinner_item,
+                    SpinnerContent.setupSubFilterContent(getActivity()));
+
+            if (filterSubAdapter.getCount() <= 1) {
+                mFilterSubSpinnerView.setVisibility(View.GONE);
+            } else {
+                mFilterSubSpinnerView.setAdapter(filterSubAdapter);
+                mFilterSubSpinnerView.setOnItemSelectedListener(mSubSelectedListener);
+                SpinnerContent.setSpinnerContentValue(mFilterSubSpinnerView, mCallSubFilter);
+            }
+        }
+
+
+        // Update the status filter's content.
+        ArrayAdapter<SpinnerContent> filterStatusAdapter = new ArrayAdapter<SpinnerContent>(
+                this.getActivity(), R.layout.call_log_spinner_item,
+                SpinnerContent.setupStatusFilterContent(getActivity(), false));
+        mFilterStatusSpinnerView.setAdapter(filterStatusAdapter);
+        mFilterStatusSpinnerView.setOnItemSelectedListener(this);
+        SpinnerContent.setSpinnerContentValue(mFilterStatusSpinnerView, mCallTypeFilter);
     }
 
     @Override
@@ -142,18 +214,10 @@ public class CallStatsFragment extends ListFragment implements
         final MenuItem resetItem = menu.findItem(R.id.reset_date_filter);
         final MenuItem sortDurationItem = menu.findItem(R.id.sort_by_duration);
         final MenuItem sortCountItem = menu.findItem(R.id.sort_by_count);
-        final MenuItem filterItem = menu.findItem(R.id.filter);
 
         resetItem.setVisible(mFilterFrom != -1);
         sortDurationItem.setVisible(!mSortByDuration);
         sortCountItem.setVisible(mSortByDuration);
-
-        mFilterSpinner = (Spinner) filterItem.getActionView();
-        CallStatsNavAdapter filterAdapter = new CallStatsNavAdapter(getActivity(),
-                android.R.layout.simple_list_item_1,
-                getResources().getStringArray(R.array.call_stats_nav_items));
-        mFilterSpinner.setAdapter(filterAdapter);
-        mFilterSpinner.setOnItemSelectedListener(this);
 
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -190,7 +254,7 @@ public class CallStatsFragment extends ListFragment implements
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        mCallTypeFilter = pos;
+        mCallTypeFilter = ((SpinnerContent)parent.getItemAtPosition(pos)).value;
         mAdapter.updateDisplayedData(mCallTypeFilter, mSortByDuration);
         if (mDataLoaded) {
             updateHeader();
@@ -251,7 +315,7 @@ public class CallStatsFragment extends ListFragment implements
     }
 
     private void fetchCalls() {
-        mCallStatsQueryHandler.fetchCalls(mFilterFrom, mFilterTo);
+        mCallStatsQueryHandler.fetchCalls(mFilterFrom, mFilterTo, mCallSubFilter);
     }
 
     private void updateHeader() {

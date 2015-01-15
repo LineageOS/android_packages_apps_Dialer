@@ -74,13 +74,6 @@ public class MSimCallLogFragment extends CallLogFragment {
     // Default to all slots.
     private int mCallSubFilter = CallLogQueryHandler.CALL_SUB_ALL;
 
-    // The index for call type spinner.
-    private static final int INDEX_CALL_TYPE_ALL = 0;
-    private static final int INDEX_CALL_TYPE_INCOMING = 1;
-    private static final int INDEX_CALL_TYPE_OUTGOING = 2;
-    private static final int INDEX_CALL_TYPE_MISSED = 3;
-    private static final int INDEX_CALL_TYPE_VOICEMAIL = 4;
-
     private OnItemSelectedListener mSubSelectedListener = new OnItemSelectedListener() {
 
         @Override
@@ -104,23 +97,7 @@ public class MSimCallLogFragment extends CallLogFragment {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Log.i(TAG, "Status selected, position: " + position);
-            switch (position) {
-                case INDEX_CALL_TYPE_ALL:
-                    mCallTypeFilter = CallLogQueryHandler.CALL_TYPE_ALL;
-                    break;
-                case INDEX_CALL_TYPE_INCOMING:
-                    mCallTypeFilter = Calls.INCOMING_TYPE;
-                    break;
-                case INDEX_CALL_TYPE_OUTGOING:
-                    mCallTypeFilter = Calls.OUTGOING_TYPE;
-                    break;
-                case INDEX_CALL_TYPE_MISSED:
-                    mCallTypeFilter = Calls.MISSED_TYPE;
-                    break;
-                case INDEX_CALL_TYPE_VOICEMAIL:
-                    mCallTypeFilter = Calls.VOICEMAIL_TYPE;
-                    break;
-            }
+            mCallTypeFilter = ((SpinnerContent)parent.getItemAtPosition(position)).value;
             mCallLogQueryHandler.fetchCalls(mCallTypeFilter, 0, mCallSubFilter);
         }
 
@@ -182,70 +159,33 @@ public class MSimCallLogFragment extends CallLogFragment {
             return;
         }
 
-        // Update the sub filter's content.
-        mCallSubFilter = getSelectedSub();
-        ArrayAdapter<SpinnerContent> filterSubAdapter = new ArrayAdapter<SpinnerContent>(
-                this.getActivity(), R.layout.call_log_spinner_item, setupSubFilterContent());
-        mFilterSubSpinnerView.setAdapter(filterSubAdapter);
-        mFilterSubSpinnerView.setOnItemSelectedListener(mSubSelectedListener);
-        SpinnerContent.setSpinnerContentValue(mFilterSubSpinnerView, mCallSubFilter);
+        final TelephonyManager telephony = (TelephonyManager) getActivity().getSystemService(
+                Context.TELEPHONY_SERVICE);
+        if (!telephony.isMultiSimEnabled()) {
+            mFilterSubSpinnerView.setVisibility(View.GONE);
+        } else {
+            // Update the sub filter's content.
+            ArrayAdapter<SpinnerContent> filterSubAdapter = new ArrayAdapter<SpinnerContent>(
+                    this.getActivity(), R.layout.call_log_spinner_item,
+                    SpinnerContent.setupSubFilterContent(getActivity()));
+
+            if (filterSubAdapter.getCount() <= 1) {
+                mFilterSubSpinnerView.setVisibility(View.GONE);
+            } else {
+                mCallSubFilter = getSelectedSub();
+                mFilterSubSpinnerView.setAdapter(filterSubAdapter);
+                mFilterSubSpinnerView.setOnItemSelectedListener(mSubSelectedListener);
+                SpinnerContent.setSpinnerContentValue(mFilterSubSpinnerView, mCallSubFilter);
+            }
+        }
 
         // Update the status filter's content.
         ArrayAdapter<SpinnerContent> filterStatusAdapter = new ArrayAdapter<SpinnerContent>(
-                this.getActivity(), R.layout.call_log_spinner_item, setupStatusFilterContent());
+                this.getActivity(), R.layout.call_log_spinner_item,
+                SpinnerContent.setupStatusFilterContent(getActivity(), mVoicemailSourcesAvailable));
         mFilterStatusSpinnerView.setAdapter(filterStatusAdapter);
         mFilterStatusSpinnerView.setOnItemSelectedListener(mStatusSelectedListener);
         SpinnerContent.setSpinnerContentValue(mFilterStatusSpinnerView, mCallTypeFilter);
-    }
-
-    private SpinnerContent[] setupSubFilterContent() {
-        TelephonyManager telephonyManager =
-                (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-        int count = telephonyManager.getPhoneCount();
-        // Update the filter sub content.
-        SpinnerContent filterSub[] = new SpinnerContent[count + 1];
-        filterSub[0] = new SpinnerContent(CallLogQueryHandler.CALL_SUB_ALL,
-                getString(R.string.call_log_show_all_slots));
-        for (int i = 0; i < count; i++) {
-            String subDisplayName = PhoneAccountUtils.getAccountLabel(getActivity(),
-                    MoreContactUtils.getAccount(i));
-            filterSub[i + 1] = new SpinnerContent(i, subDisplayName);
-        }
-        return filterSub;
-    }
-
-    private SpinnerContent[] setupStatusFilterContent() {
-        // Didn't show the voice mail item if not available.
-        int statusCount = mVoicemailSourcesAvailable ? 5 : 4;
-        SpinnerContent filterStatus[] = new SpinnerContent[statusCount];
-        for (int i = 0; i < statusCount; i++) {
-            int value = CallLogQueryHandler.CALL_TYPE_ALL;
-            String label = null;
-            switch (i) {
-                case INDEX_CALL_TYPE_ALL:
-                    value = CallLogQueryHandler.CALL_TYPE_ALL;
-                    label = getString(R.string.call_log_all_calls_header);
-                    break;
-                case INDEX_CALL_TYPE_INCOMING:
-                    value = Calls.INCOMING_TYPE;
-                    label = getString(R.string.call_log_incoming_header);
-                    break;
-                case INDEX_CALL_TYPE_OUTGOING:
-                    value = Calls.OUTGOING_TYPE;
-                    label = getString(R.string.call_log_outgoing_header);
-                    break;
-                case INDEX_CALL_TYPE_MISSED:
-                    value = Calls.MISSED_TYPE;
-                    label = getString(R.string.call_log_missed_header);
-                    break;
-                case INDEX_CALL_TYPE_VOICEMAIL:
-                    value = Calls.VOICEMAIL_TYPE;
-                    label = getString(R.string.call_log_voicemail_header);
-                    break;
-            }
-            filterStatus[i] = new SpinnerContent(value, label);
-        }
-        return filterStatus;
     }
 
     /**
@@ -265,34 +205,5 @@ public class MSimCallLogFragment extends CallLogFragment {
         // Save the selected sub to the default preference.
         PreferenceManager.getDefaultSharedPreferences(this.getActivity()).edit()
                 .putInt(PREFERENCE_KEY_CALLLOG_SUB, sub).commit();
-    }
-
-    /**
-     * To save the spinner content.
-     */
-    private static class SpinnerContent {
-        public final int value;
-        public final String label;
-
-        public static void setSpinnerContentValue(Spinner spinner, int value) {
-            for (int i = 0, count = spinner.getCount(); i < count; i++) {
-                SpinnerContent sc = (SpinnerContent) spinner.getItemAtPosition(i);
-                if (sc.value == value) {
-                    spinner.setSelection(i, true);
-                    Log.i(TAG, "Set selection for spinner(" + sc + ") with the value: " + value);
-                    return;
-                }
-            }
-        }
-
-        public SpinnerContent(int value, String label) {
-            this.value = value;
-            this.label = label;
-        }
-
-        @Override
-        public String toString() {
-            return label;
-        }
     }
 }
