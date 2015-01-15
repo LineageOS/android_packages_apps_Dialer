@@ -43,6 +43,7 @@
         <attr name="redColor" format="color" />
         <attr name="greenColor" format="color" />
         <attr name="blueColor" format="color" />
+        <attr name="orangeColor" format="color" />
         <attr name="backgroundColor" format="color" />
     </declare-styleable>
 
