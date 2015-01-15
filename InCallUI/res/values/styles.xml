@@ -61,11 +61,11 @@
     </style>
 
     <!-- "Compound button" variation of InCallButton.
-         These buttons have the concept of two states: checked and unchecked.
-         (This style is just like "InCallButton" except that we also
-         clear out android:textOn and android:textOff, to avoid the default
-         text label behavior of the ToggleButton class.) -->
+         These buttons have the concept of two states: checked and unchecked. This style is just
+         like "InCallButton" except that we also clear out android:background, android:textOn,
+         android:textOff, to avoid the default behavior of the ToggleButton class. -->
     <style name="InCallCompoundButton" parent="InCallButton">
+        <item name="android:background">@null</item>
         <item name="android:textOn">@null</item>
         <item name="android:textOff">@null</item>
     </style>
@@ -115,6 +115,7 @@
         <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
         <item name="android:popupMenuStyle">@style/InCallPopupMenuStyle</item>
         <item name="android:actionBarStyle">@style/InCallActionBarStyle</item>
+        <item name="android:buttonStyleToggle">@style/InCallCompoundButton</item>
     </style>
 
     <style name="Theme.CircularRevealAnimation" parent="@android:style/Theme.Material.Light">

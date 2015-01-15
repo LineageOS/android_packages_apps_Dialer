@@ -90,13 +90,4 @@
             android:tint="@color/selectable_icon_tint" />
     </item>
 
-    <!-- Generic "audio mode" icon. -->
-    <!-- TODO: is this actually needed? -->
-    <!--
-        <item android:id="@+id/soundItem">
-            <bitmap android:src="@drawable/ic_sound_holo_dark"
-                    android:gravity="center" />
-        </item>
-    -->
-
 </layer-list>
