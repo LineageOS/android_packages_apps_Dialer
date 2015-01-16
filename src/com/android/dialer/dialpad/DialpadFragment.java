@@ -2005,20 +2005,28 @@ public class DialpadFragment extends AnalyticsFragment
 
     private void listen() {
         for (int i = 0; i < mNumPhones; i++) {
-            getTelephonyManager().listen(mPhoneStateListener[i],
-                    PhoneStateListener.LISTEN_CALL_STATE);
+            if (mPhoneStateListener[i] != null) {
+                getTelephonyManager().listen(mPhoneStateListener[i],
+                        PhoneStateListener.LISTEN_CALL_STATE);
+            }
         }
     }
 
     private void stopListen() {
         for (int i = 0; i < mNumPhones; i++) {
-            getTelephonyManager().listen(mPhoneStateListener[i],
-                    PhoneStateListener.LISTEN_NONE);
+            if (mPhoneStateListener[i] != null) {
+                getTelephonyManager().listen(mPhoneStateListener[i],
+                        PhoneStateListener.LISTEN_NONE);
+            }
         }
     }
 
     private PhoneStateListener getPhoneStateListener(int phoneId) {
         long[] subId = SubscriptionManager.getSubId(phoneId);
+
+        if (subId == null) {
+            return null;
+        }
 
         PhoneStateListener phoneStateListener = new PhoneStateListener(subId[0]) {
             @Override
