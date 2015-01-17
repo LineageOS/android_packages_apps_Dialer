@@ -924,9 +924,10 @@ public class DialpadFragment extends Fragment
                             PhoneAccountUtils.getSubscriptionPhoneAccounts(getActivity());
                     boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
                             getTelecomManager().getUserSelectedOutgoingPhoneAccount());
-                    boolean multiSim = subscriptionAccountHandles.size() > 1;
+                    boolean needsAccountDisambiguation = subscriptionAccountHandles.size() > 1
+                            && !hasUserSelectedDefault;
 
-                    if ((multiSim && !hasUserSelectedDefault) || isVoicemailAvailable()) {
+                    if (needsAccountDisambiguation || isVoicemailAvailable()) {
                         // On a multi-SIM phone, if the user has not selected a default
                         // subscription, initiate a call to voicemail so they can select an account
                         // from the "Call with" dialog.
@@ -1519,13 +1520,21 @@ public class DialpadFragment extends Fragment
     /**
      * Check if voicemail is enabled/accessible.
      *
-     * @return true if voicemail is enabled and accessibly. Note that this can be false
+     * @return true if voicemail is enabled and accessible. Note that this can be false
      * "temporarily" after the app boot.
-     * @see TelephonyManager#getVoiceMailNumber()
+     * @see TelecomManager#hasVoiceMailNumber(PhoneAccountHandle)
      */
     private boolean isVoicemailAvailable() {
         try {
-            return getTelephonyManager().getVoiceMailNumber() != null;
+            PhoneAccountHandle defaultUserSelectedAccount =
+                    getTelecomManager().getUserSelectedOutgoingPhoneAccount();
+            if (defaultUserSelectedAccount == null) {
+                // In a single-SIM phone, there is no default outgoing phone account selected by
+                // the user, so just call TelephonyManager#getVoicemailNumber directly.
+                return getTelephonyManager().getVoiceMailNumber() != null;
+            } else {
+                return getTelecomManager().hasVoiceMailNumber(defaultUserSelectedAccount);
+            }
         } catch (SecurityException se) {
             // Possibly no READ_PHONE_STATE privilege.
             Log.w(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");
