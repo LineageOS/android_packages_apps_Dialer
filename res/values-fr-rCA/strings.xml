@@ -119,7 +119,7 @@
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Pour configurer la messagerie vocale, accédez à Menu &gt; Paramètres."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Veuillez désactiver le mode Avion avant d\'appeler la messagerie vocale."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Chargement en cours..."</string>
-    <string name="imei" msgid="3045126336951684285">"Code IMEI"</string>
+    <string name="imei" msgid="3045126336951684285">"Code IIEM"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Chargement depuis la carte SIM..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"Contacts de carte SIM"</string>
