@@ -59,7 +59,7 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"កំពុង​បន្ត​ការ​ហៅ"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"រង់ចាំ"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"ការ​ហៅ​ចូល"</string>
-    <string name="notification_incoming_video_call" msgid="7356836933934464805">"ការ​ហៅចូលជា​វីដេអូ"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"ការ​ហៅចូលជា​វីដេអូ​"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"សំណើ​ការ​ហៅ​ជា​វីដេអូ​ចូល"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"សារ​ជា​សំឡេង​ថ្មី"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"សារ​ជា​សំឡេង​ថ្មី (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -108,7 +108,7 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"បញ្ចូល​ការ​ហៅ​រួម​​គ្នា"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"ប្ដូរ"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"គ្រប់គ្រង​ការ​ហៅ"</string>
-    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"គ្រប់គ្រងការហៅ​ជាសន្និសីទ"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"គ្រប់គ្រងការហៅ​ជាសន្និសីទ​"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"សំឡេង"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"ហៅ​ជា​វីដេអូ"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"ប្ដូរ​ទៅ​ការ​ហៅ​ជា​សំឡេង"</string>
@@ -127,14 +127,6 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"សរសេរ​ផ្ទាល់​ខ្លួន​របស់​អ្នក"</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"បោះបង់"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"ផ្ញើ"</string>
-    <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"បាន​​ជ្រើស​អូប៉ាល័រ​ទូរស័ព្ទ"</string>
-    <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"បាន​ជ្រើស​កាស"</string>
-    <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"បាន​ជ្រើស​កាស​មាន​ខ្សែ"</string>
-    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"បាន​ជ្រើស​កាស​ប៊្លូធូស"</string>
-    <string name="accessibility_call_muted" msgid="2776111226185342220">"ការ​ហៅ​បិទ​សំឡេង។"</string>
-    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"បាន​បើក​សំឡេង​ការ​ហៅ។"</string>
-    <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"ការ​ហៅ​ស្ថិត​​ក្នុង​ការ​រង់ចាំ។"</string>
-    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"ការហៅទូរស័ព្ទមិនស្ថិតនៅក្នុងការរង់ចាំទៀតទេ។"</string>
     <string name="description_target_answer" msgid="7205604197797472471">"ឆ្លើយតប"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"ផ្ញើ​សារ SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"បដិសេធ"</string>
