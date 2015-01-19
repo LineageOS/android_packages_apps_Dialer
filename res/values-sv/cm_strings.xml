@@ -45,11 +45,14 @@
   <string name="call_stats_sort_by_count">Sortera efter antal samtal</string>
   <string name="menu_add_to_blacklist">Lägg till svartlista</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> lades till i svartlistan</string>
+  <string name="menu_delete_from_blacklist">Ta bort från svartlistan</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> borttagen från svartlistan</string>
   <string name="nearby_places">Platser i närheten</string>
   <string name="people">Personer</string>
   <string name="start_call_playback">Spela inspelning</string>
   <string name="stop_call_playback">Stoppa</string>
   <string name="call_playback_error_message">Det gick inte att spela inspelningen</string>
+  <string name="calllog_search_hint">Sök samtalslista</string>
   <string name="video_call">Videosamtal</string>
   <string name="video_call_settings">Videosamtalsinställningar</string>
   <string name="description_videocall">Videosamtal <xliff:g id="name">%1$s</xliff:g></string>
@@ -58,10 +61,12 @@
   <string name="speed_dial_replace">Ersätt</string>
   <string name="speed_dial_delete">Ta bort</string>
   <string name="speed_dial_unassigned_dialog_title">Inget kortnummer angivet</string>
+  <string name="msim_ime_dialog_title">Enhetsidentifierare</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
   <string name="call_log_show_all_slots">Alla SIM</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
+  <string name="call_duration_active">Varaktighet:</string>
   <string name="call_duration_call_out">Samtalslängd:</string>
   <string name="call_log_all_calls_header">Alla samtal</string>
 </resources>

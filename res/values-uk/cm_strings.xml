@@ -61,7 +61,7 @@
   <string name="speed_dial_replace">Замінити</string>
   <string name="speed_dial_delete">Видалити</string>
   <string name="speed_dial_unassigned_dialog_title">Ключ непризначений</string>
-  <string name="speed_dial_unassigned_dialog_message">Клавіші \'<xliff:g id="number">%s</xliff:g>\' не присвоєно номер швидкого набору. Призначити його?</string>
+  <string name="speed_dial_unassigned_dialog_message">Клавіші «<xliff:g id="number">%s</xliff:g>» не присвоєно номер швидкого набору. Призначити його?</string>
   <string name="dialog_speed_dial_airplane_mode_message">"Щоб використовувати швидкий набір, спершу вимкніть режим польоту."</string>
   <string name="msim_ime_dialog_title">Ідентифікатор пристрою</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
