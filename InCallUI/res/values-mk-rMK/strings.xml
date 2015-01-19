@@ -127,14 +127,6 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Напиши сопствена..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"Откажи"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Испрати"</string>
-    <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"Избран е звучник"</string>
-    <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"Избрана е слушалка"</string>
-    <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"Избрани се слушалки со кабел"</string>
-    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"Избрани се слушалки со Bluetooth"</string>
-    <string name="accessibility_call_muted" msgid="2776111226185342220">"Повикот е со исклучен звук"</string>
-    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Повикот е со вклучен звук."</string>
-    <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Повикот е ставен на чекање."</string>
-    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"Повикот повеќе не е на чекање."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Одговори"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Испрати СМС"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Одбиј"</string>

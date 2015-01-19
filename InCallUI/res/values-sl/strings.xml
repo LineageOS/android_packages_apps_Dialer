@@ -127,14 +127,6 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Napišite svoje besedilo …"</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"Prekliči"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Pošlji"</string>
-    <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"Izbran je zvočnik"</string>
-    <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"Izbrane so slušalke"</string>
-    <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"Izbrane so žične slušalke z mikrofonom"</string>
-    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"Izbrane so slušalke z mikrofonom Bluetooth"</string>
-    <string name="accessibility_call_muted" msgid="2776111226185342220">"Klic izključen."</string>
-    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"Zvok klica je znova vklopljen."</string>
-    <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Klic je zadržan"</string>
-    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"Klic ni več na čakanju."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Odgovori"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Pošlji SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Zavrni"</string>
