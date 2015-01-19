@@ -127,14 +127,6 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"നിങ്ങളുടെ സ്വന്തം സന്ദേശമെഴുതുക..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"റദ്ദാക്കുക"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"അയയ്‌ക്കുക"</string>
-    <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"സ്‌പീക്കർഫോൺ തിരഞ്ഞെടുത്തു"</string>
-    <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"ഇയർഫോൺ തിരഞ്ഞെടുത്തു"</string>
-    <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"വയർ മുഖേന ബന്ധിപ്പിച്ച ഹെഡ്‌സെറ്റ് തിരഞ്ഞെടുത്തു"</string>
-    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"ബ്ലൂടൂത്ത് ഹെഡ്‌സെറ്റ് തിരഞ്ഞെടുത്തു"</string>
-    <string name="accessibility_call_muted" msgid="2776111226185342220">"കോൾ നിശബ്‌ദമാക്കി."</string>
-    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"കോൾ അൺ‌മ്യൂട്ടുചെയ്‌തു."</string>
-    <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"കോൾ ഹോൾഡുചെയ്‌തു."</string>
-    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"കോൾ ഇനി ഹോൾഡുചെയ്യാനാവില്ല."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"മറുപടി നൽകുക"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS അയയ്ക്കുക"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"നിരസിക്കുക"</string>

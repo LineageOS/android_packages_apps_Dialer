@@ -127,14 +127,6 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Scrieți propriul răspuns…"</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"Anulați"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Trimiteți"</string>
-    <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"Ați selectat difuzorul"</string>
-    <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"Ați selectat casca"</string>
-    <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"Ați selectat setul căști-microfon cu fir"</string>
-    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"Ați selectat setul căști-microfon Bluetooth"</string>
-    <string name="accessibility_call_muted" msgid="2776111226185342220">"Apel cu sunet dezactivat."</string>
-    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"S-a activat sunetul pentru apel."</string>
-    <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Apelul a fost pus în așteptare."</string>
-    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"Apelul nu mai este în așteptare."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Răspundeţi"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Trimiteţi SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Refuzaţi"</string>

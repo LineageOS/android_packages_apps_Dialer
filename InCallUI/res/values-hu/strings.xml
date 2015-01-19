@@ -127,14 +127,6 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Saját válasz írása..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"Mégse"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Küldés"</string>
-    <string name="accessibility_speakerphone_selected" msgid="4389354567657833468">"Kihangosító kiválasztva"</string>
-    <string name="accessibility_earpiece_selected" msgid="5749525199671068663">"Fülhallgató kiválasztva"</string>
-    <string name="accessibility_wired_headset_selected" msgid="2984920743124263932">"Vezetékes headset kiválasztva"</string>
-    <string name="accessibility_bluetooth_headset_selected" msgid="2785473629292181736">"Bluetooth headset kiválasztva"</string>
-    <string name="accessibility_call_muted" msgid="2776111226185342220">"Hívás némítva."</string>
-    <string name="accessibility_call_unmuted" msgid="7496527089753980871">"A hívás némítása feloldva."</string>
-    <string name="accessibility_call_put_on_hold" msgid="4226100429657528833">"Várakoztatott hívás."</string>
-    <string name="accessibility_call_removed_from_hold" msgid="5107480079544990575">"A hívás már nem várakozik."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Fogadás"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS küldése"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Elutasítás"</string>
