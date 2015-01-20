@@ -69,13 +69,6 @@
 
     <dimen name="floating_action_bar_vertical_offset">-24dp</dimen>
 
-    <!-- Padding at the left and right edges of the incall_touch_ui button
-         cluster.  This padding is necessary because we can't allow the
-         buttons to be very close to the edges of the screen, due to the
-         risk of false touches (from your finger wrapping around while
-         holding the phone, *before* moving it up to your face and having
-         the prox sensor kick in.) -->
-    <dimen name="button_cluster_horizontal_padding">20dp</dimen>
     <dimen name="call_button_margin_vertical">8dp</dimen>
     <dimen name="call_button_margin_horizontal">6dp</dimen>
 
