@@ -312,6 +312,12 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         for (int i = 0; i < mListView.getChildCount(); i++) {
             final View child = mListView.getChildAt(i);
             final int position = firstVisiblePosition + i;
+            // Since we are getting the position from mListView and then querying
+            // mContactTileAdapter, its very possible that things are out of sync
+            // and we might index out of bounds.  Let's make sure that this doesn't happen.
+            if (!mContactTileAdapter.isIndexInBound(position)) {
+                continue;
+            }
             final long itemId = mContactTileAdapter.getItemId(position);
             if (DEBUG) {
                 Log.d(TAG, "Saving itemId: " + itemId + " for listview child " + i + " Top: "
@@ -320,7 +326,6 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
             mItemIdTopMap.put(itemId, child.getTop());
             mItemIdLeftMap.put(itemId, child.getLeft());
         }
-
         mItemIdTopMap.put(KEY_REMOVED_ITEM_HEIGHT, removedItemHeight);
     }
 
@@ -347,6 +352,13 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
                 for (int i = 0; i < mListView.getChildCount(); i++) {
                     final View child = mListView.getChildAt(i);
                     int position = firstVisiblePosition + i;
+
+                    // Since we are getting the position from mListView and then querying
+                    // mContactTileAdapter, its very possible that things are out of sync
+                    // and we might index out of bounds.  Let's make sure that this doesn't happen.
+                    if (!mContactTileAdapter.isIndexInBound(position)) {
+                        continue;
+                    }
 
                     final long itemId = mContactTileAdapter.getItemId(position);
 
