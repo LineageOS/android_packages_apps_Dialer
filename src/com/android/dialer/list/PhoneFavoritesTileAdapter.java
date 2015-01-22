@@ -431,7 +431,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
      * @param itemIndex Position of the contact in {@link #mContactEntries}.
      * @return True if the given index is valid for {@link #mContactEntries}.
      */
-    private boolean isIndexInBound(int itemIndex) {
+    public boolean isIndexInBound(int itemIndex) {
         return itemIndex >= 0 && itemIndex < mContactEntries.size();
     }
 
