@@ -21,7 +21,6 @@
         <attr name="call_log_primary_background_color" format="color" />
         <attr name="call_log_secondary_text_color" format="color" />
         <attr name="call_log_secondary_background_color" format="color" />
-        <attr name="call_log_header_color" format="color" />
     </declare-styleable>
 
     <declare-styleable name="VoicemailStatus">

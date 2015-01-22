@@ -59,7 +59,6 @@ public class CallStatsDetailActivity extends Activity {
     private CallDetailHeader mCallDetailHeader;
     private Resources mResources;
 
-    private TextView mHeaderTextView;
     private TextView mTotalSummary;
     private TextView mTotalDuration;
     private TextView mInSummary;
@@ -103,7 +102,6 @@ public class CallStatsDetailActivity extends Activity {
                 new PhoneNumberUtilsWrapper());
         mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
 
-        mHeaderTextView = (TextView) findViewById(R.id.header_text);
         mTotalSummary = (TextView) findViewById(R.id.total_summary);
         mTotalDuration = (TextView) findViewById(R.id.total_duration);
         mInSummary = (TextView) findViewById(R.id.in_summary);
@@ -162,7 +160,6 @@ public class CallStatsDetailActivity extends Activity {
         mNumber = mData.number.toString();
 
         // Set the details header, based on the first phone call.
-        mCallStatsDetailHelper.setCallStatsDetailHeader(mHeaderTextView, mData);
         mCallDetailHeader.updateViews(mData);
         mCallDetailHeader.loadContactPhotos(mData, ContactPhotoManager.TYPE_DEFAULT);
         invalidateOptionsMenu();
