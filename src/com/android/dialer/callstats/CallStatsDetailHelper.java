@@ -127,21 +127,6 @@ public class CallStatsDetailHelper {
         }
     }
 
-    public void setCallStatsDetailHeader(TextView nameView, CallStatsDetails details) {
-        final CharSequence nameText;
-        final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(
-                details.number, details.numberPresentation,
-                mResources.getString(R.string.recentCalls_addToContact));
-
-        if (TextUtils.isEmpty(details.name)) {
-            nameText = displayNumber;
-        } else {
-            nameText = details.name;
-        }
-
-        nameView.setText(nameText);
-    }
-
     public static String getCallCountString(Resources res, long count) {
         return res.getQuantityString(R.plurals.call, (int) count, (int) count);
     }
