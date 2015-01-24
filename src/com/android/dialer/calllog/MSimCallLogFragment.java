@@ -31,11 +31,13 @@ package com.android.dialer.calllog;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.CallLog.Calls;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -52,6 +54,7 @@ import android.widget.TextView;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.dialer.R;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
+import com.android.dialer.widget.DoubleDatePickerDialog;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.List;
@@ -59,8 +62,13 @@ import java.util.List;
 /**
  * Displays a list of call log entries.
  */
-public class MSimCallLogFragment extends CallLogFragment {
+public class MSimCallLogFragment extends CallLogFragment
+        implements DoubleDatePickerDialog.OnDateSetListener {
     private static final String TAG = "MSimCallLogFragment";
+
+    private long mFilterFrom = -1;
+    private long mFilterTo = -1;
+    private TextView mDateFilterView;
 
     /**
      * Key for the call log sub saved in the default preference.
@@ -82,7 +90,7 @@ public class MSimCallLogFragment extends CallLogFragment {
             int sub = position - 1;
             mCallSubFilter = sub;
             setSelectedSub(sub);
-            mCallLogQueryHandler.fetchCalls(mCallTypeFilter, 0, mCallSubFilter);
+            fetchCalls();
         }
 
         @Override
@@ -98,7 +106,7 @@ public class MSimCallLogFragment extends CallLogFragment {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Log.i(TAG, "Status selected, position: " + position);
             mCallTypeFilter = ((SpinnerContent)parent.getItemAtPosition(position)).value;
-            mCallLogQueryHandler.fetchCalls(mCallTypeFilter, 0, mCallSubFilter);
+            fetchCalls();
         }
 
         @Override
@@ -131,6 +139,7 @@ public class MSimCallLogFragment extends CallLogFragment {
 
         mFilterSubSpinnerView = (Spinner) view.findViewById(R.id.filter_sub_spinner);
         mFilterStatusSpinnerView = (Spinner) view.findViewById(R.id.filter_status_spinner);
+        mDateFilterView = (TextView) view.findViewById(R.id.date_filter);
 
         // Update the filter views.
         updateFilterSpinnerViews();
@@ -140,13 +149,13 @@ public class MSimCallLogFragment extends CallLogFragment {
 
     @Override
     public void fetchCalls() {
-        mCallLogQueryHandler.fetchCalls(mCallTypeFilter, 0, mCallSubFilter);
+        fetchCalls(mFilterFrom, mFilterTo, mCallSubFilter);
     }
 
     @Override
     public void startCallsQuery() {
         mAdapter.setLoading(true);
-        mCallLogQueryHandler.fetchCalls(mCallTypeFilter, 0, mCallSubFilter);
+        fetchCalls();
     }
 
     /**
@@ -205,5 +214,58 @@ public class MSimCallLogFragment extends CallLogFragment {
         // Save the selected sub to the default preference.
         PreferenceManager.getDefaultSharedPreferences(this.getActivity()).edit()
                 .putInt(PREFERENCE_KEY_CALLLOG_SUB, sub).commit();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.call_log_fragment_options, menu);
+        MenuItem resetItem = menu.findItem(R.id.reset_date_filter);
+        resetItem.setVisible(mFilterFrom != -1);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.date_filter:
+                final DoubleDatePickerDialog.Fragment fragment =
+                        new DoubleDatePickerDialog.Fragment();
+                fragment.setArguments(DoubleDatePickerDialog.Fragment.createArguments(
+                        mFilterFrom, mFilterTo));
+                fragment.show(getFragmentManager(), "filter");
+                return true;
+            case R.id.reset_date_filter:
+                mFilterFrom = -1;
+                mFilterTo = -1;
+                fetchCalls();
+                getActivity().invalidateOptionsMenu();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCallsFetched(Cursor cursor) {
+        boolean result = super.onCallsFetched(cursor);
+
+        if (mDateFilterView != null) {
+            if (mFilterFrom == -1) {
+                mDateFilterView.setVisibility(View.GONE);
+            } else {
+                mDateFilterView.setText(DateUtils.formatDateRange(getActivity(),
+                        mFilterFrom, mFilterTo, 0));
+                mDateFilterView.setVisibility(View.VISIBLE);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public void onDateSet(long from, long to) {
+        mFilterFrom = from;
+        mFilterTo = to;
+        getActivity().invalidateOptionsMenu();
+        fetchCalls();
     }
 }
