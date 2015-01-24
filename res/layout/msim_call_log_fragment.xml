@@ -46,6 +46,16 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <include layout="@layout/call_spinner" />
 
+    <TextView
+            android:id="@+id/date_filter"
+            style="@style/ContactListSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/call_log_outer_margin"
+            android:layout_marginEnd="@dimen/call_log_outer_margin"
+            android:background="@null"
+            android:visibility="gone" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
