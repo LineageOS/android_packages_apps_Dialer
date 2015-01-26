@@ -340,9 +340,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             }
         }
 
-        TelephonyManager telephonyManager =
-                (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-        String simNumber = telephonyManager.getLine1Number();
+        TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
+        String simNumber = mgr.getLine1Number(mPrimary.getAccountHandle());
         if (PhoneNumberUtils.compare(callbackNumber, simNumber)) {
             Log.d(this, "Numbers are the same; not showing the callback number");
             callbackNumber = null;
