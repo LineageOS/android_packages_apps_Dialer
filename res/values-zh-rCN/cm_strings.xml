@@ -73,4 +73,6 @@
     <string name="speed_dial_settings">快速拨号设置</string>
     <string name="lookup_settings_description">未知号码查询</string>
     <string name="call_stats_reset_filter">重置时间范围</string>
+    <string name="cyngn_reverse_lookup_provider_name">反向查找源(cyngn)</string>
+    <string name="call_log_blacklist_header">来自黑名单的通话</string>
 </resources>
