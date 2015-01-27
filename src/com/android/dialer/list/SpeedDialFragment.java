@@ -28,6 +28,7 @@ import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Trace;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +69,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
      */
     private static final long KEY_REMOVED_ITEM_HEIGHT = Long.MAX_VALUE;
 
-    private static final String TAG = SpeedDialFragment.class.getSimpleName();
+    private static final String TAG = "SpeedDialFragment";
     private static final boolean DEBUG = false;
 
     private int mAnimationDuration;
@@ -180,21 +181,26 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
     @Override
     public void onCreate(Bundle savedState) {
         if (DEBUG) Log.d(TAG, "onCreate()");
+        Trace.beginSection(TAG + " onCreate");
         super.onCreate(savedState);
 
         mAnimationDuration = getResources().getInteger(R.integer.fade_duration);
+        Trace.endSection();
     }
 
     @Override
     public void onResume() {
+        Trace.beginSection(TAG + " onResume");
         super.onResume();
 
         getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
+        Trace.endSection();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        Trace.beginSection(TAG + " onCreateView");
         mParentView = inflater.inflate(R.layout.speed_dial_fragment, container, false);
 
         mListView = (PhoneFavoriteListView) mParentView.findViewById(R.id.contact_tile_list);
@@ -208,7 +214,6 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
                 (ImageView) getActivity().findViewById(R.id.contact_tile_drag_shadow_overlay);
         mListView.setDragShadowOverlay(dragShadowOverlay);
 
-        final Resources resources = getResources();
         mEmptyView = mParentView.findViewById(R.id.empty_list_view);
         DialerUtils.configureEmptyListView(
                 mEmptyView, R.drawable.empty_speed_dial, R.string.speed_dial_empty, getResources());
@@ -224,7 +229,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         mListView.setOnScrollListener(mScrollListener);
         mListView.setFastScrollEnabled(false);
         mListView.setFastScrollAlwaysVisible(false);
-
+        Trace.endSection();
         return mParentView;
     }
 

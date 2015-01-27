@@ -36,6 +36,7 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Trace;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
@@ -102,7 +103,7 @@ public class DialpadFragment extends Fragment
         AdapterView.OnItemClickListener, TextWatcher,
         PopupMenu.OnMenuItemClickListener,
         DialpadKeyButton.OnPressedListener {
-    private static final String TAG = DialpadFragment.class.getSimpleName();
+    private static final String TAG = "DialpadFragment";
 
     /**
      * LinearLayout with getter and setter methods for the translationY property using floats,
@@ -315,6 +316,7 @@ public class DialpadFragment extends Fragment
 
     @Override
     public void onCreate(Bundle state) {
+        Trace.beginSection(TAG + " onCreate");
         super.onCreate(state);
         mFirstLaunch = true;
         mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
@@ -341,14 +343,21 @@ public class DialpadFragment extends Fragment
             mCallStateReceiver = new CallStateReceiver();
             ((Context) getActivity()).registerReceiver(mCallStateReceiver, callStateIntentFilter);
         }
+        Trace.endSection();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
+        Trace.beginSection(TAG + " onCreateView");
+        Trace.beginSection(TAG + " inflate view");
         final View fragmentView = inflater.inflate(R.layout.dialpad_fragment, container,
                 false);
+        Trace.endSection();
+        Trace.beginSection(TAG + " buildLayer");
         fragmentView.buildLayer();
+        Trace.endSection();
 
+        Trace.beginSection(TAG + " setup views");
         Resources r = getResources();
 
         mDialpadView = (DialpadView) fragmentView.findViewById(R.id.dialpad_view);
@@ -399,7 +408,8 @@ public class DialpadFragment extends Fragment
         floatingActionButton.setOnClickListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
                 floatingActionButtonContainer, floatingActionButton);
-
+        Trace.endSection();
+        Trace.endSection();
         return fragmentView;
     }
 
@@ -582,6 +592,7 @@ public class DialpadFragment extends Fragment
 
     @Override
     public void onStart() {
+        Trace.beginSection(TAG + " onStart");
         super.onStart();
         // if the mToneGenerator creation fails, just continue without it.  It is
         // a local audio signal, and is not as important as the dtmf tone itself.
@@ -600,10 +611,12 @@ public class DialpadFragment extends Fragment
         if (total > 50) {
             Log.i(TAG, "Time for ToneGenerator creation: " + total);
         }
+        Trace.endSection();
     };
 
     @Override
     public void onResume() {
+        Trace.beginSection(TAG + " onResume");
         super.onResume();
 
         final DialtactsActivity activity = (DialtactsActivity) getActivity();
@@ -661,6 +674,7 @@ public class DialpadFragment extends Fragment
         mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
         mOverflowMenuButton.setOnClickListener(this);
         mOverflowMenuButton.setVisibility(isDigitsEmpty() ? View.INVISIBLE : View.VISIBLE);
+        Trace.endSection();
     }
 
     @Override

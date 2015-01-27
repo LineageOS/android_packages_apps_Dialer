@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Trace;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -237,19 +238,27 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Trace.beginSection(TAG + " onCreate");
         super.onCreate(savedInstanceState);
 
         mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
                 this, 1);
+        Trace.beginSection(TAG + " getCurrentCountryIso");
         final String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
+        Trace.endSection();
+
+        Trace.beginSection(TAG + " create adapters");
         mCallLogAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
                 new ContactInfoHelper(getActivity(), currentCountryIso), null, null, false);
 
         mMergedAdapter = new ShortcutCardsAdapter(getActivity(), this, mCallLogAdapter);
+        Trace.endSection();
+        Trace.endSection();
     }
 
     @Override
     public void onResume() {
+        Trace.beginSection(TAG + " onResume");
         super.onResume();
         final SharedPreferences prefs = getActivity().getSharedPreferences(
                 DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
@@ -260,6 +269,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         if (getUserVisibleHint()) {
             sendScreenViewForPosition(mViewPager.getCurrentItem());
         }
+        Trace.endSection();
     }
 
     @Override
@@ -279,7 +289,11 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        Trace.beginSection(TAG + " onCreateView");
+        Trace.beginSection(TAG + " inflate view");
         final View parentView = inflater.inflate(R.layout.lists_fragment, container, false);
+        Trace.endSection();
+        Trace.beginSection(TAG + " setup views");
         mViewPager = (ViewPager) parentView.findViewById(R.id.lists_pager);
         mViewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
@@ -304,7 +318,8 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
         setupPaneLayout((OverlappingPaneLayout) parentView);
         mOverlappingPaneLayout = (OverlappingPaneLayout) parentView;
-
+        Trace.endSection();
+        Trace.endSection();
         return parentView;
     }
 

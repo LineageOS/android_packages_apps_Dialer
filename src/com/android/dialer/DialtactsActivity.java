@@ -28,6 +28,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Trace;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
@@ -350,15 +351,19 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Trace.beginSection(TAG + " onCreate");
         super.onCreate(savedInstanceState);
         mFirstLaunch = true;
 
         final Resources resources = getResources();
         mActionBarHeight = resources.getDimensionPixelSize(R.dimen.action_bar_height_large);
 
+        Trace.beginSection(TAG + " setContentView");
         setContentView(R.layout.dialtacts_activity);
+        Trace.endSection();
         getWindow().setBackgroundDrawable(null);
 
+        Trace.beginSection(TAG + " setup Views");
         final ActionBar actionBar = getActionBar();
         actionBar.setCustomView(R.layout.search_edittext);
         actionBar.setDisplayShowCustomEnabled(true);
@@ -453,8 +458,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         setupActivityOverlay();
 
+        Trace.endSection();
+
+        Trace.beginSection(TAG + " initialize smart dialing");
         mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
         SmartDialPrefix.initializeNanpSettings(this);
+        Trace.endSection();
+        Trace.endSection();
     }
 
     private void setupActivityOverlay() {
@@ -472,6 +482,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     protected void onResume() {
+        Trace.beginSection(TAG + " onResume");
         super.onResume();
         mStateSaved = false;
         if (mFirstLaunch) {
@@ -506,6 +517,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         prepareVoiceSearchButton();
         mDialerDatabaseHelper.startSmartDialUpdateThread();
         updateFloatingActionButtonControllerAlignment(false /* animate */);
+        Trace.endSection();
     }
 
     @Override
