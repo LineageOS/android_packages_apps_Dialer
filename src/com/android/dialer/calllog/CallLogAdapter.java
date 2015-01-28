@@ -27,6 +27,7 @@ import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -441,9 +442,19 @@ public class CallLogAdapter extends GroupingListAdapter
         expandOrCollapseActions(callLogItemView, isExpanded(rowId));
 
         if (TextUtils.isEmpty(name)) {
-            details = new PhoneCallDetails(number, numberPresentation,
-                    formattedNumber, countryIso, geocode, callTypes, date, duration, null,
-                    accountIcon, features, dataUsage, transcription, subId, operator);
+            if (mContext.getResources().getBoolean(R.bool.mark_emergency_call_in_call_log) &&
+                    PhoneNumberUtils.isLocalEmergencyNumber(mContext, number)) {
+                String emergencyName = mContext.getString(
+                        com.android.internal.R.string.emergency_call_dialog_number_for_display);
+                details = new PhoneCallDetails(number, numberPresentation,
+                        formattedNumber, countryIso, geocode, callTypes, date, duration,
+                        emergencyName, 0, "", null, null, 0, null, accountIcon, features,
+                        dataUsage, transcription, Calls.DURATION_TYPE_ACTIVE, subId, operator);
+            } else {
+                details = new PhoneCallDetails(number, numberPresentation,
+                        formattedNumber, countryIso, geocode, callTypes, date, duration,
+                        null, accountIcon, features, dataUsage, transcription, subId, operator);
+            }
         } else {
             details = new PhoneCallDetails(number, numberPresentation,
                     formattedNumber, countryIso, geocode, callTypes, date,
