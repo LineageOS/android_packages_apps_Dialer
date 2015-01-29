@@ -87,14 +87,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/header_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="?attr/call_log_header_color" />
-
     <!-- The actual details -->
     <LinearLayout
         android:layout_width="match_parent"
