@@ -61,6 +61,8 @@
   <string name="speed_dial_replace">Ersätt</string>
   <string name="speed_dial_delete">Ta bort</string>
   <string name="speed_dial_unassigned_dialog_title">Inget kortnummer angivet</string>
+  <string name="speed_dial_unassigned_dialog_message">Inget kortnummer har tilldelats till \"<xliff:g id="number">%s</xliff:g>\". Vill du tilldela ett nummer nu?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Avaktivera flygplansläget för att använda kortnummer."</string>
   <string name="msim_ime_dialog_title">Enhetsidentifierare</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
   <string name="call_log_show_all_slots">Alla SIM</string>
