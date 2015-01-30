@@ -133,6 +133,9 @@
     <!-- The header to show that call log is only showing missed calls. [CHAR LIMIT=40] -->
     <string name="call_log_missed_header">Missed calls only</string>
 
+    <!-- The header to show that call log is only showing missed calls. [CHAR LIMIT=40] -->
+    <string name="call_log_blacklist_header">Blacklist calls only</string>
+
     <!--  Voicemail status message shown at the top of call log to notify the user that no new
     voicemails are currently available. This can happen when both notification as well as data
     connection to the voicemail server is lost. [CHAR LIMIT=64] -->
@@ -411,6 +414,15 @@
 
     <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
     <string name="type_missed_video">Missed video call</string>
+
+    <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_incoming_volte">Incoming 4G voice call</string>
+
+    <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_outgoing_volte">Outgoing 4G voice call</string>
+
+    <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_missed_volte">Missed 4G voice call</string>
 
     <!-- Title for voicemail details screen -->
     <string name="type_voicemail">Voicemail</string>

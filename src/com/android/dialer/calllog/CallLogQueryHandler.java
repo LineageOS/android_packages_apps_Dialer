@@ -184,10 +184,25 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             if (where.length() > 0) {
                 where.append(" AND ");
             }
-            // Add a clause to fetch only items of type voicemail.
-            where.append(String.format("(%s = ?)", Calls.TYPE));
+
+            if ((callType == Calls.INCOMING_TYPE) || (callType == Calls.OUTGOING_TYPE)
+                    || (callType == Calls.MISSED_TYPE)) {
+                where.append(String.format("(%s = ? OR %s = ?)",
+                        Calls.TYPE, Calls.TYPE));
+            } else {
+                // Add a clause to fetch only items of type voicemail.
+                where.append(String.format("(%s = ?)", Calls.TYPE));
+            }
             // Add a clause to fetch only items newer than the requested date
             selectionArgs.add(Integer.toString(callType));
+
+            if (callType == Calls.INCOMING_TYPE) {
+                selectionArgs.add(Integer.toString(Calls.INCOMING_IMS_TYPE));
+            } else if (callType == Calls.OUTGOING_TYPE) {
+                selectionArgs.add(Integer.toString(Calls.OUTGOING_IMS_TYPE));
+            } else if (callType == Calls.MISSED_TYPE) {
+                selectionArgs.add(Integer.toString(Calls.MISSED_IMS_TYPE));
+            }
         }
 
         if (slotId > CALL_SUB_ALL) {

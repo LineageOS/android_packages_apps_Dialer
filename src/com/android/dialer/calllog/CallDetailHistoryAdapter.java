@@ -33,6 +33,7 @@ import com.android.dialer.util.DialerUtils;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+import android.util.Log;
 
 /**
  * Adapter for a ListView containing history items from the details of a call.
@@ -124,11 +125,31 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
 
         int callType = details.callTypes[0];
         boolean isVideoCall = (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
-                && CallUtil.isVideoEnabled(mContext);
-
+                && (CallUtil.isVideoEnabled(mContext) || CallUtil.isCSVTEnabled());
+        boolean isVoLTE = (callType == Calls.INCOMING_IMS_TYPE) ||
+                          (callType == Calls.OUTGOING_IMS_TYPE) ||
+                          (callType == Calls.MISSED_IMS_TYPE);
+        Log.d("CallDetailHistoryAdapter", "isVideoCall = " + isVideoCall
+                    + ", isVoLTE = " + isVoLTE);
         callTypeIconView.clear();
         callTypeIconView.add(callType);
         callTypeIconView.setShowVideo(isVideoCall);
+        boolean imsCallLogEnabled = mContext.getResources()
+                .getBoolean(R.bool.ims_call_type_enabled);
+        if (!imsCallLogEnabled) {
+            switch (callType) {
+                case Calls.INCOMING_IMS_TYPE:
+                    callType = Calls.INCOMING_TYPE;
+                    break;
+                case Calls.OUTGOING_IMS_TYPE:
+                    callType = Calls.OUTGOING_TYPE;
+                    break;
+                case Calls.MISSED_IMS_TYPE:
+                    callType = Calls.MISSED_TYPE;
+                    break;
+                default:
+            }
+        }
         callTypeTextView.setText(mCallTypeHelper.getCallTypeText(callType, isVideoCall));
         // Set the date.
         CharSequence dateValue = DateUtils.formatDateRange(mContext, details.date, details.date,

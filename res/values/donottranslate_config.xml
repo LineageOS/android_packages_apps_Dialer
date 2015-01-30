@@ -37,4 +37,9 @@
     <bool name="call_duration_enabled">true</bool>
 
     <bool name="call_durationtype_enabled">false</bool>
+
+    <bool name="ims_call_type_enabled">false</bool>
+
+    <bool name="config_incoming_call_show_one_way_video_options">true</bool>
+
 </resources>
