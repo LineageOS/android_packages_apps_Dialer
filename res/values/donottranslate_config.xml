@@ -42,6 +42,8 @@
 
     <bool name="config_incoming_call_show_one_way_video_options">true</bool>
 
+    <bool name="config_conference_call_show_participant_status">false</bool>
+
     <bool name="mark_emergency_call_in_call_log">false</bool>
 
 </resources>
