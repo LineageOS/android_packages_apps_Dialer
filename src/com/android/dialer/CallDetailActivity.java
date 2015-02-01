@@ -51,6 +51,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
@@ -87,6 +91,11 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     private static final int LOADER_ID = 0;
     private static final String BUNDLE_CONTACT_URI_EXTRA = "contact_uri_extra";
 
+    //add firewall menu
+    private static final Uri WHITELIST_CONTENT_URI = Uri
+                             .parse("content://com.android.firewall/whitelistitems");
+    private static final Uri BLACKLIST_CONTENT_URI = Uri
+                             .parse("content://com.android.firewall/blacklistitems");
     /** The time to wait before enabling the blank the screen due to the proximity sensor. */
     private static final long PROXIMITY_BLANK_DELAY_MILLIS = 100;
     /** The time to wait before disabling the blank the screen due to the proximity sensor. */
@@ -642,26 +651,73 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
 
     public void onMenuAddToBlackList(MenuItem menuItem) {
         Bundle blackBundle = new Bundle();
-        blackBundle.putString(NUMBER_KEY, mNumber);
-        blackBundle.putString(MODE_KEY, "blacklist");
+        new AlertDialog.Builder(this)
+            .setMessage(getString(R.string.firewall_add_blacklist_wring))
+            .setPositiveButton(android.R.string.ok, new OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if(addNumberToFirewall(true , mNumber)){
+                        Toast.makeText(CallDetailActivity.this,
+                            getString(R.string.firewall_save_success),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            })
+            .setNegativeButton(android.R.string.cancel, null)
+            .create().show();
 
-        Intent blackIntent = new Intent();
-        blackIntent.setClassName(FIREWALL_APK_NAME, FIREWALL_BLACK_WHITE_LIST);
-        blackIntent.setAction(Intent.ACTION_INSERT);
-        blackIntent.putExtras(blackBundle);
-        startActivity(blackIntent);
     }
 
     public void onMenuAddToWhiteList(MenuItem menuItem) {
-        Bundle whiteBundle = new Bundle();
-        whiteBundle.putString(NUMBER_KEY, mNumber);
-        whiteBundle.putString(MODE_KEY, "whitelist");
+        if(addNumberToFirewall(false , mNumber)){
+             Toast.makeText(CallDetailActivity.this,
+                getString(R.string.firewall_save_success),
+                    Toast.LENGTH_SHORT).show();
+        }
 
-        Intent whiteIntent = new Intent();
-        whiteIntent.setClassName(FIREWALL_APK_NAME, FIREWALL_BLACK_WHITE_LIST);
-        whiteIntent.setAction(Intent.ACTION_INSERT);
-        whiteIntent.putExtras(whiteBundle);
-        startActivity(whiteIntent);
+    }
+
+    private boolean addNumberToFirewall(boolean isBlacklist,String number){
+        Log.d(TAG, "number: " + number);
+         if (TextUtils.isEmpty(number)) {
+            Toast.makeText(CallDetailActivity.this,
+                getString(R.string.firewall_number_len_not_valid),
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        boolean ret = true;
+        ContentValues values = new ContentValues();
+        String queryNumber = number.replaceAll("[\\-\\/ ]", "");
+        int len = queryNumber.length();
+        if (len > 11){
+            queryNumber = number.substring(len - 11, len);
+        }
+        Uri firewallUri = isBlacklist? BLACKLIST_CONTENT_URI: WHITELIST_CONTENT_URI;
+        Cursor fiewallCursor = getContentResolver().query(firewallUri,
+                new String[] {
+                        "_id", "number", "person_id", "name"
+                },
+                "number" + " LIKE '%" + queryNumber + "'",
+                null,
+                null);
+        if (fiewallCursor != null){
+            if (fiewallCursor.getCount() > 0) {
+                fiewallCursor.close();
+                fiewallCursor = null;
+                 String Stoast = isBlacklist?getString(R.string.firewall_number_in_black)
+                                     :getString(R.string.firewall_number_in_white);
+                Toast.makeText(CallDetailActivity.this, Stoast,
+                    Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            fiewallCursor.close();
+            fiewallCursor = null;
+        }
+        values.put("number", queryNumber);
+        values.put("name", "");
+        // add new
+        Uri mUri = getContentResolver().insert(firewallUri, values);
+        return ret;
     }
 
     public void onMenuRemoveFromCallLog(MenuItem menuItem) {
