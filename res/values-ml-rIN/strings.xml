@@ -187,5 +187,5 @@
     <string name="other_settings_title" msgid="7976283601445863248">"മറ്റുള്ളവ"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ദ്രുത പ്രതികരണങ്ങൾ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"കോളുകൾ"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"കോൾ ചെയ്യാനുള്ള അക്കൗണ്ടുകൾ"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"കോളുചെയ്യാനുള്ള അക്കൗണ്ട്"</string>
 </resources>

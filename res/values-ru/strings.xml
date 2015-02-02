@@ -86,7 +86,7 @@
     <string name="dialer_settings_label" msgid="4305043242594150479">"Настройки"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Новый контакт"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Все контакты"</string>
-    <string name="callDetailTitle" msgid="5340227785196217938">"Сведения о вызове"</string>
+    <string name="callDetailTitle" msgid="5340227785196217938">"Вызов"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Данные недоступны"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Использовать тональный набор"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Вернуться к ожидающему вызову"</string>
