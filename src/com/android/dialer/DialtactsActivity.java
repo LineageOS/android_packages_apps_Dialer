@@ -693,8 +693,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // deliver is not more that 2000, because too long arguments
         // will cause TransactionTooLargeException in binder.
         if (size > ImportExportDialogFragment.MAX_COUNT_ALLOW_SHARE_CONTACT) {
-            Toast.makeText(this, R.string.share_failed,
-                    Toast.LENGTH_SHORT).show();
+            String text = getString(R.string.contact_share_failed_toast,
+                    ImportExportDialogFragment.MAX_COUNT_ALLOW_SHARE_CONTACT);
+            Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
             return null;
         }
         StringBuilder uriListBuilder = new StringBuilder();
