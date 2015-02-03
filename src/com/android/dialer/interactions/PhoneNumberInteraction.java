@@ -45,7 +45,6 @@ import android.widget.CheckBox;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.Collapser;
 import com.android.contacts.common.Collapser.Collapsible;
 import com.android.contacts.common.MoreContactUtils;
@@ -53,6 +52,7 @@ import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
 import com.android.dialer.contact.ContactUpdateService;
+import com.android.dialer.util.PrivilegedCallUtil;
 import com.android.dialer.util.DialerUtils;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -322,7 +322,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                         Intent.ACTION_SENDTO, Uri.fromParts("sms", phoneNumber, null));
                 break;
             default:
-                intent = CallUtil.getCallIntent(phoneNumber, callOrigin);
+                intent = PrivilegedCallUtil.getCallIntent(phoneNumber, callOrigin);
                 break;
         }
         DialerUtils.startActivityWithErrorToast(context, intent);

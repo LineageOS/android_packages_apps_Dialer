@@ -45,13 +45,10 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
-import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
-import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -71,7 +68,6 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PhoneNumberFormatter;
@@ -82,6 +78,7 @@ import com.android.dialer.NeededForReflection;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.calllog.PhoneAccountUtils;
+import com.android.dialer.util.PrivilegedCallUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
@@ -1002,7 +999,8 @@ public class DialpadFragment extends Fragment
     }
 
     public void callVoicemail() {
-        DialerUtils.startActivityWithErrorToast(getActivity(), CallUtil.getVoicemailIntent());
+        DialerUtils.startActivityWithErrorToast(getActivity(), PrivilegedCallUtil
+                .getVoicemailIntent());
         hideAndClearDialpad(false);
     }
 
@@ -1098,7 +1096,7 @@ public class DialpadFragment extends Fragment
                 // Clear the digits just in case.
                 clearDialpad();
             } else {
-                final Intent intent = CallUtil.getCallIntent(number,
+                final Intent intent = PrivilegedCallUtil.getCallIntent(number,
                         (getActivity() instanceof DialtactsActivity ?
                                 ((DialtactsActivity) getActivity()).getCallOrigin() : null));
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent);
@@ -1628,7 +1626,7 @@ public class DialpadFragment extends Fragment
     }
 
     private Intent newFlashIntent() {
-        final Intent intent = CallUtil.getCallIntent(EMPTY_NUMBER);
+        final Intent intent = PrivilegedCallUtil.getCallIntent(EMPTY_NUMBER);
         intent.putExtra(EXTRA_SEND_EMPTY_FLASH, true);
         return intent;
     }

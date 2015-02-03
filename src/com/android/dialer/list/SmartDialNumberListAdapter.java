@@ -20,15 +20,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
-import android.provider.ContactsContract.CommonDataKinds.Callable;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.list.ContactListItemView;
-import com.android.contacts.common.list.PhoneNumberListAdapter;
-import com.android.contacts.common.list.PhoneNumberListAdapter.PhoneQuery;
 import com.android.dialer.dialpad.SmartDialCursorLoader;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;

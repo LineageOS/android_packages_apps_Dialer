@@ -50,9 +50,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.contacts.common.ContactPhotoManager;
-import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.CallUtil;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
@@ -62,6 +62,7 @@ import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
+import com.android.dialer.util.PrivilegedCallUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.voicemail.VoicemailPlaybackFragment;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
@@ -364,8 +365,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                         getSystemService(Context.TELEPHONY_SERVICE);
                 if (tm.getCallState() == TelephonyManager.CALL_STATE_IDLE) {
                     DialerUtils.startActivityWithErrorToast(this,
-                            CallUtil.getCallIntent(Uri.fromParts(PhoneAccount.SCHEME_TEL, mNumber,
-                                    null)), R.string.call_not_available);
+                            PrivilegedCallUtil.getCallIntent(Uri.fromParts(PhoneAccount.SCHEME_TEL,
+                                    mNumber, null)), R.string.call_not_available);
                     return true;
                 }
             }
