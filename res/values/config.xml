@@ -19,4 +19,14 @@
     <integer name="call_recording_audio_source">1</integer>
     <integer name="call_recording_audio_encoder">0</integer>
     <bool name="call_durationtype_enabled">false</bool>
+
+    <!-- An array of codes aliases, such as ##123# -->
+    <string-array name="special_code_aliases" translatable="false"/>
+
+    <!-- The mapping from aliases to secret codes, index-mapped to the
+         array above. For instance, if the alias is ##123# and the
+         mapping is 123, the system will trigger a special code akin to
+         typing *#*#123#*#* -->
+    <string-array name="special_code_mapping" translatable="false"/>
+
 </resources>

@@ -42,6 +42,9 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.internal.telephony.ITelephony;
 import com.android.internal.telephony.PhoneConstants;
@@ -85,6 +88,16 @@ public class SpecialCharSequenceMgr {
      */
     private static QueryHandler sPreviousAdnQueryHandler;
 
+    /**
+     * A mapping of special codes to their representation. This is used to allow arbitrary codes
+     * like *#123# to be mapped to be recognized and trigger the same actions in the form *#*#123#*#*.
+     */
+    private static Map<String, String> sSecretCodeAliases;
+    /**
+     * Provides proper locking semantics for initializing the secret code aliases.
+     */
+    private static Object sSecretCodeAliasesLock = new Object();
+
     /** This class is never instantiated. */
     private SpecialCharSequenceMgr() {
     }
@@ -108,7 +121,8 @@ public class SpecialCharSequenceMgr {
                 || handleRegulatoryInfoDisplay(context, dialString)
                 || handlePinEntry(context, dialString)
                 || handleAdnEntry(context, dialString, textField)
-                || handleSecretCode(context, dialString)) {
+                || handleSecretCode(context, dialString)
+                || handleSecretCodeAlias(context, dialString)) {
             return true;
         }
 
@@ -166,6 +180,20 @@ public class SpecialCharSequenceMgr {
         }
 
         return false;
+    }
+
+    /**
+     * Handles secret codes aliases, that are mapped to the regular android_secret_code intents.
+     * If a secret code is encountered an Intent is started with the android_secret_code://<code>
+     * URI.
+     *
+     * @param context the context to use
+     * @param input the text to check for a secret code in
+     * @return true if a secret code was encountered
+     */
+    static boolean handleSecretCodeAlias(Context context, String input) {
+        String mapping = getMapping(context).get(input);
+        return mapping == null ? false : handleSecretCode(context, "*#*#" + mapping + "#*#*");
     }
 
     /**
@@ -410,6 +438,31 @@ public class SpecialCharSequenceMgr {
             sb.append(telephony.getDeviceId(i));
         }
         return sb.toString();
+    }
+
+    private static Map<String, String> getMapping(Context context) {
+        if (sSecretCodeAliases == null) {
+            synchronized (sSecretCodeAliasesLock) {
+                if (sSecretCodeAliases == null) {
+                    String[] aliases = context.getResources()
+                            .getStringArray(R.array.special_code_aliases);
+                    String[] actual = context.getResources()
+                            .getStringArray(R.array.special_code_mapping);
+                    if (aliases == null || actual == null
+                            || aliases.length != actual.length) {
+                        // Fail fast, if this is overriden it must be done correctly.
+                        throw new IllegalArgumentException(
+                                "Aliases and their actual representation must have the same size");
+                    }
+
+                    sSecretCodeAliases = new HashMap<String, String>();
+                    for (int i = 0; i < aliases.length; i++) {
+                        sSecretCodeAliases.put(aliases[i], actual[i]);
+                    }
+                }
+            }
+        }
+        return sSecretCodeAliases;
     }
 
     /*******
