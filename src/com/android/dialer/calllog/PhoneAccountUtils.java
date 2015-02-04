@@ -74,20 +74,27 @@ public class PhoneAccountUtils {
      * Extract account color from PhoneAccount object.
      */
     public static int getAccountColor(Context context, PhoneAccountHandle accountHandle) {
-        PhoneAccount account = getAccountOrNull(context, accountHandle);
+        TelecomManager telecomManager =
+                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+        final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+
         // For single-sim devices the PhoneAccount will be NO_HIGHLIGHT_COLOR by default, so it is
         // safe to always use the account highlight color.
         return account == null ? PhoneAccount.NO_HIGHLIGHT_COLOR : account.getHighlightColor();
     }
 
     /**
-     * Retrieve the account metadata.
+     * Retrieve the account metadata, but if the account does not exist or the device has only a
+     * single registered and enabled account, return null.
      */
     private static PhoneAccount getAccountOrNull(Context context,
             PhoneAccountHandle accountHandle) {
         TelecomManager telecomManager =
                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
         final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+        if (!telecomManager.hasMultipleCallCapableAccounts()) {
+            return null;
+        }
         return account;
     }
 }
