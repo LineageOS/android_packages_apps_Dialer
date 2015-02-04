@@ -39,10 +39,11 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
@@ -244,7 +245,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         final int listViewVisibility = visible ? View.GONE : View.VISIBLE;
 
         if (previousVisibility != emptyViewVisibility) {
-            final RelativeLayout.LayoutParams params = (LayoutParams) mContactTileFrame
+            final FrameLayout.LayoutParams params = (LayoutParams) mContactTileFrame
                     .getLayoutParams();
             params.height = visible ? LayoutParams.WRAP_CONTENT : LayoutParams.MATCH_PARENT;
             mContactTileFrame.setLayoutParams(params);
