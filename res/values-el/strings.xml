@@ -86,7 +86,7 @@
     <string name="dialer_settings_label" msgid="4305043242594150479">"Ρυθμίσεις"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Νέα επαφή"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Όλες οι επαφές"</string>
-    <string name="callDetailTitle" msgid="5340227785196217938">"Λεπτομέρειες κλήσης"</string>
+    <string name="callDetailTitle" msgid="5340227785196217938">"Στοιχ. κλήσης"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Οι λεπτομέρειες δεν είναι διαθέσιμες"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Χρησιμοποιήστε το πληκτρολόγιο αφής ηχητικών τόνων"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Επιστροφή στην κλήση που βρίσκεται σε εξέλιξη"</string>
