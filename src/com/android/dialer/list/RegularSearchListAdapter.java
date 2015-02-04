@@ -18,12 +18,10 @@ package com.android.dialer.list;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.list.DirectoryPartition;
-import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;

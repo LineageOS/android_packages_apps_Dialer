@@ -23,8 +23,8 @@ import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.telecom.PhoneAccountHandle;
 
-import com.android.contacts.common.CallUtil;
 import com.android.dialer.CallDetailActivity;
+import com.android.dialer.util.PrivilegedCallUtil;
 
 /**
  * Used to create an intent to attach to an action in the call log.
@@ -46,7 +46,7 @@ public abstract class IntentProvider {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return CallUtil.getCallIntent(number, accountHandle);
+                return PrivilegedCallUtil.getCallIntent(number, accountHandle);
             }
         };
     }
@@ -60,7 +60,7 @@ public abstract class IntentProvider {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return CallUtil.getVideoCallIntent(number, accountHandle);
+                return PrivilegedCallUtil.getVideoCallIntent(number, accountHandle);
             }
         };
     }
@@ -69,7 +69,7 @@ public abstract class IntentProvider {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return CallUtil.getVoicemailIntent();
+                return PrivilegedCallUtil.getVoicemailIntent();
             }
         };
     }
