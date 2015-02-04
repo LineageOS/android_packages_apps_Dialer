@@ -14,13 +14,10 @@
      limitations under the License.
 -->
 
-<!-- Use LinearLayout + FrameLayout, just to rely on android:divider and android:showDividers -->
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:divider="?android:attr/dividerHorizontal"
-    android:showDividers="end"
     android:clipChildren="false">
 
     <FrameLayout
@@ -51,4 +48,4 @@
         layout="@layout/empty_list_view"
         android:visibility="gone"/>
 
-</RelativeLayout>
+</FrameLayout>
