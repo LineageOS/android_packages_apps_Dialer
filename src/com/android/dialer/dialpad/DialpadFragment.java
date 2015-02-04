@@ -45,13 +45,10 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
-import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
-import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -318,7 +315,9 @@ public class DialpadFragment extends Fragment
     public void onCreate(Bundle state) {
         Trace.beginSection(TAG + " onCreate");
         super.onCreate(state);
-        mFirstLaunch = true;
+
+        mFirstLaunch = state == null;
+
         mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
 
         try {
@@ -358,7 +357,6 @@ public class DialpadFragment extends Fragment
         Trace.endSection();
 
         Trace.beginSection(TAG + " setup views");
-        Resources r = getResources();
 
         mDialpadView = (DialpadView) fragmentView.findViewById(R.id.dialpad_view);
         mDialpadView.setCanDigitsBeEdited(true);
@@ -654,8 +652,6 @@ public class DialpadFragment extends Fragment
             showDialpadChooser(false);
         }
 
-        mFirstLaunch = false;
-
         stopWatch.lap("hnt");
 
         updateDeleteButtonEnabledState();
@@ -674,6 +670,14 @@ public class DialpadFragment extends Fragment
         mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
         mOverflowMenuButton.setOnClickListener(this);
         mOverflowMenuButton.setVisibility(isDigitsEmpty() ? View.INVISIBLE : View.VISIBLE);
+
+        if (mFirstLaunch) {
+            // The onHiddenChanged callback does not get called the first time the fragment is
+            // attached, so call it ourselves here.
+            onHiddenChanged(false);
+        }
+
+        mFirstLaunch = false;
         Trace.endSection();
     }
 

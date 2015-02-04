@@ -91,6 +91,8 @@ import com.android.dialerbind.DatabaseHelperManager;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
+import junit.framework.Assert;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -406,12 +408,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mOverflowMenu = buildOptionsMenu(searchEditTextLayout);
         optionsMenuButton.setOnTouchListener(mOverflowMenu.getDragToOpenListener());
 
-        // Add the favorites fragment, and the dialpad fragment, but only if savedInstanceState
-        // is null. Otherwise the fragment manager takes care of recreating these fragments.
+        // Add the favorites fragment but only if savedInstanceState is null. Otherwise the
+        // fragment manager is responsible for recreating it.
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.dialtacts_frame, new ListsFragment(), TAG_FAVORITES_FRAGMENT)
-                    .add(R.id.dialtacts_container, new DialpadFragment(), TAG_DIALPAD_FRAGMENT)
                     .commit();
         } else {
             mSearchQuery = savedInstanceState.getString(KEY_SEARCH_QUERY);
@@ -554,7 +555,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onAttachFragment(Fragment fragment) {
         if (fragment instanceof DialpadFragment) {
             mDialpadFragment = (DialpadFragment) fragment;
-            if (!mShowDialpadOnResume) {
+            if (!mIsDialpadShown && !mShowDialpadOnResume) {
                 final FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.hide(mDialpadFragment);
                 transaction.commit();
@@ -667,12 +668,19 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             return;
         }
         mIsDialpadShown = true;
-        mDialpadFragment.setAnimate(animate);
+
         mListsFragment.setUserVisibleHint(false);
-        AnalyticsUtil.sendScreenView(mDialpadFragment);
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.show(mDialpadFragment);
+        if (mDialpadFragment == null) {
+            mDialpadFragment = new DialpadFragment();
+            ft.add(R.id.dialtacts_container, mDialpadFragment, TAG_DIALPAD_FRAGMENT);
+        } else {
+            ft.show(mDialpadFragment);
+        }
+
+        mDialpadFragment.setAnimate(animate);
+        AnalyticsUtil.sendScreenView(mDialpadFragment);
         ft.commit();
 
         if (animate) {
@@ -691,6 +699,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Callback from child DialpadFragment when the dialpad is shown.
      */
     public void onDialpadShown() {
+        Assert.assertNotNull(mDialpadFragment);
         if (mDialpadFragment.getAnimate()) {
             mDialpadFragment.getView().startAnimation(mSlideIn);
         } else {
@@ -742,7 +751,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Finishes hiding the dialpad fragment after any animations are completed.
      */
     private void commitDialpadFragmentHide() {
-        if (!mStateSaved && !mDialpadFragment.isHidden()) {
+        if (!mStateSaved && mDialpadFragment != null && !mDialpadFragment.isHidden()) {
             final FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.hide(mDialpadFragment);
             ft.commit();
@@ -850,14 +859,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             return;
         }
 
-        if (mDialpadFragment != null) {
-            final boolean phoneIsInUse = phoneIsInUse();
-            if (phoneIsInUse || (intent.getData() !=  null && isDialIntent(intent))) {
-                mDialpadFragment.setStartedFromNewIntent(true);
-                if (phoneIsInUse && !mDialpadFragment.isVisible()) {
-                    mInCallDialpadUp = true;
-                }
-                showDialpadFragment(false);
+        final boolean phoneIsInUse = phoneIsInUse();
+        if (phoneIsInUse || (intent.getData() !=  null && isDialIntent(intent))) {
+            showDialpadFragment(false);
+            mDialpadFragment.setStartedFromNewIntent(true);
+            if (phoneIsInUse && !mDialpadFragment.isVisible()) {
+                mInCallDialpadUp = true;
             }
         }
     }
@@ -959,7 +966,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         mSearchView.setText(null);
-        mDialpadFragment.clearDialpad();
+
+        if (mDialpadFragment != null) {
+            mDialpadFragment.clearDialpad();
+        }
+
         setNotInSearchUi();
 
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -972,7 +983,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         transaction.commit();
 
         mListsFragment.getView().animate().alpha(1).withLayer();
-        if (!mDialpadFragment.isVisible()) {
+
+        if (mDialpadFragment == null || !mDialpadFragment.isVisible()) {
             // If the dialpad fragment wasn't previously visible, then send a screen view because
             // we are exiting regular search. Otherwise, the screen view will be sent by
             // {@link #hideDialpadFragment}.
