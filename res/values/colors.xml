@@ -26,6 +26,7 @@
     <color name="setting_primary_color">@color/dialtacts_primary_text_color</color>
     <!-- Color for the setting description text. -->
     <color name="setting_secondary_color">@color/dialtacts_secondary_text_color</color>
+    <color name="setting_disabled_color">#aaaaaa</color>
     <color name="setting_background_color">#ffffff</color>
     <color name="setting_button_color">#eee</color>
 
