@@ -29,7 +29,6 @@ import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.calllog.CallLogQuery;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfoHelper;
-import com.android.dialer.list.ShortcutCardsAdapter.SwipeableShortcutCard;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.OverlappingPaneLayout;
