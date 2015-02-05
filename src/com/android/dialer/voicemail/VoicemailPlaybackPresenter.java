@@ -446,12 +446,10 @@ public class VoicemailPlaybackPresenter {
         @Override
         public Exception doInBackground(Void... params) {
             try {
-                if (!mPlayer.isReadyToPlay()) {
-                    mPlayer.reset();
-                    mPlayer.setDataSource(mView.getDataSourceContext(), mVoicemailUri);
-                    mPlayer.setAudioStreamType(PLAYBACK_STREAM);
-                    mPlayer.prepare();
-                }
+                mPlayer.reset();
+                mPlayer.setDataSource(mView.getDataSourceContext(), mVoicemailUri);
+                mPlayer.setAudioStreamType(PLAYBACK_STREAM);
+                mPlayer.prepare();
                 return null;
             } catch (Exception e) {
                 return e;
