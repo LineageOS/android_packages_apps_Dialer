@@ -17,12 +17,9 @@
 package com.android.dialer.list;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
 import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.CallLogNotificationsHelper;
@@ -30,23 +27,26 @@ import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.list.SwipeHelper.OnItemGestureListener;
 
 /**
- * An adapter that displays call shortcuts from {@link com.android.dialer.calllog.CallLogAdapter}
- * in the form of cards.
+ * Handles the logic that displays call shortcuts from
+ * {@link com.android.dialer.calllog.CallLogAdapter} in the form of cards.
  */
-public class ShortcutCardsAdapter extends BaseAdapter {
+public class ShortcutCardsManager {
 
     private class CustomDataSetObserver extends DataSetObserver {
         @Override
         public void onChanged() {
-            notifyDataSetChanged();
+            updateShortcutCard();
         }
     }
 
-    private static final String TAG = ShortcutCardsAdapter.class.getSimpleName();
+    private static final String TAG = ShortcutCardsManager.class.getSimpleName();
+
+    // The position of the shortcut card within the CallLogAdapter
+    private static final int SHORTCUT_CARD_INDEX = 0;
 
     private final CallLogAdapter mCallLogAdapter;
-
     private final ListsFragment mFragment;
+    private final SwipeableShortcutCard mShortcutCard;
 
     private final Context mContext;
 
@@ -89,92 +89,41 @@ public class ShortcutCardsAdapter extends BaseAdapter {
         }
     };
 
-    public ShortcutCardsAdapter(Context context,
+    public ShortcutCardsManager(Context context,
             ListsFragment fragment,
-            CallLogAdapter callLogAdapter) {
-        final Resources resources = context.getResources();
+            CallLogAdapter callLogAdapter,
+            SwipeableShortcutCard shortcutCard) {
         mContext = context;
         mFragment = fragment;
+        mShortcutCard = shortcutCard;
 
         mCallLogAdapter = callLogAdapter;
         mObserver = new CustomDataSetObserver();
         mCallLogAdapter.registerDataSetObserver(mObserver);
         mCallLogQueryHandler = new CallLogQueryHandler(mContext.getContentResolver(),
                 mCallLogQueryHandlerListener);
+        mShortcutCard.setOnItemSwipeListener(mCallLogOnItemSwipeListener);
     }
 
     /**
-     * Determines the number of items in the adapter.
-     * mCallLogAdapter contains the item for the most recent caller.
-     * mContactTileAdapter contains the starred contacts.
-     * The +1 is to account for the presence of the favorites menu.
-     *
-     * @return Number of items in the adapter.
+     * Updates the contents of the shortcut card with the view provided by the
+     * {@link CallLogAdapter}.
      */
-    @Override
-    public int getCount() {
-        return mCallLogAdapter.getCount();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return mCallLogAdapter.getItem(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
-
-    /**
-     * Determine the number of view types present.
-     */
-    @Override
-    public int getViewTypeCount() {
-        return mCallLogAdapter.getViewTypeCount();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return mCallLogAdapter.getItemViewType(position);
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        final SwipeableShortcutCard wrapper;
-        if (convertView == null) {
-            wrapper = new SwipeableShortcutCard(mContext);
-            wrapper.setOnItemSwipeListener(mCallLogOnItemSwipeListener);
+    private void updateShortcutCard() {
+        final int count = mCallLogAdapter.getCount();
+        final View convertView = mShortcutCard.getChildAt(SHORTCUT_CARD_INDEX);
+        if (count <= SHORTCUT_CARD_INDEX) {
+            if (convertView != null) {
+                convertView.setVisibility(View.GONE);
+            }
         } else {
-            wrapper = (SwipeableShortcutCard) convertView;
+            mShortcutCard.setVisibility(View.VISIBLE);
+            final View view = mCallLogAdapter.getView(SHORTCUT_CARD_INDEX, convertView,
+                    mShortcutCard);
+            mShortcutCard.removeAllViews();
+            mShortcutCard.prepareChildView(view);
+            mShortcutCard.addView(view);
+            view.setVisibility(View.VISIBLE);
         }
-
-        // Special case wrapper view for the most recent call log item. This allows
-        // us to create a card-like effect for the more recent call log item in
-        // the PhoneFavoriteMergedAdapter, but keep the original look of the item in
-        // the CallLogAdapter.
-        final View view = mCallLogAdapter.getView(position, convertView == null ?
-                null : wrapper.getChildAt(0), parent
-        );
-        wrapper.removeAllViews();
-        wrapper.prepareChildView(view);
-        wrapper.addView(view);
-        wrapper.setVisibility(View.VISIBLE);
-        return wrapper;
-    }
-
-    @Override
-    public boolean areAllItemsEnabled() {
-        return mCallLogAdapter.areAllItemsEnabled();
-    }
-
-    @Override
-    public boolean isEnabled(int position) {
-        return mCallLogAdapter.isEnabled(position);
     }
 }

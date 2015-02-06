@@ -76,7 +76,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
     private ViewPager mViewPager;
     private ViewPagerTabs mViewPagerTabs;
     private ViewPagerAdapter mViewPagerAdapter;
-    private ListView mShortcutCardsListView;
+    private SwipeableShortcutCard mShortcutCard;
     private RemoveView mRemoveView;
     private View mRemoveViewContent;
     private SpeedDialFragment mSpeedDialFragment;
@@ -87,7 +87,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
     private String[] mTabTitles;
 
-    private ShortcutCardsAdapter mMergedAdapter;
     private CallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
     private OverlappingPaneLayout mOverlappingPaneLayout;
@@ -112,16 +111,16 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
             // edge of the shortcut card, to achieve the animated effect of the shortcut card
             // being pushed out of view when the panel is slid upwards. slideOffset is 1 when
             // the shortcut card is fully exposed, and 0 when completely hidden.
-            float ratioCardHidden = (1 - slideOffset);
-            if (mShortcutCardsListView.getChildCount() > 0) {
-                final SwipeableShortcutCard v =
-                        (SwipeableShortcutCard) mShortcutCardsListView.getChildAt(0);
-                v.clipCard(ratioCardHidden);
+            if (mShortcutCard.isShown()) {
+                float ratioCardHidden = (1 - slideOffset);
+                mShortcutCard.clipCard(ratioCardHidden);
             }
 
             if (mActionBar != null) {
                 // Amount of available space that is not being hidden by the bottom pane
-                final int topPaneHeight = (int) (slideOffset * mShortcutCardsListView.getHeight());
+                final int shortcutCardHeight =
+                        mShortcutCard.isShown() ? mShortcutCard.getHeight() : 0;
+                final int topPaneHeight = (int) (slideOffset * shortcutCardHeight);
 
                 final int availableActionBarHeight =
                         Math.min(mActionBar.getHeight(), topPaneHeight);
@@ -250,7 +249,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mCallLogAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
                 new ContactInfoHelper(getActivity(), currentCountryIso), null, null, false);
 
-        mMergedAdapter = new ShortcutCardsAdapter(getActivity(), this, mCallLogAdapter);
         Trace.endSection();
         Trace.endSection();
     }
@@ -309,8 +307,8 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mViewPagerTabs.setViewPager(mViewPager);
         addOnPageChangeListener(mViewPagerTabs);
 
-        mShortcutCardsListView = (ListView) parentView.findViewById(R.id.shortcut_card_list);
-        mShortcutCardsListView.setAdapter(mMergedAdapter);
+        mShortcutCard = (SwipeableShortcutCard) parentView.findViewById(R.id.shortcut_card);
+        new ShortcutCardsManager(getActivity(), this, mCallLogAdapter, mShortcutCard);
 
         mRemoveView = (RemoveView) parentView.findViewById(R.id.remove_view);
         mRemoveViewContent = parentView.findViewById(R.id.remove_view_content);
@@ -337,7 +335,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         }
 
         mCallLogAdapter.changeCursor(cursor);
-        mMergedAdapter.notifyDataSetChanged();
 
         // Refresh the overlapping pane to ensure that any changes in the shortcut card height
         // are appropriately reflected in the overlap position.
@@ -398,11 +395,12 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mRemoveView.setAlpha(show ? 0 : 1);
         mRemoveView.animate().alpha(show ? 1 : 0).start();
 
-        if (mShortcutCardsListView.getChildCount() > 0) {
-            View v = mShortcutCardsListView.getChildAt(0);
-            v.animate().withLayer()
-                    .alpha(show ? REMOVE_VIEW_SHOWN_ALPHA : REMOVE_VIEW_HIDDEN_ALPHA)
-                    .start();
+        if (mShortcutCard.isShown()) {
+            final View child = mShortcutCard.getChildAt(0);
+            if (child != null) {
+                child.animate().withLayer()
+                        .alpha(show ? REMOVE_VIEW_SHOWN_ALPHA : REMOVE_VIEW_HIDDEN_ALPHA).start();
+            }
         }
     }
 
