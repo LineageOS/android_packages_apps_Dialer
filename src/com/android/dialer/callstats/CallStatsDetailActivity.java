@@ -42,6 +42,7 @@ import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.widget.PieChartView;
+import com.android.internal.telephony.util.BlacklistUtils;
 
 /**
  * Activity to display detailed information about a callstat item
@@ -262,6 +263,8 @@ public class CallStatsDetailActivity extends Activity {
         menu.findItem(R.id.menu_edit_number_before_call).setVisible(
                 mCallDetailHeader.canEditNumberBeforeCall());
 		*/
+        menu.findItem(R.id.menu_add_to_blacklist).setVisible(
+                BlacklistUtils.isBlacklistEnabled(this));
         return super.onPrepareOptionsMenu(menu);
     }
 
