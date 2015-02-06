@@ -72,6 +72,7 @@ import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.android.dialerbind.analytics.AnalyticsActivity;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.internal.telephony.util.BlacklistUtils;
 
 import java.util.List;
 
@@ -628,6 +629,9 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
 
         menu.findItem(R.id.menu_add_to_black_list).setVisible(mHasInstallFireWallOption);
         menu.findItem(R.id.menu_add_to_white_list).setVisible(mHasInstallFireWallOption);
+
+        menu.findItem(R.id.menu_add_to_blacklist).setVisible(
+                BlacklistUtils.isBlacklistEnabled(this));
 
         return super.onPrepareOptionsMenu(menu);
     }

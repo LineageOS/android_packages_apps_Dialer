@@ -39,6 +39,7 @@ import com.android.dialer.R;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialerbind.ObjectFactory;
+import com.android.internal.telephony.util.BlacklistUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -336,8 +337,7 @@ public class ContactInfoHelper {
      * phone blacklist is enabled
      */
     public boolean canBlacklistCalls() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.PHONE_BLACKLIST_ENABLED, 1) != 0;
+        return BlacklistUtils.isBlacklistEnabled(mContext);
     }
 
     /**
