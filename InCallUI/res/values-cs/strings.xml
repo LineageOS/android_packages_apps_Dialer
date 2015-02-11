@@ -42,7 +42,7 @@
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Příchozí hovor"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"Hovor ukončen"</string>
     <string name="card_title_on_hold" msgid="821463117892339942">"Přidržený hovor"</string>
-    <string name="card_title_hanging_up" msgid="3999101620995182450">"Zavěšování"</string>
+    <string name="card_title_hanging_up" msgid="3999101620995182450">"Ukončování hovoru"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"Probíhá hovor"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"Moje číslo je <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"Navazování spojení pro video"</string>
