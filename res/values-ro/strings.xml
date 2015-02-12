@@ -81,10 +81,10 @@
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Afişaţi numai mesajele vocale"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Afişaţi toate apelurile"</string>
     <string name="add_contact" msgid="4579643070374941999">"Adăugați în Agendă"</string>
-    <string name="add_2sec_pause" msgid="9214012315201040129">"Pauză 2 secunde"</string>
+    <string name="add_2sec_pause" msgid="9214012315201040129">"Adăugați o pauză de 2 secunde"</string>
     <string name="add_wait" msgid="3360818652790319634">"Adăugaţi interval de aşteptare"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Setări"</string>
-    <string name="menu_newContact" msgid="1209922412763274638">"Persoană nouă în agendă"</string>
+    <string name="menu_newContact" msgid="1209922412763274638">"Intrare nouă în agendă"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Toată agenda"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Detaliile apelului"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Nu sunt disponibile detalii"</string>
@@ -134,7 +134,7 @@
     <string name="call_log_activity_title" msgid="4612824396355272023">"Istoric"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Toate"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Nepreluate"</string>
-    <string name="call_log_voicemail_title" msgid="940422274047025948">"Mes. vocal"</string>
+    <string name="call_log_voicemail_title" msgid="940422274047025948">"Mesagerie vocală"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Apelare rapidă"</string>
     <string name="tab_recents" msgid="929949073851377206">"Recente"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Agendă"</string>

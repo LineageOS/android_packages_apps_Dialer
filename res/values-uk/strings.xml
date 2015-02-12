@@ -24,7 +24,7 @@
     <string name="menu_sendTextMessage" msgid="8682056943960339239">"Надіслати SMS"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Набрати <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Редаг. номер перед викл."</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Дод. до контактів"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Додати в контакти"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Видалити з історії дзвінків"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Очистити історію дзвінків"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Видалити голосову пошту"</string>
@@ -187,5 +187,5 @@
     <string name="other_settings_title" msgid="7976283601445863248">"Інше"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Швидкі відповіді"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Дзвінки"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Облікові записи для дзвінків"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Обл. записи для дзвінків"</string>
 </resources>

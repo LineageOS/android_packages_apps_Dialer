@@ -121,7 +121,7 @@
     <string name="contact_list_loading" msgid="5488620820563977329">"正在加载..."</string>
     <string name="imei" msgid="3045126336951684285">"移动通信国际识别码"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"正从SIM卡中加载..."</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"正从 SIM 卡中加载..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM卡联系人"</string>
     <string name="add_contact_not_available" msgid="5547311613368004859">"没有可用的通讯录应用"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"无法使用语音搜索"</string>

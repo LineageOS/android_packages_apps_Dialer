@@ -187,5 +187,5 @@
     <string name="other_settings_title" msgid="7976283601445863248">"Lainnya"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respons cepat"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Panggilan telepon"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Akun yang menelepon"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Akun panggilan"</string>
 </resources>
