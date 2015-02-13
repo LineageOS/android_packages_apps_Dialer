@@ -41,6 +41,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -54,6 +55,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.QuickContactBadge;
@@ -62,6 +66,8 @@ import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.internal.telephony.PhoneConstants;
+import com.google.common.base.FinalizablePhantomReference;
+
 import static com.android.internal.telephony.PhoneConstants.SUBSCRIPTION_KEY;
 import java.util.List;
 
@@ -112,6 +118,9 @@ public class SpeedDialListActivity extends ListActivity implements
     private int mPickNumber;
     private int mInitialPickNumber;
     private SpeedDialAdapter mAdapter;
+    private AlertDialog mAddSpeedDialDialog;
+    private EditText mEditNumber;
+    private Button mCompleteButton;
 
     private static final int PICK_CONTACT_RESULT = 0;
 
@@ -202,6 +211,77 @@ public class SpeedDialListActivity extends ListActivity implements
         return record;
     }
 
+    private void showAddSpeedDialDialog(final int number) {
+        mPickNumber = number;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.set_speed_dial);
+        View contentView = LayoutInflater.from(this).inflate(
+                R.layout.add_speed_dial_dialog, null);
+        builder.setView(contentView);
+        ImageButton pickContacts = (ImageButton) contentView
+                .findViewById(R.id.select_contact);
+        pickContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickContact(number);
+                dismissDialog();
+            }
+        });
+        mEditNumber = (EditText) contentView.findViewById(R.id.edit_container);
+        if (null != mRecords.get(number)) {
+            mEditNumber.setText(SpeedDialUtils.getNumber(this, number));
+        }
+        Button cancelButton = (Button) contentView
+                .findViewById(R.id.btn_cancel);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismissDialog();
+            }
+        });
+        mCompleteButton = (Button) contentView.findViewById(R.id.btn_complete);
+        mCompleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mEditNumber.getText().toString().isEmpty()) {
+                    dismissDialog();
+                    return;
+                }
+                saveSpeedDial();
+                dismissDialog();
+            }
+        });
+        mAddSpeedDialDialog = builder.create();
+        mAddSpeedDialDialog.show();
+    }
+
+    private void saveSpeedDial() {
+        String number = mEditNumber.getText().toString();
+        Record record = null;
+        if (number != null) {
+            Uri uri = Uri.withAppendedPath(
+                    ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                    Uri.encode(number));
+            record = getRecordFromQuery(uri, LOOKUP_PROJECTION);
+            if (record == null) {
+                record = new Record(number);
+                record.normalizedNumber = number;
+            }
+        }
+        if (record != null) {
+            SpeedDialUtils.saveNumber(this, mPickNumber,
+                    record.normalizedNumber);
+            mRecords.put(mPickNumber, record);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void dismissDialog() {
+        if (null != mAddSpeedDialDialog && mAddSpeedDialDialog.isShowing()) {
+            mAddSpeedDialDialog.dismiss();
+        }
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (position == 0) {
@@ -224,7 +304,7 @@ public class SpeedDialListActivity extends ListActivity implements
             int number = position + 1;
             final Record record = mRecords.get(number);
             if (record == null) {
-                pickContact(number);
+                showAddSpeedDialDialog(number);
             } else {
                 PopupMenu pm = new PopupMenu(this, view);
                 pm.getMenu().add(number, MENU_REPLACE, 0, R.string.speed_dial_replace);
@@ -312,7 +392,7 @@ public class SpeedDialListActivity extends ListActivity implements
 
         switch (item.getItemId()) {
             case MENU_REPLACE:
-                pickContact(number);
+                showAddSpeedDialDialog(number);
                 return true;
             case MENU_DELETE:
                 mRecords.put(number, null);
