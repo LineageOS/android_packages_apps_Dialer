@@ -2,6 +2,7 @@ package com.android.dialer.settings;
 
 import com.google.common.collect.Lists;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,18 +43,25 @@ public class DialerSettingsActivity extends PreferenceActivity {
 
     @Override
     public void onBuildHeaders(List<Header> target) {
-        final Header generalSettingsHeader = new Header();
+        Header generalSettingsHeader = new Header();
         generalSettingsHeader.titleRes = R.string.general_settings_label;
         generalSettingsHeader.fragment = GeneralSettingsFragment.class.getName();
         target.add(generalSettingsHeader);
 
+        Header quickResponseSettingsHeader = new Header();
+        Intent quickResponseSettingsIntent =
+                new Intent(TelecomManager.ACTION_SHOW_RESPOND_VIA_SMS_SETTINGS);
+        quickResponseSettingsHeader.titleRes = R.string.respond_via_sms_setting_title;
+        quickResponseSettingsHeader.intent = quickResponseSettingsIntent;
+        target.add(quickResponseSettingsHeader);
+
         // Only show call setting menus if the current user is the primary/owner user.
         if (isPrimaryUser()) {
-            final TelephonyManager telephonyManager =
+            TelephonyManager telephonyManager =
                     (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             // Show "Call Settings" if there is one SIM and "Phone Accounts" if there are more.
             if (telephonyManager.getPhoneCount() <= 1) {
-                final Header callSettingsHeader = new Header();
+                Header callSettingsHeader = new Header();
                 Intent callSettingsIntent = new Intent(TelecomManager.ACTION_SHOW_CALL_SETTINGS);
                 callSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -61,7 +69,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
                 callSettingsHeader.intent = callSettingsIntent;
                 target.add(callSettingsHeader);
             } else {
-                final Header phoneAccountSettingsHeader = new Header();
+                Header phoneAccountSettingsHeader = new Header();
                 Intent phoneAccountSettingsIntent =
                         new Intent(TelecomManager.ACTION_CHANGE_PHONE_ACCOUNTS);
                 phoneAccountSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
