@@ -43,7 +43,7 @@
   <string name="call_stats_reset_filter">Zaman aralığını sıfırla</string>
   <string name="call_stats_sort_by_duration">Arama süresine göre sırala</string>
   <string name="call_stats_sort_by_count">Arama sayısına göre sırala</string>
-  <string name="menu_add_to_blacklist">Karalisteye ekle</string>
+  <string name="menu_add_to_blacklist">Kara listeye ekle</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> kara listeye eklendi</string>
   <string name="menu_delete_from_blacklist">Kara listeden sil</string>
   <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> kara listeden silindi</string>

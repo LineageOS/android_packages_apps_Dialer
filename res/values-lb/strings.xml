@@ -26,27 +26,27 @@
   <string name="recentCalls_addToContact">Bei d\'Kontakter dobäisetzen</string>
   <string name="recentCalls_removeFromRecentList">Aus der Urufflëscht läschen</string>
   <string name="recentCalls_deleteAll">Urufflëscht eidel maachen</string>
-  <string name="recentCalls_trashVoicemail">Mailbox-Opnam läschen</string>
+  <string name="recentCalls_trashVoicemail">Mailboxopnam läschen</string>
   <string name="recentCalls_shareVoicemail">Mailbox deelen</string>
   <string name="recentCalls_empty">Urufflëscht ass eidel.</string>
   <string name="clearCallLogConfirmation_title">Urufflëscht eidel maachen?</string>
   <string name="clearCallLogConfirmation">Deng ganz Urufflëscht gëtt geläscht.</string>
   <string name="clearCallLogProgress_title">Urufflëscht gëtt eidel gemaach\u2026</string>
   <plurals name="notification_voicemail_title">
-    <item quantity="one">Mailbox-Opnam</item>
+    <item quantity="one">Mailboxopnam</item>
     <item quantity="other">
             <xliff:g id="count">%1$d</xliff:g>
-            Mailbox-Opnamen
+            Mailboxopnamen
         </item>
   </plurals>
   <string name="notification_action_voicemail_play">Ofspillen</string>
   <string name="notification_voicemail_callers_list"><xliff:g id="newer_callers">%1$s</xliff:g>,
         <xliff:g id="older_caller">%2$s</xliff:g>
     </string>
-  <string name="notification_new_voicemail_ticker">Nei Mailbox-Opnam vum <xliff:g id="caller">%1$s</xliff:g></string>
-  <string name="voicemail_playback_error">Konnt d\'Mailbox-Opnam net ofspillen.</string>
+  <string name="notification_new_voicemail_ticker">Nei Mailboxopnam vum <xliff:g id="caller">%1$s</xliff:g></string>
+  <string name="voicemail_playback_error">Konnt d\'Mailboxopnam net ofspillen.</string>
   <string name="voicemail_buffering">Pufferung\u2026</string>
-  <string name="voicemail_fetching_content">Mailbox-Opnam gëtt erofgelueden\u2026</string>
+  <string name="voicemail_fetching_content">Mailboxopnam gëtt erofgelueden\u2026</string>
   <string name="voicemail_fetching_timout">Mailbox konnt net geluede ginn.</string>
   <string name="call_log_voicemail_header">Just Mailbox-Uriff</string>
   <string name="call_log_incoming_header">Just erakommend Uriff</string>
@@ -84,14 +84,14 @@
   <string name="description_dial_button">wielen</string>
   <string name="description_delete_button">Récktast</string>
   <string name="description_digits_edittext">Nummer déi auszewielen ass</string>
-  <string name="action_menu_call_history_description">Urufffhistorique</string>
+  <string name="action_menu_call_history_description">Uruffhistorique</string>
   <string name="action_menu_overflow_description" msgid="2295659037509008453">Méi Optiounen</string>
   <string name="action_menu_dialpad_button">Wieltasten</string>
   <string name="menu_copy">Kopéieren</string>
   <string name="menu_show_outgoing_only">Just déi erausgoend uweisen</string>
   <string name="menu_show_incoming_only">Just déi erakommend uweisen</string>
   <string name="menu_show_missed_only">Just déi verpasst uweisen</string>
-  <string name="menu_show_voicemails_only">Just Mailbox-Opnamen uweisen</string>
+  <string name="menu_show_voicemails_only">Just Mailboxopnamen uweisen</string>
   <string name="menu_show_all_calls">All Uriff uweisen</string>
   <string name="add_2sec_pause">2-Sek.-Paus dobäisetzen</string>
   <string name="add_wait">Paus dobäisetzen</string>
@@ -108,7 +108,7 @@
   <string name="type_missed">Verpassten Uruff</string>
   <string name="type_voicemail">Sproochopnam</string>
   <string name="actionIncomingCall">Erakommend Uriff</string>
-  <string name="description_call_log_play_button">Mailbox-Opnam ofspillen</string>
+  <string name="description_call_log_play_button">Mailboxopnam ofspillen</string>
   <string name="description_call_log_incoming_call">Erakommenden Uruff</string>
   <string name="description_call_log_outgoing_call">Erausgoenden Uruff</string>
   <string name="description_call_log_missed_call">Verpassten Uruff</string>
@@ -118,7 +118,7 @@
   <string name="description_call"><xliff:g id="name">%1$s</xliff:g> uruffen</string>
   <string name="description_contact_details">Kontaktdetailer fir <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
   <string name="description_call_details">Uruffdetailer</string>
-  <string name="description_new_voicemail">Nei Mailbox-Opnam.</string>
+  <string name="description_new_voicemail">Nei Mailboxopnam.</string>
   <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> Uriff.</string>
   <string name="description_return_missed_call">Réckruff fir de verpassten Uruff vum <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
   <string name="description_return_answered_call">Réckruff fir de beäntwerten Uruff vum <xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> <xliff:g id="timeOfCall">%3$s</xliff:g></string>
@@ -127,7 +127,7 @@
   <string name="description_call_last_multiple"><xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> uruffen.  Fir d\'lescht ugeruff <xliff:g id="timeOfCall">%3$s</xliff:g>.</string>
   <string name="description_call_last"><xliff:g id="nameOrNumber">%1$s</xliff:g> <xliff:g id="typeOrLocation">%2$s</xliff:g> uruffen.  Ugeruff <xliff:g id="timeOfCall">%3$s</xliff:g>.</string>
   <string name="description_send_text_message">Dem <xliff:g id="name">%1$s</xliff:g> eng SMS schécken</string>
-  <string name="description_call_log_unheard_voicemail">Ongelauschtert Mailbox-Opnam</string>
+  <string name="description_call_log_unheard_voicemail">Ongelauschtert Mailboxopnam</string>
   <string name="description_clear_search">Sich läschen</string>
   <string name="description_start_voice_search">Sich mat der Stëmm starten</string>
   <string name="menu_callNumber"><xliff:g id="number">%s</xliff:g> uruffen</string>
@@ -152,7 +152,7 @@
   <string name="call_log_all_title">All</string>
   <string name="call_log_missed_title">Verpasst</string>
   <string name="recentMissed_empty">Keng rezent verpasst Uriff.</string>
-  <string name="recentVoicemails_empty">Keng rezent Mailbox-Opnamen.</string>
+  <string name="recentVoicemails_empty">Keng rezent Mailboxopnamen.</string>
   <string name="show_all_contacts">All d\'Kontakter uweisen</string>
   <string name="show_favorites_only">Just Favoritten uweisen</string>
   <string name="call_log_activity_title">Historique</string>

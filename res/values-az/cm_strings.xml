@@ -26,17 +26,27 @@
   <string name="call_stats_outgoing">Gedən: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Cavabsız</string>
   <string name="call_stats_missed_percent">Cavabsız: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">Ümumi: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Ümumi: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Başlanğıc tarixi</string>
   <string name="call_stats_filter_to">Bitmə tarixi</string>
+  <string name="call_stats_filter_picker_title">Filtr aralığı</string>
+  <string name="date_quick_selection">Cəld seçim</string>
   <string name="date_qs_currentmonth">Hazırki ay</string>
+  <string name="date_qs_currentquarter">Hazırki rüb</string>
   <string name="date_qs_currentyear">Hazırki il</string>
   <string name="date_qs_lastweek">Keçən həftə</string>
   <string name="date_qs_lastmonth">Keçən ay</string>
+  <string name="date_qs_lastquarter">Son rüb</string>
   <string name="date_qs_lastyear">Keçən il</string>
+  <string name="call_stats_date_filter">Vaxt aralığını nizamla</string>
+  <string name="call_stats_reset_filter">Vaxt aralığını sıfırla</string>
   <string name="call_stats_sort_by_duration">Zəng müddətinə görə sırala</string>
   <string name="call_stats_sort_by_count">Zəng sayına görə sırala</string>
   <string name="menu_add_to_blacklist">Qara siyahıya əlavə et</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number">%s</xliff:g> qara siyahıya əlavə olundu</string>
+  <string name="menu_delete_from_blacklist">Qara siyahıdan sil</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> qara siyahıdan silindi</string>
   <string name="nearby_places">Yaxındakı yerlər</string>
   <string name="people">İnsanlar</string>
   <string name="start_call_playback">Səsyazmanı oynat</string>
@@ -46,11 +56,19 @@
   <string name="video_call">Görüntülü zəng</string>
   <string name="video_call_settings">Görüntülü zəng tənzimləmələri</string>
   <string name="description_videocall">Görüntülü zəng et <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="speed_dial_settings">Cəld yığım tənzimləmələri</string>
   <string name="speed_dial_not_set">(tənzimlənməyib)</string>
   <string name="speed_dial_replace">Dəyişdir</string>
   <string name="speed_dial_delete">Sil</string>
+  <string name="speed_dial_unassigned_dialog_title">Nömrə təyin edilmədi</string>
+  <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' rəqəminə heç bir cəld zəng şəxsi təyin edilmədi. İndi bir şəxs təyin etmək istəyirsiniz?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Cəld yığımın istifadəsi üçün əvvəlcə Uçuş rejimini bağlayın."</string>
+  <string name="msim_ime_dialog_title">Cihaz təyinedicisi</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
   <string name="call_log_show_all_slots">Bütün SIMlər</string>
   <string name="yes">Bəli</string>
   <string name="no">Xeyr</string>
+  <string name="call_duration_active">Aktiv müddət:</string>
+  <string name="call_duration_call_out">Zəng müddəti:</string>
+  <string name="call_log_all_calls_header">Bütün zənglər</string>
 </resources>
