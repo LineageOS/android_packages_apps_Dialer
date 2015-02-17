@@ -24,6 +24,7 @@ import android.widget.Spinner;
 
 import com.android.contacts.common.MoreContactUtils;
 import com.android.dialer.R;
+import com.android.internal.telephony.util.BlacklistUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,8 +118,12 @@ public class SpinnerContent {
                     label = context.getString(R.string.call_log_missed_header);
                     break;
                 case INDEX_CALL_TYPE_BLACKLIST:
-                    value = CallLog.Calls.BLACKLIST_TYPE;
-                    label = context.getString(R.string.call_log_blacklist_header);
+                    if (BlacklistUtils.isBlacklistEnabled(context)) {
+                        value = CallLog.Calls.BLACKLIST_TYPE;
+                        label = context.getString(R.string.call_log_blacklist_header);
+                    } else {
+                        continue;
+                    }
                     break;
                 case INDEX_CALL_TYPE_VOICEMAIL:
                     value = CallLog.Calls.VOICEMAIL_TYPE;
