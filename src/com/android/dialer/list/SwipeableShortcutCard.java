@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -56,7 +57,15 @@ public class SwipeableShortcutCard extends FrameLayout implements SwipeHelperCal
     private Rect mClipRect = new Rect();
 
     public SwipeableShortcutCard(Context context) {
-        super(context);
+        this(context, null);
+    }
+
+    public SwipeableShortcutCard(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public SwipeableShortcutCard(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
         final Resources resources = getResources();
         final float densityScale =resources.getDisplayMetrics().density;
         final float pagingTouchSlop = ViewConfiguration.get(context)
@@ -204,9 +213,7 @@ public class SwipeableShortcutCard extends FrameLayout implements SwipeHelperCal
 
         if (ratioHidden > CLIP_CARD_MOSTLY_HIDDEN_RATIO) {
             mClipRect.set(0, 0 , 0, 0);
-            setVisibility(View.INVISIBLE);
         } else {
-            setVisibility(View.VISIBLE);
             int newTop = (int) (ratioHidden * height);
             mClipRect.set(0, newTop, width, height);
 
