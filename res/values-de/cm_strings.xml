@@ -33,6 +33,7 @@
   <string name="preference_category_t9_dialpad_search">T9-Suche</string>
   <string name="t9_search_input_locale">T9-Eingabesprache</string>
   <string name="t9_search_input_locale_default">Standard</string>
+  <string name="type_blacklist">Anruf von gesperrter Rufnummer</string>
   <string name="call_log_stats_title">Statistiken</string>
   <string name="callStatsDetailTitle">Anrufstatistikdetails</string>
   <string name="call_stats">Anrufstatistiken</string>

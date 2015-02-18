@@ -18,18 +18,18 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="hour">
     <item quantity="one">1 uur</item>
-    <item quantity="other">%d uur</item>
+    <item quantity="other">%d ure</item>
   </plurals>
   <plurals name="minute">
-    <item quantity="one">1 min.</item>
-    <item quantity="other">%d min.</item>
+    <item quantity="one">1 min</item>
+    <item quantity="other">%d minute</item>
   </plurals>
   <plurals name="second">
-    <item quantity="one">1 sec.</item>
-    <item quantity="other">%d sec.</item>
+    <item quantity="one">1 sek</item>
+    <item quantity="other">%d sekondes</item>
   </plurals>
   <plurals name="call">
     <item quantity="one">1 oproep</item>
-    <item quantity="other">%d oproepen</item>
+    <item quantity="other">%d oproepe</item>
   </plurals>
 </resources>
