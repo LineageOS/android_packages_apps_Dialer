@@ -18,11 +18,27 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">Blízká místa</string>
   <string name="people">Lidé</string>
+  <string name="lookup_settings_label">Vyhledávání telefonního čísla</string>
   <string name="lookup_settings_description">Vyhledávání neznámých telefonních čísel</string>
+  <string name="enable_forward_lookup_title">Předběžné vyhledávání</string>
+  <string name="enable_forward_lookup_summary">Zobrazit blízká místa při vyhledávání v číselníku</string>
+  <string name="enable_people_lookup_title">Vyhledávání lidí</string>
+  <string name="enable_people_lookup_summary">Zobrazit výsledky lidí online při vyhledávání v číselníku</string>
+  <string name="enable_reverse_lookup_title">Zpětné vyhledávání</string>
+  <string name="enable_reverse_lookup_summary">Vyhledávání informací o osobě nebo místě pro neznámá čísla při příchozím hovoru</string>
+  <string name="forward_lookup_provider_title">Poskytovatel předběžného vyhledávání</string>
+  <string name="people_lookup_provider_title">Poskytovatel vyhledávání osob</string>
+  <string name="reverse_lookup_provider_title">Poskytovatel zpětného vyhledávání</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Čína (CN)</string>
+  <string name="preference_category_t9_dialpad_search">Vyhledávání na T9 číselníku</string>
+  <string name="t9_search_input_locale">Vstup vyhledávání T9</string>
+  <string name="t9_search_input_locale_default">Výchozí</string>
   <string name="type_blacklist">Volání z černé listiny</string>
   <string name="call_log_stats_title">Statistika</string>
   <string name="callStatsDetailTitle">Detaily statiskitky hovorů</string>
   <string name="call_stats">Statistiky hovorů</string>
+  <string name="call_stats_refresh">Obnovit</string>
+  <string name="activity_title_call_stats">Statistiky hovoru</string>
   <string name="call_stats_nav_all">Vše</string>
   <string name="call_stats_nav_incoming">Příchozí</string>
   <string name="call_stats_nav_outgoing">Odchozí</string>
@@ -31,6 +47,7 @@
   <string name="call_stats_outgoing">Odchozí: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Zameškané</string>
   <string name="call_stats_missed_percent">Zameškané: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Černá listina</string>
   <string name="call_stats_blacklist_percent">Černá listina: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Celkem: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Celkem: <xliff:g id="call_count">%s</xliff:g></string>
@@ -60,6 +77,11 @@
   <string name="dialog_speed_dial_airplane_mode_message">Pro použití rychlého vytáčení nejprve vypněte režim „V letadle“.</string>
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
+  <string name="incall_vibration_category_title">Vibrace příchozího hovoru</string>
+  <string name="incall_vibrate_outgoing_title">Vibrovat při přijmutí hovoru</string>
+  <string name="incall_vibrate_hangup_title">Vibrovat při zavěšení</string>
+  <string name="incall_vibrate_45_title">Vibrovat každou minutu</string>
+  <string name="incall_vibrate_45_summary">Vibrovat každou 45. sekundu každé minuty při odchozím volání</string>
   <string name="detailed_incall_info_title">Podrobné informace o volajícím</string>
   <string name="detailed_incall_info_summary">Zobrazit další informace o volajícím na obrazovce příchozího hovoru</string>
   <string name="video_call">Video hovor</string>

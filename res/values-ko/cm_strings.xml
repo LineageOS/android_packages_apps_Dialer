@@ -18,8 +18,27 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">주변 장소</string>
   <string name="people">사람</string>
+  <string name="lookup_settings_label">전화 번호 검색</string>
+  <string name="lookup_settings_description">알 수 없는 전화 번호 검색</string>
+  <string name="enable_forward_lookup_title">순서대로 검색</string>
+  <string name="enable_forward_lookup_summary">다이얼러 검색시 근처 장소 표시</string>
+  <string name="enable_people_lookup_title">사람 찾기</string>
+  <string name="enable_people_lookup_summary">다이얼러 검색시 온라인 사람 찾기 결과 표시</string>
+  <string name="enable_reverse_lookup_title">역순 검색</string>
+  <string name="enable_reverse_lookup_summary">모르는 번호로부터 전화 수신시 발신자 정보 검색</string>
+  <string name="forward_lookup_provider_title">정방향 검색 제공자</string>
+  <string name="people_lookup_provider_title">주소록 검색 제공자</string>
+  <string name="reverse_lookup_provider_title">역순 검색 제공자</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn 중국 (CN)</string>
+  <string name="preference_category_t9_dialpad_search">다이얼패드 T9 검색</string>
+  <string name="t9_search_input_locale">T9 검색 입력</string>
+  <string name="t9_search_input_locale_default">기본</string>
+  <string name="type_blacklist">블랙 리스트 전화</string>
   <string name="call_log_stats_title">통계</string>
   <string name="callStatsDetailTitle">전화 통계 정보</string>
+  <string name="call_stats">전화 통계</string>
+  <string name="call_stats_refresh">새로 고침</string>
+  <string name="activity_title_call_stats">통화 통계</string>
   <string name="call_stats_nav_all">전부</string>
   <string name="call_stats_nav_incoming">수신</string>
   <string name="call_stats_nav_outgoing">발신</string>
@@ -28,6 +47,8 @@
   <string name="call_stats_outgoing">발신: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">부재중</string>
   <string name="call_stats_missed_percent">부재중: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">블랙리스트</string>
+  <string name="call_stats_blacklist_percent">블랙 리스트: <xliff:g id="percent">%d </xliff:g>%%</string>
   <string name="call_stats_header_total">합계: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">합계: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">시작 날짜</string>
@@ -46,13 +67,23 @@
   <string name="call_stats_sort_by_duration">통화 시간으로 정렬</string>
   <string name="call_stats_sort_by_count">통화 횟수로 정렬</string>
   <string name="menu_add_to_blacklist">블랙리스트에 추가</string>
+  <string name="toast_added_to_blacklist">%s이(가) 블랙리스트에 추가되었습니다.</string>
   <string name="speed_dial_settings">스피드 다이얼 설정</string>
   <string name="speed_dial_not_set">(설정되지 않음)</string>
   <string name="speed_dial_replace">바꾸기</string>
   <string name="speed_dial_delete">삭제</string>
   <string name="speed_dial_unassigned_dialog_title">할당되지 않은 키</string>
+  <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' 키에 스피드 다이얼 번호가 할당되어 있지 않습니다. 지금 번호를 할당할까요?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">스피드 다이얼을 사용하려면 비행기 모드를 해제하십시오.</string>
   <string name="yes">예</string>
   <string name="no">아니오</string>
+  <string name="incall_vibration_category_title">In-call vibration</string>
+  <string name="incall_vibrate_outgoing_title">수신 시 진동</string>
+  <string name="incall_vibrate_hangup_title">통화 종료 시 진동</string>
+  <string name="incall_vibrate_45_title">매 분마다 진동</string>
+  <string name="incall_vibrate_45_summary">발신 통화 중 매 45초마다 진동</string>
+  <string name="detailed_incall_info_title">상세한 발신자 정보</string>
+  <string name="detailed_incall_info_summary">착신 전화 화면에 발신자에 대한 추가 정보를 표시</string>
   <string name="video_call">영상통화</string>
   <string name="call_duration_active">활성 통화 시간:</string>
   <string name="call_duration_call_out">통화 시간:</string>
@@ -60,4 +91,5 @@
   <string name="call_log_all_calls_header">모든 통화</string>
   <string name="calllog_search_hint">통화 기록 검색</string>
   <string name="msim_ime_dialog_title">장치 식별자</string>
+  <string name="call_log_blacklist_header">블랙리스트 통화만</string>
 </resources>
