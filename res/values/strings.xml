@@ -711,9 +711,6 @@
     <!-- Setting option name to enable or disable DTMF tone sound [CHAR LIMIT=30] -->
     <string name="dtmf_tone_enable_title">Dialpad tones</string>
 
-    <!-- Label for section of general call settings where miscellaneous settings are listed. -->
-    <string name="other_settings_title">Other</string>
-
     <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
     <string name="respond_via_sms_setting_title">Quick responses</string>
 

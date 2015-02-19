@@ -61,23 +61,4 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:key="dialer_general_other_settings_category_key"
-        android:title="@string/other_settings_title"
-        android:persistent="false" >
-
-        <PreferenceScreen
-            android:key="button_respond_via_sms_key"
-            android:title="@string/respond_via_sms_setting_title"
-            android:persistent="false">
-
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.server.telecom"
-                android:targetClass="com.android.server.telecom.RespondViaSmsSettings$Settings" />
-
-        </PreferenceScreen>
-
-    </PreferenceCategory>
-
 </PreferenceScreen>

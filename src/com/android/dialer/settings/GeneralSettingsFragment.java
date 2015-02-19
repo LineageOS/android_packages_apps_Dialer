@@ -46,7 +46,6 @@ public class GeneralSettingsFragment extends PreferenceFragment
     private static final String BUTTON_RINGTONE_KEY    = "button_ringtone_key";
     private static final String BUTTON_VIBRATE_ON_RING = "button_vibrate_on_ring";
     private static final String BUTTON_PLAY_DTMF_TONE  = "button_play_dtmf_tone";
-    private static final String BUTTON_RESPOND_VIA_SMS_KEY = "button_respond_via_sms_key";
 
     private static final int MSG_UPDATE_RINGTONE_SUMMARY = 1;
 
@@ -55,7 +54,6 @@ public class GeneralSettingsFragment extends PreferenceFragment
     private Preference mRingtonePreference;
     private CheckBoxPreference mVibrateWhenRinging;
     private CheckBoxPreference mPlayDtmfTone;
-    private Preference mRespondViaSms;
 
     private Runnable mRingtoneLookupRunnable;
     private final Handler mRingtoneLookupComplete = new Handler() {
@@ -80,7 +78,6 @@ public class GeneralSettingsFragment extends PreferenceFragment
         mRingtonePreference = findPreference(BUTTON_RINGTONE_KEY);
         mVibrateWhenRinging = (CheckBoxPreference) findPreference(BUTTON_VIBRATE_ON_RING);
         mPlayDtmfTone = (CheckBoxPreference) findPreference(BUTTON_PLAY_DTMF_TONE);
-        mRespondViaSms = findPreference(BUTTON_RESPOND_VIA_SMS_KEY);
 
         PreferenceCategory soundCategory = (PreferenceCategory) findPreference(CATEGORY_SOUNDS_KEY);
         if (mVibrateWhenRinging != null) {
@@ -138,9 +135,6 @@ public class GeneralSettingsFragment extends PreferenceFragment
         if (preference == mPlayDtmfTone) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.DTMF_TONE_WHEN_DIALING, mPlayDtmfTone.isChecked() ? 1 : 0);
-        } else if (preference == mRespondViaSms) {
-            // Needs to return false for the intent to launch.
-            return false;
         }
         return true;
     }
