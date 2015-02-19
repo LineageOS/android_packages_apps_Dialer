@@ -1133,11 +1133,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
     }
 
-    @Override
-    public void setDialButtonContainerVisible(boolean visible) {
-        mFakeActionBar.setVisibility(visible ? View.VISIBLE : View.GONE);
-    }
-
     /**
      * @return the SIM name for the special subscription.
      */

@@ -125,7 +125,6 @@ public class DialpadFragment extends Fragment
      */
     public interface HostInterface {
         void setDialButtonEnabled(boolean enabled);
-        void setDialButtonContainerVisible(boolean visible);
     }
 
     /**
@@ -1455,7 +1454,6 @@ public class DialpadFragment extends Fragment
                 mDigits.setVisibility(View.GONE);
             }
             if (mDialpad != null) mDialpad.setVisibility(View.GONE);
-            ((HostInterface) getActivity()).setDialButtonContainerVisible(false);
 
             mDialpadChooser.setVisibility(View.VISIBLE);
 
@@ -1473,7 +1471,6 @@ public class DialpadFragment extends Fragment
                 mDigits.setVisibility(View.VISIBLE);
             }
             if (mDialpad != null) mDialpad.setVisibility(View.VISIBLE);
-            ((HostInterface) getActivity()).setDialButtonContainerVisible(true);
             mDialpadChooser.setVisibility(View.GONE);
         }
     }
