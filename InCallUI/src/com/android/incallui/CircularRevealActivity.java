@@ -59,9 +59,7 @@ public class CircularRevealActivity extends Activity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(0, 0);
         setContentView(R.layout.outgoing_call_animation);
-        final Point touchPoint = getIntent().getParcelableExtra(TouchPointManager.TOUCH_POINT);
-        final MaterialPalette palette = getIntent().getParcelableExtra(EXTRA_THEME_COLORS);
-        setupDecorView(touchPoint, palette);
+        prepareDecorViewFromIntent(getIntent());
     }
 
     @Override
@@ -79,6 +77,18 @@ public class CircularRevealActivity extends Activity {
     protected void onStop() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mClearDisplayReceiver);
         super.onStop();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        prepareDecorViewFromIntent(intent);
+    }
+
+    private void prepareDecorViewFromIntent(Intent intent) {
+        final Point touchPoint = intent.getParcelableExtra(TouchPointManager.TOUCH_POINT);
+        final MaterialPalette palette = intent.getParcelableExtra(EXTRA_THEME_COLORS);
+        setupDecorView(touchPoint, palette);
     }
 
     private void setupDecorView(final Point touchPoint, MaterialPalette palette) {
