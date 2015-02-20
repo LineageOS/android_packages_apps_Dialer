@@ -631,6 +631,8 @@ public class CallLogAdapter extends GroupingListAdapter
 
     /**
      * Binds the views in the entry to the data in the call log.
+     * TODO: This gets called 20-30 times when Dialer starts up for a single call log entry and
+     * should not. It invokes cross-process methods and the repeat execution can get costly.
      *
      * @param callLogItemView the view corresponding to this entry
      * @param c the cursor pointing to the entry in the call log
