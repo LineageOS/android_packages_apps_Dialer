@@ -83,30 +83,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
         }
     }
 
-    /**
-     * LinearLayout that always returns true for onHoverEvent callbacks, to fix
-     * problems with accessibility due to the dialpad overlaying other fragments.
-     */
-    public static class HoverIgnoringLinearLayout extends LinearLayout {
-
-        public HoverIgnoringLinearLayout(Context context) {
-            super(context);
-        }
-
-        public HoverIgnoringLinearLayout(Context context, AttributeSet attrs) {
-            super(context, attrs);
-        }
-
-        public HoverIgnoringLinearLayout(Context context, AttributeSet attrs, int defStyle) {
-            super(context, attrs, defStyle);
-        }
-
-        @Override
-        public boolean onHoverEvent(MotionEvent event) {
-            return true;
-        }
-    }
-
     private EditText mDtmfDialerField;
 
     /** Hash Map to map a view id to a character*/

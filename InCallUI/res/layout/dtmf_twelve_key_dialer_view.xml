@@ -20,11 +20,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <view class="com.android.incallui.DialpadFragment$HoverIgnoringLinearLayout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-        <include layout="@layout/dialpad_view"/>
-    </view>
+    <include layout="@layout/dialpad_view"/>
 </view>
