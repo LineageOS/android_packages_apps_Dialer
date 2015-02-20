@@ -356,6 +356,11 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         prefs.edit().putLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, mLastCallShortcutDate)
                 .apply();
         fetchCalls();
+
+        LayoutTransition transition = mOverlappingPaneLayout.getLayoutTransition();
+        // Turns on animations for all types of layout changes so that they occur for
+        // height changes.
+        transition.enableTransitionType(LayoutTransition.CHANGING);
     }
 
     public void addOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
@@ -420,11 +425,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         paneLayout.setPanelSlideCallbacks(mPanelSlideCallbacks);
         paneLayout.setIntermediatePinnedOffset(
                 ((HostInterface) getActivity()).getActionBarController().getActionBarHeight());
-
-        LayoutTransition transition = paneLayout.getLayoutTransition();
-        // Turns on animations for all types of layout changes so that they occur for
-        // height changes.
-        transition.enableTransitionType(LayoutTransition.CHANGING);
     }
 
     public SpeedDialFragment getSpeedDialFragment() {
