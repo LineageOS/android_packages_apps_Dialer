@@ -16,14 +16,13 @@
 
 package com.android.incallui;
 
-import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 import android.telecom.Phone;
@@ -57,7 +56,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * that want to listen in on the in-call state changes.
  * TODO: This class has become more of a state machine at this point.  Consider renaming.
  */
-public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
+public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
+        CircularRevealFragment.OnCircularRevealCompleteListener {
 
     private static final String EXTRA_FIRST_TIME_SHOWN =
             "com.android.incallui.intent.extra.FIRST_TIME_SHOWN";
@@ -97,6 +97,16 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     private boolean mAccountSelectionCancelled = false;
     private InCallCameraManager mInCallCameraManager = null;
 
+    /**
+     * Whether or not we are currently bound and waiting for Telecom to send us a new call.
+     */
+    private boolean mBoundAndWaitingForOutgoingCall;
+    /**
+     * If there is no actual call currently in the call list, this will be used as a fallback
+     * to determine the theme color for InCallUI.
+     */
+    private PhoneAccountHandle mPendingPhoneAccountHandle;
+
     private final Phone.Listener mPhoneListener = new Phone.Listener() {
         @Override
         public void onBringToForeground(Phone phone, boolean showDialpad) {
@@ -105,6 +115,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         }
         @Override
         public void onCallAdded(Phone phone, android.telecom.Call call) {
+            // Since a call has been added we are no longer waiting for Telecom to send us a
+            // call.
+            setBoundAndWaitingForOutgoingCall(false, null);
             call.addListener(mCallListener);
         }
         @Override
@@ -156,28 +169,12 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      */
     private boolean mIsActivityPreviouslyStarted = false;
 
-
-    /**
-     * Whether or not to wait for the circular reveal animation to be started, to avoid stopping
-     * the circular reveal animation activity before the animation is initiated.
-     */
-    private boolean mWaitForRevealAnimationStart = false;
-
-    /**
-     * Whether or not the CircularRevealAnimationActivity has started.
-     */
-    private boolean mCircularRevealActivityStarted = false;
-
-    private boolean mShowDialpadOnStart = false;
-
     /**
      * Whether or not InCallService is bound to Telecom.
      */
     private boolean mServiceBound = false;
 
     private Phone mPhone;
-
-    private Handler mHandler = new Handler();
 
     /** Display colors for the UI. Consists of a primary color and secondary (darker) color */
     private MaterialPalette mThemeColors;
@@ -261,13 +258,6 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     private void attemptFinishActivity() {
-        mWaitForRevealAnimationStart = false;
-
-        Context context = mContext != null ? mContext : mInCallActivity;
-        if (context != null) {
-            CircularRevealActivity.sendClearDisplayBroadcast(context);
-        }
-
         final boolean doFinish = (mInCallActivity != null && isActivityStarted());
         Log.i(this, "Hide in call UI: " + doFinish);
         if (doFinish) {
@@ -457,7 +447,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     /**
      * Given the call list, return the state in which the in-call screen should be.
      */
-    public static InCallState getPotentialStateFromCallList(CallList callList) {
+    public InCallState getPotentialStateFromCallList(CallList callList) {
 
         InCallState newState = InCallState.NO_CALLS;
 
@@ -479,7 +469,38 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             newState = InCallState.INCALL;
         }
 
+        if (newState == InCallState.NO_CALLS) {
+            if (mBoundAndWaitingForOutgoingCall) {
+                return InCallState.OUTGOING;
+            }
+        }
+
         return newState;
+    }
+
+    public boolean isBoundAndWaitingForOutgoingCall() {
+        return mBoundAndWaitingForOutgoingCall;
+    }
+
+    public void setBoundAndWaitingForOutgoingCall(boolean isBound, PhoneAccountHandle handle) {
+        // NOTE: It is possible for there to be a race and have handle become null before
+        // the circular reveal starts. This should not cause any problems because CallCardFragment
+        // should fallback to the actual call in the CallList at that point in time to determine
+        // the theme color.
+        Log.i(this, "setBoundAndWaitingForOutgoingCall: " + isBound);
+        mBoundAndWaitingForOutgoingCall = isBound;
+        mPendingPhoneAccountHandle = handle;
+        if (isBound && mInCallState == InCallState.NO_CALLS) {
+            mInCallState = InCallState.OUTGOING;
+        }
+    }
+
+    @Override
+    public void onCircularRevealComplete(FragmentManager fm) {
+        if (mInCallActivity != null) {
+            mInCallActivity.getCallCardFragment().animateForNewOutgoingCall();
+            CircularRevealFragment.endCircularReveal(mInCallActivity.getFragmentManager());
+        }
     }
 
     public void addIncomingCallListener(IncomingCallListener listener) {
@@ -714,8 +735,6 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         if (showing) {
             mIsActivityPreviouslyStarted = true;
-        } else {
-            CircularRevealActivity.sendClearDisplayBroadcast(mContext);
         }
 
         for (InCallUiListener listener : mInCallUiListeners) {
@@ -1125,35 +1144,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     public void showInCall(final boolean showDialpad, final boolean newOutgoingCall) {
-        if (mCircularRevealActivityStarted) {
-            mWaitForRevealAnimationStart = true;
-            mShowDialpadOnStart = showDialpad;
-            Log.i(this, "Waiting for circular reveal completion to show InCallActivity");
-        } else {
-            Log.i(this, "Showing InCallActivity immediately");
-            mContext.startActivity(getInCallIntent(showDialpad, newOutgoingCall,
-                    newOutgoingCall /* showCircularReveal */));
-        }
-    }
-
-    public void onCircularRevealStarted(final Activity activity) {
-        mCircularRevealActivityStarted = false;
-        if (mWaitForRevealAnimationStart) {
-            mWaitForRevealAnimationStart = false;
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Log.i(this, "Showing InCallActivity after circular reveal");
-                    final Intent intent =
-                            getInCallIntent(mShowDialpadOnStart, true, false, false);
-                    activity.startActivity(intent);
-                    mShowDialpadOnStart = false;
-                }
-            });
-        } else if (!mServiceBound) {
-            CircularRevealActivity.sendClearDisplayBroadcast(mContext);
-            return;
-        }
+        Log.i(this, "Showing InCallActivity");
+        mContext.startActivity(getInCallIntent(showDialpad, newOutgoingCall));
     }
 
     public void onServiceBind() {
@@ -1161,6 +1153,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     public void onServiceUnbind() {
+        InCallPresenter.getInstance().setBoundAndWaitingForOutgoingCall(false, null);
         mServiceBound = false;
     }
 
@@ -1185,43 +1178,26 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         final PhoneAccountHandle accountHandle =
                 intent.getParcelableExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE);
-        final MaterialPalette colors = getColorsFromPhoneAccountHandle(accountHandle);
         final Point touchPoint = extras.getParcelable(TouchPointManager.TOUCH_POINT);
 
-        mCircularRevealActivityStarted = true;
-        mContext.startActivity(getAnimationIntent(touchPoint, colors));
+        InCallPresenter.getInstance().setBoundAndWaitingForOutgoingCall(true, accountHandle);
+
+        final Intent incallIntent = getInCallIntent(false, true);
+        incallIntent.putExtra(TouchPointManager.TOUCH_POINT, touchPoint);
+        mContext.startActivity(incallIntent);
     }
 
-    private Intent getAnimationIntent(Point touchPoint, MaterialPalette palette) {
-        final Intent intent = new Intent(mContext, CircularRevealActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
-        intent.putExtra(TouchPointManager.TOUCH_POINT, touchPoint);
-        intent.putExtra(CircularRevealActivity.EXTRA_THEME_COLORS, palette);
-        return intent;
-    }
-
-    public Intent getInCallIntent(boolean showDialpad, boolean newOutgoingCall,
-            boolean showCircularReveal) {
-        return getInCallIntent(showDialpad, newOutgoingCall, showCircularReveal, true);
-    }
-
-    public Intent getInCallIntent(boolean showDialpad, boolean newOutgoingCall,
-            boolean showCircularReveal, boolean newTask) {
+    public Intent getInCallIntent(boolean showDialpad, boolean newOutgoingCall) {
         final Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
-        if (newTask) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
+                | Intent.FLAG_ACTIVITY_NO_USER_ACTION
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
 
         intent.setClass(mContext, InCallActivity.class);
         if (showDialpad) {
             intent.putExtra(InCallActivity.SHOW_DIALPAD_EXTRA, true);
         }
         intent.putExtra(InCallActivity.NEW_OUTGOING_CALL_EXTRA, newOutgoingCall);
-        intent.putExtra(InCallActivity.SHOW_CIRCULAR_REVEAL_EXTRA, showCircularReveal);
         return intent;
     }
 
@@ -1359,7 +1335,11 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     }
 
     private MaterialPalette getColorsFromCall(Call call) {
-        return getColorsFromPhoneAccountHandle(call == null ? null : call.getAccountHandle());
+        if (call == null) {
+            return getColorsFromPhoneAccountHandle(mPendingPhoneAccountHandle);
+        } else {
+            return getColorsFromPhoneAccountHandle(call.getAccountHandle());
+        }
     }
 
     private MaterialPalette getColorsFromPhoneAccountHandle(PhoneAccountHandle phoneAccountHandle) {

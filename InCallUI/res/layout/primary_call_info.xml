@@ -109,7 +109,8 @@
                     android:textColor="@color/incall_call_banner_subtext_color"
                     android:textSize="@dimen/call_label_text_size"
                     android:singleLine="true"
-                    android:textDirection="ltr" />
+                    android:textDirection="ltr"
+                    android:visibility="gone" />
 
                 <TextView android:id="@+id/phoneNumber"
                     android:layout_width="match_parent"
@@ -118,7 +119,8 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/incall_call_banner_subtext_color"
                     android:textSize="@dimen/call_label_text_size"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:visibility="gone" />
 
         </LinearLayout>
 
@@ -145,6 +147,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/incall_call_banner_text_color"
         android:maxLines="1"
-        android:ellipsize="end" />
+        android:ellipsize="end"
+        android:visibility="gone" />
 
 </LinearLayout>  <!-- End of call_banner -->
