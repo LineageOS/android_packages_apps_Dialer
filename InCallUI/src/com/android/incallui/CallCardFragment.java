@@ -378,7 +378,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mPrimaryName.setText(null);
         } else {
             mPrimaryName.setText(nameIsNumber
-                    ? PhoneNumberUtils.ttsSpanAsPhoneNumber(name)
+                    ? PhoneNumberUtils.getPhoneTtsSpannable(name)
                     : name);
 
             // Set direction of the name field
@@ -404,7 +404,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mPhoneNumber.setText(null);
             mPhoneNumber.setVisibility(View.GONE);
         } else {
-            mPhoneNumber.setText(PhoneNumberUtils.ttsSpanAsPhoneNumber(number));
+            mPhoneNumber.setText(PhoneNumberUtils.getPhoneTtsSpannable(number));
             mPhoneNumber.setVisibility(View.VISIBLE);
             mPhoneNumber.setTextDirection(View.TEXT_DIRECTION_LTR);
         }
@@ -462,7 +462,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mSecondaryCallConferenceCallIcon.setVisibility(isConference ? View.VISIBLE : View.GONE);
 
             mSecondaryCallName.setText(nameIsNumber
-                    ? PhoneNumberUtils.ttsSpanAsPhoneNumber(name)
+                    ? PhoneNumberUtils.getPhoneTtsSpannable(name)
                     : name);
             if (hasProvider) {
                 mSecondaryCallProviderLabel.setText(providerLabel);
