@@ -125,13 +125,13 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
             selectionArgs.add(String.valueOf(to));
         }
         if (slotId > CALL_SUB_ALL) {
-            long[] subId = SubscriptionManager.getSubId(slotId);
+            int[] subId = SubscriptionManager.getSubId(slotId);
             if (subId != null && subId.length >= 1) {
                 if (selection.length() > 0) {
                     selection.append(" AND ");
                 }
                 selection.append(String.format("(%s = ?)", Calls.PHONE_ACCOUNT_ID));
-                selectionArgs.add(Long.toString(subId[0]));
+                selectionArgs.add(Integer.toString(subId[0]));
             }
         }
 
@@ -181,7 +181,7 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
             if (pending == null || !CallUtil.phoneNumbersEqual(pending.number.toString(), number)) {
                 final long date = cursor.getLong(CallStatsQuery.DATE);
                 final int numberPresentation = cursor.getInt(CallStatsQuery.NUMBER_PRESENTATION);
-                final long accountId = cursor.getLong(CallStatsQuery.PHONE_ACCOUNT_ID);
+                final int accountId = cursor.getInt(CallStatsQuery.PHONE_ACCOUNT_ID);
                 final String countryIso = cursor.getString(CallStatsQuery.COUNTRY_ISO);
                 final String geocode = cursor.getString(CallStatsQuery.GEOCODED_LOCATION);
                 final ContactInfo info = getContactInfoFromCallStats(cursor);

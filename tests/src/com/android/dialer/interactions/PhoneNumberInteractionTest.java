@@ -48,11 +48,6 @@ import java.util.List;
 @SmallTest
 public class PhoneNumberInteractionTest extends InstrumentationTestCase {
 
-    static {
-        // AsyncTask class needs to be initialized on the main thread.
-        AsyncTask.init();
-    }
-
     private final static class TestPhoneNumberInteraction extends PhoneNumberInteraction {
         private ArrayList<PhoneItem> mPhoneList;
 

@@ -31,7 +31,7 @@ import com.android.dialer.calllog.ContactInfo;
  */
 public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
     public final String number;
-    public final long accountId;
+    public final int accountId;
     public final int numberPresentation;
     public String formattedNumber;
     public final String countryIso;
@@ -50,7 +50,7 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
     public int missedCount;
     public int blacklistCount;
 
-    public CallStatsDetails(CharSequence number, long accountId, int numberPresentation,
+    public CallStatsDetails(CharSequence number, int accountId, int numberPresentation,
             ContactInfo info, String countryIso, String geocode, long date) {
         this.number = number != null ? number.toString() : null;
         this.accountId = accountId;
@@ -107,7 +107,7 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
         return geocode;
     }
     @Override
-    public long getAccountId() {
+    public int getAccountId() {
         return accountId;
     }
 
@@ -214,7 +214,7 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(number);
-        out.writeLong(accountId);
+        out.writeInt(accountId);
         out.writeInt(numberPresentation);
         out.writeString(formattedNumber);
         out.writeString(countryIso);
@@ -247,7 +247,7 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
 
     private CallStatsDetails (Parcel in) {
         number = in.readString();
-        accountId = in.readLong();
+        accountId = in.readInt();
         numberPresentation = in.readInt();
         formattedNumber = in.readString();
         countryIso = in.readString();

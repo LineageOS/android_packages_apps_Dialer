@@ -714,7 +714,7 @@ public class DialpadFragment extends AnalyticsFragment
             if (SubscriptionManager.isVoicePromptEnabled()) {
                 mOperator.setVisibility(View.GONE);
             } else {
-                long subId = SubscriptionManager.getDefaultVoiceSubId();
+                int subId = SubscriptionManager.getDefaultVoiceSubId();
                 mOperator.setVisibility(View.VISIBLE);
                 mOperator.setText(MoreContactUtils.getNetworkSpnName(mContext, subId));
             }
@@ -1178,7 +1178,7 @@ public class DialpadFragment extends AnalyticsFragment
     private void ipCallBySlot(int slotId) {
         String prefix = MoreContactUtils.getIPCallPrefix(mContext, slotId);
         if (!TextUtils.isEmpty(prefix)) {
-            long[] subId = SubscriptionManager.getSubId(slotId);
+            int[] subId = SubscriptionManager.getSubId(slotId);
             if (subId != null && subId.length >= 1) {
                 ComponentName serviceName =
                         new ComponentName("com.android.phone",
@@ -1803,7 +1803,7 @@ public class DialpadFragment extends AnalyticsFragment
             //return hasVMNumber();
             return true;
         } else {
-            long subId = SubscriptionManager.getDefaultVoiceSubId();
+            int subId = SubscriptionManager.getDefaultVoiceSubId();
             try {
                 return !TextUtils.isEmpty(getTelephonyManager().getVoiceMailNumber(subId));
             } catch (SecurityException se) {
@@ -1819,7 +1819,7 @@ public class DialpadFragment extends AnalyticsFragment
         int phoneCount = getTelephonyManager().getPhoneCount();
         for (int i = 0; i < phoneCount; i++) {
             try {
-                long[] subId = SubscriptionManager.getSubId(i);
+                int[] subId = SubscriptionManager.getSubId(i);
                 hasVMNum = getTelephonyManager().getVoiceMailNumber(subId[0]) != null;
             } catch (SecurityException se) {
                 // Possibly no READ_PHONE_STATE privilege.
@@ -1845,7 +1845,7 @@ public class DialpadFragment extends AnalyticsFragment
                         // go to voicemail setting screen to set its number.
                         Intent intent = new Intent(ACTION_ADD_VOICEMAIL);
                         if (getTelephonyManager().isMultiSimEnabled()) {
-                            long subId = SubscriptionManager.getDefaultVoiceSubId();
+                            int subId = SubscriptionManager.getDefaultVoiceSubId();
                             intent.setClassName("com.android.phone",
                                     "com.android.phone.MSimCallFeaturesSubSetting");
                             intent.putExtra(SUBSCRIPTION_KEY, subId);
@@ -2038,7 +2038,7 @@ public class DialpadFragment extends AnalyticsFragment
     }
 
     private PhoneStateListener getPhoneStateListener(int phoneId) {
-        long[] subId = SubscriptionManager.getSubId(phoneId);
+        int[] subId = SubscriptionManager.getSubId(phoneId);
 
         if (subId == null) {
             return null;

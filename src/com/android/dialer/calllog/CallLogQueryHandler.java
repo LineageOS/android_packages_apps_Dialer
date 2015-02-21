@@ -205,7 +205,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         }
 
         if (slotId > CALL_SUB_ALL) {
-            long[] subId = SubscriptionManager.getSubId(slotId);
+            int[] subId = SubscriptionManager.getSubId(slotId);
             if (subId != null && subId.length >= 1) {
                 if (where.length() > 0) {
                     where.append(" AND ");
