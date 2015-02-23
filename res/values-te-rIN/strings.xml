@@ -33,10 +33,7 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"కాల్ చరిత్రను క్లియర్ చేయాలా?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"దీని వలన మీ చరిత్ర నుండి అన్ని కాల్‌లు తొలగించబడతాయి"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"కాల్ చరిత్రను క్లియర్ చేస్తోంది…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"వాయిస్ మెయిల్"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> వాయిస్ మెయిల్‌లు"</item>
-  </plurals>
+    <!-- no translation found for notification_voicemail_title (9088953961148324851) -->
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"ప్లే చేయి"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> నుండి కొత్త వాయిస్ మెయిల్"</string>
@@ -184,7 +181,6 @@
     <string name="ringtone_title" msgid="760362035635084653">"ఫోన్ రింగ్‌టోన్"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"కాల్‌ల కోసం వైబ్రేట్ కూడా చేయి"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"డయల్‌ప్యాడ్ టోన్‌లు"</string>
-    <string name="other_settings_title" msgid="7976283601445863248">"ఇతరం"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"శీఘ్ర ప్రతిస్పందనలు"</string>
     <string name="call_settings_label" msgid="313434211353070209">"కాల్‌లు"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"కాల్ చేసే ఖాతాలు"</string>

@@ -33,10 +33,7 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Kas kustutada kõneajalugu?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"See kustutab ajaloost kõik kõned"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Kõneajaloo kustutamine ..."</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Kõnepost"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> kõnepostisõnumit"</item>
-  </plurals>
+    <!-- no translation found for notification_voicemail_title (9088953961148324851) -->
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Esitamine"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Uus kõnepostisõnum kasutajalt <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -184,7 +181,6 @@
     <string name="ringtone_title" msgid="760362035635084653">"Telefoni helin"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibreeri ka kõnede puhul"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Valimisklahvistiku toonid"</string>
-    <string name="other_settings_title" msgid="7976283601445863248">"Muu"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Kiirvastused"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Kõned"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Helistamiskontod"</string>

@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Törli a híváslistát?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Ezzel törli az összes hívást az előzmények közül"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Híváslista törlése…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Hangposta"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> hangüzenet"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> hangpostaüzenet </item>
+      <item quantity="one">Hangpostaüzenet</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Lejátszás"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Új hangüzenet tőle: <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -184,7 +184,6 @@
     <string name="ringtone_title" msgid="760362035635084653">"Telefon csengőhangja"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Rezgés a hívásoknál is"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tárcsázó hangjai"</string>
-    <string name="other_settings_title" msgid="7976283601445863248">"Egyéb"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Gyors válaszok"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Hívások"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Telefonos fiókok"</string>
