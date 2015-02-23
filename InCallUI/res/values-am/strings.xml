@@ -45,9 +45,9 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"በመዝጋት ላይ"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"ጥሪ ላይ"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"ቁጥሬ<xliff:g id="MY_PHONE_NUMBER">%s</xliff:g> ነው"</string>
-    <string name="card_title_video_call_connecting" msgid="297586766381973954">"ቪዲዮ በማገናኘት ላይ"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"ቪድዮ በማገናኘት ላይ"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"የቪዲዮ ጥሪ"</string>
-    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"ቪዲዮ በመጠየቅ ላይ"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"ቪድዮ በመጠየቅ ላይ"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"የቪዲዮ ጥሪን ማገናኘት አልተቻለም"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"የእርስዎ የመልሶ መደወያ ቁጥር\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"የእርስዎ የድንገተኛ አደጋ መልሶ መደወያ ቁጥር\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
@@ -69,7 +69,7 @@
     <string name="notification_network_selection_text" msgid="2607085729661923269">"የተመረጠ አውታረመረብ(<xliff:g id="OPERATOR_NAME">%s</xliff:g>) የለም"</string>
     <string name="notification_action_answer" msgid="6700362365135365143">"መልስ"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"ዝጋ"</string>
-    <string name="notification_action_answer_video" msgid="7809271910870211729">"ቪዲዮ"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"ቪድዮ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"ድምፅ"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"ተቀበል"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"አሰናብት"</string>
@@ -113,7 +113,7 @@
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"የቪዲዮ ጥሪ"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"ወደ ድምጽ ጥሪ ይለውጡ"</string>
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"ካሜራ ቀይር"</string>
-    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"ቪዲዮ ለአፍታ አቁም"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"ቪድዮ ለአፍታ አቁም"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"ተጨማሪ አማራጮች"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"አገልግሎት"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"አዋቅር"</string>
@@ -130,7 +130,7 @@
     <string name="description_target_answer" msgid="7205604197797472471">"መልስ"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS ላክ"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"አትቀበል"</string>
-    <string name="description_target_answer_video_call" msgid="3495965588512395026">"እንደ ቪዲዮ ጥሪ ይመልሱ"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"እንደ ቪድዮ ጥሪ ይመልሱ"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"እንደ ድምጽ ጥሪ ይመልሱ"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"የቪዲዮ ጥያቄ ተቀበል"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"የቪዲዮ ጥያቄ አትቀበል"</string>
