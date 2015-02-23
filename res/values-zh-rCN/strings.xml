@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
+  ~ Copyright (C) 2013-2015 The Linux Foundation. All Rights Reserved.
+  ~ Not a Contribution.
   ~ Copyright (C) 2012 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -226,4 +228,8 @@
     <string name="firewall_number_in_white">"该号码已在白名单中"</string>
     <string name="firewall_save_success">保存成功</string>
     <string name="firewall_add_blacklist_wring">如果将该号码加入黑名单，你将不会再收到该号码的消息和来电</string>
+    <string name="set_speed_dial">快速拨号设置</string>
+    <string name="input_number">"输入号码"</string>
+    <string name="speed_dial_cancel">"取消"</string>
+    <string name="speed_dial_ok">"确定"</string>
 </resources>

@@ -73,4 +73,14 @@
 
     </FrameLayout>
 
+    <TextView
+        android:id="@+id/dialpad_floating_operator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialpad_floating_action_button_container"
+        android:layout_centerHorizontal="true"
+        android:textColor="?attr/call_log_secondary_text_color"
+        android:textSize="12sp"
+        android:singleLine="true"
+        android:visibility="gone" />
 </view>

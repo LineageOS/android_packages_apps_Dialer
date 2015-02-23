@@ -73,4 +73,21 @@
     <string name="speed_dial_settings">快速拨号设置</string>
     <string name="lookup_settings_description">未知号码查询</string>
     <string name="call_stats_reset_filter">重置时间范围</string>
+    <plurals name="hour">
+        <item quantity="one">1 小时</item>
+        <item quantity="other">%d 小时</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 分钟</item>
+        <item quantity="other">%d 分钟</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 秒</item>
+        <item quantity="other">%d 秒</item>
+    </plurals>
+
+    <plurals name="call">
+        <item quantity="one">1 个电话</item>
+        <item quantity="other">%d 个电话</item>
+    </plurals>
 </resources>
