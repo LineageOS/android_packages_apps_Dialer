@@ -120,6 +120,12 @@ public class VoicemailPlaybackFragment extends Fragment {
     }
 
     @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        mPresenter.onRestoreInstanceState(savedInstanceState);
+        super.onViewStateRestored(savedInstanceState);
+    }
+
+    @Override
     public void onDestroy() {
         shutdownMediaPlayer();
         mPresenter.onDestroy();

@@ -32,6 +32,7 @@ import com.android.dialer.R;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.ex.variablespeed.MediaPlayerProxy;
 import com.android.ex.variablespeed.SingleThreadedMediaPlayerProxy;
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 
@@ -110,8 +111,8 @@ public class VoicemailPlaybackPresenter {
      * If present in the saved instance bundle, we should not resume playback on
      * create.
      */
-    private static final String PAUSED_STATE_KEY = VoicemailPlaybackPresenter.class.getName()
-            + ".PAUSED_STATE_KEY";
+    private static final String IS_PLAYING_STATE_KEY = VoicemailPlaybackPresenter.class.getName()
+            + ".IS_PLAYING_STATE_KEY";
     /**
      * If present in the saved instance bundle, indicates where to set the
      * playback slider.
@@ -169,6 +170,8 @@ public class VoicemailPlaybackPresenter {
     private FetchResultHandler mFetchResultHandler;
     private PowerManager.WakeLock mWakeLock;
     private AsyncTask<Void, ?, ?> mPrepareTask;
+    private int mPosition;
+    private boolean mPlaying;
 
     public VoicemailPlaybackPresenter(PlaybackView view, MediaPlayerProxy player,
             Uri voicemailUri, ScheduledExecutorService executorService,
@@ -346,22 +349,34 @@ public class VoicemailPlaybackPresenter {
         mView.setSpeakerPhoneOn(mView.isSpeakerPhoneOn());
         mView.setRateDecreaseButtonListener(createRateDecreaseListener());
         mView.setRateIncreaseButtonListener(createRateIncreaseListener());
-        mView.setClipPosition(0, mDuration.get());
-        mView.playbackStopped();
-        // Always disable on stop.
-        mView.disableProximitySensor();
-        if (mStartPlayingImmediately) {
-            resetPrepareStartPlaying(0);
+        if (mPlaying) {
+           resetPrepareStartPlaying(mPosition);
+        } else {
+           stopPlaybackAtPosition(mPosition, mDuration.get());
+           if ((mPosition == 0) && (mStartPlayingImmediately)) {
+               resetPrepareStartPlaying(0);
+           }
         }
-        // TODO: Now I'm ignoring the bundle, when previously I was checking for contains against
-        // the PAUSED_STATE_KEY, and CLIP_POSITION_KEY.
     }
 
     public void onSaveInstanceState(Bundle outState) {
         outState.putInt(CLIP_POSITION_KEY, mView.getDesiredClipPosition());
-        if (!mPlayer.isPlaying()) {
-            outState.putBoolean(PAUSED_STATE_KEY, true);
+        outState.putBoolean(IS_PLAYING_STATE_KEY, mPlaying);
+    }
+
+    public void onRestoreInstanceState(Bundle inState) {
+        int position = 0;
+        boolean isPlaying = false;
+        if (inState != null) {
+            position = inState.getInt(CLIP_POSITION_KEY, 0);
+            isPlaying = inState.getBoolean(IS_PLAYING_STATE_KEY, false);
         }
+        setPositionAndPlayingStatus(position, isPlaying) ;
+    }
+
+    private void setPositionAndPlayingStatus(int position, boolean isPlaying) {
+       mPosition = position;
+       mPlaying = isPlaying;
     }
 
     public void onDestroy() {
@@ -469,6 +484,7 @@ public class VoicemailPlaybackPresenter {
                 try {
                     // Can throw RejectedExecutionException
                     mPlayer.start();
+                    setPositionAndPlayingStatus(mPlayer.getCurrentPosition(), true);
                     mView.playbackStarted();
                     if (!mWakeLock.isHeld()) {
                         mWakeLock.acquire();
@@ -501,6 +517,7 @@ public class VoicemailPlaybackPresenter {
         mView.playbackError(e);
         mPositionUpdater.stopUpdating();
         mPlayer.release();
+        setPositionAndPlayingStatus(0, false);
     }
 
     public void handleCompletion(MediaPlayer mediaPlayer) {
@@ -537,10 +554,15 @@ public class VoicemailPlaybackPresenter {
         @Override
         public void onStopTrackingTouch(SeekBar arg0) {
             if (mPlayer.isPlaying()) {
+                setPositionAndPlayingStatus(mPlayer.getCurrentPosition(), false);
                 stopPlaybackAtPosition(mPlayer.getCurrentPosition(), mDuration.get());
+            } else {
+                setPositionAndPlayingStatus(mView.getDesiredClipPosition(),
+                        mShouldResumePlaybackAfterSeeking);
             }
+
             if (mShouldResumePlaybackAfterSeeking) {
-                resetPrepareStartPlaying(mView.getDesiredClipPosition());
+                postSuccessfullyFetchedContent();
             }
         }
 
@@ -575,9 +597,11 @@ public class VoicemailPlaybackPresenter {
         @Override
         public void onClick(View arg0) {
             if (mPlayer.isPlaying()) {
+                setPositionAndPlayingStatus(mPlayer.getCurrentPosition(), false);
                 stopPlaybackAtPosition(mPlayer.getCurrentPosition(), mDuration.get());
             } else {
-                resetPrepareStartPlaying(mView.getDesiredClipPosition());
+                setPositionAndPlayingStatus(mPosition, true);
+                postSuccessfullyFetchedContent();
             }
         }
     }
