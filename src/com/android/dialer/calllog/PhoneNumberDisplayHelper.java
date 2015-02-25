@@ -41,7 +41,7 @@ public class PhoneNumberDisplayHelper {
         mResources = resources;
     }
 
-    /* package */ CharSequence getDisplayName(long subId, CharSequence number, int presentation) {
+    /* package */ CharSequence getDisplayName(int subId, CharSequence number, int presentation) {
         if (presentation == Calls.PRESENTATION_UNKNOWN) {
             return mResources.getString(R.string.unknown);
         }
@@ -66,7 +66,7 @@ public class PhoneNumberDisplayHelper {
      * @param number the number to display
      * @param formattedNumber the formatted number if available, may be null
      */
-    public CharSequence getDisplayNumber(long subId, CharSequence number,
+    public CharSequence getDisplayNumber(int subId, CharSequence number,
             int presentation, CharSequence formattedNumber) {
         final CharSequence displayName = getDisplayName(subId, number, presentation);
         if (!TextUtils.isEmpty(displayName)) {

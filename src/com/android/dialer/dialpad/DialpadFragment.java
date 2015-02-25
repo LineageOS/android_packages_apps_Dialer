@@ -1657,7 +1657,7 @@ public class DialpadFragment extends AnalyticsFragment
         if (promptEnabled) {
             hasVMNumber();
         } else {
-            long subId = SubscriptionManager.getDefaultVoiceSubId();
+            int subId = SubscriptionManager.getDefaultVoiceSubId();
             try {
                 return getTelephonyManager().getVoiceMailNumber(subId) != null;
             } catch (SecurityException se) {
@@ -1673,7 +1673,7 @@ public class DialpadFragment extends AnalyticsFragment
         int phoneCount = getTelephonyManager().getPhoneCount();
         for (int i = 0; i < phoneCount; i++) {
             try {
-                long[] subId = SubscriptionManager.getSubId(i);
+                int[] subId = SubscriptionManager.getSubId(i);
                 hasVMNum = getTelephonyManager().getVoiceMailNumber(subId[0]) != null;
             } catch (SecurityException se) {
                 // Possibly no READ_PHONE_STATE privilege.
