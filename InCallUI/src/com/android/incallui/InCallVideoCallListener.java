@@ -86,9 +86,14 @@ public class InCallVideoCallListener extends VideoCall.Listener {
                 VideoProfile.VideoState.isBidirectional(responseProfile.getVideoState());
 
         if (modifySucceeded && isVideoCall) {
+            // Local Upgrade success
             InCallVideoCallListenerNotifier.getInstance().upgradeToVideoSuccess(mCall);
         } else if (!modifySucceeded || status != Connection.VideoProvider.SESSION_MODIFY_REQUEST_SUCCESS) {
+            // Remote didn't accept invitation in bidirectional state or failure
             InCallVideoCallListenerNotifier.getInstance().upgradeToVideoFail(mCall);
+        } else if (modifySucceeded && !isVideoCall) {
+            // Local Downgrade success (should always be successful)
+            InCallVideoCallListenerNotifier.getInstance().downgradeToAudio(mCall);
         }
     }
 
