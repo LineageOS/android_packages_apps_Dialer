@@ -125,8 +125,8 @@
     <string name="contact_list_loading" msgid="5488620820563977329">"جارٍ التحميل..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"‏جارٍ التحميل من بطاقة SIM…"</string>
-    <string name="simContacts_title" msgid="27341688347689769">"‏بطاقة SIM وجهات الاتصال"</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"‏جارٍ التحميل من شريحة SIM…"</string>
+    <string name="simContacts_title" msgid="27341688347689769">"‏شريحة SIM وجهات الاتصال"</string>
     <string name="add_contact_not_available" msgid="5547311613368004859">"لا يتوفر تطبيق لجهات الاتصال"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"البحث الصوتي غير متاح"</string>
     <string name="call_not_available" msgid="8941576511946492225">"يتعذر إجراء مكالمة هاتفية نظرًا لأنه تم تعطيل تطبيق الهاتف."</string>

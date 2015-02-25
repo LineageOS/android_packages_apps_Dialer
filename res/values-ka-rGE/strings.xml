@@ -33,7 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"გასუფთავდეს ზარის ისტორია?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ეს წაშლის ყველა ზარს თქვენი ისტორიიდან"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"მიმდ. ზარ. ისტ. გასუფთავება…"</string>
-    <!-- no translation found for notification_voicemail_title (9088953961148324851) -->
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> ხმოვანი ფოსტა </item>
+      <item quantity="one">ხმოვანი ფოსტა</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"დაკვრა"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"ახალი ხმოვანი ფოსტა <xliff:g id="CALLER">%1$s</xliff:g>-ისგან"</string>

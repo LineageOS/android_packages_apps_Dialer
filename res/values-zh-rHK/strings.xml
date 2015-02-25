@@ -34,8 +34,8 @@
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"這會刪除所有通話記錄"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"正在清除通話記錄…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
-      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> 則語音留言</item>
-      <item quantity="one">語音留言</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 個留言</item>
+      <item quantity="one">留言</item>
     </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"播放"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g> ， <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
