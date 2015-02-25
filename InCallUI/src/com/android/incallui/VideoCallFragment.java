@@ -164,7 +164,7 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
             // orientation change.
             if (mSavedSurfaceTexture == null) {
                 mSavedSurfaceTexture = surfaceTexture;
-                surfaceCreated = createSurface();
+                surfaceCreated = createSurface(width, height);
             } else {
                 // A saved SurfaceTexture was found.
                 surfaceCreated = true;
@@ -266,18 +266,20 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
             mHeight = height;
 
             if (mSavedSurfaceTexture != null) {
-                createSurface();
+                createSurface(width, height);
             }
         }
 
         /**
          * Creates the {@link Surface}, adjusting the {@link SurfaceTexture} buffer size.
+         * @param width The width of the surface to create.
+         * @param height The height of the surface to create.
          */
-        private boolean createSurface() {
-            if (mWidth != DIMENSIONS_NOT_SET && mHeight != DIMENSIONS_NOT_SET &&
-                    mSavedSurfaceTexture != null) {
+        private boolean createSurface(int width, int height) {
+            if (width != DIMENSIONS_NOT_SET && height != DIMENSIONS_NOT_SET
+                    && mSavedSurfaceTexture != null) {
 
-                mSavedSurfaceTexture.setDefaultBufferSize(mWidth, mHeight);
+                mSavedSurfaceTexture.setDefaultBufferSize(width, height);
                 mSavedSurface = new Surface(mSavedSurfaceTexture);
                 return true;
             }
