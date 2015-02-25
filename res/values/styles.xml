@@ -166,9 +166,9 @@
     <!-- Style applied to the "Settings" screen.  Keep in sync with SettingsLight in Telephony. -->
     <style name="SettingsStyle" parent="DialtactsThemeWithoutActionBarOverlay">
         <!-- Setting text. -->
-        <item name="android:textColor">@color/setting_primary_color</item>
+        <item name="android:textColorPrimary">@color/settings_text_color_primary</item>
         <!-- Setting description. -->
-        <item name="android:textColorSecondary">@color/setting_secondary_color</item>
+        <item name="android:textColorSecondary">@color/settings_text_color_secondary</item>
         <item name="android:windowBackground">@color/setting_background_color</item>
         <item name="android:colorAccent">@color/dialtacts_theme_color</item>
         <item name="android:textColorLink">@color/dialtacts_theme_color</item>
