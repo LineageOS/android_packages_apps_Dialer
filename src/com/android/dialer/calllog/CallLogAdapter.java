@@ -27,6 +27,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
@@ -820,6 +821,7 @@ public class CallLogAdapter extends GroupingListAdapter
         } else {
             setPhoto(views, photoId, lookupUri, nameForDefaultImage, lookupKey, contactType);
         }
+        views.quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
 
         // Listen for the first draw
         if (mViewTreeObserver == null) {

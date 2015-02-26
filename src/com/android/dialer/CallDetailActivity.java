@@ -245,6 +245,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
 
         mQuickContactBadge = (QuickContactBadge) findViewById(R.id.quick_contact_photo);
         mQuickContactBadge.setOverlay(null);
+        mQuickContactBadge.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
         mCallerName = (TextView) findViewById(R.id.caller_name);
         mCallerNumber = (TextView) findViewById(R.id.caller_number);
         mAccountLabel = (TextView) findViewById(R.id.phone_account_label);
