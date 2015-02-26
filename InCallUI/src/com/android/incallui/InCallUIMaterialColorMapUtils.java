@@ -45,8 +45,8 @@ public class InCallUIMaterialColorMapUtils extends MaterialColorMapUtils {
     }
 
     public static MaterialPalette getDefaultPrimaryAndSecondaryColors(Resources resources) {
-        final int primaryColor = resources.getColor(R.color.dialer_theme_color);
-        final int secondaryColor = resources.getColor(R.color.dialer_theme_color_dark);
+        final int primaryColor = resources.getColor(R.color.dialer_theme_color, null);
+        final int secondaryColor = resources.getColor(R.color.dialer_theme_color_dark, null);
         return new MaterialPalette(primaryColor, secondaryColor);
     }
 }

@@ -62,7 +62,6 @@ public class PostCharDialogFragment extends DialogFragment {
         });
 
         final AlertDialog dialog = builder.create();
-        dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
         return dialog;
     }
 

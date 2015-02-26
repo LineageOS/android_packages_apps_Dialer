@@ -131,16 +131,19 @@ public final class AccelerometerListener {
     }
 
     SensorEventListener mSensorListener = new SensorEventListener() {
+        @Override
         public void onSensorChanged(SensorEvent event) {
             onSensorEvent(event.values[0], event.values[1], event.values[2]);
         }
 
+        @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
             // ignore
         }
     };
 
     Handler mHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
             case ORIENTATION_CHANGED:
