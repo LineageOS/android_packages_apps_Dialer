@@ -273,15 +273,6 @@
                   android:screenOrientation="nosensor" >
         </activity>
 
-        <activity android:name="com.android.incallui.CircularRevealActivity"
-                  android:theme="@style/Theme.CircularRevealAnimation"
-                  android:exported="false"
-                  android:configChanges="keyboardHidden|orientation"
-                  android:launchMode="singleInstance"
-                  android:noHistory="true"
-                  android:excludeFromRecents="true"
-                  android:screenOrientation="nosensor" />
-
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
         <receiver android:name="com.android.incallui.InCallApp$NotificationBroadcastReceiver"
                   android:exported="false">
