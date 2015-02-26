@@ -694,12 +694,9 @@
          [CHAR LIMIT=40] -->
     <string name="display_options_title">Display options</string>
 
-    <!-- Label for the general dialer settings section [CHAR LIMIT=30]-->
-    <string name="general_settings_label">General</string>
-
-    <!-- Title for the category "sounds", which is shown above sounds and vibration related
-         settings. [CHAR LIMIT=30] -->
-    <string name="sounds_and_vibrate_category_title">Sounds and vibrate</string>
+    <!-- Title for the "Sounds and vibration" settings control settings related to ringtones,
+         dialpad tones, and vibration for incoming calls. [CHAR LIMIT=40] -->
+    <string name="sounds_and_vibration_title">Sounds and vibration</string>
 
     <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
     <string name="ringtone_title">Phone ringtone</string>

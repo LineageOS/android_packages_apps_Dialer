@@ -24,7 +24,6 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -40,9 +39,8 @@ import java.lang.Runnable;
 import java.lang.String;
 import java.lang.Thread;
 
-public class GeneralSettingsFragment extends PreferenceFragment
+public class SoundSettingsFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener {
-    private static final String CATEGORY_SOUNDS_KEY    = "dialer_general_sounds_category_key";
     private static final String BUTTON_RINGTONE_KEY    = "button_ringtone_key";
     private static final String BUTTON_VIBRATE_ON_RING = "button_vibrate_on_ring";
     private static final String BUTTON_PLAY_DTMF_TONE  = "button_play_dtmf_tone";
@@ -73,19 +71,18 @@ public class GeneralSettingsFragment extends PreferenceFragment
 
         mContext = getActivity().getApplicationContext();
 
-        addPreferencesFromResource(R.xml.general_settings);
+        addPreferencesFromResource(R.xml.sound_settings);
 
         mRingtonePreference = findPreference(BUTTON_RINGTONE_KEY);
         mVibrateWhenRinging = (CheckBoxPreference) findPreference(BUTTON_VIBRATE_ON_RING);
         mPlayDtmfTone = (CheckBoxPreference) findPreference(BUTTON_PLAY_DTMF_TONE);
 
-        PreferenceCategory soundCategory = (PreferenceCategory) findPreference(CATEGORY_SOUNDS_KEY);
         if (mVibrateWhenRinging != null) {
             Vibrator vibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
             if (vibrator != null && vibrator.hasVibrator()) {
                 mVibrateWhenRinging.setOnPreferenceChangeListener(this);
             } else {
-                soundCategory.removePreference(mVibrateWhenRinging);
+                getPreferenceScreen().removePreference(mVibrateWhenRinging);
                 mVibrateWhenRinging = null;
             }
         }
@@ -109,6 +106,18 @@ public class GeneralSettingsFragment extends PreferenceFragment
                 }
             }
         };
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mVibrateWhenRinging != null) {
+            mVibrateWhenRinging.setChecked(getVibrateWhenRingingSetting(mContext));
+        }
+
+        // Lookup the ringtone name asynchronously.
+        new Thread(mRingtoneLookupRunnable).start();
     }
 
     /**
@@ -139,17 +148,6 @@ public class GeneralSettingsFragment extends PreferenceFragment
         return true;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if (mVibrateWhenRinging != null) {
-            mVibrateWhenRinging.setChecked(getVibrateWhenRingingSetting(mContext));
-        }
-
-        // Lookup the ringtone name asynchronously.
-        new Thread(mRingtoneLookupRunnable).start();
-    }
 
     /**
      * Obtain the setting for "vibrate when ringing" setting.

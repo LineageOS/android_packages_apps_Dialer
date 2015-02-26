@@ -41,10 +41,10 @@ public class DialerSettingsActivity extends PreferenceActivity {
         displayOptionsHeader.fragment = DisplayOptionsFragment.class.getName();
         target.add(displayOptionsHeader);
 
-        Header generalSettingsHeader = new Header();
-        generalSettingsHeader.titleRes = R.string.general_settings_label;
-        generalSettingsHeader.fragment = GeneralSettingsFragment.class.getName();
-        target.add(generalSettingsHeader);
+        Header soundSettingsHeader = new Header();
+        soundSettingsHeader.titleRes = R.string.sounds_and_vibration_title;
+        soundSettingsHeader.fragment = SoundSettingsFragment.class.getName();
+        target.add(soundSettingsHeader);
 
         Header quickResponseSettingsHeader = new Header();
         Intent quickResponseSettingsIntent =
