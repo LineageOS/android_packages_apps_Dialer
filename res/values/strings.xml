@@ -698,6 +698,10 @@
          dialpad tones, and vibration for incoming calls. [CHAR LIMIT=40] -->
     <string name="sounds_and_vibration_title">Sounds and vibration</string>
 
+    <!-- Title for "Accessibility" category, which controls settings such as TTY mode and hearing
+         aid compatability. [CHAR LIMIT=40] -->
+    <string name="accessibility_settings_title">Accessibility</string>
+
     <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
     <string name="ringtone_title">Phone ringtone</string>
 
