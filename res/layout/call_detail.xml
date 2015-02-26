@@ -100,18 +100,4 @@
 
 
     </LinearLayout>
-    <!--
-         Used to hide the UI when playing a voicemail and the proximity sensor
-         is detecting something near the screen.
-      -->
-    <View
-        android:id="@+id/blank"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/black"
-        android:visibility="gone"
-        android:clickable="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        />
 </RelativeLayout>
