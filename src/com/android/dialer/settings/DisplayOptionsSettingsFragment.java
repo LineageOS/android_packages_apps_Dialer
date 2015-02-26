@@ -21,11 +21,11 @@ import android.preference.PreferenceFragment;
 
 import com.android.dialer.R;
 
-public class DisplayOptionsFragment extends PreferenceFragment {
+public class DisplayOptionsSettingsFragment extends PreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.display_options);
+        addPreferencesFromResource(R.xml.display_options_settings);
     }
 }
