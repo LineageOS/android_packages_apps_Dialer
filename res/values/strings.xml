@@ -690,12 +690,12 @@
 
     <!-- Dialer settings related strings-->
 
+    <!-- Title for "Display options" category, which controls how contacts are shown.
+         [CHAR LIMIT=40] -->
+    <string name="display_options_title">Display options</string>
+
     <!-- Label for the general dialer settings section [CHAR LIMIT=30]-->
     <string name="general_settings_label">General</string>
-
-    <!-- Title for "Contact display options" category, which is shown above options which
-         manipulate how contacts are shown. [CHAR LIMIT=40] -->
-    <string name="contact_display_options_category_title">Contact display options</string>
 
     <!-- Title for the category "sounds", which is shown above sounds and vibration related
          settings. [CHAR LIMIT=30] -->

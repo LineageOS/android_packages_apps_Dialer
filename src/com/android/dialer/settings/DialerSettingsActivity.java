@@ -43,6 +43,11 @@ public class DialerSettingsActivity extends PreferenceActivity {
 
     @Override
     public void onBuildHeaders(List<Header> target) {
+        Header displayOptionsHeader = new Header();
+        displayOptionsHeader.titleRes = R.string.display_options_title;
+        displayOptionsHeader.fragment = DisplayOptionsFragment.class.getName();
+        target.add(displayOptionsHeader);
+
         Header generalSettingsHeader = new Header();
         generalSettingsHeader.titleRes = R.string.general_settings_label;
         generalSettingsHeader.fragment = GeneralSettingsFragment.class.getName();

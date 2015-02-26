@@ -19,23 +19,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:key="dialer_contact_display_options_category_key"
-        android:title="@string/contact_display_options_category_title"
-        android:persistent="false">
-
-        <com.android.contacts.common.preference.SortOrderPreference
-            android:key="sortOrder"
-            android:title="@string/display_options_sort_list_by"
-            android:dialogTitle="@string/display_options_sort_list_by" />
-
-        <com.android.contacts.common.preference.DisplayOrderPreference
-            android:key="displayOrder"
-            android:title="@string/display_options_view_names_as"
-            android:dialogTitle="@string/display_options_view_names_as" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:key="dialer_general_sounds_category_key"
         android:title="@string/sounds_and_vibrate_category_title"
         android:persistent="false">
