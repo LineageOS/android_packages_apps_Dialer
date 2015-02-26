@@ -17,6 +17,7 @@
 package com.android.dialer.list;
 
 import android.content.Context;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.QuickContact;
 import android.util.AttributeSet;
 import android.view.View;
@@ -63,7 +64,7 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
 
     private void launchQuickContact() {
         QuickContact.showQuickContact(getContext(), PhoneFavoriteSquareTileView.this,
-                getLookupUri(), QuickContact.MODE_LARGE, null);
+                getLookupUri(), null, Phone.CONTENT_ITEM_TYPE);
     }
 
     @Override

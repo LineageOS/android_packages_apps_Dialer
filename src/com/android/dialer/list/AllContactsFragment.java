@@ -18,6 +18,7 @@ package com.android.dialer.list;
 
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.QuickContact;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +84,8 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final Uri uri = (Uri) view.getTag();
         if (uri != null) {
-            QuickContact.showQuickContact(getActivity(), view, uri, QuickContact.MODE_LARGE, null);
+            QuickContact.showQuickContact(getContext(), view, uri, null,
+                    Phone.CONTENT_ITEM_TYPE);
         }
     }
 
