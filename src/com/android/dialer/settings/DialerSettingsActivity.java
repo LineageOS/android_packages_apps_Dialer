@@ -15,13 +15,7 @@ import android.preference.PreferenceActivity.Header;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.TextView;
 
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
@@ -31,7 +25,6 @@ import java.util.List;
 public class DialerSettingsActivity extends PreferenceActivity {
 
     protected SharedPreferences mPreferences;
-    private HeaderAdapter mHeaderAdapter;
 
     private static final int OWNER_HANDLE_ID = 0;
 
@@ -95,23 +88,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
         return true;
     }
 
-    @Override
-    public void setListAdapter(ListAdapter adapter) {
-        if (adapter == null) {
-            super.setListAdapter(null);
-        } else {
-            // We don't have access to the hidden getHeaders() method, so grab the headers from
-            // the intended adapter and then replace it with our own.
-            int headerCount = adapter.getCount();
-            List<Header> headers = Lists.newArrayList();
-            for (int i = 0; i < headerCount; i++) {
-                headers.add((Header) adapter.getItem(i));
-            }
-            mHeaderAdapter = new HeaderAdapter(this, headers);
-            super.setListAdapter(mHeaderAdapter);
-        }
-    }
-
     /**
      * Whether a user handle associated with the current user is that of the primary owner. That is,
      * whether there is a user handle which has an id which matches the owner's handle.
@@ -127,52 +103,5 @@ public class DialerSettingsActivity extends PreferenceActivity {
         }
 
         return false;
-    }
-
-    /**
-     * This custom {@code ArrayAdapter} is mostly identical to the equivalent one in
-     * {@code PreferenceActivity}, except with a local layout resource.
-     */
-    private static class HeaderAdapter extends ArrayAdapter<Header> {
-        static class HeaderViewHolder {
-            TextView title;
-            TextView summary;
-        }
-
-        private LayoutInflater mInflater;
-
-        public HeaderAdapter(Context context, List<Header> objects) {
-            super(context, 0, objects);
-            mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            HeaderViewHolder holder;
-            View view;
-
-            if (convertView == null) {
-                view = mInflater.inflate(R.layout.dialer_preferences, parent, false);
-                holder = new HeaderViewHolder();
-                holder.title = (TextView) view.findViewById(R.id.title);
-                holder.summary = (TextView) view.findViewById(R.id.summary);
-                view.setTag(holder);
-            } else {
-                view = convertView;
-                holder = (HeaderViewHolder) view.getTag();
-            }
-
-            // All view fields must be updated every time, because the view may be recycled
-            Header header = getItem(position);
-            holder.title.setText(header.getTitle(getContext().getResources()));
-            CharSequence summary = header.getSummary(getContext().getResources());
-            if (!TextUtils.isEmpty(summary)) {
-                holder.summary.setVisibility(View.VISIBLE);
-                holder.summary.setText(summary);
-            } else {
-                holder.summary.setVisibility(View.GONE);
-            }
-            return view;
-        }
     }
 }
