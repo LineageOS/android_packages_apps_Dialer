@@ -49,49 +49,6 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     // notification types
     private static final int IN_CALL_NOTIFICATION = 1;
 
-    private static final long IN_CALL_TIMEOUT = 1000L;
-
-    private interface NotificationTimer {
-        enum State {
-            SCHEDULED,
-            FIRED,
-            CLEAR;
-        }
-        State getState();
-        void schedule();
-        void clear();
-    }
-
-    private NotificationTimer mNotificationTimer = new NotificationTimer() {
-        private final Handler mHandler = new Handler(new Handler.Callback() {
-            public boolean handleMessage(Message m) {
-                fire();
-                return true;
-            }
-        });
-        private State mState = State.CLEAR;
-        public State getState() { return mState; }
-        public void schedule() {
-            if (mState == State.CLEAR) {
-                Log.d(this, "updateInCallNotification: timer scheduled");
-                mHandler.sendEmptyMessageDelayed(0, IN_CALL_TIMEOUT);
-                mState = State.SCHEDULED;
-            }
-        }
-        public void clear() {
-            Log.d(this, "updateInCallNotification: timer cleared");
-            mHandler.removeMessages(0);
-            mState = State.CLEAR;
-        }
-        private void fire() {
-            Log.d(this, "updateInCallNotification: timer fired");
-            mState = State.FIRED;
-            updateNotification(
-                    InCallPresenter.getInstance().getInCallState(),
-                    InCallPresenter.getInstance().getCallList());
-        }
-    };
-
     private final Context mContext;
     private final ContactInfoCache mContactInfoCache;
     private final NotificationManager mNotificationManager;
@@ -176,58 +133,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     private void updateInCallNotification(final InCallState state, CallList callList) {
         Log.d(this, "updateInCallNotification...");
 
-        Call call = getCallToShow(callList);
+        final Call call = getCallToShow(callList);
 
-        // Whether we have an outgoing call but the incall UI has yet to show up.
-        // Since we don't normally show a notification while the incall screen is
-        // in the foreground, if we show the outgoing notification before the activity
-        // comes up the user will see it flash on and off on an outgoing call. We therefore
-        // do not show the notification for outgoing calls before the activity has started.
-        boolean isOutgoingWithoutIncallUi =
-                state == InCallState.OUTGOING &&
-                !InCallPresenter.getInstance().isActivityPreviouslyStarted();
-
-        // Whether to show a notification immediately.
-        boolean showNotificationNow =
-
-                // We can still be in the INCALL state when a call is disconnected (in order to show
-                // the "Call ended" screen. So check that we have an active connection too.
-                (call != null) &&
-
-                // We show a notification iff there is an active call.
-                state.isConnectingOrConnected() &&
-
-                // If the UI is already showing, then for most cases we do not want to show
-                // a notification since that would be redundant, unless it is an incoming call,
-                // in which case the notification is actually an important alert.
-                (!InCallPresenter.getInstance().isShowingInCallUi() || state.isIncoming()) &&
-
-                // If we have an outgoing call with no UI but the timer has fired, we show
-                // a notification anyway.
-                (!isOutgoingWithoutIncallUi ||
-                        mNotificationTimer.getState() == NotificationTimer.State.FIRED);
-
-        // For call upgrade
-        if ((call != null)
-                && (call.getSessionModificationState()
-                        == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST)) {
-            Log.d(this, "updateInCallNotification, notify of callupgrade to video!");
-            showNotificationNow = true;
-        }
-
-        if (showNotificationNow) {
+        if (call != null) {
             showNotification(call);
         } else {
             cancelInCall();
-            if (isOutgoingWithoutIncallUi &&
-                    mNotificationTimer.getState() == NotificationTimer.State.CLEAR) {
-                mNotificationTimer.schedule();
-            }
-        }
-
-        // If we see a UI, or we are done with calls for now, reset to ground state.
-        if (InCallPresenter.getInstance().isShowingInCallUi() || call == null) {
-            mNotificationTimer.clear();
         }
     }
 
