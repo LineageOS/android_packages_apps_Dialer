@@ -19,20 +19,20 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <com.android.dialer.settings.DefaultRingtonePreference
-        android:key="button_ringtone_key"
+        android:key="@string/ringtone_preference_key"
         android:title="@string/ringtone_title"
         android:dialogTitle="@string/ringtone_title"
         android:persistent="false"
         android:ringtoneType="ringtone" />
 
     <CheckBoxPreference
-        android:key="button_play_dtmf_tone"
+        android:key="@string/play_dtmf_preference_key"
         android:title="@string/dtmf_tone_enable_title"
         android:persistent="false"
         android:defaultValue="true" />
 
     <CheckBoxPreference
-        android:key="button_vibrate_on_ring"
+        android:key="@string/vibrate_on_preference_key"
         android:title="@string/vibrate_on_ring_title"
         android:persistent="false"
         android:defaultValue="false" />

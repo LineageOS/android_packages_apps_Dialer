@@ -716,4 +716,11 @@
 
     <!-- Label for the phone account settings [CHAR LIMIT=30] -->
     <string name="phone_account_settings_label">Calling accounts</string>
+
+    <!-- DO NOT TRANSLATE. Internal key for ringtone preference. -->
+    <string name="ringtone_preference_key" translatable="false">button_ringtone_key</string>
+    <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->
+    <string name="vibrate_on_preference_key" translatable="false">button_vibrate_on_ring</string>
+    <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->
+    <string name="play_dtmf_preference_key" translatable="false">button_play_dtmf_tone</string>
 </resources>
