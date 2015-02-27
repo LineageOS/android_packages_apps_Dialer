@@ -21,29 +21,9 @@
     <string name="onHold" msgid="9035493194749959955">"通話保留"</string>
     <string name="unknown" msgid="6878797917991465859">"不明"</string>
     <string name="private_num" msgid="6713286113000232309">"私人號碼"</string>
-    <string name="payphone" msgid="1931775086311769314">"公共電話"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"線路忙碌中"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"網路忙碌"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"沒有回應，已逾時"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"無法連上伺服器"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"無法撥通的號碼"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"使用者名稱或密碼有誤"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"無法進行網外撥號"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"伺服器錯誤，請稍後再試。"</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"沒有訊號"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"已達 ACM 限制"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"無線通訊關閉"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"沒有 SIM 卡或 SIM 卡發生錯誤"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"無法連線至行動網路"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"撥出受固定撥號限制。"</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"通話限制啟用時無法撥號。"</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"所有通話都受存取控制限制。"</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"緊急通話受存取控制限制。"</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"正常通話受存取控制限制。"</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"號碼無效"</string>
+    <string name="payphone" msgid="4793877574636445118">"公用電話"</string>
     <string name="confCall" msgid="1904840547188336828">"多方通話"</string>
-    <string name="call_lost" msgid="317670617901479594">"電話已斷線。"</string>
-    <string name="ok" msgid="3811371167865772377">"確定"</string>
+    <string name="call_lost" msgid="6183862117003999578">"通話已中斷"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"喇叭"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"手機聽筒"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"有線頭戴式耳機"</string>
@@ -57,7 +37,7 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"多方通話<xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"語音信箱號碼"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"撥號中"</string>
-    <string name="card_title_redialing" msgid="4831412164303596395">"重試中"</string>
+    <string name="card_title_redialing" msgid="8253487008234167266">"重撥中"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"多方通話"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"來電"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"通話結束"</string>
@@ -65,6 +45,12 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"掛斷電話"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"通話中"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"我的電話號碼：<xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"連接視訊"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"視訊通話"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"提出視訊要求"</string>
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"無法建立視訊通話連線"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"您的回撥號碼如下\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"您的緊急回撥號碼如下\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"撥號中"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"未接來電"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"未接來電"</string>
@@ -73,36 +59,47 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"通話中"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"通話保留"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"來電"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"視訊通話來電"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"收到視訊要求"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"新留言"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"新留言 (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"撥打 <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"無語音信箱號碼"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"沒有服務"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"您所選取的網路 (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) 無法使用"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"接聽"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"掛斷"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"視訊"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"語音"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"接受"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"拒絶"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"回撥"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"簡訊"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"撥號前，請先關閉飛航模式。"</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"尚未註冊網路。"</string>
-    <string name="incall_error_out_of_service" msgid="8587993036435080418">"無法使用 Google 行動服務網路。"</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"撥號未送出，未輸入正確號碼。"</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"撥號未送出。"</string>
+    <string name="incall_error_out_of_service" msgid="4100065333878929223">"無法連線到行動網路。"</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"如要撥打電話，請輸入有效的號碼。"</string>
+    <string name="incall_error_call_failed" msgid="6302746943230078197">"無法通話。"</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"開始 MMI 序列…"</string>
-    <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"不支援的服務。"</string>
-    <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"無法切換通話。"</string>
-    <string name="incall_error_supp_service_separate" msgid="914362338192301746">"無法分隔來電。"</string>
-    <string name="incall_error_supp_service_transfer" msgid="2509871374644921632">"無法轉接來電。"</string>
-    <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"無法進行多方通話。"</string>
-    <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"無法拒絕來電。"</string>
-    <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"無法釋出通話。"</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"語音留言號碼不明。"</string>
-    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"網路電話"</string>
+    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"不支援的服務。"</string>
+    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"無法切換通話。"</string>
+    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"無法分割通話。"</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"無法轉接。"</string>
+    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"無法進行電話會議。"</string>
+    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"無法拒接來電。"</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"無法掛斷電話。"</string>
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP 通話"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"緊急電話"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"開啟無線通訊中…"</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"超出服務範圍，重試中…"</string>
-    <string name="dial_emergency_error" msgid="7969515493359619960">"未送出通話要求，<xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> 不是緊急電話號碼！"</string>
-    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"未送出通話要求，請撥打緊急電話號碼！"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"找不到服務訊號，正在重試…"</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"無法通話。<xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> 不是緊急號碼。"</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"無法通話。只能撥打緊急號碼。"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"使用鍵盤撥號"</string>
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"保留通話"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"恢復通話"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"新增通話"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"合併通話"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"切換通話"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"保留"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"結束"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"撥號鍵盤"</string>
@@ -111,9 +108,13 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"合併通話"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"切換"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"管理通話"</string>
-    <string name="onscreenManageConferenceText" msgid="6485935856534311346">"管理會議"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"管理會議通話"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"音訊"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"視訊通話"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"變更為語音通話"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"切換相機"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"暫停影片"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"更多選項"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"服務"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"設定"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;未設定&gt;"</string>
@@ -126,47 +127,25 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"自行撰寫回應…"</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"取消"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"傳送"</string>
-    <string name="description_image_button_one" msgid="5502718871331943463">"1"</string>
-    <string name="description_image_button_two" msgid="4903738528222924522">"2"</string>
-    <string name="description_image_button_three" msgid="5570985408463782329">"3"</string>
-    <string name="description_image_button_four" msgid="1697520001239289074">"4"</string>
-    <string name="description_image_button_five" msgid="3450276493026943454">"5"</string>
-    <string name="description_image_button_six" msgid="2070376172268675300">"6"</string>
-    <string name="description_image_button_seven" msgid="1757351311199993371">"7"</string>
-    <string name="description_image_button_eight" msgid="4734693919020613227">"8"</string>
-    <string name="description_image_button_nine" msgid="5568534122590597040">"9"</string>
-    <string name="description_image_button_star" msgid="1976280813017254462">"星號"</string>
-    <string name="description_image_button_zero" msgid="4211255756866893605">"零"</string>
-    <string name="description_image_button_pound" msgid="1716041284529917866">"井字鍵"</string>
-    <string name="description_dial_button" msgid="7459705245418435351">"撥號"</string>
-    <string name="description_delete_button" msgid="4015842181592283903">"Backspace"</string>
-    <string name="accessibility_speakerphone_enabled" msgid="1988512040421036359">"喇叭已啟用"</string>
-    <string name="accessibility_call_muted" msgid="2776111226185342220">"通話已靜音。"</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"解答"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"接聽"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"傳送簡訊"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"拒絕"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"接聽視訊通話"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"接聽語音通話"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"接受視訊要求"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"拒絕視訊要求"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"向上滑動即可<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>。"</string>
     <string name="description_direction_left" msgid="7129873384376533287">"向左滑動即可<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>。"</string>
     <string name="description_direction_right" msgid="2122584234531957308">"向右滑動即可<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>。"</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"向下滑動即可<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>。"</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"震動"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"震動"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"音效"</string>
     <string name="default_notification_description" msgid="78174796906240970">"預設音效 (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"手機鈴聲"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"鈴響時震動"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"撥號鍵盤觸控音效"</string>
-    <string name="dial_pad_autocomplete" msgid="494525952035761075">"撥號鍵盤自動完成"</string>
+    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"撥號鍵盤自動完成"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"鈴聲與震動"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"管理會議通話"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"緊急電話號碼"</string>
-    <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
-    <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
-    <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
-    <string name="dialpad_3_number" msgid="7146166309009131439">"3"</string>
-    <string name="dialpad_4_number" msgid="9075039274846639476">"4"</string>
-    <string name="dialpad_5_number" msgid="5780019709590672721">"5"</string>
-    <string name="dialpad_6_number" msgid="8261355170951265389">"6"</string>
-    <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
-    <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
-    <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
 </resources>

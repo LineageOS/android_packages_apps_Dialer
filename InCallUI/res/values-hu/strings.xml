@@ -21,29 +21,9 @@
     <string name="onHold" msgid="9035493194749959955">"Tartásban"</string>
     <string name="unknown" msgid="6878797917991465859">"Ismeretlen"</string>
     <string name="private_num" msgid="6713286113000232309">"Magántelefonszám"</string>
-    <string name="payphone" msgid="1931775086311769314">"Nyilvános telefon"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"A vonal foglalt"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"A hálózat túlterhelt"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Nincs válasz, időtúllépés történt"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"A szerver nem érhető el"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"A szám nem érhető el"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Helytelen felhasználónév vagy jelszó"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"A hívó hálózaton kívüli volt"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Szerverhiba. Kérjük, próbálkozzon újra."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Nincs vonal"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Elérte az ACM-korlátot"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Rádió kikapcsolva"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Hiányzó vagy hibás SIM kártya"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"A mobilhálózat nem érhető el"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Az FDN korlátozza a kimenő hívásokat."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Nem kezdeményezhet hívásokat, amíg a hívásletiltás be van kapcsolva."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Minden hívást korlátoz a hozzáférésvezérlés."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"A segélyhívásokat korlátozza a hozzáférésvezérlés."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"A normál hívásokat korlátozza a hozzáférésvezérlés."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Érvénytelen szám"</string>
+    <string name="payphone" msgid="4793877574636445118">"Nyilvános telefon"</string>
     <string name="confCall" msgid="1904840547188336828">"Konferenciahívás"</string>
-    <string name="call_lost" msgid="317670617901479594">"A hívás megszakadt."</string>
-    <string name="ok" msgid="3811371167865772377">"OK"</string>
+    <string name="call_lost" msgid="6183862117003999578">"A hívás megszakadt"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"Hangszóró"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Kézibeszélő fülhallgatója"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Vezetékes fülhallgató"</string>
@@ -57,7 +37,7 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"Konferenciahívás: <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Hangposta száma"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"Tárcsázás"</string>
-    <string name="card_title_redialing" msgid="4831412164303596395">"Újrapróbálkozás"</string>
+    <string name="card_title_redialing" msgid="8253487008234167266">"Újratárcsázás"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Konferenciahívás"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Bejövő hívás"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"A hívás befejeződött"</string>
@@ -65,6 +45,12 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"Megszakítás"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"Hívásban"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"A számom: <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"Videó csatlakoztatása"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"Videohívás"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Videohívást kér"</string>
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"A videohívás létesítése sikertelen"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"Visszahívható telefonszáma\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Vészhelyzet esetén visszahívható telefonszáma\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Tárcsázás"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Nem fogadott hívás"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Nem fogadott hívások"</string>
@@ -73,36 +59,47 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Hívás folyamatban"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"Tartásban"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Bejövő hívás"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Bejövő videohívás"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Bejövő videokérés"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Új hangposta"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Új hangpostaüzenet (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> tárcsázása"</string>
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"A hangposta száma ismeretlen"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Nincs szolgáltatás"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"A kiválasztott hálózat (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) nem érhető el"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"Válasz"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Hívás befejezése"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Videó"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Hang"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"Elfogadás"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Elvetés"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Visszahívás"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Üzenet"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Híváskezdeményezéshez kapcsolja ki a Repülőgép üzemmódot."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Nincs regisztrálva a hálózaton."</string>
-    <string name="incall_error_out_of_service" msgid="8587993036435080418">"A mobilhálózat nem érhető el."</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"A hívás indítása érvénytelen szám beírása miatt nem történt meg."</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"A hívás nem indítható."</string>
+    <string name="incall_error_out_of_service" msgid="4100065333878929223">"A mobilhálózat nem érhető el."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Hívásindításhoz adjon meg egy érvényes számot."</string>
+    <string name="incall_error_call_failed" msgid="6302746943230078197">"A hívás sikertelen."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI-sorozat indítása..."</string>
-    <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"Nem támogatott szolgáltatás"</string>
-    <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"Nem lehet váltani a hívások között."</string>
-    <string name="incall_error_supp_service_separate" msgid="914362338192301746">"Nem lehet elkülöníteni a hívást."</string>
-    <string name="incall_error_supp_service_transfer" msgid="2509871374644921632">"Nem lehet továbbítani a hívást."</string>
-    <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Nem lehet konferenciahívást folytatni."</string>
-    <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Nem lehet elutasítani a hívást."</string>
-    <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Nem lehet befejezni a hívás(oka)t."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"A hangpostaszám ismeretlen."</string>
-    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Internetes hívás"</string>
+    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"A szolgáltatás nem támogatott."</string>
+    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"A hívások közötti váltás sikertelen."</string>
+    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"A híváselkülönítés sikertelen."</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Az átirányítás sikertelen."</string>
+    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"A konferenciahívás sikertelen."</string>
+    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"A híváselutasítás sikertelen."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"A tartásban lévő hívás(ok) folytatása sikertelen."</string>
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP-hívás"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Segélyhívás"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Rádió bekapcsolása..."</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Szolgáltatási területen kívüli terület, újrapróbálás..."</string>
-    <string name="dial_emergency_error" msgid="7969515493359619960">"A hívás nem indítható. A(z) <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> nem segélyhívó szám!"</string>
-    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"A hívás nem indítható. Tárcsázzon egy segélyhívó számot!"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Nincs szolgáltatás. Újrapróbálkozás folyamatban…"</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"A hívás sikertelen. A(z) <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> szám nem vészhívószám."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"A hívás sikertelen. Tárcsázzon vészhívószámot."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"A tárcsázáshoz használja a billentyűzetet"</string>
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Hívás tartása"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Hívás folytatása"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Hívás hozzáadása"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Hívások egyesítése"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Hívások cseréje"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"Tartás"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Befejezés"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Tárcsázó"</string>
@@ -111,9 +108,13 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Hívások egyesítése"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Csere"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Hívások kezelése"</string>
-    <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Konferencia kezelése"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Konferenciahívás kezelése"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Hang"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videohívás"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Váltás hanghívásra"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Kamera váltása"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Videó szüneteltetése"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"További lehetőségek"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Szolgáltatás"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Beállítás"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Nincs megadva&gt;"</string>
@@ -126,47 +127,25 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Saját válasz írása..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"Mégse"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Küldés"</string>
-    <string name="description_image_button_one" msgid="5502718871331943463">"egy"</string>
-    <string name="description_image_button_two" msgid="4903738528222924522">"kettő"</string>
-    <string name="description_image_button_three" msgid="5570985408463782329">"három"</string>
-    <string name="description_image_button_four" msgid="1697520001239289074">"négy"</string>
-    <string name="description_image_button_five" msgid="3450276493026943454">"öt"</string>
-    <string name="description_image_button_six" msgid="2070376172268675300">"hat"</string>
-    <string name="description_image_button_seven" msgid="1757351311199993371">"hét"</string>
-    <string name="description_image_button_eight" msgid="4734693919020613227">"nyolc"</string>
-    <string name="description_image_button_nine" msgid="5568534122590597040">"kilenc"</string>
-    <string name="description_image_button_star" msgid="1976280813017254462">"csillag"</string>
-    <string name="description_image_button_zero" msgid="4211255756866893605">"nulla"</string>
-    <string name="description_image_button_pound" msgid="1716041284529917866">"kettős kereszt"</string>
-    <string name="description_dial_button" msgid="7459705245418435351">"tárcsázás"</string>
-    <string name="description_delete_button" msgid="4015842181592283903">"Backspace"</string>
-    <string name="accessibility_speakerphone_enabled" msgid="1988512040421036359">"Kihangosítás engedélyezve."</string>
-    <string name="accessibility_call_muted" msgid="2776111226185342220">"Hívás némítva."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Fogadás"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS küldése"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Elutasítás"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Fogadás videohívásként"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Fogadás hanghívásként"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Videó kérésének elfogadása"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Videó kérésének elutasítása"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"A(z) <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> művelethez csúsztassa felfelé."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"A(z) <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> művelethez csúsztassa balra."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"A(z) <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> művelethez csúsztassa jobbra."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"A(z) <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> művelethez csúsztassa lefelé."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Rezgés"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Rezgés"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Hang"</string>
     <string name="default_notification_description" msgid="78174796906240970">"Alapértelmezett hang (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Telefon csengőhangja"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Csengetéskor rezegjen"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Tárcsázó érintési hangjai"</string>
-    <string name="dial_pad_autocomplete" msgid="494525952035761075">"Tárcsázó automatikus kiegészítés"</string>
+    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Tárcsázás kiegészítése"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Csengőhang és rezgés"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Konferenciahívás kezelése"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Segélyhívó szám"</string>
-    <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
-    <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
-    <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
-    <string name="dialpad_3_number" msgid="7146166309009131439">"3"</string>
-    <string name="dialpad_4_number" msgid="9075039274846639476">"4"</string>
-    <string name="dialpad_5_number" msgid="5780019709590672721">"5"</string>
-    <string name="dialpad_6_number" msgid="8261355170951265389">"6"</string>
-    <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
-    <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
-    <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
 </resources>

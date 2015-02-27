@@ -21,29 +21,9 @@
     <string name="onHold" msgid="9035493194749959955">"රඳවා ගනිමින්"</string>
     <string name="unknown" msgid="6878797917991465859">"නොදනී"</string>
     <string name="private_num" msgid="6713286113000232309">"පුද්ගලික අංකය"</string>
-    <string name="payphone" msgid="1931775086311769314">"ගෙවුම් දුරකථනය"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"ඇමතුම කාර්ය බහුලයි"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"ජාලය කාර්ය බහුලයි"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"ප්‍රතිචාරයක් නැත, කල් ඉකුත්ව ඇත"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"සේවාදායකය ළඟා විය නොහැක"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"අංකය ළඟා විය නොහැක"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"වැරදි පරිශීලක නාමයක් හෝ මුරපදයකි"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"අමතන ලද්දේ ජාලයෙන් පිටිනි"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"සේවාදායකයේ දෝෂයක්. පසුව නැවත උත්සාහ කරන්න."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"සංඥාවක් නැත"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"ACM සීමාව ඉක්මවන ලදි"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"රේඩියෝව අක්‍රියයි"</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"SIM නැත හෝ SIM දෝෂයක්"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"ජංගම ජාලය නොමැත"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"FDN මඟින් පිටතට යන ඇමතුම් නවත්වා ඇත."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"ඇමතුම් අත්හිටුවීමක් ඇතිවිට ඔබට පිටතට ඇමතුම් ගත නොහැක."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"ප්‍රවේශ පාලකය මඟින් සියලුම ඇමතුම් අත්හිටුවා ඇත."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"ප්‍රවේශ පාලකය මඟින් හදිසි ඇමතුම් අත්හිටුවා ඇත."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"ප්‍රවේශ පාලකය මඟින් සාමාන්‍ය ඇමතුම් අත්හිටුවා ඇත."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"අවලංගු අංකය"</string>
+    <string name="payphone" msgid="4793877574636445118">"පේෆෝනය"</string>
     <string name="confCall" msgid="1904840547188336828">"සම්මන්ත්‍රණ ඇමතුම"</string>
-    <string name="call_lost" msgid="317670617901479594">"ඇමතුම බිදවැටුණි."</string>
-    <string name="ok" msgid="3811371167865772377">"හරි"</string>
+    <string name="call_lost" msgid="6183862117003999578">"ඇමතුම නැවතුණි"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"නාදකය"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"හෑන්ඩ්සෙටයේ සවන් කඬ"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"රැහැන් සහිත හෙඩ්සෙටය"</string>
@@ -57,7 +37,7 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"සම්මන්ත්‍රණ ඇමතුම <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"හඬ තැපැල් අංකය"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"අමතමින්"</string>
-    <string name="card_title_redialing" msgid="4831412164303596395">"යළි උත්සාහ කරමින්"</string>
+    <string name="card_title_redialing" msgid="8253487008234167266">"නැවත අංකනය කරමින්"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"සම්මන්ත්‍රණ ඇමතුම"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"එන ඇමතුම"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"ඇමතුම අවසන් විය"</string>
@@ -65,6 +45,12 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"විසන්ධි කරමින්"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"ඇමතුමක"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"මගේ අංකය <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"වීඩියෝවකට සම්බන්ධ කරමින්"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"වීඩියෝ ඇමතුම"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"වීඩියෝවක් ඉල්ලමින්"</string>
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"වීඩියෝ ඇමතුම සම්බන්ධ කළ නොහැක"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"ඔබට ආපසු කථා කිරීමේ අංකය\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"ඔබගේ හදිසි ඇමතුම් අංකය\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"අමතමින්"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"මඟ හැරුණු ඇමතුම"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"මඟ හැරුණු ඇමතුම්"</string>
@@ -73,36 +59,47 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"කරගෙනය යන ඇමතුම"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"රඳවා ගනිමින්"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"එන ඇමතුම"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"පැමිණෙන වීඩියෝ ඇමතුම"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"පැමිණෙන වීඩියෝ ඉල්ලීම"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"නව හඬතැපෑල"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"නව හඬ තැපැල් (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> අමතන්න"</string>
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"හඬතැපැල් අංකය නොදනී"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"සේවාව නැත"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"තෝරා ඇති ජාලය (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) නොමැත"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"පිළිතුරු දෙන්න"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"විසන්ධි කරන්න"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"වීඩියෝව"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"හඬ"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"පිළිගන්න"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"ඉවත ලන්න"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"නැවත අමතන්න"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"පණිවිඩය"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"ඇමතුමක් ගැනීමට, මුලින්ම ගුවන්යානා ආකාරය අක්‍රිය කරන්න."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"ජාලය මත ලියාපදිංචි වී නැත."</string>
-    <string name="incall_error_out_of_service" msgid="8587993036435080418">"ජංගම ජාලය නොමැත."</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"ඇමතුම නොයැවිණි, වලංගු අංකයක් ඇතුලත් කර නැත."</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"ඇමතුම නොයැවිණි."</string>
+    <string name="incall_error_out_of_service" msgid="4100065333878929223">"සෙලියුලර් ජාලය නොමැත"</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"ඇමතුමක් ලබාගැනීමට, වලංගු අංකයක් ලබාගන්න."</string>
+    <string name="incall_error_call_failed" msgid="6302746943230078197">"ඇමතුම් ගැනීමට නොහැක."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI අනුපිළිවෙල ආරම්භ කරමින්…"</string>
-    <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"සහාය නොදක්වන සේවාව."</string>
-    <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"ඇමතුම මාරු කිරීමට නොහැකි විය."</string>
-    <string name="incall_error_supp_service_separate" msgid="914362338192301746">"ඇමතුම වෙන් කිරීමට නොහැකි විය."</string>
-    <string name="incall_error_supp_service_transfer" msgid="2509871374644921632">"ඇමතුම මාරු කිරීමට අපොහොසත් විය."</string>
-    <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"සම්මන්ත්‍රණ ඇමතුම් ලබාගත නොහැකි විය."</string>
-    <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"ඇමතුම ප්‍රතික්ෂේප කළ නොහැකි විය."</string>
-    <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"ඇමතුම(ම්) නිදහස් කිරීමට නොහැකි විය."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"හඬ තැපැල් අංකය නොදනී."</string>
-    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"අන්තර්ජාල ඇමතුම"</string>
+    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"සේවාව සහාය ලබාදෙන්නේ නැත."</string>
+    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"ඇමතුම් මාරු කිරීම කළ නොහැක."</string>
+    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"ඇමතුම වෙන් කිරීම කළ නොහැක."</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"මාරු කිරීමට නොහැක."</string>
+    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"සාකච්ඡාව කළ නොහැක."</string>
+    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"ඇමතුම ප්‍රතික්ෂේප කළ නොහැක."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"ඇමතුම(ම්) මුදාහැරීම කළ නොහැක."</string>
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP ඇමතුම"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"හදිසි ඇමතුම"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"රේඩියෝව ආරම්භ කරමින්…"</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"සේවා රහිත ප්‍රදේශය, යළි උත්සාහ කරමින්..."</string>
-    <string name="dial_emergency_error" msgid="7969515493359619960">"ඇමතුම නොයැවිණි, <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> හදිසි අංකයක් නොවේ!"</string>
-    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"ඇමතුම නොයැවිණි, හදිසි අංකයක් අමතන්න!"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"සේවා නැත. නැවත උත්සාහ කරන්න…"</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"ඇමතුම් ලබාගැනීම කළ නොහැක. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> මෙය හදිස්සි ඇමතුම් අංකයක් නොවේ."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"ඇමතිය නොහැක. හදිසි අංකයක් අමතන්න."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"ඇමතීමට කිරීමට යතුරු පුවරුව භාවිතා කරන්න"</string>
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"ඇමතුම නවතා සිටින්න"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"ඇමතුම නැවත පටන්ගන්න"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"ඇමතුමක් එක් කරන්න"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"ඇමතුම් එකට මුසු කරන්න"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"ඇමතුම් මාරු කරන්න"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"රඳවා සිටින්න"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"අවසානයි"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"ඇමතුම් පෑඩය"</string>
@@ -111,9 +108,13 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"ඇමතුම් එකට මුසු කරන්න"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"මාරු කරන්න"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"ඇමතුම් කළමනාකරණය කරන්න"</string>
-    <string name="onscreenManageConferenceText" msgid="6485935856534311346">"සම්මන්ත්‍රණය කළමනාකරණය කරන්න"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"සම්මන්ත්‍රණ ඇමතුම කළමනාකරණය කරන්න"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"ශ්‍රව්‍ය"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"වීඩියෝ ඇමතුම"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"හඬ ඇමතුමක් වෙත මාරු කරන ලදි"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"කැමරාව මාරු කරන්න"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"විඩියෝව විරාම කරන්න"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"තවත් විකල්ප"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"සේවාව"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"ස්ථාපනය කරන්න"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;පිහිටුවා නැත&gt;"</string>
@@ -126,47 +127,25 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"ඔබෙම එකක් ලියන්න..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"අවලංගු කරන්න"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"යවන්න"</string>
-    <string name="description_image_button_one" msgid="5502718871331943463">"එක"</string>
-    <string name="description_image_button_two" msgid="4903738528222924522">"දෙක"</string>
-    <string name="description_image_button_three" msgid="5570985408463782329">"තුනයි"</string>
-    <string name="description_image_button_four" msgid="1697520001239289074">"හතර"</string>
-    <string name="description_image_button_five" msgid="3450276493026943454">"පහ"</string>
-    <string name="description_image_button_six" msgid="2070376172268675300">"හය"</string>
-    <string name="description_image_button_seven" msgid="1757351311199993371">"හත"</string>
-    <string name="description_image_button_eight" msgid="4734693919020613227">"අට"</string>
-    <string name="description_image_button_nine" msgid="5568534122590597040">"නවය"</string>
-    <string name="description_image_button_star" msgid="1976280813017254462">"තරුව"</string>
-    <string name="description_image_button_zero" msgid="4211255756866893605">"බිංදුවයි"</string>
-    <string name="description_image_button_pound" msgid="1716041284529917866">"පවුම"</string>
-    <string name="description_dial_button" msgid="7459705245418435351">"අමතන්න"</string>
-    <string name="description_delete_button" msgid="4015842181592283903">"ආපසුයවන යතුර"</string>
-    <string name="accessibility_speakerphone_enabled" msgid="1988512040421036359">"ස්පිකර්ෆෝන් සබලයි."</string>
-    <string name="accessibility_call_muted" msgid="2776111226185342220">"ඇමතුම නිශ්ශබ්දයි."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"පිළිතුරු දෙන්න"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS යවන්න"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"ප්‍රතික්ෂේප කරන්න"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"වීඩියෝ ඇමතුමට පිළිතුරු දෙන්න"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"ශ්‍රව්‍ය ඇමතුමට පිළිතුරු දෙන්න"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"වීඩියෝ ඉල්ලීම පිළිගනියි"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"වීඩියෝ ඉල්ලීම ප්‍රතික්ෂේප කරයි"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> සඳහා උඩට සර්පණය කරන්න."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> සඳහා වමට සර්පණය කරන්න."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> සඳහා දකුණට සර්පණය කරන්න."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> සඳහා පහළට සර්පණය කරන්න."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"කම්පනය වීම"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"කම්පනය වීම"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"ශබ්දය"</string>
     <string name="default_notification_description" msgid="78174796906240970">"සුපුරුදු ශබ්දය (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"දුරකථන රිංටෝනය"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"රිංග් වන විට කම්පනයවේ"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"ඇමතුම් පෑඩයේ ස්පර්ශ නාද"</string>
-    <string name="dial_pad_autocomplete" msgid="494525952035761075">"ඩයල් පෑඩය ස්වයංපූර්ණය"</string>
+    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"ඩයල් පැඩය ස්වයං සම්පුර්ණ කරන්න"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"රිගින් ටෝන් සහ කම්පනය කරන්න"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"සම්මන්ත්‍රණ ඇමතුම කළමනාකරණය කරන්න"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"හදිසි ඇමතුම් අංකය"</string>
-    <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
-    <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
-    <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
-    <string name="dialpad_3_number" msgid="7146166309009131439">"3"</string>
-    <string name="dialpad_4_number" msgid="9075039274846639476">"4"</string>
-    <string name="dialpad_5_number" msgid="5780019709590672721">"5"</string>
-    <string name="dialpad_6_number" msgid="8261355170951265389">"6"</string>
-    <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
-    <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
-    <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
 </resources>

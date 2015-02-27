@@ -21,29 +21,9 @@
     <string name="onHold" msgid="9035493194749959955">"Задържане на обаждането"</string>
     <string name="unknown" msgid="6878797917991465859">"Неизвестен номер"</string>
     <string name="private_num" msgid="6713286113000232309">"Частен номер"</string>
-    <string name="payphone" msgid="1931775086311769314">"Импулсен телефон"</string>
-    <string name="callFailed_userBusy" msgid="8851106999809294904">"Линията е заета"</string>
-    <string name="callFailed_congestion" msgid="8737761615702718375">"Мрежата е заета"</string>
-    <string name="callFailed_timedOut" msgid="7590961703135543346">"Няма отговор – времето за изчакване изтече"</string>
-    <string name="callFailed_server_unreachable" msgid="2133506577423869729">"Няма връзка със сървъра"</string>
-    <string name="callFailed_number_unreachable" msgid="7632566442515734778">"Няма достъп до номера"</string>
-    <string name="callFailed_invalid_credentials" msgid="8226835346196775378">"Неправилно потребителско име или парола"</string>
-    <string name="callFailed_out_of_network" msgid="8740943329772180507">"Обаждане извън мрежата"</string>
-    <string name="callFailed_server_error" msgid="5717915213586193217">"Грешка в сървъра. Опитайте отново по-късно."</string>
-    <string name="callFailed_noSignal" msgid="1889803273616031933">"Няма сигнал"</string>
-    <string name="callFailed_limitExceeded" msgid="4958065157970101491">"Надвишено ограничение за ACM"</string>
-    <string name="callFailed_powerOff" msgid="2766035859391549713">"Радиото е изкл."</string>
-    <string name="callFailed_simError" msgid="4476360200030635828">"Няма SIM карта или грешка в SIM картата"</string>
-    <string name="callFailed_outOfService" msgid="682300184520329366">"Мобилната мрежа не е налице"</string>
-    <string name="callFailed_fdn_only" msgid="2850204579765430641">"Изходящите обаждания са ограничени от FDN."</string>
-    <string name="callFailed_cb_enabled" msgid="3686963693629739680">"Не можете да провеждате изходящи обаждания, докато има забрана за обаждания."</string>
-    <string name="callFailed_dsac_restricted" msgid="2180223622768522345">"Всички обаждания са ограничени от контрола за достъп."</string>
-    <string name="callFailed_dsac_restricted_emergency" msgid="4353654268813314466">"Спешните обаждания са ограничени от контрола за достъп."</string>
-    <string name="callFailed_dsac_restricted_normal" msgid="2680774510252408620">"Нормалните обаждания са ограничени от контрола за достъп."</string>
-    <string name="callFailed_unobtainable_number" msgid="4736290912891155067">"Невалиден номер"</string>
+    <string name="payphone" msgid="4793877574636445118">"Обществен телефон"</string>
     <string name="confCall" msgid="1904840547188336828">"Конферентно обаждане"</string>
-    <string name="call_lost" msgid="317670617901479594">"Разговорът се загуби."</string>
-    <string name="ok" msgid="3811371167865772377">"OK"</string>
+    <string name="call_lost" msgid="6183862117003999578">"Обаждането бе прекъснато"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"Говорител"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Телефонна слушалка"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Слушалки с кабел"</string>
@@ -57,7 +37,7 @@
     <string name="caller_manage_header" msgid="3231519674734638786">"Конферентно обаждане<xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Номер за гласова поща"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"Набиране"</string>
-    <string name="card_title_redialing" msgid="4831412164303596395">"Извършва се повторен опит"</string>
+    <string name="card_title_redialing" msgid="8253487008234167266">"Набира се отново"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Конферентно обаждане"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Вх. обаждане"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"Обаждането завърши"</string>
@@ -65,6 +45,12 @@
     <string name="card_title_hanging_up" msgid="3999101620995182450">"Приключване на разговора"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"Вх. обаждане"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"Моят номер е <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"Установява се видеовръзка"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"Видеообаждане"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Заявява се видеовръзка"</string>
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"Видеообаждането не може да се осъществи"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"Номер за обратно обаждане\n– <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Номер за спешно обратно обаждане\n– <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Набира се"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Пропуснато обаждане"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Пропуснати обаждания"</string>
@@ -73,36 +59,47 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Текущо обаждане"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"Задържане на обаждането"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Входящо обаждане"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Входящо видеообаждане"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Входяща заявка за видеовръзка"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Нова гласова поща"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Нова гласова поща на (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Набиране на <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Неизвестен номер за гласова поща"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Няма покритие"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Избраната мрежа (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) не е налична"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"Отговор"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Затваряне"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Видеообаждане"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Гласово обаждане"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"Приемам"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Отхвърляне"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Обратно обаждане"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Съобщение"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Първо изключете самолетния режим, за да може да осъществите обаждане."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Няма регистрация в мрежата."</string>
-    <string name="incall_error_out_of_service" msgid="8587993036435080418">"Няма мобилна мрежа."</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="4197432103471807739">"Обаждането не е изпратено, не е въведен валиден номер."</string>
-    <string name="incall_error_call_failed" msgid="4313552620858880999">"Обаждането не е изпратено."</string>
+    <string name="incall_error_out_of_service" msgid="4100065333878929223">"Няма достъп до клетъчната мрежа."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"За да извършите обаждане, въведете валиден номер."</string>
+    <string name="incall_error_call_failed" msgid="6302746943230078197">"Не може да се извърши обаждане."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"Стартира се последователността MMI…"</string>
-    <string name="incall_error_supp_service_unknown" msgid="2991054870745666038">"Неподдържана услуга."</string>
-    <string name="incall_error_supp_service_switch" msgid="3503552565745872241">"Обажданията не могат да се превключат."</string>
-    <string name="incall_error_supp_service_separate" msgid="914362338192301746">"Обаждането не може да се отдели."</string>
-    <string name="incall_error_supp_service_transfer" msgid="2509871374644921632">"Обаждането не може да се прехвърли."</string>
-    <string name="incall_error_supp_service_conference" msgid="2505727299596357312">"Не могат да се правят конферентни обаждания."</string>
-    <string name="incall_error_supp_service_reject" msgid="7055164130563826216">"Обаждането не може да се отхвърли."</string>
-    <string name="incall_error_supp_service_hangup" msgid="7417583238334762737">"Обаждането или съответно обажданията не могат да се освободят."</string>
-    <string name="incall_error_missing_voicemail_number" msgid="2995137160077097934">"Неизвестен номер за гласова поща."</string>
-    <string name="incall_call_type_label_sip" msgid="2310958283037924371">"Интернет обаждане"</string>
+    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Услугата не се поддържа."</string>
+    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"Обажданията не могат да се превключат."</string>
+    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"Обаждането не може да се отдели."</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Не може да се прехвърли."</string>
+    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"Не може да се извърши конферентно обаждане."</string>
+    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"Обаждането не може да се отхвърли."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Обаждането или съответно обажданията не могат да се освободят."</string>
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"Обаждане чрез SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Спешно обаждане"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Радиото се включва…"</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="3724423402363063736">"Район без покритие, извършва се повторен опит..."</string>
-    <string name="dial_emergency_error" msgid="7969515493359619960">"Обаждането не е извършено. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> не е спешен номер!"</string>
-    <string name="dial_emergency_empty_error" msgid="5556166819619323893">"Обаждането не е извършено. Наберете спешен номер!"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Няма услуга. Извършва се нов опит…"</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"Не може да се извърши обаждане. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> не е номер за спешни случаи."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Не може да се извърши обаждане. Наберете номер за спешни случаи."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Използвайте клавиатурата за набиране"</string>
+    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Задържане на обаждането"</string>
+    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Възобновяване на обаждането"</string>
+    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Добавяне на обаждане"</string>
+    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Обединяване на обаждания"</string>
+    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Размяна на обажданията"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"Задържане"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Край"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Клавиатура за набиране"</string>
@@ -111,9 +108,13 @@
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Обединяване на обаждания"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Размяна"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Управление на обажданията"</string>
-    <string name="onscreenManageConferenceText" msgid="6485935856534311346">"Упр. на конференция"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Упр. на конф. обаждане"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Аудио"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Видеообаждане"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Преминаване към гласово обаждане"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Превключване на камерата"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Поставяне на видеовръзката на пауза"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"Още опции"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Услуга"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Настройка"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Не е зададено&gt;"</string>
@@ -126,47 +127,25 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Напишете свой собствен..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"Отказ"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Изпращане"</string>
-    <string name="description_image_button_one" msgid="5502718871331943463">"едно"</string>
-    <string name="description_image_button_two" msgid="4903738528222924522">"две"</string>
-    <string name="description_image_button_three" msgid="5570985408463782329">"три"</string>
-    <string name="description_image_button_four" msgid="1697520001239289074">"четири"</string>
-    <string name="description_image_button_five" msgid="3450276493026943454">"пет"</string>
-    <string name="description_image_button_six" msgid="2070376172268675300">"шест"</string>
-    <string name="description_image_button_seven" msgid="1757351311199993371">"седем"</string>
-    <string name="description_image_button_eight" msgid="4734693919020613227">"осем"</string>
-    <string name="description_image_button_nine" msgid="5568534122590597040">"девет"</string>
-    <string name="description_image_button_star" msgid="1976280813017254462">"звездичка"</string>
-    <string name="description_image_button_zero" msgid="4211255756866893605">"нула"</string>
-    <string name="description_image_button_pound" msgid="1716041284529917866">"диез"</string>
-    <string name="description_dial_button" msgid="7459705245418435351">"набиране"</string>
-    <string name="description_delete_button" msgid="4015842181592283903">"backspace"</string>
-    <string name="accessibility_speakerphone_enabled" msgid="1988512040421036359">"Високоговорителят бе активиран."</string>
-    <string name="accessibility_call_muted" msgid="2776111226185342220">"Обаждането бе спряно."</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Отговор"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Изпращане на SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Отхвърлям"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Приемане като видеообаждане"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Приемане като аудиообаждане"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Приемане на заявката за видеовръзка"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Отхвърляне на заявката за видеовръзка"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"Плъзнете нагоре за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"Плъзнете наляво за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"Плъзнете надясно за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"Плъзнете надолу за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Вибриране"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Вибриране"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Звук"</string>
     <string name="default_notification_description" msgid="78174796906240970">"Стандартен звук (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Мелодия на телефона"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Вибриране при звънене"</string>
-    <string name="dtmf_tone_enable_title" msgid="827601042915852989">"Тонове при набиране"</string>
-    <string name="dial_pad_autocomplete" msgid="494525952035761075">"Авт. довършване на клавиат. за набиране"</string>
+    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Набиране: Авт. довършване"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Мелодия и вибриране"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Управление на конферентно обаждане"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Спешен номер"</string>
-    <string name="dialpad_0_number" msgid="4644117034319354934">"0"</string>
-    <string name="dialpad_1_number" msgid="9005660581700930162">"1"</string>
-    <string name="dialpad_2_number" msgid="4037709919757417820">"2"</string>
-    <string name="dialpad_3_number" msgid="7146166309009131439">"3"</string>
-    <string name="dialpad_4_number" msgid="9075039274846639476">"4"</string>
-    <string name="dialpad_5_number" msgid="5780019709590672721">"5"</string>
-    <string name="dialpad_6_number" msgid="8261355170951265389">"6"</string>
-    <string name="dialpad_7_number" msgid="277455349526398354">"7"</string>
-    <string name="dialpad_8_number" msgid="4764964930466503513">"8"</string>
-    <string name="dialpad_9_number" msgid="4023642800448238950">"9"</string>
 </resources>
