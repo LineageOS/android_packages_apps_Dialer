@@ -15,7 +15,6 @@
   ~ limitations under the License
   -->
 
-<!-- TODO(klp): move out to separate file -->
 <com.android.incallui.GlowPadWrapper
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:dc="http://schemas.android.com/apk/res-auto"
