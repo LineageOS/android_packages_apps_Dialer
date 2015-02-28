@@ -606,14 +606,6 @@ public class InCallActivity extends Activity {
         }
     }
 
-    /**
-     * Simulates a user click to hide the dialpad. This will update the UI to show the call card,
-     * update the checked state of the dialpad button, and update the proximity sensor state.
-     */
-    public void hideDialpadForDisconnect() {
-        mCallButtonFragment.displayDialpad(false /* show */, true /* animate */);
-    }
-
     public void dismissKeyguard(boolean dismiss) {
         if (mDismissKeyguard == dismiss) {
             return;
