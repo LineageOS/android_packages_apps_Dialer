@@ -32,6 +32,8 @@ import com.android.phone.common.PhoneConstants;
  */
 public class PrivilegedCallUtil {
 
+    public static final String CALL_ACTION = Intent.ACTION_CALL_PRIVILEGED;
+
     /**
      * Return an Intent for making a phone call. Scheme (e.g. tel, sip) will be determined
      * automatically.
@@ -129,7 +131,7 @@ public class PrivilegedCallUtil {
      */
     public static Intent getCallIntent(
             Uri uri, String callOrigin, PhoneAccountHandle accountHandle, int videoState) {
-        final Intent intent = new Intent(Intent.ACTION_CALL_PRIVILEGED, uri);
+        final Intent intent = new Intent(CALL_ACTION, uri);
         intent.putExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, videoState);
         if (callOrigin != null) {
             intent.putExtra(PhoneConstants.EXTRA_CALL_ORIGIN, callOrigin);

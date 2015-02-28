@@ -239,7 +239,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     public void testSetCallDetailsHeader_PayphoneNumber() {
         setCallDetailsHeaderWithNumber("", Calls.PRESENTATION_PAYPHONE);
         assertEquals(View.VISIBLE, mNameView.getVisibility());
-        assertEquals("Pay phone", mNameView.getText().toString());
+        assertEquals("Payphone", mNameView.getText().toString());
     }
 
     public void testSetCallDetailsHeader_VoicemailNumber() {
