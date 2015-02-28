@@ -63,7 +63,7 @@
   <string name="date_qs_lastquarter">Praeitas ketvirtis</string>
   <string name="date_qs_lastyear">Praeiti metai</string>
   <string name="call_stats_date_filter">Nustatyti laikotarpį</string>
-  <string name="call_stats_reset_filter">Atkurti laikotarpį</string>
+  <string name="call_stats_reset_filter">Nustatyti iš naujo laikotarpį</string>
   <string name="call_stats_sort_by_duration">Rūšiuoti pagal skambučių trukmę</string>
   <string name="call_stats_sort_by_count">Rūšiuoti pagal skambučių skaičių</string>
   <string name="menu_add_to_blacklist">Pridėti į juodąjį sąrašą</string>

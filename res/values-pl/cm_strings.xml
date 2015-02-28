@@ -18,8 +18,27 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">Miejsca w pobliżu</string>
   <string name="people">Ludzie</string>
+  <string name="lookup_settings_label">Wyszukiwanie numeru telefonu</string>
+  <string name="lookup_settings_description">Wyszukiwanie nieznanych numerów</string>
+  <string name="enable_forward_lookup_title">Wyszukiwanie do przodu</string>
+  <string name="enable_forward_lookup_summary">Pokaż miejsca w pobliżu podczas wyszukiwania w dialerze</string>
+  <string name="enable_people_lookup_title">Wyszukiwanie osób</string>
+  <string name="enable_people_lookup_summary">Pokaż wyniki online dla osób podczas wyszukiwania w dialerze</string>
+  <string name="enable_reverse_lookup_title">Wyszukiwanie wstecz</string>
+  <string name="enable_reverse_lookup_summary">Wyszukaj informacje o osobie lub miejscu dla nieznanych numerów połączeń przychodzących</string>
+  <string name="forward_lookup_provider_title">Dostawca wyszukiwania w przód</string>
+  <string name="people_lookup_provider_title">Dostawca wyszukiwania osób</string>
+  <string name="reverse_lookup_provider_title">Dostawca wyszukiwania wstecz</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chiński (CN)</string>
+  <string name="preference_category_t9_dialpad_search">Wyszukiwanie kontaktów z T9</string>
+  <string name="t9_search_input_locale">Wyszukiwanie T9</string>
+  <string name="t9_search_input_locale_default">Domyślny</string>
+  <string name="type_blacklist">Połączenie z czarnej listy</string>
   <string name="call_log_stats_title">Statystyki</string>
   <string name="callStatsDetailTitle">Szczegółowe statystyki połączeń</string>
+  <string name="call_stats">Statystyki połączeń</string>
+  <string name="call_stats_refresh">Odśwież</string>
+  <string name="activity_title_call_stats">Statystyki połączeń</string>
   <string name="call_stats_nav_all">Wszystkie</string>
   <string name="call_stats_nav_incoming">Przychodzące</string>
   <string name="call_stats_nav_outgoing">Wychodzące</string>
@@ -28,6 +47,8 @@
   <string name="call_stats_outgoing">Wychodzące: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Nieodebrane</string>
   <string name="call_stats_missed_percent">Nieodebrane: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Czarna lista</string>
+  <string name="call_stats_blacklist_percent">Czarna lista: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Łącznie: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Łącznie: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Data początkowa</string>
@@ -46,13 +67,23 @@
   <string name="call_stats_sort_by_duration">Sortuj wg długości połączenia</string>
   <string name="call_stats_sort_by_count">Sortuj wg liczby połączeń</string>
   <string name="menu_add_to_blacklist">Dodaj do czarnej listy</string>
+  <string name="toast_added_to_blacklist">%s dodano do czarnej listy.</string>
   <string name="speed_dial_settings">Ustawienia szybkiego wybierania</string>
   <string name="speed_dial_not_set">(nieustawione)</string>
   <string name="speed_dial_replace">Zastąp</string>
   <string name="speed_dial_delete">Usuń</string>
   <string name="speed_dial_unassigned_dialog_title">Klawisz nieprzypisany</string>
+  <string name="speed_dial_unassigned_dialog_message">Brak akcji szybkiego wybierania dla przycisku numer \'<xliff:g id="number">%s</xliff:g>\'. Chcesz przypisać akcję teraz?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Aby korzystać z szybkiego wybierania, należy najpierw wyłączyć tryb samolotowy.</string>
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
+  <string name="incall_vibration_category_title">Wibracje w trakcie rozmowy</string>
+  <string name="incall_vibrate_outgoing_title">Wibracja przy odebraniu</string>
+  <string name="incall_vibrate_hangup_title">Wibracja przy rozłączeniu</string>
+  <string name="incall_vibrate_45_title">Wibracja co minutę</string>
+  <string name="incall_vibrate_45_summary">Wibracja podczas 45 sekundy każdej minuty połączenia wychodzącego</string>
+  <string name="detailed_incall_info_title">Szczegółowe informacje o rozmówcy</string>
+  <string name="detailed_incall_info_summary">Wyświetlić dodatkowe informacje o rozmówcy na ekranie połączenia przychodzącego</string>
   <string name="video_call">Połączenie wideo</string>
   <string name="call_duration_active">Aktywny czas trwania:</string>
   <string name="call_duration_call_out">Czas trwania połączenia:</string>
@@ -60,4 +91,8 @@
   <string name="call_log_all_calls_header">Wszystkie połączenia</string>
   <string name="calllog_search_hint">Szukaj w historii połączeń</string>
   <string name="msim_ime_dialog_title">Identyfikator urządzenia</string>
+  <string name="call_log_blacklist_header">Tylko połączenia z czarnej listy</string>
+  <string name="start_call_playback">Rozpocznij nagrywanie</string>
+  <string name="stop_call_playback">Zatrzymaj</string>
+  <string name="call_playback_error_message">Nie udało się zarejestrować nagrania</string>
 </resources>

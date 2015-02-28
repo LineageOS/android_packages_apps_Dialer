@@ -63,4 +63,5 @@
   <string name="call_log_all_calls_header">Alla samtal</string>
   <string name="calllog_search_hint">Sök samtalslista</string>
   <string name="msim_ime_dialog_title">Enhetsidentifierare</string>
+  <string name="start_call_playback">Spela inspelning</string>
 </resources>
