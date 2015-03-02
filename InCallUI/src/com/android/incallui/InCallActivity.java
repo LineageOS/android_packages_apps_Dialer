@@ -59,7 +59,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Phone app "in call" screen.
+ * Main activity that the user interacts with while in a live call.
  */
 public class InCallActivity extends Activity {
 
@@ -136,7 +136,6 @@ public class InCallActivity extends Activity {
         // TODO(klp): Do we need to add this back when prox sensor is not available?
         // lp.inputFeatures |= WindowManager.LayoutParams.INPUT_FEATURE_DISABLE_USER_ACTIVITY;
 
-        // Inflate everything in incall_screen.xml and add it to the screen.
         setContentView(R.layout.incall_screen);
 
         initializeInCall();
@@ -265,21 +264,6 @@ public class InCallActivity extends Activity {
         return mDialog != null;
     }
 
-    /**
-     * Dismisses the in-call screen.
-     *
-     * We never *really* finish() the InCallActivity, since we don't want to get destroyed and then
-     * have to be re-created from scratch for the next call.  Instead, we just move ourselves to the
-     * back of the activity stack.
-     *
-     * This also means that we'll no longer be reachable via the BACK button (since moveTaskToBack()
-     * puts us behind the Home app, but the home app doesn't allow the BACK key to move you any
-     * farther down in the history stack.)
-     *
-     * (Since the Phone app itself is never killed, this basically means that we'll keep a single
-     * InCallActivity instance around for the entire uptime of the device.  This noticeably improves
-     * the UI responsiveness for incoming calls.)
-     */
     @Override
     public void finish() {
         Log.i(this, "finish().  Dialog showing: " + (mDialog != null));
@@ -333,7 +317,7 @@ public class InCallActivity extends Activity {
         // Always disable the Back key while an incoming call is ringing
         final Call call = CallList.getInstance().getIncomingCall();
         if (call != null) {
-            Log.d(this, "Consume Back press for an incoming call");
+            Log.i(this, "Consume Back press for an incoming call");
             return;
         }
 
@@ -429,13 +413,6 @@ public class InCallActivity extends Activity {
         // key events to the DTMFDialer's onDialerKeyDown.
         if (mDialpadFragment != null && mDialpadFragment.isVisible()) {
             return mDialpadFragment.onDialerKeyDown(event);
-
-            // TODO: If the dialpad isn't currently visible, maybe
-            // consider automatically bringing it up right now?
-            // (Just to make sure the user sees the digits widget...)
-            // But this probably isn't too critical since it's awkward to
-            // use the hard keyboard while in-call in the first place,
-            // especially now that the in-call UI is portrait-only...
         }
 
         return false;
