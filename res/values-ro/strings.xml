@@ -179,9 +179,8 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Jucați mai lent."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Porniți sau întrerupeți redarea."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="general_settings_label" msgid="5748319557716674189">"Generale"</string>
-    <string name="contact_display_options_category_title" msgid="5719485933817512769">"Opțiuni de afișare a agendei"</string>
-    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Sunete și vibrații"</string>
+    <string name="display_options_title" msgid="7812852361055667468">"Opțiuni de afișare"</string>
+    <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Sunete și vibrații"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Ton de apel al telefonului"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrează și pentru apeluri"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tonuri pt. tastatura numerică"</string>

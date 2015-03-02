@@ -71,7 +71,7 @@
     <string name="description_playback_seek" msgid="4509404274968530055">"Hanapin ang posisyon ng playback"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"Bagalan ang playback"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"Bilisan ang playback"</string>
-    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Kasaysayan ng Tawag"</string>
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"History ng Tawag"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Higit pang mga pagpipilian"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"dial pad"</string>
     <string name="menu_copy" msgid="6108677035381940698">"Kopyahin"</string>
@@ -131,7 +131,7 @@
     <string name="recentMissed_empty" msgid="4901789420356796156">"Walang mga tawag"</string>
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"Walang mga kamakailang voicemail"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mga paborito lang ang ipakita"</string>
-    <string name="call_log_activity_title" msgid="4612824396355272023">"Kasaysayan"</string>
+    <string name="call_log_activity_title" msgid="4612824396355272023">"History"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Lahat"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Di nasagot"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Voicemail"</string>
@@ -178,9 +178,10 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Mag-play nang mas mabagal."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Simulan o i-pause ang pag-playback."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="general_settings_label" msgid="5748319557716674189">"Pangkalahatan"</string>
-    <string name="contact_display_options_category_title" msgid="5719485933817512769">"Mga opsyon ng display ng contact"</string>
-    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Mga tunog at pag-vibrate"</string>
+    <!-- no translation found for display_options_title (7812852361055667468) -->
+    <skip />
+    <!-- no translation found for sounds_and_vibration_title (1692290115642160845) -->
+    <skip />
     <string name="ringtone_title" msgid="760362035635084653">"Ringtone ng telepono"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Mag-vibrate din para sa tawag"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Mga dialpad tone"</string>

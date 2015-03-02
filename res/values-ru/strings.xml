@@ -26,11 +26,11 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Изменить номер и вызвать"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Добавить в контакты"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Удалить из журнала звонков"</string>
-    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Очистить журнал звонков"</string>
+    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Очистить историю звонков"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Удалить голосовое сообщение"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Поделиться"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Вызовов нет."</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Очистить журнал звонков?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Очистить историю звонков?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"История звонков будет удалена."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Очистка журнала звонков…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
@@ -180,9 +180,10 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Уменьшить скорость воспроизведения."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Начать или приостановить воспроизведение."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="general_settings_label" msgid="5748319557716674189">"Общие"</string>
-    <string name="contact_display_options_category_title" msgid="5719485933817512769">"Отображение контактов"</string>
-    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Звук и вибросигнал"</string>
+    <!-- no translation found for display_options_title (7812852361055667468) -->
+    <skip />
+    <!-- no translation found for sounds_and_vibration_title (1692290115642160845) -->
+    <skip />
     <string name="ringtone_title" msgid="760362035635084653">"Рингтон"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Вибросигнал при вызове"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Звук при наборе номера"</string>

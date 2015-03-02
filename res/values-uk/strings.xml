@@ -180,9 +180,8 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Відтворювати повільніше."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Почати або призупинити відтворення."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="general_settings_label" msgid="5748319557716674189">"Загальні налаштування"</string>
-    <string name="contact_display_options_category_title" msgid="5719485933817512769">"Параметри відображення контактів"</string>
-    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Звуки та вібросигнал"</string>
+    <string name="display_options_title" msgid="7812852361055667468">"Параметри відображення"</string>
+    <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Звуки та вібрація"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Сигнал дзвінка телефона"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Також вібрувати для дзвінків"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Звуки цифрової клавіатури"</string>

@@ -180,11 +180,10 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Odtwarzaj wolniej."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Rozpocznij lub wstrzymaj odtwarzanie."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="general_settings_label" msgid="5748319557716674189">"Ogólne"</string>
-    <string name="contact_display_options_category_title" msgid="5719485933817512769">"Opcje wyświetlania kontaktów"</string>
-    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Dźwięki i wibracje"</string>
+    <string name="display_options_title" msgid="7812852361055667468">"Opcje wyświetlania"</string>
+    <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Dźwięki i wibracje"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Dzwonek telefonu"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Wibracja podczas połączeń"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Wibracja przy połączeniach"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Dźwięki klawiatury"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Szybkie odpowiedzi"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Połączenia"</string>

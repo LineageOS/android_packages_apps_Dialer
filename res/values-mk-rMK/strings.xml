@@ -178,9 +178,8 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Репродуцирајте побавно."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Запрете ја или паузирајте ја репродукцијата."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="general_settings_label" msgid="5748319557716674189">"Општо"</string>
-    <string name="contact_display_options_category_title" msgid="5719485933817512769">"Опции за прикажување контакт"</string>
-    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Звуци и вибрации"</string>
+    <string name="display_options_title" msgid="7812852361055667468">"Опции за екран"</string>
+    <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Звуци и вибрации"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Мелодија на телефон"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Вибрации и за повици"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Тонови на подлогата за бирање"</string>

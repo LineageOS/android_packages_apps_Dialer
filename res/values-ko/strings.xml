@@ -178,9 +178,10 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"더 느리게 재생합니다."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"재생을 시작하거나 일시중지합니다."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="general_settings_label" msgid="5748319557716674189">"일반"</string>
-    <string name="contact_display_options_category_title" msgid="5719485933817512769">"연락처 표시 옵션"</string>
-    <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"소리와 진동"</string>
+    <!-- no translation found for display_options_title (7812852361055667468) -->
+    <skip />
+    <!-- no translation found for sounds_and_vibration_title (1692290115642160845) -->
+    <skip />
     <string name="ringtone_title" msgid="760362035635084653">"전화 벨소리"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"전화 올 때 벨소리와 함께 진동"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"다이얼패드 신호음"</string>
