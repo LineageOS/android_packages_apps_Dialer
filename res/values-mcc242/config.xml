@@ -15,8 +15,8 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Netherlands-->
-<!--Legal precedent source: http://blog.wetrecht.nl/telefoongesprekken-opnemen-als-bewijs-kan-dat/ -->
+<!--Allow recording for country: Norway-->
+<!--Legal precedent source: https://www.datatilsynet.no/verktoy-skjema/Veiledere/Lydopptak-/ -->
 <resources>
     <bool name="call_recording_enabled">true</bool>
 </resources>
