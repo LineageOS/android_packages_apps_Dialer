@@ -37,6 +37,7 @@ import android.view.View;
 import com.google.common.base.Preconditions;
 
 import com.android.contacts.common.interactions.TouchPointManager;
+import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.incalluibind.ObjectFactory;
 
@@ -187,6 +188,11 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
         return sInCallPresenter;
     }
 
+    @NeededForTesting
+    static synchronized void setInstance(InCallPresenter inCallPresenter) {
+        sInCallPresenter = inCallPresenter;
+    }
+
     @Override
     public void setPhone(Phone phone) {
         mPhone = phone;
@@ -207,7 +213,12 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
         return mCallList;
     }
 
-    public void setUp(Context context, CallList callList, AudioModeProvider audioModeProvider) {
+    public void setUp(Context context,
+            CallList callList,
+            AudioModeProvider audioModeProvider,
+            StatusBarNotifier statusBarNotifier,
+            ContactInfoCache contactInfoCache,
+            ProximitySensor proximitySensor) {
         if (mServiceConnected) {
             Log.i(this, "New service connection replacing existing one.");
             // retain the current resources, no need to create new ones.
@@ -220,14 +231,14 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
         Preconditions.checkNotNull(context);
         mContext = context;
 
-        mContactInfoCache = ContactInfoCache.getInstance(context);
+        mContactInfoCache = contactInfoCache;
 
-        mStatusBarNotifier = new StatusBarNotifier(context, mContactInfoCache);
+        mStatusBarNotifier = statusBarNotifier;
         addListener(mStatusBarNotifier);
 
         mAudioModeProvider = audioModeProvider;
 
-        mProximitySensor = new ProximitySensor(context, mAudioModeProvider);
+        mProximitySensor = proximitySensor;
         addListener(mProximitySensor);
 
         mCallList = callList;
@@ -918,8 +929,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
         //          [ AND NOW YOU'RE IN THE CALL. voila! ]
         //
         // Our app is started using a fullScreen notification.  We need to do this whenever
-        // we get an incoming call.
-        final boolean startStartupSequence = (InCallState.INCOMING == newState);
+        // we get an incoming call. Depending on the current context of the device, either a
+        // incoming call HUN or the actual InCallActivity will be shown.
+        final boolean startIncomingCallSequence = (InCallState.INCOMING == newState);
 
         // A dialog to show on top of the InCallUI to select a PhoneAccount
         final boolean showAccountPicker = (InCallState.WAITING_FOR_ACCOUNT == newState);
@@ -967,7 +979,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
         if (showCallUi || showAccountPicker) {
             Log.i(this, "Start in call UI");
             showInCall(false /* showDialpad */, !showAccountPicker /* newOutgoingCall */);
-        } else if (startStartupSequence) {
+        } else if (startIncomingCallSequence) {
             Log.i(this, "Start Full Screen in call UI");
 
             // We're about the bring up the in-call UI for an incoming call. If we still have

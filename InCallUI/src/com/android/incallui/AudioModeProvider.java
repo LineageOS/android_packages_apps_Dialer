@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Proxy class for getting and setting the audio mode.
  */
-/* package */ class AudioModeProvider implements InCallPhoneListener {
+public class AudioModeProvider implements InCallPhoneListener {
 
     static final int AUDIO_MODE_INVALID = 0;
 

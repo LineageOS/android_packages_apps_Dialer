@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.telecom.InCallService;
@@ -53,10 +54,16 @@ public class InCallServiceImpl extends InCallService {
 
     @Override
     public IBinder onBind(Intent intent) {
+        final Context context = getApplicationContext();
+        final ContactInfoCache contactInfoCache = ContactInfoCache.getInstance(context);
         InCallPresenter.getInstance().setUp(
                 getApplicationContext(),
                 CallList.getInstance(),
-                AudioModeProvider.getInstance());
+                AudioModeProvider.getInstance(),
+                new StatusBarNotifier(context, contactInfoCache),
+                contactInfoCache,
+                new ProximitySensor(context, AudioModeProvider.getInstance())
+                );
         InCallPresenter.getInstance().onServiceBind();
         InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
         return super.onBind(intent);

@@ -17,6 +17,7 @@
 package com.android.incallui;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.testing.NeededForTesting;
 
 import android.content.Context;
 import android.net.Uri;
@@ -187,6 +188,16 @@ public final class Call {
 
     private InCallVideoCallListener mVideoCallListener;
 
+    /**
+     * Used only to create mock calls for testing
+     */
+    @NeededForTesting
+    Call(int state) {
+        mTelecommCall = null;
+        mId = ID_PREFIX + Integer.toString(sIdCounter++);
+        setState(state);
+    }
+
     public Call(android.telecom.Call telecommCall) {
         mTelecommCall = telecommCall;
         mId = ID_PREFIX + Integer.toString(sIdCounter++);
@@ -270,7 +281,7 @@ public final class Call {
     }
 
     public int getState() {
-        if (mTelecommCall.getParent() != null) {
+        if (mTelecommCall != null && mTelecommCall.getParent() != null) {
             return State.CONFERENCED;
         } else {
             return mState;
@@ -401,6 +412,12 @@ public final class Call {
 
     @Override
     public String toString() {
+        if (mTelecommCall == null) {
+            // This should happen only in testing since otherwise we would never have a null
+            // Telecom call.
+            return String.valueOf(mId);
+        }
+
         return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s, conferenceable:%s, " +
                 "videoState:%d]",
                 mId,
