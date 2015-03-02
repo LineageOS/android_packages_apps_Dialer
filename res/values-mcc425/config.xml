@@ -15,8 +15,12 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Netherlands-->
-<!--Legal precedent source: http://blog.wetrecht.nl/telefoongesprekken-opnemen-als-bewijs-kan-dat/ -->
+<!--
+     Allow recording for country: Israel
+     Legal precedent source: http://www.knesset.gov.il/review/data/heb/law/kns9_monitoring.pdf
+-->
+
 <resources>
     <bool name="call_recording_enabled">true</bool>
+    <integer name="call_recording_audio_source">4</integer>
 </resources>
