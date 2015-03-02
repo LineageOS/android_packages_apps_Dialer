@@ -442,7 +442,6 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      */
     @Override
     public void onDisconnect(Call call) {
-        hideDialpadForDisconnect();
         maybeShowErrorDialogOnDisconnect(call);
 
         // We need to do the run the same code as onCallListChange.
@@ -859,15 +858,6 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
                 setDisconnectCauseForMissingAccounts(call);
             }
             mInCallActivity.maybeShowErrorDialogOnDisconnect(call.getDisconnectCause());
-        }
-    }
-
-    /**
-     * Hides the dialpad.  Called when a call is disconnected (Requires hiding dialpad).
-     */
-    private void hideDialpadForDisconnect() {
-        if (isActivityStarted()) {
-            mInCallActivity.hideDialpadForDisconnect();
         }
     }
 
