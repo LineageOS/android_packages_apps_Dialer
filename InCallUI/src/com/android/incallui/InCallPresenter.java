@@ -123,8 +123,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             new android.telecom.Call.Listener() {
         @Override
         public void onPostDialWait(android.telecom.Call call, String remainingPostDialSequence) {
-            onPostDialCharWait(
-                    CallList.getInstance().getCallByTelecommCall(call).getId(),
+            onPostDialCharWait(mCallList.getCallByTelecommCall(call).getId(),
                     remainingPostDialSequence);
         }
 
@@ -132,7 +131,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         public void onDetailsChanged(android.telecom.Call call,
                 android.telecom.Call.Details details) {
             for (InCallDetailsListener listener : mDetailsListeners) {
-                listener.onDetailsChanged(CallList.getInstance().getCallByTelecommCall(call),
+                listener.onDetailsChanged(mCallList.getCallByTelecommCall(call),
                         details);
             }
         }
@@ -142,7 +141,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
                 android.telecom.Call call, List<android.telecom.Call> conferenceableCalls) {
             Log.i(this, "onConferenceableCallsChanged: " + call);
             for (InCallDetailsListener listener : mDetailsListeners) {
-                listener.onDetailsChanged(CallList.getInstance().getCallByTelecommCall(call),
+                listener.onDetailsChanged(mCallList.getCallByTelecommCall(call),
                         call.getDetails());
             }
         }
@@ -447,7 +446,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         maybeShowErrorDialogOnDisconnect(call);
 
         // We need to do the run the same code as onCallListChange.
-        onCallListChange(CallList.getInstance());
+        onCallListChange(mCallList);
 
         if (isActivityStarted()) {
             mInCallActivity.dismissKeyguard(false);
@@ -767,7 +766,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         /**
          * INCOMING CALL
          */
-        final CallList calls = CallList.getInstance();
+        final CallList calls = mCallList;
         final Call incomingCall = calls.getIncomingCall();
         Log.v(this, "incomingCall: " + incomingCall);
 
@@ -944,7 +943,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         // machine. Telecom should also be the component responsible for disconnecting a call
         // with no valid accounts.
         showCallUi |= InCallState.PENDING_OUTGOING == newState && mainUiNotVisible
-                && isCallWithNoValidAccounts(CallList.getInstance().getPendingOutgoingCall());
+                && isCallWithNoValidAccounts(mCallList.getPendingOutgoingCall());
 
         // The only time that we have an instance of mInCallActivity and it isn't started is
         // when it is being destroyed.  In that case, lets avoid bringing up another instance of
@@ -1342,7 +1341,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      */
     public void setThemeColors() {
         // This method will set the background to default if the color is PhoneAccount.NO_COLOR.
-        mThemeColors = getColorsFromCall(CallList.getInstance().getFirstCall());
+        mThemeColors = getColorsFromCall(mCallList.getFirstCall());
 
         if (mInCallActivity == null) {
             return;
