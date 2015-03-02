@@ -627,7 +627,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     /** Asserts that the name text view is shown and contains the given text. */
     private void assertNameIs(CallLogListItemViews views, String name) {
         assertEquals(View.VISIBLE, views.phoneCallDetailsViews.nameView.getVisibility());
-        assertEquals(name, views.phoneCallDetailsViews.nameView.getText());
+        assertEquals(name, views.phoneCallDetailsViews.nameView.getText().toString());
     }
 
     /** Asserts that the label text view contains the given text. */
