@@ -47,6 +47,7 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.util.TelecomUtil;
+import com.android.internal.telephony.ConfigResourceUtil;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class SpecialCharSequenceMgr {
     private static final String SECRET_CODE_ACTION = "android.provider.Telephony.SECRET_CODE";
     private static final String MMI_IMEI_DISPLAY = "*#06#";
     private static final String MMI_REGULATORY_INFO_DISPLAY = "*#07#";
-
+    private static final int IMEI_14_DIGIT = 14;
     /**
      * Remembers the previous {@link QueryHandler} and cancel the operation when needed, to
      * prevent possible crash.
@@ -329,6 +330,7 @@ public class SpecialCharSequenceMgr {
     static boolean handleDeviceIdDisplay(Context context, String input) {
         TelephonyManager telephonyManager =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        ConfigResourceUtil mConfigResUtil = new ConfigResourceUtil();
 
         if (telephonyManager != null && input.equals(MMI_IMEI_DISPLAY)) {
             int labelResId = (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM) ?
@@ -337,6 +339,20 @@ public class SpecialCharSequenceMgr {
             List<String> deviceIds = new ArrayList<String>();
             for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
                 String deviceId = telephonyManager.getDeviceId(slot);
+
+                boolean enable14DigitImei = false;
+                try {
+                    enable14DigitImei = mConfigResUtil.getBooleanValue(context,
+                            "config_enable_display_14digit_imei");
+                } catch(RuntimeException ex) {
+                    //do Nothing
+                    Log.e(TAG, "Config for 14 digit IMEI not found: " + ex);
+                }
+                if (enable14DigitImei && deviceId != null
+                        && deviceId.length() > IMEI_14_DIGIT) {
+                    deviceId = deviceId.substring(0, IMEI_14_DIGIT);
+                }
+
                 if (!TextUtils.isEmpty(deviceId)) {
                     deviceIds.add(deviceId);
                 }
