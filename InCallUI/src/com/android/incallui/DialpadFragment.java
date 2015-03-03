@@ -361,7 +361,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         Log.d(this, "onKey:  keyCode " + keyCode + ", view " + v);
 
-        if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+        if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
             int viewId = v.getId();
             if (mDisplayMap.containsKey(viewId)) {
                 switch (event.getAction()) {
