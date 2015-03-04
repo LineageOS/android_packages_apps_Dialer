@@ -178,10 +178,8 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Նվագարկել ավելի դանդաղ:"</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Սկսել կամ դադարեցնել նվագարկումը:"</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <!-- no translation found for display_options_title (7812852361055667468) -->
-    <skip />
-    <!-- no translation found for sounds_and_vibration_title (1692290115642160845) -->
-    <skip />
+    <string name="display_options_title" msgid="7812852361055667468">"Ցուցադրման ընտրանքներ"</string>
+    <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Ձայներ և թրթռում"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Հեռախոսի զանգերանգ"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Նաև թրթռալ զանգերի ժամանակ"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Թվաշարի ձայներանգներ"</string>
