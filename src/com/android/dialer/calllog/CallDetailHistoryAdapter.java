@@ -169,7 +169,7 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
                     (ViewGroup) result.findViewById(R.id.recording_playback_layout);
             playbackView.removeAllViews();
             for (CallRecording recording : recordings) {
-                Button button = mCallRecordingPlayer.createPlaybackButton(mContext, recording);
+                Button button = mCallRecordingPlayer.createPlaybackButton(recording);
                 playbackView.addView(button);
             }
         }
