@@ -16,7 +16,9 @@
 
 package com.android.dialer.util;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Environment;
@@ -41,9 +43,23 @@ public class CallRecordingPlayer implements MediaPlayer.OnCompletionListener {
     private MediaPlayer mPlayer = null;
     private boolean mPlaying = false;
     private PlayButton mButton;
+    private Activity mActivity;
 
-    public Button createPlaybackButton(Context context, CallRecording recording) {
-        return new PlayButton(context, recording, this);
+    /**
+     * Constructor
+     *
+     * @param context {@link android.content.Context}
+     * @throws IllegalArgumentException {@link java.lang.IllegalArgumentException}
+     */
+    public CallRecordingPlayer(Activity activity) throws IllegalArgumentException {
+        if (activity == null) {
+            throw new IllegalArgumentException("'activity' cannot be null!");
+        }
+        mActivity = activity;
+    }
+
+    public Button createPlaybackButton(CallRecording recording) {
+        return new PlayButton(mActivity, recording, this);
     }
 
     // button to toggle playback for a call recording
@@ -51,11 +67,13 @@ public class CallRecordingPlayer implements MediaPlayer.OnCompletionListener {
         private boolean mPlaying = false;
         private CallRecording mRecording;
         private CallRecordingPlayer mPlayer;
+        private Activity mActivity;
 
-        public PlayButton(Context context, CallRecording recording, CallRecordingPlayer player) {
-            super(context);
+        public PlayButton(Activity activity, CallRecording recording, CallRecordingPlayer player) {
+            super(activity);
             mRecording = recording;
             mPlayer = player;
+            mActivity = activity;
             reset();
             setBackgroundColor(Color.TRANSPARENT);
             setOnClickListener(this);
@@ -64,13 +82,20 @@ public class CallRecordingPlayer implements MediaPlayer.OnCompletionListener {
         @Override
         public void onClick(View v) {
             if (!mPlaying) {
+                // Lock orientation for the playback duration
+                mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
                 mPlayer.play(mRecording, this);
                 if (!mPlayer.isPlaying()) {
-                    Toast.makeText(mContext, R.string.call_playback_error_message,
+                    Toast.makeText(getContext(), R.string.call_playback_error_message,
                             Toast.LENGTH_SHORT).show();
+                    // Play failed, lets unlock
+                    mActivity.setRequestedOrientation(
+                            ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                 }
             } else {
                 mPlayer.stop();
+                mActivity.setRequestedOrientation(
+                        ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
             }
 
             mPlaying = mPlayer.isPlaying();
@@ -80,7 +105,7 @@ public class CallRecordingPlayer implements MediaPlayer.OnCompletionListener {
         private void updateState() {
             setText(mPlaying ? R.string.stop_call_playback : R.string.start_call_playback);
             setCompoundDrawablesRelativeWithIntrinsicBounds(mPlaying
-                    ? R.drawable.ic_playback_stop_dk : R.drawable.ic_playback_dk,
+                            ? R.drawable.ic_playback_stop_dk : R.drawable.ic_playback_dk,
                     0, 0, 0);
         }
 
@@ -138,6 +163,8 @@ public class CallRecordingPlayer implements MediaPlayer.OnCompletionListener {
 
     @Override
     public void onCompletion(MediaPlayer mp) {
+        mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+
         resetButton();
 
         mPlayer.release();
