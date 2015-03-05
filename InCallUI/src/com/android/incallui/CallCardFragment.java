@@ -24,7 +24,6 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -33,11 +32,9 @@ import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLayoutChangeListener;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver;
@@ -51,7 +48,6 @@ import android.widget.TextView;
 
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.contacts.common.widget.FloatingActionButtonController;
-import com.android.incallui.service.PhoneNumberService;
 import com.android.phone.common.animation.AnimUtils;
 
 import java.util.List;
@@ -63,7 +59,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         implements CallCardPresenter.CallCardUi {
 
     private AnimatorSet mAnimatorSet;
-    private int mRevealAnimationDuration;
     private int mShrinkAnimationDuration;
     private int mFabNormalDiameter;
     private int mFabSmallDiameter;
@@ -108,9 +103,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private ImageButton mFloatingActionButton;
     private int mFloatingActionButtonVerticalOffset;
 
-    // Cached DisplayMetrics density.
-    private float mDensity;
-
     private float mTranslationOffset;
     private Animation mPulseAnimation;
 
@@ -132,7 +124,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mRevealAnimationDuration = getResources().getInteger(R.integer.reveal_animation_duration);
         mShrinkAnimationDuration = getResources().getInteger(R.integer.shrink_animation_duration);
         mVideoAnimationDuration = getResources().getInteger(R.integer.video_animation_duration);
         mFloatingActionButtonVerticalOffset = getResources().getDimensionPixelOffset(
@@ -156,9 +147,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-
-        mDensity = getResources().getDisplayMetrics().density;
         mTranslationOffset =
                 getResources().getDimensionPixelSize(R.dimen.call_card_anim_translate_y_offset);
 
@@ -230,6 +218,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         mPrimaryName.setElegantTextHeight(false);
         mCallStateLabel.setElegantTextHeight(false);
+
+        final LayoutTransition transition = mPrimaryCallInfo.getLayoutTransition();
+        transition.enableTransitionType(LayoutTransition.CHANGING);
     }
 
     @Override
@@ -425,7 +416,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void setPrimary(String number, String name, boolean nameIsNumber, String label,
             Drawable photo, boolean isSipCall) {
         Log.d(this, "Setting primary call");
-
         // set the name field.
         setPrimaryName(name, nameIsNumber);
 
@@ -842,13 +832,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
     }
 
-    public void animateForNewOutgoingCall(final Point touchPoint,
-            final boolean showCircularReveal) {
+    @Override
+    public void animateForNewOutgoingCall() {
         final ViewGroup parent = (ViewGroup) mPrimaryCallCardContainer.getParent();
 
         final ViewTreeObserver observer = getView().getViewTreeObserver();
 
-        mPrimaryCallInfo.getLayoutTransition().disableTransitionType(LayoutTransition.CHANGING);
+        final LayoutTransition transition = mPrimaryCallInfo.getLayoutTransition();
+        transition.disableTransitionType(LayoutTransition.CHANGING);
 
         observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
             @Override
@@ -862,21 +853,21 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 final LayoutIgnoringListener listener = new LayoutIgnoringListener();
                 mPrimaryCallCardContainer.addOnLayoutChangeListener(listener);
 
-                // Prepare the state of views before the circular reveal animation
+                // Prepare the state of views before the slide animation
                 final int originalHeight = mPrimaryCallCardContainer.getHeight();
                 mPrimaryCallCardContainer.setBottom(parent.getHeight());
 
                 // Set up FAB.
                 mFloatingActionButtonContainer.setVisibility(View.GONE);
                 mFloatingActionButtonController.setScreenWidth(parent.getWidth());
+
                 mCallButtonsContainer.setAlpha(0);
                 mCallStateLabel.setAlpha(0);
                 mPrimaryName.setAlpha(0);
                 mCallTypeLabel.setAlpha(0);
                 mCallNumberAndLabel.setAlpha(0);
 
-                final Animator animator = getOutgoingCallAnimator(touchPoint,
-                        parent.getHeight(), originalHeight, showCircularReveal);
+                final Animator animator = getShrinkAnimator(parent.getHeight(), originalHeight);
 
                 animator.addListener(new AnimatorListenerAdapter() {
                     @Override
@@ -990,41 +981,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         return shrinkAnimator;
     }
 
-    private Animator getRevealAnimator(Point touchPoint) {
-        final Activity activity = getActivity();
-        final View view  = activity.getWindow().getDecorView();
-        final Display display = activity.getWindowManager().getDefaultDisplay();
-        final Point size = new Point();
-        display.getSize(size);
-
-        int startX = size.x / 2;
-        int startY = size.y / 2;
-        if (touchPoint != null) {
-            startX = touchPoint.x;
-            startY = touchPoint.y;
-        }
-
-        final Animator valueAnimator = ViewAnimationUtils.createCircularReveal(view,
-                startX, startY, 0, Math.max(size.x, size.y));
-        valueAnimator.setDuration(mRevealAnimationDuration);
-        return valueAnimator;
-    }
-
-    private Animator getOutgoingCallAnimator(Point touchPoint, int startHeight, int endHeight,
-            boolean showCircularReveal) {
-
-        final Animator shrinkAnimator = getShrinkAnimator(startHeight, endHeight);
-
-        if (!showCircularReveal) {
-            return shrinkAnimator;
-        }
-
-        final Animator revealAnimator = getRevealAnimator(touchPoint);
-        final AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playSequentially(revealAnimator, shrinkAnimator);
-        return animatorSet;
-    }
-
     private void assignTranslateAnimation(View view, int offset) {
         view.setTranslationY(mTranslationOffset * offset);
         view.animate().translationY(0).alpha(1).withLayer()
@@ -1045,7 +1001,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         setViewStatePostAnimation(mCallStateIcon);
 
         mPrimaryCallCardContainer.removeOnLayoutChangeListener(layoutChangeListener);
-        mPrimaryCallInfo.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+
+        final LayoutTransition transition = mPrimaryCallInfo.getLayoutTransition();
+        transition.enableTransitionType(LayoutTransition.CHANGING);
+
         mFloatingActionButtonController.scaleIn(AnimUtils.NO_DELAY);
     }
 

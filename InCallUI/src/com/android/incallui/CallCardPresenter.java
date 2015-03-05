@@ -17,6 +17,8 @@
 package com.android.incallui;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -34,6 +36,7 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
+import com.android.incallui.CircularRevealFragment.OnCircularRevealCompleteListener;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
@@ -743,5 +746,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setProgressSpinnerVisible(boolean visible);
         void showManageConferenceCallButton(boolean visible);
         boolean isManageConferenceVisible();
+        void animateForNewOutgoingCall();
     }
 }

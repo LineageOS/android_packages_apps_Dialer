@@ -66,7 +66,6 @@ public class InCallActivity extends Activity {
     public static final String SHOW_DIALPAD_EXTRA = "InCallActivity.show_dialpad";
     public static final String DIALPAD_TEXT_EXTRA = "InCallActivity.dialpad_text";
     public static final String NEW_OUTGOING_CALL_EXTRA = "InCallActivity.new_outgoing_call";
-    public static final String SHOW_CIRCULAR_REVEAL_EXTRA = "InCallActivity.show_circular_reveal";
 
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
@@ -489,12 +488,9 @@ public class InCallActivity extends Activity {
                     }
                 }
 
-                // This is only true in the case where an outgoing call is initiated by tapping
-                // on the "Select account dialog", in which case we skip the initial animation. In
-                // most other cases the circular reveal is done by OutgoingCallAnimationActivity.
-                final boolean showCircularReveal =
-                        intent.getBooleanExtra(SHOW_CIRCULAR_REVEAL_EXTRA, false);
-                mCallCardFragment.animateForNewOutgoingCall(touchPoint, showCircularReveal);
+                // Start animation for new outgoing call
+                CircularRevealFragment.startCircularReveal(getFragmentManager(), touchPoint,
+                        InCallPresenter.getInstance());
 
                 // InCallActivity is responsible for disconnecting a new outgoing call if there
                 // is no way of making it (i.e. no valid call capable accounts)
