@@ -1079,7 +1079,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void setConferenceDialButtonVisibility(boolean enabled) {
         boolean imsUseEnabled =
-                ImsManager.isEnhanced4gLteModeSettingEnabledByPlatform(this) &&
+                ImsManager.isVolteEnabledByPlatform(this) &&
                 ImsManager.isEnhanced4gLteModeSettingEnabledByUser(this);
         if(mConferenceDialButton != null) {
             mConferenceDialButton.setVisibility((enabled && imsUseEnabled) ?
