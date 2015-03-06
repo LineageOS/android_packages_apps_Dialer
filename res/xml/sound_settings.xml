@@ -26,15 +26,21 @@
         android:ringtoneType="ringtone" />
 
     <CheckBoxPreference
+        android:key="@string/vibrate_on_preference_key"
+        android:title="@string/vibrate_on_ring_title"
+        android:persistent="false"
+        android:defaultValue="false" />
+
+    <CheckBoxPreference
         android:key="@string/play_dtmf_preference_key"
         android:title="@string/dtmf_tone_enable_title"
         android:persistent="false"
         android:defaultValue="true" />
 
-    <CheckBoxPreference
-        android:key="@string/vibrate_on_preference_key"
-        android:title="@string/vibrate_on_ring_title"
-        android:persistent="false"
-        android:defaultValue="false" />
+    <ListPreference
+        android:key="@string/dtmf_tone_length_preference_key"
+        android:title="@string/dtmf_tone_length_title"
+        android:entries="@array/dtmf_tone_length_entries"
+        android:entryValues="@array/dtmf_tone_length_entry_values" />
 
 </PreferenceScreen>

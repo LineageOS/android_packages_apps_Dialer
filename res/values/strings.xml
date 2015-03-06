@@ -707,6 +707,18 @@
 
     <!-- Setting option name to enable or disable DTMF tone sound [CHAR LIMIT=30] -->
     <string name="dtmf_tone_enable_title">Dialpad tones</string>
+    <!-- Label for setting to adjust the length of DTMF tone sounds. [CHAR LIMIT=40] -->
+    <string name="dtmf_tone_length_title">Dialpad tone length</string>
+    <!-- Options displayed for the length of DTMF tone sounds. [CHAR LIMIT=40] -->
+    <string-array name="dtmf_tone_length_entries">
+      <item>Normal</item>
+      <item>Long</item>
+    </string-array>
+    <!-- Do not translate. -->
+    <string-array name="dtmf_tone_length_entry_values" translatable="false">
+       <item>0</item>
+       <item>1</item>
+    </string-array>
 
     <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
     <string name="respond_via_sms_setting_title">Quick responses</string>
@@ -723,4 +735,6 @@
     <string name="vibrate_on_preference_key" translatable="false">button_vibrate_on_ring</string>
     <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->
     <string name="play_dtmf_preference_key" translatable="false">button_play_dtmf_tone</string>
+    <!-- DO NOT TRANSLATE. Internal key for DTMF tone length preference. -->
+    <string name="dtmf_tone_length_preference_key" translatable="false">button_dtmf_settings</string>
 </resources>
