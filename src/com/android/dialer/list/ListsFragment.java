@@ -42,7 +42,7 @@ import java.util.ArrayList;
  *
  * Contains a ViewPager that contains various contact lists like the Speed Dial list and the
  * All Contacts list. This will also eventually contain the logic that allows sliding the
- * ViewPager containing the lists up above the shortcut cards and pin it against the top of the
+ * ViewPager containing the lists up above the search bar and pin it against the top of the
  * screen.
  */
 public class ListsFragment extends Fragment implements CallLogQueryHandler.Listener,
@@ -76,7 +76,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
     private ViewPager mViewPager;
     private ViewPagerTabs mViewPagerTabs;
     private ViewPagerAdapter mViewPagerAdapter;
-    private SwipeableShortcutCard mShortcutCard;
     private RemoveView mRemoveView;
     private View mRemoveViewContent;
     private SpeedDialFragment mSpeedDialFragment;
@@ -107,26 +106,10 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
     private PanelSlideCallbacks mPanelSlideCallbacks = new PanelSlideCallbacks() {
         @Override
         public void onPanelSlide(View panel, float slideOffset) {
-            // For every 1 percent that the panel is slid upwards, clip 1 percent off the top
-            // edge of the shortcut card, to achieve the animated effect of the shortcut card
-            // being pushed out of view when the panel is slid upwards. slideOffset is 1 when
-            // the shortcut card is fully exposed, and 0 when completely hidden.
-            if (mShortcutCard.isShown()) {
-                float ratioCardHidden = (1 - slideOffset);
-                mShortcutCard.clipCard(ratioCardHidden);
-            }
-
             if (mActionBar != null) {
-                // Amount of available space that is not being hidden by the bottom pane
-                final int shortcutCardHeight =
-                        mShortcutCard.isShown() ? mShortcutCard.getHeight() : 0;
-                final int topPaneHeight = (int) (slideOffset * shortcutCardHeight);
-
-                final int availableActionBarHeight =
-                        Math.min(mActionBar.getHeight(), topPaneHeight);
-                final ActionBarController controller =
+                ActionBarController controller =
                         ((HostInterface) getActivity()).getActionBarController();
-                controller.setHideOffset(mActionBar.getHeight() - availableActionBarHeight);
+                controller.setHideOffset((int) (mActionBar.getHeight() * (1 - slideOffset)));
 
                 if (!mActionBar.isShowing()) {
                     mActionBar.show();
@@ -307,9 +290,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mViewPagerTabs.setViewPager(mViewPager);
         addOnPageChangeListener(mViewPagerTabs);
 
-        mShortcutCard = (SwipeableShortcutCard) parentView.findViewById(R.id.shortcut_card);
-        new ShortcutCardsManager(getActivity(), this, mCallLogAdapter, mShortcutCard);
-
         mRemoveView = (RemoveView) parentView.findViewById(R.id.remove_view);
         mRemoveViewContent = parentView.findViewById(R.id.remove_view_content);
 
@@ -349,20 +329,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mCallLogQueryHandler.fetchCalls(CallLogQueryHandler.CALL_TYPE_ALL, mLastCallShortcutDate);
     }
 
-    public void dismissShortcut(View view) {
-        mLastCallShortcutDate = mCurrentCallShortcutDate;
-        final SharedPreferences prefs = view.getContext().getSharedPreferences(
-                DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-        prefs.edit().putLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, mLastCallShortcutDate)
-                .apply();
-        fetchCalls();
-
-        LayoutTransition transition = mOverlappingPaneLayout.getLayoutTransition();
-        // Turns on animations for all types of layout changes so that they occur for
-        // height changes.
-        transition.enableTransitionType(LayoutTransition.CHANGING);
-    }
-
     public void addOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
         if (!mOnPageChangeListeners.contains(onPageChangeListener)) {
             mOnPageChangeListeners.add(onPageChangeListener);
@@ -399,14 +365,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mRemoveViewContent.setVisibility(show ? View.VISIBLE : View.GONE);
         mRemoveView.setAlpha(show ? 0 : 1);
         mRemoveView.animate().alpha(show ? 1 : 0).start();
-
-        if (mShortcutCard.isShown()) {
-            final View child = mShortcutCard.getChildAt(0);
-            if (child != null) {
-                child.animate().withLayer()
-                        .alpha(show ? REMOVE_VIEW_SHOWN_ALPHA : REMOVE_VIEW_HIDDEN_ALPHA).start();
-            }
-        }
     }
 
     public boolean shouldShowActionBar() {

@@ -64,18 +64,6 @@
     <dimen name="favorites_row_end_padding">0dp</dimen>
     <dimen name="favorites_row_undo_text_side_padding">32dp</dimen>
 
-    <!-- Dimensions for most recent call shortcut cards -->
-    <dimen name="recent_call_log_item_translation_z">3dp</dimen>
-    <dimen name="recent_call_log_item_margin_horizontal">8dp</dimen>
-    <dimen name="recent_call_log_item_margin_top">4dp</dimen>
-    <dimen name="recent_call_log_item_margin_bottom">6dp</dimen>
-
-    <!-- The maximum amount to clip on the left and right of the recent call shortcut card -->
-    <dimen name="recent_call_log_item_horizontal_clip_limit">20dp</dimen>
-    <dimen name="recent_call_log_item_padding_start">8dp</dimen>
-    <dimen name="recent_call_log_item_padding_top">12dp</dimen>
-    <dimen name="recent_call_log_item_padding_bottom">11dp</dimen>
-
     <dimen name="call_log_item_extra_padding_vertical">4dp</dimen>
 
 

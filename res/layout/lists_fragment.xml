@@ -21,11 +21,11 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true" >
 
-    <com.android.dialer.list.SwipeableShortcutCard
-        android:id="@+id/shortcut_card"
+    <!-- TODO: Apply background color to ActionBar instead of a FrameLayout. For now, this is the
+         easiest way to preserve correct pane scrolling and searchbar collapse/expand behaviors. -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/action_bar_height_large"
+        android:layout_height="@dimen/action_bar_height_large"
         android:background="@color/actionbar_background_color" />
 
     <FrameLayout
