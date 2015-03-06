@@ -33,7 +33,7 @@
   <string name="preference_category_t9_dialpad_search">Toetsenblok T9-zoeken</string>
   <string name="t9_search_input_locale">T9-zoeken</string>
   <string name="t9_search_input_locale_default">Standaard</string>
-  <string name="type_blacklist">Op de zwarte lijst geplaatste oproep</string>
+  <string name="type_blacklist">Op zwarte lijst geplaatste oproep</string>
   <string name="call_log_stats_title">Statistieken</string>
   <string name="callStatsDetailTitle">Gespreksstatistiekdetails</string>
   <string name="call_stats">Gespreksstatistieken</string>
@@ -83,7 +83,7 @@
   <string name="incall_vibrate_45_title">Elke minuut trillen</string>
   <string name="incall_vibrate_45_summary">Elke 45<SUP>e</SUP> seconde van een minuut trillen bij uitgaande gesprekken</string>
   <string name="detailed_incall_info_title">Gedetailleerde bellerinformatie</string>
-  <string name="detailed_incall_info_summary">Extra informatie over de beller weergeven bij inkomende oproep-scherm</string>
+  <string name="detailed_incall_info_summary">Extra informatie over de beller weergeven op inkomende oproep-scherm</string>
   <string name="video_call">Videogesprek</string>
   <string name="call_duration_active">Actieve duur:</string>
   <string name="call_duration_call_out">Gespreksduur:</string>
