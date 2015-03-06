@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ad45d7e_f5ec5b91",
+        "filename": "src/com/android/dialer/util/CallRecordingPlayer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 9621
+      },
+      "writtenOn": "2015-03-06T12:22:02Z",
+      "side": 1,
+      "message": "Since you\u0027re using this primarily to make calls on the activity, can we just strongly type this as an Activity in the first place?",
+      "revId": "3805173f6f4b2f2b2ddc9e7dd997225fe5e6793f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ad45d7e_5502873f",
+        "filename": "src/com/android/dialer/util/CallRecordingPlayer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 9621
+      },
+      "writtenOn": "2015-03-06T12:22:02Z",
+      "side": 1,
+      "message": "I think we can avoid all the instanceof checks if we just pass an Activity directly to PlayButton instead.",
+      "revId": "3805173f6f4b2f2b2ddc9e7dd997225fe5e6793f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
