@@ -495,7 +495,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         mFirstLaunch = false;
         prepareVoiceSearchButton();
-        mDialerDatabaseHelper.startSmartDialUpdateThread();
         updateFloatingActionButtonControllerAlignment(false /* animate */);
         setConferenceDialButtonImage(false);
         setConferenceDialButtonVisibility(true);
