@@ -31,8 +31,6 @@ import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.ActionBarController;
-import com.android.dialer.widget.OverlappingPaneLayout;
-import com.android.dialer.widget.OverlappingPaneLayout.PanelSlideCallbacks;
 import com.android.dialerbind.ObjectFactory;
 
 import java.util.ArrayList;
@@ -64,9 +62,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
     private static final String KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE =
             "key_last_dismissed_call_shortcut_date";
 
-    public static final float REMOVE_VIEW_SHOWN_ALPHA = 0.5f;
-    public static final float REMOVE_VIEW_HIDDEN_ALPHA = 1;
-
     public interface HostInterface {
         public void showCallHistory();
         public ActionBarController getActionBarController();
@@ -88,9 +83,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
     private CallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
-    private OverlappingPaneLayout mOverlappingPaneLayout;
-
-    private boolean mIsPanelOpen = true;
 
     /**
      * Call shortcuts older than this date (persisted in shared preferences) will not show up in
@@ -102,64 +94,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
      * The date of the current call shortcut that is showing on screen.
      */
     private long mCurrentCallShortcutDate = 0;
-
-    private PanelSlideCallbacks mPanelSlideCallbacks = new PanelSlideCallbacks() {
-        @Override
-        public void onPanelSlide(View panel, float slideOffset) {
-            if (mActionBar != null) {
-                ActionBarController controller =
-                        ((HostInterface) getActivity()).getActionBarController();
-                controller.setHideOffset((int) (mActionBar.getHeight() * (1 - slideOffset)));
-
-                if (!mActionBar.isShowing()) {
-                    mActionBar.show();
-                }
-            }
-        }
-
-        @Override
-        public void onPanelOpened(View panel) {
-            if (DEBUG) {
-                Log.d(TAG, "onPanelOpened");
-            }
-            mIsPanelOpen = true;
-        }
-
-        @Override
-        public void onPanelClosed(View panel) {
-            if (DEBUG) {
-                Log.d(TAG, "onPanelClosed");
-            }
-            mIsPanelOpen = false;
-        }
-
-        @Override
-        public void onPanelFlingReachesEdge(int velocityY) {
-            if (getCurrentListView() != null) {
-                getCurrentListView().fling(velocityY);
-            }
-        }
-
-        @Override
-        public boolean isScrollableChildUnscrolled() {
-            final AbsListView listView = getCurrentListView();
-            return listView != null && (listView.getChildCount() == 0
-                    || listView.getChildAt(0).getTop() == listView.getPaddingTop());
-        }
-    };
-
-    private AbsListView getCurrentListView() {
-        final int position = mViewPager.getCurrentItem();
-        switch (getRtlPosition(position)) {
-            case TAB_INDEX_SPEED_DIAL:
-                return mSpeedDialFragment == null ? null : mSpeedDialFragment.getListView();
-            case TAB_INDEX_RECENTS:
-                return mRecentsFragment == null ? null : mRecentsFragment.getListView();
-            case TAB_INDEX_ALL_CONTACTS:
-                return mAllContactsFragment == null ? null : mAllContactsFragment.getListView();
-        }
-        throw new IllegalStateException("No fragment at position " + position);
-    }
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager fm) {
@@ -293,8 +227,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mRemoveView = (RemoveView) parentView.findViewById(R.id.remove_view);
         mRemoveViewContent = parentView.findViewById(R.id.remove_view_content);
 
-        setupPaneLayout((OverlappingPaneLayout) parentView);
-        mOverlappingPaneLayout = (OverlappingPaneLayout) parentView;
         Trace.endSection();
         Trace.endSection();
         return parentView;
@@ -315,10 +247,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         }
 
         mCallLogAdapter.changeCursor(cursor);
-
-        // Refresh the overlapping pane to ensure that any changes in the shortcut card height
-        // are appropriately reflected in the overlap position.
-        mOverlappingPaneLayout.refresh();
 
         // Return true; took ownership of cursor
         return true;
@@ -368,21 +296,8 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
     }
 
     public boolean shouldShowActionBar() {
-        return mIsPanelOpen && mActionBar != null;
-    }
-
-    public boolean isPaneOpen() {
-        return mIsPanelOpen;
-    }
-
-    private void setupPaneLayout(OverlappingPaneLayout paneLayout) {
-        // TODO: Remove the notion of a capturable view. The entire view be slideable, once
-        // the framework better supports nested scrolling.
-        paneLayout.setCapturableView(mViewPagerTabs);
-        paneLayout.openPane();
-        paneLayout.setPanelSlideCallbacks(mPanelSlideCallbacks);
-        paneLayout.setIntermediatePinnedOffset(
-                ((HostInterface) getActivity()).getActionBarController().getActionBarHeight());
+        // TODO: Update this based on scroll state.
+        return mActionBar != null;
     }
 
     public SpeedDialFragment getSpeedDialFragment() {
