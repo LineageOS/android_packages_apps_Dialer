@@ -564,7 +564,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         prepareVoiceSearchButton();
-        mDialerDatabaseHelper.startSmartDialUpdateThread();
         mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
 
         if (getIntent().hasExtra(EXTRA_SHOW_TAB)) {
