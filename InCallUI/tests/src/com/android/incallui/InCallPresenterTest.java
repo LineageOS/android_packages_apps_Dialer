@@ -22,6 +22,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.telecom.PhoneAccountHandle;
 import android.test.InstrumentationTestCase;
 
 import com.android.incallui.InCallPresenter.InCallState;
@@ -31,10 +32,11 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 public class InCallPresenterTest extends InstrumentationTestCase {
-    private static final Call TEST_INCOMING_CALL = new Call(Call.State.INCOMING);
-    private static final Call TEST_ACTIVE_CALL = new Call(Call.State.ACTIVE);
-    private static final Call TEST_PENDING_CALL = new Call(Call.State.CONNECTING);
-    private static final Call TEST_WAITING_FOR_ACCOUNT_CALL = new Call(Call.State.PRE_DIAL_WAIT);
+    private Call mIncomingCall;
+    private Call mActiveCall;
+    private Call mConnectingCall;
+    private Call mWaitingForAccountsCall;
+    private Call mDisconnectedCall;
 
     @Mock private InCallActivity mInCallActivity;
     @Mock private AudioModeProvider mAudioModeProvider;
@@ -52,6 +54,13 @@ public class InCallPresenterTest extends InstrumentationTestCase {
         System.setProperty("dexmaker.dexcache",
                 getInstrumentation().getTargetContext().getCacheDir().getPath());
         MockitoAnnotations.initMocks(this);
+
+        mIncomingCall = getMockCall(Call.State.INCOMING);
+        mActiveCall = getMockCall(Call.State.ACTIVE);
+        mConnectingCall = getMockCall(Call.State.CONNECTING);
+        mWaitingForAccountsCall = getMockCall(Call.State.PRE_DIAL_WAIT, false);
+        mDisconnectedCall = getMockCall(Call.State.DISCONNECTED);
+
         mInCallPresenter = InCallPresenter.getInstance();
         mInCallPresenter.setUp(mContext, mCallList, mAudioModeProvider, mStatusBarNotifier,
                 mContactInfoCache, mProximitySensor);
@@ -78,7 +87,7 @@ public class InCallPresenterTest extends InstrumentationTestCase {
     }
 
     public void testOnCallListChange_sendsNotificationWhenInCall() {
-        when(mCallList.getIncomingCall()).thenReturn(TEST_INCOMING_CALL);
+        when(mCallList.getIncomingCall()).thenReturn(mIncomingCall);
 
         mInCallPresenter.onCallListChange(mCallList);
 
@@ -91,7 +100,7 @@ public class InCallPresenterTest extends InstrumentationTestCase {
      * activity.
      */
     public void testOnCallListChange_handlesCallWaitingWhenScreenOffShouldRestartActivity() {
-        when(mCallList.getActiveCall()).thenReturn(TEST_ACTIVE_CALL);
+        when(mCallList.getActiveCall()).thenReturn(mActiveCall);
 
         mInCallPresenter.onCallListChange(mCallList);
         mInCallPresenter.setActivity(mInCallActivity);
@@ -100,7 +109,7 @@ public class InCallPresenterTest extends InstrumentationTestCase {
         when(mInCallActivity.isDestroyed()).thenReturn(false);
         when(mInCallActivity.isFinishing()).thenReturn(false);
         when(mProximitySensor.isScreenReallyOff()).thenReturn(true);
-        when(mCallList.getIncomingCall()).thenReturn(TEST_INCOMING_CALL);
+        when(mCallList.getIncomingCall()).thenReturn(mIncomingCall);
 
         mInCallPresenter.onCallListChange(mCallList);
         verify(mInCallActivity).finish();
@@ -111,12 +120,12 @@ public class InCallPresenterTest extends InstrumentationTestCase {
      * that it can display an error dialog.
      */
     public void testOnCallListChange_pendingOutgoingToInCallTransitionShowsUiForErrorDialog() {
-        when(mCallList.getPendingOutgoingCall()).thenReturn(TEST_PENDING_CALL);
+        when(mCallList.getPendingOutgoingCall()).thenReturn(mConnectingCall);
 
         mInCallPresenter.onCallListChange(mCallList);
 
         when(mCallList.getPendingOutgoingCall()).thenReturn(null);
-        when(mCallList.getActiveCall()).thenReturn(TEST_ACTIVE_CALL);
+        when(mCallList.getActiveCall()).thenReturn(mActiveCall);
 
         mInCallPresenter.onCallListChange(mCallList);
 
@@ -129,7 +138,7 @@ public class InCallPresenterTest extends InstrumentationTestCase {
      * to display the account picker.
      */
     public void testOnCallListChange_noAccountProvidedForCallShowsUiForAccountPicker() {
-        when(mCallList.getWaitingForAccountCall()).thenReturn(TEST_WAITING_FOR_ACCOUNT_CALL);
+        when(mCallList.getWaitingForAccountCall()).thenReturn(mWaitingForAccountsCall);
         mInCallPresenter.onCallListChange(mCallList);
 
         verify(mContext).startActivity(InCallPresenter.getInstance().getInCallIntent(false, false));
@@ -141,11 +150,25 @@ public class InCallPresenterTest extends InstrumentationTestCase {
      * InCallActivity is not displayed.
      */
     public void testOnCallListChange_noCallsToPendingOutgoingDoesNotShowUi() {
-        when(mCallList.getPendingOutgoingCall()).thenReturn(TEST_PENDING_CALL);
+        when(mCallList.getPendingOutgoingCall()).thenReturn(mConnectingCall);
         mInCallPresenter.onCallListChange(mCallList);
 
         verifyInCallActivityNotStarted();
         verifyIncomingCallNotificationNotSent();
+    }
+
+    public void testOnCallListChange_LastCallDisconnectedNoCallsLeftFinishesUi() {
+        when(mCallList.getDisconnectedCall()).thenReturn(mDisconnectedCall);
+        mInCallPresenter.onCallListChange(mCallList);
+
+        mInCallPresenter.setActivity(mInCallActivity);
+
+        verify(mInCallActivity, never()).finish();
+
+        // Last remaining disconnected call is removed from CallList, activity should shut down.
+        when(mCallList.getDisconnectedCall()).thenReturn(null);
+        mInCallPresenter.onCallListChange(mCallList);
+        verify(mInCallActivity).finish();
     }
 
 
@@ -173,5 +196,18 @@ public class InCallPresenterTest extends InstrumentationTestCase {
     private void verifyIncomingCallNotificationNotSent() {
         verify(mStatusBarNotifier, never()).updateNotification(Mockito.any(InCallState.class),
                 Mockito.any(CallList.class));
+    }
+
+    private static Call getMockCall(int state) {
+        return getMockCall(state, true);
+    }
+
+    private static Call getMockCall(int state, boolean hasAccountHandle) {
+        final Call call = Mockito.mock(Call.class);
+        when(call.getState()).thenReturn(Integer.valueOf(state));
+        if (hasAccountHandle) {
+            when(call.getAccountHandle()).thenReturn(new PhoneAccountHandle(null, null));
+        }
+        return call;
     }
 }
