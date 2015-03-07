@@ -29,13 +29,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
 
@@ -418,11 +416,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
     @Override
     DialpadPresenter.DialpadUi getUi() {
         return this;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override

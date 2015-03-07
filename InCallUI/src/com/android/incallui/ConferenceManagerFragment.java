@@ -29,22 +29,25 @@ import com.android.contacts.common.ContactPhotoManager;
 import java.util.List;
 
 /**
- * Fragment for call control buttons
+ * Fragment that allows the user to manage a conference call.
  */
 public class ConferenceManagerFragment
         extends BaseFragment<ConferenceManagerPresenter,
                 ConferenceManagerPresenter.ConferenceManagerUi>
         implements ConferenceManagerPresenter.ConferenceManagerUi {
 
+    private static final String KEY_IS_VISIBLE = "key_conference_is_visible";
+
     private ListView mConferenceParticipantList;
     private int mActionBarElevation;
     private ContactPhotoManager mContactPhotoManager;
     private LayoutInflater mInflater;
     private ConferenceParticipantListAdapter mConferenceParticipantListAdapter;
+    private boolean mIsVisible;
+    private boolean mIsRecreating;
 
     @Override
     ConferenceManagerPresenter createPresenter() {
-        // having a singleton instance.
         return new ConferenceManagerPresenter();
     }
 
@@ -56,6 +59,10 @@ public class ConferenceManagerFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mIsRecreating = true;
+            mIsVisible = savedInstanceState.getBoolean(KEY_IS_VISIBLE);
+        }
     }
 
     @Override
@@ -75,15 +82,23 @@ public class ConferenceManagerFragment
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onResume() {
+        super.onResume();
+        if (mIsRecreating) {
+            onVisibilityChanged(mIsVisible);
+        }
     }
 
     @Override
-    public void setVisible(boolean on) {
-        ActionBar actionBar = getActivity().getActionBar();
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(KEY_IS_VISIBLE, mIsVisible);
+        super.onSaveInstanceState(outState);
+    }
 
-        if (on) {
+    public void onVisibilityChanged(boolean isVisible) {
+        mIsVisible = isVisible;
+        ActionBar actionBar = getActivity().getActionBar();
+        if (isVisible) {
             actionBar.setTitle(R.string.manageConferenceLabel);
             actionBar.setElevation(mActionBarElevation);
             actionBar.setHideOffset(0);
@@ -91,13 +106,10 @@ public class ConferenceManagerFragment
 
             final CallList calls = CallList.getInstance();
             getPresenter().init(getActivity(), calls);
-            getView().setVisibility(View.VISIBLE);
             // Request focus on the list of participants for accessibility purposes.  This ensures
             // that once the list of participants is shown, the first participant is announced.
             mConferenceParticipantList.requestFocus();
         } else {
-            getView().setVisibility(View.GONE);
-
             actionBar.setElevation(0);
             actionBar.setHideOffset(actionBar.getHeight());
         }

@@ -19,22 +19,18 @@ package com.android.incallui;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Bundle;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccountHandle;
-import android.telecom.TelecomManager;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.animation.Animation;
@@ -48,8 +44,6 @@ import android.view.accessibility.AccessibilityEvent;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 import com.android.contacts.common.interactions.TouchPointManager;
-import com.android.contacts.common.util.MaterialColorMapUtils;
-import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
 import com.android.incallui.Call.State;
@@ -61,11 +55,18 @@ import java.util.Locale;
 /**
  * Main activity that the user interacts with while in a live call.
  */
-public class InCallActivity extends Activity {
+public class InCallActivity extends Activity implements FragmentDisplayManager {
+
+    public static final String TAG = InCallActivity.class.getSimpleName();
 
     public static final String SHOW_DIALPAD_EXTRA = "InCallActivity.show_dialpad";
     public static final String DIALPAD_TEXT_EXTRA = "InCallActivity.dialpad_text";
     public static final String NEW_OUTGOING_CALL_EXTRA = "InCallActivity.new_outgoing_call";
+
+    private static final String TAG_DIALPAD_FRAGMENT = "tag_dialpad_fragment";
+    private static final String TAG_CONFERENCE_FRAGMENT = "tag_conference_manager_fragment";
+    private static final String TAG_CALLCARD_FRAGMENT = "tag_callcard_fragment";
+    private static final String TAG_ANSWER_FRAGMENT = "tag_answer_fragment";
 
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
@@ -99,7 +100,7 @@ public class InCallActivity extends Activity {
     AnimationListenerAdapter mSlideOutListener = new AnimationListenerAdapter() {
         @Override
         public void onAnimationEnd(Animation animation) {
-            showDialpad(false);
+            showFragment(TAG_DIALPAD_FRAGMENT, false, true);
         }
     };
 
@@ -177,6 +178,7 @@ public class InCallActivity extends Activity {
 
     @Override
     protected void onSaveInstanceState(Bundle out) {
+        // TODO: The dialpad fragment should handle this as part of its own state
         out.putBoolean(SHOW_DIALPAD_EXTRA, mCallButtonFragment.isDialpadVisible());
         if (mDialpadFragment != null) {
             out.putString(DIALPAD_TEXT_EXTRA, mDialpadFragment.getDtmfText());
@@ -253,6 +255,26 @@ public class InCallActivity extends Activity {
     }
 
     /**
+     * When fragments have a parent fragment, onAttachFragment is not called on the parent
+     * activity. To fix this, register our own callback instead that is always called for
+     * all fragments.
+     *
+     * @see {@link BaseFragment#onAttach(Activity)}
+     */
+    @Override
+    public void onFragmentAttached(Fragment fragment) {
+        if (fragment instanceof DialpadFragment) {
+            mDialpadFragment = (DialpadFragment) fragment;
+        } else if (fragment instanceof AnswerFragment) {
+            mAnswerFragment = (AnswerFragment) fragment;
+        } else if (fragment instanceof CallCardFragment) {
+            mCallCardFragment = (CallCardFragment) fragment;
+        } else if (fragment instanceof ConferenceManagerFragment) {
+            mConferenceManagerFragment = (ConferenceManagerFragment) fragment;
+        }
+    }
+
+    /**
      * Returns true when theActivity is in foreground (between onResume and onPause).
      */
     /* package */ boolean isForegroundActivity() {
@@ -268,7 +290,8 @@ public class InCallActivity extends Activity {
         Log.i(this, "finish().  Dialog showing: " + (mDialog != null));
 
         // skip finish if we are still showing a dialog.
-        if (!hasPendingErrorDialog() && !mAnswerFragment.hasPendingDialogs()) {
+        if (!hasPendingErrorDialog() && mAnswerFragment != null
+                && !mAnswerFragment.hasPendingDialogs()) {
             super.finish();
         }
     }
@@ -301,14 +324,15 @@ public class InCallActivity extends Activity {
         // BACK is also used to exit out of any "special modes" of the
         // in-call UI:
 
-        if (!mConferenceManagerFragment.isVisible() && !mCallCardFragment.isVisible()) {
+        if ((mConferenceManagerFragment == null || !mConferenceManagerFragment.isVisible())
+                && !mCallCardFragment.isVisible()) {
             return;
         }
 
         if (mDialpadFragment != null && mDialpadFragment.isVisible()) {
             mCallButtonFragment.displayDialpad(false /* show */, true /* animate */);
             return;
-        } else if (mConferenceManagerFragment.isVisible()) {
+        } else if (mConferenceManagerFragment != null && mConferenceManagerFragment.isVisible()) {
             showConferenceCallManager(false);
             return;
         }
@@ -571,12 +595,6 @@ public class InCallActivity extends Activity {
             mAnswerFragment = (AnswerFragment) mChildFragmentManager
                     .findFragmentById(R.id.answerFragment);
         }
-
-        if (mConferenceManagerFragment == null) {
-            mConferenceManagerFragment = (ConferenceManagerFragment) getFragmentManager()
-                    .findFragmentById(R.id.conferenceManagerFragment);
-            mConferenceManagerFragment.getView().setVisibility(View.INVISIBLE);
-        }
     }
 
     public void dismissKeyguard(boolean dismiss) {
@@ -591,26 +609,79 @@ public class InCallActivity extends Activity {
         }
     }
 
-    private void showDialpad(boolean showDialpad) {
-        // If the dialpad is being shown and it has not already been loaded, replace the dialpad
-        // placeholder with the actual fragment before continuing.
-        if (mDialpadFragment == null && showDialpad) {
-            final FragmentTransaction loadTransaction = mChildFragmentManager.beginTransaction();
-            View fragmentContainer = findViewById(R.id.dialpadFragmentContainer);
-            mDialpadFragment = new DialpadFragment();
-            loadTransaction.replace(fragmentContainer.getId(), mDialpadFragment,
-                    DialpadFragment.class.getName());
-            loadTransaction.commitAllowingStateLoss();
-            mChildFragmentManager.executePendingTransactions();
+    private void showFragment(String tag, boolean show, boolean executeImmediately) {
+        final FragmentManager fm = getFragmentManagerForTag(tag);
+
+        if (fm == null) {
+            Log.w(TAG, "Fragment manager is null for : " + tag);
+            return;
         }
 
-        final FragmentTransaction ft = mChildFragmentManager.beginTransaction();
-        if (showDialpad) {
-            ft.show(mDialpadFragment);
-        } else {
-            ft.hide(mDialpadFragment);
+        Fragment fragment = fm.findFragmentByTag(tag);
+        if (!show && fragment == null) {
+            // Nothing to show, so bail early.
+            return;
         }
-        ft.commitAllowingStateLoss();
+
+        final FragmentTransaction transaction = fm.beginTransaction();
+        if (show) {
+            if (fragment == null) {
+                fragment = createNewFragmentForTag(tag);
+                transaction.add(getContainerIdForFragment(tag), fragment, tag);
+            } else {
+                transaction.show(fragment);
+            }
+        } else {
+            transaction.hide(fragment);
+        }
+
+        transaction.commitAllowingStateLoss();
+        if (executeImmediately) {
+            fm.executePendingTransactions();
+        }
+    }
+
+    private Fragment createNewFragmentForTag(String tag) {
+        if (TAG_DIALPAD_FRAGMENT.equals(tag)) {
+            mDialpadFragment = new DialpadFragment();
+            return mDialpadFragment;
+        } else if (TAG_ANSWER_FRAGMENT.equals(tag)) {
+            mAnswerFragment = new AnswerFragment();
+            return mAnswerFragment;
+        } else if (TAG_CONFERENCE_FRAGMENT.equals(tag)) {
+            mConferenceManagerFragment = new ConferenceManagerFragment();
+            return mConferenceManagerFragment;
+        } else if (TAG_CALLCARD_FRAGMENT.equals(tag)) {
+            mCallCardFragment = new CallCardFragment();
+            return mCallCardFragment;
+        }
+        throw new IllegalStateException("Unexpected fragment: " + tag);
+    }
+
+    private FragmentManager getFragmentManagerForTag(String tag) {
+        if (TAG_DIALPAD_FRAGMENT.equals(tag)) {
+            return mChildFragmentManager;
+        } else if (TAG_ANSWER_FRAGMENT.equals(tag)) {
+            return mChildFragmentManager;
+        } else if (TAG_CONFERENCE_FRAGMENT.equals(tag)) {
+            return getFragmentManager();
+        } else if (TAG_CALLCARD_FRAGMENT.equals(tag)) {
+            return getFragmentManager();
+        }
+        throw new IllegalStateException("Unexpected fragment: " + tag);
+    }
+
+    private int getContainerIdForFragment(String tag) {
+        if (TAG_DIALPAD_FRAGMENT.equals(tag)) {
+            return R.id.dialpadFragmentContainer;
+        } else if (TAG_ANSWER_FRAGMENT.equals(tag)) {
+            return R.id.dialpadFragmentContainer;
+        } else if (TAG_CONFERENCE_FRAGMENT.equals(tag)) {
+            return R.id.main;
+        } else if (TAG_CALLCARD_FRAGMENT.equals(tag)) {
+            return R.id.main;
+        }
+        throw new IllegalStateException("Unexpected fragment: " + tag);
     }
 
     public void displayDialpad(boolean showDialpad, boolean animate) {
@@ -621,10 +692,10 @@ public class InCallActivity extends Activity {
         // We don't do a FragmentTransaction on the hide case because it will be dealt with when
         // the listener is fired after an animation finishes.
         if (!animate) {
-            showDialpad(showDialpad);
+            showFragment(TAG_DIALPAD_FRAGMENT, showDialpad, true);
         } else {
             if (showDialpad) {
-                showDialpad(true);
+                showFragment(TAG_DIALPAD_FRAGMENT, true, true);
                 mDialpadFragment.animateShowDialpad();
             }
             mCallCardFragment.onDialpadVisiblityChange(showDialpad);
@@ -645,7 +716,8 @@ public class InCallActivity extends Activity {
      *                         should be hidden.
      */
     public void showConferenceCallManager(boolean show) {
-        mConferenceManagerFragment.setVisible(show);
+        showFragment(TAG_CONFERENCE_FRAGMENT, show, true);
+        mConferenceManagerFragment.onVisibilityChanged(show);
 
         // Need to hide the call card fragment to ensure that accessibility service does not try to
         // give focus to the call card when the conference manager is visible.
@@ -690,7 +762,9 @@ public class InCallActivity extends Activity {
             mDialog.dismiss();
             mDialog = null;
         }
-        mAnswerFragment.dismissPendingDialogues();
+        if (mAnswerFragment != null) {
+            mAnswerFragment.dismissPendingDialogs();
+        }
     }
 
     /**

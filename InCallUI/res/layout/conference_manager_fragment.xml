@@ -22,9 +22,7 @@
     android:background="@color/conference_call_manager_background_color"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/conference_call_manager_padding_top"
-    android:visibility="gone">
-
+    android:paddingTop="@dimen/conference_call_manager_padding_top" >
     <!-- List of conference participants. -->
     <ListView
         android:id="@+id/participantList"
