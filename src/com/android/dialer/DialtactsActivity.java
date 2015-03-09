@@ -843,7 +843,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     /**
      * Finishes hiding the dialpad fragment after any animations are completed.
      */
-    private void commitDialpadFragmentHide() {
+    public void commitDialpadFragmentHide() {
         if (!mStateSaved && !mDialpadFragment.isHidden()) {
             final FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.hide(mDialpadFragment);

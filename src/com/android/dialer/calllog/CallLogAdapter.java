@@ -24,6 +24,7 @@ import android.content.Loader;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteFullException;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
@@ -232,7 +233,6 @@ public class CallLogAdapter extends GroupingListAdapter
                 Toast.LENGTH_SHORT);
 
         Resources resources = mContext.getResources();
-        CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
         mCallLogBackgroundColor = resources.getColor(R.color.background_dialer_list_items);
         mExpandedBackgroundColor = resources.getColor(R.color.call_log_expanded_background_color);
         mExpandedTranslationZ = resources.getDimension(R.dimen.call_log_expanded_translation_z);
@@ -242,7 +242,7 @@ public class CallLogAdapter extends GroupingListAdapter
         mAdapterHelper = new CallLogAdapterHelper(context, this,
                 contactInfoHelper, mPhoneNumberHelper);
         PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
-                resources, callTypeHelper, new PhoneNumberUtilsWrapper());
+                mContext, resources, new PhoneNumberUtilsWrapper());
         mCallLogViewsHelper =
                 new CallLogListItemHelper(
                         phoneCallDetailsHelper, mPhoneNumberHelper, resources);
@@ -1101,6 +1101,10 @@ public class CallLogAdapter extends GroupingListAdapter
                 mPreviouslyExpanded = NONE_EXPANDED;
             }
         }
+    }
+
+    public void setQueryString(String filter) {
+        mFilterString = filter;
     }
 
     /**

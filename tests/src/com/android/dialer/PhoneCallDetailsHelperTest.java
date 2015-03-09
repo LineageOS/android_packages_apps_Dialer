@@ -69,7 +69,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
         final TestPhoneNumberUtilsWrapper phoneUtils = new TestPhoneNumberUtilsWrapper(
                 TEST_VOICEMAIL_NUMBER);
-        mHelper = new PhoneCallDetailsHelper(resources, callTypeHelper, phoneUtils);
+        mHelper = new PhoneCallDetailsHelper(context, resources, phoneUtils);
         mHelper.setCurrentTimeForTest(
                 new GregorianCalendar(2011, 5, 4, 13, 0, 0).getTimeInMillis());
         mViews = PhoneCallDetailsViews.createForTest(context);
