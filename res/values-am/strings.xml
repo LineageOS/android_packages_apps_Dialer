@@ -183,6 +183,10 @@
     <string name="ringtone_title" msgid="760362035635084653">"የስልክ ጥሪ ቅላጼ"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"እንዲሁም ለጥሪዎችም ንዘር"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"የመደወያ ሰሌዳ ቅላጼዎች"</string>
+    <!-- no translation found for dtmf_tone_length_title (8581125689808919460) -->
+    <skip />
+    <!-- no translation found for dtmf_tone_length_entries:0 (1036113889050195575) -->
+    <!-- no translation found for dtmf_tone_length_entries:1 (6177579030803486015) -->
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ፈጣን ምላሾች"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ጥሪዎች"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"የመደወያ መለያዎች"</string>

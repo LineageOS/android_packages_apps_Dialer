@@ -117,7 +117,7 @@
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> sec."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Kan dit nummer niet bellen"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Voor het instellen van voicemail, gaat u naar \'Menu\' &gt; \'Instellingen\'."</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Als u uw voicemail wilt bellen, moet u eerst de Vliegmodus uitschakelen."</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Als u uw voicemail wilt bellen, moet u eerst de Vliegtuigmodus uitschakelen."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Laden..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI-nummer"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
@@ -183,6 +183,10 @@
     <string name="ringtone_title" msgid="760362035635084653">"Beltoon telefoon"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Ook trillen voor oproepen"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tonen bij toetsaanslag"</string>
+    <!-- no translation found for dtmf_tone_length_title (8581125689808919460) -->
+    <skip />
+    <!-- no translation found for dtmf_tone_length_entries:0 (1036113889050195575) -->
+    <!-- no translation found for dtmf_tone_length_entries:1 (6177579030803486015) -->
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Snelle reacties"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Oproepen"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Oproepaccounts"</string>
