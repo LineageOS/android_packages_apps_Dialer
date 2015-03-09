@@ -1302,7 +1302,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
             return;
         }
 
-        mInCallActivity.showConferenceCallManager(show);
+        mInCallActivity.showConferenceFragment(show);
     }
 
     /**

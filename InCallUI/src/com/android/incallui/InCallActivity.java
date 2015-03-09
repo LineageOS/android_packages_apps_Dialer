@@ -333,7 +333,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
             mCallButtonFragment.displayDialpad(false /* show */, true /* animate */);
             return;
         } else if (mConferenceManagerFragment != null && mConferenceManagerFragment.isVisible()) {
-            showConferenceCallManager(false);
+            showConferenceFragment(false);
             return;
         }
 
@@ -684,25 +684,25 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         throw new IllegalStateException("Unexpected fragment: " + tag);
     }
 
-    public void displayDialpad(boolean showDialpad, boolean animate) {
+    public void showDialpadFragment(boolean show, boolean animate) {
         // If the dialpad is already visible, don't animate in. If it's gone, don't animate out.
-        if ((showDialpad && isDialpadVisible()) || (!showDialpad && !isDialpadVisible())) {
+        if ((show && isDialpadVisible()) || (!show && !isDialpadVisible())) {
             return;
         }
         // We don't do a FragmentTransaction on the hide case because it will be dealt with when
         // the listener is fired after an animation finishes.
         if (!animate) {
-            showFragment(TAG_DIALPAD_FRAGMENT, showDialpad, true);
+            showFragment(TAG_DIALPAD_FRAGMENT, show, true);
         } else {
-            if (showDialpad) {
+            if (show) {
                 showFragment(TAG_DIALPAD_FRAGMENT, true, true);
                 mDialpadFragment.animateShowDialpad();
             }
-            mCallCardFragment.onDialpadVisiblityChange(showDialpad);
-            mDialpadFragment.getView().startAnimation(showDialpad ? mSlideIn : mSlideOut);
+            mCallCardFragment.onDialpadVisibilityChange(show);
+            mDialpadFragment.getView().startAnimation(show ? mSlideIn : mSlideOut);
         }
 
-        InCallPresenter.getInstance().getProximitySensor().onDialpadVisible(showDialpad);
+        InCallPresenter.getInstance().getProximitySensor().onDialpadVisible(show);
     }
 
     public boolean isDialpadVisible() {
@@ -715,7 +715,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
      * @param show {@code true} if the conference manager should be shown, {@code false} if it
      *                         should be hidden.
      */
-    public void showConferenceCallManager(boolean show) {
+    public void showConferenceFragment(boolean show) {
         showFragment(TAG_CONFERENCE_FRAGMENT, show, true);
         mConferenceManagerFragment.onVisibilityChanged(show);
 

@@ -773,7 +773,7 @@ public class CallButtonFragment
     public void displayDialpad(boolean value, boolean animate) {
         mShowDialpadButton.setSelected(value);
         if (getActivity() != null && getActivity() instanceof InCallActivity) {
-            ((InCallActivity) getActivity()).displayDialpad(value, animate);
+            ((InCallActivity) getActivity()).showDialpadFragment(value, animate);
         }
     }
 

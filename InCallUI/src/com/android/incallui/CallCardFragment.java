@@ -211,7 +211,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             @Override
             public void onClick(View v) {
                 InCallActivity activity = (InCallActivity) getActivity();
-                activity.showConferenceCallManager(true);
+                activity.showConferenceFragment(true);
             }
         });
 
@@ -879,7 +879,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         });
     }
 
-    public void onDialpadVisiblityChange(boolean isShown) {
+    public void onDialpadVisibilityChange(boolean isShown) {
         mIsDialpadShowing = isShown;
         updateFabPosition();
     }
@@ -949,7 +949,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                         }
                         observer.removeOnGlobalLayoutListener(this);
 
-                        onDialpadVisiblityChange(mIsDialpadShowing);
+                        onDialpadVisibilityChange(mIsDialpadShowing);
                     }
                 });
     }
