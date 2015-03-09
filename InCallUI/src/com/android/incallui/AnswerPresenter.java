@@ -17,15 +17,23 @@
 package com.android.incallui;
 
 import android.content.Context;
-import android.telecom.TelecomManager;
+
+import com.android.incallui.InCallPresenter.InCallState;
 
 import java.util.List;
 
 /**
- * Presenter for the Incoming call widget.
+ * Presenter for the Incoming call widget. The {@link AnswerPresenter} handles the logic during
+ * incoming calls. It is also in charge of responding to incoming calls, so there needs to be
+ * an instance alive so that it can receive onIncomingCall callbacks.
+ *
+ * An instance of {@link AnswerPresenter} is created by InCallPresenter at startup, registers
+ * for callbacks via InCallPresenter, and shows/hides the {@link AnswerFragment} via IncallActivity.
+ *
  */
 public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
-        implements CallList.CallUpdateListener, CallList.Listener {
+        implements CallList.CallUpdateListener, InCallPresenter.InCallUiListener,
+                InCallPresenter.IncomingCallListener {
 
     private static final String TAG = AnswerPresenter.class.getSimpleName();
 
@@ -34,57 +42,33 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     private boolean mHasTextMessages = false;
 
     @Override
-    public void onUiReady(AnswerUi ui) {
-        super.onUiReady(ui);
-
-        final CallList calls = CallList.getInstance();
-        Call call;
-        call = calls.getIncomingCall();
-        if (call != null) {
-            processIncomingCall(call);
-        }
-        call = calls.getVideoUpgradeRequestCall();
-        if (call != null) {
-            processVideoUpgradeRequestCall(call);
-        }
-
-        // Listen for incoming calls.
-        calls.addListener(this);
-    }
-
-    @Override
-    public void onUiUnready(AnswerUi ui) {
-        super.onUiUnready(ui);
-
-        CallList.getInstance().removeListener(this);
-
-        // This is necessary because the activity can be destroyed while an incoming call exists.
-        // This happens when back button is pressed while incoming call is still being shown.
-        if (mCallId != null) {
-            CallList.getInstance().removeCallUpdateListener(mCallId, this);
-        }
-    }
-
-    @Override
-    public void onCallListChange(CallList callList) {
-        // no-op
-    }
-
-    @Override
-    public void onDisconnect(Call call) {
-        // no-op
-    }
-
-    @Override
-    public void onIncomingCall(Call call) {
-        // TODO: Ui is being destroyed when the fragment detaches.  Need clean up step to stop
-        // getting updates here.
-        Log.d(this, "onIncomingCall: " + this);
-        if (getUi() != null) {
-            if (!call.getId().equals(mCallId)) {
-                // A new call is coming in.
+    public void onUiShowing(boolean showing) {
+        if (showing) {
+            final CallList calls = CallList.getInstance();
+            Call call;
+            call = calls.getIncomingCall();
+            if (call != null) {
                 processIncomingCall(call);
             }
+            call = calls.getVideoUpgradeRequestCall();
+            if (call != null) {
+                processVideoUpgradeRequestCall(call);
+            }
+        } else {
+            // This is necessary because the activity can be destroyed while an incoming call exists.
+            // This happens when back button is pressed while incoming call is still being shown.
+            if (mCallId != null) {
+                CallList.getInstance().removeCallUpdateListener(mCallId, this);
+            }
+        }
+    }
+
+    @Override
+    public void onIncomingCall(InCallState oldState, InCallState newState, Call call) {
+        Log.d(this, "onIncomingCall: " + this);
+        if (!call.getId().equals(mCallId)) {
+            // A new call is coming in.
+            processIncomingCall(call);
         }
     }
 
@@ -96,9 +80,20 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         CallList.getInstance().addCallUpdateListener(mCallId, this);
 
         Log.d(TAG, "Showing incoming for call id: " + mCallId + " " + this);
-        final List<String> textMsgs = CallList.getInstance().getTextResponses(call.getId());
-        getUi().showAnswerUi(true);
-        configureAnswerTargetsForSms(call, textMsgs);
+        if (showAnswerUi(true)) {
+            final List<String> textMsgs = CallList.getInstance().getTextResponses(call.getId());
+            configureAnswerTargetsForSms(call, textMsgs);
+        }
+    }
+
+    private boolean showAnswerUi(boolean show) {
+        final InCallActivity activity = InCallPresenter.getInstance().getActivity();
+        if (activity != null) {
+            activity.showAnswerFragment(show);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void processVideoUpgradeRequestCall(Call call) {
@@ -107,7 +102,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
         // Listen for call updates for the current call.
         CallList.getInstance().addCallUpdateListener(mCallId, this);
-        getUi().showAnswerUi(true);
+        showAnswerUi(true);
 
         getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_UPGRADE_REQUEST);
     }
@@ -119,7 +114,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             // Stop listening for updates.
             CallList.getInstance().removeCallUpdateListener(mCallId, this);
 
-            getUi().showAnswerUi(false);
+            showAnswerUi(false);
 
             // mCallId will hold the state of the call. We don't clear the mCall variable here as
             // it may be useful for sending text messages after phone disconnects.
@@ -175,6 +170,10 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     private void configureAnswerTargetsForSms(Call call, List<String> textMsgs) {
+        if (getUi() == null) {
+            return;
+        }
+
         final Context context = getUi().getContext();
 
         mHasTextMessages = textMsgs != null;
@@ -199,7 +198,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     interface AnswerUi extends Ui {
-        public void showAnswerUi(boolean show);
+        public void onShowAnswerUi(boolean shown);
         public void showTargets(int targetSet);
         public void showMessageDialog();
         public void configureMessageDialog(List<String> textResponses);

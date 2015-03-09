@@ -97,6 +97,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
     private boolean mServiceConnected = false;
     private boolean mAccountSelectionCancelled = false;
     private InCallCameraManager mInCallCameraManager = null;
+    private AnswerPresenter mAnswerPresenter = new AnswerPresenter();
 
     /**
      * Whether or not we are currently bound and waiting for Telecom to send us a new call.
@@ -1372,10 +1373,20 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
         return mTelecomManager;
     }
 
+    InCallActivity getActivity() {
+        return mInCallActivity;
+    }
+
+    AnswerPresenter getAnswerPresenter() {
+        return mAnswerPresenter;
+    }
+
     /**
      * Private constructor. Must use getInstance() to get this singleton.
      */
     private InCallPresenter() {
+        addIncomingCallListener(mAnswerPresenter);
+        addInCallUiListener(mAnswerPresenter);
     }
 
     /**

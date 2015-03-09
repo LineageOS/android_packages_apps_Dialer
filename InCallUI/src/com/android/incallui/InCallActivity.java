@@ -18,10 +18,12 @@ package com.android.incallui;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnCancelListener;
@@ -29,6 +31,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Trace;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
@@ -281,8 +284,8 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         return mIsForegroundActivity;
     }
 
-    private boolean hasPendingErrorDialog() {
-        return mDialog != null;
+    private boolean hasPendingDialogs() {
+        return mDialog != null || (mAnswerFragment != null && mAnswerFragment.hasPendingDialogs());
     }
 
     @Override
@@ -290,8 +293,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         Log.i(this, "finish().  Dialog showing: " + (mDialog != null));
 
         // skip finish if we are still showing a dialog.
-        if (!hasPendingErrorDialog() && mAnswerFragment != null
-                && !mAnswerFragment.hasPendingDialogs()) {
+        if (!hasPendingDialogs()) {
             super.finish();
         }
     }
@@ -465,6 +467,10 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         return mCallCardFragment;
     }
 
+    public AnswerFragment getAnswerFragment() {
+        return mAnswerFragment;
+    }
+
     private void internalResolveIntent(Intent intent) {
         final String action = intent.getAction();
 
@@ -590,11 +596,6 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
                     .findFragmentById(R.id.callButtonFragment);
             mCallButtonFragment.getView().setVisibility(View.INVISIBLE);
         }
-
-        if (mAnswerFragment == null) {
-            mAnswerFragment = (AnswerFragment) mChildFragmentManager
-                    .findFragmentById(R.id.answerFragment);
-        }
     }
 
     public void dismissKeyguard(boolean dismiss) {
@@ -610,6 +611,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     }
 
     private void showFragment(String tag, boolean show, boolean executeImmediately) {
+        Trace.beginSection("showFragment - " + tag);
         final FragmentManager fm = getFragmentManagerForTag(tag);
 
         if (fm == null) {
@@ -639,6 +641,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         if (executeImmediately) {
             fm.executePendingTransactions();
         }
+        Trace.endSection();
     }
 
     private Fragment createNewFragmentForTag(String tag) {
@@ -673,9 +676,9 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
 
     private int getContainerIdForFragment(String tag) {
         if (TAG_DIALPAD_FRAGMENT.equals(tag)) {
-            return R.id.dialpadFragmentContainer;
+            return R.id.answer_and_dialpad_container;
         } else if (TAG_ANSWER_FRAGMENT.equals(tag)) {
-            return R.id.dialpadFragmentContainer;
+            return R.id.answer_and_dialpad_container;
         } else if (TAG_CONFERENCE_FRAGMENT.equals(tag)) {
             return R.id.main;
         } else if (TAG_CALLCARD_FRAGMENT.equals(tag)) {
@@ -722,6 +725,10 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         // Need to hide the call card fragment to ensure that accessibility service does not try to
         // give focus to the call card when the conference manager is visible.
         mCallCardFragment.getView().setVisibility(show ? View.GONE : View.VISIBLE);
+    }
+
+    public void showAnswerFragment(boolean show) {
+        showFragment(TAG_ANSWER_FRAGMENT, show, true);
     }
 
     public void showPostCharWaitDialog(String callId, String chars) {

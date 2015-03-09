@@ -98,24 +98,15 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/photo" />
 
-    <!-- Placeholder for the dialpad which is replaced with the dialpad fragment when shown. -->
+    <!-- Placeholder for various fragments that are added dynamically underneath the caller info -->
     <FrameLayout
-        android:id="@+id/dialpadFragmentContainer"
+        android:id="@+id/answer_and_dialpad_container"
         android:layout_below="@id/primary_call_info_container"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="@dimen/dialpad_elevation" />
-
-    <fragment android:name="com.android.incallui.AnswerFragment"
-        android:id="@+id/answerFragment"
-        android:layout_below="@id/primary_call_info_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="@dimen/glowpadview_margin_bottom"
-        android:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/floating_end_call_action_button_container"
