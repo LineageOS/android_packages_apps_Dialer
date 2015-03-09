@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 
@@ -23,6 +24,8 @@ import android.os.Bundle;
  * Parent for all fragments that use Presenters and Ui design.
  */
 public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends Fragment {
+
+    private static final String KEY_FRAGMENT_HIDDEN = "key_fragment_hidden";
 
     private T mPresenter;
 
@@ -54,6 +57,9 @@ public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             mPresenter.onRestoreInstanceState(savedInstanceState);
+            if (savedInstanceState.getBoolean(KEY_FRAGMENT_HIDDEN)) {
+                getFragmentManager().beginTransaction().hide(this).commit();
+            }
         }
     }
 
@@ -67,5 +73,12 @@ public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mPresenter.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_FRAGMENT_HIDDEN, isHidden());
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((FragmentDisplayManager) activity).onFragmentAttached(this);
     }
 }

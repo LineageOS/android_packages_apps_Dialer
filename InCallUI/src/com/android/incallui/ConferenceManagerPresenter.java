@@ -137,7 +137,6 @@ public class ConferenceManagerPresenter
     }
 
     public interface ConferenceManagerUi extends Ui {
-        void setVisible(boolean on);
         boolean isFragmentVisible();
         void update(Context context, List<Call> participants, boolean parentCanSeparate);
         void refreshCall(Call call);

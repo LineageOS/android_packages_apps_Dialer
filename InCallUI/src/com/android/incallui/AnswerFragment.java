@@ -247,7 +247,7 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
        }
     }
 
-    public void dismissPendingDialogues() {
+    public void dismissPendingDialogs() {
         if (isCannedResponsePopupShowing()) {
             dismissCannedResponsePopup();
         }
