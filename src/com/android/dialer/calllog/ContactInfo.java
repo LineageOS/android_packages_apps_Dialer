@@ -27,6 +27,11 @@ import com.google.common.base.Objects;
  */
 public class ContactInfo {
     public Uri lookupUri;
+
+    /**
+     * Contact lookup key.  Note this may be a lookup key for a corp contact, in which case
+     * "lookup by lookup key" doesn't work on the personal profile.
+     */
     public String lookupKey;
     public String name;
     public int type;

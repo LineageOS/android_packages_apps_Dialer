@@ -30,6 +30,8 @@ import android.text.TextUtils;
 /**
  * This broadcast receiver is used to listen to outgoing calls and undemote formerly demoted
  * contacts if a phone call is made to a phone number belonging to that contact.
+ *
+ * NOTE This doesn't work for corp contacts.
  */
 public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
 

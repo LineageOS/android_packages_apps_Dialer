@@ -45,7 +45,8 @@ public final class CallLogQuery {
             Calls.PHONE_ACCOUNT_ID,             // 19
             Calls.FEATURES,                     // 20
             Calls.DATA_USAGE,                   // 21
-            Calls.TRANSCRIPTION                 // 22
+            Calls.TRANSCRIPTION,                // 22
+            Calls.CACHED_PHOTO_URI              // 23
     };
 
     public static final int ID = 0;
@@ -71,4 +72,5 @@ public final class CallLogQuery {
     public static final int FEATURES = 20;
     public static final int DATA_USAGE = 21;
     public static final int TRANSCRIPTION = 22;
+    public static final int CACHED_PHOTO_URI = 23;
 }

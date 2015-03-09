@@ -1169,6 +1169,10 @@ public class CallLogAdapter extends GroupingListAdapter
                 values.put(Calls.CACHED_PHOTO_ID, updatedInfo.photoId);
                 needsUpdate = true;
             }
+            if (!UriUtils.areEqual(updatedInfo.photoUri, callLogInfo.photoUri)) {
+                values.put(Calls.CACHED_PHOTO_URI, UriUtils.uriToString(updatedInfo.photoUri));
+                needsUpdate = true;
+            }
             if (!TextUtils.equals(updatedInfo.formattedNumber, callLogInfo.formattedNumber)) {
                 values.put(Calls.CACHED_FORMATTED_NUMBER, updatedInfo.formattedNumber);
                 needsUpdate = true;
@@ -1182,6 +1186,7 @@ public class CallLogAdapter extends GroupingListAdapter
             values.put(Calls.CACHED_MATCHED_NUMBER, updatedInfo.number);
             values.put(Calls.CACHED_NORMALIZED_NUMBER, updatedInfo.normalizedNumber);
             values.put(Calls.CACHED_PHOTO_ID, updatedInfo.photoId);
+            values.put(Calls.CACHED_PHOTO_URI, UriUtils.uriToString(updatedInfo.photoUri));
             values.put(Calls.CACHED_FORMATTED_NUMBER, updatedInfo.formattedNumber);
             needsUpdate = true;
         }
@@ -1214,7 +1219,7 @@ public class CallLogAdapter extends GroupingListAdapter
         info.number = matchedNumber == null ? c.getString(CallLogQuery.NUMBER) : matchedNumber;
         info.normalizedNumber = c.getString(CallLogQuery.CACHED_NORMALIZED_NUMBER);
         info.photoId = c.getLong(CallLogQuery.CACHED_PHOTO_ID);
-        info.photoUri = null;  // We do not cache the photo URI.
+        info.photoUri = UriUtils.parseUriOrNull(c.getString(CallLogQuery.CACHED_PHOTO_URI));
         info.formattedNumber = c.getString(CallLogQuery.CACHED_FORMATTED_NUMBER);
         return info;
     }
@@ -1352,7 +1357,7 @@ public class CallLogAdapter extends GroupingListAdapter
         } else {
             try {
                 Cursor phonesCursor = mContext.getContentResolver().query(
-                        Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, number),
+                        Uri.withAppendedPath(PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, number),
                         PhoneQuery._PROJECTION, null, null, null);
                 if (phonesCursor != null) {
                     try {
