@@ -77,6 +77,13 @@ public class DialerSettingsActivity extends PreferenceActivity {
                 target.add(phoneAccountSettingsHeader);
             }
         }
+
+        Header accessibilitySettingsHeader = new Header();
+        Intent accessibilitySettingsIntent =
+                new Intent(TelecomManager.ACTION_SHOW_CALL_ACCESSIBILITY_SETTINGS);
+        accessibilitySettingsHeader.titleRes = R.string.accessibility_settings_title;
+        accessibilitySettingsHeader.intent = accessibilitySettingsIntent;
+        target.add(accessibilitySettingsHeader);
     }
 
     @Override
