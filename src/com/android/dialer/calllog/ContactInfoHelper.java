@@ -205,7 +205,7 @@ public class ContactInfoHelper {
         final ContactInfo info;
 
         // "contactNumber" is a SIP address, so use the PhoneLookup table with the SIP parameter.
-        Uri.Builder uriBuilder = PhoneLookup.CONTENT_FILTER_URI.buildUpon();
+        Uri.Builder uriBuilder = PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI.buildUpon();
         uriBuilder.appendPath(Uri.encode(sipAddress));
         uriBuilder.appendQueryParameter(PhoneLookup.QUERY_PARAMETER_SIP_ADDRESS, "1");
         return lookupContactFromUri(uriBuilder.build());
@@ -236,7 +236,8 @@ public class ContactInfoHelper {
         }
 
         // The "contactNumber" is a regular phone number, so use the PhoneLookup table.
-        Uri uri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(contactNumber));
+        Uri uri = Uri.withAppendedPath(PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI,
+                Uri.encode(contactNumber));
         ContactInfo info = lookupContactFromUri(uri);
         if (info != null && info != ContactInfo.EMPTY) {
             info.formattedNumber = formatPhoneNumber(number, null, countryIso);
