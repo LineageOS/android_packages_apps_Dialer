@@ -1169,8 +1169,11 @@ public class CallLogAdapter extends GroupingListAdapter
                 values.put(Calls.CACHED_PHOTO_ID, updatedInfo.photoId);
                 needsUpdate = true;
             }
-            if (!UriUtils.areEqual(updatedInfo.photoUri, callLogInfo.photoUri)) {
-                values.put(Calls.CACHED_PHOTO_URI, UriUtils.uriToString(updatedInfo.photoUri));
+            final Uri updatedPhotoUriContactsOnly =
+                    UriUtils.nullForNonContactsUri(updatedInfo.photoUri);
+            if (!UriUtils.areEqual(updatedPhotoUriContactsOnly, callLogInfo.photoUri)) {
+                values.put(Calls.CACHED_PHOTO_URI, UriUtils.uriToString(
+                        updatedPhotoUriContactsOnly));
                 needsUpdate = true;
             }
             if (!TextUtils.equals(updatedInfo.formattedNumber, callLogInfo.formattedNumber)) {
@@ -1186,7 +1189,8 @@ public class CallLogAdapter extends GroupingListAdapter
             values.put(Calls.CACHED_MATCHED_NUMBER, updatedInfo.number);
             values.put(Calls.CACHED_NORMALIZED_NUMBER, updatedInfo.normalizedNumber);
             values.put(Calls.CACHED_PHOTO_ID, updatedInfo.photoId);
-            values.put(Calls.CACHED_PHOTO_URI, UriUtils.uriToString(updatedInfo.photoUri));
+            values.put(Calls.CACHED_PHOTO_URI, UriUtils.uriToString(
+                    UriUtils.nullForNonContactsUri(updatedInfo.photoUri)));
             values.put(Calls.CACHED_FORMATTED_NUMBER, updatedInfo.formattedNumber);
             needsUpdate = true;
         }
@@ -1219,7 +1223,8 @@ public class CallLogAdapter extends GroupingListAdapter
         info.number = matchedNumber == null ? c.getString(CallLogQuery.NUMBER) : matchedNumber;
         info.normalizedNumber = c.getString(CallLogQuery.CACHED_NORMALIZED_NUMBER);
         info.photoId = c.getLong(CallLogQuery.CACHED_PHOTO_ID);
-        info.photoUri = UriUtils.parseUriOrNull(c.getString(CallLogQuery.CACHED_PHOTO_URI));
+        info.photoUri = UriUtils.nullForNonContactsUri(
+                UriUtils.parseUriOrNull(c.getString(CallLogQuery.CACHED_PHOTO_URI)));
         info.formattedNumber = c.getString(CallLogQuery.CACHED_FORMATTED_NUMBER);
         return info;
     }
