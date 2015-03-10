@@ -21,6 +21,7 @@ import com.android.contacts.common.testing.NeededForTesting;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 import android.telecom.CallProperties;
 import android.telecom.DisconnectCause;
 import android.telecom.GatewayInfo;
@@ -35,7 +36,7 @@ import java.util.Locale;
 /**
  * Describes a single call and its state.
  */
-public final class Call {
+class Call {
     /* Defines different states of this call */
     public static class State {
         public static final int INVALID = 0;
@@ -179,7 +180,7 @@ public final class Call {
                 }
             };
 
-    private final android.telecom.Call mTelecommCall;
+    private android.telecom.Call mTelecommCall;
     private final String mId;
     private int mState = State.INVALID;
     private DisconnectCause mDisconnectCause;
@@ -269,6 +270,9 @@ public final class Call {
     }
 
     public String getNumber() {
+        if (mTelecommCall == null) {
+            return null;
+        }
         if (mTelecommCall.getDetails().getGatewayInfo() != null) {
             return mTelecommCall.getDetails().getGatewayInfo()
                     .getOriginalAddress().getSchemeSpecificPart();
@@ -277,7 +281,7 @@ public final class Call {
     }
 
     public Uri getHandle() {
-        return mTelecommCall.getDetails().getHandle();
+        return mTelecommCall == null ? null : mTelecommCall.getDetails().getHandle();
     }
 
     public int getState() {
@@ -293,15 +297,21 @@ public final class Call {
     }
 
     public int getNumberPresentation() {
-        return getTelecommCall().getDetails().getHandlePresentation();
+        return mTelecommCall == null ? null : mTelecommCall.getDetails().getHandlePresentation();
     }
 
     public int getCnapNamePresentation() {
-        return getTelecommCall().getDetails().getCallerDisplayNamePresentation();
+        return mTelecommCall == null ? null
+                : mTelecommCall.getDetails().getCallerDisplayNamePresentation();
     }
 
     public String getCnapName() {
-        return getTelecommCall().getDetails().getCallerDisplayName();
+        return mTelecommCall == null ? null
+                : getTelecommCall().getDetails().getCallerDisplayName();
+    }
+
+    public Bundle getExtras() {
+        return mTelecommCall == null ? null : mTelecommCall.getDetails().getExtras();
     }
 
     /** Returns call disconnect cause, defined by {@link DisconnectCause}. */
@@ -354,15 +364,15 @@ public final class Call {
     }
 
     public GatewayInfo getGatewayInfo() {
-        return mTelecommCall.getDetails().getGatewayInfo();
+        return mTelecommCall == null ? null : mTelecommCall.getDetails().getGatewayInfo();
     }
 
     public PhoneAccountHandle getAccountHandle() {
-        return mTelecommCall.getDetails().getAccountHandle();
+        return mTelecommCall == null ? null : mTelecommCall.getDetails().getAccountHandle();
     }
 
     public VideoCall getVideoCall() {
-        return mTelecommCall.getVideoCall();
+        return mTelecommCall == null ? null : mTelecommCall.getVideoCall();
     }
 
     public List<String> getChildCallIds() {

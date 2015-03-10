@@ -1013,7 +1013,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
      */
     public static boolean isCallWithNoValidAccounts(Call call) {
         if (call != null && !isEmergencyCall(call)) {
-            Bundle extras = call.getTelecommCall().getDetails().getExtras();
+            Bundle extras = call.getExtras();
 
             if (extras == null) {
                 extras = EMPTY_EXTRAS;
