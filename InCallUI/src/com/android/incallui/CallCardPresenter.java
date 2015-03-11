@@ -335,9 +335,15 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private void setCallbackNumber() {
         String callbackNumber = null;
 
+        // Show the emergency callback number if either:
+        // 1. This is an emergency call.
+        // 2. The phone is in Emergency Callback Mode, which means we should show the callback
+        //    number.
         boolean isEmergencyCall = PhoneNumberUtils.isEmergencyNumber(
                 getNumberFromHandle(mPrimary.getHandle()));
-        if (isEmergencyCall) {
+        boolean showCallbackNumber = mPrimary.can(Details.CAPABILITY_SHOW_CALLBACK_NUMBER);
+
+        if (isEmergencyCall || showCallbackNumber) {
             callbackNumber = getSubscriptionNumber();
         } else {
             StatusHints statusHints = mPrimary.getTelecommCall().getDetails().getStatusHints();
@@ -351,12 +357,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
         String simNumber = mgr.getLine1Number(mPrimary.getAccountHandle());
-        if (PhoneNumberUtils.compare(callbackNumber, simNumber)) {
-            Log.d(this, "Numbers are the same; not showing the callback number");
+        if (!showCallbackNumber && PhoneNumberUtils.compare(callbackNumber, simNumber)) {
+            Log.d(this, "Numbers are the same (and callback number is not being forced to show);" +
+                            " not showing the callback number");
             callbackNumber = null;
         }
 
-        getUi().setCallbackNumber(callbackNumber, isEmergencyCall);
+        getUi().setCallbackNumber(callbackNumber, isEmergencyCall || showCallbackNumber);
     }
 
     public void updateCallTime() {
