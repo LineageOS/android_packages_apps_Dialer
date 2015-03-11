@@ -182,6 +182,7 @@
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="display_options_title" msgid="7812852361055667468">"Možnosti prikaza"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Zvoki in vibriranje"</string>
+    <string name="accessibility_settings_title" msgid="6068141142874046249">"Funkcije za ljudi s posebnimi potrebami"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Ton zvonjenja telefona"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibriranje tudi za klice"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Toni tipkovnice"</string>

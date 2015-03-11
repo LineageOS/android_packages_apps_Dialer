@@ -180,6 +180,8 @@
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="display_options_title" msgid="7812852361055667468">"විකල්ප පෙන්වන්න"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"ශබ්ද සහ කම්පන"</string>
+    <!-- no translation found for accessibility_settings_title (6068141142874046249) -->
+    <skip />
     <string name="ringtone_title" msgid="760362035635084653">"දුරකථන රිගින්ටෝනය"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"ඇමතුම් සඳහා කම්පනයද කරන්න"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"ඩයල්පෑඩ ස්පර්ශක හඬ"</string>
