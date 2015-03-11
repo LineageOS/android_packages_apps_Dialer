@@ -419,7 +419,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                 final int numberPresentation = firstDetails.numberPresentation;
                 final Uri contactUri = firstDetails.contactUri;
                 final Uri photoUri = firstDetails.photoUri;
-                final long subId = firstDetails.accountId;
+                final int subId = firstDetails.accountId;
 
                 // Cache the details about the phone number.
                 final boolean canPlaceCallsTo =
@@ -545,9 +545,9 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                     callCursor.getString(ACCOUNT_COMPONENT_NAME),
                     callCursor.getString(ACCOUNT_ID)));
             String accId = callCursor.getString(ACCOUNT_ID);
-            long subId = SubscriptionManager.DEFAULT_SUB_ID;
+            int subId = SubscriptionManager.DEFAULT_SUBSCRIPTION_ID;
             if (accId!=null && !accId.equals("E") && !accId.toLowerCase().contains("sip")) {
-                subId = Long.parseLong(accId);
+                subId = Integer.parseInt(accId);
             }
 
             if (TextUtils.isEmpty(countryIso)) {

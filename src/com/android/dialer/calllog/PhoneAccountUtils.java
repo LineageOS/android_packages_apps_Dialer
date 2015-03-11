@@ -48,7 +48,7 @@ public class PhoneAccountUtils {
         if (account == null) {
             return null;
         }
-        return account.getIcon(context);
+        return account.createIconDrawable(context);
     }
 
     /**
