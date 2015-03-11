@@ -632,7 +632,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             }
         }
 
-        if (isPrimaryCallActive() && primaryCallCan(Details.CAPABILITY_WIFI)) {
+        if (primaryCallCan(Details.CAPABILITY_WIFI) && (isPrimaryCallActive()
+                || (mPrimary != null && mPrimary.getState() == Call.State.INCOMING))) {
             return mContext.getResources().getDrawable(R.drawable.ic_signal_wifi_4_bar_18dp);
         }
 
