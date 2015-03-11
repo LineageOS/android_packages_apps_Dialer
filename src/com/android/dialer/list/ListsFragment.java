@@ -80,6 +80,7 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
             new ArrayList<OnPageChangeListener>();
 
     private String[] mTabTitles;
+    private int[] mTabIcons;
 
     private CallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
@@ -220,7 +221,13 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         mTabTitles[TAB_INDEX_RECENTS] = getResources().getString(R.string.tab_recents);
         mTabTitles[TAB_INDEX_ALL_CONTACTS] = getResources().getString(R.string.tab_all_contacts);
 
+        mTabIcons = new int[TAB_INDEX_COUNT];
+        mTabIcons[TAB_INDEX_SPEED_DIAL] = R.drawable.tab_speed_dial;
+        mTabIcons[TAB_INDEX_RECENTS] = R.drawable.tab_recents;
+        mTabIcons[TAB_INDEX_ALL_CONTACTS] = R.drawable.tab_contacts;
+
         mViewPagerTabs = (ViewPagerTabs) parentView.findViewById(R.id.lists_pager_header);
+        mViewPagerTabs.setTabIcons(mTabIcons);
         mViewPagerTabs.setViewPager(mViewPager);
         addOnPageChangeListener(mViewPagerTabs);
 
