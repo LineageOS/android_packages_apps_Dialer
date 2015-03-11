@@ -29,6 +29,7 @@ import android.database.ContentObserver;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.provider.CallLog;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
@@ -122,6 +123,8 @@ public class InCallPresenter implements CallList.Listener,
     private InCallCameraManager mInCallCameraManager = null;
     private AnswerPresenter mAnswerPresenter = new AnswerPresenter();
     private FilteredNumberAsyncQueryHandler mFilteredQueryHandler;
+    private PowerManager mPowerManager;
+    private PowerManager.WakeLock mWakeLock = null;
 
     /**
      * Whether or not we are currently bound and waiting for Telecom to send us a new call.
@@ -329,6 +332,9 @@ public class InCallPresenter implements CallList.Listener,
 
         addIncomingCallListener(mAnswerPresenter);
         addInCallUiListener(mAnswerPresenter);
+        mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+        mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
+                PowerManager.ACQUIRE_CAUSES_WAKEUP, "InCallPresenter");
 
         mCallList = callList;
 
@@ -724,6 +730,7 @@ public class InCallPresenter implements CallList.Listener,
             return;
         }
 
+        wakeUpScreen();
         call.setRequestedVideoState(videoState);
     }
 
@@ -1613,6 +1620,9 @@ public class InCallPresenter implements CallList.Listener,
             }
             mProximitySensor = null;
 
+            mWakeLock = null;
+            mPowerManager = null;
+
             mAudioModeProvider = null;
 
             if (mStatusBarNotifier != null) {
@@ -1801,6 +1811,34 @@ public class InCallPresenter implements CallList.Listener,
         mInCallActivity.setRequestedOrientation(orientation);
         mInCallActivity.enableInCallOrientationEventListener(
                 orientation == InCallOrientationEventListener.FULL_SENSOR_SCREEN_ORIENTATION);
+    }
+
+    /* returns TRUE if screen is turned ON else false */
+    private boolean isScreenInteractive() {
+        return mPowerManager.isInteractive();
+    }
+
+    private void wakeUpScreen() {
+        if (!isScreenInteractive()) {
+            acquireWakeLock();
+            releaseWakeLock();
+        }
+    }
+
+    private void acquireWakeLock() {
+        Log.v(this, "acquireWakeLock");
+
+        if (mWakeLock != null) {
+            mWakeLock.acquire();
+        }
+    }
+
+    private void releaseWakeLock() {
+        Log.v(this, "releaseWakeLock");
+
+        if (mWakeLock != null && mWakeLock.isHeld()) {
+            mWakeLock.release();
+        }
     }
 
     public void enableScreenTimeout(boolean enable) {
