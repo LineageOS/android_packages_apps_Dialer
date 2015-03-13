@@ -78,7 +78,7 @@ public class PhoneCallDetails {
     /**
      * The account id associated with the call.
      */
-    public final long accountId;
+    public final int accountId;
     /**
      * Features applicable to this call.
      */
@@ -123,7 +123,7 @@ public class PhoneCallDetails {
     public PhoneCallDetails(CharSequence number, int numberPresentation,
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration, String accountLabel, Drawable accountIcon,
-            int features, Long dataUsage, String transcription, long accountId) {
+            int features, Long dataUsage, String transcription, int accountId) {
         this(number, numberPresentation, formattedNumber, countryIso, geocode,
                 callTypes, date, duration, "", 0, "", null, null, 0, accountLabel, accountIcon,
                 features, dataUsage, transcription, accountId);
@@ -146,7 +146,7 @@ public class PhoneCallDetails {
             int[] callTypes, long date, long duration, CharSequence name,
             int numberType, CharSequence numberLabel, Uri contactUri,
             Uri photoUri, int sourceType, String accountLabel, Drawable accountIcon, int features,
-            Long dataUsage, String transcription, long accountId) {
+            Long dataUsage, String transcription, int accountId) {
         this.number = number;
         this.numberPresentation = numberPresentation;
         this.formattedNumber = formattedNumber;

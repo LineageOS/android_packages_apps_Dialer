@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.provider.CallLog.Calls;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.contacts.common.CallUtil;
 import com.android.dialer.PhoneCallDetails;
@@ -30,6 +31,8 @@ import com.android.dialer.R;
  * Helper class to fill in the views of a call log entry.
  */
 /* package */class CallLogListItemHelper {
+    private static final String TAG = "CallLogListItemHelper";
+
     /** Helper for populating the details of a phone call. */
     private final PhoneCallDetailsHelper mPhoneCallDetailsHelper;
     /** Helper for handling phone numbers. */
@@ -78,17 +81,30 @@ import com.android.dialer.R;
      * @param views The views associated with the current call log entry.
      */
     public void setActionContentDescriptions(CallLogListItemViews views) {
+        if (views.nameOrNumber == null) {
+            Log.e(TAG, "setActionContentDescriptions; name or number is null.");
+        }
+
+        // Calling expandTemplate with a null parameter will cause a NullPointerException.
+        // Although we don't expect a null name or number, it is best to protect against it.
+        CharSequence nameOrNumber = views.nameOrNumber == null ? "" : views.nameOrNumber;
+
         views.callBackButtonView.setContentDescription(
-                mResources.getString(R.string.description_call_back_action, views.nameOrNumber));
+                TextUtils.expandTemplate(
+                        mResources.getString(R.string.description_call_back_action), nameOrNumber));
 
         views.videoCallButtonView.setContentDescription(
-                mResources.getString(R.string.description_video_call_action, views.nameOrNumber));
+                TextUtils.expandTemplate(
+                        mResources.getString(R.string.description_video_call_action),
+                        nameOrNumber));
 
         views.voicemailButtonView.setContentDescription(
-                mResources.getString(R.string.description_voicemail_action, views.nameOrNumber));
+                TextUtils.expandTemplate(
+                        mResources.getString(R.string.description_voicemail_action), nameOrNumber));
 
         views.detailsButtonView.setContentDescription(
-                mResources.getString(R.string.description_details_action, views.nameOrNumber));
+                TextUtils.expandTemplate(
+                        mResources.getString(R.string.description_details_action), nameOrNumber));
     }
 
     /**

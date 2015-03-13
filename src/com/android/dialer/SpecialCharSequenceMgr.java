@@ -211,7 +211,7 @@ public class SpecialCharSequenceMgr {
                 sc.progressDialog.show();
 
                 // run the query.
-                long subId = SubscriptionManager.getDefaultVoiceSubId();
+                int subId = SubscriptionManager.getDefaultVoiceSubId();
                 Uri uri = Uri.parse("content://icc/adn/subId/" + subId);
                 handler.startQuery(ADN_QUERY_TOKEN, sc, uri,
                         new String[]{ADN_PHONE_NUMBER_COLUMN_NAME}, null, null, null);
@@ -231,7 +231,7 @@ public class SpecialCharSequenceMgr {
 
     static boolean handlePinEntry(Context context, String input) {
         if ((input.startsWith("**04") || input.startsWith("**05")) && input.endsWith("#")) {
-            long subId = SubscriptionManager.getDefaultVoiceSubId();
+            int subId = SubscriptionManager.getDefaultVoiceSubId();
             try {
                 return ITelephony.Stub.asInterface(ServiceManager.getService(
                         Context.TELEPHONY_SERVICE)).handlePinMmiForSubscriber(subId, input);
@@ -248,7 +248,7 @@ public class SpecialCharSequenceMgr {
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (telephonyManager != null && input.equals(MMI_IMEI_DISPLAY)) {
             int phoneType;
-            long subId = SubscriptionManager.getDefaultVoiceSubId();
+            int subId = SubscriptionManager.getDefaultVoiceSubId();
             phoneType = telephonyManager.getCurrentPhoneType(subId);
             if (phoneType == TelephonyManager.PHONE_TYPE_GSM) {
                 showIMEIPanel(context, useSystemWindow, telephonyManager);
@@ -285,7 +285,7 @@ public class SpecialCharSequenceMgr {
     private static void showIMEIPanel(Context context, boolean useSystemWindow,
             TelephonyManager telephonyManager) {
         String imeiStr = null;
-        long subId = SubscriptionManager.getDefaultVoiceSubId();
+        int subId = SubscriptionManager.getDefaultVoiceSubId();
         int slotId = SubscriptionManager.getSlotId(subId);
         imeiStr = telephonyManager.getDeviceId(slotId);
 
@@ -300,7 +300,7 @@ public class SpecialCharSequenceMgr {
     private static void showMEIDPanel(Context context, boolean useSystemWindow,
             TelephonyManager telephonyManager) {
         String meidStr = null;
-        long subId = SubscriptionManager.getDefaultVoiceSubId();
+        int subId = SubscriptionManager.getDefaultVoiceSubId();
         int slotId = SubscriptionManager.getSlotId(subId);
         meidStr = telephonyManager.getDeviceId(slotId);
 
