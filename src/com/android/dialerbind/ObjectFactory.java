@@ -48,9 +48,9 @@ public class ObjectFactory {
     public static CallLogAdapter newCallLogAdapter(Context context,
             CallFetcher callFetcher, ContactInfoHelper contactInfoHelper,
             CallItemExpandedListener callItemExpandedListener,
-            OnReportButtonClickListener onReportButtonClickListener, boolean isCallLog) {
+            OnReportButtonClickListener onReportButtonClickListener) {
         return new CallLogAdapter(context, callFetcher, contactInfoHelper,
-                callItemExpandedListener, onReportButtonClickListener, isCallLog);
+                callItemExpandedListener, onReportButtonClickListener);
     }
 
     public static DialogFragment getReportDialogFragment(String number) {

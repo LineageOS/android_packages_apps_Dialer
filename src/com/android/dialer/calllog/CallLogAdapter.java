@@ -266,12 +266,6 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Can be set to true by tests to disable processing of requests. */
     private volatile boolean mRequestProcessingDisabled = false;
 
-    private boolean mIsCallLog = true;
-
-    private View mBadgeContainer;
-    private ImageView mBadgeImageView;
-    private TextView mBadgeText;
-
     private int mCallLogBackgroundColor;
     private int mExpandedBackgroundColor;
     private float mExpandedTranslationZ;
@@ -353,13 +347,12 @@ public class CallLogAdapter extends GroupingListAdapter
 
     public CallLogAdapter(Context context, CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper, CallItemExpandedListener callItemExpandedListener,
-            OnReportButtonClickListener onReportButtonClickListener, boolean isCallLog) {
+            OnReportButtonClickListener onReportButtonClickListener) {
         super(context);
 
         mContext = context;
         mCallFetcher = callFetcher;
         mContactInfoHelper = contactInfoHelper;
-        mIsCallLog = isCallLog;
         mCallItemExpandedListener = callItemExpandedListener;
 
         mOnReportButtonClickListener = onReportButtonClickListener;
@@ -659,17 +652,12 @@ public class CallLogAdapter extends GroupingListAdapter
         final long rowId = c.getLong(CallLogQuery.ID);
         views.rowId = rowId;
 
-        // For entries in the call log, check if the day group has changed and display a header
-        // if necessary.
-        if (mIsCallLog) {
-            int currentGroup = getDayGroupForCall(rowId);
-            int previousGroup = getPreviousDayGroup(c);
-            if (currentGroup != previousGroup) {
-                views.dayGroupHeader.setVisibility(View.VISIBLE);
-                views.dayGroupHeader.setText(getGroupDescription(currentGroup));
-            } else {
-                views.dayGroupHeader.setVisibility(View.GONE);
-            }
+        // Check if the day group has changed and display a header if necessary.
+        int currentGroup = getDayGroupForCall(rowId);
+        int previousGroup = getPreviousDayGroup(c);
+        if (currentGroup != previousGroup) {
+            views.dayGroupHeader.setVisibility(View.VISIBLE);
+            views.dayGroupHeader.setText(getGroupDescription(currentGroup));
         } else {
             views.dayGroupHeader.setVisibility(View.GONE);
         }
@@ -689,33 +677,11 @@ public class CallLogAdapter extends GroupingListAdapter
         final boolean isVoicemailNumber =
                 mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number);
 
-        // Where binding and not in the call log, use default behaviour of invoking a call when
-        // tapping the primary view.
-        if (!mIsCallLog) {
-            views.primaryActionView.setOnClickListener(this.mActionListener);
+        // Expand/collapse an actions section for the call log entry when the primary view is tapped.
+        views.primaryActionView.setOnClickListener(this.mExpandCollapseListener);
 
-            // Set return call intent, otherwise null.
-            if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
-                // Sets the primary action to call the number.
-                if (isVoicemailNumber) {
-                    views.primaryActionView.setTag(
-                            IntentProvider.getReturnVoicemailCallIntentProvider());
-                } else {
-                    views.primaryActionView.setTag(
-                            IntentProvider.getReturnCallIntentProvider(number));
-                }
-            } else {
-                // Number is not callable, so hide button.
-                views.primaryActionView.setTag(null);
-            }
-        } else {
-            // In the call log, expand/collapse an actions section for the call log entry when
-            // the primary view is tapped.
-            views.primaryActionView.setOnClickListener(this.mExpandCollapseListener);
-
-            // Note: Binding of the action buttons is done as required in configureActionViews
-            // when the user expands the actions ViewStub.
-        }
+        // Note: Binding of the action buttons is done as required in configureActionViews when the
+        // user expands the actions ViewStub.
 
         // Lookup contacts with this number
         NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
@@ -828,8 +794,6 @@ public class CallLogAdapter extends GroupingListAdapter
             mViewTreeObserver = callLogItemView.getViewTreeObserver();
             mViewTreeObserver.addOnPreDrawListener(this);
         }
-
-        bindBadge(callLogItemView, info, details, callType);
     }
 
     /**
@@ -1071,54 +1035,6 @@ public class CallLogAdapter extends GroupingListAdapter
         }
 
         mCallLogViewsHelper.setActionContentDescriptions(views);
-    }
-
-    protected void bindBadge(
-            View view, final ContactInfo info, final PhoneCallDetails details, int callType) {
-        // Do not show badge in call log.
-        if (!mIsCallLog) {
-            final ViewStub stub = (ViewStub) view.findViewById(R.id.link_stub);
-            if (UriUtils.isEncodedContactUri(info.lookupUri)) {
-                if (stub != null) {
-                    mBadgeContainer = stub.inflate();
-                } else {
-                    mBadgeContainer = view.findViewById(R.id.badge_container);
-                }
-
-                mBadgeContainer.setVisibility(View.VISIBLE);
-                mBadgeImageView = (ImageView) mBadgeContainer.findViewById(R.id.badge_image);
-                mBadgeText = (TextView) mBadgeContainer.findViewById(R.id.badge_text);
-
-                final View clickableArea = mBadgeContainer.findViewById(R.id.badge_link_container);
-                if (clickableArea != null) {
-                    clickableArea.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // If no lookup uri is provided, we need to rely on what information
-                            // we have available; namely the phone number and name.
-                            if (info.lookupUri == null) {
-                                final Intent intent =
-                                        DialtactsActivity.getAddToContactIntent(details.name,
-                                                details.number,
-                                                details.numberType);
-                                DialerUtils.startActivityWithErrorToast(mContext, intent,
-                                        R.string.add_contact_not_available);
-                            } else {
-                                addContactFromLookupUri(info.lookupUri);
-                            }
-                        }
-                    });
-                }
-                mBadgeImageView.setImageResource(R.drawable.ic_person_add_24dp);
-                mBadgeText.setText(R.string.recentCalls_addToContact);
-            } else {
-                // Hide badge if it was previously shown.
-                mBadgeContainer = view.findViewById(R.id.badge_container);
-                if (mBadgeContainer != null) {
-                    mBadgeContainer.setVisibility(View.GONE);
-                }
-            }
-        }
     }
 
     /** Checks whether the contact info from the call log matches the one from the contacts db. */
