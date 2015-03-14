@@ -34,6 +34,8 @@ import android.view.ViewTreeObserver;
  */
 public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         VideoCallPresenter.VideoCallUi> implements VideoCallPresenter.VideoCallUi {
+    private static final String TAG = VideoCallFragment.class.getSimpleName();
+    private static final boolean DEBUG = false;
 
     /**
      * Used to indicate that the surface dimensions are not set.
@@ -138,6 +140,10 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
          * @param view The {@link TextureView}.
          */
         public void recreateView(TextureView view) {
+            if (DEBUG) {
+                Log.i(TAG, "recreateView: " + view);
+            }
+
             if (mTextureView == view) {
                 return;
             }
@@ -163,6 +169,9 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width,
                 int height) {
             boolean surfaceCreated;
+            if (DEBUG) {
+                Log.i(TAG, "onSurfaceTextureAvailable: " + surfaceTexture);
+            }
             // Where there is no saved {@link SurfaceTexture} available, use the newly created one.
             // If a saved {@link SurfaceTexture} is available, we are re-creating after an
             // orientation change.
@@ -334,7 +343,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-
         super.onCreateView(inflater, container, savedInstanceState);
 
         final View view = inflater.inflate(R.layout.video_call_fragment, container, false);
