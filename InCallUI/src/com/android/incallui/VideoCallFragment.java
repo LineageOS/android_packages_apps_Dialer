@@ -138,6 +138,10 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
          * @param view The {@link TextureView}.
          */
         public void recreateView(TextureView view) {
+            if (mTextureView == view) {
+                return;
+            }
+
             mTextureView = view;
             mTextureView.setSurfaceTextureListener(this);
             mTextureView.setOnClickListener(this);
