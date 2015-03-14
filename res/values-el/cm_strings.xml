@@ -79,6 +79,7 @@
   <string name="no">Όχι</string>
   <string name="incall_vibration_category_title">Δόνηση κατά την κλήση</string>
   <string name="incall_vibrate_outgoing_title">Δόνηση στην απάντηση</string>
+  <string name="vibrate_call_waiting">Δόνηση στην αναμονή</string>
   <string name="incall_vibrate_hangup_title">Δόνηση στο κλείσιμο</string>
   <string name="incall_vibrate_45_title">Δόνηση κάθε 1 λεπτό</string>
   <string name="incall_vibrate_45_summary">Δόνηση στο 45ο δευτερόλεπτο κάθε λεπτού κατά τη διάρκεια εξερχόμενων κλήσεων</string>

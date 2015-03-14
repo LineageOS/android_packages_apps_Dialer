@@ -79,6 +79,7 @@
   <string name="no">Não</string>
   <string name="incall_vibration_category_title">Vibrar durante a chamada</string>
   <string name="incall_vibrate_outgoing_title">Vibrar ao atender</string>
+  <string name="vibrate_call_waiting">Vibrar com chamada em espera</string>
   <string name="incall_vibrate_hangup_title">Vibrar quando terminar a chamada</string>
   <string name="incall_vibrate_45_title">Vibrar a cada minuto</string>
   <string name="incall_vibrate_45_summary">Vibrar aos 45 segundos de cada minuto durante chamadas efetuadas</string>

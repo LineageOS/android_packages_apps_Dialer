@@ -79,6 +79,7 @@
   <string name="no">아니오</string>
   <string name="incall_vibration_category_title">In-call vibration</string>
   <string name="incall_vibrate_outgoing_title">수신 시 진동</string>
+  <string name="vibrate_call_waiting">통화 대기 중 진동</string>
   <string name="incall_vibrate_hangup_title">통화 종료 시 진동</string>
   <string name="incall_vibrate_45_title">매 분마다 진동</string>
   <string name="incall_vibrate_45_summary">발신 통화 중 매 45초마다 진동</string>

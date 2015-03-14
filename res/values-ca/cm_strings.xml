@@ -79,6 +79,7 @@
   <string name="no">No</string>
   <string name="incall_vibration_category_title">Vibració durant la trucada</string>
   <string name="incall_vibrate_outgoing_title">Vibra en contestar</string>
+  <string name="vibrate_call_waiting">Vibra quan hi hagi una trucada en espera</string>
   <string name="incall_vibrate_hangup_title">Vibra al penjar</string>
   <string name="incall_vibrate_45_title">Vibra cada minut</string>
   <string name="incall_vibrate_45_summary">Vibra als 45 segons de cada minut durant les trucades sortints</string>

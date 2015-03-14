@@ -79,6 +79,7 @@
   <string name="no">Ne</string>
   <string name="incall_vibration_category_title">Vibravimas pokalbio metu</string>
   <string name="incall_vibrate_outgoing_title">Vibruoti, kai atsiliepiama</string>
+  <string name="vibrate_call_waiting">Vibruoti, kai laukia skambutis</string>
   <string name="incall_vibrate_hangup_title">Vibruoti, kai baigiamas pokalbis</string>
   <string name="incall_vibrate_45_title">Vibruoti kiekvieną minutę</string>
   <string name="incall_vibrate_45_summary">Vibruoti ties 45 sekundę, kiekvieną išeinančio skambučio minutę</string>

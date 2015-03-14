@@ -16,5 +16,83 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="nearby_places">Lähedased kohad</string>
+  <string name="people">Inimesed</string>
+  <string name="lookup_settings_label">Numbriotsing</string>
+  <string name="lookup_settings_description">Tundmatute telefoninumbrite otsing</string>
+  <string name="enable_forward_lookup_title">Järgmine</string>
+  <string name="enable_forward_lookup_summary">Näita lähedalasuvaid kohti, kui otsin numbrivalimisrežiimis</string>
+  <string name="enable_people_lookup_title">Kontaktiotsing</string>
+  <string name="enable_people_lookup_summary">Numbrivalimisrežiimis näita kontaktide valikut jooksvalt</string>
+  <string name="enable_reverse_lookup_title">Pööratud otsing</string>
+  <string name="enable_reverse_lookup_summary">Otsi teavet isiku või koha kohta, kui kõne tuleb tundmatult numbrilt</string>
+  <string name="forward_lookup_provider_title">Otsingupakkuja</string>
+  <string name="people_lookup_provider_title">Inimeste otsingupakkuja</string>
+  <string name="reverse_lookup_provider_title">Pöördotsingupakkuja</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Hiina (CN)</string>
+  <string name="preference_category_t9_dialpad_search">Numbrilaua T9 otsing</string>
+  <string name="t9_search_input_locale">T9 otsingu sisend</string>
+  <string name="t9_search_input_locale_default">Vaikimisi</string>
+  <string name="type_blacklist">Kõne mustas nimekirjas</string>
   <string name="call_log_stats_title">Statistika</string>
+  <string name="callStatsDetailTitle">Detailne kõne statistika</string>
+  <string name="call_stats">Kõnede statistika</string>
+  <string name="call_stats_refresh">Värskenda</string>
+  <string name="activity_title_call_stats">Kõnede statistika</string>
+  <string name="call_stats_nav_all">Kõik</string>
+  <string name="call_stats_nav_incoming">Sissetulev</string>
+  <string name="call_stats_nav_outgoing">Väljaminev</string>
+  <string name="call_stats_nav_missed">Vastamata</string>
+  <string name="call_stats_incoming">Sissetulevaid: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_outgoing">Väljuvaid: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_missed">Vastamata</string>
+  <string name="call_stats_missed_percent">Vastamata: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Must nimekiri</string>
+  <string name="call_stats_blacklist_percent">Mustas nimekirjas: <xliff:g id="percent">%d </xliff:g>%%</string>
+  <string name="call_stats_header_total">Kokku: <xliff:g id="call_count">%s </xliff:g>, <xliff:g id="duration"> %s </xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Kokku: <xliff:g id="call_count">%s </xliff:g></string>
+  <string name="call_stats_filter_from">Alguskuupäev</string>
+  <string name="call_stats_filter_to">Lõppkuupäev</string>
+  <string name="call_stats_filter_picker_title">Filtri valik</string>
+  <string name="date_quick_selection">Kiirvalik</string>
+  <string name="date_qs_currentmonth">Käesolev kuu</string>
+  <string name="date_qs_currentquarter">Käesolev kvartal</string>
+  <string name="date_qs_currentyear">Käesolev aasta</string>
+  <string name="date_qs_lastweek">Eelmine nädal</string>
+  <string name="date_qs_lastmonth">Eelmine kuu</string>
+  <string name="date_qs_lastquarter">Eelmine kvartal</string>
+  <string name="date_qs_lastyear">Eelmine aasta</string>
+  <string name="call_stats_date_filter">Muuda ajavahemiku</string>
+  <string name="call_stats_reset_filter">Lähtesta ajavahemik</string>
+  <string name="call_stats_sort_by_duration">Kõne kestvuse järgi sortimine</string>
+  <string name="call_stats_sort_by_count">Kõnede arvu järgi sortimine</string>
+  <string name="menu_add_to_blacklist">Lisa musta nimekirja</string>
+  <string name="toast_added_to_blacklist">%s on lisatud musta nimekirja.</string>
+  <string name="speed_dial_settings">Kiirvalimise seaded</string>
+  <string name="speed_dial_not_set">(määramata)</string>
+  <string name="speed_dial_replace">Muuda</string>
+  <string name="speed_dial_delete">Kustuta</string>
+  <string name="speed_dial_unassigned_dialog_title">Number määramata</string>
+  <string name="speed_dial_unassigned_dialog_message">Kiirvalik numbrile \'<xliff:g id="number">%s</xliff:g>\' on määramata. Kas soovid toimingu nüüd määrata?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Kiirvalimise kasutamiseks lülitage lennurežiim välja.</string>
+  <string name="yes">Jah</string>
+  <string name="no">Ei</string>
+  <string name="incall_vibration_category_title">Kõne vibratsioon</string>
+  <string name="incall_vibrate_outgoing_title">Vibreeri vastamisel</string>
+  <string name="incall_vibrate_hangup_title">Vibreeri kõne lõppemisel</string>
+  <string name="incall_vibrate_45_title">Vibreeri iga minut</string>
+  <string name="incall_vibrate_45_summary">Vibreerib 45 sekundi täitumisel igas minutis väljaminevate kõnede korral</string>
+  <string name="detailed_incall_info_title">Detailne helistaja info</string>
+  <string name="detailed_incall_info_summary">Näita lisateavet helistaja kohta sissetuleva kõne korral</string>
+  <string name="video_call">Videokõne</string>
+  <string name="call_duration_active">Aktiivne kestus:</string>
+  <string name="call_duration_call_out">Kõne kestus:</string>
+  <string name="call_log_show_all_slots">Kõik SIM-kaardid</string>
+  <string name="call_log_all_calls_header">Kõik kõned</string>
+  <string name="calllog_search_hint">Otsi kõnelogist</string>
+  <string name="msim_ime_dialog_title">Seadme identifikaator</string>
+  <string name="call_log_blacklist_header">Ainult musta nimekirja kõned</string>
+  <string name="start_call_playback">Esita salvestus</string>
+  <string name="stop_call_playback">Stopp</string>
+  <string name="call_playback_error_message">Salvestuse esitamine nurjus</string>
 </resources>
