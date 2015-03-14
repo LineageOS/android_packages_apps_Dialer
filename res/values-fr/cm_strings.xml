@@ -23,7 +23,7 @@
   <string name="enable_forward_lookup_title">Recherche directe</string>
   <string name="enable_forward_lookup_summary">Afficher les lieux à proximité lors d\'une recherche dans le téléphone</string>
   <string name="enable_people_lookup_title">Recherche de personnes</string>
-  <string name="enable_people_lookup_summary">Afficher les résultats provenant d\'internet pour les personnes lors de la recherche dans le composeur</string>
+  <string name="enable_people_lookup_summary">Afficher les résultats provenant d\'Internet pour les personnes lors de la recherche dans le composeur</string>
   <string name="enable_reverse_lookup_title">Recherche inversée</string>
   <string name="enable_reverse_lookup_summary">Rechercher des informations sur la personne ou sur le lieu lors d\'un appels entrants d\'un numéro inconnu au répertoire</string>
   <string name="forward_lookup_provider_title">Fournisseur de recherche directe</string>
@@ -79,6 +79,7 @@
   <string name="no">Non</string>
   <string name="incall_vibration_category_title">Vibrations durant un appel</string>
   <string name="incall_vibrate_outgoing_title">Vibrer à la réponse</string>
+  <string name="vibrate_call_waiting">Vibrer quand l\'appel est en attente</string>
   <string name="incall_vibrate_hangup_title">Vibrer en fin d\'appel</string>
   <string name="incall_vibrate_45_title">Vibrer chaque minute</string>
   <string name="incall_vibrate_45_summary">Vibrer à la 45ème seconde de chaque minute durant un appel sortant</string>

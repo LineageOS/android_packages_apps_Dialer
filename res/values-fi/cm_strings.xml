@@ -79,6 +79,7 @@
   <string name="no">Ei</string>
   <string name="incall_vibration_category_title">Värinä puhelun aikana</string>
   <string name="incall_vibrate_outgoing_title">Värinä vastatessa</string>
+  <string name="vibrate_call_waiting">Värinä puhelun odottaessa</string>
   <string name="incall_vibrate_hangup_title">Värinä puhelun loputtua</string>
   <string name="incall_vibrate_45_title">Värinä joka minuutti</string>
   <string name="incall_vibrate_45_summary">Värinä joka minuutti 45 sekunnin kohdalla lähtevien puheluiden aikana</string>

@@ -79,6 +79,7 @@
   <string name="no">いいえ</string>
   <string name="incall_vibration_category_title">通話中のバイブレーション</string>
   <string name="incall_vibrate_outgoing_title">応答時のバイブレーション</string>
+  <string name="vibrate_call_waiting">割込通話時のバイブレーション</string>
   <string name="incall_vibrate_hangup_title">通話終了時のバイブレーション</string>
   <string name="incall_vibrate_45_title">時間ごとのバイブレーション</string>
   <string name="incall_vibrate_45_summary">発信中に45秒ごとに振動させる</string>

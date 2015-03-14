@@ -79,6 +79,7 @@
   <string name="no">Не</string>
   <string name="incall_vibration_category_title">Вибрација у току позива</string>
   <string name="incall_vibrate_outgoing_title">Вибрација при успостављању везе</string>
+  <string name="vibrate_call_waiting">Вибрација при позиву на чекању</string>
   <string name="incall_vibrate_hangup_title">Вибрација при прекиду позива</string>
   <string name="incall_vibrate_45_title">Вибрација сваког минута</string>
   <string name="incall_vibrate_45_summary">Вибрације сваке 45 секунде у минути током одлазних позива</string>

@@ -79,6 +79,7 @@
   <string name="no">Нет</string>
   <string name="incall_vibration_category_title">Вибрация во время звонка</string>
   <string name="incall_vibrate_outgoing_title">Вибрировать при ответе</string>
+  <string name="vibrate_call_waiting">Вибрировать при ожидании</string>
   <string name="incall_vibrate_hangup_title">Вибрировать при отбое</string>
   <string name="incall_vibrate_45_title">Вибрировать каждую минуту</string>
   <string name="incall_vibrate_45_summary">Вибрировать на 45-ой секунде каждой минуты во время исходящих вызовов</string>

@@ -79,6 +79,7 @@
   <string name="no">否</string>
   <string name="incall_vibration_category_title">通话中震动</string>
   <string name="incall_vibrate_outgoing_title">对方接听时震动</string>
+  <string name="vibrate_call_waiting">呼叫等待时振动</string>
   <string name="incall_vibrate_hangup_title">通话结束时震动</string>
   <string name="incall_vibrate_45_title">每分钟震动</string>
   <string name="incall_vibrate_45_summary">呼出通话达到每分钟的 45 秒时震动</string>
