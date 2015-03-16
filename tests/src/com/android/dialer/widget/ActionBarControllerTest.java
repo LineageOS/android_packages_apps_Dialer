@@ -17,25 +17,53 @@
 package com.android.dialer.widget;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
+import android.test.ActivityInstrumentationTestCase2;
+import android.test.AndroidTestCase;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
+import android.view.View;
 
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.widget.ActionBarController.ActivityUi;
+import com.android.internal.app.WindowDecorActionBar;
 
 @SmallTest
-public class ActionBarControllerTest extends InstrumentationTestCase {
+public class ActionBarControllerTest extends ActivityInstrumentationTestCase2<DialtactsActivity> {
 
     private static final int ACTION_BAR_HEIGHT = 100;
     private ActionBarController mActionBarController;
     private SearchEditTextLayout mSearchBox;
     private MockActivityUi mActivityUi;
 
+    private class MockActionBar extends WindowDecorActionBar {
+        private int mHideOffset = 0;
+
+        public MockActionBar(Activity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void setHideOffset(int offset) {
+            mHideOffset = offset;
+        }
+
+        @Override
+        public int getHideOffset() {
+            return mHideOffset;
+        }
+    }
+
     private class MockActivityUi implements ActivityUi {
         boolean isInSearchUi;
         boolean hasSearchQuery;
         boolean shouldShowActionBar;
-        int actionBarHideOffset;
+        private ActionBar mActionBar;
+
+        public MockActivityUi() {
+             mActionBar = new MockActionBar(getActivity());
+        }
 
         @Override
         public boolean isInSearchUi() {
@@ -59,7 +87,7 @@ public class ActionBarControllerTest extends InstrumentationTestCase {
 
         @Override
         public ActionBar getActionBar() {
-            return null;
+            return mActionBar;
         }
     }
 
@@ -82,6 +110,11 @@ public class ActionBarControllerTest extends InstrumentationTestCase {
             mIsExpanded = false;
         }
     }
+
+    public ActionBarControllerTest() {
+        super(DialtactsActivity.class);
+    }
+
 
     @Override
     protected void setUp() {
