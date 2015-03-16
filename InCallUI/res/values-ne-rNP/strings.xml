@@ -57,8 +57,12 @@
     <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> छुटेका कलहरू"</string>
     <string name="notification_missedCallTicker" msgid="504686252427747209">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g>बाट छुटेका कल"</string>
     <string name="notification_ongoing_call" msgid="7068688957273482989">"चलिरहेको कल"</string>
+    <!-- no translation found for notification_ongoing_call_wifi (8521553590606569379) -->
+    <skip />
     <string name="notification_on_hold" msgid="3480694969511790465">"होल्डमा"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"आगमन कल"</string>
+    <!-- no translation found for notification_incoming_call_wifi (9210706506594546627) -->
+    <skip />
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"आगमन भिडियो कल"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"आगमन भिडियो अनुरोध"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"नयाँ भ्वाइस मेल"</string>

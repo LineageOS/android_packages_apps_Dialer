@@ -83,9 +83,13 @@
     <!-- no translation found for notification_missedCallTicker (504686252427747209) -->
     <skip />
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Учурдагы чалуу"</string>
+    <!-- no translation found for notification_ongoing_call_wifi (8521553590606569379) -->
+    <skip />
     <!-- no translation found for notification_on_hold (3480694969511790465) -->
     <skip />
     <!-- no translation found for notification_incoming_call (2820429205043529642) -->
+    <skip />
+    <!-- no translation found for notification_incoming_call_wifi (9210706506594546627) -->
     <skip />
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"Келип жаткан видео чалуу"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"Келип жаткан видео сурамы"</string>
