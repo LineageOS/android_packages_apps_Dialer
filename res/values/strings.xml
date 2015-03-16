@@ -526,9 +526,6 @@
     -->
     <string name="contact_tooltip">Touch image to see all numbers or touch &amp; hold to reorder</string>
 
-    <!-- Content description for dismiss button on badge. [CHAR LIMIT=NONE] -->
-    <string name="description_dismiss">Dismiss</string>
-
     <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
     <string name="remove_contact">Remove</string>
 

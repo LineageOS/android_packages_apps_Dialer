@@ -192,7 +192,7 @@ public class CallLogFragment extends ListFragment
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso), this, this, true);
+                new ContactInfoHelper(getActivity(), currentCountryIso), this, this);
         setListAdapter(mAdapter);
         mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
                 this, mLogLimit);

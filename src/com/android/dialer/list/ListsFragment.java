@@ -24,9 +24,7 @@ import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
-import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.CallLogFragment;
-import com.android.dialer.calllog.CallLogQuery;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.util.DialerUtils;
@@ -43,8 +41,7 @@ import java.util.ArrayList;
  * ViewPager containing the lists up above the search bar and pin it against the top of the
  * screen.
  */
-public class ListsFragment extends Fragment implements CallLogQueryHandler.Listener,
-        CallLogAdapter.CallFetcher, ViewPager.OnPageChangeListener {
+public class ListsFragment extends Fragment implements ViewPager.OnPageChangeListener {
 
     private static final boolean DEBUG = DialtactsActivity.DEBUG;
     private static final String TAG = "ListsFragment";
@@ -81,9 +78,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
 
     private String[] mTabTitles;
     private int[] mTabIcons;
-
-    private CallLogAdapter mCallLogAdapter;
-    private CallLogQueryHandler mCallLogQueryHandler;
 
     /**
      * Call shortcuts older than this date (persisted in shared preferences) will not show up in
@@ -157,17 +151,10 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         Trace.beginSection(TAG + " onCreate");
         super.onCreate(savedInstanceState);
 
-        mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
-                this, 1);
         Trace.beginSection(TAG + " getCurrentCountryIso");
         final String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         Trace.endSection();
 
-        Trace.beginSection(TAG + " create adapters");
-        mCallLogAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso), null, null, false);
-
-        Trace.endSection();
         Trace.endSection();
     }
 
@@ -179,26 +166,10 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
                 DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
         mLastCallShortcutDate = prefs.getLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, 0);
         mActionBar = getActivity().getActionBar();
-        fetchCalls();
-        mCallLogAdapter.setLoading(true);
         if (getUserVisibleHint()) {
             sendScreenViewForPosition(mViewPager.getCurrentItem());
         }
         Trace.endSection();
-    }
-
-    @Override
-    public void onPause() {
-        // Wipe the cache to refresh the call shortcut item. This is not that expensive because
-        // it only contains one item.
-        mCallLogAdapter.invalidateCache();
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        mCallLogAdapter.stopRequestProcessing();
-        super.onDestroy();
     }
 
     @Override
@@ -237,31 +208,6 @@ public class ListsFragment extends Fragment implements CallLogQueryHandler.Liste
         Trace.endSection();
         Trace.endSection();
         return parentView;
-    }
-
-    @Override
-    public void onVoicemailStatusFetched(Cursor statusCursor) {
-        // no-op
-    }
-
-    @Override
-    public boolean onCallsFetched(Cursor cursor) {
-        mCallLogAdapter.setLoading(false);
-
-        // Save the date of the most recent call log item
-        if (cursor != null && cursor.moveToFirst()) {
-            mCurrentCallShortcutDate = cursor.getLong(CallLogQuery.DATE);
-        }
-
-        mCallLogAdapter.changeCursor(cursor);
-
-        // Return true; took ownership of cursor
-        return true;
-    }
-
-    @Override
-    public void fetchCalls() {
-        mCallLogQueryHandler.fetchCalls(CallLogQueryHandler.CALL_TYPE_ALL, mLastCallShortcutDate);
     }
 
     public void addOnPageChangeListener(OnPageChangeListener onPageChangeListener) {

@@ -64,9 +64,6 @@
     <dimen name="favorites_row_end_padding">0dp</dimen>
     <dimen name="favorites_row_undo_text_side_padding">32dp</dimen>
 
-    <dimen name="call_log_item_extra_padding_vertical">4dp</dimen>
-
-
     <!-- Size of the star icon on the favorites tile. -->
     <dimen name="favorites_star_icon_size">12dp</dimen>
 
