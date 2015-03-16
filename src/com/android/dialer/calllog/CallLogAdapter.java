@@ -754,7 +754,8 @@ public class CallLogAdapter extends GroupingListAdapter
                     public void onClick(View v) {
                         final Intent intent =
                                 DialtactsActivity.getAddNumberToContactIntent(details.number);
-                        mContext.startActivity(intent);
+                        DialerUtils.startActivityWithErrorToast(mContext, intent,
+                                R.string.add_contact_not_available);
                     }
                 });
                 mBadgeImageView.setImageResource(R.drawable.ic_person_add_24dp);
