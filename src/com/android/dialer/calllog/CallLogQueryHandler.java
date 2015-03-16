@@ -32,11 +32,13 @@ import android.os.Looper;
 import android.os.Message;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract.Status;
+import android.provider.VoicemailContract.Voicemails;
 import android.util.Log;
 
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
+
 import com.google.common.collect.Lists;
 
 import java.lang.ref.WeakReference;
@@ -140,15 +142,18 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         StringBuilder where = new StringBuilder();
         List<String> selectionArgs = Lists.newArrayList();
 
+        // Ignore voicemails marked as deleted
+        where.append(Voicemails.DELETED);
+        where.append(" = 0");
+
         if (newOnly) {
+            where.append(" AND ");
             where.append(Calls.NEW);
             where.append(" = 1");
         }
 
         if (callType > CALL_TYPE_ALL) {
-            if (where.length() > 0) {
-                where.append(" AND ");
-            }
+            where.append(" AND ");
             // Add a clause to fetch only items of type voicemail.
             where.append(String.format("(%s = ?)", Calls.TYPE));
             // Add a clause to fetch only items newer than the requested date
@@ -156,9 +161,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         }
 
         if (newerThan > 0) {
-            if (where.length() > 0) {
-                where.append(" AND ");
-            }
+            where.append(" AND ");
             where.append(String.format("(%s > ?)", Calls.DATE));
             selectionArgs.add(Long.toString(newerThan));
         }
