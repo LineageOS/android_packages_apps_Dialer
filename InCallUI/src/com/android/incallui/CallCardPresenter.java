@@ -25,7 +25,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.telecom.Call.Details;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -67,7 +69,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private ContactCacheEntry mPrimaryContactInfo;
     private ContactCacheEntry mSecondaryContactInfo;
     private CallTimer mCallTimer;
+
     private Context mContext;
+    private WifiManager mWifiManager;
 
     public static class ContactLookupCallback implements ContactInfoCacheCallback {
         private final WeakReference<CallCardPresenter> mCallCardPresenter;
@@ -108,6 +112,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     public void init(Context context, Call call) {
         mContext = Preconditions.checkNotNull(context);
+        mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
 
         // Call may be null if disconnect happened already.
         if (call != null) {
@@ -222,7 +227,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         // Start/stop timers.
-        if (mPrimary != null && mPrimary.getState() == Call.State.ACTIVE) {
+        if (isPrimaryCallActive()) {
             Log.d(this, "Starting the calltime timer");
             mCallTimer.start(CALL_TIME_UPDATE_INTERVAL_MS);
         } else {
@@ -245,6 +250,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     null,
                     null,
                     null);
+            getUi().showHdAudioIndicator(false);
         }
 
         // Hide/show the contact photo based on the video state.
@@ -265,13 +271,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     @Override
-    public void onDetailsChanged(Call call, android.telecom.Call.Details details) {
+    public void onDetailsChanged(Call call, Details details) {
         updatePrimaryCallState();
 
-        if (call.can(android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE) !=
-                android.telecom.Call.Details.can(
-                        details.getCallCapabilities(),
-                        android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE)) {
+        if (call.can(Details.CAPABILITY_MANAGE_CONFERENCE) !=
+                Details.can(details.getCallCapabilities(), Details.CAPABILITY_MANAGE_CONFERENCE)) {
             maybeShowManageConferenceCallButton();
         }
     }
@@ -301,6 +305,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     getConnectionLabel(),
                     getCallStateIcon(),
                     getGatewayNumber());
+
+            boolean showHdAudioIndicator =
+                    isPrimaryCallActive() && primaryCallCan(Details.CAPABILITY_HIGH_DEF_AUDIO);
+            getUi().showHdAudioIndicator(showHdAudioIndicator);
+
             setCallbackNumber();
         }
     }
@@ -323,15 +332,21 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return false;
         }
 
-        return mPrimary.can(android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE);
+        return mPrimary.can(Details.CAPABILITY_MANAGE_CONFERENCE);
     }
 
     private void setCallbackNumber() {
         String callbackNumber = null;
 
+        // Show the emergency callback number if either:
+        // 1. This is an emergency call.
+        // 2. The phone is in Emergency Callback Mode, which means we should show the callback
+        //    number.
         boolean isEmergencyCall = PhoneNumberUtils.isEmergencyNumber(
                 getNumberFromHandle(mPrimary.getHandle()));
-        if (isEmergencyCall) {
+        boolean showCallbackNumber = mPrimary.can(Details.CAPABILITY_SHOW_CALLBACK_NUMBER);
+
+        if (isEmergencyCall || showCallbackNumber) {
             callbackNumber = getSubscriptionNumber();
         } else {
             StatusHints statusHints = mPrimary.getTelecommCall().getDetails().getStatusHints();
@@ -345,21 +360,22 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
         String simNumber = mgr.getLine1Number(mPrimary.getAccountHandle());
-        if (PhoneNumberUtils.compare(callbackNumber, simNumber)) {
-            Log.d(this, "Numbers are the same; not showing the callback number");
+        if (!showCallbackNumber && PhoneNumberUtils.compare(callbackNumber, simNumber)) {
+            Log.d(this, "Numbers are the same (and callback number is not being forced to show);" +
+                            " not showing the callback number");
             callbackNumber = null;
         }
 
-        getUi().setCallbackNumber(callbackNumber, isEmergencyCall);
+        getUi().setCallbackNumber(callbackNumber, isEmergencyCall || showCallbackNumber);
     }
 
     public void updateCallTime() {
         final CallCardUi ui = getUi();
 
-        if (ui == null || mPrimary == null || mPrimary.getState() != Call.State.ACTIVE) {
-            if (ui != null) {
-                ui.setPrimaryCallElapsedTime(false, 0);
-            }
+        if (ui == null) {
+            mCallTimer.cancel();
+        } else if (!isPrimaryCallActive()) {
+            ui.setPrimaryCallElapsedTime(false, 0);
             mCallTimer.cancel();
         } else {
             final long callStart = mPrimary.getConnectTimeMillis();
@@ -594,6 +610,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return statusHints.getLabel().toString();
         }
 
+        // Assume the SSID of the connection reported by the WifiManager is the name of the wifi
+        // network used for calling, since currently a phone only connects to a single wifi network.
+        if (isPrimaryCallActive() && primaryCallCan(Details.CAPABILITY_WIFI)
+                && mWifiManager.getConnectionInfo() != null) {
+            return formatWifiSSID(mWifiManager.getConnectionInfo().getSSID());
+        }
+
         if (hasOutgoingGatewayCall() && getUi() != null) {
             // Return the label for the gateway app on outgoing calls.
             final PackageManager pm = mContext.getPackageManager();
@@ -619,11 +642,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             }
         }
 
-        // Return high definition audio icon if the capability is indicated.
-        if (mPrimary.getTelecommCall().getDetails().can(
-                android.telecom.Call.Details.CAPABILITY_HIGH_DEF_AUDIO)
-                && mPrimary.getState() == Call.State.ACTIVE) {
-            return mContext.getResources().getDrawable(R.drawable.ic_hd_audio);
+        if (primaryCallCan(Details.CAPABILITY_WIFI) && (isPrimaryCallActive()
+                || (mPrimary != null && mPrimary.getState() == Call.State.INCOMING))) {
+            return mContext.getResources().getDrawable(R.drawable.ic_signal_wifi_4_bar_18dp);
         }
 
         return null;
@@ -703,9 +724,16 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         ui.setCallCardVisible(!isFullScreenVideo);
     }
 
+    private boolean isPrimaryCallActive() {
+        return mPrimary != null && mPrimary.getState() == Call.State.ACTIVE;
+    }
+
+    private boolean primaryCallCan(int capability) {
+        return mPrimary.getTelecommCall().getDetails().can(capability);
+    }
+
     private String getConferenceString(Call call) {
-        boolean isGenericConference = call.can(
-                android.telecom.Call.Details.CAPABILITY_GENERIC_CONFERENCE);
+        boolean isGenericConference = call.can(Details.CAPABILITY_GENERIC_CONFERENCE);
         Log.v(this, "getConferenceString: " + isGenericConference);
 
         final int resId = isGenericConference
@@ -714,8 +742,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private Drawable getConferencePhoto(Call call) {
-        boolean isGenericConference = call.can(
-                android.telecom.Call.Details.CAPABILITY_GENERIC_CONFERENCE);
+        boolean isGenericConference = call.can(Details.CAPABILITY_GENERIC_CONFERENCE);
         Log.v(this, "getConferencePhoto: " + isGenericConference);
 
         final int resId = isGenericConference
@@ -723,6 +750,34 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         Drawable photo = mContext.getResources().getDrawable(resId);
         photo.setAutoMirrored(true);
         return photo;
+    }
+
+    /**
+     * Strip quotations off the outside of a Wifi SSID identifier. For example, \"GoogleGuest\"
+     * becomes GoogleGuest.
+     *
+     * TODO: Move into utility class.
+     * TODO: Add unit tests.
+     *
+     * @param ssid The ssid of the wifi network.
+     */
+    private String formatWifiSSID(String ssid) {
+        if (TextUtils.isEmpty(ssid)) {
+            return "";
+        }
+
+        // Trim quotation if first character.
+        if (ssid.charAt(0) == '\"') {
+            ssid = ssid.substring(1);
+        }
+
+        // Trim quotation if last character.
+        int lastIndex = ssid.length() - 1;
+        if (lastIndex >= 0 && ssid.charAt(lastIndex) == '\"') {
+            ssid = ssid.substring(0, lastIndex);
+        }
+
+        return ssid;
     }
 
     public interface CallCardUi extends Ui {
@@ -744,6 +799,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setCallbackNumber(String number, boolean isEmergencyCalls);
         void setPhotoVisible(boolean isVisible);
         void setProgressSpinnerVisible(boolean visible);
+        void showHdAudioIndicator(boolean visible);
         void showManageConferenceCallButton(boolean visible);
         boolean isManageConferenceVisible();
         void animateForNewOutgoingCall();

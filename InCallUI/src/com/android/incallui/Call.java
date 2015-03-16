@@ -392,8 +392,12 @@ class Call {
     }
 
     public boolean isVideoCall(Context context) {
-        return CallUtil.isVideoEnabled(context) &&
-                VideoProfile.VideoState.isBidirectional(getVideoState());
+        // We want to show Video call buttons even if only one direction is enabled
+        // (That is what is happening when we receive a video call for example)
+        return CallUtil.isVideoEnabled(context) && (
+            VideoProfile.VideoState.isBidirectional(getVideoState()) ||
+            VideoProfile.VideoState.isReceptionEnabled(getVideoState()) ||
+            VideoProfile.VideoState.isTransmissionEnabled(getVideoState()));
     }
 
     public void setSessionModificationState(int state) {

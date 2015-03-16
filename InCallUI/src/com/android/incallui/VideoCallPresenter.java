@@ -256,6 +256,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             mVideoCall.setDisplaySurface(null);
         } else if (surface == VideoCallFragment.SURFACE_PREVIEW) {
             mVideoCall.setPreviewSurface(null);
+            // Also disable camera as preview is closed
+            mVideoCall.setCamera(null);
         }
     }
 

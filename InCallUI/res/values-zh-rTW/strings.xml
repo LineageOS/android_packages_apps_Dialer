@@ -72,7 +72,7 @@
     <string name="notification_action_answer_video" msgid="7809271910870211729">"視訊"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"語音"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"接受"</string>
-    <string name="notification_action_dismiss" msgid="2679969397930852858">"拒絶"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"關閉"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"回撥"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"簡訊"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"撥號前，請先關閉飛航模式。"</string>

@@ -43,22 +43,21 @@
         <!-- Subscription provider or WiFi calling icon displayed to the left of the label -->
         <ImageView android:id="@+id/callStateIcon"
             android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginEnd="4dp"
-            android:baselineAlignBottom="true"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
             android:tint="@color/incall_accent_color"
             android:alpha="0.0"
-            android:scaleType="centerInside"
+            android:scaleType="center"
             android:visibility="gone" />
 
         <ImageView android:id="@+id/videoCallIcon"
             android:src="@drawable/ic_toolbar_video"
             android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginEnd="4dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
             android:baselineAlignBottom="true"
             android:tint="@color/incall_accent_color"
-            android:scaleType="centerInside"
+            android:scaleType="center"
             android:visibility="gone" />
 
         <TextView android:id="@+id/callStateLabel"
@@ -96,31 +95,40 @@
         android:clipChildren="false"
         android:clipToPadding="false">
 
+        <ImageView android:id="@+id/hdAudioIcon"
+            android:src="@drawable/ic_hd_18dp"
+            android:layout_width="16dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:tint="@color/incall_call_banner_subtext_color"
+            android:scaleType="center"
+            android:visibility="gone" />
+
         <!-- Label (like "Mobile" or "Work", if present) and phone number, side by side -->
         <LinearLayout android:id="@+id/labelAndNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-                <TextView android:id="@+id/label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/incall_call_banner_subtext_color"
-                    android:textSize="@dimen/call_label_text_size"
-                    android:singleLine="true"
-                    android:textDirection="ltr"
-                    android:visibility="gone" />
+            <TextView android:id="@+id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/incall_call_banner_subtext_color"
+                android:textSize="@dimen/call_label_text_size"
+                android:singleLine="true"
+                android:textDirection="ltr"
+                android:visibility="gone" />
 
-                <TextView android:id="@+id/phoneNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/incall_call_banner_subtext_color"
-                    android:textSize="@dimen/call_label_text_size"
-                    android:singleLine="true"
-                    android:visibility="gone" />
+            <TextView android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/incall_call_banner_subtext_color"
+                android:textSize="@dimen/call_label_text_size"
+                android:singleLine="true"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -129,7 +137,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_centerVertical="true"
             android:textAlignment="viewEnd"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/incall_call_banner_subtext_color"

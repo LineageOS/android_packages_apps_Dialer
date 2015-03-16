@@ -141,13 +141,18 @@
     <!-- Missed call notification message used for a single missed call, including
          the caller-id info from the missed call -->
     <string name="notification_missedCallTicker">Missed call from <xliff:g id="missed_call_from">%s</xliff:g></string>
-    <!-- The "label" of the in-call Notification for an ongoing call, used
-         as the format string for a Chronometer widget. [CHAR LIMIT=60] -->
+    <!-- The "label" of the in-call Notification for an ongoing call. [CHAR LIMIT=60] -->
     <string name="notification_ongoing_call">Ongoing call</string>
+    <!-- The "label" of the in-call Notification for an ongoing call, which is being made over
+         Wi-Fi. [CHAR LIMIT=60] -->
+    <string name="notification_ongoing_call_wifi">Ongoing Wi-Fi call</string>
     <!-- The "label" of the in-call Notification for a call that's on hold -->
     <string name="notification_on_hold">On hold</string>
-    <!-- The "label" of the in-call Notification for an incoming ringing call -->
+    <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=60] -->
     <string name="notification_incoming_call">Incoming call</string>
+    <!-- The "label" of the in-call Notification for an incoming ringing call,
+         which is being made over Wi-Fi. [CHAR LIMIT=60] -->
+    <string name="notification_incoming_call_wifi">Incoming Wi-Fi call</string>
     <!-- The "label" of the in-call Notification for an incoming ringing video call. -->
     <string name="notification_incoming_video_call">Incoming video call</string>
     <!-- The "label" of the in-call Notification for upgrading an existing call to a video call. -->

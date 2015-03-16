@@ -74,6 +74,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private ImageView mCallStateVideoCallIcon;
     private TextView mCallStateLabel;
     private TextView mCallTypeLabel;
+    private ImageView mHdAudioIcon;
     private View mCallNumberAndLabel;
     private ImageView mPhoto;
     private TextView mElapsedTime;
@@ -168,6 +169,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mCallStateIcon = (ImageView) view.findViewById(R.id.callStateIcon);
         mCallStateVideoCallIcon = (ImageView) view.findViewById(R.id.videoCallIcon);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
+        mHdAudioIcon = (ImageView) view.findViewById(R.id.hdAudioIcon);
         mCallNumberAndLabel = view.findViewById(R.id.labelAndNumber);
         mCallTypeLabel = (TextView) view.findViewById(R.id.callTypeLabel);
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
@@ -782,6 +784,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public void setPhotoVisible(boolean isVisible) {
         mPhoto.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
+    /**
+     * Changes the visibility of the HD audio icon.
+     *
+     * @param visible {@code true} if the UI should show the HD audio icon.
+     */
+    @Override
+    public void showHdAudioIndicator(boolean visible) {
+        mHdAudioIcon.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     /**
