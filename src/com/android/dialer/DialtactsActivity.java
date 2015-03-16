@@ -482,6 +482,30 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     @Override
+    protected void onStart() {
+        // make this call on start in case user changed t9 locale in settings
+        SmartDialPrefix.initializeNanpSettings(this);
+
+        // if locale has changed since last time, refresh the smart dial db
+        Locale locale = SettingsUtil.getT9SearchInputLocale(this);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String prevLocale = prefs.getString(PREF_LAST_T9_LOCALE, null);
+
+        if (!TextUtils.equals(locale.toString(), prevLocale)) {
+            mDialerDatabaseHelper.recreateSmartDialDatabaseInBackground();
+            if (mDialpadFragment != null) {
+                mDialpadFragment.refreshKeypad();
+            }
+
+            prefs.edit().putString(PREF_LAST_T9_LOCALE, locale.toString()).apply();
+        } else {
+            mDialerDatabaseHelper.startSmartDialUpdateThread();
+        }
+
+        super.onStart();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         if (mFirstLaunch) {
@@ -498,25 +522,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         updateFloatingActionButtonControllerAlignment(false /* animate */);
         setConferenceDialButtonImage(false);
         setConferenceDialButtonVisibility(true);
-
-        // make this call on resume in case user changed t9 locale in settings
-        SmartDialPrefix.initializeNanpSettings(this);
-
-        // if locale has changed since last time, refresh the smart dial db
-        Locale locale = SettingsUtil.getT9SearchInputLocale(this);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String prevLocale = prefs.getString(PREF_LAST_T9_LOCALE, null);
-
-        if (!TextUtils.equals(locale.toString(), prevLocale)) {
-            mDialerDatabaseHelper.recreateSmartDialDatabaseInBackground();
-            if (mDialpadFragment != null)
-                mDialpadFragment.refreshKeypad();
-
-            prefs.edit().putString(PREF_LAST_T9_LOCALE, locale.toString()).apply();
-        }
-        else {
-            mDialerDatabaseHelper.startSmartDialUpdateThread();
-        }
     }
 
     @Override
