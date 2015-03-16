@@ -180,15 +180,15 @@
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="display_options_title" msgid="7812852361055667468">"Ցուցադրման ընտրանքներ"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Ձայներ և թրթռում"</string>
-    <!-- no translation found for accessibility_settings_title (6068141142874046249) -->
-    <skip />
+    <string name="accessibility_settings_title" msgid="6068141142874046249">"Մատչելիություն"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Հեռախոսի զանգերանգ"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Նաև թրթռալ զանգերի ժամանակ"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Թվաշարի ձայներանգներ"</string>
-    <!-- no translation found for dtmf_tone_length_title (8581125689808919460) -->
-    <skip />
-    <!-- no translation found for dtmf_tone_length_entries:0 (1036113889050195575) -->
-    <!-- no translation found for dtmf_tone_length_entries:1 (6177579030803486015) -->
+    <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Թվաշարի ձայնային ազդանշանի երկարություն"</string>
+  <string-array name="dtmf_tone_length_entries">
+    <item msgid="1036113889050195575">"Սովորական"</item>
+    <item msgid="6177579030803486015">"Երկար"</item>
+  </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Արագ պատասխաններ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Զանգեր"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Հաշիվներ զանգերի համար"</string>
