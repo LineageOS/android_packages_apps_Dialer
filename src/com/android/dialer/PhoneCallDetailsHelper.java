@@ -114,19 +114,21 @@ public class PhoneCallDetailsHelper {
         // Set the call count, location and date.
         setCallCountAndDate(views, callCount, callLocationAndDate);
 
-        // set the account icon if it exists
-        if (details.accountIcon != null) {
-            if (MoreContactUtils.shouldShowOperator(mResources)) {
-                views.operator.setVisibility(View.VISIBLE);
-                views.operator.setText(details.operator);
-                views.callAccountIcon.setVisibility(View.GONE);
+        // Set the account label if it exists.
+        String accountLabel = PhoneAccountUtils.getAccountLabel(mContext, details.accountHandle);
+
+        if (accountLabel != null) {
+            views.callAccountLabel.setVisibility(View.VISIBLE);
+            views.callAccountLabel.setText(accountLabel);
+            int color = PhoneAccountUtils.getAccountColor(mContext, details.accountHandle);
+            if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
+                int defaultColor = R.color.dialtacts_secondary_text_color;
+                views.callAccountLabel.setTextColor(mContext.getResources().getColor(defaultColor));
             } else {
-                views.operator.setVisibility(View.GONE);
-                views.callAccountIcon.setVisibility(View.VISIBLE);
-                views.callAccountIcon.setImageDrawable(details.accountIcon);
+                views.callAccountLabel.setTextColor(color);
             }
         } else {
-            views.callAccountIcon.setVisibility(View.GONE);
+            views.callAccountLabel.setVisibility(View.GONE);
         }
 
         CharSequence nameText;
