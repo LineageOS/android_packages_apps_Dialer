@@ -202,6 +202,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
         wrapper.removeAllViews();
         wrapper.prepareChildView(view);
         wrapper.addView(view);
+        wrapper.setVisibility(View.VISIBLE);
         return wrapper;
     }
 
