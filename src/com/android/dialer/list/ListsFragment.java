@@ -90,6 +90,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
     private ShortcutCardsAdapter mMergedAdapter;
     private CallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
+    private OverlappingPaneLayout mOverlappingPaneLayout;
 
     private boolean mIsPanelOpen = true;
 
@@ -303,6 +304,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
         mRemoveViewContent = parentView.findViewById(R.id.remove_view_content);
 
         setupPaneLayout((OverlappingPaneLayout) parentView);
+        mOverlappingPaneLayout = (OverlappingPaneLayout) parentView;
 
         return parentView;
     }
@@ -323,6 +325,11 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
 
         mCallLogAdapter.changeCursor(cursor);
         mMergedAdapter.notifyDataSetChanged();
+
+        // Refresh the overlapping pane to ensure that any changes in the shortcut card height
+        // are appropriately reflected in the overlap position.
+        mOverlappingPaneLayout.refresh();
+
         // Return true; took ownership of cursor
         return true;
     }
