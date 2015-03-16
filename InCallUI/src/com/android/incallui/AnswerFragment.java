@@ -76,7 +76,7 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
 
     @Override
     public AnswerPresenter createPresenter() {
-        return new AnswerPresenter();
+        return InCallPresenter.getInstance().getAnswerPresenter();
     }
 
     @Override
@@ -108,11 +108,9 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     }
 
     @Override
-    public void showAnswerUi(boolean show) {
-        getView().setVisibility(show ? View.VISIBLE : View.GONE);
-
-        Log.d(this, "Show answer UI: " + show);
-        if (show) {
+    public void onShowAnswerUi(boolean shown) {
+        Log.d(this, "Show answer UI: " + shown);
+        if (shown) {
             mGlowpad.startPing();
         } else {
             mGlowpad.stopPing();

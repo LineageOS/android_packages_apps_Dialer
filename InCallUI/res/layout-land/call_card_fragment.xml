@@ -93,22 +93,12 @@
 
     <!-- Placeholder for the dialpad which is replaced with the dialpad fragment when shown. -->
     <FrameLayout
-        android:id="@+id/dialpadFragmentContainer"
+        android:id="@+id/answer_and_dialpad_container"
         android:layout_toEndOf="@id/primary_call_info_container"
         android:layout_gravity="end|center_vertical"
         android:layout_alignParentEnd="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <fragment android:name="com.android.incallui.AnswerFragment"
-        android:id="@+id/answerFragment"
-        android:layout_toEndOf="@id/primary_call_info_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="start"
-        android:layout_gravity="end|center_vertical"
-        android:layout_marginBottom="@dimen/glowpadview_margin_bottom"
-        android:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/floating_end_call_action_button_container"
