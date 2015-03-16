@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ac665da_cb5c29f0",
+        "filename": "src/com/android/dialer/lookup/gebeld/GebeldApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2015-03-16T19:42:47Z",
+      "side": 1,
+      "message": "I\u0027m not sure about the copyright attribution.",
+      "revId": "ef55d092527ac86d7372e0d1dfb3178825fb99b6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
