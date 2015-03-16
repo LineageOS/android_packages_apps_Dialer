@@ -86,7 +86,7 @@ public class CallLogActivity extends AnalyticsActivity implements
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            final Fragment fragment = super.instantiateItem(container, position);
+            final Object fragment = super.instantiateItem(container, position);
             switch (position) {
                 case TAB_INDEX_MSIM:
                     mMSimCallsFragment = (MSimCallLogFragment)fragment;

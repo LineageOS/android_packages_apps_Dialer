@@ -16,6 +16,7 @@
 
 package com.android.dialer;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
@@ -50,6 +51,7 @@ public class PhoneCallDetailsHelper {
     /** The maximum number of icons will be shown to represent the call types in a group. */
     private static final int MAX_CALL_TYPE_ICONS = 3;
 
+    private final Context mContext;
     private final Resources mResources;
     /** The injected current time in milliseconds since the epoch. Used only by tests. */
     private Long mCurrentTimeMillisForTest;
@@ -69,8 +71,9 @@ public class PhoneCallDetailsHelper {
      *
      * @param resources used to look up strings
      */
-    public PhoneCallDetailsHelper(Resources resources, CallTypeHelper callTypeHelper,
+    public PhoneCallDetailsHelper(Context context, Resources resources,
             PhoneNumberUtilsWrapper phoneUtils) {
+        mContext = context;
         mResources = resources;
         mPhoneNumberUtilsWrapper = phoneUtils;
         mPhoneNumberHelper = new PhoneNumberDisplayHelper(mPhoneNumberUtilsWrapper, resources);
@@ -114,9 +117,24 @@ public class PhoneCallDetailsHelper {
         // Set the call count, location and date.
         setCallCountAndDate(views, callCount, callLocationAndDate);
 
-        // Set the account label if it exists.
-        String accountLabel = PhoneAccountUtils.getAccountLabel(mContext, details.accountHandle);
+        // set the account icon if it exists
+        if (details.accountIcon != null) {
+            if (MoreContactUtils.shouldShowOperator(mResources)) {
+                views.operator.setVisibility(View.VISIBLE);
+                views.operator.setText(details.operator);
+                views.callAccountIcon.setVisibility(View.GONE);
+            } else {
+                views.operator.setVisibility(View.GONE);
+                views.callAccountIcon.setVisibility(View.VISIBLE);
+                views.callAccountIcon.setImageDrawable(details.accountIcon);
+            }
+        } else {
+            views.callAccountIcon.setVisibility(View.GONE);
+        }
 
+        /*
+        // Set the account label if it exists.
+        String accountLabel = details.accountLabel;
         if (accountLabel != null) {
             views.callAccountLabel.setVisibility(View.VISIBLE);
             views.callAccountLabel.setText(accountLabel);
@@ -130,6 +148,7 @@ public class PhoneCallDetailsHelper {
         } else {
             views.callAccountLabel.setVisibility(View.GONE);
         }
+        */
 
         CharSequence nameText;
         CharSequence displayNumber =
