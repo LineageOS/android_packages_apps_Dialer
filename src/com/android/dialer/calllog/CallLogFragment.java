@@ -198,14 +198,14 @@ public class CallLogFragment extends ListFragment
                 this, mLogLimit);
         mKeyguardManager =
                 (KeyguardManager) getActivity().getSystemService(Context.KEYGUARD_SERVICE);
-        getActivity().getContentResolver().registerContentObserver(CallLog.CONTENT_URI, true,
-                mCallLogObserver);
+        getActivity().getContentResolver().registerContentObserver(
+                CallLog.CONTENT_URI, true, mCallLogObserver);
         getActivity().getContentResolver().registerContentObserver(
                 ContactsContract.Contacts.CONTENT_URI, true, mContactsObserver);
         getActivity().getContentResolver().registerContentObserver(
                 Status.CONTENT_URI, true, mVoicemailStatusObserver);
         setHasOptionsMenu(true);
-        updateCallList(mCallTypeFilter, mDateLimit);
+        fetchCalls();
 
         mExpandedItemTranslationZ =
                 getResources().getDimension(R.dimen.call_log_expanded_translation_z);
@@ -270,13 +270,21 @@ public class CallLogFragment extends ListFragment
      */
     @Override
     public void onVoicemailStatusFetched(Cursor statusCursor) {
-        if (getActivity() == null || getActivity().isFinishing()) {
+        Activity activity = getActivity();
+        if (activity == null || activity.isFinishing()) {
             return;
         }
         updateVoicemailStatusMessage(statusCursor);
 
-        int activeSources = mVoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor);
-        setVoicemailSourcesAvailable(activeSources != 0);
+        // If there are any changes to the presence of active voicemail services, invalidate the
+        // options menu so that it will be updated.
+        boolean hasActiveVoicemailSources =
+                mVoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor) != 0;
+        if (mVoicemailSourcesAvailable != hasActiveVoicemailSources) {
+            mVoicemailSourcesAvailable = hasActiveVoicemailSources;
+            activity.invalidateOptionsMenu();
+        }
+
         mVoicemailStatusFetched = true;
         destroyEmptyLoaderIfAllDataFetched();
     }
@@ -285,18 +293,6 @@ public class CallLogFragment extends ListFragment
         if (mCallLogFetched && mVoicemailStatusFetched && mEmptyLoaderRunning) {
             mEmptyLoaderRunning = false;
             getLoaderManager().destroyLoader(EMPTY_LOADER_ID);
-        }
-    }
-
-    /** Sets whether there are any voicemail sources available in the platform. */
-    private void setVoicemailSourcesAvailable(boolean voicemailSourcesAvailable) {
-        if (mVoicemailSourcesAvailable == voicemailSourcesAvailable) return;
-        mVoicemailSourcesAvailable = voicemailSourcesAvailable;
-
-        Activity activity = getActivity();
-        if (activity != null) {
-            // This is so that the options menu content is updated.
-            activity.invalidateOptionsMenu();
         }
     }
 
@@ -389,7 +385,8 @@ public class CallLogFragment extends ListFragment
     @Override
     public void onStop() {
         super.onStop();
-        updateOnExit();
+
+        updateOnTransition(false /* onEntry */);
     }
 
     @Override
@@ -416,19 +413,6 @@ public class CallLogFragment extends ListFragment
     @Override
     public void fetchCalls() {
         mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mDateLimit);
-    }
-
-    public void startCallsQuery() {
-        mAdapter.setLoading(true);
-        mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mDateLimit);
-    }
-
-    private void startVoicemailStatusQuery() {
-        mCallLogQueryHandler.fetchVoicemailStatus();
-    }
-
-    private void updateCallList(int filterType, long dateLimit) {
-        mCallLogQueryHandler.fetchCalls(filterType, dateLimit);
     }
 
     private void updateEmptyMessage(int filterType) {
@@ -461,7 +445,7 @@ public class CallLogFragment extends ListFragment
         if (mMenuVisible != menuVisible) {
             mMenuVisible = menuVisible;
             if (!menuVisible) {
-                updateOnExit();
+                updateOnTransition(false /* onEntry */);
             } else if (isResumed()) {
                 refreshData();
             }
@@ -475,24 +459,23 @@ public class CallLogFragment extends ListFragment
             // Mark all entries in the contact info cache as out of date, so they will be looked up
             // again once being shown.
             mAdapter.invalidateCache();
-            startCallsQuery();
-            startVoicemailStatusQuery();
-            updateOnEntry();
+            mAdapter.setLoading(true);
+
+            fetchCalls();
+            mCallLogQueryHandler.fetchVoicemailStatus();
+
+            updateOnTransition(true /* onEntry */);
             mRefreshDataRequired = false;
         }
     }
 
-    /** Updates call data and notification state while leaving the call log tab. */
-    private void updateOnExit() {
-        updateOnTransition(false);
-    }
-
-    /** Updates call data and notification state while entering the call log tab. */
-    private void updateOnEntry() {
-        updateOnTransition(true);
-    }
-
-    // TODO: Move to CallLogActivity
+    /**
+     * Updates the call data and notification state on entering or leaving the call log tab.
+     *
+     * If we are leaving the call log tab, mark all the missed calls as read.
+     *
+     * TODO: Move to CallLogActivity
+     */
     private void updateOnTransition(boolean onEntry) {
         // We don't want to update any call data when keyguard is on because the user has likely not
         // seen the new calls yet.
