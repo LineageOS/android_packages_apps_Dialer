@@ -30,6 +30,6 @@
         android:title="@string/menu_newContact"/>
     <item
         android:id="@+id/menu_call_settings"
-        android:title="@string/dialer_settings_label"
-        android:orderInCategory="2" />
+        android:title="@string/dialer_settings_label" />
+
 </menu>
