@@ -788,16 +788,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     /**
-     * Changes the visibility of the contact photo.
-     *
-     * @param isVisible {@code True} if the UI should show the contact photo.
-     */
-    @Override
-    public void setPhotoVisible(boolean isVisible) {
-        mPhoto.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-    }
-
-    /**
      * Changes the visibility of the HD audio icon.
      *
      * @param visible {@code true} if the UI should show the HD audio icon.

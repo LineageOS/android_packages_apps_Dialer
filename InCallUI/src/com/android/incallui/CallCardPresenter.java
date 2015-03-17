@@ -250,14 +250,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             getUi().showHdAudioIndicator(false);
         }
 
-        // Hide/show the contact photo based on the video state.
-        // If the primary call is a video call on hold, still show the contact photo.
-        // If the primary call is an active video call, hide the contact photo.
-        if (mPrimary != null) {
-            getUi().setPhotoVisible(!(mPrimary.isVideoCall(mContext) &&
-                    callState != Call.State.ONHOLD));
-        }
-
         maybeShowManageConferenceCallButton();
 
         final boolean enableEndCallButton = Call.State.isConnectingOrConnected(callState) &&
@@ -794,7 +786,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimaryLabel(String label);
         void setEndCallButtonEnabled(boolean enabled, boolean animate);
         void setCallbackNumber(String number, boolean isEmergencyCalls);
-        void setPhotoVisible(boolean isVisible);
         void setProgressSpinnerVisible(boolean visible);
         void showHdAudioIndicator(boolean visible);
         void showManageConferenceCallButton(boolean visible);
