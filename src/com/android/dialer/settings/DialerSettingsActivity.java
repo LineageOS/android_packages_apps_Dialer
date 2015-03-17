@@ -53,10 +53,11 @@ public class DialerSettingsActivity extends PreferenceActivity {
         quickResponseSettingsHeader.intent = quickResponseSettingsIntent;
         target.add(quickResponseSettingsHeader);
 
+        TelephonyManager telephonyManager =
+                (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+
         // Only show call setting menus if the current user is the primary/owner user.
         if (isPrimaryUser()) {
-            TelephonyManager telephonyManager =
-                    (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             // Show "Call Settings" if there is one SIM and "Phone Accounts" if there are more.
             if (telephonyManager.getPhoneCount() <= 1) {
                 Header callSettingsHeader = new Header();
@@ -78,12 +79,15 @@ public class DialerSettingsActivity extends PreferenceActivity {
             }
         }
 
-        Header accessibilitySettingsHeader = new Header();
-        Intent accessibilitySettingsIntent =
-                new Intent(TelecomManager.ACTION_SHOW_CALL_ACCESSIBILITY_SETTINGS);
-        accessibilitySettingsHeader.titleRes = R.string.accessibility_settings_title;
-        accessibilitySettingsHeader.intent = accessibilitySettingsIntent;
-        target.add(accessibilitySettingsHeader);
+        if (telephonyManager.isTtyModeSupported()
+                || telephonyManager.isHearingAidCompatibilitySupported()) {
+            Header accessibilitySettingsHeader = new Header();
+            Intent accessibilitySettingsIntent =
+                    new Intent(TelecomManager.ACTION_SHOW_CALL_ACCESSIBILITY_SETTINGS);
+            accessibilitySettingsHeader.titleRes = R.string.accessibility_settings_title;
+            accessibilitySettingsHeader.intent = accessibilitySettingsIntent;
+            target.add(accessibilitySettingsHeader);
+        }
     }
 
     @Override
