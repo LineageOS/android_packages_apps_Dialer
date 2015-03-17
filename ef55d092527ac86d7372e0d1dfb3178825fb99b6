@@ -70,6 +70,24 @@
       "revId": "ef55d092527ac86d7372e0d1dfb3178825fb99b6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac665da_149302a5",
+        "filename": "src/com/android/dialer/lookup/gebeld/GebeldApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 848
+      },
+      "writtenOn": "2015-03-17T13:08:30Z",
+      "side": 1,
+      "message": "Yes - Please change this to The CyanogenMod Project - in addition to  this will avoid issues with sharing this to the Qualcomm project as well.",
+      "parentUuid": "5ac665da_eeaad384",
+      "revId": "ef55d092527ac86d7372e0d1dfb3178825fb99b6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
