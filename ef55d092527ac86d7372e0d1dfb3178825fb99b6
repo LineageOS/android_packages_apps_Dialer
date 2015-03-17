@@ -34,6 +34,24 @@
       "revId": "ef55d092527ac86d7372e0d1dfb3178825fb99b6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac665da_4b031910",
+        "filename": "src/com/android/dialer/lookup/gebeld/GebeldApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-03-17T04:18:39Z",
+      "side": 1,
+      "message": "No, definitely not that ... I think Ethan was heading towards attributing the copyright to CM (\u0027The CyanogenMod Project\u0027).\n\nI\u0027m not sure what\u0027s correct here either; I just followed the other lookup sources, which are attributed to the author instead of CM as well.",
+      "parentUuid": "5ac665da_8b1cf178",
+      "revId": "ef55d092527ac86d7372e0d1dfb3178825fb99b6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
