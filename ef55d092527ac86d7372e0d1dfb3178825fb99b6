@@ -88,6 +88,24 @@
       "revId": "ef55d092527ac86d7372e0d1dfb3178825fb99b6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac665da_d487aad5",
+        "filename": "src/com/android/dialer/lookup/gebeld/GebeldApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 9222
+      },
+      "writtenOn": "2015-03-17T21:28:17Z",
+      "side": 1,
+      "message": "Alright, I\u0027ll change it.",
+      "parentUuid": "5ac665da_149302a5",
+      "revId": "ef55d092527ac86d7372e0d1dfb3178825fb99b6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
