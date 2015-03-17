@@ -16,6 +16,24 @@
       "revId": "ef55d092527ac86d7372e0d1dfb3178825fb99b6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac665da_8b1cf178",
+        "filename": "src/com/android/dialer/lookup/gebeld/GebeldApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 9222
+      },
+      "writtenOn": "2015-03-17T04:14:46Z",
+      "side": 1,
+      "message": "I wasn\u0027t sure either, I adapted the Das Telefonbuch file from Danny Baumann. Should I attribute the copyright to him?",
+      "parentUuid": "5ac665da_cb5c29f0",
+      "revId": "ef55d092527ac86d7372e0d1dfb3178825fb99b6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
