@@ -160,6 +160,13 @@
             android:contentDescription="@string/onscreenOverflowText"
             android:visibility="gone" />
 
+        <!-- "Manage conference button (Video Call) " -->
+        <ImageButton android:id="@+id/manageVideoCallConferenceButton"
+            style="@style/InCallButton"
+            android:background="@drawable/ic_group_white_24dp"
+            android:contentDescription="@string/onscreenManageConferenceText"
+            android:visibility="gone" />
+
     </LinearLayout>
 
 </LinearLayout>

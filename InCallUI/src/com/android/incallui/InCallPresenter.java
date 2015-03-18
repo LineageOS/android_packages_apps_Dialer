@@ -34,6 +34,8 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.Surface;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.common.base.Preconditions;
 
@@ -156,7 +158,6 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      */
     private boolean mIsActivityPreviouslyStarted = false;
 
-
     /**
      * Whether or not to wait for the circular reveal animation to be started, to avoid stopping
      * the circular reveal animation activity before the animation is initiated.
@@ -174,6 +175,14 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      * Whether or not InCallService is bound to Telecom.
      */
     private boolean mServiceBound = false;
+
+    /**
+     * When configuration changes Android kills the current activity and starts a new one.
+     * The flag is used to check if full clean up is necessary (activity is stopped and new 
+     * activity won't be started), or if a new activity will be started right after the current one
+     * is destroyed, and therefore no need in release all resources.
+     */
+    private boolean mIsChangingConfigurations = false;
 
     private Phone mPhone;
 
@@ -243,6 +252,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         // will kick off an update and the whole process can start.
         mCallList.addListener(this);
 
+        VideoPauseController.getInstance().setUp(this);
+
         Log.d(this, "Finished InCallPresenter.setUp");
     }
 
@@ -258,6 +269,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         Log.d(this, "tearDown");
         mServiceConnected = false;
         attemptCleanup();
+
+        VideoPauseController.getInstance().tearDown();
     }
 
     private void attemptFinishActivity() {
@@ -398,9 +411,12 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         if (callList == null) {
             return;
         }
+        Log.d(this, "onCallListChange callList=" + callList.toString() );
         InCallState newState = getPotentialStateFromCallList(callList);
         InCallState oldState = mInCallState;
+        Log.d(this, "onCallListChange oldState= " + oldState + " newState=" + newState);
         newState = startOrFinishUi(newState);
+        Log.d(this, "onCallListChange newState changed to " + newState);
 
         // Set the new state before announcing it to the world
         Log.i(this, "Phone switching state: " + oldState + " -> " + newState);
@@ -437,6 +453,10 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         }
     }
 
+    @Override
+    public void onUpgradeToVideo(Call call) {
+        //NO-OP
+    }
     /**
      * Called when a call becomes disconnected. Called everytime an existing call
      * changes from being connected (incoming/outgoing/active) to disconnected.
@@ -631,33 +651,36 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         }
     }
 
-    public void acceptUpgradeRequest(Context context) {
+    public void acceptUpgradeRequest(int videoState, Context context) {
+        Log.d(this, " acceptUpgradeRequest videoState " + videoState);
         // Bail if we have been shut down and the call list is null.
         if (mCallList == null) {
             StatusBarNotifier.clearInCallNotification(context);
+            Log.e(this, " acceptUpgradeRequest mCallList is empty so returning");
             return;
         }
 
         Call call = mCallList.getVideoUpgradeRequestCall();
         if (call != null) {
-            VideoProfile videoProfile =
-                    new VideoProfile(VideoProfile.VideoState.BIDIRECTIONAL);
+            VideoProfile videoProfile = new VideoProfile(videoState);
             call.getVideoCall().sendSessionModifyResponse(videoProfile);
             call.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
         }
     }
 
     public void declineUpgradeRequest(Context context) {
+        Log.d(this, " declineUpgradeRequest");
         // Bail if we have been shut down and the call list is null.
         if (mCallList == null) {
             StatusBarNotifier.clearInCallNotification(context);
+            Log.e(this, " declineUpgradeRequest mCallList is empty so returning");
             return;
         }
 
         Call call = mCallList.getVideoUpgradeRequestCall();
         if (call != null) {
             VideoProfile videoProfile =
-                    new VideoProfile(VideoProfile.VideoState.AUDIO_ONLY);
+                    new VideoProfile(call.getVideoState());
             call.getVideoCall().sendSessionModifyResponse(videoProfile);
             call.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
         }
@@ -684,6 +707,20 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     public boolean isActivityPreviouslyStarted() {
         return mIsActivityPreviouslyStarted;
     }
+
+    public boolean isChangingConfigurations() {
+        return mIsChangingConfigurations;
+    }
+
+    /*package*/
+    void updateIsChangingConfigurations() {
+        mIsChangingConfigurations = false;
+        if (mInCallActivity != null) {
+            mIsChangingConfigurations = mInCallActivity.isChangingConfigurations();
+        }
+        Log.d(this, "IsChangingConfigurations=" + mIsChangingConfigurations);
+    }
+
 
     /**
      * Called when the activity goes in/out of the foreground.
@@ -716,6 +753,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             mIsActivityPreviouslyStarted = true;
         } else {
             CircularRevealActivity.sendClearDisplayBroadcast(mContext);
+            updateIsChangingConfigurations();
         }
 
         for (InCallUiListener listener : mInCallUiListeners) {
@@ -729,6 +767,26 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
     public boolean removeInCallUiListener(InCallUiListener listener) {
         return mInCallUiListeners.remove(listener);
+    }
+
+    /*package*/
+    void onActivityStarted() {
+        Log.d(this, "onActivityStarted");
+        notifyVideoPauseController(true);
+    }
+
+    /*package*/
+    void onActivityStopped() {
+        Log.d(this, "onActivityStopped");
+        notifyVideoPauseController(false);
+    }
+
+    private void notifyVideoPauseController(boolean showing) {
+        Log.d(this, "notifyVideoPauseController: mIsChangingConfigurations=" +
+                    mIsChangingConfigurations);
+        if (!mIsChangingConfigurations) {
+            VideoPauseController.getInstance().onUiShowing(showing);
+        }
     }
 
     /**
@@ -1088,6 +1146,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         if (shouldCleanup) {
             mIsActivityPreviouslyStarted = false;
+            mIsChangingConfigurations = false;
 
             // blow away stale contact info so that we get fresh data on
             // the next set of calls
@@ -1119,6 +1178,10 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
             mListeners.clear();
             mIncomingCallListeners.clear();
+            mDetailsListeners.clear();
+            mCanAddCallListeners.clear();
+            mOrientationListeners.clear();
+            mInCallEventListeners.clear();
 
             Log.d(this, "Finished InCallPresenter.CleanUp");
         }
@@ -1252,7 +1315,20 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      * @param rotation The device rotation.
      */
     public void onDeviceRotationChange(int rotation) {
+        Log.d(this, "onDeviceRotationChange: rotation=" + rotation);
         // First translate to rotation in degrees.
+        if (mCallList != null) {
+            mCallList.notifyCallsOfDeviceRotation(toRotationAngle(rotation));
+        } else {
+            Log.w(this, "onDeviceRotationChange: CallList is null.");
+        }
+    }
+
+    /**
+     * Converts rotation constants to rotation in degrees.
+     * @param rotation Rotation constants.
+     */
+    public static int toRotationAngle(int rotation) {
         int rotationAngle;
         switch (rotation) {
             case Surface.ROTATION_0:
@@ -1270,8 +1346,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
             default:
                 rotationAngle = 0;
         }
-
-        mCallList.notifyCallsOfDeviceRotation(rotationAngle);
+        return rotationAngle;
     }
 
     /**
@@ -1292,10 +1367,30 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      *      and landscape.  {@Code False} if the in-call UI should be locked in portrait.
      */
     public void setInCallAllowsOrientationChange(boolean allowOrientationChange) {
+        if (mInCallActivity == null) {
+            Log.e(this, "InCallActivity is null. Can't set requested orientation.");
+            return;
+        }
+
         if (!allowOrientationChange) {
             mInCallActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         } else {
             mInCallActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        }
+    }
+
+    public void enableScreenTimeout(boolean enable) {
+        Log.v(this, "enableScreenTimeout: value=" + enable);
+        if (mInCallActivity == null) {
+            Log.e(this, "enableScreenTimeout: InCallActivity is null.");
+            return;
+        }
+
+        final Window window = mInCallActivity.getWindow();
+        if (enable) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 

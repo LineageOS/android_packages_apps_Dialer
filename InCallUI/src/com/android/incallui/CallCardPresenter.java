@@ -320,7 +320,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return false;
         }
 
-        return mPrimary.can(Details.CAPABILITY_MANAGE_CONFERENCE);
+        return mPrimary.can(android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE)
+                && !mPrimary.isVideoCall(mContext);
     }
 
     private void setCallbackNumber() {

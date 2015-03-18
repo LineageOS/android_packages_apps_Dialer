@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.telecom.CameraCapabilities;
 import android.telecom.Connection;
+import android.telecom.Connection.VideoProvider;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 
@@ -47,53 +48,50 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      */
     @Override
     public void onSessionModifyRequestReceived(VideoProfile videoProfile) {
-        int previousVideoState = mCall.getVideoState();
-        int newVideoState = videoProfile.getVideoState();
+        Log.d(this, " onSessionModifyRequestReceived videoProfile=" + videoProfile);
+        int previousVideoState = CallUtils.getUnPausedVideoState(mCall.getVideoState());
+        int newVideoState = CallUtils.getUnPausedVideoState(videoProfile.getVideoState());
 
-        boolean wasVideoCall = VideoProfile.VideoState.isBidirectional(previousVideoState);
-        boolean isVideoCall = VideoProfile.VideoState.isBidirectional(newVideoState);
-
-        boolean wasPaused = VideoProfile.VideoState.isPaused(previousVideoState);
-        boolean isPaused = VideoProfile.VideoState.isPaused(newVideoState);
+        boolean wasVideoCall = VideoProfile.VideoState.isVideo(previousVideoState);
+        boolean isVideoCall = VideoProfile.VideoState.isVideo(newVideoState);
 
         // Check for upgrades to video and downgrades to audio.
-        if (!wasVideoCall && isVideoCall) {
-            InCallVideoCallListenerNotifier.getInstance().upgradeToVideoRequest(mCall);
-        } else if (wasVideoCall && !isVideoCall) {
+        if (wasVideoCall && !isVideoCall) {
             InCallVideoCallListenerNotifier.getInstance().downgradeToAudio(mCall);
+        } else if (previousVideoState != newVideoState) {
+            InCallVideoCallListenerNotifier.getInstance().upgradeToVideoRequest(mCall,
+                newVideoState);
         }
-
-        boolean pause = !wasPaused && isPaused;
-        InCallVideoCallListenerNotifier.getInstance().peerPausedStateChanged(mCall, pause);
     }
 
     /**
      * Handles a session modification response.
      *
-     * @param status Status of the session modify request.  Valid values are
-     *               {@link Connection.VideoProvider#SESSION_MODIFY_REQUEST_SUCCESS},
-     *               {@link Connection.VideoProvider#SESSION_MODIFY_REQUEST_FAIL},
-     *               {@link Connection.VideoProvider#SESSION_MODIFY_REQUEST_INVALID}
+     * @param status Status of the session modify request. Valid values are
+     *            {@link Connection.VideoProvider#SESSION_MODIFY_REQUEST_SUCCESS},
+     *            {@link Connection.VideoProvider#SESSION_MODIFY_REQUEST_FAIL},
+     *            {@link Connection.VideoProvider#SESSION_MODIFY_REQUEST_INVALID}
      * @param requestedProfile
      * @param responseProfile The actual profile changes made by the peer device.
      */
     @Override
-    public void onSessionModifyResponseReceived(
-            int status, VideoProfile requestedProfile, VideoProfile responseProfile) {
-        boolean modifySucceeded =
-                requestedProfile.getVideoState() == responseProfile.getVideoState();
-        boolean isVideoCall =
-                VideoProfile.VideoState.isBidirectional(responseProfile.getVideoState());
-
-        if (modifySucceeded && isVideoCall) {
-            // Local Upgrade success
-            InCallVideoCallListenerNotifier.getInstance().upgradeToVideoSuccess(mCall);
-        } else if (!modifySucceeded || status != Connection.VideoProvider.SESSION_MODIFY_REQUEST_SUCCESS) {
-            // Remote didn't accept invitation in bidirectional state or failure
-            InCallVideoCallListenerNotifier.getInstance().upgradeToVideoFail(mCall);
-        } else if (modifySucceeded && !isVideoCall) {
-            // Local Downgrade success (should always be successful)
-            InCallVideoCallListenerNotifier.getInstance().downgradeToAudio(mCall);
+    public void onSessionModifyResponseReceived(int status, VideoProfile requestedProfile,
+            VideoProfile responseProfile) {
+        Log.d(this, "onSessionModifyResponseReceived status=" + status + " requestedProfile="
+                + requestedProfile + " responseProfile=" + responseProfile);
+        if (status != VideoProvider.SESSION_MODIFY_REQUEST_SUCCESS) {
+            InCallVideoCallListenerNotifier.getInstance().upgradeToVideoFail(status, mCall);
+        } else if (requestedProfile != null && responseProfile != null) {
+            boolean modifySucceeded = requestedProfile.getVideoState() ==
+                    responseProfile.getVideoState();
+            boolean isVideoCall = VideoProfile.VideoState.isVideo(responseProfile.getVideoState());
+            if (modifySucceeded && isVideoCall) {
+                InCallVideoCallListenerNotifier.getInstance().upgradeToVideoSuccess(mCall);
+            } else if (!modifySucceeded) {
+                InCallVideoCallListenerNotifier.getInstance().upgradeToVideoFail(status, mCall);
+            }
+        } else {
+            Log.d(this, "onSessionModifyResponseReceived request and response Profiles are null");
         }
     }
 
@@ -104,6 +102,7 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      */
     @Override
     public void onCallSessionEvent(int event) {
+        InCallVideoCallListenerNotifier.getInstance().callSessionEvent(event);
     }
 
     /**
@@ -118,13 +117,25 @@ public class InCallVideoCallListener extends VideoCall.Listener {
     }
 
     /**
+     * Handles a change to the video quality of the call.
+     *
+     * @param videoQuality The updated video call quality.
+     */
+    @Override
+    public void onVideoQualityChanged(int videoQuality) {
+        InCallVideoCallListenerNotifier.getInstance().videoQualityChanged(mCall, videoQuality);
+    }
+
+    /**
      * Handles a change to the call data usage.  No implementation as the in-call UI does not
      * display data usage.
      *
      * @param dataUsage The updated data usage.
      */
     @Override
-    public void onCallDataUsageChanged(int dataUsage) {
+    public void onCallDataUsageChanged(long dataUsage) {
+        Log.d(this, "onCallDataUsageChanged: dataUsage = " + dataUsage);
+        InCallVideoCallListenerNotifier.getInstance().callDataUsageChanged(dataUsage);
     }
 
     /**

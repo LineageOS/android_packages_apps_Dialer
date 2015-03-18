@@ -16,7 +16,9 @@
 
 package com.android.incallui;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -26,6 +28,8 @@ import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.telecom.AudioState;
+import android.telecom.TelecomManager;
+import android.telecom.VideoProfile;
 import android.view.ContextThemeWrapper;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
@@ -36,11 +40,13 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 import android.widget.PopupMenu.OnDismissListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
 import com.android.contacts.common.util.MaterialColorMapUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
+import java.util.ArrayList;
 
 /**
  * Fragment for call control buttons
@@ -50,6 +56,7 @@ public class CallButtonFragment
         implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener, OnDismissListener,
         View.OnClickListener {
     private CompoundButton mAudioButton;
+    private static final int INVALID_INDEX = -1;
     private ImageButton mChangeToVoiceButton;
     private CompoundButton mMuteButton;
     private CompoundButton mShowDialpadButton;
@@ -61,6 +68,7 @@ public class CallButtonFragment
     private ImageButton mMergeButton;
     private CompoundButton mPauseVideoButton;
     private ImageButton mOverflowButton;
+    private ImageButton mManageVideoCallConferenceButton;
 
     private PopupMenu mAudioModePopup;
     private boolean mAudioModePopupVisible;
@@ -120,7 +128,9 @@ public class CallButtonFragment
         mPauseVideoButton.setOnClickListener(this);
         mOverflowButton = (ImageButton) parent.findViewById(R.id.overflowButton);
         mOverflowButton.setOnClickListener(this);
-
+        mManageVideoCallConferenceButton = (ImageButton) parent.findViewById(
+            R.id.manageVideoCallConferenceButton);
+        mManageVideoCallConferenceButton.setOnClickListener(this);
         return parent;
     }
 
@@ -156,7 +166,8 @@ public class CallButtonFragment
                 getPresenter().addCallClicked();
                 break;
             case R.id.changeToVoiceButton:
-                getPresenter().changeToVoiceClicked();
+                // STOPSHIP One way video options
+                getPresenter().displayModifyCallOptions();
                 break;
             case R.id.muteButton: {
                 getPresenter().muteClicked(!mMuteButton.isSelected());
@@ -177,7 +188,8 @@ public class CallButtonFragment
                 getPresenter().showDialpadClicked(!mShowDialpadButton.isSelected());
                 break;
             case R.id.changeToVideoButton:
-                getPresenter().changeToVideoClicked();
+                // STOPSHIP One way video options
+                getPresenter().displayModifyCallOptions();
                 break;
             case R.id.switchCameraButton:
                 getPresenter().switchCameraClicked(
@@ -189,6 +201,9 @@ public class CallButtonFragment
                 break;
             case R.id.overflowButton:
                 mOverflowPopup.show();
+                break;
+            case R.id.manageVideoCallConferenceButton:
+                onManageVideoCallConferenceClicked();
                 break;
             default:
                 isClickHandled = false;
@@ -329,6 +344,7 @@ public class CallButtonFragment
         mMergeButton.setEnabled(isEnabled);
         mPauseVideoButton.setEnabled(isEnabled);
         mOverflowButton.setEnabled(isEnabled);
+        mManageVideoCallConferenceButton.setEnabled(isEnabled);
     }
 
     @Override
@@ -406,6 +422,10 @@ public class CallButtonFragment
         mAddCallButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
+    public void showManageConferenceVideoCallButton(boolean show) {
+        mManageVideoCallConferenceButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
     @Override
     public void showMergeButton(boolean show) {
         mMergeButton.setVisibility(show ? View.VISIBLE : View.GONE);
@@ -431,9 +451,83 @@ public class CallButtonFragment
         mOverflowButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
+    /**The function is called when Modify Call button gets pressed. The function creates and
+     * displays modify call options.
+     */
+    public void displayModifyCallOptions() {
+        CallButtonPresenter.CallButtonUi ui = getUi();
+        if (ui == null) {
+            Log.e(this, "Cannot display ModifyCallOptions as ui is null");
+            return;
+        }
+
+        Context context = getContext();
+        if (isTtyModeEnabled()) {
+            Toast.makeText(context, context.getResources().getString(
+                    R.string.video_call_not_allowed_if_tty_enabled),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final ArrayList<CharSequence> items = new ArrayList<CharSequence>();
+        final ArrayList<Integer> itemToCallType = new ArrayList<Integer>();
+        final Resources res = ui.getContext().getResources();
+        // Prepare the string array and mapping.
+        items.add(res.getText(R.string.modify_call_option_voice));
+        itemToCallType.add(VideoProfile.VideoState.AUDIO_ONLY);
+
+        items.add(res.getText(R.string.modify_call_option_vt_rx));
+        itemToCallType.add(VideoProfile.VideoState.RX_ENABLED);
+
+        items.add(res.getText(R.string.modify_call_option_vt_tx));
+        itemToCallType.add(VideoProfile.VideoState.TX_ENABLED);
+
+        items.add(res.getText(R.string.modify_call_option_vt));
+        itemToCallType.add(VideoProfile.VideoState.BIDIRECTIONAL);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getUi().getContext());
+        builder.setTitle(R.string.modify_call_option_title);
+        final AlertDialog alert;
+
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                Toast.makeText(getUi().getContext(), items.get(item), Toast.LENGTH_SHORT).show();
+                final int selCallType = itemToCallType.get(item);
+                Log.v(this, "Videocall: ModifyCall: upgrade/downgrade to "
+                        + fromCallType(selCallType));
+                VideoProfile videoProfile = new VideoProfile(selCallType);
+                getPresenter().changeToVideoClicked(videoProfile);
+                dialog.dismiss();
+            }
+        };
+        int currVideoState = getPresenter().getCurrentVideoState();
+        int currUnpausedVideoState = CallUtils.getUnPausedVideoState(currVideoState);
+        int index = itemToCallType.indexOf(currUnpausedVideoState);
+        if (index == INVALID_INDEX) {
+            return;
+        }
+        builder.setSingleChoiceItems(items.toArray(new CharSequence[0]), index, listener);
+        alert = builder.create();
+        alert.show();
+    }
+
+    public static String fromCallType(int callType) {
+        switch (callType) {
+            case VideoProfile.VideoState.BIDIRECTIONAL:
+                return "VT";
+            case VideoProfile.VideoState.TX_ENABLED:
+                return "VT_TX";
+            case VideoProfile.VideoState.RX_ENABLED:
+                return "VT_RX";
+        }
+        return "";
+    }
+
     @Override
     public void configureOverflowMenu(boolean showMergeMenuOption, boolean showAddMenuOption,
-            boolean showHoldMenuOption, boolean showSwapMenuOption) {
+            boolean showHoldMenuOption, boolean showSwapMenuOption, 
+            boolean showManageConferenceVideoCallOption) {
         if (mOverflowPopup == null) {
             final ContextThemeWrapper contextWrapper = new ContextThemeWrapper(getActivity(),
                     R.style.InCallPopupMenuStyle);
@@ -459,6 +553,9 @@ public class CallButtonFragment
                         case R.id.overflow_swap_menu_item:
                             getPresenter().addCallClicked();
                             break;
+                        case R.id.overflow_manage_conference_menu_item:
+                            onManageVideoCallConferenceClicked();
+                            break;
                         default:
                             Log.wtf(this, "onMenuItemClick: unexpected overflow menu click");
                             break;
@@ -482,6 +579,8 @@ public class CallButtonFragment
         menu.findItem(R.id.overflow_resume_menu_item).setVisible(
                 showHoldMenuOption && mHoldButton.isSelected());
         menu.findItem(R.id.overflow_swap_menu_item).setVisible(showSwapMenuOption);
+        menu.findItem(R.id.overflow_manage_conference_menu_item).setVisible(
+            showManageConferenceVideoCallOption);
 
         mOverflowButton.setEnabled(menu.hasVisibleItems());
     }
@@ -559,6 +658,11 @@ public class CallButtonFragment
         } else {
             getPresenter().toggleSpeakerphone();
         }
+    }
+
+    private void onManageVideoCallConferenceClicked() {
+        Log.d(this, "onManageVideoCallConferenceClicked");
+        InCallPresenter.getInstance().showConferenceCallManager(true);
     }
 
     /**
@@ -788,5 +892,12 @@ public class CallButtonFragment
     @Override
     public Context getContext() {
         return getActivity();
+    }
+
+    private boolean isTtyModeEnabled() {
+        return (android.provider.Settings.Secure.getInt(
+                getContext().getContentResolver(),
+                android.provider.Settings.Secure.PREFERRED_TTY_MODE,
+                TelecomManager.TTY_MODE_OFF) != TelecomManager.TTY_MODE_OFF);
     }
 }

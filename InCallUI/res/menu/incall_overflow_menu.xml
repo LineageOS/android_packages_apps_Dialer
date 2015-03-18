@@ -30,4 +30,7 @@
 
     <item android:id="@+id/overflow_swap_menu_item"
           android:title="@string/overflowSwapMenuItemText" />
+
+    <item android:id="@+id/overflow_manage_conference_menu_item"
+          android:title="@string/overflowManageConferenceMenuItemText" />
 </menu>

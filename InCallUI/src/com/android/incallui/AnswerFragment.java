@@ -50,6 +50,9 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     public static final int TARGET_SET_FOR_VIDEO_WITHOUT_SMS = 2;
     public static final int TARGET_SET_FOR_VIDEO_WITH_SMS = 3;
     public static final int TARGET_SET_FOR_VIDEO_UPGRADE_REQUEST = 4;
+    public static final int TARGET_SET_FOR_BIDIRECTIONAL_VIDEO_ACCEPT_REJECT_REQUEST = 5;
+    public static final int TARGET_SET_FOR_VIDEO_TRANSMIT_ACCEPT_REJECT_REQUEST = 6;
+    public static final int TARGET_SET_FOR_VIDEO_RECEIVE_ACCEPT_REJECT_REQUEST = 7;
 
     /**
      * The popup showing the list of canned responses.
@@ -159,6 +162,33 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
                 targetResourceId = R.array.incoming_call_widget_video_upgrade_request_targets;
                 targetDescriptionsResourceId =
                         R.array.incoming_call_widget_video_upgrade_request_target_descriptions;
+                directionDescriptionsResourceId = R.array
+                        .incoming_call_widget_video_upgrade_request_target_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_video_handle;
+                break;
+            case TARGET_SET_FOR_BIDIRECTIONAL_VIDEO_ACCEPT_REJECT_REQUEST:
+                targetResourceId =
+                    R.array.incoming_call_widget_bidirectional_video_accept_reject_request_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_upgrade_request_target_descriptions;
+                directionDescriptionsResourceId = R.array
+                        .incoming_call_widget_video_upgrade_request_target_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_video_handle;
+                break;
+            case TARGET_SET_FOR_VIDEO_TRANSMIT_ACCEPT_REJECT_REQUEST:
+                targetResourceId =
+                    R.array.incoming_call_widget_video_transmit_accept_reject_request_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_transmit_request_target_descriptions;
+                directionDescriptionsResourceId = R.array
+                        .incoming_call_widget_video_upgrade_request_target_direction_descriptions;
+                handleDrawableResourceId = R.drawable.ic_incall_video_handle;
+                break;
+            case TARGET_SET_FOR_VIDEO_RECEIVE_ACCEPT_REJECT_REQUEST:
+                targetResourceId =
+                    R.array.incoming_call_widget_video_receive_accept_reject_request_targets;
+                targetDescriptionsResourceId =
+                        R.array.incoming_call_widget_video_receive_request_target_descriptions;
                 directionDescriptionsResourceId = R.array
                         .incoming_call_widget_video_upgrade_request_target_direction_descriptions;
                 handleDrawableResourceId = R.drawable.ic_incall_video_handle;
@@ -338,12 +368,13 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
 
     @Override
     public void onAnswer(int videoState, Context context) {
+        Log.d(this, "onAnswer videoState=" + videoState + " context=" + context);
         getPresenter().onAnswer(videoState, context);
     }
 
     @Override
-    public void onDecline() {
-        getPresenter().onDecline();
+    public void onDecline(Context context) {
+        getPresenter().onDecline(context);
     }
 
     @Override

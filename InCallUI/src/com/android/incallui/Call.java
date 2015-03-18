@@ -17,8 +17,10 @@
 package com.android.incallui;
 
 import com.android.contacts.common.CallUtil;
+import com.android.incallui.CallList.Listener;
 
 import android.content.Context;
+import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
 import android.telecom.CallProperties;
 import android.telecom.DisconnectCause;
@@ -118,7 +120,50 @@ public final class Call {
         public static final int WAITING_FOR_RESPONSE = 1;
         public static final int REQUEST_FAILED = 2;
         public static final int RECEIVED_UPGRADE_TO_VIDEO_REQUEST = 3;
+        public static final int UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT = 4;
     }
+
+    public static class VideoSettings {
+        public static final int CAMERA_DIRECTION_UNKNOWN = -1;
+        public static final int CAMERA_DIRECTION_FRONT_FACING =
+                CameraCharacteristics.LENS_FACING_FRONT;
+        public static final int CAMERA_DIRECTION_BACK_FACING =
+                CameraCharacteristics.LENS_FACING_BACK;
+
+        private int mCameraDirection = CAMERA_DIRECTION_UNKNOWN;
+
+        /**
+         * Sets the camera direction. if camera direction is set to CAMERA_DIRECTION_UNKNOWN,
+         * the video state of the call should be used to infer the camera direction.
+         *
+         * @see {@link CameraCharacteristics#LENS_FACING_FRONT}
+         * @see {@link CameraCharacteristics#LENS_FACING_BACK}
+         */
+        public void setCameraDir(int cameraDirection) {
+            if (cameraDirection == CAMERA_DIRECTION_FRONT_FACING
+               || cameraDirection == CAMERA_DIRECTION_BACK_FACING) {
+                mCameraDirection = cameraDirection;
+            } else {
+                mCameraDirection = CAMERA_DIRECTION_UNKNOWN;
+            }
+        }
+
+        /**
+         * Gets the camera direction. if camera direction is set to CAMERA_DIRECTION_UNKNOWN,
+         * the video state of the call should be used to infer the camera direction.
+         *
+         * @see {@link CameraCharacteristics#LENS_FACING_FRONT}
+         * @see {@link CameraCharacteristics#LENS_FACING_BACK}
+         */
+        public int getCameraDir() {
+            return mCameraDirection;
+        }
+
+        public String toString() {
+            return "(CameraDir:" + getCameraDir() + ")";
+        }
+    }
+
 
     private static final String ID_PREFIX = Call.class.getSimpleName() + "_";
     private static int sIdCounter = 0;
@@ -127,12 +172,16 @@ public final class Call {
             new android.telecom.Call.Listener() {
                 @Override
                 public void onStateChanged(android.telecom.Call call, int newState) {
+                    Log.d(this, "TelecommCallListener onStateChanged call=" + call + " newState="
+                            + newState);
                     update();
                 }
 
                 @Override
                 public void onParentChanged(android.telecom.Call call,
                         android.telecom.Call newParent) {
+                    Log.d(this, "TelecommCallListener onParentChanged call=" + call + " newParent="
+                            + newParent);
                     update();
                 }
 
@@ -145,29 +194,38 @@ public final class Call {
                 @Override
                 public void onDetailsChanged(android.telecom.Call call,
                         android.telecom.Call.Details details) {
+                    Log.d(this, "TelecommCallListener onStateChanged call=" + call + " details="
+                            + details);
                     update();
                 }
 
                 @Override
                 public void onCannedTextResponsesLoaded(android.telecom.Call call,
                         List<String> cannedTextResponses) {
+                    Log.d(this, "TelecommCallListener onStateChanged call=" + call
+                            + " cannedTextResponses=" + cannedTextResponses);
                     update();
                 }
 
                 @Override
                 public void onPostDialWait(android.telecom.Call call,
                         String remainingPostDialSequence) {
+                    Log.d(this, "TelecommCallListener onStateChanged call=" + call
+                            + " remainingPostDialSequence=" + remainingPostDialSequence);
                     update();
                 }
 
                 @Override
                 public void onVideoCallChanged(android.telecom.Call call,
                         VideoCall videoCall) {
+                    Log.d(this, "TelecommCallListener onStateChanged call=" + call + " videoCall="
+                            + videoCall);
                     update();
                 }
 
                 @Override
                 public void onCallDestroyed(android.telecom.Call call) {
+                    Log.d(this, "TelecommCallListener onStateChanged call=" + call);
                     call.removeListener(mTelecommCallListener);
                 }
 
@@ -184,6 +242,11 @@ public final class Call {
     private DisconnectCause mDisconnectCause;
     private int mSessionModificationState;
     private final List<String> mChildCallIds = new ArrayList<>();
+    private final VideoSettings mVideoSettings = new VideoSettings();
+    /**
+     * mModifyToVideoState is used to store requested upgrade / downgrade video state
+     */
+    private int mModifyToVideoState = VideoProfile.VideoState.AUDIO_ONLY;
 
     private InCallVideoCallListener mVideoCallListener;
 
@@ -198,6 +261,14 @@ public final class Call {
         return mTelecommCall;
     }
 
+    /**
+     * @return video settings of the call, null if the call is not a video call.
+     * @see VideoProfile
+     */
+    public VideoSettings getVideoSettings() {
+        return mVideoSettings;
+    }
+
     private void update() {
         int oldState = getState();
         updateFromTelecommCall();
@@ -209,7 +280,7 @@ public final class Call {
     }
 
     private void updateFromTelecommCall() {
-        Log.d(this, "updateFromTelecommCall: " + mTelecommCall);
+        Log.d(this, "updateFromTelecommCall: " + mTelecommCall.toString());
         setState(translateState(mTelecommCall.getState()));
         setDisconnectCause(mTelecommCall.getDetails().getDisconnectCause());
 
@@ -370,22 +441,67 @@ public final class Call {
         return mTelecommCall.getDetails().getVideoState();
     }
 
-    public boolean isVideoCall(Context context) {
-        // We want to show Video call buttons even if only one direction is enabled
-        // (That is what is happening when we receive a video call for example)
-        return CallUtil.isVideoEnabled(context) && (
-            VideoProfile.VideoState.isBidirectional(getVideoState()) ||
-            VideoProfile.VideoState.isReceptionEnabled(getVideoState()) ||
-            VideoProfile.VideoState.isTransmissionEnabled(getVideoState()));
+    public int getCallSubstate() {
+        return mTelecommCall.getDetails().getCallSubstate();
     }
 
+    public boolean isVideoCall(Context context) {
+        return CallUtil.isVideoEnabled(context) &&
+                VideoProfile.VideoState.isVideo(getVideoState());
+    }
+
+    /**
+     * This method is called when we request for a video upgrade or downgrade. This handles the
+     * session modification state RECEIVED_UPGRADE_TO_VIDEO_REQUEST and sets the video state we
+     * want to upgrade/downgrade to.
+     */
+    public void setSessionModificationTo(int videoState) {
+        Log.d(this, "setSessionModificationTo - video state= " + videoState);
+        if (videoState == getVideoState()) {
+            mSessionModificationState = Call.SessionModificationState.NO_REQUEST;
+            Log.w(this,"setSessionModificationTo - Clearing session modification state");
+        } else {
+            mSessionModificationState =
+                Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
+            setModifyToVideoState(videoState);
+            CallList.getInstance().onUpgradeToVideo(this);
+        }
+
+        Log.d(this, "setSessionModificationTo - mSessionModificationState="
+            + mSessionModificationState + " video state= " + videoState);
+        update();
+    }
+
+    /**
+     * This method is called to handle any other session modification states other than
+     * RECEIVED_UPGRADE_TO_VIDEO_REQUEST. We set the modification state and reset the video state
+     * when an upgrade request has been completed or failed.
+     */
     public void setSessionModificationState(int state) {
+        if (state == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+            Log.e(this,
+            "setSessionModificationState not to be called for RECEIVED_UPGRADE_TO_VIDEO_REQUEST");
+            return;
+        }
+
         boolean hasChanged = mSessionModificationState != state;
         mSessionModificationState = state;
-
+        Log.d(this, "setSessionModificationState " + state + " mSessionModificationState="
+                + mSessionModificationState);
+        if (state != Call.SessionModificationState.WAITING_FOR_RESPONSE) {
+            setModifyToVideoState(VideoProfile.VideoState.AUDIO_ONLY);
+        }
         if (hasChanged) {
             update();
         }
+    }
+
+    private void setModifyToVideoState(int newVideoState) {
+        mModifyToVideoState = newVideoState;
+    }
+
+    public int getModifyToVideoState() {
+        return mModifyToVideoState;
     }
 
     public static boolean areSame(Call call1, Call call2) {
@@ -406,7 +522,7 @@ public final class Call {
     @Override
     public String toString() {
         return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s, conferenceable:%s, " +
-                "videoState:%d]",
+                "videoState:%d, callSubState:%d, mSessionModificationState:%d, VideoSettings:%s]",
                 mId,
                 State.toString(getState()),
                 android.telecom.Call.Details
@@ -414,6 +530,13 @@ public final class Call {
                 mChildCallIds,
                 getParentId(),
                 this.mTelecommCall.getConferenceableCalls(),
-                mTelecommCall.getDetails().getVideoState());
+                mTelecommCall.getDetails().getVideoState(),
+                mTelecommCall.getDetails().getCallSubstate(), 
+                mSessionModificationState,
+                getVideoSettings());
+    }
+
+    public String toSimpleString() {
+        return super.toString();
     }
 }
