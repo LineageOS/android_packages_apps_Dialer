@@ -26,7 +26,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.CallLog.Calls;
-import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telecom.PhoneAccountHandle;
@@ -48,10 +47,7 @@ import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
-import com.android.contacts.common.model.Contact;
-import com.android.contacts.common.model.ContactLoader;
 import com.android.contacts.common.util.UriUtils;
-import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
@@ -61,7 +57,6 @@ import com.android.dialer.util.ExpirableCache;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -1383,54 +1378,5 @@ public class CallLogAdapter extends GroupingListAdapter
                 mPreviouslyExpanded = NONE_EXPANDED;
             }
         }
-    }
-
-    /**
-     * Invokes the "add contact" activity given the expanded contact information stored in a
-     * lookup URI.  This can include, for example, address and website information.
-     *
-     * @param lookupUri The lookup URI.
-     */
-    private void addContactFromLookupUri(Uri lookupUri) {
-        Contact contactToSave = ContactLoader.parseEncodedContactEntity(lookupUri);
-        if (contactToSave == null) {
-            return;
-        }
-
-        // Note: This code mirrors code in Contacts/QuickContactsActivity.
-        final Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
-        intent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
-
-        ArrayList<ContentValues> values = contactToSave.getContentValues();
-        // Only pre-fill the name field if the provided display name is an nickname
-        // or better (e.g. structured name, nickname)
-        if (contactToSave.getDisplayNameSource()
-                >= ContactsContract.DisplayNameSources.NICKNAME) {
-            intent.putExtra(ContactsContract.Intents.Insert.NAME,
-                    contactToSave.getDisplayName());
-        } else if (contactToSave.getDisplayNameSource()
-                == ContactsContract.DisplayNameSources.ORGANIZATION) {
-            // This is probably an organization. Instead of copying the organization
-            // name into a name entry, copy it into the organization entry. This
-            // way we will still consider the contact an organization.
-            final ContentValues organization = new ContentValues();
-            organization.put(ContactsContract.CommonDataKinds.Organization.COMPANY,
-                    contactToSave.getDisplayName());
-            organization.put(ContactsContract.Data.MIMETYPE,
-                    ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE);
-            values.add(organization);
-        }
-
-        // Last time used and times used are aggregated values from the usage stat
-        // table. They need to be removed from data values so the SQL table can insert
-        // properly
-        for (ContentValues value : values) {
-            value.remove(ContactsContract.Data.LAST_TIME_USED);
-            value.remove(ContactsContract.Data.TIMES_USED);
-        }
-        intent.putExtra(ContactsContract.Intents.Insert.DATA, values);
-
-        DialerUtils.startActivityWithErrorToast(mContext, intent,
-                R.string.add_contact_not_available);
     }
 }

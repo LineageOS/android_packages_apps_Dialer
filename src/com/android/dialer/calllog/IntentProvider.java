@@ -16,15 +16,23 @@
 
 package com.android.dialer.calllog;
 
+import android.content.ContentValues;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
 
+import com.android.contacts.common.model.Contact;
+import com.android.contacts.common.model.ContactLoader;
 import com.android.dialer.CallDetailActivity;
+import com.android.dialer.DialtactsActivity;
+import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.util.PrivilegedCallUtil;
+
+import java.util.ArrayList;
 
 /**
  * Used to create an intent to attach to an action in the call log.
@@ -121,6 +129,70 @@ public abstract class IntentProvider {
                             Calls.CONTENT_URI_WITH_VOICEMAIL, id));
                 }
                 return intent;
+            }
+        };
+    }
+
+    /**
+     * Retrieves an add contact intent for the given contact and phone call details.
+     *
+     * @param info The contact info.
+     * @param details The phone call details.
+     */
+    public static IntentProvider getAddContactIntentProvider(
+            final ContactInfo info, final PhoneCallDetails details) {
+        return new IntentProvider() {
+            @Override
+            public Intent getIntent(Context context) {
+                Contact contactToSave = null;
+
+                if (info.lookupUri != null) {
+                    contactToSave = ContactLoader.parseEncodedContactEntity(info.lookupUri);
+                }
+
+                if (contactToSave != null) {
+                    // Populate the intent with contact information stored in the lookup URI.
+                    // Note: This code mirrors code in Contacts/QuickContactsActivity.
+                    final Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
+                    intent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
+
+                    ArrayList<ContentValues> values = contactToSave.getContentValues();
+                    // Only pre-fill the name field if the provided display name is an nickname
+                    // or better (e.g. structured name, nickname)
+                    if (contactToSave.getDisplayNameSource()
+                            >= ContactsContract.DisplayNameSources.NICKNAME) {
+                        intent.putExtra(ContactsContract.Intents.Insert.NAME,
+                                contactToSave.getDisplayName());
+                    } else if (contactToSave.getDisplayNameSource()
+                            == ContactsContract.DisplayNameSources.ORGANIZATION) {
+                        // This is probably an organization. Instead of copying the organization
+                        // name into a name entry, copy it into the organization entry. This
+                        // way we will still consider the contact an organization.
+                        final ContentValues organization = new ContentValues();
+                        organization.put(ContactsContract.CommonDataKinds.Organization.COMPANY,
+                                contactToSave.getDisplayName());
+                        organization.put(ContactsContract.Data.MIMETYPE,
+                                ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE);
+                        values.add(organization);
+                    }
+
+                    // Last time used and times used are aggregated values from the usage stat
+                    // table. They need to be removed from data values so the SQL table can insert
+                    // properly
+                    for (ContentValues value : values) {
+                        value.remove(ContactsContract.Data.LAST_TIME_USED);
+                        value.remove(ContactsContract.Data.TIMES_USED);
+                    }
+
+                    intent.putExtra(ContactsContract.Intents.Insert.DATA, values);
+
+                    return intent;
+                } else {
+                    // If no lookup uri is provided, rely on the available phone number and name.
+                    return DialtactsActivity.getAddToContactIntent(details.name,
+                            details.number,
+                            details.numberType);
+                }
             }
         };
     }
