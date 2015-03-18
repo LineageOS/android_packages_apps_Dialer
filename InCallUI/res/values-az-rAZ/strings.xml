@@ -123,7 +123,6 @@
     <string name="selectContact" msgid="781975788478987237">"kontakt seçin"</string>
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Özünüzünkünü yazın"</string>
     <string name="respond_via_sms_setting_title" msgid="3754000371039709383">"Tez cavablar"</string>
-    <string name="respond_via_sms_menu_reset_default_activity" msgid="1461742052902053466">"Defolt tətbiqləri sıfırla"</string>
     <string name="description_dial_button" msgid="7459705245418435351">"Yığ"</string>
     <string name="description_delete_button" msgid="4015842181592283903">"geri düyməsi"</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Cavab"</string>
