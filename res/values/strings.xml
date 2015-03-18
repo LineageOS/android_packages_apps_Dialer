@@ -502,8 +502,9 @@
         <xliff:g id="number">%s</xliff:g>
     </string>
 
-    <!-- Shortcut item used to add a number directly from search -->
-    <string name="search_shortcut_add_to_contacts">Add to contacts</string>
+    <!-- Shortcut item used to add a number to an existing contact directly from search.
+         [CHAR LIMIT=40] -->
+    <string name="search_shortcut_add_to_existing_contact">Add to existing contact</string>
 
     <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=40] -->
     <string name="search_shortcut_send_sms_message">Send SMS</string>

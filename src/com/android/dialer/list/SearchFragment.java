@@ -163,7 +163,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                     listener.onCallNumberDirectly(getQueryString());
                 }
                 break;
-            case DialerPhoneNumberListAdapter.SHORTCUT_ADD_NUMBER_TO_CONTACTS:
+            case DialerPhoneNumberListAdapter.SHORTCUT_ADD_TO_EXISTING_CONTACT:
                 final String number = TextUtils.isEmpty(mAddToContactNumber) ?
                         adapter.getFormattedQueryString() : mAddToContactNumber;
                 final Intent intent = DialtactsActivity.getAddNumberToContactIntent(number);

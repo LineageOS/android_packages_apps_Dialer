@@ -69,10 +69,7 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
         final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString());
         boolean changed = false;
         changed |= setShortcutEnabled(SHORTCUT_DIRECT_CALL, showNumberShortcuts);
-        // Either one of the add contacts options should be enabled. If the user entered
-        // a dialable number, then clicking add to contact should add it as a number.
-        // Otherwise, it should add it to a new contact as a name.
-        changed |= setShortcutEnabled(SHORTCUT_ADD_NUMBER_TO_CONTACTS, showNumberShortcuts);
+        changed |= setShortcutEnabled(SHORTCUT_ADD_TO_EXISTING_CONTACT, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
                 showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));
         if (changed) {
