@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"Quay số nhanh là quay số bằng một lần chạm đối với các liên hệ yêu thích và các số bạn thường xuyên gọi"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Không có liên hệ nào"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Chạm vào hình ảnh để xem tất cả các số hoặc chạm và giữ để sắp xếp lại"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"Loại bỏ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Xóa"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TẤT CẢ NGƯỜI LIÊN HỆ"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"GỌI LẠI"</string>

@@ -149,7 +149,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"ಸ್ಪೀಡ್ ಡಯಲ್, ನೀವು ಹೆಚ್ಚಾಗಿ ಕರೆಮಾಡುವ ಮೆಚ್ಚಿನವುಗಳು ಮತ್ತು ಸಂಖ್ಯೆಗಳಿಗೆ ಒಂದು-ಸ್ಪರ್ಶದ ಡಯಲಿಂಗ್‌ ಆಗಿದೆ"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"ಯಾವುದೇ ಸಂಪರ್ಕಗಳಿಲ್ಲ"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"ಎಲ್ಲ ಸಂಖ್ಯೆಗಳನ್ನು ನೋಡಲು ಚಿತ್ರವನ್ನು ಸ್ಫರ್ಶಿಸಿ ಅಥವಾ ಮರುಕ್ರಮಗೊಳಿಸಲು ಸ್ಪರ್ಶಿಸಿ &amp; ಹೋಲ್ಡ್‌ ಮಾಡಿ"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"ವಜಾಗೊಳಿಸಿ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"ತೆಗೆದುಹಾಕು"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ಎಲ್ಲ ಸಂಪರ್ಕಗಳು"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ಮರಳಿ ಕರೆ ಮಾಡಿ"</string>

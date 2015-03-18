@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"වේග ඩයලනය යනු ප්‍රියතමයන් සහ ඔබ නිතර අමතන අංක සඳහා එක්-ස්පර්ශ ඩයල් කිරීමකි"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"සබඳතා නැත"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"සියලු අංක බැලීමට අනුරුව ස්පර්ශ කරන්න නැතහොත් &amp; යළි ඇණවුම් කිරීමට අල්ලාගෙන සිටින්න"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"ඉවතලන්න"</string>
     <string name="remove_contact" msgid="1080555335283662961">"ඉවත් කරන්න"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"සියලු සම්බන්ධතා"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"නැවත අමතන්න"</string>

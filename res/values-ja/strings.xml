@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"クイックアクセスは、よく通話するお気に入りや番号にワンタップでダイヤルする機能です"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"連絡先がありません"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"画像をタップするとすべての番号を表示でき、押し続けると並べ替えることができます"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"閉じる"</string>
     <string name="remove_contact" msgid="1080555335283662961">"削除"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"すべての連絡先"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"コールバック"</string>

@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"အမြန် နံပါတ်လှည့်မှုမှာ စိတ်ကြိုက်များ နှင့် သင်မကြာခဏ ခေါ်သည့် နံပါတ်များကို တစ်ချက်နှိပ် နံပါတ်လှည့်မှု ဖြစ်သည်"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"အဆက်အသွယ်များ မရှိ"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"နံပါတ်များ အားလုံးကိုကြည့်ရန် ပုံကို ထိပါ သို့မဟုတ် ပြန်စီရန် ထိလျက် &amp; ကိုင်ထားပါ"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"လွှတ်လိုက်သည်"</string>
     <string name="remove_contact" msgid="1080555335283662961">"ဖယ်ရှာခြင်း"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"အဆက်အသွယ်များအားလုံး"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ပြန် ခေါ်ဆိုမှု"</string>

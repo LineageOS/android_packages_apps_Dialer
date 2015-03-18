@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"快速撥號功能可讓您輕觸一下即撥打電話給最愛聯絡人和經常通話的號碼"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"沒有聯絡人"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"輕觸圖片即可查看所有號碼，輕觸並按住則可重新排序"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"關閉"</string>
     <string name="remove_contact" msgid="1080555335283662961">"移除"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"所有聯絡人"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"回電"</string>
@@ -184,7 +183,7 @@
     <string name="ringtone_title" msgid="760362035635084653">"手機鈴聲"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"來電時同時震動"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"撥號鍵盤音效"</string>
-    <string name="dtmf_tone_length_title" msgid="8581125689808919460">"撥號鍵盤聲調長度"</string>
+    <string name="dtmf_tone_length_title" msgid="8581125689808919460">"撥號音長度"</string>
   <string-array name="dtmf_tone_length_entries">
     <item msgid="1036113889050195575">"一般"</item>
     <item msgid="6177579030803486015">"長"</item>

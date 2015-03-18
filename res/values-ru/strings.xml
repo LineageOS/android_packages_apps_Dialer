@@ -150,7 +150,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"Настройте быстрый набор, чтобы вам было удобнее звонить на часто используемые номера."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Ничего не найдено."</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Коснитесь изображения, чтобы увидеть все номера, или нажмите и удерживайте, чтобы изменить порядок"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"Закрыть"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Удалить"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ВСЕ КОНТАКТЫ"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ВЫЗОВ"</string>
@@ -189,7 +188,7 @@
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Длительность сигналов при наборе номера"</string>
   <string-array name="dtmf_tone_length_entries">
     <item msgid="1036113889050195575">"Обычная"</item>
-    <item msgid="6177579030803486015">"Длинная"</item>
+    <item msgid="6177579030803486015">"Большая"</item>
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Быстрые ответы"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Вызовы"</string>

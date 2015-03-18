@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"നിങ്ങൾ ഇടയ്ക്കിടെ വിളിക്കുന്ന പ്രിയപ്പെട്ടവർക്കും നമ്പറുകൾക്കുമായി ഒരൊറ്റ സ്പർശനത്തിൽ ഡയൽ ചെയ്യുന്ന സവിശേഷതയാണ് സ്‌പീഡ് ഡയൽ"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"കോൺടാക്റ്റുകളൊന്നുമില്ല"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"എല്ലാ നമ്പറുകളും കാണാൻ ചിത്രം സ്‌പർശിക്കുക അല്ലെങ്കിൽ വീണ്ടും ക്രമീകരിക്കാൻ സ്‌പർശിച്ച് പിടിക്കുക"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"നിരസിക്കുക"</string>
     <string name="remove_contact" msgid="1080555335283662961">"നീക്കംചെയ്യുക"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"എല്ലാ കോൺ‌ടാക്റ്റുകളും"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"തിരിച്ചുവിളിക്കുക"</string>

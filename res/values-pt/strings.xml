@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"A discagem rápida é feita com apenas um toque para favoritos e números para os quais você liga com frequência"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Nenhum contato"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Toque na imagem para ver todos os números ou toque e segure para reordenar"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"Descartar"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Remover"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TODOS OS CONTATOS"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"RETORNAR CHAMADA"</string>

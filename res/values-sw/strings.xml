@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"Unaowasiliana nao zaidi ni upigaji simu wa kugusa mara moja kwa vipendeleo na nambari unazopiga mara kwa mara"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Hakuna anwani"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Gusa picha ili uone nambari zote au gusa na ushikilie ili upange upya"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"Ondoa"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Ondoa"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ANWANI ZOTE"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"PIGA SIMU"</string>

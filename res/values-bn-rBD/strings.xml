@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"আপনি প্রায়শই কল করেন এমন পছন্দসই ব্যক্তি এবং নম্বরগুলির জন্য দ্রুত ডায়াল হল একবার-স্পর্শের মাধ্যমে ডায়াল করার ব্যবস্থা"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"কোনো পরিচিতি নেই"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"সমস্ত নম্বর দেখতে চিত্রে স্পর্শ করুন বা রেকর্ড করতে ধরে রাখুন"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"খারিজ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"সরান"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"সকল পরিচিতি"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"কল করুন"</string>

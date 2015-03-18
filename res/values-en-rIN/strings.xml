@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"Speed dial is one‑touch dialing for favourites and numbers that you call often"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"No contacts"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Touch image to see all numbers or touch &amp; hold to reorder"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"Dismiss"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Remove"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ALL CONTACTS"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"CALL BACK"</string>

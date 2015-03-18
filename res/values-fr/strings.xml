@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"La numérotation abrégée vous permet d\'appeler vos contacts favoris et les numéros que vous appelez fréquemment d\'une simple pression du doigt."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Aucun contact"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Appuyer sur l\'image pour afficher tous les numéros, ou appuyer dessus de manière prolongée pour réorganiser ces derniers"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"Ignorer"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Supprimer"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TOUS LES CONTACTS"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"RAPPELER"</string>

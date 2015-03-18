@@ -150,7 +150,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"Hitro izbiranje je klicanje priljubljenih številk in tistih, ki jih kličete najpogosteje, z enim dotikom."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Ni stikov"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Dotaknite se slike, če želite videti vse številke, ali pa se je dotaknite in pridržite, če želite spremeniti vrstni red."</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"Opusti"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Odstrani"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"VSI STIKI"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"POVRATNI KLIC"</string>
@@ -186,7 +185,7 @@
     <string name="ringtone_title" msgid="760362035635084653">"Ton zvonjenja telefona"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibriranje tudi za klice"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Toni tipkovnice"</string>
-    <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Dolžina pozivnih tonov"</string>
+    <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Dolžina tonov tipk"</string>
   <string-array name="dtmf_tone_length_entries">
     <item msgid="1036113889050195575">"Običajno"</item>
     <item msgid="6177579030803486015">"Dolgo"</item>

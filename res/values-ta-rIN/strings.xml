@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"விரைவு டயல் என்பது பிடித்த மற்றும் நீங்கள் அடிக்கடி அழைக்கும் எண்களை ஒரே தொடுதலின் மூலம் டயல் செய்யும் அம்சமாகும்."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"தொடர்புகள் இல்லை"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"எல்லா எண்களையும் பார்க்க, படத்தைத் தொடவும் அல்லது மறுவரிசைப்படுத்த தொட்டுப் பிடித்திருக்கவும்"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"விலக்கு"</string>
     <string name="remove_contact" msgid="1080555335283662961">"அகற்று"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"எல்லா தொடர்புகளும்"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"திரும்ப அழை"</string>

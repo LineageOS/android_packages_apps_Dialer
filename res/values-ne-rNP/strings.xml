@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"द्रूत डायल मनपर्नेका लागि एक-टच डाइलिङ र तपाईंले प्राय: कल गर्ने नम्बर हुन्।"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"कुनै सम्पर्कहरू छैन।"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"सबै संख्या हेर्न  छविलाई छुनुहोस् वा पुन:क्रमबद्ध गर्न समात्नुहोस्"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"खारेज गर्नुहोस्"</string>
     <string name="remove_contact" msgid="1080555335283662961">"हटाउँनुहोस्"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"सबै सम्पर्कहरू"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"कल फर्काउने"</string>

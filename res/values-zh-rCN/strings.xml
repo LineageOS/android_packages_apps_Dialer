@@ -148,7 +148,6 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"使用快速拨号功能，只需轻轻一点即可拨打收藏联系人的电话号码以及经常拨打的电话号码。"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"没有联系人"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"触摸图片可查看所有号码，触摸并按住可重新排序"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"关闭"</string>
     <string name="remove_contact" msgid="1080555335283662961">"移除"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"所有联系人"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"回电"</string>
