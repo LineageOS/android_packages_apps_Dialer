@@ -18,6 +18,7 @@ package com.android.dialer.list;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -38,6 +39,7 @@ import com.android.dialer.util.DialerUtils;
 import com.android.phone.common.animation.AnimUtils;
 
 public class SearchFragment extends PhoneNumberPickerFragment {
+    private static final String SMS_URI_PREFIX = "sms:";
 
     private OnListFragmentScrolledListener mActivityScrollListener;
 
@@ -167,6 +169,11 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                 final Intent intent = DialtactsActivity.getAddNumberToContactIntent(number);
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent,
                         R.string.add_contact_not_available);
+                break;
+            case DialerPhoneNumberListAdapter.SHORTCUT_SEND_SMS_MESSAGE:
+                final Intent sendSmsIntent = new Intent(
+                        Intent.ACTION_VIEW, Uri.parse(SMS_URI_PREFIX + getQueryString()));
+                DialerUtils.startActivityWithErrorToast(getActivity(), sendSmsIntent);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_MAKE_VIDEO_CALL:
                 listener = getOnPhoneNumberPickerListener();

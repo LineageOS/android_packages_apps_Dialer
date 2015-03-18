@@ -28,9 +28,10 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     public final static int SHORTCUT_INVALID = -1;
     public final static int SHORTCUT_DIRECT_CALL = 0;
     public final static int SHORTCUT_ADD_NUMBER_TO_CONTACTS = 1;
-    public final static int SHORTCUT_MAKE_VIDEO_CALL = 2;
+    public final static int SHORTCUT_SEND_SMS_MESSAGE = 2;
+    public final static int SHORTCUT_MAKE_VIDEO_CALL = 3;
 
-    public final static int SHORTCUT_COUNT = 3;
+    public final static int SHORTCUT_COUNT = 4;
 
     private final boolean[] mShortcutEnabled = new boolean[SHORTCUT_COUNT];
 
@@ -145,6 +146,10 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
             case SHORTCUT_ADD_NUMBER_TO_CONTACTS:
                 text = resources.getString(R.string.search_shortcut_add_to_contacts);
                 drawableId = R.drawable.ic_search_add_contact;
+                break;
+            case SHORTCUT_SEND_SMS_MESSAGE:
+                text = resources.getString(R.string.search_shortcut_send_sms_message);
+                drawableId = R.drawable.ic_textsms_24dp;
                 break;
             case SHORTCUT_MAKE_VIDEO_CALL:
                 text = resources.getString(R.string.search_shortcut_make_video_call);
