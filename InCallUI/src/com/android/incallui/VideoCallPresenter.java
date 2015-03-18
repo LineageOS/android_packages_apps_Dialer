@@ -62,6 +62,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallDetailsListener, SurfaceChangeListener, VideoEventListener,
         InCallVideoCallListenerNotifier.SessionModificationListener {
 
+    private static final String TAG = VideoCallPresenter.class.getSimpleName();
+
+    public static final boolean DEBUG = false;
+
     /**
      * Determines the device orientation (portrait/lanscape).
      */
@@ -211,6 +215,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @param surface The surface which was created.
      */
     public void onSurfaceCreated(int surface) {
+        if (DEBUG) {
+            Log.i(TAG, "onSurfaceCreated: " + surface);
+        }
         final VideoCallUi ui = getUi();
 
         if (ui == null || mVideoCall == null) {
@@ -400,6 +407,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * TODO(vt): Need to adjust size and orientation of preview surface here.
      */
     private void enterVideoMode() {
+        if (DEBUG) {
+            Log.i(TAG, "enterVideoMode");
+        }
         VideoCallUi ui = getUi();
         if (ui == null) {
             return;
@@ -422,7 +432,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                     getInCallCameraManager();
             mVideoCall.setCamera(cameraManager.getActiveCameraId());
             mVideoCall.requestCameraCapabilities();
-
+            if (DEBUG) {
+                Log.i(TAG, "isDisplayVideoSurfacedCreated: " + ui.isDisplayVideoSurfaceCreated());
+            }
             if (ui.isDisplayVideoSurfaceCreated()) {
                 mVideoCall.setDisplaySurface(ui.getDisplayVideoSurface());
             }
@@ -561,7 +573,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
     @Override
     public void onDowngradeToAudio(Call call) {
-        // Implementing to satsify interface.
+        // Implementing to satisfy interface.
     }
 
     /**

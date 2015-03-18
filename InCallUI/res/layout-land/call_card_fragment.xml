@@ -66,6 +66,14 @@
         android:background="@android:color/white"
         android:src="@drawable/img_no_image_automirrored" />
 
+   <fragment android:name="com.android.incallui.VideoCallFragment"
+        android:id="@+id/videoCallFragment"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
     <include layout="@layout/manage_conference_call_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,7 +99,7 @@
             android:indeterminate="true" />
     </FrameLayout>
 
-    <!-- Placeholder for the dialpad which is replaced with the dialpad fragment when shown. -->
+    <!-- Placeholder for various fragments that are added dynamically underneath the caller info. -->
     <FrameLayout
         android:id="@+id/answer_and_dialpad_container"
         android:layout_toEndOf="@id/primary_call_info_container"
