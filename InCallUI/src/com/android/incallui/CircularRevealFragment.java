@@ -48,8 +48,13 @@ public class CircularRevealFragment extends Fragment {
 
     public static void startCircularReveal(FragmentManager fm, Point touchPoint,
             OnCircularRevealCompleteListener listener) {
-        fm.beginTransaction().add(R.id.main, new CircularRevealFragment(touchPoint, listener), TAG)
-                .commitAllowingStateLoss();
+        if (fm.findFragmentByTag(TAG) == null) {
+            fm.beginTransaction().add(R.id.main,
+                    new CircularRevealFragment(touchPoint, listener), TAG)
+                            .commitAllowingStateLoss();
+        } else {
+            Log.w(TAG, "An instance of CircularRevealFragment already exists");
+        }
     }
 
     public static void endCircularReveal(FragmentManager fm) {
