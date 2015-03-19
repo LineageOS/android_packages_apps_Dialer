@@ -42,9 +42,6 @@
     [CHAR LIMIT=NONE] -->
     <string name="recentCallsIconLabel">Call history</string>
 
-    <!-- Menu item used to send an SMS or MMS message to a phone number  -->
-    <string name="menu_sendTextMessage">Send SMS</string>
-
     <!-- Menu item used to call a contact from the call log -->
     <string name="recentCalls_callNumber">Call
         <xliff:g id="name">%s</xliff:g>
@@ -262,7 +259,6 @@
     <string name="menu_show_all_calls">Show all calls</string>
 
     <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
-    <string name="add_contact">Add to contacts</string>
     <string name="add_2sec_pause">Add 2-sec pause</string>
     <string name="add_wait">Add wait</string>
 

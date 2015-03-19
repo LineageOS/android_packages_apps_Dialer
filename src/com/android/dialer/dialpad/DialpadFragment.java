@@ -258,8 +258,6 @@ public class DialpadFragment extends Fragment
     private boolean mFirstLaunch = false;
     private boolean mAnimate = false;
 
-    private ComponentName mSmsPackageComponentName;
-
     private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
 
     private TelephonyManager getTelephonyManager() {
@@ -660,8 +658,6 @@ public class DialpadFragment extends Fragment
 
         stopWatch.stopAndLog(TAG, 50);
 
-        mSmsPackageComponentName = DialerUtils.getSmsComponent(activity);
-
         // Populate the overflow menu in onResume instead of onCreate, so that if the SMS activity
         // is disabled while Dialer is paused, the "Send a text message" option can be correctly
         // removed when resumed.
@@ -878,8 +874,6 @@ public class DialpadFragment extends Fragment
             @Override
             public void show() {
                 final Menu menu = getMenu();
-                final MenuItem sendMessage = menu.findItem(R.id.menu_send_message);
-                sendMessage.setVisible(mSmsPackageComponentName != null);
 
                 boolean enable = !isDigitsEmpty();
                 for (int i = 0; i < menu.size(); i++) {
@@ -1449,26 +1443,12 @@ public class DialpadFragment extends Fragment
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_add_contact: {
-                final CharSequence digits = mDigits.getText();
-                DialerUtils.startActivityWithErrorToast(getActivity(),
-                        DialtactsActivity.getAddNumberToContactIntent(digits));
-                return true;
-            }
             case R.id.menu_2s_pause:
                 updateDialString(PAUSE);
                 return true;
             case R.id.menu_add_wait:
                 updateDialString(WAIT);
                 return true;
-            case R.id.menu_send_message: {
-                final CharSequence digits = mDigits.getText();
-                final Intent smsIntent = new Intent(Intent.ACTION_SENDTO,
-                        Uri.fromParts(ContactsUtils.SCHEME_SMSTO, digits.toString(), null));
-                smsIntent.setComponent(mSmsPackageComponentName);
-                DialerUtils.startActivityWithErrorToast(getActivity(), smsIntent);
-                return true;
-            }
             default:
                 return false;
         }
