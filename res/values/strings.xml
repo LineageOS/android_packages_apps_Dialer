@@ -502,6 +502,10 @@
         <xliff:g id="number">%s</xliff:g>
     </string>
 
+    <!-- Shortcut item used to add a number directly to a new contact from search.
+         [CHAR LIMIT=40] -->
+    <string name="search_shortcut_create_new_contact">Create new contact</string>
+
     <!-- Shortcut item used to add a number to an existing contact directly from search.
          [CHAR LIMIT=40] -->
     <string name="search_shortcut_add_to_existing_contact">Add to existing contact</string>

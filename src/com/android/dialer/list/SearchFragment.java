@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Interpolator;
@@ -152,6 +153,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
         final int shortcutType = adapter.getShortcutTypeFromPosition(position);
         final OnPhoneNumberPickerActionListener listener;
+        final Intent intent;
+        final String number;
 
         switch (shortcutType) {
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
@@ -163,17 +166,26 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                     listener.onCallNumberDirectly(getQueryString());
                 }
                 break;
-            case DialerPhoneNumberListAdapter.SHORTCUT_ADD_TO_EXISTING_CONTACT:
-                final String number = TextUtils.isEmpty(mAddToContactNumber) ?
+            case DialerPhoneNumberListAdapter.SHORTCUT_CREATE_NEW_CONTACT:
+                number = TextUtils.isEmpty(mAddToContactNumber) ?
                         adapter.getFormattedQueryString() : mAddToContactNumber;
-                final Intent intent = DialtactsActivity.getAddNumberToContactIntent(number);
+                intent = new Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI);
+                intent.putExtra(ContactsContract.Intents.Insert.PHONE, number);
+                intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE,
+                        ContactsContract.CommonDataKinds.Phone.TYPE_MAIN);
+                DialerUtils.startActivityWithErrorToast(getActivity(), intent);
+                break;
+            case DialerPhoneNumberListAdapter.SHORTCUT_ADD_TO_EXISTING_CONTACT:
+                number = TextUtils.isEmpty(mAddToContactNumber) ?
+                        adapter.getFormattedQueryString() : mAddToContactNumber;
+                intent = DialtactsActivity.getAddNumberToContactIntent(number);
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent,
                         R.string.add_contact_not_available);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_SEND_SMS_MESSAGE:
-                final Intent sendSmsIntent = new Intent(
+                intent = new Intent(
                         Intent.ACTION_VIEW, Uri.parse(SMS_URI_PREFIX + getQueryString()));
-                DialerUtils.startActivityWithErrorToast(getActivity(), sendSmsIntent);
+                DialerUtils.startActivityWithErrorToast(getActivity(), intent);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_MAKE_VIDEO_CALL:
                 listener = getOnPhoneNumberPickerListener();

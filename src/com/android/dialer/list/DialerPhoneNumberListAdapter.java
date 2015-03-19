@@ -27,11 +27,12 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
 
     public final static int SHORTCUT_INVALID = -1;
     public final static int SHORTCUT_DIRECT_CALL = 0;
-    public final static int SHORTCUT_ADD_TO_EXISTING_CONTACT = 1;
-    public final static int SHORTCUT_SEND_SMS_MESSAGE = 2;
-    public final static int SHORTCUT_MAKE_VIDEO_CALL = 3;
+    public final static int SHORTCUT_CREATE_NEW_CONTACT = 1;
+    public final static int SHORTCUT_ADD_TO_EXISTING_CONTACT = 2;
+    public final static int SHORTCUT_SEND_SMS_MESSAGE = 3;
+    public final static int SHORTCUT_MAKE_VIDEO_CALL = 4;
 
-    public final static int SHORTCUT_COUNT = 4;
+    public final static int SHORTCUT_COUNT = 5;
 
     private final boolean[] mShortcutEnabled = new boolean[SHORTCUT_COUNT];
 
@@ -142,6 +143,10 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
             case SHORTCUT_DIRECT_CALL:
                 text = resources.getString(R.string.search_shortcut_call_number, number);
                 drawableId = R.drawable.ic_search_phone;
+                break;
+            case SHORTCUT_CREATE_NEW_CONTACT:
+                text = resources.getString(R.string.search_shortcut_create_new_contact);
+                drawableId = R.drawable.ic_search_add_contact;
                 break;
             case SHORTCUT_ADD_TO_EXISTING_CONTACT:
                 text = resources.getString(R.string.search_shortcut_add_to_existing_contact);

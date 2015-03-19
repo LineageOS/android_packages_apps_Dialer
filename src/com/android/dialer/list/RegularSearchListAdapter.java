@@ -69,6 +69,7 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
         final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString());
         boolean changed = false;
         changed |= setShortcutEnabled(SHORTCUT_DIRECT_CALL, showNumberShortcuts);
+        changed |= setShortcutEnabled(SHORTCUT_CREATE_NEW_CONTACT, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_ADD_TO_EXISTING_CONTACT, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
                 showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));

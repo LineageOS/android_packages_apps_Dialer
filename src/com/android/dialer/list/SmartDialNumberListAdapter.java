@@ -116,6 +116,7 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
     public void setQueryString(String queryString) {
         final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString());
         boolean changed = false;
+        changed |= setShortcutEnabled(SHORTCUT_CREATE_NEW_CONTACT, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_ADD_TO_EXISTING_CONTACT, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_SEND_SMS_MESSAGE, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
