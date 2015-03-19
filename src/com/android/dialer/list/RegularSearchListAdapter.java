@@ -33,6 +33,8 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
 
     public RegularSearchListAdapter(Context context) {
         super(context);
+        setShortcutEnabled(SHORTCUT_CREATE_NEW_CONTACT, false);
+        setShortcutEnabled(SHORTCUT_ADD_TO_EXISTING_CONTACT, false);
     }
 
     public CachedContactInfo getContactInfo(
@@ -69,8 +71,7 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
         final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString());
         boolean changed = false;
         changed |= setShortcutEnabled(SHORTCUT_DIRECT_CALL, showNumberShortcuts);
-        changed |= setShortcutEnabled(SHORTCUT_CREATE_NEW_CONTACT, showNumberShortcuts);
-        changed |= setShortcutEnabled(SHORTCUT_ADD_TO_EXISTING_CONTACT, showNumberShortcuts);
+        changed |= setShortcutEnabled(SHORTCUT_SEND_SMS_MESSAGE, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
                 showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));
         if (changed) {
