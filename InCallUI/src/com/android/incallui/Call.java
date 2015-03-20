@@ -36,7 +36,8 @@ import java.util.Locale;
 /**
  * Describes a single call and its state.
  */
-class Call {
+@NeededForTesting
+public class Call {
     /* Defines different states of this call */
     public static class State {
         public static final int INVALID = 0;

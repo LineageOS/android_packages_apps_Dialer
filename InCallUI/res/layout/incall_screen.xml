@@ -19,12 +19,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main" >
-
-    <fragment android:name="com.android.incallui.CallCardFragment"
-        android:id="@+id/callCardFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
 </FrameLayout>

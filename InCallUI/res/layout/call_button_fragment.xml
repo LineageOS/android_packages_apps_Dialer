@@ -38,8 +38,7 @@
     android:background="@color/button_background_color"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:animateLayoutChanges="true"
-    android:visibility="invisible" >
+    android:animateLayoutChanges="true" >
 
     <LinearLayout
         android:orientation="horizontal"

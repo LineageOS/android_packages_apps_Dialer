@@ -312,10 +312,6 @@ public class CallButtonFragment
     @Override
     public void setEnabled(boolean isEnabled) {
         mIsEnabled = isEnabled;
-        View view = getView();
-        if (view.getVisibility() != View.VISIBLE) {
-            view.setVisibility(View.VISIBLE);
-        }
 
         mAudioButton.setEnabled(isEnabled);
         mChangeToVoiceButton.setEnabled(isEnabled);

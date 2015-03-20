@@ -125,6 +125,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 updateContactEntry(null, true);
             }
         }
+
+        onStateChange(null, InCallPresenter.getInstance().getInCallState(), CallList.getInstance());
     }
 
     @Override

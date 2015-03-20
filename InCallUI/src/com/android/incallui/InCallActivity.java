@@ -141,8 +141,6 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
 
         setContentView(R.layout.incall_screen);
 
-        initializeInCall();
-
         internalResolveIntent(getIntent());
 
         mCurrentOrientation = getResources().getConfiguration().orientation;
@@ -272,8 +270,11 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
             mAnswerFragment = (AnswerFragment) fragment;
         } else if (fragment instanceof CallCardFragment) {
             mCallCardFragment = (CallCardFragment) fragment;
+            mChildFragmentManager = mCallCardFragment.getChildFragmentManager();
         } else if (fragment instanceof ConferenceManagerFragment) {
             mConferenceManagerFragment = (ConferenceManagerFragment) fragment;
+        } else if (fragment instanceof CallButtonFragment) {
+            mCallButtonFragment = (CallButtonFragment) fragment;
         }
     }
 
@@ -473,8 +474,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
 
     private void internalResolveIntent(Intent intent) {
         final String action = intent.getAction();
-
-        if (action.equals(intent.ACTION_MAIN)) {
+        if (action.equals(Intent.ACTION_MAIN)) {
             // This action is the normal way to bring up the in-call UI.
             //
             // But we do check here for one extra that can come along with the
@@ -491,6 +491,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
                 relaunchedFromDialer(showDialpad);
             }
 
+            boolean newOutgoingCall = false;
             if (intent.getBooleanExtra(NEW_OUTGOING_CALL_EXTRA, false)) {
                 intent.removeExtra(NEW_OUTGOING_CALL_EXTRA);
                 Call call = CallList.getInstance().getOutgoingCall();
@@ -529,11 +530,12 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
                 }
 
                 dismissKeyguard(true);
+                newOutgoingCall = true;
             }
 
             Call pendingAccountSelectionCall = CallList.getInstance().getWaitingForAccountCall();
             if (pendingAccountSelectionCall != null) {
-                mCallCardFragment.setVisible(false);
+                showCallCardFragment(false);
                 Bundle extras = pendingAccountSelectionCall
                         .getTelecommCall().getDetails().getExtras();
 
@@ -561,8 +563,8 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
                 SelectPhoneAccountDialogFragment.showAccountDialog(getFragmentManager(),
                         R.string.select_phone_account_for_calls, true, phoneAccountHandles,
                         listener);
-            } else {
-                mCallCardFragment.setVisible(true);
+            } else if (!newOutgoingCall) {
+                showCallCardFragment(true);
             }
 
             return;
@@ -580,21 +582,6 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
             if (call != null && call.getState() == State.ONHOLD) {
                 TelecomAdapter.getInstance().unholdCall(call.getId());
             }
-        }
-    }
-
-    private void initializeInCall() {
-        if (mCallCardFragment == null) {
-            mCallCardFragment = (CallCardFragment) getFragmentManager()
-                    .findFragmentById(R.id.callCardFragment);
-        }
-
-        mChildFragmentManager = mCallCardFragment.getChildFragmentManager();
-
-        if (mCallButtonFragment == null) {
-            mCallButtonFragment = (CallButtonFragment) mChildFragmentManager
-                    .findFragmentById(R.id.callButtonFragment);
-            mCallButtonFragment.getView().setVisibility(View.INVISIBLE);
         }
     }
 
@@ -710,6 +697,10 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
 
     public boolean isDialpadVisible() {
         return mDialpadFragment != null && mDialpadFragment.isVisible();
+    }
+
+    public void showCallCardFragment(boolean show) {
+        showFragment(TAG_CALLCARD_FRAGMENT, show, true);
     }
 
     /**

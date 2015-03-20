@@ -27,6 +27,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Trace;
 import android.telecom.DisconnectCause;
 import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
@@ -57,6 +58,8 @@ import java.util.List;
  */
 public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPresenter.CallCardUi>
         implements CallCardPresenter.CallCardUi {
+    private static final String TAG = "CallCardFragment";
+
     private AnimatorSet mAnimatorSet;
     private int mShrinkAnimationDuration;
     private int mFabNormalDiameter;
@@ -146,10 +149,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        Trace.beginSection(TAG + " onCreate");
         mTranslationOffset =
                 getResources().getDimensionPixelSize(R.dimen.call_card_anim_translate_y_offset);
-
-        return inflater.inflate(R.layout.call_card_fragment, container, false);
+        final View view = inflater.inflate(R.layout.call_card_fragment, container, false);
+        Trace.endSection();
+        return view;
     }
 
     @Override

@@ -508,6 +508,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
     @Override
     public void onCircularRevealComplete(FragmentManager fm) {
         if (mInCallActivity != null) {
+            mInCallActivity.showCallCardFragment(true);
             mInCallActivity.getCallCardFragment().animateForNewOutgoingCall();
             CircularRevealFragment.endCircularReveal(mInCallActivity.getFragmentManager());
         }
@@ -1281,7 +1282,10 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
      * @return The space beside the call card.
      */
     public float getSpaceBesideCallCard() {
-        return mInCallActivity.getCallCardFragment().getSpaceBesideCallCard();
+        if (mInCallActivity != null && mInCallActivity.getCallCardFragment() != null) {
+            return mInCallActivity.getCallCardFragment().getSpaceBesideCallCard();
+        }
+        return 0;
     }
 
     /**
@@ -1290,7 +1294,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
      * @return True if the call card fragment is visible.
      */
     public boolean getCallCardFragmentVisible() {
-        if (mInCallActivity != null) {
+        if (mInCallActivity != null && mInCallActivity.getCallCardFragment() != null) {
             return mInCallActivity.getCallCardFragment().isVisible();
         }
         return false;
