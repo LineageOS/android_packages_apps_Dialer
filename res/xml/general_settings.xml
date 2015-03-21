@@ -65,19 +65,19 @@
         android:key="dialer_general_incall_vibration_category_key"
         android:title="@string/incall_vibration_category_title">
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="incall_vibrate_outgoing"
             android:title="@string/incall_vibrate_outgoing_title" />
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="incall_vibrate_call_waiting"
             android:title="@string/vibrate_call_waiting"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="incall_vibrate_hangup"
             android:title="@string/incall_vibrate_hangup_title" />
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="incall_vibrate_45secs"
             android:title="@string/incall_vibrate_45_title"
             android:summary="@string/incall_vibrate_45_summary" />
