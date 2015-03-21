@@ -21,7 +21,6 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"電話"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"電話"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"通話紀錄"</string>
-    <string name="menu_sendTextMessage" msgid="8682056943960339239">"傳送簡訊"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"撥電話給<xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"撥打電話前編輯號碼"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"新增至通訊錄"</string>
@@ -80,7 +79,6 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"僅顯示未接來電"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"僅顯示語音留言"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"顯示所有通話"</string>
-    <string name="add_contact" msgid="4579643070374941999">"新增為聯絡人"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"暫停時間延長 2 秒"</string>
     <string name="add_wait" msgid="3360818652790319634">"延長等待時間"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"設定"</string>
@@ -141,7 +139,11 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"已從最愛的聯絡人移除"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"復原"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"撥打 <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"新增為聯絡人"</string>
+    <!-- no translation found for search_shortcut_create_new_contact (1679917465521554093) -->
+    <skip />
+    <!-- no translation found for search_shortcut_add_to_existing_contact (4403132207405813444) -->
+    <skip />
+    <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"傳送簡訊"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"進行視訊通話"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"查看完整通話紀錄"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> 通新的未接來電"</string>

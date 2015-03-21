@@ -21,7 +21,6 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"फोन"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"फोन"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"कल इतिहास"</string>
-    <string name="menu_sendTextMessage" msgid="8682056943960339239">"SMS पठाउनुहोस्"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"कल <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"कल गर्नुअगाडी नम्बर सम्पादन गर्नुहोस्"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"सम्पर्कहरूमा थप्नुहोस्"</string>
@@ -80,7 +79,6 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"छुटेकाहरू मात्र देखाउनुहोस्"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"भ्वाइसमेलहरू मात्र देखाउनुहोस्"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"सबै कलहरू देखाउनुहोस्"</string>
-    <string name="add_contact" msgid="4579643070374941999">"सम्पर्कहरूमा थप्नुहोस्"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"२ सेकन्डको रोकाइ थप्नुहोस्"</string>
     <string name="add_wait" msgid="3360818652790319634">"पर्खाइ थप्नुहोस्"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"सेटिङ्हरू"</string>
@@ -141,7 +139,9 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"मनपर्नेहरूबाट हटाइयो"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"अनडु गर्नुहोस्"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> कल गर्नुहोस्"</string>
-    <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"सम्पर्कहरूमा थप्नुहोस्"</string>
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"नयाँ सम्पर्क सिर्जना गर्नुहोस्"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"अवस्थित सम्पर्कमा थप्नुहोस्"</string>
+    <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS पठाउनुहोस्"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"भिडियो कल बनाउनुहोस्"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"पूर्ण कल इतिहास हेर्नुहोस्"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> नयाँ छुटेका कलहरु"</string>

@@ -21,7 +21,6 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Deitu"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefonoa"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Deien historia"</string>
-    <string name="menu_sendTextMessage" msgid="8682056943960339239">"Bidali SMS mezua"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Deitu <xliff:g id="NAME">%s</xliff:g> erabiltzaileari"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Editatu zenbakia deitu aurretik"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Gehitu kontaktuetan"</string>
@@ -80,7 +79,6 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Erakutsi galduak soilik"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Erakutsi erantzungailukoak soilik"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Erakutsi dei guztiak"</string>
-    <string name="add_contact" msgid="4579643070374941999">"Gehitu kontaktuetan"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Gehitu 2 segundoko pausa"</string>
     <string name="add_wait" msgid="3360818652790319634">"Gehitu itxaronaldia"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Ezarpenak"</string>
@@ -141,7 +139,9 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"Gogokoetatik kendu da"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Desegin"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Deitu <xliff:g id="NUMBER">%s</xliff:g> zenbakira"</string>
-    <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Gehitu kontaktuetan"</string>
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Sortu kontaktua"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Gehitu lehendik dagoen kontaktu batean"</string>
+    <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Bidali SMS mezua"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Egin bideo-deia"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Ikusi deien historia osoa"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> dei galdu berri"</string>

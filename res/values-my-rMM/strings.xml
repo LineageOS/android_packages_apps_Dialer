@@ -21,7 +21,6 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ဖုန်း"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ဖုန်း"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ခေါ်ဆိုမှု မှတ်တမ်း"</string>
-    <string name="menu_sendTextMessage" msgid="8682056943960339239">"စာတို ပို့ရန်"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ကိုခေါ်ပါ"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ဖုန်းမခေါ်ခင် နံပါတ်အားပြင်ရန်"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"လိပ်စာများထဲသို့ ထည့်ပါ"</string>
@@ -80,7 +79,6 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"လွတ်သွားသော ခေါ်ဆိုမှုများသာပြပါ"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"အသံပို့စာများသာ ပြပါ"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"ဖုန်းခေါ်မှုအားလုံးပြရန်"</string>
-    <string name="add_contact" msgid="4579643070374941999">"အဆက်အသွယ်များ ထဲသို့ ထည့်ရန်"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"၂စက္ကန့်ရပ်ဆိုင်းရန် ထည့်ပါ"</string>
     <string name="add_wait" msgid="3360818652790319634">"စောင့်ဆိုင်းခြင်း ထည့်ပါ"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"ဆက်တင်များ"</string>
@@ -141,7 +139,11 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"အနှစ်သက်ဆုံးများထဲမှာ ထုတ်လိုက်ပါပြီ"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"နောက်ပြန်လုပ်ပါ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> ကိုခေါ်ပါ"</string>
-    <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"လိပ်စာများထဲသို့ ထည့်ပါ"</string>
+    <!-- no translation found for search_shortcut_create_new_contact (1679917465521554093) -->
+    <skip />
+    <!-- no translation found for search_shortcut_add_to_existing_contact (4403132207405813444) -->
+    <skip />
+    <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"စာတို ပို့ရန်"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ဗီဒီယို ခေါ်ဆိုမှု ပြုလုပ်ရန်"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"ခေါ်ဆိုမှု မှတ်တမ်း အပြည့်ကို ကြည့်ရန်"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"လွတ်သွားသောဖုန်း <xliff:g id="NUMBER">%s</xliff:g> ခါ"</string>

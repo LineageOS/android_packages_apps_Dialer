@@ -21,7 +21,6 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Samtalshistorik"</string>
-    <string name="menu_sendTextMessage" msgid="8682056943960339239">"Skicka sms"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Ring <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Redigera nummer före samtal"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Lägg till i Kontakter"</string>
@@ -80,7 +79,6 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Visa endast missade samtal"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Visa bara röstmeddelanden"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Visa alla samtal"</string>
-    <string name="add_contact" msgid="4579643070374941999">"Lägg till i Kontakter"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Lägg till en paus på 2 sek."</string>
     <string name="add_wait" msgid="3360818652790319634">"Lägg till väntetid"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Inställningar"</string>
@@ -141,7 +139,9 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"Borttagen från favoriter"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Ångra"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Ring <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Lägg till i Kontakter"</string>
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Skapa ny kontakt"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Lägg till i befintlig kontakt"</string>
+    <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Skicka sms"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Ring videosamtal"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Visa hela samtalshistoriken"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nya missade samtal"</string>

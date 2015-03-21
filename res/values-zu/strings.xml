@@ -21,7 +21,6 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Ifoni"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Ifoni"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Umlando wekholi"</string>
-    <string name="menu_sendTextMessage" msgid="8682056943960339239">"Thumela i-SMS"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Shayela <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Hlela inombolo ngaphambi kokushaya ucingo"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Engeza kothintana nabo"</string>
@@ -80,7 +79,6 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Bonisa okugejiwe kuphela"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Bonisa ama-imeyli ezwi kuphela"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Bonisa zonke izingcingo ezenziwe"</string>
-    <string name="add_contact" msgid="4579643070374941999">"Engeza koxhumana nabo"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Faka ukumisa okwesikhashana kwamasekhondi angu-2"</string>
     <string name="add_wait" msgid="3360818652790319634">"Yengeza ukulinda"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Izilungiselelo"</string>
@@ -141,7 +139,9 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"Kukhishiwe kusuka kuzintandokazi"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Hlehlisa"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Shayela ku-<xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Engeza koxhumana nabo"</string>
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Dala oxhumana naye omusha"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Engeza koxhumana naye okhona"</string>
+    <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Thumela i-SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Yenza ikholi yevidiyo"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Buka wonke umlando wekholi"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> amakholi amasha owaphuthelwe"</string>
