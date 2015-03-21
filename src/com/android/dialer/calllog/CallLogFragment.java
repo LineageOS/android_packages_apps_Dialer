@@ -466,6 +466,9 @@ public class CallLogFragment extends ListFragment
 
             updateOnTransition(true /* onEntry */);
             mRefreshDataRequired = false;
+        } else {
+            // Refresh the display of the existing data to update the timestamp text descriptions.
+            mAdapter.notifyDataSetChanged();
         }
     }
 
