@@ -93,6 +93,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         static final String PROPERTIES = "properties";
     }
 
+    public static final Uri SMART_DIAL_UPDATED_URI =
+            Uri.parse("content://com.android.dialer/smart_dial_updated");
+
     public interface SmartDialDbColumns {
         static final String _ID = "id";
         static final String DATA_ID = "data_id";
@@ -893,6 +896,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             final SharedPreferences.Editor editor = databaseLastUpdateSharedPref.edit();
             editor.putLong(LAST_UPDATED_MILLIS, currentMillis);
             editor.commit();
+
+            // Notify content observers that smart dial database has been updated.
+            mContext.getContentResolver().notifyChange(SMART_DIAL_UPDATED_URI, null, false);
         }
     }
 
