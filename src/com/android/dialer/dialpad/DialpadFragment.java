@@ -2056,12 +2056,14 @@ public class DialpadFragment extends AnalyticsFragment
         PhoneStateListener phoneStateListener = new PhoneStateListener(subId[0]) {
             @Override
             public void onCallStateChanged(int state, String incomingNumber) {
-                if ((state == TelephonyManager.CALL_STATE_IDLE)
+                if ((getActivity() != null) &&
+                        (getTelephonyManager().getCallState() == TelephonyManager.CALL_STATE_IDLE)
                         && isDialpadChooserVisible()) {
                     showDialpadChooser(false);
                 }
-                if (state == TelephonyManager.CALL_STATE_IDLE
-                        && getActivity() != null) {
+                if ((getActivity() != null)
+                        && (getTelephonyManager().getCallState()
+                                == TelephonyManager.CALL_STATE_IDLE)) {
                     ((HostInterface) getActivity()).setConferenceDialButtonVisibility(true);
                 }
             }
