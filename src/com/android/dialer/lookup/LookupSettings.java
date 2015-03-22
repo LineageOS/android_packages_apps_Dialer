@@ -34,6 +34,7 @@ public final class LookupSettings {
 
     /** People lookup providers */
     public static final String PLP_WHITEPAGES = "WhitePages";
+    public static final String PLP_PAGINEBIANCHE = "PagineBianche";
     public static final String PLP_DEFAULT = PLP_WHITEPAGES;
 
     /** Reverse lookup providers */

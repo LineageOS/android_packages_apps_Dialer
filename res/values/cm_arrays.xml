@@ -45,10 +45,12 @@
 
     <string-array name="people_lookup_providers" translatable="false">
         <item>WhitePages</item>
+        <item>PagineBianche</item>
     </string-array>
 
     <string-array name="people_lookup_provider_names" translatable="false">
         <item>WhitePages (US)</item>
+        <item>PagineBianche (IT)</item>
     </string-array>
 
     <string-array name="reverse_lookup_providers" translatable="false">

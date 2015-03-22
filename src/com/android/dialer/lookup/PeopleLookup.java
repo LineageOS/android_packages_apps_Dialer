@@ -18,6 +18,7 @@ package com.android.dialer.lookup;
 
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.lookup.whitepages.WhitePagesPeopleLookup;
+import com.android.dialer.lookup.paginebianche.PagineBianchePeopleLookup;
 
 import android.content.Context;
 import android.util.Log;
@@ -35,6 +36,8 @@ public abstract class PeopleLookup {
 
             if (provider.equals(LookupSettings.PLP_WHITEPAGES)) {
                 INSTANCE = new WhitePagesPeopleLookup(context);
+            } else if (provider.equals(LookupSettings.PLP_PAGINEBIANCHE)) {
+                INSTANCE = new PagineBianchePeopleLookup(context);
             }
         }
 
@@ -44,6 +47,9 @@ public abstract class PeopleLookup {
     private static boolean isInstance(String provider) {
         if (provider.equals(LookupSettings.PLP_WHITEPAGES)
                 && INSTANCE instanceof WhitePagesPeopleLookup) {
+            return true;
+        } else if (provider.equals(LookupSettings.PLP_PAGINEBIANCHE)
+                && INSTANCE instanceof PagineBianchePeopleLookup) {
             return true;
         } else {
             return false;
