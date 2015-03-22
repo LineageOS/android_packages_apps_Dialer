@@ -79,6 +79,7 @@
   <string name="no">Nee</string>
   <string name="incall_vibration_category_title">Trillen tijdens bellen</string>
   <string name="incall_vibrate_outgoing_title">Trillen bij aannemen</string>
+  <string name="vibrate_call_waiting">Trillen bij wachten</string>
   <string name="incall_vibrate_hangup_title">Trillen bij ophangen</string>
   <string name="incall_vibrate_45_title">Elke minuut trillen</string>
   <string name="incall_vibrate_45_summary">Elke 45<SUP>e</SUP> seconde van een minuut trillen bij uitgaande gesprekken</string>

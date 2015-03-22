@@ -79,6 +79,7 @@
   <string name="no">Nee</string>
   <string name="incall_vibration_category_title">Vibreer In-oproep</string>
   <string name="incall_vibrate_outgoing_title">Vibreer op antwoord</string>
+  <string name="vibrate_call_waiting">Vibreer op oproep wag</string>
   <string name="incall_vibrate_hangup_title">Vibreer op oproep beëindiging</string>
   <string name="incall_vibrate_45_title">Vibreer elke minuut</string>
   <string name="incall_vibrate_45_summary">Vibreer op die 45 sekonde merk van elke minuut tydens uitgaande oproepe</string>

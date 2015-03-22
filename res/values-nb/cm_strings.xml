@@ -79,6 +79,7 @@
   <string name="no">Nei</string>
   <string name="incall_vibration_category_title">Vibrasjon under samtalen</string>
   <string name="incall_vibrate_outgoing_title">Vibrere på svar</string>
+  <string name="vibrate_call_waiting">Vibrere på samtale venter</string>
   <string name="incall_vibrate_hangup_title">Vibrere på legg på</string>
   <string name="incall_vibrate_45_title">Vibrere hvert minutt</string>
   <string name="incall_vibrate_45_summary">Vibrerer på 45 sekunders tiden for å markere hvert minutt under utgående samtale</string>

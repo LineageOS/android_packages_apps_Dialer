@@ -79,6 +79,7 @@
   <string name="no">Nem</string>
   <string name="incall_vibration_category_title">Hívás közbeni rezgés</string>
   <string name="incall_vibrate_outgoing_title">Válaszkor rezeg</string>
+  <string name="vibrate_call_waiting">Hívásvárakoztatáskor rezeg</string>
   <string name="incall_vibrate_hangup_title">Bontáskor rezeg</string>
   <string name="incall_vibrate_45_title">Percenként rezeg</string>
   <string name="incall_vibrate_45_summary">Minden 45. másodpercben rezeg a kimenő hívások során</string>

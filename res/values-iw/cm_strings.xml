@@ -20,15 +20,18 @@
   <string name="people">אנשים</string>
   <string name="lookup_settings_label">חיפוש מספר טלפון</string>
   <string name="lookup_settings_description">חיפוש מספרי טלפון לא ידועים</string>
+  <string name="enable_forward_lookup_summary">הצג מקומות סמוכים בעת חיפוש בחייגן</string>
   <string name="enable_people_lookup_title">חיפוש אנשים</string>
   <string name="enable_people_lookup_summary">הצג תוצאות מהרשת עבור אנשים בעת חיפוש בחייגן</string>
   <string name="enable_reverse_lookup_summary">חפש מידע אודות האדם או המקום עבור מספרים לא ידועים בשיחות נכנסות</string>
   <string name="reverse_lookup_provider_title">ספק שיחה חכמה מזוהה</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+  <string name="preference_category_t9_dialpad_search">חיפוש בעזרת לוח מקשי אותיות T9</string>
   <string name="t9_search_input_locale">שפת הקלט של חיפוש T9</string>
   <string name="t9_search_input_locale_default">ברירת מחדל</string>
   <string name="call_log_stats_title">סטטיסטיקה</string>
   <string name="callStatsDetailTitle">פרטים של סטטיסטיקת שיחות</string>
+  <string name="call_stats">סטטיסטיקת שיחות</string>
   <string name="call_stats_refresh">רענן</string>
   <string name="activity_title_call_stats">סטטיסטיקת שיחות</string>
   <string name="call_stats_nav_all">הכל</string>
@@ -74,6 +77,7 @@
   <string name="incall_vibrate_hangup_title">רטט בניתוק השיחה</string>
   <string name="incall_vibrate_45_title">רטט בכל דקה</string>
   <string name="incall_vibrate_45_summary">רטט בכל 45 שניות של כל דקה במהלך שיחה יוצאת</string>
+  <string name="detailed_incall_info_summary">הצג פרטים נוספים אודות המתקשר במסך השיחות הנכנסות</string>
   <string name="video_call">שיחת וידאו</string>
   <string name="call_duration_active">זמן שיחה פעילה:</string>
   <string name="call_duration_call_out">משך השיחה:</string>

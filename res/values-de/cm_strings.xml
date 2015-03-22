@@ -79,6 +79,7 @@
   <string name="no">Nein</string>
   <string name="incall_vibration_category_title">Vibration während eines Anrufes</string>
   <string name="incall_vibrate_outgoing_title">Bei Annahme vibrieren</string>
+  <string name="vibrate_call_waiting">Beim Anklopfen vibrieren</string>
   <string name="incall_vibrate_hangup_title">Beim Auflegen vibrieren</string>
   <string name="incall_vibrate_45_title">Jede Minute vibrieren</string>
   <string name="incall_vibrate_45_summary">Während ausgehender Anrufe 15 Sekunden vor dem Ende jeder vollen Minute vibrieren</string>
