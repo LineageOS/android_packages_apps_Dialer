@@ -79,6 +79,7 @@
   <string name="no">Ne</string>
   <string name="incall_vibration_category_title">Vibrace příchozího hovoru</string>
   <string name="incall_vibrate_outgoing_title">Vibrovat při přijmutí hovoru</string>
+  <string name="vibrate_call_waiting">Vibrovat při čekajícím hovoru</string>
   <string name="incall_vibrate_hangup_title">Vibrovat při zavěšení</string>
   <string name="incall_vibrate_45_title">Vibrovat každou minutu</string>
   <string name="incall_vibrate_45_summary">Vibrovat každou 45. sekundu každé minuty při odchozím volání</string>
