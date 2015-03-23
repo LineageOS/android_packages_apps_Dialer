@@ -163,7 +163,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
             default:
                 throw new IllegalArgumentException("Invalid shortcut type");
         }
-        v.setDrawableResource(R.drawable.search_shortcut_background, drawableId);
+        v.setDrawableResource(drawableId);
         v.setDisplayName(text);
         v.setPhotoPosition(super.getPhotoPosition());
         v.setAdjustSelectionBoundsEnabled(false);
