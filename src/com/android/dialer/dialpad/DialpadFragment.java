@@ -1190,7 +1190,7 @@ public class DialpadFragment extends AnalyticsFragment
     private void ipCallBySlot(int slotId) {
         String prefix = MoreContactUtils.getIPCallPrefix(mContext, slotId);
         if (!TextUtils.isEmpty(prefix)) {
-            long[] subId = SubscriptionManager.getSubId(slotId);
+            int[] subId = SubscriptionManager.getSubId(slotId);
             if (subId != null && subId.length >= 1) {
                 ComponentName serviceName =
                         new ComponentName("com.android.phone",

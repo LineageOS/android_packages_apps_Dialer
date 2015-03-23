@@ -87,24 +87,6 @@ public class CallLogActivity extends AnalyticsActivity implements
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            final CallLogFragment fragment =
-                    (CallLogFragment) super.instantiateItem(container, position);
-            switch (position) {
-                case TAB_INDEX_ALL:
-                    mAllCallsFragment = fragment;
-                    break;
-                case TAB_INDEX_MISSED:
-                    mMissedCallsFragment = fragment;
-                    break;
-                case TAB_INDEX_VOICEMAIL:
-                    mVoicemailFragment = fragment;
-                    break;
-            }
-            return fragment;
-        }
-
-        @Override
         public CharSequence getPageTitle(int position) {
             return mTabTitles[position];
         }

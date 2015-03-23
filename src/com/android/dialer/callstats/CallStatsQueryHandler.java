@@ -55,7 +55,7 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
     /**
      * To specify all slots.
      */
-    public static final int CALL_SUB_ALL = -1;
+    public static final int CALL_SIM_ALL = -1;
 
     private static final String TAG = "CallStatsQueryHandler";
 
@@ -124,14 +124,14 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
             selection.append(String.format("(%s < ?)", Calls.DATE));
             selectionArgs.add(String.valueOf(to));
         }
-        if (slotId > CALL_SUB_ALL) {
-            long[] subId = SubscriptionManager.getSubId(slotId);
+        if (slotId > CALL_SIM_ALL) {
+            int[] subId = SubscriptionManager.getSubId(slotId);
             if (subId != null && subId.length >= 1) {
                 if (selection.length() > 0) {
                     selection.append(" AND ");
                 }
                 selection.append(String.format("(%s = ?)", Calls.PHONE_ACCOUNT_ID));
-                selectionArgs.add(Long.toString(subId[0]));
+                selectionArgs.add(Integer.toString(subId[0]));
             }
         }
 

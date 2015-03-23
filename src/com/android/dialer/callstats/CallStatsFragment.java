@@ -69,7 +69,7 @@ public class CallStatsFragment extends ListFragment implements
     private Spinner mFilterStatusSpinnerView;
 
     // Default to all slots.
-    private int mCallSubFilter = CallStatsQueryHandler.CALL_SUB_ALL;
+    private int mCallSubFilter = CallStatsQueryHandler.CALL_SIM_ALL;
 
     private TextView mSumHeaderView;
     private TextView mDateFilterView;

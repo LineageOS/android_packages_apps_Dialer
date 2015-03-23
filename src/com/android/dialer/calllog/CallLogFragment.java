@@ -413,7 +413,7 @@ public class CallLogFragment extends AnalyticsListFragment
 
     @Override
     public void fetchCalls() {
-        fetchCalls(-1, -1, CallLogQueryHandler.CALL_SUB_ALL);
+        fetchCalls(-1, -1, CallLogQueryHandler.CALL_SIM_ALL);
     }
 
     protected void fetchCalls(long filterFromDate, long filterToDate, int subId) {

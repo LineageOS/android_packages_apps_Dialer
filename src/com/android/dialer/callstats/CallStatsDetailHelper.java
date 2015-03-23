@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -61,7 +62,8 @@ public class CallStatsDetailHelper {
         final CharSequence numberText;
         final CharSequence labelText;
         final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(
-                details.number, details.numberPresentation, details.formattedNumber);
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID, details.number,
+                details.numberPresentation, details.formattedNumber);
 
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;

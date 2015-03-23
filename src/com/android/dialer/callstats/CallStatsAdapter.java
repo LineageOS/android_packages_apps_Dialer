@@ -20,6 +20,7 @@ package com.android.dialer.callstats;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -220,7 +221,8 @@ class CallStatsAdapter extends ArrayAdapter<CallStatsDetails>
 
         String nameForDefaultImage = null;
         if (TextUtils.isEmpty(details.name)) {
-            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(details.number,
+            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID, details.number,
                     details.numberPresentation, details.formattedNumber).toString();
         } else {
             nameForDefaultImage = details.name;

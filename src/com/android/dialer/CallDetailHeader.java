@@ -86,6 +86,7 @@ public class CallDetailHeader {
         CharSequence getFormattedNumber();
         Uri getContactUri();
         Uri getPhotoUri();
+        int getAccountId();
         CharSequence getAccountLabel();
         CharSequence getGeocode();
     }
@@ -112,7 +113,7 @@ public class CallDetailHeader {
         final CharSequence dataAccount = data.getAccountLabel();
         final CharSequence callLocationOrType = getNumberTypeOrLocation(data);
 
-        final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(
+        final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(data.getAccountId(),
                 dataNumber, data.getNumberPresentation(), data.getFormattedNumber());
         final String displayNumberStr = mBidiFormatter.unicodeWrap(
                 displayNumber.toString(), TextDirectionHeuristics.LTR);
@@ -172,7 +173,8 @@ public class CallDetailHeader {
 
         String nameForDefaultImage;
         if (TextUtils.isEmpty(data.getName())) {
-            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(data.getNumber(),
+            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(
+                    data.getAccountId(), data.getNumber(),
                     data.getNumberPresentation(), data.getFormattedNumber()).toString();
         } else {
             nameForDefaultImage = data.getName().toString();

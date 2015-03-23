@@ -164,7 +164,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     /** Fetches the list of calls in the call log. */
     private void fetchCalls(int token, int callType, boolean newOnly,
                             long olderThan, long newerThan) {
-        fetchCalls(token, callType, newOnly, olderThan, newerThan, CALL_SUB_ALL);
+        fetchCalls(token, callType, newOnly, olderThan, newerThan, CALL_SIM_ALL);
     }
 
     private void fetchCalls(int token, int callType, boolean newOnly,

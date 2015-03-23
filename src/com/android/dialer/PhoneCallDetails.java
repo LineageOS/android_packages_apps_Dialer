@@ -139,10 +139,10 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
             int[] callTypes, long date, long duration, CharSequence name,
             int numberType, CharSequence numberLabel, Uri contactUri,
             Uri photoUri, int sourceType, String accountLabel, Drawable accountIcon, int features,
-            Long dataUsage, String transcription) {
+            Long dataUsage, String transcription, int accountId) {
        this(number, numberPresentation, formattedNumber, countryIso, geocode, callTypes,
                date, duration, name, numberType, numberLabel, contactUri, photoUri, sourceType,
-               accountLabel, accountIcon, features, dataUsage, transcription, DEFAULT_PHONE_ID,
+               accountLabel, accountIcon, features, dataUsage, transcription, accountId,
                Calls.DURATION_TYPE_ACTIVE);
     }
 
@@ -207,6 +207,10 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
     @Override
     public Uri getPhotoUri() {
         return photoUri;
+    }
+    @Override
+    public int getAccountId() {
+        return accountId;
     }
     @Override
     public CharSequence getAccountLabel() {

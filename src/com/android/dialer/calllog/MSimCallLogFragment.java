@@ -176,14 +176,14 @@ public class MSimCallLogFragment extends CallLogFragment
             // Update the sub filter's content.
             ArrayAdapter<SpinnerContent> filterSlotAdapter = new ArrayAdapter<SpinnerContent>(
                     this.getActivity(), R.layout.call_log_spinner_item,
-                    SpinnerContent.setupSlotFilterContent(getActivity()));
+                    SpinnerContent.setupSubFilterContent(getActivity()));
 
             if (filterSlotAdapter.getCount() <= 1) {
                 mFilterSlotSpinnerView.setVisibility(View.GONE);
             } else {
                 mCallSlotFilter = getSelectedSlot();
                 mFilterSlotSpinnerView.setAdapter(filterSlotAdapter);
-                mFilterSlotSpinnerView.setOnItemSelectedListener(mSlotSelectedListener);
+                mFilterSlotSpinnerView.setOnItemSelectedListener(mSubSelectedListener);
                 SpinnerContent.setSpinnerContentValue(mFilterSlotSpinnerView, mCallSlotFilter);
             }
         }

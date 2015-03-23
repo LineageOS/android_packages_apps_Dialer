@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.CallLog.Calls;
+import android.telephony.SubscriptionManager;
 import android.util.Log;
 
 import com.android.dialer.CallDetailHeader;
@@ -95,6 +96,10 @@ public class CallStatsDetails implements CallDetailHeader.Data, Parcelable {
     @Override
     public Uri getPhotoUri() {
         return photoUri;
+    }
+    @Override
+    public int getAccountId() {
+        return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
     @Override
     public CharSequence getAccountLabel() {
