@@ -692,7 +692,10 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
             mDialpadFragment.getView().startAnimation(show ? mSlideIn : mSlideOut);
         }
 
-        InCallPresenter.getInstance().getProximitySensor().onDialpadVisible(show);
+        final ProximitySensor sensor = InCallPresenter.getInstance().getProximitySensor();
+        if (sensor != null) {
+            sensor.onDialpadVisible(show);
+        }
     }
 
     public boolean isDialpadVisible() {
