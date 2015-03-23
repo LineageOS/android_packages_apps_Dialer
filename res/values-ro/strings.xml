@@ -140,10 +140,8 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"S-a eliminat din preferate"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Anulați"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Apelați <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <!-- no translation found for search_shortcut_create_new_contact (1679917465521554093) -->
-    <skip />
-    <!-- no translation found for search_shortcut_add_to_existing_contact (4403132207405813444) -->
-    <skip />
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Creați o persoană de contact nouă"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Adăugați la o persoană de contact"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Trimiteți SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Inițiați un apel video"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Vedeți istoricul complet al apelurilor"</string>

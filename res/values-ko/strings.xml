@@ -139,10 +139,8 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"즐겨찾기에서 삭제됨"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"실행취소"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g>에 전화"</string>
-    <!-- no translation found for search_shortcut_create_new_contact (1679917465521554093) -->
-    <skip />
-    <!-- no translation found for search_shortcut_add_to_existing_contact (4403132207405813444) -->
-    <skip />
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"새 연락처 만들기"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"기존 연락처에 추가"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS 보내기"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"화상 통화하기"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"전체 통화 기록 조회"</string>

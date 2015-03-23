@@ -139,10 +139,8 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"Inalis sa mga paborito"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"I-undo"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Tumawag sa <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <!-- no translation found for search_shortcut_create_new_contact (1679917465521554093) -->
-    <skip />
-    <!-- no translation found for search_shortcut_add_to_existing_contact (4403132207405813444) -->
-    <skip />
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Gumawa ng bagong contact"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Idagdag sa umiiral nang contact"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Magpadala ng SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Gumawa ng video call"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Tingnan ang buong kasaysayan ng tawag"</string>

@@ -141,10 +141,8 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"Odebráno z oblíbených"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Vrátit zpět"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Zavolat na číslo <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <!-- no translation found for search_shortcut_create_new_contact (1679917465521554093) -->
-    <skip />
-    <!-- no translation found for search_shortcut_add_to_existing_contact (4403132207405813444) -->
-    <skip />
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Vytvořit nový kontakt"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Přidat k existujícímu kontaktu"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Odeslat SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Uskutečnit videohovor"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Zobrazení celé historie volání"</string>

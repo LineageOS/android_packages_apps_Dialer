@@ -139,10 +139,8 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"အနှစ်သက်ဆုံးများထဲမှာ ထုတ်လိုက်ပါပြီ"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"နောက်ပြန်လုပ်ပါ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> ကိုခေါ်ပါ"</string>
-    <!-- no translation found for search_shortcut_create_new_contact (1679917465521554093) -->
-    <skip />
-    <!-- no translation found for search_shortcut_add_to_existing_contact (4403132207405813444) -->
-    <skip />
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"အဆက်အသွယ် အသစ် ဖန်တီးရန်"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"လက်ရှိ အဆက်အသွယ်တွင်း ထည့်ရန်"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"စာတို ပို့ရန်"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ဗီဒီယို ခေါ်ဆိုမှု ပြုလုပ်ရန်"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"ခေါ်ဆိုမှု မှတ်တမ်း အပြည့်ကို ကြည့်ရန်"</string>

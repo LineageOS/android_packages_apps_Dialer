@@ -143,8 +143,7 @@
     <skip />
     <!-- no translation found for search_shortcut_add_to_existing_contact (4403132207405813444) -->
     <skip />
-    <!-- no translation found for search_shortcut_send_sms_message (2569304043345025525) -->
-    <skip />
+    <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"发送短信"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"发起视频通话"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"查看全部通话记录"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>个新的未接电话"</string>
