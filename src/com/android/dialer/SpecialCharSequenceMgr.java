@@ -33,6 +33,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -310,13 +311,16 @@ public class SpecialCharSequenceMgr {
 
             List<String> deviceIds = new ArrayList<String>();
             for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
-                deviceIds.add(telephonyManager.getDeviceId(slot));
+                String deviceId = telephonyManager.getDeviceId(slot);
+                if (!TextUtils.isEmpty(deviceId)) {
+                    deviceIds.add(deviceId);
+                }
             }
 
             AlertDialog alert = new AlertDialog.Builder(context)
                     .setTitle(labelResId)
                     .setItems(deviceIds.toArray(new String[deviceIds.size()]), null)
-                    .setPositiveButton(R.string.ok, null)
+                    .setPositiveButton(android.R.string.ok, null)
                     .setCancelable(false)
                     .show();
             return true;
