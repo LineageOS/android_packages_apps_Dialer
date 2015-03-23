@@ -57,7 +57,6 @@ import java.util.List;
  */
 public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPresenter.CallCardUi>
         implements CallCardPresenter.CallCardUi {
-
     private AnimatorSet mAnimatorSet;
     private int mShrinkAnimationDuration;
     private int mFabNormalDiameter;
@@ -360,7 +359,17 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         if (mIsLandscape) {
             return getView().getWidth() - mPrimaryCallCardContainer.getWidth();
         } else {
-            return getView().getHeight() - mPrimaryCallCardContainer.getHeight();
+            final int callCardHeight;
+            // Retrieve the actual height of the call card, independent of whether or not the
+            // outgoing call animation is in progress. The animation does not run in landscape mode
+            // so this only needs to be done for portrait.
+            if (mPrimaryCallCardContainer.getTag(R.id.view_tag_callcard_actual_height) != null) {
+                callCardHeight = (int) mPrimaryCallCardContainer.getTag(
+                        R.id.view_tag_callcard_actual_height);
+            } else {
+                callCardHeight = mPrimaryCallCardContainer.getHeight();
+            }
+            return getView().getHeight() - callCardHeight;
         }
     }
 
@@ -856,6 +865,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
                 // Prepare the state of views before the slide animation
                 final int originalHeight = mPrimaryCallCardContainer.getHeight();
+                mPrimaryCallCardContainer.setTag(R.id.view_tag_callcard_actual_height,
+                        originalHeight);
                 mPrimaryCallCardContainer.setBottom(parent.getHeight());
 
                 // Set up FAB.
@@ -873,6 +884,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 animator.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
+                        mPrimaryCallCardContainer.setTag(R.id.view_tag_callcard_actual_height,
+                                null);
                         setViewStatePostAnimation(listener);
                     }
                 });

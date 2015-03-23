@@ -16,4 +16,5 @@
 
 <resources>
     <item type="id" name="fadeState" />
+    <item type="id" name="view_tag_callcard_actual_height" />
 </resources>
