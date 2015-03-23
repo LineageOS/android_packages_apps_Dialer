@@ -75,7 +75,6 @@ public class PhoneNumberDisplayHelper {
      */
     public CharSequence getDisplayNumber(PhoneAccountHandle accountHandle, CharSequence number,
             int presentation, CharSequence formattedNumber) {
-
         final CharSequence displayName = getDisplayName(accountHandle, number, presentation);
         if (!TextUtils.isEmpty(displayName)) {
             return displayName;

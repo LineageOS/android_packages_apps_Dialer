@@ -367,7 +367,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                 // We know that all calls are from the same number and the same contact, so pick the
                 // first.
                 PhoneCallDetails firstDetails = details[0];
-                mNumber = firstDetails.number.toString();
+                mNumber = TextUtils.isEmpty(firstDetails.number) ?
+                        null : firstDetails.number.toString();
                 final int numberPresentation = firstDetails.numberPresentation;
                 final Uri contactUri = firstDetails.contactUri;
                 final Uri photoUri = firstDetails.photoUri;
