@@ -347,28 +347,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
 
         final View view = inflater.inflate(R.layout.video_call_fragment, container, false);
 
-        // Attempt to center the incoming video view, if it is in the layout.
-        final ViewTreeObserver observer = view.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                // Check if the layout includes the incoming video surface -- this will only be the
-                // case for a video call.
-                View displayVideo = view.findViewById(R.id.incomingVideo);
-                if (displayVideo != null) {
-                    centerDisplayView(displayVideo);
-                }
-
-                mIsLayoutComplete = true;
-
-                // Remove the listener so we don't continually re-layout.
-                ViewTreeObserver observer = view.getViewTreeObserver();
-                if (observer.isAlive()) {
-                    observer.removeOnGlobalLayoutListener(this);
-                }
-            }
-        });
-
         return view;
     }
 
@@ -387,7 +365,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         // In a right-to-left locale, the space for the video view is to the left of the call card
         // so we need to translate it in the -X direction.
         final boolean isLayoutRtl = InCallPresenter.isRtl();
-
         float spaceBesideCallCard = InCallPresenter.getInstance().getSpaceBesideCallCard();
         if (mIsLandscape) {
             float videoViewTranslation = displayVideo.getWidth() / 2
@@ -576,6 +553,27 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
                 sPreviewSurface.recreateView((TextureView) mVideoViews.findViewById(
                         R.id.previewVideo));
             }
+
+            // Attempt to center the incoming video view, if it is in the layout.
+            final ViewTreeObserver observer = mVideoViews.getViewTreeObserver();
+            observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    // Check if the layout includes the incoming video surface -- this will only be the
+                    // case for a video call.
+                    View displayVideo = mVideoViews.findViewById(R.id.incomingVideo);
+                    if (displayVideo != null) {
+                        centerDisplayView(displayVideo);
+                    }
+                    mIsLayoutComplete = true;
+
+                    // Remove the listener so we don't continually re-layout.
+                    ViewTreeObserver observer = mVideoViews.getViewTreeObserver();
+                    if (observer.isAlive()) {
+                        observer.removeOnGlobalLayoutListener(this);
+                    }
+                }
+            });
         }
     }
 
