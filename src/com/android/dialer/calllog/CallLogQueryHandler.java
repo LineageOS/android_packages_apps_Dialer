@@ -129,9 +129,9 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, 0, newerThan);
     }
 
-    public void fetchCalls(int callType, long newerThan, int slot) {
+    public void fetchCalls(int callType, long newerThan, int slotId) {
         cancelFetch();
-        fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, 0, newerThan, slot);
+        fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, 0, newerThan, slotId);
     }
 
     public void fetchCalls(int callType) {
@@ -152,8 +152,8 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
                 Calls.DEFAULT_SORT_ORDER);
     }
 
-    public void fetchCallsInDateRange(int callType, long fromDate, long toDate, int subId) {
-        fetchCalls(QUERY_CALLLOG_TOKEN, callType, false, toDate, fromDate, subId);
+    public void fetchCallsInDateRange(int callType, long fromDate, long toDate, int slotId) {
+        fetchCalls(QUERY_CALLLOG_TOKEN, callType, false, toDate, fromDate, slotId);
     }
 
     public void fetchVoicemailStatus() {
