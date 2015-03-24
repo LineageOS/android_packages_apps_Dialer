@@ -90,7 +90,10 @@ public class SmartDialNameMatcher {
      * @return Phone number consisting of digits from 0-9
      */
     public static String normalizeNumber(String number, SmartDialMap map) {
-        return normalizeNumber(number, 0, map);
+        if (map != null) {
+            return normalizeNumber(number, 0, map);
+        }
+        return number;
     }
 
     /**
