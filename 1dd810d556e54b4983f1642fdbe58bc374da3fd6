@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ac665da_3958a9fa",
+        "filename": "src/com/android/dialer/dialpad/SmartDialNameMatcher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 3134
+      },
+      "writtenOn": "2015-03-25T06:19:53Z",
+      "side": 1,
+      "message": "We should handle the null check in the normalizeNumber(String, int, SmartDialMap) method, rather than here. That fixes the both methods, not only one",
+      "revId": "1dd810d556e54b4983f1642fdbe58bc374da3fd6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
