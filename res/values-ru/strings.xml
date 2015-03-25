@@ -141,10 +141,8 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"Контакт удален из избранных"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Отмена"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Позвонить: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <!-- no translation found for search_shortcut_create_new_contact (1679917465521554093) -->
-    <skip />
-    <!-- no translation found for search_shortcut_add_to_existing_contact (4403132207405813444) -->
-    <skip />
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Новый контакт"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Добавить в контакты"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Отправить SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Начать видеовстречу"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Посмотреть весь журнал звонков"</string>
