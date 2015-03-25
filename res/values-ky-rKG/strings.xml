@@ -21,26 +21,22 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Телефон"</string>
     <!-- no translation found for dialerIconLabel (6500826552823403796) -->
     <skip />
-    <!-- no translation found for recentCallsIconLabel (1419116422359067949) -->
-    <skip />
-    <!-- no translation found for menu_sendTextMessage (6937343460284499306) -->
-    <skip />
+    <string name="recentCallsIconLabel" msgid="2639489159797075507">"Чалуулар таржымалы"</string>
+    <string name="menu_sendTextMessage" msgid="8682056943960339239">"SMS жөнөтүү"</string>
     <!-- no translation found for recentCalls_callNumber (1756372533999226126) -->
     <skip />
     <!-- no translation found for recentCalls_editNumberBeforeCall (7756171675833267857) -->
     <skip />
     <!-- no translation found for recentCalls_addToContact (1429899535546487008) -->
     <skip />
-    <!-- no translation found for recentCalls_removeFromRecentList (401662244636511330) -->
-    <skip />
-    <!-- no translation found for recentCalls_deleteAll (6352364392762163704) -->
-    <skip />
+    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Чалуулар таржымалынан жок кылуу"</string>
+    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Чалуулар таржымалын тазалоо"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Үнкатты жок кылуу"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Үнкатты бөлүшүү"</string>
-    <string name="recentCalls_empty" msgid="7711926651216108723">"Чалуулар таржымалында эч нерсе жок."</string>
-    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Чалуулар тизмеси тазалансынбы?"</string>
-    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Сиздин бардык чалуу жазууларыңыз жок кылынат."</string>
-    <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Чалуулар тизмеси тазаланууда…"</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"Чалуулар жок"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Чалуулар таржымалы тазалансынбы?"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Ушуну менен бул таржымалдагы бардык чалуулар жок болот"</string>
+    <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Чалуулар таржымалы тазаланууда…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="1746619685488504230">"Үнкат"</item>
     <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> Үнкат"</item>
@@ -48,18 +44,18 @@
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Угуу"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> жаңы үнкат калтырды"</string>
-    <string name="voicemail_playback_error" msgid="1811242131549854624">"Үнкатты ойното алган жок."</string>
+    <string name="voicemail_playback_error" msgid="3356071912353297599">"Үн почтасы ойнолгон жок"</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"Топтолууда…"</string>
-    <string name="voicemail_fetching_content" msgid="877911315738258780">"Үнкат алынууда…"</string>
-    <string name="voicemail_fetching_timout" msgid="6691792377574905201">"Үнкатты алуу мүмкүн болбоду."</string>
+    <string name="voicemail_fetching_content" msgid="1287895365599580842">"Үн почтасы жүктөлүүдө…"</string>
+    <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Үн почтасы жүктөлгөн жок"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Үнкат чалуулары"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Кириш чалуулар"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Чыккан чалуулар"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Өткөзүлгөн чалуулар гана"</string>
-    <string name="voicemail_status_voicemail_not_available" msgid="3021980206152528883">"Үнкат серверине туташа албай жатат."</string>
-    <string name="voicemail_status_messages_waiting" msgid="7113421459602803605">"Үнкат серверине туташа албай жатат. Жаңы үнкаттар күтүүдө."</string>
-    <string name="voicemail_status_configure_voicemail" msgid="3738537770636895689">"Үнкат кызматын тууралаңыз."</string>
-    <string name="voicemail_status_audio_not_available" msgid="3369618334553341626">"Аудио жеткиликсиз."</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Үн почтасынын жаңыртуулары жеткиликтүү эмес"</string>
+    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Жаңы үн почтасы күтүүдө. Учурда жүктөлбөй жатат."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Үн почтаңызды орнотуңуз"</string>
+    <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Аудио жеткиликтүү эмес"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Тууралоо"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Үнкатка чалуу"</string>
     <string name="voicemail_speed_slowest" msgid="1733460666177707312">"Эң жай"</string>
@@ -71,30 +67,6 @@
     <string name="sms_disambig_title" msgid="5846266399240630846">"Номур тандоо"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Номур тандаңыз"</string>
     <!-- no translation found for make_primary (5829291915305113983) -->
-    <skip />
-    <!-- no translation found for description_image_button_one (1740638037139856139) -->
-    <skip />
-    <!-- no translation found for description_image_button_two (5882638439003731308) -->
-    <skip />
-    <!-- no translation found for description_image_button_three (8709731759376015180) -->
-    <skip />
-    <!-- no translation found for description_image_button_four (3530239685642246130) -->
-    <skip />
-    <!-- no translation found for description_image_button_five (1182465427501188413) -->
-    <skip />
-    <!-- no translation found for description_image_button_six (2093656269261415475) -->
-    <skip />
-    <!-- no translation found for description_image_button_seven (2450357020447676481) -->
-    <skip />
-    <!-- no translation found for description_image_button_eight (6969435115163287801) -->
-    <skip />
-    <!-- no translation found for description_image_button_nine (7857248695662558323) -->
-    <skip />
-    <!-- no translation found for description_image_button_star (3365919907520767866) -->
-    <skip />
-    <!-- no translation found for description_image_button_zero (4133108949401820710) -->
-    <skip />
-    <!-- no translation found for description_image_button_pound (3039765597595889230) -->
     <skip />
     <!-- no translation found for description_search_button (3660807558587384889) -->
     <skip />
@@ -121,15 +93,13 @@
     <skip />
     <!-- no translation found for add_wait (3360818652790319634) -->
     <skip />
-    <string name="menu_select_account" msgid="5576598753317289565">"Каттоо эсебин тандаңыз"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Жөндөөлөр"</string>
     <!-- no translation found for menu_newContact (1209922412763274638) -->
     <skip />
     <string name="menu_allContacts" msgid="6948308384034051670">"Бардык байланыштар"</string>
     <!-- no translation found for callDetailTitle (5340227785196217938) -->
     <skip />
-    <!-- no translation found for toast_call_detail_error (7200975244804730096) -->
-    <skip />
+    <string name="toast_call_detail_error" msgid="6947041258280380832">"Чоо-жайы жеткиликтүү эмес"</string>
     <!-- no translation found for dialer_useDtmfDialpad (1707548397435075040) -->
     <skip />
     <!-- no translation found for dialer_returnToInCallScreen (3719386377550913067) -->
@@ -156,7 +126,7 @@
     <string name="description_new_voicemail" msgid="2133792360865517746">"Жаңы үнкат."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> чалуу."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Видео чалуу."</string>
-    <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g> SMS жөнөтүү"</string>
+    <string name="description_send_text_message" msgid="3118485319691414221">"<xliff:g id="NAME">%1$s</xliff:g> дегенге SMS жөнөтүү"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Угула элек үнкат"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Үн менен издеп баштоо"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Чалуу <xliff:g id="NUMBER">%s</xliff:g>"</string>
@@ -166,15 +136,9 @@
     <skip />
     <!-- no translation found for private_num (6374339738119166953) -->
     <skip />
-    <!-- no translation found for payphone (4864313342828942922) -->
-    <skip />
-    <!-- no translation found for dialerKeyboardHintText (5401660096579787344) -->
-    <skip />
-    <!-- no translation found for dialerDialpadHintText (5824490365898349041) -->
-    <skip />
-    <!-- no translation found for callDetailsDurationFormat (8157706382818184268) -->
-    <skip />
-    <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Чалуу болгон жок"</string>
+    <string name="payphone" msgid="7726415831153618726">"Таксофон"</string>
+    <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> мүн. <xliff:g id="SECONDS">%s</xliff:g> сек."</string>
+    <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Бул номурга чалуу мүмкүн болбой жатат"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Үнкат орноотуу үчүн Меню &gt; Тууралоолорго кириңиз."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Үнкатты текшерүү үчүн, алгач Учак тартибин өчүрүңүз."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Жүктөлүүдө…"</string>
@@ -186,19 +150,19 @@
     <skip />
     <!-- no translation found for simContacts_title (27341688347689769) -->
     <skip />
-    <string name="add_contact_not_available" msgid="2731922990890769322">"Бул мүмкүнчүлүктү колдонуу үчүн Байланыштар колдонмосун кайра иштетиңиз."</string>
-    <string name="voice_search_not_available" msgid="7580616740587850828">"Үн менен издөө иштебейт."</string>
+    <string name="add_contact_not_available" msgid="5547311613368004859">"Жеткиликтүү байланыштар колдонмосу жок"</string>
+    <string name="voice_search_not_available" msgid="2977719040254285301">"Үн менен издөө жеткиликтүү эмес"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Телефон колдонмосу өчүрүлгөндүктөн, чалуу мүмкүн болбой жатат."</string>
-    <string name="activity_not_available" msgid="8265265380537872585">"Тандалган аракетти аткаруу үчүн талап кылынган колдонмо орнотулган эмес."</string>
-    <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Атын же телефон номурун териңиз"</string>
-    <string name="recentMissed_empty" msgid="4177320482947526015">"Жооп берилбей калган акыркы чалуулар жок."</string>
-    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Акыркы үн каттары жок."</string>
+    <string name="activity_not_available" msgid="2287665636817987623">"Бул түзмөктө ал үчүн колдонмо жок"</string>
+    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Атын же телеф номерин киргизңз"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"Чалуулар жок"</string>
+    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Акыркы үн каттары жок"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Тандамалдарды гана көрсөтүү"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Тарыхы"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Бардыгы"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Өткөзүлгөндөр"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Үнкат"</string>
-    <string name="tab_speed_dial" msgid="7807567599021643864">"Тез терүү"</string>
+    <string name="tab_speed_dial" msgid="7552166276545648893">"Тез терүү"</string>
     <string name="tab_recents" msgid="929949073851377206">"Акыркылар"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Байланыштар"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Тандамалдардан өчүрүлдү"</string>
@@ -208,38 +172,40 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Видео түрүндө чалуу"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Чалуулардын толук таржымалын көрүү"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> жаңы өткөзүлгөн чалуу"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"Ыкчам терүү мүмкүнчүлүгү менен,\nсүйүктүүлөрүңүздү жана көп чалган номерлерди\n бир жолу тийип тересиз."</string>
-    <string name="all_contacts_empty" msgid="4536082452651392894">"Сизде бир да байланыш жок."</string>
-    <string name="contact_tooltip" msgid="7817483485692282287">"Бардык номурларын көрүш үчүн сүрөттүнө тийиңиз же кармап туруп иретин алмаштырыңыз."</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Тез терүү мүмкүнчүлүгү менен, сүйүктүү байланыштарды жана тез-тез чалынган номурларды бир тийип тере аласыз"</string>
+    <string name="all_contacts_empty" msgid="2299508125100209367">"Байланыштар жок"</string>
+    <string name="contact_tooltip" msgid="2019777545923635266">"Бардык номурларды көрүү үчүн сүрөткө тийип коюңуз же иреттештирүү үчүн жана коё бербей басып туруңуз"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Жокко чыгаруу"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Алып салуу"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"БАРДЫК БАЙЛАНЫШТАР"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"КАЙРА ЧАЛУУ"</string>
+    <string name="call_log_action_call" msgid="8187991828921352552">"ЧАЛУУ"</string>
+    <string name="call_log_action_redial" msgid="8159106862639797417">"КАЙРА ТЕРҮҮ"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"ВИДЕО ЧАЛУУ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"УГУУ"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"ЧОО-ЖАЙ"</string>
-    <string name="description_incoming_missed_call" msgid="2610535352863246949">"Жооп берилбей калган чалуулар <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_incoming_answered_call" msgid="7206670204016969740">"Жооп берилген чалуулар <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_outgoing_call" msgid="3964211633673659733">"Төмөнкүгө чалуу <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> кайра чалуу"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"Төмөнкүгө видео чалуу <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
-    <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> үн катын угуу"</string>
-    <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> чалуу чоо-жайы"</string>
-    <string name="toast_entry_removed" msgid="3389119736202317999">"Чалуулар таржымалынан бир чалуу жок кылынган."</string>
-    <string name="toast_caller_id_reported" msgid="1127087402649645557">"Байланышка кабар берилди."</string>
+    <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> дегенден жооп берилбей калган чалуу."</string>
+    <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> дегенден жооп берилген чалуу."</string>
+    <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> дегенге чалуу."</string>
+    <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> боюнча"</string>
+    <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> кайра чалуу"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"Төмөнкүгө видео чалуу <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
+    <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> үн катын угуу"</string>
+    <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> чалуу чоо-жайы"</string>
+    <string name="toast_entry_removed" msgid="8010830299576311534">"Чалуулар таржымалынан жок кылынды"</string>
+    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Номур Google\'га кабарланды"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"КАБАРЛОО"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Бүгүн"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Кечээ"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Мурункураак"</string>
-    <string name="call_detail_list_header" msgid="866455969433213220">"Чалуулар тизмеси"</string>
+    <string name="call_detail_list_header" msgid="3752717059699600861">"Чалуулар тизмеси"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"Катуу сүйлөткүч күйгүзүлгөн."</string>
     <string name="voicemail_speaker_off" msgid="7390530056413093958">"Катуу сүйлөткүч өчүрүлгөн."</string>
     <string name="voicemail_play_faster" msgid="3444751008615323006">"Тезирээк ойнотуу."</string>
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Жайыраак ойнотуу."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Ойнотуп баштоо же бир азга токтотуу"</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="general_settings_label" msgid="4787443826763795004">"Жалпы жөндөөлөр"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"Байланышты көрсөтүү, үндөр жана тез жооптор"</string>
+    <string name="general_settings_label" msgid="5748319557716674189">"Жалпы"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Байланышты көрсөтүү параметрлери"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Добуштар жана дирилдөө"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Телефондун шыңгыры"</string>
@@ -247,6 +213,6 @@
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Тергичтин үндөрү"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"Башка"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Тез жооптор"</string>
-    <string name="call_settings_label" msgid="7416182166943714852">"Чалуу жөндөөлөрү"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"Үн почтасы, чалууну күтүү жана башкалар"</string>
+    <string name="call_settings_label" msgid="313434211353070209">"Чалуулар"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Чалуу каттоо эсептери"</string>
 </resources>

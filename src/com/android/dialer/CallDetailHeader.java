@@ -30,6 +30,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.RawContacts;
 import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
@@ -50,6 +51,7 @@ import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.format.FormatUtils;
 import com.android.contacts.common.util.Constants;
 import com.android.dialer.calllog.ContactInfoHelper;
+import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 
@@ -86,8 +88,7 @@ public class CallDetailHeader {
         CharSequence getFormattedNumber();
         Uri getContactUri();
         Uri getPhotoUri();
-        int getAccountId();
-        CharSequence getAccountLabel();
+        PhoneAccountHandle getAccountHandle();
         CharSequence getGeocode();
     }
 
@@ -107,13 +108,14 @@ public class CallDetailHeader {
 
     public void updateViews(Data data) {
         // Cache the details about the phone number.
-        final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper();
+        final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper(mActivity);
         final CharSequence dataName = data.getName();
         final CharSequence dataNumber = data.getNumber();
-        final CharSequence dataAccount = data.getAccountLabel();
+        final CharSequence dataAccount = PhoneAccountUtils.getAccountLabel(
+                mActivity, data.getAccountHandle());
         final CharSequence callLocationOrType = getNumberTypeOrLocation(data);
 
-        final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(data.getAccountId(),
+        final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(data.getAccountHandle(),
                 dataNumber, data.getNumberPresentation(), data.getFormattedNumber());
         final String displayNumberStr = mBidiFormatter.unicodeWrap(
                 displayNumber.toString(), TextDirectionHeuristics.LTR);
@@ -174,7 +176,7 @@ public class CallDetailHeader {
         String nameForDefaultImage;
         if (TextUtils.isEmpty(data.getName())) {
             nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(
-                    data.getAccountId(), data.getNumber(),
+                    data.getAccountHandle(), data.getNumber(),
                     data.getNumberPresentation(), data.getFormattedNumber()).toString();
         } else {
             nameForDefaultImage = data.getName().toString();

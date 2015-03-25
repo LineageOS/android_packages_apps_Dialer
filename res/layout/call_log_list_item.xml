@@ -14,8 +14,7 @@
      limitations under the License.
 -->
 
-<view xmlns:android="http://schemas.android.com/apk/res/android"
-    class="com.android.dialer.calllog.CallLogListItemView"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/call_log_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -113,15 +112,6 @@
                         android:layout_marginEnd="@dimen/call_log_icon_margin"
                         android:layout_gravity="center_vertical"
                         />
-                    <ImageView
-                        android:id="@+id/call_account_icon"
-                        android:layout_width="@dimen/call_provider_small_icon_size"
-                        android:layout_height="@dimen/call_provider_small_icon_size"
-                        android:layout_marginEnd="@dimen/call_log_icon_margin"
-                        android:layout_gravity="center_vertical"
-                        android:tint="?attr/call_log_secondary_text_color"
-                        android:scaleType="centerInside"
-                        />
                     <TextView
                         android:id="@+id/call_location_and_date"
                         android:layout_width="wrap_content"
@@ -133,6 +123,16 @@
                         android:singleLine="true"
                         />
                 </LinearLayout>
+                <TextView
+                    android:id="@+id/call_account_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/call_log_icon_margin"
+                    android:textColor="?attr/call_log_secondary_text_color"
+                    android:textSize="@dimen/call_log_secondary_text_size"
+                    android:visibility="gone"
+                    android:singleLine="true"
+                    />
             </LinearLayout>
             <ImageView
                 android:id="@+id/call_indicator_icon"
@@ -160,4 +160,4 @@
               android:layout="@layout/call_log_list_item_extra"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"/>
-</view>
+</LinearLayout>

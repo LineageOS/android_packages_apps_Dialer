@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.ContactsContract.PhoneLookup;
+import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -402,14 +403,14 @@ public class CallLogAdapterHelper implements ViewTreeObserver.OnPreDrawListener 
     }
 
 
-    public ContactInfo lookupContact(String number, int numberPresentation,
+    public ContactInfo lookupContact(PhoneAccountHandle accountHandle, String number, int numberPresentation,
             String countryIso, ContactInfo cachedContactInfo) {
         NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
         ExpirableCache.CachedValue<ContactInfo> cachedInfo =
                 mContactInfoCache.getCachedValue(numberCountryIso);
         ContactInfo info = cachedInfo == null ? null : cachedInfo.getValue();
         if (!PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
-                || new PhoneNumberUtilsWrapper().isVoicemailNumber(number)) {
+                || new PhoneNumberUtilsWrapper(mContext).isVoicemailNumber(accountHandle, number)) {
             // If this is a number that cannot be dialed, there is no point in looking up a contact
             // for it.
             info = ContactInfo.EMPTY;

@@ -20,12 +20,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.Fragment;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -83,9 +86,10 @@ import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.SpeedDialListActivity;
 import com.android.dialer.SpeedDialUtils;
 import com.android.dialer.util.DialerUtils;
-import com.android.dialerbind.analytics.AnalyticsFragment;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyProperties;
+import com.android.dialer.calllog.PhoneAccountUtils;
+import com.android.dialer.util.DialerUtils;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
 import com.android.phone.common.animation.AnimUtils;
@@ -96,11 +100,12 @@ import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.List;
 
 /**
  * Fragment that displays a twelve-key phone dialpad.
  */
-public class DialpadFragment extends AnalyticsFragment
+public class DialpadFragment extends Fragment
         implements View.OnClickListener,
         View.OnLongClickListener, View.OnKeyListener,
         AdapterView.OnItemClickListener, TextWatcher,
@@ -248,17 +253,21 @@ public class DialpadFragment extends AnalyticsFragment
 
     private String mCurrentCountryIso;
 
-    private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
+    private CallStateReceiver mCallStateReceiver;
+
+    private class CallStateReceiver extends BroadcastReceiver {
         /**
-         * Listen for phone state changes so that we can take down the
+         * Receive call state changes so that we can take down the
          * "dialpad chooser" if the phone becomes idle while the
          * chooser UI is visible.
          */
         @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
-            // Log.i(TAG, "PhoneStateListener.onCallStateChanged: "
-            //       + state + ", '" + incomingNumber + "'");
-            if ((state == TelephonyManager.CALL_STATE_IDLE) && isDialpadChooserVisible()) {
+        public void onReceive(Context context, Intent intent) {
+            // Log.i(TAG, "CallStateReceiver.onReceive");
+            String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+            if ((TextUtils.equals(state, TelephonyManager.EXTRA_STATE_IDLE) ||
+                    TextUtils.equals(state, TelephonyManager.EXTRA_STATE_OFFHOOK))
+                    && isDialpadChooserVisible()) {
                 // Log.i(TAG, "Call ended with dialpad chooser visible!  Taking it down...");
                 // Note there's a race condition in the UI here: the
                 // dialpad chooser could conceivably disappear (on its
@@ -268,14 +277,14 @@ public class DialpadFragment extends AnalyticsFragment
                 // onscreen, but useless...)
                 showDialpadChooser(false);
             }
-            if (state == TelephonyManager.CALL_STATE_IDLE) {
+            if (TextUtils.equals(state, TelephonyManager.EXTRA_STATE_IDLE)) {
                 final Activity activity = getActivity();
                 if (activity != null) {
                     ((HostInterface) activity).setConferenceDialButtonVisibility(true);
                 }
             }
         }
-    };
+    }
 
     private boolean mWasEmptyBeforeTextChange;
 
@@ -293,13 +302,6 @@ public class DialpadFragment extends AnalyticsFragment
     private ComponentName mSmsPackageComponentName;
 
     private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
-
-    /**
-     * Return an Intent for launching voicemail screen.
-     */
-    private static Intent getVoicemailIntent() {
-        return CallUtil.getCallIntent(Uri.fromParts(PhoneAccount.SCHEME_VOICEMAIL, "", null));
-    }
 
     private TelephonyManager getTelephonyManager() {
         return (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
@@ -330,7 +332,7 @@ public class DialpadFragment extends AnalyticsFragment
 
     @Override
     public void afterTextChanged(Editable input) {
-        // When DTMF dialpad buttons are being pressed, we delay SpecialCharSequencMgr sequence,
+        // When DTMF dialpad buttons are being pressed, we delay SpecialCharSequenceMgr sequence,
         // since some of SpecialCharSequenceMgr's behavior is too abrupt for the "touch-down"
         // behavior.
         if (!mDigitsFilledByIntent &&
@@ -371,6 +373,13 @@ public class DialpadFragment extends AnalyticsFragment
         }
 
         mDialpadSlideInDuration = getResources().getInteger(R.integer.dialpad_slide_in_duration);
+
+        if (mCallStateReceiver == null) {
+            IntentFilter callStateIntentFilter = new IntentFilter(
+                    TelephonyManager.ACTION_PHONE_STATE_CHANGED);
+            mCallStateReceiver = new CallStateReceiver();
+            ((Context) getActivity()).registerReceiver(mCallStateReceiver, callStateIntentFilter);
+        }
     }
 
     @Override
@@ -575,6 +584,14 @@ public class DialpadFragment extends AnalyticsFragment
         mStartedFromNewIntent = value;
     }
 
+    public void clearCallRateInformation() {
+        setCallRateInformation(null, null);
+    }
+
+    public void setCallRateInformation(String countryName, String displayRate) {
+        mDialpadView.setCallRateInformation(countryName, displayRate);
+    }
+
     /**
      * Sets formatted digits to digits field.
      */
@@ -686,33 +703,8 @@ public class DialpadFragment extends AnalyticsFragment
 
         stopWatch.lap("fdin");
 
-        // While we're in the foreground, listen for phone state changes,
-        // purely so that we can take down the "dialpad chooser" if the
-        // phone becomes idle while the chooser UI is visible.
-        getTelephonyManager().listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
-
-        stopWatch.lap("tm");
-
-        // Potentially show hint text in the mDigits field when the user
-        // hasn't typed any digits yet.  (If there's already an active call,
-        // this hint text will remind the user that he's about to add a new
-        // call.)
-        //
-        // TODO: consider adding better UI for the case where *both* lines
-        // are currently in use.  (Right now we let the user try to add
-        // another call, but that call is guaranteed to fail.  Perhaps the
-        // entire dialer UI should be disabled instead.)
-        if (isPhoneInUse()) {
-            final SpannableString hint = new SpannableString(
-                    getActivity().getString(R.string.dialerDialpadHintText));
-            hint.setSpan(new RelativeSizeSpan(0.8f), 0, hint.length(), 0);
-            mDigits.setHint(hint);
-        } else {
-            // Common case; no hint necessary.
-            mDigits.setHint(null);
-
-            // Also, a sanity-check: the "dialpad chooser" UI should NEVER
-            // be visible if the phone is idle!
+        if (!isPhoneInUse()) {
+            // A sanity-check: the "dialpad chooser" UI should not be visible if the phone is idle.
             showDialpadChooser(false);
         }
 
@@ -741,9 +733,6 @@ public class DialpadFragment extends AnalyticsFragment
     @Override
     public void onPause() {
         super.onPause();
-
-        // Stop listening for phone state changes.
-        getTelephonyManager().listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
 
         // Make sure we don't leave this activity with a tone still playing.
         stopTone();
@@ -777,6 +766,12 @@ public class DialpadFragment extends AnalyticsFragment
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(PREF_DIGITS_FILLED_BY_INTENT, mDigitsFilledByIntent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ((Context) getActivity()).unregisterReceiver(mCallStateReceiver);
     }
 
     private void keyPressed(int keyCode) {
@@ -1089,7 +1084,17 @@ public class DialpadFragment extends AnalyticsFragment
                     // We'll try to initiate voicemail and thus we want to remove irrelevant string.
                     removePreviousDigitIfPossible();
 
-                    if (isVoicemailAvailable()) {
+                    List<PhoneAccountHandle> subscriptionAccountHandles =
+                            PhoneAccountUtils.getSubscriptionPhoneAccounts(getActivity());
+                    boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
+                            getTelecomManager().getUserSelectedOutgoingPhoneAccount());
+                    boolean needsAccountDisambiguation = subscriptionAccountHandles.size() > 1
+                            && !hasUserSelectedDefault;
+
+                    if (needsAccountDisambiguation || isVoicemailAvailable()) {
+                        // On a multi-SIM phone, if the user has not selected a default
+                        // subscription, initiate a call to voicemail so they can select an account
+                        // from the "Call with" dialog.
                         callVoicemail();
                     } else if (getActivity() != null) {
                         // Voicemail is unavailable maybe because Airplane mode is turned on.
@@ -1230,7 +1235,7 @@ public class DialpadFragment extends AnalyticsFragment
     }
 
     public void callVoicemail() {
-        DialerUtils.startActivityWithErrorToast(getActivity(), getVoicemailIntent());
+        DialerUtils.startActivityWithErrorToast(getActivity(), CallUtil.getVoicemailIntent());
         hideAndClearDialpad(false);
     }
 
@@ -1486,7 +1491,7 @@ public class DialpadFragment extends AnalyticsFragment
         }
 
         if (enabled) {
-            Log.i(TAG, "Showing dialpad chooser!");
+            Log.d(TAG, "Showing dialpad chooser!");
             if (mDialpadView != null) {
                 mDialpadView.setVisibility(View.GONE);
             }
@@ -1501,7 +1506,7 @@ public class DialpadFragment extends AnalyticsFragment
             }
             mDialpadChooser.setAdapter(mDialpadChooserAdapter);
         } else {
-            Log.i(TAG, "Displaying normal Dialer UI.");
+            Log.d(TAG, "Displaying normal Dialer UI.");
             if (mDialpadView != null) {
                 mDialpadView.setVisibility(View.VISIBLE);
             } else {
@@ -1795,22 +1800,24 @@ public class DialpadFragment extends AnalyticsFragment
     /**
      * Check if voicemail is enabled/accessible.
      *
-     * @return true if voicemail is enabled and accessibly. Note that this can be false
+     * @return true if voicemail is enabled and accessible. Note that this can be false
      * "temporarily" after the app boot.
-     * @see TelephonyManager#getVoiceMailNumber()
+     * @see TelecomManager#hasVoiceMailNumber(PhoneAccountHandle)
      */
     private boolean isVoicemailAvailable() {
-        boolean promptEnabled = SubscriptionManager.isVoicePromptEnabled();
-        if (promptEnabled) {
-            return hasVMNumber();
-        } else {
-            int subId = SubscriptionManager.getDefaultVoiceSubId();
-            try {
-                return getTelephonyManager().getVoiceMailNumber(subId) != null;
-            } catch (SecurityException se) {
-                // Possibly no READ_PHONE_STATE privilege.
-                Log.w(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");
+        try {
+            PhoneAccountHandle defaultUserSelectedAccount =
+                    getTelecomManager().getUserSelectedOutgoingPhoneAccount();
+            if (defaultUserSelectedAccount == null) {
+                // In a single-SIM phone, there is no default outgoing phone account selected by
+                // the user, so just call TelephonyManager#getVoicemailNumber directly.
+                return getTelephonyManager().getVoiceMailNumber() != null;
+            } else {
+                return getTelecomManager().hasVoiceMailNumber(defaultUserSelectedAccount);
             }
+        } catch (SecurityException se) {
+            // Possibly no READ_PHONE_STATE privilege.
+            Log.w(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");
         }
         return false;
     }

@@ -20,19 +20,19 @@
     <string name="applicationLabel" msgid="8490255569343340580">"Πρόγραμμα κλήσης"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Τηλέφωνο"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Τηλέφωνο"</string>
-    <string name="recentCallsIconLabel" msgid="1419116422359067949">"Αρχείο"</string>
-    <string name="menu_sendTextMessage" msgid="6937343460284499306">"Αποστολή μηνύματος κειμένου"</string>
+    <string name="recentCallsIconLabel" msgid="2639489159797075507">"Ιστορικό κλήσεων"</string>
+    <string name="menu_sendTextMessage" msgid="8682056943960339239">"Αποστολή SMS"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Κλήση <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Επεξεργασία αριθμού πριν την κλήση"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Προσθήκη στις επαφές"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Κατάργηση από το αρχείο καταγραφής κλήσεων"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Εκκαθάριση αρχείου καταγραφής κλήσεων"</string>
+    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Διαγραφή από το ιστορικό κλήσεων"</string>
+    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Διαγραφή ιστορικού κλήσεων"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Διαγραφή αυτόματου τηλεφωνητή"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Κοινή χρήση αυτόμ. τηλεφωνητή"</string>
-    <string name="recentCalls_empty" msgid="7711926651216108723">"Το αρχείο καταγραφής κλήσεων είναι κενό."</string>
-    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Εκκαθάριση αρχείου;"</string>
-    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Όλα τα αρχεία κλήσεων θα διαγραφούν."</string>
-    <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Εκκαθάριση αρχ. καταγραφής κλήσεων…"</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"Δεν υπάρχουν κλήσεις"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Διαγραφή ιστορικού κλήσεων;"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Αυτό θα διαγράψει όλες τις κλήσεις από το ιστορικό σας"</string>
+    <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Διαγραφή ιστορικού κλήσεων…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="1746619685488504230">"Αυτόματος τηλεφωνητής"</item>
     <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> μηνύμ. αυτόμ. τηλεφωνητή"</item>
@@ -40,18 +40,18 @@
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Αναπαραγωγή"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Νέα μην. αυτ. τηλεφ. από <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="1811242131549854624">"Δεν αναπαράχθηκαν τα μην. αυτ. τηλεφ."</string>
+    <string name="voicemail_playback_error" msgid="3356071912353297599">"Αδύνατη αναπαραγωγή φωνητικού μηνύματος"</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"Αποθ. στη πρ. μνήμη"</string>
-    <string name="voicemail_fetching_content" msgid="877911315738258780">"Ανάκτηση μην. αυτ. τηελφ."</string>
-    <string name="voicemail_fetching_timout" msgid="6691792377574905201">"Δεν ανακτήθηκαν τα μην. αυτ. τηλεφ."</string>
+    <string name="voicemail_fetching_content" msgid="1287895365599580842">"Φόρτωση φωνητικών μηνυμάτων…"</string>
+    <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Αδύνατη φόρτωση φωνητικών μηνυμάτων"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Μόνο κλήσεις με ηχητικά μηνύματα"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Μόνο εισερχόμενες κλήσεις"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Μόνο εξερχόμενες κλήσεις"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Μόνο αναπάντητες κλήσεις"</string>
-    <string name="voicemail_status_voicemail_not_available" msgid="3021980206152528883">"Αδυναμία σύνδεσης με τον διακομιστή αυτόματου τηλεφωνητή."</string>
-    <string name="voicemail_status_messages_waiting" msgid="7113421459602803605">"Αδύν. η σύνδ. με διακομ. αυτόμ. τηλεφ. Υπάρχ. νέα μηνύματα."</string>
-    <string name="voicemail_status_configure_voicemail" msgid="3738537770636895689">"Ρύθμιση του τηλεφωνητή σας."</string>
-    <string name="voicemail_status_audio_not_available" msgid="3369618334553341626">"Ο ήχος δεν είναι διαθέσιμος."</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Μη διαθέσιμες ενημερώσεις αυτόματου τηλεφωνητή"</string>
+    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Νέο φωνητικό μήνυμα σε αναμονή. Δεν είναι δυνατή η φόρτωση τώρα."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Ρύθμιση του αυτόματου τηλεφωνητή σας"</string>
+    <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Δεν υπάρχει διαθέσιμος ήχος"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Ρύθμιση"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Κλήση αυτόμ. τηλεφ."</string>
     <string name="voicemail_speed_slowest" msgid="1733460666177707312">"Μικρότερη δυνατή ταχύτητα"</string>
@@ -63,18 +63,6 @@
     <string name="sms_disambig_title" msgid="5846266399240630846">"Επιλέξτε αριθμό"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Επιλέξτε αριθμό"</string>
     <string name="make_primary" msgid="5829291915305113983">"Διατήρηση αυτής της ρύθμισης"</string>
-    <string name="description_image_button_one" msgid="1740638037139856139">"ένα"</string>
-    <string name="description_image_button_two" msgid="5882638439003731308">"δύο"</string>
-    <string name="description_image_button_three" msgid="8709731759376015180">"τρία"</string>
-    <string name="description_image_button_four" msgid="3530239685642246130">"τέσσερα"</string>
-    <string name="description_image_button_five" msgid="1182465427501188413">"πέντε"</string>
-    <string name="description_image_button_six" msgid="2093656269261415475">"έξι"</string>
-    <string name="description_image_button_seven" msgid="2450357020447676481">"επτά"</string>
-    <string name="description_image_button_eight" msgid="6969435115163287801">"οχτώ"</string>
-    <string name="description_image_button_nine" msgid="7857248695662558323">"εννιά"</string>
-    <string name="description_image_button_star" msgid="3365919907520767866">"αστέρι"</string>
-    <string name="description_image_button_zero" msgid="4133108949401820710">"μηδέν"</string>
-    <string name="description_image_button_pound" msgid="3039765597595889230">"σύμβολο δίεσης"</string>
     <string name="description_search_button" msgid="3660807558587384889">"αναζήτηση"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"κλήση"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"αριθμός για κλήση"</string>
@@ -95,12 +83,11 @@
     <string name="add_contact" msgid="4579643070374941999">"Προσθήκη στις επαφές"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Προσθήκη παύσης 2 δευτερολέπτων"</string>
     <string name="add_wait" msgid="3360818652790319634">"Προσθήκη αναμονής"</string>
-    <string name="menu_select_account" msgid="5576598753317289565">"Επιλογή λογαριασμού"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Ρυθμίσεις"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Νέα επαφή"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Όλες οι επαφές"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Λεπτομέρειες κλήσης"</string>
-    <string name="toast_call_detail_error" msgid="7200975244804730096">"Δεν είναι δυνατή η ανάγνωση λεπτομερειών της κλήσης που ζητήθηκε."</string>
+    <string name="toast_call_detail_error" msgid="6947041258280380832">"Οι λεπτομέρειες δεν είναι διαθέσιμες"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Χρησιμοποιήστε το πληκτρολόγιο αφής ηχητικών τόνων"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Επιστροφή στην κλήση που βρίσκεται σε εξέλιξη"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Προσθήκη κλήσης"</string>
@@ -119,18 +106,16 @@
     <string name="description_new_voicemail" msgid="2133792360865517746">"Νέο μήνυμα στον αυτόματο τηλεφωνητή."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> κλήσεις."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Βιντεοκλήση."</string>
-    <string name="description_send_text_message" msgid="7803126439934046891">"Αποστολή μηνύματος κειμένου στον χρήστη <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_send_text_message" msgid="3118485319691414221">"Αποστολή SMS στο χρήστη <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Μηνύματα αυτόματου τηλεφωνητή που δεν έχετε ακούσει"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Έναρξη φωνητικής αναζήτησης"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Κλήση του αριθμού <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Άγνωστος"</string>
     <string name="voicemail" msgid="3851469869202611441">"Αυτόματος τηλεφωνητής"</string>
     <string name="private_num" msgid="6374339738119166953">"Απόκρυψη"</string>
-    <string name="payphone" msgid="4864313342828942922">"Καρτοτηλέφωνο"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Χρησιμοποιήστε το πληκτρολόγιο για να καλέσετε έναν αριθμό"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Καλέστε έναν αρ. για προσθ. μιας κλήσ."</string>
-    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> λεπτά <xliff:g id="SECONDS">%s</xliff:g> δευτερόλεπτα"</string>
-    <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Η κλήση δεν πραγματοποιήθηκε"</string>
+    <string name="payphone" msgid="7726415831153618726">"Τηλέφωνο με χρέωση"</string>
+    <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> λεπτά <xliff:g id="SECONDS">%s</xliff:g> δευτερόλεπτα"</string>
+    <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Δεν μπορείτε να καλέσετε αυτόν τον αριθμό"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Για τη r;yumish του αυτόματου τηλεφωνητή, μεταβείτε στο στοιχείο Μενού &gt; Ρυθμίσεις."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Για κλήση αυτόματου τηλεφωνητή, πρώτα απενεργοποιήστε τη λειτουργία πτήσης."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Φόρτωση…"</string>
@@ -138,19 +123,19 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Φόρτωση από κάρτα SIM…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Επαφές στην κάρτα SIM"</string>
-    <string name="add_contact_not_available" msgid="2731922990890769322">"Ενεργοποιήστε ξανά την εφαρμογή Επαφές για να χρησιμοποιήσετε αυτήν τη λειτουργία."</string>
-    <string name="voice_search_not_available" msgid="7580616740587850828">"Η φωνητική αναζήτηση δεν είναι διαθέσιμη."</string>
+    <string name="add_contact_not_available" msgid="5547311613368004859">"Δεν υπάρχουν διαθέσιμες εφαρμογές επαφών"</string>
+    <string name="voice_search_not_available" msgid="2977719040254285301">"Η φωνητική αναζήτηση δεν είναι διαθέσιμη"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Δεν είναι δυνατή η πραγματοποίηση τηλεφωνικής κλήσης επειδή η εφαρμογή \"Τηλέφωνο\" έχει απενεργοποιηθεί."</string>
-    <string name="activity_not_available" msgid="8265265380537872585">"Δεν υπάρχει διαθέσιμη εγκατεστημένη δραστηριότητα για το χειρισμό της επιλεγμένης ενέργειας."</string>
-    <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Εισαγάγετε όνομα ή τηλέφωνο"</string>
-    <string name="recentMissed_empty" msgid="4177320482947526015">"Δεν υπάρχουν πρόσφατες αναπάντητες κλήσεις."</string>
-    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Δεν υπάρχουν πρόσφατα μηνύματα στον αυτόματο τηλεφωνητή."</string>
+    <string name="activity_not_available" msgid="2287665636817987623">"Δεν υπάρχει εφαρμογή γι\' αυτήν την ενέργεια σε αυτήν τη συσκευή"</string>
+    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Εισαγάγετε όνομα ή τηλέφωνο"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"Δεν υπάρχουν κλήσεις"</string>
+    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Δεν υπάρχουν πρόσφατα φωνητικά μηνύματα"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Εμφάνιση μόνο των αγαπημένων"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Ιστορικό"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Όλα"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Αναπάντητη"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Φωνητικό μήνυμα"</string>
-    <string name="tab_speed_dial" msgid="7807567599021643864">"Ταχεία κλήση"</string>
+    <string name="tab_speed_dial" msgid="7552166276545648893">"Γρήγορη κλήση"</string>
     <string name="tab_recents" msgid="929949073851377206">"Πρόσφατα"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Επαφές"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Καταργήθηκε από τα αγαπημένα"</string>
@@ -160,38 +145,40 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Πραγματοποίηση βιντεοκλήσης"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Προβολή πλήρους ιστορικού κλήσεων"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> νέες αναπάντητες κλήσεις"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"Η ταχεία κλήση είναι κλήση με ένα άγγιγμα\nγια τα αγαπημένα και τους αριθμούς\n που καλείτε συχνά."</string>
-    <string name="all_contacts_empty" msgid="4536082452651392894">"Δεν υπάρχουν επαφές."</string>
-    <string name="contact_tooltip" msgid="7817483485692282287">"Πατήστε την εικόνα για να δείτε όλους τους αριθμούς ή πατήστε παρατεταμένα για αναδιάταξη"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Η ταχεία κλήση είναι κλήση που μπορείτε να πραγματοποιήσετε με ένα πλήκτρο για τους αγαπημένους σας αριθμούς που καλείτε συχνά"</string>
+    <string name="all_contacts_empty" msgid="2299508125100209367">"Δεν υπάρχουν επαφές"</string>
+    <string name="contact_tooltip" msgid="2019777545923635266">"Πατήστε την εικόνα για να δείτε όλους τους αριθμούς ή αγγίξτε παρατεταμένα για αναδιάταξη"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Παράβλεψη"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Κατάργηση"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ΟΛΕΣ ΟΙ ΕΠΑΦΕΣ"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ΕΠΑΝΑΚΛΗΣΗ"</string>
+    <string name="call_log_action_call" msgid="8187991828921352552">"ΚΛΗΣΗ"</string>
+    <string name="call_log_action_redial" msgid="8159106862639797417">"ΕΠΑΝΑΚΛΗΣΗ"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"ΒΙΝΤΕΟΚΛΗΣΗ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ΑΚΡΟΑΣΗ"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"ΛΕΠΤΟΜΕΡΕΙΕΣ"</string>
-    <string name="description_incoming_missed_call" msgid="2610535352863246949">"Αναπάντητη κλήση από <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_incoming_answered_call" msgid="7206670204016969740">"Ληφθείσα κλήση από <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_outgoing_call" msgid="3964211633673659733">"Κλήση στον αριθμό <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_call_back_action" msgid="3012837380108884260">"Επανάκληση <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"Βιντεοκλήση προς <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
-    <string name="description_voicemail_action" msgid="8054891873788903063">"Ακρόαση μηνύματος αυτόματου τηλεφωνητή από το χρήστη <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_details_action" msgid="2433827152749491785">"Λεπτομέρειες κλήσης για <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="toast_entry_removed" msgid="3389119736202317999">"Το αρχείο καταγραφής κλήσεων διαγράφηκε."</string>
-    <string name="toast_caller_id_reported" msgid="1127087402649645557">"Αναφέρθηκε επαφή."</string>
+    <string name="description_incoming_missed_call" msgid="2381085098795943627">"Αναπάντητη κλήση από <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_incoming_answered_call" msgid="7117665748428816544">"Ληφθείσα κλήση από <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_outgoing_call" msgid="6386364390619734734">"Κλήση προς <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_phone_account" msgid="1767072759541443861">"σε <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
+    <string name="description_call_back_action" msgid="3012837380108884260">"Επανάκληση <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"Βιντεοκλήση προς <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
+    <string name="description_voicemail_action" msgid="8054891873788903063">"Ακρόαση μηνύματος αυτόματου τηλεφωνητή από το χρήστη <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_details_action" msgid="2433827152749491785">"Λεπτομέρειες κλήσης για <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="toast_entry_removed" msgid="8010830299576311534">"Διαγράφηκε από το ιστορικό κλήσεων"</string>
+    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Ο αριθμός αναφέρθηκε στην Google"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"ΑΝΑΦΟΡΑ"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Σήμερα"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Χθες"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Παλαιότερες"</string>
-    <string name="call_detail_list_header" msgid="866455969433213220">"Λίστα κλήσεων"</string>
+    <string name="call_detail_list_header" msgid="3752717059699600861">"Λίστα κλήσεων"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"Ενεργοποίηση ηχείου."</string>
     <string name="voicemail_speaker_off" msgid="7390530056413093958">"Απενεργοποίηση ηχείου."</string>
     <string name="voicemail_play_faster" msgid="3444751008615323006">"Αναπαραγωγή πιο γρήγορα."</string>
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Αναπαραγωγή πιο αργά."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Έναρξη ή παύση αναπαραγωγής."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="general_settings_label" msgid="4787443826763795004">"Γενικές ρυθμίσεις"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"Εμφάνιση επαφής, ήχοι και γρήγορες απαντήσεις"</string>
+    <string name="general_settings_label" msgid="5748319557716674189">"Γενικά"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Επιλογές εμφάνισης επαφών"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Ήχοι και δόνηση"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Ήχος κλήσης τηλεφώνου"</string>
@@ -199,6 +186,6 @@
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Τόνοι πληκτρολογίου κλήσης"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"Άλλο"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Γρήγορες απαντήσεις"</string>
-    <string name="call_settings_label" msgid="7416182166943714852">"Ρυθμίσεις κλήσεων"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"Αυτόματος τηλεφωνητής, αναμονή κλήσης και άλλες"</string>
+    <string name="call_settings_label" msgid="313434211353070209">"Κλήσεις"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Λογαριασμοί κλήσης"</string>
 </resources>

@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.graphics.Rect;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -32,7 +33,6 @@ import android.widget.TextView;
 
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapter;
-import com.android.dialer.calllog.CallLogListItemView;
 import com.android.dialer.calllog.CallLogNotificationsHelper;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.list.SwipeHelper.OnItemGestureListener;
@@ -202,6 +202,7 @@ public class ShortcutCardsAdapter extends BaseAdapter {
         wrapper.removeAllViews();
         wrapper.prepareChildView(view);
         wrapper.addView(view);
+        wrapper.setVisibility(View.VISIBLE);
         return wrapper;
     }
 
@@ -259,15 +260,17 @@ public class ShortcutCardsAdapter extends BaseAdapter {
 
             // TODO: Set content description including type/location and time information.
             TextView nameView = (TextView) actionView.findViewById(R.id.name);
-            actionView.setContentDescription(getResources().getString(
-                    R.string.description_call_back_action, nameView.getText()));
+
+            actionView.setContentDescription(
+                    TextUtils.expandTemplate(
+                            getResources().getString(R.string.description_call_back_action),
+                            nameView.getText()));
 
             mPreviousTranslationZ = getResources().getDimensionPixelSize(
                     R.dimen.recent_call_log_item_translation_z);
             view.setTranslationZ(mPreviousTranslationZ);
 
-            final CallLogListItemView callLogItem =
-                    (CallLogListItemView) view.findViewById(R.id.call_log_list_item);
+            final ViewGroup callLogItem = (ViewGroup) view.findViewById(R.id.call_log_list_item);
             // Reset the internal call log item view if it is being recycled
             callLogItem.setTranslationX(0);
             callLogItem.setTranslationY(0);

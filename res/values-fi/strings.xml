@@ -20,19 +20,19 @@
     <string name="applicationLabel" msgid="8490255569343340580">"Dialer"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Puhelin"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Puhelin"</string>
-    <string name="recentCallsIconLabel" msgid="1419116422359067949">"Puheluloki"</string>
-    <string name="menu_sendTextMessage" msgid="6937343460284499306">"Lähetä tekstiviesti"</string>
+    <string name="recentCallsIconLabel" msgid="2639489159797075507">"Soittohistoria"</string>
+    <string name="menu_sendTextMessage" msgid="8682056943960339239">"Lähetä tekstiviesti"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Soita: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Muokkaa numeroa ennen puhelua"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Lisää yhteystietoihin"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"Poista puhelulokista"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"Tyhjennä puheluloki"</string>
+    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Poista soittohistoriasta"</string>
+    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Tyhjennä soittohistoria"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Poista vastaajaviesti"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Jaa vastaajaviesti"</string>
-    <string name="recentCalls_empty" msgid="7711926651216108723">"Puheluloki on tyhjä."</string>
-    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"Tyhjennä puheluloki?"</string>
-    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"Kaikki puhelutallenteet poistetaan."</string>
-    <string name="clearCallLogProgress_title" msgid="8365943000154295771">"Tyhjennetään puhelulokia..."</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"Ei puheluja"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Tyhjennetäänkö soittohistoria?"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Kaikki soittohistorian tiedot poistetaan"</string>
+    <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Tyhjennetään soittohistoriaa…"</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="1746619685488504230">"Vastaaja"</item>
     <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> vastaajaviestiä"</item>
@@ -40,18 +40,18 @@
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Toista"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Uusi vastaajaviesti: <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="1811242131549854624">"Vastaajaviestin toisto ei onnistu."</string>
+    <string name="voicemail_playback_error" msgid="3356071912353297599">"Viestin toistaminen epäonnistui"</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"Puskuroidaan..."</string>
-    <string name="voicemail_fetching_content" msgid="877911315738258780">"Haetaan vastaajaviestiä..."</string>
-    <string name="voicemail_fetching_timout" msgid="6691792377574905201">"Vastaajaviestin nouto epäonnistui."</string>
+    <string name="voicemail_fetching_content" msgid="1287895365599580842">"Ladataan puhelinvastaajaa…"</string>
+    <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Puhelinvastaajan lataaminen epäonnistui"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Vain vastaajaan menneet puhelut"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Vain saapuvat puhelut"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Vain soitetut puhelut"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Vain vastaamattomat puhelut"</string>
-    <string name="voicemail_status_voicemail_not_available" msgid="3021980206152528883">"Ei voi yhdistää vastaajapalvelimeen."</string>
-    <string name="voicemail_status_messages_waiting" msgid="7113421459602803605">"Ei voi yhdist. vastaajapalvelimeen. Uusia viestejä vastaajassa."</string>
-    <string name="voicemail_status_configure_voicemail" msgid="3738537770636895689">"Ota puhelinvastaaja käyttöön."</string>
-    <string name="voicemail_status_audio_not_available" msgid="3369618334553341626">"Ääntä ei ole saatavilla."</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Puhelinvastaajan tiedot eivät ole käytettävissä"</string>
+    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Uusia viestejä vastaajassa. Lataus ei onnistu tällä hetkellä."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Määritä puhelinvastaajan asetukset"</string>
+    <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Ääni ei ole käytettävissä"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Asetusten määritys"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Soita vastaajaan"</string>
     <string name="voicemail_speed_slowest" msgid="1733460666177707312">"Hitain"</string>
@@ -63,18 +63,6 @@
     <string name="sms_disambig_title" msgid="5846266399240630846">"Valitse numero"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Valitse numero"</string>
     <string name="make_primary" msgid="5829291915305113983">"Muista valinta"</string>
-    <string name="description_image_button_one" msgid="1740638037139856139">"yksi"</string>
-    <string name="description_image_button_two" msgid="5882638439003731308">"kaksi"</string>
-    <string name="description_image_button_three" msgid="8709731759376015180">"kolme"</string>
-    <string name="description_image_button_four" msgid="3530239685642246130">"neljä"</string>
-    <string name="description_image_button_five" msgid="1182465427501188413">"viisi"</string>
-    <string name="description_image_button_six" msgid="2093656269261415475">"kuusi"</string>
-    <string name="description_image_button_seven" msgid="2450357020447676481">"seitsemän"</string>
-    <string name="description_image_button_eight" msgid="6969435115163287801">"kahdeksan"</string>
-    <string name="description_image_button_nine" msgid="7857248695662558323">"yhdeksän"</string>
-    <string name="description_image_button_star" msgid="3365919907520767866">"tähti"</string>
-    <string name="description_image_button_zero" msgid="4133108949401820710">"nolla"</string>
-    <string name="description_image_button_pound" msgid="3039765597595889230">"punta"</string>
     <string name="description_search_button" msgid="3660807558587384889">"haku"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"soita"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"numero johon soitetaan"</string>
@@ -95,12 +83,11 @@
     <string name="add_contact" msgid="4579643070374941999">"Lisää yhteystietoihin"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Lisää 2 sekunnin tauko"</string>
     <string name="add_wait" msgid="3360818652790319634">"Lisää tauko"</string>
-    <string name="menu_select_account" msgid="5576598753317289565">"Valitse tili"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Asetukset"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Uusi yhteystieto"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Kaikki yhteystiedot"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Puhelun tiedot"</string>
-    <string name="toast_call_detail_error" msgid="7200975244804730096">"Valitun puhelun tietoja ei voi lukea."</string>
+    <string name="toast_call_detail_error" msgid="6947041258280380832">"Tiedot eivät ole käytettävissä"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Käytä näppäimistöä"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Palaa käynnissä olevaan puheluun"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Lisää puhelu"</string>
@@ -119,18 +106,16 @@
     <string name="description_new_voicemail" msgid="2133792360865517746">"Uusi ääniviesti."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> puhelua."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Videopuhelu."</string>
-    <string name="description_send_text_message" msgid="7803126439934046891">"Lähetä tekstiviesti: <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_send_text_message" msgid="3118485319691414221">"Lähetä tekstiviesti: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Kuuntelematon vastaajaviesti"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Aloita puhehaku"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Soita <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Tuntematon"</string>
     <string name="voicemail" msgid="3851469869202611441">"Vastaaja"</string>
     <string name="private_num" msgid="6374339738119166953">"Yksityinen numero"</string>
-    <string name="payphone" msgid="4864313342828942922">"Puhelinkoppi"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"Valitse numero näppäimistöllä"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"Lisää puhelu näppäilemällä numero"</string>
-    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
-    <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"Puhelua ei soitettu"</string>
+    <string name="payphone" msgid="7726415831153618726">"Maksupuhelin"</string>
+    <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
+    <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Numeroon ei voi soittaa"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Määritä puhelinvastaajan asetukset kohdassa Valikko &gt; Asetukset."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Poista lentokonetila käytöstä ennen vastaajaan soittamista."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Ladataan..."</string>
@@ -138,19 +123,19 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Ladataan SIM-kortilta…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM-kortin yhteystiedot"</string>
-    <string name="add_contact_not_available" msgid="2731922990890769322">"Ota Yhteystiedot-sovellus uudelleen käyttöön, niin voit käyttää tätä ominaisuutta."</string>
-    <string name="voice_search_not_available" msgid="7580616740587850828">"Puhehaku ei ole käytettävissä."</string>
+    <string name="add_contact_not_available" msgid="5547311613368004859">"Ei käytettävissä olevaa yhteystietosovellusta"</string>
+    <string name="voice_search_not_available" msgid="2977719040254285301">"Puhehaku ei ole käytettävissä"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Puhelua ei voi soittaa, koska Puhelin-sovellus on poistettu käytöstä."</string>
-    <string name="activity_not_available" msgid="8265265380537872585">"Valitun toimen suoritusta varten ei ole asennettua toimintoa."</string>
-    <string name="dialer_hint_find_contact" msgid="8798845521253672403">"Kirjoita nimi tai puh.numero"</string>
-    <string name="recentMissed_empty" msgid="4177320482947526015">"Sinulla ei ole uusia vastaamattomia puheluita."</string>
-    <string name="recentVoicemails_empty" msgid="4905583746647459963">"Sinulla ei ole uusia puhelinvastaajaviestejä."</string>
+    <string name="activity_not_available" msgid="2287665636817987623">"Laitteessa ei ole kyseiseen toimintoon tarvittavaa sovellusta"</string>
+    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Anna nimi tai puhelinnumero"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"Ei puheluja"</string>
+    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Ei uusia viestejä vastaajassa"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Näytä vain suosikit"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historia"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Kaikki"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Vastaamattomat"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Vastaaja"</string>
-    <string name="tab_speed_dial" msgid="7807567599021643864">"Pikavalinta"</string>
+    <string name="tab_speed_dial" msgid="7552166276545648893">"Pikavalinta"</string>
     <string name="tab_recents" msgid="929949073851377206">"Viimeisimmät"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Yhteystiedot"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Poistettu suosikeista"</string>
@@ -160,38 +145,40 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Soita videopuhelu"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Näytä koko soittohistoria"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> uutta vastaamatonta puhelua"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"Pikavalinnalla soitat \nsuosikeille ja usein käytettyihin numeroihin\n yhdellä kosketuksella."</string>
-    <string name="all_contacts_empty" msgid="4536082452651392894">"Sinulla ei ole kontakteja."</string>
-    <string name="contact_tooltip" msgid="7817483485692282287">"Napauta kuvaa nähdäksesi kaikki numerot tai järjestä uudelleen painamalla pitkään"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Pikavalinnan avulla voit soittaa yhdellä kosketuksella suosikeillesi ja muihin usein käyttämiisi numeroihin"</string>
+    <string name="all_contacts_empty" msgid="2299508125100209367">"Ei yhteystietoja"</string>
+    <string name="contact_tooltip" msgid="2019777545923635266">"Katso kaikki numerot koskettamalla kuvaa tai järjestele tietoja koskettamalla kuvaa pitkään"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ohita"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Poista"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"KAIKKI YHTEYSTIEDOT"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"SOITA TAKAISIN"</string>
+    <string name="call_log_action_call" msgid="8187991828921352552">"SOITA"</string>
+    <string name="call_log_action_redial" msgid="8159106862639797417">"SOITA UUDELLEEN"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"VIDEOPUHELU"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"KUUNTELE"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"TIEDOT"</string>
-    <string name="description_incoming_missed_call" msgid="2610535352863246949">"Vastaamaton puhelu: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_incoming_answered_call" msgid="7206670204016969740">"Vastattu puhelu: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_outgoing_call" msgid="3964211633673659733">"Puhelu: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_call_back_action" msgid="3012837380108884260">"Soita takaisin: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"Videopuhelu: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>."</string>
-    <string name="description_voicemail_action" msgid="8054891873788903063">"Kuuntele vastaajaviesti: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_details_action" msgid="2433827152749491785">"Yhteystiedon <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> puhelutiedot"</string>
-    <string name="toast_entry_removed" msgid="3389119736202317999">"Puhelulokimerkintä poistettiin."</string>
-    <string name="toast_caller_id_reported" msgid="1127087402649645557">"Yhteystiedosta tehtiin ilmoitus."</string>
+    <string name="description_incoming_missed_call" msgid="2381085098795943627">"Vastaamaton puhelu soittajalta <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_incoming_answered_call" msgid="7117665748428816544">"Vastattu puhelu soittajalta <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_outgoing_call" msgid="6386364390619734734">"Soita vastaanottajalle <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
+    <string name="description_call_back_action" msgid="3012837380108884260">"Soita takaisin: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"Videopuhelu: <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
+    <string name="description_voicemail_action" msgid="8054891873788903063">"Kuuntele vastaajaviesti: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_details_action" msgid="2433827152749491785">"Yhteystiedon <xliff:g id="NAMEORNUMBER">^1</xliff:g> puhelutiedot"</string>
+    <string name="toast_entry_removed" msgid="8010830299576311534">"Poistettu soittohistoriasta"</string>
+    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Numero ilmoitettu Googlelle"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"TEE ILMOITUS"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Tänään"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Eilen"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Vanhempi"</string>
-    <string name="call_detail_list_header" msgid="866455969433213220">"Soittoluettelo"</string>
+    <string name="call_detail_list_header" msgid="3752717059699600861">"Puheluluettelo"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"Ota kaiutin käyttöön."</string>
     <string name="voicemail_speaker_off" msgid="7390530056413093958">"Poista kaiutin käytöstä."</string>
     <string name="voicemail_play_faster" msgid="3444751008615323006">"Toista nopeammin."</string>
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Toista hitaammin."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Aloita tai keskeytä toisto."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="general_settings_label" msgid="4787443826763795004">"Yleisasetukset"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"Yhteystiedon näyttö, soittoäänet ja pikavastaukset"</string>
+    <string name="general_settings_label" msgid="5748319557716674189">"Yleiset"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Yhteystietojen näyttöasetukset"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Äänet ja värinä"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Puhelimen soittoääni"</string>
@@ -199,6 +186,6 @@
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Näppäimistön äänet"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"Muut"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Pikavastaukset"</string>
-    <string name="call_settings_label" msgid="7416182166943714852">"Puheluasetukset"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"Puhelinvastaaja, odottavat puhelut yms."</string>
+    <string name="call_settings_label" msgid="313434211353070209">"Puhelut"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Puhelutilit"</string>
 </resources>

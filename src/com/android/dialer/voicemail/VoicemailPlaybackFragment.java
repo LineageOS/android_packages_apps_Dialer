@@ -20,6 +20,7 @@ import static com.android.dialer.CallDetailActivity.EXTRA_VOICEMAIL_START_PLAYBA
 import static com.android.dialer.CallDetailActivity.EXTRA_VOICEMAIL_URI;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -39,15 +40,15 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.android.common.io.MoreCloseables;
+import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.ProximitySensorAware;
 import com.android.dialer.R;
 import com.android.dialer.util.AsyncTaskExecutors;
-import com.android.dialerbind.analytics.AnalyticsFragment;
 import com.android.ex.variablespeed.MediaPlayerProxy;
 import com.android.ex.variablespeed.VariableSpeed;
+
 import com.google.common.base.Preconditions;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -66,7 +67,7 @@ import javax.annotation.concurrent.NotThreadSafe;
  * methods on this class are expected to come from the main ui thread.
  */
 @NotThreadSafe
-public class VoicemailPlaybackFragment extends AnalyticsFragment {
+public class VoicemailPlaybackFragment extends Fragment {
     private static final String TAG = "VoicemailPlayback";
     private static final int NUMBER_OF_THREADS_IN_POOL = 2;
     private static final String[] HAS_CONTENT_PROJECTION = new String[] {
@@ -110,6 +111,12 @@ public class VoicemailPlaybackFragment extends AnalyticsFragment {
     public void onSaveInstanceState(Bundle outState) {
         mPresenter.onSaveInstanceState(outState);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        AnalyticsUtil.sendScreenView(this);
     }
 
     @Override

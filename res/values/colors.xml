@@ -23,6 +23,7 @@
     <color name="dialer_green_highlight_color">#00c853</color>
 
     <color name="setting_background_color">#ffffff</color>
+    <color name="setting_button_color">#eee</color>
 
     <!-- Color of the text describing an unconsumed missed call. -->
     <color name="call_log_missed_call_highlight_color">@color/dialer_red_highlight_color</color>

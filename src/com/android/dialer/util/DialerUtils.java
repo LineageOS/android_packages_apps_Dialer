@@ -71,8 +71,9 @@ public class DialerUtils {
      */
     public static void startActivityWithErrorToast(Context context, Intent intent, int msgId) {
         try {
-            if (Intent.ACTION_CALL.equals(intent.getAction())
-                    || Intent.ACTION_CALL_PRIVILEGED.equals(intent.getAction())) {
+            if ((Intent.ACTION_CALL.equals(intent.getAction())
+                    || Intent.ACTION_CALL_PRIVILEGED.equals(intent.getAction()))
+                            && context instanceof Activity) {
                 // All dialer-initiated calls should pass the touch point to the InCallUI
                 Point touchPoint = TouchPointManager.getInstance().getPoint();
                 if (touchPoint.x != 0 || touchPoint.y != 0) {
@@ -124,7 +125,7 @@ public class DialerUtils {
                 (ImageView) emptyListView.findViewById(R.id.emptyListViewImage);
 
         emptyListViewImage.setImageDrawable(res.getDrawable(imageResId));
-        emptyListViewImage.setContentDescription(res.getString(strResId));
+        emptyListViewImage.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
 
         TextView emptyListViewMessage =
                 (TextView) emptyListView.findViewById(R.id.emptyListViewMessage);

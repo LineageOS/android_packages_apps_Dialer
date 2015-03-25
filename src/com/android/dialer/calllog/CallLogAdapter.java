@@ -30,6 +30,7 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -48,6 +49,7 @@ import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
 import com.android.contacts.common.util.UriUtils;
@@ -83,10 +85,10 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Interface used to inform a parent UI element that a list item has been expanded. */
     public interface CallItemExpandedListener {
         /**
-         * @param view The {@link CallLogListItemView} that represents the item that was clicked
+         * @param view The {@link View} that represents the item that was clicked
          *         on.
          */
-        public void onItemExpanded(CallLogListItemView view);
+        public void onItemExpanded(View view);
 
         /**
          * Retrieves the call log view for the specified call Id.  If the view is not currently
@@ -95,7 +97,7 @@ public class CallLogAdapter extends GroupingListAdapter
          * @param callId The call Id.
          * @return The call log view.
          */
-        public CallLogListItemView getViewForCallId(long callId);
+        public View getViewForCallId(long callId);
     }
 
     /** Interface used to initiate a refresh of the content. */
@@ -153,6 +155,8 @@ public class CallLogAdapter extends GroupingListAdapter
     private final ContactPhotoManager mContactPhotoManager;
     /** Helper to parse and process phone numbers. */
     private PhoneNumberDisplayHelper mPhoneNumberHelper;
+    /** Helper to access Telephony phone number utils class */
+    protected final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
     /** Helper to group call log entries. */
     private final CallLogGroupBuilder mCallLogGroupBuilder;
 
@@ -169,6 +173,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private int mCallLogBackgroundColor;
     private int mExpandedBackgroundColor;
     private float mExpandedTranslationZ;
+    private int mPhotoSize;
 
     /** Listener for the primary or secondary actions in the list.
      *  Primary opens the call details.
@@ -188,7 +193,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private final View.OnClickListener mExpandCollapseListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            final CallLogListItemView callLogItem = (CallLogListItemView) v.getParent().getParent();
+            final View callLogItem = (View) v.getParent().getParent();
             handleRowExpanded(callLogItem, true /* animate */, false /* forceExpand */);
         }
     };
@@ -198,7 +203,7 @@ public class CallLogAdapter extends GroupingListAdapter
         public boolean onRequestSendAccessibilityEvent(ViewGroup host, View child,
                 AccessibilityEvent event) {
             if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
-                handleRowExpanded((CallLogListItemView) host, false /* animate */,
+                handleRowExpanded(host, false /* animate */,
                         true /* forceExpand */);
             }
             return super.onRequestSendAccessibilityEvent(host, child, event);
@@ -236,13 +241,15 @@ public class CallLogAdapter extends GroupingListAdapter
         mCallLogBackgroundColor = resources.getColor(R.color.background_dialer_list_items);
         mExpandedBackgroundColor = resources.getColor(R.color.call_log_expanded_background_color);
         mExpandedTranslationZ = resources.getDimension(R.dimen.call_log_expanded_translation_z);
+        mPhotoSize = resources.getDimensionPixelSize(R.dimen.contact_photo_size);
 
         mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
-        mPhoneNumberHelper = new PhoneNumberDisplayHelper(resources);
+        mPhoneNumberHelper = new PhoneNumberDisplayHelper(mContext, resources);
         mAdapterHelper = new CallLogAdapterHelper(context, this,
                 contactInfoHelper, mPhoneNumberHelper);
-        PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
-                resources, callTypeHelper, new PhoneNumberUtilsWrapper());
+        mPhoneNumberUtilsWrapper = new PhoneNumberUtilsWrapper(mContext);
+        PhoneCallDetailsHelper phoneCallDetailsHelper =
+                new PhoneCallDetailsHelper(mContext, resources, mPhoneNumberUtilsWrapper);
         mCallLogViewsHelper =
                 new CallLogListItemHelper(
                         phoneCallDetailsHelper, mPhoneNumberHelper, resources);
@@ -289,8 +296,7 @@ public class CallLogAdapter extends GroupingListAdapter
     @Override
     protected View newChildView(Context context, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        CallLogListItemView view =
-                (CallLogListItemView) inflater.inflate(R.layout.call_log_list_item, parent, false);
+        View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
 
         // Get the views to bind to and cache them.
         CallLogListItemViews views = CallLogListItemViews.fromView(view);
@@ -325,14 +331,13 @@ public class CallLogAdapter extends GroupingListAdapter
     /**
      * Binds the views in the entry to the data in the call log.
      *
-     * @param view the view corresponding to this entry
+     * @param callLogItemView the view corresponding to this entry
      * @param c the cursor pointing to the entry in the call log
      * @param count the number of entries in the current item, greater than 1 if it is a group
      */
-    private void bindView(View view, Cursor c, int count) {
-        view.setAccessibilityDelegate(mAccessibilityDelegate);
-        final CallLogListItemView callLogItemView = (CallLogListItemView) view;
-        final CallLogListItemViews views = (CallLogListItemViews) view.getTag();
+    private void bindView(View callLogItemView, Cursor c, int count) {
+        callLogItemView.setAccessibilityDelegate(mAccessibilityDelegate);
+        final CallLogListItemViews views = (CallLogListItemViews) callLogItemView.getTag();
 
         // Default case: an item in the call log.
         views.primaryActionView.setVisibility(View.VISIBLE);
@@ -345,8 +350,6 @@ public class CallLogAdapter extends GroupingListAdapter
         final PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
                 c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME),
                 c.getString(CallLogQuery.ACCOUNT_ID));
-        final Drawable accountIcon = PhoneAccountUtils.getAccountIcon(mContext,
-                accountHandle);
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
 
         final long rowId = c.getLong(CallLogQuery.ID);
@@ -378,7 +381,6 @@ public class CallLogAdapter extends GroupingListAdapter
         views.number = number;
         views.numberPresentation = numberPresentation;
         views.callType = callType;
-        // NOTE: This is currently not being used, but can be used in future versions.
         views.accountHandle = accountHandle;
         views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
         // Stash away the Ids of the calls so that we can support deleting a row in the call log.
@@ -387,7 +389,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final ContactInfo cachedContactInfo = getContactInfoFromCallLog(c);
 
         final boolean isVoicemailNumber =
-                PhoneNumberUtilsWrapper.INSTANCE.isVoicemailNumber(subId, number);
+                mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number);
 
         // Where binding and not in the call log, use default behaviour of invoking a call when
         // tapping the primary view.
@@ -397,7 +399,13 @@ public class CallLogAdapter extends GroupingListAdapter
             // Set return call intent, otherwise null.
             if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)) {
                 // Sets the primary action to call the number.
-                views.primaryActionView.setTag(IntentProvider.getReturnCallIntentProvider(number));
+                if (isVoicemailNumber) {
+                    views.primaryActionView.setTag(
+                            IntentProvider.getReturnVoicemailCallIntentProvider());
+                } else {
+                    views.primaryActionView.setTag(
+                            IntentProvider.getReturnCallIntentProvider(number));
+                }
             } else {
                 // Number is not callable, so hide button.
                 views.primaryActionView.setTag(null);
@@ -412,7 +420,7 @@ public class CallLogAdapter extends GroupingListAdapter
         }
 
         // Lookup contacts with this number
-        final ContactInfo info = mAdapterHelper.lookupContact(
+        final ContactInfo info = mAdapterHelper.lookupContact(accountHandle,
                 number, numberPresentation, countryIso, cachedContactInfo);
         final Uri lookupUri = info.lookupUri;
         final String name = info.name;
@@ -420,7 +428,8 @@ public class CallLogAdapter extends GroupingListAdapter
         final String label = info.label;
         final long photoId = info.photoId;
         final Uri photoUri = info.photoUri;
-        CharSequence formattedNumber = info.formattedNumber;
+        CharSequence formattedNumber = info.formattedNumber == null
+                ? null : PhoneNumberUtils.ttsSpanAsPhoneNumber(info.formattedNumber);
         final int[] callTypes = getCallTypes(c, count);
         final String geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
         final int sourceType = info.sourceType;
@@ -448,14 +457,13 @@ public class CallLogAdapter extends GroupingListAdapter
         expandOrCollapseActions(callLogItemView, isExpanded(rowId));
 
         if (TextUtils.isEmpty(name)) {
-            details = new PhoneCallDetails(number, numberPresentation,
-                    formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, null, accountIcon, features, dataUsage, transcription, subId);
+            details = new PhoneCallDetails(number, numberPresentation, formattedNumber, countryIso,
+                    geocode, callTypes, date, duration, accountHandle, features, dataUsage,
+                    transcription);
         } else {
-            details = new PhoneCallDetails(number, numberPresentation,
-                    formattedNumber, countryIso, geocode, callTypes, date,
-                    duration, name, ntype, label, lookupUri, photoUri, sourceType,
-                    null, accountIcon, features, dataUsage, transcription, subId);
+            details = new PhoneCallDetails(number, numberPresentation, formattedNumber, countryIso,
+                    geocode, callTypes, date, duration, name, ntype, label, lookupUri, photoUri,
+                    sourceType, accountHandle, features, dataUsage, transcription);
         }
 
         mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
@@ -473,9 +481,8 @@ public class CallLogAdapter extends GroupingListAdapter
 
         String nameForDefaultImage = null;
         if (TextUtils.isEmpty(name)) {
-            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(details.accountId,
-                    details.number, details.numberPresentation,
-                    details.formattedNumber).toString();
+            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(details.accountHandle,
+                    details.number, details.numberPresentation, details.formattedNumber).toString();
         } else {
             nameForDefaultImage = name;
         }
@@ -493,10 +500,9 @@ public class CallLogAdapter extends GroupingListAdapter
                     contactAccount);
         }
 
-        // Listen for the first draw
-        mAdapterHelper.registerOnPreDrawListener(view);
+        mAdapterHelper.registerOnPreDrawListener(callLogItemView);
 
-        bindBadge(view, info, details, callType);
+        bindBadge(callLogItemView, info, details, callType);
     }
 
     /**
@@ -565,12 +571,13 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     /**
-     * Expands or collapses the view containing the CALLBACK, VOICEMAIL and DETAILS action buttons.
+     * Expands or collapses the view containing the CALLBACK/REDIAL, VOICEMAIL and DETAILS action
+     * buttons.
      *
      * @param callLogItem The call log entry parent view.
      * @param isExpanded The new expansion state of the view.
      */
-    private void expandOrCollapseActions(CallLogListItemView callLogItem, boolean isExpanded) {
+    private void expandOrCollapseActions(View callLogItem, boolean isExpanded) {
         final CallLogListItemViews views = (CallLogListItemViews)callLogItem.getTag();
 
         expandVoicemailTranscriptionView(views, isExpanded);
@@ -660,7 +667,8 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     /***
-     * Binds click handlers and intents to the voicemail, details and callback action buttons.
+     * Binds text titles, click handlers and intents to the voicemail, details and callback action
+     * buttons.
      *
      * @param views  The call log item views.
      */
@@ -669,11 +677,28 @@ public class CallLogAdapter extends GroupingListAdapter
                 PhoneNumberUtilsWrapper.canPlaceCallsTo(views.number, views.numberPresentation);
         // Set return call intent, otherwise null.
         if (canPlaceCallToNumber) {
-            // Sets the primary action to call the number.
-            views.callBackButtonView.setTag(
-                    IntentProvider.getReturnCallIntentProvider(views.number));
+            boolean isVoicemailNumber =
+                    mPhoneNumberUtilsWrapper.isVoicemailNumber(views.accountHandle, views.number);
+            if (isVoicemailNumber) {
+                // Make a general call to voicemail to ensure that if there are multiple accounts
+                // it does not call the voicemail number of a specific phone account.
+                views.callBackButtonView.setTag(
+                        IntentProvider.getReturnVoicemailCallIntentProvider());
+            } else {
+                // Sets the primary action to call the number.
+                views.callBackButtonView.setTag(
+                        IntentProvider.getReturnCallIntentProvider(views.number));
+            }
             views.callBackButtonView.setVisibility(View.VISIBLE);
             views.callBackButtonView.setOnClickListener(mActionListener);
+
+            final int titleId;
+            if (views.callType == Calls.VOICEMAIL_TYPE || views.callType == Calls.OUTGOING_TYPE) {
+                titleId = R.string.call_log_action_redial;
+            } else {
+                titleId = R.string.call_log_action_call_back;
+            }
+            views.callBackButtonView.setText(mContext.getString(titleId));
         } else {
             // Number is not callable, so hide button.
             views.callBackButtonView.setTag(null);
@@ -739,16 +764,20 @@ public class CallLogAdapter extends GroupingListAdapter
             final ViewStub stub = (ViewStub) view.findViewById(R.id.link_stub);
             if (UriUtils.isEncodedContactUri(info.lookupUri)) {
                 if (stub != null) {
-                    final View inflated = stub.inflate();
-                    inflated.setVisibility(View.VISIBLE);
-                    mBadgeContainer = inflated.findViewById(R.id.badge_link_container);
-                    mBadgeImageView = (ImageView) inflated.findViewById(R.id.badge_image);
-                    mBadgeText = (TextView) inflated.findViewById(R.id.badge_text);
+                    mBadgeContainer = stub.inflate();
+                } else {
+                    mBadgeContainer = view.findViewById(R.id.badge_container);
                 }
 
-                mBadgeContainer.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                mBadgeContainer.setVisibility(View.VISIBLE);
+                mBadgeImageView = (ImageView) mBadgeContainer.findViewById(R.id.badge_image);
+                mBadgeText = (TextView) mBadgeContainer.findViewById(R.id.badge_text);
+
+                final View clickableArea = mBadgeContainer.findViewById(R.id.badge_link_container);
+                if (clickableArea != null) {
+                    clickableArea.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
                             // If no lookup uri is provided, we need to rely on what information
                             // we have available; namely the phone number and name.
                             if (info.lookupUri == null) {
@@ -761,17 +790,16 @@ public class CallLogAdapter extends GroupingListAdapter
                             } else {
                                 addContactFromLookupUri(info.lookupUri);
                             }
-                    }
-                });
+                        }
+                    });
+                }
                 mBadgeImageView.setImageResource(R.drawable.ic_person_add_24dp);
                 mBadgeText.setText(R.string.recentCalls_addToContact);
             } else {
                 // Hide badge if it was previously shown.
-                if (stub == null) {
-                    final View container = view.findViewById(R.id.badge_container);
-                    if (container != null) {
-                        container.setVisibility(View.GONE);
-                    }
+                mBadgeContainer = view.findViewById(R.id.badge_container);
+                if (mBadgeContainer != null) {
+                    mBadgeContainer.setVisibility(View.GONE);
                 }
             }
         }
@@ -925,7 +953,7 @@ public class CallLogAdapter extends GroupingListAdapter
         views.quickContactView.setOverlay(null);
         DefaultImageRequest request = new DefaultImageRequest(displayName, identifier,
                 contactType, true /* isCircular */);
-        mContactPhotoManager.loadDirectoryPhoto(views.quickContactView, photoUri, account,
+        mContactPhotoManager.loadPhoto(views.quickContactView, photoUri, mPhotoSize,
                 false /* darkTheme */, true /* isCircular */, request);
     }
 
@@ -1051,7 +1079,7 @@ public class CallLogAdapter extends GroupingListAdapter
      * @param forceExpand Whether or not to force the call log row into an expanded state regardless
      *        of its previous state
      */
-    private void handleRowExpanded(CallLogListItemView view, boolean animate, boolean forceExpand) {
+    private void handleRowExpanded(View view, boolean animate, boolean forceExpand) {
         final CallLogListItemViews views = (CallLogListItemViews) view.getTag();
 
         if (forceExpand && isExpanded(views.rowId)) {
@@ -1072,7 +1100,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
             // Animate the collapse of the previous item if it is still visible on screen.
             if (mPreviouslyExpanded != NONE_EXPANDED) {
-                CallLogListItemView previousItem = mCallItemExpandedListener.getViewForCallId(
+                View previousItem = mCallItemExpandedListener.getViewForCallId(
                         mPreviouslyExpanded);
 
                 if (previousItem != null) {

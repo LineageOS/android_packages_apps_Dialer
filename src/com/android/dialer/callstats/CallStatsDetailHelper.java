@@ -17,9 +17,12 @@
 
 package com.android.dialer.callstats;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
@@ -39,10 +42,13 @@ public class CallStatsDetailHelper {
     private final Resources mResources;
     private final PhoneNumberDisplayHelper mPhoneNumberHelper;
     private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
+    private final Context mContext;
 
-    public CallStatsDetailHelper(Resources resources, PhoneNumberUtilsWrapper phoneUtils) {
+    public CallStatsDetailHelper(Context context, Resources resources,
+            PhoneNumberUtilsWrapper phoneUtils) {
+        mContext = context;
         mResources = resources;
-        mPhoneNumberHelper = new PhoneNumberDisplayHelper(resources);
+        mPhoneNumberHelper = new PhoneNumberDisplayHelper(context, resources);
         mPhoneNumberUtilsWrapper = phoneUtils;
     }
 
@@ -58,17 +64,19 @@ public class CallStatsDetailHelper {
                     details.numberType, details.numberLabel);
         }
 
+        final TelecomManager tm = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
+        final PhoneAccountHandle accountHandle = tm.getUserSelectedOutgoingPhoneAccount();
         final CharSequence nameText;
         final CharSequence numberText;
         final CharSequence labelText;
         final CharSequence displayNumber = mPhoneNumberHelper.getDisplayNumber(
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID, details.number,
+                accountHandle, details.number,
                 details.numberPresentation, details.formattedNumber);
 
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
             if (TextUtils.isEmpty(details.geocode)
-                    || mPhoneNumberUtilsWrapper.isVoicemailNumber(details.number)) {
+                    || mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, details.number)) {
                 numberText = mResources.getString(R.string.call_log_empty_geocode);
             } else {
                 numberText = details.geocode;

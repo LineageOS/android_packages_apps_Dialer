@@ -20,6 +20,7 @@ import android.widget.ListView;
 
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ViewPagerTabs;
+import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAdapter;
@@ -29,9 +30,9 @@ import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.list.ShortcutCardsAdapter.SwipeableShortcutCard;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.OverlappingPaneLayout;
 import com.android.dialer.widget.OverlappingPaneLayout.PanelSlideCallbacks;
-import com.android.dialerbind.analytics.AnalyticsFragment;
 import com.android.dialerbind.ObjectFactory;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ import java.util.ArrayList;
  * ViewPager containing the lists up above the shortcut cards and pin it against the top of the
  * screen.
  */
-public class ListsFragment extends AnalyticsFragment implements CallLogQueryHandler.Listener,
+public class ListsFragment extends Fragment implements CallLogQueryHandler.Listener,
         CallLogAdapter.CallFetcher, ViewPager.OnPageChangeListener {
 
     private static final boolean DEBUG = DialtactsActivity.DEBUG;
@@ -68,8 +69,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
 
     public interface HostInterface {
         public void showCallHistory();
-        public int getActionBarHeight();
-        public void setActionBarHideOffset(int offset);
+        public ActionBarController getActionBarController();
     }
 
     private ActionBar mActionBar;
@@ -90,6 +90,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
     private ShortcutCardsAdapter mMergedAdapter;
     private CallLogAdapter mCallLogAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
+    private OverlappingPaneLayout mOverlappingPaneLayout;
 
     private boolean mIsPanelOpen = true;
 
@@ -124,8 +125,9 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
 
                 final int availableActionBarHeight =
                         Math.min(mActionBar.getHeight(), topPaneHeight);
-                ((HostInterface) getActivity()).setActionBarHideOffset(
-                        mActionBar.getHeight() - availableActionBarHeight);
+                final ActionBarController controller =
+                        ((HostInterface) getActivity()).getActionBarController();
+                controller.setHideOffset(mActionBar.getHeight() - availableActionBarHeight);
 
                 if (!mActionBar.isShowing()) {
                     mActionBar.show();
@@ -247,11 +249,6 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         final SharedPreferences prefs = getActivity().getSharedPreferences(
@@ -260,6 +257,9 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
         mActionBar = getActivity().getActionBar();
         fetchCalls();
         mCallLogAdapter.setLoading(true);
+        if (getUserVisibleHint()) {
+            sendScreenViewForPosition(mViewPager.getCurrentItem());
+        }
     }
 
     @Override
@@ -303,6 +303,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
         mRemoveViewContent = parentView.findViewById(R.id.remove_view_content);
 
         setupPaneLayout((OverlappingPaneLayout) parentView);
+        mOverlappingPaneLayout = (OverlappingPaneLayout) parentView;
 
         return parentView;
     }
@@ -323,6 +324,11 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
 
         mCallLogAdapter.changeCursor(cursor);
         mMergedAdapter.notifyDataSetChanged();
+
+        // Refresh the overlapping pane to ensure that any changes in the shortcut card height
+        // are appropriately reflected in the overlap position.
+        mOverlappingPaneLayout.refresh();
+
         // Return true; took ownership of cursor
         return true;
     }
@@ -358,17 +364,11 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
 
     @Override
     public void onPageSelected(int position) {
-        if (position == TAB_INDEX_SPEED_DIAL && mSpeedDialFragment != null) {
-            mSpeedDialFragment.sendScreenView();
-        } else if (position == TAB_INDEX_RECENTS && mRecentsFragment != null) {
-            mRecentsFragment.sendScreenView();
-        } else if (position == TAB_INDEX_ALL_CONTACTS && mAllContactsFragment != null) {
-            mAllContactsFragment.sendScreenView();
-        }
         final int count = mOnPageChangeListeners.size();
         for (int i = 0; i < count; i++) {
             mOnPageChangeListeners.get(i).onPageSelected(position);
         }
+        sendScreenViewForPosition(position);
     }
 
     @Override
@@ -407,7 +407,7 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
         paneLayout.openPane();
         paneLayout.setPanelSlideCallbacks(mPanelSlideCallbacks);
         paneLayout.setIntermediatePinnedOffset(
-                ((HostInterface) getActivity()).getActionBarHeight());
+                ((HostInterface) getActivity()).getActionBarController().getActionBarHeight());
 
         LayoutTransition transition = paneLayout.getLayoutTransition();
         // Turns on animations for all types of layout changes so that they occur for
@@ -428,5 +428,30 @@ public class ListsFragment extends AnalyticsFragment implements CallLogQueryHand
             return TAB_INDEX_COUNT - 1 - position;
         }
         return position;
+    }
+
+    public void sendScreenViewForCurrentPosition() {
+        sendScreenViewForPosition(mViewPager.getCurrentItem());
+    }
+
+    private void sendScreenViewForPosition(int position) {
+        if (!isResumed()) {
+            return;
+        }
+        String fragmentName;
+        switch (getRtlPosition(position)) {
+            case TAB_INDEX_SPEED_DIAL:
+                fragmentName = SpeedDialFragment.class.getSimpleName();
+                break;
+            case TAB_INDEX_RECENTS:
+                fragmentName = CallLogFragment.class.getSimpleName();
+                break;
+            case TAB_INDEX_ALL_CONTACTS:
+                fragmentName = AllContactsFragment.class.getSimpleName();
+                break;
+            default:
+                return;
+        }
+        AnalyticsUtil.sendScreenView(fragmentName, getActivity(), null);
     }
 }

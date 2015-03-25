@@ -59,10 +59,9 @@ public class ActionBarControllerTest extends ActivityInstrumentationTestCase2<Di
         boolean isInSearchUi;
         boolean hasSearchQuery;
         boolean shouldShowActionBar;
-        private ActionBar mActionBar;
-
+        int actionBarHideOffset;
+        
         public MockActivityUi() {
-             mActionBar = new MockActionBar(getActivity());
         }
 
         @Override
@@ -86,8 +85,13 @@ public class ActionBarControllerTest extends ActivityInstrumentationTestCase2<Di
         }
 
         @Override
-        public ActionBar getActionBar() {
-            return mActionBar;
+        public int getActionBarHideOffset() {
+            return actionBarHideOffset;
+        }
+
+        @Override
+        public void setActionBarHideOffset(int offset) {
+            actionBarHideOffset = offset;
         }
     }
 

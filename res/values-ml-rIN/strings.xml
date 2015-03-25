@@ -20,19 +20,19 @@
     <string name="applicationLabel" msgid="8490255569343340580">"ഡയലർ"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ഫോണ്‍"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ഫോണ്‍"</string>
-    <string name="recentCallsIconLabel" msgid="1419116422359067949">"കോൾ ലോഗ്"</string>
-    <string name="menu_sendTextMessage" msgid="6937343460284499306">"വാചകസന്ദേശമയയ്‌ക്കുക"</string>
+    <string name="recentCallsIconLabel" msgid="2639489159797075507">"കോള്‍‌ ചരിത്രം"</string>
+    <string name="menu_sendTextMessage" msgid="8682056943960339239">"SMS അയയ്ക്കുക"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> എന്നതിൽ വിളിക്കുക"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"കോൾ ചെയ്യുന്നതിന് മുമ്പായി നമ്പർ എഡിറ്റുചെയ്യുക"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"കോൺടാക്റ്റുകളിൽ ചേർക്കുക"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="401662244636511330">"കോൾ ലോഗിൽ നിന്ന് നീക്കംചെയ്യുക"</string>
-    <string name="recentCalls_deleteAll" msgid="6352364392762163704">"കോൾ ലോഗ് മായ്‌ക്കുക"</string>
+    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"കോൾ ചരിത്രത്തിൽ നിന്ന് മായ്‌ക്കുക"</string>
+    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"കോൾ ചരിത്രം മായ്‌ക്കുക"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"വോയ്‌സ്മെയിൽ ഇല്ലാതാക്കുക"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"വോയ്‌സ്‌മെയിൽ പങ്കിടുക"</string>
-    <string name="recentCalls_empty" msgid="7711926651216108723">"നിങ്ങളുടെ കോൾ ലോഗ് ശൂന്യമാണ്."</string>
-    <string name="clearCallLogConfirmation_title" msgid="6427524640461816332">"കോൾ ലോഗ് മായ്‌ക്കണോ?"</string>
-    <string name="clearCallLogConfirmation" msgid="5043563133171583152">"നിങ്ങളുടെ എല്ലാ കോൾ റെക്കോർഡുകളും ഇല്ലാതാക്കും."</string>
-    <string name="clearCallLogProgress_title" msgid="8365943000154295771">"കോൾ ലോഗ് മായ്‌ക്കുന്നു..."</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"കോളുകളൊന്നുമില്ല"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"കോൾ ചരിത്രം മായ്‌ക്കണോ?"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ഇത് നിങ്ങളുടെ ചരിത്രത്തിൽ നിന്ന് എല്ലാ കോളുകളും ഇല്ലാതാക്കും"</string>
+    <string name="clearCallLogProgress_title" msgid="3372471156216306132">"കോൾ ചരിത്രം മായ്‌ക്കുന്നു..."</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one" msgid="1746619685488504230">"വോയ്‌സ്‌മെയിൽ"</item>
     <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> വോയ്‌സ്മെയിലുകൾ"</item>
@@ -40,18 +40,18 @@
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"പ്ലേ ചെയ്യുക"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> എന്നയാളിൽ നിന്നുള്ള പുതിയ വോയ്‌സ്‌മെയിൽ"</string>
-    <string name="voicemail_playback_error" msgid="1811242131549854624">"വോയ്‌സ്‌മെയിൽ പ്ലേ ചെയ്യാനായില്ല."</string>
+    <string name="voicemail_playback_error" msgid="3356071912353297599">"വോയ്‌സ്‌മെയിൽ പ്‌ലേ ചെയ്യാനായില്ല"</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"ബഫർ ചെയ്യുന്നു…"</string>
-    <string name="voicemail_fetching_content" msgid="877911315738258780">"വോയ്‌സ്‌മെയിൽ ലഭ്യമാക്കുന്നു…"</string>
-    <string name="voicemail_fetching_timout" msgid="6691792377574905201">"വോയ്‌സ്‌മെയിൽ ലഭ്യമാക്കാനായില്ല."</string>
+    <string name="voicemail_fetching_content" msgid="1287895365599580842">"വോയ്‌സ്‌മെയിൽ ലോഡുചെയ്യുന്നു..."</string>
+    <string name="voicemail_fetching_timout" msgid="3959428065511972176">"വോയ്‌സ്‌മെയിൽ ലോഡുചെയ്യാനായില്ല"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"വോയ്‌സ്മെയിൽ ഉള്ള കോളുകൾ മാത്രം"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"ഇൻകമിംഗ് കോളുകൾ മാത്രം"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"ഔട്ട്‌ഗോയിംഗ് കോളുകൾ മാത്രം"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"മിസ്‌ഡ് കോളുകൾ മാത്രം"</string>
-    <string name="voicemail_status_voicemail_not_available" msgid="3021980206152528883">"വോയ്‌സ്‌മെയിൽ സെർവറിൽ കണക്റ്റുചെയ്യാനായില്ല."</string>
-    <string name="voicemail_status_messages_waiting" msgid="7113421459602803605">"വോയ്‌സ്‌മെയിൽ സെർവറിൽ കണക്റ്റുചെയ്യാനായില്ല. പുതിയ വോയ്‌സ്‌മെയിലുകൾ കാത്തിരിക്കുന്നു."</string>
-    <string name="voicemail_status_configure_voicemail" msgid="3738537770636895689">"നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ സജ്ജീകരിക്കുക."</string>
-    <string name="voicemail_status_audio_not_available" msgid="3369618334553341626">"ഓഡിയോ ലഭ്യമല്ല."</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"വോയ്‌സ്‌മെയിൽ അപ്‌ഡേറ്റുകൾ ലഭ്യമല്ല"</string>
+    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"പുതിയ വോയ്‌സ്‌മെയിൽ കാത്തിരിക്കുന്നു. ഇപ്പോൾ ലോഡുചെയ്യാനാവില്ല."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ സജ്ജീകരിക്കുക"</string>
+    <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"ഓഡിയോ ലഭ്യമല്ല"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"സജ്ജമാക്കുക"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"വോയ്‌സ്‌മെയിൽ വിളിക്കുക"</string>
     <string name="voicemail_speed_slowest" msgid="1733460666177707312">"വളരെ കുറഞ്ഞ വേഗത"</string>
@@ -63,18 +63,6 @@
     <string name="sms_disambig_title" msgid="5846266399240630846">"നമ്പർ തിരഞ്ഞെടുക്കുക"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"നമ്പർ തിരഞ്ഞെടുക്കുക"</string>
     <string name="make_primary" msgid="5829291915305113983">"ഈ തിരഞ്ഞെടുക്കൽ ഓർക്കുക"</string>
-    <string name="description_image_button_one" msgid="1740638037139856139">"ഒന്ന്"</string>
-    <string name="description_image_button_two" msgid="5882638439003731308">"രണ്ട്"</string>
-    <string name="description_image_button_three" msgid="8709731759376015180">"മൂന്ന്"</string>
-    <string name="description_image_button_four" msgid="3530239685642246130">"നാല്"</string>
-    <string name="description_image_button_five" msgid="1182465427501188413">"അഞ്ച്"</string>
-    <string name="description_image_button_six" msgid="2093656269261415475">"ആറ്"</string>
-    <string name="description_image_button_seven" msgid="2450357020447676481">"ഏഴ്"</string>
-    <string name="description_image_button_eight" msgid="6969435115163287801">"എട്ട്"</string>
-    <string name="description_image_button_nine" msgid="7857248695662558323">"ഒമ്പത്"</string>
-    <string name="description_image_button_star" msgid="3365919907520767866">"സ്റ്റാർ"</string>
-    <string name="description_image_button_zero" msgid="4133108949401820710">"പൂജ്യം"</string>
-    <string name="description_image_button_pound" msgid="3039765597595889230">"പൗണ്ട്"</string>
     <string name="description_search_button" msgid="3660807558587384889">"തിരയുക"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"ഡയൽ ചെയ്യുക"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"ഡയൽ ചെയ്യാനുള്ള നമ്പർ"</string>
@@ -95,12 +83,11 @@
     <string name="add_contact" msgid="4579643070374941999">"കോൺടാക്‌റ്റുകളിൽ ചേർക്കുക"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"2 സെക്കൻഡ് താൽക്കാലികമായി നിർത്തൽ ചേർക്കുക"</string>
     <string name="add_wait" msgid="3360818652790319634">"കാത്തിരിക്കൽ ചേർക്കുക"</string>
-    <string name="menu_select_account" msgid="5576598753317289565">"അക്കൗണ്ട് തിരഞ്ഞെടുക്കുക"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"ക്രമീകരണങ്ങൾ"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"പുതിയ കോണ്‍ടാക്റ്റ്"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"എല്ലാ കോൺടാക്റ്റുകളും"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"കോൾ വിശദാംശങ്ങൾ"</string>
-    <string name="toast_call_detail_error" msgid="7200975244804730096">"അഭ്യർത്ഥിച്ച കോളിനായി വിശദാംശങ്ങൾ വായിക്കാനായില്ല."</string>
+    <string name="toast_call_detail_error" msgid="6947041258280380832">"വിശദാംശങ്ങൾ ലഭ്യമല്ല"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"ടച്ച് ടോൺ കീപാഡ് ഉപയോഗിക്കുക"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"വിളിച്ചുകൊണ്ടിരിക്കുന്ന കോളിലേക്ക് മടങ്ങുക"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"കോൾ ചേർക്കുക"</string>
@@ -119,18 +106,16 @@
     <string name="description_new_voicemail" msgid="2133792360865517746">"പുതിയ വോയ്‌സ്‌മെയിൽ."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> കോളുകൾ."</string>
     <string name="description_video_call" msgid="2933838090743214204">"വീഡിയോ കോൾ."</string>
-    <string name="description_send_text_message" msgid="7803126439934046891">"<xliff:g id="NAME">%1$s</xliff:g> എന്നതിലേക്ക് വാചക സന്ദേശം അയയ്‌ക്കുക"</string>
+    <string name="description_send_text_message" msgid="3118485319691414221">"<xliff:g id="NAME">%1$s</xliff:g> എന്നയാൾക്ക് SMS അയയ്‌ക്കുക"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"കേൾക്കാത്ത വോയ്‌സ്‌മെയിൽ"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"ശബ്ദ തിരയൽ ആരംഭിക്കുക"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> എന്നതിൽ വിളിക്കുക"</string>
     <string name="unknown" msgid="740067747858270469">"അജ്ഞാതം"</string>
     <string name="voicemail" msgid="3851469869202611441">"വോയ്‌സ്‌മെയിൽ"</string>
     <string name="private_num" msgid="6374339738119166953">"സ്വകാര്യ നമ്പർ"</string>
-    <string name="payphone" msgid="4864313342828942922">"പണം നൽകി ഉപയോഗിക്കുന്ന ഫോൺ"</string>
-    <string name="dialerKeyboardHintText" msgid="5401660096579787344">"ഡയൽ ചെയ്യാൽ കീബോർഡ് ഉപയോഗിക്കുക"</string>
-    <string name="dialerDialpadHintText" msgid="5824490365898349041">"ഒരു കോൾ ചേർക്കാൻ ഡയൽ ചെയ്യുക"</string>
-    <string name="callDetailsDurationFormat" msgid="8157706382818184268">"<xliff:g id="MINUTES">%s</xliff:g> മിനിറ്റ് <xliff:g id="SECONDS">%s</xliff:g> സെക്കൻഡ്"</string>
-    <string name="dialog_phone_call_prohibited_message" msgid="6554711866586660441">"കോൾ ചെയ്യാനായില്ല"</string>
+    <string name="payphone" msgid="7726415831153618726">"പണം നൽകി ഉപയോഗിക്കുന്ന ഫോൺ"</string>
+    <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> മി. <xliff:g id="SECONDS">%s</xliff:g> സെ."</string>
+    <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"ഈ നമ്പറിലേക്ക് കോൾ ചെയ്യാനാവില്ല"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"വോയ്‌സ്‌മെയിൽ സജ്ജീകരിക്കുന്നതിന്, മെനു &gt; ക്രമീകരണങ്ങൾ എന്നതിലേക്ക് പോകുക."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"വോയ്‌സ്‌മെയിൽ വിളിക്കാൻ ആദ്യം ഫ്ലൈറ്റ് മോഡ് ഓഫാക്കുക."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"ലോഡുചെയ്യുന്നു..."</string>
@@ -138,19 +123,19 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"സിം കാർഡിൽ നിന്നും ലോഡുചെയ്യുന്നു…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"സിം കാർഡ് കോൺടാക്റ്റുകൾ"</string>
-    <string name="add_contact_not_available" msgid="2731922990890769322">"ഈ സവിശേഷത ഉപയോഗിക്കാൻ കോൺടാക്‌റ്റുകളുടെ അപ്ലിക്കേഷൻ വീണ്ടും പ്രവർത്തനക്ഷമമാക്കുക."</string>
-    <string name="voice_search_not_available" msgid="7580616740587850828">"ശബ്ദ തിരയൽ ലഭ്യമല്ല."</string>
+    <string name="add_contact_not_available" msgid="5547311613368004859">"കോൺടാക്റ്റ് അപ്ലിക്കേഷനൊന്നും ലഭ്യമല്ല"</string>
+    <string name="voice_search_not_available" msgid="2977719040254285301">"വോയ്‌സ് തിരയൽ ലഭ്യമല്ല"</string>
     <string name="call_not_available" msgid="8941576511946492225">"ഫോൺ അപ്ലിക്കേഷൻ പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നതിനാൽ ഫോൺ കോൾ ചെയ്യാനാകില്ല."</string>
-    <string name="activity_not_available" msgid="8265265380537872585">"തിരഞ്ഞെടുത്ത പ്രവർത്തനം കൈകാര്യം ചെയ്യാൻ ഇൻസ്‌റ്റാളുചെയ്‌ത പ്രവർത്തനമൊന്നും ലഭ്യമല്ല."</string>
-    <string name="dialer_hint_find_contact" msgid="8798845521253672403">"ഒരു പേരോ ഫോൺ നമ്പറോ ടൈപ്പുചെയ്യുക"</string>
-    <string name="recentMissed_empty" msgid="4177320482947526015">"നിങ്ങൾക്ക് അടുത്തിടെയുള്ള മിസ്‌ഡ് കോളുകളൊന്നുമില്ല."</string>
-    <string name="recentVoicemails_empty" msgid="4905583746647459963">"നിങ്ങൾക്ക് അടുത്തിടെയുള്ള വോയ്‌സ്‌മെയിലുകളൊന്നുമില്ല."</string>
+    <string name="activity_not_available" msgid="2287665636817987623">"അതിനായി ഈ ഉപകരണത്തിൽ അപ്ലിക്കേഷനുകളൊന്നുമില്ല"</string>
+    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"ഒരു പേരോ ഫോൺ നമ്പറോ നൽകുക"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"കോളുകളൊന്നുമില്ല"</string>
+    <string name="recentVoicemails_empty" msgid="8582424947259156664">"പുതിയ വോയ്‌സ്‌‌മെയിലുകളൊന്നുമില്ല"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"പ്രിയപ്പെട്ടവ മാത്രം കാണിക്കുക"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ചരിത്രം"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"എല്ലാം"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"മിസ്‌ഡ്"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"വോയ്‌സ്‌മെയിൽ"</string>
-    <string name="tab_speed_dial" msgid="7807567599021643864">"സ്‌പീഡ് ഡയൽ"</string>
+    <string name="tab_speed_dial" msgid="7552166276545648893">"സ്‌പീഡ് ഡയൽ"</string>
     <string name="tab_recents" msgid="929949073851377206">"പുതിയവ"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"കോണ്‍ടാക്റ്റുകള്‍"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"പ്രിയപ്പെട്ടവയിൽ നിന്നും നീക്കംചെയ്‌തു"</string>
@@ -160,38 +145,40 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"വീഡിയോ കോൾ ചെയ്യുക"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"മുഴുവൻ കോൾ ചരിത്രവും കാണുക"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> പുതിയ മിസ്‌ഡ് കോളുകൾ"</string>
-    <string name="speed_dial_empty" msgid="5476435149276295630">"നിങ്ങൾ പതിവായി വിളിക്കുന്ന \nനമ്പറുകൾക്കുള്ള\n വൺ ടച്ച് ഡയലിംഗാണ് സ്‌പീഡ് ഡയൽ."</string>
-    <string name="all_contacts_empty" msgid="4536082452651392894">"നിങ്ങൾക്ക് കോൺടാക്‌റ്റുകളൊന്നുമില്ല."</string>
-    <string name="contact_tooltip" msgid="7817483485692282287">"എല്ലാ നമ്പറുകളും കാണാൻ ചിത്രം ടാപ്പുചെയ്യുക അല്ലെങ്കിൽ പുനഃക്രമീകരിക്കാൻ അമർത്തിപ്പിടിക്കുക"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"നിങ്ങൾ ഇടയ്ക്കിടെ വിളിക്കുന്ന പ്രിയപ്പെട്ടവർക്കും നമ്പറുകൾക്കുമായി ഒരൊറ്റ സ്പർശനത്തിൽ ഡയൽ ചെയ്യുന്ന സവിശേഷതയാണ് സ്‌പീഡ് ഡയൽ"</string>
+    <string name="all_contacts_empty" msgid="2299508125100209367">"കോൺടാക്റ്റുകളൊന്നുമില്ല"</string>
+    <string name="contact_tooltip" msgid="2019777545923635266">"എല്ലാ നമ്പറുകളും കാണാൻ ചിത്രം സ്‌പർശിക്കുക അല്ലെങ്കിൽ വീണ്ടും ക്രമീകരിക്കാൻ സ്‌പർശിച്ച് പിടിക്കുക"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"നിരസിക്കുക"</string>
     <string name="remove_contact" msgid="1080555335283662961">"നീക്കംചെയ്യുക"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"എല്ലാ കോൺ‌ടാക്റ്റുകളും"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"തിരിച്ചുവിളിക്കുക"</string>
+    <string name="call_log_action_call" msgid="8187991828921352552">"കോൾ ചെയ്യുക"</string>
+    <string name="call_log_action_redial" msgid="8159106862639797417">"വീണ്ടും ഡയൽ ചെയ്യുക"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"വീഡിയോ കോൾ"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"കേൾക്കുക"</string>
     <string name="call_log_action_details" msgid="6252596497021563115">"വിശദാംശങ്ങൾ"</string>
-    <string name="description_incoming_missed_call" msgid="2610535352863246949">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> എന്നയാളിൽ നിന്നുള്ള മിസ്‌ഡ് കോൾ, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_incoming_answered_call" msgid="7206670204016969740">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> എന്നയാളിൽ നിന്നുള്ള കോളിന് മറുപടി നൽകി, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_outgoing_call" msgid="3964211633673659733">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> എന്നയാൾക്കുള്ള കോൾ, <xliff:g id="TYPEORLOCATION">%2$s</xliff:g>, <xliff:g id="TIMEOFCALL">%3$s</xliff:g>."</string>
-    <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> എന്നയാളെ തിരിച്ചുവിളിക്കുക"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> എന്നയാൾക്കുള്ള വീഡിയോ കോൾ."</string>
-    <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> എന്നയാളിൽ നിന്നുള്ള വോയ്‌സ്മെയിൽ കേൾക്കുക"</string>
-    <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> എന്നയാളുടെ കോൾ വിശദാംശങ്ങൾ"</string>
-    <string name="toast_entry_removed" msgid="3389119736202317999">"കോൾ ലോഗ് എൻട്രി ഇല്ലാതാക്കി."</string>
-    <string name="toast_caller_id_reported" msgid="1127087402649645557">"കോൺടാക്‌റ്റ് റിപ്പോർട്ടുചെയ്തു."</string>
+    <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> എന്നതിൽ നിന്നുള്ള മിസ്ഡ് കോൾ."</string>
+    <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> എന്നതിൽ നിന്നുള്ള മറുപടി നൽകിയ കോൾ."</string>
+    <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> എന്നതിലേക്കുള്ള കോൾ."</string>
+    <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> എന്നതിൽ"</string>
+    <string name="description_call_back_action" msgid="3012837380108884260">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നയാളെ തിരിച്ചുവിളിക്കുക"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നയാൾക്കുള്ള വീഡിയോ കോൾ."</string>
+    <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നയാളിൽ നിന്നുള്ള വോയ്‌സ്മെയിൽ കേൾക്കുക"</string>
+    <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നയാളുടെ കോൾ വിശദാംശങ്ങൾ"</string>
+    <string name="toast_entry_removed" msgid="8010830299576311534">"കോൾ ചരിത്രത്തിൽ നിന്ന് ഇല്ലാതാക്കി"</string>
+    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Google-ലേക്ക് നമ്പർ റിപ്പോർട്ടുചെയ്‌തു"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"റിപ്പോർട്ടുചെയ്യുക"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ഇന്ന്"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"ഇന്നലെ"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"പഴയത്"</string>
-    <string name="call_detail_list_header" msgid="866455969433213220">"കോൾ ലിസ്‌റ്റ്"</string>
+    <string name="call_detail_list_header" msgid="3752717059699600861">"കോൾ ലിസ്‌റ്റ്"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"സ്‌പീക്കർ ഓണാക്കുക."</string>
     <string name="voicemail_speaker_off" msgid="7390530056413093958">"സ്‌പീക്കർ ഓഫാക്കുക."</string>
     <string name="voicemail_play_faster" msgid="3444751008615323006">"വേഗത്തിൽ പ്ലേചെയ്യുക."</string>
     <string name="voicemail_play_slower" msgid="4544796503902818832">"കുറഞ്ഞവേഗതയിൽ പ്ലേചെയ്യുക."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"പ്ലേബാക്ക് ആരംഭിക്കുകയോ താൽക്കാലികമായി നിർത്തുകയോ ചെയ്യുക."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="general_settings_label" msgid="4787443826763795004">"പൊതു ക്രമീകരണങ്ങൾ"</string>
-    <string name="general_settings_description" msgid="4838560696004337578">"കോൺടാക്‌റ്റ് ഡിസ്‌പ്ലേ, ശബ്‌ദങ്ങൾ, ദ്രുത പ്രതികരണങ്ങൾ എന്നിവ"</string>
+    <string name="general_settings_label" msgid="5748319557716674189">"പൊതുവായത്"</string>
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"കോൺടാക്‌റ്റ് ഡിസ്പ്ലേ ഓപ്ഷനുകൾ"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"ശബ്‌ദങ്ങളും വൈബ്രേറ്റുചെയ്യലും"</string>
     <string name="ringtone_title" msgid="760362035635084653">"ഫോൺ റിംഗ്ടോൺ"</string>
@@ -199,6 +186,6 @@
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"ഡയൽപാഡ് ടോണുകൾ"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"മറ്റുള്ളവ"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ദ്രുത പ്രതികരണങ്ങൾ"</string>
-    <string name="call_settings_label" msgid="7416182166943714852">"കോൾ ക്രമീകരണങ്ങൾ"</string>
-    <string name="call_settings_description" msgid="2756622428019213052">"വോയ്‌സ്മെയിൽ, കോൾ വെയ്‌റ്റിംഗ് എന്നിവയും മറ്റുള്ളവയും"</string>
+    <string name="call_settings_label" msgid="313434211353070209">"കോളുകൾ"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"കോൾ ചെയ്യാനുള്ള അക്കൗണ്ടുകൾ"</string>
 </resources>

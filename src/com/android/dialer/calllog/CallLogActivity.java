@@ -17,12 +17,15 @@ package com.android.dialer.calllog;
 
 import android.app.ActionBar;
 import android.app.ActionBar.LayoutParams;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -40,14 +43,18 @@ import android.widget.SearchView.OnQueryTextListener;
 
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.list.ViewPagerTabs;
+import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
-import com.android.dialerbind.analytics.AnalyticsActivity;
 import com.android.dialer.callstats.CallStatsFragment;
 import com.android.dialer.widget.DoubleDatePickerDialog;
 
-public class CallLogActivity extends AnalyticsActivity implements
-        DoubleDatePickerDialog.OnDateSetListener {
+import com.android.dialer.voicemail.VoicemailStatusHelper;
+import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
+
+public class CallLogActivity extends Activity implements
+    ViewPager.OnPageChangeListener, DoubleDatePickerDialog.OnDateSetListener {
+    private Handler mHandler;
     private ViewPager mViewPager;
     private ViewPagerTabs mViewPagerTabs;
     private FragmentPagerAdapter mViewPagerAdapter;
@@ -77,13 +84,28 @@ public class CallLogActivity extends AnalyticsActivity implements
         public Fragment getItem(int position) {
             switch (position) {
                 case TAB_INDEX_MSIM:
-                    mMSimCallsFragment = new MSimCallLogFragment();
-                    mMSimCallsFragment.setHasOptionsMenu(true);
-                    return mMSimCallsFragment;
+                    MSimCallLogFragment ms = new MSimCallLogFragment();
+                    ms.setHasOptionsMenu(true);
+                    return ms;
                 case TAB_INDEX_MSIM_STATS:
                     return new CallStatsFragment();
             }
             throw new IllegalStateException("No fragment at position " + position);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            final ListFragment fragment =
+                    (ListFragment) super.instantiateItem(container, position);
+            switch (position) {
+                case TAB_INDEX_MSIM:
+                    mMSimCallsFragment = (MSimCallLogFragment)fragment;
+                    break;
+                case TAB_INDEX_MSIM_STATS:
+                    mStatsFragment = (CallStatsFragment)fragment;
+                    break;
+            }
+            return fragment;
         }
 
         @Override
@@ -403,5 +425,42 @@ public class CallLogActivity extends AnalyticsActivity implements
                 mStatsFragment.onDateSet(from, to);
                 break;
         }
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        mViewPagerTabs.onPageScrolled(position, positionOffset, positionOffsetPixels);
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (isResumed()) {
+            sendScreenViewForChildFragment(position);
+        }
+        mViewPagerTabs.onPageSelected(position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        mViewPagerTabs.onPageScrollStateChanged(state);
+    }
+
+    private void sendScreenViewForChildFragment(int position) {
+        AnalyticsUtil.sendScreenView(CallLogFragment.class.getSimpleName(), this,
+                getFragmentTagForPosition(position));
+    }
+
+    /**
+     * Returns the fragment located at the given position in the {@link ViewPagerAdapter}. May
+     * be null if the position is invalid.
+     */
+    private String getFragmentTagForPosition(int position) {
+        switch (position) {
+            case TAB_INDEX_MSIM:
+                return "All";
+            case TAB_INDEX_MSIM_STATS:
+                return "Stats";
+        }
+        return null;
     }
 }

@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.PinnedHeaderListView;
+import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialerbind.ObjectFactory;
 import com.android.dialer.lookup.LookupCache;
 import com.android.dialer.service.CachedNumberLookupService;
@@ -33,6 +34,12 @@ public class RegularSearchFragment extends SearchFragment {
 
     public RegularSearchFragment() {
         configureDirectorySearch();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        AnalyticsUtil.sendScreenView(this);
     }
 
     public void configureDirectorySearch() {

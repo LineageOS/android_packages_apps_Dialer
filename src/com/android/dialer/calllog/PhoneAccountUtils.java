@@ -18,21 +18,40 @@ package com.android.dialer.calllog;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Methods to help extract {@code PhoneAccount} information from database and Telecomm sources
  */
 public class PhoneAccountUtils {
     /**
-     * Generate account info from data in Telecomm database
+     * Return a list of phone accounts that are subscription/SIM accounts.
      */
-    public static PhoneAccountHandle getAccount(String componentString,
-            String accountId) {
+    public static List<PhoneAccountHandle> getSubscriptionPhoneAccounts(Context context) {
+        final TelecomManager telecomManager =
+                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+
+        List<PhoneAccountHandle> subscriptionAccountHandles = new ArrayList<PhoneAccountHandle>();
+        List<PhoneAccountHandle> accountHandles = telecomManager.getCallCapablePhoneAccounts();
+        for (PhoneAccountHandle accountHandle : accountHandles) {
+            PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+            if (account.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)) {
+                subscriptionAccountHandles.add(accountHandle);
+            }
+        }
+        return subscriptionAccountHandles;
+    }
+
+    /**
+     * Compose PhoneAccount object from component name and account id.
+     */
+    public static PhoneAccountHandle getAccount(String componentString, String accountId) {
         if (TextUtils.isEmpty(componentString) || TextUtils.isEmpty(accountId)) {
             return null;
         }
@@ -41,25 +60,27 @@ public class PhoneAccountUtils {
     }
 
     /**
-     * Generate account icon from data in Telecomm database
+     * Extract account label from PhoneAccount object.
      */
-    public static Drawable getAccountIcon(Context context, PhoneAccountHandle phoneAccount) {
-        final PhoneAccount account = getAccountOrNull(context, phoneAccount);
-        if (account == null) {
-            return null;
+    public static String getAccountLabel(Context context, PhoneAccountHandle accountHandle) {
+        PhoneAccount account = getAccountOrNull(context, accountHandle);
+        if (account != null && account.getLabel() != null) {
+            return account.getLabel().toString();
         }
-        return account.createIconDrawable(context);
+        return null;
     }
 
     /**
-     * Generate account label from data in Telecomm database
+     * Extract account color from PhoneAccount object.
      */
-    public static String getAccountLabel(Context context, PhoneAccountHandle phoneAccount) {
-        final PhoneAccount account = getAccountOrNull(context, phoneAccount);
-        if (account == null) {
-            return null;
-        }
-        return account.getLabel().toString();
+    public static int getAccountColor(Context context, PhoneAccountHandle accountHandle) {
+        TelecomManager telecomManager =
+                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+        final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+
+        // For single-sim devices the PhoneAccount will be NO_HIGHLIGHT_COLOR by default, so it is
+        // safe to always use the account highlight color.
+        return account == null ? PhoneAccount.NO_HIGHLIGHT_COLOR : account.getHighlightColor();
     }
 
     /**
@@ -67,14 +88,13 @@ public class PhoneAccountUtils {
      * single registered and enabled account, return null.
      */
     private static PhoneAccount getAccountOrNull(Context context,
-            PhoneAccountHandle phoneAccount) {
-        final TelecomManager telecomManager =
+            PhoneAccountHandle accountHandle) {
+        TelecomManager telecomManager =
                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        final PhoneAccount account = telecomManager.getPhoneAccount(phoneAccount);
-        if (account == null || !telecomManager.hasMultipleCallCapableAccounts()) {
+        final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+        if (!telecomManager.hasMultipleCallCapableAccounts()) {
             return null;
         }
         return account;
     }
-
 }

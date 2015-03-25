@@ -22,6 +22,7 @@ import android.provider.CallLog.Calls;
 import android.test.AndroidTestCase;
 import android.view.View;
 
+import com.android.contacts.common.CallUtil;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
@@ -60,12 +61,11 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         super.setUp();
         Context context = getContext();
         mResources = context.getResources();
-        CallTypeHelper callTypeHelper = new CallTypeHelper(mResources);
-        final TestPhoneNumberUtilsWrapper phoneUtils = new TestPhoneNumberUtilsWrapper(
-                TEST_VOICEMAIL_NUMBER);
-        PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
-                mResources, callTypeHelper, phoneUtils);
-        mPhoneNumberDisplayHelper = new PhoneNumberDisplayHelper(mResources);
+        final TestPhoneNumberUtilsWrapper phoneUtils =
+                new TestPhoneNumberUtilsWrapper(context, TEST_VOICEMAIL_NUMBER);
+        PhoneCallDetailsHelper phoneCallDetailsHelper =
+                new PhoneCallDetailsHelper(context, mResources, phoneUtils);
+        mPhoneNumberDisplayHelper = new PhoneNumberDisplayHelper(context, mResources, phoneUtils);
         mHelper = new CallLogListItemHelper(phoneCallDetailsHelper, mPhoneNumberDisplayHelper,
                 mResources);
         mViews = CallLogListItemViews.createForTest(context);
@@ -319,14 +319,18 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      */
     public void testGetCallDescription_Video() {
         PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
-                TEST_FORMATTED_NUMBER,
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                 new int[]{Calls.INCOMING_TYPE, Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION,
-                null, null, Calls.FEATURES_VIDEO, null, null);
+                null, Calls.FEATURES_VIDEO, null, null);
 
         CharSequence description = mHelper.getCallDescription(getContext(), details);
+        final boolean isVideoEnabled = CallUtil.isVideoEnabled(getContext());
         assertTrue(description.toString()
-                .contains(this.mResources.getString(R.string.description_video_call, 2)));
+                .contains(this.mResources.getString(
+                        isVideoEnabled
+                        ? R.string.description_video_call
+                        : R.string.description_num_calls,
+                                2)));
     }
 
     /** Asserts that the primary action view does not have a call intent. */

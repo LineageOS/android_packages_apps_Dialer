@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
@@ -35,6 +34,7 @@ import com.android.contacts.common.test.mocks.MockContentProvider;
 import com.android.contacts.common.test.mocks.MockContentProvider.Query;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.interactions.PhoneNumberInteraction.PhoneItem;
+import com.android.dialer.util.TestConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +47,6 @@ import java.util.List;
  */
 @SmallTest
 public class PhoneNumberInteractionTest extends InstrumentationTestCase {
-
-    static {
-        // AsyncTask class needs to be initialized on the main thread.
-        //AsyncTask.init();
-    }
-
     private final static class TestPhoneNumberInteraction extends PhoneNumberInteraction {
         private ArrayList<PhoneItem> mPhoneList;
 
@@ -179,7 +173,7 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
         Intent intent = mContext.getIntentForStartActivity();
         assertNotNull(intent);
 
-        assertEquals(Intent.ACTION_CALL_PRIVILEGED, intent.getAction());
+        assertEquals(TestConstants.CALL_INTENT_ACTION, intent.getAction());
         assertEquals("tel:123", intent.getDataString());
     }
 
@@ -197,7 +191,7 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
         Intent intent = mContext.getIntentForStartActivity();
         assertNotNull(intent);
 
-        assertEquals(Intent.ACTION_CALL_PRIVILEGED, intent.getAction());
+        assertEquals(TestConstants.CALL_INTENT_ACTION, intent.getAction());
         assertEquals("sip:example%40example.com", intent.getDataString());
     }
 
