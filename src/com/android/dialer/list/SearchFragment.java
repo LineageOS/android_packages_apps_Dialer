@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.AbsListView;
@@ -40,6 +41,7 @@ import com.android.dialer.util.DialerUtils;
 import com.android.phone.common.animation.AnimUtils;
 
 public class SearchFragment extends PhoneNumberPickerFragment {
+    private static final String TAG  = SearchFragment.class.getSimpleName();
     private static final String SMS_URI_PREFIX = "sms:";
 
     private OnListFragmentScrolledListener mActivityScrollListener;
@@ -156,6 +158,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         final Intent intent;
         final String number;
 
+        Log.i(TAG, "onItemClick: shortcutType=" + shortcutType);
         switch (shortcutType) {
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
                 super.onItemClick(position, id);
