@@ -120,10 +120,6 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     private CallDetailHeader mCallDetailHeader;
     private CallTypeHelper mCallTypeHelper;
     private PhoneNumberDisplayHelper mPhoneNumberHelper;
-    private QuickContactBadge mQuickContactBadge;
-    private TextView mCallerName;
-    private TextView mCallerNumber;
-    private TextView mAccountLabel;
     private AsyncTaskExecutor mAsyncTaskExecutor;
     private ContactInfoHelper mContactInfoHelper;
 
@@ -442,36 +438,6 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                 final boolean isSipNumber = PhoneNumberUtilsWrapper.isSipNumber(mNumber);
 
                 final CharSequence callLocationOrType = getNumberTypeOrLocation(firstDetails);
-
-                final CharSequence displayNumber =
-                        mPhoneNumberHelper.getDisplayNumber(
-                                firstDetails.accountHandle,
-                                firstDetails.number,
-                                firstDetails.numberPresentation,
-                                firstDetails.formattedNumber);
-                final String displayNumberStr = mBidiFormatter.unicodeWrap(
-                        displayNumber.toString(), TextDirectionHeuristics.LTR);
-
-                if (!TextUtils.isEmpty(firstDetails.name)) {
-                    mCallerName.setText(firstDetails.name);
-                    mCallerNumber.setText(callLocationOrType + " " + displayNumberStr);
-                } else {
-                    mCallerName.setText(displayNumberStr);
-                    if (!TextUtils.isEmpty(callLocationOrType)) {
-                        mCallerNumber.setText(callLocationOrType);
-                        mCallerNumber.setVisibility(View.VISIBLE);
-                    } else {
-                        mCallerNumber.setVisibility(View.GONE);
-                    }
-                }
-
-                String accountLabel = PhoneAccountUtils.getAccountLabel(context, accountHandle);
-                if (!TextUtils.isEmpty(accountLabel)) {
-                    mAccountLabel.setText(accountLabel);
-                    mAccountLabel.setVisibility(View.VISIBLE);
-                } else {
-                    mAccountLabel.setVisibility(View.GONE);
-                }
 
                 mHasEditNumberBeforeCallOption =
                         canPlaceCallsTo && !isSipNumber && !isVoicemailNumber;
