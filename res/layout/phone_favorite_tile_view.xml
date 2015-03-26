@@ -108,7 +108,7 @@
 
         <ImageButton
             android:id="@id/contact_tile_secondary_button"
-            android:src="@drawable/overflow_thumbnail"
+            android:src="@drawable/ic_more_vert_24dp"
             android:background="@drawable/item_background_material_dark"
             android:layout_height="@dimen/contact_tile_info_button_height_and_width"
             android:layout_width="@dimen/contact_tile_info_button_height_and_width"
