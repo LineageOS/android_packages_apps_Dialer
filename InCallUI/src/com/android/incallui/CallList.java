@@ -21,6 +21,7 @@ import com.google.common.base.Preconditions;
 
 import android.os.Handler;
 import android.os.Message;
+import android.os.Trace;
 import android.telecom.DisconnectCause;
 import android.telecom.Phone;
 
@@ -71,12 +72,14 @@ public class CallList implements InCallPhoneListener {
     private Phone.Listener mPhoneListener = new Phone.Listener() {
         @Override
         public void onCallAdded(Phone phone, android.telecom.Call telecommCall) {
+            Trace.beginSection("onCallAdded");
             Call call = new Call(telecommCall);
             if (call.getState() == Call.State.INCOMING) {
                 onIncoming(call, call.getCannedSmsResponses());
             } else {
                 onUpdate(call);
             }
+            Trace.endSection();
         }
         @Override
         public void onCallRemoved(Phone phone, android.telecom.Call telecommCall) {
@@ -139,8 +142,10 @@ public class CallList implements InCallPhoneListener {
      * Called when a single call has changed.
      */
     public void onUpdate(Call call) {
+        Trace.beginSection("onUpdate");
         onUpdateCall(call);
         notifyGenericListeners();
+        Trace.endSection();
     }
 
     public void notifyCallUpdateListeners(Call call) {

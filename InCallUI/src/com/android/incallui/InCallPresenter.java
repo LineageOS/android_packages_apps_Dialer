@@ -388,6 +388,8 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
         }
     }
 
+    private boolean mAwaitingCallListUpdate = false;
+
     /**
      * Called when there is a change to the call list.
      * Sets the In-Call state for the entire in-call app based on the information it gets from
@@ -396,9 +398,17 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
      */
     @Override
     public void onCallListChange(CallList callList) {
+        if (mInCallActivity != null && mInCallActivity.getCallCardFragment() != null &&
+                mInCallActivity.getCallCardFragment().isAnimating()) {
+            mAwaitingCallListUpdate = true;
+            return;
+        }
         if (callList == null) {
             return;
         }
+
+        mAwaitingCallListUpdate = false;
+
         InCallState newState = getPotentialStateFromCallList(callList);
         InCallState oldState = mInCallState;
         newState = startOrFinishUi(newState);
@@ -511,6 +521,12 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
             mInCallActivity.showCallCardFragment(true);
             mInCallActivity.getCallCardFragment().animateForNewOutgoingCall();
             CircularRevealFragment.endCircularReveal(mInCallActivity.getFragmentManager());
+        }
+    }
+
+    public void onShrinkAnimationComplete() {
+        if (mAwaitingCallListUpdate) {
+            onCallListChange(mCallList);
         }
     }
 
