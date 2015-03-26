@@ -47,8 +47,8 @@ public class GeneralSettingsFragment extends PreferenceFragment
     private static final String BUTTON_VIBRATE_ON_RING = "button_vibrate_on_ring";
     private static final String BUTTON_PLAY_DTMF_TONE  = "button_play_dtmf_tone";
     private static final String BUTTON_RESPOND_VIA_SMS_KEY = "button_respond_via_sms_key";
-    private static final String CATEGORY_OTHER_KEY = "dialer_general_other_settings_category_key";
     private static final String BUTTON_SPEED_DIAL_KEY  = "speed_dial_settings";
+    private static final String CATEGORY_OTHER_KEY = "dialer_general_other_settings_category_key";
 
     private static final int MSG_UPDATE_RINGTONE_SUMMARY = 1;
 

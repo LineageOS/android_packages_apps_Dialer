@@ -117,9 +117,6 @@ public class CallTypeHelper {
             case Calls.VOICEMAIL_TYPE:
                 return mVoicemailName;
 
-            case Calls.BLACKLIST_TYPE:
-                return mBlacklistedName;
-
             default:
                 return mMissedName;
         }

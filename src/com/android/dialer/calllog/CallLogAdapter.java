@@ -346,9 +346,9 @@ public class CallLogAdapter extends GroupingListAdapter
         views.rowId = rowId;
 
         String accId = c.getString(CallLogQuery.ACCOUNT_ID);
-        long subId = SubscriptionManager.DEFAULT_SUB_ID;
+        int subId = SubscriptionManager.DEFAULT_SUBSCRIPTION_ID;
         if (accId!= null && !accId.equals("E") && !accId.toLowerCase().contains("sip")) {
-             subId = Long.parseLong(accId);
+             subId = Integer.parseInt(accId);
         }
 
         // For entries in the call log, check if the day group has changed and display a header

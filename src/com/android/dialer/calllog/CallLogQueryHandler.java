@@ -195,7 +195,6 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             }
             // Add a clause to fetch only items newer than the requested date
             selectionArgs.add(Integer.toString(callType));
-
             if (callType == Calls.INCOMING_TYPE) {
                 selectionArgs.add(Integer.toString(Calls.INCOMING_IMS_TYPE));
             } else if (callType == Calls.OUTGOING_TYPE) {
@@ -206,7 +205,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         }
 
         if (slotId > CALL_SUB_ALL) {
-            long[] subId = SubscriptionManager.getSubId(slotId);
+            int[] subId = SubscriptionManager.getSubId(slotId);
             if (subId != null && subId.length >= 1) {
                 if (where.length() > 0) {
                     where.append(" AND ");

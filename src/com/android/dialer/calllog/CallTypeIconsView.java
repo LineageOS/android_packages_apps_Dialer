@@ -117,8 +117,6 @@ public class CallTypeIconsView extends View {
                 return mResources.missed;
             case Calls.VOICEMAIL_TYPE:
                 return mResources.voicemail;
-            case Calls.BLACKLIST_TYPE:
-                return mResources.blacklist;
 
             default:
                 // It is possible for users to end up with calls with unknown call types in their

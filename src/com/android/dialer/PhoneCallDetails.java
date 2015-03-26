@@ -78,7 +78,7 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
     /**
      * The account id associated with the call.
      */
-    public final long accountId;
+    public final int accountId;
     /**
      * Features applicable to this call.
      */
@@ -131,7 +131,7 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
     public PhoneCallDetails(CharSequence number, int numberPresentation,
             CharSequence formattedNumber, String countryIso, String geocode,
             int[] callTypes, long date, long duration, String accountLabel, Drawable accountIcon,
-            int features, Long dataUsage, String transcription, long accountId, String operator) {
+            int features, Long dataUsage, String transcription, int accountId, String operator) {
         this(number, numberPresentation, formattedNumber, countryIso, geocode,
                 callTypes, date, duration, "", 0, "", null, null, 0, accountLabel, accountIcon,
                 features, dataUsage, transcription, Calls.DURATION_TYPE_ACTIVE, accountId,
@@ -156,7 +156,7 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
             int[] callTypes, long date, long duration, CharSequence name,
             int numberType, CharSequence numberLabel, Uri contactUri,
             Uri photoUri, int sourceType, String accountLabel, Drawable accountIcon, int features,
-            Long dataUsage, String transcription, int durationType, long accountId) {
+            Long dataUsage, String transcription, int durationType, int accountId) {
         this(number, numberPresentation, formattedNumber, countryIso, geocode, callTypes, date,
                 duration, name, numberType, numberLabel, contactUri, photoUri, sourceType,
                 accountLabel, accountIcon, features, dataUsage, transcription, durationType,
@@ -169,7 +169,7 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
             int[] callTypes, long date, long duration, CharSequence name,
             int numberType, CharSequence numberLabel, Uri contactUri, Uri photoUri, int sourceType,
             String accountLabel, Drawable accountIcon, int features, Long dataUsage,
-            String transcription, int durationType, long accountId, String operator) {
+            String transcription, int durationType, int accountId, String operator) {
         this.number = number;
         this.numberPresentation = numberPresentation;
         this.formattedNumber = formattedNumber;
@@ -235,7 +235,7 @@ public class PhoneCallDetails implements CallDetailHeader.Data {
         return geocode;
     }
     @Override
-    public long getAccountId() {
+    public int getAccountId() {
         return accountId;
     }
 }

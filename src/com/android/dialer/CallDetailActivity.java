@@ -94,9 +94,9 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
 
     //add firewall menu
     private static final Uri WHITELIST_CONTENT_URI = Uri
-                             .parse("content://com.android.firewall/whitelistitems");
+            .parse("content://com.android.firewall/whitelistitems");
     private static final Uri BLACKLIST_CONTENT_URI = Uri
-                             .parse("content://com.android.firewall/blacklistitems");
+            .parse("content://com.android.firewall/blacklistitems");
     /** The time to wait before enabling the blank the screen due to the proximity sensor. */
     private static final long PROXIMITY_BLANK_DELAY_MILLIS = 100;
     /** The time to wait before disabling the blank the screen due to the proximity sensor. */
@@ -433,7 +433,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                 final int numberPresentation = firstDetails.numberPresentation;
                 final Uri contactUri = firstDetails.contactUri;
                 final Uri photoUri = firstDetails.photoUri;
-                final long subId = firstDetails.accountId;
+                final int subId = firstDetails.accountId;
 
                 // Set the details header, based on the first phone call.
                 mCallDetailHeader.updateViews(firstDetails);
@@ -516,9 +516,9 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                     callCursor.getString(ACCOUNT_COMPONENT_NAME),
                     callCursor.getString(ACCOUNT_ID)));
             String accId = callCursor.getString(ACCOUNT_ID);
-            long subId = SubscriptionManager.DEFAULT_SUB_ID;
+            int subId = SubscriptionManager.DEFAULT_SUBSCRIPTION_ID;
             if (accId!=null && !accId.equals("E") && !accId.toLowerCase().contains("sip")) {
-                subId = Long.parseLong(accId);
+                subId = Integer.parseInt(accId);
             }
 
             if (TextUtils.isEmpty(countryIso)) {
@@ -656,11 +656,11 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     public void onMenuAddToBlackList(MenuItem menuItem) {
         Bundle blackBundle = new Bundle();
         new AlertDialog.Builder(this)
-            .setMessage(getString(R.string.firewall_add_blacklist_wring))
+            .setMessage(getString(R.string.firewall_add_blacklist_warning))
             .setPositiveButton(android.R.string.ok, new OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if(addNumberToFirewall(true , mNumber)){
+                    if (addNumberToFirewall(mNumber, true)) {
                         Toast.makeText(CallDetailActivity.this,
                             getString(R.string.firewall_save_success),
                                 Toast.LENGTH_SHORT).show();
@@ -673,7 +673,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
     }
 
     public void onMenuAddToWhiteList(MenuItem menuItem) {
-        if(addNumberToFirewall(false , mNumber)){
+        if (addNumberToFirewall(mNumber, true)) {
              Toast.makeText(CallDetailActivity.this,
                 getString(R.string.firewall_save_success),
                     Toast.LENGTH_SHORT).show();
@@ -681,7 +681,7 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
 
     }
 
-    private boolean addNumberToFirewall(boolean isBlacklist,String number){
+    private boolean addNumberToFirewall(String number, boolean isBlacklist) {
         Log.d(TAG, "number: " + number);
          if (TextUtils.isEmpty(number)) {
             Toast.makeText(CallDetailActivity.this,
@@ -689,7 +689,6 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
                     Toast.LENGTH_SHORT).show();
             return false;
         }
-        boolean ret = true;
         ContentValues values = new ContentValues();
         String queryNumber = number.replaceAll("[\\-\\/ ]", "");
         int len = queryNumber.length();
@@ -697,31 +696,31 @@ public class CallDetailActivity extends AnalyticsActivity implements ProximitySe
             queryNumber = number.substring(len - 11, len);
         }
         Uri firewallUri = isBlacklist? BLACKLIST_CONTENT_URI: WHITELIST_CONTENT_URI;
-        Cursor fiewallCursor = getContentResolver().query(firewallUri,
+        Cursor firewallCursor = getContentResolver().query(firewallUri,
                 new String[] {
                         "_id", "number", "person_id", "name"
                 },
                 "number" + " LIKE '%" + queryNumber + "'",
                 null,
                 null);
-        if (fiewallCursor != null){
-            if (fiewallCursor.getCount() > 0) {
-                fiewallCursor.close();
-                fiewallCursor = null;
-                 String Stoast = isBlacklist?getString(R.string.firewall_number_in_black)
-                                     :getString(R.string.firewall_number_in_white);
-                Toast.makeText(CallDetailActivity.this, Stoast,
+        if (firewallCursor != null){
+            if (firewallCursor.getCount() > 0) {
+                firewallCursor.close();
+                firewallCursor = null;
+                String toastString = isBlacklist? getString(R.string.firewall_number_in_black)
+                        : getString(R.string.firewall_number_in_white);
+                Toast.makeText(CallDetailActivity.this, toastString,
                     Toast.LENGTH_SHORT).show();
                 return false;
             }
-            fiewallCursor.close();
-            fiewallCursor = null;
+            firewallCursor.close();
+            firewallCursor = null;
         }
         values.put("number", queryNumber);
         values.put("name", "");
         // add new
-        Uri mUri = getContentResolver().insert(firewallUri, values);
-        return ret;
+        getContentResolver().insert(firewallUri, values);
+        return true;
     }
 
     public void onMenuRemoveFromCallLog(MenuItem menuItem) {

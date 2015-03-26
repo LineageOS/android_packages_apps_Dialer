@@ -287,7 +287,7 @@ public class SpeedDialListActivity extends ListActivity implements
         if (position == 0) {
             Intent intent = new Intent(ACTION_ADD_VOICEMAIL);
             if (TelephonyManager.getDefault().getPhoneCount() > 1) {
-                long sub = SubscriptionManager.getDefaultVoiceSubId();
+                int sub = SubscriptionManager.getDefaultVoiceSubId();
                 intent.setClassName("com.android.phone",
                         "com.android.phone.MSimCallFeaturesSubSetting");
                 intent.putExtra(PhoneConstants.SUBSCRIPTION_KEY, sub);
@@ -340,7 +340,7 @@ public class SpeedDialListActivity extends ListActivity implements
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(ACTION_ADD_VOICEMAIL);
-                        long sub = Long.parseLong(accounts[which].getId());
+                        int sub = Integer.parseInt(accounts[which].getId());
                         intent.setClassName("com.android.phone",
                                 "com.android.phone.MSimCallFeaturesSubSetting");
                         intent.putExtra(SUBSCRIPTION_KEY, sub);

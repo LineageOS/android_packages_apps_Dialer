@@ -88,7 +88,7 @@ public class CallDetailHeader {
         Uri getPhotoUri();
         CharSequence getAccountLabel();
         CharSequence getGeocode();
-        long getAccountId();
+        int getAccountId();
     }
 
     public CallDetailHeader(Activity activity, PhoneNumberDisplayHelper phoneNumberHelper) {
@@ -108,7 +108,7 @@ public class CallDetailHeader {
     public void updateViews(Data data) {
         // Cache the details about the phone number.
         final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper();
-        final long accountId = data.getAccountId();
+        final int accountId = data.getAccountId();
         final CharSequence dataName = data.getName();
         final CharSequence dataNumber = data.getNumber();
         final CharSequence dataAccount = data.getAccountLabel();

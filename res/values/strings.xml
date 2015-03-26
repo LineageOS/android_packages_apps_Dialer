@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2013-2015 The Linux Foundation. All Rights Reserved.
+  ~ Copyright (C) 2013-2014 The Linux Foundation. All Rights Reserved.
   ~ Not a Contribution.
   ~ Copyright (C) 2012 The Android Open Source Project
   ~
@@ -847,7 +847,7 @@
     <string name="firewall_number_in_black">"Number already in blacklist"</string>
     <string name="firewall_number_in_white">"Number already in whitelist"</string>
     <string name="firewall_save_success">Saved successfully</string>
-    <string name="firewall_add_blacklist_wring">if you add this number to blacklsit, you will not receive the messages and calls from it</string>
+    <string name="firewall_add_blacklist_warning">if you add this number to blacklsit, you will not receive the messages and calls from it</string>
 
     <string name="set_speed_dial">Speed dial settings</string>
     <string name="input_number">Input Number</string>
