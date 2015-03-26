@@ -20,7 +20,6 @@
     <string name="applicationLabel" msgid="8490255569343340580">"Nömrə yığan"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="1419116422359067949">"Zəng jurnalı"</string>
-    <string name="menu_sendTextMessage" msgid="6937343460284499306">"Mətnli mesaj göndərin"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Zəng <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Zəng etmədən öncə nömrəyə düzəliş edin"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Kontaktlara əlavə edin"</string>
@@ -124,5 +123,4 @@
     <skip />
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Geri qaytar"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> nömrəsinə zəng edin"</string>
-    <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Kontaktlara əlavə edin"</string>
 </resources>
