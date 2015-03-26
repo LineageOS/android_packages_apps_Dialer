@@ -672,7 +672,7 @@ public class CallLogFragment extends ListFragment
         if (number == null) {
             return;
         }
-        mAdapter.onBadDataReported(number);
+        mAdapter.invalidateCache();
         mAdapter.notifyDataSetChanged();
     }
 
