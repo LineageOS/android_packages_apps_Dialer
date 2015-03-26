@@ -238,7 +238,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private String mVoiceSearchQuery;
 
-    private class OptionsPopupMenu extends PopupMenu {
+    protected class OptionsPopupMenu extends PopupMenu {
         public OptionsPopupMenu(Context context, View anchor) {
             super(context, anchor, Gravity.END);
         }
@@ -808,7 +808,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
     }
 
-    private OptionsPopupMenu buildOptionsMenu(View invoker) {
+    protected OptionsPopupMenu buildOptionsMenu(View invoker) {
         final OptionsPopupMenu popupMenu = new OptionsPopupMenu(this, invoker);
         popupMenu.inflate(R.menu.dialtacts_options);
         final Menu menu = popupMenu.getMenu();
