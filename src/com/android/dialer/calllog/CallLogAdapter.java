@@ -1254,48 +1254,6 @@ public class CallLogAdapter extends GroupingListAdapter
         mDayGroups.clear();
     }
 
-    /*
-     * Get the number from the Contacts, if available, since sometimes
-     * the number provided by caller id may not be formatted properly
-     * depending on the carrier (roaming) in use at the time of the
-     * incoming call.
-     * Logic : If the caller-id number starts with a "+", use it
-     *         Else if the number in the contacts starts with a "+", use that one
-     *         Else if the number in the contacts is longer, use that one
-     */
-    public String getBetterNumberFromContacts(String number, String countryIso) {
-        String matchingNumber = null;
-        // Look in the cache first. If it's not found then query the Phones db
-        NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
-        ContactInfo ci = mContactInfoCache.getPossiblyExpired(numberCountryIso);
-        if (ci != null && ci != ContactInfo.EMPTY) {
-            matchingNumber = ci.number;
-        } else {
-            try {
-                Cursor phonesCursor = mContext.getContentResolver().query(
-                        Uri.withAppendedPath(PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, number),
-                        PhoneQuery._PROJECTION, null, null, null);
-                if (phonesCursor != null) {
-                    try {
-                        if (phonesCursor.moveToFirst()) {
-                            matchingNumber = phonesCursor.getString(PhoneQuery.MATCHED_NUMBER);
-                        }
-                    } finally {
-                        phonesCursor.close();
-                    }
-                }
-            } catch (Exception e) {
-                // Use the number from the call log
-            }
-        }
-        if (!TextUtils.isEmpty(matchingNumber) &&
-                (matchingNumber.startsWith("+")
-                        || matchingNumber.length() > number.length())) {
-            number = matchingNumber;
-        }
-        return number;
-    }
-
     /**
      * Retrieves the call Ids represented by the current call log row.
      *
