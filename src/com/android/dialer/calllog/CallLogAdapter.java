@@ -36,7 +36,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
-import android.view.ViewStub;
 import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
@@ -44,7 +43,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.common.widget.GroupingListAdapter;
-import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.util.UriUtils;
@@ -273,7 +271,14 @@ public class CallLogAdapter extends GroupingListAdapter
     private final View.OnClickListener mActionListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            startActivityForAction(view);
+            final IntentProvider intentProvider = (IntentProvider) view.getTag();
+            if (intentProvider != null) {
+                final Intent intent = intentProvider.getIntent(mContext);
+                // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
+                if (intent != null) {
+                    DialerUtils.startActivityWithErrorToast(mContext, intent);
+                }
+            }
         }
     };
 
@@ -300,17 +305,6 @@ public class CallLogAdapter extends GroupingListAdapter
             return super.onRequestSendAccessibilityEvent(host, child, event);
         }
     };
-
-    private void startActivityForAction(View view) {
-        final IntentProvider intentProvider = (IntentProvider) view.getTag();
-        if (intentProvider != null) {
-            final Intent intent = intentProvider.getIntent(mContext);
-            // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
-            if (intent != null) {
-                DialerUtils.startActivityWithErrorToast(mContext, intent);
-            }
-        }
-    }
 
     @Override
     public boolean onPreDraw() {
@@ -370,8 +364,7 @@ public class CallLogAdapter extends GroupingListAdapter
         PhoneCallDetailsHelper phoneCallDetailsHelper =
                 new PhoneCallDetailsHelper(mContext, resources, mPhoneNumberUtilsWrapper);
         mCallLogViewsHelper =
-                new CallLogListItemHelper(
-                        phoneCallDetailsHelper, mPhoneNumberHelper, resources);
+                new CallLogListItemHelper(phoneCallDetailsHelper, mPhoneNumberHelper, resources);
         mCallLogGroupBuilder = new CallLogGroupBuilder(this);
     }
 
@@ -589,7 +582,7 @@ public class CallLogAdapter extends GroupingListAdapter
         View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
 
         // Get the views to bind to and cache them.
-        CallLogListItemViews views = CallLogListItemViews.fromView(view);
+        CallLogListItemViews views = CallLogListItemViews.fromView(context, view);
         view.setTag(views);
 
         // Set text height to false on the TextViews so they don't have extra padding.
@@ -673,7 +666,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number);
 
         // Expand/collapse an actions section for the call log entry when the primary view is tapped.
-        views.primaryActionView.setOnClickListener(this.mExpandCollapseListener);
+        views.primaryActionView.setOnClickListener(mExpandCollapseListener);
 
         // Note: Binding of the action buttons is done as required in configureActionViews when the
         // user expands the actions ViewStub.
@@ -864,12 +857,13 @@ public class CallLogAdapter extends GroupingListAdapter
      * @param isExpanded The new expansion state of the view.
      */
     private void expandOrCollapseActions(View callLogItem, boolean isExpanded) {
-        final CallLogListItemViews views = (CallLogListItemViews)callLogItem.getTag();
+        final CallLogListItemViews views = (CallLogListItemViews) callLogItem.getTag();
 
         expandVoicemailTranscriptionView(views, isExpanded);
         if (isExpanded) {
             // Inflate the view stub if necessary, and wire up the event handlers.
-            inflateActionViewStub(callLogItem);
+            views.inflateActionViewStub(callLogItem, mOnReportButtonClickListener, mActionListener,
+                    mPhoneNumberUtilsWrapper, mCallLogViewsHelper);
 
             views.actionsView.setVisibility(View.VISIBLE);
             views.actionsView.setAlpha(1.0f);
@@ -901,135 +895,6 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         view.setMaxLines(isExpanded ? VOICEMAIL_TRANSCRIPTION_MAX_LINES : 1);
         view.setSingleLine(!isExpanded);
-    }
-
-    /**
-     * Configures the action buttons in the expandable actions ViewStub.  The ViewStub is not
-     * inflated during initial binding, so click handlers, tags and accessibility text must be set
-     * here, if necessary.
-     *
-     * @param callLogItem The call log list item view.
-     */
-    private void inflateActionViewStub(final View callLogItem) {
-        final CallLogListItemViews views = (CallLogListItemViews)callLogItem.getTag();
-
-        ViewStub stub = (ViewStub)callLogItem.findViewById(R.id.call_log_entry_actions_stub);
-        if (stub != null) {
-            views.actionsView = (ViewGroup) stub.inflate();
-        }
-
-        if (views.callBackButtonView == null) {
-            views.callBackButtonView = (TextView)views.actionsView.findViewById(
-                    R.id.call_back_action);
-        }
-
-        if (views.videoCallButtonView == null) {
-            views.videoCallButtonView = (TextView)views.actionsView.findViewById(
-                    R.id.video_call_action);
-        }
-
-        if (views.voicemailButtonView == null) {
-            views.voicemailButtonView = (TextView)views.actionsView.findViewById(
-                    R.id.voicemail_action);
-        }
-
-        if (views.detailsButtonView == null) {
-            views.detailsButtonView = (TextView)views.actionsView.findViewById(R.id.details_action);
-        }
-
-        if (views.reportButtonView == null) {
-            views.reportButtonView = (TextView)views.actionsView.findViewById(R.id.report_action);
-            views.reportButtonView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mOnReportButtonClickListener != null) {
-                        mOnReportButtonClickListener.onReportButtonClick(views.number);
-                    }
-                }
-            });
-        }
-
-        bindActionButtons(views);
-    }
-
-    /***
-     * Binds text titles, click handlers and intents to the voicemail, details and callback action
-     * buttons.
-     *
-     * @param views  The call log item views.
-     */
-    private void bindActionButtons(CallLogListItemViews views) {
-        boolean canPlaceCallToNumber =
-                PhoneNumberUtilsWrapper.canPlaceCallsTo(views.number, views.numberPresentation);
-        // Set return call intent, otherwise null.
-        if (canPlaceCallToNumber) {
-            boolean isVoicemailNumber =
-                    mPhoneNumberUtilsWrapper.isVoicemailNumber(views.accountHandle, views.number);
-            if (isVoicemailNumber) {
-                // Make a general call to voicemail to ensure that if there are multiple accounts
-                // it does not call the voicemail number of a specific phone account.
-                views.callBackButtonView.setTag(
-                        IntentProvider.getReturnVoicemailCallIntentProvider());
-            } else {
-                // Sets the primary action to call the number.
-                views.callBackButtonView.setTag(
-                        IntentProvider.getReturnCallIntentProvider(views.number));
-            }
-            views.callBackButtonView.setVisibility(View.VISIBLE);
-            views.callBackButtonView.setOnClickListener(mActionListener);
-
-            final int titleId;
-            if (views.callType == Calls.VOICEMAIL_TYPE || views.callType == Calls.OUTGOING_TYPE) {
-                titleId = R.string.call_log_action_redial;
-            } else {
-                titleId = R.string.call_log_action_call_back;
-            }
-            views.callBackButtonView.setText(mContext.getString(titleId));
-        } else {
-            // Number is not callable, so hide button.
-            views.callBackButtonView.setTag(null);
-            views.callBackButtonView.setVisibility(View.GONE);
-        }
-
-        // If one of the calls had video capabilities, show the video call button.
-        if (CallUtil.isVideoEnabled(mContext) && canPlaceCallToNumber &&
-                views.phoneCallDetailsViews.callTypeIcons.isVideoShown()) {
-            views.videoCallButtonView.setTag(
-                    IntentProvider.getReturnVideoCallIntentProvider(views.number));
-            views.videoCallButtonView.setVisibility(View.VISIBLE);
-            views.videoCallButtonView.setOnClickListener(mActionListener);
-        } else {
-            views.videoCallButtonView.setTag(null);
-            views.videoCallButtonView.setVisibility(View.GONE);
-        }
-
-        // For voicemail calls, show the "VOICEMAIL" action button; hide otherwise.
-        if (views.callType == Calls.VOICEMAIL_TYPE) {
-            views.voicemailButtonView.setOnClickListener(mActionListener);
-            views.voicemailButtonView.setTag(
-                    IntentProvider.getPlayVoicemailIntentProvider(
-                            views.rowId, views.voicemailUri));
-            views.voicemailButtonView.setVisibility(View.VISIBLE);
-
-            views.detailsButtonView.setVisibility(View.GONE);
-        } else {
-            views.voicemailButtonView.setTag(null);
-            views.voicemailButtonView.setVisibility(View.GONE);
-
-            views.detailsButtonView.setOnClickListener(mActionListener);
-            views.detailsButtonView.setTag(
-                    IntentProvider.getCallDetailIntentProvider(
-                            views.rowId, views.callIds, null)
-            );
-
-            if (views.canBeReportedAsInvalid && !views.reported) {
-                views.reportButtonView.setVisibility(View.VISIBLE);
-            } else {
-                views.reportButtonView.setVisibility(View.GONE);
-            }
-        }
-
-        mCallLogViewsHelper.setActionContentDescriptions(views);
     }
 
     /** Checks whether the contact info from the call log matches the one from the contacts db. */
@@ -1208,7 +1073,9 @@ public class CallLogAdapter extends GroupingListAdapter
     @VisibleForTesting
     void bindViewForTest(View view, Context context, Cursor cursor) {
         bindStandAloneView(view, context, cursor);
-        inflateActionViewStub(view);
+        CallLogListItemViews views = CallLogListItemViews.fromView(context, view);
+        views.inflateActionViewStub(view, mOnReportButtonClickListener, mActionListener,
+                mPhoneNumberUtilsWrapper, mCallLogViewsHelper);
     }
 
     /**

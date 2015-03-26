@@ -17,17 +17,27 @@
 package com.android.dialer.calllog;
 
 import android.content.Context;
+import android.provider.CallLog.Calls;
 import android.telecom.PhoneAccountHandle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.PhoneCallDetailsViews;
 import com.android.dialer.R;
 
 /**
- * Simple value object containing the various views within a call log entry.
+ * This is an object containing the various views within a call log entry. It contains values
+ * pointing to views contained by a call log list item view, so that we can improve performance
+ * by reducing the frequency with which we need to find views by IDs.
+ *
+ * This object also contains methods for inflating action views and binding action behaviors. This
+ * is a way of isolating view logic from the CallLogAdapter. We should consider moving that logic
+ * if the call log list item is eventually represented as a UI component.
  */
 public final class CallLogListItemViews {
     /** The quick contact badge for the contact. */
@@ -113,9 +123,17 @@ public final class CallLogListItemViews {
      */
     public boolean canBeReportedAsInvalid;
 
-    private CallLogListItemViews(QuickContactBadge quickContactView, View primaryActionView,
-            PhoneCallDetailsViews phoneCallDetailsViews, View callLogEntryView,
+    private Context mContext;
+
+    private CallLogListItemViews(
+            Context context,
+            QuickContactBadge quickContactView,
+            View primaryActionView,
+            PhoneCallDetailsViews phoneCallDetailsViews,
+            View callLogEntryView,
             TextView dayGroupHeader) {
+        mContext = context;
+
         this.quickContactView = quickContactView;
         this.primaryActionView = primaryActionView;
         this.phoneCallDetailsViews = phoneCallDetailsViews;
@@ -123,8 +141,134 @@ public final class CallLogListItemViews {
         this.dayGroupHeader = dayGroupHeader;
     }
 
-    public static CallLogListItemViews fromView(View view) {
+    /**
+     * Configures the action buttons in the expandable actions ViewStub. The ViewStub is not
+     * inflated during initial binding, so click handlers, tags and accessibility text must be set
+     * here, if necessary.
+     *
+     * @param callLogItem The call log list item view.
+     */
+    public void inflateActionViewStub(
+            final View callLogItem,
+            final CallLogAdapter.OnReportButtonClickListener onReportButtonClickListener,
+            View.OnClickListener actionListener,
+            PhoneNumberUtilsWrapper phoneNumberUtilsWrapper,
+            CallLogListItemHelper callLogViewsHelper) {
+        ViewStub stub = (ViewStub) callLogItem.findViewById(R.id.call_log_entry_actions_stub);
+        if (stub != null) {
+            actionsView = (ViewGroup) stub.inflate();
+        }
+
+        if (callBackButtonView == null) {
+            callBackButtonView = (TextView) actionsView.findViewById(R.id.call_back_action);
+        }
+
+        if (videoCallButtonView == null) {
+            videoCallButtonView = (TextView) actionsView.findViewById(R.id.video_call_action);
+        }
+
+        if (voicemailButtonView == null) {
+            voicemailButtonView = (TextView) actionsView.findViewById(R.id.voicemail_action);
+        }
+
+        if (detailsButtonView == null) {
+            detailsButtonView = (TextView) actionsView.findViewById(R.id.details_action);
+        }
+
+        if (reportButtonView == null) {
+            reportButtonView = (TextView) actionsView.findViewById(R.id.report_action);
+            reportButtonView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onReportButtonClickListener != null) {
+                        onReportButtonClickListener.onReportButtonClick(number);
+                    }
+                }
+            });
+        }
+
+        bindActionButtons(actionListener, phoneNumberUtilsWrapper, callLogViewsHelper);
+    }
+
+    /**
+     * Binds text titles, click handlers and intents to the voicemail, details and callback action
+     * buttons.
+     */
+    private void bindActionButtons(
+            View.OnClickListener actionListener,
+            PhoneNumberUtilsWrapper phoneNumberUtilsWrapper,
+            CallLogListItemHelper callLogViewsHelper) {
+        boolean canPlaceCallToNumber =
+                PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation);
+
+        // Set return call intent, otherwise null.
+        if (canPlaceCallToNumber) {
+            boolean isVoicemailNumber =
+                    phoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number);
+            if (isVoicemailNumber) {
+                // Make a general call to voicemail to ensure that if there are multiple accounts
+                // it does not call the voicemail number of a specific phone account.
+                callBackButtonView.setTag(IntentProvider.getReturnVoicemailCallIntentProvider());
+            } else {
+                // Sets the primary action to call the number.
+                callBackButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number));
+            }
+            callBackButtonView.setVisibility(View.VISIBLE);
+            callBackButtonView.setOnClickListener(actionListener);
+
+            final int titleId;
+            if (callType == Calls.VOICEMAIL_TYPE || callType == Calls.OUTGOING_TYPE) {
+                titleId = R.string.call_log_action_redial;
+            } else {
+                titleId = R.string.call_log_action_call_back;
+            }
+            callBackButtonView.setText(mContext.getString(titleId));
+        } else {
+            // Number is not callable, so hide button.
+            callBackButtonView.setTag(null);
+            callBackButtonView.setVisibility(View.GONE);
+        }
+
+        // If one of the calls had video capabilities, show the video call button.
+        if (CallUtil.isVideoEnabled(mContext) && canPlaceCallToNumber &&
+                phoneCallDetailsViews.callTypeIcons.isVideoShown()) {
+            videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
+            videoCallButtonView.setVisibility(View.VISIBLE);
+            videoCallButtonView.setOnClickListener(actionListener);
+        } else {
+            videoCallButtonView.setTag(null);
+            videoCallButtonView.setVisibility(View.GONE);
+        }
+
+        // For voicemail calls, show the "VOICEMAIL" action button; hide otherwise.
+        if (callType == Calls.VOICEMAIL_TYPE) {
+            voicemailButtonView.setOnClickListener(actionListener);
+            voicemailButtonView.setTag(
+                    IntentProvider.getPlayVoicemailIntentProvider(rowId, voicemailUri));
+            voicemailButtonView.setVisibility(View.VISIBLE);
+
+            detailsButtonView.setVisibility(View.GONE);
+        } else {
+            voicemailButtonView.setTag(null);
+            voicemailButtonView.setVisibility(View.GONE);
+
+            detailsButtonView.setOnClickListener(actionListener);
+            detailsButtonView.setTag(
+                    IntentProvider.getCallDetailIntentProvider(rowId, callIds, null));
+
+            if (canBeReportedAsInvalid && !reported) {
+                reportButtonView.setVisibility(View.VISIBLE);
+            } else {
+                reportButtonView.setVisibility(View.GONE);
+            }
+        }
+
+        callLogViewsHelper.setActionContentDescriptions(this);
+    }
+
+    public static CallLogListItemViews fromView(Context context, View view) {
         return new CallLogListItemViews(
+                context,
                 (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
                 view.findViewById(R.id.primary_action_view),
                 PhoneCallDetailsViews.fromView(view),
@@ -135,6 +279,7 @@ public final class CallLogListItemViews {
     @NeededForTesting
     public static CallLogListItemViews createForTest(Context context) {
         CallLogListItemViews views = new CallLogListItemViews(
+                context,
                 new QuickContactBadge(context),
                 new View(context),
                 PhoneCallDetailsViews.createForTest(context),
