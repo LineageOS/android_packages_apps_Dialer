@@ -9,7 +9,7 @@
         android:id="@+id/filter_sub_spinner"
         android:layout_width="0dip"
         android:layout_height="@dimen/list_section_divider_min_height"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:layout_marginTop="5dip" />
     <Spinner
         android:id="@+id/filter_status_spinner"
