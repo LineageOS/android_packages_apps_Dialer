@@ -207,6 +207,14 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
                 (!isOutgoingWithoutIncallUi ||
                         mNotificationTimer.getState() == NotificationTimer.State.FIRED);
 
+        // For call upgrade
+        if ((call != null)
+                && (call.getSessionModificationState()
+                        == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST)) {
+            Log.d(this, "updateInCallNotification, notify of callupgrade to video!");
+            showNotificationNow = true;
+        }
+
         if (showNotificationNow) {
             showNotification(call);
         } else {
@@ -556,16 +564,16 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         Log.i(this, "Will show \"accept\" action in the incoming call Notification");
 
         PendingIntent acceptVideoPendingIntent = createNotificationPendingIntent(
-                mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
+                mContext, InCallApp.ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST);
         builder.addAction(0, mContext.getText(R.string.notification_action_accept),
-        acceptVideoPendingIntent);
+                acceptVideoPendingIntent);
     }
 
     private void addDismissUpgradeRequestAction(Notification.Builder builder) {
         Log.i(this, "Will show \"dismiss\" action in the incoming call Notification");
 
         PendingIntent declineVideoPendingIntent = createNotificationPendingIntent(
-                mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
+                mContext, InCallApp.ACTION_DECLINE_VIDEO_UPGRADE_REQUEST);
         builder.addAction(0, mContext.getText(R.string.notification_action_dismiss),
                 declineVideoPendingIntent);
     }

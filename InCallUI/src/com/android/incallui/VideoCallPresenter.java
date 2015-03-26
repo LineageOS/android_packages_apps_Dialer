@@ -177,6 +177,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallPresenter.getInstance().addListener(this);
         InCallPresenter.getInstance().addIncomingCallListener(this);
         InCallPresenter.getInstance().addOrientationListener(this);
+        // To get updates of video call details changes
+        InCallPresenter.getInstance().addDetailsListener(this);
 
         // Register for surface and video events from {@link InCallVideoCallListener}s.
         InCallVideoCallListenerNotifier.getInstance().addSurfaceChangeListener(this);
@@ -455,6 +457,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallPresenter.getInstance().setInCallAllowsOrientationChange(false);
         ui.showVideoUi(false);
 
+        if (mVideoCall != null) {
+            // Also disable camera otherwise it will be already in use for next upgrade
+            mVideoCall.setCamera(null);
+        }
+
         if (mPreVideoAudioMode != AudioModeProvider.AUDIO_MODE_INVALID) {
             TelecomAdapter.getInstance().setAudioRoute(mPreVideoAudioMode);
             mPreVideoAudioMode = AudioModeProvider.AUDIO_MODE_INVALID;
@@ -573,7 +580,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
     @Override
     public void onDowngradeToAudio(Call call) {
-        // Implementing to satisfy interface.
+        // exit video mode
+        exitVideoMode();
     }
 
     /**

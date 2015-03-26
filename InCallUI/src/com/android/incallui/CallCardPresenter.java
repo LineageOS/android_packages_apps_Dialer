@@ -25,7 +25,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.telecom.Call.Details;
 import android.telecom.DisconnectCause;
@@ -71,7 +70,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private CallTimer mCallTimer;
 
     private Context mContext;
-    private WifiManager mWifiManager;
 
     public static class ContactLookupCallback implements ContactInfoCacheCallback {
         private final WeakReference<CallCardPresenter> mCallCardPresenter;
@@ -112,7 +110,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     public void init(Context context, Call call) {
         mContext = Preconditions.checkNotNull(context);
-        mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
 
         // Call may be null if disconnect happened already.
         if (call != null) {
@@ -251,7 +248,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     new DisconnectCause(DisconnectCause.UNKNOWN),
                     null,
                     null,
-                    null);
+                    null,
+                    false /* isWifi */);
             getUi().showHdAudioIndicator(false);
         }
 
@@ -298,7 +296,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     mPrimary.getDisconnectCause(),
                     getConnectionLabel(),
                     getCallStateIcon(),
-                    getGatewayNumber());
+                    getGatewayNumber(),
+                    primaryCallCan(Details.CAPABILITY_WIFI));
 
             boolean showHdAudioIndicator =
                     isPrimaryCallActive() && primaryCallCan(Details.CAPABILITY_HIGH_DEF_AUDIO);
@@ -604,13 +603,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return statusHints.getLabel().toString();
         }
 
-        // Assume the SSID of the connection reported by the WifiManager is the name of the wifi
-        // network used for calling, since currently a phone only connects to a single wifi network.
-        if (isPrimaryCallActive() && primaryCallCan(Details.CAPABILITY_WIFI)
-                && mWifiManager.getConnectionInfo() != null) {
-            return formatWifiSSID(mWifiManager.getConnectionInfo().getSSID());
-        }
-
         if (hasOutgoingGatewayCall() && getUi() != null) {
             // Return the label for the gateway app on outgoing calls.
             final PackageManager pm = mContext.getPackageManager();
@@ -634,11 +626,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             if (icon != null) {
                 return icon;
             }
-        }
-
-        if (primaryCallCan(Details.CAPABILITY_WIFI) && (isPrimaryCallActive()
-                || (mPrimary != null && mPrimary.getState() == Call.State.INCOMING))) {
-            return mContext.getResources().getDrawable(R.drawable.ic_signal_wifi_4_bar_18dp);
         }
 
         return null;
@@ -747,34 +734,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         return photo;
     }
 
-    /**
-     * Strip quotations off the outside of a Wifi SSID identifier. For example, \"GoogleGuest\"
-     * becomes GoogleGuest.
-     *
-     * TODO: Move into utility class.
-     * TODO: Add unit tests.
-     *
-     * @param ssid The ssid of the wifi network.
-     */
-    private String formatWifiSSID(String ssid) {
-        if (TextUtils.isEmpty(ssid)) {
-            return "";
-        }
-
-        // Trim quotation if first character.
-        if (ssid.charAt(0) == '\"') {
-            ssid = ssid.substring(1);
-        }
-
-        // Trim quotation if last character.
-        int lastIndex = ssid.length() - 1;
-        if (lastIndex >= 0 && ssid.charAt(lastIndex) == '\"') {
-            ssid = ssid.substring(0, lastIndex);
-        }
-
-        return ssid;
-    }
-
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
         void setCallCardVisible(boolean visible);
@@ -784,7 +743,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 String providerLabel, boolean isConference);
         void setCallState(int state, int videoState, int sessionModificationState,
                 DisconnectCause disconnectCause, String connectionLabel,
-                Drawable connectionIcon, String gatewayNumber);
+                Drawable connectionIcon, String gatewayNumber, boolean isWifi);
         void setPrimaryCallElapsedTime(boolean show, long duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Drawable image);
