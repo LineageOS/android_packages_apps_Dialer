@@ -165,7 +165,6 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Լսել ձայնային փոստը <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ից"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> զանգի մասին տվյալներ"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Ջնջվել է զանգերի պատմությունից"</string>
-    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Համարը հաղորդվել է Google-ին"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"ԶԵԿՈՒՑԵԼ"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Այսօր"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Երեկ"</string>

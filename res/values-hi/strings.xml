@@ -26,7 +26,7 @@
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"संपर्कों में जोड़ें"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"कॉल इतिहास से साफ़ करें"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"कॉल इतिहास साफ़ करें"</string>
-    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ध्वनि मेल हटाएं"</string>
+    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"वॉयस मेल हटाएं"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"ध्‍वनिमेल साझा करें"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"कोई कॉल नहीं"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"कॉल इतिहास साफ़ करें?"</string>
@@ -101,7 +101,7 @@
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> संपर्क देखें"</string>
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g> को कॉल करें"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> का संपर्क विवरण"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"नया ध्वनि मेल."</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"नया वॉयस मेल."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> कॉल."</string>
     <string name="description_video_call" msgid="2933838090743214204">"वीडियो कॉल."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"<xliff:g id="NAME">%1$s</xliff:g> को SMS भेजें"</string>
@@ -165,7 +165,6 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> की वॉयस मेल सुनें"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> के कॉल विवरण"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"कॉल इतिहास से हटाएं"</string>
-    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Google को नंबर की रिपोर्ट की गई"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"रिपोर्ट करें"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"आज"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"कल"</string>

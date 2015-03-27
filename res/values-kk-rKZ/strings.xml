@@ -165,7 +165,6 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> дауыстық хабарын тыңдау"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> үшін қоңырау мәліметтері"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Қоңыраулар тарихынан жойылды"</string>
-    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Нөмір туралы Google компаниясына есеп берілді"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"ЕСЕП БЕРУ"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Бүгін"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Кеше"</string>

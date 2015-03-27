@@ -169,7 +169,6 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"استماع إلى بريد صوتي من <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"تفاصيل الاتصال لـ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"تم الحذف من سجل المكالمات"</string>
-    <string name="toast_caller_id_reported" msgid="2240847358945525483">"‏تم إبلاغ Google بالرقم"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"إبلاغ"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"اليوم"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"أمس"</string>

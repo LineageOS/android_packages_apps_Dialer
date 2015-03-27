@@ -141,8 +141,8 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"Контакт удален из избранных"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Отмена"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Позвонить: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Новый контакт"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Добавить в контакты"</string>
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Создать контакт"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Добавить к контакту"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Отправить SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Начать видеовстречу"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Посмотреть весь журнал звонков"</string>
@@ -167,7 +167,6 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Прослушать сообщение от контакта <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> – сведения о вызове"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Вызов удален из журнала"</string>
-    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Жалоба отправлена в Google"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"СООБЩИТЬ ОБ ОШИБКЕ"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Сегодня"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Вчера"</string>

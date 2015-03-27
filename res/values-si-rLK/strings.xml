@@ -139,7 +139,7 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"ප්‍රියතමයන්ගෙන් ඉවත් කරන්න"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"අස් කරන්න"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> අමතන්න"</string>
-    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"නව සම්බන්ධතාවයක් තනන්න"</string>
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"නව සම්බන්ධතාවයක් සාදන්න"</string>
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"පවතින සම්බන්ධතාව වෙත එක් කරන්න"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS යවන්න"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"වීඩියෝ ඇමතුමක් ලබාගන්න"</string>
@@ -165,7 +165,6 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> වෙතින් හඬ තැපෑලට සවන් දෙන්න"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> සඳහා ඇමතුම් විස්තර"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"ඇමතුම් ඉතිහාසයෙන් මකන ලදී"</string>
-    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Google වෙත වාර්තා කළ අංකය"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"වාර්තාව"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"අද"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"ඊයේ"</string>

@@ -166,7 +166,6 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Ascultați mesajul vocal de la <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detaliile apelului pentru <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"S-a șters din istoricul apelurilor"</string>
-    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Numărul a fost raportat la Google"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"RAPORTAȚI"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Astăzi"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Ieri"</string>

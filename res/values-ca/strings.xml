@@ -165,7 +165,6 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Escolta el missatge a la bústia de veu de: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detalls de la trucada de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"S\'ha suprimit de l\'historial de trucades."</string>
-    <string name="toast_caller_id_reported" msgid="2240847358945525483">"S\'ha informat del número a Google."</string>
     <string name="call_log_action_report" msgid="561229827189128879">"INFORMA"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Avui"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Ahir"</string>

@@ -165,7 +165,6 @@
     <string name="description_voicemail_action" msgid="8054891873788903063">"Прослушване на гласовата поща от <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Подробности за обаждането за <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Изтрито от историята на обажданията"</string>
-    <string name="toast_caller_id_reported" msgid="2240847358945525483">"Номерът е изпратен до Google"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"ПОДАВАНЕ НА СИГНАЛ"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Днес"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Вчера"</string>
