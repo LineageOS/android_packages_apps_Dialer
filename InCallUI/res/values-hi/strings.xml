@@ -127,7 +127,7 @@
     <string name="goPrivate" msgid="865837794424530980">"निजी हो जाएं"</string>
     <string name="selectContact" msgid="781975788478987237">"संपर्क को चुनें"</string>
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"अपना स्वयं का लिखें..."</string>
-    <string name="custom_message_cancel" msgid="7516406059429609296">"रहने दें"</string>
+    <string name="custom_message_cancel" msgid="7516406059429609296">"अभी नहीं"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"भेजें"</string>
     <string name="description_target_answer" msgid="7205604197797472471">"उत्तर"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS भेजें"</string>
