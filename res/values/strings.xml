@@ -627,10 +627,6 @@
          [CHAR LIMIT=NONE] -->
     <string name="toast_entry_removed">Deleted from call history</string>
 
-    <!-- Toast message which appears when a call log contact is reported.
-         [CHAR LIMIT=NONE] -->
-    <string name="toast_caller_id_reported">Number reported to Google</string>
-
     <!-- Button text for the "report" button displayed underneath an entry in the call log.
          Tapping causes the call log entry to be reported to Google as a bad id.
          [CHAR LIMIT=30] -->

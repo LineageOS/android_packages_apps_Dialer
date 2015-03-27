@@ -41,7 +41,6 @@ import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.CallUtil;
@@ -145,7 +144,6 @@ public class CallLogAdapter extends GroupingListAdapter
     protected final Context mContext;
     private final ContactInfoHelper mContactInfoHelper;
     private final CallFetcher mCallFetcher;
-    private final Toast mReportedToast;
     private final OnReportButtonClickListener mOnReportButtonClickListener;
     private ViewTreeObserver mViewTreeObserver = null;
 
@@ -351,8 +349,6 @@ public class CallLogAdapter extends GroupingListAdapter
         mCallItemExpandedListener = callItemExpandedListener;
 
         mOnReportButtonClickListener = onReportButtonClickListener;
-        mReportedToast = Toast.makeText(mContext, R.string.toast_caller_id_reported,
-                Toast.LENGTH_SHORT);
 
         mContactInfoCache = ExpirableCache.create(CONTACT_INFO_CACHE_SIZE);
         mRequests = new LinkedList<ContactInfoRequest>();
@@ -1288,11 +1284,6 @@ public class CallLogAdapter extends GroupingListAdapter
        } else {
            return mContext.getResources().getString(R.string.call_log_header_other);
        }
-    }
-
-    public void onBadDataReported(String number) {
-        mContactInfoCache.expireAll();
-        mReportedToast.show();
     }
 
     /**
