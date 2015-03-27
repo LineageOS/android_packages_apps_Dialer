@@ -21,6 +21,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -110,6 +112,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private Animation mPulseAnimation;
 
     private int mVideoAnimationDuration;
+    // Whether or not the call card is currently in the process of an animation
+    private boolean mIsAnimating;
 
     private MaterialPalette mCurrentThemeColors;
 
@@ -601,6 +605,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mInCallMessageLabel.setVisibility(View.VISIBLE);
     }
 
+    public boolean isAnimating() {
+        return mIsAnimating;
+    }
+
     private void showInternetCallLabel(boolean show) {
         if (show) {
             final String label = getView().getContext().getString(
@@ -864,6 +872,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         final LayoutTransition transition = mPrimaryCallInfo.getLayoutTransition();
         transition.disableTransitionType(LayoutTransition.CHANGING);
 
+        mIsAnimating = true;
+
         observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -892,6 +902,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 mCallTypeLabel.setAlpha(0);
                 mCallNumberAndLabel.setAlpha(0);
 
+                assignTranslateAnimation(mCallStateLabel, 1);
+                assignTranslateAnimation(mCallStateIcon, 1);
+                assignTranslateAnimation(mPrimaryName, 2);
+                assignTranslateAnimation(mCallNumberAndLabel, 3);
+                assignTranslateAnimation(mCallTypeLabel, 4);
+                assignTranslateAnimation(mCallButtonsContainer, 5);
+
                 final Animator animator = getShrinkAnimator(parent.getHeight(), originalHeight);
 
                 animator.addListener(new AnimatorListenerAdapter() {
@@ -900,6 +917,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                         mPrimaryCallCardContainer.setTag(R.id.view_tag_callcard_actual_height,
                                 null);
                         setViewStatePostAnimation(listener);
+                        mIsAnimating = false;
+                        InCallPresenter.getInstance().onShrinkAnimationComplete();
                     }
                 });
                 animator.start();
@@ -988,19 +1007,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      * and then translated upwards together with the scrim.
      */
     private Animator getShrinkAnimator(int startHeight, int endHeight) {
-        final Animator shrinkAnimator =
+        final ObjectAnimator shrinkAnimator =
                 ObjectAnimator.ofInt(mPrimaryCallCardContainer, "bottom", startHeight, endHeight);
         shrinkAnimator.setDuration(mShrinkAnimationDuration);
         shrinkAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
-                assignTranslateAnimation(mCallStateLabel, 1);
-                assignTranslateAnimation(mCallStateIcon, 1);
-                assignTranslateAnimation(mPrimaryName, 2);
-                assignTranslateAnimation(mCallNumberAndLabel, 3);
-                assignTranslateAnimation(mCallTypeLabel, 4);
-                assignTranslateAnimation(mCallButtonsContainer, 5);
-
                 mFloatingActionButton.setEnabled(true);
             }
         });
@@ -1009,6 +1021,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     private void assignTranslateAnimation(View view, int offset) {
+        view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        view.buildLayer();
         view.setTranslationY(mTranslationOffset * offset);
         view.animate().translationY(0).alpha(1).withLayer()
                 .setDuration(mShrinkAnimationDuration).setInterpolator(AnimUtils.EASE_IN);

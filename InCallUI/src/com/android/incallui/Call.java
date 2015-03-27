@@ -22,6 +22,7 @@ import com.android.contacts.common.testing.NeededForTesting;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Trace;
 import android.telecom.CallProperties;
 import android.telecom.DisconnectCause;
 import android.telecom.GatewayInfo;
@@ -212,6 +213,7 @@ public class Call {
     }
 
     private void update() {
+        Trace.beginSection("Update");
         int oldState = getState();
         updateFromTelecommCall();
         if (oldState != getState() && getState() == Call.State.DISCONNECTED) {
@@ -219,6 +221,7 @@ public class Call {
         } else {
             CallList.getInstance().onUpdate(this);
         }
+        Trace.endSection();
     }
 
     private void updateFromTelecommCall() {
