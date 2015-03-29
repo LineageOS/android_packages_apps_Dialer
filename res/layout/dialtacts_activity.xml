@@ -37,33 +37,24 @@
             android:clipChildren="false" />
     </FrameLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/floating_action_button_container"
         android:background="@drawable/fab_blue"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/floating_action_button_width"
         android:layout_height="@dimen/floating_action_button_height"
         android:layout_marginBottom="@dimen/floating_action_button_margin_bottom"
         android:layout_gravity="center_horizontal|bottom">
 
         <ImageButton
             android:id="@+id/floating_action_button"
+            android:background="@drawable/floating_action_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="bottom|left"
-            android:layout_weight="1"
-            android:background="@drawable/floating_action_button"
             android:contentDescription="@string/action_menu_dialpad_button"
             android:src="@drawable/fab_ic_dial"/>
-       <ImageButton
-            android:id="@+id/dialConferenceButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom|right"
-            android:layout_weight="1"
-            android:background="@drawable/floating_action_button"
-            android:contentDescription="@string/action_menu_dialpad_button"
-            android:src="@drawable/ic_add_group_holo_dark"/>
-    </LinearLayout>
+
+    </FrameLayout>
+
     <!-- Host container for the contact tile drag shadow -->
     <FrameLayout
         android:id="@+id/activity_overlay"
