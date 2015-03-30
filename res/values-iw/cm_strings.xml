@@ -29,6 +29,7 @@
   <string name="preference_category_t9_dialpad_search">חיפוש בעזרת לוח מקשי אותיות T9</string>
   <string name="t9_search_input_locale">שפת הקלט של חיפוש T9</string>
   <string name="t9_search_input_locale_default">ברירת מחדל</string>
+  <string name="type_blacklist">שיחה שהוכנסה לרשימה השחורה</string>
   <string name="call_log_stats_title">סטטיסטיקה</string>
   <string name="callStatsDetailTitle">פרטים של סטטיסטיקת שיחות</string>
   <string name="call_stats">סטטיסטיקת שיחות</string>
@@ -74,9 +75,11 @@
   <string name="no">לא</string>
   <string name="incall_vibration_category_title">רטט במהלך שיחה</string>
   <string name="incall_vibrate_outgoing_title">רטט בזמן מענה</string>
+  <string name="vibrate_call_waiting">רטט בעת שיחה ממתינה</string>
   <string name="incall_vibrate_hangup_title">רטט בניתוק השיחה</string>
   <string name="incall_vibrate_45_title">רטט בכל דקה</string>
   <string name="incall_vibrate_45_summary">רטט בכל 45 שניות של כל דקה במהלך שיחה יוצאת</string>
+  <string name="detailed_incall_info_title">מידע מפורט על המתקשר</string>
   <string name="detailed_incall_info_summary">הצג פרטים נוספים אודות המתקשר במסך השיחות הנכנסות</string>
   <string name="video_call">שיחת וידאו</string>
   <string name="call_duration_active">זמן שיחה פעילה:</string>

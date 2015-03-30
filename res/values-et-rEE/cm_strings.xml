@@ -79,6 +79,7 @@
   <string name="no">Ei</string>
   <string name="incall_vibration_category_title">Kõne vibratsioon</string>
   <string name="incall_vibrate_outgoing_title">Vibreeri vastamisel</string>
+  <string name="vibrate_call_waiting">Vibreeri kõne koputusel</string>
   <string name="incall_vibrate_hangup_title">Vibreeri kõne lõppemisel</string>
   <string name="incall_vibrate_45_title">Vibreeri iga minut</string>
   <string name="incall_vibrate_45_summary">Vibreerib 45 sekundi täitumisel igas minutis väljaminevate kõnede korral</string>
