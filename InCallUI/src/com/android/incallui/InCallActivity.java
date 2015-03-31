@@ -180,7 +180,8 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     @Override
     protected void onSaveInstanceState(Bundle out) {
         // TODO: The dialpad fragment should handle this as part of its own state
-        out.putBoolean(SHOW_DIALPAD_EXTRA, mCallButtonFragment.isDialpadVisible());
+        out.putBoolean(SHOW_DIALPAD_EXTRA,
+                mCallButtonFragment != null && mCallButtonFragment.isDialpadVisible());
         if (mDialpadFragment != null) {
             out.putString(DIALPAD_TEXT_EXTRA, mDialpadFragment.getDtmfText());
         }
