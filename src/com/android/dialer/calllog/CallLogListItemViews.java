@@ -18,6 +18,7 @@ package com.android.dialer.calllog;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
@@ -28,6 +29,8 @@ import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.ContactPhotoManager;
+import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.PhoneCallDetailsViews;
 import com.android.dialer.R;
@@ -130,6 +133,7 @@ public final class CallLogListItemViews {
     private static final int VOICEMAIL_TRANSCRIPTION_MAX_LINES = 10;
 
     private Context mContext;
+    private int mPhotoSize;
 
     private int mCallLogBackgroundColor;
     private int mExpandedBackgroundColor;
@@ -156,6 +160,18 @@ public final class CallLogListItemViews {
         mCallLogBackgroundColor = resources.getColor(R.color.background_dialer_list_items);
         mExpandedBackgroundColor = resources.getColor(R.color.call_log_expanded_background_color);
         mExpandedTranslationZ = resources.getDimension(R.dimen.call_log_expanded_translation_z);
+        mPhotoSize = mContext.getResources().getDimensionPixelSize(R.dimen.contact_photo_size);
+    }
+
+    public static CallLogListItemViews fromView(Context context, View view) {
+        return new CallLogListItemViews(
+                context,
+                view,
+                (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
+                view.findViewById(R.id.primary_action_view),
+                PhoneCallDetailsViews.fromView(view),
+                view.findViewById(R.id.call_log_row),
+                (TextView) view.findViewById(R.id.call_log_day_group_label));
     }
 
     /**
@@ -335,15 +351,33 @@ public final class CallLogListItemViews {
         view.setSingleLine(!isExpanded);
     }
 
-    public static CallLogListItemViews fromView(Context context, View view) {
-        return new CallLogListItemViews(
-                context,
-                view,
-                (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
-                view.findViewById(R.id.primary_action_view),
-                PhoneCallDetailsViews.fromView(view),
-                view.findViewById(R.id.call_log_row),
-                (TextView) view.findViewById(R.id.call_log_day_group_label));
+    public void setPhoto(long photoId, Uri photoUri, Uri contactUri, String displayName,
+            boolean isVoicemail, boolean isBusiness) {
+        quickContactView.assignContactUri(contactUri);
+        quickContactView.setOverlay(null);
+
+        int contactType = ContactPhotoManager.TYPE_DEFAULT;
+        if (isVoicemail) {
+            contactType = ContactPhotoManager.TYPE_VOICEMAIL;
+        } else if (isBusiness) {
+            contactType = ContactPhotoManager.TYPE_BUSINESS;
+        }
+
+        String lookupKey = null;
+        if (contactUri != null) {
+            lookupKey = ContactInfoHelper.getLookupKeyFromUri(contactUri);
+        }
+
+        DefaultImageRequest request = new DefaultImageRequest(
+                displayName, lookupKey, contactType, true /* isCircular */);
+
+        if (photoId == 0 && photoUri != null) {
+            ContactPhotoManager.getInstance(mContext).loadPhoto(quickContactView, photoUri,
+                    mPhotoSize, false /* darkTheme */, true /* isCircular */, request);
+        } else {
+            ContactPhotoManager.getInstance(mContext).loadThumbnail(quickContactView, photoId,
+                    false /* darkTheme */, true /* isCircular */, request);
+        }
     }
 
     @NeededForTesting

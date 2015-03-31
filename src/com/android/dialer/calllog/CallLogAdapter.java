@@ -42,8 +42,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.common.widget.GroupingListAdapter;
-import com.android.contacts.common.ContactPhotoManager;
-import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
@@ -241,8 +239,6 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Instance of helper class for managing views. */
     private final CallLogListItemHelper mCallLogViewsHelper;
 
-    /** Helper to set up contact photos. */
-    private final ContactPhotoManager mContactPhotoManager;
     /** Helper to parse and process phone numbers. */
     private PhoneNumberDisplayHelper mPhoneNumberHelper;
     /** Helper to access Telephony phone number utils class */
@@ -254,8 +250,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
     /** Can be set to true by tests to disable processing of requests. */
     private volatile boolean mRequestProcessingDisabled = false;
-
-    private int mPhotoSize;
 
     /** Listener for the primary or secondary actions in the list.
      *  Primary opens the call details.
@@ -344,9 +338,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
         Resources resources = mContext.getResources();
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
-        mPhotoSize = resources.getDimensionPixelSize(R.dimen.contact_photo_size);
 
-        mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
         mPhoneNumberHelper = new PhoneNumberDisplayHelper(mContext, resources);
         mPhoneNumberUtilsWrapper = new PhoneNumberUtilsWrapper(mContext);
         PhoneCallDetailsHelper phoneCallDetailsHelper =
@@ -744,17 +736,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
         mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
 
-        int contactType = ContactPhotoManager.TYPE_DEFAULT;
-
-        if (isVoicemailNumber) {
-            contactType = ContactPhotoManager.TYPE_VOICEMAIL;
-        } else if (mContactInfoHelper.isBusiness(info.sourceType)) {
-            contactType = ContactPhotoManager.TYPE_BUSINESS;
-        }
-
-        String lookupKey = lookupUri == null ? null
-                : ContactInfoHelper.getLookupKeyFromUri(lookupUri);
-
         String nameForDefaultImage = null;
         if (TextUtils.isEmpty(name)) {
             nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(details.accountHandle,
@@ -763,11 +744,8 @@ public class CallLogAdapter extends GroupingListAdapter
             nameForDefaultImage = name;
         }
 
-        if (photoId == 0 && photoUri != null) {
-            setPhoto(views, photoUri, lookupUri, nameForDefaultImage, lookupKey, contactType);
-        } else {
-            setPhoto(views, photoId, lookupUri, nameForDefaultImage, lookupKey, contactType);
-        }
+        views.setPhoto(photoId, photoUri, lookupUri, nameForDefaultImage, isVoicemailNumber,
+                mContactInfoHelper.isBusiness(info.sourceType));
         views.quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
 
         // Listen for the first draw
@@ -809,6 +787,7 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         return CallLogGroupBuilder.DAY_GROUP_NONE;
     }
+
     /**
      * Determines if a call log row with the given Id is expanded.
      * @param rowId The row Id of the call.
@@ -985,26 +964,6 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         cursor.moveToPosition(position);
         return features;
-    }
-
-    private void setPhoto(CallLogListItemViews views, long photoId, Uri contactUri,
-            String displayName, String identifier, int contactType) {
-        views.quickContactView.assignContactUri(contactUri);
-        views.quickContactView.setOverlay(null);
-        DefaultImageRequest request = new DefaultImageRequest(displayName, identifier,
-                contactType, true /* isCircular */);
-        mContactPhotoManager.loadThumbnail(views.quickContactView, photoId, false /* darkTheme */,
-                true /* isCircular */, request);
-    }
-
-    private void setPhoto(CallLogListItemViews views, Uri photoUri, Uri contactUri,
-            String displayName, String identifier, int contactType) {
-        views.quickContactView.assignContactUri(contactUri);
-        views.quickContactView.setOverlay(null);
-        DefaultImageRequest request = new DefaultImageRequest(displayName, identifier,
-                contactType, true /* isCircular */);
-        mContactPhotoManager.loadPhoto(views.quickContactView, photoUri, mPhotoSize,
-                false /* darkTheme */, true /* isCircular */, request);
     }
 
     /**
