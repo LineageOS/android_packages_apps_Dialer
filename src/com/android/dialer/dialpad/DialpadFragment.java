@@ -396,6 +396,13 @@ public class DialpadFragment extends AnalyticsFragment
             mDelete.setOnLongClickListener(this);
         }
 
+        // Populate the overflow menu in onCreate instead of onResume to avoid PopupMenu's memory leak.
+        mOverflowMenuButton = mDialpadView.getOverflowMenuButton();
+        mOverflowPopupMenu = buildOptionsMenu(mOverflowMenuButton);
+        mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
+        mOverflowMenuButton.setOnClickListener(this);
+        mOverflowMenuButton.setVisibility(isDigitsEmpty() ? View.INVISIBLE : View.VISIBLE);
+
         mSpacer = fragmentView.findViewById(R.id.spacer);
         mSpacer.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -708,15 +715,6 @@ public class DialpadFragment extends AnalyticsFragment
         stopWatch.stopAndLog(TAG, 50);
 
         mSmsPackageComponentName = DialerUtils.getSmsComponent(activity);
-
-        // Populate the overflow menu in onResume instead of onCreate, so that if the SMS activity
-        // is disabled while Dialer is paused, the "Send a text message" option can be correctly
-        // removed when resumed.
-        mOverflowMenuButton = mDialpadView.getOverflowMenuButton();
-        mOverflowPopupMenu = buildOptionsMenu(mOverflowMenuButton);
-        mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
-        mOverflowMenuButton.setOnClickListener(this);
-        mOverflowMenuButton.setVisibility(isDigitsEmpty() ? View.INVISIBLE : View.VISIBLE);
 
         if (getTelephonyManager().isMultiSimEnabled() &&
                 MoreContactUtils.shouldShowOperator(mContext)) {
