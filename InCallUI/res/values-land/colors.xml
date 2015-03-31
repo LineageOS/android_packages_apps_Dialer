@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2014 The Android Open Source Project
+  ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,11 +16,6 @@
   -->
 
 <resources>
-    <!-- Whether or not the landscape mode layout is currently being used -->
-    <bool name="is_layout_landscape">true</bool>
-    <!-- Height and width of the in-call buttons. -->
-    <dimen name="in_call_button_dimension">40dp</dimen>
-    <!-- Margin underneath the call buttons. This is used only in landscape mode and is sized
-         so that the call buttons are center aligned with the end call button. -->
-    <dimen name="call_buttons_bottom_margin">30dp</dimen>
+    <!-- Background color for status bar. For portrait this will be ignored. -->
+    <color name="statusbar_background_color">#000000</color>
 </resources>

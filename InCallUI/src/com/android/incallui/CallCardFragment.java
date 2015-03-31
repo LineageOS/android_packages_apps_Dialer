@@ -27,6 +27,7 @@ import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.telecom.DisconnectCause;
 import android.telecom.VideoProfile;
@@ -138,7 +139,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mShrinkAnimationDuration = getResources().getInteger(R.integer.shrink_animation_duration);
         mVideoAnimationDuration = getResources().getInteger(R.integer.video_animation_duration);
         mFloatingActionButtonVerticalOffset = getResources().getDimensionPixelOffset(
-                R.dimen.floating_action_bar_vertical_offset);
+                R.dimen.floating_action_button_vertical_offset);
         mFabNormalDiameter = getResources().getDimensionPixelOffset(
                 R.dimen.end_call_floating_action_button_diameter);
         mFabSmallDiameter = getResources().getDimensionPixelOffset(
@@ -288,17 +289,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 float videoViewTranslation = 0f;
 
                 // Translate the call card to its pre-animation state.
-                if (mIsLandscape) {
-                    float translationX = mPrimaryCallCardContainer.getWidth();
-                    translationX *= isLayoutRtl ? 1 : -1;
-
-                    mPrimaryCallCardContainer.setTranslationX(visible ? translationX : 0);
-
-                    if (visible) {
-                        videoViewTranslation = videoView.getWidth() / 2 - spaceBesideCallCard / 2;
-                        videoViewTranslation *= isLayoutRtl ? -1 : 1;
-                    }
-                } else {
+                if (!mIsLandscape){
                     mPrimaryCallCardContainer.setTranslationY(visible ?
                             -mPrimaryCallCardContainer.getHeight() : 0);
 
@@ -842,7 +833,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             return;
         }
 
-        mPrimaryCallCardContainer.setBackgroundColor(themeColors.mPrimaryColor);
+        if (getResources().getBoolean(R.bool.is_layout_landscape)) {
+            final GradientDrawable drawable =
+                    (GradientDrawable) mPrimaryCallCardContainer.getBackground();
+            drawable.setColor(themeColors.mPrimaryColor);
+        } else {
+            mPrimaryCallCardContainer.setBackgroundColor(themeColors.mPrimaryColor);
+        }
         mCallButtonsContainer.setBackgroundColor(themeColors.mPrimaryColor);
 
         mCurrentThemeColors = themeColors;
@@ -940,8 +937,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mAnimatorSet.cancel();
         }
 
-        mIsLandscape = getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE;
+        mIsLandscape = getResources().getBoolean(R.bool.is_layout_landscape);
 
         final ViewGroup parent = ((ViewGroup) mPrimaryCallCardContainer.getParent());
         final ViewTreeObserver observer = parent.getViewTreeObserver();

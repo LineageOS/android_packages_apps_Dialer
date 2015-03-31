@@ -28,22 +28,25 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:elevation="@dimen/primary_call_elevation"
-        android:background="@color/incall_call_banner_background_color"
+        android:background="@drawable/rounded_call_card_background"
         android:paddingTop="@dimen/call_banner_primary_call_container_top_padding"
         android:clipChildren="false"
-        android:clipToPadding="false" >
+        android:clipToPadding="false"
+        android:alpha="0.9"
+        android:layout_margin="10dp">
 
         <include layout="@layout/primary_call_info" />
 
-        <fragment android:name="com.android.incallui.CallButtonFragment"
-            android:id="@+id/callButtonFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <FrameLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent" >
 
+            <fragment android:name="com.android.incallui.CallButtonFragment"
+                android:id="@+id/callButtonFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/call_buttons_bottom_margin" />
             <!-- Secondary "Call info" block, for the background ("on hold") call. -->
             <include layout="@layout/secondary_call_info"
                 android:layout_width="match_parent"
