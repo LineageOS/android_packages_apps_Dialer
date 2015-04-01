@@ -17,8 +17,10 @@
 package com.android.dialer.calllog;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.provider.CallLog.Calls;
 import android.telecom.PhoneAccountHandle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -40,6 +42,8 @@ import com.android.dialer.R;
  * if the call log list item is eventually represented as a UI component.
  */
 public final class CallLogListItemViews {
+    /** The root view of the call log list item */
+    public final View rootView;
     /** The quick contact badge for the contact. */
     public final QuickContactBadge quickContactView;
     /** The primary action view of the entry. */
@@ -123,10 +127,17 @@ public final class CallLogListItemViews {
      */
     public boolean canBeReportedAsInvalid;
 
+    private static final int VOICEMAIL_TRANSCRIPTION_MAX_LINES = 10;
+
     private Context mContext;
+
+    private int mCallLogBackgroundColor;
+    private int mExpandedBackgroundColor;
+    private float mExpandedTranslationZ;
 
     private CallLogListItemViews(
             Context context,
+            View rootView,
             QuickContactBadge quickContactView,
             View primaryActionView,
             PhoneCallDetailsViews phoneCallDetailsViews,
@@ -134,11 +145,17 @@ public final class CallLogListItemViews {
             TextView dayGroupHeader) {
         mContext = context;
 
+        this.rootView = rootView;
         this.quickContactView = quickContactView;
         this.primaryActionView = primaryActionView;
         this.phoneCallDetailsViews = phoneCallDetailsViews;
         this.callLogEntryView = callLogEntryView;
         this.dayGroupHeader = dayGroupHeader;
+
+        Resources resources = mContext.getResources();
+        mCallLogBackgroundColor = resources.getColor(R.color.background_dialer_list_items);
+        mExpandedBackgroundColor = resources.getColor(R.color.call_log_expanded_background_color);
+        mExpandedTranslationZ = resources.getDimension(R.dimen.call_log_expanded_translation_z);
     }
 
     /**
@@ -149,12 +166,11 @@ public final class CallLogListItemViews {
      * @param callLogItem The call log list item view.
      */
     public void inflateActionViewStub(
-            final View callLogItem,
             final CallLogAdapter.OnReportButtonClickListener onReportButtonClickListener,
             View.OnClickListener actionListener,
             PhoneNumberUtilsWrapper phoneNumberUtilsWrapper,
             CallLogListItemHelper callLogViewsHelper) {
-        ViewStub stub = (ViewStub) callLogItem.findViewById(R.id.call_log_entry_actions_stub);
+        ViewStub stub = (ViewStub) rootView.findViewById(R.id.call_log_entry_actions_stub);
         if (stub != null) {
             actionsView = (ViewGroup) stub.inflate();
         }
@@ -266,9 +282,63 @@ public final class CallLogListItemViews {
         callLogViewsHelper.setActionContentDescriptions(this);
     }
 
+    /**
+     * Expands or collapses the view containing the CALLBACK/REDIAL, VOICEMAIL and DETAILS action
+     * buttons.
+     *
+     * TODO: Reduce number of classes which need to be passed in to inflate the action view stub.
+     *     1) Instantiate them in this class, and store local references.
+     *     2) Set them on the CallLogListItemHelper and use it for inflation.
+     *     3) Implement a parent view for a call log list item, and store references in that class.
+     */
+    public void expandOrCollapseActions(
+            boolean isExpanded,
+            final CallLogAdapter.OnReportButtonClickListener onReportButtonClickListener,
+            View.OnClickListener actionListener,
+            PhoneNumberUtilsWrapper phoneNumberUtilsWrapper,
+            CallLogListItemHelper callLogViewsHelper) {
+        expandVoicemailTranscriptionView(isExpanded);
+
+        if (isExpanded) {
+            // Inflate the view stub if necessary, and wire up the event handlers.
+            inflateActionViewStub(onReportButtonClickListener, actionListener,
+                    phoneNumberUtilsWrapper, callLogViewsHelper);
+
+            actionsView.setVisibility(View.VISIBLE);
+            actionsView.setAlpha(1.0f);
+            callLogEntryView.setBackgroundColor(mExpandedBackgroundColor);
+            callLogEntryView.setTranslationZ(mExpandedTranslationZ);
+            rootView.setTranslationZ(mExpandedTranslationZ); // WAR
+        } else {
+            // When recycling a view, it is possible the actionsView ViewStub was previously
+            // inflated so we should hide it in this case.
+            if (actionsView != null) {
+                actionsView.setVisibility(View.GONE);
+            }
+
+            callLogEntryView.setBackgroundColor(mCallLogBackgroundColor);
+            callLogEntryView.setTranslationZ(0);
+            rootView.setTranslationZ(0); // WAR
+        }
+    }
+
+    public void expandVoicemailTranscriptionView(boolean isExpanded) {
+        if (callType != Calls.VOICEMAIL_TYPE) {
+            return;
+        }
+
+        final TextView view = phoneCallDetailsViews.voicemailTranscriptionView;
+        if (TextUtils.isEmpty(view.getText())) {
+            return;
+        }
+        view.setMaxLines(isExpanded ? VOICEMAIL_TRANSCRIPTION_MAX_LINES : 1);
+        view.setSingleLine(!isExpanded);
+    }
+
     public static CallLogListItemViews fromView(Context context, View view) {
         return new CallLogListItemViews(
                 context,
+                view,
                 (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
                 view.findViewById(R.id.primary_action_view),
                 PhoneCallDetailsViews.fromView(view),
@@ -280,6 +350,7 @@ public final class CallLogListItemViews {
     public static CallLogListItemViews createForTest(Context context) {
         CallLogListItemViews views = new CallLogListItemViews(
                 context,
+                new View(context),
                 new QuickContactBadge(context),
                 new View(context),
                 PhoneCallDetailsViews.createForTest(context),

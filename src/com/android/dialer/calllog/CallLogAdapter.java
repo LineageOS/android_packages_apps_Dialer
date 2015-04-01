@@ -64,8 +64,6 @@ public class CallLogAdapter extends GroupingListAdapter
         implements ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
     private static final String TAG = CallLogAdapter.class.getSimpleName();
 
-    private static final int VOICEMAIL_TRANSCRIPTION_MAX_LINES = 10;
-
     /** The enumeration of {@link android.os.AsyncTask} objects used in this class. */
     public enum Tasks {
         REMOVE_CALL_LOG_ENTRIES,
@@ -257,9 +255,6 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Can be set to true by tests to disable processing of requests. */
     private volatile boolean mRequestProcessingDisabled = false;
 
-    private int mCallLogBackgroundColor;
-    private int mExpandedBackgroundColor;
-    private float mExpandedTranslationZ;
     private int mPhotoSize;
 
     /** Listener for the primary or secondary actions in the list.
@@ -349,9 +344,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
         Resources resources = mContext.getResources();
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
-        mCallLogBackgroundColor = resources.getColor(R.color.background_dialer_list_items);
-        mExpandedBackgroundColor = resources.getColor(R.color.call_log_expanded_background_color);
-        mExpandedTranslationZ = resources.getDimension(R.dimen.call_log_expanded_translation_z);
         mPhotoSize = resources.getDimensionPixelSize(R.dimen.contact_photo_size);
 
         mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
@@ -733,7 +725,12 @@ public class CallLogAdapter extends GroupingListAdapter
 
         // Restore expansion state of the row on rebind.  Inflate the actions ViewStub if required,
         // and set its visibility state accordingly.
-        expandOrCollapseActions(callLogItemView, isExpanded(rowId));
+        views.expandOrCollapseActions(
+                isExpanded(rowId),
+                mOnReportButtonClickListener,
+                mActionListener,
+                mPhoneNumberUtilsWrapper,
+                mCallLogViewsHelper);
 
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation, formattedNumber, countryIso,
@@ -843,54 +840,6 @@ public class CallLogAdapter extends GroupingListAdapter
             mCurrentlyExpanded = rowId;
             return true;
         }
-    }
-
-    /**
-     * Expands or collapses the view containing the CALLBACK/REDIAL, VOICEMAIL and DETAILS action
-     * buttons.
-     *
-     * @param callLogItem The call log entry parent view.
-     * @param isExpanded The new expansion state of the view.
-     */
-    private void expandOrCollapseActions(View callLogItem, boolean isExpanded) {
-        final CallLogListItemViews views = (CallLogListItemViews) callLogItem.getTag();
-
-        expandVoicemailTranscriptionView(views, isExpanded);
-        if (isExpanded) {
-            // Inflate the view stub if necessary, and wire up the event handlers.
-            views.inflateActionViewStub(callLogItem, mOnReportButtonClickListener, mActionListener,
-                    mPhoneNumberUtilsWrapper, mCallLogViewsHelper);
-
-            views.actionsView.setVisibility(View.VISIBLE);
-            views.actionsView.setAlpha(1.0f);
-            views.callLogEntryView.setBackgroundColor(mExpandedBackgroundColor);
-            views.callLogEntryView.setTranslationZ(mExpandedTranslationZ);
-            callLogItem.setTranslationZ(mExpandedTranslationZ); // WAR
-        } else {
-            // When recycling a view, it is possible the actionsView ViewStub was previously
-            // inflated so we should hide it in this case.
-            if (views.actionsView != null) {
-                views.actionsView.setVisibility(View.GONE);
-            }
-
-            views.callLogEntryView.setBackgroundColor(mCallLogBackgroundColor);
-            views.callLogEntryView.setTranslationZ(0);
-            callLogItem.setTranslationZ(0); // WAR
-        }
-    }
-
-    public static void expandVoicemailTranscriptionView(CallLogListItemViews views,
-            boolean isExpanded) {
-        if (views.callType != Calls.VOICEMAIL_TYPE) {
-            return;
-        }
-
-        final TextView view = views.phoneCallDetailsViews.voicemailTranscriptionView;
-        if (TextUtils.isEmpty(view.getText())) {
-            return;
-        }
-        view.setMaxLines(isExpanded ? VOICEMAIL_TRANSCRIPTION_MAX_LINES : 1);
-        view.setSingleLine(!isExpanded);
     }
 
     /** Checks whether the contact info from the call log matches the one from the contacts db. */
@@ -1070,7 +1019,7 @@ public class CallLogAdapter extends GroupingListAdapter
     void bindViewForTest(View view, Context context, Cursor cursor) {
         bindStandAloneView(view, context, cursor);
         CallLogListItemViews views = CallLogListItemViews.fromView(context, view);
-        views.inflateActionViewStub(view, mOnReportButtonClickListener, mActionListener,
+        views.inflateActionViewStub(mOnReportButtonClickListener, mActionListener,
                 mPhoneNumberUtilsWrapper, mCallLogViewsHelper);
     }
 
@@ -1172,7 +1121,12 @@ public class CallLogAdapter extends GroupingListAdapter
         boolean expanded = toggleExpansion(views.rowId);
 
         // Trigger loading of the viewstub and visual expand or collapse.
-        expandOrCollapseActions(view, expanded);
+        views.expandOrCollapseActions(
+                expanded,
+                mOnReportButtonClickListener,
+                mActionListener,
+                mPhoneNumberUtilsWrapper,
+                mCallLogViewsHelper);
 
         // Animate the expansion or collapse.
         if (mCallItemExpandedListener != null) {
@@ -1182,11 +1136,15 @@ public class CallLogAdapter extends GroupingListAdapter
 
             // Animate the collapse of the previous item if it is still visible on screen.
             if (mPreviouslyExpanded != NONE_EXPANDED) {
-                View previousItem = mCallItemExpandedListener.getViewForCallId(
-                        mPreviouslyExpanded);
+                View previousItem = mCallItemExpandedListener.getViewForCallId(mPreviouslyExpanded);
 
                 if (previousItem != null) {
-                    expandOrCollapseActions(previousItem, false);
+                    ((CallLogListItemViews) previousItem.getTag()).expandOrCollapseActions(
+                            false /* isExpanded */,
+                            mOnReportButtonClickListener,
+                            mActionListener,
+                            mPhoneNumberUtilsWrapper,
+                            mCallLogViewsHelper);
                     if (animate) {
                         mCallItemExpandedListener.onItemExpanded(previousItem);
                     }

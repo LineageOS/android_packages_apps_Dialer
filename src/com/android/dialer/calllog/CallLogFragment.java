@@ -556,7 +556,7 @@ public class CallLogFragment extends ListFragment
                 if (!isExpand) {
                     viewHolder.actionsView.setVisibility(View.VISIBLE);
                 }
-                CallLogAdapter.expandVoicemailTranscriptionView(viewHolder, !isExpand);
+                viewHolder.expandVoicemailTranscriptionView(!isExpand);
 
                 // Set up the fade effect for the action buttons.
                 if (isExpand) {
@@ -625,7 +625,7 @@ public class CallLogFragment extends ListFragment
                             // is defaulting to the value (0) at the start of the expand animation.
                             viewHolder.actionsView.setAlpha(1);
                         }
-                        CallLogAdapter.expandVoicemailTranscriptionView(viewHolder, isExpand);
+                        viewHolder.expandVoicemailTranscriptionView(isExpand);
                     }
                 });
 
