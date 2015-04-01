@@ -101,7 +101,7 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      * changes.
      */
     private class VideoCallSurface implements TextureView.SurfaceTextureListener,
-            View.OnClickListener {
+            View.OnClickListener, View.OnAttachStateChangeListener {
         private int mSurfaceId;
         private TextureView mTextureView;
         private SurfaceTexture mSavedSurfaceTexture;
@@ -151,10 +151,7 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
             mTextureView = view;
             mTextureView.setSurfaceTextureListener(this);
             mTextureView.setOnClickListener(this);
-
-            if (mSavedSurfaceTexture != null) {
-                mTextureView.setSurfaceTexture(mSavedSurfaceTexture);
-            }
+            mTextureView.addOnAttachStateChangeListener(this);
         }
 
         /**
@@ -234,6 +231,19 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
             // Not Handled
         }
+
+        @Override
+        public void onViewAttachedToWindow(View v) {
+            if (DEBUG) {
+                Log.i(TAG, "OnViewAttachedToWindow");
+            }
+            if (mSavedSurfaceTexture != null) {
+                mTextureView.setSurfaceTexture(mSavedSurfaceTexture);
+            }
+        }
+
+        @Override
+        public void onViewDetachedFromWindow(View v) {}
 
         /**
          * Retrieves the current {@link TextureView}.
