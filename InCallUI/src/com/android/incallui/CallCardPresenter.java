@@ -254,7 +254,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         maybeShowManageConferenceCallButton();
 
-        final boolean enableEndCallButton = Call.State.isConnectingOrConnected(callState) &&
+        final boolean enableEndCallButton = (Call.State.isConnectingOrConnected(callState)
+                || callState == Call.State.DISCONNECTING) &&
                 callState != Call.State.INCOMING && mPrimary != null;
         // Hide the end call button instantly if we're receiving an incoming call.
         getUi().setEndCallButtonEnabled(
