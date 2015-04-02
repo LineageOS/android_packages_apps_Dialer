@@ -43,11 +43,12 @@ import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
+import com.android.dialer.contactinfo.ContactInfoRequest;
+import com.android.dialer.contactinfo.NumberWithCountryIso;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.ExpirableCache;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Objects;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -90,37 +91,6 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Implements onClickListener for the report button. */
     public interface OnReportButtonClickListener {
         public void onReportButtonClick(String number);
-    }
-
-    /**
-     * Stores a phone number of a call with the country code where it originally occurred.
-     * <p>
-     * Note the country does not necessarily specifies the country of the phone number itself, but
-     * it is the country in which the user was in when the call was placed or received.
-     */
-    private static final class NumberWithCountryIso {
-        public final String number;
-        public final String countryIso;
-
-        public NumberWithCountryIso(String number, String countryIso) {
-            this.number = number;
-            this.countryIso = countryIso;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (o == null) return false;
-            if (!(o instanceof NumberWithCountryIso)) return false;
-            NumberWithCountryIso other = (NumberWithCountryIso) o;
-            return TextUtils.equals(number, other.number)
-                    && TextUtils.equals(countryIso, other.countryIso);
-        }
-
-        @Override
-        public int hashCode() {
-            return (number == null ? 0 : number.hashCode())
-                    ^ (countryIso == null ? 0 : countryIso.hashCode());
-        }
     }
 
     /** The time in millis to delay starting the thread processing requests. */
@@ -172,49 +142,6 @@ public class CallLogAdapter extends GroupingListAdapter
      *  having to reverse the cursor to the start of the previous day call log entry.
      */
     private HashMap<Long,Integer> mDayGroups = new HashMap<Long, Integer>();
-
-    /**
-     * A request for contact details for the given number.
-     */
-    private static final class ContactInfoRequest {
-        /** The number to look-up. */
-        public final String number;
-        /** The country in which a call to or from this number was placed or received. */
-        public final String countryIso;
-        /** The cached contact information stored in the call log. */
-        public final ContactInfo callLogInfo;
-
-        public ContactInfoRequest(String number, String countryIso, ContactInfo callLogInfo) {
-            this.number = number;
-            this.countryIso = countryIso;
-            this.callLogInfo = callLogInfo;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) return true;
-            if (obj == null) return false;
-            if (!(obj instanceof ContactInfoRequest)) return false;
-
-            ContactInfoRequest other = (ContactInfoRequest) obj;
-
-            if (!TextUtils.equals(number, other.number)) return false;
-            if (!TextUtils.equals(countryIso, other.countryIso)) return false;
-            if (!Objects.equal(callLogInfo, other.callLogInfo)) return false;
-
-            return true;
-        }
-
-        @Override
-        public int hashCode() {
-            final int prime = 31;
-            int result = 1;
-            result = prime * result + ((callLogInfo == null) ? 0 : callLogInfo.hashCode());
-            result = prime * result + ((countryIso == null) ? 0 : countryIso.hashCode());
-            result = prime * result + ((number == null) ? 0 : number.hashCode());
-            return result;
-        }
-    }
 
     /**
      * List of requests to update contact details.
