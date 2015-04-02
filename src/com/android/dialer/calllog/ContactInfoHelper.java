@@ -14,9 +14,12 @@
 
 package com.android.dialer.calllog;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteFullException;
 import android.net.Uri;
+import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
@@ -24,6 +27,7 @@ import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -41,6 +45,8 @@ import java.util.List;
  * Utility class to look up the contact information for a given number.
  */
 public class ContactInfoHelper {
+    private static final String TAG = ContactInfoHelper.class.getSimpleName();
+
     private final Context mContext;
     private final String mCurrentCountryIso;
 
@@ -278,6 +284,107 @@ public class ContactInfoHelper {
     }
 
     /**
+     * Stores differences between the updated contact info and the current call log contact info.
+     *
+     * @param number The number of the contact.
+     * @param countryIso The country associated with this number.
+     * @param updatedInfo The updated contact info.
+     * @param callLogInfo The call log entry's current contact info.
+     */
+    public void updateCallLogContactInfo(String number, String countryIso, ContactInfo updatedInfo,
+            ContactInfo callLogInfo) {
+        final ContentValues values = new ContentValues();
+        boolean needsUpdate = false;
+
+        if (callLogInfo != null) {
+            if (!TextUtils.equals(updatedInfo.name, callLogInfo.name)) {
+                values.put(Calls.CACHED_NAME, updatedInfo.name);
+                needsUpdate = true;
+            }
+
+            if (updatedInfo.type != callLogInfo.type) {
+                values.put(Calls.CACHED_NUMBER_TYPE, updatedInfo.type);
+                needsUpdate = true;
+            }
+
+            if (!TextUtils.equals(updatedInfo.label, callLogInfo.label)) {
+                values.put(Calls.CACHED_NUMBER_LABEL, updatedInfo.label);
+                needsUpdate = true;
+            }
+
+            if (!UriUtils.areEqual(updatedInfo.lookupUri, callLogInfo.lookupUri)) {
+                values.put(Calls.CACHED_LOOKUP_URI, UriUtils.uriToString(updatedInfo.lookupUri));
+                needsUpdate = true;
+            }
+
+            // Only replace the normalized number if the new updated normalized number isn't empty.
+            if (!TextUtils.isEmpty(updatedInfo.normalizedNumber) &&
+                    !TextUtils.equals(updatedInfo.normalizedNumber, callLogInfo.normalizedNumber)) {
+                values.put(Calls.CACHED_NORMALIZED_NUMBER, updatedInfo.normalizedNumber);
+                needsUpdate = true;
+            }
+
+            if (!TextUtils.equals(updatedInfo.number, callLogInfo.number)) {
+                values.put(Calls.CACHED_MATCHED_NUMBER, updatedInfo.number);
+                needsUpdate = true;
+            }
+
+            if (updatedInfo.photoId != callLogInfo.photoId) {
+                values.put(Calls.CACHED_PHOTO_ID, updatedInfo.photoId);
+                needsUpdate = true;
+            }
+
+            final Uri updatedPhotoUriContactsOnly =
+                    UriUtils.nullForNonContactsUri(updatedInfo.photoUri);
+            if (!UriUtils.areEqual(updatedPhotoUriContactsOnly, callLogInfo.photoUri)) {
+                values.put(Calls.CACHED_PHOTO_URI,
+                        UriUtils.uriToString(updatedPhotoUriContactsOnly));
+                needsUpdate = true;
+            }
+
+            if (!TextUtils.equals(updatedInfo.formattedNumber, callLogInfo.formattedNumber)) {
+                values.put(Calls.CACHED_FORMATTED_NUMBER, updatedInfo.formattedNumber);
+                needsUpdate = true;
+            }
+        } else {
+            // No previous values, store all of them.
+            values.put(Calls.CACHED_NAME, updatedInfo.name);
+            values.put(Calls.CACHED_NUMBER_TYPE, updatedInfo.type);
+            values.put(Calls.CACHED_NUMBER_LABEL, updatedInfo.label);
+            values.put(Calls.CACHED_LOOKUP_URI, UriUtils.uriToString(updatedInfo.lookupUri));
+            values.put(Calls.CACHED_MATCHED_NUMBER, updatedInfo.number);
+            values.put(Calls.CACHED_NORMALIZED_NUMBER, updatedInfo.normalizedNumber);
+            values.put(Calls.CACHED_PHOTO_ID, updatedInfo.photoId);
+            values.put(Calls.CACHED_PHOTO_URI, UriUtils.uriToString(
+                    UriUtils.nullForNonContactsUri(updatedInfo.photoUri)));
+            values.put(Calls.CACHED_FORMATTED_NUMBER, updatedInfo.formattedNumber);
+            needsUpdate = true;
+        }
+
+        if (!needsUpdate) {
+            return;
+        }
+
+        try {
+            if (countryIso == null) {
+                mContext.getContentResolver().update(
+                        Calls.CONTENT_URI_WITH_VOICEMAIL,
+                        values,
+                        Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " IS NULL",
+                        new String[]{ number });
+            } else {
+                mContext.getContentResolver().update(
+                        Calls.CONTENT_URI_WITH_VOICEMAIL,
+                        values,
+                        Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " = ?",
+                        new String[]{ number, countryIso });
+            }
+        } catch (SQLiteFullException e) {
+            Log.e(TAG, "Unable to update contact info in call log db", e);
+        }
+    }
+
+    /**
      * Parses the given URI to determine the original lookup key of the contact.
      */
     public static String getLookupKeyFromUri(Uri lookupUri) {
@@ -293,6 +400,29 @@ public class ContactInfoHelper {
         } else {
             return null;
         }
+    }
+
+    /**
+     * Returns the contact information stored in an entry of the call log.
+     *
+     * @param c A cursor pointing to an entry in the call log.
+     */
+    public static ContactInfo getContactInfo(Cursor c) {
+        ContactInfo info = new ContactInfo();
+
+        info.lookupUri = UriUtils.parseUriOrNull(c.getString(CallLogQuery.CACHED_LOOKUP_URI));
+        info.name = c.getString(CallLogQuery.CACHED_NAME);
+        info.type = c.getInt(CallLogQuery.CACHED_NUMBER_TYPE);
+        info.label = c.getString(CallLogQuery.CACHED_NUMBER_LABEL);
+        String matchedNumber = c.getString(CallLogQuery.CACHED_MATCHED_NUMBER);
+        info.number = matchedNumber == null ? c.getString(CallLogQuery.NUMBER) : matchedNumber;
+        info.normalizedNumber = c.getString(CallLogQuery.CACHED_NORMALIZED_NUMBER);
+        info.photoId = c.getLong(CallLogQuery.CACHED_PHOTO_ID);
+        info.photoUri = UriUtils.nullForNonContactsUri(
+                UriUtils.parseUriOrNull(c.getString(CallLogQuery.CACHED_PHOTO_URI)));
+        info.formattedNumber = c.getString(CallLogQuery.CACHED_FORMATTED_NUMBER);
+
+        return info;
     }
 
     /**
