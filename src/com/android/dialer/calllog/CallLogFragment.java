@@ -378,8 +378,7 @@ public class CallLogFragment extends ListFragment
     @Override
     public void onPause() {
         super.onPause();
-        // Kill the requests thread
-        mAdapter.stopRequestProcessing();
+        mAdapter.pauseCache();
     }
 
     @Override
@@ -392,7 +391,7 @@ public class CallLogFragment extends ListFragment
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mAdapter.stopRequestProcessing();
+        mAdapter.pauseCache();
         mAdapter.changeCursor(null);
         getActivity().getContentResolver().unregisterContentObserver(mCallLogObserver);
         getActivity().getContentResolver().unregisterContentObserver(mContactsObserver);

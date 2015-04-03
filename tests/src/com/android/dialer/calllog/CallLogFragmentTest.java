@@ -126,7 +126,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         // Do not process requests for details during tests. This would start a background thread,
         // which makes the tests flaky.
         mAdapter.disableRequestProcessingForTest();
-        mAdapter.stopRequestProcessing();
+        mAdapter.pauseCache();
         mParentView = new FrameLayout(mActivity);
         mCursor = new MatrixCursor(CallLogQuery._PROJECTION);
     }
