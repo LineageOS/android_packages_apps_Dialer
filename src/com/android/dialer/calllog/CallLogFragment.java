@@ -67,8 +67,6 @@ public class CallLogFragment extends ListFragment
     private static final String TAG = "CallLogFragment";
 
     private static final String REPORT_DIALOG_TAG = "report_dialog";
-    private String mReportDialogNumber;
-    private boolean mIsReportDialogShowing;
 
     /**
      * ID of the empty loader to defer other fragments.
@@ -79,8 +77,6 @@ public class CallLogFragment extends ListFragment
     private static final String KEY_LOG_LIMIT = "log_limit";
     private static final String KEY_DATE_LIMIT = "date_limit";
     private static final String KEY_SHOW_FOOTER = "show_footer";
-    private static final String KEY_IS_REPORT_DIALOG_SHOWING = "is_report_dialog_showing";
-    private static final String KEY_REPORT_DIALOG_NUMBER = "report_dialog_number";
 
     private CallLogAdapter mAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
@@ -185,9 +181,6 @@ public class CallLogFragment extends ListFragment
             mLogLimit = state.getInt(KEY_LOG_LIMIT, mLogLimit);
             mDateLimit = state.getLong(KEY_DATE_LIMIT, mDateLimit);
             mHasFooterView = state.getBoolean(KEY_SHOW_FOOTER, mHasFooterView);
-            mIsReportDialogShowing = state.getBoolean(KEY_IS_REPORT_DIALOG_SHOWING,
-                    mIsReportDialogShowing);
-            mReportDialogNumber = state.getString(KEY_REPORT_DIALOG_NUMBER, mReportDialogNumber);
         }
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
@@ -214,14 +207,6 @@ public class CallLogFragment extends ListFragment
         mFadeOutDuration = getResources().getInteger(R.integer.call_log_actions_fade_out_duration);
         mExpandCollapseDuration = getResources().getInteger(
                 R.integer.call_log_expand_collapse_duration);
-
-        if (mIsReportDialogShowing) {
-            DialogFragment df = ObjectFactory.getReportDialogFragment(mReportDialogNumber);
-            if (df != null) {
-                df.setTargetFragment(this, 0);
-                df.show(getActivity().getFragmentManager(), REPORT_DIALOG_TAG);
-            }
-        }
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -406,8 +391,6 @@ public class CallLogFragment extends ListFragment
         outState.putInt(KEY_LOG_LIMIT, mLogLimit);
         outState.putLong(KEY_DATE_LIMIT, mDateLimit);
         outState.putBoolean(KEY_SHOW_FOOTER, mHasFooterView);
-        outState.putBoolean(KEY_IS_REPORT_DIALOG_SHOWING, mIsReportDialogShowing);
-        outState.putString(KEY_REPORT_DIALOG_NUMBER, mReportDialogNumber);
     }
 
     @Override
@@ -668,7 +651,6 @@ public class CallLogFragment extends ListFragment
     }
 
     public void onBadDataReported(String number) {
-        mIsReportDialogShowing = false;
         if (number == null) {
             return;
         }
@@ -681,8 +663,6 @@ public class CallLogFragment extends ListFragment
         if (df != null) {
             df.setTargetFragment(this, 0);
             df.show(getActivity().getFragmentManager(), REPORT_DIALOG_TAG);
-            mReportDialogNumber = number;
-            mIsReportDialogShowing = true;
         }
     }
 }
