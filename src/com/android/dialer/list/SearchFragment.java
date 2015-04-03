@@ -15,6 +15,9 @@
  */
 package com.android.dialer.list;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -126,6 +129,26 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ViewUtil.addBottomPaddingToListViewForFab(getListView(), getResources());
+    }
+
+    @Override
+    public Animator onCreateAnimator(int transit, boolean enter, int nextAnim) {
+        Animator animator = null;
+        if (nextAnim != 0) {
+            animator = AnimatorInflater.loadAnimator(getActivity(), nextAnim);
+        }
+        if (animator != null) {
+            final View view = getView();
+            final int oldLayerType = view.getLayerType();
+            view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    view.setLayerType(oldLayerType, null);
+                }
+            });
+        }
+        return animator;
     }
 
     @Override
