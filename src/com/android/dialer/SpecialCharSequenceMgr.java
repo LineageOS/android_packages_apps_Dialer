@@ -18,6 +18,7 @@ package com.android.dialer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -63,6 +64,8 @@ import java.util.List;
  */
 public class SpecialCharSequenceMgr {
     private static final String TAG = "SpecialCharSequenceMgr";
+
+    private static final String TAG_SELECT_ACCT_FRAGMENT = "tag_select_acct_fragment";
 
     private static final String SECRET_CODE_ACTION = "android.provider.Telephony.SECRET_CODE";
     private static final String MMI_IMEI_DISPLAY = "*#06#";
@@ -229,9 +232,12 @@ public class SpecialCharSequenceMgr {
                         public void onDialogDismissed() {}
                     };
 
-                    SelectPhoneAccountDialogFragment.showAccountDialog(
-                            ((Activity) context).getFragmentManager(), subscriptionAccountHandles,
-                            listener);
+                    // NOTE: If you want to support rotation of this dialog need
+                    // to refactor the listener and set it in DialpadFragment.onCreate()
+                    DialogFragment dialogFragment = SelectPhoneAccountDialogFragment.newInstance(
+                            subscriptionAccountHandles, listener);
+                    dialogFragment.show(((Activity) context).getFragmentManager(),
+                            TAG_SELECT_ACCT_FRAGMENT);
                 } else {
                     return false;
                 }
@@ -290,9 +296,12 @@ public class SpecialCharSequenceMgr {
                     public void onDialogDismissed() {}
                 };
 
-                SelectPhoneAccountDialogFragment.showAccountDialog(
-                        ((Activity) context).getFragmentManager(), subscriptionAccountHandles,
-                        listener);
+                // NOTE: If you want to support rotation of this dialog need
+                // to refactor the listener and set it in DialpadFragment.onCreate()
+                DialogFragment dialogFragment = SelectPhoneAccountDialogFragment.newInstance(
+                        subscriptionAccountHandles, listener);
+                dialogFragment.show(((Activity) context).getFragmentManager(),
+                        TAG_SELECT_ACCT_FRAGMENT);
             }
             return true;
         }
