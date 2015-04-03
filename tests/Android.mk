@@ -10,7 +10,11 @@ LOCAL_JAVA_LIBRARIES := android.test.runner
 # Include all test java files.
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
-LOCAL_STATIC_JAVA_LIBRARIES += com.android.contacts.common.test
+src_dirs := src \
+    ../../ContactsCommon/TestCommon/src
+
+# Include all test java files.
+LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs))
 
 LOCAL_PACKAGE_NAME := DialerTests
 
