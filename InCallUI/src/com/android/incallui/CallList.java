@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import com.android.contacts.common.testing.NeededForTesting;
 import com.google.common.collect.Maps;
 import com.google.common.base.Preconditions;
 
@@ -94,9 +95,11 @@ public class CallList implements InCallPhoneListener {
     };
 
     /**
-     * Private constructor.  Instance should only be acquired through getInstance().
+     * USED ONLY FOR TESTING
+     * Testing-only constructor.  Instance should only be acquired through getInstance().
      */
-    private CallList() {
+    @NeededForTesting
+    CallList() {
     }
 
     @Override
