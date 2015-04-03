@@ -601,19 +601,23 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
     }
 
     public void handleAccountSelection(PhoneAccountHandle accountHandle, boolean setDefault) {
-        Call call = mCallList.getWaitingForAccountCall();
-        if (call != null) {
-            String callId = call.getId();
-            TelecomAdapter.getInstance().phoneAccountSelected(callId, accountHandle, setDefault);
+        if (mCallList != null) {
+            Call call = mCallList.getWaitingForAccountCall();
+            if (call != null) {
+                String callId = call.getId();
+                TelecomAdapter.getInstance().phoneAccountSelected(callId, accountHandle, setDefault);
+            }
         }
     }
 
     public void cancelAccountSelection() {
         mAccountSelectionCancelled = true;
-        Call call = mCallList.getWaitingForAccountCall();
-        if (call != null) {
-            String callId = call.getId();
-            TelecomAdapter.getInstance().disconnectCall(callId);
+        if (mCallList != null) {
+            Call call = mCallList.getWaitingForAccountCall();
+            if (call != null) {
+                String callId = call.getId();
+                TelecomAdapter.getInstance().disconnectCall(callId);
+            }
         }
     }
 
