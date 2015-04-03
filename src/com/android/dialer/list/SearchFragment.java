@@ -180,9 +180,10 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
         final int shortcutType = adapter.getShortcutTypeFromPosition(position);
         final OnPhoneNumberPickerActionListener listener;
+        final String phoneNumber = TextUtils.isEmpty(mAddToContactNumber) ?
+                adapter.getQueryString() : mAddToContactNumber;
 
-        boolean ret = checkForProhibitedPhoneNumber(mAddToContactNumber);
-
+        boolean ret = checkForProhibitedPhoneNumber(phoneNumber);
         switch (shortcutType) {
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
                 super.onItemClick(position, id);
@@ -190,7 +191,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             case DialerPhoneNumberListAdapter.SHORTCUT_DIRECT_CALL:
                 listener = getOnPhoneNumberPickerListener();
                 if (listener != null && !ret) {
-                    listener.onCallNumberDirectly(mAddToContactNumber);
+                    listener.onCallNumberDirectly(phoneNumber);
                 }
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_ADD_NUMBER_TO_CONTACTS:
@@ -203,7 +204,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             case DialerPhoneNumberListAdapter.SHORTCUT_MAKE_VIDEO_CALL:
                 listener = getOnPhoneNumberPickerListener();
                 if (listener != null && !ret) {
-                    listener.onCallNumberDirectly(mAddToContactNumber, true /* isVideoCall */);
+                    listener.onCallNumberDirectly(phoneNumber, true /* isVideoCall */);
                 }
                 break;
         }
