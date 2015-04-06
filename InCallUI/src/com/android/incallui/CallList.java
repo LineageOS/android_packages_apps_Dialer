@@ -457,6 +457,7 @@ public class CallList implements InCallPhoneListener {
         final int cause = call.getDisconnectCause().getCode();
         final int delay;
         switch (cause) {
+            case DisconnectCause.ERROR:
             case DisconnectCause.LOCAL:
                 delay = DISCONNECTED_CALL_SHORT_TIMEOUT_MS;
                 break;
