@@ -62,8 +62,7 @@ import java.util.List;
  */
 public class CallLogFragment extends ListFragment
         implements CallLogQueryHandler.Listener, CallLogAdapter.OnReportButtonClickListener,
-        CallLogAdapter.CallFetcher,
-        CallLogAdapter.CallItemExpandedListener {
+        CallLogAdapter.CallFetcher {
     private static final String TAG = "CallLogFragment";
 
     private static final String REPORT_DIALOG_TAG = "report_dialog";
@@ -95,12 +94,6 @@ public class CallLogFragment extends ListFragment
     private boolean mEmptyLoaderRunning;
     private boolean mCallLogFetched;
     private boolean mVoicemailStatusFetched;
-
-    private float mExpandedItemTranslationZ;
-    private int mFadeInDuration;
-    private int mFadeInStartDelay;
-    private int mFadeOutDuration;
-    private int mExpandCollapseDuration;
 
     private final Handler mHandler = new Handler();
 
@@ -185,7 +178,7 @@ public class CallLogFragment extends ListFragment
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso), this, this);
+                new ContactInfoHelper(getActivity(), currentCountryIso), this);
         setListAdapter(mAdapter);
         mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
                 this, mLogLimit);
@@ -199,14 +192,6 @@ public class CallLogFragment extends ListFragment
                 Status.CONTENT_URI, true, mVoicemailStatusObserver);
         setHasOptionsMenu(true);
         fetchCalls();
-
-        mExpandedItemTranslationZ =
-                getResources().getDimension(R.dimen.call_log_expanded_translation_z);
-        mFadeInDuration = getResources().getInteger(R.integer.call_log_actions_fade_in_duration);
-        mFadeInStartDelay = getResources().getInteger(R.integer.call_log_actions_fade_start);
-        mFadeOutDuration = getResources().getInteger(R.integer.call_log_actions_fade_out_duration);
-        mExpandCollapseDuration = getResources().getInteger(
-                R.integer.call_log_expand_collapse_duration);
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -513,140 +498,6 @@ public class CallLogFragment extends ListFragment
         listView.addFooterView(mFooterView);
 
         ViewUtil.addBottomPaddingToListViewForFab(listView, getResources());
-    }
-
-    @Override
-    public void onItemExpanded(final View view) {
-        final int startingHeight = view.getHeight();
-        final CallLogListItemViews viewHolder = (CallLogListItemViews) view.getTag();
-        final ViewTreeObserver observer = getListView().getViewTreeObserver();
-        observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public boolean onPreDraw() {
-                // We don't want to continue getting called for every draw.
-                if (observer.isAlive()) {
-                    observer.removeOnPreDrawListener(this);
-                }
-                // Calculate some values to help with the animation.
-                final int endingHeight = view.getHeight();
-                final int distance = Math.abs(endingHeight - startingHeight);
-                final int baseHeight = Math.min(endingHeight, startingHeight);
-                final boolean isExpand = endingHeight > startingHeight;
-
-                // Set the views back to the start state of the animation
-                view.getLayoutParams().height = startingHeight;
-                if (!isExpand) {
-                    viewHolder.actionsView.setVisibility(View.VISIBLE);
-                }
-                viewHolder.expandVoicemailTranscriptionView(!isExpand);
-
-                // Set up the fade effect for the action buttons.
-                if (isExpand) {
-                    // Start the fade in after the expansion has partly completed, otherwise it
-                    // will be mostly over before the expansion completes.
-                    viewHolder.actionsView.setAlpha(0f);
-                    viewHolder.actionsView.animate()
-                            .alpha(1f)
-                            .setStartDelay(mFadeInStartDelay)
-                            .setDuration(mFadeInDuration)
-                            .start();
-                } else {
-                    viewHolder.actionsView.setAlpha(1f);
-                    viewHolder.actionsView.animate()
-                            .alpha(0f)
-                            .setDuration(mFadeOutDuration)
-                            .start();
-                }
-                view.requestLayout();
-
-                // Set up the animator to animate the expansion and shadow depth.
-                ValueAnimator animator = isExpand ? ValueAnimator.ofFloat(0f, 1f)
-                        : ValueAnimator.ofFloat(1f, 0f);
-
-                // Figure out how much scrolling is needed to make the view fully visible.
-                final Rect localVisibleRect = new Rect();
-                view.getLocalVisibleRect(localVisibleRect);
-                final int scrollingNeeded = localVisibleRect.top > 0 ? -localVisibleRect.top
-                        : view.getMeasuredHeight() - localVisibleRect.height();
-                final ListView listView = getListView();
-                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-                    private int mCurrentScroll = 0;
-
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animator) {
-                        Float value = (Float) animator.getAnimatedValue();
-
-                        // For each value from 0 to 1, animate the various parts of the layout.
-                        view.getLayoutParams().height = (int) (value * distance + baseHeight);
-                        float z = mExpandedItemTranslationZ * value;
-                        viewHolder.callLogEntryView.setTranslationZ(z);
-                        view.setTranslationZ(z); // WAR
-                        view.requestLayout();
-
-                        if (isExpand) {
-                            if (listView != null) {
-                                int scrollBy = (int) (value * scrollingNeeded) - mCurrentScroll;
-                                listView.smoothScrollBy(scrollBy, /* duration = */ 0);
-                                mCurrentScroll += scrollBy;
-                            }
-                        }
-                    }
-                });
-                // Set everything to their final values when the animation's done.
-                animator.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        view.getLayoutParams().height = LayoutParams.WRAP_CONTENT;
-
-                        if (!isExpand) {
-                            viewHolder.actionsView.setVisibility(View.GONE);
-                        } else {
-                            // This seems like it should be unnecessary, but without this, after
-                            // navigating out of the activity and then back, the action view alpha
-                            // is defaulting to the value (0) at the start of the expand animation.
-                            viewHolder.actionsView.setAlpha(1);
-                        }
-                        viewHolder.expandVoicemailTranscriptionView(isExpand);
-                    }
-                });
-
-                animator.setDuration(mExpandCollapseDuration);
-                animator.start();
-
-                // Return false so this draw does not occur to prevent the final frame from
-                // being drawn for the single frame before the animations start.
-                return false;
-            }
-        });
-    }
-
-    /**
-     * Retrieves the call log view for the specified call Id.  If the view is not currently
-     * visible, returns null.
-     *
-     * @param callId The call Id.
-     * @return The call log view.
-     */
-    @Override
-    public View getViewForCallId(long callId) {
-        ListView listView = getListView();
-
-        int firstPosition = listView.getFirstVisiblePosition();
-        int lastPosition = listView.getLastVisiblePosition();
-
-        for (int position = 0; position <= lastPosition - firstPosition; position++) {
-            View view = listView.getChildAt(position);
-
-            if (view != null) {
-                final CallLogListItemViews viewHolder = (CallLogListItemViews) view.getTag();
-                if (viewHolder != null && viewHolder.rowId == callId) {
-                    return view;
-                }
-            }
-        }
-
-        return null;
     }
 
     public void onBadDataReported(String number) {
