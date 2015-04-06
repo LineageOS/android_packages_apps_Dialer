@@ -19,10 +19,15 @@
   <string name="nearby_places">Locații în apropiere</string>
   <string name="people">Persoane</string>
   <string name="lookup_settings_label">Căutare număr de telefon</string>
+  <string name="enable_forward_lookup_title">Căutare redirecţionată</string>
   <string name="enable_people_lookup_title">Căutare persoane</string>
+  <string name="enable_reverse_lookup_title">Căutare inversă</string>
+  <string name="people_lookup_provider_title">Furnizor de căutare a persoanelor</string>
+  <string name="reverse_lookup_provider_title">Furnizor de căutare inversă</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chineză (CN)</string>
   <string name="preference_category_t9_dialpad_search">Căutare Dialpad T9</string>
   <string name="t9_search_input_locale">Căutare T9</string>
+  <string name="type_blacklist">Apel de pe lista neagră</string>
   <string name="call_log_stats_title">Statistici</string>
   <string name="callStatsDetailTitle">Detalii statistică apel</string>
   <string name="call_stats">Statistici apel</string>
@@ -37,6 +42,7 @@
   <string name="call_stats_missed">Pierdute</string>
   <string name="call_stats_missed_percent">Pierdut: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_blacklist">Listă neagră</string>
+  <string name="call_stats_blacklist_percent">Lista neagră: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Data de început</string>
@@ -55,6 +61,7 @@
   <string name="call_stats_sort_by_duration">Sortare după durata apelului</string>
   <string name="call_stats_sort_by_count">Sortare după numărul de apeluri</string>
   <string name="menu_add_to_blacklist">Adaugă la lista neagră</string>
+  <string name="toast_added_to_blacklist">%s adăugat pe lista neagră.</string>
   <string name="speed_dial_settings">Setări apelare rapidă</string>
   <string name="speed_dial_not_set">(nu este setată)</string>
   <string name="speed_dial_replace">Înlocuire</string>
@@ -64,8 +71,10 @@
   <string name="no">Nu</string>
   <string name="incall_vibration_category_title">Vibrare în apel</string>
   <string name="incall_vibrate_outgoing_title">Vibrare la răspuns</string>
+  <string name="vibrate_call_waiting">Vibrare la apel în așteptare</string>
   <string name="incall_vibrate_hangup_title">Vibrare la terminare apel</string>
   <string name="incall_vibrate_45_title">Vibrare la fiecare minut</string>
+  <string name="detailed_incall_info_title">Informaţii detaliate ale apelantului</string>
   <string name="video_call">Apel video</string>
   <string name="call_duration_active">Durata activă:</string>
   <string name="call_duration_call_out">Durată apel:</string>
@@ -73,4 +82,7 @@
   <string name="call_log_all_calls_header">Toate apelurile</string>
   <string name="calllog_search_hint">Căutare în jurnalul de apeluri</string>
   <string name="msim_ime_dialog_title">Identificatorul dispozitivului</string>
+  <string name="start_call_playback">Redă înregistrarea</string>
+  <string name="stop_call_playback">Stop</string>
+  <string name="call_playback_error_message">Nu s-a reuşit redarea înregistrării</string>
 </resources>
