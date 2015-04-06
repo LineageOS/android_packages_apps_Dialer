@@ -21,8 +21,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.PhoneLookup;
 import android.telecom.PhoneAccountHandle;
@@ -43,15 +41,13 @@ import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
-import com.android.dialer.contactinfo.ContactInfoRequest;
-import com.android.dialer.contactinfo.NumberWithCountryIso;
+import com.android.dialer.contactinfo.ContactInfoCache;
+import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
 import com.android.dialer.util.DialerUtils;
-import com.android.dialer.util.ExpirableCache;
 
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 /**
  * Adapter class to fill in data for the Call Log.
@@ -59,11 +55,6 @@ import java.util.LinkedList;
 public class CallLogAdapter extends GroupingListAdapter
         implements ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
     private static final String TAG = CallLogAdapter.class.getSimpleName();
-
-    /** The enumeration of {@link android.os.AsyncTask} objects used in this class. */
-    public enum Tasks {
-        REMOVE_CALL_LOG_ENTRIES,
-    }
 
     /** Interface used to inform a parent UI element that a list item has been expanded. */
     public interface CallItemExpandedListener {
@@ -93,12 +84,6 @@ public class CallLogAdapter extends GroupingListAdapter
         public void onReportButtonClick(String number);
     }
 
-    /** The time in millis to delay starting the thread processing requests. */
-    private static final int START_PROCESSING_REQUESTS_DELAY_MILLIS = 1000;
-
-    /** The size of the cache of contact info. */
-    private static final int CONTACT_INFO_CACHE_SIZE = 100;
-
     /** Constant used to indicate no row is expanded. */
     private static final long NONE_EXPANDED = -1;
 
@@ -108,15 +93,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private final OnReportButtonClickListener mOnReportButtonClickListener;
     private ViewTreeObserver mViewTreeObserver = null;
 
-    /**
-     * A cache of the contact details for the phone numbers in the call log.
-     * <p>
-     * The content of the cache is expired (but not purged) whenever the application comes to
-     * the foreground.
-     * <p>
-     * The key is number with the country in which the call was placed or received.
-     */
-    private ExpirableCache<NumberWithCountryIso, ContactInfo> mContactInfoCache;
+    protected ContactInfoCache mContactInfoCache;
 
     /**
      * Tracks the call log row which was previously expanded.  Used so that the closure of a
@@ -143,22 +120,7 @@ public class CallLogAdapter extends GroupingListAdapter
      */
     private HashMap<Long,Integer> mDayGroups = new HashMap<Long, Integer>();
 
-    /**
-     * List of requests to update contact details.
-     * <p>
-     * Each request is made of a phone number to look up, and the contact info currently stored in
-     * the call log for this number.
-     * <p>
-     * The requests are added when displaying the contacts and are processed by a background
-     * thread.
-     */
-    private final LinkedList<ContactInfoRequest> mRequests;
-
     private boolean mLoading = true;
-    private static final int REDRAW = 1;
-    private static final int START_THREAD = 2;
-
-    private QueryThread mCallerIdThread;
 
     /** Instance of helper class for managing views. */
     private final CallLogListItemHelper mCallLogViewsHelper;
@@ -171,9 +133,6 @@ public class CallLogAdapter extends GroupingListAdapter
     private final CallLogGroupBuilder mCallLogGroupBuilder;
 
     private CallItemExpandedListener mCallItemExpandedListener;
-
-    /** Can be set to true by tests to disable processing of requests. */
-    private volatile boolean mRequestProcessingDisabled = false;
 
     /** Listener for the primary or secondary actions in the list.
      *  Primary opens the call details.
@@ -205,6 +164,14 @@ public class CallLogAdapter extends GroupingListAdapter
         }
     };
 
+    protected final OnContactInfoChangedListener mOnContactInfoChangedListener =
+            new OnContactInfoChangedListener() {
+                @Override
+                public void onContactInfoChanged() {
+                    notifyDataSetChanged();
+                }
+            };
+
     private AccessibilityDelegate mAccessibilityDelegate = new AccessibilityDelegate() {
         @Override
         public boolean onRequestSendAccessibilityEvent(ViewGroup host, View child,
@@ -222,28 +189,9 @@ public class CallLogAdapter extends GroupingListAdapter
         // We only wanted to listen for the first draw (and this is it).
         unregisterPreDrawListener();
 
-        // Only schedule a thread-creation message if the thread hasn't been
-        // created yet. This is purely an optimization, to queue fewer messages.
-        if (mCallerIdThread == null) {
-            mHandler.sendEmptyMessageDelayed(START_THREAD, START_PROCESSING_REQUESTS_DELAY_MILLIS);
-        }
-
+        mContactInfoCache.start();
         return true;
     }
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case REDRAW:
-                    notifyDataSetChanged();
-                    break;
-                case START_THREAD:
-                    startRequestProcessing();
-                    break;
-            }
-        }
-    };
 
     public CallLogAdapter(Context context, CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper, CallItemExpandedListener callItemExpandedListener,
@@ -257,8 +205,8 @@ public class CallLogAdapter extends GroupingListAdapter
 
         mOnReportButtonClickListener = onReportButtonClickListener;
 
-        mContactInfoCache = ExpirableCache.create(CONTACT_INFO_CACHE_SIZE);
-        mRequests = new LinkedList<ContactInfoRequest>();
+        mContactInfoCache = new ContactInfoCache(
+                mContactInfoHelper, mOnContactInfoChangedListener);
 
         Resources resources = mContext.getResources();
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
@@ -295,37 +243,6 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     /**
-     * Starts a background thread to process contact-lookup requests, unless one
-     * has already been started.
-     */
-    private synchronized void startRequestProcessing() {
-        // For unit-testing.
-        if (mRequestProcessingDisabled) return;
-
-        // Idempotence... if a thread is already started, don't start another.
-        if (mCallerIdThread != null) return;
-
-        mCallerIdThread = new QueryThread();
-        mCallerIdThread.setPriority(Thread.MIN_PRIORITY);
-        mCallerIdThread.start();
-    }
-
-    /**
-     * Stops the background thread that processes updates and cancels any
-     * pending requests to start it.
-     */
-    public synchronized void stopRequestProcessing() {
-        // Remove any pending requests to start the processing thread.
-        mHandler.removeMessages(START_THREAD);
-        if (mCallerIdThread != null) {
-            // Stop the thread; we are finished with it.
-            mCallerIdThread.stopProcessing();
-            mCallerIdThread.interrupt();
-            mCallerIdThread = null;
-        }
-    }
-
-    /**
      * Stop receiving onPreDraw() notifications.
      */
     private void unregisterPreDrawListener() {
@@ -336,134 +253,14 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     public void invalidateCache() {
-        mContactInfoCache.expireAll();
+        mContactInfoCache.invalidate();
 
         // Restart the request-processing thread after the next draw.
-        stopRequestProcessing();
         unregisterPreDrawListener();
     }
 
-    /**
-     * Enqueues a request to look up the contact details for the given phone number.
-     * <p>
-     * It also provides the current contact info stored in the call log for this number.
-     * <p>
-     * If the {@code immediate} parameter is true, it will start immediately the thread that looks
-     * up the contact information (if it has not been already started). Otherwise, it will be
-     * started with a delay. See {@link #START_PROCESSING_REQUESTS_DELAY_MILLIS}.
-     */
-    protected void enqueueRequest(String number, String countryIso, ContactInfo callLogInfo,
-            boolean immediate) {
-        ContactInfoRequest request = new ContactInfoRequest(number, countryIso, callLogInfo);
-        synchronized (mRequests) {
-            if (!mRequests.contains(request)) {
-                mRequests.add(request);
-                mRequests.notifyAll();
-            }
-        }
-        if (immediate) startRequestProcessing();
-    }
-
-    /**
-     * Queries the appropriate content provider for the contact associated with the number.
-     * <p>
-     * Upon completion it also updates the cache in the call log, if it is different from
-     * {@code callLogInfo}.
-     * <p>
-     * The number might be either a SIP address or a phone number.
-     * <p>
-     * It returns true if it updated the content of the cache and we should therefore tell the
-     * view to update its content.
-     */
-    private boolean queryContactInfo(String number, String countryIso, ContactInfo callLogInfo) {
-        final ContactInfo info = mContactInfoHelper.lookupNumber(number, countryIso);
-
-        if (info == null) {
-            // The lookup failed, just return without requesting to update the view.
-            return false;
-        }
-
-        // Check the existing entry in the cache: only if it has changed we should update the
-        // view.
-        NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
-        ContactInfo existingInfo = mContactInfoCache.getPossiblyExpired(numberCountryIso);
-
-        final boolean isRemoteSource = info.sourceType != 0;
-
-        // Don't force redraw if existing info in the cache is equal to {@link ContactInfo#EMPTY}
-        // to avoid updating the data set for every new row that is scrolled into view.
-        // see (https://googleplex-android-review.git.corp.google.com/#/c/166680/)
-
-        // Exception: Photo uris for contacts from remote sources are not cached in the call log
-        // cache, so we have to force a redraw for these contacts regardless.
-        boolean updated = (existingInfo != ContactInfo.EMPTY || isRemoteSource) &&
-                !info.equals(existingInfo);
-
-        // Store the data in the cache so that the UI thread can use to display it. Store it
-        // even if it has not changed so that it is marked as not expired.
-        mContactInfoCache.put(numberCountryIso, info);
-
-        // Update the call log even if the cache it is up-to-date: it is possible that the cache
-        // contains the value from a different call log entry.
-        mContactInfoHelper.updateCallLogContactInfo(number, countryIso, info, callLogInfo);
-        return updated;
-    }
-
-    /*
-     * Handles requests for contact name and number type.
-     */
-    private class QueryThread extends Thread {
-        private volatile boolean mDone = false;
-
-        public QueryThread() {
-            super("CallLogAdapter.QueryThread");
-        }
-
-        public void stopProcessing() {
-            mDone = true;
-        }
-
-        @Override
-        public void run() {
-            boolean needRedraw = false;
-            while (true) {
-                // Check if thread is finished, and if so return immediately.
-                if (mDone) return;
-
-                // Obtain next request, if any is available.
-                // Keep synchronized section small.
-                ContactInfoRequest req = null;
-                synchronized (mRequests) {
-                    if (!mRequests.isEmpty()) {
-                        req = mRequests.removeFirst();
-                    }
-                }
-
-                if (req != null) {
-                    // Process the request. If the lookup succeeds, schedule a
-                    // redraw.
-                    needRedraw |= queryContactInfo(req.number, req.countryIso, req.callLogInfo);
-                } else {
-                    // Throttle redraw rate by only sending them when there are
-                    // more requests.
-                    if (needRedraw) {
-                        needRedraw = false;
-                        mHandler.sendEmptyMessage(REDRAW);
-                    }
-
-                    // Wait until another request is available, or until this
-                    // thread is no longer needed (as indicated by being
-                    // interrupted).
-                    try {
-                        synchronized (mRequests) {
-                            mRequests.wait(1000);
-                        }
-                    } catch (InterruptedException ie) {
-                        // Ignore, and attempt to continue processing requests.
-                    }
-                }
-            }
-        }
+    public void pauseCache() {
+        mContactInfoCache.stop();
     }
 
     @Override
@@ -576,41 +373,11 @@ public class CallLogAdapter extends GroupingListAdapter
         // Note: Binding of the action buttons is done as required in configureActionViews when the
         // user expands the actions ViewStub.
 
-        // Lookup contacts with this number
-        NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
-        ExpirableCache.CachedValue<ContactInfo> cachedInfo =
-                mContactInfoCache.getCachedValue(numberCountryIso);
-        ContactInfo info = cachedInfo == null ? null : cachedInfo.getValue();
-        if (!PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
-                || isVoicemailNumber) {
-            // If this is a number that cannot be dialed, there is no point in looking up a contact
-            // for it.
-            info = ContactInfo.EMPTY;
-        } else if (cachedInfo == null) {
-            mContactInfoCache.put(numberCountryIso, ContactInfo.EMPTY);
-            // Use the cached contact info from the call log.
-            info = cachedContactInfo;
-            // The db request should happen on a non-UI thread.
-            // Request the contact details immediately since they are currently missing.
-            enqueueRequest(number, countryIso, cachedContactInfo, true);
-            // We will format the phone number when we make the background request.
-        } else {
-            if (cachedInfo.isExpired()) {
-                // The contact info is no longer up to date, we should request it. However, we
-                // do not need to request them immediately.
-                enqueueRequest(number, countryIso, cachedContactInfo, false);
-            } else  if (!callLogInfoMatches(cachedContactInfo, info)) {
-                // The call log information does not match the one we have, look it up again.
-                // We could simply update the call log directly, but that needs to be done in a
-                // background thread, so it is easier to simply request a new lookup, which will, as
-                // a side-effect, update the call log.
-                enqueueRequest(number, countryIso, cachedContactInfo, false);
-            }
-
-            if (info == ContactInfo.EMPTY) {
-                // Use the cached contact info from the call log.
-                info = cachedContactInfo;
-            }
+        ContactInfo info = ContactInfo.EMPTY;
+        if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
+                && !isVoicemailNumber) {
+            // Lookup contacts with this number
+            info = mContactInfoCache.getValue(number, countryIso, cachedContactInfo);
         }
 
         final Uri lookupUri = info.lookupUri;
@@ -746,15 +513,6 @@ public class CallLogAdapter extends GroupingListAdapter
         }
     }
 
-    /** Checks whether the contact info from the call log matches the one from the contacts db. */
-    private boolean callLogInfoMatches(ContactInfo callLogInfo, ContactInfo info) {
-        // The call log only contains a subset of the fields in the contacts db.
-        // Only check those.
-        return TextUtils.equals(callLogInfo.name, info.name)
-                && callLogInfo.type == info.type
-                && TextUtils.equals(callLogInfo.label, info.label);
-    }
-
     /**
      * Returns the call types for the given number of items in the cursor.
      * <p>
@@ -810,19 +568,20 @@ public class CallLogAdapter extends GroupingListAdapter
 
     /**
      * Sets whether processing of requests for contact details should be enabled.
-     * <p>
+     *
      * This method should be called in tests to disable such processing of requests when not
      * needed.
      */
     @VisibleForTesting
     void disableRequestProcessingForTest() {
-        mRequestProcessingDisabled = true;
+        // TODO: Remove this and test the cache directly.
+        mContactInfoCache.disableRequestProcessingForTest();
     }
 
     @VisibleForTesting
     void injectContactInfoForTest(String number, String countryIso, ContactInfo contactInfo) {
-        NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
-        mContactInfoCache.put(numberCountryIso, contactInfo);
+        // TODO: Remove this and test the cache directly.
+        mContactInfoCache.injectContactInfoForTest(number, countryIso, contactInfo);
     }
 
     @Override
