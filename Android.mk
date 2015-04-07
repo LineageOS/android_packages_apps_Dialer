@@ -22,19 +22,21 @@ LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(res_dirs))
 
 LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
+    --extra-packages android.support.v7.recyclerview \
     --extra-packages com.android.incallui \
     --extra-packages com.android.contacts.common \
     --extra-packages com.android.phone.common
 
 LOCAL_JAVA_LIBRARIES := telephony-common
 LOCAL_STATIC_JAVA_LIBRARIES := \
-    com.android.services.telephony.common \
-    com.android.vcard \
     android-common \
-    guava \
+    android-ex-variablespeed \
     android-support-v13 \
     android-support-v4 \
-    android-ex-variablespeed \
+    android-support-v7-recyclerview \
+    com.android.services.telephony.common \
+    com.android.vcard \
+    guava \
     libphonenumber
 
 LOCAL_REQUIRED_MODULES := libvariablespeed
