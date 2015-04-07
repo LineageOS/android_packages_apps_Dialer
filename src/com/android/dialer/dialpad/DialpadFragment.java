@@ -89,6 +89,7 @@ import com.android.dialer.util.DialerUtils;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.MultiSensorManagerDialer;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
 import com.android.phone.common.animation.AnimUtils;
@@ -109,6 +110,7 @@ public class DialpadFragment extends Fragment
         View.OnLongClickListener, View.OnKeyListener,
         AdapterView.OnItemClickListener, TextWatcher,
         PopupMenu.OnMenuItemClickListener,
+        MultiSensorManagerDialer.MultiSensorListener,
         DialpadKeyButton.OnPressedListener {
     private static final String TAG = DialpadFragment.class.getSimpleName();
 
@@ -183,6 +185,9 @@ public class DialpadFragment extends Fragment
     private ToneGenerator mToneGenerator;
     private final Object mToneGeneratorLock = new Object();
     private View mSpacer;
+
+    // Smart Call
+    private MultiSensorManagerDialer mMultiSensorManager;
 
     private FloatingActionButtonController mFloatingActionButtonController;
 
@@ -282,6 +287,12 @@ public class DialpadFragment extends Fragment
         return (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
     }
 
+    private boolean getSmartCallEnabled() {
+        int smartCallEnabled = Settings.System.getInt(getActivity().getContentResolver(),
+              Settings.System.SMART_PHONE_CALLER, 0);
+        return (smartCallEnabled != 0);
+    }
+
     private TelecomManager getTelecomManager() {
         return (TelecomManager) getActivity().getSystemService(Context.TELECOM_SERVICE);
     }
@@ -355,6 +366,8 @@ public class DialpadFragment extends Fragment
             mCallStateReceiver = new CallStateReceiver();
             ((Context) getActivity()).registerReceiver(mCallStateReceiver, callStateIntentFilter);
         }
+
+        mMultiSensorManager = new MultiSensorManagerDialer(getActivity().getApplicationContext(), this);
     }
 
     @Override
@@ -683,6 +696,10 @@ public class DialpadFragment extends Fragment
 
         stopWatch.stopAndLog(TAG, 50);
 
+        if (!isPhoneInUse() && getSmartCallEnabled()) {
+            mMultiSensorManager.enable();
+        }
+
         mSmsPackageComponentName = DialerUtils.getSmsComponent(activity);
 
         // Populate the overflow menu in onResume instead of onCreate, so that if the SMS activity
@@ -708,6 +725,9 @@ public class DialpadFragment extends Fragment
         mLastNumberDialed = EMPTY_NUMBER;  // Since we are going to query again, free stale number.
 
         SpecialCharSequenceMgr.cleanup();
+
+        // always call disable to make sure it gets disabled
+        mMultiSensorManager.disable();
     }
 
     @Override
@@ -724,6 +744,21 @@ public class DialpadFragment extends Fragment
         if (mClearDigitsOnStop) {
             mClearDigitsOnStop = false;
             clearDialpad();
+        }
+    }
+
+    @Override
+    public void onPickup() {
+        if (!isDigitsEmpty()) {
+            mMultiSensorManager.disable();
+
+            final String number = mDigits.getText().toString();
+
+            final Intent intent = CallUtil.getCallIntent(number,
+                   (getActivity() instanceof DialtactsActivity ?
+                   ((DialtactsActivity) getActivity()).getCallOrigin() : null));
+                   startActivity(intent);
+            hideAndClearDialpad(false);
         }
     }
 
