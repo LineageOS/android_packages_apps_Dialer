@@ -29,6 +29,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -37,6 +38,7 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
@@ -76,6 +78,7 @@ import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.MoreContactUtils;
+import com.android.contacts.common.util.PickupGestureDetector;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
 import com.android.contacts.common.widget.FloatingActionButtonController;
@@ -88,6 +91,7 @@ import com.android.dialer.SpeedDialUtils;
 import com.android.dialer.util.DialerUtils;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.dialer.calllog.PhoneAccountUtils;
+import com.android.dialer.settings.GeneralSettingsFragment;
 import com.android.dialer.util.DialerUtils;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
@@ -109,6 +113,7 @@ public class DialpadFragment extends Fragment
         View.OnLongClickListener, View.OnKeyListener,
         AdapterView.OnItemClickListener, TextWatcher,
         PopupMenu.OnMenuItemClickListener,
+        PickupGestureDetector.PickupListener,
         DialpadKeyButton.OnPressedListener {
     private static final String TAG = DialpadFragment.class.getSimpleName();
 
@@ -183,6 +188,8 @@ public class DialpadFragment extends Fragment
     private ToneGenerator mToneGenerator;
     private final Object mToneGeneratorLock = new Object();
     private View mSpacer;
+
+    private PickupGestureDetector mPickupDetector;
 
     private FloatingActionButtonController mFloatingActionButtonController;
 
@@ -282,6 +289,11 @@ public class DialpadFragment extends Fragment
         return (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
     }
 
+    private boolean isSmartCallEnabled() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        return prefs.getBoolean(GeneralSettingsFragment.BUTTON_SMART_DIALER_KEY, false);
+    }
+
     private TelecomManager getTelecomManager() {
         return (TelecomManager) getActivity().getSystemService(Context.TELECOM_SERVICE);
     }
@@ -355,6 +367,8 @@ public class DialpadFragment extends Fragment
             mCallStateReceiver = new CallStateReceiver();
             ((Context) getActivity()).registerReceiver(mCallStateReceiver, callStateIntentFilter);
         }
+
+        mPickupDetector = new PickupGestureDetector(getActivity(), this);
     }
 
     @Override
@@ -683,6 +697,10 @@ public class DialpadFragment extends Fragment
 
         stopWatch.stopAndLog(TAG, 50);
 
+        if (!isPhoneInUse() && isSmartCallEnabled()) {
+            mPickupDetector.enable();
+        }
+
         mSmsPackageComponentName = DialerUtils.getSmsComponent(activity);
 
         // Populate the overflow menu in onResume instead of onCreate, so that if the SMS activity
@@ -708,6 +726,8 @@ public class DialpadFragment extends Fragment
         mLastNumberDialed = EMPTY_NUMBER;  // Since we are going to query again, free stale number.
 
         SpecialCharSequenceMgr.cleanup();
+
+        mPickupDetector.disable();
     }
 
     @Override
@@ -724,6 +744,21 @@ public class DialpadFragment extends Fragment
         if (mClearDigitsOnStop) {
             mClearDigitsOnStop = false;
             clearDialpad();
+        }
+    }
+
+    @Override
+    public void onPickup() {
+        if (!isDigitsEmpty()) {
+            mPickupDetector.disable();
+
+            final String number = mDigits.getText().toString();
+            final DialtactsActivity activity = getActivity() instanceof DialtactsActivity
+                    ? (DialtactsActivity) getActivity() : null;
+            final Intent intent = CallUtil.getCallIntent(number,
+                    activity != null ? activity.getCallOrigin() : null);
+            startActivity(intent);
+            hideAndClearDialpad(false);
         }
     }
 
