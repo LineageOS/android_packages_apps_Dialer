@@ -125,4 +125,9 @@
     <string name="start_call_playback">Play recording</string>
     <string name="stop_call_playback">Stop</string>
     <string name="call_playback_error_message">Failed to play recording</string>
+
+    <!-- Smart Call -->
+    <string name="smart_dialer_title">Smart call</string>
+    <string name="smart_dialer_summary">Automatically call the contact by moving your device to your ear</string>
+
 </resources>
