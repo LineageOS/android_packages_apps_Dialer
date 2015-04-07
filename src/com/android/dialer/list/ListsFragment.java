@@ -109,7 +109,6 @@ public class ListsFragment extends Fragment implements ViewPager.OnPageChangeLis
                 case TAB_INDEX_RECENTS:
                     mRecentsFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL,
                             MAX_RECENTS_ENTRIES, System.currentTimeMillis() - OLDEST_RECENTS_DATE);
-                    mRecentsFragment.setHasFooterView(true);
                     return mRecentsFragment;
                 case TAB_INDEX_ALL_CONTACTS:
                     mAllContactsFragment = new AllContactsFragment();

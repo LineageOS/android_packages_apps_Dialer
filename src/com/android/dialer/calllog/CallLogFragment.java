@@ -75,7 +75,6 @@ public class CallLogFragment extends ListFragment
     private static final String KEY_FILTER_TYPE = "filter_type";
     private static final String KEY_LOG_LIMIT = "log_limit";
     private static final String KEY_DATE_LIMIT = "date_limit";
-    private static final String KEY_SHOW_FOOTER = "show_footer";
 
     private CallLogAdapter mAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
@@ -90,7 +89,6 @@ public class CallLogFragment extends ListFragment
     private TextView mStatusMessageText;
     private TextView mStatusMessageAction;
     private KeyguardManager mKeyguardManager;
-    private View mFooterView;
 
     private boolean mEmptyLoaderRunning;
     private boolean mCallLogFetched;
@@ -127,9 +125,6 @@ public class CallLogFragment extends ListFragment
     // Date limit (in millis since epoch) - when non-zero, only calls which occurred on or after
     // the date filter are included.  If zero, no date-based filtering occurs.
     private long mDateLimit = 0;
-
-    // Whether or not to show the Show call history footer view
-    private boolean mHasFooterView = false;
 
     public CallLogFragment() {
         this(CallLogQueryHandler.CALL_TYPE_ALL, -1);
@@ -174,7 +169,6 @@ public class CallLogFragment extends ListFragment
             mCallTypeFilter = state.getInt(KEY_FILTER_TYPE, mCallTypeFilter);
             mLogLimit = state.getInt(KEY_LOG_LIMIT, mLogLimit);
             mDateLimit = state.getLong(KEY_DATE_LIMIT, mDateLimit);
-            mHasFooterView = state.getBoolean(KEY_SHOW_FOOTER, mHasFooterView);
         }
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
@@ -287,7 +281,6 @@ public class CallLogFragment extends ListFragment
         super.onViewCreated(view, savedInstanceState);
         mEmptyListView = view.findViewById(R.id.empty_list_view);
         getListView().setItemsCanFocus(true);
-        maybeAddFooterView();
 
         updateEmptyMessage(mCallTypeFilter);
     }
@@ -380,7 +373,6 @@ public class CallLogFragment extends ListFragment
         outState.putInt(KEY_FILTER_TYPE, mCallTypeFilter);
         outState.putInt(KEY_LOG_LIMIT, mLogLimit);
         outState.putLong(KEY_DATE_LIMIT, mDateLimit);
-        outState.putBoolean(KEY_SHOW_FOOTER, mHasFooterView);
     }
 
     @Override
@@ -466,44 +458,6 @@ public class CallLogFragment extends ListFragment
             CallLogNotificationsHelper.removeMissedCallNotifications(getActivity());
             CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
         }
-    }
-
-    /**
-     * Enables/disables the showing of the view full call history footer
-     *
-     * @param hasFooterView Whether or not to show the footer
-     */
-    public void setHasFooterView(boolean hasFooterView) {
-        mHasFooterView = hasFooterView;
-        maybeAddFooterView();
-    }
-
-    /**
-     * Determine whether or not the footer view should be added to the listview. If getView()
-     * is null, which means onCreateView hasn't been called yet, defer the addition of the footer
-     * until onViewCreated has been called.
-     */
-    private void maybeAddFooterView() {
-        if (!mHasFooterView || getView() == null) {
-            return;
-        }
-
-        if (mFooterView == null) {
-            mFooterView = getActivity().getLayoutInflater().inflate(
-                    R.layout.recents_list_footer, getListView(), false);
-            mFooterView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ((HostInterface) getActivity()).showCallHistory();
-                }
-            });
-        }
-
-        final ListView listView = getListView();
-        listView.removeFooterView(mFooterView);
-        listView.addFooterView(mFooterView);
-
-        ViewUtil.addBottomPaddingToListViewForFab(listView, getResources());
     }
 
     public void onBadDataReported(String number) {
