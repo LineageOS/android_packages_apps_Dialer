@@ -87,6 +87,7 @@ public class CallLogFragment extends ListFragment
 
     private VoicemailStatusHelper mVoicemailStatusHelper;
     private View mStatusMessageView;
+    private View mEmptyListView;
     private TextView mStatusMessageText;
     private TextView mStatusMessageAction;
     private KeyguardManager mKeyguardManager;
@@ -220,8 +221,13 @@ public class CallLogFragment extends ListFragment
         mAdapter.changeCursor(cursor);
         // This will update the state of the "Clear call log" menu item.
         getActivity().invalidateOptionsMenu();
+
+        final ListView listView = getListView();
+        boolean showListView = cursor.getCount() > 0;
+        listView.setVisibility(showListView ? View.VISIBLE : View.GONE);
+        mEmptyListView.setVisibility(!showListView ? View.VISIBLE : View.GONE);
+
         if (mScrollToTop) {
-            final ListView listView = getListView();
             // The smooth-scroll animation happens over a fixed time period.
             // As a result, if it scrolls through a large portion of the list,
             // each frame will jump so far from the previous one that the user
@@ -294,7 +300,7 @@ public class CallLogFragment extends ListFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getListView().setEmptyView(view.findViewById(R.id.empty_list_view));
+        mEmptyListView = view.findViewById(R.id.empty_list_view);
         getListView().setItemsCanFocus(true);
         maybeAddFooterView();
 
@@ -414,7 +420,7 @@ public class CallLogFragment extends ListFragment
                         + filterType);
         }
         DialerUtils.configureEmptyListView(
-                getListView().getEmptyView(), R.drawable.empty_call_log, messageId, getResources());
+                mEmptyListView, R.drawable.empty_call_log, messageId, getResources());
     }
 
     CallLogAdapter getAdapter() {
