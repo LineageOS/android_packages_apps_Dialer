@@ -54,6 +54,8 @@ public class GeneralSettingsFragment extends PreferenceFragment
     private static final String BUTTON_RESPOND_VIA_SMS_KEY = "button_respond_via_sms_key";
     private static final String BUTTON_SPEED_DIAL_KEY  = "speed_dial_settings";
     private static final String BUTTON_T9_SEARCH_INPUT_LOCALE = "button_t9_search_input";
+    private static final String BUTTON_SMART_CALL = "button_smart_dialer";
+    private static final String BUTTON_SMART_DIALER_KEY = "button_smart_dialer";
 
     private static final int MSG_UPDATE_RINGTONE_SUMMARY = 1;
 
@@ -62,6 +64,7 @@ public class GeneralSettingsFragment extends PreferenceFragment
     private Preference mRingtonePreference;
     private SwitchPreference mVibrateWhenRinging;
     private SwitchPreference mPlayDtmfTone;
+    private SwitchPreference mSmartCall;
     private Preference mRespondViaSms;
     private Preference mSpeedDialSettings;
     private ListPreference mT9SearchInputLocale;
@@ -170,6 +173,10 @@ public class GeneralSettingsFragment extends PreferenceFragment
         } else if (preference == mRespondViaSms || preference == mSpeedDialSettings) {
             // Needs to return false for the intent to launch.
             return false;
+        } else if (preference == mSmartCall){
+            Settings.System.putInt(getContentResolver(), Settings.System.SMART_PHONE_CALLER,
+                    mSmartCall.isChecked() ? 1 : 0);
+            return true;
         }
         return true;
     }
@@ -184,6 +191,13 @@ public class GeneralSettingsFragment extends PreferenceFragment
 
         // Lookup the ringtone name asynchronously.
         new Thread(mRingtoneLookupRunnable).start();
+
+        mSmartCall = (SwitchPreference) findPreference(BUTTON_SMART_DIALER_KEY);
+        if (mSmartCall != null) {
+            int mSmartCallCheck = Settings.System.getInt(getContentResolver(),
+                    Settings.System.SMART_PHONE_CALLER, 0);
+            mSmartCall.setChecked(mSmartCallCheck != 0);
+        }
     }
 
     private void saveT9SearchInputLocale(Preference preference, String newT9Locale) {
