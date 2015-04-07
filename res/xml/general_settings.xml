@@ -107,6 +107,12 @@
             android:title="@string/detailed_incall_info_title"
             android:summary="@string/detailed_incall_info_summary" />
 
+        <SwitchPreference
+            android:key="button_smart_dialer"
+            android:title="@string/smart_dialer_title"
+            android:summary="@string/smart_dialer_summary"
+            android:defaultValue="false" />
+
         <PreferenceScreen
             android:key="button_respond_via_sms_key"
             android:title="@string/respond_via_sms_setting_title"
