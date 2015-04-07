@@ -21,7 +21,6 @@ import android.provider.CallLog.Calls;
 import android.telephony.PhoneNumberUtils;
 import android.text.format.Time;
 
-import com.android.common.widget.GroupingListAdapter;
 import com.android.contacts.common.util.DateUtils;
 import com.android.contacts.common.util.PhoneNumberHelper;
 
