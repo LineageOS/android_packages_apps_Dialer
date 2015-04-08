@@ -412,7 +412,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                 + " hasVideoStateChanged=" +
                 hasVideoStateChanged + " isVideoMode=" + isVideoMode());
 
-        if (!hasVideoStateChanged) { return;}
+        if (!hasVideoStateChanged) {
+            return;
+        }
 
         updateCameraSelection(call);
 
@@ -705,7 +707,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
-     * Show video Ui depends on video state.
+     * Show video Ui depends on video state.  Where the video state includes
+     * {@link VideoProfile.VideoState#PAUSED}, hide the incoming video surface so that the peer's
+     * contact photo shows.
      */
     private void showVideoUi(int videoState) {
         VideoCallUi ui = getUi();
@@ -713,13 +717,13 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             Log.e(this, "showVideoUi, VideoCallUi is null returning");
             return;
         }
-
+        boolean isPaused = VideoProfile.VideoState.isPaused(videoState);
         if (VideoProfile.VideoState.isBidirectional(videoState)) {
-            ui.showVideoViews(true, true);
+            ui.showVideoViews(true, !isPaused);
         } else if (VideoProfile.VideoState.isTransmissionEnabled(videoState)) {
             ui.showVideoViews(true, false);
         } else if (VideoProfile.VideoState.isReceptionEnabled(videoState)) {
-            ui.showVideoViews(false, true);
+            ui.showVideoViews(false, !isPaused);
         } else {
             ui.hideVideoUi();
         }
