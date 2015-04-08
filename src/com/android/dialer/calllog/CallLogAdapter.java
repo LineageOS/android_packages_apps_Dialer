@@ -95,12 +95,6 @@ public class CallLogAdapter extends GroupingListAdapter
     protected ContactInfoCache mContactInfoCache;
 
     /**
-     * Tracks the call log row which was previously expanded.  Used so that the closure of a
-     * previously expanded call log entry can be animated on rebind.
-     */
-    private long mPreviouslyExpanded = NONE_EXPANDED;
-
-    /**
      * Tracks the currently expanded call log row.
      */
     private long mCurrentlyExpanded = NONE_EXPANDED;
@@ -192,15 +186,16 @@ public class CallLogAdapter extends GroupingListAdapter
         return true;
     }
 
-    public CallLogAdapter(Context context, CallFetcher callFetcher,
-            ContactInfoHelper contactInfoHelper, CallItemExpandedListener callItemExpandedListener,
+    public CallLogAdapter(
+            Context context,
+            CallFetcher callFetcher,
+            ContactInfoHelper contactInfoHelper,
             OnReportButtonClickListener onReportButtonClickListener) {
         super(context);
 
         mContext = context;
         mCallFetcher = callFetcher;
         mContactInfoHelper = contactInfoHelper;
-        mCallItemExpandedListener = callItemExpandedListener;
 
         mOnReportButtonClickListener = onReportButtonClickListener;
 
@@ -499,14 +494,10 @@ public class CallLogAdapter extends GroupingListAdapter
     private boolean toggleExpansion(long rowId) {
         if (rowId == mCurrentlyExpanded) {
             // Collapsing currently expanded row.
-            mPreviouslyExpanded = NONE_EXPANDED;
             mCurrentlyExpanded = NONE_EXPANDED;
-
             return false;
         } else {
             // Expanding a row (collapsing current expanded one).
-
-            mPreviouslyExpanded = mCurrentlyExpanded;
             mCurrentlyExpanded = rowId;
             return true;
         }
@@ -670,30 +661,5 @@ public class CallLogAdapter extends GroupingListAdapter
                 mActionListener,
                 mPhoneNumberUtilsWrapper,
                 mCallLogViewsHelper);
-
-        // Animate the expansion or collapse.
-        if (mCallItemExpandedListener != null) {
-            if (animate) {
-                mCallItemExpandedListener.onItemExpanded(view);
-            }
-
-            // Animate the collapse of the previous item if it is still visible on screen.
-            if (mPreviouslyExpanded != NONE_EXPANDED) {
-                View previousItem = mCallItemExpandedListener.getViewForCallId(mPreviouslyExpanded);
-
-                if (previousItem != null) {
-                    ((CallLogListItemViews) previousItem.getTag()).expandOrCollapseActions(
-                            false /* isExpanded */,
-                            mOnReportButtonClickListener,
-                            mActionListener,
-                            mPhoneNumberUtilsWrapper,
-                            mCallLogViewsHelper);
-                    if (animate) {
-                        mCallItemExpandedListener.onItemExpanded(previousItem);
-                    }
-                }
-                mPreviouslyExpanded = NONE_EXPANDED;
-            }
-        }
     }
 }

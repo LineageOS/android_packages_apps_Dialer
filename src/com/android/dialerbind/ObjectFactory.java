@@ -42,15 +42,15 @@ public class ObjectFactory {
      * @param context The context to use.
      * @param callFetcher Instance of call fetcher to use.
      * @param contactInfoHelper Instance of contact info helper class to use.
-     * @param isCallLog Is this call log adapter being used on the call log?
      * @return Instance of CallLogAdapter.
      */
-    public static CallLogAdapter newCallLogAdapter(Context context,
-            CallFetcher callFetcher, ContactInfoHelper contactInfoHelper,
-            CallItemExpandedListener callItemExpandedListener,
+    public static CallLogAdapter newCallLogAdapter(
+            Context context,
+            CallFetcher callFetcher,
+            ContactInfoHelper contactInfoHelper,
             OnReportButtonClickListener onReportButtonClickListener) {
-        return new CallLogAdapter(context, callFetcher, contactInfoHelper,
-                callItemExpandedListener, onReportButtonClickListener);
+        return new CallLogAdapter(
+                context, callFetcher, contactInfoHelper, onReportButtonClickListener);
     }
 
     public static DialogFragment getReportDialogFragment(String number) {
