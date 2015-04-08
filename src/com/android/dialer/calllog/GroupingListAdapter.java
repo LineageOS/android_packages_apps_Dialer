@@ -21,6 +21,8 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Handler;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +36,7 @@ import com.android.contacts.common.testing.NeededForTesting;
  * The list has three types of elements: stand-alone, group header and group child. Groups are
  * collapsible and collapsed by default. This is used by the call log to group related entries.
  */
-abstract class GroupingListAdapter extends BaseAdapter {
+abstract class GroupingListAdapter extends RecyclerView.Adapter {
 
     private static final int GROUP_METADATA_ARRAY_INITIAL_SIZE = 16;
     private static final int GROUP_METADATA_ARRAY_INCREMENT = 128;
@@ -109,11 +111,6 @@ abstract class GroupingListAdapter extends BaseAdapter {
         public void onChanged() {
             notifyDataSetChanged();
         }
-
-        @Override
-        public void onInvalidated() {
-            notifyDataSetInvalidated();
-        }
     };
 
     public GroupingListAdapter(Context context) {
@@ -127,15 +124,7 @@ abstract class GroupingListAdapter extends BaseAdapter {
      */
     protected abstract void addGroups(Cursor cursor);
 
-    protected abstract View newStandAloneView(Context context, ViewGroup parent);
-    protected abstract void bindStandAloneView(View view, Context context, Cursor cursor);
-
-    protected abstract View newGroupView(Context context, ViewGroup parent);
-    protected abstract void bindGroupView(View view, Context context, Cursor cursor, int groupSize,
-            boolean expanded);
-
-    protected abstract View newChildView(Context context, ViewGroup parent);
-    protected abstract void bindChildView(View view, Context context, Cursor cursor);
+    protected abstract void onContentChanged();
 
     /**
      * Cache should be reset whenever the cursor changes or groups are expanded or collapsed.
@@ -147,9 +136,6 @@ abstract class GroupingListAdapter extends BaseAdapter {
         mLastCachedGroup = -1;
         mPositionMetadata.listPosition = -1;
         mPositionCache.clear();
-    }
-
-    protected void onContentChanged() {
     }
 
     public void changeCursor(Cursor cursor) {
@@ -171,13 +157,10 @@ abstract class GroupingListAdapter extends BaseAdapter {
             cursor.registerDataSetObserver(mDataSetObserver);
             mRowIdColumnIndex = cursor.getColumnIndexOrThrow("_id");
             notifyDataSetChanged();
-        } else {
-            // notify the observers about the lack of a data set
-            notifyDataSetInvalidated();
         }
-
     }
 
+    @NeededForTesting
     public Cursor getCursor() {
         return mCursor;
     }
@@ -231,7 +214,8 @@ abstract class GroupingListAdapter extends BaseAdapter {
         return need;
     }
 
-    public int getCount() {
+    @Override
+    public int getItemCount() {
         if (mCursor == null) {
             return 0;
         }
@@ -343,6 +327,7 @@ abstract class GroupingListAdapter extends BaseAdapter {
             if (position < listPosition) {
                 metadata.itemType = ITEM_TYPE_STANDALONE;
                 metadata.cursorPosition = cursorPosition - (listPosition - position);
+                metadata.childCount = 1;
                 return;
             }
 
@@ -382,6 +367,7 @@ abstract class GroupingListAdapter extends BaseAdapter {
         // The required item is past the last group
         metadata.itemType = ITEM_TYPE_STANDALONE;
         metadata.cursorPosition = cursorPosition + (position - listPosition);
+        metadata.childCount = 1;
     }
 
     /**
@@ -421,12 +407,6 @@ abstract class GroupingListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    @Override
-    public int getViewTypeCount() {
-        return 3;
-    }
-
-    @Override
     public int getItemViewType(int position) {
         obtainPositionMetadata(mPositionMetadata, position);
         return mPositionMetadata.itemType;
@@ -454,37 +434,16 @@ abstract class GroupingListAdapter extends BaseAdapter {
         }
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        obtainPositionMetadata(mPositionMetadata, position);
-        View view = convertView;
-        if (view == null) {
-            switch (mPositionMetadata.itemType) {
-                case ITEM_TYPE_STANDALONE:
-                    view = newStandAloneView(mContext, parent);
-                    break;
-                case ITEM_TYPE_GROUP_HEADER:
-                    view = newGroupView(mContext, parent);
-                    break;
-                case ITEM_TYPE_IN_GROUP:
-                    view = newChildView(mContext, parent);
-                    break;
-            }
+    /**
+     * Used for setting the cursor without triggering a UI thread update.
+     */
+    @NeededForTesting
+    public void setCursorForTesting(Cursor cursor) {
+        if (cursor != null) {
+            mCursor = cursor;
+            cursor.registerContentObserver(mChangeObserver);
+            cursor.registerDataSetObserver(mDataSetObserver);
+            mRowIdColumnIndex = cursor.getColumnIndexOrThrow("_id");
         }
-
-        mCursor.moveToPosition(mPositionMetadata.cursorPosition);
-        switch (mPositionMetadata.itemType) {
-            case ITEM_TYPE_STANDALONE:
-                bindStandAloneView(view, mContext, mCursor);
-                break;
-            case ITEM_TYPE_GROUP_HEADER:
-                bindGroupView(view, mContext, mCursor, mPositionMetadata.childCount,
-                        mPositionMetadata.isExpanded);
-                break;
-            case ITEM_TYPE_IN_GROUP:
-                bindChildView(view, mContext, mCursor);
-                break;
-
-        }
-        return view;
     }
 }
