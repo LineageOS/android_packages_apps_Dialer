@@ -97,6 +97,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mSecondaryCallProviderInfo;
     private TextView mSecondaryCallProviderLabel;
     private View mSecondaryCallConferenceCallIcon;
+    private View mSecondaryCallVideoCallIcon;
     private View mProgressSpinner;
 
     private View mManageConferenceCallButton;
@@ -451,7 +452,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-            String providerLabel, boolean isConference) {
+            String providerLabel, boolean isConference, boolean isVideoCall) {
 
         if (show != mSecondaryCallInfo.isShown()) {
             updateFabPositionForSecondaryCallInfo();
@@ -462,6 +463,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             showAndInitializeSecondaryCallInfo(hasProvider);
 
             mSecondaryCallConferenceCallIcon.setVisibility(isConference ? View.VISIBLE : View.GONE);
+            mSecondaryCallVideoCallIcon.setVisibility(isVideoCall ? View.VISIBLE : View.GONE);
 
             mSecondaryCallName.setText(nameIsNumber
                     ? PhoneNumberUtils.ttsSpanAsPhoneNumber(name)
@@ -749,6 +751,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mSecondaryCallName = (TextView) getView().findViewById(R.id.secondaryCallName);
             mSecondaryCallConferenceCallIcon =
                     getView().findViewById(R.id.secondaryCallConferenceCallIcon);
+            mSecondaryCallVideoCallIcon =
+                    getView().findViewById(R.id.secondaryCallVideoCallIcon);
         }
 
         if (mSecondaryCallProviderLabel == null && hasProvider) {

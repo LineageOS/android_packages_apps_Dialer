@@ -525,7 +525,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         if (mSecondary == null) {
             // Clear the secondary display info.
-            ui.setSecondary(false, null, false, null, null, false /* isConference */);
+            ui.setSecondary(false, null, false, null, null, false /* isConference */,
+                    false /* isVideoCall */);
             return;
         }
 
@@ -536,7 +537,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     false /* nameIsNumber */,
                     null /* label */,
                     getCallProviderLabel(mSecondary),
-                    true /* isConference */);
+                    true /* isConference */,
+                    mSecondary.isVideoCall(mContext));
         } else if (mSecondaryContactInfo != null) {
             Log.d(TAG, "updateSecondaryDisplayInfo() " + mSecondaryContactInfo);
             String name = getNameForCall(mSecondaryContactInfo);
@@ -547,10 +549,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     nameIsNumber,
                     mSecondaryContactInfo.label,
                     getCallProviderLabel(mSecondary),
-                    false /* isConference */);
+                    false /* isConference */,
+                    mSecondary.isVideoCall(mContext));
         } else {
             // Clear the secondary display info.
-            ui.setSecondary(false, null, false, null, null, false /* isConference */);
+            ui.setSecondary(false, null, false, null, null, false /* isConference */,
+                    false /* isVideoCall */);
         }
     }
 
@@ -735,7 +739,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isSipCall);
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-                String providerLabel, boolean isConference);
+                String providerLabel, boolean isConference, boolean isVideoCall);
         void setCallState(int state, int videoState, int sessionModificationState,
                 DisconnectCause disconnectCause, String connectionLabel,
                 Drawable connectionIcon, String gatewayNumber, boolean isWifi);
