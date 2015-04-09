@@ -249,6 +249,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         maybeShowManageConferenceCallButton();
+        maybeShowProgressSpinner();
 
         final boolean enableEndCallButton = Call.State.isConnectingOrConnected(callState) &&
                 callState != Call.State.INCOMING && mPrimary != null;
@@ -307,6 +308,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     private void maybeShowManageConferenceCallButton() {
         getUi().showManageConferenceCallButton(shouldShowManageConference());
+    }
+
+    private void maybeShowProgressSpinner() {
+        final boolean show = mPrimary != null && mPrimary.getSessionModificationState()
+                == Call.SessionModificationState.WAITING_FOR_RESPONSE
+                && mPrimary.getState() == Call.State.ACTIVE;
+        getUi().setProgressSpinnerVisible(show);
     }
 
     /**

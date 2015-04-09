@@ -941,6 +941,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
     @Override
     public void onDowngradeToAudio(Call call) {
+        call.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
         // exit video mode
         exitVideoMode();
     }
