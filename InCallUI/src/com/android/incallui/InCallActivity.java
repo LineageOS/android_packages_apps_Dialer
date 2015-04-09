@@ -20,6 +20,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -70,6 +71,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     private static final String TAG_CONFERENCE_FRAGMENT = "tag_conference_manager_fragment";
     private static final String TAG_CALLCARD_FRAGMENT = "tag_callcard_fragment";
     private static final String TAG_ANSWER_FRAGMENT = "tag_answer_fragment";
+    private static final String TAG_SELECT_ACCT_FRAGMENT = "tag_select_acct_fragment";
 
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
@@ -104,6 +106,19 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         @Override
         public void onAnimationEnd(Animation animation) {
             showFragment(TAG_DIALPAD_FRAGMENT, false, true);
+        }
+    };
+
+    private SelectPhoneAccountListener mSelectAcctListener = new SelectPhoneAccountListener() {
+        @Override
+        public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
+                boolean setDefault) {
+            InCallPresenter.getInstance().handleAccountSelection(selectedAccountHandle,
+                    setDefault);
+        }
+        @Override
+        public void onDialogDismissed() {
+            InCallPresenter.getInstance().cancelAccountSelection();
         }
     };
 
@@ -173,6 +188,12 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
             mShowDialpadRequested = icicle.getBoolean(SHOW_DIALPAD_EXTRA);
             mAnimateDialpadOnShow = false;
             mDtmfText = icicle.getString(DIALPAD_TEXT_EXTRA);
+
+            SelectPhoneAccountDialogFragment dialogFragment = (SelectPhoneAccountDialogFragment)
+                getFragmentManager().findFragmentByTag(TAG_SELECT_ACCT_FRAGMENT);
+            if (dialogFragment != null) {
+                dialogFragment.setListener(mSelectAcctListener);
+            }
         }
         Log.d(this, "onCreate(): exit");
     }
@@ -548,22 +569,10 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
                     phoneAccountHandles = new ArrayList<>();
                 }
 
-                SelectPhoneAccountListener listener = new SelectPhoneAccountListener() {
-                    @Override
-                    public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
-                            boolean setDefault) {
-                        InCallPresenter.getInstance().handleAccountSelection(selectedAccountHandle,
-                                setDefault);
-                    }
-                    @Override
-                    public void onDialogDismissed() {
-                        InCallPresenter.getInstance().cancelAccountSelection();
-                    }
-                };
-
-                SelectPhoneAccountDialogFragment.showAccountDialog(getFragmentManager(),
+                DialogFragment dialogFragment = SelectPhoneAccountDialogFragment.newInstance(
                         R.string.select_phone_account_for_calls, true, phoneAccountHandles,
-                        listener);
+                        mSelectAcctListener);
+                dialogFragment.show(getFragmentManager(), TAG_SELECT_ACCT_FRAGMENT);
             } else if (!newOutgoingCall) {
                 showCallCardFragment(true);
             }
