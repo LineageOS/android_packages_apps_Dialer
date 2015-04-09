@@ -20,7 +20,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Looper;
-import android.telecom.InCallAdapter;
 import android.telecom.Phone;
 import android.telecom.PhoneAccountHandle;
 
@@ -28,7 +27,6 @@ import com.google.common.base.Preconditions;
 
 import java.util.List;
 
-/** Wrapper around {@link InCallAdapter} that only forwards calls to the adapter when it's valid. */
 final class TelecomAdapter implements InCallPhoneListener {
     private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
