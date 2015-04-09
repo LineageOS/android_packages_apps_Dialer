@@ -153,7 +153,7 @@ public class CallLogAdapter extends GroupingListAdapter
         @Override
         public void onClick(View v) {
             final View callLogItem = (View) v.getParent().getParent();
-            handleRowExpanded(callLogItem, true /* animate */, false /* forceExpand */);
+            handleRowExpanded(callLogItem, false /* forceExpand */);
         }
     };
 
@@ -170,8 +170,7 @@ public class CallLogAdapter extends GroupingListAdapter
         public boolean onRequestSendAccessibilityEvent(ViewGroup host, View child,
                 AccessibilityEvent event) {
             if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
-                handleRowExpanded(host, false /* animate */,
-                        true /* forceExpand */);
+                handleRowExpanded(host, true /* forceExpand */);
             }
             return super.onRequestSendAccessibilityEvent(host, child, event);
         }
@@ -316,7 +315,7 @@ public class CallLogAdapter extends GroupingListAdapter
      * @param c the cursor pointing to the entry in the call log
      * @param count the number of entries in the current item, greater than 1 if it is a group
      */
-    private void bindView(View callLogItemView, Cursor c, int count) {
+    public void bindView(View callLogItemView, Cursor c, int count) {
         callLogItemView.setAccessibilityDelegate(mAccessibilityDelegate);
         final CallLogListItemViews views = (CallLogListItemViews) callLogItemView.getTag();
 
@@ -541,22 +540,6 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     /**
-     * Bind a call log entry view for testing purposes.  Also inflates the action view stub so
-     * unit tests can access the buttons contained within.
-     *
-     * @param view The current call log row.
-     * @param context The current context.
-     * @param cursor The cursor to bind from.
-     */
-    @VisibleForTesting
-    void bindViewForTest(View view, Context context, Cursor cursor) {
-        bindStandAloneView(view, context, cursor);
-        CallLogListItemViews views = CallLogListItemViews.fromView(context, view);
-        views.inflateActionViewStub(mOnReportButtonClickListener, mActionListener,
-                mPhoneNumberUtilsWrapper, mCallLogViewsHelper);
-    }
-
-    /**
      * Sets whether processing of requests for contact details should be enabled.
      *
      * This method should be called in tests to disable such processing of requests when not
@@ -640,11 +623,10 @@ public class CallLogAdapter extends GroupingListAdapter
      * Manages the state changes for the UI interaction where a call log row is expanded.
      *
      * @param view The view that was tapped
-     * @param animate Whether or not to animate the expansion/collapse
      * @param forceExpand Whether or not to force the call log row into an expanded state regardless
      *        of its previous state
      */
-    private void handleRowExpanded(View view, boolean animate, boolean forceExpand) {
+    private void handleRowExpanded(View view, boolean forceExpand) {
         final CallLogListItemViews views = (CallLogListItemViews) view.getTag();
 
         if (forceExpand && isExpanded(views.rowId)) {
@@ -653,10 +635,17 @@ public class CallLogAdapter extends GroupingListAdapter
 
         // Hide or show the actions view.
         boolean expanded = toggleExpansion(views.rowId);
+        expandItem(views, expanded);
+    }
 
+    /**
+     * @param views The view holder for the item to expand or collapse.
+     * @param expand {@code true} to expand the item, {@code false} otherwise.
+     */
+    public void expandItem(CallLogListItemViews views, boolean expand) {
         // Trigger loading of the viewstub and visual expand or collapse.
         views.expandOrCollapseActions(
-                expanded,
+                expand,
                 mOnReportButtonClickListener,
                 mActionListener,
                 mPhoneNumberUtilsWrapper,
