@@ -128,14 +128,6 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
                 mAnswerListener.onAnswer(VideoProfile.VideoState.BIDIRECTIONAL, getContext());
                 mTargetTriggered = true;
                 break;
-            case R.drawable.ic_lockscreen_answer_tx_video:
-                mAnswerListener.onAnswer(VideoProfile.VideoState.TX_ENABLED, getContext());
-                mTargetTriggered = true;
-                break;
-            case R.drawable.ic_lockscreen_answer_rx_video:
-                mAnswerListener.onAnswer(VideoProfile.VideoState.RX_ENABLED, getContext());
-                mTargetTriggered = true;
-                break;
             case R.drawable.ic_toolbar_video_off:
                 InCallPresenter.getInstance().declineUpgradeRequest(getContext());
                 mTargetTriggered = true;
