@@ -23,6 +23,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.PhoneLookup;
+import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -225,13 +226,12 @@ public class CallLogAdapter extends GroupingListAdapter
         mLoading = loading;
     }
 
-    @Override
     public boolean isEmpty() {
         if (mLoading) {
             // We don't want the empty state to show when loading.
             return false;
         } else {
-            return super.isEmpty();
+            return getItemCount() == 0;
         }
     }
 
@@ -262,48 +262,19 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     @Override
-    protected View newStandAloneView(Context context, ViewGroup parent) {
-        return newChildView(context, parent);
-    }
-
-    @Override
-    protected View newGroupView(Context context, ViewGroup parent) {
-        return newChildView(context, parent);
-    }
-
-    @Override
-    protected View newChildView(Context context, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
 
         // Get the views to bind to and cache them.
-        CallLogListItemViews views = CallLogListItemViews.fromView(context, view);
+        CallLogListItemViews views = CallLogListItemViews.fromView(mContext, view);
         view.setTag(views);
 
         // Set text height to false on the TextViews so they don't have extra padding.
         views.phoneCallDetailsViews.nameView.setElegantTextHeight(false);
         views.phoneCallDetailsViews.callLocationAndDate.setElegantTextHeight(false);
 
-        return view;
-    }
-
-    @Override
-    protected void bindStandAloneView(View view, Context context, Cursor cursor) {
-        bindView(view, cursor, 1);
-    }
-
-    @Override
-    protected void bindChildView(View view, Context context, Cursor cursor) {
-        bindView(view, cursor, 1);
-    }
-
-    @Override
-    protected void bindGroupView(View view, Context context, Cursor cursor, int groupSize,
-            boolean expanded) {
-        bindView(view, cursor, groupSize);
-    }
-
-    private void findAndCacheViews(View view) {
+        return (CallLogListItemViews) view.getTag();
     }
 
     /**
@@ -312,12 +283,17 @@ public class CallLogAdapter extends GroupingListAdapter
      * should not. It invokes cross-process methods and the repeat execution can get costly.
      *
      * @param callLogItemView the view corresponding to this entry
-     * @param c the cursor pointing to the entry in the call log
      * @param count the number of entries in the current item, greater than 1 if it is a group
      */
-    public void bindView(View callLogItemView, Cursor c, int count) {
-        callLogItemView.setAccessibilityDelegate(mAccessibilityDelegate);
-        final CallLogListItemViews views = (CallLogListItemViews) callLogItemView.getTag();
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        Cursor c = (Cursor) getItem(position);
+        if (c == null) {
+            return;
+        }
+        int count = getGroupSize(position);
+
+        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
+        views.rootView.setAccessibilityDelegate(mAccessibilityDelegate);
 
         // Default case: an item in the call log.
         views.primaryActionView.setVisibility(View.VISIBLE);
@@ -435,7 +411,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
         // Listen for the first draw
         if (mViewTreeObserver == null) {
-            mViewTreeObserver = callLogItemView.getViewTreeObserver();
+            mViewTreeObserver = views.rootView.getViewTreeObserver();
             mViewTreeObserver.addOnPreDrawListener(this);
         }
     }

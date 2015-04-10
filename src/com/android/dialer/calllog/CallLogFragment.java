@@ -21,8 +21,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.app.Fragment;
 import android.app.KeyguardManager;
-import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
@@ -34,10 +34,11 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.VoicemailContract.Status;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ListView;
@@ -60,7 +61,7 @@ import java.util.List;
  * Displays a list of call log entries. To filter for a particular kind of call
  * (all, missed or voicemails), specify it in the constructor.
  */
-public class CallLogFragment extends ListFragment
+public class CallLogFragment extends Fragment
         implements CallLogQueryHandler.Listener, CallLogAdapter.OnReportButtonClickListener,
         CallLogAdapter.CallFetcher {
     private static final String TAG = "CallLogFragment";
@@ -76,6 +77,8 @@ public class CallLogFragment extends ListFragment
     private static final String KEY_LOG_LIMIT = "log_limit";
     private static final String KEY_DATE_LIMIT = "date_limit";
 
+    private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLayoutManager;
     private CallLogAdapter mAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
     private boolean mScrollToTop;
@@ -172,9 +175,6 @@ public class CallLogFragment extends ListFragment
         }
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso), this);
-        setListAdapter(mAdapter);
         mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
                 this, mLogLimit);
         mKeyguardManager =
@@ -201,9 +201,8 @@ public class CallLogFragment extends ListFragment
         // This will update the state of the "Clear call log" menu item.
         getActivity().invalidateOptionsMenu();
 
-        final ListView listView = getListView();
         boolean showListView = cursor.getCount() > 0;
-        listView.setVisibility(showListView ? View.VISIBLE : View.GONE);
+        mRecyclerView.setVisibility(showListView ? View.VISIBLE : View.GONE);
         mEmptyListView.setVisibility(!showListView ? View.VISIBLE : View.GONE);
 
         if (mScrollToTop) {
@@ -213,8 +212,9 @@ public class CallLogFragment extends ListFragment
             // will not experience the illusion of downward motion.  Instead,
             // if we're not already near the top of the list, we instantly jump
             // near the top, and animate from there.
-            if (listView.getFirstVisiblePosition() > 5) {
-                listView.setSelection(5);
+            if (mLayoutManager.findFirstVisibleItemPosition() > 5) {
+                // TODO: Jump to near the top, then begin smooth scroll.
+                mRecyclerView.smoothScrollToPosition(0);
             }
             // Workaround for framework issue: the smooth-scroll doesn't
             // occur if setSelection() is called immediately before.
@@ -224,7 +224,7 @@ public class CallLogFragment extends ListFragment
                    if (getActivity() == null || getActivity().isFinishing()) {
                        return;
                    }
-                   listView.smoothScrollToPosition(0);
+                   mRecyclerView.smoothScrollToPosition(0);
                }
             });
 
@@ -269,6 +269,17 @@ public class CallLogFragment extends ListFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         View view = inflater.inflate(R.layout.call_log_fragment, container, false);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
+        mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
+                new ContactInfoHelper(getActivity(), currentCountryIso), this);
+        mRecyclerView.setAdapter(mAdapter);
+
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
         mStatusMessageView = view.findViewById(R.id.voicemail_status);
         mStatusMessageText = (TextView) view.findViewById(R.id.voicemail_status_message);
@@ -280,7 +291,6 @@ public class CallLogFragment extends ListFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mEmptyListView = view.findViewById(R.id.empty_list_view);
-        getListView().setItemsCanFocus(true);
 
         updateEmptyMessage(mCallTypeFilter);
     }

@@ -23,6 +23,7 @@ import static com.android.dialer.calllog.GroupingListAdapter.ITEM_TYPE_STANDALON
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.support.v7.widget.RecyclerView;
 import android.test.AndroidTestCase;
 import android.text.TextUtils;
 import android.view.View;
@@ -34,7 +35,7 @@ import android.view.ViewGroup;
  * Running all tests:
  *
  *   adb shell am instrument -e class com.android.dialer.calllog.GroupingListAdapterTests \
- *     -w com.google.android.dialer.tests/android.test.InstrumentationTestRunner
+ *     -w com.android.dialer.tests/android.test.InstrumentationTestRunner
  */
 public class GroupingListAdapterTests extends AndroidTestCase {
 
@@ -76,33 +77,21 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         }
 
         @Override
-        protected void bindChildView(View view, Context context, Cursor cursor) {
+        public void onContentChanged() {
+            // Do nothing.
         }
 
         @Override
-        protected void bindGroupView(View view, Context context, Cursor cursor, int groupSize,
-                boolean expanded) {
-        }
-
-        @Override
-        protected void bindStandAloneView(View view, Context context, Cursor cursor) {
-        }
-
-        @Override
-        protected View newChildView(Context context, ViewGroup parent) {
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int position) {
             return null;
         }
 
         @Override
-        protected View newGroupView(Context context, ViewGroup parent) {
-            return null;
-        }
-
-        @Override
-        protected View newStandAloneView(Context context, ViewGroup parent) {
-            return null;
+        public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+            // Do nothing.
         }
     };
+
 
     private void buildCursor(String... numbers) {
         mCursor = new MatrixCursor(PROJECTION);
@@ -117,7 +106,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         buildCursor("1", "2", "3");
         mAdapter.changeCursor(mCursor);
 
-        assertEquals(3, mAdapter.getCount());
+        assertEquals(3, mAdapter.getItemCount());
         assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
         assertPositionMetadata(1, ITEM_TYPE_STANDALONE, false, 1);
         assertPositionMetadata(2, ITEM_TYPE_STANDALONE, false, 2);
@@ -127,7 +116,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         buildCursor("1", "1", "2");
         mAdapter.changeCursor(mCursor);
 
-        assertEquals(2, mAdapter.getCount());
+        assertEquals(2, mAdapter.getItemCount());
         assertPositionMetadata(0, ITEM_TYPE_GROUP_HEADER, false, 0);
         assertPositionMetadata(1, ITEM_TYPE_STANDALONE, false, 2);
     }
@@ -137,7 +126,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         mAdapter.changeCursor(mCursor);
         mAdapter.toggleGroup(0);
 
-        assertEquals(4, mAdapter.getCount());
+        assertEquals(4, mAdapter.getItemCount());
         assertPositionMetadata(0, ITEM_TYPE_GROUP_HEADER, true, 0);
         assertPositionMetadata(1, ITEM_TYPE_IN_GROUP, false, 0);
         assertPositionMetadata(2, ITEM_TYPE_IN_GROUP, false, 1);
@@ -150,7 +139,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         mAdapter.toggleGroup(0);
         mAdapter.toggleGroup(0);
 
-        assertEquals(2, mAdapter.getCount());
+        assertEquals(2, mAdapter.getItemCount());
         assertPositionMetadata(0, ITEM_TYPE_GROUP_HEADER, false, 0);
         assertPositionMetadata(1, ITEM_TYPE_STANDALONE, false, 2);
     }
@@ -159,7 +148,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         buildCursor("1", "2", "2", "2", "3");
         mAdapter.changeCursor(mCursor);
 
-        assertEquals(3, mAdapter.getCount());
+        assertEquals(3, mAdapter.getItemCount());
         assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
         assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, false, 1);
         assertPositionMetadata(2, ITEM_TYPE_STANDALONE, false, 4);
@@ -170,7 +159,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         mAdapter.changeCursor(mCursor);
         mAdapter.toggleGroup(1);
 
-        assertEquals(6, mAdapter.getCount());
+        assertEquals(6, mAdapter.getItemCount());
         assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
         assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, true, 1);
         assertPositionMetadata(2, ITEM_TYPE_IN_GROUP, false, 1);
@@ -183,7 +172,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         buildCursor("1", "2", "3", "3", "3");
         mAdapter.changeCursor(mCursor);
 
-        assertEquals(3, mAdapter.getCount());
+        assertEquals(3, mAdapter.getItemCount());
         assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
         assertPositionMetadata(1, ITEM_TYPE_STANDALONE, false, 1);
         assertPositionMetadata(2, ITEM_TYPE_GROUP_HEADER, false, 2);
@@ -194,7 +183,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         mAdapter.changeCursor(mCursor);
         mAdapter.toggleGroup(2);
 
-        assertEquals(6, mAdapter.getCount());
+        assertEquals(6, mAdapter.getItemCount());
         assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
         assertPositionMetadata(1, ITEM_TYPE_STANDALONE, false, 1);
         assertPositionMetadata(2, ITEM_TYPE_GROUP_HEADER, true, 2);
@@ -207,7 +196,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         buildCursor("1", "2", "2", "3", "4", "4", "5", "5", "6");
         mAdapter.changeCursor(mCursor);
 
-        assertEquals(6, mAdapter.getCount());
+        assertEquals(6, mAdapter.getItemCount());
         assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
         assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, false, 1);
         assertPositionMetadata(2, ITEM_TYPE_STANDALONE, false, 3);
@@ -225,7 +214,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         // 4th to the 6th position
         mAdapter.toggleGroup(6);
 
-        assertEquals(10, mAdapter.getCount());
+        assertEquals(10, mAdapter.getItemCount());
         assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
         assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, true, 1);
         assertPositionMetadata(2, ITEM_TYPE_IN_GROUP, false, 1);
@@ -243,7 +232,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         mAdapter.changeCursor(mCursor);
 
         // First pass - building up cache
-        assertEquals(6, mAdapter.getCount());
+        assertEquals(6, mAdapter.getItemCount());
         assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
         assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, false, 1);
         assertPositionMetadata(2, ITEM_TYPE_STANDALONE, false, 3);
@@ -252,7 +241,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         assertPositionMetadata(5, ITEM_TYPE_STANDALONE, false, 8);
 
         // Second pass - using cache
-        assertEquals(6, mAdapter.getCount());
+        assertEquals(6, mAdapter.getItemCount());
         assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
         assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, false, 1);
         assertPositionMetadata(2, ITEM_TYPE_STANDALONE, false, 3);
@@ -295,7 +284,7 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         buildCursor(numbers);
         mAdapter.changeCursor(mCursor);
 
-        assertEquals(250, mAdapter.getCount());
+        assertEquals(250, mAdapter.getItemCount());
     }
 
     private void assertPositionMetadata(int position, int itemType, boolean isExpanded,

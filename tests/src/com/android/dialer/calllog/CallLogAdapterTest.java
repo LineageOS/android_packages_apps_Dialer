@@ -87,7 +87,8 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mCursor.addRow(createCallLogEntry());
 
         // Bind the views of a single row.
-        mAdapter.bindStandAloneView(mView, getContext(), mCursor);
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(CallLogListItemViews.fromView(getContext(), mView), 0);
 
         // There is one request for contact details.
         assertEquals(1, mAdapter.getContactInfoCache().requests.size());
@@ -105,7 +106,8 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mCursor.addRow(createCallLogEntryWithCachedValues());
 
         // Bind the views of a single row.
-        mAdapter.bindStandAloneView(mView, getContext(), mCursor);
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(CallLogListItemViews.fromView(getContext(), mView), 0);
 
         // There is one request for contact details.
         assertEquals(1, mAdapter.getContactInfoCache().requests.size());
@@ -123,7 +125,9 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mAdapter.injectContactInfoForTest(TEST_NUMBER, TEST_COUNTRY_ISO, createContactInfo());
 
         // Bind the views of a single row.
-        mAdapter.bindStandAloneView(mView, getContext(), mCursor);
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(
+                CallLogListItemViews.fromView(getContext(), mView), 0);
 
         // There is one request for contact details.
         assertEquals(1, mAdapter.getContactInfoCache().requests.size());
@@ -138,7 +142,8 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mAdapter.injectContactInfoForTest(TEST_NUMBER, TEST_COUNTRY_ISO, createContactInfo());
 
         // Bind the views of a single row.
-        mAdapter.bindStandAloneView(mView, getContext(), mCursor);
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(CallLogListItemViews.fromView(getContext(), mView), 0);
 
         // Cache and call log are up-to-date: no need to request update.
         assertEquals(0, mAdapter.getContactInfoCache().requests.size());
@@ -153,7 +158,8 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mAdapter.injectContactInfoForTest(TEST_NUMBER, TEST_COUNTRY_ISO, info);
 
         // Bind the views of a single row.
-        mAdapter.bindStandAloneView(mView, getContext(), mCursor);
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(CallLogListItemViews.fromView(getContext(), mView), 0);
 
         // There is one request for contact details.
         assertEquals(1, mAdapter.getContactInfoCache().requests.size());

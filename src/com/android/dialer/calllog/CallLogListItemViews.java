@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.view.View;
@@ -44,7 +45,7 @@ import com.android.dialer.R;
  * is a way of isolating view logic from the CallLogAdapter. We should consider moving that logic
  * if the call log list item is eventually represented as a UI component.
  */
-public final class CallLogListItemViews {
+public final class CallLogListItemViews extends RecyclerView.ViewHolder {
     /** The root view of the call log list item */
     public final View rootView;
     /** The quick contact badge for the contact. */
@@ -147,6 +148,7 @@ public final class CallLogListItemViews {
             PhoneCallDetailsViews phoneCallDetailsViews,
             View callLogEntryView,
             TextView dayGroupHeader) {
+        super(rootView);
         mContext = context;
 
         this.rootView = rootView;
