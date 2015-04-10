@@ -123,12 +123,13 @@ public class InCallVideoCallListenerNotifier {
 
     /**
      * Inform listeners of an upgrade to video request for a call.
-     *
      * @param call The call.
+     * @param videoState The video state we want to upgrade to.
      */
-    public void upgradeToVideoRequest(Call call) {
+    public void upgradeToVideoRequest(Call call, int videoState) {
+        Log.d(this, "upgradeToVideoRequest call = " + call + " new video state = " + videoState);
         for (SessionModificationListener listener : mSessionModificationListeners) {
-            listener.onUpgradeToVideoRequest(call);
+            listener.onUpgradeToVideoRequest(call, videoState);
         }
     }
 
@@ -148,9 +149,9 @@ public class InCallVideoCallListenerNotifier {
      *
      * @param call The call.
      */
-    public void upgradeToVideoFail(Call call) {
+    public void upgradeToVideoFail(int status, Call call) {
         for (SessionModificationListener listener : mSessionModificationListeners) {
-            listener.onUpgradeToVideoFail(call);
+            listener.onUpgradeToVideoFail(status, call);
         }
     }
 
@@ -166,6 +167,17 @@ public class InCallVideoCallListenerNotifier {
     }
 
     /**
+     * Inform listeners of a call session event.
+     *
+     * @param event The call session event.
+     */
+    public void callSessionEvent(int event) {
+        for (VideoEventListener listener : mVideoEventListeners) {
+            listener.onCallSessionEvent(event);
+        }
+    }
+
+    /**
      * Inform listeners of a downgrade to audio.
      *
      * @param call The call.
@@ -174,6 +186,18 @@ public class InCallVideoCallListenerNotifier {
     public void peerPausedStateChanged(Call call, boolean paused) {
         for (VideoEventListener listener : mVideoEventListeners) {
             listener.onPeerPauseStateChanged(call, paused);
+        }
+    }
+
+    /**
+     * Inform listeners of any change in the video quality of the call
+     *
+     * @param call The call.
+     * @param videoQuality The updated video quality of the call.
+     */
+    public void videoQualityChanged(Call call, int videoQuality) {
+        for (VideoEventListener listener : mVideoEventListeners) {
+            listener.onVideoQualityChanged(call, videoQuality);
         }
     }
 
@@ -204,6 +228,17 @@ public class InCallVideoCallListenerNotifier {
     }
 
     /**
+     * Inform listeners of a change to call data usage.
+     *
+     * @param dataUsage data usage value
+     */
+    public void callDataUsageChanged(long dataUsage) {
+        for (VideoEventListener listener : mVideoEventListeners) {
+            listener.onCallDataUsageChange(dataUsage);
+        }
+    }
+
+    /**
      * Listener interface for any class that wants to be notified of upgrade to video and downgrade
      * to audio session modification requests.
      */
@@ -212,8 +247,9 @@ public class InCallVideoCallListenerNotifier {
          * Called when a peer request is received to upgrade an audio-only call to a video call.
          *
          * @param call The call the request was received for.
+         * @param videoState The video state that the request wants to upgrade to.
          */
-        public void onUpgradeToVideoRequest(Call call);
+        public void onUpgradeToVideoRequest(Call call, int videoState);
 
         /**
          * Called when a request to a peer to upgrade an audio-only call to a video call is
@@ -230,7 +266,7 @@ public class InCallVideoCallListenerNotifier {
          *
          * @param call The call the request was successful for.
          */
-        public void onUpgradeToVideoFail(Call call);
+        public void onUpgradeToVideoFail(int status, Call call);
 
         /**
          * Called when a call has been downgraded to audio-only.
@@ -242,7 +278,7 @@ public class InCallVideoCallListenerNotifier {
 
     /**
      * Listener interface for any class that wants to be notified of video events, including pause
-     * and un-pause of peer video.
+     * and un-pause of peer video, video quality changes.
      */
     public interface VideoEventListener {
         /**
@@ -253,6 +289,29 @@ public class InCallVideoCallListenerNotifier {
          *               otherwise.
          */
         public void onPeerPauseStateChanged(Call call, boolean paused);
+
+        /**
+         * Called when the video quality changes.
+         *
+         * @param call   The call whose video quality changes.
+         * @param videoCallQuality - values are QUALITY_HIGH, MEDIUM, LOW and UNKNOWN.
+         */
+        public void onVideoQualityChanged(Call call, int videoCallQuality);
+
+        /*
+         * Called when call data usage value is requested or when call data usage value is updated
+         * because of a call state change
+         *
+         * @param dataUsage call data usage value
+         */
+        public void onCallDataUsageChange(long dataUsage);
+
+        /**
+         * Called when call session event is raised.
+         *
+         * @param event The call session event.
+         */
+        public void onCallSessionEvent(int event);
     }
 
     /**

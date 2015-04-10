@@ -75,7 +75,9 @@ public class CallList implements InCallPhoneListener {
         public void onCallAdded(Phone phone, android.telecom.Call telecommCall) {
             Trace.beginSection("onCallAdded");
             Call call = new Call(telecommCall);
-            if (call.getState() == Call.State.INCOMING) {
+            Log.d(this, "onCallAdded: callState=" + call.getState());
+            if (call.getState() == Call.State.INCOMING ||
+                    call.getState() == Call.State.CALL_WAITING) {
                 onIncoming(call, call.getCannedSmsResponses());
             } else {
                 onUpdate(call);
@@ -141,6 +143,12 @@ public class CallList implements InCallPhoneListener {
         }
     }
 
+    public void onUpgradeToVideo(Call call){
+        Log.d(this, "onUpgradeToVideo call=" + call);
+        for (Listener listener : mListeners) {
+            listener.onUpgradeToVideo(call);
+        }
+    }
     /**
      * Called when a single call has changed.
      */
@@ -547,7 +555,11 @@ public class CallList implements InCallPhoneListener {
          * incoming calls.
          */
         public void onIncomingCall(Call call);
-
+        /**
+         * Called when a new modify call request comes in
+         * This is the only method that gets called for modify requests.
+         */
+        public void onUpgradeToVideo(Call call);
         /**
          * Called anytime there are changes to the call list.  The change can be switching call
          * states, updating information, etc. This method will NOT be called for new incoming
