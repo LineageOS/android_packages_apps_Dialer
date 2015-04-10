@@ -29,7 +29,7 @@ import android.text.TextUtils;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.incallui.service.PhoneNumberService;
-import com.android.incalluibind.ServiceFactory;
+import com.android.incalluibind.ObjectFactory;
 import com.android.services.telephony.common.MoreStrings;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -69,7 +69,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
     private ContactInfoCache(Context context) {
         mContext = context;
-        mPhoneNumberService = ServiceFactory.newPhoneNumberService(context);
+        mPhoneNumberService = ObjectFactory.newPhoneNumberService(context);
     }
 
     public ContactCacheEntry getInfo(String callId) {

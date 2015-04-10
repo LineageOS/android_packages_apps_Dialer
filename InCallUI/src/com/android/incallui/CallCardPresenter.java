@@ -60,6 +60,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         implements InCallStateListener, IncomingCallListener, InCallDetailsListener,
         InCallEventListener {
 
+    public interface EmergencyCallListener {
+        public void onCallUpdated(BaseFragment fragment, boolean isEmergency);
+    }
+
+    private static final EmergencyCallListener mEmergencyCallListener =
+            ObjectFactory.newEmergencyCallListener();
+
     private static final String TAG = CallCardPresenter.class.getSimpleName();
     private static final long CALL_TIME_UPDATE_INTERVAL_MS = 1000;
 
@@ -526,6 +533,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             ui.setPrimary(null, null, false, null, null, false);
         }
 
+        if (mEmergencyCallListener != null) {
+            boolean isEmergencyCall = PhoneNumberUtils.isEmergencyNumber(
+                    getNumberFromHandle(mPrimary.getHandle()));
+            mEmergencyCallListener.onCallUpdated((BaseFragment) ui, isEmergencyCall);
+        }
     }
 
     private void updateSecondaryDisplayInfo() {
