@@ -251,11 +251,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         maybeShowManageConferenceCallButton();
         maybeShowProgressSpinner();
 
-        final boolean enableEndCallButton = Call.State.isConnectingOrConnected(callState) &&
-                callState != Call.State.INCOMING && mPrimary != null;
         // Hide the end call button instantly if we're receiving an incoming call.
-        getUi().setEndCallButtonEnabled(
-                enableEndCallButton, callState != Call.State.INCOMING /* animate */);
+        getUi().setEndCallButtonEnabled(shouldShowEndCallButton(mPrimary, callState),
+                callState != Call.State.INCOMING /* animate */);
     }
 
     @Override
@@ -739,6 +737,20 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         Drawable photo = mContext.getResources().getDrawable(resId);
         photo.setAutoMirrored(true);
         return photo;
+    }
+
+    private boolean shouldShowEndCallButton(Call primary, int callState) {
+        if (primary == null) {
+            return false;
+        }
+        if (!Call.State.isConnectingOrConnected(callState) || callState == Call.State.INCOMING) {
+            return false;
+        }
+        if (mPrimary.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+            return false;
+        }
+        return true;
     }
 
     public interface CallCardUi extends Ui {
