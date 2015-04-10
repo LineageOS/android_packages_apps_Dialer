@@ -94,6 +94,7 @@ import com.android.phone.common.dialpad.DialpadView;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
+import java.util.Locale;
 
 import static com.android.internal.telephony.PhoneConstants.SUBSCRIPTION_KEY;
 
@@ -922,6 +923,7 @@ public class DialpadFragment extends AnalyticsFragment
      * @param invoker the View that invoked the options menu, to act as an anchor location.
      */
     private PopupMenu buildOptionsMenu(View invoker) {
+        invoker.setLayoutDirection(TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()));
         final PopupMenu popupMenu = new PopupMenu(getActivity(), invoker) {
             @Override
             public void show() {
