@@ -16,6 +16,8 @@
 
 package com.android.incallui;
 
+import static com.android.incallui.CallButtonFragment.Buttons.*;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -44,7 +46,6 @@ import android.widget.Toast;
 import android.widget.PopupMenu.OnDismissListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
-import com.android.contacts.common.util.MaterialColorMapUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import java.util.ArrayList;
 
@@ -55,8 +56,26 @@ public class CallButtonFragment
         extends BaseFragment<CallButtonPresenter, CallButtonPresenter.CallButtonUi>
         implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener, OnDismissListener,
         View.OnClickListener {
-    private CompoundButton mAudioButton;
     private static final int INVALID_INDEX = -1;
+
+    public interface Buttons {
+        public static final int BUTTON_AUDIO = 1;
+        public static final int BUTTON_DOWNGRADE_TO_VOICE = 2;
+        public static final int BUTTON_MUTE = 3;
+        public static final int BUTTON_DIALPAD = 4;
+        public static final int BUTTON_HOLD = 5;
+        public static final int BUTTON_SWAP = 6;
+        public static final int BUTTON_UPGRADE_TO_VIDEO = 7;
+        public static final int BUTTON_SWITCH_CAMERA = 8;
+        public static final int BUTTON_ADD_CALL = 9;
+        public static final int BUTTON_MERGE = 10;
+        public static final int BUTTON_PAUSE_VIDEO = 11;
+        public static final int BUTTON_MANAGE_VIDEO_CONFERENCE = 12;
+        public static final int BUTTON_OVERFLOW = 13;
+    }
+
+
+    private CompoundButton mAudioButton;
     private ImageButton mChangeToVoiceButton;
     private CompoundButton mMuteButton;
     private CompoundButton mShowDialpadButton;
@@ -157,7 +176,6 @@ public class CallButtonFragment
         int id = view.getId();
         Log.d(this, "onClick(View " + view + ", id " + id + ")...");
 
-        boolean isClickHandled = true;
         switch(id) {
             case R.id.audioButton:
                 onAudioButtonClicked();
@@ -206,16 +224,13 @@ public class CallButtonFragment
                 onManageVideoCallConferenceClicked();
                 break;
             default:
-                isClickHandled = false;
                 Log.wtf(this, "onClick: unexpected");
-                break;
+                return;
         }
 
-        if (isClickHandled) {
-            view.performHapticFeedback(
-                    HapticFeedbackConstants.VIRTUAL_KEY,
-                    HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
-        }
+        view.performHapticFeedback(
+                HapticFeedbackConstants.VIRTUAL_KEY,
+                HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
     }
 
     public void updateColors() {
@@ -355,23 +370,53 @@ public class CallButtonFragment
     }
 
     @Override
-    public void showAudioButton(boolean show) {
-        mAudioButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    public void showButton(int buttonId, boolean show) {
+        final View button = getButtonById(buttonId);
+        if (button != null) {
+            button.setVisibility(show ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
-    public void showChangeToVoiceButton(boolean show) {
-        mChangeToVoiceButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    public void enableButton(int buttonId, boolean enable) {
+        final View button = getButtonById(buttonId);
+        if (button != null) {
+            button.setEnabled(enable);
+        }
     }
 
-    @Override
-    public void enableMute(boolean enabled) {
-        mMuteButton.setEnabled(enabled);
-    }
-
-    @Override
-    public void showDialpadButton(boolean show) {
-        mShowDialpadButton.setVisibility(show ? View.VISIBLE : View.GONE);
+    private View getButtonById(int id) {
+        switch (id) {
+            case BUTTON_AUDIO:
+                return mAudioButton;
+            case BUTTON_DOWNGRADE_TO_VOICE:
+                return mChangeToVoiceButton;
+            case BUTTON_MUTE:
+                return mMuteButton;
+            case BUTTON_DIALPAD:
+                return mShowDialpadButton;
+            case BUTTON_HOLD:
+                return mHoldButton;
+            case BUTTON_SWAP:
+                return mSwapButton;
+            case BUTTON_UPGRADE_TO_VIDEO:
+                return mChangeToVideoButton;
+            case BUTTON_SWITCH_CAMERA:
+                return mSwitchCameraButton;
+            case BUTTON_ADD_CALL:
+                return mAddCallButton;
+            case BUTTON_MERGE:
+                return mMergeButton;
+            case BUTTON_PAUSE_VIDEO:
+                return mPauseVideoButton;
+            case BUTTON_MANAGE_VIDEO_CONFERENCE:
+                return mManageVideoCallConferenceButton;
+            case BUTTON_OVERFLOW:
+                return mOverflowButton;
+            default:
+                Log.w(this, "Invalid button id");
+                return null;
+        }
     }
 
     @Override
@@ -382,73 +427,13 @@ public class CallButtonFragment
     }
 
     @Override
-    public void showHoldButton(boolean show) {
-        mHoldButton.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void enableHold(boolean enabled) {
-        mHoldButton.setEnabled(enabled);
-    }
-
-    @Override
-    public void showSwapButton(boolean show) {
-        mSwapButton.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void showChangeToVideoButton(boolean show) {
-        mChangeToVideoButton.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void enableChangeToVideoButton(boolean enable) {
-        mChangeToVideoButton.setEnabled(enable);
-    }
-
-    @Override
-    public void showSwitchCameraButton(boolean show) {
-        mSwitchCameraButton.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void setSwitchCameraButton(boolean isBackFacingCamera) {
+    public void setCameraSwitched(boolean isBackFacingCamera) {
         mSwitchCameraButton.setSelected(isBackFacingCamera);
     }
 
     @Override
-    public void showAddCallButton(boolean show) {
-        Log.d(this, "show Add call button: " + show);
-        mAddCallButton.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    public void showManageConferenceVideoCallButton(boolean show) {
-        mManageVideoCallConferenceButton.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void showMergeButton(boolean show) {
-        mMergeButton.setVisibility(show ? View.VISIBLE : View.GONE);
-
-        // If the merge button was disabled, re-enable it when hiding it.
-        if (!show) {
-            mMergeButton.setEnabled(true);
-        }
-    }
-
-    @Override
-    public void showPauseVideoButton(boolean show) {
-        mPauseVideoButton.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void setPauseVideoButton(boolean isPaused) {
+    public void setVideoPaused(boolean isPaused) {
         mPauseVideoButton.setSelected(isPaused);
-    }
-
-    @Override
-    public void showOverflowButton(boolean show) {
-        mOverflowButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     /**The function is called when Modify Call button gets pressed. The function creates and
@@ -526,7 +511,7 @@ public class CallButtonFragment
 
     @Override
     public void configureOverflowMenu(boolean showMergeMenuOption, boolean showAddMenuOption,
-            boolean showHoldMenuOption, boolean showSwapMenuOption, 
+            boolean showHoldMenuOption, boolean showSwapMenuOption,
             boolean showManageConferenceVideoCallOption) {
         if (mOverflowPopup == null) {
             final ContextThemeWrapper contextWrapper = new ContextThemeWrapper(getActivity(),
