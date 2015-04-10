@@ -16,6 +16,8 @@
 
 package com.android.incallui;
 
+import static com.android.incallui.CallButtonFragment.Buttons.*;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -321,7 +323,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                     mCall.getVideoState() & ~VideoProfile.VideoState.PAUSED);
             videoCall.sendSessionModifyRequest(videoProfile);
         }
-        getUi().setPauseVideoButton(pause);
+        getUi().setVideoPaused(pause);
     }
 
     private void updateUi(InCallState state, Call call) {
@@ -342,7 +344,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
         updateCallButtons(call, ui.getContext());
 
-        ui.enableMute(call.can(android.telecom.Call.Details.CAPABILITY_MUTE));
+        ui.enableButton(BUTTON_MUTE, call.can(android.telecom.Call.Details.CAPABILITY_MUTE));
     }
 
     private static int toInteger(boolean b) {
@@ -367,13 +369,13 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final CallButtonUi ui = getUi();
 
         // Show all video-call-related buttons.
-        ui.showSwitchCameraButton(true);
-        ui.showPauseVideoButton(true);
+        ui.showButton(BUTTON_SWITCH_CAMERA, true);
+        ui.showButton(BUTTON_PAUSE_VIDEO, true);
 
         final boolean supportHold = call.can(android.telecom.Call.Details.CAPABILITY_SUPPORT_HOLD);
         final boolean enableHoldOption = call.can(android.telecom.Call.Details.CAPABILITY_HOLD);
-        ui.showHoldButton(supportHold);
-        ui.enableHold(enableHoldOption);
+        ui.showButton(BUTTON_HOLD, supportHold);
+        ui.enableButton(BUTTON_HOLD, enableHoldOption);
         ui.setHold(call.getState() == Call.State.ONHOLD);
     }
 
@@ -382,13 +384,13 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final CallButtonUi ui = getUi();
 
         // Hide all video-call-related buttons.
-        ui.showChangeToVoiceButton(false);
-        ui.showSwitchCameraButton(false);
-        ui.showPauseVideoButton(false);
+        ui.showButton(BUTTON_DOWNGRADE_TO_VOICE, false);
+        ui.showButton(BUTTON_SWITCH_CAMERA, false);
+        ui.showButton(BUTTON_PAUSE_VIDEO, false);
 
         // Show all voice-call-related buttons.
-        ui.showAudioButton(true);
-        ui.showDialpadButton(true);
+        ui.showButton(BUTTON_AUDIO, true);
+        ui.showButton(BUTTON_DIALPAD,  true);
 
         Log.v(this, "Show hold ", call.can(android.telecom.Call.Details.CAPABILITY_SUPPORT_HOLD));
         Log.v(this, "Enable hold", call.can(android.telecom.Call.Details.CAPABILITY_HOLD));
@@ -410,7 +412,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
         boolean canVideoCall = call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL)
                 && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE);
-        ui.showChangeToVideoButton(canVideoCall);
+        ui.showButton(BUTTON_UPGRADE_TO_VIDEO, canVideoCall);
 
         final boolean showMergeOption = call.can(
                 android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
@@ -447,11 +449,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean isOverflowScenario = !canVideoCall && showOverflowMenu;
 
         if (isVideoOverflowScenario) {
-            ui.showHoldButton(false);
-            ui.showSwapButton(false);
-            ui.showAddCallButton(false);
-            ui.showMergeButton(false);
-            ui.showManageConferenceVideoCallButton(false);
+            ui.showButton(BUTTON_HOLD, false);
+            ui.showButton(BUTTON_SWAP, false);
+            ui.showButton(BUTTON_ADD_CALL, false);
+            ui.showButton(BUTTON_MERGE, false);
+            ui.showButton(BUTTON_MANAGE_VIDEO_CONFERENCE, false);
 
             ui.configureOverflowMenu(
                     showMergeOption,
@@ -459,12 +461,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                     showHoldOption && enableHoldOption /* showHoldMenuOption */,
                     showSwapOption,
                     showManageVideoCallConferenceOption);
-            ui.showOverflowButton(true);
+            ui.showButton(BUTTON_OVERFLOW, true);
         } else {
             if (isOverflowScenario) {
-                ui.showAddCallButton(false);
-                ui.showMergeButton(false);
-                ui.showManageConferenceVideoCallButton(false);
+                ui.showButton(BUTTON_ADD_CALL, false);
+                ui.showButton(BUTTON_MERGE, false);
+                ui.showButton(BUTTON_MANAGE_VIDEO_CONFERENCE, false);
 
                 ui.configureOverflowMenu(
                         showMergeOption,
@@ -473,15 +475,15 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                         false /* showSwapMenuOption */,
                         showManageVideoCallConferenceOption);
             } else {
-                ui.showMergeButton(showMergeOption);
-                ui.showAddCallButton(showAddCallOption);
-                ui.showManageConferenceVideoCallButton(showManageVideoCallConferenceOption);
+                ui.showButton(BUTTON_MERGE, showMergeOption);
+                ui.showButton(BUTTON_ADD_CALL, showAddCallOption);
+                ui.showButton(BUTTON_MANAGE_VIDEO_CONFERENCE, showManageVideoCallConferenceOption);
             }
 
-            ui.showOverflowButton(isOverflowScenario);
-            ui.showHoldButton(showHoldOption);
-            ui.enableHold(enableHoldOption);
-            ui.showSwapButton(showSwapOption);
+            ui.showButton(BUTTON_OVERFLOW, isOverflowScenario);
+            ui.showButton(BUTTON_HOLD, showHoldOption);
+            ui.enableButton(BUTTON_HOLD, enableHoldOption);
+            ui.showButton(BUTTON_SWAP, showSwapOption);
         }
     }
 
@@ -514,31 +516,18 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public interface CallButtonUi extends Ui {
+        void showButton(int buttonId, boolean show);
+        void enableButton(int buttonId, boolean enable);
         void setEnabled(boolean on);
         void setMute(boolean on);
-        void enableMute(boolean enabled);
-        void showAudioButton(boolean show);
-        void showChangeToVoiceButton(boolean show);
-        void showDialpadButton(boolean show);
         void setHold(boolean on);
-        void showHoldButton(boolean show);
-        void enableHold(boolean enabled);
-        void showSwapButton(boolean show);
-        void showChangeToVideoButton(boolean show);
-        void enableChangeToVideoButton(boolean enable);
-        void showSwitchCameraButton(boolean show);
-        void setSwitchCameraButton(boolean isBackFacingCamera);
-        void showAddCallButton(boolean show);
-        void showManageConferenceVideoCallButton(boolean show);
-        void showMergeButton(boolean show);
-        void showPauseVideoButton(boolean show);
-        void setPauseVideoButton(boolean isPaused);
-        void showOverflowButton(boolean show);
+        void setCameraSwitched(boolean isBackFacingCamera);
+        void setVideoPaused(boolean isPaused);
+        void setAudio(int mode);
+        void setSupportedAudio(int mask);
         void displayDialpad(boolean on, boolean animate);
         void displayModifyCallOptions();
         boolean isDialpadVisible();
-        void setAudio(int mode);
-        void setSupportedAudio(int mask);
         void configureOverflowMenu(boolean showMergeMenuOption, boolean showAddMenuOption,
                 boolean showHoldMenuOption, boolean showSwapMenuOption,
                 boolean showManageConferenceVideoCallOption);
@@ -550,6 +539,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         if (getUi() == null) {
             return;
         }
-        getUi().setSwitchCameraButton(!isUsingFrontFacingCamera);
+        getUi().setCameraSwitched(!isUsingFrontFacingCamera);
     }
 }
