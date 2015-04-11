@@ -398,8 +398,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean supportHold = call.can(android.telecom.Call.Details.CAPABILITY_SUPPORT_HOLD);
         final boolean isCallOnHold = call.getState() == Call.State.ONHOLD;
 
-        boolean canVideoCall = call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL)
-                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE);
+        boolean canVideoCall =
+                call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_BIDIRECTIONAL)
+                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_BIDIRECTIONAL);
         ui.showChangeToVideoButton(canVideoCall);
         ui.enableChangeToVideoButton(!isCallOnHold);
 
