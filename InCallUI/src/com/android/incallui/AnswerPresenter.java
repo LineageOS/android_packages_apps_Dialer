@@ -35,7 +35,8 @@ import java.util.List;
  */
 public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         implements CallList.CallUpdateListener, InCallPresenter.InCallUiListener,
-                InCallPresenter.IncomingCallListener {
+                InCallPresenter.IncomingCallListener,
+                CallList.Listener {
 
     private static final String TAG = AnswerPresenter.class.getSimpleName();
 
@@ -54,7 +55,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             }
             call = calls.getVideoUpgradeRequestCall();
             Log.d(this, "getVideoUpgradeRequestCall call =" + call);
-            if (videoCall != null && call == null) {
+            if (call == null) {
                 processVideoUpgradeRequestCall(call);
             }
         } else {
@@ -69,26 +70,10 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     @Override
     public void onIncomingCall(InCallState oldState, InCallState newState, Call call) {
         Log.d(this, "onIncomingCall: " + this);
-        if (!call.getId().equals(mCallId)) {
-            // A new call is coming in.
-            processIncomingCall(call);
-        }
-    }
-
-    @Override
-    public void onDisconnect(Call call) {
-        // no-op
-    }
-
-    @Override
-    public void onIncomingCall(Call call) {
-        // TODO: Ui is being destroyed when the fragment detaches.  Need clean up step to stop
-        // getting updates here.
-        Log.d(this, "onIncomingCall: " + this);
         if (getUi() != null) {
             Call modifyCall = CallList.getInstance().getVideoUpgradeRequestCall();
             if (modifyCall != null) {
-                getUi().showAnswerUi(false);
+                showAnswerUi(false);
                 Log.d(this, "declining upgrade request id: ");
                 CallList.getInstance().removeCallUpdateListener(mCallId, this);
                 InCallPresenter.getInstance().declineUpgradeRequest(getUi().getContext());
@@ -97,8 +82,20 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
                 // A new call is coming in.
                 processIncomingCall(call);
             }
->>>>>>> 8bef461
         }
+    }
+
+    @Override
+    public void onIncomingCall(Call call) {
+    }
+
+    @Override
+    public void onCallListChange(CallList list) {
+    }
+
+    @Override
+    public void onDisconnect(Call call) {
+        // no-op
     }
 
     private boolean isVideoUpgradePending(Call call) {

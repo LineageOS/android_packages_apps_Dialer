@@ -110,7 +110,7 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      * changes.
      */
     private static class VideoCallSurface implements TextureView.SurfaceTextureListener,
-            View.OnClickListener {
+            View.OnClickListener, View.OnAttachStateChangeListener {
         private int mSurfaceId;
         private VideoCallPresenter mPresenter;
         private TextureView mTextureView;
