@@ -16,6 +16,24 @@
       "revId": "a1e2cc6cf601da44ebe8d34bc98a71c131e60993",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ac371cc_3fc7f046",
+        "filename": "src/com/android/dialer/util/MultiSensorManagerDialer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 8461
+      },
+      "writtenOn": "2015-04-11T01:08:26Z",
+      "side": 1,
+      "message": "i see no comments on mms",
+      "parentUuid": "3ac371cc_ffb438d2",
+      "revId": "a1e2cc6cf601da44ebe8d34bc98a71c131e60993",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
