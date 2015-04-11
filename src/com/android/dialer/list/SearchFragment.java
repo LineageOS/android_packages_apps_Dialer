@@ -19,6 +19,7 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -38,6 +39,7 @@ import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
+import com.android.dialer.dialpad.DialpadFragment.ErrorDialogFragment;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
@@ -165,6 +167,32 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         mAddToContactNumber = addToContactNumber;
     }
 
+    /**
+     * Return true if phone number is prohibited by a value -
+     * (R.string.config_prohibited_phone_number_regexp) in the config files. False otherwise.
+     */
+    public boolean checkForProhibitedPhoneNumber(String number) {
+        // Regular expression prohibiting manual phone call. Can be empty i.e. "no rule".
+        String prohibitedPhoneNumberRegexp = getResources().getString(
+            R.string.config_prohibited_phone_number_regexp);
+
+        // "persist.radio.otaspdial" is a temporary hack needed for one carrier's automated
+        // test equipment.
+        if (number != null
+                && !TextUtils.isEmpty(prohibitedPhoneNumberRegexp)
+                && number.matches(prohibitedPhoneNumberRegexp)) {
+            Log.d(TAG, "The phone number is prohibited explicitly by a rule.");
+            if (getActivity() != null) {
+                DialogFragment dialogFragment = ErrorDialogFragment.newInstance(
+                        R.string.dialog_phone_call_prohibited_message);
+                dialogFragment.show(getFragmentManager(), "phone_prohibited_dialog");
+            }
+
+            return true;
+        }
+        return false;
+    }
+
     @Override
     protected ContactEntryListAdapter createListAdapter() {
         DialerPhoneNumberListAdapter adapter = new DialerPhoneNumberListAdapter(getActivity());
@@ -182,14 +210,16 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         final String number;
 
         Log.i(TAG, "onItemClick: shortcutType=" + shortcutType);
+
         switch (shortcutType) {
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
                 super.onItemClick(position, id);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_DIRECT_CALL:
+                number = adapter.getQueryString(); 
                 listener = getOnPhoneNumberPickerListener();
-                if (listener != null) {
-                    listener.onCallNumberDirectly(getQueryString());
+                if (listener != null && !checkForProhibitedPhoneNumber(number)) {
+                    listener.onCallNumberDirectly(number);
                 }
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_CREATE_NEW_CONTACT:
@@ -214,9 +244,10 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_MAKE_VIDEO_CALL:
+                number = adapter.getQueryString(); 
                 listener = getOnPhoneNumberPickerListener();
-                if (listener != null) {
-                    listener.onCallNumberDirectly(getQueryString(), true /* isVideoCall */);
+                if (listener != null && !checkForProhibitedPhoneNumber(number)) {
+                    listener.onCallNumberDirectly(number, true /* isVideoCall */);
                 }
                 break;
         }
