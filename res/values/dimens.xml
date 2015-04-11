@@ -111,8 +111,6 @@
     <dimen name="call_log_list_item_actions_text_size">12sp</dimen>
     <!-- Height of the call log actions section for each call log entry -->
     <dimen name="call_log_action_height">44dp</dimen>
-    <!-- Z Translation of expanded call log items. -->
-    <dimen name="call_log_expanded_translation_z">2dp</dimen>
     <dimen name="call_log_day_group_padding_top">15dp</dimen>
     <dimen name="call_log_day_group_padding_bottom">9dp</dimen>
 

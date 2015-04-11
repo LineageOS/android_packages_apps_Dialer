@@ -37,13 +37,17 @@
 
     <!-- Linear layout to separate the primary area containing the contact badge and caller
          information and the secondary action (call details / play voicemail). -->
-    <LinearLayout
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/call_log_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:baselineAligned="false"
         android:orientation="vertical"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardBackgroundColor="@color/background_dialer_list_items">
 
         <!-- Primary area containing the contact badge and caller information -->
         <LinearLayout
@@ -60,6 +64,7 @@
             android:focusable="true"
             android:nextFocusRight="@+id/call_back_action"
             android:nextFocusLeft="@+id/quick_contact_photo" >
+
             <QuickContactBadge
                 android:id="@+id/quick_contact_photo"
                 android:layout_width="@dimen/contact_photo_size"
@@ -67,16 +72,16 @@
                 android:paddingTop="2dp"
                 android:nextFocusRight="@id/primary_action_view"
                 android:layout_gravity="top"
-                android:focusable="true"
-                />
+                android:focusable="true" />
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
-                android:layout_marginStart="@dimen/call_log_start_margin"
-                >
+                android:layout_marginStart="@dimen/call_log_start_margin">
+
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
@@ -85,8 +90,8 @@
                     android:layout_marginEnd="@dimen/call_log_icon_margin"
                     android:textColor="?attr/call_log_primary_text_color"
                     android:textSize="@dimen/call_log_primary_text_size"
-                    android:singleLine="true"
-                    />
+                    android:singleLine="true" />
+
                 <TextView
                     android:id="@+id/voicemail_transcription"
                     android:layout_width="wrap_content"
@@ -96,22 +101,22 @@
                     android:textSize="@dimen/call_log_secondary_text_size"
                     android:singleLine="true"
                     android:ellipsize="marquee"
-                    android:visibility="gone"
-                    />
+                    android:visibility="gone" />
+
                 <LinearLayout
                     android:id="@+id/call_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
+
                     <view
                         class="com.android.dialer.calllog.CallTypeIconsView"
                         android:id="@+id/call_type_icons"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/call_log_icon_margin"
-                        android:layout_gravity="center_vertical"
-                        />
+                        android:layout_gravity="center_vertical" />
+
                     <TextView
                         android:id="@+id/call_location_and_date"
                         android:layout_width="wrap_content"
@@ -120,9 +125,10 @@
                         android:layout_gravity="center_vertical"
                         android:textColor="?attr/call_log_secondary_text_color"
                         android:textSize="@dimen/call_log_secondary_text_size"
-                        android:singleLine="true"
-                        />
+                        android:singleLine="true" />
+
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/call_account_label"
                     android:layout_width="wrap_content"
@@ -131,9 +137,10 @@
                     android:textColor="?attr/call_log_secondary_text_color"
                     android:textSize="@dimen/call_log_secondary_text_size"
                     android:visibility="gone"
-                    android:singleLine="true"
-                    />
+                    android:singleLine="true" />
+
             </LinearLayout>
+
             <ImageView
                 android:id="@+id/call_indicator_icon"
                 android:layout_width="wrap_content"
@@ -144,16 +151,17 @@
                 android:tint="@color/recent_call_log_item_phone_icon_tint"
                 android:alpha="0.3"
                 android:importantForAccessibility="no"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
+
+            <!-- Viewstub with additional expandable actions for a call log entry -->
+            <ViewStub android:id="@+id/call_log_entry_actions_stub"
+                      android:inflatedId="@+id/call_log_entry_actions"
+                      android:layout="@layout/call_log_list_item_actions"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
-        <!-- Viewstub with additional expandable actions for a call log entry -->
-        <ViewStub android:id="@+id/call_log_entry_actions_stub"
-                  android:inflatedId="@+id/call_log_entry_actions"
-                  android:layout="@layout/call_log_list_item_actions"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"/>
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

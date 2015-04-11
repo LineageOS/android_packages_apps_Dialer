@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
@@ -57,7 +58,7 @@ public final class CallLogListItemViews extends RecyclerView.ViewHolder {
     /** The text of the header for a day grouping. */
     public final TextView dayGroupHeader;
     /** The view containing the details for the call log row, including the action buttons. */
-    public final View callLogEntryView;
+    public final CardView callLogEntryView;
     /** The view containing call log item actions.  Null until the ViewStub is inflated. */
     public View actionsView;
     /** The "call back" action button - assigned only when the action section is expanded. */
@@ -136,9 +137,6 @@ public final class CallLogListItemViews extends RecyclerView.ViewHolder {
     private Context mContext;
     private int mPhotoSize;
 
-    private int mCallLogBackgroundColor;
-    private int mExpandedBackgroundColor;
-    private float mExpandedTranslationZ;
 
     private CallLogListItemViews(
             Context context,
@@ -146,7 +144,7 @@ public final class CallLogListItemViews extends RecyclerView.ViewHolder {
             QuickContactBadge quickContactView,
             View primaryActionView,
             PhoneCallDetailsViews phoneCallDetailsViews,
-            View callLogEntryView,
+            CardView callLogEntryView,
             TextView dayGroupHeader) {
         super(rootView);
         mContext = context;
@@ -159,9 +157,6 @@ public final class CallLogListItemViews extends RecyclerView.ViewHolder {
         this.dayGroupHeader = dayGroupHeader;
 
         Resources resources = mContext.getResources();
-        mCallLogBackgroundColor = resources.getColor(R.color.background_dialer_list_items);
-        mExpandedBackgroundColor = resources.getColor(R.color.call_log_expanded_background_color);
-        mExpandedTranslationZ = resources.getDimension(R.dimen.call_log_expanded_translation_z);
         mPhotoSize = mContext.getResources().getDimensionPixelSize(R.dimen.contact_photo_size);
     }
 
@@ -172,7 +167,7 @@ public final class CallLogListItemViews extends RecyclerView.ViewHolder {
                 (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
                 view.findViewById(R.id.primary_action_view),
                 PhoneCallDetailsViews.fromView(view),
-                view.findViewById(R.id.call_log_row),
+                (CardView) view.findViewById(R.id.call_log_row),
                 (TextView) view.findViewById(R.id.call_log_day_group_label));
     }
 
@@ -324,19 +319,12 @@ public final class CallLogListItemViews extends RecyclerView.ViewHolder {
 
             actionsView.setVisibility(View.VISIBLE);
             actionsView.setAlpha(1.0f);
-            callLogEntryView.setBackgroundColor(mExpandedBackgroundColor);
-            callLogEntryView.setTranslationZ(mExpandedTranslationZ);
-            rootView.setTranslationZ(mExpandedTranslationZ); // WAR
         } else {
             // When recycling a view, it is possible the actionsView ViewStub was previously
             // inflated so we should hide it in this case.
             if (actionsView != null) {
                 actionsView.setVisibility(View.GONE);
             }
-
-            callLogEntryView.setBackgroundColor(mCallLogBackgroundColor);
-            callLogEntryView.setTranslationZ(0);
-            rootView.setTranslationZ(0); // WAR
         }
     }
 
@@ -390,7 +378,7 @@ public final class CallLogListItemViews extends RecyclerView.ViewHolder {
                 new QuickContactBadge(context),
                 new View(context),
                 PhoneCallDetailsViews.createForTest(context),
-                new View(context),
+                new CardView(context),
                 new TextView(context));
         views.callBackButtonView = new TextView(context);
         views.voicemailButtonView = new TextView(context);

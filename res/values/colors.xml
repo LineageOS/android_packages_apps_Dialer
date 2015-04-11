@@ -58,7 +58,7 @@
     <!-- Background color for search results and call details -->
     <color name="background_dialer_results">#f9f9f9</color>
     <!-- Background color of dialer list items (contacts, call log entries) -->
-    <color name="background_dialer_list_items">@color/background_dialer_light</color>
+    <color name="background_dialer_list_items">@color/background_dialer_white</color>
     <color name="background_dialer_details_list_items">@color/background_dialer_results</color>
 
     <!-- Color of the 1dp divider that separates favorites -->
@@ -84,7 +84,6 @@
     <!-- Color of the bottom border below the contacts grid on the main dialer screen. -->
     <color name="contacts_grid_bottom_border_color">#16000000</color>
 
-    <color name="call_log_expanded_background_color">#ffffff</color>
     <!-- Color of actions in expanded call log entries.  This text color represents actions such
          as call back, play voicemail, etc. -->
     <color name="call_log_action_text">@color/dialer_theme_color</color>
