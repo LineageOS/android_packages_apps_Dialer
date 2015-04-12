@@ -71,8 +71,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallVideoCallListenerNotifier.SessionModificationListener {
     public static final String TAG = "VideoCallPresenter";
 
-    private static final String TAG = VideoCallPresenter.class.getSimpleName();
-
     public static final boolean DEBUG = false;
 
     /**
