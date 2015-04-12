@@ -123,10 +123,9 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     };
 
     /**
-     * Stores the current orientation of the activity.  Used to determine if a change in orientation
-     * has occurred.
+     * Used to determine if a change in orientation has occurred.
      */
-    private int mCurrentOrientation;
+    private static int sCurrentOrientation = Configuration.ORIENTATION_UNDEFINED;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -158,9 +157,8 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
 
         internalResolveIntent(getIntent());
 
-        mCurrentOrientation = getResources().getConfiguration().orientation;
-        mIsLandscape = getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE;
+        mIsLandscape = getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE;
 
         final boolean isRtl = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) ==
                 View.LAYOUT_DIRECTION_RTL;
@@ -216,6 +214,11 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
 
         // setting activity should be last thing in setup process
         InCallPresenter.getInstance().setActivity(this);
+
+        // It is possible that the activity restarted because orientation changed.
+        // Notify listeners if orientation changed.
+        doOrientationChanged(getResources().getConfiguration().orientation);
+        InCallPresenter.getInstance().onActivityStarted();
     }
 
     @Override
@@ -267,6 +270,9 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     @Override
     protected void onStop() {
         Log.d(this, "onStop()...");
+
+        InCallPresenter.getInstance().updateIsChangingConfigurations();
+        InCallPresenter.getInstance().onActivityStopped();
         super.onStop();
     }
 
@@ -274,6 +280,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     protected void onDestroy() {
         Log.d(this, "onDestroy()...  this = " + this);
         InCallPresenter.getInstance().unsetActivity(this);
+        InCallPresenter.getInstance().updateIsChangingConfigurations();
         super.onDestroy();
     }
 
@@ -471,15 +478,22 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         InCallPresenter.getInstance().getProximitySensor().onConfigurationChanged(config);
         Log.d(this, "onConfigurationChanged "+config.orientation);
 
+        doOrientationChanged(config.orientation);
+        super.onConfigurationChanged(config);
+    }
+
+
+    private void doOrientationChanged(int orientation) {
+        Log.d(this, "doOrientationChanged prevOrientation=" + sCurrentOrientation +
+                " newOrientation=" + orientation);
         // Check to see if the orientation changed to prevent triggering orientation change events
         // for other configuration changes.
-        if (config.orientation != mCurrentOrientation) {
-            mCurrentOrientation = config.orientation;
+        if (orientation != sCurrentOrientation) {
+            sCurrentOrientation = orientation;
             InCallPresenter.getInstance().onDeviceRotationChange(
                     getWindowManager().getDefaultDisplay().getRotation());
-            InCallPresenter.getInstance().onDeviceOrientationChange(mCurrentOrientation);
+            InCallPresenter.getInstance().onDeviceOrientationChange(sCurrentOrientation);
         }
-        super.onConfigurationChanged(config);
     }
 
     public CallButtonFragment getCallButtonFragment() {

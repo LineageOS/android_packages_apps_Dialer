@@ -114,6 +114,8 @@
     <string name="card_title_video_call_requesting">Requesting video</string>
     <!-- In-call screen: status label when there is a problem connecting a video call. -->
     <string name="card_title_video_call_error">Can\'t connect video call</string>
+    <!-- In-call screen: status label when in a paused video call. -->
+    <string name="card_title_video_call_paused">Video call (Paused)</string>
 
     <!-- In-call screen: string shown to the user when their outgoing number is different than the
          number reported by TelephonyManager#getLine1Number() -->
@@ -263,6 +265,8 @@
     <string name="overflowMergeMenuItemText">Merge calls</string>
     <!-- Text for the onscreen "Swap calls" menu item. -->
     <string name="overflowSwapMenuItemText">Swap calls</string>
+    <!-- Text for the overflow "Manage Conference Video Call" menu item. -->
+    <string name="overflowManageConferenceMenuItemText">Manage Conference</string>
 
     <!-- Text for the onscreen "Hold" button -->
     <string name="onscreenHoldText">Hold</string>
@@ -298,6 +302,28 @@
     <string name="onscreenPauseVideoText">Pause video</string>
     <!-- Text for the onscreen overflow button, to see additional actions which can be done. -->
     <string name="onscreenOverflowText">More options</string>
+
+    <!-- STOPSHIP -  For test only - In-call screen: Modify Call Options for IMS call -->
+    <string name="modify_call_option_title" translatable="false">Which type of call?</string>
+    <string name="modify_call_option_vt" translatable="false">Video bidirectional</string>
+    <string name="modify_call_option_vt_tx" translatable="false">Video transmit</string>
+    <string name="modify_call_option_vt_rx" translatable="false">Video receive</string>
+    <string name="modify_call_option_voice" translatable="false">Voice Only</string>
+
+    <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
+    <string name="video_call_not_allowed_if_tty_enabled">Please disable TTY Mode to upgrade to video calls.</string>
+
+    <!-- Message indicating that Video Started flowing for IMS-VT calls -->
+    <string name="player_started">Player Started</string>
+    <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
+    <string name="player_stopped">Player Stopped</string>
+    <!-- Message indicating that camera failure has occurred for the selected camera and
+         as result camera is not ready -->
+    <string name="camera_not_ready">Camera not ready</string>
+    <!-- Message indicating that camera is ready/available -->
+    <string name="camera_ready">Camera ready</string>
+    <!-- Message indicating unknown call session event -->
+    <string name="unknown_call_session_event">"Unkown call session event"</string>
 
     <!-- For incoming calls, this is a string we can get from a CDMA network instead of
          the actual phone number, to indicate there's no number present.  DO NOT TRANSLATE. -->
@@ -359,6 +385,18 @@
     <!-- Description of the target to decline a request to upgrade from an audio call to a video call.
          [CHAR LIMIT=NONE] -->
     <string name="description_target_decline_upgrade_to_video_request">Decline video request</string>
+    <!-- Description of the target to accept a request to upgrade from any call to a video transmit call.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_target_accept_upgrade_to_video_transmit_request">Accept video transmit request</string>
+    <!-- Description of the target to decline a request to upgrade from any call to a video transmit call.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_target_decline_upgrade_to_video_transmit_request">Decline video transmit request</string>
+        <!-- Description of the target to accept a request to upgrade from any call to a video receive call.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_target_accept_upgrade_to_video_receive_request">Accept video receive request</string>
+    <!-- Description of the target to decline a request to upgrade from any call to a video receive call.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_target_decline_upgrade_to_video_receive_request">Decline video receive request</string>
 
     <!-- Description of the up direction in which one can to slide the handle in the phone answer screen. [CHAR LIMIT=NONE] -->
     <string name="description_direction_up">Slide up for <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
@@ -417,4 +455,26 @@
 
     <!-- This can be used in any application wanting to disable the text "Emergency number" -->
     <string name="emergency_call_dialog_number_for_display">Emergency number</string>
+
+    <!-- STOPSHIP These strings are for debugging only --> 
+    <!-- Call substate label -->
+    <string name="call_substate_label" translatable="false">Call substate - \u000a</string>
+    <!-- Call substate label for call resumed -->
+    <string name="call_substate_call_resumed" translatable="false">Resumed \u000a</string>
+    <!-- Call substate label for call connected suspended (audio) -->
+    <string name="call_substate_connected_suspended_audio" translatable="false">Connected Suspended (Audio) \u000a</string>
+    <!-- Call substate label for call connected suspended (video) -->
+    <string name="call_substate_connected_suspended_video" translatable="false">Connected Suspended (Video) \u000a</string>
+    <!-- Call substate label for avp retry -->
+    <string name="call_substate_avp_retry" translatable="false">Avp Retry \u000a</string>
+    <!-- Video quality changed message -->
+    <string name="video_quality_changed" translatable="false">Video quality changed to \u0020</string>
+    <!-- Video quality High -->
+    <string name="video_quality_high" translatable="false">High</string>
+    <!-- Video quality Medium -->
+    <string name="video_quality_medium" translatable="false">Medium</string>
+    <!-- Video quality Low -->
+    <string name="video_quality_low" translatable="false">Low</string>
+    <!-- Video quality Unknown -->
+    <string name="video_quality_unknown" translatable="false">Unknown</string>
 </resources>

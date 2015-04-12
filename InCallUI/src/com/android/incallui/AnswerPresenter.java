@@ -19,6 +19,8 @@ package com.android.incallui;
 import android.content.Context;
 
 import com.android.incallui.InCallPresenter.InCallState;
+import android.telecom.TelecomManager;
+import android.telecom.VideoProfile;
 
 import java.util.List;
 
@@ -51,7 +53,8 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
                 processIncomingCall(call);
             }
             call = calls.getVideoUpgradeRequestCall();
-            if (call != null) {
+            Log.d(this, "getVideoUpgradeRequestCall call =" + call);
+            if (videoCall != null && call == null) {
                 processVideoUpgradeRequestCall(call);
             }
         } else {
@@ -69,6 +72,57 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         if (!call.getId().equals(mCallId)) {
             // A new call is coming in.
             processIncomingCall(call);
+        }
+    }
+
+    @Override
+    public void onDisconnect(Call call) {
+        // no-op
+    }
+
+    @Override
+    public void onIncomingCall(Call call) {
+        // TODO: Ui is being destroyed when the fragment detaches.  Need clean up step to stop
+        // getting updates here.
+        Log.d(this, "onIncomingCall: " + this);
+        if (getUi() != null) {
+            Call modifyCall = CallList.getInstance().getVideoUpgradeRequestCall();
+            if (modifyCall != null) {
+                getUi().showAnswerUi(false);
+                Log.d(this, "declining upgrade request id: ");
+                CallList.getInstance().removeCallUpdateListener(mCallId, this);
+                InCallPresenter.getInstance().declineUpgradeRequest(getUi().getContext());
+            }
+            if (!call.getId().equals(mCallId)) {
+                // A new call is coming in.
+                processIncomingCall(call);
+            }
+>>>>>>> 8bef461
+        }
+    }
+
+    private boolean isVideoUpgradePending(Call call) {
+        return call.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
+    }
+
+    @Override
+    public void onUpgradeToVideo(Call call) {
+        Log.d(this, "onUpgradeToVideo: " + this + " call=" + call);
+        if (getUi() == null) {
+            Log.d(this, "onUpgradeToVideo ui is null");
+            return;
+        }
+        boolean isUpgradePending = isVideoUpgradePending(call);
+        InCallPresenter inCallPresenter = InCallPresenter.getInstance();
+        if (isUpgradePending
+                && inCallPresenter.getInCallState() == InCallPresenter.InCallState.INCOMING) {
+            Log.d(this, "declining upgrade request");
+            //If there is incoming call reject upgrade request
+            inCallPresenter.declineUpgradeRequest(getUi().getContext());
+        } else if (isUpgradePending) {
+            Log.d(this, "process upgrade request as no MT call");
+            processVideoUpgradeRequestCall(call);
         }
     }
 
@@ -97,28 +151,65 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     private void processVideoUpgradeRequestCall(Call call) {
+        Log.d(this, " processVideoUpgradeRequestCall call=" + call);
         mCallId = call.getId();
         mCall = call;
 
         // Listen for call updates for the current call.
         CallList.getInstance().addCallUpdateListener(mCallId, this);
-        showAnswerUi(true);
 
-        getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_UPGRADE_REQUEST);
+        final int currentVideoState = call.getVideoState();
+        final int modifyToVideoState = call.getModifyToVideoState();
+
+        if (currentVideoState == modifyToVideoState) {
+            Log.w(this, "processVideoUpgradeRequestCall: Video states are same. Return.");
+            return;
+        }
+
+        showAnswerUi(true);
+        getUi().showTargets(getUiTarget(currentVideoState, modifyToVideoState));
+
+    }
+
+    private int getUiTarget(int currentVideoState, int modifyToVideoState) {
+        if (showVideoUpgradeOptions(currentVideoState, modifyToVideoState)) {
+            return AnswerFragment.TARGET_SET_FOR_VIDEO_UPGRADE_REQUEST;
+        } else if (isEnabled(modifyToVideoState, VideoProfile.VideoState.BIDIRECTIONAL)) {
+            return AnswerFragment.TARGET_SET_FOR_BIDIRECTIONAL_VIDEO_ACCEPT_REJECT_REQUEST;
+        }  else if (isEnabled(modifyToVideoState, VideoProfile.VideoState.TX_ENABLED)) {
+            return AnswerFragment.TARGET_SET_FOR_VIDEO_TRANSMIT_ACCEPT_REJECT_REQUEST;
+        }  else if (isEnabled(modifyToVideoState, VideoProfile.VideoState.RX_ENABLED)) {
+            return AnswerFragment.TARGET_SET_FOR_VIDEO_RECEIVE_ACCEPT_REJECT_REQUEST;
+        }
+        return AnswerFragment.TARGET_SET_FOR_VIDEO_UPGRADE_REQUEST;
+    }
+
+    private boolean showVideoUpgradeOptions(int currentVideoState, int modifyToVideoState) {
+        return currentVideoState == VideoProfile.VideoState.AUDIO_ONLY &&
+            isEnabled(modifyToVideoState, VideoProfile.VideoState.BIDIRECTIONAL);
+    }
+
+    private boolean isEnabled(int videoState, int mask) {
+        return (videoState & mask) == mask;
     }
 
     @Override
     public void onCallChanged(Call call) {
         Log.d(this, "onCallStateChange() " + call + " " + this);
         if (call.getState() != Call.State.INCOMING) {
-            // Stop listening for updates.
-            CallList.getInstance().removeCallUpdateListener(mCallId, this);
+            boolean isUpgradePending = isVideoUpgradePending(call);
+            if (!isUpgradePending) {
+                // Stop listening for updates.
+                CallList.getInstance().removeCallUpdateListener(mCallId, this);
+            }
 
-            showAnswerUi(false);
+            final Call incall = CallList.getInstance().getIncomingCall();
+            if (incall != null || isUpgradePending) {
+                showAnswerUi(true);
+            } else {
+                showAnswerUi(false);
+            }
 
-            // mCallId will hold the state of the call. We don't clear the mCall variable here as
-            // it may be useful for sending text messages after phone disconnects.
-            mCallId = null;
             mHasTextMessages = false;
         } else if (!mHasTextMessages) {
             final List<String> textMsgs = CallList.getInstance().getTextResponses(call.getId());
@@ -129,14 +220,14 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     public void onAnswer(int videoState, Context context) {
+        Log.d(this, "onAnswer mCallId=" + mCallId + " videoState=" + videoState);
         if (mCallId == null) {
             return;
         }
 
-        Log.d(this, "onAnswer " + mCallId);
         if (mCall.getSessionModificationState()
                 == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
-            InCallPresenter.getInstance().acceptUpgradeRequest(context);
+            InCallPresenter.getInstance().acceptUpgradeRequest(videoState, context);
         } else {
             TelecomAdapter.getInstance().answerCall(mCall.getId(), videoState);
         }
@@ -146,9 +237,14 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
      * TODO: We are using reject and decline interchangeably. We should settle on
      * reject since it seems to be more prevalent.
      */
-    public void onDecline() {
+    public void onDecline(Context context) {
         Log.d(this, "onDecline " + mCallId);
-        TelecomAdapter.getInstance().rejectCall(mCall.getId(), false, null);
+        if (mCall.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+            InCallPresenter.getInstance().declineUpgradeRequest(context);
+        } else {
+            TelecomAdapter.getInstance().rejectCall(mCall.getId(), false, null);
+        }
     }
 
     public void onText() {

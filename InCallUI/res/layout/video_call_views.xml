@@ -22,7 +22,7 @@
 
     <TextureView
         android:id="@+id/incomingVideo"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <!-- The width and height are replaced at runtime based on the selected camera. -->
