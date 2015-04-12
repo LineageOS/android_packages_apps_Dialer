@@ -33,7 +33,8 @@ public class AudioModeProvider implements InCallPhoneListener {
     private static AudioModeProvider sAudioModeProvider = new AudioModeProvider();
     private int mAudioMode = AudioState.ROUTE_EARPIECE;
     private boolean mMuted = false;
-    private int mSupportedModes = AudioState.ROUTE_ALL;
+    private int mSupportedModes = AudioState.ROUTE_EARPIECE | AudioState.ROUTE_BLUETOOTH |
+        AudioState.ROUTE_WIRED_HEADSET | AudioState.ROUTE_SPEAKER;
     private final List<AudioModeListener> mListeners = Lists.newArrayList();
     private Phone mPhone;
 
