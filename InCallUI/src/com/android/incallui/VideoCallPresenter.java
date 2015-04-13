@@ -337,11 +337,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         toggleFullScreen();
     }
 
-
     /**
      * Handles incoming calls.
      *
-     * @param state The in call state.
+     * @param oldState The old in call state.
+     * @param newState The new in call state.
      * @param call The call.
      */
     @Override
@@ -419,7 +419,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         updateCameraSelection(call);
 
         if (isVideoCall) {
-            enterVideoMode(call.getVideoCall(), call.getVideoState());
+            enterVideoMode(call);
         } else if (isVideoMode()) {
             exitVideoMode();
         }
@@ -447,6 +447,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         if (!Objects.equals(prevCameraId, newCameraId) && CallUtils.isActiveVideoCall(call)) {
             enableCamera(call.getVideoCall(), true);
         }
+
+        // Make sure we hide or show the video UI if needed.
+        showVideoUi(call.getVideoState(), call.getState());
     }
 
     private void checkForCallSubstateChange(Call call) {
@@ -487,7 +490,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             Log.d(this, "onPrimaryCallChanged: Entering video mode...");
 
             updateCameraSelection(newPrimaryCall);
-            enterVideoMode(newPrimaryCall.getVideoCall(), newPrimaryCall.getVideoState());
+            enterVideoMode(newPrimaryCall);
         }
     }
 
@@ -577,7 +580,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
 
         if (CallUtils.isVideoCall(call) && hasChanged) {
-            enterVideoMode(call.getVideoCall(), call.getVideoState());
+            enterVideoMode(call);
         }
     }
 
@@ -594,7 +597,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * Enters video mode by showing the video surfaces and making other adjustments (eg. audio).
      * TODO(vt): Need to adjust size and orientation of preview surface here.
      */
-    private void enterVideoMode(VideoCall videoCall, int newVideoState) {
+    private void enterVideoMode(Call call) {
+        VideoCall videoCall = call.getVideoCall();
+        int newVideoState = call.getVideoState();
+
         Log.d(this, "enterVideoMode videoCall= " + videoCall + " videoState: " + newVideoState);
         VideoCallUi ui = getUi();
         if (ui == null) {
@@ -602,7 +608,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             return;
         }
 
-        showVideoUi(newVideoState);
+        showVideoUi(newVideoState, call.getState());
         InCallPresenter.getInstance().setInCallAllowsOrientationChange(true);
 
         // Communicate the current camera to telephony and make a request for the camera
@@ -695,7 +701,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
         InCallPresenter.getInstance().setInCallAllowsOrientationChange(false);
 
-        showVideoUi(VideoProfile.VideoState.AUDIO_ONLY);
+        showVideoUi(VideoProfile.VideoState.AUDIO_ONLY, Call.State.ACTIVE);
         enableCamera(mVideoCall, false);
 
         Log.d(this, "exitVideoMode mIsFullScreen: " + mIsFullScreen);
@@ -707,23 +713,28 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
-     * Show video Ui depends on video state.  Where the video state includes
-     * {@link VideoProfile.VideoState#PAUSED}, hide the incoming video surface so that the peer's
-     * contact photo shows.
+     * Based on the current {@link VideoProfile.VideoState} and {@code CallState}, show or hide the
+     * incoming and outgoing video surfaces.  The outgoing video surface is shown any time video
+     * is transmitting.  The incoming video surface is shown whenever the video is un-paused and
+     * active.
+     *
+     * @param videoState The video state.
+     * @param callState The call state.
      */
-    private void showVideoUi(int videoState) {
+    private void showVideoUi(int videoState, int callState) {
         VideoCallUi ui = getUi();
         if (ui == null) {
             Log.e(this, "showVideoUi, VideoCallUi is null returning");
             return;
         }
         boolean isPaused = VideoProfile.VideoState.isPaused(videoState);
+        boolean isCallActive = callState == Call.State.ACTIVE;
         if (VideoProfile.VideoState.isBidirectional(videoState)) {
-            ui.showVideoViews(true, !isPaused);
+            ui.showVideoViews(true, !isPaused && isCallActive);
         } else if (VideoProfile.VideoState.isTransmissionEnabled(videoState)) {
             ui.showVideoViews(true, false);
         } else if (VideoProfile.VideoState.isReceptionEnabled(videoState)) {
-            ui.showVideoViews(false, !isPaused);
+            ui.showVideoViews(false, !isPaused && isCallActive);
         } else {
             ui.hideVideoUi();
         }
