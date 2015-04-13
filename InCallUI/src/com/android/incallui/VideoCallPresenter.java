@@ -541,6 +541,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         checkForVideoCallChange(call);
         checkForVideoStateChange(call);
         checkForCallStateChange(call);
+        checkForOrientationAllowedChange(call);
+    }
+
+    private void checkForOrientationAllowedChange(Call call) {
+        InCallPresenter.getInstance().setInCallAllowsOrientationChange(CallUtils.isVideoCall(call));
     }
 
     /**
@@ -609,7 +614,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
 
         showVideoUi(newVideoState, call.getState());
-        InCallPresenter.getInstance().setInCallAllowsOrientationChange(true);
 
         // Communicate the current camera to telephony and make a request for the camera
         // capabilities.
@@ -698,8 +702,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      */
     private void exitVideoMode() {
         Log.d(this, "exitVideoMode");
-
-        InCallPresenter.getInstance().setInCallAllowsOrientationChange(false);
 
         showVideoUi(VideoProfile.VideoState.AUDIO_ONLY, Call.State.ACTIVE);
         enableCamera(mVideoCall, false);
