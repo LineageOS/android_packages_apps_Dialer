@@ -398,19 +398,19 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 android.telecom.Call.Details.CAPABILITY_SWAP_CONFERENCE));
         Log.v(this, "Show add call ", TelecomAdapter.getInstance().canAddCall());
         Log.v(this, "Show mute ", call.can(android.telecom.Call.Details.CAPABILITY_MUTE));
-        Log.v(this, "Show video call local:",
-                        call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL)
-                        + " remote: "
-                        + call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE));
+
+        boolean canBidiLocal =
+                call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_BIDIRECTIONAL);
+        boolean canBidiRemote =
+                call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_BIDIRECTIONAL);
+        Log.v(this, "Show video call local:" + canBidiLocal + ", remote: " + canBidiRemote);
 
         final boolean canAdd = TelecomAdapter.getInstance().canAddCall();
         final boolean enableHoldOption = call.can(android.telecom.Call.Details.CAPABILITY_HOLD);
         final boolean supportHold = call.can(android.telecom.Call.Details.CAPABILITY_SUPPORT_HOLD);
         final boolean isCallOnHold = call.getState() == Call.State.ONHOLD;
 
-        boolean canVideoCall =
-                call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_BIDIRECTIONAL)
-                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_BIDIRECTIONAL);
+        boolean canVideoCall = canBidiLocal && canBidiRemote;
         ui.showChangeToVideoButton(canVideoCall);
 
         final boolean showMergeOption = call.can(
