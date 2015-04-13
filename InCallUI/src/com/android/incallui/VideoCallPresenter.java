@@ -65,7 +65,7 @@ import android.os.SystemProperties;
  * When downgrading to an audio-only video state, the {@code VideoCallPresenter} nulls both
  * surfaces.
  */
-public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi>  implements
+public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi> implements
         IncomingCallListener, InCallOrientationListener, InCallStateListener,
         InCallDetailsListener, SurfaceChangeListener, VideoEventListener,
         InCallVideoCallListenerNotifier.SessionModificationListener {
@@ -164,7 +164,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * Stores the current call substate.
      */
     private int mCurrentCallSubstate;
-
 
     /** Handler which resets request state to NO_REQUEST after an interval. */
     private Handler mSessionModificationResetHandler;
@@ -833,14 +832,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
 
         mPreviewSurfaceState = PreviewSurfaceState.CAPABILITIES_RECEIVED;
-        ui.setPreviewSurfaceSize(width, height);
-
-        // Configure the preview surface to the correct aspect ratio.
-        float aspectRatio = 1.0f;
-        if (width > 0 && height > 0) {
-            aspectRatio = (float) width / (float) height;
-        }
-        setPreviewSize(mDeviceOrientation, aspectRatio);
+        changePreviewDimensions(width, height);
 
         // Check if the preview surface is ready yet; if it is, set it on the {@code VideoCall}.
         // If it not yet ready, it will be set when when creation completes.
@@ -848,6 +840,32 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             mPreviewSurfaceState = PreviewSurfaceState.SURFACE_SET;
             mVideoCall.setPreviewSurface(ui.getPreviewVideoSurface());
         }
+    }
+
+    /**
+     * Changes the dimensions of the preview surface.
+     *
+     * @param width The new width.
+     * @param height The new height.
+     */
+    private void changePreviewDimensions(int width, int height) {
+        VideoCallUi ui = getUi();
+        if (ui == null) {
+            return;
+        }
+
+        // Resize the surface used to display the preview video
+        ui.setPreviewSurfaceSize(width, height);
+
+        // Configure the preview surface to the correct aspect ratio.
+        float aspectRatio = 1.0f;
+        if (width > 0 && height > 0) {
+            aspectRatio = (float) width / (float) height;
+        }
+
+        // Resize the textureview housing the preview video and rotate it appropriately based on
+        // the device orientation
+        setPreviewSize(mDeviceOrientation, aspectRatio);
     }
 
     /**
@@ -889,8 +907,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      */
     @Override
     public void onDeviceOrientationChanged(int orientation) {
-        Log.d(this, "onDeviceOrientationChanged: orientation=" + orientation);
         mDeviceOrientation = orientation;
+        Point previewDimensions = getUi().getPreviewSize();
+        Log.d(this, "onDeviceOrientationChanged: orientation=" + orientation + " size: "
+                + previewDimensions);
+        changePreviewDimensions(previewDimensions.x, previewDimensions.y);
     }
 
     @Override
@@ -1118,8 +1139,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         void setCallDataUsage(Context context, long dataUsage);
         void displayCallSessionEvent(int event);
         Point getScreenSize();
+        Point getPreviewSize();
         void cleanupSurfaces();
-        boolean isActivityRestart();
         void showCallSubstateChanged(int callSubstate);
     }
 }

@@ -19,6 +19,7 @@ package com.android.incallui;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
 import android.os.Bundle;
@@ -86,11 +87,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      * Inflated view containing the video call surfaces represented by the {@link ViewStub}.
      */
     private View mVideoViews;
-
-    /**
-     * {@code True} when the entering the activity again after a restart due to orientation change.
-     */
-    private boolean mIsActivityRestart;
 
     /**
      * {@code True} when the layout of the activity has been completed.
@@ -385,12 +381,20 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
                 Log.e(this, "onClick: Presenter is null.");
             }
         }
+
+        /**
+         * Returns the dimensions of the surface.
+         *
+         * @return The dimensions of the surface.
+         */
+        public Point getSurfaceDimensions() {
+            return new Point(mWidth, mHeight);
+        }
     };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mIsActivityRestart = sVideoSurfacesInUse;
     }
 
     /**
@@ -675,12 +679,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         }
     }
 
-    @Override
-    public boolean isActivityRestart() {
-        Log.d(this, "isActivityRestart " + mIsActivityRestart);
-        return mIsActivityRestart;
-    }
-
     /**
      * @return {@code True} if the display video surface has been created.
      */
@@ -741,12 +739,12 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
             params.height = height;
             preview.setLayoutParams(params);
 
-            int rotation = InCallPresenter.toRotationAngle(getCurrentRotation());
-            int rotationAngle = 360 - rotation;
-            preview.setRotation(rotationAngle);
-            Log.d(this, "setPreviewSize: rotation=" + rotation +
-                    " rotationAngle=" + rotationAngle);
-
+            // The width and height are interchanged outside of this method based on the current
+            // orientation, so we can transform using "width", which will be either the width or
+            // the height.
+            Matrix transform = new Matrix();
+            transform.setScale(-1, 1, width/2, 0);
+            preview.setTransform(transform);
         }
     }
 
@@ -850,6 +848,19 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         display.getSize(size);
 
         return size;
+    }
+
+    /**
+     * Determines the size of the preview surface.
+     *
+     * @return {@link Point} specifying the width and height of the preview surface.
+     */
+    @Override
+    public Point getPreviewSize() {
+        if (sPreviewSurface == null) {
+            return null;
+        }
+        return sPreviewSurface.getSurfaceDimensions();
     }
 
     /**
