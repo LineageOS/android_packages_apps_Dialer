@@ -55,7 +55,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             }
             call = calls.getVideoUpgradeRequestCall();
             Log.d(this, "getVideoUpgradeRequestCall call =" + call);
-            if (call == null) {
+            if (call != null) {
                 processVideoUpgradeRequestCall(call);
             }
         } else {
