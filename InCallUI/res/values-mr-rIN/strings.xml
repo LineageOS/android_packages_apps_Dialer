@@ -49,6 +49,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"व्हिडिओ कॉल"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"व्हिडिओ विनंती करत आहे"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"व्हिडिओ कॉल कनेक्ट करू शकत नाही"</string>
+    <!-- no translation found for card_title_video_call_paused (3753261320787432731) -->
+    <skip />
     <string name="card_title_callback_number" msgid="7307938207564217293">"आपला कॉलबॅक नंबर\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"आपला आणीबाणी कॉलबॅक नंबर\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"डायल करीत आहे"</string>
@@ -102,6 +104,8 @@
     <string name="overflowAddMenuItemText" msgid="5605615101930811453">"कॉल जोडा"</string>
     <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"कॉल विलीन करा"</string>
     <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"कॉल स्‍वॅप करा"</string>
+    <!-- no translation found for overflowManageConferenceMenuItemText (1751081566617967119) -->
+    <skip />
     <string name="onscreenHoldText" msgid="2285258239691145872">"होल्ड करा"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"शेवट"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"डायलपॅड"</string>
@@ -117,6 +121,18 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"कॅमेरा स्विच करा"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"व्हिडिओला विराम द्या"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"अधिक पर्याय"</string>
+    <!-- no translation found for video_call_not_allowed_if_tty_enabled (122020626761012211) -->
+    <skip />
+    <!-- no translation found for player_started (6046262510243983589) -->
+    <skip />
+    <!-- no translation found for player_stopped (8856926759436364963) -->
+    <skip />
+    <!-- no translation found for camera_not_ready (4955261496193316240) -->
+    <skip />
+    <!-- no translation found for camera_ready (1903335385405807324) -->
+    <skip />
+    <!-- no translation found for unknown_call_session_event (2431061946920253582) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"सेवा"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"सेटअप"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;सेट नाही&gt;"</string>
@@ -136,6 +152,14 @@
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"ऑडिओ कॉल म्हणून उत्तर द्या"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"व्हिडिओ विनंती स्वीकारा"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"व्हिडिओ विनंतीस नकार द्या"</string>
+    <!-- no translation found for description_target_accept_upgrade_to_video_transmit_request (5311037889642077468) -->
+    <skip />
+    <!-- no translation found for description_target_decline_upgrade_to_video_transmit_request (3636108065510415975) -->
+    <skip />
+    <!-- no translation found for description_target_accept_upgrade_to_video_receive_request (8668058323593087912) -->
+    <skip />
+    <!-- no translation found for description_target_decline_upgrade_to_video_receive_request (2355776509656298367) -->
+    <skip />
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> साठी वर स्लाइड करा."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> साठी डावीकडे स्लाइड करा."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> साठी उजवीकडे स्लाइड करा."</string>

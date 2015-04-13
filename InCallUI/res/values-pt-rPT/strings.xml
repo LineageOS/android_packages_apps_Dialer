@@ -49,6 +49,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videochamada"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"A solicitar vídeo"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Não é possível ligar a videochamada"</string>
+    <!-- no translation found for card_title_video_call_paused (3753261320787432731) -->
+    <skip />
     <string name="card_title_callback_number" msgid="7307938207564217293">"O seu número de retorno de chamada\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"O seu número de retorno de chamadas de emergência\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"A marcar"</string>
@@ -102,6 +104,8 @@
     <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Adicionar chamada"</string>
     <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Intercalar chamadas"</string>
     <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Alternar entre chamadas"</string>
+    <!-- no translation found for overflowManageConferenceMenuItemText (1751081566617967119) -->
+    <skip />
     <string name="onscreenHoldText" msgid="2285258239691145872">"Suspender"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"Terminar"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Teclado de marcação"</string>
@@ -117,6 +121,18 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Mudar de câmara"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Interromper vídeo"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"Mais opções"</string>
+    <!-- no translation found for video_call_not_allowed_if_tty_enabled (122020626761012211) -->
+    <skip />
+    <!-- no translation found for player_started (6046262510243983589) -->
+    <skip />
+    <!-- no translation found for player_stopped (8856926759436364963) -->
+    <skip />
+    <!-- no translation found for camera_not_ready (4955261496193316240) -->
+    <skip />
+    <!-- no translation found for camera_ready (1903335385405807324) -->
+    <skip />
+    <!-- no translation found for unknown_call_session_event (2431061946920253582) -->
+    <skip />
     <string name="voicemail_provider" msgid="5135942703327136909">"Serviço"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Configuração"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Não definido&gt;"</string>
@@ -136,6 +152,14 @@
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Responder como chamada de áudio"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Aceitar o pedido de vídeo"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Recusar o pedido de vídeo"</string>
+    <!-- no translation found for description_target_accept_upgrade_to_video_transmit_request (5311037889642077468) -->
+    <skip />
+    <!-- no translation found for description_target_decline_upgrade_to_video_transmit_request (3636108065510415975) -->
+    <skip />
+    <!-- no translation found for description_target_accept_upgrade_to_video_receive_request (8668058323593087912) -->
+    <skip />
+    <!-- no translation found for description_target_decline_upgrade_to_video_receive_request (2355776509656298367) -->
+    <skip />
     <string name="description_direction_up" msgid="4441409581444516690">"Deslize lentamente para cima para <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"Deslize lentamente para a esquerda para <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"Deslize lentamente para a direita para <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
