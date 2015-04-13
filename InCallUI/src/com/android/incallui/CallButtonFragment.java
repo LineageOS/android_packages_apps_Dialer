@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.telecom.AudioState;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
+import android.util.SparseIntArray;
 import android.view.ContextThemeWrapper;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
@@ -57,23 +58,31 @@ public class CallButtonFragment
         implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener, OnDismissListener,
         View.OnClickListener {
     private static final int INVALID_INDEX = -1;
+    private static final int BUTTON_MAX_VISIBLE = 5;
+    // The button is currently visible in the UI
+    private static final int BUTTON_VISIBLE = 1;
+    // The button is hidden in the UI
+    private static final int BUTTON_HIDDEN = 2;
+    // The button has been collapsed into the overflow menu
+    private static final int BUTTON_MENU = 3;
 
     public interface Buttons {
-        public static final int BUTTON_AUDIO = 1;
-        public static final int BUTTON_DOWNGRADE_TO_VOICE = 2;
-        public static final int BUTTON_MUTE = 3;
-        public static final int BUTTON_DIALPAD = 4;
-        public static final int BUTTON_HOLD = 5;
-        public static final int BUTTON_SWAP = 6;
-        public static final int BUTTON_UPGRADE_TO_VIDEO = 7;
-        public static final int BUTTON_SWITCH_CAMERA = 8;
-        public static final int BUTTON_ADD_CALL = 9;
-        public static final int BUTTON_MERGE = 10;
-        public static final int BUTTON_PAUSE_VIDEO = 11;
-        public static final int BUTTON_MANAGE_VIDEO_CONFERENCE = 12;
-        public static final int BUTTON_OVERFLOW = 13;
+        public static final int BUTTON_AUDIO = 0;
+        public static final int BUTTON_DOWNGRADE_TO_VOICE = 1;
+        public static final int BUTTON_MUTE = 2;
+        public static final int BUTTON_DIALPAD = 3;
+        public static final int BUTTON_HOLD = 4;
+        public static final int BUTTON_SWAP = 5;
+        public static final int BUTTON_UPGRADE_TO_VIDEO = 6;
+        public static final int BUTTON_SWITCH_CAMERA = 7;
+        public static final int BUTTON_ADD_CALL = 8;
+        public static final int BUTTON_MERGE = 9;
+        public static final int BUTTON_PAUSE_VIDEO = 10;
+        public static final int BUTTON_MANAGE_VIDEO_CONFERENCE = 11;
+        public static final int BUTTON_COUNT = 12;
     }
 
+    private SparseIntArray mButtonVisibilityMap = new SparseIntArray(BUTTON_COUNT);
 
     private CompoundButton mAudioButton;
     private ImageButton mChangeToVoiceButton;
@@ -116,6 +125,10 @@ public class CallButtonFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        for (int i = 0; i < BUTTON_COUNT; i++) {
+            mButtonVisibilityMap.put(i, BUTTON_HIDDEN);
+        }
     }
 
     @Override
@@ -218,7 +231,9 @@ public class CallButtonFragment
                         !mPauseVideoButton.isSelected() /* pause */);
                 break;
             case R.id.overflowButton:
-                mOverflowPopup.show();
+                if (mOverflowPopup != null) {
+                    mOverflowPopup.show();
+                }
                 break;
             case R.id.manageVideoCallConferenceButton:
                 onManageVideoCallConferenceClicked();
@@ -240,7 +255,6 @@ public class CallButtonFragment
             return;
         }
 
-        Resources res = getActivity().getResources();
         View[] compoundButtons = {
                 mAudioButton,
                 mMuteButton,
@@ -363,18 +377,8 @@ public class CallButtonFragment
     }
 
     @Override
-    public void setMute(boolean value) {
-        if (mMuteButton.isSelected() != value) {
-            mMuteButton.setSelected(value);
-        }
-    }
-
-    @Override
     public void showButton(int buttonId, boolean show) {
-        final View button = getButtonById(buttonId);
-        if (button != null) {
-            button.setVisibility(show ? View.VISIBLE : View.GONE);
-        }
+        mButtonVisibilityMap.put(buttonId, show ? BUTTON_VISIBLE : BUTTON_HIDDEN);
     }
 
     @Override
@@ -411,8 +415,6 @@ public class CallButtonFragment
                 return mPauseVideoButton;
             case BUTTON_MANAGE_VIDEO_CONFERENCE:
                 return mManageVideoCallConferenceButton;
-            case BUTTON_OVERFLOW:
-                return mOverflowButton;
             default:
                 Log.w(this, "Invalid button id");
                 return null;
@@ -423,6 +425,9 @@ public class CallButtonFragment
     public void setHold(boolean value) {
         if (mHoldButton.isSelected() != value) {
             mHoldButton.setSelected(value);
+            mHoldButton.setContentDescription(getContext().getString(
+                    value ? R.string.onscreenHoldText_selected
+                            : R.string.onscreenHoldText_unselected));
         }
     }
 
@@ -436,9 +441,17 @@ public class CallButtonFragment
         mPauseVideoButton.setSelected(isPaused);
     }
 
+    @Override
+    public void setMute(boolean value) {
+        if (mMuteButton.isSelected() != value) {
+            mMuteButton.setSelected(value);
+        }
+    }
+
     /**The function is called when Modify Call button gets pressed. The function creates and
      * displays modify call options.
      */
+    @Override
     public void displayModifyCallOptions() {
         CallButtonPresenter.CallButtonUi ui = getUi();
         if (ui == null) {
@@ -509,65 +522,68 @@ public class CallButtonFragment
         return "";
     }
 
+    private void addToOverflowMenu(int id, View button, PopupMenu menu) {
+        button.setVisibility(View.GONE);
+        menu.getMenu().add(Menu.NONE, id, Menu.NONE, button.getContentDescription());
+        mButtonVisibilityMap.put(id, BUTTON_MENU);
+    }
+
+    private PopupMenu getPopupMenu() {
+        return new PopupMenu(new ContextThemeWrapper(getActivity(), R.style.InCallPopupMenuStyle),
+                mOverflowButton);
+    }
+
+    /**
+     * Iterates through the list of buttons and toggles their visibility depending on the
+     * setting configured by the CallButtonPresenter. If there are more visible buttons than
+     * the allowed maximum, the excess buttons are collapsed into a single overflow menu.
+     */
     @Override
-    public void configureOverflowMenu(boolean showMergeMenuOption, boolean showAddMenuOption,
-            boolean showHoldMenuOption, boolean showSwapMenuOption,
-            boolean showManageConferenceVideoCallOption) {
-        if (mOverflowPopup == null) {
-            final ContextThemeWrapper contextWrapper = new ContextThemeWrapper(getActivity(),
-                    R.style.InCallPopupMenuStyle);
-            mOverflowPopup = new PopupMenu(contextWrapper, mOverflowButton);
-            mOverflowPopup.getMenuInflater().inflate(R.menu.incall_overflow_menu,
-                    mOverflowPopup.getMenu());
+    public void updateButtonStates() {
+        View prevVisibleButton = null;
+        int prevVisibleId = -1;
+        PopupMenu menu = null;
+        int visibleCount = 0;
+        for (int i = 0; i < BUTTON_COUNT; i++) {
+            final int visibility = mButtonVisibilityMap.get(i);
+            final View button = getButtonById(i);
+            if (visibility == BUTTON_VISIBLE) {
+                visibleCount++;
+                if (visibleCount <= BUTTON_MAX_VISIBLE) {
+                    button.setVisibility(View.VISIBLE);
+                    prevVisibleButton = button;
+                    prevVisibleId = i;
+                } else {
+                    if (menu == null) {
+                        menu = getPopupMenu();
+                    }
+                    // Collapse the current button into the overflow menu. If is the first visible
+                    // button that exceeds the threshold, also collapse the previous visible button
+                    // so that the total number of visible buttons will never exceed the threshold.
+                    if (prevVisibleButton != null) {
+                        addToOverflowMenu(prevVisibleId, prevVisibleButton, menu);
+                        prevVisibleButton = null;
+                        prevVisibleId = -1;
+                    }
+                    addToOverflowMenu(i, button, menu);
+                }
+            } else if (visibility == BUTTON_HIDDEN){
+                button.setVisibility(View.GONE);
+            }
+        }
+
+        mOverflowButton.setVisibility(menu != null ? View.VISIBLE : View.GONE);
+        if (menu != null) {
+            mOverflowPopup = menu;
             mOverflowPopup.setOnMenuItemClickListener(new OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.overflow_merge_menu_item:
-                            getPresenter().mergeClicked();
-                            break;
-                        case R.id.overflow_add_menu_item:
-                            getPresenter().addCallClicked();
-                            break;
-                        case R.id.overflow_hold_menu_item:
-                            getPresenter().holdClicked(true /* checked */);
-                            break;
-                        case R.id.overflow_resume_menu_item:
-                            getPresenter().holdClicked(false /* checked */);
-                            break;
-                        case R.id.overflow_swap_menu_item:
-                            getPresenter().addCallClicked();
-                            break;
-                        case R.id.overflow_manage_conference_menu_item:
-                            onManageVideoCallConferenceClicked();
-                            break;
-                        default:
-                            Log.wtf(this, "onMenuItemClick: unexpected overflow menu click");
-                            break;
-                    }
+                    final int id = item.getItemId();
+                    getButtonById(id).performClick();
                     return true;
                 }
             });
-            mOverflowPopup.setOnDismissListener(new OnDismissListener() {
-                @Override
-                public void onDismiss(PopupMenu popupMenu) {
-                    popupMenu.dismiss();
-                }
-            });
         }
-
-        final Menu menu = mOverflowPopup.getMenu();
-        menu.findItem(R.id.overflow_merge_menu_item).setVisible(showMergeMenuOption);
-        menu.findItem(R.id.overflow_add_menu_item).setVisible(showAddMenuOption);
-        menu.findItem(R.id.overflow_hold_menu_item).setVisible(
-                showHoldMenuOption && !mHoldButton.isSelected());
-        menu.findItem(R.id.overflow_resume_menu_item).setVisible(
-                showHoldMenuOption && mHoldButton.isSelected());
-        menu.findItem(R.id.overflow_swap_menu_item).setVisible(showSwapMenuOption);
-        menu.findItem(R.id.overflow_manage_conference_menu_item).setVisible(
-            showManageConferenceVideoCallOption);
-
-        mOverflowButton.setEnabled(menu.hasVisibleItems());
     }
 
     @Override
