@@ -21,7 +21,7 @@
     android:orientation="vertical"
     android:divider="?android:attr/dividerHorizontal"
     android:showDividers="end"
-    android:background="@color/background_dialer_list_items">
+    android:background="@color/background_dialer_call_log">
 
     <FrameLayout
         android:id="@+id/voicemail_status"
@@ -40,7 +40,7 @@
         <android.support.v7.widget.RecyclerView android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/background_dialer_list_items"
+            android:background="@color/background_dialer_call_log"
             android:padding="8dp" />
 
         <include

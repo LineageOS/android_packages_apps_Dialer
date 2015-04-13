@@ -47,7 +47,7 @@
         android:orientation="vertical"
         android:gravity="center_vertical"
         card_view:cardCornerRadius="4dp"
-        card_view:cardBackgroundColor="@color/background_dialer_list_items">
+        card_view:cardBackgroundColor="@color/background_dialer_call_log_list_item">
 
         <!-- Primary area containing the contact badge and caller information -->
         <LinearLayout

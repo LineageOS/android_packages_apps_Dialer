@@ -57,9 +57,8 @@
     <color name="background_dialer_light">#fafafa</color>
     <!-- Background color for search results and call details -->
     <color name="background_dialer_results">#f9f9f9</color>
-    <!-- Background color of dialer list items (contacts, call log entries) -->
-    <color name="background_dialer_list_items">@color/background_dialer_white</color>
-    <color name="background_dialer_details_list_items">@color/background_dialer_results</color>
+    <color name="background_dialer_call_log">@color/background_dialer_light</color>
+    <color name="background_dialer_call_log_list_item">@color/background_dialer_white</color>
 
     <!-- Color of the 1dp divider that separates favorites -->
     <color name="favorite_contacts_separator_color">#d0d0d0</color>
