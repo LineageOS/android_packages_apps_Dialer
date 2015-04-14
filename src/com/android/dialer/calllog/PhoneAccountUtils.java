@@ -92,7 +92,7 @@ public class PhoneAccountUtils {
         TelecomManager telecomManager =
                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
         final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
-        if (!telecomManager.hasMultipleCallCapableAccounts()) {
+        if (telecomManager.getCallCapablePhoneAccounts().size() <= 1) {
             return null;
         }
         return account;

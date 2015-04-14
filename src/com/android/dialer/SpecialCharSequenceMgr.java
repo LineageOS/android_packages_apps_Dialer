@@ -289,7 +289,7 @@ public class SpecialCharSequenceMgr {
                     @Override
                     public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
                             boolean setDefault) {
-                        telecomManager.handleMmi(selectedAccountHandle, input);
+                        telecomManager.handleMmi(input, selectedAccountHandle);
                         //TODO: show error dialog if result isn't valid
                     }
                     @Override
