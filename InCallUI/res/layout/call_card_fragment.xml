@@ -72,13 +72,6 @@
         android:background="@android:color/white"
         android:src="@drawable/img_no_image_automirrored" />
 
-    <fragment android:name="com.android.incallui.VideoCallFragment"
-        android:id="@+id/videoCallFragment"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <!-- Progress spinner, useful for indicating pending operations such as upgrade to video. -->
     <FrameLayout
         android:id="@+id/progressSpinner"
@@ -97,6 +90,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:indeterminate="true" />
+
     </FrameLayout>
 
     <!-- Secondary "Call info" block, for the background ("on hold") call. -->
