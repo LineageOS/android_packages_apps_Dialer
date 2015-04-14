@@ -909,6 +909,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     public void onDeviceOrientationChanged(int orientation) {
         mDeviceOrientation = orientation;
         Point previewDimensions = getUi().getPreviewSize();
+        if (previewDimensions == null) {
+            return;
+        }
         Log.d(this, "onDeviceOrientationChanged: orientation=" + orientation + " size: "
                 + previewDimensions);
         changePreviewDimensions(previewDimensions.x, previewDimensions.y);
