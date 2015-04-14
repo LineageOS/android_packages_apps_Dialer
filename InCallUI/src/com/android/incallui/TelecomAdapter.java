@@ -132,22 +132,6 @@ final class TelecomAdapter implements InCallPhoneListener {
         }
     }
 
-    void turnOnProximitySensor() {
-        if (mPhone != null) {
-            mPhone.setProximitySensorOn();
-        } else {
-            Log.e(this, "error setProximitySensorOn, mPhone is null");
-        }
-    }
-
-    void turnOffProximitySensor(boolean screenOnImmediately) {
-        if (mPhone != null) {
-            mPhone.setProximitySensorOff(screenOnImmediately);
-        } else {
-            Log.e(this, "error setProximitySensorOff, mPhone is null");
-        }
-    }
-
     void separateCall(String callId) {
         if (mPhone != null) {
             getTelecommCallById(callId).splitFromConference();
