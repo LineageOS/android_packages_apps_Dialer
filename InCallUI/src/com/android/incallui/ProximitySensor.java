@@ -24,6 +24,7 @@ import android.telecom.AudioState;
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
+
 import com.google.common.base.Objects;
 
 /**
@@ -40,6 +41,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
     private static final String TAG = ProximitySensor.class.getSimpleName();
 
     private final PowerManager mPowerManager;
+    private final PowerManager.WakeLock mProximityWakeLock;
     private final AudioModeProvider mAudioModeProvider;
     private final AccelerometerListener mAccelerometerListener;
     private int mOrientation = AccelerometerListener.ORIENTATION_UNKNOWN;
@@ -53,6 +55,13 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
 
     public ProximitySensor(Context context, AudioModeProvider audioModeProvider) {
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        if (mPowerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
+            mProximityWakeLock = mPowerManager.newWakeLock(
+                    PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, TAG);
+        } else {
+            Log.w(TAG, "Device does not support proximity wake lock.");
+            mProximityWakeLock = null;
+        }
         mAccelerometerListener = new AccelerometerListener(context, this);
         mAudioModeProvider = audioModeProvider;
         mAudioModeProvider.addListener(this);
@@ -63,7 +72,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
 
         mAccelerometerListener.enable(false);
 
-        TelecomAdapter.getInstance().turnOffProximitySensor(true);
+        turnOffProximitySensor(true);
     }
 
     /**
@@ -151,6 +160,30 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
         return !mPowerManager.isScreenOn();
     }
 
+    private void turnOnProximitySensor() {
+        if (mProximityWakeLock != null) {
+            if (!mProximityWakeLock.isHeld()) {
+                Log.i(this, "Acquiring proximity wake lock");
+                mProximityWakeLock.acquire();
+            } else {
+                Log.i(this, "Proximity wake lock already acquired");
+            }
+        }
+    }
+
+    private void turnOffProximitySensor(boolean screenOnImmediately) {
+        if (mProximityWakeLock != null) {
+            if (mProximityWakeLock.isHeld()) {
+                Log.i(this, "Releasing proximity wake lock");
+                int flags =
+                    (screenOnImmediately ? 0 : PowerManager.RELEASE_FLAG_WAIT_FOR_NO_PROXIMITY);
+                mProximityWakeLock.release(flags);
+            } else {
+                Log.i(this, "Proximity wake lock already released");
+            }
+        }
+    }
+
     /**
      * Updates the wake lock used to control proximity sensor behavior,
      * based on the current state of the phone.
@@ -210,12 +243,12 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                 Log.d(this, "Turning on proximity sensor");
                 // Phone is in use!  Arrange for the screen to turn off
                 // automatically when the sensor detects a close object.
-                TelecomAdapter.getInstance().turnOnProximitySensor();
+                turnOnProximitySensor();
             } else {
                 Log.d(this, "Turning off proximity sensor");
                 // Phone is either idle, or ringing.  We don't want any special proximity sensor
                 // behavior in either case.
-                TelecomAdapter.getInstance().turnOffProximitySensor(screenOnImmediately);
+                turnOffProximitySensor(screenOnImmediately);
             }
         }
 }
