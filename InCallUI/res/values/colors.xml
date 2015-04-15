@@ -59,6 +59,8 @@
 
     <!-- Background color of action bars -->
     <color name="actionbar_background_color">@color/dialer_theme_color</color>
+    <!-- Background color for status bar. For portrait this will be ignored. -->
+    <color name="statusbar_background_color">@color/dialer_theme_color</color>
 
     <color name="translucent_shadow">#33999999</color>
 

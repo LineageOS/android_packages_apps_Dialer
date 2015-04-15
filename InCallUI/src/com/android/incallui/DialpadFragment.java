@@ -422,7 +422,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View parent = inflater.inflate(
-                com.android.incallui.R.layout.incall_dialpad_fragment, container, false);
+                R.layout.incall_dialpad_fragment, container, false);
         mDialpadView = (DialpadView) parent.findViewById(R.id.dialpad_view);
         mDialpadView.setCanDigitsBeEdited(false);
         mDialpadView.setBackgroundResource(R.color.incall_dialpad_background);

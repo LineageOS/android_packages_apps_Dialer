@@ -30,22 +30,25 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:elevation="@dimen/primary_call_elevation"
-        android:background="@color/incall_call_banner_background_color"
+        android:background="@drawable/rounded_call_card_background"
         android:paddingTop="@dimen/call_banner_primary_call_container_top_padding"
         android:clipChildren="false"
-        android:clipToPadding="false" >
+        android:clipToPadding="false"
+        android:alpha="0.9"
+        android:layout_margin="10dp">
 
         <include layout="@layout/primary_call_info" />
 
-        <fragment android:name="com.android.incallui.CallButtonFragment"
-            android:id="@+id/callButtonFragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <FrameLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent" >
 
+            <fragment android:name="com.android.incallui.CallButtonFragment"
+                android:id="@+id/callButtonFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/call_buttons_bottom_margin" />
             <!-- Secondary "Call info" block, for the background ("on hold") call. -->
             <include layout="@layout/secondary_call_info"
                 android:layout_width="match_parent"
@@ -73,14 +76,6 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/photo" />
 
-    <fragment android:name="com.android.incallui.VideoCallFragment"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="start|center_vertical"
-        android:id="@+id/videoCallFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
-
     <!-- Progress spinner, useful for indicating pending operations such as upgrade to video. -->
     <FrameLayout
         android:id="@+id/progressSpinner"
@@ -102,7 +97,14 @@
 
     </FrameLayout>
 
-    <!-- Placeholder for various fragments that are added dynamically underneath the caller info. -->
+    <fragment android:name="com.android.incallui.VideoCallFragment"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="start|center_vertical"
+        android:id="@+id/videoCallFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Placeholder for the dialpad which is replaced with the dialpad fragment when shown. -->
     <FrameLayout
         android:id="@+id/answer_and_dialpad_container"
         android:layout_toEndOf="@id/primary_call_info_container"

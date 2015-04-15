@@ -254,13 +254,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         maybeShowManageConferenceCallButton();
+        maybeShowProgressSpinner();
 
-        final boolean enableEndCallButton = (Call.State.isConnectingOrConnected(callState)
-                || callState == Call.State.DISCONNECTING) &&
-                callState != Call.State.INCOMING && mPrimary != null;
         // Hide the end call button instantly if we're receiving an incoming call.
-        getUi().setEndCallButtonEnabled(
-                enableEndCallButton, callState != Call.State.INCOMING /* animate */);
+        getUi().setEndCallButtonEnabled(shouldShowEndCallButton(mPrimary, callState),
+                callState != Call.State.INCOMING /* animate */);
     }
 
     @Override
@@ -313,6 +311,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     private void maybeShowManageConferenceCallButton() {
         getUi().showManageConferenceCallButton(shouldShowManageConference());
+    }
+
+    private void maybeShowProgressSpinner() {
+        final boolean show = mPrimary != null && mPrimary.getSessionModificationState()
+                == Call.SessionModificationState.WAITING_FOR_RESPONSE
+                && mPrimary.getState() == Call.State.ACTIVE;
+        getUi().setProgressSpinnerVisible(show);
     }
 
     /**
@@ -531,7 +536,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         if (mSecondary == null) {
             // Clear the secondary display info.
-            ui.setSecondary(false, null, false, null, null, false /* isConference */);
+            ui.setSecondary(false, null, false, null, null, false /* isConference */,
+                    false /* isVideoCall */);
             return;
         }
 
@@ -542,7 +548,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     false /* nameIsNumber */,
                     null /* label */,
                     getCallProviderLabel(mSecondary),
-                    true /* isConference */);
+                    true /* isConference */,
+                    mSecondary.isVideoCall(mContext));
         } else if (mSecondaryContactInfo != null) {
             Log.d(TAG, "updateSecondaryDisplayInfo() " + mSecondaryContactInfo);
             String name = getNameForCall(mSecondaryContactInfo);
@@ -553,10 +560,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     nameIsNumber,
                     mSecondaryContactInfo.label,
                     getCallProviderLabel(mSecondary),
-                    false /* isConference */);
+                    false /* isConference */,
+                    mSecondary.isVideoCall(mContext));
         } else {
             // Clear the secondary display info.
-            ui.setSecondary(false, null, false, null, null, false /* isConference */);
+            ui.setSecondary(false, null, false, null, null, false /* isConference */,
+                    false /* isVideoCall */);
         }
     }
 
@@ -736,13 +745,27 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         return photo;
     }
 
+    private boolean shouldShowEndCallButton(Call primary, int callState) {
+        if (primary == null) {
+            return false;
+        }
+        if (!Call.State.isConnectingOrConnected(callState) || callState == Call.State.INCOMING) {
+            return false;
+        }
+        if (mPrimary.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+            return false;
+        }
+        return true;
+    }
+
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
         void setCallCardVisible(boolean visible);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isSipCall);
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-                String providerLabel, boolean isConference);
+                String providerLabel, boolean isConference, boolean isVideoCall);
         void setCallState(int state, int videoState, int sessionModificationState,
                 DisconnectCause disconnectCause, String connectionLabel,
                 Drawable connectionIcon, String gatewayNumber, boolean isWifi);

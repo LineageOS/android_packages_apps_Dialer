@@ -19,6 +19,7 @@ package com.android.incallui;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
 import android.os.Bundle;
@@ -88,11 +89,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      * Inflated view containing the video call surfaces represented by the {@link ViewStub}.
      */
     private View mVideoViews;
-
-    /**
-     * {@code True} when the entering the activity again after a restart due to orientation change.
-     */
-    private boolean mIsActivityRestart;
 
     /**
      * {@code True} when the layout of the activity has been completed.
@@ -404,12 +400,20 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
                 Log.e(this, "onClick: Presenter is null.");
             }
         }
+
+        /**
+         * Returns the dimensions of the surface.
+         *
+         * @return The dimensions of the surface.
+         */
+        public Point getSurfaceDimensions() {
+            return new Point(mWidth, mHeight);
+        }
     };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mIsActivityRestart = sVideoSurfacesInUse;
     }
 
     /**
@@ -421,21 +425,12 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mIsLandscape = getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE;
+        mIsLandscape = getResources().getBoolean(R.bool.is_layout_landscape);
 
         Log.d(this, "onActivityCreated: IsLandscape=" + mIsLandscape);
         getPresenter().init(getActivity());
     }
 
-    /**
-     * Handles creation of the fragment view.
-     *
-     * @param inflater The inflater.
-     * @param container The view group containing the fragment.
-     * @param savedInstanceState The saved instance state.
-     * @return
-     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -447,36 +442,15 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     }
 
     /**
-     * Centers the display view vertically for portrait orientation, and horizontally for
-     * lanscape orientations.  The view is centered within the available space not occupied by
-     * the call card.
+     * Centers the display view vertically for portrait orientations. The view is centered within
+     * the available space not occupied by the call card. This is a no-op for landscape mode.
      *
      * @param displayVideo The video view to center.
      */
     private void centerDisplayView(View displayVideo) {
-        // In a lansdcape layout we need to ensure we horizontally center the view based on whether
-        // the layout is left-to-right or right-to-left.
-        // In a left-to-right locale, the space for the video view is to the right of the call card
-        // so we need to translate it in the +X direction.
-        // In a right-to-left locale, the space for the video view is to the left of the call card
-        // so we need to translate it in the -X direction.
-        final boolean isLayoutRtl = InCallPresenter.isRtl();
-
-        ViewGroup.LayoutParams params = displayVideo.getLayoutParams();
-        float spaceBesideCallCard = InCallPresenter.getInstance().getSpaceBesideCallCard();
-        Log.d(this, "centerDisplayView: IsLandscape= " + mIsLandscape + " Layout width: " +
-                params.width + " height: " + params.height + " spaceBesideCallCard: "
-                + spaceBesideCallCard);
-        if (mIsLandscape) {
-            float videoViewTranslation = params.width / 2
-                    - spaceBesideCallCard / 2;
-            if (isLayoutRtl) {
-                displayVideo.setTranslationX(-videoViewTranslation);
-            } else {
-                displayVideo.setTranslationX(videoViewTranslation);
-            }
-        } else {
-            float videoViewTranslation = params.height / 2
+        if (!mIsLandscape) {
+            float spaceBesideCallCard = InCallPresenter.getInstance().getSpaceBesideCallCard();
+            float videoViewTranslation = displayVideo.getHeight() / 2
                     - spaceBesideCallCard / 2;
             displayVideo.setTranslationY(videoViewTranslation);
         }
@@ -701,12 +675,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         }
     }
 
-    @Override
-    public boolean isActivityRestart() {
-        Log.d(this, "isActivityRestart " + mIsActivityRestart);
-        return mIsActivityRestart;
-    }
-
     /**
      * @return {@code True} if the display video surface has been created.
      */
@@ -767,12 +735,12 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
             params.height = height;
             preview.setLayoutParams(params);
 
-            int rotation = InCallPresenter.toRotationAngle(getCurrentRotation());
-            int rotationAngle = 360 - rotation;
-            preview.setRotation(rotationAngle);
-            Log.d(this, "setPreviewSize: rotation=" + rotation +
-                    " rotationAngle=" + rotationAngle);
-
+            // The width and height are interchanged outside of this method based on the current
+            // orientation, so we can transform using "width", which will be either the width or
+            // the height.
+            Matrix transform = new Matrix();
+            transform.setScale(-1, 1, width/2, 0);
+            preview.setTransform(transform);
         }
     }
 
@@ -876,6 +844,19 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         display.getSize(size);
 
         return size;
+    }
+
+    /**
+     * Determines the size of the preview surface.
+     *
+     * @return {@link Point} specifying the width and height of the preview surface.
+     */
+    @Override
+    public Point getPreviewSize() {
+        if (sPreviewSurface == null) {
+            return null;
+        }
+        return sPreviewSurface.getSurfaceDimensions();
     }
 
     /**

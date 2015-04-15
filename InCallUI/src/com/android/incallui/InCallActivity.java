@@ -473,16 +473,11 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         return false;
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration config) {
-        InCallPresenter.getInstance().getProximitySensor().onConfigurationChanged(config);
-        Log.d(this, "onConfigurationChanged "+config.orientation);
-
-        doOrientationChanged(config.orientation);
-        super.onConfigurationChanged(config);
-    }
-
-
+    /**
+     * Handles changes in device orientation.
+     *
+     * @param orientation The new device orientation.
+     */
     private void doOrientationChanged(int orientation) {
         Log.d(this, "doOrientationChanged prevOrientation=" + sCurrentOrientation +
                 " newOrientation=" + orientation);

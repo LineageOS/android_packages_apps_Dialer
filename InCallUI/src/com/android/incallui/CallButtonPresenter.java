@@ -16,7 +16,8 @@
 
 package com.android.incallui;
 
-import android.app.AlertDialog;
+import static com.android.incallui.CallButtonFragment.Buttons.*;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.telecom.AudioState;
@@ -46,7 +47,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private Call mCall;
     private boolean mAutomaticallyMuted = false;
     private boolean mPreviousMuteState = false;
-    private static final int BUTTON_THRESOLD_TO_DISPLAY_OVERFLOW_MENU = 5;
 
     public CallButtonPresenter() {
     }
@@ -119,7 +119,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     @Override
     public void onDetailsChanged(Call call, android.telecom.Call.Details details) {
         if (getUi() != null && Objects.equals(call, mCall)) {
-            updateCallButtons(call, getUi().getContext());
+            updateButtonsState(call);
         }
     }
 
@@ -131,7 +131,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     @Override
     public void onCanAddCallChanged(boolean canAddCall) {
         if (getUi() != null && mCall != null) {
-            updateCallButtons(mCall, getUi().getContext());
+            updateButtonsState(mCall);
         }
     }
 
@@ -321,7 +321,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                     mCall.getVideoState() & ~VideoProfile.VideoState.PAUSED);
             videoCall.sendSessionModifyRequest(videoProfile);
         }
-        getUi().setPauseVideoButton(pause);
+        getUi().setVideoPaused(pause);
     }
 
     private void updateUi(InCallState state, Call call) {
@@ -340,9 +340,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
-        updateCallButtons(call, ui.getContext());
+        updateButtonsState(call);
 
-        ui.enableMute(call.can(android.telecom.Call.Details.CAPABILITY_MUTE));
+        ui.enableButton(BUTTON_MUTE, call.can(android.telecom.Call.Details.CAPABILITY_MUTE));
     }
 
     private static int toInteger(boolean b) {
@@ -353,137 +353,49 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
      * Updates the buttons applicable for the UI.
      *
      * @param call The active call.
-     * @param context The context.
      */
-    private void updateCallButtons(Call call, Context context) {
-        if (CallUtils.isVideoCall(call)) {
-            updateVideoCallButtons(call);
-        }
-        updateVoiceCallButtons(call);
-    }
-
-    private void updateVideoCallButtons(Call call) {
-        Log.v(this, "Showing buttons for video call.");
-        final CallButtonUi ui = getUi();
-
-        // Show all video-call-related buttons.
-        ui.showSwitchCameraButton(true);
-        ui.showPauseVideoButton(true);
-
-        final boolean supportHold = call.can(android.telecom.Call.Details.CAPABILITY_SUPPORT_HOLD);
-        final boolean enableHoldOption = call.can(android.telecom.Call.Details.CAPABILITY_HOLD);
-        ui.showHoldButton(supportHold);
-        ui.enableHold(enableHoldOption);
-        ui.setHold(call.getState() == Call.State.ONHOLD);
-    }
-
-    private void updateVoiceCallButtons(Call call) {
+    private void updateButtonsState(Call call) {
         Log.v(this, "Showing buttons for voice call.");
         final CallButtonUi ui = getUi();
 
-        // Hide all video-call-related buttons.
-        ui.showChangeToVoiceButton(false);
-        ui.showSwitchCameraButton(false);
-        ui.showPauseVideoButton(false);
+        final boolean isVideo = CallUtils.isVideoCall(call);
 
-        // Show all voice-call-related buttons.
-        ui.showAudioButton(true);
-        ui.showDialpadButton(true);
-
-        Log.v(this, "Show hold ", call.can(android.telecom.Call.Details.CAPABILITY_SUPPORT_HOLD));
-        Log.v(this, "Enable hold", call.can(android.telecom.Call.Details.CAPABILITY_HOLD));
-        Log.v(this, "Show merge ", call.can(
-                android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE));
-        Log.v(this, "Show swap ", call.can(
-                android.telecom.Call.Details.CAPABILITY_SWAP_CONFERENCE));
-        Log.v(this, "Show add call ", TelecomAdapter.getInstance().canAddCall());
-        Log.v(this, "Show mute ", call.can(android.telecom.Call.Details.CAPABILITY_MUTE));
-
-        boolean canBidiLocal =
-                call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_BIDIRECTIONAL);
-        boolean canBidiRemote =
-                call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_BIDIRECTIONAL);
-        Log.v(this, "Show video call local:" + canBidiLocal + ", remote: " + canBidiRemote);
-
-        final boolean canAdd = TelecomAdapter.getInstance().canAddCall();
-        final boolean enableHoldOption = call.can(android.telecom.Call.Details.CAPABILITY_HOLD);
-        final boolean supportHold = call.can(android.telecom.Call.Details.CAPABILITY_SUPPORT_HOLD);
-        final boolean isCallOnHold = call.getState() == Call.State.ONHOLD;
-
-        boolean canVideoCall = canBidiLocal && canBidiRemote;
-        ui.showChangeToVideoButton(canVideoCall);
-
-        final boolean showMergeOption = call.can(
-                android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
-        final boolean showAddCallOption = canAdd;
-        final boolean showManageVideoCallConferenceOption = call.can(
-                android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE)
-                && CallUtils.isVideoCall(call);
-
+        // Common functionality (audio, hold, etc).
         // Show either HOLD or SWAP, but not both. If neither HOLD or SWAP is available:
         //     (1) If the device normally can hold, show HOLD in a disabled state.
         //     (2) If the device doesn't have the concept of hold/swap, remove the button.
-        final boolean showSwapOption = call.can(
+        final boolean showSwap = call.can(
                 android.telecom.Call.Details.CAPABILITY_SWAP_CONFERENCE);
-        final boolean showHoldOption = !showSwapOption && (enableHoldOption || supportHold);
+        final boolean showHold = !showSwap
+                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORT_HOLD)
+                && call.can(android.telecom.Call.Details.CAPABILITY_HOLD);
+        final boolean isCallOnHold = call.getState() == Call.State.ONHOLD;
 
+        final boolean showAddCall = TelecomAdapter.getInstance().canAddCall();
+        final boolean showMerge = call.can(
+                android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
+        final boolean showUpgradeToVideo = !isVideo
+                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL)
+                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE);
+
+        final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
+
+        ui.showButton(BUTTON_AUDIO, true);
+        ui.showButton(BUTTON_SWAP, showSwap);
+        ui.showButton(BUTTON_HOLD, showHold);
         ui.setHold(isCallOnHold);
-        //Initialize buttonCount = 2. Because speaker and dialpad these two always show in Call UI.
-        int buttonCount = 2;
-        buttonCount += toInteger(canVideoCall);
-        buttonCount += toInteger(showAddCallOption);
-        buttonCount += toInteger(showMergeOption);
-        buttonCount += toInteger(showHoldOption);
-        buttonCount += toInteger(showSwapOption);
-        buttonCount += toInteger(call.can(android.telecom.Call.Details.CAPABILITY_MUTE));
-        buttonCount += toInteger(showManageVideoCallConferenceOption);
+        ui.showButton(BUTTON_MUTE, showMute);
+        ui.showButton(BUTTON_ADD_CALL, showAddCall);
+        // TODO: This button is currently being used for both upgrade and downgrade scenarios.
+        // It should be split into BUTTON_DOWNGRADE_TO_VOICE AND BUTTON_UPGRADE_TO_VIDEO
+        ui.showButton(BUTTON_UPGRADE_TO_VIDEO, true);
+        ui.showButton(BUTTON_DOWNGRADE_TO_VOICE, false);
+        ui.showButton(BUTTON_SWITCH_CAMERA, isVideo);
+        ui.showButton(BUTTON_PAUSE_VIDEO, isVideo);
+        ui.showButton(BUTTON_DIALPAD, !isVideo);
+        ui.showButton(BUTTON_MERGE, showMerge);
 
-        Log.v(this, "show ManageVideoCallConference: " + showManageVideoCallConferenceOption);
-        Log.v(this, "No of InCall buttons: " + buttonCount + " canVideoCall: " + canVideoCall);
-
-        // Show overflow menu if number of buttons is greater than 5.
-        final boolean showOverflowMenu =
-                buttonCount > BUTTON_THRESOLD_TO_DISPLAY_OVERFLOW_MENU;
-        final boolean isVideoOverflowScenario = canVideoCall && showOverflowMenu;
-        final boolean isOverflowScenario = !canVideoCall && showOverflowMenu;
-
-        if (isVideoOverflowScenario) {
-            ui.showHoldButton(false);
-            ui.showSwapButton(false);
-            ui.showAddCallButton(false);
-            ui.showMergeButton(false);
-            ui.showManageConferenceVideoCallButton(false);
-
-            ui.configureOverflowMenu(
-                    showMergeOption,
-                    showAddCallOption /* showAddMenuOption */,
-                    showHoldOption && enableHoldOption /* showHoldMenuOption */,
-                    showSwapOption,
-                    showManageVideoCallConferenceOption);
-            ui.showOverflowButton(true);
-        } else {
-            if (isOverflowScenario) {
-                ui.showAddCallButton(false);
-                ui.showMergeButton(false);
-                ui.showManageConferenceVideoCallButton(false);
-
-                ui.configureOverflowMenu(
-                        showMergeOption,
-                        showAddCallOption /* showAddMenuOption */,
-                        false /* showHoldMenuOption */,
-                        false /* showSwapMenuOption */,
-                        showManageVideoCallConferenceOption);
-            } else {
-                ui.showMergeButton(showMergeOption);
-                ui.showAddCallButton(showAddCallOption);
-                ui.showManageConferenceVideoCallButton(showManageVideoCallConferenceOption);
-            }
-
-            ui.showOverflowButton(isOverflowScenario);
-            ui.showHoldButton(showHoldOption);
-            ui.enableHold(enableHoldOption);
-            ui.showSwapButton(showSwapOption);
-        }
+        ui.updateButtonStates();
     }
 
     public void refreshMuteState() {
@@ -515,34 +427,24 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public interface CallButtonUi extends Ui {
+        void showButton(int buttonId, boolean show);
+        void enableButton(int buttonId, boolean enable);
         void setEnabled(boolean on);
         void setMute(boolean on);
-        void enableMute(boolean enabled);
-        void showAudioButton(boolean show);
-        void showChangeToVoiceButton(boolean show);
-        void showDialpadButton(boolean show);
         void setHold(boolean on);
-        void showHoldButton(boolean show);
-        void enableHold(boolean enabled);
-        void showSwapButton(boolean show);
-        void showChangeToVideoButton(boolean show);
-        void enableChangeToVideoButton(boolean enable);
-        void showSwitchCameraButton(boolean show);
-        void setSwitchCameraButton(boolean isBackFacingCamera);
-        void showAddCallButton(boolean show);
-        void showManageConferenceVideoCallButton(boolean show);
-        void showMergeButton(boolean show);
-        void showPauseVideoButton(boolean show);
-        void setPauseVideoButton(boolean isPaused);
-        void showOverflowButton(boolean show);
+        void setCameraSwitched(boolean isBackFacingCamera);
+        void setVideoPaused(boolean isPaused);
+        void setAudio(int mode);
+        void setSupportedAudio(int mask);
         void displayDialpad(boolean on, boolean animate);
         void displayModifyCallOptions();
         boolean isDialpadVisible();
-        void setAudio(int mode);
-        void setSupportedAudio(int mask);
-        void configureOverflowMenu(boolean showMergeMenuOption, boolean showAddMenuOption,
-                boolean showHoldMenuOption, boolean showSwapMenuOption,
-                boolean showManageConferenceVideoCallOption);
+
+        /**
+         * Once showButton() has been called on each of the individual buttons in the UI, call
+         * this to configure the overflow menu appropriately.
+         */
+        void updateButtonStates();
         Context getContext();
     }
 
@@ -551,6 +453,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         if (getUi() == null) {
             return;
         }
-        getUi().setSwitchCameraButton(!isUsingFrontFacingCamera);
+        getUi().setCameraSwitched(!isUsingFrontFacingCamera);
     }
 }

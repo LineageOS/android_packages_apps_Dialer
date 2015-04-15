@@ -16,6 +16,9 @@
   -->
 
 <resources>
+    <!-- Whether or not the landscape mode layout is currently being used -->
+    <bool name="is_layout_landscape">false</bool>
+
     <!-- Dimensions for CallCard elements (the normal in-call UI) -->
 
     <!-- Height of the "call banner" overlay on top of the upper part of the call info area.
@@ -67,7 +70,7 @@
     <dimen name="dialpad_digits_adjustable_height">50dp</dimen>
     <dimen name="dialpad_key_numbers_size">36dp</dimen>
 
-    <dimen name="floating_action_bar_vertical_offset">-24dp</dimen>
+    <dimen name="floating_action_button_vertical_offset">-24dp</dimen>
 
     <dimen name="call_button_margin_vertical">8dp</dimen>
     <dimen name="call_button_margin_horizontal">6dp</dimen>
