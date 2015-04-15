@@ -49,8 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Video call"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Requesting video"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Can\'t connect video call"</string>
-    <!-- no translation found for card_title_video_call_paused (3753261320787432731) -->
-    <skip />
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Video call (Paused)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Your callback number\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Your emergency callback number\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Dialling"</string>
@@ -104,8 +103,7 @@
     <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Add call"</string>
     <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Merge calls"</string>
     <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Swap calls"</string>
-    <!-- no translation found for overflowManageConferenceMenuItemText (1751081566617967119) -->
-    <skip />
+    <string name="overflowManageConferenceMenuItemText" msgid="1751081566617967119">"Manage Conference"</string>
     <string name="onscreenHoldText" msgid="2285258239691145872">"Hold"</string>
     <string name="onscreenEndCallText" msgid="4403855834875398585">"End"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Dial pad"</string>
@@ -121,18 +119,12 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Switch camera"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Pause video"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"More options"</string>
-    <!-- no translation found for video_call_not_allowed_if_tty_enabled (122020626761012211) -->
-    <skip />
-    <!-- no translation found for player_started (6046262510243983589) -->
-    <skip />
-    <!-- no translation found for player_stopped (8856926759436364963) -->
-    <skip />
-    <!-- no translation found for camera_not_ready (4955261496193316240) -->
-    <skip />
-    <!-- no translation found for camera_ready (1903335385405807324) -->
-    <skip />
-    <!-- no translation found for unknown_call_session_event (2431061946920253582) -->
-    <skip />
+    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"Please disable TTY Mode to upgrade to video calls."</string>
+    <string name="player_started" msgid="6046262510243983589">"Player Started"</string>
+    <string name="player_stopped" msgid="8856926759436364963">"Player Stopped"</string>
+    <string name="camera_not_ready" msgid="4955261496193316240">"Camera not ready"</string>
+    <string name="camera_ready" msgid="1903335385405807324">"Camera ready"</string>
+    <string name="unknown_call_session_event" msgid="2431061946920253582">"Unknown call session event"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Service"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Setup"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Not set&gt;"</string>
@@ -152,14 +144,10 @@
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Answer as audio call"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Accept video request"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Decline video request"</string>
-    <!-- no translation found for description_target_accept_upgrade_to_video_transmit_request (5311037889642077468) -->
-    <skip />
-    <!-- no translation found for description_target_decline_upgrade_to_video_transmit_request (3636108065510415975) -->
-    <skip />
-    <!-- no translation found for description_target_accept_upgrade_to_video_receive_request (8668058323593087912) -->
-    <skip />
-    <!-- no translation found for description_target_decline_upgrade_to_video_receive_request (2355776509656298367) -->
-    <skip />
+    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"Accept video transmit request"</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"Decline video transmit request"</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"Accept video receive request"</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"Decline video receive request"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"Slide up for <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"Slide left for <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"Slide right for <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
