@@ -23,14 +23,15 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Class used by {@link InCallService.VideoCallListener} to notify interested parties of incoming
+ * Class used by {@link InCallService.VideoCallCallback} to notify interested parties of incoming
  * events.
  */
-public class InCallVideoCallListenerNotifier {
+public class InCallVideoCallCallbackNotifier {
     /**
      * Singleton instance of this class.
      */
-    private static InCallVideoCallListenerNotifier sInstance = new InCallVideoCallListenerNotifier();
+    private static InCallVideoCallCallbackNotifier sInstance =
+            new InCallVideoCallCallbackNotifier();
 
     /**
      * ConcurrentHashMap constructor params: 8 is initial table size, 0.9f is
@@ -48,14 +49,14 @@ public class InCallVideoCallListenerNotifier {
     /**
      * Static singleton accessor method.
      */
-    public static InCallVideoCallListenerNotifier getInstance() {
+    public static InCallVideoCallCallbackNotifier getInstance() {
         return sInstance;
     }
 
     /**
      * Private constructor.  Instance should only be acquired through getInstance().
      */
-    private InCallVideoCallListenerNotifier() {
+    private InCallVideoCallCallbackNotifier() {
     }
 
     /**

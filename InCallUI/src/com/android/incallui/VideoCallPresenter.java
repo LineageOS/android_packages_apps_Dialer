@@ -33,8 +33,8 @@ import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallOrientationListener;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
-import com.android.incallui.InCallVideoCallListenerNotifier.SurfaceChangeListener;
-import com.android.incallui.InCallVideoCallListenerNotifier.VideoEventListener;
+import com.android.incallui.InCallVideoCallCallbackNotifier.SurfaceChangeListener;
+import com.android.incallui.InCallVideoCallCallbackNotifier.VideoEventListener;
 import com.google.common.base.Preconditions;
 
 import java.util.Objects;
@@ -64,7 +64,7 @@ import java.util.Objects;
 public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi> implements
         IncomingCallListener, InCallOrientationListener, InCallStateListener,
         InCallDetailsListener, SurfaceChangeListener, VideoEventListener,
-        InCallVideoCallListenerNotifier.SessionModificationListener {
+        InCallVideoCallCallbackNotifier.SessionModificationListener {
     public static final String TAG = "VideoCallPresenter";
 
     public static final boolean DEBUG = false;
@@ -198,9 +198,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallPresenter.getInstance().addDetailsListener(this);
 
         // Register for surface and video events from {@link InCallVideoCallListener}s.
-        InCallVideoCallListenerNotifier.getInstance().addSurfaceChangeListener(this);
-        InCallVideoCallListenerNotifier.getInstance().addVideoEventListener(this);
-        InCallVideoCallListenerNotifier.getInstance().addSessionModificationListener(this);
+        InCallVideoCallCallbackNotifier.getInstance().addSurfaceChangeListener(this);
+        InCallVideoCallCallbackNotifier.getInstance().addVideoEventListener(this);
+        InCallVideoCallCallbackNotifier.getInstance().addSessionModificationListener(this);
         mCurrentVideoState = VideoProfile.VideoState.AUDIO_ONLY;
         mCurrentCallState = Call.State.INVALID;
     }
@@ -220,9 +220,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallPresenter.getInstance().removeIncomingCallListener(this);
         InCallPresenter.getInstance().removeOrientationListener(this);
 
-        InCallVideoCallListenerNotifier.getInstance().removeSurfaceChangeListener(this);
-        InCallVideoCallListenerNotifier.getInstance().removeVideoEventListener(this);
-        InCallVideoCallListenerNotifier.getInstance().removeSessionModificationListener(this);
+        InCallVideoCallCallbackNotifier.getInstance().removeSurfaceChangeListener(this);
+        InCallVideoCallCallbackNotifier.getInstance().removeVideoEventListener(this);
+        InCallVideoCallCallbackNotifier.getInstance().removeSessionModificationListener(this);
     }
 
     /**
