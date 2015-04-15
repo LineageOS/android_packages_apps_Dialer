@@ -27,7 +27,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
-import android.telecom.Phone;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
@@ -38,11 +37,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.google.common.base.Preconditions;
-
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.incalluibind.ObjectFactory;
+import com.google.common.base.Preconditions;
 
 import java.util.Collections;
 import java.util.List;
@@ -60,8 +58,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * that want to listen in on the in-call state changes.
  * TODO: This class has become more of a state machine at this point.  Consider renaming.
  */
-public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
-
+public class InCallPresenter implements CallList.Listener,
+        CircularRevealFragment.OnCircularRevealCompleteListener {
     private static final String EXTRA_FIRST_TIME_SHOWN =
             "com.android.incallui.intent.extra.FIRST_TIME_SHOWN";
 
@@ -99,28 +97,6 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
     private boolean mServiceConnected = false;
     private boolean mAccountSelectionCancelled = false;
     private InCallCameraManager mInCallCameraManager = null;
-
-    private final Phone.Listener mPhoneListener = new Phone.Listener() {
-        @Override
-        public void onBringToForeground(Phone phone, boolean showDialpad) {
-            Log.i(this, "Bringing UI to foreground.");
-            bringToForeground(showDialpad);
-        }
-        @Override
-        public void onCallAdded(Phone phone, android.telecom.Call call) {
-            call.addListener(mCallListener);
-        }
-        @Override
-        public void onCallRemoved(Phone phone, android.telecom.Call call) {
-            call.removeListener(mCallListener);
-        }
-        @Override
-        public void onCanAddCallChanged(Phone phone, boolean canAddCall) {
-            for (CanAddCallListener listener : mCanAddCallListeners) {
-                listener.onCanAddCallChanged(canAddCall);
-            }
-        }
-    };
 
     private final android.telecom.Call.Listener mCallListener =
             new android.telecom.Call.Listener() {
@@ -185,8 +161,6 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
      */
     private boolean mIsChangingConfigurations = false;
 
-    private Phone mPhone;
-
     private Handler mHandler = new Handler();
 
     /** Display colors for the UI. Consists of a primary color and secondary (darker) color */
@@ -201,16 +175,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
         return sInCallPresenter;
     }
 
-    @Override
-    public void setPhone(Phone phone) {
-        mPhone = phone;
-        mPhone.addListener(mPhoneListener);
-    }
-
-    @Override
-    public void clearPhone() {
-        mPhone.removeListener(mPhoneListener);
-        mPhone = null;
+    @NeededForTesting
+    static synchronized void setInstance(InCallPresenter inCallPresenter) {
+        sInCallPresenter = inCallPresenter;
     }
 
     public InCallState getInCallState() {
@@ -398,6 +365,38 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         if (doAttemptCleanup) {
             attemptCleanup();
+        }
+    }
+
+    private boolean mAwaitingCallListUpdate = false;
+
+    public void onBringToForeground(boolean showDialpad) {
+        Log.i(this, "Bringing UI to foreground.");
+        bringToForeground(showDialpad);
+    }
+
+    /**
+     * TODO: Consider listening to CallList callbacks to do this instead of receiving a direct
+     * method invocation from InCallService.
+     */
+    public void onCallAdded(android.telecom.Call call) {
+        // Since a call has been added we are no longer waiting for Telecom to send us a
+        // call.
+        setBoundAndWaitingForOutgoingCall(false, null);
+        call.addListener(mCallListener);
+    }
+
+    /**
+     * TODO: Consider listening to CallList callbacks to do this instead of receiving a direct
+     * method invocation from InCallService.
+     */
+    public void onCallRemoved(android.telecom.Call call) {
+        call.removeListener(mCallListener);
+    }
+
+    public void onCanAddCallChanged(boolean canAddCall) {
+        for (CanAddCallListener listener : mCanAddCallListeners) {
+            listener.onCanAddCallChanged(canAddCall);
         }
     }
 
