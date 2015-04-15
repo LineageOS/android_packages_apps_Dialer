@@ -482,10 +482,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             String connectionLabel,
             Drawable callStateIcon,
             String gatewayNumber,
-            boolean isWifi) {
+            boolean isWifi,
+            boolean isConference) {
         boolean isGatewayCall = !TextUtils.isEmpty(gatewayNumber);
         CharSequence callStateLabel = getCallStateLabelFromState(state, videoState,
-                sessionModificationState, disconnectCause, connectionLabel, isGatewayCall, isWifi);
+                sessionModificationState, disconnectCause, connectionLabel, isGatewayCall, isWifi,
+                isConference);
 
         Log.v(this, "setCallState " + callStateLabel);
         Log.v(this, "DisconnectCause " + disconnectCause.toString());
@@ -651,15 +653,17 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      *         3. Incoming calls will only display "Incoming via..." for accounts.
      *         4. Video calls, and session modification states (eg. requesting video).
      *         5. Incoming and active Wi-Fi calls will show label provided by hint.
+     *
+     * TODO: Move this to the CallCardPresenter.
      */
     private CharSequence getCallStateLabelFromState(int state, int videoState,
             int sessionModificationState, DisconnectCause disconnectCause, String label,
-            boolean isGatewayCall, boolean isWifi) {
+            boolean isGatewayCall, boolean isWifi, boolean isConference) {
         final Context context = getView().getContext();
         CharSequence callStateLabel = null;  // Label to display as part of the call banner
 
-        boolean isSpecialCall = label != null;
-        boolean isAccount = isSpecialCall && !isGatewayCall;
+        boolean hasSuggestedLabel = label != null;
+        boolean isAccount = hasSuggestedLabel && !isGatewayCall;
 
         switch  (state) {
             case Call.State.IDLE:
@@ -668,7 +672,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             case Call.State.ACTIVE:
                 // We normally don't show a "call state label" at all in this state
                 // (but we can use the call state label to display the provider name).
-                if (isAccount || isWifi) {
+                if ((isAccount || isWifi || isConference) && hasSuggestedLabel) {
                     callStateLabel = label;
                 } else if (sessionModificationState
                         == Call.SessionModificationState.REQUEST_FAILED) {
@@ -688,7 +692,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 break;
             case Call.State.CONNECTING:
             case Call.State.DIALING:
-                if (isSpecialCall && !isWifi) {
+                if (hasSuggestedLabel && !isWifi) {
                     callStateLabel = context.getString(R.string.calling_via_template, label);
                 } else {
                     callStateLabel = context.getString(R.string.card_title_dialing);
@@ -699,7 +703,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 break;
             case Call.State.INCOMING:
             case Call.State.CALL_WAITING:
-                if (isWifi) {
+                if (isWifi && hasSuggestedLabel) {
                     callStateLabel = label;
                 } else if (isAccount) {
                     callStateLabel = context.getString(R.string.incoming_via_template, label);
