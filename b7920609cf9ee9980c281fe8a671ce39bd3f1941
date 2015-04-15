@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ac371cc_0a810d4b",
+        "filename": "res/xml/general_settings.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2015-04-15T05:07:45Z",
+      "side": 1,
+      "message": "please fix indent. (see above switchpreference)",
+      "revId": "b7920609cf9ee9980c281fe8a671ce39bd3f1941",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ac371cc_4a9305a4",
+        "filename": "src/com/android/dialer/dialpad/DialpadFragment.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2015-04-15T05:07:45Z",
+      "side": 1,
+      "message": "From what I can tell, the intent here could be null if foreground activitiy (getActivity()) isn\u0027t the DialtactsActivity. Not sure how likely of a scenario that is, but may want to wrap this in null check anyway.",
+      "revId": "b7920609cf9ee9980c281fe8a671ce39bd3f1941",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
